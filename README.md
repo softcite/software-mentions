@@ -4,7 +4,7 @@
 
 __Work in progress.__
 
-The goal of this GROBID module is to recognize in textual documents and PDF any mentions of softwares,  
+The goal of this GROBID module is to recognize in textual documents and PDF any mentions of softwares.   
 
 As the other GROBID models, the module relies only on machine learning and uses linear CRF. 
 
@@ -81,7 +81,7 @@ In this mode, by default, 80% of the available data is used for training and the
 
 ## Training data
  
-... 
+The source of training data is the [softcite dataset]() produced by 
 
 ## Generation of training data
 

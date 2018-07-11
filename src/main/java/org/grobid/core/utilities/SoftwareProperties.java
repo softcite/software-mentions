@@ -18,5 +18,9 @@ public class SoftwareProperties {
 		
 		return properties.getProperty(key);
 	}
+
+	public static String getTmpPath() {
+		return SoftwareProperties.get("org.grobid.software.tmpPath");
+	}
 	
 }
