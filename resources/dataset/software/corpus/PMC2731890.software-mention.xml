@@ -1,0 +1,961 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC2731890" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:23+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>ABSTRACT </p>
+
+<p>Potential promoters in the genome of Escherichia 
+coli were searched by pattern recognition software 
+<rs type="software">PlatProm</rs> and classified on the basis of positions 
+relative to gene borders. Beside the expected pro-
+moters located in front of the coding sequences 
+we found a considerable amount of intragenic 
+promoter-like signals with a putative ability to 
+drive either antisense or alternative transcription 
+and revealed unusual genomic regions with extre-
+mely high density of predicted transcription start 
+points (promoter 'islands'), some of which are 
+located in coding sequences. <rs type="software">PlatProm</rs> scores con-
+verted into probability of RNA polymerase binding 
+demonstrated certain correlation with the enzyme 
+retention registered by ChIP-on-chip technique; 
+however, in 'dense' regions the value of correlation 
+coefficient is lower than throughout the entire 
+genome. Experimental verification confirmed the 
+ability of RNA polymerase to interact and form 
+multiple open complexes within promoter 'island' 
+associated with appY, yet transcription efficiency 
+was lower than might be expected. Analysis of 
+expression data revealed the same tendency for 
+other promoter 'islands', thus assuming functional 
+relevance of non-productive RNA polymerase bind-
+ing. Our data indicate that genomic DNA of E. coli is 
+enriched by numerous unusual promoter-like sites 
+with biological role yet to be understood. </p>
+
+<p>Even though expression data are now available for many 
+organisms, a possibility to use them for tracking cell tran-
+scriptional output upon varying conditions requires a com-
+prehensive map of genome regulatory elements. Currently 
+there are two approaches opening a way to depict this 
+map: computational search of promoter regions [most 
+recent algorithms: (1-10)], and ChIP-on-chip spotting of </p>
+
+<p>RNA polymerase (RNAPol)-binding sites (11-14). In this 
+study we tried to understand how predictable the data 
+obtained in silico are and to what extent they correlate 
+with the data obtained in vivo. 
+The genome-scale mapping of promoter sites has been 
+performed by our pattern recognition software <rs type="software">PlatProm</rs> 
+(6,7). The same as other protocols operating with 
+position-specific weight matrices, <rs type="software">PlatProm</rs> has an advan-
+tage of predicting transcription start points (TSP) (the 
+main promoter attribute, which is determined experimen-
+tally), rather than to define promoter regions as extensive 
+genomic loci (9,10,15,16). Upon scanning <rs type="software">PlatProm</rs> con-
+siders any nucleotide as a probable point of transcription 
+initiation and scores this probability by searching for 
+promoter-specific elements in proper positions. Rather 
+high precision and low rate of false positives made our 
+software suitable for genome scanning, providing a possi-
+bility to compare in silico and in vivo data. In the present 
+work, we describe an overall map of TSPs predicted by 
+<rs type="software">PlatProm</rs>; evaluate the degree of correlation between 
+<rs type="software">PlatProm</rs> scores and RNAPol-binding efficiency regis-
+tered by two independent research groups (12,13); focus 
+attention on intragenic TSPs and promoter 'islands' 
+having high density of transcription signals over long dis-
+tance; and verify capacity of one 'island' to bind RNAPol 
+and initiate RNA synthesis. </p>
+
+<p>MATERIALS AND METHODS </p>
+
+<p>An essence of computational approach </p>
+
+<p>Our scoring system was designed as originally suggested 
+by Hertz and Stormo (17). Sensitivity of this algorithm 
+tested on our sets was the same as reported (Figure 1B). 
+To increase the performance of this approach, we took 
+into account sequence-dependent structural features in 
+the genomic environment of promoter sites (6, 7). The 
+final version of <rs type="software">PlatProm</rs> (7) was refined on 271 experi-
+mentally identified non-homologous and non-overlapping 
+s 70 -promoters with a single TSP precisely pointed out by 
+the previous version of our software (6). All sequences 
+were 411-bp long (À255/+155 according to the start 
+point nominated as 0). Allowed variations of the spacer, </p>
+
+<p>*To whom correspondence should be addressed. Tel: +7 4967 73 91 40; Fax: +7 4967 33 05 09; Email: ozoline@icb.psn.ru </p>
+
+<p>ß 2009 The Author(s) 
+This is an Open Access article distributed under the terms of the Creative Commons Attribution Non-Commercial License (http://creativecommons.org/licenses/ 
+by-nc/2.0/uk/) which permits unrestricted non-commercial use, distribution, and reproduction in any medium, provided the original work is properly cited. </p>
+
+<p>and the distance between the TSP and the element -10 
+were 14-21 and 2-9 bp, respectively. Variable length of 
+the spacer was accounted by the matrix penalizing devia-
+tions from the optimal 17 bp in accordance with their fre-
+quencies in the training promoter set. The varying distance 
+between element À10 and the TSP, ignored by previously 
+published protocols, was taken into account the same way. 
+Weight matrices corresponding to consensus elements À35 
+and À10 evaluated hexanucleotides, rather than 25 and 
+19 bp sequences, accounted by Hertz and Stormo 
+(Figure 1A and B). They contain 6 Â 4 scores equal to 
+natural logarithms of normalized occurrence frequencies 
+for each nucleotide at each position in preliminarily 
+aligned promoters. Percentage of particular nucleotides 
+in the genome was used for normalization. Sequence pref-
+erence nearby the TSP previously accounted by a 12 Â 4 
+weight matrix (17) was scored by the matrix precisely 
+reflecting the distribution of dinucleotides in À1/0. 
+Dinucleotides forming the 'extended À10 element' were 
+accounted the same way. Since frequency coefficients 
+depend on promoter alignment, optimal matrices were 
+generated by the procedure of expectation-maximization. 
+Additional sequence motifs were scored by the set of 34 
+cascade matrices exemplified in ref. (7). They include di-, 
+tri-and tetranucleotides having occurrence frequencies at 
+least 5 SD higher than the background level in the partic-
+ular positions of 34 promoter subregions (Figure 1B). 
+These matrices represent: </p>
+
+<p>(i) Sequence motifs potentially interacting with RNA 
+polymerase a-subunits, including (A) n -tracts as per-
+fect targets (18). 
+(ii) (T) n -and (A) n (T) n -tracts able to promote additional 
+protein-protein or DNA-protein contacts by indu-
+cing proper bending of the DNA helix (19). 
+(iii) Elements containing flexible YR steps (Y = T = C, 
+R = A = G) favoring adaptive isomerization of the 
+promoter DNA (20). 
+(iv) Other motifs previously revealed by cluster analysis 
+(21). </p>
+
+<p>Cascade matrices consider all sequence elements domi-
+nant in a particular promoter subregion, but only the most 
+significant one found in a certain promoter is taken into 
+account. Thus, for instance, there are 30 motifs dominat-
+ing in the region À48/À41. The most frequent of them, 
+hence the most significant one, is ATAA if located in posi-
+tion À44. It gives 0.91 to the overall score. Slightly less 
+significant (contribution 0.82) is TATA if located in À45. 
+Thus, for promoter containing TATAT in À45/À41 the 
+overall score increases by 0.82, while for promoter, con-
+taining TATAA -by 0.91, rather than by 0.91+0.82. 
+Lack of accounted motifs in a particular subregion of a 
+promoter was penalized based on probability of their 
+absence in this place in the training set. 
+Ten cascade matrices were used to formalize the pres-
+ence of mixed w-tracts (w = A = T), highly typical for 
+promoter DNA. They are regularly distributed with 1 or 
+1.5 helix turns periodicity (Figure 1B) and may participate 
+in polymerase sliding along DNA (22). To focus attention 
+on the observed regularity we search for www(n) 7,8 www </p>
+
+<p>and www(n) 13,14 www thus minimizing overlap with 
+(A) n -and (T) n -specific matrices. 
+<rs type="software">PlatProm</rs> also takes into account perfect direct and 
+inverted repeats (5-11 bp long separated by 5 or 6 bp) as 
+potential targets for interaction with regulatory proteins. 
+They are scored as natural logarithms of lengths if 
+centered in subregions of their frequent occurrence 
+(Figure 1B). 
+The contributions of both types of repeats and elements 
+accounted by cascade matrices were reduced by coeffi-
+cients estimated as a ratio of the average information con-
+tent [quantified as described in ref. (23)] in the particular 
+subregion to the information content in the sixth position 
+of the aligned element -35 (the least significant among 
+conservative base pairs). This reduction was aimed to 
+balance the endowment of additional elements with that 
+of conservative base pairs. Inputs of all elements were 
+summarized, giving the total score (S), which reflects the 
+probability for any nucleotide to be a TSP and therefore 
+the probability of its upstream region to bind RNAPol 
+and fulfill promoter function. 
+Performance of the program was tested on a set of 
+290 known promoters and two control sets (CSs). All 
+sequences were 411 bp long (À255/+155 according to 
+real or virtual TSPs). The testing compilation was com-
+posed of experimentally characterized s 70 promoters not 
+included in the training set. To increase the size of this set 
+we allowed the presence of promoters ($30%) with mul-
+tiple TSPs (for instance discussed below dcuA), while 
+homologous or overlapping promoters were excluded. 
+CS1 was composed of 273 coding sequences taken from 
+the fixed position of all convergent genes longer than 
+700 bp, separated by 50-bp intergenic space, which 
+are not associated with promoter 'islands' (see below) 
+and have 5 0 -ends similarly annotated in U00096 and 
+U00096.2 E. coli gene maps. Sequences were taken so as 
+virtual TSPs were 250 bp far from initiating codon (fall in 
+position 254 inside the gene). This strategy minimizes the 
+probability to pick out functional promoter for alternative 
+transcription or for yet unidentified genes in intergenic 
+regions. Having AT-content (48.3%) very close to that 
+of the whole genome (49.2%) CS1 roughly represents nat-
+ural sequences, which RNAPol has to bypass. CS2 
+was composed of 400 random sequences with the same 
+AT-content as in chromosomal DNA. (All compilations 
+are available by request.) Promoters were considered as 
+recognized by <rs type="software">PlatProm</rs> if experimentally mapped 
+TSP(s) or a neighboring nucleotide (AE2) had score 
+higher than threshold level. Using this criteria and the 
+last version of <rs type="software">PlatProm</rs> we identified 85.5% of promoters 
+from the test compilation at zero level of false positives 
+(level 1, Figure 1) in both CSs (S max = 3.4). Thus, at this 
+level the combination of sensitivity (percentage of recog-
+nized promoters = 85.5%) and specificity (percentage 
+of unrecognized non-promoter sequences = 100%) of 
+<rs type="software">PlatProm</rs> was better than that of previously suggested 
+algorithms (68.7-82% and 82.2-99.1%, respectively) 
+[(2,15,24) and Figure 1C]. Approximately 80% of recog-
+nized promoters possess experimentally mapped TSPs 
+coinciding (in the range of AE 2 bp) with positions of local 
+S maxima, i.e. nearly 70% of natural TSPs are accurately </p>
+
+
+
+<p>predicted by our software, which is also better than pre-
+viously reported (&lt;50%) (1,17). </p>
+
+<p>Experimental procedures </p>
+
+<p>The E. coli K12 strain was used as a source of genomic 
+DNA and total RNA. DNA was isolated by phenol-
+chloroform extraction. Total RNA was purified as 
+described in ref. (25). 
+Three DNA fragments containing part of promoter 
+'island' associated with appY were obtained by PCR. 
+A 406-bp fragment spanning over the region À260/+146 
+relative to the initiating codon of appY was amplified 
+using the primers 5 0 -GCAAGAGGTTTCAGGTGCGTT 
+GTAGTGAG-3 0 (F1) and 5 0 -CTTAGTTTAGAGGGGC 
+AT-3 0 (R1). Shortened (378 bp) and elongated (471 bp) 
+templates were obtained with F1 + 5 0 -CCCTTCTAGAT 
+TTGTCGCTTACAATAAA-3 0 (R2) (À260/+118) and 
+5 0 -GATAAGATCTGCAAGTAAAAATGATACTC-3 0 
+(F2) + R1 (À325/+146), respectively. 
+RNAPol-s 70 -binding ability was tested by gel-
+retardation and potassium permanganate footprinting. 
+Complexes were formed at 378C in buffer containing 
+50 mM Tris-HCl (pH 8.0), 0.1 mM EDTA, 0.1 mM 
+DTT, 10 mM MgCl 2 , 50 mM NaCl, 250 mkg/ml BSA, 
+1 pm of 406-bp DNA-fragment and 2-8 pm of RNAPol. 
+Templates for permanganate footprinting were 32 P-
+labeled. Interaction was allowed for 30 min. In gel-shift 
+experiments, 20 mkg/ml of heparin was added before load-
+ing the sample on 4% polyacrylamide gel pre-warmed to 
+378C. Gels were run at the same temperature and stained 
+by ethydium bromide. Footprinting assays were per-
+formed according to (26). Unpaired thymines in open 
+transcription complexes were modified by potassium per-
+manganate and revealed after piperidine treatment. The 
+products of chemical hydrolysis were separated in 8% 
+polyacrylamide gel in the presence of 8 M urea and visua-
+lized by radioautography. 
+Primer extension was carried out using RevertAid TM 
+M-MulV reverse transcriptase (Fermentas), 4 pm of 
+32 P-labeled primer and variable amounts of total RNA 
+(1-6 mkg) purified from E. coli cells grown either in LB 
+or M9 media and harvested at logarithmic or stationary 
+phases. Before the reaction the mixture of RNA and 
+primer was heated at 728C for 10 min; cooled down to 
+588C, and primer annealing was allowed for 3 min. Then 
+the probe was chilled on ice, mixed with the buffer pro-
+vided by manufacturer and incubated with the enzyme at 
+428C for 45 min. Reverse transcription was terminated by 
+heating. cDNA was precipitated by N-butanol and ana-
+lyzed the same way as the products of permanganate 
+footprinting. 
+Single round transcription was carried out as described 
+previously (27). </p>
+
+<p>RESULTS </p>
+
+<p>Figure 1 demonstrates advantage given by each additional 
+element (Figure 1B) and increased sensitivity of the pro-
+gram (Figure 1C and D) for the whole testing compilation 
+and positively regulated promoters. All additional </p>
+
+<p>elements improve the resolution but the largest contribu-
+tion is given by w-tracts increasing sensitivity for 27.6% 
+(Figure 1B). This high significance of additional elements 
+provides a chance to detect regulatory regions in newly 
+sequenced genomes if information about their own pro-
+moters is insufficient. 
+Figure 2 exemplifies promoters accurately recognized 
+(fadB) and unrecognized (dcuA) by <rs type="software">PlatProm</rs>. The start 
+point of fadB-transcription exactly fits the experimentally 
+mapped TSP (Figure 2B), while the original program (17) 
+suggests intragenic P1 as a dominant transcription signal 
+(Figure 2A) and algorithm developed by Huerta and 
+Collado-Vides (1) predicts fadB promoter $150 bp 
+upstream of the real TSP [see Figure 4 in (1)]. 
+Unrecognized promoter P dcuA (Figure 2D-F) has four 
+TSPs, experimentally mapped 69-72 bp upstream of the 
+initiating codon (28). S values at these positions vary in 
+the range À2.1/À5.7, i.e. far below the level required for 
+recognition. All promoter-specific elements in P dcuA are 
+weakly pronounced, thus no refinement of the current 
+scoring system can compensate for these negative values. 
+Although it can not be excluded that P dcuA has some 
+important determinants, which are not formalized by 
+<rs type="software">PlatProm</rs>, limitations of experimental mapping performed 
+by primer extension (28) also may result in some difference 
+between apparent and actual TSPs. Reverse transcriptase, 
+for example, can stop at sites with stable hairpins in 
+mRNA structure. In this case, the registered site of tran-
+scription initiation would be pointed out downstream 
+from the real one. <rs type="software">PlatProm</rs> predicts a good candidate 
+(P2) perfectly fitting the RNAPol-binding site registered 
+by ChIP-on-chip assay (Figure 2F). Thus, comparing 
+in silico and in vivo data one should take into account 
+finite sensitivity and selectivity of computer model as 
+well as limited accuracy of experimental approaches. 
+Even though <rs type="software">PlatProm</rs> may be further improved on the 
+basis of additional features, current version predicts TSPs 
+with rather high accuracy and was used to depict the 
+genome-wide distribution of potentially transcribed 
+regions. </p>
+
+<p>Genome scanning revealed unexpected intragenic promoters </p>
+
+<p>The genome sequence of E. coli K12 (NCBI, GenBank 
+entry U00096.2) was used for large-scale promoter predic-
+tion (see Supplementary Table 1 for all <rs type="software">PlatProm</rs> scores 
+on both strands). Only signals with S &gt;7.44 (level 2 
+in Figure 1D) were considered reliable. This cut-off level 
+provides a possibility to identify only 51.0% of known 
+promoters (Figure 1D) but ensures p &lt; 0.000043 
+(Student's T-test statistics) if average S (À5.0) and SD 
+(3.1) were estimated using scores of CS1. Artificially gen-
+erated sequences of CS2 showed the same variability of 
+S (SD = 3.1) but average score was higher (À4.2), thus 
+assuming $2.5-fold higher p-value (p &lt; 0.00011). A total 
+of 30 188 individual or clustered TSPs (Figure 2) forming 
+$5000 promoter-like regions were found. Since only half 
+of known promoters have TSPs with S &gt;7.44, the data 
+obtained presume existence of more than 9000 of separate 
+promoter-like sites, which is twice greater than the number 
+of annotated genes in the genome of E. coli. To what </p>
+
+<p>Nucleic Acids Research, 2009, Vol. 37, No. 15 4921 </p>
+
+<p>extent this excess could be explained by the presence of 
+false positives? 
+Relying on p-values only 399-928 of 30 188 predicted 
+TSPs (1-3%) may be false signals (4 639 675 bp Â 2 Â p). 
+However, intragenic and artificial sequences of CS1 and 
+CS2 may be deficient in some promoter-specific features. 
+That is why <rs type="software">PlatProm</rs> performance was further tested in 
+intergenic regions separating convergent genes, even </p>
+
+<p>though each of them may contain yet unidentified genes. 
+Predicted TSPs were searched in the central part of inter-
+genic space (!250 bp from the ends of flanking genes) so 
+as to ensure that only non-coding sequences undergo scor-
+ing. Only 15 regions between convergent genes are longer 
+than 500 bp but two of them overlap with promoter 
+'islands' (see below) and were eliminated. The total 
+length of the remaining ones is 10 226 bp (both strands). </p>
+
+<p>Figure 1. (A) Positions of base pairs accounted by Hertz and Stormo (17). (B) Promoter-specific elements scored by <rs type="software">PlatProm</rs> (preferred positions are 
+marked by vertical tics). Ciphers on the right indicate their contribution to S (percentage of promoters additionally recognized at levels 1 and 2). 
+(C and D) Discriminative capacity of algorithm suggested by Hertz and Stormo (C) and <rs type="software">PlatProm</rs> (D) tested on natural sequences. Blue plots represent 
+distribution of scores for virtual TSPs ascribed to +256 position of CS1 sequences. These data were used to estimate the average value of S, standard 
+deviation and threshold levels (indicated by horizontal arrows). Red curves show distribution of scores for experimentally mapped TSPs of testing 
+compilation (AE2 bp variations are allowed to pick out position with maximal score). These variations are aimed to compensate possible experimental or 
+computational inaccuracy. In case of promoters with multiple TSPs, their scores were compared and the maximal one was plotted. These data are used 
+to estimate percentage of recognized promoters (indicated above horizontal arrows) at two levels (S &gt; 3.4 and 7.44). Distribution of scores for TSPs 
+of promoters regulated by repressors and activators are shown by small gray and large open circles, respectively. Ciphers in parenthesis indicate 
+sensitivity of <rs type="software">PlatProm</rs> for positively regulated promoters. Vertical arrows and ciphers above indicate position and value of average S. (E-G) 
+Distribution of S for all positions in the AE2 (E), AE5 (F) and AE10 (G) areas around virtual TSPs of CS1 (blue symbols) and real starts of testing 
+compilation (red circles). Vertical lines delimit points with S exceeding levels 1 and 2. Percentage of positions with S &gt; 7.44 is indicated nearby. </p>
+
+<p>4922 Nucleic Acids Research, 2009, Vol. 37, No. 15 </p>
+
+<p>As expected, AT-content of these regions is slightly higher 
+(49.2%) than that of CS1 (48.3%). Altogether they 
+contain four predicted TSPs (one per $2500 bp). If all of 
+them are spurious, the probability to come across a false 
+positive is 0.00039, i.e. higher than p-values mentioned 
+above. However, two predicted TSPs are perfectly suitable 
+for small regulatory RNAs HB_48 and HB_139 predicted 
+by Carter et al. (29) and one is located in front of IS 
+yi21_6. Supposing that they belong to real promoters, 
+false positive rate given by statistic analysis and scanning 
+procedure correspond to each other. Even if p = 0.00039 
+is taken as a real frequency of false signals, still $90% 
+of TSPs predicted by <rs type="software">PlatProm</rs> should be considered as 
+promoter-like signals deserving more detailed analysis. 
+An important question is how to perceive <rs type="software">PlatProm</rs> 
+signals forming clusters near real and accurately recog-
+nized by PlatProm TSPs (see Figure 2B for example). 
+Should they be considered as false positives or not? 
+To address this question we compared distribution of </p>
+
+<p>scores in positions surrounding real (test compilation) 
+and virtual (CS1) transcription starts (Figure 1E-G). An 
+average S quantified for CS1 remains almost constant if 
+the size of analyzed area increases. The number of signals 
+exceeding 'level 1' in AE 2 and AE 5 bp area (11 and 24, 
+respectively) corresponds to the expected values (11 and 
+26, respectively) if CS2 statistic is used but is twice larger 
+than expected from p-value (&lt;0.0038) calculated on the 
+basis of CS1 scores (6 and 12). The rate of false positives 
+given by CS2 statistic is, therefore, quite realistic. It 
+assumes 0.63 probability for the presence of highly scoring 
+position in the AE 10 area around virtual TSPs of CS1 (total 
+number of positions is 5733). One signal with S &gt;7.44 
+('level 2') was really registered in this region (Figure 1G). 
+Portion of positions with S exceeding 'level 2' and the 
+average S decrease upon widening of the analyzed area 
+around real promoters, however, distribution of their 
+scores does not reveal expected maxima typical for CS1 
+(Figure 1E and F). Only in AE10 region S-values show </p>
+
+<p>Figure 2. Distribution of potential TSPs within regulatory regions of fadB/pepQ (A-C) and dcuA/aspA (D-F) as predicted by Hertz and Stormo 
+algorithm (top panels) and <rs type="software">PlatProm</rs> (middle panels). Black lines mark the coding sequences. Upward and downward bars reflect promoter scores 
+quantified for the '+' and 'À' strands, respectively. X-axis is placed at 'level 1' (Figure 1). Dashed lines indicate 'level 2'. Red bars and arrows 
+correspond to the experimentally mapped TSPs. Bottom plots show ChIP-on-chip data (13) for analyzed regions. Dashed arrows in plots (B) and (C) 
+confine genomic area around the predicted or experimentally mapped TSP(s), where interaction with RNAPol was verified. Dashed arrows in plots 
+(E) and (F) outline area nearby registered RNAPol-binding site, where predicted TSPs were searched. </p>
+
+<p>Nucleic Acids Research, 2009, Vol. 37, No. 15 4923 </p>
+
+<p>noticeable divergence. That means that <rs type="software">PlatProm</rs> scores 
+around real TSPs are higher than background values. 
+Thus, the total number of positions with S &gt;3.4 for 
+AE2 bp area (1681 points) is significantly larger (852) 
+than the total number of experimentally mapped starts 
+including multiple ones (480). Detailed examination 
+showed that $92% of additional signals are generated 
+by <rs type="software">PlatProm</rs> using the same frame for À35 and À10 hexa-
+nucleotides as position with maximal S. Remaining 
+ones correspond to alternative À10 element (4.4%) or 
+À10 and À35 elements (3.6%), suggesting the presence 
+of overlapping promoter. Promoters with multiple TSPs 
+tend to have additional signals corresponding to alterna-
+tive pair of core elements. Thus, in all cases <rs type="software">PlatProm</rs> 
+signals proximal to known TSPs denote the presence of 
+either the same or alternative promoter and should not be 
+considered as false positives. 
+Predicted TSPs were classified in respect to the borders 
+of mapped genes considering 750 bp as the allowed dis-
+tance between the predicted transcription starts and the 
+coding sequences of downstream genes [$10% of known 
+promoters are 250-700 bp far from the coding sequences 
+(6)]. Most predicted TSPs were ranked by this strategy 
+as 'expected' promoters (Figure 3), although some of 
+them fall into upstream genes (see, for instance P2 in 
+Figure 2E). 
+Approximately 19% of the remaining TSPs were found 
+on the opposite strand of coding sequences (Figure 3). 
+Antisense RNAs, if initiated therein, may block transla-
+tion by base pairing with mRNAs, regulate their stability 
+or interfere in other molecular processes. Such RNAs 
+control expression of many plasmid and transposon 
+genes, but until now they were not considered typical for 
+bacterial regulatory networks. Nonetheless several lines of 
+evidence support our predictions: </p>
+
+<p>(i) Microarray probes that query expression of anti-
+sense strands gave positive hybridization signals </p>
+
+<p>for all genes possessing predicted antisense promo-
+ters (30). 
+(ii) Among RNAs matching antisense strands and 
+found by Vogel et al. (31) and Kawano et al. (32), 
+10 species may be transcribed from intragenic pro-
+moters predicted by <rs type="software">PlatProm</rs>. 
+(iii) aRNAs I002 (33) and GadY (34) have 5 0 -ends 
+exactly pointed out by <rs type="software">PlatProm</rs>. 
+(iv) Two intragenic promoters found by <rs type="software">PlatProm</rs> 
+within the coding sequences of hns and htgA/yaaW 
+appeared to be active in vitro (35). </p>
+
+<p>Thus, the first amusing outcome obtained from the 
+genome scanning was a large amount of genes containing 
+promoters with antisense orientation. 
+Unexpected intragenic promoters of another group 
+have sense orientation (Figure 3). About 23% of corre-
+sponding TSPs lie &lt;50 bp downstream from the initiating 
+codon. They were not considered as candidates for 
+independent transcription initiation, since corresponding 
+promoter-like regions may participate in polymerase trap-
+ping near real promoters (1). Some intragenic promoters 
+may intensify transcription of properly oriented down-
+stream genes. If they are also ignored, there are still 
+$400 potential TSPs with a less comprehensible destina-
+tion. Some of them may produce RNAs antisense to 
+mRNAs of the convergently oriented downstream genes. 
+Synthesis of shortened mRNAs seems to be the most 
+exotic assumption to date. At the same time, ORF 
+Finder (NCBI) reveals alternative ORFs supplied with a 
+suitable Shine-Dalgarno sequence downstream of $50% 
+of intragenic co-directed promoters. </p>
+
+<p>The genome of E. coli has promoter 'islands' with high 
+density of promoter-like signals </p>
+
+<p>In silico promoter mapping revealed 78 unusual genomic 
+regions spanning for at least 300 bp and containing eight 
+or more potential TSPs on any strand in the running </p>
+
+<p>Figure 3. Classification of predicted TSPs in respect to their genomic positioning. The main group contains anticipated transcription starts located 
+either within intergenic regions or &lt;750 bp upstream of open reading frames. Schemes on the right illustrate all possible variants of their genomic 
+environment. Schemes on the left exemplify positions of unexpected intragenic promoter-like sites. </p>
+
+<p>4924 Nucleic Acids Research, 2009, Vol. 37, No. 15 </p>
+
+<p>window of 100 bp. Figure 4B exemplifies this phenom-
+enon. We call these regions 'promoter islands' (PI) so as 
+to distinguish them from clustered 'promoter-like signals' 
+(Figure 2B) found in front of almost all (92%) genes of 
+E. coli (1,36). ChIP-on-chip assays registered complexes 
+with RNAPol for all three PIs in Figure 4 (D and E). 
+However, transcription efficiency from appY-associated 
+PI1 seemed to be much weaker than that from PI3, 
+containing promoters for ompT and pauD and PI2 carry-
+ing out antisense transcription from ompT (Figure 4F). </p>
+
+<p>This curious observation prompted us to verify promoter 
+activity within the appY genomic locus. 
+In perfect conformity with ChIP-on-chip data 
+(Figure 4D and E), the 406-bp DNA fragment, containing 
+both the expected intergenic promoters and unusual intra-
+genic promoter-like sites within appY, formed two major 
+heparin-resistant complexes with RNAPol (Figure 5A). 
+Their relative abundance depended on enzyme:DNA 
+ratio, supposing two or more sites for simultaneous inter-
+action with the enzyme. Permanganate footprinting </p>
+
+<p>Figure 4. (A) Scheme illustrating the strategy used to convert <rs type="software">PlatProm</rs> scores into probability of RNAPol binding (P). Fifty-nucleotide microarray 
+probe is shown as a gray zigzag line. Dashed and composite lines represent two strands of DNA trapped by RNAPol. To take into account both 
+orientations of the enzyme (gray triangle) P was calculated as the sum of S near the expected TSPs on both strands (indicated by braces). The most 
+adequate values of P are expected if a given probe exactly fits to a promoter but allowed (AE8 bp) variation in position of the potential start ensures 
+capturing scores of promoters shifted by 1-6 bp as well (microarray probes are distributed along DNA with 12 bp periodicity). Plot (C) shows the 
+result of this converting procedure for <rs type="software">PlatProm</rs> scores predicted in 57 9670-596 200 bp genomic region (B). Horizontal gray lines indicate gene 
+positioning. The X-axis is placed at 'level 2'. Known TSPs of P cusR and P cusC are indicated. Three braces in plot (B) confine promoter 'islands'. Tick 
+marks indicate positions of primers used for PCR. (D) RNAPol-binding efficiency represented as log 2 of the ratio of hybridization signal obtained 
+with DNA co-immunoprecipitated with the enzyme by b 0 -specific antibody to control DNA recovered from complexes without specific immunopre-
+cipitation (12). (E) The same as (D) but s-specific antibody was used to collect RNAPol-DNA complexes (13). (F) Transcription efficiency from the 
+top and the bottom strands, respectively, represented as log 2 of the ratio of fluorescence signals originated from hybridized cDNA to signals obtained 
+from hybridized sonicated genomic DNA (13). </p>
+
+<p>Nucleic Acids Research, 2009, Vol. 37, No. 15 4925 </p>
+
+<p>revealed four transcription bubbles, assuming formation 
+of transcriptionally competent open complexes 
+(Figure 5B). Three of them lie $190 (I), $155 (II) and 
+$90 bp (III) upstream from the appY ATG codon, and 
+are suitable candidates for appY promoters, while the 
+fourth one is located within the coding sequence 
+(Figure 5C). Single round transcription assay performed 
+with the same DNA fragment (Figure 5D, lane 2) testified 
+synthesis of two major RNA-products: $305 and $237 nt. 
+Two additional templates were used to ascribe them to 
+particular transcription bubbles. The longer product 
+may be initiated at either PII, or PIV (Figure 5C). </p>
+
+<p>It remains unchanged when template shortened in the 
+coding region was used (lane 3), while becomes $65 nt 
+longer when DNA fragment elongated in opposite direc-
+tion was taken for transcription assay (lane 1). Thus we 
+conclude that $305 nt-RNA is initiated at PIV and is tran-
+scribed in antisense direction. Since the $237 nt-product, 
+vice versa, remains unchanged when the longer DNA 
+fragment is used but becomes shorter in the case of the 
+shortened template, it can be transcribed only from PIII 
+towards the coding sequence of appY and, therefore, may 
+represent appY-mRNA. However, reverse transcription 
+from total RNA failed to reveal the expected cDNAs in </p>
+
+<p>Figure 5. Experimental verification of promoter activity within PI1 (Figure 4B). All procedures are described in 'Materials and methods' section. 
+(A) Gel-shift assays were performed at different RNAPol-DNA ratios as indicated above the gel. (B) Local DNA melting as revealed by potassium 
+permanganate footprinting. The 5 0 -end of F1 (C) was 32 P-labeled. 'G'-sequencing ladder. Arabic ciphers on the right indicate positions of unpaired 
+thymines respective to the appY ATG codon. Transcription bubbles are denoted by Roman numerals. (C) Positioning of transcription bubbles (I-IV) 
+in the analyzed DNA fragment. Horizontal lines mark unpaired thymines. Bent arrows with size roughly reflecting the value of S show expected 
+directions of transcription. The lengths of the expected RNA products to the end of DNA fragment amplified with F1 and R1 are indicated nearby. 
+Arrows are white if corresponding RNAs were registered either in vitro (D) or in vivo (F, E). Straight arrows show directions of sense and antisense 
+transcription according to appY. (D) Single-round transcription assay. Arrows show transcripts with migration rate altered due to changed length of 
+the templates. End-to-end products are indicated by asterisks ('a' and 's' denote antisense and sense directions). (E) and (F) Products of reverse 
+transcription from the total RNA using R1 (E) and F1 (F). Bacterial cells were harvested at logarithmic and stationary phases as indicated. Lanes M 
+and ciphers nearby calibrate gels on D-F plots. </p>
+
+
+
+<p>any of five experiments performed in different conditions 
+(Figure 5E). 
+Low-transcription efficiency of appY in vivo is consistent 
+with the expression data [Figure 4F, (13)] and the data 
+obtained by Isalan et al. (37), who tested nearly 600 
+cross-combinations of genes encoding transcription regu-
+lators or s-factors and their promoters. Reporter gene 
+expression [Supplementary 1_GFP; (37)] indicated 
+increased transcription in 17 out of 22 constructions 
+when cognate promoters were replaced by appY regula-
+tory region, thus assuming very high activity of appY pro-
+moter. The effect, however, was quite opposite if the appY 
+coding sequence was fused to different promoters. 
+Transcription efficiency of the reporter gene significantly 
+decreased practically for all promoters. Thus, it appears to 
+be that strong interaction with RNAPol and even ability 
+to form open complexes do not necessarily result in effi-
+cient RNA synthesis. In the case of appY transcription 
+depends on impediments buried in its coding sequence. 
+Intragenic promoter-like sites certainly may play such a 
+role. Genomic DNA of E. coli, therefore, contains several 
+types of promoter-like sites with poorly understood func-
+tion. ChIP-on-chip data were used to evaluate the ability 
+of predicted promoters to bind RNAPol in the genome-
+wide scale. </p>
+
+<p>Coordinates of predicted promoters overlap with 
+RNAPol-binding sites found in vivo </p>
+
+<p>Three questions were addressed to compare in silico 
+and in vivo data: </p>
+
+<p>(i) how many predicted TSPs are associated with the 
+registered sites of RNAPol binding; 
+(ii) how many RNAPol-binding sites are associated 
+with the predicted TSPs; 
+(iii) how many PIs form complexes with RNAPol 
+in vivo? </p>
+
+<p>To answer the first question, we used the whole set of 
+30 188 predicted TSPs. They form 4810 clusters or single 
+promoter-like sites separated from each other by at least 
+100 bp (overlapping clusters on opposite DNA strands 
+were combined). Predicted TSPs or TSP clusters were con-
+sidered as confirmed by in vivo data, if at least one positive 
+chip probe was found by Reppas et al. [(13); experiment B] 
+within a AE 100 bp surrounding region (Figure 2B and C 
+illustrate scrutinized area). Ninety-four percent of individ-
+ual TSPs (or 77% of promoter clusters) fall into genomic 
+loci interacting with RNAPol in vivo or are located within 
+the allowed distance. Thus, most predicted promoters 
+of all types perform at least one promoter function. 
+To address the second question, we used the set of 
+microarray probes efficiently hybridized with enzyme-
+trapped DNAs. A total of 51 922 probes show fluorescent 
+signal at least 2-fold higher if RNAPol-DNA complexes 
+were extracted using specific antibodies (Figure 2F). They 
+represent 1209 continuous genomic regions. RNAPol res-
+idence sites observed in vivo were considered related to 
+potential promoters if at least one TSP with S &gt; 7.44 
+was found within region covered by oligonucleotide 
+probes or in AE100 bp surrounding area. Ninety-three </p>
+
+<p>percent of individual probes (86.8% of continuous 
+regions) appeared to be associated with predicted pro-
+moter sites. 
+All 78 promoter 'islands' form extensive complexes 
+with RNAPol (Supplementary Table 2). This coincident 
+disposition of TSPs found in silico and polymerase-bind-
+ing sites registered in vivo allows considering coordinates 
+of predicted TSPs as a valid map of transcription signals. </p>
+
+<p>Scores of predicted promoters correlate with efficiency 
+of RNA polymerase binding </p>
+
+<p>At the last step we estimated the degree of correlation 
+between the values of <rs type="software">PlatProm</rs> scores, and efficiencies 
+of RNAPol binding. Since S reflects probability of any 
+single nucleotide in the genome to be a TSP, while 
+ChIP-on-chip method estimates efficiency of RNAPol 
+binding to a particular genomic region represented by 
+50 nt probes on high-density tiled microarrays, the pattern 
+of S should be converted into a comparable mode. 
+Converting procedure should take into account that the 
+geometrical center of RNAPol-binding site does not coin-
+cide with the TSP. Moreover, as RNAPol in vivo interacts 
+with double-stranded DNA, samples prepared for chip-
+hybridization contained both strands of enzyme-trapped 
+fragments. Thus, fluorescent signal registered for a partic-
+ular probe may result from two types of complexes 
+differing in enzyme orientation (Figure 4A). Supposing 
+each 50 nt probe as a target for interaction with polymer-
+ase we thus considered the sum of S corresponding to the 
+virtual TSPs on both strands as a probability of enzyme 
+binding (P): </p>
+
+<p>P ¼ AESðtÞ þ AESðbÞ: 
+1 </p>
+
+<p>As the spacer length and the distance between the TSP 
+and À10 element differ in real promoters, AE8 nt variation 
+in +1 positioning has been allowed. Location of these 
+regions relative to 5 0 -ends was selected experimentally 
+as position giving maximal correlation coefficient (R) 
+between P and hybridization signals. Figure 4C shows 
+the predicted TSPs of the Figure 4B converted in such a 
+way. X-axis is shifted 1.96 SD (1 SD = 55.2) above the 
+background level of P (average value of all negative P), 
+providing p &lt; 0.05 for positive values. 
+Log 2 ratios [(log 2 ) B ] reflecting efficiencies of RNAPol 
+binding in vivo, obtained by Herring et al. in experiment 
+2 (12) and by Reppas et al. in experiment B (13) were used 
+to estimate correlation with P. Even though hybridization 
+signals registered by two experimental assays differ in 
+amplitude (Figure 4D and E), their profiles resemble 
+each other and the pattern of P (Figure 4C). Quantified 
+values of R are 0.51 (R H ) and 0.38 (R R ), respectively 
+(Figure 6). R H is comparable with R values estimated 
+for three replicates performed in similar conditions by 
+the same research group (R = 0.46; 0.48 and 0.52) (12). 
+Are these R H and R R values high or not? Although 
+the data obtained in silico and in vivo reflect the same 
+phenomena: anticipated and registered interaction with 
+RNAPol, there are some peculiarities decreasing evaluated 
+correlation. <rs type="software">PlatProm</rs>, for instance, accounts putative 
+modules for interaction with regulatory proteins as </p>
+
+<p>Nucleic Acids Research, 2009, Vol. 37, No. 15 4927 </p>
+
+<p>positive elements, though repressors decrease polymerase 
+binding. Many weak RNAPol-binding sites are not 
+detected in vivo due to low signal-to-noise ratio (12) but 
+<rs type="software">PlatProm</rs> discriminates them. Intensity of ChIP signals 
+from some promoters may disproportionately decrease 
+due to possibility of epitope occlusion by other inter-
+actions (12). Finally, <rs type="software">PlatProm</rs> is currently attuned to 
+s 70 -specific promoters, while s 70 -specific antibodies pre-
+cipitate s 28 as well (13). Usage of b 0 -specific antibodies 
+in combination with rifampicin-chase selection allows 
+promoters of all types to be extracted. Considering all 
+these realities, we conclude that both values of R are 
+rather high. </p>
+
+<p>Promoter 'islands' have unusual functional features </p>
+
+<p>The shape of Figure 6A reveals 2106 outliers with lower 
+than expected hybridization signals (red symbols), which 
+can not be attributed to experimental or technical errors, 
+since oligonucleotide probes to the same genomic regions 
+in the other ChIP-on-chip data set also tend to weaker 
+hybridization (Figure 6B). This phenomenon can not be 
+also explained by repressor functioning since the percent-
+age of probes representing genes with inhibited transcrip-
+tion (22%) among these outlying probes approximately 
+equals the percentage (25%) of such genes in the 
+genome [RegulonDB 5.5 (38)]. Further analysis showed 
+that almost all out-of-ordered probes correspond to 
+regions with multiple promoter-like sites and every one 
+of 78 promoter 'islands' turned out to be represented in 
+the prominent part of Figure 6A. They comprise 32% of 
+all the deviating probes, rather than 0.7% expected by 
+chance. R H and R R for promoter 'islands' are low: 0.09 
+and 0.17, respectively. Thus, it appears that polymerase 
+recognizes any single promoter-like site within the region 
+of multiple competing promoters with less predictable effi-
+ciency than across the whole genome. High density of 
+promoter-like sites tends to weaken rather than strengthen 
+RNAPol binding. 
+To explore further this phenomenon a set of 181 known 
+promoters accurately recognized in silico and possessing 
+no more than two additional <rs type="software">PlatProm</rs> signal(s) on either 
+strand in a AE50 bp area was compiled (Supplementary 
+Table 3). Amid others it contains promoters P fadB , P cusC , 
+and P cusR (Figures 2 and 4). Only 21 promoters from this 
+set contribute to the population of 2106 outlying probes 
+by 42 representatives, which is exactly as much as expected 
+by chance ($2%). The set of 'normal' promoters was com-
+pared with 78 PIs in terms of RNAPol binding and tran-
+scription efficiency calculated as described in Figure 6 
+legend (Supplementary Tables 2 and 3, and Figure 6C). 
+All PIs and 87% of 'normal' promoters (Supplementary 
+Tables 2 and 3) form complexes with RNAPol. At the 
+same time RNA synthesis has been detected for 107 
+'normal' promoters (59%) but only for 20 out of 156 
+(78 Â 2) genomic loci flanking promoter 'islands' (13%). 
+Figure 6C illustrates expression efficiency and RNAPol 
+binding for two compared groups. Points representing 
+promoter 'islands' are mainly concentrated in the 
+bottom part of the plot. The yield of particular RNAs in 
+the cell may, therefore, depend on the presence of </p>
+
+<p>Figure 6. Correlation between P and efficiency of enzyme binding 
+(log 2 ) B as registered by ChIP-on-chip assays in experiment 2 carried 
+out by Herring et al. (12) (A) and experiment B performed by Reppas 
+et al. (13) (B). Only the '+' strand probes [185 519 and 191 088 for (A) 
+and (B), respectively] are plotted. Outlying points on plot (A) are dis-
+sected by invisible lines equally shifted above and below the median and 
+colored. Red and blue symbols on plot (B) represent the same genomic 
+regions in the Reppas et al. (13) data set. Since blue outliers in the 
+second data set tend to fit better to the expected range of log 2 ratios, 
+this slight deviation was not considered as regular and was not further 
+analyzed. Points representing promoter 'islands' 1-3 (Figure 4B) are 
+shown in green. The indicated values of R were quantified for the 
+whole set of microarray probes using (log 2 ) B and P averaged within 
+running window 3. (C) Correlation between RNAPol binding (log 2 ) B 
+and expression (log 2 ) E efficiencies plotted for 78 PIs (red symbols) and 
+181 single promoters (blue symbols). For PIs (log 2 ) B were quantified as 
+average values of ChIP-on-chip signals for all probes covering corre-
+sponding genomic areas (Supplementary Table 2). (Log 2 ) E was first 
+quantified as an average log 2 ratio of chip signals obtained upon 
+cDNA hybridization with 10 probes representing the 250-bp region 
+downstream from the last predicted TSP on each strand. Two values 
+characterizing transcription in both directions were then compared and 
+the largest one was considered as the measure of expression efficiency. 
+Other variants of (log 2 ) E calculation see in Supplementary Table 2. 
+(Log 2 ) B and (log 2 ) E for 'normal' promoters were quantified within 
+250 bp region upstream and downstream from the position +1, respec-
+tively (Supplementary Table 3). Both (log 2 ) B and (log 2 ) E were averaged 
+for two replicates of Reppas et al. (13) data set. First-order regression 
+lines show apparent dependence between (log 2 ) B and (log 2 ) E for both 
+promoter 'islands' and 'normal' promoters. </p>
+
+<p>4928 Nucleic Acids Research, 2009, Vol. 37, No. 15 </p>
+
+<p>competing promoters, which makes genomic regions dif-
+fering in abundance of transcription signals dissimilar in 
+terms of functional characteristics. </p>
+
+<p>DISCUSSION </p>
+
+<p>Comprehensive annotation of newly sequenced genomes 
+implying mapping of genes along with their regulatory 
+elements is currently becoming a long-term strategy 
+appealing for effective promoter-finders. In the case of 
+genes encoding proteins, rRNAs and tRNAs, which by 
+itself are accurately identified by almost perfectly attuned 
+computer programs, promoter-finders may assist in local-
+ization of regulatory regions. In the case of genes encoding 
+small untranslated RNAs they are used to point out posi-
+tions where sRNAs may be initiated (29,39), whereas 
+other programs classify potential products as putative 
+sRNAs based on their thermodynamic features and fold-
+ing propensity. In the case of aRNAs promoter-finders 
+may provide unique indicators of potential antisense tran-
+scription. So far only two dozens of aRNAs at least partly 
+synthesized from the antisense strands of other genes have 
+been found in E. coli. This rather small number apparently 
+does not reflect their multiplicity, as genome-wide expres-
+sion studies registered a huge amount of RNAs generated 
+from antisense strands (30); <rs type="software">PlatProm</rs> predicted many 
+potential promoters for antisense transcription, while 
+ChIP-on-chip technique detected suitable intragenic 
+RNAPol-binding sites (12,13). Even though many signals 
+registered by microarrays may result from run-through 
+transcripts unterminated at 3 0 -ends of neighboring genes, 
+some promoters predicted in silico may be false positives 
+while intragenic RNAPol-binding sites may represent 
+paused elongation complexes, combined data vote for 
+antisense transcription in bacteria. 
+Along with potential TSPs for antisense transcription 
+our screen revealed a large number of intragenic promo-
+ters with sense orientation and preferred location near the 
+initiating codon. Though expediency of alternative tran-
+scription remains vague, very similar phenomenon has 
+been recently registered in eukaryotic genomes [see, e.g. 
+ref. (40)]. In the chromosome of E. coli, there are several 
+pairs of extensively overlapping genes encoding two pro-
+teins or a protein and an untranslated RNA. Many of 
+them may be transcribed from common promoters. 
+However genes hokC, tpr and ygeN with 5 0 -ends mapped 
+within mokC, rttR and ygeO, respectively, as well as 46 
+transcripts partly matching sense strand and detected in 
+the fraction of short RNAs by Vogel et al. (31) may be 
+also initiated from their own promoters predicted by 
+PlatProm. Internal promoters with sense orientation 
+may, thus, mark candidates for alternative transcription. 
+The data obtained drew attention to 78 regions with 
+high density of TSPs over long distance. Fifty-five of 
+them at least partly overlap with intergenic loci presumed 
+to contain active promoters, nine of which are mapped 
+experimentally. They initiate RNA synthesis from single 
+or several (up to eight) positions. Multiplicity of the TSPs 
+might, therefore, be exploited by transcription machinery. 
+Four promoter-rich clusters lie between convergently </p>
+
+<p>transcribed genes like in the case of appY/ompT 
+(Figure 4B). Their transcription activity, if detected, 
+assumes either presence of yet unidentified genes in inter-
+genic regions or antisense transcription in one or both 
+directions. Putative sRNA IS021 (39), for instance, may 
+be synthesized between appY and ompT, while gene for 
+sRNA HB_171 is predicted between ygcE and ygcF (29). 
+The most interesting are the remaining 19 PIs either 
+immersed into one coding sequence or covering the junc-
+tion point between two operonic genes, where promoter 
+activity is not required. 
+Even though all 78 promoter 'islands' bind RNAPol 
+in vivo, transcription has been detected for only 13 geno-
+mic loci (Figure 6C). In all but one case (PI submerged 
+into the wbbK coding sequence) they occupy intergenic 
+regions. PI1 (Figure 4B) exemplifies cluster with weak 
+expression observed in only one experiment (Supplemen-
+tary Table 2). Our data show that RNAPol can interact 
+with PI1 and initiate RNA synthesis in both directions 
+in vitro but primer extension (Figure 5E) failed to reveal 
+the presence of appY-mRNA among RNAs produced 
+in vivo. This transcriptional silence makes the value of 
+R between promoter scores within PIs and corresponding 
+(log 2 ) E statistically insignificant, whereas faint correlation 
+between these parameters was registered for the subset of 
+'normal' promoters (0.16) and even the whole set of pre-
+dicted promoter-like regions (0.075). That means that the 
+overall transcription from multiple TSPs does not repre-
+sent the sum of expected outputs from individual ones. 
+Some sites seem to bind RNAPol without initiating pro-
+ductive synthesis, thus performing only part of functions 
+commonly ascribed to promoter regions. If so, they may 
+be considered as a kind of suppressor elements. 
+Currently it is not clear whether promoter 'islands' 
+found in this study and 'clusters with high density of 
+promoter-like signals' (1,36) reflect one and the same phe-
+nomenon. Previously discovered clusters are defined as 
+accessories of intergenic loci, surrounding functional 
+promoters and participating in their proper regulation, 
+while 23 PIs ($30%) are located far from expected pro-
+moters. Ninety-two percent of E. coli genes have promo-
+ters surrounded by other promoter-like signals (36). This 
+clustering, thus, should be considered as a feature typical 
+for E. coli genes, while 'single' promoters should be 
+ranked as a peculiarity. At the same time only 78 regions 
+have extremely high density of potential TSPs assuming 
+their special role in genome organization and function. 
+Since DNA of all but three PIs has high potentiality to 
+undergo stress-induced deformations [(10); http://www 
+.genomecenter.ucdavis.edu/benham/sidd_database/], there 
+is a reason to suggest a possibility that PIs participate in 
+structural remodeling of bacterial chromosome. 
+Our conclusions were drawn on the basis of compara-
+tive analysis of data sets obtained in silico and in vivo. 
+Although both methods have certain limitations if used 
+separately, together they provide valid information on 
+the genome positioning of RNAPol-binding sites and 
+allow spotting a larger set of potential promoters. Thus, 
+even weak binding signals associated with a predicted TSP 
+may indicate the presence of an active promoter, whereas 
+complex formation with the enzyme nearby low scoring </p>
+
+<p>Nucleic Acids Research, 2009, Vol. 37, No. 15 4929 </p>
+
+<p>promoters supports their functionality. Moreover, the 
+combined use of two approaches allows mapping of all 
+types of transcribed regions including those encoding 
+untranslated RNA species, hardly identifiable by other 
+computational screens. </p>
+
+<p>SUPPLEMENTARY DATA </p>
+
+<p>Supplementary Data are available at NAR Online. </p>
+
+<p>FUNDING </p>
+
+<p>Russian Foundation for Basic Research (07-04-01066). </p>
+
+<p>Conflict of interest statement. None declared. </p>
+
+
+
+
+
+
+
+<p>Nucleic Acids Research, 2009, Vol. 37, No. 15 4931 </p>
+
+</text></tei>

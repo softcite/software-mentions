@@ -49,7 +49,7 @@ public class SoftwareParserTest {
         GrobidProperties.getInstance();
     }
 
-    @Test
+    //@Test
     public void testSoftwareParserText() throws Exception {
         System.out.println("testSoftwareParserText - testSoftwareParserText - testSoftwareParserText");
         String text = IOUtils.toString(this.getClass().getResourceAsStream("/text.txt"), StandardCharsets.UTF_8.toString());

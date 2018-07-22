@@ -1,0 +1,1373 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC5015294" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:18+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>Background--Cardiac surgery-associated acute kidney injury (CSA-AKI) is a common complication with a poor prognosis. In order 
+to identify modifiable perioperative risk factors for AKI, which existing risk scores are insufficient to predict, a dynamic clinical risk 
+score to allow clinicians to estimate the risk of CSA-AKI from preoperative to early postoperative periods is needed. </p>
+
+<p>Methods and Results--A total of 7233 cardiac surgery patients in our institution from January 2010 to April 2013 were enrolled 
+prospectively and distributed into 2 cohorts. Among the derivation cohort, logistic regression was used to analyze CSA-AKI risk 
+factors preoperatively, on the day of ICU admittance and 24 hours after ICU admittance. Sex, age, valve surgery combined with 
+coronary artery bypass grafting, preoperative NYHA score &gt;2, previous cardiac surgery, preoperative kidney (without renal 
+replacement therapy) disease, intraoperative cardiopulmonary bypass application, intraoperative erythrocyte transfusions, and 
+postoperative low cardiac output syndrome were identified to be associated with CSA-AKI. Among the other 1152 patients who 
+served as a validation cohort, the point scoring of risk factor combinations led to area under receiver operator characteristics 
+curves (AUROC) values for CSA-AKI prediction of 0.74 (preoperative), 0.75 (on the day of ICU admission), and 0.82 
+(postoperative), and Hosmer-Lemeshow goodness-of-fit tests revealed a good agreement of expected and observed CSA-AKI 
+rates. </p>
+
+<p>Conclusions--The first dynamic predictive score system, with Kidney Disease: Improving Global Outcomes (KDIGO) AKI definition, 
+was developed and predictive efficiency for CSA-AKI was validated in cardiac surgery patients. ( J Am Heart Assoc. 2016;5: 
+e003754 doi: 10.1161/JAHA.116.003754) </p>
+
+<p>Key Words: acute kidney injury • cardiac surgery • risk factor • risk score </p>
+
+<p>A cute kidney injury (AKI) is a common complication after </p>
+
+<p>cardiac surgery, with reported incidences between 8.9% 
+and 39% as well as mortality of 3.8% to 54.4%, and even slight 
+renal function changes were reported to affect short-and 
+long-term outcome after cardiac surgery. 1-3 Because early 
+prediction in those patients at high risk of developing cardiac 
+surgery-associated acute kidney injury (CSA-AKI) may enable </p>
+
+<p>prevention of complications, in the last 2 decades various 
+predictive models have been developed to forecast CSA-AKI 
+or renal replacement therapy (RRT)-AKI after cardiac 
+surgery, 4-9 in which adequate predictive power was validated 
+among whites. 10,11 However, by now, the predictive value for 
+estimating AKI, RRT-AKI, or death incidence of 5 established 
+models, including the method published by Palomba et al, 7 
+the Cleveland Clinic score, 8 the scoring system published by 
+Mehta et al, 6 the simplified renal index score, 9 and the EURO 
+score 12 in other racial cohorts after cardiac surgery is 
+uncertain. Possible reasons might include the following. (1) 
+There was no consensus in the definition of AKI when those 
+models were developed. In the AKICS score, AKI was defined 
+as "an increase of serum creatine (Cr) levels above 2.0 mg/ 
+dL in patients with baseline serum Cr lower than 1.5 mg/dL." 
+In patients with baseline serum Cr between 1.5 and 3.0 mg/ 
+dL, AKI was defined as "a serum Cr increase of 50% over the 
+baseline value." In the new 2012 Kidney Disease: Improving 
+Global Outcomes (KDIGO) AKI definition, 13 urine output, as 
+another indicator besides serum creatine, was not utilized to 
+define AKI in Palomba's study, and AKI may be missed. (2) 
+With the recognition of intraoperative and postoperative risk </p>
+
+<p>From the Departments of Nephrology (W.J., J.T., J.X., B.S., Y.W., Y.F., Z.Z., J.J., 
+X.D.), Cardiac Surgery Intensive Care Unit (Y.Z., L.L., Z.L.), and Cardiovascular 
+Surgery (C.W.), Zhongshan Hospital, Shanghai Medical College, Fudan Univer-
+sity, Shanghai, China; Shanghai Kidney and Dialysis Institute, Shanghai, China 
+(W.J., J.T., J.X., B.S., Y.W., Y.F., Z.Z., J.J., X.D.); Shanghai Kidney and Blood 
+Purification Laboratory, Shanghai, China (J.T., Y.F., X.D.). 
+*Dr Jiang and Dr Teng contributed equally to this work. 
+Correspondence to: Xiaoqiang Ding, MD, Department of Nephrology, 
+Zhongshan Hospital, Shanghai Medical College, Fudan University, No 180 
+Fenglin Rd, Shanghai, China. E-mail: ding.xiaoqiang@zs-hospital.sh.cn </p>
+
+<p>Received April 21, 2016; accepted July 8, 2016. 
+ª 2016 The Authors. Published on behalf of the American Heart Association, </p>
+
+<p>Inc., by Wiley Blackwell. This is an open access article under the terms of the 
+Creative Commons Attribution-NonCommercial License, which permits use, 
+distribution and reproduction in any medium, provided the original work is 
+properly cited and is not used for commercial purposes. </p>
+
+<p>DOI: 10.1161/JAHA.116.003754 
+Journal of the American Heart Association </p>
+
+<p>1 </p>
+
+<p>ORIGINAL RESEARCH </p>
+
+<p>factors, especially the modifiable factors, contributing to CSA-
+AKI, risk scores 6,8,9 including only preoperative risk factors 
+can hardly meet the predictive requirement. (3) In some 
+developing countries such as China, the proportions of valve 
+surgery, comorbidities, and population race 14 are quite 
+different from those of the existing model derivation cohorts. 
+With the development of medical technology, cardiac surgery 
+in developing countries is booming. Meanwhile complications 
+of surgery and economic burdens are also increasing due to 
+restriction of medical technology and management. We aimed 
+to develop a dynamic predictive model for CSA-AKI based on 
+the recent KDIGO AKI definition, which was devised to predict 
+the incidence of CSA-AKI from preoperative to early postop-
+erative periods and to validate its predictive capacity for 
+improved clinical application. </p>
+
+<p>Patients and Methods </p>
+
+<p>Patients </p>
+
+<p>In our prospective study we included 7233 patients who were 
+divided into a derivation cohort (6081 patients between 
+January 2010 and October 2012) and a validation cohort 
+(1152 patients between November 2012 and April 2013); all 
+were admitted to the Zhongshan Hospital, Shanghai Medical 
+College, Fudan University. The study was approved by the 
+ethical committee of the Zhongshan Hospital, and all partic-
+ipants provided written informed consent. 
+Inclusion criteria were adult patients who underwent coro-
+nary artery bypass grafting (CABG), off-pump coronary artery 
+bypass (OPCAB), valve surgery, or valve combined with CABG 
+surgery. Excluded were patients with previous heart transplan-
+tation, preoperative mechanical ventilation or tracheotomy, 
+preoperative defibrillator or ventricular assist devices, preoper-
+ative RRT, preoperative liver dysfunction, or sepsis. </p>
+
+<p>Data Collection </p>
+
+<p>The clinical characteristics of both derivation and validation 
+cohorts have been collected and were extracted from the 
+database of Zhongshan Hospital cardiac surgery. All data 
+were checked twice by medical personnel (postgraduate and 
+resident doctor) before being admitted to the database. We 
+collected data including sex, age, weight, length of stay, 
+length of ICU stay, and outcome; preoperative data including 
+diagnosis, comorbidities including hypertension, diabetes 
+mellitus, atrial fibrillation, endocarditis, coronary artery 
+disease, cerebral vascular disease, anemia, chronic obstruc-
+tive pulmonary disease, kidney disease without renal 
+replacement therapy; and laboratory reports including esti-
+mated glomerular filtration rate (eGFR), which were calcu-
+lated with CKD-EPI formulas, 15 in addition to New York Heart </p>
+
+<p>Association (NYHA) functional classification, left ventricular 
+ejection fraction (LVEF), preoperative congestive heart 
+failure, preoperative intra-aortic balloon pump (IABP), previ-
+ous cardiac surgery history, recent contrast media (CM) 
+exposure, and renal toxic drug exposure. Intraoperative data 
+included emergency surgery, procedure type, cardiopul-
+monary bypass (CPB) application and time, transfusion, 
+and fluid balance; postoperative data comprised low cardiac 
+output syndrome (LCOS), central venous pressure, medicine 
+application, mechanical ventilation, RRT, and renal recov-
+ery. AKI was defined according to the KDIGO guideline 13 as 
+any of the following: increase in SCr by ≥0.3 mg/dL 
+(≥26.5 lmol/L) within 48 hours; or increase in SCr to 
+≥1.5 times baseline that is known or presumed to have </p>
+
+<p>occurred within the prior 7 days or urine volume &lt;0.5 mL/ 
+kg per hour for 6 hours. If there were more than 1 cardiac 
+surgery procedures performed during the same hospitaliza-
+tion, only the data on the first surgery were considered. If 
+there were more than 1 hospitalization between January 
+2010 and April 2013, only the data on the first hospital-
+ization were considered. </p>
+
+<p>Statistical Analyses </p>
+
+<p>Statistical analyses were carried out by <rs id="software-0" type="software">SPSS</rs> statistics for 
+Windows (<rs corresp="#software-0" type="version-number">Version 20.0.</rs>. <rs corresp="#software-0" type="creator">IBM Corp, Armonk, NY</rs>). Continuous 
+variables were expressed as meanAESD and analyzed by 
+unpaired t tests, with Welch adjustment when necessary. 
+Continuous variables that violated the normality assumption 
+were expressed as median and 25th to 75th percentiles and 
+analyzed by a Mann-Whitney U test. Categorical variables 
+were expressed as absolute (n) and relative (%) frequency and 
+were analyzed by the Pearson 2-test or the Fisher exact test 
+whenever appropriate. Significant level was considered with 
+P&lt;0.05. Univariate analysis was carried out for patient data, 
+and multivariate analysis by logistic regression was used to 
+obtain data about the risk factors for AKI at the 3 time points: 
+preoperative, ICU admittance, and 24 hours after ICU admit-
+tance. In the multivariate analysis, results were expressed by 
+the odds ratio and the 95% confidence interval. The regression 
+b of those variables obtained from logistic regression were </p>
+
+<p>used to develop the final 3 stage scores to predict CSA-AKI. 
+The 1152 patients in the validation cohort were scored for 
+validation, and the area under the receiver operating charac-
+teristic curves (AUROC) as well as Hosmer-Lemeshow good-
+ness-of-fit test were applied to estimate the reliability of the 
+scoring for predicting CSA-AKI. </p>
+
+<p>Results </p>
+
+<p>The derivation cohort consisted of 6081 patients, and the 
+validation cohort consisted of 1152 patients. The </p>
+
+<p>DOI: 10.1161/JAHA.116.003754 
+Journal of the American Heart Association </p>
+
+
+
+<p>AKI Prediction After Cardiac Surgery 
+Jiang et al </p>
+
+<p>ORIGINAL RESEARCH </p>
+
+<p>characteristics of both cohorts were showed in Table 1. The 
+incidence of CSA-AKI and mortality in the derivation cohort 
+were 35.5% (2159/6081) and 2.8% (170/6081), whereas in 
+the validation cohort they were 33.0% (380/1152) and 3.4% 
+(39/1152). </p>
+
+<p>Risk Factor Analysis </p>
+
+<p>The perioperative characteristics of the derivation cohort are 
+presented in Table 2. We categorized the following variables 
+for subgroup observation: age (≤40, 41-60, 61-80, ≥81), 
+estimated GFR (&gt;60, &gt;30 to ≤60, ≤30 mL/min), and LVEF 
+(&gt;50, 36-50, ≤35). There were statistically significant 
+differences between the CSA-AKI patients and the unaf-
+fected group regarding sex, age, preoperative kidney func-
+tion, some comorbidities such as hypertension and COPD, 
+preoperative heart function, CM exposure, procedure type, 
+perioperative erythrocyte transfusion, postoperative central 
+venous pressure, and short-term mortality (Table 2). All 
+these risk factors were brought into a multivariate analysis 
+for predicting CSA-AKI. The multivariate logistic regression 
+analysis was conducted at 3 time points: preoperative, ICU 
+admittance, and 24 hours after ICU admittance; the statis-
+tically significant risk factors identified by the analysis are 
+shown in Table 3, which shows that male sex, age, kidney 
+disease without RRT, NYHA score &gt;2, previous cardiac 
+surgery, valve and CABG procedure, application of CPB, 
+erythrocyte transfusion, and postoperative LCOS at the 
+indicated time points were risk factors for CSA-AKI devel-
+opment (Table 3). </p>
+
+<p>Score Development </p>
+
+<p>Next we developed a point system for predicting CSA-AKI 
+occurrence with the regression coefficient data from the 
+multivariable regression analyses of the derivative cohort 
+patients (Table 4). Depending on the scores, the risks of 
+CSA-AKI development were categorized into low, medium, 
+and high in accordance with the practically observed 
+incidence of CSA-AKI (Table 5). The preoperative predictive 
+risks of CSA-AKI occurrence were low with 0 to 1 patient 
+(9.5%), medium with 2 to 3 patients (22.1%), and high with 
+≥4 patients (37.3%). The predictive risks of CSA-AKI devel-</p>
+
+<p>opment at the day of ICU admission were low with 0 to 
+4 patients (11.5%), medium with 5 to 9 patients (42.6%), and 
+high with ≥10 patients (83.3%). The postoperative predictive 
+risks for developing CSA-AKI were low with 0 to 4 patients 
+(11.6%), medium with 5 to 9 patients (44.2%), and high with 
+≥10 patients (88.8%). The efficiency of the scores for </p>
+
+<p>predicting medium and high risk for CSA-AKI improved with 
+the procedure progress and additional risk factors being 
+added. We further analyzed the score models at the 3 time </p>
+
+<p>Table 1. Clinical Characteristics of Derivation and Validation 
+Cohort </p>
+
+<p>Derivation 
+Cohort (N=6081) </p>
+
+<p>Validation Cohort 
+(N=1152) </p>
+
+<p>Preoperative </p>
+
+<p>Male 
+3767 (61.9%) 
+725 (62.9%) </p>
+
+<p>Age, y 
+58 (48, 65) 
+60 (52, 66) </p>
+
+<p>Renal function </p>
+
+<p>Serum creatinine, 
+lmol/L </p>
+
+<p>77 (65, 89) 
+78 (66, 90) </p>
+
+<p>eGFR, mL/min 
+per 1.73 m 2 </p>
+
+<p>88.7 (69.7, 
+99.6) </p>
+
+<p>86.5 (67.6, 
+101.6) </p>
+
+<p>Comorbidities </p>
+
+<p>Hypertension 
+2012 (33.1%) 
+403 (34.9%) </p>
+
+<p>DM 
+763 (12.5%) 
+200 (17.4%) </p>
+
+<p>COPD 
+43 (0.7%) 
+9 (0.8%) </p>
+
+<p>CVD 
+83 (1.4%) 
+14 (1.2%) </p>
+
+<p>Kidney disease 
+without RRT </p>
+
+<p>217 (3.6%) 
+11 (1.0%) </p>
+
+<p>Heart function </p>
+
+<p>NYHA classification &gt;2 
+3428 (56.4%) 
+648 (56.2%) </p>
+
+<p>NYHA classification ≤2 
+2653 (43.6%) 
+504 (43.7%) </p>
+
+<p>LVEF &gt;50% 
+5030 (82.7%) 
+978 (84.9%) </p>
+
+<p>35&lt; LVEF ≤50 
+968 (15.9%) 
+157 (13.6%) </p>
+
+<p>LVEF ≤35% 
+83 (1.3%) 
+17 (1.5%) </p>
+
+<p>Previous cardiac 
+surgery </p>
+
+<p>84 (1.4%) 
+25 (2.2%) </p>
+
+<p>CM exposure 
+2464 (40.5%) 
+395 (34.3%) </p>
+
+<p>Intraoperative </p>
+
+<p>Emergency 
+11 (0.2%) 
+3 (0.3%) </p>
+
+<p>Procedure </p>
+
+<p>Valve 
+3975 (65.4%) 
+794 (68.9%) </p>
+
+<p>CABG 
+1527 (25.1%) 
+325 (28.2%) </p>
+
+<p>OPCAB 
+286 (4.7%) 
+45 (3.9%) </p>
+
+<p>Valve and CABG 
+293 (4.8%) 
+47 (4.1%) </p>
+
+<p>CPB 
+4083 (67.1%) 
+792 (68.8) </p>
+
+<p>Erythrocyte transfusion, U 
+1 (0, 2) 
+1 (0, 2) </p>
+
+<p>Postoperative </p>
+
+<p>LCOS 
+158 (2.6%) 
+35 (3.1%) </p>
+
+<p>CVP, cm H 2 O 
+9 (7, 11) 
+10 (8, 10) </p>
+
+<p>Prognosis </p>
+
+<p>28-day mortality 
+170 (2.8%) 
+39 (3.4%) </p>
+
+<p>AKI indicates acute kidney injury; CABG, coronary artery bypass grafting; CM, contrast 
+media; COPD, chronic obstructive pulmonary disease; CPB, cardiopulmonary bypass; 
+CVD, cerebral vascular disease; CVP, central venous pressure by ICU admittance; DM, 
+diabetes mellitus; eGFR, estimated glomerular filtration rate, as was calculated based on 
+the CKD-EPI formulas; LCOS, low cardiac output syndrome; LVEF, left ventricular ejection 
+fraction; NYHA, New York Heart Association; OPCAB, off-pump coronary artery bypass. </p>
+
+<p>DOI: 10.1161/JAHA.116.003754 
+Journal of the American Heart Association </p>
+
+
+
+<p>AKI Prediction After Cardiac Surgery 
+Jiang et al </p>
+
+<p>ORIGINAL RESEARCH </p>
+
+<p>points by AUROC determinations and derived 0.75 (preop-
+erative), 0.81 (ICU admittance), and 0.82 (24 hours after ICU 
+admittance) area under curve (AUC) values. The calibrations </p>
+
+<p>of them by Hosmer-Lemeshow statistics resulted in 0.569 
+(preoperative), 0.684 (ICU admittance), 0.829 (24 hours 
+after ICU admittance). </p>
+
+<p>Table 2. Characteristics of the Patients in the Derivation Cohort </p>
+
+<p>Entire Cohort (N=6081) 
+No AKI (N=3922) 
+AKI (N=2159) 
+P Value </p>
+
+<p>Preoperative </p>
+
+<p>Male 
+3767 (61.9%) 
+2254 (57.5%) 
+1513 (70.1%) 
+&lt;0.01 </p>
+
+<p>Age, y 
+58 (48, 65) 
+57 (46, 65) 
+60 (52, 67) 
+&lt;0.01 </p>
+
+<p>Kidney function </p>
+
+<p>Serum creatinine, lmol/L 
+77 (65, 89) 
+73 (63, 86) 
+81 (70, 97) 
+&lt;0.01 </p>
+
+<p>eGFR, mL/min per 1.73 m 2 
+88.7 (72.3, 101.9) 
+92.0 (76.7, 104.6) 
+81.7(65.5, 96.3) 
+&lt;0.01 </p>
+
+<p>&gt;60 mL/min 
+5373 (88.3%) 
+3635 (92.7%) 
+1738 (80.5%) 
+&lt;0.01 </p>
+
+<p>30&lt; eGFR ≤60 mL/min 
+659 (10.8%) 
+273 (6.9%) 
+386 (17.9%) 
+&lt;0.01 </p>
+
+<p>≤30 mL/min 
+49 (0.9%) 
+14 (0.4%) 
+35 (1.6%) 
+&lt;0.01 </p>
+
+<p>Comorbidities </p>
+
+<p>Hypertension 
+2012 (33.1%) 
+1164 (29.7%) 
+848 (39.3%) 
+&lt;0.01 </p>
+
+<p>DM 
+763 (12.5%) 
+471 (12.0%) 
+292 (13.5%) 
+0.09 </p>
+
+<p>COPD 
+43 (0.7%) 
+2 (0.1%) 
+41 (1.9%) 
+&lt;0.01 </p>
+
+<p>CVD 
+83 (1.4%) 
+15 (0.4%) 
+68 (3.1%) 
+&lt;0.01 </p>
+
+<p>Kidney disease without RRT 
+217 (3.6%) 
+90 (2.3%) 
+127 (5.9%) 
+&lt;0.01 </p>
+
+<p>Cardiac function </p>
+
+<p>NYHA classification &gt;2 
+3428 (56.4%) 
+2075 (52.9%) 
+1353 (62.7%) 
+&lt;0.01 </p>
+
+<p>NYHA classification ≤2 
+2653 (43.6%) 
+1847 (47.1%) 
+806 (37.3%) 
+&lt;0.01 </p>
+
+<p>LVEF &gt;50% 
+5030 (82.7%) 
+3412 (87.0%) 
+1618 (74.9%) 
+&lt;0.01 </p>
+
+<p>35&lt; LVEF ≤50 
+968 (15.9%) 
+482 (12.3%) 
+486 (22.5%) 
+&lt;0.01 </p>
+
+<p>LVEF ≤35% 
+83 (1.3%) 
+28 (0.7%) 
+55 (2.5%) 
+&lt;0.01 </p>
+
+<p>Previous cardiac surgery 
+84 (1.4%) 
+42 (1.2%) 
+42 (1.9%) 
+0.008 </p>
+
+<p>CM exposure 
+2464 (40.5%) 
+1600 (40.8%) 
+864 (40.0%) 
+0.567 </p>
+
+<p>Intraoperative </p>
+
+<p>Emergency 
+11 (0.2%) 
+8 (0.2%) 
+3 (0.2%) 
+0.06 </p>
+
+<p>Procedure </p>
+
+<p>Valve 
+3975 (65.4%) 
+2642 (67.4%) 
+1333 (61.7%) 
+&lt;0.01 </p>
+
+<p>CABG 
+1527 (25.1%) 
+1109 (28.3%) 
+418 (19.4%) 
+&lt;0.01 </p>
+
+<p>OPCAB 
+286 (4.7%) 
+23 (0.6%) 
+263 (12.2%) 
+&lt;0.01 </p>
+
+<p>Valve and CABG 
+293 (4.8%) 
+148 (3.8%) 
+145 (6.7%) 
+&lt;0.01 </p>
+
+<p>CPB 
+4083 (67.1%) 
+2550 (65.0%) 
+1533 (71.0%) 
+&lt;0.01 </p>
+
+<p>Erythrocyte transfusion, U 
+1 (0, 2) 
+1 (0, 2) 
+1 (0, 2) 
+&lt;0.01 </p>
+
+<p>Postoperative </p>
+
+<p>LCOS 
+158 (2.6%) 
+19 (0.5%) 
+139 (6.4%) 
+&lt;0.01 </p>
+
+<p>CVP, cm H 2 O 
+9 (7, 11) 
+8 (6, 11) 
+10 (8, 12) 
+&lt;0.01 </p>
+
+<p>Prognosis </p>
+
+<p>28-day mortality 
+170 (2.8%) 
+31 (0.8%) 
+139 (6.4%) 
+&lt;0.01 </p>
+
+<p>AKI indicates acute kidney injury; CABG, coronary artery bypass grafting; CM, contrast media; COPD, chronic obstructive pulmonary disease; CPB, cardiopulmonary bypass; CVD, cerebral 
+vascular disease; CVP, central venous pressure by ICU admittance; DM, diabetes mellitus; eGFR, estimated glomerular filtration rate, as was calculated based on the CKD-EPI formulas; 
+LCOS, low cardiac output syndrome; LVEF, left ventricular ejection fraction; NYHA, New York Heart Association; OPCAB, off-pump coronary artery bypass. </p>
+
+<p>DOI: 10.1161/JAHA.116.003754 
+Journal of the American Heart Association </p>
+
+
+
+<p>AKI Prediction After Cardiac Surgery 
+Jiang et al </p>
+
+<p>ORIGINAL RESEARCH </p>
+
+<p>Score Validation </p>
+
+<p>The clinical characteristics of the 1152 patients in the 
+validation cohort are shown in Table 1. Application of the 
+scoring system led to AUC values of 0.74 (preoperative), 0.75 
+(at ICU admission), and 0.82 (postoperative) (Figure 1). The 
+calibration of the scores is shown in Figure 2. There was no 
+statistically significant difference between the predicted and 
+observed CSA-AKI incidences in the validation cohort </p>
+
+<p>(preoperative v 2 =6.346, P=0.175; at the day of ICU admit-
+tance v 2 =4.65, P=0.703; and postoperative v 2 =3.669, 
+P=0.886). </p>
+
+<p>Discussion </p>
+
+<p>In our study we utilized the KDIGO definition of AKI to 
+establish the dynamic risk score to predict CSA-AKI. With the </p>
+
+<p>Table 3. Multivariate Logistic Regression Analysis of Factors for CSA-AKI* </p>
+
+<p>Variables 
+b 
+P Value 
+OR 
+95% CI </p>
+
+<p>Preoperative </p>
+
+<p>Male 
+0.533 
+&lt;0.01 
+1.704 
+1.516 
+1.914 </p>
+
+<p>Age, y  † </p>
+
+<p>41 to 60 
+0.747 
+&lt;0.01 
+2.110 
+1.622 
+2.745 </p>
+
+<p>61 to 80 
+0.884 
+&lt;0.01 
+2.422 
+1.862 
+3.149 </p>
+
+<p>≥81 
+0.947 
+0.013 
+2.579 
+1.221 
+5.449 </p>
+
+<p>Kidney disease (without RRT) 
+0.754 
+&lt;0.01 
+1.932 
+1.692 
+3.105 </p>
+
+<p>NYHA classification &gt;2 
+0.364 
+&lt;0.01 
+1.487 
+1.304 
+1.665 </p>
+
+<p>Previous cardiac surgery 
+0.388 
+0.011 
+1.475 
+1.093 
+1.990 </p>
+
+<p>ICU admittance </p>
+
+<p>Male 
+0.677 
+&lt;0.01 
+2.032 
+1.698 
+1.876 </p>
+
+<p>Age, y  † </p>
+
+<p>41 to 60 
+0.877 
+&lt;0.01 
+2.405 
+1.816 
+3.184 </p>
+
+<p>61 to 80 
+1.122 
+&lt;0.01 
+3.071 
+2.300 
+4.099 </p>
+
+<p>≥81 
+1.367 
+&lt;0.01 
+3.923 
+1.666 
+9.235 </p>
+
+<p>Kidney disease (without RRT) 
+0.936 
+&lt;0.01 
+2.076 
+1.845 
+2.547 </p>
+
+<p>NYHA classification &gt;2 
+0.332 
+&lt;0.01 
+1.347 
+1.342 
+1.523 </p>
+
+<p>Previous cardiac surgery 
+0.354 
+&lt;0.01 
+1.452 
+1.187 
+1.842 </p>
+
+<p>Valve and CABG 
+0.643 
+&lt;0.01 
+1.887 
+1.452 
+1.872 </p>
+
+<p>Erythrocyte transfusion (per unit) 
+0.652 
+&lt;0.01 
+1.652 
+1.025 
+1.176 </p>
+
+<p>24 hours after ICU admittance </p>
+
+<p>Male 
+0.651 
+&lt;0.01 
+1.918 
+1.639 
+2.244 </p>
+
+<p>Age, y  † </p>
+
+<p>41 to 60 
+0.868 
+&lt;0.01 
+2.382 
+1.788 
+3.173 </p>
+
+<p>61 to 80 
+1.173 
+&lt;0.01 
+3.233 
+2.397 
+4.358 </p>
+
+<p>≥81 
+1.315 
+&lt;0.01 
+3.726 
+1.565 
+8.875 </p>
+
+<p>Kidney disease (without RRT) 
+1.029 
+&lt;0.01 
+2.799 
+2.001 
+3.914 </p>
+
+<p>CPB application 
+0.489 
+&lt;0.01 
+1.631 
+1.39 
+1.914 </p>
+
+<p>Previous cardiac surgery 
+0.468 
+&lt;0.01 
+1.596 
+1.309 
+1.946 </p>
+
+<p>Valve and CABG 
+0.626 
+&lt;0.01 
+1.833 
+1.579 
+2.232 </p>
+
+<p>Erythrocyte transfusion (per unit) 
+0.856 
+&lt;0.01 
+2.376 
+1.588 
+2.365 </p>
+
+<p>LCOS 
+1.387 
+&lt;0.01 
+3.542 
+2.234 
+4.763 </p>
+
+<p>CABG indicates coronary artery bypass grafting; CSA-AKI, cardiac surgery associated acute kidney injury; LCOS, low cardiac output syndrome; NYHA, New York Heart Association; RRT, 
+renal replacement therapy. 
+*Only the statistically significant risk factors in the logistic regression were contained in this table. </p>
+
+<p> † </p>
+
+<p>The variable age was categorized and (age ≤40) was set as the reference level. </p>
+
+<p>DOI: 10.1161/JAHA.116.003754 
+Journal of the American Heart Association </p>
+
+
+
+<p>AKI Prediction After Cardiac Surgery 
+Jiang et al </p>
+
+<p>ORIGINAL RESEARCH </p>
+
+<p>KDIGO guideline, which is accepted by the global nephrology 
+community, some authors carried out risk factor analysis for 
+CSA-AKI 16,17 with the new AKI definition. To the best of our 
+knowledge, there were no dynamically designed risk scores </p>
+
+<p>for predicting CSA-AKI from preoperative to early postoper-
+ative periods. Not only pre-op risk factors but also the intra-op 
+and post-op risk factors were enrolled in the analysis for 
+better predictive efficiency. The result of our study showed 
+that the predictive value of the dynamic risk scores was close 
+to that of the previous scores and improved as the intra-op 
+(AUC=0.75) and post-op (AUC=0.82) risk factors were 
+admitted into the multivariate regression analysis and the 
+subsequent scores. These risk scores can help clinicians to 
+evaluate the risk of CSA-AKI from preoperative to early 
+postoperative periods. 
+In this study all the major risk factors of CSA-AKI were 
+collected to derive the predictive score system, including the 
+intra-op and post-op risk factors. </p>
+
+<p>Table 4. Factor Scoring for Predicting of CSA-AKI 
+Development </p>
+
+<p>Variables 
+Points </p>
+
+<p>Preoperative </p>
+
+<p>Male 
+1 </p>
+
+<p>Age, y </p>
+
+<p>≤40 
+0 </p>
+
+<p>41 to 60 
+1 </p>
+
+<p>61 to 80 
+2 </p>
+
+<p>≥81 
+3 </p>
+
+<p>Kidney disease (without RRT) 
+1 </p>
+
+<p>NYHA classification &gt;2 
+1 </p>
+
+<p>Previous cardiac surgery 
+1 </p>
+
+<p>ICU admittance </p>
+
+<p>Male 
+1 </p>
+
+<p>Age, y </p>
+
+<p>≤40 
+0 </p>
+
+<p>41 to 60 
+1 </p>
+
+<p>61 to 80 
+2 </p>
+
+<p>≥81 
+3 </p>
+
+<p>Kidney disease (without RRT) 
+1 </p>
+
+<p>NYHA classification &gt;2 
+1 </p>
+
+<p>Previous cardiac surgery 
+1 </p>
+
+<p>Valve and CABG 
+1 </p>
+
+<p>Erythrocyte transfusion 
+1/unit </p>
+
+<p>24 hours after ICU admittance </p>
+
+<p>Male 
+1 </p>
+
+<p>Age, y </p>
+
+<p>≤40 
+0 </p>
+
+<p>41 to 60 
+1 </p>
+
+<p>61 to 80 
+2 </p>
+
+<p>≥81 
+3 </p>
+
+<p>Kidney disease (without RRT) 
+1 </p>
+
+<p>CPB application 
+1 </p>
+
+<p>Previous cardiac surgery 
+1 </p>
+
+<p>Valve and CABG 
+1 </p>
+
+<p>Erythrocyte transfusion (per unit) 
+1/unit </p>
+
+<p>LCOS 
+1 </p>
+
+<p>CABG indicates coronary artery bypass grafting; CPB, cardiopulmonary bypass; CSA-AKI, 
+cardiac surgery associated acute kidney injury; ICU, intensive care unit; LCOS, low 
+cardiac output syndrome; NYHA, New York Heart Association. </p>
+
+<p>Table 5. Risk Stratification of CSA-AKI Development at 
+Indicated Time Points </p>
+
+<p>Sum Points 
+Preoperative </p>
+
+<p>ICU 
+Admittance </p>
+
+<p>24 Hours After 
+ICU Admittance </p>
+
+<p>0 to 1 pts 
+Low 
+Low 
+Low </p>
+
+<p>2 to 3 pts 
+Medium 
+Low 
+Low </p>
+
+<p>4 pts 
+High 
+Low 
+Low </p>
+
+<p>5 to 9 pts 
+High 
+Medium 
+Medium </p>
+
+<p>≥10 pts 
+High 
+High 
+High </p>
+
+<p>The distinction of low/medium/high was based on the incidence of CSA-AKI in each 
+sector; eg, the incidence of AKI in the sector of ≥10 pts in the 24 hours after ICU 
+admittance column was 88.8%, which meant in the patients who scored ≥10 points at 
+the time of 24 hours after admission, the incidence of CSA-AKI was 88.8%. CSA-AKI 
+indicates cardiac surgery-associated acute kidney injury. </p>
+
+<p>Figure 1. ROC curves for predicting CSA-AKI in the validation </p>
+
+<p>cohort with point scores from Table 5. *Application of the scoring 
+system led to AUC values of 0.74 (preoperative), 0.75 (at ICU 
+admission), and 0.82 (postoperative). </p>
+
+<p>DOI: 10.1161/JAHA.116.003754 
+Journal of the American Heart Association </p>
+
+
+
+<p>AKI Prediction After Cardiac Surgery 
+Jiang et al </p>
+
+<p>ORIGINAL RESEARCH </p>
+
+<p>Male sex and age were risk factors for CSA-AKI in all 3 time 
+points, and with increasing age, the incidence of CSA-AKI also 
+increased. Age-associated AKI was reported to occur more 
+frequently in the elderly due to structural changes such as 
+vascular sclerosis, increased percentages of sclerosing 
+glomeruli, and other degenerative changes that occur with 
+increasing age, 18,19 and our finding is in agreement with other 
+publications from Fang et al, 20,21 who noted that the 
+incidence of CSA-AKI in the older patients was higher than 
+that in younger patients. In our cohort we conducted a 
+subgroup analysis according to the categorized age and found </p>
+
+<p>significant differences in CSA-AKI incidence between groups 
+(Figure 3). The risk factor of male sex is in disagreement with 
+other publications in which female sex was a risk factor, 22,23 
+which needs further analysis. 
+Another CSA-AKI risk factor was preoperative kidney 
+disease without renal replacement therapy. Preoperative renal 
+dysfunction was related to CSA-AKI in several other stud-
+ies. 4,8,23 However, we excluded preoperative RRT patients and 
+also drew the same conclusion. In Table 2, the eGFR was 
+statistically significantly different between AKI and non-AKI 
+cohorts (P&lt;0.01). In the subsequent subgroup analysis, we 
+found significant differences in the incidence of CSA-AKI 
+among subgroups. However, unlike age, categorized eGFR were 
+eliminated through logistic regression. The possible reason 
+may be that we brought many more parameters, such as 
+"previous kidney disease without RRT," into our study in order </p>
+
+<p>to improve prediction, so the relationship between eGFR and 
+CSA-AKI could be somehow diluted in the multivariate analysis. 
+Another possible reason was that the kidney function (preop-
+erative serum creatine and eGFR) in our cohorts was better 
+than that of existing model derivation cohorts. 
+The predictors above were also listed in the previous 
+scores; the innovation and superiority of our scores result 
+from our inclusion of intra-op and post-op predictors. With the 
+awareness of intra-op and post-op risk factors contributing to 
+CSA-AKI, the risk stratification based on only pre-op risk 
+factors does not take into account the patients' physiological 
+response to the surgeon and post-op treatment as well as the 
+occurrence of adverse events in the intra-op and post-op 
+periods, which increase the risk of CSA-AKI. Patients under-
+going cardiac surgery typically exhibit complex syndromes 
+with numerous pathways that affect renal function and involve 
+hemodynamic changes, tissue breakdown, reactive oxygen 
+species, infection, and drug toxicity. All of these factors can </p>
+
+<p>Figure 2. Score calibrations for predicting CSA-AKI (A) preop-</p>
+
+<p>erative, (B) at the day of ICU admittance, (C) postoperative. 
+*There was no statistically significant difference between the 
+CSA-AKI incidences predicted by point scores and those observed 
+in the validation cohort (preoperative v 2 =6.346, P=0.175; at the 
+day of ICU admittance v 2 =4.65, P=0.703; and postoperative 
+v 2 =3.669, P=0.886). CSA-AKI indicates cardiac surgery-associ-</p>
+
+<p>ated acute kidney injury. </p>
+
+<p>Figure 3. Subgroup analysis between categorized age groups </p>
+
+<p>for CSA-AKI incidence. *The CSA-AKI incidence was statistically 
+significantly different within the subgroups, and increased with 
+age. CSA-AKI indicates cardiac surgery-associated acute kidney 
+injury. </p>
+
+<p>DOI: 10.1161/JAHA.116.003754 
+Journal of the American Heart Association </p>
+
+
+
+<p>AKI Prediction After Cardiac Surgery 
+Jiang et al </p>
+
+<p>ORIGINAL RESEARCH </p>
+
+<p>result in endothelial dysfunction, blood dynamics disorders, 
+inflammatory responses, and tubular cell damage. 
+Intraoperative erythrocyte transfusion was recognized as 
+predictor for CSA-AKI in our study. Previous studies also 
+found a correlation of erythrocyte transfusion and CSA-
+AKI, 24,25 and it has been reported that the posttransfusion 
+recovery of red blood cells is lower after long-term storage 26 ; 
+the morphological and biochemical changes during storage 
+have been suggested to promote a proinflammatory state, 
+impair tissue oxygen delivery, and exacerbate tissue oxidative 
+stress due to free iron, which in turn is an AKI risk factor for 
+susceptible CPB patients. 27 Some studies suggest that each 
+unit of perioperative blood transfusion is significantly asso-
+ciated with a 10% to 20% increase in the risk of AKI after 
+cardiac surgery with CPB 25,28 in spite of the different AKI 
+definitions. Some surgical teams trying to reduce the potential 
+renal harm of erythrocyte transfusion have found promising 
+options, 29 including reducing perioperative hemodilution by 
+minimizing fluid administration and retrograde autologous 
+priming of the cardiopulmonary circuit, salvage of shed blood, 
+tolerance of moderate hemodilution, and early identification 
+and treatment with erythropoietin-stimulating agents and iron 
+therapy. 
+In previous studies some complex procedures, especially 
+valve surgery combined with CABG, were found to increase 
+the incidence of CSA-AKI. 6-9 This conclusion was also proven 
+in our study, in which valve combined with CABG was one of 
+the risk factors. Perioperative cardiac function has a definite 
+impact on CSA-AKI. Chetow et al 4 found local renal ischemia 
+injury due to insufficient perfusion contributes to CSA-AKI. 
+Preoperative NYHA scores &gt;2, previous cardiac surgery, and 
+postoperative LCOS were also found to be risk factors for 
+CSA-AKI in our study. Among the above factors, preoperative </p>
+
+<p>NYHA scores &gt;2 and previous cardiac surgery are not 
+modifiable. The LCOS may result from delayed recovery of 
+post-op cardiac function and cause pulmonary edema and 
+pulmonary infection, which in turn aggravate LCOS in a 
+vicious circle. 30 For those CSA-AKI patients who were unable 
+to eliminate excess fluid and adverse inflammatory factors, 
+either LCOS or pulmonary infection would result in a worse 
+prognosis. Some studies 31 were carried out to break this 
+vicious circle by means of "perioperative goal-directed 
+hemodynamic resuscitation therapy," which was considered 
+to be useful in reducing adverse complications including LCOS 
+as well as 30-day mortality in high-risk patients undergoing 
+cardiac surgery. 
+AKI is one of the common complications after cardiac 
+surgery. The lack of a consensus AKI definition has led to 
+inaccuracy in data regarding the actual incidence of this 
+complication, as can be confirmed by the large variation (1% 
+to 30%) in the reported incidence of AKI following cardiac 
+surgery. 22 By the time of this study, no consensus AKI 
+definition was utilized in the risk scores above, and so their 
+worldwide applicability is suspect. The KDIGO criterion, 
+published in 2012, was regarded as a complement to 
+previous AKI definitions. 32,33 Sampaio et al compared the 
+KDIGO AKI definition with AKIN and RIFLE criteria and 
+validated its superiority, especially for prognoses in unstable 
+hemodynamic cardiac surgery patients. 34 Therefore, risk 
+scores with the KDIGO AKI definition were better for 
+predicting CSA-AKI. 
+Cardiac surgery in developing countries such as China, 
+India, and Brazil has grown at a steady pace for decades, but 
+most centers performing open heart surgery are located in the 
+major cities, which is a common problem for most developing 
+countries. Although as the economy has developed, and </p>
+
+<p>Table 6. Comparison of Derivation Cohort and Other Risk Scores in Comorbidities and Procedures </p>
+
+<p>Derivation Cohort (n=6081) 
+AKICS (n=603) 
+Cleveland (n=15 838) 
+Mehta (n=449 524) 
+SRI (n=10 751) </p>
+
+<p>Comorbidities </p>
+
+<p>Hypertension 
+2012 (33.1%) 
+500 (82.6%) 
+-
+75.2% 
+5891 (54.8%) </p>
+
+<p>DM 
+763 (12.5%) 
+169 (28%) 
+3857 (24.3%) 
+33.2% 
+2381 (22.1%) </p>
+
+<p>COPD 
+43 (0.7%) 
+-
+1326 (8.4%) 
+19.6% 
+427 (3.9%) </p>
+
+<p>CVD 
+83 (1.4%) 
+28 (4.6%) 
+2713 (17.1%) 
+13.8% 
+968 (9%) </p>
+
+<p>Kidney disease without RRT 
+217 (3.6%) 
+-
+-
+-
+-</p>
+
+<p>Procedure </p>
+
+<p>Valve 
+3975 (65.4%) 
+794 (37%) 
+4086 (25.8%) 
+10.3% 
+1755 (16.3%) </p>
+
+<p>CABG* 
+1813 (29.8%) 
+319 (53%) 
+8314 (52.5%) 
+78.6% 
+7005 (65.1%) </p>
+
+<p>Valve and CABG 
+293 (4.8%) 
+61 (10%) 
+2594 (16.4%) 
+10.1% 
+1991 (18.5%) </p>
+
+<p>CABG indicates coronary artery bypass grafting; COPD, chronic obstructive pulmonary disease; CVD, cerebral vascular disease; DM, diabetes mellitus; RRT, renal replacement therapy; SRI, 
+simplified renal index. 
+*Including off-pump coronary artery bypass. </p>
+
+<p>DOI: 10.1161/JAHA.116.003754 
+Journal of the American Heart Association </p>
+
+
+
+<p>AKI Prediction After Cardiac Surgery 
+Jiang et al </p>
+
+<p>ORIGINAL RESEARCH </p>
+
+<p>cardiac surgery has become affordable for more patients, its 
+complications are adding to the social economic burden in 
+developing countries. 35,36 Considering the tremendous pop-
+ulation in developing countries, this is worthy of concern. 
+The occurrence of valve surgery is becoming higher in 
+developing countries such as China than it was in previous 
+risk stratification development centers, in which CABG is 
+the major procedure (Table 6). This change may be due to 
+the lack in early diagnosis and imbalanced distribution of 
+medical resources; it is also one of the reasons why CSA-
+AKI incidence was high in our cohort. Compared to CABG, 
+the pathophysiology and pathological impairment are diver-
+sified. Patients who undergo valve surgery typically demon-
+strate low stroke volume related to regurgitation, which 
+increases the vulnerability of the kidney to injury during 
+cardiac surgery. The comorbidities in developing countries 
+such as China are also different from those in the Western 
+population. In our derivation cohort, the ratios of hyper-
+tension and diabetes mellitus are also remarkably lower 
+than those in the previous developmental populations 
+(Table 6). 
+Therefore, the difference in ethnicity, comorbidities, 
+and underlying disease may affect the efficacy of the 
+existing models predicting CSA-AKI in patients of developing 
+countries. 
+As in Thakar's and Palomba's studies, 7,8 the present risk 
+scores are validated in a sample extracted from the original 
+population with good discrimination and calibration. For 
+simpler clinical application, the scores are stratified in 
+categories according to the predictive risk of CSA-AKI. The 
+maximum predictive risk of 88.8%, which is higher than those 
+in other studies, may be attributed to the KDIGO AKI 
+definition, which was verified with better efficacy, and the 
+inclusion of intra-op and post-op predictors, with which the 
+course of disease can be well simulated. 
+The limitation of this study was that the data were derived 
+from a single-center Chinese database, implying differences in 
+procedures and comorbidities with other existing risk scores, 
+so their predictive efficiency should be prospectively validated 
+in more centers and on a larger scale. </p>
+
+<p>Conclusion </p>
+
+<p>We carried out this study prospectively and developed 
+dynamic predictive scores for CSA-AKI in cardiac surgical 
+patients with the KDIGO definition for AKI. This may improve 
+the early recognition and intervention against CSA-AKI, fix 
+those modifiable factors, reduce the incidence of CSA-AKI, 
+and improve the renal and overall prognosis. Embedding these 
+scores into the electronic medical record (EMR) system may 
+improve their clinical practical utility. </p>
+
+<p>Acknowledgments </p>
+
+<p>We are grateful for the contribution of the study personnel from the 
+Departments of Nephrology, Cardiac Surgery, and Critical Care for 
+persistent contribution to the maintenance of the cardiac surgery 
+database. </p>
+
+<p>Sources of Funding </p>
+
+<p>The study was funded by Natural Science Foundation of China 
+(No. 81430015). </p>
+
+<p>Disclosures </p>
+
+<p>None. </p>
+
+
+
+
+
+<p>AKI Prediction After Cardiac Surgery 
+Jiang et al </p>
+
+<p>ORIGINAL RESEARCH </p>
+
+
+
+<p>DOI: 10.1161/JAHA.116.003754 
+Journal of the American Heart Association </p>
+
+
+
+<p>AKI Prediction After Cardiac Surgery 
+Jiang et al </p>
+
+<p>ORIGINAL RESEARCH </p>
+
+</text></tei>

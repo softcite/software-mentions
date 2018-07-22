@@ -25,8 +25,8 @@ public class ArticleUtilities {
     private static final Logger logger = LoggerFactory.getLogger(ArticleUtilities.class);
 
     private static String halURL = "https://hal.archives-ouvertes.fr";
-    private static String pmcURL = "https://www.ncbi.nlm.nih.gov/pmc/articles/";
-    private static String arxivURL = "https://arxiv.org/pdf/1802.01021.pdf";
+    private static String pmcURL = "http://www.ncbi.nlm.nih.gov/pmc/articles";
+    private static String arxivURL = "https://arxiv.org/pdf";
 
     enum Source {
         HAL, PMC, ARXIV;
@@ -52,14 +52,14 @@ public class ArticleUtilities {
             String urll = null;
             switch (source) {
                 case HAL:
-                    urll = halURL+"/"+identifier+"/document";
+                    urll = halURL+File.separator+identifier+"/document";
                     break;
                 case PMC:
-                    urll = pmcURL+"/"+identifier+"/pdf/";
+                    urll = pmcURL+File.separator+identifier+"/pdf";
                     break;
                 case ARXIV:
                     String localNumber = identifier.replace("arXiv:", "");
-                    urll = arxivURL+"/"+localNumber+".pdf";
+                    urll = arxivURL+File.separator+localNumber+".pdf";
                     break;
             }
 
@@ -110,19 +110,10 @@ public class ArticleUtilities {
             URL url = new URL(urll);
 
             File outFile = new File(path, name);
-            FileOutputStream out = new FileOutputStream(outFile);
-            // Writer out = new OutputStreamWriter(os,"UTF-8");
 
-            // Serve the file
-            InputStream in = url.openStream();
-            byte[] buf = new byte[4 * 1024]; // 4K buffer
-            int bytesRead;
-            while ((bytesRead = in.read(buf)) != -1) {
-                out.write(buf, 0, bytesRead);
-            }
-
-            out.close();
-            in.close();
+            Downloader downloader = new Downloader();
+            downloader.download(url, outFile);
+            //downloader.downloadExternal(url, outFile);
             return outFile;
         } 
         catch (Exception e) {

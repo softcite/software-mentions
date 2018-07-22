@@ -1,0 +1,1485 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4453845" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:24+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>Background: Key challenges of biopsy-based determination of prostate cancer aggressiveness include tumour heterogeneity, 
+biopsy-sampling error, and variations in biopsy interpretation. The resulting uncertainty in risk assessment leads to significant 
+overtreatment, with associated costs and morbidity. We developed a performance-based strategy to identify protein biomarkers 
+predictive of prostate cancer aggressiveness and lethality regardless of biopsy-sampling variation. </p>
+
+<p>Methods: Prostatectomy samples from a large patient cohort with long follow-up were blindly assessed by expert pathologists 
+who identified the tissue regions with the highest and lowest Gleason grade from each patient. To simulate biopsy-sampling error, 
+a core from a high-and a low-Gleason area from each patient sample was used to generate a 'high' and a 'low' tumour microarray, 
+respectively. </p>
+
+<p>Results: Using a quantitative proteomics approach, we identified from 160 candidates 12 biomarkers that predicted prostate 
+cancer aggressiveness (surgical Gleason and TNM stage) and lethal outcome robustly in both high-and low-Gleason areas. 
+Conversely, a previously reported lethal outcome-predictive marker signature for prostatectomy tissue was unable to perform 
+under circumstances of maximal sampling error. </p>
+
+<p>Conclusions: Our results have important implications for cancer biomarker discovery in general and development of a sampling 
+error-resistant clinical biopsy test for prediction of prostate cancer aggressiveness. </p>
+
+<p>Prostate cancer accounts for 27% of incident cancer diagnosed 
+in men in the USA. The American Cancer Society estimates that, 
+nationally, 233 000 new diagnoses of prostate cancer will be 
+made in 2014 (Siegel et al, 2014). Of all men newly diagnosed 
+with prostate cancer, only about one in seven will progress to 
+metastatic disease over a lifetime, whereas approximately half of </p>
+
+<p>them will have localised disease that has a very low risk of 
+progression (Carter et al, 2012; Siegel et al, 2014). Despite this 
+low risk, as many as 90% of these low-risk prostate cancer 
+patients in the United States undergo radical treatment, usually 
+radical prostatectomy (RP) or ablative radiation therapy 
+(Cooperberg et al, 2010). Such treatments for low-risk patients </p>
+
+<p>*Correspondence: Dr P Blume-Jensen; E-mail: pblumejensen@metamarkgenetics.com or Dr DM Berman; E-mail: Bermand@queensu.ca 
+5 Present address: Atreca Inc., San Carlos, CA 94070, USA. 
+6 Present address: Karyopharm Therapeutics, Natick, MA 01760, USA. </p>
+
+<p>Received 16 April 2014; revised 16 June 2014; accepted 20 June 2014; published online 17 July 2014 </p>
+
+<p>&amp; 2014 Cancer Research UK. All rights reserved 0007 -0920/14 </p>
+
+<p>FULL PAPER </p>
+
+<p>Keywords: prostate cancer; biopsy; biomarkers; prognosis; sampling error; tumour heterogeneity </p>
+
+<p>British Journal of Cancer (2014) 111, 1201-1212 | doi: 10.1038/bjc.2014.396 </p>
+
+<p>www.bjcancer.com | DOI:10.1038/bjc.2014.396 
+1201 </p>
+
+<p>may be excessive and often result in long-term adverse 
+events, including urinary incontinence and erectile and bowel 
+dysfunction (Wilt et al, 2008; Moyer and U.S. Preventative 
+Services Task Force, 2012; Loeb et al, 2014). 
+Current guidance and accepted standards of care for the diagnosis 
+and management of prostate cancer recommend the use of clinical 
+and pathological parameters to assess the disease grade and stage on 
+biopsy (NCCN, 2012a; NCCN, 2012b). Pathological evaluation of 
+tissue obtained by needle biopsy is essential both to confirm a 
+prostate cancer diagnosis and to grade the cancer. Tumour grade, as 
+determined by the biopsy Gleason score (GS) is the most important 
+predictor of outcome, and considered the most informative 
+parameter for guiding management decisions. The GS is comprised 
+of two Gleason patterns, with the more prevalent pattern specified 
+first. The two are summed to determine the GS. According to a 2005 
+consensus on Gleason scoring, only three patterns (3, 4, and 5) are 
+typically recognised on biopsy (Epstein et al, 2005). The accepted 
+prognostic categories of GS are 3 þ 3 ¼ 6, 3 þ 4 ¼ 7, 4 þ 3 ¼ 7, 8, 
+and 9-10. Importantly, although 3 þ 4 ¼ 7 and 4þ 3 ¼ 7 have 
+equivalent Gleason sums, the latter has significantly worse prognosis 
+based on a higher amount of pattern 4 (Goodman et al, 2012; Reese 
+et al, 2012). Approximately 80-85% of all prostate cancer biopsies 
+have a GS of 3 þ 3 ¼ 6 or 3 þ 4 ¼ 7, representing a spectrum of cases 
+with low to intermediate to high risk of progression (Epstein et al, 
+2012). Patients deemed to have indolent disease are candidates for 
+active surveillance (AS) (Mohler et al, 2012; NCCN, 2012a; NCCN, 
+2012b). However, current methods of biopsy evaluation are often 
+unable to place individual patients accurately along this spectrum 
+(Cooperberg et al, 2010; Epstein et al, 2012). 
+Two recognised factors affect the accuracy of biopsy-based 
+Gleason scoring: one is sampling variation (i.e., failing to sample 
+the area with the highest Gleason grade), and the second is 
+pathologist discordance in Gleason scoring (Porten et al, 2011; 
+Corcoran et al, 2012; Epstein et al, 2012). Despite the current 
+standard practice of multicore biopsy sampling, the most 
+aggressive area of the tumour is frequently under-represented or 
+over-represented (Corcoran et al, 2012; Bjurlin and Taneja, 2014). 
+Indeed, 25-50% of cases of prostate cancer need to be either 
+upgraded or downgraded from their initial biopsy score to a more 
+accurate surgical GS after analysis and grading of prostatectomy 
+tissue (Kvale et al, 2009; Davies et al, 2011; Epstein et al, 2012). 
+Discordance between pathologists in Gleason grading can be as 
+high as 30%, adding significantly to the difficulty of ensuring 
+uniform and accurate prognostication (McKenney et al, 2011; 
+Goodman et al, 2012). 
+Several clinical and pathological risk stratification systems have 
+been developed to improve prediction of prostate cancer aggres-
+siveness, including the D'Amico classification system, the Cancer 
+of the Prostate Risk Assessment score, and the National 
+Comprehensive Cancer Network guidelines (Cooperberg et al, 
+2005; D'Amico et al, 1998; NCCN, 2012a; Vellekoop et al, 2014). In 
+addition, clinical nomogram systems such as the widely adopted 
+systems described by Kattan and Steyerberg have been developed 
+to predict indolent prostate cancer and prostate cancer out-
+come(Steyerberg et al, 2007). All such systems recognise the biopsy 
+GS as the single most powerful variable in risk assessment. 
+Importantly, all of the risk stratification systems used to guide 
+clinical management depend on effective and consistent Gleason 
+scoring and are therefore vulnerable to sampling variation and 
+discordant scoring by pathologists. 
+Enhanced biopsy strategies have been proposed as one means to 
+overcome sampling variation and errors. Among these, increasing 
+the number or density of sampled cores might ensure more 
+representative capture of tumour tissue. However, this could 
+potentially increase the risk of adverse events from oversampling, 
+and there is little evidence that it improves pathological 
+classification (Eichler et al, 2006; Delongchamps et al, 2009). </p>
+
+<p>There has also been interest in novel forms of image-guided biopsy. 
+Currently, MRI-guided biopsy appears to improve detection of 
+aggressive cancers, but long-term studies will be needed to 
+determine whether it can improve patient selection for AS 
+(Robertson et al, 2013). 
+Using a quantitative multiplex proteomics in situ imaging 
+system, which enables accurate biomarker measurements from the 
+intact tumour epithelium (Shipitsin et al, 2014), we here report the 
+identification and evaluation of 12 biomarkers that are able to 
+predict prostate cancer aggressiveness and lethal outcome. 
+Importantly, the markers were specifically selected to be robust 
+to sampling error. The study was designed to simulate biased 
+biopsy-sampling error based on coring from areas of high and low 
+GS on prostatectomy tissue from each patient to generate 'high' 
+(H) and 'low' (L) tissue microarrays (TMAs), respectively. 
+Biomarkers were then selected based on their ability to reflect 
+true prostate pathology and lethal outcome, regardless of whether 
+they were measured on cores with high or low GS. This 
+performance-based approach not only identified novel biomarkers, 
+but also confirmed known biomarkers predictive of prostate cancer 
+aggressiveness and lethal outcome. </p>
+
+<p>MATERIALS AND METHODS </p>
+
+<p>Reagents and antibodies. All antibodies and reagents used in this 
+study were procured from commercially available sources 
+as described in Supplementary Table S4. Anti-fluorescein 
+isothiocyanate MAb-Alexa 568, anti-CK8-Alexa 488, anti-
+CK18-Alexa 488, anti-CK5-Alexa 555, and anti-Trim29-Alexa 
+555 were conjugated with Alexa dyes using the appropriate protein 
+conjugation kits (Life Technologies, Grand Island, NY, USA). </p>
+
+<p>Slide processing and staining protocol. From TMA blocks, 5-mm 
+sections were cut, placed on Histogrip (Life Technologies)-coated 
+slides, and processed as described previously (Supplementary 
+Materials). Briefly, after deparaffinisation, antigen retrieval was 
+performed in 0.05% citraconic anhydride solution for 45 min at 
+95 1C using a Lab Vision PT module (Thermo Scientific, Waltham, 
+MA, USA). Staining was performed either manually or in automated 
+fashion with an Autostainer 360 or 720 (Thermo Scientific). 
+The quantitative multiplex immunofluorescence (QMIF) stain-
+ing procedure that combined two anti-biomarker antibodies with 
+region-of-interest markers was performed as previously described 
+(see Supplementary Materials and Methods). </p>
+
+<p>Acquisition, processing, quality control, and annotation of 
+FFPE prostate cancer tissue blocks. A set of FFPE human 
+prostate cancer tissue blocks with clinical annotations and long-
+term patient outcome information was acquired from Folio 
+Biosciences (Powell, OH, USA). Information about prostate 
+cancer-specific deaths was obtained from either patient records 
+or death certificates. Samples had been collected with appropriate 
+institutional review board approval and all patient records were de-
+identified. For evaluation of candidate biomarker antibodies, FFPE 
+human prostate cancer tissue blocks with limited clinical annota-
+tion were acquired from other commercial sources. 
+A series of 5-mm sections was cut from each FFPE block. For 
+annotation, a 5-mm section that was the last to be cut from each 
+FFPE block was stained with haematoxylin and eosin and scanned 
+using a ScanScope XT system (Aperio, Buffalo Grove, IL, USA). 
+The scanned images were remotely reviewed and annotated for GS 
+in a blinded manner by expert clinical board-certified anatomical 
+pathologists. Circles corresponding to 1-mm diameter cores were 
+placed over four areas of highest and two areas of lowest Gleason 
+patterns (see Figure 1, top). </p>
+
+<p>BRITISH JOURNAL OF CANCER 
+Prostate cancer biomarkers robust to sampling error </p>
+
+<p>1202 
+www.bjcancer.com | DOI:10.1038/bjc.2014.396 </p>
+
+<p>Generation of TMA blocks. TMA blocks were prepared using 
+a modified agarose block procedure (Yan et al, 2007). See 
+Supplementary Materials for further details. </p>
+
+<p>Biomarker selection. To identify biomarkers for prostate cancer 
+aggressiveness, we developed a selection and evaluation process 
+that could be broadly applicable across diseases and conditions. 
+The process, shown in Figure 2, had biological, technical, 
+performance, and validation stages. See Supplementary Methods 
+for further details. </p>
+
+<p>Image acquisition. Two Vectra Intelligent Slide Analysis Systems 
+(PerkinElmer, Waltham, MA, USA) were used for automated 
+image acquisition as described (Supplementary Materials and 
+Methods). Multispectral images were processed into images for 
+each separate fluorophore signal and sent for analysis with 
+Definiens Developer script (Definiens AG, , Germany). </p>
+
+<p>Definiens automated image analysis. We developed an auto-
+mated image analysis algorithm using <rs id="software-2" type="software">Definiens Developer</rs> <rs corresp="#software-2" type="version-number">XD</rs> for 
+tumour identification and biomarker quantification as described in 
+Supplementary Materials. </p>
+
+<p>Data stratification and end points in the analysis. Expression of 
+39 biomarkers was examined for correlation with tumour 
+aggressiveness and lethality using the H and L TMAs. Disease 
+aggressiveness was defined based on prostate pathology (aggressive 
+disease ¼ surgical Gleason X3 þ 4 or T3b, N þ , or M þ ). For 
+aggressiveness analyses, we examined marker correlation based on 
+measurements in both L TMA samples with core Gleason p3 þ 4 
+and the corresponding, matched H TMA samples. 
+For lethal outcome analyses, we created two different sample 
+sets: (1) all cores with an observed GS p3 þ 4; and (2) all cores. </p>
+
+<p>Cohort composition. Table 1a presents the cohort composition. 
+Only those samples that had a complete set of clinical information 
+were included. When performing an analysis using a certain set of 
+biomarkers, only samples with values for those markers were 
+considered. Hence, the numbers in the table are upper bounds. </p>
+
+<p>Univariate analysis of aggressiveness and lethality. Our objec-
+tives for univariate analysis were two-fold: to characterise 
+univariate behaviour as a performance assessment for potential 
+inclusion in the final marker set, and to provide a reduced set of 
+markers for exhaustive multivariable model exploration. See 
+Supplementary Materials for details. </p>
+
+<p>GS 4+3=7 </p>
+
+<p>GS 4+4=8 </p>
+
+<p>4+4 </p>
+
+<p>4+4 
+4+4 </p>
+
+<p>3+3 </p>
+
+<p>4+4 </p>
+
+<p>3+3 </p>
+
+<p>GS 3+3=6 </p>
+
+<p>H TMA 
+L TMA </p>
+
+<p>Figure 1. Creation of biopsy simulation tissue microarrays (TMAs). A 
+tissue block from a prostatectomy sample was annotated with all visible 
+Gleason patterns (top). The example shown is from a patient with an 
+overall Gleason score (GS) of 4 þ 3 ¼ 7. As shown in a higher-
+magnification view (middle), patterns within the same block can be 
+highly diverse. Two 1-mm cores were taken from each tissue block. 
+One was taken from an area with the highest GS (4 þ 4 ¼ 8) and 
+embedded into agarose/paraffin along with high-scoring cores from 
+other blocks to create the H TMA (bottom left). The other was taken 
+from an area with the lowest GS (3 þ 3 ¼ 6) and embedded into 
+agarose/paraffin along with low-scoring cores from other blocks to 
+create the L TMA (bottom right). </p>
+
+<p>Initial list: 160 biomarker candidates </p>
+
+<p>Step 1: 
+Biological 
+criteria </p>
+
+<p>Step 2: 
+Technical 
+criteria </p>
+
+<p>Step 3: 
+Performance-
+based criteria </p>
+
+<p>Prioritised list: 120 candidates </p>
+
+<p>Technical validation: 62 candidates </p>
+
+<p>39 Ab candidates tested 
+Univariate performance, multivariate performance </p>
+
+<p>Biomarker selection on H&amp;L TMAs cohort </p>
+
+<p>Final selection </p>
+
+<p>12 Markers identified 
+Biological relevance, published literature, univariate 
+and multivariate analysis, technical considerations </p>
+
+<p>DAB: specificity, signal intensity 
+IF: specificity, signal intensity, dynamic range, 
+epitope stability, staining uniformity </p>
+
+<p>1. Biological relevance for cancer 
+2. In silico analysis 
+3. Human protein atlas 
+4. Monoclonal Ab availability </p>
+
+<p>Figure 2. Biomarker selection strategy. Three types of criteria were 
+used to select 12 final biomarkers. (DAB: Ab specificity assessed based 
+on chromogenic tissue staining with diamino benzidine (DAB); IF: Ab 
+specificity and performance based on immunofluorescent tissue 
+staining). </p>
+
+<p>Prostate cancer biomarkers robust to sampling error 
+BRITISH JOURNAL OF CANCER </p>
+
+<p>www.bjcancer.com | DOI:10.1038/bjc.2014.396 </p>
+
+<p>
+Biomarker ranking for aggressiveness via exhaustive search of 
+multimarker models. We sought to rank the biomarkers by 
+importance in multimarker models; 31 biomarkers, refined from 
+the original set of 39 to improve technical performance further, 
+were used in an exhaustive biomarker search. We considered all 
+combinations of up to five biomarkers from the 31 biomarkers 
+tested in the L TMA in the H and L TMA analysis. See 
+Supplementary Materials for further details. </p>
+
+<p>Biomarker ranking for lethality via exhaustive search of 
+multimarker models. The same model-building approach done </p>
+
+<p>for aggressiveness was followed for the biomarker ranking for 
+prediction of lethality. Supplementary Table S3 shows frequency of 
+biomarker utilisation (top 5%) for lethality. </p>
+
+<p>RESULTS </p>
+
+<p>Biopsy simulation. Our first goal was to develop a biopsy-
+sampling model to simulate and exaggerate the biopsy sample 
+variation observed in clinical practice. For this purpose, we </p>
+
+<p>Table 1b. Clinical features of the cohort used to create L and H TMAs. The distribution of H TMA core Gleason scores and surgical Gleason scores among 
+the 301 patients with L TMA core Gleason of 3 þ 3 or 3 þ 4 </p>
+
+<p>Core Gleason score 
+L TMA: n of patients 
+Core Gleason score 
+H TMA: n of patients 
+Surgical Gleason score n of patients </p>
+
+<p>3 þ 3 ¼ 6 
+233 
+3 þ 3 ¼ 6 
+1 4 9 
+3 þ 3 ¼ 6 
+9 3 </p>
+
+<p>3 þ 4 ¼ 7 
+5 8 
+3 þ 4 ¼ 7 
+1 1 2 </p>
+
+<p>X 4 þ 3 ¼ 7 
+2 6 
+X 4 þ 3 ¼ 7 
+3 0 </p>
+
+<p>3 þ 4 ¼ 7 
+6 8 
+3 þ 3 ¼ 6 
+2 3 
+3 þ 3 ¼ 6 
+1 4 </p>
+
+<p>3 þ 4 ¼ 7 
+2 7 
+3 þ 4 ¼ 7 
+3 2 </p>
+
+<p>X4 þ 3 ¼ 7 
+1 8 
+X 4 þ 3 ¼ 7 
+2 2 </p>
+
+<p>Abbreviations: H TMA ¼ high-grade tissue microarray; L TMA ¼ low-grade tissue microarray. </p>
+
+<p>Table 1a. Clinical features of the cohort used to create L and H TMAs. A single cohort of 380 patients provided samples for the two TMAs </p>
+
+<p>L TMA 
+H TMA </p>
+
+<p>Patients with survival and biomarker information 
+360 of 380 
+363 of 380 </p>
+
+<p>Mean age (s.d.), years 
+62.2 (6.76) 
+62.1 (6.83) </p>
+
+<p>Lethal events, n (%) 
+60 (16.67) 
+59 (16.25) </p>
+
+<p>Mean length of follow-up (s.d.), years 
+11.55 (3.96) 
+11.52 (3.98) </p>
+
+<p>Pathological tumour stage, n (%) </p>
+
+<p>T2 
+244 (67.8) 
+250 (68.9) 
+T3 
+112 (31.1) 
+109 (20.0) 
+T4 
+2 (0.56) 
+2 (0.55) 
+Missing 
+2 (0.56) 
+2 (0.55) </p>
+
+<p>Core Gleason score, n (%) </p>
+
+<p>p 6 
+233 (64.7) 
+177 (48.8) 
+3 þ 4 
+68 (18.9) 
+98 (27.0) 
+4 þ 3 
+15 (4.2) 
+31 (8.5) 
+8-10 
+27 (7.4) 
+47 (13) 
+Total 
+343 (95) 
+353 (97) </p>
+
+<p>Surgical Gleason score, n (%) </p>
+
+<p>p6 
+108 (30) 
+112 (31) 
+3 þ 4 
+169 (47) 
+138 (46) 
+4 þ 3 
+30 (8.3) 
+30 (8.3) 
+8-10 
+53 (15) 
+53 (15) 
+Total 
+360 (100) 
+363 (100) </p>
+
+<p>Deaths stratified by surgical Gleason score, n (% of disease deaths, % of Gleason stratun) </p>
+
+<p>p6 
+2 (3.3, 1.9) 
+3 (5.1, 2.7) 
+3 þ 4 
+20 (33.3, 11.8) 
+17 (28.8, 10.1) 
+4 þ 3 
+9 (15, 30) 
+10 (17, 33.3) 
+8-10 
+29 (48.3, 54.7) 
+29 (49.1, 54.7) 
+Total 
+60 
+59 </p>
+
+<p>Abbreviations: H TMA ¼ high-grade tissue microarray; L TMA ¼ low-grade tissue microarray; TMA ¼ tissue microarray. For technical reasons, only 360 samples on the L TMA and 363 samples on 
+the H TMA were usable. </p>
+
+<p>BRITISH JOURNAL OF CANCER 
+Prostate cancer biomarkers robust to sampling error </p>
+
+<p> 
+www.bjcancer.com | DOI:10.1038/bjc.2014.396 </p>
+
+<p>embedded cores from annotated prostatectomy tissue into TMAs. 
+On the basis of centralised Gleason grading by expert urologic 
+pathologists, a core was taken for each patient from the area with 
+the least aggressive tumour (low GS) to generate a low-grade TMA 
+(L TMA); in parallel, a core was taken from the area with the most 
+aggressive tumour based on Gleason grading (high GS) to generate 
+a high-grade TMA (H TMA) (Figure 1). Thus, we developed paired 
+tissue TMAs with samples simulating biopsies biased in two 
+directions, representing both more and less aggressive tumour 
+areas from each patient. 
+Table 1a describes the clinical features for the multi-institution 
+cohort of 380 patients for whom paired TMAs were prepared. 
+Table 1b describes the subset of 301 cases with core Gleason of 
+3 þ 3 or 3 þ 4 on L TMA along with their corresponding core 
+Gleason on H TMA and their surgical (prostatectomy) Gleason. 
+Sampling for the L TMA was specifically designed to under-
+estimate disease severity. As shown in Tables 1a and b, 64.7% of L 
+TMA samples had a core GS p6, whereas only 30% of these L 
+TMA samples came from patients with a surgical GS p6. The 
+probability of upgrade (Table 1b) for samples in the L TMA from 
+cases with core GS of p3 þ 4 to a higher surgical GS was 0.64 (95% 
+Wilson confidence interval (CI): 0.59-0.69). This probability of 
+upgrade is higher than that seen in clinical practice (Porten et al, 
+2011), as expected from the sampling method and patient cohort 
+used. Thus, by exaggerating sample variation expected in clinical 
+practice, this biopsy simulation procedure provided a useful model 
+to identify biomarkers that reliably predict prostate cancer 
+aggressiveness, regardless of sample variation. </p>
+
+<p>Effect of sampling error on known biomarker model performance. 
+Prior studies have demonstrated that RP GS of seven or higher 
+and extension of prostate cancer beyond the prostate gland are 
+significant predictors of metastasis and prostate cancer-specific 
+mortality (Ross et al, 2012; Shikanov and Eggener, 2012; Brimo 
+et al, 2013). Accordingly, we defined 'aggressive disease' based on 
+the prostate pathology as surgical GS of at least 3 þ 4 or pT3b 
+(seminal vesicle invasion), N þ , or M þ . We tested the four-
+biomarker model (SMAD4, CCND1, SPP1, and PTEN) previously 
+reported by Ding et al (2011) for its ability to predict both disease-
+specific death and disease aggressiveness in our sampling variation 
+TMA cohort. Using logistic regression analysis on the patient cores 
+in the L and H TMAs, marker coefficients and AUC were 
+estimated on the testing set. As shown in Table 2, when measured 
+on H TMA patient cores, the four-marker signature was able to 
+predict disease-specific death with a median test AUC of 0.65 (95% 
+CI of 0.59-0.74). However, when measured on L TMA, represent-
+ing biased underestimation of the surgical GS, the four-marker 
+model showed a non-significant median test AUC of 0.49 (95% CI 
+of 0.42-0.58). Moreover, the four-marker signature was unable to 
+predict aggressive disease in either H or L TMA (median test AUC 
+of 0.56 (95% CI of 0.44-0.64) and of 0.56 (95% CI of 0.46-0.65), </p>
+
+<p>respectively). These results demonstrate the impact of sampling 
+error on prognostic marker performance, and support the necessity 
+of identifying alternative biomarker combinations that can predict 
+outcomes accurately regardless of sampling variation. </p>
+
+<p>Biomarker identification. We next embarked on identifying 
+biomarkers that would robustly predict cancer aggressiveness in 
+spite of biopsy-sampling variation. The stepwise approach 
+involved: (1) identification of candidate biomarkers, (2) evaluation 
+of their biological and technical suitability, and (3) analysis of 
+performance in H and L TMA cohorts (Figure 2). 
+From a search of published literature and publicly available gene 
+expression data sets, we identified 160 biomarker candidates based 
+on biological relevance for prostate cancer (Lapointe et al, 2004; 
+True et al, 2006; Lapointe et al, 2007; Tomlins et al, 2007; Cheville 
+et al, 2008; Nakagawa et al, 2008; Graff et al, 2009; Makarov et al, 
+2009; Pressinotti et al, 2009; Gorlov et al, 2010; Taylor et al, 2010; 
+Chen et al, 2011; Cima et al, 2011; Ding et al, 2011; Markert et al, 
+2011; Ross et al, 2011; Swanson and Quinn, 2011; Ding et al, 2012; 
+Kristiansen, 2012). We further prioritised 120 of these markers 
+based on availability of appropriate monoclonal antibodies (MAbs) 
+(see Supplementary Table S1 for a comprehensive biomarker 
+candidate list). Our candidate list included well-characterised 
+markers relevant for prostate cancer aggressiveness, such as EZH2, 
+MTDH, FOXA1 (Hu et al, 2009; Yang and Yu, 2013; Mills, 2014), 
+as well as the markers PTEN, SMAD4, Cyclin D1, SPP1, phospho-
+PRAS40-T246 (pPRAS40), and phospho-S6-Ser235/236 (pS6) 
+previously identified as predictive of lethal outcome on prosta-
+tectomy tissue (Ding et al, 2011; Shipitsin et al, 2014). 
+We next procured MAbs against these 120 prioritised 
+candidates and tested them for specificity and suitability for the 
+QMIF assay. Candidate MAbs were further selected on the basis of 
+signal intensity and specific immunofluorescence-staining patterns, 
+as described (Shipitsin et al, 2014; Supplementary Materials). 
+Candidate biomarker antibodies were selected based on signals that 
+were more stable relative to those of epithelial markers. 
+Subsequently, we tested the 62 MAbs that passed the previous 
+steps and determined their dynamic range as well as their 
+predictive performance. Using a small test TMA designed to 
+represent the least aggressive areas from prostate tumours with 
+high and low overall GSs, biomarkers were selected based on 
+correlation of signal intensity with surgical GS. Specifically, we 
+required minimally a three-fold difference of signals between 
+lowest and highest expression values, in addition to the demon-
+strated difference in signal value distributions between nonaggres-
+sive and aggressive cases. The final 39 candidate MAbs that 
+fulfilled these criteria were tested on the clinical cohort represented 
+by H and L TMA blocks described above. </p>
+
+<p>Univariate analysis. Each of the 39 biomarkers were tested for 
+their ability to predict disease aggressiveness (surgical GS X3 þ 4 </p>
+
+<p>Table 2. Sampling variation reduces the performance of an established lethal outcome-predictive biomarker signature </p>
+
+<p>Markers: PTEN, SMAD4, CCND1, SPP1 
+Mean AIC 
+(2.5%, 97.5%) </p>
+
+<p>Median train AUC 
+(2.5%, 97.5%) </p>
+
+<p>Median test AUC 
+(2.5%, 97.5%) </p>
+
+<p>H TMA lethal 
+282.2 (275.9, 293.2) 
+0.67 (0.64, 0.70) 
+0.65 (0.59, 0.74) </p>
+
+<p>L TMA lethal 
+301.3 (288.6, 316.8) 
+0.6 (0.58, 0.63) 
+0.49 (0.42, 0.58) </p>
+
+<p>H TMA aggressiveness 
+350.1 (330.4, 367.4) 
+0.62 (0.56, 0.68) 
+0.56 (0.44, 0.64) </p>
+
+<p>L TMA aggressiveness 
+381.6 (353.0, 400.7) 
+0.61 (0.55, 0.68) 
+0.56 (0.46, 0.65) </p>
+
+<p>Abbreviations: AIC ¼ Akaike information criterion; ROC ¼ receiver-operating characteristic curve; TMA ¼ tissue microarray. The combination PTEN þ SMAD4 þ CCND1 þ SPP1 has previously 
+been shown to be prognostic for lethal outcome when measured on prostatectomy tissue. We confirmed that these markers are indeed predictive of lethal outcome when measured in the 
+high-Gleason biopsy simulation tissue (H TMA). However, these markers are unable to predict lethality in the low-Gleason simulation biopsy (L TMA). The markers do not show statistically 
+significant predictive performance for aggressive disease regardless of whether they were measured in high-(H TMA) or low (L TMA)-Gleason tissue areas. C statistic, area under ROC curve. </p>
+
+<p>Prostate cancer biomarkers robust to sampling error 
+BRITISH JOURNAL OF CANCER </p>
+
+<p>www.bjcancer.com | DOI:10.1038/bjc.2014.396 </p>
+
+<p>
+or pathological stage pT3b, and/or N þ or M þ ) and death from 
+disease (survival analysis) when measured in either low-or high-
+Gleason areas (Figure 3). Markers shown in red text demonstrated 
+predictive value (Po0.1) for aggressive disease or death from 
+prostate cancer based on either an increased or decreased 
+expression in both low-and high-Gleason areas. This result 
+suggests that these markers are resistant to varying degrees of 
+sampling error. There were two markers that were predictive of 
+aggressiveness and three markers of lethal outcome when 
+measured in high, but not in low-Gleason areas, indicating that 
+these markers are not robust to sampling error. Conversely, no 
+markers were identified that had predictive performance only in 
+low, but not in high-Gleason areas. Interestingly, out of the 14 
+markers with significant univariate performance for aggressiveness, 
+12 markers also exhibited significant univariate performance for 
+lethal outcome, consistent with a strong correlation between 
+aggressive disease and lethal outcome. Our performance-based </p>
+
+<p>biomarker selection approach also confirmed correlation between 
+lethal outcome and expression of three known prostate cancer 
+progression markers, EZH2, HoxB13, and MTDH2, as previously 
+reported (Hu et al, 2009; Yang and Yu, 2013; Mills, 2014). </p>
+
+<p>Multivariate analysis: biomarker combinations predicting 
+tumour aggressiveness. To explore the best multivariate biomar-
+ker combinations to predict disease aggressiveness, we exhaustively 
+searched all possible models with combinations up to and 
+including five biomarkers (Figure 4A). We focused on 31 
+biomarkers, further refined from the original set of 39 based on 
+technical criteria (see Materials and Methods). Initially, an 
+'extreme' model approach was used for the multivariate analysis, 
+which included removal of 'intermediate' samples (GS ¼ 3 þ 4, 
+pT3a and N0) for the model building and testing. We separated 
+patient cores in the L TMA into independent training and test sets, 
+and tested the resulting models on both L and H TMAs for </p>
+
+<p>A 
+B </p>
+
+<p>FUS 
+PDSS2 
+DERL1 </p>
+
+<p>FAK1 </p>
+
+<p>MTDH2 </p>
+
+<p>PXN </p>
+
+<p>YBX1 
+LMO7 
+DEC1 
+pS6 
+StAR 
+FKBP5 
+CD75 
+PTEN 
+SMAD4 
+ACTN1 </p>
+
+<p>HSPA9 
+MAOA 
+PLAG1 
+EZH2 
+DIABLO 
+HOXB13 
+AGK 
+SMAD2 
+GRIP1 
+VDAC1 </p>
+
+<p>NCOA2 
+HSD17B4 
+LATS2 
+MAP3K5 
+pPRAS40 
+CUL2 </p>
+
+<p>CCND1 
+SPP1 
+AKAP8 
+CDKN1B </p>
+
+<p>Biomarkers </p>
+
+<p>COX6C 
+EIF3H </p>
+
+<p>AGPAT6 </p>
+
+<p>FUS 
+PDSS2 
+DERL1 </p>
+
+<p>FAK1 </p>
+
+<p>MTDH2 </p>
+
+<p>PXN </p>
+
+<p>YBX1 
+LMO7 
+DEC1 
+pS6 
+StAR 
+FKBP5 
+CD75 
+PTEN 
+SMAD4 
+ACTN1 </p>
+
+<p>HSPA9 
+MAOA 
+PLAG1 
+EZH2 
+DIABLO 
+HOXB13 
+AGK 
+SMAD2 
+GRIP1 
+VDAC1 </p>
+
+<p>NCOA2 
+HSD17B4 
+LATS2 
+MAP3K5 
+pPRAS40 
+CUL2 </p>
+
+<p>CCND1 
+SPP1 
+AKAP8 
+CDKN1B 
+COX6C 
+EIF3H </p>
+
+<p>AGPAT6 </p>
+
+<p>Odds ratio 
+(per 1 s.d. change in biomarkers) </p>
+
+<p>0.25 0.50 0.75 1.00 1.25 1.50 1.75 2.00 
+Hazard ratio 
+(per 1 s.d. change in biomarkers) </p>
+
+<p>0.25 0.50 0.75 1.00 1.25 1.50 1.75 2.00 </p>
+
+<p>L TMA 
+H TMA </p>
+
+<p>Biomarkers </p>
+
+<p>Figure 3. Univariate performance of 39 biomarkers measured in both low-(L TMA; black bars) and high-(H TMA; brown bars) Gleason areas for 
+disease aggressiveness and disease-specific mortality. (A) The odds ratio (OR) for predicting severe disease pathology (aggressiveness) was 
+calculated for each marker. Markers with an OR to the left of the vertical line are negatively correlated with the severity of the disease as assessed 
+by pathology. Those to the right of the line are positively correlated. The markers were ranked based on OR when measured in L TMA. (B) The 
+hazard ratio for death from disease (lethality) was calculated for each marker and plotted as described for A. Biomarkers in red indicate statistical 
+significance at the 0.1 level in both L and H TMAs. Biomarkers in blue indicate statistical significance in only H TMA, but not L TMA. Note the large 
+overlap of biomarkers with statistically significant univariate performance for both aggressive disease and death from disease. </p>
+
+<p>BRITISH JOURNAL OF CANCER 
+Prostate cancer biomarkers robust to sampling error </p>
+
+<p> 
+www.bjcancer.com | DOI:10.1038/bjc.2014.396 </p>
+
+<p>multivariate performance across sampling variation. For this 
+purpose, we used logistic regression models to estimate biomarker 
+coefficients using the training data set, estimated AUC from the 
+resulting ROC in the testing set, and then repeated the process for 
+another sampling. 
+In each case, the most frequently occurring biomarkers in 
+the top 5 or 1% of the models, sorted by AIC (Akaike information 
+criterion) (Lindsey and Jones, 1998) and test-set AUC, 
+were determined. A final tally was generated encompassing 
+ranking by test, ranking by AIC, and by both test and AIC 
+(see Figure 4B for a representative example of a five-biomarker 
+model ranked by AIC and test). Intriguingly, we observed a high 
+degree of conservation of biomarker order in the top-performing 
+biomarker models (see Figure 4C; Supplementary Table S2). The 
+following biomarkers appeared among the top markers in at least 
+50% of the ranked lists: ACTN1, FUS, SMAD2, DERL1, YBX1, </p>
+
+<p>DEC1, pS6, HSPA9, HOXB13, PDSS2, SMAD4, and CD75. 
+In addition, CUL2 was present in a number of highly ranked 
+models (see Supplementary Table S2 for further details of the 
+ranking results). </p>
+
+<p>Multivariate analysis: biomarkers predicting lethal outcome. A 
+similar modelling analysis to that applied to predict aggressiveness 
+was performed for lethal outcome (Supplementary Table S3). 
+Biomarkers appearing among top markers in at least 50% of the 
+ranked lists included: MTDH2, ACTN1, COX6C, YBX1, SMAD2, 
+DERL1, CD75, FUS, LMO7, PDSS2, FAK1, SMAD4, and DEC1 (see 
+Supplementary Table S3 for further details of the ranking results). </p>
+
+<p>Final biomarker set predictive of prostate cancer aggressiveness 
+and lethality. We chose a final set of 12 biomarkers based on 
+careful integration of univariate and multivariate performance, and 
+analytical considerations, including minimally a three-fold </p>
+
+<p>Selection of 39 markers out of 160 based on technical considerations </p>
+
+<p>A </p>
+
+<p>B </p>
+
+<p>C </p>
+
+<p>39 Markers further reduced to 31 based on exploratory analyses </p>
+
+<p>Unbiased train/test of all combinations of up to 5 markers </p>
+
+<p>Sort combinations by train AUC, AIC and test AUC </p>
+
+<p>Determine marker utilisation frequency in top 1% and top 5% of sorted combinations </p>
+
+<p>Ranking 
+(L TMA) </p>
+
+<p>Marker utilisation frequency (%) </p>
+
+<p>100 </p>
+
+<p>80 </p>
+
+<p>60 </p>
+
+<p>40 </p>
+
+<p>20 </p>
+
+<p>0 
+ACTN1 
+FUS 
+SMAD2 
+CUL2 
+DIABLO 
+HSPA9 
+PLAG1 
+DERL1 
+PDSS2 
+AKAP8 
+VDAC1 
+HOXB13 
+CD75 
+LATS2 
+HSD17B4 
+DEC1 
+LMO7 
+YBX1 
+MTDH2 
+CDKN1B 
+PXN 
+SMAD4 
+EIF3H 
+CCND1 
+COX6C 
+pS6 
+FKBP5 
+pPRAS40 
+MAOA 
+MAP3K5 
+FAK1 </p>
+
+<p>AIC 
+ACTN1, CUL2, DERL1, 
+SMAD2, YBX1 </p>
+
+<p>112.33 
+(86.22, 135.58) </p>
+
+<p>124.95 
+(98.61, 150.52) </p>
+
+<p>0.873 
+(0.756, 0.954) </p>
+
+<p>0.892 
+(0.796, 0.956) </p>
+
+<p>0.813 
+(0.596, 0.958) </p>
+
+<p>0.856 
+(0.676, 0.965) </p>
+
+<p>0.762 
+(0.582, 0.905) </p>
+
+<p>0.798 
+(0.649, 0.912) </p>
+
+<p>ACTN1, FUS, PLAG1, 
+SMAD2, SMAD4 </p>
+
+<p>Test </p>
+
+<p>Markers </p>
+
+<p>Biomarker </p>
+
+<p>AIC median 
+(2.5%, 97.5%) 
+(L TMA) </p>
+
+<p>Train median AUC 
+(2.5%, 97.5%) 
+(L TMA) </p>
+
+<p>Test median AUC 
+(2.5%, 97.5%) 
+(L TMA) </p>
+
+<p>Test median AUC 
+(2.5%, 97.5%) 
+(H TMA) </p>
+
+<p>Figure 4. Performance-based biomarker selection process for disease aggressiveness. (A) The bioinformatics workflow selected the most 
+frequently utilised biomarkers from all combinations of up to five markers from a set of 31. (B) Example of performance of top-ranked five-marker 
+models, including comparison with training on L TMA and then testing on independent samples from L TMA and H TMA. Note that the test 
+performances on L TMA and H TMA are consistent, with substantial overlap in confidence intervals. (C) Combinations were generated allowing a 
+maximum of three, four, or five biomarkers. The figure shows the proteins most frequently included when five-biomarker models were used to 
+predict aggressive disease, ranked by test. </p>
+
+<p>Prostate cancer biomarkers robust to sampling error 
+BRITISH JOURNAL OF CANCER </p>
+
+<p>www.bjcancer.com | DOI:10.1038/bjc.2014.396 </p>
+
+<p>
+dynamic signal intensity range across tumour samples for all 
+antibodies. Figure 5A shows the estimated odds ratios (ORs) 
+associated with these 12 biomarkers for univariate prediction of 
+aggressiveness, and Figure 5B provides a biological summary of the 
+selected biomarkers. The final biomarker set was comprised of: 
+FUS, PDSS2, DERL1, HSPA9, PLAG1, SMAD2, VDAC1, CUL2, 
+YXB1, pS6, SMAD4, and ACTN1. 
+Each of the 12 marker antibodies was rigorously validated by 
+specificity analyses including western blotting and an </p>
+
+<p>immunohistochemistry assay before and after target-specific 
+knockdown, as shown in Supplementary Figure S1. 
+Finally, we assessed the predictive potential of the final 12-
+biomarker set for both disease aggressiveness and disease-specific 
+death on the entire patient cohort through logistic regression 
+analyses as described (see Materials and Methods). As shown in 
+Figure 5C, this resulted in an L TMA test AUC of 0.72 (95% CI: 
+0.64-0.79) and a corresponding OR for aggressive disease of 20 per 
+unit change in risk score (95% CI: 4.3-257). To confirm the ability </p>
+
+<p>A </p>
+
+<p>Odds ratio </p>
+
+<p>FUS 
+PDSS2 
+DERL1 
+HSPA9 
+PLAG1 
+SMAD2 
+VDAC1 
+CUL2 
+YBX1 </p>
+
+<p>Biomarker </p>
+
+<p>pS6 
+SMAD4 
+ACTN1 </p>
+
+<p>FUS </p>
+
+<p>Biomarker 
+Univariate 
+agressiveness </p>
+
+<p>Univariate 
+lethality </p>
+
+<p>Multivariate 
+aggresiveness </p>
+
+<p>Multivariate 
+lethality </p>
+
+<p>PDSS2 
+DERL1 
+HSPA9 
+PLAG1 
+SMAD2 
+VDAC1 
+CUL2 
+YBX1 
+pS6 
+SMAD4 
+ACTN1 </p>
+
+<p>× 
+× 
+× 
+-
+-
+-
+-
+-
+× 
+× 
+× 
+× </p>
+
+<p>× 
+× 
+× 
+× 
+× 
+× 
+-
+-
+× 
+× 
+× 
+× </p>
+
+<p>× 
+× 
+× 
+× 
+× 
+× 
+× 
+× 
+× 
+-
+-
+× </p>
+
+<p>× 
+× 
+× 
+-
+× 
+-
+-
+× 
+-
+-
+× 
+× 
+0.25 0.50 0.75 1.00 1.25 1.50 1.75 2.00 </p>
+
+<p>Marker 
+abbreviation </p>
+
+<p>Full name 
+Biological significance </p>
+
+<p>ACTN1 </p>
+
+<p>CUL2 </p>
+
+<p>DERL1 </p>
+
+<p>FUS </p>
+
+<p>HSPA9 
+(Mortalin) </p>
+
+<p>PDSS2 </p>
+
+<p>PLAG1 </p>
+
+<p>pS6 </p>
+
+<p>SMAD2 </p>
+
+<p>SMAD4 </p>
+
+<p>VDAC1 </p>
+
+<p>YBX1 </p>
+
+<p>Actinin, Alpha 1 </p>
+
+<p>Cullin 2 </p>
+
+<p>Derlin 1 </p>
+
+<p>Fused in sarcoma </p>
+
+<p>Heat Shock 70 kDa protein 9 
+(Mortalin) </p>
+
+<p>Prenyl (Decaprenyl) diphosphate 
+synthase, subunit 2 </p>
+
+<p>Pleiomorphic adenoma gene 1 </p>
+
+<p>Phospho-S6 ribosomal protein </p>
+
+<p>SMAD family member 2 </p>
+
+<p>SMAD family member 4 </p>
+
+<p>Voltage-dependent anion channel 1 </p>
+
+<p>Y Box-binding protein 1 </p>
+
+<p>A bundling protein that anchors actin to a variety of intracellular structures </p>
+
+<p>A component of E3 ubiquitin-protein ligase complex involved in ubiquitination of 
+target proteins </p>
+
+<p>A protein involved in endoplasmic reticulum degradation of misfolded 
+lumen proteins </p>
+
+<p>A component of the heterogeneous nuclear ribonucleoprotein complex involved in 
+pre-mRNA splicing and the export of fully processed RNA into the cytoplasm </p>
+
+<p>A member of the heat shock protein 70 family involved in cell proliferation, stress 
+response and the maintenance of the mitochondria </p>
+
+<p>An enzyme that synthesizes the prenyl side-chain of coenzyme Q, a key element in 
+the respiratory chain </p>
+
+<p>A transcription factor involved in cell proliferation and transformaiton </p>
+
+<p>A component of the 40S ribosome subunit involved in protein synthesis. Its 
+phosphorylation reflects the PI3K and core MAPK pathway signaling activity </p>
+
+<p>A component of the transforming growth factor-β signaling pathway involved in the 
+regulation of cell proliferation, apoptosis and differentiation </p>
+
+<p>A component of the transforming growth factor-β signaling pathway involved in the 
+regulation of cell proliferation, apoptosis and differentiation </p>
+
+<p>A voltage-dependent anion channel protein in the outer membrane of the mitochondria </p>
+
+<p>A cytoplasmic mRNA-binding protein involved in pre-mRNA alternative splicing </p>
+
+<p>Test L TMA </p>
+
+<p>0.72 (0.64-0.79) </p>
+
+<p>20 (4.3-257) </p>
+
+<p>0.72 (0.60-0.83) </p>
+
+<p>66 (5.1-6756) </p>
+
+<p>0.7 (0.62-0.77) </p>
+
+<p>21 (4.7-179) </p>
+
+<p>0.71 (0.61-0.81) </p>
+
+<p>36 (3.3-2889) </p>
+
+<p>AUC aggressiveness (95% CI) </p>
+
+<p>OR aggressiveness (95% CI) </p>
+
+<p>AUC lethal outcome (95% CI) </p>
+
+<p>HR lethal outcome (95% CI) </p>
+
+<p>Test H TMA </p>
+
+<p>B </p>
+
+<p>C </p>
+
+<p>Figure 5. Final biomarker set and selection criteria. (A) Twelve biomarkers were selected based on univariate performance for aggressiveness 
+(shown as OR on left) and lethality as well as frequency of appearance in multivariate models for disease aggressiveness or lethal outcome 
+(table on right) (B) The biomarker set comprises proteins known to function in the regulation of cell proliferation, cell survival, and metabolism. 
+(C) A multivariate 12-marker model for disease aggressiveness was developed based on logistic regression. The resulting AUC and OR are shown. 
+Subsequently, the risk scores generated by the aggressiveness model for all patients were correlated with lethal outcome. The resulting AUC and 
+HR are shown. </p>
+
+<p>BRITISH JOURNAL OF CANCER 
+Prostate cancer biomarkers robust to sampling error </p>
+
+<p> 
+www.bjcancer.com | DOI:10.1038/bjc.2014.396 </p>
+
+<p>to generalise across sampling error, the model derived from the L 
+TMA-training set was also tested on H TMA for prediction of 
+aggressive disease with consistent results (Figure 5C). Without any 
+further changes to the aggressiveness model, we examined its 
+performance on lethal outcome prediction by correlating the 
+aggressiveness risk scores with death from disease. Of note, we 
+found a similar AUC for lethal outcome as for aggressiveness on 
+both L and H TMA of 0.72 (95% CI: 0.60-0.83) and 0.71 (95% CI: 
+0.61-0.81), respectively. The corresponding HRs for lethal outcome 
+on L and H TMAs were 66 per unit change (95% CI: 5.1-6756) and 
+36 (95% CI: 3.3-2889), respectively. We conclude that the 12 
+identified biomarkers are robust to sampling error and predictive 
+of both disease aggressiveness and lethal outcome. </p>
+
+<p>DISCUSSION </p>
+
+<p>There is a continuing clinical need to assess prostate cancer 
+aggressiveness more accurately at the time of initial diagnosis as well 
+as for follow-up of patients, both those under active patient 
+surveillance and those receiving active treatment (Bangma and 
+Roobol, 2012; Carter et al, 2012; Brimo et al, 2013). Currently, in 
+men with early disease, a biopsy GS of 3 þ 4 ¼ 7 or more is one of the 
+prognostic determinants for active treatment (NCCN, 2012a; 
+Heidenreich et al, 2014). However, biopsy-sampling error resulting 
+from tumour heterogeneity and discordant Gleason scoring can 
+significantly affect the accuracy and reliability of assessing a patient's 
+risk of cancer progression, aggressiveness, and lethality. This 
+uncertainty in prognostication has contributed to significant over-
+treatment of patients with biopsies of Gleason grade 3 þ 3 or 3 þ 4 
+(Boorjian et al, 2009; Cooperberg et al, 2010; Bangma and Roobol, 
+2012; Epstein et al, 2012; Sandhu and Andriole, 2012; Loeb et al, 2014). </p>
+
+<p>Biomarkers predictive of prostate cancer aggressiveness and 
+lethality. In this manuscript, we describe the successful develop-
+ment of a performance-based strategy to identify and evaluate 
+biomarkers predictive of prostate cancer aggressiveness and lethal 
+outcome, even under circumstances of extreme sampling variation, 
+an issue typically encountered during prostate biopsy taking. Using 
+a large cohort (N ¼ 380) of annotated clinical prostatectomy 
+samples with long-term follow-up, the areas of highest and lowest 
+GS on each prostatectomy tissue were cored to generate paired 
+TMAs (H and L TMAs) representing the entire cohort, thereby 
+simulating biopsies with sampling error for each patient. Using 
+these paired TMAs, we evaluated a large number of biomarker 
+candidates for the ability to predict aggressive prostate pathology 
+and lethal outcome when measured in either low-or high-grade 
+cancer regions from each patient. We first selected biomarkers with 
+performance against aggressiveness and lethal outcome when 
+measured in L TMA tissue, to identify those most robust to 
+extreme sampling error. For this purpose, we only included L TMA 
+samples with core Gleason p3 þ 4 as clinically relevant, as biopsies 
+with GS 4 þ 3 or higher inevitably will be aggressive therapy 
+candidates. Most of the identified biomarkers from univariate 
+analyses were predictive of both disease aggressiveness and prostate 
+cancer-specific mortality regardless of whether they were measured 
+in L or H TMA tissue samples, and hence robust to sampling 
+variation (Figure 3). Moreover, performance of some well-
+established prostate cancer biomarkers predictive of progression 
+risk and lethal outcome (SMAD4, EZH2, MTDH2, HoxB13, and 
+PTEN) corroborated the validity of the approach. 
+As part of specificity validation of our antibodies, we learned 
+through target knockdown analyses and mass spectrometry-based 
+protein sequencing analysis that a MAb sold as anti-DCC actually 
+recognised the unrelated protein HSPA9, or Mortalin. We found 
+that HSPA9 was predictive as part of multivariate models and 
+hence was included in the final 12-marker set. Our functional </p>
+
+<p>analyses revealed the involvement of HSPA9 in clonogenic colony 
+formation and cell proliferation, consistent with previously 
+reported data (see Supplementary Figure 2 and Flachbartova 
+and Kovacech, 2013). This further validates our unbiased, 
+performance-based marker selection approach. 
+On the basis of univariate performance as well as frequency of 
+marker appearance in multivariate models for disease aggressive-
+ness and lethal outcome, 12 biomarkers were selected (Figure 5A). 
+A multivariate model based on these 12 markers showed similar 
+predictive performance for aggressiveness across tissue-sampling 
+variation (Figure 5C). Interestingly, the risk scores generated based 
+on the 12-marker aggressiveness model were equally predictive for 
+the separate end point of lethal outcome across tissue-sampling 
+variation (Figure 5C). This indicates a clear linkage between 
+aggressive features on surgical pathology and lethality, and, 
+importantly, validates the usage of our pathologic end point for 
+building our biomarker panel as relevant for long-term patient 
+outcome. We conclude that the 12 identified biomarkers are 
+relevant for prediction of tumour behaviour and could serve as the 
+starting point for development of a clinical, evidence-based 
+multivariate biopsy test for evaluating prostate cancer aggressive-
+ness as a critical aid in early decision-making steps in patient 
+management (NCCN, 2012a; NCCN, 2012b). </p>
+
+<p>Biomarkers robust to sampling error. A key objective for our 
+study was to identify and select markers that are highly robust to 
+sampling error. One of the key reasons for biopsy-sampling error is 
+the heterogeneity of prostate cancer. The inability to consistently 
+acquire tissue from the most aggressive parts of the tumour leads to 
+frequent underestimation of tumour aggressiveness and progres-
+sion risk. By coring into the highest and lowest Gleason area from 
+each patient, we generated paired TMAs of the entire cohort study 
+designed to simulate two biopsies from each patient, one with 
+'maximal' sampling error (L TMA), and the other with minimal 
+sampling error (H TMA). We focused on L TMAs with core 
+Gleason p3 þ 4, as these represent the clinically relevant cases 
+where standard of care is insufficient for accurate prognosis. We 
+found that B54% of these L TMA cases were upgraded to a higher 
+surgical GS, which is higher than observed in clinical practice 
+(Porten et al, 2011), confirming that our approach provided a 
+biased sampling error model. 
+The need for identification of biomarkers that are resistant to 
+sampling error was underscored by examining a well-established 
+four-marker signature based on Cyclin D1, SMAD4, PTEN, and 
+SPP1 previously reported to be predictive of lethal outcome based 
+on prostatectomy cohorts (Ding et al, 2011). Although we 
+confirmed that the model was predictive for lethal outcome in H 
+TMA, representing a situation of minimal sampling error, the 
+model was not lethal outcome-predictive at all in our L TMA tissue 
+cores, representing maximal sampling error (Table 2). This finding 
+is consistent with a recent report that the four-marker signature is 
+unable to predict lethal outcome in low-GS prostate tumours 
+(Irshad et al, 2013). 
+On the basis of univariate marker analyses, we identified 14 and 
+18 markers with sampling error-robust performance across L and 
+H TMA samples for disease aggressiveness and lethal outcome, 
+respectively (markers with red font in Figure 4). Most of these 
+univariately selected markers were predictive of both indications 
+across sampling variation, supporting a correlation between disease 
+aggressiveness and lethal outcome. Interestingly, although all 
+markers that showed univariate performance for both indications 
+on L TMA also were predictive on H TMA, two markers (PXN and 
+MTDH2) and three markers (NCOA2, CCND1 (Cyclin D1), and 
+AKAP8) (Sattler et al, 2000; Xu and Li, 2003; Hu et al, 2009; Ding 
+et al, 2011; Canton and Scott, 2013) were predictive of aggressive 
+disease and lethal outcome, respectively, only when measured on H 
+TMA, but not on L TMA (Figure 3). This suggests that these </p>
+
+<p>Prostate cancer biomarkers robust to sampling error 
+BRITISH JOURNAL OF CANCER </p>
+
+<p>www.bjcancer.com | DOI:10.1038/bjc.2014.396 </p>
+
+<p>
+markers are predictive primarily in situations of minimal sampling 
+error. Indeed, all these five markers have been shown as important 
+regulators of cellular proliferation, migration, and oncogenesis (see 
+e.g., Sattler et al, 2000; Xu and Li, 2003; Hu et al, 2009; Ding et al, 
+2011; Canton and Scott, 2013). The observation that Cyclin D1 is 
+predictive of lethal outcome only in H TMA, but not L TMA, is 
+consistent with the finding that the four-marker signature reported 
+by Ding et al (2011) was not predictive of lethal outcome in our L 
+TMA tissue, as well as on low-grade prostate cancer samples 
+(Irshad et al, 2013). The fact that no markers were predictive for 
+aggressive disease or lethal outcome on only L TMA, but not H 
+TMA, is interesting given that we primarily selected for markers 
+that can predict either aggressiveness or lethal outcome in L TMA, 
+to reflect maximal sampling error robustness. This suggests that 
+the identified markers likely reflect field effects from more 
+aggressive tumour regions, consistent with their similar perfor-
+mance in L and H TMA tissue samples. </p>
+
+<p>Genetic and proteomic approaches. An extensive search to find 
+better prostate cancer biomarkers has led to the identification of 
+possible genetic markers for clinical risk prognostication (Lapointe 
+et al, 2004; Lapointe et al, 2007; Tomlins et al, 2007; Cheville et al, 
+2008; Cuzick et al, 2011; Scher et al, 2013). However, there are 
+conflicting results regarding the reliability of many such markers in 
+disease prognosis. For example, although TMPRSS2-ERG gene 
+fusions are reported to be associated with high-risk tumours, more 
+recent studies with large cohorts report no strong correlation 
+between these fusions and patient outcome (Gopalan et al, 2009). 
+A multivariate gene expression-based test has recently been 
+reported to predict metastatic disease and lethal outcome based 
+on a conservatively managed cohort of patients from the United 
+Kingdom (Cuzick et al, 2012), as well as biochemical recurrence 
+after treatment in actively managed cohorts in the United States 
+(Cooperberg et al, 2013; Bishoff et al, 2014). The influence of 
+sampling variation on this test has yet to be determined. 
+The results of this study suggest that taking a proteomic 
+approach, which measures proteins from only the tumour region of 
+intact tissue, can possibly improve accurate risk classification at the 
+biopsy stage. The rationale for this idea is two-fold. First, because 
+prostate cancer is a heterogeneous, multifocal disease, biopsies 
+frequently contain only lower-grade components, and pathologists 
+may classify them as low-risk cancers. However, higher-grade 
+molecular features, not reflected morphologically, have been 
+reported to extend throughout the cancer (Boyd et al, 2012; 
+Sowalsky et al, 2013), and therefore are measurable in seemingly 
+lower-grade-containing biopsies. It is possible to accurately and 
+sensitively assess such high-grade molecular features in situ from 
+tumour regions using a proteomic approach, even in tissue samples 
+with variable amounts of tumour and benign components. This is 
+an advantage over gene expression-based technologies requiring 
+tissue homogenisation, resulting in variable dilution of the higher-
+grade molecular features depending on the amount of intermixed 
+benign tissue. Second, Gleason grading on biopsy is subjective, 
+with expert pathologists disagreeing on up to 30% of cases 
+(McKenney et al, 2011; Goodman et al, 2012). Molecular features 
+that can be objectively measured should improve risk classification. </p>
+
+<p>Limitations to the study. The fact that the biomarkers were 
+analysed in multiple ways for univariate and multivariate 
+performance on a single, large cohort increases the potential risk 
+that the results are over-fitted to patients included in this study. 
+Also, we simulated prostate cancer biopsies by taking 1-mm 
+diameter cores from prostate tissue blocks to generate TMA blocks. 
+Protein measurements made from cross-sections of these cores 
+may perform differently if measured in 20 Â 1-mm biopsy sections, 
+as typically encountered in routine pathology practice. </p>
+
+<p>CONCLUSION </p>
+
+<p>There is an urgent need for a reliable and accurate prognostic test 
+for patients with prostate cancer, given the difficulties of predicting 
+survival outcomes for patients diagnosed with early-stage cancer 
+and the resulting overtreatment. Further investigation of the 12 
+biomarkers identified in this study will enable development of an 
+objective clinical biopsy test based on multiplex proteomics in situ 
+imaging. The next step is to identify the optimal biomarker 
+subset algorithm from these 12 biomarkers, and to validate this in a 
+large clinical cohort of Gleason-and TNM-annotated biopsy 
+samples with matched prostatectomy and pathological specimens. 
+These studies are currently under way. 
+We propose that the identification strategy for protein 
+biomarkers described herein is likely to be applicable to other 
+tumour types, and may serve as a model for performance-based 
+selection of biomarkers that can be used to develop prognostic or 
+predictive tests for other tumours where histological assessment is 
+pivotal to risk stratification and prognostication. </p>
+
+<p>ACKNOWLEDGEMENTS </p>
+
+<p>We would like to thank Drs Raju Kucherlapati, Ronald DePinho, 
+Lynda Chin, Philip Kantoff, and collaborators at Metamark for 
+insightful comments and suggestions. We thank Rowena Hughes 
+and Winnie McFadzean from Oxford PharmaGenesis Ltd for 
+editorial support in collating comments from authors and 
+finalisation of the manuscript for submission. Research support: 
+this project was funded by Metamark Genetics Inc. </p>
+
+<p>CONFLICT OF INTEREST </p>
+
+<p>DLR is a paid consultant and equity holder in Metamark. DMB 
+and ML are paid consultants to Metamark. All other authors are 
+paid employees of Metamark. </p>
+
+
+
+<p>BRITISH JOURNAL OF CANCER 
+Prostate cancer biomarkers robust to sampling error </p>
+
+<p> 
+www.bjcancer.com | DOI:10.1038/bjc.2014.396 </p>
+
+
+
+<p>Prostate cancer biomarkers robust to sampling error 
+BRITISH JOURNAL OF CANCER </p>
+
+<p>www.bjcancer.com | DOI:10.1038/bjc.2014.396 </p>
+
+
+
+<p>
+ 
+www.bjcancer.com | DOI:10.1038/bjc.2014.396 </p>
+
+</text></tei>

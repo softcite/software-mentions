@@ -59,7 +59,7 @@ For training the software model with all the available training data:
 > mvn generate-resources -Ptrain_software
 ```
 
-The training data must be under ```grobid-astro/resources/dataset/software/corpus```
+The training data must be under ```software-mentions/resources/dataset/software/corpus```
 
 ### Evaluating only
 
@@ -77,15 +77,47 @@ The following commands will split automatically and randomly the available annot
 >  mvn compile exec:exec -Peval_software_split
 ```
 
-In this mode, by default, 80% of the available data is used for training and the remaining for evaluation. This ratio can be changed by editing the corresponding exec profile in the pom.xml file. 
+In this mode, by default, 90% of the available data is used for training and the remaining for evaluation. This ratio can be changed by editing the corresponding exec profile in the `pom.xml` file. 
 
 ## Training data
  
-The source of training data is the [softcite dataset]() produced by 
+The source of training data is the [softcite dataset](https://github.com/howisonlab/softcite-dataset) developed by [James Howison](http://james.howison.name/) Lab at the University of Texas at Austin. The data need to be compiled with actual PDF content prelimiary to training in order to create XML annotated document (MUC conference style). This is done with the following command which takes 3 arguments: 
+
+```
+> mvn exec:java -Dexec.mainClass=org.grobid.trainer.AnnotatedCorpusGeneratorCSV -Dexec.args="path/to/the/pdf/repo/ /path/to/csv/softcite-dataset/data/csv_dataset/ resources/dataset/software/corpus/"
+```
+
+The path to the PDF repo is the path where the PDF corresponding to the annotated document will be downloaded (done only the first time). For instance:
+
+
+```
+> mvn exec:java -Dexec.mainClass=org.grobid.trainer.AnnotatedCorpusGeneratorCSV -Dexec.args="/home/lopez/tools/softcite-dataset/pdf/ /home/lopez/tools/softcite-dataset/data/csv_dataset/ resources/dataset/software/corpus/"
+```
+
+The compiled XML training files will be written in the standard GROBID training path for the softwate recognition model under `grobid/software-mentions/resources/dataset/software/corpus/`.
+
+
+## Analysis of traninign data consistency
+
+A Python 3.* script is available under `script/` to analyse XML training data and spot possible unconsistencies to review. To launch the script: 
+
+```
+> python3 script/consistency.py _absolute_path_to_training_directory_
+```
+
+For instance: 
+
+
+```
+> python3 script/consistency.py /home/lopez/grobid/software-mentions/resources/dataset/software/corpus/
+```
+
+See the description of the output directly in the header of the `script/consistency.py` file.
+
 
 ## Generation of training data
 
-For generating training data in TEI, based on the current model, from a list of text or PDF files in a input repository, use the following command: 
+For generating training data in XML/TEI, based on the current model, from a list of text or PDF files in a input repository, use the following command: 
 
 ```
 > java -Xmx4G -jar target/software-mentions/-0.5.1-SNAPSHOT.one-jar.jar -gH ../grobid-home -dIn ~/test_software/ -dOut ~/test_software/out/ -exe createTraining

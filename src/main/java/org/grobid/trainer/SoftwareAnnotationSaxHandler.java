@@ -21,7 +21,7 @@ public class SoftwareAnnotationSaxHandler extends DefaultHandler {
 
     StringBuffer accumulator = new StringBuffer(); // Accumulate parsed text
 
-    private boolean ignore = false;
+    private boolean ignore = true;
 
     private String currentTag = null;
 
@@ -31,7 +31,8 @@ public class SoftwareAnnotationSaxHandler extends DefaultHandler {
     }
 
     public void characters(char[] buffer, int start, int length) {
-        accumulator.append(buffer, start, length);
+        if (!ignore)
+            accumulator.append(buffer, start, length);
     }
 
     public String getText() {
@@ -73,7 +74,9 @@ public class SoftwareAnnotationSaxHandler extends DefaultHandler {
                              String qName,
                              Attributes atts) throws SAXException {
         try {
-            if (qName.equals("lb")) {
+            if (qName.equals("text")) {
+                ignore = false;
+            } else if (qName.equals("lb")) {
                 accumulator.append(" +L+ ");
             } else if (qName.equals("pb")) {
                 accumulator.append(" +PAGE+ ");
@@ -103,19 +106,27 @@ public class SoftwareAnnotationSaxHandler extends DefaultHandler {
 
                         if ((name != null) && (value != null)) {
                             if (name.equals("type")) {
-                                if (value.equals("software-object")) {
-                                    // i.e. object value, default case
-                                    currentTag = "<object>";
-								} else {
+                                if (value.equals("software")) {
+                                    currentTag = "<software>";
+								} else if (value.equals("version-number")) {
+                                    currentTag = "<version-number>";
+                                } else if (value.equals("version-date")) {
+                                    currentTag = "<version-date>";
+                                } else if (value.equals("url")) {
+                                    currentTag = "<url>";
+                                } else if (value.equals("creator")) {
+                                    currentTag = "<creator>";
+                                } else {
                                	 	System.out.println("Warning: unknown entity attribute name, " + name);
                             	}
 							}
                         }
                     }
-                }  else if (qName.equals("TEI") || qName.equals("tei") || qName.equals("teiCorpus") ) {
+                } else if (qName.equals("TEI") || qName.equals("tei") || qName.equals("teiCorpus") ) {
                     labeled = new ArrayList<>();
                     accumulator = new StringBuffer();
                     currentTag = null;
+                    ignore = true;
                 }
             }
         } catch (Exception e) {

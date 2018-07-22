@@ -1,0 +1,1643 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4790474" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:20+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>Lignin poses a major challenge in the processing of plant 
+biomass for agro-industrial applications. For bioengineering 
+purposes, there is a pressing interest in identifying and char-
+acterizing the enzymes responsible for the biosynthesis 
+of lignin. Hydroxycinnamoyl-CoA:shikimate hydroxycinna-
+moyl transferase (HCT; EC 2.3.1.133) is a key metabolic 
+entry point for the synthesis of the most important lignin 
+monomers: coniferyl and sinapyl alcohols. In this study, we 
+investigated the substrate promiscuity of HCT from a bryo-
+phyte (Physcomitrella) and from five representatives of 
+vascular plants (Arabidopsis, poplar, switchgrass, pine and 
+Selaginella) using a yeast expression system. We demonstrate 
+for these HCTs a conserved capacity to acylate with p-
+coumaroyl-CoA several phenolic compounds in addition to 
+the canonical acceptor shikimate normally used during 
+lignin biosynthesis. Using either recombinant HCT from 
+switchgrass (PvHCT2a) or an Arabidopsis stem protein 
+extract, we show evidence of the inhibitory effect of 
+these phenolics on the synthesis of p-coumaroyl shikimate 
+in vitro, which presumably occurs via a mechanism of com-
+petitive inhibition. A structural study of PvHCT2a confirmed 
+the binding of a non-canonical acceptor in a similar manner 
+to shikimate in the active site of the enzyme. Finally, we 
+exploited in Arabidopsis the substrate flexibility of HCT to 
+reduce lignin content and improve biomass saccharification 
+by engineering transgenic lines that overproduce one of the 
+HCT non-canonical acceptors. Our results demonstrate con-
+servation of HCT substrate promiscuity and provide support 
+for a new strategy for lignin reduction in the effort to im-
+prove the quality of plant biomass for forage and cellulosic 
+biofuels. </p>
+
+<p>Plant biomass is routinely utilized in diverse agro-industrial sec-
+tors such as pulp and paper, forage, bio-manufacturing and 
+bioenergy. Among several sustainable energy strategies, the 
+conversion of plant cell walls into fermentable sugars offers 
+the possibility for microbial production of bio-based products 
+including materials (e.g. biopolymers), commodity chemicals, 
+fine and specialty chemicals, and liquid fuels (Vickers et al. 2012, 
+George et al. 2015). Lignin is a hydrophobic polymer that per-
+meates plant cell walls and impedes the biochemical processes 
+used for plant biomass conversion into fermentable sugars 
+(Zeng et al. 2014). Lignin from ferns and gymnosperms contains 
+p-hydroxyphenyl (H) and guaiacyl (G) units derived from p-
+coumaroyl alcohol and coniferyl alcohol, respectively; and 
+lignin from certain lycophytes and angiosperms additionally 
+contains syringyl (S) units (Boerjan et al. 2003, Weng et al. 
+2010). These lignin monomers (or monolignols) are synthesized 
+from phenylalanine in the cytosol and exported to the cell wall 
+for oxidative polymerization (Boerjan et al. 2003). 
+In the lignin pathway, the metabolic entry point responsible 
+for the production of both coniferyl and sinapyl alcohols involves 
+hydroxycinnamoyl-CoA:shikimate hydroxycinnamoyl transfer-
+ase (HCT), which catalyzes the coupling of p-coumaroyl-CoA 
+with shikimate to produce p-coumaroyl shikimate (Fig. 1) 
+(Hoffman et al. 2003, Hoffman et al. 2004). Following this step, 
+the hydroxycinnamoyl moiety of p-coumaroyl shikimate is 
+hydroxylated by p-coumaroyl shikimate 3 0 -hydroxylase (C3 0 H) 
+to produce caffeoyl shikimate which is then transesterified by 
+HCT to release caffeoyl-CoA, or, as recently described in 
+Arabidopsis, cleaved by caffeoyl shikimate esterase (CSE) to re-
+lease caffeate (Fig. 1) (Franke et al. 2002, Vanholme et al. 2013a). 
+Reduction of HCT activity limits the synthesis of coniferyl and 
+sinapyl alcohols and causes a backlog of upstream metabolites, </p>
+
+<p>Plant Cell Physiol. 57(3): 568-579 (2016) doi:10.1093/pcp/pcw016, Advance Access publication on 8 February 2016, 
+available online at www.pcp.oxfordjournals.org 
+! The Author 2016. Published by Oxford University Press on behalf of Japanese Society of Plant Physiologists. 
+This is an Open Access article distributed under the terms of the Creative Commons Attribution Non-Commercial License (http://creativecommons.org/ 
+licenses/by-nc/4.0/), which permits non-commercial re-use, distribution, and reproduction in any medium, provided the original work is properly cited. For 
+commercial re-use, please contact journals.permissions@oup.com </p>
+
+<p>Regular Paper </p>
+
+<p>which leads to a redirection of part of the metabolic flux of p-
+coumaroyl-CoA into p-coumaryl alcohol. Therefore, the lignin 
+from plants exhibiting strong HCT down-regulation is enriched 
+in H units and its content is heavily reduced due to the poor 
+capacity of p-coumaroyl alcohol to incorporate the polymer 
+(Hoffman et al. 2004, Vanholme et al. 2013b). Considering its 
+central role in lignin biosynthesis, HCT has been a target in 
+genetic engineering strategies for improving the commercial util-
+ity of plant biomass. For example, down-regulation of HCT ex-
+pression reduces lignin content and improves forage digestibility 
+and saccharification efficiency in alfalfa (Chen and Dixon 2007, 
+Shadle et al. 2007). 
+HCT belongs to the BAHD family of acyl-CoA-dependent 
+transferases, which includes several enzymes that use hydroxy-
+cinnamoyl-CoAs as a donor for the transfer reaction (D'Auria 
+2006). These transferases are capable of acylating a wide variety 
+of acceptors, and some of them exhibit broad substrate flexi-
+bility (Landmann et al. 2011, Molina and Kosma 2014). For 
+example, it is well known that some HCTs can use quinate as 
+a substrate in addition to shikimate (Hoffman et al. 2003, 
+Lallemand et al. 2012, Walker et al. 2013, Escamilla- 
+et al. 2014). Moreover, HCT from globe artichoke (CcHCT) 
+was shown to accept 3-hydroxyanthranilate as a substrate 
+(Moglia et al. 2010), and similar substrate promiscuity was 
+described for HCT from Coleus blumei, which can also use 
+3-amino-and 3-hydroxybenzoates as acceptor substrates, form-
+ing both p-coumarate ester and amide conjugates (Sander and 
+Petersen 2011). Although HCT is a well-conserved enzyme 
+among land plants (Xu et al. 2009, Tohge et al. 2013), charac-
+terization of its substrate flexibility remains poorly described. 
+Furthermore, until now, it had yet to be tested whether the 
+substrate promiscuity of HCT could be exploited for lignin en-
+gineering and improving plant biomass. </p>
+
+<p>In this study, using a yeast expression system, we investi-
+gated the substrate promiscuity of HCT from a bryophyte 
+(Physcomitrella patens), a lycophyte (Selaginella moellendorffii), 
+a coniferous gymnosperm (Pinus radiata), a monocot angio-
+sperm (Panicum virgatum) and two dicot angiosperms (Populus 
+trichocarpa and Arabidopsis thaliana) toward a series of ben-
+zene and benzoate derivatives. Recombinant yeast strains that 
+individually co-express these phylogenetically related HCTs 
+with 4-coumarate-CoA ligase were capable of producing p-
+coumaroyl conjugates when fed with p-coumarate and shiki-
+mate, 3-hydroxybenzoate, 2,5-dihydroxybenzoate (gentisate), 2,3-
+dihydroxybenzoate, 3,4-dihydroxybenzoate (protocatechuate), 
+3-aminobenzoate, 3-hydroxyanthranilate, 5-hydroxyanthranilate, 
+ortho-hydroxyphenol (catechol) and para-hydroxyphenol (hydro-
+quinone). Purified recombinant HCT from switchgrass showed 
+activity towards these new 'non-canonical' substrates, which con-
+firmed their capacity to bind the active site of the enzyme. 
+Moreover, we demonstrate that in vitro formation of p-coumar-
+oyl shikimate by either a switchgrass recombinant HCT 
+(PvHCT2a) or an Arabidopsis stem protein extract is partially 
+inhibited in the presence of the non-canonical acceptors, presum-
+ably via a mechanism of competitive inhibition. Finally, we ex-
+tended this characterization to in vivo inhibition assays by 
+engineering Arabidopsis lines to overproduce one of these 
+HCT-competitive inhibitors (protocatechuate) in lignifying tis-
+sues, and showed an approximately 30% reduction of lignin con-
+tent, providing a significant improvement of biomass 
+saccharification efficiency. Our results demonstrate the potential 
+of inhibiting HCT in various bioenergy crops by overproducing 
+unusual HCT acceptors in planta. The substrate promiscuity of 
+HCT was observed in all the plant taxa we tested, and it appears 
+to have been conserved since plants first appeared on land about 
+450 Ma ago. This novel approach could be particularly valuable to 
+reduce lignin in crops for which genomic information is still 
+unavailable. </p>
+
+<p>Results </p>
+
+<p>Selection and identification of HCT sequences </p>
+
+<p>For this study, we selected HCT from Arabidopsis (AtHCT) 
+since it has been shown to be genetically implicated in lignin 
+biosynthesis (Hoffman et al. 2004). A HCT from the woody 
+dicot poplar was also selected. In particular, out of seven 
+HCT genes found in the poplar genome, PtHCT1 and PtHCT6 
+have been associated with lignin biosynthesis because of their 
+xylem-specific expression profile (Shi et al. 2010). PtHCT6 was 
+selected for this study since it has higher catalytic efficiency 
+towards coumaroyl-CoA (Wang et al. 2014). In the monocot 
+switchgrass, two enzymes (PvHCT1a and PvHCT2a) have 
+proven HCT activity (Escamilla- et al. 2014). PvHCT2a 
+was selected for this study based on its predicted involvement 
+in lignin biosynthesis according to gene expression profiling 
+experiments (Shen et al. 2013). For gymnosperms, we selected 
+a HCT from pine (PrHCT) for which the silencing in cell cultures 
+results in reduction of lignin content (Wagner et al. 2007). 
+Moreover, we conducted a phylogenetic analysis using </p>
+
+<p>phenylalanine </p>
+
+<p>p-coumaroyl-CoA </p>
+
+<p>p-coumaroyl shikimate </p>
+
+<p>feruloyl-CoA </p>
+
+<p>p-coumaryl alcohol </p>
+
+<p>coniferyl alcohol </p>
+
+<p>sinapyl alcohol </p>
+
+<p>H-unit </p>
+
+<p>G-unit </p>
+
+<p>HCT </p>
+
+<p>shikimate </p>
+
+<p>coniferaldehyde </p>
+
+<p>sinapaldehyde 
+S-unit </p>
+
+<p>p-coumaraldehyde </p>
+
+<p>C3'H </p>
+
+<p>CSE </p>
+
+<p>caffeoyl shikimate </p>
+
+<p>caffeate </p>
+
+<p>caffeoyl-CoA </p>
+
+<p>HCT </p>
+
+<p>shikimate </p>
+
+<p>Fig. 1 Simplified representation of the lignin biosynthetic pathway. 
+Abbreviations: HCT, hydroxycinnamoyl-CoA:shikimate hydroxycinna-
+moyl transferase; C3 0 H, p-coumaroyl shikimate 3 0 -hydroxylase; CSE, 
+caffeoyl shikimate esterase. Dashed arrows represent the CSE-
+mediated esterification of caffeoyl shikimate as described in 
+Arabidopsis (Vanholme et al. 2013a). </p>
+
+
+
+<p>Plant Cell Physiol. 57(3): 568-579 (2016) doi:10.1093/pcp/pcw016 </p>
+
+<p>biochemically characterized hydroxycinnamoyl-CoA-depend-
+ent BAHD transferases (Supplementary Table S1) and con-
+firmed that AtHCT, PtHCT6, PvHCT2a and PrHCT belong to 
+the same clade along with other characterized HCTs 
+(Supplementary Fig. S1). In order to include a HCT from a 
+lycophyte, we searched the S. moellendorffii genome for the 
+presence of putative HCT homologs using AtHCT as bait. Five 
+sequences were retrieved by selecting proteins whose sequence 
+share at least 35% identity with that of AtHCT, and two of 
+which, SmHCT1a and SmHCT1b (60% and 61% identical 
+to AtHCT, respectively), fall into the 'HCT clade' 
+(Supplementary Table S1; Supplementary Fig. S1). These 
+two proteins (98% identical) are products of allelic variants of 
+the same gene, and SmHCT1a was selected for further charac-
+terization. Similarly, the genome of the bryophyte P. patens was 
+analyzed for the identification of putative HCT homologs using 
+AtHCT as bait. Out of the seven sequences retrieved (using a 
+protein sequence identity cut-off of 30%), one protein 
+(PpHCT1) falls into the 'HCT clade' and was selected for this 
+study (Supplementary Table S1; Supplementary Fig. S1). </p>
+
+<p>Screening of HCT substrate promiscuity using a 
+yeast heterologous expression system </p>
+
+<p>AtHCT, PtHCT6, PvHCT2a and PrHCT, as well as putative HCTs 
+from S. moellendorffii (SmHCT1a) and P. patens (PpHCT1), were 
+individually co-expressed with Arabidopsis 4-coumarate-CoA 
+ligase 5 (4CL5) in yeast to investigate their substrate affinity 
+toward various acceptors. In these in vivo assays, the different 
+recombinant yeast strains were fed individually with p-couma-
+rate in combination with shikimate (as a positive control) 
+or one of the potential phenolic acceptors listed in 
+Supplementary Fig. S2. These acceptors were chosen based 
+on previous reports that assign this type of alternative sub-
+strates for HCT (Moglia et al. 2010, Sander and Petersen, 
+2011). 4CL5 converts p-coumarate into p-coumaroyl-CoA, 
+which is in turn coupled to shikimate or other potential ac-
+ceptors by HCT. Subsequently, we performed liquid chroma-
+tography-tandem mass spectrometry (LC-MS/MS) analysis of 
+the yeast culture medium for the detection of p-coumaroyl 
+conjugates produced by the different HCTs. Out of 20 phenolics 
+tested, the analysis indicated that all six HCTs produced p-
+coumaroyl conjugates in the presence of shikimate, 3-hydroxy-
+benzoate, gentisate, 2,3-dihydroxybenzoate, protocatechuate, 
+3-aminobenzoate, 3-hydroxyanthranilate, 5-hydroxyanthrani-
+late, catechol and hydroquinone (Fig. 2; Supplementary 
+Table S2; Supplementary Fig. S3). None of these products 
+was found in the culture medium of a control yeast strain ex-
+pressing 4CL5 alone and fed with p-coumarate and the corres-
+ponding acceptors. For these yeast-feeding assays, the limited 
+control of enzyme expression, substrate penetrability and se-
+cretion of products does not allow direct comparisons of activ-
+ities between the different HCTs and the various acceptors 
+tested. </p>
+
+<p>Activity and inhibition of recombinant HCT </p>
+
+<p>PvHCT2a was expressed in Escherichia coli and purified to con-
+firm its activity towards shikimate and the nine new acceptors </p>
+
+<p>identified with the yeast screen. PvHCT2a was selected for bio-
+chemical assays since its expression in E. coli yielded pure and 
+high amounts of recombinant enzyme (Supplementary Fig. 
+S4), as opposed to the yield obtained using AtHCT which 
+was expressed almost entirely as insoluble inclusion bodies. 
+Conclusively, incubations of recombinant PvHCT2a with p-
+coumaroyl-CoA and shikimate, gentisate, 3-hydroxyanthranilate, 
+2,3-dihydroxybenzoate, catechol, protocatechuate, 5-hydro-
+xyanthranilate, 3-hydroxybenzoate, 3-aminobenzoate and 
+hydroquinone resulted in the formation of the corresponding 
+p-coumaroyl conjugates (Supplementary Fig. S5). The chro-
+matographic peaks of these PvHCT2a products showed reten-
+tion times similar to those of the p-coumaroyl conjugates 
+previously characterized in the yeast feedings. In contrast, in-
+cubations of PvHCT2a with only p-coumaroyl-CoA, or just the 
+different acceptors, did not produce any of these reaction prod-
+ucts (data not shown). Assuming similar LC-MS/MS response 
+factors for the different p-coumaroyl conjugates, comparison of 
+their peak intensities obtained from PvHCT2a in vitro assays 
+showed that shikimate is the best substrate, followed by 3-
+hydroxyanthranilate (Supplementary Fig. S6). Substrate satur-
+ation curves using shikimate or the non-canonical acceptors 
+were attempted to determine the affinity of PvHCT2a for 
+these different substrates. Apparent substrate saturation of 
+the enzyme could be achieved only in the case of shikimate, 
+3-hydroxyanthranilate and protocatechuate; double reciprocal 
+plots indicated K m values of 699 mM, 830 mM and 1.48 mM, 
+respectively, for these three acceptors (Supplementary Fig. S7). 
+For the other acceptors, the lack of enzyme saturation at high 
+concentrations indicates higher K m values and much lower af-
+finity of PvHCT2a for these substrates compared with shikimate 
+(Supplementary Fig. S7). 
+Because HCT acylates non-canonical acceptors in the pres-
+ence of p-coumaroyl-CoA, we tested the influence of these 
+potential competitive inhibitors on the formation of p-coumar-
+oyl shikimate catalyzed by PvHCT2a in vitro. We observed that 
+p-coumaroyl shikimate synthesis was reduced in reactions con-
+taining p-coumaroyl-CoA and an equimolar amount of shiki-
+mate and the non-canonical acceptors, in comparison with 
+control reactions containing only p-coumaroyl-CoA and shiki-
+mate. In particular, inhibitions of p-coumaroyl shikimate syn-
+thesis ranged from 11% to 48%, depending on the acceptors 
+present, and were stronger at higher concentrations (Fig. 3). In 
+these reactions, the presence of p-coumaroyl conjugates 
+formed from the coupling of p-coumaroyl-CoA with the non-
+canonical acceptors was also detected in addition to p-coumar-
+oyl shikimate (data not shown). </p>
+
+<p>PvHCT2a substrate-binding site </p>
+
+<p>The structure of the related HCT from Sorghum bicolor 
+(SbHCT) has been described previously (Walker et al. 2013). 
+As expected, the PvHCT2a structure consists of two domains, 
+with the p-coumaryl-CoA-and shikimate-binding sites located 
+between them. Domain I consists of N-terminal residues 1-199 
+and C-terminal residues 387-409. Domain II consists exclusively 
+of C-terminal residues 200-386 and 410-446 (Fig. 4A). The 
+structure of PvHCT2a in complex with p-coumaroyl-CoA and </p>
+
+
+
+<p>A. Eudes et al. | Substrate promiscuity of HCT and lignin reduction </p>
+
+<p>shikimate reveals that the two molecules reacted during the 
+soaking of the compounds into the crystal. Therefore, the prod-
+uct state was observed in the electron density map, given the 
+ternary complex of PvHCT2a, free CoA and p-coumaroyl shiki-
+mate (Fig. 4B). A similar product state formation of p-coumar-
+oyl shikimate was described for the related structure SbHCT 
+(Walker et al. 2013). In contrast, our crystal structure of 
+PvHCT2a-p-coumaroyl-CoA-protocatechuate is in a substrate 
+state, i.e. the ternary complex consists of PvHCT2a, p-coumar-
+oyl-CoA and protocatechuate (Fig. 4C). Data collection, </p>
+
+<p>refinement and model statistics for both PvHCT2a-p-coumar-
+oyl-CoA-shikimate and PvHCT2a-p-coumaroyl-CoA-protoca-
+techuate structures are summarized in Supplementary 
+Table S3. 
+The p-coumaroyl-shikimate contacts the PvHCT2a via the 
+phenolic group and carbonyl group of the p-coumaroyl portion. 
+The shikimate portion contacts PvHCT2a through both the 
+carboxyl and hydroxyl groups. The carbonyl group of the p-
+coumaroyl moiety directly contacts Trp384 and the phenolic 
+moiety interacts via water-mediated hydrogen bonds with </p>
+
+<p>319.0820 [M-H] -</p>
+
+<p>320.0831 
+321.0925 </p>
+
+<p>Time (min) 
+1 
+2 3 
+4 
+5 6 
+7 8 
+9 10 11 12 13 14 15 </p>
+
+<p>7.50 min </p>
+
+<p>Time (min) 
+1 
+2 3 
+4 
+5 6 
+7 8 
+9 10 11 12 13 14 15 </p>
+
+<p>10.12 min </p>
+
+<p>299.0562 [M-H] -</p>
+
+<p>300.0588 </p>
+
+<p>Time (min) 
+1 
+2 3 
+4 
+5 6 
+7 8 
+9 10 11 12 13 14 15 </p>
+
+<p>11.10 min </p>
+
+<p>298.0724 [M-H] -</p>
+
+<p>299.0744 
+300.0759 </p>
+
+<p>Time (min) 
+1 
+2 3 
+4 
+5 6 
+7 8 
+9 10 11 12 13 14 15 </p>
+
+<p>10.27 min </p>
+
+<p>299.0562 [M-H] -</p>
+
+<p>300.0595 
+301.0634 </p>
+
+<p>Time (min) 
+1 
+2 3 
+4 
+5 6 
+7 8 
+9 10 11 12 13 14 15 </p>
+
+<p>10.80 min </p>
+
+<p>A 
+B </p>
+
+<p>D </p>
+
+<p>E 
+F </p>
+
+<p>G 
+H </p>
+
+<p>I 
+J </p>
+
+<p>C </p>
+
+<p>255.0660 [M-H] -</p>
+
+<p>256.0688 
+257.0835 </p>
+
+<p>1 
+2 
+3 4 
+5 6 
+7 
+8 9 10 11 12 13 14 15 </p>
+
+<p>13.34 min </p>
+
+<p>Time (min) </p>
+
+<p>299.0562 [M-H] -</p>
+
+<p>301.2309 
+300.0601 </p>
+
+<p>1 
+2 
+3 
+4 
+5 
+6 
+7 
+8 9 10 11 12 13 14 15 </p>
+
+<p>12.02 min </p>
+
+<p>Time (min) </p>
+
+<p>298.0721 [M-H] -</p>
+
+<p>1 
+2 
+3 
+4 
+5 
+6 
+7 
+8 
+9 10 11 12 13 14 15 </p>
+
+<p>12.54 min </p>
+
+<p>Time (min) </p>
+
+<p>283.0606 [M-H] -</p>
+
+<p>1 
+2 
+3 
+4 
+5 
+6 
+7 
+8 9 10 11 12 13 14 15 </p>
+
+<p>10.69 min </p>
+
+<p>Time (min) </p>
+
+<p>283.2627 
+282.0760 [M-H] -</p>
+
+<p>1 
+2 
+3 
+4 
+5 
+6 
+7 
+8 
+9 10 11 12 13 14 15 </p>
+
+<p>12.71 min </p>
+
+<p>Time (min) </p>
+
+<p>255.0654 [M-H] -</p>
+
+<p>256.0677 </p>
+
+<p>x10 5 </p>
+
+<p>0 </p>
+
+<p>0.2 </p>
+
+<p>0.4 </p>
+
+<p>0.6 </p>
+
+<p>0.8 </p>
+
+<p>1 </p>
+
+<p>x10 4 </p>
+
+<p>0 
+0.5 
+1 
+1.5 
+2 
+2.5 
+3 
+3.5 </p>
+
+<p>x10 5 </p>
+
+<p>0 
+0.2 
+0.4 
+0.6 
+0.8 
+1 
+1.2 
+1.4 </p>
+
+<p>x10 3 </p>
+
+<p>0 </p>
+
+<p>1 </p>
+
+<p>2 </p>
+
+<p>3 </p>
+
+<p>4 </p>
+
+<p>5 </p>
+
+<p>x10 4 </p>
+
+<p>0 </p>
+
+<p>0.5 </p>
+
+<p>1 </p>
+
+<p>1.5 </p>
+
+<p>2 </p>
+
+<p>2.5 </p>
+
+<p>x10 3 </p>
+
+<p>0.4 </p>
+
+<p>0.8 </p>
+
+<p>1.2 </p>
+
+<p>1.6 </p>
+
+<p>0 
+1 </p>
+
+<p>2 </p>
+
+<p>3 </p>
+
+<p>4 </p>
+
+<p>5 </p>
+
+<p>6 
+x10 3 </p>
+
+<p>0 </p>
+
+<p>0 </p>
+
+<p>1 </p>
+
+<p>2 </p>
+
+<p>3 </p>
+
+<p>4 </p>
+
+<p>5 </p>
+
+<p>6 </p>
+
+<p>x10 3 </p>
+
+<p>0.5 </p>
+
+<p>1.5 </p>
+
+<p>2 </p>
+
+<p>1 </p>
+
+<p>x10 3 
+2.5 </p>
+
+<p>0 </p>
+
+<p>0 </p>
+
+<p>0.4 </p>
+
+<p>0.8 </p>
+
+<p>1.2 </p>
+
+<p>1.6 </p>
+
+<p>2 
+x10 4 </p>
+
+<p>Intensity (counts) 
+Intensity (counts) </p>
+
+<p>Intensity (counts) 
+Intensity (counts) </p>
+
+<p>Intensity (counts) 
+Intensity (counts) </p>
+
+<p>Intensity (counts) 
+Intensity (counts) </p>
+
+<p>Intensity (counts) 
+Intensity (counts) </p>
+
+<p>Fig. 2 p-Coumaroyl conjugates produced by PvHCT2a in vivo activity assays. Representative LC-MS chromatograms of p-coumaroyl conjugates 
+produced by PvHCT2a after feeding the recombinant yeast strains co-expressing At4CL5 and PvHCT2a with p-coumarate and (A) shikimate, 
+(B) gentisate, (C) 3-hydroxyanthranilate, (D) 2,3-dihydroxybenzoate, (E) catechol, (F) protocatechuate, (G) 5-hydroxyanthranilate, (H) 3-hydro-
+xybenzoate, (I) 3-aminobenzoate and (J) hydroquinone. Structures of p-coumaroyl hydroxybenzoates (B, D, F) are arbitrarily shown with an ester 
+linkage involving the hydroxyl group on the C3 position on the carbon ring. The structure of p-coumaroyl 3-hydroxyanthranilate (C) is 
+represented as determined in Moglia et al. (2010). See also Table S2. </p>
+
+
+
+<p>Plant Cell Physiol. 57(3): 568-579 (2016) doi:10.1093/pcp/pcw016 </p>
+
+<p>Ser38 and Tyr40. The carboxyl group of the shikimate moiety 
+makes a salt bridge interaction with Arg369. While the C5 
+hydroxyl group contacts the catalytic residue His163, the C3 
+hydroxyl group contacts Thr382 (Fig. 4B). 
+We then analyzed the structure of the protocatechuate 
+ternary complex to better understand the mechanism of 
+PvHCT2a. The protocatechuate binds in a very similar 
+manner to shikimate, with the carboxyl group making a tight 
+salt bridge with Arg369, and the C3 (equivalent to C5 in the 
+shikimate moiety) hydroxyl group interacting with the nitrogen 
+NE2 of His163. However, we see that the C5 (equivalent to C3 in 
+the shikimate moiety) hydroxyl interaction with Thr382 is lost, 
+since this hydroxyl group is absent in protocatechuate (Fig. 4C). </p>
+
+<p>Characterization of Arabidopsis lines producing a 
+competitive inhibitor of HCT in lignifying tissues </p>
+
+<p>As a preliminary experiment, we determined the influence of 
+the alternative HCT acceptors on the formation of p-coumaroyl 
+shikimate catalyzed by a total protein extract from Arabidopsis 
+stems. Compared with control reactions containing only p-
+coumaroyl-CoA and shikimate, and except for catechol and 
+5-hydroxyanthranilate, we observed reductions of p-coumaroyl 
+shikimate synthesis ranging from 6.0% to 63.5% in reactions 
+containing equimolar amount of the different non-canonical 
+substrates, and the strongest inhibition was observed with pro-
+tocatechuate (Supplementary Fig. S8). 
+Since the synthesis of p-coumaroyl shikimate by protein 
+extracts from Arabidopsis stems is strongly inhibited by proto-
+catechuate in vitro, we attempted to generate Arabidopsis 
+transgenic lines that overproduce protocatechuate from </p>
+
+<p>chorismate to reduce lignin content. A two-gene strategy was 
+employed to convert some of the endogenous chorismate pool 
+into p-hydroxybenzoate-and eventually protocatechuate by 
+co-expressing chorismate pyruvate-lyase from E. coli (ubiC) </p>
+
+<p>Fig. 4 Structural study of PvHCT2a. (A) Cartoon representation of the 
+monomeric PvHCT2a structure. The overall structure of PvHCT2a 
+consists of two domains with the p-coumaroyl-CoA-and shikimate-
+binding site located between the domains. Each of the domains con-
+tains a core b-sheet surrounded by a-helices. (B) Substrate-binding 
+site of the PvHCT2a-p-coumaroyl-CoA-shikimate ternary complex. 
+The residues Arg369, Thr382, His163 and Trp384 interact directly with 
+p-coumaroyl shikimate. The residues Ser38 and Tyr40 interact via 
+water-(W32) mediated hydrogen bonds with p-coumaroyl shikimate. 
+The His163 residue was observed in two alternative conformations 
+represented in magenta and pink. (C) Substrate-binding site of the 
+PvHCT2a-p-coumaroyl-CoA-protocatechuate ternary complex. The 
+major difference between protocatechuate and shikimate binding is 
+the loss of the C5 hydroxyl interaction with Thr382. </p>
+
+<p>0 </p>
+
+<p>10 </p>
+
+<p>20 </p>
+
+<p>30 </p>
+
+<p>40 </p>
+
+<p>50 </p>
+
+<p>60 </p>
+
+<p>70 </p>
+
+<p>80 </p>
+
+<p>90 </p>
+
+<p>100 </p>
+
+<p>Coumaroyl shikimate (% of control) </p>
+
+<p>400 µM 
+800 µM 
+1.6 mM </p>
+
+<p>* 
+* * 
+* 
+* 
+* </p>
+
+<p>* 
+* </p>
+
+<p>* 
+* </p>
+
+<p>* 
+* </p>
+
+<p>* 
+* 
+* 
+* </p>
+
+<p>* 
+* 
+* 
+* 
+* 
+* </p>
+
+<p>* </p>
+
+<p>* 
+* </p>
+
+<p>* 
+* 
+* 
+* 
+* 
+* 
+* 
+* </p>
+
+<p>* 
+* 
+* 
+* </p>
+
+<p>* 
+* </p>
+
+<p>* 
+* </p>
+
+<p>* 
+* 
+* * </p>
+
+<p>* 
+* 
+* 
+* </p>
+
+<p>Fig. 3 Inhibition of HCT activity in vitro. Production of p-coumaroyl 
+shikimate by recombinant PvHCT2a using p-coumaroyl-CoA and shi-
+kimate as substrates (400 mM each) was measured in the absence 
+(control) or presence of various concentrations of 3-aminobenzoate, 
+protocatechuate, 3-hydroxyanthranilate, 2,3-dihydroxybenzoate, 3-
+hydroxybenzoate, gentisate, hydroquinone, catechol or 5-hydroxyan-
+thranilate. Asterisks indicate significant differences from the control 
+using the unpaired Student's t-test (**P &lt; 0.005, *P &lt; 0.05). </p>
+
+
+
+<p>A. Eudes et al. | Substrate promiscuity of HCT and lignin reduction </p>
+
+<p>and p-hydroxybenzoate 3-monooxygenase from Pseudomonas 
+aeruginosa (pobA) (Fig. 5A). In Arabidopsis lignifying tissues, 
+the promoter of the secondary cell wall cellulose synthase gene 
+AtCesa4 was used to drive the expression of ubiC, while the 
+promoter of the cinnamate 4-hydroxylase gene AtC4H, involved 
+in the lignin biosynthetic pathway, was used to drive the ex-
+pression of pobA. Two different promoters were used to min-
+imize gene silencing effects that could potentially arise from the 
+expression of identical 5 0 -untranslated region (UTR) sequences. 
+Moreover, using an N-terminal fusion with a sequence encod-
+ing a plastid-targeting signal peptide, both ubiC and pobA were </p>
+
+<p>targeted to the plastids in which chorismate is produced. Two 
+lines harboring a T-DNA carrying either ubiC alone (ubiC-1 and 
+ubiC-2) or pobA alone (pobA-1 and pobA-2), and three lines 
+harboring a T-DNA carrying both genes (ubiC-pobA-1, -2 and -
+3) were selected for characterization. Reverse transcription-
+PCR (RT-PCR) showed the expression of only ubiC or pobA 
+in the ubiC-1, -2 lines and pobA-1, -2 lines, respectively, and 
+expression of both genes in the three ubiC-pobA lines (Fig. 
+5B). Methanol-soluble metabolites were extracted from stems 
+of the transgenic lines, and both p-hydroxybenzoate and pro-
+tocatechuate were quantified using LC-MS/MS. The metabolite 
+analysis showed a higher amount of p-hydroxybenzoate in the 
+ubiC-1 and -2 lines compared with the wild type (7.5-and 6.8-
+fold higher, respectively), while the levels observed in the ubiC-
+pobA lines were similar to those of the wild type. In contrast, 
+the protocatechuate content was 24-to 26-fold higher in the 
+ubiC-pobA lines compared with the wild-type and the ubiC lines 
+(Fig. 5C). These results confirmed the production of p-hydro-
+xybenzoate from chorismate by ubiC activity and its efficient 
+conversion to protocatechuate by pobA in the ubiC-pobA 
+transgenic lines. In addition, measurement of phenylalanine-
+an amino acid derived from chorismate and precursor of mono-
+lignols-and salicylic acid contents revealed no significant dif-
+ference between the wild type and transgenic lines 
+(Supplementary Table S4). </p>
+
+<p>Protocatechuate overproducer lines show 
+reduction of lignin and improved biomass 
+saccharification </p>
+
+<p>Lignin content was measured from the stem biomass of 
+senesced mature wild-type, ubiC, pobA and ubiC-pobA plants 
+using the Klason method. In comparison with the wild type, 
+lignin reductions of 31-37% were measured in the ubiC-pobA 
+lines, whereas no decrease of lignin content was observed in the 
+ubiC and pobA single lines (Fig. 5D). In addition, a reduction in 
+stem height at maturity was noticeable for all three ubiC-pobA 
+lines at late development stages compared with the single 
+transgenic lines and wild-type plants (Supplementary Fig. 
+S9). Lastly, using pyrolysis-gas chromatography (GC)/MS, we 
+determined that the monomeric composition of lignin was 
+altered in the pobA-ubiC lines, showing an increased S:G ratio 
+as a result of higher and lower relative amount of S and G units, 
+respectively (Table 1; Supplementary Table S5). </p>
+
+<p>A </p>
+
+<p>B </p>
+
+<p>COOH </p>
+
+<p>OH </p>
+
+<p>O </p>
+
+<p>O </p>
+
+<p>OH </p>
+
+<p>ubiC 
+pobA </p>
+
+<p>chorismate 
+p-hydroxybenzoate protocatechuate </p>
+
+<p>0 </p>
+
+<p>100 </p>
+
+<p>200 </p>
+
+<p>300 </p>
+
+<p>400 </p>
+
+<p>500 </p>
+
+<p>600 </p>
+
+<p>700 </p>
+
+<p>800 
+Protocatechuate 
+p-Hydroxybenzoate </p>
+
+<p>C </p>
+
+<p>nmol.g -1 
+fresh weight </p>
+
+<p>* </p>
+
+<p>* 
+* 
+* </p>
+
+<p>* 
+* </p>
+
+<p>* </p>
+
+<p>tub8 </p>
+
+<p>pobA </p>
+
+<p>ubiC 
+989 bp 
+483 bp 
+1040 bp </p>
+
+<p>D </p>
+
+<p>0 </p>
+
+<p>2 </p>
+
+<p>4 </p>
+
+<p>6 </p>
+
+<p>8 </p>
+
+<p>10 </p>
+
+<p>12 </p>
+
+<p>14 </p>
+
+<p>16 </p>
+
+<p>18 </p>
+
+<p>20 </p>
+
+<p>* 
+* 
+* </p>
+
+<p>Lignin content (% cell wall) </p>
+
+<p>Fig. 5 Characterization of transgenic Arabidopsis lines accumulating 
+protocatechuate. (A) Strategy used for the conversion of chorismate 
+into protocatechuate via p-hydroxybenzoate. (B) Detection by RT-
+PCR of ubiC and pobA transcripts using stem mRNA from 5-week-old 
+wild-type (WT), pobA, ubiC and ubiC-pobA transgenic lines. Tub8-
+specific primers were used to assess cDNA quality for each sample. 
+(C) p-Hydroxybenzoate and protocatechuate contents in stems from 
+5-week-old WT, pobA, ubiC and ubiC-pobA transgenic lines. Bars rep-
+resent the SE from four biological replicates (n = 4). Asterisks indicate 
+significant differences from the wild type using the unpaired Student's 
+t-test (*P &lt; 0.005). (D) Lignin content in senesced mature stems from 
+WT, pobA, ubiC and ubiC-pobA transgenic lines. Values in parentheses 
+are the SE from biological replicates (n = 13 for the WT, n = 4 for ubiC-
+pobA-1 and -2, n = 3 for ubiC-1 and -2, pobA-1 and -2, and ubiC-pobA-
+3). Asterisks indicate significant differences from the WT using the 
+unpaired Student's t-test (*P &lt; 0.001). </p>
+
+<p>Table 1 Lignin composition in senesced mature stems from wild-
+type (WT) and ubiC-pobA plants </p>
+
+<p>%H 
+%G 
+%S 
+S/G </p>
+
+<p>WT 
+4.4 (0.2) 
+60.4 (0.8) 
+35.2 (0.6) 
+0.58 </p>
+
+<p>ubiC-pobA-1 
+5.1 (0.0) 
+41.6 (0.3)* 
+53.3 (0.3)* 
+1.28* </p>
+
+<p>ubiC-pobA-2 
+5.0 (0.4) 
+42.6 (0.2)* 
+52.3 (0.5)* 
+1.23* </p>
+
+<p>ubiC-pobA-3 
+4.8 (0.4) 
+46.7 (0.1)* 
+48.4 (0.3)* 
+1.04* </p>
+
+<p>Values in parenthests are the SE from biological replicates (n = 7 for the WT, 
+n = 4 for ubiC-pobA-1 and -2, n = 3 for ubiC-pobA-3). 
+Asterisks indicate significant differences from the WT using the unpaired 
+Student's t-test (*P &lt; 0.001). 
+See also Supplementary Table S2. </p>
+
+
+
+<p>Plant Cell Physiol. 57(3): 568-579 (2016) doi:10.1093/pcp/pcw016 </p>
+
+<p>Saccharification assays on stem material were conducted to 
+evaluate the potential of our approach to reduce overall bio-
+mass recalcitrance and engineer forage and bioenergy crops. As 
+shown in Fig. 6, higher amounts of sugars were released from 
+the biomass of the three ubiC-pobA lines, which exhibited sac-
+charification improvements of 24-26% compared with the wild 
+type during a 96 h enzymatic hydrolysis. </p>
+
+<p>Discussion </p>
+
+<p>The substrate promiscuity of HCT was demonstrated by its 
+capacity to form p-coumaroyl conjugates using various ac-
+ceptors other than shikimate. This substrate flexibility appears 
+conserved between HCTs from different representatives of land 
+plants, occurring at least in one bryophyte and one lycophyte, 
+as well as in euphyllophytes including one gymnosperm, one 
+monocot angiosperm and two dicot angiosperms. Although 
+P. patens contains orthologs of all the genes required for the 
+synthesis of p-coumaryl and coniferyl alcohols (Xu et al. 2009), 
+the presence of lignified tissues has never been demonstrated in 
+this plant. We show here that P. patens possesses a bona fide 
+HCT, but its physiological role remains unclear. Although 
+PpHCT1 falls into the clade of known HCTs in the phylogenetic 
+tree of hydroxycinnamoyl-CoA-dependent BAHD transferases 
+(Supplementary Fig. S1), it may instead be involved in the 
+synthesis of alternative phenylpropanoid conjugates such as 
+chlorogenic acid (3-O-caffeoylquinic acid) which has been iden-
+tified in P. patens (Erxleben et al. 2012). Moreover, this is, to our 
+knowledge, the first demonstration of HCT activity for an 
+enzyme from Selaginella. However, its involvement in lignifica-
+tion remains questionable due to the presence in this plant of a 
+dual meta-hydroxylase (SmF5H), which can by-pass the enzym-
+atic steps catalyzed by C3 0 H and HCT (Weng et al. 2010). More 
+generally, BAHD acyltransferases from Selaginella could have a 
+role in the synthesis of phenolic esters other than p-coumaroyl 
+shikimate (Weng and Noel 2013). 
+Although the formation of p-coumaroyl shikimate occurs 
+via an ester linkage between p-coumaroyl-CoA and shikimate, </p>
+
+<p>these HCTs can also catalyze the formation of p-coumaroyl 
+conjugates via an amide bond, as exemplified with the use of 
+3-aminobenzoate as acceptor. Both ester and amide linkages 
+are possible for the formation of p-coumaroyl 3-hydroxyanthra-
+nilate and p-coumaroyl 5-hydroxyanthranilate, but only one 
+product was observed in our assays when these acceptors 
+were tested. For these two cases, an amide bond can be antici-
+pated, as previously determined for the p-coumarate conjugate 
+formed by CcHCT using 3-hydroxyanthranilate (Moglia et al. 
+2010). In this work, the apparent K m value observed for 
+PvHCT2a towards shikimate ($700 mM) is comparable with 
+the values observed for tobacco HCT (750 mM), which has 
+been genetically implicated in lignin biosynthesis (Hoffmann 
+et al. 2003), and for poplar HCT (895 mM; Kim et al. 2011), 
+but higher than the values reported for HCT from coffee (75 
+mM; Lallemand et al. 2012), sorghum (153 mM; Walker et al. 
+2013) and Coleus blumei (332 mM; Sander and Petersen 2011). 
+The slightly different structure of the new HCT acceptors 
+described in this study could influence their binding to the 
+active site of the enzyme and explain the higher apparent K m 
+values of HCT for these substrates compared with shikimate. 
+The catalytic mechanism of HCT has been elegantly 
+described previously by Walker et al. (2013). In their mutagen-
+esis experiments using shikimate as a substrate, the mutant 
+T384A-SbHCT (equivalent to Thr382 in PvHCT2a) showed 
+only 9% of the enzyme activity compared with wild-type 
+SbHCT (Walker et al. 2013). We therefore propose that the 
+loss of the C5 hydroxyl interaction with Thr382 in the 
+PvHCT2a-p-coumaroyl-CoA-protocatechuate complex af-
+fected the effective binding of protocatechuate, thus engender-
+ing a similar effect to the T384A mutation in SbHCT on the 
+turnover rate of the substrate. This is most probably the reason 
+why it was possible to capture crystallographically the substrate 
+PvHCT2a-p-coumaryl-CoA-protocatechuate ternary complex, 
+compared with the product state when shikimate was used in 
+soaking experiments. 
+Our goal was to use the substrate promiscuity of HCT to 
+reduce lignin. In this attempt, we generated Arabidopsis lines 
+that overproduce protocatechuate, a non-canonical acceptor 
+and competitive inhibitor of HCT in vitro. The engineered 
+plants accumulate approximatey 25-fold more protocatechu-
+ate than wild-type plants, and showed significant lignin re-
+ductions (31-37%) in biomass. Interestingly, transgenic lines 
+expressing the pobA gene alone accumulated approximately 
+1.8-fold more protocatechuate than wild-type plants presum-
+ably from the conversion of the endogenous pool of p-hydro-
+xybenzoate but showed no reduction of lignin content, 
+suggesting that a threshold amount of protocatechuate is 
+necessary to inhibit significantly HCT activity in vivo. Since 
+lignin is reduced in the protocatechuate-overproducing 
+plants, either the amount of p-coumaroyl protocatechuate 
+produced by HCT is too low to sustain lignin biosynthesis, 
+or p-coumaroyl protocatechuate is not metabolized further 
+in the lignin biosynthetic pathway. In particular, it is not 
+known whether C3 0 H can hydroxylate p-coumaroyl protoca-
+techuate, and whether CSE would cleave the putative result-
+ing p-caffeoyl protocatechuate. Neither p-coumaroyl </p>
+
+<p>0 </p>
+
+<p>50 </p>
+
+<p>100 </p>
+
+<p>150 </p>
+
+<p>200 </p>
+
+<p>0 
+10 
+20 
+30 
+40 
+50 
+60 
+70 
+80 
+90 
+100 </p>
+
+<p>WT 
+ubiC-pobA-1 
+ubiC-pobA-2 
+ubiC-pobA-3 </p>
+
+<p>Time (hours) </p>
+
+<p>Sugars (µg mg -1 </p>
+
+<p>biomass) </p>
+
+<p>* </p>
+
+<p>* </p>
+
+<p>* 
+* </p>
+
+<p>Fig. 6 Saccharification of biomass from mature senesced stems of the 
+wild type (WT) and ubiC-pobA transgenic lines. A 96 h time course of 
+sugars released from pre-treated biomass digested with cellulase is 
+shown. Values are means ± SE of six biological replicates (n = 6). 
+Asterisks indicate significant differences from the WT using the un-
+paired Student's t-test (P &lt; 0.005). </p>
+
+
+
+<p>A. Eudes et al. | Substrate promiscuity of HCT and lignin reduction </p>
+
+<p>protocatechuate nor putative p-caffeoyl protocatechuate 
+were detected in the metabolite extracts from ubiC-pobA 
+transgenic plants, possibly because of their conjugation to 
+other metabolites such as sugars, as was recently shown for 
+other lignin oligomers (Dima et al. 2015). 
+Our dual transgene strategy consists of a two-step conver-
+sion of chorismate into protocatechuate. Steady-state levels of 
+phenylalanine and salicylate, two metabolites derived from 
+chorismate, are not significantly changed in the ubiC, pobA 
+and ubiC-pobA transgenics compared with the wild type, sug-
+gesting that chorismate is not limiting in these lines, as previ-
+ously hypothesized in the case of tobacco plants that express 
+ubiC and show normal growth characteristics (Siebert et al. 
+1996, Viitanen et al. 2004). Therefore, the reduction of lignin 
+observed only in the ubiC-pobA lines (and not in the ubiC single 
+lines) is unlikely to be the consequence of phenylalanine deple-
+tion, although our data cannot rule out a possible slowing 
+down of the metabolic flux. In addition, the height reduction 
+observed in the ubiC-pobA lines at the mature stage is probably 
+a consequence of lignin reduction rather than drastic changes 
+in levels of salicylic acid, a metabolite whose overaccumulation 
+in some transgenic plants often results in dwarf phenotypes 
+(Rivas-San Vicente and Plasencia 2011). 
+In contrast to previous studies of plants in which HCT ac-
+tivity was down-regulated, the lignin composition of our trans-
+genic lines does not show any enrichment in H units, possibly 
+due to a lower degree of inhibition of activity and the consump-
+tion of p-coumaroyl-CoA by HCT for the formation of both 
+p-coumaroyl protocatechuate and p-coumaroyl shikimate. 
+Nevertheless, the increase of the S:G ratio in our transgenics, 
+which results from the decrease of G units in favor of an in-
+crease in S units, is a lignin feature predicted by metabolic flux 
+analysis in the case of HCT down-regulation, and was previously 
+observed in plants affected in HCT activity (Chen and Dixon 
+2007, Ziebell et al. 2010, Vanholme et al, 2013b, Wang et al. 
+2014, Eudes et al. 2015). In addition, analysis of HCT transcript 
+levels in the ubiC-pobA transgenic lines showed no major dif-
+ference compared with the wild type (Supplementary Fig. 
+S10), which is consistent with the hypothesis that protocatech-
+uate affects the activity of HCT rather than its expression in the 
+ubiC-pobA lines. 
+Engineering strategies for the overproduction of HCT non-
+canonical acceptors other than protocatechuate could be 
+developed as alternative approaches to reduce lignin. For ex-
+ample, plant lines could be engineered to express anthranilate 
+3-hydroxylase, 2,3-dihydroxybenzoate synthase/dehydrogen-
+ase, salicylate 5-hydroxylases, 3-aminobenzoate synthase or 3-
+hydroxybenzoate synthase for the accumulation of 3-hydro-
+xyanthranilate, 2,3-dihydroxybenzoate, 2,5-dihydroxybenzoate, 
+3-aminobenzoate or 3-hydroxybenzoate respectively, using the 
+metabolites anthranilate, isochorismate, salicylate, 3-dehy-
+droshikimate and chorismate as substrates (Gehring et al. 
+1997, Liu et al. 2010, Andexer et al. 2011, Hirayama et al. 
+2013, Zhang et al. 2013, Fang and Zhou 2014). It is interesting 
+to note that very low amounts of 2,3-and 2,5-dihydroxybenzo-
+ates could be detected in our metabolite extracts from wild-
+type plants ($10 nmol g -1 FW), whereas hydroxyanthranilates, </p>
+
+<p>3-hydroxybenzoate and 3-aminobenzoate were below the de-
+tection limit, and, to our knowledge, have never been measured 
+in plant extracts. With the exception of the occurrence of 
+the phytoalexin p-coumaroyl 5-hydroxyanthranilate in oats 
+(Collins 1989), p-coumaroyl conjugates of such phenolics 
+have never been reported. Lastly, although catechol and 
+hydroquinone are found in plants (Mageroy et al. 2012, 
+Rychlin´ska and Nowak 2012), no corresponding p-coumaroyl 
+esters have been described, maybe as a consequence of 
+poor HCT activity towards these diphenols (Supplementary 
+Fig. S6). 
+HCT seems to have appeared at the same time that plants 
+began colonizing land. It is unclear why such promiscuity has 
+been retained, and this question will require further study. 
+However, a strategy of exploiting this substrate promiscuity 
+of HCT offers a novel way to reduce lignin in plants. Because 
+this enzymatic activity appears to be conserved among land 
+plants, this strategy can be valuable to affect HCT activity in 
+bioenergy crops for which no HCT gene has been cloned or for 
+which multiple, functionally redundant copies are present. In 
+this respect, particular attention should be paid to the spatio-
+temporal activity of the transgene promoters employed for the 
+overproduction of HCT alternative substrates to limit possible 
+growth defects associated with lignin reduction as observed in 
+this study using Arabidopsis. Lastly, as we show here in the case 
+of protocatechuate overproduction, such an approach has the 
+potential to add value to plant biomass by increasing the 
+amount of valuable metabolites utilized in the bio-based chem-
+ical industry (Linger et al. 2014). </p>
+
+<p>Materials and Methods </p>
+
+<p>Cloning of HCTs and activity assays using yeast </p>
+
+<p>For the cloning of AtHCT and PpHCT1, total RNA (1 mg) from A. thaliana 
+seedlings and total RNA (5 mg) from P. patens protonemal tissue were extracted 
+using the Plant RNeasy extraction kit (Qiagen) and reverse-transcribed using 
+the Transcriptor First Strand cDNA Synthesis Kit (Roche Applied Science). The 
+cDNA preparations obtained were used to amplify AtHCT (GenBank accession 
+No. NP_199704.1/At5g48930) and PpHCT1 (http://www.cosmoss.org, acces-
+sion No. Pp3c2_29140V1.1; GenBank accession No. KU513965) using the oligo-
+nucleotides AtHCT-B1/AtHCT-B2 and PpHCT-B1/PpHCT-B2 (Supplementary 
+Table S6), respectively, for cloning into the Gateway pDONR221 entry vector 
+by BP recombination (Life Technologies). Gene sequences encoding for PtHCT6 
+(NCBI reference sequence XP_006368492.1), PvHCT2a (GenBank accession No. 
+AGM90558.1), PrHCT (GenBank accession No. ABO52899.1) and SmHCT (NCBI 
+reference sequence: XP_002991534.1), flanked with the attB1 (5 0 end) and attB2 
+(3 0 end) Gateway recombination sites, were synthesized for expression in yeast 
+(GenScript) and cloned into the Gateway pDONR221 entry vector by BP re-
+combination (Life Technologies). All six entry clones were LR recombined with 
+the pDRf1-4CL5-GW vector (Eudes et al. 2011) to generate the constructs 
+pDRf1-4CL5-AtHCT, pDRf1-4CL5-PtHCT6, pDRf1-4CL5-PvHCT2a, pDRf1-4CL5-
+PrHCT, pDRf1-4CL5-SmHCT, and pDRf1-4CL5-PpHCT1. 
+For HCT activity assays, the pDRf1-4CL5-HCT constructs and the control 
+pDRf1-4CL5 vector (Eudes et al. 2011) were transformed into the 
+Saccharomyces cerevisiae pad1 knockout (MATa his3D1 leu2D0 met15D0 
+ura3D0 Ápad1, ATCC 4005833) using the Frozen-EZ Yeast Transformation II 
+Kit 
+TM (Zymo Research Corporation) and selected on solid medium containing </p>
+
+<p>1 Â yeast nitrogen base (YNB) without amino acids (Difco 291940) supple-
+mented with 3% glucose and 1 Â dropout-uracil (CSM-ura; Sunrise Science 
+Products). Overnight cultures from single colonies were grown in 2 Â YNB </p>
+
+
+
+<p>Plant Cell Physiol. 57(3): 568-579 (2016) doi:10.1093/pcp/pcw016 </p>
+
+<p>medium without amino acids (Difco) supplemented with 6% glucose and 
+2 Â CSM-ura (Sunrise Science Products). Overnight cultures were used to in-
+oculate 4 ml of fresh medium at an OD 600 = 0.15. Substrates were added to the 
+medium 4 h later at a final concentration of 1 mM, and the cultures were grown 
+for 24 h; p-coumarate was used as the donor, and the various acceptors tested 
+(Sigma-Aldrich) are listed in Supplementary Fig. S1. For the detection of the p-
+coumaroyl conjugate products, an aliquot of the culture medium was collected, 
+cleared by centrifugation (20,000 Â g for 5 min at 4 C), mixed with an equal 
+volume of 50% (v/v) methanol-water and filtered using Amicon Ultra centri-
+fugal filters (3,000 Da MW cut-off regenerated cellulose membrane; EMD 
+Millipore) prior to HPLC-electrospray ionization-time-of-flight MS (HPLC-ESI-
+TOF MS) analysis. </p>
+
+<p>Phylogenetic analysis </p>
+
+<p>Multiple alignments on the full-length protein sequences were performed by 
+ClustalW. A phylogenetic tree was generated with MEGA6 (Tamura et al. 2013) 
+using the maximum likelihood method and default parameters. </p>
+
+<p>Heterologous expression, purification and activity 
+of PvHCT2a </p>
+
+<p>The pDONR221-PvHCT2a entry vector was LR recombined with the pDEST17 
+bacterial expression vector, which introduces an N-terminal 6 Â His tag (Life 
+Technologies). The construct was transferred into Rosetta 2 (DE3) chemically 
+competent E. coli (EMD Milipore), according to the manufacturer's instructions. 
+A single bacterial colony, grown on Luria-Bertani agar containing 100 mg ml -1 
+carbenicillin and 30 mg ml -1 chloramphenicol was used to inoculate a 5 ml 
+liquid culture supplemented with the same antibiotic concentrations and 
+grown overnight at 37 C. The overnight culture was used to inoculate a 0.5 
+liter Luria-Bertani culture at an OD 600 = 0.05 containing the same antibiotic 
+concentrations and grown at 37 C until it reached an OD 600 = 0.8-1.0. 
+Expression was induced by the addition of 0.5 mM isopropyl-b-D-thiogalacto-
+pyranoside (IPTG), and the culture was transferred at 18 C and grown for 24 h. 
+The recombinant protein was affinity purified using a HIS-Select HF Nickel 
+Affinity Gel (Sigma-Aldrich) according to the manufacturer's instructions and 
+buffer-exchanged with 40 mM Tris buffer pH 7.5 using Amicon Ultra centrifugal 
+filters (30,000 Da MW cut-off regenerated cellulose membrane; EMD Millipore). 
+Purity and integrity were verified by SDS-PAGE, and the recombinant protein 
+was stored atÀ20 C in 40 mM Tris buffer pH 7.5, containing 10% (v/v) glycerol. 
+In vitro transferase assays were performed at 30 C for 15 min in 40 ml 
+reactions containing 50 mM Tris buffer pH 7.5, 1 mM dithiothreitol (DTT), 
+400 mM p-coumaroyl-CoA (MicroCombiChem e.K.), 120 ng of recombinant 
+PvHCT2a protein and 1 mM of various acyl acceptors. Similar conditions 
+were used to obtain substrate saturation curves except that the incubation 
+time was reduced to 2 min and the concentration of the acyl acceptors varied 
+from 0 to 6.4 or 12.8 mM. For the competitive inhibition experiment, assays 
+were performed at 30 C for 15 min in 40 ml reactions containing 50 mM Tris 
+buffer pH 7.5, 400 mM p-coumaroyl-CoA, 400 mM shikimate and 120 ng of 
+recombinant PvHCT2a protein without (control) or with 0.4-1.6 mM of various 
+acyl acceptors. All reactions were terminated by adding 40 ml of 50% (v/v) cold 
+methanol-water and kept at -20 C until HPLC-ESI-TOF MS analysis. 
+For structural study, a PvHCT2a sequence was synthesized for expression in 
+E. coli (GenScript), amplified using the oligonucleotides PvHCT2a-infus-fw/ 
+PvHCT2a-infus-rv (Supplementary Table S6) and cloned into a BamHI/ 
+NdeI-digested pSKB3 vector using the In-Fusion HD cloning kit (Clontech). 
+The construct was transferred into BL21 (DE3) chemically competent E. coli 
+(EMD Milipore), according to the manufacturer's instructions. A single bacterial 
+colony, grown on Luria-Bertani agar containing 50 mg ml -1 kanamycin was used 
+to inoculate a 50 ml liquid culture supplemented with the same antibiotic 
+concentrations and grown overnight at 37 C. The overnight culture was used 
+to inoculate a 3 liter Luria-Bertani culture containing the same antibiotic con-
+centration and grown at 37 C until it reached an OD 600 = 0.8. Expression was 
+induced by the addition of 0.5 mM IPTG, and the culture was transferred at 18 C 
+and grown for 24 h. Cell paste was lysed in 50 mM Tris-HCl pH 8.0, 300 mM NaCl 
+and 30 mM imidazole, and loaded onto a 5 ml Histrap column on an AKTA FPLC. 
+The column was washed to baseline prior to elution with a gradient of 0-100% 
+buffer 50 mM Tris-HCl pH 8.0, 300 mM NaCl and 500 mM imidazole in 20 </p>
+
+<p>column volumes. The cleanest elution fractions were pooled and dialyzed back 
+into the lysis buffer with the addition of TEV protease to remove the 6His-tag. The 
+cleaved material was applied again through a 5 ml Histrap column on the AKTA 
+FPLC to separate the cleaved PvHCT2a from other components. The purified 
+PvHCT2a was then dialyzed into 50 mM Tris-HCl pH 8.0 and 20 mM NaCl prior 
+to concentration for crystallographic studies. </p>
+
+<p>Crystallization of PvHCT2a in complex with ligands </p>
+
+<p>The final concentration of PvHCT2a used for crystallization trials was 
+12 mg ml -1 . The PvHCT2a apoenzyme sample was screened using the sparse 
+matrix method (Jancarik and Kim 1991) with a Phoenix Robot (Art Robbins 
+Instruments) and the following crystallization screens: Crystal Screen, SaltRx, 
+PEG/Ion, Index and PEGRx (Hampton Research) and Berkeley Screen 
+[Lawrence Berkeley National Laboratory (LBNL)]. Crystals of PvHCT2a apoen-
+zyme were found in 0.2 M lithium sulfate, 0.1 M Tris-HCl pH 8.5 and 25% (w/v) 
+polyethylene glycol 3,350. Crystals of PvHCT2a in complex with p-coumaroyl-
+CoA-shikimate and p-coumaroyl-CoA-protocatechuate were obtain by soaking 
+PvHCT2a apoenzyme crystals using 5 mM p-coumaroyl-CoA and 5 mM shiki-
+mate or protocatechuate solutions for 3 h. Crystals of PvHCT2a apoenzyme were 
+obtained after 1 d by the sitting-drop vapor diffusion method, with the drops 
+consisting of a mixture of 0.5 ml of protein solution and 0.5 ml of reservoir solution. </p>
+
+<p>X-ray data collection and structure determination </p>
+
+<p>The crystals of PvHCT2a-p-coumaroyl-CoA-shikimate and PvHCT2a-p-cou-
+maroyl-CoA-protocatechuate were placed in a reservoir solution containing 
+20% (v/v) glycerol, then flash-frozen in liquid nitrogen. The X-ray data sets for 
+PvHCT2a-p-coumaroyl-CoA-shikimate and PvHCT2a-p-coumaroyl-CoA-
+protocatechuate were collected at the Berkeley Center for Structural 
+Biology beamlines 8.2.1 and 8.2.2 of the Advanced Light Source at LBNL. 
+The diffraction data were recorded using an ADSC-Q315r detector. The 
+data sets were processed using the program <rs id="software-9" type="software">HKL-2000</rs> (<rs corresp="#software-9" type="creator">Otwinowski and Minor</rs> 1997). 
+The PvHCT2a-p-coumaroyl-CoA-shikimate structure was determined 
+by the molecular-replacement method with the program <rs id="software-6" type="software">PHASER</rs> (<rs corresp="#software-6" type="creator">McCoy et. al</rs>. 2007) using the SbHCT structure (PDB ID 4KE4) (Walker et al. 2013) as a 
+search model. The PvHCT2a-p-coumaroyl-CoA-shikimate structure was 
+used as a search model to solve the PvHCT2a-p-coumaroyl-CoA-protoca-
+techuate structure. Structure refinement was performed using the phenix.re-
+fine program (Afonine et al. 2012). Manual rebuilding using <rs id="software-7" type="software">COOT</rs> (<rs corresp="#software-7" type="creator">Emsley and Cowtan</rs> 2004) and the addition of water molecules allowed construction 
+of the final model. Five percent of the data were randomly selected for cross-
+validation. The final model of PvHCT2a-p-coumaroyl-CoA-shikimate and 
+PvHCT2a-p-coumaroyl-CoA-protocatechuate have R and R free factors of 
+15.9%/18.6% and 17.9%/20.5%, respectively. Root-mean-square deviation dif-
+ferences from ideal geometry for bond lengths, angles and dihedrals were 
+calculated with <rs id="software-4" type="software">Phenix</rs> (<rs corresp="#software-4" type="creator">Adams et al.</rs>. 2010). The overall stereochemical qual-
+ity of the final models was assessed using the program <rs id="software-10" type="software">MolProbity</rs> (<rs corresp="#software-10" type="creator">Davis et al.</rs>. 2007). </p>
+
+<p>Plant material and growth conditions </p>
+
+<p>Seeds of wild-type and transgenic A. thaliana (ecotype Columbia, Col-0) lines 
+were germinated directly on soil. Growing conditions were 150 mmol m -2 s -1 , 
+22 C, 60% humidity and 14 h of light per day. Selection of T 2 transgenic plants 
+and identification of homozygous lines, for which the T 3 progeny were not 
+segregating on antibiotic, was made on Murashige and Skoog vitamin medium 
+(PhytoTechnology Laboratories), supplemented with 1% sucrose, 0.8% agar and 
+50 mg ml -1 kanamycin. </p>
+
+<p>HCT activity assays in Arabidopsis </p>
+
+<p>Total proteins were extracted from Arabidopsis stems as previously described 
+(Vanholme et al. 2013b). Briefly, stems of 5-week-old wild-type plants were frozen 
+in liquid nitrogen and ground into a fine powder. Total proteins from approxi-
+mately 500 mg of stem powder were extracted at 4 C with 1 ml of extraction 
+buffer consisting of 20 mM Tris-HCl pH 7.5 containing 10 mM DTT, 15% glycerol, 
+1% insoluble polyvinylpolypyrrolidone (PVPP) and 1 Â protease inhibitor cocktail 
+(Roche). Total proteins were quantified using the Bradford method (Bradford </p>
+
+
+
+<p>A. Eudes et al. | Substrate promiscuity of HCT and lignin reduction </p>
+
+<p>1976). HCT activity assays were performed at 30 C for 30 min in 40 ml reactions 
+containing 50 mM Tris-HCl pH 7.5, 400 mM p-coumaroyl-CoA, 400 mM shikimate 
+and 12 mg of total proteins without (control) or with 400 mM of various acyl 
+acceptors. All reactions were terminated by adding 40 ml of 50% (v/v) cold 
+methanol-water and kept at -20 C until HPLC-ESI-TOF MS analysis. </p>
+
+<p>Construction of binary vectors </p>
+
+<p>Generation of the pTKan-pCesa4::GWR1R2 destination vector was previously 
+described (Eudes et al. 2012). To generate the pTKan-pCesa4::schl-ubiC con-
+struct, a gene sequence encoding ubiC from E. coli (GenBank accession No. 
+CAA47181.1) containing the encoding sequence of a plastid targeting signal 
+(SCHL; Lebrun et al. 1992) and flanked with the Gateway attB1 (5 0 end) and 
+attB4 (3 0 end) recombination sites was synthesized for expression in 
+Arabidopsis (Supplementary Data S1) (GenScript). The sequence was ampli-
+fied by PCR to replace the Gateway attB4 (3 0 end) by the attB2 recombin-
+ation site and cloned into the Gateway pDONR221-P1P2 entry vector by BP 
+recombination (Life Technologies). A sequence-verified entry clone was LR 
+recombined with the pTKan-pCesa4::GWR1R2 vector to generate the pTKan-
+pCesa4::schl-ubiC construct. 
+Generation of the pTKan-pC4H::schl-GWR3R2 destination vector was pre-
+viously described (Eudes et al. 2015). To generate the pTKan-pC4H::schl-pobA 
+construct, a gene sequence encoding pobA from P. aeruginosa (GenBank ac-
+cession No. AAG03636.1) flanked with the Gateway attB3 (5 0 end) and attB2 (3 0 
+end) recombination sites was synthesized for expression in Arabidopsis 
+(Supplementary Data S1) (GenScript) and cloned into the Gateway 
+pDONR221-P3P2 entry vector by BP recombination (Life Technologies). An 
+entry clone was LR recombined with the pTKan-pC4H::schl-GWR3R2 vector 
+to generate the pTKan-pC4H::schl-pobA construct. 
+A multisite LR recombination (Life Technologies) using the pDONR221-P1-
+schl::ubiC-P4, pDONR221-L4R-tg7-pC4H::schl-L3R (Eudes et al. 2015) and 
+pDONR221-P3-pobA-P2 entry vectors and the pTKan-pCesa4::GWR1R2 destin-
+ation vector was performed to generate the pTKan-pCesa4::schl-ubiC-
+pC4H::schl-pobA construct. 
+All constructs were introduced into wild-type (Col-0) Arabidopsis plants via 
+Agrobacterium-mediated transformation (Bechtold and Pelletier 1998). </p>
+
+<p>RNA extraction and RT-PCR </p>
+
+<p>Total RNA (1 mg) were extracted from stems of 5-week-old wild-type and T 3 
+homozygous transgenic lines using the Plant RNeasy extraction kit (Qiagen) 
+and reverse-transcribed using the Transcriptor First Strand cDNA Synthesis Kit 
+(Roche Applied Science). The cDNA preparations obtained were quality-
+controlled using tub8-specific oligonucleotides, and the pobA, ubiC and AtHCT 
+transcripts were detected using specific oligonucleotides listed in Supplementary 
+Table S6. For the PCR, OneTaq (New England Biolabs) was used according to the 
+manufacturer's instructions, with 1 min of elongation time and 60 C for the 
+annealing temperature. Thirty (for pobA and ubiC expression) or 25 (for AtHCT 
+expression) PCR cycles were used to amplify the DNA fragments. </p>
+
+<p>Plant metabolite extraction </p>
+
+<p>Arabidopsis stems of 6-week-old wild-type and T 3 homozygous transgenic lines 
+were collected in liquid nitrogen and stored at -80 C until further utilization. 
+Prior to metabolite extraction, collected stems were pulverized in liquid nitro-
+gen. For extraction of methanol-soluble metabolites, 200-300 mg of frozen 
+stem powder was mixed with 1 ml of 80% (v/v) methanol-water and shaken 
+at 1,400 r.p.m. for 15 min at 70 C. The mixture was cleared by centrifugation for 
+5 min at 20,000 Â g. This step was repeated four times. Extracts were pooled 
+and cleared once more by centrifugation (5 min, 20,000 Â g), mixed with 2 ml of 
+analytical grade water and filtered using Amicon Ultra centrifugal filters 
+(10,000 Da MW cut-off regenerated cellulose membrane; EMD Millipore). 
+Phenylalanine was quantified in the filtered extracts using HPLC-ESI-TOF MS 
+analysis. For measurement of 4-hydroxybenzoate, protocatechuate and salicylic 
+acid, an aliquot of the filtered extracts was dried under vacuum, resuspended 
+with 1 N HCl and incubated at 95 C for 3 h. The mixture was subjected to three 
+ethyl acetate partitioning steps. Ethyl acetate fractions were pooled, dried 
+in vacuo and resuspended in 50% (v/v) methanol-water prior to HPLC-ESI-
+TOF MS analysis. </p>
+
+<p>Metabolite analyses </p>
+
+<p>Metabolites were analyzed using HPLC-ESI-TOF MS as previously described 
+(Eudes et al. 2013, Eudes et al. 2015). Protocatechuate, 4-hydroxybenzoate, 
+phenylalanine, and salicylic acid were quantified via 10-point calibration 
+curves of authentic standard compounds for which the R 2 coefficients 
+were ! 0.99. For the identification of the p-coumaroyl conjugates, the mea-
+sured masses agreed with the expected theoretical masses within &lt; 5 p.p.m. 
+mass error. </p>
+
+<p>Lignin content and composition </p>
+
+<p>The biomass from senesced mature stems of wild-type plants and T 3 homozy-
+gous transgenic lines was used to determine lignin content and composition. 
+Soluble extracts from stem biomass samples were extracted sequentially by 
+sonication (20 min) with 80% ethanol (three times), acetone (once), chloro-
+form-methanol (1 : 1, v/v, once) and acetone (once). The standard NREL bio-
+mass protocol was used to measure the lignin content (Sluiter et al. 2008). The 
+chemical composition of lignin was analyzed by pyrolysis-GC/MS as previously 
+described (Del Rio et al. 2012, Eudes et al. 2015). </p>
+
+<p>Cell wall pretreatments and saccharification </p>
+
+<p>Ball-milled senesced mature stems (10 mg) were mixed with 340 ml of NaOH 
+(0.25%, w/v), shaken at 1,400 r.p.m. (30 C, 30 min) and autoclaved at 120 C for 
+1 h for dilute alkali pre-treatment. Saccharification was initiated by adding 650 
+ml of 100 mM sodium citrate buffer pH 5.0 containing 80 mg ml -1 tetracycline 
+and 1% (w/w) Cellic CTec2 cellulase (Novozymes). At t = 0 and after 24, 48, 72 
+and 96 h of incubation at 50 C with shaking (800 r.p.m.), samples were cen-
+trifuged (20,000 Â g, 2 min) and 10 ml of the supernatant was collected for 
+measurement of reducing sugars using the 3,5-dinitrosalicylic acid assay and 
+glucose solutions as standards (Miller 1959). </p>
+
+<p>Data deposition </p>
+
+<p>The atomic co-ordinates and structure factors of PvHCT2a-p-coumaryl-CoA-
+shikimate and PvHCT2a-p-coumaryl-CoA-protocatechuate complexes have 
+been deposited in the Protein Data Bank, with PDB ID codes 5FAL and 
+5FAN, respectively. </p>
+
+<p>Supplementary data </p>
+
+<p>Supplementary data are available at PCP online. </p>
+
+<p>Funding </p>
+
+<p>This work was part of the DOE Joint BioEnergy Institute (http:// 
+www.jbei.org) supported by the U. S. Department of Energy, 
+Office of Science, Office of Biological and Environmental 
+Research, through contract DE-AC02-05CH11231 between 
+Lawrence Berkeley National Laboratory and the U.S. 
+Department of Energy. The Berkeley Center for Structural 
+Biology is supported in part by the National Institutes of 
+Health, National Institute of General Medical Sciences. The 
+Advanced Light Source is supported by the Director, Office of 
+Science, Office of Basic Energy Sciences, of the U.S. Department 
+of Energy under Contract No. DE-AC02-05CH11231. The 
+United States Government retains and the publisher, by accept-
+ing the article for publication, acknowledges that the United 
+States Government retains a non-exclusive, paid-up, irrevoc-
+able, world-wide license to publish or reproduce the published 
+form of this manuscript, or allow others to do so, for United 
+States Government purposes. </p>
+
+
+
+<p>Plant Cell Physiol. 57(3): 568-579 (2016) doi:10.1093/pcp/pcw016 </p>
+
+<p>Acknowledgements </p>
+
+<p>The authors thank Noppadon Sathitsuksanoh for assistance 
+with the pyrolysis-GC/MS, Tess Scavuzzo-Duggan for providing 
+P. patens protonemal tissue, Dr. Nigel W. Moriarty for helpful 
+analysis of the ligand geometry and restraints, Novozymes for 
+providing Cellic CTec2, and Sabin Russell for editing this manu-
+script. We are also grateful to the staff of the Berkeley Center for 
+Structural Biology at the Advanced Light Source of Lawrence 
+Berkeley National Laboratory. </p>
+
+<p>Disclosures </p>
+
+<p>J.D.K. has financial conflicts of interest in Amyris, LS9, and Lygos. 
+D.L. has financial conflicts of interest in Afingen. All other au-
+thors have no conflicts of interest to declare. </p>
+
+
+
+
+
+<p>A. Eudes et al. | Substrate promiscuity of HCT and lignin reduction </p>
+
+
+
+
+
+<p>Plant Cell Physiol. 57(3): 568-579 (2016) doi:10.1093/pcp/pcw016 </p>
+
+</text></tei>

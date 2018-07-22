@@ -1,0 +1,793 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC1540729" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:26+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>ABSTRACT </p>
+
+<p>We demonstrate the specific identification of single 
+nucleotide polymorphism (SNP) responsible for 
+rifampicin resistance of Mycobacterium tuberculo-
+sis applying fluorescently labeled DNA-hairpin 
+structures (smart probes) in combination with 
+single-molecule fluorescence spectroscopy. Smart 
+probes are singly labeled hairpin-shaped oligonu-
+cleotides bearing a fluorescent dye at the 5 0 end that 
+is quenched by guanosine residues in the comple-
+mentary stem. Upon hybridization to target sequen-
+ces, a conformational change occurs, reflected in a 
+strong increase in fluorescence intensity. An excess 
+of unlabeled ('cold') oligonucleotides was used to 
+prevent the formation of secondary structures in the 
+target sequence and thus facilitates hybridization of 
+smart probes. Applying standard ensemble fluores-
+cence spectroscopy we demonstrate the identifica-
+tion of SNPs in PCR amplicons of mycobacterial 
+rpoB gene fragments with a detection sensitivity 
+of 10 À8 M. To increase the detection sensitivity, 
+confocal fluorescence microscopy was used to 
+observe fluorescence bursts of individual smart 
+probes freely diffusing through the detection vol-
+ume. By measuring burst size, burst duration and 
+fluorescence lifetime for each fluorescence burst 
+the discrimination accuracy between closed and 
+open (hybridized) smart probes could be substan-
+tially increased. The developed technique enables 
+the identification of SNPs in 10 À11 On a global scale, infectious diseases are the most frequent 
+cause of death. A growing spectrum of so called opportunistic 
+microorganisms and the notorious tendency of microbes to 
+develop resistance patterns against anti-infective drugs (i.e. 
+antibiotics) cause a rapidly growing challenge for routine 
+diagnostic services. A number of methods are available in 
+order to test for antimicrobial susceptibility. The most widely 
+used techniques are culture-based while novel techniques 
+take advantage of specific molecular detection of resistance 
+determinants. Determination of antimicrobial resistance 
+using culture-based methods may be sufficiently fast for 
+rapidly growing microorganisms. However, the discrimi-
+nation between resistant and wild type slow growers, such 
+as Mycobacterium tuberculosis, will benefit remarkably 
+from molecular methods. Rapid, reliable, economic and 
+highly sensitive DNA detection methods have thus become 
+increasingly important in many fields, including health care, 
+environmental studies, physical and biochemical research. 
+Today, molecular methods already play an important role 
+in early-stage diagnosis of cancer diseases, diagnostic of 
+viral diseases (e.g. HIV infections), laboratory test for the 
+confirmation of tuberculosis and fast detection of antimicro-
+bial resistance mechanisms (1-5). The molecular methods 
+currently available are, however, poorly standardized (many 
+of them being in house methods). Furthermore, sensitivity 
+is still an important issue as these available methods need 
+amplification of the specific target in combination with down-
+stream methods. Consequently, there is a growing interest in 
+diagnostic methods that enable the detection of very small 
+amounts of target DNA. 
+Current state of the art routine diagnostics constitutes 
+amplification of the target sequence by PCR or related tech-
+niques that increase the concentrations of target sequence </p>
+
+<p>*To whom correspondence should be addressed. Tel: +49 622 154 5044; Fax: +49 622 154 5050; Email: knemeyer@single-molecule-spectroscopy.de </p>
+
+<p>The authors wish it to be known that, in their opinion, the first two authors should be regarded as joint First Authors </p>
+
+<p>Ó 2006 The Author(s). 
+This is an Open Access article distributed under the terms of the Creative Commons Attribution Non-Commercial License (http://creativecommons.org/licenses/ 
+by-nc/2.0/uk/) which permits unrestricted non-commercial use, distribution, and reproduction in any medium, provided the original work is properly cited. </p>
+
+<p>Nucleic Acids Research, 2006, Vol. 34, No. 13 e90 
+doi:10.1093/nar/gkl495 </p>
+
+<p>prior to analysis. The amplified DNA is hybridized to immo-
+bilized complementary oligonucleotides and hybridization 
+between target sequence and probe is visualized by use of 
+chromogenic techniques (e.g. GenoType Mycobacterium 
+direct kit or the GenoType MTBDR kit, Hain Lifescience, 
+Nehren, Germany). In contrast to heterogeneous assay for-
+mats, homogeneous assays enable the detection of specific 
+DNA sequences without washing or separation steps. One 
+approach uses a probe consisting of a short fluorescently 
+labeled oligonucleotide complementary to the target sequence 
+and fluorescence correlation spectroscopy (FCS) to monitor 
+hybridization to the target sequence by an increase in diffu-
+sion time or a change in fluorescence polarization (6,7). 
+Other assays are based on two dye-labeled oligonucleotides 
+that form a fluorescence resonance energy transfer (FRET)-
+pair which disappears upon hybridization of a probe oligo-
+nucleotide to the target sequence (8). Generally, single 
+nucleotide polymorphism (SNP) analysis is performed using 
+commercially available template directed dye terminator 
+incorporation (TDI) (9) or the TaqMan assay (10). Alter-
+natively, the ligase detection reaction (LDR) assay can be 
+used for identification of SNPs (11). Here two oligonu-
+cleotides that hybridize in direct neighborhood are ligated if 
+they perfectly match the target DNA. Applying ensemble 
+fluorescence spectroscopy these standard methods exhibit 
+detection limits in the micro-to nanomolar range. 
+Recent methods like the molecular beacons developed by 
+Tyagi and Kramer (12,13) use probes that report the presence 
+of a specific DNA sequence by an increase in fluorescence 
+intensity. These probes are based on hairpin-shaped oligo-
+nucleotides labeled with a fluorescent dye and a quenching 
+moiety. The loop sequence of the hairpin probe is comple-
+mentary to the target DNA. Upon hybridization to the target, 
+fluorescence quenching is reduced owing to the formation of 
+the thermodynamically favored double helix. Molecular 
+beacons can be used for SNP analysis in the nanomolar 
+range under optimized conditions (14). Instead of using 
+organic quencher molecules like DABCYL or the more effec-
+tive black hole quencher (BHQ) (15), also gold nanoparticles 
+have been successfully applied (16). The major advantage of 
+these types of self-quenched probes is their application in 
+homogeneous DNA assays because they do not require any 
+washing or separation step and they enable online monitoring 
+of hybridization kinetics (17-19). 
+Recently, an alternative technique for specific detection of 
+target sequences was introduced that takes advantage of the 
+fact that several oxazine and rhodamine derivatives are selec-
+tively quenched by the DNA base guanine (20-26). The 
+method uses the low oxidation potential of the DNA base 
+guanine to efficiently quench the fluorescence of suited 
+fluorophores via photoinduced electron transfer upon contact 
+formation (26). These so-called smart probes (22) are rela-
+tively easy to design because only a single labeling step is 
+required and they exhibit a free terminus for further modifica-
+tion of the hairpin, e.g. for immobilization on a solid support 
+without further chemical modifications in the loop (Figure 1) 
+(24). With careful design of these conformational flexible 
+DNA probes and the selection of appropriate fluorophores, 
+efficient and highly sensitive DNA-hairpins can be synthe-
+sized that increase fluorescence intensity up to 20-fold upon 
+specific hybridization to target sequences (23). Applying </p>
+
+<p>smart probes in time-resolved single molecule fluorescence 
+spectroscopy measurements, we demonstrated a detection 
+limit for synthetic target sequences well below the nanomolar 
+range (22). 
+In the present work, we demonstrate the identification of 
+SNPs in PCR amplified subgenic fragments of the rpoB 
+gene (which codes for the DNA dependent RNA polymerase) 
+of M.tuberculosis using smart probes in homogeneous assays. 
+As proof of principle we investigated a mutation that causes 
+rifampicin resistance in Mycobacteria. Here, displacement of 
+an adenine by a thymine residue (GAC ! GTC) at position 
+nt 1322 of the rpoB gene causes an amino acid substitution in 
+the protein sequence and induces rifampicin resistance. The 
+particular mutation chosen is one of the most common ones 
+and serves as model to optimize the described detection tech-
+nique. Rifampicin resistance may, however, as well be caused 
+by other mutations. The current literature lists $90 different 
+mutations, mainly within a short 81 bp fragment of the gene 
+(27-30). 
+In contrast to the detection of synthetic target sequences 
+using DNA-hairpin probes, the detection of mutations in 
+amplified target samples, i.e. PCR amplicons, is more compli-
+cated because of the formation of secondary structures (25). 
+In order to reduce the effect of secondary structures in the 
+target sequence we used an excess of flanking 'cold' oligonu-
+cleotides to guarantee the accessibility of the target sequence 
+for hybridization of the smart probe. Applying confocal 
+single-molecule fluorescence spectroscopy in combination 
+with multiparameter analysis we demonstrate the identifi-
+cation of SNP in 10 À11 M solutions of PCR amplicons 
+from M.tuberculosis in only 100 s. </p>
+
+<p>MATERIALS AND METHODS </p>
+
+<p>Synthesis and spectroscopic characteristics of 
+smart probes </p>
+
+<p>All oligonucleotides were purchased from IBA (, 
+Germany). For the smart probe-WT (wild type) and for the 
+smart probe-M (mutant) the oligonucleotides CCC TCT 
+GGT CCA TGA ATT GAG GG and CCC TCT GGA CCA 
+TGA ATT GAG GG were modified at their 5 0 end using </p>
+
+<p>Figure 1. Principle of operation of smart probes. The fluorophore is attached 
+to the 5 0 end of the oligonucleotide and quenched by guanosine residues in the 
+complementary stem. Hybridization to the target sequence forces the stem 
+apart and completely restores the fluorescence because efficient quenching of 
+the fluorophore by guanosine residues requires contact formation. </p>
+
+<p>e90 Nucleic Acids Research, 2006, Vol. 34, No. 13 </p>
+
+<p>
+C 6 -amino-linker. For fluorescence labeling the oligo-
+nucleotides were mixed in carbonate buffer (0.1 M, pH 8.5) 
+with a 10-fold excess of the N-hydroxysuccinimidyl ester 
+of ATTO655 (Atto-Tec GmbH, Siegen, Germany). The reac-
+tion solution was incubated for 12 h at room temperature 
+before the product was finally purified by HPLC (Hewlett-
+Packard, , Germany) using a reversed-phase 
+column (Knauer, Berlin, Germany) with octadecylsilanehy-
+persil C18. A linear gradient (20 min) from 0 to 75% acetoni-
+trile containing 0.1 M triethylammoniumacetat was used for 
+separation. All fluorescence spectra and temperature profiles 
+were obtained from a Cary Eclipse fluorescence spectrometer 
+(Varian, Darmstadt, Germany) and 50 ml-cuvettes. Absorp-
+tion spectra were measured on a Cary 500 UV-Vis-NIR 
+spectrometer (Varian, Darmstadt, Germany) using standard 
+quartz cuvettes with an optical pathway of 10 mm. Ensemble 
+fluorescence lifetime measurements were carried out with an 
+IBH spectrometer (model 5000MC, Glasgow, Scotland) using 
+the technique of time-correlated single-photon counting 
+(TCSPC). All measurements were performed at pH 7.0 in 
+phosphate-buffered saline (PBS) containing 140 mM NaCl. 
+To exclude polarization effects, fluorescence was observed 
+under magic angle (54.7 ) conditions. Typically, 5000 photon 
+counts were collected in the maximum channel using 2056 
+channels. The decay parameters were determined by least-
+square deconvolution, and their quality was judged by the 
+reduced c 2 values and the randomness of the weighted resi-
+duals. In case that a monoexponential model was inadequate 
+to describe the measured decay, a multiexponential model 
+was used to fit the decay (Equation 1), </p>
+
+<p>IðtÞ ¼ Ið0Þ 
+X 
+a i t i ‚ 
+1 </p>
+
+<p>where a i are the pre-exponential factors that describe the ratio 
+of the excited species and t i denote their lifetimes. </p>
+
+<p>Preparation of the PCR-products </p>
+
+<p>PCR was carried out applying standard protocols. Briefly, 
+primers Tr8 (TGCACGTCGCGGACCTCCA) and Tr9 
+(TCGCCGCGATCAAGGAGT) were used in a concentration 
+of 5 pmol/ml in final reaction volumes of 100 ml. DNA poyl-
+merase and PCR reagents were obtained from MBI Fermen-
+tas (St Leon Rot, Germany). The thermal cycling profile 
+consisted of 95 C (denaturation for 60 s), 57 C (primer 
+annealing for 60 s) and 72 C (extension for 60 s). PCR 
+products were checked for the expected length in 2% agarose 
+gels. Purified amplicons were used for cycle sequencing 
+applying standard protocols where reagents were obtained 
+from Applied Biotech, , Germany. Sequence anal-
+ysis was done on an ABI Prism 310 analyzer. Only amplicons 
+with verified sequence (i.e. absence or presence of the resis-
+tance conferring mutation) were used for hybridization 
+experiments. Secondary structures of the PCR amplicons 
+were calculated using mfold (31). The program uses nearest-
+neighbor energy rules to estimate the free energies of possible 
+secondary structures of a given DNA sequence. </p>
+
+<p>Hybridization of smart probes to target DNA amplicons </p>
+
+<p>For ensemble measurements the respective smart probe was 
+mixed in PBS (pH 7.0) containing 140 mM NaCl with a 
+10-fold excess of target DNA (artificial oligonucleotides or </p>
+
+<p>PCR amplicons) resulting in a final concentration of the 
+smart probe of 1 · 10 À8 M whereas the concentration of 
+the target DNA was 1 · 10 À7 M. Before addition of the 
+PCR amplicons it was denaturated for 10 min at 97 C and 
+chilled on ice. The mixed solutions were heated to 65 C 
+and slowly cooled down to 25 C with a gradient of 0.4 C 
+per minute. Samples were prepared in the same way for 
+single-molecule experiments, but the concentration of the 
+smart probes was 5 · 10 À10 M. The samples were transferred 
+onto a microscope slide with a small depression and covered 
+by a cover slide. </p>
+
+<p>Single molecule spectroscopy data analysis </p>
+
+<p>The experimental setup for single-molecule measurements is 
+based on a standard inverse fluorescence microscope 
+(Axiovert 100TV, Zeiss, Germany) and is described in 
+more detail elsewhere (22,32). Briefly, a pulsed diode laser 
+emitting light at 635 nm with a repetition rate of 80 MHz 
+and a pulse duration of &lt;100 ps full width at half-maximum 
+(PDL800B, Picoquant, Berlin, Germany) served as an excita-
+tion source. Passing an excitation filter (639DF9, Omega 
+Optics, Brattleboro, VT) the collimated laser beam was cou-
+pled into an oil-immersion objective (100·, NA ¼ 1.4, 
+Nikon, Japan) by a dichroic beam splitter (645DMLP; 
+Omega Optics, Brattleboro, VT). The average laser power 
+was adjusted to 600 mW at the sample. Fluorescence light 
+was collected with the same objective and focused through 
+the TV outlet of the microscope onto a 100 mm pinhole. 
+Fluorescence light passing through the pinhole was filtered 
+by a longpass filter (650 nm) and focused onto the active 
+area of an avalanche photodiode (AQR-14, EG&amp;G, Canada). 
+The detector signal was registered by a PC plug-in card for 
+time-correlated single-photon counting (TCSPC) (SPC-630, 
+Becker&amp;Hickl, Berlin, Germany). The photons recorded on 
+the TCSPC card were summed into 1 ms time bins to gene-
+rate multi-channel-scalar (MCS) traces (Figure 2). To analyze 
+the MCS-traces, a peak recognition filter (Burst scout, 
+Atto-Tec, Siegen, Germany) extracting bursts that have a 
+maximum intensity above a certain threshold was applied. 
+We used a burst recognition threshold of 30 kHz (Figure 2, 
+black line). For each burst &gt;30 MHz, the burst duration 
+(in milliseconds), maximum intensity, overall intensity 
+(total number of photons) and the fluorescence lifetime 
+were calculated and stored. To determine the fluorescence 
+lifetime (decay time) of each burst, the arrival times of all 
+photons of the respective burst were histogrammed with 
+respect to the laser pulse (Figure 2, inset). Fluorescence life-
+times were calculated using a maximum likelihood estimator 
+(MLE) algorithm (33,34). 
+For FCS measurements the APD output was connected to a 
+correlator card (model 5000/E, ALV, Langen, Germany). Six 
+runs of 30 s were averaged to get a correlation curve. All fluo-
+rescence signals were measured at room temperature (25 C). 
+Fluorescence intensity autocorrelation functions were calcu-
+lated by the correlator board and saved as ASCII files. The 
+autocorrelation functions were analyzed with <rs id="software-2" type="software">Origin</rs> (<rs corresp="#software-2" type="creator">Micro-cal Software</rs>, Northhampton, MA). FCS measures the fluores-
+cence fluctuations arising from fluorescent molecules as they 
+pass the detection volume to obtain information about 
+dynamic processes at the molecular level (35). Using FCS, </p>
+
+<p>PAGE 3 OF 10 
+Nucleic Acids Research, 2006, Vol. 34, No. 13 e90 </p>
+
+<p>the time dependent fluorescence signal F ¼ dF + hFi is 
+described by the fluorescence fluctuations dF(t) about an 
+average value hFi. These fluctuations are analyzed in the 
+form of a normalized autocorrelation function G(t), where 
+t denotes the correlation time (Equation 2). </p>
+
+<p>GðtÞ ¼ 
+hFðtÞFðt þ tÞi </p>
+
+<p>hFðtÞi 2 
+¼ 1 þ 
+hdFðtÞdFðt þ tÞi </p>
+
+<p>hFðtÞi 2 
+2 </p>
+
+<p>FCS can be used to gain information about all processes 
+influencing the fluorescence intensity in the detection volume, 
+e.g. translational diffusion, triplet states or equilibrium 
+constants (35-37). </p>
+
+<p>RESULTS </p>
+
+<p>Spectroscopic characteristics of smart probes </p>
+
+<p>Owing to the small number of compounds with intrinsic fluo-
+rescence &gt;600 nm, near-infrared (NIR) fluorescence detection 
+in bioanalytical samples is a desirable alternative to visible 
+fluorescence detection (38-40). This fact, as well as the avail-
+ability of diode laser for this spectral region, has prompted 
+our efforts to develop so-called smart probes (Figure 1) 
+based on NIR dyes (20-22). For our experiments, we syn-
+thesized two smart probes using the red-absorbing dye 
+ATTO655. In aqueous solvents, ATTO655 exhibits an 
+absorption maximum at 661 nm, and emits at an emission 
+maximum of 673 nm with a fluorescence lifetime t of 
+1.85 ns. The smart probe ATTO655-WT contains a DNA </p>
+
+<p>sequence complementary to the wild-type PCR product 
+whereas the smart probe ATTO655-M fits the mutant PCR 
+product. Both probes, ATTO655-WT and ATTO655-M, 
+show bathochromic shifts of a few nanometers in the absorp-
+tion and emission spectra in aqueous solvents compared to 
+spectra of the free fluorophore, indicating the formation of 
+non-or only weakly fluorescent complexes. Upon addition 
+of an excess synthetic target sequence (short complementary 
+oligonucleotides) to smart probes, spontaneous hybridization 
+occurs, reflected in an $7-fold increase in fluorescence inten-
+sity. The fluorescence decays of the closed smart probes 
+ATTO655-WT and ATTO655-M could be best described 
+using a biexponential model with t 1 ¼ 2.71 ± 0.34 ns 
+(a 1 ¼ 0.76 ± 0.06), t 2 ¼ 0.42 ± 0.18 ns (a 2 ¼ 0.24 ± 
+0.08). Accordingly, we measured an increase in fluorescence 
+lifetime upon addition of an excess of target sequence. The 
+fluorescence decays measured after hybridization show an 
+almost monoexponential decay with t 1 ¼ 2.93 ± 0.25 ns 
+(a 1 ¼ 0.98 ± 0.04), t 2 ¼ 0.32 ± 0.16 ns (a 2 ¼ 0.02 ± 
+0.02). Comparison of the changes in fluorescence intensity 
+and lifetime before and after hybridization to artificial target 
+sequences shows that quenching electron transfer reactions 
+between guanosine residues and ATTO655 are mainly 
+manifested by static quenching. This indicates that the 
+quenching reaction is faster than the time resolution of our 
+TCSPC apparatus of $40 ps. (27) </p>
+
+<p>Influence of the secondary structure of the PCR 
+amplicon on hybridization efficiency </p>
+
+<p>Although the double-stranded PCR product was denatured for 
+10 min at 97 C and immediately chilled on ice, addition of a 
+10-fold excess of single-stranded PCR product did not result 
+in a significant increase in fluorescence intensity in contrast to 
+the addition of short artificial target DNA oligonucleotides. 
+This can be attributed to the formation of suboptimal secon-
+dary structures of the PCR product (25). As depicted in 
+Figure 3. the calculated secondary structure for the 157 bp 
+PCR amplicon of M.tuberculosis is not accessible for hybridi-
+zation of a smart probe under the used standard conditions 
+(aqueous buffer containing 140 mM NaCl, 25 C). In particu-
+lar, 8 of the 15 DNA bases responsible for hybridization of 
+the smart probe (marked dark gray in Figure 3) are involved 
+in base pairing and thus are not accessible for hybridization. 
+Modification of the conditions for secondary structure 
+calculation, e.g. by increasing temperature and varying salt 
+concentration, demonstrates that below a temperature of 
+$50-60 C several target DNA bases are always involved in 
+double helix formation. To realize hybridization of the smart 
+probes to the PCR product so-called 'cold' or 'breaking' 
+oligonucleotides were used. Such artificial oligonucleotides 
+can rip the secondary structure of the PCR product and there-
+fore facilitate hybridization of the smart probe. In Figure 3 
+the binding sites for the 'cold' oligonuleotides 1-6 are 
+marked light gray (58-73: cold oligonucleotide 1; 74-98: 
+cold oligonucleotide 2; 99-133: cold oligonucleotide 3; 
+134-157: cold oligonucleotide 4; 1-19: cold oligonucleotide 
+5; 20-40; cold oligonucleotide 6). To investigate the influ-
+ence of cold oligonucleotides on hybridization efficiency, 
+the denaturated PCR product (10 À7 M) was mixed with the 
+smart probe-WT (10 À8 M) in the presence of different cold </p>
+
+<p>Figure 2. Fluorescence intensity with time (MCS-trace) recorded from a 5 · 
+10 À10 M solution of a smart probe (1 ms/bin). Fluorescence bursts are defined 
+by a recognition threshold, i.e. a count rate of 30 kHz (black line). Origin and 
+end of a burst were defined by a count rate of 20 kHz (dashed line). The 
+fluorescence lifetimes of recognized bursts were calculated applying a MLE-
+algorithm. Using the described burst recognition definition, we identify two 
+fluorescence bursts at $25 ms (223 photon counts, 3 ms burst duration, 
+fluorescence lifetime, t ¼ 2.9 ns) and at $58 ms (138 photon counts, 4 ms 
+burst duration, fluorescence lifetime, t ¼ 2.2 ns). </p>
+
+<p>e90 Nucleic Acids Research, 2006, Vol. 34, No. 13 
+PAGE 4 OF 10 </p>
+
+<p>oligonucleotides. Afterwards, the mixture was heated to 65 C 
+and cooled down to 25 C during 100 min. Addition of cold 
+oligonucleotide 1 results in a 1.4-fold increase in fluorescence 
+intensity whereas all other cold oligonucleotides (1-5) gener-
+ate a smaller increase in the range of 1.1-1.2 fold. Upon 
+simultaneous addition of all cold oligonucleotides 1-6, a 
+2.0-fold increase in fluorescence intensity was measured. In 
+addition, the influence of various combinations of cold 
+oligonucleotides was studied (data not shown). In conclusion 
+the results demonstrate that addition of cold oligonucleotide 1 
+is most effective in breaking the secondary structure of the 
+PCR product. However, in order to achieve the best results 
+addition of all six cold oligonucleotides is advantageous. 
+Applying this technique and the two smart probes (smart 
+probe-WT and smart probe-M), discrimination between the 
+wild-type amplicon and the mutant amplicon containing the 
+SNP was easily possible. In these experiments, the mixture 
+containing the matching or non-matching smart probe 
+together with the denaturated PCR products and all cold 
+oligonucleotides was heated to 65 C and subsequently cooled 
+down very slowly (0.05 C per minute) before ensemble fluo-
+rescence measurements. Using conventional fluorescence 
+spectroscopy, we achieved an increase in fluorescence inten-
+sity of up to 2-fold in the presence of relative large amounts 
+of complementary target PCR-products ($10 À6 M) with a 
+detection limit in the 10 À8 M range. Even though limited in 
+sensitivity, the introduced assay technique exhibits great 
+potential when applied in combination with time-resolved 
+single-molecule fluorescence spectroscopy. </p>
+
+<p>Time-resolved single-molecule fluorescence 
+spectroscopy </p>
+
+<p>Single-molecule fluorescence spectroscopy (SMFS) enables 
+the investigation of characteristics of individual molecules, 
+i.e. identification of subpopulations in a heterogeneous </p>
+
+<p>mixture, while ensemble measurements yield only infor-
+mation on average properties (41). Figure 4 shows the 
+fluorescence intensities recorded over time (MCS-traces) of 
+a 5 · 10 À10 M solution of smart probe-M in the absence 
+and presence of a perfectly matching artificial target DNA. 
+The average count rate measured for smart probe-M of 
+$12.5 kHz increases to $45 kHz after addition of an excess 
+of artificial target sequence. Considering a background signal 
+of $7.5 kHz measured for pure buffer, we estimate, in accor-
+dance with ensemble measurements, a 7-8-fold increase in 
+overall fluorescence intensity upon hybridization to the 
+perfectly matching artificial target sequence. However, as 
+compared to ensemble spectroscopy, SMFS might be advan-
+tageously used in diagnostic applications because it enables 
+an improved discrimination between closed (quenched 
+smart probes), and probes that are hybridized to target 
+DNA. The reason for the improved discrimination stems 
+from the fact that fluorescence signals of fluorophores can 
+be easily separated from background signal that also contains 
+Raman and Rayleigh scattering, as well as autofluorescence </p>
+
+<p>Figure 3. mfold structures (modeling parameters: 140 mM Na + , 0 mM Mg 2+ , 
+25 C) of the 157 bp PCR amplicon of M.tuberculosis. The binding sites for 
+the loop sequence of the smart probe marked dark gray. The binding sites for 
+the 'cold' oligonuleotides 1-6 are marked light gray (58-73: cold 
+oligonucleotides 1; 74-98: cold oligonucleotides 2; 99-133: cold oligonu-
+cleotides 3; 134-157: cold oligonucleotides 4; 1-19: cold oligonucleotides 5; 
+20-40: cold oligonucleotides 6). </p>
+
+<p>Figure 4. Fluorescence intensity (MCS)-traces observed from a 5 · 10 À10 M 
+solution of smart probe-M before and after addition of a 100-fold excess of 
+an artificial target DNA. Measurements were carried out at room temperature 
+in PBS (pH 7.0) containing 140 mM NaCl at an average excitation power of 
+0.6 mW at the sample. </p>
+
+<p>PAGE 5 OF 10 
+Nucleic Acids Research, 2006, Vol. 34, No. 13 e90 </p>
+
+<p>of impurities. Therefore, signals with higher count rates 
+(&gt;30 kHz) corresponding to smart probes diffusing through 
+the detection volume can be easily extracted from the moni-
+tored MCS-trace. The closed smart probes show almost only 
+signals &lt;100 kHz in the absence of target DNA. Only very 
+few signals, i.e. &lt;1%, show higher count rates that could be 
+somehow caused by opened probes, probes in which the 
+fluorophores do not interact with a guanosine residue in the 
+complementary stem, or by free fluorescent dyes that might 
+still be present even after HPLC purification. 
+On the other hand, after adding an excess of artificial target 
+DNA, fluorescence bursts with maximum count rates between 
+100 and 600 kHz are evident (Figure 4b). During a measure-
+ment time of 100 s, we found 7616 fluorescence bursts for 
+the hybridized and 63 fluorescence bursts for the closed 
+(unbound) smart probe, respectively, with a count rate 
+&gt;100 kHz. Thus, the number of fluorescence signals above 
+the selected threshold of 100 kHz increases by a factor of 
+$121, i.e. much stronger than determined in ensemble fluo-
+rescence experiments. In standard cuvette experiments we 
+found an $7-fold increase in fluorescence intensity upon 
+addition of an excess of complementary target sequence. To 
+further increase the discrimination efficiency between open 
+and closed smart probes, we determined simultaneously the 
+fluorescence decay time for each burst recognized above 
+the 100 kHz threshold. As expected from ensemble measure-
+ments the fluorescence decay time of smart probes increases </p>
+
+<p>considerably upon addition of target sequence. Applying a 
+monoexponential MLE-algorithm results in a typical fluores-
+cence decay time of $1.2 and $3 ns for the closed and open 
+smart probe, respectively (22). 
+The major aim of this work was the highly sensitive and 
+specific identification of a SNP responsible for rifampin resis-
+tance in M.tuberculosis. Therefore, different concentrations 
+of the PCR-products of the wild type and the mutant form 
+were mixed in PBS with smart probe-WT and smart probe-
+M (containing a single mismatch in the loop sequence), 
+respectively. Furthermore, all six cold oligonucleotides 
+were added in order to avoid secondary structures. Finally, 
+the solutions were heated and slowly cooled down from 65 
+to 25 C during 14 h before experiments were performed 
+with a typical measurement time of 100 s. Figure 5 shows 
+20 s sections of the raw data recorded from four different 
+samples of the mutant smart probe-M in the presence of 
+different concentrations of the corresponding PCR-product. 
+The MCS-trace of the pure smart probe-M shows mainly 
+fluorescence bursts with a maximum count rate well below 
+100 kHz (Figure 5a). Only few signals with higher count 
+rates can be observed. Upon addition of a 40-fold excess 
+(2 · 10 À8 M) of the matching PCR product the fluorescence 
+signal increases as can be seen by the increasing number of 
+fluorescence bursts with count rates &gt;100 kHz (Figure 5b). 
+In agreement with ensemble measurements the increase in 
+fluorescence intensity upon hybridization of smart probes to </p>
+
+<p>Figure 5. Fluorescence intensity traces observed from 5 · 10 À10 M solution of the smart probe-M in absence (a) and presence of (b) 2 · 10 À8 M, (c) 1 · 10 À9 M 
+and (d) 5 · 10 À11 M of the matching PCR-product. To all samples the cold oligonucleotides 1-6 were added. Before measuring all samples were heated to 65 C 
+and cooled down to 25 C over night. Measurements were carried out at room temperature in PBS (pH 7.0) containing 140 mM NaCl using an average excitation 
+power of 0.6 mW. </p>
+
+<p>e90 Nucleic Acids Research, 2006, Vol. 34, No. 13 
+PAGE 6 OF 10 </p>
+
+<p>real samples, i.e. to PCR products, is less pronounced. Using 
+background corrected average count rates we calculate only a 
+2-fold increase in fluorescence intensity upon addition of a 
+40-fold excess of matching PCR product in the presence of 
+all cold oligonucleotides. In the presence of lower concentra-
+tions of matching PCR product the average increase in count 
+rate is even less pronounced. However, the fluorescence 
+intensity traces shown in Figure 5c and d clearly demonstrate 
+the potential of SMFS. Even in the presence of only 5 · 10 À11 
+M of matching PCR product the MCS-trace reveals slightly 
+higher fluorescence bursts than without addition of any 
+PCR product (compare Figure 5a and d). In contrast, the 
+addition of a 40-fold excess of the respective non-matching 
+PCR product to smart probe-WT or smart probe-M neither 
+results in an increased average count rate nor in an increase 
+in the number of fluorescence bursts with count rates 
+&gt;100 kHz (data not shown). In order to quantify the concen-
+tration of target sequence present in the sample we compared 
+the spectroscopic properties of the fluorescence bursts of the 
+closed smart probes and probes that are hybridized to the 
+PCR product (Figure 6). The signals were obtained from 
+MCS-traces as shown in Figure 5a and b. 
+First, we investigated the intensity of the fluorescence sig-
+nals, which is the sum of all photons detected per fluores-
+cence burst (Figure 6a). The burst size, i.e. the number of 
+photon counts detected per burst, increases significantly 
+after hybridization to the target PCR-product. Less than 1% 
+of the closed smart probes show intensities &gt;220 photons/ 
+burst. In contrast, for the probes hybridized to the matching 
+PCR-product over 12% of the signals exhibit a burst size of 
+&gt;220 photons/burst. Above 150 photons/burst, the hybridized 
+probe shows significantly more signals (22.2%) than the pure 
+smart probe (4.0%). Furthermore, the fluorescence lifetime 
+changes owing to hybridization (Figure 6b). For the closed 
+hairpin probe the fluorescence signals show fluorescence 
+lifetimes centered around 1 ns, corresponding to ensemble 
+lifetime data measured for closed smart probes. For &lt;6% of 
+the signals detected for closed probes, fluorescence lifetimes 
+longer than 2.25 ns were measured. After adding an excess of 
+artificial target DNA we found a Gaussian-shaped lifetime 
+distribution centered at 2.8 ns and &lt;10% of the signals 
+below 2.25 ns (data not shown). On the other hand, addition 
+of a 40-fold excess of matching PCR-product does not induce 
+the hybridization, i.e. opening, of all hairpin probes. Here, we 
+found a bimodal lifetime distribution with two maxima at 
+$1.3 ns and $2.5 ns. Nevertheless, fluorescence decay time 
+information (Figure 6b) is suited as additional parameter to 
+increase the identification accuracy of opened (unquenched) 
+smart probes. More than 34% of the signals show a fluores-
+cence life longer than 2.25 ns. Upon hybridization to the 
+PCR-product not only an enhancement of the fluorescence 
+intensity and lifetime is observed, but also the burst duration 
+time enhances, i.e. the diffusion constant increases because of 
+the increase in molecular weight (Figure 6c). In the experi-
+ments presented, a 23 nt containing smart probe hybridizes 
+to a 157 nt containing PCR product including several cold 
+oligonucleotides. Thus, the molecular weight increases con-
+siderably. While 99.5% of all unhybridized probes show 
+diffusion times shorter than 5 ms, 10% of the hybridi-
+zed hairpins exhibit diffusion times longer than 5 ms 
+(Figure 6c). Already at a burst duration of 4 ms we found </p>
+
+<p>significantly more signals for the hybridized probe (19.3%) 
+than for the unhybridized probe (6.1%). 
+Figure 6a and c clearly demonstrate that the combi-
+nation of all three parameters can substantially increase the </p>
+
+<p>Figure 6. (a) Burst size, (b) fluorescence decay time and (c) burst duration 
+distribution of 3500 photon bursts detected from a 5 · 10 À10 M solution of 
+smart probe-M in the absence (gray) and presence (open) of 2 · 10 À8 M 
+matching PCR product. </p>
+
+<p>PAGE 7 OF 10 
+Nucleic Acids Research, 2006, Vol. 34, No. 13 e90 </p>
+
+<p>identification accuracy of hybridized smart probes. Therefore, 
+we plotted the burst size versus the fluorescence lifetime for 
+each signal measured in the absence and presence of match-
+ing PCR-product (Figure 7). Furthermore, all signals with 
+burst durations of four or more milliseconds were color 
+encoded in red. Comparison of the two scatter plots clearly 
+uncovers an area defined by the rectangle in Figure 7 where 
+mainly signals from hybridized smart probes are located. 
+During a measurement time of 100 s smart probe-M shows 
+only 10 fluorescence signals (i.e. 0.2% of all signals recorded) 
+with a lifetime &gt;2.25 ns, a burst size &gt;150 photon counts and 
+a burst duration of longer than 4 ms in the absence of match-
+ing PCR-product (red circles in Figure 7a). In contrast, in the 
+presence of 2 · 10 À8 M matching PCR-product $500 fluores-
+cence signals (i.e. $10% of all signal) are located within the 
+same area (Figure 7b). 
+Figure 8 shows the number of fluorescence signals located 
+within the area defined in Figure 7 at different PCR-product 
+concentrations of the wild type and mutant form. In the 
+nanomolar range, 5-10 times more signals were found for 
+the smart probe hybridized to the fully matching PCR-
+product compared to the respective PCR-product containing </p>
+
+<p>one mismatch. Also for lower concentrations a significant 
+increase in the number of signals located within the area is 
+apparent, e.g. for a concentration of 5 · 10 À11 M $20 signals 
+were found, i.e. a 2-fold increase. </p>
+
+<p>DISCUSSION </p>
+
+<p>In this article we present for the first time the detection of 
+SNP in PCR-products using smart probes. Our study 
+demonstrates that PCR-products show significantly different 
+properties than artificial target-DNA sequences. After 
+addition of a 40-fold excess of a short (20mer) artificial 
+target-DNA to smart probes (5 · 10 À9 M) the hairpin-
+structured probe hybridizes immediately reflected in a 
+7-fold increase in fluorescence intensity. On the other hand, 
+addition of the same amount of PCR-product has no effect 
+owing to the presence of stronger secondary structures. As 
+shown, the formation of stable secondary structures can be 
+at least partly avoided by adding an excess of unlabeled 
+('cold') oligonucleotides. Applying this method we observed 
+a 2-fold increase in fluorescence intensity upon addition of 
+an excess of PCR-product. 
+However, the discrepancy in fluorescence signals between 
+closed and opened smart probes can be further increased by 
+applying single-molecule fluorescence spectroscopy. Owing 
+to the relatively high mass of the DNA-strand including the 
+hybridized 'cold' oligonucleotides, the diffusion time of the 
+fluorescence labeled smart probe decreases significantly 
+upon binding to its target. This effect can be investigated 
+by FCS that analyses the fluctuations of the fluorescence sig-
+nal. Figure 9a shows FCS measurements of a 5 · 10 À9 M 
+solution of smart probe-WT in the absence of any target 
+(dotted line), in presence of a 20-fold excess of artificial 
+target DNA (dashed line) and of an excess of matching 
+PCR-product (solid line). The calculated diffusion time for 
+the unhybridized smart probe is $100 ms and increases to </p>
+
+<p>Figure 7. Fluorescence lifetime of each signal measured from a 5 · 10 À10 M 
+solution of the smart probe-M (a) in the absence and (b) presence of 
+2 · 10 À8 M of the matching PCR-product is plotted versus the respective 
+burst size (photon counts/burst). Signals with a burst duration &gt;4 ms are 
+marked red. </p>
+
+<p>Figure 8. Detected signals of the smart probe-M (triangles) and the smart 
+probe-WT (squares) with a burst size of &gt;150 photons, a fluorescence lifetime 
+of &gt;2.25 ns and a burst duration of &gt;4 ms during a measurement time of 100 s 
+plotted versus the concentration of PCR-product of the wild type and the 
+mutant of M.tuberculosis, respectively. The data points obtained from the 
+matching PCR-product are black and the respective reference sample 
+containing the other PCR-product containing one mismatch is marked gray. </p>
+
+<p>e90 Nucleic Acids Research, 2006, Vol. 34, No. 13 </p>
+
+<p>
+$180 ms upon addition of artificial target-DNA. Hybridi-
+zation to the PCR-product results in a diffusion time of 
+$380 ms which is almost four times longer than the diffusion 
+time of the unhybridized smart probe. Consequently, the anal-
+ysis of burst durations can help to discriminate between 
+hybridized and unhybridized smart probes. Furthermore, 
+longer diffusion times result in higher burst sizes. 
+Using standard ensemble fluorescence spectroscopy, smart 
+probe concentrations down to about 10 À8 M can be measured. 
+However, in the presence of an equimolar amount of PCR-
+product no significant increase in fluorescence intensity 
+occurs. Even a 40-fold excess of PCR-product is able to 
+open $15% of the hairpin probes and thus the fluorescence 
+intensity is doubled. A 100% opening of the smart probe 
+generates a 7-fold increase and can be achieved by adding 
+artificial target-DNA. To improve the hybridization of the 
+probe to the target-DNA the hairpin probe could be designed 
+less stable, e.g. by using shorter stems that contain only four 
+base pairs, or one could choose a longer loop sequence that is 
+complementary to the target-DNA. Actually, both ways 
+would result in more efficient hybridization, but on the 
+other hand, this also reduces the specificity of the probes 
+and the quenching efficiency in the closed state. However, 
+the presented smart probes are appropriate to identify a single 
+point mutation in a 157 bp PCR-product of M.tuberculosis. </p>
+
+<p>We demonstrated that the sensitivity can be enhanced drama-
+tically using single-molecule detection techniques. Measuring 
+the diffusion of individual molecules through the open 
+volume element of a confocal fluorescence microscope 
+presents an easy and fast detection and identification scheme 
+for PCR target sequences in the nanomolar range simply by 
+counting fluorescence signals above a threshold count rate 
+of 150 kHz. At lower concentrations the use of additional 
+information like burst duration, fluorescence lifetime and 
+burst size further improve the discrimination accuracy. To 
+summarize, the proof of principle that smart probes can be 
+utilized for the identification of PCR-targets with single-
+nucleotide accuracy has been demonstrated. A single point 
+mutation in a PCR-product at very low concentrations 
+down to 10 À11 M can be detected by time-resolved single-
+molecule spectroscopy. It has to be investigated in future 
+experiments whether this novel method can be applied for 
+analyzing a broad range of clinical relevant PCR products. </p>
+
+<p>ACKNOWLEDGEMENTS </p>
+
+<p>This 
+work was 
+financially 
+supported by 
+the 
+Bundesministerium  Bildung und Forschung (Grants 
+13N8349 and 13N8348) and the Landesstiftung Baden-
+ and the European Commission as part of the 
+MoITools project. Funding to pay the Open Access publica-
+tion charges for this article was provided by the German 
+Cancer Research Center. </p>
+
+<p>Conflict of interest statement. None declared. </p>
+
+
+
+<p>e90 Nucleic Acids Research, 2006, Vol. 34, No. 13 
+PAGE 10 OF 10 </p>
+
+</text></tei>

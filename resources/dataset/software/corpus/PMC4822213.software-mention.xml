@@ -1,0 +1,866 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4822213" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:21+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>a b s t r a c t </p>
+
+<p>We developed a novel PCR-based pre-amplification (PreAmp) technology that can increase the abun-
+dance of over 350 target genes one million-fold. To assess potential bias introduced by PreAmp we utilized 
+ERCC RNA reference standards, a model system that quantifies measurement error in RNA analysis. We 
+assessed three types of bias: amplification bias, dynamic range bias and fold-change bias. We show that 
+our PreAmp workflow introduces only minimal amplification and fold-change bias under stringent condi-
+tions. We do detect dynamic range bias if a target gene is highly abundant and PreAmp occurred for 16 or 
+more PCR cycles; however, this type of bias is easily correctable. To assess PreAmp bias in a gene expres-
+sion profiling experiment, we analyzed a panel of genes that are regulated during differentiation using 
+the NTera2 stem cell model system. We find that results generated using PreAmp are similar to results 
+obtained using standard qPCR (without the pre-amplification step). Importantly, PreAmp maintains pat-
+terns of gene expression changes across samples; the same biological insights would be derived from 
+a PreAmp experiment as with a standard gene expression profiling experiment. We conclude that our 
+PreAmp technology can facilitate analysis of extremely limited samples in gene expression quantification 
+experiments. 
+Pre-amplification (PreAmp) of nucleic acid is a powerful tech-
+nique that allows for the analysis of large numbers of target genes 
+from limiting samples. PreAmp can be achieved through whole 
+transcriptome amplification [1] or at the level of targeted gene 
+panels using PCR-based methodology [2,3]. However, there is a 
+legitimate concern that PreAmp might change a sample to an extent 
+that results generated from it are misleading or inaccurate. Better 
+understanding of the limitations of a PreAmp-based workflow is 
+necessary to ensure the reliability of research results. 
+To address such concerns, the National Institute of Standards 
+and Technology (NIST), in conjunction with the External RNA con-
+trols consortium (ERCC) developed a set of reference standards to 
+evaluate the performance of RNA quantification systems and work-</p>
+
+<p>Abbreviations: PreAmp, pre-amplification; ERCC, external RNA controls con-
+sortium; NIST, National Institute of Standards and Technology; NT2, NTera2; RA, 
+retinoic acid. 
+ *  Corresponding author. </p>
+
+<p>E-mail addresses: steven okino@bio-rad.com (S.T. Okino), 
+michelle kong@bio-rad.com (M. Kong), haya sarras@bio-rad.com (H. Sarras), 
+yan wang@bio-rad.com (Y. Wang). </p>
+
+<p>flows [4,5]. The ERCC standards are mixtures of up to 96 synthetic 
+RNAs that are spiked into an RNA sample and processed and quanti-
+fied along with the natural RNAs. The amount of each ERCC RNA in a 
+mixture is precisely defined; the performance of an RNA quantifica-
+tion workflow/platform is determined by comparing the measured 
+amount with the actual, defined amount of each ERCC control RNA. 
+In addition, by spiking two sets of ERCC standards (with defined 
+ratios of each ERCC target) into two different biological samples, 
+the accuracy in quantifying gene expression differences between 
+samples can be determined. ERCC standards have been used to 
+assess qPCR, digital PCR, microfluidic qPCR, microarray and RNA-
+seq platforms for their precision, accuracy and detection limits in 
+RNA quantification [6-10]. 
+There are two fundamental challenges in PreAmp reactions 
+because multiple targets are amplified simultaneously. The first 
+challenge is increasing the capacity of the amplification reaction 
+to allow targets of vastly different starting quantity to be effi-
+ciently amplified through every PCR cycle. The second challenge 
+is maintaining target amplification specificity in the presence of 
+large numbers of primers. Unless both challenges are addressed in a 
+PreAmp reagent, the probability of having biased pre-amplification 
+will be high. We developed a PreAmp reagent that utilizes an engi-
+neered DNA polymerase with improved binding affinity to DNA </p>
+
+<p>http://dx.doi.org/10.1016/j.bdq.2015.12.001 
+2214-7535/© 2015 The Authors. Published by Elsevier GmbH. This is an open access article under the CC BY-NC-ND license (http://creativecommons.org/licenses/by-nc-nd/ 
+4.0/). </p>
+
+
+
+<p>S.T. Okino et al. / Biomolecular Detection and Quantification 6 (2016) 13-21 </p>
+
+<p>Fig. 1. Fold-change bias of ERCC standards. ExFold spike in-mixtures were added to 10 ng NT2 RNA, reverse transcribed and pre-amplified for 14 PCR cycles. ERCC targets 
+were quantified by qPCR using three technical replicates, the experiment was performed one time. Fold-change measurements for each ERCC target are plotted against target 
+abundance. Results show the measured difference, between samples, of the amount of each ERCC target (colored circles) and the actual difference that should be detected 
+(Fig. 1A-C; colored lines at 1.0, 0.585, 0 and −2.0 Cq units representing RNA abundance ratios of 2-1, 1.5-1, 1-1 and 1-4 respectively). (A) Analysis of samples that were not 
+pre-amplified. (B) Analysis of samples in which 88 ERCC targets were pre-amplified. (C) Analysis of samples in which 355 targets were pre-amplified. (D) Overall fold-change 
+bias for 88 ERCC targets. No PreAmp samples (red circles), 88-plex PreAmp samples (yellow circles), 355-plex PreAmp samples (blue circles). </p>
+
+<p>S.T. Okino et al. / Biomolecular Detection and Quantification 6 (2016) 13-21 </p>
+
+
+
+<p>Fig. 2. Fold-change bias of native target genes with limited sample. cDNA derived from NT2 cells treated with RA for 0-7 days were pre-amplified for 10 PCR cycles and used 
+to quantify native target genes by qPCR; 100 pg, 1 ng and 10 ng cDNA was used in the PreAmp reactions. 1 g cDNA that was not pre-amplified was also used to quantify target 
+gene expression by standard qPCR (10 ng per target). The level of expression of each target gene was determined and expressed as "RNA copies per cell" after normalizing 
+with TBP and assuming that there are 10 TBP copies per cell. The experiment was performed three times, each with two technical replicates, the average values are reported. 
+Error bars represent standard deviation. Data for selected target genes that show RA-induced changes are shown. </p>
+
+<p>and, consequently, dramatically increased processivity. This results 
+in improved PreAmp reaction capacity which ensures that all tar-
+gets are efficiently amplified [11]. We also focused our PreAmp 
+reagent formulation efforts to mediate extremely stringent speci-
+ficity of primer annealing. 
+To provide a stringent assessment of our new PreAmp reagent, 
+we used the ERCC controls to quantify bias in a gene expression pro-
+filing experiment involving stem cell differentiation. We then used 
+the ERCC information to discriminate regulated genes from back-
+ground noise. Our findings, from analysis of ERCC standards and 
+natural target genes, demonstrate that our novel PreAmp reagent 
+will provide accurate results in gene expression profiling experi-
+ments. </p>
+
+<p>2. Materials and methods </p>
+
+<p>2.1. Cell culture and sample processing </p>
+
+<p>NTera2 cells (NT2) were obtained from the American Type Cul-
+ture Collection (Manassas, VA) and cultured as directed. To induce 
+differentiation, cells were treated with 10 M all-trans-Retinoic 
+acid (Cat# R2625, Sigma-Aldrich, St. Louis MO) for 0, 1, 2, 3, 4 
+or 7 days. RNA was isolated using the Aurum Total RNA Mini Kit 
+which incorporates an on-column genomic DNA clearance step 
+(Cat# 7326820, Bio-Rad Laboratories, Hercules, CA), quantified 
+with a NanoDrop ND-1000 spectrophotometer (Thermo Fischer 
+Scientific, Waltham, MA) and stored at −80 • C. ERCC ExFold RNA 
+Spike-in Mixes (Cat# 4456739, Thermo Fischer Scientific, Waltham, 
+MA) were diluted and spiked into RNA samples which were then 
+reverse transcribed using iScript Reverse Transcription Supermix 
+as directed by the manufacturer (Cat# 1708849, Bio-Rad Laborato-
+ries, Hercules, CA) to make stock cDNA samples which were stored </p>
+
+<p>at −20 • C. Stock cDNA samples were pre-amplified for 10-20 cycles 
+using SsoAdvanced PreAmp Supermix as directed by the manufac-
+turer (Cat# 1725160, Bio-Rad Laboratories, Hercules, CA) diluted 
+at least 5-fold and stored at −20 • C. PreAmp was performed with 
+panels of assays which include PrimePCR PreAmp assays (Bio-Rad 
+Laboratories, Hercules, CA), assays culled from public databases, 
+assays designed using online software tools and assays from pub-
+lished manuscripts (Supplemental Fig. 1); primers were at a final 
+concentration of 50 nM each. Target genes were quantified by qPCR 
+using SsoAdvanced Universal SYBR Green Supermix (Cat# 1725270, 
+Bio-Rad Laboratories, Hercules, CA) and CFX96 or CFX384 Real-
+Time PCR Detection Systems (Bio-Rad Laboratories, Hercules, CA) 
+using 20 l or 10 l reaction volumes respectively. Genomic DNA 
+contamination was assessed using the PrimePCR DNA Contamina-
+tion Control (Cat# 10025352, Bio-Rad Laboratories, Hercules, CA). 
+As a no-PreAmp control, stock cDNA was used to quantify gene tar-
+gets directly by standard qPCR using SsoAdvanced Universal SYBR 
+Green Supermix. qPCR conditions were: 98 • C for 2 min; 40 cycles 
+of (98 • C, 5 s; 60 • C, 30 s); melt curve analysis, 65-98 • C, 0.5 • C incre-
+ments, 5 s hold. <rs id="software-1" type="software">CFX Manager</rs> <rs corresp="#software-1" type="version-number">version 3.1</rs> was used for qPCR analysis 
+(Bio-Rad Laboratories, Hercules, CA). A synthetic DNA interplate 
+calibrator was used to set the Cq baseline. </p>
+
+<p>2.2. Measurement of fold-change bias </p>
+
+<p>The two ERCC ExFold RNA Spike-in mixes contain in-vitro tran-
+scribed RNA transcripts in 4 sub-pools that have set ratios between 
+the mixes (1:1, 1:1.5, 1:2 and 4:1). To quantify fold-change bias, 
+ExFold mixes were spiked into RNA samples and processed as 
+described above; the amount of each ERCC target in each sample 
+was then determined by qPCR. The 1:1 sub-pool was used as a cal-
+ibrator to normalize the Mix 1 and Mix 2 results. To visualize bias </p>
+
+
+
+<p>S.T. Okino et al. / Biomolecular Detection and Quantification 6 (2016) 13-21 </p>
+
+<p>Fig. 3. Effect of sample input. Titrating amounts of NT2 cDNA, from 10 pg to 1 g, were pre-amplified for 12 PCR cycles; natural target genes encompassing a wide expression 
+range were quantified by qPCR using three technical replicates, the experiment was performed one time. Results show the relationship between sample input and target 
+gene abundance (Cq). </p>
+
+<p>the Cq value between the Mix 1 and Mix 2 samples was deter-
+mined for each target and plotted against the average no PreAmp Cq 
+value. Fold-change bias was calculated as the difference between 
+the observed Cq and the theoretical Cq for each ERCC target. The 
+theoretical Cq is 0, 0.585, 1.0 and 2.0 for the 1:1, 1:1.5, 1:2 and 
+4:1 sub-pools, respectively. Variation in fold-change measurement 
+error was calculated using the equivalence test from <rs id="software-2" type="software">JMP</rs> statisti-
+cal software <rs corresp="#software-2" type="version-number">version 12.1.0</rs> (<rs corresp="#software-2" type="creator">SAS</rs>, Cary, NC), the practical difference 
+threshold was specified as the standard deviation of the no PreAmp 
+fold change measurement error. </p>
+
+<p>2.3. Limits-of-detection of fold-change measurement </p>
+
+<p>Fold-change bias 95% confidence intervals were determined 
+using Microsoft Excel 2010 for the Cq values illustrated in 
+Fig. 1B and rounded-up to the closest 0.5Cq. We analyzed three 
+different ranges of target abundance, average no PreAmp Cq value 
+less than 30, between 30 and 32.5, and greater than 32.5. The limit 
+of detection was estimated as 2-fold the 95% confidence interval. 
+For example, if the fold-change 95% confidence interval for targets 
+between 30 and 32.5 was calculated as 1.0Cq, then 2-fold this value 
+is 2.0Cq, which represents a 4-fold change. Therefore, targets with 
+a no PreAmp Cq value between 30 and 32.5 have a 4-fold change 
+limit of detection. </p>
+
+<p>2.4. Measurement of amplification bias </p>
+
+<p>Analysis of the stock cDNA samples by PreAmp and by stan-
+dard qPCR was performed three times independently. PreAmp 
+amplification bias was calculated as "Amplification bias = (Cq Tar-
+get (no-PreAmp) − Cq Target (PreAmp) ) − 7.03" where 7.03 is a constant 
+derived from 14 PreAmp cycles and 5-fold sample dilution, which 
+reflects the theoretical Cq between the no-PreAmp and PreAmp 
+target gene Cq values if PreAmp is 100% efficient; a PreAmp bias 
+score of 0 indicates that target gene PreAmp is 100% efficient. </p>
+
+<p>3. Results </p>
+
+<p>3.1. Analysis of fold-change bias using ERCC controls </p>
+
+<p>To assess bias introduced by PreAmp we used the ERCC ExFold 
+RNA spike-in control product; this product consists of two tubes 
+that contain the same ERCC RNAs at precisely defined amounts 
+and ratios. Analysis of the ERCC standards spiked into two differ-
+ent biological samples reveals the ability of a workflow to quantify 
+differences between samples [10]. We added the ExFold mixtures 
+to two RNA samples and converted them to cDNA. We then pre-
+amplified the cDNA samples for 14 cycles using PreAmp primer 
+panels targeting either 88 ERCC RNAs only (88-plex PreAmp) or the </p>
+
+<p>S.T. Okino et al. / Biomolecular Detection and Quantification 6 (2016) 13-21 </p>
+
+
+
+<p>Fig. 4. Dynamic range bias. ExFold spike in-mixtures were added to 10 ng NT2 RNA, reverse transcribed and pre-amplified for 10-20 PCR cycles; ERCC targets were quantified 
+by qPCR using two technical replicates, the experiment was performed one time. (A) The measured amount of ERCC target gene is plotted as a function of actual RNA abundance. 
+All ERCC targets can be detected in the no PreAmp sample and in the samples processed for 14 PreAmp cycles. For samples processed for 20 PreAmp cycles, quantification 
+of targets in the 1 million copy range, have a Cq value less than 5 and are of unreliable value. (B) qPCR results for ERCC-00144, which contained 5,513 copies in the PreAmp 
+reaction, show good results over the entire amplification range. (C) qPCR results for ERCC-00074, which contained 2,822,879 copies in the PreAmp reaction, show poor results 
+when amplified for 18 or 20 PCR cycles. </p>
+
+
+
+<p>S.T. Okino et al. / Biomolecular Detection and Quantification 6 (2016) 13-21 </p>
+
+<p>Fig. 5. Amplification bias. ExFold spike-in mixture 1 was added to 10 ng NT2 RNA, reverse transcribed and pre-amplified for 14 PCR cycles in a 355-plex PreAmp reaction. All 
+355 targets were quantified by qPCR using two technical replicates, the experiment was performed one time. Amplification bias was determined and plotted against target 
+gene expression. </p>
+
+<p>ERCC RNAs plus an additional 267 target genes (355-plex PreAmp, 
+see Supplemental Table 1 for gene targets and assay information). 
+We then quantified each ERCC transcript in the PreAmp'd samples 
+as well as in the original, non-amplified cDNA samples. 
+Our results show the measured difference versus the actual pre-
+defined difference of each ERCC RNA spiked into the two samples 
+(Fig. 1A-C). We find that fold-change measurement bias appears 
+similar when comparing the no PreAmp, 88-plex PreAmp and 
+355-plex PreAmp results. In Fig. 1D we show the measurement 
+error in fold-change results; no measurement error would have 
+a Cq value of 0, a Cq value of 1 indicates a measurement 
+error of 100%. We observe that measurement error increases as 
+the amount of ERCC target RNA decreases. This finding is expected 
+and is consistent with stochastic partitioning of a small number 
+of RNA molecules in the qPCR reactions. We then quantified the 
+fold-change measurement error associated with RNA abundance 
+ranges (Table 1). We find that for RNAs with moderate to high 
+abundance (Cq &lt; 30) fold-change measurement error is, on average, 
+only about 0.1Cq representing 7% error. For low abundance RNAs 
+(Cq between 30 and 32.5) measurement error averages 20%, for 
+trace RNAs (Cq &gt; 32.5) 75% average measurement error is observed. 
+Importantly, a test of statistical equivalence indicates that PreAmp 
+(88-plex or 355-plex) has only a slight effect on fold-change mea-
+surement error relative to the no PreAmp samples (only the trace 
+RNAs in the 88-plex PreAmp sample has a p-Value above the 0.05 
+threshold that indicates a PreAmp bias, the p-value is 0.0515). These 
+findings are consistent with a previous report [6] and demonstrates 
+that our PreAmp workflow only has low fold-change bias when 
+analyzing trace expression target genes. 
+Our results also imply that the ability to detect a meaningful 
+difference in RNA expression between two samples by RT-qPCR is 
+a function of RNA abundance. Using the ERCC RNAs as an internal 
+control we estimated that the limits-of-detection of fold-change 
+measurement is 2-fold for moderately or highly expressed RNA tar-
+gets, 4-fold for RNAs with low expression, and, at best, 8-fold for 
+RNAs with trace expression (Table 1). </p>
+
+<p>3.2. Analysis of fold-change bias using regulated genes </p>
+
+<p>Our ERCC-based work demonstrates that even high multi-
+plex PreAmp does not introduce appreciable bias to fold-change 
+measurements. However, the ERCC model system is based on 
+spike-in of in-vitro transcribed RNAs, not natural RNA transcripts. 
+To determine if the PreAmp workflow can accurately quantify 
+gene expression changes of natural targets, we analyzed RNA 
+samples purified from NT2 cells, an established model system of </p>
+
+<p>human stem cell behavior. When treated with retinoic acid (RA), 
+NT2 cells differentiate into neurons [12,13]; during differentia-
+tion the expression of stem cell-specific biomarkers decrease while 
+the expression of neuron-specific biomarkers increase [14-17]. 
+To identify genes regulated during differentiation we applied the 
+fold-change limits-of-detection criteria established in the previ-
+ous section (Table 1) to 267 genes involved in cell maintenance, 
+cell fate and adaptation. We identified 34 regulated genes, which 
+include well known stem cell biomarkers such as NANOG and neu-
+ral cell biomarkers such as NEUROD1 (Table 2). Most of these genes 
+were previously characterized to be involved in NT2 differentiation 
+[14-17], which is confirmatory of our approach. 
+We analyzed a panel of 100 genes that are involved in lineage 
+determination (Supplemental Table 1). We pre-amplified and ana-
+lyzed varied amounts of cDNA (100 pg, 1 ng and 10 ng) derived 
+from NT2 cells treated with RA for 0, 1, 2, 3, 4 and 7 days; as a 
+no-PreAmp control, 1 g cDNA was used to quantify gene targets 
+directly by standard qPCR (10 ng/target, 1 g per 100 target panel). 
+We show data for several representative regulated target genes, 
+gene transcript levels are expressed as "RNA copies per cell" after 
+normalizing with TBP and assuming that there are 10 TBP copies 
+per cell [18]; this method of normalization provides information on 
+the relative level of target gene expression as well as fold-change 
+of RNA abundance (Fig. 2). Data presented in Supplemental Fig. 1 
+shows that TBP expression is relatively stable over the time course 
+of RA exposure changing less than 0.5Cq (25%), this justifies its 
+use as a normalization gene. The assumption that there are 10 TBP 
+copies per cell does not affect fold-change results; it is used because 
+it provides a relative estimate of target gene levels in a biologically 
+relevant context. 
+We find that the gene expression profiling results obtained from 
+the PreAmp'd samples show similar trends as those derived from 
+the original cDNA samples, even though up to 10,000-fold less cDNA 
+is analyzed. This implies that PreAmp can analyze limited samples 
+effectively and that the same biological insights and conclusions 
+would be derived from an experiment using PreAmp and a standard 
+gene expression profiling experiment. Importantly, the changes in 
+gene expression observed over the NT2 differentiation time course 
+are consistent with previously published results [14-17] suggest-
+ing that our results are accurate. 
+To further explore the dynamic range of sample input, we 
+pre-amplified varied amounts of cDNA, from 10 pg to 1 g, and 
+then used the samples to analyze gene targets that span a wide 
+expression range. Our results show a linear relationship between 
+sample input and target amount (Fig. 3). This demonstrates that 
+our PreAmp reagent has the capacity to analyze samples with a 6-</p>
+
+<p>S.T. Okino et al. / Biomolecular Detection and Quantification 6 (2016) 13-21 </p>
+
+
+
+<p>Table 1 
+Fold-change measurement error. </p>
+
+<p>Target gene expression level (Cq) </p>
+
+<p>&lt;30 
+30-32.5 
+&gt;32.5 </p>
+
+<p>No PreAmp 
+Average fold change measurement error (Cq) 
+0.093 
+0.265 
+0.804 
+Average fold change measurement error (percent) 
+7% 
+20% 
+75% 
+88-plex PreAmp 
+Average fold change measurement error (Cq) 
+0.094 
+0.162 
+0.578 
+Average fold change measurement error (percent) 
+7% 
+12% 
+49% 
+Statistical equivalence with no PreAmp. p-value (upper threshold) 
+&lt;0.0001 a 
+0.0121 a 
+0.0515 
+Statistical equivalence with no PreAmp. p-value (lower threshold) 
+0.0021 a 
+0.0003 a 
+&lt;0.0001 a 
+355-plex PreAmp 
+Average fold change measurement error (Cq) 
+0.108 
+0.119 
+0.380 
+Average fold change measurement error (percent) 
+8% 
+9% 
+30% 
+Statistical equivalence with no PreAmp. p-value (upper threshold) 
+&lt;0.0001 a 
+0.0010 a 
+0.0074 a 
+Statistical equivalence with no PreAmp. p-value (lower threshold) 
+0.0205 a 
+0.0050 a 
+0.0002 a 
+Estimated fold-change limits-of-detection 
+2-fold 
+4-fold 
+8-fold </p>
+
+<p>a Statistically equivalent with no PreAmp. </p>
+
+<p>log input range (10 pg to 1 g) and faithfully maintain the relative 
+quantity of gene targets over a wide expression level range (e.g. a 
+span of 18Cq from POU5F1 to NEUROD1). </p>
+
+<p>3.3. Analysis of dynamic range bias </p>
+
+<p>An important consideration in a PreAmp experiment is the num-
+ber of amplification cycles. Typically, qPCR platforms require 10-14 
+PreAmp cycles for single copy detection. However, microfluidic-
+based qPCR instruments have a nanoliter scale interrogation 
+volume and often require up to 20 PreAmp cycles to achieve sin-
+gle copy detection [19]. To assess bias associated with PreAmp 
+cycle number we used the ERCC controls which have wide range 
+of RNA abundance [10]. We diluted the ExFold mixtures such that 
+all targets should be present in a PreAmp reaction (2.5 copies 
+to 5.6 million copies). We then pre-amplified the samples using 
+standard (88-plex) and high multiplex (355-plex) conditions for </p>
+
+<p>Table 2 
+Genes regulated by retinoic acid. </p>
+
+<p>Target gene No PreAmp Avg Cq 
+% Expression in RA treated cells 
+relative to control cells </p>
+
+<p>T (Brachyury) 34.1 
+1% 
+OTX2 
+27.4 
+6% 
+DKK1 
+32.2 
+10% 
+NANOG 
+23.7 
+18% 
+DPPA3 
+29.7 
+22% 
+MIXL1 
+30.0 
+23% 
+TDGF1 
+24.6 
+23% 
+RARG 
+29.4 
+23% 
+PRDM14 
+26.3 
+24% 
+CD44 
+28.6 
+25% 
+PMAIP1 
+25.6 
+25% 
+POU5F1 
+21.0 
+26% 
+SOX9 
+27.6 
+27% 
+CA12 
+29.8 
+28% 
+THY1 
+24.5 
+47% 
+DLL3 
+28.8 
+307% 
+SNCG 
+26.8 
+404% 
+GABRB2 
+29.1 
+493% 
+CRABP2 
+20.0 
+831% 
+POU3F2 
+29.7 
+1280% 
+CDX1 
+30.1 
+1801% 
+MEIS1 
+28.6 
+1879% 
+RARB 
+28.6 
+1884% 
+HOXD4 
+29.3 
+3074% 
+ASCL1 
+28.6 
+3141% 
+HNF4A 
+31.5 
+3507% 
+LEFTY2 
+25.1 
+6656% 
+NEUROG2 
+33.2 
+8626% 
+FOXA1 
+33.3 
+9277% 
+HOXA4 
+33.5 
+10550% 
+PAX6 
+27.7 
+13467% 
+NEUROD1 
+35.2 
+13703% </p>
+
+<p>10-20 PreAmp cycles; this reflects a target amplification range of 
+10 3 -10 6 -fold. The amount of ERCC target detected, as a function 
+of RNA abundance, is shown in Fig. 4A. We find that all ERCC tar-
+gets can be detected in the no PreAmp sample and in the samples 
+processed for 14 PreAmp cycles. This implies that a moderate num-
+ber of PreAmp cycles will not bias the 6-log dynamic range of target 
+detection. However, for samples that underwent 20 PreAmp cycles, 
+quantification of targets in the 1 million copy range, corresponding 
+to a Cq value less than 5, are of unreliable value (see Fig. 4C). 
+To illustrate the dynamic range bias associated with a highly 
+expressed target we show selected qPCR results. Fig. 4B shows 
+the qPCR traces for the moderate abundance target, ERCC-00144, 
+which is present at ∼5,500 copies in the PreAmp reaction. We find 
+that amplification efficiency, with respect to cycle number, is linear 
+and close to 100%. However, for the high abundance target ERCC-
+00074, which is present at over 2.8 million copies in the PreAmp 
+reaction, high numbers of PreAmp cycles results in poor target 
+quantification, thus exhibiting dynamic range bias (Fig. 4C). We 
+conclude that high numbers of PreAmp cycles could bias results 
+for very highly expressed genes and, therefore, recommend using 
+the fewest number of PreAmp cycles required to achieve robust 
+single copy target gene detection. Supplementary Table 2 lists the 
+amplification efficiency and dynamic range bias of all ERCC targets; 
+the results demonstrate that our PreAmp workflow supports quan-
+titative target gene amplification up to 1 million-fold under both 
+standard and high multiplex conditions. 
+The data presented in Fig. 4A was also analyzed quantitatively 
+to delineate salient properties of the PreAmp reaction (Table 3). We 
+find that PreAmp amplifies targets at all levels of abundance with 
+similar efficiency; this is reflected by a slope close to 1. We find 
+that PreAmp decreases the Cq value associated with single copy 
+detection (X-intercept) by the expected 2 cycles for every 2 cycle 
+increase in PreAmp cycle number; this reflects linear amplifica-
+tion over 10-20 PreAmp cycles. We also observe a slight decrease 
+in the R 2 values when using 18-20 PreAmp cycles, likely reflect-
+ing unreliable qPCR quantification of targets with extremely highly 
+abundance (see Fig. 4C). </p>
+
+<p>3.4. Analysis of amplification bias </p>
+
+<p>Amplification bias is the difference between the measured 
+amount of a target gene after pre-amplification, relative to the the-
+oretical amount. In practice, the theoretical target gene amount 
+can be estimated from the amount of target detected in the non-
+amplified cDNA sample and the number of PreAmp cycles (see 
+Section 2). To assess amplification bias, we compared target gene 
+levels in cDNA samples before and after 14 PreAmp cycles. For 
+each target gene we calculated the amplification bias introduced 
+by PreAmp and plotted it against the level of target gene expres-</p>
+
+
+
+<p>S.T. Okino et al. / Biomolecular Detection and Quantification 6 (2016) 13-21 </p>
+
+<p>Table 3 
+Effect of PreAmp cycles on RNA detection. </p>
+
+<p>PreAmp cycles 
+ERCC mix 
+PreAmp plex 
+Slope 
+R 2 
+X-int (Cq) </p>
+
+<p>0 
+Mix 1 
+NA 
+1.005 
+0.983 
+37.3 
+0 
+Mix 2 
+NA 
+0.988 
+0.984 
+36.9 
+10 
+Mix 1 
+88 
+0.995 
+0.979 
+34.4 
+10 
+Mix 1 
+355 
+0.994 
+0.978 
+34.5 
+10 
+Mix 2 
+88 
+0.987 
+0.979 
+34.1 
+10 
+Mix 2 
+355 
+0.985 
+0.980 
+34.1 
+12 
+Mix 1 
+88 
+0.996 
+0.979 
+32.3 
+12 
+Mix 1 
+355 
+0.993 
+0.980 
+32.4 
+12 
+Mix 2 
+88 
+0.989 
+0.978 
+32.0 
+12 
+Mix 2 
+355 
+0.983 
+0.979 
+32.4 
+14 
+Mix 1 
+88 
+0.996 
+0.977 
+30.3 
+14 
+Mix 1 
+355 
+0.991 
+0.975 
+30.3 
+14 
+Mix 2 
+88 
+1.000 
+0.977 
+30.3 
+14 
+Mix 2 
+355 
+0.987 
+0.978 
+30.1 
+16 
+Mix 1 
+88 
+1.009 
+0.976 
+28.5 
+16 
+Mix 1 
+355 
+0.994 
+0.972 
+28.4 
+16 
+Mix 2 
+88 
+0.992 
+0.978 
+28.2 
+16 
+Mix 2 
+355 
+0.994 
+0.979 
+28.2 
+18 
+Mix 1 
+88 
+0.998 
+0.969 
+26.3 
+18 
+Mix 1 
+355 
+0.999 
+0.966 
+26.4 
+18 
+Mix 2 
+88 
+0.997 
+0.969 
+26.2 
+18 
+Mix 2 
+355 
+1.000 
+0.971 
+26.2 
+20 
+Mix 1 
+88 
+1.013 
+0.964 
+24.3 
+20 
+Mix 1 
+355 
+1.010 
+0.958 
+24.5 
+20 
+Mix 2 
+8 8 
+1.010 
+0.960 
+24.4 
+20 
+Mix 2 
+355 
+1.021 
+0.960 
+24.1 </p>
+
+<p>sion in the original sample (Fig. 5). We considered gene targets 
+that have a Cq ≥ 40 in the original sample to be not expressed and 
+excluded them from analysis. We observe that for 319 (91%) of the 
+346 expressed gene targets, PreAmp did not change the expression 
+level by more than 1.0Cq. </p>
+
+<p>4. Discussion </p>
+
+<p>We developed a novel PreAmp reagent that features an 
+engineered DNA polymerase designed to improve amplification 
+capacity and efficiency. Here we report an in-depth analysis of the 
+bias our PreAmp reagent introduces into a gene expression pro-
+filing experiment. We analyzed three types of bias: amplification 
+bias, dynamic range bias and fold-change bias. 
+Amplification bias reflects PreAmp PCR efficiency and is a com-
+monly used parameter to measure PreAmp performance [1-3]. 
+Specifically, amplification bias measures whether each target is 
+amplified at 100% efficiency throughout the PCR cycling. We find 
+that our PreAmp reagent performs well on this metric, even under 
+high multiplex conditions (Fig. 5). 
+In a previous report the amplification bias of 194 genes was 
+analyzed using standard qPCR; 80% of targets were not altered by 
+more than 1.0 Cq and about 91% of targets were not altered 
+by more than 1.5 Cq [2]. Our results show less amplification 
+bias when analyzing 346 genes; 91% of targets were not altered by 
+more than 1.0 Cq. This difference may reflect differences in the 
+samples and/or target genes analyzed, it may also reflect differences 
+in the reagents and overall workflow used in the analysis. 
+Interestingly however, even if a target gene exhibits ampli-
+fication bias, as long as it is biased to the same extent in all 
+samples, relative gene expression results will still be accurate. Thus, 
+amplification bias reproducibility is a key requirement for accu-
+rate gene expression profiling results. Not surprisingly, given our 
+gene expression profiling data (Fig. 2), we find that amplification 
+bias standard deviation is extremely low, averaging 0.06Cq when 
+analyzing technical replicates and averaging 0.17Cq when analyz-
+ing multiple samples (Supplemental Fig. 2). These results reflect 
+the precision associated with our PreAmp-based gene expression 
+profiling analysis. </p>
+
+<p>Dynamic range bias measures the ability to accurately quan-
+tify target genes over a wide range of abundance. Our standard, no 
+PreAmp gene expression profiling workflow can quantify the entire 
+6-log dynamic range of the ERCC controls. Pre-amplification for up 
+to 14 PCR cycles can also accurately quantify the entire ERCC assay 
+set and, thus, does not introduce dynamic range bias. However, in 
+instances of high target gene expression coupled with a high num-
+ber of PreAmp cycles (e.g. 20 cycles) target gene quantification may 
+be compromised. Dynamic range bias was previously reported in 
+a microfluidic-based qPCR study and is quite consistent with our 
+findings [3]; a high number of PreAmp cycles biased the quantifi-
+cation of high abundance target genes. We believe that dynamic 
+range bias will not be an issue in standard qPCR experiments. Such 
+bias is apparent in the qPCR traces (Fig. 4C), and can be alleviated 
+through sample dilution or use of fewer PreAmp cycles. For applica-
+tions that require high levels of PreAmp, such as microfluidic-based 
+qPCR, our conclusions may not apply. More work is necessary to 
+better quantify the various types of bias associated with high PCR 
+cycle PreAmp. 
+Fold-change measurement is fundamental to gene expression 
+profiling experiments; it allows for the comparison of target gene 
+expression levels across samples. To our knowledge, this is the 
+first report that analyses fold-change bias using RNA reference 
+standards and natural target genes. Using the ERCC standards 
+we quantified fold-change measurement bias and found that our 
+PreAmp reagent does not introduce bias for target genes expressed 
+above trace levels (Cq &lt; 32.5); for target genes that have trace 
+expression (Cq &gt; 32.5) we do observe low bias and suggest that 
+only 8-fold and higher gene expression differences are detectable 
+(Table 1). 
+There are limitations to our PreAmp workflow; it has limited use 
+in detecting gene expression changes of less than 2-fold (Table 1). 
+To detect small changes a different platform, such as digital PCR, is 
+likely more appropriate [20]. 
+We also analyzed the expression of a panel of regulated target 
+genes across six samples; here we found that the PreAmp results 
+are similar to the results using standard methodology (Fig. 2). 
+This finding is significant and implies that PreAmp can be used 
+in gene expression profiling experiments without compromising 
+results. Indeed, we show that PreAmp faithfully maintains patterns 
+of relative gene expression changes (Fig. 2); the same insights and 
+conclusions would be drawn from a PreAmp-based experiment and 
+a standard gene expression profiling experiment. 
+Our novel PreAmp technology amplifies over 350 gene targets 
+up to 1 million-fold. The high level of multiplex allows for the 
+incorporation of ERCC standards into a PreAmp-based workflow 
+as an internal control. We find that this control is valuable because 
+it both validates PreAmp performance and establishes screening 
+specifications to identify regulated genes with significant expres-
+sion changes (Tables 1 and 2). We envision that such a workflow can 
+facilitate experimentation with very limited samples and lead to 
+advances in fields requiring sensitive and accurate gene expression 
+analysis, such as single cell biology. </p>
+
+<p>Conflict of interest </p>
+
+<p>The authors are employees and shareholders of Bio-Rad Labo-
+ratories Inc. </p>
+
+<p>Funding </p>
+
+<p>No funding outside of Bio-Rad Laboratories was used in this 
+research. </p>
+
+<p>S.T. Okino et al. / Biomolecular Detection and Quantification 6 (2016) 13-21 </p>
+
+
+
+<p>Author contributions </p>
+
+<p>S.O. and Y.W conceived the project. S.O., M.K., and Y.W. designed 
+the experiments. S.O. and M.K. executed the experiments and S.O., 
+M.K., H.S. and Y.W analyzed the data. S.O. wrote the first draft of 
+the manuscript. H.S. and Y.W edited the manuscript. </p>
+
+<p>Disclosure </p>
+
+<p>The authors are employees and shareholders of Bio-Rad Labo-
+ratories Inc. </p>
+
+<p>Acknowledgements </p>
+
+<p>We thank Xiao-Song Gong, Evan Bursey, Elizabeth Jordan, Sonia 
+Streng and Paul Streng for their advice and assistance on this 
+project. No external funding was used in this work. </p>
+
+<p>Appendix A. Supplementary data </p>
+
+<p>Supplementary data associated with this article can be found, in 
+the online version, at http://dx.doi.org/10.1016/j.bdq.2015.12.001. </p>
+
+
+
+</text></tei>

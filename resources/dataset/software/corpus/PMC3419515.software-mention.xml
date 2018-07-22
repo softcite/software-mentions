@@ -1,0 +1,581 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC3419515" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:23+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>Citation Raghavan R, Sloan DB, Ochman H. 2012. Antisense transcription is pervasive but rarely conserved in enteric bacteria. mBio 3(4):e00156-12. associated with these transcripts show no evidence of purifying 
+selection. The lack of evolutionary conservation between these 
+two closely related enteric bacteria, combined with comparisons 
+of strains within species, supports the view that many or even most 
+of the asRNAs detected by deep-sequencing techniques are non-
+functional transcripts originating from spurious promoter-like 
+sequences that arise nonadaptively throughout the genome. </p>
+
+<p>RESULTS </p>
+
+<p>Pervasive antisense transcription in E. coli and Salmonella. We 
+obtained approximately 30 million 35-nucleotide (nt) strand-
+specific sequencing reads each from exponential-phase E. coli and 
+Salmonella Typhimurium grown in LB medium, with approxi-
+mately 90% of the reads mapping to the respective genomes (Ta-
+ble 1). The read coverages for the two genomes are nearly identi-
+cal, with 2% of the reads mapping to the antisense strands of 
+protein-coding genes. After applying empirically derived cutoffs 
+to recognize expressed sequences from both genomes (see Mate-
+rials and Methods), we detected sense and antisense transcripts 
+from 75% and 28% of protein-coding genes, including tran-
+scripts from 14 of 17 previously annotated asRNAs in E. coli (see 
+Table S1 in the supplemental material). 
+Detection of transcription start sites and quantification of 
+expression levels. The strand-specific coverage at each genomic 
+position was visualized and manually inspected using the Artemis 
+software tool (17). As observed in previous deep-sequencing stud-
+ies (18-21), sequencing reads accumulated with a pronounced 
+peak at the 5= end of each gene (Fig. 1). Although this bias pre-
+cludes characterizing the read coverage across the whole tran-
+script, it allows the relatively precise identification of transcription 
+start sites (TSSs) based on the 5= end of mapped reads (Fig. 1). For 
+a sample of 50 highly expressed protein-coding genes, 80% of the 
+TSSs identified with RNA-seq data were within 2 bp of experimen-
+tally determined positions (22) (see Table S2 in the supplemental 
+material). 
+To verify the relationship between mapping coverage and gene 
+expression, we used a quantitative PCR (qPCR) assay with a set of 
+4 mRNAs and 18 asRNAs whose maximum read depths spanned 
+several orders of magnitude. We found that maximum read depth 
+was an accurate measure of expression level as estimated by qPCR 
+for both mRNAs (r 0.920; P 0.05) and asRNAs (r 0.814; P 
+0.001; see Fig. S1 in the supplemental material). 
+Highly expressed asRNAs from E. coli and Salmonella. To 
+compare the most highly expressed asRNAs in E. coli and Salmo-
+nella, we identified antisense TSSs within annotated protein-</p>
+
+<p>coding genes with a maximum read depth of at least 200. We 
+excluded antisense TSSs within prophage genes and those that 
+were located at the extreme 5= end of a protein-coding gene and 
+likely represented the TSSs for a divergently transcribed gene on 
+the opposite strand. Based on these criteria, we identified 90 
+asRNAs in E. coli and 91 in Salmonella. These corresponded to a 
+total of 173 distinct genes, 120 of which have orthologs in both 
+species (see Tables S3 and S4 in the supplemental material). 
+asRNAs are enriched for 70 promoters. Consistent with pre-
+vious findings (9), the antisense TSSs that we identified by deep 
+sequencing were frequently associated with canonical promoter 
+elements on the antisense strand, further validating the use of 
+RNA-seq to identify TSSs and indicating that most of the identi-
+fied asRNAs are expressed under the control of the 70 transcrip-
+tion factor. In both E. coli and Salmonella, 70% of the antisense 
+TSSs had an identifiable 10 promoter element (Fig. 2) (23). This 
+represents a highly significant enrichment (P 0.001), since only 
+15% of randomly chosen antisense positions have a 10 se-
+quence that met these criteria (Fig. 2). In contrast, similar analyses 
+for 28 , 32 , or 54 promoters did not yield significant enrich-
+ments upstream of antisense TSSs in either species. 
+Most asRNAs are not shared between species. Among the 120 
+orthologous gene pairs with a highly expressed asRNA in either 
+E. coli or Salmonella, only 8 (6.7%) showed high antisense expres-
+sion in both species, and only 3 (2.5%) shared an identical anti-
+sense TSS position. Applying relaxed criteria that included any 
+asRNA with a maximum read depth of at least 20 and an antisense 
+TSS within 10 bp, we found that only 17 (14.2%) of the 120 gene 
+pairs shared antisense expression at homologous positions in 
+E. coli and Salmonella (Table 2). 
+For asRNAs that were expressed in one species but not detected 
+in the orthologous gene in the other species, the species lacking the 
+asRNA was less likely to have an antisense 10 promoter element. 
+In such cases, only 26.9% of the homologous positions in E. coli 
+and 31.5% in Salmonella had an identifiable 10 promoter ele-
+ment. Although these values are greatly reduced relative to the 
+frequencies of 70% observed for expressed asRNAs, they still 
+significantly exceed the expectation based on randomly chosen </p>
+
+<p>TABLE 1 Sequencing reads mapped to E. coli and Salmonella genomes </p>
+
+<p>Characteristic </p>
+
+<p>Value for genome </p>
+
+<p>E. coli 
+Salmonella a </p>
+
+<p>Total no. of reads 
+30,206,434 
+29,275,111 
+Total mapped reads (%) 
+88 
+87 
+Protein-coding genes (%) 
+Sense 
+30 
+27 
+Antisense 
+2 
+2 
+Intergenic regions (%) 
+54 
+55 
+Plasmid (%) 
+No plasmid 
+0.4 </p>
+
+<p>a Of 5,313 putative ORFs in the Salmonella Typhimurium 14028S genome, only 4,477 
+with orthologs in Salmonella Typhimurium LT2 and/or in E. coli MG1655 were 
+considered. </p>
+
+<p>FIG 1 Location of an asRNA within the holE coding region of E. coli. Tran-</p>
+
+<p>scripts identified by RNA-seq mapped onto the E. coli genome: reads corre-
+sponding to holE mRNA transcripts are in red, and reads corresponding to the 
+antisense transcript are in green. Locations of TSSs and the direction of tran-
+scription are shown. Numbering is according to the E. coli MG1655 genome 
+(NC_000913.2). </p>
+
+<p>Raghavan et al. </p>
+
+
+
+<p>® </p>
+
+<p>mbio.asm.org 
+July/August 2012 Volume 3 Issue 4 e00156-12 </p>
+
+<p>antisense positions (P 0.05) (Fig. 2). As expected, promoter 
+elements were much less likely to be shared between E. coli and 
+Salmonella if antisense expression was detected in only one of the </p>
+
+<p>species (37%) than if it was detected in both (90%) (P 0.002, 
+Fisher's exact test). 
+Lack of purifying selection on antisense promoters. Patterns 
+of DNA sequence divergence provide an effective tool for identi-
+fying sequences of functional importance. Such sequences typi-
+cally experience purifying selection, meaning that most new mu-
+tations are deleterious and are therefore eliminated from the 
+population. As a result, functional sequences show lower rates of 
+sequence evolution than their nonfunctional counterparts. Pro-
+moters are necessary for the precise control of gene expression, 
+and their sequences are typically under purifying selection and 
+enriched in the regulatory regions of bacterial genomes (23-25). 
+Accordingly, we found that the promoter regions for mRNAs ex-
+hibited reduced nucleotide divergence between E. coli and Salmo-
+nella relative to third codon position sites within protein-coding 
+sequences. In particular, mRNA promoters exhibited pronounced 
+reductions in divergence around the 35 and 10 elements, im-
+portant functional regions that are involved in factor binding 
+(Fig. 3A). 
+In contrast to the functional constraint acting on promoter 
+regions of mRNAs, there was no evidence of purifying selection on 
+antisense promoter regions in E. coli and Salmonella. This is con-
+sistent with the observed differences between these species in an-
+tisense expression patterns and in the presence/absence of anti-
+sense promoter elements. The levels of sequence divergence in 
+antisense promoter regions were indistinguishable from back-
+ground levels in the surrounding gene, and unlike the situation for 
+mRNA promoters, there was no indication of specific reductions 
+in the rate of sequence evolution around the 10 and 35 posi-
+tions (Fig. 3A). 
+Repeating this analysis with E. coli and its congener Esche-
+richia fergusonii yielded similar results, indicating that even on a 
+more recent evolutionary time scale, there is no evidence of selec-
+tion on antisense promoter regions (Fig. 3B). Furthermore, we 
+found a similar pattern at the intraspecific level by analyzing 41 
+completely sequenced E. coli genomes, revealing a reduced fre-
+quency of polymorphic sites in promoter regions (particularly </p>
+
+<p>FIG 2 Enrichment of promoter elements associated with antisense RNAs. </p>
+
+<p>Distributions show null expectations for the percentage of randomly selected 
+antisense sites associated with a 10 promoter element in the E. coli (black/ 
+right) and Salmonella (gray/left) genomes. For each genome, arrows indicate 
+the percentage of identified antisense TSSs associated with 10 promoter 
+elements. </p>
+
+<p>TABLE 2 Genes with asRNAs conserved on their noncoding strands in E. coli and Salmonella </p>
+
+<p>Gene 
+Product </p>
+
+<p>asRNA expression a </p>
+
+<p>Distance between TSS positions (bp) 
+E. coli 
+Salmonella </p>
+
+<p>acrR 
+DNA-binding transcriptional repressor 
+495 
+819 
+0 
+asd 
+Aspartate-semialdehyde dehydrogenase, NAD(P) binding 
+1,062 
+57 
+0 
+erfK 
+L,D-Transpeptidase linking Lpp to murein 
+176 
+680 
+1 
+gloB 
+Hydroxyacylglutathione hydrolase 
+110 
+1,079 
+1 
+ispB 
+Octaprenyl diphosphate synthase 
+30 
+637 
+1 
+mdtL (yidY) 
+Multidrug efflux system protein 
+447 
+143 
+0 
+metB 
+Cystathionine gamma-synthase, PLP dependent 
+502 
+40 
+0 
+mltC 
+Membrane-bound lytic murein transglycosylase C 
+178 
+657 
+0 
+napA 
+Nitrate reductase, periplasmic, large subunit 
+419 
+209 
+10 
+nudF 
+ADP-ribose pyrophosphatase 
+171 
+346 
+0 
+pflB 
+Pyruvate formate lyase I 
+79 
+214 
+0 
+treR 
+DNA-binding transcriptional repressor 
+321 
+28 
+0 
+ybhA 
+Pyridoxal phosphate (PLP) phosphatase 
+270 
+29 
+0 
+ycdX 
+Predicted zinc-binding hydrolase 
+204 
+3,500 
+10 
+yhbE 
+Predicted inner membrane permease 
+90 
+243 
+1 
+yjjX 
+Inosine/xanthosine triphosphatase 
+1,113 
+419 
+0 
+ytfP 
+Conserved protein, UPF0131 family 
+432 
+550 
+0 </p>
+
+<p>a Maximum depth of mapped reads near asRNA TSS. </p>
+
+<p>Antisense RNAs in Enteric Bacteria </p>
+
+<p>July/August 2012 Volume 3 Issue 4 e00156-12 </p>
+
+<p>® </p>
+
+<p>mbio.asm.org 3 </p>
+
+<p>around the 35 and 10 positions) for mRNAs but not for 
+asRNAs (Fig. 3C). </p>
+
+<p>DISCUSSION </p>
+
+<p>We detected widespread antisense transcription and strikingly 
+similar numbers of asRNAs in E. coli and Salmonella but found 
+that most individual asRNAs are not shared between these two 
+closely related enteric bacteria. The lack of conservation in 
+asRNAs between these species might be taken to indicate that 
+asRNAs function largely in a species-specific manner; however, we 
+found no evidence of conservation or functional constraint acting 
+within the genus Escherichia or even among different strains of 
+E. coli (Fig. 3). Therefore, we suggest the alternative interpretation 
+that a large fraction of antisense expression in bacterial genomes is 
+nonfunctional. 
+Promoter-like sequences are expected to arise spontaneously 
+by point mutations over short evolutionary time scales in bacterial 
+genomes because of the low information content in 70 transcrip-
+tion factor binding sites (16, 26). The underrepresentation of 
+transcription factor binding motifs in bacterial genomes indicates 
+that selection acts to purge spurious promoters (23, 24, 27). How-
+ever, Hahn et al. (27) found that the average intensity of selection 
+against such elements is weak, falling well within the range of 
+"nearly neutral" mutations, where the effects of genetic drift begin 
+to overwhelm the strength of selection (28, 29). Consequently, 
+many spurious promoter-like sequences are expected to persist 
+within populations and even reach fixation based purely on non-
+adaptive mechanisms of mutation and drift. 
+In the context of these observations, the lack of conservation in 
+highly expressed bacterial asRNAs between E. coli and Salmonella 
+and within E. coli suggests that many of these transcripts are the 
+products of transcriptional misfiring resulting from the degener-</p>
+
+<p>ate nature of the binding site motifs for the housekeeping factor. 
+This conclusion parallels a recent examination of the Bacillus sub-
+tilis transcriptome, which also found many asRNAs to be products 
+of spurious transcriptional events from evolutionarily less con-
+served promoter sequences (30). 
+The recent analysis of transcription in B. subtilis (30) found 
+that asRNAs were highly variable across environmental condi-
+tions and originated preferentially with alternative promoters. In 
+contrast to the situation in B. subtilis, we found asRNA expression 
+in E. coli and Salmonella to be predominantly controlled by the 
+housekeeping 70 factor, consistent with expectations given our 
+sampling at log-phase growing conditions. It is possible that our 
+analysis captured only a fraction of potential antisense expression, 
+which could account for the limited overlap observed between the 
+sets of asRNAs reported in different studies of E. coli (see Table S5 
+in the supplemental material). The sensitivity of spurious tran-
+scription events to minor environmental differences may also ex-
+plain why antisense TSS positions are weakly but significantly en-
+riched in promoter-like sequences, even in species for which we 
+found no expression of the corresponding asRNA. 
+Even if most asRNAs do not have a clear role in cellular pro-
+cesses, there are undoubtedly some individual asRNAs that serve 
+some biological function. Previous studies have described func-
+tional asRNAs in both E. coli and Salmonella (12-15), and a recent 
+analysis of the transcriptomes of a number of Gram-positive bac-
+teria suggests a role for asRNAs in genome-wide mRNA process-
+ing (31). Our findings, however, make it clear that the identifica-
+tion of antisense expression does not, in and of itself, confirm an 
+adaptive role. The future identification of functional asRNAs 
+should ideally link expression data to a combination of genetic, 
+biochemical, and evolutionary data to reject the null hypothesis </p>
+
+<p>FIG 3 Comparisons of divergence/polymorphism in asRNA and mRNA promoter sequences. Plotted are averages from a 9-bp sliding window of the </p>
+
+<p>interspecific sequence divergence between either E. coli and Salmonella (A) or E. coli and E. fergusonii (B) or for the proportion of segregating sites within E. coli 
+(C). Black arrows on y axes indicate average divergence (or polymorphism) for the entire coding sequences of ORFs containing asRNAs. Note that levels of 
+sequence divergence (or polymorphism) in the asRNA promoter regions are statistically indistinguishable from the corresponding levels in the surrounding ORF 
+(P 0.5 for all three data sets; paired t tests). The 10 bp flanking the 10 and 35 regions have been highlighted. Each error bar represents 1 standard error 
+of the proportion. </p>
+
+<p>Raghavan et al. </p>
+
+
+
+<p>® </p>
+
+<p>mbio.asm.org 
+July/August 2012 Volume 3 Issue 4 e00156-12 </p>
+
+<p>that expression is a consequence of transcription from spurious 
+promoters. 
+The existence of pervasive, antisense transcription may be of 
+general consequence to the cell: antisense transcription itself may 
+be metabolically costly or interfere with the expression of the cog-
+nate protein-coding gene (32), and asRNA transcripts could po-
+tentially serve as raw material for the evolution of new regulatory 
+elements. Noncoding RNAs and regulatory sequences have been 
+found to be involved in short-term evolutionary diversification 
+and adaptation to local environments in both bacteria and eu-
+karyotes (33-36), suggesting that strain-specific evolution of non-
+coding transcripts has the potential to supply new functions. Per-
+vasive antisense expression may also affect genome contents in 
+that bacterial mutations are biased towards AT (37, 38) and 
+selection pressure acting to purge AT-rich promoter-like se-
+quences would have a counterbalancing effect on the genomic 
+base composition. </p>
+
+<p>MATERIALS AND METHODS </p>
+
+<p>Bacterial strains, RNA preparation, library construction, and sequenc-
+ing. E. coli K-12 MG1655 (GenBank accession no. NC_000913.2) and 
+Salmonella enterica subsp. enterica serovar Typhimurium strain 14028S 
+(GenBank accession no. CP001363.1) were grown in LB medium to log 
+phase (optical density at 600 nm [OD 600 ] of ~0.5). Cells were harvested by 
+centrifugation at 4°C for 5 min, and total RNA was extracted from bacte-
+rial pellets using Tri reagent (ABI) and cleaned using Qiagen RNeasy 
+columns. Genomic DNA was removed by DNase treatment, and 16S and 
+23S rRNAs were eliminated using the MICROBExpress kit (ABI). Direc-
+tional (i.e., strand-specific) RNA-seq libraries were prepared to maintain 
+strand information (39) and were assayed on a Bioanalyzer 2100 system 
+(Agilent) for quality. Each library was loaded onto a single lane of a flow 
+cell and sequenced using the Illumina GA II platform (35 cycles) at the 
+Yale Center for Genome Analysis. Raw sequencing reads have been de-
+posited in the NCBI Sequence Read Archive (accession no. SRA047329.1), 
+and Artemis-ready files are available on request. 
+Mapping of sequencing reads and quantitative PCR. Sequencing 
+reads were mapped using the software program <rs type="software">MAQ</rs> (40) onto the pub-
+lished E. coli (NC_000913.2) and Salmonella Typhimurium (CP001363.1) 
+genomes, allowing up to two mismatches per read. The number of reads 
+mapped to each nucleotide position on each strand was obtained by pars-
+ing the <rs type="software">MAQ</rs> pileup file using a custom Perl script, as previously described 
+(18). The expression levels of genes were estimated by identifying the 
+maximum number of reads that mapped to the sense and antisense 
+strands of annotated open reading frames (ORFs). Background expres-
+sion levels were calculated for 53 genes (see Table S6 in the supplemental 
+material) that were not expressed in a previous microarray-based study in 
+exponential-phase E. coli in LB (41). Microarray data were downloaded 
+from the Oklahoma University E. coli Gene Expression Database (http: 
+//genexpdb.ou.edu/main/). Read depths for these genes ranged from 0 to 
+19. Based on these, we used a cutoff of 20 reads to designate an asRNA as 
+expressed. 
+For qPCR validation of expression levels, E. coli was grown in LB 
+medium, and RNA was extracted as described above. After DNase treat-
+ment, cDNA was prepared from 1 g of RNA using an iScript kit (Bio-
+Rad). Four loci (cdd, ldcC, napF, and ompA) were selected for qPCR, 
+which was performed using SYBR green on a LightCycler instrument 
+(Roche). To assess the similarity between expression estimates from Illu-
+mina sequencing and qPCR, we calculated the Pearson correlation coef-
+ficient between log-transformed maximum read depth and the qPCR cy-
+cle threshold (C T ), applying a one-tailed test of significance (see Fig. S1 in 
+the supplemental material). 
+For qPCR validation of asRNAs, three independent E. coli samples 
+were grown in LB and RNA was extracted, as described above. After 
+DNase treatment, cDNA was prepared from 500 ng of RNA and asRNA-</p>
+
+<p>specific primers using a SuperScript II reverse transcriptase kit (Invitro-
+gen). Reaction mixtures were incubated at 50°C for 30 min, followed by 
+enzyme inactivation at 70°C for 15 min. qPCR was performed on a Mas-
+tercycler instrument (Eppendorf), and the intraclass correlation among 
+the replicate C T values obtained for each sample was determined using the 
+irr package in the software environment R v2.8.0 (see Fig. S2). 
+Identification of antisense TSSs. After RNA-seq reads were mapped 
+to the respective genome, the antisense strands of all protein coding genes 
+were scanned using a custom Perl script to identify regions with a read 
+depth of at least 200. These genes were then manually inspected in Artemis 
+to determine the positions of upshifts in coverage to identify putative TSSs 
+(30) (Fig. 1). Antisense TSSs that were located at the 5= ends of three 
+protein-coding genes (ybaN and STM14_1994 in Salmonella, and yneJ in 
+E. coli) were excluded from further analysis because they potentially rep-
+resent the TSSs of the divergently transcribed adjacent genes. 
+Identification of 10 promoter elements. DNA binding of the 70 
+transcription factor is mediated by a promoter region that consists of two 
+short motifs positioned approximately 10 and 35 bp upstream of the TSS 
+(42). The 10 element is particularly indispensable and has a core se-
+quence with the 6-bp consensus TATAAT (43, 44). This motif is highly 
+degenerate, however, since promoter elements often have imperfect 
+matches to the consensus and can be located anywhere in a window rang-
+ing from approximately 4 to 18 bp upstream of the TSS (44). Therefore, to 
+identify potential 10 elements associated with antisense TSSs, we 
+searched this 15-bp window for any hexamers that matched at least 4 of 
+the 6 bp in the consensus sequence including the two most highly con-
+served positions, A2 and T6 (23). This approach could potentially miss 
+some legitimate 10 elements because many documented promoters are 
+too divergent to satisfy these criteria (45). 
+To produce a null expectation for the observed frequency of 10 
+elements, we generated 1,000,000 sets of randomly sampled antisense po-
+sitions in each genome and determined the fraction of sites in each set that 
+contained a 10 element satisfying the criteria described above. 
+Analysis of nucleotide sequence divergence and polymorphism. 
+Patterns of nucleotide divergence and polymorphism were analyzed to 
+infer whether promoter regions regulating asRNA expression are subject 
+to functional constraint. To calculate levels of nucleotide sequence diver-
+gence, protein-coding gene sequences containing identified antisense 
+TSSs were extracted from the genome sequence of either E. coli 
+(NC_000913.2) or Salmonella (CP001363.1) and aligned with ortholo-
+gous sequences from the other species. Codon-based nucleotide align-
+ments were generated by aligning translated amino acid sequences using 
+the software program <rs id="software-2" type="software">MUSCLE</rs> <rs corresp="#software-2" type="version-number">v3.7</rs> and then converting them back to 
+nucleotide sequences (46). Divergence values were calculated using third 
+codon positions only, which are largely synonymous and thus less suscep-
+tible to selection acting on the sense-strand-encoded amino acid se-
+quence. Alignment gaps were excluded from divergence estimates. 
+Average divergence levels between E. coli and Salmonella were calcu-
+lated based on the distance to the antisense TSS. To test the hypothesis that 
+purifying selection acts to constrain sequence evolution in antisense pro-
+moter regions, the divergence data were partitioned into two categories: 
+(i) an antisense promoter region consisting of the TSS along with 50 
+upstream and 10 downstream nucleotides on the antisense strand and (ii) 
+the rest of the surrounding protein-coding gene. A paired t test was im-
+plemented in R v2.8.0 to compare levels of nucleotide divergence between 
+these two partitions. In addition, divergence data within the antisense 
+promoter region were visualized using a sliding-window analysis with a 
+window size of 9 bp and a step size of 1 bp. 
+The above comparison between E. coli and Salmonella was repeated 
+using E. coli and its more closely related congener Escherichia fergusonii 
+(NC_011740.1). In addition, a similar analysis was performed using the 
+number of segregating sites in multiple alignments generated from com-
+plete genome sequences of 41 strains of E. coli (see Table S7 in the supple-
+mental material). Note that this set of genomes included some isolates 
+that are taxonomically placed in the genus Shigella based on their patho-</p>
+
+<p>Antisense RNAs in Enteric Bacteria </p>
+
+<p>July/August 2012 Volume 3 Issue 4 e00156-12 </p>
+
+<p>® </p>
+
+<p>mbio.asm.org 5 </p>
+
+<p>genic properties but are phylogenetically nested within E. coli (47). Only 
+genes that were present in at least 10 of the strains were included in this 
+polymorphism analysis. 
+To provide a basis of comparison for the patterns of nucleotide diver-
+gence and polymorphism observed in antisense promoter regions, we 
+identified TSSs for a set of highly expressed protein-coding mRNAs (max-
+imum read depth of at least 200) in E. coli and Salmonella (67 and 55 loci, 
+respectively). For this set of control loci, we extracted gene sequences 
+along with associated 5= regions extending 200 bp upstream of the iden-
+tified TSS from the same sets of genomes described above. Nucleotide 
+alignments were performed in <rs type="software">MUSCLE</rs>, and sequence divergence and 
+polymorphism values were calculated as described above, except that 
+there was no filtering based on codon position for upstream noncoding 
+sequences. Genes with unalignable upstream regions were excluded from 
+the analysis. 
+For both interspecific and intraspecific comparisons, putative or-
+thologs were identified as pairs of genes that returned top hits in reciprocal 
+searches between a pair of genomes with <rs corresp="#software-4" type="creator">NCBI</rs> <rs id="software-4" type="software">tBLASTn</rs> <rs corresp="#software-4" type="version-number">v2.2.24</rs> (48). All 
+analyses were conducted with custom Perl scripts utilizing BioPerl mod-
+ules (49). </p>
+
+<p>SUPPLEMENTAL MATERIAL </p>
+
+<p>Supplemental material for this article may be found at http://mbio.asm.org 
+/lookup/suppl/doi:10.1128/mBio.00156-12/-/DCSupplemental. 
+Figure S1, EPS file, 1.1 MB. 
+Figure S2, EPS file, 0.7 MB. 
+Table S1, DOCX file, 0.1 MB. 
+Table S2, DOCX file, 0.1 MB. 
+Table S3, DOCX file, 0.1 MB. 
+Table S4, DOCX file, 0.1 MB. 
+Table S5, DOCX file, 0.1 MB. 
+Table S6, DOCX file, 0.1 MB. 
+Table S7, DOCX file, 0.1 MB. </p>
+
+<p>ACKNOWLEDGMENTS </p>
+
+<p>We thank Cindy Barlan for technical help and Kim Hammond for assis-
+tance with figures. 
+This work was supported in part by NIH grant GM74738 to 
+H.O. D.B.S. was supported by an NIH Ruth Kirschstein postdoctoral fel-
+lowship (1F32GM099334-01). </p>
+
+
+
+
+
+<p>® </p>
+
+<p>mbio.asm.org 
+July/August 2012 Volume 3 Issue 4 e00156-12 </p>
+
+
+
+<p>Antisense RNAs in Enteric Bacteria </p>
+
+<p>July/August 2012 Volume 3 Issue 4 e00156-12 </p>
+
+<p>® </p>
+
+<p>mbio.asm.org 7 </p>
+
+</text></tei>

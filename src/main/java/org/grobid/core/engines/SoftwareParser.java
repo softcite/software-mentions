@@ -75,7 +75,7 @@ public class SoftwareParser extends AbstractParser {
     }
 
     /**
-     * Extract all Software Objects from a simple piece of text.
+     * Extract all Software mentions from a simple piece of text.
      */
     public List<SoftwareEntity> processText(String text) throws Exception {
         if (isBlank(text)) {
@@ -117,7 +117,7 @@ public class SoftwareParser extends AbstractParser {
     }
 
 	/**
-	  * Extract all Software Objects from a pdf file, with 
+	  * Extract all Software mentions from a pdf file, with 
 	  */
     public Pair<List<SoftwareEntity>,Document> processPDF(File file) throws IOException {
 
@@ -381,7 +381,7 @@ public class SoftwareParser extends AbstractParser {
             throw new GrobidException("Cannot create training data because input file can not be accessed: " + inputFile);
         }
 
-        Element root = getTEIHeader(id);
+        Element root = getTEIHeader("_" + id);
         if (inputFile.endsWith(".txt") || inputFile.endsWith(".TXT")) {
             root = createTrainingText(file, root);
         } else if (inputFile.endsWith(".pdf") || inputFile.endsWith(".PDF")) {
@@ -703,7 +703,7 @@ public class SoftwareParser extends AbstractParser {
             if ((endPos > 0) && (text.length() >= endPos) && (text.charAt(endPos-1) == ' '))
                 endPos--;
 
-            if (clusterLabel.equals(SoftwareTaggingLabels.OBJECT)) {
+            if (clusterLabel.equals(SoftwareTaggingLabels.SOFTWARE)) {
             	
             	if (currentEntity == null) {
                     currentEntity = new SoftwareEntity();
@@ -712,7 +712,7 @@ public class SoftwareParser extends AbstractParser {
                 currentEntity.setRawForm(clusterContent);
                 currentEntity.setOffsetStart(pos);
                 currentEntity.setOffsetEnd(endPos);
-                currentEntity.setType(SoftwareLexicon.Software_Type.OBJECT);
+                currentEntity.setType(SoftwareLexicon.Software_Type.SOFTWARE);
                 currentEntity.setTokens(theTokens);
 
 				List<BoundingBox> boundingBoxes = BoundingBoxCalculator.calculate(cluster.concatTokens());
@@ -741,8 +741,8 @@ public class SoftwareParser extends AbstractParser {
         for (SoftwareEntity entity : entities) {
             Element entityElement = teiElement("rs");
 
-            if (entity.getType() == SoftwareLexicon.Software_Type.OBJECT) {
-                entityElement.addAttribute(new Attribute("type", "software-object"));
+            if (entity.getType() == SoftwareLexicon.Software_Type.SOFTWARE) {
+                entityElement.addAttribute(new Attribute("type", "software"));
 
                 int startE = entity.getOffsetStart();
                 int endE = entity.getOffsetEnd();
@@ -761,13 +761,13 @@ public class SoftwareParser extends AbstractParser {
 	/**
 	 *  Create a standard TEI header to be included in the TEI training files.
 	 */
-    private Element getTEIHeader(int id) {
+    static public Element getTEIHeader(String id) {
         Element tei = teiElement("tei");
         Element teiHeader = teiElement("teiHeader");
 
-        if (id != -1) {
+        if (id != null) {
             Element fileDesc = teiElement("fileDesc");
-            fileDesc.addAttribute(new Attribute("xml:id", "http://www.w3.org/XML/1998/namespace", "_" + id));
+            fileDesc.addAttribute(new Attribute("xml:id", "http://www.w3.org/XML/1998/namespace", id));
             teiHeader.appendChild(fileDesc);
         }
 

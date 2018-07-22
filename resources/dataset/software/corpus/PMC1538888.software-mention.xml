@@ -1,0 +1,253 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC1538888" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:26+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>ABSTRACT </p>
+
+<p>The large number of experimentally determined 
+protein 3D structures is a rich resource for studying 
+protein function and evolution, and protein struc-
+ture comparison (PSC) is a key method for such 
+studies. When comparing two protein structures, 
+almost all currently available PSC servers report 
+a single and sequential (i.e. topological) alignment, 
+whereas the existence of good alternative align-
+ments, including those involving permutations 
+(i.e. non-sequential or non-topological alignments), 
+is well known. We have recently developed a novel 
+PSC method that can detect alternative alignments 
+of statistical significance (alignment similarity 
+P-value ,10 À5 Protein structure comparison (PSC) has been a staple method 
+for obtaining information about a protein when its 3D struc-
+ture is determined experimentally or predicted computation-
+ally. It is therefore not surprising that the development of 
+new PSC algorithms has been continuing for more than two 
+decades with no sign of ceasing (1-6). These efforts are 
+needed not only to meet new scientific challenges but also 
+to benefit maximally from the large number of new structures 
+now pouring in from structural genomics projects (7,8). </p>
+
+<p>To these ends, a number of laboratories have created 
+PSC servers in recent years to provide information beyond 
+the basic PSC operations, including, e.g. those that do flexible 
+alignment (9,10), those that discover recurring substructures 
+or motifs (11,12), those that perform multiple structure align-
+ment (13) and those that focus on fast structure feature 
+extraction (14-16). 
+Here we offer a new PSC server with the functionality to 
+report statistically significant alternative alignments (17,18) 
+and structural permutations (19,20) at all levels of complex-
+ity. Our method, named OPAAS, which has been detailed 
+elsewhere (21,22), deduces the probabilities of aligning 
+every possible pair of secondary structure elements (SSEs) 
+between two protein structures prior to the search for a 
+solution of their alignment. This deduction allows the ready 
+identification of most, though not all, statistically significant 
+alignment solutions, many of which being distinct alterna-
+tives to the 'optimal' solution, the target of conventional 
+PSC operations. As we reported previously from a study of 
+all-against-all database comparisons (22), about half of the 
+alternative alignments were detectable only when permuta-
+tion, i.e. non-topological alignment, was allowed. Moreover, 
+many of the permuted alignments exhibited a permutation 
+complexity higher than that of circular permutation, meaning 
+that more than two separable regions of the protein structure 
+could be aligned non-sequentially. To quantitatively measure 
+the level of permutation complexity for all the alignments, we 
+devised a permutation index (PI) as follows: </p>
+
+<p>PI ¼ 
+ð 
+P n 
+i¼1 S i Þ 2 
+P n 
+i¼1 S 2 </p>
+
+<p>i </p>
+
+<p>‚ </p>
+
+<p>where S i is the size (number of aligned amino acid residues) 
+of the aligned region i and n is the total number of aligned 
+regions. A region is an independently, and, within the region 
+itself, topologically aligned part of an alignment. That is, 
+within a region, all the aligned residues are ordered sequen-
+tially, which may or may not be interrupted by gaps, but 
+these regions, if there are more than one, are aligned non-
+sequentially. It follows that an alignment without any permu-
+tation will have just one region, and will have, by definition, a 
+PI value of 1.0. Also by definition, a circular permutation, </p>
+
+<p>*To whom correspondence should be addressed. Tel: +886 2 2789 9033; Fax: +886 2 2788 7641; Email: mjhwang@ibms.sinica.edu.tw </p>
+
+<p>Ó 2006 The Author(s). 
+This is an Open Access article distributed under the terms of the Creative Commons Attribution Non-Commercial License (http://creativecommons.org/licenses/ 
+by-nc/2.0/uk/) which permits unrestricted non-commerical use, distribution, and reproduction in any medium, provided the original work is properly cited. </p>
+
+<p>Nucleic Acids Research, 2006, Vol. 34, Web Server issue W95-W98 
+doi:10.1093/nar/gkl264 </p>
+
+<p>which involves swapping two regions in a non-topological 
+alignment (19,20), will receive a PI value &gt;1.0 but not 
+&gt;2.0. PI hence furthermore let us know how much the sizes 
+of the separately aligned regions differ. For example, given 
+two permuted protein pairs having PI 3.0 and 2.5, respec-
+tively, we will know that they both have three aligned 
+regions, but the sizes of the three regions are equal for the 
+former and vary significantly for the latter. 
+Both permuted and non-permuted alternative alignments 
+are reported by the OPAAS server in a fashion that is easy 
+for a non-specialist user to grasp the main significance of 
+the comparison as one would with the 'optimal' alignment 
+featured by other PSC servers. This is aided by the server's 
+user-friendly interfaces described below, which use intuitive 
+viewing directions, informative tables that can be sorted by 
+different parameters, cascading information windows, and a 
+structured user guide with examples. </p>
+
+<p>OPAAS WEB SERVER LAYOUT </p>
+
+<p>At the portal of the OPAAS web server (Figure 1a) lay two 
+main structure comparison functions, '1 against SCOP90 
+dataset' and '2 chains alignment', and a Help webpage for 
+a structured OPAAS user guide, which can be viewed 
+on-line (http://opaas.ibms.sinica.edu.tw/help/opaas.html) as 
+well as interactively in different contexts (see below). </p>
+
+<p>One-against-all search on SCOP90 </p>
+
+<p>The one-against-all on SCOP90 function is designed to find 
+structural neighbors of a protein of interest in the structure 
+classification of proteins (<rs type="software">SCOP</rs>) (23) database. One of the 
+following three input options (left panel in Figure 1b and </p>
+
+<p>user guide 3.1.1) is available for the search: a structure 
+domain already in SCOP90 (SCOP version 1.55, &lt;90% 
+sequence identity non-redundant set), a structure in the cur-
+rent Protein Data Bank (PDB; the server updates its local 
+PDB weekly) (24) with a specified chain (PDB ID option), 
+or a structure in PDB format uploaded by user (User's struc-
+ture option). All of the three inputs can be accompanied with 
+optional parameter settings for customized output. The 
+parameters that could be changed from default include mini-
+mum rough Z-score [for the alignment prior to refinement 
+(21)], minimum refined Z-score, maximum root mean square 
+deviation (RMSD) of Ca superposition between two aligned 
+protein chains, minimum aligned sequence identity, maxi-
+mum number of shown matches, and sorting options (right 
+panel in Figure 1b and user guide 3.1.2). Unlike the first 
+input option, for which pre-computed results will be 
+retrieved, the last two input options require entry of user's 
+e-mail address (user guide 3.1.3) because the OPAAS server 
+needs time for computation and will return the result via 
+email in, typically, minutes to hours, depending mainly on 
+the stringency of the selected parameters. 
+For the first input option, a table of matched results 
+retrieved from a pre-computed database will be displayed 
+directly on the web page (Figure 1c and user guide 3.2). In 
+this table, Z-score, #a.a. aligned (number of aligned amino 
+acids), and RMSD reported are those for the optimal align-
+ment solution only, #alt. sol. is the number of alternative 
+alignment solutions that satisfy the parameters specified by 
+the user, and PI indicates the level of permutation complexity 
+as described above. User can sort the table by the field 
+selected (user guide 3.2.2) and download this table either as 
+a plain text file or a comma separated values format file (user 
+guide 3.2.3). User also can click on the matched entry to view </p>
+
+<p>Figure 1. Snapshots of the OPAAS web server. (a) The portal page of the server. Two main applications can be chosen here. (b) The input page for the function 
+of one-against-all search in the SCOP90 dataset. Three different input preferences and optional parameter settings are allowed in the left and right panel, 
+respectively. (c) This table of matched results is retrieved from a database containing pre-computed all-against-all comparison results, which is available only 
+with the one-against-all function. (d) The input page for the function of two chain alignment. (e) Output of a two chain alignment. The information of all 
+alignment solutions ('optimal' and alternatives) is hierarchically laid out in three frames. </p>
+
+<p>W96 Nucleic Acids Research, 2006, Vol. 34, Web Server issue </p>
+
+<p>details of each alignment solution, which will have exactly 
+the same output as that from using the function of '2 chains 
+alignment' (user guide 3.2.4; see below). For the output of the 
+last two input options, an e-mail of search result with the 
+subject title 'OPAAS result' will be sent back to the e-mail 
+address supplied (user guide 3.3). The e-mail contains a 
+table of search result like that of the first input option 
+described above, but to interactively view details of individ-
+ual alignment solution, the second function, described below, 
+needs to be separately invoked. </p>
+
+<p>Alignment of two protein chains </p>
+
+<p>For the function of '2 chains alignment' (Figure 1d and user 
+guide 4.1), the structures of the two protein chains could 
+either be selected from PDB (i.e. entering PDB ID) or 
+uploaded by user in PDB format. Display of the comparison 
+results, which can be expected to follow immediately upon 
+submission of the request, is split into three frames to show 
+'basic information of the comparison', 'information of each 
+solution', and 'detail alignment of selected region' 
+(Figure 1e and user guide 4.2). 
+In the frame of 'basic information of the comparison', one 
+of two tables gives some basic information about the two 
+chains compared: size (number of amino acid residues), and 
+number of SSE (user guide 4.2.1). User can click a hyperlink 
+on the name of the two chains placed above the table to learn 
+more about the compared proteins from the PDB website 
+(user guide 4.2.2). The other table shows information of all 
+the solutions (both the 'optimal' and alternative alignments, 
+if any) of this comparison including #a.a. aligned (number 
+of aligned residues), RMSD, refined Z-score, PI and region 
+(number of permutedly aligned regions). Clicking on the 
+solution number shows details of that solution in another 
+two frames (user guide 4.2.3). The frame of 'information of 
+each solution' shows the alignment of the selected solution 
+graphically (user guide 4.2.4), both in a schematic representa-
+tion and in a 3D superposition supported by chime plug-in 
+(user guide 4.2.5). A file containing Cartesian coordinates 
+of this alignment solution in standard PDB format can be 
+exported. Different colors of the boxes in the diagram of 
+the schematic representation, as well as of the traces in the 
+3D superposition, refer to different aligned regions. Clicking 
+on the region box will show 'detail alignment of the selected 
+region' in the third frame. The sequence alignment of this 
+region can also be downloaded in MFA (Multi-FASTA 
+Alignment) format by clicking 'export alignment' at the top 
+of this frame. </p>
+
+<p>DISCUSSION </p>
+
+<p>The best way to compare two protein structures often depends 
+on the question being asked (6), so having a server like 
+OPAAS that can simultaneously analyze solutions beyond 
+the 'optimal' alignment is useful. Although most of the pub-
+lished PSC algorithms can be modified to offer similar capa-
+bility, to our knowledge, only two PSC servers give user the 
+option to see alternative alignments: Prosup (25) and SARF2 
+(26), but Prosup is limited to topological alignments and 
+neither offers one-against-all database searching service. 
+Moreover, with an intuitive hierarchical layout of the com-</p>
+
+<p>parison results and optional parameter settings to view most 
+significant alignments (e.g. with similarity P-value set at 
+10 À5 , a typical comparison usually resulted in &lt;5 such solu-
+tions), an informative summary that could lead to unexpected 
+insight from unexpected alternative alignments is effectively 
+produced. The main limitation of OPAAS, at its current ver-
+sion, arose from a compromise to trade for computational 
+efficiency, which dictates that a structure must possess at 
+least three SSEs to be compared (21,22); elimination of this 
+limitation is in progress. Significantly, our server allows data-
+base search with an efficiency comparable that of the popular 
+CE server (27), despite ours being run on a personal computer 
+(Pentium IV) and being asked to find alternative alignments. 
+The source code of OPAAS is also available at the server for 
+free download for standalone computations and for incorpora-
+tion of structure database other than SCOP. </p>
+
+<p>ACKNOWLEDGEMENTS </p>
+
+<p>Funding to pay the Open Access publication charges for this 
+article was provided by the Academia Sinica and National 
+Science Council of Taiwan. </p>
+
+<p>Conflict of interest statement. None declared. </p>
+
+
+
+</text></tei>

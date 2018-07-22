@@ -1,0 +1,633 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4374707" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:19+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>Abstract </p>
+
+<p>As digital imaging is becoming a fundamental part of medical and biomedical research, 
+the demand for computer-based evaluation using advanced image analysis is becoming 
+an integral part of many research projects. A common problem when developing new 
+image analysis algorithms is the need of large datasets with ground truth on which the 
+algorithms can be tested and optimized. Generating such datasets is often tedious and 
+introduces subjectivity and interindividual and intraindividual variations. An alterna-
+tive to manually created ground-truth data is to generate synthetic images where the 
+ground truth is known. The challenge then is to make the images sufficiently similar to 
+the real ones to be useful in algorithm development. One of the first and most widely 
+studied medical image analysis tasks is to automate screening for cervical cancer 
+through Pap-smear analysis. As part of an effort to develop a new generation cervical 
+cancer screening system, we have developed a framework for the creation of realistic 
+synthetic bright-field microscopy images that can be used for algorithm development 
+and benchmarking. The resulting framework has been assessed through a visual evalua-
+tion by experts with extensive experience of Pap-smear images. The results show that 
+images produced using our described methods are realistic enough to be mistaken for 
+real microscopy images. The developed simulation framework is very flexible and can 
+be modified to mimic many other types of bright-field microscopy images. V C 2015 </p>
+
+<p>The Authors. Published by Wiley Periodicals, Inc. on behalf of ISAC </p>
+
+<p><rs type="software">SIMCEP</rs><rs id="software-11" type="software">MATLAB</rs><rs corresp="#software-11" type="version-number">2011b</rs><rs type="software">DIPimage</rs>Figure 9. The creation process of leukocyte clusters. (Left) Shapes generated using parametric model. (Middle) Shape masks added to the 
+final cluster. (Right) The final result with added Perlin noise. </p>
+
+<p>Original Article </p>
+
+<p> 
+Simulation of Bright-Field Microscopy Images </p>
+
+<p>exponent, I d (x, y) n . The background is initialized as a uniform 
+image, H(x, y), with a predefined intensity, H(x, y) 5 b. The 
+perturbed background illumination can then be written as </p>
+
+<p>I b ðx; yÞ5Hðx; yÞI d ðx; yÞ n ; 
+(8) </p>
+
+<p>where the exponent, n, controls the strength of the variation. 
+We can now add the second type of aberration which is related 
+to light scattering in the slide. To simulate these effects, we 
+have chosen to use a Perlin noise image, I pe (x, y): [0,1], 
+together with a constant, c pe , that controls the strength of the 
+variations. Perlin noise is a computationally efficient way of 
+generating correlated noise (32). It is commonly used in com-
+puter graphics to generate natural looking textures. It is not 
+directly based on any physical model of light transport, but 
+the results are visually similar to that caused by the light scat-
+tering effects. 
+The Perlin noise variations are added to the background 
+illumination as </p>
+
+<p>I b ðx; yÞ5 Hðx; yÞ2c pe I pe ðx; yÞ 
+Â 
+Ã 
+I d ðx; yÞ n : 
+(9) </p>
+
+<p>The final step of the background generation is to calcu-
+late the logarithm of the generated image, </p>
+
+<p>I b ðx; yÞ5log 10 Hðx; yÞ2c pe I pe ðx; yÞ 
+Â 
+Ã 
+I d ðx; yÞ n 
+À 
+Á 
+: 
+(10) </p>
+
+<p>This is done to facilitate the use of absorbance values, as 
+will be explained in the following section. </p>
+
+<p>Absorbance. In bright-field microscopy an object's color is 
+related to its light absorption properties. This behavior can be 
+described using the well known Beer-Lambert law (34), which 
+states that </p>
+
+<p>A k 52log 10 
+I 1 
+I 0 
+; 
+(11) </p>
+
+<p>where A k is the material's absorbance at a specific wavelength, 
+k, of incoming light, I 0 is the intensity of the light before it 
+passes through the sample, and I 1 is the intensity of light that 
+remains after passing through the sample. Essentially, for the 
+Pap-smear application, the Beer-Lambert law relates the 
+absorbance of the Pap-stain to its concentration </p>
+
+<p>A k 5k3c3l; 
+(12) </p>
+
+<p>where k is a constant commonly referred to as the extinction 
+coefficient (a characteristic of the dye), c is the concentration 
+of the dye, and l is the length of the light path. 
+For the simulation, each object type is given a specific 
+absorbance value. These values can be directly based on meas-
+urements taken from source materials or selected based on a 
+specific desired target appearance. In this project, we meas-
+ured representative values from our cellular database. </p>
+
+<p>Impulse response. The shape of the PSF for a specific 
+bright-field microscopy setup is dependent on the NA of the 
+objective used, the refractive index of the medium between 
+the sample and the objective lens and the wavelength, k, of the 
+image forming light (6). Trying to mathematically determine 
+the precise degenerative effects of the PSF for specific hard-</p>
+
+<p>ware specifications can be exceedingly difficult. For this study, 
+we have instead chosen to simplify the process by approximat-
+ing the impulse response function with a Gaussian function, 
+G r . Furthermore, for simplicity and speed, we have elected to 
+separate the blurring process into a depth of focus blurring, 
+G Dz , and an image plane blurring, G Dx,y . 
+Because of the availability of focus stacks as reference 
+data, we have been able to quantifiably determine a suitable 
+standard deviation for the Gaussian kernel related to the 
+depth of focus. This was achieved by first studying a nucleus 
+at the focus level at which it is in focus. This level was deter-
+mined by summing the gradient magnitude values within the 
+cell nuclei for all focus levels and choosing the level with the 
+greatest sum. We can then compare each offset step in the 
+focus stack to a Gaussian blurred version of the focused 
+image, allowing us to decide which sigma yields a degradation 
+that lies closest to the observed one. The quantification is 
+achieved by taking the sum of the intensity difference for each 
+pixel of the nucleus. In Figure 10, a plot showing the optimal 
+ratio r/mm, relative to each focus level offset can be seen for a 
+sample cell. The same experiment was carried out for a repre-
+sentative population of 10 different cells. For small focus off-
+sets, it is, due to discretization issues, hard to get reliable 
+measurements. However, for offsets &gt;1 mm it becomes appa-
+rent that a reasonable approximation of the impulse response 
+in the z-direction is r ' d z , where d z is the z-offset in mm. 
+The impulse response in the image plane is more difficult 
+to approximate quantifiably. Generally, the PSF is smaller in 
+the x-y dimension relative to the z-dimension, r x;y &lt; r z . By 
+taking an image depicting a step function, that is, a sharp 
+edge, and studying the first derivative of that image, it is pos-
+sible to obtain an approximation of the PSF that lies close to 
+reality. The measured PSF can then be compared to Gaussian 
+kernels with different sigma to find the closest match. Using 
+this approach, a suitable value for r x,y for the model system 
+used in this project was found to be 0.9 pixels corresponding 
+to around 0.22 microns. </p>
+
+<p>Signal Detection and Digitalization 
+The most commonly used type of imaging sensor within 
+microscopy is the charged coupled device (CCD) sensor. 
+These sensors operate using a linear transfer function, that is, 
+the output signal for each pixel is proportional to the number 
+of photons it receives. Optical imaging sensors have, as has 
+been previously stated, certain limitations. The dominant 
+source of noise in sensors, known as photon noise, is related 
+to the fact that the number of photons emitted from a con-
+stant light source over a finite time interval is stochastic. 
+Under normal operating conditions, this noise is Poisson dis-
+tributed and quite easy to simulate. A second type of sensor 
+noise significant enough to be added to the simulation is 
+called readout noise that is a product of phenomena related to 
+the A/D converter and amplification circuits. This noise 
+behaves as additive white Gaussian noise (35). </p>
+
+<p>Final Image Formation 
+The formation of the final simulated image, I f , can be 
+written as </p>
+
+<p>Original Article </p>
+
+<p>Cytometry Part A 87A: 212À226, 2015 </p>
+
+<p>
+I f ðx; yÞ5g po 10 I b ðx;yÞ2Ipðx;yÞ 
+ð 
+Þ Ã G rx;y </p>
+
+<p>
+1g g 
+(13) </p>
+
+<p>where g po and g g constitute the addition of Poisson and Gaussian 
+noise, respectively, (*) denotes a convolution operation, G rx;y 
+stands for the approximation of the PSF with a Gaussian kernel 
+with sigma r x;y , I b ðx; yÞ is the background image generated by 
+Eq. (10) and I p ðx; yÞ is a phantom image. The phantom image 
+contains the set of N p phantom objects, P5fp 1 ; p 2 ; . . . ; p Np g. To 
+simulate the depth of field, each object, p i , is assigned a z position, 
+z i , using a median filtered Perlin noise image, scaled to encompass 
+the desired depth in the image. The generation of the phantom 
+image can then be written as a sum of phantom objects with 
+appropriate amounts of out-of-focus blur, </p>
+
+<p>I p 5 
+X Np </p>
+
+<p>i51 </p>
+
+<p>p i Ã G rz i 
+(14) </p>
+
+<p>The final step of the synthesis process is to remove some 
+of the degenerative effects applied to the parts of the image </p>
+
+<p>displaying nucleus texture. Because the nucleus texture is a 
+product of patch-based texture generation from source mate-
+rial, the texture has actually already been subjected to the 
+degenerative effects of the optics and the sensor system. 
+Therefore, the final image, I f (x, y) is updated according to </p>
+
+<p>I </p>
+
+<p>0 </p>
+
+<p>f x; y 
+ð Þ5I p x; y 
+ð ÞC 
+0 x; y 
+ð Þ1I f x; y 
+ð Þð12C 
+0 ðx; yÞÞ 
+(15) </p>
+
+<p>where C 
+0 is a feathered nucleus mask generated as </p>
+
+<p>C 
+0 5C Ã G r </p>
+
+<p>C5 
+1; if nucleus </p>
+
+<p>0; otherwise </p>
+
+<p>( </p>
+
+<p>(16) </p>
+
+<p>The feathering, or blurring, of the nucleus mask, C, prevents 
+the creation of sharp, unnatural edges around the nucleus texture. </p>
+
+<p>EVALUATION </p>
+
+<p>The quality and realism of the synthetic images which are 
+generated through the described procedure needs to be </p>
+
+<p>Figure 10. (Top) Nucleus at its focus level (Left) and its actual degeneration at a 1.2-mm offset (Middle image), compared to a Gaussian 
+degeneration with r 5 1.2 (Right image). (Bottom) Plot discerning optimal ratio for r relative to the z-offset (lm) as a function of the z-off-
+set for specific offsets. </p>
+
+<p>Original Article </p>
+
+<p> 
+Simulation of Bright-Field Microscopy Images </p>
+
+<p>evaluated. As we are generating images that can be visually 
+inspected, a natural approach is to do a visual comparison 
+between synthetic and real images. This approach also seems 
+relevant since the most common way of analyzing Pap-test 
+specimens is through visual inspection. In designing such a 
+test, it becomes important to have realistic conditions for the 
+visual inspection. Given unlimited time and the possibility of 
+zooming and scrolling the images, it is in most cases possible 
+to find out which image is real and which is synthetic. But, 
+this is far from the conditions under which this kind of images 
+normally are scrutinized. 
+We have, therefore, designed a customized evaluation 
+test. The experimental design was inspired by a study devised 
+by Meyer et al. (36). In that study, users were asked to com-
+pare a real scene to an identical computer generated one. For 
+the experiment, the subject was showed a tightly cropped view 
+of the real and synthetic scene projected through a lightly 
+frosted glass, to account for limitations of existing display 
+devices. For our validation study, a simple user interface was 
+designed. A patch of size 200 3 200 pixels, randomly selected, 
+was cut out from an image that in turn was randomly selected 
+from a database of images containing 25 synthetic images cre-
+ated with varying settings and 25 real images from different 
+specimen. Before showing the image to the user, a pixel-wise 
+Gaussian noise (r 5 0.7 graylevels) was added. This was done 
+to make the variations in background intensity and smooth-
+ness between different real images less visually disturbing, 
+making it easier to focus on the details in the images. The 
+patch was shown to the test subject for 2 s, after which a non-
+timed prompt for an answer was displayed. In total, 120 
+patches were displayed to each user. However, the first two 
+patches were training images used to get the user comfortable 
+with the validation system and are not counted in the final 
+result. The outcome of this study is discussed in Results 
+section. 
+Another approach to evaluating the quality of the syn-
+thetic image generation algorithms, is to compare results from 
+an automated image cytometry algorithm applied to synthetic 
+images and real data with expert annotated ground truth (4). 
+Other validation approaches have included comparing results 
+for several image cytometry tools when used on synthetic 
+images (4) or comparing scores for different image descriptive 
+features from synthetic and real images (12). 
+Such tests can give valuable evaluations of whether the 
+feature distributions obtained from the synthetic images are 
+the same as those obtained from real ones. There are, however, 
+problems in that many aspects of the synthetic images are gen-
+erated from feature distributions extracted from real images. 
+So, for many simple features such as nuclear size, we can 
+obtain perfect agreement between normal and synthetic distri-
+butions. Another issue is the fact that manually obtaining a 
+suitable ground truth dataset is, as has previously been dis-
+cussed, a far from trivial task paired with many difficulties. 
+We have as a complement to the visual evaluation made a 
+comparison of the distribution of one nontrivial feature, the 
+moments of the nuclear texture distribution. The choice is 
+motivated by the fact that from a diagnostic perspective, the </p>
+
+<p>key structures in Pap-smear images are the nuclei and their 
+chromatin structure. Following the approach taken by Svo-
+boda et al. (5), a number of central moments as well as an 
+entropy score was calculated for several real and synthetic 
+nuclei. The n th central moment is calculated as </p>
+
+<p>l n 5 
+X L21 </p>
+
+<p>i50 </p>
+
+<p>z i 2m 
+ð 
+Þ n p z i 
+ð Þ; 
+(17) </p>
+
+<p>where </p>
+
+<p>m5 
+X L21 </p>
+
+<p>i50 </p>
+
+<p>z i p z i 
+ð Þ: 
+(18) </p>
+
+<p>Here, z i is a discrete random variable denoting the partic-
+ular intensity level present in the image. The sum covers the 
+range of all the image intensity levels (L). The entropy defines 
+the amount of uncertainty in the measured data and is calcu-
+lated as </p>
+
+<p>H5 
+X L21 </p>
+
+<p>i50 </p>
+
+<p>p z i 
+ð Þlog p z i 
+ð Þ: 
+(19) </p>
+
+<p>Five central moments, n 52,. . .,6, as well as the entropy 
+was calculated for a sample of 30 nuclei from real images and 
+an equal number from synthetic images. From this, individual 
+quantile-quantile (Q-Q) plots have been generated for each 
+feature (Fig. 11). A Q-Q plot is a probability plot that com-
+pares two distributions by plotting their quantiles against each 
+other (37). If the compared populations are drawn from simi-
+lar distributions, the points should have an approximately lin-
+ear relation. </p>
+
+<p>RESULTS </p>
+
+<p>An example of a finished synthetic image compared to a 
+real image can be seen in Figure 12. The results of the visual 
+evaluation can be seen in Table 1. Six test subjects have been 
+used for the evaluation. The first (1) test subject is a cytologist 
+with over 30 year experience of cervical smear screening. Test 
+subjects 2-5 are cytometry algorithm developers with several 
+year experiences from developing methods for automated 
+Pap-smear analysis. The last test subject (6) is an algorithm 
+developer with experience in life-science applications. This 
+person had no experience with cytometry images and was 
+included as a reference. Also for reference purposes, a random 
+result subject (x) has been added to the result. For all subjects, 
+the test was the first time they came into contact with the 
+image generation method described in this article. All the sub-
+jects had prior experience with observing Pap-smear images 
+in grayscale. For each user the number of true positives (TP), 
+false positives (FP), true negatives (TN), and false negatives 
+(FN) were counted. For this evaluation, a real image was 
+counted as a positive and a synthetic image as a negative. 
+Based on these values, the sensitivity, TP/(TP1FN), and spec-
+ificity, TN/(TN1FP), for each user was also calculated. In this 
+setting, the sensitivity value relates to the ability to accurately 
+detect real images as being real and the specificity the ability 
+to accurately detect synthetic images as synthetic. The </p>
+
+<p>Original Article </p>
+
+<p>Cytometry Part A 87A: 212À226, 2015 </p>
+
+<p>
+sensitivity for the six human test subjects is not consistent 
+with a random result (Mean: 0.7667, 95% confidence interval 
+[0.671, 0.863]), but it is still low enough to indicate that expe-
+rienced individuals had a difficult time separating real images 
+from synthetic ones under these experimental conditions. The 
+random assignment, "subject x," achieved almost as good 
+results as the actual persons, it deviated somewhat from the 
+expected 0.50 in sensitivity and specificity as the population 
+size was rather small. A different experimental design may 
+have given different results. It is usually possible to tell the dif-
+ference if you are given unlimited time and can zoom and 
+scroll the image arbitrarily. But in routine cytology screening, 
+the time available for this analysis is extremely limited so our 
+conclusion is that our synthetic images are visually quite simi-
+lar to real ones when studied under realistic conditions. 
+The Q-Q plot in Figure 11 show a distinct linear relation-
+ship between the synthetic and real nuclei for all features, 
+indicating that, as is expected, the two populations are drawn 
+from similar distributions. However, the angle of the linear 
+dependency shows that the real data have a wider distribution 
+than the synthetic data. This, again, is not surprising as each 
+synthetic nucleus texture represents a combination of data 
+from three real nuclei. The choice of using three nuclei as a 
+sampling base stems from an effort to make the texture of the 
+synthetic nuclei more general and not a scrambled copy of a 
+single. This had the side effect of making the variation in the 
+synthesized textures somewhat smaller than in the real ones. </p>
+
+<p>This effect would be reduced if we used a single real nucleus 
+as a model for the texture of a synthetic one. 
+We have generated a small population of synthetic images 
+and also picked an equal number of real images and cropped 
+those to the same size as the synthetic ones and supplied these 
+two image datasets as Supporting Information allowing the 
+reader to evaluate the similarities and differences between the 
+images. These images can be found as a Supporting 
+Information. </p>
+
+<p>DISCUSSION </p>
+
+<p>In this article, we present a synthetic image generation 
+framework for simulating bright-field microscopy images of 
+cervical cell populations. The simulation method accurately 
+models object primitives as well as the characteristics and 
+behavior of the measurement system. In our evaluation study, 
+even experienced cytology professionals showed rather poor 
+performance in deciding whether an image was synthetic or 
+real when shown the images under realistic screening condi-
+tions. A simple test on nuclear texture features indicated that 
+they came from similar distributions. 
+The presented framework offers a flexible approach to 
+image synthesis. Each block of the process is interchangeable 
+depending on the requirements on the finished results. Fur-
+thermore, if needed, additional object types can be added with 
+minimal effort using the methods and principles described in </p>
+
+<p>Figure 11. Quantile-quantile plot comparison of descriptors computed from real and synthetic cervical cell nuclei. The quantile-quantile 
+plot illustrate whether the acquired measurements belong to the same distribution. A linear relationship indicates that points belong to the 
+same probability distribution. When the trend is steeper than 45 degrees, which is the case in the plots above, it is an indication that the 
+data plotted on the y-axis, which refers to real data in this figure, has a larger dispersion than the x-axis data. The descriptors shown above 
+are: (Top row, left to right) second central moment, third central moment, and fourth central moment. (Bottom row, left to right) Fifth central 
+moment, sixth central moment, and entropy. [Color figure can be viewed in the online issue, which is available at wileyonlinelibrary.com.] </p>
+
+<p>Original Article </p>
+
+<p> 
+Simulation of Bright-Field Microscopy Images </p>
+
+<p>this article. As an example, the addition of other common cer-
+vical epithelial cell types, for example, parabasal cells or squa-
+mous superficial cells, can be achieved by creating small 
+databases of primitives that can then be used as the basis for 
+shape and texture generation. To illustrate this, a dataset of 
+cells, expert classified to exhibit signs conforming to high 
+grade intraepithelial lesions, were collected and added to the 
+simulation pipeline. A resulting image can be seen in Figure 
+13. This flexibility indicates that the synthesis process could 
+be adapted to mimic other types of cellular material com-
+monly analyzed using bright-field microscopy, for example, 
+lung or oral cavity smears. 
+For the time being, the method produces one diagnostic 
+cell type (squamous intermediate) and four levels of debris. In 
+the future, more cell types and other types of debris should be 
+added. Also, other common types of distortion such as folding 
+should be included to the cytoplasm model to add even more 
+variety in the shapes that are produced. The greatest benefit 
+with the use of simulated images is the availability of ground 
+truth. Using simulated images reduces the dependency on 
+manually generated ground-truth data, which has the draw-
+back of being expensive and time consuming to produce. </p>
+
+<p>Well-designed synthetic images make it possible to reserve 
+that valuable ground truth data for final control validation. 
+For instance, first the endless supply of synthetic data can be 
+used to form hypotheses about how varying amount of debris 
+or inhomogeneous background illumination will affect the 
+qualitative performance of a segmentation algorithm. Then 
+brute force parameter tuning, over an arbitrary large parame-
+ter space, can point out optimal parameters, a plausible range 
+of optimal parameters or relations and dependence between 
+different optimal parameter settings from which the algorithm 
+designer can gain insight and form hypotheses. Then finally, a 
+rigorous and more data economical procedure can be used for 
+fine tuning and cross-validation on expert annotated real data 
+to estimate the performance of an algorithm on real life data. 
+It is important to recognize the fact that, while synthetic 
+images can function as a great development tool, problems </p>
+
+<p>Figure 12. An example of a finished synthetic image (Left) an a real image for comparison (Right). </p>
+
+<p>Table 1. Results of evaluation of the generated synthetic images </p>
+
+<p>SUBJECT 
+TP 
+FP 
+TN 
+FN 
+SENS. 
+SPEC. </p>
+
+<p>1 
+35 
+29 
+37 
+17 
+0.67 
+0.56 
+2 
+39 
+29 
+29 
+21 
+0.65 
+0.50 
+3 
+50 
+16 
+38 
+14 
+0.78 
+0.70 
+4 
+49 
+20 
+36 
+13 
+0.79 
+0.64 
+5 
+51 
+17 
+39 
+11 
+0.82 
+0.70 
+6 
+58 
+32 
+21 
+7 
+0.89 
+0.40 
+x 
+37 
+31 
+24 
+26 
+0.54 
+0.48 </p>
+
+<p>Results are shown for the six test subjects (1-6) and a ran-
+dom result (x). The results show the number of true positives 
+(TP), the number of false positives (FP), the number of true nega-
+tives (TN), and the number of false negatives (FN). From these 
+numbers, the sensitivity TP/(TP1FN) and specificity TN/(TN1FP) 
+have also been calculated. </p>
+
+<p>Figure 13. Example of two simulated cells corresponding to high 
+grade lesions added to the simulation framework. </p>
+
+<p>Original Article </p>
+
+<p>Cytometry Part A 87A: 212À226, 2015 </p>
+
+<p>
+such as overfitting need to be taken into account. Because syn-
+thetic images are the result of their defining parameters, there 
+exists a limitation in the variation present in the images. 
+Good design can, to a certain extent, alleviate the problem, 
+but the fact remains that real data remains a necessity in the 
+creation of any image processing algorithm aimed at real 
+world applications. However, one can compare the risk of 
+overfitting synthetic data with the risks of overfitting when 
+tuning algorithms with the help of small amounts of real 
+ground truth data. We can benefit from the great flexibility of 
+synthetic data, while at the same time guarantee an estimate 
+on real data if proper cross-validation is performed for the 
+final parameter tuning using real expert annotated data. </p>
+
+<p>AVAILABILITY </p>
+
+<p>The synthesis framework described in this article is avail-
+able on the <rs type="software">MATLAB</rs> file-exchange, at http://www.mathworks. 
+com/matlabcentral/fileexchange/48915-synthetic-bright-field-
+microscopy-image-generator, as an open-source code package 
+on publication acceptance. </p>
+
+<p>ACKNOWLEDGMENTS </p>
+
+<p>The authors would like to thank the participants of the 
+user study. The work was carried out within the framework of 
+a collaboration with a research project at the Center for 
+Advanced Computing in Thiruvananthapuram headed by 
+Rajesh Kumar and the Regional Cancer Center, Kerala, India, 
+headed by Dr K Sujathan, funded by the Department of Infor-
+mation Technology, Government of India. Ethical permit for 
+using stained Pap smears was obtained from Indian Council 
+of Medical Research, permit number INDO/FRC/402/2005-
+IHD. Funding was also provided by the Swedish Research 
+Council (2008-2738) and VINNOVA (2008-01712). </p>
+
+<p>LITERATURE CITED </p>
+
+
+
+<p>Original Article </p>
+
+<p> 
+Simulation of Bright-Field Microscopy Images </p>
+
+</text></tei>

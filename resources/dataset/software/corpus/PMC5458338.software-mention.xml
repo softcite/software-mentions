@@ -1,0 +1,775 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC5458338" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:29+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>Abstract </p>
+
+<p>CDKL5 disorder is a neurodevelopmental disorder still without a cure. Murine models of CDKL5 disorder have been recently 
+generated raising the possibility of preclinical testing of treatments. However, unbiased, quantitative biomarkers of high 
+translational value to monitor brain function are still missing. Moreover, the analysis of treatment is hindered by the 
+challenge of repeatedly and non-invasively testing neuronal function. We analyzed the development of visual responses in a 
+mouse model of CDKL5 disorder to introduce visually evoked responses as a quantitative method to assess cortical circuit 
+function. Cortical visual responses were assessed in CDKL5 null male mice, heterozygous females, and their respective con-
+trol wild-type littermates by repeated transcranial optical imaging from P27 until P32. No difference between wild-type and 
+mutant mice was present at P25-P26 whereas defective responses appeared from P27-P28 both in heterozygous and homozy-
+gous CDKL5 mutant mice. These results were confirmed by visually evoked potentials (VEPs) recorded from the visual cortex 
+of a different cohort. The previously imaged mice were also analyzed at P60-80 using VEPs, revealing a persistent reduction of 
+response amplitude, reduced visual acuity and defective contrast function. The level of adult impairment was significantly 
+correlated with the reduction in visual responses observed during development. Support vector machine showed that multi-
+dimensional visual assessment can be used to automatically classify mutant and wt mice with high reliability. Thus, moni-
+toring visual responses represents a promising biomarker for preclinical and clinical studies on CDKL5 disorder. </p>
+
+<p>Cyclin-dependent kinase-like 5 (CDKL5) disorder, also known as 
+early infantile epileptic encephalopathy type 2 (EIEE2, OMIM 
+number: #300672) is a severe neurological condition character-
+ized by early-onset seizures in the first month of life, intellec-
+tual disability, motor and social impairment. This disease has </p>
+
+<p>recently been considered as an autonomous etiopathological 
+entity (1), with a clearly distinct genetic and clinical phenotype 
+respect to other similar infantile encephalopathies such as Rett 
+syndrome (RTT) and X-linked infantile spasm syndrome 1 
+(ISSX1). No effective treatment is currently available for this dis-
+ease. At a molecular level, CDKL5 is a serine/threonine kinase </p>
+
+<p> † </p>
+
+<p>The authors wish it to be known that, in their opinion, the first two authors should be regarded as joint First Authors. 
+Received: January 22, 2017. Revised: March 23, 2017. Accepted: March 25, 2017 </p>
+
+<p>V C The Author 2017. Published by Oxford University Press. 
+This is an Open Access article distributed under the terms of the Creative Commons Attribution Non-Commercial License (http://creativecommons.org/ 
+licenses/by-nc/4.0/), which permits non-commercial re-use, distribution, and reproduction in any medium, provided the original work is properly cited. 
+For commercial re-use, please contact journals.permissions@oup.com </p>
+
+
+
+<p>Human Molecular Genetics, 2017, Vol. 26, No. 12 
+2290-2298 </p>
+
+<p>doi: 10.1093/hmg/ddx119 
+Advance Access Publication Date: 28 March 2017 
+Original Article </p>
+
+<p>that is highly expressed in the central nervous system. 
+Intracellular localization of CDKL5 appears to vary in different 
+brain areas and during development with expression present 
+both in the cytosolic and nuclear fractions (2). CDKL5 was also 
+found to be localized in postsynaptic structures, where it can 
+regulate dendritic spine maturation and density, and modulate 
+excitatory synaptic function (3,4). The synaptic localization of 
+CDKL5 seems to be mediated by its interaction with the palmi-
+toylated form of postsynaptic density protein 95 (PSD-95) (5,6) or 
+by the formation of a complex involving PSD-95 and NGL-1 (3). 
+In mice, CDKL5 is strongly upregulated postnatally with high 
+levels of expression in the forebrain (2,7,8). 
+Recently, CDKL5 loss-of-function murine models that reca-
+pitulate some aspects of the human disease have become avail-
+able (9,10), raising the possibility of preclinical testing of 
+treatments. However, unbiased, quantitative biomarkers of 
+high translational value to monitor brain function are still miss-
+ing. Moreover, the analysis of treatment and washout effects 
+are hindered by the challenge of repeatedly and non-invasively 
+testing neuronal function over the course of the disorder. 
+Recent work introduced the use of visually evoked responses as 
+a quantitative method to assess cortical circuit function in RTT 
+patients carrying MeCP2 mutations (11). The results obtained in 
+humans revealed a good correlation with the results in the 
+mouse model (11,12) suggesting that the analysis of visual phe-
+notype could also be extended to other diseases, including the 
+CDKL5 disorder, in which abnormal function of cortical circuits 
+can be hypothesized and animal models are available. Indeed, 
+clinical studies indicated that several CDKL5 patients show vi-
+sual impairments (13-16) and abnormal electroencephalo-
+graphic (17) waveforms deriving from impaired activity of the 
+cerebral cortex, in keeping with findings of morphofunctional 
+alterations in sensory cortical circuits of cdk o5 mutant mice 
+(4,9,10). Thus, we investigated the developmental trajectory of 
+cortical visual responses in male mice totally missing CDKL5, 
+and in heterozygous cdkl5 females, better recapitulating the 
+mosaic distribution of mutant cells present in the majority of 
+CDKL5 patients. Two independent techniques were used: longi-
+tudinal transcranial intrinsic optical signal (IOS) imaging and 
+intracortical VEP recordings. The data showed the presence of 
+an impairment of visual response both in male and in female 
+mutants, first detectable at P27. This early alteration of visual 
+responses was correlated with impairments of different param-
+eters of cortical visual function in adulthood, and can be ex-
+ploited as a classifying biomarker providing rational targets for 
+treatment assessment. </p>
+
+<p>Results </p>
+
+<p>Longitudinal IOS imaging reveals decreased amplitude 
+of cortical visual responses in developing cdkl5 
+mutants </p>
+
+<p>To determine the impact of cdkl5 mutation on visual cortical 
+development we examined cortical responses to visual stimula-
+tion using intact skull repeated IOS imaging in juvenile animals, 
+and tracking response maturation in binocular visual cortex 
+during visual development (P25-32) (18). We examined IOS re-
+sponses in the same subjects, both male cdkl5 null and female 
+heterozygous mice compared with their age and sex matched 
+wt littermates, at three different developmental stages (Fig. 1A). 
+Figure 2A and E shows typical examples of responses from the 
+different experimental groups consisting in a decrease in reflec-
+tance (dark area) induced by visual stimulation in the visual </p>
+
+<p>cortex. Data quantitation showed that at the first age tested 
+(P25-26), the amplitude of the responses to contralateral eye 
+stimulation was comparable between cdkl5 null and control 
+mice, however, at later ages (P27-28 and P31-32) cdkl5 null mice 
+showed a significantly reduced response with respect to wt (Fig. 
+2B, wt N ¼ 9, cdkl5 null N ¼ 7; two-way ANOVA genotype 
+P ¼ 0.035, post hoc Holm-Sidak wt versus mutants P25-26 
+P ¼ 0.91, P27-28 P ¼ 0.0016, P31-32 P ¼ 0.0047). The responses to 
+the ipsilateral eye showed a similar pattern: no difference be-
+tween genotypes at P25-26 and significantly reduced amplitude 
+in cdkl5 null mice at P27-28 and at P31-32 (Fig. 2C, wt N ¼ 9, 
+cdkl5 null N ¼ 7; two-way ANOVA genotype P ¼ 0.0017, post hoc 
+Holm-Sidak wt versus mutants P25-26 P ¼ 0.5, P27-28 P ¼ 0.024, 
+P31-32 P ¼ 0.0028). Interestingly, female heterozygous cdkl5 
+mice also showed a similar developmental impairment of con-
+tralateral evoked responses, but preserved ipsilateral response 
+amplitude (Fig. 2F and G, wt N ¼ 11, cdkl5 het N ¼ 7; 
+Contralateral responses: two-way ANOVA time Âgenotype 
+P ¼ 0.017, post hoc Holm-Sidak wt versus mutants P25-26 
+P ¼ 0.53, P27-28 P ¼ 0.046, P31-32 P ¼ 0.049; Ipsilateral responses: 
+two-way ANOVA time Âgenotype P ¼ 0.17, genotype P ¼ 0.87). 
+This differential effect on ipsilateral and contralateral responses 
+resulted in an abnormal ocular dominance index (ODI) biased 
+toward ipsilateral eye in heterozygous mutants with respect to 
+wt (Fig. 2H, wt N ¼ 11, cdkl5 het N ¼ 7; t-test P ¼ 0.003). No change 
+in ODI was present in null mice with respect to controls (Fig. 2D, 
+wt N ¼ 9, cdkl5 null N ¼ 7; t-test P ¼ 0.87). Thus, defective devel-
+opment of visual responses is present after P27 both in null and 
+heterozygous cdkl5 mutant mice. </p>
+
+<p>Impaired VEP responses in juvenile and adult cdkl5 
+mutants </p>
+
+<p>To assess cortical visual responses in cdkl5 mutants using a dif-
+ferent technique, we recorded intracortical VEP responses to 
+pattern reversal by means of a multielectrode inserted into the 
+binocular visual cortex of p27-32 mice, a time point represent-
+ing the onset of the visual response deficit previously observed 
+by IOS imaging in heterozygous and null mice. VEP results 
+reproduced IOS data showing a reduced VEP amplitude in male 
+cdkl5 null mice for both contralateral and ipsilateral stimulation 
+(Supplementary Material, Fig. S1, wt N ¼ 5, cdkl5 null N ¼ 4; two-
+way ANOVA genotype P &lt; 0.001, post hoc Holm-Sidak wt versus 
+mutants Ipsilateral eye P ¼ 0.04, Contralateral eye P &lt; 0.001), and 
+reduced VEP amplitude for contralateral eye stimulation in het-
+erozygous cdkl5 mice (Supplementary Material, Fig. S1, wt N ¼ 4, 
+cdkl5 het N ¼ 5; two way ANOVA interaction eye Âgenotype 
+P ¼ 0.014, post hoc Holm-Sidak wt versus mutants Ipsilateral eye 
+P ¼ 0.13, Contralateral eye P &lt; 0.001). 
+To investigate whether the developmental visual impair-
+ment persists into adulthood we recorded VEPs in P60-P80 
+mice. To establish whether the defect observed in juvenile mice 
+was correlated with adult visual cortical responses, we analyzed 
+the same mice that were studied during development by means 
+of IOS imaging, a non-terminal procedure that allows recovery 
+of the animal at the end of the procedure. We found that VEP 
+amplitude was reduced in adult cdkl5 null mice for both contra-
+lateral and ipsilateral eye stimulation (Fig. 3A, wt N ¼ 6, cdkl5 
+null N ¼ 6; two way ANOVA genotype P &lt; 0.0001, post hoc Holm-
+Sidak wt versus mutants Ipsilateral eye P ¼ 0.028, Contralateral 
+eye P ¼ 0.0001). Similarly, contralateral, but not ipsilateral, eye 
+responses were significantly reduced in heterozygous cdkl5 fe-
+males (Fig. 3C, wt N ¼ 8, cdkl5 het N ¼ 8; two way ANOVA </p>
+
+<p> 
+Human Molecular Genetics, 2017, Vol. 26, No. 12 | </p>
+
+<p>eye Âgenotype P ¼ 0.029, post hoc Holm-Sidak wt versus mutants 
+Ipsilateral eye P ¼ 0.31, Contralateral eye P ¼ 0.0004) resulting in 
+an abnormal ODI in cdkl5 heterozygous mice (Fig. 3D, wt N ¼ 8, 
+cdkl5 het N ¼ 8; t-test P ¼ 0.03), but not in cdkl5 null males (Fig. 
+3B, wt N ¼ 6, cdkl5 null N ¼ 6; t-test P ¼ 0.22). No difference was 
+observed between VEP waveforms in any of the genotypes 
+(Supplementary Material, Fig. S2). These data, obtained in adult 
+mice, overlap with the results found during early development 
+using IOS imaging. 
+VEPs are usually employed to assess visual parameters such 
+as contrast sensitivity and spatial visual acuity that well corre-
+late with vision assessed behaviorally in both mice and humans 
+(11,19-22). To investigate whether contrast responses are af-
+fected by cdkl5 mutation, we recorded VEPs in response to grat-
+ings of different contrast in cdkl5 null and heterozygous 
+animals (Fig. 4A and B). Contrast response curves were fitted 
+with a Naka-Rushton function (23,24) to derive two parameters: 
+C 50 representing the contrast eliciting the half-maximal re-
+sponse, and N representing the slope of the curve. We found 
+that cdkl5 mutants reached half maximum responses at much 
+higher contrast values than wt mice (Fig. 4C and D; wt N ¼ 5, 
+cdkl5 null N ¼ 6; t-test P ¼ 0.035; wt N ¼ 7, cdkl5 het N ¼ 6; t-test </p>
+
+<p>P ¼ 0.0096) while the N parameter was not significantly affected 
+(Fig. 4E and F; males t-test P ¼ 0.49; females t-test P ¼ 0.50). 
+Electrophysiological visual acuity was assessed by stimulating 
+the animal with gratings of different spatial frequency (22). We 
+found that both heterozygous and null animals had a signifi-
+cantly lower spatial resolution (visual acuity) as compared to 
+their sex-matched wt littermates (Fig. 5; wt N ¼ 5, cdkl5 null 
+N ¼ 6; t-test P ¼ 0.011; wt N ¼ 7, cdkl5 het N ¼ 6; t-test P ¼ 0.0097). </p>
+
+<p>Early IOS responses are correlated with adult VEP 
+amplitude, visual acuity and contrast response curve </p>
+
+<p>The altered VEP responses found in adult cdkl5 null and hetero-
+zygous mice could result from an abnormal development of 
+neural circuits. Since adult VEP recordings were performed in 
+the same mice employed for IOS assessment, we investigated if 
+there was a correlation between IOS responses during develop-
+ment and adult electrophysiological measurements. For this 
+reason, we computed the correlation matrix between z-scored 
+amplitudes of the contralaterally evoked IOS and VEPs, VEP vi-
+sual acuity and the C 50 parameter obtained from contrast curve 
+fit (Fig. 6A). Intriguingly, all these variables were significantly 
+correlated indicating that IOS measures are in agreement with 
+VEPs, and that altered developmental trajectories could be at 
+the basis of the visual impairment found in adult cdkl5 mu-
+tants. These data also suggest that monitoring IOS responses 
+during development could be a predictive tool of adult cortical 
+visual processing. </p>
+
+<p>Visual responses are a robust disease biomarker </p>
+
+<p>To evaluate the reliability of the visual phenotype as a bio-
+marker, we evaluated its accuracy, sensitivity, specificity and d 0 
+(Table 1 and Fig 6C) using linear support vector machine (SVM), 
+a supervised machine-learning algorithm for data classification. 
+When trained with the entire dataset (All), the algorithm 
+showed a remarkable discriminative capability (d 0 ¼ 1.32) be-
+tween mutated and wild-type mice. We then performed a prin-
+cipal components analysis (PCA) and we selected the first two 
+components accounting for 66.7% of the variance in the entire 
+dataset. By using these variables, subjects were readily segre-
+gated between wt and mutants (Fig. 6B) and the d 0 was signifi-
+cantly improved (d 0 ¼ 1.52; one-way ANOVA P &lt; 0.0001, post hoc 
+Holm-Sidak All versus PCA P &lt; 0.0001). Since ease of testing is a 
+key factor in the applicability of a disease biomarker, we also as-
+sessed whether smaller subsets of variables could reach a simi-
+lar discriminative performance. The tested data subsets were 
+composed of: visual acuity and C 50 (Thresholds); contralateral 
+and ipsilateral VEP amplitude (VEP); contralateral IOS amplitude 
+at P27-28 and P31-32 (IOS-C); ipsilateral IOS amplitude at P27-28 
+and P31-32 (IOS-I). As a control we also repeated the procedure 
+after bootstrapping the dataset of principal components 
+(Bootstrap). Thresholds, VEP and IOS-C models showed signifi-
+cantly better performances than the bootstrap condition 
+(Thresholds d 0 : 1.21, VEP d 0 : 0.97, IOSI-C d 0 : 1.00; post hoc Holm-
+Sidak P &lt; 0.0001 for all comparisons versus Bootstrap), indicat-
+ing that even simple sets of physiological parameters could be 
+used as a tool for monitoring both disease progression and the 
+effect of potential treatments. Interestingly, IOS-I model had a 
+remarkably lower efficiency not significantly different from the 
+Bootstrap model (d 0 : 0.16; post hoc Holm-Sidak P ¼ 0.20). </p>
+
+<p>Figure 1. (A) Sketch of the experimental protocol. (B) Picture of the 3D printed 
+imaging chamber. (C) Example of DR/R visual responses. Shaded area represents </p>
+
+<p>duration of the visual stimulation. Horizontal scale bar¼1 s, vertical scale bar </p>
+
+<p>(DR/R)¼2Â10 À4 . (D) Flow chart of image processing for automated binocular </p>
+
+<p>visual cortex ROI generation. Frame size: 2Â2 mm. </p>
+
+
+
+<p>Discussion </p>
+
+<p>The availability of animal models has greatly benefited the ef-
+forts to individuate molecular and cellular underpinnings of 
+cdkl5 syndrome (9,10). Moreover, behavioral assessment 
+has outlined significant impairments in different domains 
+(9,10,25,26). However, there remains a pressing need for bio-
+markers of high translational value to non-invasively and quan-
+titatively monitor brain function throughout progression of the 
+disorder and during treatment. Here, we used transcranial IOS 
+and intracortical VEPs to investigate visual cortical function in 
+cdkl5 mutant mice. The results showed that cortical responses 
+are dramatically reduced in amplitude already at P27-P28, as as-
+sessed both with IOS and VEPs, and that this reduction is signifi-
+cantly correlated with decreased response amplitude, abnormal 
+contrast response function, and impaired visual acuity in adult 
+mutants. Importantly, these alterations were detected both in 
+male mice with no expression of cdkl5 and in heterozygous fe-
+male mutants with mosaic expression of the remaining cdkl5 
+allele. Sensitivity analysis revealed that visual responses were 
+able to correctly classify mice in mutant or wild-type with more 
+than 93% accuracy and 92% sensitivity proving the robustness 
+of this technique in phenotype assessment. 
+In recent years, the visual cortex has become an impor-
+tant model to assess cortical processing in mouse model of 
+neurodevelopmental disorders (12,27,28). For instance, the 
+use of visually evoked responses has been suggested as a rel-
+atively common quantitative method to directly compare 
+cortical function in RTT patients and mouse models carrying 
+mecp2 mutations (11,12). VEPs have also been used to reveal 
+alterations in West Syndrome patients, EIEE1 (OMIM ref: 
+#308350), and in EIEE3 (OMIM ref: #609304), supporting the 
+translational and clinical applicability of this technique even 
+in presence of seizures or hyperexcitability (29,30). Our re-
+sults suggest that monitoring deficits in cortical visual 
+function could also be applied to cdkl5 syndrome. This </p>
+
+<p>possibility is in agreement with clinical studies indicating 
+that cdkl5 patients show visual impairments (13,15,16). 
+Moreover, previous studies showed that adult cdkl5 mutant 
+mice have altered neural responses in sensory cortices (9,10) 
+and impaired visual optokinetic reflex (9). A fundamental is-
+sue in analyzing phenotypes in mouse models of neurodeve-
+lopmental disorders is to understand whether the defective 
+phenotype is a primary deficit occurring at the disease onset 
+or a late secondary manifestation of the disease. Knowledge 
+about the onset of the symptoms is useful to optimize treat-
+ment schedule and to formulate hypotheses on the underly-
+ing neurobiological defects generating the deficit. Our results 
+indicate that, both in cdkl5 null males and in heterozygous 
+females, an impairment in visual responses begins to be pre-
+sent during development, in correlation with the increase of 
+cdkl5 expression occurring during forebrain postnatal devel-
+opment (2,7,8). Furthermore, the degree of impairment of 
+cortical visual responses present in juvenile mutants was 
+correlated with the deficits observed in the same animals 
+when they became adult, suggesting that the alteration of 
+developmental maturation mechanisms by cdkl5 mutation is 
+responsible for the impaired visual cortical function during 
+adulthood. 
+Both the onset of visual response impairment in mice and 
+the appearance of symptoms in humans take place during a pe-
+riod of intense synaptogenesis and synaptic plasticity, in agree-
+ment with the proposed role of cdkl5 in synaptic organization 
+(3-6). Studies performed in cdkl5 mice reported abnormal turn-
+over and density of dendritic spines, and reduced expression of 
+proteins involved in excitatory synaptic structure in different 
+brain areas, including sensory cortices (4,9,26). In particular, a 
+recent morphological analysis focused on the developing visual 
+cortex showed reduced staining for the activity-dependent pro-
+tein c-fos and for key components of the excitatory postsynap-
+tic protein assembly together with increased numbers and </p>
+
+<p>Figure 2. (A) Images collected at different ages in one male wild-type (WTm) and one cdkl5 null (KO) mice. Responses to contralateral (Contra) and ipsilateral eye (Ipsi) </p>
+
+<p>eye stimulation are reported. (B) IOS amplitude in response to contralateral eye stimulation at different ages in WTm and KO mice. (C) IOS amplitude in response to ip-</p>
+
+<p>silateral eye stimulation at different ages in WTm and KO mice. (D) Ocular dominance index (ODI) in WTm and KO mice. (E) Images collected at different ages in one fe-
+male wt (WTf) and one cdkl5 heterozygous (HET) mice. Responses to contralateral (Contra) and ipsilateral eye (Ipsi) eye stimulation are reported. (F) IOS amplitude in </p>
+
+<p>response to contralateral eye stimulation at different ages in WTf and HET mice. (G) IOS amplitude in response to ipsilateral eye stimulation at different ages in WTf </p>
+
+<p>and HET mice. (H) Ocular dominance index (ODI) in WTf and HET mice. In all panels, values are average6SEM. *P&lt;0.05, **P&lt;0.01. Frame size: 2Â2 mm. </p>
+
+<p> 
+Human Molecular Genetics, 2017, Vol. 26, No. 12 | </p>
+
+<p>connectivity of parvalbumin-positive inhibitory interneurons 
+(31). The possibility that cdkl5 acts both on excitatory and inhib-
+itory neurons is strengthened by previous work showing dis-
+tinct but overlapping phenotypes in mice with cdkl5 deletion 
+selectively from excitatory or inhibitory neurons (9). Therefore, 
+a defective maturation of excitatory and inhibitory circuits 
+could contribute to the impaired visual cortical responses ob-
+served here. 
+Intriguingly, our data suggest that the contralateral and the 
+ipsilateral responses could be differentially sensitive to cdkl5 
+mutation. Indeed, ipsilateral responses of mutant heterozygous 
+females, albeit consistently reduced, were not statistically af-
+fected. Whether this is due to differential effects of cdkl5 on the 
+crossed and uncrossed pathways, or to the low statistical power 
+due to the combination of low signal-to-noise ratio of mouse ip-
+silateral responses and the variability intrinsic to cdkl5 mosai-
+cism, is still to be clarified. 
+In summary, we found that the developmental trajectory of 
+visual cortical development is altered in cdkl5 mutants. Our 
+data were obtained with two different techniques that provided 
+highly correlated data increasing the robustness of the results. 
+Moreover, we showed that visual assessment can be used to au-
+tomatically classify subjects with high reliability. Importantly, </p>
+
+<p>VEP and IOS reduction of contralateral responses in both null 
+and het cdkl5 mice exhibited a large effect size (&gt;1.3) that was 
+obtained with approximately the same number of animals for 
+both sexes, suggesting that contralateral visual response deficit 
+is not linearly dependent on the percentage of cells carrying the 
+mutation. VEP recordings can be readily applied to humans and 
+other species, increasing the translational value of the visual 
+biomarker. Transcranial IOS imaging, a minimally invasive and 
+longitudinal technique, is also comparable to techniques used 
+in humans: indeed, it detects the same blood-oxygenation level 
+dependent signal measured by other widely used methods to 
+assess responsiveness in newborns and infants like functional 
+magnetic resonance imaging or functional near infrared spec-
+troscopy or tomography. We expect that these techniques will 
+be extremely valuable to monitor longitudinally the effective-
+ness of treatments and washout effects in preclinical, and pos-
+sibly clinical, studies of novel treatments for cdkl5 disorder. </p>
+
+<p>Materials and Methods </p>
+
+<p>Animal handling </p>
+
+<p>Animals were maintained in rooms at 22 C with a standard 
+12-h light-dark cycle. During the light phase a constant illumi-
+nation below 40 lux from fluorescent lamps was maintained. 
+Food (standard diet, 4RF25 GLP Certificate, Mucedola) and water 
+were available ad libitum and changed weekly. Open-top cages 
+(36.5Â20.7Â14 cm; 26.7Â20.7Â14 cm for up to 5 adult mice or </p>
+
+<p>Figure 3. (A) Average VEP amplitude to 0.03 cyc/deg gratings for contralateral 
+and ipsilateral eye stimulation in male wt (WTm) and cdkl5 null (KO) mice. </p>
+
+<p>Representative VEPs from single animals are reported above the corresponding </p>
+
+<p>histogram bar. (B) Ratio between contralateral and ipsilateral eye responses (C/I </p>
+
+<p>ratio) in WTm and KO mice. (C) Average VEP amplitude to 0.03 cyc/deg gratings 
+for contralateral and ipsilateral eye stimulation in female wt (WTf) and cdkl5 </p>
+
+<p>heterozygous (HET) mice. Representative VEPs from single animals are reported </p>
+
+<p>above the corresponding histogram bar. (D) C/I ratio in WTf and HET mice. </p>
+
+<p>Horizontal scale bar in (A and C)¼50 ms, vertical scale bar in (A and C)¼100 lV. 
+In all panels, values are average6SEM. *P&lt;0.05. </p>
+
+<p>Figure 4. (A) Contrast function for contralateral eye stimulation in male wt 
+(WTm) and cdkl5 null (KO) mice. Representative examples from single animals </p>
+
+<p>are reported. Data points are fitted with the Naka-Rushton function. (B) Contrast </p>
+
+<p>function for contralateral eye stimulation in female wt (WTf) and cdkl5 hetero-</p>
+
+<p>zygous (HET) mice. Representative examples from single animals are reported. 
+Data points are fitted with the Naka-Rushton function. (C) C 50 parameter (con-</p>
+
+<p>trast eliciting half-maximal response) of the Naka-Rushton fit in WTm and KO </p>
+
+<p>mice. (D) C 50 parameter in WTf and HET mice. (E) N parameter (slope) of the </p>
+
+<p>Naka-Rushton fit in WTm and KO mice. (F) N parameter in WTf and HET mice. 
+In all panels, values are average6SEM. *P&lt;0.05, **P&lt;0.01. </p>
+
+
+
+<p>42.5Â26.6Â15.5 cm for up to 8 adult mice) with wooden dust-
+free bedding were used. All the experiments were carried out in 
+accordance with the directives the European Community 
+Council (2011/63/EU) and approved by the Italian Ministry of 
+Health. All necessary efforts were made to minimize both stress 
+and the number of animals used. The mice used in this work de-
+rive from the cdkl5 null strain in C57BL/6N background devel-
+oped in (9) and backcrossed in C57BL/6J for three generations. 
+Male wt mice were bred with female hets to obtain mutant and 
+wt littermates. Weaning was performed at P21-23. Genotyping 
+(P10-12) was performed on tail tissue as described in (9). Colony 
+founders were selected for the absence of the rd8 retinal degen-
+eration allele spontaneously present in C57BL/6N mice (32). The 
+experimental groups were divided by sex: male cdkl5 null and 
+female heterozygous mice were compared with male wt and fe-
+male wt littermates, respectively. Data analysis was performed 
+by experimenters blind to the genotype. For chronic evaluation 
+of IOS/VEP responses and for VEP recordings at p27-32, mutant 
+and littermate control animals from 9 and 5 different litters 
+were used, respectively. </p>
+
+<p>Experimental protocol </p>
+
+<p>Mice of the four experimental groups (female wt, female cdkl5 
+heterozygous, male wt, male cdkl5 nulls) underwent three </p>
+
+<p>sessions of IOS imaging during development and VEP recordings 
+at P60-80 (protocol scheme depicted in Fig. 1A). Throughout im-
+aging sessions weight gain was monitored in all animals as a 
+measure of general health status. No differential effect was de-
+tected between wild-type and mutant mice (Supplementary 
+Material, Fig. S3). A separate cohort of mice was analyzed at 
+P27-32 using VEPs. </p>
+
+<p>Chronic IOS imaging </p>
+
+<p>Surgery 
+For chronic IOS preparations, mice (P23-24) were deeply box-
+anesthetized and maintained with isoflurane (respectively, 3 
+and 1%), placed on a stereotaxic frame and head fixed using ear 
+bars. Body temperature was controlled using a heating pad and 
+a rectal probe to maintain the animals' body at 37 C. Local 
+anesthesia was provided using subcutaneous lidocaine (2%) </p>
+
+<p>Figure 5. (A) Spatial frequency response curve for contralateral eye stimulation </p>
+
+<p>in male wild-type (WTm) and cdkl5 null (KO) mice. Representative examples </p>
+
+<p>from single animals are reported. Data points are linearly fitted. (B) VEP visual 
+acuity in WTm and KO mice. (C) Spatial frequency response curve for contralat-</p>
+
+<p>eral eye stimulation in female wt (WTf) and cdkl5 heterozygous (HET) mice. </p>
+
+<p>Representative examples from single animals are reported. Data points are line-</p>
+
+<p>arly fitted. (D) VEP visual acuity in WTf and HET mice. In all panels, values are 
+average6SEM. *P&lt;0.05, **P&lt;0.01. </p>
+
+<p>Figure 6. (A) Correlation matrix between average contralaterally evoked IOS am-</p>
+
+<p>plitude during development (IOS-C), contralaterally evoked VEP amplitude at 
+P60-80 (VEP-C), VEP acuity at P60-80 (ACUITY), and the C 50 parameter at P60-80 </p>
+
+<p>derived from Naka-Rushton fit of the contrast response curve (C 50 ). Non-para-</p>
+
+<p>metric Spearman correlation analysis revealed significant correlation (*P&lt;0.05, </p>
+
+<p>**P&lt;0.01, P-values corrected for multiple comparisons using Benjamini-
+Hochberg false discovery rate) between all the variables. The correlation coeffi-</p>
+
+<p>cient R is reported for each correlation in the corresponding plot. (B) Scatter plot </p>
+
+<p>of all the experimental subjects analyzed with VEP and IOS imaging plotted in </p>
+
+<p>the space of the first two principal components of PCA. (C) Comparison of 
+d-prime for different SVM classifiers trained and tested, respectively, with: the </p>
+
+<p>entire dataset (All), the first two principal components (PCA), Visual acuity and </p>
+
+<p>C 50 parameter from the contrast sensitivity curve (Thresholds), VEP amplitudes </p>
+
+<p>(VEP); contralateral IOS amplitudes (IOS-C); ipsilateral IOS amplitudes (IOS-I) 
+and randomly permuted dataset (Bootstrap). n.s., not significative; all other </p>
+
+<p>comparisons have P&lt;0.05. Values in C are presented as mean695% CI. </p>
+
+<p> 
+Human Molecular Genetics, 2017, Vol. 26, No. 12 | </p>
+
+<p>injection and eyes were protected with dexamethasone-based 
+ointment (Tobradex, Alcon Novartis). The scalp was removed 
+and the skull carefully cleaned with saline. Skin was secured to 
+the skull using cyanoacrylate. Then a thin layer of cyanoacry-
+late is poured over the exposed skull to attach a custom made 
+metal ring (9 mm internal diameter) centered over the binocular 
+visual cortex. When the glue dried off, a drop of transparent nail 
+polish was spread over the area to ameliorate optical access. 
+After surgery the animals were placed in a heated box and mon-
+itored to ensure the absence of any sign of discomfort. Before 
+any other experimental procedure, mice were left to recover for 
+24/48 h. During this period, paracetamol (5 mg/ml) was adminis-
+tered in the water as antalgic therapy. </p>
+
+<p>Visual stimulation, data acquisition and analysis 
+IOS recordings were performed under avertin anesthesia (20 ll/ 
+g, i.p.) at P25-26, P27-28 and P31-32. Images were visualized us-
+ing an Olympus microscope (BX50WI). Red light illumination 
+was provided by 8 red LEDs (625 nm, Knight Lites KSB1385-1P) 
+attached to the objective (Zeiss Plan-NEOFLUAR 5x, NA: 0.16) us-
+ing a custom made metal LED holder (33). The animal was se-
+cured under the objective using a ring-shaped neodynium 
+magnet (www.supermagnete.it; date last accessed April 1, 2017, 
+R-12-09-1.5-N) mounted on an arduino-based 3D printed imag-
+ing chamber that also controls eye shutters and a thermostated 
+heating pad (Fig. 1B; http://labrigger.com/blog/2015/11/30/open-
+source-intrinsic-imaging/; date last accessed April 1, 2017). 
+Visual stimuli were generated using <rs type="software">Matlab</rs> Psychtoolbox and 
+presented on a gamma corrected 9.7 in. monitor, placed 10 cm 
+away from the eyes of the mouse. Square wave gratings were 
+presented in the binocular portion of the visual field (À10 
+to þ10 relative to the horizontal midline and À5 to þ50 rela-
+tive to the vertical midline) with a spatial frequency of 0.03 cyc/ 
+deg, mean luminance 20 cd/m 2 and a contrast of 90%. The stim-
+ulus consisted in the abrupt contrast reversal of a grating with a 
+temporal frequency of 4 Hz for 1 s, time locked with a 16-bit 
+depth acquisition camera (Hamamatsu digital camera C11440) 
+using a parallel port trigger. Interstimulus time was 14 s. Frames 
+were acquired at 30 fps with a resolution of 512Â512 pixels. A 
+total of 210 frames were captured for each trial: 30 before the 
+stimulus as a baseline condition and 180 as post-stimulus. The 
+signal was averaged for at least 30 trials and downsampled to 10 
+fps. Fluctuations of reflectance (R) for each pixel were computed 
+as the normalized difference from the average baseline (DR/R). 
+For each recording, an image representing the mean evoked re-
+sponse was computed by averaging frames between 0.5 and 
+2.5 seconds after stimulation. The mean image was then low-
+pass filtered with a 2D average spatial filter (30 pixels, 117 lm 2 
+square kernel). To select the binocular portion of the primary vi-
+sual cortex for further analysis, a region of interest (ROI) was </p>
+
+<p>automatically calculated on the mean image of the response to 
+ipsilateral stimulation by selecting the pixels in the lowest 30% 
+DR/R of the range between the maximal and minimal intensity 
+pixel (34). The same ROI was used for the analysis of contralat-
+eral eye responses. A scheme of the data processing is shown in 
+Figure 1D. Mean evoked responses were quantitatively esti-
+mated as the average intensity inside the ROI. ODI was calcu-
+lated as (C À I)/(C þ I) for each pixel, where C and I indicate the 
+amplitude of contralateral and ipsilateral responses, respec-
+tively (34). To weaken background fluctuations a manually se-
+lected polygonal region of reference (ROR) was subtracted. The 
+ROR was placed where no stimulus response, blood vessel arti-
+fact or irregularities of the skull were observed (35). An example 
+of the time course of the DR/R response to visual stimulation af-
+ter processing is shown in Figure 1C. </p>
+
+<p>Visually evoked potentials </p>
+
+<p>Surgery 
+General anesthesia was induced in mice with 3% isoflurane, 
+subsequently deeply anesthetized with an intraperitoneal injec-
+tion of urethane (0.7 ml/h g; 20% solution in lactated ringer solu-
+tion) and head-fixed in a stereotaxic frame. After the removal of 
+the ring implant, the skull was exposed and a small craniotomy 
+(2Â 2 mm) overlying the visual cortex was performed, leaving 
+the dura mater intact. Then, a multichannel neural probe (Q-
+trode tetrode configuration, Neuronexus) was slowly inserted at 
+a depth of 150À200 lm, in the binocular visual cortex (lamb-
+da: þ3.2 mm lateral, þ0.2 mm rostral and following IOS derived 
+coordinates), where a high amplitude positive VEP is detectable. 
+Signal was acquired using Cheetah 32 (Neuralynx) recording 
+system at 30.3 kHz of sampling rate with a band pass filter of 
+0.1À250 Hz. Signal from each channel was averaged to obtain 
+VEPs. </p>
+
+<p>Visual stimulation and data acquisition 
+Both stimuli and analysis for VEP recordings were performed 
+using custom software written in Matlab Psychtoolbox and dis-
+played onto a gamma corrected 21 inch CRT monitor placed 
+20 cm in front of the animal. Stimuli consisted in contrast rever-
+sal square wave gratings with a spatial frequency of 0.03 cyc/ 
+deg, mean luminance of 25 cd/m 2 and a contrast of 90%. 
+Monitor was centered on animal head and stimuli covered 655 
+relative to vertical and À5 þ30 relative to vertical midline. 
+Stimulus temporal frequency was 2 Hz. VEP responses were av-
+eraged for at least 100 trials per eye. Each condition was re-
+peated for at least eight times. The amplitude quantification of 
+the response was calculated as the peak to baseline difference 
+of the first positive component (at $100 ms). Visual acuity is cal-
+culated presenting contrast reversal sinewave gratings with </p>
+
+<p>Table 1. Performance evaluation of SVM classifiers trained with different datasets </p>
+
+<p>Training dataset 
+Accuracy % (95% CI) 
+Sensitivity % (95% CI) 
+Specificity % (95% CI) 
+d 0 (95% CI) </p>
+
+<p>All 
+89.96 (89.34-90.58) 
+89.50 (88.53-90.47) 
+91.50 (90.14-92.86) 
+1.32 (1.29 to 1.36) 
+PCA 
+93.10 (92.56-93.64) 
+92.21 (91.11-93.32) 
+97.08 (96.14-98.03) 
+1.52 (1.49 to 1.55) 
+Thresholds 
+87.63 (86.72-88.55) 
+83.79 (82.07-85.50) 
+92.83 (91.24-94.42) 
+1.21 (1.16 to 1.25) 
+VEP 
+82.58 (81.55-83.60) 
+82.79 (80.78-84.80) 
+82.50 (80.32-84.68) 
+0.97 (0.92 to 1.02) 
+IOS-C 
+82.94 (81.80-84.08) 
+85.14 (83.16-87.13) 
+80.58 (78.65-82.52) 
+1.00 (0.96 to 1.05) 
+IOS-I 
+64.88 (63.58-66.19) 
+73.43 (71.25-75.61) 
+53.17 (49.91-56.42) 
+0.16 (0.06 to 0.25) 
+Bootstrap 
+55.94 (54.83-57.06) 
+49.86 (46.32-53.40) 
+50.83 (47.22-54.45) 
+0.08 (À0.03 to 0.19) </p>
+
+<p>IOS, intrinsic optical signal; VEP, visually evoked potentials; SVM, support vector machine; PCA, principal component analysis. </p>
+
+
+
+<p>different spatial frequencies (0.03, 0.06, 0.012, 0.024, 0.048, 0.96 
+and 0 cyc/deg) and calculating the maximal spatial frequency 
+resolved by linear fit estimation of parameters and extrapola-
+tion of amplitude at 0 lV in a semi-logarithmic space. Contrast 
+sensitivity was calculated using 0.03 cyc/deg contrast reversal 
+sine wave gratings with different contrasts (90, 50, 25, 12, 6, 3 
+and 0%). Normalized amplitude data was fitted to a sigmoid 
+curve using Naka-Rushton function, Resp(c) ¼ 1 C n /(C 50 
+n þ C n ), to </p>
+
+<p>extract contrast sensitivity parameters (23,24,36). C 50 is the con-
+trast evoking half the maximum response and n describes the 
+shape of the curve. </p>
+
+<p>SVM classifier 
+Z-scored values of each physiological parameter were used for 
+linear SVM classification. SVM is a supervised machine learning 
+method for data classification that can be trained to find the 
+best hyperplane that separates all data points in two user-
+defined classes and can subsequently be exploited to blind-
+predict the class to which a new observation belongs (37-39). 
+We defined two classes: mutated (heterozygous and null) and 
+wild-type (males and females) mice. By using the <rs type="software">Matlab</rs> func-
+tion svmtrain, we trained the SVM with a subset of data consist-
+ing of 50% of the dataset and we than used the remaining 50% 
+for testing, using the svmclassify function. Accuracy, sensitivity, 
+specificity and D-prime (d 0 ) were then computed for the categor-
+ical classification in order to evaluate its performance. This pro-
+cedure was repeated 200 times, each one with a randomly 
+divided training and testing subsets. Values for accuracy, sensi-
+tivity (or true positive rate), specificity (or true negative rate) 
+and d 0 were averaged across iterations. Accuracy, sensitivity 
+and specificity were defined as (TP þ TN)/total, TP/P and TN/N, 
+respectively, where TP: True positive, TN: True Negative, P: total 
+positives, N: total negatives. D-prime, which measures the dis-
+tance between the signal and the noise means in standard 
+deviation units (40), was calculated using <rs type="software">matlab</rs> function 
+dprime_simple 
+(https://it.mathworks.com/matlabcentral/fileex 
+change/47711-dprime-simple-m; date last accessed April 1, 
+2017). </p>
+
+<p>Statistical analysis </p>
+
+<p>All statistical analyses were performed using <rs id="software-0" type="software">GraphPad Prism</rs> 
+version <rs corresp="#software-0" type="version-number">6</rs> (<rs corresp="#software-0" type="creator">GraphPad Software</rs>, San Diego, CA, USA). All values 
+were presented as mean 6 SEM unless otherwise stated. 
+Differences between groups were tested for significance using 
+two-way ANOVA, unless otherwise indicated. Holm-Sidak's 
+multiple comparisons post hoc tests were performed, where ap-
+propriate, to correct for multiple hypothesis testing. In the fig-
+ures, n.s., not significative, *P &lt; 0.05, **P &lt; 0.01 and ***P &lt; 0.001. </p>
+
+<p>Supplementary Material </p>
+
+<p>Supplementary Material is available at HMG online. </p>
+
+<p>Acknowledgements </p>
+
+<p>We thank Areg Barsegyan for technical suggestions on imaging 
+implants. </p>
+
+<p>Conflict of Interest statement. None declared. </p>
+
+<p>Funding </p>
+
+<p>International Foundation for cdkl5 Research and the 
+Fondazione Telethon (GGP15098). Funding to pay the Open 
+Access publication charges for this article was provided by 
+Fondazione Telethon. </p>
+
+
+
+<p> 
+Human Molecular Genetics, 2017, Vol. 26, No. 12 | </p>
+
+
+
+
+
+</text></tei>

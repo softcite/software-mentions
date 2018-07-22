@@ -1,0 +1,468 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC2447753" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:21+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p><rs type="software">MAGNOLIA</rs>ABSTRACT </p>
+
+<p><rs type="software">MAGNOLIA</rs> is a new software for multiple alignment 
+of nucleic acid sequences, which are recognized to 
+be hard to align. The idea is that the multiple align-
+ment process should be improved by taking into 
+account the putative function of the sequences. In 
+this perspective, <rs type="software">MAGNOLIA</rs> is especially designed 
+for sequences that are intended to be either protein-
+coding or structural RNAs. It extracts information 
+from the similarities and differences in the data, and 
+searches for a specific evolutionary pattern between 
+sequences before aligning them. The alignment step 
+then incorporates this information to achieve higher 
+accuracy. The website is available at http://bioinfo. 
+lifl.fr/magnolia. </p>
+
+<p>More and more newly sequenced genomes are becoming 
+available every week. Tiling arrays are also gaining 
+popularity for detecting novel transcripts in sequenced 
+genomes. In this context, sequence annotation is an 
+essential step in understanding the genome and the tran-
+scriptome of a species. Comparative genomics has proven 
+to be a promising approach to address this problem. 
+Large-scale comparisons of prokaryotic and eukaryotic 
+genomes reveal thousands of conserved regions obtained 
+by homology or synteny. These regions might be protein-
+coding sequences (1) or non-coding RNA genes (2,3,4). 
+Annotation by comparative analysis typically involves 
+two steps: first aligning the sequences, then analysing 
+the multiple alignment to detect an evolutionary pattern 
+that is representative of the selection pressure. This idea 
+is exploited in <rs type="software">Exoniphy</rs> (5) for exon detection, in <rs type="software">RNAz</rs> 
+(6) or <rs type="software">Evofold</rs> (7) for structural RNA prediction or in 
+Qrna (8), that implements both a coding and an non-
+coding model for RNAs. In this computational protocol, 
+high-quality sequence alignment is an essential pre-
+requisite step. This task, however, is difficult because 
+sequence similarity is often reduced at the nucleic level. </p>
+
+<p>Regarding protein coding genes, nucleic acid sequences 
+exhibit a much larger sequence heterogeneity compared to 
+their encoded amino acid sequences due to the redundancy 
+of the genetic code. It is well known that the combination 
+of nucleic acid and amino acid sequence information 
+leads to improved alignments (9,10). The same situation 
+holds for non-coding RNA genes. The spatial structure 
+evolves slower than its primary structure. So pure-
+sequence-based multiple alignment tools perform poorly 
+on low-homology datasets of structural RNAs (11). In 
+this article, we present the <rs type="software">MAGNOLIA</rs> website, whose 
+objective is to provide an advanced tool for aligning 
+nucleic acid sequences. The idea is to get rid of the 
+dichotomy between aligning and predicting the function. 
+If we assume that sequences are either protein-coding or 
+structural RNAs, it is possible to incorporate some 
+functional information into the alignment algorithm to 
+improve the result. The multiple alignment can then be 
+used as a starting point to refine the comparative analysis 
+or to carry out further predictions, such as motif finding 
+or phylogeny reconstruction. </p>
+
+<p>METHODS </p>
+
+<p>The method has two steps. First, it tries to predict the 
+function of the sequences according to the substitution 
+pattern between sequences. Second, a multiple alignment 
+is built based on the putative function of the sequences. If 
+the sequences are recognized as coding sequences, then the 
+multiple alignment uses the amino acid sequences. If the 
+sequences are recognized to contain a conserved second-
+ary structure, then the mutiple alignment takes into 
+consideration long-range base pair interactions. 
+<rs type="software">MAGNOLIA</rs> includes three specific modules: <rs type="software">Protea</rs> 
+for protein coding sequences, <rs type="software">caRNAc</rs> and <rs type="software">gardenia</rs> for 
+structural RNAs. The overall scenario is summed up in 
+Figure 1. 
+<rs type="software">Protea</rs> implements an evolutionary model for protein-
+coding sequences (12). Here the idea is that the selection 
+pressure tends to preserve the encoded amino acid 
+sequence, and it is possible to identifies coding sequences 
+by looking for a global conservation of common </p>
+
+<p>*To whom correspondence should be addressed. Tel: (33) 3 59 57 79 16; Fax: (33) 3 59 57 78 50; Email: Helene.Touzet@lifl.fr </p>
+
+<p>ß 2008 The Author(s) 
+This is an Open Access article distributed under the terms of the Creative Commons Attribution Non-Commercial License (http://creativecommons.org/licenses/ 
+by-nc/2.0/uk/) which permits unrestricted non-commercial use, distribution, and reproduction in any medium, provided the original work is properly cited. </p>
+
+<p>reading frames. The method first identifies best potential 
+reading frames from each pair of sequences, and then 
+incorporates this information into a frame graph from 
+which a coding significancy score is calculated. By 
+doing so, it also predicts the associated reading frame for 
+each sequence. If the sequences are classified as protein-
+coding sequences, then the multiple alignment of nucleic 
+acid sequences is built from the hypothetical amino 
+acid sequences using <rs type="software">ClustalW</rs> (13), Dialign2 (10) or 
+<rs type="software">T-coffee</rs> (14). <rs type="software">caRNAc</rs> is for structural RNA genes (15). In 
+this model, the selection pressure tends to preserve the 
+secondary structure of the molecule, and mutations should 
+retain the ability to form base pairs into energetically 
+favorable stems. 
+<rs type="software">caRNAc</rs> is able to recover a conserved secondary struc-
+ture from a set of unaligned sequences. This idea is also 
+present in refs. (16,17), that fold and align several 
+sequences at the same time, for example. But these pro-
+grams are still computationally demanding. We circum-
+vent the problem by using a heuristics approach. The 
+algorithm uses a Sankoff-based dynamic programing 
+approach to identify conserved strutures for all pairs of 
+sequences. Then all pairwise foldings are combined into 
+a graph-theoretical structure called the stem graph. 
+Only frequent common stems that correspond to highly 
+connected subgraphs in the stem graph are retained. 
+Gardenia is used to build the multiple alignment for 
+potential structural RNA sequences. The method takes 
+into account both the nucleic sequence and the putative 
+common secondary structure predicted by <rs type="software">caRNAc</rs>. It 
+relies on the dynamic programming algorithm for pair-
+wise comparison proposed in ref. (18). RNA sequences are 
+encoded as arc-annotated sequences, and a multiple align-
+ment for a set of arc-annotated sequences is a nested 
+common supersequence. The edit scheme incorporates 
+evolutionary operations concerning free bases (base 
+substitution, base deletion) and base pairs (arc-mismatch, 
+arc-removing, arc-breaking, arc-altering), originally 
+defined in ref. (19). It is easy to show that this problem 
+is NP-hard. We take a heuristic approach and use a </p>
+
+<p>progressive method. The method starts with constructing 
+all pairwise alignments to determine the degree of 
+similarity for each pair of sequences. Then it combines 
+sequences into a multiple alignment by an ascending 
+hierarchical clustering. Pairwise alignment of super-
+sequences rely on the same algorithm as pairwise 
+alignments for arc-annotated sequences. This is made 
+possible because supersequences can be viewed as a nested 
+arc-annotated sequences on an extended alphabet. The 
+score of one node is its SP (sum-of-pairs) score. Lastly, the 
+space search of the dynamic programming alignment is 
+pruned using constraints coming from the <rs type="software">caRNAc</rs> 
+output. This provides a significant speed up. </p>
+
+<p>WEB SERVER </p>
+
+<p>Input </p>
+
+<p><rs type="software">MAGNOLIA</rs> requires as input data a set of RNA or 
+DNA sequences in the standard FASTA format. This set 
+should contain at least two distinct sequences and at most 
+ten sequences. It can be stored in a file to be uploaded to 
+the server, or pasted directly in the text box. </p>
+
+<p>Output </p>
+
+<p>A typical run of <rs type="software">MAGNOLIA</rs> takes a few seconds. 
+Upon completion of a job, <rs type="software">MAGNOLIA</rs> displays the 
+result on a new web page. The job assigned a unique 
+identifier that can be used to retrieve results for one week. 
+All results are available for download in <rs type="software">Clustal</rs> and 
+bracket-dot format. 
+If input sequences are annotated as coding sequences, 
+then two multiple alignments are displayed. The first 
+alignment is built on the putative amino acid sequences 
+obtained by virtual translation using the predicted reading 
+frame, and the second alignment is the corresponding 
+alignment on nucleic acid sequences obtained by reverse 
+translation, allowing for frameshifts. Codons in the nucleic 
+acid sequences are put in color: two base triplets coding for </p>
+
+<p>gardenia 
+caRNAc </p>
+
+<p>protea 
+ClustalW, Dialign, 
+T-coffee </p>
+
+<p>O U T P U T </p>
+
+<p>I N P U T 
+all sequences </p>
+
+<p>all sequences </p>
+
+<p>primary + secondary 
+structures </p>
+
+<p>aminoacid 
+sequences </p>
+
+<p>2 sequences </p>
+
+<p>2 sequences </p>
+
+<p>set of nucleic 
+acid sequences 
+all pairs 
+of sequences </p>
+
+<p>conserved 
+2ary structure 
+stem graph </p>
+
+<p>frame graph 
+conserved 
+reading frame </p>
+
+<p>classification 
+coding/other </p>
+
+<p>multiple 
+alignment </p>
+
+<p>classification 
+structural/other </p>
+
+<p>multiple 
+alignment </p>
+
+<p>Figure 1. <rs type="software">MAGNOLIA</rs> scenario. </p>
+
+<p>Nucleic Acids Research, 2008, Vol. 36, Web Server issue W15 </p>
+
+<p>the same amino acid bear the same color. The color choice 
+is inspired from the <rs type="software">RasMol</rs> amino acid color scheme. 
+Figure 2 shows an example of <rs type="software">MAGNOLIA</rs> output 
+obtained with a family of protein-coding sequences. 
+If input sequences are annotated as structural RNA 
+genes, then a multiple alignment taking into consideration 
+the primary structure accompanied by the secondary 
+structure is displayed. Concerning the secondary struc-
+ture, base pairings are indicated in bracket-dot format: 
+Each base-pair is represented by a pair of matching 
+brackets and unpaired bases are represented by dots. The 
+lack of pseudoknots in the secondary structure ensures 
+that this notation defines a unique folding. Moreover, 
+stems in the alignment are highlighted in colors. Figure 3 
+shows an example of output obtained with a family of 
+non-coding RNAs. For each sequence, the individual 
+putative secondary structure is also provided in five 
+formats: CT, JPEG, PS, bracket-dot format and as a list 
+of constrained base pairings. JPEG and PS files are 
+automatically produced from the CT file using the 
+<rs type="software">NAview</rs> layout program (22). 
+Some data sets are not identified as coding RNAs nor as 
+non-coding RNAs. The first possibility is that the 
+sequences might have an alternative function, such as 
+untranslated regions in messenger RNAs, promoter 
+elements, etc. The second possibility is that the sequences 
+are highly conserved. In this context, the comparative 
+analysis approach used by <rs type="software">MAGNOLIA</rs> is not suitable. 
+The evolutionary signal is too weak and the sequences do 
+not exhibit any significant mutational bias towards any 
+model. This is an intrinsic limitation of the method. But 
+this limitation is harmless for practical purposes, because 
+standard multiple sequence alignment tools usually yield 
+good results on high-identity data sets. So when the 
+average identity percentage is greater than 90%, the server 
+outputs a warning message and provides a default 
+multiple alignment constructed directly with <rs type="software">ClustalW</rs> 
+on the initial data set. 
+One final point worth mentioning is that the classifica-
+tion is not mutually exclusive. Some sequences might 
+contain conserved secondary structure elements within a 
+coding region. Two such examples are the cis-acting </p>
+
+<p>regulatory element from the human rhinoviruses, that is 
+located in the open reading frame of the capsid proteins 
+[RFAM -RF00220 (21)], or the Hepatitis C stem-loop 
+VII structure found in the coding region of the RNA-
+dependent RNA polymerase gene NS5B [RFAM -
+RF000468 (21)]. In such cases, <rs type="software">MAGNOLIA</rs> releases 
+two multiple alignments. </p>
+
+<p>EXPERIMENTAL RESULTS </p>
+
+<p>We evaluate the accuracy of the method on two large data 
+sets: Pandit (20) and BRaliBase II (11). Pandit is a registry 
+of families of homologous protein domains, accompanied 
+by curated RNA sequence alignments. BRaliBase II is a 
+set of non-coding RNA families that has been used to 
+establish a benchmark of multiple sequence alignment 
+programs upon structural RNAs. It is composed of four 
+families: Group II introns, 5S rRNA, tRNA and U5 
+spliceosomal RNA. </p>
+
+<p>Results on pandit database </p>
+
+<p>For each family, we selected a subset of four sequences at 
+random. It remains 6491 families, whose average sequence 
+length is 604 bp. 6122 (94.3%) families are correctly 
+classified as coding sequences, among them more than 
+99% with the correct reading frame predicted for each 
+sequence. Less than 3% of the families are classified as 
+structural RNA. To estimate the quality of the alignments, 
+we used the sum-of-pairs score (SPS) of the Baliscore 
+software (23). The SPS is calculated such that it increases 
+with the number of sequences correctly aligned. We 
+compared <rs type="software">MAGNOLIA</rs> with <rs type="software">ClustalW</rs>, <rs type="software">T-coffee</rs> and 
+<rs type="software">Dialign2</rs> on the same nucleic acid sequences. Results are 
+displayed in Figure 4. </p>
+
+<p>Results on BRaliBase II benchmark data </p>
+
+<p>This benchmark contains 388 alignments, that are 
+classified into high, medium and low identity data sets. 
+<rs type="software">MAGNOLIA</rs> failed to identify a structural evolutionary 
+pattern for 20% of them and falsely assigned a protein 
+coding function for 7% of them. Following ref. (11), we 
+use the structure conservation index (SCI) to assess the </p>
+
+<p>Figure 3. Alignment for five tRNA sequences (BRaliBase II -aln 13). The average length is 76 nt and the average identity percentage is 51.0%. 
+<rs type="software">MAGNOLIA</rs> finds three common stems (in blue, green and orange). All pairings are correct, and the multiple alignment is consistent with the 
+reference alignment available in RFAM-RF00005 (21). </p>
+
+<p>Figure 2. Alignment for Zn-finger in Ran binding proteins (PFAM PF00641). The average length is 92 nt and the average identity percentage is 
+45.1%. Triplets are colorized according to the encoded amino acid. The reference alignment provided in Pandit is almost identical (20). </p>
+
+<p>W16 Nucleic Acids Research, 2008, Vol. 36, Web Server issue </p>
+
+<p>accuracy of alignments. This score provides a measure of 
+the conserved secondary structure information contained 
+within the alignment. Results for <rs type="software">MAGNOLIA</rs> are 
+reported in Figure 5, together with results for other 
+alignment tools used in the benchmark. We also evaluated 
+the accuracy of the secondary structure found by 
+<rs type="software">MAGNOLIA</rs> and compared it to two recent structural 
+alignment programs: <rs type="software">Murlet</rs> (16) and <rs type="software">Mlocarna</rs> (17). For 
+each <rs type="software">software</rs> and for each identity class, we computed the 
+percentage of correct base pairings amongst the set of 
+predicted base pairings. Results are shown in Table 1. It 
+appears that <rs type="software">MAGNOLIA</rs> has similar performances as 
+<rs type="software">Murlet</rs> and outperforms <rs type="software">Mlocarna</rs>. Furthermore, the 
+total runtime is more than 12 times faster for 
+<rs type="software">MAGNOLIA</rs> than for the two other methods (&lt; 20 min 
+for the whole data set, compared to more than 4 hours). </p>
+
+<p>ACKNOWLEDGEMENTS </p>
+
+<p>Funding to pay the Open Access publication charges for 
+this article was provided by CNRS (Centre National de la 
+Recherche Scientifique). </p>
+
+<p>Conflict of interest statement. None declared. </p>
+
+
+
+<p>Table 1. Accuracy percentage for <rs type="software">MAGNOLIA</rs>, <rs type="software">Murlet</rs> and Mlocarna 
+for reference secondary structures of <rs id="software-74" type="software">BRaliBase</rs> <rs corresp="#software-74" type="version-number">II</rs> </p>
+
+<p>Identity class </p>
+
+<p>Low 
+Medium 
+High </p>
+
+<p>MAGNOLIA 
+72.0% 
+76.3% 
+87.0% 
+Murlet 
+78.1% 
+76.2% 
+77.8% 
+Mlocarna 
+68% 
+71.1% 
+78.9% </p>
+
+<p>30 
+40 
+50 
+60 
+70 
+80 
+90 </p>
+
+<p>0.0 </p>
+
+<p>0.2 </p>
+
+<p>0.4 </p>
+
+<p>0.6 </p>
+
+<p>0.8 </p>
+
+<p>1.0 </p>
+
+<p>Percent Identity </p>
+
+<p>SPS </p>
+
+<p>Reference 
+Magnolia (ClustalW) 
+Magnolia (Dialign2) 
+Magnolia (T-Coffee) 
+ClustalW 
+Dialign2 
+T-Coffee </p>
+
+<p>Figure 4. <rs type="software">MAGNOLIA</rs> alignments on <rs type="software">Pandit</rs>. The x-axis represents the 
+average identity percentage and the y-axis represents the SPS value. For 
+<rs type="software">MAGNOLIA</rs>, we tried all possible combinations concerning the 
+alignment tool in the amino acid alignment step: <rs type="software">ClustalW</rs>, <rs type="software">T-coffee</rs> 
+and <rs type="software">Dialign2</rs>. For <rs type="software">Dialign2</rs>, we selected the appropriate option 
+Translation of nucleotide diagonals into peptide diagonals when compar-
+ing the nucleic acid sequences. <rs type="software">MAGNOLIA</rs> clearly outperforms other 
+methods. </p>
+
+<p>40 
+50 
+60 
+70 
+80 
+90 </p>
+
+<p>0.0 </p>
+
+<p>0.2 </p>
+
+<p>0.4 </p>
+
+<p>0.6 </p>
+
+<p>0.8 </p>
+
+<p>1.0 </p>
+
+<p>Percent Identity </p>
+
+<p>SCI </p>
+
+<p>Reference 
+Magnolia 
+ClustalW 
+DIALIGN 
+MUSCLE 
+PCMA 
+POA 
+POA (g,p) </p>
+
+<p>ProAlign 
+Prrn 
+Prrn (S10) 
+T-Coffee 
+T-Coffee (c) 
+Handel 
+MAFFT 
+Align-m (1) </p>
+
+<p>Figure 5. <rs type="software">MAGNOLIA</rs> alignments on BRaliBase II. The x-axis 
+represents the average identity percentage and the y-axis represents 
+the SCI value. The above curve is calculated from reference alignments. 
+<rs type="software">MAGNOLIA</rs> appears to be the closest curve to the reference curve for 
+identity percentage ranging from 40% to 80%. For higher identity 
+percentages, all methods show similar performances. </p>
+
+<p>Nucleic Acids Research, 2008, Vol. 36, Web Server issue W17 </p>
+
+
+
+<p>W18 Nucleic Acids Research, 2008, Vol. 36, Web Server issue </p>
+
+</text></tei>

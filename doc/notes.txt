@@ -1,0 +1,213 @@
+using certainty threshold should be experimented !
+
+----
+
+getting software entities with Wikidata
+
+SELECT ?item ?itemLabel 
+WHERE 
+{
+  ?item wdt:P31 wd:Q7397.
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
+}
+
+-> 11 671 software
+
+
+----
+
+how is managed software inter-agreement?
+which one to choose?
+agreement phase?
+
+jasleen29-PMC2570388.ttl
+
+version number in software name / overlapping mentions
+
+    ca:isTargetOf
+        [ rdf:type ca:CodeApplication ;
+          ca:hasCoder "jasleen29" ;
+          ca:appliesCode [ rdf:type citec:software_name ;
+                           citec:isPresent true ; # true/false
+                           rdfs:label """Statview 5.0.1 software package""" ; # use triple quotes
+                         ] ;
+        ] ;
+    ca:isTargetOf
+        [ rdf:type ca:CodeApplication ;
+          ca:hasCoder "jasleen29" ;
+          ca:appliesCode [ rdf:type citec:version_number ;
+                           citec:isPresent true ; # true/false
+                           rdfs:label """5.0.1""" ; # use triple quotes
+                         ] ;
+        ] ;
+
+
+but correct in:
+
+sehreenali-PMC2570388.ttl
+
+    ca:isTargetOf
+        [ rdf:type ca:CodeApplication ;
+          ca:hasCoder "sehreenali" ;
+          ca:appliesCode [ rdf:type citec:software_name ;
+                           citec:isPresent true ; # true/false
+                           rdfs:label """Statview""" ; # use triple quotes
+                         ] ;
+        ] ;
+    ca:isTargetOf
+        [ rdf:type ca:CodeApplication ;
+          ca:hasCoder "sehreenali" ;
+          ca:appliesCode [ rdf:type citec:version_number ;
+                           citec:isPresent true ; # true/false
+                           rdfs:label """5.0.1""" ; # use triple quotes
+                         ] ;
+        ] ;
+
+---
+
+version number in software name / overlapping mentions
+
+PMC2768165_SG03,sonakshigarg23,software_name,true,"Imagine-Pro Plus 5.0, Media Cybernetics"
+
+
+
+----
+
+are there cases where the version number/date and creator are not located in the quote corresponding to a software name ?
+
+----
+
+chunk selection policy: version number
+
+-> example "version" included or not in the version number?
+
+* ctjoe-PMC3768955.ttl
+
+ca:isTargetOf
+        [ rdf:type ca:CodeApplication ;
+          ca:hasCoder "ctjoe" ;
+          ca:appliesCode [ rdf:type citec:version_number ;
+                           citec:isPresent true; # true/false
+                           rdfs:label """version 7.1.5""" ; # use triple quotes
+                         ] ;
+        ] ;
+
+ca:isTargetOf
+        [ rdf:type ca:CodeApplication ;
+          ca:hasCoder "ctjoe" ;
+          ca:appliesCode [ rdf:type citec:version_number ;
+                           citec:isPresent true; # true/false
+                           rdfs:label """Version 7.0"""; # use triple quotes
+                         ] ;
+        ] ;
+
+
+* ambermomin-PMC3158666.ttl
+
+ca:isTargetOf
+        [ rdf:type ca:CodeApplication ;
+          ca:hasCoder "ambermomin" ;
+          ca:appliesCode [ rdf:type citec:version_number ;
+                           citec:isPresent true ; # true/false
+                           rdfs:label """v 10""" ; # use triple quotes
+                         ] ;
+        ] ;
+
+* brentbiglin-PMC3218131.ttl
+
+pmcid:PMC3218131_BB01 rdf:type citec:in_text_mention ; # use in text mention name
+    citec:full_quote """The statistical analysis was conducted with SPSS ver. 12.0 (SPSS Inc., Chicago, IL, USA), """ ; # use triple quotes
+
+    
+    ca:isTargetOf
+        [ rdf:type ca:CodeApplication ;
+          ca:hasCoder "brentbiglin" ;
+          ca:appliesCode [ rdf:type citec:version_number ;
+                           citec:isPresent true ; # true/false
+                           rdfs:label """12.0""" ; # use triple quotes
+                         ] ;
+        ] ;
+
+* mjsong1201-PMC3251324.ttl
+
+pmcid:PMC3251324_MS01 rdf:type citec:in_text_mention ; # use in text mention name
+    citec:full_quote """Phylogenetic trees were inferred in MrBayes v.3.0b4 (Ronquist  &  Huelsenbeck  2003)  by  Bayesian  analysis  and in  PAUP  (Phylogenetic Analysis  Using  Parsimony)  v.4.0b10 (Swofford  2002)  by  Maximum  Parsimony  (MP)  using  the heuristic  search  option  with  random  addition  of  sequences (1000  replications),  tree  bisection-reconnection  (TBR)  and MULTREES  options  ON.""" ; # use triple quotes
+
+    ca:isTargetOf
+        [ rdf:type ca:CodeApplication ;
+          ca:hasCoder "mjsong1201" ;
+          ca:appliesCode [ rdf:type citec:version_number ;
+                           citec:isPresent true ; # true/false
+                           rdfs:label """4.0b10""" ; # use triple quotes
+                         ] ;
+        ] ;
+
+pmcid:PMC3251324_MS02 rdf:type citec:in_text_mention ; # use in text mention name
+    citec:full_quote """Phylogenetic trees were inferred in MrBayes v.3.0b4 (Ronquist  &  Huelsenbeck  2003)  by  Bayesian  analysis  and in  PAUP  (Phylogenetic Analysis  Using  Parsimony)  v.4.0b10 (Swofford  2002)  by  Maximum  Parsimony  (MP)  using  the heuristic  search  option  with  random  addition  of  sequences (1000  replications),  tree  bisection-reconnection  (TBR)  and MULTREES  options  ON.""" ; # use triple quotes
+
+    ca:isTargetOf
+        [ rdf:type ca:CodeApplication ;
+          ca:hasCoder "mjsong1201" ;
+          ca:appliesCode [ rdf:type citec:version_number ;
+                           citec:isPresent true ; # true/false
+                           rdfs:label """3.0b4""" ; # use triple quotes
+                         ] ;
+        ] ;
+
+* henryrossiter-PMC3710919.ttl
+
+pmcid:PMC3710919_HR01 rdf:type citec:in_text_mention ; # use in text mention name
+    citec:full_quote """All statistical analysis was by SPSS version 15.0 (SPSS Inc., Chicago, IL, USA)""" ; # use triple quotes
+
+    ca:isTargetOf
+        [ rdf:type ca:CodeApplication ;
+          ca:hasCoder "henryrossiter" ;
+          ca:appliesCode [ rdf:type citec:version_number ;
+                           citec:isPresent true ; # true/false
+                           rdfs:label """15.0""" ; # use triple quotes
+                         ] ;
+        ] ;
+
+
+
+----
+
+Chunck selection policy, software name
+
+PMC3768679_SAS-2002,henryrossiter,software_name,true,SAS System for windows
+PMC3768679_SAS01,jackchristen,software_name,true,SAS System
+PMC4213536_YK01,yashkar,software_name,true,SAS program
+PMC4475901_FJ02,jasleen29,software_name,true,image Master 2D Platinum 7 software
+PMC4496436_CM01,anneclarisse,software_name,true,IBM SPSS
+PMC4536843_CM02,anneclarisse,software_name,true,Stata software
+
+PMC3593214_CB01,carsonbrown19,software_name,true,"2D image construction
+and statistical analysis were executed using custom-made scripts in the FlexImaging
+software (Bruker Biosicence, AUS)"
+
+
+----
+
+journal name as creator...
+
+* jasleen29-PMC2731890.ttl
+
+    citec:has_reference pmcid-cited:PMC2731890_PlatProm ; # name reference like pmcid-cited:a2004-40-NAT_GENET_Author-YYYY, no quotes
+.pmcid-cited:PMC2731890_JBioinf rdf:type citec:reference ;
+    citec:full_quote """Ozoline,O.N. and Deev,A.A. (2006) Predicting antisense RNAs in the genomes of Escherichia coli and Salmonella typhimurium using promoter-search algorithm PlatProm. J. Bioinf. Comput. Biol., 4, 443–454.""" ; # use triple quotes
+
+    ca:isTargetOf
+        [ rdf:type ca:CodeApplication ;
+          ca:hasCoder "jasleen29" ;
+          ca:appliesCode [ rdf:type citec:creator ;
+                           citec:isPresent true ; # true/false
+                           rdfs:label """J. Bioinf. Comput. Biol""" ; # use triple quotes
+                         ] ;
+        ] ;
+
+----
+
+how much is put to creator?
+
+PMC4435018_FJ01,jasleen29,creator,true,"Tom Hall, Ibis Biosciences, Carlsbad, CA"
+

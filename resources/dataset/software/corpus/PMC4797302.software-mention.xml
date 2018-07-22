@@ -1,0 +1,792 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4797302" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:30+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>ABSTRACT </p>
+
+<p>The spatial organization of the genome influences 
+cellular function, notably gene regulation. Recent 
+studies have assessed the three-dimensional (3D) 
+co-localization of functional annotations (e.g. cen-
+tromeres, long terminal repeats) using 3D genome 
+reconstructions from Hi-C (genome-wide chromo-
+some conformation capture) data; however, corre-
+sponding assessments for continuous functional 
+genomic data (e.g. chromatin immunoprecipitation-
+sequencing (ChIP-seq) peak height) are lacking. 
+Here, we demonstrate that applying bump hunting 
+via the patient rule induction method (PRIM) to ChIP-
+seq data superposed on a Saccharomyces cerevisiae 
+3D genome reconstruction can discover 'functional 
+3D hotspots', regions in 3-space for which the mean 
+ChIP-seq peak height is significantly elevated. For 
+the transcription factor Swi6, the top hotspot by P-
+value contains MSB2 and ERG11 -known Swi6 target 
+genes on different chromosomes. We verify this find-
+ing in a number of ways. First, this top hotspot is rel-
+atively stable under PRIM across parameter settings. 
+Second, this hotspot is among the top hotspots by 
+mean outcome identified by an alternative algorithm, 
+k-Nearest Neighbor (k-NN) regression. Third, the dis-
+tance between MSB2 and ERG11 is smaller than ex-
+pected (by resampling) in two other 3D reconstruc-
+tions generated via different normalization and re-
+construction algorithms. This analytic approach can 
+discover functional 3D hotspots and potentially re-
+veal novel regulatory interactions. </p>
+
+<p>The three-dimensional (3D) configuration of chromosomes 
+within the eukaryotic nucleus is important for several cellu-
+lar functions including gene regulation and epigenetic pat-</p>
+
+<p>terning (1) and is also strongly associated with transloca-
+tion events and cancer-driving gene fusions (2,3). While 
+visualization of such architecture remains limited to low-
+resolution, low-throughput, targeted techniques such as flu-
+orescent in situ hybridization (FISH) (4), the ability to infer 
+genome architecture at high resolution has been enabled by 
+recently-devised assays derived from chromosome confor-
+mation capture (3C) techniques (5). In particular, when cou-
+pled with next generation sequencing, such methods (here-
+after termed Hi-C (6,7)) yield an inventory of genome-wide 
+chromatin interactions which, in turn, provide a basis for re-
+constructing 3D chromatin configuration, as described be-
+low. Here, we use such 3D reconstructions to discover 'func-
+tional 3D hotspots' in the nucleus (e.g. transcription facto-
+ries) (8-10). 
+The contact data from Hi-C analysis lists two genomic 
+positions--each corresponding to a restriction enzyme site 
+(or bin if the data are binned)--and an 'interaction fre-
+quency': the number of times the two positions were lig-
+ated and paired-end sequenced together. This interaction 
+frequency is inversely related to the physical 3D distance be-
+tween the two genomic positions in the nucleus (7,11). 
+By quantifying the relationship between interaction fre-
+quency and physical distance, Duan et al. (7) proceeded to 
+generate a 3D reconstruction of the Saccharomyces cere-
+visiae genome (16 chromosomes, 12.2 Megabases (Mb) and 
+∼6275 genes) by solving a multi-dimensional scaling cri-
+terion (7,11-14) via constrained optimization -with con-
+straints based on prior biophysical and biological knowl-
+edge (e.g. imposition of within-chromosome contiguity, and 
+avoidance of steric clash). A 3D genome reconstruction 
+has also been generated (11) for Plasmodium falciparum 
+3D7 (14 chromosomes, 23.3 Mb and ∼5300 genes), the 
+causative agent of malaria, using a similar approach. Addi-
+tional methods for generating 3D genome reconstructions 
+using alternate approaches to inferring distances from inter-
+action frequencies and differing optimization methods or 
+reconstruction algorithms have been advanced (12-14), as 
+have methods for gauging the concordance of 3D genome 
+reconstructions (15). </p>
+
+<p>* To whom correspondence should be addressed. Tel: +1 415 514 8034; Fax: +1 415 514 8150; Email: Mark.Segal@ucsf.edu </p>
+
+<p>C </p>
+
+<p>The Author(s) 2016. Published by Oxford University Press on behalf of Nucleic Acids Research. 
+This is an Open Access article distributed under the terms of the Creative Commons Attribution License (http://creativecommons.org/licenses/by-nc/4.0/), which 
+permits non-commercial re-use, distribution, and reproduction in any medium, provided the original work is properly cited. For commercial re-use, please contact 
+journals.permissions@oup.com </p>
+
+<p>Nucleic Acids Research, 2016, Vol. 44, No. 5 2029 </p>
+
+<p>Several recent studies have used the contact data (16), 
+the 3D genome reconstructions (11) or both (17) to test 
+the hypothesis that functionally related genomic annota-
+tions (hereafter 'marks') co-localize in 3-space in the nu-
+cleus. Centromeres, telomeres and long terminal repeats 
+were detected as significantly co-localized in S. cerevisiae 
+(17). Interestingly, in P. falciparum, sets of genes with de-
+velopmentally regulated expression were detected as signifi-
+cantly co-localized in 3D-reconstruction-based assessments 
+but not in contact-based assessments (17). This finding il-
+lustrates a potential advantage of 3D reconstructions: they 
+enable the detection of multi-level co-localizations (i.e. of 
+multiple (inter)chromosomal regions), whereas the contact 
+data are inherently limited to detecting strictly pairwise co-
+localization. In other words, 3D reconstruction-based anal-
+yses may detect if a set of marks occupies a smaller subset 
+of the nucleus than expected by chance even if the set is not 
+enriched for individual pairs of marks that are exceptionally 
+close together. Another advantage of the 3D reconstruc-
+tion is that for genomic regions that have missing contact 
+data their position in the 3D reconstruction can be inferred 
+from neighboring genomic regions via chromatin contigu-
+ity. Furthermore, superposition of genomic locus-indexed 
+attributes onto 3D reconstructions can be readily and nat-
+urally performed, as we subsequently illustrate. For contact 
+level data, such overlay is less immediate again due to the 
+contact data's pairwise structure. 
+Here, we extend such downstream analyses of 3D genome 
+reconstructions to continuous functional genomic data. 
+We illustrate our methodology corresponding to overlay-
+ing an S. cerevisiae 3D genome reconstruction with the 
+peak height of chromatin immunoprecipitation-sequencing 
+(ChIP-seq) data for the transcription factor Swi6 (18). 
+A previous study superposed continuous functional ge-
+nomic data (microarray gene expression data) on a model-
+based 3D structure (19); however, this was solely for visual-
+ization purposes. Another study assessed the global coher-
+ence of gene expression profiles with a 3D reconstruction 
+(11). Our study makes the novel contribution of analyzing 
+3D genome reconstructions overlaid with continuous func-
+tional genomic data (ChIP-seq peak height) with the ob-
+jective of discovering focal regions in 3-space for which the 
+overlaid outcome is extreme; we refer to these foci as func-
+tional 3D hotspots. The algorithm that we employ for dis-
+covering such functional 3D hotspots is the patient rule in-
+duction method (PRIM) (20,21) (detailed in the 'Results' 
+section). 
+An important motivation for focal assessments is that 
+downstream analysis of, for example, the gene membership 
+of functional 3D hotspots can reveal biological insights, 
+concordant with the scale of activity, in contrast to global 
+assessments. Further, focal assessments of continuous out-
+come provide a potential advantage over focal assessments 
+of marks. For the previous analyses of marks (e.g. target 
+genes), the target genes to be tested for co-localization had 
+to be specified from the outset. In contrast, the analytic ap-
+proaches that we advance for continuous outcomes can dis-
+cover functional co-localizations without target genes be-
+ing pre-specified. Rather, these techniques analyze genome-
+indexed signals superposed on 3D reconstructions and dis-
+cover putative hotspots, which are then subjected to down-</p>
+
+<p>stream biological analyses (e.g. gene membership). As such, 
+the approaches detailed here may detect novel interactions 
+for which the interacting target genes are not known a pri-
+ori. The functional outcomes that we analyze here derive 
+from ChIP-seq as mentioned; however, the methods can be 
+applied irrespective of outcome type. 
+Examples of functional 3D hotspots are transcription 
+factories: transcription does not occur uniformly through-
+out the nucleus, but rather at discrete foci where the poly-
+merase machinery has been assembled -and where active 
+genes then become localized (8,22,23). Another example of 
+a functional 3D hotspot is that some inducible genes be-
+come localized near the nuclear pore complex during acti-
+vation (9,24). In addition, some repressed heterochromatic 
+regions cluster near the nuclear periphery based on interac-
+tions with nuclear envelope proteins (10). </p>
+
+<p>MATERIALS AND METHODS </p>
+
+<p>Hi-C contact data normalization and 3D reconstruction gen-
+eration </p>
+
+<p>The S. cerevisiae Hi-C contact data (HindIII, pre-FDR, 
+no masking) from (7) (Supplementary Data) were down-
+loaded from https://noble.gs.washington.edu/proj/yeast-
+architecture/sup.html. We performed explicit-factor 
+normalization of this contact data to control for GC 
+content, mappability and fragment length using <rs type="software">HiC-
+Norm</rs> (25) genome-wide (chromosome by chromosome) 
+as per (17) and then generated a new 3D reconstruc-
+tion using the constrained optimization approach (7). 
+The HiCNorm source code was downloaded from 
+http://www.people.fas.harvard.edu/∼junliu/HiCNorm/. </p>
+
+<p>ChIP-seq data normalization </p>
+
+<p>The raw ChIP-seq data set (18), which contains three in-
+put samples (Swi6, Tup1 and RNA polymerase II phos-
+phorylated at serine 5 (Pol2ser5p)) and a mock immuno-
+precipitation (IP) control sample (DMSO, Illumina), was 
+obtained from GEO (data set GSE51251; http://www.ncbi. 
+nlm.nih.gov/geo/query/acc.cgi?acc = GSE51251). We con-
+verted the raw sequencing SRA data to FASTQ format us-
+ing '<rs id="software-23" type="software">fastq-dump</rs>' <rs corresp="#software-23" type="version-number">version 2.3.4</rs> in the sequence read archive 
+(<rs type="software">SRA) Toolkit</rs> (26). We aligned the reads to the S. cere-
+visiae reference genome (sacCer2) using <rs type="software">Bowtie 2</rs> (27) ver-
+sion 2.2.1 with default parameters and then converted the 
+sequence alignment / map (SAM) output to binary align-
+ment / map (BAM) format using <rs id="software-21" type="software">SAMtools</rs> (28) <rs corresp="#software-21" type="version-number">version 0.1.19–44428cd</rs>. We filtered the sequencing reads (using the 
+R package '<rs id="software-14" type="software">ShortRead</rs>' (29) <rs corresp="#software-14" type="version-number">version 1.20.0</rs> with a custom fil-
+ter) to retain only those with two or less expected errors per 
+read: given a Phred quality score q for each base call, the 
+probability that a base call is erroneous is P = 10 (− q / 10) , 
+which is then summed over the bases in the read to give 
+the expected errors per read. Using '<rs type="software">ShortRead</rs>' (29), we 
+deduplicated the reads to control for PCR amplification 
+bias (30,31) and masked the highly repetitive chromosome 
+XII rDNA region (via a custom filter) because of the diffi-
+culty of aligning short reads there. We log 2 -normalized each 
+ChIP-seq sample to the mock IP control using the function 
+get.smoothed.enrichment.mle() in the R package 'spp' (32) </p>
+
+
+
+<p>version 1.11 with a 200 basepair (bp) bandwidth and 100 bp 
+stepsize. 'spp' was downloaded from http://compbio.med. 
+harvard.edu/Supplements/ChIP-seq/. 
+We performed a smoothing step to control for the lo-
+cal dependency of the signal in linear genomic space, since 
+we are interested in identifying 3D hotspots of physically 
+proximal yet genomically distal ChIP-seq peaks in sub-
+sequent analyses. Specifically, we smoothed each normal-
+ized ChIP-seq signal along each chromosome arm using 
+<rs type="software">SuperSmoother</rs> (33), which is implemented as supsmu() 
+in R (version 3.0.2) package '<rs type="software">stats</rs>', with the span deter-
+mined by cross-validation. We then took the residuals of 
+each smoothed normalized signal -this constitutes the fi-
+nal 'ChIP-seq peak height' that we proceeded to superpose 
+onto the 3D genome reconstruction. </p>
+
+<p>Data superposition </p>
+
+<p>The 3D genome reconstruction consists of a series of beads 
+spaced along each chromosome; each bead has a genomic 
+position and (X,Y,Z) coordinates. For each ChIP-seq in-
+put, we binned its peak height data (i.e. the residuals of 
+the smoothed log 2 -normalized signal) such that each bin 
+was centered on a bead. We then assigned to each bead the 
+most extreme ChIP-seq peak height (positive or negative) 
+from the bin centered on that bead. The result is a 3D chro-
+matin configuration reconstruction overlaid with functional 
+genomic data: each bead now has a genomic position, phys-
+ical coordinates (X,Y,Z) and a ChIP-seq peak height value. 
+We visualized this superposed 3D reconstruction in <rs id="software-15" type="software">MacPy-
+MOL</rs> <rs corresp="#software-15" type="version-number">1.3</rs> (34) by first converting the data to the Protein 
+Data Bank (PDB) file format (35) with the ChIP-seq peak 
+height value rescaled as the temperature factor (B-factor) in 
+the PDB file. </p>
+
+<p>PRIM </p>
+
+<p>We applied PRIM using the R package 'prim' (36) to dis-
+cover 3D hotspots in ChIP-seq peak height superposed on 
+the 3D reconstruction. We used the default parameter set-
+tings peel alpha = 0.5 and paste alpha = 0.01 (we explored 
+alternative settings subsequently) and used min beads = 25, 
+the smallest parameter setting out of those tested (10, 25, 
+50 and 100) for which inter-chromosomal hotspots could 
+be detected. After applying PRIM, each bead in the super-
+posed 3D reconstruction now has a genomic position, phys-
+ical (X,Y,Z) coordinates, a ChIP-seq peak height value and 
+a numerical PRIM box label (the largest numerical label is 
+a placeholder for the beads that were not boxed). We es-
+timated the significance of all of the PRIM boxes (except 
+for the placeholder) by permutations as follows. We pre-
+served the mapping of beads to PRIM boxes, and then per-
+muted the ChIP-seq peak height along each chromosome. 
+Then, we computed the mean ChIP-seq peak height for 
+each PRIM box from the permuted data. We repeated this 
+for a total of 10 5 permutations. The P-value of each box 
+was estimated by comparing its mean ChIP-seq peak height 
+from the observed data to its mean ChIP-seq peak height 
+values from the permuted data. We ranked these potential 
+3D hotspots by P-value and Holm-adjusted the P-values to 
+account for multiple testing. To gauge the effect size of the </p>
+
+<p>mean ChIP-seq peak height of each hotspot, we also com-
+puted Z-scores: the difference between the observed mean 
+outcome and the mean of the mean outcomes across all per-
+mutations, divided by the standard deviation of the mean 
+outcomes across all permutations. </p>
+
+<p>k-Nearest Neighbor (k-NN) regression </p>
+
+<p>We applied k-NN regression to the ChIP-seq peak height 
+superposed on the 3D reconstruction using the R package 
+'<rs type="software">FNN</rs>' (37), where k is the specified number of physically 
+proximal beads to be analyzed together as a grouping. First, 
+we selected 'seed' beads evenly spaced along each chromo-
+some by a bead interval of 0.5*k. Next, for each seed bead, 
+we found its k nearest beads in Euclidean distance via the 
+function knn.index() to create a bead grouping. Finally, we 
+found the mean ChIP-seq peak height of each bead group-
+ing via the function knn.reg() and ranked the list of bead 
+groupings by mean ChIP-seq peak height. </p>
+
+<p>RESULTS </p>
+
+<p>Superposing ChIP-seq data on the 3D reconstruction </p>
+
+<p>We normalized the S. cerevisiae contact data from (7) us-
+ing <rs type="software">HiCNorm</rs> (25) (see 'Methods') and then generated a 
+new 3D genome reconstruction from the normalized con-
+tact data via the constrained optimization approach from 
+(7) as per (17) (the original study (7) preceded the formaliza-
+tion of pipelines for normalizing Hi-C contact data (25,38-
+40)). 
+We focus on ChIP-seq data for the transcription fac-
+tor Swi6 as the continuous functional genomic outcome. 
+Swi6 is a component of two transcriptional regulatory 
+complexes: SBF (composed of Swi6 and the sequence-
+specific transcription factor Swi4) and MBF (composed of 
+Swi6 and the sequence-specific transcription factor Mbp1) 
+(41,42). SBF and MBF regulate genes that function in G1/S 
+(e.g. cell growth genes, DNA synthesis genes) (41,42). 
+We aligned the sequencing reads for Swi6 ChIP-seq and 
+the sequencing reads for a mock IP control (18) to the 
+reference genome and then log 2 -normalized the signal to 
+the control (see 'Methods'). We applied quality control fil-
+ters, performed read deduplication and obtained residuals 
+from smoothing the signal along each chromosome arm 
+(see 'Methods') -this constitutes the final 'ChIP-seq peak 
+height' that we proceeded to analyze. 
+We superposed the ChIP-seq peak height on the 3D 
+genome reconstruction (Figure 1). The 3D reconstruction 
+consists of a series of 'beads' spaced along each chromo-
+some, with each bead having a genomic position and an 
+(X,Y,Z) coordinate. We binned the Swi6 ChIP-seq peak 
+height data at the same genomic spacing as the beads (see 
+'Methods'). The result is that each bead now has a ge-
+nomic position, an (X,Y,Z) coordinate, and a ChIP-seq 
+peak height value. We applied PRIM to this data, with 
+ChIP-seq peak height as outcome and (X,Y,Z) coordinates 
+as covariates, to identify functional 3D hotspots. </p>
+
+<p>PRIM </p>
+
+<p>PRIM seeks to identify hotspots by sequentially and strate-
+gically paring away data regions so that the average out-</p>
+
+<p>Nucleic Acids Research, 2016, Vol. 44, No. 5 2031 </p>
+
+<p>Figure 1. Swi6 ChIP-seq peak height superposed on the 3D chromatin 
+configuration reconstruction. The 3D reconstruction is colored by (A) 
+chromosome or (B) Swi6 ChIP-seq peak height. For (B), regions are col-
+ored red if their log 2 -normalized ChIP-seq peak height is greater than 1; 
+otherwise, they are colored yellow (except for the masked chrXII rDNA 
+repeat region, which is colored blue). </p>
+
+<p>come over the remaining data are elevated. At each itera-
+tion, a fraction of the beads (peel alpha) are peeled off the 
+3D reconstruction by evaluating the extremal slices orthog-
+onal to each of the coordinate axes and removing data from 
+whichever slice results in the highest mean ChIP-seq peak 
+height for the remaining beads. This process is continued 
+until a prescribed minimum number of beads (min beads) 
+remains (we used the smallest setting out of those tested for 
+which inter-chromosomal hotspots could be detected, de-
+tailed in 'Methods'). The resultant region can be enlarged 
+to correct potential overshoot by pasting additional beads 
+on to the region (via paste alpha, which is smaller than 
+peel alpha) if that increases the mean ChIP-seq peak height 
+(see 'Methods'). At this point, a PRIM region or 'box' has 
+been identified, which represents a potential 3D hotspot. 
+The beads comprising this box are then excluded and the 
+entire procedure is repeated to identify additional boxes. We 
+performed inference as follows: for each PRIM box, we pre-
+served the beads comprising that box, then permuted ChIP-
+seq peak height values along each chromosome, and com-
+puted the mean ChIP-seq peak height of the box with the 
+permuted data to generate a null referent distribution for 
+estimating a P-value (see 'Methods'). </p>
+
+<p>The top Swi6 3D hotspot contains known Swi6 target genes 
+on different chromosomes </p>
+
+<p>We focus on the top-ranked Swi6 3D hotspot by P-value un-
+der PRIM to illustrate the potential of such hotspot discov-
+ery by subsequently performing extensive downstream ver-
+ification of the stability and robustness of this 3D hotspot. 
+This top 3D hotspot contains a region from chromosome 
+VII (chrVII), a region from chrVIII and a region from 
+chrXVI (Figure 2). Notably, two of these genomic regions 
+contain a known Swi6 target gene, as previously identified 
+in a Swi6 ChIP-on-chip analysis (41). In other words, two 
+out of the seven genes in this 3D hotspot are known Swi6 
+target genes, compared to 207 known Swi6 target genes out 
+of 6275 genes in the yeast genome (hypergeometric P &lt; 
+0.033; additional summary statistics are presented in Ta-
+ble 1). Specifically, the chrVII region contains the cell ad-
+hesion mucin gene MSB2 (43) and the chrVIII region con-
+tains the ergosterol (cell membrane sterol) biosynthesis gene 
+ERG11 (44). This 3D hotspot may also contain other as yet </p>
+
+<p>Swi6 ChIP−seq </p>
+
+<p>Genes </p>
+
+<p>−3 </p>
+
+<p>0 </p>
+
+<p>3 </p>
+
+<p>516 
+520 </p>
+
+<p>chrVII </p>
+
+<p>A </p>
+
+<p>&gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; </p>
+
+<p>SNU71 </p>
+
+<p>&gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; </p>
+
+<p>MSB2 </p>
+
+<p>122 
+125 </p>
+
+<p>chrVIII </p>
+
+<p>B </p>
+
+<p>&lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; 
+ERG11 </p>
+
+<p>&lt; &lt; &lt; &lt; &lt; &lt; </p>
+
+<p>YHR007C </p>
+
+<p>&lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; </p>
+
+<p>SOD2 </p>
+
+<p>&lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; </p>
+
+<p>TDA3 </p>
+
+<p>515 
+517 </p>
+
+<p>chrXVI </p>
+
+<p>C </p>
+
+<p>&lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; </p>
+
+<p>VTC3 </p>
+
+<p>Figure 2. Genomic regions in the top Swi6 3D hotspot under PRIM. This 
+3D hotspot contains one region from chrVII, one region from chrVIII and 
+one region from chrXVI. The top panels show the log 2 -normalized ChIP-
+seq peak height in each region (gray background); if the boundary of a 
+region is intergenic, the region is extended (white background) to the near-
+est gene. The x-axis is the chromosomal position in kilobases. The bottom 
+panels show the genes in each region by their names, genomic positions and 
+orientations. The genes MSB2 and ERG11 (highlighted in red) were previ-
+ously identified as significant Swi6 target genes in a ChIP-on-chip analysis 
+(41). </p>
+
+<p>uncharacterized Swi6 target genes. For example, the Sac-
+charomyces genome database (45) indicates that VTC3, the 
+membrane trafficking gene (46) in the chrXVI region of this 
+hotspot, has Swi4 (Swi6's binding partner in the SBF com-
+plex) as one of its regulators (47). If VTC3 turns out to 
+be a bona fide Swi6 target gene, then the P-value of Swi6 
+target gene enrichment in this hotspot will be markedly 
+smaller than is currently reported. Thus, the top functional 
+3D hotspot discovered by applying PRIM to Swi6 ChIP-seq 
+peak height superposed on the 3D reconstruction contains 
+known Swi6 target genes on different chromosomes. We an-
+alyzed two additional ChIP-seq inputs (the repressor Tup1 
+and the active form of RNA polymerase II (18)) separately 
+superposed on the 3D reconstruction (Supplementary Fig-
+ures S1-S3) but did not detect significant enrichment of tar-
+get genes (or gene ontology terms) in the top 3D hotspot of 
+either. Next, we pursued rigorous downstream analyses to 
+verify the robustness of the top Swi6 3D hotspot discovered. </p>
+
+<p>The top Swi6 3D hotspot under PRIM is relatively stable 
+across parameter settings </p>
+
+<p>The initial hotspot discovery was performed using the de-
+fault PRIM tuning parameters (peel alpha = 0.05 and 
+paste alpha = 0.01). As an initial sensitivity assessment of 
+the top Swi6 3D hotspot containing MSB2 and ERG11 to 
+these specifications, we applied PRIM with alternative pa-
+rameter settings. We tested the six crossed combinations 
+of three values for peel alpha (0.075, 0.05 or 0.025) and 
+two values for paste alpha (0.025 or 0.01). Encouragingly, </p>
+
+
+
+<p>Table 1. Summary of top Swi6 3D hotspot under PRIM </p>
+
+<p>Rank by P-value 
+1 (of 643) 
+Holm P-value 
+6.4 × 10 −3 
+Mean ChIP-seq peak height (log 2 -normalized) 
+0.82 
+Z-score of mean ChIP-seq peak height 
+4.83 
+Number of genes in hotspot 
+7 
+Swi6 target genes in hotspot 
+MSB2 (chrVII), ERG11 (chrVIII) 
+P-value of target gene enrichment 
+3.3 × 10 −2 </p>
+
+<p>for five of the six combinations, the 3D hotspot contain-
+ing MSB2 and ERG11 was ranked first by P-value (of 548 
+to 717 potential hotspots) (Supplementary Table S1). For 
+the other combination, it was ranked 22nd (of 503 poten-
+tial hotspots). Thus, this top Swi6 3D hotspot is relatively 
+stable across PRIM parameter settings. 
+We also evaluated whether the discovery of this top 3D 
+hotspot was specific to the bead interval of the 3D re-
+construction to which PRIM was applied. For this pur-
+pose, we generated two down-sampled 3D reconstructions 
+by dropping every 3rd bead or every 2nd bead from the 
+original 3D reconstruction. We superposed the Swi6 ChIP-
+seq peak height on to each of these 3D reconstructions 
+(in doing so the ChIP-seq peak height becomes binned at 
+the same interval as the beads) and then applied PRIM. 
+When the min beads parameter was reduced (from 25 to 
+15)--consistent with the larger bead intervals (and smaller 
+number of beads in the 3D reconstructions)--the 3D 
+hotspot containing MSB2 and ERG11 was ranked 1st (of 
+754 potential hotspots) for the 3D reconstruction resulting 
+from dropping every 3rd bead, and was ranked 3rd (of 544 
+potential hotspots) for the 3D reconstruction resulting from 
+dropping every 2nd bead (Supplementary Table S2). This 
+finding indicates that the top 3D hotspot is stable across 3D 
+reconstructions that have different resolutions. 
+In addition, we assessed whether elicitation of this top 
+3D hotspot was sensitive to the orientation of the 3D re-
+construction to which PRIM was applied. While PRIM's 
+adaptivity makes it an effective tool for hotspot discov-
+ery, a caveat is that it's paste and peel operations are 
+performed with respect to (untransformed) input covari-
+ates. In the present setting this may be problematic as the 
+'covariates'--X, Y and Z axes--have no intrinsic meaning 
+since the 3D reconstruction is coordinate free with no pre-
+ferred orientation. To address this concern, we applied rota-
+tion matrices to the original 3D reconstruction to generate 
+six rotated 3D reconstructions (three combinations of two-
+angle 45 • rotations, and three combinations of two-angle 
+315 • rotations) and then applied PRIM to each of these. 
+The 3D hotspot containing MSB2 and ERG11 ranked 
+1st (of 652 to 712 potential hotspots) for three of these ro-
+tated 3D reconstructions, and ranked 12th(of 663 poten-
+tial hotspots) for another of the rotated 3D reconstruc-
+tions (Supplementary Table S3). This 3D hotspot ranked 
+poorly for the other two rotated 3D reconstructions, sug-
+gesting that there are 3D reconstruction orientations for 
+which PRIM cannot precisely home in on the 3D region of 
+extreme ChIP-seq peak height orthogonally. Nevertheless, 
+it is encouraging that this 3D hotspot ranks prominently for 
+four of the six rotated 3D reconstructions, as this demon-
+strates that this 3D hotspot is not specific to one orientation. </p>
+
+<p>Applying PRIM after rotation of coordinate data to prin-
+cipal axes represents a natural invariance-inducing strategy, 
+although it is possible that this specific rotation may be non-
+optimal with respect to hotspot identification. </p>
+
+<p>An alternative algorithm identifies the same Swi6 3D hotspot </p>
+
+<p>We next applied k-NN regression (21,48), which operates 
+very differently from PRIM and is inherently invariant to 
+3D reconstruction orientation. Briefly, the k beads nearest 
+(here we use Euclidean distance) a starting seed bead are 
+grouped together and the mean outcome of this group com-
+puted, this representing a potential hotspot. This process is 
+repeated at seed beads evenly spaced along each chromo-
+some by a fixed interval, and groups are then ranked by 
+mean outcome (see 'Methods'). Since the 'bottom-up' k-
+NN regression groups together more genomically adjacent 
+beads than the 'top-down' PRIM, we used the setting k = 
+2*min beads = 50 to be able to elicit 3D hotspots comprised 
+of more than one genomic region. 
+It is notable that the third-ranked 3D hotspot under k-
+NN regression (out of 957 potential 3D hotspots) contains 
+two genomic regions: the chrVII region containing MSB2 
+and the chrVIII region containing ERG11 (Supplementary 
+Figure S4). This finding, utilizing a distinct, rotationally in-
+variant analytical approach, is affirming of the robustness 
+of the 3D hotspot containing MSB2 and ERG11. How-
+ever, while k-NN regression can be effectively deployed for 
+3D hotspot discovery, a potential limitation is that, due to 
+its prescriptive, rather than adaptive, nature (all resulting 
+hotspots will contain exactly k beads) and the attendant 
+multiple testing burden, it may not prove sufficiently pow-
+erful to detect statistically significant hotspots, as was the 
+case here. </p>
+
+<p>MSB2 and ERG11 are co-localized in other 3D reconstruc-
+tions </p>
+
+<p>A major advantage of utilizing 3D reconstructions for 
+hotspot discovery is that functional genomic data can be 
+readily superposed on 3D reconstructions. This contrasts 
+with contact level data where such superposition is prob-
+lematic in view of its inherent pairwise structure. In addi-
+tion, the use of a 3D reconstruction serves to dramatically 
+reduce the hotspot discovery search space in comparison 
+with the combinatorial explosion of hotspot candidates if 
+analyses were to be performed using pairwise contact data. 
+However, an obvious concern in basing hotspot discovery 
+on a 3D reconstruction is that the hotspots depend on the 
+3D reconstruction used and, as previously noted, gauging 
+the accuracy of a given 3D reconstruction is challenging 
+(15). </p>
+
+<p>Nucleic Acids Research, 2016, Vol. 44, No. 5 2033 </p>
+
+<p>To address this concern, we tested whether the two 
+Swi6 target genes in the top 3D hotspot from PRIM were 
+closer together than expected in various 3D reconstruc-
+tions. Specifically, we assessed the significance of the Eu-
+clidean distance between MSB2 and ERG11 via resam-
+pling with preservation of the chromosome structure of 
+the data as per (17). We performed this assessment on 
+the 3D reconstruction that was used for hotspot discovery, 
+which was generated via explicit-factor normalization fol-
+lowed by constrained optimization of a multi-dimensional 
+scaling (MDS) criterion, the constraints reflecting numer-
+ous biologically-based restrictions (7). In addition, we per-
+formed this assessment on two 3D reconstructions from 
+(13), which were generated via a different normalization 
+algorithm (iterative correction and eigenvector decomposi-
+tion (ICE) (39)) followed by differing reconstruction algo-
+rithms: an unconstrained MDS optimization and a Poisson 
+regression model (13). 
+Encouragingly, MSB2 and ERG11 were found to be 
+closer together than expected not only in the 3D recon-
+struction that was used for hotspot discovery (P = 9.9 × 
+10 −4 ), but also in the two 3D reconstructions generated via 
+a different normalization algorithm followed by an uncon-
+strained MDS optimization (P = 4.6 × 10 −2 ) or by a Pois-
+son regression model (P = 4.0 × 10 −2 ) (Figure 3). This 
+result provides evidence that the biological finding is not 
+reconstruction-specific. We were not able to discover this 
+hotspot de novo by applying PRIM to the 3D reconstruc-
+tions generated via different normalization and reconstruc-
+tion algorithms; however, this is not surprising given the dis-
+similarity of the 3D reconstructions (Figure 3). </p>
+
+<p>DISCUSSION </p>
+
+<p>Identifying functional interactions in the nucleus is an im-
+portant and challenging problem. Examples of transcrip-
+tion factories (or 'regulatory depots') have been described 
+in experimental literature (8,22,23). Previous attempts to 
+utilize Hi-C data to identify such co-localizations (whether 
+from contact level data or from 3D reconstructions) have 
+so far only assessed marks such as centromeres, telomeres 
+and long terminal repeats (11,16,17). Relatedly, Ben-Elazar 
+et al. (49) used a sophisticated approach that adjusts for 
+genomic proximity in assessing 3D spatial co-localization 
+of transcription factor target genes. Here, we made the 
+novel contribution of extending such analyses to continuous 
+functional genomic data. We applied PRIM to Swi6 ChIP-
+seq data superposed on a 3D genome reconstruction and 
+demonstrated that the top-ranked 3D hotspot by P-value 
+contains known Swi6 target genes on different chromo-
+somes. Extensive downstream analyses demonstrated the 
+robustness of this 3D hotspot -it being detected under a 
+range of PRIM parameter settings, 3D reconstruction reso-
+lutions, 3D reconstruction rotations and also emergent us-
+ing an alternative algorithm, k-NN regression. Moreover, 
+the known Swi6 target genes contained in this hotspot, 
+MSB2 and ERG11, are also co-localized under alternate 3D 
+reconstructions. 
+Other techniques could potentially be used to discover 
+3D hotspots. Recursive partitioning or tree-structured re-
+gression methods (21) can isolate regions by successive split-</p>
+
+<p>Figure 3. Swi6 target genes MSB2 (chrVII) and ERG11 (chrVIII) in differ-
+ent 3D chromatin configuration reconstructions. (A) The 3D reconstruc-
+tion used for hotspot discovery, which was generated via explicit-factor 
+normalization followed by constrained optimization of a multidimensional 
+scaling criterion. (B) A 3D reconstruction (13), which was generated via 
+matrix balancing followed by a Poisson regression model. The 3D recon-
+structions are colored by chromosome, or are colored yellow with MSB2 
+and ERG11 highlighted in red. The first two rows display the full 3D re-
+constructions. The last two rows display only chromosomes VII and VIII. 
+The P-value of the Euclidean distance between MSB2 and ERG11 was es-
+timated by resampling within chromosome. </p>
+
+<p>ting. However, it was partly to overcome the top-down 
+greediness of these approaches that PRIM was advanced. 
+Like PRIM, these methods are not invariant under rota-
+tion, but such invariance can be attained using splits that 
+are linear combinations of the coordinate axes. Neverthe-
+less, due to computational expense and instability, trees with 
+such oblique splits are disfavored (21). Approaches based 
+on algebraic topology and in particular persistent homol-
+ogy and Betti number barcodes (50) have possible utility in 
+eliciting 3D hotspots but are undeveloped from an inferen-
+tial perspective. 
+Identification of novel chromatin structures has been en-
+abled by the recent emergence of Hi-C assays. In partic-</p>
+
+
+
+<p>ular, both topologically associated domains (51) and con-
+tact domains (52) delineate 'regions' with substantial self-
+chromatin interactions. However, as these constructs are de-
+fined in terms of contiguous chromatin intervals they are in-
+herently intra-chromosomal and, unlike our functional 3D 
+hotspots, cannot be comprised of inter-chromosomal re-
+gions characterized by extreme values of associated func-
+tional outcomes. We note that while the Swi6 3D hotspot 
+presented here contains regions from different chromo-
+somes our approach can identify 3D hotspots containing 
+distal intra-chromosomal regions, as may be more likely to 
+arise for higher-order eukaryotes due to the existence of 
+chromosome territories (53). 
+The physical extent of an identified 3D hotspot is a func-
+tion not just of the magnitude and localization of the out-
+come being analyzed but also the resolution of the under-
+lying Hi-C data. Even in instances wherein this resolution 
+appreciably exceeds the extent of, say, physical DNA : pro-
+tein complex interactions there is still biological utility in 
+hotspot elicitation, as we have illustrated and analogous to 
+linkage and/or GWAS studies as precursors to fine map-
+ping. 
+There are putative advantages in utilizing 3D reconstruc-
+tions for discovering functional 3D hotspots in comparison 
+with pursuing such discovery using contact level data. At-
+tempts to elicit hotspots by search of raw (pairwise) contacts 
+(interaction frequencies) would potentially face combinato-
+rial explosion. In addition, superposing functional genomic 
+data onto the contact level data in the first place is prob-
+lematic because of the pairwise nature of the contacts. As 
+an example of what can be gleaned from the contact level 
+data, a recent study applied hierarchical clustering to the 
+pairwise contacts based on the epigenetic status of the first 
+locus in each pair (54); however, this merely groups together 
+pairs that have the same epigenetic status (of the first locus), 
+regardless of whether the different pairs are physically prox-
+imal. 
+Conversely, functional hotspots discovered from 3D re-
+constructions are conditional on the quality of the 3D re-
+construction. Previous studies have advanced methods for 
+gauging the reproducibility of 3D reconstructions (15) or 
+have used FISH measurements to calibrate Hi-C derived 
+distances (55). However, the ability to arbitrate between 
+competing solutions remains limited. Herein, we performed 
+analyses to demonstrate that the Swi6 target genes in the top 
+3D hotspot discovered in one 3D reconstruction are also 
+closer together than expected in 3D reconstructions gener-
+ated via different normalization and reconstruction algo-
+rithms. The recent emergence of single cell (56,57) and in 
+situ (52) Hi-C assays will potentially enable, by means of a 
+series of carefully designed experiments, improved assess-
+ments of 3D reconstruction reproducibility. </p>
+
+<p>SUPPLEMENTARY DATA </p>
+
+<p>Supplementary Data are available at NAR Online. </p>
+
+<p>ACKNOWLEDGEMENTS </p>
+
+<p>Some computations were performed using the UCSF Bio-
+statistics High Performance Computing System. We thank </p>
+
+<p>William Noble and two reviewers for very helpful comments 
+on this manuscript and thank Nelle Varoquaux for provid-
+ing data. </p>
+
+<p>FUNDING </p>
+
+<p>National Science Foundation Graduate Research Fel-
+lowship [1144247]; National Institutes of Health (NIH) 
+[R01 GM109457]; National Institutes of Health Train-
+ing [T32 GM007175 to D.C. in part]. Funding for open 
+access charge: National Institutes of Health (NIH) [R01 
+GM109457]. 
+Conflict of interest statement. None declared. </p>
+
+
+
+</text></tei>

@@ -1,0 +1,638 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4615111" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:29+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>Abbreviations: APC/C, anaphase-promoting complex/cyclosome; ATM, Ataxia telangiectasia mutated kinase; ATR, Ataxia telangiec-
+tasia and Rad3 related kinase; AU, arbitrary units; Cdk, cyclin-dependent kinase; Chk1/2, checkpoint kinase 1/2; DDR, DNA dam-
+age response; DNA-PK, DNA-dependent protein kinase; LMB, Leptomycin B; Mdm2, mouse double minute 2 homolog; MK2, 
+MAPKAP kinase 2; NCS, Neocarzinostatin; Plk1, polo-like kinase 1; gH2AX, histone variant; H2AX, phosphorylated on serine 139. </p>
+
+<p>Upon DNA damage, cell cycle progression is temporally blocked to avoid propagation of mutations. While 
+transformed cells largely maintain the competence to recover from a cell cycle arrest, untransformed cells past the G1/S 
+transition lose mitotic inducers, and thus the ability to resume cell division. This permanent cell cycle exit depends on 
+p21, p53, and APC/C Cdh1 . However, when and how permanent cell cycle exit occurs remains unclear. Here, we have 
+investigated the cell cycle response to DNA damage in single cells that express Cyclin B1 fused to eYFP at the 
+endogenous locus. We find that upon DNA damage Cyclin B1-eYFP continues to accumulate up to a threshold level, 
+which is reached only in G2 phase. Above this threshold, a p21 and p53-dependent nuclear translocation required for 
+APC/C Cdh1 -mediated Cyclin B1-eYFP degradation is initiated. Thus, cell cycle exit is decoupled from activation of the 
+DNA damage response in a manner that correlates to Cyclin B1 levels, suggesting that G2 activities directly feed into 
+the decision for cell cycle exit. Once Cyclin B1-eYFP nuclear translocation occurs, checkpoint inhibition can no longer 
+promote mitotic entry or re-expression of mitotic inducers, suggesting that nuclear translocation of Cyclin B1 marks the 
+restriction point for permanent cell cycle exit in G2 phase. </p>
+
+<p>Preserving the integrity of the genome and preventing cell 
+division in the presence of DNA damage are critical tasks for 
+cell and organism survival. Consequently, eukaryotic cells pos-
+sess complex networks for surveillance of DNA integrity, 
+checkpoint activation, and DNA repair. Upon a DNA damage 
+insult the DDR kinases ATM, ATR and DNA-PK are acti-
+vated. Early on, the downstream activated effector kinases 
+MK2, Chk1 and Chk2 mediate a checkpoint response that 
+converges in inactivation of Cdc25s, which results in persistent 
+inhibitory phosphorylation of Cdks. 1-3 In addition, the DDR 
+kinases target p53 and Mdm2, resulting in the activation of a 
+p53-dependent transcriptional program including the upregu-
+lation of the Cdk inhibitor p21 and the p53-dependent </p>
+
+<p>transcriptional repression of cell cycle-promoting factors. 4,5 
+Together these pathways enforce a checkpoint that allows time 
+for repair and eventual reentry into the cell cycle. However, 
+not all cells recover from a DNA damage arrest, but instead 
+terminally exit the cell cycle. 
+Terminal cell cycle exit is presumably a mean to prevent prop-
+agation of mutations when damage cannot be repaired. In G2 
+phase it strictly depends on p53-and p21-dependent APC/C Cdh1 
+activation and subsequent degradation of cell cycle proteins. 6-11 
+A key target for APC/C Cdh1 is Cyclin B1, which in complex with 
+Cdk1 acts as a master regulator of mitotic entry in an unper-
+turbed cell cycle. 12,13 Indeed, we have previously found that 
+upon DNA damage the levels of Cyclin B1 function as a marker 
+for whether G2 cells are still competent to resume cell division. 14 
+Interestingly, in cancer cell lines with compromised p21 function </p>
+
+<p>© Erik M€ ullers, Helena Silva Cascales, Himjyot Jaiswal, Adrian T Saurin, and Arne Lindqvist 
+*Correspondence to: Arne Lindqvist; Email: arne.lindqvist@ki.se 
+Submitted: 05/27/2014; Accepted: 06/09/2014 
+http://dx.doi.org/10.4161/15384101.2015.945831 </p>
+
+<p>This is an Open Access article distributed under the terms of the Creative Commons Attribution-Non-Commercial License (http://creativecommons.org/licenses/ 
+by-nc/3.0/), which permits unrestricted non-commercial use, distribution, and reproduction in any medium, provided the original work is properly cited. The 
+moral rights of the named author(s) have been asserted. </p>
+
+<p>www.landesbioscience.com 
+2733 
+Cell Cycle </p>
+
+<p>Cell Cycle 13:17, 2733--2743; September 1, 2014; Published with license by Taylor &amp; Francis Group, LLC </p>
+
+<p>REPORT </p>
+
+<p>APC/C-dependent degradation pathways are activated, but cells 
+avoid degradation of Cyclin B1 as well as other mitotic proteins 
+and do not terminally exit the cell cycle. 9,15 
+Traditionally, DNA damage checkpoint activation and DNA 
+repair were seen as a molecular cascade directly activated down-
+stream of the recognition of DNA damage. Recently however, a 
+growing number of studies indicate that DNA-damage signaling 
+and checkpoint activation have more integrated roles that rely not 
+only on the type of damage, but also on the region in the genome 16 
+and the cell cycle phase 17 when the damage occurs. However, the 
+timing and coordination of the checkpoint response and terminal 
+cell cycle exit could not be conclusively addressed, as available 
+studies depend largely on population averages and cell synchroni-
+zation. How single cells decide between checkpoint recovery and 
+terminal cell cycle exit remains currently unclear. 
+We have set up a system that allows us to study Cyclin B1 
+dynamics in single untransformed cells and to assess the resulting 
+cell fate decisions during a DNA damage checkpoint response. 
+We find that terminal cell cycle exit is temporally decoupled 
+from the DNA damage insult in a manner that depends on the 
+cell cycle position. Moreover, we find that nuclear translocation 
+of Cyclin B1 marks a restriction point for terminal cell cycle exit. </p>
+
+<p>Results </p>
+
+<p>Gene-targeted Cyclin B1 as a novel setup to study the DNA-
+damage checkpoint response 
+We wanted to set up a system to study permanent cell cycle exit 
+in individual untransformed cells. We first analyzed an ongoing 
+DNA-damage checkpoint response in hTERT-immortalized RPE 
+cells and compared it to transformed U2OS cells. When continu-
+ously exposed to low concentration of the topoisomerase II-inhibi-
+tor Etoposide, U2OS cells retain expression of G2 specific markers, 
+with the exception of Plk1. 15 In contrast, RPE cells lose the expres-
+sion of Cyclin A2, Cyclin B1, Plk1, Cdk1, and Cdk2, all key regu-
+lators of S and G2 phase, indicating a cell cycle exit (Fig. 1A). 6 We 
+next established a U2OS 18 and an RPE (Fig. S1A) cell line encod-
+ing a Cyclin B1-eYFP fusion protein at the endogenous CCNB1 
+locus, which allowed us to directly monitor Cyclin B1 protein 
+dynamics in single live cells. We have previously shown that expres-
+sion levels of Cyclin B1, a key regulator of mitotic entry, correlate 
+closely with the competence to recover from a DNA damage check-
+point. 14 Furthermore, the decrease in Cyclin B1 levels after DNA 
+damage correlates with cellular senescence. 19,20 
+We monitored Cyclin B1-eYFP levels using time-lapse 
+microscopy (Fig. 1B) and quantified the total fluorescence of 
+multiple positions after careful subtraction of background fluo-
+rescence (materials and methods), allowing a time-resolved read-
+out of Cyclin B1-eYFP levels in a population. At the same time, 
+we monitored a checkpoint arrest by scoring whether cells could 
+enter mitosis. We find that Cyclin B1-eYFP levels increase over a 
+range of Etoposide and NCS concentrations in U2OS cells 
+(Fig. 1C and E). In fact, the increase in Cyclin B1-eYFP levels is 
+more pronounced at Etoposide and NCS concentrations that 
+block mitotic entry. In accordance, FACS analysis shows an </p>
+
+<p>accumulation of 4n U2OS cells containing high levels of Cyclin 
+B1 (Fig. 1G). Thus, U2OS cells block in G2 phase without 
+impairing the ability to retain Cyclin B1. 
+In contrast, Cyclin B1-eYFP levels start decreasing in RPE 
+cells 3 to 4 hours after addition of Etoposide or NCS at concen-
+trations where there is an apparent cell cycle arrest (Fig. 1D 
+and F). The loss of Cyclin B1 does not depend on checkpoint 
+slippage or an enforced G1/S checkpoint, as a large proportion of 
+the Cyclin B1 eYFP-negative cells contain 4n DNA content 
+(Fig. 1G). This shows that there is a correlation between a cell 
+cycle block and the loss of Cyclin B1 in RPE cells. </p>
+
+<p>Cyclin B1 is degraded in a p21-, p53-and APC/C Cdh1 -
+dependent manner 
+It has been reported that Cyclin B1 is actively degraded in an 
+APC/C Cdh1 -dependent manner in untransformed cells after 
+DNA damage. 6,21 While Cyclin B1 and other APC/C Cdh1 targets 
+are also regulated at the mRNA level late after DNA damage, 
+timely destruction relies on APC/C Cdh1 -dependent degrada-
+tion. 6,19 In line, we find that addition of the proteasome inhibi-
+tor MG-132 leads to sustained Cyclin B1-eYFP presence in RPE 
+cells, whereas it has no effect on U2OS cells (Fig. 2A). Moreover, 
+siRNA-mediated depletion of Cdh1, but not of Cdc20, NIPA, 
+or b-TrCP, stabilized Cyclin B1-eYFP after Etoposide addition 
+in a similar way as the APC/C inhibitor proTAME (Fig. 2B and 
+C). This indicates that in RPE cells APC/C Cdh1 targets Cyclin 
+B1-eYFP for degradation after DNA damage. 
+APC/C Cdh1 activation during DNA damage was suggested to 
+depend on p53 and p21. 6,9,11 Indeed, siRNA-mediated depletion 
+of p53 or p21 led to sustained Cyclin B1-eYFP levels (Fig. 2D). 
+Thus, our live-cell setup recapitulates that Cyclin B1-eYFP is 
+degraded in a p53-, p21-, and APC/C Cdh1 -dependent manner in 
+RPE cells apparent 3 to 4 hours after induction of DNA damage. </p>
+
+<p>Cyclin B1 degradation requires nuclear translocation 
+Cyclin B1 is predominantly cytoplasmic in interphase, but 
+can translocate to the nucleus upon p21 induction, although the 
+relevance of this translocation remains unclear. 7 When we fol-
+lowed the levels of Cyclin B1-eYFP in U2OS and RPE cells we 
+observed obvious differences in the intracellular localization. 
+Whereas Cyclin B1-eYFP stays almost exclusively cytoplasmic in 
+U2OS cells, the majority of RPE cells translocate Cyclin B1-
+eYFP to the cell nucleus 1 to 2 hours before degradation com-
+mences (Fig. 3A and B). In fact, we found that nuclear transloca-
+tion of Cyclin B1-eYFP in RPE cells appeared to be highly 
+predictive for the initiation of Cyclin B1-eYFP degradation 
+(Fig. 3C). Nuclear translocation of Cyclin B1-eYFP is not depen-
+dent on active APC/C Cdh1 , as addition of MG-132, proTAME, 
+or depletion of Cdh1 rather increased the amount of cells with 
+nuclear Cyclin B1-eYFP. However, siRNA-mediated knockdown 
+of p53 or p21 abolished both nuclear translocation and degrada-
+tion of Cyclin B1-eYFP (Fig. 3D). This suggests that although 
+controlled by the same pathways, nuclear translocation of Cyclin 
+B1 is independent of its degradation. </p>
+
+<p>2734 
+Volume 13 Issue 17 
+Cell Cycle </p>
+
+<p>As APC/C Cdh1 is predominantly active in the nucleus in G1 
+phase in an unperturbed cell cycle, 22 we reasoned that the 
+observed nuclear translocation of Cyclin B1 in RPE cells during 
+a DDR might be required for APC/C Cdh1 -mediated ubiquitina-
+tion. Indeed, we find that addition of the Exportin 1 inhibitor 
+LMB to Etoposide-treated U2OS cells leads to nuclear accumula-
+tion of Cyclin B1-eYFP and subsequent degradation in more 
+than half of the cells (Fig. 3E, G and H). Interestingly, addition </p>
+
+<p>of LMB also induced mitotic entry in a subset of cells (Fig. 3F 
+and H). However, in a small fraction of RPE cells Cyclin B1-
+eYFP degradation occurred without an apparent nuclear translo-
+cation (Fig. 3C), indicating either that ubiquitination and degra-
+dation can also occur in the cytoplasm, or that nuclear 
+translocation is rate-limiting in some cells. We therefore added 
+Importazole, an inhibitor of Importin b to Etoposide-treated 
+cells. 23 Addition of Importazole effectively blocked nuclear </p>
+
+<p>Figure 1. Gene-targeted Cyclin B1 as a novel setup to study checkpoint recovery competence. (A) U2OS or RPE cells were treated with 1 or 5 mM Etopo-
+side for the indicated time periods and subjected to immunoblotting with the indicated antibodies. (C) Untreated control. (B) Representative images of 
+U2OS Cyclin B1-eYFP and RPE Cyclin B1-eYFP cell populations during ongoing Etoposide treatment. Scale bar: 50 mm. (C-F) Equal amounts of U2OS 
+Cyclin B1-eYFP cells (C and E) and RPE Cyclin B1-eYFP cells (D and F) were treated with Etoposide (C and D) or NCS (E and F) at time point 0, and fol-
+lowed by time-lapse microscopy. Average Cyclin B1-eYFP signal was quantified and passage through mitosis was determined. (G) U2OS Cyclin B1-eYFP 
+and RPE Cyclin B1-eYFP cells were treated with 1 mM Etoposide for 5, 10 or 15 h, and subsequently cellular DNA content and eYFP positivity were 
+assessed by flow cytometry. </p>
+
+<p>www.landesbioscience.com </p>
+
+<p>
+translocation, indicating that Cyclin B1 translocation during a 
+DDR depends on active transport by Importin b (Fig. 3I). Strik-
+ingly, when tracking single cells most cells did not show signs of 
+Cyclin B1-eYFP degradation and only one cell lost Cyclin B1-
+eYFP during the time-course of the experiment (Fig. 3I and J). 
+This indicates that nuclear import is crucial for effective Cyclin 
+B1 degradation after DNA-damage checkpoint activation. </p>
+
+<p>Cyclin B1 nuclear translocation marks the restriction point 
+for terminal cell cycle exit 
+DNA damage-dependent activation of APC/C Cdh1 was shown 
+to promote permanent cell cycle exit in untransformed cells. 6-9 
+Similarly, Kikuchi and colleagues found that the loss of Cyclin 
+B1 after DNA damage is associated with a concurrent increase in 
+cellular senescence. 19 In line with these findings, we never 
+observed a single cell that regained expression of Cyclin B1-eYFP 
+once having degraded it. Furthermore, we never detected recur-
+rence of Cyclin B1-eYFP expression or mitosis when following 
+cells for up to 5 d after damage (Fig. 4A). Moreover, whereas the 
+G2 population of U2OS cells retains both Cyclin B1-eYFP and 
+checkpoint recovery competence, RPE cells lose Cyclin B1-eYFP 
+over time and do not enter mitosis after combined treatment 
+with the checkpoint kinase inhibitors KU60019 and UCN-01 
+once Cyclin B1-eYFP is degraded (Fig. 4B). Taken together, this </p>
+
+<p>shows that RPE cells have lost the competence to resume cell 
+division after APC/C Cdh1 activation. 
+To assess when single cells become determined to perma-
+nently exit the cell cycle we monitored live cells and blocked 
+ATM and ATR kinase activity by addition of caffeine at different 
+time points after Etoposide addition. Addition of caffeine shortly 
+after damage stimulated mitotic entry and sustained Cyclin B1-
+eYFP expression over time. In contrast, caffeine had limited effect 
+on both Cyclin B1-eYFP levels and forced mitotic entry when 
+added 6 hours after Etoposide (Fig. 4C and D). When analyzing 
+single cells we found that addition of caffeine 1 hour after Etopo-
+side had a dramatic effect on both mitotic entry and timing of 
+Cyclin B1-eYFP degradation, showing that ATM/ATR activity 
+initiates these events (Fig. 4E). However, when added 4 or 
+6 hours after Etoposide, at a time when nuclear translocation of 
+Cyclin B1-eYFP had occurred in most cells, forced mitotic entry 
+was only apparent in cells where no signs of nuclear translocation 
+or degradation of Cyclin B1-eYFP were present (Fig. 4E and F). 
+Moreover, we never observed mitotic entry for cells that had 
+already translocated Cyclin B1-eYFP to the nucleus at the time 
+of caffeine addition (Fig. 4G). 
+Thus, although DNA damage-dependent cell cycle exit 
+requires APC/C Cdh1 activation, it is only ATM/ATR-dependent 
+until nuclear translocation of Cyclin B1. Therefore, Cyclin B1 
+nuclear translocation marks the restriction point for losing </p>
+
+<p>Figure 2. Degradation of Cyclin B1 during ongoing DNA damage is p53-, p21-and APC/C Cdh1 -dependent. (A) Time-lapse microscopy quantification of 
+populations of RPE and U2OS Cyclin B1-eYFP cells. Cells were treated with 1 mM Etoposide from time point '¡1 h'. At 0 h cells were treated with MG-
+132 (inhibitor of the proteasome) or mock treated. (B-D) Time-lapse microscopy quantifications of RPE Cyclin B1-eYFP cells in different conditions. Cells 
+were transfected with the indicated siRNA 48 h and 24 h prior to Etoposide addition. Etoposide was added at a concentration of 1 mM at the '¡1 h' 
+time point. At 0 h cells were treated with MG-132, proTAME, or DMSO as indicated. The error bars represent standard error of the mean signal of at least 
+8 positions. </p>
+
+<p> 
+Volume 13 Issue 17 
+Cell Cycle </p>
+
+<p>Figure 3. Nuclear translocation is required for Cyclin B1 degradation. (A) Representative images of RPE Cyclin B1-eYFP and U2OS Cyclin B1-eYFP cells 
+during ongoing Etoposide treatment. Scale bar: 20 mm. (B) RPE Cyclin B1-eYFP cells were treated with 1 mM Etoposide and the time between Cyclin B1-
+eYFP nuclear translocation and onset of degradation was determined for 67 individual cells. The average time  § standard deviation is indicated. (C) RPE 
+Cyclin B1-eYFP cells were treated with 1 mM Etoposide, and Cyclin B1-eYFP nuclear translocation and degradation was assessed for 85 individual cells. 
+(D) RPE Cyclin B1-eYFP cells were transfected with siRNA 48 h and 24 h prior to Etoposide addition, or treated with MG-132 or proTAME as indicated. 
+Intracellular localization of Cyclin B1-eYFP was assessed in single cells at different time points after treatment with 1 mM Etoposide ('¡1 h' time point). 
+Inhibitors were added at the '0 h' time point. (E) Representative images of U2OS Cyclin B1-eYFP cells treated as indicated. Scale bar: 20 mm. (F) Mitotic 
+entry was assessed for Cyclin B1-eYFP-positive cells treated as in (E). Data are mean and standard deviation of 3 independent experiments. (G) Time-
+lapse quantification of cells treated as in (E). The error bars represent standard error of the mean signal of at least 8 positions. (H) The time point of 
+nuclear translocation and the onset of degradation of Cyclin B1-eYFP were determined in single U2OS Cyclin B1-eYFP cells. Each line represents a single 
+cell. Inhibitors were added 1 h after Etoposide treatment. (I) Representative images of RPE Cyclin B1-eYFP cells treated with 1 mM Etoposide from time 
+point '¡1 h'. After 1 h cells were treated as indicated. Scale bar: 20 mm. (J) The time point of nuclear translocation and the onset of degradation of Cyclin 
+B1-eYFP were determined in single RPE Cyclin B1-eYFP cells. Each line represents a single cell. Inhibitors were added 1 h after Etoposide treatment. </p>
+
+<p>www.landesbioscience.com </p>
+
+<p>
+checkpoint recovery competence and for subsequent APC/C Cdh1 -
+dependent permanent cell cycle exit in G2 phase. </p>
+
+<p>APC/C Cdh1 activation is temporally decoupled from 
+checkpoint activation 
+Although the DDR is activated within minutes in all cells, we 
+observed large differences between the times of onset of Cyclin 
+B1-eYFP nuclear translocation and degradation in individual 
+cells, suggesting that Cyclin B1 degradation may depend on the 
+cell cycle phase (Fig. 5A). As Cyclin B1-eYFP levels are a direct 
+readout of cell cycle progression, we grew cells on fibronectin-</p>
+
+<p>coated micropatterns, which enabled us to accurately quantify 
+fluorescence in single U2OS or RPE cells over long periods of 
+time. 18 
+Whereas on Western blot, U2OS cells reach a steady state of 
+Cyclin B1 after DNA damage, Cyclin B1-eYFP levels vary dra-
+matically over time in individual cells (Fig. 5B and C). In fact, a 
+majority of U2OS cells continuously increase Cyclin B1-eYFP to 
+protein levels that are higher compared to what is observed dur-
+ing unperturbed growth. Similar to U2OS cells, no RPE cell sus-
+tains a steady-state of Cyclin B1-eYFP over time (Fig. 5C). After 
+an initial increase, RPE cells degrade Cyclin B1-eYFP over a 
+15-hour time-period. Interestingly, the time point of degradation </p>
+
+<p>Figure 4. Single RPE cells are not able to recover after Cyclin B1 nuclear translocation. (A) Representative montage of an RPE Cyclin B1-eYFP cell growing 
+on a fibronectin-coated micropattern treated with 1 mM Etoposide for 48 h and followed for an additional 114 h after Etoposide was washed out. Scale 
+bar: 50 mm. (B) RPE Cyclin B1-eYFP cells and U2OS Cyclin B1-eYFP cells were treated for 5, 10 or, 15 h with 1 mM Etoposide or mock treated. Subse-
+quently, damaged cells were forced into mitosis using KU60019 and UCN-01. Nocodazole was added to block cells in mitosis. The percentage of Cyclin 
+B1-eYFP positive cells and the percentage of mitotic cells were determined by flow cytometry. The graphs denote averages of 3 independent experi-
+ments. Error bars represent standard errors. (C) Time-lapse microscopy quantifications of RPE Cyclin B1-eYFP cells treated with 1 mM Etoposide at time 
+point 0 and caffeine addition at the indicated time points. The error bars represent standard error of the mean signal of at least 8 positions. (D) The per-
+centage of Cyclin B1-eYFP-positive cells passing through mitosis was assessed from (C). (E) The time point of nuclear translocation and the onset of deg-
+radation of Cyclin B1-eYFP were determined in single cells treated as in (C). Each line represents a single cell. The dotted lines indicate presence of 
+caffeine. (F) Representative images of cells in (C) treated with Caffeine. Mitotic cell is marked by asterisk. (G) RPE Cyclin B1-eYFP cells were treated with 
+1 mM Etoposide and caffeine was added after 4 h. Cyclin B1-eYFP intracellular localization and cell fate was assessed for 96 individual cells. </p>
+
+<p> 
+Volume 13 Issue 17 
+Cell Cycle </p>
+
+<p>Figure 5. The time point of Cyclin B1 degradation is decoupled from DDR activation. (A) RPE Cyclin B1-eYFP cells were treated with 1 mM Etoposide and 
+the time point of onset of Cyclin B1-eYFP degradation was assessed. The red bar indicates cells that did not initiate degradation during the time of the 
+experiment. (B) Representative montages of single U2OS Cyclin B1-eYFP and RPE Cyclin B1-eYFP cells on fibronectin-coated micropatterns during an 
+unperturbed cell cycle (control) and during treatment with 1 mM Etoposide (damage). Time between images is 1 h. Scale bar: 50 mm. (C) Single-cell 
+quantifications of time-lapse images as in (B) for U2OS Cyclin B1-eYFP cells and RPE Cyclin B1-eYFP cells under treatment with 1 mM Etoposide from 
+time point '0 h'. The green track indicates a cell undergoing mitosis. The dashed orange lines denote the average of the displayed cells. (D) RPE Cyclin 
+B1-eYFP cells were grown on fibronectin-coated micropatterns and treated with 1 mM Etoposide. The Cyclin B1-eYFP levels at the time of Etoposide addi-
+tion are plotted versus the time point of maximum Cyclin B1-eYFP levels ('time point of Cyclin B1-eYFP degradation'). (E and H) In silico synchronizations 
+of single-cell quantifications as in (C) in unperturbed conditions (E) or under treatment with 1 mM Etoposide (H). Data are from a single experiment in 
+parallel wells, allowing for direct comparison of fluorescence levels. Cells in (E) are synchronized in silico to mitosis. Graphs (H) show tracks of cells with 
+near-background levels at the time of Etoposide addition. RPE Cyclin B1-eYFP cells were synchronized in silico for to the maximum level of Cyclin B1-
+eYFP reached. (F) The time point of apparent nuclear translocation of Cyclin B1-eYFP before mitosis was assessed in RPE Cyclin B1-eYFP and U2OS Cyclin 
+B1-eYFP cells. (G) Time-lapse microscopy quantifications of the nuclear to cytoplasm ratio of single RPE Cyclin B1-eYFP and U2OS Cyclin B1-eYFP cells. 
+Cells were treated with 1 mM Etoposide or mock treated with DMSO at time point '¡1 h'. LMB was added at time point '0 h'. Mean and standard error of 
+at least 15 cells per condition are depicted. (I) Quantification of DNA content (DAPI) vs. estimated time. Cells were sorted for DAPI levels and the predom-
+inant localization of Cyclin B1 was assessed for each cell. </p>
+
+<p>www.landesbioscience.com </p>
+
+<p>
+correlates with the Cyclin B1-eYFP level at the time point of the 
+DNA damage insult, that is cells with high Cyclin B1-eYFP level 
+initiate degradation earlier than cells with low Cyclin B1-eYFP 
+level (Fig. 5D). As a consequence, Cyclin B1-eYFP levels are pre-
+vented from exceeding the levels observed during mitotic entry. 
+Thus, Cyclin B1-eYFP degradation is temporally decoupled 
+from initiation of the DDR in a manner that correlates with the 
+initial levels of Cyclin B1-eYFP, indicating a cell cycle-dependent 
+control of Cyclin B1 degradation. 
+To allow better comparison between individual cells, we 
+next synchronized cells from a single experiment containing 
+both unperturbed and Etoposide-treated RPE and U2OS cells 
+in silico. When synchronizing unperturbed cells in mitosis, 
+both RPE and U2OS cells showed similar dynamics and similar 
+levels of Cyclin B1-eYFP (Fig. 5E). However, in U2OS cells 
+Cyclin B1-eYFP accumulation starts earlier and with larger var-
+iability between individual cells (Fig. 5E), and we note that 
+nuclear translocation of Cyclin B1-eYFP is less apparent com-
+pared to RPE cells both in unperturbed and DNA damage con-
+ditions (Fig. 5F and G). We next focused on cells with a low 
+level of Cyclin B1-eYFP at the time of Etoposide addition. 
+U2OS cells required approximately 30 hours before reaching 
+similar Cyclin B1-eYFP level as during unperturbed mitotic 
+entry, suggesting that Cyclin B1 accumulation is slower after 
+initiation of a DDR (Fig. 5H). When synchronizing RPE cells 
+with initially low levels of Cyclin B1-eYFP at their maximal 
+level of fluorescence, we note that degradation is initiated at 
+similar Cyclin B1-eYFP levels in all cells (Fig. 5H). Thus, 
+indicating that in RPE cells Cyclin B1 is allowed to accumu-
+late up to a distinct threshold before degradation is initiated. 
+As this threshold corresponds to Cyclin B1 levels at the S/G2 
+transition in unperturbed growth (Fig. 5E and H) we reasoned 
+that Cyclin B1 degradation is initiated when cells exit S phase. 
+To test this hypothesis, we assessed the cell cycle timing of 
+Cyclin B1 nuclear translocation during DNA damage by sort-
+ing single RPE cells according to their DNA content and 
+determined Cyclin B1 localization by immunofluorescence. 
+Strikingly, we find that Cyclin B1 nuclear localization occurs 
+only in cells in G2 phase (Fig. 5I). Thus, Cyclin B1 accumula-
+tion continues after DNA damage and Cyclin B1 nuclear 
+translocation and subsequent degradation is only initiated 
+when Cyclin B1 has reached a distinct threshold level in G2 
+phase. </p>
+
+<p>Discussion </p>
+
+<p>Terminal cell cycle exit is decoupled from DDR activation 
+In principle, DNA repair should be initiated as soon as a 
+lesion is recognized, whereas a cell cycle block only needs to be 
+activated late in interphase to prevent mitotic entry. By examin-
+ing Cyclin B1 dynamics in single RPE cells we show that APC/ 
+C Cdh1 activation is temporally decoupled from the DNA dam-
+age insult. While at a population level Cyclin B1 expression 
+remains stable during the first hours after DNA damage, we 
+find that no single cell maintains steady Cyclin B1 levels over </p>
+
+<p>time. Rather Cyclin B1 levels continue to rise and degradation 
+is only initiated once a certain threshold is reached. Cells con-
+taining very low levels of Cyclin B1-eYFP initially accumulate 
+it to levels indicative of entering G2 phase. At the same time, 
+only cells with 4n DNA content initiate Cyclin B1 degradation, 
+showing that terminal cell cycle exit occurs in G2 phase, but 
+not in S phase. 
+Similarly, the higher the Cyclin B1-eYFP content the more 
+rapidly degradation is initiated. Thus, cells late in G2 phase 
+exit the cell cycle faster than cells in early G2 phase, suggesting 
+that G2 activities directly feed into the decision for cell cycle 
+exit. As terminal cell cycle exit can be seen as a last resort of the 
+DDR to avoid mitotic entry and thereby propagation of muta-
+tions, incorporation of G2 activities in the decision process sug-
+gests an elegant mechanism for timely cell cycle exit only when 
+necessary. </p>
+
+<p>Nuclear translocation of Cyclin B1 marks a restriction point 
+for terminal cell cycle exit 
+Upon successful repair of damaged DNA, cells should be 
+allowed to resume cell division. However, not all cells will reen-
+ter the cell cycle. Several studies show that this permanent cell 
+cycle exit depends on APC/C Cdh1 activation. 6-9 Indeed, chicken 
+DT40 Cdh1 ¡/¡ cells fail to maintain a DNA damage-induced 
+G2 arrest. 24 However, we find that the actual point-of-no-
+return occurs already earlier. Once all damaged DNA is 
+repaired, the upstream ATM and ATR kinases lose their acti-
+vating stimuli, which will lead to their eventual inactivation. 
+We show that simulating repair by blocking ATM/ATR activity 
+can induce recovery only in cells that had not previously trans-
+located Cyclin B1 to the cell nucleus. Thus, after Cyclin B1 
+nuclear translocation, cell cycle exit is no longer dependent on 
+the presence of DNA damage signaling. As a consequence, 
+depending on its initial cell cycle state, a cell has a set time to 
+repair damaged DNA, before Cyclin B1 nuclear translocation 
+in G2 phase marks the restriction point for terminal cell cycle 
+exit. 
+Interestingly, both Cyclin B1 nuclear localization and APC/ 
+C Cdh1 activation have to be tightly connected to prevent check-
+point override. APC/C Cdh1 activation and Cyclin B1 degrada-
+tion were reported to be dependent on p21. 6 In contrast, APC/ 
+C Cdh1 activation appears to be a general response to DNA dam-
+age that also occurs in cells that do not terminally exit the cell 
+cycle due to a defective p21 response. 9,15 Our data resolves this 
+discrepancy as it suggests that a critical role of p21 is to seques-
+ter Cyclin B1 in the nucleus, 7 which then, in turn, is required 
+for Cyclin B1 degradation. In fact, transformed cells exclude 
+Cyclin B1 from the nucleus 26 and accumulate it to high levels 
+during ongoing DNA damage. 27 Under these conditions forced 
+nuclear translocation of Cyclin B1 actually induces checkpoint 
+override or Cyclin B1 degradation. 8 Notably, this data high-
+lights an intriguing analogy to the unperturbed cell cycle, where 
+Cyclin B1 nuclear translocation leads to a restriction point for 
+mitotic entry. 28-30 Thus, Cyclin B1 nuclear translocation marks 
+a decision point -leading to mitosis or terminal cell cycle exit. </p>
+
+<p>2740 
+Volume 13 Issue 17 
+Cell Cycle </p>
+
+<p>Conclusion </p>
+
+<p>We suggest that cell cycle exit is decoupled from the initiation 
+of the DDR in a manner that depends on a cell's initial cell cycle 
+phase and, thus, correlates to its Cyclin B1 levels. Once a certain 
+threshold level is reached in G2 phase Cyclin B1 nuclear translo-
+cation occurs and cell fate becomes determined toward perma-
+nent cell cycle exit. </p>
+
+<p>Materials and methods </p>
+
+<p>Cell culture 
+U2OS cell lines were cultured in Dulbecco's modified eagle 
+medium (DMEM) C GlutaMAX (Invitrogen) supplemented 
+with 6% heat-inactivated fetal bovine serum (FBS, HyClone) 
+and 1% Penicillin/Streptomycin (HyClone). RPE cell lines were 
+cultured in DMEM/Nutrient mixture F-12 (DMEM/F-12) C 
+GlutaMAX (Invitrogen) supplemented with 10% FBS and 1% 
+Penicillin/Streptomycin. HEK293T cells for viral particle pro-
+duction were cultured in DMEM C GlutaMAX (Invitrogen) 
+supplemented with 10% FBS and 1% Penicillin/Streptomycin. 
+All cell lines were cultured in an ambient-controlled incubator at 
+37 C with 5% CO 2 . For live-cell imaging experiments, cells 
+were cultured in Leibowitz's L-15 medium (Invitrogen) supple-
+mented with 10% FBS and 1% Penicillin/Streptomycin. </p>
+
+<p>RNAi 
+For RNA interference experiments SMARTpool ON-TAR-
+GET plus siRNAs targeting CDKN1A (p21), TP53 (p53), 
+FRZ1 (Cdh1), CDC20 (Cdc20), BTRC (b-TrCP), ZC3HC1 
+(NIPA), or CCNB1 (Cyclin B1) were purchased from Dhar-
+macon. Cells were seeded at a density of 45000 cells/ml and 
+transfected with siRNA using HiPerFect (Qiagen) and Opti-
+MEM (Invitrogen) at 48 h and 24 h before analysis of pheno-
+types. siRNAs were employed at a final concentration of 
+20 nM. </p>
+
+<p>Inhibitors and plasmids 
+The inhibitors used in this study were employed at the follow-
+ing concentrations: MG-132 at 10 mM (Sigma Aldrich), pro-
+Tame at 15 mM (R&amp;D systems), Leptomycin B at 10 ng/ml 
+(Sigma Aldrich), Importazole at 66 mM (Sigma Aldrich), UCN-
+01 at 300 nM (Sigma Aldrich), KU60019 at 10 mM (Tocris 
+Bioscience), Nocodazole at 250 ng/ml (Sigma Aldrich), S-Trityl-
+L-cysteine (STLC) at 10 mM (Tocris Bioscience), caffeine at 
+5 mM (Sigma Aldrich), Etoposide at 0.125 to 8 mM (Sigma 
+Aldrich), and Neocarzinostatin (NCS) at 0.125 to 8 nM (Sigma 
+Aldrich). Based on our titrations, 1 mM Etoposide was sufficient 
+to induce damage to cells at all cell cycle stages and it was the 
+lowest concentration where both U2OS and RPE cells displayed 
+a robust checkpoint arrest (Fig. 1C and D; Fig. S1B). Therefore, 
+we used 1 mM Etoposide in our experiments. </p>
+
+<p>Live-cell microscopy and micropatterns 
+For live-cell imaging of cell populations, 18000 cells were 
+seeded in 96-well imaging plates (BD Falcon) 16 h before imag-
+ing on either a DeltaVision Spectris imaging system (Applied 
+Precision) using a 20£, NA 0.7 objective, or on a ImageXpress 
+system (Molecular Devices) using a 20£, NA 0.45 objective. 
+For experiments involving micropatterns, cells were detached 
+using PBS containing 0.2% EDTA and seeded on fibronectin-
+coated micropatterns (CYTOO) at a density of 60000 cells/ml 
+5 h before starting the experiment. After 30 min cover slips were 
+washed with PBS to remove unattached cells. 
+Images were processed and analyzed using <rs type="software">ImageJ</rs>. For time-
+lapse microscopy quantification of populations the background 
+was subtracted for every image series using rolling ball back-
+ground subtraction. Furthermore, the image series were manually 
+screened and series with fluorescent aggregates were excluded 
+from the analysis. Subsequently, integrated fluorescent intensities 
+were calculated and values were normalized for each series on the 
+time point before inhibitor addition. Mean values of at least 8 
+individual positions per condition were calculated. </p>
+
+<p>Immunofluorescence 
+Cells were grown in 96-well imaging plates (BD Falcon), fixed 
+using 3.7% formaldehyde (Sigma Aldrich) for 5 min at room 
+temperature, permeabilized by ice-cold methanol for 2 min, 
+blocked with 2% bovine serum albumin (Sigma Aldrich) in PBS 
+supplemented with 0.1% Tween-20 (PBST) and incubated with 
+primary antibodies for 2 h at room temperature. After washing 
+with PBST, the cells were incubated with AlexaFluor-conjugated 
+secondary antibodies for 1 h. DNA was stained with DAPI 
+(0.5 mg/ml; Sigma Aldrich). The following antibodies were used: 
+Cyclin B1 V152 (1:400; #4135 Cell Signaling), ɣH2AX (1:400; 
+#9781 Cell Signaling). Images were acquired on an ImageXpress 
+system (Molecular Devices) using a 40£ NA 0.6 or a 60£ NA 
+0.7 objective. </p>
+
+<p>Immunoblotting 
+For Western blot analysis 1.5 £ 10 6 U2OS or RPE cells were 
+cultured in 10-cm dishes. DNA damage was induced using Eto-
+poside (1 mM and 5 mM) and samples were collected 4 h, 8 h, 
+24 h and 48 h after damage. Cells were washed using PBS and 
+lysed in 500 ml of sample buffer (BioRad). 15 ml of each sample 
+were loaded, run on 4-15% polyacrylamide gels (BioRad) and 
+transferred to a PVDF membrane (BioRad) for immunoblotting. 
+The following antibodies were used: Cyclin B1 GNS-1 (1:500; 
+sc-245 Santa Cruz), Cyclin B1 V152 (1:1000; #4135 Cell Signal-
+ing), Cyclin A2 H-432 (1:1000; sc-751 Santa Cruz), Plk1 F-8 
+(1:500; sc-17783 Santa Cruz), Cdk1 POH1 (1:1000; #9116 Cell 
+Signaling), Cdk2 78B2 (1:1000; #2564 Cell Signaling), p21 
+12D1 (1:1000; #2947 Cell Signaling), p53 DO-1 (1:500; sc-126 
+Santa Cruz), b-tubulin 9F3 (1:1000; #2128S Cell Signaling), 
+GAPDH (1:25000; G9545 Sigma Aldrich), GFP (1:1000; 
+ab290 abcam). Secondary antibodies conjugated to horseradish 
+peroxidase (GE Healthcare) were diluted at 1:5000. </p>
+
+<p>www.landesbioscience.com </p>
+
+<p>
+Generation of cell lines 
+The U2OS Cyclin B1-eYFP and RPE Cyclin B1-eYFP cells 
+were generated as previously described. 18,31 Briefly, the open 
+reading frame of eYFP lacking the start codon was inserted into 
+the CCNB1 locus by adeno-associated virus-mediated homolo-
+gous recombination. The targeting construct was designed to 
+contain 959 bp of homology with the CCNB1 locus in the 5 0 of 
+the STOP codon and 1253 bp 3 0 of the STOP codon. The con-
+struct was cloned into a rAAV backbone and the resulting clones 
+were verified by test digest prior to transfection of HEK293T 
+cells to produce viral particles. Transduced and control U2OS 
+and RPE cells were harvested with trypsin/EDTA 96 h after 
+transduction, washed, resuspended in PBS, and filtered through 
+a cell strainer to avoid cell aggregates (BD Falcon). Positive 
+clones were obtained by sorting cells in a FACSAria III (Becton 
+Dickinson) sorter as described previously by Mata and 
+colleagues. 32 </p>
+
+<p>Flow cytometry 
+Cells were harvested with trypsin/EDTA, resuspended and 
+fixed with 70% ethanol. After fixation, cells were incubated with 
+an antibody against Histone H3 pS10 (1:200; #3377 Cell Signal-
+ing) and a secondary antibody conjugated to AlexaFluor647 </p>
+
+<p>(Invitrogen). Finally, nucleic acids were stained using 40 mg/ml 
+propidium iodide. Cells were analyzed on a FACSCanto II 
+(Becton Dickinson). </p>
+
+<p>Disclosure of Potential Conflicts of Interest </p>
+
+<p>No potential conflicts of interest were disclosed. </p>
+
+<p>Acknowledgments </p>
+
+<p>We thank Camilla Sj€ ogren and Nico Dantuma for critical 
+comments on the manuscript. </p>
+
+<p>Funding </p>
+
+<p>This work was financed by the Swedish research council, the 
+Swedish foundation for strategic research, the Swedish cancer 
+society and the Swedish childhood cancer foundation. </p>
+
+<p>Supplemental Material </p>
+
+<p>Supplemental data for this article can be accessed on the 
+publisher's website. </p>
+
+
+
+<p> 
+Volume 13 Issue 17 
+Cell Cycle </p>
+
+
+
+<p>www.landesbioscience.com </p>
+
+<p>
+</p></text></tei>

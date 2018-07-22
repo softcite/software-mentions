@@ -1,0 +1,1165 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC5389568" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:31+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>ABSTRACT </p>
+
+<p>The oncogenic transcription factor MYC and its bind-
+ing partner MAX regulate gene expression by bind-
+ing to DNA at enhancer-box (E-box) elements 5 -
+CACGTG-3 . In mammalian genomes, the central E-
+box CpG has the potential to be methylated at the 
+5-position of cytosine (5mC), or to undergo further 
+oxidation to the 5-hydroxymethyl (5hmC), 5-formyl 
+(5fC), or 5-carboxyl (5caC) forms. We find that MAX 
+exhibits the greatest affinity for a 5caC or unmodified 
+C-containing E-box, and much reduced affinities for 
+the corresponding 5mC, 5hmC or 5fC forms. Crystal-
+lization of MAX with a 5caC modified E-box oligonu-
+cleotide revealed that MAX Arg36 recognizes 5caC 
+using a 5caC-Arg-Guanine triad, with the next near-
+est residue to the carboxylate group being Arg60. In 
+an analysis of &gt;800 primary multiple myelomas, MAX 
+alterations occurred at a frequency of ∼3%, more 
+than half of which were single nucleotide substitu-
+tions affecting a basic clamp-like interface important 
+for DNA interaction. Among these, arginines 35, 36 
+and 60 were the most frequently altered. In vitro bind-
+ing studies showed that whereas mutation of Arg36 
+(R36W) or Arg35 (R35H/L) completely abolished DNA 
+binding, mutation of Arg60 (R60Q) significantly re-
+duced DNA binding, but retained a preference for the 
+5caC modified E-box. Interestingly, MAX alterations 
+define a subset of myeloma patients with lower MYC 
+expression and a better overall prognosis. Together 
+these data indicate that MAX can act as a direct epi-
+genetic sensor of E-box cytosine modification states 
+and that local CpG modification and MAX variants </p>
+
+<p>converge to modulate the MAX-MYC transcriptional 
+network. </p>
+
+<p>Postsynthetic modifications to DNA and histone proteins 
+play a key role in defining the three dimensional organi-
+zation of chromatin in the nucleus and DNA accessibility, 
+shaping gene expression programs by enabling the expres-
+sion of some genes while restricting that of others. Such 
+epigenetic regulation controls cell fate decisions during de-
+velopment and the maintenance of cellular identity in dif-
+ferentiated cells, a program that is frequently altered in the 
+progression to cancer. Among these, the methylation of cy-
+tosine residues (5mC) in the sequence context CpG is per-
+haps the best studied and affects gene regulation through 
+both direct and indirect (secondary to changes in chromatin 
+structure) effects on the binding of proteins to DNA. Most 
+CpGs in the genome are methylated and in the context of in-
+tact chromatin, the absence of 5mC demarks accessible re-
+gions of the genome, including CpG island-containing gene 
+promoters and active enhancers (1,2). While the methyla-
+tion status of most CpG sites are largely invariant across cell 
+types, the fraction that do vary (∼20%) overlap distal reg-
+ulatory regions, and in particular enhancers and transcrip-
+tion factor binding sites, suggesting that the gain or loss of 
+5mC at such sites is a key defining feature of lineage-specific 
+gene regulation (3,4). 
+It is now evident that 5mC patterns can be fur-
+ther shaped during development and even in post-
+mitotic cells by the ten-eleven translocation (Tet) fam-
+ily of Fe(II)-and -ketoglutarate-dependent dioxygenases 
+which convert 5mC to 5-hydroxymethylcytosine (5hmC), 5-
+formylcytosine (5fC) and 5-carboxylcytosine (5caC) in suc-
+cessive oxidation steps (5-8). One fate of oxidized 5mC 
+residues--particularly 5fC and 5caC--involves excision by </p>
+
+<p>* To whom correspondence should be addressed. Tel: +1 404 727 8491; Fax: +1 404 727 3746; Email: xcheng@emory.edu 
+Correspondence may also be addressed to Paula M. Vertino. Tel: +1 404 778 3119; Fax: +1 404 778 2512; Email: pvertin@emory.edu </p>
+
+<p> † These authors contributed equally to this work as first authors. </p>
+
+<p>C </p>
+
+<p>The Author(s) 2016. Published by Oxford University Press on behalf of Nucleic Acids Research. 
+This is an Open Access article distributed under the terms of the Creative Commons Attribution License (http://creativecommons.org/licenses/by-nc/4.0/), which 
+permits non-commercial re-use, distribution, and reproduction in any medium, provided the original work is properly cited. For commercial re-use, please contact 
+journals.permissions@oup.com </p>
+
+<p>Nucleic Acids Research, 2017, Vol. 45, No. 5 2397 </p>
+
+<p>thymine DNA glycosylase (TDG) followed by incorpora-
+tion of an unmodified C, leading to a net DNA 'demethyla-
+tion' (8). Accumulated evidence now support the view that 
+5hmC exists as a relatively stable modification unaffected 
+by TDG depletion, constituting a distinct epigenetic signal 
+that primarily marks lowly expressed genes, gene bodies and 
+intragenic regions (9,10) (reviewed in (11,12)). In contrast, 
+5fC and 5caC are found at much lower levels at steady state 
+(1-10% that of 5hmC), and preferentially accumulate at en-
+hancers and other distal regulatory regions in the absence of 
+TDG (13-18), implying that the dynamic turnover of 5mC 
+may be particularly important in enhancer function. Recent 
+work by our group and others showing that the binding of 
+certain transcription factors to DNA is influenced by the 
+presence of oxidized 5mC bases in vitro (19-23) and that 
+5fC/5caC pose a barrier to transcriptional elongation in 
+cells (24) raise the question of whether 5fC/5caC may have 
+functions in gene regulation beyond that of intermediates in 
+the DNA demethylation cycle. 
+The oncogenic transcription factor MYC and its bind-
+ing partner MAX are basic-helix-loop-helix (bHLH) tran-
+scription factors that preferentially recognize a subset of 
+enhancer-box (E-box) sequences containing a central CpG 
+dinucleotide (5 -CACGTG-3 ) (25-28). MYC-MAX bind-
+ing to E-box sequences is thought 'amplify' transcrip-
+tion by promoting elongation at a wide number of genes 
+(29,30). MAX also dimerizes with a number of other bHLH 
+proteins, including Mad1-4 (Mxd), Mnt, Mga and oth-
+ers (31,32). The MAX-Mad/Mnt/Mga heterodimers di-
+rectly antagonize the function of MYC by instead recruiting 
+corepressor complexes to mediate transcriptional repres-
+sion from the same E-box sequences. Ultimately, it is the 
+relative abundance of MYC and the other binding partners 
+and their competition for MAX that mediates distinct bi-
+ologic outputs (32,33). Dysregulation of the MYC-MAX 
+transcriptional network is a common mechanism driving 
+oncogenic progression in many human cancers. Most often 
+this is achieved through translocations or amplification of 
+the MYC locus, resulting in its overexpression. Alterations 
+in MAX have also recently been reported (34-36), but the 
+functional significance of these is not well understood. In 
+this study, we sought to determine the influence of 5mC ox-
+idation and the impact of cancer-associated MAX muta-
+tions on the biochemical and structural features of MAX 
+binding with its cognate E-box. 
+Here, we provide evidence that MAX, and potentially 
+other bHLH transcription factors, can 'sense' the oxidation 
+status of 5mCpGs, and further that cancer-associated muta-
+tions in MAX differentially affect binding to these features. 
+In a large collection of over 800 primary multiple myelomas, 
+we establish that somatic MAX mutations occur at a fre-
+quency of ∼3% and are likely to represent loss of function 
+alterations. Among myeloma patients, MAX mutations are 
+associated with low expression of MYC and a better over-
+all prognosis. Taken together the data suggest that 5mCpG 
+oxidation may play a critical role in fine-tuning E-box recog-
+nition by the MYC family of transcription factors, and ul-
+timately transcriptional output. </p>
+
+<p>MATERIALS AND METHODS </p>
+
+<p>Protein expression and purification </p>
+
+<p>Human full length MAX (NP 002373.3) and the bHLH-
+leucine zipper domain (residues 22-107) were cloned into 
+hexahistidine-SUMO (small ubiquitin-like modifier) tagged 
+vector (pXC1385 and pXC1407, respectively) and expressed 
+in Escherichia coli BL21 (DE3) Codon-plus RIL. Cells 
+were cultured in LB medium at 37 • C until OD600 reached 
+0.5 before induction by adding 0.4 mM isopropyl -D-1-
+thiogalactopyranoside for 16 h at 16 • C. Cells were har-
+vested and lysed in 20 mM sodium phosphate, pH 7.4, 150 
+mM NaCl, 1 mM dithiothreitol (DTT), 50 mM imidazol 
+and 0.3 mM phenylmethyl-sulphonyl fluoride by sonica-
+tion. The lysate was clarified by centrifugation at 35 000 × 
+g for 60 min at 4 • C. The hexahistidine fusion protein was 
+isolated on nickel-charged chelating column (GE Health-
+care). The hexahistidine-SUMO tag was removed by di-
+gestion with Ulp1 protease (purified in-house) for 16 h at 
+4 • C (37), resulting in the retention of two extraneous N-
+terminal residues (His-Met). The protein was further pu-
+rified by tandem HiTrap Q and SP column (i.e. passing 
+through Q and eluted from SP column). The protein do-
+main used for crystallization was then loaded on a HiLoad 
+Superdex 200 (16/60) column (GE Healthcare) and concen-
+trated to approximately 87 mg/ml in 20 mM Tris-HCl, pH 
+8.0, 500 mM NaCl and 1 mM DTT. </p>
+
+<p>Site-directed mutagenesis </p>
+
+<p>Point mutations were introduced into the wild-type 6xHis-
+SUMO-tagged human full length MAX (pXC1385) using 
+the QuickChange site-directed mutagenesis kit (Stratagene) 
+to generate MAX H28R (pXC1506), R35H (pXC1580), 
+R35L (pXC1581), R36W (pXC1500), R36K (pXC1507) 
+and R60Q (pXC1533). All mutants were verified by se-
+quencing. The mutant proteins were purified as described 
+above for the wild type (WT) protein. With the exception 
+of H28R which yielded a lower protein yield (0.3 mg/l), the 
+remaining mutant proteins were all recovered a similar or 
+higher protein yields as the WT protein (2 mg from 1 l cul-
+ture for WT, 3.3 mg for R35H, 6.5 mg for R35L, 1.4 mg 
+for R36W, 2.7 mg for R36K and 3.2 mg for R60Q). Size ex-
+clusion chromatography and dynamic light scattering mea-
+surements indicated a similar size and integrity for all (Sup-
+plementary Figure S1). </p>
+
+<p>Electrophoretic mobility shift assay </p>
+
+<p>The gel shift assays were performed by incubating 5 nM 
+6-carboxy-fluorescein (FAM) labeled double-stranded 
+oligonucleotides 
+[FAM-5 -TAGGCCAXGTGACCGG-
+3 /5 -CCGGTCAYGTGGCCTA-3 where X or Y is C, 
+5-methyl-C (M), 5-hydroxymethyl-C (H), 5-formyl-C (F) 
+or 5-carboxyl-C (5caC)] with an increasing amount (up 
+to 0.5 M) of full length MAX protein at room tempera-
+ture (∼22 • C) for 30 min under the conditions of 20 mM 
+Tris-HCl (pH 8.0), 150 mM NaCl, 5% (v/v) glycerol, 1 
+mM DTT and 0.1 mg/ml bovine serum albumin (BSA). 
+Protein/DNA complexes were loaded onto a 6% native 1× 
+TBE polyacrylamide gel, and electrophoresed for 40 min at </p>
+
+<p>2398 Nucleic Acids Research, 2017, Vol. 45, No. 5 </p>
+
+<p>80 V in 1× TBE buffer. Gels were scanned using Typhoon 
+Trio+ imager (GE Healthcare). </p>
+
+<p>Fluorescent polarization </p>
+
+<p>Fluorescence polarization measurements were carried out 
+at 25 • C on a Synergy 4 Microplate Reader (BioTek) as de-
+scribed (38). A 5 nM of FAM-labeled double strand DNA 
+was incubated for 10 min with increasing amounts of pro-
+teins (up to 1 M) in 20 mM Tris-HCl, pH 7.5, 150 mM 
+NaCl, 1 mM DTT, 5% (v/v) glycerol and 0.1 mg/ml BSA. 
+No change in fluorescence intensity was observed with 
+the addition of protein. Curves were fit individually using 
+<rs id="software-6" type="software">GraphPad PRISM</rs> <rs corresp="#software-6" type="version-number">5.0d</rs> software. Binding constants (K D ) 
+were calculated as [mP] = [maximum mP] x [C] / (K D +[C]) 
++ [baseline mP], where [mP] is milli-Polarization and [C] is 
+protein concentration (39). Saturated [mP] was calculated 
+as saturation = ([mP] − [baseline mP])/([maximum mP] − 
+[baseline mP]). Curves were normalized as percentage of 
+bound and reported is the mean ± SEM of the interpolated 
+K D from two independent experiments performed in dupli-
+cate. For those binding curves that did not reach saturation, 
+the lower limit of the binding affinity was estimated (39). </p>
+
+<p>Crystallography </p>
+
+<p>For co-crystallization, 1 mM MAX purified protein was 
+mixed with 0.5 mM double-stranded oligonucleotide with 
+nine different DNAs (Supplementary Figure S2). The best 
+diffracting crystal used for data collection was obtained 
+from 5 -AGTAGCAXGTGCTACT-3 (where X = 5caC) 
+(synthesized by New England Biolabs). Crystals appeared 
+within 1-day under the conditions of 0.1 M sodium citrate-
+citric acid at pH 5.5, 20% (w/v) polyethylene glycol 3000. 
+Crystals were cryoprotected by soaking in mother liquor 
+supplemented with 30% ethylene glycol. X-ray diffraction 
+datasets were collected at the SER-CAT beamline (22ID-D) 
+at the Advanced Photon Source, Argonne National Lab-
+oratory and processed using XDS (40). The structure was 
+solved by molecular replacement by <rs type="software">PHENIX</rs> (41,42) us-
+ing the Max-DNA complex structure (PDB 1AN2 (43)) as 
+a search model. <rs type="software">PHENIX</rs> refinement scripts were used for 
+refinement, and the statistics shown in Supplementary Ta-
+ble S1 were calculated for the entire resolution range. </p>
+
+<p>MAX mutations in multiple myeloma </p>
+
+<p>The CoMMpass (Clinical outcomes in Multiple Myeloma 
+to personal assessment) database interim analysis IA9 was 
+interrogated for single nucleotide variants (SNVs) and 
+structural variants in the MAX locus (https://research. 
+themmrf.org). RNA-seq data and overall survival data 
+were extracted for those patients harboring MAX vari-
+ants and compared to those for whom MAX status could 
+be definitively called but whom lacked MAX SNVs (wild-
+type). Overall survival data between the two groups were 
+compared using a Log-rank (Mantel-Cox) test and Haz-
+ard Ratio determined using the Mantel-Haenszel test in 
+<rs id="software-2" type="software">GraphPad Prism</rs> <rs corresp="#software-2" type="version-number">6.0</rs>. MYC expression levels were deter-
+mined from RNAseq data that was processed with Cuf-
+flinks by the CoMMpass consortium and expressed as </p>
+
+<p>FPKM--fragments per kilobase of exon per million reads 
+mapped. The distributions between the two groups were 
+compared using the Mann-Whitney U test implemented in 
+<rs id="software-5" type="software">GraphPad Prism</rs> <rs corresp="#software-5" type="version-number">6.0</rs>. </p>
+
+<p>RESULTS </p>
+
+<p>The bHLH DNA-binding domain together with leucine 
+zipper dimerization domains (bHLH-LZ) of the Max-Max, 
+Max-Myc and Max-Mad dimers in complex with E-box 
+DNA have been structurally examined (43,44). However, in 
+these in vitro studies it was necessary to use a chemical liga-
+tion approach to achieve homogeneous Max-Myc or Max-
+Mad heterodimers (44). Whereas the various Max partners 
+exhibit marked differences in the leucine zipper regions, the 
+mode of interaction of the bHLH domains with DNA is es-
+sentially identical between the Max homodimer and the het-
+erodimers (44). Therefore, for simplicity, we used the full-
+length human MAX-MAX homodimer to biochemically 
+characterize interactions with E-box DNA, and the bHLH-
+LZ region (residues 22-107) for structural analysis (Supple-
+mentary Figure S3A and B). </p>
+
+<p>Binding of MAX to CpG-modified E-boxes </p>
+
+<p>We first compared the binding of human full-length MAX 
+protein to double-stranded oligonucleotides containing the 
+E-box sequence in which the status of the central CpG was 
+either unmodified, 5mC-modified, or oxidized to 5hmC, 
+5fC or 5caC by electrophoretic mobility shift assay. As ex-
+pected, MAX bound to the unmodified E-box and methy-
+lation of the CpG greatly inhibited DNA binding, as ob-
+served previously (28) (Figure 1A and B). 5hmC further de-
+creased binding significantly (Figure 1C). Surprisingly, the 
+5fC containing oligo showed a small amount of discrete 
+complex, whereas 5caC restored binding to the level of un-
+modified C (Figure 1D and E). Due to synthetic limitations, 
+the 5caC modification is not compatible with a FAM la-
+bel on the same oligonucleotide, thus the 5caC-containing 
+double-stranded oligonucleotide was only hemi-modified, 
+with the 5caC base on the bottom strand only. In all other 
+cases we compared both the fully modified setting in which 
+the modified base was on both strands (Figure 1A-D, top) 
+as well as the hemi-modified setting (Figure 1A-E, bottom). 
+From the intensities of shifted bands, we estimated the ap-
+parent binding affinity to be between 16 and 32 nM for 
+both completely unmodified C and hemi-modified 5caC-
+containing oligonucleotides. We expect that a fully modified 
+5caC oligo might have an even stronger binding affinity to 
+the MAX homodimer. 
+We repeated the binding assays using fluorescence polar-
+ization to quantitatively measure the dissociation constants 
+(K D ) between the MAX protein and the five E-box forms, 
+comparing directly double-stranded oligonucleotides that 
+were modified only on the bottom strand (Figure 1F). MAX 
+bound the unmodified C and the 5caC-containing oligonu-
+cleotides equally well with a K D of ∼30 nM. Methylation 
+(5mC) and 5-hydroxymethylation (5hmC) significantly re-
+duced binding by a factor of &gt;13, whereas 5-formycytosine 
+(5fC) reduced affinity by a factor of 8. The affinity of MAX 
+for the E-box is thus on the order 5caC ∼ C &gt; 5fC &gt; 5mC </p>
+
+<p>Nucleic Acids Research, 2017, Vol. 45, No. 5 2399 </p>
+
+<p>X/Y=C/C </p>
+
+<p>0.0001 0.001 
+0.01 
+0.1 
+1 </p>
+
+<p>0 </p>
+
+<p>50 </p>
+
+<p>100 </p>
+
+<p>MAX wild-type (μM) </p>
+
+<p>% of saturation </p>
+
+<p>FAM-5'-TGCCACGTGACC-3' 
+3'-ACGGTGXACTGG-5' </p>
+
+<p>X 
+K D (nM) 
+5caC 31±3 
+C 
+36±9 
+5fC &gt;240 
+5mC &gt;400 
+5hmC &gt;400 </p>
+
+<p>150 mM NaCl </p>
+
+<p>F 
+A </p>
+
+<p>X/Y=C/C 
+5mC/5mC 
+5hmC/5hmC 
+5fC/5fC 
+C/5caC </p>
+
+<p>16-32 nM 
+16-32 nM </p>
+
+<p>Free DNA </p>
+
+<p>Max-DNA 
+complex </p>
+
+<p>FAM-5'-TAGGCCAXGTGACCGG-3' 
+3'-ATCCGGTGYACTGGCC-5' </p>
+
+<p>C/5mC 
+C/5hmC 
+C/5fC 
+C/5caC </p>
+
+<p>Free DNA </p>
+
+<p>Max-DNA 
+complex </p>
+
+<p>B 
+C 
+D 
+E </p>
+
+<p>Figure 1. MAX binds 5caC DNA. (A-E) Electrophoretic mobility shift assay of full length MAX protein binding to oligonucleotides containing a single 
+E-box where the central CpG are unmodified (C/C), fully modified (M/M, H/H, F/F), or hemi-modified (C/M, C/H, C/F or C/5caC). The protein 
+concentrations used were a maximum of 0.5 M (the right most lane of each panel) followed by serial 2-fold dilutions (from right to left). (F) DNA binding 
+was quantified by fluorescence polarization. Data represent the mean ± SEM of two independent determinations performed in duplicate. </p>
+
+<p>∼ 5hmC. We also tested the effect of independent modi-
+fication of the two DNA strands (i.e. strand-biased DNA 
+modification) on binding affinity. As expected, MAX had a 
+slightly better affinity for the hemi-modified C/5caC than 
+it did for unmodified C/C, whereas addition of a single 
+methyl group onto one strand (5mC/5caC or C/5mC) re-
+duced binding, regardless of which it was opposite, and was 
+nearly as detrimental as that observed with the fully methy-
+lated (5mC/5mC) site (Supplementary Figure S4). </p>
+
+<p>Structure of MAX bound with 5caC DNA </p>
+
+<p>To understand how MAX binds 5caC DNA, we next co-
+crystallized the MAX bHLH-LZ (residues 22-107) with a 
+16-base pair palindromic sequence containing a fully mod-
+ified 5caCpG within the E-box element (Supplementary 
+Figure S3B). The MAX-DNA complex structure was de-
+termined to a resolution of 2.39Å (Supplementary Ta-
+ble S1). The structure is composed of two long helices, 1 
+(residues 22-49) and 2 (residues 60-106) connected by a 
+loop (residues 50-59) (Supplementary Figure S3C). The ba-
+sic region of the N-terminal portion of helix 1 binds in the 
+major groove of the DNA (Figure 2A-C), recognizing half 
+of the palindromic E-box sequence (Figure 2D). His28 do-
+nates one hydrogen bond (H-bond) to either Guanine O6 
+or Guanine N7 of the outer C 3 :G 3 base pair (Figure 2E). 
+Glu32 accepts a H-bond from the N4 amino group (NH 2 ) 
+of the opposite cytosine (Figure 2E), while its side chain 
+aliphatic carbons (C and C ) are in the vicinity of the 
+Thymine methyl group of the inner A 2 :T 2 base pair (Fig-
+ure 2F). The Thymine methyl group also forms a carbon-
+oxygen (C-H. . . O type) hydrogen bond (45) with the side 
+chain carbonyl oxygen of Asn29 (Figure 2F). 
+The central 5caCpG dinucleotide is involved in interac-
+tions with three charged residues, Arg36, Lys40 and Arg60 
+(Figure 2G and H). The guanidino group of Arg36 inter-
+acts with the central 5 -CpG-3 dinucleotide by donating 
+two hydrogen atoms to the O6 and N7 atoms of the 3 
+Guanine (G 1 ), as well as stacks with the carboxylate group 
+of the 5 5caC (Figure 2D and I), forming a 5caC-Arg-
+Guanine triad. The next closest residues to the carboxy-
+late group are Arg60 (∼6Å) and Lys40 (∼7Å) (Figure 
+2G and H)--too far to make direct contact (but poten-
+tially involved via water-mediated interactions). This cre-
+ates a clamp-like basic environment ideal for electrostatic at-
+traction with the two negatively charged carboxylate groups </p>
+
+<p>of central 5caC:G base pairs and the phosphate backbone 
+(Figure 2A and J). The negatively charged Glu32 and the 
+polar residue Asn29 are further away and separated by base 
+pairs in between. </p>
+
+<p>Arg36 adopts alternative conformations: C-specific and 
+5caC-specific </p>
+
+<p>We compared our structure with previously characterized 
+structures of the Max-Max homodimer, and the Max-Myc 
+and Max-Mad heterodimers in complex with unmodified 
+E-box DNA (43,44). Regardless of the partner, the corre-
+sponding His28-G 3 and Glu32/Asn29-T 2 interactions are 
+conserved between Max, Myc and Mad (Figure 3A and B). 
+Of the side chains involved in DNA base contact, Arg36 
+of Max has the largest conformational difference compar-
+ing 5caC and unmodified E-box DNA binding (Figure 
+3C and D). In the structures of the Max-Myc and Max-
+Mad bound with unmodified DNA, the guanidino group of 
+Arg36 forms a singular H-bond with the Guanine N7 atom 
+of central CpG (Figure 3C). The corresponding arginine in 
+Myc (Arg366) likewise forms a single H-bond with Gua-
+nine N7, whereas the corresponding residue in Mad (Arg68) 
+points away from the N7 atom of the Guanine (Figure 3D). 
+In this conformation, which we term 'C-specific', the guani-
+dino group of Arg36 (and the corresponding Arg336 of Myc 
+or Arg68 of Mad) is quite close to the C5 atom of the CpG 
+Cytosine (3.3-3.7 ˚ 
+A) (Figure 3E). Methylation or hydrox-
+ylmethylation at the C5 atom is likely to cause steric ob-
+struction with the Arg36 in this conformation (Figure 3f), 
+perhaps explaining the diminished binding to E-box DNA 
+containing these modifications. In contrast, the negatively 
+charged carboxylate group of 5caC is accommodated by in-
+ducing the positively charged Arg36 to adopt the rotated 
+'5caC-specific' conformation (Figure 3G), via a series of 
+the side chain torsion angle rotations. In this conforma-
+tion, Arg36 makes two H-bond interactions with Guanine 
+O6 and N7. The conformation of Max Arg60 on the other 
+hand, also involved in the distant binding of 5caC (Figure 
+2G), appears to be relatively constant regardless of whether 
+Max is in the homodimer, or heterodimer with Myc or Mad, 
+or whether the DNA is unmodified or 5-carboxylated (Fig-
+ure 3H). The strong binding for 5caC/C (Figure 1) sug-
+gests that if the two DNA strands were modified indepen-
+dently, Arg36 from each monomer of the Max homodimer </p>
+
+
+
+<p>Figure 2. Structure of MAX-5caC complex. (A) The surface charge of MAX homodimer at neutral pH is displayed as blue for positive, red for negative, and 
+white for neutral. (B) The inner surface of the clamp-like DNA binding domain is predominantly basic. (C) Electron density 2F o -F c , contoured at 1σ above 
+the mean, is shown for the entire 16-bp DNA with major and minor grooves indicated. (D) Each MAX monomer recognizes one half of the palindromic 
+E-box sequence (x = 5caC). (E) Interactions with the outer C 3 :G 3 base pair. The numerical numbers indicate the inter-atom distance in angstrom. (F) 
+Interactions with the inner A 2 :T 2 base pair. (G) The bidentate hydrogen bonds formed between Arg36 and the central G 1 --a pattern specific to Guanine. 
+(H) Close-up view of the central C 1 :G 1 base pair, recognized by the pair of Arg36 residues. Additional neighboring residues near the carboxylate group of 
+5caC are Lys40 and Lys60. Two 5caC:G base pairs interact with two side chains of Arg-36 residues. Lys-40 interacts with the phosphate group of 5caC. 
+(I) Arg36 forms a 5caC-Arg-Gua triad with the central CpG dinucleotide. Simulated annealing omit electron densities, contoured at 3 and 5 above the 
+mean, are shown for Arg36 (green mesh) and the carboxylate moiety of 5caC (red mesh), respectively. (J) Phosphate interactions with Arg33, Lys40 and 
+Arg60. </p>
+
+<p>(or by extension, each monomer of the Max-Myc or Max-
+Mad heterodimers) could adopt strand-specific conforma-
+tion: one for the 5caC-specific mode and the other for the 
+C-specific mode. </p>
+
+<p>Cancer-associated MAX mutations have altered DNA bind-
+ing properties </p>
+
+<p>While 
+the 
+oncogenic 
+consequences 
+of 
+MYC 
+overexpression/amplification are well documented, re-
+cent work indicates that MAX is also a target of mutation 
+in human cancers. Germline mutations in MAX confer 
+a hereditary predisposition to pheochromocytoma and 
+paragangliomas (34,35) and somatic mutations have been 
+described in a number of other sporadic tumor types 
+(cBioportal, http://www.cbioportal.org/) (36,46,47). We 
+characterized three such cancer related MAX mutations: </p>
+
+<p>R36W has been found in a myeloma, H28R found pri-
+marily in endometrial cancers, and R60Q found in a 
+wide variety of cancers including endometrial, glioma, 
+acute myeloid leukemia, colorectal and stomach cancers. 
+Among these, H28R and R60Q were recently identified as 
+recurrent 'hotspot' mutations predicted to have functional 
+consequences in cancer development (48). 
+Consistent with the central role for Arg36-mediated hy-
+drogen bonding to the central CpG base pair noted above, 
+the change from a positively charged Arg36 to an aromatic 
+tryptophan (R36W) resulted in complete loss of DNA bind-
+ing (Figure 4A). In contrast, substitution of His28, which 
+recognizes the outer guanine (G 3 ) (Figure 2E), with argi-
+nine (H28R), resulted in significantly higher affinity for all 
+five forms of E-box DNA (Figure 4B). This observation is 
+in agreement with previous studies showing that both Arg </p>
+
+<p>Nucleic Acids Research, 2017, Vol. 45, No. 5 2401 </p>
+
+<p>Max H28-Gua interaction: 
+Max-Max-5caC (this study) (green) 
+Max-Max-C (PDB 1AN2) (dark grey) 
+Max-Myc (PDB 1NKP) (light pink) 
+Max-Mad (PDB 1NLW) (light grey) </p>
+
+<p>Max H28-Gua (this study) (cyan) </p>
+
+<p>Myc H359-Gua (PDB 1NKP) (light pink) 
+Mad H61-Gua (PDB 1NLW) (light grey) </p>
+
+<p>(5caC-specific) 
+Max-Max R36 </p>
+
+<p>(Myc)-Max R36 </p>
+
+<p>(Mad)-Max R36 
+(C-specific) </p>
+
+<p>Max R60 </p>
+
+<p>A 
+B 
+C </p>
+
+<p>H </p>
+
+<p>Max H28 
+Max H28 
+Myc H359 
+Mad H61 </p>
+
+<p>(5caC-specific) 
+Max-Max R36 </p>
+
+<p>(Max)-Mad R68 
+(C-specific) </p>
+
+<p>( M 
+a x ) -M </p>
+
+<p>y c </p>
+
+<p>R 
+3 6 6 </p>
+
+<p>D </p>
+
+<p>G3 
+G3 
+G1 </p>
+
+<p>G1 </p>
+
+<p>Max-Max R36 
+(5caC-specific) </p>
+
+<p>5caC </p>
+
+<p>G </p>
+
+<p>CH 3 </p>
+
+<p>5mC </p>
+
+<p>G </p>
+
+<p>(A model) 
+Max R36 </p>
+
+<p>F </p>
+
+<p>(Myc)-Max R36 
+(C-specific) </p>
+
+<p>C </p>
+
+<p>G </p>
+
+<p>3.3 </p>
+
+<p>E </p>
+
+<p>C </p>
+
+<p>p 
+G </p>
+
+<p>G </p>
+
+<p>I </p>
+
+<p>Figure 3. Arg36 adopts alternative conformations: C-specific and 5caC-specific. (A) Comparison of Max His28-Gua interaction among Max-Max ho-
+modimer, Max-Myc and Max-Mad heterodimers. (B) Comparison of Max His28 and its corresponding residue in Myc (His359) and Mad (His61). (C) 
+Superimposition of Max Arg36-Gua interaction in Max-Max homodimer (in complex with 5caC DNA), Max-Myc (unmodified DNA) and Max-Mad 
+(unmodified DNA) heterodimers. (D) Superimposition of Max Arg36 (5caC DNA) and its corresponding residue in Myc (Arg366) and Max (Arg68) in 
+complex with unmodified DNA. (E) With unmodified DNA, Max Arg36 forms a van der Waals contact with the ring C5 atom of unmodified Cyt and a 
+hydrogen bond with Gua of the central CpG dinculeotide, adopted from PDB 1NKP (44). (F) Modeling a methyl group (in yellow ball) onto unmodified 
+CpG site potentially results in repulsion (indicated by a star) with the Arg36 of Max in the C-specific conformation. (G) The 5caC-Arg-Gua triad in the 
+5caC-specific interactions observed by Max Arg36. (H) Max Arg60 conformation is conserved among Max-Max, Max-Myc and Max-Mad dimers. (I) A 
+close-up view of 5caCpG dinucleotide connected by the sugar-backbone (p: phosphate group). </p>
+
+<p>and His can be used in Guanine recognition (49) (e.g. see 
+(50)). Indeed, H28R bound DNA so tightly that the esti-
+mated K D values were below the probe concentration of as-
+say conditions regardless of CpG modification status (5 nM 
+probe, 150 mM NaCl) (Figure 4B). We thus increased the 
+NaCl concentration to 350 mM. Under these more strin-
+gent conditions, H28R retained the same relative order of 
+binding preference as wild-type MAX (5caC∼C &gt; 5fC &gt; 
+5mC∼5hmC), with the K D values ranging from 11 to 110 
+nM (Figure 4C). Moreover, H28R was able to bind two 
+control sequences (C-1 and C-2) that retain one or both 
+of the outer G 3 :C 3 base pairs, but lack the cognate E-box 
+sequence--albeit with a reduced affinity relative to the E-
+box containing sequence. Wild-type MAX showed no de-
+tectable binding to the canonical E-box sequence or the con-
+trol sequences under the same high salt condition (Figure 
+4C). It appears that the retention of both of the outer G 3 :C 3 
+base pairs renders the control-1 sequence a reasonable tar-
+get for the H28R mutant, with an affinity only about 2-</p>
+
+<p>fold lower than that of the hemi-methylated E-box sequence 
+and 14-fold less than the unmodified sequence (Figure 4D). 
+These data suggest that the H28R mutation may confer very 
+tight, potentially indiscriminate DNA binding of MAX to 
+degenerate E-box sequences. 
+Substitution of the positively charged Arg60 with a po-
+lar glutamine residue (R60Q) reduced DNA binding signif-
+icantly, by a factor of ∼20. Nevertheless, even at the lower 
+affinity, the mutant retained its preference for the 5caC 
+modification over 5mC or the other oxidized forms (5hmC, 
+5fC) (Figure 4E). The weakened DNA binding by the mu-
+tant might provide an opportunity for other enzymes (such 
+as the DNA glycosylase TDG (8)) to compete and excise 
+5caC base, resulting in demethylation. </p>
+
+<p>MAX mutations in Multiple Myeloma </p>
+
+<p>Multiple myeloma (MM) is a malignancy of the long-lived 
+antibody-producing plasma cells of the bone marrow. While </p>
+
+<p>2402 Nucleic Acids Research, 2017, Vol. 45, No. 5 </p>
+
+<p>A </p>
+
+<p>B </p>
+
+<p>MAX WT 
+(X=C) 
+K D 36nM </p>
+
+<p>R36W </p>
+
+<p>150 mM NaCl </p>
+
+<p>0.0001 0.001 
+0.01 
+0.1 
+1 </p>
+
+<p>0 </p>
+
+<p>50 </p>
+
+<p>100 </p>
+
+<p>MAX R36W [µM] </p>
+
+<p>% of saturation </p>
+
+<p>C </p>
+
+<p>0.0001 0.001 
+0.01 
+0.1 
+1 </p>
+
+<p>0 </p>
+
+<p>50 </p>
+
+<p>100 </p>
+
+<p>MAX H28R [µM] </p>
+
+<p>% of saturation </p>
+
+<p>X 
+K D (nM) 
+5caC 11±2 
+C 
+14±3 
+5fC 
+&gt;60 
+5mC &gt;80 
+5hmC &gt;110 
+C-1 &gt;200 (control) </p>
+
+<p>350 mM NaCl </p>
+
+<p>( </p>
+
+<p>E-box </p>
+
+<p>MAX WT (E-box X=C) </p>
+
+<p>0.0001 0.001 
+0.01 
+0.1 
+1 </p>
+
+<p>0 </p>
+
+<p>50 </p>
+
+<p>100 </p>
+
+<p>MAX H28R [μM] </p>
+
+<p>% of saturation </p>
+
+<p>MAX WT (X=C) K D 36nM </p>
+
+<p>H28R </p>
+
+<p>150 mM NaCl </p>
+
+<p>K D &lt; 5 nM </p>
+
+<p>E-box 
+FAM-5'-TGCCACGTGACC-3' (6/6) 
+3'-ACGGTGXACTGG-5' 
+| | || 
+Control-1 5'-GTCAGCGCATGG-3' 
+(4/6) 
+3'-CAGTCGCGTACC-5'-FAM 
+| || 
+Control-2 
+5'-GAGGCGTGGC-3' (4/6) 
+3'-CTCCGCACCGTT-5'-FAM 
+| 
+Control-3 5'-ATAAGATCAATA-3' 
+(1/6) 
+3'-TATTCTAGTTAT-5'-FAM </p>
+
+<p>K D (nM) 
+E-box &gt;80 (X=5mC) 
+C-1 &gt;200 </p>
+
+<p>C-2 &gt;1100 </p>
+
+<p>C3 </p>
+
+<p>350 mM NaCl </p>
+
+<p>0.0001 0.001 
+0.01 
+0.1 
+1 </p>
+
+<p>0 </p>
+
+<p>50 </p>
+
+<p>100 </p>
+
+<p>MAX H28R [μM] </p>
+
+<p>% of saturation </p>
+
+<p>D </p>
+
+<p>150 mM NaCl </p>
+
+<p>E </p>
+
+<p>0.001 
+0.01 
+0.1 
+1 
+10 </p>
+
+<p>0 </p>
+
+<p>50 </p>
+
+<p>100 </p>
+
+<p>MAX R60Q [µM] </p>
+
+<p>% of saturation </p>
+
+<p>X 
+K D (µM) 
+5caC 0.7±0.1 
+C 
+1.2±0.4 
+5mC 
+5hmC &gt;5-7 
+5fC </p>
+
+<p>C </p>
+
+<p>Figure 4. Cancer associated MAX mutants with altered DNA binding property. (A) R36W diminished DNA binding as measured by fluorescence po-
+larization assays. Inset within the box: Sequences of the various modified E-box and control (C-1, C-2 and C-3) DNA substrates used. (B and C) H28R 
+enhanced DNA binding with oligos containing varied forms of cytosine. The estimated dissociation constant K D values are uniformly low in 150 mM NaCl 
+(panel B) but considerably increased in 350 mM NaCl (panel C). Note that the smaller the calculated K D value, the higher the binding affinity. (D) The 
+enhanced DNA binding affinity of H28R might allow the mutant to bind near-cognate sequence. (E) The effect of the R60Q mutation on DNA binding. 
+Despite significant reduction of affinity, 5caC DNA is still preferred over unmodified DNA by the R60Q mutant. Data represent the mean ± SEM of two 
+independent determinations performed in duplicate. </p>
+
+<p>myeloma cells maintain many of the features of their nor-
+mal counterparts (e.g. antibody production, dependence on 
+interactions with the bone marrow stroma for survival), 
+they acquire proliferative capacity and the dysregulation of 
+MYC is thought to play a central role in driving their clonal 
+expansion (51). Rearrangements that juxtapose MYC to the 
+immunoglobulin loci or other super-enhancers drive high 
+levels of MYC expression in ∼20-50% of cases (52,53). 
+In addition to dysregulated MYC, MAX mutations are 
+also observed in myeloma. The R36W mutation described 
+above was originally uncovered in a study of ∼200 multiple 
+myelomas, three of whom harbored MAX mutations (1.5%, </p>
+
+<p>cBioportal (54)). To determine the frequency and scope 
+of MAX mutations, we queried the CoMMpass project 
+(https://research.themmrf.org/), a prospective collection of 
+purified tumor samples from over 1000 newly diagnosed 
+myeloma patients, the majority of which have been charac-
+terized by exome sequencing and have corresponding RNA-
+seq and clinical outcomes data. Among the 805 patients for 
+whom exome sequence was available, we identified 24 pri-
+mary patient samples with 25 unique mutations affecting 
+the MAX locus (16 missense, 5 nonsense, 2 splice site and 
+2 deletion/rearrangements; Supplementary Table S2) sug-
+gesting an overall frequency of ∼3%. The finding that many </p>
+
+<p>Nucleic Acids Research, 2017, Vol. 45, No. 5 2403 </p>
+
+<p>Figure 5. MAX alterations in multiple myeloma. (A) Relative position of MAX variants detected in multiple myeloma and their relationship to the struc-
+tural features of the MAX protein. Features of the DNA binding (bHLH) and dimerization domains (leucine zipper) are shown. Missense mutations are 
+shown below. Purple stars show the position of nonsense mutations. Black/gray shaded residues are those conserved across the MAX bHLH family (see 
+Supplementary Figure S3D). Those 'hotspot' mutations that were biochemically analyzed (H28R, R60Q) are marked in red. (B-D) Structural impacts of 
+MAX variants in different regions of the MAX protein. (B) The detailed impact of missense mutations in the basic region--detailed interactions can be 
+observed in panels of Figure 2E, F and G. (C) An I71 to F variant is likely to interfere with the dimer interaction via the leucine zipper. (D) The L94V, 
+located on the outer surface of helix 2, has the potential to alter interactions with regions outside of structured region of the dimer or other proteins. 
+(E) R36K reduced DNA binding significantly, whereas the R35H and R35L completely abolished binding under the same conditions. Data represent two 
+independent determinations performed in duplicate. (F) Comparison of MYC expression in multiple myeloma samples from patients with wild type MAX 
+(n = 625) or MAX alterations (n = 18). Shown are box plots of the MYC expression levels between samples in each class. Median is indicated by a line, 
+box is the 1st and 3rd quartiles, whiskers are the most extreme data point that is 1.5 times the interquartile range. Significance (P &lt; 0.0001) was assessed 
+by the Mann-Whitney U test. (G) Survival outcomes among Multiple Myeloma patients with wild-type MAX (n = 740) or MAX alterations (n = 24). 
+Patients with MAX alterations exhibit a significantly better outcomes [Mantel-Cox log rank test, P = 0.041 (95% CI, 0.13-0.96)]. </p>
+
+<p>tumors harbor nonsense mutations, start codon mutations, 
+or deletion/rearrangements predicted to result in a loss of 
+all or most of the MAX gene product (n = 10), as well as sev-
+eral patients with more than one mutation (n = 5), strongly 
+suggests that it is loss of function alterations in MAX that 
+are important in myeloma. Indeed, of the remaining mis-
+sense mutations, more than half affected amino acids 29-36 
+(Figure 5A), and in particular conserved residues R35 (n = 
+4) or R36 (n = 8). The finding that R36 can be mutated to 
+a number of other residues (G, S, M, W or K), and R35 
+to L or H, suggested that the loss of the positively charge 
+side chain(s) in the basic clamp region is particularly im-
+portant in these cases. These mutations are likely to directly 
+interfere with the Arg side chain interaction with the cen-
+tral guanine G 1 (Figure 2G) resulting in a complete loss of 
+binding affinity, as shown for the R36W mutant above (Fig-</p>
+
+<p>ure 4A). Although the R36K mutation retains the positive 
+charge, we found it reduced the mutant MAX binding affin-
+ity by &gt;30-fold (Figure 5E). Likewise, mutation at R35 to a 
+hydrophobic residue (L) or a shorter side chain (H), which 
+could affect interactions with the negatively charged DNA 
+phosphate group and E32 side chain (Figure 2E), also re-
+sulted in a total loss of binding (Figure 5E). An additional 
+25% (n = 4) affected R60, which was again changed to a 
+hydrophobic residue (W) or the smallest residue (G), which 
+might introduce flexibility and affect protein stability. We 
+predict that this might weaken overall DNA binding affinity 
+by abolishing electrostatic interaction with the phosphate 
+backbone (Figure 2J) as exemplified by the reduced bind-
+ing affinity of the R60Q mutation (Figure 4E) described 
+above. Two additional missense mutations were observed 
+in the helical leucine zipper region (I71W and L94V) (Fig-</p>
+
+
+
+<p>ure 5C and D), which might affect dimerization or other 
+protein-protein interactions. 
+The above data suggested that MAX inactiva-
+tion plays an important role in the pathogenesis 
+of at least some myelomas. As noted above, MYC 
+translocation/overexpression is also common in multiple 
+myeloma, and has been associated with a poorer outcome 
+(52,53). We therefore next examined the relationship be-
+tween MAX mutations and MYC expression and outcomes 
+among MM patients. Interestingly, among the 643 patients 
+for whom both mutation status and RNA-seq data were 
+available, there was an inverse relationship between MYC 
+expression and MAX status, in that tissue from patients 
+harboring MAX alterations expressed significantly lower 
+levels of MYC transcript than those with wild-type MAX 
+(Figure 5F). Such patients are also trending towards a 
+more favorable outcome; among the 764 patients for whom 
+mutation status and outcomes data were available, the 24 
+patients with MAX alterations had a significantly better 
+prognosis, with a hazard ratio for overall survival of 0.35 
+(Figure 5G), which may be a reflection of the tendency 
+toward low MYC expression among this group of patients. </p>
+
+<p>DISCUSSION </p>
+
+<p>DNA 5mC is a major epigenetic signal that acts to reg-
+ulate chromatin structure and ultimately gene expression. 
+The Tet-mediated 5mC oxidation products, 5hmC, 5fC and 
+5caC are now recognized as an additional component of 
+the 'methylome'. While accumulating evidence supports a 
+role for 5hmC as a stable epigenetic mark, 5fC and 5caC 
+are the preferred substrates among the five forms of cyto-
+sine for excision by TDG and thus have been largely con-
+sidered an intermediate in the demethylation cycle. Our re-
+sults show that the DNA binding bHLH domain of MAX 
+is responsive to all forms of modified CpG within its E-box 
+recognition sequence, displaying the highest affinity for cog-
+nate sequences containing a central 5caC and unmodified 
+C, with reduced affinity for 5fC and much lower affinity for 
+5mC and 5hmC. Taken at face value, this result could be 
+interpreted to mean that the progressive Tet-mediated oxi-
+dation of 5mC may be a way to titrate in transcriptional ac-
+tivity in a graded and cyclical fashion, with the 5mC form of 
+such sites being the 'off' position and Tet-mediated oxida-
+tion steps a way of progressively increasing affinity for the 
+binding site while moving towards 5caC (Figure 6). Given 
+the similarities between the bHLH domains of MAX and 
+its binding partners, and the structural conservation of the 
+critical amino acids whether partnered with MYC or Mad 
+(Mxd), it is likely that the ability to 'sense' the 5mC oxida-
+tion state translates to most (if not all) MAX heterodimers 
+and the extended MYC family of bHLH transcription fac-
+tors. The balance between Tet-mediated generation of 5caC 
+and TDG-mediated removal and replacement by unmod-
+ified C could define an equilibrium state that ensures the 
+maintenance of a favorable (5caC or C) platform for MAX 
+binding and regulatory activity. Dynamic competition be-
+tween MAX binding and the local action of de novo DNA 
+methyltransferase(s) might then represent the switch back 
+to the 'off' position. In this context, one hypothesis is that 
+the reduced binding affinity to the C/5caC forms exhib-</p>
+
+<p>ited by certain MAX variants (R36, R60) provides an in-
+creased opportunity for TDG-mediated turnover and sub-
+sequent methylation, whereas the H28 variant (H28R) with 
+increased binding affinity may have the opposite effect. In 
+all, these data raise the possibility that the role of DNA 
+modification (methylation and/or oxidation) in regulating 
+transcription factor activity may be more refined than a sim-
+ple on-off switch. 
+MAX and other transcription factors that can sense the 
+oxidation status of 5mC and preferentially bind the Tet-
+mediated oxidation products may play a role in continually 
+recruiting Tet enzymes to their genomic targets to main-
+tain their open, active status and/or to initiate a shift in 
+cell state. Indeed, in the absence of Tet function, DNA 
+methylation accumulates predominantly at enhancers and 
+other DNase hypersensitive regions (55,56). To this end, 
+Wilms tumor protein WT1, which displays a preference for 
+C, 5mC or 5caC over the 5hmC or 5fC forms (21), physi-
+cally interacts with Tet2 and may recruit Tet2 to its target 
+genes and/or bind to the products of Tet2 enzymatic activ-
+ity (57,58). Moreover, recent genome-wide mapping of full-
+length Tet3 binding sites in mouse neural progenitor cells se-
+lectively enriched for sequences containing an E-box motif 
+(5 -TCACGTGA-3 ) that matches the recognition sequence 
+of TFEB, another bHLH transcription factor (59) (Supple-
+mentary Figure S3D). 
+We provide evidence that for a subset of patients, so-
+matic alterations in MAX play a role in the pathogenesis 
+of multiple myeloma. An examination of the largest collec-
+tion of multiple myeloma available to date showed MAX 
+mutations to occur in ∼ 3% of cases, with missense mu-
+tations affecting R35/R36, and/or nonsense mutations be-
+ing the most frequent. These alterations are unlikely to be 
+therapy-related but rather appear to occur early in disease 
+progression as the majority of CoMMpass samples (and 
+all of those detected with MAX mutations) are derived 
+from newly diagnosed patients. The finding that many tu-
+mors harbor nonsense mutations, start codon mutations, or 
+deletion/rearrangements predicted to result in a loss of all 
+or most of the MAX gene product (n = 10) and that several 
+patients (n = 5) have more than one mutation strongly sug-
+gests that it is the inactivation of MAX that contributes to 
+myelomagenesis, similar to what has been observed in other 
+settings (34-36). Our in vitro binding experiments showing 
+that alteration at R36 (R36W/K), R35 (R35H/L) or R60 
+(R60Q) (another one third of patients) significantly reduces 
+or abolishes MAX DNA binding altogether is consistent 
+with this suggestion. 
+Interestingly, MAX mutations marked a subset of pa-
+tients with low levels of MYC expression and a better prog-
+nosis overall, as compared to those with wild-type MAX. 
+One interpretation is that the consequences of MAX inac-
+tivation are functionally redundant with that of MYC over-
+expression in promoting myelomagenesis, but that the long-
+term disease course of a MYC-promoted versus a MAX-
+promoted myeloma ultimately differ. For example, when 
+MAX is absent, MYC activity may go unrestrained. Analy-
+sis of the genome-wide occupancy of MYC and MAX in a 
+myeloma cell line in which MYC is translocated and over-
+expressed (MM.1S (29)) indicates that whereas nearly all 
+(97%) of MAX sites are co-occupied by MYC, only 3% </p>
+
+<p>Nucleic Acids Research, 2017, Vol. 45, No. 5 2405 </p>
+
+<p>Figure 6. A hypothetical model of the cyclical impact of CpG modification on transcription factor binding. Schematic of chemical reactions of DNA 
+cytosine methylation and 5mC oxidation. DNA methyltransferases convert a proportion of the cytosines (Cs) into 5mC in a S-adenosyl-L-methionine 
+(AdoMet)-dependent reaction. The Tet dioxygenases then convert a fraction of 5mC to 5hmC, 5fC and 5caC in three consecutive Fe(II)-and -ketoglutarate 
+(KG)-dependent oxidation reactions without releasing any formaldehyde. The potential consequence of modifications is indicated by color: green for 
+activities associated with an increased level of gene expression ('ON') and red for those tending to decrease the level of expression ('OFF'). </p>
+
+<p>of MYC binding sites are co-occupied by MAX (Supple-
+mentary Figure S5A and B). This is consistent with the re-
+cent suggestions that once MYC's high affinity sites are sat-
+urated, it can 'invade' other low affinity sites in areas of 
+open chromatin, eventually including the majority of pro-
+moters (29,60,61) potentially facilitated through binding to 
+other factors (e.g. WDR5) (61,62). Loss of MAX may shift 
+the balance towards these lower affinity, non-physiologic 
+sites. It is interesting to note that whereas MYC-MAX co-
+occupied sites are enriched in canonical E-box sequences, 
+the MYC-only sites show reduced specificity for the central 
+CpG (29) (Supplementary Figure S5C), which would poten-
+tially remove any impact of CpG methylation status. Alter-
+natively, loss of MAX function could promote myeloma-
+genesis by alleviating MAX-mediated repression of select 
+genes normally mediated by its interaction with other part-
+ners. Ectopic expression of the repressive MAX partners 
+directly antagonizes MYC-driven transformation in cell-
+based assays, and deletion of certain partners (e.g. MNT) 
+is sufficient to promote tumor formation in mouse models 
+(63), and is observed in human leukemias (64,65). It is pos-
+sible that both consequences contribute. 
+Taken together, our data suggest that bHLH transcrip-
+tion factors join a growing group of transcriptional regu-
+lators that have adapted to respond to different cytosine 
+modification states, potentially acting as direct epigenetic 
+sensors to instruct downstream events. The TET enzymes 
+are altered in human cancers, particularly hematologic ma-
+lignancies, and are associated with altered genomic patterns 
+of 5mC/5hmC (reviewed in (12,66)). Inactivating mutations 
+in TET2 are observed in a wide variety of myeloid and lym-
+phoid tumors, and although mutations in TET1/3 are rel-
+atively rare, mice deficient in Tet1 or the combination of 
+Tet1/Tet2 develop late-onset B-cell lymphomas that exhibit 
+gene expression patterns consistent with human B-cell ma-
+lignancies (67,68). Thus, the convergence of altered patterns 
+of oxidized 5mC and acquired mutations in the factors that 
+read them hint at a new level of epigenetic complexity in 
+cancer progression. </p>
+
+<p>ACCESSION NUMBER </p>
+
+<p>The X-ray structure (coordinates and structure factor files) 
+of MAX residues 22-107 with bound 5caC DNA has been 
+submitted to PDB under accession number 5EYO. </p>
+
+<p>SUPPLEMENTARY DATA </p>
+
+<p>Supplementary Data are available at NAR Online. </p>
+
+<p>ACKNOWLEDGEMENTS </p>
+
+<p>We thank B. Baker of New England Biolabs for synthesiz-
+ing the oligonucleotides. The Department of Biochemistry 
+of Emory University School of Medicine supported the use 
+of SER-CAT beamlines. We also thank Daniel Auclair and 
+Joan Levy from the Multiple Myeloma Research Founda-
+tion, the MMRF CoMMpass Network and Jonathan Keats 
+(TGEN) for support and advice regarding the CoMMpass 
+trial and associated data. 
+Author Information: D.W. performed protein expression 
+and purification, DNA binding assays and crystallization. 
+H.H. performed X-ray data collection and structure deter-
+mination. B.G.B. performed bioinformatics analysis; S.L., 
+L.H.B. and P.M.V. participated in discussion and myeloma 
+data analyses. X.Z., P.M.V. and X.C. organized and de-
+signed the scope of the study. All were involved in analyzing 
+data and in preparing the manuscript. </p>
+
+<p>FUNDING </p>
+
+<p>National Institutes of Health (NIH) [GM049245-23 to X.C. 
+and CA077337-15 to P.M.V.]; T.J. Martell Foundation [to 
+L.H.B.]; Georgia Research Alliance Eminent Scholar [to 
+X.C.]. The open access publication charge for this paper has 
+been waived by Oxford University Press -NAR Editorial 
+Board members are entitled to one free paper per year in 
+recognition of their work on behalf of the journal. 
+Conflict of interest statement. None declared. </p>
+
+
+
+<p>Nucleic Acids Research, 2017, Vol. 45, No. 5 2407 </p>
+
+
+
+</text></tei>

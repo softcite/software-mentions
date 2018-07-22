@@ -1,0 +1,1491 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC3490414" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:27+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>Abstract </p>
+
+<p>Gene duplication is an important evolutionary mechanism and no eukaryote has more duplicated gene families than the parasitic 
+protist Trichomonas vaginalis. Iron is an essential nutrient for Trichomonas and plays a pivotal role in the establishment of infection, 
+proliferation, and virulence. To gain insight into the role of iron in T. vaginalis gene expression and genome evolution, we screened 
+iron-regulated genes using an oligonucleotide microarray for T. vaginalis and by comparative EST (expressed sequence tag) sequen-
+cing of cDNA libraries derived from trichomonads cultivated under iron-rich (+Fe) and iron-restricted (ÀFe) conditions. Among 
+19,000 ESTs from both libraries, we identified 336 iron-regulated genes, of which 165 were upregulated under +Fe conditions 
+and 171 under ÀFe conditions. The microarray analysis revealed that 195 of 4,950 unique genes were differentially expressed. Of 
+these, 117 genes were upregulated under +Fe conditions and 78 were upregulated under ÀFe conditions. The results of both 
+methods were congruent concerning the regulatory trends and the representation of gene categories. Under +Fe conditions, the 
+expression of proteins involved in carbohydrate metabolism, particularly in the energy metabolism of hydrogenosomes, and in 
+methionine catabolism was increased. The iron-sulfur cluster assembly machinery and certain cysteine proteases are of particular 
+importance among the proteins upregulated under ÀFe conditions. A unique feature of the T. vaginalis genome is the retention 
+during evolution of multiple paralogous copies for a majority of all genes. Although the origins and reasons for this gene expansion 
+remain unclear, the retention of multiple gene copies could provide an opportunity to evolve differential expression during growth in 
+variable environmental conditions. For genes whose expression was affected by iron, we found that iron influenced the expression of 
+only some of the paralogous copies, whereas the expression of the other paralogs was iron independent. This finding indicates a very 
+stringent regulation of the differentially expressed paralogous genes in response to changes in the availability of exogenous nutrients 
+and provides insight into the evolutionary rationale underlying massive paralog retention in the Trichomonas genome. </p>
+
+<p>Gene duplications are important in evolution (Lynch and 
+Conery 2000), and no genome has more recently duplicated 
+genes than the parasitic flagellate Trichomonas vaginalis, the 
+causative agent of trichomoniasis (Carlton et al. 2007; Cui 
+et al. 2010). Trichomoniasis is the most common sexually </p>
+
+<p>transmitted infection of nonviral origin in humans. Although 
+trichomoniasis is usually self-limiting in males, it causes serious 
+health problems for female patients, including an increased 
+risk of cervical cancer, pelvic inflammatory disease, infertility, 
+and transmission of the HIV (Laga et al. 1993; Zhang and Begg 
+1994; Viikki et al. 2000; Moodley et al. 2002). Trichomoniasis 
+during pregnancy is associated with low birth weight, the </p>
+
+<p>GBE </p>
+
+<p>ß The Author(s) 2012. Published by Oxford University Press on behalf of the Society for Molecular Biology and Evolution. 
+This is an Open Access article distributed under the terms of the Creative Commons Attribution License (http://creativecommons.org/licenses/by-nc/3.0/), which permits non-
+commercial reuse, distribution, and reproduction in any medium, provided the original work is properly cited. For commercial re-use, please contact journals.permissions@oup.com. </p>
+
+<p>Genome Biol. Evol. 4(10):1017-1029. doi:10.1093/gbe/evs078 Advance Access publication September 12, 2012 </p>
+
+
+
+<p>premature rupture of membranes and preterm birth (Cotch 
+et al. 1997). The establishment of a T. vaginalis infection as 
+well as infections by other pathogenic microorganisms is 
+dependent on the efficient acquisition of essential nutrients 
+such as iron, from the host environment. Trichomonads 
+can utilize various host iron-containing proteins such as lacto-
+ferrin, transferrin, ferritin, hemoglobin, and low-molecular-
+weight-iron complexes (Sutak et al. 2008). Iron is required 
+for critical housekeeping functions such as proteosynthesis, 
+genome duplication, and energy fixation. A significant portion 
+of the trichomonad energy metabolism takes place in 
+hydrogenosomes, whose function is particularly dependent 
+on iron (Gorrell 1985;   et al. 2001). These specific 
+mitochondria-related organelles contain a number of FeS pro-
+teins that catalyze key steps in ferredoxin-linked electron 
+transport, hydrogen production, and ATP synthesis at the 
+level of substrate phosphorylation (Hrdy et al. 2004). The for-
+mation of FeS clusters in the catalytic centers of apoproteins is 
+mediated by the hydrogenosomal iron-sulfur cluster (ISC) as-
+sembly machinery, which consists of approximately 10 pro-
+teins, of which cysteine desulfurase (IscS) and the molecular 
+scaffold protein IscU are the main components (Tachezy et al. 
+2001; Sutak, Dolezal, et al. 2004. Iron is also required for the 
+functions of cytosolic and nuclear FeS proteins such as Rli1p, 
+which is a protein essential for ribosome biogenesis and func-
+tion (Kispal et al. 2005; Yarunin et al. 2005). This protein is 
+highly conserved in eukaryotes, including T. vaginalis ( 
+et al. 2008). 
+In addition to housekeeping functions, iron affects specific 
+host-pathogen interactions associated with the virulence of 
+the parasite. Experiments performed in vitro have shown that 
+iron regulates the cytoadherence of T. vaginalis to target cells 
+(Mundodi et al. 2006) as well as the expression of cysteine 
+proteinases (Sommer et al. 2005; Solano- lez et al. 
+2007; Kummer et al. 2008), ecto-ATPases and ecto-phosphat-
+ases (De Jesus et al. 2006), and it increases trichomonad re-
+sistance to complement-mediated lysis (Alderete et al. 1995). 
+Iron-dependent enhancement of experimental infections in 
+mice was demonstrated with the related bovine parasite 
+Tritrichomonas foetus (Kulda et al. 1999). However, little is 
+known about the mechanisms underlying the iron-dependent 
+regulation of these processes. Positive iron regulation at the 
+transcriptional level was observed for the expression of some 
+hydrogenosomal proteins, including malic enzyme (ME) and 
+pyruvate:ferredoxin oxidoreductase (PFOR) (  et al. 
+2001). A detailed study of the iron-dependent regulation of 
+hydrogenosomal ME, which may alternatively be present on 
+the cell surface as the adhesin (AP65-1) (Hirt et al. 2007), led 
+to the identification of Myb recognition elements and novel 
+Myb proteins that appear to be components of a multifarious 
+regulatory machinery in T. vaginalis (Ong et al. 2006, 2007). 
+Two cysteine proteases, TVCP4 and TVCP12, were recently 
+reported to be regulated at the posttranscriptional level by 
+an iron-responsive element/iron response protein-like system </p>
+
+<p>(Solano- lez et al. 2007; Torres-Romero and Arroyo 
+2009). 
+We combined cDNA microarray analysis with an expressed 
+sequence tag (EST) approach to map iron-regulated genes and 
+to reconstruct iron-regulated pathways in T. vaginalis. Our 
+data revealed numerous iron-responsive genes that are 
+involved in several essential pathways, particularly in cytosolic 
+glycolysis and extended glycolysis in hydrogenosomes, as well 
+as genes that encode components of the FeS cluster assembly 
+machinery. Moreover, iron affected the expression of many 
+genes with unknown functions. </p>
+
+<p>Materials and Methods </p>
+
+<p>Cell Cultures </p>
+
+<p>Axenic cultures of T. vaginalis strain T1 were grown in trypti-
+case-yeast extract-maltose medium supplemented with 10% 
+heat-inactivated horse serum, pH 6.2 (Diamond 1957). Iron-
+rich medium (+Fe) and iron-restricted medium (ÀFe) were 
+supplemented with 100 mM Fe-nitrilotriacetate; and 50 mM 
+2-2-dipyridyl (Sigma), respectively. The cells were subcultured 
+daily in +Fe and ÀFe media for 5 days prior to experiment. </p>
+
+<p>cDNA Library Construction and DNA Sequencing </p>
+
+<p>RNA isolation kit (Pharmacia) was used to extract the total 
+RNA from cells grown under +Fe and ÀFe conditions, and 
+contaminating genomic DNA was digested with DNase I. 
+PolyA+ RNA was isolated using a PolyA+ tract mRNA isolation 
+kit (Promega). Complementary DNA was synthesized using a 
+ZAP-cDNA synthesis kit after priming with oligo-dT. The cDNA 
+was then directionally cloned into the EcoRI and XhoI sites of 
+the Uni-ZAP XR vector (Stratagene). Single and well-separated 
+plaques were cored out from agar plates and transferred to 
+96-well microtiter plates containing SM buffer. The phage 
+stocks were used as templates for cDNA insert amplification 
+with T3 and T7 primers (1 nM for each primer). The amplified 
+products were separated in 1.5% agarose gels, and clones 
+that yielded single polymerase chain reaction (PCR)-amplified 
+bands were collected for sequencing. Single-pass sequencing 
+from the 5 0 -end of the cDNA insert was initiated with a T3 
+primer using the ABI PRISM BigDye Terminator Cycle Sequen-
+cing Kit (Applied Biosystems). The sequencing products were 
+resolved and analysed on an ABI PRISM 377 (Applied Biosys-
+tems) or a MEGABACE DNA Sequencer (GE). The nucleotide 
+sequences obtained were processed with the <rs id="software-2" type="software">Phred/Phrap/ 
+Consed package</rs> (<rs corresp="#software-2" type="url">http://www.phrap.org/phredphrapconsed.html</rs>). </p>
+
+<p>Functional Annotations and Sequence Analysis </p>
+
+<p>BLAST tools were used to compare the assembled sequence 
+contigs to known Trichomonas mRNAs, putative open-read-
+ing-frames from the T. vaginalis G3 genome (Carlton et al. 
+2007) and NCBI's nonredundant (nr) nucleotide (E value ¼ </p>
+
+<p>  et al. </p>
+
+<p>GBE </p>
+
+
+
+<p>10 À15 ) and protein database. Genes were functionally anno-
+tated based on the Interpro and Gene Ontology databases. 
+Contigs with identity greater than 60% of their length were 
+annotated and assigned to KEGG pathways. 
+Putative coding regions from the EST data were collected 
+from BLASTX alignments, and the codon usage bias was cal-
+culated. A Perl script was also written to locate poly-A tails and 
+to search 10-35 bp upstream for putative mRNA poly-adeny-
+lation signals; the script allowed one mismatch and two 
+mismatches from the sequence AAUAAA. Putative signal se-
+quences and transmembrane domains in the coding regions 
+were identified by <rs id="software-4" type="software">SignalP</rs> <rs corresp="#software-4" type="version-number">3.0</rs> and <rs id="software-3" type="software">TMHMM</rs> <rs corresp="#software-3" type="version-number">2.0</rs> (<rs corresp="#software-3" type="url">http://www.cbs.dtu.dk/services/</rs>/), respectively. Putative Trichomonas pro-
+tein kinases and peptidases were identified by sequence com-
+parison with datasets downloaded from the KinBase (http:// 
+www.kinase.com) and the MEROPS (http://merops.sanger.ac 
+.uk) databases, respectively. </p>
+
+<p>Microarray Sample Preparation </p>
+
+<p>RNA from trichomonads grown in +Fe and ÀFe conditions 
+was isolated using a QuickPrep Total RNA Extraction Kit 
+(Amersham Biosciences) according to the manufacturer's in-
+structions. The total RNA was further purified using an RNeasy 
+CleanUp Kit (Qiagen). The RNA concentration and purity were 
+determined using a NanoDrop ND-1000 spectrophotometer 
+(NanoDrop Technologies). The integrity of the RNA was 
+checked by agarose gel electrophoresis. The same RNA sam-
+ples were used in parallel experiments for cDNA microarray 
+analysis and quantitative real-time PCR (qRT-PCR). cDNA 
+probes were synthesized using 2 mg of total RNA and primers 
+labeled with Cy3 and Cy5, respectively, according to the 
+manufacturer's instructions (3DNA Array 900 Expression 
+Array Detection Kit, Genisphere). Four independent RNA sam-
+ples (biological replicates) from T. vaginalis strain T1 grown 
+under +Fe and ÀFe conditions were compared. A dye-swap 
+design was used to prevent dye-associated effects on cDNA 
+synthesis. </p>
+
+<p>Microarray Analysis </p>
+
+<p>A T. vaginalis customized cDNA microarray (TvArray V2.0) was 
+implemented by the Molecular Regulation and Bioinformatics 
+Laboratory, Chang Gung University, Taiwan. The TvArray chip 
+contained PCR products amplified from 7,688 EST clones with 
+an average GC content of 38.36% and an average length of 
+384 bp. The cDNA inserts were fabricated on GAPS TM II 
+Coated Slides (Corning. USA). The microarrays were prehy-
+bridized in Coplin chambers using a solution containing 1% 
+bovine serum albumine, 1% sodium dodecyl sulfate, and 3X 
+saline sodium citrate buffer (1X SSC consists of 0.15 M NaCl 
+with 0.015 M sodium acetate). The slides were incubated at 
+50 C for 30 min, washed with water and isopropanol and 
+dried by centrifugation at 90 Â g for 3 min. Hybridization 
+with the cDNA hybridization mix and washes were performed </p>
+
+<p>following the protocol for the 3DNA Array 900 Expression 
+Array Detection Kit (Genisphere). cDNA hybridizations were 
+performed in a VersArray Hybridization Chamber (Bio-Rad) at 
+60 C overnight. Hybridizations with fluorescent 3DNA re-
+agents were performed in the same chamber at 60 C for 
+4 h. After the final washing step, the slides were dried by 
+centrifugation at 90 Â g for 3 min and scanned using the 
+GenePix 4200A scanner (Axon). GenePix Pro 5.1 software 
+was used to determine the average signal intensity and the 
+local background for each spot. The Cy3/Cy5 fluorescence 
+ratios were Log 2 transformed and normalized by LOWESS 
+normalization method in the <rs id="software-5" type="software">TIGR</rs> microarray data analysis 
+system <rs corresp="#software-5" type="version-number">version 2.19</rs> (<rs corresp="#software-5" type="creator">Saeed et al.</rs>. 2003). In total, 10 independ-
+ent hybridizations using samples from 4 independent cultures 
+and RNA extractions were performed and data of the inde-
+pendent experiments were combined. We used MeV v4.8.1 
+to determine significantly regulated genes. One-class Student 
+t test was performed and P values were based on all 1,024 
+possible permutations (cut-off was 0.01) and the proportion 
+of false significant genes was set to not exceed 10 genes. 
+The results of all experiments are available in the Array-
+Express database (http://www.ebi.ac.uk/arrayexpress/) under 
+the array design name TvArray v1.0. </p>
+
+<p>qRT-PCR Analysis </p>
+
+<p>Oligonucleotide primers (supplementary table S1, Supplemen-
+tary Material online) were designed using Primer Designer 
+software v1.01 (Scientific and Education software). The pri-
+mers were tested prior to qRT-PCR analysis using DNA as a 
+template, and single amplicons of the proper size were 
+sequenced. The RT reaction contained 1 mg of total RNA, 
+500 ng of Oligo(dT) 15 Primer (Invitrogen), 5 mM DTT 
+(Invitrogen), 2 U of RNasin (Invitrogen), 10 U of SuperScriptII 
+reverse transcriptase (Invitrogen), and 500 mM each of dATP, 
+dCTP, dGTP, and dTTP. The reactions were incubated at 42 C 
+for 50 min followed by 15 min at 70 C. For qRT-PCR, 1 ml of 
+cDNA was amplified in a 25 ml reaction mixture containing 
+each gene-specific primer at 50 nM and 12.5 ml of iQTM 
+SYBR green Supermix (Bio-Rad). All reactions were performed 
+in triplicate using a RotorGene 2000 Real-Time PCR cycler 
+(Corbett Life Science). The expression levels of each gene 
+were normalized to those of the housekeeping gene b-tubu-
+lin, expression of which is not affected by the availability of 
+iron. Relative quantitative values were obtained by the com-
+parative threshold cycle (2 ÀÁÁC 
+T ) method as described by 
+(Livak and Schmittgen 2001). </p>
+
+<p>Analysis of 5 0 Untranslated Regions </p>
+
+<p>An application based on the <rs type="software">NetBeans Platform</rs> (http://plat 
+form.netbeans.org) was developed to search for MRE-like 
+motifs in 300 bp of the upstream regions of all iron-regulated 
+genes. We searched for the MRE eukaryotic consensus (C/T) 
+AACG(G/T) and the specific MREs of the ME gene as described </p>
+
+<p>Transcriptomic Identification of +Fe and ÀFe Gene Copies </p>
+
+<p>GBE </p>
+
+<p>Genome Biol. Evol. 4(10):1017-1029. doi:10.1093/gbe/evs078 Advance Access publication September 12, 2012 </p>
+
+
+
+<p>by Hsu et al. (2009): MRE1/MRE2r (A[A/T/C/G]AACGAT, CGA 
+TA, AACGATA, and TAACGA) and MRE2f (TATCGT and TAT 
+CGTC). </p>
+
+<p>Results and Discussion </p>
+
+<p>Microarray Analysis </p>
+
+<p>To investigate changes in gene expression caused by iron avail-
+ability, trichomonads were grown in media supplemented 
+with 100 mM Fe-nitrilotriacetate (iron-rich conditions, +Fe) or 
+with the iron chelator 2,2-dipyridyl (50 mM; iron-restricted 
+conditions, ÀFe). To estimate timeframe for cultivation prior 
+to RNA isolation, we monitored enzymatic activities of PFOR 
+and ME (Rasoloson et al. 2002) as their expression is known to 
+be affected by iron availability in trichomonads (  
+et al. 2001). The activities of both enzymes decreased 
+during 24 h cultivation under ÀFe conditions and then 
+remained stable (supplementary fig. S1, Supplementary Mate-
+rial online). Thus, to assure ultimate effect of iron on tricho-
+monads, we cultivated the cells for 5 days under +Fe/ÀFe 
+conditions prior to each experiment. The total RNA was 
+then isolated from both treatment groups and hybridized 
+onto DNA microarray slides containing PCR products amplified 
+from 7,688 EST clones representing 4,950 unique T. vaginalis 
+genes. A direct pairwise comparison strategy was used to 
+identify differentially expressed genes. Altogether, 10 inde-
+pendent hybridizations were performed using samples from 
+four independent experiments. Genes whose expression ratios 
+changed by a factor of at least 1.3 and had P values lower 
+than 0.01 were considered to be significantly regulated by 
+iron. In total, 195 genes met this criterion that represent ap-
+proximately 4% of unique genes; 117 and 78 genes were 
+upregulated in cells cultivated under +Fe and ÀFe conditions, 
+respectively (fig. 1 and supplementary table S2a, Supplemen-
+tary Material online). The distribution of genes into fold 
+change categories is given in supplementary table S2b, Sup-
+plementary Material online. The complete dataset including 
+genes expression of which was not affected by iron was de-
+posited in the ArrayExpress database (http://www.ebi.ac.uk/ 
+arrayexpress/) under the array design name TvArray v1.0. 
+To verify the cut-off limit and to validate the microarray 
+data, we selected 15 genes for qRT-PCR analyses. The selec-
+tion included genes that were not affected by iron (ferredoxin 
+6, IscS-2), genes with moderate changes in expression (À1.42-
+to 1.67-fold change) and genes with a greater than 2-fold 
+change in expression (hydrogenase, alcohol dehydrogenase, 
+and PFOR) according to the microarray data (table 1). In each 
+instance, the qRT-PCR confirmed regulation trends observed 
+in the microarray analysis. The ratios between paired samples 
+(fold change) determined by qRT-PCR were, however, greater 
+than the fold change obtained for the same gene by micro-
+array analysis. These results are consistent with those of Yuen 
+et al. (2002) and Dallas et al. (2005), who showed that </p>
+
+<p>microarray analysis underestimates the changes in gene ex-
+pression compared with the more qRT-PCR assay, although 
+correlations between microarray and qRT-PCR data are gen-
+erally strong. The list of genes that met the cut-off limit 1.3 in 
+our study included majority of genes coding for proteins that 
+were showed previously to be affected by iron on protein level 
+in T. vaginalis and related parasite T. foetus such as PFOR, 
+hydrogenosomal ME, hydrogenase, ferredoxin, cytosolic 
+malate dehydrogenase, and cysteine protease (  
+et al. 2001; De Jesus et al. 2007; Dolezal et al. 2007) that 
+further supports validity of the microarray analysis. </p>
+
+<p>Comparative EST Analysis </p>
+
+<p>As a second technique to identify differentially expressed 
+genes, we employed a comparative EST approach (Lee et al. 
+1995). 10,042 and 9,032 ESTs were sequenced from two 
+distinct cDNA libraries that were derived from trichomonads 
+grown under +Fe and ÀFe conditions, respectively. The rela-
+tive frequency (RF) of an EST was calculated as the number of 
+ESTs per 10,000 clones. The upregulation index was calcu-
+lated as the difference between the RF under +Fe conditions 
+and the RF under ÀFe conditions. The distribution of unique 
+genes to upregulation index categories is summarized in sup-
+plementary table S2d, Supplementary Material online. The 
+upregulation index values ranged from 1 to 70, which was 
+considerably higher than the range of the fold change based 
+on microarray analysis. Consequently we used higher cut-off 
+limit: a gene was considered to be significantly upregulated if 
+the upregulation index was greater than or equal to five. This 
+criterion met 336 genes ($5%) out of a total number of 
+6,381 unique genes that were generated by the assembly of 
+the ESTs. Of those genes, 165 were upregulated under +Fe 
+conditions, and 171 were upregulated under ÀFe conditions 
+(supplementary table S2c, Supplementary Material online). A 
+representation of the gene categories that were affected by 
+iron availability is shown in figure 2. </p>
+
+<p>Major Iron-Regulated Pathways </p>
+
+<p>Glycolysis </p>
+
+<p>The energy metabolism of T. vaginalis relies on fermentative 
+carbohydrate catabolism in the cytosol that is extended to 
+malate or pyruvate degradation in the hydrogenosome 
+( ller et al. 2012). At least one (but usually several) of mul-
+tiple gene copies encoding glycolytic proteins showed signifi-
+cant iron-dependent regulation (fig. 3 and supplementary 
+table S3, Supplementary Material online), with similar results 
+obtained from both methods (microarray and EST analysis). 
+The enzymes that supply the glycolytic pathway with sub-
+strates (glucokinase, glycogen phosphorylase, and phospho-
+glucomutase) and the successive glycolytic enzymes were 
+significantly upregulated under +Fe conditions. A striking 
+exception was the upregulation of one of the four detected 
+glyceraldehyde-3-phosphate dehydrogenase (GAPDH) genes </p>
+
+<p>  et al. </p>
+
+<p>GBE </p>
+
+
+
+<p>α </p>
+
+<p>A 
+B </p>
+
+<p>FIG. 1.-Heatmap visualization of iron-regulated genes based on microarray analysis. Results of 10 experiments are given in columns A-J. (A) genes 
+upregulated in +Fe conditions; (B) genes upregulated in ÀFe conditions. </p>
+
+<p>Transcriptomic Identification of +Fe and ÀFe Gene Copies </p>
+
+<p>GBE </p>
+
+<p>Genome Biol. Evol. 4(10):1017-1029. doi:10.1093/gbe/evs078 Advance Access publication September 12, 2012 </p>
+
+
+
+<p>(TVAG_366380) under ÀFe conditions according to the EST 
+analysis, as the other three GAPDH genes were upregulated 
+under +Fe conditions (fig. 3 and supplementary table S3, 
+Supplementary Material online). It is tempting to speculate 
+that GAPDH TVAG_366380 gene copy encodes protein 
+with the function distinct from other paralogs. 
+Multifunctional character of GAPDH was reported in macro-
+phages where GAPDH serves as a surface receptor that is 
+upregulated upon iron depletion (Rawat et al. 2012). 
+Interestingly, T. vaginalis possesses two types of phosphofruc-
+tokinase (PFK) (Liapounova et al. 2006) Inorganic pyrophos-
+phate 
+(PPi)-dependent 
+PFK 
+catalyzes 
+reversible 
+phosphorylation of fructose-6-phosphate in the cytosol 
+(Mertens et al. 1998). More recently, putative 
+ATP-dependent PFK has been identified in proteome of hydro-
+genosomes (Rada et al. 2011). Two of the three genes that 
+encode the PPi-dependent PFK and one of two genes for the 
+ATP-dependent PFK were upregulated under +Fe conditions 
+(supplementary table S3, Supplementary Material online). The 
+most significant changes in iron-dependent gene expression 
+were associated with the pathways that follow the conversion 
+of phosphoenolpyruvate (PEP), the branch-point of carbohy-
+drate metabolism. The enzymes that catalyze the formation of 
+malate from PEP via oxaloacetate (PEP carboxykinase and 
+malate dehydrogenase) were considerably upregulated 
+under +Fe conditions (fig. 3). In contrast, the pathway that 
+converts malate to lactate was upregulated under ÀFe condi-
+tions. This pathway involves cytosolic NADP-dependent ME 
+and NADH-dependent lactate dehydrogenase (fig. 3). These 
+findings indicate that under +Fe conditions, malate </p>
+
+<p>preferentially enters the hydrogenosome and serves as a sub-
+strate for hydrogenosomal energy metabolism. However, 
+under ÀFe, when hydrogenosomal metabolism is ceased, 
+malate is metabolized in the cytosol via pyruvate to lactate. 
+Thus, the ability to switch between hydrogenosomal and cyto-
+solic malate metabolism seems to be important for the ability 
+of trichomonads to quickly adapt to changes in iron availability 
+in their environment. Similar changes in carbohydrate metab-
+olism were reported in T. vaginalis that had impaired hydro-
+genosomal metabolism because of the induction of 
+metronidazole resistance (Kulda et al. 1993). 
+Besides lactate, T. vaginalis also produces low amount of 
+ethanol ( et al. 1986). In our dataset, we identi-
+fied two types of alcohol dehydrogenases (ADHs) that differ in 
+the metal ion present in the active site of the enzyme. Notably, 
+four of five genes coding for the iron-containing ADH were 
+upregulated under +Fe conditions, whereas one gene was 
+upregulated under ÀFe conditions together with one of two 
+genes coding for the zinc-containing ADH (fig. 3). In the 
+related organism T. foetus, acetaldehyde that is reduced by 
+ADH to ethanol is formed from pyruvate by the enzyme pyru-
+vate decarboxylase (Sutak, Tachezy, et al. 2004). However, 
+pyruvate decarboxylase activity was not detected in T. vagina-
+lis, and the gene encoding this enzyme was not identified in 
+the genome (Carlton et al. 2007). Thus, the pathway respon-
+sible for the formation of acetaldehyde remains unclear. </p>
+
+<p>Hydrogenosomal Energy Metabolism </p>
+
+<p>Iron increased the transcription of all critical enzymes in hydro-
+genosomal carbohydrate catabolism; at least one copy of each 
+gene was significantly upregulated (fig. 4 and supplementary 
+table S3, Supplementary Material online). PFOR and ME, 
+which are the enzymes that catalyze the oxidative decarboxyl-
+ation of the hydrogenosomal substrates pyruvate and malate, 
+respectively, were the most highly upregulated enzymes of 
+the pathway. Three genes encoding PFOR (PFOR-A, BI and 
+BII) displayed the highest upregulation observed in the micro-
+array analysis (4.01, 3.71, and 3.64, respectively), and also had 
+high upregulation scores determined by the EST analysis (32, 
+18, and 9, respectively) (supplementary table S2a and c, Sup-
+plementary Material online). The gene coding for ME-H was 
+the most highly upregulated according to the EST analysis, 
+with an upregulation index value of 63 (supplementary 
+table S2c, Supplementary Material online). The re-oxidation 
+of NADH resulting from ME activity is mediated by heterodi-
+meric NADH dehydrogenase (remnant of respiratory complex 
+I). The 51 kDa subunit of this enzyme was significantly upre-
+gulated under +Fe conditions according to EST analysis, but 
+the upregulation of the 24 kDa subunit did not reach the cut-
+off limit. Electrons generated by PFOR are transferred via fer-
+redoxin to the hydrogenase responsible for the synthesis of 
+molecular hydrogen. The genes that code for ferredoxin-1 and 
+the 64 kDa [Fe]-hydrogenase were upregulated under +Fe </p>
+
+<p>Table 1 
+Fold Changes Detected by qRT-PCR in Comparison with Results of 
+Microarray Analysis </p>
+
+<p>TrichDB 1.2 
+Accession No. </p>
+
+<p>Annotation 
+Microarrays 
+Upregulation </p>
+
+<p>Rate* </p>
+
+<p>Fold Change 
+Detected by </p>
+
+<p>qRT-PCR** </p>
+
+<p>TVAG_239660 
+IscS-2 
+NSC 
+NSC 
+TVAG_251200 
+Ferredoxin 6 
+NSC 
+NSC </p>
+
+<p>TVAG_129940 
+IBP39 
+1.11 
+1.88 
+TVAG_348330 
+Glycogen phosphorylase 
+1.24 
+1.95 </p>
+
+<p>TVAG_281070 
+Phosphofructokinase 
+1.31 
+4.62 
+TVAG_292710 
+Ferredoxin 4 
+1.33 
+2.89 </p>
+
+<p>TVAG_104250 
+Hmp-35-2 
+1.56 
+2.28 
+TVAG_238830 
+Malic enzyme B 
+1.67 
+2.51 </p>
+
+<p>TVAG_198110 
+PFO A 
+4.01 
+24.96 
+TVAG_037570 
+Iron hydrogenase 64 kDa 
+2.48 
+109.64 </p>
+
+<p>TVAG_422780 
+Alcohol dehydrogenase 
+2.57 
+31.44 
+TVAG_165030 
+Malate dehydrogenase 
+À1.33 
+À1.62 
+TVAG_381311 
+Lactate dehydrogenase 
+À1.81 
+À5.02 
+TVAG_361540 
+IscA-2 
+À1.36 
+À2.26 
+TVAG_008840 
+NfU-2 
+À1.42 
+À1.47 </p>
+
+<p>NOTE.-NSC, no significant change of gene expression. 
+*P 0.01. 
+**P 0.05. </p>
+
+<p>  et al. </p>
+
+<p>GBE </p>
+
+
+
+<p>conditions. Finally, the acetyl-CoA that is generated by PFOR 
+activity is used in two steps of ATP synthesis: the reactions 
+catalyzed by acetate:succinate-CoA transferase (ASCT) and 
+heterodimeric succinyl-CoA synthase (SCS). One of the four 
+ASCT genes and all of the genes that encode SCS subunits 
+showed significant upregulation under +Fe conditions. </p>
+
+<p>FeS Cluster Assembly </p>
+
+<p>The biosynthesis of the ISCs that are necessary for the matur-
+ation of FeS proteins is an indispensable process that occurs in 
+the hydrogenosomes of T. vaginalis. In contrast to the com-
+ponents of energy metabolism, the ISC assembly machinery 
+appeared to be upregulated under ÀFe conditions (fig. 4 and 
+supplementary table S3, Supplementary Material online). Our 
+screen detected genes that encode two paralogs of the 
+scaffold protein IscA, three Nfu paralogs, and the cysteine 
+desulfurase IscS-2. Frataxin was previously shown to be </p>
+
+<p>upregulated under ÀFe conditions using a nuclear run-on 
+assay (Dolezal et al. 2007). This trend was also observed in 
+our analysis, but the cut off limit was not reached (EST upre-
+gulation index À2). Interestingly, ÀFe conditions also caused a 
+significant increase in the expression of the hydrogenase 
+maturase (Hyd-G) that is required for the assembly of the 
+hydrogenase-specific H cluster (Putz et al. 2006). Altogether, 
+these results suggest a common regulatory mechanism for the 
+genes that encode the multiple components of the ISC assem-
+bly machinery that are upregulated under ÀFe conditions. This 
+regulation might be related to the sensing of an increased 
+cellular demand for FeS cluster synthesis during ÀFe 
+conditions. </p>
+
+<p>Hydrogenosomal Membrane Proteins </p>
+
+<p>Hydrogenosomes are surrounded by two membranes that 
+possess a specific set of proteins that facilitate the exchange </p>
+
+<p>amino acids metabolism </p>
+
+<p>carbohydrate metabolism </p>
+
+<p>cytoskeleton and interacting proteins </p>
+
+<p>FeS clusters assembly </p>
+
+<p>hypothetical proteins </p>
+
+<p>kinases and phosphatases </p>
+
+<p>membrane and vesicular transport </p>
+
+<p>oxidoreductases </p>
+
+<p>peptidases </p>
+
+<p>protein folding and modification </p>
+
+<p>transcription and translation </p>
+
+<p>unknown function </p>
+
+<p>0 </p>
+
+<p>10 </p>
+
+<p>20 </p>
+
+<p>30 </p>
+
+<p>40 </p>
+
+<p>50 </p>
+
+<p>+Fe </p>
+
+<p>Number of proteins </p>
+
+<p>Functional category </p>
+
+<p>80 </p>
+
+<p>0 </p>
+
+<p>5 </p>
+
+<p>10 </p>
+
+<p>15 </p>
+
+<p>20 </p>
+
+<p>70 </p>
+
+<p>40 </p>
+
+<p>-Fe </p>
+
+<p>Number of proteins </p>
+
+<p>Functional category </p>
+
+<p>microarrays </p>
+
+<p>ESTs </p>
+
+<p>FIG. 2.-Classification of iron-regulated genes by functional category. Numbers of genes that were upregulated under iron-rich (+Fe) and iron-restricted 
+(ÀFe) conditions. Results of microarray and EST analysis are represented by open and hatched bars, respectively. Color code of functional categories is given 
+in the legend. </p>
+
+<p>Transcriptomic Identification of +Fe and ÀFe Gene Copies </p>
+
+<p>GBE </p>
+
+<p>Genome Biol. Evol. 4(10):1017-1029. doi:10.1093/gbe/evs078 Advance Access publication September 12, 2012 </p>
+
+
+
+<p>Glucose </p>
+
+<p>Glucose </p>
+
+<p>Glucose-6-P </p>
+
+<p>Fructose-6-P </p>
+
+<p>Fructose-1,6-bisP </p>
+
+<p>P 
+-
+3 
+-
+e 
+d 
+y 
+h 
+e 
+d 
+l 
+a 
+r 
+e 
+c 
+y 
+l 
+G 
+P 
+-
+e 
+n 
+o 
+t 
+e 
+c 
+a 
+y 
+x 
+o 
+r 
+d 
+y 
+h 
+i 
+D </p>
+
+<p>ATP </p>
+
+<p>ADP </p>
+
+<p>ATP </p>
+
+<p>ADP </p>
+
+<p>ATP </p>
+
+<p>ADP </p>
+
+<p>glucokinase </p>
+
+<p>glucose-6-P 
+isomerase </p>
+
+<p>Glycogen 
+Glucose-1-P </p>
+
+<p>P </p>
+
+<p>glycogen 
+phosphorylase </p>
+
+<p>P-glucomutase </p>
+
+<p>CELL 
+MEMBRANE </p>
+
+<p>PP </p>
+
+<p>P </p>
+
+<p>PFK </p>
+
+<p>fructose-1,6-bisP aldolase </p>
+
+<p>triose-P 
+isomerase </p>
+
+<p>1,3-bisP-glycerate </p>
+
+<p>3-P-glycerate </p>
+
+<p>2-P-glycerate </p>
+
+<p>P-enolpyruvate </p>
+
+<p>Pyruvate </p>
+
+<p>P </p>
+
+<p>PP </p>
+
+<p>Oxaloacetate </p>
+
+<p>Malate </p>
+
+<p>PEPCK </p>
+
+<p>malate 
+dehydrogenase </p>
+
+<p>CO </p>
+
+<p>P </p>
+
+<p>NADH </p>
+
+<p>NADPH </p>
+
+<p>CO 2 </p>
+
+<p>2 </p>
+
+<p>H O </p>
+
+<p>2 </p>
+
+<p>H O </p>
+
+<p>2 </p>
+
+<p>Lactate </p>
+
+<p>P-glycerate kinase </p>
+
+<p>pyruvate-P 
+dikinase </p>
+
+<p>pyruvate 
+kinase </p>
+
+<p>enolase </p>
+
+<p>lactate dehydrogenase 
+malic enzyme </p>
+
+<p>glyceraldehyde-3-P 
+dehydrogenase </p>
+
+<p>? </p>
+
+<p>acetaldehyde </p>
+
+<p>Ethanol </p>
+
+<p>NAD(P)H </p>
+
+<p>NADH </p>
+
+<p>NAD + </p>
+
+<p>P </p>
+
+<p>NAD(P) </p>
+
+<p>+ </p>
+
+<p>NADP </p>
+
+<p>+ </p>
+
+<p>alcohol dehydrogenase </p>
+
+<p>NAD </p>
+
+<p>+ </p>
+
+<p>iron 
+zinc </p>
+
+<p>NADH 
+NAD </p>
+
+<p>+ </p>
+
+<p>AMP </p>
+
+<p>ATP </p>
+
+<p>P-glycerate mutase </p>
+
+<p>i </p>
+
+<p>i </p>
+
+<p>i </p>
+
+<p>i </p>
+
+<p>i </p>
+
+<p>i </p>
+
+<p>Microarrays 
+fold change </p>
+
+<p>-2.1 to -4 </p>
+
+<p>-1.5 to -2 </p>
+
+<p>-5 to -15 </p>
+
+<p>2 to 1.51 </p>
+
+<p>4 to 2.1 </p>
+
+<p>1.5 to 1.3 
+15 to 5 </p>
+
+<p>-16 to -30 </p>
+
+<p>-1.3 to -1.5 </p>
+
+<p>unregulated gene </p>
+
+<p>30 to 16 </p>
+
+<p>&gt;-31 </p>
+
+<p>&gt;31 
+Fe+ </p>
+
+<p>Fe-</p>
+
+<p>EST analysis 
+upregulation index </p>
+
+<p>HYDROGENOSOME </p>
+
+<p>FIG. 3.-Iron-dependent regulation of genes encoding enzymes in glycolytic pathway. Each double square represents a single gene copy. Triangles 
+represent the results of the microarray analysis, and circles represent the results of the EST analysis. Upregulation under +Fe and ÀFe conditions is indicated 
+by red and green colors, respectively. The empty squares represent detected, but unregulated gene copies. </p>
+
+<p>  et al. </p>
+
+<p>GBE </p>
+
+
+
+<p>of metabolites between the cytosol and organelles. We de-
+tected four hydrogenosomal membrane proteins [two Hmp35 
+and two ADP/ATP carriers (AACs)] that were differentially 
+expressed in response to iron availability (supplementary 
+table S3, Supplementary Material online). Hmp35, which is 
+a unique form of a b-barrel protein that is localized to the 
+outer hydrogenosomal membrane, was significantly upregu-
+lated under +Fe conditions. Hmp35 is a cysteine-rich protein 
+with the cysteine residues clustered near the C terminus, 
+where they form a metal-binding motif (Dyall et al. 2003; 
+Rada et al. 2011). These structural properties, together with 
+the observed upregulation of the protein under +Fe condi-
+tions, allow us to speculate that Hmp35 may be involved in 
+iron transport. Five members of the mitochondrial carrier pro-
+tein family (MCF) that serve as AACs in the inner </p>
+
+<p>hydrogenosomal membrane have been identified (Dyall 
+et al. 2000; Rada et al. 2011). In this study, two of these 
+proteins showed significant iron-dependent regulation: 
+AAC-1 was upregulated under ÀFe conditions, whereas 
+AAC-2 was upregulated under +Fe conditions (fig. 4 and sup-
+plementary table S3, Supplementary Material online). As 
+described earlier, active hydrogenosomal energy metabolism 
+is dependent on iron. Under these conditions, a portion of the 
+ATP synthesized in the hydrogenosomes is directly used by 
+processes such as ISC assembly and HSP-70-dependent pro-
+tein transport and maturation. Some ATP could also be ex-
+ported by AACs to the cytosol in exchange for ADP as in 
+mitochondria. However, ATP is also required for hydrogeno-
+somal functions under iron-limiting conditions when the ex-
+pression of enzymes necessary for ATP synthesis is ceased. </p>
+
+<p>CoA </p>
+
+<p>Malate 
+Malate 
+NAD + </p>
+
+<p>NADH </p>
+
+<p>CO 2 </p>
+
+<p>2H + </p>
+
+<p>Pyruvate 
+Pyruvate </p>
+
+<p>Acetate 
+Acetate </p>
+
+<p>CO 2 </p>
+
+<p>Succinate 
+Succinate-CoA </p>
+
+<p>Pi </p>
+
+<p>ATP 
+ADP </p>
+
+<p>Acetyl-CoA </p>
+
+<p>2H 
++ </p>
+
+<p>H 2 
+H 2 </p>
+
+<p>H 2 
+H 2 </p>
+
+<p>-
+fdx </p>
+
+<p>-
+fdx </p>
+
+<p>+ 
+fdx </p>
+
+<p>+ 
+fdx </p>
+
+<p>51kDa 
+24kDa </p>
+
+<p>hydrogenase </p>
+
+<p>malic enzyme </p>
+
+<p>ASCT </p>
+
+<p>complex 1 </p>
+
+<p>+ 
+fdx </p>
+
+<p>-
+fdx </p>
+
+<p>Hydrogenase </p>
+
+<p>IscA </p>
+
+<p>[FeS] </p>
+
+<p>Isd11 
+IscS </p>
+
+<p>Cysteine 
+Alanine </p>
+
+<p>Fe 
+S </p>
+
+<p>frataxin </p>
+
+<p>HydG </p>
+
+<p>Nfu </p>
+
+<p>AAC-2 </p>
+
+<p>Hmp35 </p>
+
+<p>Fe? </p>
+
+<p>Cysteine </p>
+
+<p>Fe </p>
+
+<p>AAC-1 </p>
+
+<p>hydrogenase </p>
+
+<p>Microarrays 
+fold change </p>
+
+<p>-2.1 to -4 </p>
+
+<p>-1.5 to -2 </p>
+
+<p>-5 to -15 </p>
+
+<p>2 to 1.51 </p>
+
+<p>4 to 2.1 </p>
+
+<p>1.5 to 1.3 
+15 to 5 </p>
+
+<p>-16 to -30 </p>
+
+<p>-1.3 to -1.5 </p>
+
+<p>unregulated gene </p>
+
+<p>30 to 16 </p>
+
+<p>&gt;-31 </p>
+
+<p>&gt;31 
+Fe+ </p>
+
+<p>Fe-</p>
+
+<p>EST analysis 
+upregulation index </p>
+
+<p>Apoproteins </p>
+
+<p>SCS </p>
+
+<p>PFOR </p>
+
+<p>FIG. 4.-Iron-dependent regulation of hydrogenosomal metabolism. Each double square represents a single gene copy. Triangles represent the results of 
+the microarray analysis, and circles represent the results of the EST analysis. Upregulation under +Fe and ÀFe conditions is indicated by red and green colors, 
+respectively. The empty squares represent detected, but unregulated gene copies. </p>
+
+<p>Transcriptomic Identification of +Fe and ÀFe Gene Copies </p>
+
+<p>GBE </p>
+
+<p>Genome Biol. Evol. 4(10):1017-1029. doi:10.1093/gbe/evs078 Advance Access publication September 12, 2012 </p>
+
+
+
+<p>Thus, ATP might be imported from the cytosol by AACs. The 
+expression of AAC-1 is increased under ÀFe conditions, which 
+renders it the most likely candidate for the transportation of 
+ATP into hydrogenosomes. </p>
+
+<p>Amino Acid Metabolism </p>
+
+<p>The arginine dihydrolase pathway contributes to energy me-
+tabolism in T. vaginalis (Yarlett et al. 1996). Two components 
+of the pathway, ornithine carbamoyltransferase and carba-
+mate kinase, were significantly upregulated under +Fe condi-
+tions (supplementary table S3, Supplementary Material 
+online), whereas arginine deiminase, which was recently 
+shown to be localized in hydrogenosomes (Morada et al. 
+2011), was not regulated by iron availability. 
+Methionine can be directly degraded to a-ketobutyrate, 
+ammonia, and thiols or converted to homocysteine. These 
+two metabolic pathways appear to be regulated by iron in 
+opposing manners. Methionine degradation is catalyzed by 
+the unique enzyme methionine g-lyase (McKie et al. 1998). 
+We found that one of the two genes that encode this enzyme 
+was upregulated under +Fe conditions. In contrast, genes that 
+encode three components of the homocysteine-forming path-
+way (methionine adenosyltransferase, S-adenosyl methionine-
+dependent methyltransferase, and S-adenosyl homocysteine 
+hydrolase) appear to be upregulated under ÀFe conditions </p>
+
+<p>(fig. 5 and supplementary table S3, Supplementary Material 
+online). </p>
+
+<p>Proteases </p>
+
+<p>Multiple proteinases have been found in T. vaginalis (Carlton 
+et al. 2007), and many of them have been implicated in the 
+virulence of the parasite (Dailey et al. 1990; Ramon-Luing et al. 
+2010). The expression of 16 genes coding for cysteine prote-
+ases and metallopeptidases was found to be regulated by iron, 
+and 9 of these genes were upregulated under ÀFe conditions 
+(supplementary table S3, Supplementary Material online). De 
+Jesus et al. (2007) used comparative proteomics to show that 
+CP3 and the legumain-like cysteine proteinase-1(LEGU1) are 
+downregulated under ÀFe conditions, and their results are 
+consistent with upregulation of these proteins that we 
+observed with EST under +Fe conditions. Kummer et al. 
+(2008) isolated an extracellular protein fraction from T. vagi-
+nalis that they called CP30 and that contained CP2, CP3, CP4, 
+and CPT, and they demonstrated that trichomonads grown 
+under ÀFe conditions had increased CP30 fraction protease 
+activity. These results are consistent with the increased tran-
+scription of CP2 observed in our experiments (supplementary 
+table S3, Supplementary Material online), whereas opposite 
+trend we obtained for CP3 and CPT (supplementary table S3, 
+Supplementary Material online). </p>
+
+<p>methionine </p>
+
+<p>S-adenosyl methionine </p>
+
+<p>S-adenosyl homocysteine </p>
+
+<p>homocysteine </p>
+
+<p>ATP, H O </p>
+
+<p>2 </p>
+
+<p>Pi,PPi </p>
+
+<p>Methionine adenosyltransferase </p>
+
+<p>Methionine γ-lyase </p>
+
+<p>acceptor </p>
+
+<p>methylated acceptor </p>
+
+<p>H O </p>
+
+<p>2 </p>
+
+<p>adenosine </p>
+
+<p>NH , methanthiol </p>
+
+<p>3 </p>
+
+<p>α -ketobutyrate </p>
+
+<p>S-adenosyl methionine dep. 
+methyltransferase </p>
+
+<p>S-adenosyl homocysteine 
+hydrolase </p>
+
+<p>Microarrays 
+fold change </p>
+
+<p>-2.1 to -4 </p>
+
+<p>-1.5 to -2 </p>
+
+<p>-5 to -15 </p>
+
+<p>2 to 1.51 </p>
+
+<p>4 to 2.1 </p>
+
+<p>1.5 to 1.3 
+15 to 5 </p>
+
+<p>-16 to -30 </p>
+
+<p>-1.3 to -1.5 </p>
+
+<p>unregulated gene </p>
+
+<p>30 to 16 </p>
+
+<p>&gt;-31 </p>
+
+<p>&gt;31 
+Fe+ </p>
+
+<p>Fe-</p>
+
+<p>EST analysis 
+upregulation index </p>
+
+<p>FIG. 5.-Iron-regulated genes involved in methionine metabolism. Each double square represents a single gene copy. Triangles represent the results of 
+the microarray analysis, and circles represent the results of the EST analysis. Upregulation under +Fe and ÀFe conditions is indicated by red and green colors, 
+respectively. The empty squares represent detected, but unregulated gene copies. </p>
+
+<p>  et al. </p>
+
+<p>GBE </p>
+
+
+
+<p>Regulation of Transcription </p>
+
+<p>Proteins that are involved in the regulation of transcription 
+and translation, including ribosomal proteins and proteins 
+that affect DNA metabolism, constitute approximately 10% 
+of the iron-regulated genes (fig. 2 and supplementary table 
+S3, Supplementary Material online). Of particular interest are 
+the Myb-like transcription factors, which are exceptionally 
+abundant in the T. vaginalis genome and have been suggested 
+to be major regulators of gene transcription (Hsu et al. 2009). 
+In our dataset, we detected the expression of 97 Myb-like 
+DNA-binding proteins, five of which were significantly regu-
+lated by iron. One gene was upregulated under +Fe condi-
+tions, and four genes were upregulated under ÀFe conditions 
+(supplementary table S3, Supplementary Material online). To 
+date, four T. vaginalis Myb-like proteins have been chara-
+cterized (Ong et al. 2006, 2007; Hsu et al. 2009; Smith 
+et al. 2011). It was demonstrated that the temporal and 
+iron-inducible transcription of the ME is regulated by the syn-
+ergistic or antagonistic actions of three proteins that can se-
+lectively bind to two discrete Myb protein recognition sites in 
+the 5 0 -untranslated regions (5'-UTR) of the ME gene. Myb1 
+and Myb2, that play the roles of a repressor and an activator, 
+respectively, are able to bind to both sites with affinities that 
+differ over time and according to iron availability (Ong et al. 
+2006, 2007). Myb3 activates basal and prolonged iron-indu-
+cible transcription by binding solely to the MRE1 site (Hsu et al. 
+2009). In the T. vaginalis genome, there are three genes that 
+encode Myb-3-like proteins, and all three products contain 
+conserved base-contacting amino acids. Hsu et al. (2009) </p>
+
+<p>showed that the gene copy TVAG_475500 is upregulated 
+under +Fe conditions. In our screen, we detected a second 
+copy (TVAG_252420) that was upregulated under ÀFe con-
+ditions. We also identified a Myb2 gene; however, under our 
+experimental conditions, Myb2 was not regulated by iron, 
+which contradicts the findings of Ong et al. (2007). 
+Because MRE sites were demonstrated to be essential for 
+the iron-dependent regulation of ME, we searched 300 bp of 
+the 5 0 -UTR of all iron-regulated genes detected in our screen 
+for the presence of MRE motifs. We found numerous genes 
+that had upstream sequences containing the MRE eukaryotic 
+consensus sequence (C/T)AACG(G/T) or specific MRE-like sites 
+similar to those found in the ME gene (supplementary table 
+S4, Supplementary Material online). The genes that contain 
+both MRE1/MRE2r and MRE2f in their upstream regions, and 
+that have the motifs in the same order as in ME upstream 
+region, are listed in table 2. Interestingly, the 5 0 -UTR of the 
+genes that encode ADH, hypothetical protein TVAG_383310 
+and thioredoxin reductase contain both elements at positions 
+similar to those in the 5 0 -UTR sequence of the ME gene 
+(table 2), which suggests a similar multifarious Myb-mediated 
+regulation of transcription. </p>
+
+<p>Conclusions </p>
+
+<p>The 160 Mb T. vaginalis genome is the largest protozoan 
+genome that has been sequenced thus far (Carlton et al. 
+2007). A unique feature of the Trichomonas genome among 
+all sequenced eukaryotes is the massive expansion of many 
+gene families and the retention of multiple copies for almost </p>
+
+<p>Table 2 
+Iron-Regulated Genes That Contain Both MRE1/MRE2r and MRE2f in Their Upstream Regions </p>
+
+<p>TrichDB 1.2 Accession No. 
+Annotation 
+MRE1/MRE2r 
+MRE2f </p>
+
+<p>+Fe 
+ANAACGATA 
+TATCGT </p>
+
+<p>À111/À103 
+À59/À54 </p>
+
+<p>TVAG_422780 
+Alcohol dehydrogenase 
+À136/À129 
+À37/À32 </p>
+
+<p>CGATA 
+TATCGT </p>
+
+<p>À107/À103 
+À59/À54 </p>
+
+<p>TVAG_035180 
+Arp2/3 complex subunit 
+À300/À296 
+À45/À40 
+TVAG_218790 
+Conserved hypothetical protein 
+À230/À226 
+À110/À105 
+TVAG_405900 
+Phosphoglucomutase 
+À286/À282 
+À199/À194 </p>
+
+<p>TAACGA 
+TATCGTC </p>
+
+<p>À110/À105 
+À59/À53 </p>
+
+<p>TVAG_072120 
+Conserved hypothetical protein 
+À173/À168 
+À19/À13 </p>
+
+<p>ÀFe 
+CGATA 
+TATCGT </p>
+
+<p>À107/À103 
+À59/À54 </p>
+
+<p>TVAG_383370 
+Conserved hypothetical protein 
+À114/À110 
+À81/À76 
+TVAG_474980 
+Thioredoxin reductase 
+À151/À147 
+À107/À102 </p>
+
+<p>NOTE.-The numbers indicate position of the sequence motifs of translation start site. Values in bold indicate position of the motifs in the 5 0 -UTR of ME (Ong et al. 2006). </p>
+
+<p>Transcriptomic Identification of +Fe and ÀFe Gene Copies </p>
+
+<p>GBE </p>
+
+<p>Genome Biol. Evol. 4(10):1017-1029. doi:10.1093/gbe/evs078 Advance Access publication September 12, 2012 </p>
+
+
+
+<p>all genes (Cui et al. 2010). The mechanistic origins and biolo-
+gical functions of these multiple gene copies are yet unknown, 
+but it is clear that they provided abundant starting material for 
+evolutionary innovation while also contributing to the genetic 
+robustness of the organism (Li et al. 2010). Indeed, because 
+the T. vaginalis genome appears to be haploid, genetic redun-
+dancy might be particularly important to buffer gene muta-
+tions. Moreover, the differential expression of paralogous 
+copies could be necessary for optimal growth in response to 
+various environmental conditions (Giaever et al. 2002). We 
+demonstrated that iron, a critical nutrient for T. vaginalis, 
+has broad effects on the parasite's trancriptome, which is 
+consistent with the observation that iron modulates tricho-
+monad growth, metabolic fluxes, and virulence phenotypes 
+such as cytoadherence (Mundodi et al. 2006). However, we 
+found that in most cases iron regulated the expression of a 
+single gene or a portion of the gene copies, whereas the ex-
+pression of other paralogous copies of the gene was iron 
+independent. 
+The strongest iron-dependent upregulation we observed 
+was for ME and PFOR, enzymes that play critical roles in hydro-
+genosomal energy metabolism and that are known to exhibit 
+iron-dependent changes in protein expression and enzyme 
+activity (Vanacova et al. 2001; Leitsch et al. 2009. However, 
+we also found that there were four gene copies for ME, and 
+two for PFOR, whose expression was not iron dependent. Of 
+all major enzymes involved in hydrogenosomal energy metab-
+olism, only SCS, which mediates the final step of ATP synthe-
+sis, appears to be an exception in that the expression of all 
+copies of both SCS subunits was iron dependent. Further stu-
+dies of expression profiles for cells grown under various con-
+ditions such as the absence of external glucose, temperature 
+or oxygen stress, the induction of the amoeboid form or com-
+parison with nonpathogenic forms should lead to further in-
+sights as to how individual copies among the myriad 
+trichomonad gene families have come to fall under differential 
+iron regulation during evolution. </p>
+
+<p>Supplementary Material </p>
+
+<p>Supplementary figure S1 and tables S1-S4 are available 
+at Genome Biology and Evolution online (http://www.gbe 
+.oxfordjournals.org/). </p>
+
+<p>Acknowledgments </p>
+
+<p>The authors thank M.  for technical support and 
+J.  th for the development of the sequence motif search-</p>
+
+<p>
+Transcriptomic Identification of +Fe and ÀFe Gene Copies </p>
+
+<p>GBE </p>
+
+<p>Genome Biol. Evol. 4(10):1017-1029. doi:10.1093/gbe/evs078 Advance Access publication September 12, 2012 </p>
+
+
+
+</text></tei>

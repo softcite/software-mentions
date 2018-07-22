@@ -1,0 +1,1822 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC3694247" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:26+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>Background: A 28 amino-acid (aa) cell-penetrating peptide (p28) derived from azurin, a redox protein secreted from the 
+opportunistic pathogen Pseudomonas aeruginosa, produces a post-translational increase in p53 in cancer cells by inhibiting its 
+ubiquitination. </p>
+
+<p>Methods: In silico computational simulations were used to predict motifs within the p53 DNA-binding domain (DBD) as potential 
+sites for p28 binding. In vitro direct and competitive pull-down studies as well as western blot and RT-PCR analyses were used to 
+validate predictions. </p>
+
+<p>Results: The L1 loop (aa 112-124), a region within the S7-S8 loop (aa 214-236) and T140, P142, Q144, W146, R282 and L289 of the 
+p53DBD were identified as potential sites for p28 binding. p28 decreased the level of the E3 ligase COP1 480%, in p53 wt and 
+p53 mut cells with no decrease in COP1 in p53dom/neg or p53null cells. Brief increases in the expression of the E3 ligases, 
+TOPORS, Pirh2 and HDM2 (human double minute 2) in p53 wt and p53 mut cells were in response to sustained increases in p53. </p>
+
+<p>Conclusion: These data identify the specific motifs within the DBD of p53 that bind p28 and suggest that p28 inhibition of COP1 
+binding results in the sustained, post-translational increase in p53 levels and subsequent inhibition of cancer cell growth 
+independent of an HDM2 pathway. </p>
+
+<p>The cupredoxin azurin preferentially enters a wide variety of 
+cancer cells, inducing p53-mediated cytostatic and cytotoxic 
+(apoptotic) effects in murine and human cancer cells (Yamada 
+et al, 2002; Punj et al, 2004; Apiyo and Wittung-Stafshede, 2005; 
+Bizzarri and Cannistraro, 2009). Molecular modeling and atomic 
+force microscopy studies suggest that azurin binds to the flexible L 1 
+and S 7 -S 8 loops of the p53 DNA-binding domain (DBD), forming 
+a stable complex through tight protein-protein interactions (De 
+Grandis et al, 2007; Taranta et al, 2008). Amino acids (aa) 50-67 
+(p18) and 50-77 (p28) of azurin represent the protein transport 
+domain (Yamada et al, 2005; Taylor et al, 2009) and motif 
+(Yamada et al, 2009) responsible for azurin's antiproliferative 
+activity, respectively. Exposure of p53 wt MCF-7 breast cancer cells 
+to p28 induces a post-translational increase in the level and activity 
+of p53, inhibits the cell cycle at the G 2 -M transition and induces 
+apoptosis, but not in the isogenic p53 dom/neg cell line MDD2 
+(Shaulian et al, 1992; Yamada et al, 2009). </p>
+
+<p>Intracellular levels of p53 are tightly regulated by a series of 
+ubiquitin E3 ligases that promote ubiquitination and proteasomal 
+degradation of p53 (Michael and Oren, 2003). The most prominent 
+is HDM2 (human double minute 2) (Haupt et al, 1997). Current 
+small-molecule HDM2 antagonists MI-219/AT-219, RITA, 
+PXN727, Nutlins (cis-imidazoline analogues) and JNJ-26854165 
+(Cheok et al, 2011) bind to HDM2 and inhibit the subsequent 
+ubiquitination and proteolysis of wild-type p53. Unlike these 
+agents, p28 forms a complex (Bizzarri et al, 2011) within aa 80-276 
+of the p53DBD that decreases ubiquitination (Yamada et al, 2009) 
+and proteasomal degradation of p53 via an HDM2-independent 
+pathway (Yamada et al, 2009). In addition to HDM2, other E3 
+ligases, COP1 (constitutively photomorphogenic 1), Pirh2 (p53-
+induced RING-H2 domain protein) and TOPORS (topoisomerase 
+I binding, arginine/serine rich), also reportedly bind to p53 and 
+negatively regulate intracellular levels of p53 (Leng et al, 2003; 
+Dornan et al, 2004a; Dornan et al, 2004b; Rajendra et al, 2004; </p>
+
+<p>*Correspondence: Dr CW Beattie; E-mail: cbeattie@uic.edu </p>
+
+<p>Received 26 April 2013; accepted 8 May 2013; published online 4 June 2013 </p>
+
+<p>&amp; 2013 Cancer Research UK. All rights reserved 0007 -0920/13 </p>
+
+<p>FULL PAPER </p>
+
+<p>Keywords: p53; COP1; cell penetrating peptide; cell cycle; ubiquitination; E3 ligases </p>
+
+<p>British Journal of Cancer (2013) 108, 2495-2504 | doi: 10.1038/bjc.2013.266 </p>
+
+<p>www.bjcancer.com | DOI:10.1038/bjc.2013.266 
+2495 </p>
+
+<p>Dornan et al, 2006; Wang et al, 2011). COP1 is reportedly 
+overexpressed in breast, ovarian and hepatocellular carcinomas, 
+and gastric cancer (Li et al, 2012) predictive of survival in the latter 
+(Dornan et al, 2004b), suggesting it contributes to the accelerated 
+degradation of the p53 protein and attenuating the tumour 
+suppressor function of p53 (Dornan et al, 2004b). Silencing COP1 
+inhibits tumour growth and suggests COP1 may be a promising 
+target for systemic therapy (Lee et al, 2010). 
+In contrast, COP1 also reportedly acts as a developmentally 
+dependent tumour suppressor (Migliorini et al, 2011; Vitari et al, 
+2011), interacting with the oncoprotein c-Jun (Bianchi et al, 2003) 
+to keep c-Jun at constitutively low levels in vivo and modulate 
+c-Jun/AP-1 transcriptional activity in mice bred to be genetically 
+hypomorphic at the COP1 locus (Migliorini et al, 2011). A COP1 
+deficiency also reportedly leads to c-Jun upregulation in human 
+cancer cells (Migliorini et al, 2011), suggesting COP1 is also a 
+tumour suppressor that functions, at least in part, by antagonising 
+c-Jun oncogenic activity in the absence of a genetic interaction 
+between COP1 and p53 (Migliorini et al, 2011). Here, we report the 
+underlying mechanism for the post-translational increase in 
+p53 wt,mut levels induced by p28 in breast cancer and melanoma 
+cells. p28 inhibits the binding of COP1 to a specific motif of the 
+p53DBD, leading to an autoreduction in COP1 levels (Dornan 
+et al, 2006) and an increase in the level of p53 in the absence of any 
+alteration in c-Jun. </p>
+
+<p>MATERIALS AND METHODS </p>
+
+<p>Peptide synthesis. p28 (Leu 50 -Asp 77 LSTAADMQGVVTDGMAS 
+GLDKDYLKPDD, 2914 Da) was synthesised by C S Bio, Inc. 
+(Menlo Park, CA, USA) at 495% purity and mass balance. </p>
+
+<p>Molecular dynamics. Computer simulations were performed 
+essentially as described (De Grandis et al, 2007; Bizzarri et al, 
+2009). Configurations for azurin and the DBD of p53 were taken 
+from 1E5Z and 1TUP of PDB files, respectively. The 28 aa of p28 
+was cut from the crystallographic structure for azurin and used to 
+generate the configuration file subsequently applied to MD 
+simulations at 300 K and P ¼ 1 bar. Complete details for MD are 
+in the Supplementary Materials and Methods. </p>
+
+<p>Docking studies. ClusPro (Kozakov et al, 2010) was used to 
+conduct automated docking as a six-dimensional search within the 
+rotational space between the two molecules. This generated a set of 
+possible configurations for a predicted series of p53DBD-p28 
+complexes that were ranked based on scoring. The predicted 
+complexes were then subjected to cluster analysis under a pairwise 
+binding site root mean squared deviation criterion. The cluster 
+model with the best score was used to further compare the protein-
+protein interface using the ProtorP: Protein-Protein Interface 
+Analysis Server (Reynolds et al, 2009). </p>
+
+<p>Cell proliferation and xenograft tumour assays. Human breast 
+cancer cells MCF-7, p53 wt (ATCC, Manassas, VA, USA), the 
+isogenic MDD2, p53 dom/neg (Shaulian et al, 1992) (courtesy of Dr 
+Andrei V. Gudkov, Roswell Park Cancer Institute, Buffalo, NY, 
+USA) and MDA-MB-231, p53 mut , as well as normal breast (MCF-
+10A, p53 wt ) (ATCC) and melanoma cells (UISO-Mel-6, p53 null ; 
+UISO-Mel-23, p53 mut ; UISO-Mel-29, p53 wt ) (Kichina et al, 2003) 
+were cultured as described (Yamada et al, 2002; Punj et al, 2004; 
+Taylor et al, 2009). p28 is a stable peptide that binds to p53 in the 
+cell nucleus (Yamada et al, 2009) with intracellular concentrations 
+reaching 120 ng ml À 1 (p28) or 0.042 (mmol l À 1 ) 2 h post exposure 
+to 100 mmol l À 1 p28, which eliminated the need for repeated 
+exposure. The effect of p28 on cell growth was determined by 
+direct cell counting (Taylor et al, 2009). </p>
+
+<p>Human melanoma (Mel-29, -23 and -6) and breast cancer cells 
+(MCF-7 and MDA-MB-231) were injected s.c. in the right flank of 
+5-to 6-week-old male and female athymic mice (Punj et al, 2004; 
+Jia et al, 2011; Mehta et al, 2011). When tumours reached 3 mm in 
+diameter, animals were randomised into control (20 mice) and 
+treatment (10 mice) groups, and injected i.p. with DTIC (5-(3,3-
+dimethyl-1-triazeno) imidazole-4-carboxamide), 4 mg kg À 1 , 3 Â 
+/week (melanoma); paclitaxel, 12.8 mg kg À 1 i.p., days 10, 14, 21 
+and 25 (breast cancer); or p28 10 or 20 mg kg À 1 i.p. 3 Â /week for 
+30 days. Although p28 is rapidly cleared (t ½ 0.06 h; clearance 
+(ml kg À 1 h À 1 ) 2159), it is also rapidly taken up (Vdss (ml kg À 1 ) 
+297) at pharmacologically active doses (Punj et al, 2004; Jia et al, 
+2011; Mehta et al, 2011). p28 is also stable in murine serum (t 1/2 
+B60 min) (Punj et al, 2004; Jia et al, 2011; Mehta et al, 2011) 
+assuring a continuous release of the mature peptide. At necropsy, 
+tumours were dissected, freed of fat and weighed. Statistical 
+comparisons were performed by analysis of variance ANOVA 
+(control vs treatment) (<rs id="software-1" type="software">GraphPad InStat</rs> <rs corresp="#software-1" type="version-number">ver. 3.0</rs>, La Jolla, CA, 
+USA). </p>
+
+<p>Western blot analysis and RT-PCR. Human breast and mela-
+noma cells were cultured with p28 at 50 mmol l À 1 for 24-72 h, 
+whole-cell lysates prepared and western blot analysis conducted 
+(Yamada et al, 2002; Yamada et al, 2009). A list of antibodies used 
+is provided in Supplementary Materials and Methods. Band 
+intensity was determined using UN-SCAN-IT (Silk Scientific 
+Inc., Orem, Utah). Each control and experimental band was 
+normalised by calculating the ratio of a specific protein/actin. Each 
+experimental level was then expressed as the (relative) percentage 
+of control. 
+Total RNA was extracted from human breast and melanoma 
+cells exposed to p28, and RT-PCR conducted as previously 
+described (Yamada et al, 2009). Primer sets are described under 
+Supplementary Materials. Each control and experimental band was 
+normalised by calculating the ratio of a specific gene/GAPDH. 
+Each experimental level was then expressed as the (relative) 
+percentage of control. The data are representative of at least two 
+independent measures. </p>
+
+<p>Construction and purification of p53 fragments. Plasmid 
+pGEX5X3 (GE Healthcare, Little Chalfont, United Kingdom) 
+expressing GST fused to fragments of human p53 wt were 
+constructed by PCR (Yamada et al, 2009). DNA fragments 
+encoding aa 1-80, 81-300, 81-160, 161-300 and 301-393 of p53 
+were amplified with specific primer sets (Supplementary Materials 
+and Methods) and GST-fusion proteins purified by Glutathione 
+Sepharose 4B affinity chromatography and HiLoad Superdex 75 
+gel-filtration column connected to the A ¨ KTAprime plus FPLC 
+system (GE Healthcare) (Yamada et al, 2009). </p>
+
+<p>GST pull-down assays. p28 binding to fragments of p53 was 
+analysed using a GST pull-down assay (Yamada et al, 2009). GST 
+fused to fragments of p53 and GST alone were bound to 
+glutathione-Sepharose 4B beads (GE Healthcare), p28 added and 
+incubated for 2 h. Each sample was loaded on 6% native-PAGE. 
+Membranes were incubated with polyclonal anti-p28 antibody, 
+washed three times with Tris-HCl containing 0.05% Tween 20, 
+secondary rabbit IgG-HRP antibody (Sigma-Aldrich, St Louis, MO, 
+USA). COP1 binding to p53 in the presence or absence of p28 was 
+analysed using competitive pull-down assays (Hosaka et al, 2005). 
+GST fused to fragments of p53 were immobilised on beads, 
+followed by incubating with or without p28 (10-100 mole excess). 
+Whole-cell lysates containing COP1 were prepared from MCF-7 
+cells in PBS containing 0.1% Triton X-100, 10% glycerol and a 
+protease inhibitor cocktail (Sigma-Aldrich). Soluble extracts were 
+incubated with beads, each sample washed with PBS, pelleted and 
+analysed with an anti-COP1 antibody. </p>
+
+<p>BRITISH JOURNAL OF CANCER 
+Peptide inhibition of COP1 </p>
+
+<p> 
+www.bjcancer.com | DOI:10.1038/bjc.2013.266 </p>
+
+<p>RESULTS </p>
+
+<p>Docking simulation of p28-p53 complex. ClusPro identified 
+motifs spanning the L 1 loop (aa 112-124), within aa 139-146, a 
+region within the S 7 -S 8 loop (aa 214-236) and R282 and L289 of 
+the p53 DBD (Tu et al, 2008) that were involved in the binding 
+between p28 and p53 (Figure 1A). Molecular surface and 
+electrostatic potential plots of the p53DBD were calculated by 
+<rs id="software-0" type="software">DeepView</rs> <rs corresp="#software-0" type="version-number">ver. 4.0.3</rs> (<rs corresp="#software-0" type="creator">Swiss Institute of Bioinformatics</rs>, Geneva, 
+Switzerland) (Figure 1B). A blue, red and white colour gradient 
+represents positive, negative and neutral (including hydrophobic 
+aa) potentials on the molecular surface, respectively. The DNA-
+binding surface of the p53DBD is highly cationic (blue). In 
+contrast, the p28-binding area is essentially neutral (white), 
+suggesting that electrostatic interaction may not have a role in 
+p28 binding to p53 (Figure 1B). The amino-acid composition of 
+the predicted p28-binding sites on p53 was FLHSGTAVTCTYPA 
+LTPQWEGSDCTHRL or 43% hydrophobic, 36% neutral and 21% 
+hydrophilic residues. p28 bound to 10 of 13 aa (77%) in the L 1 loop 
+that were 50% hydrophobic, 40% neutral and 10% hydrophilic 
+residues and 7 of 23 aa (30%), 14% hydrophobic, 43% neutral and 
+43% hydrophilic, in the S 7 -S 8 loops (Figure 1C). The four amino 
+acids residing between residues 139 and 147 predicted to bind p28 
+are 50% hydrophobic and 50% neutral. These residues and the L 1 
+and S 7 -S 8 loops are not located at or near the DNA-binding 
+surface of p53 (R248 and R273 are direct DNA-binding residues on </p>
+
+<p>p53), suggesting p28 does not interfere with the ability of p53 to 
+bind to DNA (Figure 1B). The ClusPro best score model also 
+predicted that amino-acid residues LSTAAMQVVGDYLKDD of 
+p28 bind to p53. Fifty per cent of the predicted residues are 
+hydrophobic, again suggesting that hydrophobic rather than 
+electrostatic interaction is essential to the formation of the 
+p28-p53 complex (Figure 1B). These results agree with computa-
+tional docking (De Grandis et al, 2007) studies demonstrating that 
+azurin binds to the L 1 and S 7 -S 8 loops of p53 through interaction 
+of non-polar residues at the interface, creating a short-range 
+hydrophobic interaction. A sequence map of the amino acids 
+predicted to be involved in p28 binding and their relationship to 
+the known binding sites of the E3 ubiquitin ligases that negatively 
+regulate p53 is illustrated in Figure 1D. p28 does not bind to motifs 
+shown to bind either HDM2 or Pirh2. </p>
+
+<p>GST pull-down assays. p28-binding regions on p53 were mapped 
+using a GST pull-down assay (Yamada et al, 2009). GST-p53 1-393 
+(full length p53), GST-p53 81-300 (p53DBD), GST-p53 81-160 and 
+GST-p53 161-300 pulled down p28, but the N-(GST-p53 1-80 ) and 
+C-terminus of p53 (GST-p53 301-393 ) and GST alone did not 
+(Figure 2A). These results confirm computerised predictions of 
+regions within the DBD of p53 likely to bind p28 (Figure 1A-D). 
+We confirmed that binding motifs for p28 and COP1 overlap using 
+competitive pull-down assays of purified GST-p53 and GST alone 
+in the presence of excess p28. p28 induced a significant 
+concentration-dependent reduction in the amount of COP1 </p>
+
+<p>L 1 loop </p>
+
+<p>S 7 -S 8 loop </p>
+
+<p>F113 
+L114 
+H115 </p>
+
+<p>S116 
+G117 </p>
+
+<p>T118 </p>
+
+<p>A119 
+V122 </p>
+
+<p>T123 </p>
+
+<p>C124 </p>
+
+<p>E224 
+G226 
+S227 
+D228 
+C229 </p>
+
+<p>T231 </p>
+
+<p>H233 </p>
+
+<p>1MEEPQSDPSVEPPLSQETFSDLWKLLPENNVLSPLPSQAMDDLMLSPDDIEQWFTEDPGPDEAPRMPEAA </p>
+
+<p>71PRVAPAPAAPTPAAPAPAPSWPLSSSVPSQKTYQGSYGFRLGFLHSGTAKSVTCTYSPAL </p>
+
+<p>131 NKMFCQLAKTCPVQLWVDSTPPPGTRVRAMAIYKQSQHMTEVVRRCPHHERCSDSDGLAP </p>
+
+<p>191PQHLIRVEGNLRVEYLDDRNTFRHSVVVPYEPPEVGSDCTTIHYNYMCNSSCMGGMNRRP </p>
+
+<p>251 ILTIITLEDSSGNLLGRNSFEVRVCACPGRDRRTEEENLRKKGEPHHELPPGSTKRALSN </p>
+
+<p>311NTSSSPQPKKKPLDGEYFTLQIRGRERFEMFRELNEALELKDAQAGKEPGGSRAHSSHLK </p>
+
+<p>371SKKGQSTSRHKKLMFKTEGPDSD </p>
+
+<p>COP1 </p>
+
+<p>HDM2 </p>
+
+<p>Pirh2 </p>
+
+<p>L 1 loop </p>
+
+<p>COP1 </p>
+
+<p>S 7 -S 8 loop </p>
+
+<p>Figure 1. Docking model of p28 and p53. (A) The p28-p53 complex structure obtained from the best docking model. Blue: overall ribbon diagram 
+of the p53DBD, green: L 1 and S 7 -S 8 loops. (B) Ribbon diagram of the p53DBD (yellow) superimposed on the electrostatic potential plot. p28 
+(green) binds to hydrophobic pocket. (C) Relationship of p28 (green) and L 1 (blue) and S 7 -S 8 (yellow) loops of the p53DBD. (D) Map of 
+E3 ligase binding regions superimposed on the full-length sequence of p53. p28-binding residues indicated in red. Binding regions of HDM2, 
+COP1 and Pirh2 indicated in black, green and blue bars, respectively. COP1 binds to p53 in regions separate from HDM2. p28 and COP1 
+share a binding motif within aa 92-160 of the p53DBD. </p>
+
+<p>Peptide inhibition of COP1 
+BRITISH JOURNAL OF CANCER </p>
+
+<p>www.bjcancer.com | DOI:10.1038/bjc.2013.266 </p>
+
+<p>
+binding to the DBD of p53 (Figure 2B). Fine mapping of the 
+regions within the p53DBD revealed that p28 inhibited the binding 
+of COP1 to only GST-p53 81-300 and GST-p53 81-160 , clearly 
+demonstrating that p28 inhibits the binding of COP1 to p53 only 
+where their respective binding sites overlap (Figure 2C). </p>
+
+<p>Effect of p28 on the growth of human cancer cells. p28 produces 
+a time and dose-related inhibition of p53 wt tumour cell and 
+xenograft growth (Yamada et al, 2009; Jia et al, 2011). Figure 3A 
+shows that a 72-h exposure to p28 at 50 mmol l À 1 decreased the 
+proliferation of (p53 wt ) Mel-29 and (p53 mut ) Mel-23, where p53 is 
+internally deleted at aa 178-183 (Kichina et al, 2003), B25-30% 
+from control. The inhibition was similar to that of 50 mmol l À 1 
+DTIC. Neither p28 nor DTIC altered the proliferation of p53 null 
+Mel-6 cells. p28 also exhibited significant cytostatic activity on 
+p53 wt MCF-7 breast cancer cells with a similar reduction (B20%) 
+in the number of (p53 mut R280K) MDA-MB-231 cells after 72 h 
+(Figure 3B). These observations, in contrast, p28 did not exhibit an 
+antiproliferative effect on MDD2 (p53 dom/neg ) or normal MCF-10A 
+(p53 wt ) mammary cells confirming previous results (Yamada et al, 
+2009). Paclitaxel at 50 mmol l À 1 inhibited the growth of MCF-7 
+and MDA-MB-231 breast cancer cells by B90% and MDD2 
+(p53 dom/neg ) and MCF-10 A (p53 wt ) cells by B50% and 35%, 
+respectively (Figure 3B). p28 also significantly decreased the weight 
+of established p53 wt Mel-29 and p53 mut Mel-23 xenograft tumours 
+in athymic mice (Figure 3C). p28 did not inhibit cell growth of 
+p53 null Mel-6 in vitro (Figure 3A) or in vivo (Figure 3C). p28 also 
+decreased the weight of MCF-7 (p53 wt ) and MDA-MB-213 
+(p53 mut ) xenograft tumours by B50 and 60% respectively, similar 
+to the effect of a non-toxic dose of paclitaxel (Mi et al, 2002) 
+(Figure 3D). The significant reduction in growth at 20 mg kg À 1 
+and lack of effect at 10 mg kg À 1 on MDA-MB-231 cells contrast 
+sharply with the similarity in effect for either dose of p28 on 
+p53 wt MCF-7, Mel-29 or p53 mut Mel-23 cells, suggesting the 
+site of the mutation may be critical to overexpression of p53 
+(Figures 4A and 5A) and to the overall effect of p28 on the 
+proliferation of p53 mut cancer cells. </p>
+
+<p>p28 Alters the level of p53 and major downstream targets. The 
+significant decrease in growth following exposure to p28 was 
+associated with a sustained increase in the level of p53 in p53 wt 
+MCF-7 and p53 mut MDA-MB-231 cells (Figure 4A) and p53 wt 
+Mel-29 and p53 mut Mel-23 cells (Figure 5A) with no alteration in </p>
+
+<p>the level of transcription of p53 (Figures 4B and 5B), confirming 
+earlier results of an increase in p53 wt MCF-7 cells in response to 
+p28 (Yamada et al, 2009). The increase in the level of p53 protein 
+in these lines was also directly associated with an increase in the 
+level of transcription and translation of p21. p28 did not alter 
+either the level or rate of transcription of p53 or p21 in p53 dom/neg 
+MDD2, p53 wt normal MCF-10A or p53 null Mel-6 cells (Figures 4A 
+and B, and 5A and B). Forkhead box M1 protein (FoxM1), an 
+important regulator of the G 2 -M transition, was significantly 
+reduced in MCF-7, Mel-29 and Mel-23 cells during exposure to 
+p28, increased in p53 dom/neg MDD2 cells at 48-72 h, and remained 
+essentially unchanged in MDA-MB-231, MCF-10A and Mel-6 
+cells, suggesting that downregulation of FoxM1 also contributed to 
+inhibition of the cell cycle in p53 wt MCF-7, Mel-29 and p53 mut 
+Mel-23 cells. Although this may result from an inability of p53 mut 
+to bind the p53 canonical consensus regions in the FOXM1 
+promoter, p21 levels were sufficiently elevated to inhibit the 
+proliferation of p53 mut MDA-MB-231 cells, despite the over-
+expression of FoxM1 (Figure 4A) (Bektas et al, 2008). This is not 
+surprising because p53 mutants can often transactivate promoters 
+containing a p21 responsive element (Campomenosi et al, 2001) 
+and loss of function in mutant p53 breast tumours does not 
+represent a complete absence of activity (Williams et al, 1998). 
+STMN1, an inhibitor of microtubule polymerisation (Belmont and 
+Mitchison, 1996) and critical for cell cycle progression, was not 
+significantly decreased in any cancer cell line tested (Figures 4A 
+and 5A), suggesting p28 inhibition of the cell cycle at G 2 -M is at 
+G 2 and does not involve inhibition of microtubule formation. 
+The p28-induced increase in p53 was associated with a 
+significant decrease in the levels of COP1 in p53 wt and p53 mut 
+breast cancer and melanoma cells (Figures 4A and 5A). Exposure 
+of p53 wt MCF-7 and p53 mut MDA-MB-231 cells to p28 reduced 
+COP1 levels by B70% and 80%, respectively, over 24-72 h without 
+altering the transcription of COP1 (Figure 4A). Exposure of p53 wt 
+Mel-29 to p28 significantly reduced COP1 levels (B75%) at 24 h 
+that gradually increased (B60% of control) at 72 h (Figure 5A). 
+A similar effect on COP1 levels was observed in p53 mut Mel-23 
+cells. The lack of effect of p28 on COP1 levels in p53 null Mel-6 and 
+delayed increase in p53 dom/neg MDD2 exposed to p28 suggest that 
+the effects of p28 on COP1 are a function of a cell's p53 status. 
+Moreover, as continued exposure to p28 does not significantly alter 
+COP1 transcription in p53 wt and p53 mut cancer cells, the decrease </p>
+
+<p>GST 
+GST-p53 1-393 </p>
+
+<p>p28 </p>
+
+<p>100 43.7 73.4 (%) </p>
+
+<p>GST 
+GST-p53 </p>
+
+<p>1-393 </p>
+
+<p>GST-p53 </p>
+
+<p>1-80 </p>
+
+<p>GST-p53 </p>
+
+<p>81-300 </p>
+
+<p>GST-p53 </p>
+
+<p>301-393 </p>
+
+<p>GST-p53 </p>
+
+<p>81-160 </p>
+
+<p>GST-p53 </p>
+
+<p>161-300 </p>
+
+<p>GST 
+GST-p53 </p>
+
+<p>1-393 </p>
+
+<p>GST-p53 </p>
+
+<p>1-80 </p>
+
+<p>GST-p53 </p>
+
+<p>81-300 </p>
+
+<p>GST-p53 </p>
+
+<p>301-393 </p>
+
+<p>GST-p53 </p>
+
+<p>81-160 </p>
+
+<p>GST-p53 </p>
+
+<p>161-300 </p>
+
+<p>p28 </p>
+
+<p>Lysate </p>
+
+<p>Lysate </p>
+
+<p>+ </p>
+
+<p>+ 
++ 
++ 
++ 
++ 
++ 
++ </p>
+
+<p>-
+-
+-
+-
+-</p>
+
+<p>-</p>
+
+<p>-
+-
+-
+-
+-
+-
+-</p>
+
+<p>-</p>
+
+<p>+ 
++ 
++ 
++ </p>
+
+<p>+ 
+++ 
+++ </p>
+
+<p>Figure 2. p28-binding regions on p53. (A) Purified various fragments of p53 and GST alone were used for a GST pull-down assay. Each sample was 
+analysed by immunoblotting with an anti-p28 antibody. (B) Competitive pull-down assay. Immobilised GST-p53 1-393 and GST alone on 
+glutathione-Sepharose 4B beads were incubated in absence ( À ) or presence of p28 ( þ : 10, þ þ : 100 mole excess), followed by adding MCF-7 
+lysates containing COP1. Samples were separated by SDS-PAGE and immunoblotted with an anti-COP1 antibody. Lysate: whole-cell lysates of 
+MCF-7 used for the assay showed the stable expression of COP1. Numbers below COP1 bands were relative percentage to the level of COP1 
+bound to p53 in absence of p28. (C) COP1 binding to various fragments of p53 in absence or presence of p28 was analysed using a similar 
+competitive pull-down assay. Immobilised various fragments of p53 and GST alone were treated with or without p28 (100 mole excess), followed 
+by incubation with MCF-7 lysates containing COP1. </p>
+
+<p>BRITISH JOURNAL OF CANCER 
+Peptide inhibition of COP1 </p>
+
+<p> 
+www.bjcancer.com | DOI:10.1038/bjc.2013.266 </p>
+
+<p>in the overall level of COP1 likely occurs through autodegradation 
+(Dornan et al, 2006). </p>
+
+<p>p28 Effects on minor E3 ubiquitin ligases. p28 produces a post-
+translational increase in p53 through decreased ubiquitination and 
+proteasomal degradation rather than transcriptional activation 
+(Yamada et al, 2009). However, exposure to p28 transiently 
+increased the transcription and level of TOPORS (48 h) in p53 wt 
+MCF-7 cells, but did not significantly affect either the transcription 
+or level of TOPORS in p53 mut MDA-MB-231 cells (Figure 4A and 
+B). This suggests the upregulation of TOPORS by wild-type p53 
+was more efficient than with mutated p53. Exposure of p53 wt Mel-
+29 cells to p28 produced a sustained increase in the level of 
+TOPORS that was not transcription dependent, whereas exposure 
+of p53 mut Mel-23 cells to p28 reduced the level of TOPORS over 
+48 h, which was not preceded or accompanied by a change in 
+transcription (Figure 5 A and B). The increase in the level and 
+transcription of TOPORS in p53 wt MCF-7 and Mel-29 cells and </p>
+
+<p>lack of effect on p53 mut MDA-MB-231 and Mel-23 cells suggest 
+that changes in the level of TOPORS in response to p28 are 
+dependent on p53 status and do not have a major role in the 
+regulation of cell proliferation. 
+p28 also induced a short-term (24 h) increase in the level of 
+Pirh2 in p53 wt MCF-7 and MDA-MB-231 cells without an 
+accompanying increase in transcription, suggesting that the 
+transient increase was in response to the p28-induced increase in 
+p53 (Figure 4A and B). In contrast, p28 had no significant effect on 
+the expression of the Pirh2 protein or transcription in p53 wt Mel-
+29 or p53 mut Mel-23 cells (Figure 5A and B). Collectively, changes 
+in the level of TOPORS and Pirh2 appeared dependent on the cell 
+line treated as well as p53 status and are a minor factor in the 
+regulation of wild-type or mutated p53. 
+In contrast, the initial increase (24-48 h) and slow rise (72 h) in 
+the level of the major E3 ligase HDM2 in p53 wt MCF-7 and p53 mut 
+MDA-MB-231 cells, respectively, was accompanied by a parallel 
+increase in transcription. However, neither increase reflected the </p>
+
+<p>% Control </p>
+
+<p>0 </p>
+
+<p>20 </p>
+
+<p>40 </p>
+
+<p>60 </p>
+
+<p>80 </p>
+
+<p>100 </p>
+
+<p>0 </p>
+
+<p>20 </p>
+
+<p>40 </p>
+
+<p>60 </p>
+
+<p>80 </p>
+
+<p>100 </p>
+
+<p>% Control </p>
+
+<p>* </p>
+
+<p>* </p>
+
+<p>* </p>
+
+<p>* </p>
+
+<p>* </p>
+
+<p>* </p>
+
+<p>* </p>
+
+<p>* </p>
+
+<p>* </p>
+
+<p>* </p>
+
+<p>Mel-29 </p>
+
+<p>10 mg kg -1 
+n =8 </p>
+
+<p>20 mg kg -1 
+n =8 </p>
+
+<p>DTIC 
+n =8 </p>
+
+<p>0 </p>
+
+<p>* 
+* </p>
+
+<p>Mel-23 </p>
+
+<p>PBS 
+n =18 </p>
+
+<p>10 mg kg -1 
+n =9 </p>
+
+<p>20 mg kg -1 
+n =8 </p>
+
+<p>DTIC 
+n =8 </p>
+
+<p>* 
+* </p>
+
+<p>Mel-6 </p>
+
+<p>PBS 
+n =14 </p>
+
+<p>10 mg kg -1 
+n =6 </p>
+
+<p>DTIC 
+n =5 </p>
+
+<p>0 </p>
+
+<p>1 </p>
+
+<p>2 </p>
+
+<p>3 </p>
+
+<p>4 </p>
+
+<p>5 </p>
+
+<p>6 </p>
+
+<p>7 </p>
+
+<p>MDA-MB-231 </p>
+
+<p>PBS 
+n =5 </p>
+
+<p>10 mg kg -1 
+n =6 </p>
+
+<p>20 mg kg -1 
+n =5 </p>
+
+<p>0 </p>
+
+<p>* </p>
+
+<p>* </p>
+
+<p>MCF-7 </p>
+
+<p>Paclitaxel 
+n = 8 </p>
+
+<p>Paclitaxel 
+n =5 </p>
+
+<p>PBS 
+n =15 </p>
+
+<p>20 mg kg -1 
+n = 3 </p>
+
+<p>* 
+* 
+* </p>
+
+<p>Mel-29 
+Mel-23 
+Mel-6 </p>
+
+<p>Control 
+p28, 50 µM 
+DTIC, 50 µM 
+Control 
+p28, 50 µM 
+Paclitaxel, 50 µM </p>
+
+<p>120 </p>
+
+<p>MCF-7 
+MDD2 
+MDA-MB-231 MCF-10A </p>
+
+<p>0.9 </p>
+
+<p>0.8 </p>
+
+<p>0.7 </p>
+
+<p>0.6 </p>
+
+<p>0.5 </p>
+
+<p>0.4 </p>
+
+<p>0.3 </p>
+
+<p>0.2 </p>
+
+<p>0.1 </p>
+
+<p>0.0 </p>
+
+<p>0.3 </p>
+
+<p>0.2 </p>
+
+<p>0.1 </p>
+
+<p>0 </p>
+
+<p>0.7 </p>
+
+<p>0.6 </p>
+
+<p>0.5 </p>
+
+<p>0.4 </p>
+
+<p>0.3 </p>
+
+<p>0.2 </p>
+
+<p>0.1 
+Tumour weight (g) 
+Tumour weight (g) 
+Tumour weight (g) </p>
+
+<p>PBS 
+n =16 </p>
+
+<p>Tumour weight (g) </p>
+
+<p>0.50 </p>
+
+<p>1.00 </p>
+
+<p>1.50 </p>
+
+<p>2.00 </p>
+
+<p>2.50 </p>
+
+<p>Tumour weight (g) </p>
+
+<p>10 mg kg -1 
+n = 5 </p>
+
+<p>Figure 3. The effect of p28 on cell and xenograft growth. Human melanoma UISO-Mel-29, -23 and -6 (A) and breast cancer MCF-7, MDD2, 
+MDA-MB-231 and normal MCF-10A cells (B) were exposed to p28, DTIC, paclitaxel or a similar volume of media without peptide for 
+72 h and cells counted. Values represent the mean ± s.d. of three replicates. Reduction in Mel-23, 29 xenograft growth (C). Reduction of MCF-7, 
+MDA-MB-231 xenograft growth (D). *Po0.05. </p>
+
+<p>Peptide inhibition of COP1 
+BRITISH JOURNAL OF CANCER </p>
+
+<p>www.bjcancer.com | DOI:10.1038/bjc.2013.266 </p>
+
+<p>
+sustained increase in p53 in response to p28. Unlike COP1, 
+HDM2 levels were not significantly altered by p28 in p53 wt Mel-29 
+cells, but increased late in exposure (48-72 h) in p53 mut Mel-23 
+(Figure 5A). </p>
+
+<p>p28 Effect on c-Jun. If COP1 acts as a developmentally dependent 
+tumour suppressor (Migliorini et al, 2011; Vitari et al, 2011), 
+interacting with the oncoprotein c-Jun (Bianchi et al, 2003) to keep 
+c-Jun at constitutively low levels in vivo and COP1 deficiency leads 
+to c-Jun upregulation in human cancer cells (Migliorini et al, 2011) 
+even in the absence of a genetic interaction between COP1 and p53 
+(Migliorini et al, 2011), then exposure to p28 should significantly 
+increase c-Jun levels in p53 wt,mut,null cells. p28 did not significantly 
+alter the level of c-Jun in either p53 wt MCF-7, MDD2 or MCF-10A 
+cells and transiently (48 h) reduced (38%) c-Jun levels in p53 mut 
+MDA-MB-231 breast cancer cells (Figure 6A). In contrast, c-Jun 
+was significantly decreased over 48-72 h in p53 wt Mel-29 cells, 
+briefly increased (48 h) in p53 mut Mel-23 cells, and only increased 
+slightly over 24 h in p53 null Mel-6 cells (Figure 6C). The decrease in 
+c-Jun in p53 wt Mel-29 cells was accompanied by an increase in 
+transcription (72 h), suggesting the increase was in response to the 
+decrease in the level of the c-Jun protein (Figure 6B and D) rather 
+than the result of a decrease in COP1 following exposure to p28. 
+None of these results suggest that a sustained decrease in COP1 
+results in an increase in the level and transcription of c-Jun 
+(Migliorini et al, 2011). 
+Moreover, the absence of any change in p53, COP1, p21, 
+FOXM1, TORPORS, Pirh2 or HDM2 and the transient increase in </p>
+
+<p>c-Jun in p53 null Mel-6 cells in response to p28 suggest that the 
+antiproliferative effects of p28 are mediated via the sustained 
+increase in p53 and p21 independent of any effect on c-Jun 
+(Migliorini et al, 2011). </p>
+
+<p>DISCUSSION </p>
+
+<p>Although most wild-type or mutated p53 tumours must certainly 
+be dysfunctional (Wiman, 2006), cancer cells proliferate irrespec-
+tive of p53 status. This suggests reactivation of p53-induced control 
+of the cell cycle and apoptosis is a plausible therapeutic goal 
+regardless of p53 status. The loss of wild-type p53 function or gain 
+of new oncogenic properties may result, in part, from the 
+numerous missense point mutations within the DBD of p53 
+clustered into discrete hot spots (R175, G245, R248, R249, R273 
+and R282) (Tu et al, 2008). However, the reported gain-of-function 
+properties reportedly associated with p53 hot spot mutations may 
+not be a universal phenomenon (Lee et al, 2012). Amino-acid 
+residues R248 and R273 directly contact DNA while the remainder 
+stabilises the structure of the DNA-binding motif within the DBD 
+(Tu et al, 2008). In contrast, the flexible L 1 loop (aa 112-124) 
+within the p53DBD is a mutational cold spot (Zupnick and Prives, 
+2006). Our models predicted that p28 would bind to the L 1 loop, a 
+region of the S 7 -S 8 loop (aa 214-236) and T140, P142, Q144, 
+W146, R282 and L289 of the p53DBD. This prediction was 
+supported by GST pull-down assays (Figure 2A) and atomic force </p>
+
+<p>0 
+24 
+48 72 (h) </p>
+
+<p>FoxM1 </p>
+
+<p>Actin </p>
+
+<p>0 
+24 
+48 
+72 (h) </p>
+
+<p>100 </p>
+
+<p>MCF-7 
+MDD2 </p>
+
+<p>153 
+61 
+42 
+100 
+186 
+389 
+398 </p>
+
+<p>COP1 </p>
+
+<p>TOPORS </p>
+
+<p>STMN1 </p>
+
+<p>Pirh2 </p>
+
+<p>HDM2 </p>
+
+<p>100 
+207 (%) 
+227 
+214 </p>
+
+<p>p53 </p>
+
+<p>p21 </p>
+
+<p>100 
+132 
+282 
+257 </p>
+
+<p>100 
+109 
+142 104 (%) </p>
+
+<p>100 
+105 
+102 
+98 </p>
+
+<p>100 
+92 
+88 
+86 
+100 
+115 
+162 
+119 </p>
+
+<p>100 
+199 
+112 
+89 
+100 
+107 
+234 
+101 </p>
+
+<p>100 
+141 
+92 
+102 
+100 
+113 
+119 
+193 </p>
+
+<p>100 
+153 
+162 
+117 
+100 
+106 
+158 
+162 </p>
+
+<p>100 
+87 
+28 
+27 
+100 
+99 
+225 
+259 </p>
+
+<p>0 
+24 
+48 72 (h) </p>
+
+<p>MDA-MB-231 </p>
+
+<p>0 
+24 
+48 72 (h) </p>
+
+<p>MCF-10A </p>
+
+<p>100 
+160 
+151 169 (%) </p>
+
+<p>100 
+185 
+227 
+224 </p>
+
+<p>100 
+109 
+105 
+121 </p>
+
+<p>100 
+124 
+102 94 (%) </p>
+
+<p>100 
+111 
+103 
+91 </p>
+
+<p>100 
+103 
+113 
+109 </p>
+
+<p>100 
+23 
+13 
+17 
+100 
+134 
+111 
+86 </p>
+
+<p>100 
+102 
+112 
+128 
+100 
+110 
+103 
+97 </p>
+
+<p>100 
+87 
+105 
+119 
+100 
+111 
+107 
+106 </p>
+
+<p>100 
+111 
+159 
+107 
+100 
+108 
+106 
+88 </p>
+
+<p>100 
+110 
+111 
+121 
+100 
+105 
+106 
+83 </p>
+
+<p>FoxM1 </p>
+
+<p>GAPDH </p>
+
+<p>COP1 </p>
+
+<p>TOPORS </p>
+
+<p>Pirh2 </p>
+
+<p>HDM2 </p>
+
+<p>p53 </p>
+
+<p>p21 </p>
+
+<p>100 
+110 
+95 </p>
+
+<p>100 
+197 
+174 
+112 </p>
+
+<p>100 
+254 
+140 
+124 </p>
+
+<p>1 0 0 
+8 8 
+9 2 
+8 9 </p>
+
+<p>100 
+92 
+110 
+95 </p>
+
+<p>100 
+171 
+179 
+109 </p>
+
+<p>100 
+148 
+86 
+71 </p>
+
+<p>0 
+24 
+48 
+72 (h) 
+0 
+24 
+48 72 (h) </p>
+
+<p>MCF-7 
+MDD2 </p>
+
+<p>0 
+24 
+48 
+72 (h) </p>
+
+<p>MDA-MB-231 </p>
+
+<p>0 
+24 
+48 
+72 (h) </p>
+
+<p>MCF-10A </p>
+
+<p>100 
+105 
+115 
+100 </p>
+
+<p>100 
+104 
+117 
+107 </p>
+
+<p>100 
+115 
+96 
+82 </p>
+
+<p>100 
+87 
+195 
+148 </p>
+
+<p>100 
+95 
+109 
+95 </p>
+
+<p>100 
+104 
+136 
+112 </p>
+
+<p>100 
+129 
+132 
+91 </p>
+
+<p>100 
+89 
+106 
+88 </p>
+
+<p>100 
+150 
+142 
+127 </p>
+
+<p>100 
+97 
+113 
+108 </p>
+
+<p>1 0 0 
+9 6 
+8 7 
+9 8 </p>
+
+<p>100 
+103 
+82 
+128 </p>
+
+<p>100 
+93 
+92 
+108 </p>
+
+<p>100 
+101 
+106 
+131 </p>
+
+<p>1 0 0 
+8 9 
+9 0 
+9 7 </p>
+
+<p>1 0 0 
+9 3 
+9 1 
+9 4 </p>
+
+<p>100 
+104 
+97 
+88 </p>
+
+<p>100 
+83 
+106 
+101 </p>
+
+<p>100 
+87 
+101 
+115 </p>
+
+<p>100 
+84 
+102 
+105 </p>
+
+<p>100 
+105 
+97 
+98 </p>
+
+<p>123 </p>
+
+<p>Figure 4. Stabilisation of p53 by E3 ligases on p53 wt,mut breast cancer cells. (A) MCF-7, MDD2, MDA-MB-231, and MCF-10A cells were 
+treated with p28 at 50 mmol l À 1 for 24-72 h. Whole-cell lysates were subjected to western blot analysis. (B) The expression of each gene was 
+determined by RT-PCR. The numbers indicated below each band represent the relative to control (control expressed as 100%). </p>
+
+<p>BRITISH JOURNAL OF CANCER 
+Peptide inhibition of COP1 </p>
+
+<p> 
+www.bjcancer.com | DOI:10.1038/bjc.2013.266 </p>
+
+<p>spectroscopy studies that indicated p28 binds with high affinity to 
+the p53DBD (Bizzarri et al, 2011). 
+Once bound, p28 produces an increase in the level of p53 wt,mut 
+(Figures 4A and 5A), which is associated with an inhibition of cell 
+proliferation in vitro and in vivo (Figure 3A-D). Neither the 
+internal in frame deletion (aa 178-183) (Kichina et al, 2003) in p53 
+in Mel-23 cells, which does not include the predicted binding sites 
+for p28, nor the point mutation at R280K in MDA-MB-231 cells 
+that leads to overexpression (Olivier et al, 2002) (Figure 4A) affects 
+the binding of p28. This suggests that increasing an already 
+elevated level of mutated p53 may also positively impact down-
+stream targets within the cell cycle and apoptotic pathways 
+(Ludwig et al, 1996; Campomenosi et al, 2001). 
+The FoxM1, a transcription factor for genes regulating the G 2 -
+M transition, is a major downstream target of p53 (Laoukili et al, 
+2005). Loss of FoxM1 leads to a delay in G 2 (Laoukili et al, 2005). 
+p28 reduced the level of FoxM1 in p53 wt MCF-7, p53 wt Mel-29 and 
+p53 mut Mel-23 cells and inhibited cell proliferation, but did not 
+reduce the high basal levels of FoxM1 in triple negative (ER À , 
+PGR À , HER2 À ) p53 mut MDA-MB-231 cells (Figure 4A). The 
+significant inverse correlation between FoxM1 expression and 
+human epidermal growth factor 2 (HER2) (Bektas et al, 2008) 
+suggests overexpression of FoxM1 may result from this interaction 
+or that the p53 mut R280K in MDA-MB-231 cells may not allow 
+binding to the promoter region of FoxM1. However, p28 did </p>
+
+<p>increase the level of p21 in p53 mut MDA-MB-231 cells (Figure 4A), 
+in turn inhibiting the activity of the cyclin-CDK2 complex 
+(Yamada et al, 2009). This suggests that inhibition of CDK by 
+p21 provided an alternative pathway for the reduction in growth in 
+the absence of a reduction in FoxM1. 
+Intracellular levels of p53 are tightly regulated by a series of 
+ubiquitin E3 ligases that promote ubiquitination and proteasome-
+dependent degradation of p53 (Michael and Oren, 2003). HDM2 
+or MDM2 is the major E3 ligase promoting p53 degradation 
+(Haupt et al, 1997; Kubbutat et al, 1997), but TOPORS, Pirh2 and 
+particularly COP1 also bind to and negatively regulate p53 (Leng 
+et al, 2003; Dornan et al, 2004b; Rajendra et al, 2004). Although 
+TOPORS is expressed in most normal human tissues (Saleem et al, 
+2004), it is not expressed in colon cancer (Rajendra et al, 2004) and 
+may not be an E3 ligase critical to p53 function in malignant cells. 
+In contrast, Pirh2 expression is lower in normal compared with 
+tumour cells and appears independent of the type of p53 mutation 
+(Duan et al, 2006). The C-terminal domain of Pirh2 (aa 190-261) 
+binds primarily to the tetramerisation domain (aa 325-355) of p53 
+(Sheng et al, 2008) well removed from the binding sites for p28. 
+Exposure to p28 did not reduce Pirh2 levels in either breast cancer 
+or melanoma cells (Figures 4 and 5), producing only short-term 
+increases that were not accompanied by an increase in transcrip-
+tion. This suggests that only extant Pirh2 was recruited to degrade 
+the increasing levels of p53. </p>
+
+<p>0 
+24 
+48 72 (h) </p>
+
+<p>FoxM1 </p>
+
+<p>Actin </p>
+
+<p>0 
+24 
+48 
+72 (h) </p>
+
+<p>STMN1 </p>
+
+<p>HDM2 </p>
+
+<p>100 
+165 
+148 </p>
+
+<p>p53 </p>
+
+<p>p21 </p>
+
+<p>0 
+24 
+48 
+72 (h) </p>
+
+<p>FoxM1 </p>
+
+<p>GAPDH </p>
+
+<p>COP1 </p>
+
+<p>TOPORS </p>
+
+<p>Pirh2 </p>
+
+<p>HDM2 </p>
+
+<p>p53 </p>
+
+<p>p21 </p>
+
+<p>0 
+24 
+48 72 (h) 
+0 
+24 
+48 72 (h) </p>
+
+<p>UISO-Mel-29 
+0 
+24 
+48 72 (h) </p>
+
+<p>UISO-Mel-23 
+UISO-Mel-6 </p>
+
+<p>UISO-Mel-29 
+UISO-Mel-23 
+UISO-Mel-6 </p>
+
+<p>156 </p>
+
+<p>100 
+123 
+119 
+121 
+100 
+98 
+97 
+96 </p>
+
+<p>100 
+140 
+127 
+121 </p>
+
+<p>100 
+144 
+138 
+124 </p>
+
+<p>100 
+68 
+24 
+58 
+100 
+83 
+51 
+94 
+100 
+97 
+102 
+92 </p>
+
+<p>100 
+94 
+114 
+92 
+100 
+113 
+104 
+127 
+100 
+116 
+96 
+108 </p>
+
+<p>100 
+106 
+103 
+98 
+100 
+105 
+107 
+97 </p>
+
+<p>100 
+74 
+77 
+74 
+100 
+79 
+80 
+124 
+100 
+122 
+126 
+108 </p>
+
+<p>100 
+111 
+102 
+117 
+100 
+90 
+97 
+97 
+100 
+98 
+106 
+99 </p>
+
+<p>100 
+103 
+96 
+106 
+100 
+132 
+108 
+119 
+100 
+109 
+103 
+107 </p>
+
+<p>N.D. 
+N.D. 
+N.D. 
+N.D. </p>
+
+<p>N.D. 
+N.D. 
+N.D. 
+N.D. </p>
+
+<p>100 
+90 
+96 
+86 
+100 
+93 
+107 
+88 
+100 
+96 
+104 
+100 </p>
+
+<p>TOPORS </p>
+
+<p>Pirh2 </p>
+
+<p>100 
+139 
+129 
+156 </p>
+
+<p>100 
+85 
+89 
+98 </p>
+
+<p>100 
+75 
+70 
+110 </p>
+
+<p>100 
+104 
+105 
+126 </p>
+
+<p>100 
+102 
+98 
+83 </p>
+
+<p>100 
+91 
+97 
+98 </p>
+
+<p>COP1 </p>
+
+<p>100 
+59 
+45 
+76 
+100 
+92 
+98 
+78 
+100 
+38 
+44 
+74 </p>
+
+<p>100 
+102 
+128 
+120 
+100 
+98 
+112 
+86 
+100 
+128 
+101 
+108 </p>
+
+<p>100 
+72 
+74 
+69 
+100 
+90 
+94 
+89 
+100 
+109 
+98 
+106 </p>
+
+<p>100 
+84 
+147 
+81 
+100 
+62 
+143 
+53 
+100 
+104 
+113 
+92 </p>
+
+<p>Figure 5. Stabilisation of p53 by E3 ligases on p53 wt,mut melanoma cells. (A) Mel-29, Mel-23 and Mel-6 cells were treated with p28 at 50 mmol l À 1 
+for 24-72 h. (B) The expression of each gene was determined by RT-PCR. The numbers indicated below each band represent the relative to control 
+(control expressed as 100%). </p>
+
+<p>Peptide inhibition of COP1 
+BRITISH JOURNAL OF CANCER </p>
+
+<p>www.bjcancer.com | DOI:10.1038/bjc.2013.266 </p>
+
+<p>
+p28 significantly increased the level and transcription of HDM2 
+in p53 wt MCF-7 cells over 24-72 h, while p53 levels remained 
+elevated (Figure 4). The increase in HDM2 was minimal and 
+delayed (72 h) in p53 mut MDA-MB-231 cells. p28 had essentially 
+no effect on HDM2 levels or transcription in p53 wt Mel-29, and 
+induced only a delayed increase in HDM2 protein and RNA levels 
+in p53 mut Mel-23 cells in spite of a sustained increase in p53 levels 
+in both cell lines. 
+COP1 is overexpressed in breast and ovarian cancers (Dornan 
+et al, 2004b), promotes p53 degradation via the proteasome 
+pathway independently of HDM2 or Pirh2 (Dornan et al, 2004b) 
+and is able to ubiquitinate itself (Bianchi et al, 2003; Dornan et al, 
+2006). We confirm that COP1 binds to aa 92-160 and aa 318-393 
+of p53 (Li et al, 2009). We show that p28 binds to specific motifs 
+within the COP1-binding regions of the p53DBD, blocking COP1 
+binding and the subsequent ubiquitination and proteasomal 
+degradation of p53. These motifs are distinct (Figure 1D) from 
+those binding HDM2. The significant reduction in COP1 levels in 
+breast cancer and melanoma cells (Figures 4 and 5) is not 
+accompanied by an increase in the transcription of COP1 message, 
+indicating the loss in COP1 is through autodegradation (Dornan 
+et al, 2006). The p28-induced reduction in COP1 levels was also 
+not accompanied by a significant or sustained increase in the 
+transcription in c-Jun levels (Migliorini et al, 2011) that would be 
+expected if a decrease in COP1 levels led to upregulation of c-Jun 
+or altered its ubiquitination. Similarly, overexpression of COP1 
+does not result in a decrease in steady-state levels of c-Jun nor 
+reduce c-Jun half-life (Bianchi et al, 2003). 
+The slight, transient increases and decreases in c-Jun levels were 
+also unrelated to alterations in the expression of p53 or in c-Jun 
+transcription (Figure 6) (Migliorini et al, 2011), and may result 
+from as yet unknown modulating effects on the steady-state 
+condition of c-Jun in individual cell lines as a result of exposure to 
+p28. The sustained decrease in COP1 levels induced by p28 did not 
+result in a c-Jun-dependent increase in cell proliferation (Figure 3) 
+(Migliorini et al, 2011), again suggesting that a pharmacologically 
+induced reduction in COP1 levels does not result in a c-Jun-
+mediated increase in tumour cell proliferation in either p53 wt or 
+p53 mut cancers (Migliorini et al, 2011). </p>
+
+<p>On the basis of our findings, we propose a model for the 
+stabilisation of p53 by p28 that results in a reduction in tumour 
+growth through regulation of cell cycle-related genes. p28 binds 
+to the L 1 loop (aa 112-124) and additional motifs within the 
+COP1-binding regions of the p53DBD (Figure 1D), subsequently 
+inhibiting COP1-mediated p53 proteasomal degradation and 
+stabilising p53. Increased levels of p53 upregulate the downstream 
+molecules p21 (Figures 4A and 5A) and p27 (Yamada et al, 2009) 
+in p53 wt and, at least some, p53 mut cancer cells, downregulating 
+FoxM1, and leading to inhibition of cell cycle at G 2 -M. 
+Currently, small molecules designed to inhibit HDM2-mediated 
+ubiquitination are apparently only being tested in patients 
+with p53 wt tumours (Kojima et al, 2010). Unlike these small 
+molecules, p28 preferentially enters wide variety of cancer cells 
+(Taylor et al, 2009) and enhances the cellular level of p53 wt,mut by 
+inhibiting the binding of COP1 independent of the HDM2 
+pathway. As such, p28 is a prototype molecule that exhibits 
+efficacy in patients with advanced (Stage IV) p53 wt,mut solid 
+tumours (Warso et al, 2013). </p>
+
+<p>ACKNOWLEDGEMENTS </p>
+
+<p>We thank Scott Kennedy for editorial assistance. We thank CDG 
+Therapeutics Inc. for the p28 used in these studies. Financial 
+support was received from the Schenk Chair in Surgical 
+Oncology, the Illinois Health Improvement Association and the 
+NCI-DCT RAID programme. SS, ARB and SC thank the 
+Italian Association for Cancer Research (AIRC No IG 10412) for 
+supporting their research. </p>
+
+<p>CONFLICT OF INTEREST </p>
+
+<p>All terms of the research agreement between CDG Therapeutics, 
+Inc., and UIC are managed by UIC in accordance with its conflict 
+of interest management policies. </p>
+
+<p>0 
+24 
+48 72 (h) </p>
+
+<p>Actin </p>
+
+<p>0 
+24 
+48 72 (h) </p>
+
+<p>MCF-7 
+MDD2 </p>
+
+<p>100 
+91 (%) 
+113 
+93 </p>
+
+<p>c-jun </p>
+
+<p>100 
+99 
+94 101 (%) </p>
+
+<p>0 
+24 
+48 72 (h) </p>
+
+<p>MDA-MB-231 </p>
+
+<p>0 
+24 
+48 72 (h) </p>
+
+<p>MCF-10A </p>
+
+<p>100 
+92 
+62 86 (%) 
+100 
+86 
+96 100 (%) </p>
+
+<p>UISO-Mel-29 
+UISO-Mel-23 
+UISO-Mel-6 </p>
+
+<p>100 
+82 
+136 
+68 (%) 
+100 
+129 
+91 
+114 (%) 
+100 
+98 
+115 
+118 (%) </p>
+
+<p>Actin </p>
+
+<p>c-jun </p>
+
+<p>0 
+24 
+48 72 (h) 
+0 
+24 
+48 72 (h) 
+0 
+24 
+48 72 (h) </p>
+
+<p>GAPDH </p>
+
+<p>GAPDH </p>
+
+<p>0 
+24 
+48 72 (h) 
+0 
+24 
+48 72 (h) </p>
+
+<p>MCF-7 
+MDD2 
+0 
+24 
+48 72 (h) </p>
+
+<p>MDA-MB-231 
+0 
+24 
+48 72 (h) </p>
+
+<p>MCF-10A </p>
+
+<p>UISO-Mel-29 
+UISO-Mel-23 
+UISO-Mel-6 
+0 
+24 
+48 72 (h) 
+0 
+24 
+48 72 (h) 
+0 
+24 48 72 (h) </p>
+
+<p>c-jun </p>
+
+<p>c-jun </p>
+
+<p>100 
+105 (%) 
+96 
+104 
+100 
+111 
+110 104 (%) 
+100 
+109 
+96 82 (%) 
+100 
+101 
+95 98 (%) </p>
+
+<p>100 
+104 
+102 
+123 (%) 
+100 
+105 
+104 
+119 (%) 
+100 
+98 
+104 
+98 (%) </p>
+
+<p>Figure 6. The effect of p28 on c-Jun. The protein level of c-Jun was determined in MCF-7, MDD2, MDA-MB-231 and MCF-10A cells (A), and 
+Mel-29, Mel-23 and Mel-6 (C) treated with p28 at 50 mmol l À 1 for 24-72 h. The transcription level of c-Jun was determined by RT-PCR in 
+breast cell lines (B) and melanoma cells (D). The numbers indicated below each band represent the relative to control (control expressed as 100%). </p>
+
+<p>BRITISH JOURNAL OF CANCER 
+Peptide inhibition of COP1 </p>
+
+<p> 
+www.bjcancer.com | DOI:10.1038/bjc.2013.266 </p>
+
+
+
+<p>Peptide inhibition of COP1 
+BRITISH JOURNAL OF CANCER </p>
+
+<p>www.bjcancer.com | DOI:10.1038/bjc.2013.266 </p>
+
+
+
+<p>
+ 
+www.bjcancer.com | DOI:10.1038/bjc.2013.266 </p>
+
+</text></tei>

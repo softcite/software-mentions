@@ -1,0 +1,1183 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC3322527" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:26+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>† Xiujuan Zhu and Ferhat Ozturk have 
+contributed equally to this work. </p>
+
+<p>Development of the palate comprises sequential stages of growth, elevation, and fusion 
+of the palatal shelves. The mesenchymal component of palates plays a major role in 
+early phases of palatogenesis, such as growth and elevation. Failure in these steps may 
+result in cleft palate, the second most common birth defect in the world. These early 
+stages of palatogenesis require precise and chronological orchestration of key physiologi-
+cal processes, such as growth, proliferation, differentiation, migration, and apoptosis.There 
+is compelling evidence for the vital role ofTGFβ-mediated regulation of palate development. 
+We hypothesized that the isoforms of TGFβ regulate different cellular biofunctions of the 
+palatal mesenchyme to various extents. Human embryonic palatal mesenchyme (HEPM) 
+cells were treated with TGFβ1, β2, and β3 for microarray-based gene expression studies in 
+order to identify the roles of TGFβ in the transcriptome of the palatal mesenchyme. Follow-
+ing normalization and modeling of 28,869 human genes, 566 transcripts were detected as 
+differentially expressed in TGFβ-treated HEPM cells. Out of these altered transcripts, 234 
+of them were clustered in cellular biofunctions, including growth and proliferation, devel-
+opment, morphology, movement, cell cycle, and apoptosis. Biological interpretation and 
+network analysis of the genes active in cellular biofunctions were performed using <rs type="software">IPA</rs>. 
+Among the differentially expressed genes, 11 of them are known to be crucial for palatoge-
+nesis (EDN1, INHBA, LHX8, PDGFC, PIGA, RUNX1, SNAI1, SMAD3, TGF β1, TGF β2, and 
+TGF βR1).These genes were used for a merged interaction network with cellular behaviors. 
+Overall, we have determined that more than 2% of human transcripts were differentially 
+expressed in response to TGFβ treatment in HEPM cells. Our results suggest that both 
+TGFβ1 and TGFβ2 orchestrate major cellular biofunctions within the palatal mesenchyme 
+in vitro by regulating expression of 234 genes. </p>
+
+<p><rs type="software">IPA</rs><rs type="software">dChip</rs><rs id="software-34" type="software">IPA</rs><rs corresp="#software-34" type="creator">Ingenuity Systems,</rs><rs type="software">IPA</rs><rs type="software">IPA</rs><rs type="software">IPA</rs><rs type="software">IPA</rs><rs type="software">IPA</rs><rs type="software">MS Excel</rs><rs id="software-26" type="software">Adobe Photoshop</rs><rs corresp="#software-26" type="creator">Adobe Inc.</rs><rs type="software">dChip</rs><rs id="software-25" type="software">REST</rs><rs corresp="#software-25" type="version-date">2009</rs><rs type="software">IPA</rs><rs type="software">Path Designer of IPA</rs><rs type="software">Bioconductor</rs><rs type="software">IPA</rs><rs type="software">dChip</rs><rs type="software">dChip</rs><rs type="software">IPA</rs><rs type="software">IPA</rs><rs type="software">IPA</rs><rs type="software">IPA Path Designer</rs><rs type="software">IPA</rs><rs type="software">dChip</rs><rs type="software">IPA</rs>This research is supported by NIDCR, NIH grant (R01DE017986) 
+to Dr. Ali Nawshad. </p>
+
+
+
+
+
+<p>April 2012 | Volume 3 | Article 85 | 14 </p>
+
+<p>Zhu et al. </p>
+
+<p>TGFβ-treated HEPM transcriptome </p>
+
+
+
+<p>www.frontiersin.org </p>
+
+<p>April 2012 | Volume 3 | Article 85 | 15 </p>
+
+<p>Zhu et al. </p>
+
+<p>TGFβ-treated HEPM transcriptome </p>
+
+
+
+<p>Conflict of Interest Statement: The 
+authors declare that the research was 
+conducted in the absence of any com-
+mercial or financial relationships that 
+could be construed as a potential con-
+flict of interest. </p>
+
+<p>Received: 23 December 2011; accepted: 21 
+March 2012; published online: 10 April 
+2012. 
+Citation: Zhu X, Ozturk F, Pandey 
+S, Guda CB and Nawshad A (2012) 
+Implications of TGFβ on transcrip-
+tome and cellular biofunctions of palatal 
+mesenchyme. Front. Physio. 3:85. doi: 
+10.3389/fphys.2012.00085 
+This article was submitted to Frontiers 
+in Craniofacial Biology, a specialty of 
+Frontiers in Physiology. 
+Copyright © 2012 Zhu, Ozturk, Pandey, 
+Guda and Nawshad. This is an open-
+access article distributed under the terms 
+of the Creative Commons Attribution 
+Non Commercial License, which per-
+mits non-commercial use, distribution, 
+and reproduction in other forums, pro-
+vided the original authors and source are 
+credited. </p>
+
+<p>Frontiers in Physiology | Craniofacial Biology </p>
+
+<p>April 2012 | Volume 3 | Article 85 | 16 </p>
+
+<p>Zhu et al. </p>
+
+<p>TGFβ-treated HEPM transcriptome </p>
+
+<p>APPENDIX </p>
+
+<p>Table A1 | Primers for q-RTPCR. </p>
+
+<p>Gene name 
+Entrez ID 
+Fw primer 
+Rv primer </p>
+
+<p>AMIGO2 
+NM_001143668.1 
+CAACATCACCAGCATTTCCAC 
+TCACCGTCTTCAGCTTATTGG </p>
+
+<p>NOX4 
+NM_016931 
+TCACAGAAGGTTCCAAGCAG 
+ACTGAGAAGTTGAGGGCATTC </p>
+
+<p>TNFAIP6 
+NM_007115.3 
+AATACAAGCTCACCTACGCAG 
+GGTATCCAACTCTGCCCTTAG </p>
+
+<p>DACT1 
+NM_016651.5 
+TTGGAGGAGAACATCTTGCTG 
+GTCTTTTCTACATCCAGTCTCAGG </p>
+
+<p>ANKRD1 
+NM_014391.2 
+GGTGAGACTGAACCGCTATAAG 
+GGCTGTCGAATATTGCTTTGG </p>
+
+<p>PMEPA1 
+NM_020182 
+GCAAACGCTCTTTGTTCCAG 
+ACCATCACCATCATCACCAC </p>
+
+<p>MSC 
+NM_005098.3 
+CGCTATGAGAACGGCTACG 
+CCCATCAAGTGAGTTCCAGTC </p>
+
+<p>EDN1 
+NM_001955 
+CTTCGTTTTCCTTTGGGTTCAG 
+GCTCAGCGCCTAAGACTG </p>
+
+<p>VDR 
+NM_000376.2 
+CACTATTCACCTGCCCCTTC 
+CTTCCTCTGCACTTCCTCATC </p>
+
+<p>ITGB3 
+NM_000212.2 
+CAAGTGTGAATGTGGCAGC 
+TTTTCGTCATGTAGGGCTCC </p>
+
+<p>KCNH1 
+NM_172362.2 
+GCCTTCTCCCATTCCTTCTC 
+CCTCATTCTTTCGTTTCATGCG </p>
+
+<p>HAPLN1 
+NM_001884.3 
+AGTGTGAGGTGATTGAAGGATTAG 
+CTGCGCCTCGTGAAAATTG </p>
+
+<p>NEDD9 
+NM_006403.3 
+TGTAGGAAAACGGCTCAACC 
+CCCTGTGTTCTGCTCTATGAC </p>
+
+<p>GDF5 
+NM_000557.2 
+ACAGAAAGGGAGGCAACAG 
+CTTCTCCAGGGCACTAATGTC </p>
+
+<p>SECTM1 
+NM_003004.2 
+GACACCAGAGAAATAACAGACAAG 
+GTACCAGGCGAACATGACC </p>
+
+<p>NPTX1 
+NM_002522.3 
+GCCCTATCACCCCATCAAG 
+TTGCGGTCCCAGATGTTG </p>
+
+<p>SMAD3 
+NM_005902 
+TCCATCCCCGAAAACACTAAC 
+CATCTTCACTCAGGTAGCCAG </p>
+
+<p>OAS1 
+NM_016816 
+CATCTGTGGGTTCCTGAAGG 
+GAGAGGACTGAGGAAGACAAC </p>
+
+<p>TBC1D8 
+NM_001102426 
+CCCAGGTTTATTCTCCCATAGC 
+AGCCTTTACCTTCCCTTTGAC </p>
+
+<p>TRERF1 
+NM_033502.2 
+GTGATGGTTGCTCTGGAAATG 
+TCTTTGCTGTAAGTGGCTAGTG </p>
+
+<p>VSIG1 
+NM_182607 
+GCTCTCAACTAACCTCCACAC 
+AGATCCAACAGTCACGTTCAC </p>
+
+<p>TGFBR3 
+NM_003243.4 
+CGGAAACATCACCTTCAACATG 
+CCCAGTTCTTGTTCAGCCTTAG </p>
+
+<p>CA12 
+NM_001218 
+CAGGTCCAGAAGTTCGATGAG 
+CAATACAGATGCCAAGAATGCC </p>
+
+<p>ARHGAP28 
+NM_001010000 
+AGTAAAAGGACGAGACAATGGG 
+ATTCCTTCAGATTCCAGACCTG </p>
+
+<p>HGF 
+NM_000601.4 
+GCTATACTCTTGACCCTCACAC 
+GTAGCCTTCTCCTTGACCTTG </p>
+
+<p>NR4A2 
+NM_006186 
+CTGGCTGTTGGGATGGTC 
+TGTGGGCTCTTCGGTTTC </p>
+
+<p>IFIT2 
+NM_001547.4 
+GAAGATTTCTGAAGAGTGCAGC 
+CCTCCATCAAGTTCCAGGTG </p>
+
+<p>www.frontiersin.org </p>
+
+<p>April 2012 | Volume 3 | Article 85 | 17 </p>
+
+<p>Zhu et al. </p>
+
+<p>TGFβ-treated HEPM transcriptome </p>
+
+<p>Table A2 | Genes susceptible for cleft palate. </p>
+
+<p>Abca4 
+Fst 
+Mthfr 
+Tbx1 </p>
+
+<p>Acvr2* 
+Gabrb3 
+Myf5 
+Tbx22 </p>
+
+
+
+<p>Fgf 
+Lhx8* 
+Six3 </p>
+
+<p>Fgf-10* 
+Mafb 
+SMAD2 </p>
+
+<p>Fgfr 
+Meox1* 
+SMAD3 </p>
+
+<p>Fgfr-2* 
+Mid1 
+SMAD4 </p>
+
+<p>Folr1* 
+Mmp 
+Snail 1 </p>
+
+<p>Foxc2 
+Mn1* 
+Snail 2* </p>
+
+<p>Foxe1 
+Mnt* 
+Snail 3* </p>
+
+<p>Foxf2 
+Msx1 
+Sox9 </p>
+
+<p>*Putative genes, which may cause cleft palate in human. </p>
+
+<p>Differentially expressed putative cleft palate genes in response to TGFβ1 and </p>
+
+<p>TGFβ2. </p>
+
+<p>Frontiers in Physiology | Craniofacial Biology </p>
+
+<p>April 2012 | Volume 3 | Article 85 | 18 </p>
+
+<p>Zhu et al. </p>
+
+<p>TGFβ-treated HEPM transcriptome </p>
+
+<p>Table A3 | Details of the most significantly altered genes within the palatal mesenchyme. </p>
+
+<p>Gene 
+Entrez Gene Name 
+Function in the cell </p>
+
+<p>Most </p>
+
+<p>Upregulated </p>
+
+<p>AMIGO2 
+Adhesion molecule with Ig-like domain 2 Cell-cell adhesion, apoptosis, adhesion, survival </p>
+
+<p>NOX4 
+NADPH oxidase 4 
+Proliferation, expression, apoptosis, morphogenesis, aging, growth, cell death, </p>
+
+<p>NADPH oxidase activity </p>
+
+<p>TNFAIP6 
+Tumor necrosis factor, alpha-induced fac-</p>
+
+<p>tor 6 </p>
+
+<p>Signaling, adhesion, expansion, assembly </p>
+
+<p>DACT1 
+Dapper homolog 1 
+Multicellular organismal development; Wnt receptor signaling pathway </p>
+
+<p>ANKRD1 
+Ankyrin repeat domain 1 
+Apoptosis, colony formation </p>
+
+<p>PMEPA1 
+Prostate transmembrane protein, andro-</p>
+
+<p>gen induced 1 </p>
+
+<p>Apoptosis, growth; androgen receptor signaling pathway </p>
+
+<p>MSC 
+Musculin 
+Myogenesis; skeletal muscle development; palate development; regulation of </p>
+
+<p>transcription </p>
+
+<p>EDN1 
+Endothelin 1 
+Proliferation, migration, growth, apoptosis, gene expression, stimulation, pH, </p>
+
+<p>activation, invasion </p>
+
+<p>VDR 
+Vitamin D (1,25-dihydroxyvitamin D3) </p>
+
+<p>receptor </p>
+
+<p>Apoptosis, development, proliferation, homeostasis, differentiation, osteoclas-</p>
+
+<p>togenesis, transcription </p>
+
+<p>KCNH1 
+Potassium voltage-gated channel mem-</p>
+
+<p>ber 1 </p>
+
+<p>Growth, proliferation, fusion, hyperexcitation </p>
+
+<p>HAPLN1 
+Hyaluronan and proteoglycan link protein </p>
+
+<p>1 </p>
+
+<p>Cell adhesion; hyaluronic acid binding </p>
+
+<p>NEDD9 
+Neural precursor cell expressed, devel-</p>
+
+<p>opmentally downregulated 9 </p>
+
+<p>Migration, invasion, proliferation, apoptosis, quantity, cell division, cell spread-</p>
+
+<p>ing, survival, activation </p>
+
+<p>ITGB3 
+Integrin, beta 3 
+Adhesion, migration, aggregation, cell spreading, proliferation, activation, apop-</p>
+
+<p>tosis, invasion, angiogenesis; negative regulation of cell death </p>
+
+<p>Most Downreg-</p>
+
+<p>ulated </p>
+
+<p>GDF5 
+Growth differentiation factor 5 
+Differentiation, apoptosis, signaling, adhesion, proliferation, migration; cell-cell </p>
+
+<p>signaling; limb morphogenesis;TGFβR signaling pathway </p>
+
+<p>SECTM1 
+Secreted and transmembrane 1 
+Immune response; mesoderm development; positive regulation of IKB </p>
+
+<p>kinase/NFKB cascade; signal transduction </p>
+
+<p>NPTX1 
+Neuronal pentraxin I 
+Synaptic transmission, cell death, outgrowth, apoptosis, cell-cell contact, loss, </p>
+
+<p>chemotaxis; central nervous system development </p>
+
+<p>SMAD3 
+SMAD family member 3 
+Growth, proliferation, apoptosis, differentiation, chemotaxis; cell-cell junction </p>
+
+<p>organization; cell cycle arrest; developmental growth </p>
+
+<p>OAS1 
+2 -5 -oligoadenylate synthetase 1 
+Apoptosis; cellular response to interferon-alpha; cytokine-mediated signaling </p>
+
+<p>pathway; defense response to virus </p>
+
+<p>TBC1D8 
+TBC1 domain family, member 8 
+Proliferation, formation; blood circulation; cell proliferation; regulation of Rab </p>
+
+<p>GTPase activity </p>
+
+<p>TRERF1 
+Transcriptional regulating factor 1 
+Replication; homeostatic process; multicellular organismal development; reg-</p>
+
+<p>ulation of transcription </p>
+
+<p>VSIG1 
+V-set and immunoglobulin domain con-</p>
+
+<p>taining 1 </p>
+
+<p>Member of the junctional adhesion molecule (JAM) family </p>
+
+<p>TGFBR3 
+Transforming growth factor, beta recep-</p>
+
+<p>tor III </p>
+
+<p>Growth, apoptosis, proliferation, invasiveness, motility, movement, differentia-</p>
+
+<p>tion; epithelial to mesenchymal transition; TGFβ receptor signaling </p>
+
+<p>CA12 
+Carbonic anhydrase XII 
+Growth; one-carbon metabolic process; type I membrane protein </p>
+
+<p>ARHGAP28 Rho GTPase activating protein 28 
+Positive regulation of small GTPase activity; signal transduction </p>
+
+<p>HGF 
+Hepatocyte growth factor 
+Migration, scattering, proliferation, apoptosis, invasion, growth, expression, </p>
+
+<p>motility, branching, morphogenesis </p>
+
+<p>NR4A2 
+Nuclear receptor subfamily 4, group A, </p>
+
+<p>member 2 </p>
+
+<p>Differentiation, maturation, degeneration, quantity, migration, growth, survival; </p>
+
+<p>negative regulation of apoptosis </p>
+
+<p>IFIT2 
+Interferon-induced protein with tetratri-</p>
+
+<p>copeptide repeats 2 </p>
+
+<p>Cellular response to interferon-alpha; cytokine-mediated signaling pathway; </p>
+
+<p>negative regulation of protein binding; type I interferon-mediated signaling </p>
+
+<p>pathway </p>
+
+<p>(Continued) </p>
+
+<p>www.frontiersin.org </p>
+
+<p>April 2012 | Volume 3 | Article 85 | 19 </p>
+
+<p>Zhu et al. </p>
+
+<p>TGFβ-treated HEPM transcriptome </p>
+
+<p>Table A3 | Continued </p>
+
+<p>Gene 
+Entrez Gene Name 
+Function in the cell </p>
+
+<p>Cleft </p>
+
+<p>Palate-related </p>
+
+<p>EDN1 
+Endothelin 1 
+Proliferation, migration, growth, apoptosis, gene expression, stimulation, pH, </p>
+
+<p>activation, invasion </p>
+
+<p>INHBA 
+Inhibin, beta A 
+Apoptosis, growth, differentiation, cell cycle progression, proliferation, quantity, </p>
+
+<p>induction, cell death </p>
+
+<p>LHX8 
+LIM homeobox 8 
+Development, maturation, differentiation, quantity; female gonad development; </p>
+
+<p>forebrain neuron development </p>
+
+<p>PDGFC 
+Platelet derived growth factor C 
+Proliferation, migration, formation, mitogenesis, growth, chemotaxis, motility; </p>
+
+<p>activation of transmembrane receptor protein tyrosine kinase activity </p>
+
+<p>PIGA 
+Phosphatidylinositol glycan anchor </p>
+
+<p>biosynthesis, class A </p>
+
+<p>Morphogenesis, colony formation, hemolysis, quantity; biosynthetic process; </p>
+
+<p>cellular protein metabolic process </p>
+
+<p>RUNX1 
+Runt-related transcription factor 1 
+Differentiation, apoptosis, growth, proliferation, transcription, activation, sur-</p>
+
+<p>vival; skeletal system development; DNA-dependent transcription </p>
+
+<p>SMAD3 
+SMAD family member 3 
+Growth, proliferation, apoptosis, differentiation, chemotaxis; cell-cell junction </p>
+
+<p>organization; cell cycle arrest; developmental growth </p>
+
+<p>SNAI1 
+Snail homolog 1 
+Apoptosis, epithelial-mesenchymal transition, migration, cell cycle progres-</p>
+
+<p>sion, binding, transcription, dissemination; osteoblast differentiation; palate </p>
+
+<p>development </p>
+
+<p>TGFβ1 
+Transforming growth factor, beta 1 
+Multifunctional peptide that regulates proliferation, differentiation, adhesion, </p>
+
+<p>migration </p>
+
+<p>TGFβ2 
+Transforming growth factor, beta 2 
+Proliferation, apoptosis, growth, differentiation, cell cycle progression, cell </p>
+
+<p>death, migration, cytostasis, development; angiogenesis; axon guidance; blood </p>
+
+<p>coagulation </p>
+
+<p>TGFβR1 
+Transforming growth factor, beta recep-</p>
+
+<p>tor 1 </p>
+
+<p>Apoptosis, differentiation, proliferation, growth, migration, motility, cell cycle </p>
+
+<p>progression, phosphorylation; signal transduction; skeletal system develop-</p>
+
+<p>ment </p>
+
+<p>Frontiers in Physiology | Craniofacial Biology </p>
+
+<p>April 2012 | Volume 3 | Article 85 | 20 </p>
+
+<p>Zhu et al. </p>
+
+<p>TGFβ-treated HEPM transcriptome </p>
+
+<p>Table A4 | The full list of genes regulated by differentially expressed </p>
+
+<p>TGFβ signaling molecules and their level of altered expression. </p>
+
+<p>Molecule 
+Gene 
+TGFβ1 
+TGFβ2 </p>
+
+<p>SMAD7 
+Alpha1 
+NS 
+NS </p>
+
+<p>CDKN1A 
+NS 
+NS </p>
+
+<p>CDKN2B 
+NS 
+NS </p>
+
+<p>COL1A1 
+NS 
+NS </p>
+
+<p>COL3A1 
+NS 
+NS </p>
+
+<p>Collagen 
+NS 
+NS </p>
+
+<p>CTGF 
+2.00 
+1.95 </p>
+
+<p>MAPK 
+NS 
+NS </p>
+
+<p>P38 
+NS 
+NS </p>
+
+<p>SERPINE1 
+1.83 
+1.96 </p>
+
+<p>SMAD2 
+NS 
+NS </p>
+
+<p>Smad2/3 
+NS 
+NS </p>
+
+<p>SMAD3 
+−3.24 
+−2.51 </p>
+
+<p>SMAD7 
+4.17 
+4.04 </p>
+
+<p>TGFBR1 
+1.49 
+NS </p>
+
+<p>TGFBR2 
+NS 
+NS </p>
+
+<p>SMURF1 
+BMPR2 
+1.42 
+1.38 </p>
+
+<p>MAP3K2 
+NS 
+NS </p>
+
+<p>RHOA 
+NS 
+NS </p>
+
+<p>RUNX2 
+NS 
+NS </p>
+
+<p>SMAD1 
+1.48 
+NS </p>
+
+<p>SMAD1/5/8 
+NS 
+NS </p>
+
+<p>SMAD4 
+NS 
+NS </p>
+
+<p>SMAD5 
+NS 
+NS </p>
+
+<p>SMAD7 
+4.17 
+4.04 </p>
+
+<p>TGFBR1 
+1.49 
+NS </p>
+
+<p>TRAF1 
+NS 
+NS </p>
+
+<p>TRAF4 
+NS 
+NS </p>
+
+<p>BMPR2 
+ID1 
+NS 
+NS </p>
+
+<p>ID2 
+NS 
+NS </p>
+
+<p>MAP3K7 
+NS 
+NS </p>
+
+<p>MAPK 
+NS 
+NS </p>
+
+<p>P38 
+NS 
+NS </p>
+
+<p>PKA 
+NS 
+NS </p>
+
+<p>Ras 
+NS 
+NS </p>
+
+<p>SHC1 
+NS 
+NS </p>
+
+<p>SMAD1 
+1.48 
+NS </p>
+
+<p>Smad1/5/8 
+NS 
+NS </p>
+
+<p>SMAD3 
+−3.24 
+−2.51 </p>
+
+<p>SMAD5 
+NS 
+NS </p>
+
+<p>TGFBR1 
+CDKN1A 
+NS 
+NS </p>
+
+<p>Erk1/2 
+NS 
+NS </p>
+
+<p>MAP3K7 
+NS 
+NS </p>
+
+<p>Ras 
+NS 
+NS </p>
+
+<p>SERPINE1 
+1.83 
+1.96 </p>
+
+<p>SMAD1 
+1.48 
+NS </p>
+
+<p>SMAD2 
+NS 
+NS </p>
+
+<p>SMAD3 
+−3.24 
+−2.51 </p>
+
+<p>SMAD4 
+NS 
+NS </p>
+
+<p>Tab1-Tak1 
+NS 
+NS </p>
+
+<p>TGFBR1 
+1.49 
+NS </p>
+
+<p>Gene 
+TGFβ1 
+TGFβ2 </p>
+
+<p>Molecule 
+Gene 
+TGFβ1 
+TGFβ2 </p>
+
+<p>SERPINE1 (PAI1) 
+F2 
+NS 
+NS </p>
+
+<p>FLT1 
+NS 
+NS </p>
+
+<p>FN1 
+NS 
+NS </p>
+
+<p>ITGAV 
+NS 
+NS </p>
+
+<p>ITGB3 
+5.19 
+4.42 </p>
+
+<p>Laminin 
+NS 
+NS </p>
+
+<p>LRP1 
+NS 
+NS </p>
+
+<p>PLAT 
+NS 
+NS </p>
+
+<p>PLAU 
+NS 
+NS </p>
+
+<p>PLAUR 
+NS 
+NS </p>
+
+<p>PLG 
+NS 
+NS </p>
+
+<p>SERPINE1 
+1.83 
+1.96 </p>
+
+<p>TGFB1 
+1.91 
+1.59 </p>
+
+<p>VTN 
+NS 
+NS </p>
+
+<p>VDR 
+BGLAP 
+NS 
+NS </p>
+
+<p>Ca2 + 
+NS 
+NS </p>
+
+<p>CYP24A1 
+NS 
+NS </p>
+
+<p>CYP27B1 
+NS 
+NS </p>
+
+<p>FGF23 
+NS 
+NS </p>
+
+<p>IL2 
+NS 
+NS </p>
+
+<p>PTH 
+NS 
+NS </p>
+
+<p>REN 
+NS 
+NS </p>
+
+<p>Renin 
+NS 
+NS </p>
+
+<p>RXRA 
+NS 
+NS </p>
+
+<p>S100G 
+NS 
+NS </p>
+
+<p>SLC34A1 
+NS 
+NS </p>
+
+<p>TGFβ1 
+ACTA2 
+NS 
+NS </p>
+
+<p>CDH1 
+NS 
+NS </p>
+
+<p>CDKN1A 
+NS 
+NS </p>
+
+<p>CDKN2B 
+NS 
+NS </p>
+
+<p>COL1A1 
+NS 
+NS </p>
+
+<p>COL1A2 
+NS 
+NS </p>
+
+<p>CTGF 
+2.00 
+1.95 </p>
+
+<p>FN1 
+NS 
+NS </p>
+
+<p>FOXP3 
+NS 
+NS </p>
+
+<p>SERPINE1 
+1.83 
+1.96 </p>
+
+<p>SMAD2 
+NS 
+NS </p>
+
+<p>SMAD3 
+−3.24 
+−2.51 </p>
+
+<p>SMAD4 
+NS 
+NS </p>
+
+<p>SMAD7 
+4.17 
+4.04 </p>
+
+<p>Gene 
+TGFβ1 
+TGFβ2 </p>
+
+<p>SMAD3 
+Alp 
+NS 
+NS </p>
+
+<p>CDKN1A 
+NS 
+NS </p>
+
+<p>CDKN2B 
+NS 
+NS </p>
+
+<p>COL1A2 
+NS 
+NS </p>
+
+<p>CTGF 
+2.00 
+1.95 </p>
+
+<p>FSHB 
+NS 
+NS </p>
+
+<p>IFNG 
+NS 
+NS </p>
+
+<p>IL2 
+NS 
+NS </p>
+
+<p>NOS2 
+NS 
+NS </p>
+
+<p>SERPINE1 
+1.83 
+1.96 </p>
+
+<p>SMAD3 
+−3.24 
+−2.51 </p>
+
+<p>(Continued) </p>
+
+<p>www.frontiersin.org </p>
+
+<p>April 2012 | Volume 3 | Article 85 | 21 </p>
+
+<p>Zhu et al. </p>
+
+<p>TGFβ-treated HEPM transcriptome </p>
+
+<p>Table A4 | Continued </p>
+
+<p>Molecule 
+Gene 
+TGFβ1 
+TGFβ2 </p>
+
+<p>TBX21 
+NS 
+NS </p>
+
+<p>TGFB1 
+1.91 
+1.59 </p>
+
+<p>INHBA 
+ACVR1B 
+NS 
+NS </p>
+
+<p>ACVR2B 
+NS 
+NS </p>
+
+<p>BAX 
+NS 
+NS </p>
+
+<p>CCND2 
+NS 
+NS </p>
+
+<p>CDKN1A 
+NS 
+NS </p>
+
+<p>CDKN2B 
+NS 
+NS </p>
+
+<p>CGA 
+NS 
+NS </p>
+
+<p>CYP11A1 
+NS 
+NS </p>
+
+<p>FSH 
+NS 
+NS </p>
+
+<p>FSHB 
+NS 
+NS </p>
+
+<p>FSHR 
+NS 
+NS </p>
+
+<p>FST 
+NS 
+NS </p>
+
+<p>GNRHR 
+NS 
+NS </p>
+
+<p>INSULIN 
+NS 
+NS </p>
+
+<p>SMAD7 
+NS 
+NS </p>
+
+<p>TGFβ2 
+CDKN1A 
+NS 
+NS </p>
+
+<p>CDKN2B 
+NS 
+NS </p>
+
+<p>COL1A1 
+NS 
+NS </p>
+
+<p>COL1A2 
+NS 
+NS </p>
+
+<p>CTGF 
+2.00 
+1.95 </p>
+
+<p>FN1 
+NS 
+NS </p>
+
+<p>FOS 
+NS 
+NS </p>
+
+<p>FOXP3 
+NS 
+NS </p>
+
+<p>SERPINE1 
+1.83 
+1.96 </p>
+
+<p>SMAD2 
+NS 
+NS </p>
+
+<p>SMAD3 
+-3.24 
+-2.51 </p>
+
+<p>SMAD4 
+NS 
+NS </p>
+
+<p>SMAD7 
+4.17 
+4.04 </p>
+
+<p>TNF 
+NS 
+NS </p>
+
+<p>NS, non-significant expression detected by <rs type="software">dChip</rs>. </p>
+
+<p>Frontiers in Physiology | Craniofacial Biology </p>
+
+<p>April 2012 | Volume 3 | Article 85 | 22 </p>
+
+</text></tei>

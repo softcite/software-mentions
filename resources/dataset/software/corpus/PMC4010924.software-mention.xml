@@ -1,0 +1,528 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4010924" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:22+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>The ability to perturb individual genes in genome-wide experiments has been instrumental in unraveling 
+cellular and disease properties. Here we introduce, describe the assembly, and demonstrate the use of 
+comprehensive and versatile transcription activator-like effector (TALE) libraries. As a proof of principle, 
+we built an 11-mer library that covers all possible combinations of the nucleotides that determine the 
+TALE-DNA binding specificity. We demonstrate the versatility of the methodology by constructing a 
+constraint library, customized to bind to a known p53 motif. To verify the functionality in assays, we applied 
+the 11-mer library in yeast-one-hybrid screens to discover TALEs that activate human SCN9A and miR-34b 
+respectively. Additionally, we performed a genome-wide screen using the complete 11-mer library to 
+confirm known genes that confer cycloheximide resistance in yeast. Considering the highly modular nature 
+of TALEs and the versatility and ease of constructing these libraries we envision broad implications for 
+high-throughput genomic assays. </p>
+
+<p>T </p>
+
+<p>ranscription activator-like effectors (TALEs) are proteins secreted by Xanthomonas bacteria to target 
+specific DNA sequences 1,2 . TALE family members contain a highly conserved and repetitive region 
+(Fig. 1a) and their DNA binding capacities are dependent on the amino acid positions 12 and 13 (i.e. repeat 
+variable diresidue or RVD) of each modular repeat 3,4 . Recent advances show that TALE proteins consist of a 
+modular DNA-binding domain (DBD) that can be rapidly synthesized de novo 5 . The ability to complement the 
+DBD with a functional domain permits a wide range of applications that include gene activation, repression, and 
+nucleotide deletion and insertion, in a variety of model organisms and cell types 6-10 . 
+In a parallel domain, high-throughput genome-wide screening experiments continue to provide critical insight 
+into biology and medicine, shedding light on traditional cellular phenotypes, disease networks, and for reverse 
+engineering endogenous pathways. Unfortunately, currently available methods are highly constrained, expensive, 
+and often suffer from non-specific target effects 11-15 . Traditionally, these assays involve mutations or RNAi and 
+explore the effect of loss of function coupled with selective pressure 15-17 . The complement, or gain-of-function, 
+can be partially accomplished in yeast with introduction of cDNA 18 . In mammalian cells, a recently developed 
+methodology provides a path for the use of zinc finger 19 proteins for genetic screens 20,21 . This protein-based 
+technology can expand the repertoire of genetic screening in human cells by allowing the delivery of a variety of 
+functional domains. In addition, RNAi-based screening is extensively used for genome-wide screens 11,22 , and 
+typically relies on shRNA delivery. Finally, the CRISPR-Cas9 system was recently used to perform genetic screens 
+in human cells using genome-scale lentiviral single-guide RNA (sgRNA) libraries 23,24 . 
+Here, we introduce novel transcription activator-like effector (TALE) libraries. Our assembly methodology is 
+rapid, modular, and allows precise control of the resulting RVD content and overall DNA binding domain 
+composition. As a proof of principle, we built and verified two libraries: a sequence-constrained library to target 
+a known p53 motif and an 11-mer library that spans all possible 11-nucleotide DNA targets (i.e. resulting to a 
+maximum of 4,194,304 combinations). In contrast, an alternative Golden-Gate assembly system that relies on 432 
+plasmids assembled using a multi-well plate format, produced a TALE Nuclease (TALEN) library that targets 
+18,740 exclusively protein-coding gene targets 25 . </p>
+
+<p>Results 
+Assembly and verification of the libraries. To assemble our TALE 
+libraries, we modified the Golden Gate protocol (Fig. 1b) 5,26 . The 
+enabling modification is the use of a predetermined mixture of the 
+four building modules during the first step of the assembly (Fig. 1c). 
+The flanking sequences of the four modules are identical. Therefore, 
+during the enzyme-based digestion and ligase-based ligation 
+reactions these modules have an equal probability in appearing in 
+the final TALE construct (Methods and Supplementary Material). To 
+test the library fidelity we subjected our 11-mer TALE mixture to 
+standard Sanger sequencing using primers flanking the TALE DNA 
+binding domain (Supplementary Table 1, P23 and P24). The se-
+quencing results show that there are 6-nucleotide long repeats, 
+spaced by 102 nucleotides, which have variable signature (Supple-
+mentary Fig. 1a). This general profile perfectly matches the TALE 
+tandem repeat structure which contains 102 nucleotides and has 
+RVDs which are 6-nucleotides in length. Importantly the 
+composition of different peaks within these 6-nucleotide noisy 
+elements closely tracks the expected composition. In particular, 
+when equal amounts of all four possible RVDs are used for all 
+positions, the first nucleotide position should consist of 75% A and 
+25% C (Supplementary Fig. 1b) and indeed the results have the 
+expected sequencing profile (Supplementary Fig. 1c). Similarly, at 
+position 2 of the RVD sequence, we should have only nucleotide A 
+which was confirmed by sequencing (Supplementary Fig. 1c). The 
+sequencing results confirm all positions. </p>
+
+<p>The versatility of the proposed methodology of TALE library con-
+struction, perhaps, can be best illustrated by the simplicity in gen-
+erating specific variants, namely sequence or nucleotide-biased 
+TALE libraries (Supplementary Fig. 2). A sequence-biased TALE 
+library has constrained nucleotides, and is assembled to bind to a 
+specific transcription factor motif, while a nucleotide-biased TALE 
+library has a predetermined ratio of the building modules resulting in 
+desired nucleotide distributions (e.g. GC-rich). 
+As an example, we assembled a sequence-biased library to target a 
+p53 motif. The p53-responsive element has been identified 27 as two 
+copies of the decamer motif 59-RRRCWWGYYY-39 (R5A or G, 
+W5A or T, Y5C or T) separated by 0 to 13 random nucleotides. 
+Accordingly, we prepared an 11-mer TALE library which targets 59-
+RRRCWWGYYYN-39 (Methods and Supplementary Material). The 
+validity of this library was again verified by Sanger sequencing, and 
+the results closely match the desired RVD patterns (Supplemen-
+tary Fig. 3). </p>
+
+<p>TALE library-based yeast one-hybrid assay. We then explored the 
+functional integrity of our complete 11-mer TALE library using a 
+yeast one-hybrid assay (Methods, Yeast One-hybrid Assay). A VP16 
+activation domain was added to the 11-mer library to enhance the 
+transactivation activities. For the assay, we cloned part of the 
+59untranslated region (UTR) and the open reading frame (ORF) of 
+the human SCN9A gene (Supplementary Table 2) in front of an 
+antibiotic resistance gene, Aureobasidin A (Aba) in yeast (bait), </p>
+
+<p>Figure 1 | Construction of an 11-mer TALE-VP16 library. (a) Schematic illustration of a TALE protein depicting the tandem repeat domain and the </p>
+
+<p>variable diresidues (RVDs). (b) Schematic illustration of a typical TALE assembling reaction. Corresponding RVDs were chosen for specific 
+nucleotide targets (NI for A, HD for C, NG for T, and NN for G). (c) Schematic illustration of the TALE library assembling. For each position, equal 
+amounts of all four building modules were used, which results in an 11-mer TALE library covering all possible 11-mer DNA targets. </p>
+
+<p>www.nature.com/scientificreports </p>
+
+<p>SCIENTIFIC REPORTS | 4 : 4857 | DOI: 10.1038/srep04857 </p>
+
+<p>
+and applied our library (prey) (Fig. 2a). We used 50 (15 cm diameter) 
+plates, which resulted to approximately 1 million individual TALE 
+clones (Supplementary Material, Yeast one-hybrid). For assays that 
+require comprehensive library coverage the protocol can be scaled up 
+by increasing the number of plates. The positive clones were con-
+firmed by re-streaking on Aba-containing agar plates (Supple-</p>
+
+<p>mentary Fig. 4). Thirteen of the TALE-VP16 expression plasmids 
+were then rescued and sequenced to extract the RVD sequences 
+(Supplementary Table 3). 
+Using <rs id="software-3" type="software">TALE-NT</rs> <rs corresp="#software-3" type="version-number">2.0</rs> (TALE Effector Nucleotide Targeter 2.0) 28 , 
+we were able to confirm that these positive clones are predicted to 
+bind to either the plus or minus strand of three specific locations </p>
+
+<p>Figure 2 | Isolation of TALE-VP16 fusions targeting the human SCN9A gene using the 11-mer TALE-VP16 library and the yeast one-hybrid assay. </p>
+
+<p>(a) Schematic illustration of the yeast one-hybrid assay using the 11-mer TALE-VP16 library. A bait sequence was cloned in front of an antibiotic 
+resistance gene (Aba resistance gene) in yeast. The 11-mer TALE-VP16 library was then transformed into this stable clone and a surviving assay was 
+performed on -Leu plates containing 100 nM Aba. (b) The RVD sequences of isolated TALE-VP16 fusions and their targets within the human SCN9A bait 
+sequence (scale not proportional). TALE-VP16 fusions were shown to bind to both the plus and the minus strands of the SCN9A bait sequence. (c) The 
+isolated TALE-VP16 fusions induced overexpression of endogenous SCN9A in HEK293 cells and A431 cells. The mRNA levels of SCN9A were 
+determined by quantitative RT-PCR. An empty vector (PEF-1) was used as the control. Columns 1-6: All TALE-VP16 fusions were able to effectively 
+induce the overexpression of SCN9A in HEK293 cells (n55). Columns 11-16: All TALE-VP16 fusions effectively induced the overexpression of SCN9A in 
+A431 cells (n53). Columns 7-10: All 4 TALEs designed according to <rs id="software-2" type="software">TALE-NT</rs> <rs corresp="#software-2" type="version-number">2.0</rs> failed to induce the overexpression of SCN9A in HEK293 cells (n53). 
+Inlet: Western blot shows that all TALE-VP16 fusions induced the overexpression of SCN9A protein in A431 cells (representative data of two independent 
+experiments). (d) The RVD sequences of isolated TALE-VP16 fusions and their targets within the human miR-34b/c bait sequence (scale not 
+proportional). (e) Confirmation of the binding between isolated TALE-VP16 fusion M1 and its predicted gene target within the human miR-34b/c bait 
+sequence. The isolated clone M1 was predicted to target 59-TTTCTAGGTAT-39 within the miR-34b/c bait sequence. The full-length bait sequence 
+(pAbAi-miR-34b/c) or bait with the predicted target site deleted (pAbAi-miR-34b/c (DTTTCTAGGTAT)) was stably integrated into yeast cells. TALE-
+VP16 fusion clone M1 was then transformed into either cell line. Only cells which contained the intact bait sequence survived the 100 nM Aba selection. 
+(f) The isolated TALE-VP16 fusion M1 effectively induced overexpression of miR-34b in a dose-dependent manner in both HEK293 and HeLa cells (n53 
+for both cell lines). </p>
+
+<p>www.nature.com/scientificreports </p>
+
+<p>SCIENTIFIC REPORTS | 4 : 4857 | DOI: 10.1038/srep04857 </p>
+
+<p>
+within the SCN9A bait sequence. Five of the TALE-VP16 clones are 
+illustrated together with their corresponding position (Fig. 2b). To 
+confirm these results, we first generated baits that exclude those 
+predicted DNA target sites. For example, the positive clone T110 
+induced the expression of Aba resistance gene when the bait 
+sequence is intact (Supplementary Fig. 5a) but it failed to produce 
+surviving clones when the specific DNA target site (59-GTTGC-
+CTCCCC-39) was removed (Supplementary Fig. 5b). Subsequently, 
+we cloned these TALE-VP16 fusions into a mammalian expression 
+vector, transiently transfected the plasmids into human embryonic 
+kidney cells (HEK293) and human squamous carcinoma cells 
+(A431), and measured the expression level of SCN9A by quantitative 
+RT-PCR (Methods, Quantitative reverse transcription-PCR). All 
+fusions were able to effectively drive the overexpression of the 
+SCN9A gene in both cell lines (up to 11-fold increase for HEK293 
+cells and 8.5-fold increase for A431 cells) (Fig. 2c). 
+In line with these results, the TALE-VP16 fusions also induced the 
+overexpression of SCN9A protein in A431 cells (Fig. 2c, and 
+Supplementary Fig. 6b). Interestingly, we were not able to detect 
+SCN9A protein in HEK293 cell samples, including those transfected 
+with the fusion constructs (Supplementary Fig. 6c). The discrepancy 
+between the mRNA and protein measurements for HEK293 cells 
+may be due to regulatory translational or post-translational mechan-
+isms on the expression of SCN9A 29 . 
+We also investigated whether the TALE fusions isolated from our 
+screening were compatible with a virus-based delivery system for 
+potential applications in primary cells. We prepared a TALE T34 
+recombinant adeno-associated viral vector using the AAV helper-
+free system (Agilent Technologies). This AAV viral stock was applied 
+to HEK293 cells at a multiplicity of infection (MOI) of 400 and in-
+duced the overexpression of the SCN9A gene by 2 fold (Supple-
+mentary Fig. 7). 
+Furthermore, we tested the performance of our TALE-based yeast 
+one-hybrid screening approach for microRNA gene targets. Speci-
+fically, we used part of the promoter sequence of the human miR-
+34b/c gene as the bait sequence (Supplementary Table 2) and isolated 
+four positive clones, which were confirmed by re-streaking on Aba-
+containing plates (Supplementary Fig. 8). The RVD sequences of 
+these four clones were extracted (Supplementary Table 3) and all 
+are predicted to target the bait (Fig. 2d). Interestingly, two of the 
+clones (M1, M17) target the same sequence within the miR-34b/c 
+promoter (Fig. 2d). Again, we used two methods to confirm the 
+results. We first generated a bait mutant which excludes the pre-
+dicted target sequence for clone M1 (59-TTTCTAGGTAT-39) and 
+prepared the according yeast stable cell line. As expected, in these 
+yeast cells clone M1 failed to induce the expression of Aba resistance 
+gene (Fig. 2e). Furthermore, the TALE M1 -VP16 cDNA was cloned 
+into a mammalian expression vector and transiently transfected into 
+HEK293 and HeLa cells. The TALE fusion effectively induced the 
+overexpression of miR-34b in a dose-dependent manner (Fig. 2f). 
+Our results clearly demonstrate that the complete library can be 
+used to isolate TALEs that bind to a desired DNA sequence. 
+Importantly, we observed that TALE-VP16 can be designed to bind 
+to the minus strand of a target sequence and in addition, can also be 
+designed to target sequences within the ORF. We emphasize that one 
+fundamental difference between our approach and all previous appli-
+cations of TALEs is that our screening procedure does not rely on 
+TALE-DNA binding prediction algorithms 28,30 . This is a considerable 
+advantage as available algorithms may not yet fully capture the 
+dynamics of TALE-DNA interactions. Indeed, we designed four 
+11-mer TALE-VP16 constructs for the same SCN9A bait sequence 
+using the <rs id="software-4" type="software">TALE-NT</rs> <rs corresp="#software-4" type="version-number">2.0</rs> program (Supplementary Table 3) and 
+observed that all fusions, as well as combinations, failed to induce 
+the overexpression of SCN9A mRNA levels in HEK293 (Fig. 2c, 
+Supplementary Figs. 7 and 9). Additional insight can be gathered 
+from recovered RVDs (Supplementary Table 3), as none of the iso-</p>
+
+<p>lated positive TALE-VP16 clones contain RVD sequences exactly 
+matching the canonical TALE-DNA binding code. As an example, 
+for the target sequence 59-GTTGCCTCCCC-39, instead of the pre-
+dicted canonical RVD sequence the four isolated clones contained at 
+least one RVD difference. Therefore, the TALE-DNA binding 
+information extracted from our library can be used in the future to 
+refine the TALE-DNA binding algorithms. </p>
+
+<p>TALE library-based benchmark genomic screen in yeast. We next 
+applied our library to screen for TALE-VP16 fusion proteins which 
+confer resistance to cycloheximide in yeast. The underlying mecha-
+nisms of cycloheximide resistance are well-studied. For example, in 
+yeast S. cerevisiae, overexpression of ATP-binding cassette (ABC) 
+transporters such as Pdr5p has been shown to contribute to cyclohe-
+ximide resistance 31 . In addition, the expression of the PDR5 gene is 
+known to be positively regulated by two homologous zinc finger-
+containing transcription regulators, Pdr1p and Pdr3p 32 . We first 
+determined the lowest concentration cycloheximide (0.5 mg/ml) at 
+which the wild-type yeast cells failed to grow (Supplementary Ma-
+terial). We applied the complete TALE-VP16 library and isolated 
+eighteen positive clones which tolerate cycloheximide (e.g., selected 
+clones illustrated in Supplementary Fig. 10). Subsequently, we 
+isolated the TALE-VP16 fusion plasmids and re-transformed them 
+back to the wild-type cells for confirmation, as in the original screen 
+natural mutations of the yeast genome (both gain-of-function 33 and 
+loss-of-function 34 ) can artificially increase the resistance to cyclohe-
+ximide. Five genuine positive clones were confirmed (Fig. 3a), 
+isolated and sequenced to extract the TALE RVD sequences (Supple-
+mentary Table 3). 
+The sequencing results indicate that two clones (A8, A35) are 
+predicted to target the promoter of the PDR3 gene and, in addition, 
+A35 is also predicted to bind to the promoter of the PDR5 gene 
+(Fig. 3a). Two methods were used to confirm the results. First, we 
+cloned four copies of the predicted PDR3 and PDR5 promoter tar-
+gets and their immediate adjacent sequences in front of a fluor-
+escence reporter gene (mKate2) in yeast. We then transformed the 
+yeast stable clones with plasmids carrying the TALEs. Indeed both 
+clones induced the expression of mKate2 in cells containing the bait 
+(Fig. 3b). Second, we prepared yeast cells transformed with TALE A8 -
+VP16, TALE A35 -VP16 or empty vector and measured the expression 
+levels of PDR3 and PDR5 by quantitative RT-PCR. Again, both 
+clones were able to effectively induce the expression of PDR3 and 
+PDR5 (Fig. 3c). </p>
+
+<p>Discussion 
+Here, we establish a methodology for the assembly of complete and 
+biased TALE-based libraries. As proof-of-concept, we demonstrate 
+that our methodology can be applied towards designing effective 
+TALEs for any given DNA target (i.e. the yeast-one-hybrid experi-
+ments) as well as for genome-wide phenotype screens in yeast. 
+We show experimentally that the standard TALE design algorithm 
+can fail to predict RVDs that bind to a desired target. Therefore, 
+in the unforeseen cases where computational methods are not 
+successful, the yeast-one-hybrid approach provides an algorithm-
+independent alternative towards designing TALEs. 
+A potential pitfall is that instead of the desired bait sequence a 
+TALE may bind to the antibiotic resistance plasmid backbone 
+sequence and induce the expression of the resistance gene. In our 
+case, the negative control experiments (deletion of target) provide 
+proof that the selected TALEs target exclusively the bait 
+(Supplementary Fig. 5 and Fig. 2e). More generally, to avoid false-
+positives in the TALE-based yeast-one-hybrid assays, we recom-
+mend using bait sequences that are sufficiently long, ideally larger 
+than 500 bp (Supplementary Material, Yeast-one-hybrid assay false-
+positives). We also presume that multiple copies of the targets can be 
+used in cases when the target sequence is short. </p>
+
+<p>www.nature.com/scientificreports </p>
+
+<p>SCIENTIFIC REPORTS | 4 : 4857 | DOI: 10.1038/srep04857 </p>
+
+<p>
+An advantage of TALEs compared to other technologies (e.g., 
+RNAi, CRISPR 35-37 ) is that the size of the DNA target can be 
+controlled. Increasing the DNA target size will result to superior 
+specificity, albeit at the cost of increasing the library complexity 
+and reducing the coverage in yeast screens. Therefore, a practical 
+strategy towards eliminating off-target effects is to use a relatively 
+short library (e.g., 11-mer) for screening purposes and a posteriori 
+extend the DBDs of the screened TALEs to include flanking target 
+sequences. 
+An alternative approach towards increasing the size of the targets 
+of the library, without introducing additional experimental burden 
+or increasing the complexity, involves utilizing the RVD properties. </p>
+
+<p>For example, it is known that the RVD NN can target both A and G. 
+Therefore, only three modules (i.e. NN, NG and HD) can be used for 
+the assembly of the complete TALE libraries. As an example, a 14-
+mer TALE library with these three modules will result in a complex-
+ity of 3 14 54,782,969. The assembly of larger TALE libraries can be 
+experimentally cumbersome and in some cases practically prohib-
+itive without the use of automated assembly systems. 
+One additional challenge lies in the fact that there is a certain 
+degree of uncertainty in terms of deciphering the TALE-DNA bind-
+ing given a RVD sequence, which may complicate the identification 
+of potential target sequences in genome-wide assays. This issue can 
+be resolved experimentally using ChIP-seq 38 . </p>
+
+<p>Figure 3 | Genetic screen for cycloheximide resistance in yeast using the TALE-VP16 plasmid library. (a) Confirmation of the genuine positive yeast </p>
+
+<p>clones conferring cycloheximide resistance. 18 positive clones were isolated from the cycloheximide resistance screening. Subsequently, these positive 
+TALE-VP16 fusion plasmids were recovered and again re-transformed into the wild-type yeast cells. The transformed cells were then re-streaked onto 
+-Leu plates containing 0.5 mg/ml of cycloheximide. After 3 days, cells transformed with genuine positive clones pGADT7-TALE-A8-VP16 and pGADT7-
+TALE-A35-VP16 were able to grow robustly. In contrast, cells transformed with the false positive clone pGADT7-TALE-A12-VP16 or the control 
+pGADT7 failed to grow. (b) The isolated TALE-VP16 fusion clones A8 and A35 bind to the promoters of the PDR3 and PDR5 genes. TALE-VP16 fusion 
+clones A8 and A35 were isolated from cycloheximide resistance screening. Both A8 and A35 were predicted to bind to the promoter of PDR3 gene. In 
+addition, A35 was predicted to target the promoter of the PDR5 gene. Four copies of the predicted PDR3/PDR5 promoter targets and their immediate 
+adjacent sequences were cloned in front of a fluorescence reporter gene (mKATE2) in yeast (bait). These yeast stable clones were then transformed with 
+corresponding pGADT7-TALE-A8-VP16, pGADT7-TALE-A35-VP16 or pGADT7 (control). TALE-VP16 fusion clones A35 or A8 potently induced the 
+expression of mKATE2 in yeast cells containing the corresponding baits, while pGADT7 failed to do so (right). (c) The isolated TALE-VP16 fusions A8 
+and A35 induced overexpression of endogenous PDR3 and PDR5 genes. Wild-type yeast cells were transformed with pGADT7-TALE-A8-VP16, 
+pGADT7-TALE-A35-VP16 or pGADT7 (control). The expression levels of PDR3/PDR5 were measured by quantitative RT-PCR. Both clones were able to 
+effectively induce the overexpression of PDR3 (n53) and PDR5 (n53). </p>
+
+<p>www.nature.com/scientificreports </p>
+
+<p>SCIENTIFIC REPORTS | 4 : 4857 | DOI: 10.1038/srep04857 </p>
+
+<p>
+In summary, we have successfully established a methodology for 
+the assembly of versatile TALE-based libraries and we demonstrated 
+yeast-one-hybrid and genome-wide screens in yeast cells. We further 
+emphasize that the TALE DBD can be fully customized to target any 
+nucleotide content (e.g., GC-rich areas), nucleotide constraints (e.g., 
+transcription factor motifs), or other modifications (e.g., methyla-
+tions 39,40 ). For the latter, during the construction of the TALE library, 
+one additional RVD building block can be included in the assembly, 
+namely N*. The star indicates that the amino acids at position 13 of 
+TALE repeats are missing, which has been shown 39 to overcome the 
+steric hindrance from the additional methyl moiety present at posi-
+tion 5 of thymine and thus allow efficient recognition of 5-methy-
+lated cytosine. 
+The modularity of the functional domain allows for a range of 
+targeted manipulations including, but not limited to, transactivators, 
+transrepressors, methylases, demethylases, recombinases, and nu-
+cleases 41 . More generally, with TALE libraries we have the ability 
+to introduce multiple rounds of positive and negative screening, 
+and even introduce a combination of positive and/or negative action 
+to study synergistic effects. Finally, the TALE protein coding 
+sequences can be easily isolated and sequenced, which can facilitate 
+the rapid identification of their target genes. To conclude, consider-
+ing the highly modular nature of TALEs, the ability to control their 
+size and thus fine-tune their specificity, and the versatility and ease of 
+constructing these libraries we foresee a broad range of applications 
+in the future. </p>
+
+<p>Methods </p>
+
+<p>Library construction. A modified protocol based on the Golden Gate Assembly was 
+used to construct the 11-mer TALE-VP16 library. First, a pFUS_A library containing 
+all possible combinations of 10 tandem repeat (RVDs 1-10) and a pFUS_B library 
+containing all combinations of 1 tandem repeat (RVD 11) were prepared as described 
+in Cermak, T. et al. 5 , except that for each position in a standard 30 mL reaction, 
+37.5 ng of each of the NN, NI, NG, and HD building blocks were mixed and included. 
+Next, the pFUS_A and pFUS_B plasmid libraries were conjoined using the standard 
+protocol. Similar procedures were used to prepare the p53-responsive element-
+targeting TALE-VP16 libraries. For each position of the Golden Gate Assembly 
+reactions, the amounts of the four building blocks were adjusted according to the 
+desired nucleotide target. All libraries were then subjected to standard Sanger 
+sequencing using the forward primer P23 and the reverse primer P24 (Supplementary 
+Table 1). The sequencing profiles were then analyzed using <rs type="software">FinchTV</rs> (Geospiza). For 
+full description, see Supplementary Material. </p>
+
+<p>Yeast one-hybrid assay. The Matchmaker Gold Yeast One-Hybrid Screening System 
+was used (Clontech, #630491). The TALE-VP16 library-based yeast one-hybrid assay 
+was performed according to the protocol (Clontech, protocol #PT4087-1). The 
+positive clones were screened by using SD/-Leu agar medium (Clontech, #630311) 
+containing either 100 ng/ml Aureobasidin A (Clontech, #630466) or 0.5 mg/ml 
+cycloheximide (Sigma-Aldrich, #C7698-1G). Subsequently, the positive clones were 
+cultured in SD/-Leu broth (Clontech, #630310) and the pGADT7-TALE-VP16 
+plasmids were then prepared using the PrepEase Yeast Plasmid Isolation Kit 
+(Affymetrix, #79220). The plasmids were then rescued into XL10-Gold 
+Ultracompetent cells (Agilent, #200315) and prepared using the Qiagen Plasmid Mini 
+Kit (Qiagen, #12123). For full description, see Supplementary Material. </p>
+
+<p>Prediction of target sequences. All rescued pGADT7-TALE-VP16 plasmids were 
+subjected to standard Sanger sequencing using the forward primer P23 and the 
+reverse primer P24 (Supplementary Table 1), which are flanking sequences of the 
+DNA binding domain of TALE proteins. After extracting the RVD sequences, the 
+TALE potential target sequences were determined by the Target Finder function of 
+<rs id="software-7" type="software">TALE-NT</rs> <rs corresp="#software-7" type="version-number">2.0</rs> 28 using the setting ''upstream base T''. Since TALE-NT 2.0 only 
+supports sequences which are between 12 and 31 RVDs, for each TALE we conducted 
+four searches by adding one additional RVD (HD or NN or NI or NG) to the end of 
+our RVD sequences. The lowest score from one of these four searches was defined as 
+''the lowest possible score''. The targets were considered as potentially genuine only 
+when the lowest possible score is less than 9, as lower scores indicate higher 
+confidence of the bindings between TALE fusions and their predicted DNA target 
+sequences. </p>
+
+<p>Mammalian cell culture and transfection. All mammalian cells were maintained at 
+37uC, 100% humidity and 5% CO 2 . HEK293, A431 and HeLa cells were grown in 
+Dulbecco's modified Eagle's medium (DMEM, Invitrogen, #11965-1181) 
+supplemented with 10% Fetal Bovine Serum (FBS, Atlanta Biologicals, #S11550), 
+0.1 mM MEM non-essential amino acids (Invitrogen, #11140-050), 0.045 units/mL 
+of Penicillin and 0.045 units/mL of Streptomycin (Penicillin-Streptomycin liquid, </p>
+
+<p>Invitrogen, #15140). For transient transfection, ,300 thousand cells in 1 mL of 
+complete medium were plated into each well of 12-well culture treated plastic plates 
+(Griener Bio-One, #665180) and grown for 16-20 hours. For jetPRIME (Polyplus 
+Transfection, #114-15) transfection, up to 1 mg of the plasmid was added to 75 mL of 
+jetPRIME buffer and 1.75 mL of jetPRIME. Transfection solutions were mixed and 
+incubated at room temperature for 10 min. The transfection mixture was then 
+applied to the cells and mixed with the medium by gently shaking. </p>
+
+<p>Preparation of recombinant AAV vectors. The AAV helper-free system was 
+purchased from Agilent Technologies (#240071). HEK293 cells were seeded on 10-
+cm cell culture treated petri dishes (Griener Bio-One, #664160). After reaching 
+approximately 70-80% confluence, the cells were transfected with 3.3 mg of AAV-
+SCN9A-T34, 3.3 mg of pHELPER plasmid and 3.3 mg of pAAV-RC plasmid using 
+30 mL of jetPRIME. 72 hours post-transfection, the cells were scraped into the growth 
+medium and pelleted by centrifugation at 1000 rpm for 5 min. The supernatant was 
+then removed and the cell pellets were re-suspended in 1 mL of complete growth 
+medium before being subjected to 4 rounds of freeze-thaw cycles between the dry ice-
+ethanol bath and the 37uC water bath. Subsequently, the cellular debris was collected 
+by centrifugation at 10,000 3 g for 10 min. The supernatant (primary recombinant 
+AAV virus stock) was transferred into a fresh tube and stored at 280uC. The 
+QuickTiter AAV Quantitation Kit (Cell Biolabs, #VPK-145-T) was used to determine 
+the titers (genome copy/mL, GC/mL) of the recombinant AAV viral stocks. In brief, 
+any free nucleic acids were first removed and the intact AAV viruses were captured 
+using the QuickTiter AAV Capture Matrix. The captured viruses were then denatured 
+to release the viral nucleic acids, which were subsequently labeled with fluorescence 
+tags. The fluorescent intensities were measured using the FLUOstar Omega plate 
+reader (BMG Labtech) with a 480/520 nm filter set. </p>
+
+<p>Western blot assay. A431 or HEK293 cells were lysed in RIPA buffer (Sigma-Aldrich, 
+#R0278) with protease inhibitors (Sigma-Aldrich, #P8340). Protein concentrations 
+were measured using the Coomassie Plus Bradford assay kit (Thermo Scientific, 
+#23236). For Western blot, 15 mg of whole cell lysates were mixed with loading buffer 
+and boiled for 5 min, and then were run in 4-15% Mini-PROTEAN TGX 
+polyacrylamide gel (Bio-Rad, #456-1083). After transferring, the nitrocellulose 
+membranes were first blotted with 50 mM Tris, 150 mM NaCl and 0.1% Tween-20 
+(TBS-T) with 5% nonfat milk for 30 min at room temperature. The membranes were 
+then incubated with either anti-SCN9A monoclonal antibody (15500 dilution in 
+TBS-T, Millipore, #MABN41) or anti-actin monoclonal antibody (155,000 dilution 
+in TBS-T, Millipore, #MAB1501) at 4uC overnight. The membranes were then 
+washed with TBS-T three times, each time for 10 min. Subsequently, the membranes 
+were incubated with goat anti-mouse IgG (H1L) secondary antibody (1510,000 
+dilution in TBS-T, Thermo Scientific, #31430) at room temperature for 45 min. The 
+membranes were then washed with TBS-T four times, each time for 10 min. The 
+membranes subsequently were incubated with ECL Western blotting substrates 
+(Thermo Scientific, #32106) and then exposed to X-ray films (Sigma-Aldrich, 
+#Z370398). </p>
+
+<p>Quantitative reverse transcription-PCR (rtPCR). For measurement of mRNAs in 
+mammalian cells, total RNA was extracted using the RNeasy Mini Kit (Qiagen, 
+#74104) 48 hours post transfection. First strand synthesis was performed using the 
+QuantiTect Reverse Transcription Kit (Qiagen, #205311). Quantitative PCR was 
+performed using the KAPA SYBR FAST Universal qPCR Kit (KAPA Biosystems, 
+#KK4601). GAPDH was used for normalization. For measurement of mRNAs in 
+yeast cells, the same protocol was followed, except that total RNA was extracted using 
+the MasterPure Yeast Purification Kit (Epicentre, #MPY80200), and yeast ACT1 was 
+used for normalization. For measurement of miRNAs in mammalian cells, total RNA 
+was extracted using the miRNeasy Micro Kit (Qiagen, #217084). First strand 
+synthesis was performed using the miScript II RT Kit with HiSpec Buffer (Qiagen, 
+#218161). Quantitative PCR was performed using miScript SYBR Green PCR Kit 
+(Qiagen, #218073). RNU6 was used for normalization. The quantitative analysis was 
+performed using the 2 2DDCt method. The values of fold-change are reported as mean 
+with standard deviation. For full description, see Supplementary Material. </p>
+
+<p>Fluorescence microscopy. Bait yeast strains containing PDR3/PDR5 promoter target 
+sequences were prepared as described in the yeast two-hybrid section. Subsequently, 
+these yeast stable clones were transformed with corresponding pGADT7-TALE-
+VP16 plasmids and then grown on SD/-Leu agar medium. Individual positive clones 
+(diameter 2-3 mm) were re-suspended in 1 mL of 0.9% (w/v) NaCl solution and 
+transferred into 12-well culture treated plastic plates. Cells were allowed to fully settle 
+and then imaged using an Olympus IX81 microscope in a Precision Control 
+environmental chamber. The images were captured using a Hamamatsu ORCA-03 
+Cooled monochrome digital camera. The filter set (Chroma) for mKATE2 is ET560/ 
+40x (excitation) and ET630/75m (emission). Data collection and processing was 
+performed using the software package Slidebook 5.0. All images were collected with 
+the same magnification (403) and exposure times and underwent identical 
+processing. </p>
+
+<p>1. Zhou, J. &amp; Chai, J. Plant pathogenic bacterial type III effectors subdue host 
+responses. Curr Opin Microbiol 11, 179-185 (2008). 
+2. Boch, J. &amp; Bonas, U. Xanthomonas AvrBs3 family-type III effectors: discovery and 
+function. Annu Rev Phytopathol 48, 419-436 (2010). </p>
+
+<p>www.nature.com/scientificreports </p>
+
+<p>SCIENTIFIC REPORTS | 4 : 4857 | DOI: 10.1038/srep04857 </p>
+
+
+
+<p>
+Author contributions </p>
+
+<p>Y.L. and L.B. conceived the project and designed the experiments. Y.L. performed the 
+majority of the experiments. K.E. performed TALE-NT2.0 cloning and viral experiments. 
+Y.L. and L.B. analyzed the data. Y.L., K.E., M.Z. and L.B. prepared the manuscript. L.B. 
+supervised the project. </p>
+
+<p>Additional information </p>
+
+<p>Supplementary information accompanies this paper at http://www.nature.com/ 
+scientificreports </p>
+
+<p>Competing financial interests: The authors declare no competing financial interests. </p>
+
+<p>How to cite this article: Li, Y., Ehrhardt, K., Zhang, M.Q. &amp; Bleris, L. Assembly and 
+Validation of Versatile Transcription Activator-Like Effector Libraries. Sci. Rep. 4, 4857; 
+DOI:10.1038/srep04857 (2014). </p>
+
+<p>This work is licensed under a Creative Commons Attribution-NonCommercial-
+ShareAlike 3.0 Unported License. The images in this article are included in the 
+article's Creative Commons license, unless indicated otherwise in the image credit; 
+if the image is not included under the Creative Commons license, users will need to 
+obtain permission from the license holder in order to reproduce the image. To view a 
+copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/ </p>
+
+<p>www.nature.com/scientificreports </p>
+
+<p>SCIENTIFIC REPORTS | 4 : 4857 | DOI: 10.1038/srep04857 </p>
+
+<p>
+</p></text></tei>

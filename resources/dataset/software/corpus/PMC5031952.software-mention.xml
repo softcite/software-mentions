@@ -1,0 +1,1438 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC5031952" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:19+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>SUMMARY </p>
+
+<p>While Cas9 nucleases permit rapid and efficient generation of gene-edited cell lines, the CRISPR-Cas9 system can introduce undesirable 
+''on-target'' mutations within the second allele of successfully modified cells via non-homologous end joining (NHEJ). To address this, we 
+fused the Streptococcus pyogenes Cas9 (SpCas9) nuclease to a peptide derived from the human Geminin protein (SpCas9-Gem) to facilitate 
+its degradation during the G 1 phase of the cell cycle, when DNA repair by NHEJ predominates. We also use mRNA transfection to facilitate 
+low and transient expression of modified and unmodified versions of Cas9. Although the frequency of homologous recombination was 
+similar for SpCas9-Gem and SpCas9, we observed a marked reduction in the capacity for SpCas9-Gem to induce NHEJ-mediated indels at 
+the target locus. Moreover, in contrast to native SpCas9, we demonstrate that transient SpCas9-Gem expression enables reliable gener-
+ation of both knockin reporter cell lines and genetically repaired patient-specific induced pluripotent stem cell lines free of unwanted 
+mutations at the targeted locus. </p>
+
+<p>The utility of human pluripotent stem cells (hPSCs) is 
+significantly enhanced by an ability to precisely modify a 
+chosen locus with minimal impact on the remaining 
+genome. Ideally this is achieved by gene targeting, which 
+historically has proved challenging in hPSCs due to the 
+low frequency of homologous recombination (HR) (Zwaka 
+and Thomson, 2003). More recently, genetic modification 
+of hPSCs has been facilitated through the use of nucleases 
+to induce DNA double-strand breaks (DSBs) at a target 
+locus, which are subsequently repaired by HR or the er-
+ror-prone non-homologous end-joining (NHEJ) pathway. 
+Zinc finger nucleases and transcription activator-like endo-
+nucleases (TALENs) were the first sequence-specific nucle-
+ases employed for gene targeting in hPSCs (Hockemeyer 
+et al., 2009, 2011; Zou et al., 2009). However, both ap-
+proaches require the design, expression, and validation of 
+a new pair of proteins for every targeted locus, rendering 
+both of these platforms time consuming and labor inten-
+sive. Due to its simplicity, ease of manipulation, and high 
+efficiency, the clustered regularly interspaced short palin-
+dromic repeats (CRISPR)-Cas9 system is fast becoming the 
+preferred method for the precise modification of eukaryotic 
+genomes (Cho et al., 2013; Cong et al., 2013; Jinek et al., 
+2012, 2013; Mali et al., 2013). However, a potential limita-
+tion to this system is the introduction of ''on-target'' 
+disruptive mutations caused by Cas9-induced NHEJ occur-
+ring within the untargeted allele of knockin or gene-cor-</p>
+
+<p>rected hPSC clones (Howden et al., 2015; Merkle et al., 
+2015). Although reducing the Cas9 dosage may limit 
+both off-target and on-target NHEJ activity (Cradick et al., 
+2013), a corresponding decrease in gene-targeting effi-
+ciency is also expected. 
+Previous studies, including one in normal human fibro-
+blasts, have demonstrated that HR activity is virtually ab-
+sent during G 1 phase, increases sharply in S phase, and be-
+gins to decrease by G 2 /M, whereas NHEJ activity occurs 
+throughout the cell cycle (Mao et al., 2008; Saleh-Gohari 
+and Helleday, 2004). Hence, controlling the presence of 
+Cas9 protein during specific stages of the cell cycle could 
+minimize the formation of undesirable insertion or dele-
+tion mutations (indels) induced by NHEJ. We hypothesized 
+that the presence of Cas9 in G 1 would induce DNA DSBs 
+that would invariably be repaired by error-prone NHEJ, 
+whereas elimination of the nuclease within this phase 
+could potentially limit the introduction of disruptive in-
+dels at the target locus. 
+Previous studies have shown that fusion of fluorescent 
+reporters to an N-terminal peptide derived from the human 
+Geminin protein resulted in their proteolytic destruction 
+in the late M and G 1 phases of the cell cycle (Pauklin and 
+Vallier, 2013; Sakaue-Sawano et al., 2008), a process medi-
+ated by the APCCdh1 E3 ligase complex (Nishitani et al., 
+2004). In this study, an identical Geminin-derived peptide 
+was fused to SpCas9 (designated SpCas9-Gem) to facilitate 
+nuclease degradation during G 1 . We show that the fre-
+quency of HR is not impaired by fusion of the Geminin </p>
+
+<p>508 Stem Cell Reports j Vol. 7 j 508-517 j September 13, 2016 j ª 2016 The Author(s). 
+This is an open access article under the CC BY-NC-ND license (http://creativecommons.org/licenses/by-nc-nd/4.0/). </p>
+
+<p>peptide to SpCas9, but observe a significant decrease in 
+NHEJ frequency, as evidenced by the absence of indels 
+within the target locus. Together, these features of 
+SpCas9-Gem permit efficient and reliable generation of 
+both knockin cell lines and gene-corrected patient-specific 
+induced pluripotent stem cell (iPSC) lines that are free of 
+disruptive mutations within the untargeted allele. </p>
+
+<p>RESULTS </p>
+
+<p>SpCas9-Gem mRNA Transfection Results in Transient 
+and Cell-Cycle-Dependent Protein Expression 
+SpCas9-Gem was generated by fusing the first 110 amino 
+acids of Geminin to the C-terminal region of SpCas9, 
+following removal of the C-terminal nuclear localization 
+signal (Figure 1A). Because levels of Geminin and Cdt1 
+oscillate inversely, whereby Cdt1 levels are highest during 
+G 1 and Geminin levels are highest during the S and G 2 
+phases (Nishitani et al., 2004; Sakaue-Sawano et al., 
+2008), we also generated a second variant of SpCas9 
+(termed SpCas9-Cdt1) by fusing SpCas9 to amino acids </p>
+
+<p>30-120 of Cdt1. Fusion of this peptide to fluorescent re-
+porters has previously been shown to be sufficient for 
+marking cells in G 1 (Pauklin and Vallier, 2013; Sakaue-Sa-
+wano et al., 2008). An upstream T7 promoter was used 
+for in vitro transcription of mRNA encoding SpCas9, 
+SpCas9-Gem and SpCas9-Cdt1 (Figure 1A). We performed 
+intracellular staining and flow cytometric analysis 
+following transfection of mRNA encoding each of the 
+Cas9 variants in the human embryonic stem cell line, H9, 
+to examine their abundance and stability over time. Prior 
+to analysis, cells were incubated in the presence of Hoechst 
+33342 to distinguish cells in G 0 /G 1 and S/G 2 phases of the 
+cell cycle. Although at 6 hr post transfection all three Cas9 
+variants were present at similar levels, by 18 hr post trans-
+fection a marked reduction in both SpCas9-Gem and 
+SpCas9-Cdt1 abundance was observed relative to native 
+SpCas9 (Figure 1B). Furthermore, at both time points 
+SpCas9-Gem appeared to be expressed at higher levels in 
+the S/G 2 subpopulation, which was not observed for the 
+native SpCas9 or SpCas9-Cdt1 variant. Although signifi-
+cant expression of SpCas9-Gem in the G 0 /G 1 subpopula-
+tion was also noted, we hypothesized that this could be </p>
+
+<p>103 </p>
+
+<p>104 </p>
+
+<p>105 </p>
+
+<p>0 </p>
+
+<p>50 
+100 
+150 
+200 
+250 </p>
+
+<p>103 </p>
+
+<p>104 </p>
+
+<p>105 </p>
+
+<p>0 </p>
+
+<p>50 
+100 
+150 
+200 
+250 </p>
+
+<p>103 </p>
+
+<p>104 </p>
+
+<p>105 </p>
+
+<p>0 </p>
+
+<p>50 
+100 
+150 
+200 
+250 </p>
+
+<p>103 </p>
+
+<p>104 </p>
+
+<p>105 </p>
+
+<p>0 </p>
+
+<p>50 
+100 
+150 
+200 
+250 </p>
+
+<p>103 </p>
+
+<p>104 </p>
+
+<p>105 </p>
+
+<p>0 </p>
+
+<p>50 
+100 
+150 
+200 
+250 </p>
+
+<p>103 </p>
+
+<p>104 </p>
+
+<p>105 </p>
+
+<p>0 </p>
+
+<p>50 
+100 
+150 
+200 
+250 </p>
+
+<p>103 </p>
+
+<p>104 </p>
+
+<p>105 </p>
+
+<p>0 </p>
+
+<p>50 
+100 
+150 
+200 
+250 </p>
+
+<p>Untransfected 
+(no Cas9) </p>
+
+<p>SpCas9 
+6 hrs </p>
+
+<p>18 hrs </p>
+
+<p>SpCas9-Gem 
+SpCas9-Cdt1 </p>
+
+<p>Cas9 </p>
+
+<p>Hoechst </p>
+
+<p>SpCas9 SpCas9-
+Gem </p>
+
+<p>SpCas9-
+Cdt1 </p>
+
+<p>50 kDa </p>
+
+<p>35 kDa </p>
+
+<p>150 kDa </p>
+
+<p>225 kDa </p>
+
+<p>anti-ACTIN </p>
+
+<p>anti-CRISPR/Cas9 </p>
+
+<p>G0/G1 S/G2 G0/G1 S/G2 G0/G1 S/G2 </p>
+
+<p>C </p>
+
+<p>B 
+A </p>
+
+<p>NLS </p>
+
+<p>Geminin 
+(1/110) </p>
+
+<p>Cdt1 
+(30/120) </p>
+
+<p>Cas9 </p>
+
+<p>T7 promoter </p>
+
+<p>SpCas9 </p>
+
+<p>SpCas9-Cdt1 </p>
+
+<p>SpCas9-Gem </p>
+
+<p>G0/G1 S/G2 </p>
+
+<p>G0/G1 S/G2 </p>
+
+<p>G0/G1 S/G2 </p>
+
+<p>G0/G1 S/G2 </p>
+
+<p>G0/G1 S/G2 </p>
+
+<p>G0/G1 S/G2 </p>
+
+<p>Figure 1. Analysis of SpCas9-Gem Protein 
+(A) Schematic diagram of the Cas9 variants generated in this study. Unmodified SpCas9, and the SpCas-Gem and SpCas9-Cdt1 variants were 
+cloned downstream of a T7 promoter to permit their in vitro transcription. NLS, nuclear localization signal. 
+(B) Flow cytometric analysis following intracellular staining of Cas9 protein in H9 cells transfected with mRNA encoding SpCas9, SpCas9-
+Gem, or SpCas9-Cdt1. Cells were analyzed at 6 hr and 18 hr post transfection and incubated in the presence of Hoechst 33342 prior to 
+harvesting. Untransfected H9 cells are shown as a negative control. 
+(C) Western blot analysis of Cas9 protein expression 12 hr post transfection of SpCas9, SpCas9-Gem, or SpCas9-Cdt1 in H9 cells. Prior to 
+harvesting, cells were incubated in the presence of Hoechst 33342 and the G 0 /G 1 and S/G 2 subpopulations were sorted based on DNA 
+content. Anti-actin was included as a loading control. </p>
+
+<p>Stem Cell Reports j Vol. 7 j 508-517 j September 13, 2016 509 </p>
+
+<p>due to the binding of CRISPR-Cas9 antibody to not just the 
+intact Cas9 protein but also fragmented protein that was 
+undergoing or had recently undergone proteolytic destruc-
+tion. To address this concern we performed western blot 
+analysis on the G 0 /G 1 and S/G 2 subpopulations 12 hr after 
+the introduction of mRNA encoding each of the Cas9 
+variants into H9 cells, which were subsequently sorted by 
+fluorescence-activated cell sorting based on DNA content. 
+Using this analysis we clearly detected higher SpCas9-
+Gem protein levels in the S/G 2 population relative to 
+the G 0 /G 1 (Figure 1C), confirming cell-cycle-dependent 
+expression of the SpCas9-Gem variant. </p>
+
+<p>Generation of Indel-Free Knockin Reporter iPSCs from 
+Human Fibroblasts 
+To evaluate the HR and NHEJ activities associated with 
+SpCas9-Gem and SpCas9-Cdt1, we used a recently des-
+cribed method that permits both rapid and efficient gener-
+ation of gene-edited induced pluripotent stem cell (iPSC) 
+lines following a single electroporation of human fibro-
+blasts (Howden et al., 2015). As in the previous study, we 
+chose to target the DNMT3B gene with an EGFP reporter 
+(Figure 2A), since DNMT3B is highly expressed in pluripo-
+tent cells and quickly downregulated following differentia-
+tion, allowing targeted iPSC colonies to be easily identified 
+by fluorescent microscopy (Figure 2B) and flow cytometry 
+(Figure 2C). Episomal reprogramming vectors, a plasmid 
+encoding a single-guide RNA (sgRNA) specific to sequence 
+spanning the DNMT3B start codon and a plasmid encoding 
+an EGFP reporter flanked by 1.1 kb and 0.7 kb and homol-
+ogy arms specific to sequences upstream and downstream 
+of the DNMT3B start codon (Figure 2A) were co-transfected 
+with mRNA encoding SpCas9, SpCas9-Gem, or SpCas9-
+Cdt1. No observable difference in cell viability was associ-
+ated with transfection of mRNA encoding SpCas9-Gem or 
+SpCas9-Cdt1 compared with the native SpCas9 (Fig-
+ure S1A). To estimate targeting efficiency associated with 
+each of the Cas9 variants, we passaged cells approximately 
+3 weeks post transfection using EDTA to selectively remove 
+residual fibroblasts from iPSCs (Howden et al., 2015). After 
+three passages the total cell population was analyzed by 
+flow cytometry. As measured by the number of EGFP-ex-
+pressing cells, targeting efficiency was comparable for 
+both the SpCas9 and SpCas9-Gem variants (17.1% versus 
+16.5%) but slightly lower for the SpCas9-Cdt1 variant 
+(9.9%) (Figure 2C). We did not observe any EGFP-express-
+ing cells when Cas9 mRNA was omitted from the transfec-
+tion (data not shown). At 2-3 weeks post transfection, 
+randomly selected EGFP-expressing and EGFP non-ex-
+pressing (EGFP neg ) colonies were picked and expanded for 
+further analysis (Figure 2B and Table 1). EGFP-expressing 
+clones were further categorized as either having a single 
+allele (EGFP + ) or both DNMT3B alleles (EGFP ++ ) targeted, </p>
+
+<p>based on flow cytometry and PCR analysis (Figures 2D 
+and S1). Of 28 EGFP-expressing clones isolated from trans-
+fections performed with SpCas9 or SpCas9-Gem mRNA, we 
+observed 11 (39%) and 6 (21%) EGFP ++ clones, respectively 
+(Table 1). The SpCas9-Cdt1 variant resulted in only a single 
+(6%) EGFP ++ clone out of 17 clones analyzed. Next we 
+analyzed the untargeted allele of single-targeted EGFP + 
+clones by Sanger sequencing of the PCR product amplified 
+from genomic DNA using primers flanking the DNMT3B 
+start codon (Figure 2D). With respect to unmodified 
+SpCas9, NHEJ activity could be detected within the untar-
+geted allele in all 17 clones analyzed (Figure 2E), as evi-
+denced by the presence of indels ranging from 1 bp to 
+over 1 kb in size (Table S1). In contrast, of 22 clones 
+analyzed, we identified 8 (36%) ''indel-free'' clones derived 
+using the SpCas9-Gem variant, which did not contain mu-
+tations within the untargeted DNMT3B allele. Interest-
+ingly, indel-free clones could also be generated with the 
+SpCas9-Cdt1 variant, albeit with a lower efficiency (2 out 
+of 16 EGFP + clones [12%] analyzed). We next investigated 
+the NHEJ activity associated with each of the Cas9 variants 
+in EGFP neg clones, again by analysis of PCR amplicons en-
+compassing the DNMT3B start codon and surrounding 
+sequence. Sequencing analysis revealed indels in all 25 
+EGFP neg clones expanded and analyzed from experiments 
+performed with SpCas9, with all but one clone carrying dis-
+ruptions in both DNMT3B alleles (Figure 2F and Table S2). 
+Mutations in DNMT3B could also be found in the vast ma-
+jority (95%) of EGFP neg clones isolated and expanded from 
+experiments performed using SpCas9-Cdt1 mRNA; how-
+ever, approximately half of these had only one allele dis-
+rupted by NHEJ with the other allele remaining intact. 
+Conversely, only 35% of EGFP neg clones generated with 
+the SpCas9-Gem variant contained mutations in DNMT3B, 
+with single allele and biallelic disruption in 13% and 22% 
+of EGFP neg clones, respectively. </p>
+
+<p>Generation of Indel-Free Gene-Corrected iPSCs from 
+Patient Fibroblasts 
+Next we assessed the capacity of SpCas9-Gem to facilitate 
+the derivation of gene-corrected iPSCs lacking deleterious 
+indels within the second allele. To demonstrate this, we 
+chose to correct an autosomal dominant G &gt; A transition 
+(R853Q) in exon 14 of the SCN2A gene identified in a pedi-
+atric patient with severe epilepsy. We attempted to simulta-
+neously reprogram and correct the disease-causing muta-
+tion in the patient fibroblasts using our one-step protocol 
+and mRNA encoding SpCas9, SpCas9-Gem, or SpCas9-
+Cdt1. To facilitate gene repair we used an sgRNA encom-
+passing the patient-specific mutation and a plasmid encod-
+ing wild-type SCN2A sequence, comprising z0.9-kb arms 
+flanking the intended DNA DSB. A silent 3-bp change 
+was also included to aid in identification of correctly </p>
+
+<p>510 Stem Cell Reports j Vol. 7 j 508-517 j September 13, 2016 </p>
+
+<p>modified clones and to minimize Cas9 recutting following 
+HR with the homologous template (Figure 3A). To assess 
+HR and NHEJ activities, we extracted genomic DNA from 
+randomly selected iPSC colonies, followed by sequencing 
+analysis of the PCR product amplified using primers flank-</p>
+
+<p>ing exon 14 of SCN2A. With respect to the SpCas9-Gem 
+variant, gene repair was observed in 5 of 30 clones (17%) 
+screened, as evidenced by the loss of the disease-causing 
+mutation and gain of the 3-bp synonymous change carried 
+by the corrective plasmid (Figures 3B and 3C). Indel </p>
+
+<p>DNMT3B </p>
+
+<p>Ex 23 
+Ex 1 
+Ex 2 </p>
+
+<p>1.1 kb </p>
+
+<p>pA 3' arm 
+5' arm 
+EGFP </p>
+
+<p>0.7 kb </p>
+
+<p>Cas9 target site </p>
+
+<p>Phase 
+EGFP+ </p>
+
+<p>0 
+1 0 3 
+10 4 
+10 5 </p>
+
+<p>EGFP+ </p>
+
+<p>SpCas9-Gem (16.5%) </p>
+
+<p>SpCas9 (17.1%) </p>
+
+<p>SpCas9-Cdt1 (9.9%) </p>
+
+<p>B </p>
+
+<p>C </p>
+
+<p>200 μm 
+200 μm </p>
+
+<p>0 </p>
+
+<p>5 </p>
+
+<p>20 
+15 
+10 </p>
+
+<p>30 
+25 </p>
+
+<p>35 </p>
+
+<p>40 </p>
+
+<p>%indel-free EGFP+ clones </p>
+
+<p>E </p>
+
+<p>SpCas9 SpCas9-
+Gem </p>
+
+<p>SpCas9-
+Cdt1 </p>
+
+<p>45 </p>
+
+<p>50 </p>
+
+<p>% EGFP neg </p>
+
+<p>clones with indel </p>
+
+<p>0 </p>
+
+<p>20 </p>
+
+<p>40 </p>
+
+<p>80 </p>
+
+<p>60 </p>
+
+<p>100 </p>
+
+<p>one allele 
+both alleles 
+total </p>
+
+<p>SpCas9 
+SpCas9-
+Gem </p>
+
+<p>SpCas9-
+Cdt1 </p>
+
+<p>F </p>
+
+<p>ATG </p>
+
+<p>Unmodified allele 
+1.8 kb 
+Targeted allele 
+2.9 kb </p>
+
+<p>EGFP </p>
+
+<p>DNMT3B </p>
+
+<p>D </p>
+
+<p>Double 
+EGFP++ 
+Single 
+EGFP+ 
+unmod. 
+control </p>
+
+<p>ATG (start) </p>
+
+<p>A </p>
+
+<p>Figure 2. Generation of Knockin Reporter iPSC Lines Using Cas9 Variants 
+(A) Schematic diagram of the DNMT3B locus and the homologous template used for gene targeting. pA, polyA signal; Ex, exon. 
+(B) Representative phase contrast and fluorescent images depicting an EGFP-expressing and non-expressing iPSC colony emerging 
+approximately 2 weeks after simultaneous reprogramming and gene targeting of DNMT3B in human fibroblasts. 
+(C) Targeting efficiency associated with SpCas9, SpCas9-Gem and SpCas9-Cdt1 assessed by flow cytometric analysis of the total iPSC 
+population after EDTA passaging, initiated approximately 3 weeks post electroporation. 
+(D) Schematic of the DNMT3B locus showing location of PCR primers used to screen EGFP-expressing clones, and representative gel analysis 
+of the PCR products amplified from EGFP-expressing clones. These primers preferentially amplify the untargeted allele in monoallelic 
+(EGFP + ) clones, whereas only the larger 2.9-kb band is visible following PCR analysis of biallelic (EGFP ++ ) clones. 
+(E) Proportion of single-targeted EGFP + clones identified without disruption of the other untargeted DNMT3B allele. 
+(F) Proportion of EGFP neg (untargeted) iPSC clones with one or both DNMT3B alleles disrupted by NHEJ. EGFP + and EGFP neg colonies were 
+isolated and expanded from three independent experiments, performed with each version of Cas9. Data represent mean ± SEM from three 
+independent experiments. </p>
+
+<p>Stem Cell Reports j Vol. 7 j 508-517 j September 13, 2016 511 </p>
+
+<p>formation at the second SCN2A allele could not be detected 
+in four of the gene-corrected clones, although biallelic HR 
+with the repair template was observed, as evidenced by ho-
+mozygosity for the plasmid-specific 3-bp change (TCA &gt; 
+AGC). Targeted correction of SCN2A was also observed 
+with the SpCas9 and SpCas9-Cdt1 variants, although at a 
+lower frequency (9.7% and 3.3%, respectively). Further-
+more, only one gene-corrected clone out of 31 (3.3%) 
+iPSC colonies screened for both the SpCas9 and SpCas9-
+Cdt1 variants did not contain a secondary mutation at 
+the other SCN2A allele. As seen in the previous DNMT3B 
+targeting experiment, sequencing analysis of uncorrected 
+iPSC clones revealed a much lower incidence of NHEJ asso-
+ciated with the SpCas9-Gem variant compared with un-
+modified SpCas9 and the SpCas9-Cdt1 variant (Figure 3D). 
+Although our sgRNA was designed to recognize the mutant 
+over wild-type SCN2A allele, indels could be detected in 
+both alleles for each of the Cas9 variants tested. This is 
+not unexpected, since single mismatches in sgRNA are 
+often well tolerated, even within the 3 0 end of the proto-
+spacer sequence (Fu et al., 2013; Hsu et al., 2013). However, 
+analysis of all clones with only a single allele disrupted by 
+NHEJ did reveal a preference for the mutant allele (Fig-
+ure 3D and Table S3). </p>
+
+<p>SpCas9-Gem Retains HR Capacity with Reduced NHEJ 
+Activity in hPSCs 
+To evaluate the SpCas9-Gem variant in a cell type other 
+than human fibroblasts, we utilized iPSC lines generated 
+in the previous experiments (see Figure S1) that harbor 
+EGFP targeted to both DNMT3B alleles. For a homologous 
+template we used a plasmid encoding the full-length BFP 
+sequence that was identical to EGFP except for C &gt; G and 
+T &gt; C transitions, corresponding to two consecutive amino 
+acid changes (T67S and Y68H) (Figure 4A). This is sufficient 
+for conversion of EGFP to BFP reporter expression (Glaser 
+et al., 2016). We also included a plasmid encoding an 
+sgRNA that specifically recognizes EGFP over BFP. Using 
+this system in an iPSC line constitutively expressing </p>
+
+<p>EGFP, we simultaneously estimated both HR (as deter-
+mined by the number of BFP + cells) and NHEJ frequencies 
+(as determined by the number of EGFP neg cells) in the total 
+population of transfected cells after 3 days by flow cytom-
+etry (Figure 4B). SpCas9 or SpCas9-Gem mRNA resulted 
+in similar levels of HR, as determined by the number of 
+BFP + cells, when co-transfected with BFP plasmid DNA 
+and EGFP-specific sgRNA into two independent EGFP ++ 
+iPSC lines (Figures 4B and 4C). However, a significantly 
+reduced proportion of EGFP neg cells, caused by disruption 
+of the EGFP gene, was consistently associated with the 
+SpCas9-Gem variant. This approximately 2-fold reduction 
+in NHEJ activity was observed in both the presence and 
+absence of the BFP donor template (Figure 4C). To deter-
+mine whether simply lowering the nuclease dosage could 
+also achieve reduced indel formation while maintaining 
+HR efficiency, we co-transfected 50, 100, 250, or 500 ng 
+of mRNA encoding SpCas9 with the BFP plasmid and 
+EGFP-specific sgRNA plasmid into iPSCs constitutively ex-
+pressing EGFP. In agreement with previous studies, lower 
+concentrations of Cas9 did indeed reduce NHEJ frequency, 
+although a consequential decrease in HR efficiency was also 
+observed. Specifically, the lowest dose of SpCas9 mRNA 
+(50 ng) reduced NHEJ to rates observed with 500 ng of 
+the SpCas9-Gem mRNA but resulted in more than 5-fold 
+reduction in HR frequency (Figure S2A). A positive correla-
+tion between Cas9 mRNA concentration and HR efficiency 
+was also observed when targeting EGFP to the DNMT3B 
+locus in H9 cells (Figure S2B). Furthermore, no significant 
+difference in targeting efficiency was observed following 
+co-transfection of mRNA encoding SpCas9 or SpCas9-
+Gem with the DNMT3B-EGFP homologous template and 
+DNMT3B-specific sgRNA in H9 cells (Figure S3A). We also 
+evaluated the ''on-target'' indel frequency of the SpCas9-
+Gem variant following targeting of the DNMT3B and 
+GAPDH loci in H9 cells. In these experiments, we used tar-
+geting constructs that contain a drug-selectable marker to 
+facilitate rapid isolation, expansion, and characterization 
+of individual colonies (Figures S3B and S3C). Consistent 
+with the EGFP-to-BFP conversion assay in the previous ex-
+periments, an approximately 2-to 3-fold reduction in NHEJ 
+activity was associated with the SpCas9-Gem variant 
+compared with native SpCas9. </p>
+
+<p>DISCUSSION </p>
+
+<p>The recent development of the CRISPR-Cas9 system 
+will undoubtedly have an enormous impact on the utility 
+of hPSCs for the elucidation of developmental processes, 
+disease modeling, or even personalized regenerative medi-
+cine. However, the reliable and efficient generation of 
+knockin or gene-corrected hPSCs without secondary </p>
+
+<p>Table 1. Number of iPSC Clones Isolated, Expanded, and 
+Characterized Following Targeting of the DNMT3B Locus </p>
+
+<p>Targeted (EGFP + ) Clones Non-targeted 
+(EGFP neg ) 
+Clones </p>
+
+<p>Total Clones 
+Analyzed 
+One Allele Both Alleles </p>
+
+<p>SpCas9 
+17 (0) 
+11 
+25 
+53 </p>
+
+<p>SpCas9-Gem 22 (8) 
+6 
+23 
+51 </p>
+
+<p>SpCas9-Cdt1 16 (2) 
+1 
+22 
+39 </p>
+
+<p>The number of clones with EGFP targeted to one allele without an additional 
+mutation in the untargeted allele is shown in parentheses. </p>
+
+
+
+<p>deleterious mutations has been somewhat elusive. Because 
+cell-cycle phase largely determines the frequency of the 
+alternative HR and NHEJ DNA repair pathways, it is reason-
+able to expect that controlling the timing of a DNA DSB 
+may selectively favor one pathway over the other. Chemi-
+cal-mediated cell synchronization followed by timed deliv-
+ery of Cas9-guide RNA ribonucleoprotein complexes has 
+recently been shown to be effective for increasing HR effi-
+ciency in the human cell line HEK-293, although whether 
+this led to decreased NHEJ activity in alleles that had not 
+undergone HR was not reported (Lin et al., 2014). More-
+over, different cell types, such as hPSCs, have distinct re-
+quirements for synchronization, which do not always 
+translate to effective increases in HR. Recent studies have 
+also shown that small molecules such as SCR7 may inhibit 
+NHEJ and consequently promote HR (Maruyama et al., 
+2015). However, these kinds of approaches are likely to </p>
+
+<p>have variable effects across different cell types and may 
+potentially exhibit undesirable cytotoxic effects, rendering 
+them unsuitable in therapeutic contexts. In an attempt to 
+address some of these issues, we generated a variant of 
+the SpCas9 nuclease (SpCas9-Gem) that persists during 
+stages of the cell cycle when the HR pathway is active, 
+but is degraded during G 1 , when NHEJ activity predomi-
+nates. An attractive feature of the SpCas9-Gem variant is 
+its potential applicability to different cell types without a 
+requirement for cells to be manipulated or specially pre-
+pared prior to introduction of the gene-editing factors. In 
+the current study we have demonstrated the versatility of 
+SpCas9-Gem in primary human fibroblasts and hPSCs, 
+two cell types known to exhibit very different cell-cycle 
+profiles. Although the lower frequency of NHEJ associated 
+with SpCas9-Gem was less pronounced in hPSCs, we hy-
+pothesize that this may be attributed to the dramatically </p>
+
+<p>UAGUAAGGUC </p>
+
+<p>T T 
+G 
+T 
+T 
+A 
+T 
+G 
+T </p>
+
+<p>u </p>
+
+<p>A 
+C 
+C 
+A 
+G </p>
+
+<p>c 
+G </p>
+
+<p>C </p>
+
+<p>C 
+A a </p>
+
+<p>C 
+C 
+T ATTCC G </p>
+
+<p>a </p>
+
+<p>CTG taaattaactgggag 
+g 
+A </p>
+
+<p>uu </p>
+
+<p>ser 
+arg 
+phe 
+C 
+AG 
+G </p>
+
+<p>gln </p>
+
+<p>arg </p>
+
+<p>leu 
+leu 
+val 
+ser 
+leu </p>
+
+<p>Ex 26 
+Ex 1 
+Ex 14 
+SCN2A </p>
+
+<p>A </p>
+
+<p>0 </p>
+
+<p>4 </p>
+
+<p>8 </p>
+
+<p>12 </p>
+
+<p>16 </p>
+
+<p>0 </p>
+
+<p>20 </p>
+
+<p>40 </p>
+
+<p>60 </p>
+
+<p>80 </p>
+
+<p>100 </p>
+
+<p>B </p>
+
+<p>C </p>
+
+<p>9.7% </p>
+
+<p>16.6% </p>
+
+<p>13.3% </p>
+
+<p>3.3% 
+3.3% </p>
+
+<p>uncorrected </p>
+
+<p>corrected (heterozygous) </p>
+
+<p>corrected (homozygous) </p>
+
+<p>corrected + indel </p>
+
+<p>total 
+indel-free </p>
+
+<p>% gene corrected clones </p>
+
+<p>mutant allele 
+wt allele 
+both alleles 
+total </p>
+
+<p>SpCas9 SpCas9-
+Gem </p>
+
+<p>SpCas9-
+Cdt1 </p>
+
+<p>SpCas9 SpCas9-
+Gem </p>
+
+<p>SpCas9-
+Cdt1 </p>
+
+<p>% clones with indel </p>
+
+<p>D </p>
+
+<p>Figure 3. Generation of Gene-Corrected 
+iPSC Lines Using Cas9 Variants 
+(A) Schematic diagram of the SCN2A gene, 
+with mutation in exon 14. The crRNA 
+sequence used (red), PAM location (bold), 
+and the patient-specific autosomal domi-
+nant mutation (blue) along with the 3-bp 
+synonymous change (green) incorporated 
+into the plasmid template used for repair are 
+shown. Exon sequences are in uppercase, 
+introns in lowercase. 
+(B) Sequencing analysis of exon 14 of the 
+SCN2A gene from a representative uncor-
+rected patient-specific iPSC clone and three 
+gene-corrected iPSC clones with either one 
+allele targeted (heterozygote), both alleles 
+targeted (homozygote), or one allele tar-
+geted and the other disrupted by NHEJ. 
+(C) Proportion of gene-corrected iPSC clones 
+without disruption of the second SCN2A 
+allele. 
+(D) Proportion of uncorrected iPSC clones 
+with one or both SCN2A alleles disrupted by 
+NHEJ. </p>
+
+<p>Stem Cell Reports j Vol. 7 j 508-517 j September 13, 2016 513 </p>
+
+<p>shorter G 0 /G 1 phase that is characteristic of hPSCs, 
+compared with somatic cell types such as fibroblasts. 
+While this manuscript was in preparation, Gutschner 
+et al. (2016) also described a version of SpCas9 fused to 
+the N-terminal region of human Geminin. Although the 
+authors reported a modest increase (28%-87%) in HR 
+compared with unmodified SpCas9 in HEK293T cells, their 
+Cas9-Geminin fusion provoked similar levels of indel for-
+mation. This may be explained by their use of plasmid 
+DNA to express Cas9 from a b-actin promoter, resulting 
+in sustained levels of nuclease transcription that likely per-
+sists over several days and during the course of multiple cy-
+cles of cell division. In the study presented here, transfec-
+tion of in vitro transcribed mRNA was utilized, enabling </p>
+
+<p>uniform and transient expression of SpCas9-Gem protein 
+during S/G 2 . Following degradation during G 1 , nuclease 
+levels are drastically reduced, even in subsequent S/G 2 
+phases, which can most likely be attributed to the transient 
+and unstable properties of mRNA. 
+Of note, the SpCas9-Cdt1 variant also enabled the gener-
+ation of correctly targeted lines, albeit with a lower effi-
+ciency than the unmodified or SpCas9-Gem variants. 
+Although this may be due to the fact that proteins fused 
+to the Cdt1 peptide can persist during the initial stages of 
+S phase, when HR becomes a potential option for DNA 
+repair, this may also be the result of incomplete degrada-
+tion of SpCas9-Cdt1 during S/G 2 /M (see Figure 1). The 
+SpCas9-Cdt1 fusion induced indel formation significantly </p>
+
+<p>0.5 </p>
+
+<p>S p C a s 9 
++ p B F P 
+S p C a s 9 -G e m 
++ p B F P </p>
+
+<p>1 </p>
+
+<p>3 </p>
+
+<p>2.5 </p>
+
+<p>2 </p>
+
+<p>1.5 </p>
+
+<p>3.5 </p>
+
+<p>4 </p>
+
+<p>4.5 </p>
+
+<p>5 </p>
+
+<p>0 </p>
+
+<p>EGFP+ </p>
+
+<p>BFP+ </p>
+
+<p>%EGFP++ cells </p>
+
+<p>0 </p>
+
+<p>20 </p>
+
+<p>40 </p>
+
+<p>60 </p>
+
+<p>80 </p>
+
+<p>100 </p>
+
+<p>** </p>
+
+<p>* </p>
+
+<p>S p C a s 9 
+S p C a s 9 -G e m 
+p B F P </p>
+
+<p>%BFP+ cells </p>
+
+<p>GACCACCCTGACCTACGGCGTGCAGTGCTTCAGCCG </p>
+
+<p>GACCACCCTGAGCCACGGCGTGCAGTGCTTCAGCCG </p>
+
+<p>10 3 </p>
+
+<p>10 4 </p>
+
+<p>10 5 </p>
+
+<p>0 </p>
+
+<p>5 0 
+1 0 0 
+1 5 0 
+2 0 0 
+2 5 0 </p>
+
+<p>0.1% BFP+ </p>
+
+<p>10 3 </p>
+
+<p>10 4 </p>
+
+<p>10 5 </p>
+
+<p>0 </p>
+
+<p>0.4% BFP+ </p>
+
+<p>ser his </p>
+
+<p>thr tyr </p>
+
+<p>A </p>
+
+<p>B </p>
+
+<p>EGFP </p>
+
+<p>BFP </p>
+
+<p>50 </p>
+
+<p>100 </p>
+
+<p>150 </p>
+
+<p>200 </p>
+
+<p>250 </p>
+
+<p>3 
+4 
+5 </p>
+
+<p>60.4% 
+neg </p>
+
+<p>36.5% 
+EGFP++ </p>
+
+<p>SpCas9 </p>
+
+<p>50 </p>
+
+<p>100 </p>
+
+<p>150 </p>
+
+<p>200 </p>
+
+<p>250 </p>
+
+<p>3 
+4 
+5 </p>
+
+<p>64.0% 
+neg </p>
+
+<p>33.1% 
+EGFP++ </p>
+
+<p>SpCas9 + pBFP </p>
+
+<p>10 3 </p>
+
+<p>10 4 </p>
+
+<p>10 5 </p>
+
+<p>0 </p>
+
+<p>50 
+100 
+150 
+200 
+250 </p>
+
+<p>3.1% BFP+ </p>
+
+<p>50 </p>
+
+<p>100 </p>
+
+<p>150 </p>
+
+<p>200 </p>
+
+<p>250 </p>
+
+<p>3 
+4 
+5 </p>
+
+<p>67.3% 
+EGFP++ </p>
+
+<p>27.4% 
+neg </p>
+
+<p>Cas9-Gem </p>
+
+<p>50 </p>
+
+<p>100 </p>
+
+<p>150 </p>
+
+<p>200 </p>
+
+<p>250 </p>
+
+<p>0 
+1 0 3 
+10 4 
+10 5 </p>
+
+<p>97.7% 
+EGFP++ </p>
+
+<p>0.1% 
+neg </p>
+
+<p>pBFP (no Cas9) </p>
+
+<p>EGFP </p>
+
+<p>SSC </p>
+
+<p>50 </p>
+
+<p>100 </p>
+
+<p>150 </p>
+
+<p>200 </p>
+
+<p>250 </p>
+
+<p>0 
+1 0 3 
+10 4 
+10 5 </p>
+
+<p>34.7% 
+neg </p>
+
+<p>60.9% 
+EGFP++ </p>
+
+<p>Cas9-Gem + pBFP </p>
+
+<p>C </p>
+
+<p>10 3 </p>
+
+<p>10 4 </p>
+
+<p>10 5 </p>
+
+<p>0 </p>
+
+<p>50 
+100 
+150 
+200 
+250 </p>
+
+<p>3.2% BFP+ </p>
+
+<p>10 3 </p>
+
+<p>10 4 </p>
+
+<p>10 5 </p>
+
+<p>0 </p>
+
+<p>50 
+100 
+150 
+200 
+250 </p>
+
+<p>0.1% BFP+ </p>
+
+<p>BFP </p>
+
+<p>SSC </p>
+
+<p>0 
+1 0 
+1 0 
+1 0 
+50 
+100 
+150 
+200 
+250 </p>
+
+<p>0 
+1 0 
+1 0 
+1 0 </p>
+
+<p>0 
+1 0 
+1 0 
+1 0 </p>
+
+<p>Figure 4. Evaluation of SpCas9-Gem in Pluripotent Stem Cells 
+(A) Schematic summary of EGFP-to-BFP conversion targeting strategy. The location of the two amino acid changes and the Cas9 target site 
+(red) are indicated. 
+(B and C) Representative flow cytometry plots (B) and graphical plot (C) depicting the proportion of BFP + (targeting efficiency) and 
+EGFP neg cells (NHEJ frequency) assessed 3 days after the introduction of SpCas9 and SpCas9-Gem with and without a BFP homologous 
+template in iPSCs constitutively expressing EGFP. Data represent the average ± SD of four independent experiments in two EGFP ++ iPSC 
+lines. *p &lt; 0.0001, **p &lt; 0.000001. </p>
+
+<p>514 Stem Cell Reports j Vol. 7 j 508-517 j September 13, 2016 </p>
+
+<p>more often than SpCas9-Gem but at a lower frequency 
+than unmodified SpCas9, which was particularly evident 
+when assessing the total number of alleles disrupted by 
+NHEJ. It is difficult to determine whether this is due to 
+lower overall levels of SpCas9-Cdt1 or perhaps a reduced 
+nuclease activity relative to unmodified SpCas9. 
+Although any off-target effects associated with the Cas9 
+variants generated in this study were not analyzed, the 
+lower NHEJ activity of SpCas9-Gem would likely translate 
+to a reduction in unwanted mutations across the genome. 
+Nonetheless, the incorporation of the Geminin peptide 
+into the recently described high-fidelity versions of SpCas9 
+(SpCas9-HF1 and eCas9) (Kleinstiver et al., 2016; Slaymaker 
+et al., 2016) may reduce the likelihood of off-target NHEJ 
+further. 
+In conclusion, the SpCas9-Gem variant described here fa-
+cilitates efficient and reliable generation of knockin and 
+gene-corrected hPSC lines free of unwanted mutations at 
+the targeted locus. Our results demonstrate the utility of 
+SpCas9-Gem for achieving effective and precise genome 
+modifications while minimizing the ''on-target'' effects of 
+NHEJ in both somatic cells types, such as fibroblasts, and 
+pluripotent cell types, such as embryonic stem cells and 
+iPSCs. This is a significant advance in the downstream 
+application of hPSCs for disease modeling and functional 
+genomics, and prepares the field for gene-correction appli-
+cations in regenerative medicine. The use of additional 
+peptides or sequences that promote greater cell-cycle spec-
+ificity of Cas9 may permit even further reductions in ''on-
+target'' NHEJ while increasing desirable HR activity. </p>
+
+<p>EXPERIMENTAL PROCEDURES </p>
+
+<p>Oligonucleotide and gBlock Sequences </p>
+
+<p>A list of oligonucleotide (ODN) sequences for PCR amplification 
+and generation of sgRNA plasmids (Table S4) and complete se-
+quences of the gBlocks (Integrated DNA Technologies) used in 
+this study can be found in Supplemental Sequencing Data. </p>
+
+<p>Vector Construction </p>
+
+<p>To enable in vitro transcription of mRNA encoding SpCas9, an 
+XbaI-NsiI fragment from plasmid hCas9 (Addgene plasmid 
+#41815) containing the entire SpCas9 sequence was inserted into 
+the NheI and SbfI sites of the pDNR-Dual vector (Clontech), to 
+generate pDNR-SpCas9. The SpCas9-Gem variant was generated 
+by PCR-amplifying sequence from hCas9 using ODNs 1 and 2 
+and sequence from pTRE-CellCycle (Clontech) using ODNs 3 
+and 4 followed by insertion into the EcoRI and AgeI restriction sites 
+in pDNR-SpCas9. The pSpCas9-CdtI variant was generated by PCR-
+amplifying sequence from hCas9 using ODNs 1 and 2 and 
+sequence from pTRE-CellCycle (Clontech) using ODNs 3 and 5 fol-
+lowed by insertion into the EcoRI and AgeI restriction sites in 
+pDNR-SpCas9. For construction of the DNMT3B targeting vector, 
+a gBlock encoding 5 0 BglII and NdeI sites, nucleotides 150-724 of </p>
+
+<p>the EGFP gene, an SV40 polyA signal, and 700 bp of sequence 
+beginning at the DNMT3B start codon was cloned into the HincII 
+site of the pSMARTHCKan plasmid vector (Lucigen). ODNs 6 and 
+7 were used to PCR amplify (from a previously generated BAC 
+clone carrying an EGFP reporter inserted at the DNMT3B 
+start codon) a DNA fragment carrying an approximately 1.1-kb 
+sequence upstream of the DNMT3B start codon and the first 
+150 bp of EGFP, which was subsequently inserted into the BglII 
+and NdeI sites of the plasmid described above. A plasmid designed 
+for insertion and expression of sgRNA sequences was constructed 
+by inserting a gBlock encoding a U6 promoter, two BbsI sites, 
+and SpCas9-specific tracrRNA sequence into the HincII site of 
+pSMARTHCKan. ODNs specific to each target locus were annealed 
+and inserted into the BbsI sites of the pSMART-sgRNA vector. For 
+repair of the patient-specific mutation, two gBlocks encoding a to-
+tal of 1750 bp of the SCN2A gene was inserted into the AatII and 
+EcoRI sites of the pDNR-Dual vector. A serine residue within the re-
+gion recognized by our SCN2A-specific sgRNA was changed from 
+TCA to AGT to minimize Cas9-induced cutting of the plasmid 
+following its introduction into cells. A BFP targeting vector was 
+generated by inserting a gBlock encoding the full-length BFP 
+gene into the AatII and EcoRI sites of pDNR-Dual. The DNMT3B 
+gene-targeting construct containing the EGFP and puromycin 
+resistance genes was generated as previously described (Howden 
+et al., 2015). The plasmids used for in vitro transcription of native 
+SpCas9 (plasmid 80425), SpCas9-Gem (plasmid 80424), and 
+SpCas9-Cdt1 (plasmid 80426) along with the plasmid used for 
+sgRNA expression (plasmid 80427) are all available from Addgene 
+upon request. </p>
+
+<p>In Vitro Transcription </p>
+
+<p>Capped and polyadenylated in vitro transcribed mRNA encoding 
+SpCas9, SpCas9-Gem, and SpCas9-Cdt1 was generated using the 
+mMESSAGE mMACHINE T7 ULTRA transcription kit (Thermo 
+Fisher) according to the manufacturer's recommendations. 
+Plasmid template was linearized with PmeI prior to transcription. 
+LiCl was used to precipitate mRNA before resuspension. A trun-
+cated version of the EBNA1 protein was transcribed using the 
+mMESSAGE mMACHINE SP6 transcription kit, as previously 
+described (Howden et al., 2006). </p>
+
+<p>Transfection </p>
+
+<p>All transfections were performed using the Neon Transfection Sys-
+tem (Thermo Fisher). For simultaneous reprogramming and gene 
+editing of human fibroblasts, cells were harvested with TrypLE 
+(Thermo Fisher) 2 days after passaging and resuspended in Buffer 
+R at a final concentration of 1 3 10 7 cells/mL. One hundred micro-
+liters of the cell suspension was added to a tube containing plas-
+mids necessary for both reprogramming and gene targeting as 
+well as mRNA encoding either SpCas9, SpCas9-Gem, or SpCas9-
+Cdt1. In vitro transcribed mRNA encoding a truncated version of 
+the EBNA1 protein was also included to enhance nuclear uptake 
+of the reprogramming plasmids (Chen et al., 2011; Howden 
+et al., 2006). See Table S5 for DNA/mRNA concentrations used in 
+each transfection. Electroporation was performed in 100-mL tips 
+using the following conditions: 1,400 V, 20 ms, two pulses. 
+Following electroporation, cells were plated on a single 10-cm </p>
+
+<p>Stem Cell Reports j Vol. 7 j 508-517 j September 13, 2016 515 </p>
+
+<p>Matrigel-coated (Corning) plate and maintained in fibroblast me-
+dium until 4 days post transfection, then switched to E7 medium 
+(E8 medium without transforming growth factor b) supplemented 
+with 100 mM sodium butyrate and changed every other day as 
+described previously (Chen et al., 2011). Sodium butyrate was 
+removed from the medium after the appearance of the first iPSC 
+colonies at around day 10. iPSC and H9 transfections were per-
+formed in 10-mL and 100-mL tips, respectively, according to the 
+manufacturer's recommendation using the following conditions: 
+1,100 V, 30 ms, one pulse. Following transfection, cells were trans-
+ferred to Matrigel-coated plates containing E8 medium supple-
+mented with 5 mM Y-27632 (Tocris), which was omitted in subse-
+quent media changes. </p>
+
+<p>Cell Culture </p>
+
+<p>Fibroblast lines were derived from donors with informed parental 
+consent and approval from the local research ethics committee. Fi-
+broblasts were cultured in DMEM (Thermo Fisher) supplemented 
+with 15% fetal bovine serum (HyClone) at 37 C, 5% CO 2 , and 
+5% O 2 . All hPSC lines were maintained and expanded in E8 me-
+dium with daily media changes and passaged every 3-4 days 
+with EDTA in 13 PBS as previously described (Chen et al., 2011). </p>
+
+<p>PCR, RT-PCR, and Sanger Sequencing </p>
+
+<p>Total genomic DNA was extracted using the DNeasy Blood and Tis-
+sue kit (Qiagen). PCR was performed using GoTaq Green PCR Mas-
+termix (Promega). Sequence encompassing the DNMT3B start 
+codon and surrounding region PCR was amplified using ODNs 8 
+and 9. Exon 14 of SCN2A and surrounding sequence was amplified 
+using ODNs 15 and 16. Prior to sequencing, PCR amplicons 
+were treated with rAPid Alkaline Phosphatase (Roche Life Science) 
+and Endonuclease I (NEB) for 30 min at 37 C followed by heat 
+inactivation at 80 C for 15 min. Sequencing reactions were per-
+formed using BigDye Terminator v3.1 (Thermo Fisher). Reactions 
+were purified and sequenced by the Australian Genome Research 
+Facility. </p>
+
+<p>Flow Cytometry </p>
+
+<p>Cells were analyzed for EGFP and BFP expression by flow cytome-
+try using a LSRFortessa Call Analyzer (BD Biosciences). Data acqui-
+sition and analysis were performed using <rs type="software">FACSDiva</rs> (Becton Dick-
+inson) and <rs id="software-0" type="software">FlowLogic</rs> software (<rs corresp="#software-0" type="creator">Inivai</rs>). Gating was performed on 
+live cells based on forward and side scatter analysis. </p>
+
+<p>Cell Sorting </p>
+
+<p>Prior to sorting, cells were harvested with TrypLE and resuspended 
+in 2 mL of E8 medium containing Hoechst 33,342 (10 mg/mL) and 
+incubated at 37 C for 30 min. Cells were sorted according to their 
+DNA content using a FACSAria Fusion Cell Sorter (BD Biosciences). </p>
+
+<p>Western Blot </p>
+
+<p>Western blots were performed by standard Tris-glycine SDS-PAGE 
+followed by transfer to polyvinylidene fluoride membranes. 
+Following blocking with 10% skim milk in TBS-T (20 mM Tris-Cl 
+[pH 8.0], 150 mM NaCl, 0.1% Tween 20), membranes were probed 
+with anti-CRISPR/Cas9 (Abcam, ab191468) at 1 mg/mL and anti-</p>
+
+<p>b-actin (Cell Signaling Technology, #4970) at 1:5,000 and visual-</p>
+
+<p>ized by chemiluminescence. </p>
+
+<p>Intracellular Staining </p>
+
+<p>Prior to harvest, cells were incubated in medium containing Hoechst 
+33342 (10 mg/mL) at 37 C for 30 min. Cells were harvested, 
+fixed with 2% paraformaldehyde, and permeabilized with 0.1% 
+Triton X-100. Cells were stained with anti-CRISPR/Cas9 (AbCam, 
+ab191468) for 1 hr followed by staining with a goat immunoglobulin 
+G anti-mouse secondary antibody directly conjugated to allophyco-
+cyanin. Cells were analyzed by flow cytometry as described above. </p>
+
+<p>SUPPLEMENTAL INFORMATION </p>
+
+<p>Supplemental Information includes Supplemental Sequencing 
+Data, three figures, and five tables and can be found with this 
+article online at http://dx.doi.org/10.1016/j.stemcr.2016.07.001. </p>
+
+<p>AUTHOR CONTRIBUTIONS </p>
+
+<p>S.E.H. conceived the experiments and wrote the paper; B.M and J.V 
+performed western blot analysis; A.G. conceptualized EGFP-to-BFP 
+conversion experiments; S.P. facilitated SCN2A gene-correction ex-
+periments; A.G.E., M.H.L., and E.G.S. provided supervision and as-
+sisted in manuscript preparation. </p>
+
+<p>ACKNOWLEDGMENTS </p>
+
+<p>S.E.H. is supported by a National Health and Medical Research 
+Council (NHMRC) Overseas Biomedical Fellowship. A.G.E. and 
+E.G.S. are Senior Research Fellows and M.H.L. Senior Principal 
+Research Fellow of the NHMRC. Murdoch Children's Research 
+Institute is supported by the Victorian Government's Operational 
+Infrastructure Support Program. </p>
+
+<p>Received: March 17, 2016 
+Revised: July 1, 2016 
+Accepted: July 4, 2016 
+Published: August 4, 2016 </p>
+
+
+
+
+
+
+
+<p>Stem Cell Reports j Vol. 7 j 508-517 j September 13, 2016 517 </p>
+
+</text></tei>

@@ -1,0 +1,1039 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4499650" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:20+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>Fura-2 analogs are ratiometric fluoroprobes that are widely used for the quantitative measurement 
+of [Ca 2+ ]. However, the dye usage is intrinsically limited, as the dyes require ultraviolet (UV) excitation, 
+which can also generate great interference, mainly from nicotinamide adenine dinucleotide (NADH) 
+autofluorescence. Specifically, this limitation causes serious problems for the quantitative measurement 
+of mitochondrial [Ca 2+ ], as no available ratiometric dyes are excited in the visible range. Thus, NADH 
+interference cannot be avoided during quantitative measurement of [Ca 
+2+ ] because the majority of NADH 
+is located in the mitochondria. The emission intensity ratio of two different excitation wavelengths 
+must be constant when the fluorescent dye concentration is the same. In accordance with this principle, 
+we developed a novel online method that corrected NADH and Fura-2-FF interference. We simultaneously 
+measured multiple parameters, including NADH, [Ca 
+2+ ], and pH/mitochondrial membrane potential; 
+Fura-2-FF for mitochondrial [Ca 2+ ] and TMRE for Ψ m or carboxy-SNARF-1 for pH were used. W ith 
+this novel method, we found that the resting mitochondrial [Ca 
+2+ ] concentration was 1.03 μ M. This 
+1 μ M cytosolic Ca 
+2+ could theoretically increase to more than 100 mM in mitochondria. However, the 
+mitochondrial [Ca 2+ ] increase was limited to ∼30 μM in the presence of 1 μM cytosolic Ca 2+ . Our method 
+solved the problem of NADH signal contamination during the use of Fura-2 analogs, and therefore the 
+method may be useful when NADH interference is expected. </p>
+
+<p>Ca 
+2+ is an essential element involved in initiating and 
+controlling the excitation-contraction coupling process in car-
+diac myocytes. The predominant Ca 2+ source is trans-sarco-
+lemmal Ca 
+2+ influx and SR Ca 
+2+ release [1-3]. For many years, 
+mitochondria were simply regarded as an ATP-generating 
+factory. However, several recent reports showed that mito-
+chondria participate in many other important processes, such 
+as apoptosis, ischemic-reperfusion injury, aging, and other dis-
+eases [4-8]. All of those phenomena are related to Ca 2+ [4-8]. 
+Several mechanisms of mitochondrial Ca 
+2+ regulation in car-
+diac myocytes were reported, including involvement of the 
+mCU [4,6,7,9], RaM [10,11], the RyR [12,13], the mNCX 
+[14-17], and the CPX [18,19]. To date, their dynamics and </p>
+
+<p>quantitative roles in cardiac myocyte mitochondrial Ca 
+2+ reg-
+ulation were unclear. Further, their exact working mecha-
+nism, molecular identity, and regulatory factors were un-
+known. The role of mitochondria in cytosolic Ca 
+2+ regulation 
+in cardiac myocytes was controversial as well [4,6,7,9,20]. 
+In order to study these issues, quantitative and real-time mea-
+surements of [Ca </p>
+
+<p>2+ </p>
+
+<p>]m were required. 
+The [Ca 2+ ]m range was reportedly 0.08 to 20 μM [21-24]. 
+The most frequently used fluoroprobe to determine this range 
+was rhod-2. Rhod-2-AM has a positive charge, and therefore 
+it may preferentially load into mitochondria because of the 
+large negative potential of the mitochondrial matrix. However, 
+rhod-2 has limitations regarding quantitative mitochondrial 
+Ca 2+ measurement because it is not a ratiometric dye. In 
+addition, rhod-2 can measure only up to several μM of Ca </p>
+
+<p>2+ </p>
+
+<p>374 </p>
+
+<p>JH Lee, et al </p>
+
+<p>Fig. 1. A microfluorometry system for multiparameric measurement. 
+The diagram shows the instrumentation used to measure NADH 
+(emission, 450 nm; excitation, 361 nm), Fura-2-FF (emission, 500 nm; 
+excitation, 353 and 400 nm), and TMRE (emission, 590 nm; excitation, 
+530 nm) or carboxy-SNARF-1 (emission, 590 and 640nm; excitation, 
+539 nm). The light from a Xenon arc lamp excited the fluoroprobes 
+in a myocyte, and then the emission passed through a dichroic mirror 
+and band-pass filters to measure the intensity using photon-counting 
+devices. Near infrared from a microscope was used as a light source 
+to visualize the myocytes during experiments using a CCD camera 
+and monitor. </p>
+
+<p>because its dissociation constant (Kd) ranged from 0.57 to 
+0.80 μM [12,25,26]. 
+Fura-2 analogs are widely used for quantitative measure-
+ments of [Ca 2+ ]. The Kd value of Fura-2-FF was reportedly 
+18∼35 μM in calibrating buffers [27-31] and 6∼13 μM 
+in cells [27,32]. However, this dye has potential usage prob-
+lems due to NADH contamination and dye loading into mi-
+tochondria. Specifically, NADH contamination is a serious 
+problem because most NADH is located in the mitochondria 
+and because [NADH] change is related to mitochondrial mem-
+brane potential (Ψm), in turn, [Ca </p>
+
+<p>2+ </p>
+
+<p>]m change [33-36]. These 
+problems have been ignored and no methods exist to avoid 
+or overcome them. 
+In this report, we developed a novel online NADH correction 
+method to measure [Ca </p>
+
+<p>2+ </p>
+
+<p>]m quantitatively, as well as a meth-
+od to simultaneously measure multiple parameters, includ-
+ing NADH, [Ca </p>
+
+<p>2+ </p>
+
+<p>]m, and pH/Ψm. </p>
+
+<p>METHODS </p>
+
+<p>Cell preparation </p>
+
+<p>Sprague-Dawley (SD) rats (8∼10 weeks old) were anes-
+thetized with a mixture of ketamine hydrochloride (90 mg/kg) 
+and Rompun 
+Ⓡ (10 mg/kg). We injected the anesthetics in-
+traperitoneally. The rat chest cavity was opened, and the 
+heart was excised and mounted on a Langendorff-type ap-
+paratus. The heart was sufficiently perfused with Tyrode's 
+solution (mmol/L: NaCl, 133.5; KCl, 5.4; HEPES, 5; taurine, 
+20; MgCl2, 3; CaCl2, 0.75; and glucose, 5.5; pH adjusted to 
+7.4 with NaOH) to remove all residual blood in the heart. 
+Subsequently, the heart was perfused with Ca </p>
+
+<p>2+ </p>
+
+<p>-free Tyrode's 
+solution (mmol/L: NaCl, 133.5; KCl, 5.4; HEPES, 5; taurine, 
+20; MgCl2 3; EGTA 0.5; glucose, 5.5; pH adjusted to 7.4 
+with NaOH), and then with collagenase (Worthington Bio-
+chemical Co., NJ, USA) containing Tyrode's solution (mmol/L: 
+NaCl, 133.5; KCl, 5.4; HEPES, 5; taurine, 20; MgCl2, 3; CaCl2, 
+0.15; and glucose, 5.5; collagenase, 0.8 mg/mL; pronase, 0.04 
+mg/mL; pH adjusted to 7.4 with NaOH) for 15 minutes. Single 
+cardiac myocytes were dispersed by gentle agitation of the 
+digested heart in a high K </p>
+
+<p>+ </p>
+
+<p>-low Cl 
+-solution and stored in 
+cell culture medium (Dulbecco's modified Eagle's medium; 
+Sigma, St. Louis, USA) at room temperature (24∼26 </p>
+
+<p>o </p>
+
+<p>C) for 
+later use. The high K </p>
+
+<p>+ </p>
+
+<p>-low Cl 
+-solution was comprised of the 
+following, in mmol/L: KCl, 25; K-glutamate, 70; KH2PO4, 10; 
+taurine, 10; glucose, 11; EGTA, 0.5; and HEPES, 10; pH ad-
+justed to 7.2 with KOH. All experimental protocols were 
+approved by our institutional animal care and use committee. </p>
+
+<p>Solutions and reagents </p>
+
+<p>Fura-2-FF was purchased from TEFLabs (TX, USA). The 
+TMRE and carboxy-SNARF-1-AM were obtained from Invi-
+trogen (Seoul, Korea). </p>
+
+<p>Fluoroprobe loading procedure </p>
+
+<p>Ventricular myocytes were incubated in Fura-2-FF-AM 
+(8 μM) solution for 60 min at 4 </p>
+
+<p>o </p>
+
+<p>C, and then at 37 </p>
+
+<p>o </p>
+
+<p>C for 
+30 min. Next, ventricular myocytes were incubated for 60 
+min at 37 </p>
+
+<p>o </p>
+
+<p>C with a dye-free solution to sufficiently hydro-
+lyze the AM ester dye. Finally, the ventricular myocytes 
+were transferred into and incubated in fresh medium. If 
+carboxy-SNARF-1 was needed for the study, the dye (2 μM) </p>
+
+<p>was added into the second incubation step. To remove cyto-
+solic compartments and to visualize the mitochondrial fluo-
+rescence, single isolated cardiomyocytes were perfused with 
+saponin (0.1 mg/mL) for 60 s in the perfusing bath which 
+is mounted on the inverted microscope (Fig. 1). All experi-
+ments were performed at 37 </p>
+
+<p>o </p>
+
+<p>C. </p>
+
+<p>Spectrofluorometric measurements with a multipara-
+metric measurement system </p>
+
+<p>A fast monochromator (Polychrome II; Till Photonics, 
+Inc., Germany) was used as an excitation light source. A fused 
+quartz light guide was used to divert the excitation light 
+to an inverted microscope (TE-300; Nikon, Tokyo, Japan). 
+An oil immersion lens (40x, NA 1.3) was used. A near infra-
+red filter (Chroma Technology Corp., Bellows Falls, VT, USA) 
+was used between the microscope illuminator and specimen 
+to monitor the object field with a charge-coupled device 
+(CCD) camera (FTM1800NH/HGI; Philips, Salt Lake, USA). 
+The image was captured with a BT878-based TV capture 
+board, and the object field or cell area, as a pixel unit, was 
+measured with custom-made software. The object field area 
+was set with a field diaphragm (Nikon, Tokyo, Japan). Four 
+photomultiplier tubes (PMTs) were used to detect emission 
+wavelengths, and each had band-pass filters (450, 500, 590, 
+and 640 nm). Dichroic mirrors and band-pass filters were 
+purchased from Chroma (Brattleboro VT, USA). A photon 
+counting method was applied with the combination of a pho-
+tomultiplier tube (R2949; Hamamatsu, Hamamatsu Japan), pho-
+ton counter unit (C3866; Hamamatsu, Hamamatsu, Japan), 
+and high-speed counter (NI 6602; National Instruments, 
+Austin, USA). Custom-made driving software was used to 
+control and sample data. A diagram of the whole system 
+is shown in Fig. 1. </p>
+
+<p>Correction of NADH and Fura-2-FF Interference </p>
+
+<p>375 </p>
+
+<p>Fig. 3. NADH and Fura-2 excitation and emission spectra. (A) The 
+NADH excitation spectrum was obtained at 465-nm emission and 
+the emission spectrum was obtained at 365-nm excitation. (B) The 
+Fura-2 excitation spectrum was obtained at 500-nm emission and 
+the emission spectrum was obtained at 340-nm excitation. The 
+emission spectrum was shifted to the left by an increase in Ca 2+ . 
+Ex is excitation. Em is emission. </p>
+
+<p>Fig. 4. Identification of isosbestic points. (A) The isosbestic point 
+at 450-nm emission (red arrow). Ca 
+2+ in the non-bound state (--) 
+and Ca 2+ in the bound state (−) (B) The isosbestic point at 500-nm 
+emission for Ca 2+ in the non-bound state (--) and Ca 2+ in the bound 
+state (−) (C) The graph shows subtracted data. Ca 
+2+ in the non-bound 
+state was subtracted from that in the bound state at 450 nm. (D) 
+The graph shows subtracted data. Ca 2+ in the non-bound state was 
+subtracted from that in the bound state at 500 nm. (E) Standard 
+deviation data from graph C. (F) Standard deviation data from 
+graph D. </p>
+
+<p>Fig. 2. The excitation spectrum of NADH-Fura-2-FF. The spectrum 
+shows the interference between NADH and Fura-2-FF at each 
+emission (450 and 500 nm). (A) The NADH excitation spectrum at 
+450-nm emission. (B) The NADH excitation spectrum at 500-nm emi-
+ssion. (C) The Fura-2-FF excitation spectrum at 450-nm emission 
+under Ca </p>
+
+<p>2+ </p>
+
+<p>-free and 1 mM Ca 
+2+ conditions. (D) The Fura-2-FF ex-
+citation spectrum at 500-nm emission under Ca 2+ -free and 1 mM 
+Ca 2+ conditions. </p>
+
+<p>RESULTS </p>
+
+<p>Development of a NADH correction method 
+NADH-Fura-2 signal interference: Simultaneous measure-
+ment of Fura-2-FF and NADH was technically difficult be-
+cause each fluoroprobe produced signal interference. Fig. 2 
+shows this interference. Emission wavelengths of 450 and 
+500 nm were selected for NADH and Fura-2-FF, respectively. 
+The excitation spectrums of both fluoroprobes overlapped. 
+In addition, each fluoroprobe could generate emission at 
+both 450 and 500 nm. The light intensity at each emission, 
+therefore, contained signals from both fluoroprobes. This in-
+terference had to be corrected to obtain an exact measure-
+ment of the emission signal, specifically the quantitative 
+measurement of Ca 
+2+ with Fura-2-FF. 
+Correction principles: The excitation wavelength and the 
+concentration of NADH can affect the emission intensity but 
+not the emission spectral curve. Changes in [Ca </p>
+
+<p>2+ </p>
+
+<p>] did not 
+affect the emission and excitation spectrums of NADH (data 
+not shown). Thus, the 450 and 500 nm ratio of NADH was 
+constant at any excitation wavelength. The same principle 
+can be applied to Fura-2-FF if NADH or [Ca 2+ ] does not affect 
+the emission and excitation spectrums of Fura-2-FF. However, 
+the Fura-2-FF emission spectrum was shifted to the left by 
+Ca 2+ (Fig. 3B). Therefore, only isosbestic excitation could gen-
+erate a Ca </p>
+
+<p>2+ </p>
+
+<p>-independent emission spectrum. The isosbestic 
+point was different for each emission wavelength (i.e., 450 
+and 500 nm). To minimize NADH contamination during iso-
+sbestic point acquisition, 10 μM FCCP and 10 μM ADP 
+were added in the absence of mitochondrial substrates. The 
+residual emission intensity was measured, and the relation-
+ship between the intensity and the cell area was obtained 
+for correction of subsequent experiments. After myocytes 
+were loaded with Fura-2-FF, the cell area was measured 
+in each cardiac myocyte to correct the residual signals. The 
+excitation spectrums at 450 and 500 nm emission were ob-
+tained by changing [Ca 2+ ] from 0 to 10 mM under FCCP-free </p>
+
+<p>and mitochondrial substrate-free conditions (Fig. 4A and B). 
+The excitation spectrum of the Ca </p>
+
+<p>2+ </p>
+
+<p>-bound state was sub-
+tracted from the excitation spectrum of Ca </p>
+
+<p>2+ </p>
+
+<p>-free conditions. 
+Those subtracted curves are shown in Fig. 4C and D. To 
+obtain an isosbestic point, we chose the wavelength show-
+ing the minimum standard deviation value (Fig. 4E and F). 
+The isosbestic points were 361 at 450-nm emissions and </p>
+
+<p>376 </p>
+
+<p>JH Lee, et al </p>
+
+<p>Fig. 6. Cellular area-dependent autofluorescent background. • 
+(F361,450) was used for NADH signal correction. ○ (F353,500) and ▼ 
+(F400,500) were used for Fura-2-FF signal correction, respectively. △ 
+(F530,590) was used for TMRE signal correction. </p>
+
+<p>Fig. 5. Measurement of RN factors. (A) The NADH signal in 
+Fura-2-FF-free myocytes at 361-nm excitation and 450-nm emission 
+was measured in the presence of various mitochondrial substrates. 
+(B) F400,500 (•) and F353,500 (−) were measured simultaneously to 
+monitor the NADH contribution to the Fura-2-FF signal. (C) The 
+graph shows the relationships between F361,450,NADH and F353,500,NADH 
+(•) and between F361,450,NADH and F400,500,NADH (○). Linear relation-
+ships are evident in the graph. </p>
+
+<p>353 at 500-nm emissions, respectively. Using isosbestic ex-
+citation, the following equations were valid: </p>
+
+<p>F361,450=F361,450,NADH+F361,450,fura 
+(1) 
+F353,500=F353,500,NADH+F353,500,fura 
+(2) 
+F400,500=F400,500,NADH+F400,500,fura 
+(3) </p>
+
+<p>where Fx,y is the measured emission intensity at y nm by 
+x nm excitation, Fx,y,NADH represents the pure NADH-de-
+pendent emission intensity, and Fx,y,fura represents the pure 
+Fura-2-FF dependent emission intensity. In addition, the 
+Rf, RN1, and RN2 values must be constant because of the 
+consistent shape of the emission spectrum: </p>
+
+<p>Rf=F361,450,fura/F353,500,fura 
+(4) 
+RN1=F400,500,NADH/F361,450,NADH 
+(5) 
+RN2=F353,500,NADH/F361,450,NADH 
+(6) </p>
+
+<p>With these constants, equations (1), (2), and (3) can be 
+changed as follows: </p>
+
+<p>F361,450=F361,450,NADH+Rf*F353,500,fura 
+(7) 
+F353,500=RN2*F361,450,NADH+F353,500,fura 
+(8) 
+F400,500=RN1*F361,450,NADH+F400,500,fura 
+(9) </p>
+
+<p>If the constants, Rf, RN1, and RN2, were known, the pure 
+NADH and Fura-2-FF signals could be obtained by solving 
+the above equations. The Rf was calculated with the fluo-
+rescence intensity observed in Fig. 4A and B. RN1 and RN2 
+were obtained in myocytes that were not loaded with 
+Fura-2-FF. The NADH signal was changed according to the 
+supply of mitochondrial substrates: malate, pyruvate, or 
+malate plus pyruvate (Fig. 5A and B). The linear relation-
+ships of F400,500,NADH vs. F361,450,NADH and F353,500,NADH vs. 
+F361,450,NADH are shown in Fig. 5C, and each slope indicates 
+RN1 and RN2. The equations of each pure signal values are 
+as follows: </p>
+
+<p>F361,450,NADH=(A-Rf*B)/(1-Rf*RN2) 
+( 1 0 ) </p>
+
+<p>F353,500,fura /F400,500,fura=Rfura・= </p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+<p>         
+        </p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+<p>               </p>
+
+<p>      </p>
+
+<p> </p>
+
+<p>(11) </p>
+
+<p>Rfura is the ratio value of Fura-2-FF that was used to calcu-
+late the free calcium concentration. 
+Background subtraction: The excitation light intensity 
+used to induce fluorescence was much stronger than the fluo-
+rescence emission. Although the selected excitation wave-
+length was far different from the emission wavelength and 
+was blocked using a band-pass filter, the stray light from 
+excitation was still present. The stray light was reflected 
+at the boundary between the solution and the cover slip 
+and diffracted in the cells due to cellular components. Cells 
+may also produce unwanted autofluorescence. Those signal 
+artifacts were comparable to the real fluorescence emission 
+from the dye; thus, correction was necessary. First, the re-
+flected signal at the cover slip boundary was measured. 
+Then, the background signal due to cellular autofluorescence 
+was measured in the presence of FCCP and in the absence 
+of mitochondrial substrates. The cell-dependent background 
+signal was linearly related to the cell area; these relation-
+ships are shown in Fig. 6. Later, the dye-loaded cellular 
+area was measured, and the autofluorescence calculated 
+from the cellular area was corrected. Further, the cell-free 
+window background was also measured and subtracted. The 
+background correction was performed before the experi-
+ments began. We determined the relationship between the 
+cellular area and cellular autofluorescence on each ex-
+perimental day. </p>
+
+<p>Calibration equation </p>
+
+<p>The Ca 
+2+ concentration could be calculated from the ratio 
+value calculated from equation (11) using Grykiewicz's equa-
+tion [37]. To convert the ratio into a concentration, the equa-
+tion required four parameters: Kd, dissociation constant; Rmin, 
+minimum ratio; Rmax, maximum ratio; and F380,max/F380,min, the </p>
+
+<p>Correction of NADH and Fura-2-FF Interference </p>
+
+
+
+<p>Table 1. The dissociation constant (Kd) of Fura-2-FF at different 
+pH values </p>
+
+<p>Conditions 
+pH 
+Kd±S.E. (μM) </p>
+
+<p>Without cell 
+6.0 
+10.1622±0.4461 (n=12) 
+6.5 
+6.7459±0.2751 (n=23) 
+7.0 
+5.5703±0.1392 (n=36) 
+7.5 
+6.4291±0.2219 (n=27) 
+8.0 
+6.5048±0.0364 (n=3) 
+With cell 
+6.0 
+10.8589±0.6653 (n=12) 
+6.5 
+4.2521±0.2319 (n=12) 
+7.0 
+3.9020±0.2702 (n=10) 
+7.5 
+5.2825±0.4023 (n=10) </p>
+
+<p>Fig. 7. Simultaneous measurement of NADH, [Ca 
+2+ ]m, and pH. 
+Using carboxy-SNARF-and Fura-2-FF-loaded myocytes, NADH, 
+[Ca 2+ ]m, and pH was measured simultaneously. The mitochondrial 
+pH changes were investigated following Ca 
+2+ changes. The increase 
+in [Ca 2+ ]m did not affect mitochondrial pH. Mitochondrial pH was 
+7.504±0.047 (mean±S.E., n=13). </p>
+
+<p>ratio of maximum and minimum at 380 nm excitation. How-
+ever, applying the equation was not easy because both Rmax 
+and F380,max/F380,min require Ca </p>
+
+<p>2+ </p>
+
+<p>-saturated conditions with-
+out dye-loss. Replicating that condition in real cells was a 
+difficult and erroneous procedure. In mitochondria, dye-satu-
+rated conditions for Fura-2-FF without dye-loss were vir-
+tually impossible. We found that the Ca 2+ -bound form of 
+Fura-2-FF was practically non-fluorescent at 400-nm exci-
+tation. The new equation using this property was developed 
+and is as follows: </p>
+
+<p>[Ca 2+ ] =Kdㆍ(F400,500,max/F353,500,max)ㆍ(R-Rmin) 
+( 1 2 ) </p>
+
+<p>The F400,500,max and F353,500,max are maximum values of the 
+emitted signals at 500 nm with the excitation at 400 and 
+353 nm. Since F353,500,max was an isosbestic emission value 
+and was constant, the above equation could be simplified 
+further as follows: </p>
+
+<p>[Ca </p>
+
+<p>2+ </p>
+
+<p>]=Kdㆍ(1/Rmin)ㆍ(R-Rmin) 
+(13) </p>
+
+<p>The details of the derivation of the above equations are 
+shown in the Appendix. </p>
+
+<p>The Kd of Fura-2-FF </p>
+
+<p>To apply the calibration equation, the Kd value had to 
+be determined. If we knew the free [Ca </p>
+
+<p>2+ </p>
+
+<p>] and the other 
+parameters in the calibration equation, we could calculate 
+Kd. To calculate the free Ca 2+ concentration, <rs id="software-1" type="software">WINMAXC32</rs> 
+<rs corresp="#software-1" type="version-number">version 2.50</rs> (<rs corresp="#software-1" type="creator">Chris Patton</rs>, Stanford University) was used. 
+EGTA purity was double-checked using the pH and oxalate 
+method [38-42]. We obtained pH-dependent changes of Kd 
+values in a cell-free solution. To simulate the experimental 
+conditions, we measured pH-dependent Kd values with a 
+dye-free cell in the window. A summary of the measured 
+Kd values is shown in Table 1. </p>
+
+<p>M itochondrial pH changes by the change in [Ca 2+ ]m </p>
+
+<p>Using carboxy-SNARF loaded myocytes, mitochondrial 
+pH changes were determined following Ca 2+ changes (Fig. 7). 
+The increase in [Ca </p>
+
+<p>2+ </p>
+
+<p>]m did not affect mitochondrial pH. The 
+mitochondrial pH was 7.504±0.047 (mean±standard error 
+[S.E.], n=13). The Kd value of Fura-2-FF at pH 7.5 was 5.28 
+μM; this value was used for later Ca 
+2+ calculations. </p>
+
+<p>M itochondrial Ca 
+2+ changes due to correction </p>
+
+<p>Fig. 8 shows the differences in Ca 2+ concentrations before 
+and after the correction. The results clearly showed the impor-
+tance of correction for NADH and Fura-2-FF interference. The 
+mitochondrial resting calcium concentration was 1.03±0.13 
+μM (mean±S.E., n=32) and the maximum [Ca </p>
+
+<p>2+ </p>
+
+<p>]m at 1 μM 
+cytosolic Ca 
+2+ ([Ca </p>
+
+<p>2+ </p>
+
+<p>]c) was 29.6±1.61 μM (mean±S.E., n=33) 
+(Fig. 9). </p>
+
+<p>Simultaneous measurement of NADH, [Ca </p>
+
+<p>2+ ]m, and Ψm </p>
+
+<p>TMRE has a positive charge and is distributed in a mem-
+brane potential-dependent manner. If the concentration in 
+each compartment is known, the membrane potential can 
+be calculated using Nernst's equation. TMRE was perfused 
+at 2 nM to record the changes in the TMRE signal in mito-
+chondria. The resting Ψm was assumed to be −150 mV. 
+Based on this, Ψm was calculated. NADH was decreased 
+by the application of Ca </p>
+
+<p>2+ </p>
+
+<p>, but the Ψm remained similar 
+(Fig. 10). </p>
+
+<p>DISCUSSION </p>
+
+<p>Interest in the ubiquitous role of Ca 
+2+ in cells and cellular 
+organelles is increasing. To study Ca 2+ dynamics, the use of 
+Ca 
+2+ indicators has steadily increased. Mitochondria have </p>
+
+<p>378 </p>
+
+<p>JH Lee, et al </p>
+
+<p>Fig. 9. Resting and maximal [Ca 2+ ]m at l μM cytosolic Ca 2+ . The 
+resting [Ca </p>
+
+<p>2+ </p>
+
+<p>]m was 1.03±0.13 μM (mean±S.E., n=32) and the maximal 
+[Ca 2+ ]m was 29.6±1.61 μM (mean±S.E., n=33). </p>
+
+<p>Fig. 10. Simultaneous measurement of NADH, [Ca 2+ ]m, and Ψm. Using 
+Fura-2-FF-loaded myocytes, NADH, [Ca </p>
+
+<p>2+ </p>
+
+<p>]m, and Ψm were measured 
+simultaneously. The resting Ψm was assumed to be −150 mV. </p>
+
+<p>Fig. 8. Results of NADH and Fura-2-FF interference correction. 
+The left panels show the signals prior to correction and the right 
+panels show the signals after correction. NADH and the ratio of 
+Fura-2-FF signals were changed following correction. The calculated 
+[Ca </p>
+
+<p>2+ </p>
+
+<p>]m was substantially decreased. (A) NADH signals at 450-nm 
+emission. (B) Fura-2-FF signals at 500-nm emission. The figure 
+shows F400,500 (--), F353,500 (----), and the ratio of Fura-2-FF (-). 
+(C) The mitochondrial calcium concentration calculated from the 
+Fura-2-FF ratio. </p>
+
+<p>now become a focus because of their role in many cellular proc-
+esses, such as energy generation, apoptosis, ischemic-reper-
+fusion injury in the heart, aging, etc. Ca 2+ has a central 
+role in these processes. However, quantitative and dynamic 
+mitochondrial Ca 
+2+ data are not yet available. For quantita-
+tive measurement of mitochondrial Ca 2+ , a ratiometric ap-
+proach is essential. Ratiometric fluoroprobes are advanta-
+geous for quantitative measurement of [Ca </p>
+
+<p>2+ </p>
+
+<p>] because dye 
+loss due to leakage or photobleaching does not affect the 
+calculation of [Ca </p>
+
+<p>2+ </p>
+
+<p>]. These problems cannot be avoided </p>
+
+<p>when single excitation and single emission dyes are used 
+to determine [Ca </p>
+
+<p>2+ </p>
+
+<p>]. 
+Fura-2 was first introduced in 1985 as a ratiometric fluo-
+rescent dye [37]; several analogs were subsequently devel-
+oped. However, Fura-2 has several disadvantages when used 
+to measure mitochondrial Ca </p>
+
+<p>2+ </p>
+
+<p>. First, targeted dye loading 
+into the mitochondria is not easy. Therefore, Fura-2 would 
+likely be nonspecifically loaded into all organelles of the 
+cell. One major Ca </p>
+
+<p>2+ </p>
+
+<p>-related organelle is the SR. However, 
+the total SR and mitochondria percent volumes are about 
+3.5% and 34∼36%, respectively, in rat ventricular my-
+ocytes [43,44]. Therefore, even though Ca 
+2+ in SR may affect 
+the results, the effect would be negligible. Second, cellular 
+autofluorescence from NADH could contaminate the Fura-2 
+signal. More than 90% of cellular NADH is present in the 
+mitochondria (data not shown). Excitation and emission 
+spectrums of NADH and Fura-2 widely overlap. Importantly, 
+Ca 
+2+ changes in mitochondria could affect NADH, which, 
+in turn, affects Fura-2 signals. Therefore, this complicated 
+interference must be solved to quantitatively measure [Ca </p>
+
+<p>2+ </p>
+
+<p>]m. 
+This problem, however, has not been systematically inves-
+tigated since Fura-2 was introduced. We were able to suc-
+cessfully correct for the interference between NADH and 
+Fura-2 using the spectral characteristics of NADH and 
+Fura-2. Fig. 8 shows the effect of NADH and Fura-2-FF 
+interference. The NADH signal was considerably decreased 
+after the correction (Fig. 8). The corrected Fura-2-FF signal 
+resulted in lower [Ca 2+ ]m. This interference implied that da-
+ta from previous reports using Fura-2 analogs could be 
+wrong, as the NADH signal could be different based on the 
+correction or lack thereof. We would like to further inves-</p>
+
+<p>Correction of NADH and Fura-2-FF Interference </p>
+
+
+
+<p>tigate this possibility in the future. 
+Our calibration equation (Equation 12) has many advan-
+tages over Grynkiewicz's equation. First, it only required 
+three calibration parameters: Kd, F340,max/F400,max, and Rmin. 
+Second, the ratio value was directly linear to the Ca 
+2+ con-
+centration at a constant pH. Therefore, the rate of ratio change 
+could be directly converted to the rate of Ca 2+ change. Third, 
+obtaining the calibration parameters, particularly F340,max/ 
+F400,max, is relatively error-free. In Grynkiewicz's equation, 
+F380,max/F380,min is prone to error because it divides the larg-
+est number by the smallest number. In addition, to obtain 
+F380,max/F380,min, we had to accomplish real free-and satu-
+rated-[Ca 2+ ] conditions because F380 must reach the real max-
+imum and minimum values, respectively. If not, F380,max/F380,min 
+can easily be faulty. However, in our new equation, the 
+F340,max/F400,max measurement error is much smaller because 
+it is the ratio of the largest numbers at each excitation. 
+Fourth, as shown in Equation 13, when the isosbestic ex-
+citation value was chosen instead of 340 nm in the new 
+equation, only Rmin is required to convert the ratio into the 
+Ca 
+2+ concentration if the pH was unchanged and the Kd 
+value at that pH is known. Finally, the calibration proce-
+dure is much simpler, as Rmin is the only parameter needed. 
+However, there are limitations associated with use of the 
+equation. The new equation was generated based on the 
+assumption that the emission of Ca </p>
+
+<p>2+ </p>
+
+<p>-saturated Fura-2-FF was 
+zero at 400-nm excitation. However, Ca </p>
+
+<p>2+ </p>
+
+<p>-saturated Fura-2-FF 
+actually produces a small emission. This causes deflection 
+from the linearity between the ratio and Ca 
+2+ concentration 
+at very high Ca 
+2+ concentrations. We that found our equa-
+tion could be reasonably applied to [Ca 2+ ]m concentrations 
+up to 50-fold that of the Kd. This range is reasonably accept-
+able under experimental conditions. The new equation still 
+does not solve the problems of incomplete hydrolysis of the 
+AM form of the dye, dye compartmentalization, autofluo-
+rescence, etc. Dye loading problems are inevitable, but care-
+ful loading and washing may minimize these kinds of errors 
+(see Ref. [45]). In the case of compartmentalization, mi-
+tochondria had the largest volume; therefore, this type of 
+error could be ignored. We used a very careful loading pro-
+cedure to minimize incomplete hydrolysis of the AM form; 
+therefore, we believe that this error was also minimized. 
+The Kd value of Fura-2-FF is pH dependent; therefore, 
+if the procedure could cause changes in pH, we need to con-
+sider the pH effect when calculating [Ca </p>
+
+<p>2+ </p>
+
+<p>]m. Cytosolic Ca </p>
+
+<p>2+ </p>
+
+<p>application increased [Ca 2+ ]m, but the mitochondrial pH did 
+not change. Therefore, the constant Kd at pH 7.5 was used 
+to calculate [Ca </p>
+
+<p>2+ </p>
+
+<p>]m. 
+Our microfluorometry system could measure NADH, [Ca 2+ ]m, 
+and pHm simultaneously. In addition, the Ψm could be meas-
+ured using TMRE because the excitation and the emission 
+spectrum of TMRE overlapped with those of carboxy-SNARF-1. 
+Therefore, we were able to successfully measure Ψm using 
+TMRE (Fig. 10). 
+The resting [Ca 2+ ]m was approximately 1.03 μM. A pre-
+vious report showed that [Ca </p>
+
+<p>2+ </p>
+
+<p>]m ranged from 0.08 to 0.17 
+μM [23,24]. Our study revealed a higher value than that 
+of previous reports (see Refs. [23,24]). The change in [Ca 2+ ]m 
+plays a central role in the exercise-dependent increase in 
+ATP by activating three mitochondrial matrix Ca </p>
+
+<p>2+ </p>
+
+<p>-sensi-
+tive enzymes (pyruvate dehydrogenase, α-ketoglutarate 
+dehydrogenase, and NAD-dependent isocitrate dehydrogen-
+ase) [46-51]. Pyruvate and α-ketoglutarate dehydrogenase 
+were almost fully activated at 1 μM because of the low 
+Kd values, 0.77 and 0.28 μM, respectively [51]. The Kd val-</p>
+
+<p>ue of NAD-dependent isocitrate dehydrogenase was 5.4 μM 
+[51]. Therefore, the [Ca </p>
+
+<p>2+ </p>
+
+<p>]m-dependent increase in ATP may 
+be due to the activation of NAD-dependent isocitrate dehyd-
+rogenase. 
+The maximal attainable [Ca </p>
+
+<p>2+ </p>
+
+<p>]m seemed to be limited. 
+Our data showed that the maximal [Ca </p>
+
+<p>2+ </p>
+
+<p>]m was about 30 
+μM at 1 μM cytosolic Ca 2+ . Even when we applied more 
+than 1 μM, the maximal [Ca </p>
+
+<p>2+ </p>
+
+<p>]m was not increased further 
+(data not shown). The 30 μM concentration is far below 
+the electrochemical equilibrium because the Ψm is about 
+−150 mV and the concentration of the electrochemical 
+equilibrium must be up to 10 
+5 times the cytosolic [Ca </p>
+
+<p>2+ </p>
+
+<p>]. 
+This limitation implied the strong possibility that other 
+mechanisms exist to limit Ca 
+2+ increase in mitochondria. 
+This may be a Ca 
+2+ efflux mechanism, an inhibitory regu-
+lator of Ca 2+ influx, or the increase in Ca 2+ buffer by a vol-
+ume increase or an actual buffer increase. Until now, two 
+mechanisms were suggested for mitochondrial Ca 
+2+ efflux, 
+mNCX and CPX. Ca 2+ was applied under 0 mM Na + con-
+ditions; therefore, mNCX could not be the efflux mechanism 
+involved in limiting the increase in [Ca </p>
+
+<p>2+ </p>
+
+<p>]m. CPX may 
+change mitochondrial pH because it causes influx of H + into 
+mitochondria. However, mitochondrial pH was not changed 
+during [Ca </p>
+
+<p>2+ </p>
+
+<p>]m increase. The MCU, a major Ca 
+2+ influx 
+pathway, did not show inactivation [52]. The electrochemical 
+gradient for Ca 
+2+ influx was huge, and thus it would likely 
+be difficult for CPX to counteract the Ca 
+2+ influx to limit 
+the [Ca 2+ ]m increase. Another possibility is the opening of 
+the MPTP. It was reported that [Ca </p>
+
+<p>2+ </p>
+
+<p>]m overload could open 
+the MPTP [53-55]. However, MPTP is permeable to 1.5-kDa 
+molecules [54-56]; if the MPTP was opened, Fura-2-FF or 
+NADH would be decreased. Further, if the MPTP was 
+opened, the Ψm would be substantially depolarized. However, 
+we did not observe these phenomena. Mitochondria are known 
+to be a Ca 
+2+ sink because of their relatively larger Ca 
+2+ buf-
+fering capacity [57-60]. If the limitation was caused by the 
+buffer, [Ca 2+ ]m must continuously increase, even though the 
+speed was slower; however, this was not observed. Ca 
+2+ and 
+Pi could form a precipitate [61], and free [Ca </p>
+
+<p>2+ </p>
+
+<p>]m may not 
+increase because of continuous precipitate formation. Another 
+possibility is mitochondrial swelling. Ca 
+2+ overload caused 
+mitochondrial swelling, an indication of MPTP opening [53-55]. 
+However, actual swelling may occur without MPTP opening. 
+Mitochondria reportedly had a Pi-containing particle [61]. 
+Mitochondrial swelling and dissolution of those particles 
+may increase mitochondrial buffering capacity to limit [Ca 2+ ]m 
+increase. The Pi effect on mitochondrial Ca 
+2+ dynamics re-
+quires further study. 
+In conclusion, we successfully developed a method to solve 
+NADH and Fura-2-FF interference. This method enables 
+more accurate Ca 
+2+ measurements. In particular, quantita-
+tive measurement of mitochondrial Ca 2+ dynamics is now 
+possible and many uncertainties surrounding mitochon-
+drial Ca 
+2+ dynamics can be answered in the future using 
+our new method. </p>
+
+<p>ACKNOWLEDGEMENTS </p>
+
+<p>This research was partly supported by the National 
+Research Foundation of Korea (NRF) funded by the Ministry 
+of Education, Science and Technology (No. 2011-0010965) 
+and (No. 2012-0009829). </p>
+
+
+
+<p>JH Lee, et al </p>
+
+
+
+
+
+<p>JH Lee, et al </p>
+
+<p>Appendix: Derivation of the new calibration equations. </p>
+
+<p>If the fluorescent dye is only bound to Ca 2+ , the following equation is valid: </p>
+
+<p>         </p>
+
+<p>  </p>
+
+<p>(1a) </p>
+
+<p>Total dye concentration: DT 
+Free-form dye concentration: Df 
+Ca </p>
+
+<p>2+ </p>
+
+<p>-bound-form dye concentration: Db 
+Dissociation constant: Kd. </p>
+
+<p>If each form of the dye generates fluorescence emission at k by the excitation wavelengths x and y, the fluorescence intensity 
+of the mixture of the free-and bound-form dye is as follows: </p>
+
+<p>Fx,k=aㆍDf+bㆍDb 
+(2a) 
+Fy,k=cㆍDf+dㆍDb 
+(3a) </p>
+
+<p>where Fx,k is the emitted intensity at k by the x excitation, and Fy,k is the emitted intensity at k by the y excitation. 
+Since the Ca </p>
+
+<p>2+ </p>
+
+<p>-bound form of Fura-2-FF does not generate fluorescence at the 400 nm emission, we can describe this by 
+setting d to zero. When the florescence ratio R is the ratio Fx,k/Fy,k, </p>
+
+<p>   ㆍ  
+ㆍ   ㆍ  </p>
+
+<p>(4a) </p>
+
+<p>   
+     
+ㆍ      </p>
+
+<p> ㆍ      </p>
+
+<p> </p>
+
+<p> </p>
+
+<p>(5a) </p>
+
+<p>if all dye is the free form and [Ca </p>
+
+<p>2+ </p>
+
+<p>] is zero, R is the minimum value (Rmin) and equal to a/c. In addition, Fy,k is the 
+maximum value (Fy,k,max) and is c·DT. If all dye is the Ca </p>
+
+<p>2+ </p>
+
+<p>-bound form in Ca </p>
+
+<p>2+ </p>
+
+<p>-saturated conditions, Fx,k is the maximum 
+value (Fx,k,max) and is bㆍDT. Therefore, [Ca 2+ ] can be calculated with the following equation: </p>
+
+<p>      ㆍ    
+  ㆍ       </p>
+
+<p>(6a) </p>
+
+<p>If x is the isosbestic excitation, (2a) and (5a) can be converted as follows: </p>
+
+<p>Fx,k=a'ㆍDT=a'ㆍ(Df+Db) 
+(7a) </p>
+
+<p>   
+    ′ 
+ㆍ  ′   ′ </p>
+
+<p> ㆍ      </p>
+
+<p>′ </p>
+
+<p>  </p>
+
+<p>Since a'/c equals Rmin, the following equation can be derived: </p>
+
+<p>      ㆍ    
+ ㆍ      </p>
+
+<p>The English in this document has been checked by at least two professional editors, both native speakers of English. For 
+a certificate, please see: </p>
+
+<p>http://www.textcheck.com/certificate/iNNy9q </p>
+
+</text></tei>

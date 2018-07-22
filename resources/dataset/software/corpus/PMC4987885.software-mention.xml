@@ -1,0 +1,338 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4987885" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:31+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>ABSTRACT </p>
+
+<p><rs type="software">SuperLooper2</rs> (SL2) (http://proteinformatics.charite. 
+de/sl2) is the updated version of our previous web-
+server SuperLooper, a fragment based tool for the 
+prediction and interactive placement of loop struc-
+tures into globular and helical membrane proteins. 
+In comparison to our previous version, <rs type="software">SL2</rs> benefits 
+from both a considerably enlarged database of frag-
+ments derived from high-resolution 3D protein struc-
+tures of globular and helical membrane proteins, and 
+the integration of a new protein viewer. The database, 
+now with double the content, significantly improved 
+the coverage of fragment conformations and predic-
+tion quality. The employment of the NGL viewer for 
+visualization of the protein under investigation and 
+interactive selection of appropriate loops makes <rs type="software">SL2</rs> 
+independent of third-party plug-ins and additional in-
+stallations. </p>
+
+<p>Structural biology is an established but still emerging re-
+search field of life sciences, as reflected by the exponential 
+rise of atomic models deposited in the Research Collab-
+oratory for Structural Bioinformatics Protein Data Bank 
+(RCSB PDB) (1). However, in more than one half of all 
+entries deposited in the RSCB PDB segments are missing 
+(2). These missing segments are often located in flexible and 
+functionally important regions of proteins such as loops or 
+turns, not resolved by X-ray crystallography or single parti-
+cle cryo-electron microscopy. These regions have to be mod-
+eled to obtain a more complete structural model for further 
+analysis of the structure, e.g. for molecular dynamics simu-
+lations (3). 
+Loop regions are one of the most demanding regions in 
+homology modeling workflows. A prominent example are 
+G protein coupled receptors (GPCRs), which constitute the 
+largest protein family in the human genome. The number of </p>
+
+<p>available templates for modeling of GPCRs has increased 
+dramatically in the last decade facilitating the generation 
+of homology models for structure-based drug design. The 
+common topology of the transmembrane-spanning regions, 
+even of distantly related GPCRs, allows homology model-
+ing of these regions and docking of small rigid orthosteric 
+ligands with close to experimental accuracy. However, pre-
+dictions of long or flexible loops remain unsolved problems, 
+as evaluated recently by the community-wide GPCR Dock 
+assessment (4). As the sequence similarity within loop re-
+gions is generally much lower than within other parts of 
+proteins, specialized methods are required for modeling. 
+Loop modeling approaches can be divided into ab initio 
+(5-8), fragment-based, (9-12) or a mixture of both meth-
+ods (13,14). Ab initio based methods utilize molecular me-
+chanics force fields to determine possible loop conforma-
+tions. These methods are generally CPU-intensive but ca-
+pable of predicting currently unknown loop conformations. 
+Fragment-based methods on the other hand are less CPU-
+intensive and thus faster, but depend on known structures 
+and precalculated fragment databases to find loop confor-
+mations. It remains unclear which method provides the bet-
+ter predictions. Some studies find that both methods per-
+form on a similar level (9,12), while others describe advan-
+tages to either ab initio (15) or fragment-based (16) methods. 
+As fragment-based methods generally provide results much 
+faster, they are well suited for web-based tools such as Su-
+perLooper (17), allowing instant visualization and control 
+of the results. 
+The quality of fragment-based loop predictions using de-
+pends on the completeness of the fragment database. Inde-
+pendent studies have shown that the conformational space 
+for short loops up to 12-14 residues is covered by structural 
+fragments derived from the RCSB PDB (18,19). Enlarge-
+ment of fragment databases may thus particularly enhance 
+prediction of longer loops. Depending on the method used, 
+also the prediction of shorter loops might benefit from a 
+larger pool of available templates, e.g. when the exact fit of 
+the stem atoms of the template loop to the gap is an evalua-</p>
+
+<p>* To whom correspondence should be addressed. Tel: +49 30450524190; Fax: +49 30450524952; Email: peter.hildebrand@charite.de </p>
+
+<p>Present address: Alexander S. Rose, San Diego Supercomputer Center, University of California, San Diego, CA 92093-0743, USA. </p>
+
+<p>C </p>
+
+<p>The Author(s) 2016. Published by Oxford University Press on behalf of Nucleic Acids Research. 
+This is an Open Access article distributed under the terms of the Creative Commons Attribution License (http://creativecommons.org/licenses/by-nc/4.0/), which 
+permits non-commercial re-use, distribution, and reproduction in any medium, provided the original work is properly cited. For commercial re-use, please contact 
+journals.permissions@oup.com </p>
+
+<p>Nucleic Acids Research, 2016, Vol. 44, Web Server issue W391 </p>
+
+<p>tion criterion. The database of globular and membrane pro-
+teins has more than doubled since our previous publication 
+(17). In order to benefit from this enlargement of available 
+structures we updated our fragment database. 
+Fragment-based tools such as <rs type="software">SuperLooper</rs> depend on 
+databases too large to distribute as stand-alone programs 
+(∼80 GB in the case of <rs type="software">SL2</rs>). The rapid delivery of a large 
+number of possible loop conformation makes web-based 
+tools a perfect candidate. The database remains on a server 
+and the user is able to choose a suitable loop from listed re-
+sults using a web-based molecule viewer. Here, we use <rs type="software">NGL</rs> 
+(20) for protein and fragment visualization, which adopts 
+capabilities of modern web browsers, such as <rs type="software">WebGL</rs> for 
+molecular graphics. <rs type="software">NGL</rs> allows interactive display of even 
+large molecular complexes and is unaffected by the retire-
+ment of third-party plug-ins such as Flash or Java-Applets. 
+This viewer offers comprehensive molecular visualization 
+through a graphical user interface so that life scientists can 
+easily access and utilize available structural data without 
+any further installations (20). 
+Thus, <rs type="software">SL2</rs> benefits from the significantly enlarged 
+database of fragments and new fast molecule viewer. Due 
+to the improved coverage of the conformational loop space, 
+the quality of prediction, measured by the backbone root 
+mean square deviation (RMSD), has improved by 20% on 
+average compared to our previous version (17). The new 
+version of our fragment-based web-application for loop 
+modeling <rs type="software">SL2</rs> thus has an improved performance in loop 
+prediction as well as an up-to-date visualization. </p>
+
+<p>UPDATE OF THE LIP AND LIMP DATABASE </p>
+
+<p>The loop database (LIP) is composed of all possible frag-
+ments of 3-35 amino acids length extracted from the RSCB 
+PDB entries in December 2015. Here, not only loops 
+are considered but also fragments derived from secondary 
+structure elements like helices and -sheets. For each frag-
+ment, the amino acid sequence, PDB identifier, chain iden-
+tifier, residue number of stem atoms and a geometrical fin-
+gerprint is stored. 
+Geometrical fingerprint matching is used as a criterion to 
+estimate the sterical fit of stem atoms of N-and C-termini 
+of each database fragment to the C-and N-terminal stem 
+atoms of a gap in a protein structure. The geometrical fin-
+gerprints of both the stem atoms of each database fragment 
+and the stem atoms of the gap are composed of the dis-
+tance between the N-and C-terminal stem atoms and three 
+angles defining their relative orientation (Figure 1). Com-
+pared to our previous version, we slightly altered the geo-
+metric fingerprint. Previously, we used a combination of two 
+distances and two angles for scoring, resulting in a higher 
+weighting of the fit of the residue where the angle was mea-
+sured. In <rs type="software">SL2</rs>, we solved this problem employing distance 
+and three angles. 
+Since the first release of <rs type="software">SuperLooper</rs> in 2008, the num-
+ber of entries deposited in the RSCB PDB has more than 
+doubled from 54 543 structures to 114 693 in 2015. A total 
+of 901 609 231 fragments with a length of 3 to 35 residues 
+was extracted from this enlarged pool of template structures 
+(Figure 2A). Because more short than long overlapping 
+fragments are extracted from a given template structure, </p>
+
+<p>Figure 1. Schematic representation of the geometrical fingerprint: The ge-
+ometrical fingerprint is characterized by the distance d between the N-
+terminal C-and the C-terminal N atom and the following three angles: 
+defined by the line between C (N) , C (N) and d, is spanned by the line 
+between N (C) , C (C) and d, is the angle between the two planes A (de-
+fined by C (N) , C (N) and N (C) ) and B (C (C) , C (N) and N (C) ). </p>
+
+<p>Figure 2. Length dependency of the number of fragments stored in our 
+previous (black) and present fragment (gray) database; (A) loops in pro-
+teins (LIP), and (B) loops in membrane proteins (LIMP). </p>
+
+<p>the number of fragments decreases linearly with length. For 
+loops with three amino acids, more than 30 million frag-
+ments are stored in the database, for 35 amino acids 24 mil-
+lion fragments are available. To benefit from the continuous 
+growth of the RCSB PDB an update protocol was imple-</p>
+
+<p>W392 Nucleic Acids Research, 2016, Vol. 44, Web Server issue </p>
+
+<p>mented that automatically adds novel fragments to the LIP 
+or LIMP database every three months. 
+Due to (partial) embedding into the lipid bilayer, loops 
+of membrane proteins have a more hydrophobic amino 
+acid composition compared to loops of globular proteins 
+(21). Tools developed for the prediction of loops connect-
+ing transmembrane helices were indeed found to enhance 
+prediction of GPCR loops (22). In <rs type="software">SL2</rs>, such loops can be 
+selected from LIMP, which is a collection of fragments ex-
+tracted from loops of all helical transmembrane proteins. 
+Loops were defined as parts without regular fold, thus also 
+containing kinks, bulges or re-entrant loops (23). To allow 
+selection of membrane protein loops taking the lipid bilayer 
+into account, the extension of the lipid bilayer is indicated 
+by two parallel planes (as described below). 
+The number of membrane protein structures deposited in 
+the RCSB PDB rose from 805 (in 2008) to 2298 (in 2015) ac-
+cording to the Protein Data Bank of Transmembrane Pro-
+teins (24). As a result, the loops stored in LIMP doubled 
+from 179 580 to 378 839. For LIMP is composed mainly 
+of loop structures, the length distribution differs from LIP 
+where the fragments also include helical fragments and frag-
+ments derived from -sheets. In LIMP (Figure 2B), few loop 
+templates are available for short loops of 3-5 amino acids 
+in length. The number of loops stored in LIMP increases 
+markedly to a maximum of 20 000 up to a length of 20 
+residues before it decreases again. </p>
+
+<p>SEARCH PROCEDURE </p>
+
+<p>To start the search the stem residues flanking the N-and C-
+terminus of a missing (or existing) loop in a protein model 
+and the amino acid sequence have to be provided. As in 
+our previous version, the search procedure is based on a 
+stepwise approach which minimizes the calculation time. 
+Fragments with appropriate sequence length, and with ge-
+ometrical fingerprints of the fragment and the gap match-
+ing with an accuracy of at least 0.75Å RMSD distance are 
+selected. This RMSD value is subsequently used to deter-
+mine the top 1000 loop candidates. These loop candidates 
+are then rescored by the parameters 'sequence similarity be-
+tween missing segment and template loop' and 'fingerprint 
+matching of the template loop to the gap in the model.' 
+Only one representative of fragments with identical primary 
+structure and high tertiary structure similarity (with back-
+bone RMSD &lt; 0.5 ˚ 
+A) is kept in the results list to maximize 
+the conformational space of fragments used for further cal-
+culations. The top 100 loop candidates are finally displayed 
+in the results list. Suitable candidates can be selected from 
+that list by visual inspection. </p>
+
+<p>VISUALIZATION AND USER INTERFACE </p>
+
+<p>For visual inspection of results, we employed the NGL 
+viewer which works without installation of additional plug-
+ins (20). As a common graphical user interface for the 
+NGL viewer (Figure 3) the search mask and the results list 
+were implemented within JavaScript. A protein structure 
+uploaded via the file selection dialog is instantly loaded to 
+the NGL viewer. The stem residues of the gap in the protein 
+model must either be typed into the according search field or </p>
+
+<p>can be selected by clicking them in the NGL viewer. The se-
+quence of the missing segment must be typed or copied into 
+the search mask. If the membrane protein-specific LIMP 
+data base (Membrane DB) is not checked, the LIP data base 
+will be searched. After the submission button is pressed, the 
+search is started. Depending on the loop length, results are 
+expected to appear after few seconds or up to half a minute 
+in the results list. 
+The top hit will automatically be loaded into the gap of 
+the protein model depicted in the viewer window. Alterna-
+tive loop conformations can be selected from the results ta-
+ble containing the 100 best loop candidates. For each can-
+didate, the score ranging from 0 to 0.455, the RCSB PDB 
+entry-code and sequence of the template protein, the num-
+ber of clashes, and the sequence identity between target and 
+template are listed. If no appropriate loop is found, the 
+user can select 'Decrease N-terminal stem' or 'Increase C-
+terminal stem' to add a residue to the loop and shift the 
+stem atoms of the gap, accordingly. As an additional vi-
+sual control, for helical membrane proteins, the position 
+of the lipid bilayer can be calculated ('Calculate membrane 
+planes'), employing the web-service TMDET (25). 
+There is an option to display the complete list of loop 
+candidates at the same time as visualizing the conforma-
+tion space of the loop. Loop candidates can be colored ac-
+cording to score, sequence identity or clashes by selecting 
+the corresponding color scheme from the dropdown menu. 
+The completed structure (initial model plus selected loop) 
+can be downloaded by clicking the download button. Al-
+ternatively, the complete list of loops can be downloaded 
+for further analysis. </p>
+
+<p>TECHNICAL ASPECTS </p>
+
+<p>Visualization is carried out by the NGL viewer (20). To use 
+the full feature set of the NGL viewer an up-to-date web 
+browser (tested on the recent versions of Firefox, Google 
+Chrome, Safari, IE and Edge) is recommended. The spe-
+cialized graphical user interface is written in JavaScript. For 
+job handling a simple python job server based on the Flask 
+framework (http://flask.pocoo.org/) is used. </p>
+
+<p>PERFORMANCE, LIMITATIONS AND OUTLOOK </p>
+
+<p>The updated version of our fragment based web-application 
+tool for loop modeling, <rs type="software">SL2</rs>, benefits from an enlarged frag-
+ment database and a new user interface including an up-
+dated protein viewer. As a result of the enlarged fragment 
+database the prediction quality has been further improved. 
+Using the same dataset (15) and validation procedure as in 
+our previous publication (17), an average gain in prediction 
+quality by 20% is observed for loops of 3-16 residues length 
+(Figure 4). A drop of the backbone RMSD between ex-
+perimentally determined and modeled loops (only the top 
+hit was considered) starts to become evident for loops with 
+eight residues length. This implies that the coverage of pos-
+sible loop conformations has been further optimized start-
+ing with this length. 
+Despite the gain of prediction quality, the top hit results 
+obtained by <rs type="software">SL2</rs> sometimes deviate from the experimentally 
+determined structure even for short loops. There are several </p>
+
+<p>Nucleic Acids Research, 2016, Vol. 44, Web Server issue W393 </p>
+
+<p>Figure 3. Screenshot of the <rs type="software">SL2</rs> results page (NGL viewer). Structure of the human cytomegalovirus GPCR US28 (PDB-ID: 4xt1) in a gray cartoon rep-
+resentation with top ranked loop (green) and calculated membrane planes. The list of loop candidates filling the gap 94 to 103 in the GPCR structure is 
+displayed as table on the right hand just below the search mask. </p>
+
+<p>Figure 4. Comparison of benchmarks of our previous (17) (black rhom-
+bus) and updated version <rs type="software">SL2</rs> (gray star) using a standard loop dataset 
+(15). </p>
+
+<p>possible reasons for this. First, many loops are highly flexi-
+ble or are even located in structurally disordered regions of 
+proteins (26,27). The conformations suggested by <rs type="software">SL2</rs> may 
+thus indicate alternative loop conformations not observed 
+by protein X-ray structure crystallography (e.g. Figure S6 
+in (28)). Second, as scoring of the loops mainly depends on 
+the stem residues, experimentally caused distortions of these 
+stem atoms may prevent selection of a specific conformation 
+(29). Prediction quality drops with loop length, mainly due 
+to the increased conformational space. A promising strategy 
+to enhance prediction quality of longer loops would be in-</p>
+
+<p>clusion of additional experimental constraints such as mass 
+spectrometry (30,31) or electron density maps from single 
+particle cryo-electron microscopy (32). </p>
+
+<p>FUNDING </p>
+
+<p>Deutsche Forschungsgemeinschaft [Sfb740/B6, DFG HI 
+1502/1-2, BI 893/8]; 'Norddeutscher Verbund f ¨ 
+ur Hoch-
+und H ¨ 
+ochstleistungsrechner' (HLRN) (in part). Funding 
+for open access charge: Sfb740 / B6. 
+Conflict of interest statement. None declared. </p>
+
+
+
+</text></tei>

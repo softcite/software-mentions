@@ -68,7 +68,7 @@ public class SoftwareTrainerRunner {
             throw new IllegalStateException(
                     USAGE);
         }
-System.out.println();
+
         String path2GbdHome = SoftwareProperties.get("grobid.home");
         System.out.println("path2GbdHome=" + path2GbdHome);
         initProcess(path2GbdHome);

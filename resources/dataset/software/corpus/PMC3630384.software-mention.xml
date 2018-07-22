@@ -1,0 +1,625 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC3630384" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:20+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>In cancer genome studies, the annotation of newly detected oncogene/tumor suppressor gene candidates is a challenging 
+process. We propose using concept lattice analysis for the annotation and interpretation of genes having candidate somatic 
+mutations in whole-exome sequencing in acute myeloid leukemia (AML). We selected 45 highly mutated genes with 
+whole-exome sequencing in 10 normal matched samples of the AML-M2 subtype. To evaluate these genes, we performed 
+concept lattice analysis and annotated these genes with existing knowledge databases. </p>
+
+<p>Acute myeloid leukemia (AML) is one of the most well-
+studied diseases in the genomic research area [1, 2]. AML 
+occurs usually in middle-aged people and is diagnosed by 
+increasing leukemic myeloblasts in blood over 30% [3]. AML 
+is a genetically heterogeneous disease, since 1/3 of AML 
+patients have chromosomal rearrangements, like t(8;21) and 
+t(15;17), but other AML patients have normal karyotypes 
+[4]. With recent advances of high-throughput genomic 
+technology, a favorable prognosis has been observed with 
+some genetic changes in cytogenetically normal AML [5]. 
+These results were reflected by the World Health 
+Organization (WHO) diagnostic criteria; the NMP1 and 
+CEBPA mutations were included in the 2008 revision of 
+these criteria [6]. The molecular change of AML is con-
+sidered to be the accumulation of somatic mutations in 
+hematopoietic progenitor cells [7]. Next-generation sequen-
+cing technology gave us new insights into the clonal hete-
+rogeneity of leukemic mutations so that we can make an 
+explanation why some of these mutations are highly re-</p>
+
+<p>producible but others are very rare [8]. Still, in 30% of 
+cytogenetically normal AML, the genetic causality origin or 
+strongly associated genetic changes have not yet been 
+discovered [9, 10]. 
+With advances of high-throughput technology, discovery 
+of disease-associated genes is growing [11]. As a conse-
+quence, the genetic knowledge databases are growing ra-
+pidly. Accordingly, the annotation of candidate causal genes 
+in genetic studies is a very challenging process for resear-
+chers. We propose a workflow of the detection of somatic 
+mutation candidates in 10 normal matched AML samples 
+and introduce concept lattice analysis for clustering the 
+samples that have highly mutated genes in common. </p>
+
+<p>Methods </p>
+
+<p>Primacy sequence analysis </p>
+
+<p>We received the fastq files of whole-exome sequencing 
+results of tumor and matched normal sample data of 10 AML 
+patients from the Korea Genome Organization in December 
+2012. There were no patient-related medical or charac-</p>
+
+<p>www.genominfo.org </p>
+
+
+
+<p>Genomics &amp; Informatics Vol. 11, No. 1, 2013 </p>
+
+<p>Fig. 1. Primary sequence analysis 
+pipeline. </p>
+
+<p>Fig. 2. Workflow of detection of somatic mutation candidate from 
+exome sequencing of normal matched samples from 10 acute 
+myeloid leukemia. </p>
+
+<p>teristic data. We aligned the sequencing reads to the human 
+reference genome (hg 19, GRCh37) from USCC by <rs id="software-16" type="software">BWA</rs> 
+<rs corresp="#software-16" type="version-number">0.6.2</rs> [12] (Figs. 1 and 2). To filter the known single nucle-
+otide polymorphisms (SNPs), we used dbSNP bulid 137. We 
+removed PCR duplicates and filtering low-quality SNPs by 
+<rs id="software-14" type="software">Samtools</rs> <rs corresp="#software-14" type="version-number">0.1.18</rs> [13], <rs id="software-12" type="software">Picard</rs> <rs corresp="#software-12" type="version-number">1.68</rs> [14], and <rs id="software-10" type="software">GATK</rs> <rs corresp="#software-10" type="version-number">2.3.4</rs> 
+[15]. After the filtering process, the SAM file was converted 
+to VCF file by <rs id="software-15" type="software">VCF Tools</rs> <rs corresp="#software-15" type="version-number">0.1.10</rs> [16]. For detecting somatic 
+mutation candidates, we obtained the difference in VCF files 
+between tumor and normal samples. For annotation of these 
+somatic mutation candidates, we used the ANNOVAR tool 
+[17]. </p>
+
+<p>Formal concept analysis </p>
+
+<p>We used formal concept analysis (FCA) for the con-
+struction of hierarchical relationships among samples 
+sharing highly mutated genes [18]. FCA is a useful method 
+in conceptual clustering of objects, attributes, and their 
+binary relationship. In FCA, the sets of formal objects and 
+formal attributes together with their relation to each other 
+form a "formal context," which can be represented by a 
+crosstable. In our case, the objects are 10 AML samples, and 
+the attributes are 45 highly mutated genes. We defined the 
+formal context as K = (G, M, I), where G is a set of objects 
+(i.e., samples), M is a set of attributes (i.e., mutated genes), 
+and I ⊆ G × M is the incidence relations where (g, m) ⊆ I if 
+object g has attribute m. For A ⊆ G and B ⊆ M, we define the 
+operators A' = {m ∈ M|gIm for all g ∈ A} (i.e., the set of 
+attributes common to the objects in A) and B' = {g ∈ G|gIm 
+for all m ∈ B} (i.e., the set of objects common to the 
+attributes in B). A pair of (A, B) is a formal concept of k(G, 
+M, I) if and only if A ⊆ G, B ⊆ M, A' = B, and A = B'. A is 
+called the extent and B is the intent of the concept (A, B). The 
+extent consists of all objects belonging to the concept while 
+the intent contains all attributes shared by the objects. The 
+concept of a given context is naturally ordered by the 
+subconcept-superconcept relation, defined by (A1, B1) ≤ 
+(A2, B2): ＜=＞ A1 ⊆ A2 (＜=＞ B2 ⊆ B1). </p>
+
+<p>The ordered set of all concepts of the context (G, M, I) is 
+denoted by C(G, M, I) and is called the concept lattice of (G, 
+M, I). We represent the structure of this concept lattice with 
+a Hasse diagram, in which nodes are the concepts and the 
+edges correspond to the neighborhood relationship among 
+the concepts. All concepts above an object label (below the 
+attribute label) include that object (attribute). The top 
+element of a lattice is a unit concept, representing a concept 
+that contains all objects. The bottom element is a zero 
+concept having no object. </p>
+
+<p>Results </p>
+
+<p>Overview of mutations </p>
+
+<p>We have identified 12,908 somatic mutation candidates in 
+10 AML sequenced exomes, including 1,281 point muta-
+tions, 625 insertion/deletions (Indels) (Table 1, Fig. 3). The </p>
+
+
+
+<p>www.genominfo.org </p>
+
+<p>KH Lee, et al. Clustering of Candidate Oncogenes in Acute Myeloid Leukemia Using Concept Lattice Analysis </p>
+
+<p>Samle 
+No. 
+Synonymous 
+SNP 
+NS SNPs 
+Stopgain 
+SNV 
+Stoploss 
+SNV 
+Frameshift 
+substitution 
+Frameshift 
+insertion 
+Frameshift 
+deletion 
+Nonframeshift 
+Indel 
+Unknown </p>
+
+<p>1 
+729 
+409 
+23 
+2 
+0 
+26 
+34 
+10 
+21 
+2 
+603 
+352 
+17 
+2 
+0 
+19 
+29 
+9 
+12 
+3 
+840 
+482 
+22 
+0 
+1 
+30 
+40 
+6 
+23 
+4 
+568 
+333 
+22 
+1 
+0 
+18 
+30 
+5 
+13 
+5 
+838 
+480 
+33 
+0 
+1 
+32 
+35 
+12 
+19 
+6 
+1,099 
+649 
+47 
+3 
+0 
+21 
+39 
+5 
+40 
+7 
+751 
+411 
+33 
+3 
+1 
+31 
+34 
+7 
+15 
+8 
+828 
+469 
+36 
+3 
+0 
+30 
+26 
+4 
+21 
+9 
+534 
+317 
+21 
+0 
+1 
+21 
+9 
+4 
+15 
+10 
+693 
+395 
+28 
+0 
+1 
+19 
+34 
+6 
+23 
+Mean 
+748.3 
+429.7 
+28.2 
+1.4 
+0.5 
+24.7 
+31 
+6.8 
+20.2 
+SD 
+166.25 
+97.16 
+9.07 
+1.34 
+0.5 
+5.65 
+8.83 
+2.69 
+8.05 </p>
+
+<p>AML, acute myeloid leukemia; SNP, single nucleotide polymorphism; NS, nonsynonymous; SNV, single nucleotide variation. </p>
+
+<p>Table 1. The distribution of somatic mutation candidates in 10 AML samples </p>
+
+<p>Fig. 3. Distribution of somatic mutation candidates in all samples. 
+NS SNV, nonsynonymous single nucleotide variation. </p>
+
+<p>point mutations include 7,483 synonymous single nucle-
+otide variations (SNVs), 4,297 nonsynonymous SNVs, 282 
+stopgain SNVs, 14 stoploss SNVs, and 5 frameshift sub-
+stitutions, and the Indels include 247 frame shift insertions, 
+310 frameshift deletions, and 68 nonframe shifts (Fig. 4). 
+For each patient, the average nonsynonymous mutation 
+count was 429.7 (SD, 97.16). 
+About 342 to 665 genes have nonsynonymous somatic 
+mutation candidates at least once in each AML sample (Table 
+2). Recurrent mutated genes were observed in all samples. </p>
+
+<p>Mutation analysis </p>
+
+<p>The most frequently mutated genes across all samples 
+were USP9Y and MUC5B; these genes were mutated in 5 
+samples. These genes were also highly mutated in each 
+sample; for USP9Y genes, it had 6 nonsynonymous muta-
+tions in sample 3. We have selected 45 highly mutated genes 
+(1.5%) from 2981 mutated genes. We defined highly mu-
+tated genes as genes having 3 or more nonsynonymous 
+mutations in each sample (Table 3). In a comparison of 
+mutations with the <rs type="software">COSMIC</rs> database [19], among 45 
+highly mutated genes, 21 genes matched to hematopoietic 
+and lymphoid tissue malignancy terms, and 21 genes 
+matched to other cancer types. In 3 genes, there was no 
+matched term in <rs type="software">COSMIC</rs> (Table 4). 
+We used the concept lattice to construct the hierarchical 
+relationship between the samples that had 45 highly 
+mutated genes. Concept Biolattice analysis is a mathe-
+matical framework based on concept lattice analysis for 
+better biological interpretation of genomic data. The top 
+element of a lattice is a unit concept, representing a concept 
+that contains all objects. The bottom element is a zero 
+concept having no object [20, 21]. For comparing with the 
+Concept lattice (Fig. 5), we also performed hierarchical 
+clustering analysis by Ward method. In hierarchical clus-
+tering, cluster 1 has 5 samples (nos. 1, 2, 5, 9, and 10), 
+cluster 2 has 2 samples (nos. 4 and 7), and others have 1 
+sample each (Fig. 6). We divided the samples into 4 
+subgroups by interpretation of the concept lattice result (Fig. 
+7). Lattice subgroup 1 shared SYNE1 gene mutation, and 
+samples 3, 4, and 7 were included in this subgroup. 
+Subgroup 2 was comprised of 5 samples (nos. 1, 2, 5, 6, and 
+9) that had MUC5 gene mutations in common. Samples 10 
+and 8 could be isolated by the uniqueness of their mutated </p>
+
+<p>www.genominfo.org </p>
+
+
+
+<p>Genomics &amp; Informatics Vol. 11, No. 1, 2013 </p>
+
+<p>Sample no. 
+No. with more than 
+1 mutated genes 
+No. with more than 
+2 mutated genes 
+No. with more than 
+3 mutated genes 
+No. with more than 
+4 mutated genes </p>
+
+<p>1 
+454 
+30 
+7 
+3 
+2 
+369 
+31 
+3 
+1 
+3 
+513 
+47 
+9 
+3 
+4 
+370 
+30 
+4 
+0 
+5 
+532 
+39 
+7 
+3 
+6 
+665 
+72 
+14 
+5 
+7 
+465 
+41 
+5 
+2 
+8 
+506 
+46 
+10 
+1 
+9 
+342 
+20 
+2 
+0 
+10 
+442 
+29 
+5 
+1 
+Mean 
+465.8 
+38.5 
+6.6 
+1.9 </p>
+
+<p>Table 2. Classification of genes according to the count of mutations in each sample </p>
+
+<p>Sample 
+no. 
+Symbols of 3 or more mutated genes </p>
+
+<p>1 
+USP9Y a , MUC5B a , TCF19 c , MUC2 c , C6orf10, VPS13A, TMEM131 
+2 
+USP9Y a , MUC5B a , BRD2 c 
+3 
+USP9Y a , SYNE1 b , CDH23, TCF19 c , MYH10, KIF16B, ITGAX, GRIK1, DMBT1 
+4 
+SYNE1 </p>
+
+<p>b </p>
+
+<p>, LAMC3, HELZ2, DNAH8 
+5 
+MUC5B a , MUC6 b , TCF19 c , FOXD4L6, ZC3H7B, MYOM2, USP48 
+6 
+USP9Y </p>
+
+<p>a </p>
+
+<p>, MUC5B a , MUC6 b , CDSN c , WDR81, DMBT1, CYFIP1, TMUB2, PITRM1, PCDHB10, MUC17, KIFC2, KIAA1199, 
+ABCA7 
+7 
+USP9Y a , SYNE1 b , THAP3, CYFIP1, ANKRD18A 
+8 
+MUC2 
+c , HELZ2, TNRC6C, TNRC18, TECTA, MUC16, MLL3, KANSL1, GPR98, FAM195A 
+9 
+MUC5B a , CDSN c 
+10 
+MUC6 b , BRD2 c , CDH23, OR6V1, DNAH17 </p>
+
+<p>a </p>
+
+<p>Genes mutated in 5 samples; </p>
+
+<p>b </p>
+
+<p>Genes mutated in 3 samples; 
+c Genes mutated in 2 samples. </p>
+
+<p>Table 3. List of 3 more mutated genes in 10 AML samples </p>
+
+<p>Fig. 4. Distribution of nonsynonymous somatic mutations in 10 acute myeloid leukemia samples. NS SNPs, nonsynonymous single nucleotide 
+polymorphisms. </p>
+
+
+
+<p>www.genominfo.org </p>
+
+<p>KH Lee, et al. Clustering of Candidate Oncogenes in Acute Myeloid Leukemia Using Concept Lattice Analysis </p>
+
+<p>Fig. 5. Concept lattice of 45 genes 
+and 10 acute myeloid leukemia 
+patients having 3 or more non-
+synonymous mutations, annotated 
+by <rs type="software">COSMIC</rs> database. Red rectan-
+gles represent annotated hemato-
+poietic and lymphoid tissue malig-
+nancy; yellow rectangles represent 
+other cancer type annotated in the 
+<rs type="software">COSMIC</rs> database. </p>
+
+<p>COSMIC 
+cancer type </p>
+
+<p>Hematopoietic and 
+lymphoid_tissue </p>
+
+<p>Other cancer 
+type 
+None </p>
+
+<p>Gene symbol 
+ABCA7 
+BRD2 
+KANSL1 
+ANKRD18A 
+C6orf10 
+FOXD4L6 
+CDH23 
+CDSN 
+HELZ2 
+CYFIP1 
+DMBT1 
+DNAH17 
+GRIK1 
+DNAH8 
+KIF16B 
+FAM195A 
+KIFC2 
+GPR98 
+MUC5B 
+ITGAX 
+MUC6 
+KIAA1199 
+MYH10 
+LAMC3 
+OR6V1 
+MLL3 
+PITRM1 
+MUC16 
+TCF19 
+MUC17 
+THAP3 
+MUC2 
+TMUB2 
+MYOM2 
+TNRC18 
+PCDHB10 
+TNRC6C 
+SYNE1 
+USP48 
+TECTA 
+USP9Y 
+TMEM131 
+WDR81 
+VPS13A 
+ZC3H7B 
+Count 
+21 
+21 
+3 </p>
+
+<p>Table 4. Comparison of list of 3 more mutated genes with 
+<rs type="software">COMIC</rs> database </p>
+
+<p>Fig. 6. Hierarchical clustering of samples by binarized score of 45 
+highly mutated gene states. </p>
+
+<p>gene sharing pattern. </p>
+
+<p>Discussion </p>
+
+<p>In this study, we proposed a workflow of matched normal 
+AML exome sequencing analysis and the framework for 
+defining sample subgroups. We observed every sample 
+having a nonsynonymous mutation associated with hema-
+tological and lymphoid malignancy genes, but the candidate </p>
+
+<p>oncogenes showed diverse characters. 
+We selected 45 genes that had 3 or more nonsynonymous 
+mutations and performed hierarchical clustering analysis of 
+the samples by these genes. In classic hierarchical clustering 
+analysis by Ward's method, we could not identify the genetic 
+relationship of those clusters. On the other hand, the result 
+of concept lattice analysis gave us insight into the mutational 
+pattern of each sample. 
+In subgroup 1, samples 3, 4, and 7 shared SYNE1 gene 
+mutations. SYNE1 gene encodes a spectrin repeat-con-
+taining protein expressed in skeletal and smooth muscle and 
+peripheral blood lymphocytes that localizes to the nuclear 
+membrane [21]. This gene is not a well-known leukemic 
+gene but is observed in some hematological malignancies </p>
+
+<p>www.genominfo.org </p>
+
+
+
+<p>Genomics &amp; Informatics Vol. 11, No. 1, 2013 </p>
+
+<p>Fig. 7. Subgroup analysis by concept lattice. (A) Subgroup 1 shares SYNE1 mutation in samples 3, 4 and 7. (B) Subgroup 2 shares MUC5B 
+mutation in samples 1, 2, 5, 6, and 9. Continued on next page. </p>
+
+<p>and other cancer types [22]. In glioblastoma, SYNE1 muta-
+tion is significantly correlated with the overexpression of 
+several known glioblastoma survival genes [23]. In the case 
+of sample 3, the ITGAX gene, encoding ankyrin repeat 
+domain 18A, was mutated. This gene is well known by the 
+association with leukemia [24] and lung cancer [25]. For </p>
+
+<p>sample 4, the possible oncogene is LAMC3. LAMC3 gene 
+encodes laminins, which are the major non-collagenous 
+constituent of basement membrane. LAMC3 mutations are 
+associated with several cancers, including colon cancer, lung 
+cancer, and melanoma, and candidate tumor suppressor 
+genes in bladder transitional cell carcinoma [26]. LAMC3 is </p>
+
+
+
+<p>www.genominfo.org </p>
+
+<p>KH Lee, et al. Clustering of Candidate Oncogenes in Acute Myeloid Leukemia Using Concept Lattice Analysis </p>
+
+<p>Fig. 7. Continued from previous page. (C) Subgroup 3 sample 8 only has mutated genes, such as MUC2 and HELZ2. (D) Subgroup 4 
+has sample 10, having only mutated genes, like MUC6, CDH23, BRD2, OR6V1, and DNAH17. </p>
+
+<p>involved in the phosphatidylinositol 3-kinase-Akt signaling 
+pathway, since it has a role in cell adhesion. The ANKRD18A 
+gene is the oncogene candidate for sample 7 and is a novel 
+epigenetic regulation gene in lung cancer [25]. Therefore, it 
+is possible that the pair relationship of those genes </p>
+
+<p>(ITGAX-SYNE1, LAMC3-SYNE1, and ANKRD18A-SYNE1) 
+could contribute together to evolve the leukemic cell 
+transformation. 
+The major limitation of our study is that we could not 
+validate the mutation results by Sanger method or deep </p>
+
+<p>www.genominfo.org </p>
+
+
+
+<p>Genomics &amp; Informatics Vol. 11, No. 1, 2013 </p>
+
+<p>sequencing. We selected highly mutated genes having 3 
+mutations or more, but this definition is arbitrary, so we 
+might have lost candidate oncogenes in some patients. 
+In this study, we suggest the concept of clustering samples 
+that have diverse mutated genes. AML is very heterogeneous 
+genetic disease. Despite the small number of samples we 
+have studied, the genetic variation patterns were not com-
+mon for all samples. It could have been better to evaluate 
+more sample data for analysis by clustering analysis. </p>
+
+<p>Acknowledgments </p>
+
+<p>This work was supported by the basic science research 
+program through the National Research Foundation of 
+Korea (NRF), funded by the Ministry of Education, Science 
+and Technology (2012-0000994). This material is based 
+upon work supported by the Korea Genome Organization. </p>
+
+
+
+</text></tei>

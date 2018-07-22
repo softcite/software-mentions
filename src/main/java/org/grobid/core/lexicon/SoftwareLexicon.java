@@ -25,7 +25,7 @@ public class SoftwareLexicon {
     // NER base types
     public enum Software_Type {
         UNKNOWN("UNKNOWN"),
-        OBJECT("OBJECT");
+        SOFTWARE("SOFTWARE");
 
         private String name;
 
@@ -57,7 +57,7 @@ public class SoftwareLexicon {
         LOGGER.info("Init software lexicon");
         softwareVocabulary = new HashSet<String>();
 
-        File file = new File(GrobidProperties.getGrobidHomePath()+"/../grobid-software/resources/lexicon/softwareVoc.txt");
+        File file = new File(GrobidProperties.getGrobidHomePath()+"/../software-mentions/resources/lexicon/wikidata-softwares.txt");
         if (!file.exists()) {
             throw new GrobidResourceException("Cannot initialize software dictionary, because file '" + 
                 file.getAbsolutePath() + "' does not exists.");

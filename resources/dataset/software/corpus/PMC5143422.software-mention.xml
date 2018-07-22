@@ -1,0 +1,905 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC5143422" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:27+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>Fatty acid biosynthesis (FAS) is a vital process in cells. Fatty acids are essential for cell assembly and cellular me-
+tabolism. Abnormal FAS directly correlates with cell growth delay and human diseases, such as metabolic syndromes 
+and various cancers. The FAS system utilizes an acyl carrier protein (ACP) as a transporter to stabilize and shuttle 
+the growing fatty acid chain throughout enzymatic modules for stepwise catalysis. Studying the interactions between 
+enzymatic modules and ACP is, therefore, critical for understanding the biological function of the FAS system. How-
+ever, the information remains unclear due to the high flexibility of ACP and its weak interaction with enzymatic mod-
+ules. We present here a 2.55 Å crystal structure of type II FAS dehydratase FabZ in complex with holo-ACP, which 
+exhibits a highly symmetrical FabZ hexamer-ACP 3 stoichiometry with each ACP binding to a FabZ dimer subunit. 
+Further structural analysis, together with biophysical and computational results, reveals a novel dynamic seesaw-like 
+ACP binding and catalysis mechanism for the dehydratase module in the FAS system, which is regulated by a critical 
+gatekeeper residue (Tyr100 in FabZ) that manipulates the movements of the β-sheet layer. These findings improve 
+the general understanding of the dehydration process in the FAS system and will potentially facilitate drug and ther-
+apeutic design for diseases associated with abnormalities in FAS. 
+Fatty acid biosynthesis (FAS) is one of the most im-
+portant processes in cells and organisms on earth. Fatty 
+acids are essential for the cellular membrane assembly, 
+energy storage, cell signal transduction and regulation 
+of gene expression [1-5]. Deficiency in the FAS system 
+causes delays in bacterial development and triggers pro-
+grammed cell death in plants [2, 3, 6]. In human, dereg-
+ulated FAS system has been correlated with metabolic 
+syndrome (MetS) diseases, including obesity and type-
+II diabetes [7-11]. Moreover, human fatty acid synthase </p>
+
+<p>(hFASN) has been considered as an oncogene because it 
+is significantly overexpressed in several human cancers 
+with poor prognosis and survival, particularly, including 
+prostate and breast cancers [12-17]. 
+The chemical logic of FAS system is highly conserved 
+between eukaryotes and bacteria except for the arrange-
+ment of functional enzymatic modules. It utilizes a series 
+of enzymatic modules to iteratively carry out fatty acid 
+elongation, which is divided into two stages: synthesis 
+initiation and elongation (Figure 1). The initiation stage 
+covalently attaches a short acetyl (or malonyl) group to 
+the terminal sulfhydryl of the 4-phosphopantetheine arm 
+(4′-Pan-arm, hereafter) on the substrate carrier protein, 
+which is a holo-acyl carrier protein (holo-ACP). Subse-
+quently, ACP shuttles among approximately four enzy-
+matic modules in the elongation cycle to process fatty 
+acid extension; and two additional carbons are added </p>
+
+<p>Lin Zhang et al. </p>
+
+<p>
+www.cell-research.com | Cell Research | SPRINGER NATURE </p>
+
+<p>to the substrate chain in each cycle until the product is 
+released. On the basis of the enzymatic module arrange-
+ment, the FAS system is divided into associative and dis-
+sociative architectural types. The associative architecture 
+(FAS-I) exists in some bacteria (e.g., CMN-FAS) and 
+eukaryotes, including mammals and fungi [1, 18]. All the 
+enzymatic modules function as domains on a large poly-
+peptide (one or two polypeptide(s) in fungi), which is en-
+coded by a single gene (one or two gene(s) in fungi). The 
+dissociative architecture (FAS-II) exists in plants, mito-
+chondria and bacteria, whereas the enzymatic modules 
+function as a series of individual soluble enzymes en-
+coded by discrete genes [2]. So far, crystal structures of 
+FAS-I synthases (FASN) from Sus scrofa and fungi [19-
+23] and FAS-II individual enzymes from various bacteri-
+al species have been reported [2, 24-28], which provided 
+detailed insights into the biochemical mechanism at an 
+atomic level. However, due to the high flexibility and </p>
+
+<p>diffusible characteristics of ACP, the interactions be-
+tween ACP and enzyme modules in FASN or individual 
+enzymes in FAS-II have rarely been investigated except 
+for an incomplete enoyl reductase (FabI)-ACP structure 
+and a covalently crosslinked β-hydroxyacyl-ACP dehy-
+dratase (FabA)-ACP structure [25, 29]. Hence, the key 
+mechanisms underlying the recognition and processing 
+of ACP by enzymatic modules for substrate catalysis re-
+main unclear, especially in the elongation cycle. 
+The elongation cycle predominantly consists of four 
+catalytic steps (Figure 1). Dehydration of β-hydroxya-
+cyl-ACP is the third step, which is processed either by 
+the dehydratase (DH) domain of FAS-I synthase or two 
+individual DH homologs, FabA and FabZ, in FAS-II 
+(Figure 1) [1, 2]. FabA appears as a homodimer and cat-
+alyzes the dehydration of short fatty acids (≤ 10-carbon) 
+as well as the isomerization of trans-2-acyl-ACP to cis-
+2-acyl-ACP. In contrast, FabZ appears as a hexamer in </p>
+
+<p>Figure 1 Schematic diagram of fatty acid biosynthesis process. The catalytic process is divided into initiation and elongation 
+stages. In the initiation stage, apo-form of acyl carrier protein (apo-ACP, green) is covalently installed with a 4′-phosphop-
+antetheine moiety (4′-Pan-arm) by holo-ACP synthase (AcpS), forming holo-ACP. Subsequently, a short acetyl (or malonyl) 
+group is covalently attached to the terminal sulfhydryl of the 4′-Pan-arm by malonyl-CoA-/acetyl-CoA-ACP transacylase (MAT 
+domain in FAS-I; FabD in FAS-II). The elongation cycle mainly includes four catalytic steps to process fatty acid extension 
+successively. The first step is decarboxylative condensation to form β-ketoacyl-ACP by β-ketoacyl synthase (KS domain in 
+FAS-I; FabH, FanB and FabF in FAS-II); the second step is NADPH-dependent reduction of β-ketoacyl-ACP to β-hydroxya-
+cyl-ACP by β-ketoacyl reductase (KR domain in FAS-I; FabG in FAS-II); the third step is β-hydroxyacyl-ACP dehydration to 
+β-enoyl-ACP by β-hydroxyacyl-ACP dehydratase (DH domain in FAS-I; FabA and FabZ in FAS-II); the last step is β-enoyl-
+ACP reduction by NADPH-dependent β-enoyl reductase (ER domain in FAS-I; FabI, FabK and FabL in FAS-II). After four 
+steps, two carbons are added to the fatty acid chain, and the fatty acid chain either re-enter the elongation cycle for further exten-
+sion or is released from ACP by thioesterase (TE domain in FAS-I; TE in FAS-II) once the length reaches 16-18 carbons. </p>
+
+
+
+<p>Crystal structure of FabZ-ACP complex </p>
+
+<p>SPRINGER NATURE | Cell Research | Vol 26 No 12 | December 2016 </p>
+
+<p>most cases (dimer is also observed besides hexamer in 
+Plasmodium falciparum) and preferentially catalyzes the 
+dehydration of long-chain fatty acids [2] (Supplementary 
+information, Figure S1). In addition, FabZ is involved in 
+the balance maintenance of fatty acid and lipid A biosyn-
+thesis by regulating deacetylase LpxC [30]. Due to their 
+indispensable functions and ubiquitous distributions, 
+FabA and FabZ are regarded as important drug targets 
+against pathogenic microbes. The enzymatic characteris-
+tics of FabA and FabZ, as well as their structures in vari-
+ous bacterial species have been well studied, and several 
+lead compounds have been developed [31-35]. In 2014, 
+Nguyen et al. [29] reported the first FabA-ACP complex 
+structure, in which a mechanism-based synthetic alkyne 
+probe was employed to covalently crosslink two ACP 
+molecules to the FabA homodimer. The complex struc-
+ture reveals ACP binding and the substrate accommo-
+dation mechanism of FabA for the first time. A putative 
+ACP binding mechanism was proposed based on the sig-
+nificant conformational changes of ACP helices α2 and 
+α3 observed during binding to FabA. Nevertheless, this 
+structural model has not provided adequate insights into 
+how the DH module recognizes and regulates ACP mole-
+cules for enzymatic catalysis in the FAS system and what 
+determines the distinct substrate length preference and 
+isomerization mechanism between FabA and FabZ. The 
+DH module (FabZ)-ACP complex structure in the FAS 
+system presented in current study illustrates a dynamic 
+seesaw-like ACP binding and regulation mechanism of 
+FabZ, representing a novel substrate selection and catal-
+ysis mechanism for the DH module in the FAS system. </p>
+
+<p>Results </p>
+
+<p>Overall structure of the FabZ-ACP complex 
+The recombinant FabZ and ACP from Helicobacter 
+pylori were expressed and purified as described previ-
+ously [36, 37]. Instead of using an alkyne probe attached 
+to ACP (which was used in FabA-ACP structure [29]), 
+holo-ACP was directly employed in crystallization to 
+obtain the natural conformation of the DH module bound 
+with ACP. The purified FabZ and holo-ACP proteins 
+were mixed with a molar ratio of 1:7, and further puri-
+fied by using Superdex 200 gel-filtration column. The 
+crystals appeared within 30 days under 277 K in hang-
+ing drop, and the complex structure was determined by 
+molecular replacement (MR) at a resolution of 2.55 Å 
+(Supplementary information, Table S1). The asymmet-
+ric crystallographic unit contains a FabZ dimer subunit 
+bound with a holo-ACP molecule. However, the gel-fil-
+tration results indicated that the complex appears to have 
+a stable hexamer conformation that reflects native FabZ </p>
+
+<p>in complex with ACP (Supplementary information, Fig-
+ure S2). As shown in Figure 2A, the overall structure of 
+the FabZ-ACP hexamer generated by crystallographic 
+symmetry operation displays a turbine-like shape with 
+six FabZ monomers arranged in a ring-like contact topol-
+ogy to form a classic FabZ "trimer of dimers" hexameric 
+turbine core [26]. Each FabZ dimer subunit is bound by 
+one holo-ACP, resulting in a stoichiometry of (FabZ di-
+mer-ACP) 3 . 
+In the dimer subunit, an unexpected 2:1 (FabZ mono-
+mer:ACP) stoichiometric binding ratio is observed, 
+where only one ACP molecule binds to a FabZ dimer. 
+FabZ monomers A and B within the dimer subunit adopt 
+a typical β + α "hot dog" fold in which a layer consisting 
+of six anti-parallel β-sheets (β1-β6 strands, hereafter) 
+wraps around the long, central six-turn α-helix (α3) (Fig-
+ure 2B) [2, 26]. The β-sheet layer from each monomer 
+further interacts with each other through their β3 strands 
+to form a stable FabZ homodimer subunit. Next to the 
+dimer interface, there are two L-shaped substrate-bind-
+ing and catalysis tunnels, which are ~20 Å away from 
+each other. Each tunnel consists of residues from both 
+monomers. The entrance of the tunnel is located on the 
+β3 strand near the dimer interface, and protected by a 
+gatekeeper residue Tyr100 from bulk solvent. Here we 
+named the two tunnels of the dimer subunit tunnels A (the 
+gatekeeper residue Tyr100 is from monomer A) and B 
+(Tyr100 is from monomer B). The holo-ACP binds to the 
+β-sheet layer right on the FabZ dimer interface through 
+its conserved α2 helix, occupying the monomer A and B 
+surface areas of 148.82 Å 2 and 335.03 Å 2 , respectively, 
+and inserts the 4′-Pan-arm into tunnel B (Figure 2B). The 
+FabZ-ACP interactions are established through multiple 
+hydrogen bonds (H-bonds) between a list of conserved 
+residues, including those between positively charged res-
+idue Arg110′ on FabZ β3 strand (the prime indicates the 
+residue from FabZ monomer A in the dimer, otherwise 
+from monomer B) and two negatively charged residues 
+Asp35 and Asp38 on the N-terminus of ACP α2 helix, 
+between Lys129 on the loop between FabZ β4 and β5 
+strands and Glu47 on the C-terminus of ACP α2 helix, 
+and between Lys152 on FabZ β6 strand and Glu41 on the 
+C-terminus of ACP α2 helix (Figure 2B, Supplementary 
+information, Figures S3, S4 and Table S2). In addition 
+to H-bonds, the sidechains of Leu37, Val40 and Met44 
+on ACP α2 helix form hydrophobic contacts with the 
+hydrophobic patch composed of Met102, Thr103, Ile132 
+and Lys152 from FabZ (Figure 2B). These hydrophobic 
+and electrostatic interactions orient the ACP α2 helix 
+precisely with the entrance of the FabZ tunnel B. Mean-
+while, the sidechain of the gatekeeper residue Tyr100 in 
+FabZ monomer B points toward Lys62′ to form an open </p>
+
+<p>Lin Zhang et al. </p>
+
+<p>
+www.cell-research.com | Cell Research | SPRINGER NATURE </p>
+
+<p>Figure 2 Crystal structure of the FabZ-ACP complex. (A) Overall structure of the FabZ-ACP complex. FabZ dimer subunits 
+are colored in green/cyan, and ACP is colored in magenta. The cartoon was generated by Pymol. (B) Interactions between 
+ACP and FabZ dimer subunit. White surface of FabZ active tunnel was generated by Pymol plugin Caver. Residues involved 
+in the interactions are shown as sticks, and the prime indicates the residues from FabZ monomer A, otherwise from B. 
+H-bond network is shown as yellow dashes, and secondary structural elements are labeled as well. </p>
+
+<p>conformation so that the ACP 4′-Pan-arm can comfort-
+ably enter tunnel B (Figure 2B). Inside tunnel B, the arm 
+displays a nearly extended conformation (Supplementary 
+information, Figure S5). The conformation is stabilized 
+by H-bonds between the backbone oxygen of Arg110′ 
+from FabZ and ACP 4′-Pan-arm hydroxyl group (atom 
+O 33 ) and the first -NH group (atom N 36 ) (Figure 2B), 
+which indicates that the role of Arg110 in ACP binding 
+is indispensable, consistent with results from previous 
+reports [2, 38]. </p>
+
+<p>Fatty acyl chain length preference of FabZ 
+Previous studies indicate that the L-shaped FabZ ac-
+tive tunnel is not adequate for accommodating a long fat-
+ty acid substrate (&gt; 12-carbon), although FabZ enzymat-
+ically prefers long substrates [2, 26-28]. In the current 
+structure, ACP binding and insertion of the 4′-Pan-arm 
+expand the active tunnel by pushing the β-sheet layer 
+toward β4 (Figure 3A), which evokes a novel Y-shaped 
+tunnel with extended potential for long fatty acid accom-
+modation. The extension of the classical L-shaped tunnel 
+B starts around residue Gly79 by forming two tunnel </p>
+
+<p>branches (designated tunnels I and II; Figure 4A). Tunnel 
+I consists of hydrophobic residues Gly78, Gly79, Trp133, 
+Val135, Leu151 and Ala153 (Figure 4B), whereas tunnel 
+II consists of hydrophobic residues Leu21, Phe83, Ile93, 
+Ala94, Lys97 and Ile98 from monomer B (Figure 4C). 
+Accordingly, the hydrophobic nature of both tunnels I 
+and II is suitable for accommodation of fatty acids. 
+To investigate the selectivity of two tunnels for differ-
+ent lengths of fatty acid substrates, we docked 4-, 6-, 8-, 
+10-, 12-, 14-and 16-carbon fatty acid chains into the ac-
+tive tunnel structure (Supplementary information, Table 
+S3) [39]. As shown in Figure 4, short fatty acid chains 
+(4-, 6-, 8-, 10-and 12-carbon chains) extend to tunnel I, 
+whereas tunnel II is blocked by the sidechain of Phe83 
+(closed conformation, pointing toward Ile98). In con-
+trast, longer fatty acid chains (14-and 16-carbon chains) 
+extend to tunnel II by switching the sidechain of Phe83 
+toward Ile93 to form an open conformation [26]. Nota-
+bly, the exit of tunnel II is a loop area between β3 and α4 
+(residues Ala94-Lys97), which was reported to be disor-
+dered in previously determined FabZ structures [27, 28], 
+suggesting that this exit has flexibility and compatibility </p>
+
+
+
+<p>Crystal structure of FabZ-ACP complex </p>
+
+<p>SPRINGER NATURE | Cell Research | Vol 26 No 12 | December 2016 </p>
+
+<p>Lin Zhang et al. </p>
+
+<p>
+www.cell-research.com | Cell Research | SPRINGER NATURE </p>
+
+<p>for threading out long substrates. </p>
+
+<p>Distinct isomerization behavior between FabA and FabZ 
+The FabZ dimer shares high structural similarity with 
+the FabA dimer. Nevertheless, unlike FabA, FabZ does 
+not function as an isomerase [2]. Comparison of the 
+structures of FabZ-ACP and FabA-ACP complexes, both 
+docked with an 8-carbon trans-2 fatty acid chain, shows 
+that the ACP 4′-Pan-arms adopt a similar conformation 
+in the two structures, whereas the conformation of the 
+fatty acid substrate appears to be significantly different 
+(Supplementary information, Figure S6). The carbon 
+chain displays a nearly U-shape conformation in FabZ 
+tunnel I compared with the L-shape in FabA because the 
+tunnel leading to a U-shape in FabA is blocked by Val90 
+and Val162. Interestingly, the fatty acid chain adopts a 
+cis conformation in FabA, whereas it remains the trans 
+configuration in FabZ, which is consistent with a hypoth-
+esis proposed by Kimber et al. [27] that the L-shape tun-
+nel has much less steric hindrance for the carbonyl chain 
+isomerization compared with the U-shape. </p>
+
+<p>The dynamic seesaw-like catalytic mechanism of FabZ 
+Unlike two ACPs covalently binding to the FabA di-
+mer, only one ACP binds to the FabZ dimer subunit. The 
+superposition of holo-ACP from the FabZ-ACP complex 
+with native apo-and holo-ACP structures displays high 
+structural similarity except for the 4′-Pan-arm orientation 
+(Supplementary information, Figure S7), suggesting that 
+the conformation of ACP itself does not interfere with the 
+stoichiometric binding. In contrast, significant conforma-
+tional changes in both FabZ monomers were observed. 
+In FabZ monomer B, the anti-parallel β-sheet layer 
+moves ~2.8 Å toward β4 due to ACP binding and 4′-Pan-
+arm insertion (Figure 3A). The narrow L-shaped active 
+tunnel is, therefore, expanded to a Y-shape to accommo-
+date a long fatty acid substrate. In addition, the phenol 
+ring of Tyr100 sidechain points toward Lys62′ to allow </p>
+
+<p>the 4′-Pan-arm inserting into the catalytic tunnel (Figure 
+3C). Surprisingly, FabZ monomer A also has similar con-
+formational changes upon ACP binding to monomer B. 
+The β-sheet layer in monomer A moves 1.0-1.7 Å farther 
+toward β4 compared with that in monomer B and the 
+specific loop between β4 and β5 is extruded by a distance 
+of ~4.8 Å (Figure 3B). The extruded loop introduces 
+clashes into most of interactions between the β-sheet lay-
+er of FabZ and ACP α2 helix, especially the hydrophobic 
+contacts between FabZ Lys129′ and Glu47/Glu53 from 
+ACP, as well as FabZ Ile132′ and Val40/Met44 from 
+ACP (Supplementary information, Figure S8), forming a 
+conformation unfavorable for ACP binding. To support 
+such conformational movements, the Tyr100′ sidechain 
+adopts an abnormal closed conformation by further rotat-
+ing ~30° clockwise along the C α -C bond from the regular 
+closed conformation (in the native FabZ hexamer struc-
+ture [26]) and pointing toward the backbone carbonyl 
+oxygen of Phe109 to generate additional H-bond (Figure 
+3D). These structural observations strongly argue that 
+FabZ regulates ACP binding and releasing through alter-
+nating movements of the β-sheet layer. 
+Indeed, these β-sheet layer movements have been 
+observed in our previous study of the native FabZ struc-
+ture, in which three monomers (defined as monomers 
+A-C) adopt a close conformation, while the other three 
+(monomers D-E) adopt an open conformation [26]. 
+These movements directly correlated with the sidechain 
+position of the gatekeeper residue Tyr100. Tyr100 is lo-
+cated on the β3 strand next to the active tunnel entrance 
+and adopts two distinct conformations in the native 
+FabZ hexamer structure either by pointing the phenol 
+ring toward Lys62′ to form an open conformation (the 
+tunnel entrance is opened to substrate; e.g., monomer 
+E) or rotating the phenol ring along the C α -C β bond for 
+~120° to interact with Pro112′ to form a closed confor-
+mation (the tunnel entrance is blocked by the sidechain 
+of Tyr100; e.g., monomer A) (Figure 3E). In the native </p>
+
+<p>Figure 3 Superposition of FabZ monomer subunits. In the structure of a FabZ-ACP dimer subunit, only one monomer is as-
+sociated with ACP, termed monomer B; the other is termed monomer A. In the structure of the ACP-unbound FabZ hexamer 
+(PDB code: 2GLL), three monomers adopt open conformation (monomers D, E and F), and the other three adopt close con-
+formation (monomers A, B and C). (A) Superposition of FabZ monomer B (cyan) from FabZ-ACP complex with monomer E 
+(yellow) from native FabZ hexamer structure (PDB code: 2GLL). The β-sheet layers from monomer B and E are colored in 
+blue and orange, respectively. holo-ACP is colored in magenta, and the 4′-Pan-arm is shown in sticks. (B) Superposition of 
+FabZ monomers A (green) and B (cyan) from the FabZ-ACP complex. The β-sheet layers from monomers A and B are col-
+ored in forest green and blue, respectively. (C-F) Superposition of FabZ β-sheet layers. Residues around the entrance are 
+shown and labeled. (C) Superposition of monomer A (green) with monomer B (cyan) from FabZ-ACP complex. (D) Superpo-
+sition of monomer A (yellow) from the native FabZ hexamer (PDB code: 2GLL) with monomer A (green) from the FabZ-ACP 
+complex. (E) Superposition of monomer A (yellow) with monomer E (wheat), both from native FabZ hexamer structure. Atoms 
+of Tyr100 and Pro112′ involved in the interactions are presented as transparent spheres. (F) Superposition of monomer E 
+(wheat) from the native FabZ hexamer with monomer A (blue) from FabZ (Y100A) mutant hexamer (PDB code: 2GLV). </p>
+
+
+
+<p>Crystal structure of FabZ-ACP complex </p>
+
+<p>SPRINGER NATURE | Cell Research | Vol 26 No 12 | December 2016 </p>
+
+<p>FabZ hexamer structure, the hydrophobic interaction 
+between the Tyr100 sidechain and Pro112′ in the closed 
+conformation pushes the β-sheet layer further toward β4 
+compared with the open conformation (Figure 3E). In the 
+FabZ-ACP complex structure, the abnormal conforma-
+tion of Tyr100′ sidechain further pushes the β-sheet layer 
+toward β4 (Figure 3D), likely causing ACP releasing. 
+Previous studies suggested that the gatekeeper residue 
+commonly exists in the DH across species in the FAS </p>
+
+<p>Figure 4 Side view of FabZ active tunnel B surface with fatty acids of different lengths modeled to ACP. The electrostatic 
+surface and ribbons were generated by Pymol. The color range from red (negative) to blue (positive) represents the surface 
+electrostatic potentials of −75 e/kT to +75 e/kT. ACP is colored in magenta. Fatty acid chains with 4, 6, 8, 10, 12, 14 and 16 
+carbons are colored in hot pink, purple blue, yellow, salmon, gray, slate and orange, respectively. Secondary structural ele-
+ments, tunnels I and II are labeled. (A) Side view of FabZ active tunnel B surface with fatty acids of different lengths modeled 
+to ACP. Catalytic residues His58′ and Glu72, and residue Gly79 in the Y-shaped tunnel fork are shown as sticks. (B) Side 
+view of FabZ active tunnel surface with short fatty acid chains (4-12 carbons). Short fatty acid chains and residues involved 
+in the interactions are shown as sticks, and long chains with 14 and 16 carbons are shown as lines. The closed conformation 
+of backdoor residue Phe83 (pointing toward Ile98) shown here is replaced by the corresponding residue from native HpFabZ 
+structure (PDB code: 2GLL). It blocks long fatty chain (shown as a line) stretching to tunnel II. (C) Side view of FabZ active 
+tunnel surface with long fatty acid chains (14 and 16 carbons). Long fatty acid chains and residues involved in the interactions 
+are shown as sticks, and short chains are shown as lines. Phe83 adopts an open conformation (pointing to Ile93) and allows 
+long fatty chains (shown as sticks) to stretch into tunnel II. </p>
+
+<p>system for protecting the hydrophobic catalytic tunnel 
+from bulk solvent [2, 27, 28]. Multiple sequence align-
+ments of FabZ among 72 bacterial species indicate that 
+tyrosine is the predominant gatekeeper (61%), whereas 
+some other residues with hydrophobic sidechains, such 
+as phenylalanine (22%) and leucine (17%), are also ob-
+served (Supplementary information, Figure S3C). Our 
+studies suggest that the absence of the Tyr100 sidechain 
+in FabZ Y100A mutant completely abolishes the move-</p>
+
+<p>Lin Zhang et al. </p>
+
+<p>
+www.cell-research.com | Cell Research | SPRINGER NATURE </p>
+
+<p>ments of the β-sheet layer within the FabZ hexamer 
+(Figure 3F) and significantly reduces FabZ enzymatic ac-
+tivity to ~10% by interfering with the release of ACP [26]. 
+Together with structural observations, these results indi-
+cate that the hydrophobic sidechain of such a gatekeeper 
+is indispensable for the maintenance of FabZ enzymatic 
+activity not only for simply protecting the hydrophobic 
+catalytic tunnel from bulk solvent but also for regulating 
+ACP binding and releasing by rotating its sidechain to 
+manipulate the movements of the β-sheet layer in an al-
+ternating manner like a seesaw. </p>
+
+<p>Biophysical studies of FabZ-ACP binding 
+The structural packing analysis indicates that the 
+N-terminus of holo-ACP from the crystallographic 
+neighbor FabZ-ACP molecule has contacts with the 
+ACP-unbound FabZ monomer A to form a potential 
+large tetramer complex with a stoichiometry of (FabZ 
+hexamer-ACP 3 ) 4 or an even larger aggregated mass 
+due to the linkage effect (Supplementary information, 
+Figure S9). To investigate whether the crystal packing 
+force from the neighbor ACP molecule contributes to 
+the conformational changes in monomer A observed in 
+our crystal structure, we carefully examined the contacts 
+between monomer A and the neighbor ACP. The contacts 
+are contributed by hydrophobic interactions between the 
+sidechains of Met102′ and Met154′ from FabZ mono-
+mer A and the backbones of a cloning-generated extra 
+residue Gly(-2) at the N-terminus of ACP, as well as 
+the sidechain of Arg110 from FabZ monomer B and the 
+sidechain of another cloning-generated extra residue 
+Tyr(-1) of ACP (Supplementary information, Figure 
+S9A and S9B). Among the interactions, Tyr100′ from 
+FabZ monomer A interacts weakly through its hydroxyl 
+group to the backbone N atom of ACP Ser(-4) residue 
+(~4.0 Å distance). As Ser(-4) is the very first residue at 
+the N-terminus of ACP, the interaction between Ser(-
+4) and Tyr100 is even weaker than normal hydrophobic 
+interaction due to the high flexibility of the residue. The 
+superposition of FabZ monomers A and B suggests that 
+the sidechains of Met102 and Met154 are slightly bend-
+ed, and the sidechain of Arg110 is extended due to the 
+packing forces (Supplementary information, Figure S9C 
+and S9D). Obviously, the packing forces tend to push 
+the sidechain of Tyr100′ from monomer A anticlockwise, 
+forming an open conformation rather than the current 
+"super-close" conformation, and push the β-sheet layer to 
+move backward rather than toward β4. Hence, the crystal 
+packing has little influence on the observed conforma-
+tional changes in monomer A in the complex structure. 
+As these interactions, potentially induced by crystal-
+lographic packing, occur close to the entrance of FabZ </p>
+
+<p>tunnel A, steric hindrance of the neighbor holo-ACP 
+may block the FabZ tunnel entrance, thus preventing the 
+binding of a second holo-ACP in solution (Supplemen-
+tary information, Figure S2). To eliminate this concern, 
+the oligomeric state of the FabZ-ACP complex in solu-
+tion was evaluated by size-exclusion chromatography 
+coupled with multi-angle light scattering (SEC-MALS). 
+Compared with native FabZ, the molecular weight of the 
+complex is almost exactly that of a FabZ hexamer plus 
+three holo-ACPs (Figure 5A and 5B). The stoichiometry 
+was further confirmed by synchrotron-based small-angle 
+X-ray scattering (SAXS) (Figure 5C-5E). The low-reso-
+lution particle model reconstructed from the SAXS ex-
+perimental profiles fits well with the respective complex 
+structure (χ 2 = 0.922), which suggests that the FabZ-ACP 
+complex adopts the same stoichiometry in solution as 
+observed in the crystal structure. Subsequently, a titra-
+tion-based microscale thermophoresis assay (MST) was 
+employed to identify the binding affinities of holo-ACP 
+to FabZ (Figure 5F and 5G) [40]. On the basis of the 
+stoichiometry, the binding curve appears in triphasic 
+phases with binding affinities of 0.354 ± 0.056, 16.2 ± 
+1.5 and 297 ± 22.1 µM (Figure 5F). The distinct binding 
+affinities also indicate that the binding of ACP to FabZ 
+hexamer involves a complicated allosteric crosstalk, not 
+only between monomers within a FabZ dimer subunit 
+observed from the structure, but also between dimers 
+within the FabZ hexamer. It is likely that the binding of 
+each ACP induces significant conformational changes 
+of ACP-unbound and -bound FabZ dimer subunits, thus 
+influencing the subsequent ACP binding (lower binding 
+affinities). Such conformational changes are most like-
+ly regulated by the gatekeeper residue Tyr100, as ACP 
+binding as well as FabZ enzymatic activity are abolished 
+by FabZ Y100A mutagenesis (Figure 5G) [40]. Although 
+the allosteric crosstalk between FabZ dimer subunits in-
+duced by successive ACP binding could not be observed 
+from the current structure as the crystal was obtained 
+under the condition of saturated ACP binding of FabZ 
+hexamer (ACP:FabZ = 7:1 before gel-filtration purifica-
+tion), the solution-based biophysical results uncovered 
+the existence of such allosteric crosstalk. Nevertheless, 
+the current structure shows monomer-monomer allosteric 
+crosstalk upon the asymmetric binding of ACP on FabZ 
+dimer subunit, and reveals the dynamic seesaw-like cat-
+alytic mechanism of DH FabZ in the FAS system for the 
+first time, which is regulated by the critical gatekeeper 
+residue Tyr100. </p>
+
+<p>Discussion </p>
+
+<p>To date, there is little structural information for the </p>
+
+
+
+<p>Crystal structure of FabZ-ACP complex </p>
+
+<p>SPRINGER NATURE | Cell Research | Vol 26 No 12 | December 2016 </p>
+
+<p>Lin Zhang et al. </p>
+
+<p>
+www.cell-research.com | Cell Research | SPRINGER NATURE </p>
+
+<p>interaction of ACP with enzymatic modules in the FAS 
+system, except for an incomplete FabI-ACP structure 
+and the covalently crosslinked FabA-ACP structure [25, 
+29]. Our study presents the first native high-resolution 
+enzymatic module-ACP complex structure of a FAS sys-
+tem. The complex exhibits a highly symmetrical FabZ 
+hexamer-ACP 3 stoichiometry with each ACP binding to a 
+FabZ dimer subunit. Further structural analysis suggests 
+that FabZ contacts ACP through H-bonds between a con-
+stellation of conserved Arg/Lys residues near its active 
+tunnel entrance and negatively charged residues along 
+an ACP α2 helix as well as hydrophobic interactions 
+between residues located in the hydrophobic patch near 
+the tunnel entrance of FabZ and residues in the ACP α2 
+helix. Remarkably, the conserved Arg110 of FabZ con-
+tributes to the FabZ-ACP interactions, suggesting an im-
+portant role in recognizing and binding of ACP to FabZ. 
+The binding of ACP to FabZ also induces the movements 
+of the β-sheet layer, which enlarges the narrow L-shaped 
+active tunnel to a Y-shape for long fatty acid substrate 
+accommodation. This Y-shaped tunnel has significantly 
+more steric hindrance in reversion of trans-2-acyl-ACP to 
+cis-3-acyl-ACP during isomerization compared with the 
+L-shaped tunnel of FabA, which explains the absence of 
+isomerase activity in FabZ. More importantly, the move-
+ments of the β-sheet layer not only occur on ACP-bound 
+FabZ monomers but also on ACP-unbound monomers 
+with even larger conformational changes, forming an un-
+favorable conformation for ACP binding by introducing 
+clashes between FabZ and ACP. Additional biophysical </p>
+
+<p>methods, including SEC-MALS, SAXS and MST, con-
+firmed these observations, and the corresponding binding 
+affinities of ACP toward FabZ were determined. These 
+findings suggest a novel dynamic seesaw-like continuous 
+catalytic mechanism of DH FabZ with ACP in the FAS-II 
+system, in which ACP's alternate binding is regulated by 
+a FabZ gatekeeper residue Tyr100 through manipulating 
+the movements of FabZ's β-sheet layer (Figure 6, and 
+Supplementary information, Movie). Furthermore, the 
+MST titration result suggests that the binding of ACP to 
+FabZ involves a series of complicated allosteric crosstalk 
+both between monomer subunits and between dimer sub-
+units. The current crystal structure successfully shows 
+the monomer-monomer crosstalk due to the asymmetric 
+binding of ACP on FabZ dimer subunit. The current 
+study mainly focuses on the structural changes within a 
+single FabZ dimer subunit as well as the corresponding 
+seesaw-like allosteric crosstalk mechanism on regulating 
+ACP binding; and thus the current structural information 
+is not adequate to explain entire allosteric changes be-
+tween dimer subunits. 
+The superposition of FabZ-ACP structure, FabA-ACP 
+structure (PDB code: 4KEH) and the mammalian DH 
+module from S. scrofa FASN (PDB code: 2vz8) exhibits 
+high overall structural similarity, indicating that these 
+DH (module) may employ a conserved mechanism to 
+regulate ACP catalysis (Supplementary information, 
+Figure S6A-S6C and S10). The major difference among 
+the structures is the numbers of ACP bound to the DH 
+(module). In FabA-ACP structure case, two ACP mole-</p>
+
+<p>Figure 5 Biophysical studies of FabZ-ACP complex in solution. (A) Size-exclusion chromatography (SEC) coupled with 
+multi-angle light scattering (MALS) analysis. FabZ protein (black curve) or holo-ACP (blue curve) was separated using a 
+Wyatt Technology WTC-030S5 column. The running buffer contains 20 mM HEPES (pH 8.0), 500 mM NaCl and 10 mM DTT. 
+500 mM NaCl, instead of 150 mM NaCl was used due to the instability of FabZ protein in a low-salt buffer. Corresponding 
+average molecular weight of the fraction peaks marked with stars was evaluated and analyzed using Wyatt Technology SEC-
+MALS system. The chromatogram shows the readings of UV detector, and 280 nm absorption scaling is shown in Y axis 
+on the left. The yellow and green curves indicate the calculated molecular masses of FabZ and holo-ACP throughout the 
+peaks. The molecular mass scaling is shown in the Y axis on the right. (B) SEC-MALS analysis of FabZ-ACP complex. The 
+FabZ-ACP complex saturated with excess amounts of holo-ACP (red curve) was separated using a Wyatt Technology WTC-
+030S5 column. The running buffer for separating the complex contains 20 mM HEPES (pH 8.0), 150 mM NaCl and 10 mM 
+DTT. The magenta curves indicate the calculated molecular masses of FabZ-ACP complex and holo-ACP throughout the 
+peaks. (C) SAXS scattering data from FabZ-ACP complex in solution. Curve-1 (black dots): SAXS scattering experimental 
+data. Curve-2 (red line): scattering pattern calculated from the crystal structure. Curve-3 (green line): smooth curve back 
+transformed from the p(r) and extrapolated to a zero scattering angle for the complex in solution. (D) SAXS data analysis: 
+distance distribution functions for the complex. (E) SAXS modeling: low-resolution envelope for the complex was shown as a 
+particle model and was superposed with the complex crystal structure. (F) Microscale thermophoresis (MST) measurements 
+of holo-ACP binding to wild-type FabZ. Data points colored in black, red and blue indicate the differences in normalized fluo-
+rescence generated by various concentrations of holo-ACP binding to FabZ. Curves colored in black, red and green indicate 
+the calculated fits according to the data points, and the corresponding Kd values are shown. (G) MST measurements of ho-
+lo-ACP binding to FabZ (Y100A) mutant. Data points in black indicate the difference in normalized fluorescence generated by 
+various concentrations of holo-ACP binding to FabZ (Y100A). Curves colored in black indicate the calculated fits according to 
+the data points. </p>
+
+
+
+<p>Crystal structure of FabZ-ACP complex </p>
+
+<p>SPRINGER NATURE | Cell Research | Vol 26 No 12 | December 2016 </p>
+
+<p>Figure 6 Schematic diagram of the dynamic seesaw-like continuous catalytic mechanism model of FabZ during fatty acid bio-
+synthesis. Monomers A and B within a FabZ dimer subunit and two ACP molecules are colored in green, light blue, wheat and 
+purple, respectively. Four critical β-strands from the β-sheet layer are shown as oval rafts. Key gatekeeper residues Tyr100 
+and Phe83 from FabZ monomer B (cyan) and monomer A (green) are shown as sticks. The 4′-phosphopantetheine arm (ma-
+genta) attached with a long fatty acid chain (orange) from ACP are shown as lines. In the native conformation of FabZ, the 
+sidechains of Tyr100 and Phe83 adopt close conformation to protect the hydrophobic catalytic tunnel from bulk solvent (step 
+1). When the first ACP molecule (wheat) binds to FabZ monomer B, the L-shaped active tunnel is expanded to a Y-shape due 
+to movement of the β-sheet layer toward 4. The sidechains of Tyr100 and Phe83 flop ~120° to an open conformation, which 
+allows the substrate chain carried by the 4′-Pan-arm to insert into the active tunnel for catalytic dehydration. Meanwhile, the 
+β-sheet layer in the ACP-unbound FabZ monomer A moves further toward β4 due to a ~30° rotation of the Tyr100 sidechain 
+from its normal closed conformation to form an abnormal conformation unfavorable for ACP binding (purple) (steps 2 and 3). 
+When the dehydration reaction is finished on monomer B, the β-sheet layer moves further toward β4 to release ACP, whereas 
+the β-sheet layer on monomer A moves back with a ~150° rotation of the Tyr100 sidechain to a normal open conformation 
+to accept binding and catalysis of the second ACP (steps 4 and 5). By doing so, the catalysis core is exchanged from FabZ 
+monomer B to monomer A. When the second dehydration reaction is finished, the catalysis core is exchanged to B again 
+like a see-saw due to the movements of the β-sheet layer (steps 4-6), which causes the high-efficiency catalytic dehydration 
+mechanism of FabZ in the FAS system. </p>
+
+<p>cules bind to a FabA dimer, whereas in our structure, one 
+ACP molecule binds to a FabZ dimer subunit. This could 
+be caused by the covalent crosslinking of ACP to FabA. 
+In the DH domain case, it is a pseudo-dimer with distinct 
+differences between the two subdomains, and can only </p>
+
+<p>catalyze one ACP at a time rather than two. However, 
+the DH domain shares a highly structurally conserved 
+β-sheet layer with FabZ, where ACP molecule binds to, 
+suggesting that the DH domain is very likely to utilize 
+similar mechanism to regulate ACP by manipulating the </p>
+
+<p>Lin Zhang et al. </p>
+
+<p>
+www.cell-research.com | Cell Research | SPRINGER NATURE </p>
+
+<p>conformational changes of the β-sheet layer. Hence, our 
+finding also contributes to the understanding of mamma-
+lian FAS catalytic mechanism, and provides a potential 
+drug discovery strategy against human diseases associat-
+ed with FAS by inhibiting its enzymatic activity through 
+interfering ACP-enzymatic module interactions. Collec-
+tively, our results illustrate a novel and dynamic ACP 
+binding and regulation mechanism for the DH module in 
+the FAS system, which provides a plausible explanation 
+for previously established phenomenon and facilitates a 
+general understanding of the biological functions of the 
+FAS system. 
+Increasing evidence suggests that overproduction of 
+fatty acids by the FAS system is correlated with MetS 
+and various cancers [12-17, 41]. Inhibition of FAS activ-
+ity significantly induces tumor cell apoptosis, suppresses 
+tumor cell metastasis and improves insulin sensitivity [33, 
+42, 43]. Hence, hFASN is considered to be a promising 
+anti-MetS and anti-tumor drug target for clinical therapy, 
+and several specific inhibitors for interfering with the en-
+zymatic activity of hFASN have been developed [3, 41-
+46]. Unfortunately, most of these compounds have lim-
+ited applications in clinical scenarios due to severe side 
+effects or modest potency [23, 33]. The dynamic ACP 
+binding and regulation mechanism of the DH module in 
+the FAS system provides a potential novel drug design 
+strategy for interfering with ACP-enzymatic module in-
+teractions rather than the enzymatic activities in the FAS 
+system, which may significantly reduce side effects. Our 
+findings may benefit clinical drug and therapy devel-
+opment against pathogenic infection, as well as human 
+diseases associated with the deregulation of this pathway, 
+including obesity, diabetes, and prostate and breast can-
+cers. </p>
+
+<p>Materials and Methods </p>
+
+<p>Protein subcloning, expression and purification </p>
+
+<p>Expressions and purifications of apo-ACP, holo-ACP, FabZ 
+and FabZ (Y100A) from H. pylori were expressed and purified as 
+described previously [36, 37]. Briefly, FabZ gene was subcloned 
+to PQE30 plasmid and expressed in Escherichia coli strain M15 
+cells. QuikChange Site-Directed Mutagenesis (Stratagene) strat-
+egy was used to perform the FabZ (Y100A) mutagenesis. FabZ 
+and FabZ (Y100A) protein were purified by using Ni-NTA and 
+Gel-filtration column. ACP gene was subcloned to pET32a vector 
+and expressed in E. coli BL21 cells. The protein was purified by 
+using Ni-NTA, and the N-terminal thioredoxin-His tag was re-
+moved by recombinant enterokinase protease cleavage at 4 °C for 
+overnight. Subsequently, ACP protein was further purified by GE 
+HiLoad 16/600 Superdex 75 prep grade gel-filtration column. The 
+final concentration was quantified by Bradford reagent purchased 
+from Bio-Rad. For the FabZ-holo-ACP complex, the purified FabZ 
+and holo-ACP protein were mixed in molar ratio 1:7, and dialyzed </p>
+
+<p>against 20 mM HEPES, pH 8.0, 150 mM NaCl and 10 mM DTT. 
+The mixture was concentrated and loaded to HiLoad 16/600 Su-
+perdex 200 prep grade column for further purification. The com-
+plex peak was pooled and concentrated to10 mg/ml. </p>
+
+<p>Apo-ACP, holo-ACP and FabZ-ACP complex crystallization </p>
+
+<p>Approximately 10 mg/ml apo-ACP, holo-ACP and complex 
+protein were mixed with an equal volume of reservoir solution 
+containing 1.0-3.0 M sodium chloride and 0.1 M sodium acetate, 
+and 1.0-3.0 M lithium sulfate and 0.5 M ammonium sulfate, and 
+10%-30% PEG3350, 0.05 M tri-sodium citrate dehydrate, respec-
+tively, and equilibrated against 500 µl of the reservoir solution at 
+277 K. Crystals appeared within 30 days. The crystals were then 
+flash-frozen in liquid nitrogen with 20%-30% glycerol (v/v) as the 
+cryoprotectant solution. </p>
+
+<p>Data collection and structure determination </p>
+
+<p>Crystal diffraction data of apo-ACP and FabZ-ACP complex 
+were collected at beamline BL19U1 at the National Center for 
+Protein Sciences Shanghai and Shanghai Synchrotron Radiation 
+Facility, China. Significant decay of the complex crystals during 
+data collection caused the resolution cut off at 2.55 Å. While the 
+crystal diffraction data of holo-ACP were collected at 100 K using 
+CuKα X-ray with a Rigaku R-AXIS IV++ image plate. The data 
+were further processed using <rs type="software">HKL2000</rs> software package [47] and 
+<rs type="software">CrystalClear</rs> software. The structures were solved by MR with the 
+published structure of apo-EcACP (PDB code: 1T8K) and Hp-
+FabZ (PDB code: 2GLL) as search models, and refined by using 
+programs <rs type="software">Phenix</rs> [48] (complex) and <rs type="software">CNS</rs> (apo and holo-ACP). 
+The crystallographic statistics are summarized in Supplementary 
+information, Table S1. Electron density interpretation and model 
+building were performed using the computer graphics program 
+<rs type="software">Coot</rs> [49]. Final structures were visualized by PyMol software. </p>
+
+<p>Covalent docking </p>
+
+<p><rs id="software-25" type="software">SYBYL</rs> package (<rs corresp="#software-25" type="url">www.tripos.com</rs>) was used to prepare the 
+fatty acid chains and the protein structures used in docking. Initial 
+structures of fatty acid chains in different lengths (4-to 16-carbon 
+chain) were sketched using the <rs type="software">SYBYL</rs> program with standard 
+geometric parameters, and Gasteiger-Hucker charge was added. 
+All fatty acids were then optimized using the standard TRIPOS 
+force field with Gasteiger-Hückel charges until the energy gradient 
+converged to below 0.05 kcal/mol. Waters in the crystal structure 
+of FabZ were removed, and all hydrogens were added. Kollman 
+all-atom charges were assigned for FabZ and Gasteiger-Hückel 
+charge was computed for residue 36 with 4′-Pan-arm. 
+Genetic algorithm-based docking program <rs type="software">GOLD</rs> was used 
+for molecular docking simulations [50]. Fatty acid chain-binding 
+site for docking was defined as a collection of all atoms within 25 
+Å around the midpoint of the terminal S of the 4-Pan-arm and O 
+atom of Lys97, so the active site would be big enough to include 
+the possible binding sites of variable length fatty acid chains. The 
+GOLDScore fitness function was employed in scoring conforma-
+tions. The parameters for GOLD were as follows: numbers of GA 
+ran 50, no early termination was allowed and all other parameters 
+were used as default (Supplementary information, Table S3). </p>
+
+<p>Size-exclusion chromatography coupled with multi-angle 
+light scattering measurements </p>
+
+
+
+<p>Crystal structure of FabZ-ACP complex </p>
+
+<p>SPRINGER NATURE | Cell Research | Vol 26 No 12 | December 2016 </p>
+
+<p>Approximately 10 µl, 0.5 mg/ml purified FabZ-ACP complex 
+saturated with excess amount of holo-ACP sample was injected 
+into HPLC system (Agilent Technologies) and separated by using 
+Wyatt Technology WTC-030S5 column with running buffer con-
+taining 20 mM HEPES, pH 8.0, 150 mM NaCl and 10 mM DTT. 
+The native FabZ or holo-ACP protein was separated with running 
+buffer containing 20 mM HEPES, pH 8.0, 500 mM NaCl and 10 
+mM DTT due to the instability of FabZ protein under low salt (150 
+mM NaCl) buffer. Corresponding molecular weight of the fraction 
+peaks was evaluated and analyzed by using Wyatt Technology 
+SEC-MALS system, which was calibrated by using 2 mg/ml 
+standard BSA sample. As shown in Figure 5A and 5B, FabZ-ACP 
+MW calculated = 145 KDa, MW observed = 143 (± 2.0%) kDa; FabZ 
+MW calculated = 117 kDa, MW observed = 112.7 (± 0.66%) kDa; holo-ACP 
+MW calculated = 9382 Da, MW observed = 9331 (± 4.3%) Da. </p>
+
+<p>Synchrotron solution small angle X-ray scattering measure-
+ments </p>
+
+<p>FabZ-ACP complex purified from gel-filtration in the solution 
+containing 20 mM HEPES, pH 8.0, 150 mM NaCl and 10 mM 
+DTT was used in the Synchrotron SAXS experiment. The mea-
+surement was performed in a vacuum cuvette with exposure time 
+of 1 s to diminish the parasitic scattering under wavelength 1.03 Å 
+at National Center for Protein Sciences Shanghai (NCPSS) beam-
+line BL19U2, China. The scattering was recorded in the range 
+of the momentum transfer 0.015 &lt; s &lt; 0.420/Å, where s = (4π × 
+sinθ)/λ and 2θ is the scattering angle. SAXS data were subsequent-
+ly processed and analyzed by using the <rs type="software">ATSAS</rs> program suite 
+[51]. Briefly, program <rs type="software">PRIMUS</rs> [52] was employed to process the 
+experimental scattering data and correct the solvent background 
+scattering. Program <rs type="software">CRYSOL</rs> was used to generate the theoretical 
+scattering from the FabZ-ACP complex crystal structure [53]. Pro-
+gram <rs type="software">GNOM</rs> was employed to calculate the distance distribution 
+function p(r) (Figure 5C and 5D) [54]. Subsequently, programs 
+<rs type="software">DAMMIN</rs> [55], <rs type="software">GASBOR</rs> [56] and <rs type="software">DAMAVER</rs> [57] were used 
+to reconstruct the low-resolution shapes to a dummy atom particle 
+model, and superpose to the crystal structure (Figure 5E). The 
+figure was generated by using <rs corresp="#software-14" type="creator">GraphPad</rs> <rs id="software-14" type="software">Prism</rs> <rs corresp="#software-14" type="version-number">5</rs> and <rs type="software">PyMol</rs> soft-
+ware. </p>
+
+<p>Microscale thermophoresis assays </p>
+
+<p>MST assay is a new immobilization-free and titration-based 
+technology for biomolecule interaction determination [58]. The 
+assay was performed with a NanoTemper Monolith NT.115 instru-
+ment (NanoTemper Technologies GmbH). Briefly, FabZ or FabZ 
+(Y100A) was labeled with fluorescence dye NT-647 (amine-re-
+action) according to manufacturer's protocol. Subsequently, 50 
+nM of labeled protein was mixed with various concentrations of 
+holo-ACP in the reaction buffer containing 20 mM HEPES, pH 8.0, 
+150 mM NaCl, 5 mM fresh DTT and 0.05% Tween 20. After in-
+cubation for 5 min under room temperature, 10 µl of the mixtures 
+were loaded into premium coated capillaries for measurement. The 
+MST data were then collected under 40% infrared laser power and 
+20% light-emitting diode power. Nanotemper analysis software 
+(1.5.41) was used to fit the independent experimental data and de-
+termine Kd and standard deviation value. The figure was generated 
+by using <rs corresp="#software-18" type="creator">GraphPad</rs> <rs id="software-18" type="software">Prism</rs> <rs corresp="#software-18" type="version-number">5</rs>. </p>
+
+<p>Acknowledgments </p>
+
+<p>This project was supported by the National Natural Science 
+Foundation of China (21572133 to LZ, 21210003 to HJ and 
+91413102 to XS), the Program for Professors of Special Appoint-
+ment (Eastern Scholar) at the Shanghai Institutions of Higher 
+Learning (to LZ), the National Great Basic Science Project of 
+China (2010CB529806 to HC), the Ministry of Science and Tech-
+nology of China (2015CB910304 to HJ). We thank the staff of 
+beamlines BL19U1 and BL19U2 at the National Center for Protein 
+Sciences Shanghai (NCPSS) and Shanghai Synchrotron Radiation 
+Facility (SSRF, China) for assistance with crystal diffraction and 
+SAXS data collection. We thank professors Jianping Ding and Ji-
+amu Du from Shanghai Institutes for Biological Sciences, Chinese 
+Academy of Sciences for data analysis and discussion. We thank 
+Mr Jing Lan from WYATT Technology for SEC-MALS technical 
+support, Mr Fenfei Wang from Quantum Design China &amp; Nano-
+Temper Technologies GmbH for MST technical support, and Dr 
+José Ramón Andrade Candelario for production of the animation 
+(http://www.3dciencia.com/). </p>
+
+<p>Author Contributions </p>
+
+<p>HJ and LZ designed the experiments; LZ, TRF and ZWC 
+performed protein purification; LZ and LZ performed the crystal-
+lization as well as SEC-MALS, SAXS and the MST biophysical 
+experiments; JFX and JRX performed the computational analysis; 
+HJ, LZ, LZ and JFX wrote the paper. All authors discussed and 
+commented on the manuscript. </p>
+
+<p>Competing Financial Interests 
+The authors declare no competing financial interests. </p>
+
+
+
+<p>Lin Zhang et al. </p>
+
+
+
+
+
+<p>
+Crystal structure of FabZ-ACP complex </p>
+
+<p>SPRINGER NATURE | Cell Research | Vol 26 No 12 | December 2016 </p>
+
+
+
+<p>This work is licensed under a Creative Commons 
+Attribution-NonCommercial-NoDerivs 4.0 Unported 
+License. The images or other third party material in this article are 
+included in the article's Creative Commons license, unless indicated 
+otherwise in the credit line; if the material is not included under the 
+Creative Commons license, users will need to obtain permission from 
+the license holder to reproduce the material. To view a copy of this 
+license, visit http://creativecommons.org/licenses/by-nc-nd/4.0/ </p>
+
+<p>© The Author(s) 2016 </p>
+
+</text></tei>

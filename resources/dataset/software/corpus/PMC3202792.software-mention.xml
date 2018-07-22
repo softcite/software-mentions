@@ -1,0 +1,1293 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC3202792" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:21+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>Metabolic network reconstruction encompasses existing knowledge about an organism's 
+metabolism and genome annotation, providing a platform for omics data analysis and phenotype 
+prediction. The model alga Chlamydomonas reinhardtii is employed to study diverse biological 
+processes from photosynthesis to phototaxis. Recent heightened interest in this species results from 
+an international movement to develop algal biofuels. Integrating biological and optical data, we 
+reconstructed a genome-scale metabolic network for this alga and devised a novel light-modeling 
+approach that enables quantitative growth prediction for a given light source, resolving wavelength 
+and photon flux. We experimentally verified transcripts accounted for in the network and 
+physiologically validated model function through simulation and generation of new experimental 
+growth data, providing high confidence in network contents and predictive applications. The 
+network offers insight into algal metabolism and potential for genetic engineering and efficient 
+light source design, a pioneering resource for studying light-driven metabolism and quantitative 
+systems biology. 
+Algae have garnered significant interest in recent years for their 
+potential commercial applications in biofuels (Hu et al, 2008; 
+Hemschemeier et al, 2009) and nutritional supplements 
+(Spolaore et al, 2006). Among eukaryotic microalgae, Chlamy-
+domonas reinhardtii has arisen as the hallmark, model organism 
+(Harris, 2001). C. reinhardtii has been widely used to study 
+photosynthesis, cell motility and phototaxis, cell wall biogen-
+esis, and other fundamental cellular processes (Harris, 2001). 
+Commercial use and basic scientific research of photosyn-
+thetic organisms could benefit from better understanding of 
+how light is absorbed and affects cellular systems. The quality 
+of light sources implemented in photobioreactors largely 
+determines the efficiency of energy usage in industrial algal 
+farming (Fernandes et al, 2010). Light spectral quality also 
+affects how photon absorption induces various metabolic 
+processes: photosynthesis, pigment and vitamin synthesis, 
+and the retinol pathway required for phototaxis. 
+Metabolic network reconstruction provides a framework to 
+integrate diverse experimental data for investigation of global </p>
+
+<p>properties of metabolism, and as such, can provide clear 
+advantages as a mode of studying the effects of light upon a 
+photosynthetic biological system if light input is accounted for 
+explicitly. The standardized reconstruction process (Thiele 
+and Palsson, 2010) yields a biochemically and genomically 
+structured knowledgebase and, coupled with the standard 
+simulation approach of flux balance analysis (FBA) (Orth et al, 
+2010), provides a basis for predictive phenotype modeling; 
+both contexts have been used for a variety of applications 
+(Durot et al, 2009; Oberhardt et al, 2009; Gianchandani et al, 
+2010), among them the design of genetic engineering strategies 
+for production strains (Bro et al, 2006; Park et al, 2011). To date, 
+however, photon flux, with associated spectral constraints, has 
+not been integrated into a metabolic network reconstruction. 
+Characterizing algal metabolism is key to engineering 
+production strains and framing the study of photosynthesis. 
+Extensive literature on C. reinhardtii metabolism, reviewed in 
+Stern et al (2008), and multiple metabolic mutants (Harris 
+et al, 2008) provide a solid foundation for detailed character-
+ization of its metabolic functions. The availability of complete 
+genome sequence data for C. reinhardtii (Merchant et al, 2007) </p>
+
+<p>Molecular Systems Biology 7; Article number 518; doi:10.1038/msb.2011.52 
+Citation: Molecular Systems Biology 7:518 </p>
+
+<p>&amp; 2011 EMBO and Macmillan Publishers Limited All rights reserved 1744-4292/11 </p>
+
+<p>www.molecularsystemsbiology.com </p>
+
+<p>&amp; 2011 EMBO and Macmillan Publishers Limited </p>
+
+<p>Molecular Systems Biology 2011 1 </p>
+
+<p>and its functional annotation have enabled bioinformatic 
+approaches to inform the presence of genome-encoded 
+enzymes (Grossman et al, 2007; Boyle and Morgan, 2009; 
+Manichaikul et al, 2009). We have employed these resources to 
+reconstruct and experimentally validate a genome-scale 
+metabolic network of C. reinhardtii, the first network to 
+account for detailed photon absorption permitting growth 
+simulations under different light sources. This network 
+accounts for the activity of substantially more genes with 
+metabolic functions than existing reconstructions (Boyle and 
+Morgan, 2009; Manichaikul et al, 2009). </p>
+
+<p>Results </p>
+
+<p>Reconstruction contents and advances </p>
+
+<p>The genome-scale C. reinhardtii metabolic network (Figure 1A; 
+Supplementary Figure S1; Supplementary Table S1; Supple-
+mentary Table S2; Supplementary Model S1) accounts for 1080 
+genes, associated with 2190 reactions and 1068 unique 
+metabolites, and encompasses 83 subsystems distributed across 
+10 compartments. As per convention (Reed et al, 2003), we call 
+this network iRC1080 based on the primary reconstructionist 
+and the scope of genomic content. Of the putative protein-
+coding genes in the C. reinhardtii genome (http://augustus.go-
+bics.de/predictions/chlamydomonas/augustus.u5.aa), an esti-
+mated 20% function in metabolism (Supplementary Table S3). 
+iRC1080 accounts for the activity of 432% of the estimated </p>
+
+<p>genes with metabolic functions, a significant expansion over 
+existing reconstructions (Boyle and Morgan, 2009; Manichaikul 
+et al, 2009). iRC1080 is the most comprehensive metabolic 
+network reconstruction of C. reinhardtii to date based on 
+inclusion of pathways and a level of detail absent from previous 
+reconstructions. 
+A major emergent feature of C. reinhardtii metabolism, 
+apparent in Figure 1A, is the relative centrality of the 
+chloroplast and its importance in light-driven metabolism. 
+The chloroplast, including the thylakoid and eyespot sub-
+compartments, accounts for 430% of the total reactions in the 
+network and 9 of the 10 photon-utilizing reactions. The 
+thylakoid contains essential pathways for photoautotrophic 
+growth including photosynthesis, chlorophyll synthesis, and 
+carotenoid synthesis, producing photoprotective pigments 
+also valuable as fish feed additives and nutritional supple-
+ments for human consumption. The eyespot accounts for 
+retinol metabolism, the mechanistic basis for phototaxis. 
+Several pathways are partially duplicated across the chlor-
+oplast and other cellular compartments, in agreement with 
+known biochemistry. A few crucial pathways are divided 
+between the chloroplast and cytosol, including glycolysis and 
+glycerolipid metabolism. Among the glycerolipids, triacylgly-
+cerides carrying high energy, long-chain fatty acids relevant for 
+biofuel production accumulate substantially in microalgae. 
+iRC1080 provides a thorough resource for studying these and 
+other metabolic products and a basis for strain design for 
+genetic engineering. </p>
+
+<p>Figure 1 Contents of the iRC1080 metabolic network reconstruction. (A) Compartmentalized network diagram. The full genome-scale metabolic network is depicted, 
+denoting compartments. A high-resolution diagram without compartment labels is also available (Supplementary Figure S1). (B) Global transcript verification status. The 
+graph shows the distribution of transcripts accounted for in the network categorized by their verification status. Color codes correspond to the noted percentage of 
+transcript sequence verified experimentally. For example, 42% of transcripts in the network were verified experimentally by 100% sequence coverage. (C) Latent 
+VLCPUFA pathway diagram. Blue nodes represent metabolites included in iRC1080, and orange nodes represent metabolites not included in iRC1080, hypothesized to 
+be absent in C. reinhardtii. Green edges represent enzyme activities accounted for in our functional annotation, and the red edge represents the VLCFA elongase 
+missing from our annotation and hypothesized to have been lost in C. reinhardtii's evolution. This pathway diagram also demonstrates the detail of the high-resolution 
+network diagram (Supplementary Figure S1). </p>
+
+<p>Metabolic network reconstruction of Chlamydomonas 
+RL Chang et al </p>
+
+<p>2 Molecular Systems Biology 2011 </p>
+
+<p>&amp; 2011 EMBO and Macmillan Publishers Limited </p>
+
+<p>iRC1080 considerably expands lipid metabolic pathways 
+over previous reconstructions. We compared the lipid path-
+ways of iRC1080 with several previously published metabolic 
+reconstructions (Duarte et al, 2007; Feist et al, 2007; Boyle and 
+Morgan, 2009; Mo et al, 2009; Montagud et al, 2010) counting 
+the number of genes, reactions, and chemically distinct lipid 
+molecules included in pathways for each lipid class (Table I). 
+The extent of gene, reaction, and metabolite content of lipid 
+pathways in iR1080 is, in general, greater than previous 
+reconstructions. The coverage of ketoacyl lipid chemical 
+properties represented in each network was also analyzed 
+for all metabolites in fatty acyl, glycerolipid, glyceropho-
+spholipid, and sphingolipid classes; the fraction of lipid 
+metabolites in the networks that account for a given applicable 
+property was determined (Table I). Lower coverage signifies 
+incompletely specified molecular species and often lumped </p>
+
+<p>lipid reactions and metabolites. iRC1080 accounts explicitly for 
+all metabolites in these pathways, providing sufficient detail to 
+completely specify all individual molecular species: backbone 
+molecule and its stereochemical numbering of acyl-chain 
+positions; acyl-chain length; and number, position, and 
+cis-trans stereoisomerism of carbon-carbon double bonds. 
+This level of detail enables a significantly higher degree of 
+precision in lipid studies and in metabolic engineering design 
+involving these pathways. </p>
+
+<p>Experimental transcript verification </p>
+
+<p>We have analyzed iRC1080 via experimental transcript 
+verification under permissive growth conditions (Supplemen-
+tary Table S4), representing the largest genome-scale trans-
+cript validation effort to date. More than 75% of included </p>
+
+<p>Table I Lipid pathway reconstruction properties in iRC1080 in comparison to other metabolic network reconstructions </p>
+
+<p>Reconstructions </p>
+
+<p>iRC1080 C. 
+reinhardtii </p>
+
+<p>[iNB305] 
+C. reinhardtii </p>
+
+<p>iSyn669 
+Synechocystis </p>
+
+<p>iMM904 
+S. cerevisiae </p>
+
+<p>iAF1260 
+E. coli </p>
+
+<p>Recon 1 
+Homo sapiens </p>
+
+<p>Ketoacyl lipid chemical properties a 
+Backbone molecule 
+1.00 
+0.94 
+1.00 
+1.00 
+1.00 
+1.00 
+Stereochemical numbering 
+1.00 
+0.00 
+0.60 
+0.85 
+1.00 
+0.00 
+Acyl-chain length 
+1.00 
+0.72 
+0.90 
+0.91 
+1.00 
+0.70 
+C¼C number 
+1.00 
+0.72 
+0.75 
+0.91 
+1.00 
+0.70 
+C¼C positions 
+1.00 
+0.00 
+0.80 
+0.42 
+0.91 
+0.60 
+E-Z stereoisomerism 
+1.00 
+0.00 
+0.80 
+0.50 
+0.42 
+0.53 </p>
+
+<p>Fatty acyls 
+G b 
+64 
+7 
+13 
+32 
+26 
+91 
+R c 
+167 
+41 
+71 
+108 
+139 
+233 
+M d 
+104 
+21 
+55 
+55 
+95 
+137 </p>
+
+<p>Glycerolipids 
+G b 
+40 
+0 
+0 
+18 
+0 
+27 
+R c 
+292 
+4 
+0 
+12 
+0 
+13 
+M d 
+135 
+4 
+2 
+4 
+7 
+4 </p>
+
+<p>Glycerophospholipids 
+G b 
+47 
+0 
+8 
+46 
+22 
+87 
+R c 
+126 
+5 
+7 
+52 
+227 
+51 
+M d 
+56 
+4 
+3 
+4 
+102 
+22 </p>
+
+<p>Sphingolipids 
+G b 
+8 
+0 
+0 
+2 1 
+0 
+5 4 
+R c 
+10 
+0 
+0 
+63 
+0 
+79 
+M d 
+6 
+0 
+0 
+3 1 
+0 
+5 9 </p>
+
+<p>Sterol lipids 
+G b 
+22 
+0 
+1 
+32 
+0 
+87 
+R c 
+34 
+0 
+3 
+49 
+0 
+156 
+M d 
+26 
+0 
+4 
+22 
+0 
+105 </p>
+
+<p>Prenol lipids 
+G b 
+37 
+4 
+15 
+9 
+16 
+21 
+R c 
+59 
+5 
+53 
+17 
+20 
+50 
+M d 
+43 
+4 
+42 
+15 
+17 
+41 </p>
+
+<p>Total lipids 
+G b 
+218 
+11 
+37 
+158 
+64 
+367 
+R c 
+688 
+55 
+134 
+301 
+386 
+582 
+M d 
+370 
+33 
+106 
+131 
+221 
+368 </p>
+
+<p>a </p>
+
+<p>Values are the fraction of lipid metabolites in each network that account for each property, when applicable. </p>
+
+<p>b </p>
+
+<p>Gene transcripts (can be duplicated across lipid classes). </p>
+
+<p>c </p>
+
+<p>Lipid pathway reactions (non-transport). </p>
+
+<p>d </p>
+
+<p>Lipid metabolites (unique lipids). </p>
+
+<p>Metabolic network reconstruction of Chlamydomonas 
+RL Chang et al </p>
+
+<p>&amp; 2011 EMBO and Macmillan Publishers Limited </p>
+
+<p>Molecular Systems Biology 2011 3 </p>
+
+<p>transcripts were verified at 490% sequence coverage, and 
+92% of tested transcripts were at least partially validated 
+experimentally (i.e. a portion of the sequence was recovered in 
+the sequenced transcripts) (Figure 1B). We also analyzed the 
+strength of transcript verification by specific metabolic 
+subsystems (Figure 2, a representative subset; Supplementary 
+Figure S2, the full set). The full lengths of all transcripts 
+associated with 10 subsystems were verified, notably includ-
+ing biosynthesis of unsaturated fatty acids, histidine metabo-
+lism, and phenylalanine, tyrosine and tryptophan 
+biosynthesis, with 12, 12, and 24 transcripts, respectively. 
+Many more subsystems were also well verified, 61 out of 76 
+gene-associated subsystems with 490% of associated tran-
+scripts at least partially validated. It should be noted that only 
+sequencing reads that uniquely map to reference transcript 
+sequences were counted toward the percentage of length 
+validation; thus, sequencing reads unique enough to un-
+ambiguously specify the corresponding reference transcript 
+were detected for every transcript with 40% validation. A few 
+subsystems stood out as being more poorly verified, including </p>
+
+<p>chloroplast and mitochondrial transport systems and 
+sphingolipid metabolism, all of which exhibited o80% of 
+transcripts validated to any extent. This may reflect low 
+expression level or imperfect structural annotation of these 
+genes, particularly compartmental transporters. Low expres-
+sion levels or complete deactivation of these genes is 
+consistent with a hypothesized evolutionary trend (see below) 
+in the case of sphingolipid metabolism. </p>
+
+<p>Evolution of latent lipid pathways </p>
+
+<p>The comprehensive reconstruction of lipid metabolism in 
+iRC1080 revealed hypothetical latent pathways, the functions 
+of which have likely been lost through evolution. Previous 
+studies established that C. reinhardtii lacks the practically 
+ubiquitous membrane lipids phosphatidylcholine (Giroud 
+et al, 1988) and phosphatidylserine (Riekhof et al, 2005). 
+Similarly, our reconstruction suggests that C. reinhardtii also 
+lacks very long-chain fatty acids (VLCFAs), their polyunsatu-
+rated analogs (VLCPUFAs) (Figure 1C), and ceramides. 
+Surveys of C. reinhardtii lipid species have not detected 
+VLCFAs (Giroud et al, 1988; Giroud and Eichenberger, 1989; 
+Tatsuzawa et al, 1996; Dubertret et al, 2002; Kajikawa et al, 
+2006; Lang, 2007), likely due to a lack of functional VLCFA 
+elongase (Weers and Gulati, 1997; Guschina and Harwood, 
+2006; Kajikawa et al, 2006). No candidate VLCFA elongase was 
+identified in our comprehensive functional annotation (Sup-
+plementary Table S3), and our annotation suggests several 
+downstream gaps in arachidonic acid metabolism as well, 
+corroborating this hypothesis. Arachidonic acid, the 20-carbon 
+parent fatty acid of all VLCFAs and VLCPUFAs, is synthesized 
+by a VLCFA elongase-catalyzed extension of g-linolenic acid, 
+which is present in C. reinhardtii (Griffiths et al, 2000). 
+Notably, C. reinhardtii does encode a fatty acid desaturase that 
+accepts arachidonic acid as substrate (Kajikawa et al, 2006) 
+and, based on our functional annotation, encodes several 
+other enzymes that act upon this substrate, indicating that 
+algal ancestors likely had a functional VLCFA elongase. 
+Multiple lines of evidence uncovered during the reconstruc-
+tion also support the absence of ceramides in C. reinhardtii. 
+Our functional annotation did not uncover a convincing 
+candidate for ceramide synthetase (EC:2.3.1.24), a required 
+enzyme for ceramide synthesis, nor, to our knowledge, has one 
+been discovered by previous efforts, including C. reinhardtii 
+enzyme annotations of the Kyoto Encyclopedia of Genes and 
+Genomes. Similarly, our functional annotation suggests 
+substantial gaps downstream in the sphingolipid metabolic 
+pathway. As aforementioned, C. reinhardtii also lacks VLCFAs, 
+and VLCFA-CoA is a required substrate for the ceramide 
+synthetase reaction (Hills and Roscoe, 2006). Finally, our 
+experimental transcript analysis failed to verify 2 out of 8 
+transcripts associated with sphingolipid metabolism (Figure 2) 
+that were included in iRC1080, 1 of 2 serine C-palmitoyl-
+transferases and a putative sphingosine 1-phosphate aldolase. 
+This result may reflect still further gene function loss in this 
+pathway, perhaps occurring more recently in evolutionary 
+time given that our functional annotation actually detected 
+candidate sequences for these enzymes. Considering this 
+evidence, we suggest that the evolutionary history of 
+C. reinhardtii includes the loss of ceramide metabolism, </p>
+
+<p>Figure 2 Experimental transcript verification by subsystem. The graph 
+summarizes transcript verification status (see Materials and methods and 
+Supplementary information for details) for 30 of the 76 gene-associated 
+subsystems of iRC1080. Identical analysis for the full complement of 
+76 subsystems is also available (Supplementary Figure S2). The x axis 
+corresponds to the percentage of subsystem-associated transcripts that were 
+experimentally verified to the extent noted by the color code. </p>
+
+<p>Metabolic network reconstruction of Chlamydomonas 
+RL Chang et al </p>
+
+
+
+<p>&amp; 2011 EMBO and Macmillan Publishers Limited </p>
+
+<p>although this hypothesis remains to be verified. Annotated 
+enzymes in this pathway separated from the broader network 
+by gaps may represent multifunctional proteins or proteins 
+that have evolved to function in a pathway distinct from 
+ceramide synthesis. These gaps in C. reinhardtii metabolism 
+not only increase understanding of the evolution of algal lipid 
+pathways but also represent potential targets for genetic 
+engineering in an effort to expand the diversity of lipids this 
+alga can synthesize. Such engineering efforts serve as valuable 
+test cases for engineering industrial strains and could improve 
+C. reinhardtii as a model alga for biofuel development. </p>
+
+<p>Modeling metabolic light usage </p>
+
+<p>Our reconstruction accounted for effective light spectral ranges 
+by analyzing biochemical activity spectra (Figure 3A), either 
+reaction activity or absorbance at varying light wavelengths. 
+Defining effective spectral bandwidths associated with each 
+photon-utilizing reaction enabled our network to model 
+growth under different light sources via stoichiometric 
+representation of the spectral composition of emitted light, 
+which we term prism reactions. The coefficients for different </p>
+
+<p>photon wavelengths in prism reactions correspond to the 
+ratios of photon flux in the defined effective spectral ranges to 
+the total photon flux in the visible spectrum emitted by a given 
+light source (Figure 3A and B). In this manner, it is possible to 
+distinguish the amount of emitted photons that drive different 
+metabolic reactions. We created prism reactions for 11 distinct 
+light sources (Supplementary Figure S3), covering most 
+sources that have been used in published studies for algal 
+and plant growth including solar light, various light bulbs, 
+and LEDs. 
+The network reconstruction provides a detailed account of 
+metabolic photon absorption by light-driven reactions. 
+Photosystems I and II in iRC1080 stoichiometrically absorb 
+photons according to the Z-scheme (Berg et al, 2007). The 
+light-dependent protochlorophyllide oxidoreductases require 
+a single photon per catalysis as demonstrated in wheat 
+(Griffiths et al, 1996). Extrapolation of UVB energy require-
+ments for spontaneous provitamin D 3 conversion to vitamin 
+D 3 (Bjorn, 2007) based on the average photon energy in the 
+UVB range suggests a stoichiometric ratio of approximately 
+one. Two phototactic rhodopsins, reactants of the rhodopsin 
+photoisomerase reaction, are encoded by C. reinhardtii, one </p>
+
+<p>Figure 3 Analysis of light spectra. (A) Activity and irradiance spectra. The top graph displays activity spectra for photon-utilizing reactions included in iRC1080. The 
+abbreviated reactions are defined as follows: VITD3, vitamin D 3 synthesis; OPSIN, rhodopsin photoisomerase; PCHLD, both protochlorophyllide photoreductase and 
+divinylprotochlorophyllide photoreductase; PSI, photosystem I; PSII, photosystem II. The y axis for the activity spectra is the fraction of maximum-measured activity with 
+respect to each noted reaction. Four of the eleven sample irradiance spectra (Supplementary Figure S3) are depicted with y axes set as the percentage of total visible 
+photon flux at each wavelength (x axis). Effective spectral bandwidths are denoted by vertical dashed lines color coded to match the activity spectra for each reaction. 
+(B) Prism reaction derivation. The photon flux from wavelengths a to b is normalized by the total visible photon flux from 380 to 750 nm to yield the effective spectral 
+bandwidth coefficient C. The coefficients for each range are compiled into a single prism reaction for a given light source, representing the composition of emitted light as 
+defined by photon-utilizing metabolic reactions. Equation variables are defined at top. </p>
+
+<p>Metabolic network reconstruction of Chlamydomonas 
+RL Chang et al </p>
+
+<p>&amp; 2011 EMBO and Macmillan Publishers Limited </p>
+
+<p>Molecular Systems Biology 2011 5 </p>
+
+<p>requiring a single photon and one requiring two photons for 
+activation; the average effective stoichiometric photon count 
+was measured to be 1.6 (Hegemann and Marwan, 1988). 
+A prism reaction is the intermediate step between light input 
+and the specific photon-utilizing metabolic reactions men-
+tioned above. Flux through the photon exchange reaction 
+'EX_photonVis(e)' represents the total metabolically active 
+photon flux incident upon the cell. Flux passing through this 
+exchange reaction then passes through a single user-specified 
+prism reaction, for example 'PRISM_solar_litho,' and is 
+distributed across specific spectral ranges. These ranges are 
+specified explicitly in the photon-dependent metabolic reac-
+tion formulas (Supplementary Table S2), thereby making these 
+reactions wavelength specific. Flux through the photon-
+dependent metabolic reactions is then propagated through 
+the network. Excess wavelength-specific photon fluxes that 
+are not absorbed metabolically leave the system via demand 
+reactions, for example 'DM_photon298(c),' completing the 
+pathway of light through the network. 
+To accurately model metabolic activity of a photosynthetic 
+organism, it is also important to consider regulatory effects 
+resulting from lighting conditions. Indeed, light and dark 
+conditions have been shown to affect metabolic enzyme 
+activity in C. reinhardtii at multiple levels: transcriptional 
+regulation (Bohne and Linden, 2002), chloroplast RNA 
+degradation (Salvador et al, 1993), translational regulation 
+(Cahoon and Timko, 2000), and thioredoxin-mediated 
+enzyme regulation (Lemaire et al, 2004). As a preliminary 
+attempt to incorporate light and dark regulatory effects, 
+literature was reviewed to identify such regulation upon 
+enzymes in iRC1080 (Supplementary Table S5), focusing 
+mainly on thioredoxin regulation of chloroplast enzymes since 
+most published data relate to this mode. In the absence of 
+activity spectra for these effects, it is not yet possible to 
+represent these effects via prism reactions. Therefore, we 
+modeled regulation with Boolean reaction flux constraints 
+following published approaches (Covert et al, 2001). </p>
+
+<p>Environmental and genetic validation of iRC1080 </p>
+
+<p>Implementing light-regulated constraints and basic environ-
+mental exchange constraints (Supplementary Table S6) 
+yielded photoautotrophic, heterotrophic, and mixotrophic 
+models from iRC1080. We simulated various growth condi-
+tions (Supplementary Table S7) and all gene knockouts for 
+which phenotypes have been published and are assessable 
+in our network (Supplementary Table S8) to validate the 
+predictive ability of the models. All 30 validations involving 
+environmental parameters displayed very close agreement 
+with experimental results (Supplementary Table S7). 
+Of particular note is the ability of our photosynthetic model 
+in sunlight to accurately recapitulate O 2 -PAR (photosyntheti-
+cally active radiation) energy conversion efficiency, predicting 
+an efficiency of 2% compared with the experimental result 
+(Greenbaum, 1988) of 1.3-4.5%. Of the 14 gene knockouts 
+simulated, 7 were partially or completely validated relative to 
+experimental results (Supplementary Table S8). The uncon-
+firmed gene knockout phenotypes may result from network 
+errors or an incomplete set of constraints in the model 
+(e.g. enzyme capacity, regulatory, thermodynamic, or other </p>
+
+<p>constraints). No internal model reactions were constrained in 
+the models except indirectly via constraints on the input 
+exchanges and the few explicitly noted Boolean regulatory 
+constraints imposed (Supplementary Table S5). The uncon-
+firmed knockout phenotypes were investigated through model 
+analysis and literature search, although in most cases, current 
+literature evidence could not completely explain these 
+discrepancies, leaving them to be fully accounted for by future 
+studies. 
+Two discrepancies may result from incomplete genome 
+functional annotation or missing constraints. Knockout of 
+mitochondrial NADH:ubiquinone oxidoreductase complex I 
+(EC:1.6.5.3) in the model fails to recapitulate a reduced 
+heterotrophic growth phenotype (Remacle et al, 2001a). The 
+NDA2 and NDA3 genes can substitute completely for this 
+activity in the current model. Sequence-based localization 
+analysis places both proteins in the mitochondria, but this may 
+be incorrect as a recent study suggests that both may be plastid 
+localized (Desplats et al, 2009). Two other network reactions 
+can also substitute for the reduction of ubiquinone, succinate 
+dehydrogenase (ubiquinone) (EC:1.3.5.1) and electron trans-
+fer flavoprotein-ubiquinone oxidoreductase (EC:1.5.5.1). 
+The cytochrome c oxidase complex IV (EC:1.9.3.1) knockout 
+does not result in an obligate photoautotrophic phenotype 
+(Remacle et al, 2001b) in the model because the cytochrome c 
+peroxidase (EC:1.11.1.5) reaction is capable of compensating. 
+The C. reinhardtii CCPR1 protein is homologous to mitochon-
+drial cytochrome c peroxidases from a number of species, 
+but no focused studies have been carried out to provide further 
+evidence for this enzyme. In the model, the complex IV and 
+CCPR1 double knockout is an obligate photoautotroph. These 
+discrepancies point out important genes that should be the 
+focus of subsequent experimentation in order to more clearly 
+understand these metabolic phenotypes. 
+Another discrepancy may result from missing thermody-
+namic constraints. The zeaxanthin epoxidase (EC:1.14.13.90) 
+knockout does not preclude antheraxanthin, violaxanthin, 
+or neoxanthin production (Baroli et al, 2003) in the model 
+because violaxanthin de-epoxidase (EC:1.10.99.3) reactions 
+compensate. This substitution depends on the reversibility of 
+these de-epoxidase reactions and may point to missing 
+thermodynamic constraints or to undiscovered regulation 
+under this condition. 
+Two discrepancies result from the lack of accounting for 
+kinetics of the reactions of ribulose-1,5-bisphosphate carbox-
+ylase oxygenase (RuBisCO) from the model. Both phospho-
+glycolate phosphatase (EC:3.1.3.18) (Suzuki et al, 1990) 
+and glycolate dehydrogenase (EC:1.1.99.14) (Nakamura 
+et al, 2005) deficient mutants require high CO 2 for photo-
+autotrophic growth in vivo, not recapitulated in simulations. 
+This phenotype results from dominance of the oxygenase over 
+carboxylase activity of RuBisCO under lower CO 2 conditions, 
+both reactions sharing the same catalytic site. In vivo, these 
+two mutants are deficient in the salvage of carbon from 
+2-phosphoglycolate, a product of the oxygenase activity of 
+RuBisCO. Although these two reactions are carried out by the 
+same enzyme in the model, their fluxes are treated as 
+independent and not competitive; due to an absence of kinetic 
+parameters in the model, the effect of relative CO 2 and O 2 
+concentrations upon RuBisCO activity cannot be explicitly </p>
+
+<p>Metabolic network reconstruction of Chlamydomonas 
+RL Chang et al </p>
+
+
+
+<p>&amp; 2011 EMBO and Macmillan Publishers Limited </p>
+
+<p>expressed. Because the carboxylase activity more efficiently 
+promotes growth, both high and low CO 2 conditions drive only 
+this reaction and not the oxygenase reaction in the model; 
+therefore, the salvage pathway is unnecessary in the model to 
+achieve wild-type growth rates. 
+Finally, two mutant phenotype discrepancies in the model 
+result from complex compensatory pathways that convert an 
+input carbon source to the mutant-required carbon source. 
+The high CO 2 requirement for photoautotrophic growth due to 
+knockout of the chloroplast carbonic anhydrase (EC:4.2.1.1) 
+(Spalding et al, 1983; Funke et al, 1997) can be compensated 
+for in the model by activity of a six-reaction pathway of 
+pyrimidine metabolism leading from bicarbonate incorpora-
+tion via carbamoyl-phosphate synthase (EC:6.3.5.5) to con-
+version to CO 2 via orotidine-5 0 -phosphate decarboxylase 
+(EC:4.1.1.23). The chloroplast ATP synthase (EC:3.6.3.14) 
+deficient mutant (Smart and Selman, 1991; Dent et al, 2005; 
+Drapier et al, 2007) with an acetate-requiring phenotype can 
+be compensated for in the model by a complex pathway 
+consisting of 415 reactions by which CO 2 is converted to 
+acetate, which is then used in pathways similar to those 
+supporting heterotrophic growth. Although this complex 
+pathway has many branch points, it is notable that chloroplast 
+malate dehydrogenase (EC:1.1.1.40) and the diffusion of 
+pyruvate between the cytosol and chloroplast are essential to 
+coupling the CO 2 fixation reactions to pyruvate metabolism 
+and ultimate conversion to acetate but are not essential to 
+the wild-type photoautotrophic or heterotrophic models. Loss 
+of either of these conditionally essential reactions prevents the 
+CO 2 -to-acetate conversion and recapitulates the acetate-
+requiring phenotype. Given the complexity of these compen-
+satory pathways, a number of possible missing constraints 
+could explain their inactivity in vivo under photosynthetic 
+conditions, and the model offers a starting point to explore 
+possible targets of regulation under these conditions. </p>
+
+<p>Gene essentiality analysis </p>
+
+<p>To demonstrate the prospective use of iRC1080 in predi-
+cting phenotypic outcomes of genetic manipulations of 
+C. reinhardtii, comprehensive essentiality analysis of all 
+simulated single-gene knockouts was performed in models 
+under four basic environmental conditions: growth in sunlight 
+with and without acetate, aerobic growth in dark on acetate, 
+and anaerobic subsistence in dark on starch. Phenotypes were 
+defined as growth equivalent to wild-type, reduced growth 
+relative to wild-type, or lethal based on the comparative 
+objective fluxes of the mutant and wild-type models 
+(Supplementary Table S9). A lethal phenotype was defined 
+as no flux through the biomass reaction (defined as the 
+objective function) in the mutant. Simulation results exhibited 
+distinct metabolic system dependencies under each condition. 
+There were 201 and 144 lethal knockouts in the model with 
+sunlight and with and without acetate, respectively. There 
+were 147 and only 3 lethal knockouts in the aerobic and 
+anaerobic dark model, respectively. The metabolic processes 
+associated with essential genes were ranked, and the three 
+subsystems associated with the essential genes were compared 
+under each condition. Photosynthesis, porphyrin and 
+chlorophyll metabolism, and phenylalanine, tyrosine, and </p>
+
+<p>tryptophan biosynthesis were the most essential subsystems in 
+light without acetate. Phenylalanine, tyrosine, and tryptophan 
+biosynthesis, porphyrin and chlorophyll metabolism, and 
+purine metabolism were the most essential subsystems in 
+light with acetate. Expectedly, photosynthesis is most crucial 
+for photoautotrophic growth and not required in the presence 
+of acetate. The dark, aerobic condition had the same top 
+ranked essential subsystems as in the mixotrophic condition, 
+which is also expected as amino acids, chlorophyll, and 
+nucleotides make up a high proportion of the required biomass 
+components under both conditions. For subsistence in dark on 
+starch, glycolysis/gluconeogenesis, starch metabolism, and 
+starch and sucrose metabolism were the most essential 
+subsystems, paralleling the expected core pathways for ATP 
+maintenance with starch breakdown. While these predicted 
+genotype-phenotype relationships demonstrate a compelling 
+prospective use of the network, the majority of the mutant 
+phenotypes remain to be validated experimentally; however, 
+these predictions could be used to help define the scope 
+and expected outcomes of such future studies. </p>
+
+<p>Light-source-specific model validations </p>
+
+<p>Next, we performed more extensive validations of light models 
+grown under specific light sources at varying intensities. 
+Varying sunlight intensity in our model and evaluating 
+photosynthetic O 2 evolution, we observed that the model 
+reached photosynthetic saturation at light intensity consistent 
+with experimental measurement (Polle et al, 2003) 
+(Figure 4A). Our model under red LED light (653 nm) also 
+showed fair agreement with our experimentally measured 
+maximum growth rate across the range of unsaturated photon 
+flux (Figure 4B), despite divergence above the experimental 
+saturation point. The principal explanation for this divergence 
+lies in the relative CO 2 supplies of the experimental setup and 
+the model. All reported photoautotrophic model simulations 
+utilize the same maximum CO 2 exchange constraint corre-
+sponding to the maximum-measured cellular uptake rate 
+under non-CO 2 -limiting conditions (Supplementary Table S6), 
+while the CO 2 supply in our bioreactor setup was clearly 
+growth-limiting given that the light-saturated maximum 
+growth rate was 0.01 gDW/h, much lower than the maximum 
+growth rate of 0.14 gDW/h under non-CO 2 -limiting conditions 
+(Janssen et al, 2000). It should also be noted that the linearity 
+of the simulation trends is a property of steady-state system 
+modeling, which is incapable of kinetic representation of 
+growth shifts observable in the in vivo experiments. For further 
+validation, we present that the maximum biomass yield under 
+incandescent white light is 5.7 Â10 À5 gDW/mE (Janssen et al, 
+2000), in close agreement with our analogous prediction of 
+2.6 Â10 À5 gDW/mE (Figure 4C). Similarly, our predicted 
+biomass yield on 674 nm peak LED light of 1.1 Â10 À4 gDW/ 
+mE is on the same order of magnitude as our experimental 
+results for C. reinhardtii under 660 nm peak LED light near 
+growth-saturating photon flux, 4.3 Â10 À4 gDW/mE. This 
+agreement is striking given that the network explicitly 
+accounts for the spectral photon flux of these light sources 
+and the subsequent processing of this energy to generate all of 
+the constituents of biomass without any parameter fitting to 
+the experimental data. Together, these results constitute an </p>
+
+<p>Metabolic network reconstruction of Chlamydomonas 
+RL Chang et al </p>
+
+<p>&amp; 2011 EMBO and Macmillan Publishers Limited </p>
+
+<p>Molecular Systems Biology 2011 7 </p>
+
+<p>important validation of our models using three different light 
+sources. 
+To quantitatively evaluate the significance of the agreement 
+between our reported model simulations using prism reactions 
+derived through analysis of irradiance spectra and experi-
+mental measurements under the three light sources reported 
+above, we compared the reported simulation results for each 
+of these light sources with an unbiased sample of results 
+representative of potential solutions achievable using our 
+network. We sampled the space of possible light models by 
+generating random prism reactions with the same total 
+metabolically active photon flux. To obtain stoichiometric 
+coefficients for a random prism reaction, a set of random 
+fractions of the sum of stoichiometric coefficients of the 
+prism reaction representing the evaluated light source was 
+generated, contingent upon resulting in the same sum of 
+coefficients. The simulations as reported above for sunlight, 
+red LED, and white incandescent light were repeated using 
+such random prism reactions. The Euclidean distance between </p>
+
+<p>the simulated and experimental results was compared with the 
+distribution of distances for 10 000 randomly sampled results 
+(Figure 5). The probability of randomly achieving experi-
+mental agreement closer than seen in our simulations was 
+determined empirically based on these distributions 
+of distances. Only 77 of 10 000 randomized simulations 
+(Figure 5A) had experimental agreement better than the 
+simulated oxygen photoevolution under sunlight (Figure 4A), 
+yielding an empirical P-value of 0.0077, and indicating our 
+model had experimental agreement statistically significantly 
+better than a random model constrained to have the same total 
+metabolically active photon flux. Simulated growth under 
+665 nm peak LED (Figure 4B) had a suggestive P-value of 
+0.1947 (Figure 5B), although the reported simulation was still 
+closer to experiment than the mean of randomized simula-
+tions. Our simulated growth under white incandescent light 
+was statistically significantly closer to experiment (Janssen 
+et al, 2000) than random (Figure 5C) with a P-value of 0.0285. 
+This analysis shows that the reported model for each of these </p>
+
+<p>Figure 4 Photosynthetic model simulation results. (A) O 2 photoevolution under solar light. Simulated (blue line) and experimentally measured (green dots) O 2 
+evolution are compared. (B) Photosynthetic growth under red LED light. Simulations were performed using the 653-nm prism reaction, and experimentally grown culture 
+was exposed to 660 nm LED light. Simulated (blue line) and experimentally measured (green dots) growth are compared. (C) Efficiency of light utilization. The minimum 
+photon flux required for maximum-simulated growth (bottom), biomass yield (middle), and energy conversion efficiency (top) are presented for 11 light sources derived 
+from measured spectra and for the designed growth-efficient LED. </p>
+
+<p>Metabolic network reconstruction of Chlamydomonas 
+RL Chang et al </p>
+
+
+
+<p>&amp; 2011 EMBO and Macmillan Publishers Limited </p>
+
+<p>light sources is exceptionally close to recapitulating experi-
+mental results and thus serves as an excellent validation. 
+These results indicate that the network has the capacity to 
+broadly differentiate light-dependent growth based on spectral 
+properties and that the formulation of a prism reaction serves 
+to accurately narrow the space of possible flux distributions 
+relevant to a specific light source. </p>
+
+<p>Application of iRC1080 to evaluate light source 
+efficiency and design </p>
+
+<p>Our photosynthetic model was applied prospectively to 
+evaluate the efficiency of light utilization under different light 
+sources. The photon energy conversion efficiency (Supple-
+mentary Equation 1) and biomass yield on light (Supplemen-
+tary Equation 2) were computed for each light source given the 
+minimum incident photon flux required to achieve maximum 
+growth rate (Figure 4C); the minimum photon flux for 
+maximum growth rate is the growth-saturating photon flux 
+value for a given light source. One clear result is that red LEDs 
+provide the greatest efficiency in terms of both absorbed </p>
+
+<p>photon energy and biomass yield, about two and three times as 
+efficient as can be optimally achieved in sunlight by these 
+respective measures. Although experimental growth data for 
+validation is only presented for three light sources, simulation 
+results are presented for all 11 light sources for which 
+irradiance spectra were obtainable (Figure 4C). This analysis 
+demonstrates the prospective extensibility of the network and 
+modeling approach to any possible lighting condition, natural 
+or manmade, for which an irradiance spectrum can be 
+measured. 
+Given the capability of our photosynthetic model to evaluate 
+light source efficiency, we applied it to design an LED spectrum 
+providing maximum photon utilization efficiency for growth 
+(Supplementary Figure S3). The result was a 677-nm peak LED 
+spectrum with a total incident photon flux of 360 mE/m 2 /s 
+(Figure 4C; Supplementary Figure S3), which is quite close to 
+the 674-nm LED with a minimum incident photon flux of 
+362 mE/m 2 /s for maximum growth. This result suggests that 
+for the simple objective of maximizing growth efficiency, 
+LED technology has already reached an effective theoretical 
+optimum, which is further supported by experimental 
+measurements of the spectral peak of light absorption for 
+green algae (Akkerman et al, 2002) and the quantum action 
+spectrum of land plants (Barta et al, 1992) (Supplementary 
+Table S7). </p>
+
+<p>Discussion </p>
+
+<p>We have presented a genome-scale network reconstruction of 
+C. reinhardtii metabolism, well validated in content and 
+function, and its application for detailed modeling of diverse 
+light sources. Initial model validations also highlight the need 
+for more experimental studies to uncover regulatory mechan-
+isms in order to expand understanding of the complexity of 
+light regulation of algal metabolism. This open research topic 
+presents important challenges and opportunities in enumerat-
+ing such effects on a genome scale. 
+Given the importance of lipid metabolism in biofuel 
+production, iRC1080 was reconstructed enumerating all lipids 
+supported by evidence in the literature and genome functional 
+annotation. The capacity of iRC1080 as a knowledgebase was 
+demonstrated through analysis of lipid metabolism to generate 
+novel hypotheses about latent metabolic pathways resulting 
+from algal evolution. In particular, the exclusion of certain 
+enzymatic reactions in VLCFA and sphingolipid pathways 
+from iRC1080 suggests evolutionary recession of these path-
+ways in C. reinhardtii, a hypothesis supported by undetected 
+lipids in experimental measurements, gaps in genome func-
+tional annotation for these enzymes, and incomplete transcript 
+verification for other enzymes included in these pathways. Not 
+only do these network gaps reflect the relatively simple lipid 
+biosynthetic capabilities of C. reinhardtii among microalgae, 
+but their identification suggests gene insertions that could 
+expand its lipid metabolic repertoire, relevant for industrial 
+and scientific purposes. Of particular interest may be the 
+potential for enabling algal synthesis of essential fatty acids for 
+human health such as docosahexaenoic acid (Yashodhara 
+et al, 2009). Candidate enzymes for the conversion 
+of arachidonic acid to essential fatty acids downstream of the </p>
+
+<p>Figure 5 Distributions of randomly sampled distances from experimental 
+measurements. (A) O 2 photoevolution under solar light. (B) Photosynthetic 
+growth under red LED light. (C) Photosynthetic growth under white incandescent 
+light. All three distance distributions result from 10 000 unbiased sampling results 
+in which random prism reactions were generated with the same total 
+metabolically active photon flux as the given light source. Each distribution is 
+depicted in 25 equal-sized bins. The red dot in each plot is placed over the 
+bin in which the distance of the reported simulation result for the given light 
+source falls; the vertical placement of each red dot indicates the number of 
+randomly sampled distances within the same bin that are less than that of 
+the reported result. </p>
+
+<p>Metabolic network reconstruction of Chlamydomonas 
+RL Chang et al </p>
+
+<p>&amp; 2011 EMBO and Macmillan Publishers Limited </p>
+
+<p>Molecular Systems Biology 2011 9 </p>
+
+<p>apparently absent VLCFA elongase reaction are present in our 
+functional annotation. 
+The models developed from iRC1080 provide a platform for 
+prediction of phenotypic outcomes of system perturbations, 
+light source evaluation and design, and genetic engineering 
+design for production of biofuels and other commodity 
+chemicals. We demonstrated an approach applying iRC1080 
+to the design of an energetically efficient light source 
+for growth, a novel application of metabolic networks. 
+Other light sources may be more efficient for other metabolic 
+objectives or under other environmental conditions or 
+genetic backgrounds. This result could be of significant 
+interest to the metabolic engineering and bioreactor-design 
+communities because it demonstrates that our network 
+and light-modeling approach are capable of accurately 
+predicting light source efficiencies in terms of a metabolic 
+objective. 
+The prism reactions developed and applied in this study to 
+quantitatively integrate spectral quality with biological activ-
+ity represent a significant integration of diverse data types for 
+biological system modeling, which hopefully will encourage a 
+new paradigm for systems biology. This modeling approach 
+could be used for applications beyond light source design, 
+including as a metabolic basis for studying and simulating 
+phototaxis. Given the acquisition of appropriate biological 
+spectral activity data, this approach could be extended to other 
+biological light-response phenomena and other organisms. 
+The importance of understanding how light parameters affect 
+biological systems may also extend beyond natural phenom-
+ena with recent progress in protein engineering leading to 
+chimeric light-inducible proteins (Shimizu-Sato et al, 2002; 
+Levskaya et al, 2005). 
+The iRC1080 network and presented metabolic modeling 
+represent a milestone in systems biology. Our network 
+provides a broad knowledgebase of the biochemistry and 
+genomics underlying global metabolism of a photoautotroph, 
+and our modeling of light-driven metabolism exemplifies how 
+integration of largely unvisited data types, such as physico-
+chemical environmental parameters, can expand the diversity 
+of applications of metabolic networks. </p>
+
+<p>Materials and methods </p>
+
+<p>Metabolic network reconstruction </p>
+
+<p>Building from our previously published reconstruction of C. reinhard-
+tii central metabolism (Manichaikul et al, 2009), iAM303, the iRC1080 
+network was reconstructed in a bottom-up manner according 
+to current standards (Thiele and Palsson, 2010) on a pathway-by-
+pathway basis, drawing biochemical, genomic, and physiological 
+evidence from 4250 publications (Supplementary Table S2). The 
+genomic evidence was derived from our own functional annotation 
+(Supplementary Table S3) of metabolic enzymes, coenzymes, and 
+transport proteins. Network gap-filling was performed to make 
+pathways functional and account for dead-end metabolites. Global 
+quality control checks were then performed, including elemental 
+balancing and elimination of as many internal thermodynamically 
+infeasible loops and new photon-driven, input-only pathways as 
+possible (Supplementary Figure S4; Supplementary information). We 
+also accounted for subcellular compartment pH in the protonation 
+states of metabolites as much as possible. 
+iRC1080 is publicly available at http://www.ebi.ac.uk/biomodels 
+(Accession: MODEL1106200000) and as Supplementary Model S1. </p>
+
+<p>Functional annotation of transcripts </p>
+
+<p>Functional annotation for iRC1080 was performed using a consensus 
+of two separate approaches. In the first approach, gene models (http:// 
+augustus.gobics.de/predictions/chlamydomonas/augustus.u5.aa) from 
+the Augustus update 5 (Au5) of C. reinhardtii genome assembly 
+version JGI v4.0 were functionally annotated by assigning enzyme 
+classification (EC) terms using BLASTP results against UniProt (http:// 
+www.uniprot.org/) and AraCyc (http://www.arabidopsis.org/biocyc/) 
+enzyme protein sequences and their EC annotations as the basis. The 
+second approach followed from mapping of Au5 gene models 
+to annotated JGI v3.1 gene models, for which EC terms and Gene 
+Ontology annotation were assigned using a combination of BLASTP, 
+AutoFACT, <rs type="software">InterProScan</rs>, and PRIAM. The comprehensive annotation 
+is presented in Supplementary Table S3. See Supplementary informa-
+tion for full details. </p>
+
+<p>Growth simulations </p>
+
+<p>Simulation procedures consisted of FBA (Orth et al, 2010) and flux 
+variability analysis (FVA) (Mahadevan and Schilling, 2003) as 
+implemented in the COBRA toolbox (Becker et al, 2007), testing 
+model capabilities while optimizing biomass functions to simulate 
+growth (Supplementary Table S10) or subsistence on starch by 
+optimizing ATP maintenance. FBA is a widely used simulation 
+approach for large-scale, constraint-based metabolic models and has 
+become a standard method in the systems biology field with a long 
+history of success (Gianchandani et al, 2010). Different environmental 
+conditions were modeled by appropriately setting reaction flux 
+constraints in iRC1080 (Supplementary Table S6) including environ-
+mental exchanges, non-growth associated ATP maintenance, O 2 
+photoevolution, starch degradation, and light-or dark-regulated 
+enzymatic reactions (Supplementary Table S5). </p>
+
+<p>C. reinhardtii strains and growth conditions </p>
+
+<p>For transcript verification experiments, C. reinhardtii strain CC-503 
+was grown in tris-acetate-phosphate medium containing 100 mg/l 
+carbamicillin without agitation, at room temperature (22-251C) and 
+under continuous illumination with cool white light at a photosyn-
+thetic photon flux of 60 mE/m 2 /s. 
+For growth experiments under 660 nm peak LED light (Supplementary 
+Figure S5), C. reinhardtii strain UTEX2243 was grown in a bubble 
+column photobioreactor at 23-271C with P49 medium. The total volume 
+of algal culture was 300 ml, and the gas supply was 180 ml/min air with 
+2.5% CO 2 . The 660-nm peak LED light supply was set at 10 kHz 
+frequency and different duty cycles to get varied average photon fluxes. </p>
+
+<p>Transcript verification by sequencing </p>
+
+<p>ORF amplicons were generated from C. reinhardtii cells by RT-PCR 
+from RNA or PCR from Gateway clones. The Roche 454FLX Titanium 
+sequencing system was used for sequencing of the generated ORF 
+amplicons according to the manufacturer's instructions. The gener-
+ated data were processed using the <rs type="software">GS FLX</rs> data analysis software v2.3. 
+Minimum overlap length of 40 nucleotides and minimum overlap 
+identity of 90% were used to align the sequencing reads against the 
+Au5 reference sequences. ORFs encoding transporter proteins were 
+verified by capillary Sanger sequencing. </p>
+
+<p>Prism reaction derivation </p>
+
+<p>Spectral bandwidths that effectively drive each photon-utilizing 
+reaction in iRC1080 were determined from published experimental 
+activity spectral data or absorbance data. Effective spectral band-
+widths were defined as the full width half maximum of activity, 
+denoted by color-paired dashed lines in Figure 3A. The effective 
+spectral bandwidths were used to derive stoichiometric coefficients of 
+the prism reactions used to quantitatively represent different light 
+sources from the composition of their published irradiance spectra, 
+converted to photon flux units according to Supplementary Equations </p>
+
+<p>Metabolic network reconstruction of Chlamydomonas 
+RL Chang et al </p>
+
+
+
+<p>&amp; 2011 EMBO and Macmillan Publishers Limited </p>
+
+<p>3 and 4. Coefficients for each of the effective spectral bandwidths were 
+computed based on Equation 1. </p>
+
+<p>C b 
+a ¼ </p>
+
+<p>R b 
+a LðlÞ dl 
+R 750 nm 
+380 nm LðlÞ dl 
+C b </p>
+
+<p>a </p>
+
+<p>LðlÞ 
+a 
+b </p>
+
+<p>¼ 
+¼ 
+¼ 
+¼ </p>
+
+<p>effective bandwidth coefficient 
+photon flux as a function of wavelength 
+effective bandwidth lower limit 
+effective bandwidth upper limit </p>
+
+<p>ð1Þ </p>
+
+<p>Each coefficient represents the ratio of photon flux in the defined 
+effective bandwidth to total visible photon flux. Definite integrals in 
+Equation 1 were approximated using the trapezoidal rule. For each 
+light source, all effective bandwidth coefficients were compiled into a 
+single reaction in the form of Equation 2. </p>
+
+<p>photonVis À! </p>
+
+<p>ðC 306nm 
+281nm Þphoton298 þ ðC 454nm 
+406nm Þphoton437 
+þ ðC 482nm 
+378nm Þphoton438 þ ðC 472nm 
+417nm Þphoton450 
+þ ðC 526nm 
+451nm Þphoton490 þ ðC 666nm 
+608nm Þphoton646 
+þ ðC 685nm 
+661nm Þphoton673 þ ðC 691nm 
+662nm Þphoton680 </p>
+
+<p>ð2Þ </p>
+
+<p>Constraints on prism reaction fluxes (Supplementary Table S6) were 
+derived from the total visible photon flux, the definite integral of the 
+spectrum from 380 to 750 nm. The total experimentally measured 
+emitted visible photon flux was converted to model units of incident 
+photon flux using the values in Supplementary Table S11 and 
+Supplementary Equations 5 and 6. Prism reactions for 11 different 
+light sources (Supplementary Figure S3) were generated. </p>
+
+<p>Random sampling of prism reaction space and 
+significance test </p>
+
+<p>For a given prism reaction, first the sum of the stoichiometric 
+coefficients was calculated, representing the total quantity of 
+metabolically active photons per incident photon from the specified 
+light source. Next, to sample the space of prism reactions, 10 000 
+random prism reactions with the same sum of stoichiometric 
+coefficients were generated and used in growth simulations. In these 
+simulations, input photon flux was constrained to the reported 
+experimental values, generating a set of simulated results (biomass 
+or photosynthetically evolved O 2 flux, depending on the experimental 
+parameter) with one value corresponding to each experimental data 
+point. The Euclidean distance between the sampled and experimental 
+results was calculated for each of the 10 000 randomized prism 
+reactions (Figure 5). The significance of the experimental agreement 
+with simulations reported for a given prism reaction derived directly 
+from analysis of irradiance spectra was established by comparison 
+between the corresponding Euclidean distance and the distribution of 
+distances from the randomly sampled prism reactions. Probability of 
+achieving equal or closer results to experiments by chance was 
+computed as the proportion of smaller values in the randomly sampled 
+distribution of 10 000 distances. </p>
+
+<p>Procedure for efficient LED design </p>
+
+<p>Multiple iterations of FVA were used to maximize growth while 
+minimizing the energy of the sum of individual wavelengths of model 
+photon flux. The ratios of these individual wavelength photon fluxes to 
+total photon flux were set as stoichiometric coefficients for a 
+theoretical maximum-efficiency prism reaction. The Euclidean vector 
+distance was computed (Supplementary Figure S6) between this set of 
+coefficients and prism reaction coefficients calculated for an LED 
+spectrum of the same shape as the experimentally measured 674 nm 
+peak LED but centered at varying wavelengths across the visible 
+spectrum, with a total photon flux equal to the total theoretical 
+maximum-efficiency photon flux. The spectrum corresponding to the 
+minimum distance was taken as the solution and subsequently tested 
+through growth simulation. </p>
+
+<p>Supplementary information </p>
+
+<p>Supplementary information is available at the Molecular Systems 
+Biology website (www.nature.com/msb). </p>
+
+<p>Acknowledgements </p>
+
+<p>We thank Harish Nagarajan for his critical assessment of this work. 
+This research was supported by the Office of Science (Biological and 
+Environmental Research), US Department of Energy, Grant DE-FG02-
+07ER64496 (to JP and KS-A), New York University Abu Dhabi Research 
+funds (to KS-A), and Institute Sponsored Research funds from the 
+Dana-Farber Cancer Institute Strategic Initiative (to CCSB). RLC was 
+supported by the National Science Foundation IGERT training Grant 
+DGE0504645, and EFYH was supported by the Jane Coffin Childs 
+Memorial Fund for Medical Research. 
+Author contributions: RLC wrote the manuscript and developed the 
+light-modeling approach. RLC and AM reconstructed the metabolic 
+network and performed model simulations and analysis. LG, YS and 
+TH performed transcript verification experiments and associated 
+computational analyses. EFYH and SB performed genome functional 
+annotation. WF performed bioreactor growth experiments. B+P, JAP, 
+and KS-A designed the study. </p>
+
+
+
+<p>Metabolic network reconstruction of Chlamydomonas 
+RL Chang et al </p>
+
+<p>&amp; 2011 EMBO and Macmillan Publishers Limited </p>
+
+<p>Molecular Systems Biology 2011 11 </p>
+
+
+
+<p>Metabolic network reconstruction of Chlamydomonas 
+RL Chang et al </p>
+
+
+
+<p>&amp; 2011 EMBO and Macmillan Publishers Limited </p>
+
+
+
+<p>Metabolic network reconstruction of Chlamydomonas 
+RL Chang et al </p>
+
+<p>&amp; 2011 EMBO and Macmillan Publishers Limited </p>
+
+<p>Molecular Systems Biology 2011 13 </p>
+
+</text></tei>

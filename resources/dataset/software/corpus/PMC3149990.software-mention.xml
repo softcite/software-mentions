@@ -1,0 +1,723 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC3149990" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:24+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>Abstract </p>
+
+<p>Ion mobility (IM) is a method that measures the time taken for an ion to travel through a pressurized cell under the influence of a weak electric 
+field. The speed by which the ions traverse the drift region depends on their size: large ions will experience a greater number of collisions with 
+the background inert gas (usually N 2 ) and thus travel more slowly through the IM device than those ions that comprise a smaller cross-section. In 
+general, the time it takes for the ions to migrate though the dense gas phase separates them, according to their collision cross-section (Ω). </p>
+
+<p>Recently, IM spectrometry was coupled with mass spectrometry and a traveling-wave (T-wave) Synapt ion mobility mass spectrometer (IM-
+MS) was released. Integrating mass spectrometry with ion mobility enables an extra dimension of sample separation and definition, yielding 
+a three-dimensional spectrum (mass to charge, intensity, and drift time). This separation technique allows the spectral overlap to decrease, 
+and enables resolution of heterogeneous complexes with very similar mass, or mass-to-charge ratios, but different drift times. Moreover, the 
+drift time measurements provide an important layer of structural information, as Ω is related to the overall shape and topology of the ion. The 
+correlation between the measured drift time values and Ω is calculated using a calibration curve generated from calibrant proteins with defined 
+cross-sections </p>
+
+<p>1 </p>
+
+<p>. </p>
+
+<p>The power of the IM-MS approach lies in its ability to define the subunit packing and overall shape of protein assemblies at micromolar 
+concentrations, and near-physiological conditions </p>
+
+<p>1 </p>
+
+<p>. Several recent IM studies of both individual proteins 
+2,3 and non-covalent protein 
+complexes </p>
+
+<p>4-9 </p>
+
+<p>, successfully demonstrated that protein quaternary structure is maintained in the gas phase, and highlighted the potential of 
+this approach in the study of protein assemblies of unknown geometry. Here, we provide a detailed description of IMS-MS analysis of protein 
+complexes using the Synapt (Quadrupole-Ion Mobility-Time-of-Flight) HDMS instrument (Waters Ltd; the only commercial IM-MS instrument 
+currently available) </p>
+
+<p>10 </p>
+
+<p>. We describe the basic optimization steps, the calibration of collision cross-sections, and methods for data processing and 
+interpretation. The final step of the protocol discusses methods for calculating theoretical Ω values. Overall, the protocol does not attempt to 
+cover every aspect of IM-MS characterization of protein assemblies; rather, its goal is to introduce the practical aspects of the method to new 
+researchers in the field. </p>
+
+<p>Video Link </p>
+
+<p>The video component of this article can be found at http://www.jove.com/video/1985/ </p>
+
+<p>Protocol </p>
+
+<p>The procedure we describe focuses solely on IM-MS analysis of protein complexes. Therefore, we suggest that researchers unacquainted with 
+the field of structural MS refer to the sample preparation steps, instrument calibration and MS and tandem MS optimization procedures described 
+in Kirshenbaum et al. 2009 http://www.jove.com/index/details.stp?ID=1954. In general, this protocol involves low micromolar concentrations of 
+complex (1-20 μM) in a volatile buffer such as ammonium acetate (0.005 -1 M, pH 6-8). Given that 1-2 μl are consumed per nanoflow capillary, 
+we suggest 10-20 μl as a minimum volume, to enable optimization of MS conditions. </p>
+
+<p>Part 1: Acquiring an ion mobility-mass spectrometry spectrum </p>
+
+<p>1. Set the mass spectrometer on the following modes of operation: Mobility-TOF, positive ion acquisition, and V-mode. 
+2. Turn on all gases (API, Trap and IMS). We use N 2 for IM separation, and Ar for the Trap/Transfer. Recommended initial values are 1.5 ml/min 
+for the Trap region, and a gas flow of 24 ml/min for the IMS device. 
+3. Set the m/z acquisition range. For an unknown protein complex, we suggest initial use of a wide mass range, which can then be reduced to 
+the desired values. In parallel, adjust the MS profile for maximum transmission efficiency. For large complexes, the acquisition mass range 
+should be set from 1,000 -32,000 m/z, and the MS profile to Auto. Otherwise, the profile can be set, according to the following chart: </p>
+
+<p>Journal of Visualized Experiments </p>
+
+<p>www.jove.com </p>
+
+<p>Copyright © 2010 Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported 
+License 
+July 2010 | 41 | e1985 | Page 2 of 8 </p>
+
+<p>m/z 
+dwell (%) 
+ramp (%) </p>
+
+<p>960 
+10 
+20 </p>
+
+<p>3200 
+30 
+40 </p>
+
+<p>10667 </p>
+
+<p>4. Check the RF setting and, if necessary, adjust to values appropriate for large protein complexes, thus: </p>
+
+<p>Source 
+Trap 
+IMS 
+Transfer </p>
+
+<p>RF Offset 
+450 
+380 
+380 
+380 </p>
+
+<p>RF Gain 
+0 
+0 
+0 
+0 </p>
+
+<p>RF Limit 
+450 
+380 
+380 
+380 </p>
+
+<p>5. Apply capillary voltage (1,050-1,400 V) and low nanoflow pressure (0.00-0.03 bar). Once spray is initiated, try to reduce the nanoflow 
+pressure to a minimal value. In addition, adjust the position of the capillary, with respect to the cone. 
+6. Adjust the MS acquisition parameters, to acquire a well-resolved MS spectrum: the pressure gradient along the instrument, and the sampling 
+cone as well as the extraction cone, bias, Trap and Transfer potential settings, should all be optimized (detailed in the associated JoVE 
+protocol Kirshenbaum et al. 2009 http://www.jove.com/index/details.stp?ID=1954). Although these parameters are sample-dependent, the 
+conditions we used for acquiring MS spectra of various ion masses, from peptide to protein complexes, are outlined in Table 1, (see also Fig. 
+1). To minimize the activation of the complex try to gradually reduce (in steps of ~ 10 V) the sample cone, Trap and bias voltages without 
+changing the position of the peak. 
+7. Once an optimum mass spectrum is obtained the drift time profile should be adjusted. When analyzing protein assemblies, optimal conditions 
+for both mass and mobility measurements are often incompatible; therefore, it is important to strike the proper balance between the two. 
+Overall, the ion mobility plot should be optimized such that the peaks are distributed over the entire drift time range, and the peak profile 
+is smooth, approaching a Gaussian distribution (Fig. 2A, 2B). Significant peak asymmetry can be related to poor separation of multiple 
+conformations. 
+8. As a general rule, three parameters, T-wave velocity, T-wave height and IMS gas flow rate can be tuned to optimize the mobility separation. 
+Increasing the T-wave velocity will widen the drift time distribution profile, while increased T-wave height values will narrow it. Similarly, 
+increasing the IMS gas flow will shift the drift time profile toward higher values (the minimal IMS gas flow should be 10 ml/min). We suggest 
+leaving two of the three available variables fixed, and optimizing the third until the IM spectrum is well-resolved (Fig. 2B). To this end, set 
+the T-wave velocity and the gas flow to 250 m/s and 24 ml/min, respectively. Then, as a starting point, set the T-wave height to 3 V and, in a 
+stepwise manner, increase it in 1 V increments. In general, larger ions will require higher wave heights. Usually, there is no need to modify 
+the IMS pressure; however, when high bias voltages are required for tuning, reducing the IMS gas will enable a decrease in the bias voltage 
+value and, consequently, a reduction in protein complex activation. Overall, maximal resolution of 10-12 t/Δt can be reached. 
+9. When conditions are not optimized (low T-wave height or high T-wave velocity and/or high IM pressure), the ions will not traverse through the 
+IM device effectively, and their journey may take longer than the time required for the next ion packet to be released into the mobility cell. As 
+a result, a new ion packet will be released from the Trap region before the previous packet has been delivered to the pusher region. This will 
+lead to a 'roll-over' effect, in which the peak observed in the first part of the drift time spectrum is identical to that of the ions in the tailing edge 
+(Fig. 2C). This artifact can be eliminated by increasing the T-wave height, and decreasing T-wave velocity and IMS pressure. In addition, 
+the Trap release time can be adjusted. Moreover, it is important to validate that the Transfer T-wave height is set to at least 5 V. To prevent 
+leakage of ions towards the IMS cell, we recommend that the mobility trap height be kept at maximum levels (30 V). 
+10. Low velocity and high amplitude of Transfer T-waves may lead to the "rippling" of the drift time distribution profile (Fig. 2D). This artifact 
+occurs when the mobility separation of ions (ion arrival/drift time) is not maintained through the Transfer and ToF regions, due to partial 
+synchronization between the pusher frequency and the transfer T-wave velocity. In order to eliminate this effect, either the pusher time or the 
+Transfer T-wave velocity should be adjusted. Since the pusher frequency is related to the mass range, this artifact may reappear when this 
+parameter is changed. T-wave height exerts a minor effect, though its reduction may also help to eliminate ripples. 
+11. Once the aforementioned parameters are optimized, the IM-MS data can be acquired. </p>
+
+<p>Part 2: Screening experimental conditions to ensure mobility measurements of native 
+structures </p>
+
+<p>To achieve highly resolved MS peaks, protein complexes are often activated within the mass spectrometer, to promote the stripping of residual 
+water and buffer components </p>
+
+<p>11 </p>
+
+<p>. However, if the activation energy is increased beyond a threshold value, partial unfolding can be induced forming 
+multiple intermediate states </p>
+
+<p>12 </p>
+
+<p>, which are unlikely to correspond to the native, solution-state structure (Fig. 3A-C). As a result, the drift time peak 
+may be shifted and broadened, reflecting the heterogeneous population of unfolded structures. 
+In order to obtain drift time data consistent with solution-phase structures, it is essential to carefully control the voltages used for accelerating 
+ions, prior to IM separation. Moreover, for high MS resolution it is preferable to increase the Transfer rather than the Trap voltage. As the IM 
+device is positioned, first, followed by the Transfer region and the TOF analyzer, hence, the activation follows the IM measurement and the ions 
+remains unaffected, while the MS accuracy can be increased. </p>
+
+<p>To validate that data acquisition is performed under conditions that maintain the native structure of the complex, it is recommended that data be 
+recorded over a range of experimental and solution conditions, rather than according to a single, optimized set of parameters: </p>
+
+<p>1. Increase capillary and cone voltages in a stepwise manner, while monitoring the effect on the drift time spectrum. 
+2. As in Step 1, increase the Trap collision voltage in a stepwise manner, and acquire data at 10 V intervals. 
+3. To identify the unfolded conformations and assess the acquired data, manually induce dissociation of the protein complex by titrating the 
+sample with acetic acid over a pH range of 2-7, and record the data (Fig. 3B). </p>
+
+<p>Journal of Visualized Experiments </p>
+
+<p>www.jove.com </p>
+
+<p>Copyright © 2010 Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported 
+License 
+July 2010 | 41 | e1985 | Page 3 of 8 </p>
+
+<p>Part 3: Correlating between drift time values and cross-sectional areas </p>
+
+<p>Unlike conventional IM measurements, in which the measured drift time values are linearly related to Ω, in the T-wave IMS system, the cross 
+sectional area is defined by a calibration approach. Thus, rather than an absolute measurement, a relative exponential correlation is generated </p>
+
+<p>between the measured drift times and Ω </p>
+
+<p>1,13 </p>
+
+<p>: </p>
+
+<p>where t D is the measured drift time, and X is the proportion constant that can be extracted from a calibration curve. The calibration is performed 
+by measuring the drift times of ions with known Ω (measured from conventional IM experiments). </p>
+
+<p>1. Drift time measurements are calibrated using denatured proteins equine cytochrome C, horse heart myoglobin and bovine ubiquitin with 
+known collision cross-sections. To this end, solutions of 10 μM in 49/49/2, volume ratio, water/methanol/acetic acid should be prepared 
+(reagents used are outlined in Table 3). 
+2. Acquire IM-MS data for the calibrant proteins under exactly the same instrument conditions used for the target protein or protein complex: </p>
+
+<p>(Part 1). All the voltages and pressure values should be identical, to preserve the IM separation settings. 
+3. For each charge state of the calibrant proteins extract the experimental drift time value (t D ) (described in Part 4). 
+4. </p>
+
+<p>Correct each of the calibrant drift times (t D ) (Table 2) using the following equation: 
+, where m/z is the mass-to-charge 
+ratio of the observed ion, and c is the Enhanced Duty Cycle (EDC) delay coefficient </p>
+
+<p>1 </p>
+
+<p>. Its value, typically between 1.4 and 1.6, is instrument-
+dependent. The EDC value is indicated within the System | Acquisition Settings | Acquisition Setup tab. 
+5. Using Prof. David Clemmer's Cross-Section Database: 
+http://www.indiana.edu/~clemmer/Research/cross%20section%20database/Proteins/protein_cs.htm 
+14 correct each of the calibrant cross-</p>
+
+<p>section for both ion charge state and reduced mass. 
+, where Ω C is the corrected cross-section, Ω is the literature cross-section, z is the ion charge state, m is the molecular weight of the calibrant 
+ion, and M G is the molecular weight of the IM background gas (typically N 2 ). 
+6. Plot In(t D ) against In(Ω C ) (Fig. 4A). 
+7. 
+The resulting curve corresponds to the following equation: 
+The parameters X and A can be extracted by fitting 
+the plot to a linear relationship. The slope X corresponds to the exponential proportion factor and A represents the fit-determined constant. 
+8. </p>
+
+<p>Calculate the fit correlation coefficient r </p>
+
+<p>2 </p>
+
+<p>, using the Pearson's equation: 
+. Acceptable values for r 
+2 are greater 
+than 0.95 (Fig. 4B). A lower correlation coefficient value may be due to: 
+a. Incomplete unfolding of the protein calibrants. This will lead to peak widening due to the heterogeneous assembly of intermediate 
+states. 
+b. In our experience, an aged sample can deteriorate the IM spectra. 
+c. Dissimilar experimental conditions used for the different calibrant proteins. In this case, plotting the data for each protein separately 
+should generate diverse correlation coefficients, though each of them should be higher than 0.95. 
+d. Noisy data and incorrect smoothing and centering of the drift time distribution. 
+e. Calculation error. </p>
+
+<p>9. </p>
+
+<p>Recorrect the calibrant drift time using the determined exponential factor, X, derived in step 7: 
+10. As a validation step, replot Ω C vs. 
+and define the correlation coefficient. Higher values than 0.95 are to be expected. 
+11. </p>
+
+<p>According to the procedure described in Step 4, correct the measured drift time of the target protein or protein complex: 
+12. </p>
+
+<p>Calibrate the drift time of the target protein/protein complex using the exponential factor, X, defined in Step 7: 
+13. Calculate Ω of the target protein/protein complex using the fit-determined constant, A, defined in Step 7: 
+. 
+14. For each experimental condition, Steps 2 to 13 should be repeated. When defining the cross sectional area of the unknown protein or protein 
+complex, we recommend that each experiment be repeated at least three times, and the standard deviation of these triplicate measurements 
+determined. </p>
+
+<p>Journal of Visualized Experiments </p>
+
+<p>www.jove.com </p>
+
+<p>Copyright © 2010 Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported 
+License 
+July 2010 | 41 | e1985 | Page 4 of 8 </p>
+
+<p>Part 4: Defining drift time values </p>
+
+<p>Required software: <rs type="software">MassLynx</rs> and <rs id="software-8" type="software">Driftscope</rs> (<rs corresp="#software-8" type="creator">Waters</rs>). </p>
+
+<p>1. Open the IM-MS spectrum using the Driftscope software. 
+2. From the main menu, select View and uncheck Chromatogram, Drift Time and Spectrum (optional), leaving active only the 2D map displaying 
+drift time vs. m/z. 
+3. From the menu bar, choose Display |Options |Display Editor Panel and adjust Intensity Threshold values to minimize background noise (in 
+most cases, this setting can be defined as Min=30-40% and Max=100% counts). 
+4. Choose Display |2D Map Intensity Scale, and three options will appear: Linear Scale, Log Scale and Square Root Scale. A choice of Log 
+Scale (logarithmic data transform) will compress the intensity color code, and enable the simultaneous appearance of a broad range of 
+intensities (as opposed to the linear and square root options, with which only the most intense peaks will become visible). 
+5. From the toolbar panel, Use Selection Tool button. This option will activate the different selection options, and enable selection of the relevant 
+region within the spectrum. The most precise tool is Enable Region of Interest Selections, by means of which a border may be drawn around 
+the region of interest, thereby excluding all unnecessary data and noise peaks. Likewise, the Orthogonal and Band Selection options are 
+useful, when the region of interest is not surrounded by redundant peaks. 
+6. Once the region of interest is selected, use the Accept Current Selection command to remove unnecessary information. 
+7. Export the data to <rs type="software">MassLynx</rs>, while retaining the drift time information. 
+8. Within <rs type="software">MassLynx</rs>, open the chromatogram of the saved drift time spectrum, and combine the time bins. The corresponding mass spectrum 
+will open automatically. 
+9. Apply the smoothening function by defining the window size and number of smooth parameters (should be tuned specifically for each 
+spectrum, using minimal values). 
+10. Apply baseline subtraction, if necessary. 
+11. Center the spectrum and measure the mass, to validate protein identity and mass accuracy. 
+12. For each charge state, combine the m/z range. The corresponding drift time spectrum will automatically appear. Smooth and center the drift 
+time profile, and define the drift time value by indicating the centroid of each peak. </p>
+
+<p>Part 5: Representative Results </p>
+
+<p>Figure 1. Schematic representation of the Synapt HDMS instrument indicating the major tunable parameters of IMS-MS acquisition. 
+Experimental parameters used for IM-MS measurements are labeled according to their position within the instrument. The ion beam is colored 
+in red, and the pressure in each region is designated using a color code. The panel on the bottom illustrates the potential gradient along the 
+instrument and the potential differences defining the Trap and Transfer collision energies as well as the Bias potential. All potentials read-backs 
+are referenced to the Static Offset voltage which is usually set to 120V. </p>
+
+<p>Journal of Visualized Experiments </p>
+
+<p>www.jove.com </p>
+
+<p>Copyright © 2010 Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported 
+License 
+July 2010 | 41 | e1985 | Page 5 of 8 </p>
+
+<p>Figure 2. Ion mobility arrival time distributions for the Gβυ protein. 
+A. A high T-wave velocity leads to a narrow distribution of the drift time profile. The plot illustrates the arrival time distribution of the 16+ (red), 15+ 
+(green), 14+ (blue), and 13+ (magenta) charge states, as well as the total drift time profile (in black) of the G βυ protein. 
+B. An optimized drift time spectrum with a smooth Gaussian peak shape. Similar color labels as in A. 
+C. A 'roll-over' effect, which occurs when the time taken for ions to traverse the mobility cell is slower than the interval between the injections of 
+new ion packets into the device. As a result, the extended drift time peak appears at the beginning of the spectrum. This effect can be eliminated 
+by increasing the T-wave height, and decreasing T-wave velocity and IMS pressure. 
+D. Artificial 'ripples' are caused when the Transfer T-wave velocity and pusher frequency are partially synchronized. This effect can be overcome 
+by adjusting either the pusher frequency or Transfer T-wave velocity. </p>
+
+<p>Figure 3. The effect of ion activation and partial denaturing conditions on IM-MS spectra of hemoglobin. Plot of drift time versus m/z for 
+the tetrameric hemoglobin complex, using an aqueous solution of 10 mM ammonium acetate (pH=7.6) (A, C) and the addition of 0.1 % acetic 
+acid (B). Data acquired using Trap collision energy voltage of 13 V (A, B) and 35 V (C) Although in all three panels the mass spectrum (projected 
+on the top) looks similar, with a tetrameric charge series centered at 4,000 m/z, the drift time profile (projected on the sides) is different (total 
+drift time distribution is in black, and the 16+ profile is in red). The longer drift time of the partially denatured sample, obtained in B, and the gas-
+phase activated ions, obtained in C, is indicative of some degree of unfolding. This observation illustrates that even though the measured mass 
+corresponds to an intact complex, its solution structure is disrupted. As a consequence, careful control of experimental conditions is required. </p>
+
+<p>Journal of Visualized Experiments </p>
+
+<p>www.jove.com </p>
+
+<p>Copyright © 2010 Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported 
+License 
+July 2010 | 41 | e1985 | Page 6 of 8 </p>
+
+<p>Figure 4. By generating a calibration curve, drift time measurements and collision cross-sections can be correlated. </p>
+
+<p>A. Measured drift time values of the multiple charge states of equine cytochrome C (circles), horse heart myoglobin (triangles) and bovine 
+ubiquitin (squares) were plotted against literature Ω values corrected for both ion charge state and reduced mass. The fit yields a linear function 
+corresponding to: ln(Ω C )=Xln(t D' )+A. The determined exponential factor (X), fit-determined constant (A), and correlation coefficient are displayed 
+on the plot for data acquired at a T-wave velocity of 350 m/s, and a static wave height of 11 V. B. A histogram of the correlation coefficient 
+distributions obtained from 10 consecutive calibration experiments. </p>
+
+<p>Protein sample / 
+Technical parameters 
+GluFibrino-
+peptide 
+monomer 
+1.6 kDa </p>
+
+<p>Myoglobin 
+monomer 
+17 kDa </p>
+
+<p>Hemoglobin 
+tetramer 
+67 kDa </p>
+
+<p>Transferrin 
+monomer 
+80 kDa </p>
+
+<p>GroEL 
+14-mer 
+801 kDa </p>
+
+<p>Backing pressure, 
+mBar 
+4.4 
+5.0 
+5.1 
+5.1 
+6.5 </p>
+
+<p>Trap pressure, mBar 1.6x10 </p>
+
+<p>-2 </p>
+
+<p>2.4x10 </p>
+
+<p>-2 </p>
+
+<p>2.4x10 </p>
+
+<p>-2 </p>
+
+<p>2.6x10 </p>
+
+<p>-2 </p>
+
+<p>2.8x10 </p>
+
+<p>-2 </p>
+
+<p>IMS Pressure, mBar 4.4x10 </p>
+
+<p>-1 </p>
+
+<p>4.4x10 </p>
+
+<p>-1 </p>
+
+<p>4.4x10 </p>
+
+<p>-1 </p>
+
+<p>4.4x10 </p>
+
+<p>-1 </p>
+
+<p>4.2x10 </p>
+
+<p>-1 </p>
+
+<p>Sampling cone 
+voltage, V 
+46 
+80 
+80 
+80 
+118 </p>
+
+<p>Extraction cone 
+voltage, V 
+1.7 
+1 
+1 
+1 
+3 </p>
+
+<p>Bias voltage, V 
+20 
+20 
+25 
+25 
+50 </p>
+
+<p>Trap collision energy, 
+V 
+20 
+15 
+15 
+15 
+80 </p>
+
+<p>Transfer collision 
+energy, V 
+5 
+12 
+12 
+12 
+15 </p>
+
+<p>Table 1. Experimental conditions used for analyzing macromolecules. </p>
+
+<p>Standard Protein 
+Molecular Mass (m) 
+Charges (z) 
+m/z 
+Collision Cross-Section 
+(in 2) </p>
+
+<p>Cytochrome C 
+12213 
+10 
+1222.3 
+2226 </p>
+
+<p>11 
+1111.3 
+2303 </p>
+
+<p>12 
+1018.8 
+2335 </p>
+
+<p>13 
+940.5 
+2391 </p>
+
+<p>14 
+873.4 
+2473 </p>
+
+<p>15 
+815.2 
+2579 </p>
+
+<p>16 
+764.3 
+2679 </p>
+
+<p>17 
+719.4 
+2723 </p>
+
+<p>18 
+679.5 
+2766 </p>
+
+<p>Journal of Visualized Experiments </p>
+
+<p>www.jove.com </p>
+
+<p>Copyright © 2010 Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported 
+License 
+July 2010 | 41 | e1985 | Page 7 of 8 </p>
+
+<p>Myoglobin 
+16952 
+11 
+1542.1 
+2942 </p>
+
+<p>12 
+1413.7 
+3044 </p>
+
+<p>13 
+1305.0 
+3136 </p>
+
+<p>14 
+1211.9 
+3143 </p>
+
+<p>15 
+1131.1 
+3230 </p>
+
+<p>16 
+1060.5 
+3313 </p>
+
+<p>17 
+998.2 
+3384 </p>
+
+<p>18 
+942.8 
+3489 </p>
+
+<p>19 
+893.2 
+3570 </p>
+
+<p>20 
+848.6 
+3682 </p>
+
+<p>21 
+808.2 
+3792 </p>
+
+<p>22 
+771.6 
+3815 </p>
+
+<p>Ubiquitin 
+8565 
+8 
+1071.6 
+1442 </p>
+
+<p>8 
+1071.6 
+1622 </p>
+
+<p>9 
+952.7 
+1649 </p>
+
+<p>10 
+857.5 
+1732 </p>
+
+<p>11 
+779.6 
+1802 </p>
+
+<p>Table 2. Calibrant proteins and their collision cross sections values determined by conventional IMS measurments </p>
+
+<p>14 </p>
+
+<p>. </p>
+
+<p>Devices 
+Company 
+Catalogue number </p>
+
+<p>Synapt HDMS-32K RF generator 
+Waters Ltd. </p>
+
+<p>P-97 Flaming-Brown micropipette puller 
+Sutter Instruments 
+P-97 </p>
+
+<p>Sputter coater 
+Electron Microscopy Sciences 
+EMS550 </p>
+
+<p>Binocular microscope 
+Nikon </p>
+
+<p>Reagents 
+Company 
+Catalogue Number </p>
+
+<p>Ammonium Acetate 
+Sigma-Aldrich 
+Sigma, A2706 </p>
+
+<p>CsI 99.999% 
+Sigma-Aldrich 
+Aldrich, 203033 </p>
+
+<p>Methanol 
+Sigma-Aldrich 
+Fluka, 34966 </p>
+
+<p>Acetic Acid 
+Fisher Scientific 
+AC12404 </p>
+
+<p>Equine myoglobin (from horse heart) 
+Sigma-Aldrich 
+M1882 </p>
+
+<p>Equine cytochrome c (from horse heart) 
+Sigma-Aldrich 
+C-2506 </p>
+
+<p>Bovine ubiquitin (from red blood cells) 
+Sigma-Aldrich 
+U6253 </p>
+
+<p>Hemoglobin 
+Sigma-Aldrich 
+H2625 </p>
+
+<p>Gas 
+Comments </p>
+
+<p>Nitrogen, 99.999% pure 
+8 cubic meter cylinder </p>
+
+<p>Argon, 99.999% pure 
+8.8 cubic meterscylinder </p>
+
+<p>Table 3. Reagents and equipment. </p>
+
+<p>Discussion </p>
+
+<p>The protocol described here enables to define the collision cross section of proteins or protein complexes with an unknown three dimensional 
+structure, with the aim of providing information on their overall shape, subunit packing and topology. To this end once collision cross section 
+values are depicted it is necessary to convert these values to structural details. This process requires additional experimental efforts as well as 
+computational analysis, which are briefly discussed below. </p>
+
+<p>To begin with, it is recommended to analyze proteins or protein complexes with known structures. These measurements can provide a useful 
+quality control of the methodology and will enable accuracy assessment of the acquisition parameters by comparing theoretical and measured Ω 
+values. The theoretical cross sectional areas can be calculated from the crystal structure coordinates using the <rs type="software">MOBCAL</rs> 
+15,16 software, which is </p>
+
+<p>Journal of Visualized Experiments </p>
+
+<p>www.jove.com </p>
+
+<p>Copyright © 2010 Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported 
+License 
+July 2010 | 41 | e1985 | Page 8 of 8 </p>
+
+<p>an open source FORTRAN based software allowing code editing according to the operator needs. For running such calculations it is required to 
+modify the program such that the number of iterative calculations performed per input structure is increased and that coordinate files containing 
+large number of atoms are accepted </p>
+
+<p>1 </p>
+
+<p>. </p>
+
+<p>An IM-MS strategy for defining topological arrangements of subunits within multicomponent assemblies has been recently proposed </p>
+
+<p>4,6 </p>
+
+<p>. The 
+method involves the monitoring of dissociation pathways of protein assemblies to smaller components. This dissociation is achieved through 
+controlled adjustment of solution phase conditions, which gives rise to a distribution of subcomplexes reflective of the "building blocks" of the 
+assemblies. The simultaneous measurement of Ω values of both the intact complex and disassembly products generates structural restraints 
+which are then used for calculating topological models of the protein complexes. The basic assumption underlying this methodology is that the 
+generated subcomplexes retain their native-like confirmations, and indeed recent studies have demonstrated that the solution structure of the 
+disassembly products is maintained and no major rearrangement in either solution or gas phases have occurred </p>
+
+<p>4,6 </p>
+
+<p>. </p>
+
+<p>The last step in the assignment of quaternary structure to gas-phase protein complex ions is fitting the collision cross section values to computer 
+generated models. Modeling approaches are employed in order to explore the different possible topological arrangements of subunits and their 
+in silico Ω values are calculated and compared to the experimental ones. Currently only a few computational approaches are used, like the 
+spheretype coarse-grained method that approximates the diameter of subunits </p>
+
+<p>1,8 </p>
+
+<p>. On the whole, this field is still in its early years and further 
+development is required to make this approach generic, and applicable to a wide range of complexes. </p>
+
+<p>Disclosures </p>
+
+<p>No conflicts of interest declared. </p>
+
+<p>Acknowledgements </p>
+
+<p>The authors thank the Sharon group members for their critical review, and for their contributions to the manuscript. We are grateful for the 
+support of the Morasha and Bikura Programs, the Israel Science Foundation (Grant Nos. 1823/07 and 378/08), the Josef Cohn Minerva Center 
+for Biomembrane Research, the Chais Family Fellows Program for New Scientists, the Abraham and Sonia Rochlin Foundation; the Wolfson 
+Family Charitable Trust; the Helen and Milton A. Kimmelman Center for Biomolecular Structure and Assembly; the estate of Shlomo and Sabine 
+Beirzwinsky; Meil de Botton Aynsley, and Karen Siem, UK. </p>
+
+
+
+</text></tei>

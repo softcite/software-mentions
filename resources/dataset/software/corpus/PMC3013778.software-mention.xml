@@ -1,0 +1,439 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC3013778" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:27+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>ABSTRACT </p>
+
+<p>TADB (http://bioinfo-mml.sjtu.edu.cn/TADB/) is an 
+integrated database that provides comprehensive 
+information about Type 2 toxin-antitoxin (TA) loci, 
+genetic features that are richly distributed through-
+out bacterial and archaeal genomes. Two-gene and 
+much less frequently three-gene Type 2 TA loci code 
+for cognate partners that have been hypothesized or 
+demonstrated to play key roles in stress response, 
+bacterial physiology and stabilization of horizontally 
+acquired genetic elements. TADB offers a unique 
+compilation of both predicted and experimentally 
+supported Type 2 TA loci-relevant data and current-
+ly contains 10 753 Type 2 TA gene pairs identified 
+within 1240 prokaryotic genomes, and details of 
+over 240 directly relevant scientific publications. A 
+broad range of similarity search, sequence align-
+ment, genome context browser and phylogenetic 
+tools are readily accessible via TADB. We propose 
+that TADB will facilitate efficient, multi-disciplinary 
+and innovative exploration of the bacteria and 
+archaea Type 2 TA space, better defining presently 
+recognized TA-related phenomena and potentially 
+even leading to yet-to-be envisaged frontiers. The 
+TADB database, envisaged as a one-stop shop 
+for Type 2 TA-related research, will be maintained, 
+updated and improved regularly to ensure its 
+ongoing maximum utility to the research 
+community. </p>
+
+<p>Bacterial and archaeal toxin-antitoxin (TA) loci, typically 
+containing two but occasionally three tandem genes, code </p>
+
+<p>for cognate partners that have been hypothesized or 
+demonstrated to play key roles in stress response, bacterial 
+physiology and stabilization of horizontally acquired 
+genetic elements (1,2). The toxin genes invariably code 
+for proteins, while matching antitoxin genes code for 
+either antisense RNA or antitoxin proteins, resulting in 
+classification as Type 1 or Type 2 TA loci, respectively. 
+To date numerous phylogenetically and functionally 
+distinct Type 2 TA systems have been identified through 
+experimental and bioinformatics studies. In particular, 
+since the advent of the genomics era it has become abun-
+dantly clear that Type 2 TA loci are richly distributed 
+throughout the genomes of almost all free-living bacteria 
+and archaea (3-7). Individual bacterial and archael 
+genomes may harbor between 0 and &gt;50 TA loci, with 
+the vast majority encoding at least one TA locus. Con-
+sistent with the focus of this study, all further references 
+within this report to 'TA' loci/genes/proteins refer solely to 
+corresponding counterparts in 'Type 2 TA' systems. 
+TA toxin genes code for stable toxins that target either 
+DNA replication or translation and these toxins are 
+neutralized by short-lived protein antitoxins. As a 
+general model for TA systems, the short-lived nature of 
+the antitoxin ensures that cells which lose a TA locus and 
+thus no longer produce the cognate 'immunity' antitoxin 
+protein become susceptible to the stable toxin that has 
+outlived the presence of its coding gene, resulting 
+in toxin-mediated killing of the cell (2). Hence, prokary-
+otic organisms harboring TA loci are considered by some 
+investigators to be 'addicted' to their native repertoire of 
+TA loci. When present on plasmids and other horizontally 
+acquired elements, TA systems are frequently viewed as 
+'selfish DNA' as many of these addiction systems have 
+been shown to promote post-segregational killing of cells 
+that have lost TA-encoding mobile genetic elements (8). A 
+few TA loci have also been shown to confer within-host 
+competitive advantage of the TA-encoding plasmid </p>
+
+<p>*To whom correspondence should be addressed. Tel: +86 21 62932943; Fax: +86 21 62932418; Email: hyou@sjtu.edu.cn </p>
+
+<p>D606-D611 Nucleic Acids Research, 2011, Vol. 39, Database issue 
+Published online 6 October 2010 
+doi:10.1093/nar/gkq908 </p>
+
+<p>ß The Author(s) 2010. Published by Oxford University Press. 
+This is an Open Access article distributed under the terms of the Creative Commons Attribution Non-Commercial License (http://creativecommons.org/licenses/ 
+by-nc/2.5), which permits unrestricted non-commercial use, distribution, and reproduction in any medium, provided the original work is properly cited. </p>
+
+<p>against other host permissive plasmids (9). In addition, 
+chromosomally encoded TA pairs have also been shown 
+or postulated to play multiple other functions. These 
+systems can act to stabilize large horizontally acquired 
+chromosomal regions, such as integrons, by selecting 
+against their loss (10). TA pairs also provide immunity 
+to the host cell from the same or related toxin encoded 
+on other co-resident mobile genetic elements, thus acting 
+as anti-addiction modules by allowing for the loss of one 
+or more 'redundant' anti-toxin gene and its carrier mobile 
+genetic element (2,11). A major area of active research in 
+the TA field relates to a postulated regulatory role in bac-
+terial stress physiology and the formation of dormant or 
+'persister' cells. Persister cells are involved in antibiotic 
+resistance and pathogenicity in Mycobacterium tubercu-
+losis and several other important human pathogens 
+(2,12). In Escherichia coli, persister cells can be formed 
+by fluctuations in the expression of the HipA toxin, 
+encoded by the hipBA TA tandem genes (13,14). 
+Expression of HipA over a certain threshold in small 
+numbers of cells causes dormancy (14). This subset of 
+dormant cells is able to survive antibiotics that are 
+active against growing cells, thus allowing the infecting 
+organism to survive an antimicrobial assault and regener-
+ate in time from a small number of surviving persister 
+cells. Thus TA systems may well contribute towards sto-
+chastic variation within the population, gearing up indi-
+vidual subsets of organisms distinctly to favor survival of 
+the population itself in the face of a likely wide diversity of 
+unpredictable environmental, competitive and hostile 
+challenges ahead. 
+Given the dramatic pace of expansion in experimental 
+and bioinformatics data pertaining to TA systems in the 
+last 10 years and the likely impending avalanche triggered 
+by next-generation sequencing-facilitated prokaryotic-
+and metagenomic-sequencing projects, we have created a 
+<rs type="software">PostgreSQL</rs> database of Type 2 TA systems, known as 
+TADB (http://bioinfo-mml.sjtu.edu.cn/TADB/), that 
+provides for ready access, analysis, manipulation and ex-
+ploitation of this invaluable biological information. We 
+propose that TADB should serve as a 'one-stop-shop' 
+for all Type 2 TA data sets and resources and are confi-
+dent that in time it will facilitate efficient, 
+multi-disciplinary and innovative exploration of the 
+bacteria and archaea TA space, further defining presently 
+recognized phenomena and potentially even leading to 
+yet-to-be envisaged frontiers. </p>
+
+<p>MATERIALS AND METHODS </p>
+
+<p>As of 30 July 2010, TADB contains 10 753 type 2 TA gene 
+pairs identified within 1240 genome sequences represen-
+tative of 962 strains of phylogenetically diverse bacteria 
+and archaea. The data in TADB are derived from compu-
+tationally predicted data sets and/or reports of experimen-
+tally validated TA genes. The <rs type="software">BLASTP</rs>-identified 921 TA 
+loci present in 147 sequenced genomes reported by Gerdes 
+and co-workers (3,7) were first uploaded and classified 
+into eight TA families. Next, the 5806 TA loci found in 
+604 genomes which had been assigned to 44 conserved TA </p>
+
+<p>domain pairs by Makarova et al. (4) were archived in 
+TADB. The database was then further complemented 
+with the data set of <rs type="software">RASTA-Bacteria</rs> predicted TA 
+loci identified in 883 annotated genomes. The <rs type="software">RASTA-
+Bacteria</rs> algorithm utilizes <rs type="software">RPSBLAST</rs> search and 
+typical characteristics of TA loci, such as a two-gene, 
+co-directed module coding for small proteins, to identify 
+TA hits (6). <rs type="software">RASTA-Bacteria</rs> TA pair hits with one score 
+&gt;70% and the other &gt;60% were recorded by TADB, this 
+strict cut-off yields broadly reliable TA candidates (6). 
+Subsequently, the three data sets mentioned above were 
+compared to ensure that only de-duplicated entries were 
+included in TADB; identical TA loci from identical strains 
+were eliminated. 
+In addition, we have identified further examples of 
+known or putative TA loci by searching PubMed using 
+the search terms 'toxin AND antitoxin' and manually in-
+specting all PubMed hits. Supplementary TA loci 
+identified by this literature search strategy included six 
+TA pairs, absent from the first three data sets mentioned 
+above, in M. tuberculosis H37Rv (NC_000962) that had 
+recently been (12). At present, TADB contains details of 
+106 experimentally validated TA loci. Significantly, text 
+mining has identified a further three TA families and 
+three three-component TA families that belong to more 
+recently identified TA families that would not be detected 
+by the current version of <rs type="software">RASTA-Bacteria</rs>. Our TADB 
+database now includes members of 11 two-component 
+and 3 three-component TA families. These TA families 
+were classified based on toxin protein sequence similarity 
+and tertiary structure, as described in the reviews by 
+Gerdes et al. (1) and Van Melderen and Saavedra De 
+Bast (2) (See http://bioinfo-mml.sjtu.edu.cn/TADB/ 
+Introduction.html for more details). We have also classi-
+fied TADB entries by a second classification system based 
+on identification of TA pairs sharing cognate TA domains 
+and independent of wider protein-level similarity as sug-
+gested recently by Makarova et al. (4), yet again offering 
+the potential for future enhanced genome data mining and 
+further expansion of the TADB database. TADB is 
+expected to grow dramatically given next-generation 
+sequencing-facilitated rapid acceleration in prokaryote-
+focused whole genome sequencing projects. As more in-
+formation about the TA loci becomes available, the 
+database will be expanded and improved accordingly. 
+TADB is implemented as a <rs type="software">PostgreSQL</rs> relational 
+database. The ontology-based Chado schema (15) was 
+employed to house annotations and sequences of 1000 
+prokaryotic genomes which had been downloaded from 
+the NCBI Refseq archive (16). A second customized 
+schema was designed to organize the available experimen-
+tal and in silico analyses data and references relating to TA 
+loci reported in the literatures. TADB runs on a <rs type="software">Linux</rs> 
+platform with the <rs type="software">Apache</rs> web-server. Web interfaces 
+were developed using <rs type="software">HTML</rs>, <rs type="software">CSS</rs> and <rs type="software">JavaScript</rs>. The 
+majority of data pipelines were developed with <rs type="software">PHP</rs> and 
+<rs type="software">Perl</rs>. In addition, the following freely available compo-
+nents were employed: (i) genome browser <rs type="software">Gbrowse</rs> (17); 
+(ii) circular genome visualization tool <rs type="software">CGview</rs> (18); 
+(iii) multiple sequence alignment and visualization tools, 
+<rs type="software">MUSCLE</rs> (19) and <rs type="software">Jalview</rs> (20); (iv) primer design tool </p>
+
+<p>Nucleic Acids Research, 2011, Vol. 39, Database issue D607 </p>
+
+<p>Primer3Plus (21); (v) <rs type="software">IslandViewer</rs> (database of genomic 
+islands) (22); (vi) dndDB (database of DNA backbone 
+phosphorothioation) (23); (vii) ACLAME database 
+(A CLAssification of genetic Mobile Elements) (24); 
+(viii) GOLD database of genome sequencing projects (25). </p>
+
+<p>RESULTS AND DISCUSSION </p>
+
+<p>TADB provides a flexible and biologist-friendly 
+web-interface. It allows users to view an entire genome's 
+TA locus repertoire, color coded by TA classification, 
+within the context of the whole replicon and to access 
+individual pages dedicated to each TA locus pair, toxin 
+and antitoxin as required. The TADB homepage contains 
+the following interfaces: 'Home', 'Browse' (browse by 
+organism, TA family or TA conserved domains), 
+'Search' (search by species, TA family, gene or protein), 
+'Tools' (gene/protein sequence BLAST against TADB), 
+'Download' (TA gene/protein sequences), 'References' 
+(literatures relating to TA loci), 'Introduction' (description 
+of the toxin protein-based TA family classification system 
+and the TA domain pair-based classification system), 
+'Submission' (report new TA loci to TADB), 'Links' and 
+'Contact'. </p>
+
+<p>TADB browse module </p>
+
+<p>At the heart of TADB is the 'Browse by organism' page 
+that provides a hyperlinked organized catalog of over 
+900 prokaryotic genomes with TA systems identified by 
+one of the above-mentioned strategies. TADB allows the 
+users to view genomic maps flagged by hyperlinked TA loci 
+color-coded by TA family to provide a genome-scale view 
+TA locus repertoires. In addition, users can access individ-
+ual pages dedicated to each TA locus pair, toxin and 
+antitoxin as required. As an example, TA loci in 
+Geobacter uraniireducens Rf4 (NCBI Refseq accession no. 
+NC_009483) were analysed (Figure 1). Geobacter 
+uraniireducens Rf4 is a Gram negative Delta 
+Proteobacteria which can reduce uranium using acetate 
+and other organic acids (Supplementary Figure S3C). 
+Recently G. uraniireducens has been used experimentally 
+in bioremediation of metal-contaminated subsurface envir-
+onments (26). Tabulated (Figure 1A) and graphically dis-
+played (Figure 1B) outputs of the 74 putative TA pairs with 
+conserved TA domains (4) in G. uraniireducens Rf4 are as 
+shown. In addition, a further eight putative TA loci pre-
+dicted by <rs type="software">RASTA-Bacteria</rs> (6) are also included in these 
+outputs. The genomic context of a selected TA locus is 
+readily investigated further by using <rs type="software">Gbrowse</rs>, as shown 
+for the putative TA locus Gura_2469-Gura_2470 (Figure 
+1D). The putative toxin protein (yet to be experimentally 
+characterized), Gura_2470, contains a MNT (minimal 
+nucleotidyltransferase) domain, while its cognate putative 
+antitoxin, Gura_2469, harbors a HEPN (higher eukaryotes 
+and 
+prokaryotes 
+nucleotide-binding) 
+domain 
+(Supplementary Figure S3D) (4). Equivalent domain-level 
+data are available for 12 other G. uraniireducens Rf4 
+putative TA pairs archived within TADB (Supplementary 
+Figure S3). Interestingly, a second putative TA pair 
+Gura_2467-Gura_2468 (4) is located a short distance </p>
+
+<p>upstream of the Gura_2469-Gura_2470 TA pair. This 
+second toxin, Gura_2467, contains a RES domain 
+(COG5654), which contains three highly conserved polar 
+groups (arginine, glutamate and serine) that could form an 
+active site. Its matching antitoxin, Gura_2468, contains an 
+Xre family HTH (helix-turn-helix) domain (COG5642). 
+Remarkably, the two tandem putative TA loci are located 
+within a single 18-kb dnd island, details of which are 
+archived within dndDB (Figure 1D) (23). Based on avail-
+able data, the G. uraniireducens Rf4 dnd gene cluster 
+(Gura_2472-2476) is likely to code for enzymes required 
+for sequence-specific phosphorothioation of the DNA 
+backbone (27). Consistent with a foreign origin, this 
+18-kb dnd island exhibits a lower G+C content (51%) 
+than the genome average (54%) and codes for two likely 
+transposase proteins (Gura_2461 and Gura_2462). 
+Gura_2466, one of the island borne genes that lies close to 
+the two TA loci, codes for an unusual 4-oxalocrotonate 
+tautomerase. This protein possesses one of the smallest 
+enzyme subunits known (28). Bacteria belonging to the 
+Geobacter genus are often the predominant species in a 
+wide diversity of subsurface sediments under metal-
+reducing conditions (29). Given the abundance of phylo-
+genetically diverse and functionally distinct TA loci within 
+G. uraniireducens Rf4, it would be tempting to speculate 
+that cumulative acquisition of TA loci and/or associated 
+physically-linked mobile genetic DNA directly contributed 
+to the environmental success and hardiness of Geobacter. 
+Using the 'Browse by TA family' link (Supplementary 
+Figure S1), users can retrieve the full list of 11 
+two-component and 3 three-component TA families that 
+encompass the full set of current TADB entries that have 
+to date been mapped to a specific family (Supplementary 
+Figure S2). The TA family classification system used is 
+based on that described in the reviews by Gerdes et al. 
+(1) and Van Melderen and Saavedra De Bast (2). As of 
+now, 949 TA loci in 159 genomes have been assigned into 
+these 14 TA families. Similarly, via the 'Browse by TA 
+related domain' link (Supplementary Figure S3), the 
+5806 TA loci found in 604 genomes reported by 
+Makarova et al. (4) have been organized into the 44 TA 
+domain pair groupings. </p>
+
+<p>TADB search options and tools </p>
+
+<p>TADB offers several search tools with varied options. 
+Through the 'Search' page, users can retrieve a specific 
+object(s) in the TADB database by the following 
+categories: species or genus, TA family, gene or protein. 
+Via the 'Tools' page, users are able to blast a query 
+sequence using <rs id="software-26" type="software">WU-BLAST</rs> <rs corresp="#software-26" type="version-number">2.0</rs> (<rs corresp="#software-26" type="creator">W. Gish</rs>, personal com-
+munication) against TADB to find and visualize potential 
+homologous matches. A NCBI <rs type="software">RPSBLAST</rs> (Reverse 
+PSI-BLAST) (30) interface that relies on a position 
+specific scoring matrix to identify potential toxin or anti-
+toxin domains in a user-supplied protein sequence is also 
+provided. </p>
+
+<p>TADB reference module </p>
+
+<p>The TADB reference section provides publication details 
+of papers relating to TA systems that have been identified </p>
+
+<p>D608 Nucleic Acids Research, 2011, Vol. 39, Database issue </p>
+
+<p>Figure 1. An overview of TADB data sets and outputs using the G. uraniireducens Rf4 (NC_009483) TA locus-rich genome as an example. (A) A 
+selected sample of the 74 TA domain pairs identified in this organism by Makarova et al. (4), plus another eight putative TA pairs predicted by 
+<rs type="software">RASTA-Bacteria</rs> (6) alone. (B) A segment of the circular genome map of G. uraniireducens Rf4 generated using <rs type="software">CGview</rs> (18) showing TA loci in 
+color code by TA family and TA domain pair. (C) A partial view of the features and sequence of the putative toxin gene Gura_2470 as shown by 
+TADB. Hyperlinks to NCBI Refseq Project, UniProtKB, PDB and/or KEGG are provided. An integrated version of <rs type="software">Primer3Plus</rs> (21) is available to 
+facilitate design of PCR primers and selected TADB items can be searched against the ACLAME database of mobile genetic elements (24) using 
+<rs type="software">Blast</rs> via a single link. (D) A schematic view of the wider genomic context of the putative TA locus Gura_2469-Gura_2470 using <rs type="software">Gbrowse</rs> (17). See 
+text for details of the utility TADB-facilitated localized genome browsing strategy as highlighted by the example of the Gura_2469-Gura_2470 locus. </p>
+
+<p>Nucleic Acids Research, 2011, Vol. 39, Database issue D609 </p>
+
+<p>by text mining the NCBI PubMed database. Direct links 
+to matching PubMed entries are also offered. At present 
+this resource contains records of over 240 directly relevant 
+scientific publications. This reference collection will be 
+updated on a monthly basis with new entries being 
+subject to subsequent manual curation and organization 
+in a timely manner. The TADB reference collection has 
+been sorted by the following headings: experimental 
+studies, in silico analysis, protein structure data 
+(Supplementary Figure S2C). TADB links the reviewed 
+literatures to relevant TA loci, TA family, toxin domain, 
+antitoxin domain and species pages as indicated by the 
+corresponding thumbnail icons. The TADB reference 
+collection is also searchable by TA family, author, title, 
+journal, year, PubMed ID and matching abstracts can be 
+subjected to standard word searches. This provides an 
+easily accessible literature resource that has been subjected 
+to both text mining and manual curation. </p>
+
+<p>Future directions </p>
+
+<p>As future developments, we will shortly be updating the 
+records of experimentally verified TA loci with more func-
+tional information such as details of toxin targets, mech-
+anisms of action of antitoxins, promoter, Shine-Dalgarno, 
+terminator and identified TA loci regulators. Comparative 
+analysis tool will also be incorporated into TADB to fa-
+cilitate large scale synteny mapping of chromosomally 
+encoded TA loci and their associated genomic islands. 
+We are also exploring a pipeline, including the use of 
+<rs type="software">RPSBLAST</rs>, to implement automated searches of 
+annotated or unannotated genome sequences for presently 
+undiscovered potential members of the TADB-recorded 
+families. </p>
+
+<p>CONCLUSION </p>
+
+<p>We envisage an evolving resource that maintains a 
+growing variety of TA loci related data extracted and 
+curated from experimental literature, submitted directly 
+by users and derived by increasingly sophisticated bio-
+informatics analyses of bacterial and archaeal DNA, 
+RNA and protein sequences. The increasing abundance 
+of omics data will undoubtedly drive major growth of 
+TADB. A broad range of similarity search, sequence 
+alignment, genome context browser and phylogenetic 
+tools are readily accessible to allow for user-directed in-
+terrogation of the database, examination of user-supplied 
+sequences and other individualized directions of research. 
+We propose that a unified resource such as TADB will 
+facilitate efficient, multidisciplinary and innovative inves-
+tigation of a wide range of aspects relating to prokaryotic 
+TA systems. Studies of this nature are undoubtedly of 
+major interest to many researchers given the complex 
+genetic, evolutionary, biochemical, physiological and 
+cellular processes frequently at the heart of operations of 
+chromosome-and plasmid-encoded TA systems in diverse 
+host organisms. </p>
+
+<p>SUPPLEMENTARY DATA </p>
+
+<p>Supplementary Data are available at NAR Online. </p>
+
+<p>ACKNOWLEDGEMENTS </p>
+
+<p>We are grateful to two anonymous referees for their 
+constructive suggestions. </p>
+
+<p>FUNDING </p>
+
+<p>National Natural Science Foundation of China; the 973 
+program, Ministry of Science and Technology of China; a 
+Royal Society-National Natural Science Foundation of 
+China International Joint Project grant 2007/R3 (to K.R. 
+and Z.D.); the Chen Xing Young Scholars Programme, 
+Shanghai Jiaotong University (to H.-Y.O.); an Action 
+Medical Research grant SP4255 (to K.R.); E.M.H.'s 
+post was part-funded by an Innovation Fellowship; East 
+Midlands Development Agency grant (to K.R.). Funding 
+for open access charge: National Natural Science 
+Foundation of China. </p>
+
+<p>Conflict of interest statement. None declared. </p>
+
+
+
+<p>Nucleic Acids Research, 2011, Vol. 39, Database issue D611 </p>
+
+</text></tei>

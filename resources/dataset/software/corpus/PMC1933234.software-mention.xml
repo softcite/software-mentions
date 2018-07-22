@@ -1,0 +1,404 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC1933234" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:29+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>ABSTRACT </p>
+
+<p>Clustered regularly interspaced short palindromic 
+repeats (CRISPRs) constitute a particular family of 
+tandem repeats found in a wide range of prokaryotic 
+genomes (half of eubacteria and almost all archaea). 
+They consist of a succession of highly conserved 
+regions (DR) varying in size from 23 to 47 bp, 
+separated by similarly sized unique sequences 
+(spacer) of usually viral origin. A CRISPR cluster is 
+flanked on one side by an AT-rich sequence called 
+the leader and assumed to be a transcriptional 
+promoter. Recent studies suggest that this struc-
+ture represents a putative RNA-interference-based 
+immune system. Here we describe CRISPRFinder, a 
+web service offering tools to (i) detect CRISPRs 
+including the shortest ones (one or two motifs); 
+(ii) define DRs and extract spacers; (iii) get the 
+flanking sequences to determine the leader; 
+(iv) blast spacers against Genbank database and 
+(v) check if the DR is found elsewhere in 
+prokaryotic sequenced genomes. CRISPRFinder is 
+freely accessible at http://crispr.u-psud.fr/Server/ 
+CRISPRfinder.php. </p>
+
+<p>Genomic structures corresponding to CRISPRs were 
+observed first in 1987 in Escherichia coli (1) and were 
+subsequently reported in other organisms under different 
+names [TREP (2), SRSR (3,4), DRVs (5), LCTR (6), 
+SPIDR (7)] until the CRISPR acronym was proposed by 
+Jansen et al. (8). The direct repeat sequences carry in 
+general a low level of palindromic symmetry; they are 
+remarkably well conserved within a species (up to 248 
+exact copies in Verminephrobacter eiseniae EF01-2). 
+However, one of the flanking DRs is frequently truncated 
+or diverged (see Supplementary Data). The DR size varies 
+from 24 to 47 bp whereas the spacer sequence is generally 
+within the range of 0.6-2.5Â the DR size. The originality 
+of spacers is that they apparently derive from conjugative </p>
+
+<p>plasmids or bacteriophages (2,9-11). A prokaryotic 
+genome may harbour up to 16 CRISPR clusters with the 
+same or a different DR. In a genome, a single CRISPR is 
+generally associated with a family of genes called cas for 
+CRISPR-associated (8,12), encoding proteins showing 
+functional similarity with components of the eukaryotic 
+RNA interference (RNAi) systems (13). In addition, it was 
+demonstrated in two archaea, Archaeoglobus fulgidus (14) 
+and Sulfolobus solfataricus (15), that the CRISPR locus 
+is transcribed into small RNAs (smRNA) probably 
+from one of the flanking regions, the leader, acting as a 
+promoter. These observations and the viral origin 
+of spacers have led to the hypothesis that the CRISPR-
+associated system (CASS) is a prokaryotic defence 
+mechanism against genetic aggressions (10,13,16). Within 
+species, CRISPRs may be present in a subset of strains, 
+where they sometimes show polymorphism. The DR and 
+the order of the spacers are well conserved, but the 
+number of motifs (DR þ spacer) differs from strain to 
+strain. To better understand the mechanisms underlying 
+the CRISPRs' evolutionary scenario, three evolution rules 
+were proposed by Pourcel et al. (10) and confirmed by 
+Lillestol et al. (15): (i) polarized acquisition of spacers 
+near the leader sequence; (ii) random loss of motifs and 
+(iii) shared ancestry when spacers are identical. 
+CRISPRs' in silico analyses started in 1995 (2) but no 
+specific stand-alone CRISPR software tool was created. 
+Several software were used by different authors to identify 
+these particular repeats but usually a manual discard 
+of background was necessary, and generally some 
+<rs type="software">CRISPR</rs> clusters were missed or neglected, especially the 
+shortest one (less than three motifs). This is the case, for 
+example, of Tandem Repeat Finder (17) when considering 
+a motif (DR þ spacer) as a degenerate repeat (10,18), or 
+Locating Uniform poly-Nucleotide Areas (LUNA), 
+a program for finding degenerate repeats in microbial 
+genomes on a desktop computer. The repeats can be 
+filtered using several parameters including length, distance 
+and level of conservation. LUNA was used especially for 
+finding CRISPRs in archaea (4,15). Another program, 
+Patscan (19) a pattern-matching tool that searches 
+sequences fitting the introduced pattern, was applied to </p>
+
+<p>*To whom correspondence should be addressed. Tel: 33 1 69 15 30 01; Fax: 33 1 69 15 66 78; Email: Ibtissem.Grissa@igmors.u-psud.fr </p>
+
+<p>ß 2007 The Author(s) 
+This is an Open Access article distributed under the terms of the Creative Commons Attribution Non-Commercial License (http://creativecommons.org/licenses/ 
+by-nc/2.0/uk/) which permits unrestricted non-commercial use, distribution, and reproduction in any medium, provided the original work is properly cited. </p>
+
+<p>identify CRISPRs containing at least three (20) or four 
+exact direct repeats (8). PYGRAM (21) is a visualization 
+program browsing all the repeats in the submitted 
+genomic sequence and showing perfectly conserved 
+palindromic repeats as pyramids. The PYGRAM pro-
+gram is mostly efficient in visually displaying large 
+CRISPRs (CRISPRs with as many as seven motifs are 
+considered as being very short in this work) since they will 
+be recognized as a concentration of horizontal bars 
+referring to a group of co-occurring repeats that differ 
+by only a few nucleotides. Finally, Haft et al. (12) used 
+REPfind (http://bibiserv.techfak.uni-bielefeld.de/reputer/), 
+a part of the REPuter package (22-24) and BLASTN to 
+identify smaller repeat clusters. 
+These programs are the most used tools in CRISPR 
+detection, although none of them is especially conceived 
+for this purpose. They require further manual manipula-
+tions to eliminate background data (tandem repeats for 
+example) and importantly, do not define accurately the 
+DR consensus (due to errors on the boundaries). Recently, 
+two CRISPR-dedicated software tools were proposed, 
+<rs id="software-3" type="software">CRT</rs> (<rs corresp="#software-3" type="url">http://www.room220.com/crt</rs>) and <rs type="software">PILER-CR</rs> (25). 
+Both of them run fast and perform well in finding 
+CRISPRs. However, CRT results in a considerable 
+background since tandem repeats are considered as 
+putative CRISPRs and in addition, the same CRISPR is 
+sometimes detected more than once with different 
+consensus DRs. PILER-CR has also some drawbacks 
+since it often misidentifies the DR boundaries and omits 
+the truncated DR. 
+In addition, there is no user-friendly dedicated web site. 
+A specialized program to automatically identify CRISPRs 
+seems to be mandatory for their optimum, rapid explora-
+tion and in-depth analysis, in order to increase the 
+efficiency of CRISPRs investigations. CRISPRFinder is 
+a web service offering fundamental tools for CRISPR 
+detection, including the shortest ones, allowing an 
+accurate definition of the DR consensus boundaries and 
+extraction of the related spacers. It offers also additional 
+tools to analyze the CRISPR loci: (i) obtain the CRISPR 
+and the flanking sequences according to flexible size; 
+(ii) make a blast of selected spacers or flanking sequences 
+against the Genbank database and (iii) check if the DR is 
+found elsewhere in prokaryotic sequenced genomes. The 
+CRISPRFinder web interface is accessible through http:// 
+crispr.u-psud.fr/Server/CRISPRfinder.php </p>
+
+<p>METHODS AND IMPLEMENTATION </p>
+
+<p>CRISPRFinder core routines were developed in Perl 
+under Debian Linux. The input of the web tool is a 
+genomic query sequence of length up to 67 Mb in 
+'FASTA' format. Possible locations of CRISPRs (con-
+sisting of at least one motif) are detected by finding 
+maximal repeats. A maximal repeat (26) is a repeat that 
+cannot be extended in either direction without incurring a 
+mismatch. The total number of maximal repeats in a 
+sequence of size n is linear (less than n) which is interesting 
+since the computation may be done in linear time using a 
+suffix-tree-based algorithm. A CRISPR pattern of two </p>
+
+<p>DRs and a spacer may be considered as a maximal repeat 
+where the repeated sequences are separated by a sequence 
+of approximately the same length. 
+The operation of the program can be divided into four 
+main steps summarized in Figure 1: (Step 1) browsing the 
+maximal repeats of length 23-55 bp interspaced by 
+sequences of 25-60 bp, (Step 2) selecting the DR consensus 
+according to a defined score taking into account the 
+number of occurrences of the candidate DR in the whole 
+genome and privileging internal mismatches between the 
+DRs rather than mismatches in the first or the last 
+nucleotides, (Step 3) defining candidate CRISPRs after 
+checking if they fit CRISPR definition, (Step 4) eliminat-
+ing residual tandem repeats. 
+In the first step, maximal repeats are found by the 
+software <rs id="software-1" type="software">Vmatch</rs> (<rs corresp="#software-1" type="url">http://www.vmatch.de/</rs>/), the upgrade of 
+REPuter (22-24). Vmatch is based on a comprehensive 
+implementation of enhanced suffix arrays (27) which 
+provides the power of suffix trees with lower space 
+requirements. A one nucleotide mismatch is allowed 
+permitting minimal CRISPRs with a single nucleotide 
+mutation between DRs to be found. Hereafter, the 
+obtained maximal repeats are grouped to define regions 
+of possible CRISPRs with a display of consensus DR 
+candidates related to each cluster. 
+The second step is aimed at retrieving the DR consensus 
+of each cluster. The difficulty resides especially in the 
+identification of boundaries, which is very important to 
+extract the correct spacers and compare DRs. In fact, 
+the consensus DR is selected as the maximal repeat which 
+occurs the most in the whole underlying genome sequence 
+with respect to the forward and the reverse complement 
+directions (since two CRISPRs having the same 
+DR consensus may be in opposite directions). Thus, 
+ambiguity in the choice of a DR will be eliminated in the 
+case of presence of similar DRs in other CRISPRs of the 
+related genomic sequence. However, if occurrence num-
+bers are equal, more than a single DR consensus candidate 
+are kept and later compared. Given a candidate consensus 
+DR, the pattern search program fuzznuc of the EMBOSS 
+package (28) is applied to get DRs' positions in the 
+related cluster. As the first or the last DR in a CRISPR 
+may be diverged/truncated, a mismatch of one-third of the 
+DR length is allowed between the flanking DRs and the 
+candidate consensus DR, whereas smaller nucleotide 
+differences are allowed between the other DRs to take 
+into account possible single mutations. In case of multiple 
+DR candidates, a score is computed and the best one 
+(minimum) is picked. This score favours candidates which 
+are encountered more frequently, rather than consensus 
+DR showing less internal mismatches. 
+Once the DR consensus is determined, the correspond-
+ing spacers (Step 3) are extracted according to the DR 
+boundaries determined previously. The spacer length is 
+not allowed to be shorter than 0.6 or longer than 2.5 times 
+the DR length. These sizes are in the range of CRISPRs 
+described in the literature. 
+The last step consists in discarding false CRISPRs. 
+Therefore, tandem repeats are eliminated by comparing 
+the consensus DR with the spacer if there is only 
+one spacer, or by comparing spacers between each other. </p>
+
+<p>Nucleic Acids Research, 2007, Vol. 35, Web Server issue W53 </p>
+
+<p>The comparison is done with the CLUSTALW program 
+(29) and the percentage of identity between spacers is 
+not allowed to exceed 60%. Finally, candidates having 
+at least three motifs and at least two exactly identical 
+DRs are considered as confirmed CRISPRs. The remain-
+ing candidates are considered as questionable. These 
+should be critically investigated by, for example, checking 
+for intraspecies size variation of the locus. </p>
+
+<p>INPUT AND OPTIONS </p>
+
+<p>The query sequence must be in 'FASTA' format. Ns 
+characters are accepted, IUB/GCG letters (MRWSY-
+KVHDBX) will be converted to Ns and considered as 
+mismatches but any other characters will be deleted. 
+One can either paste the genomic sequence into the input 
+field or upload it from a file on the local machine. 
+Multisequence files are also allowed by the program and </p>
+
+<p>will be treated independently. Users may use the default 
+version or click on the 'advanced version' link to set and 
+modify all the program parameters, which may be 
+especially useful for fixing the DR size. </p>
+
+<p>OUTPUT </p>
+
+<p>After querying a genomic sequence by CRISPRFinder, 
+results are summarized in a table with the number 
+of confirmed and questionable CRISPRs (Figure 2A). 
+A CRISPR locus is presented according to a colour code 
+showing DRs in yellow and spacers in different colours. 
+The respective positions are displayed, in addition to links 
+to two files: a summary of the displayed properties 
+(number of motifs, DR consensus, positions, etc.) and 
+a fasta file containing the list of spacers. In addition, 
+a PNG (Portable Network Graphics) figure displays the 
+different candidates' location in the analysed sequence. </p>
+
+<p>Figure 1. CRISPR Finder flow chart. (Step 1) Browsing the maximal repeats to get possible CRISPR localizations using the Vmatch program. 
+(Step 2) Consensus DR selection according to candidate occurrences and a score computation: the score privileges internal mismatches between direct 
+repeats of a cluster rather than boundary mismatches. (Step 3) DR and spacers size check. (Step 4) Tandem repeats elimination using ClustalW for 
+aligning spacers. </p>
+
+<p>W54 Nucleic Acids Research, 2007, Vol. 35, Web Server issue </p>
+
+<p>Figure 2. An example of CRISPRFinder output using the Aquifex aeolicus VF5 genomic sequence (Refseq: NC_000918). (Panel A) (1) Home page 
+where the genomic sequence is submitted. (2) Table listing the detected CRISPRs candidates (questionable and confirmed) providing links to each 
+one. (3) CRISPRs details, the DR is showed in yellow and the spacers in different colours. (4) A fasta file displaying the first CRISPR spacers. 
+(5) Figure showing the Aquifex circular chromosome with CRISPRs positions. (Panel B) One or several spacers may be blasted against NCBI 
+databases by clicking on the blast_spacers button. (Panel C) The flanking and the CRISPR sequences may be viewed by clicking on the Get 
+sequences button. The sequences boundaries may be modified by the user. (Panel D) The list of consensus DRs for all CRISPRs is shown with a 
+link to identical DRs in the CRISPR database. </p>
+
+<p>Nucleic Acids Research, 2007, Vol. 35, Web Server issue W55 </p>
+
+<p>In the case of presence of CRISPR clusters, further 
+analysis may be done through three hyperlinks in the left 
+menu: (i) blast spacers against the Genbank databases 
+with a cutoff of 0.1 for the E-value and a matching 
+length of at least 70% the queried spacer size (Figure 2B); 
+(ii) obtain CRISPR and flanking sequences which are 
+especially useful to define the leader sequence. As the size 
+of the leader sequence depends on the species (it varies 
+from 100 to 500 bp), the retrieved sequence may be 
+manually modified by the user (Figure 2C) and (iii) display 
+identical DRs in other known CRISPR loci (Figure 2D). 
+This utility corresponds to a link to CRISPR database 
+(Grissa et al. submitted for publication). </p>
+
+<p>DISCUSSION AND CONCLUSIONS </p>
+
+<p>CRISPRFinder is a program that allows the identification 
+of structures with the principal characteristics of 
+CRISPRs, the smaller being composed of a truncated or 
+diverged DR, a spacer and a complete DR. In their 
+analysis, Godde et al. (20) using Patscan had chosen to 
+retain only CRISPRs with at least three exact repeats 
+(eliminating CRISPRs constituted of a first truncated 
+repeat plus two exact repeats) thus ignoring most 
+CRISPRs containing less than three spacers. Similarly in 
+the work by Durand et al.(21), the PYGRAM program is 
+mostly efficient in visually displaying large CRISPRs. 
+Such stringent criteria were appropriate in order to avoid 
+ambiguities in early investigations which were essentially 
+describing these new structures. However, it is now 
+important, in order to better understand the evolution 
+and spreading of CRISPRs, to provide tools which will 
+not eliminate the smallest CRISPRs. This is what we chose 
+to achieve with CRISPFinder. The major drawback is that 
+when looking for the shortest structures, such as those 
+with a unique spacer, it is clear that the background of 
+spurious candidates can be very high. The output of 
+Patscan and CRT also contains a large quantity of noised 
+data that needs a manual treatment. 
+CRISPRFinder is accessible on the web and submission 
+is very simple. We provide several samples on the website 
+as demonstrators. Upon submission of the complete 
+genome of Aquifex aeolicus VF5 (sample1), five confirmed 
+and five possible CRISPRs are displayed in the following 
+pages. On the contrary, while using the webservice for 
+Patscan (http://www-unix.mcs.anl.gov/compbio/PatScan/), 
+it is necessary to first define a pattern (which is not 
+straightforward) and it is not possible to seek for 
+CRISPRs in a single genomic sequence but rather in an 
+entire predefined database. In addition, Patscan requires a 
+Sun machine for local implementation. Similarly, 
+PYGRAM only runs on linux systems and its installation 
+requires advanced skills. CRT requires either to install 
+JRE (Java Runtime Environment) or compile the source 
+files, and PILER-CR needs to be compiled before use. 
+A comparison between layouts of available online 
+programs 
+(REPuter, 
+Patscan, 
+TRF) 
+and 
+of 
+CRISPRFinder is provided in the Supplementary Data. 
+To check that CRISPRFinder was efficient in recover-
+ing all the CRISPRs from a genome, we compared the </p>
+
+<p>results to other available studies on CRISPRs (15,20). The 
+data were generally in good agreement, the differences 
+being always in the DR boundaries' identification 
+(more accurate with CRISPRFinder) or in the number 
+of motifs found, as the truncated DR is sometimes 
+neglected or short clusters are not detected with other 
+programs. Interestingly, some strains were claimed to 
+be devoid of CRISPRs by Godde and colleagues but 
+proved to have short CRISPRs with CRISPRFinder, such 
+as in different Shigella sp. (S. sonnei Ss046, S. flexneri 
+2a str. 301, S. flexneri 2a str), or even long CRISPRs such 
+as in Pseudomonas aeruginosa UCBPP-PA14. The latter 
+example is shown on the CRISPRfinder website 
+(sample2), and as can be seen by using the BLAST 
+spacer function, six spacers out of thirty six at two 
+different CRISPR loci, correspond to a bacteriophage 
+sequence (bacteriophages F116, B3, D3112, DMS3 
+and phi CTX). 
+The tools developed here will assist in future CRISPRs' 
+analysis. Furthermore, the possibility to identify 
+CRISPRs containing one or two motifs may help under-
+stand how new CRISPRs are created. The very small 
+candidates will need to be typed across different isolates 
+within the same species or very closely related species to 
+search for variations. For instance, as shown with the 
+sample file provided on the website (YP1 Yersinia), 
+five Yersinia pestis strains possess at the same CRISPR 
+locus two to eight spacers, some being unique and others 
+shared by two or more strains (10). This strain-dependent 
+polymorphism is especially interesting for epidemiological 
+and phylogenetic studies (30,31). A tool to easily create a 
+dictionary of spacers from different strains is proposed 
+in a CRISPR-dedicated web database (http://crispr. 
+u-psud.fr/crispr/). 
+The CRISPRFinder web server is an interface to extract 
+with precision and to further analyse CRISPRs from 
+genomic sequences. Four main advantages may be cited: 
+(i) short CRISPR-like structures are detected, they are 
+labelled questionable but may be of great interest if later 
+confirmed; (ii) DRs are accurately defined to single 
+base pair resolution; (iii) summary files may be uploaded 
+(CRISPR properties summary and spacers file in Fasta 
+format) and (iv) flanking sequences or spacers can be 
+easily extracted and blasted against different databases. </p>
+
+<p>SUPPLEMENTARY DATA </p>
+
+<p>Supplementary Data are available at NAR Online. </p>
+
+<p>ACKNOWLEDGEMENTS </p>
+
+<p>The CNRS and Universite´Paris Sud 11 have funded this 
+project. Work on the development of genotyping tools for 
+bacterial pathogens is supported by the  
+Ge´ne´rale pour l'Armement (DGA). Funding to pay the 
+Open Access publication charges for this article was 
+provided by ADGE. </p>
+
+<p>Conflict of interest statement. None declared. </p>
+
+<p>W56 Nucleic Acids Research, 2007, Vol. 35, Web Server issue </p>
+
+
+
+<p>Nucleic Acids Research, 2007, Vol. 35, Web Server issue W57 </p>
+
+</text></tei>

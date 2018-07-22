@@ -1,0 +1,906 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC3638180" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:27+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>ABSTRACT 
+The findings of a case study assessing the design and 
+implementation of an electronic health record (EHR) in 
+the public health system of Colima, Mexico, its 
+perceived benefits and limitations, and 
+recommendations for improving the implementation 
+process are presented. In-depth interviews and focus 
+group discussions were used to examine the 
+experience of the actors and stakeholders participating 
+in the design and implementation of EHRs. Results 
+indicate that the main driving force behind the use of 
+EHRs was to improve reporting to the two of the 
+main government health and social development 
+programs. Significant challenges to the success of the 
+EHR include resistance by physicians to use the 
+ICD-10 to code diagnoses, insufficient attention to 
+recurrent resources needed to maintain the system, 
+and pressure from federal programs to establish 
+parallel information systems. Operating funds and more 
+importantly political commitment are required to 
+ensure sustainability of the EHRs in Colimaima. </p>
+
+<p>The electronic health record (EHR) is a tool with 
+the potential to improve the quality, safety, and 
+efficiency of health services. 1-9 It can also provide 
+data for assessing the health status of the popula-
+tion and the performance of the health system 
+itself. 10 11 Many countries in the developing world 
+are considering EHR adoption. 12 
+In Mexico, different public and private health-
+care institutions have adopted EHRs, including 
+Mexico's Social Security Institute, 13 the Institute 
+for Social Security and Services for Government 
+Employees, and the health services of several states 
+and many private hospitals. As part of the national 
+strategy for monitoring and improving the quality, 
+functionality, and interoperability of EHRs in 
+Mexico, in 2010 the General Directorate of Health 
+Information published the Official Mexican 
+Standard NOM-024-SSA3-2010. 14 However, the 
+way in which EHRs have been introduced and 
+their specific functionality have varied between 
+institutions and states, mainly because they were 
+developed and implemented before publication of 
+the official standard. 13 15 16 
+Mexico's health system consists of public insti-
+tutions and private providers, all of which are </p>
+
+<p>under the governance of the Ministry of Health. 
+The public social security institutions provide ser-
+vices to the employees of the formal economic 
+sector and civil servants, as well as other public 
+sector specific institutions (eg, the federal oil 
+company PEMEX and the Armed Forces). Together 
+these account for approximately 44% of the popu-
+lation. 17 The rest of the population is served either 
+by the System for Social Protection in Health 
+(SSPH), also known as Seguro Popular, or by 
+private providers. The SSPH is a health insurance 
+program for the poor and other vulnerable indivi-
+duals and has become one of the main funding 
+agencies for the health system in Mexico. Its bene-
+ficiaries receive healthcare services through the 
+Ministry of Health and the 32 decentralized State 
+Health Services (SHS). Colima's SHS provide 
+health care to approximately 42% of the state's 
+population including the beneficiaries of the SSPH 
+and the Oportunidades Program, a conditional 
+cash transfer program designed to address health 
+and poverty. 18 These two programs are important 
+sources of funds for the operation of the SHS and 
+demand detailed and systematic information about 
+their affiliates, most often by imposing specialized 
+parallel systems. 
+The state of Colima demonstrated leadership 
+and foresight with the development and imple-
+mentation of an EHR beginning in 2005, called 
+SAECCOL. Other states, such as Coahuila, 
+Aguascalientes, and Yucatán, have expressed inter-
+est in adopting SAECCOL. 19 In fact, the state of 
+Coahuila has already started to implement it in 
+several hospitals. As they have improved and devel-
+oped new modules, they have shared back these 
+improvements with Colima, in the spirit of open 
+source software development. 
+Given the potential benefits of SAECCOL in 
+Colima and the possibility that other states in 
+Mexico may adopt the system, our purpose was 
+to assess the design and implementation of 
+SAECCOL, its perceived benefits and limitations, 
+and to make recommendations to improve the 
+system and implementation process. Despite the 
+number of states implementing EHRs, there are no 
+studies that document the design and implementa-
+tion process or assess the effectiveness of EHRs in 
+improving the quality and efficiency of care deliv-
+ered in Mexico's public healthcare facilities, and </p>
+
+<p>Open Access 
+Scan to access more 
+free content </p>
+
+<p>238 
+J Am Med Inform Assoc 2013;20:238-244. doi:10.1136/amiajnl-2012-000907 </p>
+
+<p>Case report </p>
+
+<p>few in low and middle income countries. We explored the tech-
+nical, organizational, and behavioral issues that may have 
+affected EHR adoption and use, and their possible implications 
+for other states and countries. Our results have implications 
+that can guide other states in Mexico and other countries in 
+the design and implementation of an EHR in the public health 
+system. </p>
+
+<p>MATERIALS AND METHODS </p>
+
+<p>SAECCOL is an EHR developed and implemented by Colima's 
+SHS. It is based on the <rs type="software">MS-SQL Server</rs> database management 
+system and <rs type="software">Visual Basic</rs> was used for the development of the 
+main application and specific modules. It is a modular system 
+(figure 1) that at the time of the study operated mainly in the 
+outpatient and emergency departments, offering support ser-
+vices such as laboratory, imagery, pharmacy, social work and 
+archive modules, the last of which is linked to SSPH's data-
+bases. The system allows physicians to record and retrieve the 
+clinical history of patients, as well as all consultation data 
+including drug prescriptions and laboratory studies requested. 
+The system had not been fully implemented in the hospital 
+environment at the time of the study, with working sub-
+modules only operating in admissions and the pharmacy 
+department. The archive module also transfers administrative 
+data for the management of the SSPH. 
+Framework analysis, a method developed specifically for 
+applied research where there are particular questions to be 
+answered, a limited time frame, and a pre-designed sample, 20 21 
+was used and included in-depth interviews and focus group dis-
+cussions to examine the experiences of the actors and stake-
+holders who participated in the design and implementation of </p>
+
+<p>EHRs in the state of Colima. 21 Key informants were selected 
+using purposive sampling to ensure that all SHS officials and IT 
+experts in Colima who were involved in the development, 
+implementation, and operation of SAECCOL were included. In 
+addition, four officials of the SSPH and the Oportunidades 
+Program at the federal level were also interviewed so that the 
+perspectives of the financing agencies would be represented 
+(table 1). 
+In total, 27 in-depth interviews were held (table 2). Four focus 
+groups were conducted with physicians at two health centers 
+and two hospitals who were categorized as either pioneer users 
+of the system or as new users (table 3). The views were obtained 
+of 35 physicians or about 10% of all general physicians working 
+in outpatient departments using SAECCOL: (1) doctors 
+working in facilities that adopted the system relatively early 
+(Centro de Salud Gustavo Vázquez Montes); (2) doctors 
+working in facilities that adopted the system relatively recently 
+(Centro de Salud Colima); (3) doctors working in hospitals that 
+adopted the system relatively early (Hospital de Tecoman); and 
+(4) doctors working in hospitals that adopted the system rela-
+tively recently (Hospital de Manzanillo). 
+The Gustavo Vázquez Montes health center is an urban out-
+patient center with three general consultation rooms and 
+10 general physicians. The Colima health center has 12 con-
+sultation rooms and 22 general physicians. Tecoman and 
+Manzanillo hospitals are general hospitals with the four basic 
+services (internal medicine, surgery, pediatric, and obstetric) 
+with 47 and 60 beds, respectively. Tecoman hospital has 
+13 consultation rooms and 12 general physicians, while 
+Manzanillo hospital has 15 consultation rooms and 11 general 
+physicians. </p>
+
+<p>Figure 1 SAECCOL home-grown modular electronic health record (EHR). SSPH, System for Social Protection in Health. </p>
+
+<p>J Am Med Inform Assoc 2013;20:238-244. doi:10.1136/amiajnl-2012-000907 </p>
+
+<p>
+Case report </p>
+
+<p>The Institutional Review Boards of the National Institute 
+of Public Health (INSP) and Tulane University approved the 
+research protocol. Informed consent was obtained verbally 
+from all participants to ensure they fully understood that their 
+participation was strictly voluntary, that the data collected 
+were to be kept anonymous, and that their comments in the 
+discussions would not affect their jobs in any way. Participants 
+were also informed they could leave the interview or focus 
+group at any time without repercussion. 
+Standardized interview and discussion guides were designed 
+and tested with volunteer physicians in Mexico City. 
+Interviewers were trained to adhere to the interview protocol 
+in order to minimize interviewer bias. After informed consent 
+was received from key informants, face-to-face interviews were 
+conducted, recorded, and transcribed, and focus group discus-
+sions were audio and video recorded and transcribed. All inter-
+views and focus group discussions were conducted in Spanish. 
+Audio and video recordings were kept for further reference and 
+will be destroyed at the end of the study. </p>
+
+<p>Interviews were conducted by two native Spanish speak-
+ing female researchers with experience in qualitative 
+research (August 3-19, 2011, in Colima state and September 
+1-19, 2011, in Mexico City). A group of experienced, 
+Spanish speaking researchers from INSP and Tulane 
+University read the interview and focus group transcripts to 
+code the data and group them into key concepts and ana-
+lytical axes. Some of the codes were generated according to 
+the research questions, while others emerged from the inter-
+views. <rs id="software-4" type="software">NVivo</rs> <rs corresp="#software-4" type="version-number">9.2</rs> software 22 was used to analyze the data 
+around three analytical axes: design and development of the 
+EHR ( planning and organization, criteria, and require-
+ments), implementation of the EHR (users, constraints, and 
+resources), and the impact of the EHR (benefits, recommen-
+dations, and vision for the future) (table 4). Each researcher 
+coded separate interviews. Before starting, a coding exercise 
+was conducted to make sure all researchers were interpret-
+ing the codes in the same way and there was constant dis-
+cussion during the analysis to ensure there was agreement 
+across researchers. </p>
+
+<p>RESULTS 
+Design </p>
+
+<p>The EHR in Colima was conceived in 2004 by the General 
+Directorate of the SSPH in the state as a way to collect health 
+and administrative data on its beneficiaries. The development 
+process was an extensive and collaborative exercise, which 
+involved practitioners, medical specialists, hospital directors, 
+and information technology experts, and lasted more than a 
+year (box 1: quote 1). The information technology department 
+of the state office of the SSPH was at first in charge of the 
+design and development of the EHR but this responsibility 
+was later transferred to Colima's SHS IT department. The 
+SSPH Affiliation Director, in cooperation with IT specialists 
+from the Colima SHS, physicians, and consultants, continued 
+to lead the development effort. All participants understood 
+that the EHR was being developed to meet the information 
+needs of the SSPH, including the need to provide data to the 
+federal health information system (box 2: quote 2). Although 
+the EHR was not designed to provide information to physi-
+cians and other caregivers at the point of care as the key </p>
+
+<p>Table 1 Types of actors and their respective roles in the design, 
+implementation, and operation of SAECCOL </p>
+
+<p>Type of actor 
+Roll/functions 
+N </p>
+
+<p>Federal level officials 
+Federal health system governance 
+Financing state health services (SHS) through the 
+System for Social Protection in Health and/or 
+Oportunidades ProgramDeveloping and publishing 
+official norms </p>
+
+<p>4 </p>
+
+<p>State level officials 
+State level governance 
+Operate SHSState public policy to establish the 
+conditions for SAECCOL development, 
+implementation, and operationParticipation in the 
+design and implementation of SAECCOL </p>
+
+<p>7 </p>
+
+<p>Hospital and health 
+center managers </p>
+
+<p>Directing health center/hospitals 
+Administrative tasks using of information generated 
+by SAECCOL </p>
+
+<p>10 </p>
+
+<p>IT staff 
+Participation in the design of SAECCOL 
+Development of SAECCOL's softwareImplementation 
+of SAECCOL in health centers and hospitals including 
+installation and training of physicians </p>
+
+<p>6 </p>
+
+<p>Physicians in outpatient 
+departments </p>
+
+<p>Use SAECCOL as a tool to improve doctor/patient 
+interaction through the use of data recorded in 
+SAECCOL </p>
+
+<p>35 </p>
+
+<p>Total 
+62 </p>
+
+<p>Table 3 Demographic characteristics of focal group discussion 
+participants </p>
+
+<p>Demographic characteristics 
+N 
+% </p>
+
+<p>Type of health center 
+Pioneer 
+16 
+45.7 
+Recently implemented 
+19 
+54.3 
+Sex 
+Male 
+19 
+54.3 
+Female 
+16 
+45.7 
+Age groups 
+20-39 years 
+22 
+62.9 
+40 years or more 
+13 
+37.1 
+Time using SAECCOL 
+None 
+3 
+8.6 
+Less than 2 years 
+27 
+77.1 
+2 years or more 
+5 
+14.3 
+Training 
+Physician 
+31 
+88.6 
+Nurse 
+3 
+8.6 
+Other 
+1 
+2.9 </p>
+
+<p>Table 2 Demographic characteristics of in-depth interview 
+participants </p>
+
+<p>Demographic characteristics 
+N 
+% </p>
+
+<p>Type of actor 
+Federal level officials 
+4 
+14.8 
+State level officials 
+7 
+25.9 
+Hospital and health center managers 
+10 
+37.0 
+IT staff 
+6 
+22.2 
+Sex 
+Male 
+20 
+74.1 
+Female 
+7 
+25.9 
+Age 
+20-39 years 
+14 
+51.9 
+40 years or more 
+13 
+48.1 
+Training 
+Physician 
+17 
+63.0 
+IT specialist 
+6 
+22.2 
+Other 
+4 
+14.8 </p>
+
+<p> 
+J Am Med Inform Assoc 2013;20:238-244. doi:10.1136/amiajnl-2012-000907 </p>
+
+<p>Case report </p>
+
+<p>objective, it does make some relevant information available 
+to them. It was also clear that a key objective was that the 
+EHR should comply with the International Classification of 
+Diseases, Tenth Revision (ICD-10). At the time SAECCOL 
+was first conceived and developed, the official standard 
+NOM-024-SSA1-2010 for EHRs had not yet been published, 
+but there is now pressure for 100% compliance with it within 
+the next 3 years. </p>
+
+<p>Implementation </p>
+
+<p>Colima's SHS IT department led the process of implementing 
+the EHR in the state. They implemented the EHR using a 
+gradual, phased approach following its launch in 2005. In 
+selecting facilities for implementation, priority was placed on 
+outpatient services in medium-sized health centers in urban 
+areas that had the minimum infrastructure required, including 
+electricity, wiring, and internet connectivity. Training in how 
+to use the system was conducted by the SHS IT department 
+both through facility-specific sessions attended by physicians 
+and facility directors, and through pre-service training of resi-
+dents of the University of Colima's Medical School (box 3: 
+quote 3). The first phase of implementation took place from 
+2005 to 2006 with the acquisition of 300 computers, and 
+covered almost 80% of the state's health centers and hospitals. 
+By that time, the SHS IT department had three areas servicing 
+SAECCOL: system development, implementation (installation </p>
+
+<p>and training), and technical support, but no additional operat-
+ing funds (box 3: quote 4). </p>
+
+<p>Benefits of the EHR </p>
+
+<p>Facility directors and physicians using the EHR suggest that 
+the system has produced a number of important benefits, 
+motivating them to continue using the system. For example, 
+many respondents mentioned that the organization of health-
+care delivery has been improved through the use of the 
+appointment scheduling features of the EHR. This saves time 
+for patients, who no longer need to wait for hours at the facil-
+ity in order to receive care, and for physicians, by saving time 
+during consultations and improving the standardization, com-
+pleteness, and legibility of medical records (box 4: quote 5). 
+A number of physicians also mentioned that the improved 
+information from the EHR has allowed them to better under-
+stand the medical history of their patients, make diagnoses 
+earlier, and reduce medication errors (box 4: quote 6). Facility 
+directors also commented that the use of the administrative 
+data produced by SAECCOL had improved their management 
+capabilities, allowing them to monitor the performance of 
+health centers and hospitals. </p>
+
+<p>Challenges </p>
+
+<p>Respondents also identified a number of challenges to the 
+adoption and continued use of the EHR. Some respondents </p>
+
+<p>Table 4 Analytical axes and key concepts </p>
+
+<p>Analytical 
+axis 
+Key concept 
+Description of key concept 
+Sources References </p>
+
+<p>Design 
+Consensus 
+Design and development of SAECCOL was with the agreement of all actors and stakeholders 
+14 
+24 
+Advocacy 
+Advocacy to develop SAECCOL 
+12 
+15 
+Motivation 
+Reasons behind the decision to develop and implement SAECCOL 
+8 
+19 
+Requirements 
+Experiences, best practices, and requirements of EHRs 
+15 
+23 
+Time 
+Time dedicated to the design and development of SAECCOL 
+10 
+12 
+Funding 
+Funds allocated for the design and development of SAECCOL 
+7 
+8 
+Implementation 
+Training 
+Initial training process 
+22 
+23 
+Hardware and 
+communications </p>
+
+<p>Availability of computers and internet connectivity 
+20 
+26 </p>
+
+<p>Infrastructure 
+Health centers and hospitals where SAECCOL was implemented 
+19 
+27 
+Budget 
+Budget allocated for SAECCOL's implementation 
+8 
+10 
+Time 
+Time dedicated by hospital and health center managers and medical staff to implement SAECCOL 
+11 
+15 
+Benefits 
+Quality of care 
+Monitoring health care 
+16 
+35 
+Reliable information 
+Availability of quality data produced by SAECCOL 
+13 
+17 
+Information improvement 
+Availability of statistical data for decision making based on SAECCOL's data 
+15 
+21 
+Health system organization 
+Organization of health services (appointments, waiting time, consultation time, process 
+standardization) </p>
+
+<p>15 
+33 </p>
+
+<p>Data safety 
+Data safety 
+6 
+1 5 
+Challenges 
+ICD-10 
+Physicians experience with the use of SAECCOL and diagnoses using ICD-10 classification 
+7 
+26 
+Difficulties 
+Difficulties experienced in the use of SAECCOL 
+18 
+48 
+Implementation discontinuity 
+Reasons for interrupting implementation 
+10 
+18 
+Disarticulation 
+Disarticulation in the development of SAECCOL by different actors 
+13 
+15 
+Mixed health records 
+Need to maintain paper-based records coexisting with EHR 
+17 
+22 
+Lack of infrastructure 
+Availability of computers/computers obsolete/no electricity or supplies 
+25 
+36 
+Lack of training 
+Experiences with lack of training 
+11 
+13 
+Does not cover all needs 
+Evidence that SAECCOL does not cover all the needs of doctors 
+20 
+33 
+Resistance to change 
+Evidence of resistance to change from paper-based to EHRs 
+12 
+14 
+Partial use of EHR 
+Experiences in partial use of SAECCOL 
+11 
+13 
+Challenges 
+Documenting challenges in the implementation of an EHR 
+14 
+14 </p>
+
+<p>EHR, electronic health record; ICD-10, International Classification of Diseases, Tenth Revision. </p>
+
+<p>J Am Med Inform Assoc 2013;20:238-244. doi:10.1136/amiajnl-2012-000907 </p>
+
+<p>
+Case report </p>
+
+<p>mentioned issues of trust. For example, physicians expressed 
+suspicion that the SHS introduced EHRs in order to monitor 
+medical staff. Respondents at the state level mentioned that 
+federal program administrators sometimes have a paternalistic 
+view of state officials, are dubious about the quality of EHR 
+information, and insist on receiving paper-based reports. A fre-
+quently mentioned issue during the interviews and focus group 
+discussions was the ICD-10 classification scheme, which plays 
+a large role in the EHR system. Physicians complained about 
+the difficulty in identifying ICD-10 disease codes, which was 
+not part of their medical education (box 5: quotes 7-9). They 
+mentioned that they are not trained to use ICD-10, and that 
+although most cases are easy to code, a small portion are diffi-
+cult, resulting in substantial frustration. SHS officials and staff 
+insisted that physicians must make diagnoses using ICD-10, 
+but were trying to develop alternative ways to facilitate phys-
+ician coding of diagnoses according to ICD-10 to address phys-
+ician concerns. To help implement diagnosis coding according 
+to ICD-10, at the time of the study, the IT department was 
+building a list of the most common diagnoses (as usually 
+reported by physicians) with their respective ICD-10 codes; 
+however, this effort has still not completely resolved the coding 
+issue. Other challenges mentioned include insufficient training, 
+which causes excessive time to be spent on entering data, frus-
+tration with features that ensure the security of records, the 
+rigidity of the system, and resistance to change. </p>
+
+<p>General results </p>
+
+<p>There was a common view that the EHR (SAECCOL) is a valu-
+able tool, and most of those interviewed agreed it was neces-
+sary to use it more effectively to improve the quality of 
+healthcare so that it mainly benefits patients. There were 
+important differences among the respondents regarding its 
+functionality and usability. While young doctors found no diffi-
+culty in adapting their workflow in the consultation room to 
+work with the EHR, older doctors complained that it was diffi-
+cult to use. Doctors in health centers and hospitals where 
+SAECCOL has recently been deployed also complained, but 
+they also indicated interest in receiving more training in order 
+to master its use. The one issue that respondents agreed upon 
+was the difficulties with the use of ICD-10. They all expressed 
+frustration with the need to classify their diagnoses and that it 
+was not part of their training as physicians. They also agreed 
+that Colima's SHS IT department has made important efforts 
+to address those difficulties, but that the issue is still not 
+resolved. </p>
+
+<p>DISCUSSION </p>
+
+<p>The purpose of the study was to assess the development and 
+implementation of SAECCOL, its perceived benefits and limita-
+tions, and to make recommendations to improve the system and 
+implementation process. Our results show that the main driving 
+force behind the design, development, and implementation of 
+SAECCOL was the strengthening of mandated reporting to the 
+SSPH and Oportunidades Program, two of the main programs to 
+improve health and social development in Mexico. The decision 
+to design and develop an EHR to meet the information-reporting 
+requirements of the SSPH and federal health information systems 
+affected the potential of the EHR to influence the quality, effi-
+ciency, and cost of health service delivery. The collaborative effort 
+of physicians, hospital administrators, IT specialists, and state 
+officials was fundamental in the design and development process. 
+The University of Colima was instrumental in the decision to </p>
+
+<p>follow a 'home grown' EHR development strategy. As a result, 
+and in spite of its reporting focus, physicians saw benefits from 
+improved data availability, a better understanding of their 
+patient's history, and reduced medication errors. However, these 
+benefits fall short of the potential benefits of an EHR for improv-
+ing quality of care. 
+The SHS of Colima was able to take advantage of the infor-
+mation needs of important health programs to secure funds for 
+initial investment for the development and implementation of 
+their EHR, which proved to be a very successful strategy. The 
+implementation process was phased and systematic, with 
+appropriate attention to infrastructure requirements, and 
+included efforts to involve stakeholders and generate support 
+for adoption among health workers. From our perspective, this 
+is a highly recommended best practice. However, there were 
+several significant challenges to the success of the EHR. First, 
+physicians were concerned that the EHR was designed primar-
+ily to evaluate their performance. They also felt strongly that 
+coding ICD-10 diagnoses is a clerical function being forced on 
+them through the EHR and should not be part of their medical 
+practice. 23 Emphasizing the importance of performance moni-
+toring as part of the culture of information and as a way to 
+receive organizational feedback may positively influence the 
+way physicians perceive and react to the EHR's monitoring cap-
+acity. Additionally, as ICD-10 coding is needed for standardiza-
+tion of the collection and reporting of EHR data, it must be 
+complied with; nevertheless, the efforts of the IT department 
+to develop alternative features to help the use of this classifica-
+tion scheme may improve the experience of physicians. 
+Another solution to this controversial aspect of SAECCOL 
+would be to allow doctors annotate unclassified diagnoses 
+which would be coded later by specialized coders. 
+However, following the initial investment, the SHS did not 
+receive further funds and the EHR was not explicitly supported 
+by state policy. Nevertheless, SHS IT personnel continued with 
+the development of new modules. Difficulties in providing 
+technical support and computer maintenance developed, 
+mainly because of a lack of resources (eg, gas, vehicles, and 
+computer parts). In addition, the political environment pre-
+vented the channeling of financial resources to the project. 
+EHR use started to decline as providers required training and 
+computers needed to be repaired or replaced, and the project 
+faltered. As part of a set of innovative strategies to make the 
+EHR sustainable, the SHS signed an agreement with the 
+University of Colima medical school that all students should be 
+trained in the use of the EHR. 
+Another factor endangering the sustainability of the EHR was 
+the lack of an information policy and normative framework at 
+the time of design and development, which impeded the ability 
+to promote governance and to negotiate for operating funds. 
+Also, any change in Colima's SHS administration presents sus-
+tainability challenges because newly appointed leaders need to 
+be convinced of the value of the EHR so that they will provide 
+resources for its ongoing maintenance, operation, and develop-
+ment. Fortunately, with the change of administration in 2010, a 
+new perspective on e-government was adopted and the EHR 
+was incorporated into the Governor's State Development Plan, 
+which provided the political basis for directing the necessary 
+resources from both state and federal health programs to 
+strengthen the EHR project. Moreover, the Oportunidades 
+Program, through the SSPH, requested that additional informa-
+tion requirements be met through a parallel information system 
+called Sistema Nominal de Información en Salud, but inclusion </p>
+
+<p> 
+J Am Med Inform Assoc 2013;20:238-244. doi:10.1136/amiajnl-2012-000907 </p>
+
+<p>Case report </p>
+
+<p>of the EHR in the State's Development Plan served as leverage 
+to negotiate its use as the sole source of information for federal 
+health programs, thus avoiding the need for parallel systems and 
+allowing a more efficient use of resources. 
+The implementation of an EHR in the public health sector is 
+subject to multiple pressures and requires a vast amount of 
+financial and human resources. Operating funds are required to 
+ensure sustainability, but political commitment is also neces-
+sary. This must be expressed in a state or national strategic 
+plan in order to withstand administrative/political changes. 
+The authors are well aware that most public institutions do 
+not follow or adhere to such a process. Colima did not begin 
+with a clear strategic plan but rather was responding to the 
+information needs of funding agencies, but nevertheless was 
+able to recover midway under the incoming new administra-
+tion. This was a lesson learned the hard way. 
+Overall, our results suggest that designing and implementing 
+EHRs is a gradual and often slow process which requires atten-
+tion to be given to technical, organizational, and behavioral 
+factors. The results of the study are very much in line with 
+those of previous research. For example, in a study on the imple-
+mentation and adoption of national EHRs in secondary care 
+facilities in England, Sheikh et al 24 found that the speed of 
+implementation was slower than expected, and that the EHRs 
+had a narrower focus and substantially less functionality than 
+originally planned, with no discernible benefits for clinicians or 
+patients among early adopters of the system. In a systematic 
+review of studies on this issue, Boonstra and Broekhuis 25 also 
+found that, overall, EHR adoption rates are low and that there is 
+often resistance from physicians. The authors concluded that 
+the process of EHR implementation should be treated as a man-
+agerial change project, rather than simply as a technical strategy. 
+Ideally, the decision to move towards an EHR at the state or 
+national level should be part of a national strategic plan. This 
+promotes ownership and evidence of ability to meet informa-
+tion needs in order to advocate for funds, thus avoiding the cre-
+ation of parallel systems. The evidence from Colima highlights 
+the importance of including stakeholders in the planning phase 
+in order to address their specific information needs. 26 Just as 
+important is the sharing of experiences within a country and 
+south-south collaboration can improve the chances of success-
+ful implementation, scalability, and sustainability. It is impera-
+tive that funders recognize the potential synergies of their 
+investments in health information systems and technology as a 
+way to promote diagonal effects with positive spill-over effects 
+to other health problems beyond the intended programs. </p>
+
+<p>Box 1 Consensus </p>
+
+<p>Quote 1 </p>
+
+<p>▸ … the designers from the Secretary of Health came to meet 
+with us, talk to us, and give us their comments after seeing 
+the EHR [electronic health record]. "What should it contain?" 
+they asked. The records, ok, the health record has this and 
+that. Then, they would go do their job, bring it back and 
+present it to us. We would then give them feedback: "Do you 
+know? This window should move from here to there. Maybe 
+apply a drop down menu, add this or that, or this is easier." 
+That's how it was done. (Health center director) </p>
+
+<p>Box 2 Source of information for the System for Social 
+Protection in Health (SSPH) and the Oportunidades Program </p>
+
+<p>Quote 2 </p>
+
+<p>▸ From the start, the project was developed with the belief that 
+it would cover everything, that it was going to be installed in 
+every health center and that it was going to be the primary 
+source of information, and we keep going in this process to 
+reach that goal; fortunately it was developed to that purpose 
+from the beginning. (State IT specialist) </p>
+
+<p>Box 3 Implementation </p>
+
+<p>Quote 3 </p>
+
+<p>▸ Training was done at different levels; we went to the univer-
+sity and explained, because many doctors are still students. 
+It was easier dealing with them because they all have a good 
+understanding of computers. So, we went to the university, 
+took the EHR system to them, and left it with them. At the 
+beginning we used to provide training to the young doctors 
+and in a couple of days they were ready to use the system, 
+even in one day. We did this so that once they graduated 
+they each had a EHR chip and when they got to their com-
+munities we didn't have to train them again… and start all 
+over again… (State director) </p>
+
+<p>Quote 4 </p>
+
+<p>▸ When the first computer buying was done, 300 computers 
+to cover about 80% of the facilities, it's when it is decided 
+to make a structure based in three areas: software devel-
+opment, and of course most of us continued working 
+there, an implementation area, dedicated exclusively to 
+training and follow up, and another for technical support, 
+which was the infantry, the one in which to serve… (State 
+IT specialist) </p>
+
+<p>Box 4 Benefits </p>
+
+<p>Quote 5 </p>
+
+<p>▸ When the system works ok I think it's perfect; you enter 
+your password and access the EHR, you can check your 
+starting time, your patient list, you select a patient, open his/ 
+her file and I can review observations in past encounters and 
+make a medical note a lot easier and clearer and it can be 
+reviewed by any other doctor who may access the record. 
+(Hospital director) </p>
+
+<p>Quote 6 </p>
+
+<p>▸ We now have a more specific, focused, and simpler 
+clinical history. (Health center focus group discussion 
+participant) </p>
+
+<p>J Am Med Inform Assoc 2013;20:238-244. doi:10.1136/amiajnl-2012-000907 </p>
+
+<p>
+Case report </p>
+
+<p>Box 5 Challenges </p>
+
+<p>Quote 7 </p>
+
+<p>▸ It happened to me many times that I was not able to write in the 
+diagnosis and since I wasn't able to do so, I had to write the 
+diagnosis in a separate box in the hope that when it was 
+printed, at least my diagnosis would show up somewhere in the 
+form. But it wasn't the correct diagnosis… (Hospital director) </p>
+
+<p>Quote 8 </p>
+
+<p>▸ It is very difficult to fill in the form in a short period because there 
+is a set amount of time for the consultation: for the use of 
+devices and systems, to conduct a physical check-up and make 
+a presumptive diagnosis plus writing the prescription; and for the 
+preparation of the particulars and setting up the next appoint-
+ment. If we put this in time, it would take 30-40 minutes per 
+patient. If we only did the health consultation note, we are talking 
+about a period of 10-15 minutes per patient. (Hospital director) </p>
+
+<p>Quote 9 </p>
+
+<p>▸ In our case, what we do is to print it with a diagnostic, the 
+closest we can find, and write notes in the analysis section 
+to register our diagnostic, the real one, to put it that way. 
+This is how we have being functioning. (Hospital focus group 
+participant) </p>
+
+<p>Acknowledgements We would like to thank the state of Colima and all 
+participants in this project. </p>
+
+<p>Contributors JEHA, LSPM, ALE, MAB, MLD, DH, BP, ES, and ASP: conception and 
+study design; LSPM, MAB, and ASP: field work supervision; LSPM, MAB, and ES: 
+data analysis and interpretation; JEHA, LSPM, ALE, MLD, DH, BP, ES, and ASP: 
+drafting the paper, critical review, and final review and approval of the manuscript. </p>
+
+<p>Funding Support for this study was obtained from MEASURE Evaluation, which is 
+funded by the US Agency for International Development (USAID) through Cooperative 
+Agreement GHA-A-00-08-00003-00. The views expressed in this publication do not 
+necessarily reflect the views of USAID or the US Government. </p>
+
+<p>Competing interests None. </p>
+
+<p>Provenance and peer review Not commissioned; externally peer reviewed. </p>
+
+<p>Open Access This is an Open Access article distributed in accordance with the 
+Creative Commons Attribution Non Commercial (CC BY-NC 3.0) license, which permits 
+others to distribute, remix, adapt, build upon this work non-commercially, and license 
+their derivative works on different terms, provided the original work is properly cited 
+and the use is non-commercial. See: http://creativecommons.org/licenses/by-nc/3.0/ </p>
+
+
+
+<p> 
+J Am Med Inform Assoc 2013;20:238-244. doi:10.1136/amiajnl-2012-000907 </p>
+
+<p>Case report </p>
+
+</text></tei>

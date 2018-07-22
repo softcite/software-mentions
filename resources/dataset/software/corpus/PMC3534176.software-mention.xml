@@ -1,0 +1,289 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC3534176" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:28+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>ABSTRACT </p>
+
+<p>Purpose: This study aimed to evaluate the trabecular bone changes after alveolar bone grafting in unilateral cleft lip 
+and palate (UCLP) patients using a computer-aided diagnosis (CAD) system. 
+Materials and Methods: The occlusal radiographs taken from 50 UCLP patients were surveyed retrospectively. The 
+images were categorized as: 50 images in group 0 (before bone grafting), 33 images in group 1 (one month after bone 
+grafting), 24 images in group 2 (2-4 months after bone grafting), 15 images in group 3 (5-7 months after bone grafting), 
+and 21 images in group 4 (8 or more months after bone grafting). Each image was grouped as either "non-cleft side" 
+or "cleft side". The CAD system was used five times for each side to calculate the pixel area based on the mathematical 
+morphology. Significant differences were found using a Wilcoxon signed ranks test or paired samples t test. 
+Results: The pixel area showed a significant difference between the "non-cleft side" and "cleft side" in group 0 
+(404.27±103.72/117.73±92.25; p= =0.00), group 1 (434.29±86.70/388.31±109.51; p= =0.01), and group 4 (430.98 
+±98.11/366.71±154.59; p= =0.02). No significant differences were found in group 2 (423.57±98.12/383.47± 
+135.88; p= =0.06) or group 3 (433.02±116.07/384.16±146.55; p= =0.19). 
+Conclusion: Based on the design of this study, alveolar bone grafting was similar to normal bone within 2-7 months 
+postoperatively. (Imaging Sci Dent 2012; 42 : 225-9) </p>
+
+<p>bone analysis using a computer-aided diagnosis (CAD) 
+system for evaluation of the graft site of the cleft palate. 
+The purpose of this study was to use a CAD system on 
+digital images as a tool to quantitatively measure the pixel 
+area of trabecular bone changes after alveolar bone grafting 
+in unilateral cleft lip and palate (UCLP) patients. </p>
+
+<p>Materials and Methods </p>
+
+<p>The occlusal radiographs taken from 70 UCLP patients 
+at the Radiologic Clinic, Faculty of Dentistry, Khon Kaen </p>
+
+<p>University from 1999 to 2010 were surveyed retrospec-
+tively. The exclusion criteria for the radiographs were 
+images that had poor diagnostic quality including scratches 
+on the radiograph or too much distortion, and patients who 
+did not undergo follow-up. Therefore, 20 patients' data 
+were excluded and 50 UCLP patients' images were included 
+in this study. The images were classified as follows: group 
+0: before bone grafting, 50 images, group 1: one month 
+after bone grafting, 33 images, group 2: 2-4 months after 
+bone grafting, 24 images, group 3: 5-7 months after bone 
+grafting, 15 images, and group 4: 8 or more months after </p>
+
+<p>─ 226 ─ </p>
+
+<p>Evaluation of alveolar bone grafting in unilateral cleft lip and palate patients using a computer-aided diagnosis system </p>
+
+<p>A 
+B 
+C 
+D 
+E </p>
+
+<p>1 </p>
+
+<p>2 </p>
+
+<p>Fig. 1. A pre-operative occlusal radiograph. The upper row 1: the regions of interest cropped from the non-cleft side area. The lower row 
+2: the regions of interest cropped from the cleft side area: A. original image, B. median filtering, C. morphological skeletonization, D. 
+eroded image, E. dilated image. </p>
+
+<p>bone grafting, 21 images. The 50 patients included 20 
+males and 30 females. Patient age at the time of the alve-
+olar bone grafting ranged from 8 to 29 years (mean; 12.3 
+±4.6). There were 16 sites of right UCLP and 34 sites of 
+left UCLP. All of the images were digitized on a flatbed 
+image scanner with a resolution of 600 dots per inch (dpi) 
+spatial resolution and 8-bit depth contrast resolution (256 
+gray levels) (Epson expression 10000XL, Long Beach, 
+CA, USA). 
+The CAD system 11 was used to select two regions of 
+interest (ROIs), the 'non-cleft side' and 'cleft side'. The 
+CAD algorithm was implemented by a technical comput-</p>
+
+<p>ing language (<rs id="software-1" type="software">MATLAB</rs> <rs corresp="#software-1" type="version-number">R2010a</rs>, <rs corresp="#software-1" type="creator">MathWorks Inc.</rs>., Natick, 
+MA, USA). The ROI, a square portion of 64×64 pixels, 
+was extracted by dragging the mouse from a randomly 
+selected single point to 64 pixels left and 64 pixels down-
+ward. The tooth structure, periodontal ligament, and lamina 
+dura were excluded from each ROI. Next, the noise was 
+removed by median filtering. Morphological skeletoniza-
+tion was then used to extract the medial axis of the trabe-
+cular bone, which was regarded as the prominent region 
+that was brighter than the surrounding structures, and sub-
+sequently, the images were enlarged 64-fold. The 'strel' 
+function was selected from the computing language to </p>
+
+<p>─ 227 ─ </p>
+
+<p>Pipop Sutthiprapaporn et al </p>
+
+<p>A 
+B 
+C 
+D 
+E </p>
+
+<p>1 </p>
+
+<p>2 </p>
+
+<p>Fig. 2. The post-operative occlusal radiograph at 5-7 months postoperatively. The upper row 1: the regions of interest cropped from the 
+non-cleft side area. The lower row 2: the regions of interest cropped from the cleft side area after alveolar bone grafting. A. original image, 
+B. median filtering, C. morphological skeletonization, D. eroded image, E. dilated image. </p>
+
+<p>create a flat, rectangle-shaped structuring element (strel 
+('rectangle',[2 3])) where [2 3] is the size. In the matrix 
+[2 3], the first element was the number of rows in the str-
+ucturing element neighbourhood; the second element was 
+the number of columns. Then, the most basic morpholog-
+ical operations, which were 'erosion' and 'dilation,' were 
+performed. The 'erosion' function removed pixels on the 
+object boundaries, while dilation added pixels to the bound-
+aries of objects in an image. The number of pixels added 
+or removed from the objects in an image depends on the 
+size and the shape of the structuring element used to pro-
+cess the image. Finally, the pixel area calculation was used 
+to estimate the area of the trabecular bone in the binary 
+image, that is, the digital image that had only two possible 
+values for each pixel, namely 0 and 1 (Figs. 1 and 2). The 
+pixel area of the "non-cleft side" and "cleft side" from 
+group 0 to group 4 were calculated and compared. The 
+measurements were made five times, once a week, on each 
+side by an oral radiologist. Five positions were randomly 
+selected at the "non-cleft side" and "cleft side" on the same 
+image. All of the pixel areas of the image were then cal-
+culated. Statistical tests were performed using <rs id="software-0" type="software">SPSS</rs> <rs corresp="#software-0" type="version-number">10.1</rs> 
+(<rs corresp="#software-0" type="creator">SPSS Inc.</rs>., Chicago, IL, USA). Descriptive statistics were 
+applied. The Shapiro-Wilk test was used to evaluate a nor-
+mally distributed pixel area. Wilcoxon signed ranks test 
+was used when the data did not show normal distribution 
+and the paired samples t test was used when the data show-
+ed normal distribution. The study design was approved by 
+the Khon Kaen University Ethics Committee for Human 
+Research. </p>
+
+<p>Results </p>
+
+<p>The pixel area was significantly different between the 
+"non-cleft side" and "cleft side" in group 0 (404.27± 
+103.72/117.73±92.25; p= =0.000), group 1 (434.29± 
+86.70/388.31±109.51; p= =0.012), and group 4 (430.98± 
+98.11/366.71±154.59; p= =0.020), whereas there were no </p>
+
+<p>significant differences found in group 2 (423.57±98.12/ 
+383.47±135.88; p= =0.060) or group 3 (433.02±116.07/ 
+384.16±146.55; p= =0.192) (Table 1). </p>
+
+<p>Discussion </p>
+
+<p>Alveolar bone grafting in patients with cleft lip and pal-
+ate is now a common practice owing to several advantages. 
+It can help to prevent the collapse and constriction of the 
+dental arch, to close the oronasal fistula, and to allow erup-
+tion of teeth into the cleft. The bone grafting is fully revas-
+cularized between 14 and 21 days, and new bone is form-
+ed in approximately six weeks and has matured after six 
+months. 12 It is generally thought that osseous healing of 
+transplants is completed six months after the operation. 
+Nightingale et al compared three methods of radiographic 
+assessment, the Bergland, Kindelan, and Chelsea scales, 
+which produced great reproducibility rather than validity. 9 
+Over-and under-estimation of the success rate of the alve-
+olar bone grafting has also been reported in some cases. 13 
+The CAD system, therefore, has been developed to deter-
+mine the bone quantity in the alveolar cleft after bone 
+grafting. This CAD system uses mathematical morpholo-
+gy and calculates the area on the binary images that can 
+be produced by <rs type="software">MathWorks</rs>. Our results showed that the 
+pixel areas from the binary images in the "cleft side" were 
+significantly smaller than those on the "non-cleft side" in 
+group 0 (before bone grafting) and group 1 (one month 
+after bone grafting). This means that the trabecular bone 
+increased but was still less than the normal side. In addi-
+tion, there was no significant difference found in group 2 
+(2-4 months after bone grafting) and group 3 (5-7 months 
+after bone grafting), which means the trabecular bone grad-
+ually increased in the 2-4 months and was similar to the 
+normal bone within 5-7 months. It should be noted that the 
+new bone formation with osteoid deposition indicated 
+remodeling of 25-55% at 3 months postoperatively and 
+the grafted bone had a denser structure than the control </p>
+
+<p>─ 228 ─ </p>
+
+<p>Evaluation of alveolar bone grafting in unilateral cleft lip and palate patients using a computer-aided diagnosis system </p>
+
+<p>Table 1. The pixel area in the "non-cleft side" and "cleft side" in each group </p>
+
+<p>Group 
+Non-cleft side 
+Cleft side 
+p -value 
+Mean±SD 
+95%CI 
+Shapiro wilk 
+Mean±SD 
+95% CI 
+Shapiro wilk </p>
+
+<p>0 
+404.27±103.72 
+374.80-433.75 
+0.724 
+117.73±92.25 
+91.51-143.94 
+0.002 
+0.000** 
+1 
+434.29±86.70 
+403.03-465.54 
+0.160 
+388.31±109.51 
+348.83-427.80 
+0.859 
+0.012* 
+2 
+423.57±98.12 
+381.13-466.00 
+0.790 
+383.47±135.88 
+324.71-442.23 
+0.244 
+0.060* 
+3 
+433.02±116.07 
+368.74-497.30 
+0.933 
+384.16±146.55 
+303.00-465.32 
+0.508 
+0.192* 
+4 
+430.98±98.11 
+386.32-475.64 
+0.208 
+366.71±154.59 
+296.34-437.08 
+0.341 
+0.020* </p>
+
+<p>*Paired samples t test, **Wilcoxon signed ranks test </p>
+
+<p>specimen from the iliac crest. 14 The histomophometric 
+analysis has shown that major bone remodeling can already 
+be seen after 4-5 months. 15 However, the pixel area pre-
+sented a significant difference again in group 4 (8 or more 
+months after bone grafting), which means the quantity of 
+bone had decreased after eight months. Honma et al also 
+reported that the grafted bone volumes one year after alveo-
+lar bone grafting were significantly reduced compared 
+with 3 months after grafting using CT. 16 Therefore, long-
+term follow-up is suggested to evaluate the trabecular bone 
+at the bone grafting area in comparison to the side with 
+normal bone. Dental radiographs may be used with the 
+CAD system to evaluate the bone grafting area more easily 
+than CT images and show cost-effectiveness. 
+The CAD system was developed based on mathematical 
+morphology using <rs type="software">MathWorks</rs>. The ROI can be controlled 
+by using the same size and can be changed into binary 
+images for calculating the pixel area that corresponds to 
+the total number of pixels in the image. The CAD system 
+could be useful for evaluating grafting failure, which 
+would permit re-grafting before the eruption of the teeth 
+and improve the prognosis of cleft lip and palate patients. 
+Trindade et al 8 and Jia et al 17 showed 86% and 88% success 
+rates, respectively, for the long term outcome of alveolar 
+bone grafting in a UCLP group using the Bergland scale. 
+However, their studies did not evaluate the success rate. 
+A further prospective study would be required using this 
+CAD system to support surgeons to determine the appro-
+priate period for re-grafting or to explain the success of 
+bone grafting compared with normal bone on the same 
+image. The quantity of the pixel area might be useful for 
+further and better treatment planning for artificial eruption 
+in the cleft area. 
+In conclusion, based on the design of this study, alveolar 
+bone grafting was similar to normal bone within 2-7 months 
+postoperatively and our results suggest that the CAD sys-
+tem might be used to calculate the bone grafting quantity 
+in UCLP patients. </p>
+
+
+
+<p>─ 229 ─ </p>
+
+<p>Pipop Sutthiprapaporn et al </p>
+
+</text></tei>

@@ -1,0 +1,972 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC3935166" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:25+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>Abstract </p>
+
+<p>Background and aim: Audience response (AR) systems are increasingly 
+used in undergraduate medical education. However, high costs and </p>
+
+<p>Felizian Kühbeck 1 
+Stefan Engelhardt 1 </p>
+
+<p>complexity of conventional AR systems often limit their use. Here we </p>
+
+<p>Antonio Sarikas 1 </p>
+
+<p>present a novel AR system that is platform independent and does not 
+require hardware clickers or additional software to be installed. 
+Methods and results: "<rs type="software">OnlineTED</rs>" was developed at Technische Uni-
+versität München (TUM) based on Hypertext Preprocessor (PHP) with </p>
+
+<p>1 Technische Universität 
+München (TUM), Institute of </p>
+
+<p>a My Structured Query Language (MySQL)-database as server-and </p>
+
+<p>Pharmacology and 
+Toxicology, Munich, Germany </p>
+
+<p><rs type="software">Javascript</rs> as client-side programming languages. "<rs type="software">OnlineTED</rs>" enables 
+lecturers to create and manage question sets online and start polls in-
+class via a web-browser. Students can participate in the polls with any 
+internet-enabled device (smartphones, tablet-PCs or laptops). A paper-
+based survey was conducted with undergraduate medical students and 
+lecturers at TUM to compare "<rs type="software">OnlineTED</rs>" with conventional AR systems 
+using clickers. "<rs type="software">OnlineTED</rs>" received above-average evaluation results 
+by both students and lecturers at TUM and was seen on par or superior 
+to conventional AR systems. The survey results indicated that up to 80% 
+of students at TUM own an internet-enabled device (smartphone or 
+tablet-PC) for participation in web-based AR technologies. 
+Summary and Conclusion: "<rs type="software">OnlineTED</rs>" is a novel web-based and plat-
+form-independent AR system for higher education that was well received 
+by students and lecturers. As a non-commercial alternative to conven-
+tional AR systems it may foster interactive teaching in undergraduate 
+education, in particular with large audiences. </p>
+
+<p>Keywords: audience response system, interactive teaching </p>
+
+<p>Introduction </p>
+
+<p>There is an increasing shift in higher education from 
+teacher-centered to more interactive, student-centered 
+teaching concepts. This is in part due to the known limit-
+ations of traditional lectures, such as low student atten-
+tion or inefficient knowledge acquisition and translation 
+[1]. To foster interactive learning and student engage-
+ment, in particular with large student numbers, audience 
+response (AR) systems are increasingly used at educa-
+tional institutions worldwide [2]. AR systems typically 
+consist of an hardware transmitter ("clicker") that is 
+controlled by the student, a radio-frequency receiver and 
+a computer with software to display voting results during 
+the presentation by the instructor, e.g. as histogram of 
+responses [3]. AR systems are used in a variety of ways: 
+to increase student interaction and attention, to promote 
+in-class discussions, to evaluate student knowledge or 
+as formative assessments for the lecturer to adjust 
+teaching pace and didactics [2]. Recent meta-analyses 
+in health profession education showed that AR systems 
+are favored by the vast majority of students and likely </p>
+
+<p>result in improved short-term and long-term knowledge 
+outcomes [4]. However, many instructors only reluctantly 
+use AR systems in teaching. Frequently cited reasons are 
+high acquisition and maintenance costs, logistic efforts 
+or technical difficulties to operate AR system with different 
+operating systems and presenter software [5]. 
+To overcome these limitations we sought to develop a 
+novel web-based AR system that is specifically adapted 
+to the didactic needs and economic requirements of 
+higher education. Here we present "<rs type="software">OnlineTED</rs>", a novel 
+smartphone-and web-based AR system that is free-to-
+use, platform independent and does not require hardware 
+clicker or additional software. Based on user evaluation 
+data, we analyzed the strengths and limitations of "On-
+lineTED" in comparison with a conventional AR system 
+that is used at TUM and discuss the potential of web-
+based AR systems for undergraduate medical education. </p>
+
+<p>1/13 
+GMS Zeitschrift für Medizinische Ausbildung 2014, Vol. 31(1), ISSN 1860-3572 </p>
+
+<p>project </p>
+
+<p>This is the original (English) version. 
+The translated (German) version starts at p. 7. </p>
+
+<p>OPEN ACCESS </p>
+
+<p>medicine </p>
+
+<p>Methods </p>
+
+<p>Programming and online database </p>
+
+<p>"<rs type="software">OnlineTED</rs>" was developed and programmed by students 
+and lecturers at TUM. Hypertext Preprocessor (PHP) as 
+server-side programming language was used to build a 
+web-based AR system that is compatible with different 
+operating systems. The user interface was linked to a My 
+Structured Query Language (MySQL) database for storage 
+and management of user accounts and data. <rs type="software">JavaScript</rs> 
+was used as client-side programming language for anim-
+ated features, e.g. a poll countdown function. Hypertext 
+Transfer Protocol Secure (HTTPS) was implemented to 
+ensure secure internet communication for the user. </p>
+
+<p>Structure and features </p>
+
+<p>The AR system "<rs type="software">OnlineTED</rs>" can be accessed via the open-
+access website http://www.OnlineTED.com (German 
+version: http://www.OnlineTED.de). After log-on, the main 
+page conveys information for the auditorium to participate 
+in a poll (e.g. website URL for login, session token, quick 
+response (QR) code). For the lecturer, the main page is 
+the starting point to create, manage or commence polls. 
+Flags link to the sub-pages "poll viewer" to start of a 
+polling session, "quick poll" for spontaneous polls and 
+"poll editor" to create or manage question sets (see Figure 
+1). In the latter, new poll sets and questions in multiple-
+choice format can be created and saved via an online 
+form (see Figure 2). In addition, image (gif, jpg or png), 
+movie (mov, avi or mpeg) or sound files (mp3, aac or wav) 
+can be uploaded and saved with each question. Other 
+media sources of the internet (e.g. http:// 
+www.youtube.com/) can be directly embedded. In addition 
+to prepared and saved questions sets, the lecturer can 
+conduct spontaneous polls by choosing different rating 
+scales (yes / no / undecided; very low -very high; excel-
+lent -insufficient; strongly agree -strongly disagree) from 
+the "quick poll" options. 
+Students can participate in the poll after log-on to the 
+website with any internet-enabled device (smartphone, 
+tablet-PC, laptop). A poll is joined by entering a four-digit 
+access code (session token) that is automatically gener-
+ated and displayed for each session. Alternatively, stu-
+dents can scan a QR code with their mobile device. Upon 
+session log-on, answer options are automatically dis-
+played on the student devices (see Figure 3A ). After vot-
+ing, the results are dynamically displayed in the present-
+ation by the lecturer as growing histograms depicting the 
+number and percentage of votes for each answer (see 
+Figure 3B ). 
+Each poll question requires a bidirectional data transfer 
+of approximately 0.03 Mbit. Based on the average con-
+nections speed of wireless Local Area Network (LAN) (54 
+MBits/s) or cellular mobile networks such as Universal 
+Mobile Telecommunications System (UMTS) (7.2 Mbit/s) 
+[6], "<rs type="software">OnlineTED</rs>" enables polls with large audiences in a 
+typical lecture hall setting. </p>
+
+<p>The AR system was programmed in <rs type="software">PHP</rs> as a server-sided 
+programming language to be compatible with all operating 
+systems without the requirement to install additional 
+software. </p>
+
+<p>Study design and user evaluation </p>
+
+<p>To evaluate the use of "<rs type="software">OnlineTED</rs>" in higher education, 
+the tool was tested with undergraduate medical students 
+and instructors in lectures (average number of parti-
+cipants: 200±50) and seminars (average number of 
+participants: 22±3) of pharmacology at TUM in the winter 
+term of 2012/13. A conventional AR system using hard-
+ware clickers (Interwrite Cricket , Scotsdale, USA) that is 
+routinely used for teaching at TUM served as a comparis-
+on. 
+Information on usability and user perception of the two 
+different AR systems was solicited through a paper survey 
+at the end of the term. A 1-to-6 rating scale was used to 
+assess the overall rating of "<rs type="software">OnlineTED</rs>". The answer op-
+tions were 1 "excellent", 2 "very good", 3 "good", 4 "fair", 
+5 "poor" and 6 "inadequat". For the comparison of "Online-
+TED" and the conventional AR systems, survey parti-
+cipants were asked to select the option "superior", "equal" 
+or "inferior" for each of the categories, respectively. 
+Study participation was voluntary and both informed 
+consent by the participants and approval by the ethics 
+committee of TUM were obtained. Website statistics were 
+tracked by Google Analytics (Google, Mountain View, CA). </p>
+
+<p>Results </p>
+
+<p>Comparison "<rs type="software">OnlineTED</rs>" vs. conventional AR 
+system </p>
+
+<p>A conventional AR system using hardware clickers (Inter-
+write Cricket , Scotsdale, USA) that is routinely used for 
+teaching at TUM served as a comparison. Interwrite 
+Cricket consists of 2.4 Ghz band radio receiver and radio 
+transmitters (clicker). The system can manage up to 2047 
+clickers per receiver. The keypad of the clicker consists 
+of six numeric and additional true and false buttons. The 
+clickers are powered by two AAA batteries each that last 
+approximately 20 weeks based on typical usage. The 
+operative range of the clickers is up to 150 feet (45.7 m) 
+from the receivers (in free space). Interwrite Cricket soft-
+ware runs on Windows, Mac and Linux and supports the 
+generation of multiple-choice and true/false questions 
+with a authoring software that requires installation on 
+the computer of the presenter (http://www.banxia.com/ 
+prs/hardware/cricket). 
+In contrast, "<rs type="software">OnlineTED</rs>" is a web-based AR system that 
+utilizes internet-enabled end devices of the audience as 
+handsets. "<rs type="software">OnlineTED</rs>" does not require the installation 
+of software, is fully web-based and thus can be used on 
+any operating system. Each poll question requires a bi-
+directional data transfer of approximately 0.03 Mbit, 
+which enables the participation of large audiences even </p>
+
+<p>2/13 
+GMS Zeitschrift für Medizinische Ausbildung 2014, Vol. 31(1), ISSN 1860-3572 </p>
+
+<p>Kühbeck et al.: OnlineTED.com − a novel web-based audience response ... </p>
+
+<p>Figure 1: Structure and features of the main page in "<rs type="software">OnlineTED</rs>". After log-on, the main page conveys information for poll 
+participation such as website URL for login, session token or quick response code. Flags link to the sub-pages "poll viewer" to 
+start a polling session, "quick poll" for spontaneous polls and "poll editor" to create or manage question sets. </p>
+
+<p>Figure 2: Structure and features of the poll editor in "<rs type="software">OnlineTED</rs>". For lecturers, the poll editor is the starting point to manage 
+and create poll sets and questions in multiple-choice format. </p>
+
+<p>with low data bandwidth. The operative range of "Online-
+TED" is not spatially limited and thus can be used for 
+distance teaching, e.g. webinars. Sets of multiple-choice 
+questions can be created and manage in "<rs type="software">OnlineTED</rs>", 
+and spontaneous polls with different rating scales (yes / 
+no / undecided; very low -very high; excellent -insuffi-
+cient; strongly agree -strongly disagree) conducted as 
+"quick polls" options. </p>
+
+<p>Survey participation </p>
+
+<p>To evaluate "<rs type="software">OnlineTED</rs>" and compare its user acceptance 
+with conventional AR systems, a paper-based survey was 
+conducted with students and lecturers at TUM. 361 of 
+709 (51%) students participated in the survey. Of these, 
+203 students were in their first clinical year (third year of 
+study) at TUM and enrolled in the course "basic pharma-
+cology" consisting of lectures and seminars. 158 students 
+were in the third clinical year (sixth year of study) at TUM 
+and enrolled in the course "clinical pharmacology" that </p>
+
+<p>3/13 
+GMS Zeitschrift für Medizinische Ausbildung 2014, Vol. 31(1), ISSN 1860-3572 </p>
+
+<p>Kühbeck et al.: OnlineTED.com − a novel web-based audience response ... </p>
+
+<p>Figure 3: Display of voting options and results. A. Display of answer options on a mobile device of the student. B. Display of 
+voting results in the presentation of the lecturer. </p>
+
+<p>consisted of lectures only. The average age of the stu-
+dents enrolled was 23.4 (SD 3.5) years in the course 
+"basic pharmacology" and 25.3 (SD 3.3) years in the 
+course "clinical pharmacology". Of the lecturers, nine of 
+ten participated in the survey. Their average age was 40.1 
+(SD 10.0) years. </p>
+
+<p>Web statistics and evaluation data </p>
+
+<p>The <rs corresp="#software-50" type="version-number">beta-version</rs> of "<rs id="software-50" type="software">OnlineTED</rs>" was made available on 
+November 1 st , 2012 at http://www.OnlineTED.com (Ger-
+man version: http://www.OnlineTED.de). As of February 
+28th, 2013, the website has been accessed by 2,997 
+visitors with 37,696 page hits (approximately 750 visitors 
+and 9,424 page hits per month). 
+The overall rating of "<rs type="software">OnlineTED</rs>" by lecturers was "very 
+good" (5 out of 10) or "excellent" (4 out of 10). The didact-
+ic benefit of "<rs type="software">OnlineTED</rs>" for teaching was considered 
+"excellent" by 6 out of 10 and "very good" by 3 out of 10 
+lecturers. Free text comments by the lecturers indicated 
+that "<rs type="software">OnlineTED</rs>" provided a "helpful basis for in-class 
+discussions between students and lecturer". In addition, 
+"playful discussion of topics and clinical problems", e.g. 
+by presenting clinical cases and questions on pharmaco-
+therapy, drug choice and clinical management were 
+considered a key didactic benefit of AR systems. A specific 
+advantage of "<rs type="software">OnlineTED</rs>" was seen in the possibility to 
+"spontaneously assess the learning and knowledge state" 
+of the students by using the instant poll option. 
+When asked to compare "<rs type="software">OnlineTED</rs>" with conventional 
+AR systems using hardware clickers, the lecturers rated 
+"OnlineTED" superior in seven out of nine categories (see 
+Figure 4A ). The areas with the highest advantage for 
+lecturers were seen in time required to use the TED sys-</p>
+
+<p>tem for the first time, well as its flexibility (10 out of 10 
+and 9 out of 10, respectively). 
+Approximately 80% (289 of 361) of the undergraduate 
+medical students in the studied cohort at TUM indicated 
+to own a mobile internet-enabled device (smartphone, 
+tablet-PC or iPad). Of these, the majority (92%, n=265) 
+could access the polling session without difficulty using 
+either wireless LAN or cellular data network during lec-
+tures or seminars. The vast majority of students (94%, 
+n= 274) gave an overall rating for "<rs type="software">OnlineTED</rs>" of "excel-
+lent" or "very good". "<rs type="software">OnlineTED</rs>" was seen on par or su-
+perior in all categories when compared to conventional 
+AR systems using hardware clickers (see Figure 4B ). </p>
+
+<p>Discussion </p>
+
+<p>In this article we present "<rs type="software">OnlineTED</rs>", a novel web-based 
+audience response system that is free-to-use, platform-
+independent and does not require hardware clickers. Our 
+aim was to develop an AR system for higher education 
+that is on par with commercial systems with respect to 
+functionality and usability. Surprisingly, "<rs type="software">OnlineTED</rs>" was 
+evaluated superior in a number of categories by both 
+students and lecturers (see Figure 4). In particular, its 
+usability and flexibility with regard to handling, question 
+management and in-class performance were seen as key 
+advantages of "<rs type="software">OnlineTED</rs>" in comparison to conventional 
+AR systems. Finally, "<rs type="software">OnlineTED</rs>" is a non-commerical AR 
+system that is freely available to educators and students 
+worldwide. 
+A potential limitation of "<rs type="software">OnlineTED</rs>" is its dependency on 
+internet availability that may be limited or restricted at 
+some university campuses due to poor WLAN coverage </p>
+
+<p>4/13 
+GMS Zeitschrift für Medizinische Ausbildung 2014, Vol. 31(1), ISSN 1860-3572 </p>
+
+<p>Kühbeck et al.: OnlineTED.com − a novel web-based audience response ... </p>
+
+<p>Figure 4: Comparison of "<rs type="software">OnlineTED</rs>" with a conventional AR system using clickers. A. Evaluation results by lecturers. B. Evaluation 
+results by undergraduate medical students at TUM. The response rate was 8 of 10 and 361 of 709 (51%), respectively. The 
+stacked bars depict the relationship of individual items to the whole in percent. </p>
+
+<p>or cellular network reception. Another important issue is 
+the safety of data on the internet. To address these con-
+cerns, "<rs type="software">OnlineTED</rs>" has implemented HTTPS, a commu-
+nications protocol for secure communication over a 
+computer network that is used for sensitive data transfer 
+e.g. electronic banking. HTTPS provides bi-directional 
+encryption of data transfer between a client and server 
+and authentication of the web site and associated web 
+server [7]. As an additional safety measure, "<rs type="software">OnlineTED</rs>" 
+does not permit users to identify the IP address of devices 
+used in a poll, thus assuring the anonymity of poll parti-
+cipants. Nevertheless, further studies are needed to in-
+vestigate the concerns and attitudes of students and 
+lecturers to web-based technology and its impact for 
+higher education. 
+Extensive research on AR systems in higher education 
+has indicated their effectiveness on different learning 
+outcomes, such as knowledge gain, student self-confid-
+ence and positive learner reactions (reviewed by [5], [8], 
+[9]). The most commonly cited benefit of AR systems are 
+the increased student engagement through active parti-
+cipation. However, while AR systems provide a convenient 
+way to improve student interactivity, it is in the end ped-
+agogy and didactic implementation that matters. In a re-
+cent study by Smith et al. [10], students were encouraged 
+to discuss TED clicker questions with their classmates 
+prior to voting. The authors demonstrated that peer dis-</p>
+
+<p>cussions are effective means of active learning that res-
+ulted in significantly improved conceptual understanding 
+when used with AR systems. In this regard, the frequently 
+cited limitation of AR systems that not all students may 
+be able to participate in a poll due to limited numbers of 
+clickers or internet-enabled devices may offer the oppor-
+tunity for collaborative voting and peer discussions in 
+class. Another pedagogical aspect of AR systems, which 
+is often overlooked, is its use in formative assessment 
+and feedback. A recent report by Alexander et al. showed 
+that AR systems can be successfully used to monitor the 
+progress of students in the curriculum and allow students 
+to compare their learning progress with other classmates 
+[11] . 
+The omnipresence of the internet and availability of 
+computer-based technologies open up new opportunities 
+to actively engage students in teaching. Our survey re-
+vealed that up to 80% of undergraduate medical students 
+at TUM posses an internet-enabled device (smartphone, 
+tablet or iPad). This results is in accordance with recent 
+studies that 60 to 80% of UK medical students own a 
+smartphone [12], [13]. Web-based AR systems such as 
+"<rs type="software">OnlineTED</rs>" may thus provide a feasible alternative to 
+conventional, hardware-based AR technology in teaching 
+and become a suitable tool to foster interactive learning 
+and student engagement in undergraduate medical 
+education, in particular with large audiences. </p>
+
+<p>5/13 
+GMS Zeitschrift für Medizinische Ausbildung 2014, Vol. 31(1), ISSN 1860-3572 </p>
+
+<p>Kühbeck et al.: OnlineTED.com − a novel web-based audience response ... </p>
+
+<p>Acknowledgements </p>
+
+<p>We thank Leszek Wojnowski for critical reading of the 
+manuscript. We are grateful to Pascal Berberat and co-
+workers for providing statistical data on the age distribu-
+tion of the survey cohort. </p>
+
+<p>Competing interests </p>
+
+<p>The authors declare that they have no competing in-
+terests. </p>
+
+
+
+<p>Corresponding author: 
+Dr. med. Antonio Sarikas 
+Technische Universität München (TUM), Institute of 
+Pharmacology and Toxicology, Biedersteiner Str. 29, 
+80802 Munich, Germany, Phone: +49 (0)89/4140-3298, 
+Fax: +49 (0)89/4140-3261 
+sarikas@ipt.med.tum.de </p>
+
+<p>Please cite as 
+Kühbeck F, Engelhardt S, Sarikas A. OnlineTED.com − a novel 
+web-based audience response system for higher education. A pilot 
+study to evaluate user acceptance. GMS Z Med Ausbild. 
+2014;31(1):Doc5. 
+DOI: 10.3205/zma000897, URN: urn:nbn:de:0183-zma0008978 </p>
+
+<p>This article is freely available from 
+http://www.egms.de/en/journals/zma/2014-31/zma000897.shtml </p>
+
+<p>Received: 2013-07-02 
+Revised: 2013-10-15 
+Accepted: 2013-11-20 
+Published: 2014-02-17 </p>
+
+<p>Copyright 
+©2014 Kühbeck et al. This is an Open Access article distributed under 
+the terms of the Creative Commons Attribution License 
+(http://creativecommons.org/licenses/by-nc-nd/3.0/deed.en). You 
+are free: to Share -to copy, distribute and transmit the work, provided 
+the original author and source are credited. </p>
+
+<p>6/13 
+GMS Zeitschrift für Medizinische Ausbildung 2014, Vol. 31(1), ISSN 1860-3572 </p>
+
+<p>Kühbeck et al.: OnlineTED.com − a novel web-based audience response ... </p>
+
+<p>OnlineTED.de − ein webbasiertes Abstimmungssystem 
+für die Lehre. Eine Pilotstudie zur 
+Nutzerakzeptanzmessung </p>
+
+<p>Zusammenfassung </p>
+
+<p>Hintergrund und Ziel: TED-Abstimmungssysteme werden zunehmend 
+in der medizinischen Ausbildung an Hochschulen eingesetzt. Jedoch li-</p>
+
+<p>Felizian Kühbeck 1 
+Stefan Engelhardt 1 </p>
+
+<p>mitieren hohe Kosten und Komplexität herkömmlicher TED-Systeme </p>
+
+<p>Antonio Sarikas 1 </p>
+
+<p>häufig deren Anwendung. In diesem Projektartikel stellen wir ein neues 
+webbasiertes TED-System vor, das keine Hardware-Klicker oder Instal-
+lation zusätzlicher Software erfordert und mit allen Betriebssystemen 
+kompatibel ist. </p>
+
+<p>1 Technische Universität 
+München (TUM), Institut für </p>
+
+<p>Methoden und Ergebnisse: "OnlineTED" wurde an der Technischen 
+Universität München (TUM) entwickelt und basiert auf Hypertext Prepro-</p>
+
+<p>Pharmakologie und 
+Toxikologie, München, 
+Deutschland </p>
+
+<p>cessor (PHP) mit My Structured Query Language (MySQL)-Datenbank 
+als serverseitige und Javascript als nutzerseitige Programmiersprachen. 
+"OnlineTED" ermöglicht es Dozenten, Fragensammlungen online zu 
+erstellen, verwalten und in der Lehrveranstaltung mit einem Webbrowser 
+anzuzeigen. Studierende können mit jedem internetfähigen Endgerät 
+(Smartphone, Tablet-PC oder Laptop) an der Abstimmung teilnehmen. 
+Eine Datenerhebung mit Hilfe eines Fragebogens, der Studierenden 
+und Dozenten der TUM ausgehändigt wurde, enthielt Fragen zum Besitz 
+von internetfähigen Endgeräten, der Akzeptanzmessung von "OnlineTED" 
+sowie dem Vergleich von "OnlineTED" mit einem kommerziellen TED-
+System mit Klickern. Die Nutzerevaluationen von Studierenden und 
+Dozenten ergab eine überdurchschnittlich positive Beurteilung von 
+"OnlineTED" im Vergleich zum kommerziellen TED-System mit Klickern. 
+Die Mehrheit (80%) der befragten Studierenden gab an, ein internetfä-
+higes Endgerät zu besitzen. 
+Zusammenfassung und Schlussfolgerungen: "OnlineTED" ist ein neues, 
+webbasiertes und plattformunabhängiges TED-Abstimmungssystem für 
+Hochschulen, das von Studenten und Dozenten überdurchschnittlich 
+positiv evaluiert wurde. Als nicht-kommerzielle Alternative zu herkömm-
+lichen TED-Systemen unterstützt es die interaktive Ausbildung von 
+Studierenden, insbesondere bei großen Teilnehmerzahlen. </p>
+
+<p>Schlüsselwörter: TED, Abstimmungssystem, interaktive Lehre </p>
+
+<p>Einleitung </p>
+
+<p>Die Ausbildung an Hochschulen unterliegt einem zuneh-
+menden Wandel von einer dozentenzentrierten zu einer 
+verstärkt studentenfokussierten, interaktiven Lehre. Ur-
+sachen für diese Entwicklung sind unter anderem bekann-
+te Limitationen der klassischen Vorlesung, wie z. B. die 
+hohe Passivität der Studierenden oder ein oft wenig effi-
+zienter Wissenserwerb und -transfer [1]. Um die studen-
+tische Mitarbeit und Interaktivität der Lehre zu verbes-
+sern, insbesondere bei Lehrveranstaltungen mit hohen 
+Teilnehmerzahlen, werden weltweit an Bildungseinrich-
+tungen zunehmend elektronische Abstimmungssysteme 
+(Synonym: Tele-Dialog, TED) im Unterricht eingesetzt [2]. </p>
+
+<p>TED-Systeme bestehen typischerweise aus einem Funk-
+sender ("Klicker"), der von den Studierenden bedient wird, 
+einem Funkempfänger, sowie spezieller Software, um die 
+Abstimmungsergebnisse in der Präsentation des Dozen-
+ten* anzuzeigen, z.B. in Form von Histogrammen [3]. 
+TED-Systeme werden in der Lehre auf vielfältige Weise 
+eingesetzt: zur Förderung der studentischen Mitarbeit 
+und Aufmerksamkeit während der Lehrveranstaltung, als 
+Diskussionsgrundlage mit dem Auditorium, oder zur 
+Überprüfung des Wissens-und Verständisstands der 
+Studierenden. Ein weiterer Anwendungsbereich ist die 
+formative Evaluation (formative assessment), durch die 
+der Dozent mit Hilfe des TED-Systems eine sofortige 
+Rückmeldung von den Studierenden erhält, um Lehrstil 
+und -tempo bedarfsgerecht anzupassen [2]. </p>
+
+<p>7/13 
+GMS Zeitschrift für Medizinische Ausbildung 2014, Vol. 31(1), ISSN 1860-3572 </p>
+
+<p>Projekt </p>
+
+<p>This is the translated (German) version. 
+The original (English) version starts at p. 1. </p>
+
+<p>OPEN ACCESS </p>
+
+<p>Humanmedizin </p>
+
+<p>Aktuelle Metaanalysen der medizinischen Ausbildungsfor-
+schung haben gezeigt, dass TED-Systeme von der Mehr-
+heit der Studierenden gut angenommen werden und ihr 
+Einsatz mit einem erhöhten kurz-und langfristigen Ler-
+nerfolg verbunden sein kann [4]. 
+Dennoch werden TED-Systeme von vielen Dozenten nicht 
+oder nur zögerlich in der Lehre eingesetzt. Häufig genann-
+te Gründe sind die hohen Anschaffungs-und Wartungs-
+kosten konventioneller TED-Systeme, der logistische 
+Aufwand für die Durchführung von Abstimmungen, sowie 
+technische Schwierigkeiten wie zum Beispiel die Inkom-
+patibilität der Software mit unterschiedlichen Betriebssys-
+temen [5]. 
+Unser Ziel war diesen Limitationen mit der Entwicklung 
+eines neuen TED-Systems zu begegnen, das speziell an 
+die didaktischen Anforderungen und wirtschaftlichen 
+Möglichkeiten von Bildungseinrichtungen angepasst ist. 
+In diesem Projektartikel stellen wir mit "OnlineTED" ein 
+neues webbasiertes Abstimmungssystem vor, das keine 
+zusätzliche Hard-oder Software erfordert, plattformunab-
+hängig ist und kostenfrei genutzt werden kann. Auf der 
+Grundlage von Evaluationsergebnissen diskutieren wir 
+die Vor-und Nachteile von "OnlineTED" im Vergleich zu 
+einem an der TUM eingesetzten konventionellen Abstim-
+mungssystem und erörtern das Potenzial von webbasier-
+ten TED-Systemen für die Hochschullehre. </p>
+
+<p>Methoden </p>
+
+<p>Programmierung und Onlinedatenbank </p>
+
+<p>"OnlineTED" wurde von Studenten und Dozenten an der 
+TUM entwickelt und programmiert. Hypertext Preprocessor 
+(PHP) wurde als serverseitige Programmiersprache ver-
+wendet, um ein Betriebssystem-unabhängiges TED-Sys-
+tem zu konzipieren. Eine My Structured Query Language 
+(MySQL)-Datenbank diente der Speicherung und Verwal-
+tung von Benutzerdaten im Internet. JavaScript diente 
+als clientseitige Programmiersprache für dynamische In-
+halte, wie z. B. einer Countdown-Funktion während der 
+Abstimmung. Ein Hypertext Transfer Protocol Secure 
+(HTTPS) wurde implementiert, um eine sichere Internet-
+Kommunikation für die Nutzer zu gewährleisten. </p>
+
+<p>Aufbau und Funktionsumfang </p>
+
+<p>Das Abstimmungssystem "OnlineTED" kann über die In-
+ternetseite 
+http://www.OnlineTED.de 
+(http:// 
+www.OnlineTED.com, englischsprachige Version) aufge-
+rufen werden. Nach dem Login werden auf der Startseite 
+Informationen für die Teilnahme an einer Abstimmung 
+angezeigt (z.B. den Uniform Resource Locator (URL) der 
+Webseite mit einem aktuellen Zugangscode (Freischalt-
+code), sowie ein Quick Response (QR) Code) (siehe Abbil-
+dung 1). Für Dozenten ist die Startseite Ausgangspunkt 
+für das Starten, Verwalten oder Verfassen von TED-Fra-
+gen. Verschiedene Reiter ermöglichen den Zugriff auf die 
+jeweiligen Bereiche: durch Anklicken des Reiters "Über-</p>
+
+<p>sicht" kann eine bereits erstellte TED-Fragesammlung 
+ausgewählt und gestartet werden. Der Reiter "Spontanum-
+frage" verweist auf eine Sammlung von voreingestellten 
+allgemeinen Kurzumfragen und -abstimmungen ("ja" / 
+"nein" / "unentschlossen", "sehr gering" bis "sehr hoch", 
+"ausgezeichnet" bis "unzureichend", "trifft zu" bis "trifft 
+nicht zu") für den spontanen Einsatz in Lehrveranstaltun-
+gen. Im Bereich "Fragenverwaltung" können bereits be-
+stehende TED-Fragen modifiziert oder neue Fragensets 
+im Multiple Choice (MC)-Format mit Hilfe einer Eingabe-
+maske erstellt werden (siehe Abbildung 2). Das System 
+ermöglicht die direkte Einbindung von Bild-(gif, jpg oder 
+png), Film-(mov, avi oder mpeg) oder Audiodateien (mp3, 
+aac oder wav) in TED-Fragen. Alternativ können Hyperlinks 
+zu Lehrmedien (z.B. Filmclips in http://youtube.com) in 
+TED-Fragen eingefügt werden. 
+Studierende können sich mit jedem internetfähigen 
+Endgerät (Smartphone, Tablet-PC oder Laptop) bei "Onli-
+neTED" anmelden und an einer Abstimmung teilnehmen. 
+Die Anmeldung erfolgt durch die manuelle Eingabe des 
+vierstelligen Zugangscodes, der automatisch für jede 
+TED-Sitzung generiert und angezeigt wird. Alternativ ist 
+die Anmeldung durch Einscannen des QR-Codes möglich. 
+Die Antwortoptionen der vom Dozenten gestarteten TED-
+Frage werden automatisch auf den mobilen Endgeräten 
+der Teilnehmer angezeigt (siehe Abbildung 3A ). Die Ant-
+wortauswahl erfolgt durch Antippen oder Anklicken des 
+jeweiligen Antwortfelds im Display. Die Abstimmungser-
+gebnisse werden anschließend in der Präsentation des 
+Dozenten als wachsende Histogramme mit Prozentangabe 
+angezeigt (siehe Abbildung 3B ). 
+Jede TED-Frage erfordert eine bidirektionale Datenüber-
+tragung von ca. 0,03 Megabit (MBit). Auf Basis einer 
+durchschnittlichen Datenübertragungsgeschwindigkeit 
+von 54 MBit/s in Wireless Local Area Network (WLAN) 
+Funknetzen und 7,2 Mbit/s in Universal Mobile Telecom-
+munications System (UMTS) Mobilfunknetzen [6], kann 
+"OnlineTED" auch in Lehrveranstaltungen mit hohen 
+Teilnehmerzahlen eingesetzt werden. 
+Durch die Verwendung von PHP als serverseitige Program-
+miersprache ist "OnlineTED" mit allen gängigen Betriebs-
+systemen kompatibel. Eine Installation von zusätzlicher 
+Software auf dem Computer des Dozenten oder den 
+mobilen Endgeräten der Studierenden ist nicht erforder-
+lich. </p>
+
+<p>Evaluation und Studiendesign </p>
+
+<p>Um die Funktionalität und Benutzerfreundlichkeit von 
+"OnlineTED" in der Hochschullehre zu testen, wurde das 
+Abstimmungssystem im Wintersemester 2012/13 in 
+Vorlesungen (durchschnittliche Teilnehmerzahl: 200±50) 
+und Seminaren (durchschnittliche Teilnehmerzahl: 22±3) 
+der TUM eingesetzt. Ein konventionelles Abstimmungs-
+system mit Hardware-Klickern (Interwrite Cricket, Scotts-
+dale, USA), das an der TUM für die Lehre eingesetzt wird, 
+diente als Vergleich. 
+Die Datenerhebung erfolgte mit Hilfe eines Papierfrage-
+bogens, der Studierenden und Dozenten der TUM in den </p>
+
+<p>8/13 
+GMS Zeitschrift für Medizinische Ausbildung 2014, Vol. 31(1), ISSN 1860-3572 </p>
+
+<p>Kühbeck et al.: OnlineTED.de − ein webbasiertes Abstimmungssystem ... </p>
+
+<p>Abbildung 1: Aufbau und Funktionsumfang der Startseite von "OnlineTED". Nach dem Login werden auf der Startseite 
+Informationen für die Teilnahme an einer Abstimmung angezeigt (Webseiten-URL, Zugangscode sowie QR-Code). Reiter 
+ermöglichen den einfachen Zugriff auf die Bereiche "Übersicht" (für die Auswahl und Start bereits erstellter TED-Fragen), 
+"Spontanumfrage" (für die Durchführung von allgemeinen Kurzumfragen), sowie "Fragenverwaltung" (für die Neuerstellung 
+oder Bearbeitung von TED-Fragen). </p>
+
+<p>Abbildung 2: Aufbau und Funktionen der Fragenverwaltung. In der Fragenverwaltung können TED-Fragen verwaltet, überarbeitet 
+oder mit einem Eingabefenster neu erstellt werden. Zusätzlich können statistische Daten zu TED-Abstimmungen abgerufen 
+werden, oder TED-Fragen exportiert oder ausgedruckt werden. </p>
+
+<p>Lehrveranstaltungen des Fachs Pharmakologie am Ende 
+des Semesters ausgehändigt wurde. Eine Ratingskala 
+mit den Antwortoptionen 1 "exzellent", 2 "sehr gut", 3 
+"gut", 4 "ausreichend", 5 "mangelhaft" und 6 "ungenü-
+gend" wurde für die Bestimmung der Gesamtnote von 
+"OnlineTED" verwendet. Für den Vergleich zwischen "On-
+lineTED" und dem konventionellen Abstimmungssystem 
+konnte aus den Antwortoptionen "besser", "gleich" oder 
+"schlechter" ausgewählt werden. 
+Die Teilnahme an der Umfrage war anonym, freiwillig und 
+erfolgte mit Zustimmung der Ethikkommission der TUM. </p>
+
+<p>Der Webseitenzugriff auf "OnlineTED" wurden mit Google 
+Analytics (Google, Mountain View, CA) erfasst. </p>
+
+<p>Ergebnisse </p>
+
+<p>Vergleich "OnlineTED" vs. konventionelles 
+Abstimmungssystem </p>
+
+<p>Ein konventionelles kommerzielles Abstimmungssystem 
+(Interwrite 
+Cricket, 
+Scottsdale, 
+USA; 
+http:// </p>
+
+<p>9/13 
+GMS Zeitschrift für Medizinische Ausbildung 2014, Vol. 31(1), ISSN 1860-3572 </p>
+
+<p>Kühbeck et al.: OnlineTED.de − ein webbasiertes Abstimmungssystem ... </p>
+
+<p>Abbildung 3: Darstellung der Antwortoptionen und Abstimmungsergebnissen. A. Darstellung der Antwortoptionen auf dem 
+Display eines mobilen Endgeräts. Die Abstimmung erfolgt durch Antippen des jeweiligen Antwortfelds. B. Darstellung der 
+Abstimmungsergebnisse als Histogramme in der Präsentation des Dozenten. </p>
+
+<p>www.banxia.com/prs/hardware/cricket), das routinemä-
+ßig im Unterricht an der TUM eingesetzt wird, diente als 
+Vergleich. Das System besteht aus einem 2,4 Gigahertz 
+Funkempfänger und Funksender (Klicker). Laut Angaben 
+des Herstellers können bis zu 2047 Klicker mit einem 
+Funkempfänger verbunden werden. Der Klicker besteht 
+aus einer Tastatur mit sechs Schaltflächen für numerische 
+Eingaben, sowie zwei Eingabeflächen "F" und "T" für 
+Falsch/Richtig-Abstimmungen. Die Klicker enthalten zwei 
+AAA-Batterien, die eine Nutzung von bis zu 20 Wochen 
+bei normalen Einsatz ermöglichen. Die Reichweite des 
+Systems beträgt maximal 45,7 m. Für die Erstellung von 
+TED-Fragen (MC-und Richtig/Falsch-Fragen) sowie der 
+Durchführung einer Abstimmung ist eine spezielle Soft-
+ware erforderlich, die auf dem Rechner des Dozenten 
+installiert wird. 
+Im Gegensatz dazu ist "OnlineTED" ein vollständig webba-
+siertes Abstimmungssystem, das die internetfähigen 
+Endgeräte der Teilnehmer als Klicker nutzt. "OnlineTED" 
+erfordert keine Installation von zusätzlicher Software auf 
+den Endgeräten der Dozenten oder Studierenden und ist 
+mit allen gängigen Betriebssystemen kompatibel. Durch 
+den geringen Datentransfer (0,03 Mbit pro TED-Frage) 
+sind auch Abstimmungen mit großen Teilnehmerzahlen 
+und/oder geringer Bandbreite der Internetverbindung 
+möglich. Da "OnlineTED" vollständig webbasiert ist, kön-
+nen Abstimmungen auch mit Teilnehmern durchgeführt 
+werden, die sich an unterschiedlichen Orten befinden 
+(z.B. im Rahmen von Webinaren). In Gegensatz zu dem 
+konventionellen Vergleichssystem erfolgt die Erstellung 
+und Verwaltung der TED-Fragen bei "OnlineTED" aus-
+schließlich online. Zusätzlich bietet "OnlineTED" die </p>
+
+<p>Möglichkeit, Spontanumfragen durchzuführen. Hierfür 
+stehen allgemeine Fragensets mit verschiedenen Rating-
+Skalen ("ja" / "nein" / "unentschlossen", "sehr gering" bis 
+"sehr hoch", "ausgezeichnet" bis "unzureichend", "trifft 
+zu" bis "trifft nicht zu") zur Verfügung. 
+An der Fragebogen-basierten Datenerhebung zur Bewer-
+tung der Funktionalität und Benutzerfreundlichkeit von 
+"OnlineTED" im Vergleich zu konventionellen Klicker-ba-
+sierten TED-Systemen nahmen 361 von 709 (51 %) Stu-
+denten der TUM teil. Von diesen besuchten 203 Studen-
+ten die aus Vorlesungen und Seminaren bestehende 
+Lehrveranstaltung "Allgemeine Pharmakologie" im ersten 
+klinischen Studienjahr. 158 Studenten besuchten die 
+Lehrveranstaltung "Klinische Pharmakologie" im dritten 
+klinischen Studienjahr, die nur aus Vorlesungen besteht. 
+Das Durchschnittsalter der Studenten war 23,4 (SD 3,5) 
+Jahre in der Lehrveranstaltung "Allgemeine Pharmakolo-
+gie" und 25,3 (SD 3,3) in der Lehrveranstaltung "Klinische 
+Pharmakologie". Neun von zehn Dozenten beteiligten 
+sich an der Umfrage, das Durchschnittsalter war 40,1 
+(SD 10,0) Jahre. </p>
+
+<p>Webstatistik und Evaluationsergebnisse </p>
+
+<p>Die Beta-Version von "OnlineTED" wurde am 1. November 
+2012 auf http://wwwOnlineTED.de (englischsprachige 
+Version: http://wwwOnlineTED.com) bereitgestellt. In den 
+ersten vier Monaten (bis 28. Februar 2013) verzeichnete 
+die Webseite 2.997 Besucher und 37.696 Seitenzugriffe 
+(ca. 750 Besucher und 9.424 Seitenzugriffe pro Monat). 
+Die Gesamtbewertung von "OnlineTED" durch die Dozen-
+ten war "sehr gut" (fünf von zehn Dozenten) und "exzel-</p>
+
+<p>10/13 
+GMS Zeitschrift für Medizinische Ausbildung 2014, Vol. 31(1), ISSN 1860-3572 </p>
+
+<p>Kühbeck et al.: OnlineTED.de − ein webbasiertes Abstimmungssystem ... </p>
+
+<p>lent" (vier von zehn Dozenten). Der didaktische Nutzen 
+von "OnlineTED" für den Unterricht wurde von sechs Do-
+zenten mit "exzellent" und von drei Dozenten mit "sehr 
+gut" bewertet. In den Freitextkommentaren wurde von 
+den Dozenten angeführt, dass "OnlineTED" eine "hilfreiche 
+Grundlage für Diskussionen zwischen Studenten und 
+Dozenten während der Lehrveranstaltung" ist. Weiterhin 
+wurde die Möglichkeit der "spielerischen Diskussion von 
+Themen und klinischen Problemstellungen" als Vorteil 
+gesehen, z.B. durch die Präsentation von klinischen 
+Fallbeispielen mit Abstimmung der geeigneten Pharma-
+kotherapie durch das Auditorium. Als spezifischer Vorteil 
+von "OnlineTED" wurde angegeben, "spontan den Wissen-
+stand und -fortschritt" der Studenten durch die Sponta-
+numfragefunktion zu ermitteln. 
+Im Vergleich zu konventionellen TED-Systemen mit 
+Hardware-Klickern wurde "OnlineTED" von den Dozenten 
+in insgesamt sieben von neun Kategorien als überlegen 
+bewertet (siehe Abbildung 4A ). Als wichtigste Vorteile 
+wurde von den Dozenten die kurze Einarbeitungszeit in 
+das System, sowie die hohe Flexibilität von "OnlineTED" 
+angesehen (zehn von zehn, und neun von zehn Dozen-
+ten). 
+Etwa 80% (289 von 361) der an der Umfrage beteiligten 
+Studenten der TUM gaben an, ein mobiles internetfähiges 
+Endgerät (Smartphone, Tablet-PC oder iPad) zu besitzen. 
+Von diesen konnten die Mehrheit (92%, n=265) problem-
+los über WLAN oder eine Mobilfunkverbindung an den 
+TED-Abstimmung während der Lehrveranstaltung teilneh-
+men. Die Mehrzahl der Studierenden (94%, n=274) ver-
+gab für "OnlineTED" die Gesamtnote "exzellent" oder "sehr 
+gut". Im Vergleich zu konventionellen Abstimmungssyste-
+men mit Hardware-Clicker wurde "OnlineTED" von den 
+Studierenden in allen Kategorien als gleichwertig oder 
+überlegen eingestuft (siehe Abbildung 4B ). </p>
+
+<p>Diskussion </p>
+
+<p>In diesem Artikel stellen wir mit "OnlineTED" ein neues 
+webbasiertes Abstimmungssystem vor, das plattformun-
+abhängig ist, keine Hardware-Klicker benötigt und kosten-
+frei genutzt werden kann. Ziel dieses Projekts war es, ein 
+TED-System zu entwickeln, das speziell auf die Bedürfnis-
+se und Anforderungen der Hochschullehre ausgerichtet 
+ist und hinsichtlich Funktionalität und Benutzerfreundlich-
+keit mit kommerziellen Systemen vergleichbar ist. Zu 
+unserer Überraschung wurde "OnlineTED" sowohl von 
+Studierenden als auch Dozenten in mehreren Kategorien 
+als ein den kommerziellen Produkten überlegenes System 
+bewertet (siehe Abbildung 4). Insbesondere die hohe 
+Benutzerfreundlichkeit und Flexibilität von "OnlineTED" 
+bei der Fragenerstellung und -verwaltung sowie der 
+praktische Einsatz bei Lehrveranstaltungen wurden als 
+Vorzüge im Vergleich zu konventionellen Abstimmungs-
+systemen angeführt. Ferner kann "OnlineTED" als ein 
+nicht-kommerzielles Abstimmungssystem von Dozenten 
+und Studenten weltweit kostenfrei genutzt werden. </p>
+
+<p>Eine potentielle Limitation für den Einsatz von webbasier-
+ten TED-Systemen ist die Notwendigkeit einer Internetver-
+bindung. Diese kann an einigen Universitäten aufgrund 
+von Sicherheitsbestimmungen oder durch lokale bauliche 
+Gegebenheiten mit schlechter WLAN-Abdeckung oder 
+Mobilfunkempfang nicht oder nur eingeschränkt gegeben 
+sein. Ein weiterer potentieller Unsicherheitsfaktor ist die 
+Datensicherheit im Internet. Um einen sichere Datenüber-
+tragung zu gewährleisten wurde bei "OnlineTED" das 
+Kommunikationsprotokoll HTTPS implementiert, das z.B. 
+beim Internetbanking für die Übertragung vertraulicher 
+Daten Verwendung findet. HTTPS ermöglicht eine bidirek-
+tionale verschlüsselte Datenübermittlung zwischen Client 
+und Server mit Authentifizierung von Webseite und 
+Webserver [7]. Als weitere Sicherheitsmaßnahme spei-
+chert "OnlineTED" keine Internetprotokoll (IP) Adressen 
+der Endgeräte, wodurch die Anonymität der Teilnehmer 
+gewährleistet ist. 
+In welchen Umfang bei Studierenden und Dozenten Be-
+denken gegenüber webbasierten Lehrtechnologien beste-
+hen, ist noch wenig untersucht. Hingegen deuten umfang-
+reiche Studien über den Einsatz von TED-Systemen in 
+der Hochschullehre auf deren Effektivität, z.B. in Hinblick 
+auf Wissenserwerb, Meinungsbildung und Zufriedenheit 
+der Studierenden im Unterricht (Übersicht in [5], [8], [9]). 
+Der am häufigsten angeführte Vorteil von TED-Systemen 
+ist die intensivierte studentische Mitarbeit und Interaktion 
+in Lehrveranstaltungen. Hier stellen TED-Systeme eine 
+bequeme Möglichkeit dar, studentische Mitarbeit zu för-
+dern. Allerdings ist für den Lernerfolg letztlich die pädago-
+gisch und didaktische Fähigkeit eines Dozenten entschei-
+dend, und damit die Art der Einbindung von technischen 
+Innovationen wie TED-Systemen in den Unterricht. Bei-
+spielsweise wurden in einer Studie von Smith et al. [10] 
+Studenten aufgefordert, TED-Fragen zunächst mit dem 
+Platznachbarn zu diskutieren und erst nach gemeinsamer 
+Konsensfindung abzustimmen. Die Autoren konnten zei-
+gen, dass kollaboratives Diskutieren und Abstimmen mit 
+TED-Systemen eine effektive Methode ist, aktives Lernen 
+zu fördern und mit einem signifikant verbesserten kon-
+zeptionellen Verständnis verbunden ist. Diese Ergebnisse 
+relativieren Bedenken, dass durch eine limitierte Zahl 
+von Abstimmungsgeräten nur ein Teil der Studenten aktiv 
+am Unterricht teilnehmen können. Vielmehr könnte diese 
+Situation auch die Möglichkeit zu dem vom Smith et al. 
+[10] dargestellten didaktisch wertvolleren TED-Einsatz 
+durch kooperatives Abstimmen eröffnen. Ein weiterer 
+pädagogischer Aspekt von TED-Systemen ist deren Einsatz 
+in der formativen Evaluation (formative assessment). 
+Alexander und Kollegen [11] konnten zeigen, dass stu-
+dentisches Feedback mit TED-Systemen erfolgreich für 
+die bedarfsgerechte Anpassung der Lehre durch Dozenten 
+genutzt werden kann. Für Studierende bietet sich die 
+Möglichkeit, ihren persönlichen Lernfortschritt mit dem 
+ihrer Kommilitonen zu vergleichen. 
+Die Omnipräsenz des Internets und die weite Verbreitung 
+computerbasierter Technologien eröffnen neue Möglich-
+keiten, Studenten aktiv in der Lehre einzubeziehen. Un-
+sere Datenerhebung ergab, dass bis zu 80% der Medizin-</p>
+
+<p>11/13 
+GMS Zeitschrift für Medizinische Ausbildung 2014, Vol. 31(1), ISSN 1860-3572 </p>
+
+<p>Kühbeck et al.: OnlineTED.de − ein webbasiertes Abstimmungssystem ... </p>
+
+<p>Abbildung 4: Beurteilung der Funktionalität und Benutzerfreundlichkeit von "OnlineTED" im Vergleich zu einem konventionellen 
+Abstimmungssystem. A. Evaluationsergebnisse der Dozenten. B. Evaluationsergebnisse der Studierenden. An der Umfragen 
+haben sich 8 von 10 Dozenten und 361 von 709 (51%) einer Kohorte von Medizinstudenten an TUM beteiligt. Die gestapelten 
+Säulendiagramme stellen die anteilige Verteilung der Antworten in Prozent dar. </p>
+
+<p>studenten an der TUM ein internetfähiges Endgerät 
+(Smartphone, Tablet oder iPad) besitzen. Diese Ergebnis-
+se stehen in Einklang mit aktuellen Studien aus Großbri-
+tannien, die den Besitz von Smartphones bei Medizinstu-
+dierenden mit 60 bis 80 % angeben [12], [13]. Webba-
+sierte Abstimmungssysteme wie "OnlineTED" könnten 
+somit eine gute Alternative zu konventionellen TED-Sys-
+temen darstellen, um interaktives Lernen und studenti-
+sche Mitarbeit zu fördern, insbesondere bei Lehrveran-
+staltungen mit hohen Teilnehmerzahlen. </p>
+
+<p>Danksagung </p>
+
+<p>Wir danken Leszek Wojnowski für die kritische Durchsicht 
+des Manuskripts. Pascal Berberat und den Mitarbeitern 
+des Medizindidaktischen Zentrums der TUM möchten wir 
+für die Bereitstellung von statistischen Daten zur Alters-
+verteilung der Studienkohorte danken. </p>
+
+<p>Anmerkung </p>
+
+<p>Im Interesse der erleichterten Lesbarkeit und damit der 
+Verständlichkeit wird nur die verallgemeinerte männliche 
+Sprachform gewählt. Hierbei sind aber immer ausdrück-
+lich beide Geschlechter angesprochen. </p>
+
+<p>Interessenkonflikt </p>
+
+<p>Die Autoren erklären, dass sie keine Interessenkonflikte 
+im Zusammenhang mit diesem Artikel haben. </p>
+
+<p>Literatur </p>
+
+
+
+<p>Artikel online frei zugänglich unter 
+http://www.egms.de/en/journals/zma/2014-31/zma000897.shtml </p>
+
+<p>Eingereicht: 02.07.2013 
+Überarbeitet: 15.10.2013 
+Angenommen: 20.11.2013 
+Veröffentlicht: 17.02.2014 </p>
+
+<p>Copyright 
+©2014 Kühbeck et al. Dieser Artikel ist ein Open Access-Artikel und 
+steht unter den Creative Commons Lizenzbedingungen 
+(http://creativecommons.org/licenses/by-nc-nd/3.0/deed.de). Er darf 
+vervielfältigt, verbreitet und öffentlich zugänglich gemacht werden, 
+vorausgesetzt dass Autor und Quelle genannt werden. </p>
+
+<p>13/13 
+GMS Zeitschrift für Medizinische Ausbildung 2014, Vol. 31(1), ISSN 1860-3572 </p>
+
+<p>Kühbeck et al.: OnlineTED.de − ein webbasiertes Abstimmungssystem ... </p>
+
+</text></tei>

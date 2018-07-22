@@ -1,0 +1,1731 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC5435914" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:25+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>ABSTRACT </p>
+
+<p>The cyclin-dependent kinase inhibitor p27 Kip1 (p27) 
+also behaves as a transcriptional repressor. Data 
+showing that the p300/CBP-associated factor 
+(PCAF) acetylates p27 inducing its degradation sug-
+gested that PCAF and p27 could collaborate in the 
+regulation of transcription. However, this possibility 
+remained to be explored. We analyzed here the tran-
+scriptional programs regulated by PCAF and p27 in 
+the colon cancer cell line HCT116 by chromatin im-
+munoprecipitation sequencing (ChIP-seq). We iden-
+tified 269 protein-encoding genes that contain both 
+p27 and PCAF binding sites being the majority of 
+these sites different for PCAF and p27. PCAF or p27 
+knock down revealed that both regulate the expres-
+sion of these genes, PCAF as an activator and p27 
+as a repressor. The double knock down of PCAF and 
+p27 strongly reduced their expression indicating that 
+the activating role of PCAF overrides the repressive 
+effect of p27. We also observed that the transcrip-
+tion factor Pax5 interacts with both p27 and PCAF 
+and that the knock down of Pax5 induces the ex-
+pression of p27/PCAF target genes indicating that 
+it also participates in the transcriptional regulation 
+mediated by p27/PCAF. In summary, we report here 
+a previously unknown mechanism of transcriptional 
+regulation mediated by p27, Pax5 and PCAF. </p>
+
+<p>The protein p27 Kip1 (p27) is a member of the Cip/Kip fam-
+ily of cyclin dependent kinase (Cdk) inhibitors that also in-
+cludes p21 Cip1 and p57 Kip2 (1). Its classical role is to inhibit </p>
+
+<p>the activity of most cyclin-Cdk complexes involved in cell 
+cycle progression. It interacts with both cyclin and Cdk sub-
+units by the KID domain sited on its amino moiety (2). 
+The KID consists of three subdomains: the cyclin-binding 
+subdomain (D1), the Cdk-binding subdomain (D2) and a 
+linker subdomain that joins D1 and D2 (3). Phosphoryla-
+tion of specific tyrosine residues in the D2 subdomain (Y74 
+and Y88), by members of the Src family of kinases, allows 
+the partial activation of the Cdk in the trimeric complexes 
+formed by cyclin, Cdk and p27 (4, 5). Thus, p27 behaves as a 
+dual regulator of cyclin-Cdk complexes by inhibiting their 
+activities in the non-tyrosine phosphorylated form and al-
+lowing Cdk to be active when phosphorylated at these spe-
+cific tyrosine residues. 
+p27 directly interacts with the acetyltransferase and 
+transcriptional co-activator p300/CBP associated factor 
+(PCAF) by a region (aa 91-120) containing a proline rich 
+domain (PRD, aa 91-96) included in the D2 subdomain 
+of p27 (6). PCAF interacts with p27 by its catalytic do-
+main and acetylates p27 at Lysine 100, very close to the 
+PRD. This acetylation induces its ubiquitylation and the 
+subsequent degradation via proteasome (6). Thus, Src ki-
+nases and PCAF regulate cell cycle progression by generat-
+ing post-translational modifications of p27 that lead to the 
+activation of cyclin-Cdk complexes. 
+p27 also plays a role as a transcriptional regulator (7-
+9). It associates with a number of gene promoters through 
+E2F4/p130 complexes behaving as a transcriptional repres-
+sor of these genes (9). The specific role of p27 on these re-
+pressor complexes is to recruit cyclin D2/D3-Cdk4 com-
+plexes needed for p130 phosphorylation at early-mid G1 
+phase (10). This possibility is supported by the fact that 
+the interaction of p27 with E2F4 and p130 is through its 
+carboxyl-moiety (9) indicating that the KID subdomain in 
+the NH2 region will be free to associate with cyclin-Cdk </p>
+
+<p>* To whom correspondence should be addressed. Tel: +934035386; Fax: +934021907; Email: obachs@ub.edu </p>
+
+<p>C </p>
+
+<p>The Author(s) 2017. Published by Oxford University Press on behalf of Nucleic Acids Research. 
+This is an Open Access article distributed under the terms of the Creative Commons Attribution License (http://creativecommons.org/licenses/by-nc/4.0/), which 
+permits non-commercial re-use, distribution, and reproduction in any medium, provided the original work is properly cited. For commercial re-use, please contact 
+journals.permissions@oup.com </p>
+
+<p>Nucleic Acids Research, 2017, Vol. 45, No. 9 5087 </p>
+
+<p>complexes when they appear at early G1. The role of p27 as 
+a transcriptional repressor mediated by E2F4/p130 com-
+plexes has been confirmed by a recent work showing that 
+p27 represses transcription of SOX2 through this mecha-
+nism (11). 
+p27 deficiency is associated with tumorigenesis and re-
+duced p27 levels are frequently observed in human cancers 
+in association with tumor aggressiveness and poor clini-
+cal outcome (12-14). In most of the cases, low p27 levels 
+are due to post-transcriptional mechanisms that induce its 
+proteasome-dependent degradation (15, 16). Interestingly, 
+the over-expression of p27-target genes (p27-TGs) in hu-
+man tumors correlates with poor clinical outcome suggest-
+ing that the transcriptional regulatory function of p27 plays 
+an important role in tumor development (9). Thus, to un-
+derstand how p27 regulates transcription is an important 
+goal to be achieved not only to better define the mechanisms 
+involved in cell cycle regulation but also the role of p27 in 
+tumorigenesis. 
+The evidence that the transcriptional co-activator PCAF 
+acetylates the repressor p27 inducing its degradation (6) 
+led us to investigate whether these two proteins collaborate 
+in the regulation of gene expression. We performed chro-
+matin immunoprecipitation sequencing (ChIP-seq) analysis 
+to identify the putative transcriptional programs regulated 
+by these two proteins. We selected a number of targets com-
+mon to both proteins and analyzed the mechanism by which 
+p27 and PCAF regulate the transcription of these genes. In-
+terestingly, we found that the transcription factor PAX5 in-
+teracts with both p27 and PCAF and also participates in 
+the transcriptional regulation of p27/PCAF target genes. </p>
+
+<p>MATERIALS AND METHODS </p>
+
+<p>Antibodies </p>
+
+<p>Antibodies against p27 (ChIP and IP) (sc-528), PAX-5 
+(WB) (sc-13146), PAX-5 (WB) (sc-1974), UNC5D (WB) 
+(anti-UNC5H4, sc-135262), PCAF (WB) (sc-13124), SPAG 
+9 (WB) (anti-JIP-4, sc-134972) and ROBO1 (WB) (sc-
+25672) were from Santa Cruz. p27 antibody (WB) (610242) 
+was from BD Transduction Laboratories. Antibodies 
+against PCAF (WB) (P7493) and tubulin (WB) (T9026) 
+were from Sigma. Antibodies against PCAF (ChIP/IP) 
+(ab12188) and PAX-5 (ChIP/IP, WB) (ab15164) were from 
+Abcam. GRIN3A antibodies (WB) (MA1-10881) were 
+from Thermo Fisher Scientific and actin antibody (WB) 
+(0869100) was obtained from MP Biomedicals. </p>
+
+<p>Cell cultures </p>
+
+<p>HCT116 cells were cultured in Dulbecco's modified Ea-
+gle's medium (DMEM)-HAM F12 (1:1). MCF-7 cells and 
+mice embryonic fibroblasts (MEFs) WT and p27 −/− were 
+cultured in DMEM supplemented with 10% fetal bovine 
+serum, 2 mM glutamine, 1% non-essential amino acids, 1 
+mM pyruvic acid and 5% penicillin/streptomycin. Cultures 
+were maintained at 37 • C and 5% CO 2 . </p>
+
+<p>Determination of generation time </p>
+
+<p>Generation time was determined in HCT116 Control, p27 
+and PCAF cells transfected with the CRISPR plasmid as </p>
+
+<p>described in CRISPR/Cas9 transfection section. Cells were 
+seeded at a density of 300 000 cells per 60 mm dish to deter-
+mine their proliferation. We calculated the rate of growth of 
+each cell line by counting the total number of viable cells in 
+duplicate dishes for 24, 48, 72 and 96 h with the Scepter™ 
+2.0 Cell Counter (Millipore). </p>
+
+<p>Immunoprecipitation </p>
+
+<p>Asynchronously growing HCT116 cells were scraped and 
+washed twice with PBS. Pellets were lysed in 1 ml of im-
+munoprecipitation (IP) buffer (PBS containing 0.5% Tri-
+ton X-100, 1 mM EDTA, 100 M sodium orthovanadate, 
+0.25 mM PMSF, 20 mM glycerol phosphate, complete 
+protease inhibitor mixture by Roche Applied Science, and 
+1/25 vol of DNAse I) (Sigma). Cell lysates were incubated 
+for 15 min rotating at RT and 15 min on ice. Then, they 
+were centrifuged at 3000 rpm at 4 • C for 5 min. After cen-
+trifugation, samples were subsequently quantified using the 
+Lowry method (17). 1 mg of total protein was incubated 
+overnight at 4 • C with 2-4 g of antibodies (PAX5, p27 or 
+PCAF). Proteins and antibody were incubated with pro-
+tein A-Dynabeads (Invitrogen) for 1 h and the immunocom-
+plexes were extensively washed with IP buffer. Subsequently 
+they were eluted by boiling at 100 • C in Laemmli buffer for 
+western blot (WB) analysis. As a control, lysates were incu-
+bated with irrelevant rabbit IgG. </p>
+
+<p>Chromatin immunoprecipitation (ChIP) </p>
+
+<p>HCT116 cells were asynchronously grown till achieve an 
+80% confluence. ChIP assays were then performed as previ-
+ously described (18). Briefly, cells were lysed and chromatin 
+from cross-linked cells was sonicated. Chromatin was in-
+cubated with 5 g of anti-p27, anti-PCAF or anti-PAX5 
+antibodies in RIPA buffer (50 mM Tris−HCl pH 7.5, 150 
+mM NaCl, 1% NP-40, 0.5% sodium deoxycholate, 0.1% 
+SDS, 1 mM EDTA, 1 mM DTT, 1 mM PMSF, 0.1 mM 
+Na 3 VO 4 , 0.5 g/l aprotinin, 10 g/l leupeptin) adding 
+20 l of Magna ChIP Protein A magnetic beads (Milli-
+pore). Samples were incubated in rotation overnight at 4 • C. 
+Beads were washed with low salt buffer, high salt buffer, 
+LiCl buffer and TE buffer. Subsequent elution and purifi-
+cation of the immunoprecipitated DNA-proteins complexes 
+was performed using the IPure kit (Diagenode) according to 
+manufacturer's protocol. Samples were analyzed by qPCR. 
+The association of p27 and PCAF to their respective bind-
+ing sites of the gene Grin3A, SPAG9, ROBO1 and UNC5D 
+was performed by RT-PCR using the primers listed in Sup-
+plementary Table S1. </p>
+
+<p>ChIP-seq </p>
+
+<p>HCT116 cells were grown to confluence and made quies-
+cent by serum starvation during 48 h for doing the ChIP-seq 
+for p27. In contrast, asynchronously growing HCT116 cells 
+were used for the ChIP-seq studies using anti-PCAF. After 
+DNA isolation, ChIP samples, together with the input, were 
+sequenced. Libraries were prepared using the NEBNext ® 
+ChIP-Seq Library Prep Reagent Set for Illumina ® kit (ref. 
+E6200S) according to the manufacturer's protocol. Briefly, </p>
+
+<p>5088 Nucleic Acids Research, 2017, Vol. 45, No. 9 </p>
+
+<p>10 ng of input and ChIP enriched DNA were subjected 
+to end repair, addition of 'A' bases to 3 ends and ligation 
+of PE adapters. All purification steps were performed us-
+ing Qiagen PCR purification columns (refs. 50928106 and 
+50928006). Library size selection was done with 2% low-
+range agarose gels. Library amplification was performed by 
+PCR on the size selected fragments. Final libraries were an-
+alyzed using Agilent DNA 1000 chip to estimate the quan-
+tity and check size distribution, and were then quantified 
+by qPCR using the KAPA Library Quantification Kit (ref. 
+KK4835, KapaBiosystems) prior to amplification with Illu-
+mina's cBot. Sequencing was done on the HiSeq2000, Single 
+Read, 50 nts. </p>
+
+<p>ChIP-seq data analysis </p>
+
+<p>Illumina pipeline analyzed short reads were uniquely 
+aligned allowing at best two mismatches to the UCSC (The 
+Genome Sequencing Consortium) human genome version 
+hg18, using the program <rs type="software">BOWTIE</rs> (19). Peak caller algo-
+rithm <rs id="software-27" type="software">MACS</rs> (<rs corresp="#software-27" type="version-number">version 1.4</rs>) was used to determine enriched 
+peak region with parameters: -nomodel, -tsize = 46, -bw = 
+300. Shift size were determined using <rs type="software">Pyicos</rs> (20) strand cor-
+relation method. Enriched peaks were annotated to near-
+est <rs id="software-20" type="software">EnsEMBL</rs> (21) gene (EnsEMBL Biomart <rs corresp="#software-20" type="version-number">version 54</rs>) 
+using Bioconductor package <rs type="software">ChIPpeakAnno</rs> (22). Distri-
+bution of enriched reads along the genomes and transcrip-
+tion start site (TSS) of RefSeq genes were determined using 
+<rs type="software">CEAS</rs> (23). Data from ChIP-seq experiments have been de-
+posited in GEO (accession number GSE93975). </p>
+
+<p>De novo motif discovery </p>
+
+<p>To determine the over-represented short sequence motifs in 
+enriched peaks, we used total 100nt sequences (from peak 
+summit, 50 bp down and 50 bp up). We used top 1000 
+peaks (based on fold change) for finding motifs using both 
+<rs type="software">WEEDER</rs> (24) and <rs type="software">MEME</rs> (25) programs. </p>
+
+<p>Functional enrichment analysis </p>
+
+<p>Functional annotation of target genes is based on Gene 
+Ontology (GO) (26) Consortium, 2000; (http://www. 
+geneontology.org) as extracted from <rs type="software">EnsEMBL</rs> (21) and 
+KEGG pathway database (27). Accordingly, all genes are 
+classified into the ontology categories biological process 
+(GOBP) and pathways when possible. We have taken only 
+the GO/pathway categories that have at least 10 genes an-
+notated. We used <rs type="software">Gitools</rs> for enrichment analysis and heat 
+map generation (28) (http://www.gitools.org). Resulting P-
+values were adjusted for multiple testing using the Ben-
+jamin and Hochberg's method of False Discovery Rate (29). 
+Enrichment analysis was also performed using the public 
+<rs type="software">DAVID</rs> tools (Database for Annotation, visualization and 
+integrated discovery v 6.7) (http://david.abcc.ncifcrf.gov) 
+(30). </p>
+
+<p>Putative transcription factor binding </p>
+
+<p>Possible occurrence of transcription factor (TF) motifs in 
+peak regions (150 bp around peak summit), or in target gene </p>
+
+<p>promoters were predicted with STORM algorithm (31) with 
+a P-value cutoff determined based on the size of the input 
+sequence as (1/100 × sequence-size), and using position fre-
+quency matrices (PFM) from TRANSFAC database (pro-
+fessional version release 2009.4). </p>
+
+<p>Co-occurrence and enrichment of TFs around enriched peaks </p>
+
+<p>Possible occurrence of TF motifs in peak regions (150 bp 
+around peak summit) and overrepresentation of these TFs 
+is based on the tool <rs type="software">Pscan</rs> (32) with parameter: mixed back-
+ground hg18, TRANSFAC matrix. Pscan evaluates local 
+enrichment, comparing with a t-test mean and standard de-
+viation of the score of the best matching oligonucleotides in 
+the input regions to mean and standard deviation of the best 
+match in the genomic regions flanking the input ones. Local 
+enrichment can be used to identify motifs with significant 
+preference for binding within the regions, that is, the mo-
+tif corresponding to the ChIP'ed TF, as well as other TFs 
+likely to interact with it and binding in its neighborhood. 
+Local enrichment P-value (L.PV): describing whether the 
+motif is over-or underrepresented in the 150 bp input re-
+gions with respect to the genomic regions flanking them, 
+indicating whether the motif is overrepresented. </p>
+
+<p>Overlap analysis </p>
+
+<p>Overlap of genomic position range data was done using 
+<rs type="software">BedTools</rs> (33) and significance of overlap was analyzed by 
+Hypergeometric test. However, Venn-diagram generation 
+and overlap of target genes analysis was performed using 
+in-house R programming language script. Significance of 
+overlap calculated based on Chi-square test. Unless stated, 
+peak overlap is defined as overlap by at least 1 bp. </p>
+
+<p>RNA extraction, reverse transcription-PCR and quantitative 
+PCR (qPCR) for gene expression analysis </p>
+
+<p>Total RNA from cells was extracted using High Pure RNA 
+Isolation kit (Roche). cDNA was obtained from 1 g of 
+RNA using SuperScript VILO cDNA synthesis (Invitro-
+gen) according to manufacturer's instructions. Gene ex-
+pression was analyzed by real-time PCR, using Express 
+SYBR GreenER qPCR supermix (Invitrogen), corrected by 
+GADPH expression and expressed as relative units. Primer 
+sequences used for qPCR assessment of mRNA levels of 
+target genes are listed in Supplementary Table S2. Primer 
+sequences used for qPCR assessment of the primary non-
+spliced transcripts of target genes are listed in Supplemen-
+tary Table S3. </p>
+
+<p>ShRNA lentiviral infection </p>
+
+<p>HCT116 or MCF-7 cells were infected with MISSION 
+shRNA control vector and specific p27 or PCAF shRNA 
+(Sigma Aldrich) with the following sequences: 
+p27: 5 -CCGGGTAGGATAAGTGAAATGGATAC 
+TCGAGTATCCATTTCACTTATCCTACTTTTTG-3 
+PCAF:5 -CCGGGCAGACTTACAGCGAGTCTTTC 
+TCGAGAAAGACTCGCTGTAAGTCTGCTTTT-3 
+The protocol for viral particles production and cell in-
+fections has been described elsewhere (34). Twenty four </p>
+
+<p>Nucleic Acids Research, 2017, Vol. 45, No. 9 5089 </p>
+
+<p>hours after infection, cells were selected with 2 mg/ml of 
+Puromycin (Sigma Aldrich) for five days. shRNA-mediated 
+down-regulation was tested by WB with specific antibodies. </p>
+
+<p>CRISPR/Cas9 transfection </p>
+
+<p>HCT116 cells were co-transfected with Control 
+CRISPR/Cas9 (sc-418922), p27 CRISPR/Cas9 KO 
+(sc-400074) or PCAF CRISPR/Cas9 KO (sc-400753) plas-
+mids from Santa Cruz and with pLPCX plasmid (K1061-1, 
+Clontech) using Lipofectamine 2000 transfection reagent 
+(Invitrogen P/N 52887) according to manufacturer's 
+protocol. Transfected cells were subsequently selected with 
+media containing 2 mg/ml of Puromycin (Sigma Aldrich) 
+for 3-5 days. Successful transfection was confirmed by 
+WB with specific antibodies. For the stable generation 
+of a p27KO cell line we used the CRISPR/Cas9 system 
+transfecting HCT116 cells with p27 Double Nickase Plas-
+mid (sc-400074-NIC) and with Control Double Nickase 
+(sc-437281) for the control cell line. Individual GFP pos-
+itive colonies were isolated by cell sorting (FACSAriaII) 
+and seeded in 96-well plates and grown for 2-3 weeks 
+until the positive colonies reached confluence when they 
+were transferred to 24-well plates. When the latter reached 
+confluence, cells were trypsinized and an aliquot was kept 
+for protein screening by WB and mRNA levels validation. 
+The remaining cells were frozen or expanded in 60 mm 
+dishes for additional analyses. </p>
+
+<p>Expression microarrays </p>
+
+<p>Asynchronously growing HCT116 cells were washed with 
+PBS and RNA was isolated from 3 different sets of cells 
+transfected with shRNA control or shRNAPCAF. To-
+tal RNA was extracted using the RNeasy Kit (Qiagen, 
+Iberia, Madrid, Spain). RNA quality control was done with 
+Agilent 2100 bioanalyzer. Samples were then hybridized 
+with Affymetrix Human Gene 1.0 ST arrays. Dataset ob-
+tained by Expression Console (Affymetrix) were analyzed 
+by DNA-ChIP Analyzer (dChIP) software and tools. The 
+normalization of the arrays was performed using the ro-
+bust multi-array average (RMA) method as implemented in 
+the Affymetrix package of R bioconductor. Quality control 
+measurements were obtained with ArrayQualityMetrics, 
+while the statistical analysis of significant hits with <rs type="software">Limma</rs> 
+(35). Data from expression microarray experiments have 
+been deposited in GEO (accession number GSE93694). </p>
+
+<p>RESULTS </p>
+
+<p>Differential distribution of PCAF and p27 chromatin binding 
+sites in HCT116 cells </p>
+
+<p>To analyze the transcriptional programs regulated by p27, 
+ChIP-seq experiments were performed in HCT116 cells. Re-
+sults showed that p27 significantly binds to the chromatin 
+at 1981 sites that corresponded to 1012 genes. Analysis of 
+p27-binding sites (p27-BSs) distribution overall genome in-
+dicates that it mostly associates to distal intergenic regions 
+(∼74%) and to intronic sequences (∼24%). In contrast, as-
+sociation with proximal and exonic regions was minimal 
+(Figure 1A). ChIP-seq analyses were also performed to </p>
+
+<p>identify the putative PCAF-BSs. Results showed that PCAF 
+associates to the chromatin at 10.878 specific sites that cor-
+responded to 6.131 genes. PCAF mostly associates with dis-
+tal intergenic (∼42%), intronic (∼42%) and exonic (∼8%) 
+sequences. Interestingly, its association to proximal regions, 
+although low (∼4%), was much higher than p27 (Figure 
+1A). Because neither p27 nor PCAF interact directly with 
+DNA, their association with chromatin has to be mediated 
+by chromatin associated proteins. 
+We also analyzed the distribution of p27-and PCAF-
+BSs over chromosomes. As shown in Supplementary Figure 
+S1, PCAF-BSs significantly accumulated in chromosomes 
+8, 10, 16, 17, 19, 20, 21 and 22. Interestingly, the distribution 
+of p27-BSs was quite similar. They accumulated in chromo-
+somes 8, 10, 16, 17, 21 and Y. It worth's noting that the pres-
+ence of both p27 and PCAF-BSs in chromosome X was ex-
+tremely reduced. Finally, we also analyzed the biotype pro-
+file of the genes potentially regulated by p27 or PCAF. In the 
+case of PCAF the 76% of the genes were encoding for pro-
+teins, the 13% for pseudogenes and the remaining 11% cor-
+responded to non-coding RNAs (ncRNAs) (Figure 1B). In-
+triguingly, the 41% of the genes putatively regulated by p27 
+corresponded to nc-RNAs (23%) and to pseudogenes (18%) 
+and only the 59% were genes encoding for proteins (Figure 
+1B). These results indicate that both, p27 and PCAF, but 
+p27 in a higher extension, can play a significant role in the 
+expression of nc-RNAs and pseudogenes. </p>
+
+<p>Gene ontology analysis of p27-BSs and PCAF-BSs </p>
+
+<p>Gene ontology (GO) analysis of the protein encoding 
+genes potentially regulated by p27 was performed using the 
+DAVID program. Results revealed that the four more signif-
+icant biological processes were: cell adhesion, neuron differ-
+entiation, cell-cell signaling and ion transport (Figure 2A). 
+In the case of PCAF, due the high number of peaks, the 
+analyses had to be done in two separated groups. One group 
+contained the genes with PCAF-BSs in intragenic regions 
+and the other included genes with PCAF-BSs in intergenic 
+regions. Interestingly, the four biological processes enriched 
+in p27-target genes (p27-TGs) were also significantly en-
+riched (Figure 2B and C). We observed that around 50% 
+of p27-TGs in these four groups also contained PCAF-BSs 
+(Supplementary Figure S2). These results suggest that p27 
+and PCAF can collaborate in the transcriptional regulation 
+of genes involved in these cellular functions. To further con-
+firm this data, GO analysis using the Gitools program was 
+additionally performed. Results showed that three of the 
+biological processes (cell adhesion, neuron differentiation 
+and ion transport) shared by p27 and PCAF-TGs were also 
+found to be significantly enriched using this more restrictive 
+program (Figure 2D). 
+We next aimed to identify DNA consensus sequences that 
+could interact with p27 or with PCAF using the MEME 
+tool. These analyses allowed the identification of two con-
+sensus sequences for p27 and three other sequences for 
+PCAF (Figure 2E). </p>
+
+
+
+<p>Genome HCT116 </p>
+
+<p>ChIP p27 
+ChIP PCAF </p>
+
+<p>1.50 1.90 1.30 2.00 
+0.70 </p>
+
+<p>1.40 </p>
+
+<p>7.60 </p>
+
+<p>41.70 </p>
+
+<p>41.60 </p>
+
+<p>0.05 
+0.25 
+0.20 0.50 0.05 0.20 
+1.00 </p>
+
+<p>23.70 </p>
+
+<p>73.90 </p>
+
+<p>1.10 
+1.30 
+0.90 
+1.30 0.40 
+1.40 
+1.90 </p>
+
+<p>41.60 
+50.00 </p>
+
+<p>Promoter (&lt;= 1000bp) </p>
+
+<p>Promoter (1000-3000bp) </p>
+
+<p>Dowstream (&lt;=1000bp) </p>
+
+<p>Dowstream (1000-3000bp) </p>
+
+<p>5'UTR </p>
+
+<p>3'UTR </p>
+
+<p>Coding exon </p>
+
+<p>Intron </p>
+
+<p>Distal intergenic </p>
+
+<p>B </p>
+
+<p>59% 
+18% </p>
+
+<p>23% </p>
+
+<p>ChIP p27 
+ChIP PCAF </p>
+
+<p>76% </p>
+
+<p>13% </p>
+
+<p>11% </p>
+
+<p>Protein coding </p>
+
+<p>Pseudogen </p>
+
+<p>Noncoding 
+RNAs </p>
+
+<p>A </p>
+
+<p>Figure 1. Distribution of p27-and PCAF-BSs on the chromatin. (A) Distribution of different chromatin regions overall genome of HCT116 cells (upper 
+panel), p27-BSs (Bottom panel, left) and PCAF-BSs (Bottom panel, right) obtained by ChIP-seq experiments. Results are represented as percentage. (B) 
+The different biotypes of genes putatively regulated by p27 (left) or PCAF (right) are represented as percentage. </p>
+
+<p>Nucleic Acids Research, 2017, Vol. 45, No. 9 5091 </p>
+
+<p>A 
+B </p>
+
+<p>D </p>
+
+<p>PCAF 
+p27 </p>
+
+<p>GO p27-BSs 
+GO PCAF-BSs (intra) </p>
+
+<p>GO PCAF-BSs (inter) </p>
+
+<p>C 
+E </p>
+
+<p>GO p27/PCAF-BSs </p>
+
+<p>cell adhesion 
+regulation of nervous system development 
+regulation of neurogenesis 
+regulation of neuron differentiation 
+synaptic transmission 
+regulation of developmental process 
+positive regulation of cell differentiation 
+cation transport 
+positive regulation of muscle cell differentiation 
+metal ion transport 
+muscle cell differentiation 
+regulation of protein homodimerization activity 
+regulation of cell communication 
+regulation of signaling 
+developmental process 
+anatomical structure development 
+regulation of signal transduction 
+regulation of cellular process 
+homeostatic process 
+regulation of cell development </p>
+
+<p>0 
+2 
+4 
+Enrichment score </p>
+
+<p>Cell adhesion </p>
+
+<p>Cell-cell signaling </p>
+
+<p>Neuron differentiation </p>
+
+<p>Regulation of transcription </p>
+
+<p>Embryonic organ development </p>
+
+<p>1 
+3 </p>
+
+<p>Cell adhesion </p>
+
+<p>Neuron differentiation </p>
+
+<p>Cell-cell signaling </p>
+
+<p>Ion transport </p>
+
+<p>Enrichment score </p>
+
+<p>0 
+1 
+2 
+3 </p>
+
+<p>9.5e-4 </p>
+
+<p>2.6e-4 </p>
+
+<p>2.3e-4 </p>
+
+<p>1.2e-4 </p>
+
+<p>p-value </p>
+
+<p>Ion transport </p>
+
+<p>Cell adhesion </p>
+
+<p>Cell-cell signaling </p>
+
+<p>Neuron differentiation </p>
+
+<p>0 
+4 
+8 
+Enrichment score </p>
+
+<p>2 
+6 
+10 </p>
+
+<p>2.4e-14 </p>
+
+<p>1.6e-10 </p>
+
+<p>1.6e-5 </p>
+
+<p>7.3e-4 </p>
+
+<p>p-value </p>
+
+<p>1.8e-7 </p>
+
+<p>5.2e-5 </p>
+
+<p>7.8e-5 </p>
+
+<p>5.3e-7 </p>
+
+<p>2.3e-6 </p>
+
+<p>p-value </p>
+
+<p>E-value </p>
+
+<p>E-value </p>
+
+<p>Figure 2. Gene ontology analysis of protein encoding genes with p27-or PCAF-BSs in their proximity. The Database for Annotation, Visualization and 
+Integrated Discovery (<rs type="software">DAVID</rs>) program was used to define biological processes enriched in the protein encoding genes putatively regulated by p27 (A), 
+PCAF (intragenic BSs) (B) and PCAF (intergenic BSs) (C). (D) The <rs type="software">Gitools</rs> program was used to define biological processes enriched in the protein 
+encoding genes putatively regulated by p27 or PCAF. (E) <rs type="software">MEME</rs> programs were used to identify short sequence motifs enriched in the p27-BSs (upper 
+panel) or PCAF-BSs (bottom panel). </p>
+
+
+
+<p>Identification of protein encoding genes containing p27-and 
+PCAF-binding sites </p>
+
+<p>By comparing the p27 and PCAF ChIP-seq data we iden-
+tified 269 protein encoding genes that contain BSs for both 
+proteins (Figure 3A). These genes represent the 45% of all 
+the protein encoding p27-TGs, a percentage similar to that 
+observed in the four biological processes most significantly 
+regulated by these two proteins according to the GO analy-
+sis (Supplementary Figure S2). Interestingly, in most cases, 
+the chromatin region able to associate with PCAF is differ-
+ent to that interacting with p27. GO analysis of these 269 
+genes revealed that the biological processes ionic transport, 
+cell adhesion, and cell-cell signaling were significantly en-
+riched (Figure 3B). </p>
+
+<p>Expression microarrays in HCT116 cells knocked down for 
+PCAF </p>
+
+<p>HCT116 cells were knocked down (KD) for PCAF us-
+ing a specific shRNA (Supplementary Figure S3A). Then, 
+expression microarray analyses, in PCAF-KD cells versus 
+control, were performed. Results showed that 852 genes 
+were differentially expressed in these cells being 557 genes 
+up-regulated and 295 down-regulated (Figure 3C). GO 
+analysis revealed that the most significantly enriched group 
+was cell cycle (Figure 3D). Interestingly, GO analysis of 
+down-regulated genes revealed that most of these cell cycle 
+regulatory genes were down-regulated in PCAF-KD cells 
+(Supplementary Figure S3B). These results suggest that 
+PCAF regulates cell cycle progression by controlling the ex-
+pression of a number of relevant cell cycle regulatory genes. 
+Genes up-regulated are mainly involved in translation and 
+apoptosis (Supplementary Figure S3C). 
+On comparing ChIP-seq and expression microarrays data 
+we observed that 156 genes from those differentially ex-
+pressed in the PCAF-KD cells also showed PCAF-BSs sug-
+gesting that PCAF participates in the regulation of the ex-
+pression of these genes by associating with regulatory pro-
+tein complexes at these specific sites (Figure 3E). The rest of 
+the genes could be genes indirectly regulated by PCAF. GO 
+analysis of these 156 genes showed that a significant num-
+ber of them are involved in cellular functions related to cell 
+adhesion and neurogenesis (Supplementary Figure S3D). 
+We also observed that 5 of these genes (IGF1R, GABRG2, 
+CRBN, SPAG9 and ZWINT) also contain p27-BSs (Figure 
+3E). </p>
+
+<p>Role of p27 and PCAF in the regulation of transcription </p>
+
+<p>To define the role of p27 and PCAF on the expression 
+of TGs we analyzed the effect of knocking down p27 
+or/and PCAF on transcription of a number of selected 
+common targets (Table 1) using specific shRNAs (Supple-
+mentary Figure S3A). Determinations were performed in 
+asynchronously proliferating cells (mostly in G1) thus min-
+imizing the cell cycle progression differences between p27-
+KD cells and PCAF-KD cells (both proliferating slightly 
+faster than controls) as observed by determining the gener-
+ation time (Supplementary Figure S4A and B). We found 
+that in p27-KD cells the mRNA levels of most TGs were 
+increased (Figure 4A). To investigate whether these higher </p>
+
+<p>levels of mRNA were due to increased rates of transcription 
+we determined the amount of the primary non-spliced tran-
+scripts (PNST) by qPCR. Results revealed that these tran-
+scripts were elevated in p27-KD cells indicating that p27 re-
+presses transcription of these genes (Figure 4B). 
+We also found that the mRNA levels of common TGs 
+were significantly lower in PCAF-KD cells than in control 
+cells (Figure 4C) and that this reduction was due to a de-
+creased rate of transcription (Figure 4D). This indicates 
+that PCAF activates transcription of these TGs. To con-
+firm the transcriptional regulatory role of p27 and PCAF 
+we performed similar experiments using the CRISPR/Cas9 
+methodology. Thus, after knocking out p27 (Supplemen-
+tary Figure S4A) we observed that the levels of mRNA and 
+primary non-spliced transcripts were increased (Figures 4E 
+and 4F). In contrast in PCAF-KD cells the levels of mRNA 
+and primary non-spliced transcript were found to be de-
+creased (Figure 4G and H). We analyzed the expression of 
+specific target genes for only p27 or PCAF as controls (Sup-
+plementary Figure S5A). The protein levels in p27KO or 
+PCAF-KD cells were also determined (Supplementary Fig-
+ure S5B). 
+We also investigated the effect of the double KD (2KD) 
+of p27 and PCAF on transcription. In 2KD-cells obtained 
+using shRNAs we observed that the amount of the primary 
+non-spliced transcripts was reduced in all the cases indi-
+cating that the co-activator effect of PCAF overrides the 
+repressor role of p27 in all the cases (Figure 5A). These 
+results were corroborated by generating 2KD cells using 
+CRISP/Cas9 (Figure 5B). In these cells the levels of mRNA 
+(Figure 5C) primary non-spliced transcripts (Figure 5D) 
+and protein (Supplementary Figure S5C) were significantly 
+reduced. Additionally, KD experiments using the MCF-7 
+breast cancer cell line gave similar results: whereas the KD 
+p27 increased transcription of TGs, the KD of PCAF re-
+duced their expression (Supplementary Figure S6). </p>
+
+<p>PAX5 collaborates with p27 and PCAF in the regulation of 
+transcription </p>
+
+<p>The identification of TFs that could bind to p27-and 
+PCAF-BSs was performed by studying 150 bp regions of 
+these peaks (75 bp up the maximum and 75 bp down) by 
+using the STORM tool for the scanning of the peaks and 
+the TF-BSs motif position weight matrix from TRANS-
+FAC. The ten TFs more significantly identified have been 
+represented in a heat map that compares results from p27 
+and PCAF (Figure 6A). Interestingly, only PAX5 appears 
+to be able to significantly associate to the p27-BSs. In con-
+trast, a number of different TFs can putatively associate to 
+the PCAF-BSs and among these different candidates PAX5 
+was one of the most significant (Figure 6A). Interestingly, 
+The consensus sequence for Pax5 (Supplementary Figure 
+S7) is quite similar to the sequences found for p27 and 
+PCAF (Figure 2E and Supplementary Figure S7). Interest-
+ingly, the sequence analysis of the chromatin peaks for p27 
+and PCAF of a number of genes (Table 1) also revealed that 
+these sequences also include regions of high similarity with 
+the PAX5 consensus sequence (data not shown). Hence, 
+we aimed to analyze the putative interaction of PAX5 with 
+both p27 and PCAF by IP. We observed that PAX5 levels </p>
+
+<p>Nucleic Acids Research, 2017, Vol. 45, No. 9 5093 </p>
+
+<p>A </p>
+
+<p>C </p>
+
+<p>B </p>
+
+<p>D </p>
+
+<p>E </p>
+
+<p>GO p27-and PCAF-BSs 
+p27-and PCAF-BSs </p>
+
+<p>GO PCAF regulated genes </p>
+
+<p>2.1e-3 </p>
+
+<p>9.0e-4 </p>
+
+<p>1.1e-2 </p>
+
+<p>3.5e-2 </p>
+
+<p>p-value </p>
+
+<p>4.4e-12 </p>
+
+<p>1.2e-5 </p>
+
+<p>1.1e-4 </p>
+
+<p>2.1e-3 </p>
+
+<p>p-value </p>
+
+<p>1.1e-2 </p>
+
+<p>Figure 3. Identification of genes putatively regulated by p27 and PCAF. (A) Venn diagram representing the number of genes encoding for proteins identified 
+by ChIP-seq with anti-PCAF antibodies (pink) or with anti-p27 (blue). (B) The biological processes enriched in the group of genes sharing p27 and PCAF-
+BSs (269 genes) were identified by using the <rs type="software">DAVID</rs> program. (C) Number of genes differentially expressed in PCAF-KD versus control HCT116 cells 
+identified by expression microarray analysis and main characteristics of the data. (D) The biological processes enriched in the group of genes differentially 
+expressed in PCAF-KD cells versus control were identified using the DAVID program. (E) Venn diagram representing the number of genes encoding for 
+proteins identified by ChIP-seq with anti-PCAF antibodies (pink), with anti-p27 (blue) or differentially expressed in PCAF-KD cells (green). </p>
+
+<p>5094 Nucleic Acids Research, 2017, Vol. 45, No. 9 </p>
+
+<p>C </p>
+
+<p>E 
+F </p>
+
+<p>D </p>
+
+<p>A 
+B </p>
+
+<p>0 </p>
+
+<p>2 </p>
+
+<p>4 </p>
+
+<p>6 </p>
+
+<p>8 </p>
+
+<p>Fold enrichment </p>
+
+<p>CR Ctrl 
+CR p27 </p>
+
+<p>** </p>
+
+<p>* </p>
+
+<p>** 
+*** </p>
+
+<p>* </p>
+
+<p>* </p>
+
+<p>** </p>
+
+<p>** </p>
+
+<p>Fold enrichment </p>
+
+<p>CR Ctrl 
+CR p27 </p>
+
+<p>G 
+H </p>
+
+<p>0 </p>
+
+<p>0.2 </p>
+
+<p>0.4 </p>
+
+<p>0.6 </p>
+
+<p>0.8 </p>
+
+<p>1 </p>
+
+<p>1.2 </p>
+
+<p>1.4 </p>
+
+<p>Fold enrichment </p>
+
+<p>CR Ctrl </p>
+
+<p>CR PCAF </p>
+
+<p>0 </p>
+
+<p>0.2 </p>
+
+<p>0.4 </p>
+
+<p>0.6 </p>
+
+<p>0.8 </p>
+
+<p>1 </p>
+
+<p>1.2 </p>
+
+<p>1.4 </p>
+
+<p>Fold enrichment </p>
+
+<p>CR Ctrl </p>
+
+<p>CR PCAF </p>
+
+<p>**** </p>
+
+<p>* </p>
+
+<p>* 
+** </p>
+
+<p>* </p>
+
+<p>** </p>
+
+<p>* </p>
+
+<p>** </p>
+
+<p>mRNA </p>
+
+<p>mRNA </p>
+
+<p>mRNA </p>
+
+<p>mRNA </p>
+
+<p>PNST </p>
+
+<p>PNST </p>
+
+<p>PNST </p>
+
+<p>PNST </p>
+
+<p>Figure 4. Effect of knocking down p27 or PCAF on the expression of target genes. (A) HCT116 cells were infected with a specific shRNA for p27 (shp27) 
+or with a control shRNA (sh(-)). Then, mRNA levels of different common target genes (see Table 1) were determined by qPCR. In these cells, the levels of 
+primary non spliced transcripts (PNST) were also determined by qPCR (B). (C) HCT116 cells were infected with a specific shRNA for PCAF (shPCAF) 
+or with a control shRNA (sh(-)) and the levels of mRNA of different common target genes were subsequently determined by qPCR. In these cells, the 
+levels of primary non spliced transcripts (PNST) were also determined by qPCR (D). Levels of mRNA (E) or of primary non spliced transcripts (PNST) 
+(F) from different common target genes were determined in p27 knocked down cells using the CRISPR/Cas9 (CR p27) methodology and in control cells 
+(CR Ctrl). Levels of mRNA (G) or of primary non spliced transcripts (PNST) (H) from different common target genes were determined in PACF knocked 
+down cells using the CRISPR/Cas9 (CR PCAF) methodology and in control cells (CR Ctrl). In all experiments results are the mean value ± SEM of four 
+independent experiments and are represented as fold enrichment versus control. Statistical analyses were performed using the t-student's test. *P &lt; 0.05, 
+**P &lt; 0.01 and ***P &lt; 0.001. </p>
+
+<p>Nucleic Acids Research, 2017, Vol. 45, No. 9 5095 </p>
+
+<p>Table 1. List of selected genes that have both p27 and PCAF-binding sites (BSs) in their vicinity. The table includes localization and extension of the p27-
+and PCAF-BSs and the intensity of the binding (Fold-enrichment) </p>
+
+<p>ChIP-seq 
+Cromosome 
+Start 
+End </p>
+
+<p>Fold-
+enrichment 
+Inside feature 
+Distance to feature </p>
+
+<p>GABRG2 
+p27 
+chr5 
+161583970 
+161584252 
+9.91 
+Downstream 
+156675 
+PCAF 
+chr5 
+161580341 
+161580611 
+11.44 
+Downstream 
+153046 
+GHR 
+p27 
+chr5 
+42434475 
+42434749 
+8.49 
+Upstream 
+-25308 
+PCAF 
+chr5 
+42267322 
+42267561 
+10.01 
+Upstream 
+-192461 
+GRIN3A 
+p27 
+chr9 
+103520403 
+103520670 
+8.49 
+Inside 
+20280 
+PCAF 
+chr9 
+103539425 
+103539691 
+8.58 
+Inside 
+1258 
+IGF1R 
+p27 
+chr15 
+97121406 
+97121648 
+9.91 
+Inside 
+111104 
+PCAF 
+chr15 
+97135969 
+97136244 
+11.86 
+Inside 
+125667 
+PCAF 
+chr15 
+96961148 
+96961421 
+8.46 
+Upstream 
+-49154 
+ROBO1 
+p27 
+chr3 
+79257543 
+79257776 
+9.83 
+Upstream 
+-163 
+PCAF 
+chr3 
+80182644 
+80183002 
+11.44 
+Upstream 
+-460893 
+PCAF 
+chr3 
+80060831 
+80061238 
+10.15 
+Upstream 
+-339080 
+UNC5D 
+p27 
+chr8 
+35345752 
+35346062 
+8.49 
+Inside 
+132907 
+p27 
+chr8 
+35652578 
+35652839 
+8.49 
+Inside 
+131126 
+PCAF 
+chr8 
+35828412 
+35828659 
+8.58 
+Downstream 
+306960 
+IL7 
+p27 
+chr8 
+80047436 
+80047703 
+11.32 
+Upstream 
+-167123 
+p27 
+chr8 
+80007304 
+80007574 
+9.91 
+Upstream 
+-126991 
+PCAF 
+chr8 
+79892345 
+79892640 
+7.98 
+Upstream 
+-12032 
+ARHGEF7 
+p27 
+chr13 
+110645835 
+110646168 
+6.97 
+Upstream 
+-9802 
+PCAF 
+chr13 
+110492766 
+110493092 
+10.15 
+Upstream 
+-73017 
+RERGL 
+p27 
+chr12 
+18151836 
+18152131 
+11.32 
+Upstream 
+-17455 
+PCAF 
+chr12 
+17993973 
+17994265 
+12.87 
+Downstream 
+140408 
+SPAG9 
+p27 
+chr17 
+46415723 
+46416022 
+8.9 
+Inside 
+63547 
+PCAF 
+chr17 
+46406076 
+46406443 
+8.87 
+Inside 
+73194 
+CRBN 
+p27 
+chr3 
+3355488 
+3355749 
+9.64 
+Upstream 
+-159098 
+p27 
+chr3 
+3328299 
+3328565 
+11.32 
+Upstream 
+-131909 
+PCAF 
+chr3 
+3417081 
+3417428 
+11.44 
+Upstream 
+-220691 
+GLI3 
+p27 
+chr7 
+42180561 
+42180853 
+11.32 
+Inside 
+48859 
+PCAF 
+chr7 
+42190975 
+42191217 
+8.12 
+Inside 
+38445 
+ZNF716 
+p27 
+chr7 
+57555151 
+57555705 
+7.79 
+Downstream 
+41320 
+PCAF 
+chr7 
+57555035 
+57555523 
+7.7 
+Downstream 
+41204 
+DGCR6 
+p27 
+chr22 
+17263635 
+17264251 
+9.48 
+Upstream 
+-10144 
+PCAF 
+chr22 
+17263972 
+17264283 
+8.79 
+Upstream 
+-9807 </p>
+
+<p>are constant along cell cycle (Supplementary Figure S8A). 
+IP experiments using anti-PAX5 were performed in asyn-
+chronously growing HCT116 cells. Results revealed that this 
+protein interacts with both p27 and PCAF (Figure 6B). 
+Also reciprocal IPs using anti-p27 and anti-PCAF showed 
+this interaction (Supplementary Figure S8B and C). Inter-
+estingly, the absence of PCAF did not affect the interac-
+tion between PAX5 and p27 (Supplementary Figure S8D). 
+Similarly, the absence of p27 did not alter the association 
+between PAX5 and PCAF (Supplementary Figure S8E). 
+These results suggest that PAX5 is able to bind to both (p27 
+and PCAF), most probably through different binding sites 
+because in the absence of p27 the levels of PCAF associated 
+to PAX5 are quite similar to those associated in its presence 
+(Supplementary Figure S8E). The interaction of p27 with 
+its specific binding site in the GRIN3A, SPAG9, ROBO1 
+and UNC5D genes was validated by ChIP in HCT116 cells 
+(Figure 6C, upper panel). Additionally, the specificity of the 
+interaction was validated by ChIP in HCT116 p27KO cells 
+(Supplementary Figure S9A). Moreover, the interaction of 
+PCAF with its specific binding site in the same genes was 
+also validated by ChIP (Figure 6C bottom panel). Next, 
+ChIP analysis with anti-PAX5 showed the binding of PAX5 
+to the p27-and PCAF-BSs of the same group of genes (Fig-
+ure 6D) indicating that PAX5 is able to associate to both 
+p27 and PCAF-BSs. Finally, ChIP experiments performed 
+in HCT116 cells knocked down for PAX5 revealed a sig-</p>
+
+<p>nificant decreased association of p27 and PCAF to their re-
+spective binding sites, suggesting that PAX5 mediates the in-
+teraction of both proteins with DNA (Supplementary Fig-
+ure S9B). Interestingly, we observed that the mRNA and 
+the protein levels of several target genes were increased in 
+PAX5-KD cells (Figure 6E, F and G). All these data indi-
+cate that PAX5 collaborates in the transcriptional regula-
+tion of specific p27 and PCAF target genes playing a role as 
+a repressor. </p>
+
+<p>DISCUSSION </p>
+
+<p>PCAF is a member of the GNAT (GCN5-related N-
+acetyltransferases) family of acetylases that participates in 
+large multi-subunit complexes involved in transcriptional 
+regulation (36). It also possesses an intrinsic ubiquitin E3 
+ligase activity that allows specific ubiquitylation of tar-
+get proteins (37). PCAF behaves as a transcriptional co-
+activator by acetylating a number of different substrates, 
+the most well-known being histones, although non-histones 
+proteins are also substrates of PCAF (36). These include 
+TFs as c-myc, E2F1, GATA-2 and Myo-D (38-41), other 
+proteins involved in transcription as Cdk9 and some cell cy-
+cle regulatory proteins as p27, cdk2 and cyclin A (6,42-44). 
+The evidence showing that PCAF acetylates p27 inducing 
+its degradation (6) and that p27 behaves as a transcriptional 
+repressor (9,11) suggested the possibility of the cooperation 
+between both proteins in the regulation of transcription. We </p>
+
+<p>5096 Nucleic Acids Research, 2017, Vol. 45, No. 9 </p>
+
+<p>2 KD CTR </p>
+
+<p>CRISPR </p>
+
+<p>p27 </p>
+
+<p>PCAF </p>
+
+<p>0 </p>
+
+<p>0.2 </p>
+
+<p>0.4 </p>
+
+<p>0.6 </p>
+
+<p>0.8 </p>
+
+<p>1 </p>
+
+<p>1.2 </p>
+
+<p>1.4 </p>
+
+<p>Fold enrichment </p>
+
+<p>CR Ctrl </p>
+
+<p>CR 2KD </p>
+
+<p>A </p>
+
+<p>D 
+C </p>
+
+<p>B </p>
+
+<p>0 </p>
+
+<p>0.2 </p>
+
+<p>0.4 </p>
+
+<p>0.6 </p>
+
+<p>0.8 </p>
+
+<p>1 </p>
+
+<p>1.2 </p>
+
+<p>Fold enrichment </p>
+
+<p>CR Ctrl 
+CR 2KD </p>
+
+<p>** </p>
+
+<p>* </p>
+
+<p>* 
+** </p>
+
+<p>* </p>
+
+<p>*** </p>
+
+<p>** </p>
+
+<p>** </p>
+
+<p>PNST </p>
+
+<p>PNST 
+mRNA </p>
+
+<p>Figure 5. Effect of knocking down both, p27 and PCAF on the expression of target genes. (A) HCT116 cells were infected with a specific shRNA for p27 
+alone, or with shRNAs for p27 and PCAF or with a control shRNA (sh(-)). Then, the levels of primary non spliced transcripts (PNST) were determined by 
+qPCR. (B). Cells were Knocked down for p27 and PCAF (double knockout) (2KD) using the CRISPR/Cas9 methodology. Then, the levels of PCAF and 
+p27 were determined by WB. Levels of mRNA (C) or of primary non spliced transcripts (PNST) (D) from different common target genes were determined 
+in double knock down cells (CR 2KD) and in control cells (CR Ctrl) by qPCR. In all experiments results are the mean value ± SEM of four independent 
+experiments and are represented as fold enrichment versus control. Statistical analyses were performed using the t-student's test. *P &lt; 0.05, **P &lt; 0.01 
+and ***P &lt; 0.001. </p>
+
+<p>analyzed this possibility by performing ChIP-seq analysis 
+in HCT116 cells using both anti-PCAF and anti-p27 anti-
+bodies. The first interesting observation was that the distri-
+bution of the binding sites of both proteins overall genome 
+was very different. Intriguingly, only a small number of p27-
+BSs were on gene promoters while most of them were in dis-
+tal intergenic (74%) or in intronic regions (24%). These re-
+sults expand the previous information of the identification 
+of p27-BSs performed by ChIP on chip in NIH3T3 cells in 
+which only the association of p27 with gene promoters was 
+analyzed (9) and reveals for the first time that the role of p27 
+in the regulation of transcription is mainly produced by as-
+sociating to chromatin regions distal from the promoters. 
+In contrast, around the 60% of the PCAF-BSs were on the 
+gene body (intron and exon regions) or in proximal regions. 
+Another attractive observation was that a significant 
+number of the p27-BSs (40%) were close to pseudogenes 
+or sequences of non-coding RNAs. Similar results were ob-
+served for PCAF although the proportion was lower (25%). </p>
+
+<p>This observation suggests a putative role of both proteins in 
+the regulation of ncRNA and pseudogene expression. Due 
+to the relevance of these types of RNAs in multiple cellular 
+functions and their involvement in different pathologies, as 
+for instance cancer, these data reveal a putative new role of 
+p27 and PCAF as transcriptional regulators of these RNAs 
+(45-48). 
+Results reported here also yield up that both p27 and 
+PCAF proteins regulate the expression of similar functional 
+groups of genes as cell adhesion, neuronal differentiation, 
+ion transport and cell signaling. It's worth noting that the 
+45% of protein-encoding p27-TGs also contain PCAF bind-
+ing sites indicating that this transcriptional co-activator 
+could be a very important partner of p27 in the regulation of 
+transcription. In fact, we demonstrate here the cooperation 
+between these two proteins in the regulation of transcription 
+of a number of common targets. Specifically, by knocking 
+down p27, PCAF or both we have seen that PCAF operates 
+as a co-activator and p27 as a repressor and that PCAF is </p>
+
+<p>Nucleic Acids Research, 2017, Vol. 45, No. 9 5097 </p>
+
+<p>A </p>
+
+<p>C 
+D </p>
+
+<p>E </p>
+
+<p>p27 
+PCAF </p>
+
+<p>ARNT 02 
+PAX4 01 
+AHRARNT 01 
+PAX5 01 
+ARNT 01 </p>
+
+<p>MYCMAXARNT 01 
+AHRARNT 02 
+PAX5 02 </p>
+
+<p>NMYC 01 
+STAF 01 </p>
+
+<p>F </p>
+
+<p>PAX 5 </p>
+
+<p>p27 </p>
+
+<p>PCAF </p>
+
+<p>IgG 
+PAX5 
+input </p>
+
+<p>IP </p>
+
+<p>Pax5/GAPDH </p>
+
+<p>Sh Ctrl 
+shPAX5 </p>
+
+<p>0,0 </p>
+
+<p>1,0 </p>
+
+<p>2,0 </p>
+
+<p>3,0 </p>
+
+<p>4,0 </p>
+
+<p>5,0 </p>
+
+<p>6,0 </p>
+
+<p>** </p>
+
+<p>ROBO1 </p>
+
+<p>SPAG9 </p>
+
+<p>GRIN3A </p>
+
+<p>UNC5D </p>
+
+<p>ShCtrl shPAX5 </p>
+
+<p>Tubulin </p>
+
+<p>Tubulin </p>
+
+<p>Tubulin </p>
+
+<p>Tubulin </p>
+
+<p>ShCtrl shPAX5 </p>
+
+<p>PAX 5 </p>
+
+<p>Tubulin </p>
+
+<p>*** 
+*** </p>
+
+<p>* </p>
+
+<p>*** </p>
+
+<p>0 </p>
+
+<p>1 </p>
+
+<p>2 </p>
+
+<p>3 </p>
+
+<p>4 </p>
+
+<p>5 </p>
+
+<p>6 </p>
+
+<p>7 </p>
+
+<p>GRIN3A ROBO1 UNC5D SPAG9 </p>
+
+<p>Fold enrichment </p>
+
+<p>G </p>
+
+<p>B </p>
+
+<p>0 </p>
+
+<p>5 </p>
+
+<p>10 </p>
+
+<p>15 </p>
+
+<p>20 </p>
+
+<p>25 </p>
+
+<p>GRIN3A SPAG9 ROBO1 UNC5D 
+Fold enrichment </p>
+
+<p>Ctrl 
+p27 </p>
+
+<p>** 
+** </p>
+
+<p>* </p>
+
+<p>* </p>
+
+<p>0 </p>
+
+<p>1 </p>
+
+<p>2 </p>
+
+<p>3 </p>
+
+<p>GRIN3A SPAG9 ROBO1 UNC5D 
+Fold enrichment </p>
+
+<p>Ctrl 
+PCAF </p>
+
+<p>** </p>
+
+<p>* </p>
+
+<p>** </p>
+
+<p>* </p>
+
+<p>0 </p>
+
+<p>5 </p>
+
+<p>10 </p>
+
+<p>15 </p>
+
+<p>20 </p>
+
+<p>GRIN3A SPAG9 ROBO1 UNC5D 
+Fold enrichment </p>
+
+<p>p27-BS </p>
+
+<p>Ctrl 
+PAX5 </p>
+
+<p>* 
+*** </p>
+
+<p>* </p>
+
+<p>** </p>
+
+<p>0 </p>
+
+<p>5 </p>
+
+<p>10 </p>
+
+<p>15 </p>
+
+<p>GRIN3A SPAG9 ROBO1 UNC5D 
+Fold enrichment </p>
+
+<p>PCAF-BS </p>
+
+<p>Ctrl 
+PAX5 </p>
+
+<p>* 
+* 
+** 
+** </p>
+
+<p>p27-BS </p>
+
+<p>PCAF-BS </p>
+
+<p>mRNA 
+mRNA </p>
+
+<p>Figure 6. PAX5 collaborates in the regulation of p27-and PCAF-target genes. (A) Enrichment analysis of the putative transcription factors that could 
+significantly associate to p27-or PCAF-BSs was performed using GiTools, the STORM tool for the scanning of the peaks and the TF-BSs motif position 
+weight matrix from TRANSFAC. (B) IP experiments were performed using anti-PAX5 antibodies or IgG as a control. The presence of p27, PAX5 and 
+PCAF in the inputs and in the immunoprecipitates was determined by WB. (C) The interactions of p27 (upper panel) or PCAF (bottom panel) with their 
+specific chromatin binding sites in several target genes were performed by ChIP using anti-p27, anti-PCAF or no-antibodies as a control. Results are 
+represented relative to the control. (D) The interaction of PAX5 with the p27-BSs (upper panel) and PCAF-BSs (bottom panel) of the target genes was 
+analyzed by ChIP using anti-PAX5 antibodies or no-antibodies as a control. Results are represented relative to the control (E) Cells were infected with 
+a specific shRNA for PAX5 or a control shRNA. Then, the levels of PAX5 mRNA (upper panel) and PAX5 protein (bottom panel) were determined by 
+qPCR or WB, respectively. (F) The mRNA levels of different target genes were determined by qPCR in cells infected with a specific shRNA for PAX5 
+(white bars) or a control shRNA (black bars). Results are represented as a fold change relative to the control. In all cases, results are the mean value ± 
+SD of three independent experiments. Statistical analyses were performed using the t-student's test. *P &lt; 0.05, **P &lt; 0.01 and ***P &lt; 0.001. (G) Protein 
+levels of the different TGs were determined by WB in PAX5-KD cells. Tubulin was used as a loading control. </p>
+
+<p>5098 Nucleic Acids Research, 2017, Vol. 45, No. 9 </p>
+
+<p>needed for the expression of p27-TGs because in the double 
+knock-down cells gene expression is blocked. Curiously, in 
+this cooperative role each one of these proteins associates to 
+different regulatory sites of the chromatin. 
+The evidence that PCAF acetylates K100 sited in D2 sub-
+domain of p27 and that this acetylation induces p27 ubiq-
+uitylation and the subsequent degradation (6) together with 
+results reported here allows us to postulate a model of how 
+p27 and PCAF can cooperate in the regulation of tran-
+scription. In this model, p27 associated to specific regula-
+tory domains of the chromatin represses transcription of 
+its target genes. To activate transcription PCAF (associated 
+to a different regulatory domain) interacts with p27, possi-
+ble by a change in chromatin conformation. Then, PCAF 
+acetylates p27 inducing its degradation. Whether the p27-
+ubiquitylating enzyme is the own PCAF still remains un-
+known but this is an attractive possibility. Degradation of 
+p27 would eliminate the repressor role of this protein and 
+would allow PCAF to act as a transcriptional co-activator. 
+That PCAF mediated acetylation occurs on p27 associated 
+to the regulatory chromatin BSs still remains to be demon-
+strated. However, a similar mechanism has been reported 
+to operate during the activation of the Hedgehog pathway 
+(49). Authors described that cells subjected to a genotoxic 
+stress induce the p53-dependent transcriptional activation 
+and accumulation of PCAF (50). Then, PCAF associates 
+with and acetylates the TF GLI1 that is subsequently ubiq-
+uitylated by the intrinsic ubiquitin E3 ligase of PCAF that 
+induced its degradation. As a consequence, GLI1 targets 
+cannot be transcribed. 
+We also report here that PAX5 participates in the tran-
+scriptional regulation mediated by p27 and PCAF. PAX5 
+belongs to the PAX family of TFs that include 9 members 
+that are involved in the control of development (51). Specif-
+ically, PAX5 is essential for commitment of lymphoid pro-
+genitors to the B lymphocyte lineage. It activates the ex-
+pression of B-lineage specific genes but represses a subset 
+of genes not needed for this process of differentiation (52). 
+Interestingly, mice lacking PAX5 in mature B cells develop 
+aggressive lymphomas (53). We report here that PAX5 in-
+teracts with both p27 and PCAF, that it associates to p27-
+and PCAF-BSs and that the knockdown of PAX5 increased 
+transcription of p27/PCAF-TGs indicating that it behaves 
+as a transcriptional repressor of these genes together with 
+p27. An attractive speculation is that PAX5, similarly to 
+p27, could be a PCAF substrate and that PAX5 acetyla-
+tion could lead to its inactivation as a transcriptional re-
+pressor. However, this possibility remains to be explored. 
+In summary, we describe here a novel mechanism of tran-
+scriptional regulation mediated by p27, PAX5 and PCAF 
+that might be relevant for the control of several important 
+biological processes and that can participate in the devel-
+opment of different pathological situations as for instance 
+tumorigenesis. </p>
+
+<p>SUPPLEMENTARY DATA </p>
+
+<p>Supplementary Data are available at NAR Online. </p>
+
+<p>FUNDING </p>
+
+<p>Ministerio de  y Competitividad (MINECO) 
+[SAF2012-38078 to O.B. and BFU2015-65311-R to R.A.]; 
+Instituto de Salud Carlos III [RD12/0036/0054 to O.B. and 
+CB16/12/00244 (CIBERONC) to A.B.]; 'La Caixa' Foun-
+dation 2016-052407 (to R.A.). Funding for open access 
+charge: MInisterio the Economia y Competitividad, Spain 
+La Caixa Foundation. Spain. 
+Conflict of interest statement. None declared. </p>
+
+
+
+</text></tei>

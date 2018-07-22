@@ -15,12 +15,11 @@ public class SoftwareProperties {
 		} catch (IOException e1) {
 			return null;
 		}
-		
 		return properties.getProperty(key);
 	}
 
 	public static String getTmpPath() {
-		return SoftwareProperties.get("org.grobid.software.tmpPath");
+		return SoftwareProperties.get("grobid.software.tmpPath");
 	}
 	
 }

@@ -1,0 +1,535 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC2650971" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:18+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p><rs type="software">R program</rs>To address the debate on the safety of generic substitution quantitatively, the author 
+compared the change in AUC in virtual patients who were simulated for several dif-
+ferent scenarios of generic substitution. In four scenarios of original (branded) to 
+generic and generic to generic substitution, 5,000 virtual patients were simulated per 
+scenario using the programming software R. The mean population AUC of gener-
+ics ranged from 90-110% (scenarios A and B) and 80-123.5% (scenarios C and D) 
+of the AUC of the original. Those patients who had an AUC change (ratio) as a result 
+of drug substitution of less than 0.67 or greater than 1.5 were considered to be in 
+potential danger due to the substitution. We found that less than 6% of patients fell 
+outside of the cutoff range of 0.67-1.5 as a result of original to generic substitution. 
+However, in the case of generic to generic substitution, the proportion was as high 
+as 9-12%. This alerts us to the potential danger of generic substitution, especially 
+for drugs with narrow therapeutic indices. </p>
+
+<p>were defined throughout the simulation. In the equation (2-1) 
+and (2-2), Pop Mean AUCGen1 and Pop Mean AUCGen2 denote 
+mean population AUCs of two different generics (Gen1 and 
+Gen2). Gen1 and Gen2 are those which are randomly select-
+ed from many different generics of Drug X, produced by differ-
+ent companies in each simulation scenario. In equations (1), 
+(2-1) and (2-2), the individual mean AUCs in the i th simu-
+lated patient (Indiv Mean AUCOri_i, Indiv Mean AUCGen1_i 
+and Indiv Mean AUCGen2_i) share the same η i (BSV), which 
+follows a Gaussian distribution of mean 0 and variance 0.04 
+as mentioned above. Therefore, whatever value the η i may 
+be, it does not influence the AUC ratios of switched formu-
+lations in an individual patient. 
+Equations (3) and (4) were used to produce the AUC for the 
+i th simulated patient after taking the original (AUCOri_ij) and 
+generic (AUCGen_i) formulations of Drug X. </p>
+
+<p>AUCOri_ij=Indiv Mean AUCOri_i×(1+ε Ori_ij), ε Ori_ij~N (0, 0.1 2 ) 
+(3) 
+AUCGen1_i=Indiv Mean AUCGen1_i×(1+ε Gen1_i), ε Gen1_i~N (0, 
+ω Gen1 2 ) (4-1) 
+AUCGen2_i=Indiv Mean AUCGen2_i×(1+ε Gen2_i), ε Gen2_i~N (0, 
+ω Gen2 2 ) (4-2) </p>
+
+<p>Because the simulated patient was assumed to take the orig-
+inal formulation on two separate occasions, the subscript j in 
+equation (3) corresponds to 1 (first time) or 2 (second time). 
+The RV was described using the symbol ε . The ε Ori_ij was as-
+sumed to follow Gaussian distribution with mean 0 and vari-
+ance 0.1 2 (coefficient of variance 10%). In contrast to the orig-
+inal, Gen1 and Gen2, the two different formulations of gener-
+ics (i.e., manufactured by two different companies) were also 
+assumed to be given to the same virtual patient. The AUC-
+Gen symbols in the above equations were not given the sub-
+script j because they were separately expressed in two differ-
+ent equations, (4-1) and (4-2) by ε Gen1_i and ε Gen2_i. The ε Gen1_i 
+and ε Gen2_i had different variance (ω Gen1 2 and ω Gen2 2 , respective-
+ly) defined by each scenario. The time intervals between the 
+four events of drug administrations (twice for the original and 
+twice for the generics) per patient were assumed to be long 
+enough to ignore drug accumulation. No period or sequence 
+effect was assumed to exist. </p>
+
+<p>Scenarios </p>
+
+<p>The aim of the simulation was to compare the AUC changes 
+in each patient when he/she was given the original or one of 
+many generics. For all of the four scenarios (A, B, C, and D), 
+the Pop Mean AUC of the original formulation of Drug X 
+was fixed at 100. In scenarios A and B, the Pop Mean AUCs 
+of the generics were 90, 95, 105, and 110, with the RV either 
+being fixed at the same value (10%, scenario A) or being ran-
+domly chosen from 1.0, 1.25 or 1.5 times (scenario B) that 
+of the original. More often than not, there may be several tens 
+of generics per original brand in the market. To reflect this, 
+scenario C had 30 generics, with Pop Mean AUC ranging 
+from 80 to 123.5, increasing by a factor of 1.5 but the RVs 
+fixed at 10%. Scenario D had Pop Mean AUCs identical to 
+those of scenario C, but the RV was randomly chosen between 
+10%, 12.5% and 15% (1.0, 1.25 or 1.5 times that of the orig-
+inal), as in scenario B. The use of larger RV values for the ge-
+nerics compared with that of the original (10%) in scenarios 
+B and D arose from the concern that the quality control ser-
+vices of small-to-medium sized companies producing gener-
+ics may not be as competent as those practiced in the com-
+panies producing the originals. However, the Pop Mean AUC 
+ranges (80-123.5) in scenarios C and D were assumed to sat-
+isfy the 90% confidence interval of BE guidances (80-125). 
+The four scenarios are summarized in Table 1. </p>
+
+<p>Data generation </p>
+
+<p>The models and scenarios were simulated using the R pro-
+gram (Version 2.4.1, http://www.r-project.org/). For each virtu-
+al patient, two AUCs were simulated after giving the original 
+on two separate occasions (AUCOri_i1 and AUCOri_i2), and the 
+next two AUCs after giving two different generics (AUCGen1_i 
+and AUCGen2_i) which were randomly selected from the gener-
+ics of each scenario (e.g., selecting two different generics out 
+of 30 generics for scenario C). In other words, four AUC values 
+were generated per patient, who shared the same η i, but had 
+four different values of ε . The εwhich includes intra-subject 
+variability, intra-formulation variability and other unknown 
+errors is changeable at every occasion. This process was repeat-
+ed 5,000 times per scenario to mimic the situation of pre-
+scription and dispensing for the equivalent number of patients. </p>
+
+<p>8 
+D.-S. Yim </p>
+
+<p>*Between subject variability (BSV) η i~N (0, 0.2 2 ); � Residual variability (RV), including the variability coming from within-subject and within-formulation </p>
+
+<p>differences. ε ~N (0, ω 2 ). </p>
+
+<p>Scenario 
+Original </p>
+
+<p>Generic </p>
+
+<p>Pop Mean AUC 
+BSV* 
+RV </p>
+
+<p>� </p>
+
+<p>(ω Gen value) </p>
+
+<p>A 
+90, 95, 105, 110 
+0.1 
+B 
+90, 95, 105, 110 
+0.1, 0.125, 0.15 
+C 
+80, 81.5, 83, ..., 123.5 
+0.1 
+D 
+80, 81.5, 83, ..., 123.5 
+0.1, 0.125, 0.15 </p>
+
+<p>Same as original: </p>
+
+<p>η i~N (0, 0.2 2 ) </p>
+
+<p>Pop Mean AUC=100 </p>
+
+<p>BSV: η i~N (0, 0.2 2 ) </p>
+
+<p>RV: ε Ori_ij~N (0, 0.1 2 ) </p>
+
+<p>Table 1. Summary of scenarios A to D </p>
+
+<p>RESULTS </p>
+
+<p>Scenarios A to D were sequentially run using the R pro-
+gram. Each run of the scenario constructed data for 5,000 vir-
+tual patients and four AUCs (two for the original, two for dif-
+ferent generics) were simulated per patient. </p>
+
+<p>AUC ratio of 'Original to Original' </p>
+
+<p>Before assessing the effect of drug switch, the ratio of two 
+original AUCs was calculated for each patient. This was to 
+estimate the fluctuation of the AUC when the same formu-
+lation was given to the same patient without any drug switch-
+in other words, it is a measure of the influence of RV only on 
+the AUC of each patient. In the top panel of Fig. 1, illustrating 
+the results of scenario D, the AUC ratio histogram of 'origi-
+nal to original' (AUCOri_i2/AUCOri_i1, i=1-5,000th patient) is 
+given. The histograms in the other scenarios were almost iden-
+tical because the model for the original formulation was the 
+same. As shown in the histogram, there were a lot of patients 
+who fell outside of the ratio 0.8-1.25, the equivalence win-
+dow, in the course of repeated dosing of the original formu-
+lation (4.9% of patients were &lt;0.80, 6.2% of patients were 
+&gt;1.25). However, the number of patients who had ratios small-
+er than 0.67 or greater than 1.5 was negligible. When the 
+same simulation was performed with RV values greater than 
+10%, the proportion of patients outside of the BE window 
+increased accordingly (data not shown). However, the AUCOri_i2/ 
+AUCOri_i1 histogram needs careful interpretation because it 
+indicates the degree of fluctuation of the AUC after each dos-
+ing, and not the ultimate increase or decrease in the mean 
+steady state AUC, which stays constant since the patients 
+were given the same original formulation. </p>
+
+<p>AUC ratios of 'Original to Generic' </p>
+
+<p>The AUC ratios (AUCGen1_i/AUCOri_i1) resulting from a switch 
+from the original formulation to a generic in the four scenar-
+ios are summarized in Table 2. The two different generics </p>
+
+<p>Simulation of Generic Substitution 
+9 </p>
+
+<p>Fig. 1. Simulation results of scenario D, one of the four scenarios. 
+Each histogram represents the AUC ratios of 5,000 virtual patients. 
+The generics in scenario D had a Pop Mean AUC ranging from 
+80-123.5 (original: 100) and an RV of 10-15% (original: 10%). The 
+proportion of patients falling outside of the ratio margin 0.67-1.5 
+(shaded zone) was also included. (A) The AUCs fluctuate even 
+when the same patient takes the same original formulation on two 
+occasions because of the RV value, given as 10% in this scenario. 
+(B) AUCGen1_i /AUCOri _i1 in the case of switch from the original to a 
+generic. (C) AUCGen1_i /AUCGen2_i in the case of switch from a generic 
+to another generic. </p>
+
+<p>Frequency </p>
+
+<p>500 </p>
+
+<p>200 
+0 
+50 
+66.7 80 
+100 
+125 
+150 
+200 </p>
+
+<p>AUC ratio (%)-Switch from original to original </p>
+
+<p>Frequency </p>
+
+<p>400 </p>
+
+<p>200 
+0 
+50 
+66.7 80 
+100 
+125 
+150 
+200 </p>
+
+<p>AUC ratio (%)-Switch from original to one of 30 generics </p>
+
+<p>2.3% 
+2.3% </p>
+
+<p>Frequency </p>
+
+<p>300 </p>
+
+<p>100 
+0 
+50 
+66.7 80 
+100 
+125 
+150 
+200 </p>
+
+<p>AUC ratio (%)-Switch from generics to generics </p>
+
+<p>6.1% 
+5.9% </p>
+
+<p>RV, residual variability. </p>
+
+<p>Scenarios-characteristics of the generics on the market 
+Simulation results </p>
+
+<p>Sce-
+nario 
+Remark 
+Number of 
+Pop Mean 
+generics 
+AUC of 
+RV 
+onthe 
+generics 
+market 
+(original=100) </p>
+
+<p>When switched from 
+When switched from 
+original to generic 
+generic to another generic 
+(AUCGen1_i /AUCOri _i1) 
+(AUCGen1_i /AUCGen2_i ) </p>
+
+<p>&lt;0.67 
+&gt;1.5 Subtotal &lt;0.67 
+&gt;1.5 Subtotal </p>
+
+<p>A 
+4 
+90-110 
+Same as original 
+0.6% 
+0.7% 
+1.3% 
+1.4% 
+1.1% 
+2.5% 
+(90, 95, 105, 110) 
+(10% of mean AUC) 
+B 
+4 ( ×3) 
+1, 1.25, 1.5 times 
+1.3% 
+1% 
+2.3% 
+2.4% 
+3.3% 
+5.7% 
+original 
+C 
+30 
+80-123.5 
+Same as original 
+(even distribution 
+(10% of mean AUC) 1.2% 
+1.8% 
+3% 
+4.5% 
+4.5% 
+9% 
+Scenarios C and D 
+with 1.5 interval) 
+may be more like real 
+D 
+30 (×3) 
+1, 1.25, 1.5 times 
+2.3% 
+2.3% 
+4.6% 
+6.1% 
+5.9% 12% 
+situation than A and B. 
+original </p>
+
+<p>Table 2. Simulation results of four scenarios in 5,000 virtual patients. The proportion of patients who had an AUC ratio of less than 0.67 
+(2/3) or more than 1.5 after switching from 'original to generic' or 'generic to another generic' are given </p>
+
+<p>A </p>
+
+<p>B </p>
+
+<p>C </p>
+
+<p>given to each patient were randomly selected from those with 
+different Pop Mean AUCs and/or RVs defined in each sce-
+nario. An arbitrarily determined safety range of 0.67 (AUC 
+decreased by more than 1/3 after switch) to 1.5 (AUC increased 
+by more than 1.5 times after switch) was used to estimate the 
+proportion of patients who may be harmed by the lack of effect 
+or by overdosing. Along with scenarios A to D, the propor-
+tion of those outside of the safety range increased from 1.3% 
+to 4.6%. </p>
+
+<p>AUC ratios of 'Generic to another Generic' </p>
+
+<p>When a patient taking a generic is switched to another 
+generic on the market, what happens to his/her AUC ? To 
+answer to this question, we also simulated the situation of 
+generic to generic switch in each scenario. The proportion of 
+patients who had simulated AUC ratios (AUCGen1_i/AUCGen2_i) 
+outside of the safety range 0.67-1.5 after 'generic to another 
+generic' switch (2.5-12% in different scenarios) were always 
+greater than the above 'original to generic' situation. In sce-
+narios C and D, where the Mean Pop AUC ranges were greater 
+than those for scenarios A and B, there were more patients 
+outside of the safety range, as expected. The results are sum-
+marized in Table 2. </p>
+
+<p>DISCUSSION </p>
+
+<p>Disputes on the safety of generic substitution have a long 
+history, with a lot of conflicting reports. Most of the papers 
+addressing the safety problem of generic substitution are case 
+reports on the therapeutic inequivalence caused by substitu-
+tion. By contrast, the 'pro-substitution' papers have mainly 
+focused on the saving of medication costs in their own coun-
+tries (10-13), without focusing on the additional costs that 
+may be incurred by therapeutic failure as a result of generic 
+substitution. Richton-Hewett et al. (14), however, measured 
+both the medication cost and healthcare cost after switching 
+branded warfarin to a generic in Boston City Hospital. In their 
+report, the healthcare cost increase from more frequent hos-
+pital visits and elongation of the admission period caused by 
+generic substitution was greater than the medication cost 
+saved. Likewise, Hellstrom et al. (15) also showed an increas-
+ing number of adverse effects with increasing market shares 
+of generics based on time-series data from 1972 to 1996. If 
+the pharmacokinetic results of generic substitution are to be 
+assessed, well-designed prospective studies are recommend-
+ed. However, because it is not practical in clinical settings, 
+Rosenbaum et al. (16) detected 20-30% lower phenytoin 
+concentrations in generic formulation-treated patients than 
+in those treated with the original formulation (Dilantin � ) via 
+retrospective analysis of the therapeutic drug monitoring data. 
+Against this background, computer simulation is thought to 
+be an appropriate method to predict the changes in drug expo-</p>
+
+<p>sure in a large patient population after generic substitution. 
+In simulation-based researches, a critical factor is the fideli-
+ty or reliability of the model used to perform the simulation. 
+In our model, the distribution of Pop Mean AUC of gener-
+ics had the strongest influence on the AUC ratios. There are 
+typically several tens of generics per original brand on the mar-
+ket. It is impossible to know their mean AUC values and vari-
+ance. BE study reports that contain such information are arc-
+hived by companies and regulatory authorities but these are 
+not to be publicized. Hence, the BSV of 20% and the RV of 
+10-15% used in the present study were chosen for the con-
+venience of simulation without regard to real BE data. How-
+ever, the BSV does not influence the switch results as men-
+tioned in the method section. When compared with the au-
+thor's experiences in several repeated-dosing PK studies, the 
+RV of 10-15% used herein may be a conservative condition, 
+i.e. switch results in the real world may be worse than the sim-
+ulated ones in this report. 
+The AUC ratio histograms obtained by the simulation were 
+influenced by both the Pop Mean AUCs and their variability 
+(BSV and RV), as expected. In the model assumption, scenar-
+ios C and D were given a broader range of Pop Mean AUC 
+(80-123.5) for the generics compared with scenarios A and 
+B. The shape of the Pop Mean AUC distribution was assumed 
+to be uniform (evenly distributed) with an interval of 1.5 in 
+scenarios C and D. The condition of uniform distribution as-
+sumed herein may seem to be 'unfair' for the generic drugs, 
+since the estimate of the mean AUC ratio, which is equiva-
+lent to the Pop Mean AUC for the generics in this report, is 
+known to be log-normally distributed with a 90% confidence 
+interval within the 80-125% range, but not uniform-distribut-
+ed. However, at the same time, none of the scenarios in this 
+report had Pop Mean AUC values of the generics outside of 
+the 80-125% range, a situation which may occur with a prob-
+ability of less than 10% (tails on both sides of the distribution 
+curve) in the case of 'log-normal distribution'. Therefore, the 
+assumption of uniform distribution was not an unduly harsh 
+condition to make the AUC changes after generic switch seem 
+worse than they really are. 
+The safety range of the AUC ratio (0.67 to 1.5) used in this 
+study to estimate the proportion of patients falling outside of 
+this range was determined to help the readers to interpret the 
+AUC differences caused by switch. Although the limits of 
+0.67 and 1.5 may be somewhat arbitrary, the proportion out-
+side of the cutoff range helps us to estimate the possibility of 
+therapeutic failure, especially for NTI drugs. In scenarios C 
+and D, it may be concluded that roughly 10% of patients may 
+experience therapeutic failure when substituted from one ge-
+neric to another generic. Currently, not a country requests 
+BE studies comparing a generic with another generic, where 
+mean AUC and Cmax may differ by 45% in the most extreme 
+case (80% generic versus 125% generic). This is why the 'gener-
+ic to another generic' switch was found more dangerous than 
+the 'original to generic' switch in this simulation study. </p>
+
+<p> 
+D.-S. Yim </p>
+
+<p>As with the simulation results herein, it is worth consid-
+ering the surveys from patients who were exposed to gener-
+ic substitution (from the original). In Norway, 36% of the 
+patients had one or more negative experiences after switch 
+(17). In Denmark, 6% of patients responded that he/she had 
+experienced more side-effects from the substituted medicine, 
+and 10% felt that the substituted medicine had had a weak-
+er effect, although 85% of responders were positive about 
+the substitution policy itself (18). In Germany, 37% of patients 
+were skeptical towards generics because of their lower price 
+(19). Such concerns will be considerably amplified in Korea, 
+where a substantial proportion of marketed generics are sus-
+pected to be of sub-standard quality. 
+The problem of therapeutic inequivalence may be more 
+serious in those generics approved without BE tests. In many 
+countries, digestives, topical agents (creams, ointments etc.) 
+and other parenteral formulations are approved without human 
+PK studies. A case report of therapeutic failure by a generic 
+digestive followed by recovery after switch to the original 
+formulation (20) demonstrates that the therapeutic inequiv-
+alence is not simply a theoretical possibility. The fact that 10 
+generic acyclovir creams were found to have a bioavailabili-
+ty of less than 50% of that of the original formulation in in 
+vitro skin permeation experiments (21) also demonstrates the 
+need to tighten the regulatory web on the topical generics 
+approved without BE tests. Moreover, the quality of intra-
+venous formulations also needs thorough examination to assure 
+their safety and quality. This necessity seems to be greater for 
+some macromolecule drugs, which tend to be harder to syn-
+thesize and eliminate detrimental byproducts during the man-
+ufacturing process. 
+Generic prescription or substitution has been widely prac-
+ticed in the US and EU countries for the purpose of health-
+care cost containment. In Ontario, Canada, mandatory gener-
+ic substitution-a more decisive policy of giving patients gener-
+ic drugs, regardless of the prescription-was introduced in 2003 
+(22). In 2007, however, it was reported that the proportion 
+of switching back to the original was higher for antiepileptic 
+agents, one of typical NTI drugs, than for other drugs. Alth-
+ough the causes of switching back were not known, this report 
+implies that the safety and effect of generic substitution of 
+NTI drugs may not be guaranteed under mandatory gener-
+ic substitution. The perspectives of pharmacists may be dif-
+ferent, but they are unlikely to be free from concerns about 
+the safety of patients either. In France, where generic substi-
+tution has been possible since 1999, pharmacists are satisfied 
+with the fact that they can exercise the 'substitution right' 
+(23). However, only 42.5% of them were found to dispense 
+generics to patients routinely, and 55% did so to specific pa-
+tients only (23) for many reasons including safety concerns. 
+A survey report from the US showing that many pharmacists 
+have negative opinions on the generic warfarin substitution 
+(24) is another example showing that pharmacists are also con-
+cerned for the safety of NTI generics. </p>
+
+<p>Through this simulation study, we were able to find that 
+a significant proportion of patients may be exposed to the 
+possibility of under-treatment or overdosing by the switch 
+of drugs, especially when switched from a generic to anoth-
+er generic. In conclusion, the present report supports the old 
+notion that prescription drugs-especially the NTI drugs-should 
+be carefully chosen by physicians based on the consideration 
+of individual patient's condition, not by the governmental 
+policy to save medication cost. </p>
+
+<p>ACKNOWLEDGMENTS </p>
+
+<p>A part of this manuscript was presented at BioKorea 2007 
+held in Seoul. The author is grateful to Prof. Sang-Goo Shin 
+and Kyung-Sang Yu at Seoul National University for their 
+invaluable advice and inspiration which were essential to the 
+execution of this in silico research. </p>
+
+
+
+<p>Simulation of Generic Substitution </p>
+
+
+
+<p>
+ 
+D.-S. Yim </p>
+
+</text></tei>

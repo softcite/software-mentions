@@ -1,0 +1,875 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC5054108" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:26+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>A glycosylphosphatidylinositol (GPI) anchor is a common but complex C-terminal 
+post-translational modif ication of extracellular proteins in eukaryotes. Here we 
+investigate the problem of correctly annotating GPI-anchored proteins for the 
+growing number of sequences in public databases. We developed a computa-
+tional system, called <rs type="software">FragAnchor</rs>, based on the tandem use of a neural net-
+work (NN) and a hidden Markov model (HMM). Firstly, NN selects potential 
+GPI-anchored proteins in a dataset, then HMM parses these potential GPI sig-
+nals and ref ines the prediction by qualitative scoring. <rs type="software">FragAnchor</rs> correctly pre-
+dicted 91% of all the GPI-anchored proteins annotated in the Swiss-Prot database. 
+In a large-scale analysis of 29 eukaryote proteomes, <rs type="software">FragAnchor</rs> predicted that 
+the percentage of highly probable GPI-anchored proteins is between 0.21% and 
+2.01%. The distinctive feature of <rs type="software">FragAnchor</rs>, compared with other systems, 
+is that it targets only the C-terminus of a protein, making it less sensitive to 
+the background noise found in databases and possible incomplete protein se-
+quences. Moreover, <rs type="software">FragAnchor</rs> can be used to predict GPI-anchored proteins 
+in all eukaryotes. Finally, by using qualitative scoring, the predictions combine 
+both sensitivity and information content. The predictor is publicly available at 
+http://navet.ics.hawaii.edu/∼fraganchor/NNHMM/NNHMM.html. </p>
+
+<p>The complexity of information contained in protein 
+sequences is a major challenge for large-scale analy-
+sis of proteomics data: some characteristics are easily 
+identifiable, such as general hydrophobicity, whereas 
+others are well hidden, such as the presence of short 
+segments endowed with a specific function but hav-
+ing been affected by numerous mutations during their 
+evolution. Identifying and classifying correctly these 
+characteristics often requires novel approaches that 
+assist standard tools of analysis. Furthermore, the 
+structure of protein sequences translated from genes is 
+not sufficient to assess the overall complexity of their 
+functions. Indeed, post-translational modifications 
+(PTMs) can spawn, for example, changes of activity, 
+cellular localization, or protein interaction (1 ). PTMs 
+such as glycosylphosphatidylinositol (GPI) anchors </p>
+
+<p>*Corresponding author. 
+E-mail: guylaine@hawaii.edu </p>
+
+<p>are fundamental for understanding biological func-
+tions of proteins; however, studies are suffering from 
+a shortage of efficient methods that could allow to 
+identify them in large-scale analyses (2 ). The predic-
+tion of PTM in protein sequences is then an integral 
+part of an in-depth study fostering the understand-
+ing of biological functions, which turns out to be an 
+important step in the annotation of proteomes. </p>
+
+<p>Glycosylation is one of the most common and com-
+plex forms of PTMs (3 , 4 ). It is classified into three 
+categories: N-glycosylation, O-glycosylation, and the 
+attachment of a glycolipide (GPI) to the C-terminus 
+of a protein. A GPI anchor is a type of membrane at-
+tachment discovered fairly recently. Its occurrences in 
+eukaryotic cells were identified in the 1980s through 
+the works of several researchers (5-9 ). Among pro-
+teins with GPI anchors one finds enzymes, adhesive 
+proteins, receptors, activation antigens, and so on 
+(10 , 11 ). Currently the exact function of this at-</p>
+
+<p>Geno. Prot. Bioinfo. Vol. 5 No. 2 2007 </p>
+
+<p>
+This is an open access article under the CC BY license (http://creativecommons.org/licenses/by/4.0/). </p>
+
+<p>FragAnchor for Predicting GPI-Anchored Proteins </p>
+
+<p>tachment is not well characterized (12 ). Nonethe-
+less, its conservation across great taxonomic diver-
+sity (yeasts, protozoa, plants, vertebrates, and even 
+archeo-bacteria) suggests some important functional-
+ity (13 ). Proteins with GPI anchors reveal a very 
+interesting feature that they are exclusively extracel-
+lular. This PTM thus provides interesting informa-
+tion for the annotation of new sequences by specifying 
+their cellular localizations. Moreover, this property 
+of GPI-anchored proteins opens the way to several 
+potential applications. For example, in the genome 
+of Plasmodium falciparum (human malaria parasite), 
+several proteins that are attached to the membrane 
+by a GPI anchor can be used as vaccine candidates 
+(14 ). 
+Proteins linked to the membrane by a GPI an-
+chor are not easy to identify with traditional sequence 
+alignment and pattern recognition approaches that 
+are used in computational biology. Indeed, there 
+is no clear constant, approximate, or repetitive pat-</p>
+
+<p>terns, and similarity analysis yields poor results (re-
+sults not shown). Nonetheless, some general rules 
+have been identified. For example, GPI-anchored 
+proteins have an N-terminal signal for translocation 
+across the endoplasmic reticulum. However, we dis-
+covered that this signal is absent or not clearly pre-
+dicted by computational tools in nearly 7% of the 
+annotated GPI-anchored proteins in the Swiss-Prot 
+database (http://www.expasy.org/sprot/). Besides 
+the N-terminal signal, the C-terminal GPI signal, 
+cleaved off at the time of the addition of the GPI-
+lipid anchor, can be further broken down into 4 re-
+gions (15 ): (1) an unstructured linker region of about 
+10 residues; (2) a region of small residues, including 
+the GPI attachment and cleavage site; (3) a spacer 
+region, following the cleavage site, of about 7 amino 
+acids (a.a.); (4) a hydrophobic tail next to the spacer 
+region, completing the C-terminus (Figure 1). 
+Such sequence features suggest that rule-based 
+approaches should be efficient in predicting GPI-</p>
+
+<p>Fig. 1 Structure of GPI-anchored proteins. A. Signals of GPI-anchored proteins at the N-terminus and the C-
+terminus, respectively. B. The C-terminal signal can be further decomposed, from left to right, as a polar region, a 
+sequence of three small amino acids (the anchor site is at position W ), a spacer region, followed by a hydrophobic tail. 
+C. Illustration of the structure with a fragment of the DAF HUMAN protein. </p>
+
+<p> 
+Geno. Prot. Bioinfo. Vol. 5 No. 2 2007 </p>
+
+<p>Poisson et al. </p>
+
+<p>anchored proteins, but there are many exceptions that 
+newly identified GPI-anchored proteins depart from 
+these rules (for example, unpredictable N-terminal 
+signals, C-terminal signals with overlapping spacer re-
+gion and hydrophobic tail, or length of the spacer re-
+gion outside the parameters), lowering automatically 
+the sensitivity of the predictions based on methods 
+using such rules in a strict way. 
+Currently, there exist three different predictors 
+publicly available: <rs id="software-51" type="software">big-π</rs> (15 ) from the <rs corresp="#software-51" type="creator">University of Vienna</rs> (available in two versions, one for meta-
+zoa and one for protozoa), <rs id="software-12" type="software">DGPI</rs> from the <rs corresp="#software-12" type="creator">University of Geneva</rs> (retrieved from <rs corresp="#software-12" type="url">http://129.194.185.165/dgpi/</rs>/), and the large-scale annotator <rs type="software">GPI-SOM</rs> (16 ) 
+from the University of Bern. The first two also pre-
+dict potential cleavage sites while the third does not. 
+These tools target the C-terminal and N-terminal sig-
+nals of protein sequences, or require verifying the pres-
+ence of the N-terminal signal before submitting se-
+quences to the predictor. This affects automatically 
+their performance in the presence of fragmented or 
+partial sequences, which happen to be more and more 
+common in databases. In particular, metagenome 
+projects generate many fragmented sequences repre-
+senting only partial proteins, complicating the anno-
+tation process. Moreover, with metagenome projects, 
+the inability to relate many of the new sequences to 
+a specific taxonomic group does not favor the use of 
+a group-specific tool like <rs type="software">big-π</rs>. Therefore, large-scale 
+annotation tools, which are able to predict the pres-
+ence of a particular motif at different levels of preci-
+sion (that is, to assess each prediction in a qualitative 
+way) with minimal information, are then needed to 
+address this new reality, since tools that are too re-
+strictive or specialized often lack the flexibility needed 
+to make correct predictions. For example, a recent 
+analysis of the P. falciparum proteome shows that 
+<rs type="software">big-π</rs>, <rs type="software">DGPI</rs>, and <rs type="software">GPI-SOM</rs> generated poor results in 
+predicting proteins selected as biologically validated 
+or highly probable candidates (14 ). Accordingly, our 
+system was designed to offer the precision of cleavage 
+site prediction tools and the flexibility needed for a 
+large-scale annotator in a noisy environment. </p>
+
+<p>Results and Discussion </p>
+
+<p>We developed a system, called <rs type="software">FragAnchor</rs>, based on 
+the tandem use of a neural network (NN) and a hid-
+den Markov model (HMM). NN is used to select po-
+tential GPI-anchored sequences and HMM classifies </p>
+
+<p>the selected sequences by a qualitative scoring scheme. 
+The sequences selected by NN are annotated as highly 
+probable (Class 1), probable (Class 2), weakly prob-
+able (Class 3), or potential false positive (Class 4). 
+HMM is also used to predict the position of the cleav-
+age site in the sequence. 
+Firstly, NN and HMM were trained separately 
+with different training sets. This choice was made 
+to ensure an optimal training set for each method. 
+For NN, a validation test was performed with 134 
+GPI sequences and 134 non-GPI sequences from the 
+Swiss-Prot database release 49.0. This test showed 
+that, for a threshold of selection set to 0.90 (the pos-
+sible values for this threshold range from 0.0 to 1.0), 
+NN had a precision of 93% and a positive correlation 
+coefficient between prediction and observation (17 ) 
+of 0.86, implying that the predictions are quite ac-
+curate. With this validation test set, NN was able 
+to correctly predict 89.47% of the GPI-anchored se-
+quences and 96.27% of the sequences that were not an-
+notated as GPI-anchored. These results, along with 
+the area under the receiver operating characteristic 
+(ROC) curve, are good indicators suggesting that NN 
+has an acceptable degree of precision and an interest-
+ing generalization power. 
+We also performed additional tests of NN with a 
+dataset containing 593 sequences annotated as GPI-
+anchored in the Swiss-Prot database, 265 membrane 
+transport protein sequences, as well as 111 cytoplasm 
+and nuclear protein sequences (Table 1). The result 
+showed that NN was able to predict 91.06% of the 
+annotated GPI sequences in Swiss-Prot. Note that 
+the training sequences, as well as the sequences that 
+are very similar to some ones present in the train-
+ing set, are present in this dataset and these results 
+cannot be used to assess precisely the quality of the 
+predictor. However, these tests indicated that NN 
+had a specificity of 95%, which means that 5% of the 
+predictions were false positive. For HMM alone, we 
+performed similar tests and the results we obtained 
+showed a higher specificity but a lower sensitivity (re-
+sults not shown). 
+For the tandem system (see Materials and Meth-
+ods), we ran a validation test by using four different 
+sets of sequences (Table 2). The first two are positive 
+sets (GPI-anchored proteins) while the next two are 
+negative sets (proteins that are not GPI-anchored). 
+The first positive set contains 121 sequences among 
+the 134 sequences used to test NN (13 sequences used 
+in the training set of HMM were discarded). The sec-
+ond positive set contains 30 sequences presented in a </p>
+
+<p>Geno. Prot. Bioinfo. Vol. 5 No. 2 2007 </p>
+
+<p>
+FragAnchor for Predicting GPI-Anchored Proteins </p>
+
+<p>Table 1 Prediction results of the neural network on dif ferent sequence sets </p>
+
+<p>Sequence set 
+No. of sequences Predicted GPI (%) </p>
+
+<p>Cytoplasm and nuclear 
+111 
+98.20 
+Membrane transport 
+265 
+92.45 
+GPI sequences in Swiss-Prot 
+593 
+91.06 </p>
+
+<p>Table 2 Prediction results of the tandem system on dif ferent sequence sets </p>
+
+<p>Sequence set 
+No. of 
+Predicted Class 1 Class 2 Class 3 Class 4 Invalid Rejected 
+sequences GPI (%) 
+(%) 
+(%) 
+(%) 
+(%) 
+(%) by NN (%) </p>
+
+<p>First positive set 
+121 
+88.43 
+66.94 
+11.57 
+4.13 
+5.79 
+0.00 
+11.57 
+P. falciparum 
+30 
+96.67 
+20.00 
+26.67 
+10.00 
+40.00 
+0.00 
+3.33 
+Cytoplasm and nuclear 
+1,873 
+3.20 
+0.21 
+0.16 
+0.27 
+2.56 
+0.08 
+96.80 
+Membrane transport 
+4,587 
+6.21 
+0.76 
+0.68 
+0.44 
+4.29 
+0.59 
+93.79 </p>
+
+<p>Table 3 Comparative prediction results between big-π, GPI-SOM, and FragAnchor </p>
+
+<p>Sequence set 
+No. of 
+Predicted GPI (%) 
+sequences FragAnchor FragAnchor 
+FragAnchor 
+GPI-SOM big-π 
+(all classes) 
++SignalP 
+(Classes 1-3) </p>
+
+<p>First positive set 
+121 
+88.43 
+82.64 
+82.64 
+82.64 
+60.33 
+P. falciparum 
+30 
+96.67 
+80.00 
+56.67 
+73.33 
+46.67 
+Cytoplasm and nuclear 
+1,873 
+3.20 
+0.85 
+0.64 
+1.49 
+0.54 
+Membrane transport 
+4,587 
+6.21 
+3.24 
+1.88 
+2.83 
+0.50 </p>
+
+<p>recent analysis of the P. falciparum proteome (14 ). 
+The first negative set contains 1,873 sequences with 
+a subcellular localization annotated as "cytoplas-
+mic" from the human protein localization database 
+(http://locate-human.imb.uq.edu.au/). The second 
+negative set contains 4,587 sequences retrieved from 
+the Swiss-Prot database by using the keywords 
+"transmembrane", "transport", or "secreted" and are 
+not annotated as GPI-anchored. </p>
+
+<p>These tests revealed an interesting prediction 
+power of the tandem system and more importantly a 
+remarkable flexibility offered by the qualitative scor-
+ing. The test on the first positive set (121 sequences) 
+revealed a sensitivity of 88.43% to the GPI anchor 
+signal if we accept all predictions, and 82.64% if we 
+want to be stricter by eliminating the potential false 
+positive class. The specificity varied from 99.89% 
+to 93.89% depending on the type of sequences and 
+classes. HMM also gives an annotated prediction with 
+a potential cleavage site. A test on 330 sequences 
+with an annotated cleavage site showed that the tan-
+dem system correctly predicted 75% of them. In the 
+25% incorrectly predicted cleavage sites, 58% were 
+predicted at a distance of at most three amino acids 
+from the annotated anchor site. An important point 
+is that many of the GPI anchor sites in the Swiss-Prot </p>
+
+<p>curated database are based on automated prediction. 
+In the test performed with 30 sequences of those 
+proposed by Gilson et al (14 ) from the P. falciparum 
+proteome, <rs type="software">FragAnchor</rs> was able to predict 29 of them 
+as GPI-anchored protein sequences (96.67%). How-
+ever, it is interesting to note that 40% of these predic-
+tions were classified as potential false positive (Class 
+4). 
+The tests with the two negative sets gave very 
+good results as 96.80% and 93.79% of the sequences 
+were rejected by NN, respectively, while HMM clas-
+sified most of the incorrectly selected sequences as po-
+tential false positives. These examples illustrate the 
+importance and usefulness of the qualitative scoring 
+of the predictions of <rs type="software">FragAnchor</rs>. 
+The sequences of the four test sets described above 
+were also submitted to two publicly available predic-
+tors of GPI-anchored proteins: <rs type="software">big-π</rs> (15 ) and <rs type="software">GPI-
+SOM</rs> (16 ) (Table 3). We did not compare <rs type="software">FragAnchor</rs> 
+with <rs type="software">DGPI</rs> because the design of this tool makes large 
+dataset analysis difficult. Since <rs type="software">big-π</rs> and <rs type="software">GPI-SOM</rs> 
+require the use of <rs type="software">SignalP</rs> (18 ) for the N-terminal sig-
+nal peptide prediction, we included an evaluation of 
+<rs type="software">FragAnchor</rs> combined with <rs type="software">SignalP</rs> to help the com-
+parison process. However, the use of <rs type="software">SignalP</rs> is not re-
+quired before using <rs type="software">FragAnchor</rs>. Compared with big-</p>
+
+<p> 
+Geno. Prot. Bioinfo. Vol. 5 No. 2 2007 </p>
+
+<p>Poisson et al. </p>
+
+<p>π, FragAnchor is more sensitive to the GPI-anchoring </p>
+
+<p>pattern even if we consider only the first three classes 
+(highly probable, probable, and weakly probable). 
+For the first set of 121 GPI-anchored sequences, Fra-
+gAnchor correctly predicted 88.43% of them (82.64% 
+in Classes 1-3) while big-π accepted 60.33%. For the 
+newly analyzed P. falciparum sequences, as pointed 
+out in Gilson et al (14 ), most predictors failed to pre-
+dict a significant number of sequences known to bear 
+GPI anchor. In Table 3, we can see that FragAn-
+chor has a very high capacity of prediction with only 
+one sequence wrongly predicted. Even when discard-
+ing the potential false positive sequences, <rs type="software">FragAnchor</rs> 
+recognizes more GPI-anchored sequences than <rs type="software">big-π</rs> 
+does. One of the reasons of the better performance 
+of <rs type="software">FragAnchor</rs> is the fact that it does not need the 
+presence of the N-terminal signal, which is not clearly 
+detectable in 6 of the 30 P. falciparum sequences. 
+On the other hand, <rs type="software">FragAnchor</rs> shows a lower ca-
+pacity of discrimination for the negative sets when 
+compared with <rs type="software">big-π</rs>, which is understandable due to 
+the high stringency of <rs type="software">big-π</rs>. However, this high strin-
+gency is accompanied by a poor capacity of prediction 
+for the GPI anchor signal. Nonetheless, we achieved a 
+specificity of <rs type="software">FragAnchor</rs> comparable to that of <rs type="software">GPI-
+SOM</rs> and <rs type="software">big-π</rs>. The specificity was computed by 
+adding the proportions of the first three classes (Ta-
+ble 2), for example, for the cytoplasm and nuclear 
+proteins, it is 0.21 + 0.16 + 0.27 = 0.64. For the mem-
+brane transport proteins, FragAnchor gave more false 
+positive predictions. However, for this set of proteins, 
+it is possible that some of them will eventually be 
+validated as real GPI-anchored proteins in laboratory 
+experiments. 
+When compared with <rs type="software">GPI-SOM</rs>, <rs type="software">FragAnchor</rs> is 
+more accurate. <rs type="software">GPI-SOM</rs> predicted fewer GPI-
+anchored sequences from the first positive set of 121 
+sequences, with a prediction rate of 82.64% compared 
+with 88.43% for <rs type="software">FragAnchor</rs>. It also failed to predict 
+a significant number of the P. falciparum sequences 
+with only 73.33% of correctly predicted GPI-anchored 
+sequences. For the negative sets, the use of FragAn-
+chor combined with <rs type="software">SignalP</rs> showed that <rs type="software">FragAnchor</rs> 
+achieved results close to <rs type="software">GPI-SOM</rs> (better for the first 
+negative set, slightly lower for the second negative 
+set). 
+More interestingly, the analysis of P. falciparum 
+GPI-anchored sequences showed that a large portion 
+of the GPI-anchored sequences (40%) fell in the po-
+tential false positive prediction, proving the useful-
+ness of keeping those potentially wrongly predicted </p>
+
+<p>sequences in a specific class. An analysis of the se-
+quences rejected by <rs type="software">GPI-SOM</rs> showed that 50% of 
+them were found in the potential false positive class 
+from <rs type="software">FragAnchor</rs>. In addition, the analysis result of 
+P. falciparum sequences demonstrated that 4 of the 11 
+biochemically validated GPI-anchored sequences did 
+not have an N-terminal signal peptide recognized by 
+<rs type="software">SignalP</rs>. This fact confirms the effectiveness of an an-
+notation not based on the prediction of this signal. In 
+short, the comparison with other tools is not easy due 
+to the uniqueness of the tandem method. However, 
+it reveals an interesting power of prediction where, in 
+a single run, <rs type="software">FragAnchor</rs> can have a very low num-
+ber of potential false positive predictions with a much 
+higher number of GPI-anchored sequences predicted. 
+In Figure 2, we show an example of output from 
+the tandem system (<rs type="software">FragAnchor</rs> predictor). NN first 
+selects a protein sequence and then HMM parses 
+the sequence in order to predict a potential cleavage 
+site. The first predicted anchor site for that sequence 
+(5NTD HUMAN) is at position 549. This is the po-
+sition annotated in the Swiss-Prot database. In the 
+output, the predictor proposes a maximum of three 
+possible anchor sites, ranked by decreasing scores. 
+We selected 29 eukaryote proteomes available from 
+the EBI Intergr8 portal (19 ) for large-scale analysis. 
+The results showed that, in general, the percentage 
+of GPI-anchored proteins in a proteome is between 
+0.21% and 2.01% when only the highly probable class 
+is considered (Table 4). These results are compa-
+rable with a study performed by Eisenhaber et al 
+(20 ) that estimated the proportion of the Arabidop-
+sis thaliana proteome consisting of GPI-anchored pro-
+teins at 0.75%. </p>
+
+<p>Conclusion </p>
+
+<p>The comparison of <rs type="software">FragAnchor</rs> with <rs type="software">big-π</rs> and <rs type="software">GPI-
+SOM</rs> shows that <rs type="software">FragAnchor</rs> can be used at different 
+levels of precision, allowing a more selective predic-
+tion. In addition, it offers a high level of flexibility 
+with respect to the organism considered. Studies like 
+the P. falciparum proteome analysis by Gilson et al 
+(14 ), where the available predictors failed to predict 
+the biochemically proposed new GPI-anchored pro-
+teins, show that there is a need for a more flexible 
+and universal predictor. The flexibility and accuracy 
+achieved by <rs type="software">FragAnchor</rs> offer an excellent annotator 
+for the GPI anchor signal designed for all metagenome 
+projects. </p>
+
+<p>Geno. Prot. Bioinfo. Vol. 5 No. 2 2007 </p>
+
+<p>
+FragAnchor for Predicting GPI-Anchored Proteins </p>
+
+<p>Fig. 2 Example of the output from <rs type="software">FragAnchor</rs> and comparison to the Swiss-Prot annotation. </p>
+
+<p>One of the main goals of this large-scale predic-
+tion tool is to offer greater flexibility to the users. 
+We propose a tool that offers different levels of sen-
+sitivity to the GPI anchor signal. The tests reveal 
+that the combination of the two machine learning ap-
+proaches yields very good results. The tandem system 
+is a very general (all eukaryotes) tool for the annota-
+tion of GPI-anchored proteins on a large scale by us-
+ing minimal information. It produces prediction with 
+a qualitative annotation allowing the user to choose 
+the strength of precision that he/she wants. The less 
+sensitive classes may contain sequences with unusual 
+GPI anchor signals, which can yield to new discoveries 
+in the PTM research area. </p>
+
+<p>Materials and Methods </p>
+
+<p>Neural network predictor </p>
+
+<p>Neural networks are designed to classify patterns 
+through a learning process that allows defining class 
+boundaries in a non-parametric way. The basic ele-</p>
+
+<p>ments are artificial neurons that: (1) accept numer-
+ical input from other neurons or from the external 
+environment; (2) process their input with a transfer 
+function; (3) output a value to other neurons or back 
+to the external environment. 
+The Stuttgart Neural Network Simulator 
+(<rs id="software-19" type="software">javaNNS</rs> <rs corresp="#software-19" type="version-number">1.1</rs>) developed at the University of 
+Stuttgart (http://www-ra.informatik.uni-tuebingen. 
+de/downloads/JavaNNS/) was used to design and 
+train our NN predictor. The learning set for this 
+experiment is 79 sequences from the Swiss-Prot 
+database release 49.0 that are annotated as GPI-
+anchored proteins, with a length of the C-terminal 
+section to be 50 a.a., and another 79 sequences of pro-
+teins that are known not to be GPI-anchored proteins. 
+The choice of the length of the C-terminal section was 
+based on an analysis of Swiss-Prot GPI-anchored pro-
+teins, which showed a maximum length of 45 a.a. for 
+the C-terminal signal. To give some flexibility to the 
+system, we selected an input vector of 50 a.a. Since 
+neural networks accept numerical input, and given the 
+importance of molecular weight and hydrophobicity </p>
+
+<p> 
+Geno. Prot. Bioinfo. Vol. 5 No. 2 2007 </p>
+
+<p>Poisson et al. </p>
+
+<p>Table 4 Proportion of highly probable GPI-anchored proteins predicted by FragAnchor 
+for 29 eukaryote proteomes </p>
+
+<p>Organism 
+Proteome size Predicted GPI 
+(sequences) 
+(Class 1) (%) </p>
+
+<p>Anopheles gambiae 
+15,135 
+0.61 
+Arabidopsis thaliana 
+33,862 
+0.83 
+Ashbya gossypii 
+4,720 
+0.91 
+Aspergillus fumigatus 
+9,906 
+0.89 
+Brachydanio rerio 
+11,863 
+0.58 
+Caenorhabditis briggsae 
+13,192 
+0.70 
+Caenorhabditis elegans 
+22,362 
+0.66 
+Candida glabrata 
+5,180 
+1.31 
+Cryptococcus neoformans 
+6,442 
+0.90 
+C. neoformans var. neoformans 
+6,442 
+0.90 
+Debaryomyces hansenii 
+6,311 
+0.82 
+Dictyostelium discoideum 
+13,049 
+1.29 
+Drosophila melanogaster 
+16,302 
+0.79 
+Encephalitozoon cuniculi 
+1,909 
+0.21 
+Gallus gallus 
+11,820 
+0.93 
+Gibberella zeae 
+11,638 
+1.13 
+Guillardia theta 
+598 
+0.33 
+Homo sapiens 
+38,039 
+0.74 
+Kluyveromyces lactis 
+5,312 
+1.02 
+Leishmania major 
+8,010 
+1.02 
+Mus musculus 
+32,901 
+0.82 
+Paramecium tetraurelia 
+6,311 
+0.82 
+Plasmodium falciparum 
+5,253 
+0.19 
+Plasmodium yoelii yoelii 
+7,755 
+0.22 
+Rattus norvegicus 
+11,820 
+0.93 
+Saccharomyces cerevisiae 
+5,801 
+0.95 
+Schizosaccharomyces pombe 
+4,964 
+0.68 
+Tetraodon nigroviridis 
+27,810 
+0.55 
+Yarrowia lipolytica 
+6,525 
+2.01 </p>
+
+<p>in the anchoring process, we encoded each amino acid 
+with its hydropathy on the Kyte and Doolitle scale 
+(21 ), as well as its molecular weight. The last step 
+is the normalization of the input vectors. We have 
+applied a simple min-max normalization: </p>
+
+<p>v = 
+(v − min) 
+(max − min) 
+ *  (max − min ) + min </p>
+
+<p>where v represents the normalized value of data v, 
+min and max represent the minimal and maximal </p>
+
+<p>value of the target interval, while min and max are 
+the minimal and maximal value of our actual data in-
+tervals: [−4.5, 4.5] for hydropathy, and [75.07, 204.23] 
+for molecular weight. 
+An alignment of sequences consisting of the last 50 
+residues of GPI sequences was done with ClustalW </p>
+
+<p>(22 ). 
+It was visually analyzed to target non-
+redundant sequences in order to eliminate the risk of 
+bias toward a type of sequence too abundantly repre-
+sented. We retained 79 sequences annotated as GPI-
+anchored from the Swiss-Prot database. In order to 
+discriminate accurately between GPI and non-GPI se-
+quences for the model, we retained mostly experimen-
+tally verified sequences. We also selected a set of 79 
+sequences that have a very low probability of being 
+GPI-anchored (such as cytoplasm and nucleic pro-
+teins) or have similar features but without the GPI 
+anchor (membrane transport proteins). The selection 
+of the sequences was manually made to ensure a low 
+level of similarity and to verify the quality of the an-
+notation as not GPI-anchored sequences. The combi-
+nation of these two datasets defines our training set. </p>
+
+<p>Geno. Prot. Bioinfo. Vol. 5 No. 2 2007 </p>
+
+<p>
+FragAnchor for Predicting GPI-Anchored Proteins </p>
+
+<p>To validate the model, we used a test set composed 
+of 134 GPI-anchored sequences. This set features few 
+redundant sequences and is disjoint from the training 
+set. We also selected 134 sequences with a very low 
+probability of being GPI-anchored. </p>
+
+<p>Our validation set of 268 sequences does not rep-
+resent the complexity of actual sequence databases. 
+Therefore, we selected in the Swiss-Prot database the 
+following types of sequences: </p>
+
+<p>(1) Sequences that have structures or physico-
+chemical properties relatively similar to GPI-anchored 
+and potential false positive proteins. We selected 265 
+membrane transport proteins with similar hydropho-
+bicity characteristics, making them good candidates 
+for discrimination purpose. </p>
+
+<p>(2) Sequences with a very low probability of being 
+GPI-anchored. GPI-anchored proteins are exclusively 
+extracellular, so we selected 111 cytoplasmic protein 
+sequences based on their subcellular localization. </p>
+
+<p>The architecture of the neural network used in 
+FragAnchor is a multilayered perceptron using the 
+RPROP (Resilient Back Propagation) learning algo-
+rithm (23 ). The input layer is composed of 100 neu-
+rons, corresponding to 2 input values for each of 50 
+amino acids. A hidden layer of 150 neurons encodes 
+the classification process, and the output layer con-
+tains 1 neuron, giving a score to each sequence. The 
+number of neurons in the hidden layer is the optimal 
+architecture selected over different test architectures 
+(results not shown). </p>
+
+<p>The learning process consisted in gradually adjust-
+ing the weights of the processing functions in order to 
+obtain good scores on known GPI-anchored proteins. 
+A score greater than 0.90 indicates that the network </p>
+
+<p>has identified a potential GPI-anchored protein. </p>
+
+<p>Hidden Markov model predictor </p>
+
+<p>HMM is a probabilistic model equivalent to a regular 
+grammar that is built by using machine-learning algo-
+rithms, from a set of sequences (amino acid sequences 
+in this study) called the training set. Given an amino 
+acid sequence, the automaton reads it and computes 
+the following data: (1) a score expressing the likeli-
+hood that a new sequence is similar to the ones in the 
+training set; (2) a most likely path in the automaton 
+that highlights possible features of the structure of 
+this sequence (24 ). 
+Based on the known structure of the GPI signal 
+(Figure 1), we designed our HMM predictor follow-
+ing the approach used in SignalP (18 ). The underly-
+ing graph of HMM is composed of three parts, corre-
+sponding to the GPI signal features (Figure 3). The 
+score associated to a sequence is the log-score of the 
+likelihood, normalized by the length of the sequence. 
+The parameters for HMM were estimated by 100 
+iterations of the Baum-Welch algorithm (25 ). Pseu-
+docounts were used for the two parts of HMM cor-
+responding to the spacer region and the hydrophobic 
+tail. For each of these regions, the distribution of the 
+amino acids after the initial training in the given re-
+gion was used to correct for the rare states that had a 
+null emission probability for some amino acids. The 
+training set for HMM was a set of 87 sequences from 
+Swiss-Prot that are annotated as GPI-anchored pro-
+teins. The model was validated using 500 bootstrap 
+replications on our training set. For each replication, 
+a dataset composed of 87 sequences (repetitions al-
+lowed) was generated. These models were trained and </p>
+
+<p>Fig. 3 The hidden Markov model for the GPI anchor signal representation. The first three states model the three 
+amino acids around the anchor site. From the third state, transitions are possible to states 4 to 13, modeling the 
+variable length spacer region. Finally, the hydrophobic tail, also a variable length region, is modeled by states 17 to 41. </p>
+
+<p> 
+Geno. Prot. Bioinfo. Vol. 5 No. 2 2007 </p>
+
+<p>Poisson et al. </p>
+
+<p>tested using a validation set of 66 sequences. 
+In the experimental setup, each analyzed sequence 
+was run through HMM with each putative cleavage 
+site. These putative cleavage sites were identified 
+with a sliding window that detects groups of three 
+amino acids of small molecular weight. This is how 
+HMM can also predict cleavage sites. The Forward 
+algorithm computed the likelihood of a sequence, and 
+the Viterbi algorithm (26 ) computed the most prob-
+able path for each sequence. The three best, in terms 
+of scores, possible cleavage sites were recorded. </p>
+
+<p>Tandem system </p>
+
+<p>In the tandem system (Figure 4), the sequences se-
+lected by NN (the ones with a score greater than 0.90) 
+are presented to HMM. The HMM score obtained on 
+each sequence is then used to classify the sequence. 
+This classification ranges from "highly probable" to </p>
+
+<p>"potential false positive" (Table 5). Each class of an-
+notation was defined using a graphical representation 
+of false-positive and true-positive predictions at all 
+discrimination threshold, the ROC curve. This quali-
+tative annotation allows us to keep the high sensitivity 
+(proportion of all true positives correctly predicted) 
+obtained with NN, together with the specificity (pro-
+portion of all true negatives correctly predicted) and 
+the capacity of HMM to identify some features of the 
+GPI signal, such as the cleavage site. The major ad-
+vantage of using the qualitative scoring in a large-
+scale annotator is its fast and easy identification of 
+the best predictions and the possible false positives. 
+NN can detect the GPI anchor motif efficiently but its 
+architecture does not give us any information about 
+the primary structure of the motif, while the use of 
+HMM provides this information. Consequently, we 
+can refine the prediction depending on the quality of 
+the signal present in the protein sequence. </p>
+
+<p>Fig. 4 The structure of the tandem system. </p>
+
+<p>Table 5 Qualitative annotation of the tandem system </p>
+
+<p>Category 
+Class 
+HMM score </p>
+
+<p>Probable highly probable (Class 1) 
+score ≥ 5.40 
+probable (Class 2) 
+2.20 ≤ score &lt; 5.40 
+weakly probable (Class 3) 
+0.20 ≤ score &lt; 2.20 </p>
+
+<p>Potential potential false positive (Class 4) score &lt; 0.20 </p>
+
+<p>Acknowledgements </p>
+
+<p>We thank Fathey Sarhan, Mounir Boukadoum, Math-
+ieu Blanchette, Pierre Poirier, and Marc LePape for 
+reviewing and providing useful comments and sugges-</p>
+
+<p>tions. This work was partly supported by the Na-
+tional Institutes of Health of USA (Grant No. 5 P20 
+RR16467) and by the GP/PhD scholarship from the 
+FCAR (now NATEQ) fund of Canada. </p>
+
+<p>Geno. Prot. Bioinfo. Vol. 5 No. 2 2007 </p>
+
+<p>
+FragAnchor for Predicting GPI-Anchored Proteins </p>
+
+<p>Authors' contributions </p>
+
+<p>GP conceived of the study, participated in its design, 
+performed the analysis for the neural network and the 
+tandem method, and drafted the manuscript. CC par-
+ticipated in the design and coordination of the study, 
+performed the analysis for the hidden Markov model, 
+and also drafted the manuscript. XC performed the 
+automation of the method and designed the web site. 
+AB participated in the design and coordination of the 
+study and also drafted the manuscript. All authors 
+contributed to the final manuscript. </p>
+
+<p>Competing interests </p>
+
+<p>The authors have declared that no competing inter-
+ests exist. </p>
+
+
+
+<p> 
+Geno. Prot. Bioinfo. Vol. 5 No. 2 2007 </p>
+
+</text></tei>

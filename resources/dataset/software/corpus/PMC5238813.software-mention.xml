@@ -1,0 +1,1231 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC5238813" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:21+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>Abstract: The effects of different formulations and manufacturing process conditions on the </p>
+
+<p>physical properties of a solid dosage form are of importance to the pharmaceutical industry. It is 
+vital to have in-depth understanding of the material properties and governing parameters of its 
+processes in response to different formulations. Understanding the mentioned aspects will allow 
+tighter control of the process, leading to implementation of quality-by-design (QbD) practices. 
+Computational intelligence (CI) offers an opportunity to create empirical models that can be 
+used to describe the system and predict future outcomes in silico. CI models can help explore 
+the behavior of input parameters, unlocking deeper understanding of the system. This research 
+endeavor presents CI models to predict the porosity of tablets created by roll-compacted binary 
+mixtures, which were milled and compacted under systematically varying conditions. CI models 
+were created using tree-based methods, artificial neural networks (ANNs), and symbolic regres-
+sion trained on an experimental data set and screened using root-mean-square error (RMSE) 
+scores. The experimental data were composed of proportion of microcrystalline cellulose (MCC) 
+(in percentage), granule size fraction (in micrometers), and die compaction force (in kilonewtons) 
+as inputs and porosity as an output. The resulting models show impressive generalization abil-
+ity, with ANNs (normalized root-mean-square error [NRMSE] =1%) and symbolic regression 
+(NRMSE =4%) as the best-performing methods, also exhibiting reliable predictive behavior when 
+presented with a challenging external validation data set (best achieved symbolic regression: 
+NRMSE =3%). Symbolic regression demonstrates the transition from the black box modeling 
+paradigm to more transparent predictive models. Predictive performance and feature selection 
+behavior of CI models hints at the most important variables within this factor space. 
+Pharmaceutical companies rely on solid dosage forms, which constitute a majority of 
+the total manufactured and marketed product. Powder characteristics, manufacturing 
+process parameters, and various other tangible entities have profound effects on the 
+quality of a solid dosage form in a complex way. The quality of a solid dosage form, 
+among other factors, can be assessed based on its hardness and porosity, which can 
+be used as indirect measurements of its capability and rate to dissolve. 1 In most cases, 
+the complexity of relationships among the possible material parameters and upstream 
+processes diminishes the understanding of the system as a whole. 
+Porosity, known as the ratio of volume of void space to the bulk volume and gen-
+erally represented as a percentage, is an important property that controls the micro-
+structure of the tablet during compression. It can assist in the understanding of the 
+dispersion mechanism, behavior after ingestion, moisture penetration, and with certain </p>
+
+<p>correspondence: Mohammad 
+hassan Khalid 
+Department of Pharmaceutical 
+Technology and Biopharmaceutics, 
+Faculty of Pharmacy, Jagiellonian 
+University-Medical college, 
+Medyczna 9, Krakow 30-688, Poland 
+Tel +48 73 306 5594 
+email hassankhalid101@gmail.com </p>
+
+<p>Number of times this article has been viewed </p>
+
+<p>This article was published in the following Dove Press journal: 
+Drug Design, Development and Therapy 
+12 January 2017 </p>
+
+<p>Drug Design, Development and Therapy 2017:11 </p>
+
+<p>submit your manuscript | www.dovepress.com </p>
+
+<p>Dovepress </p>
+
+<p>Dovepress </p>
+
+<p>194 </p>
+
+<p>Khalid et al </p>
+
+<p>prerequisites, even bioavailability. Porosity measurements 
+are also known to be relevant indicators of drug stability. 2 
+The effect of shape and porosity of granules has been stud-
+ied by Johansson and Alderborn, 3 suggesting that stronger 
+tablets are formed when granules with irregular porosity are 
+compressed. Theoretically, the porosity of a tablet can be a 
+predictor of its dissolution behavior as well. 4 
+Previous works on this topic have revealed that porosity 
+influences tablet strength; lactose tablets with larger pores 
+were weak 5-7 and similar relationships were observed with 
+other excipients such as glucose and mannitol. 7,8 The impor-
+tance of porosity as an indirect measurement of dissolution 
+was demonstrated using rate of water uptake, and solvent 
+penetration was studied in microcrystalline cellulose (MCC) 
+tablets with different porosities. Results showed that tablets 
+with 10% and 15% porosity take up water much faster (30 s) 
+and expand by up to 50% of original thickness, while tablets 
+with 5% porosity are much slower in water uptake behavior 
+(148 s), in addition to showing less expansion. 9 The corre-
+lation of porosity with die compaction force has been well 
+studied in the past. 10,11 It was explained that tablets made from 
+pharmaceutical powders do not exhibit the quasi-exponential 
+trend proposed by Heckel 12 for evolution of porosity against 
+pressure. Pharmaceutical powders exhibit plastic deformation 
+properties, while Heckel's model works well with metal-
+lic powders. 11 Tablet brittleness has been described as an 
+exponential growth function of porosity using a diverse set 
+of pharmaceutical tablets by Gong et al. 13 
+Data-driven empirical models established using compu-
+tational intelligence (CI) methods can be used as surrogates 
+to run in silico experiments to predict porosity. Use of CI 
+offers reduction in experiments, leading to cost and time sav-
+ings and broader understanding of the system. CI tools have 
+been used in works addressing the pharmaceutical industry's 
+various problems, including tensile strength, porosity, and 
+dissolution problems. 14-18 
+Generally, modeling and simulation (M-and-S) is a huge 
+area of science, in which various paradigms of modeling are 
+used, mostly based on well-established theory. In pharma-
+ceutical sciences, a broad area of molecular modeling, using 
+ab initio techniques such as molecular docking offers profound 
+examples of such an approach. 19-21 However, when no such 
+theory is present, only empirical modeling is a suitable alterna-
+tive, in particular with data-driven modeling in focus. 
+The aim of this work is to create data-driven intelligent 
+models using well-known and established approaches to 
+compute the porosity of tablets based on average granule size, 
+proportion of MCC, and die compaction force. Furthermore, </p>
+
+<p>it aims to show that CI models can be represented in the 
+form of an equation as a result of modeling through sym-
+bolic regression -a shift from the black box paradigm to 
+transparency. Last, this work attempts to dissect CI models 
+to ascertain which of the input variables are more important 
+to predict porosity. The models are based on experimental 
+data generated by Perez-Gandarillas et al. 22 </p>
+
+<p>Materials and methods 
+ethics </p>
+
+<p>Since this study is conducted purely in silico, no ethics review 
+was sought or granted here. </p>
+
+<p>Training data </p>
+
+<p>The experimental data set contains records of binary tablets 
+made from MCC and lactose. Powder mixtures were roll 
+compacted under constant conditions. Ribbons were milled to 
+produce granules of three different size ranges (315-500; 630-
+800, and 800-1,000 μm). In continuation of the process, the 
+feed powders (binary mixtures) and their granules from each 
+size range were die compacted using six different die compac-
+tion forces. The experiments were done in triplicates. 22 
+The tablets were characterized through the porosity. 
+Therefore, the porosity is an outcome (Table 1A). After 
+ejection, the tablet dimensions (diameter and thickness) were 
+measured with a digital micrometer (Mitutoyo, Takatsu-ku, 
+Japan), and tablet mass was weighed with an electronic bal-
+ance (CP224S). These data were used to calculate the relative 
+density (ρ r ) of each tablet, as follows: </p>
+
+<p>ρ 
+ρ </p>
+
+<p>r 
+t </p>
+
+<p>= 
+4 </p>
+
+<p>2 </p>
+
+<p>m 
+hD 
+π 
+(1) </p>
+
+<p>where m is the mass, h is the tablet thickness, D is the tablet 
+diameter, and ρ t is the true density of each binary mixture. 
+Once the relative density is obtained, the porosity (ε) is 
+calculated as follows: </p>
+
+<p>ε 
+ρ 
+= − 
+1 r 
+(2) </p>
+
+<p>Validation data </p>
+
+<p>An additional data set from single-powder tableting experiments 
+was used to validate the CI models. The data set is explained in 
+Perez-Gandarillas et al. 23 The validation set is composed of data 
+generated by varying roll compaction over two sets of tooling 
+(cheek plates and sealed rim rolls) and two roll compaction 
+forces (4 kN/cm and 8 kN/cm). The ribbons were milled under 
+constant settings and granules were compacted under seven </p>
+
+<p>Drug Design, Development and Therapy 2017:11 </p>
+
+<p>submit your manuscript | www.dovepress.com </p>
+
+<p>Dovepress </p>
+
+<p>Dovepress </p>
+
+<p>195 </p>
+
+<p>computational intelligence models to predict porosity of tablets </p>
+
+<p>different die compaction forces (Table 1B). Variation in roll 
+compactor tooling and roll compaction/die compaction forces 
+introduces a challenge to trained CI models. </p>
+
+<p>Model training </p>
+
+<p>The models were built using three different approaches: 
+1. Tree-based predictive models 
+i. Decision trees (<rs type="software">Cubist</rs>) 
+ii. Random forests (<rs type="software">randomForest</rs>) 
+2. Artificial neural networks (ANNs) (<rs type="software">monmlp</rs>) 
+3. Symbolic regression (<rs type="software">rgp</rs>). 
+Extensive combinations of algorithm parameters in all 
+the approaches were tried. The data set was divided into 
+10 folds, where nine of the folds were used for training and 
+one for testing. Tenfold cross-validation (10cv) is a renowned 
+method to create a "real-world" depiction of a problem from 
+the data representing it. 24 Models were selected based on their 
+RMSE values calculated according to Equation 1. The RMSE 
+values are a measure of the differences between the predicted 
+and the observed values and are completely independent of 
+the modeling technique. Hence, they are reliable and widely 
+accepted measures for evaluating a model. R statistical envi-
+ronment was used to create the models. </p>
+
+<p>RMSE 
+pred obs 
+= 
+∑ 
+− 
+ 
+  
+ 
+  </p>
+
+<p>1 </p>
+
+<p>2 </p>
+
+<p>n 
+( 
+) 
+(3) </p>
+
+<p>where "pred" is the predicted value from the models, "obs" 
+is the observed value from the experiments, and "n" is the 
+total number of test cases. 
+The RMSE values were normalized using Equation 2. </p>
+
+<p>NRMSE 
+RMSE 
+= 
+− 
+× 
+X 
+X </p>
+
+<p>max 
+min </p>
+
+<p>100 
+(4) </p>
+
+<p>where RMSE was calculated in Equation 1, X max and X min are 
+the highest and the lowest observed values for the outcome 
+in the data set, respectively. </p>
+
+<p>CI methods 
+Decision trees -<rs type="software">cubist</rs> </p>
+
+<p><rs type="software">Cubist</rs> is a tree-based modeling approach wherein a linear 
+model is fit iteratively, resulting in a set of linear models at 
+each node starting from the root to the last node of the tree. 
+<rs type="software">Cubist</rs> is an ensemble-based technique. All variables that are 
+covered by a linear function at a single node are then dis-
+carded from the future iterations for that particular tree. This 
+process is recursively continued until all the input variables 
+have been covered by a single or a set of rules in a tree. This 
+is also known as the separate-and-conquer approach. At every 
+step, the response of the model is analyzed and adjusted to 
+be used by the next model, until the final model is achieved. 
+The final prediction is a simple average of the predictions 
+from each tree in the ensemble. 25 </p>
+
+<p>random forest </p>
+
+<p>Random forests are well known tree-based models. One 
+model is shaped by numerous trees in the collection. Indepen-
+dent trees are generated based on sample data randomly taken 
+out of the training data set. Errors exhibited by individual 
+trees are collectively representative of the generalization 
+error of the <rs type="software">randomForest</rs> model. 26 An extensive search for 
+the best architecture was carried out using a 10cv scheme, 
+followed by training of the best-performing architecture on 
+the full data set. </p>
+
+<p>anns -<rs type="software">monmlp</rs> </p>
+
+<p><rs type="software">Monmlp</rs> is the implementation of ANN in <rs type="software">R</rs>. ANNs with 
+<rs type="software">monmlp</rs> are generalized feed-forward ANNs that work in a 
+monotone fashion using the backpropagation (BP) algorithm </p>
+
+<p>Table 1 characteristics of Mcc tablets and the various compaction conditions </p>
+
+<p>Statistical 
+parameters </p>
+
+<p>Die compaction 
+force (KN) </p>
+
+<p>MCC proportion (%) 
+Average granule 
+range (μm) </p>
+
+<p>Roll compaction 
+force (kN/cm) </p>
+
+<p>Porosity (%) </p>
+
+<p>(a) experimental parameters for training data 
+Minimum 
+2 
+25 
+80 
+Fixed at 11.02; 
+not used in the 
+training models </p>
+
+<p>0.17 
+Maximum 
+14 
+100 
+900 
+0.46 
+Median 
+6 
+50 
+408 
+0.26 
+Mean 
+6.84 
+54 
+481.9 
+0.27 
+(B) experimental parameters for external validation data 
+Minimum 
+2 
+Fixed at 100% 
+80 
+0 
+0.14 
+Maximum 
+15 
+350 
+8 
+0.47 
+Median 
+8 
+350 
+4 
+0.21 
+Mean 
+8.14 
+296 
+4.8 
+0.24 </p>
+
+<p>Abbreviation: Mcc, microcrystalline cellulose. </p>
+
+<p>Drug Design, Development and Therapy 2017:11 </p>
+
+<p>submit your manuscript | www.dovepress.com </p>
+
+<p>Dovepress </p>
+
+<p>Dovepress </p>
+
+<p>196 </p>
+
+<p>Khalid et al </p>
+
+<p>enhanced by the nonlinear minimization algorithm (nlm) for 
+training. Neural networks imitate the structure of the human 
+brain, whereby information is passed on between neurons 
+in the form of synapses. <rs type="software">Monmlp</rs> allows two hidden layers 
+of neurons, with hyperbolic tangent and linear activation as 
+transfer functions. 27 In <rs type="software">monmlp</rs>, signals move forward from 
+the input layer through sigmoid neurons before reaching the 
+linear output layer. 
+Neurons in each layer consist of N inputs (X i ), which 
+multiplies by the proper generated weight element (W i,j ) for 
+the layer named j. Summation of the weighted inputs plus bias 
+(b j ) produces the input (n j ) for the activation function, using 
+which the output of each neuron (y i ) can be calculated. 
+Moreover, different activation functions, such as hyper-
+bolic tangent sigmoid (TAN-SIG) transfer function, loga-
+rithm sigmoid (LOGSIG) transfer function, and pure linear 
+(PURELIN) transfer function, are the potential transfer 
+functions that can be used in each layer. 28 The neural net-
+work package <rs type="software">monmlp</rs> was run extensively to find the best-
+performing network architecture with 10cv. The whole data 
+set was used to retrain the model on the best architecture. </p>
+
+<p>symbolic regression by <rs type="software">rgp</rs> </p>
+
+<p>Genetic programming (GP) is a bioinspired algorithm based 
+on evolution principles to solve complex problems. A com-
+plex problem is broken down into smaller, simpler problems 
+with random solutions. These solutions are then evolved 
+through the biologically mimicked process of variation and 
+selection until the end condition is reached or a workable 
+solution is generated. Thus, <rs type="software">rgp</rs> is an implementation of GP 
+methods in the R environment. 29 Package <rs type="software">rgp</rs> results are 
+simple representations of the problem without being exposed 
+to a priori information. <rs type="software">rgp</rs> offers various options for initial-
+ization, variation, and selection procedures inherent in GP. 
+GP implements a tree structure representation to show the 
+mathematical equations. The tree structure is composed of 
+two parts: function set (nodes) and a terminal set (leaves). 30 
+The function set can be chosen through the operators {+, -, 
+*, /, sin, cos, log, abs}, mathematical functions, conditional 
+statements, or even the user-defined operators. In addition, 
+the terminal set includes constants and model variables. 31,32 </p>
+
+<p>To find the best solution, different runs were conducted 
+by iterating over GP tuning parameters. The most important 
+tuning parameters are maximum size of the chromosome, 
+the number of generations, and population size. 30 The size 
+of the chromosome, which governs the maximum length of 
+the equation, was varied from 5 to 100. The population size 
+was set to 1,000, and the number of generations was set to 
+500 million evolution steps divided into 100 stages. 
+These equations can be optimized by different strategies. 33,34 
+For this experiment, equations were created on the whole 
+data set, and then selected ones were optimized using the 
+simulated annealing (SANN) algorithm, followed by a quasi-
+Newton (Broyden-Fletcher-Goldfarb-Shanno [BFGS]) 
+method. 35,36 </p>
+
+<p>independent feature selection by <rs type="software">fscaret</rs> </p>
+
+<p>The package <rs type="software">fscaret</rs> allows semiautomatic feature selection, 
+working as a wrapper for the caret package in R. <rs type="software">Fscaret</rs> 
+is specialized for in silico feature selection experiments, 
+whereby approximately 120 different packages are used to 
+fit models. 37 Input feature ranking is extracted from trained 
+models by using weighted averages. Sum of squared errors 
+(SSE), mean squared errors (MSEs), and RMSEs are used to 
+evaluate models. <rs type="software">fscaret</rs> has been successfully implemented 
+in recent studies. 38,39 </p>
+
+<p>Results and discussion </p>
+
+<p>Approximately 10,000 models with different architectures 
+were developed using the CI methods mentioned herein. 
+External validation of the models was done using a data 
+set on tableting with MCC under different roll compaction 
+conditions. </p>
+
+<p>Model performance </p>
+
+<p>Results for best models from all the different CI methods are 
+shown in Table 2. All CI methods perform well on the data 
+sets. The multiple linear regression (MLR) model, shown 
+in Table 3, does not represent the process adequately (15% 
+error), suggesting that nonlinearity needs to be addressed 
+with a robust method. Figure 1 shows the predicted vs 
+observed graph for the MLR model. Hence, to find a suitable </p>
+
+<p>Table 2 nrMse for 10cv and external validation tests for all ci methods </p>
+
+<p>Data set 
+Multivariate linear 
+regression (lm) </p>
+
+<p><rs type="software">Cubist</rs> 
+(Cubist) </p>
+
+<p>RF 
+(<rs type="software">randomForest</rs>) </p>
+
+<p>Monmlp 
+(monmlp) </p>
+
+<p>Symbolic 
+regression (<rs type="software">rgp</rs>) </p>
+
+<p>average of 10cv 
+15 
+3 
+3 
+1 
+4 
+external (unknown to models) 
+-
+3 
+7 
+6 
+3 </p>
+
+<p>Abbreviations: 10cv, tenfold cross-validation; ci, computational intelligence; nrMse, normalized root-mean-square error; rF, random forest. </p>
+
+<p>Drug Design, Development and Therapy 2017:11 </p>
+
+<p>submit your manuscript | www.dovepress.com </p>
+
+<p>Dovepress </p>
+
+<p>Dovepress </p>
+
+<p>197 </p>
+
+<p>computational intelligence models to predict porosity of tablets </p>
+
+<p>model, decision trees, ANNs, and GP algorithms were used. 
+<rs type="software">RGP</rs> was performed as an early-stage experiment at this 
+point. Nonetheless, <rs type="software">RGP</rs> shows results comparable to those 
+from other methods, which is evidence that evolutionary 
+computational methods are quite robust and can fit complex 
+data well. </p>
+
+<p>ann model </p>
+
+<p>ANNs show best 10cv generalization results among all the 
+experiments conducted, although they fail to maintain the 
+performance on the external data set. A simple network of 
+two hidden layers of 13 and 11 nodes, respectively, with 
+10 ensembles and 100 iterations was found out to be the 
+best-performing architecture. Hyperbolic tangent was used 
+as the transfer function within the ANN (Figure 2). 
+Recent works 39,40 demonstrate the ANN as a much coveted 
+CI modeling tool. ANNs show plausible results in super-
+vised learning, a behavior that can be attributed to the high 
+generalization ability of the ANNs. Moreover, 10cv ANN 
+models exhibit a meager 1% normalized root-mean-square 
+error (NRMSE) (Table 1). Although ANNs are robust, are 
+widely used, and have great generalization capabilities, they 
+are generally black-box models. The resulting ANN models 
+cannot be dissected with certainty to establish how different </p>
+
+<p>input features are interacting with each other to predict 
+porosity. Furthermore, ANN models are unstable where 
+retraining could lead to a slightly different understanding 
+of the system. The source of instability and inconsistency 
+lies within the design and strategy used to train an ANN. 
+Weights in the ANN are generated at random to expedite 
+the learning process while the process of learning itself 
+is deterministic. Hence, the randomness introduced while 
+generating the weights could lead to a completely different 
+model after retraining. </p>
+
+<p>symbolic regression </p>
+
+<p>GP is a stable, a transparent method that can offer structural 
+insights into the models. Symbolic regression exhibits a good 
+model fit (4% 10cv error, 3% external). The advantage of 
+symbolic regression is that the result can be represented in 
+the form of a mathematical formula. 41 The model for poros-
+ity can be represented as in Equation 4. A regression plot is 
+shown in Figure 3. </p>
+
+<p>Table 3 Mlr model statistical parameters </p>
+
+<p>Intercept 
+Die compaction force (kN) 
+MCC proportion 
+Granule fraction range </p>
+
+<p>estimate 
+3.486e-01 
+-2.041e-02 
+1.242e-01 
+-1.094e-05 </p>
+
+<p>standard error 
+8.743e-03 
+8.284e-04 
+1.289e-02 
+8.426e-06 
+t-value 
+39.874 
+-24.634 
+9.633 
+-1.299 </p>
+
+<p>P-value 
+2e-16 
+2e-16 
+1.22e-14 
+0.198 </p>
+
+<p>Note: adjusted R-squared: 0.8899. 
+Abbreviations: Mcc, microcrystalline cellulose; Mlr, multiple linear regression. </p>
+
+<p>
+⋅ </p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>Figure 1 Predicted vs observed graph for Mlr. 
+Abbreviation: Mlr, multiple linear regression. </p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>⋅ </p>
+
+<p>Figure 2 Predicted vs observed graph for ann. 
+Abbreviation: ANN, artificial neural network. </p>
+
+<p>Drug Design, Development and Therapy 2017:11 </p>
+
+<p>submit your manuscript | www.dovepress.com </p>
+
+<p>Dovepress </p>
+
+<p>Dovepress </p>
+
+<p>198 </p>
+
+<p>Khalid et al </p>
+
+<p>The model represents the outcome of porosity with high 
+accuracy (4% 10cv error). </p>
+
+<p>Porosity In In In 
+= 
+− 
+− 
++ + </p>
+
+<p>( 
+) </p>
+
+<p>C </p>
+
+<p>C X 
+X 
+X C </p>
+
+<p>1 </p>
+
+<p>2 
+2 
+2 
+1 
+3 </p>
+
+<p>2 
+ 
+( 
+) 
+(5) </p>
+
+<p>where C 1 =1.52888, C 2 =2.415892, C 3 =7.28763, X 1 is the 
+die compaction force (in kilonewtons), and X 2 is the MCC 
+proportion (as fraction). </p>
+
+<p>external validation </p>
+
+<p>Data from additional tableting experiments was used to 
+test the trained models. Tablets were made with MCC. The 
+external data set was particularly challenging for the models 
+because roll compaction conditions were kept constant in 
+the training data set while being systematically changed in 
+the external data set. Table 1 shows the results of external 
+validation. The models were able to predict porosity with 
+substantial accuracy using unseen input data. The external 
+data set is composed of experiments with two different roll 
+compactor tooling (cheek plates and rim rolls) and two dif-
+ferent roll compaction forces (4 kN and 8 kN) for each. The 
+variety of roll compactor settings introduces variance in the 
+external data set unknown to the trained models. Although 
+CI systems are not known for their extrapolation abilities, 42 
+the models presented herein are able to extrapolate success-
+fully in a small range. Regardless of the complexity in the 
+external data set, the <rs type="software">rgp</rs> model represented by Equation 4 
+makes accurate predictions of the test cases from all different </p>
+
+<p>tooling and force conditions (Figure 4). Table 4 shows the 
+levels of accuracy of prediction for the external validation 
+data set. Non-roll-compacted powder is predicted with the 
+most accuracy (NRMSE: 7%), followed by prediction of roll 
+compaction using rim rolls at 4 kN (NRMSE: 9%). </p>
+
+<p>Model description </p>
+
+<p>Further analysis of trained CI models gives interesting 
+insights into the governing parameters within this tableting 
+experiment. </p>
+
+<p>Feature selection by gP </p>
+
+<p>Symbolic regression model exhibits feature selection 
+behavior. The resulting model represents two inputs in the 
+equation as compared to the original three inputs presented 
+to it while training. Feature selection process discards the 
+input variables which are not contributing decisively toward 
+the outcome; in this case, the average granule fraction size. 
+Considering granule fraction range as a disposable input 
+characteristic for the outcome of porosity is contrary to pre-
+vious works, 43 but justified within the range of this training 
+data set. 22 A comparison between the GP model and the ANN 
+model shows that the average granule fraction size does not 
+exercise significant effect on the outcome (Figure 5), also 
+supported by MLR (Table 3). ANN model does not perform 
+feature selection on its own and is bound to use all three 
+inputs in the final model. Therefore, GP model discarding 
+the average granule fraction size makes it less complex and 
+improves performance on the external data set (Table 2). 
+Further RSM analysis based on the GP equation shows 
+that variation in the amount of MCC does not have a profound 
+effect on the porosity of the tablet, while an increase in the 
+die compaction force considerably reduces the porosity of 
+tablets (Figure 6), a behavior that can be attributed to particle 
+rearrangement followed by plastic deformation during the 
+compression stage. 44 </p>
+
+<p>Feature selection on the external data set to 
+establish the surplus of discarded variables </p>
+
+<p>Plausible performance of the trained CI models on a signifi-
+cantly different external data set could be an occurrence of 
+chance. To study this in detail, important features from both 
+the data sets were compared. Feature selection experiments 
+using fscaret were run independently on the external data set. 
+Confirmatory models were developed with a variation of 
+input vectors using the tree-based learning method <rs type="software">Cubist</rs>. 
+The resulting top features of the external data set are in agree-
+ment with the features used to train the models. The results 
+confirm that the die compaction force is the most important 
+variable, with roll compaction force, roll compaction tooling, </p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+Figure 3 Predicted vs observed graph for <rs type="software">rgp</rs> (nrMse: 4%). 
+Abbreviations: nrMse, normalized root-mean-square error; <rs type="software">rgp</rs>, r-genetic 
+programming. </p>
+
+<p>Drug Design, Development and Therapy 2017:11 </p>
+
+<p>submit your manuscript | www.dovepress.com </p>
+
+<p>Dovepress </p>
+
+<p>Dovepress </p>
+
+<p>199 </p>
+
+<p>computational intelligence models to predict porosity of tablets </p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+Figure 4 Model performance on external data set. </p>
+
+<p>percentage of material in the formulation, and granule frac-
+tion range displaying much lower ranking. Models developed 
+without the information of roll compaction force, roll com-
+paction tooling, and granule fraction range predict porosity of 
+tablets accurately (Table 5: experiments with two and three 
+inputs). The successful modeling shows that these variables </p>
+
+<p>do not contribute to the outcome within this design space. 
+The results strongly suggest redundancies in the original 
+data set, which, once removed, do not affect the prediction 
+of porosity within the factor space. Correlation analysis of 
+the original data set reveals that porosity is highly correlated 
+to die compaction force (Figure 7). </p>
+
+<p>Drug Design, Development and Therapy 2017:11 </p>
+
+<p>submit your manuscript | www.dovepress.com </p>
+
+<p>Dovepress </p>
+
+<p>Dovepress </p>
+
+<p>200 </p>
+
+<p>Khalid et al </p>
+
+<p>Table 4 rMse and nrMse for external validation data set using 
+<rs type="software">rgp</rs> model </p>
+
+<p>System 
+RMSE 
+NRMSE </p>
+
+<p>cheekplates (4 kn) 
+0.0314 
+10 
+cheekplates (8 kn) 
+0.0401 
+14 
+rim rolls (4 kn) 
+0.0309 
+9 
+rim rolls (8 kn) 
+0.0387 
+13 
+Feed powder 
+0.0254 
+7 </p>
+
+<p>Abbreviations: nrMse, normalized root-mean-square error; rMse, root-mean-
+square error. </p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>Figure 5 Surface plot showing the influence of average granule fraction size on 
+porosity based on the <rs type="software">monmlp</rs> model. 
+Abbreviation: <rs type="software">monmlp</rs>, Monotone Multi-layer Perception neural network. </p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>Figure 6 Surface plot showing the influence of MCC and die compaction force on 
+porosity based on <rs type="software">rgp</rs> model. 
+Abbreviations: Mcc, microcrystalline cellulose; <rs type="software">rgp</rs>, r-genetic programming. </p>
+
+<p>Table 5 Performance metrics for different input combinations of 
+training and test data sets </p>
+
+<p>Data set and input numbers 
+MLR a 
+Decision trees a </p>
+
+<p>Training data with three inputs 
+8% (0.89) 
+3.4% (0.97) 
+Training data with two inputs 
+8% (0.89) 
+3.4% (0.96) 
+Test data with five inputs 
+11% (0.90) 
+1% (0.99) 
+Test data with three inputs 
+10% (0.90) 
+1% (0.99) 
+Test data with two inputs 
+11.7% (0.78) 
+5.2% (0.95) </p>
+
+<p>Notes: a nrMse and R 2 are presented. all experiments were done in 10cv mode 
+of data representation. Mlr and decision trees were implemented in r using lm 
+command and <rs type="software">cubist</rs> package, respectively. 
+Abbreviations: 10cv, tenfold cross-validation; Mlr, multiple linear regression; 
+nrMse, normalized root-mean-square error. </p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+Figure 7 correlation plots for (A) training and (B) test data. 
+Abbreviations: avg, average; Mcc, microcrystalline cellulose. </p>
+
+<p>Drug Design, Development and Therapy 2017:11 </p>
+
+<p>submit your manuscript | www.dovepress.com </p>
+
+<p>Dovepress </p>
+
+<p>Dovepress </p>
+
+<p>201 </p>
+
+<p>computational intelligence models to predict porosity of tablets </p>
+
+<p>Conclusion </p>
+
+<p>CI models for MCC-based tablets are presented herein. The 
+models have been rigorously tested internally using 10cv and 
+then externally validated by using a challenging data set. The 
+models exhibit reliable prediction behavior, with the best 
+achieved 10cv-NRMSE of 1% on using ANNs. The models 
+also exhibit understanding of the tableting process within the 
+design space. The equation for porosity is presented as the 
+result of symbolic regression models with 10cv-NRMSE of 
+4% and external validation NRMSE of 3%. Presentation of 
+CI models in the form of an equation makes them transpar-
+ent to scrutiny and shows how the input variables interact 
+with each other plus contribute toward the specific outcome 
+of porosity. Contrary to common knowledge, roll compac-
+tion parameters such as tooling and compression force do 
+not influence the porosity of tablets. Such conclusions are 
+confined to the local design space and cannot be treated as 
+general rules governing the tableting process. </p>
+
+<p>Acknowledgments </p>
+
+<p>This work was supported by the IPROCOM Marie Curie 
+Initial Training Network, funded through the People Pro-
+gramme (Marie Curie Actions) of the European Union's 
+Seventh Framework Programme FP7/2007-2013/under REA 
+grant agreement number 316555. </p>
+
+<p>Disclosure </p>
+
+<p>The authors report no conflicts of interest in this work. </p>
+
+
+
+<p>Publish your work in this journal </p>
+
+<p>Submit your manuscript here: http://www.dovepress.com/drug-design-development-and-therapy-journal </p>
+
+<p>Drug Design, Development and Therapy is an international, peer-
+reviewed open-access journal that spans the spectrum of drug design 
+and development through to clinical applications. Clinical outcomes, 
+patient safety, and programs for the development and effective, safe, 
+and sustained use of medicines are the features of the journal, which </p>
+
+<p>has also been accepted for indexing on PubMed Central. The manu-
+script management system is completely online and includes a very 
+quick and fair peer-review system, which is all easy to use. Visit 
+http://www.dovepress.com/testimonials.php to read real quotes from 
+published authors. </p>
+
+<p>Drug Design, Development and Therapy 2017:11 </p>
+
+<p>submit your manuscript | www.dovepress.com </p>
+
+<p>Dovepress </p>
+
+<p>Dovepress </p>
+
+<p>Dovepress </p>
+
+<p>202 </p>
+
+<p>Khalid et al </p>
+
+
+
+</text></tei>

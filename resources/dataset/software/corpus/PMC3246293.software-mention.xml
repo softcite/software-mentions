@@ -1,0 +1,784 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC3246293" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:27+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>Electronic data capture of case report forms, demographic, neuropsychiatric, or clinical 
+assessments, can vary from scanning hand-written forms into databases to fully elec-
+tronic systems. Web-based forms can be extremely useful for self-assessment; however, 
+in the case of neuropsychiatric assessments, self-assessment is often not an option. The 
+clinician often must be the person either summarizing or making their best judgment about 
+the subject's response in order to complete an assessment, and having the clinician turn 
+away to type into a web browser may be disruptive to the flow of the interview. The Mind 
+Research Network has developed a prototype for a software tool for the real-time acquisi-
+tion and validation of clinical assessments in remote environments. We have developed the 
+clinical assessment and remote administration tablet on a Microsoft Windows PC tablet 
+system, which has been adapted to interact with various data models already in use in 
+several large-scale databases of neuroimaging studies in clinical populations. The tablet 
+has been used successfully to collect and administer clinical assessments in several large-
+scale studies, so that the correct clinical measures are integrated with the correct imaging 
+and other data. It has proven to be incredibly valuable in confirming that data collection 
+across multiple research groups is performed similarly, quickly, and with accountability for 
+incomplete datasets. We present the overall architecture and an evaluation of its use. </p>
+
+<p>Mental health research conducted on human subjects involves a 
+rich set of clinical, neuropsychological, and sociodemographic 
+assessments. Traditionally, these assessments which result from 
+face to face interactions between the researcher and the study par-
+ticipant are recorded on paper. The paper forms are then passed 
+at a later date to separate data-entry operators, who either scan 
+the documents as graphics or use a combination of automatic text 
+recognition and manual methods to enter the needed values into 
+a database. This time-consuming transcription process can be a 
+source of both delays and random error in large studies (Welker, 
+2007; Babre, 2011). 
+The process of transferring paper forms to electronic data can 
+be cumbersome, confusing, and error-prone. Errors may slip past 
+data-entry operators, who are not trained as raters and may not 
+recognize that data is in fact illogical or missing, and the problem-
+atic data may only be discovered by data-entry operators months 
+or longer after the assessment is performed. Clinical trials orga-
+nizations implement continuing oversight processes with regular 
+audits of the paper forms, to ensure that data are being col-
+lected correctly; effective, source data verification (SDV) creates 
+an incredible cost in personnel time both on the part of the local 
+research team and the study as a whole. Large-scale research stud-
+ies without that level of personnel hours to invest in auditing or 
+SDV can find that subjects may be excluded from analysis for 
+an extended period of time due to incomplete data. In extreme </p>
+
+<p>cases, some subjects' data, so costly to collect, may be entirely 
+lost to analysis. In studies where it is difficult to find a suf-
+ficient number of qualified subjects, exclusion of subjects may 
+compromise the research. These problems can become even more 
+pronounced in multi-site research protocols that use paper-based 
+assessments and centralized data-entry operations (Vessey et al., 
+2003). Automated methods are needed to ensure that data are 
+complete. 
+Electronic data capture (EDC) promises a solution: The data 
+are collected electronically and can be validated at the time of 
+collection, confirming logical errors or notational problems, and 
+ensuring that the required forms are complete. EDC can alleviate 
+the need for time-consuming audits, since each subject's data can 
+be electronically audited, in a sense, at the time of collection (Kahn 
+et al., 2007; Carvalho et al., 2011). The overall progress of a study 
+can be monitored more closely during its actual execution and 
+incomplete data identified promptly, through the integration of 
+EDC methods with data management systems which track subject 
+enrollment and other progress. 
+Web-based forms for EDC such as those developed by <rs type="software">REDCap</rs> 
+(Harris et al., 2009) are extremely useful for either clinician-or 
+self-assessment, allowing the subjects to answer the questions on 
+their own time in the comfort of their own home over the inter-
+net, and the answers can be collated without the introduction of an 
+extra transcription step. However, self-assessment may not be an 
+option in some situations. In the case of psychiatric assessments, </p>
+
+<p>Frontiers in Neuroinformatics 
+www.frontiersin.org </p>
+
+<p>December 2011 | Volume 5 | Article 31 | 1 </p>
+
+<p>Turner et al. </p>
+
+<p>EDC in CARAT </p>
+
+<p>the clinician researcher often must be the person either summariz-
+ing or making their best judgment about the subject's response in 
+order to complete an assessment, as in conducting the Structured 
+Clinical Interview for Diagnosis (Spitzer et al., 1992) or reporting 
+the level of consciousness in a neurological assessment of a near-
+comatose patient, for example. Interviewers cannot maintain eye 
+contact or a comfortable interaction when there is a computer 
+monitor between them, which is problematic in various studies; 
+having the clinician turn away to type into a web browser may 
+be disruptive to assessing body language cues or the flow of the 
+interview. 
+Electronic data capture methods for research that occurs in 
+a medical institution to integrate health records with research 
+records (El Fadly et al., 2011) can depend on internet access during 
+data collection and integration. EDC methods are also needed for 
+studies that need to be performed at locations without internet 
+access, remote rural areas, prisons, or mental health facilities that 
+do not provide computing resources and may even block internet 
+access. These problems make traditional web and desktop software 
+impractical for many studies, which in turn keeps these more dis-
+tributed clinical studies tethered to paper forms. REDCap is one 
+of the few to address this, with a "<rs type="software">REDCap Mobile</rs>" version which 
+allows researchers in these situations to have encrypted laptops 
+with a push-pull relationship to the centralized REDCap database 
+to allow data collection while off-line (Borlawsky et al., 2011). 
+A list of current EDC packages are listed in Table 1, with their 
+published characteristics. Current web-based EDC solutions suf-
+fer from two primary disadvantages, as can be seen: The first is 
+the need to have internet access in order to function, which makes 
+them unusable in remote situations such as those noted above, with 
+the exception of <rs type="software">REDCap</rs>. The second is that many of them are 
+integrated into select data management systems. To use a specific 
+EDC system one must also use a specific database and presumably 
+port any pre-existing data into it. This is less attractive when the 
+research group has a mature data management system in place for 
+their neuroimaging data, and is looking to add EDC for clinical 
+assessments. 
+The solution is a system that combines the automated data 
+capture of web-based self-assessment with the dynamics of a clin-
+ician's expertise and needs, and the abilities to work off-line until </p>
+
+<p>interface with an arbitrary database is needed. The Mind Research 
+Network (MRN) has developed a software tool for the real-time 
+acquisition and validation of clinical assessments in remote envi-
+ronments: <rs type="software">The clinical assessment and remote administration 
+tablet (CARAT</rs>). We have developed this tool on a Microsoft Win-
+dows PC tablet system, and it has been used successfully to collect 
+and administer clinical assessments in several large-scale studies. 
+It has proven to be incredibly valuable in confirming that data 
+collection across multiple research groups is performed similarly, 
+quickly, and with accountability for incomplete datasets. Here we 
+present its specifications and current availability, focusing on its 
+use in conjunction with the Functional Biomedical Informatics 
+Research Network (FBIRN) multi-site neuroimaging studies in 
+schizophrenia, and the FBIRN Human Imaging Databases (Keator 
+et al., 2008); and in conjunction with the MRN data manage-
+ment system (Bockholt et al., 2010; Scott et al., 2011), a centralized 
+institutional level system managing multiple federated studies 
+simultaneously. It has also been applied within an <rs type="software">OpenClinica</rs> 1 
+data management system (Bockholt et al., in preparation). </p>
+
+<p><rs type="software">CARAT</rs> SPECIFICATIONS </p>
+
+<p>The current application approached the problem of real-time 
+clinical assessment entry and quality control with the following 
+specifications: </p>
+
+<p>1. Tablet hardware with convertible keyboard: Interviewers had to 
+be able to hold a tablet on their laps, maintain eye contact with 
+the subject, and enter data or make notes using the touch screen. 
+Tablets offer a form factor uniquely suitable to an assessment 
+interview. They are slim, easily carried, and shaped similarly to 
+a sheet of paper or a notepad, allowing them to be held without 
+attracting attention during an assessment. Touch screens allow 
+for a rater to quickly select answers to questions with multiple 
+choice options, and a touch keyboard is available for free-form 
+questions and annotations. 
+2. Internet-independence for most functions: Users needed to be 
+able to work remotely, entering case report forms (CRF) data </p>
+
+<p>1 http://community.openclinica.org </p>
+
+<p>Table 1 | Electronic data capture systems available for clinical data capture and transmission to a database. </p>
+
+<p>Free Open </p>
+
+<p>source </p>
+
+<p>Internet </p>
+
+<p>independent </p>
+
+<p>Database independent 
+CRF </p>
+
+<p>library </p>
+
+<p>CRF </p>
+
+<p>design </p>
+
+<p>Data </p>
+
+<p>validation </p>
+
+<p><rs id="software-44" type="software">OpenClinica</rs> <rs corresp="#software-44" type="url">www.openclinica.org</rs> 
+Yes 
+Yes 
+No 
+No 
+Yes 
+Limited* Yes </p>
+
+<p><rs id="software-22" type="software">Clinovo ClinCapture</rs> <rs corresp="#software-22" type="url">www.clinovo.com</rs> 
+Yes 
+Yes 
+No 
+No, but it supports several databases No 
+Yes 
+Yes </p>
+
+<p><rs id="software-56" type="software">Study Manager Evolve</rs> <rs corresp="#software-56" type="url">clinicalsoftware.net</rs> No 
+No 
+No 
+No 
+No 
+Yes 
+Yes </p>
+
+<p><rs id="software-61" type="software">REDCap</rs> <rs corresp="#software-61" type="url">project-redcap.org</rs> 
+Yes 
+Yes 
+Somewhat 
+No 
+Yes 
+Yes 
+Yes </p>
+
+<p><rs id="software-59" type="software">eCaseLink</rs> <rs corresp="#software-59" type="url">http://www.dsg-us.com/</rs>/ </p>
+
+<p><rs type="software">eCaseLinkEDC.aspx</rs> </p>
+
+<p>No 
+No 
+No 
+No, but it supports several databases Yes 
+Yes 
+Yes </p>
+
+<p><rs id="software-13" type="software">Medidata Rave</rs> <rs corresp="#software-13" type="url">http://www.mdsol.com/</rs>/ </p>
+
+<p><rs type="software">products/rave_capture.htm</rs> </p>
+
+<p>No 
+No 
+No 
+Yes 
+Unknown Yes 
+Yes </p>
+
+<p>CARAT 
+Yes 
+Yes 
+Yes 
+Yes 
+Yes 
+Yes 
+Yes </p>
+
+<p>*Uses an excel template method. </p>
+
+<p>Frontiers in Neuroinformatics 
+www.frontiersin.org </p>
+
+<p>December 2011 | Volume 5 | Article 31 | 2 </p>
+
+<p>Turner et al. </p>
+
+<p>EDC in CARAT </p>
+
+<p>and saving it to a central repository when the internet became 
+available. 
+3. Potential for interaction with arbitrary database platforms and 
+schemas: From the beginning, the software needed to be able to 
+both submit to and receive data from several different databases 
+as used by several investigators. 
+4. Real-Time Data Quality Validation: Data had to be checked as 
+it was entered into each CRF for each interview or assessment. 
+5. Generic engine useful for any assessment and arbitrary visit-
+based groupings of assessments: The CRF metadata, including 
+the questions, possible answers, data validation and required 
+field information, and identifiers for upload to the database, 
+had to be easily understood and expandable. CRFs may be 
+changed after the study begins, or modified from one study to 
+another. CRFs must be able to be grouped for initial screening 
+visits and follow-up visits to follow the flow of a study protocol. </p>
+
+<p><rs type="software">CARAT</rs> IMPLEMENTATION </p>
+
+<p>The overall flow of information when using CARAT is shown in 
+Figure 1. Clinical study setup (upper half of the figure) requires 
+CRF form layout on the tablet, as well as arranging the CRFs into 
+visits for each study; the data collection steps (lower half) use 
+the XML representations to send the subject's responses via the 
+web service back to the database. The data collection steps from 
+Figure 1 are expanded in the workflow shown in Figure 2. These 
+are discussed below. </p>
+
+<p>Tablet hardware. The current version of CARAT is built in C#. 
+Net and designed to run on Windows XP Tablet Edition. It also 
+runs successfully on Windows 7 desktops, laptops, and slate 
+tablets. </p>
+
+<p>FIGURE 1 | The flow of information for study setup and data collection 
+using CARAT. The currently usable databases are the FBIRN human 
+imaging database (HID) and the MRN medical imaging computer 
+information system (MICIS), but others can be modeled in the web service. 
+The study definition portion determines which CRFs are required in what 
+layout for which visits and subject types within the study. The CRF XML 
+layout captures how the questions should be presented on the tablet and 
+the validation steps required. Following the administration of the 
+assessments, the subject's responses are sent via the web service back to 
+the available database. </p>
+
+<p>Internet-independence. CARAT does not require an Internet or 
+database connection for the entry of new clinical data. In the 
+workflow shown in Figure 2, once the CRF information has 
+been created during study setup, the data collection steps that 
+follow, the subject interviews and data validation, data cor-
+rection, and inclusion of any additional annotations, can be 
+completed without any database connectivity. When network 
+access is available, the submission process can be completed: 
+The completed assessments that have passed data quality vali-
+dation are exported, and can be inserted into a central database 
+via the web service module shown in Figure 1. </p>
+
+<p>Linking to other databases. To ensure database platform and 
+schema independence, this step is performed by a SOAP web 
+service that is individually customized by a software engineer 
+associated with the required database platform. This web ser-
+vice need be written only once per database schema and then 
+applied to all studies that are stored using the same database 
+schema. Modification for communication with FBIRN Human 
+Imaging Database (FBIRN HID) 2 led to the addition of the 
+ability to export assessments in different XML formats. As 
+shown in Figure 1, <rs type="software">CARAT</rs> can export the subject's data using 
+the XML-based Clinical Experiment Data Exchange (XCEDE) 
+schema, which the FBIRN HID uses to import data 3 . </p>
+
+<p>Real-time data validation. The validation steps can be set per 
+question per assessment, and can be changed for different vis-
+its within a study if needed. They include checking required 
+fields for completion, data type (e.g., numeric, character string, 
+or date), bounds-checking (e.g., systolic blood pressure is a 
+number between 0 and 300), and question dependencies (e.g., 
+Question 2 "How many cigarets do you smoke a day?" does 
+not need to be answered if the answer to Question 1 "Do you 
+smoke?" is NO). <rs type="software">CARAT</rs> provides some complex controls like 
+tree selects, and repeating groups of fields, as one might use for 
+a medication or drug history. During an interview, the rater is 
+notified immediately when a required field is skipped or data 
+entered does not meet quality criteria, but the software does 
+not require the rater to fix the data immediately. This allows 
+the rater to complete the interview smoothly and fix data issues 
+at a later time if necessary. CRFs that do not pass data quality 
+validation may be stored on the rater's tablet and edited at any 
+time, but they may not be submitted to the database until all 
+issues are resolved. Examples are shown in Figures 4 and 6. </p>
+
+<p>Generic CRF specifications. The CRF questions, possible 
+answers, data validation and required field information, and 
+identifiers for upload to the database, are stored in XML spec-
+ification files, created from the database specifications of the 
+CRF questions. The XML file also specifies traditional GUI ele-
+ments, such as radio buttons and drop-down list boxes, and 
+their location on the screen. Data-entry screens may then be 
+created dynamically for any assessment the rater needs to use. 
+The general data model is shown in Figure 3: A subject has an 
+ID and a type or group assignment; a study may have multiple 
+visits with varying assessments, and may be a multi-site study. </p>
+
+<p>2 www.birncommunity.org 
+3 www.xcede.org </p>
+
+<p>Frontiers in Neuroinformatics 
+www.frontiersin.org </p>
+
+<p>December 2011 | Volume 5 | Article 31 | 3 </p>
+
+<p>Turner et al. </p>
+
+<p>EDC in CARAT </p>
+
+<p>FIGURE 2 | The workflow for <rs type="software">CARAT</rs>, expanding on the data collection parts of Figure 1. Following study setup, data collection can proceed through the 
+needed steps of interviews, validation, correction, addition of other notes or annotations, and final submission. </p>
+
+<p>FIGURE 3 | The data model for <rs type="software">CARAT</rs> is lightweight, combining an 
+individual's responses with their study-specific information and 
+response validation prior to inserting the information in the database. 
+The upper row indicates those parts of the model that draw from study setup, </p>
+
+<p>while the lower row indicates the parts that are populated during data 
+collection. The solid bulleted connections indicate a many-to-one relationship: 
+a single CRF pulls from many questions, and a completed assessment 
+includes several responses. </p>
+
+<p>The CRF is linked to many questions, each of which contains 
+the question text and the validation rules for the answers. The 
+CRF, in combination with information regarding the visit and 
+study, forms an assessment for that study and visit. The subject's 
+responses for that assessment are tagged with the information 
+about which question it came from on the CRF, as well as the 
+subject, study, and visit information. </p>
+
+<p>Both Figures 4 and 5 show data-entry screens dynamically gen-
+erated from XML layout specification files. This provides flexi-
+bility and frees the researchers from the management of separate 
+software packages to handle different clinical assessments. 
+A user-friendly method of creating electronic forms is required, 
+to allow for rapid prototyping of new assessments for a study, and 
+flexibility in re-use of forms. Clinicians may find that they habit-
+ually rearrange the order of questions on an assessment from the </p>
+
+<p>paper form during an interview, for example; electronic forms can 
+allow this kind of rearrangement to be done to allow for a more 
+natural interviewing environment. Questions that are not required 
+based on the current interviewee's answers may be automatically 
+and dynamically hidden. Medication categories are included so 
+that drug names can be selected rather than re-typed each time 
+they are used. 
+In <rs type="software">CARAT</rs>, XML layout specifications for CRFs are created using 
+a graphic tool that uses the SOAP web service to pull the question 
+metadata from the study protocols already in the database. The 
+layout tool is designed for raters or other study staff to use to 
+create detailed layouts, including GUI elements and data valida-
+tion, with a minimum of technical expertise. Questions may be 
+dragged and dropped into a GUI form and then modified as nec-
+essary. If metadata about a particular CRF question does not exist 
+in a database, the metadata can be provided directly in the layout </p>
+
+<p>Frontiers in Neuroinformatics 
+www.frontiersin.org </p>
+
+<p>December 2011 | Volume 5 | Article 31 | 4 </p>
+
+<p>Turner et al. </p>
+
+<p>EDC in CARAT </p>
+
+<p>FIGURE 4 | An example of a questionnaire on <rs type="software">CARAT</rs>, 
+demonstrating: (1) Annotations may be stored for any question by 
+clicking the pencil icon (the pencil icon then displays in green). (2) 
+Data types and reasonable responses are enforced, with error 
+messages available to clarify. (3) Navigation through a form can be done </p>
+
+<p>using either the navigation tree or the buttons on the lower right corner. 
+(4) Conditional skipping of questions: Here, since the participant 
+answered "Yes" about English being their primary language, the 
+follow-up question is not required. (5) Required fields are marked with a 
+red icon. </p>
+
+<p>FIGURE 5 | Example question with a drop-down menu and extended text. </p>
+
+<p>tool. The layout is then exported as an XML CRF specification to 
+be included in <rs type="software">CARAT</rs>. </p>
+
+<p><rs type="software">CARAT</rs> USER INTERFACE </p>
+
+<p>The <rs type="software">CARAT</rs> software has spent the last almost 3 years in long-
+term piloting with multiple studies. During this time, it has 
+been through three rounds of enhancement in response to user </p>
+
+<p>feedback. User needs led to extensive expansion of the options 
+for assessment appearance, keyboard shortcuts for studies that 
+made more use of the keyboard, expansion of user preferences so 
+that default behavior better matches specific study needs, allowing 
+sorting and re-ordering of assessments on the fly, creating missing 
+data explanation fields, turning pen use on and off as needed, and 
+various other usability changes. </p>
+
+<p>Frontiers in Neuroinformatics 
+www.frontiersin.org </p>
+
+<p>December 2011 | Volume 5 | Article 31 | 5 </p>
+
+<p>Turner et al. </p>
+
+<p>EDC in CARAT </p>
+
+<p>FIGURE 6 | Example of error messages to identify which questions the error occurred on, what the error was, and what page of the assessment it 
+occurred on. </p>
+
+<p>Figure 4 demonstrates some of the user interface features of 
+the prototype. The prototype provides a wide variety of data-
+entry methods from simple free text entry to methods of multiple 
+choice that may be selected by a mouse click or a pen tap. Sup-
+ported forms of data-entry include: Radio Buttons (displayed in 
+Figure 4), Checkboxes, Date Selector, Extended Text Drop-Down 
+Combo Box (displayed in Figure 5), Free Text Entry, and Tree 
+Menus. Free text annotations may be stored for any question by 
+clicking the pencil icon or tapping it with the tablet stylus. 
+Navigation of lengthy CRFs on paper is often not linear; clini-
+cians may skip back and forth as the flow of the interview require. 
+To recreate this in <rs type="software">CARAT</rs>, users may navigate through the CRF 
+pages using the arrow buttons in the lower right-hand corner, or 
+they may go to a specific page using the navigation tree. 
+Questions may be skipped based on the answers to other ques-
+tions. For example, one question may record if the subject ever 
+received a specific diagnosis. If the answer is no, then the sub-
+sequent question about the diagnosis is non-applicable and is 
+skipped. 
+The validation of data types and reasonable responses are 
+enforced using regular expressions. If, for example, text is entered 
+in a field expecting an integer or an out-of-range response is 
+entered, or if a required response is missing, the user is imme-
+diately notified with a red exclamation icon. If the cursor hovers 
+over the icon, then a specific error message is displayed. 
+When Complete or Review buttons at the top of the form are 
+clicked, the prototype validates all questions in the CRF and dis-
+plays a list of errors for the user to address, as shown in Figure 6. 
+Clicking or tapping the error listing takes the user to the question 
+that needs to be addressed. CRFs may be edited and saved with 
+known errors, but they may not be submitted to the database until 
+all errors are addressed. The <rs type="software">CARAT</rs> interface includes the ability 
+to create an exception, explaining how the data were not able to be 
+collected, if this is the case. This method ensures that an error does 
+not obstruct an interview, but that all issues are addressed before 
+the data appears in the database. </p>
+
+<p>EVALUATION OF <rs type="software">CARAT</rs> </p>
+
+<p>This prototype has been in long-term pilot with multiple groups, 
+of which we will describe two examples: Psychopathy Research 
+under Dr. Kent Kiehl located at the MRN and FBIRN (Keator et 
+al., 2008; Potkin et al., 2009), a collaboration featuring more than 
+10 distributed sites. These groups use different database schemas 
+and have different data collection needs. These projects have been </p>
+
+<p>instrumental in gathering user feedback as well as demonstrat-
+ing the usefulness of the software in real assessment gathering 
+conditions. We have recently added a self-assessment mode to 
+allow the same <rs type="software">CARAT</rs> system to be used in computer labs for 
+self-assessments. 
+The psychopathy research team currently conducts five related 
+studies. The team has been using the tablet application for longi-
+tudinal acquisition of clinical and sociodemographic assessments 
+on an incarcerated adult psychopathy population since January 
+2009 (Ermer and Kiehl, 2010; Harenski and Kiehl, 2010; Harenski 
+et al., 2010). The tablet product is ideal in a prison setting, since 
+network desktop PC clients are typically disallowed and internet 
+access is not available. Among the assessments in use are sev-
+eral standard questionnaires, personality checklists, and symptom 
+severity indices, which use a broad range of question types and 
+answers. Some of them have been modified for specific study 
+needs; they are implemented with type-checking (dates, strings, 
+numbers) and range-checking where relevant. Assessment data is 
+entered in the MRN database, as part of the COINS system (Scott 
+et al., this issue). The vast majority of CRFs for the psychopathy 
+research studies are now entered via tablet. 
+Because the Kiehl psychopathy team phased the tablet entry 
+into ongoing studies that had been using manual transcription 
+and dual-entry, it is possible to compare the old method to the 
+new method to evaluate the effects. For example, as of this writ-
+ing, 15,393 assessments were entered manually from paper forms 
+into the MRN's database. The average time between the assess-
+ment interview and the time the data were verified as complete 
+in the database was 232 days. In contrast, 5,567 assessments have 
+been entered using the tablet prototype, and the average time 
+between interview and complete data in the database is 3 days. 
+This trend indicates that assessment data can be made avail-
+able for analysis very quickly after it is gathered, and results 
+may be available more than 7 months earlier than they would be 
+otherwise. 
+The FBIRN community has used the tablet application as its 
+primary method of assessment gathering for its Phase III schiz-
+ophrenia study since January 2009. These assessments are con-
+ducted with schizophrenic and normal control participants across 
+eight different data collection sites. For this project, we added 
+functionality to the current prototype application to support data 
+exchange using the XCEDE standard (Keator et al., 2006, 2009). 
+Completed CRFs for FBIRN are uploaded to distributed instances 
+of the Human Imaging Database, one at each data collection site. </p>
+
+<p>Frontiers in Neuroinformatics 
+www.frontiersin.org </p>
+
+<p>December 2011 | Volume 5 | Article 31 | 6 </p>
+
+<p>Turner et al. </p>
+
+<p>EDC in CARAT </p>
+
+<p>Similarly in FBIRN as in the psychopathy research, two large-
+scale studies have been performed that can be compared. The 
+Phase II dataset (Potkin and Ford, 2009; Potkin et al., 2009) was col-
+lected using the dual-entry method, including requiring manual 
+double entry of the transcribed data to minimize errors. As project 
+manager of the FBIRN at the time, Dr. Turner was very aware of the 
+delays and errors in clinical data availability due to the dual-entry 
+method, and the final data aggregation across assessments ranged 
+from 100% available (for simple measures such as age and gender) 
+to only 70% available or less (for more detailed questions regard-
+ing duration of illness or the full list and dosing information for 
+current medications, for example). This was highly problematic in 
+the full analysis of the final study. In the next multi-site study, the 
+currently ongoing Phase III study, the clinical tablet is being used in 
+all eight data collection sites, of which MRN is one. In conjunction 
+with the multi-database querying allowed by the HID infrastruc-
+ture, this allows regular confirmation of which subjects have been 
+enrolled, screened, scanned, and have their clinical data complete -
+rather than simply asking the data collection teams for their assur-
+ances, electronic audits are being performed automatically and 
+reviewed by the whole FBIRN regularly. As of this writing, over 300 
+subjects have been enrolled, with some sites showing 100% com-
+plete clinical assessments and others very close to that. This allows 
+immediate accountability for incomplete data, and the ability to 
+correct it rapidly to increase the proportion of usable datasets. </p>
+
+<p>CAVEATS </p>
+
+<p>With the exception of the upload of completed CRFs to a data-
+base, all major functions on <rs type="software">CARAT</rs> are available without internet 
+or network access. Asynchronous updates, however, can lead to 
+duplicate or existing data in the centralized data management sys-
+tem, which must not be overwritten. REDCap has developed an 
+elegant system to manage these issues (Borlawsky et al., 2011); 
+<rs type="software">CARAT</rs> handles those problems to some extent, though not as 
+completely. At this point, the MICIS and BIRN web services will 
+check against the subject ID, assessment, study, and visit to see if 
+duplicate data already exists in the database. We are working to 
+make the generic web service more flexible and secure for these 
+issues while maintaining its agnostic approach to database schema 
+Clinical assessment and remote administration tablet was 
+designed and implemented on a Windows system. Convertible 
+tablets, for which Windows was the dominant operating system, 
+are being overwhelmed by the new popularity of slate tablets. Slates 
+tend to run Android or iOS, as well as Windows; <rs type="software">CARAT</rs> is being 
+re-factored to be platform-independent, to take advantage of these 
+new options. 
+A challenge specific to multi-site studies is the need to have 
+all users have the same implementation of <rs type="software">CARAT</rs>, the same 
+forms and layouts. For studies which decide on their protocol 
+and never vary from it, it is not a challenge to set up one instan-
+tiation of <rs type="software">CARAT</rs> and disseminate it to all the participating sites. 
+Many clinical and research studies, however, find that they need 
+new or revised CRFs over the course of a study; confirming all 
+sites are using the same version has been a challenge for <rs type="software">CARAT</rs> 
+in multi-site studies. Future versions of <rs type="software">CARAT</rs> will implement 
+automatic update detection, so that all sites are running with the 
+latest version for a given study whenever they have internet access. </p>
+
+<p>DISCUSSION </p>
+
+<p>Electronic data capture of the assessments and interviews associ-
+ated with clinical neuroimaging studies have been used in many 
+studies, and the <rs type="software">CARAT</rs> system which we present has been tested 
+in a wide range of study situations. The needs which EDC sys-
+tems commonly address include using a web interface to transmit 
+data directly into a database, usually over the internet so that only 
+a browser is needed for the user. The ability to handle complex 
+forms, multiple types of questions, conditional branching, and 
+constraint checking is also needed for an adequate system (Harris 
+et al., 2009). Unique needs for many research programs include the 
+ability to use a tablet system rather than a desktop or laptop, and 
+to work where the internet is not available, without giving up the 
+ability to capture the data and transmit it directly to a study data-
+base. The demands of neuroimaging studies includes the ability 
+to identify the subject's imaging data with their clinical and other 
+data, preferably within a centralized multi-modal data repository. 
+The first advantage of <rs type="software">CARAT</rs> is that it was designed to work on 
+a tablet, mimicking natural interviewing style. The use of the stylus 
+on the tablet screen has been popular with researchers who prefer 
+the pen and paper approach. <rs type="software">CARAT</rs> also includes the ability to 
+handle constraint checking and complex conditional branching, 
+similar to what <rs type="software">REDCap</rs> provides. Data validation supports regu-
+lar expressions, so error detection can become extremely detailed. 
+Responses can be validated not just by data type (date, number, 
+character string, etc.) but by complex ranges of these in almost any 
+combination. <rs type="software">CARAT</rs> at the moment does not implement the abil-
+ity to reference multiple questions in a single validation rule, how-
+ever; it can require the response field be filled in according to highly 
+complex string-formation rules combining letters and numbers, 
+but we can't say that the response must be less the answer to the pre-
+vious question plus 100, for example. That has not been a common 
+request from users, though it could be implemented if needed. 
+An appropriate EDC solution must also provide a high degree of 
+CRF customization to accommodate the almost constant stream of 
+new assessments, and modifications to existing assessments, which 
+comes with many research programs. The CRFs and other assess-
+ment forms must be extremely customizable, allowing for entry of 
+common, rare, and unique study-specific assessments. It should be 
+modifiable by the research team that is collecting and/or managing 
+the data, rather than depending on the original software develop-
+ers -ease of use in the <rs type="software">CARAT</rs> layout system is currently a focus of 
+ongoing development. Ideally, for non-copyright material, a repos-
+itory of assessments should be available, built from studies already 
+using <rs type="software">CARAT</rs>, so that the forms for a new study can be set up 
+quickly and re-use existing forms automatically whenever possible, 
+similar to the system implemented in (El Fadly et al., 2011). 
+Data-gathering software appropriate to the specific needs of 
+clinical research interviews is unlikely to be widely adopted if it 
+cannot conform to the data storage solutions already employed at 
+mature research sites. It may or may not be possible to integrate 
+data from independent software packages that employ their own 
+distinct database schemas. The software must be able to plug 
+into the existing frameworks already in use by mature research 
+programs. It must have a mechanism to communicate with exist-
+ing databases and schemas, be they off-the-shelf like <rs type="software">OpenClinica</rs> 
+or custom solutions such as <rs type="software">REDCap</rs>. CARAT has the flexibility </p>
+
+<p>Frontiers in Neuroinformatics 
+www.frontiersin.org </p>
+
+<p>December 2011 | Volume 5 | Article 31 | 7 </p>
+
+<p>Turner et al. </p>
+
+<p>EDC in CARAT </p>
+
+<p>to interact with arbitrary databases, rather than a single propri-
+etary database specialized for clinical assessments, thus allowing 
+the ability of combining clinical and imaging data within a single 
+repository. 
+Franklin et al. (2011) reviewed several common EDC systems 
+within their needs for small-scale clinical trials; their list of val-
+ued features overlapped with the <rs type="software">CARAT</rs> specifications to some 
+extent. Their list included availability of training materials, the 
+presence of site and user roles and permissions, ease of designing 
+CRFs including error detection, the ability to create a visit sched-
+ule for data-entry, and the ease in importing or exporting data in a 
+standards-compliant way. <rs type="software">CARAT</rs> provides training materials for 
+the user interface, and the developers' manual for the web interface 
+is in development. The fact that <rs type="software">CARAT</rs> is built to work with both 
+MICIS and HID and to be expandable to other database system 
+means many of the security issues and permissions are considered 
+the purview of the database, however, rather than the data col-
+lection system. <rs type="software">CARAT</rs> can validate that the rater's username and 
+password is a valid rater for the study, and that the subject ID being 
+used is for a subject who is enrolled in the study. Other levels of 
+permission that are not related to collecting assessment data are 
+not within the scope of <rs type="software">CARAT</rs> at this time. </p>
+
+<p>Clinical assessment and remote administration tablet is orga-
+nized around the idea of visit schedules, which are part of the 
+fundamentals of the tablet interface. The grouping of assessments 
+that need to be done at baseline screening and subsequent visits 
+throughout a study protocol are defined in the primary con-
+figuration file and are required. Each assessment or group of 
+assessments for an individual subject, can be exported as XML 
+as described above; data import and export from the database 
+repository, whether in text or comma separated values or other 
+formats, is again, a choice for that data management system. </p>
+
+<p>AVAILABILITY </p>
+
+<p>The <rs type="software">CARAT</rs> software is available from www.nitric.org, under mul-
+tiple licenses. For the research community with free re-use, it is 
+available under the GNU General Public License (GPL). If the 
+software is to be used with a commercial interest, other licenses 
+can be negotiated. </p>
+
+<p>ACKNOWLEDGMENTS </p>
+
+<p>This work was supported by funding from the National Institutes 
+of Health as part of the FBIRN project (U24 RR021992, S. G. 
+Potkin PI), by 1R01EB006841 (Vince D. Calhoun), and from the 
+Department of Energy, DE-FG02-08ER64581. </p>
+
+
+
+<p>Conflict of Interest Statement: The 
+authors declare that the research was 
+conducted in the absence of any 
+commercial or financial relationships 
+that could be construed as a potential 
+conflict of interest. </p>
+
+<p>Received: 14 September 2011; paper 
+pending published: 08 October 2011; 
+accepted: 21 November 2011; published 
+online: 27 December 2011. 
+Citation: Turner JA, Lane SR, Bockholt 
+HJ and Calhoun VD (2011) The clin-
+ical assessment and remote administra-
+tion tablet. Front. Neuroinform. 5:31. doi: 
+10.3389/fninf.2011.00031 
+Copyright © 2011 Turner , Lane, Bock-
+holt and Calhoun. This is an open-
+access article distributed under the terms 
+of the Creative Commons Attribution 
+Non Commercial License, which per-
+mits noncommercial use, distribution, 
+and reproduction in other forums, pro-
+vided the original authors and source are 
+credited. </p>
+
+<p>Frontiers in Neuroinformatics 
+www.frontiersin.org </p>
+
+<p>December 2011 | Volume 5 | Article 31 | 8 </p>
+
+</text></tei>

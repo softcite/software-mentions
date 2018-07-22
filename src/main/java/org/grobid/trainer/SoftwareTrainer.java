@@ -90,7 +90,7 @@ public class SoftwareTrainer extends AbstractTrainer {
             // we process all tei files in the output directory
             File[] refFiles = corpusDir.listFiles(new FilenameFilter() {
                 public boolean accept(File dir, String name) {
-                    return name.toLowerCase().endsWith(".tei") || name.toLowerCase().endsWith(".tei.xml");
+                    return name.toLowerCase().endsWith(".xml");
                 }
             });
 
@@ -104,8 +104,12 @@ public class SoftwareTrainer extends AbstractTrainer {
             // the active writer
             Writer writer = null;
 
+            // this ratio this the minimum proportion of token with non default label, it is used to 
+            // decide to keep or not a paragraph without any entities in the training data
+            double ratioNegativeSample = 0.01;
+
             if (refFiles != null) {
-                System.out.println(refFiles.length + " TEI files");
+                System.out.println("\n" + refFiles.length + " XML training files\n");
 
                 // get a factory for SAX parser
                 SAXParserFactory spf = SAXParserFactory.newInstance();
@@ -114,8 +118,9 @@ public class SoftwareTrainer extends AbstractTrainer {
                 for (int n = 0; n < refFiles.length; n++) {
                     File thefile = refFiles[n];
                     name = thefile.getName();
-                    System.out.println(name);
-
+                    //System.out.println(name);
+                    //if (n > 100)
+                    //    break;
                     SoftwareAnnotationSaxHandler handler = new SoftwareAnnotationSaxHandler();
 
                     //get a new instance of parser
@@ -123,6 +128,7 @@ public class SoftwareTrainer extends AbstractTrainer {
                     p.parse(thefile, handler);
 
                     List<Pair<String, String>> labeled = handler.getLabeledResult();
+                    labeled = subSample(labeled, ratioNegativeSample);
 
                     // we need to add now the features to the labeled tokens
                     List<Pair<String, String>> bufferLabeled = null;
@@ -165,9 +171,9 @@ public class SoftwareTrainer extends AbstractTrainer {
                 }
             }
 
-            // we convert then the PDF files having entities annotated into the
-            // CRf training format
-            refFiles = corpusDir.listFiles(new FilenameFilter() {
+            // uncomment bellow in case of PDF files having annotated entities in the annotation layout 
+            // (some adjustments would be necessary for translating annotation target into label type)
+            /*refFiles = corpusDir.listFiles(new FilenameFilter() {
                 public boolean accept(File dir, String name) {
                     return name.toLowerCase().endsWith(".pdf");
                 }
@@ -238,9 +244,9 @@ public class SoftwareTrainer extends AbstractTrainer {
                                         break;
 
                                     // check if we have an software entity
+                                    // TBD: adapt for getting the annotation type of the software mention model
                                     if ((currentAnnotation.getType() == PDFAnnotation.Type.URI) &&
-                                            (currentAnnotation.getDestination() != null) &&
-                                            (currentAnnotation.getDestination().indexOf("simbad") != -1)) {
+                                            (currentAnnotation.getDestination() != null) ) {
 
                                         //System.out.println(currentAnnotation.toString() + "\n");
 
@@ -248,12 +254,12 @@ public class SoftwareTrainer extends AbstractTrainer {
                                             System.out.println(currentAnnotation.toString() + " covers " + token.toString());
                                             // the annotation covers the token position
                                             // we have an software entity at this token position
-                                            if (previousLabel.endsWith("<object>")) {
-                                                theLabel = "<object>";
+                                            if (previousLabel.endsWith("<software>")) {
+                                                theLabel = "<software>";
                                             } else {
                                                 // we filter out entity starting with (
                                                 if (!token.getText().equals("("))
-                                                    theLabel = "I-<object>";
+                                                    theLabel = "I-<software>";
                                             }
                                             break;
                                         }
@@ -263,7 +269,7 @@ public class SoftwareTrainer extends AbstractTrainer {
                                         new Pair<String, String>(token.getText(), theLabel);
 
                                 // we filter out entity ending with a punctuation mark
-                                if (theLabel.equals("<other>") && previousLabel.equals("<object>")) {
+                                if (theLabel.equals("<other>") && previousLabel.equals("<software>")) {
                                     // check the previous token
                                     Pair<String, String> theLastPair = labeled.get(labeled.size() - 1);
                                     String theLastToken = theLastPair.getA();
@@ -287,7 +293,7 @@ public class SoftwareTrainer extends AbstractTrainer {
                     }
                     writer.write("\n");
                 }
-            }
+            }*/
         } catch (Exception e) {
             throw new GrobidException("An exception occured while training GROBID.", e);
         } finally {
@@ -301,6 +307,35 @@ public class SoftwareTrainer extends AbstractTrainer {
             }
         }
         return totalExamples;
+    }
+
+    /**
+     *  Ensure a ratio between positive and negative examples and shuffle
+     */
+    private List<Pair<String, String>> subSample(List<Pair<String, String>> labeled, double targetRatio) {
+        int nbPositionTokens = 0;
+        int nbNegativeTokens = 0;
+
+        List<Pair<String, String>> reSampled = new ArrayList<Pair<String, String>>();
+        List<Pair<String, String>> newSampled = new ArrayList<Pair<String, String>>();
+        
+        boolean hasLabels = false;
+        for (Pair<String, String> tagPair : labeled) {
+            if (tagPair.getB() == null) {
+                // new sequence
+                if (hasLabels) {
+                    reSampled.addAll(newSampled);
+                    reSampled.add(tagPair);
+                } 
+                newSampled = new ArrayList<Pair<String, String>>();
+                hasLabels = false;
+            } else {
+                newSampled.add(tagPair);
+                if (!tagPair.getB().equals("<other>") && !tagPair.getB().equals("other") && !tagPair.getB().equals("O")) 
+                    hasLabels = true;
+            }
+        }
+        return reSampled;
     }
 
     /**
@@ -361,12 +396,12 @@ public class SoftwareTrainer extends AbstractTrainer {
                                 System.out.println(currentAnnotation.toString() + " covers " + token.toString());
                                 // the annotation covers the token position
                                 // we have an software entity at this token position
-                                if (previousLabel.endsWith("<object>")) {
-                                    theLabel = "<object>";
+                                if (previousLabel.endsWith("<software>")) {
+                                    theLabel = "<software>";
                                 } else {
                                     // we filter out entity starting with (
                                     if (!token.getText().equals("("))
-                                        theLabel = "I-<object>";
+                                        theLabel = "I-<software>";
                                 }
                                 break;
                             }
@@ -375,7 +410,7 @@ public class SoftwareTrainer extends AbstractTrainer {
                                 new Pair<String, String>(token.getText(), theLabel);
 
                         // we filter out entity ending with a punctuation mark
-                        if (theLabel.equals("<other>") && previousLabel.equals("<object>")) {
+                        if (theLabel.equals("<other>") && previousLabel.equals("<software>")) {
                             // check the previous token
                             Pair<String, String> theLastPair = labeled.get(labeled.size() - 1);
                             String theLastToken = theLastPair.getA();

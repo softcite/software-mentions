@@ -1,0 +1,1154 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4408226" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:22+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>concordance between skin permeability and skin sensitization. This observation suggests that 
+chemical modifications that affect skin permeability should not be presumed a priori to modulate 
+the sensitization potential of chemicals. The models reported herein as well as those developed in 
+the companion paper on skin sensitization suggest that it may be possible to rationally design 
+compounds with the desired high skin permeability but low sensitization potential. </p>
+
+<p>Skin sensitization is a complex adverse toxicological endpoint that is influenced by several 
+biological parameters, such as protein binding, dendritic cell activation, individual variation, 
+and time-dose exposure (Jaworska et al., 2011; Johansen et al., 2011). Skin permeability is 
+also often considered as a potential parameter affecting chemicals' sensitization potential 
+(MacKay et al., 2013). It relates to the ability of a molecule to pass through the skin, a 
+characteristic which is primarily influenced by the physicochemical properties of the 
+chemical as well as the physicochemical and biological properties of the membrane (Xia, 
+2011). </p>
+
+<p>Despite the high importance of skin permeability for consumer product efficacy and its 
+supposed influence on potential toxicities such as skin sensitization, the amount of 
+experimental data available in the public domain is surprisingly limited. In the early 90's, a 
+compilation of data points for skin permeability gathered from several sources was 
+published (Flynn, 1990). Subsequent studies added some complementary data allowing 
+researchers to develop Quantitative Structure-Activity Relationship (QSAR) models for 
+predicting skin permeability. However, as shown in Table S1, most of the published studies 
+reporting on skin permeability modeling (Abraham et al., 1999; Barratt, 1995; Berge, 2009; 
+Chen et al., 2010, 2007; Cronin et al., 1999; Hostýnek and Magee, 1997; Lien and Gao, 
+1995; Magnusson et al., 2004; Moss and Cronin, 2002; Moss et al., 2011; Patel et al., 2002; 
+Potts and Guy, 1995, 1992) have not included certain critical elements of QSAR model 
+development and validation protocol, such as the definition of the applicability domain (AD) 
+or proof of passing the Y-randomization test, which constitute best practices of QSAR 
+modeling (OECD, 2004; Tropsha, 2010). Recently, several QSAR studies were 
+benchmarked on a series of 11 compounds and all of them failed to predict skin permeation 
+quantitatively; they were only able to rank permeants (Brown et al., 2012). Another recent 
+study showed that most of the available QSAR models underestimate the skin permeability 
+of hydrophilic solutes (Chen et al., 2013). Recent studies (Chauhan and Shakya, 2010) 
+attempted to overcome the related problems with complex chemical mixtures and built a 
+QSAR model based on several mixtures of 36 chemicals with porcine skin data. The latter 
+model followed the best practices of QSAR modeling (Tropsha, 2010); however, we have 
+identified 21 duplicative structures in that dataset (see Table S3) indicating a potential bias 
+of the model and a likely over-estimation of its true performance. </p>
+
+<p>Alves et al. 
+Page 2 </p>
+
+<p>Toxicol Appl Pharmacol. Author manuscript; available in PMC 2016 April 15. </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Despite the underlying importance of skin permeability and its identification as a necessary 
+step in the OECD Adverse Outcome Pathway (AOP) for skin sensitization (Karlberg et al., 
+2008; OECD, 2012), we could not find any study among those compiled in Tables S1 and 
+S2, where both endpoints were analyzed concurrently and in the context of their possible 
+inter-dependency. The prevalence of dermal exposure to diverse chemicals in consumer 
+products and in the environment, the importance of permeability for skin sensitization, and 
+the lack of reliable models to predict these endpoints for new chemicals have motivated us 
+to initiate a tandem study on collecting and analyzing both skin permeability and skin 
+sensitization data. In the companion paper (Alves et al., 2014), we have reported on new 
+QSAR models of skin sensitization. In this study, we have compiled, curated, and integrated 
+skin permeability coefficient (Kp) data extracted from various literature sources. Using this 
+unique data collection, we have developed and rigorously validated QSAR models for skin 
+permeability, and explored the relationships between the skin sensitization potential and the 
+chemical permeability coefficient. The QSAR models developed in this and the 
+accompanying study (Alves et al., 2014) are publicly available and can be used for 
+evaluating chemically induced skin effects in silico as part of both research and development 
+projects as well as in support of regulatory decisions on consumer products. </p>
+
+<p>MATERIALS AND METHODS </p>
+
+<p>Datasets </p>
+
+<p>Skin sensitization datasets (datasets A and B)-In the Part I of this study (Alves et 
+al., 2014) we described two skin sensitization datasets. Briefly, one of them (dataset A) was 
+retrieved from the ICCVAM (Interagency Coordinating Committee on the Validation of 
+Alternative Methods) report on the murine reduced local lymph node assay (ICCVAM 
+2009). The modeling set (Dataset A) consisted of 254 compounds (127 sensitizers and 127 
+non-sensitizers) and the external validation set (dataset B) consisted of 133 sensitizers from 
+the ICCVAM report (ICCVAM 2009) and 18 additional compounds taken from the study of 
+Jaworska et al. (2011). This collection of data was used to explore the intrinsic relationship 
+between skin sensitization and skin permeability (human data from dataset D; see below) for 
+a subset of 20 compounds from the same dataset for which both skin sensitization and skin 
+permeability data were known. </p>
+
+<p>Human skin permeability dataset (dataset D)-In vitro human skin permeability 
+coefficients were retrieved from the literature (Chauhan and Shakya, 2010) including 211 
+records expressed in logKp (cm.h −1 ); this dataset contained the well-known and frequently 
+studied Flynn dataset (Flynn, 1990). 17 duplicates and two sets of triplicates were identified 
+and curated leaving unique compounds only. Three additional compounds and water were 
+also removed for the following reasons: both styrene (logKp = −0.19) and ethyl benzene 
+(logKp = 0.08) were identified as activity outliers (i.e., their logKp values were far outside 
+the activity range of the other compounds in the dataset between −5.52 and −0.69) whereas 
+digitoxin (natural product) was a structural outlier. The remaining 186 compounds (dataset 
+D) were retained for modeling. </p>
+
+<p>Alves et al. 
+Page 3 </p>
+
+<p>Toxicol Appl Pharmacol. Author manuscript; available in PMC 2016 April 15. </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Rodent dataset (dataset E)-The set of in vitro rodent skin permeability data consisting 
+of 103 chemical compounds was retrieved from the literature (Moss et al., 2011). After 
+curation, 96 compounds (dataset E) were kept for modeling. The following five activity 
+outliers were removed from the dataset E: bisphenol A diglycidyl ether (−5.26), 
+decabromodiphenyl oxide (−5.15), 4-N butylamine (−0.64), bufexamac (−0.57), and 
+triclosan (0.13). The overall range of logKp for the final dataset varied from −4.85 to −0.94. </p>
+
+<p>Data curation </p>
+
+<p>Chemical structures were retrieved either from PubChem (https:// 
+pubchem.ncbi.nlm.nih.gov/, accessed in March 2012) or ChemSpider (http:// 
+www.chemspider.com/, accessed in March 2012) databases using chemical names. 
+Chemicals were removed if their structures could not be found. Each dataset was carefully 
+curated according to previously established guidelines (Fourches et al., 2010). Briefly, 
+counterions were removed, whereas specific chemotypes such as aromatic and nitro groups 
+were normalized using the <rs id="software-2" type="software">ChemAxon Standardizer</rs> (<rs corresp="#software-2" type="version-number">v.5.3</rs>, <rs corresp="#software-2" type="creator">ChemAxon Budapest, Hungary</rs>, 
+http://www.chemaxon.com). The presence of duplicates, i.e., identical compounds reported 
+more than once in the same dataset, is known to lead to over-optimistic estimations of the 
+predictivity for developed QSAR models. However, the analysis of such records also gives 
+an estimate of the dataset quality: if activity data for the same compound are consistent, the 
+overall data quality is high; if there is a large deviation in experimental values between 
+different records of the same compound, the quality is, obviously, low. Thus, after the 
+structural standardization, the duplicates were identified using <rs type="software">ISIDA Duplicates</rs> (Varnek et 
+al., 2008) and <rs type="software">HiT QSAR</rs> (Kuz'min et al., 2008) software and carefully analyzed. If the 
+experimental properties associated with two duplicative structures were identical, or highly 
+similar, then one compound was chosen at random and deleted. However, if their 
+experimental properties were significantly different, we deleted both records from the 
+dataset. During the curation of human skin permeability dataset, we found 17 pairs of 
+duplicate structures and two sets of triplicates as shown in Table S3. The permeability 
+values for duplicative records were almost identical (logKp variation ~ 0.01 LU) except 
+those for butanoic acid that had a variation higher than ca. 0.4 LU. Thus, the LogKp value 
+for all 17 compounds was averaged and the duplicative records were removed so that only 
+one permeability coefficient was used for a chemical compound. </p>
+
+<p>Cheminformatics Approaches </p>
+
+<p>Hierarchical Cluster Analysis-The clustering of a chemical dataset consists of 
+merging compounds into distinct clusters of chemically similar molecules [see (Downs and 
+Barnard, 2003; Mercier, 2003) for a review of the most popular clustering approaches used 
+in computational chemistry]. In this study, we have employed the Sequential Agglomerative 
+Hierarchical Non-overlapping (SAHN) method implemented in the <rs id="software-16" type="software">ISIDA/Cluster</rs> program 
+(<rs corresp="#software-16" type="url">http://infochim.u-strasbg.fr.</rs>) (Varnek et al., 2007). Briefly, each compound represents one 
+cluster at the start. Then, the m compounds are merged iteratively into clusters using their 
+pairwise Euclidean distances stored in a squared (m * m) symmetric distance matrix. The 
+two closest objects (molecules or clusters) are iteratively identified and merged to form a 
+new cluster, the distance matrix being updated with the re-computed distances separating the 
+newly formed cluster and the others, according to the user-specified type of linkage </p>
+
+<p>Alves et al. 
+Page 4 </p>
+
+<p>Toxicol Appl Pharmacol. Author manuscript; available in PMC 2016 April 15. </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>(complete linkage in this study). The process is repeated until one cluster remains. The 
+parent-child relationships between clusters result in a hierarchical data representation, or 
+dendrogram. In particular, we used <rs type="software">ISIDA/Cluster</rs> to obtain the heat map (see Results 
+section) of the proximity matrix. </p>
+
+<p>Dragon Descriptors-The following types of descriptors were generated using <rs id="software-1" type="software">Dragon 
+software</rs> (<rs corresp="#software-1" type="version-number">v.5.5.</rs>, <rs corresp="#software-1" type="creator">Talete SRL, Milan, Italy</rs>): 0D constitutional (atom and group counts), 1D 
+functional groups, 1D atom-centered fragments, 2D topological descriptors, 2D walk and 
+path counts, 2D autocorrelations, 2D connectivity indices, 2D information indices, 2D 
+topological charge indices, 2D eigenvalue-based indices, 2D topological descriptors, 2D 
+edge-adjacency indices, 2D Burden eigenvalues, 2D binary fingerprints, 2D frequency 
+fingerprints, and molecular properties. The detailed discussion for these descriptors can be 
+found elsewhere (Todeschini and Consonni, 2000). </p>
+
+<p>SiRMS Descriptors-2D Simplex Representation of Molecular Structure (SiRMS) 
+descriptors (Muratov et al., 2010) (representing numbers of unique tetratomic fragments 
+with fixed composition and topological structure) were generated by the <rs type="software">HiT QSAR</rs> 
+software (Kuz'min et al., 2008). At the 2D level, the connectivity of atoms in a simplex, 
+atom type, and bond nature (single, double, triple, or aromatic) have been considered. 
+SiRMS descriptors account not only for the atom type, but also for other atomic 
+characteristics that may impact biological activity of molecules, e.g., partial charge, 
+lipophilicity, refraction, and an atom ability for being a donor/acceptor in hydrogen-bond 
+formation (H-bond). For atom characteristics with continuous values (charge, lipophilicity, 
+and refraction) the division of the entire value range into definite discrete groups has been 
+carried out. The atoms have been divided into four groups corresponding to their (i) partial 
+charge A≤−0.05&lt;B≤0&lt;C≤0.05&lt;D, (ii) lipophilicity A≤−0.5&lt;B≤0&lt;C≤0.5&lt;D, and (iii) 
+refraction A≤1.5&lt;B≤3&lt;C≤8&lt;D. For H-bond characteristic, the atoms have been divided into 
+three groups: A (acceptor of hydrogen in H-bond), D (donor of hydrogen in H-bond), and I 
+(indifferent atom). The usage of sundry variants of differentiation of simplex vertexes 
+(atoms) represents the principal feature of the SiRMS approach (Kuz'min et al., 2007). 
+Detailed description of <rs type="software">HiT QSAR</rs> and SiRMS can be found elsewhere (Kuz'min et al., 
+2008; Muratov et al., 2010). </p>
+
+<p>QSAR modeling-The QSAR modeling workflow used in this study includes three major 
+steps (Tropsha and Golbraikh, 2007; Tropsha, 2010): (i) data curation/preparation/analysis 
+(selection of compounds and descriptors), (ii) model building, and (iii) model validation/ 
+selection. Here we followed a 5-fold external cross-validation procedure: the full set of 
+compounds with known experimental activity is randomly divided into five subsets of equal 
+size; then one of these subsets (20% of all compounds) is set aside as an external validation 
+set and the remaining four sets together form the modeling set (80% of the full set). This 
+procedure is repeated five times allowing each of the five subsets to be used as external 
+validation set. Models are built using the modeling set only, and it is important to emphasize 
+that the compounds in corresponding external set (fold) are never employed either to build 
+and/or select the models. Each modeling set is divided into many internal training and test 
+sets; then models are built using compounds of each training set and applied to test set </p>
+
+<p>Alves et al. </p>
+
+<p>
+Toxicol Appl Pharmacol. Author manuscript; available in PMC 2016 April 15. </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>compounds to assess their properties. The statistical metrics used to assess different aspects 
+of model performance are available in the Supplementary Materials. </p>
+
+<p>Best models were identified and selected according to acceptable threshold values (&gt; 0.6) of </p>
+
+<p>for the internal test sets (called out-of-bag set in Random Forest, vide infra). Then, 
+selected models were applied to the external set compounds to predict their skin 
+sensitization potential. This procedure was repeated five times to ensure that every 
+compound was present once and only once in the corresponding external test set. Since the 
+accuracy of each model is estimated only based on external set compounds, which are never 
+used to derive, bias, or select models, this protocol ensures an objective estimation of the 
+true external predictivity of the models. In addition, 1,000 rounds of Y-randomization were 
+performed for each dataset to assure that the high accuracy of the models built with real data 
+was not due to chance correlations. </p>
+
+<p>Random Forest-Random Forest models were constructed according to the original RF 
+algorithm (Breiman, 2001) using the <rs id="software-15" type="software">CF software</rs> <rs corresp="#software-15" type="version-number">version 2.12</rs> (Polishchuk et al., 2009). RF 
+is an ensemble of single decision trees. Outputs of all trees are aggregated to obtain one final 
+prediction. Each tree is grown as follows: (i) a bootstrap sample is produced from the whole 
+set of N compounds to form a training set for the current tree. Compounds that are not in the 
+training set of the current tree are placed in the out-of-bag (OOB) set (size of ~ N/3); (ii) the 
+best split by CART algorithm (Breiman et al., 1984) among the m randomly selected 
+descriptors from the entire pool in each node is chosen; (iii) each tree is then grown to the 
+largest possible extent; there is no pruning. The predicted classification values are defined 
+by majority voting for one of the classes. Thus, each tree predicts values for only those 
+compounds that are not included in the training set of that tree (for OOB set only). Since RF 
+possesses its own reliable statistical characteristics (based on OOB set prediction) which 
+could be used for validation and model selection, no cross-validation was performed 
+(Breiman, 2001). Thus, the final model is chosen by the lowest error for prediction of the 
+OOB set. The local (tree) applicability domain approach (Artemenko et al., 2011) was used 
+for all RF models developed in this study. </p>
+
+<p>DERMWIN-The <rs type="software">Dermal Permeability Coefficient Program (DERMWIN</rs>) is a module 
+available in the EPI Suite package developed by the EPA's Office of Pollution Prevention 
+Toxics and Syracuse Research Corporation and available at http://www.epa.gov/oppt/ 
+exposure/pubs/episuitedl.htm. The <rs id="software-0" type="software">DERMWIN</rs> <rs corresp="#software-0" type="version-number">v.2.02</rs> estimates chemicals' dermal 
+permeability coefficient using the following equation 1 (USEPA, 2004): </p>
+
+<p>(1) </p>
+
+<p>where K o/w is the octanol/water partition coefficient and MW is the molecular weight of the 
+chemical. Human skin permeability dataset (dataset D) was imported to <rs type="software">DERMWIN</rs> as 
+SMILES strings, and logKp was calculated and compared to the predictions of our models. </p>
+
+<p>Alves et al. 
+Page 6 </p>
+
+<p>Toxicol Appl Pharmacol. Author manuscript; available in PMC 2016 April 15. </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>RESULTS </p>
+
+<p>Relationship between human and rodent skin permeability coefficients </p>
+
+<p>First, we searched for the subset of chemicals that had both human and rodent skin 
+permeability data available to verify whether we could increase the dataset size by merging 
+these data. We found 34 compounds that have both human and rodent experimental data. As 
+is obvious from Figure 1, the correlation between human and rodent data was not high 
+enough to merge these datasets. </p>
+
+<p>A linear regression of the logKp values yielded R 2 =0.44 only. Therefore, we decided that 
+the data for humans and rodents were definitely not compatible and built species-specific 
+QSAR models. Human-based and rodent-based QSAR models for skin permeability were 
+developed using the same protocol used for skin sensitization as described in the companion 
+paper (Alves et al., 2014). The results (Table 1) suggest that continuous models for both 
+datasets afforded high predictive accuracy as estimated by Q 2 ext values. However, the 
+quality and coverage of human-based models 12 and 14 were higher than the same 
+characteristics of the best rodent-based model 21. Thus, models 12 and 14 were retained for 
+in silico screening of chemical libraries of concern to identify potential human skin 
+sensitizers. Additional statistical characteristics of the models are present in Supplementary 
+Materials (Table S2). </p>
+
+<p>Relationship between skin sensitization and permeability </p>
+
+<p>We have explored whether there are intrinsic relationships between skin sensitization and 
+skin permeability of chemicals. Since rodent data did not correlate well with human data, 
+only human skin permeability data were employed for this analysis. We identified a subset 
+of 20 compounds for which both skin sensitization and skin permeability data were known. 
+These experimental data were compiled from several studies (Chauhan and Shakya, 2010; 
+ICCVAM, 2009; Jaworska et al., 2011). As shown in Table 2, there is no direct relationship 
+between the two endpoints. The ranges of logKp values for sensitizers (logKp = −3.62 -
+−1.28) vs. non-sensitizers (logKp = −3.05 -−1.6) confirm this finding. For instance, five 
+non-sensitizers have low permeability coefficient while logKp values for two other non-
+sensitizers are high. There is a common understanding that a chemical should penetrate the 
+skin to cause sensitization (penetration is generally regarded as the first step in the skin 
+sensitization AOP (Karlberg et al., 2008; OECD, 2012)). However, we found examples 
+when a relatively weak penetrant can still be a strong sensitizer (e.g., p-Phenylenediamine, 
+logKp = −3.62), whereas a strong penetrant, can be a non-sensitizer (e.g., octanoic acid, 
+logKp = −1.60). This observation suggests that skin permeability and skin sensitization are 
+generally decoupled processes and therefore it may be possible to modify chemicals such as 
+to affect permeability without affecting sensitization, and vice versa. </p>
+
+<p>Cluster analysis of human skin permeability dataset </p>
+
+<p>We have performed a cluster analysis of the human skin permeability set (dataset D) 
+following the same method used for the skin sensitization dataset A (part I in (Alves et al., 
+2014)). Due to the poor concordance between human and rodent data, and a heightened 
+interest in human skin permeability data, this analysis was only conducted using dataset D. </p>
+
+<p>Alves et al. 
+Page 7 </p>
+
+<p>Toxicol Appl Pharmacol. Author manuscript; available in PMC 2016 April 15. </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>As illustrated in Figure 2, the dendrogram for the dataset D is not as extensive as for skin 
+sensitization dataset A (Alves et al., 2014), i.e., compounds in the skin penetration dataset D 
+are more structurally similar than those in the skin sensitization dataset A. Short-chain 
+alcohols have similar logKp values (ca. −3.0) except for ethylene glycol (logKp = −4.07). 
+For glycol ethers with short carbon chains (cluster b in Figure 2), the decrease of 
+permeability is likely related to the chain length (2-(2-methoxyethoxy)ethanol (logKp= 
+−3.69) &lt; 2-(2-ethoxyethoxy)ethanol (logKp= −3.88) &lt; 2-(2-butoxyethoxy)ethanol) (logKp= 
+−4.45). To confirm this tendency, we have calculated permeability for two additional glycol 
+ethers. We found that 2-(2-propoxyethoxy)ethanol (logKp pred = −4.05), which had an 
+logKppred intermediary between 2-(2-ethoxyethoxy)ethanol and 2-(2-butoxyethoxy)ethanol, 
+followed the trend but our predictions indicated a slight increase in permeability for 2-(2-
+(pentyloxy)ethoxy)ethanol (logKp pred = −3.95). Then, with further increase of the chain 
+length, this effect reached saturation resulting in a highly similar permeability for the next 
+three compounds: 2-(2-(hexyloxy)ethoxy)ethanol (logKp pred = −3.88), 2-(2-
+(heptyloxy)ethoxy)ethanol (logKp pred = −3.87), and 2-(2-(octyloxy)ethoxy)ethanol 
+(logKp pred −3.89). Two compounds, 2-(2-(nonyloxy)ethoxy)ethanol and 2-(2-
+(decyloxy)ethoxy)ethanol were outside of the AD for the consensus model 5. </p>
+
+<p>As a result of cluster analysis, we found three compounds that had different activity 
+annotations from the rest of the cluster members and were therefore suspicious. These 
+compounds included a barbiturate (amylobarbital) and two steroid derivatives of 
+hydrocortisone (hydrocortisone methylsuccinate, and hydrocortisone succinamate). Our 
+procedure for evaluating suspicious compounds was based on the permeability prediction for 
+these compounds using developed models and a search for additional experimental data to 
+verify their human skin permeability coefficients. Unfortunately, we were unable to find any 
+confirmatory data in the literature to prove or refute the values of permeability coefficients 
+for these substances. According to our consensus model 5, amylobarbital had a predicted 
+logKp = −3.56 (experimental logKp= −2.64) similar to other barbitals: barbital (logKp = 
+−3.95), phenobarbital (logKp = −3.34), and butobarbital (logKp = −3.71), which made us 
+less confident in the accuracy of the reported permeability of this compound. Within steroids 
+(cluster c in Figure 2), progesterone was the strongest penetrant (logKp = −1.89), whereas 
+the addition of one hydroxyl group in position 17 of the steroid scaffold significantly 
+decreased the permeability (hydroxyprogesterone logKp = −3.22). The hydroxyl group in 
+position 17 appears to be bad for steroid permeability, since testosterone (logKp = −3.40) 
+contains the hydroxyl group but lacks the ethoxy group. We removed both hydroxyl and 
+ethoxy group from position 17, and the resulting compound, 3-oxo-delta4-steroid, had a 
+predicted logKp pred = −2.28; adding a methyl group to the same position resulted in a 
+logKp pred = −2.28, which was higher than the permeability of hydroxyprogesterone and 
+testosterone, but lower than that of progesterone. </p>
+
+<p>The presence of other substituents and positions of double bonds seemed to be less 
+important. The effects of the substituent in position 21 on compound permeability seem to 
+depend on its size: it decreases when a methyl substituent (methylsuccinate; logKp = −3.68) 
+is replaced by a larger group (succinamate substituent; logKp = −4.59) but dramatically 
+increases as shown in the four hydrocortisone derivatives (hydrocortisone hexanoate, </p>
+
+<p>Alves et al. 
+Page 8 </p>
+
+<p>Toxicol Appl Pharmacol. Author manuscript; available in PMC 2016 April 15. </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>hydrocortisone octanoate, hydrocortisone methylpimelate, and hydrocortisone 
+hemipimelate) that have a long chain in this position (see Table S4). In the beginning of the 
+homological series of compounds, the permeability of carboxylic acids (cluster a in Figure 
+2) increased proportionally to the length of the hydrocarbon chain, i.e., acetic acid (logKp = 
+−3.21) &lt; propionic acid (logKp = −2.74) &lt; butanoic acid (logKp = −2.90) &lt; pentanoic acid 
+(logKp = −2.70) &lt; hexanoic acid (logKp = −1.85) &lt; heptanoic acid (logKp = −1.70) &lt; 
+octanoic acid (logKp = −1.60). Then, similarly to glycol ethers from cluster b, the effect 
+reached saturation and predicted logKp values for five next carboxylic acids became very 
+similar: nonanoic acid (logKp pred = −1.68), decanoic acid (logKp pred = −1.68), undecanoic 
+acid (logKp pred = −1.71), dodecanoic acid (logKp pred = −1.82), and tridecanoic acid 
+(logKp pred = −1.84). </p>
+
+<p>QSAR modeling of skin permeability </p>
+
+<p>We have employed a dataset (Chauhan and Shakya, 2010) comprising 211 compounds 
+(dataset D). Several structural duplicates were identified during the curation process. The 
+complete list of 17 duplicate pairs and two sets of triplicates is shown in Table S3. Skin 
+permeability values for all pairs of duplicates were the same or almost the same. This 
+observation also means that the statistical performance of the models developed in an earlier 
+study (Chauhan and Shakya, 2010) may have been over-optimistic because, as shown 
+previously (Fourches et al., 2010), the presence of duplicates with identical activity 
+annotations in both training and test sets generally leads to an overestimation of the model's 
+predictivity. Here, we built species-specific QSAR models of skin permeability using the 
+same protocol used for the skin sensitization study (Alves et al., 2014). The results shown in 
+Table 1 suggest that continuous models with high accuracy for both datasets have been 
+generated; however, the quality and coverage of human-based models 12 and 14 were higher 
+than the same characteristics of rodent-based model 21. The former models have been 
+retained for in silico screening of chemical libraries. </p>
+
+<p>Comparison of developed QSAR models vs. DERMWIN permeability predictions </p>
+
+<p>The <rs type="software">DERMWIN</rs> module available as part of the EPI Suite software has been employed in 
+several recent studies (Fong and Tong, 2012; Fong et al., 2014; Zhang et al., 2013) for 
+evaluating skin permeability. For this reason, we decided to compare our models with that 
+implemented in this software. <rs type="software">DERMWIN</rs> uses a linear equation that relates the 
+permeability coefficient with the chemical's octanol/water partition coefficient and 
+molecular weight. However, statistical characteristics of this model suggested that this 
+correlation was not adequate to predict human permeability. Although our consensus model 
+12 had a lower coverage of chemical space than <rs type="software">DERMWIN</rs> (77% vs. 100%), it 
+significantly outperformed DERMWIN in predictivity (Q 2 ext = 72% vs. 43%, respectively) 
+(see Table 1). When the AD restriction was removed and the predictive accuracy of the 
+models was evaluated using the same set of compounds (143 compounds), the comparison 
+was in favor of our model (Q 2 ext = 71% vs. 66%, respectively) (see Table 3). </p>
+
+<p>Alves et al. 
+Page 9 </p>
+
+<p>Toxicol Appl Pharmacol. Author manuscript; available in PMC 2016 April 15. </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>DISCUSSION </p>
+
+<p>Can rodent skin permeability data be used to predict human permeability? </p>
+
+<p>As presented in the Results section, we found 34 compounds that had experimental 
+permeability coefficient data for both human and rodents. Although the overall correlation 
+between skin permeability measured in these two species was not high, we wished to 
+determine whether the model obtained on rodent dataset E could be used to predict skin 
+permeability in humans. Virtual screening of the human dataset D using the model 
+developed with the rodent data resulted in a reasonably high predictivity (Q 2 ext = 0.77, 
+RMSE = 1.27) but only for a very small fraction (19%) of compounds. Based on these 
+results, one can assume that the rodent model could be used for predicting human skin 
+permeability for at least some compounds within the conservative AD, but this observation 
+should be considered with caution since it does not hold true for a larger data set. Additional 
+experimental results for greater number of compounds are needed for more definitive 
+conclusions. </p>
+
+<p>Relationships between skin sensitization potential and skin permeability based on 
+computed data </p>
+
+<p>Given the small number of compounds with known experimental values of both skin 
+sensitization and permeability, we decided to apply our selected QSAR models to cross-
+predict these properties. The use of QSAR-imputed permeability and sensitization data 
+allowed us to examine the possible relationships between the two endpoints for a much 
+larger set of compounds. Skin sensitization model 5 (see the companion paper (Alves et al., 
+2014)) was used for predicting skin sensitization for 186 compounds in the human skin 
+permeability dataset (D), whereas skin permeability model 5 (Table 1) was used for 
+calculating permeability coefficients for 387 compounds in the skin sensitization dataset 
+retrieved from ICCVAM (254 compounds from dataset A + 133 sensitizers from dataset B) 
+(see (Alves et al., 2014)). Then, we combined all predictions for compounds with 
+unavailable experimental data (see Table S5). Compounds outside of AD either for model 5 
+or 12 were removed from the analysis. In the end, 283 compounds that had information 
+(experimental or predicted) for both endpoints were considered for the analysis. As one can 
+see in Figure S1, all but one of the weakest penetrants (logKp &lt; −5) were non-sensitizers. 
+The only exception was 1-dodecyl glycidyl ether, which could have been mispredicted by 
+model 5. It was hypothesized recently that compound accumulation in the skin is 
+contributing more significantly to skin sensitization than its actual permeability through the 
+skin layer (Jaworska et al., 2013). Our results (see Figure S1) show that easily-penetrating 
+compounds may be both sensitizers and non-sensitizers. For compounds with low 
+permeability we made the same observation. These findings re-confirm the absence of the 
+global correlation between skin permeability and sensitization. </p>
+
+<p>Aforementioned results contradict a common view of skin permeation as the first step in the 
+adverse outcome pathway leading to skin sensitization (OECD, 2012). To investigate 
+whether the concordance between skin sensitization and permeability could be confined to 
+certain chemical classes, we have performed a cluster analysis for the entire dataset of 283 
+compounds with imputed data. Careful analysis of the relationships between the two </p>
+
+<p>Alves et al. 
+Page 10 </p>
+
+<p>Toxicol Appl Pharmacol. Author manuscript; available in PMC 2016 April 15. </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>endpoints within clusters of structurally similar compounds showed that the observation 
+linking the high permeability and skin sensitization potential could be made only for one 
+cluster out of 34. This specific Cluster 1 is formed by 11 compounds represented by four 
+barbitals (barbital, amylobarbital, butobarbital, and phenobarbital) and seven other drugs 
+(scopolamine, ibuprofen, atropine, griseofulvin, cyclamen aldehyde, p-tert-butyl-alpha-
+ethyl-hydrocinnamal, and sodium-3,3,5-trimethyl-benzenesulfonate). The comparison 
+between permeability and sensitization for compounds in this cluster is shown in Figure S2 
+and Table S6. The analysis revealed that seven compounds are associated with logKp &lt; −2.5 
+and are non-sensitizers, whereas the four other compounds with logKp &gt; −2.5 are 
+sensitizers. </p>
+
+<p>No distinct trend could be observed for the remaining clusters. Although, as noticed above, 
+skin permeability is widely considered to be mechanistically implicated in skin sensitization, 
+we have found no evidence that high permeability implies high skin sensitization potency 
+and vice versa. Some other authors reached the same conclusions. For instance, the analysis 
+of mechanism-based QSARs demonstrates no role for skin permeability in determining 
+potency (Roberts and Aptula, 2008). Similarly, in another recent study (Jaworska et al., 
+2013) the authors hypothesizes that the accumulation of a chemical in the epidermis layer of 
+the skin is much more related to the skin sensitization than the actual penetration properties. 
+In another study (Roberts and Patlewicz, 2010), it was hypothesized that skin sensitizers 
+reach the viable epidermis by-passing skin permeability route via shunt pathways, since bad 
+penetrants have shown to be sensitizers when applied by intradermal injection. </p>
+
+<p>Another important benefit of this cheminformatics analysis is the use of structural rules 
+established from the interpretation of developed QSAR models, SAR and cluster analysis, in 
+order to design new compounds with improved permeability and sensitization 
+characteristics. We illustrated this approach using an example of putative stepwise structural 
+optimization for permeability of pentanoic acid, considering experimental data and 
+predictions using developed models (Figure 3). Starting from this compound with a 
+relatively low permeability (logKp = −2.7), several transformation steps can increase its 
+permeability more than 10-fold and convert it to n-heptanol (logKp = −1.50). n-heptanol is 
+predicted as a sensitizer (which is confirmed by its Material Safety Data Sheet (OXEA, 
+2013) but it can be transformed to octanoic acid that has a similar permeability (logKp = 
+−1.60) as n-heptanol but lacks its sensitization potential. </p>
+
+<p>CONCLUSIONS </p>
+
+<p>We have compiled, curated, and integrated the largest publicly available datasets of skin 
+permeability for diverse chemicals. The analysis of the experimental data for compounds 
+containing both skin sensitization and permeability data indicated that, with a few 
+exceptions, there is no overall concordance between these two endpoints, i.e., weak 
+penetrants could be strong sensitizers and vice versa. Although sensitizers have to penetrate 
+the skin layer, the permeability coefficient is not a determinant of the skin sensitization 
+potential. Cluster analysis also helped us to highlight the high consistency of experimental 
+Kp data reported in the literature. </p>
+
+<p>Alves et al. 
+Page 11 </p>
+
+<p>Toxicol Appl Pharmacol. Author manuscript; available in PMC 2016 April 15. </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>We have built statistically significant and externally predictive QSAR models of skin 
+permeability that can be used to predict the permeability of untested compounds through the 
+skin. Comparison of the developed consensus model with <rs type="software">DERMWIN</rs> software showed that 
+our model significantly outperformed DERMWIN in predictivity (Q 2 ext = 72% and 43%, 
+respectively) but at the expense of some lost in coverage (77% vs. 100%); when applied to 
+the same set of compounds as used for DERMWIN (ignoring the AD for our models) the 
+performance of our model is still higher (Q 2 ext = 71% vs. 66%). The compiled datasets and 
+all the models developed in this study have been made publicly available at the Chembench 
+Web Portal (http://chembench.mml.unc.edu). </p>
+
+<p>The use of skin permeability and sensitization values imputed by our QSAR models allowed 
+us to examine the relationships between these two endpoints utilizing a significantly 
+expanded set consisting of 283 compounds. The results indicated that there is still no overall 
+concordance between these endpoints. This phenomenon could be explained by attributing 
+higher impact to compound accumulation in the skin on sensitization potential, rather than 
+permeability through the skin layer. Further investigation into this observation would be 
+facilitated via building predictive models of compound accumulation in the skin, and 
+incorporating considerations of protein binding and reactivity. </p>
+
+<p>In conclusion, the skin permeability models developed in this study could be useful for risk 
+assessment purposes in addition to the assessment of skin sensitization; for instance, the 
+knowledge how much of an applied dose will penetrate the skin may be helpful to estimate 
+systemic exposure to topically applied chemicals. Moreover, the lack of correlation between 
+skin permeability and skin sensitization established in this study suggests a possibility of 
+rational design of compounds with the desired high permeability but low skin sensitization 
+potential that may be of value to the cosmetics industry. </p>
+
+<p>Supplementary Material </p>
+
+<p>Refer to Web version on PubMed Central for supplementary material. </p>
+
+<p>ACKNOWLEDGEMENTS </p>
+
+<p>This study was supported in part by NIH (grants GM66940 and GM096967), EPA (grant RD 83499901), and 
+FAPEG (grant 201310267001095). A.T. acknowledges partial support from Russian Scientific Foundation (project 
+14-43-00024). E.M. acknowledges partial support from STCU (Grant P407) E.M, V.A., and C.H.A acknowledge 
+partial support from CNPq (PVE, Grant 400760/2014-2). V.A. thanks CNPq and Science without Borders program 
+for the financial support of his visit to the University of North Carolina at Chapel Hill. N.K. and J.S. are supported 
+by the NIEHS contract N01-ES 35504 and the Intramural Research Program of the NIEHS. This article may be the 
+work product of an employee or group of employees of the NIEHS, NIH, or other organizations; however, the 
+statements, opinions, or conclusions contained therein do not necessarily represent the statements, opinions, or 
+conclusions of NIEHS, NIH, the United States government, or other organizations. The use of commercial product 
+names is for comparative purposes only and does not constitute endorsement by any of the authors, organizations, 
+or agencies. </p>
+
+<p>ABBREVIATIONS </p>
+
+<p>AD 
+Applicability domain </p>
+
+<p>AOP 
+Adverse outcome pathway </p>
+
+<p>Alves et al. 
+Page 12 </p>
+
+<p>Toxicol Appl Pharmacol. Author manuscript; available in PMC 2016 April 15. </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>ICCVAM </p>
+
+<p>Interagency Coordinating Committee on the Validation of Alternative 
+Methods </p>
+
+<p>Kp 
+Permeability coefficient </p>
+
+<p>LLNA 
+Local lymph node assay </p>
+
+<p>LU 
+Logarithmic unit </p>
+
+<p>MAE 
+Mean absolute error </p>
+
+<p>OECD 
+Organization for Economic Co-operation and Development </p>
+
+<p>(Q)SAR 
+(Quantitative) structure-activity relationship </p>
+
+<p>RMSE 
+Root mean squared error </p>
+
+<p>REFERENCES </p>
+
+<p>Abraham MH, Chadha HS, Martins F, Mitchell RC, Bradbury MW, Gratton JA. Hydrogen bonding 
+part 46: a review of the correlation and prediction of transport properties by an lfer method: 
+physicochemical properties, brain penetration and skin permeability. Pestic. Sci. 1999; 55:78-88. 
+Alves VM, Muratov EN, Fourches D, Strickland J, Kleinstreuer N, Andrade CH, Tropsha A. 
+Predicting chemically-induced skin reactions. Part I: QSAR models of skin sensitization and their 
+application to identify potentially hazardous compounds. Toxicol. Appl. Pharmacol. 2014 
+Submitted. 
+Artemenko AG, Muratov EN, Kuz'min VE, Muratov NN, Varlamova EV, Kuz'mina AV, Gorb LG, 
+Golius A, Hill FC, Leszczynski J, Tropsha A. QSAR analysis of the toxicity of nitroaromatics in 
+Tetrahymena pyriformis: structural factors and possible modes of action. SAR QSAR Environ. Res. 
+2011; 22:575-601. [PubMed: 21714735] 
+Barratt MD. Quantitative structure-activity relationships for skin permeability. Toxicol. In Vitro. 1995; 
+9:27-37. [PubMed: 20650060] 
+Berge W. A simple dermal absorption model: derivation and application. Chemosphere. 2009; 
+75:1440-1445. [PubMed: 19304310] 
+Breiman, L.; Friedman, JH.; Olshen, RA.; Stone, CJ. Classification and Regression Trees. Belmont: 
+Wadsworth Publishing; 1984. 
+Breiman LEO. Random Forests. Mach. Learn. 2001; 45:5-32. 
+Brown MB, Lau C-H, Lim ST, Sun Y, Davey N, Moss GP, Yoo S-H, De Muynck C. An evaluation of 
+the potential of linear and nonlinear skin permeation models for the prediction of experimentally 
+measured percutaneous drug absorption. J. Pharm. Pharmacol. 2012; 64:566-577. [PubMed: 
+22420662] 
+Chauhan P, Shakya M. Role of physicochemical properties in the estimation of skin permeability: in 
+vitro data assessment by Partial Least-Squares Regression. SAR QSAR Environ. Res. 2010; 
+21:481-494. [PubMed: 20818583] 
+Chen L, Han L, Lian G. Recent advances in predicting skin permeability of hydrophilic solutes. Adv. 
+Drug Deliv. Rev. 2013; 65:295-305. [PubMed: 22580335] 
+Chen L, Lian G, Han L. Modeling transdermal permeation. Part I. Predicting skin permeability of both 
+hydrophobic and hydrophilic solutes. AIChE J. 2010; 56:1136-1146. 
+Chen LL, Lian GG, Han LL. Prediction of human skin permeability using artificial neural network 
+(ANN) modeling. Acta Pharmacol. Sin. 2007; 28:591-600. [PubMed: 17376301] 
+Cronin MT, Dearden JC, Moss GP, Murray-Dickson G. Investigation of the mechanism of flux across 
+human skin in vitro by quantitative structure-permeability relationships. Eur. J. Pharm. Sci. 1999; 
+7:325-330. [PubMed: 9971916] </p>
+
+<p>Alves et al. 
+Page 13 </p>
+
+<p>Toxicol Appl Pharmacol. Author manuscript; available in PMC 2016 April 15. </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+
+
+<p>Alves et al. 
+Page 14 </p>
+
+<p>Toxicol Appl Pharmacol. Author manuscript; available in PMC 2016 April 15. </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+
+
+<p>Alves et al. </p>
+
+<p>
+Toxicol Appl Pharmacol. Author manuscript; available in PMC 2016 April 15. </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Highlights </p>
+
+<p>• We compiled the largest publicly-available skin permeability dataset. </p>
+
+<p>• Predictive QSAR models were developed for skin permeability. </p>
+
+<p>• No concordance between skin sensitization and skin permeability has been 
+found. </p>
+
+<p>• Structural rules for optimizing sensitization and penetration were established. </p>
+
+<p>Alves et al. 
+Page 16 </p>
+
+<p>Toxicol Appl Pharmacol. Author manuscript; available in PMC 2016 April 15. </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Figure 1. </p>
+
+<p>Human vs. rodent skin permeability correlation (R 2 = 0.44, logKp Human = 0.72*logKp Rodent 
+− 1.17). </p>
+
+<p>Alves et al. 
+Page 17 </p>
+
+<p>Toxicol Appl Pharmacol. Author manuscript; available in PMC 2016 April 15. </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Figure 2. </p>
+
+<p>Cluster analysis of the human skin permeability dataset D: dendrogram and heat map of the 
+distance matrix ordered based on structural similarity (blue/violet = similar; yellow/red = 
+dissimilar). The following clusters are noted: (a) carboxylic acids, (b) glycol ethers, and (c) 
+steroids. </p>
+
+<p>Alves et al. 
+Page 18 </p>
+
+<p>Toxicol Appl Pharmacol. Author manuscript; available in PMC 2016 April 15. </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Figure 3. </p>
+
+<p>Example of a structural transformation of sensitizer n-octanol with low permeability to non-
+sensitizer octanoic acid with improved permeability. Desired change of property is 
+highlighted by green, undesired -by red; Δ = logKp parent − logKp child . </p>
+
+<p>Alves et al. 
+Page 19 </p>
+
+<p>Toxicol Appl Pharmacol. Author manuscript; available in PMC 2016 April 15. </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Alves et al. 
+Page 20 </p>
+
+<p>Table 1 </p>
+
+<p>Statistical characteristics of QSAR models for skin permeability assessed by 5-fold external cross-validation. </p>
+
+<p>Models </p>
+
+<p>Q 2 </p>
+
+<p>ext </p>
+
+<p>RMSE MAE Coverage </p>
+
+<p>HUMAN 
+Model 1 -SiRMS </p>
+
+<p>0.69 </p>
+
+<p>0.52 </p>
+
+<p>0.40 </p>
+
+<p>0.72 </p>
+
+<p>Model 2 -SiRMS no AD * </p>
+
+<p>0.50 </p>
+
+<p>0.73 </p>
+
+<p>0.53 </p>
+
+<p>1.00 </p>
+
+<p>Model 3 -Dragon </p>
+
+<p>0.73 </p>
+
+<p>0.46 </p>
+
+<p>0.35 </p>
+
+<p>0.68 </p>
+
+<p>Model 4 -Dragon no AD * </p>
+
+<p>0.55 </p>
+
+<p>0.70 </p>
+
+<p>0.49 </p>
+
+<p>1.00 </p>
+
+<p>Model 5 -Consensus </p>
+
+<p>0.72 </p>
+
+<p>0.49 </p>
+
+<p>0.38 </p>
+
+<p>0.77 </p>
+
+<p>Model 6 -Consensus no AD * </p>
+
+<p>0.55 </p>
+
+<p>0.69 </p>
+
+<p>0.50 </p>
+
+<p>1.00 </p>
+
+<p>Model 7 -Consensus Rigor </p>
+
+<p>0.73 </p>
+
+<p>0.45 </p>
+
+<p>0.34 </p>
+
+<p>0.63 </p>
+
+<p>DERMWIN </p>
+
+<p>0.43 </p>
+
+<p>0.78 </p>
+
+<p>0.49 </p>
+
+<p>1.00 </p>
+
+<p>RODENT 
+Model 8 -SiRMS </p>
+
+<p>0.57 </p>
+
+<p>0.67 </p>
+
+<p>0.50 </p>
+
+<p>0.71 </p>
+
+<p>Model 9 -SiRMS no AD * </p>
+
+<p>0.35 </p>
+
+<p>0.82 </p>
+
+<p>0.61 </p>
+
+<p>1.00 </p>
+
+<p>Model 10 -Dragon </p>
+
+<p>0.33 </p>
+
+<p>0.75 </p>
+
+<p>0.56 </p>
+
+<p>0.69 </p>
+
+<p>Model 11 -Dragon no AD * </p>
+
+<p>0.32 </p>
+
+<p>0.84 </p>
+
+<p>0.63 </p>
+
+<p>1.00 </p>
+
+<p>Model 12 -Consensus </p>
+
+<p>0.41 </p>
+
+<p>0.77 </p>
+
+<p>0.56 </p>
+
+<p>0.86 </p>
+
+<p>Model 13 -Consensus no AD * </p>
+
+<p>0.38 </p>
+
+<p>0.80 </p>
+
+<p>0.61 </p>
+
+<p>1.00 </p>
+
+<p>Model 14 -Consensus Rigor </p>
+
+<p>0.61 </p>
+
+<p>0.58 </p>
+
+<p>0.43 </p>
+
+<p>0.53 </p>
+
+<p>Notes: Models 1 to 7: Human-based skin permeability models. Models 8 to 13: Rodent-based skin permeability models. RSME: root mean square error; MAE: mean absolute error </p>
+
+<p>* 
+Applicability Domain was not considered in these models. </p>
+
+<p>Toxicol Appl Pharmacol. Author manuscript; available in PMC 2016 April 15. </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Alves et al. 
+Page 21 </p>
+
+<p>Table 2 </p>
+
+<p>Comparison of experimental data on skin sensitization and human skin permeability </p>
+
+<p>Chemical compound 
+LLNA Result 
+logKp </p>
+
+<p>1,6-Hexanediol diglycidyl ether [1-3] Sensitizer (moderate) −3.87 </p>
+
+<p>Resorcinol [1-3] 
+Sensitizer (moderate) −3.62 </p>
+
+<p>p-Phenylenediamine [1-3] 
+Sensitizer (strong) 
+−3.62 </p>
+
+<p>2-Nitro-4-phenylenediamine [1-3] 
+Sensitizer (strong) 
+−3.30 </p>
+
+<p>Isopropyl alcohol [1-3] 
+Non-sensitizer 
+−3.05 </p>
+
+<p>Pyridine [1-3] 
+Sensitizer (weak) 
+−2.74 </p>
+
+<p>Clotrimazole [1-3] 
+Sensitizer (moderate) −2.70 </p>
+
+<p>Methyl acrylate [1-3] 
+Sensitizer (weak) 
+−2.68 </p>
+
+<p>Formaldehyde [1-3] 
+Sensitizer (strong) 
+−2.65 </p>
+
+<p>Aniline [1-3] 
+Sensitizer (weak) 
+−2.65 </p>
+
+<p>n-Butanol [1-3] 
+Non-sensitizer 
+−2.60 </p>
+
+<p>Methyl acrylic acid [1-3] 
+Sensitizer (weak) 
+−2.58 </p>
+
+<p>Ethyl acrylate [1-3] 
+Sensitizer (weak) 
+−2.39 </p>
+
+<p>Salicylic acid [1-3] 
+Non-sensitizer 
+−2.20 </p>
+
+<p>Coumarin [1-3] 
+Non-sensitizer 
+−2.04 </p>
+
+<p>Methyl 4-hydroxybenzoate [1-3] 
+Non-sensitizer 
+−2.04 </p>
+
+<p>Butyl acrylate [1-3] 
+Sensitizer (weak) 
+−2.00 </p>
+
+<p>Octanoic acid [1-3] 
+Non-sensitizer 
+−1.60 </p>
+
+<p>1-Naphthol [1-3] 
+Sensitizer (moderate) −1.55 </p>
+
+<p>n-Octanol [1, 2] 
+Sensitizer (moderate) −1.28 </p>
+
+<p>Notes: [1] (Chauhan and Shakya, 2010); [2] (ICCVAM, 2009); [3] (Jaworska et al., 2011); Kp: permeability coefficient. </p>
+
+<p>Toxicol Appl Pharmacol. Author manuscript; available in PMC 2016 April 15. </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Author Manuscript </p>
+
+<p>Alves et al. 
+Page 22 </p>
+
+<p>Table 3 </p>
+
+<p>Comparison of the performance of consensus QSAR model with that of DERMWIN on the set of 143 
+compounds. </p>
+
+<p>Models 
+Q 2 </p>
+
+<p>ext </p>
+
+<p>RMSE MAE </p>
+
+<p>Model 5 -Consensus 0.72 
+0.49 
+0.38 </p>
+
+<p>DERMWIN 
+0.66 
+0.53 
+0.37 </p>
+
+<p>Toxicol Appl Pharmacol. Author manuscript; available in PMC 2016 April 15. </p>
+
+</text></tei>

@@ -1,0 +1,353 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC2447807" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:27+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>ABSTRACT </p>
+
+<p>In plants, short RNAs including » 21-nt microRNA 
+(miRNA) and 21-nt trans-acting siRNA (ta-siRNA) 
+compose a 'miRNA ! ta-siRNA ! target gene' 
+cascade pathway that regulates gene expression at 
+the posttranscriptional level. In this cascade, bio-
+genesis of ta-siRNA clusters requires 21-nt intervals 
+(i.e. phasing) and miRNA (phase-initiator) cleavage 
+sites on its TAS transcript. Here, we report a novel 
+web server, <rs type="software">pssRNAMiner</rs>, which is developed to 
+identify both the clusters of phased small RNAs as 
+well as the potential phase-initiator. To detect 
+phased small RNA clusters, the <rs type="software">pssRNAMiner</rs> maps 
+input small RNAs against user-specified transcript/ 
+genomic sequences, and then identifies phased 
+small RNA clusters by evaluating P-values of hyper-
+geometric distribution. To identify potential phase-
+initiators, <rs type="software">pssRNAMiner</rs> aligns input phase-initiators 
+with transcripts of TAS candidates using the Smith-
+Waterman algorithm. Potential cleavage sites on TAS 
+candidates are further identified from complemen-
+tary regions by weighting the alignment expectation 
+and its distance to detected phased small RNA 
+clusters. The <rs id="software-7" type="software">pssRNAMiner</rs> web server is freely 
+available at <rs corresp="#software-7" type="url">http://bioinfo3.noble.org/pssRNAMiner/</rs>/. </p>
+
+<p>In plants, small regulatory RNAs including miRNAs, 
+heterochromatic siRNAs (hc-siRNAs), repeat-associated 
+siRNAs (ra-siRNAs), natural sense-antisense transcript 
+siRNAs and trans-acting siRNAs (ta-siRNAs) are 
+involved in regulating gene expression through various 
+mechanisms (1). Recent studies have demonstrated that 
+these various small RNA molecules, in combination with 
+cellular transcription factors, form the basis of network 
+responsible for regulating the cellular gene expression. 
+The ta-siRNA, a newly identified class of 21-nt short 
+siRNAs, play an essential role in bridging the miRNA and 
+siRNA pathways, which were previously believed to be </p>
+
+<p>two independent processes (2-5). Phase-initiators direct 
+the cleavage of ta-siRNA gene (TAS) primary transcripts 
+(precursors) and subsequently initiate the production 
+of ta-siRNA clusters (4). To date, only a few known 
+phase-initiators are ta-siRNAs as most of reported phase-
+initiators are miRNAs. Following cleavage of the pre-
+cursor, the 3 0 (or 5 0 )-cleavage products are converted into 
+double-stranded RNA (dsRNA) by RDR6 and SGS3. The 
+dsRNA is then processed into 21-nt increments, relative to 
+the original cleavage site on both strands, by DCL4 in 
+order to produce ta-siRNA clusters (3,4). The ta-siRNAs 
+form an essential component of the RISC complex 
+responsible for guiding AGO-dependent cleavage of the 
+target transcript. Based on these data, several researchers 
+have proposed a 'miRNA ! ta-siRNA ! target gene' 
+cleavage cascade as an element of gene regulatory network 
+in the model plant Arabidopsis (4-7). In this paper, we 
+describe the development of the <rs type="software">pssRNAMiner</rs>, a plant 
+short small RNA regulatory cascade analysis server that is 
+able to identify potential ta-siRNAs clusters and their 
+phase-initiators. 
+While miRNA biogenesis is dependent on the hairpin 
+structure of the precursor, the formation of siRNA 
+molecules occurs as a result of the processing of dsRNA 
+by RNA-dependent RNA polymerases (RDRs). There-
+fore, as compared to miRNA, there is no effective 
+computational approach to identify siRNAs from either 
+genomic or transcript sequence. Since 21-nt phased 
+ta-siRNAs are generated from TAS precursors, it is 
+possible to map known small RNA molecules to candidate 
+TAS precursors and then cluster these small RNAs based 
+on their 21-nt phase properties (8,9). By evaluating the 
+P-value of phase features, Chen et al. (6) identified and 
+validated a number of known, and several previously 
+unknown, ta-siRNA clusters as well as the associated TAS 
+gene loci in Arabidopsis. 
+TAS precursors require at least one valid cleavage site, 
+which is targeted by a phase-initiator to generate ta-
+siRNAs. While some TAS genes possess multiple regions 
+that are complementary with the phase-initiator, only 
+one region effectively guides cleavage in vivo. A 'two-hit 
+trigger' mechanism was recently proposed to correlate the 
+number of complementary regions with the activity of </p>
+
+<p>*To whom correspondence should be addressed. Tel: +1 580 224 6725; Fax: +1 580 224 6692; Email: pzhao@noble.org </p>
+
+<p>ß 2008 The Author(s) 
+This is an Open Access article distributed under the terms of the Creative Commons Attribution Non-Commercial License (http://creativecommons.org/licenses/ 
+by-nc/2.0/uk/) which permits unrestricted non-commercial use, distribution, and reproduction in any medium, provided the original work is properly cited. </p>
+
+<p>phased-initiators based on evidences from studies per-
+formed in moss and Arabidopsis (7). Therefore, it is 
+anticipated that analysis of both complementary regions 
+as well as valid cleavage sites in TAS candidate precursors 
+would facilitate screening of phased small RNA clusters. 
+In this study, we describe the development of 
+<rs type="software">pssRNAMiner</rs>, a web-based server which identifies 
+ta-siRNA clusters as well as their potential phase-
+initiators. This program requires that the user submit a 
+set of small RNAs and specify one of listed transcript/ 
+genomic libraries for mapping. To identify phase-
+initiators, the user must submit at least one small RNA 
+as candidate phase initiator. The <rs type="software">pssRNAMiner</rs> is able to 
+identify phased small RNA clusters as ta-siRNA candi-
+dates by evaluating the P-values of hypergeometric 
+distribution. Furthermore, <rs type="software">pssRNAMiner</rs> has the ability 
+to identify potential phase-initiators based on the user 
+input. To date, <rs type="software">pssRNAMiner</rs> hosts 29 transcript/ 
+genomic sequence libraries from 20 species. </p>
+
+<p>METHODS </p>
+
+<p>Detection of phased small RNA clusters </p>
+
+<p>The pssRNAMiner improves a previously described 
+method of evaluating the P-value of random hypergeo-
+metric distribution to detect phased small RNA clusters 
+(6). First, pssRNAMiner maps the input small RNAs on 
+transcript sequences and records each position. Then, as 
+described by Chen et al. (6), the algorithm slides on both 
+strands of the transcript sequence to search each mapped 
+small RNA and count the number of phased/nonphased 
+positions with small RNA hits in a 231 bp region 
+downstream of the 5 0 start site of the small RNA. 
+Equations (1) and (2), revised from Chen et al. (6), are 
+used to calculate the P-value of phased small RNA 
+clusters on the basis of a random hypergeometric 
+distribution. Since the cleavage of phased small RNAs 
+often occurs within 1-2 nt of the phased positions (8), we 
+introduced a variable, s, in Equation (1) to reflect this 
+shift. The addition of this variable will have the added 
+effect of reducing the total number of nonphased position 
+within the 231 bp region. </p>
+
+<p>PrðX ¼ kÞ ¼ </p>
+
+<p>400 À 21 Â 2 Â s 
+n À k </p>
+
+
+
+<p>21 
+k </p>
+
+
+
+<p>461 À 21 Â 2 Â s 
+n </p>
+
+
+
+<p>1 </p>
+
+<p>n: Number of total positions having small RNA hits in 
+231-bp region; 
+k: Number of phase positions having small RNA hits in 
+231-bp region; 
+s: Maximum allowed offset from phase position </p>
+
+<p>P-value : pðkÞ ¼ 
+X minðn, 21Þ </p>
+
+<p>X¼k </p>
+
+<p>PrðXÞ 
+2 </p>
+
+<p>Analysis of cleavage sites guided by phase-initiator </p>
+
+<p>In addition to detecting phased small RNA clusters, 
+pssRNAMiner has the ability to predict whether the input </p>
+
+<p>candidate phase-initiators have the potential to guide 
+the cleavage of TAS candidate precursors and trigger the 
+biogenesis of phased small RNA clusters identified in the 
+first step. 
+To perform this analysis, <rs type="software">pssRNAMiner</rs> first searches 
+the complementary regions between the phase-initiator 
+and TAS candidate precursor using the Smith-Waterman 
+algorithm (10). It then ranks the alignment of comple-
+mentary regions based on a scoring scheme described by 
+Zhang (11,12). Since the Smith-Waterman algorithm is 
+only able to identify the optimal alignment for each pair of 
+query/target sequences, an iterative algorithm has been 
+developed to obtain as many complementary regions as 
+possible. During each iteration, the identified complemen-
+tary region of the precursor sequences are masked by 
+'N' letters for the next iterative search until no further 
+complementary region(s) can be identified in a given 
+query/target sequence. 
+Next, the server identifies whether these complementary 
+regions have valid cleavage sites, which can result in the 
+production of phased small RNA clusters. We applied two 
+conditions in this analysis. First, the user-defined cleavage 
+site in the complementary region must be located within a 
+region calculated by ½B 1 À D,B 2 þ D, where B 1 , start 
+position of phased small RNA cluster on the TAS 
+precursor; B 2 , end position of phased small RNA cluster; 
+D, a user-specific maximum distance between cleavage site 
+and start site of small RNA cluster. Second, the distance 
+between the cleavage site and start site of the small RNA 
+cluster must meet the 21-nt phase property (i.e. multiples 
+of 21 nt). </p>
+
+<p>Architecture and implementation of <rs type="software">pssRNAMiner</rs> </p>
+
+<p>The <rs type="software">pssRNAMiner</rs> consists of two independent compo-
+nents, a backend pipeline that is responsible for directing 
+the core functions and a web server. The core functions, 
+which include the calculation of the P-value and analysis 
+of cleavage sites directed by the phase-initiator, are 
+performed by the backend pipeline written in <rs type="software">Java</rs> and 
+<rs type="software">PERL</rs>. To perform a search for complementary regions, 
+a third party software <rs type="software">ssearch</rs> has been used for Smith-
+Waterman alignment. The web server was developed on 
+top of a SQLite database. Scripts used to generate web 
+interfaces and search results were written in <rs type="software">PHP</rs>. </p>
+
+<p>USER INTERFACES </p>
+
+<p>To identify 21-nt phased small RNA clusters as ta-siRNA 
+candidates from the existing small RNA dataset, the user 
+is required to submit small RNA sequences in either a 
+simple sequence format or multi-FASTA format. The 
+pssRNAMiner is able to recognize small RNA sequences 
+between 17 and 28 nt in length but more readily identifies 
+sequences of 21 nt in length. In addition, the user needs 
+to specify a transcript/genomic library for mapping 
+(Figure 1a). Following submission, pssRNAMiner maps 
+each of the small RNAs onto the transcript/genomic 
+sequence and then, calculates a P-value, in order to 
+evaluate the potential phased small RNA cluster. The 
+pssRNAMiner lists the candidate clusters having P-values </p>
+
+<p>Nucleic Acids Research, 2008, Vol. 36, Web Server issue W115 </p>
+
+<p>lower than a user specified cutoff threshold (Figure 2a). 
+The list view page enables the use of a filtering/searching 
+function, in order to remove false positive clusters, such as 
+transposon or ribosomal RNAs. In addition, this function 
+enables the user to list only those clusters of interest by 
+filtering based on specific annotation keywords or IDs. 
+The users can further inspect the details of each cluster, 
+including phased/nonphased small RNA sequences, the 
+location of small RNAs on TAS candidate precursors, 
+functional annotation of TAS candidate and valid 
+cleavage site, etc. by clicking on the individual cluster 
+ID for a detailed view (Figure 2b and c). The users are able 
+to further check potential target sequences of these 
+detected ta-siRNA candidates by clicking 'search' at the 
+end of detailed view. 
+Based on user preferences, <rs type="software">pssRNAMiner</rs> can also 
+identify potential cleavage site guided by phase-initiator 
+on TAS candidate precursor. For <rs type="software">pssRNAMiner</rs> to per-
+form this function, it is necessary for the user to submit 
+potential phase-initiators in multi-FASTA format and 
+specify the maximum expectation for screening the 
+complementary region between the phase-initiators and 
+TAS candidate precursors. In addition, it is necessary for </p>
+
+<p>the user to specify the expected cleavage range in the 
+complementary region (generally between 9 and 11 nt on 
+miRNA sequence) (Figure 1b). After submission, the 
+server aligns input phase-initiators with TAS candidate 
+precursors to locate complementary regions. Next, the 
+server searches valid cleavage sites from the complemen-
+tary regions based on the distance between the cleavage 
+site and the phased small RNA clusters and output a web 
+page that lists clusters with cleavage site information 
+(Figure 2a-c). 
+To demonstrate the effectiveness of <rs type="software">pssRNAMiner</rs> and 
+to facilitate its use, we have integrated a number of 
+published small RNA datasets into pssRNAMiner. These 
+data can be found under the 'dataset' sub-menu. Each 
+dataset has been pre-run against their corresponding 
+transcript/genomic sequences, and therefore users may 
+click links on the right-hand column of dataset table to 
+view these precalculated results. </p>
+
+<p>PERFORMANCE </p>
+
+<p>Finally, to evaluate the performance of <rs type="software">pssRNAMiner</rs>, 
+we downloaded RDR small RNA MPSS libraries from the </p>
+
+<p>(a) </p>
+
+<p>(b) </p>
+
+<p>Figure 1. (a) Input interface for searching phased small RNA clusters. (b) Input interface for optional identification of phase-initiator for detected 
+small RNA clusters. </p>
+
+<p>W116 Nucleic Acids Research, 2008, Vol. 36, Web Server issue </p>
+
+<p>(a) </p>
+
+<p>(b) </p>
+
+<p>(c) </p>
+
+<p>Figure 2. (a) Output: list view of phased small RNA clusters with phase-initiator cleavage sites on TAS candidate. (b) Output: detailed view of a 
+specific phased small RNA clusters with phase-initiator cleavage sites on a TAS candidate. (c) Output: detailed view of the alignment of specific 
+phased small RNA clusters with phase-initiator cleavage sites on a TAS candidate. </p>
+
+<p>Nucleic Acids Research, 2008, Vol. 36, Web Server issue W117 </p>
+
+<p>Arabidopsis MPSS Plus database (http://mpss.udel.edu/ 
+at/) (13,14). A total of 11 767 distinct small RNA signa-
+tures were analyzed based on the Arabidopsis TAIR7 
+cDNA release (ftp://ftp.arabidopsis.org/home/tair/Genes/ 
+TAIR7_genome_release/). When these data were investi-
+gated, <rs type="software">pssRNAMiner</rs> detected 124 significantly phased 
+small RNA clusters (P &lt; 0.005) at 19 gene loci. Moreover, 
+pssRNAMiner detected all the reported ta-siRNA gene loci 
+with significant P-value, including TAS1a (AT2G27400), 
+TAS1b (AT1G50055), TAS1c (AT2G39675), TAS2 
+(AT2G39681), TAS3a (AT3G17185) and PPR proteins 
+(AT1G63080 and AT1G63130) (see Supplementary 
+Material for the list of detected phased RNA clusters and 
+gene loci). To investigate the ability of <rs type="software">pssRNAMiner</rs> to 
+identify valid cleavage site of phase-initiators, a reported 
+phase-initiator, miRNA 'ath-miR390', was submitted for 
+cleavage site analysis on TAS candidate precursors. The 
+pssRNAMiner reported two complementary regions 
+(expectation 5) with one region having a valid cleavage 
+site on TAS3a. These results are consistent with previously 
+published studies that demonstrated that the ath-miR390 
+initiates production of phased small RNA clusters on 
+TAS3a by guiding precursor cleavage (2,4) (see detailed 
+alignment in the Supplementary Material). </p>
+
+<p>SUPPLEMENTARY DATA </p>
+
+<p>Supplementary Data are available at NAR Online. </p>
+
+<p>ACKNOWLEDGEMENTS </p>
+
+<p>We are grateful to the members of our group, colleagues 
+and our external beta testers, especially Vikram Agarwal, 
+who have rigorously tested the <rs type="software">pssRNAMiner</rs> and 
+provided valuable feedback. Financial support for this 
+project and funding to pay the Open Access publication 
+charges for this article was provided by The Samuel 
+Roberts Noble Foundation. </p>
+
+<p>Conflict of interest statement. None declared. </p>
+
+
+
+<p>W118 Nucleic Acids Research, 2008, Vol. 36, Web Server issue </p>
+
+</text></tei>

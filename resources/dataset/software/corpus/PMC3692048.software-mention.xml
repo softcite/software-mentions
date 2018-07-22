@@ -1,0 +1,271 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC3692048" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:23+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p><rs id="software-22" type="software">DIANA-microT</rs><rs corresp="#software-22" type="version-number">v5.0</rs>ABSTRACT </p>
+
+<p>MicroRNAs (miRNAs) are small endogenous RNA 
+<rs id="software-27" type="software">DIANA-microT</rs><rs corresp="#software-27" type="url">http://www.microrna.gr/webServer</rs><rs id="software-13" type="software">DIANA-microT</rs><rs corresp="#software-13" type="version-number">v5.0</rs><rs id="software-8" type="software">Ensembl</rs><rs corresp="#software-8" type="version-number">version 69</rs>MicroRNAs (miRNAs) are small non-coding RNAs 
+($21-23 nt in length) that post-transcriptionally regulate 
+gene expression by blocking translation or inducing deg-
+radation of the targeted mRNA (1). Since their first iden-
+tification in Caenorhabditis elegans in 1993 (2), the number 
+of annotated miRNAs and miRNA-related publications 
+increase in a super linear rate, clearly depicting their 
+central position in the RNA revolution (3). 
+In silico miRNA target identification is a crucial step in 
+most miRNA experiments, as the miRNA interactome has 
+not yet been adequately mapped, even for the most 
+studied model organisms. Early miRNA-related research 
+efforts have highlighted the necessity of computational 
+analyses in order to assist the experimental identification 
+of miRNA targets. This has resulted to the development of 
+numerous miRNA target prediction algorithms (4), which 
+are now considered indispensable for the design of 
+relevant experiments. These algorithms identify in silico 
+miRNA targets as candidates for further experimentation 
+or for computational processing, such as target enrich-
+ment analyses. Predictions of the available computational 
+algorithms can be acquired from relevant interaction data-
+bases or web servers (4,5). </p>
+
+<p>*To whom correspondence should be addressed. Tel: +30 210 9656310 (ext. 190); Fax: +30 210 9653934; Email: hatzigeorgiou@fleming.gr 
+Correspondence may also be addressed to Maria D. Paraskevopoulou. Tel: +30 210 9656310 (ext. 190); Fax: +30 210 9653934; 
+Email: paraskevopoulou@fleming.gr </p>
+
+<p>The authors wish it to be known that, in their opinion, the first two authors should be regarded as joint First Authors </p>
+
+<p>Published online 16 May 2013 
+Nucleic Acids Research, 2013, Vol. 41, Web Server issue W169-W173 
+doi:10.1093/nar/gkt393 </p>
+
+<p>ß The Author(s) 2013. Published by Oxford University Press. 
+This is an Open Access article distributed under the terms of the Creative Commons Attribution Non-Commercial License (http://creativecommons.org/licenses/ 
+by-nc/3.0/), which permits non-commercial re-use, distribution, and reproduction in any medium, provided the original work is properly cited. For commercial 
+re-use, please contact journals.permissions@oup.com </p>
+
+<p>The <rs id="software-33" type="software">DIANA-microT</rs> web server <rs corresp="#software-33" type="version-number">v4.0</rs> (6) is focused on 
+providing in silico predictions of miRNA-mRNA inter-
+actions. It is characterized by a user-friendly interface 
+and provides extensive information for predicted 
+miRNA-target gene interactions such as a global score 
+for each interaction, as well as detailed information for 
+all predicted target sites. Each target site can be visualized, 
+and the user can examine its local prediction score, target 
+site conservation and miRNA-mRNA binding structure. 
+The server also provides connectivity to online biological 
+databases and offers links to nomenclature, sequence and 
+protein databases. 
+Here, we present <rs id="software-12" type="software">DIANA-microT</rs> web server <rs corresp="#software-12" type="version-number">v5.0</rs>, a 
+significantly updated version, which hosts the state-of-
+the-art target prediction algorithm, DIANA-microT-
+CDS (7). microT-CDS is the only algorithm available 
+online, specifically designed to identify miRNA targets 
+both in 3 0 untranslated region (3 0 UTR) and in coding 
+sequences (CDS). The new server detects miRNA targets 
+in mRNA sequences of Homo sapiens, Mus musculus, 
+Drosophila melanogaster and C.elegans. Furthermore, it 
+has been updated to miRBase v18 (8) and <rs id="software-21" type="software">Ensembl</rs> <rs corresp="#software-21" type="version-number">v69</rs> 
+(9). Specific attention has been paid to the web server 
+interface, which follows the DIANA design framework, 
+to be instantly familiar to users of previous versions, or 
+other DIANA tools (Figure 1). On the other hand, online 
+help, informative tooltips and easy-to-use menus minimize 
+the learning curve of new users. The fifth version of the 
+DIANA-microT web server focuses also on advanced 
+users and laboratories requiring support for sophisticated 
+pipelines. The server provides programmatic access to 
+services of multiple DIANA algorithms and a complete 
+integration with the <rs type="software">Taverna</rs> Workflow Management 
+System (WMS) (10), using the in-house developed 
+DIANA-Taverna Plug-in. Furthermore, a new section of 
+the web interface hosts ready-made advanced workflows 
+that can perform extensive miRNA-related analyses on 
+results derived from high-throughput techniques, such as 
+microarrays or Next-Generation Sequencing (NGS). </p>
+
+<p>MATERIALS AND METHODS </p>
+
+<p>Integration of DIANA-microT-CDS </p>
+
+<p>Initial research efforts have unveiled that miRNAs 
+regulated gene expression through their binding on 
+the 3 0 UTR of protein-coding genes (2). However, 
+accumulated experimental evidence has revealed that 
+miRNA-binding sites within coding sequences are also 
+functional in controlling gene expression (11). The new 
+algorithm microT-CDS (7) can identify miRNA targets 
+in 3 0 UTR, as well as in CDS regions. Further details on 
+the microT-CDS algorithm and the utilized training sets 
+can be found in the relevant publication by Reczko et al. 
+(7). DIANA-microT-CDS provides increased accuracy 
+and the highest sensitivity at any level of specificity over 
+other available state-of-the-art implementations, when 
+tested against pulsed stable isotope labeling by amino 
+acids in cell culture (pSILAC) proteomics data sets (12). 
+The selection of DIANA-microT-CDS as its core algo-
+rithm renders the new web server the only available online </p>
+
+<p>resource capable of incorporating miRNA targets in 
+3 0 UTR as well as in CDS. The new web server enables 
+users to attain high quality predicted miRNA-gene inter-
+actions in all relevant in silico pipelines. </p>
+
+<p>Web server update and extension </p>
+
+<p><rs type="software">DIANA-microT</rs> server has been updated to miRBase v18 
+and <rs id="software-32" type="software">Ensembl</rs> <rs corresp="#software-32" type="version-number">v69</rs>. The server is compatible with the new 
+miRNA nomenclature (3p/5p) introduced in miRBase 
+v18, as well as with previous miRNA naming conventions. 
+It currently supports 7.3 Â 10 6 H.sapiens, 3.5 Â 10 6 
+M.musculus, 4.4 Â 10 5 D.melanogaster and 2.5 Â 10 5 
+C.elegans interactions between 3876 miRNAs and 64 750 
+protein-coding genes. Gene (9) and miRNA (13) expres-
+sion annotation has been incorporated into the web server, 
+enabling the user to perform advanced result filtering 
+based on tissue expression. Furthermore, users can also 
+restrict predictions between uploaded lists of expressed 
+genes and/or miRNAs. For example, this feature can be 
+used to identify interactions between a list of repressed (or 
+overexpressed) genes and overexpressed (or repressed) 
+miRNAs, in the case of a differential expression analysis 
+pipeline. 
+Moreover, the web server hosts an updated version of 
+the KEGG database providing a relevant search module 
+based on KEGG pathway descriptions (14). A redesigned 
+optional user space has also been implemented, which 
+provides personalized features and facilitates the 
+interconnectivity between the web server and the available 
+<rs type="software">DIANA</rs> software and databases (Figure 1). </p>
+
+<p>Web server support of advanced pipelines </p>
+
+<p>As high-throughput data have become the new backbone 
+of biological research, there is an increasing need to 
+support advanced high-throughput analysis pipelines. 
+The new <rs type="software">DIANA-microT</rs> web server aims to facilitate 
+users, not having access to extensive computational 
+infrastructures and support, to perform ready-to-use 
+sophisticated pipelines. 
+DIANA-microT web server v5.0 hosts numerous 
+integrated analyses in the form of ready-made advanced 
+pipelines, covering a wide range of inquiries regarding pre-
+dicted or validated miRNA-gene interactions and their 
+impact on metabolic and signalling pathways. These pipe-
+lines can be used to analyse user data derived from small 
+scale and high-throughput experiments directly from the 
+<rs type="software">DIANA-microT</rs> web server interface, without the neces-
+sity to install or implement any kind of software. 
+For instance, one of the available workflows (Figure 2) 
+can analyse mRNA and miRNA expression data (expres-
+sion and fold change). Suppressed genes are automatically 
+matched with overexpressed miRNAs (and vice versa). 
+The workflow performs enrichment analysis of experimen-
+tally validated targets derived from DIANA-TarBase v6.0 
+(3) or/and predicted interactions from microT-CDS. This 
+step is considered crucial to identify miRNAs that signifi-
+cantly regulate the differentially expressed genes. 
+The prediction score threshold can significantly affect 
+the analysis steps that follow. In the case of predicted 
+interactions, the pipeline can be optimized by automatic </p>
+
+<p>W170 Nucleic Acids Research, 2013, Vol. 41, Web Server issue </p>
+
+<p>repetitions of different prediction thresholds (from sensi-
+tive to more stringent), to minimize the effect of the 
+selected settings to the result. By using meta-analysis stat-
+istics, the server combines the P-values from each repeti-
+tion into a total P-value for each miRNA, signifying its 
+effect on the selected genes for all used thresholds (15,16). 
+In the last step of the pipeline, the identified miRNAs are 
+subjected to a functional analysis, where pathways 
+controlled by the combined action of these miRNAs are 
+detected using <rs id="software-5" type="software">DIANA-miRPath</rs> <rs corresp="#software-5" type="version-number">v2.1</rs> (16). 
+Other available pipelines can handle miRNA and gene 
+lists, to perform the enrichment analysis, or even select the 
+type of used interactions (predicted or experimentally 
+validated). In the latter workflow, the algorithm 'personal-
+izes' the target identification module for each miRNA. It 
+initially identifies the number of available interactions in 
+DIANA-TarBase and DIANA-microT-CDS (validated 
+versus predicted) and automatically selects to use validated 
+targets only in the cases of well-annotated miRNAs. 
+Computationally identified interactions are used otherwise. 
+The new <rs type="software">DIANA-microT</rs> web server enables users to 
+perform such analyses directly from the on-line user inter-
+face, or create even more extensive pipelines programmat-
+ically or by using visual tools (<rs type="software">Taverna WMS</rs>). </p>
+
+<p>Web server integration with Taverna WMS </p>
+
+<p><rs id="software-25" type="software">DIANA-microT</rs> web server <rs corresp="#software-25" type="version-number">v5.0</rs> was completely re-
+designed to provide the necessary building blocks for </p>
+
+<p>easily incorporating miRNA functional analysis in 
+complex pipelines. The new <rs type="software">DIANA-microT</rs> web server 
+aims to facilitate advanced users in creating novel or 
+enhancing existing pipelines with miRNA target identifi-
+cation and functional analysis tools. To this end, <rs id="software-30" type="software">DIANA-
+microT</rs> web server <rs corresp="#software-30" type="version-number">v5.0</rs> provides a complete integration 
+with the <rs type="software">Taverna WMS</rs>, using our in-house developed 
+DIANA-Taverna Plug-in. 
+DIANA-<rs type="software">Taverna</rs> Plug-in enables the user to directly 
+access our target prediction server (microT-CDS) from 
+the graphic interface of Taverna and incorporate 
+advanced miRNA analysis functionalities into custom 
+pipelines. Furthermore, the plug-in enables the extension 
+of such pipelines through the use of other DIANA tools 
+and databases, providing access to the most extensive col-
+lection of validated miRNA targets (DIANA-TarBase 
+v6.0) and to <rs id="software-37" type="software">DIANA-miRPath</rs> <rs corresp="#software-37" type="version-number">v2.1</rs>, a tool designed for 
+the identification of miRNA targeted pathways. 
+Furthermore, the web server also supports direct pro-
+grammatic access to all aforementioned utilities in the 
+form of services, to facilitate users having already imple-
+mented pipelines using scripting or programming 
+languages. </p>
+
+<p>CONCLUSION </p>
+
+<p>High-throughput techniques have significantly increased 
+the number of users requiring in-depth analysis of </p>
+
+<p>Figure 1. Example of a submitted query in the DIANA-microT web server v5.0. The interface presents information regarding the specified predicted 
+miRNA-mRNA interactions. miRNA and gene-related information, as well as the advanced search options have been expanded. Links to external 
+databases, graphical representation of the binding sites, as well as miRNA-recognition elements (MREs) conservation and prediction scores are 
+displayed in the relevant sections. The left side of the page is devoted to personal user space, reporting latest searches and bookmarks. </p>
+
+<p>Nucleic Acids Research, 2013, Vol. 41, Web Server issue W171 </p>
+
+<p>miRNA-mRNA interactions. These techniques provide 
+great numbers of differentially expressed miRNAs and 
+genes, which have to be analysed in sophisticated pipe-
+lines. The new <rs type="software">DIANA-microT</rs> web server aims to 
+further increase the target prediction accuracy and usabil-
+ity of the server interface, while facilitating users aiming to 
+perform complex miRNA-related analyses. 
+Compared with the previous version, the new web 
+server has received a major upgrade and is currently up 
+to date with key miRNA/gene repositories, such as 
+<rs id="software-6" type="software">Ensembl</rs> (<rs corresp="#software-6" type="version-number">v69</rs>) and miRBase (v18). The Taverna Plug-in 
+and the integration of cutting-edge workflows in the web 
+interface provide the missing link between experimental 
+results and state-of-the-art functional meta-analyses. </p>
+
+<p>FUNDING </p>
+
+<p>The project [09 SYN-13-1055] 'MIKRORNA' by the 
+Greek General Secretariat for Research and Technology 
+and the project 'TOM' which is implemented under 
+the 'ARISTEIA' Action of the 'OPERATIONAL 
+PROGRAMME EDUCATION AND LIFELONG 
+LEARNING' and is co-funded by the European Social </p>
+
+<p>Fund (ESF) and National Resources. Funding for open 
+access charge: Projects TOM and MIKRORNA. </p>
+
+<p>Conflict of interest statement. None declared. </p>
+
+<p><rs id="software-17" type="software">DIANA-miRPath</rs><rs corresp="#software-17" type="version-number">v2</rs></p>
+
+<p>Nucleic Acids Research, 2013, Vol. 41, Web Server issue W173 </p>
+
+</text></tei>

@@ -1,0 +1,1541 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC3686433" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:25+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>Abstract 
+In this paper, we performed a comprehensive re-annotation of protein-coding genes by a systematic 
+method combining composition-and similarity-based approaches in 10 complete bacterial genomes of 
+the family Neisseriaceae. First, 418 hypothetical genes were predicted as non-coding using the compos-
+ition-based method and 413 were eliminated from the gene list. Both the scatter plot and cluster of ortho-
+logous groups (COG) fraction analyses supported the result. Second, from 20 to 400 hypothetical proteins 
+were assigned with functions in each of the 10 strains based on the homology search. Among newly assigned 
+functions, 397 are so detailed to have definite gene names. Third, 106 genes missed by the original annota-
+tions were picked up by an ab initio gene finder combined with similarity alignment. Transcriptional experi-
+ments validated the effectiveness of this method in Laribacter hongkongensis and Chromobacterium 
+violaceum. Among the 106 newly found genes, some deserve particular interests. For example, 27 transpo-
+sases were newly found in Neiserria meningitidis alpha14. In Neiserria gonorrhoeae NCCP11945, four new 
+genes with putative functions and definite names (nusG, rpsN, rpmD and infA) were found and homologues of 
+them usually are essential for survival in bacteria. The updated annotations for the 10 Neisseriaceae 
+genomes provide a more accurate prediction of protein-coding genes and a more detailed functional infor-
+mation of hypothetical proteins. It will benefit research into the lifestyle, metabolism, environmental adap-
+tion and pathogenicity of the Neisseriaceae species. The re-annotation procedure could be used directly, or 
+after the adaption of detailed methods, for checking annotations of any other bacterial or archaeal genomes. 
+The emergence of next-generation DNA sequencing 
+techniques accelerate tremendously the increment of </p>
+
+<p>sequences deposited in public nucleotide databases. 
+The wealth of sequence data stimulates wonderful op-
+portunity to understand the biological process of 
+various living species. To achieve this aim, two of the </p>
+
+<p># The Author 2013. Published by Oxford University Press on behalf of Kazusa DNA Research Institute. 
+This is an Open Access article distributed under the terms of the Creative Commons Attribution License (http://creativecommons.org/licenses/by-
+nc/3.0/), which permits non-commercial use, distribution, and reproduction in any medium, provided the original work is properly cited. For 
+commercial re-use, please contact journals.permissions@oup.com. </p>
+
+<p>DNA RESEARCH 20, 273-286, (2013) 
+doi:10.1093/dnares/dst009 
+Advance Access publication on 9 April 2013 </p>
+
+<p>essential steps are identifying all protein-coding genes 
+and trying to assign their functions. They are jointly 
+named as genome annotation. The quality of the 
+genome annotation is very vital. If one genome 
+could not be annotated accurately but still submitted 
+to the public database, not only subsequent 
+researches based on it may encounter problems but 
+also annotations of after sequenced closely related 
+genomes would be influenced. The annotation 
+errors may propagate and finally affect more and 
+more genomes. Recognizing this serious problem, 
+Ouzounis and Kap 1 appealed to update regularly the 
+genome annotation by latest database and methods. 
+As for prokaryotes, dozens of genomes have been 
+re-annotated. 2 Three kinds of re-annotations are 
+often performed in sequenced prokaryotic genomes. 
+First, and rather early, falsely predicted protein-
+coding genes are eliminated from the original annota-
+tion using composition-based methods. For example, 
+Wang and Zhang 3 suggested that 172 annotated 
+genes were very unlikely to encode proteins in the 
+genome of Vibrio cholerae based on single-nucleotide 
+frequencies. One of the typical re-annotation cases of 
+archaea was associated with Aeropyrum pernix K1, in 
+which protein-coding genes were over-annotated up 
+to 60% by the original sequencing institute. 4 -6 It is 
+lucky that this major error has been corrected by 
+using proteome approaches and bioinformatics 
+methods. 7 -10 Amsacta moorei entomopoxvirus may 
+have the most over-annotated protein-coding genes 
+among sequenced viruses. 11 Guo and Yu 12 suggested 
+that 38 of 294 originally annotated genes did not 
+encode proteins based on the Z-curve method. By 
+using another graphical method, Yu and Sun 13 con-
+firmed this speculation. 
+Second, some genes may be missed by the original 
+annotation and could be picked up by the ab initio 
+gene finding method and further confirmed by the 
+similarity alignment or transcription and/or protein 
+expression proofs. For example, Zhou et al. 14 newly 
+added 278 potential genes by the similarity align-
+ment and another 147 by detectable mRNA tran-
+scriptions in the genome of Xanthomonas campestris. 
+Very recently, Du et al. 15 newly added eight potential 
+genes by the similarity-based method in the archaeon 
+Pyrobaculum aerophilum. 
+Assigning functions to hypothetical proteins consti-
+tutes the last kind of re-annotation. This type of re-an-
+notation may be performed by using the homology 
+alignment or by functional genomic experiments. 
+For example, 149 hypothetical proteins were assigned 
+detailed functions according to the strict homology 
+information in the genome of Erwinia carotovora. 16 
+A similar method was employed to the genome of 
+P. aerophilum and 80 hypothetical proteins were 
+assigned with functional information. 15 Based on </p>
+
+<p>cellular fractions and expression profiles under differ-
+ent culture conditions, Okamoto and Yamada 17 pro-
+vided general functional information for 126 
+hypothetical proteins in the genome of Streptococcus 
+pyogenes. 
+In this study, we performed all three types of re-an-
+notation in 10 complete genomes of the 
+Neisseriaceae family. As far as our knowledge goes, 
+the only example involved with all three types of re-
+annotation is the updated annotation in the 
+genome of P. aerophilum. 15 Through them, the out-
+dated annotation may be corrected as far as possible. 
+However, alternative approaches may be utilized to 
+obtain similar results with the systematic method 
+used here. Compared with our previous work, 15 
+here, we used transcriptional analyses to validate the 
+effectiveness of our method to pick up new genes. 
+The Neisseriaceae family belongs to b-proteobacteria. 
+Among the 10 Neisseriaceae strains analyzed in this 
+work, seven belong to the genus Neisseria and all 
+can colonize the mucosal surfaces of many animals. 
+Neiserria meningitidis, as one of the most common 
+causes of bacterial meningitis, are most virulent in 
+human. 18 Laribacter hongkongensis is a recently 
+sequenced bacterium associated with invasive blood 
+stream infections in patients with liver cirrhosis as 
+well as gastroenteritis and traveler's diarrhea. 19 -22 
+Updated annotations of these bacterial strains would 
+help to understand their pathogenicities and environ-
+ment adaptation capacities. </p>
+
+<p>2. Material and methods </p>
+
+<p>2.1 Data source 
+Ten complete genomes of the family Neisseriaceae 
+were included in this work. They were Chromo-
+bacterium violaceum ATCC 12472 (RefSeq accession 
+number: NC_005085), L. hongkongensis HLHK9 
+(NC_012559), N. gonorrhoeae FA 1090 (NC_002946), 
+N. gonorrhoeae NCCP11945 (NC_011035), N. lactamica 
+020-06 (NC_014752), N. meningitidis 053442 
+(NC_010120), N. meningitidis alpha14 (NC_013016), 
+N. meningitidis MC58 (NC_0031112), N. meningitidis 
+Z2491 (NC_003116) and Pseudogulbenkiania sp. 
+NH8B (NC_016002). Among them, two strains of 
+N. gonorrhoeae and four strains of N. meningitidis and 
+L. hongkongensis are pathogens. In fact, dozens of strains 
+in the family Neisseriaceae have been sequenced. 23 
+However, the NCBI RefSeq project provides curated anno-
+tations only for these strains. 24 In this work, we chose the 
+10 complete genomes to perform re-annotation. </p>
+
+<p>2.2 Method to pick up missed genes 
+In each sequenced genome, there are always some 
+bona fide genes that have been missed by the original </p>
+
+<p>274 
+Gene Re-Annotation in the Neisseriaceae Family 
+[Vol. 20, </p>
+
+<p>annotation. For example, Warren et al. 25 uncovered 
+38 895 intergenic open reading frames (ORFs), 
+readily identified as putative genes by similarity to 
+currently annotated genes, from 1297 prokaryotic 
+replicons based on across-genome alignment. New 
+genes could be confirmed by the similarity alignment 
+or by transcription or proteome analyses. In this work, 
+we first used the <rs id="software-5" type="software">ZCURVE</rs> 26 program, which is freely 
+available at <rs corresp="#software-5" type="url">http://tubic.tju.edu.cn/Zcurve_B/</rs>/, to pick 
+out all candidate genes that did not have same 5 0 
+terminals with all genes in the original annotation. 
+The candidate may overlap one annotated gene with 
+their sequences but they did not correspond to the 
+same reading frame. Then those candidate new 
+genes would be filtered by blast 27 against the NCBI 
+nr database. If one candidate met the following 
+three conditions, it would be regarded as genuine 
+genes: (i) it had the significant similarity (E-value , 
+10 220 , Coverage . 60% and Identity . 50%) with 
+annotated genes in bacteria beyond the same genus 
+in the database, and it had the similar length with 
+the counterpart (difference , 20%); (ii) it had coun-
+terpart in the cluster of orthologous groups (COG) 
+database, i.e. it could be assigned within an existed 
+COG cluster; (iii) it did not overlap annotated genes 
+with any bases or it had a smaller E-value and a 
+higher identity score against functional genes in the 
+other genomes in the case of overlapping. This 
+process has been standardized in this work. For each 
+of the 10 strains, all parameters in the whole 
+process were fixed. </p>
+
+<p>2.3 Method to eliminate over-annotated genes 
+A composition-based method was used to eliminate 
+over-annotated genes. The method is based on the 
+Z-curve representation of the DNA sequences, which 
+has been successfully used to find genes in various 
+microbes. 3,7,9,12,15,16,28,29 In this analysis, 33 Z-curve 
+variables were adopted, 26 including nine variables of 
+phase-dependent single-nucleotide frequencies 28 and 
+24 of phase-dependent dinucleotide frequencies. 26 In 
+fact, there are 36 variables denoting phase-dependent 
+dinucleotides. 30 However, long-range correlations 
+between the first and third codon positions tend to be 
+weaker and so 12 variables associated with them were 
+discarded. For details about these variables, refer to 
+Guo et al. 26 Besides 33 classifying features, the 
+Fisher linear discrimination algorithm was used to 
+optimally differentiate protein-coding and non-coding 
+sequences, the procedure was as detailed previously. 28 
+The training set of the classifying model comprised a 
+positive sample set and a negative sample set. The posi-
+tive sample set was those function-known genes with </p>
+
+<p>definite names, e.g. gyrB as the name of gene encoding 
+protein of DNA gyrase subunit B. The negative sample 
+was generated by a randomly shuffling sequence of 
+the positive sample and thus destroying its natural 
+structure. After parameters have been trained based 
+on positive and negative samples, all hypothetical pro-
+teins would be decided to be genuine genes or falsely 
+annotated non-coding sequences. The latter would be 
+eliminated in the updated annotation. The scatter plot 
+in Figure 1 illustrates the effectiveness of the method 
+to eliminate non-coding ORFs from the collection of 
+hypothetical proteins. A web server has been con-
+structed to check hypothetical genes and eliminate 
+non-coding ORFs in any sequenced bacterial or archaeal 
+genomes, which is freely available at http://147.8.74. 
+24/Zfisher/. </p>
+
+<p>2.4 Method to assign functions to hypothetical proteins 
+Hypothetical proteins after refining by the above 
+process would be submitted to the nr database. 
+Those with highly significant similarities with func-
+tion-known genes in the database would be assigned 
+the same functions. To achieve more sensitive results, 
+amino acid (aa) sequences of hypothetical genes were 
+actually aligned against protein sequences translated 
+from the nr nucleotide database. 27 To ensure strict 
+homology, the aligned length covered at least 80% 
+of each gene with the identity of .70% and the 
+E-value of ,1e220. According to the above thresh-
+olds, if one hypothetical gene with a translated aa 
+sequence matched two or more proteins with the 
+same functions, then the function information 
+would be transferred to the hypothetical protein. 18 </p>
+
+<p>2.5 Bacterial strains and growth conditions 
+Laribacter hongkongensis HLHK9 is a clinical isolate 
+in Hong Kong and its complete genome sequence 
+was available recently. 21 It was grown at 378C, in 
+brain heart infusion (BHI) broth or on BHI agar plates 
+(BD, USA). Chromobacterium violaceum ATCC 12472 is 
+a type strain and its complete genome sequence is 
+also available in Genbank. 31 Chromobacterium viola-
+ceum was cultured in nutrient broth or nutrient agar 
+(Oxoid, England) at 268C. Unless indicated otherwise, 
+bacteria were cultured to the log-phase for experiment 
+(0.6 at OD 600 ). </p>
+
+<p>2.6 Reverse transcription -polymerase chain reaction 
+The total bacterial RNA was extracted by using the 
+RNeasy mini kit following the manufacturer's instruc-
+tions (Qiagen, Germany). Genomic DNA was removed </p>
+
+<p>No. 3] 
+F.-B. Guo et al. 
+275 </p>
+
+<p>by DNase digestion using RNase-free DNase I (Roche 
+Diagnostic, Switzerland) as described by the manufac-
+turer. Reverse transcription (RT) was performed using 
+Superscript III Reverse Transcriptase (Invitrogen, 
+Carlsbad, CA, USA) according to the manufacturer's 
+recommendations. One microlitre of cDNA was used 
+as a template for RT-polymerase chain reaction 
+(PCR) with each specific primer pair. Mock RT-PCR 
+without reverse transcriptase was also conducted as 
+control. Triplicate assays using RNAs extracted in 
+three independent experiments were performed for 
+each target gene. </p>
+
+<p>3. Results </p>
+
+<p>3.1. Eliminated non-coding ORFs and the graphic proof 
+All ab initio gene finders would predict a certain 
+number of non-coding ORFs as potential genes and 
+these predictions constitute false positives of gene an-
+notation. 32 To ensure less species-specific genes be 
+missed from the annotation result, one or more ab 
+initio gene finders are necessary in the process of an-
+notating prokaryotic genomes. 33 Often, similarity 
+alignment methods are combined with ab initio 
+methods to achieve better results. Because of the </p>
+
+<p>Figure 1. Distribution of GC 2 versus GC 3 for four types of sequences. The x-axis indicates the value of GC 2 and the y-axis denotes the value 
+of GC 3 . (A) For 969 function-known genes in L. hongkongensis; (B) for 86 predicted non-coding genes in L. hongkongensis; (C) for 915 
+retained hypothetical genes in L. hongkongensis and (D) for 20 horizontally transferred genes in P. aeruginosa. </p>
+
+<p>276 
+Gene Re-Annotation in the Neisseriaceae Family 
+[Vol. 20, </p>
+
+<p>intervention of the latter, it is not inevitable that some 
+non-coding ORFs will appear in the final list of poten-
+tial genes in every sequenced genome. 34 They may 
+constitute source of annotation errors of closely 
+related genomes and thus should be eliminated 
+from the current annotations. According to the 
+RefSeq 24 annotation for each Neisseriaceae strain, all 
+annotated genes could be classified into three 
+groups. The first group contains only function-
+known genes with definite names. The last group 
+includes those genes encoding hypothetical proteins. 
+The remaining genes constitute the second group. 
+Obviously, the first group encodes proteins without 
+any uncertainty. Coding potentials of the third group 
+would be doubted to some extent. Therefore, we focus 
+on the third group, hypothetical genes, in this work. 
+Numbers of genes belong to the first and third 
+groups and genomic characteristics of each strain 
+are listed in Table 1. As can been seen, ratios of the 
+numbers of the first and third class genes to the 
+total gene number vary significantly. For example, 
+N. gonorrhoeae FA 1090 has the highest ratio of hypo-
+thetical genes, whereas almost the least ratio of func-
+tion-known genes with definite names. This illustrates 
+that the function annotation in this strain is much 
+poorer compared with the other strains. The variation 
+of the gene ratio is associated with many factors, such 
+as annotation methods, genomic G þ C contents and 
+the number of closely related genomes that have 
+been sequenced when annotating the strain. 
+The training set needed the Z-curve method with 
+33 variables was used to filter over-annotated genes 
+from the RefSeq annotations of 10 Neisseriaceae 
+strains. For each of them, function-known genes 
+with definite names were chosen and shuffled 
+sequences were correspondingly generated. Thus, 
+the training set was obtained. For example, in L. hon-
+gkongensis, the training set was comprised of 969 
+function-known genes that correspond to positive 
+samples, and 969 shuffled sequences corresponding 
+to negative samples. Based on the training set, the dis-
+criminant model was built. The accuracy of the model 
+based on 5-fold cross-validation is listed in Table 2 for 
+each of the 10 strains. With the model, each hypo-
+thetical protein was decided to be a genuine gene 
+or a falsely predicted ORF. Consequently, 86 hypothet-
+ical genes were predicted as a non-coding ORF by the 
+Z-curve method in the genome of L. hongkongensis. 
+Prediction of 86 hypothetical genes as non-coding 
+is based on the assumption that all protein-coding 
+genes should have similar nucleotide composition in 
+one specific bacterial genome. 28 That is to say, hypo-
+thetical genes should have similar composition fea-
+tures with function-known genes in L. hongkongensis. 
+If not, they should have been over-annotated as 
+genes. The scatter plot of the nucleotide distribution </p>
+
+<p>of 969 function-known genes and 86 predicted 
+non-coding ORFs is shown in Figure 1A and B. As 
+can be seen, non-coding ORFs are distributed far 
+away from function-known genes. In detail, almost 
+all function-known genes lie far above the diagonal 
+and G þ C contents of them at the second codon posi-
+tions are much lower than that at the third codon 
+positions, whereas almost all 86 non-coding ORFs 
+locate around the diagonal, indicating that their G þ 
+C contents at the second positions are approximate 
+to that at the third codon positions. The need to 
+encode functional proteins exerts severe constrain 
+on the nucleotide composition of genes. 35 Previous 
+work showed a similar nucleotide distribution of func-
+tional genes in seven high G þ C prokaryotic 
+genomes. 36,37 Therefore, the distinct nucleotide com-
+position between 86 hypothetical genes and the 
+function-known genes draw them away from being 
+genuine genes. Nucleotide compositions for the 915 
+retained hypothetical genes are shown in Figure 1C. 
+Different from 86 predicted non-coding ORFs, most 
+of the retained hypothetical genes have a similar dis-
+tribution of GC 2 versus GC 3 with function-known 
+genes. 
+The COG database has been widely used during the an-
+notation process of sequenced bacterial genomes. 5,38 
+Belonging to a COG is believed to be a very reliable evi-
+dence of protein-coding genes. 38,39 In L. hongkongensis, 
+954 among 967 function-known genes have been 
+assigned a COG code. However, only 1 of 86 predicted 
+non-coding ORFs has the COG code. Based on the 
+above analyses, these 86 ORFs are very unlikely to 
+encode proteins. COG statistics information for the 
+other nine strains is shown in Table 2. As can been 
+seen, the COG ratio of predicted non-coding ORFs is ex-
+tremely lower than that of genes with known functions 
+and definite names. Summarily, 7260 among 7426 
+(97.8%) genes belonging to the first class are assigned 
+with COG codes in the 10 Neisseriaceae genomes. In 
+comparison, only 5 of 418 (1.2%) predicted non-
+coding ORFs could be assigned to the COG database, in-
+dicating that our prediction is much accurate in another 
+sense. These five ORFs with COG codes are likely to con-
+stitute falsely predictions of our method because having 
+COG counterparts has been believed to be one of the 
+reliable evidences of encoding proteins. Finally, we 
+only eliminated the remaining 413 hypothetical pro-
+teins from the RefSeq annotations in the 10 complete 
+genomes. Details of them are listed in Supplementary 
+Table S1. 
+As is well known, horizontally transferred genes 
+may also have a different nucleotide composition 
+with core genes to some extent. The DarkHorse data-
+base stores horizontally transferred genes in 
+sequenced bacterial genomes. Entries in it are all 
+those predicted by comparative genomes methods </p>
+
+<p>No. 3] 
+F.-B. Guo et al. 
+277 </p>
+
+<p>and hence are very reliable. However, the information 
+of HGT is not available for L. hongkongensis in the 
+DarkHorse. To circumvent this problem, we fall back 
+on the bacterial strain Pseudomonas aeruginosa PA01, 
+which also has a high G þ C content, and the distribu-
+tion of GC 2 versus GC 3 for function-known genes has 
+shown to be similar to that of L. hongkongensis. 36 
+Furthermore, as an early sequenced genome, the 
+gene annotation of it is very reliable and so could be 
+used a good reference. For the genome, 22 horizon-
+tally transferred genes were extracted from the 
+DarkHorse. As can be seen from Figure 1D, the nu-
+cleotide distribution of horizontally transferred </p>
+
+<p>genes tends to be similar to that in Figure 1A. 
+Although the DarkHorse genes have basically similar 
+nucleotide compositions with function-known genes, 
+it does not mean the 86 ORFs in Figure 1B are all def-
+initely non-coding. In fact, there may still be the pos-
+sibility that some of the genes, particularly those with 
+GC 2 between 0.3 and 0.6, are falsely predicted as 
+non-coding because of their very recent transfers. To 
+investigate the possibility of clusters of horizontally 
+transferred genes, we checked the chromosomal loca-
+tions of these 86 ORFs and found that they not have 
+any cluster pattern. Therefore, it is sure that, at least, 
+most of the 85 eliminated ORFs do not belong to </p>
+
+<p>Table 1. Statistical information in genomes of the 10 Neisseriaceae strains </p>
+
+<p>Strains 
+Published 
+year a </p>
+
+<p>Gene 
+density 
+(kb) </p>
+
+<p>Genome size 
+(bp) </p>
+
+<p>Gene 
+number </p>
+
+<p>G þ C 
+content (%) </p>
+
+<p>First class gene 
+(ratio) </p>
+
+<p>Third class gene 
+(ratio) </p>
+
+<p>C. violaceum 
+18 September 
+2003 </p>
+
+<p>0.927 
+4 751 080 
+4405 
+64.8 
+1494 (33.9%) 
+1714 (38.9%) </p>
+
+<p>L. hongkongensis 
+14 April 2009 1.021 
+3 169 329 
+3235 
+62.4 
+969 (30.0%) 
+1001 (30.1%) </p>
+
+<p>N. gonorrhoeae FA 
+1090 </p>
+
+<p>15 February 
+2005 </p>
+
+<p>0.930 
+2 153 922 
+2002 
+52.7 
+266 (13.3%) 
+800 (40.0%) </p>
+
+<p>N. gonorrhoeae 
+NCCP11945 </p>
+
+<p>9 July 2008 
+1.195 
+2 232 025 
+2668 
+52.4 
+244 (9.1%) 
+996 (37.3%) </p>
+
+<p>N. lactamica 
+16 December 
+2010 </p>
+
+<p>0.888 
+2 220 606 
+1972 
+52.3 
+744 (37.7%) 
+657 (33.3%) </p>
+
+<p>N. meningitidis 
+053442 </p>
+
+<p>3 December 
+2007 </p>
+
+<p>0.938 
+2 153 416 
+2020 
+51.7 
+875 (43.3%) 
+645 (31.9%) </p>
+
+<p>N. meningitidis Alpha 
+14 </p>
+
+<p>24 July 2009 
+0.872 
+2 145 295 
+1872 
+52.0 
+865 (46.2%) 
+467 (25.0%) </p>
+
+<p>N. meningitidis MC58 
+10 March 
+2000 </p>
+
+<p>0.908 
+2 272 360 
+2063 
+51.5 
+806 (39.1%) 
+810 (39.3%) </p>
+
+<p>N. meningitidis Z2491 30 March 
+2000 </p>
+
+<p>0.874 
+2 184 406 
+1909 
+51.8 
+459 (24.0%) 
+669 (35.0%) </p>
+
+<p>Pseudogulbenkiania 
+8 September 
+2011 </p>
+
+<p>0.926 
+4 332 995 
+4012 
+64.4 
+704 (17.5%) 
+831 (20.7%) </p>
+
+<p>a </p>
+
+<p>Information of published date were extracted from http://www.genomesonline.org/. </p>
+
+<p>Table 2. Accuracy based on 5-fold cross-validation and the COG ratio in each strain </p>
+
+<p>Strain 
+Accuracy of the method (%) 
+Class 1 with COG 
+(% ratio) </p>
+
+<p>Predicted 
+non-coding ORFs </p>
+
+<p>Predicted non-coding 
+with COG (% ratio) </p>
+
+<p>C. violaceum 
+100 
+1457 (97.5) 
+88 
+0 (0) </p>
+
+<p>L. hongkongensis 
+99.90 
+954 (98.7) 
+86 
+1 (1.2) </p>
+
+<p>N. gonorrhoeae FA 1090 
+100 
+263 (98.9) 
+24 
+1 (4.2) </p>
+
+<p>N. gonorrhoeae NCCP11945 
+100 
+241 (98.9) 
+56 
+0 (0) </p>
+
+<p>N. lactamica 
+99.87 
+725 (97.4) 
+8 
+0 (0) </p>
+
+<p>N. meningitidis 053442 
+99.77 
+851 (97.3) 
+37 
+1 (2.7) </p>
+
+<p>N. meningitidis Alpha 14 
+99.77 
+840 (97.1) 
+25 
+1 (4.0) </p>
+
+<p>N. meningitidis MC58 
+99.75 
+790 (98.0) 
+48 
+0 (0) </p>
+
+<p>N. meningitidis Z2491 
+100 
+456 (99.3) 
+12 
+0 (0) </p>
+
+<p>Pseudogulbenkiania 
+99.86 
+683 (97.0) 
+34 
+1 (2.9) </p>
+
+<p>278 
+Gene Re-Annotation in the Neisseriaceae Family 
+[Vol. 20, </p>
+
+<p>horizontally transferred genes and are indeed non-
+coding. Also note that 11 of the 20 horizontally trans-
+ferred genes have been assigned the COG code and 
+this ratio is much higher than that of the collective 
+of the 85 eliminated ORFs. </p>
+
+<p>3.2. Missed genes found by joint methods and their 
+functions 
+During the process of annotating sequenced 
+genomes, some genuine genes may be missed 
+because the annotators pursue a balance between 
+the number of all annotated genes and that of 
+finding genuine genes and ensure not too high 
+falsely positive predictions. 14,25,40 The method for 
+picking up missed genes was a two-step process by 
+combining the ab initio gene finding and the blast 
+search. With this method, we found a varying 
+number of missed genes with potential functions 
+(Table 3). For example, eight new genes were added 
+in L. hongkongensis, and details for them are listed in 
+Table 4. RT-PCR analyses validated the transcriptions 
+of all eight sequences (Fig. 2). Out of the 10 newly 
+found genes in the genome of C. violaceum, transcrip-
+tions of eight ones are validated with RT-PCR and the 
+exceptions are (Table 6) CV_A0007 and CV_A0010 
+(Fig. 3). All the amplification with genome DNA was 
+positive (data not shown). Therefore, transcriptional 
+analyses illustrated that the method was effective for 
+picking up new genes and had very high accuracy. 
+However, this method is only applicable to picking 
+up genes having homologues in other genomes but 
+not to strain-specific genes. In the other genomes, </p>
+
+<p>the method was directly used and without experi-
+mental validation. 
+Among the eight new genes in L. hongkongensis, 
+only two do not have any overlapping bases with 
+annotated genes and they are LHK_A0003 and 
+LHK_A0004. The details of the eight genes and their 
+corresponding functions and the details of PCR 
+primers and conditions used in the validation experi-
+ments are listed in Tables 4 and 5, respectively. For 
+each of the remaining six overlapping genes, the 
+region spanned by the two PCR primers does not 
+overlap with the annotated genes and thus could 
+reduce false-positive errors for the transcription trace. 
+The six genes are analyzed as follows. LHK_A0001 
+overlaps the annotated gene LHK_00511. According 
+to the annotation, the two sequences have the same 
+potential function of encoding the phosphoserine 
+phosphatase. LHK_A0001 has the similarity score of 
+the E-value of 10 249 and Identity of 55% and the simi-
+larity score of LHK_00511 is the E-value of 10 239 and 
+Identity of 65%. We could not decide which of them is 
+the genuine gene based on the scores. LHK_00511 
+has the length of only 211 bp, which is much shorter 
+than the length (669 bp) of known genes with the 
+same function in other genomes. LHK_A0001 has 
+the length of 471 bp. Based on the length information, 
+LHK_A0001 is more likely to encode the phosphoser-
+ine phosphatase than LHK_00511. LHK_A0002 over-
+laps the annotated gene LHK_00916 with only 
+29 bp. LHK_A0002 is predicted to code for site-specific 
+recombinase and LHK_00916 encodes replicase. 
+Because they have so little overlap and have different 
+functions, it is very likely that they are both genuine 
+genes. LHK_A0005 has the potential function of en-
+coding the Na þ -dependent transporter. LHK_A0006 
+overlaps 61 bp with one functional gene but they 
+locate on two different DNA strands. LHK_A0007 
+and the annotated rpsI gene (LHK_02777) constitute 
+an interesting overlap. After the blast alignment, both 
+of them are found to be significantly similar to the 
+rpsI gene in the other genomes. As shown in 
+Figure 4, LHK_A0007 matches the last 141 bp 
+(57 aa) of the other rpsI genes and LHK_02777 
+matches the first 219 bp (73 aa). LHK_A0007 and 
+LHK_02777 as a whole just constitute a complete 
+rpsI gene (130 aa). In fact, LHK_A0007 and LHK_ 
+02777 are adjacent and overlapping. For the overlap-
+ping part, LHK_A0007 has the correct reading frame 
+but the LHK_02777 does not have the correct frame, 
+according to the other rpsI genes. Therefore, it is 
+suggested that there has appeared an event of 
+nucleotide insertion/deletion for the rpsI gene in 
+L. hongkongensis. After point mutation, the single 
+reading frame changed to two different ORFs. In this 
+work, the two generated segments could be tran-
+scribed and should have functions. But we do not </p>
+
+<p>Table 3. Numbers of revised genes, which contains newly found 
+genes, hypothetical genes with newly assigned functions, 
+eliminated ORFs and disrupted ORFs </p>
+
+<p>Strains 
+Newly 
+found 
+genes </p>
+
+<p>Newly 
+assigned 
+functions </p>
+
+<p>Eliminated 
+ORFs </p>
+
+<p>Disrupted 
+ORFs </p>
+
+<p>C. violaceum 
+10 
+120 
+88 
+0 </p>
+
+<p>L. hongkongensis 
+8 
+2 0 
+8 5 
+2 </p>
+
+<p>N. gonorrhoeae FA 
+1090 </p>
+
+<p>18 
+400 
+23 
+23 </p>
+
+<p>N. gonorrhoeae 
+NCCP11945 </p>
+
+<p>9 
+207 
+56 
+0 </p>
+
+<p>N. lactamica 
+5 
+218 
+8 
+8 </p>
+
+<p>N. meningitidis 
+053442 </p>
+
+<p>6 
+214 
+36 
+19 </p>
+
+<p>N. meningitidis 
+Alpha 14 </p>
+
+<p>30 
+214 
+24 
+14 </p>
+
+<p>N. meningitidis 
+MC58 </p>
+
+<p>11 
+331 
+48 
+27 </p>
+
+<p>N. meningitidis 
+Z2491 </p>
+
+<p>8 
+299 
+12 
+20 </p>
+
+<p>Pseudogulbenkiania 
+1 
+4 6 
+3 3 
+0 </p>
+
+<p>No. 3] 
+F.-B. Guo et al. 
+279 </p>
+
+<p>know whether they have the same function of encod-
+ing ribosomal protein S9. Finally, LHK_A0008 has pos-
+sible function of coding for thioesterase. </p>
+
+<p>For the 10 newly found potential genes in C. viola-
+ceum, there are not so serious cases of overlapping 
+with annotated genes as in L. hongkongensis. Either </p>
+
+<p>Figure 2. RT-PCR confirmations of eight newly found genes in L. hongkongensis. mRNAs corresponding to candidate genes were evaluated 
+by RT-PCR (RT). We used no transcriptase-containing sample as negative control (NRT) and PCR with genomic DNA as a positive control </p>
+
+<p>(PC). </p>
+
+<p>Table 5. PCR primers and annealing temperature for the eight newly found genes in L. hongkongensis </p>
+
+<p>ID 
+Primer pair 
+Primer sequence 
+Annealing temperature </p>
+
+<p>LHK_A0001 
+LPW20036 
+LPW20037 </p>
+
+<p>GCATGCCGAATTCCTCGAAG 
+TCCGGGCCTTCTTCCAGTTC </p>
+
+<p>60 </p>
+
+<p>LHK_A0002 
+LPW20038 
+LPW20039 </p>
+
+<p>ACGCGCTTTGATTCGGGAAC 
+GCGTTCGCATAACCGTACAG </p>
+
+<p>60 </p>
+
+<p>LHK_A0003 
+LPW20046 
+LPW20047 </p>
+
+<p>TGGCCAATCCGATCGTGAC 
+CCTCCTGAGCGTTTCAAG </p>
+
+<p>55 </p>
+
+<p>LHK_A0004 
+LPW19946 
+LPW19947 </p>
+
+<p>ATTCATCCGTCGTGGCTAAG 
+TGACCACAAGCAGCCACATC </p>
+
+<p>65 </p>
+
+<p>LHK_A0005 
+LPW19950 
+LPW19951 </p>
+
+<p>TGGGCGCCATGATCACCTAC 
+CGGCAGGCATGGTGATGAAG </p>
+
+<p>65 </p>
+
+<p>LHK_A0006 
+LPW19952 
+LPW19953 </p>
+
+<p>TGGCGCTTCATCCGCATCAC 
+TCCGGCATCAGTACCGAGAC </p>
+
+<p>65 </p>
+
+<p>LHK_A0007 
+LPW20545 
+LPW20546 </p>
+
+<p>CATCACCCGTGCCCTGAT 
+CTTGGAGAACTGCTTGCG </p>
+
+<p>60 </p>
+
+<p>LHK_A0008 
+LPW20048 
+LPW20049 </p>
+
+<p>CTGACACCCGGTGCAGTTTC 
+CTGGCGTAATCCACCCAGAC </p>
+
+<p>60 </p>
+
+<p>Table 4. Details of the eight newly found genes in the genome of L. hongkongensis </p>
+
+<p>ID 
+Position 
+COG 
+Coverage, E-value, 
+Identity </p>
+
+<p>Potential function </p>
+
+<p>LHK_A0001 476554 -477024 (þ) 
+COG0560E 92%, 1e249, 55% 
+Phosphoserine phosphatase </p>
+
+<p>LHK_A0002 880771 -881358 (þ) 
+COG1961L 97%, 2e272, 60% 
+Site-specific recombinases </p>
+
+<p>LHK_A0003 1391850-1392488 (2) 
+COG2869C 98%, 6e266, 51% 
+Naþ-transporting nicotinamide adenine 
+dinucleotide </p>
+
+<p>LHK_A0004 1570970-1571566 (þ) 
+COG2864C 100%, 1e2110, 81% 
+Thiosulphate reductase cytochrome subunit B </p>
+
+<p>LHK_A0005 1848723-1850306 (2) 
+COG0733R 63%, 3e2156, 73% 
+Naþ-dependent transporters of the sodium: 
+neurotransmitter symporter family </p>
+
+<p>LHK_A0006 2282651-2283334 (þ) 
+COG0778C 77%, 3e273, 66% 
+Putative Cob(II)yrinic acid a,c-diamide reductase 
+(BluB) </p>
+
+<p>LHK_A0007 2660234-2660422 (2) 
+COG0103J 96%, 2e228, 88% 
+Ribosomal protein S9 </p>
+
+<p>LHK_A0008 2875641-2876057 (2) 
+COG0824R 91%, 7e255, 64% 
+Predicted thioesterase </p>
+
+<p>280 
+Gene Re-Annotation in the Neisseriaceae Family 
+[Vol. 20, </p>
+
+<p>Table 6. Details of the 10 newly found genes in the genome of C. violaceum </p>
+
+<p>ID 
+Position 
+COG 
+Coverage, E-value, 
+Identity </p>
+
+<p>Potential function </p>
+
+<p>CV_A0001 486035 -487360 (þ) 
+COG0845Q 
+100%, 0, 72% 
+Membrane-fusion protein </p>
+
+<p>CV_A0002 487503 -489461 (þ) 
+COG0750M 
+100%, 0, 71% 
+Membrane-associated Zn-dependent proteases </p>
+
+<p>CV_A0003 1025430-1025810 
+(þ) </p>
+
+<p>COG3536S 
+89%, 4e267, 83% 
+Uncharacterized bacterial conserved region (BCR) </p>
+
+<p>CV_A0004 1026544-1027152 
+(þ) </p>
+
+<p>COG3165S 
+95%, 6e288, 66% 
+Uncharacterized BCR </p>
+
+<p>CV_A0005 1956990-1958684 
+(þ) </p>
+
+<p>COG0654HC 88%, 3e2177, 53% 
+2-polyprenyl-6-methoxyphenol hydroxylase </p>
+
+<p>CV_A0006 2305072-2305416 
+(2) </p>
+
+<p>COG3628R 
+99%, 4e253, 71% 
+Phage baseplate assembly protein </p>
+
+<p>CV_A0007 2362585-2363220 
+(2) </p>
+
+<p>COG0693R 
+92%, 1e270, 54% 
+Intracellular protease/amidase </p>
+
+<p>CV_A0008 4207595-4208386 
+(þ) </p>
+
+<p>COG0614P 
+85%, 6e294, 67% 
+ABC-type cobalamin/Fe3þ-siderophores transport 
+systems </p>
+
+<p>CV_A0009 4462117-4463199 
+(2) </p>
+
+<p>COG0438M 
+96%, 5e2137, 62% 
+Predicted glycosyltransferases </p>
+
+<p>CV_A0010 4588140-4588436 
+(2) </p>
+
+<p>COG1872S 
+98%, 3e247, 75% 
+Uncharacterized ancient conserved region </p>
+
+<p>Figure 3. RT-PCR confirmations of newly found potential genes in C. violaceum. </p>
+
+<p>Figure 4. Matching relationship of aa sequences encoded by LHK_02777 and LHK_A0007 with the RpsI protein in the genome of 
+Pseudogulbenkiania. The plot is adapted from the result generated by the NCBI blast application. In the search, the query is 
+LHK_02777 and LHK_A0007, respectively, whereas the rpsI protein constitutes the subject. </p>
+
+<p>No. 3] 
+F.-B. Guo et al. 
+281 </p>
+
+<p>the overlapping part is shorter than 15 bp or the over-
+lapping gene is annotated as hypothetical protein that 
+has not significant similarity with known genes in the 
+public database. Details of the 10 genes and their cor-
+responding functions and the details of PCR primers 
+and conditions used in the validation experiments 
+are listed in Tables 6 and 7, respectively. The two 
+negative samples with RT-PCR analysis may consti-
+tute falsely positive predictions of our method, or 
+alternatively, they are expressed only in special 
+conditions. 
+In the other nine Neisseriaceae strains, there were 
+also newly found genes with potential functions. In 
+N. gonorrhoeae FA 1090, only 1 of 18 newly added 
+genes overlaps the annotated genes and the overlap-
+ping part is 20 bp. Among the 18 genes, the function 
+information of four are so detailed to have definite 
+gene names and they encode thiol:disulfide inter-
+change protein DsbD, sulphate ABC transporter 
+permease protein CysU, 23S rRNA (guanosine-2 0 -O-)-
+methyltransferase RlmB and septum site-determining 
+protein MinD, respectively. In N. gonorrhoeae 
+NCCP11945, nine new genes are found. Among 
+them, five do not overlap annotated genes. Four of 
+the five genes have putative important function 
+based on very high similarity and they encode tran-
+scription antiterminator (Nusg), 30S ribosomal 
+protein S14 (RpsN), 30S ribosomal protein L30 
+(RpmD) and translation initiation factor IF-1 (InfA). 
+In N. lactamica, none of the five newly added genes 
+overlap annotated genes. Among them, three encode </p>
+
+<p>DNA transport competence protein (ComeA), one 
+encodes transposases and one encodes the TonB-
+dependent receptor. In Pseudogulbenkiania, only one 
+gene is added. Interestingly, this gene has the same 5 0 
+terminal with the annotated gene (NH8B_2210) but 
+they do not have the same stop codon. The 
+NH8B_2210 is much longer than the newly added 
+one and they have the same reading frame. 
+According to the RefSeq annotation for NH8B_2210, 
+the original authors seemed to have predicted that 
+there is a stop codon treated as the selenocystein 
+codon. By blast against the public database, the 
+newly added gene is shown to be a more reliable pre-
+diction because it has the same length with counter-
+parts in distantly related species where as the 
+annotated does not. 
+In the four strains of N. meningitidis, from 6 to 30 
+new genes were added and very few of them overlap 
+the annotated genes. The strain alpha14 N. meningiti-
+dis has the most found new genes and interestingly 
+27 among the 30 new genes encode transposases. 
+Although their aa identities with known transposases 
+in genomes beyond the Neisseria genus tend to be just 
+slightly higher than 50%, the identity is higher than 
+80% for each of them with counterparts in the same 
+genus. Furthermore, the coverage at each case is 
+greater than 90%. Therefore, predicted functions of 
+encoding transposases for the 27 new genes are reli-
+able. According to the RefSeq annotation, none of 
+the genes code for transposases in this strain. 
+However, 55, 29 and 33 transposases have been 
+annotated in the other three strains of N. meningitidis. 
+The lower sensitivity of the ab initio gene finder used 
+in the annotation of N. meningitidis alpha14 is sug-
+gested to be responsible for the missing of transpo-
+sases. In fact, some of transposases, which aid the 
+integration insertion of genomic islands or single hori-
+zontally transferred gene, tend to own abnormal nu-
+cleotide composition and are easily missed by 
+composition-based programmes. 41 In addition, some 
+genes with important functions have been added in 
+the N. meningitidis genomes, such as the haemoglobin 
+receptor in 053442, transcription elongation factor 
+(greA) in alpha14, protein methyltransferase (hemK) 
+in Z2491, leucyl aminopeptidase ( pepA) and allopha-
+nate hydrolase subunit 2 in MC58. Details of the 106 
+newly found genes in the 10 Neisseriaceae strains are 
+listed in Supplementary Table S2. </p>
+
+<p>3.3. Hypothetical proteins with newly assigned 
+functions 
+For the genomes sequenced several years ago, func-
+tional information may be outdated. 16,29 Especially, 
+some hypothetical genes may have functional coun-
+terparts in current databases, 16 whereas they are </p>
+
+<p>Table 7. PCR primers and annealing temperature for the 10 
+newly found potential genes in C. violaceum </p>
+
+<p>ID Primer pair Primer sequence 
+Annealing 
+temperature </p>
+
+<p>1 
+LPW21817 
+LPW21818 </p>
+
+<p>CTGGCATTGACCGATGAC 
+CGAAGCGTTGGGATACAG </p>
+
+<p>55 </p>
+
+<p>2 
+LPW21819 
+LPW21820 </p>
+
+<p>CTGTATCGCCTGGTGTTG 
+GCCCTTGCTCTGCAAATC </p>
+
+<p>45 </p>
+
+<p>3 
+LPW21821 
+LPW21822 </p>
+
+<p>TGCCCATGTCAGGACTTG 
+GAGCTTGTCCAGGTATTG </p>
+
+<p>55 </p>
+
+<p>4 
+LPW21823 
+LPW21824 </p>
+
+<p>GATTTGTCGCGGGTGTTC 
+GAAGCGTTGAACCAGATG </p>
+
+<p>60 </p>
+
+<p>5 
+LPW21825 
+LPW21826 </p>
+
+<p>CATGAGGTTAGCCCTTTC 
+GCCATCGACGAAATACAG </p>
+
+<p>55 </p>
+
+<p>6 
+LPW21827 
+LPW21828 </p>
+
+<p>CAGTGCATCCGCATCATC 
+GCTCCCATTGCCGAATAG </p>
+
+<p>60 </p>
+
+<p>7 
+LPW21829 
+LPW21830 </p>
+
+<p>CAGGAAGACCTGTCTTAC 
+CTGGCAAAGTCCTCTTCC </p>
+
+<p>55 </p>
+
+<p>8 
+LPW21835 
+LPW21836 </p>
+
+<p>CGCAGCTGAAGCAGCTGAAG 
+CGGCTTGAAACCGTTGAG </p>
+
+<p>48 </p>
+
+<p>9 
+LPW21837 
+LPW21838 </p>
+
+<p>TTGAGCTACGGCATAGAC 
+GCCAGCCGTTTCAGATTC </p>
+
+<p>55 </p>
+
+<p>10 LPW21839 
+LPW21840 </p>
+
+<p>CGTCTGACGCTGCATGTG 
+GTCGCCGGACAACAATTC </p>
+
+<p>55 </p>
+
+<p>282 
+Gene Re-Annotation in the Neisseriaceae Family 
+[Vol. 20, </p>
+
+<p>still annotated as hypothetical. This section is aiming 
+to provide functional information for hypothetical 
+genes in the 10 Neisseriaceae strains by using the 
+similarity search method. To ensure reliable function 
+transfer, severe homologous conditions were 
+adopted. After the blast search, varying numbers of 
+hypothetical proteins were assigned functions in the 
+10 Neisseriaceae genomes (Table 3). Among them, 
+L. hongkongensis and Pseudogulbenkiania have the 
+least numbers perhaps because their genomes were 
+most recently sequenced. In the two strains of the 
+N. gonorrhoeae, the strain FA 1090 has the larger 
+number of assigned functions and it just was 
+sequenced earlier than NCCP11945. 23,42 Among 
+the four strains of the species, N. meningitidis MC58 
+has the largest number and it just was sequenced 
+earliest among them. 23 Therefore, the number of 
+hypothetical proteins with newly assigned functions 
+may be tightly associated with sequenced time of 
+the genome. In fact, if one genome has been 
+sequenced at earlier year, it should have more func-
+tional counterparts in the current public database 
+but not existed at that time. 29 The original annotation 
+would be more outdated for earlier sequenced 
+genome in the sense of function information. 
+Among newly assigned functions, some have been 
+provided definite names (Table 8) and this transferred 
+annotation information should be unquestionable. 
+For example, the hypothetical gene LHK_02863 in 
+L. hongkongensis has been assigned not only the func-
+tion encoding iron-sulphur cluster assembly protein 
+but also the definite name 'IscA'. Some other genes 
+were assigned with detailed functions and would be 
+reliable with this function because stringent homolo-
+gous criteria were adopted. However, there are still 
+some hypothetical proteins with only general 
+functions, such as membrane proteins, lipoproteins 
+and periplasmic proteins (Table 8). This type of 
+rough function information would give help for 
+the determination of more detailed functions. </p>
+
+<p>Interestingly, the number of assigned membrane pro-
+teins tends to be larger than periplasmic proteins and 
+much larger than lipoproteins in most cases (Table 8). 
+It is suggested that this information corresponds to 
+their natural ranks existing in the genome. Details of 
+assigned functions for each of the 10 Neisseriaceae 
+strains are listed in Supplementary Table S3. </p>
+
+<p>3.4. Disrupted ORFs 
+During the process of genome re-annotation for the 
+10 Neisseriaceae strains, we found an interesting phe-
+nomenon. In a specific genome, two adjacent ORFs, 
+which are predicted as genes by the <rs type="software">ZCURVE</rs> 
+program, have the same function with known genes 
+in the other species. The total length of the two 
+ORFs just corresponds to that of the known counter-
+parts or just a little different from them. Based on 
+similarity scores, both of the two ORFs should be pre-
+dicted as genes with the corresponding function. 
+However, either of them is much shorter than the 
+functional counterpart and could not constitute a 
+homologue in the sense of length information. 
+Perrodou et al. 43 stated that unrecognized frameshifts, 
+in-frame stop codons and sequencing errors often led 
+to interrupted coding sequences. Very recently, 
+Sharma et al. 44 performed a pilot study on bacterial 
+genes with disrupted ORFs. Their results indicated 
+that many disrupted genes likely utilized the non-
+standard decoding mechanisms: programmed riboso-
+mal frameshifting and programmed transcriptional 
+realignment. Given that our recognized adjacent 
+ORFs have identical functions, they should originate 
+from the disruption of a longer gene by a frameshift 
+or an in-frame stop codon and rarely by the sequen-
+cing error. Numbers of disrupted ORFs are listed 
+in Table 3 and details of them are illustrated in 
+Supplementary Table S4. Totally, 111 disrupted 
+ORFs (or partial genes) were identified in six strains 
+of the genus Neisseria and two in L. hongkongensis. </p>
+
+<p>Table 8. Among hypothetical gene with assigned functions, the numbers of genes with definite names, those encoding membrane 
+proteins, lipoproteins and periplasmic proteins </p>
+
+<p>Strains 
+With definite name 
+Membrane protein 
+Lipoprotein 
+Periplasmic protein 
+C. violaceum 
+29 
+5 
+1 
+1 </p>
+
+<p>L. hongkongensis 
+9 
+3 
+0 
+0 </p>
+
+<p>N. gonorrhoeae FA 1090 
+105 
+72 
+25 
+31 </p>
+
+<p>N. gonorrhoeae NCCP11945 
+34 
+25 
+6 
+8 </p>
+
+<p>N. lactamica 
+39 
+25 
+6 
+21 </p>
+
+<p>N. meningitidis 053442 
+30 
+21 
+4 
+19 </p>
+
+<p>N. meningitidis Alpha 14 
+19 
+67 
+16 
+26 </p>
+
+<p>N. meningitidis MC58 
+47 
+77 
+26 
+17 </p>
+
+<p>N. meningitidis Z2491 
+78 
+33 
+8 
+18 </p>
+
+<p>Pseudogulbenkiania 
+7 
+9 
+5 
+0 </p>
+
+<p>No. 3] 
+F.-B. Guo et al. </p>
+
+<p>
+According to Sharma et al., 44 some of the disrupted 
+ORFs still encode proteins. Consistent with this, 
+both of the disrupted ORFs LHK_A0007 (newly 
+predicted) and LHK_02777 (originally annotated) 
+are found to be transcribed in L. hongkongensis cells 
+by the PCR experiment. Further wet experiment on 
+functions of the other disrupted ORFs would be 
+interesting. </p>
+
+<p>4. Discussions </p>
+
+<p>The genome annotation would be outdated with 
+the functional information when several years 
+passed since the sequencing. Latest database may 
+contain new functional genes which were not yet 
+assigned functional information when the analyzed 
+genome was sequenced. 29 Those newly added func-
+tional information would provide the source of func-
+tion transfer for some hypothetical genes in the 
+analyzed genome. Sometimes, a few genes missed 
+by the original annotation may be found with the 
+similarity alignment. 25 In this work, a total of 2069 
+hypothetical genes were assigned with general or 
+detailed functions based on homology search 
+against latest database. Among the 10 Neisseriaceae 
+strains, N. gonorrhoeae FA 1090 and N. meningitidis 
+MC58 and Z2491 were sequenced and annotated 
+earlier. 23 Correspondingly, the numbers of newly 
+assigned functions in them are the largest. 
+Therefore, the time from the sequencing is longer 
+and the function annotation is more likely to be out-
+dated. As for newly found genes, all 10 strains except 
+N. meningitidis alpha14 contain a small number. In 
+fact, it is rather difficult to find genes missed by the 
+original annotation using the similarity-based 
+method. When annotating the genome originally, pre-
+dicted genes, particularly those having similar coun-
+terparts, would be retained as far as possible. 
+Therefore, newly identified genes usually are only 
+those having counterparts newly added in the data-
+base. As an exception, as many as 30 genes were 
+newly found in the strain of N. meningitidis 
+alpha14 and 27 of them correspond to transpo-
+sases. We speculate that the less sensitivity of the 
+ab initio programme, which has been used in the ori-
+ginal annotation, for the external genes leads to the 
+missing of the 27 genes associated with insertion 
+function. 
+Besides the published date, the quality of the origin-
+al annotation is another determining factor of the 
+extent of errors. 33 As an example, N. gonorrhoeae 
+NCCP11945 has the highest gene density according 
+to the RefSeq annotations among the seven Neisseria 
+strains. Correspondingly, the largest number of hypo-
+thetical genes has been excluded from this strain. </p>
+
+<p>When annotating this genome, only one ab initio 
+gene finder was used. 42 Usually, two or more ab 
+initio programmes are used in annotating the other 
+bacterial genomes. Based on the very abnormal 
+gene density of the strain, we suppose that there 
+may still be non-coding ORFs, besides the 56 ones 
+excluded by us. Besides the annotation method and 
+sequencing time, some other factors also cause the 
+different extent of errors. For example, genes in high 
+G þ C bacterial genomes are shown to be difficultly 
+predicted with high accuracy and this is caused by 
+the fact that many long ORFs appear in this type of 
+genomes. 32 In addition, the genome could be diffi-
+cultly predicted accurately if there are only distantly 
+related species in the public databases. 33 
+We should note that there still probably are non-
+coding ORFs and missed genes after the present 
+updated annotation in the 10 Neisseriaceae strains. 
+To assure reliable results, we picked up only those 
+sequences with very higher similarities when identify-
+ing missed genes and we used the method with lower 
+specificity when excluding non-coding ORFs. In add-
+ition, some thoroughly new genes, which have not sig-
+nificant similarities with any known genes, may be 
+found by combing ab initio programme and wet ex-
+perimental validation. However, the 106 newly 
+found genes are those having similar counterparts 
+based on latest databases. Also note that different 
+detailed methods may be used to check the annota-
+tions of the other bacterial genomes, although the 
+present systematic method has shown to be effective 
+and reliable. For example, the recently developed ab 
+initio gene finder <rs type="software">Prodigal</rs>, 32 which has lower false 
+positives could replace or jointly used with <rs id="software-4" type="software">ZCURVE</rs> 
+<rs corresp="#software-4" type="version-number">1.0</rs>. Here, we used only the latter because the use of 
+both of them generates basically consistent results 
+(data not shown). The <rs type="software">RPGM</rs> program, 39 which is 
+also based on the graphical representation of the 
+DNA sequence, could be chosen as an alternative to 
+eliminate non-coding ORFs. </p>
+
+<p>Supplementary data: Supplementary Data are 
+available at www.dnaresearch.oxfordjournals.org. </p>
+
+<p>Acknowledgements: The authors are grateful to 
+the editor and the anonymous reviewers for their 
+valuable suggestions and comments, which has led to 
+the improvement of this article. We thank Mr Zhong-
+Shan Cheng for helpful discussions. We also thank 
+Miss Annette Y. P. Wong for helps in constructing the 
+website.: Conflict of Interest statement. None declared. </p>
+
+<p>Funding </p>
+
+<p>This work was supported by the Hong Kong 
+Scholars Program (XJ2011005), National Natural </p>
+
+<p>284 
+Gene Re-Annotation in the Neisseriaceae Family 
+[Vol. 20, </p>
+
+<p>Science Foundation of China (31071109) and the 
+programme for New Century Excellent Talents in 
+University (NCET-11-0059). </p>
+
+
+
+<p> 
+Gene Re-Annotation in the Neisseriaceae Family 
+[Vol. 20, </p>
+
+</text></tei>
