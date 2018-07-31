@@ -34,17 +34,22 @@ Run some test:
 
 > mvn -Dmaven.test.skip=true jetty:run-war
 
-Demo/console web app is then accessible at ```http://localhost:8080```
+Javascript demo/console web app is then accessible at ```http://localhost:8060```
 
-Using ```curl``` POST/GET requests:
-
-
-```
-curl -X POST -d "text=The next step is install GROBID version 0.5.1." localhost:8080/processSoftwareText
-```
+Using ```curl``` POST/GET requests with some text:
 
 ```
-curl -GET --data-urlencode "text=Look at GROBID logs." localhost:8080/processSoftwareText
+curl -X POST -d "text=The next step is install GROBID version 0.5.1." localhost:8060/processSoftwareText
+```
+
+```
+curl -GET --data-urlencode "text=Look at GROBID logs." localhost:8060/processSoftwareText
+```
+
+Using ```curl``` POST/PUT requests with a PDF file:
+
+```bash
+curl --form input=@./thefile.pdf localhost:8060/annotateSoftwarePDF
 ```
 
 ## Training and evaluation

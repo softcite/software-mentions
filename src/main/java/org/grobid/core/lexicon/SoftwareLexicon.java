@@ -70,7 +70,7 @@ public class SoftwareLexicon {
         BufferedReader dis = null;
         // read the lexicon file
         try {
-            softwarePattern = new FastMatcher(file, SoftwareAnalyzer.getInstance());
+            softwarePattern = new FastMatcher(file, SoftwareAnalyzer.getInstance(), true); // case sensitive
 
             dis = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF8"));
             String l = null;
@@ -106,12 +106,12 @@ public class SoftwareLexicon {
 	}
 
     public List<OffsetPosition> tokenPositionsSoftwareNamesVectorLabeled(List<Pair<String, String>> pairs) {
-        List<OffsetPosition> results = softwarePattern.matcherPairs(pairs);
+        List<OffsetPosition> results = softwarePattern.matcherPairs(pairs, true); // case sensitive
         return results;
     }
 
     public List<OffsetPosition> tokenPositionsSoftwareNames(List<LayoutToken> vector) {
-        List<OffsetPosition> results = softwarePattern.matchLayoutToken(vector);
+        List<OffsetPosition> results = softwarePattern.matchLayoutToken(vector, true, true); // case sensitive
         return results;
     }
 }
