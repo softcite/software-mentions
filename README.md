@@ -15,20 +15,25 @@ Building module requires maven and JDK 1.8.
 First install and build the latest development version of GROBID as explained by the [documentation](http://grobid.readthedocs.org).
 
 Copy the module software-mentions as sibling sub-project to grobid-core, grobid-trainer, etc.:
+
 > cp -r software-mentions grobid/
 
-Try compiling everything with:
+Copy the provided pre-trained model in the standard grobid-home path:
 
 > cd grobid/software-mentions/
+
+> mkdir ../grobid-home/models/software
+
+> cp resources/model/model.wapiti ../grobid-home/models/software/
+
+Try compiling everything with:
 
 > mvn -Dmaven.test.skip=true clean install
 
 Run some test: 
-> cd PATH-TO-GROBID/grobid/software-mentions/
 
 > mvn compile test
 
-**The models have to be trained before running the tests!** - See bellow for training a software model. 
 
 ## Start the service
 

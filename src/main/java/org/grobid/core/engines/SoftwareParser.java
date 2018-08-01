@@ -5,7 +5,7 @@ import nu.xom.Element;
 import org.apache.commons.io.FileUtils;
 import org.grobid.core.GrobidModels;
 import org.grobid.core.analyzers.SoftwareAnalyzer;
-import org.grobid.core.data.SoftwareEntity;
+import org.grobid.core.data.SoftwareComponent;
 import org.grobid.core.data.BiblioItem;
 import org.grobid.core.document.Document;
 import org.grobid.core.document.DocumentPiece;
@@ -77,11 +77,11 @@ public class SoftwareParser extends AbstractParser {
     /**
      * Extract all Software mentions from a simple piece of text.
      */
-    public List<SoftwareEntity> processText(String text) throws Exception {
+    public List<SoftwareComponent> processText(String text) throws Exception {
         if (isBlank(text)) {
             return null;
         }
-        List<SoftwareEntity> entities = new ArrayList<SoftwareEntity>();
+        List<SoftwareComponent> components = new ArrayList<SoftwareComponent>();
         try {
             text = text.replace("\n", " ");
             text = text.replace("\t", " ");
@@ -108,20 +108,20 @@ public class SoftwareParser extends AbstractParser {
                 throw new GrobidException("CRF labeling for software parsing failed.", e);
             }
 //System.out.println(res);
-            entities = extractSoftwareEntities(text, res, tokens);
+            components = extractSoftwareComponents(text, res, tokens);
         } catch (Exception e) {
             throw new GrobidException("An exception occured while running Grobid.", e);
         }
 
-        return entities;
+        return components;
     }
 
 	/**
 	  * Extract all Software mentions from a pdf file, with 
 	  */
-    public Pair<List<SoftwareEntity>,Document> processPDF(File file) throws IOException {
+    public Pair<List<SoftwareComponent>,Document> processPDF(File file) throws IOException {
 
-        List<SoftwareEntity> entities = new ArrayList<SoftwareEntity>();
+        List<SoftwareComponent> components = new ArrayList<SoftwareComponent>();
         Document doc = null;
         try {
 			GrobidAnalysisConfig config = 
@@ -152,19 +152,19 @@ public class SoftwareParser extends AbstractParser {
                     // title
                     List<LayoutToken> titleTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_TITLE);
                     if (titleTokens != null) {
-                        processLayoutTokenSequence(titleTokens, entities);
+                        processLayoutTokenSequence(titleTokens, components);
                     } 
 
                     // abstract
                     List<LayoutToken> abstractTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_ABSTRACT);
                     if (abstractTokens != null) {
-                        processLayoutTokenSequence(abstractTokens, entities);
+                        processLayoutTokenSequence(abstractTokens, components);
                     } 
 
                     // keywords
                     List<LayoutToken> keywordTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_KEYWORD);
                     if (keywordTokens != null) {
-                        processLayoutTokenSequence(keywordTokens, entities);
+                        processLayoutTokenSequence(keywordTokens, components);
                     }
                 }
             }
@@ -205,11 +205,11 @@ public class SoftwareParser extends AbstractParser {
                         String clusterContent = LayoutTokensUtil.normalizeText(LayoutTokensUtil.toText(cluster.concatTokens()));
                         if (clusterLabel.equals(TaggingLabels.PARAGRAPH) || clusterLabel.equals(TaggingLabels.ITEM)
                             || clusterLabel.equals(TaggingLabels.SECTION) ) {
-                            processLayoutTokenSequence(localTokenization, entities);
+                            processLayoutTokenSequence(localTokenization, components);
                         } else if (clusterLabel.equals(TaggingLabels.TABLE)) {
-                            processLayoutTokenSequenceTableFigure(localTokenization, entities);
+                            processLayoutTokenSequenceTableFigure(localTokenization, components);
                         } else if (clusterLabel.equals(TaggingLabels.FIGURE)) {
-                            processLayoutTokenSequenceTableFigure(localTokenization, entities);
+                            processLayoutTokenSequenceTableFigure(localTokenization, components);
                         }
                     }
                 }
@@ -221,13 +221,13 @@ public class SoftwareParser extends AbstractParser {
             // we can process annexes
             documentParts = doc.getDocumentPart(SegmentationLabels.ANNEX);
             if (documentParts != null) {
-                processDocumentPart(documentParts, doc, entities);
+                processDocumentPart(documentParts, doc, components);
             }
 
             // footnotes are also relevant?
             /*documentParts = doc.getDocumentPart(SegmentationLabel.FOOTNOTE);
             if (documentParts != null) {
-                processDocumentPart(documentParts, doc, entities);
+                processDocumentPart(documentParts, doc, components);
             }*/
 
         } catch (Exception e) {
@@ -235,35 +235,35 @@ public class SoftwareParser extends AbstractParser {
             throw new GrobidException("Cannot process pdf file: " + file.getPath());
         }
 
-        Collections.sort(entities);
-        return new Pair<List<SoftwareEntity>,Document>(entities, doc);
+        Collections.sort(components);
+        return new Pair<List<SoftwareComponent>,Document>(components, doc);
     }
 
     /**
      * Process with the software model a segment coming from the segmentation model
      */
-    private List<SoftwareEntity> processDocumentPart(SortedSet<DocumentPiece> documentParts, 
+    private List<SoftwareComponent> processDocumentPart(SortedSet<DocumentPiece> documentParts, 
                                                   Document doc,
-                                                  List<SoftwareEntity> entities) {
+                                                  List<SoftwareComponent> components) {
         List<LayoutToken> tokenizationParts = doc.getTokenizationParts(documentParts, doc.getTokenizations());
-        return processLayoutTokenSequence(tokenizationParts, entities);
+        return processLayoutTokenSequence(tokenizationParts, components);
     }
 
     /**
      * Process with the software model an arbitrary sequence of LayoutToken objects
      */ 
-    private List<SoftwareEntity> processLayoutTokenSequence(List<LayoutToken> layoutTokens, 
-                                                            List<SoftwareEntity> entities) {
+    private List<SoftwareComponent> processLayoutTokenSequence(List<LayoutToken> layoutTokens, 
+                                                            List<SoftwareComponent> components) {
         List<LayoutTokenization> layoutTokenizations = new ArrayList<LayoutTokenization>();
         layoutTokenizations.add(new LayoutTokenization(layoutTokens));
-        return processLayoutTokenSequences(layoutTokenizations, entities);
+        return processLayoutTokenSequences(layoutTokenizations, components);
     }
 
     /**
      * Process with the software model a set of arbitrary sequence of LayoutTokenization
      */ 
-    private List<SoftwareEntity> processLayoutTokenSequences(List<LayoutTokenization> layoutTokenizations, 
-                                                  List<SoftwareEntity> entities) {
+    private List<SoftwareComponent> processLayoutTokenSequences(List<LayoutTokenization> layoutTokenizations, 
+                                                  List<SoftwareComponent> components) {
         for(LayoutTokenization layoutTokenization : layoutTokenizations) {
             List<LayoutToken> layoutTokens = layoutTokenization.getTokenization();
             layoutTokens = SoftwareAnalyzer.getInstance().retokenizeLayoutTokens(layoutTokens);
@@ -283,17 +283,17 @@ public class SoftwareParser extends AbstractParser {
             // labeled result from CRF lib
             String res = label(ress);
 //System.out.println(res);
-            entities.addAll(extractSoftwareEntities(text, res, layoutTokens));
+            components.addAll(extractSoftwareComponents(text, res, layoutTokens));
         }
-        return entities;
+        return components;
     }
 
     /**
      * Process with the software model a set of arbitrary sequence of LayoutTokenization
      * from tables and figures, where the content is not structured (yet)
      */ 
-    private List<SoftwareEntity> processLayoutTokenSequenceTableFigure(List<LayoutToken> layoutTokens, 
-                                                  List<SoftwareEntity> entities) {
+    private List<SoftwareComponent> processLayoutTokenSequenceTableFigure(List<LayoutToken> layoutTokens, 
+                                                  List<SoftwareComponent> components) {
 
         layoutTokens = SoftwareAnalyzer.getInstance().retokenizeLayoutTokens(layoutTokens);
 
@@ -324,12 +324,12 @@ public class SoftwareParser extends AbstractParser {
             // labeled result from CRF lib
             String res = label(ress);
     //System.out.println(res);
-            entities.addAll(extractSoftwareEntities(text, res, localLayoutTokens));
+            components.addAll(extractSoftwareComponents(text, res, localLayoutTokens));
             localLayoutTokens = null;
             pos++;
         }
        
-        return entities;
+        return components;
     }
 
 	/**
@@ -470,7 +470,7 @@ public class SoftwareParser extends AbstractParser {
         // we process the text paragraph by paragraph
         String lines[] = text.split("\n");
         StringBuilder paragraph = new StringBuilder();
-        List<SoftwareEntity> entities = null;
+        List<SoftwareComponent> components = null;
         for (int i = 0; i < lines.length; i++) {
             String line = lines[i].trim();
             if (line.length() != 0) {
@@ -501,9 +501,9 @@ public class SoftwareParser extends AbstractParser {
                 } catch (Exception e) {
                     throw new GrobidException("CRF labeling for software mention parsing failed.", e);
                 }
-                entities = extractSoftwareEntities(text, res, tokens);
+                components = extractSoftwareComponents(text, res, tokens);
 
-                textNode.appendChild(trainingExtraction(entities, text, tokens));
+                textNode.appendChild(trainingExtraction(components, text, tokens));
                 paragraph = new StringBuilder();
             }
         }
@@ -533,7 +533,7 @@ public class SoftwareParser extends AbstractParser {
 
         // we parse this TEI string similarly as for createTrainingXML
 
-        List<SoftwareEntity> entities = null;
+        List<SoftwareComponent> components = null;
 
         Element textNode = teiElement("text");
         // for the moment we suppose we have english only...
@@ -579,14 +579,15 @@ public class SoftwareParser extends AbstractParser {
                 } catch (Exception e) {
                     throw new GrobidException("CRF labeling for software parsing failed.", e);
                 }
-                entities = extractSoftwareEntities(text, res, tokenizations);
+                components = extractSoftwareComponents(text, res, tokenizations);
 
-                textNode.appendChild(trainingExtraction(entities, text, tokenizations));
+                textNode.appendChild(trainingExtraction(components, text, tokenizations));
             }
             root.appendChild(textNode);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new GrobidException("Cannot create training data because input PDF/XML file can not be parsed: " + file.getPath());
+            throw new GrobidException("Cannot create training data because input PDF/XML file can not be parsed: " + 
+                file.getPath());
         }
 
         return root;
@@ -653,17 +654,17 @@ public class SoftwareParser extends AbstractParser {
     }
 
     /**
-     * Extract identified software entities from a CRF labelled text.
+     * Extract identified software components from a CRF labelled text.
      */
-    public List<SoftwareEntity> extractSoftwareEntities(String text,
+    public List<SoftwareComponent> extractSoftwareComponents(String text,
                                                 	String result,
                                                 	List<LayoutToken> tokenizations) {
-        List<SoftwareEntity> entities = new ArrayList<>();
+        List<SoftwareComponent> components = new ArrayList<>();
 
         TaggingTokenClusteror clusteror = new TaggingTokenClusteror(GrobidModels.SOFTWARE, result, tokenizations);
         List<TaggingTokenCluster> clusters = clusteror.cluster();
 
-        SoftwareEntity currentEntity = null;
+        SoftwareComponent currentComponent = null;
         SoftwareLexicon.Software_Type openEntity = null;
 
         int pos = 0; // position in term of characters for creating the offsets
@@ -676,8 +677,7 @@ public class SoftwareParser extends AbstractParser {
             TaggingLabel clusterLabel = cluster.getTaggingLabel();
             List<LayoutToken> theTokens = cluster.concatTokens();
             String clusterContent = LayoutTokensUtil.toText(cluster.concatTokens()).trim();
-
-            
+  
             if ((pos < text.length()-1) && (text.charAt(pos) == ' '))
                 pos += 1;
             if ((pos < text.length()-1) && (text.charAt(pos) == '\n'))
@@ -703,55 +703,55 @@ public class SoftwareParser extends AbstractParser {
             if ((endPos > 0) && (text.length() >= endPos) && (text.charAt(endPos-1) == ' '))
                 endPos--;
 
-            if (clusterLabel.equals(SoftwareTaggingLabels.SOFTWARE)) {
-            	
-            	if (currentEntity == null) {
-                    currentEntity = new SoftwareEntity();
-                }
+            if (!clusterLabel.equals(SoftwareTaggingLabels.OTHER)) {
+                currentComponent = new SoftwareComponent();
 
-                currentEntity.setRawForm(clusterContent);
-                currentEntity.setOffsetStart(pos);
-                currentEntity.setOffsetEnd(endPos);
-                currentEntity.setType(SoftwareLexicon.Software_Type.SOFTWARE);
-                currentEntity.setTokens(theTokens);
+                currentComponent.setRawForm(clusterContent);
+                currentComponent.setOffsetStart(pos);
+                currentComponent.setOffsetEnd(endPos);
+                currentComponent.setLabel(clusterLabel);
+                if (clusterLabel.equals(SoftwareTaggingLabels.SOFTWARE))
+                   currentComponent.setType(SoftwareLexicon.Software_Type.SOFTWARE);
+                currentComponent.setTokens(theTokens);
 
 				List<BoundingBox> boundingBoxes = BoundingBoxCalculator.calculate(cluster.concatTokens());
-				currentEntity.setBoundingBoxes(boundingBoxes);
+				currentComponent.setBoundingBoxes(boundingBoxes);
 
-				entities.add(currentEntity);
-				currentEntity = null;
-            }
+				components.add(currentComponent);
+				currentComponent = null;
+            } 
             
             pos = endPos;
         }
 
-        return entities;
+        return components;
     }
 
 	/**
-	 *  Add XML annotations corresponding to entities in a piece of text, to be included in
+	 *  Add XML annotations corresponding to components in a piece of text, to be included in
 	 *  generated training data.
 	 */
-    public Element trainingExtraction(List<SoftwareEntity> entities, String text, List<LayoutToken> tokenizations) {
+    public Element trainingExtraction(List<SoftwareComponent> components, String text, List<LayoutToken> tokenizations) {
         Element p = teiElement("p");
 
         int pos = 0;
-		if ( (entities == null) || (entities.size() == 0) )
+		if ( (components == null) || (components.size() == 0) )
 			p.appendChild(text);
-        for (SoftwareEntity entity : entities) {
-            Element entityElement = teiElement("rs");
+        for (SoftwareComponent component : components) {
+            Element componentElement = teiElement("rs");
 
-            if (entity.getType() == SoftwareLexicon.Software_Type.SOFTWARE) {
-                entityElement.addAttribute(new Attribute("type", "software"));
+            //if (component.getLabel() != OTHER) 
+            {
+                componentElement.addAttribute(new Attribute("type", component.getLabel().getLabel()));
 
-                int startE = entity.getOffsetStart();
-                int endE = entity.getOffsetEnd();
+                int startE = component.getOffsetStart();
+                int endE = component.getOffsetEnd();
 
 				p.appendChild(text.substring(pos, startE));
-                entityElement.appendChild(text.substring(startE, endE));
+                componentElement.appendChild(text.substring(startE, endE));
                 pos = endE;
             }
-            p.appendChild(entityElement);
+            p.appendChild(componentElement);
         }
         p.appendChild(text.substring(pos, text.length()));
 

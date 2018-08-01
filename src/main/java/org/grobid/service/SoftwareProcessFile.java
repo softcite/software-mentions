@@ -1,6 +1,6 @@
 package org.grobid.service;
 
-import org.grobid.core.data.SoftwareEntity;
+import org.grobid.core.data.SoftwareComponent;
 import org.grobid.core.document.Document;
 import org.grobid.core.engines.Engine;
 import org.grobid.core.main.LibraryLoader;
@@ -75,11 +75,11 @@ public class SoftwareProcessFile {
                 response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
             } else {
                 long start = System.currentTimeMillis();
-                Pair<List<SoftwareEntity>, Document> extractedEntities = parser.processPDF(originFile);
+                Pair<List<SoftwareComponent>, Document> extractedEntities = parser.processPDF(originFile);
                 long end = System.currentTimeMillis();
 
                 Document doc = extractedEntities.getB();
-                List<SoftwareEntity> entities = extractedEntities.getA();
+                List<SoftwareComponent> entities = extractedEntities.getA();
                 StringBuilder json = new StringBuilder();
 				json.append("{ ");
 
@@ -98,7 +98,7 @@ public class SoftwareProcessFile {
 
 				json.append("], \"entities\":[");
 				first = true;
-				for(SoftwareEntity entity : entities) {
+				for(SoftwareComponent entity : entities) {
 					if (!first)
 						json.append(", ");
 					else
