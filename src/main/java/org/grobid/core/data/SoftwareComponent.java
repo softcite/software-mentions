@@ -44,9 +44,6 @@ public class SoftwareComponent implements Comparable<SoftwareComponent> {
 	// normalized form of the component
     private String normalizedForm = null;
 	
-	// type of the component
-	private SoftwareLexicon.Software_Type type = null;
-	
 	// relative offset positions in context, if defined
 	private OffsetPosition offsets = null;
 	
@@ -71,14 +68,13 @@ public class SoftwareComponent implements Comparable<SoftwareComponent> {
 		this.offsets = new OffsetPosition();
     }
 
-	public SoftwareComponent(SoftwareComponent ent) {
+	/*public SoftwareComponent(SoftwareComponent ent) {
 		rawForm = ent.rawForm;
 		normalizedForm = ent.normalizedForm;
-		type = ent.type;
 		offsets = ent.offsets;
 		conf = ent.conf;
 		origin = ent.origin;
-	}
+	}*/
 
     public String getRawForm() {
         return rawForm;
@@ -95,14 +91,6 @@ public class SoftwareComponent implements Comparable<SoftwareComponent> {
 	public void setNormalizedForm(String normalized) {
         this.normalizedForm = normalized;
     }
-
-	public SoftwareLexicon.Software_Type getType() {
-		return type;
-	}
-	
-	public void setType(SoftwareLexicon.Software_Type theType) {
-		type = theType;
-	}
 
 	public OffsetPosition getOffsets() {
 		return offsets;
@@ -208,19 +196,19 @@ public class SoftwareComponent implements Comparable<SoftwareComponent> {
 		}
 		if (normalizedForm != null)
 			buffer.append(", \"normalizedForm\" : \"" + normalizedForm + "\"");
-		if (type != null)
-			buffer.append(", \"type\" : \"" + type.getName() + "\"");	
-		if (label != null) {
+		/*if (label != null) {
 			String componentType = label.getLabel();
 			componentType = componentType.replace("<", "");
 			componentType = componentType.replace(">", "");
+			if (componentType.equals("software"))
+				componentType = "software-name";
 			buffer.append(", \"component-type\" : \"" + componentType + "\"");	
-		}
+		}*/
 
 		buffer.append(", \"offsetStart\" : " + offsets.start);
 		buffer.append(", \"offsetEnd\" : " + offsets.end);	
 		
-		buffer.append(", \"conf\" : \"" + conf + "\"");
+		//buffer.append(", \"conf\" : \"" + conf + "\"");
 		
 		if ( (boundingBoxes != null) && (boundingBoxes.size() > 0) ) {
 			buffer.append(", \"boundingBoxes\" : [");
@@ -247,9 +235,9 @@ public class SoftwareComponent implements Comparable<SoftwareComponent> {
 		if (normalizedForm != null) {
 			buffer.append(normalizedForm + "\t");
 		}
-		if (type != null) {
-			buffer.append(type + "\t");	
-		}
+		//if (type != null) {
+		//	buffer.append(type + "\t");	
+		//}
 		//if (entityId != null)
 		//	buffer.append(entityId + "\t");	
 

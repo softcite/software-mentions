@@ -9,6 +9,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import org.grobid.core.data.SoftwareComponent;
+import org.grobid.core.data.SoftwareEntity;
 import org.grobid.core.engines.SoftwareParser;
 import org.grobid.core.factory.GrobidPoolingFactory;
 import org.slf4j.Logger;
@@ -44,7 +45,7 @@ public class SoftwareProcessString {
 		try {
 			LOGGER.debug(">> set raw text for stateless service'...");
 			
-			List<SoftwareComponent> entities = null;
+			List<SoftwareEntity> entities = null;
 			text = text.replaceAll("\\n", " ").replaceAll("\\t", " ");
 			long start = System.currentTimeMillis();
 			entities = parser.processText(text);
@@ -56,7 +57,7 @@ public class SoftwareProcessString {
 					retVal.append("\"entities\" : []");
 				else {
 					boolean first = true;
-					for(SoftwareComponent entity : entities)	{
+					for(SoftwareEntity entity : entities)	{
 						if (first) {
 							retVal.append("\"entities\" : [ ");
 							first = false;

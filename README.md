@@ -52,20 +52,19 @@ which should return this:
 ```json
 {
 	"entities": [{
-		"rawForm": "GROBID",
-		"type": "SOFTWARE",
-		"component-type": "software",
-		"offsetStart": 28,
-		"offsetEnd": 34,
-		"conf": "0.8"
-	}, {
-		"rawForm": "version 0.5.1",
-		"component-type": "version-number",
-		"offsetStart": 35,
-		"offsetEnd": 48,
-		"conf": "0.8"
+		"type": "software",
+		"software-name": {
+			"rawForm": "GROBID",
+			"offsetStart": 28,
+			"offsetEnd": 34
+		},
+		"version-number": {
+			"rawForm": "version 0.5.1",
+			"offsetStart": 35,
+			"offsetEnd": 48
+		}
 	}],
-	"runtime": 2
+	"runtime": 4
 }
 ```
 
@@ -78,6 +77,8 @@ Using ```curl``` POST/PUT requests with a PDF file:
 ```bash
 curl --form input=@./thefile.pdf localhost:8060/annotateSoftwarePDF
 ```
+
+Runtimes are expressed in milliseconds. 
 
 ## Training and evaluation
 

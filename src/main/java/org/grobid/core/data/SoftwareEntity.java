@@ -4,6 +4,7 @@ import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.lexicon.SoftwareLexicon;
 import org.grobid.core.layout.BoundingBox;
 import org.grobid.core.layout.LayoutToken;
+import org.grobid.core.engines.label.SoftwareTaggingLabels;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,6 +17,10 @@ import java.util.List;
  */
 public class SoftwareEntity implements Comparable<SoftwareEntity> {   
 
+	// type of the entity
+	private SoftwareLexicon.Software_Type type = null;
+	
+	// component of the entity
 	private SoftwareComponent softwareName = null;
 	private SoftwareComponent versionNumber = null;
 	private SoftwareComponent versionDate = null;
@@ -26,6 +31,14 @@ public class SoftwareEntity implements Comparable<SoftwareEntity> {
 	// knowledge base of software entities. The identifier is the unique 
 	// identifier of the entity in this KB.
 	private String entityId = null;
+
+	public SoftwareLexicon.Software_Type getType() {
+		return type;
+	}
+	
+	public void setType(SoftwareLexicon.Software_Type theType) {
+		type = theType;
+	}
 
 	public SoftwareComponent getSoftwareName() {
 		return this.softwareName;
@@ -75,6 +88,20 @@ public class SoftwareEntity implements Comparable<SoftwareEntity> {
 		this.entityId = id;
 	}
 
+	public void setComponent(SoftwareComponent component) {
+		if (component.getLabel().equals(SoftwareTaggingLabels.SOFTWARE)) {
+			this.softwareName = component;
+		} else if (component.getLabel().equals(SoftwareTaggingLabels.SOFTWARE_URL)) {
+			this.softwareURL = component;
+		} else if (component.getLabel().equals(SoftwareTaggingLabels.CREATOR)) {
+			this.creator = component;
+		} else if (component.getLabel().equals(SoftwareTaggingLabels.VERSION_NUMBER)) {
+			this.versionNumber = component;
+		} else if (component.getLabel().equals(SoftwareTaggingLabels.VERSION_DATE)) {
+			this.versionDate = component;
+		}
+	}
+
 	@Override
 	public boolean equals(Object object) {
 		boolean result = false;
@@ -107,8 +134,10 @@ public class SoftwareEntity implements Comparable<SoftwareEntity> {
 		}
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("{ ");
-		buffer.append("\"name\": ");
+		buffer.append("\"software-name\": ");
 		buffer.append(softwareName.toJson());
+		if (type != null)
+			buffer.append(", \"type\" : \"" + type.getName().toLowerCase() + "\"");	
 		if (entityId != null)
 			buffer.append(", \"id\" : \"" + entityId + "\"");	
 		if (versionNumber != null) {
@@ -117,10 +146,10 @@ public class SoftwareEntity implements Comparable<SoftwareEntity> {
 		if (versionDate != null) {
 			buffer.append(", \"version-date\":" + versionDate.toJson());
 		}
-		if (versionNumber != null) {
+		if (creator != null) {
 			buffer.append(", \"creator\":" + creator.toJson());
 		}
-		if (versionNumber != null) {
+		if (softwareURL != null) {
 			buffer.append(", \"url\":" + softwareURL.toJson());
 		}
 		buffer.append(" }");

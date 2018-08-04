@@ -1,6 +1,7 @@
 package org.grobid.core.engines;
 
 import org.apache.commons.io.IOUtils;
+import org.grobid.core.data.SoftwareEntity;
 import org.grobid.core.data.SoftwareComponent;
 import org.grobid.core.document.Document;
 import org.grobid.core.factory.GrobidFactory;
@@ -54,7 +55,7 @@ public class SoftwareParserTest {
         System.out.println("testSoftwareParserText - testSoftwareParserText - testSoftwareParserText");
         String text = IOUtils.toString(this.getClass().getResourceAsStream("/text.txt"), StandardCharsets.UTF_8.toString());
         text = text.replaceAll("\\n", " ").replaceAll("\\t", " ");
-        List<SoftwareComponent> entities = SoftwareParser.getInstance().processText(text);
+        List<SoftwareEntity> entities = SoftwareParser.getInstance().processText(text);
         //System.out.println(text);
         //System.out.println(entities.size());
         assertThat(entities, hasSize(5));
@@ -62,8 +63,8 @@ public class SoftwareParserTest {
 
     //@Test
     public void testSoftwareParserPDF() throws Exception {
-        Pair<List<SoftwareComponent>, Document> res = SoftwareParser.getInstance().processPDF(new File("./src/test/resources/annot.pdf"));
-        List<SoftwareComponent> entities = res.getA();
+        Pair<List<SoftwareEntity>, Document> res = SoftwareParser.getInstance().processPDF(new File("./src/test/resources/annot.pdf"));
+        List<SoftwareEntity> entities = res.getA();
 
         assertThat(entities, hasSize(19));
     }
