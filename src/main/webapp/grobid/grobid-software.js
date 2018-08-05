@@ -9,6 +9,9 @@ var grobid = (function ($) {
     // for components view
     var entities = null;
 
+    // for complete concept information, resulting of additional calls to the knowledge base service
+    var conceptMap = new Object();
+
     function defineBaseURL(ext) {
         var baseUrl = null;
         if ($(location).attr('href').indexOf("index.html") != -1)
@@ -188,6 +191,15 @@ var grobid = (function ($) {
 
                         // Get desired page
                         pdf.getPage(i).then(function (page) {
+                            var table = document.createElement("table");
+                            table.setAttribute('style', 'table-layout: fixed; width: 100%;')
+                            var tr = document.createElement("tr");
+                            var td1 = document.createElement("td");
+                            var td2 = document.createElement("td");
+
+                            tr.appendChild(td1);
+                            tr.appendChild(td2);
+                            table.appendChild(tr);
 
                             var div0 = document.createElement("div");
                             div0.setAttribute("style", "text-align: center; margin-top: 1cm;");
@@ -195,26 +207,44 @@ var grobid = (function ($) {
                             var t = document.createTextNode("page " + (page.pageIndex + 1) + "/" + (nbPages));
                             pageInfo.appendChild(t);
                             div0.appendChild(pageInfo);
-                            container.appendChild(div0);
 
-                            var scale = 1.5;
-                            var viewport = page.getViewport(scale);
+                            td1.appendChild(div0);
+
+
                             var div = document.createElement("div");
 
                             // Set id attribute with page-#{pdf_page_number} format
                             div.setAttribute("id", "page-" + (page.pageIndex + 1));
 
                             // This will keep positions of child elements as per our needs, and add a light border
-                            div.setAttribute("style", "position: relative; border-style: solid; border-width: 1px; border-color: gray;");
+                            div.setAttribute("style", "position: relative; ");
 
-                            // Append div within div#container
-                            container.appendChild(div);
 
                             // Create a new Canvas element
                             var canvas = document.createElement("canvas");
+                            canvas.setAttribute("style", "border-style: solid; border-width: 1px; border-color: gray;");
 
                             // Append Canvas within div#page-#{pdf_page_number}
                             div.appendChild(canvas);
+
+                            // Append div within div#container
+                            td1.setAttribute('style', 'width:70%;');
+                            td1.appendChild(div);
+
+                            var annot = document.createElement("div");
+                            annot.setAttribute('style', 'vertical-align:top;');
+                            annot.setAttribute('id', 'detailed_annot-' + (page.pageIndex + 1));
+                            td2.setAttribute('style', 'vertical-align:top;width:30%;');
+                            td2.appendChild(annot);
+
+                            container.appendChild(table);
+
+                            //fitToContainer(canvas);
+
+                            // we could think about a dynamic way to set the scale based on the available parent width
+                            //var scale = 1.2;
+                            //var viewport = page.getViewport(scale);
+                            var viewport = page.getViewport((td1.offsetWidth * 0.98) / page.getViewport(1.0).width);
 
                             var context = canvas.getContext('2d');
                             canvas.height = viewport.height;
@@ -230,29 +260,29 @@ var grobid = (function ($) {
                                 // Get text-fragments
                                 return page.getTextContent();
                             })
-                                .then(function (textContent) {
-                                    // Create div which will hold text-fragments
-                                    var textLayerDiv = document.createElement("div");
+                            .then(function (textContent) {
+                                // Create div which will hold text-fragments
+                                var textLayerDiv = document.createElement("div");
 
-                                    // Set it's class to textLayer which have required CSS styles
-                                    textLayerDiv.setAttribute("class", "textLayer");
+                                // Set it's class to textLayer which have required CSS styles
+                                textLayerDiv.setAttribute("class", "textLayer");
 
-                                    // Append newly created div in `div#page-#{pdf_page_number}`
-                                    div.appendChild(textLayerDiv);
+                                // Append newly created div in `div#page-#{pdf_page_number}`
+                                div.appendChild(textLayerDiv);
 
-                                    // Create new instance of TextLayerBuilder class
-                                    var textLayer = new TextLayerBuilder({
-                                        textLayerDiv: textLayerDiv,
-                                        pageIndex: page.pageIndex,
-                                        viewport: viewport
-                                    });
-
-                                    // Set text-fragments
-                                    textLayer.setTextContent(textContent);
-
-                                    // Render text-fragments
-                                    textLayer.render();
+                                // Create new instance of TextLayerBuilder class
+                                var textLayer = new TextLayerBuilder({
+                                    textLayerDiv: textLayerDiv,
+                                    pageIndex: page.pageIndex,
+                                    viewport: viewport
                                 });
+
+                                // Set text-fragments
+                                textLayer.setTextContent(textContent);
+
+                                // Render text-fragments
+                                textLayer.render();
+                            });
                         });
                     }
                 });
