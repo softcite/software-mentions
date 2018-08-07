@@ -226,7 +226,6 @@ var grobid = (function ($) {
                             // This will keep positions of child elements as per our needs, and add a light border
                             div.setAttribute("style", "position: relative; ");
 
-
                             // Create a new Canvas element
                             var canvas = document.createElement("canvas");
                             canvas.setAttribute("style", "border-style: solid; border-width: 1px; border-color: gray;");
@@ -395,8 +394,7 @@ var grobid = (function ($) {
                         // the server response is not compatible with the present client 
                         console.log("Sorting of entities as present in the server's response not valid for this client.");
                         // note: this should never happen?
-                    }
-                    else {
+                    } else {
                         newString += string.substring(pos, start)
                             + '<span id="annot-' + currentEntityIndex + '" rel="popover" data-color="' + entityType + '">'
                             + '<span class="label ' + entityType + '" style="cursor:hand;cursor:pointer;" >'
@@ -432,7 +430,7 @@ var grobid = (function ($) {
 
         if (entities) {
             for (var entityIndex = 0; entityIndex < entities.length; entityIndex++) {
-                $('#annot-' + entityIndex).bind('hover', viewEntity);
+                //$('#annot-' + entityIndex).bind('hover', viewEntity);
                 $('#annot-' + entityIndex).bind('click', viewEntity);
             }
         }
@@ -566,7 +564,7 @@ var grobid = (function ($) {
         var localEntityNumber = parseInt(localID.substring(ind+1,localID.length));
         if (localEntityNumber < entities.length) {
 
-            var string = toHtml(entities[localEntityNumber]);
+            var string = toHtml(entities[localEntityNumber], -1);
 
             $('#detailed_annot-0').html(string);
             $('#detailed_annot-0').show();
@@ -600,7 +598,7 @@ var grobid = (function ($) {
              entityListIndex >= 0;
              entityListIndex--) {
             var entity = entityMap[localEntityNumber][entityListIndex];
-            var wikipedia = entity.wikipediaExternalRef;
+            /*var wikipedia = entity.wikipediaExternalRef;
             var wikidataId = entity.wikidataId;
             var type = entity.type;
 
@@ -706,47 +704,122 @@ var grobid = (function ($) {
                 string += '</p>';
             }
 
-            string += "</div></div>";
+            string += "</div></div>";*/
+
+            string = toHtml(entity, topPos);
         }
         $('#detailed_annot-' + pageIndex).html(string);
         $('#detailed_annot-' + pageIndex).show();
     }
 
-    function toHtml(entity) {
-        var string = "";
-        var first = true;
-        
+    function toHtml(entity, topPos) {
+        var wikipedia = entity.wikipediaExternalRef;
+        var wikidataId = entity.wikidataId;
         var type = entity.type;
 
         var colorLabel = null;
-        if (type) {
+        if (type)
             colorLabel = type;
-        } else {
-            colorLabel = entity.rawName;
+
+        var definitions = null;
+        if (wikipedia)
+            definitions = getDefinitions(wikipedia);
+
+        var content = entity['software-name'].rawForm;
+        var normalized = null;
+        if (wikipedia)
+            normalized = getPreferredTerm(wikipedia);
+
+        string = "<div class='info-sense-box " + colorLabel + "'";
+        if (topPos != -1)
+            string += " style='vertical-align:top; position:relative; top:" + topPos + "'";
+
+        string += "><h3 style='color:#FFF;padding-left:10px;'>" + content.toUpperCase() +
+            "</h3>";
+        string += "<div class='container-fluid' style='background-color:#F9F9F9;color:#70695C;border:padding:5px;margin-top:5px;'>" +
+            "<table style='width:100%;background-color:#fff;border:0px'><tr style='background-color:#fff;border:0px;'><td style='background-color:#fff;border:0px;'>";
+
+        if (type)
+            string += "<p>Type: <b>" + type + "</b></p>";
+
+        if (content)
+            string += "<p>Raw name: <b>" + content + "</b></p>";                
+
+        if (normalized)
+            string += "<p>Normalized name: <b>" + normalized + "</b></p>";
+
+        var versionNumber = null
+        if (entity['version-number'])
+            versionNumber = entity['version-number'].rawForm;
+
+        if (versionNumber)
+            string += "<p>Version number: <b>" + versionNumber + "</b></p>"
+
+        var versionDate = null
+        if (entity['version-date'])
+            versionDate = entity['version-date'].rawForm;
+
+        if (versionDate)
+            string += "<p>Version date: <b>" + versionDate + "</b></p>"
+
+        var url = null
+        if (entity['url'])
+            url = entity['url'].rawForm;
+
+        if (url)
+            string += "<p>URL: <b>" + url + "</b></p>"
+
+        var creator = null
+        if (entity['creator'])
+            creator = entity['creator'].rawForm;
+
+        if (creator)
+            string += "<p>Creator: <b>" + creator + "</b></p>"            
+
+        //string += "<p>conf: <i>" + conf + "</i></p>";
+        
+        if (wikipedia) {
+            string += "</td><td style='align:right;bgcolor:#fff'>";
+            string += '<span id="img-' + wikipedia + '"><script type="text/javascript">lookupWikiMediaImage("' + wikipedia + '", "' + lang + '")</script></span>';
+            string += "</td></tr></table>";
         }
 
-        var rawForm = entity.rawForm;
-
-            string += "<div class='info-sense-box " + colorLabel + "'><h2 style='color:#FFF;padding-left:10px;font-size:16;'>SOFTWARE " + type;
-            string += "</h2>";
-
-        string += "<div class='container-fluid' style='background-color:#FFF;color:#70695C;border:padding:5px;margin-top:5px;'>" +
-            "<table style='width:100%;display:inline-table;'><tr style='display:inline-table;'><td>";
-
-        if (type) {
-            string += "<p>object type: <b>" + type + "</b></p>";
+        if ((definitions != null) && (definitions.length > 0)) {
+            var localHtml = wiki2html(definitions[0]['definition'], lang);
+            string += "<p><div class='wiky_preview_area2'>" + localHtml + "</div></p>";
         }
 
-        if (rawForm) {
-            string += "<p>raw form: <b>" + rawForm + "</b></p>";
-
-            string += '<p><a target="_blank" href="http://simbad.u-strasbg.fr/simbad/sim-basic?Ident=' + 
-                        encodeURI(rawForm) + '&submit=SIMBAD+search"><img src="resources/img/simbad_small.png" width="50%"/></a></p>';
+        // statements
+        if (wikipedia) {
+            var statements = getStatements(wikipedia);
+            if ((statements != null) && (statements.length > 0)) {
+                var localHtml = "";
+                for (var i in statements) {
+                    var statement = statements[i];
+                    localHtml += displayStatement(statement);
+                }
+                string += "<p><div><table class='statements' style='width:100%;border-color:#fff;border:1px'>" + localHtml + "</table></div></p>";
+            }
         }
 
-        string += "</td></tr>";
-        string += "</table></div>";
-        string += "</div>";
+        if ((wikipedia != null) || (wikidataId != null)) {
+            string += '<p>References: '
+            if (wikipedia != null) {
+                string += '<a href="http://' + lang + '.wikipedia.org/wiki?curid=' +
+                    wikipedia +
+                    '" target="_blank"><img style="max-width:28px;max-height:22px;margin-top:5px;" ' +
+                    ' src="resources/img/wikipedia.png"/></a>';
+            }
+            if (wikidataId != null) {
+                string += '<a href="https://www.wikidata.org/wiki/' +
+                    wikidataId +
+                    '" target="_blank"><img style="max-width:28px;max-height:22px;margin-top:5px;" ' +
+                    ' src="resources/img/Wikidata-logo.svg"/></a>';
+            }
+            string += '</p>';
+        }
+
+        string += "</div></div>";
 
         return string;
     }
