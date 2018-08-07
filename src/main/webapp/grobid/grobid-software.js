@@ -347,7 +347,7 @@ var grobid = (function ($) {
         var newString = "";
         var lastMaxIndex = string.length;
 
-        display += '<table id="sentenceNER" style="width:100%;table-layout:fixed;" class="table">';
+        display += '<table id="sentence" style="width:100%;table-layout:fixed;" class="table">';
         //var string = responseJson.text;
 
         display += '<tr style="background-color:#FFF;">';
@@ -356,24 +356,53 @@ var grobid = (function ($) {
             var pos = 0; // current position in the text
 
             for (var currentEntityIndex = 0; currentEntityIndex < entities.length; currentEntityIndex++) {
-                var entity = entities[currentEntityIndex];
-                var entityType = entity.type;
-                var entityRawForm = entity.rawForm;
-                var start = parseInt(entity.offsetStart, 10);
-                var end = parseInt(entity.offsetEnd, 10);
-    
-                if (start < pos) {
-                    // we have a problem in the initial sort of the quantities
-                    // the server response is not compatible with the present client 
-                    console.log("Sorting of entities as present in the server's response not valid for this client.");
-                    // note: this should never happen?
-                }
-                else {
-                    newString += string.substring(pos, start)
-                        + '<span id="annot-' + currentEntityIndex + '" rel="popover" data-color="' + entityType + '">'
-                        + '<span class="label ' + entityType + '" style="cursor:hand;cursor:pointer;" >'
-                        + string.substring(start, end) + '</span></span>';
-                    pos = end;
+                var annotation = entities[currentEntityIndex];
+                var entityType = annotation.type;
+
+                var pieces = []
+
+                var softwareName = annotation['software-name']
+                pieces.push(softwareName)
+                
+                var versionNumber = annotation['version-number']
+                if (versionNumber)
+                    pieces.push(versionNumber);
+                
+                var versionDate = annotation['version-date']
+                if (versionDate)
+                    pieces.push(versionDate)
+
+                var softwareUrl = annotation['url']
+                if (softwareUrl)
+                    pieces.push(softwareUrl)
+
+                var creator = annotation['creator']
+                if (creator)
+                    pieces.push(creator)
+
+                var type = annotation['type']
+                var id = annotation['id']
+
+                for (var pi in pieces) {
+                    piece = pieces[pi]
+
+                    var entityRawForm = piece.rawForm;
+                    var start = parseInt(piece.offsetStart, 10);
+                    var end = parseInt(piece.offsetEnd, 10);
+        
+                    if (start < pos) {
+                        // we have a problem in the initial sort of the quantities
+                        // the server response is not compatible with the present client 
+                        console.log("Sorting of entities as present in the server's response not valid for this client.");
+                        // note: this should never happen?
+                    }
+                    else {
+                        newString += string.substring(pos, start)
+                            + '<span id="annot-' + currentEntityIndex + '" rel="popover" data-color="' + entityType + '">'
+                            + '<span class="label ' + entityType + '" style="cursor:hand;cursor:pointer;" >'
+                            + string.substring(start, end) + '</span></span>';
+                        pos = end;
+                    }
                 }
             }
             newString += string.substring(pos, string.length);
@@ -461,11 +490,9 @@ var grobid = (function ($) {
                 var type = annotation['type']
                 var id = annotation['id']
 
-                console.log(pieces.length)
-
                 for (var pi in pieces) {
                     piece = pieces[pi]
-                    console.log(piece)
+                    //console.log(piece)
                     var pos = piece.boundingBoxes;
                     var rawForm = softwareName.rawForm
                     if ((pos != null) && (pos.length > 0)) {
@@ -485,8 +512,8 @@ var grobid = (function ($) {
     }
 
     function annotateEntity(theId, rawForm, theType, thePos, page_height, page_width, entityIndex, positionIndex) {
-        console.log('annotate: ' + ' ' + rawForm + ' ' + theType + ' ')
-        console.log(thePos)
+        //console.log('annotate: ' + ' ' + rawForm + ' ' + theType + ' ')
+        //console.log(thePos)
 
         var page = thePos.p;
         var pageDiv = $('#page-'+page);
@@ -517,7 +544,7 @@ var grobid = (function ($) {
             html: true,
             container: 'body'
         });*/
-        console.log(element)
+        //console.log(element)
 
         element.setAttribute("class", theType.toLowerCase());
         element.setAttribute("id", 'annot-' + entityIndex + '-' + positionIndex);
@@ -643,7 +670,7 @@ var grobid = (function ($) {
                 string += '<span id="img-' + wikipedia + '"><script type="text/javascript">lookupWikiMediaImage("' + wikipedia + '", "' + lang + '")</script></span>';
                 string += "</td></tr></table>";
             }
-            
+
             if ((definitions != null) && (definitions.length > 0)) {
                 var localHtml = wiki2html(definitions[0]['definition'], lang);
                 string += "<p><div class='wiky_preview_area2'>" + localHtml + "</div></p>";
@@ -751,7 +778,10 @@ var grobid = (function ($) {
         $('#textInputDiv').show();
     }
 
-    var examples = ["",
+    var examples = ["The column scores (the fraction of entirely correct columns) were  reported  in  addition  " +
+    "to Q-scores  for  BAliBASE3.0. Wilcoxon  signed-ranks  tests  were  performed  to  calculatestatistical " +
+    " significance  of  comparisons  between  alignment programs,   which   include   ProbCons   (version   1.10)" +
+    "   (23), MAFFT (version 5.667) (11) with several options, MUSCLE (version 3.52) (10) and ClustalW (version 1.83) (7).",
         "",
         "",
         "."]
