@@ -9,8 +9,11 @@ var grobid = (function ($) {
     // for components view
     var entities = null;
 
-    // for complete concept information, resulting of additional calls to the knowledge base service
+    // for complete Wikidata concept information, resulting of additional calls to the knowledge base service
     var conceptMap = new Object();
+
+    // store the current entities extracted by the service
+    var entityMap = new Object();
 
     function defineBaseURL(ext) {
         var baseUrl = null;
@@ -117,7 +120,7 @@ var grobid = (function ($) {
 
     function AjaxError(jqXHR, textStatus, errorThrown) {
         $('#infoResult').html("<font color='red'>Error encountered while requesting the server.<br/>" + jqXHR.responseText + "</font>");
-        responseJson = null;
+        entities = null;
     }
 
     function AjaxError2(message) {
@@ -125,7 +128,7 @@ var grobid = (function ($) {
             message = "";
         message += " - The PDF document cannot be annotated. Please check the server logs.";
         $('#infoResult').html("<font color='red'>Error encountered while requesting the server.<br/>"+message+"</font>");
-        responseJson = null;
+        entities = null;
         return true;
     }
 
@@ -136,6 +139,10 @@ var grobid = (function ($) {
     function submitQuery() {
         $('#infoResult').html('<font color="grey">Requesting server...</font>');
         $('#requestResult').html('');
+
+        // re-init the entity map
+        entityMap = new Object();
+        conceptMap = new Object();
 
         var selected = $('#selectedService option:selected').attr('value');
         if (selected == 'processSoftwareText') {
@@ -422,28 +429,65 @@ var grobid = (function ($) {
         var page_height = 0.0;
         var page_width = 0.0;
 
-        var entities = json.entities;
+        entities = json.entities;
         if (entities) {
-            for(var n in entities) {
-                var annotation = entities[n];
-                var theId = annotation.rawForm;
-                var theUrl = null;
-                //var theUrl = annotation.url;
-                var pos = annotation.boundingBoxes;
-                pos.forEach(function(thePos, m) {
-                    // get page information for the annotation
-                    var pageNumber = thePos.p;
-                    if (pageInfo[pageNumber-1]) {
-                        page_height = pageInfo[pageNumber-1].page_height;
-                        page_width = pageInfo[pageNumber-1].page_width;
+            // hey bro, this must be asynchronous to avoid blocking the brothers
+            entities.forEach(function (annotation, n) {
+                entityMap[n] = [];
+                entityMap[n].push(annotation);
+
+                //console.log(annotation)
+                var pieces = []
+
+                var softwareName = annotation['software-name']
+                pieces.push(softwareName)
+                
+                var versionNumber = annotation['version-number']
+                if (versionNumber)
+                    pieces.push(versionNumber);
+                
+                var versionDate = annotation['version-date']
+                if (versionDate)
+                    pieces.push(versionDate)
+
+                var softwareUrl = annotation['url']
+                if (softwareUrl)
+                    pieces.push(softwareUrl)
+
+                var creator = annotation['creator']
+                if (creator)
+                    pieces.push(creator)
+
+                var type = annotation['type']
+                var id = annotation['id']
+
+                console.log(pieces.length)
+
+                for (var pi in pieces) {
+                    piece = pieces[pi]
+                    console.log(piece)
+                    var pos = piece.boundingBoxes;
+                    var rawForm = softwareName.rawForm
+                    if ((pos != null) && (pos.length > 0)) {
+                        pos.forEach(function(thePos, m) {
+                            // get page information for the annotation
+                            var pageNumber = thePos.p;
+                            if (pageInfo[pageNumber-1]) {
+                                page_height = pageInfo[pageNumber-1].page_height;
+                                page_width = pageInfo[pageNumber-1].page_width;
+                            }
+                            annotateEntity(id, rawForm, type, thePos, page_height, page_width, n, m);
+                        });
                     }
-                    annotateEntity(theId, thePos, theUrl, page_height, page_width);
-                });
-            }
+                }
+            });
         }
     }
 
-    function annotateEntity(theId, thePos, theUrl, page_height, page_width) {
+    function annotateEntity(theId, rawForm, theType, thePos, page_height, page_width, entityIndex, positionIndex) {
+        console.log('annotate: ' + ' ' + rawForm + ' ' + theType + ' ')
+        console.log(thePos)
+
         var page = thePos.p;
         var pageDiv = $('#page-'+page);
         var canvas = pageDiv.children('canvas').eq(0);;
@@ -463,17 +507,26 @@ var grobid = (function ($) {
         var attributes = "display:block; width:"+width+"px; height:"+height+"px; position:absolute; top:"+
             y+"px; left:"+x+"px;";
         element.setAttribute("style", attributes + "border:2px solid; border-color: #800080;");
-        element.setAttribute("data-toggle", "popover");
-        element.setAttribute("data-placement", "top");
-        element.setAttribute("data-content", "content");
-        element.setAttribute("data-trigger", "hover");
-        $(element).popover({
-            content: "<p>Software Entity</p><p>" +theId+"<p>",
+        // to have a pop-up window, uncomment
+        //element.setAttribute("data-toggle", "popover");
+        //element.setAttribute("data-placement", "top");
+        //element.setAttribute("data-content", "content");
+        //element.setAttribute("data-trigger", "hover");
+        /*$(element).popover({
+            content: "<p>Software Entity</p><p>" +rawForm+"<p>",
             html: true,
             container: 'body'
-        });
-        
+        });*/
+        console.log(element)
+
+        element.setAttribute("class", theType.toLowerCase());
+        element.setAttribute("id", 'annot-' + entityIndex + '-' + positionIndex);
+        element.setAttribute("page", page);
+
         pageDiv.append(element);
+
+        $('#annot-' + entityIndex + '-' + positionIndex).bind('hover', viewEntityPDF);
+        $('#annot-' + entityIndex + '-' + positionIndex).bind('click', viewEntityPDF);
     }
 
     function viewEntity() {
@@ -491,6 +544,145 @@ var grobid = (function ($) {
             $('#detailed_annot-0').html(string);
             $('#detailed_annot-0').show();
         }
+    }
+
+    function viewEntityPDF() {
+        var pageIndex = $(this).attr('page');
+        var localID = $(this).attr('id');
+
+        console.log('viewEntityPDF ' + pageIndex + ' / ' + localID);
+
+        if (entities == null) {
+            return;
+        }
+
+        var topPos = $(this).position().top;
+
+        var ind1 = localID.indexOf('-');
+        var localEntityNumber = parseInt(localID.substring(ind1 + 1, localID.length));
+
+        if ((entityMap[localEntityNumber] == null) || (entityMap[localEntityNumber].length == 0)) {
+            // this should never be the case
+            console.log("Error for visualising annotation with id " + localEntityNumber
+                + ", empty list of entities");
+        }
+
+        var lang = 'en'; //default
+        var string = "";
+        for (var entityListIndex = entityMap[localEntityNumber].length - 1;
+             entityListIndex >= 0;
+             entityListIndex--) {
+            var entity = entityMap[localEntityNumber][entityListIndex];
+            var wikipedia = entity.wikipediaExternalRef;
+            var wikidataId = entity.wikidataId;
+            var type = entity.type;
+
+            var colorLabel = null;
+            if (type)
+                colorLabel = type;
+
+            var definitions = null;
+            if (wikipedia)
+                definitions = getDefinitions(wikipedia);
+
+            var content = entity['software-name'].rawForm;
+            var normalized = null;
+            if (wikipedia)
+                normalized = getPreferredTerm(wikipedia);
+
+            string += "<div class='info-sense-box " + colorLabel + "'";
+            if (topPos != -1)
+                string += " style='vertical-align:top; position:relative; top:" + topPos + "'";
+
+            string += "><h3 style='color:#FFF;padding-left:10px;'>" + content.toUpperCase() +
+                "</h3>";
+            string += "<div class='container-fluid' style='background-color:#F9F9F9;color:#70695C;border:padding:5px;margin-top:5px;'>" +
+                "<table style='width:100%;background-color:#fff;border:0px'><tr style='background-color:#fff;border:0px;'><td style='background-color:#fff;border:0px;'>";
+
+            if (type)
+                string += "<p>Type: <b>" + type + "</b></p>";
+
+            if (content)
+                string += "<p>Raw name: <b>" + content + "</b></p>";                
+
+            if (normalized)
+                string += "<p>Normalized name: <b>" + normalized + "</b></p>";
+
+            var versionNumber = null
+            if (entity['version-number'])
+                versionNumber = entity['version-number'].rawForm;
+
+            if (versionNumber)
+                string += "<p>Version number: <b>" + versionNumber + "</b></p>"
+
+            var versionDate = null
+            if (entity['version-date'])
+                versionDate = entity['version-date'].rawForm;
+
+            if (versionDate)
+                string += "<p>Version date: <b>" + versionDate + "</b></p>"
+
+            var url = null
+            if (entity['url'])
+                url = entity['url'].rawForm;
+
+            if (url)
+                string += "<p>URL: <b>" + url + "</b></p>"
+
+            var creator = null
+            if (entity['creator'])
+                creator = entity['creator'].rawForm;
+
+            if (creator)
+                string += "<p>Creator: <b>" + creator + "</b></p>"            
+
+            //string += "<p>conf: <i>" + conf + "</i></p>";
+            
+            if (wikipedia) {
+                string += "</td><td style='align:right;bgcolor:#fff'>";
+                string += '<span id="img-' + wikipedia + '"><script type="text/javascript">lookupWikiMediaImage("' + wikipedia + '", "' + lang + '")</script></span>';
+                string += "</td></tr></table>";
+            }
+            
+            if ((definitions != null) && (definitions.length > 0)) {
+                var localHtml = wiki2html(definitions[0]['definition'], lang);
+                string += "<p><div class='wiky_preview_area2'>" + localHtml + "</div></p>";
+            }
+
+            // statements
+            if (wikipedia) {
+                var statements = getStatements(wikipedia);
+                if ((statements != null) && (statements.length > 0)) {
+                    var localHtml = "";
+                    for (var i in statements) {
+                        var statement = statements[i];
+                        localHtml += displayStatement(statement);
+                    }
+                    string += "<p><div><table class='statements' style='width:100%;border-color:#fff;border:1px'>" + localHtml + "</table></div></p>";
+                }
+            }
+
+            if ((wikipedia != null) || (wikidataId != null)) {
+                string += '<p>References: '
+                if (wikipedia != null) {
+                    string += '<a href="http://' + lang + '.wikipedia.org/wiki?curid=' +
+                        wikipedia +
+                        '" target="_blank"><img style="max-width:28px;max-height:22px;margin-top:5px;" ' +
+                        ' src="resources/img/wikipedia.png"/></a>';
+                }
+                if (wikidataId != null) {
+                    string += '<a href="https://www.wikidata.org/wiki/' +
+                        wikidataId +
+                        '" target="_blank"><img style="max-width:28px;max-height:22px;margin-top:5px;" ' +
+                        ' src="resources/img/Wikidata-logo.svg"/></a>';
+                }
+                string += '</p>';
+            }
+
+            string += "</div></div>";
+        }
+        $('#detailed_annot-' + pageIndex).html(string);
+        $('#detailed_annot-' + pageIndex).show();
     }
 
     function toHtml(entity) {
