@@ -361,23 +361,32 @@ var grobid = (function ($) {
                 var pieces = []
 
                 var softwareName = annotation['software-name']
+                softwareName['subtype'] = 'software'
                 pieces.push(softwareName)
                 
                 var versionNumber = annotation['version-number']
-                if (versionNumber)
+                if (versionNumber) {
+                    versionNumber['subtype'] = 'version-number'
                     pieces.push(versionNumber);
+                }
                 
                 var versionDate = annotation['version-date']
-                if (versionDate)
+                if (versionDate) {
+                    versionDate['subtype'] = 'version-date'
                     pieces.push(versionDate)
+                }
 
                 var softwareUrl = annotation['url']
-                if (softwareUrl)
+                if (softwareUrl) {
+                    softwareUrl['subtype'] = 'url'
                     pieces.push(softwareUrl)
+                }
 
                 var creator = annotation['creator']
-                if (creator)
+                if (creator) {
+                    creator['subtype'] = 'creator'
                     pieces.push(creator)
+                }
 
                 var type = annotation['type']
                 var id = annotation['id']
@@ -396,8 +405,8 @@ var grobid = (function ($) {
                         // note: this should never happen?
                     } else {
                         newString += string.substring(pos, start)
-                            + '<span id="annot-' + currentEntityIndex + '" rel="popover" data-color="' + entityType + '">'
-                            + '<span class="label ' + entityType + '" style="cursor:hand;cursor:pointer;" >'
+                            + '<span id="annot-' + currentEntityIndex + '" rel="popover" data-color="' + piece['subtype'] + '">'
+                            + '<span class="label ' + piece['subtype'] + '" style="cursor:hand;cursor:pointer;" >'
                             + string.substring(start, end) + '</span></span>';
                         pos = end;
                     }
@@ -467,23 +476,32 @@ var grobid = (function ($) {
                 var pieces = []
 
                 var softwareName = annotation['software-name']
+                softwareName['subtype'] = 'software'
                 pieces.push(softwareName)
                 
                 var versionNumber = annotation['version-number']
-                if (versionNumber)
+                if (versionNumber) {
+                    versionNumber['subtype'] = 'version-number'
                     pieces.push(versionNumber);
+                }
                 
                 var versionDate = annotation['version-date']
-                if (versionDate)
+                if (versionDate) {
+                    versionDate['subtype'] = 'version-date'
                     pieces.push(versionDate)
+                }
 
                 var softwareUrl = annotation['url']
-                if (softwareUrl)
+                if (softwareUrl) {
+                    softwareUrl['subtype'] = 'url'
                     pieces.push(softwareUrl)
+                }
 
                 var creator = annotation['creator']
-                if (creator)
+                if (creator) {
+                    creator['subtype'] = 'creator'
                     pieces.push(creator)
+                }
 
                 var type = annotation['type']
                 var id = annotation['id']
@@ -501,7 +519,7 @@ var grobid = (function ($) {
                                 page_height = pageInfo[pageNumber-1].page_height;
                                 page_width = pageInfo[pageNumber-1].page_width;
                             }
-                            annotateEntity(id, rawForm, type, thePos, page_height, page_width, n, m);
+                            annotateEntity(id, rawForm, piece['subtype'], thePos, page_height, page_width, n, m);
                         });
                     }
                 }
@@ -531,7 +549,7 @@ var grobid = (function ($) {
         var element = document.createElement("a");
         var attributes = "display:block; width:"+width+"px; height:"+height+"px; position:absolute; top:"+
             y+"px; left:"+x+"px;";
-        element.setAttribute("style", attributes + "border:2px solid; border-color: #800080;");
+        element.setAttribute("style", attributes + "border:2px solid;");
         // to have a pop-up window, uncomment
         //element.setAttribute("data-toggle", "popover");
         //element.setAttribute("data-placement", "top");
@@ -598,113 +616,6 @@ var grobid = (function ($) {
              entityListIndex >= 0;
              entityListIndex--) {
             var entity = entityMap[localEntityNumber][entityListIndex];
-            /*var wikipedia = entity.wikipediaExternalRef;
-            var wikidataId = entity.wikidataId;
-            var type = entity.type;
-
-            var colorLabel = null;
-            if (type)
-                colorLabel = type;
-
-            var definitions = null;
-            if (wikipedia)
-                definitions = getDefinitions(wikipedia);
-
-            var content = entity['software-name'].rawForm;
-            var normalized = null;
-            if (wikipedia)
-                normalized = getPreferredTerm(wikipedia);
-
-            string += "<div class='info-sense-box " + colorLabel + "'";
-            if (topPos != -1)
-                string += " style='vertical-align:top; position:relative; top:" + topPos + "'";
-
-            string += "><h3 style='color:#FFF;padding-left:10px;'>" + content.toUpperCase() +
-                "</h3>";
-            string += "<div class='container-fluid' style='background-color:#F9F9F9;color:#70695C;border:padding:5px;margin-top:5px;'>" +
-                "<table style='width:100%;background-color:#fff;border:0px'><tr style='background-color:#fff;border:0px;'><td style='background-color:#fff;border:0px;'>";
-
-            if (type)
-                string += "<p>Type: <b>" + type + "</b></p>";
-
-            if (content)
-                string += "<p>Raw name: <b>" + content + "</b></p>";                
-
-            if (normalized)
-                string += "<p>Normalized name: <b>" + normalized + "</b></p>";
-
-            var versionNumber = null
-            if (entity['version-number'])
-                versionNumber = entity['version-number'].rawForm;
-
-            if (versionNumber)
-                string += "<p>Version number: <b>" + versionNumber + "</b></p>"
-
-            var versionDate = null
-            if (entity['version-date'])
-                versionDate = entity['version-date'].rawForm;
-
-            if (versionDate)
-                string += "<p>Version date: <b>" + versionDate + "</b></p>"
-
-            var url = null
-            if (entity['url'])
-                url = entity['url'].rawForm;
-
-            if (url)
-                string += "<p>URL: <b>" + url + "</b></p>"
-
-            var creator = null
-            if (entity['creator'])
-                creator = entity['creator'].rawForm;
-
-            if (creator)
-                string += "<p>Creator: <b>" + creator + "</b></p>"            
-
-            //string += "<p>conf: <i>" + conf + "</i></p>";
-            
-            if (wikipedia) {
-                string += "</td><td style='align:right;bgcolor:#fff'>";
-                string += '<span id="img-' + wikipedia + '"><script type="text/javascript">lookupWikiMediaImage("' + wikipedia + '", "' + lang + '")</script></span>';
-                string += "</td></tr></table>";
-            }
-
-            if ((definitions != null) && (definitions.length > 0)) {
-                var localHtml = wiki2html(definitions[0]['definition'], lang);
-                string += "<p><div class='wiky_preview_area2'>" + localHtml + "</div></p>";
-            }
-
-            // statements
-            if (wikipedia) {
-                var statements = getStatements(wikipedia);
-                if ((statements != null) && (statements.length > 0)) {
-                    var localHtml = "";
-                    for (var i in statements) {
-                        var statement = statements[i];
-                        localHtml += displayStatement(statement);
-                    }
-                    string += "<p><div><table class='statements' style='width:100%;border-color:#fff;border:1px'>" + localHtml + "</table></div></p>";
-                }
-            }
-
-            if ((wikipedia != null) || (wikidataId != null)) {
-                string += '<p>References: '
-                if (wikipedia != null) {
-                    string += '<a href="http://' + lang + '.wikipedia.org/wiki?curid=' +
-                        wikipedia +
-                        '" target="_blank"><img style="max-width:28px;max-height:22px;margin-top:5px;" ' +
-                        ' src="resources/img/wikipedia.png"/></a>';
-                }
-                if (wikidataId != null) {
-                    string += '<a href="https://www.wikidata.org/wiki/' +
-                        wikidataId +
-                        '" target="_blank"><img style="max-width:28px;max-height:22px;margin-top:5px;" ' +
-                        ' src="resources/img/Wikidata-logo.svg"/></a>';
-                }
-                string += '</p>';
-            }
-
-            string += "</div></div>";*/
 
             string = toHtml(entity, topPos);
         }
@@ -734,8 +645,8 @@ var grobid = (function ($) {
         if (topPos != -1)
             string += " style='vertical-align:top; position:relative; top:" + topPos + "'";
 
-        string += "><h3 style='color:#FFF;padding-left:10px;'>" + content.toUpperCase() +
-            "</h3>";
+        string += "><h4 style='color:#FFF;padding-left:10px;'>" + content.toUpperCase() +
+            "</h4>";
         string += "<div class='container-fluid' style='background-color:#F9F9F9;color:#70695C;border:padding:5px;margin-top:5px;'>" +
             "<table style='width:100%;background-color:#fff;border:0px'><tr style='background-color:#fff;border:0px;'><td style='background-color:#fff;border:0px;'>";
 
@@ -852,13 +763,12 @@ var grobid = (function ($) {
     }
 
     var examples = ["The column scores (the fraction of entirely correct columns) were  reported  in  addition  " +
-    "to Q-scores  for  BAliBASE3.0. Wilcoxon  signed-ranks  tests  were  performed  to  calculatestatistical " +
+    "to Q-scores  for  BAliBASE 3.0. Wilcoxon  signed-ranks  tests  were  performed  to  calculate statistical " +
     " significance  of  comparisons  between  alignment programs,   which   include   ProbCons   (version   1.10)" +
     "   (23), MAFFT (version 5.667) (11) with several options, MUSCLE (version 3.52) (10) and ClustalW (version 1.83) (7).",
-        "",
-        "",
-        "."]
-
+    "Sequences were further annotated with PERL scripts using BioPerl libraries (21) together with data and libraries from Ensemble (22) (Supplementary Table 1 and Supplementary Perl scripts 1-3). Repetitive sequences were identified using repeatmasker (http://www.repeatmasker.org). Spike control amplicons were prepared by PCR from DNA extracted from normal blood. ",
+    "All statistical analyses were done using computer software Prism 6 for Windows (version 6.02; GraphPad Software, San Diego, CA, USA). One-Way ANOVA was used to detect differences amongst the groups. To account for the non-normal distribution of the data, all data were sorted by rank status prior to ANOVA statistical analysis. ",
+    "The statistical analysis was performed using IBM SPSS Statistics v. 20 (SPSS Inc, 2003, Chicago, USA)."]
 
 })(jQuery);
 

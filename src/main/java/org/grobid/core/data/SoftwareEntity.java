@@ -5,6 +5,8 @@ import org.grobid.core.lexicon.SoftwareLexicon;
 import org.grobid.core.layout.BoundingBox;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.engines.label.SoftwareTaggingLabels;
+import org.grobid.core.engines.label.TaggingLabel;
+import org.grobid.core.engines.label.TaggingLabels;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -86,6 +88,24 @@ public class SoftwareEntity implements Comparable<SoftwareEntity> {
 	
 	public void setEntityId(String id) {
 		this.entityId = id;
+	}
+
+	/**
+	 * Check if a component corresponding to a given label is already present in a software entity
+	 */
+	public boolean freeField(TaggingLabel label) {
+		if (label.equals(SoftwareTaggingLabels.SOFTWARE) && (this.softwareName != null)) {
+			return false;
+		} else if (label.equals(SoftwareTaggingLabels.SOFTWARE_URL) && (this.versionNumber != null)) {
+			return false;
+		} else if (label.equals(SoftwareTaggingLabels.CREATOR) && (this.versionDate != null)) {
+			return false;
+		} else if (label.equals(SoftwareTaggingLabels.VERSION_NUMBER) && (this.creator != null)) {
+			return false;
+		} else if (label.equals(SoftwareTaggingLabels.VERSION_DATE) && (this.softwareURL != null)) {
+			return false;
+		}
+		return true;
 	}
 
 	public void setComponent(SoftwareComponent component) {

@@ -131,11 +131,9 @@ System.out.println(components.size() + " components found");
         // to form full entities
         List<SoftwareEntity> entities = new ArrayList<SoftwareEntity>();
         SoftwareEntity currentEntity = null;
-        // first pass for creaing entities based on software names
+        // first pass for creating entities based on software names
         for(SoftwareComponent component : components) {
 System.out.println(component.toJson());
-System.out.println(component.getLabel());
-System.out.println(SoftwareTaggingLabels.SOFTWARE);
 System.out.println(component.getLabel().getLabel());
             if (component.getLabel().equals(SoftwareTaggingLabels.SOFTWARE)) {
 System.out.println("entity added");                
@@ -149,38 +147,49 @@ System.out.println("entity added");
         // second pass for aggregating other components
         int n = 0; // index in entities
         SoftwareEntity previousEntity = null;
+        currentEntity = null;
         if (entities.size() == 0)
             return entities;
         if (entities.size() > 1) {
             previousEntity = entities.get(0);
             currentEntity = entities.get(1);
             n = 1;
+        } else {
+            previousEntity = entities.get(0);
         }
-        else 
-            currentEntity = entities.get(0);
 
         for(SoftwareComponent component : components) {
             if (component.getLabel().equals(SoftwareTaggingLabels.SOFTWARE))
                 continue;
-            if (component.getOffsetStart() >= currentEntity.getSoftwareName().getOffsetEnd()) {
+
+System.out.println(component.toJson());
+System.out.println(component.getLabel().getLabel());
+
+            while ( (currentEntity != null) && 
+                 (component.getOffsetStart() >= currentEntity.getSoftwareName().getOffsetEnd()) ) {
                 previousEntity = currentEntity;
                 if (n < entities.size())
                     currentEntity = entities.get(n);
                 n += 1;
-            } 
-            if (previousEntity == null) {
-                currentEntity.setComponent(component);
-            } else if ( (previousEntity != null) && 
-                 (component.getOffsetEnd() < previousEntity.getSoftwareName().getOffsetStart()) ) {
-                previousEntity.setComponent(component);
+                if (n >= entities.size())
+                    break;
+            }
+            if (currentEntity == null) {
+                if (previousEntity.freeField(component.getLabel())) {
+                    previousEntity.setComponent(component);
+                }
+            } else if (component.getOffsetEnd() < previousEntity.getSoftwareName().getOffsetStart()) {
+                if (previousEntity.freeField(component.getLabel())) {
+                    previousEntity.setComponent(component);
+                }
             } else if (component.getOffsetEnd() < currentEntity.getSoftwareName().getOffsetStart()) {
                 // we are in the middle of the two entities, we use proximity to attach the component
                 // to an entity
                 int dist1 = currentEntity.getSoftwareName().getOffsetStart() - component.getOffsetEnd();
                 int dist2 = component.getOffsetStart() - previousEntity.getSoftwareName().getOffsetEnd(); 
-                if (dist2 <= dist1) 
+                if (dist2 <= dist1) {
                     previousEntity.setComponent(component);
-                else
+                } else
                     currentEntity.setComponent(component);
             } else if (component.getOffsetEnd() >= currentEntity.getSoftwareName().getOffsetEnd()) {
                 currentEntity.setComponent(component);

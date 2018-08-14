@@ -16,8 +16,20 @@
     -moz-border-radius: 3px;
     border-radius: 3px;
 }
-.label.OBJECT {
+.label.software {
     background-color: #800080;
+}
+.label.version-date {
+    background-color: #3366cc;
+}
+.label.version-number {
+    background-color: #0066ff;
+}
+.label.url {
+    background-color: #ff3399;
+}
+.label.creator {
+    background-color: #993300;
 }
 
 html, body {
@@ -129,6 +141,12 @@ a.section-active { color: #BC0E0E; }
 span.section-not-active { color: #70695C; }
 span.section-active { color: #BC0E0E; }
 
+a.software { border-color: #800080 !important; } 
+a.version-date { border-color: #3366cc !important; } 
+a.version-number { border-color: #0066ff !important; } 
+a.url { border-color: #ff3399 !important; } 
+a.creator { border-color: #993300 !important; } 
+
 /*.table th{background-color:#FCF8E3;} */
 .table {background-color:#fff;border:0px solid #ddd;}
 .table th {background-color:#fff;} 
@@ -140,17 +158,41 @@ span.section-active { color: #BC0E0E; }
 p {word-break:normal;}
 span {word-break:normal;}
 
-[rel=popover][data-color=OBJECT] + .popover .popover-title {
+[rel=popover][data-color=software] + .popover .popover-title {
     background-color: #800080; color: white;
+}
+[rel=popover][data-color=version-date] + .popover .popover-title {
+    background-color: #3366cc; color: white;
+}
+[rel=popover][data-color=version-number] + .popover .popover-title {
+    background-color: #0066ff; color: white;
+}
+[rel=popover][data-color=url] + .popover .popover-title {
+    background-color: #ff3399; color: white;
+}
+[rel=popover][data-color=creator] + .popover .popover-title {
+    background-color: #993300; color: white;
 }
 
 .info-sense-box,.details-list {
 	margin:1px 1;padding:5px 2px 3px 2px;border:1px solid #87A1A8;background-color:#87A1A8;border-radius:5px;
-	font-size:13px;
+	font-size:12px;
 }
 
 /* entity */
-.info-sense-box.OBJECT {
+.info-sense-box.software {
     background-color: #800080;
+}
+.info-sense-box.version-date {
+    background-color: #3366cc;
+}
+.info-sense-box.version-number {
+    background-color: #0066ff;
+}
+.info-sense-box.url {
+    background-color: #ff3399;
+}
+.info-sense-box.creator {
+    background-color: #993300;
 }
 
