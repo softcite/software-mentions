@@ -39,7 +39,12 @@ Run some test:
 
 > mvn -Dmaven.test.skip=true jetty:run-war
 
-Javascript demo/console web app is then accessible at ```http://localhost:8060```
+Javascript demo/console web app is then accessible at ```http://localhost:8060```. From the console and the `RESTfull services` tab, you can process chunk of text (select `ProcessText`) or process a complete PDF document (select `Annotate PDF document`).
+
+![GROBID Software mentions Demo](doc/images/screen1.png)
+
+![GROBID Software mentions Demo](doc/images/screen2.png)
+
 
 Using ```curl``` POST/GET requests with some text:
 
@@ -51,20 +56,20 @@ which should return this:
 
 ```json
 {
-	"entities": [{
-		"type": "software",
-		"software-name": {
-			"rawForm": "GROBID",
-			"offsetStart": 28,
-			"offsetEnd": 34
-		},
-		"version-number": {
-			"rawForm": "version 0.5.1",
-			"offsetStart": 35,
-			"offsetEnd": 48
-		}
-	}],
-	"runtime": 4
+    "entities": [{
+        "software-name": {
+            "rawForm": "GROBID",
+            "offsetStart": 28,
+            "offsetEnd": 34
+        },
+        "type": "software",
+        "version-number": {
+            "rawForm": "version 0.5.1",
+            "offsetStart": 35,
+            "offsetEnd": 48
+        }
+    }],
+    "runtime": 2
 }
 ```
 
