@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4066774" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:24+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4066774" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-08-19T00:35+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>ABSTRACT </p>
 
@@ -284,33 +284,34 @@ the TruSeq SBS Kit version 3 -HS (Illumina). Ten percent
 X174 phage DNA was spiked into all sequencing lanes for 
 sequencer calibration. Real-time image analysis and base 
 calling were performed on the instrument using the <rs type="software">HiSeq 
-Sequencing Control Software</rs>. <rs id="software-6" type="software">CASAVA</rs> software <rs corresp="#software-6" type="version-number">version 1.8</rs> (<rs corresp="#software-6" type="creator">Illumina</rs>) was used for de-multiplexing and production 
+Sequencing Control</rs> Software. <rs id="software-5" type="software">CASAVA</rs> software version 
+<rs corresp="#software-5" type="version-number">1.8</rs> (<rs corresp="#software-5" type="creator">Illumina</rs>) was used for de-multiplexing and production 
 of FASTQ sequence files. </p>
 
 <p>Analysis of small RNA sequence data </p>
 
-<p>The <rs id="software-13" type="software">FASTX</rs> application (<rs corresp="#software-13" type="url">www.molecularevolution.org</rs>) 
+<p>The <rs id="software-13" type="software">FASTX application</rs> (<rs corresp="#software-13" type="url">www.molecularevolution.org</rs>) 
 was used to trim adapter sequences from the 3'-end of 
 the sequence read, discard any sequence of &lt;17 nts after 
 trimming and to collapse identical reads into single en-
 tries retaining the read count for each unique sequence. 
 Non-redundant sequences were then aligned to genomic 
-RNA and mRNA sequences of hg19 using <rs id="software-5" type="software">Bowtie</rs> <rs corresp="#software-5" type="version-number">2</rs> (<rs corresp="#software-5" type="url">www.bowtie-bio.sf.net</rs>) (35) and matched sequences were re-
+RNA and mRNA sequences of hg19 using <rs id="software-12" type="software">Bowtie</rs> <rs corresp="#software-12" type="version-number">2</rs> (<rs corresp="#software-12" type="url">www.bowtie-bio.sf.net</rs>) (35) and matched sequences were re-
 tained and aligned to common and abundant non-coding 
 RNAs (tRNAs, rRNAs, snoRNAs). Remaining sequences 
 were further aligned to known mature and precursor 
 miRNAs using the miRbase 19 database (www.mirbase. 
 org). Additional alignments to a transcript database (En-
 sembl version 75, http://www.ensembl.org) (36) and the spe-
-cific piRNA database <rs id="software-10" type="software">piRNABank</rs> (<rs corresp="#software-10" type="url">http://pirnabank.ibab. ac.in/</rs>/) were also performed (37). Alignment result files 
+cific piRNA database <rs id="software-9" type="software">piRNABank</rs> (<rs corresp="#software-9" type="url">http://pirnabank.ibab. ac.in/</rs>/) were also performed (37). Alignment result files 
 were parsed using the R statistical language (http://www. 
-R-project.org) and the <rs id="software-19" type="software">Bioconductor</rs> project (<rs corresp="#software-19" type="url">http://www. bioconductor.org</rs>) (38) to generate tables including the read 
+R-project.org) and the <rs id="software-16" type="software">Bioconductor</rs> project (<rs corresp="#software-16" type="url">http://www.bioconductor.org</rs>) (38) to generate tables including the read 
 count and annotation information for each entry in the tar-
 get database. Raw read counts for each RNA class from all 
 samples in the study were then joined in raw data tables. 
 The raw reads were converted to reads per kilobase of target 
 length per million mapped reads (39). All sequences were 
-deposited into the <rs id="software-21" type="software">GEO</rs> database (<rs corresp="#software-21" type="url">http://www.ncbi.nlm.nih.gov/geo/</rs>/) under accession number GSE56076. Calculation 
+deposited into the <rs id="software-17" type="software">GEO</rs> database (<rs corresp="#software-17" type="url">http://www.ncbi.nlm.nih.gov/geo/</rs>/) under accession number GSE56076. Calculation 
 of percent of reads by biotype was based on raw read counts 
 of perfectly matched transcripts for each biotype compared 
 to total reads for each library. </p>
@@ -348,7 +349,7 @@ firmed by checking original publication references (41). </p>
 alyzed using Spearman's correlation coefficient. The dif-
 ference in RNA content between exosomes and seminal 
 plasma was tested using a paired t test. All statistics were 
-calculated using <rs id="software-14" type="software">Prism</rs> <rs corresp="#software-14" type="version-number">6.0</rs> (<rs corresp="#software-14" type="creator">Graphpad</rs>). </p>
+calculated using <rs id="software-8" type="software">Prism</rs> <rs corresp="#software-8" type="version-number">6.0</rs> (<rs corresp="#software-8" type="creator">Graphpad</rs>). </p>
 
 <p>RESULTS </p>
 

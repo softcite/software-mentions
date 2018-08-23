@@ -1,8 +1,8 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC1636350" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:24+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC1636350" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-08-19T00:35+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>ABSTRACT </p>
 
-<p><rs corresp="#software-179" type="creator">We</rs> have developed <rs id="software-179" type="software">MUMMALS</rs>, a program to con-
+<p>We have developed <rs type="software">MUMMALS</rs>, a program to con-
 struct multiple protein sequence alignment using 
 probabilistic consistency. <rs type="software">MUMMALS</rs> improves 
 alignment quality by using pairwise alignment 
@@ -393,9 +393,9 @@ The column scores (the fraction of entirely correct columns)
 were reported in addition to Q-scores for BAliBASE3.0. 
 Wilcoxon signed-ranks tests were performed to calculate 
 statistical significance of comparisons between alignment 
-programs, which include <rs id="software-166" type="software">ProbCons</rs> (<rs corresp="#software-166" type="version-number">version 1.10</rs>) (23), 
-<rs id="software-239" type="software">MAFFT</rs> (<rs corresp="#software-239" type="version-number">version 5.667</rs>) (11) with several options, <rs id="software-73" type="software">MUSCLE</rs> 
-(<rs corresp="#software-73" type="version-number">version 3.52</rs>) (10) and <rs id="software-304" type="software">ClustalW</rs> (<rs corresp="#software-304" type="version-number">version 1.83</rs>) (7). 
+programs, which include <rs id="software-213" type="software">ProbCons</rs> (<rs corresp="#software-213" type="version-number">version 1.10</rs>) (23), 
+<rs id="software-69" type="software">MAFFT</rs> (<rs corresp="#software-69" type="version-number">version 5.667</rs>) (11) with several options, <rs id="software-152" type="software">MUSCLE</rs> 
+(<rs corresp="#software-152" type="version-number">version 3.52</rs>) (10) and <rs id="software-78" type="software">ClustalW</rs> (<rs corresp="#software-78" type="version-number">version 1.83</rs>) (7). 
 In addition to Q-score, we utilized a reference-independent 
 assessment of alignment quality from a structural modeling 
 perspective. Given a test sequence alignment of two SCOP 
@@ -863,7 +863,7 @@ measured by column score.
 We found that the major cause of lower average column 
 score of <rs type="software">MUMMALS</rs> is due to a few alignments that 
 MUMMALS gives considerably lower scores as compared 
-to <rs type="software">MAFFT-linsi</rs> (10 alignments with a score difference larger 
+to <rs type="software">MAFFT</rs>-linsi (10 alignments with a score difference larger 
 than 0.5). Manual inspections of these alignments revealed 
 some interesting scenarios. In some cases, the low scores of 
 <rs type="software">MUMMALS</rs> are due to wrong alignment of a few divergent 
@@ -993,7 +993,7 @@ not that different from each other. The differences between
 For example, <rs type="software">MUMMALS</rs> with HMM_3_3_1 has a large 
 Q-score increase (&gt;10%) over <rs type="software">ProbCons</rs> on 201 alignments, 
 while ProbCons is better by 10% or more on 62 alignments. 
-For <rs type="software">MUMMALS</rs> with HMM_3_3_1 and <rs type="software">MAFFT-ginsi</rs>, these 
+For <rs type="software">MUMMALS</rs> with HMM_3_3_1 and <rs type="software">MAFFT</rs>-ginsi, these 
 numbers are 199 and 117, respectively. Our comparisons thus 
 suggest that different programs can explore somewhat differ-
 ent regions in alignment space, and the program giving lower 
@@ -1016,7 +1016,7 @@ tion is a weighted sum-of-pairs score of BLOSUM62, a gen-
 eral amino acid substitution matrix. Recent versions of 
 <rs type="software">MAFFT</rs> enhance performance by exploring aligned core 
 regions with a simple consistency measure (11). However, 
-the time-consuming <rs type="software">ProbCons</rs>-type consistency operations 
+the time-consuming <rs type="software">ProbCons-type</rs> consistency operations 
 on sequence triplets are not implemented in <rs type="software">MAFFT</rs>. Our 
 results show that <rs type="software">MUMMALS</rs> based on probabilistic consis-
 tency can perform better than <rs type="software">MAFFT</rs>, implying that 

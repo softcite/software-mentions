@@ -135,7 +135,7 @@ The path to the PDF repo is the path where the PDF corresponding to the annotate
 The compiled XML training files will be written in the standard GROBID training path for the softwate recognition model under `grobid/software-mentions/resources/dataset/software/corpus/`.
 
 
-## Analysis of traninign data consistency
+## Analysis of training data consistency
 
 A Python 3.* script is available under `script/` to analyse XML training data and spot possible unconsistencies to review. To launch the script: 
 

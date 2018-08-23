@@ -62,6 +62,9 @@ public class SoftciteAnnotation extends Annotation {
 
     private String url = null;
 
+    // provided article identifier, e.g PMC identifier
+    //private String articleID = null;
+
     // Gives the actual occurence of the annotation in the PDF document as offset relatively to 
     // the LayoutToken of the whole document.
     // These LayoutTokens provide the exact position in the document with coordinates and so on.

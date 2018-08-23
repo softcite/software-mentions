@@ -1,0 +1,1197 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC3173807" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-08-19T00:34+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p><rs type="software">EPP</rs>The most significant change in the global response 
+to HIV has been the rapid expansion of anti-
+retroviral therapy (ART) using drug combinations 
+in developing countries. Since WHO and UNAIDS 
+launched the '3 by 5' strategy in 2003, 1 the number 
+of people on ART has grown to exceed 4 million 
+people by the end of 2008. 2 High levels of ART in 
+many countries are now having a major impact on 
+HIV prevalence. Because survival of individuals on 
+ART is greatly prolonged, HIV prevalence in the 
+population as a whole will be higher than in the 
+absence of ART. These increased prevalence effects 
+are often reflected in surveillance data which the 
+UNAIDS Estimation and Projection Package (EPP) 
+fits to the model developed by the UNAIDS 
+Reference Group on Estimates, Modelling and 
+Projections (hereafter, the Reference Group 
+model). 3e6 EPP has been used extensively for 
+modelling national epidemics. 7e10 The EPP model 
+must incorporate these effects of ART on preva-
+lence before fitting to the data. High levels of ART 
+can also lower the HIV incidence for a given </p>
+
+<p>prevalence level through decreases in viral load 
+reducing individuals' infectiousness. To respond to 
+both sets of treatment-related effects, EPP 2009 
+now uses a modified Reference Group model that 
+includes the impacts of ART on prevalence and 
+incidence. 
+Estimates of the number of persons living with 
+HIV have been the major focus of routine moni-
+toring and reporting on HIV epidemics. However, 
+a number of problems have been identified with the 
+reliance on prevalence as an indicator for analysing 
+the impact of HIV programs. During the early 
+phases of an epidemic prevalence grows rapidly, but 
+changes in the slope due to saturation and to 
+program impact are difficult to separate. After 
+several years HIV prevalence tends to plateau, with 
+new infections and deaths balancing each other 
+out. An effective program introduced as this 
+plateau phase begins may induce a gradual decline 
+in prevalence, but this decline may be difficult to 
+distinguish from mortality-related declines. Several 
+years ago, the global epidemic entered a plateau 
+phase, with most countries in sub-Saharan Afri-
+cadwhere the majority of people living with HIV 
+residedshowing stable or only slowly declining 
+HIV prevalence. As a result, in 2007 UNAIDS began 
+to focus more attention on new infections, that is, 
+incidence, as a more informative measure of global 
+progress. 11 In response, the UNAIDS Reference 
+Group recommended that the tools UNAIDS 
+prepares to assist countries in analysing their 
+epidemics, EPP and <rs type="software">Spectrum</rs>, shift to a focus on 
+incidence. 12 This change was made in the 2009 
+version of the software, which still fits prevalence 
+data, but provides incidence from the model along 
+with prevalence as outputs. Because incidence is 
+derived by fitting prevalence, it reflects an averaged 
+national trend in new infections and may not 
+capture short-term rises and falls in incidence 
+occurring in specific groups or geographical areas. 
+EPP 2009 includes a number of additional 
+changes to resolve issues that have arisen in the 
+application of the package at country level. EPP 
+2007's uncertainty estimation procedures evaluated 
+50 000e200 000 sets of Reference Group model 
+parameters for their fit to the observed prevalence 
+data, normally selecting out 50 or more that were 
+close to the data (described in Brown et al 5 and 
+Alkema et al 13 ). In a few countries, the defaults set 
+in the uncertainty procedures produced relatively 
+few unique curves, leading to inaccurate estimation 
+of uncertainty. A new procedure, incremental 
+mixture importance sampling (IMIS), has been 
+introduced to solve this problem. In many African 
+countries the population has been rapidly shifting </p>
+
+<p>1 Population and Health Studies, 
+East-West Center, Honolulu, 
+Hawaii, USA 
+2 Department of Statistics, 
+University of Washington, 
+Seattle, Washington, USA 
+3 Harvard School of Public 
+Health, Boston, Massachusetts, 
+USA 
+4 Department of Infectious 
+Disease Epidemiology, Imperial 
+College London, London, UK 
+5 Futures Institute, Glastonbury, 
+Connecticut, USA 
+6 Population Division, 
+Department of Economic and 
+Social Affairs, New York, New 
+York, USA </p>
+
+<p>Correspondence to 
+Tim Brown, Population and 
+Health Studies, East-West 
+Center, 1601 East-West Road, 
+Honolulu, HI 96848, USA; 
+tim@hawaii.edu </p>
+
+<p>Accepted 7 September 2010 </p>
+
+<p>This paper is freely available 
+online under the BMJ Journals 
+unlocked scheme, see http://sti. 
+bmj.com/site/about/unlocked. 
+xhtml </p>
+
+<p>Sex Transm Infect 2010;86(Suppl 2):ii3eii10. doi:10.1136/sti.2010.044784 
+ii3 </p>
+
+<p>Supplement </p>
+
+<p>from rural to urban areas, but earlier versions of EPP assumed 
+fixed urban and rural population sizes. 12 EPP 2009 now allows 
+the urban/rural proportions to vary over time. In a small number 
+of countries, fits to the data in EPP 2007 produced zero incidence 
+within a few years, a situation which has never been observed in 
+any country. A modified Reference Group model was developed 
+for use in these countries. Finally, user interface changes were 
+introduced to allow user input of the data needed for ART 
+calculations, improve overall calibration procedures, and support 
+the shift to an incidence basis. </p>
+
+<p>INCORPORATING ART INTO THE REFERENCE GROUP MODEL 
+AND EPP FITS </p>
+
+<p>The widespread availability of ART is altering the course of HIV 
+epidemics. People living with HIV who start ART have 
+substantially increased survival. 14 As a result, HIV prevalence is 
+higher than it would be otherwise. Figure 1 illustrates the 
+impact that scaling up ART from 0% coverage among those in 
+need in 2005 to 100% coverage by 2015 would have on an 
+advanced epidemic. Prevalence increases slightly because fewer 
+people are dying from HIV-related causes. At the same time, </p>
+
+<p>incidence declines because a substantial fraction of those living 
+with HIV are now on ART, which substantially reduces their 
+infectivity, that is, their ability to infect their partners. In EPP 
+2009, based on a review by Baggaley and colleagues (unpub-
+lished), the default value for the infectivity of those on ART is 
+set at 0.11 of the infectivity of persons not on ART, but the user 
+can change this value on the User Preferences page. This figure 
+was based on an extensive review of the relative HIV trans-
+mission probability of treated individuals compared to people 
+not eligible for ART, estimated from the best field data available 
+at the time as 0.20, an 80% reduction in infectivity. This figure 
+was then adjusted for the average duration and relative infec-
+tiousness of the stages of HIV infection to provide the 0.11 figure 
+for relative infectiousness compared to all infected individuals, 
+that is, both those eligible for and ineligible for ART. This value 
+is similar to those in another literature review and a recent 
+cohort study, both of which found a 92% reduction in hetero-
+sexual transmission among those on ART relative to those not 
+on therapy. 15 16 
+Adding ART to EPP 2009 required substantial changes to both 
+the internal Reference Group model and the user interface: 
+&lt; The underlying equations describing the Reference Group 
+model were modified to include the effects of ART on survival 
+and new infections (see the appendix). 
+&lt; The EPP interface added an ART Data page for the user to 
+provide information about the CD4 eligibility criterion, HIV 
+progression rate and numbers on first-and second-line ART. 
+&lt; The Results page added a button, labelled 'ART results' which 
+brings up a table displaying the number of people on ART and 
+estimated percentage of ART need met. 
+The original Reference Group model, described in detail 
+previously, 4 5 divided the population into three groups: (1) those 
+not at risk (X); (2) those at risk, but not yet infected (Z); and (3) 
+those at risk and living with HIV (Y). These three groups are 
+shown in the upper left of figure 2. New members can enter the 
+two uninfected compartments at age 15 and only leave 
+a compartment by contracting HIV or dying. Those in the 
+uninfected compartments have only background mortality 
+applied, while those living with HIV also have additional HIV-
+related mortality, which depends on when they contracted HIV. 
+As seen in the lower right of figure 2, the model in EPP 2009 
+has been modified to add several new compartments: those 
+newly eligible for ART, divided among those untreated and those 
+on first-line ART; and those on second-line ART. While previous 
+versions of EPP and Spectrum used a single Weibull survival 
+function for time from infection to death, EPP 2009 and current 
+versions of Spectrum replaced this single function with four 
+functions: a Weibull curve describing progression from infection 
+to eligibility for ART, a second Weibull curve describing 
+progression from eligibility to death in the absence of ART (see 
+figure 3), and simple survival functions for those on first-and 
+second-line ART expressed as the percentage of those on each 
+treatment surviving from year to year. The eligibility Weibull 
+function is used to progress people from the infected at-risk 
+compartment into the currently eligible compartment based on 
+their time since infection. EPP 2009 then uses current numbers 
+of people on first-and second-line ART supplied by the user to 
+divide eligible individuals into those untreated, those on first-line 
+ART and those on second-line ART. For persons remaining in the 
+untreated category, survival will follow the Weibull distribution 
+of time from eligibility to death based on the time at which they 
+became eligible. For those on first-line ART, survival is deter-
+mined by two values: (1) the percentage surviving the first year 
+on first-line ART, and (2) the percentage surviving subsequent </p>
+
+<p>a </p>
+
+<p>b </p>
+
+<p>Figure 1 The impact that scaling up to 100% of antiretroviral therapy 
+(ART) need by 2015 would have if begun in 2005 in an advanced 
+epidemic. (A) Prevalence increases as a result of prolonged survival of 
+those on ART, while (B) incidence declines. Note that the UNAIDS 
+Estimation and Projection Package (EPP) estimates incidence using the 
+traditional epidemiological definition of percentage of susceptibles 
+contracting HIV rather than on a whole-population basis. </p>
+
+<p> 
+Sex Transm Infect 2010;86(Suppl 2):ii3eii10. doi:10.1136/sti.2010.044784 </p>
+
+<p>Supplement </p>
+
+<p>years on first-line ART. By default these are set to 86% and 90%, 
+respectively, but may be changed by the user. If a person fails 
+first-line therapy and slots are open for second-line therapy, they 
+are moved to second-line therapy and 90% survival per year is 
+assumed in subsequent years. If no slots are open, they progress 
+to death. By tracking people's evolution through these addi-
+tional compartments, the outputs of EPP 2009 incorporate the 
+impacts of ART on prevalence and incidence. The equations 
+describing this model are provided in the appendix. 
+The Weibull curves used depend on both an eligibility criterion 
+in terms of CD4 count and a fast or normal progression rate 
+from HIV infection to death chosen by the user: four sets of 
+Weibull parameters are provided to cover possible combinations 
+of CD4 eligibility threshold (CD4&lt;200 and CD4&lt;350) and </p>
+
+<p>progression pattern (normal with median 11-year survival, fast 
+with median 9-year survival without ART). Fast and slow 
+progression patterns address the wide variability in survival 
+observed between African and Thai cohorts. 17 
+This modified model requires several decisions and numerical 
+inputs from the user in order to fully calculate ART effects: 
+&lt; CD4 eligibility threshold. The user must select eligibility for 
+ART as a CD4 count below 200 cells/mm 3 or a CD4 below 
+350 cells/mm 3 . 
+&lt; Progression pattern. The user must select a progression pattern 
+with an overall survival in the absence of ART of 11 years 
+(normal pattern) or one with survival of 9 years (fast 
+pattern). 
+&lt; Year-by-year estimates of percentage survival in the 1st year of 
+ART. By default this is set to 86% surviving the first year and 
+is kept at this value throughout the projection. However, 
+expansion of voluntary counselling and testing (VCT) 
+programs in most countries is expected to allow for detection 
+of individuals living with HIV at higher CD4 counts. 
+When therapy starts at higher CD4 counts, survival is 
+improved. 18 19 As VCT programs expand, it is expected that 
+first year survival will improve, so EPP and Spectrum allow 
+the user to change it over time. 
+&lt; Year-by-year numbers on first-line and second-line ART nationally. 
+The user must provide the total number of individuals on 
+first-and second-line therapies. For years in the past, values 
+should be based on historical program data. For years in the 
+future, values can be based on projections of anticipated 
+numbers on ART. To simplify future projections, the user can 
+enter values for historical data and an estimate for the 
+numbers on ART in the final year of the projection and then 
+select an option to project the intervening years (the 'ART 
+project' button). This will linearly extrapolate from the last 
+historical value entered and the estimate for the final year. 
+&lt; Distribution of ART among user defined subpopulations. Finally, 
+the user must distribute the national ART numbers among 
+the different subpopulations. This distribution may be either 
+done in absolute numbers or as percentages of all those on 
+ART who are members of each subpopulation. </p>
+
+<p>Figure 2 The compartments in the 
+modified Reference Group model with 
+antiretroviral therapy (ART) used in the 
+UNAIDS Estimation and Projection 
+Package (EPP) 2009. Once they 
+become eligible for ART, those living 
+with HIV can move to untreated or first-
+line therapy compartments based on 
+the number of treatment slots available. 
+If they fail first-line therapy they can 
+move to second-line therapy. </p>
+
+<p>X </p>
+
+<p>Not at-risk 
+Entrants by 
+"birth" at age 15 </p>
+
+<p>t </p>
+
+<p>E </p>
+
+<p>population </p>
+
+<p>Z </p>
+
+<p>Uninfected </p>
+
+<p>Death </p>
+
+<p>Number gated by 
+at-risk </p>
+
+<p>Y </p>
+
+<p>Infe </p>
+
+<p>access slots. All 
+untreated + newly 
+eligible have equal 
+chance </p>
+
+<p>cted 
+at-risk </p>
+
+<p>U </p>
+
+<p>Untreated </p>
+
+<p>Newly 
+eligible for ART </p>
+
+<p>L 1 </p>
+
+<p>First-line ART </p>
+
+<p>Death </p>
+
+<p>L 2 </p>
+
+<p>Second-line ART </p>
+
+<p>E </p>
+
+<p>0 
+. 
+1 </p>
+
+<p>8 
+. 
+0 </p>
+
+<p>6 
+. 
+0 </p>
+
+<p>4 
+. 
+0 </p>
+
+<p>2 
+. 
+0 </p>
+
+<p>0 
+. 
+0 </p>
+
+<p>0 
+1 
+5 
+1 
+0 
+2 
+5 
+2 
+0 
+3 
+Percent progressing to endpoint (eligibility or death) </p>
+
+<p>0 
+5 </p>
+
+<p>) 
+s 
+r 
+a 
+e 
+y 
+( 
+V 
+I 
+H 
+g 
+n 
+i 
+t 
+c 
+a 
+r 
+t 
+n 
+o 
+c 
+e 
+c 
+n 
+i 
+s 
+e 
+m 
+i 
+T </p>
+
+<p>y 
+t 
+i 
+l 
+i 
+b 
+i 
+g 
+i 
+l 
+e 
+T 
+R 
+A 
+o 
+t 
+n 
+o 
+i 
+t 
+c 
+e 
+f 
+n 
+I 
+) 
+a 
+( 
+h 
+t 
+a 
+e 
+d 
+o 
+t 
+y 
+t 
+i 
+l 
+i 
+b 
+i 
+g 
+i 
+l 
+E 
+) 
+b 
+( 
+h 
+t 
+a 
+e 
+d 
+o 
+t 
+n 
+o 
+i 
+t 
+c 
+e 
+f 
+n 
+I 
+) 
+c 
+( </p>
+
+<p>Figure 3 Example of the Weibull distributions for time (A) from 
+infection to antiretroviral therapy (ART) eligibility and (B) from ART 
+eligibility to death. When combined, they approximate (C) the original 
+Weibull survival function used in previous versions of the UNAIDS 
+Estimation and Projection Package (EPP) and Spectrum. This figure is for 
+a CD4 eligibility threshold of 200 cells/mm 3 and normal (11-year 
+survival) progression pattern. </p>
+
+<p>Sex Transm Infect 2010;86(Suppl 2):ii3eii10. doi:10.1136/sti.2010.044784 
+ii5 </p>
+
+<p>Supplement </p>
+
+<p>The user enters this information on a single ART Data page in 
+EPP 2009. The subsequent year survival on ART is specified on 
+the User Preferences page and can be altered by the user if 
+desired, although the Reference Group generally recommends 
+against this in the absence of convincing local data to the 
+contrary. </p>
+
+<p>THE SHIFT TO INCIDENCE </p>
+
+<p>In EPP incidence is defined using the standard epidemiological 
+definition of the percentage of those susceptible to infection 
+contracting HIV in a specified year. The shift from prevalence to 
+incidence in EPP 2009 required primarily changes in the user 
+interface. Internally, the EPP implementation of the Reference 
+Group model has always explicitly calculated incidence while 
+fitting prevalence. For EPP 2009, however, this was made visible 
+to the user. There are a number of places where the shift to 
+incidence becomes apparent: 
+&lt; The files containing the national projection and uncertainty 
+estimates (*.spt and *.spu) that EPP passes to Spectrum now 
+provide incidence as well as prevalence. Spectrum then uses 
+this incidence to calculate its outputs for national projections. 
+&lt; On the Results page, incidence can now be displayed both in 
+terms of estimated number of new infections and percentage 
+of susceptibles contracting HIV in a given year (see figure 4). 
+Users should always take final new and current infection 
+numbers from Spectrum rather than EPP because Spectrum 
+has a more complete demographic model, while EPP uses 
+a simplified demographic model inherent in the Reference 
+Group model. 
+&lt; A graph for displaying the incidence distribution (see figure 5) 
+has been added to the Results page and is activated by 
+clicking the button labelled 'Incidence distribution'. This 
+displays the distribution of incidence among the various user 
+defined subpopulations in EPP. It can help to track the 
+evolution of the epidemic and provide countries with a better 
+idea of which populations are giving rise to new infections at 
+a given point in time. </p>
+
+<p>IMPROVING UNCERTAINTY ESTIMATION </p>
+
+<p>EPP 2007 adopted an uncertainty estimation method known as 
+Bayesian melding. 5 13 This method generates random combina-</p>
+
+<p>tions of the Reference Group model parameters (r, f 0 , t 0 and 4) in </p>
+
+<p>accord with user-specified distributions of each of the variables, 
+weights them by how well they fit the surveillance data, and 
+then resamples them to provide an estimate of the uncertainty 
+in the fit of the model to the data. 20 This method worked fairly 
+well in most cases, but for some surveillance data sets the 
+method found relatively few unique curves close to the data 
+among the resamples (see figure 6A). This meant that the 
+uncertainty bounds were not very well-determined. The 
+problem could be alleviated by generating more parameter 
+combinations, but this was very computationally demanding 
+and time-consuming. 
+EPP 2009 replaced the simple random sampling of possible 
+combinations of variables in the Bayesian melding module with 
+a procedure known as incremental mixture importance sampling </p>
+
+<p>(IMIS). 21 22 In IMIS, a smaller initial set of (r, f 0 , t 0 and 4) 
+combinations is generated. (Note: If one is using the 4-shift </p>
+
+<p>described later in this paper, this group is expanded by two </p>
+
+<p>variables, 4 9 and the year in which the shift begins, t 4eshift .) </p>
+
+<p>These are then evaluated and weighted by their fit to the data. 
+New combinations of the variables are then generated centred 
+on the combination with the highest weight. This process is 
+repeated iteratively until the desired number of unique curves is 
+obtained. The IMIS algorithm has several control parameters: 
+the number of initial samples, N 0 , the sample size at each 
+importance sampling iteration, B, and the number of resamples, 
+J. The algorithm is unbiased for any choice of these parameters, 
+but they do affect its efficiency. After extensive experimentation, 
+good results were found with N 0 ¼4000, B¼400 and J¼3000. For 
+3000 resamples, finding 1900 unique curves ensures the resam-
+pled curves will be a good approximation to the actual distri-
+bution, so this was set as the default for national projections. For 
+training purposes the number of unique curves was set at 400, 
+which allows fits to be generated in a few minutes during 
+workshops. Figure 6B illustrates how this procedure has gener-
+ated a much higher number of unique curves, making the 
+uncertainty bounds more accurate. </p>
+
+<p>ALLOWING FOR URBAN/RURAL POPULATION SHIFTS </p>
+
+<p>Urbanisation is a global phenomenon, and large urban/rural HIV 
+prevalence differentials are often observed in countries with 
+generalised epidemics. 23 24 Across Africa, United Nations Popu-
+lation Division projections show urban populations growing </p>
+
+<p>Figure 4 Incidence display on the Results page. The user can select to display new infections, that is, incidence as either (A) the percentage of those 
+susceptible to infection who contracted HIV in the last year or (B) an absolute number of new infections in a year. </p>
+
+<p> 
+Sex Transm Infect 2010;86(Suppl 2):ii3eii10. doi:10.1136/sti.2010.044784 </p>
+
+<p>Supplement </p>
+
+<p>from 27.6% in 1980 to 39.9% in 2010 25 ; and in a few countries 
+with generalised epidemics, the rate of urbanisation is extreme. 
+Between 1980 and 2010, Botswana went from 16.5% to 61.1% 
+urban, while Angola went from 24.3% to 58.5%. 25 In an era of 
+increasing urbanisation, urban/rural prevalence differentials can 
+have a major influence on national HIV estimates. 26 To adjust for 
+this influence, EPP 2009 allows for changes in the urban/rural 
+population proportions over time in generalised epidemics. 
+In most generalised epidemics, the national projection is 
+divided into two subpopulations: one urban and one rural. In 
+EPP 2009 the user first fits the epidemics in each subpopulation 
+to the corresponding HIV surveillance data. EPP 2009 then 
+combines these two separate fits with weights proportional to 
+the number of people living in urban or rural areas. By default, 
+the urban percentage is set based on the numbers entered on the 
+Define Pops page and is kept constant over time. However, the 
+user can change the annual urban/rural proportions over time on 
+the Pop Change page, which contains a table showing the overall 
+percentage of urban population along with the percentage of 
+national population in each subpopulation. The user can also 
+adjust urbanerural proportions to the values provided by the 
+United Nations Population Division by clicking on an 'Adjust to </p>
+
+<p>UN values' button. If the user has defined multiple urban and 
+rural subpopulations, then the total urban population is divided 
+among them according to their relative size as specified on the 
+Define Pops page. The actual resulting population sizes and the 
+impacts on national HIV prevalence can then be examined on 
+the Results page. </p>
+
+<p>UNUSUAL CASES FORCE MODIFICATIONS TO THE MODEL </p>
+
+<p>One final issue seen in the field was a small number of data sets, 
+for example, in Cambodia or Zimbabwe, that approached zero 
+incidence by the end of the projection period when fit with EPP 
+2007. No national HIV epidemic has ever been observed that 
+actually declined to zero incidence. The problem here is that 
+epidemics are dynamic, that is, the behaviours that drive them 
+can and do change over time. However, the Reference Group 
+model is static, that is, the four parameters that define the model </p>
+
+<p>(r, f 0 , t 0 and 4) are fixed and do not vary over timedthey must fit 
+both the early epidemic and the late epidemic. While the 4 </p>
+
+<p>parameter was introduced to represent increased or decreased 
+levels of risk behaviour over the course of the epidemic, 6 it forces 
+a particular behaviour change pattern on a projection that is </p>
+
+<p>Figure 5 Incidence distribution displays. UNAIDS Estimation and Projection Package (EPP) 2009 allows the display of the distribution of incidence 
+among the subpopulations comprising a national projection. The vertical axis shows the number of new infections in thousands. </p>
+
+<p>Figure 6 A comparison of the outcomes of the Bayesian melding routines as implemented in the UNAIDS Estimation and Projection Package (EPP) 
+2007 (A) and EPP 2009 (B) with the same data set. This illustrates how the incremental mixture importance sampling (IMIS) procedure used in EPP 
+2009 provides many more unique curves and better uncertainty estimates in similar amounts of computational time. </p>
+
+<p>Sex Transm Infect 2010;86(Suppl 2):ii3eii10. doi:10.1136/sti.2010.044784 
+ii7 </p>
+
+<p>Supplement </p>
+
+<p>itself static. In the real world, behaviours change, the proportion 
+of people at risk changes, and any model with static parameters 
+will not be able to capture the full complexity. In fact, in a few 
+epidemics incidence is once again rising, something that the 
+original Reference Group model was never intended to reproduce 
+and which cannot be fitted with the standard four-parameter 
+model. 
+In order to address these issues, a number of variants to the 
+Reference Group model were considered. One alternative 
+allowed for a one-time change in r, which represents the rate at 
+which new infections occur among the susceptible population. 
+However, this approach was found to be insufficient, as the 
+change in r often occurred when there were no susceptibles left 
+in the population to become infected. Other alternatives were </p>
+
+<p>also explored, including variants in which both r and 4 were </p>
+
+<p>allowed to change, and in which r shifted gradually over some 
+time frame; but neither of these resolved the zero incidence 
+issues. The solution finally adopted was to allow a slow shift in </p>
+
+<p>4 over some period before the end of the projection period. The </p>
+
+<p>interpretation of this scenario is that as prevalence declines from 
+its peak, some individuals who had reduced their risk behaviours 
+in response to the epidemic, might return to riskier behaviours, 
+which would increase recruitment into the susceptible popula-
+tion. By allowing such changes and applying constraints on 
+incidence, more reasonable incidence patterns could be produced 
+while still fitting the data. This produced a six-parameter model </p>
+
+<p>with (r, f 0 , t 0 and 4) supplemented by a 4 9 and a year, t 4eshift in 
+which 4 began a slow shift to 4 9 by the end of the projection </p>
+
+<p>period. Using this approach, it was possible to fit the more 
+problematic data sets without having incidence drop to zero (see 
+figure 7). </p>
+
+<p>ANTICIPATED FUTURE DIRECTIONS </p>
+
+<p>In the 2009 round of estimations, even after decomposing the 
+population in homogeneous groups (eg, urban/rural, provinces, 
+etc) more complex epidemic patterns were observed in a number 
+of countries, for example, an early peak and subsequent decline 
+in prevalence followed by an increase in prevalence. These 
+patterns almost certainly result from behavioural changes, 
+where lower levels of risk behaviour in the past are giving way to 
+higher levels today, producing higher incidence. Such changes 
+may result from prevention fatigue, perceptions of lower HIV </p>
+
+<p>severity with the availability of ART, new generations of 
+susceptibles, or newly emerging epidemics in populations 
+previously unaffected. Addressing these will require a more </p>
+
+<p>complex model than the simple four-parameter (r, f 0 , t 0 and 4) 
+Reference Group model or even the new six-parameter 4-shift </p>
+
+<p>model outlined above. Work is currently underway to develop 
+models that allow r to vary smoothly over time (described in 
+Hogan et al 27 and in Bao and Raftery 28 ), thus permitting the 
+combined SpectrumeEPP package to better handle the more 
+complex behavioural trends being observed as the global 
+pandemic enters its fourth decade. 
+The focus on incidence in this round of global estimates 
+highlighted some issues with the current separation of respon-
+sibilities between EPP and Spectrum, with EPP fitting the 
+prevalence data and Spectrum subsequently applying a more 
+complete age-structured demographic model to the resulting 
+prevalence curve to produce comprehensive national outputs. 
+Since incidence was calculated as the percentage of susceptible 
+individuals contracting HIV, the variations in their underlying 
+population models resulted in slightly different calculations of 
+the number of new infections between EPP and Spectrum. In 
+some countries, migration, which is included in Spectrum's 
+demographic model but not in EPP's, made a substantial 
+difference in incidence levels. In addition, it became clear that 
+better incidence estimates would be obtained if the Reference 
+Group model was adapted to use a population between 15 and 
+49 years of age and allowed ageing out at 50, instead of the 
+current 15+ population. These factors also contributed to 
+differing ART estimates between the two models, sometimes 
+requiring countries to go through an iterative process to reach an 
+acceptable result. These problems are being addressed in the 
+next round of EPP and Spectrum by combining them into 
+a more tightly integrated package. EPP will take its demo-
+graphics directly from Spectrum and will pass its incidence 
+calculations to Spectrum without direct user intervention, thus 
+ensuring better consistency. The user will actually invoke EPP 
+from within Spectrum, thus providing a more holistic user 
+experience. 
+In light of evolving global and national policies and recom-
+mendations for initiation of ART at higher and higher CD4 
+counts, the next versions of Spectrum and EPP are adopting 
+a CD4 model allowing for a fuller range of CD4 criteria, for 
+example, 200, 250, 350 and 500. </p>
+
+<p>Figure 7 An example of the impact of applying a 4-shift with an incidence constraint to Zimbabwe urban data. The left-hand figure shows the near-
+zero incidence resulting from a four-parameter Reference Group model fit, while the right-hand side shows the results of allowing 4 to vary, providing </p>
+
+<p>a low, but stable incidence pattern. </p>
+
+<p> 
+Sex Transm Infect 2010;86(Suppl 2):ii3eii10. doi:10.1136/sti.2010.044784 </p>
+
+<p>Supplement </p>
+
+<p>The Reference Group also recognises that many countries rely 
+on case reporting systems as opposed to cross-sectional seros-
+urveillance and has begun to explore methodologies for esti-
+mating the levels of under-reporting in such systems as 
+diagnoses increase, but these discussions are still at an early 
+stage. In the future, as techniques for such estimation improve, 
+their incorporation into the UNAIDS estimation and projection 
+suite may be considered. As they have since the beginning, these 
+tools will continue to evolve to address new problems and issues 
+that arise as the global pandemic enters its fourth decade. </p>
+
+<p>Acknowledgements We greatly appreciate the ongoing technical inputs of the 
+many and varied members of the UNAIDS Reference Group on Estimates, Modelling 
+and Projections, and the willingness of country counterparts to share the data used 
+in preparing examples here with UNAIDS and WHO. </p>
+
+<p>Funding The authors acknowledge the support of UNAIDS for the ongoing 
+development of EPP and Spectrum. National Institute of Child Health and Development 
+grant no. R01 HD054511 supported the development of the uncertainty estimation 
+methodologies in EPP. </p>
+
+<p>Competing interests None. </p>
+
+<p>Contributors Tim Brown drafted the first version of the paper and incorporated 
+extensive feedback from the other authors. Adrian Raftery and Le Bao developed the 
+IMIS and Bayesian melding methodologies used in uncertainty estimation. Rebecca 
+Baggaley conducted the analysis to estimate reductions in infectiousness for those on 
+ART. John Stover developed the Weibull distributions used to progress individuals 
+from infection to eligibility for ART and from eligibility to death and also supervises 
+Spectrum development. Josh Salomon first recognised the limitations of the 
+Reference Group model and suggested approaches involving steps and shifts in the 
+model parameters to better fit some epidemics. Patrick Gerland first suggested the 
+approach for combining urban and rural populations, and he and his colleagues at 
+the United Nations Population Division provided the trends in urban/rural proportions 
+incorporated into the software. Tim Brown coded these features into the EPP package. 
+All seven serve as members of the UNAIDS Reference Group on HIV Estimates, 
+Modelling and Projections which advises UNAIDS on the techniques to be used in EPP 
+and Spectrum. All authors contributed to revising the manuscript and approving the 
+final content. </p>
+
+<p>Provenance and peer review Not commissioned; externally peer reviewed. </p>
+
+<p>We wish to make clear that the examples used here are illustrative in nature only. 
+They may differ from actual national projections in the countries referenced, as they 
+do not necessarily incorporate all data and information available at the country level. 
+The views and opinions expressed in this paper are those of the authors and do not 
+necessarily represent those of the United Nations. Its contents have not been formally 
+edited or cleared by the United Nations. </p>
+
+
+
+<p>APPENDIX 
+The mathematics of antiretroviral therapy (ART) in EPP 2009 </p>
+
+<p>The Reference Group model modifications used in EPP 2009 are shown in figure 2. 
+They primarily consist of calculating the number newly eligible for ART (E) at a given 
+time step, and then dividing these among two new compartments for those who 
+remain untreated (U) and those who go on first-line ART (L 1 ). An additional 
+compartment is added for those failing first-line ART and going on second-line ART 
+(L 2 ). The original compartments in the model are retained: not at risk (X), at risk and 
+infected but not on ART (Y), and at risk but uninfected (Z). The total population at any 
+point in time is then calculated as: </p>
+
+<p>Key messages </p>
+
+<p>&lt; The UNAIDS Estimation and Projection package has contin-
+ually evolved to adapt to new issues arising in estimating and 
+projecting national HIV epidemics. 
+&lt; EPP 2009 derives incidence, an essential indicator for program 
+impact assessment. 
+&lt; EPP 2009 includes the effects of ART: reducing incidence, 
+increasing prevalence and decreasing HIV-related mortality. 
+&lt; Computational efficiency in EPP 2009 has been greatly 
+improved through the use of incremental mixture importance 
+sampling. </p>
+
+<p>Sex Transm Infect 2010;86(Suppl 2):ii3eii10. doi:10.1136/sti.2010.044784 
+ii9 </p>
+
+<p>Supplement </p>
+
+<p>N ¼ X þ Y þ Z þ U þ L 1 þ L 2 </p>
+
+<p>Demographic parameters, calculated from the United Nations Population Division 
+non-AIDS projections, include background mortality (m), birth rate to those aged 15 
+and older (b) and survival to age 15 (l). These are used along with the probability of 
+vertical transmission (n) and the fertility reduction among HIV+ women (3) to 
+calculate the number of new entrants E t in a given time step, t, in terms of the 
+populations 15 years (tÀ15) earlier as: 
+E t ¼ B À 
+tÀ15 l </p>
+
+<p>B À 
+tÀ15 ¼ b </p>
+
+<p>Â 
+X tÀ15 þ Z tÀ15 þ 
+À </p>
+
+<p>1 À n 
+Á 3 </p>
+
+<p>À 
+Y tÀ15 þ U tÀ15 þ L 1ðtÀ15Þ þ L 2ðtÀ15Þ 
+ÁÃ </p>
+
+<p>The four primary Reference Group parameters remain unchanged: the force of 
+infection (r), the initial fraction entering the at-risk population (f 0 ), the start year of the 
+epidemic (t 0 ) and the behaviour-change parameter (4); and the fraction, f, entering 
+the at-risk population at a given point in time is determined by the size of the not-at-
+risk and total populations as: </p>
+
+<p>f </p>
+
+<p>
+X=N </p>
+
+<p>
+¼ 
+exp 
+Â </p>
+
+<p>f </p>
+
+<p>À X </p>
+
+<p>N </p>
+
+<p>À 
+À 
+1 À f 0 
+ÁÁÃ </p>
+
+<p>exp 
+Â </p>
+
+<p>f </p>
+
+<p>À X </p>
+
+<p>N </p>
+
+<p>À 
+À 
+1 À f 0 
+ÁÁÃ þ 1 </p>
+
+<p>f 0 </p>
+
+<p>À 1 </p>
+
+<p>To implement ART, a number of ART-specific inputs must be provided or selected 
+by the user: 
+&lt; Time series for the number on first-and second-line ART: L 1 (t) and L 2 (t) 
+&lt; The infectivity of individuals on ART relative to those not on ART: R inf (default 0.11, 
+but user adjustable, R inf ¼0 means no transmission) 
+&lt; Weibull 
+for 
+progression 
+from 
+infection 
+to 
+ART 
+eligibility: 
+g 1 ðxÞ ¼ ða 1 x a1À1 =b </p>
+
+<p>a1 </p>
+
+<p>1 Þexp½Àðx=b 1 Þ a1  
+&lt; Weibull for progression from eligibility to death if no ART: 
+g 2 ðxÞ ¼ ða 2 x a 2 À1 =b </p>
+
+<p>a 2 </p>
+
+<p>2 Þexp½Àðx=b 2 Þ a2  
+&lt; First year survival on first-line ART (time varying): s 1 (t) (default 86%, held constant, 
+but user can change on an annual basis) 
+&lt; Second and subsequent year survival on both first-and second-line ART: s 2+ 
+(default 90%, but user adjustable) 
+The latter two survivals are then used to calculate a third distribution for 
+progression to first-line failure once ART has commenced: </p>
+
+<p>g 3 
+À 
+x 
+Á ¼ 
+( 
+0 
+if x ¼ 0 
+s 1 e Às 1 x 
+if x#1yr 
+s 2 þ e Às 1 e Às 2 þ ðxÀ1Þ if x &gt; 1yr </p>
+
+<p>EPP then calculates the distribution for the rate at which infections occur at time 
+x as: </p>
+
+<p>Y new </p>
+
+<p>x </p>
+
+<p>¼ ½ðr½Y x þ U x þ R inf ðL 1x þ L 2x Þ=N x þ i x ÞZ x ; </p>
+
+<p>where t i is the pulse of infection that initiates the epidemic. Note that those on ART 
+receive the reduced infectiousness described by R inf . The equations describing the 
+changes in the number in each of the compartments: X, Y and Z becomes: </p>
+
+<p>DX ¼ ½ð1 À fðX=NÞÞE t À mXDt </p>
+
+<p>DY ¼ </p>
+
+<p>h 
+r 
+Â 
+Y þ U þ R inf </p>
+
+<p>
+L 1 þ L 2 </p>
+
+<p>i. </p>
+
+<p>N þ i </p>
+
+<p>
+Z À </p>
+
+<p>Z t </p>
+
+<p>0 </p>
+
+<p>Y new 
+x g 1 </p>
+
+<p>À 
+t À x 
+Á 
+dx À mY </p>
+
+<p>i </p>
+
+<p>Dt </p>
+
+<p>DZ ¼ ½fðX=NÞE t À ðm þ r½Y þ U þ R inf ðL 1 þ L 2 Þ=N þ iÞZDt </p>
+
+<p>And the number newly eligible for ART in a given time step is calculated from the 
+progression from infection to eligibility and the temporal distribution of new infections: </p>
+
+<p>DE ¼ </p>
+
+<p>2 </p>
+
+<p>4 
+Z t </p>
+
+<p>0 </p>
+
+<p>Y new 
+x g 1 </p>
+
+<p>À 
+t À x 
+Á 
+dx </p>
+
+<p>3 </p>
+
+<p>5 Dt </p>
+
+<p>The newly eligible must then be allocated into the compartments for those on first-
+line treatment (L 1 ) and those remaining untreated (U). The number failing first-line ART 
+is calculated by applying the g 3 (x) distribution to estimate the number who fail first-
+line therapy, and thus leave the L 1 compartment: 
+Z t </p>
+
+<p>0 </p>
+
+<p>L new 
+1x g 3 </p>
+
+<p>À 
+t À x 
+Á 
+dx </p>
+
+<p>Where L new 
+1x is the number who entered first-line therapy at time x. L new 
+1x is kept at zero 
+until ART is initiated. The number failing first-line therapy is then combined with the 
+user-provided time series L 1 (t) and L 2 (t), for numbers on first-line and second-line ART, 
+to calculate the number entering each arm of ART at the next time step as: </p>
+
+<p>L new </p>
+
+<p>1 </p>
+
+<p>¼ 
+h 
+L 1 </p>
+
+
+
+<p>t þ Dt </p>
+
+<p>
+À L 1 </p>
+
+<p>t </p>
+
+<p>i 
+þ </p>
+
+<p>Z t </p>
+
+<p>0 </p>
+
+<p>L new 
+1x g 3 </p>
+
+<p>À 
+t À x 
+Á 
+dx </p>
+
+<p>L new </p>
+
+<p>2 </p>
+
+<p>¼ 
+Â 
+L 2 
+À </p>
+
+<p>t þ Dt </p>
+
+<p>Á À L 2 
+À 
+t 
+ÁÃ þ 
+À 
+1 À s 2 þ 
+Á 
+L 2 
+À 
+t </p>
+
+<p>Á Dt </p>
+
+<p>that is, the number newly entering first-line ART is the increase in numbers on first-
+line ART specified by the user plus replacements for those who fail on ART. For 
+second-line therapy, it is assumed that a constant fraction of those currently on ART 
+fail at every time step, the second term in the above equation. The remaining number 
+of newly eligible must then be allocated into the untreated compartment, U: </p>
+
+<p>DU ¼ DE À L new </p>
+
+<p>1 </p>
+
+<p>À 
+h 
+mU þ </p>
+
+<p>Z t </p>
+
+<p>0 </p>
+
+<p>U newAdj </p>
+
+<p>x </p>
+
+<p>g 2 
+À 
+t À x 
+Á 
+dx </p>
+
+<p>i </p>
+
+<p>Dt </p>
+
+<p>The final term in brackets in this equation represents background mortality (mU) 
+and HIV-related mortality for those remaining untreated through the present. U newAdj </p>
+
+<p>x </p>
+
+<p>is 
+the distribution of the number untreated who became eligible for ART at time x. When 
+people are placed on ART at each time step, this distribution must be adjusted 
+downward to account for the fraction of the untreated going on to ART and also to 
+correct for background mortality: </p>
+
+<p>U newAdj </p>
+
+<p>x </p>
+
+<p>À </p>
+
+<p>t þ Dt </p>
+
+<p>Á ¼ U newAdj </p>
+
+<p>x </p>
+
+<p>À 
+t 
+Á </p>
+
+<p>
+1 À 
+L new </p>
+
+<p>1 </p>
+
+<p>UðtÞ </p>
+
+<p>
+À 
+1 À mDt 
+Á </p>
+
+<p>This effectively assumes that those selected for ART are chosen uniformly without 
+regard to their duration of infection. If all of those eligible at any point in the projection 
+are placed on ART, this distribution is set to zero for all previous times. The total 
+number living with HIV in the population is then defined as: </p>
+
+<p>H þ ¼ Y þ U þ L 1 þ L 2 </p>
+
+<p>which accounts for the effects of ART on total HIV prevalence and incidence. </p>
+
+<p> 
+Sex Transm Infect 2010;86(Suppl 2):ii3eii10. doi:10.1136/sti.2010.044784 </p>
+
+<p>Supplement </p>
+
+</text></tei>

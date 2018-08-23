@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4816756" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:19+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4816756" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-08-19T00:29+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>Background: The major gene mutated in autosomal dominant polycystic kidney disease was first identified over 
 20 years ago, yet its function remains poorly understood. We have used a systems-based approach to examine 
@@ -199,11 +199,11 @@ were analyzed using paired t-test. </p>
 stabilization and quantile normalization with the <rs type="software">lumi package</rs> (Du 
 et al., 2008; Lin et al., 2008) in R (Team, 2014), filtered to include only 
 probes with detection call p value b0.05 in at least seven of the arrays, 
-followed by batch-removal using <rs id="software-10" type="software">COMBAT</rs> (<rs corresp="#software-10" type="creator">Johnson et al.</rs>., 2007). 
+followed by batch-removal using <rs id="software-17" type="software">COMBAT</rs> (<rs corresp="#software-17" type="creator">Johnson et al.</rs>., 2007). 
 Same-gene probes were consolidated to a single identifier keeping the 
 probe with highest mean value. Detection of differentially expressed 
 genes was performed using linear models and empirical Bayes methods 
-implemented in the <rs id="software-13" type="software">limma</rs> package (<rs corresp="#software-13" type="creator">Smyth</rs>, 2004) in R. For time course 
+implemented in the <rs id="software-18" type="software">limma</rs> package (<rs corresp="#software-18" type="creator">Smyth</rs>, 2004) in R. For time course 
 analysis, <rs type="software">splines</rs> and <rs type="software">limma</rs> packages in R were used to fit separate 
 curves in mutant males and females for each gene, and then the param-
 eters corresponding to the interaction of time and sex were evaluated to </p>
@@ -219,8 +219,8 @@ The published gene expression dataset GSE25506 was downloaded
 from the Gene Expression Omnibus (GEO) repository (http://www. 
 ncbi.nlm.nih.gov/geo/). Data were restricted to 706 mouse kidney 
 cortex or medulla samples and analyzed for differential expression 
-comparing sexual differences within anatomic region using the <rs id="software-12" type="software">limma</rs> 
-package (<rs corresp="#software-12" type="creator">Smyth</rs>, 2004) in R. Genes with fdr-p b 0.05 in both cortex 
+comparing sexual differences within anatomic region using the <rs id="software-23" type="software">limma</rs> 
+package (<rs corresp="#software-23" type="creator">Smyth</rs>, 2004) in R. Genes with fdr-p b 0.05 in both cortex 
 and medulla were considered differentially expressed. Comparisons 
 of overlap between sexual differences in the current dataset and 
 GSE25506 were done after restricting the datasets to only genes 
@@ -229,14 +229,14 @@ expressed in both. </p>
 <p>2.8. Network and Pathway Analysis </p>
 
 <p>Weighted Gene Co-expression Network and Pathway Analysis was 
-performed using the <rs id="software-11" type="software">WGCNA</rs> R package (<rs corresp="#software-11" type="creator">Langfelder and Horvath</rs>, 
+performed using the <rs id="software-16" type="software">WGCNA</rs> R package (<rs corresp="#software-16" type="creator">Langfelder and Horvath</rs>, 
 2008) with soft thresholding powers selected based on the approximate 
 scale-free topology criterion (Zhang and Horvath, 2005), followed by 
 blockwise network construction, module detection, correlation with 
 sex/genotype and comparative network analysis to determine module 
 preservation. Gene ontology enrichment analysis of the identified 
 modules and lists of differentially expressed genes was performed in R 
-using <rs id="software-19" type="software">GOstats</rs> (<rs corresp="#software-19" type="creator">Falcon and Gentleman</rs>, 2007). </p>
+using <rs id="software-20" type="software">GOstats</rs> (<rs corresp="#software-20" type="creator">Falcon and Gentleman</rs>, 2007). </p>
 
 <p>2.9. Metabolomics and Lipidomics </p>
 
@@ -251,7 +251,7 @@ autosampler, and G1316C Column Thermostat) coupled to either an
 Agilent 6530 (positive ion mode) or an Agilent 6550 mass spectrometer 
 equipped with an ion funnel (iFunnel) (negative ion mode)), with a 
 15 min total run time. Data were collected in both positive and negative 
-ion mode, and analyzed using <rs id="software-15" type="software">MassHunter</rs> (<rs corresp="#software-15" type="creator">Agilent</rs>) to assign a unique 
+ion mode, and analyzed using <rs id="software-21" type="software">MassHunter</rs> (<rs corresp="#software-21" type="creator">Agilent</rs>) to assign a unique 
 ID to each lipid based on its retention time and exact mass (RT_mz). For 
 GC-TOF, samples were prepared and analyzed using Gerstel CIS4 -with 
 dual MPS Injector, Agilent 6890 GC and Pegasus III TOF MS, as described 

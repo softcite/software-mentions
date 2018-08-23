@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC2649809" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-07-19T20:26+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC2649809" /><encodingDesc><appInfo><application version="0.5.1-SNAPSHOT" ident="GROBID" when="2018-08-19T00:37+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>1 The abbreviations used are: HD, Huntington disease; CSF, cerebro-
 spinal fluid; IPI, International Protein Index; AMT, accurate mass and 
@@ -152,11 +152,11 @@ scribed in the supplemental text, Part A. </p>
 
 <p>All data files were transmitted to the bioinformatics data-process-
 ing lab for analysis after converting to the standard mzXML format 
-(32, 33) and then searched with <rs id="software-36" type="software">X! Tandem</rs> (<rs corresp="#software-36" type="version-date">January 1, 2007</rs> release) 
+(32, 33) and then searched with <rs id="software-31" type="software">X! Tandem</rs> (<rs corresp="#software-31" type="version-date">January 1, 2007</rs> release) 
 configured with a scoring function (24) compatible with <rs type="software">Peptide-
 Prophet</rs> (25) and <rs type="software">ProteinProphet</rs> (26). The same database (human 
 IPI version 3.20 consisting of 61,225 IPI numbers) was used to search 
-all data. <rs id="software-33" type="software">PeptideProphet</rs> (<rs corresp="#software-33" type="version-number">version 3.0</rs>) and <rs id="software-7" type="software">ProteinProphet</rs> (<rs corresp="#software-7" type="version-number">version 3.0</rs>) 
+all data. <rs id="software-17" type="software">PeptideProphet</rs> (<rs corresp="#software-17" type="version-number">version 3.0</rs>) and <rs id="software-8" type="software">ProteinProphet</rs> (<rs corresp="#software-8" type="version-number">version 3.0</rs>) 
 were used to assign identified peptide and protein confidence scores 
 for all but Lab 1 (details described below) where the complexity of 
 samples interrogated was not sufficient to estimate the Peptide-
@@ -184,27 +184,27 @@ following are descriptions of the software used for each lab's data
 and quantitation methods (summarized in supplemental Table S2) 
 during data processing. 
 Lab 1-Lab 1 used a DIGE method and quantitated a large number 
-of fluorescent spots with two commercial software algorithms (<rs id="software-21" type="software">DeCyder</rs> 
-<rs corresp="#software-21" type="version-number">6.5</rs> (<rs corresp="#software-21" type="creator">GE Healthcare</rs>) and <rs id="software-25" type="software">SameSpots</rs> <rs corresp="#software-25" type="version-number">2.0</rs> (<rs corresp="#software-25" type="creator">Nonlinear Dynamics</rs>)). A </p>
+of fluorescent spots with two commercial software algorithms (<rs id="software-9" type="software">DeCyder</rs> 
+<rs corresp="#software-9" type="version-number">6.5</rs> (<rs corresp="#software-9" type="creator">GE Healthcare</rs>) and <rs id="software-38" type="software">SameSpots</rs> <rs corresp="#software-38" type="version-number">2.0</rs> (<rs corresp="#software-38" type="creator">Nonlinear Dynamics</rs>)). A </p>
 
-<p>t test was performed on the log ratios using <rs id="software-37" type="software">Statistica</rs> for Windows 
-(<rs corresp="#software-37" type="creator">StatSoft, Inc.</rs>.) <rs corresp="#software-37" type="version-number">version 7</rs> to estimate the significant difference of a 
+<p>t test was performed on the log ratios using <rs id="software-26" type="software">Statistica</rs> for Windows 
+(<rs corresp="#software-26" type="creator">StatSoft, Inc.</rs>.) <rs corresp="#software-26" type="version-number">version 7</rs> to estimate the significant difference of a 
 protein. Only those spots found to have significant changes, based on 
 fluorescence, between the HD and the control were selected for 
 tandem MS analysis. Peak lists of MS/MS spectra acquired on the 
 HCT-Ultra ion trap instrument (Bruker Daltonics) were generated us-
-ing the software tool <rs id="software-22" type="software">DataAnalysis</rs> <rs corresp="#software-22" type="version-number">3.4.179</rs> (<rs corresp="#software-22" type="creator">Bruker Daltonics</rs>) with 
+ing the software tool <rs id="software-28" type="software">DataAnalysis</rs> <rs corresp="#software-28" type="version-number">3.4.179</rs> (<rs corresp="#software-28" type="creator">Bruker Daltonics</rs>) with 
 default parameters. The built-in algorithm version 2.0 was used, and 
 neither smoothing nor any signal-to-noise filter was applied for com-
 pound detection. A maximum charge state of 3 was considered for 
 deconvolution. Data were then converted to mzXML files using 
-<rs id="software-35" type="software">CompassXport</rs> (<rs corresp="#software-35" type="version-number">version 1.2.3</rs>). Peptides were identified using decoy 
+<rs id="software-20" type="software">CompassXport</rs> (<rs corresp="#software-20" type="version-number">version 1.2.3</rs>). Peptides were identified using decoy 
 database methods with an approach described by Elias and Gygi (34). 
 After proteins were identified for selected spots using false discovery 
 rate (FDR) and <rs type="software">ProteinProphet</rs> (see details in the supplemental text, 
 Part B), quantitation of -fold changes among different disease sta-
 tuses was processed based on the following rules. 1) If a spot was 
-quantitated by both <rs id="software-13" type="software">DeCyder</rs> <rs corresp="#software-13" type="version-number">6.5</rs> and <rs type="software">SameSpots</rs> methods, -fold 
+quantitated by both <rs id="software-12" type="software">DeCyder</rs> <rs corresp="#software-12" type="version-number">6.5</rs> and <rs type="software">SameSpots</rs> methods, -fold 
 changes by DeCyder 6.5 were selected because the differential ex-
 pression resulting from this method is more significant on average. On 
 the other hand, if only one quantitation method was used, results from 
@@ -213,10 +213,10 @@ protein identification, -fold changes were averaged for that protein. 3)
 When a spot resulted in several protein identifications, the same -fold 
 changes were assigned to all proteins. 
 Lab 2-Lab 2 performed label-free analysis. Peak lists were gen-
-erated using <rs id="software-20" type="software">MassLynx</rs> (<rs corresp="#software-20" type="version-number">4.0</rs>) based on signals obtained by Q-ToF 
+erated using <rs id="software-11" type="software">MassLynx</rs> (<rs corresp="#software-11" type="version-number">4.0</rs>) based on signals obtained by Q-ToF 
 Micro spectrometer from Waters Micromass. The MS duty cycle was 
 set at 1,1,4 as described in detail in the supplemental text, Part A. 
-These data were converted to mzXML files using <rs id="software-6" type="software">MassWolf</rs> <rs corresp="#software-6" type="version-number">1.02</rs> with 
+These data were converted to mzXML files using <rs id="software-7" type="software">MassWolf</rs> <rs corresp="#software-7" type="version-number">1.02</rs> with 
 the Waters Datafile Access Component (DAC) library. Following the 
 database search using the common criteria, quantitation was per-
 formed using a spectral count approach (35), which sums the number 
@@ -298,8 +298,8 @@ the quality of data for the labeled experiments. M is the y-axis and A
 is the x-axis, where in this paper, M Log 2 (Heavy) Log 2 (Light); 
 A [ 1 ⁄2] (Log 2 (Heavy) Log 2 (Light)). 
 Lab 3-Data from Lab 3 were acquired from the LTQ-FT instrument 
-(Thermo Finnigan). Peak lists were generated by <rs id="software-12" type="software">Xcalibur</rs> (<rs corresp="#software-12" type="version-number">version 1.1</rs>) 
-and converted to mzXML files using <rs id="software-23" type="software">ReAdW</rs> <rs corresp="#software-23" type="version-number">1.1</rs> with XRawfile library. 
+(Thermo Finnigan). Peak lists were generated by <rs id="software-18" type="software">Xcalibur</rs> (<rs corresp="#software-18" type="version-number">version 1.1</rs>) 
+and converted to mzXML files using <rs id="software-6" type="software">ReAdW</rs> <rs corresp="#software-6" type="version-number">1.1</rs> with XRawfile library. 
 Default parameters were used. Database search was carried out 
 using the common parameters and the designated specific modifica-
 tions (supplemental text, Part B). Protein groups with probability 
@@ -330,8 +330,8 @@ versus control, HD-early versus control, and HD-mid versus HD-early
 ratios for each protein group were calculated using IS/control, IS/HD-
 mid, and IS/HD-early ratios from the three experiments. 
 Lab 4 -LTQ OrbiTrap XL mass spectrometer from Thermo Finni-
-gan was used, and <rs id="software-11" type="software">Xcalibur</rs> (<rs corresp="#software-11" type="version-number">version 2.2</rs>) was applied to generate 
-peak lists. Data were converted to mzXML files using <rs id="software-24" type="software">ReAdW</rs> <rs corresp="#software-24" type="version-number">1.1</rs> with 
+gan was used, and <rs id="software-33" type="software">Xcalibur</rs> (<rs corresp="#software-33" type="version-number">version 2.2</rs>) was applied to generate 
+peak lists. Data were converted to mzXML files using <rs id="software-29" type="software">ReAdW</rs> <rs corresp="#software-29" type="version-number">1.1</rs> with 
 XRawfile library. Default parameters were used. Data were then 
 searched with the common criteria plus specific modifications. Pro-
 tein groups with probability score 0.9 (corresponding to an overall 
@@ -477,7 +477,7 @@ extensive study that was carried out on four parts of human normal
 brain (caudate nucleus, cerebellum, and BA4 and BA9 cortex) using 
 the same microarray chips (2). After these brain data were obtained 
 from Gene Expression Omnibus (GEO) DataSets, signals detected 
-using <rs id="software-18" type="software">Affymetrix microarray suite</rs> <rs corresp="#software-18" type="version-number">version 5</rs> software (MAS5) for each 
+using <rs id="software-10" type="software">Affymetrix microarray suite</rs> <rs corresp="#software-10" type="version-number">version 5</rs> software (MAS5) for each 
 probe were averaged over 21 caudate nucleus, 21 cerebellum, and 24 
 cortex (12 BA4 and 12 BA9) arrays. We plotted log 2 MAS5 signal of 
 the caudate nucleus and cerebellum from Ge et al. (29) versus those 

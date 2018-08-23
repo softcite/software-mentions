@@ -34,6 +34,7 @@ import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.text.NumberFormat;
 
 import org.apache.commons.io.*;
 import org.apache.commons.csv.*;
@@ -89,17 +90,39 @@ public class AnnotatedCorpusGeneratorCSV {
 
     static Charset UTF_8 = Charset.forName("UTF-8"); // StandardCharsets.UTF_8
 
-    // TBD: use counter classes
+    // TBD: use counter classes and a map
     private int totalMentions = 0;
-    private int unmatchedMentions = 0;
+    
+    private int unmatchedSoftwareMentions = 0;
+    private int unmatchedVersionNumberMentions = 0;
+    private int unmatchedVersionDateMentions = 0;
+    private int unmatchedCreatorMentions = 0;
+    private int unmatchedUrlMentions = 0;
+
+    private int totalSoftwareMentions = 0;
+    private int totalVersionNumberMentions = 0;
+    private int totalVersionDateMentions = 0;
+    private int totalCreatorMentions = 0;
+    private int totalUrlMentions = 0;
+
     private int totalContexts = 0;
     private int unmatchedContexts = 0;
+
+    // these PDF fail with current version of GROBID, they will work with then next which will integrate pdfalto
+    private List<String> failingPDF = Arrays.asList("PMC4153526", "PMC5378987"); // hanging for first, pdf2xml error for second
+    
+    // wrongly duplicated annotation identiers, resulting in mess in csv files and in our alignments, we thus ignore 
+    // them for the moment
+    private List<String> duplicateAnnotationIdentifiers = Arrays.asList("PMC3727320_CB01", "PMC3727320_CB02", "PMC3727320_CB03", 
+        "PMC3727320_CB04", "PMC4303630_CB12", "PMC2686520_HR01", "PMC4303630_CB12", "PMC3782730_TL06", 
+        "PMC4230620_BB03", "PMC3035800_SK22", "PMC3322527_CB13", "PMC3281721_TZ10", 
+        "PMC2686520_HR01", "PMC3281721_TZ07");
 
     /**
      * Start the conversion/fusion process for generating MUC-style annotated XML documents
      * from PDF, parsed by GROBID core, and softcite dataset  
      */
-    public void process(String documentPath, String csvPath, String xmlPath) {
+    public void process(String documentPath, String csvPath, String xmlPath) throws IOException {
         
         Map<String, AnnotatedDocument> documents = new HashMap<String, AnnotatedDocument>();
         Map<String, SoftciteAnnotation> annotations = new HashMap<String, SoftciteAnnotation>();
@@ -117,17 +140,19 @@ public class AnnotatedCorpusGeneratorCSV {
         LibraryLoader.load();
         Engine engine = GrobidFactory.getInstance().getEngine();
 
+        // for reporting unmatched mention/context 
+        Writer writerSoftware = new PrintWriter(new BufferedWriter(new FileWriter("unmatched-software-mention-context.txt")));
+        Writer writerVersionNumber = new PrintWriter(new BufferedWriter(new FileWriter("unmatched-version-number-mention-context.txt")));
+        Writer writerVersionDate = new PrintWriter(new BufferedWriter(new FileWriter("unmatched-version-date-mention-context.txt")));
+        Writer writerCreator = new PrintWriter(new BufferedWriter(new FileWriter("unmatched-creator-mention-context.txt")));
+        Writer writerUrl = new PrintWriter(new BufferedWriter(new FileWriter("unmatched-url-mention-context.txt")));
+
         // go thought all annotated documents of softcite
         for (Map.Entry<String, AnnotatedDocument> entry : documents.entrySet()) {
             File pdfFile = getPDF(documentPath, entry.getKey());
 
-            if (entry.getKey().equals("PMC4153526")) {
-                // hanging
-                continue;
-            }
-
-            if (entry.getKey().equals("PMC5378987")) {
-                // pdf2xml error, but it works with pdfalto
+            if (failingPDF.contains(entry.getKey())) {
+                // hanging currently, but it works with pdfalto
                 continue;
             }
 
@@ -260,7 +285,41 @@ public class AnnotatedCorpusGeneratorCSV {
                 }
             }
 
+            // update total number of mentions
+            for(SoftciteAnnotation annotation : localAnnotations) {
+                // context
+                String context = annotation.getContext();
+                if (context == null)
+                    continue;
+
+                if ( (annotation.getSoftwareMention() != null) || 
+                     (annotation.getVersionNumber() != null) ||
+                     (annotation.getVersionDate() != null) ||
+                     (annotation.getCreator() != null) ||
+                     (annotation.getUrl() != null) ) 
+                    totalMentions++;
+
+                if (annotation.getSoftwareMention() != null)
+                    totalSoftwareMentions++;
+                if (annotation.getVersionNumber() != null)
+                    totalVersionNumberMentions++;
+                if (annotation.getVersionDate() != null)
+                    totalVersionDateMentions++;
+                if (annotation.getCreator() != null)
+                    totalCreatorMentions++;
+                if (annotation.getUrl() != null)
+                    totalUrlMentions++;
+            }
+
+            // TBD: use a map...
+            checkMentionContextMatch(localAnnotations, "software", entry.getKey(), writerSoftware);
+            checkMentionContextMatch(localAnnotations, "version-number", entry.getKey(), writerVersionNumber);
+            checkMentionContextMatch(localAnnotations, "version-date", entry.getKey(), writerVersionDate);
+            checkMentionContextMatch(localAnnotations, "creator", entry.getKey(), writerCreator);
+            checkMentionContextMatch(localAnnotations, "url", entry.getKey(), writerUrl);
+
             // now try to align annotations with actual article content
+            /*
             List<LayoutToken> tokens = doc.getTokenizations();
             if (tokens != null) {
                 logger.debug("Process content... ");
@@ -284,13 +343,135 @@ public class AnnotatedCorpusGeneratorCSV {
                     logger.error("Failed to write the resulting annotated document in xml", e);
                 }
             }
+            */
         }
 
-        System.out.println("Unmatched contexts: " + unmatchedContexts + " out of " + totalContexts + " total contexts");
-        System.out.println("Unmatched mentions: " + unmatchedMentions + " out of " + totalMentions + " total mentions");
+        writerSoftware.close();
+        writerVersionDate.close();
+        writerVersionNumber.close();
+        writerCreator.close();
+        writerUrl.close();
+
+        // to be done: use a map...
+        System.out.println("\nUnmatched contexts: " + unmatchedContexts + " out of " + totalContexts + " total contexts\n");
+
+        //System.out.println("Unmatched software mentions: " + unmatchedSoftwareMentions + " out of " + totalMentions + " total mentions");
+        System.out.println("Unmatched software mentions: " + unmatchedSoftwareMentions + " out of " + 
+            totalSoftwareMentions + " total software mentions (" +
+            formatPourcent((double)unmatchedSoftwareMentions/totalSoftwareMentions) + ")");
+
+        //System.out.println("Unmatched version number mentions: " + unmatchedVersionNumberMentions + " out of " + totalMentions + " total mentions");
+        System.out.println("Unmatched version number mentions: " + unmatchedVersionNumberMentions + " out of " + 
+            totalVersionNumberMentions + " total version number mentions (" +
+            formatPourcent((double)unmatchedVersionNumberMentions/totalVersionNumberMentions) + ")");
+
+        //System.out.println("Unmatched version date mentions: " + unmatchedVersionDateMentions + " out of " + totalMentions + " total mentions");
+        System.out.println("Unmatched version date mentions: " + unmatchedVersionDateMentions + " out of " + 
+            totalVersionDateMentions + " total version date mentions (" +
+            formatPourcent((double)unmatchedVersionDateMentions/totalVersionDateMentions) + ")");
+
+        //System.out.println("Unmatched creator mentions: " + unmatchedCreatorMentions + " out of " + totalMentions + " total mentions");
+        System.out.println("Unmatched creator mentions: " + unmatchedCreatorMentions + " out of " + 
+            totalCreatorMentions + " total creator mentions (" +
+            formatPourcent((double)unmatchedCreatorMentions/totalCreatorMentions) + ")");
+
+        //System.out.println("Unmatched url mentions: " + unmatchedUrlMentions + " out of " + totalMentions + " total mentions");
+        System.out.println("Unmatched url mentions: " + unmatchedUrlMentions + " out of " + totalUrlMentions + " total url mentions (" +
+            formatPourcent((double)unmatchedUrlMentions/totalUrlMentions) + ")");
+
+        int unmatchedMentions = unmatchedSoftwareMentions + unmatchedVersionNumberMentions + unmatchedVersionDateMentions +
+                                unmatchedCreatorMentions + unmatchedUrlMentions;
+        System.out.println("\nTotal unmatched mentions: " + unmatchedMentions + " out of " + totalMentions + " total mentions (" + 
+            formatPourcent((double)unmatchedMentions/totalMentions) + ") \n");
     }
 
-    private void alignLayoutTokenSequenceOld(List<LayoutToken> layoutTokens, List<SoftciteAnnotation> localAnnotations) {
+
+    private String formatPourcent(double num) {
+        NumberFormat defaultFormat = NumberFormat.getPercentInstance();
+        defaultFormat.setMinimumFractionDigits(2);
+        return defaultFormat.format(num);
+    }
+
+    /**
+     * In this method, we check if the mentions provided by an annotation are present in the provided context.
+     * If not, we report it for manual correction.
+     */
+    private void checkMentionContextMatch(List<SoftciteAnnotation> localAnnotations, 
+                                        String field, 
+                                        String documentId, 
+                                        Writer writer) throws IOException, IllegalArgumentException {
+        for(SoftciteAnnotation annotation : localAnnotations) {
+            // context
+            String context = annotation.getContext();
+            if (context == null)
+                continue;
+
+            String simplifiedContext = context.replaceAll("[^a-zA-Z0-9]", "");
+            simplifiedContext = simplifiedContext.toLowerCase();
+
+            // mention
+            String mention = null;
+
+            switch (field) {
+                case "software":
+                    mention = annotation.getSoftwareMention();
+                    break;
+                case "version-number":
+                    mention = annotation.getVersionNumber();
+                    break;
+                case "version-date":
+                    mention = annotation.getVersionDate();
+                    break;
+                case "creator":
+                    mention = annotation.getCreator();
+                    break;
+                case "url":
+                    mention = annotation.getUrl();
+                    break;
+                default:
+                    throw new IllegalArgumentException("Invalid field: " + field);
+            }
+
+            if (mention != null) {
+                //System.out.println(type + " mention: " + mention);
+                //System.out.println("context: " + context);
+
+                String simplifiedMention = mention.replaceAll("[^a-zA-Z0-9]", "");
+                simplifiedMention = simplifiedMention.toLowerCase();
+
+                if (simplifiedContext.indexOf(simplifiedMention) == -1) {
+                    switch (field) {
+                        case "software":
+                            unmatchedSoftwareMentions++;
+                            break;
+                        case "version-number":
+                            unmatchedVersionNumberMentions++;
+                            break;
+                        case "version-date":
+                            unmatchedVersionDateMentions++;
+                            break;
+                        case "creator":
+                            unmatchedCreatorMentions++;
+                            break;
+                        case "url":
+                            unmatchedUrlMentions++;
+                            break;
+                        default:
+                            throw new IllegalArgumentException("Invalid field: " + field);
+                    }
+                    
+                    context = context.replace("\t", " ").replace("\n", " ");
+                    context = context.replaceAll(" +", " ");
+                    writer.write(documentId + "\t" + annotation.getIdentifier() + "\t" + field + "\t" + 
+                        mention + "\t" + context + "\t" + annotation.getPage());
+                    writer.write(System.lineSeparator());
+                }
+            }
+
+        }
+    }
+
+    /*private void alignLayoutTokenSequenceOld(List<LayoutToken> layoutTokens, List<SoftciteAnnotation> localAnnotations) {
         if ( (layoutTokens == null) || (layoutTokens.size() == 0) )
             return;
         String previousContext = null;
@@ -365,7 +546,7 @@ public class AnnotatedCorpusGeneratorCSV {
             previousContext = context;
             previousMention = softwareMention;
         }
-    }
+    }*/
 
     private void alignLayoutTokenSequence(AnnotatedDocument annotatedDocument, List<LayoutToken> layoutTokens, List<SoftciteAnnotation> localAnnotations) {
         if ( (layoutTokens == null) || (layoutTokens.size() == 0) )
@@ -378,7 +559,7 @@ public class AnnotatedCorpusGeneratorCSV {
             annotationIndex++;
             if (annotation.getSoftwareMention() == null)
                 continue;
-            totalMentions++;
+            //totalMentions++;
             if (annotation.getContext() == null)
                 continue;
             totalContexts++;
@@ -391,7 +572,7 @@ public class AnnotatedCorpusGeneratorCSV {
             List<OffsetPosition> positions = matcher.matchLayoutToken(layoutTokens, true, true);
 
             if ( (positions == null) || (positions.size() == 0) ) {
-                unmatchedMentions++;
+                //unmatchedMentions++;
                 System.out.println("\t\t!!!!!!!!! " + softwareMention + ": failed mention");
                 continue;
             }
@@ -565,7 +746,7 @@ public class AnnotatedCorpusGeneratorCSV {
                 break;
             }
             if (!matchFound) {
-                unmatchedMentions++;
+                //unmatchedMentions++;
                 System.out.println("\t\t!!!!!!!!! " + softwareMention + ": failed mention after position check");
             }
         }
@@ -792,6 +973,12 @@ public class AnnotatedCorpusGeneratorCSV {
                         continue;
                     value = cleanValue(value);
                     if (i == 0) {
+                        if (duplicateAnnotationIdentifiers.contains(value)) {
+                            // this record must be ignored for the moment
+                            i = csvRecord.size();
+                            continue;
+                        }
+
                         if (annotations.get(value) == null) {
                             annotation = new SoftciteAnnotation();
                             annotation.setIdentifier(value);
@@ -850,6 +1037,12 @@ public class AnnotatedCorpusGeneratorCSV {
                         continue;
                     value = cleanValue(value);
                     if (i == 0) {
+                        if (duplicateAnnotationIdentifiers.contains(value)) {
+                            // this record must be ignored for the moment
+                            i = csvRecord.size();
+                            continue;
+                        }
+
                         if (annotations.get(value) == null) {
                             annotation = new SoftciteAnnotation();
                             annotation.setIdentifier(value);
@@ -900,7 +1093,7 @@ public class AnnotatedCorpusGeneratorCSV {
         int nbMentionAnnotations = 0;
         try {
             CSVParser parser = CSVParser.parse(softciteMentions, UTF_8, CSVFormat.RFC4180);
-            // selection,coder,quote,page,mention_type,certainty,memo
+            // selection,coder,article,quote,page,mention_type,certainty,memo
             boolean start = true;
             int nbCSVlines = 0;
             for (CSVRecord csvRecord : parser) {
@@ -917,6 +1110,12 @@ public class AnnotatedCorpusGeneratorCSV {
                         continue;
                     value = cleanValue(value);
                     if (i == 0) {
+                        if (duplicateAnnotationIdentifiers.contains(value)) {
+                            // this record must be ignored for the moment
+                            i = csvRecord.size();
+                            continue;
+                        }
+
                         if (annotations.get(value) == null) {
                             annotation = new SoftciteAnnotation();
                             annotation.setIdentifier(value);
@@ -927,7 +1126,7 @@ public class AnnotatedCorpusGeneratorCSV {
 
                         // derive the document ID from the selection - this might not be 
                         // reliable and not genral enough in the future
-                        int ind = value.indexOf("_");
+                        /*int ind = value.indexOf("_");
                         if (ind == -1)
                             continue;
                         String valueDoc = value.substring(0, ind);
@@ -941,12 +1140,21 @@ public class AnnotatedCorpusGeneratorCSV {
                             documents.put(valueDoc, document);
                         } else 
                             document = documents.get(documentID);
-                        document.addAnnotation(annotation); 
+                        document.addAnnotation(annotation); */
 
                     } else if (i == 2) {
+                        String documentID = value;
+                        if (documents.get(documentID) == null) {
+                            document = new AnnotatedDocument();
+                            document.setDocumentID(documentID);
+                            documents.put(documentID, document);
+                        } else 
+                            document = documents.get(documentID);
+                        document.addAnnotation(annotation); 
+                    } else if (i == 3) {
                         annotation.setContext(value);
                         nbMentionAnnotations++;
-                    } else if (i == 3) {
+                    } else if (i == 4) {
                         int intValue = -1;
                         try {
                             intValue = Integer.parseInt(value);
@@ -955,9 +1163,9 @@ public class AnnotatedCorpusGeneratorCSV {
                         }
                         if (intValue != -1)
                             annotation.setPage(intValue);
-                    } else if (i == 4) {
-                        annotation.setType(value.toLowerCase()); 
                     } else if (i == 5) {
+                        annotation.setType(value.toLowerCase()); 
+                    } else if (i == 6) {
                         int intValue = -1;
                         try {
                             intValue = Integer.parseInt(value);
@@ -966,7 +1174,7 @@ public class AnnotatedCorpusGeneratorCSV {
                         }
                         if (intValue != -1)
                             annotation.setCertainty(intValue);
-                    } else if (i == 6) {
+                    } else if (i == 7) {
                         annotation.setMemo(value);
                     }
                 }
@@ -1058,6 +1266,10 @@ public class AnnotatedCorpusGeneratorCSV {
         }       
 
         AnnotatedCorpusGeneratorCSV converter = new AnnotatedCorpusGeneratorCSV();
-        converter.process(documentPath, csvPath, xmlPath);
+        try {
+            converter.process(documentPath, csvPath, xmlPath);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
