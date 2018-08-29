@@ -117,8 +117,10 @@ The following commands will split automatically and randomly the available annot
 
 In this mode, by default, 90% of the available data is used for training and the remaining for evaluation. This ratio can be changed by editing the corresponding exec profile in the `pom.xml` file. 
 
-## Training data
- 
+## Training data import
+
+### Importing the softcite dataset
+
 The source of training data is the [softcite dataset](https://github.com/howisonlab/softcite-dataset) developed by [James Howison](http://james.howison.name/) Lab at the University of Texas at Austin. The data need to be compiled with actual PDF content prelimiary to training in order to create XML annotated document (MUC conference style). This is done with the following command which takes 3 arguments: 
 
 ```
@@ -134,6 +136,17 @@ The path to the PDF repo is the path where the PDF corresponding to the annotate
 
 The compiled XML training files will be written in the standard GROBID training path for the softwate recognition model under `grobid/software-mentions/resources/dataset/software/corpus/`.
 
+### Inter-Annotator Agreement measures
+
+The import process includes the computation of standard Inter-Annotator Agreement (__IIA__) measures for the documents being annotated by at least two annotators. For the moment, the reported IIA is a percentage agreement measure, with standard error and confidence interval.  
+
+See this nice [tutorial](https://dkpro.github.io/dkpro-statistics/inter-rater-agreement-tutorial.pdf) about IIA. We might need more sophisticated IIA measures than just pourcentage agreement for more robustness. We plan, in addition to pourcentage agreement, to also cover various IIA metrics from π, κ, and α families using the [dkpro-statistics-agreement](https://dkpro.github.io/dkpro-statistics/) library:
+
+Christian M. Meyer, Margot Mieskes, Christian Stab, and Iryna Gurevych: [DKPro Agreement: An Open-Source Java Library for Measuring Inter-Rater Agreement](https://dkpro.github.io/dkpro-statistics/dkpro-agreement-poster.pdf), in: Proceedings of the 25th International Conference on Computational Linguistics (COLING), pp. 105–109, August 2014. Dublin, Ireland. 
+
+For explanations on these IIA measures, see: 
+
+Artstein, R., & Poesio, M. (2008). [Inter-coder agreement for computational linguistics](https://www.mitpressjournals.org/doi/pdf/10.1162/coli.07-034-R2). Computational Linguistics, 34(4), 555-596.
 
 ## Analysis of training data consistency
 
@@ -150,7 +163,7 @@ For instance:
 > python3 script/consistency.py /home/lopez/grobid/software-mentions/resources/dataset/software/corpus/
 ```
 
-See the description of the output directly in the header of the `script/consistency.py` file.
+See the description of the output directly in the header of the `script/consistency.py` file. 
 
 
 ## Generation of training data

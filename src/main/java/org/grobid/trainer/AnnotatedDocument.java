@@ -28,7 +28,8 @@ public class AnnotatedDocument {
 
     /** 
      * This is a representation of the softcate annotation, capturing the particular data scheme of the dataset.
-     * Note that at this stage, the annotations are not located/aligned withthe PDF content.  
+     * Note that the annotations are not necessary located/aligned with the PDF content: for this the whole PDF
+     * fulltext parsing and mention/centext alignment need to be run.  
      **/
     private List<SoftciteAnnotation> annotations = null;
 
@@ -38,6 +39,7 @@ public class AnnotatedDocument {
      */
     private List<Annotation> inlineAnnotations = null;
 
+    // this is the download url for the document 
     private String url = null;
 
     //@JsonIgnore

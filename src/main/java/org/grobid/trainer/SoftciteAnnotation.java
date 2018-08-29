@@ -87,6 +87,24 @@ public class SoftciteAnnotation extends Annotation {
         this.annotatorID = annotatorID;
     }
 
+    public String getField(String field) {
+        switch (field) {
+            case "software":
+                return this.softwareMention;
+            case "version-date":
+                return this.versionDate;
+            case "version-number":
+                return this.versionNumber;
+            case "creator":
+                return this.creator;
+            case "url":
+                return this.url;
+            case "quote":
+                return this.context;
+        }
+        return null;
+    }
+
     public AnnotationType getType() {
         return this.type;
     }

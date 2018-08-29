@@ -108,16 +108,18 @@ public class AnnotatedCorpusGeneratorCSV {
     private int totalContexts = 0;
     private int unmatchedContexts = 0;
 
+    private List<String> fields = Arrays.asList("software", "version-number", "version-date", "creator", "url");
+
     // these PDF fail with current version of GROBID, they will work with then next which will integrate pdfalto
     private List<String> failingPDF = Arrays.asList("PMC4153526", "PMC5378987"); // hanging for first, pdf2xml error for second
     
     // wrongly duplicated annotation identiers, resulting in mess in csv files and in our alignments, we thus ignore 
     // them for the moment
-    private List<String> duplicateAnnotationIdentifiers = Arrays.asList("PMC3727320_CB01", "PMC3727320_CB02", "PMC3727320_CB03", 
+    /*private List<String> duplicateAnnotationIdentifiers = Arrays.asList("PMC3727320_CB01", "PMC3727320_CB02", "PMC3727320_CB03", 
         "PMC3727320_CB04", "PMC4303630_CB12", "PMC2686520_HR01", "PMC4303630_CB12", "PMC3782730_TL06", 
         "PMC4230620_BB03", "PMC3035800_SK22", "PMC3322527_CB13", "PMC3281721_TZ10", 
         "PMC2686520_HR01", "PMC3281721_TZ07");
-
+    */
     /**
      * Start the conversion/fusion process for generating MUC-style annotated XML documents
      * from PDF, parsed by GROBID core, and softcite dataset  
@@ -131,6 +133,11 @@ public class AnnotatedCorpusGeneratorCSV {
 
         System.out.println(annotations.size() + " total annotations");
         System.out.println(documents.size() + " total annotated documents");    
+
+        // computing and reporting cross-agreement for the loaded set
+        CrossAgreement crossAgreement = new CrossAgreement(fields);
+        CrossAgreement.AgreementStatistics stats = crossAgreement.evaluate(documents); 
+        System.out.println("\n****** Inter-Annotator Agreement (Percentage agreement) ******** \n\n" + stats.toString());
 
         // we keep GROBID analysis as close as possible to the actual content
         GrobidAnalysisConfig config = new GrobidAnalysisConfig.GrobidAnalysisConfigBuilder()
@@ -149,9 +156,10 @@ public class AnnotatedCorpusGeneratorCSV {
 
         // go thought all annotated documents of softcite
         for (Map.Entry<String, AnnotatedDocument> entry : documents.entrySet()) {
-            File pdfFile = getPDF(documentPath, entry.getKey());
+            String docName = entry.getKey();
+            File pdfFile = getPDF(documentPath, docName);
 
-            if (failingPDF.contains(entry.getKey())) {
+            if (failingPDF.contains(docName)) {
                 // hanging currently, but it works with pdfalto
                 continue;
             }
@@ -170,14 +178,14 @@ public class AnnotatedCorpusGeneratorCSV {
             Document doc = engine.getParsers().getSegmentationParser().processing(documentSource, config);
 
             if (doc == null) {
-                logger.error("The parsing of the PDF file corresponding to " + entry.getKey() + " failed");
+                logger.error("The parsing of the PDF file corresponding to " + docName + " failed");
                 // TBD
                 continue;
             }
 
             AnnotatedDocument document = entry.getValue();
             List<SoftciteAnnotation> localAnnotations = document.getAnnotations();
-            //System.out.println(entry.getKey() + ": " + localAnnotations.size() + " annotations");
+            //System.out.println(docName + ": " + localAnnotations.size() + " annotations");
 
             Language lang = new Language("en", 1.0);
             
@@ -312,11 +320,11 @@ public class AnnotatedCorpusGeneratorCSV {
             }
 
             // TBD: use a map...
-            checkMentionContextMatch(localAnnotations, "software", entry.getKey(), writerSoftware);
-            checkMentionContextMatch(localAnnotations, "version-number", entry.getKey(), writerVersionNumber);
-            checkMentionContextMatch(localAnnotations, "version-date", entry.getKey(), writerVersionDate);
-            checkMentionContextMatch(localAnnotations, "creator", entry.getKey(), writerCreator);
-            checkMentionContextMatch(localAnnotations, "url", entry.getKey(), writerUrl);
+            checkMentionContextMatch(localAnnotations, "software", docName, writerSoftware);
+            checkMentionContextMatch(localAnnotations, "version-number", docName, writerVersionNumber);
+            checkMentionContextMatch(localAnnotations, "version-date", docName, writerVersionDate);
+            checkMentionContextMatch(localAnnotations, "creator", docName, writerCreator);
+            checkMentionContextMatch(localAnnotations, "url", docName, writerUrl);
 
             // now try to align annotations with actual article content
             /*
@@ -406,8 +414,7 @@ public class AnnotatedCorpusGeneratorCSV {
             if (context == null)
                 continue;
 
-            String simplifiedContext = context.replaceAll("[^a-zA-Z0-9]", "");
-            simplifiedContext = simplifiedContext.toLowerCase();
+            String simplifiedContext = CrossAgreement.simplifiedField(context);
 
             // mention
             String mention = null;
@@ -436,8 +443,7 @@ public class AnnotatedCorpusGeneratorCSV {
                 //System.out.println(type + " mention: " + mention);
                 //System.out.println("context: " + context);
 
-                String simplifiedMention = mention.replaceAll("[^a-zA-Z0-9]", "");
-                simplifiedMention = simplifiedMention.toLowerCase();
+                String simplifiedMention = CrossAgreement.simplifiedField(mention);
 
                 if (simplifiedContext.indexOf(simplifiedMention) == -1) {
                     switch (field) {
@@ -768,12 +774,12 @@ public class AnnotatedCorpusGeneratorCSV {
         // actual left context from position
         int leftBound = Math.max(0, position.start-10);
         String leftContext = LayoutTokensUtil.toText(layoutTokens.subList(leftBound, position.start));
-        String leftContextSimplified = leftContext.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+        String leftContextSimplified = CrossAgreement.simplifiedField(leftContext);
 
         // actual right context from position
         int rightBound = Math.min(position.end+11, layoutTokens.size());
         String rightContext = LayoutTokensUtil.toText(layoutTokens.subList(position.end+1, rightBound));
-        String rigthContextSimplified = rightContext.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+        String rigthContextSimplified = CrossAgreement.simplifiedField(rightContext);
 
         // now the quote
         String leftQuoteSimplified = null;
@@ -785,17 +791,15 @@ public class AnnotatedCorpusGeneratorCSV {
         OffsetPosition mentionInQuote = new OffsetPosition();
         if (mentionMatcher.find()) {
             // we found a match :)
-            leftQuoteSimplified = quote.substring(0, mentionMatcher.start());
-            leftQuoteSimplified = leftQuoteSimplified.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
-            rightQuoteSimplified = quote.substring(mentionMatcher.end(), quote.length());
-            rightQuoteSimplified = rightQuoteSimplified.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+            String leftQuote = quote.substring(0, mentionMatcher.start());
+            leftQuoteSimplified = CrossAgreement.simplifiedField(leftQuote);
+
+            String rightQuote = quote.substring(mentionMatcher.end(), quote.length());
+            rightQuoteSimplified = CrossAgreement.simplifiedField(rightQuote);
         } else {
             // more agressive soft matching 
-            String simplifiedContext = quote.replaceAll("[^a-zA-Z0-9]", "");
-            simplifiedContext = simplifiedContext.toLowerCase();
-
-            String softwareNameSimplified = softwareName.replaceAll("[^a-zA-Z0-9]", "");
-            softwareNameSimplified = softwareNameSimplified.toLowerCase();
+            String simplifiedContext = CrossAgreement.simplifiedField(quote);
+            String softwareNameSimplified = CrossAgreement.simplifiedField(softwareName);
 
             int ind = simplifiedContext.indexOf(softwareNameSimplified);
             if (ind == -1)
@@ -973,11 +977,11 @@ public class AnnotatedCorpusGeneratorCSV {
                         continue;
                     value = cleanValue(value);
                     if (i == 0) {
-                        if (duplicateAnnotationIdentifiers.contains(value)) {
+                        /*if (duplicateAnnotationIdentifiers.contains(value)) {
                             // this record must be ignored for the moment
                             i = csvRecord.size();
                             continue;
-                        }
+                        }*/
 
                         if (annotations.get(value) == null) {
                             annotation = new SoftciteAnnotation();
@@ -1037,11 +1041,11 @@ public class AnnotatedCorpusGeneratorCSV {
                         continue;
                     value = cleanValue(value);
                     if (i == 0) {
-                        if (duplicateAnnotationIdentifiers.contains(value)) {
+                        /*if (duplicateAnnotationIdentifiers.contains(value)) {
                             // this record must be ignored for the moment
                             i = csvRecord.size();
                             continue;
-                        }
+                        }*/
 
                         if (annotations.get(value) == null) {
                             annotation = new SoftciteAnnotation();
@@ -1070,6 +1074,8 @@ public class AnnotatedCorpusGeneratorCSV {
                         document.addAnnotation(annotation);
                     } else if (i == 3) {
                         annotation.setReferenceString(value);
+                    } else if (i == 4) {
+                        annotation.setAnnotatorID(value);
                     } else if (i == 5) {
                         int intValue = -1;
                         try {
@@ -1110,11 +1116,11 @@ public class AnnotatedCorpusGeneratorCSV {
                         continue;
                     value = cleanValue(value);
                     if (i == 0) {
-                        if (duplicateAnnotationIdentifiers.contains(value)) {
+                        /*if (duplicateAnnotationIdentifiers.contains(value)) {
                             // this record must be ignored for the moment
                             i = csvRecord.size();
                             continue;
-                        }
+                        }*/
 
                         if (annotations.get(value) == null) {
                             annotation = new SoftciteAnnotation();
@@ -1142,6 +1148,8 @@ public class AnnotatedCorpusGeneratorCSV {
                             document = documents.get(documentID);
                         document.addAnnotation(annotation); */
 
+                    } else if (i == 1) {
+                        annotation.setAnnotatorID(value);
                     } else if (i == 2) {
                         String documentID = value;
                         if (documents.get(documentID) == null) {
