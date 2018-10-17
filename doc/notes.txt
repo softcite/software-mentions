@@ -11,7 +11,20 @@ WHERE
   SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
 }
 
--> 11 671 software
+-> 11 686 software
+
+
+SELECT DISTINCT ?item ?itemLabel 
+WHERE 
+{
+  ?item wdt:P31/wdt:P279* wd:Q7397. # instance and sub-class of softwares
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
+}
+
+
+-> 82 303 softwares
+
+
 
 -> in practice for extracting corresponding vocabulary, use entity-fishing (utility GenerateSpecializedVocabulary)
 
