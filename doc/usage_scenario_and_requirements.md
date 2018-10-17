@@ -120,19 +120,19 @@ We explore in the section the usage of Wikidata as Knowledge Base.
 
 The advantages for using Wikidata as data scheme are multiple:
 
-- an already existing extensive scheme with 82,303 software instances and sub-classes,
+- an already existing extensive scheme with 82,303 software instances and sub-classes, which would seed the Impactstory software database,
 
 - a lot of links and textual content via Wikipedia that can be used for text and graph-based disambiguation and/or entity embeddings,
 
-- Wikidata schema representations able to scale to million of entities and hundred million of statements, resolving most of the blocking issues of the Semantic Web paradigm based on Description Logics,
+- it is scaling: Wikidata schema representation scales to millions of entities and hundred million of statements, resolving most of the blocking and ugly issues of the Semantic Web paradigm based on Description Logics,
 
 - open data (CC-0) with open source tool supporting collaborative work between humans and machines,
 
 - perspectives to contribute to Wikidata for the benefit of the public,
 
-- possibility to use existing disambiguation tools, in particular our own implementation entity-fishing.
+- possibility to use existing disambiguation tools, in particular our own implementation [entity-fishing](https://github.com/kermitt2/entity-fishing).
 
-As drawback, we could mention that the data scheme is graph-oriented and cannot be "natively" supported at low level by a relational database (like MySQL, although the data is actually stored by Wikimedia with MySQL, but it's blob flat representation), nor by a document database (e.g. Mongo DB) without the creation of additional indexes.  
+As drawback, we could mention that the data scheme is graph-oriented and cannot be "natively" supported at low level by a relational database (like MySQL, although the data is actually stored by Wikimedia with MySQL, but it's blob flat representation), nor by a document database (e.g. Mongo DB) without the creation of additional indexes. However this is not a practical issue and using Mongo DB as data storage is straightforward. 
 
 Regarding the usage of entity-fishing as a disambiguation tool:
 
@@ -161,9 +161,114 @@ Each software entity has a unique identifier:
 
 ### Data scheme
 
-Summary of Wikidata data scheme:
+#### Summary of Wikidata data scheme
 
-...
+![GROBID Software mentions Demo](images/wikidata.png)
+
+The Wikidata data scheme corresponds to the following set of information for each _item_ (entity). Note that we are reusing the json notation of the json Wikidata REST API: 
+
+- unique identifier
+
+```json
+    "id": "Q8029",
+```
+
+- a set of labels, one label for each language, corresponding to the _preferred term_ used to reference an entity. 
+
+```json
+    "labels": {"en": {"language": "en", "value": "BibTeX"}, "fr": {"language": "fr", "value": "BibTeX"}}, 
+```
+
+- a set of natural language descriptions, one for each language:
+
+```json
+    "descriptions": {"en": {"language": "en", "value": "reference management software for formatting lists of references"}},
+```
+
+- a set of alias, which are synonyms to reference the entity, in different languages
+
+- a set of claims, each claims being a proposition associated to a property for characterizing the entity. The property is introduced by a prefix P. The value of the claim is defined by a type and a a datavalue structure as illustrated bellow:
+
+```json
+    "claims": {"P31": [{"datatype":"wikibase-item", "datavalue": {"value": "Q7397"}},      /** instance of software */
+                       {"datatype":"wikibase-item", "datavalue": {"value": "Q18616720"}}], /** instance of bibliographic data format */
+               "P178": [{"datatype":"wikibase-item", "datavalue": {"value": "Q93068"}}],   /** developer is Q93068 (Oren Patashnik) */
+               "P856": [{"datatype":"url", "datavalue": {"value": "https://www.ctan.org/pkg/bibtex"}}] /** url */
+              }
+```
+
+A complete json example:
+
+```json
+{
+    "id": "Q8029",
+    "labels": {"en": {"language": "en", "value": "BibTeX"}}, 
+    "descriptions": {"en": {"language": "en", "value": "reference management software for formatting lists of references"}},
+    "aliases": [],
+    "claims": {"P31": [{"datatype":"wikibase-item", "datavalue": {"value": "Q7397"}},      /** instance of software */
+                       {"datatype":"wikibase-item", "datavalue": {"value": "Q18616720"}}], /** instance of bibliographic data format */
+               "P178": [{"datatype":"wikibase-item", "datavalue": {"value": "Q93068"}}],   /** developer is Q93068 (Oren Patashnik) */
+               "P856": [{"datatype":"url", "datavalue": {"value": "https://www.ctan.org/pkg/bibtex"}}] /** url */
+              }
+}
+
+```
+
+
+#### Extension for PDF annotations 
+
+We keep track of the position of the software mentions in the various citing documents as follow: 
+
+
+```json
+
+citations: [ {
+    "document": { "doi": "https://doi.org/10.1093/pcp/pcg126", 
+                  "url": "",
+                  "sha1": ""},
+    "mentions": [{
+        "type": "software",
+        "id": "Q8029",
+        "confidence": 0.9511,
+        "software-name": {
+            "rawForm": "ImagePro Plus",
+            "offsetStart": 351,
+            "offsetEnd": 364,
+            "boundingBoxes": [{
+                "p": 8,
+                "x": 118.928,
+                "y": 461.363,
+                "w": 49.98600000000002,
+                "h": 7.749360000000024
+            }]
+        },
+        "creator": {
+            "rawForm": "Media Cybernetics, Silver Spring, \nU.S.A.",
+            "offsetStart": 366,
+            "offsetEnd": 407,
+            "boundingBoxes": [{
+                "p": 8,
+                "x": 175.37953333333334,
+                "y": 461.363,
+                "w": 115.15626666666665,
+                "h": 7.749360000000024
+            }, {
+                "p": 8,
+                "x": 48.5996,
+                "y": 471.623,
+                "w": 21.192299999999996,
+                "h": 7.749360000000024
+            }]
+        }
+        }],
+    }
+]
+
+
+```
+
+Mentions information are directly produced by the software mention recognizer. The document is identified by its DOI, an URL to a particular PDF version and a sha1 for ensuring PDF integrity (coordinates depend on a particular PDF). The disambiguated software entity, if present, is simply indicated by its identifier associated to a disambiguisation confidence score. 
+
 
 ### Disambiguation process
 
@@ -188,7 +293,7 @@ For all services, the response status codes will be as follow:
 
 ### Retrieve information about a software entity in the KB
 
-endpoint: `/api/concept/{software id}`
+Endpoint: `/api/concept/{software id}`
 
 |   method  |  response type      | 
 |---        |---                  |
@@ -196,7 +301,7 @@ endpoint: `/api/concept/{software id}`
 |           |                     | 
 
 
-example: `/api/concept/Q8029`
+Example: `/api/concept/Q8029`
 
 ```json
 {
@@ -204,58 +309,142 @@ example: `/api/concept/Q8029`
     "labels": {"en": {"language": "en", "value": "BibTeX"}}, 
     "descriptions": {"en": {"language": "en", "value": "reference management software for formatting lists of references"}},
     "aliases": [],
-    "claims": {"P31": [{"datatype":"wikibase-item", "datavalue": {"value": "Q7397"}},      # instance of software
-                       {"datatype":"wikibase-item", "datavalue": {"value": "Q18616720"}}], # instance of bibliographic data format
-               "P178": [{"datatype":"wikibase-item", "datavalue": {"value": "Q93068"}}],   # developer is Q93068 (Oren Patashnik)
-               "P856": [{"datatype":"url", "datavalue": {"value": "https://www.ctan.org/pkg/bibtex"}}] # url
+    "claims": {"P31": [{"datatype":"wikibase-item", "datavalue": {"value": "Q7397"}},      /** instance of software */
+                       {"datatype":"wikibase-item", "datavalue": {"value": "Q18616720"}}], /** instance of bibliographic data format */
+               "P178": [{"datatype":"wikibase-item", "datavalue": {"value": "Q93068"}}],   /** developer is Q93068 (Oren Patashnik) */
+               "P856": [{"datatype":"url", "datavalue": {"value": "https://www.ctan.org/pkg/bibtex"}}] /** url */
               }
 }
 
 ```
 
+Note by default the citations information (with in particular location of the software mentions in the different citing PDF) are not present in the response to this query, accessing this information requires a separate call to the following service. 
+
 ### Retrieve citation information for a software entity
 
-endpoint: `/api/Q8029/citations`
+Endpoint: `/api/concept/{software id}/citations`
 
-method: GET
+|   method  |  response type      | 
+|---        |---                  |
+| GET       |   application/json  |
+|           |                     | 
+
+Example: `/api/concept/Q8029/citations`
+
+```json
+{
+    "id": "Q8029",
+    "citations": [ {
+        "document": { "doi": "https://doi.org/10.1093/pcp/pcg126", 
+                      "url": "",
+                      "sha1": ""},
+        "mentions": [{
+            "type": "software",
+            "id": "Q8029",
+            "confidence": 0.9511,
+            "software-name": {
+                "rawForm": "bibtex",
+                "offsetStart": 351,
+                "offsetEnd": 364,
+                "boundingBoxes": [{
+                    "p": 8,
+                    "x": 118.928,
+                    "y": 461.363,
+                    "w": 49.98600000000002,
+                    "h": 7.749360000000024
+                }]
+            },
+            "creator": {
+                "rawForm": "O. Patashnik",
+                "offsetStart": 366,
+                "offsetEnd": 407,
+                "boundingBoxes": [{
+                    "p": 8,
+                    "x": 175.37953333333334,
+                    "y": 461.363,
+                    "w": 115.15626666666665,
+                    "h": 7.749360000000024
+                }, {
+                    "p": 8,
+                    "x": 48.5996,
+                    "y": 471.623,
+                    "w": 21.192299999999996,
+                    "h": 7.749360000000024
+                }]
+            }
+        }]
+    }, 
+    {
+        "document": { "doi": "", 
+                      "url": "",
+                      "sha1": ""},
+        "mentions": [{
+            "type": "software",
+            "id": "Q8029",
+            "confidence": 0.7719,
+            "software-name": {
+            "rawForm": "BibTeX",
+            "offsetStart": 113,
+            "offsetEnd": 135,
+            "boundingBoxes": [{
+                "p": 8,
+                "x": 271.854,
+                "y": 363.347,
+                "w": 125.13299999999998,
+                "h": 13.283999999999992
+            }]
+        },
+        }]
+    }
+]
+
+}
+```
 
 ### Disambiguate a software mention in isolation
 
-endpoint: `/api/disambiguate`
+Endpoint: `/api/disambiguate`
 
 method: POST
 
 ### Extract all raw mention of a software in a PDF
 
-endpoint: `/api/softwares/mentions`
+Endpoint: `/api/softwares/mentions`
 
 method: POST
 
 ### Extract all disambiguated software entities in a PDF
 
-endpoint: `/api/softwares/entities`
+Endpoint: `/api/softwares/entities`
 
 method: POST
 
 ### Provide the n-best citations for a software entity
 
-endpoint: `/api/Q8029/citations/nbest`
+Endpoint: `/api/{software id}/citations/nbest`
 
-method: GET
+|   method  |  response type      | 
+|---        |---                  |
+| GET       |   application/json  |
+|           |                     | 
+
 
 ### Provide the most relevant related software entities with a given software entities
 
-endpoint: `/api/Q8029/related`
+Endpoint: `/api/{software id}/related`
 
-method: GET
+|   method  |  response type      | 
+|---        |---                  |
+| GET       |   application/json  |
+|           |                     | 
 
 ### Provide the most relevant related software entities given a PDF
 
-endpoint: `/api/softwares/related`
+Endpoint: `/api/softwares/related`
 
-method: GET
-
-
-
+|   method  |  response type      | 
+|---        |---                  |
+| POST      |   application/json  |
+|           |                     | 
 
 
