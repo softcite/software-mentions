@@ -86,7 +86,7 @@ The described features would imply as additional requirements:
 
 Storing the list of software mentions in the scientific litterature and their mention contexts are not enough for supporting the above scenarios. We need to conflate the mentions at an aggregated software entity level, so that if the same software is refered using different wording, we can identify this unique software in the two contexts (of course the software version might differ). Software naming might not be very ambiguous (few polysemy), but synonymy might be important (same software with different equivalent naming). 
 
-### Need for a software knowledge base and an entity scheme
+### Need for a software knowledge base and a software entity scheme
 
 The software knwoledge base will be capable of storing entity information at general level and at version level. Boths level can be associated with mentions in scientific papers. 
 
@@ -156,8 +156,7 @@ Each software entity has a unique identifier:
 
 - Wikidata identifier for software entities already in Wikidata, e.g. Q8029 for BibTeX
 
-- Identifier for software entities not in Wikidata: E24 for GROBID (we basically simply replace Q by E - for External, but keep the same data model)
-
+- for software entities not in Wikidata: we proposed identifier with E as prefix (for External) instead of Q, for example E24 for GROBID 
 
 ### Data scheme
 
@@ -165,7 +164,7 @@ Each software entity has a unique identifier:
 
 ![GROBID Software mentions Demo](images/wikidata.png)
 
-The Wikidata data scheme corresponds to the following set of information for each _item_ (entity). Note that we are reusing the json notation of the json Wikidata REST API: 
+The Wikidata data scheme encode a set of information for each _item_ (entity). We are reusing the json notation of the json Wikidata REST API: 
 
 - unique identifier
 
@@ -185,7 +184,7 @@ The Wikidata data scheme corresponds to the following set of information for eac
     "descriptions": {"en": {"language": "en", "value": "reference management software for formatting lists of references"}},
 ```
 
-- a set of alias, which are synonyms to reference the entity, in different languages
+- a set of alias, which are synonyms usable to refer to the entity, in different languages,
 
 - a set of claims, each claims being a proposition associated to a property for characterizing the entity. The property is introduced by a prefix P. The value of the claim is defined by a type and a a datavalue structure as illustrated bellow:
 
@@ -219,7 +218,7 @@ A complete json example:
 
 We keep track of the position of the software mentions in the various citing documents as follow. 
 
-Mentions information are directly produced by the software mention recognizer. The document is identified by its DOI, an URL to a particular PDF version and a sha1 for ensuring PDF integrity (coordinates depend on a particular PDF). The disambiguated software entity, if present, is simply indicated by its identifier associated to a disambiguisation confidence score. 
+Mentions information are directly produced by the software mention recognizer. The document is identified by its DOI, an URL to a particular PDF version and a sha1 for ensuring PDF integrity (coordinates depend on a particular PDF). The disambiguated software entity, if present, is simply indicated by its identifier in the database, associated to a disambiguisation confidence score. 
 
 
 ```json
@@ -326,7 +325,7 @@ Example:
 
 ```
 
-Note by default the citations information (with in particular location of the software mentions in the different citing PDF) are not present in the response to this query, accessing this information requires a separate call to the following service. 
+Note by default the citations information (with the position information of the software mentions in the different citing PDF) are not present in the response to this query, accessing this information requires a separate call to the following service. 
 
 ### Retrieve citation information for a software entity
 
@@ -390,7 +389,7 @@ Example:
         }]
     }, 
     {
-        "document": { "doi": "", 
+        "document": { "doi": "https://doi.org/10.1038/s41699-018-0076-0", 
                       "url": "",
                       "sha1": ""},
         "mentions": [{
@@ -550,7 +549,7 @@ Parameters:
 |---         |---      |---                    |---                        |
 |required    |   file  |  multipart/form-data  |  PDF file (as multipart)  |
 
-The response response if similar to the previous mention extraction service, but the mention are disdambiguated against the software database, with disambiguated software entity `id` and a disambiguation confidence score. Non-disambiguated mentions are not appearing. 
+The response response if similar to the previous mention extraction service, but the mention are disambiguated against the software database, with disambiguated software entity `id` and a disambiguation confidence score. Non-disambiguated mentions are not appearing. 
 
 ```json
 {
@@ -634,8 +633,7 @@ The response lists the top citing documents with a relevance score, ranked in a 
                       "url": "",
                       "sha1": ""},
         "relevance": 0.89
-    }
-    ]
+    }]
 }
 ```
 
@@ -673,12 +671,11 @@ The response lists the top software entities with a relatedness score, ranked in
     {
         "id": "Q226915",
         "relatedness": 0.80
-    }
-    ]
+    }]
 }
 ```
 
-### Provide the n most relevant related software entities for a PDF
+### Provide for a given PDF the n most relevant related software entities not mentioned in the PDF
 
 Endpoint: `/api/softwares/related`
 
@@ -712,7 +709,55 @@ The response lists the top software entities with a relatedness score, ranked in
     {
         "id": "Q226915",
         "relatedness": 0.49
-    }
-    ]
+    }]
 }
 ```
+
+The service must ensure that none of the returned software entity is actually mentioned in the PDF. 
+
+
+### Provide for a given person, all the software entities he has authored 
+
+Endpoint: `/api/{id}/softwares`
+
+|   method  |  response type      | 
+|---        |---                  |
+| GET       |   application/json  |
+
+Parameters:
+
+|requirement |   name  |  content-type value   |  description |
+|---         |---      |---                    |---                        |
+|required    |   id    |  String               |  Person identifer in the databse  |
+
+
+Example: 
+
+> curl localhost:8070/api/Q93068/softwares 
+
+The response lists the software entities having the person as author or co-author. 
+
+```json
+{
+    "id": "Q93068",
+    "entities": [ 
+    {
+        "id": "Q8029"
+    }] 
+}
+```
+From the software entity identifier, the client can then get the different software information and citations. 
+
+
+## Issues 
+
+Some issues to be considered:
+
+- In the current corpus annotation scheme, the creator can be one or several persons who have developed the software or the organization that published the software. We need a way to distinguish the two possibilities. 
+
+- We have not distinguished in the returned citations, 1) the documents to be used as reference for a software because the document is dedicted to the software (the "software paper" that acts as hook for citations instead of the software itself, cf. Depsy) and 2) the documents that are simply citing and/or discussing a lot a software (the most informative publication regarding the software, but not only about it). 
+
+- In the REST API, we have not considered so far restricting or separating the citations according to versions of the software (as a parameter of the services, or as a way to group the citations).  
+
+- We could at some point aggregate reliable citation information in order to enrich the Wikidata claims, by adding references, authors, etc. 
+
