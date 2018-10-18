@@ -217,7 +217,9 @@ A complete json example:
 
 #### Extension for PDF annotations 
 
-We keep track of the position of the software mentions in the various citing documents as follow: 
+We keep track of the position of the software mentions in the various citing documents as follow. 
+
+Mentions information are directly produced by the software mention recognizer. The document is identified by its DOI, an URL to a particular PDF version and a sha1 for ensuring PDF integrity (coordinates depend on a particular PDF). The disambiguated software entity, if present, is simply indicated by its identifier associated to a disambiguisation confidence score. 
 
 
 ```json
@@ -267,7 +269,6 @@ citations: [ {
 
 ```
 
-Mentions information are directly produced by the software mention recognizer. The document is identified by its DOI, an URL to a particular PDF version and a sha1 for ensuring PDF integrity (coordinates depend on a particular PDF). The disambiguated software entity, if present, is simply indicated by its identifier associated to a disambiguisation confidence score. 
 
 
 ### Disambiguation process
@@ -293,15 +294,22 @@ For all services, the response status codes will be as follow:
 
 ### Retrieve information about a software entity in the KB
 
-Endpoint: `/api/concept/{software id}`
+Endpoint: `/api/concept/{id}`
 
 |   method  |  response type      | 
 |---        |---                  |
 | GET       |   application/json  |
-|           |                     | 
 
+Parameters:
 
-Example: `/api/concept/Q8029`
+|requirement |   name  |  content-type value   |  description |
+|---         |---      |---                    |---                        |
+|required    |   id    |  String               |  Software identifer in the databse  |
+
+Example: 
+
+> curl localhost:8070/api/concept/Q8029
+
 
 ```json
 {
@@ -322,14 +330,21 @@ Note by default the citations information (with in particular location of the so
 
 ### Retrieve citation information for a software entity
 
-Endpoint: `/api/concept/{software id}/citations`
+Endpoint: `/api/concept/{id}/citations`
 
 |   method  |  response type      | 
 |---        |---                  |
 | GET       |   application/json  |
-|           |                     | 
 
-Example: `/api/concept/Q8029/citations`
+Parameters:
+
+|requirement |   name  |  content-type value   |  description |
+|---         |---      |---                    |---                        |
+|required    |   id    |  String               |  Software identifer in the databse  |
+
+Example: 
+
+> curl localhost:8070/api/concept/Q8029/citations
 
 ```json
 {
@@ -396,7 +411,7 @@ Example: `/api/concept/Q8029/citations`
         },
         }]
     }
-]
+    ]
 
 }
 ```
@@ -405,46 +420,299 @@ Example: `/api/concept/Q8029/citations`
 
 Endpoint: `/api/disambiguate`
 
-method: POST
+|   method  |  response type      | 
+|---        |---                  |
+| POST      |   application/json  |          
+
+Parameters:
+
+|requirement |   name  |  content-type value   |  description |
+|---         |---      |---                    |---                                                         |
+|required    |   json  |  multipart/form-data  |  Description of the mention and its context in JSON UTF-8  |
+
+The `json` parameter provides information about the software mention (in a format similar as mention annotation), and an optional contextual text.
+
+Example: 
+
+> curl -X POST localhost:8070/api/disambiguate --form "json={'mentions':[{'type':'software','software-name':{'rawForm':'bibtex'},'creator':{'rawForm':'O. Patashnik'}}]}" 
+
+Example of the json parameter with textual context:
+
+```json
+{
+    "mentions": [{
+        "type": "software",
+        "software-name": {
+            "rawForm": "bibtex"
+        },
+        "creator": {
+            "rawForm": "O. Patashnik",
+        }
+    }],
+    "context": "LaTeX, originally written by Leslie Lamport, is a document preparation system. BibTex developed by O. Patashnik is its reference management component. "
+}
+```
+
+The response will complement the input with disambiguated software entity `id` and a disambiguation confidence score. 
+
+```json
+{
+    "mentions": [{
+        "type": "software",
+        "id": "Q8029",
+        "confidence": 1.0,
+        "software-name": {
+            "rawForm": "bibtex"
+        },
+        "creator": {
+            "rawForm": "O. Patashnik",
+        }
+    }],
+    "context": "LaTeX, originally written by Leslie Lamport, is a document preparation system. BibTex developed by O. Patashnik is its reference management component. "
+}
+```
 
 ### Extract all raw mention of a software in a PDF
 
 Endpoint: `/api/softwares/mentions`
 
-method: POST
+|   method  |  response type      | 
+|---        |---                  |
+| POST      |   application/json  |   
+
+
+Parameters:
+
+
+|requirement |   name  |  content-type value   |  description |
+|---         |---      |---                    |---                        |
+|required    |   file  |  multipart/form-data  |  PDF file (as multipart)  |
+
+
+The response will list the extracted mentions similarly as the current software mention module with PDF coordinate information for each text chunk. The dimentions of each page of the document are also provided, in case the client needs to display the annotations in the PDF with the given coordinates: 
+
+```json
+{
+    "mentions": [{
+        "type": "software",
+        "software-name": {
+            "rawForm": "ImagePro Plus",
+            "offsetStart": 351,
+            "offsetEnd": 364,
+            "boundingBoxes": [{
+                "p": 8,
+                "x": 118.928,
+                "y": 461.363,
+                "w": 49.98600000000002,
+                "h": 7.749360000000024
+            }]
+        },
+        "creator": {
+            "rawForm": "Media Cybernetics, Silver Spring, \nU.S.A.",
+            "offsetStart": 366,
+            "offsetEnd": 407,
+            "boundingBoxes": [{
+                "p": 8,
+                "x": 175.37953333333334,
+                "y": 461.363,
+                "w": 115.15626666666665,
+                "h": 7.749360000000024
+            }, {
+                "p": 8,
+                "x": 48.5996,
+                "y": 471.623,
+                "w": 21.192299999999996,
+                "h": 7.749360000000024
+            }]
+        }
+        }],
+    "pages": [ {"page_height":842.0, "page_width":595.0}, {"page_height":842.0, "page_width":595.0}, ...]
+}
+```
+
+Example:
+
+> curl --form file=@./thefile.pdf localhost:8070/api/softwares/mentions
+
 
 ### Extract all disambiguated software entities in a PDF
 
 Endpoint: `/api/softwares/entities`
 
-method: POST
+|   method  |  response type      | 
+|---        |---                  |
+| POST      |   application/json  |   
+
+
+Parameters:
+
+|requirement |   name  |  content-type value   |  description |
+|---         |---      |---                    |---                        |
+|required    |   file  |  multipart/form-data  |  PDF file (as multipart)  |
+
+The response response if similar to the previous mention extraction service, but the mention are disdambiguated against the software database, with disambiguated software entity `id` and a disambiguation confidence score. Non-disambiguated mentions are not appearing. 
+
+```json
+{
+    "mentions": [{
+        "type": "software",
+        "id": "E280",
+        "confidence": 0.7130,
+        "software-name": {
+            "rawForm": "ImagePro Plus",
+            "offsetStart": 351,
+            "offsetEnd": 364,
+            "boundingBoxes": [{
+                "p": 8,
+                "x": 118.928,
+                "y": 461.363,
+                "w": 49.98600000000002,
+                "h": 7.749360000000024
+            }]
+        },
+        "creator": {
+            "rawForm": "Media Cybernetics, Silver Spring, \nU.S.A.",
+            "offsetStart": 366,
+            "offsetEnd": 407,
+            "boundingBoxes": [{
+                "p": 8,
+                "x": 175.37953333333334,
+                "y": 461.363,
+                "w": 115.15626666666665,
+                "h": 7.749360000000024
+            }, {
+                "p": 8,
+                "x": 48.5996,
+                "y": 471.623,
+                "w": 21.192299999999996,
+                "h": 7.749360000000024
+            }]
+        }
+        }],
+    "pages": [ {"page_height":842.0, "page_width":595.0}, {"page_height":842.0, "page_width":595.0}, ...]
+}
+```
+
+Example:
+
+> curl --form file=@./thefile.pdf localhost:8070/api/softwares/entities
+
 
 ### Provide the n-best citations for a software entity
 
-Endpoint: `/api/{software id}/citations/nbest`
+Endpoint: `/api/{id}/citations/nbest`
 
 |   method  |  response type      | 
 |---        |---                  |
 | GET       |   application/json  |
-|           |                     | 
 
+Parameters:
 
-### Provide the most relevant related software entities with a given software entities
+|requirement |   name  |  content-type value   |  description |
+|---         |---      |---                    |---                        |
+|required    |   id    |  String               |  Software identifer in the databse  |
+|optional    |   n     |  Integer              |  number of related software entity to return (ranked), default is 1   |
 
-Endpoint: `/api/{software id}/related`
+Example: 
+
+> curl localhost:8070/api/Q8029/citations/nbest -d 'n=2'
+
+The response lists the top citing documents with a relevance score, ranked in a decreasing order:
+
+```json
+{
+    "id": "Q8029",
+    "citations": [ 
+    {
+        "document": { "doi": "https://doi.org/10.1093/pcp/pcg126", 
+                      "url": "",
+                      "sha1": ""},
+        "relevance": 0.95
+    },
+    {
+        "document": { "doi": "https://doi.org/10.1038/s41699-018-0076-0", 
+                      "url": "",
+                      "sha1": ""},
+        "relevance": 0.89
+    }
+    ]
+}
+```
+
+### Provide the n most related software entities for a given software entity
+
+Endpoint: `/api/{id}/related`
 
 |   method  |  response type      | 
 |---        |---                  |
 | GET       |   application/json  |
-|           |                     | 
 
-### Provide the most relevant related software entities given a PDF
+Parameters:
+
+|requirement |   name  |  content-type value   |  description |
+|---         |---      |---                    |---                        |
+|required    |   id    |  String               |  Software identifer in the databse  |
+|optional    |   n     |  Integer              |  number of related software entities to return (ranked), default is 1   |
+
+
+Example: 
+
+> curl localhost:8070/api/Q8029/related -d 'n=2'
+
+The response lists the top software entities with a relatedness score, ranked in a decreasing order:
+
+
+```json
+{
+    "id": "Q8029",
+    "entities": [ 
+    {
+        "id": "Q5310",
+        "relatedness": 0.98
+    },
+    {
+        "id": "Q226915",
+        "relatedness": 0.80
+    }
+    ]
+}
+```
+
+### Provide the n most relevant related software entities for a PDF
 
 Endpoint: `/api/softwares/related`
 
 |   method  |  response type      | 
 |---        |---                  |
 | POST      |   application/json  |
-|           |                     | 
 
 
+Parameters:
+
+|requirement |   name  |  content-type value   |  description |
+|---         |---      |---                    |---                        |
+|required    |   file  |  multipart/form-data  |  PDF file (as multipart)  |
+|optional    |   n     |  multipart/form-data  |  number of related software entities to return (ranked), default is 1   |
+
+
+Example:
+
+> curl --form file=@./thefile.pdf localhost:8070/api/softwares/mentions --form n=2
+
+The response lists the top software entities with a relatedness score, ranked in a decreasing order:
+
+
+```json
+{
+    "entities": [ 
+    {
+        "id": "Q5310",
+        "relatedness": 0.62
+    },
+    {
+        "id": "Q226915",
+        "relatedness": 0.49
+    }
+    ]
+}
+```
