@@ -1,0 +1,683 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1257%2Faer.p20161124" /><encodingDesc><appInfo><application version="0.5.2-SNAPSHOT" ident="GROBID" when="2018-10-20T01:06+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>MAY 2016 
+ 
+AEA PAPERS AND PROCEEDINGS </p>
+
+<p>Database; and a composite of earnings and 
+placement information based on extracts from 
+IRS W-2 forms, the Longitudinal Employer 
+Household Dynamics microdata (LEHD), 
+the Business Register (BR), Longitudinal 
+Business Database (LBD), and the Integrated 
+Longitudinal Business Database (ILBD) (Zolas 
+et al. 2015). The UMETRICS file contains uni-
+versity payroll records on the proportion of earn-
+ings allocated to all federal awards (and some 
+nonfederal awards) for all pay periods and for 
+all individuals. The data also include the federal 
+funding agency and job titles, which we mapped 
+into six occupation categories that include fac-
+ulty and graduate student. These data identify all 
+people employed on research projects and their 
+positions. The focal award is identified based on 
+the time on the award and the award's share of 
+the student's earnings. 
+PhD recipients ("graduate students" includes 
+Masters students) are identified by matching 
+UMETRICS data to ProQuest's Dissertation and 
+Thesis Database. These data contain the name of 
+the dissertation's author, the subject (which we 
+aggregated manually), institution awarding the 
+degree, and the degree awarded. 
+We link the UMETRICS data to the 2010 
+census via a person identifier, used internally 
+by the Census Bureau, called the Protected 
+Identification Key (PIK). PIKs are assigned 
+through the Person Identification Validation 
+System (<rs type="software">PVS</rs>), which uses probability record 
+linkage techniques and personal information 
+such as name, date of birth, and residential loca-
+tion (Wagner and Layne 2014). Once a PIK is 
+assigned to a record, the Personally Identifiable 
+Information is removed so analysts can anony-
+mously link individuals across files for statisti-
+cal and research purposes. Person records in the 
+census contain date of birth, gender, race, eth-
+nicity, and relationship to the head of household 
+(HH), the last of which permits inference about </p>
+
+<p>certain relationships within a household. Marital 
+status is modeled for graduate students who are 
+either the HH or listed as a spouse or unmarried 
+partner of the HH. Individuals are characterized 
+as having children when they are, or are married 
+to, the HH and there are (step) children of the 
+HH present. 1 </p>
+
+<p>1 This approach provides valuable information but has 
+two main limitations. First, we can only infer marital status </p>
+
+<p>The PIK is used to link to W-2 earnings, which 
+cover total annual wages, tips, and other com-
+pensation from the job with the highest earnings 
+in each year from 2005 and 2012. Linking to 
+the LEHD provides establishment identifiers, 
+and linking on those establishment identifiers 
+to the BR, LBD, and ILBD provides sector of 
+employment. 
+As shown in the online Appendix, the 
+UMETRICS data include 3,551,730 payment 
+records, representing 127,822 employees (at all 
+levels) from four universities. Of these, 11,773 
+earned a research doctorate from one of the four 
+universities, and 3,837 were in the 2007-2010 
+graduating cohort. We keep those in STEM 
+fields, between the ages of 24 and 40, who were 
+assigned a PIK and matched to earnings data. 
+The final sample includes 1,237 students (867 
+male and 370 female). There are no gender dif-
+ferences in terms of demographics. For each, all 
+but 1 percent are white alone (57 percent), black 
+alone (2.3 percent), or Asian alone (40 percent); 
+3 percent are Hispanic; the average age is just 
+over 30; and just under two-thirds are married 
+or partnered. Nineteen percent of females and 
+24 percent of males had children at the time 
+of the 2010 census. There are clear differences 
+in field of study-59 percent of the females in 
+our sample completed dissertations in biology, 
+chemistry, or health, but only 27 percent of 
+males wrote dissertations in those fields. Males 
+were more than twice as likely to complete dis-
+sertations in engineering (45 percent versus 
+21 percent) and were 1.5 times as likely to study 
+computer science, math, or physics (28 percent 
+versus 19 percent). Given these differences, it is 
+crucial to account for field of study when esti-
+mating training and labor outcomes. </p>
+
+<p>II. Analysis </p>
+
+<p>We use OLS to compare the training environ-
+ments and labor market outcomes of female and 
+male doctoral recipients along a wide range of </p>
+
+<p>or presence of children for those who are either listed as the 
+HH or are married or partnered to the HH. Individuals in 
+our sample who are in multi-family or multi-generational 
+households may be incorrectly classified as single or child-
+less. Second, the 2010 census provides a point-in-time mea-
+sure of marital status and presence of children, while our 
+UMETRICS and earnings data are longitudinal. Therefore, 
+these measures become increasingly noisy as our educa-
+tional and labor market outcomes deviate further from 2010. </p>
+
+<p>VOL. 106 NO. 5 </p>
+
+<p> 
+STEM Training and Early CarEEr OuTCOMES Of graduaTE STudEnTS </p>
+
+<p>dimensions. The main variable of interest is an 
+indicator equal to one if the student is a woman. 
+The simplest specification includes univer-
+sity indicators, a linear trend for the first year 
+the student appears as a graduate student in the 
+UMETRICS data, 2 and an indicator for being 
+left-censored in the UMETRICS data. 3 Labor 
+market regressions also include indicators for 
+graduation year. Additional controls are progres-
+sively introduced for dissertation topic, funding 
+agency, race, Hispanic origin, age and its square, 
+marital status, and presence of children. Finally, 
+interactions are included between gender and </p>
+
+<p>2 Some students enter the UMETRICS data first as under-
+graduates and later transition to graduate students. 
+3 A student is defined as left-censored if the date she 
+first appears as a graduate student in the UMETRICS data 
+is equal to the first date for which her university's data are 
+available. </p>
+
+<p>both marital status and presence of children. Of 
+course, there are likely to be unmeasured differ-
+ences between women and men and those with 
+and without children. 
+Table 1 reports differences in training environ-
+ments. Here and in Table 2, columns 1a through 
+1c report raw means for women and men, and 
+the difference between the two. The remaining 
+columns report the gender gaps conditional on 
+the controls discussed above. Dependent vari-
+ables enter as rows. There is substantial gen-
+der separation in teams. For the average female 
+graduate student in the data, over two out of 
+ten faculty members on the research teams are 
+female, while fewer than one out of ten faculty 
+members are female for the average male grad-
+uate student. This finding is robust; even using 
+the richest set of controls in column 6, there is 
+a precise 5 percentage point difference in the 
+proportion of faculty members on the research </p>
+
+<p>Table 1-Training Environments of Male and Female Graduate Students Participating in STEM Research </p>
+
+<p>Dependent variables ↓ 
+Females 
+Males 
+Diff 
+(a) 
+(b) 
+(c) </p>
+
+<p>(1) 
+(2) 
+(3) 
+(4) 
+(5) 
+(6) </p>
+
+<p>Share of faculty that are female 
+0.21 
+0.08 
+0.13*** 
+0.12*** 
+0.12*** 
+0.09*** 
+0.09*** 
+0.05* 
+(0.02) 
+(0.01) 
+(0.02) 
+(0.02) 
+(0.02) 
+(0.02) 
+(0.02) 
+(0.03) </p>
+
+<p>Share of graduate students that 
+0.14 
+0.09 
+0.05*** 
+0.04*** 
+0.04*** 
+0.01 
+0.01 
+−0.00 </p>
+
+<p>are female 
+(0.01) 
+(0.00) 
+(0.01) 
+(0.01) 
+(0.01) 
+(0.01) 
+(0.01) 
+(0.02) </p>
+
+<p>ln team size 
+1.73 
+1.93 
+−0.20*** 
+−0.18*** −0.18*** −0.10* 
+−0.10* 
+−0.06 
+(0.04) 
+(0.03) 
+(0.05) 
+(0.05) 
+(0.05) 
+(0.06) 
+(0.06) 
+(0.09) </p>
+
+<p>Faculty to student ratio 
+0.93 
+0.64 
+0.29*** 
+0.22*** 
+0.22*** 
+0.15** 
+0.14* 
+0.29** 
+(0.06) 
+(0.03) 
+(0.07) 
+(0.07) 
+(0.07) 
+(0.07) 
+(0.07) 
+(0.13) </p>
+
+<p>Total number of awards 
+2.24 
+2.69 
+−0.45*** 
+−0.34*** −0.32*** −0.24*** −0.23*** 
+v0.10 
+(0.07) 
+(0.06) 
+(0.09) 
+(0.09) 
+(0.09) 
+(0.09) 
+(0.09) 
+(0.15) </p>
+
+<p>Number of months participating 
+20.98 
+21.59 
+−0.62 
+−1.10 
+−1.00 
+−1.38* 
+−1.42* 
+−0.91 </p>
+
+<p>on the award 
+(0.69) 
+(0.45) 
+(0.82) 
+(0.79) 
+(0.79) 
+(0.82) 
+(0.82) 
+(1.18) </p>
+
+<p>Years from first observation to degree 
+3.20 
+3.23 
+−0.03 
+−0.12** 
+−0.11* 
+−0.12** 
+−0.12** 
+0.00 
+(0.08) 
+(0.06) 
+(0.10) 
+(0.06) 
+(0.06) 
+(0.06) 
+(0.06) 
+(0.10) </p>
+
+<p>University, first year trend, left-censored 
+✓ 
+✓ 
+✓ 
+✓ 
+✓ </p>
+
+<p>Race, Hispanic origin, age, age-squared 
+✓ 
+✓ 
+✓ 
+✓ </p>
+
+<p>Dissertation topic 
+✓ 
+✓ 
+✓ </p>
+
+<p>Funding agency 
+✓ 
+✓ 
+✓ </p>
+
+<p>Married or partnered, children 
+✓ 
+✓ </p>
+
+<p>Female × (married or 
+partnered + children) 
+✓ </p>
+
+<p>Observations 
+370 
+867 
+1,237 
+1,237 
+1,237 
+1,237 
+1,237 
+1,237 </p>
+
+<p>Notes: Sample includes 2007-2010 graduates with dissertation topics in a STEM field. Each cell in columns 2-6 displays the 
+estimated coefficient on the FEMALE indicator from a separate regression. Robust standard errors. 
+*** Significant at the 1 percent level. 
+** Significant at the 5 percent level. 
+* Significant at the 10 percent level. </p>
+
+<p>Sources: Author calculations. UMETRICS linked to 2010 census, ProQuest, LEHD, W2, LBD, BR, and iLBD. </p>
+
+<p>MAY 2016 
+336 
+AEA PAPERS AND PROCEEDINGS </p>
+
+<p>team who are female. There is some evidence 
+female graduate students work on teams with a 
+higher percentage of other female students, but 
+this result disappears controlling for dissertation 
+topic. 
+These differences could be due to choice 
+("sorting"), external forces ("segregation"), or </p>
+
+<p>a combination of both. Furthermore, since stu-
+dents are observed at a relatively late stage in 
+their education, sorting by choice at this stage 
+may derive from experiences (including segre-
+gation) at earlier stages. Distinguishing between 
+these mechanisms is beyond the scope of this 
+paper and is an area for future research. 
+The remainder of Table 1 shows gender dif-
+ferences in several characteristics of STEM 
+students' training environments. These differ-
+ences may be advantageous or disadvantageous. 
+For example, female graduate students tend to 
+be on awards with smaller teams and a greater 
+share of faculty per graduate student. This may 
+imply more opportunities for direct mentorship, 
+but it also may reflect differences in the size and 
+prestige of grants (i.e., smaller awards may not </p>
+
+<p>be able to employ as many graduate students). 
+Female graduate students are employed on fewer 
+federal research awards overall than their male 
+counterparts, spend slightly less time partici-
+pating in their primary award, and have shorter 
+spans between first appearing in the UMETRICS 
+data and graduating, although many of these dif-
+ferences are sensitive to the specification. These 
+differences could be interpreted two ways. In 
+one view, the tendency of females to partici-
+pate in fewer awards and appear in the data for 
+shorter durations could reflect specialized train-
+ing and faster degree completion. In another 
+view, female students may be isolated from 
+other researchers and may begin participating in 
+federally funded research later. More research is 
+needed to determine which view is correct. 
+The early labor market outcomes of the males 
+and females in the graduating cohort can also be 
+studied. We examine outcomes one year from 
+the time the student graduates (according to 
+ProQuest) or leaves the payroll of the univer-
+sity that granted the degree (according to the 
+W-2 data), whichever is later. Specifically, we </p>
+
+<p>Table 2-Labor Market Outcomes of Male and Female Graduate Students Participating in STEM Research </p>
+
+<p>Dependent variables ↓ 
+Females 
+Males 
+Diff 
+(a) 
+(b) 
+(c) </p>
+
+<p>(1) 
+(2) 
+(3) 
+(4) 
+(5) 
+(6) </p>
+
+<p>Employed in industry 
+0.40 
+0.47 
+−0.13*** 
+−0.11*** −0.11*** −0.05 
+−0.05 
+−0.03 
+(0.022) 
+(0.02) 
+(0.03) 
+(0.03) 
+(0.03) 
+(0.03) 
+(0.03) 
+(0.05) </p>
+
+<p>ln wage 
+10.50 
+10.93 
+−0.37*** 
+−0.35*** −0.35*** −0.11* 
+−0.11* 
+0.01 
+(0.063) 
+(0.03) 
+(0.07) 
+(0.07) 
+(0.07) 
+(0.07) 
+(0.07) 
+(0.10) </p>
+
+<p>ln wage (with industry controls) 
+10.40 
+10.71 
+−0.31*** 
+−0.29*** −0.30*** −0.9 
+−0.10 
+0.02 
+(0.057) 
+(0.04) 
+(0.07) 
+(0.07) 
+(0.06) 
+(0.06) 
+(0.07) 
+(0.10) </p>
+
+<p>University, first year trend, left-censored 
+✓ 
+✓ 
+✓ 
+✓ 
+✓ </p>
+
+<p>Degree year 
+✓ 
+✓ 
+✓ 
+✓ 
+✓ </p>
+
+<p>Race, Hispanic origin, age, age-squared 
+✓ 
+✓ 
+✓ 
+✓ </p>
+
+<p>Dissertation topic 
+✓ 
+✓ 
+✓ </p>
+
+<p>Funding agency 
+✓ 
+✓ 
+✓ </p>
+
+<p>Married or partnered, presence of children 
+✓ 
+✓ </p>
+
+<p>Female × (married or 
+partnered + children) 
+✓ </p>
+
+<p>Observations 
+370 
+867 
+1,237 
+1,237 
+1,237 
+1,237 
+1,237 
+1,237 </p>
+
+<p>Notes: Labor outcomes are taken from one year following graduation or separation from the university payroll, whichever is 
+greater. Wages are in 2012 dollars. Sample includes observations with dissertation topics in a STEM field. Each cell in columns 
+2-8 displays the estimated coefficient on the FEMALE indicator from a separate regression. Robust standard errors. 
+*** Significant at the 1 percent level. 
+** Significant at the 5 percent level. 
+* Significant at the 10 percent level. </p>
+
+<p>Sources: Author calculations. UMETRICS linked to 2010 census, ProQuest, LEHD, W2, LBD, BR, and iLBD. </p>
+
+<p>VOL. 106 NO. 5 </p>
+
+<p> 
+STEM Training and Early CarEEr OuTCOMES Of graduaTE STudEnTS </p>
+
+<p>consider earnings in 2012 dollars and placement 
+within Academia and Government versus all 
+other industries. 4 
+Figure 1 shows unconditional kernel density 
+plots of earnings for males and females in all 
+sectors, the Academic and Government Sector, 
+and all other sectors. Panel A shows women are 
+more concentrated than men at the low-to-middle 
+portion of the earnings distribution and less rep-
+resented at the higher end of the earnings distri-
+bution, with the male earnings distribution being 
+bimodal. Panel B shows relatively smaller gaps 
+among those going into academia and govern-
+ment, with many earning typical postdoctoral 
+researcher incomes just under $50,000. Women 
+and men earn the most in industry, but the gap 
+is also larger. 
+Table 2 further analyzes differences in early 
+labor market outcomes. Column 1 of the top row </p>
+
+<p>4 Far more people are in academia than government, but 
+these sectors have similar earnings. </p>
+
+<p>shows that the female students in our graduating 
+cohort are 13 percentage points less likely than 
+male graduate students to work in the lucrative 
+sectors outside academia and government. This 
+holds controlling for university, degree year, 
+and demographic characteristics, but column 4 
+shows there are no detectable differences once 
+we control for broad dissertation topic and fund-
+ing source. We find unconditional wage differ-
+ences between males and females of 0.37 log 
+points (31 percent). Controlling for university 
+characteristics, degree date, and demographics 
+has little impact on the point estimate. However, 
+we see the magnitude of the estimated wage gap 
+drop by about two-thirds to 11 percent when 
+we include controls for dissertation topic and 
+funding source, underscoring the important role 
+of field of study. 5 Adding controls for family </p>
+
+<p>5 We estimated regressions that introduced funding 
+agency before dissertation topic to check that the change 
+moving from columns 3 to 4 was not an artifact of model sat-
+uration, and we found that the large influence of dissertation </p>
+
+<p>Panel A. All sectors 
+Panel B. Government 
+and academia </p>
+
+<p>0 </p>
+
+<p>5 0 , 0 0 0 </p>
+
+<p>Wages </p>
+
+<p>1 0 0 , 0 0 0 
+1 5 0 , 0 0 0 </p>
+
+<p>Panel C. Other sectors </p>
+
+<p>0 </p>
+
+<p>5 0 , 0 0 0 </p>
+
+<p>Wages </p>
+
+<p>1 0 0 , 0 0 0 1 5 0 , 0 0 0 </p>
+
+<p>0 </p>
+
+<p>5 0 , 0 0 0 </p>
+
+<p>Wages </p>
+
+<p>1 0 0 , 0 0 0 1 5 0 , 0 0 0 </p>
+
+<p>Females 
+Males </p>
+
+<p>Figure 1. Wage Distributions by Sex and Sector </p>
+
+<p>Notes: Sample includes STEM students in the 2007-2010 graduating cohort. Wages are in 
+2012 dollars and are from one year following graduation or leaving the university payroll, 
+whichever was later. The tails of the kernel density plots and the bandwidth size are not dis-
+played to satisfy confidentiality requirements. </p>
+
+<p>Sources: UMETRICS linked to 2010 census, ProQuest, LEHD, W2, LBD, BR, and iLBD. </p>
+
+<p>MAY 2016 
+ 
+AEA PAPERS AND PROCEEDINGS </p>
+
+<p>and household structure (column 5) does not 
+change the point estimate, which is significant 
+at the 10 percent level. Allowing the impact of 
+partnership status and children to vary by gen-
+der, however, makes the point estimate of the 
+male-female wage gap statistically indistin-
+guishable from zero. This suggests the presence 
+of children contributes meaningfully to the gen-
+der wage gap. However the point estimates on 
+the interactions themselves are imprecise, pos-
+sibly due to noise in measurement of children 
+and partnered status (see footnote 2). Finally, 
+the gender gap is larger for industry employees 
+and robust to controlling for sector. </p>
+
+<p>III. Conclusion </p>
+
+<p>This paper explores differences in STEM 
+training environments and labor market place-
+ment outcomes using unique transaction data 
+from university combined with administrative 
+and survey data from the Census Bureau. The 
+results show gender separation in training, but 
+no clear gender disadvantages in training envi-
+ronments. There are, however, differences in 
+placement outcomes-women are much less 
+likely to enter industry and more likely to enter 
+academia or government. Women have sub-
+stantially lower wages, with a larger gap for 
+those entering industry. This difference is due 
+largely to field of study and disappears con-
+trolling for gender interacted with marital sta-
+tus and the presence of children. These results 
+should be interpreted with caution. The data 
+represent a limited number of schools and only 
+some aspects of the training environment. Also, 
+labor outcomes likely reflect some unobserved </p>
+
+<p>topic was invariant to the stage at which we introduce it. 
+Given its central role in our results, we also tried estimating 
+regressions that interacted gender and topic. However, we 
+found no evidence of within-topic gender gaps in wages. </p>
+
+<p>heterogeneity, including in hours worked, and 
+potentially household decisions on housework 
+and child care. </p>
+
+
+
+<p>This article has been cited by: </p>
+
+
+
+</text></tei>

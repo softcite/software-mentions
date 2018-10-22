@@ -17,16 +17,25 @@ WHERE
 SELECT DISTINCT ?item ?itemLabel 
 WHERE 
 {
-  ?item wdt:P31/wdt:P279* wd:Q7397. # instance and sub-class of softwares
+  ?item wdt:P31/wdt:P279* wd:Q7397. # instance and sub-class of software
   SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
 }
 
 
 -> 82 303 softwares
 
-
+---
 
 -> in practice for extracting corresponding vocabulary, use entity-fishing (utility GenerateSpecializedVocabulary)
+
+https://github.com/kermitt2/entity-fishing
+
+> cd entity-fishing
+
+> mvn exec:java -Dexec.mainClass=com.scienceminer.nerd.utilities.GenerateSpecializedVocabulary -Dexec.args="en +Q7397 /tmp/wikidata-software.txt"
+
++Q7397 means we start with the entity for software and recursively expand via P31 (instance_of) and P279 (sub-class_of) properties
+-Q7889 means we exclude instances of and sub-classes of video games
 
 ----
 

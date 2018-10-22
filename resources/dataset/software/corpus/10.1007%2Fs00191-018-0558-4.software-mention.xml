@@ -1,0 +1,3033 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1007%2Fs00191-018-0558-4" /><encodingDesc><appInfo><application version="0.5.2-SNAPSHOT" ident="GROBID" when="2018-10-20T00:52+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>Abstract Using an agent-based model, this paper revisits the merits for a central 
+bank of announcing its inflation target. The model preserves the main transmission 
+channels of monetary policy used in stochastic dynamic general equilibrium models-
+namely the consumption and the expectation channels, while allowing for agents' 
+heterogeneity in both expectations and behavior. We find that, in a rather stable envi-
+ronment such as the Great Moderation period, announcing the target allows for the 
+emergence of a loop between credibility and success: if the target is credible, inflation 
+expectations remain anchored at the target, which helps stabilize inflation, and, in 
+turn, reinforces the central bank's credibility. We then tune the degree of heterogene-
+ity in agents' behavior and the individual learning process to introduce inflationary 
+pressures, accompanied or not by uncertainty affecting the real transmission channel 
+of monetary policy. Even if learning and heterogeneity would a priori lead to think-
+ing favorably about transparency, we show that this virtuous circle is not robust, as 
+transparency may expose the central bank to a risk of credibility loss. In this case, we 
+discuss the potential benefits from partial announcements. </p>
+
+<p>Over the past three decades, inflation targeting (IT hereafter) has been adopted by an 
+increasing number of countries. Under an IT regime, the central bank (CB hereafter) 
+puts a strong emphasis on communication, especially by announcing the inflation tar-
+get to the public. Following this trend, an important strand of the academic literature 
+has investigated the macroeconomic benefits that may be expected from adopting 
+IT. 1 Most of the related studies point to the impact on inflation expectations as the 
+key stabilization mechanism under this regime. 
+Two properties of an explicit inflation target have been emphasized (see, notably, 
+Demertzis and Viegi 2008, 2009). First, an explicit, numerical target makes it a 
+good candidate as a focal point of coordination for potentially heterogeneous infla-
+tion expectations. Second, the announced target becomes a natural reference point 
+for assessing the inflation performances of the monetary authorities, and, hence, for 
+judging the credibility of the announcement itself. As a consequence, this credibil-
+ity stands as a key factor for determining whether the target can become an effective 
+anchoring device for inflation expectations. 2 In a dynamic perspective, Demertzis 
+and Viegi (2009) show that the anchoring properties of IT arise through the emer-
+gence of a self-reinforcing credibility-success loop: the more credible the monetary 
+authorities, the more likely are inflation expectations to be anchored on the target, 
+and the more likely is inflation to be stabilized around the target, which consolidates 
+the initially favorable credibility assessment, and so on. 
+The current paper aims at revisiting the stabilization properties of the inflation 
+target in an economic setting characterized by a collection of fully heterogeneous 
+agents who behave, interact and learn under bounded rationality. We depart, in that 
+regard, from the aforementioned literature that has addressed the role of the target in 
+a context where heterogeneity essentially pertains to the formation of inflation expec-
+tations, while considering agents as homogeneous and fully rational players in the 
+coordination game. In this paper, agents may not only differ regarding the formation 
+of their inflation expectations but also concerning other dimensions of their economic 
+behavior. This heterogeneity is, in turn, likely to complicate the coordination process 
+between agents in a bounded rationality context. 
+In such a specific environment, the question naturally arises of whether the anchor-
+ing properties of the inflation target can be used as an efficient stabilization tool by 
+the monetary authorities. The answer depends on the interplay between the inflation 
+expectations dynamics that may be influenced by the publicity of the target on the one 
+hand, and the learning dynamics that drives the coordination between agents, on the 
+other hand. In particular, the control of the inflation rate is likely to be all but a simple </p>
+
+<p>1 The literature is impressive on these crossing issues. For a recent survey on IT, see Svensson (2010) and 
+the references therein. A useful reference is Walsh (2009). On the impact of transparency and communi-
+cation of the CB, see, among others, Geraats (2002, 2009) and Woodford (2005). Empirical evidence on 
+the effects of IT on expectations has been provided by Johnson (2002, 2003). 
+2 Empirical evidence supports the view that the credibility of the CB, inherited from past inflation 
+performances, acts as a primary determinant of inflation expectations (Blinder et al. 2008). </p>
+
+<p>How transparent about its inflation target... </p>
+
+<p>matter, as interactions between agents, and learning shape the transmission mecha-
+nisms of monetary policy in the economy. As a consequence, the announcement of 
+the target can pose a more pronounced credibility challenge for the policymaker than 
+the one arising in representations of IT within representative agent settings. 
+Given the features of the economy on which we want to focus, an agent based 
+model (ABM) seems a well-suited framework. This framework acknowledges the 
+heterogeneity between agents, and the modalities of their learning behavior at the 
+individual level, without being constrained by the assumptions of intertemporal opti-
+mization and aggregation requirements through representative agents. 3 The price to 
+pay for that flexibility is the absence of any tractable representation of the model, 
+which has then to be assessed through numerical simulations of the emerging dynam-
+ics, and a dependence of the outcomes on the range of parameters, which have thus 
+to be chosen with caution. 
+In the following paper, we elaborate on the ABM developed in Salle et al. (2013). 
+This ABM is deliberately constructed so as to retain the basic structure of stan-
+dard macroeconomic models dealing with monetary policy (such as the NK model). 
+Specifically, this model encompasses the consumption and the expectation channels 
+of monetary policy to inflation. We extend this ABM by explicitly accounting for 
+an inflation expectations formation process that acknowledges the twofold status of 
+the inflation target under IT, playing both as a focal point and as a reference point 
+for credibility. On those aspects, we adapt the approach developed by Demertzis and 
+Viegi (2009) to the case of agents' heterogeneity and bounded rationality. We exam-
+ine under which conditions a credibility-success loop may emerge under IT, and make 
+this regime an advantageous choice for the monetary authorities in the economic 
+environment we have considered. 
+Our main results can be summarized as follows. The announcement of an inflation 
+target may allow for the emergence of a credibility-loop success if a relatively wide 
+radius of tolerance is coupled with that target. However, this loop arises only in stable 
+macroeconomic environments. In volatile macroeconomic environments, especially 
+characterized by a significant variability in the expectation channel of monetary pol-
+icy, tying one's hands by announcing an inflation target turns out to be problematic. 
+Macroeconomic volatility impairs the ability of the CB to deliver its official inflation 
+commitment, and a credibility problem emerges. As a result, a reverse credibility loop 
+can set in. In that case, the economy may benefit from partial announcements about 
+the inflation target, that provide a clear signal to anchor inflation expectations for 
+the part of the public that is reached by that announcement, while allowing for a less 
+tightly defined objective for the remaining part. Overall, our results suggest that fully 
+revealing the inflation target can deteriorate macroeconomic performances, even in 
+a setting with core features -i.e. learning and heterogeneity -which would a priori 
+lead one to think favorably about CB's transparency. The remainder of the paper is 
+organized as follows. Section 2 presents the ABM. Section 3 explains the simulation </p>
+
+<p>3 For recent contributions using macro ABMs, see, e.g., Dosi et al. (2010), Lengnick (2013), Assenza et al. 
+(2015). Few of them have been devoted to the specific purpose of monetary policy analysis; see notably 
+Delli Gatti et al. (2005), Raberto et al. (2008) and Salle et al. (2013). </p>
+
+<p>I. Salle et al. </p>
+
+<p>protocol and gives insights into the main mechanisms at work in the model. Section 4 
+discusses the results and Section 5 concludes. </p>
+
+<p>2 The model </p>
+
+<p>2.1 General features </p>
+
+<p>This model elaborates on the macroeconomic ABM first introduced in Salle et al. 
+(2013). This ABM shares several general features of the baseline NK framework 
+(see Woodford 2003, Chap. 4). labor is the only input, used to produce a perishable 
+good, and the goods market operates under imperfect competition. The price/wage 
+adjustments are characterized by nominal rigidities. Inflation is driven by both aggre-
+gate demand and inflation expectations, in line with the NK Phillips curve. The two 
+usual transmission channels of monetary policy then result: the consumption and the 
+expectation channels. The CB uses a Taylor rule to set the interest rate. 
+The economy is populated by n households, indexed by i ∈ [1, n], a single firm 
+summarizing the supply side, and a CB. The sequence of events is as follows. First, 
+the labor market allocates households' labor supplies to the firm. The quantity of 
+hired labor determines the unemployment rate, the firm's goods supply, its labor costs 
+and the corresponding price, as well as households' labor income. Second, house-
+holds choose their consumption and savings/debt strategy. In a third step, the goods 
+market determines the allocation of the goods supply to each household. This allo-
+cation dictates the firm's profit and each household's utility. Fourth, agents update 
+their individual behavior and inflation expectations. Finally, the CB sets the nominal 
+interest rate for the next period, and the story starts all over again. </p>
+
+<p>2.2 Households </p>
+
+<p>Households supply labor and consume according to two simple rules of thumb. To 
+implement those two rules, they need to forecast inflation. Moreover, they adapt those 
+rules according to a social learning process, and update their inflation forecasts on 
+the basis of the realization of inflation and the CB's announcements. </p>
+
+<p>2.2.1 Individual behavior </p>
+
+<p>Labor supply In each period, each household is endowed with an inelastic labor 
+supply normalized to one, i.e. h s 
+i,t = 1, ∀t, i. 4 This normalization allows us to define 
+explicitly unemployment in the model, and can be interpreted as a full-time occu-
+pation. 5 Labor supply behavior is formulated in terms of a reservation wage. The 
+heuristic rule that we choose introduces a direct transmission channel of inflation </p>
+
+<p>4 Lower case symbols stand for individual variables, and upper case symbols for aggregate ones. s and d 
+superscripts indicate respectively, supply and demand variables. 
+5 This is usual in ABMs, see, among others, Delli Gatti et al. (2005) or Dosi et al. (2010). </p>
+
+<p>How transparent about its inflation target... </p>
+
+<p>expectations to the growth rate of nominal wages, and hence to price inflation, lead-
+ing to an expectation channel of monetary policy in the model. In every period t, each 
+household i sets its reservation wage following the first rule of thumb: </p>
+
+<p>w i,t = w i,t−1 × (1 + 1 (π e 
+i,t+1 &gt;0) γ w 
+i,t .π e 
+i,t+1 ) 
+(1) </p>
+
+<p>Heuristic (1) indicates that households raise their reservation wage w i,t only if their 
+inflation expectation π e 
+i,t+1 is positive (and, consequently, 1 () = 1). A wage index-
+ation process then prevails, according to which households raise their wage by </p>
+
+<p>γ w 
+i,t .π e </p>
+
+<p>i,t+1 </p>
+
+<p>
+. Otherwise, they keep it unchanged (1 () = 0). Wages are increasing 
+with expected inflation, while being subject to nominal wage downward stickiness 
+(γ w 
+i,t &gt; 0). 6 In this set-up, coefficients γ w 
+i stand for the strength of the wage-
+price inflation spiral. Coefficient γ w 
+i is the first strategy variable of households. Any 
+household faces a trade-off when choosing its strategy γ w 
+i : setting a high γ w 
+i , i.e. 
+a high reservation wage, would induce higher wage payments, and a higher con-
+sumption level if the household can be employed. However, at the same time, the 
+probability of becoming unemployed rises, as the firm first hires the less demanding 
+households (see Section 2.5). Furthermore, the higher is inflation, the higher is the 
+cost in terms of purchasing power of under-indexation, and the higher is the incentive 
+of the household to set an indexation coefficient at least equal to unity. This relation-
+ship between expected inflation and indexation coefficients is investigated in detail 
+in numerical simulations in Section 3. </p>
+
+<p>Consumption In each period, each household receives a nominal income given by: </p>
+
+<p>y i,t = w i,t h i,t + t−1 1/n + b i,t−1 (1 + i t−1 ) 
+(2) </p>
+
+<p>where h i,t ≤ h s 
+i,t is the actual labor supplied by household i after the matching pro-
+cess in the labor market, w i,t h i,t is then the corresponding labor income, t−1 /n the 
+share of the last period's total nominal profits evenly distributed among households, 
+i t−1 , the nominal riskless interest rate set by the CB. b i,t−1 stands for the nominal 
+holdings (positive in case of savings and negative in case of debt), and is simply given 
+by the difference between actual consumption expenditures and current income after 
+the matching in the goods market. 
+In line with the consumption behavior described by the Euler equation in NK 
+models, we assume that households desire to smooth their consumption path. Accord-
+ingly, each household computes a proxy of its permanent income, as defined by 
+Friedman (1957, Chap. III), as a moving average of its past incomes: </p>
+
+<p>˜ 
+y i,t ≡ (1 − ρ)y i,t + ρ ˜ 
+y i,t−1 
+(3) </p>
+
+<p>where ρ ∈ [0, 1[ is a memory parameter common to all households. Each 
+household then intends to consume a share d i,t &gt; 0 of its permanent income. </p>
+
+<p>6 See e.g. Oeffner (2008) or Raberto et al. (2008) for comparable assumptions. </p>
+
+<p>I. Salle et al. </p>
+
+<p>Formally, the demand for the goods of each household i in period t is expressed 
+as: 7 
+c d 
+i,t = d i,t . ˜ 
+y i,t where d i,t ∈ [d, ¯ 
+d] 
+(4) 
+Households adjust their consumption rate, d i,t , according to the second rule of 
+thumb. We specify a counterpart of the standard Euler condition where the real 
+interest rate dictates consumption and savings decisions: 8 </p>
+
+<p>d i,t = d i,t−1 − γ d 
+i,t (i t − π e 
+i,t+1 − r n 
+t ) 
+(5) </p>
+
+<p>The adjustments of d i,t depend on the gap between the current real interest rate 
+expected by household i, i.e. i t − π e 
+i,t+1 and the natural (real) rate r n 
+t (assumed to 
+be zero in numerical simulations). Accordingly, monetary policy influences aggre-
+gate demand through the nominal interest rate, and, for a given level of inflation 
+expectations, the real interest rate. The coefficient γ d 
+i,t ∈ R is the households' second 
+strategy. As soon as γ d 
+i,t &gt; 0, consumption decreases when the real interest rate rises, 
+and we obtain the standard consumption channel of monetary policy through the sub-
+stitution effect. Otherwise (i.e., when γ d 
+i,t &lt; 0), the income effect dominates and the 
+consumption channel is reversed. Both effects have been emphasized as plausible in 
+the empirical literature. (See Oeffner 2008, p. 83, for a review.) </p>
+
+<p>2.2.2 Adaptation through social learning </p>
+
+<p>Following the assumption of perpetual learning, the two strategies γ w 
+i,t and γ d 
+i,t are 
+updated at the end of each period through a simple form of a genetic algorithm involv-
+ing two learning operators: a social learning mechanism (imitation) and random 
+experiments in the strategy space. 9 
+Imitation is based on households' performance, measured by smoothed utility: </p>
+
+<p>˜ 
+u i,t = (1 − ρ)u i,t + ρ ˜ 
+u i,t−1 = (1 − ρ) </p>
+
+<p>t </p>
+
+
+
+<p>l=0 </p>
+
+<p>ρ t−l u i,l 
+(6) </p>
+
+<p>where u(c i,t ) ≡ ln(c i,t ) in the numerical simulations and ρ is the same memory 
+parameter as in Eq. 3. The use of a smoothed measure denotes a concern for the per-
+sistence in the performances. In each period t, with a probability P imit , a household 
+i imitates the strategies (γ w 
+j,t , γ d 
+j,t ) of another household j = i. The household to be </p>
+
+<p>7 In DSGE models, transversality conditions are imposed to avoid explosive dynamics in the bond accumu-
+lation process. Such restrictions cannot be set in our model, in which we have to impose period-by-period 
+constraints. In that respect, we impose an upper limit ¯ 
+d &gt; 1 to the consumption adjustment rate d, in 
+order to rule out excessive debt and household defaulting, and we impose a lower bound d &gt; 0 to ensure 
+minimal subsistence consumption at each period. This way, consumption cannot be driven to zero. 
+8 We depart from the behavioral rules introduced in the literature on learning about consumption (see 
+the seminal contribution of Allen and Carroll 2001). This is because this literature seeks to explain how 
+households may learn to smooth their consumption path over time assuming a constant nominal interest 
+rate and a zero-inflation world, while we aim here at specifying the consumption channel of monetary 
+policy through changes in the real interest rate. 
+9 See, notably, Holland et al. (1989) and Sargent (1993) for general statements, Arifovic (2000) for a survey 
+in macroeconomics. </p>
+
+<p>How transparent about its inflation target... </p>
+
+<p>imitated is chosen with a roulette-wheel selection process. Formally, the probability 
+of household j to be imitated is proportional to its relative utility in the households' 
+population: </p>
+
+<p>exp( ˜ 
+u j ) 
+n 
+l=1 exp( ˜ 
+u l ) 
+(7) </p>
+
+<p>where the exponential function is set to cope with negative utility values. Conse-
+quently, better strategies in terms of utility are favored by the selection process, and 
+they tend to replace less performing ones among the population of households. 
+With a probability P mut , a household can also perform a random experiment, in 
+order potentially to discover better strategies than those already present among the 
+households' population. In this case, it draws a new γ w 
+i,t+1 coefficient from a nor-
+mal distribution with the mean equal to the average of the coefficients γ w 
+i,t across 
+all households, and a given standard-deviation σ w : N </p>
+
+<p>n </p>
+
+<p>l=1 γ w </p>
+
+<p>l,t </p>
+
+<p>n </p>
+
+<p>, σ w </p>
+
+
+
+<p>. We truncate </p>
+
+<p>the draw at zero, as negative indexation coefficients are not relevant. The new strat-
+egy γ d 
+i,t+1 is also drawn from a normal distribution, with a given standard deviation 
+σ d : N </p>
+
+<p>n </p>
+
+<p>l=1 γ d </p>
+
+<p>l,t </p>
+
+<p>n </p>
+
+<p>, σ d </p>
+
+
+
+<p>, but this draw does allow for negative coefficients, as both </p>
+
+<p>substitution and income effects are plausible (see Eq. 5). 
+With a probability 1 − P imit − P mut , the household keeps its strategies (γ w 
+i,t , γ d 
+i,t ) 
+unchanged for the next period t + 1. 
+Parameters σ d and σ w can be interpreted in terms of shocks: they control the 
+endogenous variability in the model, which arises from the heterogeneity in the 
+individual behavior and its evolution through the learning process. 
+High values of σ d are associated with a high level of uncertainty about the way 
+monetary policy transmits to aggregate demand (see Eq. 5). That situation is akin to 
+model uncertainty in the related literature about monetary policy under uncertainty 
+and we refer to it as such in the paper. 10 Variability induced by σ w directly trans-
+lates into variability in the inflation process through the wage-indexation scheme, and 
+leads to similar effects on inflation dynamics as cost-push shocks (see Eq. 1). Values 
+of σ w higher than unity generate second-round effects that fuel a wage-price inflation 
+spiral, and may give rise to a stabilization trade-off between the level of inflation and 
+the level of output. 
+From the preceding, it should be clear that households' inflation expectations 
+play a central role in the economic dynamics in our model: i) they determine the ex 
+ante real interest rate, through which the CB affects aggregate demand, and ii) they 
+feed the inflation dynamics, and can endogenously drive the inflation process. For 
+these reasons, it becomes important that the CB acts as a manager of expectations 
+(Woodford 2003). </p>
+
+<p>10 See, for instance, Brainard (1967) for a standard reference and  (2002) and Giannoni (2007) 
+for recent treatments. </p>
+
+<p>I. Salle et al. </p>
+
+<p>2.2.3 Inflation expectations and CB's announcements </p>
+
+<p>We assume an inflation expectation formation mechanism that integrates jointly cred-
+ibility and coordination issues, as in Demertzis and Viegi (2009). 11 We distinguish 
+between two regimes: IT, in which the CB announces to all households the inflation 
+target π T and the radius of tolerance around it +/ − ζ , and non-IT, in which none of 
+these parameters is announced. Unlike Demertzis and Viegi (2009), our ABM explic-
+itly models heterogeneous expectations, and the question of coordination naturally 
+arises. </p>
+
+<p>Under IT, agents assess the credibility they attribute to the CB by evaluating its 
+past performances in terms of inflation over a finite number of past periods, denoted 
+by window. In each period in which past inflation has been contained between 
+the announced range </p>
+
+<p>π T − ζ, π T + ζ </p>
+
+<p>, they consider the CB as successful. If the 
+CB has been successful in x periods over the last window periods, they compute 
+their perceived credibility, denoted by P target , as P target = </p>
+
+<p>x </p>
+
+<p>window ∈ [0, 1]. Each 
+household then determines its inflation expectation as follows: </p>
+
+<p>π e 
+i,t+1 → </p>
+
+<p>U (π T − ζ, π T + ζ ) with probability P target </p>
+
+<p>π t + ξ i with probability 1 − P target 
+(8) </p>
+
+<p>where ξ i is an i.d.d. noise with mean zero and variance σ ξ . The first case in Eq. 8 is in 
+line with the definition of credibility given in Faust and Svensson (2001), as the gap 
+between the inflation target and the average inflation expectations. Our expectations 
+scheme allows for the emergence of a credibility-success loop: the more success-
+ful the CB, the higher P target , the closer to the target inflation expectations, and the 
+more likely is inflation to be contained in the announced range. The reverse is true in 
+the case of a credibility loss. Moreover, the radius of tolerance around the target, ζ , 
+plays an ambivalent role: the wider the radius (i.e. the higher ζ ), the more likely past 
+inflation rates fall within the range, and the higher, ceteris paribus, P target . How-
+ever, the higher the range, the less clear the focal point, and the more heterogeneous 
+agents' expectations. Section 3.2 below illustrates this mechanism in the numerical 
+simulations. 
+The second case of Eq. 8 corresponds to naive (noisy) expectations, 12 that well 
+account for the unanchoring process of inflation expectations when credibility is 
+weak. </p>
+
+<p>Under non-IT, we assume that households use the average inflation rate over the 
+last window periods as a reference point to evaluate inflation performances, instead </p>
+
+<p>11 On the credibility issue, our expectation model shares also common features with Bomfim and Rude-
+busch (2000), Alichi et al. (2009) and Libich (2011). See also Arifovic et al. (2010) for a private inflation 
+expectations formation process that is partially based on adaptive learning and takes the announcement of 
+an inflation target by the central bank into account. 
+12 See De Grauwe (2011) for a comparable mechanism </p>
+
+<p>How transparent about its inflation target... </p>
+
+<p>of the target, because they do not know it. 13 This is the only difference between the 
+two regimes. Each household then determines its inflation expectation as follows: </p>
+
+<p>π e 
+i,t+1 → </p>
+
+<p>U ( ˜ 
+π t − ζ, ˜ 
+π t + ζ ) with probability P target 
+π t + ξ i with probability 1 − P target 
+(9) </p>
+
+<p>where˜π  t is the average inflation over the last window periods. Admittedly, the radius 
+of tolerance ζ under non-IT is not a choice of the CB, and finds a slightly different 
+interpretation than under IT: the radius of tolerance is the tolerance that households 
+use to determine whether inflation has been far from or close to its past average value. 
+The choice of the inflation expectations formation process under non-IT is made 
+for various reasons. First, it allows for a credibility-success loop as under IT, although 
+it does not provide an anchoring device around the target as such (we follow on that 
+point an extension of their model that is suggested by Demertzis and Viegi 2009, p. 
+31). Second, Eq. 9 translates the lack of anchor in the absence of an explicit infla-
+tion target. In our model, if the CB meets its target, the average past inflation remains 
+close to the target, and non-IT resembles IT. However, a series of failures in keeping 
+inflation close to the target pulls average inflation away from the implicit inflation 
+target, and contributes to further deviations of inflation expectations from that tar-
+get. It should be further noted, as illustrated in Section 3.2, that this design of non-IT 
+results in the same amount of heterogeneity in expectations under IT and non-IT by 
+construction (for given values of P target and ζ ), which allows for a fair comparison 
+of their relative performances. Third, as stressed in an experimental study by Roos 
+and Schmidt (2012), past trends of macroeconomic variables are a key determinant of 
+forecasts when laypeople, such as households, are concerned. Eventually, the specifi-
+cation we use translates the Keynesian notion of "market sentiment", which has been 
+modelled in the context of monetary policy by Canzian (2009) or De Grauwe (2011). 
+From the preceding, it ensues that, in our set-up, the benefit from announcing 
+the target mainly arises from the potential anchoring effect on households' infla-
+tion expectations. Other economic effects of transparency have been considered in 
+the literature. We do not take them into consideration as such in this paper however. 
+For example, the role of policy objective announcements as an implicit commit-
+ment device has been stressed in models where the CB has an incentive to create 
+inflation surprises (see, for example, Walsh 1995), which is not the case in the frame-
+work we consider. Furthermore, in our model, households do not rely on interest rate 
+changes to forecast inflation in the absence of an explicit inflation target, so that we 
+cannot address the so-called opacity bias (see Walsh 2010). Finally, in our model, 
+coordination is not made attractive as such, because the utility function depends 
+only on consumption, but households' expectations indirectly influence other house-
+holds' consumption. 14 They have therefore a collective interest in coordinating their </p>
+
+<p>13 We could have considered a noisy target but our focus is on credibility issues of the announcement and 
+the way the CB can use it to manage expectations; that is why we do not want to add issues of clarity, 
+which have been tackled in Salle et al. (2013). 
+14 For instance, if most agents anticipate a rise in inflation, actual inflation will rise next period through 
+the expectation channel. Agents who did not expect that rise may lose purchasing power, both through a 
+misassessment of the real rate of return of their savings and an under-indexation of their reservation wage. </p>
+
+<p>I. Salle et al. </p>
+
+<p>inflation expectations. Coordination could also be assessed with respect to the perfor-
+mance of agents' learning. As strategies γ w 
+i,t and γ k 
+i,t are directly related to individual 
+inflation expectations, one could expect that the social learning mechanism would 
+yield better performances if it takes place in an environment where agents hold 
+comparable beliefs on the future. Coordination could thus favor learning. 
+We now turn to the description of the rest of the model. </p>
+
+<p>2.3 The firm </p>
+
+<p>2.3.1 Production and price setting behavior </p>
+
+<p>When the labor demand of the firm (see Section 2.3.2) meets the labor supply of 
+households in the labor market (see Section 2.5), the rationing mechanism determines 
+the actual quantity of labor (H t ) that the firm hires, and the corresponding wage bill. 
+The firm uses that quantity to produce goods through a standard production function 
+(see, for example, Gali 2008): </p>
+
+<p>Y s 
+t = A t H 1−α </p>
+
+<p>t </p>
+
+<p>(10) </p>
+
+<p>where α ∈ [0, 1[ encompasses decreasing returns, A t is the technology factor. 15 The 
+only production costs of the firm result from the wage bill: </p>
+
+<p>(Y s 
+t ) = </p>
+
+<p>n </p>
+
+
+
+<p>i=1 </p>
+
+<p>h i,t w i,t 
+(11) </p>
+
+<p>and we can compute the nominal aggregate wage level as a weighted average of 
+individual wages, i.e. W t ≡ </p>
+
+<p>(Y s 
+t ) 
+H t </p>
+
+<p>. 
+The firm sets its price P , according to a mark-up μ on the marginal cost, and the 
+resulting price is given by: </p>
+
+<p>P t = 
+(1 + μ) 
+(1 − α) </p>
+
+<p>(Y s 
+t ) 
+Y s </p>
+
+<p>t </p>
+
+<p>(12) </p>
+
+<p>where we have used the property of the production function relating the marginal cost 
+to (1 − α) times the average cost. 16 Price is an increasing function of the production 
+Y s as soon as 0 &lt; α &lt; 1. 
+The rationing mechanism in the goods market (see Section 2.5) determines the 
+quantity that the firm actually sells to households (Y t ), which gives its corresponding 
+profit: </p>
+
+<p>t = P t Y t − (Y s 
+t ) 
+(13) </p>
+
+<p>15 We assume a deterministic natural production level, we set A t = 1, ∀t (the long run value of the 
+technology assumed by Woodford 2003, p. 225). 
+16 Normally, the mark-up is computed over the average cost, and not the marginal cost, but we select 
+here the latter in order to keep the analogy with the elasticity rule of the standard NK model, and the 
+comparability with the DSGE literature in general (see also Rotemberg and Woodford 1999). </p>
+
+<p>How transparent about its inflation target... </p>
+
+<p>2.3.2 Adaptation of the goods supply </p>
+
+<p>The firm behaves in an adaptive way, and updates, in each period, its labor demand 
+strategy H d 
+t . 17 As there is a single firm, it cannot benefit from social learning and 
+can only learn through an individual learning process. We consider a simple adaptive 
+mechanism, much in the spirit of gradient learning (see, for example, Leijonhufvud 
+2006, p. 1631-32 or Delli Gatti et al. 2005). We assume that the firm takes its unsold 
+quantities, if any, as a proxy of the demand it faces, and specify the rule: 18 </p>
+
+<p>If unsold quantities, 
+H d 
+t+1 = H t × (1 − ) 
+Otherwise, 
+H d 
+t+1 = H t × (1 + ) </p>
+
+<p>(14) </p>
+
+<p>where &gt; 0 is a parameter that denotes a (small) adjustment rate. The next period's 
+labor demand is slightly increased compared to the current quantity of labor hired H t 
+in case all goods have been sold, or slightly decreased otherwise. As unsold quantities 
+are a loss on the firm's profit, and profit is increasing with sold quantities, the rule 
+(14) ensures that the adjustment mechanism, while simple, always works into the 
+direction of profit increase. </p>
+
+<p>2.4 Monetary authority </p>
+
+<p>The CB reacts to both inflation and the level of activity, and sets the nominal interest 
+rate i t according to a non-linear Taylor (1993) instrumental rule. 19 </p>
+
+<p>1 + i t = (1 + π T )(1 + r n 
+t−1 ) </p>
+
+<p>
+1 + π t−1 
+1 + π T </p>
+
+<p>φ π 
+1 + u  *  
+1 + u t−1 </p>
+
+<p>φ u </p>
+
+<p>(15) </p>
+
+<p>where π T stands for the inflation target, u  *  for the natural rate of unemployment, and 
+φ π &gt; 0 and φ u &gt; 0 are the reaction coefficients to inflation and unemployment rates. 
+The rule incorporates the unemployment rate, as we are able to derive it explicitly 
+from the model (see also Orphanides and Williams 2007). We assume u  *  = 0 and 
+the CB targets a full employment state. </p>
+
+<p>2.5 Aggregation and dynamics </p>
+
+<p>Markets do not necessarily clear because price and wage strategies are not set a pri-
+ori so as to make agents' strategies mutually consistent. Markets instead confront 
+aggregate supply and aggregate demand according to rationing mechanisms. </p>
+
+<p>17 If we overlook potential rationing, having a labor demand or a good supply strategy is equivalent from 
+the firm's point of view, as labor is the only input (see Eq. 10). Through the mark-up price setting (12), 
+adjusting price is also equivalent to adjusting quantities, so that the firm has actually only one decision-
+making variable, expressed here in terms of labor demand. 
+18 See, for instance, Seppecher (2012) or Assenza et al. (2015) for a similar assumption. 
+19 We consider the non-linear form of the rule rather than the log-linearized version, given the non-linear 
+dynamics of our framework; see Ashraf and Howitt (2012) for a comparable specification. </p>
+
+<p>I. Salle et al. </p>
+
+<p>2.5.1 Labor market </p>
+
+<p>Aggregate demand for labor is the firm's strategy H d 
+t , while aggregate supply is given 
+by: </p>
+
+<p>H s 
+t = </p>
+
+<p>n </p>
+
+
+
+<p>i=1 </p>
+
+<p>h s 
+i,t = n 
+(16) </p>
+
+<p>The two are matched according to a process that is designed to be consistent with 
+the firm aiming at minimizing its production costs: the firm hires households by 
+increasing reservation wages. 20 The aggregate hired labor is then set as: </p>
+
+<p>H t = min(H d 
+t , n) = </p>
+
+<p>n </p>
+
+
+
+<p>i=1 </p>
+
+<p>h i,t 
+(17) </p>
+
+<p>The corresponding unemployment rate is computed as u t = n−H t 
+n . The real wage 
+rate is given by ω ≡ W t </p>
+
+<p>P t </p>
+
+<p>= (1−α) 
+(1+μ) H −α 
+t , decreasing with H . </p>
+
+<p>2.5.2 Goods market </p>
+
+<p>Aggregate goods supply Y s 
+t is given by the production function (10) and the aggre-
+gate goods demand is given by the sum of individual ones (see Eq. 4). The two are 
+confronted according to an efficient rationing mechanism: households are ranked by 
+decreasing goods demand, so that the firm first faces the highest demand. This mech-
+anism stands for the counterpart of the standard assumption of households aiming at 
+maximizing their utility, derived from their consumption. If a household is rationed, 
+it buys bonds b with its remaining cash. Inflation π t is computed as π t = P t −P t−1 </p>
+
+<p>P t−1 </p>
+
+<p>. </p>
+
+<p>2.5.3 Inflation dynamics </p>
+
+<p>We show in Salle et al. (2013) that the Philips curve in our ABM can be made explicit. 
+First, notice that, through Eq. 1, we have: </p>
+
+<p>w i,t = 1 (π e 
+i,t+1 &gt;0) (γ w 
+i,t π e 
+i,t+1 w i,t−1 ) ≥ 0 
+(18) </p>
+
+<p>and, by using the expression of the price (12) and the aggregate labor costs (11), and 
+noticing that H ≡ 
+n 
+i=1 h i , we obtain: </p>
+
+<p>π t ≡ 
+P t 
+P t−1 
+= </p>
+
+<p>t−1 
+− (1 − α) 
+H 
+H t−1 </p>
+
+<p>= </p>
+
+<p>n 
+i=1 w i,t h i,t−1 
+t−1 
++ </p>
+
+<p>n </p>
+
+
+
+<p>i=1 </p>
+
+<p>h i,t 
+H t−1 </p>
+
+<p>
+w i,t−1 
+W t−1 
++ α − 1 </p>
+
+
+
+<p>⇒ π t = π(π e </p>
+
+<p>t+1 
++ </p>
+
+<p>, Y S </p>
+
+<p>t 
++ </p>
+
+<p>) 
+(19) </p>
+
+<p>20 Households are then either fully employed, i.e. h i,t = 1, or fully unemployed, i.e. h i,t = 0, except for 
+the last hired, who can be only partially unemployed i.e. h i,t &lt; 1. </p>
+
+<p>How transparent about its inflation target... </p>
+
+<p>where π e 
+t+1 refers to the average inflation expectation among households, and 
+h i,t ∝ Y S 
+t . In our ABM, the Phillips curve (19) does incorporate nominal 
+rigidities, allowing for real effects of monetary policy in the short run. 
+Figure 1 summarizes the model's dynamics. We now describe the simulation 
+protocol. </p>
+
+<p>3 Model simulations and emerging dynamics </p>
+
+<p>The ABM outcomes are analyzed through a large number of computer simulations 
+that are implemented over different sets of parameter values. In this section, we first 
+describe the method we have adopted to determine these parameter values. We then 
+carry out a first assessment of the mechanisms at play in the ABM on the basis of 
+the emerging dynamics and salient features that arise from the computer simulations. 
+We finally perform an exercise of empirical validation, and show to which extent the 
+ABM is able to account for the stylized facts that are key for the issues covered in 
+this paper. </p>
+
+<p>3.1 Parameter setting and simulation protocol </p>
+
+<p>The structural parameters that underlie the microfoundations of the economy have 
+been set according to standard values in the NK literature (see, notably, Woodford 
+2003). As for the consumption bounds (d and ¯ 
+d), the adjustment rate of the firm , 
+the number of households n and the length of the simulations T , we set their value by 
+relying on results of intensive sensitivity analyses performed on the model to allow </p>
+
+<p>Fig. 1 Summary of the ABM's dynamics </p>
+
+<p>I. Salle et al. </p>
+
+<p>for a first screening of the parameter space. 21 This screening has been performed by 
+following the validation procedure proposed by  (2008) that consists in a suc-
+cessive sub-sampling of parameter values and systemic analyses of the plausibility of 
+emergent dynamics vis-` a-vis the specific research question at hand. 22 This procedure 
+results in a so-called minimal model, i.e., a model that incorporates the minimum set 
+of assumptions and parameters to design consistent mechanisms regarding a specific 
+research question. In particular, we checked whether the choice of specific parame-
+ter values (or ranges of values) did significantly affect or not the dynamics generated 
+at the micro or macro level, and whether the simulation of the model did lead to 
+degenerate patterns that reflect an inconsistent behavior of the agents or the econ-
+omy as a whole. 23 During this step, we specifically observe that i) the size of the 
+macroeconomic variables is plausible, ii) aggregate welfare is increasing and stabi-
+lizes, indicating that learning is efficient, iii) explosive dynamics of real variables are 
+ruled out. Accordingly, we use n = 500 households and T = 800 periods. We further 
+set σ ξ ≡ σ w 
+40 , meaning that the variance of the noise ξ is related to the variance of the 
+proxy for supply shocks σ w (where 40 is a scaling parameter). It is a rather intuitive 
+modelling device: the more unstable the economy (i.e., the bigger the shocks affect-
+ing the inflation rate are), the further from the objective the inflation rate is likely to 
+be and the more difficult it is to stabilize inflation expectations. This assumption is 
+also made for the sake of parsimony in the parameter set. Importantly, this feature 
+is identical under IT or under non-IT, so that the noise in inflation expectations does 
+not vary exogenously under the two regimes. 
+Following that stage, we are left with the determination of the values to be taken 
+by eight parameters, namely window, P mut , P imit , σ d , σ w , φ π , φ u and ζ . It is 
+not a coincidence as those parameters are supposed to be key regarding the inter-
+play between the learning environment, the inflation expectations dynamics and the 
+monetary policy strategy upon which we want to focus. We use a design of experi-
+ment (DoE) 24 to cover the space of those remaining parameters and set their values 
+accordingly. Large sampling methods such as Monte Carlo simulations come indeed 
+at a computational cost if there are numerous parameters with large experiment 
+domains, which is a priori our case. DoE allows us to minimize the sample size 
+under constraint of representativeness. We use the design proposed by Cioppa (2002) 
+and provided by Sanchez (2005), which efficiently combines space-filling properties 
+and the non-correlation criteria between parameter configurations, avoiding multi-
+colinearity issues in the analysis of the results. The design is reported in Table 5 in 
+Appendix A. Each given set of parameter values (i.e., for each configuration or expe-
+rience) is simulated 30 times, in order to account for the non-deterministic nature of </p>
+
+<p>21 Results are not displayed here but the whole validation procedure is detailed in the PhD thesis of the 
+main author, see Salle (2012). 
+22 To the best of our knowledge, it has been only applied to ABMs in economics in Oeffner (2008) and 
+Salle (2012). 
+23 For this reason, we rule out parameter values such that &gt; 0.05, ¯ 
+d &gt; 2 and d &lt; 0.2. Other values of 
+this parameter have been found to have little, if any, influence on aggregate emergent dynamics. 
+24 See, for example, Goupy and Creighton (2007) for an introduction. This method is widely used in 
+computer simulations in areas such as industry, chemistry, computer science, biology, etc. </p>
+
+<p>How transparent about its inflation target... </p>
+
+<p>Fig. 2 Regression tree (based on an ANOVA) of the loss values as a function of the regimes (IT vs. non 
+IT) and the parameters of the DoE given in Table 5 in Appendix A. Only branches that contribute at least 
+to 5% of the variance of the loss values are displayed </p>
+
+<p>the model. The simulation setting is kept the same for IT and non-IT, in order to pro-
+vide a relevant comparison of the outcomes and dynamics of the model over those 
+two regimes. 
+As for the outcomes, we summarize the CB's performances with a usual loss 
+function (see, for example, Svensson 1999): 
+L(π, u) = (π − π T ) 2 + u 2 
+(20) </p>
+
+<p>where the inflation rate π t and the unemployment rate u t are measured for each run 
+as the average over the whole simulation, with a 100 period burn-in phase. </p>
+
+<p>3.2 Emerging dynamics and salient features </p>
+
+<p>We first assess the model outcomes on the basis of a regression tree (see Fig. 2) that 
+reports the main determinants of the values of the loss function over the whole set of 
+simulations implemented under IT and non-IT. 
+The results indicate that the distinction between IT and non-IT matters for the 
+stabilization outcomes obtained by the monetary authorities. However, the stabilizing 
+role of IT appears to be also affected by other parameters, namely the two monetary 
+policy coefficients φ π and φ u , the bandwidth of the range around the target ζ as well 
+as the features of the learning dynamics via the importance of the learning shocks 
+(especially σ w ). 25 In Section 4, we therefore focus on those parameters specifically 
+(thus fixing the other ones) and examine attentively their interplay with the features 
+of IT and non-IT. 
+More precisely, the regression tree (Fig. 2) indicates that an IT regime coupled with a 
+relative large radius (higher than 0.75 %) yields overall the lowest expected average 
+loss (0.085), while an IT regime coupled with a narrow range (no more than 0.75%) 
+yields the highest loss (0.509) in a strongly volatile inflationary environment (i.e. </p>
+
+<p>25 A special case obtains when the number of past observations used to forecast inflation (window) does 
+not exceed five periods (the lower bound of the interval we have retained). This is the case in three among 
+the thirty-three configurations. In that case, the expected loss is high, probably because the expectations 
+formation process is very reactive to changes in the inflation process. </p>
+
+<p>I. Salle et al. </p>
+
+<p>with a higher than 0.32 value of σ w ). Those two results suggest that the magnitude of 
+the radius bears a strong influence on the stabilization performance of an IT regime, 
+which, however, depend also on the volatility arising from the learning environment. 
+To go further into the assessment of the role of the target range, Fig. 3 plots the 
+distributions of various variables of interest for every value of ζ retained in the DoE. 
+This is done for both the IT and non-IT cases. As Fig. 3 clearly shows, the role played 
+by the radius under IT hinges on a trade-off between a coordination and a credibility 
+motive. Under IT, the value of the radius comes along with a compromise between 
+providing a clear signal in order to coordinate heterogeneous individual expectations 
+(with a narrow range) on the one hand, and allowing for a less tightly defined objec-
+tive to be met (with a wide range) that could enhance credibility, on the other hand. 
+Which aspect of this compromise dominates for the stabilization performances under 
+IT does also depend on the volatility in the micro behavior created by the learning 
+environment. This point will be more particularly investigated in Section 4. By look-
+ing at the inflation gap as a function of ζ , we see that this trade-off stands out less 
+clearly under a non-IT regime. 
+One of the main objectives of this section is to identify the main mechanisms that 
+underlie the impact of IT on the economy for different parameter configurations. We 
+establish two main results. 
+First, the stabilization benefits associated with IT come along with the emergence 
+of a credibility-success loop. Figure 4 illustrates this mechanism in experiment 13. 
+This experiment has been chosen because it corresponds to a configuration where 
+IT overperforms non-IT, as depicted in Fig. 2 (i.e. window&gt; 5 and ζ &gt; 0.75%). 
+Under IT, we observe that inflation expectations are very well anchored to the tar-
+get, which does help the monetary authorities to keep the inflation rate in the range. 
+As a consequence, the credibility can be maintained at a high level, which positively </p>
+
+<p>0.0025 
+0.0075 
+0.0125 
+0.0175 
+−0.1 0.0 0.1 0.2 0.3 </p>
+
+<p>mean e </p>
+
+<p>0.0025 
+0.0075 
+0.0125 
+0.0175 </p>
+
+<p>0.00000 </p>
+
+<p>0.00010 </p>
+
+<p>IT </p>
+
+<p>var e </p>
+
+<p>0.0025 
+0.0075 
+0.0125 
+0.0175 
+0.0 0.2 0.4 0.6 0.8 1.0 </p>
+
+<p>probtarget </p>
+
+<p>0.0025 
+0.0075 
+0.0125 
+0.0175 </p>
+
+<p>−0.05 </p>
+
+<p>0.05 </p>
+
+<p>0.15 </p>
+
+<p>mean e </p>
+
+<p>0.0025 
+0.0075 
+0.0125 
+0.0175 </p>
+
+<p>0e+00 </p>
+
+<p>2e−04 </p>
+
+<p>4e−04 </p>
+
+<p>non −IT </p>
+
+<p>var e </p>
+
+<p>0.0025 
+0.0075 
+0.0125 
+0.0175 
+0.0 0.2 0.4 0.6 0.8 1.0 </p>
+
+<p>probtarget </p>
+
+<p>Fig. 3 The role of the radius around the inflation target under IT and non IT. The boxplots depict the 
+distribution of the average inflation expectations among households(mean (π e ), left panel), their variance 
+(var (π e ), middle panel) and the credibility measure prob target (right panel) for the different values of 
+the range ζ considered, in the IT regime (top panel) and in the non-IT regime (bottom panel), over the 
+whole simulations (33 × 30 = 990 runs per regime). Each data point is measured every 50 periods, i.e. 
+t = 100, 150, ..., 750, 800 </p>
+
+<p>How transparent about its inflation target... </p>
+
+<p>Fig. 4 Dynamics in chosen experiments from the DoE given in Table 5. From the top-left to the bottom-
+right, evolution of the average inflation expectations, the realized inflation, the credibility measure P target , 
+households' average strategies γ d and γ w and the output gap (measured as the gap to the full-employment 
+output level). Each variable is averaged over the 30 replications of each experiment </p>
+
+<p>feeds back into the formation of expectations. What is important, given the struc-
+ture of the ABM, is to observe that the anchoring dynamics of expectations shows 
+a stabilising interplay with the learning process of the agents at the micro-level. </p>
+
+<p>I. Salle et al. </p>
+
+<p>Higher values for coefficients of substitution regarding the consumption channel of 
+monetary policy (γ d ) are found to emerge over time under IT (compared to non-IT). 
+This situation clearly favors the transmission of monetary policy through the real 
+interest rate, and hence the stabilization of inflation, as coefficients γ d 
+i,t directly mea-
+sure the reactivity of individual consumption decisions to the level of the real interest 
+rate (see Eq. 5). In turn, this configuration backs the anchoring process of the infla-
+tion expectations to the target. As for the indexation coefficients </p>
+
+<p>
+γ w </p>
+
+<p>i,t </p>
+
+<p>
+, they stabilise 
+at a level less than one, which rules out emergent self-reinforcing price-wage infla-
+tion spirals. Therefore, the expectation channel reinforces the stabilising effects of 
+the inflation expectations anchoring on the inflation process itself. 
+Our second result shows that IT does not necessarily allow for the emergence of 
+a credibility-success loop, so that a non-IT regime can overperform an IT regime. 
+Figure 4 illustrates this problem using Experiment 3. This experiment is character-
+ized by a strong volatility of the learning process regarding the wage indexation 
+coefficients (σ w &gt; 0.32), which directly impinges on the inflation process (and thus 
+can be assimilated to a cost-push shock). Moreover, the radius around the target is 
+low (ζ &lt; 0.75%). According to the regression tree Fig. 2, under that configuration, a 
+non-IT regime over-performs an IT regime. 
+As Fig. 4 lets it clearly appear, inflation lies well above the target under both 
+regimes at the beginning of the simulations. We observe more volatile substitution 
+coefficients under IT (than under non-IT), which are, moreover, lower, and can be 
+even negative. In that case, the income effect dominates regarding the impact of inter-
+est changes on consumption, which means that the usual consumption channel of 
+monetary policy breaks down. In such a context, and even more if the radius of toler-
+ance around the target is narrow, the CB quickly loses its credibility and the inflation 
+expectations become unanchored. This unanchoring does in turn amplify the volatil-
+ity of the learning behavior which feeds back negatively onto the stabilization of 
+the inflation process, preventing the CB from benefiting from the credibility/success 
+loop. This explains why, under IT, the CB fails to bring back inflation within the 
+targeted range. 
+By contrast, under the non-IT regime, the monetary authorities manage to drive 
+over time inflation expectations within the range, and the loss values are limited. 
+The overperformance of non-IT can be explained as follows: as the reference 
+point of household' expectations under non-IT is the average of past inflation, it 
+works as a moving anchor which, under experience 3, decreases along the disin-
+flationary path implemented by the CB. This allows the channelling of inflation 
+expectations, despite a narrow range of tolerance ζ . By contrast, under IT, inflation 
+expectations are only driven by naive expectations that extrapolate the decreasing 
+path of inflation along the disinflationary path. At the micro level, the variability 
+of agents' behavior appears much lower under non-IT than under IT, despite the 
+fact that the shocks σ d and σ w are the same. This means that the learning process 
+stabilise the emerging substitution coefficients γ d 
+i,t at higher levels, with much less 
+volatility, under non-IT than under IT, which makes the consumption channel more 
+powerful. Indexation coefficients are also saliently less heterogeneous under non-
+IT, and stabilizes under unity, which contributes to stabilizing inflation close to the 
+target. </p>
+
+<p>How transparent about its inflation target... </p>
+
+<p>As a final insight drawn from the overview exercise, we focus on the consump-
+tion and the expectation channels such as they emerge in the ABM from the micro 
+behavior of the households. The top panel of Fig. 5 shows the relationship between 
+the average indexation coefficient γ w among households and the gap between aver-
+age expected inflation rate and the target, under IT (left panel) and non-IT (right 
+panel). The general pattern is very similar under the two regimes. It shows a structural 
+change when indexation coefficients increase beyond unity: if lower than unity, infla-
+tion expectations are stabilized around the target (the gaps are scattered around zero), 
+while, when increased beyond unity, an increasing relationship emerges between the 
+expected inflation and the indexation coefficients. This depicts potentially explo-
+sive wage-price inflation spirals. This feature emerges from the learning process: the 
+higher the expected inflation rate, the more costly in terms of purchasing power for 
+the households not to index their reservation wage on the expected inflation. This in 
+turn amplifies the rise in inflation, and inflation expectations are driven away from 
+the target. It seems that, under IT, expectations remain anchored even if indexation 
+coefficients rise beyond unity (but not a too high level) more often than under non-IT. 
+But this difference concerns few observations. 
+The bottom panel of Fig. 5 reports the average consumption rate d i,t among house-
+holds as a function of expected real interest rate. Under IT, it is clear than negative real 
+interests rate yield to higher than unity consumption rate (meaning that households 
+are debtors), while positive interest rates drive consumption rate towards the lower 
+bound b, as households take advantage of the higher return on savings to save, and 
+decrease their current consumption. This translates into positive coefficients γ d 
+i,t (see 
+Eq. 5), and indicates that the consumption channel of monetary policy is operational. 
+Under non-IT, we observe a similar, even if less clear-cut, pattern: more observations 
+indicate that households have a lower-than-unity (resp. higher than unity) consump-
+tion rate even if real interest rates are expected to be negative (resp. positive) under </p>
+
+<p>Fig. 5 Micro-founded expectations and consumption channels in the ABM. Top panel: average γ w among 
+households against average expected inflation gap (mean(π e ) − π T ) in the IT regime (left) and in the 
+non-IT regime (right). Bottom panel: average coefficient d among households against average expected 
+inflation gap (mean(π e ) − π T ) in the IT regime (left) and in the non-IT regime (right). Each variable is 
+measured every 50 periods, i.e. t = 100, 150, ..., 750, 800 in each run of the DoE given by Table 5 </p>
+
+<p>I. Salle et al. </p>
+
+<p>Table 1 Parameter values under the baseline scenario </p>
+
+<p>n 
+T 
+P imit 
+P mut 
+σ d 
+φ u 
+φ π 
+π T </p>
+
+<p>500 
+800 
+0.1 
+0.02 
+0.15 
+0.2 
+1.5 
+0.02 </p>
+
+<p>
+α 
+μ 
+w i n d o w 
+σ W 
+σ ξ 
+¯ 
+d 
+d </p>
+
+<p>0.01 
+0.25 
+0.1 
+20 
+0.15 
+σ W /40 
+1.5 
+0.5 </p>
+
+<p>non-IT than under IT. Again referring to the consumption rule (5), this translates into 
+more negative γ d 
+i,t coefficients under non-IT than under IT, meaning that the con-
+sumption channel is occasionally less effective under non-IT than under IT. However, 
+it should be noted that Fig. 5 pools all observations of the DoE Table 5 together, 
+embedding a variety of situations, as illustrated by Experiments 3 and 13 in Fig. 4. 
+As a conclusion, the overview of the model performances indicates that the infla-
+tion target announcement is not an unconditionally powerful tool to stabilise the 
+economy. This depends on the volatility stemming from the learning environment, 
+the radius of tolerance around the target and the monetary policy rule. We provide a 
+detailed examination of how those elements interact in Section 4. </p>
+
+<p>3.3 Empirical validation of the model </p>
+
+<p>We now define a baseline scenario in which we fix the values of the parameters 
+for which the regression tree (see Fig. 2) does not report any significant influence 
+on monetary policy performance. The parameter values are given in Table 1. We 
+use standard values in the learning literature for the probabilities of imitation and 
+mutation (see e.g. Lux and Schornstein 2005) and for monetary policy (see e.g. Taylor 
+1993). 
+In line with recent developments in ABM, 26 we confront the baseline sce-
+nario to selected related empirical regularities. As the paper focuses on the interplay 
+between inflation expectations, CB's credibility and macroeconomic stabilization, 
+the following empirical features have been focused on regarding the assessment 
+of the predictive properties of the ABM. Figure 6 displays the joint evolution of 
+inflation and inflation expectations, and statistical properties of inflation distribu-
+tion in New Zealand between 1988 and 2012, and in the UK between 1997 and 
+2013. Those countries have been chosen because they have been pioneers in infla-
+tion targeting (implemented in 1989 in New Zealand and in 1992 in the UK 27 ), 
+and they have been conducting surveys of inflation expectations since then (we 
+use the J6 survey of inflation expectations available on the RBNZ website and 
+the GfK NOP Inflation Attitudes survey available on the Bank of England's 
+website). </p>
+
+<p>26 See, notably, Dosi et al. (2010), Lengnick (2013), Assenza et al. (2015). 
+27 An inflation target was first announced in September 1992 in the UK, but the operational responsibility, 
+which implies greater independence and credibility was given to the Bank of England in May 1997. </p>
+
+<p>How transparent about its inflation target... </p>
+
+<p>New Zealand data (%) </p>
+
+<p>correlation: 0.875 
+p−value (Pearson test): 0.0000 </p>
+
+<p>0 </p>
+
+<p>0.03 </p>
+
+<p>0.06 </p>
+
+<p>0.09 </p>
+
+<p>4 
+Q 
+2 
+1 
+0 
+2 
+2 
+Q 
+0 
+0 
+0 
+2 
+1 
+Q 
+8 
+8 
+9 
+1 </p>
+
+<p>inflation 
+inflation expectations </p>
+
+<p>targeted range </p>
+
+<p>Inflation </p>
+
+<p>skewness : 1.535 adj. kurtosis : 2.082 
+p−value (Shapiro−Wilk test): 0.0000 </p>
+
+<p>0.00 
+0.02 
+0.04 
+0.06 
+0.08 </p>
+
+<p>0 </p>
+
+<p>5 </p>
+
+<p>10 </p>
+
+<p>15 </p>
+
+<p>Credibility index </p>
+
+<p>correlation with inflation gap: −0.54 
+p−value (Pearson test): 0.0000 </p>
+
+<p>0.0 
+0.2 
+0.4 
+0.6 
+0.8 
+1.0 </p>
+
+<p>0 </p>
+
+<p>1 0 </p>
+
+<p>2 0 </p>
+
+<p>3 0 </p>
+
+<p>4 0 </p>
+
+<p>5 0 </p>
+
+<p>6 0 </p>
+
+<p>UK data (%) </p>
+
+<p>correlation: 0.825 
+p−value (Pearson test): 0.0000 </p>
+
+<p>0 </p>
+
+<p>0.02 </p>
+
+<p>0.04 </p>
+
+<p>0.06 </p>
+
+<p>4 
+Q 
+5 
+0 
+0 
+2 
+2 
+Q 
+7 
+9 
+9 
+1 </p>
+
+<p>inflation 
+inflation expectations </p>
+
+<p>targeted value </p>
+
+<p>Inflation </p>
+
+<p>skewness : 0.9622 adj. kurtosis : 0.2344 
+p−value (Shapiro−Wilk test): 0.0002 </p>
+
+<p>0.00 
+0.01 
+0.02 
+0.03 
+0.04 
+0.05 </p>
+
+<p>0 </p>
+
+<p>2 </p>
+
+<p>4 </p>
+
+<p>6 </p>
+
+<p>8 </p>
+
+<p>1 0 </p>
+
+<p>1 2 </p>
+
+<p>Credibility index </p>
+
+<p>correlation with inflation gap: −0.682 
+p−value (Pearson test): 0.0000 </p>
+
+<p>0.0 
+0.2 
+0.4 
+0.6 
+0.8 
+1.0 </p>
+
+<p>0 </p>
+
+<p>5 </p>
+
+<p>1 0 </p>
+
+<p>1 5 </p>
+
+<p>Fig. 6 Empirical data of two inflation targeting countries </p>
+
+<p>Three stylized facts are particularly relevant for our purpose. 28 First, inflation 
+and inflation expectations are strongly and positively correlated, suggesting the pre-
+dominance of the expectation channel (see also Woodford 2003). Second, inflation 
+is characterized by a non-normal distribution with fat tails: the distribution displays 
+excess kurtosis, indicating that values far from the mean are more frequent than under 
+a normal distribution, and the distribution is right-skewed, meaning that inflation 
+rates are more often strongly higher than strongly lower than the average (see also 
+De Grauwe 2012 for a comparable analysis). Third, we compute an index of inflation 
+target credibility for those two countries, in line with Faust and Svensson (2001)'s 
+definition of credibility as negatively related to the distance between agents' inflation 
+expectations and the CB's announced target. 29 In the ABM, credibility is modelled </p>
+
+<p>28 We have also shown that inflation time series in our model display a significant autocorrelated pattern. 
+This result sounds natural as the micro behavioral rules in the ABM prescribe to adjust past behavior, 
+which by construction involves inertia in the model dynamics. Those additional results are available upon 
+request. 
+29 More precisely, we use de Mendonca (2007) credibility index, that accounts for the range of tolerance 
+around the target: </p>
+
+<p>credibility index = </p>
+
+<p>⎧ 
+⎪ ⎨ </p>
+
+<p>⎪ ⎩ </p>
+
+<p>1 
+i f E(π) = π T 
+1 − E(π)−π T </p>
+
+<p>ρ </p>
+
+<p>if π T − ρ ≤ E(π) ≤ π T + ρ 
+0 
+i f E(π) &gt; π T + ρ or E(π) &lt; π T − ρ </p>
+
+<p>(21) </p>
+
+<p>I. Salle et al. </p>
+
+<p>Table 2 Simulated data statistics, average over 100 runs, 800 periods, discarding the 100th first periods 
+(in order to rule out the effects of initialization) </p>
+
+<p>cor(π, π e ) 
+skewness (π ) 
+kurtosis (π ) 
+cor(credibility, π − π T ) </p>
+
+<p>ABM 
+mean 
+0.923 
+0.711 
+1.57 
+−0.384 </p>
+
+<p>(baseline 
+t-test, H 0 : 
+&gt; 0 
+mean &lt; 0 </p>
+
+<p>scenario) 
+p-value 
+0.0000 
+0.0000 
+0.0119 
+0.0000 </p>
+
+<p>UK (1997Q2-2013Q1) 
+0.825 
+0.9622 
+0.2344 
+−0.682 </p>
+
+<p>NZ (1987Q1-2012Q4) 
+0.875 
+1.535 
+2.082 
+−0.54 </p>
+
+<p>as the fraction of agents who believe that inflation will be contained in the range, 
+and is not directly comparable to the values of de Mendonca (2007) index. Never-
+theless, both measurements have the same interpretation: credibility varies between 
+0 (no credibility) and 1 (full credibility), and they are sufficient to highlight the 
+third empirical regularity under interest: credibility and inflation performance appear 
+highly correlated, lower credibility leading to a higher inflation gap. 
+We then run 100 replications of the baseline scenario, the calibration of 
+which is given in Table 1. Results are reported in Table 2. Well in tune with the pre-
+vious empirical findings, our model significantly reproduces the correlation between 
+expectations and inflation, and the non-normal distribution of inflation, both excess 
+kurtosis and right-skewness. Importantly, we are able to provide a comprehensive 
+explanation of these findings within the model, all the more as this model is also able 
+to account for the strong negative correlation between inflation target credibility and 
+inflation gap. 
+Finally, it should be noted that non-normality is an emergent property of the 
+model; we do not assume it beforehand. In our model, volatility results from the 
+learning shocks, which are obtained using normal draws, but the non-linear and 
+decentralized nature of our model leads to non-linear aggregate dynamics following 
+these normal disturbances. 
+We conclude that our ABM is able to account for the stylized facts that are central 
+to our research question. </p>
+
+<p>4 Optimal monetary policy under IT </p>
+
+<p>Section 3 shows that the merits of IT are contingent upon the level of volatility con-
+veyed by the learning behavior of agents. We now focus on this issue, and distinguish 
+various environments in terms of macroeconomic volatility so to analyse optimal 
+monetary policy in such configurations. We can characterize those environments </p>
+
+<p>We apply the same index to both countries to make the comparison easier, although the UK does not 
+announce a range around the target. However, an implicit range of ±1% may prevail, as the Governor is 
+held to account through an open letter to the Chancellor if the target is missed by more than 1%. </p>
+
+<p>How transparent about its inflation target... </p>
+
+<p>using ranges of values for parameters σ d and σ w . We first define a stable environ-
+ment by setting σ d = σ w = 0.05. We then consider two levels of model uncertainty 
+-a moderate level, by setting σ d = 0.25, and a high level by setting σ d = 0.4 -as 
+well as two levels of inflationary shocks -a moderate one with σ w = 0.25 and a 
+strong one with σ w = 0.4. 30 When unchanged, the other parameters are kept at their 
+baseline values, reported in Table 1. We measure the CB's performance with a loss 
+function as given in Eq. 20. The entire methodology we use to map the loss func-
+tion values to the monetary policy parameters in our non-linear ABM is detailed in 
+Appendix B, and is based on Roustant et al. (2010) and Salle and Yıldızo˘ glu (2014). </p>
+
+<p>4.1 Transparency, variability and optimal monetary policy rule </p>
+
+<p>We first characterize, both under IT and non-IT, the best monetary policy strategies 
+(coefficients φ π and φ u ) prevailing in the stable scenario, and in the alternative con-
+figurations of shocks. In each of those configurations, we alternatively retain two 
+radius levels, which correspond to either a price stability objective as a single point 
+(ζ = 0.1%), or as a range (ζ = 1%). Results are reported in Table 3, that shows the 
+optimal coefficients φ  *  
+π and φ  *  
+u as well as the corresponding minimum estimated loss 
+L  *  . 
+Table 6 in Appendix A gives the design of experiments of the φ π and φ u values 
+that we have used to estimate and validate the kriging metamodels that underlie our 
+quantitative analysis, and Table 8 in Appendix B reports the details of the estimation. 
+In the stable environment, an IT regime with a relatively broad range (ζ = 1%) 
+overperforms a non-IT strategy. In the absence of adverse shocks, the CB may bene-
+fit from the credibility/success loop and stabilize inflation expectations and inflation. 
+Nevertheless, with a very tight objective (ζ = 0.1%), credibility and success can-
+not be ensured, the IT regime loses its attractiveness and its performance lies in the 
+same range as the ones obtained under a non-IT regime. The benefit that can be 
+reaped from announcing a vague objective have been notably emphasized by Stein 
+(1989) and Garfinkel and Oh (1995), but in a theoretical framework that incorporates 
+time inconsistency issues. In such a setting, the CB can create surprise inflation by 
+announcing a wide range, which allows it to depart from the target without losing 
+its credibility. In our model, the CB has no incentive to create inflation surprises but 
+the learning environment may cause deviations of inflation and unemployment from 
+their targets and put the CB's credibility at risk. 
+We interpret the values of the optimal rule coefficients in terms of a trade-off 
+between the two objectives of the CB. As long as the target is credible, expectations 
+are anchored, and movements of inflation reflect changes in production (cf. second 
+term of Eq. 19). In this case, the two objectives of the CB move in the same direction, 
+and reacting to the deviation of one from its target simultaneously moves the other 
+one towards its target. In this case, there is no trade-off between the two objectives </p>
+
+<p>30 Those values belong to the range that has been analysed in Section 3, and, as shown below in the results 
+of the numerical simulations, those σ d and σ w values are high enough to imply significant deviations from 
+the stable case σ d = σ w = 0.05 in terms of loss function values. </p>
+
+<p>I. Salle et al. </p>
+
+<p>Table 3 Optimal monetary policy (φ  *  
+π , φ  *  
+u ) and associated minimum loss L  *  , based of the optimization 
+of the kriging model of the CB's loss as a function of φ π and φ u </p>
+
+<p>ζ = 0.001 -IT 
+ζ = 0.01 -IT 
+ζ = 0.001 -Non-IT 
+ζ = 0.01 -Non-IT </p>
+
+<p>Stable scenario: {σ w , σ d } = {0.05, 0.05} </p>
+
+<p>φ  *  </p>
+
+<p>π </p>
+
+<p>2.66 
+4 
+4 
+2.91 </p>
+
+<p>φ  *  </p>
+
+<p>u </p>
+
+<p>0.117 
+0 
+0 
+0 </p>
+
+<p>L  *  
+0.0129 
+0.0018 
+0.0061 
+0.0162 </p>
+
+<p>Moderate model uncertainty: {σ w , σ d } = {0.05, 0.25} </p>
+
+<p>φ  *  </p>
+
+<p>π </p>
+
+<p>4 
+0 
+4 
+3 . 8 </p>
+
+<p>φ  *  </p>
+
+<p>u </p>
+
+<p>0 
+2 
+0.97 
+1.49 </p>
+
+<p>L  *  
+0.0137 
+0.008 
+0.011 
+0.0142 </p>
+
+<p>Strong model uncertainty: {σ w , σ d } = {0.05, 0.4} </p>
+
+<p>φ  *  </p>
+
+<p>π </p>
+
+<p>4 
+0 
+2.31 
+2.79 </p>
+
+<p>φ  *  </p>
+
+<p>u </p>
+
+<p>0 
+1.94 
+0.82 
+0.14 </p>
+
+<p>L  *  
+0.0172 
+0.0123 
+0.0179 
+0.0284 </p>
+
+<p>Strong model uncertainty and moderate inflationary shocks: {σ w , σ d } = {0.25, 0.4} </p>
+
+<p>φ  *  </p>
+
+<p>π </p>
+
+<p>0.68 
+1.21 
+4 
+4 </p>
+
+<p>φ  *  </p>
+
+<p>u </p>
+
+<p>1.2 
+0.32 
+0 
+1.49 </p>
+
+<p>L  *  
+0.092 
+0.0742 
+0.0252 
+0.0376 </p>
+
+<p>Moderate inflationary shocks: {σ w , σ d } = {0.25, 0.05} </p>
+
+<p>φ  *  </p>
+
+<p>π </p>
+
+<p>4 
+4 
+2.08 
+2.98 </p>
+
+<p>φ  *  </p>
+
+<p>u </p>
+
+<p>0 
+0 
+1.69 
+0.03 </p>
+
+<p>L  *  
+0.072 
+0.041 
+0.022 
+0.025 </p>
+
+<p>Strong inflationary shocks: {σ w , σ d } = {0.4, 0.05} </p>
+
+<p>φ  *  </p>
+
+<p>π </p>
+
+<p>4 
+2.68 
+4 
+3.74 </p>
+
+<p>φ  *  </p>
+
+<p>u </p>
+
+<p>2 
+1.22 
+1.36 
+1.21 </p>
+
+<p>L  *  
+0.0697 
+0.0572 
+0.0408 
+0.0487 </p>
+
+<p>Strong inflationary shocks and moderate model uncertainty: {σ w , σ d } = {0.4, 0.25} </p>
+
+<p>φ  *  </p>
+
+<p>π </p>
+
+<p>2.87 
+2.66 
+3.29 
+2.84 </p>
+
+<p>φ  *  </p>
+
+<p>u </p>
+
+<p>0.75 
+0 
+0.4 
+0.6 </p>
+
+<p>L  *  
+0.08 
+0.075 
+0.0393 
+0.0374 </p>
+
+<p>Moderate inflationary shocks and model uncertainty: {σ w , σ d } = {0.25, 0.25} </p>
+
+<p>φ  *  </p>
+
+<p>π </p>
+
+<p>2.38 
+0.68 
+4 
+3.23 </p>
+
+<p>φ  *  </p>
+
+<p>u </p>
+
+<p>1.2 
+1.85 
+0 
+0 </p>
+
+<p>L  *  
+0.0484 
+0.0472 
+0.045 
+0.029 </p>
+
+<p>of the CB, and the optimal monetary policy prescribes a one-sided solution (with 
+either φ  *  
+π or φ  *  
+u being zero). As the expectation channel plays a strongly dominant 
+role in our ABM, it favors the role played, when credible, by the inflation target 
+as an anchoring device under IT, which does then act as a second monetary policy 
+instrument that stabilizes inflation (see Svensson 2010 for a similar interpretation). </p>
+
+<p>How transparent about its inflation target... </p>
+
+<p>Monetary policy reaction to inflation can become redundant, which can explain why 
+the optimal reaction to inflation is zero in some cases under IT with a wide range. 31 
+By contrast, if expectations become unanchored, they drive inflation away from 
+the target (cf. first component of Eq. 19), and movements in inflation no longer reflect 
+changes in production. In this case, a trade-off arises between stabilizing inflation 
+and the level of activity. The optimal monetary policy is then likely to be a two-sided 
+solution, according to which the CB has to react to both objectives. 
+Introducing higher variability in the consumption channel (i.e. increasing σ d ) dete-
+riorates the performance of the CB, across all regimes. For instance, under IT with a 
+wide range, the loss value of the CB is more than four times higher when σ d = 0.25 
+(L  *  = 0.008) than when σ d = 0.05, and almost eight times larger when σ d = 0.4 
+(L  *  = 0.0123). Following our interpretation of the optimal coefficients in terms of 
+trade-off, model uncertainty does not create a trade-off between the two objectives 
+of the CB under IT, as the CB optimally adopts a one-sided reaction. With a widely 
+defined objective (ζ = 1%), the credibility-success loop stabilize inflation expecta-
+tions better than with a narrow objective (ζ = 0.1%), and the CB should only react 
+to deviations of unemployment. 
+Overall, in a moderate or high degree of uncertainty concerning the real trans-
+mission channel of monetary policy, an IT strategy slightly overperforms a non-IT 
+strategy, but only if it is implemented with a wide range (ζ = 1%). With a tight 
+objective (i.e. ζ = 0.1%), loss values are fairly the same as under non-IT. 
+Under inflationary shock dominance (i.e. moderate or high σ w ), macroeconomic 
+outcomes strongly deteriorate. As explained in Section 2.2.3 (see, also, Eq. 19), this 
+kind of volatility directly leads to variability in the inflation process. The CB is there-
+fore highly likely to miss its inflation objective, and lose its credibility. Consequently, 
+expectations get unanchored. Inflation becomes mostly driven by naive expectations, 
+and is no more in line with the aggregate demand stance. This phenomenon creates a 
+trade-off between the CB objectives. This trade-off translates into the optimal mon-
+etary policy reactions, which imply a strong two-sided reaction to both inflation and 
+the level of activity -see, also, Alichi et al. (2009) for a similar analysis in the pres-
+ence of cost-push shocks. Accordingly, optimal monetary policy implies, as soon as 
+inflationary shocks are strong enough (i.e. for σ w = 0.4), a strong reaction to both 
+inflation and unemployment. In this case, it is clear that a non-IT strategy outperforms 
+an IT regime. The worst performances are obtained under IT with a tight objective: 
+the loop between credibility and success is strongly impaired, and loss values are 
+much lower if the CB does not announce its target than under IT. 
+If both model uncertainty and inflationary shocks coexist, again, performances 
+deteriorate compared to the cases with only one type of shock (i.e. either σ w &gt; 0.05 
+or σ d &gt; 0.5), and non-IT outperforms IT, especially when accompanied by a tight </p>
+
+<p>31 It should be noted that the dynamics arising from the ABM cannot be exposed to determinacy issues, 
+as in the RE models, as ABMs simulate trajectories that are multiple by nature. Moreover, the hypotheses 
+underlying the construction of our ABM rule out the possibility of sunspot equilibria, as inflation expec-
+tations only depend on realized past inflation. Consequently, our results should not be compared as such 
+to the ones stressing the necessity of complying with the Taylor principle in the related literature on NK 
+models (see, e.g. Bullard and Mitra 2002). </p>
+
+<p>I. Salle et al. </p>
+
+<p>objective. The trade-off between the two objectives seems to be mitigated under non-
+IT as long as the two shocks are moderate (i.e. in the case where σ w = σ d = 0.25, 
+the optimal reaction under non-IT is a one-sided strategy). 
+Finally, in all the cases we have considered, we note that the optimal monetary 
+policy rule is always an aggressive one. This result goes along the lines of previous 
+statements about optimal monetary policy under uncertainty (see Schmidt-Hebbel 
+and Walsh 2009 for a review). Model uncertainty, i.e. uncertainty concerning the 
+parameters that depict the transmission mechanisms of monetary policy, character-
+izes our environment. It is a multiplicative uncertainty case, as shocks on agents' 
+behavior translate to inflation and economic activity in a non-linear way. 32 There is 
+no consensual answer to the question of optimal monetary policy in such a context. 
+The conservatism principle first established by Brainard (1967) prescribes a mod-
+erate rule. However, when shocks and parameters are correlated, as it is the case 
+in our model, the Brainard principle does not hold. Other contributions call for an 
+aggressive rule under other cases of "Brainardian" uncertainty, for example when 
+the CB cannot accurately estimate how inflation responds to inflation expectations 
+(see  2002). Moreover, when radical uncertainty surrounds the economic 
+model and is tackled through the tools of robust control theory, optimal monetary pol-
+icy rules are hawkish ones (Giannoni 2007), especially when the CB cannot identify 
+which parameters are uncertain (Tetlow and von zur Muehlen 2001). We also con-
+clude in favor of aggressive rules under model uncertainty, which primarily stems, in 
+our case, from learning. </p>
+
+<p>4.2 Can partial announcements overperform pure IT or non-IT regimes? </p>
+
+<p>Some contributions to the debate about the optimal degree of transparency have 
+analysed partial announcements (see, among others, Cornand and Heinemann 2008 
+and Walsh 2009). In those works, it is assumed that only a fraction P ∈ [0, 1] of 
+agents receives the CB's signal, i.e. the so-called "degree of publicity" P can be 
+lower than one. According to Cornand and Heinemann (2008) this is the case when 
+the CB chooses to provide news only in certain communities, or in a language that 
+is understood only by some. Furthermore, public announcements are in general 
+released through media, but each agent acknowledges a certain medium only with 
+some probability, so that a CB can choose the degree of publicity by selecting 
+appropriate media for publication. Agents may also have limited ability to process 
+information, or may face costs to acquire it, so that an immediate release does not 
+necessarily turn out to be incorporated into all agents' decisions. Partial dissemi-
+nation of precise public information may be an optimal communication strategy in 
+combining the positive effects of valuable information for the agents who receive it 
+with a confinement of the threat of overreaction by limiting the number of receivers </p>
+
+<p>32 In the case of multiplicative uncertainty, shocks impact the parameters of the model, and the noise is 
+propagated in a multiplicative way with the change in the variables under concern, in contrast to the 
+additive (uncertainty) case, in which shocks enter the model as a term that is added to the model equations. </p>
+
+<p>How transparent about its inflation target... </p>
+
+<p>Table 4 Optimal announcement policy (degree of publicity P  *  and range ζ  *  ) and associated minimum 
+loss L  *  , based of the optimization of the kriging model of the CB's loss as a function of ζ and P (φ π = 1.5, 
+φ u = 0.5) </p>
+
+<p>{σ w , σ d } = {0.05, 0.05} {σ w , σ d } = {0.25, 0.05} {σ w , σ d } = {0.4, 0.05} {σ w , σ d } = {0.4, 0.25} </p>
+
+<p>ζ  *  0.0068 
+0.0035 
+0.0064 
+0.0029 </p>
+
+<p>P  *  0.36 
+0.91 
+0.51 
+0.6 </p>
+
+<p>L  *  0.0015 
+0.0465 
+0.0522 
+0.0533 </p>
+
+<p>{σ w , σ d } = {0.05, 0.25} {σ w , σ d } = {0.05, 0.4} {σ w , σ d } = {0.25, 0.4} {σ w , σ d } = {0.25, 0.25} </p>
+
+<p>ζ  *  0.01 
+0.009 
+0.0051 
+0.0089 </p>
+
+<p>P  *  0.91 
+0.65 
+0.45 
+0.87 </p>
+
+<p>L  *  0.0107 
+0.0276 
+0.0444 
+0.0413 </p>
+
+<p>(Cornand and Heinemann 2008). Walsh (2007b) also shows that the optimal degree 
+of economic transparency depends on the existence of cost-push or demand shocks. 
+In the same vein as those authors, we introduce partial dissemination of CB's 
+announcement by defining the degree of publicity of the inflation target as the share 
+of agents (P ∈ [0, 1]) who know the target, and use it to forecast inflation (see the 
+mechanism depicted in Section 2.2.3). Conversely, a share 1 − P of agents form 
+inflation expectations in the same way as under non-IT. Following Demertzis and 
+Viegi (2009), we also include in our experiments different values of the radius ζ 
+around the target. In order to keep the optimization problem to a two-dimensional 
+system, given the number of points of the DoE (see Table 7 in Appendix A), we 
+fix the monetary policy coefficients to standard values (i.e. φ π = 1.5 and φ u = 
+0.5), and derive the optimal announcement strategy (P , ζ ) in the scenarios previously 
+considered. Results are reported in Table 4, and details of the estimations in Table 9 
+in Appendix B. 
+In the stable scenario (i.e. {σ w , σ d } = {0.05, 0.25}), a low publicity of the tar-
+get (i.e. P = 0.36), coupled with a medium range (0.7%) is optimal. However, the 
+minimum loss obtained (roughly 0.005) fairly equals the one obtained under a pure 
+IT regime (i.e. when P = 1, ζ = 1% and φ π , φ u = {4, 0}, see Table 3). As a 
+conclusion, we confirm the result of Demertzis and Viegi (2009): the publicity of 
+the target is superfluous in a weakly volatile environment. This result is in line with 
+what has been observed during the Great Moderation period, where developed coun-
+tries, either under IT and non-IT, have experienced a low macroeconomic variability 
+(Geraats 2009). The performance of IT in these countries appear, thus, at the most, 
+"non-negative" (Walsh 2009). 
+When introducing shocks (either increasing σ d or σ w values, or both simulta-
+neously), the value of the expected loss increases, and is minimized with partial 
+announcements (i.e. P &lt; 1). 33 The stronger the shocks (either σ d or σ w ), the lower </p>
+
+<p>33 It should be noted that the loss values are higher in case of partial announcements than in Table 3 under 
+pure IT or non-IT regimes. However, in the present exercise, monetary policy coefficients are fixed while 
+they constitute a degree of freedom of monetary policy in Table 3. As a result, we should be cautious 
+when comparing as such the loss values between Tables 3 and 4 and concluding that a pure non-IT regime 
+over-performs any form of partial announcements. </p>
+
+<p>I. Salle et al. </p>
+
+<p>the optimal degree of publicity. Intuitively, a mitigate dissemination of the target bal-
+ances the risk of losing credibility in front of inflation variability, and the gain from 
+the coordination of inflation expectations at the targeted level. 
+The stronger the inflationary shocks (i.e. the higher σ w values), the higher the 
+optimal range ζ to be communicated around the target, but the optimal range values 
+remain below the optimal one under the stable scenario (0.0067). Conversely, the 
+higher the model uncertainty (i.e. the higher σ d values), the lower the optimal range 
+values. Yet, the optimal range values are high (typically above 0.5%), and higher than 
+the ones under the stable scenario and under an environment with strong inflationary 
+shocks. 
+Note that, this results contradicts Walsh (2007a), who establishes that complete 
+transparency is optimal in front of demand shocks. Those demand shocks are assim-
+ilable to the disturbances associated with a high level of σ d in our model: in both 
+frameworks, they correspond to the control error of the CB on the demand through the 
+nominal interest rate. However, the two models work differently. In Walsh's set-up, 
+transparency on the target allows firms to infer the kind of shocks (demand or sup-
+ply) that the CB is expecting while, in case of opacity, firms set their forecasts using 
+the CB's instrument only, and the so-called opacity bias arises. As firms only adjust 
+their prices in reaction to supply shocks, a demand shock contaminates inflation if 
+firms misinterpret the change in the interest rate in reaction to the demand shock, as 
+a change in response to a supply shock. In our model, the gain (or the loss) of being 
+transparent comes from the gain of being credible (or the loss of having lost its cred-
+ibility). Credibility, in turn, anchors the heterogeneous private inflation expectations, 
+and reduces macroeconomic volatility through more favorable micro behavior (i.e. 
+lower-than-unity indexation coefficients γ w 
+i,t and high positive values of the substitu-
+tion coefficients γ d 
+i,t ). In our set-up, partial dissemination of the target then limits the 
+risk of losing its credibility, while maintaining a partial anchorage in case of success. 
+In that respect, the optimal range around the target is relatively high, close to 1%. 
+This result indicates that the insurance against a credibility loss turns out to be the 
+primary concern of a CB facing high model uncertainty. 
+By contrast, the need of providing a clear focal point to coordinate expectations-
+through an explicit inflation target associated with a moderate radius -is of critical 
+importance when volatility comes mainly from the inflation process per se -see also 
+Libich (2011) for a similar argument in a context of wage inflation. Accordingly, a 
+lower range minimizes the expected loss under σ w -led than under σ d -led volatility. </p>
+
+<p>5 Conclusion </p>
+
+<p>This paper revisits the virtues of transparency of an inflation targeting regime using 
+an agent-based model. By transparency, we mean the announcement of the numerical 
+value of the inflation target together with a range around it. Thanks to an agent-
+based perspective, we obtain a comprehensive way of modelling heterogeneity and 
+bounded rationality from a collection of interacting agents, while allowing the main 
+monetary policy mechanisms underlying the dynamics of the baseline NK model. In </p>
+
+<p>How transparent about its inflation target... </p>
+
+<p>particular, our ABM incorporates the consumption (real interest rate) channel and the 
+expectation channel of monetary policy. 
+In our setting, the benefit from announcing the target arises from the emergence 
+of a virtuous circle through a loop between credibility and success. Accordingly, 
+inflation expectations may remain anchored at the CB's inflation target and inflation 
+may be stabilized around the target. The trade-off that the CB faces between the 
+inflation objective and the level of activity may be loosened. Our results confirm that 
+this mechanism prevails in a rather stable environment, such as the so-called Great 
+Moderation period. However, this virtuous circle is not robust to the introduction of 
+strong inflationary pressures, even when coupled with uncertainty affecting the real 
+transmission channel of monetary policy. This is because inflationary shocks feed 
+back into the inflation dynamics and may produce a self-defeating mechanism. 
+In this case, partial dissemination of the target may limit the risk of losing its 
+credibility, while maintaining a partial anchorage in case of success. We find that 
+providing a clear signal to anchor inflation expectations on one part of the public, 
+while allowing for a less tightly defined objective for the remaining part, achieves 
+an optimal management of expectations when inflation and inflation expectations 
+display a high degree of volatility. In face of model uncertainty, the insurance against 
+the loss of credibility through the announcement of a wide range appears of primary 
+importance. 
+Overall, our results support the hypothesis that there is a lack of robustness of a 
+fully transparent inflation targeting regime under volatile economic environments. </p>
+
+<p>Acknowledgments We are grateful to Jouko Vilmunen for interesting comments and fruitful discussions 
+throughout the redaction of this paper, as well as to Camille Cornand and Prof. Jean-Christophe Poutineau 
+for helpful advices, and to Prof. Paul De Grauwe, Prof. Cars Hommes, Prof. Jean-Christophe  reau and 
+Prof. Thomas  for interesting comments on an earlier draft of this paper. We also thank participants 
+of the 2012 SMYE in ZEW, Mannheim, Germany, of the 2012 AFSE conference in Paris, of the 2013 
+CEF conference in Vancouver, Canada, of the 1st Bordeaux Workshop on Macro ABM co-organized by 
+the Bank of Finland for interesting remarks and of a seminar at the University of Surrey on February, 
+26th 2014. Isabelle Salle acknowledges financial support from the EU FP7 RAstaNEWS project (grant 
+agreement number 320278). </p>
+
+<p>Funding Isabelle Salle acknowledges financial support from the EU FP7 RAstaNEWS project (grant 
+number 320278) </p>
+
+<p>Open Access This article is distributed under the terms of the Creative Commons Attribution 4.0 
+International License (http://creativecommons.org/licenses/by/4.0/), which permits unrestricted use, dis-
+tribution, and reproduction in any medium, provided you give appropriate credit to the original author(s) 
+and the source, provide a link to the Creative Commons license, and indicate if changes were made. </p>
+
+<p>Appendix A: parameters setting </p>
+
+<p>Each configuration is repeated 30 times as the model is not deterministic. We use 
+a design of experiments (DoE, hereafter) to cover the space of parameters -see, 
+notably, Salle and Yıldızo˘ glu (2014) for a pedagogical statement. Large sampling </p>
+
+<p>I. Salle et al. </p>
+
+<p>Table 5 Design of experiments (near-orthogonal latin hypercube) with eight parameters -(Section 3.2) </p>
+
+<p>exp. 
+window 
+σ mutK 
+σ mutW 
+φ π 
+φ u 
+P mut 
+P imit 
+ζ (en %) </p>
+
+<p>1 
+40.00 
+0.08 
+0.20 
+0.40 
+0.90 
+0.07 
+0.19 
+1.00 </p>
+
+<p>2 
+35.00 
+0.40 
+0.09 
+0.80 
+0.50 
+0.03 
+0.20 
+0.75 </p>
+
+<p>3 
+35.00 
+0.20 
+0.37 
+0.30 
+0.00 
+0.06 
+0.19 
+0.25 </p>
+
+<p>4 
+25.00 
+0.36 
+0.40 
+0.80 
+0.90 
+0.02 
+0.21 
+0.25 </p>
+
+<p>5 
+40.00 
+0.06 
+0.21 
+0.40 
+0.70 
+0.07 
+0.13 
+1.25 </p>
+
+<p>6 
+40.00 
+0.38 
+0.16 
+0.60 
+0.40 
+0.03 
+0.08 
+1.75 </p>
+
+<p>7 
+30.00 
+0.21 
+0.39 
+0.50 
+0.00 
+0.07 
+0.13 
+1.75 </p>
+
+<p>8 
+25.00 
+0.29 
+0.38 
+0.70 
+0.90 
+0.03 
+0.09 
+2.00 </p>
+
+<p>9 
+30.00 
+0.14 
+0.13 
+1.10 
+0.70 
+0.04 
+0.05 
+0.50 </p>
+
+<p>10 
+30.00 
+0.28 
+0.15 
+1.40 
+0.20 
+0.06 
+0.07 
+1.00 </p>
+
+<p>11 
+30.00 
+0.13 
+0.31 
+1.90 
+0.30 
+0.02 
+0.08 
+0.50 </p>
+
+<p>12 
+30.00 
+0.30 
+0.28 
+1.90 
+0.80 
+0.10 
+0.14 
+1.00 </p>
+
+<p>13 
+25.00 
+0.10 
+0.12 
+1.10 
+0.60 
+0.02 
+0.24 
+1.50 </p>
+
+<p>14 
+35.00 
+0.26 
+0.18 
+1.80 
+0.20 
+0.06 
+0.24 
+1.50 </p>
+
+<p>15 
+25.00 
+0.12 
+0.35 
+1.80 
+0.40 
+0.01 
+0.18 
+1.50 </p>
+
+<p>16 
+35.00 
+0.27 
+0.26 
+2.00 
+0.80 
+0.09 
+0.16 
+1.50 </p>
+
+<p>17 
+25.00 
+0.23 
+0.23 
+1.00 
+0.50 
+0.06 
+0.15 
+1.25 </p>
+
+<p>18 
+5.00 
+0.37 
+0.25 
+1.60 
+0.10 
+0.04 
+0.11 
+1.25 </p>
+
+<p>19 
+10.00 
+0.05 
+0.36 
+1.30 
+0.50 
+0.08 
+0.10 
+1.50 </p>
+
+<p>20 
+10.00 
+0.25 
+0.08 
+1.70 
+1.00 
+0.05 
+0.11 
+2.00 </p>
+
+<p>21 
+20.00 
+0.09 
+0.05 
+1.20 
+0.10 
+0.09 
+0.09 
+2.00 </p>
+
+<p>22 
+5.00 
+0.39 
+0.24 
+1.60 
+0.30 
+0.04 
+0.17 
+1.00 </p>
+
+<p>23 
+5.00 
+0.07 
+0.29 
+1.40 
+0.60 
+0.08 
+0.22 
+0.50 </p>
+
+<p>24 
+15.00 
+0.24 
+0.06 
+1.50 
+1.00 
+0.04 
+0.18 
+0.50 </p>
+
+<p>25 
+20.00 
+0.16 
+0.07 
+1.30 
+0.10 
+0.08 
+0.21 
+0.25 </p>
+
+<p>26 
+15.00 
+0.31 
+0.32 
+0.90 
+0.30 
+0.07 
+0.25 
+1.75 </p>
+
+<p>27 
+15.00 
+0.17 
+0.30 
+0.60 
+0.80 
+0.05 
+0.23 
+1.25 </p>
+
+<p>28 
+15.00 
+0.32 
+0.14 
+0.10 
+0.70 
+0.09 
+0.23 
+1.75 </p>
+
+<p>29 
+15.00 
+0.15 
+0.17 
+0.10 
+0.30 
+0.01 
+0.16 
+1.25 </p>
+
+<p>30 
+20.00 
+0.35 
+0.33 
+0.90 
+0.40 
+0.09 
+0.06 
+0.75 </p>
+
+<p>31 
+10.00 
+0.19 
+0.27 
+0.30 
+0.80 
+0.05 
+0.06 
+0.75 </p>
+
+<p>32 
+20.00 
+0.33 
+0.10 
+0.20 
+0.60 
+0.10 
+0.12 
+0.75 </p>
+
+<p>33 
+10.00 
+0.18 
+0.19 
+0.00 
+0.20 
+0.02 
+0.14 
+0.75 </p>
+
+<p>methods such as Monte Carlo simulations come at a computational cost if we aim at 
+considering the effects of numerous parameters with large experiment domains. DoE 
+allows minimization of the sample size under constraint of representativeness. We 
+use the design proposed by Cioppa (2002) and provided by Sanchez (2005), which 
+combines space-filling properties and parsimony. </p>
+
+<p>How transparent about its inflation target... </p>
+
+<p>Table 6 Design of experiments (orthogonal latin hypercube) with two factors (Section 4.1) </p>
+
+<p>DoE (estimation, Sanchez 2005) 
+Additional points (external validation) </p>
+
+<p>exp. 
+φ π 
+φ u 
+exp. 
+φ π 
+φ u </p>
+
+<p>0 
+1.3 
+2 
+0 
+3.82 
+0.48 </p>
+
+<p>1 
+0.3 
+0.5 
+1 
+1.56 
+0.96 </p>
+
+<p>2 
+0.5 
+0.9 
+2 
+3.12 
+0.08 </p>
+
+<p>3 
+0.8 
+1.3 
+3 
+0.56 
+0.74 </p>
+
+<p>4 
+3 
+1.9 
+4 
+1.96 
+1.84 </p>
+
+<p>5 
+4 
+0.6 
+5 
+1.04 
+1.1 </p>
+
+<p>6 
+2.5 
+0.4 
+6 
+2.6 
+0.26 </p>
+
+<p>7 
+2.3 
+1.8 
+7 
+2.13 
+1.72 </p>
+
+<p>8 
+2 
+1 
+8 
+0 . 1 
+1 . 3 9 </p>
+
+<p>9 
+2.8 
+0 
+9 
+3.33 
+1.49 </p>
+
+<p>10 
+3.8 
+1.5 </p>
+
+<p>11 
+3.5 
+1.1 </p>
+
+<p>12 
+3.3 
+0.8 </p>
+
+<p>13 
+1 
+0.1 </p>
+
+<p>14 
+0 
+1.4 </p>
+
+<p>15 
+1.5 
+1.6 </p>
+
+<p>16 
+1.8 
+0.3 </p>
+
+<p>Table 7 Design of experiments (orthogonal latin hypercube) with two factors (Section 4.2), φ π = 1.5, 
+φ u = 0.5 </p>
+
+<p>DoE (estimation, Sanchez 2005) 
+Additional points (external validation) </p>
+
+<p>exp. 
+P 
+ζ 
+exp. 
+P 
+ζ </p>
+
+<p>1 
+0.30 
+0.010 
+1 
+0.67 
+0.001 </p>
+
+<p>2 
+0.10 
+0.003 
+2 
+0.89 
+0.004 1 </p>
+
+<p>3 
+0.10 
+0.005 
+3 
+0.33 
+0.002 </p>
+
+<p>4 
+0.20 
+0.007 
+4 
+0.56 
+0.005 </p>
+
+<p>5 
+0.80 
+0.009 
+5 
+0.78 
+0.008 </p>
+
+<p>6 
+1.00 
+0.004 
+6 
+0.44 
+0.006 </p>
+
+<p>7 
+0.60 
+0.003 
+7 
+0.00 
+0.003 </p>
+
+<p>8 
+0.60 
+0.009 
+8 
+0.11 
+0.009 </p>
+
+<p>9 
+0.50 
+0.006 
+9 
+1.00 
+0.01 </p>
+
+<p>10 
+0.70 
+0.001 
+10 
+0.22 
+0.007 </p>
+
+<p>11 
+0.90 
+0.008 </p>
+
+<p>12 
+0.90 
+0.006 </p>
+
+<p>13 
+0.80 
+0.004 </p>
+
+<p>14 
+0.30 
+0.002 </p>
+
+<p>15 
+0.00 
+0.007 </p>
+
+<p>16 
+0.40 
+0.008 </p>
+
+<p>17 
+0.40 
+0.002 </p>
+
+<p>I. Salle et al. </p>
+
+<p>Appendix B: technical appendix: kriging metamodeling </p>
+
+<p>Principle </p>
+
+<p>Let D ≡ [0, 2] × [0, 1] ∈ R 2 and x ≡ (φ π , φ u ) ∈ D the two factors. Let the loss 
+function (20) be the response-variable L : x ∈ D → L(x) ∈ R. Kriging model 
+aims at optimally forecasting, for each point x ∈ D, the variable L(x) ∈ R through 
+a stochastic process L : x ∈ D → L(x) ∈ R, called ametamodel. 34 This metamodel 
+is obtained through a linear combination of the n = 17 observations of L over D, 
+denoted by {L(x 1 ), ..., L(x 17 )}: 35 </p>
+
+<p>L(x) = μ(x) + Z(x) 
+(22) </p>
+
+<p>where μ : x ∈ D → μ(x) ≡ 
+l 
+j =1 β j f j (x) ∈ R, l &gt; 0, f j are fixed functions and 
+β j are unknown coefficients to be estimated, and Z is a stochastic process with zero 
+mean and covariance C : (u, v) ∈ D 2 → C(u, v) ∈ R. 
+Kriging has the following properties: it is an exact interpolator (i.e. L(x) = L(x)), 
+it is global (i.e. L is defined over the whole domain D) and it is spatial: indeed, 
+contrary to LS fitting, in order to determine L at a point x ∈ D, kriging models put 
+more weight on observations of L at points x in the neighborhood of x. That is why 
+kriging needs a DoE with good space-filling properties to give accurate estimations. 
+We use the  v = 5 
+2 covariance function, which is the default one in 
+<rs id="software-12" type="software">DiceKriging</rs>-package of <rs corresp="#software-12" type="creator">R Development Core Team</rs> (<rs corresp="#software-12" type="version-date">2009</rs>): </p>
+
+<p>C(x i , x j ) = σ 2 </p>
+
+<p>L </p>
+
+<p>k </p>
+
+
+
+<p>g=1 </p>
+
+
+
+<p>1 + </p>
+
+<p>√ 
+5|x i − x j | 
+θ g 
++ 
+5(x i − x j ) 2 
+3θ 2 </p>
+
+<p>g </p>
+
+
+
+<p>exp </p>
+
+
+
+<p>− </p>
+
+<p>√ 
+5|x i − x j | 
+θ g </p>
+
+
+
+<p>(23) 
+with k = 2 as we have two factors φ π and φ u . It is a continuous Gaussian process that 
+is twice differentiable and therefore gives more accurate estimations. Parameters θ , 
+which stand for the relative weight of each factor, and σ 2 
+L , the estimated variance of 
+L process, are estimated using maximum likelihood. As simulations are stochastic, 
+we integrate L variance across the 30 runs at each of the 17 points into the covariance 
+matrix C (see Roustant et al. 2010). 
+We have to choose the trend μ (i.e. to specify functions f j ). With two factors, we 
+define four specifications: 36 
+μ(x) = β 0 
+(I) 
+which is a single trend (called ordinary kriging), a first order polynomial: </p>
+
+<p>μ(x) = β 0 + β φ π φ π + β φ u φ u 
+(II) </p>
+
+<p>34 This kind of models originally comes from geostatistics (see Matheron 1963). See Sacks et al. (1989) for 
+a complete treatment. We use packages <rs type="software">DiceKriging</rs>, <rs type="software">DiceEval</rs> and <rs id="software-7" type="software">DiceOptim</rs> of <rs corresp="#software-7" type="creator">R Development Core Team</rs> (<rs corresp="#software-7" type="version-date">2009</rs>) to perform all kriging estimations (see Roustant et al. 2010). 
+35 We have n = 17 observation points of L over D (see DoE Table 6, Appendix A). As the model is 
+stochastic, we repeat each 30 times. The kriging estimation has then to be performed in averaging L values 
+over the 30 repetitions (van Beers and Kleijnen 2004). This results in n = 17 observations of L over D. 
+36 More complex forms would involve more parameters to be estimated, besides σ 2 
+L , θ φπ and θ φu . </p>
+
+<p>How transparent about its inflation target... </p>
+
+<p>to which we add second-order interactions: 
+μ(x) = β 0 + β φ π φ π + β φ u φ u + β φ π φ u φ π φ u 
+(III) </p>
+
+<p>and a full second-order polynomial: </p>
+
+<p>μ(x) = β 0 + β φ π φ π + β φ u φ u + β φ π φ u φ π φ u + β φ 2 </p>
+
+<p>π </p>
+
+<p>φ 2 
+π + β φ 2 </p>
+
+<p>u </p>
+
+<p>φ 2 </p>
+
+<p>u </p>
+
+<p>(IV) </p>
+
+<p>We successively estimate each specification and discriminate between them 
+with external validation. It is indeed preferable to other techniques such as cross-
+validation, based on the existing sample and leave-one out estimation, all the more 
+as we have few observations. We randomly add validation points to the design and 
+compute the root mean square error (RMSE) between these additional observations 
+and the estimated one for each of the four above specifications (reported in Appendix 
+B2) and choose the one which minimizes this figure. 
+As soon as we have a satisfying metamodel L, we determine the pair (φ  *  
+π , φ  *  
+u ) 
+that minimizes the estimated value of loss L, denoted by L  *  . This is done through 
+the packages rgenoud (R-GENetic Optimization Using Derivatives, see Mebane 
+and Sekhon 2011) and <rs id="software-11" type="software">DiceOptim</rs> (see Roustant et al. 2010) provided by <rs corresp="#software-11" type="creator">R Development Core Team</rs> (2009). This is a quite powerful optimization function 
+that efficiently combines evolutionary algorithm methods for global purpose with a 
+derivative-based (quasi-Newton) method for local search of optima. </p>
+
+<p>Kriging models reports </p>
+
+<p>Table 8 Kriging models reports -2 parameters (Section 4.1) </p>
+
+<p>β 0 
+β φπ 
+β φu 
+β φπ φu 
+β φ 2 </p>
+
+<p>π </p>
+
+<p>β φ 2 </p>
+
+<p>u </p>
+
+<p>θ φπ 
+θ φu 
+σ 2 </p>
+
+<p>L </p>
+
+<p>{σ w , σ d } = {0.05, 0.05} </p>
+
+<p>IT, ζ = 0.1% 
+RMSE: 0.0458 (I) -0.0497 (II) -0.0471 (III) -0.0491 (IV) 
+0.0696 
+0.174 0.881 0.0022 
+IT, ζ = 1% 
+RMSE: 0.019 (I) -0.0136 (II) -0.0193 (III) -0.0269 (IV) 
+0.0367 -0.0087 0.0104 
+0.000 3.664 0.0006 
+non-IT, ζ = 0.1% 
+RMSE: 0.0401 (I) -0.0343 (II) -0.0333 (III) -0.0328 (IV) 
+0.0456 −0.0121 0.0464 0.0022 −0.026 0.0048 0.000 2.666 0.001 
+non-IT, ζ = 1% 
+RMSE: 0.0185 (I) -0.0197 (II) -0.0196 (III) -0.0195 (IV) 
+0.0385 
+0.0402 0.000 0.0006 
+{σ w , σ d } = {0.05, 0.25} </p>
+
+<p>IT, ζ = 0.1% 
+RMSE: 0.0502 (I) -0.043 (II) -0.0366 (III) -0.0428 (IV) 
+0.0288 0.0279 0.1329 0.0019 
+0.001 0.000 0.0011 
+IT, ζ = 1% 
+RMSE: 0.0101 (I) -0.0102 (II) -0.0099 (III) -0.011 (IV) 
+0.0401 −0.0084 −0.0166 0.0074 
+1.854 0.000 0.0001 
+non-IT, ζ = 0.1% 
+RMSE: 0.0248 (I) -0.0275 (II) -0.0276 (III) -0.031 (IV) 
+0.0521 
+0.897 0.463 0.0089 
+non-IT, ζ = 1% 
+RMSE: 0.0144 (I) -0.0171 (II) -0.0168 (III) -0.016 (IV) 
+0.0297 
+0.002 0.001 0.0004 
+{σ w , σ d } = {0.05, 0.4} </p>
+
+<p>IT, ζ = 0.1% 
+RMSE: 0.052 (I) -0.0501 (II) -0.049 (III) -0.05 (IV) 
+0.0472 −0.0075 0.046 
+−0.0036 
+0.000 1.959 0.0014 </p>
+
+<p>I. Salle et al. </p>
+
+<p>Table 8 (continued) </p>
+
+<p>β 0 
+β φπ 
+β φu 
+β φπ φu 
+β φ 2 </p>
+
+<p>π </p>
+
+<p>β φ 2 </p>
+
+<p>u </p>
+
+<p>θ φπ 
+θ φu 
+σ 2 </p>
+
+<p>L </p>
+
+<p>IT, ζ = 1% 
+RMSE: 0.031 (I) -0.0266 (II) -0.025 (III) -0.0267 (IV) </p>
+
+<p>0.0543 −0.0047 −0.022 0.0062 
+6.8 
+0.00 
+0.0005 </p>
+
+<p>non-IT, ζ = 0.1% 
+RMSE: 0.038 (I) -0.0452 (II) -0.0461 (III) -0.0551 (IV) </p>
+
+<p>0.0434 
+0.0938 4.00 
+0.0006 </p>
+
+<p>non-IT, ζ = 1% 
+RMSE: 0.0154 (I) -0.017 (II) -0.0162 (III) -0.0155 (IV) </p>
+
+<p>0.0284 
+2.159 0.000 0.0002 </p>
+
+<p>IT, ζ = 0.1% 
+RMSE: 0.0471(I) -0.0547 (II) -0.041 (III) -0.042 (IV) </p>
+
+<p>0.1241 −0.0207 −0.023 0.0164 
+0.000 3.392 0.0012 </p>
+
+<p>IT, ζ = 1% 
+RMSE: 0.057 (I) -0.052 (II) -0.0544(III) -0.049 (IV) </p>
+
+<p>0.1086 −0.0327 −0.0473 0.0027 0.021 
+0.021 
+0.461 0.000 0.0008 </p>
+
+<p>non-IT, ζ = 0.1% 
+RMSE: 0.042 (I) -0.0494 (II) -0.043 (III) -0.05(IV) </p>
+
+<p>0.1256 
+0.000 1.7233 0.0005 </p>
+
+<p>non-IT, ζ = 1% 
+RMSE: 0.022 (I) -0.0277 (II) -0.0265 (III) -0.031 (IV) </p>
+
+<p>0.0628 
+0.325 0.775 0.0006 
+{σ w , σ d } = {0.4, 0.05} </p>
+
+<p>IT, ζ = 0.1% 
+RMSE: 0.0.079(I) -0.048 (II) -0.054 (III) -0.068 (IV) </p>
+
+<p>0.169 −0.199 −0.0098 
+0.1671 4 
+0.0018 </p>
+
+<p>IT, ζ = 1% 
+RMSE: 0.09 (I) -0.054 (II) -0.089 (III) -0.072 (IV) </p>
+
+<p>0.0908 0.0244 
+0.0668 
+0.2255 0.0138 0.0014 </p>
+
+<p>non-IT, ζ = 0.1% 
+RMSE: 0.063 (I) -0.062 (II) -0.061 (III) -0.057 (IV) </p>
+
+<p>0.1502 0.005 
+−0.0614 −0.008 0.0226 0.002 
+0.358 4 
+0.0014 </p>
+
+<p>non-IT, ζ = 1% 
+RMSE: 0.033 (I) -0.044 (II) -0.043 (III) -0.0422 (IV) </p>
+
+<p>0.0943 
+0.342 0.393 0.0018 
+{σ w , σ d } = {0.4, 0.25} </p>
+
+<p>IT, ζ = 0.1% 
+RMSE: 0.039(I) -0.041 (II) -0.044 (III) -0.067 (IV) </p>
+
+<p>0.2123 
+0.000 4.000 0.0013 </p>
+
+<p>IT, ζ = 1% 
+RMSE: 0.063 (I) -0.072 (II) -0.0765 (III) -0.077 (IV) </p>
+
+<p>0.0433 
+0.000 2.786 0.0006 </p>
+
+<p>non-IT, ζ = 0.1% 
+RMSE: 0.042 (I) -0.048 (II) -0.046 (III) -0.059 (IV) </p>
+
+<p>0.2273 
+0.0015 0.0309 0.0017 </p>
+
+<p>non-IT, ζ = 1% 
+RMSE: 0.051 (I) -0.036 (II) -0.054 (III) -0.049 (IV) </p>
+
+<p>0.1647 −0.022 −0.0183 
+0.4041 1.0331 0.0037 
+{σ w , σ d } = {0.25, 0.25} </p>
+
+<p>IT, ζ = 0.1% 
+RMSE: 0.0278(I) -0.0417 (II) -0.0355 (III) -0.0321 (IV) </p>
+
+<p>0.0946 −0.0045 0.0348 
+0.004 2.674 0.0007 </p>
+
+<p>IT, ζ = 1% 
+RMSE: 0.043 (I) -0.0472 (II) -0.0477 (III) -0.0482 (IV) </p>
+
+<p>0.0831 
+0.05 
+1.628 0.0011 </p>
+
+<p>non-IT, ζ = 0.1% 
+RMSE: 0.0622 (I) -0.0555 (II) -0.053 (III) -0.0588 (IV) </p>
+
+<p>0.0853 −0.0101 −0.0104 0.0106 
+0.000 3.946 0.0006 </p>
+
+<p>non-IT, ζ = 1% 
+RMSE: 0.036 (I) -0.0303 (II) -0.03 (III) -0.024 (IV) </p>
+
+<p>0.0767 −0.0164 0.0312 
+0.0027 −0.013 −0.0034 0.2338 1.714 0.0003 </p>
+
+<p>How transparent about its inflation target... </p>
+
+<p>Table 9 Kriging models reports -2 parameters (Section 4.2) </p>
+
+<p>β 0 
+β P 
+β ζ 
+β P ζ 
+β P 2 
+β ζ 2 
+θ P 
+θ ζ 
+σ 2 </p>
+
+<p>L </p>
+
+<p>{σ w , σ d } = {0.05, 0.05} </p>
+
+<p>RMSE: 0.007 (I) -0.0081 (II) -0.008 (III) -0.013 (IV) </p>
+
+<p>0.0309 
+0.12 
+1.34 
+0.0002 
+{σ w , σ d } = {0.25, 0.05} </p>
+
+<p>RMSE: 0.013 (I) -0.0124 (II) -0.012 (III) -0.0123 (IV) </p>
+
+<p>0.0137 
+0.065 
+4.4635 
+−8.899 
+0.000 
+0.01 
+0.0001 
+{σ w , σ d } = {0.4, 0.05} </p>
+
+<p>RMSE: 0.0192 (I) -0.0192 (II) -0.0191 (III) -0.018 (IV) </p>
+
+<p>0.0571 
+−0.0201 
+0.299 
+0.007 
+−101.81 
+1.856 
+0.0013 
+0.000 
+0.0002 
+{σ w , σ d } = {0.4, 0.25} </p>
+
+<p>RMSE: 0.03 (I) -0.033 (II) -0.031 (III) -0.032 (IV) </p>
+
+<p>0.0534 
+0.000 
+0.56 
+0.0002 
+{σ w , σ d } = {0.05, 0.25} </p>
+
+<p>RMSE: 0.0266 (I) -0.022 (II) -0.0247 (III) -0.019 (IV) </p>
+
+<p>0.0776 
+−0.0405 
+−14.62 
+0.014 
+951.9 
+3.373 
+0.000 
+0.000 
+0.0000 
+{σ w , σ d } = {0.05, 0.4} </p>
+
+<p>RMSE: 0.0053 (I) −0.0067 (II) -0.0061 (III) -0.009 (IV) </p>
+
+<p>0.0276 
+0.034 
+0.99 
+0.0000 
+{σ w , σ d } = {0.25, 0.4} </p>
+
+<p>RMSE: 0.0145 (I) -0.0104 (II) -0.013 (III) -0.022 (IV) </p>
+
+<p>0.034 
+0.03 
+−0.861 
+0.000 
+0.000 
+0.0004 
+{σ w , σ d } = {0.25, 0.25} </p>
+
+<p>RMSE: 0.0104 (I) -0.0116 (II) -0.0113 (III) -0.0114 (IV) </p>
+
+<p>0.087 
+0.071 
+0.003 
+0.0000 </p>
+
+
+
+</text></tei>

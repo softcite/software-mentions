@@ -1,0 +1,1139 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.3846%2Fbtp.2016.534" /><encodingDesc><appInfo><application version="0.5.2-SNAPSHOT" ident="GROBID" when="2018-10-20T00:59+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>Abstract. The article deals with the use of fuzzy logic as a support of evaluation of total project risk. A brief description of actual 
+project risk management, fuzzy set theory, fuzzy logic and the process of calculation is given. 
+The major goal of this paper is to present am new expert decision-making fuzzy model for evaluating total project risk. This fuzzy 
+model based on RIPRAN method. RIPRAN (RIsk PRoject ANalysis) method is an empirical method for the analysis of project 
+risks. The Fuzzy Logic Toolbox in <rs type="software">MATLAB</rs> software was used to create the decision-making fuzzy model. The advantage of the 
+fuzzy model is the ability to transform the input variables The Number of Sub-Risks (NSR) and The Total Value of Sub-Risks 
+(TVSR) to linguistic variables, as well as linguistic evaluation of the Total Value of Project Risk (TVPR) -output variable. With this 
+approach it is possible to simulate the risk value and uncertainty that are always associated with real projects. The scheme of the 
+model, rule block, attributes and their membership functions are mentioned in a case study. The use of fuzzy logic is a particular 
+advantage in decision-making processes where description by algorithms is extremely difficult and criteria are multiplied. </p>
+
+<p>Project management is nowadays a widely discussed 
+theme. This fact is substantiated by numerous scien-
+tific articles, books and publications dealing with these 
+problems (Bergantiños, Vidal-Puga 2009; Pérez et al. 
+2005; Rosenau 2007; Schwable 2011). This discipline 
+is also included in the courses of numerous faculties 
+focusing on economy both in the Czech Republic and 
+abroad. Experts are also associated in various profession-
+al organizations or associations (International Project 
+Management Association 2014; Project Management 
+Institute 2014; AXELOS 2015). 
+Project risk management is the responsibility of the 
+entire life cycle of project. Risk management of the pro-
+ject consists of process of risk analysis and process of risk 
+monitoring. Project manager or other members of project 
+team can for risk project analysis use some methods (Rais, 
+Smejkal 2013): scoring method (Podmolík 2006), FRAAP 
+method -Facilitated Risk Analysis and Assessment Process </p>
+
+<p>mathematical theory and gray relational analysis method in 
+the risk evaluation of construction project (Zhang, Li 2011). 
+The authors Park et al. present a systematic framework 
+for risk management is proposed for handling risk factors, 
+risk degrees, integrated risk degree, and responding activi-
+ties with corresponding data flow diagrams in their article 
+"A Risk Management System Framework for New Product 
+Development (NPD)" (Park et al. 2011). 
+The research by the authors Liu and Ye presented mo-
+dels for comprehensive evaluating modelling of investment 
+project risk with trapezoid fuzzy linguistic information. A 
+practical example for evaluating the investment project risk 
+is used to verify the developed approach (Liu, Ye 2015). 
+The method of fuzzy logic applied to the risk mana-
+gement process is described in (Nasirzadeh et al. 2014). 
+The authors present an integrated fuzzy system dynamic 
+modelling for quantitative risk assessment. The values of 
+the various factors, which are characterized by the nature 
+of uncertainty, are defined by fuzzy numbers. The proposed 
+model was simulated at different levels of risk; the optimum 
+level of risk is determined by the point at which the mini-
+mum cost of the project. See e.g. (Nasirzadeh et al. 2014). 
+The same risk issues of construction projects are pre-
+sented by authors Yao-Chen Kuo and Shih-Tong Lu. This 
+study deals with a fuzzy multiple criteria decision-making 
+(FMCDM) approach to systematically assess risk for a me-
+tropolitan construction project where twenty risk factors 
+were identified. Triangular fuzzy sets are used for describing 
+of identified factors. The overall risk level of the project 
+depends on the individual impact of individual risk factors; 
+the scheme was evaluated based on the relative impact and 
+likelihood. They note that the suggested model for risk as-
+sessment is more reliable, more convenient than traditional 
+statistical methods, and that this model can be used to ef-
+ficiently identify risks metropolitan construction projects. 
+See Kuo and Lu (2013). 
+An article by Nieto Morote-and-Ruz Vila is a methodo-
+logy for risk assessment based on fuzzy set theory, which 
+is an effective tool for dealing with subjective assessments. 
+The proposed methodology is based on the knowledge 
+and experience gained from many experts. Risk factors are 
+evaluated by qualitative criteria in the form of trapezoidal 
+fuzzy numbers. Fuzzy numbers describe the uncertainty 
+variables at the language level. See e.g. (Nieto-Morote, Ruz-
+Vila 2011). 
+In the study 'The moderating effect of risk on the 
+Relationship between planning and success' authors 
+Zwikael, Pathak, Singh, Ahmed deal with examination the 
+relationship between the project planning process and its 
+success. They show the level of success (measured in the 
+form of risk) associated with the project plan. They conclude 
+the high risk projects must be carefully planned. See e.g. 
+(Zwikael et al. 2014). </p>
+
+<p>The science aim of the paper is to present a new expert 
+decision-making fuzzy model for evaluation of the total 
+project risk. This fuzzy model is based on RIPRAN method, 
+specifically on the phase: risk assessment. See below. This 
+phase evaluates the total project risk based on two parame-
+ters: the number of sub-risks and the total value of sub risk. 
+For creating of model is used fuzzy set theory and fuzzy 
+logic. See below. 
+The advantage of fuzzy sets in comparison with the clas-
+sical set theory is its ability to record inaccurate (vague) 
+concepts that project managers use natural language in the 
+design and implementation of projects. Individual charac-
+teristics associated with the process of project management, 
+although the project practice countable relatively well, but 
+usually only with large variance. This means that they are 
+more or less well estimated. 
+The current approach in the area of risk engineering 
+applied either numerical values of probability and impact, 
+or worked with classical sharp jurisdiction of these values 
+into certain sets, which for many applications not appro-
+priate and did not correspond to the actual perception of 
+risk. Fuzzy approach to modeling these processes minimizes 
+this shortcoming. 
+Research in the field of evaluation of total project risk is 
+based on an empirical research. This research was realised in 
+region Vysočina in Czech Republic in the first half of 2014. 
+A secondary analysis was used to obtain and process rele-
+vant secondary data. General theoretical methods, based 
+on principles of logic and logical thinking (analysis -synt-
+hesis, induction -deduction, abstraction -concretization), 
+were used to own processing, especially for pronouncing of 
+conclusions. Fuzzy modelling (fuzzy set theory and fuzzy 
+logic) was used to create the decision-making fuzzy mode. 
+For identification of rules of the fuzzy model was used met-
+hod guided interview with experts in project management. 
+The advantage of the fuzzy model is the ability to trans-
+form the input variables The Number of Sub-Risks (NSR) 
+and The Total Value of Sub-Risks (TVSR) to linguistic va-
+riables, as well as linguistic evaluation of the Total Value of 
+Project Risk (TVPR) -output variable. 
+Application of fuzzy logic (Dostál 2011) is based on 
+the fuzzy set theory (Zadeh 1965; Zimmermann 2001; 
+Klir, Yuan 1995). The theory of fuzzy sets and applica-
+tions of fuzzy logic in project management also focused 
+a lot of authors (Relich, Muszyński 2014; Khazaeni et al. 
+2012; Nassif et al. 2013; Relich 2013; Relich 2012). Authors 
+Kuchta, Chanas and Zielinski, Oliveros and Fayek, Bushan 
+Rao and Shankar presented fuzzy sets using fuzzy numbers 
+to obtaining critical paths of project (Kuchta 2001; Chanas, 
+Zielinski 2001; Oliveros, Fayek 2005; Bushan Rao, Shankar 
+2012). The technique EVM is also scientific goal for some 
+authors (Naeni et al. 2011; Lipke et al. 2009; Khamooshi, 
+Golafshani 2014). </p>
+
+<p>24 
+R. Doskočil. An evaluation of total project risk based on fuzzy logic </p>
+
+<p>1. Theoretical background </p>
+
+<p>RIPRAN (RIsk PRoject ANalysis) method is an empiri-
+cal method for the analysis of project risks. Author of the 
+RIPRAN method is Associate Professor Branislav Lacko. 
+RIPRAN method can be used in all phases of the project. 
+The method was originally created for risk analysis automa-
+tion projects in the framework of the research project at the 
+Technical University in Brno. Experience has shown that 
+after certain adjustments, it is possible to apply the method 
+for risk analysis of a wide range of different projects and 
+in some cases also for the analysis of other types of risks 
+than are project risks. RIPRAN method is a trademark, 
+registered author of the Industrial Property Office in Prague 
+under reg.no. 283536 (Lacko 2014). 
+The risk analysis process by RIPRAN method comprises 
+the following phases: 
+-Risk preparing -agreement on the process, identifi-
+cation of materials, team building, identification of 
+relationships. 
+-Risk identification -identification of threats and sce-
+narios. Can be used risk trees. 
+-Risk quantification -identification of probabilities 
+of threats and impact of scenarios. 
+-Risk response -identification of steps to reduce the 
+risk. 
+-Risk assessment -total project risk evaluation based 
+on the number of sub-risks and the total value of 
+sub-risks (Lacko 2014; 2004). </p>
+
+<p>2. Materials and methods </p>
+
+<p>A fuzzy set is a set whose elements have degrees of mem-
+bership. Fuzzy set was introduced by Lotfi A. Zadeh in 
+1965 as an extension of the classical notion of set and can 
+be applied in many fields of human activity. Fuzzy set de-
+termines "how much" the element belongs to the set. This 
+is the basic principle of fuzzy set. 
+A fuzzy set is defined following: Let X is a non-empty set 
+and µ  </p>
+
+<p>A </p>
+
+<p>: 
+  
+→   
+0; 1 
+X 
+. Then fuzzy set  
+A is a set of all ordered 
+pairs µ ) 
+( , 
+) 
+( 
+A x 
+x 
+therefore </p>
+
+<p>( ) </p>
+
+<p>( 
+) </p>
+
+<p>( ) </p>
+
+<p>{ 
+} </p>
+
+<p>= 
+µ 
+∈ µ 
+∈  
+  </p>
+
+<p> 
+ </p>
+
+<p> 
+, 
+: 
+, 
+0;1 . </p>
+
+<p>A 
+A </p>
+
+<p>A 
+x 
+x x X 
+x 
+(1) </p>
+
+<p>Where X is a universe, µ  </p>
+
+<p>A </p>
+
+<p>is a membership func-
+tion of fuzzy set  
+A , see Fig. 1. Triangular and trapezoidal 
+type of the membership function, and µ  ( ) </p>
+
+<p>A </p>
+
+<p>x is a grade 
+of membership of x. µ  </p>
+
+<p>A </p>
+
+<p>is defined for all ∈ 
+x X and 
+( 
+0 
+) 
+µ 
+= </p>
+
+<p>A </p>
+
+<p>x </p>
+
+<p> </p>
+
+<p>for ∉  
+x A . 
+A support of a fuzzy set  
+A is the classical set </p>
+
+<p>{ 
+} </p>
+
+<p>= ∈ µ 
+&gt; </p>
+
+<p> </p>
+
+<p> 
+supp 
+: 
+) 0 . 
+( </p>
+
+<p>A </p>
+
+<p>A x X 
+x 
+(2) </p>
+
+<p>A kernel or core of a fuzzy set  
+A is the classical set </p>
+
+<p>{ 
+} </p>
+
+<p>= ∈ µ 
+= </p>
+
+<p> </p>
+
+<p> 
+ker 
+: 
+. 
+) 1 
+( </p>
+
+<p>A </p>
+
+<p>A x X 
+x 
+(3) </p>
+
+<p>A height of a fuzzy set  
+A is the number </p>
+
+<p>= 
+µ  
+ 
+hgt 
+sup 
+( ). </p>
+
+<p>x A </p>
+
+<p>A 
+x 
+(4) </p>
+
+<p>For example when fuzzy set  
+A is "about 2", see 
+triangular membership function in Figure 1, then 
+= 
+ 
+supp 
+(1; 3), 
+A </p>
+
+<p>{ } </p>
+
+<p>= 
+ 
+ker 
+2 
+A 
+and 
+= 
+ 
+hgt 
+1 
+A 
+. 
+Let α be a number form   
+  
+0; 1 then α level cut of fuzzy 
+set  
+A is a classical set </p>
+
+<p>{ 
+} </p>
+
+<p>α = 
+∈ 
+µ 
+≥ α </p>
+
+<p> </p>
+
+<p>: 
+) 
+. 
+( </p>
+
+<p>A </p>
+
+<p>A 
+x X 
+x 
+(5) </p>
+
+<p>A fuzzy set </p>
+
+<p>( 
+) </p>
+
+<p>= 
+µ  
+ 
+R, A 
+A 
+is called real fuzzy number on 
+set of real number R when fulfils following conditions: 
+-Fuzzy set  
+A is convex ( µ  </p>
+
+<p>A </p>
+
+<p>is a convex function). 
+-Fuzzy set  
+A is normal ( 
+= 
+ 
+hgt 
+1 
+A 
+). 
+-µ  </p>
+
+<p>A </p>
+
+<p>is a piecewise continuous function. 
+With fuzzy numbers basic binary operations are used, 
+e.g. + − ×  
+, , , . Let * is a binary operation on R then an 
+extended binary operation on  , where  is a set of all </p>
+
+<p>fuzzy numbers, means a operation  , e.g. ⊕ ,  , ⊗ ,  . </p>
+
+<p>{ 
+} </p>
+
+<p>= </p>
+
+<p>µ = 
+µ 
+µ </p>
+
+<p> 
+ 
+ 
+ 
+ 
+sup 
+, 
+* </p>
+
+<p>min 
+( 
+, 
+. 
+) 
+( ) ( ) </p>
+
+<p>B 
+A B 
+A 
+x y 
+x y z </p>
+
+<p>z 
+x 
+y 
+(6) </p>
+
+<p>Practical computing of the extended binary operations 
+is often realised by α level cut (5). For increasing binary 
+operation the extended binary operations is </p>
+
+<p>α 
+α 
+α∈  
+  </p>
+
+<p>= 
+α 
+  </p>
+
+<p> </p>
+
+<p> 
+ </p>
+
+<p>0;1 </p>
+
+<p>. 
+A B 
+A 
+B 
+(7) </p>
+
+<p>If we denote α </p>
+
+<p>α 
+α </p>
+
+<p> 
+ 
+=  
+ </p>
+
+<p>1 
+2 </p>
+
+<p>; 
+A 
+a a 
+and α </p>
+
+<p>α 
+α </p>
+
+<p> 
+ 
+=  
+ </p>
+
+<p>1 
+2 </p>
+
+<p>; 
+B 
+b b 
+then 
+the extended binary operation for increasing binary opera-
+tion * is </p>
+
+<p>α 
+α 
+α 
+α 
+α 
+α </p>
+
+<p> 
+  
+ 
+=  
+  
+ 
+ 
+ </p>
+
+<p>1 
+2 
+1 
+2 </p>
+
+<p>; 
+; 
+. 
+A 
+B 
+a a 
+b b 
+(8) </p>
+
+<p>Each α level cut of fuzzy number can be regarded as 
+the interval number. The interval number means interval 
+  
+  
+; , 
+a b where ≤ 
+a b , a and b are real numbers. The interval 
+numbers are a special case of fuzzy number, so arithmetic </p>
+
+<p>Fig. 1. Triangular and trapezoidal type of the membership 
+function </p>
+
+<p>Business: Theory and Practice, 2016, 17(1): 23-31 </p>
+
+<p>
+operations with interval number have properties of opera-
+tions with fuzzy numbers (Karpíšek 2009). 
+Arithmetic operations on interval numbers are defined 
+following relationships (Dostál 2008): </p>
+
+<p>     
+ 
++ 
+= + 
++ 
+     
+ 
+; 
+; 
+; 
+a b 
+c d 
+a c b d ; 
+(9) </p>
+
+<p>     
+ 
+− 
+= − 
+− 
+     
+ 
+; 
+; 
+; 
+a b 
+c d 
+a d b c ; 
+(10) </p>
+
+<p>{ 
+} 
+{ 
+} </p>
+
+<p>; · ; </p>
+
+<p>min , , , 
+; max , , , 
+; </p>
+
+<p>a b c d </p>
+
+<p>ac ad bc bd 
+ac ad bc bd </p>
+
+<p>    = 
+    
+ 
+ 
+ 
+ 
+(11) </p>
+
+<p> 
+ 
+      
+  
+= 
+∉ 
+      
+  
+ 
+ 
+1 
+1 
+; / ; 
+; · 
+; 
+for 0 
+; 
+a b 
+c d 
+a b 
+c d 
+d 
+c 
+. (12) </p>
+
+<p>Fuzzy logic measures the certainty or uncertainty of how 
+much the element belongs to the set. By means of fuzzy logic 
+it is possible to find the solution of given task from rules, 
+which were defined for analogous tasks. The calculation of 
+fuzzy logics consists of three basic steps: fuzzification, fuzzy 
+inference and defuzzification (Fig. 2). 
+1. Fuzzification -transforms real variables to linguis-
+tic variables using their attributes. The variable has 
+usually from three to seven attributes. The attribute 
+and membership functions are defined for input 
+and output variables. The degree of membership of 
+attributes is expressed by mathematical function -
+membership function (Π, Z, S, etc.) (Dostál 2011). 
+2. Fuzzy inference -defines the behavior of system by 
+using of rules of type &lt;When&gt;, &lt;Then&gt; on linguistic </p>
+
+<p>level. Conditional clauses typically have the follow-
+ing form: 
+&lt;When&gt; [Input_a1 &lt;And&gt; Input_a2 &lt;And&gt; ... 
+&lt;And&gt; Input_an] &lt; And &gt; [Input_b1 &lt;And&gt; Input_ 
+b2 &lt;And&gt; ... &lt;And&gt; Input_bm] &lt;Then&gt; Output_1. 
+Each combination of attributes of input and output 
+variables, occurring in condition &lt;When&gt;, &lt;Then&gt;, 
+presents one rule. The rules are created by the user 
+or expert himself (Dostál 2011). 
+3. Defuzzification -transfers the results of fuzzy infer-
+ence (numerical values) on output variables by linguis-
+tic values. It describes results verbally (Dostál 2011). 
+The system with fuzzy logic works as an automatic sys-
+tem. The user must enter input data only. These can be re-
+presented by many variables and their attributs. </p>
+
+<p>3. Results </p>
+
+<p>The case study presents the use of fuzzy logic at evaluation 
+of total project risk base on RIPRAN method. The Fuzzy 
+logic Toolbox of the <rs type="software">MATLAB</rs> software was used for the 
+creating of the decision making model. At first is it ne-
+cessary to design the variables, their attributes and their 
+membership functions. 
+The developed expert decision-making fuzzy model 
+system (ERS_TVPR) consists of two input ariables with 
+five attributes, one rule block and one output variable also 
+with five attributes. The inputs are represented by two varia-
+bles: The Number of Sub-Risk (NSR) and The Total Value of 
+Sub-Risks (TVSR). Both input variables are very important 
+indicators based on RIPRAN method. The output from the 
+rule block and the output variable is The Total Value of 
+Project Risk (TVPR) (Fig. 3). 
+It was used membership function of the shape Π in 
+the model. This membership fuction names trapmf (tra-
+pezoidal-shaped). Syntax of the function is following: y = 
+trapmf(x,[a b c d]). Description of the trapezoidal curve is 
+a function of a vector, x, and depends on four scalar para-
+meters a, b, c, d, as given by </p>
+
+<p>≤ 
+ 
+ 
+ 
+ 
+− 
+ 
+ 
+≤ ≤ 
+ 
+ 
+− 
+ 
+ 
+≤ ≤ 
+=  
+ 
+ 
+ 
+− 
+ 
+ 
+≤ ≤ 
+− 
+ 
+ 
+ 
+ 
+≤ 
+ 
+ </p>
+
+<p>0; </p>
+
+<p>; </p>
+
+<p>1; 
+( ; , , , ) </p>
+
+<p>0; </p>
+
+<p>x a 
+x a a x b 
+b a 
+b x c 
+f x a b c d 
+d x c x d 
+d c 
+d x </p>
+
+<p>. 
+(13) </p>
+
+<p>The parameters a and d locate the "feet" of the trapezoid 
+and the parameters b and c locate the "shoulders". Figure 4 
+denotes trapmf trapezoidal-shaped membership functions. 
+As can be seen from the chart, the function has a value 
+between 0 and 1, which also characterises how much it be-
+longs to a certain fuzzy set. </p>
+
+<p>Fig. 2. Decision-making -solved by fuzzy processing 
+(Dostál 2011) </p>
+
+<p>Fig. 3. Build up model </p>
+
+<p> 
+R. Doskočil. An evaluation of total project risk based on fuzzy logic </p>
+
+<p>The following Figures 5 and 6 show the attributes and 
+membership functions of the variables. 
+Figure 5 shows the input variable NSR with five attribu-
+tes (membership functions): VH -very high, H -high, M -
+middle, L -low and VL -very low. It was used membership 
+function of type Π (trapmf) and range [0;100] to creation 
+of fuzzy model. The parameters of membership functions 
+are adjusted balanced for each of the variables. The mem-
+bership function VH -very high has the parameters: [-22.5 
+-2.5 2.5 22.5]. The membership function H -high has the 
+parameters: [2.5 22.5 27.5 47.5]. The membership function 
+M -middle has the parameters: [27.5 47.5 52.5 72.5]. The 
+membership function L -low has the parameters: [52.5 72.5 
+77.5 97.5]. The membership function VL -very low has the 
+parameters: [77.5 97.5 102.5 122.5]. 
+The input variable TVSR has got also with five attributes 
+(membership functions): VH -very high, H -high, M -
+middle, L -low and VL -very low. It was used membership 
+function of type Π (trapmf) and range [0;100] to creation 
+of fuzzy model. The parameters of membership functions 
+are adjusted balanced for each of the variables. The mem-
+bership function VH -very high has the parameters: [-22.5 
+-2.5 2.5 22.5]. The membership function H -high has the 
+parameters: [2.5 22.5 27.5 47.5]. The membership function 
+M -middle has the parameters: [27.5 47.5 52.5 72.5]. The 
+membership function L -low has the parameters: [52.5 72.5 
+77.5 97.5]. The membership function VL -very low has the 
+parameters: [77.5 97.5 102.5 122.5]. 
+Figure 6 shows the output variable TVPR with five attri-
+butes (membership functions): VH -very high, H -high, 
+M -middle, L -low and VL -very low. It was used mem-
+bership function of type Π (trapmf) and range [0;100] to 
+creation of fuzzy model. The parameters of membership 
+functions are adjusted balanced for each of the variables. 
+The membership function VH -very high has the parame-
+ters: [-22.5 -2.5 2.5 22.5]. The membership function H -
+high has the parameters: [2.5 22.5 27.5 47.5]. The members-
+hip function M -middle has the parameters: [27.5 47.5 52.5 
+72.5]. The membership function L -low has the parameters: 
+[52.5 72.5 77.5 97.5]. The membership function VL -very 
+low has the parameters: [77.5 97.5 102.5 122.5]. 
+Figure 7 shows the rule box with 25 rules and degree of 
+support that set up the relationship between the input and 
+output variables. 
+The module allows you to set rules and work with them. 
+Rule number one is a situation where: </p>
+
+<p>&lt;If&gt; = NSR = VH &lt;And&gt; TVSR = 
+VH &lt;Then&gt;TVPR = VH. </p>
+
+<p>Interpretation of the rules is as follows: If the Number 
+of Sub-Risk (NSR) is very high (VH) and the Total Value of 
+Sub-Risks (TVSR) is very high (VH), then the Total Value 
+of Project Risk (TVPR) is evaluated to be very high (VH). </p>
+
+<p>Fig. 4. Membership function -Trapmf </p>
+
+<p>Fig. 5. The attributes and membership functions of input 
+variable NSR </p>
+
+<p>Fig. 6. The attributes and membership functions of output 
+variable TVPR </p>
+
+<p>Business: Theory and Practice, 2016, 17(1): 23-31 </p>
+
+<p>
+Similarly can be interpreted other fuzzy rules in the model. 
+The listing of a combination of all 25 of the rules of the 
+system based on the following linear distribution (Table 1). 
+Explanatory combination rules of the system. 
+Input variable NSR and TVSR: 
+1 -VH (very high) 
+2 -H (high) 
+3 -M (middle) 
+4 -L (low) 
+5 -VL (very low) 
+Output variable TVPR: TVPR = VH (very high) 
+TVPR = H (high) 
+TVPR = M (middle) 
+TVPR = L (low) 
+TVPR = VL (very low) 
+The list and combination of fuzzy rules for the total pro-
+ject risk evaluation system is based on an empirical research 
+into the given subject carried out by the guided interview 
+method. These rules can be change or defined for specific 
+project. 
+Figure 8 shows correlation between inputs and output 
+variables. Concretely this picture shows graphically corre-
+lation between two input variable NSR, TVSR and output 
+variable TVPR. It is a functional dependence TVPR = f 
+(NSR, TVSR). 
+Point with coordinates [0; 0] represents the situation 
+where the input variable NSR is very high and the input 
+variable TVSR is very high, then the output variable TVPR 
+is evaluated as very high. 
+Point with coordinates [100; 100] represents the si-
+tuation where the input variable NSR is very low and the 
+input variable TVSR is very low, then the output variable 
+TVPR is evaluated as very low. 
+Graphical display of dependencies of input and output 
+variables allows you to check the set parameters of fuzzy 
+model. Generally speaking, the displayed area of the model </p>
+
+<p>Fig. 7. Rule block and rules </p>
+
+<p>Table 1. The listing of a combination of rules </p>
+
+<p>NSR 
+TVSR 
+NSR 
+TVSR 
+NSR 
+TVSR 
+NSR 
+TVSR 
+NSR 
+TVSR </p>
+
+<p>1 
+1 
+2 
+1 
+3 
+1 
+4 
+1 
+5 
+1 </p>
+
+<p>TVPR = 
+VH 
+TVPR = 
+VH 
+TVPR = 
+VH 
+TVPR = H TVPR = M </p>
+
+<p>1 
+2 
+2 
+2 
+3 
+2 
+4 
+2 
+5 
+2 </p>
+
+<p>TVPR = 
+VH 
+TVPR = 
+VH 
+TVPR = H TVPR = M TVPR = L </p>
+
+<p>1 
+3 
+2 
+3 
+3 
+3 
+4 
+3 
+5 
+3 </p>
+
+<p>TVPR = 
+VH 
+TVPR = H TVPR = M TVPR = M TVPR = VL </p>
+
+<p>1 
+4 
+2 
+4 
+3 
+4 
+4 
+4 
+5 
+4 </p>
+
+<p>TVPR = H TVPR = M TVPR = M TVPR = VL TVPR = VL </p>
+
+<p>1 
+5 
+2 
+5 
+3 
+5 
+4 
+5 
+5 
+5 </p>
+
+<p>TVPR = M TVPR = M TVPR = VL TVPR = VL TVPR = VL </p>
+
+<p>Fig. 8. Correlation between variables </p>
+
+<p> 
+R. Doskočil. An evaluation of total project risk based on fuzzy logic </p>
+
+<p>is satisfactory because the specified rules and members-
+hip functions selected model adequately generalize. User 
+(expert) can change this variables how for presentation in 
+graphs. In this graphs you can see very important informa-
+tion about fuzzy model. </p>
+
+<p>4. Discussion </p>
+
+<p>Figure 9 shows the evaluation of total project risk of concre-
+te project. The input variables are set up NSR = 0, TVSR = 
+0. It leads to the result (output) TVPR = 7.29 which means 
+that the total risk of the project is very high. 
+Using the first rule is expressed by the output variable 
+TVPR coloration ( Fig. 9). 
+Figure 9 shows the result, where the total value of risk of 
+concrete project is evaluated as very high. The model was 
+verified in this manner. The results match the requirement, 
+so fuzzy model can be regarded generally as functional. 
+After the model is created, it must be tuned (to set up the 
+inputs on known values, evaluate the results and change the 
+rules or weights, if necessary). The tuning and validation of 
+the fuzzy model must be realised on real data of the project. 
+The parameters of the model must be adjusted on the basis 
+of the real data for each of the variables. If the validation 
+shows, that the model provides relatively accurate results, 
+can be used in practice. 
+For implementation of fuzzy model in <rs type="software">MATLAB</rs> 
+software was created executable file called "M-file". This file 
+contains the following sequence of commands (Fig. 10). 
+This file is used to enter the input values (NSR, TVSR) 
+and automatically evaluate the total value of project risk 
+(TVPR). 
+The first line (see Fig. 10) loads a variable BCHRP from 
+the file ERS_TVPR.fis. There are the parameters of fuzzy 
+model in this file. The second line (see Fig. 10) loads the 
+input variables: The Number of Sub-Risk (NSR); The Total 
+Value of Sub-Risks (TVSR). The third line (see Fig. 10) im-
+plements an evaluation with command evalfis. Inputs are va-
+riable DataBTVPR and parametres of fuzzy model BTVPR. 
+The value of the output is the variable EvaluationBTVPR. 
+The fourth to ninth line (see Fig. 10) implements own eva-
+luation. When the value of the output variable is evaluated 
+less than 20, then the output linguistic value is Very high 
+value of the total project risk. When the value of the output 
+variable is evaluated in the interval from 20 to 40, then the 
+output linguistic value is High value of the total project risk. 
+When the value of the output variable is evaluated in the 
+interval from 40 to 60, then the output linguistic value is 
+Middle value of the total project risk. When the value of the 
+output variable is evaluated in the interval from 60 to 80, 
+then the output linguistic value is Low value of the total 
+project risk. When the value of the output variable is eva-
+luated more than 80, then the output linguistic value is Very </p>
+
+<p>low value of the total project risk. Command fuzzy(BTVPR) 
+displays and allows set-up work fuzzy model (see Fig. 10, 
+line 10). Command mfedit(BTVPR) displays and allows 
+edit membership functions of input and output variables 
+(see Fig. 10, line 11). Command ruleedit(BTVPR) displays 
+and allows edit fuzzy rules (see Fig. 10, line 12). Command 
+surfview(BTVPR) displays graphical viewing dependency 
+input and output variables (see Fig. 10, line 13). Command 
+ruleview(BTVPR) displays and allows testing and simu-
+lation output variable to input variables (see Fig. 10, line 14). 
+If the M-file called TVPR.m is used to simulate (in 
+<rs type="software">MATLAB</rs> software) a request to enter inputs [The Number 
+of Sub-Risk and The Total Value of Sub-Risks] is displayed. 
+After enter inputs e.g.: The Number of Sub-Risk = 0 and 
+The Total Value of Sub-Risks = 0 in forme [0;0], is receive 
+the result TVPR = Very high value of the total project risk 
+(Fig. 11). 
+After enter inputs e.g.: The Number of Sub-Risk = 100 
+and The Total Value of Sub-Risks = 100 in forme [100;100], is </p>
+
+<p>Fig. 9. The evaluation of total project risk of concrete project </p>
+
+<p>Fig. 10. M-file -TVPR.m </p>
+
+<p>Fig. 11. Evaluation of calculation -Very high value of the 
+total project risk </p>
+
+<p>Business: Theory and Practice, 2016, 17(1): 23-31 </p>
+
+<p>
+receive the result TVPR = Very low value of the total project 
+risk (see Fig. 12). 
+The advantage of fuzzy sets in comparison with the 
+classical set theory is its ability to record inaccurate (va-
+gue) concepts that project managers use natural language 
+in the design and implementation of projects. Individual 
+characteristics associated with the process of project mana-
+gement, although the project practice countable relatively 
+well, but usually only with large variance. This means that 
+they are more or less well estimated. The current approach 
+eg. In the field of risk engineering applied either numerical 
+values of probability and impact, or worked with classical 
+sharp jurisdiction of these values into certain sets, which for 
+many applications not appropriate and did not correspond 
+to the actual perception of risk. Fuzzy approach to modeling 
+these processes minimizes this shortcoming. Application 
+of fuzzy modeling approach controversial (in relation to 
+the possibilities and practical usability exact calculation) 
+selected project processes is one of the major contributions 
+of this paper. 
+Suggested model is recommended to apply repeatedly 
+throughout the project life cycle. Applications reentrancy 
+proposed model is otherwise a static model added an ele-
+ment of dynamism, but they are mainly obtained data on the 
+future development of the project. This will not only project 
+managers with valuable information and hence knowledge 
+to support further decisions. Another advantage of the pro-
+posed model is the possibility of a subsequent experiment 
+with it eg. through simulation. This is more information 
+available about a possible variant development projects and 
+to get warning signals to support future decisions. </p>
+
+<p>Conclusions </p>
+
+<p>The expert fuzzy decision-making model of evaluation of 
+total project risk is only one of possible options how to 
+use fuzzy logic for support of decision-making. This paper 
+presented a new expert fuzzy model, based on the RIPRAN 
+method, specifically on the phase: risk assessment. This 
+phase evaluates the total project risk based on two parame-
+ters: the number of sub-risks and the total value of sub risk. 
+For creating of model is used fuzzy set theory and fuzzy 
+logic. The advantage of fuzzy sets in comparison with the 
+classical set theory is its ability to record inaccurate (vague) 
+concepts that project managers use natural language in the 
+design and implementation of projects. </p>
+
+<p>The advantage of this fuzzy model is the ability to trans-
+form the input variables The Number od SUb-Risks (NSR) 
+and The Total Value of Sub-Risk (TVSR) to linguistic va-
+riables, as well linguistic evaluated The Total Value Project 
+RIsk (TVPR) -output variable. With this approach it is 
+possible to simulate an uncertainty that is always associated 
+with projects. After the fuzzy model is constructed, it is 
+necessary to tune it (to set up the inputs on known values, 
+evaluate the results and to change the rules or weights, if 
+necessary) when the model was built. If the fuzzy model is 
+tuned, it is possible to use it in practice. For implement the 
+fuzzy model in <rs type="software">MATLAB</rs> can also created an executable file 
+called M-File. M-file is used to enter the input values and 
+automatically evaluate the total risk of the project. 
+The fuzzy model has a lot of benefits for users (pro-
+ject managers and others). Some of them are: speed up the 
+decision-making in risk management, automatization and 
+standardization of risk analysis process, effective project 
+management etc. </p>
+
+<p>Acknowledgements </p>
+
+<p>This paper was supported by grant FP-S-15-2787 'Effective 
+Use of ICT and Quantitative Methods for Business Processes 
+Optimization'' from the Internal Grant Agency at Brno 
+University of Technology. </p>
+
+
+
+<p> 
+R. Doskočil. An evaluation of total project risk based on fuzzy logic </p>
+
+
+
+<p>Business: Theory and Practice, 2016, 17(1): 23-31 </p>
+
+<p>
+</p></text></tei>

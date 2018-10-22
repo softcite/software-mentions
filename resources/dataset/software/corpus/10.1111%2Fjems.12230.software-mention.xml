@@ -1,0 +1,1433 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1111%2Fjems.12230" /><encodingDesc><appInfo><application version="0.5.2-SNAPSHOT" ident="GROBID" when="2018-10-20T01:01+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>Abstract 
+This paper studies the effect of word-of-mouth communication on the optimal pric-
+ing strategy for new experience goods. I consider a dynamic monopoly model with </p>
+
+<p>asymmetric information about product quality, in which consumers learn in equilib-
+rium from both prices and other consumers. The main result is that word-of-mouth </p>
+
+<p>communication is essential for the existence of separating equilibria, wherein the 
+high-quality monopolist signals high quality through a low introductory price (lower </p>
+
+<p>than the monopoly price), and the low-quality one charges the monopoly price. The 
+intuition is simple: low prices are costly, and will only be used by firms confident </p>
+
+<p>enough that increased experimentation (and therefore communication among con-
+sumers) will yield good news about quality and increased future profits. Additional 
+results are the following: for the high-quality seller, the expected price (quantity) is </p>
+
+<p>increasing (decreasing) over time; whereas for the low-quality one, the opposite is 
+true. Moreover, signaling becomes more difficult when consumers pay less attention </p>
+
+<p>to their peers' reports and more attention to past prices. Finally, word-of-mouth com-
+munication improves consumer welfare. </p>
+
+<p>Word-of-mouth (WOM) communication is a powerful instrument to disseminate product information prior to purchase. When 
+consumers face uncertainty about the quality of a new product, they are able to learn from their peers and, specifically, tend to 
+pay attention to what their fellow consumers observed after their own purchases (Arndt, 1967; Chen &amp; Xie, 2008; Zhu &amp; Zhang, 
+2010). This information, communicated via WOM or eWOM, 1 is likely to be more credible, and therefore more persuasive than 
+advertising or other seller-created information, because it is based on personal experience and usage (Bughin, Doogan, &amp; Vetvik, 
+2010; Dellarocas, 2003; Mayzlin, 2006). As such, WOM can be an important component of a firm's marketing strategy, and may 
+also act as a substitute for advertising, as it promises more impact than any other communication channel (Chen &amp; Xie, 2008; 
+Godes &amp; Mayzlin, 2004). After all, "Marketers may spend millions of dollars on elaborately conceived advertising campaigns, 
+yet often what really makes up a consumer' s mind is not only simple but also free: a word-of-mouth recommendation from a 
+trusted source" (Bughin et al., 2010). 
+Firms understand the importance of WOM and use it strategically. When firms are better informed about the characteristics 
+and quality of the product, prices may also provide valuable information to consumers, as they can be used as signals of quality 
+(Bagwell &amp; Riordan, 1991; Milgrom &amp; Roberts, 1986). Thus, prices become a signaling instrument to encourage or discourage 
+experimentation and thereby control the diffusion of information. In particular, low prices that generate WOM buzz can signal 
+high product quality. Low prices (and higher sales) lead to increased product exposure, which amplifies the good (or bad) news 
+generated through WOM communication. </p>
+
+<p>J Econ Manage Strat. 2018;27:53-70. 
+© 2017 Wiley Periodicals, Inc. 
+53 
+wileyonlinelibrary.com/journal/jems </p>
+
+<p>54 </p>
+
+<p>JOURNAL OF ECONOMICS &amp; MANAGEMENT STRATEGY </p>
+
+<p>This is particularly true in the case of experience goods, whose quality is unobserved at the time of purchasing, and only 
+becomes known after consuming and "tasting" the product. 2 Travelers, for example, would be remiss to reserve an <rs type="software">Airbnb</rs> 
+property without first consulting online reviews to ensure that previous guests confirm the host-reported quality. For their part, 
+hosts would be equally remiss not to incorporate this fact into the pricing strategy. Here, eWOM can bridge the information 
+gap between past consumers and potential consumers and help turn views into purchases. Indeed, Aerosolve, the dynamic open-
+source algorithm used by <rs type="software">Airbnb</rs> to provide hosts with date-specific price suggestions, prioritizes the capture of a first and second 
+review via penetration pricing. The fact that a property has no reviews is a negative "feature", which puts significant downward 
+pressure on the suggested price. Even in a machine-learning environment (as in the <rs type="software">Airbnb</rs> case), prices provide a signal from 
+which consumers can infer product quality, even as they influence the rate of information transmission via interpersonal com-
+munication. 
+Empirical evidence shows the positive effect of eWOM on sales for experience goods 3 (Chevalier &amp; Mayzlin, 2006; Cui, 
+Lui, &amp; Guo, 2006; Duan, Gu, &amp; Whinston, 2008; Liu, 2006; Lu, Ba, Huang, &amp; Feng, 2013). Moreover, eWOM is shown to 
+be particularly influential for recently introduced goods: the volume of reviews has a significant effect on new product sales in 
+the early period and decreases over time (Liu, 2006; Zhu &amp; Zhang, 2010). On the other hand, extensive economic literature has 
+explored the optimal pricing strategy and dynamics for new products of initially uncertain quality. Nevertheless, most signaling 
+models have ignored learning from others and the question of whether and how interpersonal communication across consumers 
+affects or is affected by prices. It is therefore interesting to study how a high-quality seller can take strategic advantage of 
+experimentation and WOM when choosing his pricing strategy. This paper addresses these questions by providing a simple 
+model in which WOM communication is combined with strategic pricing and signaling. 
+Specifically, I consider a two-period model, in which a long-lived monopolist introduces a new experience good of unknown 
+quality to consumers. The monopolist is privately informed about his type (either high or low), and a high-type seller is more 
+likely to produce high-quality products. Consumers are short-lived and the satisfaction they receive from buying is a function of 
+both objective quality and personal preference (or taste). First-period consumers can only rely on prices to infer the monopolist's 
+type (and therefore expected quality). Second-period consumers, on the other hand, learn through the observation of noisy signals 
+of past prices and observed quality. Notably, past prices are not directly observable, as public price information usually refers to 
+the posted price, which does not accurately reflect the final transaction price because sales, discounts, and/or geographic price 
+variations are not taken into account. Furthermore, consumers have been shown to have imprecise memories when it comes to 
+the final price paid for the product. 4 Still, past consumers report through WOM communication the satisfaction obtained from 
+the product, if purchased. Reports from past consumers are noisy signals of the observed quality as higher satisfaction can come 
+either from high quality or from strong personal preference. Moreover, communication between past and present consumers 
+is incomplete because social interaction remains limited by time, geography, and other constraint. 5 Nevertheless, information 
+gathered through WOM communication is more precise when the fraction of consumers who bought in the past is high. 
+I focus on the role of prices as signals of quality when consumers learn in equilibrium through both prices and WOM com-
+munication. First, I characterize the benchmark case without WOM communication among consumers, and show that there is 
+no separating equilibrium. I then show that, when allowing for WOM communication, there exists a separating equilibrium in 
+which prices signal quality. Given a sample information structure, I study how the separating equilibrium responds to variation 
+in the signal precision and compare consumer welfare in the benchmark and WOM case. Finally, I present model extensions. 
+The main result is that WOM communication is essential for the existence of separating equilibria. Moreover, in any separating 
+equilibrium, the high-quality monopolist signals quality through a low introductory price (lower than the monopoly price). 
+The intuition is simple: low prices are costly, and will only be used by firms confident enough that increased experimentation 
+(therefore communication among consumers) will yield good news about quality and increased future profits. The low-quality 
+monopolist, on the other hand, avoids information transmission by choosing a higher price (the monopoly price), which limits 
+sales and the possibility of learning through WOM. An additional implication: for the high-quality seller, the expected price 
+(quantity) is increasing (decreasing) over time; whereas for the low-quality one, the opposite is true. Since the second-period 
+price is a function of beliefs, it will be higher (lower) if good (bad) news is revealed in the first period when the product 
+is introduced. Moreover, the (low) separating price charged by the high-quality monopolist in equilibrium decreases as the 
+impact of signaling on consumers' beliefs increases: a high-quality seller must work harder to discourage the low-quality one 
+from mimicking its behavior if consumers pay less attention to their peers' reports. Finally, consumers are better off with WOM 
+communication. As a robustness check, I show that WOM communication and advertising can be either substitute or complement 
+instruments for the firm. In particular, when allowed to use WOM, the firm will never use "money-burning" advertising as a 
+signal of quality. On the contrary, when advertising is demand-enhancing, firms might use both instruments to signal quality. 
+Finally, the equilibrium is robust to reporting bias by first-period consumers. </p>
+
+<p>GUADALUPI </p>
+
+
+
+<p>This paper contributes to the existing literature in at least three dimensions. I extend the signaling literature by allowing 
+consumers' communication about product quality and by focusing on the case in which quality and costs are not correlated. The 
+standard "you get what you pay for" result from the signaling literature is reverted when allowing for WOM communication 
+among generations of consumers. Moreover, the situation in which quality is independent of marginal costs is particularly 
+relevant for tech products with previously and exogenously research and development (R&amp;D)-determined quality. The result also 
+extends the marketing literature, by offering a point of reference for comparison vis-à-vis the heretofore dominant marketing 
+strategy-advertising. Even though WOM and advertising are related (both are forms of communication about product quality), 
+the former is consumer-created communication and the latter is firm-created communication. Indeed, WOM communication is 
+more effective than traditional advertising because it is more informative, persuasive, and trustworthy. Finally, the results are 
+consistent with empirical evidence: WOM has positive effect on sales (see empirical literature cited above), but also high prices 
+signal low quality (Jin &amp; Kato, 2006). </p>
+
+<p>1.1 Related literature </p>
+
+<p>This paper is closely related to the literature on signaling quality through prices and/or advertising. Milgrom and Roberts (1986) 
+study a dynamic monopoly model in which both (introductory) price and advertising can signal quality. The main result is that 
+price signaling will typically occur and (dissipative) advertising will be used in equilibrium when separation through prices 
+is too costly. The extent to which price signaling occurs (through high or low prices) depends on the relationship between 
+quality and marginal costs. In the general case, in which quality is correlated with costs, both high prices (supra-monopoly) and 
+dissipative advertising signal quality. 6 Low prices are enough to signal quality when high-quality producers are more efficient. 7 
+Prices and advertising are complementary instruments in the former case and substitute instruments in the latter when both act 
+as demand-enhancing forces. Linnemer (2002) extends the previous model to consider a monopolist of intermediate age, so 
+that some but not all consumers are informed about quality. Informed consumers here play a role similar to repeat-purchases in 
+Milgrom-Roberts (1986). He confirms the Milgrom-Roberts (1986) result that (high) prices and advertising are complementary 
+instruments to signal quality. Linnemer (2011, 2012) provides a third explanation that justifies signaling through both high prices 
+and dissipative advertising: two-dimensional types, which allow for different degrees of correlation between production costs 
+and product quality. Bagwell and Riordan (1991) show that high (and declining) prices signal quality in a static monopoly for 
+durable goods and for different informational settings. This result is due to cost effects: signaling through high prices generates 
+lower sales, which cause less damage to a higher cost producer. Judd and Riordan (1994) obtain the same result by examining 
+a two-period signal-extraction model with learning. Even though no correlation between quality and costs is assumed, private 
+information on both sides of the market allows the seller to signal quality through high prices. I extend the signaling literature 
+by considering WOM communication among consumers and analyzing how it affects the firm' s pricing strategy. 
+This paper is also related to a growing branch of the marketing literature that focuses on WOM communication as a new form 
+of advertising. Mayzlin (2006) explores the situation in which advertising takes the form of promotional chat on the Internet, 
+so that advertising and WOM act like perfect-substitute learning mechanisms. He shows the existence of a unique (pooling) 
+equilibrium in which low-quality firms advertise more than high-quality ones (contrary to what the advertising literature pre-
+dicts), who instead rely more on consumer recommendations. Chen and Xie (2008) argue that the direction of the interaction 
+between advertising and WOM depends on product characteristics and market conditions. Given sufficiently informative con-
+sumer reviews, advertising and WOM are complements when product cost is low and/or the ratio of expert consumers is high. 
+On the other hand, when product cost is high, and consumers are mostly novices, advertising and WOM are substitutes. I extend 
+the marketing literature by studying how WOM communication can be affected by prices and then used as a signal of product 
+quality. 
+Finally, this paper is related to the literature on strategic experimentation. When both firms and consumers are uncertain about 
+product quality, initial sales help both sides of the market obtain information, so that low prices are optimal (Bergemann &amp; 
+Valimaki 1996, 1997; Caminal &amp; Vives, 1999; Schlee, 2001). Without information asymmetries, no signaling arises. However, 
+signaling quality through quantities is the main scope of Caminal and Vives (1996) and Vettas (1997). In a duopoly model, 
+Caminal and Vives (1996) show that firms cut prices in an attempt to make consumers think the product sells more because of 
+its higher quality and not simply because it is cheap. Their main focus is on market shares as signals of quality, even though 
+there is no communication among consumers. Vettas (1997) studies the informational role of quantities when allowing for WOM 
+communication among consumers in a monopoly market for durable goods. In this model, there is no separating equilibrium, but 
+only a pooling one in which a high-quality seller spreads sales to incentivize communication between consumers, and therefore 
+information transmission. I extend the last model by allowing learning in equilibrium from both prices and other consumers. 
+In particular I nest WOM learning, as modeled in Banerjee and Fudenberg (2004), in a two-period signaling model, in which </p>
+
+
+
+<p>JOURNAL OF ECONOMICS &amp; MANAGEMENT STRATEGY </p>
+
+<p>learning in equilibrium comes from both prices and other consumers. Moreover, I exploit the fact that learning is noisy in the 
+second period and the signals consumers receive can be ordered according to the precision criteria established by Ganuza and 
+Penalva (2010), which facilitates the existence proof. 
+The rest of the paper is organized as follows: the next section presents the model. Section 3 defines the separating equilibria 
+and presents the main results. Sections 4 shows an application of the model and addresses comparative statics and consumer 
+welfare. Section 5 presents extensions and discusses the robustness of results. Finally, Section 6 concludes. All proofs are in the 
+Appendix. </p>
+
+<p>2 THE MODEL </p>
+
+<p>Consider a two-period model, in which a long-lived monopolist introduces a new experience good of unknown quality to con-
+sumers. Quality í µí± is a random variable distributed according to í µí°¹ í µí¼ (í µí±), with positive and differentiable density í µí± í µí¼ (í µí±). The param-
+eter í µí¼ ∈ {í µí°», í µí°¿} represents the monopolist's type, which is private information and can be high or low. The distributions í µí°¹ í µí¼ (í µí±) 
+are ordered by first-order stochastic dominance (FOSD), with í µí°¹ í µí°» (í µí±) &lt; í µí°¹ í µí°¿ (í µí±), for all í µí±. 8 Quality is exogenous and can be thought 
+of as determined by R&amp;D prior to production, therefore unrelated to marginal costs, which I assume zero for both types. 
+Consumers are short-lived and represented by a continuum of mass 1. They have unit demand for the product and receive 
+satisfaction í µí± í µí± (í µí±, í µí±£ í µí± ) from purchasing and zero otherwise. Satisfaction í µí± í µí± (í µí±, í µí±£ í µí± ) is an increasing function of the common valuation 
+(objective quality) í µí± and the individual valuation (taste) í µí±£ í µí± , an independent draw from distribution í µí°º(í µí±£ í µí± ) with positive and 
+differentiable density í µí±(í µí±£ í µí± ). 9 Therefore, consumer satisfaction provides valuable, but noisy, information about observed quality. 
+The timing of the game is as follows: the monopolist learns í µí¼ and chooses the introductory price. First-period consumers 
+observe the price, but not í µí¼ (nor í µí±), update beliefs on the monopolist's type (therefore product quality), and make their purchase 
+decisions. If they buy, satisfaction is then observed. At the beginning of the second period, new consumers enter the market and 
+form their beliefs by observing noisy signals of past price and observed quality. The monopolist then sets the second-period 
+price. Given second-period beliefs and price, consumers make a purchase decision. Second-period profits are realized and the 
+game ends. </p>
+
+<p>2.1 Consumer beliefs and information structure </p>
+
+<p>Consumers share the prior belief í µí¼ 0 that the monopolist is a high-quality producer. First-period consumers can only rely on 
+prices to update beliefs. Separating prices (í µí± í µí°¿ , í µí± í µí°» ) induce beliefs í µí¼ = 0 if í µí± = í µí± í µí°¿ and í µí¼ = 1 if í µí± = í µí± í µí°» . 10 Moreover, I 
+restrict off-the-equilibrium path beliefs such that any deviation is attributed to the low-quality seller. Consumers learn their 
+personal valuation í µí±£ í µí± and decide whether to buy given í µí± , í µí¼ and í µí±£ í µí± . They buy if and only if í µí´¼ í µí¼ [í µí± í µí± (í µí±, í µí±£ í µí± ) − í µí± ] ≥ 0, which leads 
+to the aggregate first-period demand í µí°·(í µí± , í µí¼), increasing in beliefs and decreasing in price. 
+Second-period consumers have two mechanisms to infer the monopolist's type: noisy signals of past price and observed quality. 
+They observe a noisy signal of í µí± , from which they (imperfectly) infer the belief í µí¼ (price signal). 11 Additionally, they communi-
+cate with í µí°¾ randomly sampled first-period consumers, who report the satisfaction obtained from the product, if purchased. From 
+their average (random) report í µí±(í µí±, í µí±£ í µí± ), 12 second-period consumers update the belief í µí¼(í µí±) = ℙ(í µí¼ = H | r(q, v i )) (quality signal), 
+whose expected value is Λ(í µí±) = í µí´¼(í µí¼(í µí±)) 13 and whose precision depends positively on í µí°·(í µí± , í µí¼). 14 After observing both signals, 
+consumers form second-period beliefs í µí¼ 2 , which can be written as a function of í µí¼, Λ(í µí±) , and í µí°·(í µí± , í µí¼), í µí¼ 2 (í µí¼, Λ(í µí±), í µí°·(í µí± , í µí¼)). 
+The relative influence of each signal on second-period beliefs í µí¼ 2 depends on its respective informative content and precision. 
+The signal ordering relies on the notion of supermodular precision as defined by Ganuza and Penalva (2010), which allows 
+signals to be ordered in terms of their relative impacts on the distribution of conditional expectations. 15 The quality signal Λ(í µí±) 
+is more supermodular precise if the past quantity í µí°·(í µí± , í µí¼) is higher, as it increases the number of useful reports. On the other 
+hand, the price signal is independent of í µí°·(í µí± , í µí¼). Moreover, more precise (informative) signals will have higher influence on 
+updating consumers' beliefs (see lemma 1 in Ganuza &amp; Penalva, 2010). Therefore, second-period beliefs satisfy the following 
+conditions: </p>
+
+<p>1. </p>
+
+<p>í µí¼ 2 í µí¼ 2 (í µí¼,Λ(í µí±),í µí°·(í µí± ,í µí¼)) 
+í µí¼í µí°·(í µí± ,í µí¼)í µí¼Λ(í µí±) </p>
+
+<p>&gt; 0, </p>
+
+<p>2. </p>
+
+<p>í µí¼ 2 í µí¼ 2 (í µí¼,Λ(í µí±),í µí°·(í µí± ,í µí¼)) 
+í µí¼í µí¼í µí¼Λ(í µí±) </p>
+
+<p>&gt; 0, </p>
+
+<p>which imply that an increase in the quantity sold in the first period (directly or through higher first-period beliefs) makes WOM 
+communication more informative. Moreover, I assume that second-period beliefs are increasing in í µí¼. 16 After observing their </p>
+
+<p>GUADALUPI </p>
+
+
+
+<p>individual taste í µí±£ í µí± , second-period consumers decide whether to buy given í µí± 2 , í µí¼ 2 , and í µí±£ í µí± . They buy if and only if í µí°¸í µí¼ 2 [í µí± í µí± (í µí±, í µí±£ í µí± ) − 
+í µí± 2 ] ≥ 0, which leads to the aggregate second-period demand í µí°·(í µí± 2 , í µí¼ 2 ). </p>
+
+<p>2.2 Profits </p>
+
+<p>Let Π(í µí¼, í µí± , í µí¼) denote the expected profits of a monopolist of type í µí¼ who charged price í µí± in the first period, inducing beliefs í µí¼: </p>
+
+<p>Π(í µí¼, í µí± , í µí¼) = í µí± í µí°·(í µí± , í µí¼) + ∫ í µí± 
+í µí¼(í µí¼ 2 (í µí¼, Λ(í µí±), í µí°·(í µí± , í µí¼)))í µí± í µí¼ (í µí±)í µí±í µí±, 
+(1) </p>
+
+<p>where í µí¼(í µí¼ 2 ) represents second-period profits, which are increasing and convex in beliefs, and satisfy the following assumption: </p>
+
+<p>Assumption 1. Second-period marginal profits are decreasing in observed quality: </p>
+
+<p>í µí¼ 2 í µí¼(í µí¼ 2 (í µí¼, Λ(í µí±), í µí°·(í µí± , í µí¼))) 
+í µí¼í µí± í µí¼í µí± 
+&lt; 0. </p>
+
+<p>Assumption 1 ensures that low prices, therefore higher demand, are more beneficial to the high-quality monopolist that is 
+more likely to produce high quality. An increase in í µí°·(í µí± , í µí¼) will be detrimental to beliefs when news is bad and quality poor, 
+whereas it will improve the monopolist's reputation and profits when news is good. Note that this effect is more pronounced for 
+the low-quality seller who has a worse (in terms of FOSD) quality distribution. </p>
+
+<p>3 SEPARATING EQUILIBRIA </p>
+
+<p>This paper considers the role of prices as signals of quality when consumers learn in equilibrium through WOM communication. 
+Therefore, it is natural to focus on separating equilibria. In this context, separating equilibria are perfect Bayesian equilibria such 
+that consumers can distinguish between the high-and low-quality producer by their different pricing choices. It is important to 
+note that signaling occurs only in the first period. 17 In a separating equilibrium, consumers know the monopolist's type once 
+the introductory price is chosen. A separating equilibrium (í µí± í µí°¿ , í µí± í µí°» ) induces beliefs í µí¼ = 0 if í µí± = í µí± í µí°¿ and í µí¼ = 1 if í µí± = í µí± í µí°» . 
+Moreover, off-equilibrium prices í µí± ≠(í µí± í µí°¿ , í µí± í µí°» ) are assumed to induce pessimistic beliefs í µí¼ = 0. </p>
+
+<p>Definition 2. A (first-period) separating equilibrium is a pair (í µí± í µí°¿ , í µí± í µí°» ) such that: </p>
+
+<p>C1. Π(í µí°¿, í µí± í µí°¿ , í µí¼ = 0) ≥ Π(í µí°¿, í µí± , í µí¼ = 0), for every í µí± ≠ í µí± í µí°» . </p>
+
+<p>C2. Π(í µí°¿, í µí± í µí°¿ , í µí¼ = 0) ≥ Π(í µí°¿, í µí± í µí°» , í µí¼ = 1). </p>
+
+<p>C3. Π(í µí°», í µí± í µí°» , í µí¼ = 1) ≥ Π(í µí°», í µí± , í µí¼ = 0), for every í µí± ≠ í µí± í µí°» . </p>
+
+<p>For the low-quality monopolist, the equilibrium price í µí± í µí°¿ must dominate any price í µí± ≠ í µí± í µí°» that induces the same pessimistic 
+beliefs (C1). Moreover, the low-quality monopolist should not have incentives to mimic its high-quality counterpart, even if 
+this implies optimistic beliefs (C2). For the high-quality monopolist, í µí± í µí°» must dominate any other price í µí± , knowing that any 
+deviation will be treated as though it comes from a low-quality seller (C3). Lemma 9 follows from Definition 2. </p>
+
+<p>Lemma 3. In any separating equilibrium í µí± í µí°¿ = í µí± í µí°¿ *  , where í µí± í µí°¿ *  is the low-quality full-information monopoly price. For the 
+high-quality monopolist, it is sufficient to control for the best deviation, Π(í µí°», í µí± í µí°» , í µí¼ = 1) ≥ Π(í µí°», í µí± í µí°» *  , í µí¼ = 0), where í µí± í µí°» *  
+maximizes expected profits under beliefs í µí¼ = 0. </p>
+
+<p>Proof. See Appendix A. 
+□ </p>
+
+<p>3.1 Benchmark case: in the absence of word-of-mouth communication </p>
+
+<p>It is useful to establish a benchmark to compare the effects of WOM on the existence and characterization of separating equilibria. 
+I consider the static version of the game, in which consumers learn from prices while they are not allowed to communicate with 
+their peers. 18 When no communication among consumers is permitted, there is no fully revealing equilibrium in which prices 
+signal quality. The only existing equilibria are pooling. Moreover, the only pooling equilibrium that survives the undefeated 
+criterium proposed by Mailath, Okuno-Fujiwara, and Postlewaite (1993) is one in which the high-quality monopolist chooses 
+its preferred price-the price that maximizes profits under the prior belief í µí¼ 0 -and the low-quality one mimics him. </p>
+
+
+
+<p>JOURNAL OF ECONOMICS &amp; MANAGEMENT STRATEGY </p>
+
+<p>Lemma 4. Without WOM communication, there is no separating equilibrium. Indeed, the only pooling equilibrium that survives 
+the undefeated refinement is í µí±  *  , the maximizer of í µí± í µí°·(í µí± , í µí¼ 0 ). </p>
+
+<p>Proof. See Appendix A. 
+□ </p>
+
+<p>If consumers are not allowed to communicate about the observed quality, any price chosen by the high-quality seller can be 
+costlessly mimicked by the low-quality counterpart. This is true because the high-quality monopolist cannot profitably use the 
+price to manipulate information revelation and transmission between consumers' generations. Therefore, any equilibrium will 
+be a pooling one. Nevertheless, the restriction on off-equilibrium beliefs makes most pooling equilibria implausible. The only 
+pooling equilibrium that satisfies the undefeated criterium is the one in which the high-quality seller chooses his preferred price 
+and is imitated by the low-quality seller. </p>
+
+<p>3.2 Prices with word-of-mouth communication </p>
+
+<p>I now consider the model in which consumers can learn through prices and WOM communication, and solve the game using 
+backward induction. Following any history of separation (í µí± í µí°¿ *  , í µí± í µí°» ), consumers update beliefs to í µí¼ 2 (í µí¼, Λ(í µí±), í µí°·(í µí± , í µí¼)) and 
+second-period prices maximize í µí± 2 í µí°·(í µí± 2 , í µí¼ 2 (í µí¼, Λ(í µí±), í µí°·(í µí± , í µí¼))), which leads to second-period profits í µí¼(í µí¼ 2 (í µí¼, Λ(í µí±), í µí°·(í µí± , í µí¼))). 
+I look for separating equilibria as defined in Definition 2, and apply the intuitive criterion refinement (Cho &amp; Kreps, 1987) 
+to eliminate implausible off-equilibrium beliefs. As shown in Lemma 3, the low-quality monopolist cannot do better than to 
+behave as in the complete-information setting, by choosing the monopoly price. Thus, if the high-quality monopolist is to sep-
+arate, then he must choose a price that the low-quality seller would not mimic (and from which he would not deviate). To 
+focus on the case in which signaling is costly, I assume that the full-information monopoly price í µí± í µí°» *  *  does not satisfy C2, or 
+equivalently Π(í µí°¿, í µí± í µí°» *  *  , í µí¼ = 1) &gt; Π(í µí°¿, í µí± í µí°¿ *  , í µí¼ = 0). 19 The main result is that WOM communication allows the existence of 
+separating equilibria, in which the high-quality monopolist signals high quality through a low introductory price (lower than 
+the full-information monopoly price), whereas the low-quality monopolist charges a higher introductory price (higher than the 
+full-information monopoly price). </p>
+
+<p>Proposition 1. With WOM communication, there is always a separating equilibrium (í µí± í µí°¿ *  , í µí± í µí°» ) with í µí± í µí°» &lt; í µí± í µí°» *  *  . </p>
+
+<p>Proof. See Appendix A. 
+□ </p>
+
+<p>The intuition behind this result is simple: low prices are costly, and will only be used by firms confident enough that increased 
+experimentation (and therefore communication among consumers) will yield good news and therefore increased future profits. 
+The high-quality monopolist aims to maximize the benefits from consumer communication through increased sales, and therefore 
+uses a low price as a signal of quality. The low-quality monopolist, on the other hand, tries to avoid information transmission by 
+choosing a higher price, which limits sales and the probability that future consumers learn through WOM. This result contradicts 
+the standard signaling literature, according to which high prices signal high quality. Moreover, it complements both the literature 
+on quantity as signals of quality and the marketing literature by characterizing the signaling equilibrium when WOM is allowed. 
+As shown in Figure 1, the existence of a separating equilibrium is implied by two conditions: (i) í µí¼ 2 Π(í µí¼,í µí± ,í µí¼) </p>
+
+<p>í µí¼í µí¼í µí¼í µí± </p>
+
+<p>&lt; 0 (standard </p>
+
+<p>single-crossing) and (ii) í µí¼ 2 Π(í µí¼,í µí± ,í µí¼) </p>
+
+<p>í µí¼í µí¼í µí¼í µí¼ </p>
+
+<p>&gt; 0 ("sensitivity" single-crossing). Condition (i) implies that the cost of signaling through </p>
+
+<p>low prices is lower for the high-quality monopolist. So that, even when allowed to choose the optimal price, the high-quality 
+monopolist will prefer to set a lower price than his low-quality counterpart, holding beliefs constant. The second condition (ii) 
+requires that the shift from pessimistic to optimistic beliefs is more attractive to the high type than to his low-type counterpart. 20 
+It follows, from Proposition 5, that there is no separating equilibrium in which high prices signal high quality. The result is 
+due to the properties of second-period beliefs, which guarantee that standard single-crossing is negative. As more supermodular 
+precise signals have stronger influence on updating consumers' beliefs, an increase in í µí°·(í µí± , í µí¼) ensures a higher impact of the 
+quality signal on second-period beliefs. Therefore, more sales will be detrimental to beliefs when news is bad and quality is poor, 
+whereas they will improve the monopolist's reputation and profits when news is good. Bacause the high-quality seller is more 
+likely to spread good news, he will benefit more from high first-period demand. This fact makes the existence of separating 
+equilibria in which high prices (low quantities) 21 signal high quality impossible. Some additional implications: for the high-
+quality seller, the expected price (quantity) dynamic is increasing (decreasing) over time; whereas for the low-quality one, the 
+opposite is true. Because the second-period price is a function of beliefs, it will be higher (lower) if good (bad) news is revealed 
+in the first period when the product was introduced. 
+Most of these separating equilibria involve beliefs that are implausible, bacause any deviation is interpreted as coming from 
+a low-quality seller. To solve the problem of multiplicity of equilibria, I apply the intuitive criterion proposed by Cho and Kreps </p>
+
+<p>GUADALUPI </p>
+
+
+
+<p>F I G U R E 1 Sketch of the proof </p>
+
+<p>(1987). A separating equilibrium (í µí± í µí°¿ *  , í µí± í µí°» ) fails the intuitive criterion if there exists a price í µí± ' such that: (a) Π(í µí°», í µí± 
+′ , í µí¼ = </p>
+
+<p>1) ≥ Π(í µí°», í µí± í µí°» , í µí¼ = 1) and (b) Π(í µí°¿, í µí± 
+′ , í µí¼ = 1) &lt; Π(í µí°¿, í µí± í µí°¿ *  , í µí¼ = 0). That is, if there exists a price í µí± 
+′ such that the high-quality </p>
+
+<p>monopolist prefers to deviate and the low-quality monopolist makes more profits following the equilibrium strategy, even if the 
+deviation would have generated optimistic beliefs. Intuitively, if such a price exists, consumers should interpret such a deviation 
+as if it comes from a high-quality seller, which would collapse the equilibrium. </p>
+
+<p>Proposition 2. The only pair that satisfies the intuitive criterion is (í µí± í µí°¿ *  , í µí± ), where the price charged by the high-quality 
+monopolist is the least costly among the ones that induce separation, that is, í µí± í µí°» = ̄ 
+í µí± such that </p>
+
+<p>Π(í µí°¿, í µí± , í µí¼ = 1) = Π(í µí°¿, í µí± í µí°¿  *  
+, í µí¼ = 0). </p>
+
+<p>Proof. See Appendix A. 
+□ </p>
+
+<p>4 TRUTH OR NOISE APPLICATION </p>
+
+<p>I now provide an example of information structure that can be ranked according to the supermodular precision criterium. When 
+second-period consumers enter the market, they observe a noisy signal of past prices, from which they infer the belief ̃ 
+í µí¼(í µí¼) </p>
+
+<p>(price signal). Additionally, they communicate with í µí°¾ past consumers about the satisfaction obtained from the product, and 
+update beliefs to í µí¼(í µí±) (quality signal), whose expected value is Λ(í µí±). Moreover, the number of reports received is proportional 
+to the quantity sold by the monopolist in the first period, so that í µí°¾ is increasing in í µí°·(í µí± , í µí¼). Therefore, í µí¼ 2 , the conditional 
+expectation on the monopolist's type after receiving the two signals, can be written as í µí¼ 2 (í µí¼, Λ(í µí±), í µí°·(í µí± , í µí¼)). The information 
+structure I consider here is the "truth or noise" technology, as first defined by Lewis and Sappington (1994), or linear experiment, 
+as defined by Ganuza and Penalva (2010). A "truth or noise" signal returns the true parameter with some probability, and pure 
+noise with the complementary probability. Let the monopolist's type í µí¼ ∈ Θ be distributed according to a function í µí°»(í µí¼) with 
+mean í µí¼ 0 , and let ̃ 
+í µí¼ and í µí¼ be two signals about the true parameter í µí¼. With probability í µí±, ̃ 
+í µí¼ = í µí¼, and with probability 1 − í µí±, 
+̃ 
+í µí¼ = í µí¼, with í µí¼ = í µí¼ 0 . Similarly, with probability í µí°¾(í µí°·(í µí± , í µí¼)), í µí¼(í µí±) = Λ(í µí±), and with probability 1 − í µí°¾(í µí°·(í µí± , í µí¼)), no reports are </p>
+
+<p>received, so that í µí¼(í µí±) = í µí¼, with í µí¼ = í µí¼ 0 . Then, </p>
+
+<p>í µí¼ 2 (í µí¼, Λ(í µí±), í µí°·(í µí± , í µí¼)) ∶= í µí´¼(í µí¼ = í µí°» | ̃ 
+í µí¼, í µí¼) = í µí±í µí¼ + (1 − í µí±)í µí°¾(í µí°·(í µí± , í µí¼))Λ(í µí±) + (1 − í µí±)(1 − í µí°¾(í µí°·(í µí± , í µí¼)))í µí¼ 0 . </p>
+
+<p>It is easy to see that second-period beliefs satisfy the following conditions: </p>
+
+<p>í µí¼ 2 í µí¼ 2 (í µí¼,Λ(í µí±),í µí°·(í µí± ,í µí¼)) 
+í µí¼í µí°·(í µí± ,í µí¼)í µí¼Λ(í µí±) </p>
+
+<p>&gt; 0 and </p>
+
+<p>í µí¼ 2 í µí¼ 2 (í µí¼,Λ(í µí±),í µí°·(í µí± ,í µí¼)) 
+í µí¼í µí¼í µí¼Λ(í µí±) </p>
+
+<p>&gt; 0, </p>
+
+<p>which ensure that an increase in the quantity sold in the first period (directly or through higher first-period beliefs) makes 
+the quality signal Λ(í µí±) more supermodular precise, and therefore increases its impact on beliefs í µí¼ 2 (í µí¼, Λ(í µí±), í µí°·(í µí± , í µí¼)). In </p>
+
+
+
+<p>JOURNAL OF ECONOMICS &amp; MANAGEMENT STRATEGY </p>
+
+<p>particular: </p>
+
+<p>í µí¼ 2 í µí¼ 2 (í µí¼, Λ(í µí±), í µí°·(í µí± , í µí¼)) 
+í µí¼í µí°·(í µí± , í µí¼)í µí¼Λ(í µí±) 
+= 
+í µí¼í µí°¾(í µí°·(í µí± , í µí¼)) 
+í µí¼í µí°·(í µí± , í µí¼) 
+(1 − í µí±) &gt; 0, </p>
+
+<p>í µí¼ 2 í µí¼ 2 (í µí¼, Λ(í µí±), í µí°·(í µí± , í µí¼)) 
+í µí¼í µí¼í µí¼Λ(í µí±) 
+= 
+í µí¼í µí°¾(í µí°·(í µí± , í µí¼)) 
+í µí¼í µí°·(í µí± , í µí¼) </p>
+
+<p>í µí¼í µí°·(í µí± , í µí¼) 
+í µí¼í µí¼ 
+(1 − í µí±) &gt; 0. </p>
+
+<p>4.1 Comparative static on the equilibrium price í µí±· </p>
+
+<p>As shown in Section 3.2, the only pair that survives the intuitive criterion is (í µí± í µí°¿ *  , í µí± ). The low-quality monopolist charges 
+the full-information monopoly price, whereas the high-quality one charges the highest of the low prices that the low-quality 
+monopolist would not find profitable to mimic. Consider now the "truth or noise" information structure with associated second-
+period beliefs: </p>
+
+<p>í µí¼ 2 (í µí¼, Λ(í µí±), (í µí°·(í µí± , í µí¼))) = í µí±í µí¼ + (1 − í µí±)í µí°¾(í µí°·(í µí± , í µí¼))Λ(í µí±) + (1 − í µí±)(1 − í µí°¾(í µí°·(í µí± , í µí¼)))í µí¼ 0 . </p>
+
+<p>It is interesting to analyze how the equilibrium price changes when the signaling channel becomes more important, or equiv-
+alently how í µí± reacts to an increase in í µí±. The main result is that signaling becomes more difficult when consumers pay less 
+attention to their peers' reports and more attention to past prices. Indeed, a good signal in the first period (í µí± = í µí± í µí°» ) carries 
+more positive information to second-period buyers about the monopolist's type, making it more attractive. To discourage the 
+low-quality seller from mimicking, a lower price must be charged by the high-quality monopolist. </p>
+
+<p>Proposition 3. The separating equilibrium price í µí± is decreasing in í µí±. </p>
+
+<p>Proof. See Appendix A. 
+□ </p>
+
+<p>4.2 Consumer welfare </p>
+
+<p>I now compare consumer welfare under the separating equilibrium with WOM communication (í µí± í µí°¿ *  , í µí± ) to the benchmark case 
+without information transmission, in which firms charge in both periods í µí±  *  , the solution to max í µí± í µí± í µí°·(í µí± , í µí¼ 0 ) (see Lemma 4). 
+The result here is that consumer welfare improves in both periods when allowing for WOM communication between generations. 
+First-period consumers benefit from lower prices due to signaling. Second-period consumers gain, in expectation, from prices 
+that reveal information by reflecting better the expected product quality. </p>
+
+<p>Proposition 4. If </p>
+
+<p>1. í µí±  *  &gt; í µí± í µí°¿ *  . </p>
+
+<p>2. The inverse price elasticity 1 </p>
+
+<p>í µí¼(í µí± ,í µí¼) </p>
+
+<p>is convex in í µí¼. </p>
+
+<p>Then, both first-and second-period consumers are better off with WOM communication. </p>
+
+<p>Proof. Proof. See Appendix A. 
+□ </p>
+
+<p>Assumption 1 ensures that, absent signaling motives, even low-quality firms benefit from generating some level of WOM 
+buzz. This is true whenever the low-type monopolist produces high-quality products with a sufficiently high probability. Indeed, 
+Assumption 1 is satisfied if, on average, news about quality is good news. 22 Assumption 2 is satisfied whenever beliefs gen-
+erate a parallel shift of the demand function. As an example consider the following demand functions: í µí°·(í µí± , í µí¼) = í µí¼ − í µí± , or 
+í µí°·(í µí± , í µí¼) = í µí± (í µí¼) + í µí± (í µí± ) , with í µí± (í µí¼) concave in í µí¼. If both assumptions hold, then consumers are better off in both periods under </p>
+
+<p>the separating equilibrium with WOM. Note that both assumptions, particularly the first, are (overly) restrictive because I seek a 
+strong result-one that guarantees a welfare improvement from WOM independent of the monopolist's type and for consumers 
+in both periods. If I drop the first assumption, for example, WOM improves consumer welfare only if the seller is a high-type 
+monopolist. Given this result, any policy that protects consumers ability to communicate about product quality without restric-
+tion or bias yields a positive result. Again, this is particularly relevant for newly introduced technological and digital products, 
+for which online WOM has been shown to have strong effects on sales. Regulation of online consumer fora, which may or may 
+not be firm-hosted, would improve consumer welfare to the extent that it permits a free flow of information about product quality 
+between consumers. </p>
+
+<p>GUADALUPI </p>
+
+
+
+<p>5 EXTENSIONS </p>
+
+<p>This two-period framework allows for many interesting extensions. For example, the firm might communicate quality through 
+other instruments, such as advertising, discounts, or return policies. First, I highlight the differences between WOM and adver-
+tising by showing that no separating equilibrium exists when replacing the former with the latter. Next, I allow the monopolist 
+to use WOM and advertising, and show that both instruments can be substitutes or complements depending on the nature of 
+advertising (dissipative or informative). Finally, I endogenize the information transmission technology by allowing consumers 
+to misrepresent quality and show how the separating equilibrium responds to reporting bias. </p>
+
+<p>5.1 WOM versus advertising </p>
+
+<p>I analyze a simplified version of the model presented in Section 2. Specifically, quality can only take two values, either high 
+or low, í µí± ∈ {1, 0}, and the monopolist can signal quality through both prices and advertising. So that the expected profits of a 
+monopolist of type í µí¼ who chooses the pair (í µí± , í  in the first period, inducing beliefs í µí¼, are: </p>
+
+<p>Π(í µí¼, í µí± , í  í µí¼) = í µí± í µí°·(í µí± , í µí¼, í  + í µí¼[í µí¼(í µí¼ 2 (í µí¼, Λ(í µí± = 1), í µí°·(í µí± , í µí¼, í ))] + (1 − í µí¼)[í µí¼(í µí¼ 2 (í µí¼, Λ(í µí± = 0), í µí°·(í µí± , í µí¼, í ))], 
+(2) </p>
+
+<p>where í µí°·(í µí± , í µí¼, í  represents (first-period) demand and í µí¼(í µí¼ 2 ) (second-period) indirect profit function. Note that advertising can 
+be either dissipative, 23 as in the standard Milgrom-Roberts (1986) setup, so that í µí°· í µí°´(í µí± , í µí¼, í  = 0 or it can be informative or 
+"demand-enhancing," í µí°· í µí°´(í µí± , í µí¼, í  &gt; 0 (see Appendix B.1 for a detailed description of the simplified model). </p>
+
+<p>5.1.1 WOM versus dissipative advertising </p>
+
+<p>A high-quality monopolist will never use "money burning" (dissipative) advertising to signal quality, regardless of whether or 
+not WOM communication is used. In particular, when replacing WOM with advertising, there is no separating equilibrium and 
+the only existing equilibrium is a pooling one, which entails no advertising expenditure. 24 The intuition of the result is analogous 
+to the benchmark case (Lemma 4). If the high-quality monopolist cannot profitably use price and/or advertising to manipulate 
+information transmission among consumers, then any choice he makes will be costlessly mimicked by the low-quality firm. 
+Similarly, when the monopolist can use both instruments to signal quality, he will only rely on low prices (therefore WOM) to 
+signal quality, so that a separating equilibrium exists and it is the same as the one characterized in Section 3.2. Therefore, WOM 
+(driven by low prices) and advertising are substitute instruments for the firm. The two instruments are similar in that, from 
+the monopolist's point of view, they are both ways of throwing money away. Nevertheless, WOM entails a cost proportional to 
+demand, whereas dissipative advertising is a fixed cost. Thus, low prices are less costly for the high-quality firm who benefits 
+more from spreading news through high WOM buzz. See Appendix B.2 for a formal argument. </p>
+
+<p>5.1.2 WOM versus informative advertising </p>
+
+<p>Consider now the case in which advertising is informative or "demand-enhancing," so that it can be used as an instrument 
+to amplify the (good or bad) news about quality. This can happen through two alternative mechanisms. First, advertising can 
+amplify the quality signal by enhancing first-period demand, í µí°· í µí°´(í µí± , í µí¼, í  &gt; 0. As an example consider the demand function 
+í µí°· í µí°´(í µí± , í µí¼, í  = í µí°º(í í µí°·(í µí± , í µí¼) with í µí°º(⋅) increasing and concave in í  where advertising's main function is to expand the market </p>
+
+<p>size, therefore WOM. 25 This model can be thought of as one in which WOM is advertising-dependent (not only price-dependent). 
+Second, advertising can operate as a "megaphone" for second-period consumers by stressing the effect of the quality signal on 
+second-period beliefs. For example, suppose that firms pay information intermediaries a commission fee in return for a more 
+favorable quality recommendation or pay search engines for prominent placement. Therefore, second-period beliefs can be </p>
+
+<p>written as í µí¼ 2 (í µí¼, Λ(í µí±), í µí°·(í µí± , í µí¼), í  with </p>
+
+<p>í µí¼ 2 í µí¼ 2 (í µí¼,Λ(í µí±),í µí°·(í µí± ,í µí¼)) 
+í µí¼í µí°´í µí¼Λ(í µí±) </p>
+
+<p>&gt; 0. In both cases, there exists a separating equilibrium in which WOM </p>
+
+<p>(driven by low prices) and informative advertising might be both used as signals of quality. In particular, prices and informative 
+advertising are complementary instruments that can help the high-quality monopolist to separate from the low-quality one. See 
+Appendix B.3 for a formal argument. </p>
+
+<p>5.2 Reporting bias </p>
+
+<p>Consumers may face incentives to lie about quality, for example, in order to obtain lower prices. Indeed, the firm may incentivize 
+first-period consumers to misreport quality by offering a discount. 26 Consider the simplified version of the model with two 
+quality levels, í µí± ∈ {1, 0}, and the firm implementing the following "please lie" campaign, with intensity í  At a cost í µí° ¶(í , </p>
+
+
+
+<p>JOURNAL OF ECONOMICS &amp; MANAGEMENT STRATEGY </p>
+
+<p>increasing and convex, only a fraction í  first-period consumers misreport quality. In particular, a fraction í µí°´reports ̃ í µí± í µí± (í µí±, í µí±£ í µí± ) = 
+í µí± í µí± (í µí± = 1, í µí±£ í µí± ), whereas the remaining fraction 1 − í µí°´reports the truth, í µí± í µí± (í µí±, í µí±£ í µí± ). The monopolist can signal quality through both </p>
+
+<p>instruments, namely, prices and the "please lie" campaign. So that the expected profits of a monopolist of type í µí¼ who chooses 
+the pair (í µí± , í  in the first period, inducing beliefs í µí¼, are: </p>
+
+<p>Π(í µí¼, í µí± , í  í µí¼) = [í µí± í µí°·(í µí± , í µí¼) − í µí° ¶(í ] + (í µí¼ + í 1 − í µí¼))[í µí¼(í µí¼ 2 (í µí¼, Λ(í µí± = 1), í µí°·(í µí± , í µí¼)))] </p>
+
+<p>+ (1 − í µí¼)(1 − í [í µí¼(í µí¼ 2 (í µí¼, Λ(í µí± = 0), í µí°·(í µí± , í µí¼)))]. </p>
+
+<p>The main result is that the high-quality monopolist will not use the strategy í  any separating equilibrium, still preferring 
+low prices (WOM) to signal quality. This is mainly because the low-quality seller benefits more from (overly) biased reports 
+achieved through the "please lie" campaign. Therefore, the least-costly signaling strategy for the high-quality monopolist is to 
+avoid biased reports. For a detailed analysis, see Section 5.2 of the Appendix. </p>
+
+<p>6 CONCLUSION </p>
+
+<p>This paper studies the optimal pricing strategy for new experience goods in a dynamic monopoly with private information 
+about quality and WOM communication. Prices provide a signal from which consumers can infer product quality, even as they 
+influence the rate of information transmission via interpersonal communication. More sales lead to higher product exposure 
+in the subsequent period, which amplifies the good (or bad) news generated by the product through WOM communication. 
+Thus, prices become an instrument through which firms may signal quality by encouraging or discouraging experimentation 
+and thereby controlling the diffusion of information. In this framework, I show the existence of separating equilibria in which 
+low prices signal high quality. Furthermore, I extend the model to check robustness and endogenize some model features. I 
+compare the effectiveness of WOM-affected pricing and advertising in allowing high-quality firms to separate from low-quality 
+ones, and find that (low) prices (that generate more WOM communication) allow separation, whereas advertising does not. I 
+also investigate incentives for bias in consumer reporting, finding that in this context, consumers are driven to report observed 
+quality truthfully. Finally, I show that WOM communication is beneficial to consumers and discuss policy implications. 
+The main contribution is to allow learning in equilibrium from both prices and other consumers, in a setting in which 
+firms are equally efficient (quality and costs are not correlated). In particular, learning via WOM, as modeled in Banerjee 
+and Fudenberg (2004), is introduced in a two-period signaling model. From a technical point of view, the paper provides an 
+insight on how to characterize separating equilibria when the Spence-Mirrlees condition is not sufficient. In particular, two 
+cross-derivatives, standard single-crossing and "sensitivity" single-crossing properties, are sufficient for the existence of sep-
+arating equilibria. Moreover, I use the precision criteria proposed by Ganuza and Penalva (2010) to order signals received by 
+second-period consumers. This innovative approach allows consumers to rank signals based on their relative precision and 
+impact on the belief function. As first-period demand increases, so does the weight consumers assign to information from WOM 
+communication. 
+This framework can be extended in many interesting ways. For example, exploring price dynamics in the infinite-horizon 
+version of the model. Moreover, relaxing the assumption that consumers are short-lived to allow for a fraction of long-lived 
+consumers may reveal interesting insights on consumers' incentives to truthfully report quality. Introducing competition among 
+firms in order to investigate its implication on the equilibrium price and welfare is also of interest. An ambitious extension that 
+evaluates the effect of WOM communication using networks and influential consumers (digital influentials such as bloggers and 
+celebrities, for example) on signaling quality is very intriguing. Here, consumers give more weight to information coming from 
+within tight and trusted friend and family networks, as well as recommendations made by experts and even celebrities. Finally, 
+it would be nice to further explore the situation in which firms make use of WOM communication through both pricing and 
+(nondissipative) advertising strategies. </p>
+
+<p>E N D N O T E S </p>
+
+<p>1 WOM refers to product-related commentary shared between friends, family, neighbors, etc. Moreover, advances in information technology and the 
+digital revolution both facilitate and amplify the exchange of information on products via social networking sites and other online fora, such as 
+<rs type="software">Facebook</rs>, <rs type="software">Twitter</rs>, forums, blogs, etc., referred to as eWOM. </p>
+
+<p>2 Creative goods such as books (unless judged by the cover), restaurants, movies, and records are examples, as are services like hotels, vacation rentals, 
+and consumer electronics like video games, mobile phones, apps, and digital cameras. </p>
+
+<p>GUADALUPI </p>
+
+
+
+<p>3 According to Bughin et al. (2010), "In the mobile-phone market, for example, we have observed that the pass-on rates for key positive and negative 
+messages can increase a company's market share by as much as 10 percent or reduce it by 20 percent over a two-year period, all other things being 
+equal. This effect alone makes a case for more systematically investigating and managing word of mouth." </p>
+
+<p>4 See Caminal and Vives (1996) for a more detailed explanation of why price histories may be nonobservable. </p>
+
+<p>5 See Banerjee and Fudenberg (2004) for a more detailed explanation of why consumers are often allowed to communicate with just a fraction of 
+previous users. </p>
+
+<p>6 The high-cost, high-quality monopolist suffers less from contracting demand in the first period (lower markup), but also suffers more in the second 
+period because of lower sales (repeat-purchases effect). Due to these counteracting effects, the high-quality monopolist may have no better option 
+than to use dissipative advertising, along with a distorted price, to avoid copycat behavior (while high prices increase costs proportional to demand, 
+wasteful advertising is a fixed cost that does not allow the low-quality monopolist to benefit from copying). </p>
+
+<p>7 In this case, both the markup and the repeat-business effects point in the same direction and high prices are more costly to the high-quality seller. </p>
+
+<p>8 I assume permanent types; therefore, quality realizations í µí± are independent draws from the same distribution í µí°¹ (í µí±) in both periods. Moreover, quality 
+is the same for all units produced in each period. </p>
+
+<p>9 For example, satisfaction can be one of the following functions: í µí± í µí± (í µí±, í µí±£ í µí± ) = í µí± + í µí±£ í µí± or í µí± í µí± (í µí±, í µí±£ í µí± ) = í µí±í µí±£ í µí± . </p>
+
+<p>10 By observing the separating price, consumers will automatically know from which distribution quality has been drawn. On the other hand, pooling 
+prices do not provide any information and the posterior is unaltered, í µí¼ = í µí¼ 0 . </p>
+
+<p>11 Specifically, they observe a noisy signal of í µí± , from which they infer the belief ̃ 
+í µí¼(í µí¼) about the monopolist's type (price signal), as a function of the </p>
+
+<p>true í µí¼. </p>
+
+<p>12 For simplicity, I drop the problem of integrality of the number of reports. </p>
+
+<p>13 Λ(í µí±) is the update on the monopolist's (high) type after the observed quality, absent the noise caused by individual shock í µí±£ í µí± . </p>
+
+<p>14 The number of reports received is proportional to first-period demand. </p>
+
+<p>15 Basically, an information structure (the joint distribution of the unknown parameter and the signal) is more informative (more precise) than another 
+if it generates a more disperse distribution of conditional expectations. </p>
+
+<p>16 The belief generated by signaling, í µí¼, has a dual effect on second-period beliefs. The first one is direct, whereas the second one operates through an 
+increase in í µí°·(í µí± , í µí¼), which, in turn, amplifies the effect of the quality signal. I assume that the direct effect dominates the indirect one. </p>
+
+<p>17 The assumption that types are permanent prevents the need to consider dynamic signaling. Moreover, as it is a finite-horizon game, in í µí±¡ = 2, there 
+is no reason for firms to separate. </p>
+
+<p>18 The same result holds for the two-period model without WOM communication, as well as for the case in which WOM is exogenous (therefore 
+independent of first-period demand). </p>
+
+<p>19 The high-quality full-information monopoly price í µí± í µí°» *  *  is defined as the price that maximizes high-quality monopolist's expected profits under 
+correct beliefs í µí¼ = 1, Π(í µí°», í µí± , í µí¼ = 1). </p>
+
+<p>20 In Spence's job-market signaling model, good-type workers signal high-quality via increased education, which at some critical point, bad types are 
+unable to replicate because education is assumed to be more costly for them. Here, the logic of the signaling mechanism does not depend on cost 
+differences across types, instead copycat behavior is prevented by the existence of a second period with improved information (standard single-
+crossing). Nevertheless, in contrast to Spence's model where the worker's utility, quasi-linear in beliefs, ensures condition (ii), in our setup, signaling 
+also requires profits to be marginally more sensitive to type for beliefs í µí¼ (sensitivity single-crossing). </p>
+
+<p>21 Note that in the experimentation process, second-period consumers observe some noisy signal of the past quantity (for instance, the number of people 
+they meet who tell them they have purchased the product and how satisfied they were). Hence, signaling through (low) prices or (high) quantities 
+will yield the same result. </p>
+
+<p>22 A sufficient condition for Assumption 1 to be satisfied is ∫ í µí± </p>
+
+<p>í µí¼í µí¼(í µí¼ 2 (í µí¼=0,Λ(í µí±),í µí°·(í µí± ,í µí¼=0))) 
+í µí¼í µí¼ 2 (í µí¼=0,Λ(í µí±),í µí°·(í µí± ,í µí¼=0)) 
+í µí¼í µí¼ 2 (í µí¼=0,Λ(í µí±),í µí°·(í µí± ,í µí¼=0)) 
+í µí¼í µí°·(í µí± ,í µí¼=0) </p>
+
+<p>í µí± í µí°¿ (í µí±)í µí±í µí± &gt; 0. </p>
+
+<p>23 Any ad campaign that conveys no direct information about the quality of the product. </p>
+
+<p>24 Without WOM communication, profits 2 reduces to Π(í µí¼, í µí± , í  í µí¼) = í µí± í µí°·(í µí± , í µí¼, í  + í µí¼(í µí¼ 2 (í µí¼)), which are independent of the monopolist's type. </p>
+
+<p>25 Consider, as an example, the referrals program implemented by <rs type="software">Airbnb</rs> to encourage inviting friends by giving both the sender and recipient $25 of 
+travel credit when the invited user completes their first trip. The idea is to increase WOM by stimulating the demand. </p>
+
+<p>26 Consumers may also spontaneously misreport quality (imagine that consumers are friends of a restaurant owner or recently opened store). In this 
+case, the bias can be one of the two types. First, consumers may report a satisfaction level higher than what they actually experienced, that is, 
+̃ í µí± í µí± (í µí±, í µí±£ í µí± ) = í µí± í µí± (í µí±, í µí±£ í µí± ) + í µí±. Second, consumers may report as high quality was observed, that is, ̃ í µí± í µí± (í µí±, í µí±£ í µí± ) = í µí± í µí± (í µí± = 1, í µí±£ í µí± ). In the first scenario, the quality </p>
+
+<p>signal Λ(í µí±) is unchanged due to the systematic bias in consumers Bayesian updating. In other words, if misreporting generates differences in reports, 
+then second-period consumers can filter it out. Thus, the separating equilibrium is the same as the one characterized in Section 3.2. In the second 
+scenario, the quality signal is Λ(í µí± = 1), as low quality is never reported. Expected profits are then independent of the monopolist's type and the 
+high-quality monopolist can no longer use prices to manipulate information transmission. Therefore, there is no separating equilibrium. </p>
+
+<p>27 Again, I restrict off-the-equilibrium path beliefs such that any deviation is attributed to the low-quality seller. </p>
+
+<p>28 Again, no opportunities for signaling remain in the second period; therefore, (í µí± 2 , í µí°´2 ) are the solution to the problem: max (í µí± 2 ,í µí°´2 ) í µí± 2 í µí°·(í µí± 2 , í µí¼ 2 , í µí°´2 ) − 
+í µí° ¶(í µí°´2 ). </p>
+
+
+
+<p>JOURNAL OF ECONOMICS &amp; MANAGEMENT STRATEGY </p>
+
+
+
+<p>GUADALUPI </p>
+
+
+
+<p>APPENDIX A </p>
+
+<p>Proof of Lemma 3. A necessary condition for C1 to be satisfied is that the low-quality monopolist charges in equilibrium 
+the full-information monopoly price, í µí± í µí°¿ *  , which is the price that maximizes expected profits under the correct beliefs (í µí¼ = 0). 
+Moreover, C3 requires that the high-quality monopolist should not have any incentive to deviate from the equilibrium price, 
+as such deviation implies pessimistic beliefs. Then, it is sufficient to control for the best deviation, which occurs at í µí± í µí°» *  , the 
+maximizer of Π(í µí°», í µí± , í µí¼ = 0). 
+□ </p>
+
+<p>Proof of Lemma 4. We show this result by contradiction. Let í µí¼(í µí± , í µí¼) = í µí± í µí°·(í µí± , í µí¼) denote the one-period profits of a monopolist 
+of type í µí¼ who sets the price í µí± , inducing beliefs í µí¼. As a corollary of Lemma 3, two conditions guarantee the existence of a 
+separating equilibrium: </p>
+
+<p>C1 í µí¼(í µí± í µí°¿ *  , í µí¼ = 0) ≥ í µí¼(í µí± í µí°» , í µí¼ = 1), and </p>
+
+<p>C2 í µí¼(í µí± í µí°» , í µí¼ = 1) ≥ í µí¼(í µí± í µí°» *  , í µí¼ = 0). </p>
+
+<p>Consider a separating equilibrium (í µí± í µí°¿ *  , í µí± í µí°» ) where í µí± í µí°» = í µí± such that í µí¼(í µí± í µí°¿ *  , í µí¼ = 0) = í µí¼(í µí± , í µí¼ = 1). At this price, the high-
+quality seller should not have any incentive to deviate to his monopoly price, í µí¼(í µí± , í µí¼ = 1) &gt; í µí¼(í µí± í µí°» *  , í µí¼ = 0), or equivalently 
+í µí¼(í µí± í µí°¿ *  , í µí¼ = 0) &gt; í µí¼(í µí± í µí°» *  , í µí¼ = 0). This cannot be true basause í µí± í µí°» *  = í µí± í µí°¿ *  . Therefore, the only existing equilibrium is a pooling </p>
+
+<p>one. Note that all the prices such that í µí¼(í µí± , í µí¼ = í µí¼ 0 ) ≥ í µí¼(í µí± í µí¼ *  , í µí¼ = 0) are pooling equilibria. Nevertheless, most of them are 
+supported by implausible off-equilibrium beliefs, because every deviation is thought of as coming from a low-quality seller. 
+Such implausible equilibria can be ruled out by the undefeated refinement proposed by Mailath et al. (1993). In particular, 
+the only pooling equilibrium that survives the undefeated refinement is í µí±  *  , the price that maximizes í µí¼(í µí± , í µí¼ 0 ). Consider a 
+proposed equilibrium í µí± &lt; í µí±  *  and the price í µí±  *  , chosen in an alternative equilibrium by some firm's type. If some type prefers 
+the alternative equilibrium price í µí±  *  to the proposed one (and this preference is strict for at least one type), then consumers' 
+beliefs that the deviator is of that type are increasing. Then, a profitable deviation appears for the firm that upset the equilibrium. 
+Note that here, both types would strictly prefer to deviate to the alternative equilibrium price; therefore, the only undefeated 
+equilibrium involves firms pooling at í µí±  *  . 
+□ </p>
+
+<p>Proof of Proposition 5. As a corollary of Lemma 9, two conditions guarantee the existence of a separating equilibrium: </p>
+
+<p>C1 Π(í µí°¿, í µí± í µí°¿ *  , í µí¼ = 0) ≥ Π(í µí°¿, í µí± í µí°» , í µí¼ = 1), and </p>
+
+<p>C2 Π(í µí°», í µí± í µí°» , í µí¼ = 1) ≥ Π(í µí°», í µí± í µí°» *  , í µí¼ = 0). </p>
+
+<p>Consider the price í µí± &lt; í µí± í µí°» *  , such that the low-quality monopolist is indifferent between following the equilibrium strategy 
+or mimic his high-quality counterpart, Π(í µí°¿, í µí± , í µí¼ = 1) = Π(í µí°¿, í µí± í µí°¿ *  , í µí¼ = 0). A separating equilibrium exists if at this price, the 
+high-quality monopolist has no incentive to deviate to his monopoly price: </p>
+
+<p>Π(í µí°», í µí± , í µí¼ = 1) − Π(í µí°», í µí± í µí°» *  , í µí¼ = 0) &gt; 0 = Π(í µí°¿, í µí± , í µí¼ = 1) − Π(í µí°¿, í µí± í µí°¿ *  , í µí¼ = 0) 
+(A.1) </p>
+
+<p>[Π(í µí°», í µí± , í µí¼ = 0) − Π(í µí°», í µí± í µí°» *  , í µí¼ = 0)] + [Π(í µí°», í µí± , í µí¼ = 1) − Π(í µí°», í µí± , í µí¼ = 0)] </p>
+
+<p>&gt;[Π(í µí°¿, í µí± , í µí¼ = 0) − Π(í µí°¿, í µí± í µí°¿ *  , í µí¼ = 0)] + [Π(í µí°¿, í µí± , í µí¼ = 1) − Π(í µí°¿, í µí± , í µí¼ = 0)]. </p>
+
+<p>For (A.1) to be satisfied, the following two conditions are sufficient: </p>
+
+<p>1. [Π(í µí°», í µí± , í µí¼ = 0) − Π(í µí°», í µí± í µí°» *  , í µí¼ = 0)] &gt; [Π(í µí°¿, í µí± , í µí¼ = 0) − Π(í µí°¿, í µí± í µí°¿ *  , í µí¼ = 0)]. </p>
+
+<p>2. [Π(í µí°», í µí± , í µí¼ = 1) − Π(í µí°», í µí± , í µí¼ = 0)] &gt; [Π(í µí°¿, í µí± , í µí¼ = 0) − Π(í µí°¿, í µí± í µí°¿ *  , í µí¼ = 0)]. </p>
+
+<p>As shown in Figure 1, these two conditions are implied by: </p>
+
+<p>í µí± í µí°» *  &lt; í µí± í µí°¿ *  , 
+(A.2) </p>
+
+<p>í µí¼ 2 Π(í µí¼, í µí± , í µí¼) 
+í µí¼í µí¼í µí¼í µí± 
+&lt; 0, 
+(A.3) </p>
+
+
+
+<p>JOURNAL OF ECONOMICS &amp; MANAGEMENT STRATEGY </p>
+
+<p>í µí¼ 2 Π(í µí¼, í µí± , í µí¼) 
+í µí¼í µí¼í µí¼í µí¼ 
+&gt; 0. 
+(A.4) </p>
+
+<p>As (A.2) is implied by (A.3), then it is enough to show that í µí¼ 2 Π(í µí¼,í µí± ,í µí¼) </p>
+
+<p>í µí¼í µí¼í µí¼í µí± </p>
+
+<p>&lt; 0: </p>
+
+<p>í µí¼ 2 Π(í µí¼, í µí± , í µí¼) 
+í µí¼í µí¼í µí¼í µí± 
+= 
+í µí¼ 
+í µí¼í µí¼í µí¼í µí± </p>
+
+<p>{ 
+í µí± í µí°·(í µí± , í µí¼) + ∫ í µí± 
+í µí¼(í µí¼ 2 (í µí¼, Λ(í µí±), í µí°·(í µí± , í µí¼)))í µí± í µí¼ (í µí±)í µí±í µí± </p>
+
+<p>} </p>
+
+<p>= 
+í µí¼ 
+í µí¼í µí± </p>
+
+<p>{ </p>
+
+<p>∫ í µí± 
+í µí¼(í µí¼ 2 (í µí¼, Λ(í µí±), í µí°·(í µí± , í µí¼))) 
+í µí¼í µí± í µí¼ (í µí±) 
+í µí¼í µí¼ 
+í µí±í µí± </p>
+
+<p>} </p>
+
+<p>= ∫ í µí± 
+í µí¼í µí¼(í µí¼ 2 (í µí¼, Λ(í µí±), í µí°·(í µí± , í µí¼))) 
+í µí¼í µí± 
+í µí¼í µí± í µí¼ (í µí±) 
+í µí¼í µí¼ 
+í µí±í µí±. </p>
+
+<p>Since the family of distributions í µí°¹ í µí¼ (í µí±) is ordered by FOSD, then the integral is negative for every decreasing function in í µí±. Note 
+that the function </p>
+
+<p>í µí¼í µí¼(í µí¼ 2 (í µí¼,Λ(í µí±),í µí°·(í µí± ,í µí¼))) 
+í µí¼í µí± </p>
+
+<p>is decreasing in í µí± by Assumption 1. Finally, sensitivity single-crossing should be positive, </p>
+
+<p>í µí¼ 2 Π(í µí¼,í µí± ,í µí¼) 
+í µí¼í µí¼í µí¼í µí¼ </p>
+
+<p>&gt; 0: </p>
+
+<p>í µí¼ 2 Π(í µí¼, í µí± , í µí¼) 
+í µí¼í µí¼í µí¼í µí¼ 
+= 
+í µí¼ 
+í µí¼í µí¼ </p>
+
+<p>{ </p>
+
+<p>∫ í µí± 
+í µí¼(í µí¼ 2 (í µí¼, Λ(í µí±), í µí°·(í µí± , í µí¼))) 
+í µí¼í µí± í µí¼ (í µí±) 
+í µí¼í µí¼ 
+í µí±í µí± </p>
+
+<p>} </p>
+
+<p>= ∫ í µí± 
+í µí¼í µí¼(í µí¼ 2 (í µí¼, Λ(í µí±), í µí°·(í µí± , í µí¼))) 
+í µí¼í µí¼ 
+í µí¼í µí± í µí¼ (í µí±) 
+í µí¼í µí¼ 
+í µí±í µí±. </p>
+
+<p>Because the family of distributions í µí°¹ í µí¼ (í µí±) is ordered by FOSD, then the integral is positive for every increasing function in í µí±. 
+Therefore, it is enough to show that </p>
+
+<p>í µí¼í µí¼(í µí¼ 2 (í µí¼,Λ(í µí±),í µí°·(í µí± ,í µí¼))) 
+í µí¼í µí¼ </p>
+
+<p>is increasing in í µí±: </p>
+
+<p>í µí¼ 2 í µí¼(í µí¼ 2 (í µí¼, Λ(í µí±), í µí°·(í µí± , í µí¼))) 
+í µí¼í µí¼í µí¼í µí± 
+= 
+í µí¼ 
+í µí¼í µí± 
+{ í µí¼í µí¼(í µí¼ 2 (í µí¼, Λ(í µí±), í µí°·(í µí± , í µí¼))) </p>
+
+<p>í µí¼í µí¼ 2 (í µí¼, Λ(í µí±), í µí°·(í µí± , í µí¼)) 
+í µí¼í µí¼ 2 (í µí¼, Λ(í µí±), í µí°·(í µí± , í µí¼)) 
+í µí¼í µí¼ </p>
+
+<p>} </p>
+
+<p>= 
+í µí¼Λ(í µí±) 
+í µí¼í µí± 
+( í µí¼ 2 í µí¼(í µí¼ 2 (í µí¼, Λ(í µí±), í µí°·(í µí± , í µí¼))) </p>
+
+<p>í µí¼ 2 í µí¼ 2 (í µí¼, Λ(í µí±), í µí°·(í µí± , í µí¼)) </p>
+
+<p>í µí¼í µí¼ 2 (í µí¼, Λ(í µí±), í µí°·(í µí± , í µí¼)) 
+í µí¼Λ(í µí±) 
+í µí¼í µí¼ 2 (í µí¼, Λ(í µí±), í µí°·(í µí± , í µí¼)) 
+í µí¼í µí¼ </p>
+
+<p>) </p>
+
+<p>+ 
+í µí¼Λ(í µí±) 
+í µí¼í µí± 
+( í µí¼í µí¼(í µí¼ 2 (í µí¼, Λ(í µí±), í µí°·(í µí± , í µí¼))) </p>
+
+<p>í µí¼í µí¼ 2 (í µí¼, Λ(í µí±), í µí°·(í µí± , í µí¼)) 
+í µí¼ 2 í µí¼ 2 (í µí¼, Λ(í µí±), í µí°·(í µí± , í µí¼)) 
+í µí¼í µí¼í µí¼Λ(í µí±) </p>
+
+<p>) 
+, </p>
+
+<p>which is positive because second-period profits are increasing and convex in beliefs, second-period beliefs are increasing in 
+the quality and price signal, and the quality signal Λ(í µí±) is increasing in the observed quality. Moreover, second-period beliefs </p>
+
+<p>satisfy : </p>
+
+<p>í µí¼ 2 í µí¼ 2 (í µí¼,Λ(í µí±),í µí°·(í µí± ,í µí¼)) 
+í µí¼í µí¼í µí¼Λ(í µí±) </p>
+
+<p>&gt; 0 (an increase in first-period beliefs í µí¼ generates more demand, which, in turn, makes the quality </p>
+
+<p>signal Λ(í µí±) more informative, and therefore increases its impact on beliefs í µí¼ 2 (í µí¼, Λ(í µí±), í µí°·(í µí± , í µí¼))). 
+□ </p>
+
+<p>Proof of Proposition 6. The proof consists of two steps. I first show that there is no equilibrium price í µí± &lt; í µí± that satisfies the 
+intuitive criterion. Consider the price í µí± &lt; í µí± such that (í µí± í µí°¿ *  , í µí± ) is a separating equilibrium. Define í µí± 
+′ = í µí± + í µí¼. Then, it is easy </p>
+
+<p>to see that (a) Π(í µí°», í µí± 
+′ , í µí¼ = 1) ≥ Π(í µí°», í µí± , í µí¼ = 1) and (b) Π(í µí°¿, í µí± 
+′ , í µí¼ = 1) &lt; Π(í µí°¿, í µí± í µí°¿ *  , í µí¼ = 0). Noting that í µí± í µí°» *  *  &gt; í µí± í µí°» *  and </p>
+
+<p>í µí± í µí°» *  &gt; í µí± &gt; í µí± 
+′ , it follows that í µí± í µí°» *  *  &gt; í µí± 
+′ &gt; í µí± . Therefore, Π(í µí°», í µí± 
+′ , í µí¼ = 1) ≥ Π(í µí°», í µí± , í µí¼ = 1). Moreover, by Proposition 5, </p>
+
+<p>Π(í µí°¿, í µí± , í µí¼ = 1) &lt; Π(í µí°¿, í µí± í µí°¿ *  , í µí¼ = 0), then by continuity, Π(í µí°¿, í µí± 
+′ , í µí¼ = 1) &lt; Π(í µí°¿, í µí± í µí°¿ *  , í µí¼ = 0). Thus, for any price, í µí± &lt; í µí± con-</p>
+
+<p>dition (a) is not satisfied, violating the intuitive criterion. I now show that (í µí± í µí°¿ *  , í µí± ) is the only separating equilibrium that 
+satisfies the intuitive criterion. If í µí± 
+′ &lt; í µí± , condition (a) is not satisfied. Then, í µí± 
+′ ≥ í µí± . But if í µí± 
+′ &gt; í µí± , there is no separating </p>
+
+<p>equilibrium, because any deviation at í µí± 
+′ &gt; í µí± is profitable for the low-quality seller, as shown in Proposition 5. Then, it must </p>
+
+<p>be í µí± 
+′ = í µí± , and (í µí± í µí°¿ *  , í µí± ) is the only separating equilibrium that satisfies the intuitive criterion. 
+□ </p>
+
+<p>Proof of Proposition 7. The least costly equilibrium price í µí± is such that Π(í µí°¿, í µí± í µí°¿ *  , í µí¼ = 0) = Π(í µí°¿, í µí± , í µí¼ = 1). It is therefore 
+enough to analyze how the last equality varies with í µí±: </p>
+
+<p>GUADALUPI </p>
+
+
+
+<p>í µí¼Π(í µí°¿, í µí± í µí°¿ *  , í µí¼ = 0) 
+í µí¼í µí± 
+= 
+í µí¼Π(í µí°¿, í µí± , í µí¼ = 1) 
+í µí¼í µí± </p>
+
+<p>× 
+í µí¼ 
+í µí¼í µí± </p>
+
+<p>{ 
+í µí± í µí°¿ *  í µí°·(í µí± í µí°¿ *  , í µí¼ = 0) + ∫ í µí± 
+í µí¼(í µí¼ 2 (í µí±, í µí¼ = 0, Λ(í µí±), í µí°·(í µí± í µí°¿ *  , í µí¼ = 0)))í µí± í µí°¿ (í µí±)í µí±í µí± </p>
+
+<p>} </p>
+
+<p>= 
+í µí¼ 
+í µí¼í µí± </p>
+
+<p>{ 
+í µí± í µí°·(í µí± , í µí¼ = 1) + ∫ í µí± 
+í µí¼(í µí¼ 2 (í µí±, í µí¼ = 1, Λ(í µí±), í µí°·(í µí± , í µí¼ = 1)))í µí± í µí°¿ (í µí±)í µí±í µí± </p>
+
+<p>} 
+. </p>
+
+<p>Therefore: </p>
+
+<p>í µí¼í µí± 
+í µí¼í µí± 
+= 
+∫ í µí± </p>
+
+<p>[ </p>
+
+<p>í µí¼í µí¼(í µí¼ 2 (í µí±,0,Λ(í µí±),í µí°·(í µí± í µí°¿ *  ,0))) 
+í µí¼í µí¼ 2 (í µí±,0,Λ(í µí±),í µí°·(í µí± í µí°¿ *  ,0)) 
+í µí¼í µí¼ 2 (í µí±,0,Λ(í µí±),í µí°·(í µí± í µí°¿ *  ,0)) 
+í µí¼í µí± </p>
+
+<p>− </p>
+
+<p>í µí¼í µí¼(í µí¼ 2 (í µí±,1,Λ(í µí±),í µí°·(í µí± ,1))) </p>
+
+<p>í µí¼í µí¼ 2 (í µí±,1,Λ(í µí±),í µí°·(í µí± ,1)) </p>
+
+<p>í µí¼í µí¼ 2 (í µí±,1,Λ(í µí±),í µí°·(í µí± ,1)) 
+í µí¼í µí± </p>
+
+<p>] 
+í µí± í µí°¿ (í µí±)í µí±í µí± </p>
+
+<p>[ 
+(í µí± í µí¼í µí°·(í µí± ,1) </p>
+
+<p>í µí¼í µí± </p>
+
+<p>+ í µí°·(í µí± , 1)) + ∫ í µí± </p>
+
+<p>í µí¼í µí¼(í µí¼ 2 (í µí±,1,Λ(í µí±),í µí°·(í µí± ,1))) </p>
+
+<p>í µí¼í µí¼ 2 (í µí±,1,Λ(í µí±),í µí°·(í µí± ,1)) </p>
+
+<p>í µí¼í µí¼ 2 (í µí±,1,Λ(í µí±),í µí°·(í µí± ,1)) </p>
+
+<p>í µí¼í µí°·(í µí± ,1) </p>
+
+<p>í µí¼í µí°·(í µí± ,1) 
+í µí¼í µí± </p>
+
+<p>í µí± í µí°¿ (í µí±)í µí±í µí± </p>
+
+<p>] 
+&lt; 0. </p>
+
+<p>Note that the equilibrium price í µí± is decreasing in í µí± as from the last expression, the numerator is negative and the denominator 
+is positive. The numerator is negative because second-period beliefs are increasing in í µí±, the weight consumers attribute to sig-
+naling, when beliefs generated by signaling are the most optimistic, í µí¼ = 1; whereas the contrary occurs for the most pessimistic 
+case, in which í µí¼ = 0. The denominator is the sum of two terms, both positive. In particular, the first term represents first-period 
+marginal income, which is positive given í µí± &lt; í µí± í µí°» *  *  . The second term is also positive because first-period demand is decreasing 
+in price, and second-period beliefs are decreasing in demand-the weight placed on the quality signal-when the price signal 
+is the most favorable, í µí¼ = 1. 
+□ </p>
+
+<p>Proof of Proposition 8. Consumers' surplus is given by </p>
+
+<p>í µí±(í µí± , í µí±) = ∫ </p>
+
+<p>í µí±£ </p>
+
+<p>í µí±£=í µí±£  *  (í µí± ) </p>
+
+<p>[ </p>
+
+<p>∫ í µí± 
+(í µí±(í µí±, í µí±£) − í µí± )í µí± í µí¼ (í µí±)í µí±í µí± </p>
+
+<p>] 
+í µí±(í µí±£)í µí±í µí±£, </p>
+
+<p>where í µí±£  *  (í µí± ) is defined by ∫ í µí± í µí±(í µí±, í µí±£  *  (í µí± ))í µí± í µí¼ (í µí±)í µí±í µí± = í µí± . Consider first í µí±¡ = 1. Given Assumption 1, first-period consumers benefit 
+from WOM communication independent of the monopolist's type. Indeed, the price charged by either firms is lower than the 
+price consumers would pay in the benchmark without WOM, that is, í µí±  *  &gt; í µí± í µí°¿ *  &gt; í µí± . First, note that í µí± í µí°¿ *  &gt; í µí± by definition. 
+Then, consider the low-type monopolist maximization problem, with first-order condition (FOC): </p>
+
+<p>[ 
+í µí± í µí°· í µí± (í µí± , í µí¼ = 0) + í µí°·(í µí± , í µí¼ = 0) 
+] </p>
+
+<p>+ í µí°· í µí± (í µí± , í µí¼ = 0) ∫ í µí± 
+í µí¼í µí¼(í µí¼ 2 (í µí¼ = 0, Λ(í µí±), í µí°·(í µí± , í µí¼ = 0))) 
+í µí¼í µí¼ 2 (í µí¼ = 0, Λ(í µí±), í µí°·(í µí± , í µí¼ = 0)) 
+í µí¼í µí¼ 2 (í µí¼ = 0, Λ(í µí±), í µí°·(í µí± , í µí¼ = 0)) 
+í µí¼í µí°·(í µí± , í µí¼ = 0) 
+í µí± í µí°¿ (í µí±)í µí±í µí± = 0. </p>
+
+<p>Let denote the myopic monopoly price by í µí± í µí± . Note that </p>
+
+<p>∫ í µí± 
+í µí¼í µí¼(í µí¼ 2 (í µí¼ = 0, Λ(í µí±), í µí°·(í µí± , í µí¼ = 0))) 
+í µí¼í µí¼ 2 (í µí¼ = 0, Λ(í µí±), í µí°·(í µí± , í µí¼ = 0)) 
+í µí¼í µí¼ 2 (í µí¼ = 0, Λ(í µí±), í µí°·(í µí± , í µí¼ = 0)) 
+í µí¼í µí°·(í µí± , í µí¼ = 0) 
+í µí± í µí°¿ (í µí±)í µí±í µí± &gt; 0 </p>
+
+<p>is a sufficient condition for Assumption 1 to be satisfied, so that the marginal income is positive and í µí± í µí± &gt; í µí± í µí°¿ *  . Moreover, 
+í µí±  *  &gt; í µí± í µí± because í µí± is increasing in í µí¼. Therefore, í µí±  *  &gt; í µí± í µí°¿ *  &gt; í µí± . Consider now í µí±¡ = 2. Following any history of separation, </p>
+
+<p>second-period prices maximize í µí± 2 í µí°·(í µí± 2 , í µí¼ 2 (í µí¼, Λ(í µí±), í µí°·(í µí± , í µí¼))). Note that second-period belief í µí¼ 2 (í µí¼, Λ(í µí±), í µí°·(í µí± , í µí¼)) is a martin-
+gale (specifically, it is a weighted average of martingales). Think, for example, of the belief í µí¼ 2 derived by the "truth or noise" 
+information structure, for the particular case in which quality is a discrete variable, either high or low. I now show that demand 
+functions that satisfy Assumption 2 are such that í µí± 2 is a supermartingale with respect to í µí±  *  . Let í µí¼ 0 be a martingale, that is, 
+í µí¼ 0 = í µí±Λ(1) + (1 − í µí±)Λ(0) , í µí± ∈ (0, 1), and consider the maximization problem </p>
+
+<p>max </p>
+
+<p>í µí± </p>
+
+<p>í µí± í µí°·(í µí± , í µí¼) </p>
+
+
+
+<p>JOURNAL OF ECONOMICS &amp; MANAGEMENT STRATEGY </p>
+
+<p>with solution í µí± (í µí¼) = − í µí°·(í µí± ,í µí¼) </p>
+
+<p>í µí°· í µí± (í µí± ,í µí¼) </p>
+
+<p>, for any í µí¼ ∈ {í µí¼ 0 , Λ(1), Λ(0)} . It is enough to show that if í µí¼ 0 is a martingale, then í µí± (í µí¼ 0 ) is a 
+supermartingale: </p>
+
+<p>− 
+í µí°·(í µí± , í µí¼ 0 ) 
+í µí°· í µí± (í µí± , í µí¼ 0 ) 
+≥ −í µí± 
+í µí°·(í µí± , Λ(1)) 
+í µí°· í µí± (í µí± , Λ(1)) 
+− (1 − í µí±) 
+í µí°·(í µí± , Λ(0)) 
+í µí°· í µí± (í µí± , Λ(0)) 
+, </p>
+
+<p>í µí°·(í µí± , í µí¼ 0 ) 
+í µí± í µí°· í µí± (í µí± , í µí¼ 0 ) 
+≤ í µí± 
+í µí°·(í µí± , Λ(1)) 
+í µí± í µí°· í µí± (í µí± , Λ(1)) 
++ (1 − í µí±) 
+í µí°·(í µí± , Λ(0)) 
+í µí± í µí°· í µí± (í µí± , Λ(0)) 
+, </p>
+
+<p>which is true for any demand function with (inverse) price elasticity 1 </p>
+
+<p>í µí¼(í µí± ,í µí¼) </p>
+
+<p>convex in í µí¼. For example, for every demand function 
+of the form í µí°·(í µí± , í µí¼) = í µí¼ − í µí± , or í µí°·(í µí± , í µí¼) = í µí± (í µí¼) + í µí± (í µí± ) , if í µí± (í µí¼) is concave in í µí¼ . Therefore, on average, í µí± 2 ≤ í µí±  *  . Basically, 
+because consumer surplus is convex in prices, a mean preserving spread in prices is beneficial to consumers. As long as prices 
+are a supermartingale, which is guaranteed by Assumption 2, prices are in average lower under the separating equilibrium. 
+In conclusion, consumer welfare in the second period is not reduced with WOM communication. Therefore, consumers are 
+unequivocally better off when allowing for WOM communication. 
+□ </p>
+
+<p>APPENDIX B: EXTENSIONS </p>
+
+<p>B.1 The simplified model with Advertising </p>
+
+<p>Consider now a simplified version of the model in which quality í µí± can only take two values, high or low, í µí± ∈ {1, 0}. Quality 
+depends on the monopolist's type, í µí¼ ∈ {í µí°», í µí°¿}, with í µí¼ = ℙ(q = 1). A high-quality monopolist has higher probability of produc-
+ing high-quality products. The monopolist is long-lived and each period chooses price and advertising, (í µí± , í . Marginal costs 
+are zero for both types, and denote by í µí° ¶(í  the cost of advertising expenditure, which is increasing and convex. Consumers are 
+short-lived and represented by a continuum of mass 1. They have unit demand for the product and receive satisfaction í µí± í µí± (í µí±, í µí±£ í µí± ) 
+if they purchase and zero otherwise. The timing of the game is as follows: the monopolist learns his type and chooses the intro-
+ductory price and advertising level. After observing the pair (í µí± , í , consumers update beliefs on the monopolist's type (and 
+therefore product quality) and make their purchase decisions. If they buy, satisfaction is then observed. At the beginning of the 
+second period, new consumers enter the market and form their beliefs by observing noisy signals of past price, advertising and 
+observed quality. The monopolist then sets the second-period price and advertising expenditure. Given second-period beliefs 
+and price, consumers make a purchase decision. Second-period profits are realized and the game ends. 
+Consumers' beliefs and information structure. Consumers share the prior belief í µí¼ 0 that the monopolist is a high-
+quality producer. First-period consumers observe (í µí± , í  and update beliefs on í µí¼. A separating strategy [(í µí± í µí°¿ , í µí°´í µí°¿ ), (í µí± í µí°» , í µí°´í µí°» )] 
+induces beliefs í µí¼ = 0 if (í µí± , í  = (í µí± í µí°¿ , í µí°´í µí°¿ ) and í µí¼ = 1 if (í µí± , í  = (í µí± í µí°» , í µí°´í µí°» ). 27 Given í µí±£ í µí± , í µí± and í µí¼ consumers' demand is 
+given by í µí°·(í µí± , í µí¼, í . Note that advertising can be both dissipative, as in the standard Milgrom-Roberts (1986) setup, so 
+that í µí°· í µí°´(í µí± , í µí¼, í  = 0, or it can be informative or "demand-enhancing," í µí°· í µí°´(í µí± , í µí¼, í  &gt; 0. Second-period consumers observe 
+noisy signals of past price and advertising expenditure (í µí± , í , from which they infer the belief ̃ 
+í µí¼(í µí¼) about the monopolist's </p>
+
+<p>type, as a function of the true í µí¼. Additionally, they communicate with í µí°¾ randomly sampled first-period consumers, who 
+report the satisfaction obtained from the product, if purchased. From their average (random) report í µí±(í µí±, í µí±£ í µí± ), second-period con-
+sumers update the belief í µí¼(í µí±) = ℙ(í µí¼ = H | r(q, v i )) (quality signal). Note that the belief í µí¼(í µí±) is a noisy signal of the true belief 
+Λ(í µí±) = ℙ(í µí¼ = H | q): </p>
+
+<p>Λ(í µí± = 1) = 
+í µí¼ 0 í µí°» 
+í µí¼ 0 í µí°» + (1 − í µí¼ 0 )í µí°¿ 
+, Λ(í µí± = 0) = 
+í µí¼ 0 (1 − í µí°») 
+í µí¼ 0 (1 − í µí°») + (1 − í µí¼ 0 )(1 − í µí°¿) 
+, </p>
+
+<p>whose precision depends positively on í µí°·(í µí± , í µí¼, í . After observing both signals, consumers form second-period beliefs 
+í µí¼ 2 (í µí¼, Λ(í µí±), í µí°·(í µí± , í µí¼, í ) that can be ordered by supermodular precision. Second-period consumers decide whether to buy given 
+í µí± 2 , í µí¼ 2 , and í µí±£ í µí± , which leads to second-period demand í µí°·(í µí± 2 , í µí¼ 2 ). 28 </p>
+
+<p>Profits. Let Π(í µí¼, í µí± , í  í µí¼) denote the expected profits of a monopolist of type í µí¼ who chooses the pair (í µí± , í  in the first period, 
+inducing beliefs í µí¼: </p>
+
+<p>Π(í µí¼, í µí± , í  í µí¼) = í µí± í µí°·(í µí± , í µí¼, í  + í µí¼[í µí¼(í µí¼ 2 (í µí¼, Λ(í µí± = 1), í µí°·(í µí± , í µí¼, í ))] + (1 − í µí¼)[í µí¼(í µí¼ 2 (í µí¼, Λ(í µí± = 0), í µí°·(í µí± , í µí¼, í ))], </p>
+
+<p>where í µí¼(í µí¼ 2 ) represents the indirect profit function of the monopolist in the second period (increasing and convex in beliefs). </p>
+
+<p>GUADALUPI </p>
+
+
+
+<p>Separating equilibria are defined according to Definition 2 and Lemma 3. Therefore, two conditions guarantee the existence 
+of a separating equilibrium: </p>
+
+<p>1. Π(í µí°¿, í µí± í µí°¿ *  , í µí°´í µí°¿ *  , í µí¼ = 0) ≥ Π(í µí°¿, í µí± í µí°» , í µí°´í µí°» , í µí¼ = 1). </p>
+
+<p>2. Π(í µí°», í µí± í µí°» , í µí°´í µí°» , í µí¼ = 1) ≥ Π(í µí°», í µí± í µí°» *  , í µí°´í µí°» *  , í µí¼ = 0). </p>
+
+<p>I focus on the least costly separating equilibrium (i.e., the equilibrium that satisfies the intuitive criterium) that the low-quality 
+monopolist would not mimic, that is, the pair (í µí± , í  that solves the following problem: </p>
+
+<p>max </p>
+
+<p>(í µí± ,í  </p>
+
+<p>Π(í µí¼ = í µí°», í µí± , í  í µí¼ = 1) </p>
+
+<p>í µí± .í µí±¡. Π(í µí¼ = í µí°¿, í µí± í µí°¿ *  , í µí°´í µí°¿ *  , í µí¼ = 0) ≥ Π(í µí¼ = í µí°¿, í µí± , í  í µí¼ = 1) </p>
+
+<p>with associated Lagrangian </p>
+
+<p> = Π(í µí¼ = H, P, A, í µí¼ = 1) + í µí¼ 
+[ 
+Π(í µí¼ = L, P L *  , A L *  , í µí¼ = 0) − Π(í µí¼ = L, P, A, í µí¼ = 1) 
+] . 
+(B.1) </p>
+
+<p>B.2 WOM versus dissipative advertising </p>
+
+<p>Lemma 9. If advertising is dissipative, then, in any separating equilibrium, the high-quality monopolist chooses low prices and 
+no advertising to signal high quality. </p>
+
+<p>Proof. Existence. The existence proof follows the same reasoning as Proof of Proposition 5. In particular, two single-crossing 
+properties guarantee the existence of a separating equilibrium given that advertising is dissipative. 
+Characterization. Suppose that the solution to problem (B.1) entails positive advertising. Then, the FOC with respect to </p>
+
+<p>advertising reduces to í µí¼ = 1, because dissipative advertising implies that Π(í µí¼, í µí± , í  í µí¼) depends on í  through −í µí° ¶ 
+′ (í . </p>
+
+<p>Consider now the FOC with respect to price. Using í µí¼ = 1: </p>
+
+<p>í µí¼Π(í µí°», í µí± , í í µí¼ = 1) 
+í µí¼í µí± 
+− 
+í µí¼Π(í µí°¿, í µí± , í í µí¼ = 1) 
+í µí¼í µí± 
+= 0, </p>
+
+<p>which cannot be satisfied because standard single-crossing implies í µí¼ 2 Π(í µí¼,í µí± ,í í µí¼) </p>
+
+<p>í µí¼í µí¼í µí¼í µí± </p>
+
+<p>&lt; 0 (LHS&lt;0). Therefore, advertising is not used </p>
+
+<p>in equilibrium by a high-quality monopolist. 
+□ </p>
+
+<p>B.3 WOM versus informative advertising </p>
+
+<p>Lemma 10. If advertising is informative, in any separating equilibrium, the high-quality monopolist might use either instru-
+ments, prices, and advertising, to signal high quality. </p>
+
+<p>Proof. Existence. Following Proof of Proposition 5, the existence of a separating equilibrium is guaranteed by three single-
+crossing properties: í µí¼ 2 Π(í µí¼,í µí± ,í µí¼) </p>
+
+<p>í µí¼í µí¼í µí¼í µí± </p>
+
+<p>&lt; 0 (standard SCP), í µí¼ 2 Π(í µí¼,í µí± ,í µí¼) </p>
+
+<p>í µí¼í µí¼í µí¼í µí¼ </p>
+
+<p>&gt; 0 (sensitivity SCP) and (advertising SCP) í µí¼ 2 Π(í µí¼,í µí± ,í µí¼) </p>
+
+<p>í µí¼í µí¼í µí¼í µí°´&gt; 
+ 0. The </p>
+
+<p>last condition states that informative advertising is marginally more profitable for the high-quality producer. Because he is more 
+likely to produce high-quality products, he benefits more from amplifying the good news about the observed quality through 
+informative advertising. 
+Characterization. Suppose that the solution to problem (B.1) entails positive advertising. Then, FOCs can be written as </p>
+
+<p>í µí¼ 
+í µí¼í µí°´∶  </p>
+
+<p>í µí¼Π(í µí°»,í µí± ,í í µí¼=1) 
+í µí¼í µí°´í  µí¼Π(í µí°¿,í µí± ,í í µí¼=1) 
+í µí¼í µí°´= 
+ í µí¼ &gt; 1, </p>
+
+
+
+<p>JOURNAL OF ECONOMICS &amp; MANAGEMENT STRATEGY </p>
+
+<p>since í µí¼ 2 Π(í µí¼,í µí± ,í í µí¼=1) </p>
+
+<p>í µí¼í µí¼í µí¼í µí°´&gt; 
+ 0 . Note that for the case in which advertising is demand-enhancing, í µí¼ 2 Π(í µí¼,í µí± ,í í µí¼=1) </p>
+
+<p>í µí¼í µí¼í µí¼í µí°´&gt; 
+ 0 given </p>
+
+<p>í µí°· í µí°´(í µí± , í µí¼, í  &gt; 0, í µí¼(í µí¼ 2 ) convex in beliefs, and condition 1 on second-period beliefs: </p>
+
+<p>í µí¼ 2 í µí¼ 2 (í µí¼,Λ(í µí±),í µí°·(í µí± ,í µí¼,í ) 
+í µí¼í µí°·(í µí± ,í µí¼,í í µí¼Λ(í µí±) </p>
+
+<p>&gt; 0. Similarly, when </p>
+
+<p>advertising acts as a "megaphone", í µí¼ 2 Π(í µí¼,í µí± ,í í µí¼=1) </p>
+
+<p>í µí¼í µí¼í µí¼í µí°´&gt; 
+ 0, given í µí¼(í µí¼ 2 ) convex in beliefs and </p>
+
+<p>í µí¼ 2 í µí¼ 2 (í µí¼,Λ(í µí±),í µí°·(í µí± ,í µí¼,í ) 
+í µí¼í µí°´í µí¼Λ(í µí±) </p>
+
+<p>&gt; 0. Moreover, </p>
+
+<p>í µí¼ 
+í µí¼í µí± 
+∶ </p>
+
+<p>í µí¼Π(í µí°»,í µí± ,í í µí¼=1) 
+í µí¼í µí± 
+í µí¼Π(í µí°¿,í µí± ,í í µí¼=1) 
+í µí¼í µí± </p>
+
+<p>= í µí¼ &gt; 1, </p>
+
+<p>since standard single-crossing implies í µí¼ 2 Π(í µí¼,í µí± ,í í µí¼) </p>
+
+<p>í µí¼í µí¼í µí¼í µí± </p>
+
+<p>&lt; 0. Therefore, informative advertising and low introductory prices are com-</p>
+
+<p>plementary instruments for the firm to signal quality: í µí¼ 2 Π(í µí¼,í µí± ,í í µí¼=1) </p>
+
+<p>í µí¼í µí¼í µí¼í µí°´&gt; 
+ 0 and í µí¼ 2 Π(í µí¼,í µí± ,í í µí¼) </p>
+
+<p>í µí¼í µí¼í µí¼í µí± </p>
+
+<p>&lt; 0. In fact, the monopolist will use </p>
+
+<p>both instruments if Inada conditions hold. 
+□ </p>
+
+<p>B.4 Reporting bias </p>
+
+<p>Lemma 11. In any separating equilibrium, the high-quality monopolist chooses low prices and no investment in the "please 
+lie" campaign, to signal high quality. </p>
+
+<p>Proof. Existence. Following Proof of Proposition 5, the existence of a separating equilibrium is guaranteed by three single-
+crossing properties: í µí¼ 2 Π(í µí¼,í µí± ,í µí¼) </p>
+
+<p>í µí¼í µí¼í µí¼í µí± </p>
+
+<p>&lt; 0 (standard SCP), í µí¼ 2 Π(í µí¼,í µí± ,í µí¼) </p>
+
+<p>í µí¼í µí¼í µí¼í µí¼ </p>
+
+<p>&gt; 0 (sensitivity SCP), and (advertising SCP) í µí¼ 2 Π(í µí¼,í µí± ,í µí¼) </p>
+
+<p>í µí¼í µí¼í µí¼í µí°´&lt; 
+ 0. The </p>
+
+<p>last condition states that the strategy í  "please lie" campaign is marginally more profitable for the low-quality producer 
+because he is less likely to produce high-quality and therefore receiving a high-quality report (similarly, the high-quality monop-
+olist is less willing to invest in the strategy í µí°´since if a consumer observe í µí± = 1-which occurs with higher probability-then 
+the resource is wasted). </p>
+
+<p>Characterization. Suppose that the solution to problem (B.1) entails positive í  Then, FOCs can be written as </p>
+
+<p>í µí¼ 
+í µí¼í µí°´∶  </p>
+
+<p>í µí¼Π(í µí°»,í µí± ,í í µí¼=1) 
+í µí¼í µí°´í  µí¼Π(í µí°¿,í µí± ,í í µí¼=1) 
+í µí¼í µí°´= 
+ í µí¼ &lt; 1, </p>
+
+<p>given í µí¼ 2 Π(í µí¼,í µí± ,í í µí¼=1) </p>
+
+<p>í µí¼í µí¼í µí¼í µí°´&lt; 
+ 0 . Nevertheless, </p>
+
+<p>í µí¼ 
+í µí¼í µí± 
+∶ </p>
+
+<p>í µí¼Π(í µí°»,í µí± ,í í µí¼=1) 
+í µí¼í µí± 
+í µí¼Π(í µí°¿,í µí± ,í í µí¼=1) 
+í µí¼í µí± </p>
+
+<p>= í µí¼ &gt; 1, </p>
+
+<p>given standard single-crossing í µí¼ 2 Π(í µí¼,í µí± ,í í µí¼) </p>
+
+<p>í µí¼í µí¼í µí¼í µí± </p>
+
+<p>&lt; 0, which is a contradiction. 
+□ </p>
+
+</text></tei>

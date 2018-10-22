@@ -44,8 +44,8 @@ public class SoftwareTrainer extends AbstractTrainer {
         // adjusting CRF training parameters for this model
         this.epsilon = epsilon;
         this.window = window;
-        this.nbMaxIterations = nbMaxIterations;
-
+        //this.nbMaxIterations = nbMaxIterations;
+        this.nbMaxIterations = 2000;
         softwareLexicon = SoftwareLexicon.getInstance();
     }
 

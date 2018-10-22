@@ -113,6 +113,8 @@ public class AnnotatedCorpusGeneratorCSV {
     // these PDF fail with current version of GROBID, they will work with then next which will integrate pdfalto
     private List<String> failingPDF = Arrays.asList("PMC4153526", "PMC5378987"); // hanging for first, pdf2xml error for second
     
+    private ArticleUtilities articleUtilities = new ArticleUtilities();
+
     // wrongly duplicated annotation identiers, resulting in mess in csv files and in our alignments, we thus ignore 
     // them for the moment
     /*private List<String> duplicateAnnotationIdentifiers = Arrays.asList("PMC3727320_CB01", "PMC3727320_CB02", "PMC3727320_CB03", 
@@ -327,7 +329,7 @@ public class AnnotatedCorpusGeneratorCSV {
             checkMentionContextMatch(localAnnotations, "url", docName, writerUrl);
 
             // now try to align annotations with actual article content
-            /*
+            
             List<LayoutToken> tokens = doc.getTokenizations();
             if (tokens != null) {
                 logger.debug("Process content... ");
@@ -351,7 +353,7 @@ public class AnnotatedCorpusGeneratorCSV {
                     logger.error("Failed to write the resulting annotated document in xml", e);
                 }
             }
-            */
+            
         }
 
         writerSoftware.close();
@@ -359,6 +361,9 @@ public class AnnotatedCorpusGeneratorCSV {
         writerVersionNumber.close();
         writerCreator.close();
         writerUrl.close();
+
+        System.out.println("\ntotal number of failed article PDF download: " + articleUtilities.totalFail);
+        System.out.println("total number of failed article PDF download based on DOI: " + articleUtilities.totalDOIFail + "\n");
 
         // to be done: use a map...
         System.out.println("\nUnmatched contexts: " + unmatchedContexts + " out of " + totalContexts + " total contexts\n");
@@ -1216,7 +1221,7 @@ public class AnnotatedCorpusGeneratorCSV {
     private File getPDF(String pathPDFs, String identifier) {
         File inRepo = new File(pathPDFs + File.separator + identifier + ".pdf");
         if (!inRepo.exists()) {
-            File notInRepo = ArticleUtilities.getPDFDoc(identifier);
+            File notInRepo = articleUtilities.getPDFDoc(identifier);
             if (notInRepo == null) {
                 return null;
             } else {

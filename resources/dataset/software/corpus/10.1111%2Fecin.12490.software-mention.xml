@@ -1,0 +1,3723 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1111%2Fecin.12490" /><encodingDesc><appInfo><application version="0.5.2-SNAPSHOT" ident="GROBID" when="2018-10-20T01:07+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>This article examines the effect of tobacco prices on the decision to start smoking in 
+Argentina. Argentina is an interesting case to explore given its high smoking rates, its 
+recent experience with periods of very high and hyperinflation, and the mixed evidence of 
+the effect of prices on smoking onset, particularly in low-and middle-income countries. 
+We used data from four cycles of two large national surveys conducted between 2005 and 
+2011 and discrete-time hazard models. We found that tobacco prices had a statistically 
+significant and fairly large impact on the hazard of smoking onset, and these findings 
+were robust to alternative specifications. We also found that prices had little effect 
+on the hazards of smoking onset during periods of hyper-and very high inflation, 
+which provide some support for the notion that prices lose their informational role in 
+such periods. Governments need to be cognizant that their most important policy tool 
+to reduce tobacco use-taxes that increase real tobacco prices-is likely no longer 
+effective during these times. (JEL C41, H20, I12, I18) </p>
+
+<p>Tobacco use causes more than 6 million deaths 
+per year worldwide, a number that is expected 
+to rise to more than 8 million by 2030. The 
+majority of these deaths will occur in low-and 
+middle-income countries (LMIC) where 80% of 
+the deaths are expected to take place by 2030 </p>
+
+<p> *  We thank Daniel Araya, Jorge Vives, and Mathieu 
+Poirier for their research assistance and K. Stephen Brown, 
+Frank J. Chaloupka, David Feeny, Christina Hackett, Emily 
+McGirr, and members of McMaster University's Polinomics 
+Group for their comments and discussion. Funding: Inter-
+national Development Research Centre (grants 106836-001 
+and 107206-001) and the Canadian Cancer Society (grant 
+702176 to GEG). GEG holds the Centre for Health Economics 
+and Policy Analysis (CHEPA)/Ontario Ministry of Health 
+and Long-Term Care (MOHLTC) Chair in Health Equity, an 
+endowed Chair funded in part by the MOHLTC. The funders 
+had no role in the study design, analysis, interpretation, writ-
+ing of the report, or in the decision to submit this article for 
+publication. 
+Guindon: Assistant Professor, Centre for Health Economics 
+and Policy Analysis; Department of Health Research 
+Methods, Evidence, and Impact; Department of Eco-
+nomics, McMaster University, Hamilton L8S 4K1, 
+Canada. Phone +1 905 525 9140x22879, Fax +1 905 522 
+9507, E-mail emmanuel.guindon@mcmaster.ca 
+Paraje: Professor, Escuela de Negocios, Universidad Adolfo 
+Ibáñez, Santiago de Chile, Chile. Phone +56 2 2331 1380, 
+Fax +56 2 2278 4413, E-mail guillermo.paraje@uai.cl 
+Chávez: Economist, Banco Central del Ecuador, Quito 
+170409, Ecuador. Phone +593 2393 8600, Fax +593 
+2393 8600, E-mail rechavez@bce.ec </p>
+
+<p>(GBD Risk Factors Collaborators 2016 ; Mathers 
+and Loncar 2006). In addition to the well-known 
+long-term consequences of smoking, smok-
+ing during childhood and adolescence causes 
+serious contemporaneous health problems. The 
+US Surgeon General concluded in 2012 that 
+there was sufficient evidence to support a causal 
+relationship between active smoking during 
+childhood and adolescence and reduced lung 
+function, impaired lung growth, and wheezing 
+severe enough to be diagnosed as asthma. There 
+is also emerging evidence that youth smoking 
+is associated with various developmental and 
+mental health disorders such as schizophrenia, 
+anxiety, and depression (US Department of 
+Health and Human Services 2012). Moreover, 
+in addition to its considerable health impact, </p>
+
+<p>ABBREVIATIONS </p>
+
+<p>CPI: Consumer Price Index 
+ENFR: Encuesta Nacional Factores de Riesgo 
+ENPreCoSP: Encuesta Nacional sobre Prevalencias de 
+Consumo de Sustancias Psicoactivas 
+FCTC: Framework Convention on Tobacco Control 
+IAE: Impuesto Adicional de Emergencia 
+IECS: Instituto de Efectividad Clinica y Sanitaria 
+IHME: Institute for Health Metrics and Evaluation 
+INDEC: Instituto Nacional de Estadística y Censos 
+IPC: Índice de Precios al Consumo Gran Buenos Aires 
+KM: Kaplan-Meier 
+LMIC: Low-and Middle-Income Countries 
+SES: Socioeconomic Status </p>
+
+<p>424 </p>
+
+<p>Economic Inquiry 
+(ISSN 0095-2583) 
+Vol. 56, No. 1, January 2018, 424-445 </p>
+
+<p>doi:10.1111/ecin.12490 
+Online Early publication August 16, 2017 
+© 2017 The Authors. Economic Inquiry published by Wiley Periodicals, Inc. on behalf of Western Economic Association International. 
+This is an open access article under the terms of the Creative Commons Attribution-NonCommercial-NoDerivs License, which permits use and 
+distribution in any medium, provided the original work is properly cited, the use is non-commercial and no modifications or adaptations are made. </p>
+
+<p>GUINDON, PARAJE &amp; CHÁVEZ: PRICES, INFLATION, AND SMOKING ONSET IN ARGENTINA </p>
+
+
+
+<p>tobacco use hinders sustainable development and 
+has been formally recognized as a priority for 
+health interventions by the United Nations Gen-
+eral Assembly in its Sustainable Development 
+Goals (de Beyer, Lovelace, and Yurekli 2001; 
+Collishaw 2010; United Nations 2015). 
+In Latin America, 13% of deaths among 
+persons aged 35 years and older can be attributed 
+to tobacco use (IECS 2014). In Argentina, 
+tobacco smoking is responsible for more than 
+40,000 deaths every year and almost 10% of all 
+disability-adjusted life years lost (IHME 2013; 
+Pichon-Riviere et al. 2013). In Argentina, about 
+30% of men and 16% of women were current 
+smokers in 2012 (MSAL and INDEC 2013; 
+World Health Organization 2015). Argentina is 
+one of the very few countries that has not seen 
+any appreciable decreases in cigarette consump-
+tion over the past two decades. Compared to 
+its neighbor Uruguay that has instituted exten-
+sive tobacco control measures, Argentina fares 
+particularly poorly (Abascal et al. 2012). 
+A recent systematic review examined the 
+impact of tobacco prices or taxes on tobacco 
+use in Latin American and Caribbean countries 
+and found that cigarette prices had a negative 
+and statistically significant effect on cigarette 
+consumption (Guindon, Paraje, and Chaloupka 
+2015). The review concluded that in most Latin 
+American countries, total own-price elasticity 
+for cigarettes was likely below |-0.5| but noted 
+a lack of studies that used individual-level data. 
+The systematic review identified two sets of 
+studies that used aggregate time series data from 
+Argentina (Gonzáles-Rozada and Rodriguez 
+Iglesias 2013; Martinez, Mejia, and Perez-
+Stable 2015). Estimates were remarkably similar 
+across studies and suggested a long-run price 
+elasticity for cigarettes of about −0.3. Studies that 
+use aggregate time series data such as national 
+cigarette consumption or sales are unable to 
+examine the effect that tax or price changes 
+have on smoking participation, consumption, 
+onset or cessation, or different responses across 
+groups (e.g., across individuals of different 
+socioeconomic status [SES]). Another recent 
+review examined the impact of tobacco prices 
+on smoking onset (i.e., the transition between 
+never smoking and smoking) and concluded that 
+existing studies did not provide strong evidence 
+that tobacco prices or taxes affect smoking onset, 
+in part due to a reliance on empirical approaches 
+that were methodologically weak (Guindon 
+2014a, 2014b). Moreover, the review identified 
+only three studies that were conducted using </p>
+
+<p>data from LMIC (China, Russia, and Vietnam) 
+(Laxminarayan and Deolalikar 2004; Arzhen-
+ovskiy 2006; Kenkel, Lillard, and Liu 2009). The 
+review also identified one study that used cross-
+country data from non-representative national 
+or sub-national surveys of school-children and 
+-teens conducted in 48 LMIC (Kostova 2013). 
+More recently, the impact of prices on smoking 
+onset has been examined using data from China, 
+South Africa, and Vietnam (Guindon 2014a; 
+Kostova, Husain, and Chaloupka 2016; Vellios 
+and van Walbeek 2016). On the whole, none of 
+the existing studies are easily generalizable to 
+Latin American countries. 1 
+Argentina's situation presents a unique oppor-
+tunity to examine price responsiveness in a 
+high-inflation environment. During most of its 
+recent history, Argentina experienced some 
+of the world's most acute inflation episodes. 
+Between 1980 and 1991, overall prices increased 
+by more than 8,000,000,000%; in 1990 alone 
+inflation neared 5,000%. This period of high 
+inflation was followed by a rapid price stabiliza-
+tion process, which saw inflation fall to 83% in 
+1991, 17.5% in 1992, and 7.4% in 1993. Prices 
+have been relatively stable since the early 1990s, 
+but even so, overall prices increased by about 
+185%-350% between 2000 and 2011 (Cavallo 
+2013; INDEC 2014; International Monetary 
+Fund 2015). Economic and political actors have 
+become so sensitive to general price increases 
+that in recent years the National Statistical Office 
+has been accused of deliberately reporting lower 
+inflation figures (International Monetary Fund 
+2013; The Economist 2012, 2014). 
+In market-based economies prices play an 
+important informational role; current prices are 
+signals of future prices. Ball and Romer (2003) 
+argued that high inflation has an important </p>
+
+<p>1. Price responsiveness may differ between high-income 
+countries and lower-income countries and between Latin 
+American and non-Latin American countries for a number of 
+reasons. First, Warner (1990) argued that price responsiveness 
+of tobacco users in LMIC ought to be substantially higher 
+than users in more affluent countries because LMIC con-
+sumers have relatively fewer resources. Second, Chaloupka 
+et al. (2000, 246) pointed out that "economic models of addic-
+tion suggest that the generally lower level of education in 
+lower-income countries is likely to make the demand for 
+tobacco products in these countries relatively more responsive 
+to changes in monetary prices than demand in higher-income 
+countries." Third, there is evidence that consumers with dif-
+ferent levels of income or wealth behave differently when it 
+comes to choices involving intertemporal trade-offs; poorer 
+consumers are likely more impatient than more affluent ones 
+(Carvalho 2010). Fourth, the availability and prices of substi-
+tutes and complements may well differ between national or 
+regional markets (e.g., local distilled alcoholic beverages). </p>
+
+
+
+<p>ECONOMIC INQUIRY </p>
+
+<p>twofold effect on the relationship between 
+prices and demand. First, inflation reduces the 
+informativeness of current prices, causing cus-
+tomers to make costly mistakes about which 
+long-term relationships to enter. Second, because 
+prices have become less informative, they have 
+less influence on consumers' decision, and as 
+demand becomes less elastic, producers increase 
+their mark-ups. Ball and Romer argued that both 
+effects can be quantitatively important at mod-
+erate inflation rates. Between 1980 and 1991, 
+inflation was anything but moderate in Argentina 
+fluctuating between 80% and 5,000% annually. 
+Such high rates of inflation may lead markets to 
+break down completely. In the context of smok-
+ing, during high inflation periods in which prices 
+provide little information, prices may cease to 
+have any effects on tobacco use generally and 
+smoking onset in particular. Consequently, it 
+may be the case that governments lose their 
+most potent policy tool to reduce tobacco use 
+(i.e., taxes that increase real tobacco prices) 
+during periods of high inflation. High inflation, 
+however, may affect smoking decisions through 
+other pathways than price. For example, Deaton 
+(1977) suggested that unanticipated inflation 
+may lead consumers to believe that all goods are 
+more expensive and result in a decrease in real 
+consumption. Inflation may impact time prefer-
+ence, which may in turn affect smoking (Gong 
+2006; Khwaja, Silverman, and Sloan 2007). Or 
+times of high inflation may lead to increased 
+stress which in turn may effect smoking onset 
+(Finkelstein, Kubzansky, and Goodman 2006; 
+Iakunchykova et al. 2015). 
+Argentina is an important producer of tobacco 
+leaf and one of the very few countries not 
+to have ratified WHO's Framework Conven-
+tion on Tobacco Control (FCTC). The 2011 
+National Tobacco Law, which came into effect 
+in 2013, generally follows the recommenda-
+tions of the FCTC including a ban on smoking 
+in all indoor areas. Provinces, however, have 
+unevenly implemented important provisions of 
+the National Tobacco Law. The general lack 
+of leadership at the federal level has led many 
+provinces and some municipalities to introduce 
+smokefree policies prior to the National Tobacco 
+Law. There is some evidence that smokefree 
+policies decreased acute coronary syndrome 
+admissions after their implementation in the 
+province of Santa Fe and the city of Buenos 
+Aires and improved respiratory health in the 
+city of Neuquen (Ferrante et al. 2012; Schoj 
+et al. 2010). Although most tobacco advertising, </p>
+
+<p>promotion, and sponsorship were banned in 
+2013, advertising at point of sale is still pervasive. 
+Prior to 2013, tobacco advertising, promotion, 
+and sponsorship were widespread. Advertis-
+ing and promotion were loosely regulated in 
+1986 by Law 23.344, which also mandated a 
+warning label for cigarettes. Argentina's two 
+leading multinationals-Massalin Particulares 
+(Philip Morris) and Nobleza-Piccardo (British-
+American Tobacco)-control nearly 100% of 
+the Argentinian cigarette market (ERC 2014). 
+Argentina's overall tax system is extremely 
+complex; the structure of tobacco taxation, and in 
+particular, the taxation of cigarettes, even more 
+so. In addition to general taxes such as value-
+added tax that are broadly applied to most goods 
+and services, Argentina uses two taxes that are 
+specifically applied to cigarettes. First, an ad val-
+orem tax (impuestos internos or internal tax) is 
+applied on the retail price of cigarettes (minus 
+other taxes) at a rate of 75%, last changed in 
+May 2016 (the rate had been 60% since 1996). 
+In 2004, a minimum tax revenue condition was 
+introduced which stipulates that the revenue from 
+the internal tax cannot be less than 75% of the 
+tax levied on the most popular brand. In January 
+1996, Argentina introduced an ad valorem emer-
+gency tax (Impuesto Adicional de Emergencia 
+[IAE]) at a rate of 7% of the retail price, net of all 
+taxes, later increased to 31% in December 1999. 
+The IAE was subsequently decreased to 16, 12 
+and finally 7% in February 2001. There is also a 
+relatively small dedicated tax (Fondo Especial del 
+Tabaco) that is used to support tobacco growers. 
+Recently, nominal cigarette price increases have 
+been set by agreement between the Ministry of 
+Finance and the tobacco industry to reach partic-
+ular tax collection objectives (Rodriguez-Iglesias 
+et al. 2015), though very little information is pub-
+licly available for the terms of these agreements. 
+Since the early 2000s and until very recently, 
+on the whole, taxes on cigarettes have either 
+remained relatively stable or have decreased. 
+More importantly, cigarettes in Argentina have 
+become more affordable: both overall inflation 
+and incomes have outpaced increases in nominal 
+cigarette prices since the early 2000s (Rodriguez-
+Iglesias et al. 2015). Figure 1 presents a timeline 
+of key tobacco control measures and key politi-
+cal, monetary, and inflation events. 
+The overall mixed evidence from high-income 
+countries, the growing but still limited evidence 
+from LMIC, and the lack of evidence from Latin 
+American countries calls for additional analyses 
+of the impact of tobacco prices or taxes on </p>
+
+<p>GUINDON, PARAJE &amp; CHÁVEZ: PRICES, INFLATION, AND SMOKING ONSET IN ARGENTINA </p>
+
+
+
+<p>FIGURE 1 
+Timeline of Key Tobacco Control Measures and of Political/Monetary/Inflation Events </p>
+
+<p>31% </p>
+
+<p>Minimum tobacco tax revenue introduced </p>
+
+<p>Córdoba -first province to introduce smokefree policies (May 2003) </p>
+
+<p>16% </p>
+
+<p>Law 23.344 
+Some advertising restrictions 
+Warning labels on packages </p>
+
+<p>7% 
+7% </p>
+
+<p>1980 
+1981 
+1982 
+1983 
+1984 
+1985 
+1986 
+1987 
+1988 
+1989 
+1990 
+1991 
+1992 
+1993 
+1994 
+1995 
+1996 
+1997 
+1998 
+1999 
+2000 
+2001 </p>
+
+<p>National tobacco Law 
+Smoke-free policies at national level, 
+subject to provincial approval 
+-came into effect in 2013 </p>
+
+<p>2002 
+2003 
+2004 
+2005 
+2006 
+2007 
+2008 
+2009 
+2010 
+2011 </p>
+
+<p>VERY HIGH INFLATION PERIOD 
+Quality of official inflation statistics called into question 
+End of military dictatorship 
+Hyperinflation (May 1989 -Mar 1990) 
+Beginning of currency board </p>
+
+<p>12% </p>
+
+<p>Y H </p>
+
+<p>Emergency tax </p>
+
+<p>Q </p>
+
+<p>7% </p>
+
+<p>Political and economic instability: end of currency board; four presidents in a single week; 
+per capita real GDP tumbles (-5.3% in 2001, -11.9% in 2002) </p>
+
+<p>1 
+1 </p>
+
+<p>1 16% 1 </p>
+
+<p>12 
+7 </p>
+
+<p>31% % </p>
+
+<p>smoking onset. Moreover, Argentina is a partic-
+ularly interesting case to examine in this regard 
+since it is a middle-income country with high 
+smoking rates coupled with recent periods of very 
+high inflation. Our objective is to examine the 
+relationship between cigarette prices and smok-
+ing onset in Argentina while giving special atten-
+tion to overall price inflation, tobacco control 
+policies, and sex and socioeconomic differences 
+in the effect of prices on smoking onset. </p>
+
+<p>II. DATA AND METHODS </p>
+
+<p>A. Data </p>
+
+<p>As a measure of nominal cigarette prices, 
+we used the manufactured tobacco component 
+(of which cigarettes represent nearly 100%) 
+of Argentina's consumer price index (CPI) 
+for Greater Buenos Aires (Índice de Precios 
+al Consumo Gran Buenos Aires [IPC]) from 
+the Instituto Nacional de Estadística y Censos 
+(INDEC). This approach is not problematic as 
+individuals residing outside Greater Buenos 
+Aires face the same cigarette prices as those 
+residing in that area (i.e., cigarette prices do not 
+vary by neighborhood or regions in Argentina). 
+Other countries such as Chile and France have 
+similar "uniform" price regulations (i.e., prices 
+vary between brands, but the prices of individual 
+brands do not vary across space). These data were 
+available from January 1980 to May 2008. From 
+May 2008 to 2011, we used the after-tax monthly 
+weighted average price for a pack of 20 cigarettes 
+reported by the Ministerio de Agricultura, 
+Ganadería y Pesca, as INDEC stopped reporting 
+CPI for individual categories in May 2008. 2 </p>
+
+<p>2. The Pearson correlation coefficient between CPI-
+tobacco and cigarette weighted average prices for the period 
+1994 and 2008 is &gt;0.99. </p>
+
+<p>We adjusted all nominal prices for overall 
+inflation. As a measure of overall inflation, we 
+used CPI all-items for Greater Buenos Aires 
+(IPC nivel general) which was available for the 
+period 1980-2011. The quality, or lack thereof, 
+of INDEC's CPI figures from 2007 is well docu-
+mented (International Monetary Fund 2013; The 
+Economist 2012, 2014). In February 2013, after 
+several warnings, the International Monetary 
+Fund issued a declaration of censure against 
+Argentina. As an alternative measure of inflation 
+from January 2007, we used estimates for the 
+Sante Fe province (the second largest province, 
+situated in the central region) calculated and 
+reported by the Sante Fe statistical office. As a 
+sensitivity check, we used estimates calculated 
+by MIT's Billion Prices Project (Cavallo 2013) 
+and State Street, a financial services firm. The 
+latter series began in December 2007. 
+Figure 2 shows changes in the real prices of 
+cigarettes from 1980. The 1980s were character-
+ized by high volatility. For example, between Jan-
+uary 1980 and June 1982, real cigarette prices 
+increased by nearly 60% before plunging by 
+about 80% over the next 28 months. Such extreme 
+price swings occurred throughout the 1980s. The 
+abrupt drops in the real prices of cigarettes are 
+explained by pronounced increases in the gen-
+eral inflation and not by decreases in the nominal 
+prices of cigarettes. Overall inflation subsided 
+in the early 1990s and coincided with a fairly 
+long and sustained decrease in real cigarette 
+prices (from mid-1991 to the early of 1996). For 
+the remainder of the 1990s, real cigarette prices 
+remained fairly stable, with the exception of one 
+real price hike in early 1996. Volatility in prices 
+returned in the 2000s, albeit to a much lesser 
+extent than the 1980s. From 2007, trends in real 
+prices depend greatly on which estimates of over-
+all inflation are used. From 2007, Figure 2 shows </p>
+
+
+
+<p>ECONOMIC INQUIRY </p>
+
+<p>FIGURE 2 
+Inflation-Adjusted Manufactured Tobacco Prices, 1980-2014 </p>
+
+<p>0 </p>
+
+<p>25 </p>
+
+<p>50 
+75 100 
+125 150 175 </p>
+
+<p>200 225 250 </p>
+
+<p>Jan 1980 
+Real tobacco prices, 1980 = 100 </p>
+
+<p>Jan 1984 Jan 1988 Jan 1992 Jan 1996 Jan 2000 Jan 2004 Jan 2008 Jan 2012 </p>
+
+<p>INDEC 
+MIT 
+Sante Fe </p>
+
+<p>estimates using the official INDEC inflation and 
+the estimates from the province of Sante Fe and 
+from MIT/State Street. Differences are obvious, 
+substantial, and provide support to our decision 
+to use alternative measures of inflation. 
+We used data from two national surveys. First, 
+we used data from the Encuesta Nacional Fac-
+tores de Riesgo (ENFR) conducted in 2005 and 
+2009. ENFR is a risk factor survey that is repre-
+sentative at national and province level for urban 
+populations (about 90% of Argentines live in 
+urban areas). 
+ENFR is a large cross-sectional survey with 
+relatively high response rates; in 2005 and 2009, 
+data are available for about 45,000 (response 
+rate, 87%) and 35,000 (response rate, 74%) 
+individuals aged 18-65 years, respectively. Sec-
+ond, we used data from the Encuesta Nacional 
+sobre Prevalencias de Consumo de Sustancias 
+Psicoactivas (ENPreCoSP) conducted in 2008 
+and 2011. ENPreCoSP is a substance abuse 
+survey. As ENFR, it is representative at national 
+and province level for urban populations, has 
+large sample sizes (&gt;30,000) and relatively high 
+response rates (72% in 2008 and 73% in 2011). 
+The target population, 16-65 years, is similar 
+to that of ENFR. Both ENFR and ENPreCoSP 
+used a similar multi-stratified sampling approach 
+covering urban areas with population over 5,000 
+inhabitants, and both had the same extensive 
+tobacco use module. </p>
+
+<p>We created a measure of the age of smok-
+ing onset from the self-reported response to the 
+question "How old were you when you smoked 
+for the first time?" and include only smokers 
+who responded positively to the question "Have 
+you smoked at least 100 cigarettes in your life-
+time?" ENFR data collection occurred from April 
+to June 2005 and from October to December 2009 
+while ENPreCoSP data were collected in May 
+and June 2008 and from August to October 2011. 
+Given the month of interview and respondents' 
+self-reported age of smoking onset, it is possible 
+to bound the age of onset within intervals of 24 
+or 12 months. 3 Instead of picking the mid-point 
+as is commonly done, we randomly selected, 
+using a uniform distribution, a month within each 
+interval. We assumed that individuals were first 
+exposed to the risk of starting to smoke at age 
+8. Consequently, individuals older than 8 in 1980 
+and those who reported starting smoking before 
+age 8 were excluded. Put differently, individu-
+als that were older than 33, 36, 37, and 39 when 
+surveyed in 2005, 2008, 2009 and 2011, respec-
+tively, were excluded. As sensitivity checks, we 
+also assumed that individuals were first exposed 
+to the risk of starting to smoke at age 0, 5, and 11. 
+Respondents with missing or nonsensical data 
+(e.g., age of smoking onset greater than age </p>
+
+<p>3. The interval is only 12 months when age and age of 
+smoking onset are the same. </p>
+
+<p>GUINDON, PARAJE &amp; CHÁVEZ: PRICES, INFLATION, AND SMOKING ONSET IN ARGENTINA </p>
+
+
+
+<p>at time of survey) were dropped. Overall, we 
+dropped about 1% of individual observations 
+from our pooled sample and no more than 1.5% 
+for any single survey/cycle. We also created a 
+dataset that kept age groups consistent across sur-
+veys and cycles by keeping only individuals that 
+were between 16 and 33 years old at interview. 
+In addition to our measure of real cigarette 
+price that enters models as a time varying covari-
+ate, we included measures of tobacco control 
+policies and a measure of real alcohol price. We 
+included a dummy variable to control for the 
+introduction of Law 23.344 in May 1986 (weak 
+ad ban and health warnings). We also created 
+a variable that varies across time and space to 
+examine the effect of the introduction of smoke-
+free policies at province level. To explore the 
+possible effect that alcohol prices may have on 
+smoking onset, we included a measure of average 
+prices of alcohol beverages based on the alco-
+hol component of Argentina's CPI for Greater 
+Buenos Aires. Decker and Schwartz (2000) argue 
+that if alcohol and cigarettes are important substi-
+tutes (or complements), then a correctly specified 
+cigarette demand equation should include prices 
+of alcoholic beverages. 
+To examine the potential effect of hyper-and 
+very high inflation on smoking onset we cre-
+ated dichotomous indicators. Defining hyper-, 
+very high, or high inflation is inherently sub-
+jective. First, we followed Fischer, Sahay, and 
+Végh (2002) and used Cagan's classic definition 
+of hyperinflation (Cagan 1956). Cagan defines 
+hyperinflation "as beginning in the month the rise 
+in prices exceeds 50 percent and as ending in the 
+month before the monthly rise in prices drops 
+below that amount and stays below for at least 
+a year" (Fischer, Sahay, and Végh 2002, 840). 
+Second, we followed Fisher et al.'s approach to 
+define very high inflation. Very high inflationary 
+episode is defined as taking place when the 12-
+month inflation rate rises above 100%. Cagan's 
+definition indicates that Argentina experienced 
+hyperinflation from May 1989 to March 1990 
+while Fischer, Sahay, and Végh's indicates that 
+Argentina experienced very high inflation from 
+July 1974 to October 1991. All other variables are 
+time-invariant. As a measure of socioeconomic 
+status, we used educational attainment of the 
+household head (three binary indicators, primary, 
+secondary, and more than secondary). This mea-
+sure of SES, however, is inherently time-varying, 
+but due to the nature of the data, enters models 
+as a time invariant variable. Given the relatively 
+young age of the respondents in our sample, we </p>
+
+<p>feel that SES at the time of survey is a reasonable 
+proxy for SES at the time at which individuals 
+were at risk of starting smoking. Moreover, inter-
+generational income mobility is relatively low in 
+Argentina (Jimenez and Gasparini 2010). Other 
+individual covariates include sex and geographi-
+cal region. </p>
+
+<p>B. Methods </p>
+
+<p>We used discrete-time hazard models and a 
+complementary loglog (cloglog) specification; 
+unlike logit or probit, cloglog has a response 
+curve that is asymmetric (Box-Steffensmeier and 
+Jones 2004; Jenkins 1995; Singer and Willett 
+1993). One advantage of duration or survival 
+models is their ability to take into account obser-
+vations that are censored (in our case, individuals 
+who have not yet started smoking at interview). 
+Discrete-time hazard models have been used 
+fairly extensively to examine the effect of prices 
+on smoking onset (for recent examples, see Etile 
+and Jones 2011; Guindon 2014a; Nonnemaker 
+and Farrelly 2011). As a functional form for the 
+baseline hazard function, we used a cubic poly-
+nomial specification. As a sensitivity check, we 
+also used a more flexible approach and used a 
+dummy specification for time at risk, measured in 
+years. An even more flexible approach would use 
+a dummy specification for time at risk measured 
+in months. Such an approach, however, requires 
+the inclusion of a large number of unknown 
+parameters, is computationally demanding, and is 
+fraught with convergence problems. 
+Standard survival/duration models assume 
+that the probability of eventual failure is greater 
+than zero for all individuals (Boag 1949; Forster 
+and Jones 2001; Schmidt and Witte 1989). Given 
+that a large proportion of individuals never start 
+smoking, we also used discrete time split popu-
+lation models. 4 All models were estimated using 
+<rs id="software-1" type="software">Stata/MP</rs> <rs corresp="#software-1" type="version-number">14.1</rs> with sampling weights. Split 
+population models were estimated using spsurv 
+developed by Jenkins without sampling weights. 5 
+Finally, we conducted a number of sensi-
+tivity checks to ensure that our main results 
+were not sensitive to alternative specifications. </p>
+
+<p>4. A number of studies have used a split population 
+approach to examine the effect of prices on smoking onset. 
+See for example, Douglas and Hariharan (1994), Douglas 
+(1998), Forster and Jones (2001), López Nicolás (2002), Kidd 
+and Hopkins (2004), Madden (2007), and Guindon (2014a). 
+5. spsurv, however, does not allow the use of sampling 
+weights nor does it allow the inclusion of covariates in the 
+participation component of the model. </p>
+
+
+
+<p>ECONOMIC INQUIRY </p>
+
+<p>First, we re-estimated models without sampling 
+weights. In creating our retrospective dataset, we 
+are assuming that the collection of individuals 
+represented by each subject represents a collec-
+tion of individuals at the time they were at risk 
+of starting. Second, the assumption that the haz-
+ard function given age and other covariates does 
+not change with calendar time may not be valid. 
+However, it is difficult to identify calendar time 
+and duration effects separately when one includes 
+a measure of calendar time as they are correlated 
+by construction. Hence, it is generally not recom-
+mended to include a measure of calendar time 
+in duration models. We used a somewhat less 
+problematic specification and estimated models 
+that control for differing birth cohorts (Korn, 
+Graubard, and Midthune 1997). We used as a cal-
+endar time predictor a variable that describes the 
+calendar year that corresponds to the first calen-
+dar year at which each individual was first at risk 
+of starting. 6 Third, we re-estimated all models 
+using annual data. 
+Generally, price elasticity estimates may be 
+biased because of the endogeneity of the price 
+variable. First, when using survey data, the prob-
+lem of price endogeneity is less of a concern 
+because no individual tobacco user (or potential 
+user in our case) consumes enough to influence 
+the market price. Second, price endogeneity is 
+of particular concern if one uses self-reported 
+prices; we used a measure of tobacco prices con-
+structed from retail prices. Third, increases in 
+cigarette taxes may be proxies for unobserved 
+sentiment against cigarette smoking (i.e., changes 
+in anti-smoking sentiment may drive higher taxes 
+and prices) (Chaloupka and Warner 2000). In the 
+Argentinian context, it is unlikely that changes 
+in anti-smoking sentiment were associated with 
+changes in cigarette prices. As shown in Figure 2, 
+to be correlated with prices, anti-smoking senti-
+ment would have had to fluctuate in an extremely 
+unusual fashion (e.g., decrease from the early 
+1990s, then suddenly increase, followed by a 
+sharp decrease and an even sharper increase in 
+the early 2000s). Moreover, there is no indi-
+cation that the national government ever had a 
+public health objective to increase prices (driven 
+or not by "anti-smoking sentiment"). From the 
+2000s and until very recently, taxes actually 
+decreased and the opaque agreement between </p>
+
+<p>6. We also used as a calendar time predictor the first 
+calendar year (measured in units of 5 years) at which each 
+individual was first at risk of starting (i.e., 1980-1984, 
+1985-1989, 1990-1994, 1995-1999, and &gt;2000). </p>
+
+<p>the Ministry of Finance and the tobacco industry 
+had for objective to reach particular tax col-
+lection objectives, not a public health objec-
+tive (see Rodriguez-Iglesias et al. 2015 for more 
+details). Consequently, we feel that our measure 
+of cigarette prices is plausibly exogenous. </p>
+
+<p>III. RESULTS </p>
+
+<p>Descriptive statistics are presented in Table 1. 
+Nearly 50% of all individuals included in our 
+sample started smoking and, on average, those 
+who did were about 16 years of age. A little over 
+half of our sample are women, and most resided 
+in the province (40%) or city (9%) of Buenos 
+Aires at interview. Approximately 40% of house-
+hold heads had not attended secondary school 
+while less than one-fourth had studied beyond 
+secondary school. There are no marked differ-
+ences between surveys and cycles. Figures 3 
+and 4 plot, for men and women, Kaplan-Meier 
+(KM) product-limit survivor and hazard func-
+tions assuming that individuals were exposed 
+to the risk of starting to smoke at age 8. Both 
+figures suggest potentially important differences 
+between men and women. Figure 4 shows clearly 
+that the hazard rates among Argentine men and 
+women are non-monotonic, which provides 
+support for our choice of functional form for the 
+baseline hazard function. 
+Tables 2-5 present the results of the discrete-
+time complementary loglog (cloglog) duration 
+models. We began with parsimonious models. 
+First, we only included, in addition to price, 
+indicators for sex, provinces, and surveys/cycles 
+(Table 2, model 1). We then included in turn, 
+household's educational attainment, tobacco 
+control policies, alcohol prices and inflation 
+(models 2-6). For models 7-9, as our measure 
+of price, we used tobacco prices that have been 
+adjusted for inflation using the full INDEC 
+overall inflation series. 
+For covariates measured in natural logarithmic 
+such as our price measures, coefficients repre-
+sent the elasticity of the hazard with respect to a 
+regressor. A negative coefficient indicates that the 
+hazard rate or risk of event decreases for higher 
+values of a covariate. For example, a price coef-
+ficient of −0.5 indicates that a 1% increase in the 
+price of tobacco products would reduce the haz-
+ard or risk of smoking onset by 0.5%. Hazard 
+ratios (i.e., the exponential of the reported coeffi-
+cients) are more intuitive to assess the effects of 
+dichotomous indicators. For example, in Table 2, 
+a hazard ratio of 0.7 (i.e., exp.(−0.36)) suggests </p>
+
+<p>GUINDON, PARAJE &amp; CHÁVEZ: PRICES, INFLATION, AND SMOKING ONSET IN ARGENTINA </p>
+
+
+
+<p>TABLE 1 
+Descriptive Statistics </p>
+
+<p>ENFR, 2005 
+ENPreCoSP, 2008 
+ENFR, 2009 
+ENPreCoSP, 2011 
+Variable 
+Mean (SD) 
+Mean (SD) 
+Mean (SD) 
+Mean (SD) </p>
+
+<p>Age of starting smoking 
+16.0 
+1 5 .9 
+1 6 .3 
+1 6 .2 
+(ever smokers only) 
+(2.6) 
+( 2.8) 
+( 3.0) 
+( 3.0) 
+% 
+% 
+% 
+% 
+Smoking onset 
+45.1 
+3 8 .0 
+4 1 .9 
+3 8 .6 
+Sex, male 
+49.4 
+4 7 .3 
+4 8 .9 
+5 0 .5 
+Education, household head 
+Primary 
+43.3 
+4 0 .8 
+3 8 .3 
+3 6 .6 
+Secondary 
+35.7 
+3 8 .2 
+3 7 .6 
+3 8 .0 
+&gt;Secondary 
+21.0 
+2 1 .0 
+2 4 .2 
+2 5 .4 
+Province 
+Buenos Aires, city 
+9.6 
+8 .8 
+9 .2 
+7 .9 
+Buenos Aires, prov 
+39.8 
+3 9 .7 
+4 0 .4 
+4 0 .5 
+Catamarca 
+0.8 
+0 .9 
+0 .9 
+0 .9 
+Córdoba 
+8.7 
+8 .1 
+8 .1 
+8 .4 
+Corrientes 
+2.5 
+2 .5 
+2 .5 
+2 .4 
+Chaco 
+2.3 
+2 .4 
+2 .4 
+2 .5 
+Chubut 
+1.1 
+1 .1 
+1 .1 
+1 .2 
+Entre Ríos 
+2.9 
+2 .9 
+2 .9 
+3 .0 
+Formosa 
+1.0 
+1 .0 
+1 .1 
+1 .2 
+Jujuy 
+1.7 
+1 .8 
+1 .7 
+1 .7 
+La Pampa 
+0.6 
+0 .7 
+0 .7 
+0 .7 
+La Rioja 
+0.9 
+0 .9 
+0 .9 
+0 .9 
+Mendoza 
+3.7 
+3 .9 
+3 .9 
+4 .0 
+Misiones 
+1.9 
+2 .2 
+2 .1 
+2 .2 
+Neuquén 
+1.3 
+1 .3 
+1 .4 
+1 .4 
+Río Negro 
+1.3 
+1 .3 
+1 .3 
+1 .4 
+Salta 
+3.0 
+3 .0 
+3 .0 
+3 .0 
+San Juan 
+1.8 
+1 .7 
+1 .7 
+1 .7 
+San Luis 
+1.0 
+1 .1 
+1 .1 
+1 .1 
+Santa Cruz 
+0.5 
+0 .6 
+0 .6 
+0 .6 
+Santa Fe 
+8.0 
+8 .6 
+7 .6 
+7 .8 
+Santiago del Estero 
+1.5 
+1 .6 
+1 .6 
+1 .7 
+Tucumán 
+3.8 
+3 .5 
+3 .6 
+3 .6 
+Tierra del Fuego 
+0.3 
+0 .4 
+0 .4 
+0 .4 
+Number of individuals 
+13,607 
+16,120 
+14,382 
+18,560 
+Number of observations 
+2,206,845 
+2,775,512 
+2,624,445 
+3,412,101 </p>
+
+<p>Notes: Standard deviations in parenthesis. ENFR, Encuesta Nacional Factores de Riesgo; ENPreCoSP, Encuesta Nacional 
+sobre Prevalencias de Consumo de Sustancias Psicoactivas. </p>
+
+<p>that women have lower hazards to begin smok-
+ing than men and that the difference between the 
+hazards of men and women is about 43%. 7 
+All models suggest a fairly large, negative, 
+and statistically significant association between 
+prices of tobacco products and the hazard of 
+smoking onset. Price elasticity estimates from our 
+preferred specifications (Table 2, models 1 to 6) 
+fall within a fairly narrow range centered around 
+−0.45. Including additional covariates does not 
+alter price elasticity estimates in any signifi-
+cant or substantial way. Specifications that used 
+tobacco prices adjusted for inflation using the full 
+INDEC overall inflation series yield estimates </p>
+
+<p>7. As the models estimated are nonlinear, the comparison 
+of hazard ratios across such models with different sets of 
+covariates should be done with caution (Norton 2012). </p>
+
+<p>that are between about 45% and 60% higher 
+(in absolute value) (Table 2, models 7-9). These 
+estimates are, however, not statistically signifi-
+cantly different than estimates obtained using our 
+alternative measure of overall inflation. 
+The introduction of health warnings and 
+advertising and promotion regulations in May 
+1986 and provincial smokefree policies intro-
+duced in the mid-to late 2000s are generally 
+associated with a decreased hazard of smoking 
+initiation. Women and higher SES individuals 
+appear to be at lower risk of smoking onset than 
+men and low SES individuals; the differences 
+between SES levels, however, are fairly small. 
+Our measures of hyper-and very high inflation 
+do not, on the whole, suggest that the hazards 
+of smoking onset were any different in times 
+of hyper-or very high inflation. We found that </p>
+
+
+
+<p>ECONOMIC INQUIRY </p>
+
+<p>FIGURE 3 
+Kaplan-Meier Survivor Functions for Starting Smoking-Men and Women (assuming individuals 
+were first exposed to the risk of starting at age 8) </p>
+
+<p>0.00 </p>
+
+<p>0.25 </p>
+
+<p>0.50 </p>
+
+<p>0.75 </p>
+
+<p>1.00 </p>
+
+<p>0 
+100 
+200 
+300 </p>
+
+<p>Men 
+Women </p>
+
+<p>time at risk (measured in months) </p>
+
+<p>FIGURE 4 
+Hazard Functions for Starting Smoking-Men and Women (assuming individuals were first exposed 
+to the risk of starting at age 8) </p>
+
+<p>0 </p>
+
+<p>.002 </p>
+
+<p>.004 </p>
+
+<p>.006 </p>
+
+<p>0 
+100 
+200 
+300 </p>
+
+<p>Men 
+Women </p>
+
+<p>time at risk (measured in months) </p>
+
+<p>alcohol prices have a statistically significant 
+and fairly large effect on the hazard of smok-
+ing onset. We found that a 1% increase in the 
+price of alcohol products increases the hazard 
+of smoking onset by about 0.7%. Provinces </p>
+
+<p>with relatively higher per capita incomes, such 
+as Patagonia (Rio Negro, Chubut, Santa Cruz, 
+and Tierra del Fuego) show a significantly higher 
+hazard of smoking onset (relative to Buenos 
+Aires City). In contrast, relatively poor provinces, </p>
+
+<p>GUINDON, PARAJE &amp; CHÁVEZ: PRICES, INFLATION, AND SMOKING ONSET IN ARGENTINA </p>
+
+
+
+<p>TABLE 2 
+Discrete-Time Complementary loglog (cloglog) Duration Models of Smoking Initiation, Full Sample </p>
+
+<p>Model 
+Variables 
+(1) 
+(2) 
+(3) 
+(4) 
+(5) 
+(6) 
+(7) 
+(8) 
+(9) </p>
+
+<p>Prices (in In) 
+Tobacco, sf 
+-0.466*** -0.468*** -0.432*** -0.425*** -0.467*** -0.409*** 
+(0.092) 
+(0.092) 
+(0.093) 
+(0.093) 
+(0.105) 
+(0.094) 
+Tobacco, indec 
+-0.674*** -0.637*** -0.708*** 
+(0.081) 
+(0.085) 
+(0.093) 
+Alcohol, sf 
+0.705*** 0.715*** 0.715*** 
+(0.149) 
+(0.148) 
+(0.150) 
+Alcohol, indec 
+-0.039 
+-0.000 
+(0.149) 
+(0.150) 
+Inflation (ref, no inflation) 
+Hyperinflation 
+-0.098 
+-0.058 
+(0.073) 
+(0.073) 
+Very high inflation 
+0.039 
+0.067 
+(0.042) 
+(0.041) 
+Sex (ref, male) 
+-0.357*** -0.357*** -0.358*** -0.361*** -0.362*** -0.360*** -0.358*** -0.358*** -0.360*** 
+(0.025) 
+(0.025) 
+(0.025) 
+(0.025) 
+(0.025) 
+(0.025) 
+(0.025) 
+(0.025) 
+(0.025) 
+Education, hh head (ref, 
+primary) 
+Secondary 
+0.021 
+0.020 
+0.018 
+0.017 
+0.019 
+0.020 
+0.017 
+(0.030) 
+(0.030) 
+(0.030) 
+(0.030) 
+(0.030) 
+(0.030) 
+(0.030) 
+&gt;Secondary 
+-0.059* 
+-0.061* 
+-0.065** -0.066** -0.064** 
+-0.063* 
+-0.066** 
+(0.033) 
+(0.033) 
+(0.033) 
+(0.033) 
+(0.033) 
+(0.033) 
+(0.033) 
+Tobacco control policies 
+Law 23.344, May 1986 
+-0.176 
+-0.235* 
+-0.265** -0.240** 
+-0.175 
+-0.226* 
+(0.121) 
+(0.121) 
+(0.125) 
+(0.121) 
+(0.121) 
+(0.125) 
+Smokefree policies 
+-0.196*** -0.162*** -0.152** -0.166*** 
+-0.127** 
+-0.106* 
+(0.062) 
+(0.062) 
+(0.063) 
+(0.062) 
+(0.063) 
+(0.064) 
+Province (ref, Buenos Aires 
+city) 
+Buenos Aires, prov 
+-0.023 
+-0.045 
+-0.046 
+-0.046 
+-0.045 
+-0.046 
+-0.021 
+-0.046 
+-0.044 
+(0.047) 
+(0.047) 
+(0.047) 
+(0.047) 
+(0.047) 
+(0.047) 
+(0.047) 
+(0.047) 
+(0.047) 
+Catamarca 
+-0.295*** -0.318*** -0.319*** -0.318*** -0.318*** -0.318*** -0.291*** -0.317*** -0.316*** 
+(0.055) 
+(0.056) 
+(0.056) 
+(0.056) 
+(0.056) 
+(0.056) 
+(0.055) 
+(0.056) 
+(0.056) 
+Córdoba 
+-0.135** -0.151*** -0.109** -0.117** -0.118** -0.116** -0.135** -0.125** -0.129** 
+(0.055) 
+(0.055) 
+(0.056) 
+(0.056) 
+(0.056) 
+(0.056) 
+(0.055) 
+(0.056) 
+(0.056) 
+Corrientes 
+-0.355*** -0.374*** -0.376*** -0.374*** -0.373*** -0.375*** -0.352*** -0.375*** -0.373*** 
+(0.056) 
+(0.057) 
+(0.057) 
+(0.057) 
+(0.057) 
+(0.057) 
+(0.056) 
+(0.057) 
+(0.057) 
+Chaco 
+-0.264*** -0.286*** -0.287*** -0.285*** -0.285*** -0.286*** -0.260*** -0.285*** -0.283*** 
+(0.054) 
+(0.056) 
+(0.056) 
+(0.056) 
+(0.056) 
+(0.056) 
+(0.054) 
+(0.056) 
+(0.056) 
+Chubut 
+0.132** 
+0.109** 
+0.108** 
+0.107* 
+0.107* 
+0.108** 
+0.135** 
+0.110** 
+0.109** 
+(0.054) 
+(0.055) 
+(0.055) 
+(0.055) 
+(0.055) 
+(0.055) 
+(0.054) 
+(0.055) 
+(0.055) 
+Entre Ríos 
+-0.153*** -0.176*** -0.170*** -0.172*** -0.172*** -0.172*** -0.151*** -0.172*** -0.172*** 
+(0.056) 
+(0.057) 
+(0.057) 
+(0.057) 
+(0.057) 
+(0.057) 
+(0.056) 
+(0.057) 
+(0.057) 
+Formosa 
+-0.631*** -0.654*** -0.656*** -0.655*** -0.654*** -0.655*** -0.625*** -0.652*** -0.651*** 
+(0.062) 
+(0.063) 
+(0.063) 
+(0.063) 
+(0.063) 
+(0.063) 
+(0.062) 
+(0.063) 
+(0.063) 
+Jujuy 
+-0.407*** -0.431*** -0.432*** -0.432*** -0.431*** -0.432*** -0.404*** -0.431*** -0.429*** 
+(0.057) 
+(0.058) 
+(0.058) 
+(0.058) 
+(0.058) 
+(0.058) 
+(0.057) 
+(0.058) 
+(0.058) 
+La Pampa 
+0.096* 
+0.077 
+0.076 
+0.076 
+0.076 
+0.076 
+0.100* 
+0.079 
+0.078 
+(0.055) 
+(0.056) 
+(0.056) 
+(0.056) 
+(0.056) 
+(0.056) 
+(0.055) 
+(0.056) 
+(0.056) 
+La Rioja 
+-0.164*** -0.185*** -0.186*** -0.185*** -0.184*** -0.186*** -0.160*** -0.184*** -0.182*** 
+(0.052) 
+(0.053) 
+(0.053) 
+(0.053) 
+(0.053) 
+(0.053) 
+(0.052) 
+(0.053) 
+(0.053) 
+Mendoza 
+0.057 
+0.040 
+0.039 
+0.040 
+0.041 
+0.040 
+0.058 
+0.040 
+0.041 
+(0.054) 
+(0.054) 
+(0.054) 
+(0.054) 
+(0.054) 
+(0.054) 
+(0.054) 
+(0.054) 
+(0.054) 
+Misiones 
+-0.353*** -0.376*** -0.378*** -0.376*** -0.375*** -0.376*** -0.347*** -0.374*** -0.372*** 
+(0.057) 
+(0.058) 
+(0.058) 
+(0.058) 
+(0.058) 
+(0.058) 
+(0.057) 
+(0.058) 
+(0.058) 
+Neuquén 
+0.089 
+0.069 
+0.079 
+0.079 
+0.078 
+0.079 
+0.092* 
+0.077 
+0.076 
+(0.055) 
+(0.055) 
+(0.055) 
+(0.055) 
+(0.055) 
+(0.055) 
+(0.055) 
+(0.055) 
+(0.055) 
+Río Negro 
+0.128** 
+0.105* 
+0.104* 
+0.105* 
+0.105* 
+0.105* 
+0.131** 
+0.107** 
+0.107** 
+(0.053) 
+(0.054) 
+(0.054) 
+(0.054) 
+(0.054) 
+(0.054) 
+(0.053) 
+(0.054) 
+(0.054) 
+Salta 
+-0.189*** -0.212*** -0.214*** -0.213*** -0.212*** -0.213*** -0.186*** -0.212*** -0.210*** 
+(0.055) 
+(0.056) 
+(0.056) 
+(0.056) 
+(0.056) 
+(0.056) 
+(0.055) 
+(0.056) 
+(0.056) 
+San Juan 
+-0.075 
+-0.098* 
+-0.072 
+-0.077 
+-0.078 
+-0.077 
+-0.073 
+-0.082 
+-0.084 
+(0.054) 
+(0.055) 
+(0.055) 
+(0.055) 
+(0.055) 
+(0.055) 
+(0.054) 
+(0.055) 
+(0.055) 
+San Luis 
+0.080 
+0.059 
+0.057 
+0.058 
+0.058 
+0.058 
+0.083 
+0.059 
+0.060 
+(0.052) 
+(0.053) 
+(0.053) 
+(0.053) 
+(0.053) 
+(0.053) 
+(0.052) 
+(0.053) 
+(0.053) 
+Santa Cruz 
+0.290*** 0.266*** 0.265*** 0.266*** 0.266*** 0.266*** 0.294*** 0.268*** 0.268*** 
+(0.051) 
+(0.052) 
+(0.052) 
+(0.052) 
+(0.052) 
+(0.052) 
+(0.051) 
+(0.052) 
+(0.052) 
+Santa Fe 
+-0.007 
+-0.025 
+-0.001 
+-0.003 
+-0.004 
+-0.003 
+-0.006 
+-0.009 
+-0.010 
+(0.054) 
+(0.055) 
+(0.056) 
+(0.056) 
+(0.056) 
+(0.056) 
+(0.054) 
+(0.056) 
+(0.056) 
+Santiago del Estero 
+-0.329*** -0.353*** -0.349*** -0.349*** -0.348*** -0.349*** -0.325*** -0.349*** -0.347*** 
+(0.057) 
+(0.058) 
+(0.058) 
+(0.058) 
+(0.058) 
+(0.058) 
+(0.057) 
+(0.058) 
+(0.058) 
+Tucumán 
+-0.087 
+-0.106** 
+-0.081 
+-0.086 
+-0.087 
+-0.085 
+-0.086 
+-0.090* 
+-0.092* 
+(0.053) 
+(0.054) 
+(0.055) 
+(0.055) 
+(0.055) 
+(0.055) 
+(0.053) 
+(0.055) 
+(0.055) </p>
+
+
+
+<p>ECONOMIC INQUIRY </p>
+
+<p>TABLE 2 
+Continued </p>
+
+<p>Model 
+Variables 
+(1) 
+(2) 
+(3) 
+(4) 
+(5) 
+(6) 
+(7) 
+(8) 
+(9) </p>
+
+<p>Tierra del Fuego 
+0.221*** 0.198*** 0.197*** 0.197*** 0.197*** 0.197*** 0.223*** 0.198*** 0.198*** 
+(0.053) 
+(0.053) 
+(0.053) 
+(0.053) 
+(0.053) 
+(0.053) 
+(0.053) 
+(0.053) 
+(0.053) 
+Survey/cycle (ref, 
+ENPreCoSP, 2011) 
+ENFR 2005 
+0.172*** 0.169*** 0.161*** 0.148*** 0.144*** 0.150*** 0.143*** 0.138*** 0.129*** 
+(0.037) 
+(0.037) 
+(0.037) 
+(0.037) 
+(0.037) 
+(0.037) 
+(0.037) 
+(0.037) 
+(0.037) 
+ENPreCoSP, 2008 
+0.020 
+0.017 
+0.013 
+0.005 
+0.003 
+0.005 
+-0.002 
+-0.006 
+-0.010 
+(0.037) 
+(0.037) 
+(0.037) 
+(0.037) 
+(0.037) 
+(0.037) 
+(0.037) 
+(0.037) 
+(0.037) 
+ENFR, 2009 
+0.064** 
+0.063** 
+0.060* 
+0.053* 
+0.051* 
+0.053* 
+0.045 
+0.044 
+0.040 
+(0.031) 
+(0.031) 
+(0.031) 
+(0.031) 
+(0.031) 
+(0.031) 
+(0.031) 
+(0.031) 
+(0.031) 
+Duration dependency 
+t 
+0.155*** 0.155*** 0.154*** 0.154*** 0.154*** 0.154*** 0.155*** 0.155*** 0.155*** 
+(0.003) 
+(0.003) 
+(0.003) 
+(0.003) 
+(0.003) 
+(0.003) 
+(0.003) 
+(0.003) 
+(0.003) 
+t^2 
+-0.001*** -0.001*** -0.001*** -0.001*** -0.001*** -0.001*** -0.001*** -0.001*** -0.001*** 
+(0.000) 
+(0.000) 
+(0.000) 
+(0.000) 
+(0.000) 
+(0.000) 
+(0.000) 
+(0.000) 
+(0.000) 
+t^3 
+0.000*** 0.000*** 0.000*** 0.000*** 0.000*** 0.000*** 0.000*** 0.000*** 0.000*** 
+(0.000) 
+(0.000) 
+(0.000) 
+(0.000) 
+(0.000) 
+(0.000) 
+(0.000) 
+(0.000) 
+(0.000) 
+Intercept 
+-11.596*** -11.569*** -11.541*** -14.823*** -14.863*** -14.870*** -11.533*** -11.291*** -11.467*** 
+(0.139) 
+(0.143) 
+(0.148) 
+(0.703) 
+(0.700) 
+(0.707) 
+(0.138) 
+(0.694) 
+(0.696) </p>
+
+<p>Notes: Robust standard errors in parentheses. indec, prices adjusted for inflation using official inflation data from INDEC; sf, prices adjusted for 
+inflation using inflation data from the Santa Fe statistical office; hyperinflation defined using Cagan's definition (May 1989 to March 1990); very 
+high inflation defined using Fisher et al.'s definition (January 1980 to October 1991); hh, household head; ENFR, Encuesta Nacional Factores de 
+Riesgo; ENPreCoSP, Encuesta Nacional sobre Prevalencias de Consumo de Sustancias Psicoactivas. Number of observations, 10,996,654; number 
+of failures, 25,696. 
+*, **, and ***, significant at 10%, 5%, and 1%, respectively. </p>
+
+<p>such as Catamarca, Chaco, Formosa, Jujuy, La 
+Rioja, Salta, Misiones, and Santiago del Estero 
+show a considerably lower hazard of smoking 
+onset. These differences occurred despite the 
+vicinity of Paraguay (a major source of contra-
+band cigarettes) for provinces such as Formosa, 
+Misiones, and Chaco or being a major tobacco-
+growing province such as Salta. 
+Table 3 presents results of models that exam-
+ine differences in the effect of prices on smok-
+ing onset across sex, SES, and between high 
+and low inflation periods. We interacted, in turn, 
+prices with sex, household head's highest edu-
+cation level, and our binary measures of periods 
+of hyper-or very high inflation. First, we found 
+that women were about twice more responsive to 
+changes in prices than men. Second, we did not 
+find that low-SES individuals were more respon-
+sive than individuals of higher SES. If anything, 
+our findings suggest that individuals with higher 
+SES were more responsive to price. Lastly, we 
+found striking differences in the effect of prices 
+on smoking onset between inflation periods. We 
+found that prices had no effects whatsoever on 
+smoking onset during periods of hyper-or very 
+high inflation. 
+Table 4 presents results of models that seek 
+to examine differences in the effect of prices 
+by SES subgroups, between high and low infla-
+tion periods. We found that, regardless of the </p>
+
+<p>SES subgroups, individuals were not responsive 
+to prices in very high and hyperinflation peri-
+ods. Additionally, individuals of lower SES (i.e., 
+whose household head had less than a secondary 
+school education) were not found to be price 
+responsive in either period. </p>
+
+<p>A. Sensitivity Analyses </p>
+
+<p>To ensure our results were robust to alterna-
+tive specifications, we conducted a number of 
+sensitivity checks. Table 5 presents results using 
+the dataset we created that retained only indi-
+viduals that were between 16 and 33 years old 
+when interviewed. Estimates of own-and cross-
+price elasticities are, on the whole, robust to this 
+alternative approach. Results for some covariates, 
+however, are sensitive to this specification. First, 
+low-and high-SES individuals do not appear to 
+have different hazards of smoking initiation. Sec-
+ond, these results do not suggest a negative asso-
+ciation between Law 23.344 enacted in 1986 and 
+the hazard of smoking onset. 
+We also examined the robustness of our results 
+to alternative specifications for age when first at 
+risk and for the functional form for the baseline 
+hazard function, estimated models that do not 
+assume that all individuals will eventually start 
+smoking, estimated models using annual instead 
+of monthly data, and estimated models without </p>
+
+<p>GUINDON, PARAJE &amp; CHÁVEZ: PRICES, INFLATION, AND SMOKING ONSET IN ARGENTINA </p>
+
+
+
+<p>TABLE 3 
+Discrete-Time Complementary loglog (cloglog) Duration Models of Smoking Initiation, Full Sample </p>
+
+<p>Model 
+Variables 
+(1) 
+(2) 
+(3) 
+(4) </p>
+
+<p>Prices (in In) 
+Tobacco, sf 
+-0.304** 
+-0.212 
+-0.675*** 
+-0.451*** 
+(0.133) 
+(0.171) 
+(0.130) 
+(0.102) 
+Alcohol, sf 
+0.710*** 
+0.708*** 
+0.747*** 
+0.721*** 
+(0.148) 
+(0.148) 
+(0.147) 
+(0.150) 
+Inflation (ref, no inflation) 
+Very high inflation 
+0.040 
+0.042 
+-0.330*** 
+(0.042) 
+(0.042) 
+(0.116) 
+Hyperinflation 
+-0.310** 
+(0.147) 
+Sex (ref, male) 
+-0.223*** 
+-0.362*** 
+-0.363*** 
+-0.360*** 
+(0.072) 
+(0.025) 
+(0.025) 
+(0.025) 
+Education, hh head (ref, primary) 
+Secondary 
+0.017 
+0.145* 
+0.016 
+0.019 
+(0.030) 
+(0.085) 
+(0.030) 
+(0.030) 
+&gt;Secondary 
+-0.066** 
+0.1 44 
+-0.068** 
+-0.064** 
+(0.033) 
+(0.090) 
+(0.033) 
+(0.033) 
+Tobacco control policies 
+Law 23.344, May 1986 
+-0.266** 
+-0.268** 
+-0.171 
+-0.241** 
+(0.125) 
+(0.125) 
+(0.129) 
+(0.121) 
+Smokefree policies 
+-0.153** 
+-0.152** 
+-0.121* 
+-0.160** 
+(0.063) 
+(0.063) 
+(0.064) 
+(0.063) 
+Province (ref, Buenos Aires city) 
+Buenos Aires, prov 
+-0.045 
+-0.045 
+-0.044 
+-0.046 
+(0.047) 
+(0.047) 
+(0.047) 
+(0.047) 
+Catamarca 
+-0.318*** 
+-0.317*** 
+-0.317*** 
+-0.318*** 
+(0.056) 
+(0.056) 
+(0.056) 
+(0.056) 
+Córdoba 
+-0.117** 
+-0.119** 
+-0.125** 
+-0.117** 
+(0.056) 
+(0.056) 
+(0.056) 
+(0.056) 
+Corrientes 
+-0.373*** 
+-0.373*** 
+-0.372*** 
+-0.375*** 
+(0.057) 
+(0.057) 
+(0.057) 
+(0.057) 
+Chaco 
+-0.284*** 
+-0.285*** 
+-0.283*** 
+-0.286*** 
+(0.056) 
+(0.056) 
+(0.056) 
+(0.056) 
+Chubut 
+0.107* 
+0.107* 
+0.107* 
+0.108** 
+(0.055) 
+(0.055) 
+(0.055) 
+(0.055) 
+Entre Ríos 
+-0.171*** 
+-0.172*** 
+-0.173*** 
+-0.172*** 
+(0.057) 
+(0.057) 
+(0.057) 
+(0.057) 
+Formosa 
+-0.655*** 
+-0.654*** 
+-0.652*** 
+-0.654*** 
+(0.063) 
+(0.063) 
+(0.063) 
+(0.063) 
+Jujuy 
+-0.432*** 
+-0.431*** 
+-0.431*** 
+-0.432*** 
+(0.058) 
+(0.058) 
+(0.058) 
+(0.058) 
+La Pampa 
+0.075 
+0.075 
+0.077 
+0.076 
+(0.056) 
+(0.056) 
+(0.056) 
+(0.056) 
+La Rioja 
+-0.185*** 
+-0.184*** 
+-0.183*** 
+-0.186*** 
+(0.053) 
+(0.053) 
+(0.053) 
+(0.053) 
+Mendoza 
+0.041 
+0.041 
+0.042 
+0.040 
+(0.054) 
+(0.054) 
+(0.054) 
+(0.054) 
+Misiones 
+-0.375*** 
+-0.376*** 
+-0.373*** 
+-0.376*** 
+(0.058) 
+(0.058) 
+(0.058) 
+(0.058) 
+Neuquén 
+0.078 
+0.078 
+0.077 
+0.078 
+(0.055) 
+(0.055) 
+(0.055) 
+(0.055) 
+Río Negro 
+0.105* 
+0.105* 
+0.105* 
+0.105* 
+(0.054) 
+(0.054) 
+(0.054) 
+(0.054) 
+Salta 
+-0.212*** 
+-0.212*** 
+-0.211*** 
+-0.213*** 
+(0.056) 
+(0.056) 
+(0.056) 
+(0.056) 
+San Juan 
+-0.078 
+-0.078 
+-0.082 
+-0.077 
+(0.055) 
+(0.055) 
+(0.055) 
+(0.055) 
+San Luis 
+0.058 
+0.058 
+0.059 
+0.058 
+(0.053) 
+(0.053) 
+(0.053) 
+(0.053) 
+Santa Cruz 
+0.266*** 
+0.267*** 
+0.267*** 
+0.266*** 
+(0.052) 
+(0.052) 
+(0.052) 
+(0.052) 
+Santa Fe 
+-0.004 
+-0.004 
+-0.007 
+-0.004 
+(0.056) 
+(0.056) 
+(0.056) 
+(0.056) </p>
+
+
+
+<p>ECONOMIC INQUIRY </p>
+
+<p>TABLE 3 
+Continued </p>
+
+<p>Model 
+Variables 
+(1) 
+(2) 
+(3) 
+(4) </p>
+
+<p>Santiago del Estero 
+-0.348*** 
+-0.347*** 
+-0.348*** 
+-0.349*** 
+(0.058) 
+(0.058) 
+(0.058) 
+(0.058) 
+Tucumán 
+-0.087 
+-0.086 
+-0.091* 
+-0.086 
+(0.055) 
+(0.055) 
+(0.055) 
+(0.055) 
+Tierra del Fuego 
+0.196*** 
+0.197*** 
+0.197*** 
+0.197*** 
+(0.053) 
+(0.053) 
+(0.053) 
+(0.053) 
+Survey/cycle (ref, ENPreCoSP, 2011) 
+ENFR 2005 
+0.145*** 
+0.147*** 
+0.135*** 
+0.149*** 
+(0.037) 
+(0.037) 
+(0.037) 
+(0.037) 
+ENPreCoSP, 2008 
+0.004 
+0.004 
+0.001 
+0.005 
+(0.037) 
+(0.037) 
+(0.037) 
+(0.037) 
+ENFR, 2009 
+0.052* 
+0.052* 
+0.049 
+0.053* 
+(0.031) 
+(0.031) 
+(0.031) 
+(0.031) 
+Duration dependency 
+t 
+0.154*** 
+0.154*** 
+0.154*** 
+0.154*** 
+(0.003) 
+(0.003) 
+(0.003) 
+(0.003) 
+t^2 
+-0.001*** 
+-0.001*** 
+-0.001*** 
+-0.001*** 
+(0.000) 
+(0.000) 
+(0.000) 
+(0.000) 
+t^3 
+0.000*** 
+0.000*** 
+0.000*** 
+0.000*** 
+(0.000) 
+(0.000) 
+(0.000) 
+(0.000) 
+Interactions 
+Tob. price × sex 
+-0.368** 
+(0.183) 
+Tob. price × secondary 
+-0.336 
+(0.214 ) 
+Tob. price × &gt; secondary 
+-0.559** 
+(0.227) 
+Tob. price × very high inflation 
+0.768*** 
+(0.224) 
+Tob. price × very hyper inflation 
+0.430* 
+(0.256) 
+Intercept 
+-14.903*** 
+-14.930*** 
+-14.949*** 
+-14.880*** 
+(0.699) 
+(0.702) 
+(0.695) 
+(0.708) 
+Own-price elasticities for tobacco 
+Sex: male 
+-0.304** 
+(0.132) 
+Sex: female 
+-0.672*** 
+(0.146) 
+hh education: primary 
+-0.212 
+(0.171) 
+hh education: secondary 
+-0.548*** 
+(0.148) 
+hh education: &gt; secondary 
+-0.770*** 
+(0.168) 
+Hyper, very high inflation: yes 
+0.092 
+-0.020 
+(0.183) 
+(0.235) 
+Hyper, very high inflation: no 
+-0.675*** 
+-0.450*** 
+(0.130) 
+(0.102) </p>
+
+<p>Notes: Robust standard errors in parentheses; hyperinflation defined using Cagan's definition (May 1989 to March 1990); 
+very high inflation defined using Fisher et al.'s definition (January 1980 to October 1991); hh, household head; ENFR, Encuesta 
+Nacional Factores de Riesgo; ENPreCoSP, Encuesta Nacional sobre Prevalencias de Consumo de Sustancias Psicoactivas. 
+Number of observations, 10,996,654; number of failures, 25,696. 
+*, **, and ***, significant at 10%, 5% and 1%, respectively. </p>
+
+<p>sampling weights. We re-ran selected analyses 
+assuming individuals were first at risk of start-
+ing to smoke at age 0, 5, and 11 years. None of 
+the results varied in any substantive way. This is 
+not surprising as only about 1% of individuals 
+reported having started smoking before the age </p>
+
+<p>of 12. As an alternative functional form for the 
+baseline hazard function, we used a dummy spec-
+ification for time at risk, measured in years. Here 
+again, none of the results varied in any substan-
+tive way. We estimated discrete time split pop-
+ulation models and also found relatively large, </p>
+
+<p>GUINDON, PARAJE &amp; CHÁVEZ: PRICES, INFLATION, AND SMOKING ONSET IN ARGENTINA </p>
+
+
+
+<p>TABLE 4 
+Discrete-Time Complementary loglog (cloglog) Duration Models of Smoking Initiation, Full 
+Sample-Differences Across High and Low Inflation Periods, by Socioeconomic Status (SES) </p>
+
+<p>Model 
+(1) 
+(2) 
+(3) 
+(4) 
+(5) 
+(6) 
+SES category 
+Low 
+Mid 
+High 
+Low 
+Mid 
+High </p>
+
+<p>Very high inflation 
+Hyperinflation 
+Variables </p>
+
+<p>Prices (in In) 
+Tobacco, sf 
+-0.013 
+0.264 
+-0.060 
+-0.134 
+-0.187 
+0.345 
+(0.346) 
+(0.266) 
+(0.326) 
+(0.398) 
+(0.389) 
+(0.434) 
+Alcohol, sf 
+0.561** 
+0.817*** 
+0.856*** 
+0.539** 
+0.774*** 
+0.858*** 
+(0.251) 
+(0.240) 
+(0.270) 
+(0.256) 
+(0.246) 
+(0.270) 
+Inflation (ref, no inflation) 
+Very high inflation 
+-0.079 
+-0.501*** 
+-0.437** 
+(0.221) 
+(0.169) 
+(0.199) 
+Hyperinflation 
+-0.104 
+-0.355 
+-0.540** 
+(0.248) 
+(0.246) 
+(0.266) 
+Sex (ref, male) 
+-0.494*** 
+-0.356*** 
+-0.154*** 
+-0.492*** 
+-0.350*** 
+-0.155*** 
+(0.045) 
+(0.040) 
+(0.046) 
+(0.045) 
+(0.040) 
+(0.046) 
+Tobacco control policies 
+Law 23.344, May 1986 
+-0.126 
+-0.141 
+-0.300 
+-0.122 
+-0.233 
+-0.451 
+(0.191) 
+(0.214) 
+(0.310) 
+(0.174) 
+(0.200) 
+(0.306) 
+Smokefree policies 
+-0.183* 
+-0.052 
+-0.133 
+-0.209** 
+-0.135 
+-0.122 
+(0.105) 
+(0.105) 
+(0.126) 
+(0.102) 
+(0.102) 
+(0.122) 
+Province (ref, Buenos Aires city) 
+Buenos Aires, prov 
+0.227 
+-0.072 
+-0.063 
+0.226 
+-0.075 
+-0.062 
+(0.139) 
+(0.079) 
+(0.073) 
+(0.139) 
+(0.079) 
+(0.073) 
+Catamarca 
+-0.056 
+-0.377*** 
+-0.252*** 
+-0.057 
+-0.380*** 
+-0.252*** 
+(0.148) 
+(0.092) 
+(0.094) 
+(0.148) 
+(0.092) 
+(0.094) 
+Córdoba 
+0.268* 
+-0.205** 
+-0.238*** 
+0.274* 
+-0.188** 
+-0.239*** 
+(0.150) 
+(0.095) 
+(0.087) 
+(0.149) 
+(0.095) 
+(0.086) 
+Corrientes 
+-0.057 
+-0.447*** 
+-0.445*** 
+-0.060 
+-0.448*** 
+-0.443*** 
+(0.146) 
+(0.097) 
+(0.093) 
+(0.146) 
+(0.097) 
+(0.093) 
+Chaco 
+0.022 
+-0.284*** 
+-0.485*** 
+0.020 
+-0.287*** 
+-0.485*** 
+(0.144) 
+(0.092) 
+(0.098) 
+(0.144) 
+(0.092) 
+(0.098) 
+Chubut 
+0.410*** 
+0.107 
+-0.083 
+0.410*** 
+0.110 
+-0.085 
+(0.145) 
+(0.088) 
+(0.106) 
+(0.145) 
+(0.088) 
+(0.106) 
+Entre Ríos 
+0.183 
+-0.300*** 
+-0.226** 
+0.183 
+-0.297*** 
+-0.226** 
+(0.147) 
+(0.093) 
+(0.099) 
+(0.147) 
+(0.093) 
+(0.099) 
+Formosa 
+-0.389** 
+-0.722*** 
+-0.565*** 
+-0.391*** 
+-0.723*** 
+-0.566*** 
+(0.151) 
+(0.100) 
+(0.128) 
+(0.151) 
+(0.100) 
+(0.128) 
+Jujuy 
+-0.302** 
+-0.330*** 
+-0.393*** 
+-0.303** 
+-0.332*** 
+-0.393*** 
+(0.151) 
+(0.092) 
+(0.100) 
+(0.151) 
+(0.092) 
+(0.100) 
+La Pampa 
+0.364** 
+0.081 
+-0.075 
+0.364** 
+0.082 
+-0.075 
+(0.148) 
+(0.092) 
+(0.093) 
+(0.148) 
+(0.092) 
+(0.093) 
+La Rioja 
+0.146 
+-0.286*** 
+-0.191** 
+0.145 
+-0.288*** 
+-0.189** 
+(0.144) 
+(0.088) 
+(0.082) 
+(0.144) 
+(0.088) 
+(0.082) 
+Mendoza 
+0.411*** 
+0.011 
+-0.139 
+0.410*** 
+0.009 
+-0.139 
+(0.147) 
+(0.090) 
+(0.087) 
+(0.147) 
+(0.090) 
+(0.087) 
+Misiones 
+-0.064 
+-0.437*** 
+-0.462*** 
+-0.066 
+-0.441*** 
+-0.460*** 
+(0.146) 
+(0.096) 
+(0.103) 
+(0.146) 
+(0.096) 
+(0.103) 
+Neuquén 
+0.302** 
+0.107 
+0.002 
+0.302** 
+0.112 
+0.001 
+(0.150) 
+(0.090) 
+(0.086) 
+(0.150) 
+(0.090) 
+(0.086) 
+Río Negro 
+0.359** 
+0.129 
+-0.036 
+0.356** 
+0.132 
+-0.038 
+(0.144) 
+(0.088) 
+(0.097) 
+(0.144) 
+(0.088) 
+(0.097) 
+Salta 
+0.020 
+-0.228** 
+-0.163* 
+0.018 
+-0.229** 
+-0.162* 
+(0.146) 
+(0.090) 
+(0.091) 
+(0.146) 
+(0.090) 
+(0.091) 
+San Juan 
+0.215 
+-0.083 
+-0.246** 
+0.218 
+-0.073 
+-0.248** 
+(0.145) 
+(0.090) 
+(0.102) 
+(0.145) 
+(0.090) 
+(0.102) 
+San Luis 
+0.317** 
+0.034 
+0.020 
+0.316** 
+0.035 
+0.021 
+(0.144) 
+(0.086) 
+(0.085) 
+(0.144) 
+(0.086) 
+(0.085) 
+Santa Cruz 
+0.484*** 
+0.324*** 
+0.095 
+0.482*** 
+0.322*** 
+0.093 
+(0.145) 
+(0.082) 
+(0.088) 
+(0.145) 
+(0.082) 
+(0.088) 
+Santa Fe 
+0.276* 
+0.004 
+-0.131 
+0.277* 
+0.014 
+-0.130 
+(0.148) 
+(0.093) 
+(0.092) 
+(0.148) 
+(0.093) 
+(0.092) 
+Santiago del Estero 
+-0.125 
+-0.326*** 
+-0.331*** 
+-0.125 
+-0.328*** 
+-0.330*** 
+(0.147) 
+(0.094) 
+(0.109) 
+(0.147) 
+(0.094) 
+(0.109) </p>
+
+
+
+<p>ECONOMIC INQUIRY </p>
+
+<p>TABLE 4 
+Continued </p>
+
+<p>Model 
+(1) 
+(2) 
+(3) 
+(4) 
+(5) 
+(6) 
+SES category 
+Low 
+Mid 
+High 
+Low 
+Mid 
+High </p>
+
+<p>Very high inflation 
+Hyperinflation 
+Variables </p>
+
+<p>Tucumán 
+0.285** 
+-0.226** 
+-0.207** 
+0.289** 
+-0.214** 
+-0.207** 
+(0.143) 
+(0.095) 
+(0.089) 
+(0.143) 
+(0.095) 
+(0.089) 
+Tierra del Fuego 
+0.490 *** 
+0.170** 
+0.125 
+0.488*** 
+0.170** 
+0.123 
+(0.154) 
+(0.084) 
+(0.086) 
+(0.154) 
+(0.084) 
+(0.086) 
+Survey/cycle (ref, ENPreCoSP, 2011) 
+ENFR 2005 
+0.148** 
+0.098* 
+0.215*** 
+0.159** 
+0.122** 
+0.211*** 
+(0.065) 
+(0.058) 
+(0.068) 
+(0.064) 
+(0.058) 
+(0.067) 
+ENPreCoSP, 2008 
+0.019 
+-0.060 
+0.107* 
+0.023 
+-0.055 
+0.105 
+(0.066) 
+(0.058) 
+(0.065) 
+(0.066) 
+(0.058) 
+(0.065) 
+ENFR, 2009 
+0.098* 
+0.036 
+0.008 
+0.101* 
+0.043 
+0.006 
+(0.053) 
+(0.048) 
+(0.059) 
+(0.053) 
+(0.048) 
+(0.059) 
+Duration dependency 
+t 
+0.136*** 
+0.163*** 
+0.179*** 
+0.136*** 
+0.163*** 
+0.179*** 
+(0.005) 
+(0.005) 
+(0.006) 
+(0.005) 
+(0.005) 
+(0.006) 
+t^2 
+-0.001*** 
+-0.001*** 
+-0.001*** 
+-0.001*** 
+-0.001*** 
+-0.001*** 
+(0.000) 
+(0.000) 
+(0.000) 
+(0.000) 
+(0.000) 
+(0.000) 
+t^3 
+0.000*** 
+0.000*** 
+0.000*** 
+0.000*** 
+0.000*** 
+0.000*** 
+(0.000) 
+(0.000) 
+(0.000) 
+(0.000) 
+(0.000) 
+(0.000) 
+Interactions 
+Tob. price × very high inflation 
+-0.277 
+-1.237*** 
+-0.754* 
+(0.411) 
+(0.333) 
+(0.402) 
+Tob. price × very hyper inflation 
+-0.013 
+-0.321 
+-1.195** 
+(0.436) 
+(0.420) 
+(0.468) 
+Intercept 
+-13.6*** 
+-15.5*** 
+-16.7*** 
+-13.6*** 
+-15.4*** 
+-16.7*** 
+(1.179) 
+(1.130) 
+(1.286) 
+(1.205) 
+(1.158) 
+(1.284) 
+Own-price elasticities for tobacco 
+Hyper, very high inflation: yes 
+-0.013 
+0.264 
+-0.060 
+-0.133 
+-0.186 
+0.344 
+(0.346) 
+(0.266) 
+(0.326) 
+(0.397) 
+(0.388) 
+(0.433) 
+Hyper, very high inflation: no 
+-0.290 
+-0.971*** 
+-0.813*** 
+-0.146 
+-0.506*** 
+-0.849*** 
+(0.228) 
+(0.201) 
+(0.231) 
+(0.179) 
+(0.160) 
+(0.176) 
+Number of observations 
+3,754,776 
+4,312,961 
+2,928,917 
+3,754,776 
+4,312,961 
+2,928,917 
+Number of failures 
+8,731 
+10,567 
+6,398 
+8,731 
+10,567 
+6,398 </p>
+
+<p>Notes: Robust standard errors in parentheses; hyperinflation defined using Cagan's definition (May 1989 to March 90); very 
+high inflation defined using Fisher et al.'s definition (January 1980 to October 1991); hh, household head; ENFR, Encuesta 
+Nacional Factores de Riesgo; ENPreCoSP, Encuesta Nacional sobre Prevalencias de Consumo de Sustancias Psicoactivas. 
+*, **, and ***, significant at 10%, 5% and 1%, respectively. </p>
+
+<p>negative, and statistically significant association 
+between prices of tobacco products and the haz-
+ard of smoking onset. We did found, however, on 
+the whole, greater variations between specifica-
+tions. Using data measured annually instead of 
+monthly did not change our results in any sig-
+nificant or substantial way. On the whole, these 
+results were in line with results obtained using 
+monthly data; estimates of own-price and cross-
+price elasticities were similar or somewhat higher 
+(in absolute value). Our analyses without sam-
+pling weights did not reveal any substantive dif-
+ferences in price effects. 
+Finally, we attempted to control for calendar 
+year effects. With one exception, all model spec-
+ifications suggested price elasticities that were 
+statistically significant. On the whole, estimates </p>
+
+<p>of price elasticities were somewhat lower (in 
+absolute value); estimates of own-price elastic-
+ities ranged from about −0.25 to −0.3 while 
+estimates of cross-price elasticities were fairly 
+narrowly centered around 0.45. All model spec-
+ifications that included calendar year indicators 
+and a measure of very high inflation (i.e., Fisher 
+et al.'s definition [January 1980-October 1991]) 
+yielded price elasticities that were not statistically 
+significantly different than 0. </p>
+
+<p>IV. DISCUSSION </p>
+
+<p>Our results suggest that tobacco prices had 
+a statistically significant, robust to alternative 
+specifications (with one exception), and fairly 
+large impact on the hazard of smoking onset (see </p>
+
+<p>GUINDON, PARAJE &amp; CHÁVEZ: PRICES, INFLATION, AND SMOKING ONSET IN ARGENTINA </p>
+
+
+
+<p>TABLE 5 
+Discrete-Time Complementary loglog (cloglog) Duration Models of Smoking Initiation, 16-33 Years 
+Old Cohort Sample </p>
+
+<p>Model 
+Variables 
+(1) 
+(2) 
+(3) 
+(4) 
+(5) </p>
+
+<p>Prices (in In) 
+Tobacco, sf 
+−0.589*** 
+−0.400*** 
+−0.337* 
+−0.751*** 
+−0.611*** 
+(0.121) 
+(0.155) 
+(0.199) 
+(0.136) 
+(0.120) 
+Alcohol, sf 
+0.843*** 
+0.838*** 
+0.839*** 
+0.876*** 
+0.849*** 
+(0.179) 
+(0.179) 
+(0.179) 
+(0.178) 
+(0.179) 
+Inflation (ref, no inflation) 
+Very high inflation 
+0.024 
+0.027 
+0.026 
+−0.562*** 
+(0.060) 
+(0.060) 
+(0.060) 
+(0.160) 
+Hyperinflation 
+−0.364* (0.191) 
+Sex (ref, male) 
+−0.337*** 
+−0.180** 
+−0.337*** 
+−0.338*** 
+−0.337*** 
+(0.028) 
+(0.084) 
+(0.028) 
+(0.028) 
+(0.028) 
+Education, hh head (ref, primary) 
+Secondary 
+0.042 
+0.042 
+0.175 * 
+0.041 
+0.043 
+(0.033) 
+(0.033) 
+(0.098) 
+(0.033) 
+(0.033) 
+&gt;Secondary 
+−0.027 
+−0.027 
+0.168 
+−0.028 
+−0.027 
+(0.036) 
+(0.036) 
+(0.104) 
+(0.036) 
+(0.036) 
+Tobacco control policies 
+Law 23.344, May 1986 
+−0.081 
+−0.082 
+−0.083 
+0.090 
+−0.064 
+(0.224) 
+(0.224) 
+(0.224) 
+(0.233) 
+(0.220) 
+Smokefree policies 
+−0.139** 
+−0.140** 
+−0.138** 
+−0.116* 
+−0.136** 
+(0.066) 
+(0.066) 
+(0.066) 
+(0.067) 
+(0.066) 
+Province (ref, Buenos Aires city) 
+Buenos Aires, prov 
+−0.035 
+−0.035 
+−0.034 
+−0.034 
+−0.034 
+(0.054) 
+(0.054) 
+(0.054) 
+(0.054) 
+(0.054) 
+Catamarca 
+−0.288*** 
+−0.288*** 
+−0.287*** 
+−0.287*** 
+−0.288*** 
+(0.063) 
+(0.063) 
+(0.063) 
+(0.063) 
+(0.063) 
+Córdoba 
+−0.090 
+−0.088 
+−0.090 
+−0.096 
+−0.091 
+(0.063) 
+(0.063) 
+(0.063) 
+(0.063) 
+(0.063) 
+Corrientes 
+−0.335*** 
+−0.335*** 
+−0.335*** 
+−0.335*** 
+−0.336*** 
+(0.064) 
+(0.064) 
+(0.064) 
+(0.064) 
+(0.064) 
+Chaco 
+−0.210*** 
+−0.210*** 
+−0.211*** 
+−0.209*** 
+−0.210*** 
+(0.062) 
+(0.062) 
+(0.062) 
+(0.062) 
+(0.062) 
+Chubut 
+0.166*** 
+0.166*** 
+0.166*** 
+0.166*** 
+0.166*** 
+(0.061) 
+(0.061) 
+(0.062) 
+(0.062) 
+(0.062) 
+Entre Ríos 
+−0.113* 
+−0.112* 
+−0.112* 
+−0.113* 
+−0.113* 
+(0.064) 
+(0.064) 
+(0.064) 
+(0.064) 
+(0.064) 
+Formosa 
+−0.609*** 
+−0.609*** 
+−0.609*** 
+−0.607*** 
+−0.608*** 
+(0.071) 
+(0.071) 
+(0.071) 
+(0.071) 
+(0.071) 
+Jujuy 
+−0.390*** 
+−0.390*** 
+−0.389*** 
+−0.389*** 
+−0.390*** 
+(0.066) 
+(0.066) 
+(0.066) 
+(0.066) 
+(0.066) 
+La Pampa 
+0.166*** 
+0.166*** 
+0.166*** 
+0.167*** 
+0.167*** 
+(0.063) 
+(0.063) 
+(0.063) 
+(0.063) 
+(0.063) 
+La Rioja 
+−0.135** 
+−0.136** 
+−0.135** 
+−0.135** 
+−0.136** 
+(0.059) 
+(0.059) 
+(0.059) 
+(0.059) 
+(0.059) 
+Mendoza 
+0.070 
+0.071 
+0.070 
+0.071 
+0.070 
+(0.061) 
+(0.061) 
+(0.061) 
+(0.061) 
+(0.061) 
+Misiones 
+−0.300*** 
+−0.301*** 
+−0.301*** 
+−0.298*** 
+−0.300*** 
+(0.065) 
+(0.065) 
+(0.065) 
+(0.065) 
+(0.065) 
+Neuquén 
+0.078 
+0.078 
+0.077 
+0.077 
+0.078 
+(0.062) 
+(0.062) 
+(0.062) 
+(0.062) 
+(0.062) 
+Río Negro 
+0.160*** 
+0.160*** 
+0.160*** 
+0.160*** 
+0.160*** 
+(0.061) 
+(0.061) 
+(0.061) 
+(0.061) 
+(0.061) 
+Salta 
+−0.155 ** 
+−0.155** 
+−0.156** 
+−0.155** 
+−0.155** 
+(0.062) 
+(0.062) 
+(0.062) 
+(0.062) 
+(0.062) 
+San Juan 
+−0.017 
+−0.016 
+−0.017 
+−0.020 
+−0.017 
+(0.062) 
+(0.062) 
+(0.062) 
+(0.062) 
+(0.062) 
+San Luis 
+0.080 
+0.080 
+0.080 
+0.080 
+0.080 
+(0.059) 
+(0.059) 
+(0.059) 
+(0.059) 
+(0.059) 
+Santa Cruz 
+0.305*** 
+0.305*** 
+0.306*** 
+0.306*** 
+0.305*** 
+(0.058) 
+(0.058) 
+(0.058) 
+(0.058) 
+(0.058) 
+Santa Fe 
+0.030 
+0.030 
+0.030 
+0.028 
+0.029 
+(0.062) 
+(0.062) 
+(0.062) 
+(0.062) 
+(0.062) </p>
+
+
+
+<p>ECONOMIC INQUIRY </p>
+
+<p>TABLE 5 
+Continued </p>
+
+<p>Model 
+Variables 
+(1) 
+(2) 
+(3) 
+(4) 
+(5) </p>
+
+<p>Santiago del Estero 
+−0.288*** 
+−0.288*** 
+−0.287*** 
+−0.288*** 
+−0.288*** 
+(0.065) 
+(0.065) 
+(0.065) 
+(0.065) 
+(0.065) 
+Tucumán 
+−0.011 
+−0.011 
+−0.011 
+−0.015 
+−0.012 
+(0.061) 
+(0.061) 
+(0.061) 
+(0.061) 
+(0.061) 
+Tierra del Fuego 
+0.262*** 
+0.262*** 
+0.262*** 
+0.263*** 
+0.262*** 
+(0.060) 
+(0.060) 
+(0.060) 
+(0.060) 
+(0.060) 
+Survey/cycle (ref, ENPreCoSP, 2011) 
+ENFR 2005 
+0.146*** 
+0.146*** 
+0.148*** 
+0.135*** 
+0.150*** 
+(0.043) 
+(0.043) 
+(0.043) 
+(0.043) 
+(0.041) 
+ENPreCoSP, 2008 
+−0.003 
+−0.003 
+−0.003 
+−0.007 
+−0.002 
+(0.042) 
+(0.042) 
+(0.042) 
+(0.042) 
+(0.041) 
+ENFR, 2009 
+0.055 
+0.056 
+0.055 
+0.052 
+0.055 
+(0.036) 
+(0.036) 
+(0.036) 
+(0.036) 
+(0.036) 
+Duration dependency 
+t 
+0.180*** 
+0.180*** 
+0.180*** 
+0.180*** 
+0.180*** 
+(0.005) 
+(0.005) 
+(0.005) 
+(0.005) 
+(0.005) 
+t^2 
+−0.001*** 
+−0.001*** 
+−0.001*** 
+−0.001*** 
+−0.001*** 
+(0.000) 
+(0.000) 
+(0.000) 
+(0.000) 
+(0.000) 
+t^3 
+0.000*** 
+0.000*** 
+0.000*** 
+0.000*** 
+0.000*** 
+(0.000) 
+(0.000) 
+(0.000) 
+(0.000) 
+(0.000) 
+Interactions 
+Tob. price × sex 
+−0.431* 
+(0.223) 
+Tob. price × secondary 
+−0.360 
+(0.258) 
+Tob. price × &gt; secondary 
+−0. 533* 
+(0.272) 
+Tob. price × very high inflation 
+1.163*** 
+(0.303) 
+Tob. price × very hyper inflation 
+0.696** 
+(0.333) 
+Intercept 
+−16.323*** 
+−16.370*** 
+−16.394*** 
+−16.426*** 
+−16.332*** 
+(0.849) 
+(0.848) 
+(0.853) 
+(0.844) 
+(0.849) 
+Own-price elasticities for tobacco 
+All 
+−0.589*** 
+(0.121) 
+Sex: male 
+−0.400*** 
+(0.155) 
+Sex: female 
+−0.830*** 
+(0.174) 
+hh education: primary 
+−0.336* 
+(0.199) 
+hh education: secondary 
+−0.696*** 
+(0.177) 
+hh education: &gt; secondary 
+−0.868*** 
+(0.199) 
+Hyper, very high inflation: yes 
+0.411 
+−0.085 
+(0.270) 
+(0.310) 
+Hyper, very high inflation: no 
+−0.700*** 
+−0.610*** 
+(0.136) 
+(0.102) </p>
+
+<p>Notes: Robust standard errors in parentheses; hyperinflation defined using Cagan's definition (May 1989 to March 1990); 
+very high inflation defined using Fisher et al.'s definition (January 1980 to October 1991); hh, household head; ENFR, Encuesta 
+Nacional Factores de Riesgo; ENPreCoSP, Encuesta Nacional sobre Prevalencias de Consumo de Sustancias Psicoactivas. 
+Number of observations, 8,414,893; number of failures, 21,414. 
+*, **, and ***, significant at 10%, 5% and 1%, respectively. </p>
+
+<p>Figure 5 for a graphical representation of key 
+results). We found that prices had little effect 
+on the hazards of smoking onset during periods 
+of very high and hyperinflation, which provides 
+some support to the notion that prices lose their </p>
+
+<p>informational role in such periods. We did not 
+find that individuals of lower SES were more 
+responsive to prices. If anything, our results 
+suggest that higher SES individuals may be more 
+responsive to price changes. We found some </p>
+
+<p>GUINDON, PARAJE &amp; CHÁVEZ: PRICES, INFLATION, AND SMOKING ONSET IN ARGENTINA </p>
+
+
+
+<p>FIGURE 5 
+Results, Own-Price Elasticities for Cigarettes; Differences in the Effect of Prices on Smoking Onset 
+Across Sex, Socioeconomic Status and Between High and Low Inflation Periods </p>
+
+<p>-0.41 </p>
+
+<p>-0.30 </p>
+
+<p>-0.67 </p>
+
+<p>-0.21 </p>
+
+<p>-0.55 </p>
+
+<p>-0.77 </p>
+
+<p>0.09 </p>
+
+<p>-0.67 </p>
+
+<p>-0.02 </p>
+
+<p>-0.45 </p>
+
+<p>-1.0 </p>
+
+<p>-0.8 </p>
+
+<p>-0.6 </p>
+
+<p>-0.4 </p>
+
+<p>-0.2 </p>
+
+<p>0.0 </p>
+
+<p>0.2 </p>
+
+<p>0.4 </p>
+
+<p>A ll </p>
+
+<p>own-price elasticity </p>
+
+<p>s e x : m </p>
+
+<p>a le </p>
+
+<p>s e x : f e m </p>
+
+<p>a le </p>
+
+<p>h h </p>
+
+<p>h e 
+h </p>
+
+<p>a </p>
+
+<p>h </p>
+
+<p>d </p>
+
+<p>e </p>
+
+<p>e </p>
+
+<p>a </p>
+
+<p>d </p>
+
+<p>d </p>
+
+<p>u : </p>
+
+<p>e d </p>
+
+<p>p </p>
+
+<p>u </p>
+
+<p>r im </p>
+
+<p>a r y </p>
+
+<p>h 
+h 
+h e a d </p>
+
+<p>: </p>
+
+<p>e </p>
+
+<p>s e </p>
+
+<p>d u </p>
+
+<p>c o </p>
+
+<p>: </p>
+
+<p>n d a r y </p>
+
+<p>h </p>
+
+<p>&gt; 
+s e c o n d a r y </p>
+
+<p>v e r y </p>
+
+<p>h ig </p>
+
+<p>h </p>
+
+<p>v e </p>
+
+<p>in </p>
+
+<p>r y </p>
+
+<p>h i </p>
+
+<p>t </p>
+
+<p>g </p>
+
+<p>io </p>
+
+<p>h </p>
+
+<p>n : y e s </p>
+
+<p>h y p e r -in 
+h y p </p>
+
+<p>t i </p>
+
+<p>e </p>
+
+<p>o </p>
+
+<p>r -</p>
+
+<p>n : y e s </p>
+
+<p>Notes: Very high inflation defined using Fisher et al.'s definition (Jan 1980-Oct 1991); hyperinflation defined using Cagan's 
+definition (May 1989-Mar 1990). hh, household. </p>
+
+<p>evidence that tobacco control policies may have 
+reduced the hazard of smoking onset. 
+The International Agency for Research on 
+Cancer (2011) in its comprehensive review 
+concluded that most studies that jointly exam-
+ined the effect of cigarette and alcohol prices 
+on tobacco found negative cross-price effects, 
+which suggested that tobacco and alcohol were 
+complements. Nearly all studies, however, were 
+conducted using data from high-income coun-
+tries and none looked at the effect of alcohol 
+prices on smoking onset. More recently, the U.S. 
+National Cancer Institute and the World Health 
+Organization (2016) concluded that evidence 
+was too mixed to make any definitive statement. 
+Our results indicate that higher alcohol prices 
+increased the hazard of smoking onset, which 
+suggests that cigarettes and alcoholic bever-
+ages were substitutes. This finding may suggest 
+that Argentine youth that were prone to risky 
+health behaviors such as drinking and smoking </p>
+
+<p>were more likely to start smoking when the 
+price of other risky behaviors such as drinking 
+increased. 
+This study's contributions are fourfold. First, 
+this is just the second exploration of the impact 
+of prices on tobacco use that used household-or 
+individual-level data in any Latin America coun-
+try; and the first that examined smoking onset. 
+Using individual data allowed us to examine dif-
+ferences in the effect of prices on smoking onset 
+across sex and SES. Second, we used a num-
+ber of alternative approaches and found that our 
+main result that higher tobacco prices decreased 
+the hazards of smoking onset was robust to most 
+alternative specifications. Third, we explored dif-
+ferences in the effect of prices during high and 
+low inflation periods and found that prices had no 
+effect whatsoever on smoking onset during peri-
+ods of hyper-or very high inflation. Fourth, we 
+explored the effect of two sets of tobacco control 
+policies on smoking onset and considered the role </p>
+
+
+
+<p>ECONOMIC INQUIRY </p>
+
+<p>FIGURE 6 
+The Distribution of Self-Reported Age of Smoking Initiation, by Survey Cycle </p>
+
+<p>0 </p>
+
+<p>.05 </p>
+
+<p>.1 </p>
+
+<p>.15 </p>
+
+<p>.2 </p>
+
+<p>0 </p>
+
+<p>.05 </p>
+
+<p>.1 </p>
+
+<p>.15 </p>
+
+<p>.2 </p>
+
+<p>0 
+2 
+4 
+6 
+8 
+1 0 
+1 2 
+1 4 
+1 6 
+1 8 
+2 0 
+2 2 
+2 4 
+2 6 
+2 8 
+3 0 
+3 2 
+3 4 </p>
+
+<p>0 
+2 
+4 
+6 
+8 
+1 0 
+1 2 
+1 4 
+1 6 
+1 8 
+2 0 2 2 2 4 2 6 2 8 3 0 3 2 3 4 </p>
+
+<p>2005 
+2008 </p>
+
+<p>2009 
+2011 </p>
+
+<p>% </p>
+
+<p>age of initiation </p>
+
+<p>that alcohol prices might play in the decision to 
+start smoking. </p>
+
+<p>A. Limitations </p>
+
+<p>First, using cross-sectional self-reported data 
+to construct smoking histories may introduce bias 
+in the dependent variable (Taurus and Chaloupka 
+1999). Although the dataset we constructed is 
+retrospective, the relatively young age of respon-
+dents likely reduces the possibility of recall bias. 
+Moreover, a number of studies have compared 
+reconstructed smoking prevalence rates and 
+contemporary measured rates and concluded 
+that they matched relatively well, especially 
+when the focus was on younger populations 
+(which is our case) (Kenkel, Lillard, and Mathios 
+2004; Christopoulou et al. 2011). Heaping (when 
+respondents cannot recall a specific value and 
+provide a "prototypical" response near the actual 
+value, resulting in the over-representation of 
+certain values, such as 15, 18, or 20 years of 
+age) can result in a mismatch between our price </p>
+
+<p>variable and our dependent variable, smoking 
+onset (Grotpeter 2008; Bar and Lillard 2012). 
+Figure 6 presents histograms of age of onset, 
+by survey wave. These figures show possible 
+heaping at 15, 18, and 20. We re-estimated key 
+models with three dummy variables for those 
+who started smoking at 15, 18, and 20 and found 
+no qualitative differences. Second, the data we 
+utilized allowed us to bound the age of onset 
+within intervals of 12-24 months. This may 
+be problematic in periods of high inflation as 
+month-to-month changes in prices can be sub-
+stantial. Third, the nature of the data limited our 
+ability to include more time-varying individual-
+or household-level covariates. For example, we 
+were unable to use a time-varying measure of 
+household income or even a measure of house-
+hold income at time of survey. Although SES is 
+inherently time-varying, we used a time-invariant 
+measure of SES (educational attainment of the 
+household head). Given the relatively young 
+age of the respondents in our sample and the </p>
+
+<p>GUINDON, PARAJE &amp; CHÁVEZ: PRICES, INFLATION, AND SMOKING ONSET IN ARGENTINA </p>
+
+
+
+<p>relatively low levels of inter-generational income 
+mobility in Argentina, we feel that SES at time 
+of survey is a reasonable proxy for SES for 
+the time at which individuals were at risk of 
+starting smoking. Nevertheless, our SES results 
+should be interpreted with caution. Fourth, unlike 
+cigarette prices that do not vary between regions 
+in Argentina, alcohol prices do vary between 
+regions. Consequently, our finding that tobacco 
+and alcohol are substitutes should be interpreted 
+with caution. </p>
+
+<p>B. Implications for Policy and Research </p>
+
+<p>This study adds to the small but growing body 
+of evidence from LMIC that finds that higher 
+tobacco prices decrease the hazard of smoking 
+onset (Guindon 2014a; Vellios and van Walbeek 
+2016; Laxminarayan and Deolalikar 2004). Of 
+particular interest is the finding that prices have 
+no effect on the hazard of smoking onset in peri-
+ods of hyper-and very high inflation. During 
+such periods, governments need to be cognizant 
+that their most important policy tool to reduce 
+tobacco use (i.e., taxes that increase real tobacco 
+prices) is likely no longer effective. This finding 
+is particularly relevant to Argentina's current sit-
+uation, as its government is currently struggling 
+to keep inflation under control. It is also rele-
+vant to several other LMIC that are experiencing 
+high levels of inflation such as Belarus, Malawi, 
+Ukraine, and Venezuela (International Monetary 
+Fund 2015). At the very least, governments need 
+to ensure that specific tobacco taxes are automat-
+ically adjusted for changes in overall inflation as 
+is the case in Australia and Chile. 
+Given that the health benefits of reduced 
+cigarette use occur primarily through preventing 
+onset or cessation rather than reduced consump-
+tion in smokers (Hart, Gruer, and Bauld 2013; 
+Pisinger and Godtfredsen 2007) and the lack 
+of studies from LMIC, an extension of this 
+research that examines the effects of tobacco 
+prices on cessation could help fill an important 
+evidence gap. </p>
+
+
+
+
+
+
+
+<p>GUINDON, PARAJE &amp; CHÁVEZ: PRICES, INFLATION, AND SMOKING ONSET IN ARGENTINA </p>
+
+
+
+
+
+</text></tei>

@@ -1,0 +1,1369 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.3846%2Fjbem.2010.28" /><encodingDesc><appInfo><application version="0.5.2-SNAPSHOT" ident="GROBID" when="2018-10-20T01:04+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>Abstract. In this paper we consider the idea of negotiations conducted by means of the 
+software support tools. We present the advantages of the negotiation support systems 
+discussing their different functions and typologies focusing later on the possibilities of 
+decision support they can give to the negotiating parties in all negotiation phases. After 
+presenting the most popular solutions we introduce also two of our own procedures that 
+can be applied in the pre-negotiation phase for eliciting negotiators' preferences and build-
+ing the offers' scoring systems for the parties. The first one is based on the Hammond, 
+Keeney and Raiffa's procedure of even swaps, while the second derives from the Roy's 
+ELECTRE-TRI. Both of them can be easily applied as the analytic engines in electronic 
+negotiation systems replacing the classical additive scoring systems. We discuss also the 
+issue of using different scoring systems in the successive negotiation phases. 
+Negotiation is an everyday task. Except for simple and typical situations like discussing 
+the task shared in a family (i.e. walking the dog, cleaning the apartment, etc.) influenc-</p>
+
+<p>ing someone to change their mind or dividing the scarce resources, it includes also 
+the complex deliberations between the companies, political parties or nations. We can 
+describe negotiation situation as the problem of making decision about parties' interde-
+pendent goals and objectives (Lewicki et al. 1999). Moreover, the parties are committed 
+to peaceful means of solving the problem and there is no clear or established method of 
+making the decision. Usually, while thinking of the negotiation we consider a regular 
+face-to-face meeting where the parties are sitting at the negotiation table and solving 
+the problem using some advisors, analysts, facilitators or mediators. But we live in the 
+time of technological explosion, and nowadays it influences nearly all the activities </p>
+
+
+
+<p>undertaken by humans, including negotiation. Negotiations are consequently being con-
+ducted by means of the electronic media, starting with simple phone calls, through the 
+videoconferences, online chatting, with the use of software negotiation support system 
+(NSS), ending with the electronic negotiation system (ENS) -a software that employs 
+Internet technologies and is deployed on the web for the purpose of facilitating, organ-
+izing, supporting and/or automating activities undertaken by the negotiators and/or the 
+third party (Kersten and Lai 2007). More and more people and organizations are decid-
+ing to negotiate electronically, since it saves time and money and allows to develop and 
+maintain the business contacts regardless of the distance of time and space between the 
+counterparts. Therefore, the negotiation support tools are still being developed to make 
+the negotiation process more fluent and bring negotiators closer to the most satisfying </p>
+
+<p>agreement. Usually, these systems implement the formal models deriving from opera-
+tional research and decision science that are used to help negotiators define negotiation 
+space, evaluate offers and determine efficient solutions. There are a lot of NSSs and </p>
+
+<p>ENSs that have been used for simulating, training and teaching negotiations or for 
+research purposes like <rs id="software-13" type="software">INSPIRE</rs> (<rs corresp="#software-13" type="creator">Kersten and Noronha</rs> <rs corresp="#software-13" type="version-date">1999</rs>), <rs id="software-24" type="software">Negoisst</rs> (<rs corresp="#software-24" type="creator">Schoop et al</rs>. 
+<rs corresp="#software-24" type="version-date">2003</rs>), NeGoGo (<rs corresp="#software-19" type="creator">Lai et al.</rs>. 2007) or <rs id="software-19" type="software">NegoCalc</rs> (Wachowicz <rs corresp="#software-19" type="version-date">2008</rs>). Lots of theoretical </p>
+
+<p>and practical solutions for electronic negotiation support are also proposed in the lit-
+erature, that focuse on both the methodological and applicational aspects of electronic 
+negotiations (see Stroebel and Weinhardt 2003; Urbanavičienė et al. 2009a, b). Unfor-</p>
+
+<p>tunately, there are only a few examples of using the formal models and systems in the 
+large and complex real-world negotiations of business or political nature. One of them 
+was introducing the Deep Ocean Mining Model into the United Nations' UNCLOS III 
+negotiations (Sebenius 1984) concerning the rights to exploit the deep sea. It allowed 
+to make a consensus between the developed and developing countries according to the 
+profits sharing. Another system, developed by International Institute for Applied System </p>
+
+<p>Analysis, is RAINS (Hordijk 1991), which was used in the international negotiations 
+between the European countries on the air pollution limits. Some other systems are still 
+being developed to support real-world problems like <rs id="software-16" type="software">Familly_Winner</rs> (<rs corresp="#software-16" type="creator">Bellucci and Zeleznikow</rs> <rs corresp="#software-16" type="version-date">2005</rs>) designed on Victoria University, Australia, for supporting divorcing 
+disputes or <rs id="software-22" type="software">Smartsettle</rs> (Thiessen and Soberg <rs corresp="#software-22" type="version-date">2003</rs>), which is now being adapted to </p>
+
+<p>support negotiations between First Nations and the Government of Alberta Province in 
+Canada (Thiessen and Shakun 2009). </p>
+
+<p>In this paper we describe the negotiation process supported by NSS and ENS with 
+considering all the subsequent negotiation phases and activities required within each 
+phase and the support that can be given by the software systems. In the first section </p>
+
+<p>we discuss the fundamental elements of negotiation process and analyze the different 
+types of NSSs that can be used for supporting different aspects of negotiation process. 
+In the successive sections we consider the subsequent negotiation phases. Considering 
+the pre-negotiation phase we focus on negotiators' preference elicitation and process of 
+building offers' scoring systems that require formal modeling and usually implement 
+an additive scoring system. We also propose two alternative solutions that can be intro-
+duced instead of classical additive scoring system. Next we describe the support that </p>
+
+<p>Journal of Business Economics and Management, 2010, 11(4): 576-597 </p>
+
+<p>578 </p>
+
+<p>can be given within the actual negotiation phase for exchanging the messages and offers 
+and analyzing the negotiation progress. Afterwards, we analyze the post-negotiation 
+mechanisms that can be introduced by NSS to help negotiators evaluate the compromise 
+and find better solutions. </p>
+
+<p>2. Negotiations and negotiation software support </p>
+
+<p>2.1. Negotiation process </p>
+
+<p>In vast majority of situations the basis of negotiation is some form of conflict. But 
+negotiation and conflict are not the same thing. As far as conflict is the perception </p>
+
+<p>of differences of interest among people, negotiation is a decision making process in 
+which two or many people make joint decision about the allocation of scarce resources 
+(Thompson 1998). Since we perceive negotiation as a decision making process we need 
+to be aware of multitude tasks the parties must accomplish to obtain the satisfying so-
+lution. Negotiators need to understand the essence of the conflict (i.e. to diagnose the </p>
+
+<p>negotiation problem), gather all information required (e.g. about the problem, parties, 
+possible solutions) and process it to manage the negotiation process well (e.g. analyze 
+the counterpart's personality, select negotiation strategies, etc.). Negotiation thus is a 
+very complex activity, which requires from the parties many skills of the behavioral and 
+analytical nature to cope with different problems that can appear during the negotiation 
+process. This process in not uniform, and depending on the stage of the conflict it may </p>
+
+<p>require different tasks to perform or problems to solve. There are many proposals of 
+dividing the negotiation process into separate phases (Douglas 1962; Morley and Ste-</p>
+
+<p>phenson 1977). Some of them are quite general, like a six-phase model of Greenhalgh 
+(2001) including preparing, relation building, information gathering, information using, 
+submitting offers, closing and implementing agreement; others are specific to nego-</p>
+
+<p>tiation problems or context, like Four-Phase Model of Hostage Negotiation (Madrigal 
+et al. 2009) that consists of establishing initial dialogue, building rapport, influencing, 
+and Surrender; or a five phases model for negotiating transactions (Tafreschi et al. 2008) </p>
+
+<p>distinguishing the information, intention, agreement, execution and service phases. Here 
+we will focus on a very general and straightforward categorization that allows to dis-
+tinguish three main negotiation phases (Gulliver 1979): pre-negotiation phase, actual </p>
+
+<p>negotiation phase and post-negotiation phase. </p>
+
+<p>2.1.1. Pre-negotiation phase </p>
+
+<p>Pre-negotiation phase is in fact the preparation for negotiation. Preparing itself consists 
+of some subsequent steps that should lead to a plan of action. The first step of pre-</p>
+
+<p>negotiation phase is called the ideas stage (Scott 1999), which aim is to review the 
+area of negotiation and the other party. Negotiators should gather all the data and facts 
+describing the present situation between the parties and the essence of conflict. Within </p>
+
+<p>the second stage -analysis stage -the data is processed. Parties should identify the 
+strengths and weaknesses of both their own and their counterparts. The goals, intentions, 
+positions, expectations, aspiration and reservation levels and BATNAs of the parties 
+should also be identified. It will lead to the construction of negotiation space, identifica-</p>
+
+<p>tion of possible alternatives and determination of the zone of possible agreement (Raiffa </p>
+
+<p>T. Wachowicz. Decision support in software supported negotiations </p>
+
+<p>579 </p>
+
+<p>1982). Then in the last stage -organizing the meeting -the negotiators, facilitators and 
+analysts are chosen, the negotiation place and agenda are also prepared. These three 
+stages lead to formulating a direct plan, linking the overall goals with operational tactics 
+which we call a negotiation strategy (Kuhn 1999). </p>
+
+<p>2.1.2. Actual negotiation phase </p>
+
+<p>This negotiation phase includes the main talks, offers exchange, making concessions 
+and all the verbal and non-verbal endeavors that parties use to achieve a compromise 
+(see Thompson 1998). This is a sequential process within which we can distinguish five 
+different stages (elements). The first stage is the partner inquiry, which is necessary 
+to find out the true intentions, emotions and position of a counterpart. The next, called 
+mutual influencing, consists in revealing negotiators' views and emotions and is strongly </p>
+
+<p>connected with the third element -negotiation maneuvers -which includes all the 
+specific tactics and techniques, both constructive and destructive ones, that are to move </p>
+
+<p>negotiators towards the aspired agreement (see Aaronson 1989). These three stages can 
+be repeated iteratively but then stabilizing is required, which will lead the negotiators to 
+the stage of reaching agreement that consists in exchanging the proposals for the final 
+compromise. This entire process starting from the first offer and ending with the mutual </p>
+
+<p>agreement is also known as a negotiation dance (Raiffa 1982). </p>
+
+<p>2.1.3. Post-negotiation phase </p>
+
+<p>The last negotiation phase begins with the agreement concluding, which effects in writ-
+ing an official contract and its execution (Lewicki et al. 2004). But this phase extends </p>
+
+<p>also to some other tasks, usually realized by the third party -facilitators or mediators, 
+like analyzing the final compromise and looking for the gains that are left on the ne-</p>
+
+<p>gotiation table. It is often conducted by means of formal models that help negotiators 
+to evaluate the compromise and, using some elements of mathematical programming, 
+find the effective solutions that dominate the current compromise. It is also the time for </p>
+
+<p>conclusions and summarizing the lessons learned that negotiators make use of during 
+the future negotiations. </p>
+
+<p>2.2. Negotiation support in the software negotiation system </p>
+
+<p>The software systems may support different tasks at different stages of negotiation 
+process. They can also act as a supportive tool for one negotiator only or have imple-
+mented the procedures to support all of them, including the third party (i.e. facilitator 
+or mediator). What is more, they can be either passive tools gathering and visualizing 
+data or can act actively by processing the data, doing calculations, making simulations 
+or suggesting some solutions. We will now focus on the ways of support that negotiation 
+support systems may offer and present some categorization of such systems. </p>
+
+<p>2.2.1. Support for negotiation phases and parties </p>
+
+<p>Deriving form the three-phase negotiation model presented in the previous section and 
+taking into account the parties involved in the negotiation process we can categorize 
+negotiation support systems into four types (Kersten and Lai 2007): </p>
+
+<p>Journal of Business Economics and Management, 2010, 11(4): 576-597 </p>
+
+
+
+<p>1. Planning and preparation systems used mainly in the pre-negotiation phase. They 
+are designed to support a single negotiator in analyzing private and public informa-
+tion about the negotiation problem and context. They allow to build and evaluate 
+the alternatives applying some scoring methods (e.g. utility based ones). They also 
+support negotiator in formulating their negotiation strategies and tactics that they 
+can apply later in the actual negotiation phase. 
+2. Assessment systems used within all negotiation phases and support single party. 
+They help in constructing offers, analyzing counter-offers and propose some alter-
+native solutions. They allow to track negotiation progress by analyzing the conces-
+sion paths. 
+3. Intervention systems designed to support mediators or arbitrators in all the tasks </p>
+
+<p>they are supposed to undertake during the whole negotiation process. 
+4. Process systems designed for supporting simultaneously all the negotiators. They 
+act according to selected negotiation protocol and impose on negotiators specific </p>
+
+<p>organization of the negotiation process, including communication procedures, 
+mechanisms for exchanging offers, etc. Usually they support all negotiation phases. </p>
+
+<p>As we see NSSs can support different phases and actors of negotiation process but, 
+simultaneously, it is also very important how they give this support. The negotiator's 
+satisfaction from using the supporting system is significantly different if the system </p>
+
+<p>helps only to present or organize the data or if it offers advanced analytic mechanisms 
+that allow him to act as an advisor or facilitator. Therefore we can consider NSSs taking 
+into account the type of activity they offer. </p>
+
+<p>The general scheme of support the NSS may offer to all the parties involved in the 
+negotiation process is presented in a form of high level use case diagram in Fig. 1. </p>
+
+<p>Fig. 1. NSSs and their functions </p>
+
+<p>Mediator/Facilitator </p>
+
+<p>Arbitrating </p>
+
+<p>Solving impasses </p>
+
+<p>As se ss m en t sy st em s </p>
+
+<p>P a la n in g 
+p r e p a r a t io n </p>
+
+<p>s y s t e m </p>
+
+<p>&amp; </p>
+
+<p>NSS 
+Process 
+systems </p>
+
+<p>« 
+» 
+uses 
+« 
+» 
+uses </p>
+
+<p>Intervention 
+systems 
+Analyzing 
+concessions </p>
+
+<p>Constructing 
+ff 
+&amp; evaluating o ers </p>
+
+<p>Suggesting 
+solutions </p>
+
+<p>De ning negotiation 
+fi 
+protocol 
+Scoring o ers 
+ff </p>
+
+<p>Analyzing private &amp; 
+public information </p>
+
+<p>Formulating 
+negotiation strategy </p>
+
+<p>Negotiator </p>
+
+<p>T. Wachowicz. Decision support in software supported negotiations </p>
+
+
+
+<p>2.2.2. Activity of NSSs </p>
+
+<p>Taking into account the scale of participation of supporting systems in the negotiation 
+process, the three following types of system can be distinguished (Kersten 2005): </p>
+
+<p>1. Passive systems require users to control over their actions. If used for communica-
+tion purposes they are simple messengers providing users with mechanisms for 
+conducting the talks. If used for calculation they support negotiators in solving 
+mathematical formulas required to compare the negotiation offers. They also help 
+to display data on graphs or maps. These systems do not verify requirements and 
+assumptions defined by users and expect all the data required to be provided by </p>
+
+<p>negotiators. 
+2. Active facilitation-mediation systems support the whole decision making process 
+in negotiations, starting with problem definition and structuring, and ending with 
+producing the final results in the form of offers that can be suggested as the agree-
+ment proposals. They support also concession-making process, and the final as-</p>
+
+<p>sessment of the agreement. The models implemented in these systems take into 
+consideration simultaneously the problem, the negotiators and the process. 
+3. Pro-active intervention-mediation systems except for playing the role of active </p>
+
+<p>facilitation-mediation systems they also intervene in the process by suggesting to 
+the parties some alternative solutions and coordinating their activities. They can 
+monitor the concession path and stimulate the parties to act in the way that will 
+bring them closer to the agreement. </p>
+
+<p>2.2.3. Roles of NSSs </p>
+
+<p>We know the different scale of support NSSs give in the successive negotiation phases 
+and the degree of their participation in the negotiation process. The mix of these ele-
+ments determines in fact the role NSS plays in the negotiations as a third party. We 
+usually distinguish three major roles the third party can play in negotiation, which is 
+a mediator, facilitator and analyst (expert). Therefore analyzing the role NSS plays in 
+the negotiation process we can distinguish three types of negotiations (Kersten and 
+Lai 2007): </p>
+
+<p>1. Computer-facilitated negotiations use software with communication and coordina-
+tion components implemented only. The technology used do not affect the content 
+of communications therefore the decision and concession making process depends 
+only on the skills of the negotiators. In terms of decision support the system acts 
+passively, however it can inform negotiators of the current stage of talks (e.g. 
+send emails informing of new compromise proposals prepared by counterpart in 
+the system). 
+2. Computer-supported negotiations use software that can provide negotiators with 
+the information they would not be able to obtain otherwise. This software affects 
+the negotiation process and parties by organizing the negotiation activities and 
+proposing individual mechanisms for analyzing the data and understanding the 
+problem better, like simulation tool or preference elicitation engines. </p>
+
+<p>Journal of Business Economics and Management, 2010, 11(4): 576-597 </p>
+
+
+
+<p>3. Computer-mediated negotiations use software that helps parties to achieve an </p>
+
+<p>agreement. This software not only supports individual tasks of negotiators but 
+also their cognitive efforts. It tries to identify the potential conflicts by analyzing </p>
+
+<p>the moves of counterparts and redirects them by proposing them the concession 
+and suggests the alternative compromises. </p>
+
+<p>3. Pre-negotiation phase support </p>
+
+<p>Having discussed the negotiation process and the general way of its support that can 
+be given by software systems we will focus now on the details of decision support in 
+successive negotiation phases. The decision support given by NSSs within the pre-
+negotiation phase focuses mainly on the negotiators' preference elicitation and building 
+the scoring system for offers evaluation. All the formal models required for such a sup-
+port derive from the negotiation analysis (Young 1991; Raiffa 1982; Raiffa et al. 2002) </p>
+
+<p>which is a huge and modern trend within the decision science. The common idea of 
+these models is to define the negotiation outcome quantitatively and use some methods </p>
+
+<p>from game theory and multiple attribute decision making to evaluate the implication 
+of the potential solutions and find the efficient, fair or compromising agreement (Luce 
+and Raiffa 1957; Keeney and Raiffa 1976; Brams 1990; Zeckhauser et al. 1996; Ham-</p>
+
+<p>mond et al. 2002). We will discuss below a very popular MCDM model -the additive 
+scoring model -that is usually applied in computer-supported negotiation to develop 
+an assessment capabilities of NSSs. </p>
+
+<p>3.1. Additive scoring systems </p>
+
+<p>Additive scoring system is commonly used to evaluate negotiation offers in multi-issue 
+negotiations. The fundamentals of this scoring method can be found in works of Keeney 
+and Raiffa (Keeney and Raiffa 1976; Raiffa 1982; Keeney and Raiffa 1991). Usually </p>
+
+<p>this scoring is applied to discrete decision making problems, however it can be easily 
+adapted to the continuous problems by introducing linear or nonlinear interpolation 
+between the scores. We will assume then, that there is a negotiation problem and ne-
+gotiation space defined in the form of the set of issues I and finite sets of options X i </p>
+
+<p>(realization levels of each issue i = 1, …, |I |). Each negotiation offer, perceived as the 
+complete package, can be thus denoted as </p>
+
+<p>1 2 </p>
+
+<p>[ , ,..., ] </p>
+
+<p>I </p>
+
+<p>a x x 
+x 
+= 
+, 
+(1) </p>
+
+<p>where x i is a realization level chosen from the set of feasible options X i for issue i. 
+The main idea of the additive scoring system is to score each option that can comprise 
+the negotiation offer by using an artificial criterion like utility or desirability. The pro-
+cess of scoring offers and building the final ranking of them requires four stage analysis: </p>
+
+<p>1. Assigning weights to the negotiation issues by distributing a certain number of scor-
+ing points among all of them. 
+In the first step negotiator declares the importance of issues. He assigns the weights </p>
+
+<p>w i for each issue i = 1, …, |I|, such as: </p>
+
+<p>i 
+i </p>
+
+<p>w P 
+= </p>
+
+<p>∑ </p>
+
+<p>, 
+(2) </p>
+
+<p>where P is the total pool of scoring points established by the negotiator. </p>
+
+<p>T. Wachowicz. Decision support in software supported negotiations </p>
+
+
+
+<p>To make the interpretation of scores easier it is recommended to use a pool of 100 
+scoring points, which allows then to explain the global score of offers as percentage 
+of satisfaction (Kersten and Noronha 1999). 
+2. Assigning scores to each option within each issue, using the pool of scores assigned 
+to the issue. 
+Negotiator distributes the scoring points according to his subjective perception of the 
+quality of each option and following the rule that the most preferred the option is, the 
+higher score it receives. He assigns a certain number of scoring points to each option </p>
+
+<p>k 
+i 
+i </p>
+
+<p>x 
+X 
+∈ 
+up to the limit defined by the weight of this option: </p>
+
+<p>( ) [0, ] </p>
+
+<p>k 
+i 
+i </p>
+
+<p>u x 
+w 
+∈ 
+, 
+(3) </p>
+
+<p>for 
+1,..., i 
+k 
+X 
+= 
+i 
+1,..., 
+i 
+I 
+= 
+, 
+where the least preferred option least </p>
+
+<p>i </p>
+
+<p>x 
+receives the score of 0 points and the most 
+preferred one most </p>
+
+<p>i </p>
+
+<p>x 
+-the score of w i . 
+3. Determining the global scores of offers by adding up the scores of options that com-</p>
+
+<p>prise them. 
+Each offer m 
+a 
+A 
+∈ (A -set of feasible offers, built with the combination of all pos-
+sible options defined for all negotiation issues) receives the score: </p>
+
+<p>( ) 
+( 
+) </p>
+
+<p>m </p>
+
+<p>m 
+a 
+i 
+i </p>
+
+<p>u a 
+u x </p>
+
+<p>= ∑ </p>
+
+<p>, 
+(4) </p>
+
+<p>for 
+1,..., 
+m 
+A 
+= 
+i 
+1,..., 
+i 
+I 
+= 
+, where </p>
+
+<p>m </p>
+
+<p>a 
+i </p>
+
+<p>x is the option value for the issue i that builds </p>
+
+<p>the offer a m . 
+4. Building the ranking of offers according to descending global scores. </p>
+
+<p>Having completed all four steps of the above procedure we obtain a full scoring system 
+of the feasible offers. Negotiators can use this system to compare proposals submitted 
+by their counterparts and analyze the differences between quality (satisfaction rate) of 
+the subsequent offers (that have the interval scale interpretation). Negotiators can also 
+observe how the score is determined while the options are added or changed within the 
+offer they prepare. The system allows also to follow the negotiation progress by analyz-
+ing the concession paths -the shape of the graph built with scores of successive offers 
+submitted both by the negotiator himself and his counterpart. Such a solution is com-
+monly applied in the NSS, for example in <rs id="software-12" type="software">Inspire</rs> (<rs corresp="#software-12" type="creator">Kersten and Noronha</rs> <rs corresp="#software-12" type="version-date">1999</rs>), Smartset-
+tle (Thiessen and Soberg <rs corresp="#software-15" type="version-date">2003</rs>) or <rs id="software-15" type="software">Negoisst</rs> (<rs corresp="#software-15" type="creator">Schoop et al</rs>. 2003). An example of scoring </p>
+
+<p>negotiation offers with additive scoring system in <rs type="software">Inspire</rs> ENS is shown in Fig. 2. 
+But there are some disadvantages of additive scoring system. The first is that the scores </p>
+
+<p>negotiators use need to be simply assigned to the issues and options instead of determin-
+ing them -deriving from their preferences defined verbally (Saaty 2001). What is more, </p>
+
+<p>operating with utility or desirability scores requires from negotiators some mathemati-
+cal skills and at least a basic knowledge of decision theory, otherwise the global scores 
+may be misinterpreted or, which is worse, the whole scoring system may not reflect the </p>
+
+<p>true preferences of negotiator. The second problem is that negotiators do not have to 
+assume full compensation between the issues. Negotiation experiments conducted by </p>
+
+<p>Journal of Business Economics and Management, 2010, 11(4): 576-597 </p>
+
+<p>584 </p>
+
+<p>Wachowicz and Kersten (2009) show that negotiators very often reject some alterna-
+tive solutions proposed by ENS despite they result in the higher score than the current 
+negotiation agreement. It happens because these alternative solutions do not meet the 
+minimal accepted levels for one or more issues. Therefore some alternative solutions 
+are proposed based, for instance, on AHP (Mustajoki and Hamalainen 2000), outranking 
+methods (Wachowicz and Wieszała 2009; Ulubeyli and Kazaz 2009) or verbal analysis </p>
+
+<p>(Ustinovichius et al. 2009). </p>
+
+<p>We also decided to develop alternative methods for scoring negotiation offers that will 
+try to overcome some of the problems mentioned above. </p>
+
+<p>3.2. Even swaps based scoring system </p>
+
+<p>The first method is based on the straightforward decision making model called even </p>
+
+<p>swaps (Hammond et al. 1998). This method has the same mathematical foundations 
+as the additive scoring system, but differs in the philosophy of assigning the scores. It 
+derives from the concept of vector domination assuming that each dominated alterna-
+tive can be eliminated from the decision process, since it cannot be recommended to 
+the decision maker as the most satisfying one. Furthermore it emphasizes that if all the 
+alternatives result in equal consequences for any criterion, this criterion can be ignored 
+in the decision making process as well (eliminated). Then, the even-swap method tries 
+to adjust the consequences of all considered alternatives to make them equivalent in 
+terms of a given objective, which requires increasing the value of one alternative in 
+terms of one objective while decreasing its value by the equivalent amount in terms </p>
+
+<p>Fig. 2. Additive scoring system in ENS Inspire </p>
+
+<p>T. Wachowicz. Decision support in software supported negotiations </p>
+
+<p>585 </p>
+
+<p>of another objective. The equivalent amounts are defined subjectively by the decision 
+maker and reflect the structure of his preferences. After such an adjustment the consid-</p>
+
+<p>ered objective can be eliminated and domination analysis can be conducted once again 
+with respect to the rest of the objectives. </p>
+
+<p>The process of the objectives elimination is repeated until the decision maker is able 
+to find the best decision (the one that dominates over all the others) or the decision </p>
+
+<p>making problem is reduced (by eliminating the criteria) to the single criterion decision 
+making problem. </p>
+
+<p>Let us consider a simple problem of choosing between two alternatives (dwelling houses 
+under construction) that differ in consequences for two criteria: price and building time </p>
+
+<p>(Table 1). </p>
+
+<p>Table 1. Alternatives under consideration </p>
+
+<p>Criteria 
+Alternatives </p>
+
+<p>House 1 
+House 2 </p>
+
+<p>Price (in thousands of $) 
+400 
+370 </p>
+
+<p>Building time (in months) 
+18 
+20 </p>
+
+<p>Comparing these two houses we see that House 2 is cheaper but with longer building 
+time than House 1 (investor wants to minimize both the criteria). No vector domination 
+occurs. Investor needs to conduct then the even-swap analysis between two criteria. Ac-
+cording to the procedure he will try to adjust the consequences of these two alternatives 
+to become equal in terms of building time -say, both to be realized within 18 months. 
+House 1 is going to be built within this time, but House 2 not. Investor needs to declare 
+thus an equivalent amount (in terms of thousands of dollars) that will describe what 
+the costs of shortening the building time form 20 to 18 months are. Let us assume that 
+he evaluates the difference as $15,000 price equivalent. This amount may reflect some </p>
+
+<p>objective costs that decision maker needs to pay for waiting two moths longer for a 
+new house, but also all the subjective and "non-measurable" costs (e.g. the costs of two 
+months longer irritation for an annoying neighbor that lives next door and plays piano 
+until midnight everyday) may (and should) be taken into consideration as well. Now, 
+the equivalent amount can be added to the actual price of House 2 and Table 1 can be 
+rewritten to Table 2. </p>
+
+<p>Table 2. Alternatives after even-swap analysis </p>
+
+<p>Criteria 
+Alternatives </p>
+
+<p>House 1 
+House 2 </p>
+
+<p>Price (in thousands of $) 
+400 
+370 385 </p>
+
+<p>Building time (in months) 
+18 
+20 18 </p>
+
+<p>Journal of Business Economics and Management, 2010, 11(4): 576-597 </p>
+
+
+
+<p>Since both alternatives result in the same value for criterion "building time", it can be 
+eliminated from the decision making problem. After this elimination investor considers 
+between these two alternatives analyzing only the criterion of price, therefore House 2 
+will be selected as the most preferable solution, since it is cheaper than House 1. </p>
+
+<p>The even-swap method can be easily applied for building the negotiation offers' scoring 
+system. All the modifications required were previously described in details by Wacho-
+wicz (2007). The modified procedure requires four step analysis: </p>
+
+<p>1. Defining of the base issue. Base issue is used as a global score for the offers evalu-
+ation (like utility payoff in additive scoring system). It is chosen from the set of 
+all negotiation issues that parties agreed to negotiate. It is recommended to choose 
+the quantitative issue as the base, which will make the interpretation of the global 
+scores much easier (it is easier to understand the difference between two prices: 
+$200 and $250, than to understand the difference between two verbal descriptions: </p>
+
+<p>interesting and very interesting). 
+2. Defining the base options for all issues. Making all the offers equal for one par-
+ticular issue requires selecting the base option as a common result for all the 
+offers. It is recommended to use the best option (i.e. the one that satisfied each 
+issue the most) as a base. The equivalent amount defined then for other options </p>
+
+<p>may be interpreted as the cost of upgrading the offer's consequence to the best 
+possible resolution. 
+3. Assigning the equivalent amounts for options within issues. For each issue sepa-</p>
+
+<p>rately the negotiator needs to compare all the options with the base option and 
+define the equivalent amount for the differences between them (the base option </p>
+
+<p>receives the equivalent amount of 0). These equivalent amounts for the quantita-
+tive base issue are calculated automatically as the differences between the actual 
+values of the options. 
+4. It is allowed to conduct such a within-issue analysis because the even-swap meth-
+od employs an additive aggregation of the scores, which means it assumes that the 
+score associated with each option of one issue does not depend on the options of 
+other issues (Keeney and Raiffa 1991). 
+5. Calculating the overall scores of offers by adding the equivalent amounts of op-</p>
+
+<p>tions that comprise the offers. Similarly to the additive scoring system the global 
+score of offer is determined by adding up the equivalent amounts defined for op-</p>
+
+<p>tions that comprise this offer. The overall scores of the offers are interpreted as 
+the costs of their upgrading to the ideal (best) level. </p>
+
+<p>Even-swap based scoring system was applied in a simple spreadsheet based negotia-
+tion support tool called <rs id="software-25" type="software">NegoCalc</rs> (<rs corresp="#software-25" type="creator">Wachowicz</rs> <rs corresp="#software-25" type="version-date">2008</rs>). The key stages of building the 
+negotiation offers' scoring system in NegoCalc are shown in Fig. 3. First the base issue 
+has been selected as the price, and then, after identification of the best options for all </p>
+
+<p>remaining issues (building time and warranty time), the equivalent amounts for even 
+swaps in terms of price have been declared. </p>
+
+<p>The even-swap based scoring system overcomes one disadvantage of additive scoring 
+system. It allows negotiators to operate with the global score that they choose them-</p>
+
+<p>T. Wachowicz. Decision support in software supported negotiations </p>
+
+
+
+<p>selves and the values of which they can interpret and compare easily. For instance, they 
+can select the base issue like price or time and use their units to score offers. However, 
+similarly to additive scoring system, even swaps require assigning swaps instead of 
+determining them and, what is more important, assumes the full compensation for all 
+negotiation issues. </p>
+
+<p>3.3. Application of calibrated ELECTRE-TRI for scoring negotiation offers </p>
+
+<p>The recent work of Wachowicz and Wieszała (2009) on alternative pre-negotiation pro-</p>
+
+<p>tocols shows that outranking methods (like PROMETHEE) may be applied in nego-
+tiation process to evaluate offers. What is interesting, these outranking methods that 
+employ veto thresholds, reject the assumption of compensation, which is concordant 
+with the true negotiation behavior recognized in the research of Wachowicz and Ker-
+sten (2009). But on the other hand PROMETHEE or ELECTRE base on pair-wise 
+comparisons and produce the offers scoring systems very sensitive to any change of 
+the negotiation space. The ranking of offers may change diametrically if new options 
+are added, which is a result of the ranking reversal problem (see De Keyser and Peeters 
+1996). Therefore we decided to employ one of the sorting method from the ELECTRE 
+family -ELECTRE TRI (Roy and Bouyssou 1993). </p>
+
+<p>ELECTRE TRI allows to classify multi-criteria alternatives into the predefined catego-
+ries, described by the lower and upper-limit profiles. Let F denote the set of indices of </p>
+
+<p>the criteria g 1 , g 2 , …, g m (F = {1, 2, …, m}), and B -the set of indices of the profiles 
+defining p + 1 categories (B = {1, 2, …, p}), where b h is an upper limit of category C h </p>
+
+<p>and a lower limit of category C h+1 , h = 1, 2, …, p (Fig. 4). We assume here that decision 
+maker's preferences increase with the value on each criterion. 
+ELECTRE-TRI classifies alternatives into the category C h+1 described by the lower </p>
+
+<p>limit b h and the higher limit b h+1 by verifying the assertion aSb h , interpreted as "a 
+is at least as good as b h ". To verify this assertion a notion of pseudo-criteria is ap-
+plied, introducing the preference, indifference and veto thresholds (Roy and Vincke 
+1984) required for determining the credibility indices s(aSb h ) ∈ [0.1] of assertion aSb h . </p>
+
+<p>Fig. 3. Building a scoring system of negotiation offers in NegoCalc </p>
+
+<p>Journal of Business Economics and Management, 2010, 11(4): 576-597 </p>
+
+
+
+<p>Then the assignment procedure is started, which (in the pessimistic approach) compares 
+a successively to b i for i = p, p -1, …,1 and identifies first profile b h , for which aSb h . 
+Alternative a is assigned then to the category C h+1 . </p>
+
+<p>ELECTRE-TRI requires from decision maker the declaration of lots of parameters like 
+profiles, weights, preference, indifference and veto thresholds. It can be troublesome, </p>
+
+<p>taking into consideration that these parameters are not so intuitive. Therefore, a few pro-
+cedures were proposed to estimate the parameters of the ELECTRE-TRI model. One of 
+them, by Mousseau and Slowinski (1998) -let us call it MS model -tries to determine 
+the parameters by analyzing the assignment examples performed by the decision maker. 
+The decision maker is asked to formulate examples of alternatives that he can easily 
+classify to the categories. Basing on these assignments a simple quadratic programming 
+model is constructed, solution of which allows to determine all the parameters except 
+the veto thresholds. </p>
+
+<p>ELECTRE-TRI together with the MS model can be easily applied to build the nego-
+tiation offers' scoring system. The only problem that occurs is the precision of offers 
+evaluation. Negotiators can consider the offers from the lower category to be worse 
+than the ones from higher category, but cannot distinguish the differences between the 
+offers classified to the same category. To obtain higher precision of a scoring system a 
+huge number of categories should be defined, but it automatically increases the number </p>
+
+<p>of examples negotiator needs to assign in the preliminary stage. We propose an alterna-
+tive approach that allows for increasing a scoring system's precision, which bases on 
+calibration of the outcomes obtained by solving MS model. The procedure of calibration 
+imposes on negotiator the declaration of satisfaction level that comes from reaching 
+each profile, which we denote u(b h ). Consequently each offer a assigned to category </p>
+
+<p>C h+1 will result in satisfaction level from the range </p>
+
+<p>1 </p>
+
+<p>( ), ( 
+) </p>
+
+<p>h 
+h </p>
+
+<p>u b u b + . If the range is too </p>
+
+<p>big to make an effective offers comparison, we propose to divide it into n sub-ranges 
+of equal dimensions, which is equivalent to definition of new sub-categories within the </p>
+
+<p>considered category C h+1 , i.e.: </p>
+
+<p>Fig. 4. Definition of categories using limit profiles (Mousseau and Slowinski 1998) </p>
+
+<p>Category 1 </p>
+
+<p>g 2 </p>
+
+<p>g 3 </p>
+
+<p>g m-</p>
+
+<p>g m </p>
+
+<p>1 </p>
+
+<p>b 1 
+b 1 </p>
+
+<p>p-</p>
+
+<p>b p </p>
+
+<p>Category 2 
+Category -1 
+p 
+Category p 
+Category p 
+g 1 </p>
+
+<p>T. Wachowicz. Decision support in software supported negotiations </p>
+
+
+
+<p> 
+ </p>
+
+<p> 
+− 
++ </p>
+
+<p>− 
+− 
++ 
+∈ </p>
+
+<p>⇒ 
+→ </p>
+
+<p>+ </p>
+
+<p>+ </p>
+
+<p>+ </p>
+
+<p>n </p>
+
+<p>b 
+u 
+b 
+u 
+s 
+b 
+u </p>
+
+<p>n </p>
+
+<p>b 
+u 
+b 
+u 
+s 
+b 
+u 
+a 
+u </p>
+
+<p>C 
+a </p>
+
+<p>h 
+h 
+h </p>
+
+<p>h 
+h 
+h </p>
+
+<p>s 
+h </p>
+
+<p>) 
+( 
+) 
+( 
+) 
+( </p>
+
+<p>, 
+) 
+( 
+) 
+( 
+) 
+1 
+( 
+) 
+( 
+) 
+( </p>
+
+<p>1 </p>
+
+<p>1 </p>
+
+<p>1 </p>
+
+<p>(5) </p>
+
+<p>where s = 1, …, n. 
+Each sub-category is defined by new profiles and the issues' values need to be identified 
+for each of these profiles. They can be determined by linear interpolation between the 
+issues' values of neighboring profiles defining this category. The upper-limit profile of 
+each sub-category but the last (most preferred) one can be determined as: </p>
+
+<p>1 </p>
+
+<p>( 
+) 
+( ) 
+( ) 
+( ) 
+1 </p>
+
+<p>k h 
+k h 
+k h 
+k h </p>
+
+<p>g b 
+g b 
+g b 
+g b 
+s 
+n 
++ − 
+= 
++ ⋅ 
+− 
+, 
+(6) </p>
+
+<p>for k = 1, …, m and s = 1, …, n -1. The upper limit profile for the sub-category n is b h . 
+The whole idea of dividing the ELECTRE-TRI scoring system into sub-categories and 
+calibrating the outcomes in terms of satisfaction levels is presented in Fig. 5. </p>
+
+<p>Having prepared the offers' scoring system as described above, negotiator can evaluate 
+each negotiation offer by assigning it first to the general category, and then to the sub-</p>
+
+<p>category within this category. Such an algorithm reduces the number of comparisons 
+that would be far more bigger if the alternative was compared with sub-categories 
+directly. </p>
+
+<p>Let us assume that the negotiator wants to evaluate an offer 1 [320;10;8] 
+a = 
+within the 
+scoring system shown in Fig. 4, where weights of issues estimated from MS model 
+are 
+[0,35;0,15;0,5] 
+w = 
+. He declares also the veto thresholds </p>
+
+<p>1 
+2 </p>
+
+<p>( ) 
+( ) [10;5;5] 
+p b 
+p b 
+= = 
+. </p>
+
+<p>Fig. 5. Sub-categories and satisfaction scores </p>
+
+<p>b 0 </p>
+
+<p>1 </p>
+
+<p>b 0 
+u( ) = 0% 
+b 0 </p>
+
+<p>C 1 
+C 2 
+C 3 </p>
+
+<p>b 1 
+u( ) = 40% 
+b 1 </p>
+
+<p>b 2 
+u( ) = 70% 
+b 2 </p>
+
+<p>b 3 
+u( ) = 100% 
+b 3 </p>
+
+<p>10% </p>
+
+<p>b 0 </p>
+
+<p>2 </p>
+
+<p>20% </p>
+
+<p>b 0 </p>
+
+<p>2 </p>
+
+<p>b 1 </p>
+
+<p>1 </p>
+
+<p>30% 
+50% </p>
+
+<p>b 1 </p>
+
+<p>2 </p>
+
+<p>60% </p>
+
+<p>b 2 </p>
+
+<p>1 </p>
+
+<p>77,5% </p>
+
+<p>b 2 </p>
+
+<p>2 </p>
+
+<p>85% </p>
+
+<p>b 2 </p>
+
+<p>3 </p>
+
+<p>92,5% </p>
+
+<p>-420 </p>
+
+<p>-20 </p>
+
+<p>1 </p>
+
+<p>s </p>
+
+<p>6.25 
+13.25 
+25 </p>
+
+<p>-6 </p>
+
+<p>-300 
+-372.7 
+-338.8 </p>
+
+<p>-12.2 
+-9 </p>
+
+<p>g 1 </p>
+
+<p>g 2 </p>
+
+<p>g 3 </p>
+
+<p>Journal of Business Economics and Management, 2010, 11(4): 576-597 </p>
+
+
+
+<p>According to the pessimistic assigning procedure this offer is compared first with pro-
+file b 2 and later with b 1 , by examining the relation a 1 Sb 2 , i.e. s(a 1 Sb 2 ) ≥ λ (we assume 
+λ = 0.746 estimated also from MS model). We obtain s(a 1 Sb 2 ) &lt; λ and s(a 1 Sb 1 ) = 
+1 &gt; λ, which means a 1 may be classified to the category C 2 assuring the satisfaction at 
+level no less than 40% and no higher than 70%. To make the evaluation more precise </p>
+
+<p>we compare now the offer a 1 with upper-limit profiles 2 </p>
+
+<p>1 </p>
+
+<p>[350,1;10, 08;10,91] 
+b = 
+and </p>
+
+<p>1 </p>
+
+<p>1 [361, 4;11,14;8,58] 
+b = 
+and obtain the values of credibility indices: </p>
+
+<p>2 
+1 1 </p>
+
+<p>( 
+) 0,5 
+a Sb 
+σ 
+= and </p>
+
+<p>1 
+1 1 </p>
+
+<p>( 
+) 0,503 
+a Sb 
+σ 
+= . With the assumed λ = 0.746 we cannot assign a 1 to any higher cat-</p>
+
+<p>egory. Therefore a 1 will be assigned to sub-category 1 </p>
+
+<p>2 </p>
+
+<p>C that assures the satisfaction at 
+the levels from 40% to 50% (Fig. 6). </p>
+
+<p>The significant advantage of the calibrated ELECTRE-TRI based scoring system is 
+that it does not need a specification on all feasible options in the pre-negotiation phase, </p>
+
+<p>which was required for additive scoring system and even-swap based scoring system. 
+Negotiators need only to agree over negotiation issues, and then define individually their </p>
+
+<p>reservation and aspiration levels that determine their negotiation space. And therefore 
+in, the actual negotiation phase they can freely propose as an agreement proposals any 
+offer (even those out of their negotiation space), not only the one based on the pre-
+defined options. What is more, negotiators do not need to assign explicitly the scores </p>
+
+<p>to issues and options using their decision making skills. All the parameters required for 
+building the scoring system are estimated basing on the assignment examples negotia-
+tors declared in the pre-negotiation phase. The idea of scoring negotiation offers with 
+calibrated ELECTRE-TRI scoring system is being tested in the experimental electronic 
+negotiations system. </p>
+
+<p>Fig. 6. Assigning the offer to sub-categories </p>
+
+<p>C 2 </p>
+
+<p>1 </p>
+
+<p>C 2 </p>
+
+<p>2 </p>
+
+<p>C 2 </p>
+
+<p>3 </p>
+
+<p>b 1 
+40% </p>
+
+<p>b 2 
+70% </p>
+
+<p>a 1 </p>
+
+<p>g 1 </p>
+
+<p>g 2 </p>
+
+<p>g 3 </p>
+
+<p>-12.2 
+-9 </p>
+
+<p>6.25 
+13.25 </p>
+
+<p>-372.7 </p>
+
+<p>70% 
+60% 
+77,5% </p>
+
+<p>-338.8 </p>
+
+<p>85% </p>
+
+<p>T. Wachowicz. Decision support in software supported negotiations </p>
+
+
+
+<p>4. Software support for further negotiation phases </p>
+
+<p>Having the offers' scoring system built, negotiators may take advantage of it in the 
+actual negotiation phase, for following the negotiation progress and analyzing the scale 
+of concessions and also in post-negotiation phase (after achieving agreement), for ana-
+lyzing the gains left on the table. </p>
+
+<p>4.1. Actual negotiation phase support </p>
+
+<p>Both an additive scoring system and even-swap based scoring system can be used in 
+the offer's formulation process for analyzing in details the trade-offs between issues and 
+options. While building the offer (i.e. adding the propositions for reservation levels of 
+successive issues) negotiator can observe how the overall score changes. He can im-
+mediately react if the score is lower than his aspiration level by balancing with different 
+combination of options (increasing value of one issue, while decreasing it for another). 
+The process of building negotiation offer in <rs type="software">NegoCalc</rs> system is presented in Fig. 7. </p>
+
+<p>These two scoring systems may be also helpful in graphical illustration of the negotia-
+tion progress. A graph depicting the history of offers in the evaluation (utility) space 
+can be used to analyze the dynamics of negotiation -how frequently the offers and 
+counteroffers are submitted and what outcome they produce. It is also very useful in 
+recognizing the scale of successive concessions, basing on which negotiators can con-
+clude on their counterparts negotiation strategy. An example of a history graph displayed 
+in ENS <rs id="software-20" type="software">Inspire</rs> (<rs corresp="#software-20" type="creator">Kersten and Noronha</rs> <rs corresp="#software-20" type="version-date">1999</rs>) is presented in Fig. 8. </p>
+
+<p>The ELECTRE-TRI based offers' scoring system cannot be used the same way, since 
+it does not operate on the options rating. It does not allow to score any offer until the 
+full package is not created, therefore, negotiators cannot observe in details the direct 
+trade-offs between the different resolution levels of issues. The graph of history cannot 
+be depicted for the offers scored by ELECTRE-TRI either, since the scores are in fact 
+the ranges that correspond to the actual sub-category but not the scalar values. Instead 
+of the classic history graph a simple general map can be drawn showing the pace of 
+concession in terms of moving from one sub-category to another. </p>
+
+<p>Fig. 7. Analyzing an offer under construction in NegoCalc system </p>
+
+<p>Journal of Business Economics and Management, 2010, 11(4): 576-597 </p>
+
+
+
+<p>Negotiation support system may also have implemented the optimization engines that 
+allow them to act pro-actively in the actual negotiation phase, like some heuristics or 
+game theory models. These engines may determine the fair solutions and suggest ne-
+gotiators the alternative offers as the agreement proposals, like in Smartsettle (Thiessen 
+and Soberg 2003). </p>
+
+<p>4.2. Post-negotiation phase support </p>
+
+<p>In post-negotiation phase a final contract is signed by the negotiating parties, but be-</p>
+
+<p>fore it happens there is time for analyzing the agreement and consider its effectiveness. 
+NSSs can help in analyzing the negotiation space of both the negotiators and finding </p>
+
+<p>the better solutions. It is quite a simple task for discrete negotiation problems that are 
+supported by additive scoring systems or even-swap scoring systems. NSSs simply 
+search a finite negotiation space and try to identify the offers that result in scores at </p>
+
+<p>least as good as the current compromise simultaneously for both the negotiators. The 
+results of the electronic negotiation experiments show that NSSs find the solutions better 
+than the negotiated agreement for 65% of all cases (Wachowicz and Kersten 2009). The </p>
+
+<p>post-negotiation optimization capabilities of NSSs seem to be very important because 
+they are giving the opportunity to improve the agreement and consume the gains left 
+on negotiation table. The results of post-negotiation optimization conducted by eNS 
+Inspire are shown in Fig. 9. </p>
+
+<p>Fig. 8. History graph in eNS Inspire </p>
+
+<p>T. Wachowicz. Decision support in software supported negotiations </p>
+
+
+
+<p>Knowing the scale of possible improvements negotiators can renegotiate the current 
+agreement trying to move themselves to one of the solutions proposed by the system. 
+But what is interesting, only 22% of negotiators that NSS suggested the improvements 
+to, took an advantage of the renegotiation and improved their final score (Wachow-</p>
+
+<p>icz and Kersten 2009). The rest of them decided to stay in the negotiated agreement 
+claiming that the system proposals cannot be accepted (despite they resulted in higher 
+score than an agreement) because these offers do not satisfy their reservation levels on 
+some options. This explanation shows that negotiators reject sometimes the notion of 
+compensation and the alternative scoring mechanisms, like the one based on calibrated 
+ELECTRE-TRI, that should be implemented. However, there are yet no research works 
+showing the post-negotiation capabilities of scoring systems based on ELECTRE-TRI 
+or other outranking or sorting methods. </p>
+
+<p>5. Conclusions </p>
+
+<p>In this paper we discussed the problem of decision support that can be given in negotia-
+tions supported by negotiation support systems. This is a very interesting problem, since 
+more and more negotiations are conducted in the electronic way and sooner or later 
+negotiators will require professional tools that could efficiently help them in the conduct </p>
+
+<p>of negotiation. We described thus the structure of negotiation process and showed dif-
+ferent possibilities of its support considering the role and activity NSSs can play. Then 
+we tried to focus on the decision process that takes place in the pre-negotiation phase 
+discussing the classical approach to eliciting preferences and building the offers' scor-
+ing system that was based on the additive scoring system with the utility payoffs. We 
+tried to emphasize its simplicity showing also some disadvantages of it and proposing 
+two alternative approaches. </p>
+
+<p>Fig. 9. Improvement of current agreement found by eNS Inspire </p>
+
+<p>Journal of Business Economics and Management, 2010, 11(4): 576-597 </p>
+
+<p>594 </p>
+
+<p>The first approach derived from Hammond, Keeney and Raiffa even-swap method also </p>
+
+<p>assumes full compensation on issues. The main difference in comparison with the utility 
+based additive scoring system is the philosophy of defining the trade-offs. Here negotia-</p>
+
+<p>tors decide themselves what kind of units to use to express the overall score of offer. 
+They select the base issue and try to evaluate all other options of all issues in terms 
+of base one, using its units to define the equivalent amounts for swaps between issues. </p>
+
+<p>The second approach rejects compensation and tries to build the scoring system using 
+pseudo-criteria. This ELECTRE-TRI based model in conjunction with the MS model for 
+estimation of key parameters can become a very helpful and simple to use supporting 
+tool. Instead of asking negotiators to assign the scores it tries to derive the preferences 
+basing on the assignment examples. This indirect approach does not force negotiators 
+to score each negotiation option separately and declare the abstract values (i.e. utili-
+ties, desirabilities) to what they can sometimes perceive as immeasurable. It only asks 
+to formulate the alternatives that negotiators can judge intuitively to be good, medium 
+or bad and then, using some assumptions, tries to identify the profiles that limit these </p>
+
+<p>categories. To increase the precision of such an evaluation we decided to calibrate the 
+scoring system using satisfaction scores assigned to the initial profiles of the categories. </p>
+
+<p>What is more, we decided to divide the categories into the sub-categories by simple 
+interpolation between the values of the successive profiles, which allowed to distinguish 
+the differences between two offers that were previously classified to the same category. </p>
+
+<p>We also tried to show that the choice of scoring system has the consequences for the 
+subsequent negotiation phases. The methods that can easily build the scoring system 
+in the pre-negotiation phase deriving from the negotiators' decision or choices may not 
+allow later for making any sophisticated analysis of the negotiation progress or the scale 
+of concessions (i.e. the ELECTRE-TRI based scoring system). </p>
+
+<p>The future work will focus on the implementation of the calibrated ELECTRE-TRI 
+model to the electronic negotiation system and making the comparison study with the 
+utility based scoring system that will show how the negotiators perceive a use and use-
+fulness of these two different tools. </p>
+
+<p>Acknowledgements </p>
+
+<p>This work has been supported by Polish Ministry of Science and Higher Education, as 
+a part of scientific project number N N111 234936. </p>
+
+
+
+<p>T. Wachowicz. Decision support in software supported negotiations </p>
+
+
+
+
+
+
+
+
+
+<p>T. Wachowicz. Decision support in software supported negotiations </p>
+
+
+
+
+
+<p>Journal of Business Economics and Management, 2010, 11(4): 576-597 </p>
+
+</text></tei>

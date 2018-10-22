@@ -1,0 +1,3150 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1111%2Fcoep.12223" /><encodingDesc><appInfo><application version="0.5.2-SNAPSHOT" ident="GROBID" when="2018-10-20T00:51+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>This research investigates two features of the Affordable Care Act that especially 
+affect young adults, the young adult-dependent coverage (YAD) mandate and the 
+requirement to cover contraception (CM). Both mandates were first enacted at the 
+state level but have been studied only in isolation. We estimate a wide range of models 
+allowing these mandates to have joint effects on insurance coverage, health-care access, 
+health outcomes and fertility. We provide new evidence that helps settle the mixed 
+findings from past state-level YAD and CM research and suggests the two mandates 
+may combine to improve the well-being of young adults. (JEL I18, I12, H75) </p>
+
+<p>Young adults are typically low-risk/low-cost 
+users of health insurance who are also among 
+the most likely to be uninsured. The Patient 
+Protection and Affordable Care Act of 2010 
+(ACA) targeted this group and contains two 
+key mandates of particular benefit to young 
+adults: (1) extending the provision of young 
+adult-dependent coverage (YAD) on family 
+insurance plans to age 26 and (2) requiring all 
+Food and Drug Administration (FDA)-approved 
+contraceptive methods to be available to women 
+with no cost sharing (HRSA 2015). Both of these 
+provisions were enacted at the state level prior 
+to the national reform, thus providing a natural 
+setting for researchers to test their effects (e.g., 
+Depew 2015; Levine, McKnight, and Heep 2011; 
+Monheit et al. 2011 for YAD; Mulligan 2015; 
+Raissian and Lopoo 2015 for contraception man-
+dates [CMs]). However, the key findings from </p>
+
+<p> *  We would like to thank Elizabeth Nash from the 
+Guttmacher Institute for providing information on state 
+contraception policies, Joel Cantor for research on dependent 
+coverage mandates, and Philip Levine for CPS data on health 
+insurance. This paper has also benefited from the comments 
+of Reagan Baughman, David Bradford, Anca Cotet-Grecu, 
+Andrew Houtenville, Joanna Lahey, Robert Mohr, David 
+Simon, and participants in presentations at APPAM, the 
+University of Connecticut, Bowdoin College, the Eastern 
+Economics Association Meetings, and iHEA Meetings, as 
+well as those of three anonymous referees and the editor. 
+Trudeau: Assistant Professor, Department of Business 
+Economics, Sacred Heart University, Fairfield, CT 
+06825. Phone 203-365-4156, Fax 203-365-7538, E-mail 
+trudeauj@sacredheart.edu 
+Conway: Professor, Department of Economics, University of 
+New Hampshire, Durham, NH 03824. Phone 603-862-
+3386, Fax 603-862-3383, E-mail karen.conway@unh.edu </p>
+
+<p>this research are decidedly mixed. Moreover, no 
+research has taken a comprehensive approach to 
+studying these two mandates in tandem. 
+Our research seeks to close this gap by 
+studying the effects of both mandates on health 
+insurance coverage, access to care, general health 
+outcomes, and reproductive outcomes using a 
+variety of datasets and empirical approaches. We 
+make three contributions. First, ours is the first 
+study to investigate the effects of both mandates. 
+Our approach not only avoids the possible bias 
+caused by ignoring a related health insurance 
+policy but allows for the mandates to reinforce 
+(or diminish) each other's effects. Such an inter-
+action between the mandates appears plausible 
+for young women. Given their typically low risk 
+of serious health problems yet higher fertility, 
+the costs because of pregnancy likely loom large. </p>
+
+<p>ABBREVIATIONS </p>
+
+<p>ACA: Affordable Care Act of 2010 
+ASEC: Annual Social and Economic Supplement 
+BRFSS: Behavioral Risk Factor Surveillance System 
+CDC: Centers for Disease Control and Prevention 
+CM: Contraception Mandate 
+CPS: Current Population Survey 
+DD: Difference-in-Difference 
+DDD: Triple Difference 
+EPICC: Equity in Prescription Insurance and 
+Contraception Coverage Act 
+ERISA: Employee Retirement Income Security Act 
+ESI: Employer-Sponsored Insurance 
+FDA: Food and Drug Administration 
+HRSA: Health Resources and Services Administration 
+MEPS: Medical Expenditure Survey 
+NCSL: National Conference of State Legislatures 
+YAD: Young Adult-Dependent Coverage </p>
+
+<p>73 
+Contemporary Economic Policy (ISSN 1465-7287) 
+Vol. 36, No. 1, January 2018, 73-92 
+Online Early publication March 16, 2017 </p>
+
+<p>doi:10.1111/coep.12223 
+© 2017 Western Economic Association International </p>
+
+
+
+<p>CONTEMPORARY ECONOMIC POLICY </p>
+
+<p>Moreover, the cost of prescription contraception 
+is relatively expensive, especially for young 
+adults whose incomes tend to be lower than 
+other groups. For example, Trussell et al. (2013) 
+estimates the average annual cost of short-acting 
+prescription contraception to be $390.53 for 
+injections, $654.30 for the birth control pill, 
+and $1,023.86 for the birth control patch. 1 The 
+reported spike in requests and <rs type="software">Google</rs> searches 
+for intrauterine devices immediately after the 
+2016 election is strong, although admittedly 
+anecdotal, evidence of the importance women 
+place on having the cost of their contraception 
+covered (Ross 2016). 
+Health insurance policies that include contra-
+ception coverage are likely valued more highly by 
+young women than policies that do not, which in 
+turn may lead to greater take-up and strengthens 
+the effects of a YAD mandate. Similarly, Raissian 
+and Lopoo (2015) note that CMs only help those 
+women who have insurance; thus, a CM may have 
+stronger effects in states where young women 
+have better access to health insurance, such as 
+provided by a YAD mandate. Even if these man-
+dates do not combine to increase health insurance 
+coverage, they could still combine to affect the 
+care women receive and their health outcomes. 
+For example, a woman covered by a YAD may 
+not bother going to the doctor for routine care if 
+she is using nonprescription contraception (e.g., 
+condoms, spermicide); the addition of a CM may 
+encourage her to seek prescription contraception 
+and lead her to get such routine care, care which 
+could potentially diagnose, treat, or prevent other 
+health conditions (like depression). 
+There are other, more indirect mechanisms 
+too. Depew (2015) and Colman and Dave (2015) 
+find that YADs reduce labor supply; the latter 
+also find a decrease in time spent waiting for 
+or receiving health care and an increase in "so-
+cializing." Such second-order effects could lead 
+YADs to affect both care received and health 
+outcomes (indeed, Colman and Dave 2015, find 
+an increase in subjective well-being) as well as 
+influence reproductive behavior and the desire 
+for contraception. These scenarios suggest that 
+the effects of these mandates can operate through </p>
+
+<p>1. These estimates contain an initial physician visit cost 
+of $41.45 taken from the 2011 Medicare fee schedule; how-
+ever, other evidence from the Medical Expenditure Survey 
+(MEPS) by Davis and Carper (2012) suggests that the aver-
+age expense for a visit to a primary physician is closer to 
+$145, or for an OB-GYN $235. For context, note that the aver-
+age earnings for 18-24-year-old women in 2009 was $24,117 
+according to the U.S. Census Bureau (2012). </p>
+
+<p>multiple avenues and may be influenced by 
+whether the other mandate exists, an interaction 
+effect we model explicitly. 
+A second contribution is the comprehensive 
+set of outcomes we investigate in studying these 
+two mandates. This approach allows us to both 
+fill in the gaps left by existing research and bring 
+new evidence to key outcomes for which past 
+findings are mixed. Research on state-level YAD 
+mandates (e.g., Levine, McKnight, and Heep 
+2011; Monheit et al. 2011) focuses on insurance 
+coverage. 2 In contrast, research on CMs primar-
+ily focuses on sexual activity and contraception 
+use (Atkins and Bradford 2014; Magnusson et al. 
+2012; Raissian and Lopoo 2015) and birth and 
+abortion rates (Dills and Cotet-Grecu 2016; Mul-
+ligan 2015). Possible effects on insurance cover-
+age or on more general health-care utilization and 
+health outcomes that may arise out of the com-
+plementary consumption of health services have 
+been mostly ignored. 3 Our study investigates the 
+effects of both mandates, first in isolation and 
+then allowing for joint effects, for health insur-
+ance coverage; health-care access; general health 
+outcomes; and pregnancies, births, and abortions. 
+Drawing from several data sources also allows 
+us to explore multiple independent measures of 
+insurance coverage, general health, and repro-
+ductive outcomes, bringing new evidence and a 
+different kind of robustness check to past work. 
+Finally, our study provides data and method-
+ological updates to existing research on state-
+level mandates. Six states adopted YADs in 2009 
+alone, yet the two key studies observing their 
+effect on coverage end in 2008 (Levine, McK-
+night, and Heep 2011; Monheit et al. 2011). 
+Some recent YAD research emphasizes including 
+narrower, more targeted age groups (e.g., Slusky 
+2015), while Depew (2015) advocates for a wider 
+age range such that eligibility can be based on age 
+rather than marital or student status, which may 
+be endogenous. Recent work also explores sen-
+sitivity to including location-specific time trends 
+and emphasizes the need to test for pretrends and 
+conduct placebo tests (e.g., Depew 2015; Dills 
+and Cotet-Grecu 2016; Mulligan 2015; Slusky </p>
+
+<p>2. Studies that investigate the broader effects of YAD 
+reform on coverage, health-care utilization, and general health 
+outcomes all consider only the ACA's mandate (Antwi, 
+Moriya, and Simon 2015a; Antwi et al. 2015b; Barbaresco, 
+Courtemanche, and Qi 2015; Chua and Sommers 2014; Som-
+mers et al. 2013). 
+3. An exception is Raissian and Lopoo (2015), which 
+investigates the effect of state-level CMs on private insurance 
+and preventive care services. To our knowledge, no published 
+study has investigated the causal effects of the ACA CM. </p>
+
+<p>TRUDEAU &amp; CONWAY: INSURANCE MANDATES &amp; YOUNG WOMEN </p>
+
+
+
+<p>2015). We estimate every outcome with several 
+difference-in-difference (DD) and triple differ-
+ence (DDD) models and subject each one to sen-
+sitivity and robustness checks. These exercises 
+lend support to the emerging view that YADs did 
+not significantly increase insurance coverage and, 
+instead, led to a switch in the source of cover-
+age. Our analyses also bring new evidence to the 
+mixed findings regarding CMs' effects on fertility 
+by finding that they reduce reported pregnancies. 
+Finally, our joint models yield suggestive evi-
+dence that the two mandates combine to improve 
+the general well-being of young adults, although 
+the precise mechanism for the effect is not clear. </p>
+
+<p>II. BACKGROUND </p>
+
+<p>In 1994, Utah adopted a provision for 
+extended parental coverage of young adult 
+dependents, allowing unmarried children under 
+the age of 26 to enroll under their parents' 
+insurance plan. 4 By 2009, more than 30 states 
+had implemented their own variations of the 
+YAD mandates, limiting dependency by age, 
+student status, marital status, and whether or not 
+the young adult has their own dependents. The 
+2010 ACA extended parental coverage of health 
+insurance to all young adults, without exceptions, 
+under the age of 26 as of September 23, 2010. 
+During the same time period, federal and 
+state legislation began to challenge the equity 
+of insurance coverage that does not provide free 
+access to contraception. The issue first received 
+national attention in the form of the Equity in 
+Prescription Insurance and Contraception Cover-
+age Act (EPICC) in 1997, yet Congress failed to 
+enact the bill. States, however, seized the oppor-
+tunity to establish their own initiatives, starting 
+with Maryland in 1998, extending contraception 
+coverage to women with insurance plans that 
+covered other prescription drug benefits. By 
+2009, more than 25 states had enacted similar 
+CMs. The ACA extended outpatient contracep-
+tive services and prescription drug benefits to all 
+insured women starting August 1, 2012 at zero 
+cost sharing (HRSA 2015). 
+One complication in studying the effects 
+of state-level mandates is that not all firms 
+are subject to the mandates' reforms. In 1974, </p>
+
+<p>4. Although Utah is commonly cited as the first adopter 
+of YAD legislation, in our reading, we observe that North 
+Dakota extended family coverage to students up to age 23 and 
+nonstudents cohabitating with a parent through age 19 in 1985 
+and then increased both age thresholds in 1995. See Table S2, 
+Supporting Information. </p>
+
+<p>the Employee Retirement Income Security 
+Act (ERISA) set the minimum standards for 
+firms extending employer-sponsored insurance 
+(ESI) benefits to their employees and exempted 
+self-insured firms from state-level insurance 
+mandates. In 2009, 59% of ESI plans were 
+issued by self-insured firms (Henry J. Kaiser 
+Family Foundations and Health Research and 
+Educational Trust [HRET] 2010), such that they 
+are not covered by the mandates. 5 A second com-
+plication is that the increased cost of the newly 
+mandated benefits may decrease ESI offers. 
+Unfortunately, data sources that have measures 
+of care utilization and health outcomes, including 
+those we employ here, do not have information 
+on ESI offers or ERISA status. 
+Research on these mandates, both at the 
+state level and via the ACA, has exploded in 
+recent years, and an expanded discussion of this 
+research is available upon request. For the sake of 
+brevity, Table 1 summarizes the research on each 
+state-level mandate (two columns) across the 
+three effects of interest (three rows)-coverage, 
+care utilization, and health outcomes. 6 We briefly 
+summarize the key insights and note that our 
+study requires an additional column as it consid-
+ers the effects of both mandates on all three types 
+of outcomes for the first time. 
+Research into state-level YAD mandates (left 
+column of Table 1) focuses on the effects on 
+insurance coverage (top panel); care utilization 
+(middle panel) and health outcomes (bottom 
+panel) are much less explored. Most studies 
+examine the effect of state-level YAD mandates 
+across all or most states, although a few focus 
+only on the Massachusetts Health Reform in 
+2006. Each employs quasiexperimental, DD, 
+or DDD frameworks, using young adults not 
+eligible for the mandates and/or living in states 
+without mandates as control groups. The majority 
+of studies of coverage use the Current Population 
+Survey (CPS), which allows the identification of 
+the source of coverage (own, dependent) and, for 
+young adults living with their parents, whether 
+the policy holders work for small employers who </p>
+
+<p>5. Nonetheless, evidence provided by Sonfield et al. 
+(2004) suggests that CMs led to an increase of insurance plans 
+including contraception coverage. 
+6. We provide a similar summary table (Table S1) for 
+ACA mandate research. However, it only has one column (for 
+YAD) because, to our knowledge, no research yet exists with 
+respect to the contraception mandate with the exception Finer, 
+Sonfield, and Jones (2014), a descriptive study that reports 
+that the percentage of privately insured women paying zero 
+out-of-pocket expenses for contraception increased after the 
+ACA. </p>
+
+
+
+<p>CONTEMPORARY ECONOMIC POLICY </p>
+
+<p>TABLE 1 </p>
+
+<p>Summary of Studies on the Independent Effects of State-Level YAD and Contraception Mandates on Insurance, Care, and Health </p>
+
+<p>YAD Mandate </p>
+
+<p>Contraception Mandate </p>
+
+<p>Coverage 
+Long, Yemane, and Stockley </p>
+
+<p>(2010)-MA Health Reform </p>
+
+<p>(CPS </p>
+
+<p>2006-2009) </p>
+
+<p>DD, 19-26 vs. all 27-33, minorities 27-33, childless 27-33 in 
+MA: decreases uninsured rate by 5.0-6.5 pp. 
+DDD, compare against NY: decrease uninsured rate 5.4-7.5 pp. </p>
+
+<p>a </p>
+
+<p>Blum et al. (2012)-State Level 
+(BRFSS 2002-2004 vs. 2008-2009) </p>
+
+<p>Descriptive 1 st 
+Study, 19-23, 3 treatment states CO, NJ, SD v. 17 controls </p>
+
+<p>0.2% increase in any insurance coverage. 
+Descriptive 2 nd 
+Study, nonstudents 19-23 v. 26-29 in CO and SD only </p>
+
+<p>4.2% increase in coverage for 19-23-year-olds. 
+Depew (2015)-State Level </p>
+
+<p>(CPS 2001-2010) </p>
+
+<p>DDD, 19-29, 2.3 pp increase in likelihood of dependent insurance 
+coverage. Subsamples: 14.4% increase for females, 10% increase males 
+relative to mean. </p>
+
+<p>Hahn and Yang (2014)-State Level </p>
+
+<p>(CPS 2001-2010) </p>
+
+<p>DD, 19-24 in expansion states: 4.8 pp increase in dependent coverage, 
+more than half because of decreases in own private insurance. </p>
+
+<p>a </p>
+
+<p>Raissian and Lopoo (2015) </p>
+
+<p>(CPS 1989-2009) </p>
+
+<p>DD, 15-44, includes indicator for mandates that cover services and 
+supplies or suppliers only: no effect on probability of having private 
+insurance coverage </p>
+
+<p>b </p>
+
+<p>Levine, McKnight, and Heep </p>
+
+<p>(2011)-State Level 
+(CPS 2001-2009) </p>
+
+<p>DDD, 19-24: 3.3 pp increase in any coverage, 4.4 pp increase in 
+private insurance. Subsample, nonstudents: 5.1 pp increase in any 
+insurance coverage. </p>
+
+<p>DD, 19-24 and live with parents: 1.6 pp increase in any insurance 
+(2.9 pp private). </p>
+
+<p>b </p>
+
+<p>Monheit et al. (2011)-State Level </p>
+
+<p>(CPS 2001-2009) </p>
+
+<p>DD, 19-29: No effect on overall uninsured, private or public coverage. 
+Subsamples, by residence with parents and/or ages 19-25: decreases </p>
+
+<p>in own ESI from 2.11 to 3.33 pp offset by increases in parents' coverage 
+of 2.58-3.84 pp. </p>
+
+<p>TRUDEAU &amp; CONWAY: INSURANCE MANDATES &amp; YOUNG WOMEN </p>
+
+
+
+<p>TABLE 1 
+Continued </p>
+
+<p>YAD Mandate </p>
+
+<p>Contraception Mandate </p>
+
+<p>Care Utilization </p>
+
+<p>a </p>
+
+<p>Blum et al. (2012)-State Level 
+(BRFSS 2002-2004 vs. 2008-2009) </p>
+
+<p>Descriptive 1 st 
+Study, 19-23, 3 treatment states CO, NJ, SD v. 17 controls: </p>
+
+<p>0.9% increase in having primary physician, 4.6% increase in recent 
+physical exam, 3.9% decrease in forgoing care because of cost. 
+Descriptive 2 nd 
+Study, nonstudents 19-23 v. 26-29 in CO and SD only: </p>
+
+<p>3.8% increase in having primary physician, 2.1% increase in recent 
+physical exam, 8.0% decrease in forgoing care because of cost. 
+Atkins and Bradford (2014)-(BRFSS 1998-2010-limited, Family Planning 
+Module) </p>
+
+<p>DD, 18-44, Logit Regressions, Treatment: DE and IA; Controls: KY, NE, and 
+SD: 5% more likely to report any prescription contraception use, 4% higher pill 
+use in treatment states. 
+Magnusson et al. (2012) </p>
+
+<p>(NSFG 2006-2008) </p>
+
+<p>DD, 15-44, Logit Regressions: 64% increased odds of consistent contraceptive 
+use among privately insured women in mandate states relative to none; no 
+effect on uninsured women's consistent use. </p>
+
+<p>a </p>
+
+<p>Mulligan (2015) 
+(BRFSS 1998-2010-limited, Family Planning Module) </p>
+
+<p>DD, 18-44: 2.1 pp increase in probability of any contraceptive use; 
+1.8 pp hormonal. Subsample, 20-29: 3.6 pp increase in shot/implant use. </p>
+
+<p>a </p>
+
+<p>Raissian and Lopoo (2015) 
+(NSFG 1995, 2002, 2006-2010) </p>
+
+<p>DD, 15-44 privately insured only, includes indicator for mandates that 
+cover services and supplies or suppliers: no effect on contraception use, 8% 
+increase in pill use by women with low education, driven by supply mandates. </p>
+
+<p>DDD, 15-44, privately insured v. not privately insured: no differential effect on 
+contraception use overall or among low educated; 15.9% (12.8%) increase </p>
+
+<p>in pap smears (pelvic exams), driven by low-educated privately insured women. </p>
+
+<p>Health Outcomes </p>
+
+<p>Dills and Cotet-Grecu (2016) </p>
+
+<p>(Vital Statistics 1998-2008) </p>
+
+<p>DD for 18-19, 20-34, 35-44 by race: 4% decrease in births to Hispanic teens 
+robust to inclusion of state-specific time trends and event-study specification. 
+Other Outcomes: No effect on meconium release, precipitous labor, induced 
+labor, or C-section. </p>
+
+<p>a </p>
+
+<p>Mulligan (2015) 
+(Vital Statistics 1993-2007, NSLY, CPS) </p>
+
+<p>DD, 15-44: 6% decrease in state annual abortion rate, moderated by inclusion 
+of state time trends; effects do not persist in long run for flexible time 
+specification model. Births: 3% decline in state-and individual-level analyses, </p>
+
+<p>not robust to state trends. </p>
+
+<p>Notes: 
+Studies typically follow a DD/DDD approach, identifying the effect of each mandate using variation across states and over time. For DDD specifications, the treatment and control </p>
+
+<p>groups are also indicated. </p>
+
+<p>a </p>
+
+<p>Indicates that the study spans more than one row of the matrix. </p>
+
+<p>b </p>
+
+<p>Burgdorf (2014) conducts a sensitivity analysis of Monheit et al. 2011 and Levine, McKnight, and Heep (2011), incorporating a distinction between the source of dependent coverage </p>
+
+<p>(spouse or parent). See also Monheit, Cantor, and DeLia (2015)'s commentary and Burgdorf (2015)'s reply. </p>
+
+
+
+<p>CONTEMPORARY ECONOMIC POLICY </p>
+
+<p>are therefore more likely affected by state-level 
+reforms (because of ERISA). There remains 
+some debate about whether the overall uninsured 
+rate decreases (Levine, McKnight, and Heep 
+2011) or is unaffected because of reverse crowd-
+out from own to parent coverage (Monheit et al. 
+2011; Depew 2015, who also finds a decrease 
+in young adult labor supply). These differences 
+stem from differences in definition of controls 
+(19-24 vs. 19-29) and identification of eligibil-
+ity. Using CPS data and DD as well as the alter-
+native DDD strategies of Levine, McKnight, and 
+Heep (2011) versus Depew (2015), we attempt 
+to replicate past results, compare approaches, 
+and explore the role that CMs may play. We also 
+estimate these models using a health insurance 
+measure from a different data source, the Behav-
+ioral Risk Factor Surveillance System (BRFSS). 
+Because the CPS has no information on care 
+utilization and is limited to one measure of 
+self-reported health status, research that investi-
+gates health care or outcomes typically uses the 
+BRFSS. To our knowledge, only one study (Blum 
+et al. 2012) considers the effect of state-level 
+YADs on care utilization, and no study examines 
+outcomes. 7 
+Table 1 makes it clear that several gaps exist in 
+studying the effects of CMs as well. These stud-
+ies focus on contraceptive use (care utilization) 
+and fertility and birth outcomes (reproductive 
+health outcomes), with most finding a posi-
+tive effect on contraceptive use. This research 
+typically takes a DD approach and considers 
+broader age groups than YAD research as all 
+women of childbearing age may be potentially 
+affected by CMs. Only Raissian and Lopoo 
+(2015) consider more general types of health 
+care, finding an increase in pap smears for states 
+that mandate contraceptive services and supplies. 
+We consider a still broader set of care utilization 
+variables that have not yet been investigated in 
+CM research. Raissian and Lopoo (2015) also 
+make the point that CMs may not have much 
+impact because they only affect women with 
+health insurance-which is precisely why we 
+believe it is critical to investigate the joint effects 
+of contraceptive and YAD mandates. </p>
+
+<p>7. Using the BRFSS, Blum et al. (2012) provide descrip-
+tive evidence of increased insurance coverage and care utiliza-
+tion of individuals living in 3 treatment (YAD) states relative 
+to those living in 17 control states. Additionally, two studies 
+investigate the effects of the MA Health Reform on health care 
+(Kolstad and Kowalski 2012) and outcomes (Courtemanche 
+and Zapata 2014), but neither focuses on young adults nor the 
+YAD. </p>
+
+<p>To our knowledge, only two economic studies 
+address the direct effect of CMs on health out-
+comes, and both investigate only reproductive 
+outcomes with contradicting findings. Mulligan 
+(2015) uses state-level Vital Statistics data on 
+fertility outcomes (births and abortions) and 
+individual-level CPS Fertility Supplement data 
+and finds a decline in both births and abortions, 
+although the former is sensitive to including 
+state-specific time trends. Dills and Cotet-Grecu 
+(2016) conduct a similar analysis using the 
+restricted-use Vital Statistics data but incorporate 
+a more extensive set of individual-and state-level 
+characteristics and policies. They find no robust 
+effects on overall births with the exception of one 
+subgroup, Hispanic teens (&lt;19), who experience 
+a decline in births. 
+Taken together, the research summarized in 
+Table 1 reveals that CMs appear to increase con-
+traceptive use but that evidence for the rest of 
+the outcomes is lacking and/or mixed. Moreover, 
+no study has considered the effects of both man-
+dates together. Our analysis fills this gap and, as 
+such, informs ACA research by providing the first 
+evidence of how these two mandates combine to 
+affect outcomes. </p>
+
+<p>III. EMPIRICAL STRATEGY </p>
+
+<p>We apply a quasiexperimental framework that 
+takes advantage of variation in each mandate 
+within states over time to two individual-level 
+datasets (the CPS and the BRFSS) as well as 
+state-level Vital Statistics data on births and abor-
+tions (see Table 2 and Section IV for details). We 
+begin with a DD framework because all women 
+are potentially affected by a state's CM, so its 
+variation is limited to the state level. We esti-
+mate a DD model for each mandate separately 
+and for one that allows for a joint effect. However, 
+because most YAD studies exploit the fact that 
+not all young adults are eligible and so employ a 
+DDD approach, we also estimate two alternative 
+DDD models that rely on different identification 
+strategies. This comparison allows us to see if (1) 
+our DD findings stand up to a DDD approach and 
+(2) if controlling for CMs and addressing more 
+recent methodological concerns affect existing 
+YAD-DDD findings. </p>
+
+<p>A. DD Models </p>
+
+<p>Because CMs potentially apply to all women 
+of childbearing age, past CM research has relied 
+on variation over time and across states only, </p>
+
+<p>TRUDEAU &amp; CONWAY: INSURANCE MANDATES &amp; YOUNG WOMEN </p>
+
+
+
+<p>TABLE 2 
+Description of the Data Used: (A) Summary Statistics for Outcomes Studied and Eligibility Status by 
+Age Group and (B) Description of Other Variables Included in the Models </p>
+
+<p>Ages 19-24 
+Ages 25-29 </p>
+
+<p>(A) Summary Statistics 
+N 
+M 
+SD 
+N 
+M 
+SD 
+Source </p>
+
+<p>1. Insurance Coverage 
+Insured a 
+85,929 
+0.72 
+0.45 
+75,674 
+0.75 
+0.43 
+CPS 
+HlthPlan 
+77,841 
+0.75 
+0.43 
+111,390 
+0.81 
+0.40 
+BRFSS 
+2. Care Utilization 
+NotAfford 
+64,857 
+0.22 
+0.41 
+95,522 
+0.20 
+0.40 
+BRFSS 
+Checkup 
+50,291 
+0.70 
+0.46 
+76,126 
+0.70 
+0.46 
+BRFSS 
+3. Health Outcomes 
+General 
+Very Good + [CPS] a 
+79,579 
+0.74 
+0.44 
+70,069 
+0.71 
+0.45 
+CPS 
+Very Good + [BRFSS] 
+78,019 
+0.61 
+0.49 
+111,330 
+0.65 
+0.48 
+BRFSS 
+PhysHlth 
+73,335 
+2.37 
+5.42 
+105,788 
+2.37 
+5.67 
+BRFSS 
+MentalHlth 
+73,350 
+4.82 
+8.07 
+105,602 
+4.32 
+7.91 
+BRFSS 
+Reproductive 
+Birth Rate [DD] 
+686 
+104.76 
+18.80 
+NA 
+Vital Stats 
+Birth Rate [DDD] 
+3,822 
+103.16 
+24.75 
+3,185 
+120.09 
+19.15 
+Vital Stats 
+Abortion Rate [DD] b 
+546 
+30.51 
+12.81 
+NA 
+Abortion Surveil. 
+Pregnant 
+77,243 
+0.08 
+0.26 
+102,057 
+0.08 
+0.27 
+BRFSS 
+4. Eligibility Used for DDDs 
+"Levine" [CPS] 
+85,929 
+0.75 
+0.44 
+NA 
+CPS 
+"Levine" [BRFSS] 
+78,115 
+0.66 
+0.48 
+NA 
+BRFSS 
+"Depew" [CPS] 
+85,929 
+0.60 
+0.49 
+75,674 
+0.21 
+0.41 
+CPS 
+"Depew" [BRFSS] 
+78,115 
+0.56 
+0.50 
+111,479 
+0.09 
+0.28 
+BRFSS </p>
+
+<p>(B) Other Variables 
+1. State-level Controls [Z] 
+Medicaid eligibility, fraction of state receiving Medicaid assistance, receiving employer-sponsored insurance (ESI), state unemployment rate, 
+indicator for availability of over-the-counter emergency contraception 
+2. Sample-specific Controls [X, Z] 
+BRFSS: Control for race, marital status, student status, and income bracket 
+CPS: Control for marital status, student status, and a quadratic measure of the income to poverty ratio. Regressions use Levine, McKnight, and 
+Heep's (2011) data, "maindata.dta," limited to women and expanded to include 2009. 
+Vital Statistics/Abortion Surveillance: Control for fraction of state population that is married, non-White, that earned a high school diploma, that 
+earned a college degree as well as log median income, average age, average number of children under 5 per household, average number of 
+children under 18 per household by state, as in Mulligan (2015). </p>
+
+<p>a CPS measures VeryGood + and Insured have different sample sizes because of survey questionnaire referencing current vs. prior year (see 
+footnote 18). 
+b Sample from Abortion Surveillance excludes AK, CT, FL, NH, and WY because of missing information. </p>
+
+<p>that is, a DD approach. The typical CM model 
+estimated is </p>
+
+<p>CM Model ∶ Y iast = α + θ s + θ t + θ a + γX iast </p>
+
+<p>(1) </p>
+
+<p>+ πZ st + β CM CM st + ε iast , </p>
+
+<p>where the state (θ s ) and year (θ t ) fixed effects cap-
+ture the "treatment" and "after" effects included 
+in the most basic DD model. CM is a dummy vari-
+able equal to one if the state has a CM in that year 
+(and thus equals the standard "treatment*after" 
+variable of interest). θ a , X, and Z are age fixed 
+effects, other individual characteristics, and state 
+characteristics, respectively. 
+The effects of a YAD mandate can be esti-
+mated in a similar way: </p>
+
+<p>YAD Model ∶ Y iast = α + θ s + θ t + θ a + γX iast </p>
+
+<p>(2) </p>
+
+<p>+ πZ st + β YA YAD st + ε iast , </p>
+
+<p>where all variables are as defined above, and YAD 
+is a dummy variable equal to one if the state has a 
+YAD mandate in that year. We combine these two 
+models to allow for both effects, thus eliminating 
+the potential omitted variable bias from focusing 
+only on one mandate, and we also include an 
+interaction term to capture any joint effects the 
+mandates may have 8 : </p>
+
+<p>Full Model ∶ Y iast = α + θ s + θ t + θ a + γX iast </p>
+
+<p>(3) </p>
+
+<p>+ πZ st + β CM CM st + β YA YAD st </p>
+
+<p>+ β CM * YA 
+( 
+YAD st  *  CM st 
+) 
++ ε iast . </p>
+
+<p>8. We also specify a simpler model that drops the interac-
+tion term and so focuses only on the possible omitted variable 
+bias created by considering each mandate in isolation; that 
+is, we see how the estimates of β CM and β YA are affected by 
+controlling for the other mandate. As a practical matter, how-
+ever, the conclusions are similar to those drawn by comparing 
+models 1-3, and so, we do not report them. </p>
+
+
+
+<p>CONTEMPORARY ECONOMIC POLICY </p>
+
+<p>The CM and YAD models commonly esti-
+mated often include different controls (i.e., X and 
+Z); as described in Section IV and Table 2, we 
+include a broad set of controls that are represen-
+tative of both. Likewise, CM models are typically 
+estimated on a wider set of ages, whereas YAD 
+models are limited to young adults. To be com-
+parable across models and have a homogeneous 
+sample, we limit all DD analyses to women aged 
+19-24, the age group to which most YADs apply. 
+A concern with DD models is that the trends 
+in treatment and control groups/states may be dif-
+ferent in the periods preceding the law. In our 
+case, with two potentially interacting laws occur-
+ring over a short time frame (13 years), the typical 
+approaches (plotting trends before and after the 
+law, estimating the pre-and post-effects of the 
+law) greatly strain the data. 9 To our knowledge, 
+no one has attempted these approaches in such 
+a setting. Furthermore, these approaches become 
+even more untenable-and less necessary-in 
+the DDD models we consider next. 10 We instead 
+address this concern in two ways, both of which 
+can be applied to all models we estimate (single 
+mandate and the full models, DD and DDD mod-
+els alike). First, we subject all models to a placebo 
+test in which each mandate variable is replaced 
+with a dummy of whether the mandate was in 
+place 3 years in the future. This test is a more 
+parsimonious way of seeing if the different "treat-
+ment" states behaved differently even before the 
+mandate(s) was passed. It is also straightforward 
+to apply to our more complicated DDD models. 
+We are further reassured that, for our simpler one-
+mandate DD models, estimating a dynamic spec-
+ification with a full set of leads and lags of the 
+policy typically yields similar conclusions to our 
+3-year lead placebo. 11 Second, we estimate all 
+DD models both with and without state-specific </p>
+
+<p>9. To illustrate, consider an event time plot where there 
+are now five potential types of treatment states: (1) those that 
+only adopt a YAD, (2) those that only adopt a CM, (3) those 
+that first adopt a YAD then a CM, (4) those that adopt a CM 
+and then a YAD, and (5) those that adopt both at the same 
+time. Not only does that split the data into six groups (five 
+treatment + one control), but there are also two events ("time 
+zero") to consider. Similarly, a dynamic regression, such as 
+that estimated by Bellou and Bhatt (2013), would include 
+thrice the number of lead and lag coefficients (one set for each 
+mandate plus their interaction). 
+10. As Depew (2015, 127) notes, the assumptions 
+required for identification in DDDs are considerably weaker. 
+11. Testing the joint statistical significance of the leads of 
+the policy in these models yields a different conclusion from 
+our placebo (3-year lead instead of current) less than 25% of 
+the time. More importantly, these differences never occur in 
+models that yield a key finding. </p>
+
+<p>time trends and estimate DDD models that do and 
+do not include state-specific time effects. 
+Because many young adults in YAD states are 
+not eligible for the mandate by virtue of their 
+age, marital status, or student status, most YAD 
+studies take a DDD approach, where eligible and 
+ineligible young adults in both states are further 
+compared. To be comparable to this past research, 
+we adapt the above models to two alternative 
+DDD approaches, described next. 12 </p>
+
+<p>B. DDD Models </p>
+
+<p>To estimate a YAD-DDD model, we must 
+identify a group of young adults who are not eli-
+gible for the YAD enacted in their state. Past YAD 
+work differs on using age and/or marital/student 
+status to identify eligibility, and both approaches 
+have drawbacks. If one relies on age only, then 
+to obtain a reasonable number of ineligible indi-
+viduals, the age range of the sample must be siz-
+able; typically, ages 19-29 are included (Depew 
+2015; Monheit et al. 2011). This approach pools 
+together young adults at potentially very differ-
+ent points in their lives and has been subject to 
+strong criticism in studies of the ACA (which 
+must rely on age; e.g., Slusky 2015). Put simply, 
+adults aged 25-29 (who are ineligible in most 
+YAD states) may not be an appropriate control 
+group for those aged 19-24. If the analysis is 
+instead limited to that narrower, more homoge-
+neous age group, as Levine, McKnight, and Heep 
+(2011) does, then other, arguably endogenous, 
+eligibility criteria such as marital and student sta-
+tus must be used. Depew (2015) makes this point 
+and provides evidence of possible endogeneity. 
+We therefore estimate two different DDD 
+models, one that is limited to 19-24 year olds 
+and uses marital and student status (as well 
+as age) to identify eligibility and another that 
+includes 19-29 year olds and uses only age 
+to identify eligibility. The first follows Levine, 
+McKnight, and Heep (2011), and the second 
+follows Depew (2015). 13 These two studies also 
+differ in controlling for location-specific time </p>
+
+<p>12. We also try modifying our DD models by replacing 
+the YAD dummy variable with a measure of the intensity of 
+the law. Specifically, we re-estimate Equations (2) and (3) 
+using the percentage of young adults aged 19-24 in a national 
+CPS sample who would be eligible for the state's mandate 
+(on the basis of age, marital status, and student status). The 
+estimates are quite similar to those from the above equations 
+and are available upon request. 
+13. Monheit et al. (2011) is a hybrid of the two 
+approaches, including 19-29-year-olds in many analyses but 
+also using student and marital status as criteria as well. </p>
+
+<p>TRUDEAU &amp; CONWAY: INSURANCE MANDATES &amp; YOUNG WOMEN </p>
+
+
+
+<p>effects. Levine, McKnight, and Heep (2011) 
+take a more restrictive approach and do not 
+include state-specific time trends or effects, 
+whereas Depew (2015) includes the full set of 
+state*year fixed effects (as well as age*year and 
+age*state fixed effects). As such, we view these 
+two approaches as ideal bookends to the range 
+of possible DDD approaches one could take, and 
+we try to follow each one as closely as possible. 
+Our "Levine" model continues with the 
+19-24-year-old samples from the DD approach 
+and defines Eligible as Levine, McKnight, and 
+Heep (2011) do: as a dummy variable equal to 
+one if the individual, i, would be eligible for the 
+YAD enacted (at some point in the sample) in 
+their state, s, on the basis of age a, and mari-
+tal/student status, m, e; for those living in a state 
+without a YAD, it is equal to one if they are 
+unmarried. Eligible is then interacted with every 
+variable included in the model, </p>
+
+<p>YAD-DDD Model ∶ Y iamest = α + θ s + θ t + θ a + γX iamest + πZ st + β YA YAD st + α ′ Eligible iames </p>
+
+<p>(2a) </p>
+
+<p>+ θ ′ 
+s Eligible iames + θ ′ 
+t Eligible iames + θ ′ 
+a Eligible iames + γ ′ X iamest Eligible iames 
++ π ′ Z st Eligible iames + β ′ 
+YA YAD st Eligible iames + ε iamest , </p>
+
+<p>and the DDD "treatment" effect is the coefficient 
+on Eligible*YAD, or β ′ 
+YA . This approach is akin to 
+splitting the sample into eligible ("treated") and 
+ineligible ("control") observations and estimat-
+ing the difference in the effects of the YAD man-
+date being implemented. Modifying this model to 
+include CM's effects as well yields </p>
+
+<p>Full-DDD Model ∶ Y iamest = α + θ s + θ t + θ a + γX iamest + πZ st + β CM CM st + β YA YAD st </p>
+
+<p>(3a) </p>
+
+<p>+ β CM * YA 
+( 
+YAD st  *  CM st 
+) 
++ α ′ Eligible iames + θ ′ 
+s Eligible iames + θ ′ 
+t Eligible iames + θ ′ 
+a Eligible iames 
++ γ ′ X iamest Eligible iames + π ′ Z st Eligible iames + β ′ 
+CM CM st Eligible iames + β ′ 
+YA YAD st Eligible iames 
++ β ′ </p>
+
+<p>CM * YA </p>
+
+<p>( 
+YAD st  *  CM st 
+) 
+Eligible iames + ε iamest . </p>
+
+<p>The baseline effect of a CM is β CM as 
+before, and the special effect of having both 
+mandates when one is YAD-eligible is now 
+β ′ 
+CM * YA . 
+Depew (2015) uses only age to determine 
+eligibility and expands the ages considered to 
+29. Depew (2015) also includes the full set </p>
+
+<p>of state-by-year, state-by-age, and year-by-age 
+fixed effects. This full set of fixed effects allows 
+the treatment and control groups to differ with 
+respect to other factors in a very flexible way. 
+It also includes location-specific time effects 
+in an even less restrictive manner than state-
+specific time trends. We adapt this specification 
+to our three models (Equations (1)-(3)) by first 
+expanding our sample to ages 19-29; note that 
+this means that our "CM-only" model results 
+are different for the "Depew" model because 
+of the wider age group and richer set of fixed 
+effects included. In contrast, the "Levine" CM-
+only model is identical to the DD model without 
+state-specific time trends. Second, eligibility is 
+now equal to one if the individual is below the 
+cut-off age for the YAD in the individual's state. 
+Equations (1b)-(3b) (next page) reflect this dis-
+tinction, with eligibility indexed by a and s, age 
+and state, respectively, only. Finally, this model </p>
+
+<p>requires adding the full set of age*state, age*year, 
+and state*year fixed effects. However, the effect 
+of a CM will be completely subsumed in the state-
+by-year fixed effects. We therefore adapt our "De-
+pew" model to include state-specific time trends 
+instead. To explore the impact of this restriction, 
+we also try including state-specific quadratic time </p>
+
+<p>trends, and we re-estimate the YAD-only model 
+including the full set of state*year fixed effects. 
+The results are reasonably similar, lending sup-
+port to our approach. 
+Using our adapted "Depew" approach, 
+the 
+three 
+models 
+we 
+estimate 
+are 
+then: </p>
+
+
+
+<p>CONTEMPORARY ECONOMIC POLICY </p>
+
+<p>CM Model ∶ Y iast = α + θ s + θ t + θ a + θ a * s </p>
+
+<p>(1b) </p>
+
+<p>+ θ a * t + θ s  *  time + γX iast + πZ st </p>
+
+<p>+ β CM CM st + ε iast , </p>
+
+<p>YAD-DDD Model ∶ Y iast = α + θ s + θ t + θ a </p>
+
+<p>(2b) </p>
+
+<p>+ θ a * s + θ a * t + θ s  *  time + γX iast + πZ st </p>
+
+<p>+ β YA YAD st + β ′ 
+YA YAD st Eligible as + ε iast , 
+and </p>
+
+<p>Full-DDD Model ∶ Y iast = α + θ s + θ t + θ a </p>
+
+<p>(3b) </p>
+
+<p>+ θ a * s + θ a * t + θ s  *  time + γX iast + πZ st </p>
+
+<p>+ β CM CM st + β YA YAD st + β ′ 
+YA YAD st Eligible as 
++ β CM * YA CM st YAD st </p>
+
+<p>+ β′ CM * YA CM st YAD st Eligible as + ε iast , </p>
+
+<p>where the DDD estimate of YAD's effect is β ′ 
+YA , 
+and the joint effect of having both a YAD and a 
+CM is β ′ 
+CM * YA . </p>
+
+<p>IV. DATA </p>
+
+<p>Our analyses use data from several datasets 
+combined with information on state-level insur-
+ance mandates and other characteristics. We first 
+examine the variation in state-level insurance 
+mandates and then discuss the different datasets 
+we use: the CPS (coverage and health status), the 
+BRFSS (coverage, care, and health and reproduc-
+tive outcomes), and the Vital Statistics (reproduc-
+tive outcomes). We conclude by discussing the 
+individual-and state-level controls we include, as 
+well as robustness checks and placebo tests. </p>
+
+<p>A. State Mandates </p>
+
+<p>The National Conference of State Legislatures 
+(NCSL) website (National Conference of State 
+Legislatures 2012) contains information on both 
+the extended parental coverage and CMs. We 
+cross-reference the NCSL indicators for YADs 
+with Levine, McKnight, and Heep (2011), Mon-
+heit et al. (2011), Hahn and Yang (2014), Depew 
+(2015), and Cantor et al. (2012), and the CM indi-
+cators with the Guttmacher Institute (2014), Rais-
+sian and Lopoo (2015), Dills and Cotet-Grecu 
+(2016), and Mulligan (2015). This exercise is </p>
+
+<p>summarized in Table S2 and reveals several dis-
+crepancies across the different sources. For CMs, 
+the differences are fairly minor 14 ; for YADs, 
+however, they are much more widespread, and 
+no two studies use the exact same list, a point 
+also noted in Burgdorf (2014). The differences 
+appear to be because of the use of implementa-
+tion versus effective dates, states with multiple 
+changes to extended coverage eligibility criteria, 
+and the censoring of most samples in 2008. We 
+arrive at our final list by cross-referencing the 
+discrepancies with state legislation recorded in 
+WestLaw. As is the convention, we omit Mas-
+sachusetts from our analyses because of its per-
+sonal mandate. 
+Figure S1, Supporting Information, summa-
+rizes the adoption of these mandates over time, as 
+well as the state-specific requirements for YAD 
+eligibility, and Figure S2 shows the geographic 
+variation over time. While both reveal the accel-
+erating adoption of both mandates during this 
+short time period, they also suggest substantial 
+independent variation in each one. We explore 
+their correlation formally by estimating state-
+year panel models in which the presence/absence 
+of each mandate is regressed on the other as 
+well as state and year fixed effects. This exercise 
+reveals a statistically significant positive relation-
+ship between the two, which suggests that con-
+sidering each mandate in isolation could lead to 
+bias. 15 At the same time, there appears to be suf-
+ficient independent variation to identify the sepa-
+rate and joint effects of each mandate. 16 </p>
+
+<p>B. CPS-Health Insurance Coverage and 
+General Health </p>
+
+<p>The March Supplement of the CPS, also 
+known as the Annual Social and Economic Sup-
+plement (ASEC), provides measures of health 
+insurance status and source of coverage: private, </p>
+
+<p>14. Dills and Cotet-Grecu (2016) differ by excluding 
+states in which legislation is enacted by Attorney General 
+opinion in Michigan and Montana; the differences with Mul-
+ligan (2015, Table 1) are almost all 1 year or less. When 
+different, Mulligan (2015) tends to use the year prior to imple-
+mentation. However, these differences may be compounded 
+by combining these earlier dates with the year of birth rather 
+than year of conception, as in Dills and Cotet-Grecu (2016) 
+and in our analyses. 
+15. A Chi-squared test of independence on whether each 
+state eventually adopts each mandate similarly rejects the null 
+hypothesis of independence. 
+16. The R-squares of 0.608 and 0.703 obtained from the 
+state-year panel models suggest that 29-39% of the variation 
+remains even after controlling for the other mandate and for 
+state and year fixed effects. </p>
+
+<p>TRUDEAU &amp; CONWAY: INSURANCE MANDATES &amp; YOUNG WOMEN </p>
+
+
+
+<p>public, group, and nongroup. As noted above, 
+it is the main data source for past YAD studies 
+of insurance coverage. While the CPS contains 
+no information on health-care access, it does 
+have a general self-reported health measure as 
+well as other individual characteristics, including 
+age, marital, and student status. We employ 
+Levine, McKnight, and Heep (2011)'s dataset 
+and code submitted for publication in the AEJ: 
+Economic Policy 17 to replicate and expand their 
+analyses by (1) including state CMs; (2) using 
+the revised list of YAD mandates; and (3) adding 
+data for 1997-1999 and post-2008, 18 more ages 
+(25-29), and the self-reported health measure. 
+The year 2009, in particular, could be influential 
+both because six states adopted YAD mandates 
+in that year and because of the potentially wide-
+reaching effects of the Great Recession. As 
+discussed shortly, one robustness check is to 
+drop 2009 from our analyses. The CPS sample 
+spanning 1997-2009 is comprised of 85,929 
+females aged 19-24 and 75,674 females aged 
+25-29. Table 2 provides the summary statistics 
+for each of our outcome variables across all three 
+data sources; it also lists the control variables 
+included. 19 </p>
+
+<p>C. BRFSS-Insurance Coverage, Care Access, 
+Health Outcomes, and Pregnancy </p>
+
+<p>The BRFSS is an annual telephone survey on 
+personal health behaviors administered by the 
+states that includes measures of all four outcomes 
+of interest here-if the individual has health 
+insurance; their access to health care; their self-
+reported general, physical, and mental health; and 
+their reproductive outcomes (if they are currently 
+pregnant). 20 As such, it allows us to explore, 
+with one data source, the full range of outcomes 
+shown in Table 1. It also allows us to bring </p>
+
+<p>17. The dataset "maindata.dta" is available at http://www 
+.aeaweb.org/articles.php?doi=10.1257/pol.3.1.129. 
+18. The CPS questions often refer to the previous calen-
+dar year; therefore, while Levine, McKnight, and Heep (2011) 
+use 2001-2009 CPS data, their analyses actually refer to the 
+years 2000-2008. However, the self-reported health measure 
+refers to the current year (year of the survey), and so, we adjust 
+the data accordingly for those analyses. 
+19. All summary statistics and regression analyses 
+include sample weights. 
+20. Concern over the response rates of a landline sur-
+vey, especially for young adults, led the BRFSS to include 
+a cell phone survey in 2008 and modify its weighting pro-
+cedures. Testing for raking began in 2007 and replaced post-
+stratification entirely in 2011. These issues likely do not play 
+a substantial role in our analyses as they end in 2009 (and in 
+robustness checks, 2008). </p>
+
+<p>new evidence for the two most heavily studied 
+outcomes-health insurance coverage for YADs 
+and reproductive outcomes for CMs. These two 
+outcomes, as well as a self-reported general 
+health status (similar to the one in the CPS), are 
+available in every year. Table 2 shows that health 
+insurance and general health are reasonably sim-
+ilar across the CPS and the BRFSS, although the 
+CPS respondents consistently report lower insur-
+ance rates and better health. It also shows that 
+about 8% of young women report being pregnant 
+at the time of the survey. 
+However, other access and health outcome 
+measures are not reported in every year, as shown 
+in Table S3. Not Afford (whether the individual 
+had to forego care because they could not afford 
+to see the doctor) is the most available access 
+measure, missing only in 2002. Especially unfor-
+tunate for our purposes is that routine care target-
+ing females (pap smears and breast exams) and 
+reported use of contraception methods are miss-
+ing in too many years and/or states to be useful. 21 
+Our health-care access measures are therefore 
+limited to Not Afford and whether the woman had 
+a routine physician visit in the last year (Check 
+up, missing for most states in 2001-2004). 
+Finally, in all years but 2002, the BRFSS con-
+tains two measures indicating the number of days 
+in the previous month in which the respondent's 
+physical or mental health was "not good," which 
+we also investigate in our analyses. </p>
+
+<p>D. Vital Statistics and Abortion 
+Surveillance-Reproductive Outcomes </p>
+
+<p>Past CM research relies primarily on Vital 
+Statistics data to investigate reproductive out-
+comes, and we do as well, using the birth and 
+abortion rates from the Centers for Disease Con-
+trol and Prevention (CDC) aggregated to the 
+state-year level. 22 The restricted-use Vital Statis-
+tics records contain information on maternal and 
+infant characteristics, including demographic and 
+health indicators as well as geographic identifiers </p>
+
+<p>21. Pap Smear and Breast Exam are missing for the vast 
+majority of states for five of the more recent years (2001, 
+2003, 2005, 2007, and 2009), leading to relatively small 
+sample sizes and less observed variation in the post mandate 
+periods. The contraception questions are asked by all states in 
+only 2002 and 2004 and by a very small number of states, if 
+at all, in the remaining years. 
+22. Our abortion data is the same as that used in Mul-
+ligan (2015). Our conception year, state-level births data are 
+similar; Mulligan (2015) uses birth year and state-level births, 
+whereas Dills and Cotet-Grecu (2016) use conception year 
+(estimated using date of last menstrual period) and county-
+level births. </p>
+
+
+
+<p>CONTEMPORARY ECONOMIC POLICY </p>
+
+<p>for state and county. Using the estimated length 
+of gestation and counting back from the month 
+of birth, pregnancies resulting in live births are 
+aggregated to the state level by conception year 
+and reported as the annual birth rate per 1,000 
+women. The full sample of live births between 
+1997 and 2009 is 19,457,946 births aggregated 
+into 686 state-year observations. Abortion statis-
+tics by state are reported annually in the CDC's 
+"Morbidity and Mortality Weekly Report: Abor-
+tion Surveillance" by age bracket (&lt;15, 15-19, 
+20-24, 25-29, 30-34, 35-39, 40+). 
+These aggregate fertility measures preclude 
+estimation of most DDD models. Neither the 
+births nor abortion data contain the information 
+needed to determine "Levine" eligibility (e.g., 
+student status). In addition, the abortion data are 
+already aggregated into broad age groups, and so, 
+determining eligibility based solely on age (i.e., 
+"Depew") is not possible either. This limitation 
+highlights the benefits of the Pregnant variable 
+we investigate from the BRFSS; to our knowl-
+edge, we are the first to do so in this kind of 
+research. At the same time, we note that Preg-
+nant differs from these fertility measures because 
+(1) it captures whether the woman is pregnant 
+and knows it at the time of the survey (and so 
+misses many pregnancies over the course of a 
+year), and (2) it captures some eventual miscar-
+riages (which are missed in aggregate fertility 
+measures). Table 2 suggests that the former is 
+larger than the latter as the 8% reported preg-
+nancy rate in the BRFSS is substantially lower 
+than the birth + abortion rates per 1,000 women 
+observed in the Vital Statistics. </p>
+
+<p>E. Other Data Choices and Robustness Checks </p>
+
+<p>One challenge is choosing a set of control 
+variables that are representative of both CM and 
+YAD research. At the individual level, our choice 
+is limited by what is available in the CPS ver-
+sus the BRFSS; recall that our Vital Statistics 
+analyses (state-level births and abortions) con-
+tain no individual-level variables. An additional 
+complication is that studies vary in the state-level 
+variables they include. Most include the unem-
+ployment rate and Medicaid eligibility levels, 
+and CM studies emphasize controlling for emer-
+gency contraception availability. To be compara-
+ble across mandates and outcomes, we include all 
+three state-level variables as well as the percent 
+reporting ESI and percent receiving Medicaid; we 
+also choose a broad set of individual-level vari-
+ables (see panel B of Table 2). </p>
+
+<p>Recent CM research (Dills and Cotet-Grecu 
+2016; Mulligan 2015) shows that the effects are 
+sensitive to the inclusion of state-specific time 
+trends. As noted in Section III, we estimate our 
+DD models both with and without state-specific 
+time trends and choose one DDD approach that 
+does control for state-specific time effects ("De-
+pew") and one that does not ("Levine"). 23 We 
+also re-estimate all models excluding 2009 as it 
+was an unusual year because of the Great Reces-
+sion and the large number of states enacting 
+YADs; the results are quite similar. Finally, we 
+subject every model to a placebo test in which 
+the current mandate variables are replaced with 
+a 3-year lead-that is, whether or not they were 
+enacted 3 years in the future. In the full model, 
+this process involves four separate tests-the 
+individual statistical significance of each man-
+date coefficient (β CM , β YA , and β CM * YA ) as well 
+as their joint statistical significance. </p>
+
+<p>V. RESULTS </p>
+
+<p>Our empirical analyses include three models 
+(Equations (1)-(3) above) estimated with four 
+different approaches (two DD and two DDD) 
+on a wide set of outcomes from three different 
+data sources. We also subject every model to a 
+placebo test. We therefore report only the key 
+coefficients from each of the models/approaches, 
+and at the bottom of each one, we summarize 
+whether the model "passed" the placebo test(s) 
+at a 10% level. For the models including both 
+mandates, we also report the p value for the 
+joint test of the three key coefficients (for YAD, 
+CM, and YAD*CM). To facilitate comparisons, 
+we group the results by outcome rather than 
+data source. </p>
+
+<p>A. Health Insurance and Health-Care Access </p>
+
+<p>Table 3 reports the results for health insurance 
+coverage using data from both the CPS and the </p>
+
+<p>23. Because the BRFSS data is gathered monthly, we 
+include month fixed effects as well as year and state fixed 
+effects in those models; their inclusion has no substantive 
+impact on the results. Other sensitivity analyses explored but 
+not reported include lagging the mandate indicators by 1 year 
+(to allow for a delayed effect and/or variables that may capture 
+behavior over more than one calendar year), including age-
+specific time trends, reducing the individual-and state-level 
+controls included, and estimating the dichotomous outcomes 
+with probit and the count outcomes (i.e., days not healthy) 
+with a negative binomial. None of these analyses affect the 
+conclusions drawn from the core set of exercises. All results 
+discussed are available upon request. </p>
+
+<p>TRUDEAU &amp; CONWAY: INSURANCE MANDATES &amp; YOUNG WOMEN </p>
+
+
+
+<p>TABLE 3 </p>
+
+<p>Results of the Effect of State Mandates on Having Any Insurance Coverage in the Last Year or Current Health Plan a </p>
+
+<p>DD Models </p>
+
+<p>DDD Models </p>
+
+<p>Base </p>
+
+<p>w/ State-Time Trends </p>
+
+<p>By Status ("Levine") </p>
+
+<p>By Age Only ("Depew") </p>
+
+<p>CM </p>
+
+<p>YAD </p>
+
+<p>YAD*CM </p>
+
+<p>CM </p>
+
+<p>YAD </p>
+
+<p>YAD*CM </p>
+
+<p>CM </p>
+
+<p>YAD </p>
+
+<p>YAD*CM </p>
+
+<p>CM </p>
+
+<p>YAD </p>
+
+<p>YAD*CM </p>
+
+<p>1. Insured [CPS] 
+CM </p>
+
+<p>−0.002 </p>
+
+<p>−0.004 </p>
+
+<p>−0.003 </p>
+
+<p>−0.003 </p>
+
+<p>−0.002 </p>
+
+<p>−0.009 </p>
+
+<p>0.004 </p>
+
+<p>0.011* </p>
+
+<p>(−0.22) </p>
+
+<p>(−0.48) </p>
+
+<p>(−0.39) </p>
+
+<p>(−0.30) </p>
+
+<p>(−0.22) </p>
+
+<p>(−0.69) </p>
+
+<p>(0.72) </p>
+
+<p>(1.90) </p>
+
+<p>YAD (× Eligible) </p>
+
+<p>0.003 </p>
+
+<p>−0.004 </p>
+
+<p>0.019** </p>
+
+<p>−0.002 </p>
+
+<p>0.028* </p>
+
+<p>0.003 </p>
+
+<p>0.004 </p>
+
+<p>0.006 </p>
+
+<p>(0.61) </p>
+
+<p>(−0.50) </p>
+
+<p>(2.30) </p>
+
+<p>(−0.14) </p>
+
+<p>(1.71) </p>
+
+<p>(0.10) </p>
+
+<p>(0.30) </p>
+
+<p>(0.43) </p>
+
+<p>YAD × CM (× Eligible) </p>
+
+<p>0.011 </p>
+
+<p>0.032** </p>
+
+<p>0.035 </p>
+
+<p>−0.007 </p>
+
+<p>(0.86) </p>
+
+<p>(2.08) </p>
+
+<p>(0.87) </p>
+
+<p>(−0.28) </p>
+
+<p>Joint Test (p value) </p>
+
+<p>0.7567 </p>
+
+<p>0.0022 </p>
+
+<p>0.0213 </p>
+
+<p>0.2786 </p>
+
+<p>Placebo Test b </p>
+
+<p>P </p>
+
+<p>P </p>
+
+<p>P/P/P/P </p>
+
+<p>P </p>
+
+<p>F </p>
+
+<p>P/P/P/F </p>
+
+<p>P </p>
+
+<p>P </p>
+
+<p>P/P/F/F </p>
+
+<p>P </p>
+
+<p>P </p>
+
+<p>P/P/P/P </p>
+
+<p>2. HlthPlan [BRFSS] </p>
+
+<p>CM </p>
+
+<p>YAD </p>
+
+<p>YAD*CM </p>
+
+<p>CM </p>
+
+<p>YAD </p>
+
+<p>YAD*CM </p>
+
+<p>CM </p>
+
+<p>YAD </p>
+
+<p>YAD*CM </p>
+
+<p>CM </p>
+
+<p>YAD </p>
+
+<p>YAD*CM </p>
+
+<p>CM </p>
+
+<p>0.0003 </p>
+
+<p>0.005 </p>
+
+<p>0.015* </p>
+
+<p>0.015* </p>
+
+<p>0.0003 </p>
+
+<p>−0.003 </p>
+
+<p>0.011 </p>
+
+<p>0.010 </p>
+
+<p>(0.03) </p>
+
+<p>(0.48) </p>
+
+<p>(1.67) </p>
+
+<p>(1.70) </p>
+
+<p>(0.03) </p>
+
+<p>(−0.22) </p>
+
+<p>(1.64) </p>
+
+<p>(1.40) </p>
+
+<p>YAD (× Eligible) </p>
+
+<p>−0.023* </p>
+
+<p>−0.010 </p>
+
+<p>0.0001 </p>
+
+<p>−0.0002 </p>
+
+<p>−0.022 </p>
+
+<p>−0.043 </p>
+
+<p>0.007 </p>
+
+<p>0.020* </p>
+
+<p>(−1.86) </p>
+
+<p>(−0.69) </p>
+
+<p>(0.01) </p>
+
+<p>(−0.01) </p>
+
+<p>(−1.05) </p>
+
+<p>(−1.16) </p>
+
+<p>(0.79) </p>
+
+<p>(1.77) </p>
+
+<p>YAD × CM (× Eligible) </p>
+
+<p>−0.020 </p>
+
+<p>−0.001 </p>
+
+<p>0.028 </p>
+
+<p>−0.022 </p>
+
+<p>(−1.21) </p>
+
+<p>(−0.03) </p>
+
+<p>(0.65) </p>
+
+<p>(−1.37) </p>
+
+<p>Joint Test (p value) </p>
+
+<p>0.1863 </p>
+
+<p>0.3984 </p>
+
+<p>0.6647 </p>
+
+<p>0.1362 </p>
+
+<p>Placebo Test b </p>
+
+<p>F </p>
+
+<p>P </p>
+
+<p>P/P/P/F </p>
+
+<p>P </p>
+
+<p>P </p>
+
+<p>P/P/F/P </p>
+
+<p>F </p>
+
+<p>P </p>
+
+<p>F/P/F/P </p>
+
+<p>P </p>
+
+<p>P </p>
+
+<p>P/F/P/F </p>
+
+<p>a </p>
+
+<p>Each model uses sample weights and controls for state-level characteristics reported in Table 2, Panel B as well as age, year, and state fixed effects. Standard errors are clustered by state; 
+corresponding t-statistics 
+are reported in parentheses, and *, **, *** indicate 10, 5, and 1% significance levels, respectively. </p>
+
+<p>b </p>
+
+<p>The placebo test replaces each mandate variable with a dummy for whether the mandate is in place 3 years in the future. P indicates whether the estimated coefficient passes, that is, is </p>
+
+<p>not statistically significant at the 10% level; F indicates fails. The fourth indicator for the YAD*CM model is the joint test of β </p>
+
+<p>CM , β 
+YA , and β </p>
+
+<p>CM </p>
+
+<p>* YA from the placebo regression. </p>
+
+
+
+<p>CONTEMPORARY ECONOMIC POLICY </p>
+
+<p>BRFSS. Using the CPS measure and the "Levine" 
+YAD-DDD model, our results are close to those 
+of Levine, McKnight, and Heep (2011), despite 
+including more years (1997-1999 and 2009), 
+using slightly different mandate dates, and lim-
+iting our analyses to women. 24 However, the 
+rest of our analyses provide very little evidence 
+that either mandate increased insurance coverage. 
+Using the BRFSS insurance measure instead is 
+especially damaging, often leading to estimated 
+negative effects. Our results are therefore consis-
+tent with the conclusion drawn by Depew (2015) 
+and Monheit et al. (2011), which state that YADs 
+did little to increase overall insurance coverage 
+and may have instead simply caused a shifting 
+between group versus individual, parent versus 
+own, and/or private versus public. The results for 
+CMs and the joint effect of CM and YAD like-
+wise suggest little consistent effect, although it 
+is somewhat surprising that they are found to be 
+positive and significant about as often as the much 
+more heavily studied YAD. 
+The health-care access measures from the 
+BRFSS, Not Afford and Checkup, likewise 
+yield no consistent evidence that either mandate 
+expanded young women's access to general 
+health care, and in fact, the estimated effects are 
+just as likely to be detrimental as beneficial (see 
+Table S4). Given that we find no evidence that 
+these mandates expanded insurance coverage, 
+it is not surprising to find little effect on these 
+general measures of care received. It nonetheless 
+remains possible that switching types of cover-
+age (à la YADs) could affect access in subtler 
+ways, such as the quality or convenience of care 
+received. If YADs lead young adults to switch to 
+their parents' insurance, then that new insurance 
+may differ in its coverage of contraception if the 
+state also has a CM. Likewise, as Depew (2015) 
+and Colman and Dave (2015) find, the switch 
+in health insurance may have been accompanied 
+by other changed behaviors. Such subtle mech-
+anisms suggest that these mandates could still 
+have effects on general health, and the avenue for 
+CMs to affect reproductive outcomes-by 
+expanding contraceptive use among the 
+insured-remains. </p>
+
+<p>B. General and Reproductive Health Outcomes </p>
+
+<p>Table 4 reports results for several mea-
+sures of general health. The first two panels </p>
+
+<p>24. Specifically, Levine, McKnight, and Heep (2011) find 
+a statistically significant increase of 0.033 (Table 5, Panel A, 
+column 2 on p. 148), while ours suggests a 0.028 increase. </p>
+
+<p>are the standard self-reported health variable 
+(1 = poor to 5 = excellent) from the CPS and 
+BRFSS, transformed to Very Good plus (=1 if 
+excellent or very good, 0 otherwise) as com-
+monly constructed. Neither mandate in isolation 
+appears to have a consistent effect on Very Good 
+plus, but the effect of having both mandates is 
+consistently positive and, in the BRFSS data, 
+almost always statistically significant. More-
+over, while the individual coefficients vary, the 
+estimated total effect of having both mandates 
+is surprisingly close across the two very dif-
+ferent datasets and DDD models, ranging from 
+0.023 to 0.046. 
+We explore this finding further by estimating 
+the same models using the number of days out 
+of the last 30 that physical (mental) health was 
+"not good" from the BRFSS (see Table 5). These 
+analyses suggest no effect of either mandate on 
+physical health, with the exception of the "De-
+pew" model, which suggests that YADs reduce 
+the number of "not good" days. The results are 
+marginally more suggestive for mental health, but 
+the mechanisms appear to differ. The "Depew" 
+model once again finds that YADs are beneficial 
+and that CMs may be as well, although the lat-
+ter is not statistically significant. The "Levine" 
+model finds it is CMs and perhaps the joint effect 
+(CM*YAD) that are beneficial and that YADs 
+are harmful if anything. However, the net total 
+effect is again quite similar across the two DDD 
+models; both suggest that having both mandates 
+reduces the number of "not good" mental health 
+days by 0.546-0.584 days. 
+Taken together with the results for Very Good 
+plus, a broad measure of health, we conclude 
+that there is some weakly suggestive evidence 
+that these mandates are improving the subjective 
+well-being of young women, although the path-
+ways are not clear. Our findings therefore echo 
+those of Colman and Dave (2015) for the ACA's 
+YAD mandate; perhaps they derive from the 
+same mechanisms (decreased time spent working 
+and waiting for or receiving care, increased time 
+socializing). It is also intriguing to link our "De-
+pew" findings with the reductions in labor supply 
+caused by YADs found by Depew (2015); per-
+haps that reduced labor supply is associated with 
+improvements in health. 
+Finally, we turn to reproductive outcomes, 
+reported in Table 6. The top two panels report 
+estimates from the aggregate Vital Statistics mea-
+sures typically used. Here, we find similar results 
+to Mulligan (2015) that CMs appear to reduce 
+fertility until location-specific time effects </p>
+
+<p>TRUDEAU &amp; CONWAY: INSURANCE MANDATES &amp; YOUNG WOMEN </p>
+
+
+
+<p>TABLE 4 </p>
+
+<p>Results of the Effect of State Mandates on Measures of Self-Reported Health a </p>
+
+<p>DD Models </p>
+
+<p>DDD Models </p>
+
+<p>Base </p>
+
+<p>w/ State-Time Trends </p>
+
+<p>By Status ("Levine") </p>
+
+<p>By Age Only ("Depew") </p>
+
+<p>CM </p>
+
+<p>YAD </p>
+
+<p>YAD*CM </p>
+
+<p>CM </p>
+
+<p>YAD </p>
+
+<p>YAD*CM </p>
+
+<p>CM </p>
+
+<p>YAD </p>
+
+<p>YAD*CM </p>
+
+<p>CM </p>
+
+<p>YAD </p>
+
+<p>YAD*CM </p>
+
+<p>1. Very Good </p>
+
+<p>+ [CPS] </p>
+
+<p>CM </p>
+
+<p>0.011 </p>
+
+<p>0.009 </p>
+
+<p>0.008 </p>
+
+<p>0.009 </p>
+
+<p>0.011 </p>
+
+<p>0.025* </p>
+
+<p>0.007 </p>
+
+<p>0.004 </p>
+
+<p>(1.47) </p>
+
+<p>(1.08) </p>
+
+<p>(0.73) </p>
+
+<p>(0.89) </p>
+
+<p>(1.47) </p>
+
+<p>(1.80) </p>
+
+<p>(1.07) </p>
+
+<p>(0.48) </p>
+
+<p>YAD (× Eligible) </p>
+
+<p>0.002 </p>
+
+<p>−0.008 </p>
+
+<p>0.007 </p>
+
+<p>−0.014 </p>
+
+<p>−0.013 </p>
+
+<p>−0.030 </p>
+
+<p>0.008 </p>
+
+<p>−0.016 </p>
+
+<p>(0.17) </p>
+
+<p>(−0.73) </p>
+
+<p>(0.42) </p>
+
+<p>(−0.82) </p>
+
+<p>(−0.79) </p>
+
+<p>(−0.83) </p>
+
+<p>(0.64) </p>
+
+<p>(−0.77) </p>
+
+<p>YAD × CM (× Eligible) </p>
+
+<p>0.013 </p>
+
+<p>0.031 </p>
+
+<p>0.028 </p>
+
+<p>0.035 </p>
+
+<p>(1.05) </p>
+
+<p>(1.41) </p>
+
+<p>(0.74) </p>
+
+<p>(1.45) </p>
+
+<p>Joint Test (p value) </p>
+
+<p>0.2106 </p>
+
+<p>0.4902 </p>
+
+<p>0.2146 </p>
+
+<p>0.4503 </p>
+
+<p>Placebo Test b </p>
+
+<p>P </p>
+
+<p>P </p>
+
+<p>P/P/F/P </p>
+
+<p>P </p>
+
+<p>P </p>
+
+<p>P/P/F/P </p>
+
+<p>P </p>
+
+<p>P </p>
+
+<p>P/P/P/P </p>
+
+<p>P </p>
+
+<p>P </p>
+
+<p>P/P/P/P </p>
+
+<p>2. Very Good </p>
+
+<p>+ [BRFSS] </p>
+
+<p>CM </p>
+
+<p>YAD </p>
+
+<p>YAD*CM </p>
+
+<p>CM </p>
+
+<p>YAD </p>
+
+<p>YAD*CM </p>
+
+<p>CM </p>
+
+<p>YAD </p>
+
+<p>YAD*CM </p>
+
+<p>CM </p>
+
+<p>YAD </p>
+
+<p>YAD*CM </p>
+
+<p>CM </p>
+
+<p>−0.005 </p>
+
+<p>−0.012 </p>
+
+<p>−0.012 </p>
+
+<p>−0.010 </p>
+
+<p>−0.005 </p>
+
+<p>−0.009 </p>
+
+<p>0.002 </p>
+
+<p>0.002 </p>
+
+<p>(−0.36) </p>
+
+<p>(−0.93) </p>
+
+<p>(−0.86) </p>
+
+<p>(−0.69) </p>
+
+<p>(−0.36) </p>
+
+<p>(−0.52) </p>
+
+<p>(0.25) </p>
+
+<p>(0.18) </p>
+
+<p>YAD (× Eligible) </p>
+
+<p>0.013 </p>
+
+<p>−0.019 </p>
+
+<p>−0.004 </p>
+
+<p>−0.041** </p>
+
+<p>0.040* </p>
+
+<p>−0.002 </p>
+
+<p>0.017 </p>
+
+<p>−0.037** </p>
+
+<p>(0.69) </p>
+
+<p>(−1.18) </p>
+
+<p>(−0.19) </p>
+
+<p>(−2.09) </p>
+
+<p>(1.73) </p>
+
+<p>(−0.04) </p>
+
+<p>(1.27) </p>
+
+<p>(−2.32) </p>
+
+<p>YAD × CM (× Eligible) </p>
+
+<p>0.046** </p>
+
+<p>0.056** </p>
+
+<p>0.058 </p>
+
+<p>0.079*** </p>
+
+<p>(2.52) </p>
+
+<p>(2.46) </p>
+
+<p>(1.40) </p>
+
+<p>(4.44) </p>
+
+<p>Joint Test (p value) </p>
+
+<p>0.0893 </p>
+
+<p>0.0323 </p>
+
+<p>0.1498 </p>
+
+<p>0.0002 </p>
+
+<p>Placebo Test b </p>
+
+<p>P </p>
+
+<p>P </p>
+
+<p>P/P/P/P </p>
+
+<p>P </p>
+
+<p>P </p>
+
+<p>P/P/F/F </p>
+
+<p>P </p>
+
+<p>P </p>
+
+<p>P/P/P/P </p>
+
+<p>P </p>
+
+<p>P </p>
+
+<p>F/P/P/P </p>
+
+<p>a </p>
+
+<p>Each model uses sample weights and controls for state-level characteristics reported in Table 2, Panel B as well as age, year, and state fixed effects. Standard errors are clustered by state; 
+corresponding t-statistics 
+are reported in parentheses, and *, **, *** indicate 10, 5, and 1% significance levels, respectively. </p>
+
+<p>b </p>
+
+<p>The placebo test replaces each mandate variable with a dummy for whether the mandate is in place 3 years in the future. P indicates whether the estimated coefficient passes, that is, is </p>
+
+<p>not statistically significant at the 10% level; F indicates fails. The fourth indicator for the YAD*CM model is the joint test of β </p>
+
+<p>CM , β 
+YA , and β </p>
+
+<p>CM </p>
+
+<p>* YA from the placebo regression. </p>
+
+
+
+<p>CONTEMPORARY ECONOMIC POLICY </p>
+
+<p>TABLE 5 </p>
+
+<p>BRFSS Results of the Effect of State Mandates on Measures of Self-Reported Physical and Mental Health a </p>
+
+<p>DD Models </p>
+
+<p>DDD Models </p>
+
+<p>Base </p>
+
+<p>w/State-Time Trends </p>
+
+<p>By Status ("Levine") </p>
+
+<p>By Age Only ("Depew") </p>
+
+<p>CM </p>
+
+<p>YAD </p>
+
+<p>YAD*CM </p>
+
+<p>CM </p>
+
+<p>YAD </p>
+
+<p>YAD*CM </p>
+
+<p>CM </p>
+
+<p>YAD </p>
+
+<p>YAD*CM </p>
+
+<p>CM </p>
+
+<p>YAD </p>
+
+<p>YAD*CM </p>
+
+<p>1. PhysHlth 
+CM </p>
+
+<p>−0.018 </p>
+
+<p>0.0001 </p>
+
+<p>0.034 </p>
+
+<p>0.024 </p>
+
+<p>−0.018 </p>
+
+<p>0.209 </p>
+
+<p>0.038 </p>
+
+<p>0.050 </p>
+
+<p>(−0.15) </p>
+
+<p>(0.00) </p>
+
+<p>(0.22) </p>
+
+<p>(0.16) </p>
+
+<p>(−0.15) </p>
+
+<p>(1.59) </p>
+
+<p>(0.35) </p>
+
+<p>(0.43) </p>
+
+<p>YAD (× Eligible) </p>
+
+<p>−0.007 </p>
+
+<p>0.088 </p>
+
+<p>0.106 </p>
+
+<p>0.175 </p>
+
+<p>−0.266 </p>
+
+<p>−0.114 </p>
+
+<p>−0.206* </p>
+
+<p>−0.302* </p>
+
+<p>(−0.05) </p>
+
+<p>(0.52) </p>
+
+<p>(0.47) </p>
+
+<p>(0.72) </p>
+
+<p>(−0.91) </p>
+
+<p>(−0.37) </p>
+
+<p>(−1.68) </p>
+
+<p>(−1.87) </p>
+
+<p>YAD × CM (× Eligible) </p>
+
+<p>−0.131 </p>
+
+<p>−0.106 </p>
+
+<p>−0.160 </p>
+
+<p>0.162 </p>
+
+<p>(−0.70) </p>
+
+<p>(−0.43) </p>
+
+<p>(−0.37) </p>
+
+<p>(0.73) </p>
+
+<p>Joint Test (p value) </p>
+
+<p>0.8879 </p>
+
+<p>0.9064 </p>
+
+<p>0.2977 </p>
+
+<p>0.2006 </p>
+
+<p>Placebo Test b </p>
+
+<p>P </p>
+
+<p>P </p>
+
+<p>P/P/P/P </p>
+
+<p>P </p>
+
+<p>P </p>
+
+<p>P/P/P/F </p>
+
+<p>P </p>
+
+<p>F </p>
+
+<p>P/P/P/F </p>
+
+<p>P </p>
+
+<p>P </p>
+
+<p>P/P/P/P </p>
+
+<p>2. MentalHlth </p>
+
+<p>CM </p>
+
+<p>YAD </p>
+
+<p>YAD*CM </p>
+
+<p>CM </p>
+
+<p>YAD </p>
+
+<p>YAD*CM </p>
+
+<p>CM </p>
+
+<p>YAD </p>
+
+<p>YAD*CM </p>
+
+<p>CM </p>
+
+<p>YAD </p>
+
+<p>YAD*CM </p>
+
+<p>CM </p>
+
+<p>−0.251 </p>
+
+<p>−0.243 </p>
+
+<p>−0.081 </p>
+
+<p>−0.088 </p>
+
+<p>−0.251 </p>
+
+<p>−0.820*** </p>
+
+<p>−0.238 </p>
+
+<p>−0.232 </p>
+
+<p>(−1.30) </p>
+
+<p>(−1.39) </p>
+
+<p>(−0.31) </p>
+
+<p>(−0.31) </p>
+
+<p>(−1.30) </p>
+
+<p>(−3.12) </p>
+
+<p>(−1.27) </p>
+
+<p>(−1.17) </p>
+
+<p>YAD (× Eligible) </p>
+
+<p>−0.076 </p>
+
+<p>−0.026 </p>
+
+<p>0.276 </p>
+
+<p>0.155 </p>
+
+<p>0.527* </p>
+
+<p>0.867** </p>
+
+<p>−0.402* </p>
+
+<p>−0.504*** </p>
+
+<p>(−0.26) </p>
+
+<p>(−0.09) </p>
+
+<p>(0.73) </p>
+
+<p>(0.50) </p>
+
+<p>(1.66) </p>
+
+<p>(1.97) </p>
+
+<p>(−1.83) </p>
+
+<p>(−3.08) </p>
+
+<p>YAD × CM (× Eligible) </p>
+
+<p>−0.028 </p>
+
+<p>0.187 </p>
+
+<p>−0.631 </p>
+
+<p>0.190 </p>
+
+<p>(−0.08) </p>
+
+<p>(0.43) </p>
+
+<p>(−1.11) </p>
+
+<p>(0.70) </p>
+
+<p>Joint Test (p value) </p>
+
+<p>0.5748 </p>
+
+<p>0.8158 </p>
+
+<p>0.0020 </p>
+
+<p>0.0298 </p>
+
+<p>Placebo Test b </p>
+
+<p>P </p>
+
+<p>P </p>
+
+<p>P/P/P/P </p>
+
+<p>P </p>
+
+<p>P </p>
+
+<p>P/P/F/P </p>
+
+<p>P </p>
+
+<p>P </p>
+
+<p>P/P/P/P </p>
+
+<p>P </p>
+
+<p>P </p>
+
+<p>P/P/P/P </p>
+
+<p>a </p>
+
+<p>Each model uses sample weights and controls for state-level characteristics reported in Table 2, Panel B as well as age, year, and state fixed effects. Standard errors are clustered by state; 
+corresponding t-statistics are reported in parentheses, and *, **, *** indicate 10, 5, and 1% significance levels, respectively. </p>
+
+<p>b </p>
+
+<p>The placebo test replaces each mandate variable with a dummy for whether the mandate is in place 3 years in the future. P indicates whether the estimated coefficient passes, that is, is </p>
+
+<p>not statistically significant at the 10% level; F indicates fails. The fourth indicator for the YAD*CM model is the joint test of β </p>
+
+<p>CM , β 
+YA , and β </p>
+
+<p>CM </p>
+
+<p>* YA from the placebo regression </p>
+
+<p>TRUDEAU &amp; CONWAY: INSURANCE MANDATES &amp; YOUNG WOMEN </p>
+
+
+
+<p>TABLE 6 </p>
+
+<p>Results of the Effect of State Mandates on Birth and Abortion Rates and Reported Pregnancies a </p>
+
+<p>DD Models </p>
+
+<p>DDD Models </p>
+
+<p>Base </p>
+
+<p>w/ State-Time Trends </p>
+
+<p>By Status ("Levine") </p>
+
+<p>By Age Only ("Depew") </p>
+
+<p>CM </p>
+
+<p>YAD </p>
+
+<p>YAD*CM </p>
+
+<p>CM </p>
+
+<p>YAD </p>
+
+<p>YAD*CM </p>
+
+<p>CM </p>
+
+<p>YAD </p>
+
+<p>YAD*CM </p>
+
+<p>CM </p>
+
+<p>YAD </p>
+
+<p>YAD*CM </p>
+
+<p>1. Births [VS] 
+CM </p>
+
+<p>−2.223* </p>
+
+<p>−2.571** </p>
+
+<p>−0.594 </p>
+
+<p>−0.52 </p>
+
+<p>−0.411 </p>
+
+<p>−0.88 </p>
+
+<p>(−1.86) </p>
+
+<p>(−2.16) </p>
+
+<p>(−0.39) </p>
+
+<p>(−0.34) </p>
+
+<p>(−0.51) </p>
+
+<p>(−0.75) </p>
+
+<p>YAD (× Eligible) </p>
+
+<p>0.270 </p>
+
+<p>−0.91 </p>
+
+<p>−0.538 </p>
+
+<p>−1.35 </p>
+
+<p>NA </p>
+
+<p>0.329 </p>
+
+<p>−0.377 </p>
+
+<p>(0.22) </p>
+
+<p>(−0.45) </p>
+
+<p>(−0.53) </p>
+
+<p>(−1.03) </p>
+
+<p>(0.51) </p>
+
+<p>(−0.35) </p>
+
+<p>YAD × CM (× Eligible) </p>
+
+<p>2.104 </p>
+
+<p>1.299 </p>
+
+<p>0.689 </p>
+
+<p>(0.94) </p>
+
+<p>(0.86) </p>
+
+<p>(0.49) </p>
+
+<p>Joint Test (p value) </p>
+
+<p>0.1762 </p>
+
+<p>0.7622 </p>
+
+<p>0.8204 </p>
+
+<p>Placebo Test b </p>
+
+<p>F </p>
+
+<p>P </p>
+
+<p>F/P/P/P </p>
+
+<p>P </p>
+
+<p>P </p>
+
+<p>P/P/P/P </p>
+
+<p>P/P/P/P </p>
+
+<p>2. Abortions [AS] </p>
+
+<p>CM </p>
+
+<p>YAD </p>
+
+<p>YAD*CM </p>
+
+<p>CM </p>
+
+<p>YAD </p>
+
+<p>YAD*CM </p>
+
+<p>CM </p>
+
+<p>YAD </p>
+
+<p>YAD*CM </p>
+
+<p>CM </p>
+
+<p>YAD </p>
+
+<p>YAD*CM </p>
+
+<p>CM </p>
+
+<p>−1.628** </p>
+
+<p>−1.212* </p>
+
+<p>−0.811 </p>
+
+<p>−0.864 </p>
+
+<p>(−2.24) </p>
+
+<p>(−1.96) </p>
+
+<p>(−1.31) </p>
+
+<p>(−1.43) </p>
+
+<p>YAD (× Eligible) </p>
+
+<p>0.047 </p>
+
+<p>2.773** </p>
+
+<p>−0.279 </p>
+
+<p>0.266 </p>
+
+<p>(0.06) </p>
+
+<p>−2.05 </p>
+
+<p>(−0.43) </p>
+
+<p>−0.32 </p>
+
+<p>NA </p>
+
+<p>NA </p>
+
+<p>YAD×CM (× Eligible) </p>
+
+<p>−3.410** </p>
+
+<p>−0.816 </p>
+
+<p>(−2.32) </p>
+
+<p>(−0.70) </p>
+
+<p>Joint Test (p value) </p>
+
+<p>0.0548 </p>
+
+<p>0.5029 </p>
+
+<p>Placebo Test b </p>
+
+<p>F </p>
+
+<p>P </p>
+
+<p>F/P/F/F </p>
+
+<p>F </p>
+
+<p>P </p>
+
+<p>F/P/P/F </p>
+
+<p>3. Pregnant [BRFSS] </p>
+
+<p>CM </p>
+
+<p>YAD </p>
+
+<p>YAD*CM </p>
+
+<p>CM </p>
+
+<p>YAD </p>
+
+<p>YAD*CM </p>
+
+<p>CM </p>
+
+<p>YAD </p>
+
+<p>YAD*CM </p>
+
+<p>CM </p>
+
+<p>YAD </p>
+
+<p>YAD*CM </p>
+
+<p>CM </p>
+
+<p>−0.006 </p>
+
+<p>−0.008 </p>
+
+<p>−0.016** </p>
+
+<p>−0.016** </p>
+
+<p>−0.006 </p>
+
+<p>−0.013 </p>
+
+<p>−0.013** </p>
+
+<p>−0.015** </p>
+
+<p>(−1.07) </p>
+
+<p>(−1.49) </p>
+
+<p>(−2.41) </p>
+
+<p>(−2.28) </p>
+
+<p>(−1.07) </p>
+
+<p>(−0.98) </p>
+
+<p>(−2.35) </p>
+
+<p>(−2.46) </p>
+
+<p>YAD (× Eligible) </p>
+
+<p>0.007 </p>
+
+<p>−0.003 </p>
+
+<p>0.003 </p>
+
+<p>−0.008 </p>
+
+<p>0.024 </p>
+
+<p>0.036 </p>
+
+<p>0.016* </p>
+
+<p>0.010 </p>
+
+<p>(1.13) </p>
+
+<p>(−0.42) </p>
+
+<p>(0.57) </p>
+
+<p>(−0.84) </p>
+
+<p>(1.24) </p>
+
+<p>(1.26) </p>
+
+<p>(1.78) </p>
+
+<p>(0.83) </p>
+
+<p>YAD × CM (× Eligible) </p>
+
+<p>0.015* </p>
+
+<p>0.018* </p>
+
+<p>−0.018 </p>
+
+<p>0.011 </p>
+
+<p>(1.77) </p>
+
+<p>(1.72) </p>
+
+<p>(−0.69) </p>
+
+<p>(0.82) </p>
+
+<p>Joint Test (p value) </p>
+
+<p>0.1987 </p>
+
+<p>0.0401 </p>
+
+<p>0.4806 </p>
+
+<p>0.0273 </p>
+
+<p>Placebo Test b </p>
+
+<p>P </p>
+
+<p>P </p>
+
+<p>P/P/P/P </p>
+
+<p>P </p>
+
+<p>P </p>
+
+<p>P/P/P/P </p>
+
+<p>P </p>
+
+<p>F </p>
+
+<p>P/F/P/F </p>
+
+<p>P </p>
+
+<p>F </p>
+
+<p>P/P/P/P </p>
+
+<p>a </p>
+
+<p>Each model uses sample weights and controls for state-level characteristics reported in Table 2, Panel B as well as age, year, and state fixed effects. Standard errors are clustered by state; 
+corresponding t-statistics 
+are reported in parentheses, and *, **, *** indicate 10, 5, and 1% significance levels, respectively. </p>
+
+<p>b </p>
+
+<p>The placebo test replaces each mandate variable with a dummy for whether the mandate is in place 3 years in the future. P indicates whether the estimated coefficient passes, that is, is </p>
+
+<p>not statistically significant at the 10% level; F indicates fails. The fourth indicator for the YAD*CM model is the joint test of β </p>
+
+<p>CM , β 
+YA , and β </p>
+
+<p>CM </p>
+
+<p>* YA from the placebo regression. </p>
+
+
+
+<p>CONTEMPORARY ECONOMIC POLICY </p>
+
+<p>are included, which eliminate all significant 
+effects. 25 Moreover, our placebo tests suggest 
+that including those effects are necessary. We 
+augment these previously studied measures with 
+whether the young woman reports being pregnant 
+(via the BRFSS), included in the bottom panel. 
+These individual-level data allow us to estimate 
+all four DD and DDD approaches, as we have 
+for all of the other outcomes. These results are 
+consistent with the aggregate data, suggesting 
+that CMs have a negative effect on pregnancy. 
+Now, however, including location-specific time 
+effects appears less necessary, and their inclusion 
+strengthens the impact of CMs. These analy-
+ses are also weakly suggestive that YADs may 
+increase pregnancy, which is not implausible, 
+especially if YADs make it easier for women 
+to get insurance from a source other than their 
+employers and reduces their labor supply. </p>
+
+<p>VI. CONCLUDING REMARKS </p>
+
+<p>This research takes a comprehensive approach 
+to studying the effects of insurance mandates 
+on young adults by using contrasting empirical 
+methodologies to estimate the individual and pos-
+sibly joint effects of both YAD and contracep-
+tion insurance mandates on a wide set of out-
+comes spanning several different datasets. Our 
+approach helps settle conflicting past findings as 
+well as uncovers more complicated pathways for 
+these mandates to have an effect. For YADs, our 
+results support the more tepid findings of Depew 
+(2015) and others that such mandates do not sig-
+nificantly increase overall insurance coverage. 
+Rather, the strong effects of Levine, McKnight, 
+and Heep (2011) appear unique to their method-
+ology and data source (the CPS). Using an alter-
+native methodology (e.g., a DDD based on age 
+only) or dataset (BRFSS) overturns the positive 
+results we find using the CPS and their approach. 
+Past research on the effect of CMs on fertil-
+ity outcomes (as measured with aggregate births 
+and abortions) has also been mixed, whereby 
+strong negative effects are greatly diminished 
+by the inclusion of location-specific time trends 
+(e.g., Mulligan 2015). We use similar-yet not 
+identical-aggregate data as this past work and 
+find the same mixed results. However, we also </p>
+
+<p>25. Recall that the "Depew" model includes state-specific 
+time trends. Also recall that these aggregate Vital Statis-
+tics datasets have no individual characteristics (precluding 
+"Levine") and that the abortion data are already aggregated 
+by broad age groups (precluding "Depew"). </p>
+
+<p>bring new evidence by estimating the effects one 
+or both mandates have on reported pregnancy 
+using data from the BRFSS. These analyses also 
+yield a negative effect of CMs on fertility, an 
+effect that is stronger when location-specific time 
+effects are included. When combined with the 
+aggregate evidence, it strengthens the case that 
+CMs reduce fertility. 
+These findings for insurance coverage and 
+reproductive outcomes are largely unaffected by 
+allowing the other mandate to have an effect as 
+well, despite the fact that we find the two man-
+dates' enactments are positively correlated. We 
+do find some evidence, however, that the two 
+mandates combine to affect the general health 
+and well-being of young adults, an effect that is 
+mostly obscured if each mandate is considered 
+in isolation. Such effects are plausible in light of 
+past work that finds other pathways for YADs to 
+have an effect (through a change in coverage type 
+or reducing labor supply) and our results here that 
+CMs appear likely to have an effect on reproduc-
+tive behavior. 
+This research is not without its shortcomings. 
+Our results are not as definitive as we would like 
+and are instead mostly suggestive. Our analyses 
+face the difficulty of identifying the unique and 
+joint effects of two mandates using the relatively 
+small number of years and states in which pol-
+icy changes take place. This challenge is com-
+pounded by the fact that these mandates likely 
+fail to reach a significant proportion of young 
+women; that is, the gap between intent-to-treat 
+(what we estimate) and treatment-on-the-treated 
+estimates is large. This is especially true for our 
+DD and age-based DDD YAD models because 
+many young adults do not satisfy other eligi-
+bility requirements. More broadly, neither man-
+date is binding for those young adults who get 
+their insurance from self-insured firms (because 
+of ERISA) or who already receive such coverage 
+prior to the law. As noted by Depew (2015), such 
+attenuation bias is likely to lead to insignificant 
+results and is why he uses the American Com-
+munity Survey to study labor supply, a very large 
+dataset that is nearly 20 times bigger than the 
+CPS or BRFSS. While these challenges extend 
+to all studies of state-level YADs and CMs, 
+studying both in tandem and subjecting them to 
+such substantial robustness checks (different data 
+sources and empirical methodologies) appears 
+almost certain to exacerbate them and makes the 
+consistent findings that do emerge compelling. 
+The ACA, with its much wider reach and 
+fewer exemptions, avoids some of these </p>
+
+<p>TRUDEAU &amp; CONWAY: INSURANCE MANDATES &amp; YOUNG WOMEN </p>
+
+
+
+<p>limitations and has led to an explosion of 
+research studying the effects of its YAD. As 
+the full potential of the ACA's impact grows, 
+with the CM and other mandates firmly in place, 
+future work should consider the dual effects of 
+both of these mandates on the coverage, care, 
+and well-being of young adults. At the same 
+time, the possible repeal of the ACA, an outcome 
+that appears more likely with the 2016 elections, 
+suggests that these state-level mandates may 
+once again become relevant and therefore so too 
+the estimated effects we explore here. </p>
+
+
+
+
+
+<p>CONTEMPORARY ECONOMIC POLICY </p>
+
+
+
+<p>SUPPORTING INFORMATION </p>
+
+<p>Additional Supporting Information may be found in the 
+online version of this article: 
+Table S1. Summary of Studies on the ACA-YAD mandate 
+on insurance, care, and health 
+Table S2. Comparison of timing of state mandates 
+across studies 
+Table S3. State level sampling of care utilization and 
+health measures in the BRFSS 
+Table S4. Results of the effect of state mandates on health-
+care utilization 
+Figure S1. Timing of individual state mandates on young 
+adult-dependent coverage and contraception coverage 
+Figure S2. Growth in state-level YADs and CMs over 
+time (1997-2009) </p>
+
+</text></tei>

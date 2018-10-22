@@ -1,0 +1,3948 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1111%2Fj.1538-4616.2008.00153.x" /><encodingDesc><appInfo><application version="0.5.2-SNAPSHOT" ident="GROBID" when="2018-10-20T00:51+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>This paper generalizes the standard homoscedastic macro-finance model by 
+allowing for stochastic volatility, using the "square root" specification of the 
+mainstream finance literature. Empirically, this specification dominates the 
+standard model because it is consistent with the square root volatility found 
+in macroeconomic time series. Thus it establishes an important connection 
+between the stochastic volatility of the mainstream finance model and macro-
+economic volatility of the Okun-Friedman type. This research opens the way 
+to a richer specification of both macro-economic and term structure models, 
+incorporating the best features of both macro-finance and mainstream finance 
+models. </p>
+
+<p>JEL codes: C13, C32, E30, E43, E52 
+Keywords: affine term structure model, macro finance, unit root, stochastic volatility. </p>
+
+<p>THIS PAPER DEVELOPS a general affine macro-finance model 
+of the U.S. macroeconomy and the Treasury bond market. As the name suggests 
+the macro-finance approach allows bond yields to reflect macro-economic variables 
+as well as latent variables representing financial market factors. It is based on the 
+central bank model (CBM) developed by Svensson (1999), Rudebusch (2002), Smets 
+(1999), Kozicki and Tinsley (2005), and others, which represents the behavior of 
+the macroeconomy in terms of the output gap (g t ), inflation (π t ) and the short-term 
+interest rate (r t ). The model developed in this paper allows bond yields to reflect 
+changes in macro-economic volatility related to the underlying rate of inflation. </p>
+
+<p>1178 : MONEY, CREDIT AND BANKING </p>
+
+<p>In turn, the behavior of bond yields helps inform the specification of the macroe-
+conomy, yielding new insights into the operation of monetary policy. In particular, 
+early macro-finance studies showed that although macro-economic variables provide 
+a good description of the behavior of short rates they do not provide an adequate 
+description of long-term yields (Kozicki and Tinsley 2001, Ang and Piazzesi 2003). 
+This finding has spawned an important macro-econometric literature that augments 
+the CBM with latent variables, capturing exogenous changes in inflation and interest 
+rates (Kozicki and Tinsley 2005 provide a useful summary). This literature shows 
+that these rates are characterized by a nonstationary common trend (or unit root) that 
+seems to be explained by the underlying rate of inflation. It follows the standard macro-
+econometric literature in assuming a homoskedastic (fixed) variance structure. This 
+situation is familiar to macro-economic modelers but poses a potential problem for 
+term structure researchers: it is well known that asymptotic (long-maturity) yields are 
+not properly defined if the interest rate is driven by a random walk (a homoskedastic 
+unit root process). 
+This theoretical problem was first raised as an empirical issue by Dewachter and 
+Lyrio (2006), but with this notable exception, macro-finance modelers have avoided 
+it by assuming that the underlying inflation variable follows a near-unit-root process 
+(Ang and Piazzesi 2003, Rudebusch and Wu 2003, Dewachter, Lyrio, and Maes 2006). 
+However, because this variable is stationary, it mean-reverts to a constant rather than 
+the variable end-point suggested by unit root macro-economic models. As Kozicki 
+and Tinsley (2005), Dewachter and Lyrio (2006), and others note, this means that it 
+cannot be interpreted as a long-run inflation expectation because it is anchored to a 
+constant that cannot be influenced by monetary policy. 
+Mainstream finance yield curve research avoids these problems by using het-
+eroskedastic (stochastic volatility) interest rate models based on Cox, Ingersoll, and 
+Ross (1985, hereafter CIR). I modify their continuous time specification for use with 
+discrete-time macro-economic data, getting a sensible forward rate asymptote with-
+out placing constraints on the roots of system. The stochastic trend is estimated using 
+the extended Kalman filter, which is also standard in the mainstream finance liter-
+ature. Model restrictions allow the stochastic trend-volatility term to be interpreted 
+as an inflation trend, consistent with the hypothesis that macro-economic volatility 
+is influenced by the underlying rate of inflation (Okun 1971, Friedman 1977, Engel 
+1982). 1 This specification encompasses the standard macro-finance model, which is 
+decisively rejected by the data. 
+The research described in this paper was initially motivated by my interest in the 
+asymptotic yield problem raised by early drafts of the Dewachter and Lyrio (2006) 
+paper. I expected the new specification to outperform the standard one in explain-
+ing long maturity yields and with this in mind I extended the conventional (10-year 
+maximum) maturity data set to include a 15-year yield, the longest available his-
+torically. However, the results are surprising in this respect. The new specification </p>
+
+<p>1. Ball (1992) offers a theoretical analysis of this phenomenon and the empirical evidence is examined 
+by Brunner and Hess (1993), Holland (1995), Caporale and McKiernan (1997), and others. There is also 
+an extensive literature on the effect of inflation and macro-economic volatility on the equity risk premium 
+(Brandt and Wang 2003, Lettau, Ludvigson, and Wachter Forthcoming). </p>
+
+<p>PETER D. SPENCER : 1179 </p>
+
+<p>does give a dramatic improvement in fit, but the main reason for this is the impor-
+tance of the Okun-Friedman heteroskedasticity effect found in the macro-data. Once 
+this is allowed for, its more flexible yield curve specification adds very little. This 
+finding suggests that this new macro-finance framework-which uses estimates of 
+macro-economic volatility to inform the stochastic volatility parameters of the term 
+structure model-should be better at discriminating between rival models than the 
+mainstream finance one (Chen and Scott 1993, Dai and Singleton 2002), which does 
+not. It further suggests that CBM-based studies of monetary policy should use the 
+heteroskedastic framework rather than the current homoskedastic one, allowing the 
+effects of the stochastic trend on the second as well as the first moments of the system 
+to be analyzed. 
+The paper is set out as follows. The next section describes the macro-economic 
+model and its stochastic structure, supported by Appendix A. Section 2 derives the 
+bond pricing model, supported by Appendix B. It discusses the theoretical problems 
+posed by the unit root in the standard specification and shows how these are avoided in 
+the general affine specification. The two respective empirical models are compared in 
+Section 3. Section 4 offers a brief conclusion and suggestions for further research. </p>
+
+<p>1. THE GENERAL AFFINE MACRO-MODEL FRAMEWORK </p>
+
+<p>This section specifies the macro-economic framework. This is "general affine" or 
+"exponential-affine" in the sense of Duffie and Kan (1996) and Duffie, Filipovic, 
+and Schachtermayer (2003, to be explained). It consists of a heteroscedastic macro-
+economic vector autoregression (VAR) augmented by two latent variables, which is 
+specified under the physical (or observed) probability measure P. The yield model is 
+specified under the risk neutral measure Q in the next section. </p>
+
+<p>1.1 The Macro-Economic Dynamics 
+The macro-model is based on the CBM. It represents the behavior of the macroe-
+conomy in terms of the inflation rate (π t ), output gap (g t ) and the 3-month Treasury 
+Bill rate (r 1,t ). These are part of an n-vector z t of macro-economic variables driven 
+by the difference equation system: </p>
+
+<p>z t = K + 0 y t + L 
+l=1 l z t−l + Gη t , 
+(1) </p>
+
+<p>where G is a lower triangular matrix, η t is an n-vector of independent and identically 
+distributed (i.i.d.) orthogonal errors, and y t is a k-vector of latent factors. These follow 
+the first-order process: </p>
+
+<p>y t = θ + y t−1 + ε t , 
+(2) </p>
+
+<p>where ε t is a k-vector of i.i.d orthogonal errors, θ = {θ 1,..., θ k } and = Diag{ξ 1 , . . . , 
+ξ k }. 2 It is assumed that z t is observed without measurement error and that y t is </p>
+
+<p>2. In this paper, Diag{δ} represents a matrix with the elements of the row vector δ in the main diagonal 
+and zeros elsewhere. 0 a is the (a × 1) × 1 zero vector, 1 a is the (a × 1) × 1 summation vector, 0 a,b is the 
+(a × b) zero matrix, and I a is the a 2 identity matrix. </p>
+
+
+
+<p>unobservable. I estimate y t using the extended Kalman filter (Harvey 1989, Duffee 
+and Stanton 2004) as described in Appendix C. 
+The specific model developed in this paper defines z t = {g t , π t , r 1,t } , y t = 
+{y π  *  ,t , y r  *  ,t } , ε t = {ε π  *  ,t , ε r  *  ,t } , ξ = {ξ π  *  , ξ r  *  }, and θ = {θ π  *  , θ r  *  } . In my preferred 
+model, y π  *  ,t is a martingale driving the inflation asymptote: π  *  
+t = y π  *  ,t + ϕ π  *  , where 
+ϕ π  *  is a shift constant. The central tendency r  *  of the real interest rate r is y r  *  ,t 
+plus the constant ϕ r  *  . y r  *  ,t is assumed to be a mean-reverting Gaussian variable 
+(ξ 2 = ξ r  *  , |ξ r  *  | &lt; 1), so ϕ r  *  plays an identical role to θ r  *  , which it is convenient to 
+set to zero, making ϕ r  *  the long-run mean. The central tendency of the nominal 
+interest rate is thus r  *  
+t = y π  *  ,t + y r  *  ,t + ϕ π  *  + ϕ r  *  , which reverts to the asymptote 
+r  *  *  
+t = y π  *  ,t + ϕ π  *  + ϕ r  *  . The output gap is also assumed to be a zero-mean-reverting 
+variable: g  *  
+t = 0. These equilibrium conditions are enforced by imposing a set of 
+restrictions on (1): 
+0 = </p>
+
+<p>I − L 
+l=1 l </p>
+
+<p>
+R; K = 0 ϕ, </p>
+
+<p>where </p>
+
+<p>ϕ = {ϕ π  *  , ϕ r  *  }; R = </p>
+
+<p> </p>
+
+<p> 
+ </p>
+
+<p>0 0 
+1 0 
+1 1 </p>
+
+<p> </p>
+
+<p> 
+ 
+(3) </p>
+
+<p>to give the equilibrium solution z  *  
+t = (I − L 
+l=1 l ) −1 0 (y t + ϕ) = R(y t + ϕ). 
+This system can be consolidated by defining x t = {y 
+t , z 
+t } ; v t = {ε 
+t , η 
+t } and 
+combining (1) and (2) to get an Lth order difference system described in Appendix 
+A as (A1). The yield model employs the state space form (Harvey 1989), obtained 
+by arranging this as first-order difference system describing the dynamics of the state 
+vector: </p>
+
+<p>X t = + X t−1 + W t , 
+(4) </p>
+
+<p>where X t = {y 
+t , z 
+t , . . . , z 
+t−1 } is the state vector, W t = C · {ε 
+t , η 
+t , 0 1,N −k−n } , and 
+, , and C are defined in Appendix A. X t has dimension N = k + nl. 
+The macro-economic data were provided by Datastream and are shown in Fig-
+ure 1. π t is the annual CPI inflation rate and r 1,t is the 3-month Treasury Bill rate. 
+The output gap series g t is the quarterly OECD measure, derived from a Hodrick-
+Prescott filter. The yield data were taken from McCulloch and Kwon (1991), updated 
+by the New York Federal Reserve Bank. 3 These have been extensively used in the 
+empirical literature on the yield curve. To represent this curve I use 1-, 2-, 3-, 5-, 7-, 
+10-, and 15-year maturities. These yield data are available on a monthly basis, but 
+the macro-economic data dictated a quarterly time frame (1961Q4-2004Q1, a total 
+of 170 periods). The quarterly yield data are shown in Figure 2. The 15-year yield 
+is typically shown shown at the top of the figure, while the shorter maturity yields 
+are most frequently shown at the bottom; however, reversals in this ordering tend to 
+occur near business cycle peaks. </p>
+
+<p>3. I am grateful to Tony Rodrigues of the New York Federal Reserve Bank for supplying a copy of this 
+yield data set. </p>
+
+<p>PETER D. SPENCER : 1181 </p>
+
+<p>-10 </p>
+
+<p>-5 </p>
+
+<p>0 </p>
+
+<p>5 </p>
+
+<p>10 </p>
+
+<p>15 </p>
+
+<p>20 </p>
+
+<p>1962 
+1968 
+1975 
+1982 
+1989 
+1996 
+2003 </p>
+
+<p>% </p>
+
+<p>Output gap </p>
+
+<p>CPI inflation </p>
+
+<p>Interest rate </p>
+
+<p>FIG. 1. Macroeconomic Variables. </p>
+
+<p>NOTE: CPI inflation and 3-month T-Bill intrest rate are from Datastream. Output gap is from OECD. </p>
+
+<p>0 </p>
+
+<p>2 </p>
+
+<p>4 </p>
+
+<p>6 </p>
+
+<p>8 </p>
+
+<p>10 </p>
+
+<p>12 </p>
+
+<p>14 </p>
+
+<p>16 </p>
+
+<p>18 </p>
+
+<p>1962 
+1967 
+1974 
+1981 
+1988 
+1995 
+2002 </p>
+
+<p>% </p>
+
+<p>5 year </p>
+
+<p>1 year </p>
+
+<p>10 year </p>
+
+<p>15 year </p>
+
+<p>FIG. 2. U.S. Treasury Discount Yields: United States. </p>
+
+<p>NOTE: U.S. Treasury discount bond equivalent yield data are compiled by McCulloch and Kwon (1990) updated by the 
+New York Federal Reserve Bank. </p>
+
+<p>These inflation and interest rates all exhibit a high degree of persistence, which 
+could be the effect of slow mean reversion, unit roots, or structural breaks. Table 1 
+shows the means, standard deviations, and first-order autocorrelation coefficients of 
+these data, as well as KPSS (Kwiatowski et al. 1992) and adjusted Dickey-Fuller 
+(ADF) test results. The ADF tests show that the null hypothesis of nonstationarity for 
+these variables cannot be rejected at the 5% level. The KPSS statistics for inflation 
+and 1-to 10-year interest rates are only significant at the 10% level, suggesting that </p>
+
+
+
+<p>TABLE 1 
+DATA SUMMARY STATISTICS: 1961Q4-2004Q1 </p>
+
+<p>g </p>
+
+<p>π </p>
+
+<p>r </p>
+
+<p>1 </p>
+
+<p>r </p>
+
+<p>4 </p>
+
+<p>r </p>
+
+<p>8 </p>
+
+<p>r </p>
+
+<p>12 </p>
+
+<p>r </p>
+
+<p>20 </p>
+
+<p>r </p>
+
+<p>28 </p>
+
+<p>r </p>
+
+<p>40 </p>
+
+<p>r </p>
+
+<p>60 </p>
+
+<p>Mean </p>
+
+<p>0.0266 </p>
+
+<p>4.4345 </p>
+
+<p>5.8051 </p>
+
+<p>6.3954 </p>
+
+<p>6.6305 </p>
+
+<p>6.7849 </p>
+
+<p>7.0021 </p>
+
+<p>7.1478 </p>
+
+<p>7.2513 </p>
+
+<p>7.4383 </p>
+
+<p>Std. </p>
+
+<p>2.3382 </p>
+
+<p>2.9841 </p>
+
+<p>2.7750 </p>
+
+<p>2.8174 </p>
+
+<p>2.7355 </p>
+
+<p>2.6508 </p>
+
+<p>2.5447 </p>
+
+<p>2.4790 </p>
+
+<p>2.4194 </p>
+
+<p>2.3833 </p>
+
+<p>Skew. </p>
+
+<p>−0.575 </p>
+
+<p>1.4161 </p>
+
+<p>1.1907 </p>
+
+<p>1.8820 </p>
+
+<p>1.8697 </p>
+
+<p>1.8793 </p>
+
+<p>1.9633 </p>
+
+<p>1.9622 </p>
+
+<p>1.9215 </p>
+
+<p>1.8188 </p>
+
+<p>Kurt. </p>
+
+<p>1.0230 </p>
+
+<p>1.5178 </p>
+
+<p>2.3986 </p>
+
+<p>1.1986 </p>
+
+<p>1.0622 </p>
+
+<p>0.9505 </p>
+
+<p>0.9166 </p>
+
+<p>0.7550 </p>
+
+<p>0.5929 </p>
+
+<p>0.3945 </p>
+
+<p>Auto. </p>
+
+<p>0.4632 </p>
+
+<p>0.9921 </p>
+
+<p>0.9815 </p>
+
+<p>0.9892 </p>
+
+<p>0.9923 </p>
+
+<p>0.9944 </p>
+
+<p>0.9953 </p>
+
+<p>0.9963 </p>
+
+<p>0.9969 </p>
+
+<p>0.9971 </p>
+
+<p>KPSS </p>
+
+<p>0.2151 </p>
+
+<p>0.3399 </p>
+
+<p>0.3100 </p>
+
+<p>0.3307 </p>
+
+<p>0.3348 </p>
+
+<p>0.3399 </p>
+
+<p>0.3475 </p>
+
+<p>0.3548 </p>
+
+<p>0.3761 </p>
+
+<p>0.4298 </p>
+
+<p>ADF </p>
+
+<p>−4.133 </p>
+
+<p>−2.411 </p>
+
+<p>−2.110 </p>
+
+<p>−2.100 </p>
+
+<p>−2.063 </p>
+
+<p>−2.031 </p>
+
+<p>−2.043 </p>
+
+<p>−1.991 </p>
+
+<p>−1.951 </p>
+
+<p>−2.091 </p>
+
+<p>NOTE: Inflation (π) and 3-month T-Bill rate (r 
+1 ) are from Datastream. Output gap (g) is from OECD. Yield data are U.S. Treasury discount bond equivalent data compiled by McCulloch and Kwon (1990) </p>
+
+<p>updated by the New York Federal Reserve Bank. Mean denotes sample arithmetic mean expressed as percentage per annum; Std. is standard deviation and Auto. is the first-order quarterly autocorrelation 
+coefficient. Skew. and Kurt. are standard measures of skewness (the third moment) and kurtosis (the fourth moment). KPSS is the Kwiatowski et al. (1992) statistic testing the null hypothesis of level stationarity. The </p>
+
+<p>10% and 5% significance levels are 0.347 and 0.463, respectively. ADF is the adjusted Dickey-Fuller statistic testing the null hypothesis of nonstationarity. The 10% and 5% significance levels are 2.575 and 2.877, respectively. </p>
+
+<p>PETER D. SPENCER : 1183 </p>
+
+<p>the null hypothesis of stationarity may just be acceptable. However, the KPSS statistic 
+for the 15-year rate is almost significant at the 5% level. Moreover, Fama (2006) argues 
+persuasively that the long upswing and downswing in rates evident in the figures was 
+the result of a succession of permanent shocks that were on balance positive until 
+1981 and negative thereafter. In this paper, I follow Kozicki and Tinsley (2005), 
+Dewachter and Lyrio (2006), and Fama (2006) in analyzing a macro-econometric 
+model characterized by a unit root. </p>
+
+<p>1.2 The Stochastic Structure 
+The standard macro-finance model assumes that the volatility structure is ho-
+moskedastic and Gaussian: W t ∼ N (0 N , ), while mainstream finance models usually 
+assume that volatility is stochastic, driven by square root processes in one or more of 
+the state variables. 4 Dai and Singleton (2000) derive "admissibility" conditions to en-
+sure that these state variables remain nonnegative and the variances are well defined. 
+They classify an admissible model with N state variables and m independent square 
+root factors conditioning volatility is classed as A m (N ). Thus the standard macro-
+finance model (which is homoskedastic) is classified as A 0 (N ) and the mainstream 
+specification (with a single stochastic volatility term) as A 1 (N ). 
+This paper develops a model that encompasses the A 0 (N ) and A 1 (N ) specifi-
+cations. These models all generate affine yield curves because the probability dis-
+tributions underpinning them are all "exponential-affine" in the sense of Duffie, 
+Filipovic, and Schachtermayer (2003). They define a process as exponential-affine 
+under any measure M if the conditional moment generating function (MGF) (L M [ν, 
+X t ] = E M [exp[ν X t+1 ] | X t ]) for X t+1 , is an exponential-affine (log-linear) function 
+of X t . E M denotes the expectation under the measure M while E and V denote the 
+mean and variance under the state price density and ν is a vector of Laplace coeffi-
+cients. The MGF is the Laplace transform of the density of X t+1 . For example A 0 (N ) 
+assumes that ε 1,t is normally distributed with mean zero and standard deviation δ 01 
+and we use the formula for the MGF of a normal variable: </p>
+
+<p>E[exp[ν.y π  *  |y π  *  ,t ]] = exp </p>
+
+<p>
+ν(µ + ξ π  *  y π  *  ,t ) + 
+1 
+2 
+ν 2 δ 01 </p>
+
+<p>
+. 
+(5) </p>
+
+<p>In A 1 (N ), this latent variable also drives volatility through a square root process 
+similar to the diffusion for the spot interest rate in CIR. They show that in discrete time, 
+this has a noncentral conditional χ 2 distribution. If we normalize the time interval (s 
+− t) in their equation (18) as unity and replace r by y π  *  : </p>
+
+<p>y π  *  ,t+1 ∼ χ 2 [2cy π  *  ,t+1 ; 2cµ; 2ξ π  *  cy π  *  ,t ], 
+(6) </p>
+
+<p>where 2c is the scale factor, 2ξ π  *  cy π  *  ,t is the noncentrality parameter, and 2cµ shows 
+the degrees of freedom. </p>
+
+<p>4. Preliminary tests showed no significant evidence of autoregressive conditional heteroskedasticity 
+(ARCH) in this data set. </p>
+
+
+
+<p>This process is exponential-affine because its conditional MGF is a log-linear 
+function of y π  *  ,t : </p>
+
+<p>E[exp[ν.y π  *  ,t+1 |y π  *  ,t ]] = exp 
+νξ π  *  y π  *  ,t </p>
+
+<p>1 − ν/c 
+− cµ ln </p>
+
+<p>1 − 
+ν </p>
+
+<p>c </p>
+
+<p>
+(7) </p>
+
+<p>(provided that ν &lt; c, Johnson and Kotz 1970). Differentiating (7) with respect to ν 
+once, twice, and then setting ν to zero gives the conditional mean and variance: </p>
+
+<p>E[y π  *  ,t+1 | y π  *  ,t ] = µ + ξ π  *  y π  *  ,t ; V [y π  *  ,t+1 | y π  *  ,t ] = δ 01 + δ 11 y π  *  ,t , </p>
+
+<p>where </p>
+
+<p>δ 01 = µ/c, δ 11 = 2ξ π  *  /c. 
+(8) </p>
+
+<p>In the limiting case of a unit root, the degree of freedom parameter is zero. This 
+model is studied by Seigel (1979) and his basic results are reported in chapter 29 of 
+Johnson and Kotz (1970). Important results have also been obtained for this case by 
+Gourieroux and Jasiak (2002). In this limit: ξ π  *  = 1; δ 01 = µ = 0; c = 2/δ 11 , and (8) 
+simplifies to: </p>
+
+<p>E[y π  *  ,t+1 |y π  *  ,t ] = y π  *  ,t ; V [y π  *  ,t+1 |y π  *  ,t ] = δ 11 y π  *  ,t . 
+(9) </p>
+
+<p>This process is a martingale: the expectation of any future value is equal to the 
+current value. However, unlike the random walk model, the error variance is also 
+proportional to this value. These models can all be represented as: y π  *  ,t+1 = θ π  *  + 
+ξ π  *  y π  *  ,t + ε π  *  ,t+1 . To be consistent with (2) we set the intercept θ π  *  equal to µ for 
+the models (5) and (8) and to zero in (9). 
+In A 1 (N ), this stochastic trend also conditions the volatility of the other variables. 
+It is ordered as x 1,t = y π  *  ,t , the first variable in the (k + n) vector x t . The other 
+contemporaneous variables are put into an (k + n − 1) vector x 2,t , so that: x t = {x 1,t , 
+x 
+2,t } and conformably: v t = {w 1,t , v 
+2,t } and w t = {w 1,t , w 
+2,t } , where w 1,t = ε π  *  ,t . 
+Similarly, writing X t = {x 1,t , X 
+2,t } and partitioning W t , , , C conformably (see 
+Appendix A), (4) becomes: </p>
+
+<p>x 1,t+1 </p>
+
+<p>X 2,t+1 </p>
+
+
+
+<p>= 
+θ 1 </p>
+
+<p>2 </p>
+
+
+
+<p>+ 
+ξ 1 0 </p>
+
+<p>N −1 </p>
+
+<p>21 22 </p>
+
+<p>
+x 1,t </p>
+
+<p>X 2,t </p>
+
+
+
+<p>+ </p>
+
+<p>
+w 1,t+1 </p>
+
+<p>W 2,t+1 </p>
+
+
+
+<p>, 
+(10) </p>
+
+<p>where θ 1 = θ π  *  , ξ 1 = ξ π  *  , and w 1,t+1 = ε π  *  ,t+1 . In this paper subscripts 1 and 2 
+denote partitions of N (or k + n) dimensional vectors and matrices into 1 and N − 
+1 (or k + n − 1). The stochastic structure for (10) is described in Appendix A. The 
+distribution of x 2,t and x 2,t conditional upon x 1,t−1 is assumed to be Gaussian. The 
+conditional covariance of x 2,t is 0 + 1 x 1,t−1 , where: i = C 22 i C 
+22 and i = 
+Diag{{δ i2 , . . . , δ i(k+n) }, 0 
+N −k−n }; i = 0, 1. C 22 is a lower triangular and i ; i = 0, 
+1 are deficient diagonal (N − 1) 2 matrices. 
+This model is the discrete time analogue of the "general affine" A 1 (N ) model 
+developed by Duffie and Kan (1996), which generalizes the CIR model by adding </p>
+
+<p>PETER D. SPENCER : 1185 </p>
+
+<p>a translation or shift constant to a model variable like an interest rate or stochastic 
+trend when defining the volatility term in the rate diffusion. However, it is convenient 
+to allow for this shift by using ϕ π  *  in (3) instead, keeping y π  *  a CIR process but 
+making the inflation asymptote π  *  a Duffie and Kan (1996) process. Importantly, 
+the Duffie and Kan A 1 (N ) model encompasses A 0 (N ). Similarly, the discrete time 
+A 0 (N ) model is a special case of my A 1 (N ) model, which can be obtained by taking 
+the limit as c tends to infinity. Setting δ 11 and 1 to zero then makes x 1,t and x 2,t 
+homoskedastic. This also renders the distribution of y π  *  ,t+1 Gaussian, allowing this 
+to be defined in the A 0 (N ) model as another zero-mean-reverting latent variable (θ 1 
+= 0). 5 These models are "admissible" in the sense of Dai and Singleton (2000, 2002) 
+in that they ensure that the variance structure remains nonnegative definite. 6 They 
+can be used independently of the yield specification, as for example by Kozicki and 
+Tinsley (2005). However, my interest is to use them jointly with bond market data, 
+using the macro-yield framework developed in the next section. </p>
+
+<p>2. THE GENERAL AFFINE YIELD CURVE FRAMEWORK </p>
+
+<p>This section is supported by Appendix B and shows how exponential-affine MGFs 
+can be used to model the yield curve consistently with the macro-models of the 
+previous section. It is based on the fact (Duffie, Filipovic, and Schachtermayer 2003) 
+that the MGF of a distribution that is exponential-affine under the risk neutral measure 
+Q generates an exponential-affine discount bond price model: </p>
+
+<p>P τ,t = exp[−γ τ − 
+τ X t ]; τ = 1, . . . , M. 
+(11) </p>
+
+<p>The natural logarithm of this price is denoted by p τ,t and is linear in X t . Reversing 
+sign and dividing by maturity τ gives the discount yields: r τ,t = − p τ,t /τ = α τ + 
+β 
+τ X t , where α τ = γ τ /τ ; β τ = τ /τ . The slope coefficients β τ are known as "factor 
+loadings." Stacking the yield equations for τ = 4, 8, 12, 20, 28, 40, and 60 quarters 
+and adding an error vector e t gives the multivariate regression model used in Section 3 
+for the (7 × 1) vector r t : </p>
+
+<p>r t = α + B X t + e t = α + B 
+0 y t + L 
+l=1 B 
+l z t+1−l + e t , 
+where </p>
+
+<p>e t ∼ N (0, ¯ 
+P); ¯ 
+P = Diag{ρ 1 , ρ 2 , . . . , ρ 7 }, 
+(12) 
+and e t is an i.i.d. error vector. 7 This is the affine yield curve framework used in this 
+paper. The remainder of this section discusses the measure Q used for asset pricing 
+and the "essentially affine" yield models EA 0 (N ) and EA 1 (N ) corresponding to the 
+macro-models A 0 (N ) and A 1 (N ) of the previous section. </p>
+
+<p>5. This parameter is equivalent to ϕ 1 in (3) in this case. 
+6. In A 1 (N ) the variable driving volatility x 1,t has a noncentral χ 2 distribution and is nonnegative, 
+keeping the variance structure 0 + 1 x 1,t−1 for X 2,t nonnegative definite. 
+7. The usual convention in macro-finance models is that this represents measurement error. </p>
+
+
+
+<p>2.1 The Risk Neutral Measure Q 
+Assets are priced under the risk neutral measure, which adjusts the state probabil-
+ities in such a way that they all have the same expected return. These adjustments 
+depend upon "price of risk" parameters that show the effect of model variables on the 
+risk premia. For the yield model to be affine these prices must also be affine in the 
+state variables. So, for example, the variable λ 1,t shows the price of risk associated 
+with the stochastic trend, which plays an important role in this analysis: </p>
+
+<p>λ 1,t = λ 10 + λ 11 x 1,t + 12 X 2,t . 
+(13) </p>
+
+<p>If this is zero, then an "asymptotic" or "end-point" portfolio that is constructed so 
+that it is only exposed to shocks in x 1,t has a zero risk premium and is expected to 
+earn the spot rate. If it is constant (λ 1,t = λ 10 ), then variations in this risk premium 
+depend only upon variations in volatility, such as those induced by x 1,t in A 1 (N ). 
+This parameter plays the key role in that model. If λ 11 is also nonzero then the trend 
+can influence the risk premia thorough variations in the price of risk, even if volatility 
+is fixed as in A 0 (N ), so λ 11 plays the key role in that model. Appendix B shows how 
+the prices of risk associated with the other variables are adjusted, following Duffee 
+(2002). After this modification, the models A 0 (N ) and A 1 (N ) are classified as the 
+"essentially affine" models EA 0 (N ) and EA 1 (N ), respectively, represented by the 
+empirical models M0 and M1 in Section 3. Following Dewachter and Lyrio (2006), 
+both models incorporate the restrictions: ξ 1 = 1; 12 = 0 N −1 . 
+As Appendix B explains, variations in λ 1,t are a nuisance in the EA 1 (N ) model 
+M1 and the conventional assumption is that λ 1,t = λ 10 for that model. On the other 
+hand, it is important to allow λ 1,t to reflect variations in x 1,t in M0, so in this case 
+λ 1,t = λ 10 + λ 11 x 1,t . This means that M1 does not encompass M0. However, an 
+encompassing specification that nests both models can be constructed by relaxing the 
+usual macro-finance assumption that bond market participants use the true value of 
+ξ 1 in pricing. This gives my "baseline" model M2, which uses a new parameter ξ B 
+1 to 
+describe their estimate of the speed of adjustment of x 1,t under P, which may differ 
+from the parameter ξ 1 defined in the macro-model. 8 This modification is a technical 
+one, designed to allow encompassing tests, but could detect an error in the market 
+estimate of ξ 1 . Appendix B derives the MGF of M2 under measure Q and shows how 
+it can be used as a "model generating function" to derive the other empirical models. 
+It can for instance be used as a moment generating function to give the dynamics of 
+this system under Q: </p>
+
+<p>x 1,t+1 </p>
+
+<p>X 2,t+1 </p>
+
+
+
+<p>= 
+θ Q </p>
+
+<p>1 </p>
+
+<p>Q </p>
+
+<p>2 </p>
+
+
+
+<p>+ 
+ξ Q </p>
+
+<p>1 </p>
+
+<p>0 </p>
+
+<p>N −1 </p>
+
+<p>Q </p>
+
+<p>21 </p>
+
+<p>Q </p>
+
+<p>22 </p>
+
+<p>
+x 1,t </p>
+
+<p>X 2,t </p>
+
+
+
+<p>+ </p>
+
+<p>
+w Q </p>
+
+<p>1,t+1 </p>
+
+<p>W Q </p>
+
+<p>2,t+1 </p>
+
+
+
+<p>, 
+(14) </p>
+
+<p>where the time t expectations of the error terms are zero under Q. Table 2 shows 
+parameter values for models M0-M2, where </p>
+
+<p>8. A shift in the parameters from (4) to (14) could occur either because of the risk adjustment implied 
+by (B5) or because the bond market does not use the true values of the parameters in (4). However, it is 
+not possible to distinguish these two effects without imposing restrictions on (B5). </p>
+
+<p>PETER D. SPENCER : 1187 </p>
+
+<p>TABLE 2 </p>
+
+<p>DYNAMIC COEFFICIENTS FOR DIFFERENT YIELD MODELS AND MEASURES </p>
+
+<p>Model: 
+M2 
+M1 
+M0 
+Type: 
+EA 1 (N) 
+EA 0 (N) 
+Measure: P 
+Q 
+Q 1 
+Q 0 
+θ 1 
+θ Q 
+1 = µ </p>
+
+<p>1+λ10 /c </p>
+
+<p>θ Q1 </p>
+
+<p>1 </p>
+
+<p>= θ Q </p>
+
+<p>1 </p>
+
+<p>θ Q0 </p>
+
+<p>1 </p>
+
+<p>= µ − δ 01 λ 10 </p>
+
+<p>ξ B </p>
+
+<p>1 </p>
+
+<p>ξ Q 
+1 = </p>
+
+<p>ξ B </p>
+
+<p>1 </p>
+
+<p>(1+λ10 /c) 2 </p>
+
+<p>ξ Q1 </p>
+
+<p>1 </p>
+
+<p>= </p>
+
+<p>ξ1 </p>
+
+<p>(1+λ10 /c) 2 </p>
+
+<p>ξ Q0 </p>
+
+<p>1 </p>
+
+<p>= ξ B 
+1 = ξ 1 − δ 01 λ 11 
+2 Q 
+2 = 2 − θ 1 C 21 − H 1 + µC21 </p>
+
+<p>(1+λ10 /c) </p>
+
+<p>Q1 
+2 = Q </p>
+
+<p>2 </p>
+
+<p>Q0 
+2 = 2 − H 0 
+21 
+Q 
+21 = 21 
+(1+λ10 /c) 2 − ϒ 1 
+Q1 
+21 = 21 
+(1+λ10 /c) 2 − ϒ 1 
+Q0 
+21 = 21 − ϒ 0 
+22 
+Q 
+22 = 22 − 22 
+Q1 
+22 = Q </p>
+
+<p>22 </p>
+
+<p>Q0 
+22 = Q </p>
+
+<p>22 </p>
+
+<p>NOTE: This table shows how the shift from the state probability measure P underpinning the macro-model to the risk-neutral measures used 
+to price financial assets shift the coefficients of (14). The scalars λ 10 and λ 11 reflect the price of risk (or risk-reward ratio) associated with 
+variations in x 1,t , while H i and Υi; i = 0, 1 are matrices of parameters reflecting the price of risk associated with the other state variables 
+and are defined in (15). The baseline model M2 allows ξ B 
+1 to differ from the parameter ξ 1 defined in the macro-model. M1 is the EA 1 (N) 
+model with ξ B 
+1 = ξ 1 . M0 specializes M2 by setting δ 11 and 1 to zero and taking the limit as c tends to infinity. This gives the standard 
+EA 0 (N) model with the Duffee (2002) risk adjustments shown in the final column. </p>
+
+<p>H 0 = 0 20 + δ 01 λ 10 C 21 ; H 1 = 0 20 ; ϒ 0 = 21 + δ 01 λ 11 C 21 ; </p>
+
+<p>ϒ 1 = 21 + 1 20 . 
+(15) </p>
+
+<p>These reduced form parameters show the effects of the coefficients λ 10 and λ 11 mod-
+eling the price of risk associated with x 1,t . The vectors 20 and 21 and the matrix 
+22 are defined in (B6) and model the price of risk associated with x 2,t . Obviously, 
+if all of these parameters are set to zero, the parameters revert to those shown (for 
+P) in the first column. The parameter values for model M2 are shown in the second 
+column. Those for M1 in the next column assume the market uses the true value of 
+ξ B 
+1 = ξ 1 . The parameters for M0 in the final column are standard and Appendix B 
+shows that they can be derived from those for M2 by setting δ 11 and 1 to zero and 
+taking the limit as c tends to infinity. In this case we replace ξ B 
+1 by ξ Q 0 
+1 = ξ 1 − δ 01 λ 11 , 
+which is the Duffee (2002) risk-adjusted parameter. </p>
+
+<p>2.2 The EA 1 (N ) Yield Specifications (M1 and M2) 
+The coefficients of (11) are partitioned τ conformably with (10) as {ψ 1,τ , 
+2,τ } . 
+They are recursive in maturity. Since − p τ,1 = r 1,t its coefficients have the starting 
+values γ 1 = ψ 1,1 = 0; and 2,1 = J 2,r , where J 2,r is a selection vector such that J </p>
+
+<p>2,r </p>
+
+<p>X 2,t = r 1,t . It is also recursive in the sense that 2,τ does not depend upon ψ 1,τ −1 
+(or γ τ −1 ): </p>
+
+<p>2,τ = 
+Q </p>
+
+<p>22 </p>
+
+<p>2,τ −1 + J 2,r </p>
+
+<p>= </p>
+
+<p>I − 
+Q </p>
+
+<p>22 </p>
+
+<p>−1 
+I − </p>
+
+<p>Q </p>
+
+<p>22 </p>
+
+<p>τ 
+J 2,r , </p>
+
+<p>(16) </p>
+
+<p>where Q 
+22 = 22 − 22 (defined in Table 2) adjusts 22 to allow for the effect of 
+X 2,t on the associated prices of risk. I assume that the roots of this subsystem are 
+stable under Q, so this has the asymptote: </p>
+
+
+
+<p>TABLE 3 </p>
+
+<p>ASYMPTOTIC YIELD COEFFICIENTS FOR THE LIMIT OF A UNIT ROOT </p>
+
+<p>Model 
+EA 0 (N) 
+EA 1 (N) </p>
+
+<p>Limit: 
+β  *  
+1 = lim τ →∞ β 1,τ 
+Q0 
+21 (I − ( Q 
+22 ) ) −1 J 2,r 
+0 
+β  *  
+2 = lim τ →∞ β 2,τ 
+0 N−1 
+0 N−1 
+f  *  
+t = lim τ →∞ f τ,t 
+( 2 − H 0 )  *  
+2 + τ β  *  
+1 x 1,t 
+( 2 − H 1 )  *  
+2 − 1 </p>
+
+<p>2 </p>
+
+<p> *  *  
+2 0  *  </p>
+
+<p>2 </p>
+
+<p>− 1 </p>
+
+<p>2 </p>
+
+<p> *  *  
+2 0  *  
+2 − 1 </p>
+
+<p>2 </p>
+
+<p>δ 01 [τβ  *  
+1 +  *  *  
+2 C 21 ] 2 </p>
+
+<p>NOTE: This table shows the effect on the yield model of imposing unit root restrictions (ξ </p>
+
+<p>Q i </p>
+
+<p>1 = 1; θ </p>
+
+<p>Q i </p>
+
+<p>1 = 0) on x 1,t under Q. The maturity 
+limits for its factor loading (β  *  
+1 ) are very different in the two models. This is reflected in the behavior of the forward rate asymptote (f  *  
+t ). β  *  </p>
+
+<p>2 </p>
+
+<p>=  *  
+2 /τ is common to both specifications where  *  
+2 = limτ→∞ 2,τ = (I − ( Q 
+22 ) ) −1 J 2,r . </p>
+
+<p> *  
+2 = lim </p>
+
+<p>τ →∞ </p>
+
+<p>2,τ = </p>
+
+<p>I − 
+Q </p>
+
+<p>22 </p>
+
+<p>−1 J 2,r . 
+(17) </p>
+
+<p>Dividing by τ and taking the limit as this goes to infinity gives the limit for β 2 shown 
+in Table 3. This Gaussian substructure is common to all models, but the structure of the 
+remaining coefficients depends critically upon the model specification, particularly if 
+the system is nonstationary. 
+Importantly, as Dai and Singleton (2002) and others note, nonstationarity under Q is 
+not a problem in the EA 1 specification. Indeed their results, like previous mainstream 
+EA 1 (N ) estimates (Chen and Scott 1993) suggest that there is a root that is significantly 
+larger than unity under Q. The volatility of x 1,t+1 is linear in x 1,t and so the equation 
+determining its price coefficient includes a nonlinear Jensen effect. For M2: </p>
+
+<p>ψ 1,τ = 
+ξ B </p>
+
+<p>1 </p>
+
+<p>ψ 1,τ −1 + λ 10 + </p>
+
+<p>2,τ −1 C 21 </p>
+
+
+
+<p>1 + 
+ψ 1,τ −1 + λ 10 + </p>
+
+<p>2,τ −1 C 21 </p>
+
+<p>
+c </p>
+
+<p>− 
+ξ B 
+1 λ 10 
+1 + λ 10 /c 
+− 
+2,τ −1 ϒ 1 − </p>
+
+<p>1 
+2 </p>
+
+<p>2,τ −1 1 2,τ −1 . 
+(18) </p>
+
+<p>For a regular solution: </p>
+
+<p>λ 10 + c &gt; 0; 
+ψ 1,τ −1 + λ 10 + </p>
+
+<p>2,τ −1 C 21 
++ c &gt; 0. 
+(19) </p>
+
+<p>As Campbell, Lo, and Mackinlay (1997) note in a similar heteroskedastic yield curve 
+model, 9 the price parameter ψ  *  
+1 is determined by a quadratic rather than a linear 
+equation and is well defined (with β  *  
+1 = 0) even if |ξ Q 1 
+1 | ≥ 1. 10 For the intercept: </p>
+
+<p>9. Their model uses a Gaussian approximation to the CIR process describing the spot rate, due originally 
+to Sun (1992). 
+10. Substituting (17) into (18) gives ψ  *  
+1 as the solution to: ψ  *  
+1 = </p>
+
+<p>ξ1 (ψ  *  
+1 +λ10 +  *  *  
+2 C21 ) 
+1+(ψ  *  
+1 +λ10 +  *  *  
+2 C21 )/c </p>
+
+<p>− ξ1 λ10 </p>
+
+<p>1+λ10 /c </p>
+
+<p>−  *  *  
+2 ϒ 1 − </p>
+
+<p>1 
+2 </p>
+
+<p> *  *  
+2 1  *  
+2 . This may be arranged as: 0 = ϑ 2 + ϑ (c(1 − ξ 1 ) − ζ ) − cζ , where ϑ = ψ  *  
+1 + λ 10 +  *  *  </p>
+
+<p>2 </p>
+
+<p>C 21 , and ζ = λ10 (1−ξ1)+λ10 /c </p>
+
+<p>1+λ10 /c </p>
+
+<p>+  *  *  
+2 (C 21 − ϒ 1 ) − 1 </p>
+
+<p>2 </p>
+
+<p> *  *  
+2 1  *  
+2 . The intercept term cζ shows the product of the 
+roots and is a very large negative number. Consequently, one root is a large negative and the other a large 
+positive number. Phase analysis reveals that the recursion (18) selects the positive root. </p>
+
+<p>PETER D. SPENCER : 1189 </p>
+
+<p>γ τ = ( 2 − C 21 µ − H 1 ) 2,τ −1 − 
+1 
+2 </p>
+
+<p>2,τ −1 0 2,τ −1 </p>
+
+<p>+ cµ ln 
+c + ψ 1,τ −1 + λ 10 + 
+2,τ −1 C 21 
+c + λ 10 </p>
+
+<p>
+. 
+(20) </p>
+
+<p>Unit roots are not a problem in EA 1 (N ). Indeed, they simplify the model structure, 
+giving model M1 with ξ B 
+1 = ξ 1 = 1. Substituting µ = 0 into (20) "switches off" the 
+logarithmic term and makes γ τ and hence the asymptotic forward rate f  *  independent 
+of ψ  *  
+1 , as shown in Appendix B. In other words, because the volatility of x 1,t is 
+proportional to x 1,t−1 , the associated Jensen effects are found in (18) but not in (20). 
+This also simplifies the risk premium, derived in Appendix B as (B12). </p>
+
+<p>2.3 The Standard EA 0 (N ) Specification (M0) 
+The pricing formulae for this model are well known and Appendix B considers 
+them as limits of these baseline M2 formulae. Taking the limit of (18) as c tends to 
+zero gives a quadratic recursion. However, the restriction δ 11 = 0 "switches off" this 
+quadratic effect, reducing (18) to a linear recursion: </p>
+
+<p>ψ 1,τ = ξ Q 0 
+1 ψ 1,τ −1 + 
+2,τ −1 Q 0 
+21 . 
+(21) </p>
+
+<p>The intercepts do follow a quadratic recursion: </p>
+
+<p>γ τ = γ τ − γ τ −1 = 
+2,τ −1 Q 0 
+2 + ψ 1,τ −1 θ Q 0 
+1 − </p>
+
+<p>1 
+2 </p>
+
+<p>2,τ −1 0 2,τ −1 </p>
+
+<p>− 
+1 
+2 
+δ 01 
+ψ 1,τ −1 + </p>
+
+<p>2,τ −1 C 21 
+2 , 
+(22) </p>
+
+<p>with the parameters defined in Table 2. In contrast to the M1 model, the intercept 
+exhibits the nonlinear Jensen effects in M0 and not the first slope coefficient. 
+If ξ Q 0 
+1 = 1, then clearly (21) has a unit root and as Appendix B and Table 3 show, the 
+long forward rates behave like (−)τ 2 in the limit, reflecting the well-known asymptotic 
+problem. In the specification of Dewachter and Lyrio (2006), x 1 has a unit root under 
+P(µ = 0, ξ 1 = 1) but is mean reverting under Q : (|ξ Q 0 
+1 | = |ξ 1 − δ 01 λ 11 | &lt; 1). This 
+provides a neat way of avoiding the asymptotic yield problem while allowing the 
+inflation asymptote in the macro-model to be a variable end-point as in Kozicki and 
+Tinsley (2001). However, this restriction constrains the rate at which ψ 1,τ grows in the 
+recursion (21), constraining the effect of the stochastic trend on short-maturity yields. 
+It also means that the associated factor risk premium, the excess return expected for 
+holding the "asymptotic" portfolio (constructed so that the portfolio weights sum 
+to: ψ 1 = 1, 
+2 = 0 N −1 ), is negatively related to the inflation trend, as Appendix B 
+demonstrates. Moreover, the EA 1 (N ) model relaxes this restriction and my results, 
+reflecting those of mainstream research (e.g., Chen and Scott 1993, Dai and Singleton 
+2002), suggest that this root is significantly greater than unity under Q. </p>
+
+
+
+<p>3. THE EMPIRICAL MODELS </p>
+
+<p>The empirical model consists of a heteroskedastic VAR describing the three macro-
+economic variables (4) and the associated equations describing the seven represen-
+tative yields (12). It is estimated by quasi-maximum likelihood and the extended 
+Kalman filter, which gives optimal linear estimates of the latent variables in this 
+situation. The likelihood function is derived in Appendix C. The preliminary tests re-
+ported in Section 1.1 indicated the presence of a unit root in the macro-economic and 
+yield data. Further (Akaike information criterion (AIC)) tests suggested a third-order 
+lag structure for (1). With n = 3, k = 2, and l = 3, there are N = 11 state variables. 
+Consequently this research focussed on the EA 0 (11) and EA 1 (11) specifications. The 
+baseline model M2 uses 66 parameters 11 and has a log-likelihood L(2) = 747.5 as 
+shown in Table 5. 
+The EA 1 (11) model M1 specializes this by assuming a unit root and maintaining the 
+standard identity between macro-and yield parameters under P : ξ B 
+1 = ξ 1 = 1; µ = 
+0. 12 These 3 restrictions are easily accepted by the data: the χ 2 (3) likelihood ratio 
+test gives an acceptance value of p = 0.97. The unit root EA 0 (11) specification M0 
+is also nested in M2, employing six restrictions: δ 11 and 1 (4) are set to zero and 
+again ξ 1 = 1. However, its log-likelihood of L(0) = 678.2 is much lower than for the 
+other models and it is overwhelmingly rejected against M2. This rejection is largely 
+due to the restriction δ 11 = 0. The effect of this is twofold: (i) it makes the stochastic 
+trend homoskedastic and (ii) it removes the nonlinearity from (18), reducing it to the 
+linear recursion (21). Theoretically, these two effects are inextricably related because 
+the parameters of the stochastic structure structure(δ 01 , δ 11 , 0 , 1 , and C 22 ) are not 
+affected by the change of measure and the conventional macro-finance assumption is 
+that they are the same in the macro-and yield models. However further relaxing this 
+assumption allows (i) and (ii) to be separated. 
+To explore this idea, I constructed two new models: M3 and M4. The "encompass-
+ing" specification M4 nests all of the other models. It is based on M2 but uses 10 
+new parameters (δ B 
+01 , δ B 
+11 , , B 
+0 , and B 
+1 ) to replace their macro-equivalents in the yield 
+model. It has the log-likelihood value L(4) = 749.7. As Table 5 shows, model M1 
+is acceptable against this alternative, suggesting that the conventional macro-finance 
+assumption is valid. Model M3 then specializes M4 by using the restrictions δ B 
+11 = 0 
+and B 
+0 = 0. This is a hybrid in which the true macro-model is the heteroscedastic 
+A 1 (N ) model, but the bond market mistakenly uses a best-fit EA 0 (N ) specification 
+instead of EA 1 (N ). Comparing its log-likelihood L(3) with that L(0) of M0 which 
+it nests, gives an estimate of effect (i) of heteroskedasticity in the macroeconomy. 
+This is highly significant. Indeed, M3 is accepted against the alternative of M4 ( p = 
+0.13), with a likelihood almost as high as that for M2 and my preferred model M1. </p>
+
+<p>11. These are ξ B 
+1 , ξ 1 , ξ 2 , λ 10 , δ 01 , δ 11 , ∆ 0 (4), ∆ 1 (4), H 1 (4), ϒ 1 (3), 22 (13), G(3), (27), and ϕ(2). 
+Estimates are reported in Table 4. It was found that although λ 22,r  *  r  *  was significant (Table 4c) the remaining 
+elements of the first rows of 22 and ϒ 1 (or ϒ 0 ) were very poorly determined and could be eliminated 
+without significantly reducing the likelihood. The structural parameters µ and c follow from (8) given ξ 1 , 
+δ 01 , and δ 11 . </p>
+
+<p>12. This restriction is imposed via (8) by setting δ 01 = 0. </p>
+
+<p>PETER D. SPENCER : 1191 </p>
+
+<p>TABLE 4a </p>
+
+<p>DYNAMIC MODEL STRUCTURES (ASYMPTOTIC t-VALUES IN PARENTHESES.) </p>
+
+<p>Parameter 
+M0 
+M1 
+Parameter 
+M0 
+M1 </p>
+
+<p>1 
+2 
+φ 1,gg 
+1.07900 
+1.04720 
+φ 2,gg 
+0.06499 
+0.10684 
+(14.73) 
+(14.00) 
+(0.62) 
+(1.02) 
+φ 1,π g 
+0.07699 
+0.05795 
+φ 2,π g 
+0.05163 
+0.027942 
+(1.39) 
+(1.163) 
+(0.67) 
+(0.40) 
+φ 1,rg 
+0.17259 
+0.16763 
+φ 2,rg 
+0.06868 
+0.07950 
+(2.22) 
+(2.58) 
+(0.68) 
+(1.09) 
+φ 1,gπ 
+−0.06339 
+−0.13240 
+φ 2,gπ 
+−0.06393 
+−0.04701 
+(0.64) 
+(1.30) 
+(0.37) 
+(0.30) 
+φ 1,π π 
+1.17550 
+1.17491 
+φ 2,π π 
+−0.14605 
+−0.14437 
+(15.78) 
+(16.79) 
+(1.29) 
+(1.35) 
+φ 1,rπ 
+−0.06515 
+0.00110 
+φ 2,rπ 
+0.58100 
+0.20064 
+(0.60) 
+(0.01) 
+(3.87) 
+(1.91) 
+φ 1,gr 
+−0.03226 
+0.04263 
+φ 2,gr 
+−0.24966 
+−0.24031 
+(0.50) 
+(0.58) 
+(3.15) 
+(2.87) 
+φ 1,π r 
+0.14097 
+0.11553 
+φ 2,π r 
+−0.15173 
+−0.12517 
+(2.85) 
+(2.08) 
+(2.27) 
+(1.99) 
+φ 1,rr 
+0.74127 
+0.75781 
+φ 2,rr 
+−0.38167 
+−0.35723 
+(11.24) 
+(9.60) 
+(5.03) 
+(4.97) 
+3 
+φ 3,gg 
+−0.17881 
+−0.18599 
+ϕ π  *  
+0.00286 
+0.00586 
+(2.74) 
+(2.68) 
+(1.25) 
+(3.77) 
+φ 3,π g 
+−0.01416 
+−0.00688 
+ϕ r 
+0.00359 
+0.00454 
+(0.34) 
+(0.16) 
+(2.51) 
+(2.46) 
+φ 3,rg 
+−0.15742 
+−0.20052 
+ξ r  *  
+0.77438 
+0.88652 
+(2.40) 
+(3.66) 
+(11.53) 
+(10.63) 
+φ 3,gπ 
+0.12345 
+0.08762 
+(1.33) 
+(0.91) 
+φ 3,π π 
+−0.08313 
+−0.08848 
+(1.34) 
+(1.54) 
+φ 3,rπ 
+−0.40458 
+−0.22228 
+(4.53) 
+(3.13) 
+φ 3,gr 
+0.07208 
+0.12329 
+(1.20) 
+(1.91) 
+φ 3,π r 
+0.00561 
+−0.05152 
+(0.14) 
+(1.22) 
+φ 3,rr 
+0.12879 
+0.22584 
+(2.38) 
+(4.11) </p>
+
+<p>Although these models are not directly comparable, this observation tells us that (ii) 
+the increase in fit due to the use of a macro-consistent yield model, is in practice 
+relatively small. In other words, if the yield model parameters (δ B 
+01 , δ B 
+11 , , B 
+0 , and B 
+1 ) 
+are estimated separately they not very well determined statistically. In practice, these 
+parameters are determined by the macro-finance restriction, which equates them with 
+their macro-model analogues and thus uses macro data to pin them down. 
+Since these L(M) values are the sum of log-likelihood values at each period 
+(Appendix C) they can be analyzed as time series. Figure 3 shows the effect of 
+disaggregating the differences [L(3)-L(0)] due to effect (i) of heteroskedasticity in 
+the macroeconomy. This is very marked in the early 1980s when the stochastic trend 
+peaks, but also noticeable when the trend is low, at the beginning and the end of the </p>
+
+
+
+<p>TABLE 4b </p>
+
+<p>VARIANCE STRUCTURES (ASYMPTOTIC t-VALUES IN PARENTHESES) </p>
+
+<p>Parameter 
+M0 
+M1 
+Parameter 
+M0 
+M1 </p>
+
+<p>δ 01 
+2.044 9 × 10 −6 
+(−) 
+δ 11 
+(−) 
+1. 142 1 × 10 −4 
+(8.41) 
+(7.40) 
+∆ 0 
+∆ 1 
+δ 0r  *  
+3. 048 5 × 10 −6 
+4. 251 × 10 −7 
+δ 1r  *  
+(−) 
+1. 148 4 × 10 −3 
+(6.91) 
+(1.50) 
+(5.51) 
+δ 0g 
+3. 157 7 × 10 −6 
+2. 614 7 × 10 −6 
+δ 1g 
+(−) 
+1. 077 4 × 10 −4 
+(18.15) 
+(8.51) 
+(1.93) 
+δ 0π 
+1. 722 4 × 10 −6 
+9. 662 9 × 10 −7 
+δ 1π 
+(−) 
+1. 279 8 × 10 −4 
+(18.49) 
+(6.93) 
+(4.03) 
+δ 0r 
+3. 254 4 × 10 −6 
+6. 400 9 × 10 −8 
+δ 1r 
+(−) 
+4. 197 6 × 10 −4 
+(17.26) 
+(0.76) 
+(7.80) </p>
+
+<p>Parameter 
+M0 
+M1 </p>
+
+<p>Γ 22 
+g πg 
+0.10619 
+0.03944 
+(1.84) 
+(0.72) 
+g rg 
+0.09591 
+0.10695 
+(1.1466) 
+(1.66) 
+g rπ 
+0.14518 
+0.12105 
+(1.29) 
+(1.32) </p>
+
+<p>estimation period. The difference [L(4)-L(3)] due to (ii), the use of the more general 
+EA 1 yield curve specification, is much smaller and reflecting this, the residuals from 
+the heteroscedastic macro-based specifications M1, M2, M3, and M4 are all very 
+similar. Despite the theoretical superiority of the EA 1 (N )-based yield specification, 
+it is hard to see any systematic improvement over maturity or over time. The impulse 
+responses and factor loadings of these models are also similar. For that reason I now 
+focus on the results for the preferred model, M1. </p>
+
+<p>3.1 The Empirical Macro-Model 
+At the core of this model there is a macro VAR with a steady state solution dictated 
+by the restrictions (3). The novelty here is the introduction of the square root volatil-
+ity effects implied by the CIR-based term structure model. The model is driven by a 
+nominal factor x 1,t and a real factor x 2,t . Model estimates of these factors are shown 
+in Figure 4, along with their 95% confidence intervals. Most of the work is done by 
+the nominal factor, which has a unit root. Since x 1,t has a noncentral chi-square dis-
+tribution, the downside variance is smaller than the upside, but this asymmetry is only 
+apparent at the beginning of the estimation period when the underlying inflation rate 
+is low. This variable drives the conditional heteroskedasticity in the macro-variables. 
+Their one-quarter-ahead forecasts values and 95% confidence intervals are shown in 
+Figure 5. The effect of heteroskedasticity is particularly pronounced in the case of 
+the spot rate, consistent with the finding in univariate models (Chen et al. 1992, Ait-
+Sahalia 1996, Stanton 1997, and others). Its variance is low over the first 4 years of the 
+estimation period, consistent with the ex post stability of interest rates over this period </p>
+
+<p>PETER D. SPENCER : 1193 </p>
+
+<p>TABLE 4c </p>
+
+<p>RISK ADJUSTMENT STRUCTURES (ASYMPTOTIC t-VALUES IN PARENTHESES) </p>
+
+<p>M0 
+M1 
+M0 
+M1 
+Parameter 
+H 0 
+H 1 
+Parameter 
+Υ 0 
+Υ 1 </p>
+
+<p>η r  *  
+−5.90 × 10 −4 
+−0.0030 
+(2.82) 
+(1.14) 
+η g 
+8.34 × 10 −3 
+0.00970 
+υ g 
+0.63421 
+−0.25960 
+(1.28) 
+(1.03) 
+(0.14) 
+(0.37) 
+η π 
+−1.17 × 10 −3 
+−0.00093 
+υ π 
+0.30492 
+0.01102 
+(0.32) 
+(0.43) 
+(0.95) 
+(0.05) 
+η r 
+−4.89 × 10 −3 
+−0.01085 
+υ r 
+−0.63421 
+−1.2480 
+(3.21) 
+(3.61) 
+(3.48) 
+(4.21) </p>
+
+<p>Parameter 
+M0 
+M1 
+Parameter 
+M0 
+M1 </p>
+
+<p>Λ 22 
+λ 22,r  *  r  *  
+−0.12637 
+−0.16903 
+(2.39) 
+(2.07) 
+λ 22,gr  *  
+−0.07442 
+0.35501 
+λ 22,gg 
+0.09866 
+0.00672 
+(0.07) 
+(0.63) 
+(0.75) 
+(0.06) 
+λ 22,π r  *  
+0.39808 
+−0.08346 
+λ 22,π g 
+0.13265 
+0.0626 
+(0.86) 
+(0.49) 
+(1.86) 
+(1.64) 
+λ 22,r r  *  
+−0.96665 
+−0.94238 
+λ 22,rg 
+−0.05797 
+−0.21144 
+(4.21) 
+(4.04) 
+(0.99) 
+(2.25) 
+λ 22,gπ 
+0.29325 
+0.02125 
+λ 22,gr 
+−0.26069 
+0.03396 
+(0.92) 
+(0.41) 
+(0.32) 
+(0.06) 
+λ 22,π π 
+−0.02423 
+−0.00153 
+λ 22,π r 
+−0.28030 
+−0.02538 
+(0.17) 
+(0.06) 
+(0.78) 
+(0.14) 
+λ 22,rπ 
+0.21818 
+0.00430 
+λ 22,rr 
+0.66757 
+0.96510 
+(2.77) 
+(0.04) 
+(3.79) 
+(4.35) </p>
+
+<p>Parameter 
+M0 
+M1 </p>
+
+<p>
+λ 10 
+−118.68 
+−42.8160 
+(0.87) 
+(4.09) 
+λ 11 
+2219.6 
+( −) 
+(0.87) </p>
+
+<p>(Figure 5c). The behavior of the spot rate over the medium term is also influenced by 
+the real factor x 2,t , as is clear from a comparison with Figure 4(b). As expected, this 
+real interest series reveals a marked tightening of monetary policy in the late 1970s, 
+with a very relaxed stance in the early 1990s and again post-millennium. The model 
+attributes the ultra-low interest rates seen over the early years of the millennium to 
+a relaxation of monetary policy, coming against a background of a low underlying 
+inflation rate. 
+How firmly do these factors anchor inflation and interest rates? This question 
+depends upon whether output, inflation, and interest rates and the real factor x 2,t 
+are contintegrated with the nonstationary nominal factor x 1,t . This was checked by 
+running ADF tests on the residuals of the output, inflation, and interest rate equations, 
+which decisively reject nonstationarity (Table 6b). These variables adjust quickly and 
+smoothly to their equilibrium values. This mean-reversion effect can be summarized 
+in terms of the model's eigenvalues. The autoregressive coefficient associated with </p>
+
+
+
+<p>TABLE 5 
+MODEL </p>
+
+<p>EVALUATION </p>
+
+<p>1961Q4-2004Q1 </p>
+
+<p>Parameters </p>
+
+<p>Log-likelihood </p>
+
+<p>Model </p>
+
+<p>Specification  *  </p>
+
+<p>M </p>
+
+<p>macro/finance </p>
+
+<p>Restrictions (w.r.t M4) </p>
+
+<p>k(M) </p>
+
+<p>k(4)-k(M) </p>
+
+<p>k(3)-k(M) </p>
+
+<p>k(2)-k(M) </p>
+
+<p>L(M) </p>
+
+<p>L(4)-L(M) </p>
+
+<p>L(3)-L(M) </p>
+
+<p>L(2)-L(M) </p>
+
+<p>Standard </p>
+
+<p>δ B 
+01 = δ 01 </p>
+
+<p>, , B 
+0 = 0 </p>
+
+<p>0 </p>
+
+<p>A 
+0 (N)/EA </p>
+
+<p>0 (N) </p>
+
+<p>δ B 
+11 = δ 11 </p>
+
+<p>, , B 
+1 = 1 </p>
+
+<p>60 </p>
+
+<p>16 </p>
+
+<p>11 </p>
+
+<p>6 </p>
+
+<p>678.2 </p>
+
+<p>142.4 </p>
+
+<p>135.6 </p>
+
+<p>138.6 </p>
+
+<p>χ 2 </p>
+
+<p>95 </p>
+
+<p>δ 11 </p>
+
+<p>= 0, </p>
+
+<p>1 
+= 0 </p>
+
+<p>26.30 </p>
+
+<p>19.68 </p>
+
+<p>12.59 </p>
+
+<p>p </p>
+
+<p>ξ 1 </p>
+
+<p>= 1 </p>
+
+<p>0.0 </p>
+
+<p>0.0 </p>
+
+<p>0.0 </p>
+
+<p>1 </p>
+
+<p>Stochastic trend </p>
+
+<p>A 
+1 (N)/EA </p>
+
+<p>1 (N) </p>
+
+<p>δ B 
+01 = δ 01 </p>
+
+<p>, , B 
+0 = 0 </p>
+
+<p>63 </p>
+
+<p>13 </p>
+
+<p>3 </p>
+
+<p>747.0 </p>
+
+<p>5.40 </p>
+
+<p>1.00 </p>
+
+<p>χ 2 </p>
+
+<p>95 </p>
+
+<p>δ B 
+11 = δ 11 </p>
+
+<p>, , B 
+1 = 1 </p>
+
+<p>22.36 </p>
+
+<p>7.81 </p>
+
+<p>p </p>
+
+<p>ξ B 
+1 = ξ 1 </p>
+
+<p>= 1; 
+µ = 0 </p>
+
+<p>0.97 </p>
+
+<p>0.80 </p>
+
+<p>2 </p>
+
+<p>Baseline </p>
+
+<p>A 
+1 (N)/EA </p>
+
+<p>1 (N) </p>
+
+<p>δ B 
+01 = δ 01 </p>
+
+<p>, , B 
+0 = 0 </p>
+
+<p>66 </p>
+
+<p>10 </p>
+
+<p>χ 2 </p>
+
+<p>95 </p>
+
+<p>δ B 
+11 = δ 11 </p>
+
+<p>, , B 
+1 = 1 </p>
+
+<p>747.5 </p>
+
+<p>4.4 </p>
+
+<p>p </p>
+
+<p>18.31 
+0.93 </p>
+
+<p>3 </p>
+
+<p>Hybrid </p>
+
+<p>A 
+1 (N)/EA </p>
+
+<p>0 (N) </p>
+
+<p>δ B 
+11 = 0, </p>
+
+<p>, B 
+1 = 0 </p>
+
+<p>71 </p>
+
+<p>5 </p>
+
+<p>745.4 </p>
+
+<p>8.60 </p>
+
+<p>χ 2 </p>
+
+<p>95 </p>
+
+<p>11.07 </p>
+
+<p>p </p>
+
+<p>0.13 </p>
+
+<p>4 </p>
+
+<p>Encompassing </p>
+
+<p>76 </p>
+
+<p>A 
+1 (N)/EA </p>
+
+<p>1 (N) </p>
+
+<p>749.7 </p>
+
+<p>χ 2 </p>
+
+<p>95 </p>
+
+<p>p </p>
+
+<p>NOTES: (  *  
+) Model specification Am(N), EAm(N), </p>
+
+<p>where m 
+= number of variables conditioning volatility and N </p>
+
+<p>= number of state variables. </p>
+
+<p>PETER D. SPENCER : 1195 </p>
+
+<p>-10 </p>
+
+<p>0 </p>
+
+<p>10 </p>
+
+<p>20 </p>
+
+<p>30 </p>
+
+<p>40 </p>
+
+<p>50 </p>
+
+<p>60 </p>
+
+<p>70 </p>
+
+<p>80 </p>
+
+<p>1962 
+1967 
+1974 
+1981 
+1988 
+1995 
+2002 </p>
+
+<p>% p.a. </p>
+
+<p>M1 </p>
+
+<p>M0 </p>
+
+<p>Difference M3-M0 </p>
+
+<p>FIG. 3. Model Performance (Log-Likelihood by Period). </p>
+
+<p>NOTE: M0 is the standard heteroskedastic A 0 (N)/EA 0 (N) model. M3 is a hybrid in which the true macro-model is the 
+heteroskedastic A 1 (N) model, but the bond market mistakenly uses a best-fit EA 0 (N) specification instead of EA 0 (N). 
+This comparison gives an estimate of effect of heteroskedasticity in the macroeconomy. </p>
+
+<p>x 1,t is unity, but the other roots are stable and are reported in Table 7. Four pairs of 
+roots are sinusoidal, reflecting the cyclical nature of the macro-economic data. 13 
+These cyclical effects are seen more clearly in the impulse responses, which show 
+the dynamic effects of innovations in the macro-economic variables on the system. 
+Because these innovations are correlated empirically, we work with orthogonalized 
+innovations using the triangular factorization defined in (A1). The orthogonalized 
+impulse responses show the effect on the macro-economic system of increasing each 
+of these shocks by 1 percentage point for just one period using the Wold representation 
+of the system. This arrangement is affected by the ordering of the macro-economic 
+variables in the vector x t . Like Kozicki and Tinsley (2005), I adopt the standard 
+ordering: x t = {y π  *  ,t , y r  *  ,t , g t , π t , r 1,t }. The first shock (υ 1 ) reflects permanent policy 
+or expectational changes in the inflation asymptote while the second (υ 2 ) reflects 
+structural shocks to the real interest rate. Conventionally, υ 3 is interpreted as a positive 
+demand shock and (υ 4 ) as a negative supply shock. Finally, (υ 5 ) represents transitory 
+changes in monetary policy. 
+Figure 6 shows the results of this exercise. This gives a plausible description of 
+the macro-economic dynamics. As in the model of Kozicki and Tinsley (2005), the 
+use of Kalman filters to pick up the effect of unobservable expectational influences 
+seems to solve the notorious price puzzle-the tendency (noted originally by Sims 
+1992) for increases in policy interest rates to anticipate inflationary developments and 
+apparently cause inflation. The nominal filter dictates the long-run equilibrium of the </p>
+
+<p>13. However, the imaginary components of the first root is small, meaning that the macro-model is 
+dominated by exponential adjustment effects. </p>
+
+
+
+<p>-1 </p>
+
+<p>0 </p>
+
+<p>1 </p>
+
+<p>2 </p>
+
+<p>3 </p>
+
+<p>4 </p>
+
+<p>5 </p>
+
+<p>6 </p>
+
+<p>7 </p>
+
+<p>8 </p>
+
+<p>9 </p>
+
+<p>1962 
+1967 
+1974 
+1981 
+1988 
+1995 
+2002 </p>
+
+<p>% </p>
+
+<p>(a) </p>
+
+<p>-6 </p>
+
+<p>-4 </p>
+
+<p>-2 </p>
+
+<p>0 </p>
+
+<p>2 </p>
+
+<p>4 </p>
+
+<p>6 </p>
+
+<p>8 </p>
+
+<p>1962 
+1967 
+1974 
+1981 
+1988 
+1995 
+2002 </p>
+
+<p>% </p>
+
+<p>(b) </p>
+
+<p>FIG. 4. (a) Inflation Factor (with 95% Confidence Band) and (b) Real Rate Factor (with 95% Confidence Band). </p>
+
+<p>macroeconomy (and its volatility). These effects are persistent, but the responses of 
+the macro-economic variables to surprises in inflation, output, and interest rates are 
+rapid. They are largely exponential in nature, suggesting that monetary policy has 
+been effective in securing its objectives quickly, without significant policy reversals 
+or cycles. 
+These results are reflected in Figure 7, which report the results of the analysis 
+of variance (ANOVA) exercise. These figures show the share of the total variance 
+attributable to the innovations at different lag lengths and are also obtained using the 
+Wold representation of the system, as described in Cochrane (1997). They indicate 
+the contribution each innovation would make to the volatility of each model variable </p>
+
+<p>PETER D. SPENCER : 1197 </p>
+
+<p>if the error process was suddenly started (having been dormant previously). So, for 
+example, we see that the output surprise η 1,t accounts for nearly all of the short-run 
+volatility in output, with similar results for the responses of inflation and spot rates to 
+their own innovations. However, the effect of other innovations builds up over time. </p>
+
+<p>3.2 The Empirical Yield Model 
+The behavior of the yield curve is dictated by the factor loadings. These are depicted 
+in Figure 8, as a function of maturity (expressed in quarters). The first panel shows the </p>
+
+<p>-12 </p>
+
+<p>-10 </p>
+
+<p>-8 </p>
+
+<p>-6 </p>
+
+<p>-4 </p>
+
+<p>-2 </p>
+
+<p>0 </p>
+
+<p>2 </p>
+
+<p>4 </p>
+
+<p>6 </p>
+
+<p>8 </p>
+
+<p>1962 
+1967 
+1974 
+1981 
+1988 
+1995 
+2002 </p>
+
+<p>(a) </p>
+
+<p>-2 </p>
+
+<p>0 </p>
+
+<p>2 </p>
+
+<p>4 </p>
+
+<p>6 </p>
+
+<p>8 </p>
+
+<p>10 </p>
+
+<p>12 </p>
+
+<p>14 </p>
+
+<p>16 </p>
+
+<p>18 </p>
+
+<p>1962 
+1967 
+1974 
+1981 
+1988 
+1995 
+2002 </p>
+
+<p>(b) </p>
+
+<p>FIG. 5. (a) Output Gap Variability, (b) Inflation Variability, and (c) Spot Rate Variability (One Step Ahead Estimate 
+Plus 95% Confidence Interval). </p>
+
+<p>1198 : MONEY, CREDIT AND BANKING </p>
+
+<p>-5 </p>
+
+<p>0 </p>
+
+<p>5 </p>
+
+<p>10 </p>
+
+<p>15 </p>
+
+<p>20 </p>
+
+<p>25 </p>
+
+<p>1962 
+1967 
+1974 
+1981 
+1988 
+1995 
+2002 </p>
+
+<p>% </p>
+
+<p>(c) </p>
+
+<p>FIG. 5. Continued. </p>
+
+<p>TABLE 6a </p>
+
+<p>SUMMARY STATISTICS FOR ESTIMATED VALUES, M1 1961Q4-2004Q1 </p>
+
+<p>g 
+π 
+r 1 
+r 4 
+r 8 
+r 12 
+r 20 
+r 28 
+r 40 
+r 60 </p>
+
+<p>Mean 
+0.1433 
+4.4933 
+5.9103 6.5804 6.7846 6.9040 7.1637 7.2676 7.3626 7.4621 
+Std. 
+2.23992 2.96308 2.5555 2.6222 2.5782 2.5277 2.4582 2.4204 2.3889 2.3193 
+Skew. −0.553 
+1.3980 
+0.9157 0.7411 0.8196 0.8749 0.9212 0.9298 0.9238 0.8994 
+Kurt. 
+3.9787 
+4.5119 
+4.4288 3.8537 3.8352 3.8021 3.7220 3.6512 3.5751 3.4752 </p>
+
+<p>NOTES: Mean denotes sample arithmetic mean expressed as percentage per annum, and Std. is standard deviation. Skew. and Kurt. are 
+standard measures of skewness and kurtosis. </p>
+
+<p>loadings on x 1,t (broken line), and x 2,t (continuous line). The second panel shows the 
+loadings on π (dotted line), g (broken line), and the spot rate (continuous line). The 
+spot rate provides the link between the macro-economic model and the term structure. 
+Since it is the 3-month yield, this variable has a unit coefficient at a maturity of one 
+quarter and other factors have a zero loading. The spot rate loadings decline over the 
+next few years, reflecting the adjustment of the spot rate toward x 1,t and x 2,t . The 
+spot rate thus determines the slope of the short-term yield curve. Three-to 5-year 
+maturity yields are strongly influenced by the behavior of the real rate factor x 2,t . The 
+loading on this factor then fades gradually over the longer maturities, allowing this to 
+act as a "curvature" factor. In contrast, the loading upon x 1,t moves up to unity and 
+then increases gradually with maturity over the 2-to 15-year maturity range, so that 
+it acts as a "level" factor. The loadings for output and inflation have a humped shape, 
+but are relatively small. </p>
+
+<p>PETER D. SPENCER : 1199 </p>
+
+<p>TABLE 6b 
+RESIDUAL ERROR STATISTICS M1 1961Q4-2004Q1 </p>
+
+<p>g </p>
+
+<p>π </p>
+
+<p>r </p>
+
+<p>1 </p>
+
+<p>r </p>
+
+<p>4 </p>
+
+<p>r </p>
+
+<p>8 </p>
+
+<p>r </p>
+
+<p>12 </p>
+
+<p>r </p>
+
+<p>20 </p>
+
+<p>r </p>
+
+<p>28 </p>
+
+<p>r </p>
+
+<p>40 </p>
+
+<p>r </p>
+
+<p>60 </p>
+
+<p>R 2 </p>
+
+<p>0.9020 </p>
+
+<p>0.9664 </p>
+
+<p>0.9099 </p>
+
+<p>0.8616 </p>
+
+<p>0.8797 </p>
+
+<p>0.8901 </p>
+
+<p>0.9158 </p>
+
+<p>0.9297 </p>
+
+<p>0.9341 </p>
+
+<p>0.9355 </p>
+
+<p>RMSE </p>
+
+<p>0.1824 </p>
+
+<p>0.5452 </p>
+
+<p>0.8321 </p>
+
+<p>1.045 </p>
+
+<p>0.9458 </p>
+
+<p>0.8563 </p>
+
+<p>0.7359 </p>
+
+<p>0.6550 </p>
+
+<p>0.6188 </p>
+
+<p>0.6034 </p>
+
+<p>ADF </p>
+
+<p>−9.4633 </p>
+
+<p>−6.3951 </p>
+
+<p>−6.3239 </p>
+
+<p>−6.6522 </p>
+
+<p>−6.7983 </p>
+
+<p>−7.0042 </p>
+
+<p>−7.1833 </p>
+
+<p>−7.2131 </p>
+
+<p>−7.0550 </p>
+
+<p>−6.9903 </p>
+
+<p>Auto. </p>
+
+<p>−0.1218 </p>
+
+<p>−0.1283 </p>
+
+<p>−0.0933 </p>
+
+<p>−0.0261 </p>
+
+<p>0.0049 </p>
+
+<p>0.0948 </p>
+
+<p>0.1081 </p>
+
+<p>0.0832 </p>
+
+<p>0.0153 </p>
+
+<p>−0.0021 </p>
+
+<p>(1.57) </p>
+
+<p>(1.59) </p>
+
+<p>(1.21) </p>
+
+<p>(0.34) </p>
+
+<p>(0.06) </p>
+
+<p>(1.23) </p>
+
+<p>(1.98) </p>
+
+<p>(1.08) </p>
+
+<p>(0.19) </p>
+
+<p>(0.02) </p>
+
+<p>NOTES: The first row reports the unadjusted R 2 
+; the second reports the root mean square error (RMSE). ADF is the adjusted Dickey-Fuller statistic testing the null hypothesis of nonstationarity. The 10% and 5% </p>
+
+<p>significance levels are 2.575 and 2.877, respectively. Auto. is the first order quarterly autocorrelation coefficient (with t-value </p>
+
+<p>in parentheses). </p>
+
+
+
+<p>TABLE 7 </p>
+
+<p>EIGENVALUES OF THE DYNAMIC RESPONSES IN M1 (IN ORDER OF ABSOLUTE VALUE) </p>
+
+<p>M0 
+M1 
+1 
+1 </p>
+
+<p>0.92415 ± 0.08084i 
+0.93103 ± 0.10677 
+0.85770 
+84000 
+0.55264 ± 0.27966i 
+0.61927 
+−0.00649 ± 0.51542i 
+0.51854 ± 0.18382 
+0.51152 
+0.03600 ± 0.50129 
+−0.24485 ± 0.012387 
+−0.26430 ± 0.09198 </p>
+
+<p>Figure 9 shows the risk premia implied by models M0 and M1 for the 15-year yield. 
+Although the loadings for these models are similar, the risk premia differ because they 
+also depend upon the way that the stochastic trend affects volatility (via λ 10 in M1) 
+and the price of risk (λ 11 in M0). The parameter λ 10 is significantly negative in 
+M1, so the stochastic trend has a positive effect on the asymptotic risk premium in 
+that model (Appendix B). In M0, λ 11 adopts a positive value in order to keep the 
+model dynamics stable under Q, so the stochastic trend has a negative effect on the 
+asymptotic premium. This means that although the stochastic trend has a positive 
+effect on the 15-year premia in both models, this is more powerful in M1 than it is in 
+M0. The real factor also has a strong positive effect in both models, as is clear from the 
+figure. The effect of the macro-economic variables on the risk premia in these models 
+is relatively small in the 15-year area. The impulse responses for the 5-year yield and 
+ANOVA results for the 10-year yield are shown in Figures 6 and 7. These reflect the 
+combined effect of the factor loadings and the dynamic characteristics of the model 
+variables discussed in the previous section. The behavior of the 5-year yield depends 
+upon the spot rate and the financial factors. The variance of the 10-year yield (Figure 
+7) is dominated by the shocks to the two financial factors, reflecting the "level" and 
+"curvature" effects. The effect of the spot rate and other macro-economic variables 
+is negligible at this maturity. Table 6 shows that the joint macro-yield model closely 
+replicates the first three moments of the data shown in Table 1. </p>
+
+<p>4. CONCLUSION </p>
+
+<p>This research aligns the new macro-finance model with the mainstream finance 
+literature, using a latent variable with stochastic first and second moments to model 
+the unit root. Because volatility depends upon the stochastic trend in this model, 
+the Jensen effects induced by the convexity of the bond price function affect the 
+associated slope parameter and not the intercept. This means that the trend affects the 
+steady state inflation and spot rates without disturbing the asymptotic forward rate. 
+The model was initially designed to tackle the asymptotic problem posed by the unit 
+root, but in practice it seems that its superior performance stems from its ability to </p>
+
+<p>PETER D. SPENCER : 1201 </p>
+
+<p>FIG. 6. Model M1 Macro-Economic Impulse Responses. </p>
+
+<p>NOTES: Each panel shows the effect of a shock to one the five orthogonal innovations (ε, η) shown in (1) and (2). These 
+shocks increase the each of the five driving variables in turn by 1 percentage point compared to its historical value for just 
+one period. Since y π  *  is a martingale, the first shock (ε 1 ) has a permanent effect on inflation and interest rates, while other 
+shocks are transient. The dashed line shows the effect on output, the dotted line the effect on inflation, the continuous line 
+the effect on the spot rate and the dotted-dash line the effect on the 10 year yield. Elapsed time is measured in quarters. </p>
+
+<p>handle the heteroscedasticity of the macro-economic data rather than the asymptotic 
+yield problem. Unfortunately, it is not possible to test these models on longer term 
+yields using this historical data set because there have been long periods when the 
+U.S. Treasury did not fund in the 20-to 30-year area. However, 30 year issuance has 
+now resumed and the growing demand from pension providers is likely to keep this 
+funding window open. Moreover, the increasing number of 50-year issues in the U.K. 
+and French Treasury markets should generate data better suited to an empirical test 
+of asymptotic model behavior. </p>
+
+
+
+<p>FIG. 7. Model M1 Analysis of Variance. </p>
+
+<p>NOTES: Each panel shows the contribution to total variance of innovations in each of the orthogonal shocks representing 
+innovations in each of the five driving variables. Elapsed time is measured in quarters. </p>
+
+<p>FIG. 8. Factor Loadings in Model M1. </p>
+
+<p>NOTES: Panels (i) and (ii) show the effect of orthogonal shocks to the financial factors (η) and macro-variables (ε), 
+respectively. These shocks increase each of these driving variables in turn by 1 percentage point compared to its historical 
+value for one period. Maturity is measured in quarters. </p>
+
+<p>In the meantime, the significance of the inflation-driven conditional heteroskedas-
+ticity found in U.S. macro-data motivates the use of the general affine model to study 
+both the macroeconomy and the bond market. In contrast to the volatility-clustering 
+effects implied by GARCH macro-models, this conditional heteroskedasticity is </p>
+
+<p>PETER D. SPENCER : 1203 </p>
+
+<p>-2 </p>
+
+<p>0 </p>
+
+<p>2 </p>
+
+<p>4 </p>
+
+<p>6 </p>
+
+<p>8 </p>
+
+<p>10 </p>
+
+<p>12 </p>
+
+<p>14 </p>
+
+<p>1962 
+1967 
+1974 
+1981 
+1988 
+1995 
+2002 </p>
+
+<p>% pa </p>
+
+<p>M1 </p>
+
+<p>M0 </p>
+
+<p>FIG. 9. Risk Premia (on 15-Year Maturity). </p>
+
+<p>persistent, exhibiting a unit root. Mathematically, it is more tractable than the GARCH 
+model, generating linear structures that could lend themselves not just to research on 
+the term structure but to optimal control and similar intertemporal optimization prob-
+lems. Empirically, this finding helps to explain the "Great Moderation"-the fall in 
+output, interest rate, and inflation volatility seen since the mid 1980s (Bernanke 2004, 
+Kim, Nelson, and Piger 2004)-attributing it to the fall in the inflation trend associated 
+with the recession of the early 1980s. It reminds us that this so-called moderation is 
+actually a return to the low-inflation, low-volatility epoch that characterized the early 
+postwar years. The "general affine" macro-model A 1 helps to explain both the rise 
+and subsequent fall in volatility. 
+Compared to the mainstream finance model of the bond market, the macro-finance 
+EA 1 model can use a relatively large number of factors (11) because the param-
+eters of the model are informed by macroeconomic as well as yield data (with a 
+total of 1,700 data points). It can also use an unrestricted specification of the price 
+of risk, with a large number of parameters. It is particularly informative about the 
+stochastic volatility parameters, identifying these with the volatility parameters of 
+the macro-model, which are well determined. The relative adjustment speeds mean 
+that the behavior of the yield curve is largely dictated by three factors: the inflation 
+end-point, the real interest rate factor, and the spot rate. The model is consistent 
+with the traditional three-factor finance specification in this sense but links these 
+factors to the behavior of the macroeconomy. This research opens the way to new 
+CBM-based studies of monetary policy and a much richer term structure specifica-
+tion, incorporating the best features of both macro-finance and mainstream finance 
+models. </p>
+
+
+
+<p>APPENDIX A: THE STATE-SPACE REPRESENTATION OF THE MODEL </p>
+
+<p>Define x t = {y 
+t , z 
+t } ; v t = {ε 
+t , η 
+t } and combine (1) and (2) to get: </p>
+
+<p>x t = </p>
+
+<p>
+θ </p>
+
+<p>K + 0 θ </p>
+
+
+
+<p>+ L 
+l=1 l x t−l + w t , 
+(A1) </p>
+
+<p>where </p>
+
+<p>w t = v t ; = </p>
+
+<p>
+I k 0 k,n 
+0 G </p>
+
+
+
+<p>, </p>
+
+<p>1 = </p>
+
+<p>0 k,n 
+0 1 </p>
+
+
+
+<p>; l = </p>
+
+<p>
+0 k,k 0 k,n </p>
+
+<p>0 n,k l </p>
+
+
+
+<p>; l = 2, . . . , L . </p>
+
+<p>Stacking (A1) puts the system into state space form (4), where X t = {y 
+t , z 
+t , . . . , 
+z 
+t−1 } , W t = C.{ε 
+t , η 
+t , 0 1,N −k−n } and: </p>
+
+<p>= {θ, K + θ 
+0 , 0 1,N −k−n } , </p>
+
+<p>= </p>
+
+<p> </p>
+
+<p> 
+ 
+ 
+ 
+ 
+ 
+ </p>
+
+<p>
+0 k,n . . . 0 k,n 
+0 k,n 
+0 1 . . . l−1 l </p>
+
+<p>0 n,k 
+I n 
+.. 
+0 n,n 
+0 n,n </p>
+
+<p>0 n,k 
+0 n,n . . . I n 
+0 n,n </p>
+
+<p> </p>
+
+<p> 
+ 
+ 
+ 
+ 
+ 
+ </p>
+
+<p>= 
+ξ 1 0 </p>
+
+<p>N −1 </p>
+
+<p>21 22 </p>
+
+
+
+<p>. 
+(A2) </p>
+
+<p>The second matrix repartitions conformably with (10), so that 21 is (N − 1) × 1 
+and 22 is (N − 1) 2 . Similarly: </p>
+
+<p>C = </p>
+
+<p> </p>
+
+<p> 
+ </p>
+
+<p>I k 
+0 k,n 
+0 k,(N −k−n) 
+0 
+G 
+0 n,(N −k−n) </p>
+
+<p>0 (N −k−n),k 0 (N −k−n),n 0 (N −k−n),(N −k−n) </p>
+
+<p> </p>
+
+<p> 
+ = </p>
+
+<p>
+1 0 </p>
+
+<p>N −1 </p>
+
+<p>C 21 C 22 </p>
+
+
+
+<p>, </p>
+
+<p>where C 21 is (N − 1) × 1 and C 22 is (N − 1) 2 . Comparing this with the partition of 
+(A2), note that: </p>
+
+<p>21 = C 21 ξ 1 . 
+(A3) </p>
+
+<p>Similarly for x t = {x 1,t , x 
+2,t } repartition v t = {w 1,t , v 
+2,t } , w t = {w 1,t , w 
+2,t } and 
+(A1) conformably and write as: </p>
+
+<p>= </p>
+
+<p>
+I k 0 k,n 
+0 G </p>
+
+
+
+<p>= </p>
+
+<p>
+1 0 1,(k+n−1) 
+21 
+22 </p>
+
+
+
+<p>, </p>
+
+<p>PETER D. SPENCER : 1205 </p>
+
+<p>where 22 is a (k + n − 1) 2 lower triangular matrix with unit diagonals and 21 is 
+a (k + n − 1) column vector. The errors in x 2,t+1 are decomposed into orthogonal 
+components that are related to w 1,t+1 and v 2,t+1 = s t u 2,t+1 : </p>
+
+<p>w 2,t+1 = 21 w 1,t+1 + 22 s t u 2,t+1 , 
+(A4) </p>
+
+<p>where u 2,t+1 is an (n + k − 1) vector of standard normal variables, s t = Diag{(δ 02 + 
+δ 12 x 1,t ) </p>
+
+<p>1 </p>
+
+<p>2 , . . . , (δ 0(k+n) + δ 1(k+n) x 1,t ) </p>
+
+<p>1 </p>
+
+<p>2 }; δ mj ≥ 0, m = 0, 1; j = 1, . . . , k + n, and 
+E[u 2,t+1 w 1,t+1 ] = 0 (k+n−1) ; u 2,t+1 ∼ N [0 (k+n−1) , I (k+n−1) ]. The error structure of 
+(10) follows from (A4) as: </p>
+
+<p>W 2,t+1 = C 21 w 1,t+1 + C 22 S t U 2,t+1 
+(A5) </p>
+
+<p>U 2,t+1 ∼ N (0 N −1 , D), 
+(A6) </p>
+
+<p>where U 2,t+1 = {(u 
+2,t+1 , 0 
+N −k−n } ; S t = Diag{{(δ 02 + δ 12 x 1,t ) </p>
+
+<p>1 </p>
+
+<p>2 , . . . , (δ 0(k+n) + 
+δ 1(k+n) x 1,t ) </p>
+
+<p>1 </p>
+
+<p>2 }, 0 
+N −k−n }; D = Diag{1 
+k+n−1 , 0 
+N −k−n }, so that S t D = S t . This implies 
+the Gaussian conditional MGFs: </p>
+
+<p>E </p>
+
+<p>exp </p>
+
+<p>ν 
+2 U 2,t+1 
+= exp </p>
+
+<p>1 
+2 
+ν </p>
+
+<p>2 Dν 2 </p>
+
+
+
+<p>, </p>
+
+<p>E </p>
+
+<p>exp 
+ν </p>
+
+<p>2 S t U 2,t+1 
+= exp </p>
+
+<p>1 
+2 
+ν </p>
+
+<p>2 S 2 
+t ν 2 </p>
+
+
+
+<p>, </p>
+
+<p>(A7) </p>
+
+<p>where </p>
+
+<p>S 2 
+t = S t DS t = 0 + x 1,t 1 . 
+(A8) </p>
+
+<p>Finally, the conditional value X 2,t+1 | x 1,t+1 can be represented using (10), (A3), and 
+(A5) as: </p>
+
+<p>X 2,t+1 = 2 + 21 x 1,t + C 21 w 1,t+1 + 22 X 2,t + C 22 S t U 2,t+1 </p>
+
+<p>= 2 − C 21 θ 1 + C 21 x 1,t+1 + 22 X 2,t + C 22 S t U 2,t+1 . 
+(A9) </p>
+
+<p>APPENDIX B : AFFINE YIELD STRUCTURES </p>
+
+<p>This appendix derives the MGF of the distribution under the risk neutral measure Q 
+and shows how it can be employed as a "model generating function" to derive the yield 
+model, forward rates, and risk premia as well as the moments of the macro-system 
+under Q. </p>
+
+
+
+<p>B.1 The Risk-Neutral Probability Measure 
+Measure Q adjusts the state probabilities using a multiplicative state-dependent 
+subjective-utility weight N t+1 (with the logarithm n t+1 ) so that the time t conditional 
+risk neutral expectation (E Q ) of a scalar random variable Z t+1 : </p>
+
+<p>E Q [Z t+1 | X t ] = E[N t+1 Z t+1 | X t ]. 
+(B1) </p>
+
+<p>Bond (and other asset) prices are discounted expectations of future payoffs and prices 
+defined under this measure: </p>
+
+<p>P τ,t = exp[−r 1,t ]E Q [P τ −1,t+1 | X t ]; τ = 1, . . . , M. 
+(B2) </p>
+
+<p>(Campbell, Lo, and MacKinlay 1997, Cochrane 2000). Recall that the MGF for 
+measure Q is: </p>
+
+<p>L Q [ν, X t ] = E Q [exp[ν X t+1 ] | X t ]. 
+(B3) </p>
+
+<p>Using (11) to replace P τ −1,t+1 in (B2) gives a similar form with ν = − τ −1 : </p>
+
+<p>P τ,t = exp[−r 1,t ]E Q 
+exp 
+− γ τ −1 − 
+τ −1 X t+1 
+| X t </p>
+
+<p>
+= exp 
+−γ τ −1 − J </p>
+
+<p>r X t </p>
+
+<p>
+L Q − 
+τ −1 , X t 
+, 
+(B4) </p>
+
+<p>where J r is a selection vector such that J 
+r X t = r 1,t . 
+The discount factor is naturally exponential and if the MGF under the risk-neutral 
+measure (L Q [ν, X t ]) is exponential-affine in X t , then so is the expectation. Thus, 
+(B4) is of the form (11), with coefficients that are obtained recursively by matching 
+the coefficients (for maturity τ − 1) of the state variables X t in the exponents of (B4) 
+with those (for τ ) in (11). For this to be the case, N t+1 must be an exponential-affine 
+function of the state variables or error terms: </p>
+
+<p>−n t+1 = ω t + λ 1,t x 1,t+1 + 
+2,t U 2,t+1 , 
+(B5) </p>
+
+<p>where λ 1,t is a scalar, and 2,t = [λ 
+2,t , 0 
+N −(k+n) ] is a (N − 1) × 1 deficient vector 
+containing λ 2,t , which is a (k + n − 1) × 1 vector of coefficients related to the prices of 
+risk associated with shocks to x 2,t+1 . In the basic affine model class these coefficients 
+are constant and variations in the risk premia only depend upon those in volatility. 
+However, in the "essentially affine" specification of Duffee (2002) they are linear in 
+x t , allowing an addition source of variation in the premia. I adopt his specification 
+using (13) with: </p>
+
+<p>2,t = S t C 
+22 20 + S −1 
+t C −1 
+22 21 x 1,t + S −1 
+t C −1 
+22 22 X 2,t , 
+(B6) </p>
+
+<p>where 
+12 , 20 and 21 are (N − 1) × 1 vectors and 22 is an (N − 1) 2 matrix 
+of parameters to be estimated. The parameter λ 11 allows x 1 to influence the asymp-
+totic risk premium through the price of risk. However, since x 1 affects this through </p>
+
+<p>PETER D. SPENCER : 1207 </p>
+
+<p>volatility it is redundant in EA 1 and is set to zero. For the EA 1 specifications M1 
+and M2 to be admissible it is also necessary that 12 = 0 N −1 and to facilitate the 
+encompassing tests I follow Dewachter and Lyrio (2006) and use this restriction for 
+M0. </p>
+
+<p>B.2 The MGF under the Risk-Neutral Measure 
+Using (B1) and (B3), the MGF of the distribution under the risk-neutral measure Q 
+can be represented as: L Q [ν, X t ] = E[exp [n t+1 + ν X t+1 ] | X t ]. Substituting (B5) 
+and (A9) and noting that x 1,t+1 and U 2,t+1 are independent allows this to be factorized 
+as: </p>
+
+<p>L Q [ν, X t ] = exp 
+− ω t + ν </p>
+
+<p>2 </p>
+
+<p>2 − C 21 µ + 22 X 2,t </p>
+
+<p>
+× E </p>
+
+<p>exp 
+ν </p>
+
+<p>2 C 22 S t − </p>
+
+<p>2,t </p>
+
+<p>
+U 2,t+1 </p>
+
+<p>
+× E </p>
+
+<p>exp 
+ν 1 − λ 1,t + ν </p>
+
+<p>2 C 21 </p>
+
+<p>
+x 1,t+1 | x 1,t 
+. 
+(B7) </p>
+
+<p>For the baseline model M2, these expectations are evaluated using (7) and (A7), 
+substituting ξ B 
+1 for ξ π  *  : </p>
+
+<p>L Q [ν, X t ] = exp </p>
+
+
+
+<p>− ω t + ν 
+2 ( 2 − C 21 µ + 22 X 2,t ) </p>
+
+<p>+ 
+1 
+2 </p>
+
+<p>
+ν 
+2 C 22 S t − </p>
+
+<p>2,t </p>
+
+<p>
+D </p>
+
+<p>S t C 
+22 ν 2 − 2,t </p>
+
+
+
+<p>+ 
+ξ B </p>
+
+<p>1 </p>
+
+<p>ν 1 − λ 1,t + ν </p>
+
+<p>2 C 21 </p>
+
+<p>
+x 1,t </p>
+
+<p>1 − 
+ν 1 − λ 1,t + ν </p>
+
+<p>2 C 21 
+/c </p>
+
+
+
+<p>− cµ ln[1 − </p>
+
+<p>ν 1 − λ 1,t + ν 
+2 C 21 
+/c </p>
+
+<p>
+. </p>
+
+<p>This probability density is normalized to unity using: ω t = 1 </p>
+
+<p>2 </p>
+
+<p>
+2,t D 2,t − </p>
+
+<p>λ 1,t ξ B 
+1 x 1,t 
+1+λ 1,t /c </p>
+
+<p>− 
+cµ ln[1 + λ 1,t /c]. Substituting this back and using (15), (B6), and setting λ 1,t = λ 10 
+gives: </p>
+
+<p>L Q [ν, X t ] = exp </p>
+
+<p>
+ν 
+2 ( 2 − C 21 µ) + ν 
+2 ( 22 − 22 )X 2,t + </p>
+
+<p>1 
+2 
+ν 2 </p>
+
+
+
+<p>0 ν 2 − ν 
+2 H 1 </p>
+
+<p>− cµ ln </p>
+
+<p>1 − 
+ν 1 − λ 1 + ν </p>
+
+<p>2 C 21 
+/c 
++ cµ ln[1 + λ 10 /c] </p>
+
+<p>+ x 1,t 
+ξ B </p>
+
+<p>1 </p>
+
+<p>ν 1 − λ 10 + ν </p>
+
+<p>2 C 21 </p>
+
+
+
+<p>1 − </p>
+
+<p>ν 1 − λ 10 + ν 
+2 C 21 </p>
+
+<p>
+/c </p>
+
+<p>+ 
+ξ B 
+1 λ 10 
+1 + λ 10 /c 
+− ν 
+2 ϒ 1 + </p>
+
+<p>1 
+2 
+ν 2 </p>
+
+
+
+<p>1 ν 2 </p>
+
+<p>
+. 
+(B8) </p>
+
+
+
+<p>Using this as a moment-generating function (differentiating w.r.t. {ν 1 , ν 2 } and set-
+ting these parameters to zero) gives (14). The formulae (16), (18), and (20) follow 
+by substituting ν = − τ −1 , into (B8), substituting this into (B4) and equating the 
+coefficients of X t in the exponent with those in (11). M1 follows immediately from 
+the restrictions noted in the main text. </p>
+
+<p>B.3 The Standard EA 0 Model as a Special Case 
+The standard way to obtain the moments and yield structure for the EA 0 specifica-
+tion is to use (5) instead of (7) to evaluate the second expectation in (B7). However 
+it is more instructive to derive these from the formulae for M2, taking the limit as 
+c tends to infinity and setting 1 and δ 11 to zero. This specializes the baseline pa-
+rameters as shown in the final column of Table 2. We expand the denominator in θ Q </p>
+
+<p>1 </p>
+
+<p>as the geometric series [1 − λ 10 /c + (λ 10 /c) 2 − · · ·] and use δ 01 = µ/c to get the 
+second-order approximation: θ Q 
+1 = µ − δ 01 λ 10 + δ 01 o(c −1 ), which is approximated 
+arbitrarily closely by θ Q 0 
+1 = µ − δ 01 λ 10 for large values of c (o(c −1 ) denotes terms of 
+order c −1 or smaller). Q 0 
+2 follows from Q 
+2 in the same way. Similarly, ξ Q 
+1 may be 
+written as the second-order approximation: ξ B 
+1 [1 − 2λ 10 /c + 3(λ 10 /c) 2 − · · ·], which 
+reduces to the first-order expansion ξ B 
+1 = ξ 1 − δ 01 λ 11 upon the substitution of zero 
+for the limiting value of δ 11 = 2ξ B 
+1 /c as c tends to infinity. Q 0 
+21 follows from Q 
+21 in 
+the same way. 
+Now consider the EA 0 yield curve formulae. First, note that the recursive nature of 
+the coefficient system means that ξ B 
+1 , δ 11 , , 1 , and c do not affect (16). Next, expand 
+the denominators in (18) as above to give the quadratic approximation: </p>
+
+<p>ψ 1,τ = ξ B </p>
+
+<p>1 </p>
+
+<p>ψ 1,τ −1 + </p>
+
+<p>2,τ −1 C 21 
+− </p>
+
+<p>2,τ −1 ϒ 1 − </p>
+
+<p>1 
+2 </p>
+
+<p>2,τ −1 1 2,τ −1 </p>
+
+<p>− δ 11 </p>
+
+<p>
+1 
+2 
+ψ 1,τ −1 + </p>
+
+<p>2,τ −1 C 21 
+2 + λ 10 
+ψ 1,τ −1 + </p>
+
+<p>2,τ −1 C 21 
++ o(c −1 ) </p>
+
+<p>. </p>
+
+<p>(B9) </p>
+
+<p>Substituting the limit δ 11 = 0 reduces this to a linear difference equation and then 
+substituting (15), (A3), 1 = 0 and the coefficients of Table 2 gives: </p>
+
+<p>ψ 1,τ = ξ B </p>
+
+<p>1 </p>
+
+<p>ψ 1,τ −1 + </p>
+
+<p>2,τ −1 C 21 
+− </p>
+
+<p>2,τ −1 21 , 
+= ξ B 
+1 ψ 1,τ −1 + 
+2,τ −1 Q 0 
+21 , 
+(B10) </p>
+
+<p>which reproduces (21) upon substitution of ξ B 
+1 = ξ Q 0 
+1 = ξ 1 − δ 01 λ 11 . Finally, to spe-
+cialize the intercept (22) for EA 0 , take a Taylor approximation of the logarithmic term 
+in (20) around ln [1] use δ 01 = µ/c and then expand the denominator terms. </p>
+
+<p>PETER D. SPENCER : 1209 </p>
+
+<p>cµ ln </p>
+
+
+
+<p>1 + 
+ψ 1,τ −1 + 
+2,τ −1 C 21 
+c + λ 10 </p>
+
+
+
+<p>= µ 
+ψ 1,τ −1 + 
+2,τ −1 C 21 
+1 + λ 10 /c </p>
+
+<p>
+− 
+1 
+2 
+δ 01 
+ψ 1,τ −1 + 
+2,τ −1 C 21 
+1 + λ 10 /c </p>
+
+<p>2 </p>
+
+<p>+ 
+1 
+6 </p>
+
+<p>δ 01 [ψ 1,τ −1 + 
+2,τ −1 C 21 ] 3 
+c[1 + λ 10 /c] 2 
+− · · · </p>
+
+<p>= (µ − λ 10 δ 01 ) 
+ψ 1,τ −1 + </p>
+
+<p>2,τ −1 C 21 </p>
+
+
+
+<p>− 
+1 
+2 
+δ 01 
+ψ 1,τ −1 + </p>
+
+<p>2,τ −1 C 21 
+2 + o(c −1 ) </p>
+
+<p>Neglecting the terms o(c −1 ) gives a second-order approximation. Substituting back 
+into (20) using (15) and Table 2 gives (22): </p>
+
+<p>γ τ = ( 2 − C 21 µ − 0 20 ) 2,τ −1 − 
+1 
+2 </p>
+
+<p>2,τ −1 0 2,τ −1 </p>
+
+<p>+ θ Q 0 
+1 ψ 1,τ −1 + (µ − δ 01 λ 10 ) 
+2,τ −1 C 21 − </p>
+
+<p>1 
+2 
+δ 01 
+ψ 1,τ −1 + </p>
+
+<p>2,τ −1 C 21 </p>
+
+<p>2 </p>
+
+<p>= 
+2,τ −1 Q 0 
+2 + θ Q 0 
+1 ψ 1,τ −1 </p>
+
+<p>− 
+1 
+2 </p>
+
+<p>2,τ −1 0 2,τ −1 − </p>
+
+<p>1 
+2 
+δ 01 
+ψ 1,τ −1 + </p>
+
+<p>2,τ −1 C 21 
+2 . 
+(B11) </p>
+
+<p>B.4 Risk Premia 
+The risk premia depend entirely upon the difference between the two measures P 
+and Q. To see this, note that the premium on a τ -period bond is the expected return, less 
+the spot rate. The gross expected rate of return is the expected payoff E[P τ −1,t+1 |X t ] 
+divided by its current price P τ,t = exp[−r 1,t ]E Q [P τ −1,t+1 | X t ]. Taking the natural 
+logarithm expresses this as a percentage return and subtracting the spot rate r 1,t then 
+gives the risk premium: ρ τ,t = log E[P τ −1,t+1 | X t ] − log E Q [P τ −1,t+1 | X t ]. This is 
+affine provided that the MGF is exponential-affine under both measures. Substituting 
+(11), (7), and (B8) with ν = 
+τ −1 gives the risk premium. In the case of the EA 1 unit 
+root model this gives: </p>
+
+<p>ρ τ,t = − 
+2,τ −1 (H 1 + 22 X 2,t + ϒ 1 x 1,t ) </p>
+
+<p>− 
+ξ B </p>
+
+<p>1 cλ 10 </p>
+
+<p>
+2,τ −1 C 21 + ψ 1,τ −1 </p>
+
+<p>
+2c + λ 10 + 
+2,τ −1 C 21 + ψ 1,τ −1 </p>
+
+
+
+<p>
+c + λ 10 + 
+2,τ −1 C 21 + ψ 1,τ −1 </p>
+
+<p>
+(c + λ 10 ) </p>
+
+<p>c + ψ 1,τ −1 + 
+2,τ −1 C 21 </p>
+
+
+
+
+
+<p>x 1,t . </p>
+
+<p>(B12) </p>
+
+<p>The linear term on the first line is the compensation for the bond's exposure to shifts 
+in X 2,t , which is negligible for a portfolio or security like an ultra-long bond, with </p>
+
+
+
+<p>a yield that mimics the asymptotic portfolio. The nonlinear term on the second line 
+shows the premium on the asymptotic portfolio and is zero if λ 10 = 0. It is positively 
+related to x 1,t if λ 10 &lt; 0, and negatively related if λ 10 &gt; 0 since: </p>
+
+<p>d 2 ρ τ,t 
+dx 1,t dλ 10 
+= −ξ B 
+1 c 2 </p>
+
+<p>C 21 
+2,τ −1 + ψ 1,τ −1 
+(c + λ 10 ) 2 </p>
+
+
+
+<p>× </p>
+
+<p>
+2c + 2λ 10 + C 21 
+2,τ −1 + ψ 1,τ −1 </p>
+
+<p>c + λ 10 + C 21 
+2,τ −1 + ψ 1,τ −1 </p>
+
+<p>2 </p>
+
+
+
+<p>≤ 0 </p>
+
+<p>given (19). The risk premium in the EA 0 (N ) model is: </p>
+
+<p>ρ τ,t = − 
+2,τ −1 (H 0 + ϒ 0 x 1,t + 22 X 2,t ) − ψ 1,τ −1 δ 01 (λ 10 + λ 11 x 1,t ). (B13) </p>
+
+<p>Recall that this model requires the restriction λ 11 &gt; 0. This means that the associated 
+factor risk premium (the asymptotic premium) is negatively related to the inflation 
+trend. This premium is shown by δ 01 (λ 10 + λ 11 x 1,t ) in the second term. In prac-
+tice, this effect has the effect of offsetting the effect of the component 
+2,τ −1 ϒ 0 x 1,t 
+shown in the first term (which is positive in the empirical model). Thus, the influ-
+ence of the trend on the premia shown in Figure 9 is more pronounced in model 
+M1. </p>
+
+<p>B.5 Forward Rates and Asymptotic Behavior 
+Taking logs of (11) and maturity-differencing gives the affine forward rate structure: </p>
+
+<p>f τ,t = γ τ +1 + [ τ +1 − τ ] X t ; τ = 1, . . . , M. 
+(B14) </p>
+
+<p>This shows that the asymptotic behavior of the forward rate depends critically upon 
+whether the slope coefficients converge to constants. If so, the last term vanishes 
+and γ τ +1 and hence the forward rate asymptote ( f  *  
+t ) is constant. Since  *  
+2 = 
+lim τ →∞ 2,τ = (I − ( Q 
+22 ) ) −1 J 2,r is constant, this just depends upon the behavior 
+ψ 1,τ . Table 3 shows the asymptotic effect on the yield model of imposing unit root 
+restrictions (ξ Q i 
+1 = 1; θ Q i 
+1 = 0) on x 1,t under Q. In EA 1 , ψ 1,τ asymptotes to a constant, 
+so β  *  
+1 and f  *  are zero. However, (21) shows that in EA 0 : lim τ →∞ (ψ 1,τ +1 − ψ 1,τ ) = 
+Q 0 
+21  *  
+2 = Q 0 
+21 (I − ( Q 
+22 ) ) −1 J 2,r . Consequently, β  *  
+1 = lim τ →∞ ψ 1,τ /τ = Q 0 
+21 (I − 
+( Q 
+22 ) ) −1 J 2,r . This expression is equal to the asymptotic effect of x 1,t on r 1,t under 
+Q and as such it should be close to unity. Substituting these coefficients into (22) 
+and (B14) gives the asymptotic behavior of the forward rate reported in Table 3. 
+The final term in this expression is the Jensen effect associated with ψ 1,τ x 1,t , which 
+behaves like (−) 1 </p>
+
+<p>2 </p>
+
+<p>δ 01 β  * 2 
+1 τ 2 in the limit. These results illustrate the basic theorem of 
+Dybvig, Ingersoll, and Ross (1996), which says that in an arbitrage-free framework 
+"the limiting forward interest rate, if it exists, can never fall." In other words the </p>
+
+<p>PETER D. SPENCER : 1211 </p>
+
+<p>forward rate must either fail to converge with maturity (as in the unit root EA 0 
+model), or must asymptote to a constant (EA 1 ). </p>
+
+<p>APPENDIX C : THE KALMAN FILTER AND THE LIKELIHOOD FUNCTION </p>
+
+<p>These models were estimated and tested using the fminsearch algorithm on Mat-
+lab. 14 In this model, the unobservable variables are modeled using the extended 
+Kalman filter (Harvey 1989, Duffee and Stanton 2004). This method assumes that the 
+revisions in (2) are approximately normally distributed: </p>
+
+<p>ε t+1 ∼ N (0, Q t ) </p>
+
+<p>where </p>
+
+<p>Q t = Q 0 + Q 1 y π  *  ,t </p>
+
+<p>Q i = Diag 
+δ 2 </p>
+
+<p>0i , δ 2 </p>
+
+<p>1i </p>
+
+<p>
+; i = 1, 2. </p>
+
+<p>I represent expectations conditional upon the available information with a "hat" (so 
+thatˆy  t = ˆ 
+E t y t ; ˆ 
+y s,t = ˆ 
+E t y s ; s ≥ t) and define the covariance matrices: </p>
+
+<p>ˆ 
+V t = ˆ 
+E t (y t − ˆ 
+y t )(y t − ˆ 
+y t ) ; </p>
+
+<p>ˆ 
+V t+1,t = ˆ 
+E t (y t+1 − ˆ 
+y t+1,t )(y t+1 − ˆ 
+y t+1,t ) </p>
+
+<p>= ˆ 
+V t + Q t , </p>
+
+<p>(C1) </p>
+
+<p>where using (2): </p>
+
+<p>y t+1,t = ˆ 
+E t ˆ 
+y t+1 = θ + ˆ 
+y t . 
+(C2) </p>
+
+<p>Similarly, using (1): z t+1 = ˆ 
+z t+1,t + Gη t+1 + 0 (y t+1 − ˆ 
+y t+1,t ), where </p>
+
+<p>ˆ 
+z t+1,t = K + 0 ˆ 
+y t+1,t + L−1 
+l=0 l z t−l , 
+(C3) </p>
+
+<p>and using (12): r t+1 = ˆ 
+r t+1,t + B 
+0 (y t+1 − ˆ 
+y t+1,t ) + B 
+1 (z t+1 − ˆ 
+z t+1,t ) + e t+1 , where </p>
+
+<p>ˆ 
+r t+1,t = α + B 
+0 ˆ 
+y t+1,t + B 
+1 ˆ 
+z t+1,t + L 
+l=2 B l 
+z t+2−l . 
+(C4) </p>
+
+<p>14. I am very grateful to Zhuoshi Liu for suggesting this algorithm and converting my basic files from 
+<rs type="software">Mathematica</rs> to <rs type="software">Matlab</rs>. </p>
+
+<p>1212 : MONEY, CREDIT AND BANKING </p>
+
+<p>The t-conditional covariance matrix for this (t + 1)-dated system is: 
+ </p>
+
+<p> 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ </p>
+
+
+
+<p>rr </p>
+
+
+
+<p>r z </p>
+
+
+
+<p>r y </p>
+
+
+
+<p>
+r z </p>
+
+
+
+<p>zz </p>
+
+
+
+<p>zy </p>
+
+
+
+<p>
+r y </p>
+
+
+
+
+
+<p>zy </p>
+
+
+
+<p>yy </p>
+
+<p> </p>
+
+<p> 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ </p>
+
+<p>= ˆ 
+E t </p>
+
+<p> </p>
+
+<p> 
+ </p>
+
+<p>r t+1 − ˆ 
+r t+1,t </p>
+
+<p>z t+1 − ˆ 
+z t+1,t </p>
+
+<p>y t+1 − ˆ 
+y t+1,t </p>
+
+<p> </p>
+
+<p> 
+ . </p>
+
+<p>r t+1 − r t+1,t z t+1 − z t+1,t y t+1 − ˆ 
+y t+1,t 
+, </p>
+
+<p>where </p>
+
+<p>rr = ¯ 
+P + B 1 M t B 
+1 + (B 1 0 + B 0 ) ˆ 
+V t+1,t (B 1 0 + B 0 ) ; </p>
+
+<p>r z = B 1 M t + 
+(B 1 0 + B 0 ) ˆ 
+V t+1,t 
+0 ; </p>
+
+<p>
+r y = (B 1 0 + B 0 ) ˆ 
+V t+1,t ; </p>
+
+<p>zz = 0 ˆ 
+V t+1,t 
+0 + M t ; </p>
+
+<p>
+zy = 
+0 ˆ 
+V t+1,t ; </p>
+
+<p>yy = ˆ 
+V t+1,t ; M t = G[S 0 + S 1 y t,t ]G ; S i = Diag{δ 2 
+i1 . . . , δ 2 
+in }; i = 0, 1 
+and ¯ 
+P is defined in (12). This allows the expectations to be updated as: </p>
+
+<p>ˆ 
+y t+1 = ˆ 
+y t+1,t + </p>
+
+
+
+<p>yr </p>
+
+
+
+<p>yz </p>
+
+<p>
+ </p>
+
+<p> 
+ 
+ </p>
+
+
+
+<p>rr </p>
+
+
+
+<p>r z </p>
+
+
+
+<p>zr </p>
+
+
+
+<p>zz </p>
+
+<p> </p>
+
+<p> 
+ 
+ </p>
+
+<p>−1 
+r t+1 − ˆ 
+r t+1,t </p>
+
+<p>z t+1 − ˆ 
+z t+1,t </p>
+
+
+
+<p>(C5) </p>
+
+<p>ˆ 
+V t+1 = ˆ 
+V t+1,t − </p>
+
+
+
+<p>yr </p>
+
+
+
+<p>yz </p>
+
+<p>
+ </p>
+
+<p> 
+ 
+ </p>
+
+
+
+<p>rr </p>
+
+
+
+<p>r z </p>
+
+
+
+<p>zr </p>
+
+
+
+<p>zz </p>
+
+<p> </p>
+
+<p> 
+ 
+ </p>
+
+<p>−1  
+ 
+ 
+ </p>
+
+
+
+<p>r y </p>
+
+
+
+<p>zy </p>
+
+<p> </p>
+
+<p> 
+ 
+ . 
+(C6) </p>
+
+<p>The (log) likelihood for period t + 1 is thus: </p>
+
+<p>L t+1 = k − 
+1 
+2 
+ln </p>
+
+<p> </p>
+
+<p> 
+ 
+ Det </p>
+
+<p> </p>
+
+<p> 
+ 
+ </p>
+
+
+
+<p>rr </p>
+
+
+
+<p>r z </p>
+
+
+
+<p>zr </p>
+
+
+
+<p>zz </p>
+
+<p> </p>
+
+<p> 
+ 
+ </p>
+
+<p> </p>
+
+<p> 
+ 
+ </p>
+
+<p>− 
+1 
+2 </p>
+
+<p>
+r t+1 − r t+1,t z t+1 − z t+1,t </p>
+
+<p>
+ </p>
+
+<p> 
+ 
+ </p>
+
+
+
+<p>rr </p>
+
+
+
+<p>r z </p>
+
+
+
+<p>zr </p>
+
+
+
+<p>zz </p>
+
+<p> </p>
+
+<p> 
+ 
+ </p>
+
+<p>−1 
+r t+1 − ˆ 
+r t+1,t </p>
+
+<p>z t+1 − ˆ 
+z t+1,t </p>
+
+
+
+<p>. (C7) </p>
+
+<p>The log-likelihood for the full sample follows by iterating (C1), (C2), (C5), and 
+(C6) forward given suitable starting values; substituting (C3) and (C4) then summing 
+(C7) over t = 1, . . . ,T . </p>
+
+<p>PETER D. SPENCER : 1213 </p>
+
+<p>LITERATURE CITED </p>
+
+
+
+<p>PETER D. SPENCER : 1215 </p>
+
+
+
+</text></tei>

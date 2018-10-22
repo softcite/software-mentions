@@ -43,6 +43,7 @@ The text mining process is thus not limited to populating a database, but also o
 
 We present below the current metrics of the software mention model, as produced by the software component. The annotated corpus is divided randomly with 90% for training and 10% for evaluation. We use traditional precision, recall and f1 scores. Token-level evaluation indicates how good the labeling is for each token. Field-level evaluation indicates accuracy for a complete multi-word sequence, including correct attachment of attributes (`creator`, `url`, `version-date`, `version-number`) to the correct `software`.
 
+Version Aug. 24th 2018 
 
 ```
 ===== Token-level results =====
@@ -70,7 +71,45 @@ label                precision    recall       f1
 all fields           70.71        51.15        59.36   (micro average)
 ```
 
-With this current model, 27.4% of the PDF of the evaluation set are entirely correctly annotated. 
+Version Oct. 19th 2018
+
+```
+Labeling took: 1821 ms
+
+===== Token-level results =====
+
+
+label                precision    recall       f1     
+
+<creator>            71.72        71           71.36  
+<software>           82.48        50.37        62.54  
+<url>                40           66.67        50     
+<version-date>       100          6.25         11.76  
+<version-number>     87.14        81.77        84.37  
+
+all fields           79.68        64.37        71.21   (micro average)
+
+===== Field-level results =====
+
+label                precision    recall       f1     
+
+<creator>            70.65        59.09        64.36  
+<software>           76.61        50.61        60.95  
+<url>                25           50           33.33  
+<version-date>       100          6.25         11.76  
+<version-number>     72.82        69.44        71.09  
+
+all fields           73.92        54.59        62.8    (micro average)
+
+===== Instance-level results =====
+
+Total expected instances:   236
+Correct instances:          80
+Instance-level recall:      33.9
+
+```
+
+With this current model, 33.9% of the PDF of the evaluation set (213 documents) are entirely correctly annotated. 
 
 Note that we present here simply intermediary results, and final evaluation metrics will be averaged over 10 random annotated corpus segmentations or via a 10-fold approach to match good practice. 
 

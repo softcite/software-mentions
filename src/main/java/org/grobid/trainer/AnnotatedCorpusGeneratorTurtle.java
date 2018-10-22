@@ -54,7 +54,9 @@ import java.net.URI;
  */
 public class AnnotatedCorpusGeneratorTurtle {
 
-    static Charset UTF_8 = Charset.forName("UTF-8"); // StandardCharsets.UTF_8
+    static public Charset UTF_8 = Charset.forName("UTF-8"); // StandardCharsets.UTF_8
+
+    private ArticleUtilities articleUtilities = new ArticleUtilities();
 
     /**
      * Start the conversion/fusion process for generating MUC-style annotated XML documents
@@ -134,7 +136,7 @@ public class AnnotatedCorpusGeneratorTurtle {
     private File getPDF(String pathPDFs, String identifier) {
         File inRepo = new File(pathPDFs + File.separator + identifier + ".pdf");
         if (!inRepo.exists()) {
-            File notInRepo = ArticleUtilities.getPDFDoc(identifier);
+            File notInRepo = articleUtilities.getPDFDoc(identifier);
             if (notInRepo == null) {
                 return null;
             } else {

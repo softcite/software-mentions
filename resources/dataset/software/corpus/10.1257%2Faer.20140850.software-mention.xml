@@ -1,0 +1,1553 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1257%2Faer.20140850" /><encodingDesc><appInfo><application version="0.5.2-SNAPSHOT" ident="GROBID" when="2018-10-20T00:59+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p> 
+Perry and reny: How to count citations if you must 
+VoL. 106 no. 9 </p>
+
+<p>Improvements to the h -index have been suggested. Consider, for example, the 
+g -index (Egghe 2006a,b), which is the largest number g such that the total citation 
+count of the g most cited papers is at least g 2 . The g -index is intended to correct 
+for the insensitivity of the h -index to the number of citations received by the h most 
+cited papers. Many other variations have been suggested since. Yet, like the h -index, 
+they are ad hoc measures based almost entirely on intuition and rules of thumb 
+with insufficient justification given for choosing them over the infinitely many other 
+unchosen possibilities. But for a novel empirical approach to selecting among a new 
+class of h -indices, see Ellison (2012, 2013). 2 
+To illustrate the difficulties that can arise when a systematic approach to choos-
+ing an index is not followed, let us consider the very practical and well-recognized 
+problem of comparing the records of individuals in different fields or subfields. 3 
+There is compelling evidence to suggest that for such comparisons to be meaning-
+ful, one must rescale each individual's citation list by dividing each entry in it by the 
+average number of citations in that individual's field. Indeed, Radicchi, Fortunato, 
+and Castellano (2008) observe that while the distributions of citations vary widely 
+across a variety of fields (from agricultural economics to nuclear physics), after res-
+caling by the average number of citations within a field, the distributions all become 
+virtually identical (see Section III). 
+With this in mind, suppose that two macroeconomists, A and B, are being consid-
+ered for a single position and it is noted that A has the higher h -index and so should 
+be the preferred candidate. But before a final decision is made, a second position as 
+well as a new candidate, C, become available. Candidate C, however, is an industrial 
+organization (IO) economist and so a rescaling of the citation lists is necessary to 
+compare the three records across the two fields. But a serious difficulty arises. The 
+rescaling has reversed the ranking of the two macroeconomists. That is, applying the 
+h -index to the rescaled lists produces the ranking: B preferred to C preferred to A, 
+and it is now entirely unclear which one of the two macroeconomists should be 
+hired! 
+But do such reversals occur in practice? According to data collected by Ellison 
+(2013), 4 the average number of citations per paper among macroeconomists at the </p>
+
+<p>top 50 US universities is 98 , while among IO economists it is 55 . 5 That is, macro-
+economists are cited 1.8 ( = 98/55 ) times more often per paper, on average, than 
+IO economists. Applying the h -index to Ellison's (2013) data, both before and after 
+reducing the macroeconomists' citations by a factor of 1.8, we find that 95 percent of 
+them experience at least one pairwise ranking change with another macroeconomist </p>
+
+<p>2 Ellison (2013) introduces the following class of generalized Hirsch indices. For any a, b &gt; 0 and for any cita-
+tion list, h (a, b) is the number of papers, h, that each have at least a h b citations. Ellison estimates a and b so that h (a, b) 
+gives the best fit in terms of ranking economists at the top 50 US universities in a manner that is consistent with 
+the observed labor market outcome. Ellison (2012) is a related paper that instead uses data on computer scientists. 
+3 See, e.g., Radicchi, Fortunato, and Castellano (2008) and the references therein. 
+4 See Section IV for more details. 
+5 These figures pertain to individuals who are classified by Ellison (2013) as being in a unique field, in this case 
+either IO or macroeconomics. There are 88 out of 226 such macroeconomists and 64 out of 120 such IO economists. </p>
+
+
+
+<p>THE AMERICAN ECONOMIC REVIEW 
+SEpTEMbER 2016 </p>
+
+<p>and 60 percent of them experience at least one strict ranking reversal (see Figure 3 
+in Section IV). 6,7 So, for the h -index, the problem of ranking reversals is quite real. 
+To avoid this and other difficulties, we take an axiomatic approach in our search 
+for an index. 8 The methodology of this approach is to select, with care, a number of 
+basic properties that an index should have. The advantage of this approach is that 
+it focuses attention on the properties that an index should possess rather than the 
+functional form that it should take. After all, it is the properties we desire an index 
+to possess that should determine its functional form, not the other way around. The 
+five properties that we identify are quite natural for the problem at hand and lead 
+uniquely to the Euclidean index. 
+Still, one might wonder how well the Euclidean index performs in practice rel-
+ative to the h -index. To get a sense of this with Ellison's (2013) data, we assigned 
+a score to each index by considering how well its ranking of economists at the top 
+50 US universities matched the National Research Council's (NRC) ranking of the 
+departments in which they are employed. More specifically, we increased an index's 
+score by 1 whenever its ranking of two economists agreed with the NRC's ranking 
+of their departments and we decreased an index's score by 1 otherwise, ignoring all 
+ties. 9 The Euclidean index outscored the h -index in this test and it also outscored a 
+whole family of indices which satisfy a strict subset of our axioms (see Figure 4 in 
+Section IV). 10 Thus, at least with respect to this test, the Euclidean index performs 
+rather well. 
+The Euclidean index is intended to judge an individual's record as it stands. It is 
+not intended as a means to predict an individual's record at some future date. If a 
+prediction is important to the decision at hand (as in tenure decisions, for example) 
+then separate methods must first be used to obtain a predicted citation list to which 
+our index can then be applied. 11 
+Finally, it should be noted that our index is ordinal. Indeed, we would argue that 
+virtually all citation indices are ordinal because they do not provide decision mak-
+ers (administrators, tenure committees, funding committees, etc.) with information 
+such as individual A is "worth twice as much" as individual B. On the other hand, 
+citation indices can and do provide usefully interpretable ordinal information such 
+as " A is equivalent to an individual who receives twice as many citations as B on 
+every paper" (see Section IIA). It is up to decision makers to apply this interpreta-
+ble information to decide how much A should be paid relative to B, or how much 
+teaching A should be assigned relative to B, or how much funding A should receive </p>
+
+<p>6 The changes in rank that occur in the data often arise between individuals with similar initial h -indices. Such 
+reversals are then less likely to occur between two randomly chosen individuals. Of course recruitment targets are 
+not chosen at random. To the extent that departments tend to consider individuals of similar stature, and to the extent 
+that the h-index is positively correlated with stature, the frequency of reversals reported here is potentially quite 
+relevant in practice. 
+7 One might instead suggest rescaling the h -index itself since this will not affect the within-field ranking. But 
+unless one can justify why the h -index is preferable to an ordinally equivalent index, say h + √ </p>
+
+<p>_ </p>
+
+<p>h , this adjustment 
+too will lead to difficulties. See Section III. 
+8 We are certainly not the first to do so. See, e.g., Queseda (2011); Woeginger (2008a,b); Marchant (2009a,b); 
+and Chambers and Miller (2014). But in each of these cases, except Marchant (2009b), the stated goal is to provide 
+axioms for a preexisting citation index. As far as we are aware, the functional form that our axioms identify has not 
+been proposed for use as a citation index until now. 
+9 That is, we assign scores according to Kendall's (1938) rank correlation coefficient. 
+10 All of the indices in the family outscore the h -index. 
+11 We thank Glenn Ellison for helpful discussions on this point. </p>
+
+<p> 
+Perry and reny: How to count citations if you must 
+VoL. 106 no. 9 </p>
+
+<p>relative to B, etc. Given our ordinal perspective, we will have little to say about 
+assigning scores to scholarly journals (e.g., Palacios-Huerta and Volij 2004, 2014) 
+since such scores are typically used to translate publications from distinct journals 
+into a common cardinal currency. 
+The rest of the paper proceeds as follows. In Section I, we list the five proper-
+ties that characterize the Euclidean index. Section II contains the statement of our 
+main result as well as a brief discussion of the roles of each property. Section III 
+discusses the important issue of how to eliminate the well-recognized biases that 
+arise when comparing citation lists of individuals from different fields or subfields. 
+Understanding this issue is central to understanding why we introduce the property 
+that we call "scale invariance." Section IV provides the details of the two empirical 
+exercises described above. </p>
+
+<p>I. Five Properties for Citation Indices </p>
+
+<p>In this section, we present five properties that lead to a unique index. Unless 
+otherwise stated, these properties should be thought of as pertaining to citation lists 
+whose cited papers differ only in their number of citations but otherwise have com-
+mon characteristics, e.g., year of publication, field, number of authors, etc. Taking 
+into account differences in such characteristics is an important issue that is touched 
+upon in Section III. 
+Citation indices work as follows. First, an individual's record is summarized by a 
+finite list of numbers, typically ordered from highest to lowest, where the i th number 
+in the list is the number of citations received by the individual's i th most highly cited 
+paper. The list of citations is then operated upon by some index function to produce 
+the individual's index number. As already mentioned in the introduction (see also 
+Section III), one must sometimes rescale one individual's citation list to adequately 
+compare it to another individual's list. Consequently, one must be prepared to con-
+sider noninteger lists. We therefore take as our domain the set L consisting of all 
+finite nonincreasing sequences of nonnegative real numbers. Any element of L is 
+called a citation list. 12 
+A citation index is any continuous function, ι : L → ℝ, that assigns to each 
+citation list a real number. 13 Consider first the following four basic properties. A 
+discussion of them follows: </p>
+
+<p>(i) Monotonicity.-The index value of a citation list does not fall when a new </p>
+
+<p>paper with sufficiently many citations is added to the list. </p>
+
+<p>(ii) Independence.-The index's ranking of two citation lists does not change </p>
+
+<p>when a new paper is added to each list and each of the two new papers 
+receives the same number of citations. </p>
+
+<p>12 Implicit in the convention to list the numbers in decreasing order is that the index value would be the same 
+were the numbers listed in any other order. 
+13 Continuity means that for any citation list x , if a sequence of citation lists x 1 , x 2 , … each of whose length 
+is the same as the finite length of x, converges to x in the Euclidean sense, then ι( x 1 ), ι( x 2 ), … converges to ι(x). 
+The use of the Euclidean metric here is not important. Any equivalent metric, e.g., the taxicab metric, would do. </p>
+
+
+
+<p>THE AMERICAN ECONOMIC REVIEW 
+SEpTEMbER 2016 </p>
+
+<p>(iii) Depth Relevance.-It is not the case that, for every citation list, the index </p>
+
+<p>weakly increases when any paper in the list is split into two and its citations 
+are divided in any way between them. </p>
+
+<p>(iv) Scale Invariance.-The index's ranking of two citation lists does not change </p>
+
+<p>when each entry of each list is multiplied by any common positive scaling 
+factor. </p>
+
+<p>The first property, monotonicity, says that for each citation list there is a number 
+(which can depend on the list) such that the index does not fall if a new paper with </p>
+
+<p>at least that number of citations is added to the list. All indices that we are aware 
+of satisfy this property. In fact, all indices that we are aware of satisfy the stron-
+ger property that they weakly increase when any new paper is added, regardless of 
+how few citations it receives. In contrast, our less restrictive monotonicity property 
+allows (but does not require) the index to fall if a new but infrequently cited paper 
+is added. Note that monotonicity says nothing about the behavior of the index when 
+an existing paper receives additional citations. 
+The second property, independence, is natural given that our index is intended 
+to compare the records-as they currently stand-of any two individuals. 14 It says, 
+in particular, that a tie between two records cannot be broken by adding identical 
+papers to each record. The h -index fails to satisfy independence. For example, if 
+individual A has 10 papers with 10 citations each, and B has 5 papers with 15 cita-
+tions each, then A 's h -index is 10 and B 's is 5. But if they each produce 10 identical 
+new papers that receive 15 citations each, then A 's h -index is still 10, but B 's h -index 
+increases from 5 to 15 . Note that the independence property is agnostic about the 
+effect on the index of adding new papers. Independence allows that adding identi-
+cally cited papers to two records could separately increase or decrease the indices, 
+so long as the rankings are not reversed. 
+It is often suggested that a good index should encourage "quality over quantity," 
+i.e., encourage a smaller number of highly cited papers over a larger number of 
+infrequently cited papers. The third property, depth relevance, takes a very weak 
+stand on this important trade-off. It says that it should not be the case that for any 
+fixed number of citations, the index is maximized by spreading them as thinly as 
+possible across as many publications as possible. Depth relevance is satisfied by all 
+indices that we are aware of with the exception of the total citation count. 
+When distinct fields have significantly different average numbers of citations 
+per paper, citation lists must be rescaled in order to make meaningful cross-field 
+comparisons (see Section III). The fourth property, scale invariance, ensures that 
+the final ranking of the population is independent of whether the lists are scaled 
+down relative to the disadvantaged field or scaled up relative to the advantaged field. 
+Because the h -index is not scale invariant it can, as already observed in the introduc-
+tion, reverse the order of individuals in the same field when their lists are adjusted to 
+account for differences across fields (Section IV illustrates this with empirical data). </p>
+
+<p>14 Marchant (2009b) appears to be the first to apply this independence property to the bibliometric index 
+problem. </p>
+
+<p> 
+Perry and reny: How to count citations if you must 
+VoL. 106 no. 9 </p>
+
+<p>In addition to the four basic properties above, let us now introduce a fifth property 
+that we call "directional consistency." It is motivated as follows. 
+Consider two individuals with equally ranked citation lists who, over the next 
+year, each receive the same number of additional citations on their most cited paper, 
+and the same number but fewer additional citations on their second most cited paper, 
+etc. Suppose that at the end of the year their lists remain equally ranked. Directional 
+consistency requires that if their papers continue to accrue citations at those same 
+yearly rates, then their lists will continue to remain equally ranked year after year. 
+The formal statement is as follows: </p>
+
+<p>(v) Directional Consistency.-∀ x, y, d ∈ L, if ι(x) = ι(y) and ι(x + d) 
+= ι(y + d), then ι(x + λd) = ι(y + λd) for all λ &gt; 1. 15 </p>
+
+<p>Observe that each of properties (i)-(v) is ordinal in the sense that if an index 
+satisfies any one of the properties, then any monotone transformation of that index 
+also satisfies that property. The independence of properties (i)-(v) is established in 
+the next section following the statement of Theorem 1. </p>
+
+<p>II. The Euclidean Index </p>
+
+<p>Call two citation indices equivalent if one of them is a monotone transformation 
+of the other. We now state our main result, whose proof is in the Appendix. </p>
+
+<p>THEOREM 1: A citation index satisfies properties (i)-(v) if and only if it is equiva-
+lent to the index that assigns to any citation list, ( x 1 , … , x n ) , the number </p>
+
+<p>√ </p>
+
+<p>____ </p>
+
+<p>∑ </p>
+
+<p>i=1 </p>
+
+<p>n </p>
+
+<p>x i </p>
+
+<p>2 </p>
+
+<p>. </p>
+
+<p>Since this number is the Euclidean length of ( x 1 , … , x n ), we may call this index the 
+Euclidean index, and we denote it by ι E . </p>
+
+<p>It may be helpful to briefly discuss the roles of properties (i)-(v). Even though 
+we make no such assumption directly, properties (i)-(iv), together with continuity, 
+imply that the index strictly increases when any existing paper receives additional 
+citations. Independence then implies that the (continuous) index must be equivalent 
+to one that is additively separable (a direct application of Debreu 1960). The sym-
+metry built into the index (see footnote 12) implies that the summand in the addi-
+tively separable representation consists of a single common function, which must be 
+strictly increasing. Scale invariance then implies that the index must be equivalent </p>
+
+<p>to an index of the form ( ∑ i=1 </p>
+
+<p>n </p>
+
+<p>x i </p>
+
+<p>σ </p>
+
+<p>) </p>
+
+<p>1/σ for some σ &gt; 0, and depth relevance implies </p>
+
+<p>that σ &gt; 1. Thus, as Part I of the proof of Theorem 1 shows (see the Appendix), </p>
+
+<p>15 If, for example, x ∈ ℝ + </p>
+
+<p>n </p>
+
+<p>∩ L and d ∈ ℝ + </p>
+
+<p>m </p>
+
+<p>∩ L and n &lt; m, then x + d = ( x 1 + d 1 , … , x n + d n , d n+1 , … , d m ). </p>
+
+
+
+<p>THE AMERICAN ECONOMIC REVIEW 
+SEpTEMbER 2016 </p>
+
+<p>properties (i)-(iv) determine the index up to the single parameter σ &gt; 1 . Property 
+(v) pins σ down to the value σ = 2. 16 </p>
+
+<p>While the functional form ( ∑ i=1 </p>
+
+<p>n </p>
+
+<p>x i </p>
+
+<p>σ </p>
+
+<p>) </p>
+
+<p>1/σ is novel for citation indices, it has a long </p>
+
+<p>tradition in other areas. It is an l σ norm from classical mathematics, a constant elas-
+ticity of substitution (CES) utility function as derived in Burk (1936), an Atkinson 
+(1970) measure of income inequality, and a Foster, Greer, and Thorbecke (1984) </p>
+
+<p>poverty index. In addition, there are several well-known axiomatic characterizations 
+already in the literature, including Burk (1936), Roberts (1980), and Blackorby and 
+Donaldson (1982). The main ingredients of each of these characterizations include 
+assumptions of continuity, symmetry, independence, coordinate-wise monotonicity, 
+and scale invariance. In contrast, we do not impose any monotonicity conditions on 
+the coordinates of the index function. The monotonicity property specified here is 
+quite distinct from those in the literature because it refers to the effect of increasing 
+the dimension of the vector that is being evaluated. For example, the index func-
+tion ∑ i ( x i − 10) 3 is not an increasing function of any of its coordinates, yet it satis-
+fies our monotonicity property because adding a paper with more than 10 citations 
+increases the index. Relatedly, the literature cited above focuses on domains whose 
+dimension is fixed at a particular value of n (and it is often assumed that n ≥ 3) 
+whereas our analysis must include and patch together all possible dimensions 
+n ∈ { 1, 2, … }. Finally, we provide a novel condition that isolates the value σ = 2. 
+Properties (i)-(v) are independent. That is, no single property is implied by the 
+other four. This can be demonstrated by displaying, for each property, a citation 
+index that satisfies the other four properties but is not equivalent to the Euclidean 
+index identified in Theorem 1. Finding five such indices is not difficult. 17 </p>
+
+<p>A. Linear Homogeneity </p>
+
+<p>Of all the equivalent indices satisfying properties (i)-(v), only the Euclidean </p>
+
+<p>index ι E (x) = ( ∑ i x i 2 ) </p>
+
+<p>1/2 and its positive multiples are homogeneous of degree 1. </p>
+
+<p>This turns out to be convenient. 
+For example, suppose that the Euclidean index of x is twice that of y, 
+i.e., ι E (x) = 2 ι E (y). How might one describe how the two lists compare to one 
+another in terms that would be helpful to an administrator or someone outside the 
+field in question? The answer is that one could say that "list x is as good as the list 
+that has as many papers as in y, but receives twice as many citations on each of 
+them." 
+The reason that this statement is correct is that, by linear homogeneity, 
+2 ι E (y) = ι E (2y). Therefore, ι E (x) = 2 ι E (y) if and only if ι E (x) = ι E (2y), and </p>
+
+<p>16 It is interesting to note that properties (i)-(iv) alone imply that for any two lists x, y ∈ L ∩ ℝ n , if x 1 ≥ y 1 
+and x 1 + x 2 ≥ y 1 + y 2 and ⋯ x 1 + ⋯ + x n ≥ y 1 + ⋯ + y n , with at least one inequality strict, then the index 
+must rank x strictly above y. This follows directly from Hardy, Littlewood, and Pólya's (1934) well-known result on 
+second-order stochastic dominance since ∑ i=1 
+n x i 
+σ is an increasing and strictly convex function for any σ &gt; 1. Thus, </p>
+
+<p>some lists can be compared without appealing to property (v). 
+17 For example, ι = 1/n satisfies all properties but monotonicity; ι = max ( x 1 , … , x n ) satisfies all properties </p>
+
+<p>but independence; ι = ∑ i=1 
+n x i satisfies all properties but depth relevance; ι = ∑ i=1 
+n x i </p>
+
+<p>2 </p>
+
+<p>+ n satisfies all properties </p>
+
+<p>but scale invariance; and ι = ∑ i=1 
+n x i 
+3 satisfies all properties but directional consistency. In addition, the lexico-
+graphic order satisfies all properties but continuity. None of these indices is equivalent to the Euclidean index. </p>
+
+<p> 
+Perry and reny: How to count citations if you must 
+VoL. 106 no. 9 </p>
+
+<p>this last equality means precisely what is stated in the quotation marks in the previ-
+ous paragraph. 
+Thus, the Euclidean index, ι E , is particularly convenient because the ratio, λ, of 
+the Euclidean index of x to that of y tells us that "list x is as good as the list that has 
+as many papers as list y, but receives λ times as many citations on each of them." In 
+particular, if an individual's Euclidean index is twice that of the median Euclidean 
+index in his field, then the individual is equivalent to one who produces twice as 
+many citations per paper as the median researcher in his field. </p>
+
+<p>III. Why Rescale the Lists? </p>
+
+<p>Our justification for the scale invariance property rests on the claim that the 
+appropriate way to adjust for differences in fields is to divide each entry in an indi-
+vidual's citation list by the average number of citations in that individual's field. 
+We now support this claim by reviewing the work in this direction due to Radicchi, 
+Fortunato, and Castellano (2008). 18 
+In Figure 1, we reproduce Figure 1 in Radicchi, Fortunato, and Castellano (2008), 
+showing normalized (relative to the total number of citations) histograms of unad-
+justed citations received by papers published in 1999 within each of 5 fields out 
+of 20 considered. The main point of this figure is to show that the distributions 
+of unadjusted citations differ widely across fields. For example, in Developmental </p>
+
+<p>18 It should be noted that, for the most part, Radicchi, Fortunato, and Castellano hold fixed the year of publica-
+tion so that the age of the papers considered is the same. </p>
+
+<p>Number of citations c </p>
+
+<p>Percent of eld's papers with </p>
+
+<p>c citations </p>
+
+<p>10 −5 </p>
+
+<p>10 −4 </p>
+
+<p>10 −3 </p>
+
+<p>10 −2 </p>
+
+<p>10 −1 </p>
+
+<p>10 0 </p>
+
+<p>10 −6 </p>
+
+<p>Engineering, Aerospace c 0 = 5.65 
+Biology c 0 = 14.60 
+Astronomy &amp; Astrophysics c 0 = 23.77 
+Hematology c 0 = 30.61 
+Developmental biology c 0 = 38.67 </p>
+
+<p>10 0 
+10 1 
+10 2 
+10 3 </p>
+
+<p>Figure 1 </p>
+
+<p>Note: Histograms of raw citations across fields in 1999, where c 0 is the average number of cita-
+tions per paper published in 1999 in that field. </p>
+
+<p>Source: Radicchi, Fortunato, and Castellano (2008), Copyright (2008) National Academy of 
+Sciences, USA </p>
+
+
+
+<p>THE AMERICAN ECONOMIC REVIEW 
+SEpTEMbER 2016 </p>
+
+<p>Biology, a publication with 100 citations is 50 times more frequent than in Aerospace 
+Engineering. However, after adjusting each citation received by a year-1999 paper 
+by dividing it by the average number of citations of all the year-1999 papers in the 
+same field, the distinct histograms in Figure 1, remarkably, align to form a single 
+histogram, shown in Figure 2 (in both figures, the axes are on a logarithmic scale). 19 
+We encourage the reader to consult Radicchi, Fortunato, and Castellano (2008) 
+for details, but let us point out that several statistical methods are used there to ver-
+ify what seems perfectly clear from the figures, namely, that dividing by the aver-
+age number of citations per paper in one's field corrects for differences in citations 
+across fields in the very strong sense that, after the adjustment, the distributions of 
+citations are virtually identical across fields. 20 </p>
+
+<p>A. Why Not Rescale the Index Itself? </p>
+
+<p>Another way to adjust for differences in fields might be to adjust the index itself. 
+For example, a popular method for comparing h -indices across fields is to divide </p>
+
+<p>19 A consequence of this alignment is that the suggested adjustment is unique in the following sense. Restricting 
+to papers published in 1999, let c ̃ j denote the random variable describing the distribution of citations in field j, and 
+let c -j denote its expectation. The suggested adjustment is to divide any field j paper's number of citations, c, by c -j , 
+giving the adjusted entry c / c -j . If any increasing functions ϕ 1 , ϕ 2 , . . . align the distributions across fields-i.e., are 
+such that the adjusted random variables ϕ 1 ( c ̃ 1 ), ϕ 2 ( c ̃ 2 ), . . . all have the same distribution-then there is a common 
+increasing function f such that ϕ j (c) = f ( </p>
+
+<p>c </p>
+
+<p>__ 
+c -j ) </p>
+
+<p>for every j. 
+20 In Radicchi, Fortunato, and Castellano (2008), the common histogram in Figure 2 is estimated as being log 
+normal with variance 1.3 (the mean must be 1 because of the rescaling). </p>
+
+<p>Percent of eld's papers with </p>
+
+<p>c/c </p>
+
+<p>0 citations </p>
+
+<p>10 −5 </p>
+
+<p>10 −4 </p>
+
+<p>10 −3 </p>
+
+<p>10 −2 </p>
+
+<p>10 −1 </p>
+
+<p>10 0 </p>
+
+<p>Number of adjusted citations c/ </p>
+
+<p>10 −2 
+10 −1 
+10 0 
+10 1 
+10 2 </p>
+
+<p>Agricultural economics &amp; Policy 
+Allergy 
+Anesthesiology 
+Astronomy &amp; Astrophysics 
+Biology 
+Computer science, Cybernetics 
+Developmental biology 
+Engineering, Aerospace 
+Hematology 
+Mathematics 
+Microbiology 
+Neuroimaging 
+Physics, Nuclear 
+Tropical medicine </p>
+
+<p>c 0 </p>
+
+<p>Figure 2 </p>
+
+<p>Note: Histograms of adjusted citations across fields in 1999. </p>
+
+<p>Source: Radicchi, Fortunato, and Castellano (2008), Copyright (2008) National Academy of 
+Sciences, USA </p>
+
+<p> 
+Perry and reny: How to count citations if you must 
+VoL. 106 no. 9 </p>
+
+<p>each individual's h -index by the average h -index in his/her field. 21 This produces, 
+for each individual, an adjusted h -index, called the h s -index in the literature, that is 
+then used to compare any two individuals in the population, regardless of field. This 
+adjustment has the obvious but important property that it does not affect the ranking 
+of individuals within the same field. The following example shows, however, that 
+the final ranking of the population depends on the particular numerical representa-
+tion of the h -index that is employed. </p>
+
+<p>Example 1: There are two mathematicians, M 1 and M 2 , and two biologists, B 1 
+and B 2 , with each individual representing one-half of his field. Their h -indices are 2, 
+8, 7, and 27, respectively so that their ranking according to the raw h -index is </p>
+
+<p>(3.1) 
+M 1 ≺ B 1 ≺ M 2 ≺ B 2 , </p>
+
+<p>where ≺ means "is ranked worse than." To compare mathematicians to biol-
+ogists, let us divide each of the mathematician's indices by their field's average 
+( (2 + 8)/2 = 5) and divide each of the biologist's h -indices by their field's average 
+((7 + 27)/2 = 17). The resulting adjusted indices, h s , are respectively, 0.4, 1.6, </p>
+
+<p>0.41, and 1.58, producing the final adjusted ranking, </p>
+
+<p>(3.2) 
+M 1 ≺ B 1 ≺ B 2 ≺ M 2 . </p>
+
+<p>But suppose that instead of starting the exercise with the h -index, we start with 
+the monotonic transformation h  *  = h + √ </p>
+
+<p>_ </p>
+
+<p>h . The h  *  -indices of M 1 , M 2 , B 1 , and B 2 
+are, respectively, 2 + √ </p>
+
+<p>_ </p>
+
+<p>2 , 8 + √ </p>
+
+<p>_ </p>
+
+<p>8 , 7 + √ </p>
+
+<p>_ </p>
+
+<p>7 , and 27 + √ </p>
+
+<p>_ </p>
+
+<p>27 , i.e., 3.4, 10.8, 9.6, and 
+32.2, yielding the same ranking (3.1) as the ordinally equivalent h -index. 
+However, if for h  *  we follow the same procedure and divide each individual's 
+h  *  -index by the average h  *  in his/her field (i.e., divide the mathematicians' 
+h  *  -indices by 7.1 and divide the biologists' by 20.9), then the final adjusted ranking 
+becomes </p>
+
+<p>(3.3) 
+B 1 ≺ M 1 ≺ M 2 ≺ B 2 . </p>
+
+<p>Comparing (3.2) with (3.3), we see that the ranking of M 1 and B 1 and of M 2 
+and B 2 depend on which of the ordinally equivalent indices h or h  *  that one begins 
+with. 22 Absent a compelling argument for choosing one over the other, one must 
+conclude that this adjustment procedure is not well founded. </p>
+
+<p>21 This h -index adjustment is suggested by Kaur, Radicchi, and Menczer (2013) and it is used by the online citation 
+analysis tool <rs id="software-1" type="software">Scholarometer</rs> (<rs corresp="#software-1" type="url">http://scholarometer.indiana.edu</rs>), whose popularity for computing and comparing 
+the h -indices of scholars across disciplines seems to be growing. 
+22 Indeed, the ranking in (3.2) is impossible to obtain through any rescaling of the mathematicians' and the biol-
+ogists' h  *  indices because there is no λ &gt; 0 such that λ(2 + √ </p>
+
+<p>_ </p>
+
+<p>2 ) &lt; (7 + √ </p>
+
+<p>_ </p>
+
+<p>7 ) &lt; (27 + √ </p>
+
+<p>_ </p>
+
+<p>27 ) &lt; λ(8 + √ </p>
+
+<p>_ </p>
+
+<p>8 ). </p>
+
+
+
+<p>THE AMERICAN ECONOMIC REVIEW 
+SEpTEMbER 2016 </p>
+
+<p>IV. Two Empirical Exercises </p>
+
+<p>We conclude by providing the details of the two empirical exercises described 
+in the introduction. 23 In both exercises we rely on a dataset constructed by Glen 
+Ellison who graciously made it available to us. Ellison (2013, p. 68) describes his 
+data as follows: "The dataset includes citation records of almost all faculty at the 
+top 50 economics departments in the 1995 NRC ranking. Faculty lists were taken 
+from the departmental websites in the fall of 2011. Citation data for each economist 
+were collected from <rs type="software">Google Scholar</rs>. Economists were classified into one or more of 
+15 subfields primarily by mapping keywords appearing in descriptions of research 
+interests on departmental or individual websites. Slightly less than one-half of econ-
+omists are classified as working in a single field." 
+When one looks, even casually, at Ellison's citation data, one cannot help but 
+notice the large differences in the average numbers of citations across fields, from 
+a high of 108 per paper in international trade to a low of 30 per paper in economic 
+history. To correct for these differences when comparing scholars from different 
+fields, one must first rescale the individual citation lists, as explained in Section III, 
+by dividing each scholars' citations, paper by paper, by the average number of cita-
+tions in that paper's field. For scholars whose papers are in a single field, all citations 
+should be divided by the average number of citations in that field. 
+Our first exercise illustrates that use of the h -index can lead to serious practical 
+problems when efforts are made to correct for differences in fields of study because 
+rescaling has a nontrivial effect on the h -index's within-field rankings. In this exer-
+cise we restricted attention to individuals in Ellison's (2013) data who are classified 
+as working in a single field. For the 88 individuals who are classified as macroecon-
+omists, the average number of citations per paper is 97.9, while the average number 
+of citations per paper for the 64 IO economists is 55.17. Therefore, to adequately 
+compare macroeconomists to IO economists one must scale down the macroecono-
+mists' citation lists by a factor of (97.9)/(55.17) = 1.77. 
+Figure 3 shows that the h -index's within-field ranking of macroeconomists is 
+nontrivially affected by this rescaling. Each numbered space on the horizontal axis 
+corresponds to a macroeconomist, with space k denoting the macroeconomist with 
+the k th highest h -index before rescaling. The heights of the bars indicate either the 
+total number of ranking changes (lighter colored bars) or the number of strict rank-
+ing reversals (darker colored bars) experienced by each macroeconomist as a result 
+of rescaling. 
+For example, after rescaling all of the macroeconomists' lists, macroecono-
+mist number 47 experiences 8 within-field strict ranking reversals and a total of 13 
+within-field ranking changes. That is, there are 8 macroeconomists (the height of the 
+darker colored bar) who either have a strictly higher h -index than macroeconomist 
+47 before rescaling but a strictly lower h -index after or vice versa; and there are 5 
+additional macroeconomists (for a total of 13, the height of the lighter colored bar) 
+who either have the same h -index as macroeconomist 47 before rescaling but a dif-
+ferent h -index after or vice versa. </p>
+
+<p>23 We are very grateful to the editor and referees for encouraging us to include some empirical facts along with 
+our theoretical analysis. </p>
+
+<p> 
+Perry and reny: How to count citations if you must 
+VoL. 106 no. 9 </p>
+
+<p>While a number of macroeconomists experienced no ranking changes at all (e.g., 
+macroeconomist number 1 was top-ranked both before and after rescaling), 95 per-
+cent of the 88 macroeconomists experienced at least one pairwise change in their 
+h -index ranking as a result of rescaling, and 60 percent experienced at least one 
+strict pairwise ranking reversal. In contrast, the Euclidean index, being scale invari-
+ant, generates the same within-field ranking of macroeconomists before and after 
+rescaling. 
+Our second exercise is intended to provide an empirically relevant and reason-
+ably objective comparison between the Euclidean index and the h -index. Inspired 
+by Ellison (2013), and again using his data, we tested each index to see how well 
+its ranking of economists at the top 50 US universities matched the NRC's ranking 
+of the departments in which they are employed. To do this, we first rescaled the 
+citation lists of each economist by the average number of citations in his/her field 
+(with economic history as the numeraire). We then assigned a score to each index as </p>
+
+<p>follows. Starting from a score of zero, we increased an index's score by 1 whenever 
+its strict ranking of two economists agreed with the NRC's strict ranking of their 
+departments and we decreased an index's score by 1 otherwise, ignoring all ties. 
+Summing all the +1s and −1 s and then dividing by the total number of distinct 
+pairs of economists yields the index's score, a number between − 1 and +1 . That 
+is, we computed Kendall's (1938) rank correlation coefficient (or "tau coefficient") 
+between the ranking of economists according to each of the two indices' ( h -index 
+and Euclidean index) and the NRC's ranking of their departments. </p>
+
+<p>0 </p>
+
+<p>2 </p>
+
+<p>4 </p>
+
+<p>6 </p>
+
+<p>8 </p>
+
+<p>10 </p>
+
+<p>12 </p>
+
+<p>14 </p>
+
+<p>1 3 5 7 9 11 13 15 17 19 21 23 25 27 29 31 33 35 37 39 41 43 45 47 49 51 53 55 57 59 61 63 65 67 69 71 73 75 77 79 81 83 85 87 </p>
+
+<p>Number of ranking changes </p>
+
+<p>
+Number of strict ranking reversalss </p>
+
+
+
+<p>88 macroeconomists listed by their h-index rank before rescaling </p>
+
+<p>Figure 3. The h-Index Is Susceptible to Ranking Changes after Rescaling for Differences in Fields </p>
+
+
+
+<p>THE AMERICAN ECONOMIC REVIEW 
+SEpTEMbER 2016 </p>
+
+<p>The Euclidean index outscored the h -index in this test, producing a score of 
+0.1846 , over 14 percent higher than the h -index's score of 0.1614 . And both indices' 
+rankings of economists reject (with a p-value of 0.4 percent for the Euclidean index 
+and 2.6 percent for the h -index) the null hypothesis of mutual independence with 
+the NRC's ranking. 24 
+In addition to testing the Euclidean index against the h -index, we tested the 
+Euclidean index against a whole family of indices that nest the Euclidean index. 
+Specifically, we computed Kendall's rank correlation coefficient between the rank-</p>
+
+<p>ing of economists given by the " σ -index" ( ∑ i=1 </p>
+
+<p>n </p>
+
+<p>x i </p>
+
+<p>σ </p>
+
+<p>) </p>
+
+<p>1/σ with σ &gt; 1, and the NRC's </p>
+
+<p>ranking of their departments. We did this for all values of σ between 1 and 4. The 
+family of σ -indices with σ &gt; 1 is precisely the family of indices that satisfy prop-
+erties (i)-(iv) (see the discussion following Theorem 1 in Section II). </p>
+
+<p>Figure 4 (solid line) graphs the value of Kendall's correlation coefficient as 
+a function of σ. For comparison, we have also included in Figure 4 the value of 
+Kendall's coefficient achieved by the Euclidean index (dashed line) and the lower 
+value achieved by the h -index (dotted line). As is evident from the figure, for all val-
+ues of σ between 1 and 4, Kendall's coefficient for the σ -index is larger than that for 
+the h -index. Moreover, Kendall's coefficient achieves its maximum value of 0.1849 
+when σ = 1.85, a value of σ that is remarkably close to the value of σ = 2 that 
+defines the Euclidean index. Thus, the Euclidean index, in addition to outscoring the 
+h -index, outscores a whole family of indices satisfying properties (i)-(iv), namely 
+the family of σ -indices for values of σ &gt; 1 that are not too close to 1.85 . </p>
+
+<p>24 Under the null hypothesis of mutual independence between an index's ranking and the NRC's ranking, the 
+scores are (see Kendall 1938) well approximated by a normal distribution with mean zero and standard deviation 
+2/(3 √ </p>
+
+<p>_ </p>
+
+<p>n ) = 0.071 , where n = 88 is the number of economists who are classified as working in the single field 
+of macroeconomics. </p>
+
+<p>0.16 </p>
+
+<p>0.165 </p>
+
+<p>0.17 </p>
+
+<p>0.175 </p>
+
+<p>0.18 </p>
+
+<p>0.185 </p>
+
+<p>0.19 </p>
+
+<p>0 
+1 
+2 
+3 
+4 
+5 </p>
+
+<p>Euclidean index </p>
+
+<p>h-index </p>
+
+<p>Kendall's correlation coefficient </p>
+
+<p>σ-index </p>
+
+<p>σ </p>
+
+<p>Figure 4. The Euclidean Index Outperforms the h-Index in Matching Labor Market Data </p>
+
+<p> 
+Perry and reny: How to count citations if you must 
+VoL. 106 no. 9 </p>
+
+<p>Appendix </p>
+
+<p>PROOF OF THEOREM 1: 
+Since sufficiency is clear, we focus only on necessity. We separate the proof of 
+necessity into two parts. Part I imposes only properties (i)-(iv), and shows that 
+the index must be equivalent to ∑ i x i </p>
+
+<p>σ </p>
+
+<p>for some σ &gt; 1. Part II shows that for any 
+σ &gt; 1, the index ∑ i x i </p>
+
+<p>σ </p>
+
+<p>satisfies property (v) only if σ = 2. </p>
+
+<p>Part I: Suppose that the (continuous) citation index ι : L → ℝ satisfies properties 
+(i)-(iv). For every n, it will be convenient to extend ι from the set of nonin-</p>
+
+<p>creasing and nonnegative n -vectors to all of ℝ + </p>
+
+<p>n </p>
+
+<p>by defining, for any ( x 1 , … , x n ) 
+∈ ℝ + </p>
+
+<p>n </p>
+
+<p>, ι( x 1 , … , x n ) := ι( X 1 , X 2 , … , X n ), where X i is i th order statistic of x 1 , … , x n . 
+Thus, ι is now defined on the extended domain L  *  : = ∪ n ℝ + </p>
+
+<p>n </p>
+
+<p>in such a way that it is 
+symmetric; i.e., if x ∈ L  *  is a permutation of x′ ∈ L  *  , then ι(x) = ι(x′ ). Clearly, 
+the extended function ι satisfies the extensions to L  *  of properties (i)-(iv), and for 
+any n ≥ 1 its restriction to ℝ + </p>
+
+<p>n </p>
+
+<p>is continuous. We work with the extended index ι 
+from now on. 
+Let us first show that adding a paper with zero citations leaves the index 
+unchanged. Let z be any element of L  *  . We wish to show that ι(z) = ι(z, 0). By 
+depth relevance, there is a list ( x 1 , w) ∈ L  *  , where w may be the empty list, and 
+there are numbers y 1 , y 2 ≥ 0 with y 1 + y 2 = x 1 such that ι( x 1 , w) &gt; ι( y 1 , y 2 , w). 
+By independence, ι( x 1 ) &gt; ι( y 1 , y 2 ) and by scale invariance, ι(λ x 1 ) &gt; ι(λ y 1 , λ y 2 ) 
+for all λ &gt; 0. Taking the limit as λ → 0 + gives, by continuity, that ι(0) ≥ ι(0, 0). 
+Applying independence once gives ι(z, 0) ≥ ι(z, 0, 0) and applying it again gives 
+ι(z) ≥ ι(z, 0). For the reverse inequality note that by monotonicity, there is m &gt; 0 </p>
+
+<p>such that ι(m, 0) ≥ ι(0). By scale invariance, ι(λm, 0) ≥ ι(0) for all λ &gt; 0. 
+Taking the limit as λ → 0 + gives, by continuity, that ι(0, 0) ≥ ι(0). Then, by 
+independence, ι(z, 0, 0) ≥ ι(z, 0), and applying independence once more gives 
+ι(z, 0) ≥ ι(z), as desired. </p>
+
+<p>We next show that ι(1) &gt; ι(0). By monotonicity, there is m &gt; 0 such that 
+ι(m, 0) ≥ ι(0). Since by the previous paragraph ι(m, 0) = ι(m) , we have 
+ι(m) ≥ ι(0). Since m &gt; 0, scale invariance implies that ι(1) ≥ ι(0). It remains </p>
+
+<p>to show that ι(1) ≠ ι(0). Suppose, by way of contradiction, that ι(1) = ι(0). 
+Then, by scale invariance, ι( x 1 ) = ι(0) for all x 1 ≥ 0. Then for all x 2 ≥ 0, by 
+independence, ι( x 1 , x 2 ) = ι( x 2 , 0) = ι( x 2 ) = ι(0), where the second equal-
+ity follows from the previous paragraph. Continuing in this manner shows that 
+ι( x 1 , … , x n ) = ι(0) for all n and all x 1 , … , x n ≥ 0, contradicting depth relevance. </p>
+
+<p>We conclude that ι(1) &gt; ι(0). 
+We next show that, for every n ≥ 1, ι is strongly increasing on ℝ + </p>
+
+<p>n </p>
+
+<p>, i.e., </p>
+
+<p>(A1) 
+ι( x i ′ , x −i ) &gt; ι( x i , x −i ), ∀ x ∈ ℝ + </p>
+
+<p>n </p>
+
+<p>, ∀ i, and ∀ x i ′ &gt; x i . </p>
+
+<p>To establish (A1), it suffices to show, by independence, that x i ′ &gt; x i implies 
+ι( x i ′ ) &gt; ι( x i ); note that x i and x i ′ here are real numbers (e.g., x i is a list consist-</p>
+
+<p>ing of 1 paper with x i citations). By scale invariance, it then suffices to show that 
+ι(1) &gt; ι ( </p>
+
+<p>x i </p>
+
+<p>__ </p>
+
+<p>x i ′ ) . So, let λ = x i / x i ′ &lt; 1 and suppose, by way of contradiction, that </p>
+
+
+
+<p>THE AMERICAN ECONOMIC REVIEW 
+SEpTEMbER 2016 </p>
+
+<p>ι(λ) ≥ ι(1). Then λ &gt; 0 since ι(1) &gt; ι(0) as shown above. Hence, we may </p>
+
+<p>apply scale invariance to ι(λ) ≥ ι(1) using the scaling factor λ. Doing so k times 
+gives ι( λ k+1 ) ≥ ι( λ k ) ≥ ⋯ ≥ ι(λ) ≥ ι(1). Taking the limit as k → ∞ of 
+ι( λ k+1 ) ≥ ι(1) implies, because ι is continuous and λ &lt; 1 , that ι(0) ≥ ι(1). But </p>
+
+<p>this contradicts ι(1) &gt; ι(0) and so establishes (A1). 
+For any n ≥ 1, let ι n : ℝ + </p>
+
+<p>n </p>
+
+<p>→ ℝ be the restriction of ι to ℝ + </p>
+
+<p>n </p>
+
+<p>. For any subset I of 
+{ 1, … , n} and for any x ∈ ℝ + </p>
+
+<p>n </p>
+
+<p>let x I = ( x i ) i∈I and let I c = { 1, … , n}\I. 
+We next show that ι n satisfies Blackorby and Donaldson's (1982) "complete strict 
+separability" condition. 25 That is, ∀ x, x′, y ∈ ℝ + </p>
+
+<p>n </p>
+
+<p>and ∀ I ⊆ { 1, … , n}, </p>
+
+<p>(A2) 
+ι n ( x I , x I c ) ≥ ι n ( x I , y I c ) if and only if ι n ( x I ′ , x I c ) ≥ ι n ( x I ′ , y I c ). 26 </p>
+
+<p>To see that (A2) holds, note that ι n ( x I , x I c ) ≥ ι n ( x I , y I c ) if and only if ι( x I , x I c ) 
+≥ ι( x I , y I c ) if and only if ι( x I c ) ≥ ι( y I c ) if and only if ι( x I ′ , x I c ) ≥ ι( x I ′ , y I c ) if and </p>
+
+<p>only if ι n ( x I ′ , x I c ) ≥ ι n ( x I ′ , y I c ) as desired, where the second and third equivalences 
+follow from independence. 
+Because, for each n, the continuous and symmetric function ι n : ℝ + </p>
+
+<p>n </p>
+
+<p>→ ℝ satis-</p>
+
+<p>fies (A1), (A2) , and scale invariance, we may apply Theorem 2, part (i), in Blackorby 
+and Donaldson (1982) (see also Theorem 6 in Roberts 1980) to conclude that for 
+all n ≥ 3, there exist a n ∈ ℝ and a strictly increasing ϕ n : ℝ ++ → ℝ such that </p>
+
+<p>ι n (x) = ϕ n ( ( </p>
+
+<p>∑ </p>
+
+<p>i </p>
+
+<p>x i </p>
+
+<p>a n </p>
+
+<p>) </p>
+
+<p>1 </p>
+
+<p>__ </p>
+
+<p>a n </p>
+
+<p>) 
+, for all x ∈ ℝ ++ </p>
+
+<p>n </p>
+
+<p>, </p>
+
+<p>where we adopt the convention that ( ∑ i x i </p>
+
+<p>a n </p>
+
+<p>) </p>
+
+<p>1 </p>
+
+<p>__ </p>
+
+<p>a n := Π i x i if a n = 0. From this we </p>
+
+<p>may conclude that ι n is equivalent to ( ∑ i x i </p>
+
+<p>a n </p>
+
+<p>) </p>
+
+<p>1 </p>
+
+<p>__ </p>
+
+<p>a n on the strictly positive orthant ℝ ++ </p>
+
+<p>n </p>
+
+<p>. 
+We claim that a n &gt; 0. Indeed, let w(α) = (1, … , 1, α) ∈ ℝ + </p>
+
+<p>n </p>
+
+<p>and suppose </p>
+
+<p>first that a n &lt; 0. Then lim α→ 0 + ( ∑ i ( w i (α)) a n ) </p>
+
+<p>1 </p>
+
+<p>__ </p>
+
+<p>a n </p>
+
+<p>= 0. Consequently, because </p>
+
+<p>the functional form of ι n above implies that ι n (1, 0, … , 0) ≤ ι n (w(α)), we </p>
+
+<p>have </p>
+
+<p>ι n (1, 0, … , 0) ≤ lim α→ 0 + ι n (w(α)) = lim α→ 0 + ϕ n ( ( ∑ i ( w i (α)) a n ) </p>
+
+<p>1 </p>
+
+<p>__ </p>
+
+<p>a n </p>
+
+<p>) &lt; </p>
+
+<p>ϕ n (λ n </p>
+
+<p>1 </p>
+
+<p>_ </p>
+
+<p>a n ) = ι n (λ 1 n ) holds for any λ &gt; 0, where the strict inequality follows </p>
+
+<p>because ϕ n is strictly increasing and lim α→ 0 + ( ∑ i ( w i (α)) a n ) </p>
+
+<p>1 </p>
+
+<p>__ </p>
+
+<p>a n </p>
+
+<p>= 0 &lt; λ n </p>
+
+<p>1 </p>
+
+<p>__ </p>
+
+<p>a n . 
+Hence, ι n (1, 0, … , 0) ≤ lim λ→ 0 + ι n (λ 1 n ) = ι n (0, … , 0), which contradicts (A1). 
+A similar argument holds for a n = 0. 
+Hence, for every n ≥ 3, a n is strictly positive and ι n is equivalent to ∑ i=1 </p>
+
+<p>n </p>
+
+<p>x i </p>
+
+<p>a n </p>
+
+<p>on ℝ ++ </p>
+
+<p>n </p>
+
+<p>. But since both ι n and ∑ i=1 </p>
+
+<p>n </p>
+
+<p>x i </p>
+
+<p>a n </p>
+
+<p>are continuous on ℝ + </p>
+
+<p>n </p>
+
+<p>we may conclude 
+that ι n is equivalent to ∑ i=1 </p>
+
+<p>n </p>
+
+<p>x i </p>
+
+<p>a n </p>
+
+<p>on ℝ + </p>
+
+<p>n </p>
+
+<p>. And because adding a paper with zero 
+citations does not change the value of the index, we may further conclude that 
+a n = a n+1 for all n ≥ 3. </p>
+
+<p>25 Or, equivalently, Debreu's (1960) " factor-independence" condition. 
+26 Where, e.g., x I = ( x i ) i∈I . </p>
+
+<p> 
+Perry and reny: How to count citations if you must 
+VoL. 106 no. 9 </p>
+
+<p>Thus, we have so far shown that there exists σ &gt; 0 such that, for any n ≥ 3 
+and for any lists x, y ∈ ℝ + </p>
+
+<p>n </p>
+
+<p>of the same length n, ι n (x) ≥ ι n (y) if and only 
+if ∑ i=1 </p>
+
+<p>n </p>
+
+<p>x i </p>
+
+<p>σ </p>
+
+<p>≥ ∑ i=1 </p>
+
+<p>n </p>
+
+<p>y i </p>
+
+<p>σ </p>
+
+<p>. We must also characterize the index when comparing lists 
+whose common length is less than 3, and when comparing lists of different lengths. 
+But such comparisons can be made by first adding zeros to the two lists to be com-
+pared so that the lengths of the resulting lists are equal and at least 3. Since adding 
+zeros does not affect the value of the index the correct comparison can now be 
+obtained by applying to the lengthened lists the function ∑ i x i </p>
+
+<p>σ </p>
+
+<p>. Hence, we may con-
+clude that ι is equivalent to the index that assigns to any citation list ( x 1 , … , x n ) ∈ L  *  
+of any length n the number ∑ i=1 </p>
+
+<p>n </p>
+
+<p>x i </p>
+
+<p>σ </p>
+
+<p>. 
+It remains only to show that σ &gt; 1 . But this follows from depth relevance 
+because 0 &lt; σ ≤ 1 implies ( x 1 </p>
+
+<p>σ </p>
+
+<p>+ x 2 </p>
+
+<p>σ </p>
+
+<p>) ≥ ( x 1 + x 2 ) σ ∀ x 1 , x 2 ≥ 0, which implies 
+( x 1 </p>
+
+<p>σ </p>
+
+<p>+ x 2 </p>
+
+<p>σ </p>
+
+<p>) + ∑ i z i </p>
+
+<p>σ </p>
+
+<p>≥ ( x 1 + x 2 ) σ + ∑ i z i </p>
+
+<p>σ </p>
+
+<p>for all nonnegative z = ( z 1 , … , z n ), 
+which implies ι( x 1 , x 2 , z) ≥ ι( x 1 + x 2 , z), and so depth relevance fails. 27 This com-
+pletes part I of the proof. </p>
+
+<p>Part II: We must show that if σ &gt; 1 and ι(x) = ∑ i x i </p>
+
+<p>σ </p>
+
+<p>satisfies property (v), 
+then σ = 2. In fact, we will show the even stronger result that if σ &gt; 1 and ∑ i x i </p>
+
+<p>σ </p>
+
+<p>satisfies property (v) for lists of length 2 then σ = 2. So, from now on we restrict 
+attention to lists of length 2, i.e., to vectors in L ∩ ℝ + </p>
+
+<p>2 </p>
+
+<p>. 
+Let x = ( (1 / 2) 1/σ , (1 / 2) 1/σ ) and let y = (1, 0). Then, </p>
+
+<p>ι(x) = ι(y) = 1 . </p>
+
+<p>By Lemma A1 below, there exists d 1 &gt; 1 such that </p>
+
+<p>(A3) 
+((1/2 ) 1/σ + d 1 ) σ + ((1/2 ) 1/σ + 1) σ = (1 + d 1 ) σ + 1. </p>
+
+<p>Since d 1 &gt; 1, the vector ( d 1 , 1) is in L ∩ ℝ + </p>
+
+<p>2 </p>
+
+<p>. Letting d = ( d 1 , 1) , (A3) says 
+that </p>
+
+<p>ι(x + d) = ι(y + d). </p>
+
+<p>Therefore, by property (v), we must have </p>
+
+<p>ι(x + λd) = ι(y + λd) ∀ λ &gt; 1. </p>
+
+<p>That is, </p>
+
+<p>((1/2 ) 1/σ + λ d 1 ) σ + ((1/2 ) 1/σ + λ ) σ = (1 + λ d 1 ) σ + λ σ , ∀ λ &gt; 1. </p>
+
+<p>Dividing this equality by λ σ , letting α = (1/2) 1/σ , and letting β = 1/λ gives </p>
+
+<p>(A4) 
+(βα + d 1 ) σ + (βα + 1) σ = (β + d 1 ) σ + 1, ∀ β ∈ (0, 1). </p>
+
+<p>27 For σ ∈ (0, 1 ] , the function ( x 1 </p>
+
+<p>σ </p>
+
+<p>+ x 2 </p>
+
+<p>σ </p>
+
+<p>) − ( x 1 + x 2 ) σ has nonnegative partial derivatives when x 1 , x 2 &gt; 0 and </p>
+
+<p>so it achieves a minimum value of 0 on ℝ + 
+2 at, for example, x 1 = x 2 = 0. </p>
+
+
+
+<p>THE AMERICAN ECONOMIC REVIEW 
+SEpTEMbER 2016 </p>
+
+<p>Assume, by way of contradiction, that σ is not a positive integer. Then, for any 
+integer k = 1, 2, 3, … we may differentiate (A4) k times with respect to β and take 
+the limit of the resulting equality as β → 0 giving , </p>
+
+<p>(A5) 
+α k ( d 1 ) σ−k + α k = ( d 1 ) σ−k . </p>
+
+<p>Solving for d 1 gives </p>
+
+<p>(A6) 
+d 1 = ( 
+α k </p>
+
+<p>_ </p>
+
+<p>1 − α k ) </p>
+
+<p>1 </p>
+
+<p>____ </p>
+
+<p>σ−k </p>
+
+<p>= ( 2 k/σ − 1 ) </p>
+
+<p>1 </p>
+
+<p>____ </p>
+
+<p>k−σ </p>
+
+<p>, </p>
+
+<p>where the second equality uses the definition α = (1/2) 1/σ . 
+Since (A6) holds for every k = 1, 2, 3, … it must also hold in the limit as 
+k → ∞. We claim that </p>
+
+<p>(A7) 
+lim </p>
+
+<p>k→∞ </p>
+
+<p>( 2 k/σ − 1 ) </p>
+
+<p>1 </p>
+
+<p>____ </p>
+
+<p>k−σ </p>
+
+<p>= 2 1/σ . </p>
+
+<p>To see this, replace k with the continuous variable z ∈ (1, ∞) and take the limit of 
+the log of the expression of interest. This gives </p>
+
+<p>lim </p>
+
+<p>z→∞ </p>
+
+<p>log ( 2 z/σ − 1 ) </p>
+
+<p>1 </p>
+
+<p>____ </p>
+
+<p>z−σ </p>
+
+<p>= lim </p>
+
+<p>z→∞ </p>
+
+<p>log ( 2 z/σ − 1 ) </p>
+
+<p>_ </p>
+
+<p>z − σ </p>
+
+<p>= lim </p>
+
+<p>z→∞ </p>
+
+<p>( 2 z/σ − 1 ) 
+−1 2 z/σ log ( 2 1/σ 
+) </p>
+
+<p>____________________ </p>
+
+<p>1 </p>
+
+<p>= log ( 2 1/σ 
+) , </p>
+
+<p>where the second equality follows by l'Hôpital's rule This proves (A7). 
+Since, (A6) must hold, in particular, for k = 1, and also in the limit, we must 
+have </p>
+
+<p>2 1/σ = ( 2 1/σ − 1 ) </p>
+
+<p>1 </p>
+
+<p>____ </p>
+
+<p>1−σ </p>
+
+<p>. </p>
+
+<p>Raising both sides to the power 1 − σ gives </p>
+
+<p>2 (1−σ)/σ = 2 1/σ − 1. </p>
+
+<p>Since the left-hand side is (1/2) ( 2 1/σ ), we obtain </p>
+
+<p>(1/2)( 2 1/σ ) = 1, </p>
+
+<p> 
+Perry and reny: How to count citations if you must 
+VoL. 106 no. 9 </p>
+
+<p>or, equivalently, </p>
+
+<p>2 1/σ = 2. </p>
+
+<p>But this last equality implies that σ = 1, which is a contradiction since σ &gt; 1 . 
+Hence, σ must be an integer greater than 1. 
+Next, assume by way of contradiction, that σ ≠ 2, i.e., that σ is an integer 
+greater than 2. Since (A6) is valid for all k = 1, … , σ − 1, it is valid, in particular 
+for k = σ − 1 and k = σ − 2 ≥ 1. Hence, </p>
+
+<p>( 2 (σ−1)/σ − 1 ) </p>
+
+<p>1 </p>
+
+<p>_______ </p>
+
+<p>(σ−1)−σ </p>
+
+<p>= ( 2 (σ−2)/σ − 1 ) </p>
+
+<p>1 </p>
+
+<p>_______ </p>
+
+<p>(σ−2)−σ , </p>
+
+<p>which is equivalent to </p>
+
+<p>(2( 2 −1/σ ) − 1) </p>
+
+<p>−1 </p>
+
+<p>= (2( 2 −2/σ ) − 1) 
+−1/2 , </p>
+
+<p>which, after cross-multiplying and squaring, is equivalent to </p>
+
+<p>2( 2 −2/σ ) − 1 = (2( 2 −1/σ ) − 1) </p>
+
+<p>2 </p>
+
+<p>= 4( 2 −2/σ ) − 4( 2 −1/σ ) + 1. </p>
+
+<p>Gathering terms, this is equivalent to </p>
+
+<p>0 = 2( 2 −2/σ ) − 4( 2 −1/σ ) + 2 </p>
+
+<p>= 2 ( 2 −1/σ − 1) 
+2 , </p>
+
+<p>which is a contradiction, because the last expression on the right-hand side is posi-
+tive for all finite values of σ &gt; 1. We conclude that σ = 2. ∎ </p>
+
+<p>LEMMA A1: There exists d 1 &gt; 1 that solves (A3). </p>
+
+<p>PROOF: 
+Since the functions in (A3) are continuous, it suffices to show: (i) when d 1 = 1 
+in (A3), the left-hand side is larger than the right-hand side; and (ii) the right-hand 
+side of (A3) is larger than the left-hand side for all d 1 sufficiently large. 
+Starting with (i), set d 1 = 1 in (A3). We wish to show that </p>
+
+<p>(A8) 
+2((1/2 ) 1/σ + 1 ) σ &gt; 2 σ + 1. </p>
+
+
+
+<p>THE AMERICAN ECONOMIC REVIEW 
+SEpTEMbER 2016 </p>
+
+<p>The left-hand side of (A8) is equal to (1 + 2 1/σ ) </p>
+
+<p>σ </p>
+
+<p>. Taking the σ th root of both sides, 
+we see that (A8) holds if and only if, </p>
+
+<p>1 + 2 1/σ &gt; ( 2 σ + 1) 1/σ , </p>
+
+<p>which can be rewritten as </p>
+
+<p>( 1 σ + 0 σ ) 1/σ + ( 1 σ + 1 σ ) 1/σ &gt; ( 2 σ + 1 σ ) 1/σ . </p>
+
+<p>But this last strict inequality holds by the Minkowski inequality for the vectors (1, 0), </p>
+
+<p>(1, 1) , and (2, 1) under the l p norm ‖( a 1 , a 2 )‖ p = ( a 1 </p>
+
+<p>p </p>
+
+<p>+ a 2 </p>
+
+<p>p </p>
+
+<p>) 1/p with p = σ &gt; 1, </p>
+
+<p>because (1, 0) and (1, 1) are not proportional. 28 This establishes (A8) and therefore 
+(i). We now turn to (ii). </p>
+
+<p>Let α = (1/2) 1/σ . It suffices to show that </p>
+
+<p>lim </p>
+
+<p>w→∞ </p>
+
+<p>[ (1 + w) σ − (α + w) σ ] = +∞ . </p>
+
+<p>We can establish this limit as follows: </p>
+
+<p>lim </p>
+
+<p>w→∞ </p>
+
+<p>[ (1 + w) σ − (α + w) σ ] = lim </p>
+
+<p>r→ 0 + [ ( 1 + 1 </p>
+
+<p>_ </p>
+
+<p>r ) 
+σ − ( α + 1 </p>
+
+<p>_ </p>
+
+<p>r ) </p>
+
+<p>σ </p>
+
+<p>] </p>
+
+<p>= lim </p>
+
+<p>r→ 0 + </p>
+
+<p>[ (r + 1) σ − (αr + 1) σ ] </p>
+
+<p>__________________ </p>
+
+<p>r σ </p>
+
+<p>= lim </p>
+
+<p>r→ 0 + </p>
+
+<p>[ (r + 1) σ−1 − α (αr + 1) σ−1 
+] </p>
+
+<p>______________________ </p>
+
+<p>r σ−1 </p>
+
+<p>= + ∞, </p>
+
+<p>where the third equality follows by l'Hôpital's rule because σ &gt; 0, and the fourth 
+since the numerator of the third line tends to 1 − α &gt; 0 and the denominator tends 
+to 0 from the right because σ &gt; 1 . This proves (ii). ∎ </p>
+
+
+
+<p>28 We thank Sergiu Hart for this Minkowski inequality argument. </p>
+
+<p> 
+Perry and reny: How to count citations if you must 
+VoL. 106 no. 9 </p>
+
+
+
+<p>This article has been cited by: </p>
+
+<p>1. Daniel S. Hamermesh. 2018. Citations In Economics: Measurement, Uses, and Impacts. Journal of 
+Economic Literature 56:1, 115-156. [Abstract] [View PDF article] [PDF with links] </p>
+
+</text></tei>

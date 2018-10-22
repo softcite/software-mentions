@@ -1,0 +1,2632 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.3846%2Fjbem.2010.30" /><encodingDesc><appInfo><application version="0.5.2-SNAPSHOT" ident="GROBID" when="2018-10-20T01:04+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>Abstract. This paper proposes a fuzzy multi-period newsvendor model with pre-season 
+extension for innovative products. The demand of the product is represented by fuzzy 
+numbers with triangular membership function. The holding and shortage cost parameters 
+are considered as imprecise and also represented by triangular fuzzy numbers. As the sell-
+ing season draws closer, suppliers lead times shortens and thus production costs increase. 
+In contrast, caused by the oncoming selling season, demand fuzziness decreases and more 
+accurate demand forecasts can be maintained that lead to lower overage/underage costs. 
+The objective of the model is to find the best order period and the best order quantity that 
+will minimize the fuzzy expected total cost. The model is experimented with an illustra-
+tive example and supported by sensitivity analyses. 
+In today's competitive market conditions, development of innovative products is ex-
+tremely important for an enterprise to achieve and sustain the superiority. Innovative 
+products are products that have shorter life cycles with higher innovation and fashion 
+contents (Lee 2002). Fashion goods, electronic products and mass customized goods 
+are examples of innovative products. Although innovative products tend to have higher 
+product profit margins, the cost of obsolescence is high for them. These kinds of prod-</p>
+
+<p>ucts have much product variety and short product life cycles. Caused by the innovative 
+nature of the product, usually no historical data are available for forecasting demand 
+of such products. In addition to the short life cycle and high demand unpredictability 
+of these products, another important feature is the long supply lead times. Because of 
+having such long supply lead times and short sales seasons, procurement problem of 
+these products corresponds to the single-period inventory (also known as newsvendor 
+or newsboy) problem. </p>
+
+
+
+<p>The single-period inventory problem (SPP) deals with finding product's order quantity 
+that minimizes the expected total cost or maximizes the expected total profit under linear </p>
+
+<p>purchasing, holding, and shortage costs and probabilistic demand. In SPP, product or-
+ders are given before the selling period begins. There is no option for an additional order 
+during the selling period or there will be a penalty cost for this re-order. The assumption 
+of the SPP is that if any inventory remains at the end of the period, either a discount is 
+used to sell it or it is disposed of (Nahmias 1996). If the order quantity is smaller than 
+the realized demand, the seller misses some profit. An extensive literature review on </p>
+
+<p>a variety of extensions of the single-period inventory problem and related multi-stage, 
+inventory control models can be found Khouja (1999) and Silver et al. (1998). Most 
+of the extensions have been made in the probabilistic framework, in which the uncer-
+tainty of demand is described by probability distributions. However, the methods based 
+on the probability theory allow only quantitative uncertainties. For instance, Kopytov 
+et al. (2006) developed a stochastic single-product inventory control model for the 
+chain "producer -wholesaler -customer" for transport and industrial companies. The 
+optimization criterion is the minimum of average expenses for goods holding, ordering 
+and losses from deficit per a time unit. </p>
+
+<p>In reality, most of the evaluations are imprecise, fuzzy and cannot be quantified. The 
+fuzzy set theory, introduced by Zadeh (1965), is the best form that adapts all the un-</p>
+
+<p>certainty set to the model. When subjective evaluations are considered, the possibility 
+theory takes the place of the probability theory (Zadeh 1978). The fuzzy set theory can </p>
+
+<p>represent linguistic data which cannot be easily modeled by other methods (Dubois and 
+Prade 1980). </p>
+
+<p>In the literature, fuzzy modeling is used for single-period inventory problems by sev-
+eral researchers. Ishii and Konno (1998) introduced a fuzzy newsboy model restricted 
+to shortage cost that is given by an L-shape fuzzy number while the demand is still 
+stochastic. Thus the total expected profit function also becomes a fuzzy number and an 
+optimum order quantity is obtained in the sense of fuzzy max (min) order of the profit </p>
+
+<p>function. Petrovic et al. (1996) developed two fuzzy models to handle uncertainty in 
+the SPP. In the first model, uncertain demand is represented by a discrete fuzzy set but </p>
+
+<p>the inventory costs thought as precise and in the second model inventory costs also 
+described as triangular fuzzy numbers. In the paper the concept of level-2 fuzzy set 
+and the method of arithmetic defuzzification are employed to access an optimum order </p>
+
+<p>quantity. Li et al. (2002) studied the single-period inventory problem in two differ-
+ent cases to maximize the profit through ordering fuzzy numbers with respect to their </p>
+
+<p>total integral values. In order to minimize the fuzzy total cost, Kao and Hsu (2002) 
+constructed a single-period inventory model. They adopted a method for ranking fuzzy 
+numbers to find the optimum order quantity in terms of the cost. In their first study, </p>
+
+<p>Dutta et al. (2005) presented a SPP in an imprecise and uncertain mixed environment. 
+They introduced demand as a fuzzy random variable and developed a new methodology 
+to determine the optimum order quantity where the optimum is achieved using a graded </p>
+
+<p>H. Behret, C. Kahraman. A multi-period newsvendor problem with pre-season extension under fuzzy demand </p>
+
+<p>615 </p>
+
+<p>mean integration representation. In their second study, Dutta et al. (2007) proposed 
+a single-period inventory model of profit maximization with a reordering strategy in </p>
+
+<p>an imprecise environment. They divided the entire ordering period into two slots and 
+considered the customer demand as a fuzzy number in both slots. They represented a 
+solution procedure using ordering of fuzzy numbers with respect to their possibilistic 
+mean values. Ji and Shao (2006) extended SPP in bi-level context, where the decision 
+of retailer (lower level) was considered separate from this of the "manufacturer" (upper 
+level). In another study Shao and Ji (2006) extended SPP in multi-product case with 
+fuzzy demands under budget constraint. In both studies they adopt credibility theory 
+and used chance-constrained programming. They solved their models by a hybrid in-
+telligent algorithm based on genetic algorithm and developed a fuzzy simulation. Lu 
+(2008) studied a fuzzy newsvendor problem to analyze optimum order policy based on 
+probabilistic fuzzy sets with hybrid data. They verified that the fuzzy newsvendor model 
+is one extension of the crisp models. Xu and Zhai (2008) proposed a fuzzy model to 
+find an optimal technique for dealing with the fuzziness aspect of demand uncertainties. </p>
+
+<p>They used a triangular fuzzy number to model the external demand, and they developer 
+optimal decision models for both an independent retailer and an integrated supply chain. 
+In their more recent study, Xu and Zhai (2010) considered a two-stage supply chain </p>
+
+<p>coordination problem and focused on the fuzziness aspect of demand uncertainty. They 
+used fuzzy numbers to depict customer demand, and investigated the optimization of 
+the vertically integrated two-stage supply chain under perfect coordination and contrast 
+with the non-coordination case. </p>
+
+<p>Most of the papers mentioned above proposed single-period inventory models with only 
+fuzzy environment extensions. Through this paper, we combine two extensions to SPP 
+which are; an extension to fuzzy environment and an extension to models with more </p>
+
+<p>than one period to prepare for the selling season. The idea behind the second extension 
+is that there may be many periods to produce or purchase the items which will be sold 
+in a single season. The question becomes when and what orders should be placed from 
+the suppliers as the selling season draws closer. Related references about this extension 
+can be found in Silver et al. (1998). However, these papers consider only the probabil-
+istic demand cases. In this study, a multi-period newsvendor problem with pre-season 
+extension under fuzzy demand is analyzed. As the selling season draws closer, suppliers 
+lead times shortens and the production cost increases. In contrast, demand fuzziness 
+decreases and more accurate demand forecasts can be maintained that lead to lower 
+overage/underage costs. The purpose of this study is to find the best order period and </p>
+
+<p>best order quantity for the single-period inventory problem with multi-period pre-season 
+extension under fuzzy demand. </p>
+
+<p>The remainder of the paper is organized as follows. The single-period inventory prob-
+lem is subjected in Section 2. In Section 3, a fuzzy model with multi-period pre-season </p>
+
+<p>extension is described. A numerical illustration of the presented model is issued and 
+sensitivity analyses over cost parameters are presented. Lastly the paper is concluded 
+in Section 4. </p>
+
+<p>Journal of Business Economics and Management, 2010, 11(4): 613-629 </p>
+
+<p>616 </p>
+
+<p>2. Single-period inventory problem </p>
+
+<p>The objective of the stochastic single-period inventory problem is to determine the order 
+quantity Q* for a fixed time period that will minimize the expected total cost. The total 
+cost is the linear sum of purchase, overage, and underage costs. It is assumed that there 
+is no initial inventory on hand. Demand is a random variable and represented by prob-
+ability distributions. Items are purchased (or produced) for a single-period at the cost 
+of c p . The holding cost which is the cost of storing excess products minus their salvage 
+value is c h and the shortage cost which is the cost of lost sales due to the inability to 
+supply the demand is c s . The total cost function will be as follows: </p>
+
+<p>( 
+) 
+( 
+) </p>
+
+<p>{ 
+} </p>
+
+<p>( 
+) </p>
+
+<p>{ 
+} </p>
+
+<p>, 
+max 
+, 0 
+max 
+, 0 , </p>
+
+<p>p 
+h 
+s </p>
+
+<p>TC Q X 
+c Q c 
+Q X 
+c 
+X Q 
+= + 
+− 
++ 
+− 
+(1) </p>
+
+<p>where Q represents order quantity and X stands for the demand given by the domain </p>
+
+<p>{ 
+} </p>
+
+<p>0 1 2 </p>
+
+<p>, , ,..., n 
+X 
+x x x 
+x 
+= 
+. If demand has a probability distribution function </p>
+
+<p>( ) </p>
+
+<p>X 
+i </p>
+
+<p>p x , than 
+the total expected cost function will be: </p>
+
+<p>( 
+) </p>
+
+<p>( ) ( ) 
+( 
+) </p>
+
+<p>{ 
+} </p>
+
+<p>( 
+) </p>
+
+<p>{ 
+} ( ) </p>
+
+<p>0 </p>
+
+<p>0 </p>
+
+<p>, 
+, 
+= </p>
+
+<p>max 
+, 0 
+max 
+, 0 
+, </p>
+
+<p>= </p>
+
+<p>= </p>
+
+<p>= 
+ 
+ 
+ 
+ 
+ 
+ 
++ 
+− 
++ 
+− 
+ 
+ </p>
+
+<p>∑ 
+∑ </p>
+
+<p>n 
+i 
+i 
+i 
+n 
+p 
+h 
+i 
+s 
+i 
+i 
+i </p>
+
+<p>E TC Q X 
+TC Q x p x </p>
+
+<p>c Q 
+c 
+Q x 
+c 
+x Q 
+p x 
+(2) </p>
+
+<p>( 
+) </p>
+
+<p>0,1, 2,..., 
+= 
+i 
+n </p>
+
+<p>which is equal to: </p>
+
+<p>( 
+) </p>
+
+<p>( 
+) ( ) 
+( 
+) ( ) </p>
+
+<p>1 
+0 </p>
+
+<p>, 
+. </p>
+
+<p>Q 
+n 
+p 
+h 
+i 
+i 
+s i 
+i 
+i 
+i Q </p>
+
+<p>E TC Q X 
+c Q 
+c Q x p x 
+c x Q p x </p>
+
+<p>− 
+= = </p>
+
+<p> 
+ 
+ 
+ 
+= + 
+− 
++ 
+− 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ </p>
+
+<p>∑ 
+∑ </p>
+
+<p>(3) </p>
+
+<p>Let </p>
+
+<p>( 
+) 
+( 
+) 
+( 
+) </p>
+
+<p>, 
+1, 
+, 
+. 
+E TC Q X 
+E TC Q 
+X 
+E TC Q X 
+∆ 
+= 
++ 
+− 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(4) </p>
+
+<p>Then, </p>
+
+<p>( 
+) </p>
+
+<p>, 
+E TC Q X 
+∆  
+ 
+ 
+ is the change in expected total cost when we switch from Q 
+to Q + 1. For a convex cost function, the optimum Q will be the lowest Q where </p>
+
+<p>( 
+) </p>
+
+<p>, 
+E TC Q X 
+∆  
+ 
+ 
+ is greater than zero. Therefore, we select the smallest Q for which, </p>
+
+<p>( 
+) </p>
+
+<p>, 
+0. 
+E TC Q X 
+∆ 
+≥ 
+ 
+ 
+ 
+ 
+(5) </p>
+
+<p>The equation above holds if </p>
+
+<p>( 
+) 
+( 
+) </p>
+
+<p>1, 
+, 
+0. 
+E TC Q 
+X 
+E TC Q X 
++ 
+− 
+≥ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(6) </p>
+
+<p>Substituting Equation 3 into Equation 6 leads to: </p>
+
+<p>( 
+) </p>
+
+<p>( 
+) ( ) 
+( 
+) ( ) </p>
+
+<p>( ) </p>
+
+<p>( 
+) ( ) 
+( 
+) ( ) 
+( ) 
+( ) </p>
+
+<p>0 
+1 
+1 
+0 </p>
+
+<p>0 
+1 </p>
+
+<p>1 
+1 
+1 </p>
+
+<p>0 </p>
+
+<p>0. </p>
+
+<p>Q 
+n 
+p 
+h 
+i 
+i 
+s i 
+i 
+i 
+i Q 
+Q 
+n 
+p 
+h 
+i 
+i 
+s i 
+i 
+i 
+i Q 
+Q 
+n 
+p 
+h 
+i 
+s 
+i 
+i 
+i Q </p>
+
+<p>c Q 
+c Q 
+x p x 
+c x Q 
+p x </p>
+
+<p>c Q 
+c Q x p x 
+c x Q p x </p>
+
+<p>c 
+c p x 
+c p x </p>
+
+<p>= 
+= + 
+− 
+= = </p>
+
+<p>= 
+= + </p>
+
+<p> 
+ 
+ 
+ 
++ + 
++ − 
++ 
+− − 
+− 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
++ 
+− 
++ 
+− 
+≥ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
++ 
+− 
+≥ 
+ 
+ 
+ 
+ </p>
+
+<p>∑ 
+∑ 
+∑ 
+∑ 
+∑ 
+∑ </p>
+
+<p>(7) </p>
+
+<p>While </p>
+
+<p>( ) </p>
+
+<p>0 </p>
+
+<p>1, </p>
+
+<p>n 
+X 
+i 
+i </p>
+
+<p>p x </p>
+
+<p>= </p>
+
+<p>= </p>
+
+<p>∑ </p>
+
+<p>H. Behret, C. Kahraman. A multi-period newsvendor problem with pre-season extension under fuzzy demand </p>
+
+
+
+<p>( ) </p>
+
+<p>, </p>
+
+<p>s 
+p 
+X 
+h 
+s </p>
+
+<p>c c 
+p 
+Q 
+c c </p>
+
+<p>≤ </p>
+
+<p>− 
+≥ + 
+(8) </p>
+
+<p>where </p>
+
+<p>( ) </p>
+
+<p>X </p>
+
+<p>p 
+Q </p>
+
+<p>≤ </p>
+
+<p>is the probability that the demand X is smaller or equal to the order 
+quantity Q. The expected total cost, </p>
+
+<p>( 
+) </p>
+
+<p>, 
+E TC Q X 
+ 
+ 
+ </p>
+
+<p> will be minimized by the smallest 
+value of Q(call it Q*) satisfying the equation above (Equation 8). </p>
+
+<p>3. Fuzzy model with multi-period pre-season extension </p>
+
+<p>The fuzzy set theory provides a proper framework for description of uncertainty related 
+to vagueness of natural language expressions and judgments. Fuzzy sets have been 
+introduced by Zadeh (1965) as an extension of the classical notion of set. In classical </p>
+
+<p>set theory, the membership of elements in a set is assessed in binary terms according 
+to a bivalent condition where an element either belongs or does not belong to the set. 
+By contrast, fuzzy set theory permits the gradual assessment of the membership of ele-
+ments in a set; this is described with the aid of a membership function valued in the </p>
+
+<p>real unit interval [0, 1]. </p>
+
+<p>Let U be a classical set of objects, called the universe, whose generic elements are de-
+noted by x. Membership in a classical subset X of U is often viewed as a characteristic 
+function, μ X from U to such that: </p>
+
+<p>{ 1 iff </p>
+
+<p>( ) 
+. 
+0 iff </p>
+
+<p>X </p>
+
+<p>x X 
+x 
+x X 
+∈ 
+µ 
+= 
+∉ 
+(9) </p>
+
+<p>If the valuation set ({0,1}) is allowed to be the real interval [0,1],  X is called a fuzzy 
+set (Zadeh 1965),  ( ) </p>
+
+<p>X </p>
+
+<p>x 
+µ 
+is the grade of membership of x in  X . The closer the value 
+of  ( ) </p>
+
+<p>X </p>
+
+<p>x 
+µ 
+is to, the more x belongs to  X .  X is completely characterized by the set of 
+pairs: 
+ </p>
+
+<p> </p>
+
+<p> 
+{( , ( )), 
+}. </p>
+
+<p>X </p>
+
+<p>X 
+x 
+x x X 
+= µ 
+∈ 
+(10) </p>
+
+<p>Fuzzy numbers are a particular kind of fuzzy sets. A fuzzy number is a fuzzy set R 
+of real numbers set with a continuous, compactly supported, and convex membership 
+function. </p>
+
+<p>Let U be a universal set; a fuzzy subset  X of U is defined by a function  </p>
+
+<p>[ ] </p>
+
+<p>( ) : 
+0,1 </p>
+
+<p>X </p>
+
+<p>x U 
+µ 
+→ </p>
+
+<p>is called membership function. Here, U is assumed to be the set of real numbers R and 
+Fis the space of fuzzy sets. </p>
+
+<p>The fuzzy set  X F 
+∈ is a fuzzy number iff: </p>
+
+<p>I. For </p>
+
+<p>[ ] </p>
+
+<p>0,1 
+∀α ∈ 
+, the set </p>
+
+<p> </p>
+
+<p>{ 
+: 
+( ) 
+} </p>
+
+<p>X </p>
+
+<p>X 
+x R 
+x 
+α = 
+∈ µ 
+≥ α , which is called α cut of  X is a </p>
+
+<p>convex set. 
+II.  ( ) </p>
+
+<p>X </p>
+
+<p>x 
+µ 
+is a continuous function. </p>
+
+<p>III. 
+ </p>
+
+<p> </p>
+
+<p>sup( ) { 
+: 
+( ) 0} </p>
+
+<p>X </p>
+
+<p>X 
+x R 
+x 
+= ∈ µ 
+≥ 
+is a bounded set in R. </p>
+
+<p>IV. 
+ </p>
+
+<p> </p>
+
+<p>( ) max 
+( ) 
+0 </p>
+
+<p>x U X </p>
+
+<p>height X 
+x h </p>
+
+<p>∈ </p>
+
+<p>= 
+µ 
+= ≥ . </p>
+
+<p>By conditions (I) and (II), each α-cut is a compact and convex subset of R hence it is a closed </p>
+
+<p>interval in R, 
+( ), 
+( ) </p>
+
+<p>L 
+R </p>
+
+<p>X 
+X 
+X 
+α = 
+α 
+α 
+ 
+ 
+ 
+ . If h = 1 we say that the fuzzy number is normal. </p>
+
+<p>Journal of Business Economics and Management, 2010, 11(4): 613-629 </p>
+
+<p>618 </p>
+
+<p>Let us show a fuzzy number  ( , , , ) </p>
+
+<p>l m n u </p>
+
+<p>X 
+x x x x 
+= 
+where l </p>
+
+<p>m 
+n 
+u </p>
+
+<p>x x 
+x 
+x 
+&lt; 
+&lt; &lt; 
+in this form. 
+The fuzzy number  X is a so-called triangular fuzzy number  ( , 
+, ) </p>
+
+<p>l m 
+n u </p>
+
+<p>X 
+x x 
+x x 
+= = 
+, </p>
+
+<p>l 
+m 
+n 
+u </p>
+
+<p>x x 
+x 
+x 
+&lt; 
+= &lt; 
+if its membership function  </p>
+
+<p>[ ] </p>
+
+<p>( ) : 
+0,1 </p>
+
+<p>X </p>
+
+<p>x R 
+µ 
+→ 
+is equal to (Fig. 1): </p>
+
+<p> </p>
+
+<p>0 </p>
+
+<p>( ) 
+. </p>
+
+<p>0 
+x&gt;x </p>
+
+<p>l </p>
+
+<p>l 
+l 
+m 
+m 
+l 
+X 
+u 
+m 
+u 
+u 
+m </p>
+
+<p>u </p>
+
+<p>x x </p>
+
+<p>x x 
+x x x 
+x 
+x 
+x 
+x x 
+x x x 
+x x </p>
+
+<p>&lt; 
+ 
+ 
+− 
+ 
+ 
+ 
+&lt; &lt; 
+ 
+ 
+ 
+− 
+  
+ 
+µ 
+=  
+− 
+ 
+ 
+ 
+&lt; &lt; 
+ 
+ 
+ 
+− 
+ 
+ 
+ 
+  </p>
+
+<p>(11) </p>
+
+<p>The fuzzy function  X is a function of parameters , 
+and </p>
+
+<p>l m 
+u </p>
+
+<p>x x 
+x , known as the lower 
+value, middle value and upper value respectively. The figure (Fig. 1) shows the member-</p>
+
+<p>ship function for a fuzzy number "approximately x m ". </p>
+
+<p>In this study, a multi-period newsvendor problem with pre-season extension under fuzzy 
+demand is analyzed. As the selling season draws closer, suppliers lead times shortens 
+and the production cost increases. In contrast, demand fuzziness decreases and more 
+accurate demand forecasts can be maintained that lead to lower overage/underage costs. 
+The purpose of the model is to find the best order period (M*) and best order quantity </p>
+
+<p>(Q*)for the multi-period newsvendor problem with pre-season extension under discrete 
+fuzzy demand  X with membership function  ( ) </p>
+
+<p>i 
+X </p>
+
+<p>x 
+µ 
+, precise production cost c p , fuzzy 
+unit holding cost  </p>
+
+<p>h </p>
+
+<p>c with  h </p>
+
+<p>c </p>
+
+<p>µ and fuzzy unit shortage  </p>
+
+<p>s </p>
+
+<p>c cost with  s </p>
+
+<p>c </p>
+
+<p>µ . </p>
+
+<p>3.1. Fuzzy demand and fuzzy inventory costs with precise purchasing cost </p>
+
+<p>Let the membership function  ( ) </p>
+
+<p>i 
+X </p>
+
+<p>x 
+µ 
+of fuzzy demand  X given by domain 
+ </p>
+
+<p>0 1 2 </p>
+
+<p>{ , , ,..., } </p>
+
+<p>n </p>
+
+<p>X 
+x x x 
+x 
+= 
+have the triangular membership function (Fig. 1). Unit produc-
+tion cost, (c p ) is precise while unit holding cost  
+( ) </p>
+
+<p>h </p>
+
+<p>c and unit shortage cost  
+( ) </p>
+
+<p>s </p>
+
+<p>c , are </p>
+
+<p>represented by triangular fuzzy numbers. The uncertain demand and uncertain cost </p>
+
+<p>Fig. 1. Triangular membership function </p>
+
+<p>x l 
+x m 
+x u 
+x </p>
+
+<p>1.0 </p>
+
+<p>0 </p>
+
+<p>° </p>
+
+<p>m ( ) </p>
+
+<p>X </p>
+
+<p>x </p>
+
+<p>H. Behret, C. Kahraman. A multi-period newsvendor problem with pre-season extension under fuzzy demand </p>
+
+<p>619 </p>
+
+<p>parameters cause uncertain overage and underage costs. For a given Q and 
+ </p>
+
+<p>i </p>
+
+<p>x X 
+∈ , the </p>
+
+<p>fuzzy overage  
+( ) 
+OC and underage costs  
+( ) 
+UC , are as follows; </p>
+
+<p>  
+ </p>
+
+<p>( 
+) </p>
+
+<p>{ 
+} </p>
+
+<p>  
+ </p>
+
+<p>( 
+) </p>
+
+<p>{ 
+} </p>
+
+<p>max 
+, 0 </p>
+
+<p>max 
+, 0 . </p>
+
+<p>h </p>
+
+<p>s </p>
+
+<p>OC c 
+Q X </p>
+
+<p>UC c 
+X Q </p>
+
+<p>= 
+− </p>
+
+<p>= 
+− 
+(12) </p>
+
+<p>The unit penalty cost  
+( ) 
+PC is the sum of unit overage cost and unit underage cost with </p>
+
+<p>the membership function  </p>
+
+<p>PC </p>
+
+<p>µ . 
+   . 
+PC OC UC 
+= 
++ 
+(13) </p>
+
+<p>The unit penalty cost  
+( ) 
+PC ) is a level-2 fuzzy set which means that it includes two </p>
+
+<p>fuzzy values and there are corresponding membership degrees of these fuzzy values. 
+A level-2 fuzzy set can be reduced to an ordinary fuzzy set by s-fuzzification process 
+(Zadeh 1971). The membership function of an ordinary fuzzy set is maintained via s-
+fuzzification ("s" stands for support) as follows: </p>
+
+<p> 
+ </p>
+
+<p> </p>
+
+<p>0,1,2,..., 
+( ) </p>
+
+<p>( ) sup 
+[ 
+( ) 
+( )], 
+, </p>
+
+<p>i </p>
+
+<p>i 
+n 
+c 
+s fuzz PC 
+PC </p>
+
+<p>x 
+i 
+x x X </p>
+
+<p>= 
+− </p>
+
+<p>µ = 
+µ 
+× µ 
+∈ 
+(14) </p>
+
+<p>where c i (x) is the i th possible fuzzy cost of  
+PC and  ( ) </p>
+
+<p>PC </p>
+
+<p>i 
+µ 
+is the possibility of that 
+cost.According to the properties of possibility measure (Zadeh 1978),  ( ) </p>
+
+<p>PC </p>
+
+<p>i 
+µ 
+is ob-
+tained as follows: </p>
+
+<p> 
+  </p>
+
+<p>( ) max 
+( ), 
+0,1, 2,..., . </p>
+
+<p>i </p>
+
+<p>i 
+x X X 
+PC </p>
+
+<p>i 
+x 
+i 
+n </p>
+
+<p>∈ </p>
+
+<p>µ = 
+µ 
+= 
+(15) </p>
+
+<p>The fuzzy total cost is minimized by the best order quantity (Q*): </p>
+
+<p> 
+ 
+ </p>
+
+<p>* </p>
+
+<p>( , ) min 
+( 
+( )) . </p>
+
+<p>Q 
+p </p>
+
+<p>TC Q X 
+c Q defuzz s fuzz PC 
+ 
+ 
+= 
++ 
+− 
+ 
+ 
+(16) </p>
+
+<p>Here, the operator "defuzz" denotes the defuzzification process. Defuzzification is the 
+conversion of a fuzzy quantity to a precise quantity; in contrast fuzzification is the </p>
+
+<p>conversion of a precise quantity to a fuzzy quantity. Usually, a fuzzy system will have 
+a number of rules that transform a number of variables into a "fuzzy" result. Defuzzifi-
+cation would transform this result into a single number (Ross 1995). There are several 
+methods for defuzzification. In this study centroid defuzzification method is applied. 
+Centroid defuzzification method (also called center of area, center of gravity) is the 
+most common of all the defuzzification methods. It is given by the algebraic expression </p>
+
+<p>as follows. 
+For continuous functions: </p>
+
+<p> </p>
+
+<p> </p>
+
+<p>( ) 
+* </p>
+
+<p>( ) </p>
+
+<p>. </p>
+
+<p>C z </p>
+
+<p>C z </p>
+
+<p>zdz 
+z 
+dz </p>
+
+<p>µ 
+= µ </p>
+
+<p>∫ 
+∫ </p>
+
+<p>(17) </p>
+
+<p>For discrete functions: </p>
+
+<p> </p>
+
+<p> </p>
+
+<p>( ) 
+* </p>
+
+<p>( ) </p>
+
+<p>, </p>
+
+<p>C z </p>
+
+<p>C z </p>
+
+<p>z 
+z 
+µ 
+= 
+µ </p>
+
+<p>∑ 
+∑ </p>
+
+<p>(18) </p>
+
+<p>where  </p>
+
+<p> </p>
+
+<p>( ) 
+1 
+z 
+z 
+i 
+i </p>
+
+<p>C 
+C </p>
+
+<p>= </p>
+
+<p>=  
+and  i 
+C is one of the membership functions those figure the fuzzy 
+output. This method is represented in Fig. 2. </p>
+
+<p>Journal of Business Economics and Management, 2010, 11(4): 613-629 </p>
+
+
+
+<p>Best order quantity (Q*) which minimiz-
+es the fuzzy total cost is found by brute-
+force search algorithm which is a very 
+general problem-solving technique that 
+consists of systematically enumerating all 
+possible candidates for the solution and 
+checking whether each candidate satisfies </p>
+
+<p>the problem's statement. </p>
+
+<p>The procedure explained above is exam-
+ined for every pre-season ordering period. 
+Through these periods as the selling sea-
+son draws closer the production cost increases and demand fuzziness decreases and 
+more accurate demand forecasts can be maintained that lead to lower overage/underage 
+costs. </p>
+
+<p>In the multi-period model, j </p>
+
+<p>p </p>
+
+<p>c denotes unit production cost for period j. Demand fuzzi-</p>
+
+<p>ness decreases as the ordering period closes to the selling season. This decrease of 
+fuzziness is maintained by fuzzy concentration of the membership function of demand 
+according to the periods. The membership function  ( ) </p>
+
+<p>i 
+X </p>
+
+<p>x 
+µ 
+of fuzzy demand  X is 
+given by domain  </p>
+
+<p>0 1 2 </p>
+
+<p>{ , , ,..., } </p>
+
+<p>n </p>
+
+<p>X 
+x x x 
+x 
+= 
+concentrates as the selling season draws closer. </p>
+
+<p>Concentrations tend to concentrate the element of a fuzzy set by reducing the degree of 
+membership of all elements that have lower membership degrees in the set. The less an 
+element is in a set, the more it is reduced in membership through concentration (Ross 
+1995). </p>
+
+<p>The membership function of fuzzy demand for period j is denoted by  ( ) </p>
+
+<p>j </p>
+
+<p>i 
+X </p>
+
+<p>x 
+µ 
+. Fuzzy 
+total cost for pre-season ordering periods is as follows: </p>
+
+<p> 
+ 
+ </p>
+
+<p>* </p>
+
+<p>( , ) min [ 
+( 
+( 
+))]. </p>
+
+<p>j 
+j </p>
+
+<p>j 
+j 
+j 
+Q 
+p 
+j </p>
+
+<p>TC Q X 
+c Q defuzz s fuzz PC 
+= 
++ 
+− 
+(19) </p>
+
+<p>Here  j 
+PC represents the penalty cost for period j where j=1,2,...,m. The best order </p>
+
+<p>period </p>
+
+<p>* </p>
+
+<p>( ) 
+M is the period which has the minimum fuzzy total cost. </p>
+
+<p>3.2. Numerical illustration </p>
+
+<p>Suppose that a retailer wants to introduce an innovative product to the market at the 
+beginning of July and have six possible periods (January, February, March, April, May, 
+June) to give the manufacturing order to the manufacturer. As the selling season draws 
+closer, suppliers lead times shorten and the production cost increases. On the other hand 
+demand fuzziness decreases and more accurate demand forecasts can be maintained that 
+lead to lower overage/underage costs. </p>
+
+<p>Let unit holding cost  
+( ) </p>
+
+<p>h </p>
+
+<p>c and unit shortage cost  
+( ) </p>
+
+<p>s </p>
+
+<p>c be imprecise and represented </p>
+
+<p>with triangular fuzzy numbers as,  </p>
+
+<p>[ 
+] </p>
+
+<p>$ 1, 2,3 </p>
+
+<p>h </p>
+
+<p>c = 
+and  </p>
+
+<p>[ 
+] </p>
+
+<p>$ 4,5, 6 </p>
+
+<p>s </p>
+
+<p>c = 
+, respectively. Unit 
+purchasing cost is precise and increases 5% according to the previous months' cost </p>
+
+<p>Table 1. </p>
+
+<p>Fig. 2. Centroid defuzzification method </p>
+
+<p>m </p>
+
+<p>1 </p>
+
+<p>z* 
+z </p>
+
+<p>H. Behret, C. Kahraman. A multi-period newsvendor problem with pre-season extension under fuzzy demand </p>
+
+
+
+<p>Table 1. Unit purchasing cost per month ($) </p>
+
+<p>Jan 
+Feb 
+March 
+April 
+May </p>
+
+<p>June </p>
+
+<p>3.50 
+3.68 
+3.86 
+4.05 
+4.25 </p>
+
+<p>4.47 </p>
+
+<p>Let the membership function 
+ ( ) </p>
+
+<p>i 
+X </p>
+
+<p>x 
+µ 
+of fuzzy demand  X for January be 
+ {1000,1500, 2000, 2500,3000,3500, 4000, 4500,5000,5500, 6000} 
+X = 
+with the triangu-
+lar membership function as follows: </p>
+
+<p> </p>
+
+<p>0 
+1000 </p>
+
+<p>1000 
+1000 
+3500 
+2500 
+( ) 
+. 
+6000 
+3500 
+6000 
+2500 </p>
+
+<p>0 
+x &gt;6000 </p>
+
+<p>i </p>
+
+<p>i 
+i </p>
+
+<p>i 
+X 
+i 
+i </p>
+
+<p>i </p>
+
+<p>x </p>
+
+<p>x 
+x 
+x 
+x 
+x </p>
+
+<p>&lt; 
+ 
+ 
+− 
+ 
+ 
+ 
+&lt; &lt; 
+ 
+ 
+ 
+  
+ 
+µ 
+=  
+− 
+ 
+ 
+ 
+&lt; &lt; 
+ 
+ 
+  
+ 
+ 
+  </p>
+
+<p>(20) </p>
+
+<p>For example let x 1 = 1000. The membership value of x 1 will be  1 
+( ) 0 </p>
+
+<p>X </p>
+
+<p>x 
+µ 
+= or if x 7 = </p>
+
+<p>1000 then the membership value of x 7 will be  7 
+( ) 0.80 </p>
+
+<p>X </p>
+
+<p>x 
+µ 
+= and so on. The member-</p>
+
+<p>ship functions for other months are maintained through the membership function of the 
+demand for January using fuzzy concentration (Table 2 and Fig. 3). </p>
+
+<p>Table 2. Membership values of demand per month </p>
+
+<p>Jan 
+Feb 
+March 
+April 
+May 
+June </p>
+
+<p>Demand 
+ ( ) </p>
+
+<p>i 
+X </p>
+
+<p>x 
+µ </p>
+
+<p> 
+1.25 </p>
+
+<p>( ) </p>
+
+<p>i 
+X </p>
+
+<p>x 
+µ </p>
+
+<p> 
+1.5 </p>
+
+<p>( ) </p>
+
+<p>i 
+X </p>
+
+<p>x 
+µ </p>
+
+<p> 
+2 </p>
+
+<p>( ) </p>
+
+<p>i 
+X </p>
+
+<p>x 
+µ </p>
+
+<p> 
+3 </p>
+
+<p>( ) </p>
+
+<p>i 
+X </p>
+
+<p>x 
+µ </p>
+
+<p> 
+4 </p>
+
+<p>( ) </p>
+
+<p>i 
+X </p>
+
+<p>x 
+µ </p>
+
+<p>1000 
+0.000 
+0.000 
+0.000 
+0.000 
+0.000 
+0.000 </p>
+
+<p>1500 
+0.200 
+0.134 
+0.089 
+0.040 
+0.008 
+0.002 </p>
+
+<p>2000 
+0.400 
+0.318 
+0.253 
+0.160 
+0.064 
+0.026 </p>
+
+<p>2500 
+0.600 
+0.528 
+0.465 
+0.360 
+0.216 
+0.130 </p>
+
+<p>3000 
+0.800 
+0.757 
+0.716 
+0.640 
+0.512 
+0.410 </p>
+
+<p>3500 
+1.000 
+1.000 
+1.000 
+1.000 
+1.000 
+1.000 </p>
+
+<p>4000 
+0.800 
+0.757 
+0.716 
+0.640 
+0.512 
+0.410 </p>
+
+<p>4500 
+0.600 
+0.528 
+0.465 
+0.360 
+0.216 
+0.130 </p>
+
+<p>5000 
+0.400 
+0.318 
+0.253 
+0.160 
+0.064 
+0.026 </p>
+
+<p>5500 
+0.200 
+0.134 
+0.089 
+0.040 
+0.008 
+0.002 </p>
+
+<p>6000 
+0.000 
+0.000 
+0.000 
+0.000 
+0.000 
+0.000 </p>
+
+<p>Journal of Business Economics and Management, 2010, 11(4): 613-629 </p>
+
+
+
+<p>For example, let us order a quantity of 2000 units at the beginning of January. The unit pen-
+alty cost  
+( ) 
+PC is a level-2 fuzzy set including imprecise demand and costs. For x 1 = 1000, </p>
+
+<p>the fuzzy penalty cost will be  (1, 2,3) 1000 (1000, 2000,3000) 
+PC = 
+× 
+= 
+with possibility of 
+0. For x 5 = 3000, the fuzzy penalty cost will be  (4,5, 6) 1000 (4000,5000, 6000) 
+PC = 
+× 
+= </p>
+
+<p>with the possibility 0.80 and so on. For the ordering period January fuzzy unit penalty 
+cost values for Q = 2000 is given in Table 3. </p>
+
+<p>The graphical representations of level-2 fuzzy sets of  
+( ) 
+PC for January when Q = 
+2000 and the corresponding s-fuzzified set 
+ 
+( ) 
+s fuzz PC 
+− 
+are shown in Figs. 4a and 
+4b, respectively. </p>
+
+<p>Table 3. Unit penalty cost values for January, Q = 2000 </p>
+
+<p> X 
+ ( ) 
+x i 
+X 
+µ 
+ 
+( ) 
+OC 
+ 
+( ) 
+UC 
+ 
+( ) 
+PC </p>
+
+<p>x 1 
+1000 
+0 
+(1000,2000,3000) (0,0,0) 
+(1000,2000,3000) </p>
+
+<p>x 2 
+1500 
+0.20 
+(500,1000,1500) 
+(0,0,0) 
+(500,1000,1500) </p>
+
+<p>x 3 
+2000 
+0.40 
+(0,0,0) 
+(0,0,0) 
+(0,0,0) </p>
+
+<p>x 4 
+2500 
+0.60 
+(0,0,0) 
+(2000,2500,3000) 
+(2000,2500,3000) </p>
+
+<p>x 5 
+3000 
+0.80 
+(0,0,0) 
+(4000,5000,6000) 
+(4000,5000,6000) </p>
+
+<p>x 6 
+3500 
+1 
+(0,0,0) 
+(6000,7500,9000) 
+(6000,7500,9000) </p>
+
+<p>x 7 
+4000 
+0.80 
+(0,0,0) 
+(8000,10000,12000) (8000,10000,12000) </p>
+
+<p>x 8 
+4500 
+0.60 
+(0,0,0) 
+(10000,12500,15000) (10000,12500,15000) </p>
+
+<p>x 9 
+5000 
+0.40 
+(0,0,0) 
+(12000,15000,18000) (12000,15000,18000) </p>
+
+<p>x 10 
+5500 
+0.20 
+(0,0,0) 
+(14000,17500,21000) (14000,17500,21000) </p>
+
+<p>x 11 
+6000 
+0 
+(0,0,0) 
+(16000,20000,24000) (16000,20000,24000) </p>
+
+<p>Fig. 3. Fuzzy concentration of  X </p>
+
+<p>° </p>
+
+<p>m ( ) </p>
+
+<p>i 
+X </p>
+
+<p>x </p>
+
+<p>1000 1500 2000 2500 3000 3500 4000 4500 5000 5500 6000 </p>
+
+<p>January </p>
+
+<p>February </p>
+
+<p>March </p>
+
+<p>April </p>
+
+<p>May </p>
+
+<p>June </p>
+
+<p>1.000 </p>
+
+<p>0.900 </p>
+
+<p>0.800 </p>
+
+<p>0.700 </p>
+
+<p>0.600 </p>
+
+<p>0.500 </p>
+
+<p>0.400 </p>
+
+<p>0.300 </p>
+
+<p>0.200 </p>
+
+<p>0.100 </p>
+
+<p>0.000 </p>
+
+<p>Fuzzy Concentration of ° 
+X </p>
+
+<p>x i </p>
+
+<p>H. Behret, C. Kahraman. A multi-period newsvendor problem with pre-season extension under fuzzy demand </p>
+
+
+
+<p>According to the s-fuzzified value of the penalty cost, total cost for the given values </p>
+
+<p>when Q = 2000 is calculated as below: 
+ 
+ 
+ 
+(2000, ) [3.50 2000 
+( 
+( ))]. 
+TC 
+X 
+defuzz s fuzz PC 
+= 
+× 
++ 
+− 
+(21) </p>
+
+<p>Here, the operator "defuzz" denotes the centroid method for defuzzification. Centroid 
+defuzzification values have been obtained by using <rs type="software">MATLAB R2008a Fuzzy Logic 
+Toolbox</rs> as in Fig. 5. 
+ 
+ 
+(2000, ) [3.5 2000 10, 022] $17, 022 
+TC 
+X = × 
++ 
+= 
+. 
+(22) </p>
+
+<p>Fuzzy total cost values for all other order quantities of the ordering period January are 
+given in Table 4. For the ordering period January, best order quantity which gives the 
+min fuzzy total cost is found 3000 units with the fuzzy total cost value $16,820. </p>
+
+<p>The procedure continues with calculation of other periods best order quantities. Using 
+Equation 19, the fuzzy total costs for pre-season ordering periods are calculated and 
+given as in Table 5 and Fig. 6. </p>
+
+<p>As stated by Table 5, best order period (M*) is found January with fuzzy total cost 
+$16,820 with 3000 units. Here the decrease of demand fuzziness causes a decline on </p>
+
+<p>the fuzzy total cost values among ordering periods. However, the change of production 
+cost also affects the cost function. The proposed model offers best order period and 
+corresponding order quantity for the given fuzzy variables. </p>
+
+<p>Fig. 4a. Level-2 fuzzy set  
+( ) 
+PC </p>
+
+<p>Fig. 4b. 
+ 
+( ) 
+s fuzz PC 
+− </p>
+
+<p>± </p>
+
+<p>m ( ) </p>
+
+<p>PC </p>
+
+<p>i </p>
+
+<p>0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 
+± * 
+( $1000) 
+PC </p>
+
+<p>i = 1 2 4 
+5 
+6 
+7 
+8 
+9 
+10 
+11 
+1 </p>
+
+<p>0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 
+± * 
+( $1000) 
+PC </p>
+
+<p>0,2 </p>
+
+<p>0,4 </p>
+
+<p>0,6 </p>
+
+<p>0,8 </p>
+
+<p>1 </p>
+
+<p>Journal of Business Economics and Management, 2010, 11(4): 613-629 </p>
+
+
+
+<p>Fig. 5. Centroid defuzzification of 
+ 
+( ) 
+s fuzz PC 
+− </p>
+
+<p>1 </p>
+
+<p>0.9 </p>
+
+<p>0.8 </p>
+
+<p>0.7 </p>
+
+<p>0.6 </p>
+
+<p>0.5 </p>
+
+<p>0.4 </p>
+
+<p>0.3 </p>
+
+<p>0.2 </p>
+
+<p>0.1 </p>
+
+<p>0 </p>
+
+<p>0 
+0.5 
+1 
+1.5 
+2 
+2.5 
+3 
+x10 4 
+Centroid </p>
+
+<p>Table 4. Fuzzy total costs 
+for January, ($) </p>
+
+<p>Order quantity Fuzzy total cost </p>
+
+<p>1000 
+17,356 </p>
+
+<p>1500 </p>
+
+<p>17,159 </p>
+
+<p>2000 </p>
+
+<p>17,022 </p>
+
+<p>2500 </p>
+
+<p>16,930 </p>
+
+<p>3000 </p>
+
+<p>16,820* </p>
+
+<p>3500 </p>
+
+<p>16,828 </p>
+
+<p>4000 </p>
+
+<p>17,258 
+4500 
+19,079 </p>
+
+<p>5000 </p>
+
+<p>21,514 </p>
+
+<p>5500 </p>
+
+<p>24,045 </p>
+
+<p>6000 </p>
+
+<p>26,681 </p>
+
+<p>Table 5. Fuzzy total cost for pre-season ordering periods,  </p>
+
+<p>[ 
+]  [ 
+] </p>
+
+<p>$ 
+, 
+$ 
+1,2,3 
+4,5,6 </p>
+
+<p>h 
+s </p>
+
+<p>c 
+c 
+= = </p>
+
+<p>Q 
+ ( 
+) 
+TC Jan 
+ ( 
+) 
+TC Feb 
+ ( 
+) 
+TC March  ( 
+) 
+TC April 
+ ( 
+) 
+TC May 
+ ( 
+) 
+TC June </p>
+
+<p>c p 
+3,50 
+3,68 
+3,86 
+4,05 
+4,25 
+4,47 </p>
+
+<p>1000 
+17,356 
+17,335 
+17,360 
+17,327 
+17,262 
+17,332 </p>
+
+<p>1500 
+17,159 
+17,161 
+17,219 
+17,184* 
+17,098 
+17,202 </p>
+
+<p>2000 
+17,022 
+17,089 
+17,210* 
+17,202 
+17,087* 
+17,202* </p>
+
+<p>2500 
+16,930 
+17,082 
+17,282 
+17,333 
+17,223 
+17,350 </p>
+
+<p>3000 
+16,820* 
+17,075* 
+17,375 
+17,515 
+17,448 
+17,617 </p>
+
+<p>3500 
+16,828 
+17,168 
+17,553 
+17,787 
+17,815 
+18,087 </p>
+
+<p>4000 
+17,258 
+17,718 
+18,237 
+18,659 
+19,003 
+19,589 </p>
+
+<p>4500 
+19,079 
+19,709 
+20,401 
+21,063 
+21,708 
+22,508 </p>
+
+<p>5000 
+21,514 
+22,252 
+23,059 
+23,861 
+24,678 
+25,636 </p>
+
+<p>5500 
+24,045 
+24,902 
+25,831 
+26,775 
+27,756 
+28,843 </p>
+
+<p>6000 
+26,681 
+27,658 
+28,703 
+29,778 
+30,880 
+32,058 </p>
+
+<p>H. Behret, C. Kahraman. A multi-period newsvendor problem with pre-season extension under fuzzy demand </p>
+
+
+
+<p>3.3. Sensitivity analysis </p>
+
+<p>In this section, various experiments have been performed to analyze the effect of mem-
+bership function shapes to the fuzzy models. Through these experiments fuzzy unit 
+holding cost and fuzzy unit shortage cost values have been changed (Table 6). </p>
+
+<p>Table 6. Performed experiments and values of the cost parameters </p>
+
+<p>Experiments 
+ ($) </p>
+
+<p>h </p>
+
+<p>c 
+ ($) </p>
+
+<p>s </p>
+
+<p>c </p>
+
+<p>1 
+(1,2,3) 
+(4,5,6) </p>
+
+<p>2 </p>
+
+<p>(1,2,3) 
+(4,5,8) </p>
+
+<p>3 </p>
+
+<p>(1,2,3) 
+(4,5,10) </p>
+
+<p>4 </p>
+
+<p>(1,2,3) 
+(4,5,12) </p>
+
+<p>5 </p>
+
+<p>(1,2,5) 
+(4,5,6) </p>
+
+<p>6 
+(1,2,5) 
+(4,5,8) </p>
+
+<p>7 
+(1,2,5) 
+(4,5,10) </p>
+
+<p>8 </p>
+
+<p>(1,2,5) 
+(4,5,12) </p>
+
+<p>9 </p>
+
+<p>(1,2,7) 
+(4,5,6) </p>
+
+<p>10 </p>
+
+<p>(1,2,7) 
+(4,5,8) </p>
+
+<p>11 
+(1,2,7) 
+(4,5,10) </p>
+
+<p>12 </p>
+
+<p>(1,2,7) 
+(4,5,12) </p>
+
+<p>13 </p>
+
+<p>(1,2,9) 
+(4,5,6) </p>
+
+<p>14 </p>
+
+<p>(1,2,9) 
+(4,5,8) </p>
+
+<p>15 </p>
+
+<p>(1,2,9) 
+(4,5,10) </p>
+
+<p>16 
+(1,2,9) </p>
+
+<p>(4,5,12) </p>
+
+<p>Q </p>
+
+<p>30 000 </p>
+
+<p>25 000 </p>
+
+<p>20 000 </p>
+
+<p>15 000 </p>
+
+<p>± 
+TC </p>
+
+<p>1000 1500 2000 2500 3000 3500 4000 4500 5000 5500 6000 </p>
+
+<p>January </p>
+
+<p>February </p>
+
+<p>March </p>
+
+<p>April </p>
+
+<p>May </p>
+
+<p>June </p>
+
+<p>Fig. 6. Fuzzy total cost for pre-season ordering periods </p>
+
+<p>Journal of Business Economics and Management, 2010, 11(4): 613-629 </p>
+
+
+
+<p>In these experiments, production cost values and demand membership functions are 
+considered the same as the previous illustration while the membership of holding cost 
+and the membership of shortage cost have been changed. According to the provided 
+membership values, the fuzzy model generates the results represented in Table 7. </p>
+
+<p>Table 7. 
+* 
+M , * 
+Q and  
+TC for different  </p>
+
+<p>h </p>
+
+<p>c and  </p>
+
+<p>s </p>
+
+<p>c </p>
+
+<p>Experiments 
+* 
+M 
+* 
+Q 
+ ($) 
+TC </p>
+
+<p>1 
+Jan 
+3000 
+16,820 </p>
+
+<p>2 
+Jan 
+2500 
+17,716 
+3 
+May 
+2500 
+18,484 </p>
+
+<p>4 
+June 
+3000 
+19,152 </p>
+
+<p>5 
+Jan 
+3000 
+16,626 </p>
+
+<p>6 
+Jan 
+3000 
+17,619 </p>
+
+<p>7 
+May 
+2500 
+18,457 </p>
+
+<p>8 
+May 
+3000 
+19,093 </p>
+
+<p>9 
+Jan 
+3000 
+16,509 </p>
+
+<p>10 
+Jan 
+3000 
+17,545 </p>
+
+<p>11 
+May 
+3000 
+18,431 </p>
+
+<p>12 
+May 
+3000 
+19,062 
+13 
+Jan 
+3000 
+16,449 </p>
+
+<p>14 
+Jan 
+3000 
+17,498 
+15 
+May 
+3000 
+18,417 </p>
+
+<p>16 
+May 
+3000 
+19,048 </p>
+
+<p>The results provided in Table 7 represents that, the increase of the fuzziness of cost 
+parameters causes an increase of fuzzy total cost values. For example, in experiment 
+2, we increased the fuzziness of shortage cost by changing the membership function 
+shape to  </p>
+
+<p>[ 
+] </p>
+
+<p>$ 4,5,8 </p>
+
+<p>s </p>
+
+<p>c = 
+. This change increased the fuzzy total cost value from $16,820 
+to $17,716. Shortage cost values as they have higher fuzziness affect the order period 
+in that way. In experiments 3 and 4 membership values of shortage costs are wider than </p>
+
+<p>the values in experiments 1 and 2. For the experiments 1 and 2 best order period is 
+found as January which has the maximum demand fuzziness and minimum production 
+cost. However, for experiments 3 and 4 best order period changes to May and June, </p>
+
+<p>respectively, which have minimum demand fuzziness and maximum production costs. </p>
+
+<p>Best order quantities for the experiments do not change much according to different sce-
+narios. The reason of this situation is the symmetrical shape of demands' membership 
+function. Only in three experiments best order quantity decreases from 3000 to 2500. </p>
+
+<p>If nonsymmetrical membership functions are used for demand data, more changes on 
+offered order quantities can be observed. </p>
+
+<p>H. Behret, C. Kahraman. A multi-period newsvendor problem with pre-season extension under fuzzy demand </p>
+
+
+
+<p>4. Conclusion </p>
+
+<p>The classical single-period inventory problem has been considered extensively in the 
+relevant literature. Through these studies, most of the extensions have been made in the 
+probabilistic and possibilistic framework. Most of the papers under possibilistic frame-
+work proposed single-period inventory models with only fuzzy environment extensions. 
+Through this paper, we combine two extensions to single-period inventory problem 
+which are; an extension to fuzzy environment and an extension to models with more </p>
+
+<p>than one period to prepare for the selling season. The model is developed for innovative 
+products. The demand, holding and shortage cost parameters are represented by fuzzy 
+numbers. The model has been experimented with an illustrative example and supported 
+by sensitivity analyses. 
+Contrary to the crisp model, fuzzy model proposes highly flexible solutions for all pos-</p>
+
+<p>sible states. When the solutions of the model are analyzed, it is seen that the decrease of 
+demand fuzziness causes a decline on the fuzzy total cost values among ordering peri-
+ods. The fuzzy model offers the best order period and corresponding order quantity for 
+the given fuzzy variables. Furthermore, the increase of the fuzziness of cost parameters 
+causes an increase in fuzzy total cost values. Shortage cost values as they have higher 
+fuzziness affect the order period in that way. Best order quantities for the experiments 
+do not change much according to different scenarios. The reason of this situation is the 
+symmetrical shape of demands' membership function. 
+For further research, we suggest the examination of the influence of nonsymmetrical and </p>
+
+<p>different type of membership functions for demand data on order quantities. Further-
+more, the use of an imprecise continuous demand function instead of the discrete case 
+of this paper can be examined. This will require optimization techniques for solution 
+procedure. Lastly, dependent demand structure among ordering periods is suggested to 
+be applied. </p>
+
+
+
+<p>Journal of Business Economics and Management, 2010, 11(4): 613-629 </p>
+
+
+
+
+
+<p>H. Behret, C. Kahraman. A multi-period newsvendor problem with pre-season extension under fuzzy demand </p>
+
+
+
+<p>KELIŲ LAIKOTARPIŲ PARDAVIMŲ MODELIS, PAPILDYTAS PARUOŠIAMUOJU 
+LAIKOTARPIU, ESANT NERAIŠKIAJAI PAKLAUSAI </p>
+
+<p>H. Behret, C. Kahraman </p>
+
+<p>Santrauka 
+Straipsnyje pasiūlytas neraiškusis kelių laikotarpių pardavimo modelis, papildytas paruošiamuoju lai-
+kotarpiu inovatyviems produktams. Produkto paklausa apibūdinama neraiškiaisiais skaičiais, aprašytais 
+trikampe priklausomumo funkcija. Turto ir sąnaudų parametrai laikomi netiksliais ir taip pat apibūdi-
+nami trikampe priklausomumo funkcija aprašytais neraiškiaisiais skaičiais. Kai pardavimo laikotarpis 
+priartėja, tiekimo laikas trumpėja, o gaminio kaina išauga. Priešingai, dėl praeinančio pardavimo laiko-
+tarpio paklausos neapibrėžtumas sumažėja ir galima tiksliau prognozuoti paklausą, o tai padeda suma-
+žinti išlaidas dėl gaminių pertekliaus ar trūkumo. Šio modelio tikslas -rasti geriausią užsakymo laiką ir 
+geriausią užsakymo kiekį, kurie padėtų sumažinti visų numatomų sąnaudų neapibrėžtumą. Pateikiamas 
+modelio taikymo pavyzdys ir modelio jautrumo analizė. </p>
+
+<p>Reikšminiai žodžiai: atsargų problema, neraiškusis modeliavimas, pardavimas, inovatyvus produktas, 
+neraiškioji paklausa, neraiškioji atsargų savikaina, paruošiamasis laikotarpis. </p>
+
+<p>Hülya BEHRET. M. Sc., a research assistant at Istanbul Technical University, Industrial Engineering </p>
+
+<p>Department and working on her PhD dissertation on "Fuzzy Single-Period Inventory Models in Pro-
+duction Systems" under the supervision of Prof. Cengiz Kahraman. Her research areas are Production 
+and Inventory Systems, Fuzzy Modeling, and Simulation. </p>
+
+<p>Cengiz KAHRAMAN. A professor of industrial engineering at Istanbul Technical University, Indus-
+trial Engineering Department. He has published about 100 international journal papers and 50 interna-</p>
+
+<p>tional book chapters on fuzzy applications of industrial engineering. His research areas are engineering 
+economics, quality control and management, statistical decision making, and production engineering. </p>
+
+<p>Journal of Business Economics and Management, 2010, 11(4): 613-629 </p>
+
+</text></tei>

@@ -1,0 +1,4488 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1111%2F1468-0106.12204" /><encodingDesc><appInfo><application version="0.5.2-SNAPSHOT" ident="GROBID" when="2018-10-20T01:04+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>Abstract. We develop a new robust-to-outliers dummy estimator that we subsequently apply to 
+investigate the impact of various democratic attributes on foreign direct investment in recent 
+years. We find that democracy has generally a positive impact on foreign direct investment, 
+once outliers are controlled for, but that this relationship is very specific to each host country's 
+characteristics. </p>
+
+<p>The impact of democracy on foreign direct investment (FDI) in developing 
+countries is a hotly debated issue. Jensen (2003, 2008) and Azémar and 
+Desbordes (2009) provide an overview of the literature on FDI and democracy. 
+On the one hand, it has been argued that democratic forms of government at-
+tract FDI because they tend to be predictable and credible, thanks to vertical 
+and horizontal accounting mechanisms. The combination of periodic elections 
+and widespread diffusion of information ensures that politicians make clear their 
+preferences, do not renege on their promises once in power, and, more broadly, 
+do not abuse their position for private gains. Strong checks and balances in-
+crease policy stability, and, ultimately, the protection of property rights, because 
+the existence of several distinct veto players hinders any changes in the status 
+quo. When policy changes do occur, institutionalized channels of influence/ 
+lobbying can allow foreign investors to mitigate any adverse effects. Consoli-
+dated democracies also guarantee orderly and non-violent changes of govern-
+ment within the current institutional framework. 
+On the other hand, the virtues of democracy can easily be seen as disadvan-
+tages to countries wanting to attract multinational enterprises. Politicians' desire 
+to win elections may lead them to promise and adopt popular but economically 
+harmful policies. Political turnover creates uncertainty about the persistence of 
+policies, whereas an increase in the number of veto players has the potential to 
+result in long-term reform sclerosis. Foreign firms may suffer from a political li-
+ability of foreignness and be discriminated against relative to their better 
+politically-connected domestic competitors. Finally, a related but more sinister 
+view is that freedom of expression and open media can prevent foreign firms </p>
+
+<p>*Address for Correspondence: Department of Economics, Sir William Duncan Building, University 
+of Strathclyde, 130 Rottenrow, Glasgow G4 0GE, Scotland, UK. E-mail: rodolphe. 
+desbordes@strath.ac.uk. Vincenzo Verardi is associated researcher of the FNRS and gratefully ac-
+knowledges their financial support </p>
+
+<p>Pacific Economic Review, 22: 1 (2017) 
+pp. 43-82 
+doi: 10.1111/1468-0106.12204 </p>
+
+<p>© 2017 John Wiley &amp; Sons Australia, Ltd </p>
+
+<p>bs_bs_banner </p>
+
+<p>from colluding with officials in order to obtain generous entry deals or to de-
+crease market competition. Hence, FDI may be attracted by autocracies. 
+This ambiguous theoretical impact of democracy on FDI is mirrored in the 
+empirical literature. As described in Table 1, studies find positive (Harms and 
+Ursprung, 2002; Jensen, 2003; Busse, 2004; Azémar and Desbordes, 2009), neg-
+ative (Li and Resnick, 2003) or insignificant (Blanton and Blanton, 2007; Büthe 
+and Milner, 2008; Choi and Samy, 2008) impacts, depending on the econometric 
+model, the proxy for democracy and the sample used. 
+The presence of outliers (i.e. observations that are substantially different from 
+the bulk of the data) has sometimes been blamed for this variety of findings. 
+Some researchers have attempted to deal with these atypical observations 
+(Jakobsen and De Soysa, 2006; Choi, 2009; Li, 2009). However, it is unlikely 
+that they have solved this issue in a satisfactory manner. Popular robust estima-
+tors (e.g. median regression estimator or M-estimator) are sensitive to outliers 
+present in the values of explanatory variables and outlier diagnostics (e.g. the 
+Cook distance) frequently fail to detect atypical observations as they fundamen-
+tally rely on the extremely non-robust-to-outliers least-squares estimator 
+(Verardi and Croux, 2009). Problems of inadequate econometric identification 
+and treatment of outliers thus remain pervasive in the FDI literature. 
+A related issue is the increasing use of the fixed effects estimator to control for 
+unobserved time-invariant unit-specific effects that may be correlated with the 
+explanatory variables. While this estimator may reduce any omitted variable 
+bias, it does not protect against outlier contamination. An aggravating problem 
+is that the most resistant robust regression methods are ill-designed to analyse 
+econometric models, which include a large number of dummies. While some 
+robust panel data estimators have been proposed, they appear not to be consis-
+tent when the number of time periods is small, and cannot deal with dummies 
+not related to the within transformation (Aquaro and Pavel, 2010). 
+In this paper, we revisit the link between FDI and democracy in develop-
+ing countries, during the 1998-2006 period. We pay particular attention to 
+the multi-faceted nature of democracy, the influence of outliers, and the het-
+erogeneous relationship that may exist between these two variables. We use 
+a variety of measures to explore how each particular dimension of democ-
+racy can influence FDI. We develop a new robust dummy estimator, which 
+allows us to control for outliers in a fixed effects panel data model. Finally, 
+we investigate whether the impact of democracy on FDI depends on natural 
+resources, income inequality, and their interaction. Our results show that 
+democracy generally has a positive impact on FDI, once outliers are con-
+trolled for, but that this relationship is very specific to each host country's 
+characteristics. 
+The rest of the paper proceeds as follows. Section 2 introduces our new robust 
+dummy estimator and explains its advantages over existing robust regression 
+methods. Section 3 provides Monte-Carlo simulations highlighting the good 
+performance of our estimator. Section 4 replicates a key study on FDI and 
+democracy to highlight that the correct treatment of outliers is a key issue. 
+Section 5 describes the data used in our original empirical analysis and motivates </p>
+
+<p>R. DESBORDES AND V. VERARDI </p>
+
+<p>44 </p>
+
+<p>© 2017 John Wiley &amp; Sons Australia, Ltd </p>
+
+<p>Table 1. Selective review of the impact of democracy on FDI </p>
+
+<p>Reference </p>
+
+<p>Citations </p>
+
+<p>Sample 
+Main estimator(s) </p>
+
+<p>Dependent variable 
+Main proxy (proxies) </p>
+
+<p>Explicit control 
+for outliers </p>
+
+<p>Findings </p>
+
+<p>Harms and 
+Ursprung (2002) </p>
+
+<p>258 
+62 developing 
+countries; 
+1989-1997 </p>
+
+<p>Between 
+(cross-sectional); </p>
+
+<p>fixed effects </p>
+
+<p>FDI/population </p>
+
+<p>Freedom house 
+indexes of 
+political 
+rights and 
+civil rights </p>
+
+<p>Yes </p>
+
+<p>Positive but 
+statistically 
+significant only </p>
+
+<p>with a between 
+estimator </p>
+
+<p>Jensen (2003) </p>
+
+<p>653 
+114 developed 
+and developing 
+countries; 
+1970-1997 
+Fixed effects; 
+dynamic </p>
+
+<p>FDI/GDP </p>
+
+<p>Polity III score </p>
+
+<p>No </p>
+
+<p>Positive 
+direct impact </p>
+
+<p>Li and 
+Resnick (2003) </p>
+
+<p>587 
+53 developing 
+countries; 
+1982-1995 </p>
+
+<p>Pooled </p>
+
+<p>FDI </p>
+
+<p>Polity IV score </p>
+
+<p>No </p>
+
+<p>Negative direct 
+impact; indirect 
+positive impact </p>
+
+<p>via strengthening 
+property rights 
+protection </p>
+
+<p>Jakobsen and </p>
+
+<p>De Soysa (2006) </p>
+
+<p>88 
+99 developing 
+countries; 
+1984-2001 </p>
+
+<p>Pooled; 
+dynamic </p>
+
+<p>ln(FDI) </p>
+
+<p>Polity IV score </p>
+
+<p>Yes; log 
+transformation </p>
+
+<p>to attenuate 
+influence of 
+outliers in 
+dependent 
+variable; China 
+dummy variable </p>
+
+<p>Positive direct 
+impact </p>
+
+<p>Blanton and 
+Blanton (2007) </p>
+
+<p>114 
+129 developing 
+countries; 
+1980-2003 </p>
+
+<p>Pooled </p>
+
+<p>FDI/GDP </p>
+
+<p>Polity IV score </p>
+
+<p>No </p>
+
+<p>Statistically 
+insignificant </p>
+
+<p>impact </p>
+
+<p>Busse and 
+Hefeker (2007) </p>
+
+<p>576 
+83 developing 
+countries; 
+1984-2003 
+Fixed effects/ 
+DIFF-GMM; </p>
+
+<p>dynamic </p>
+
+<p>ln(FDI + sqrt(FDI </p>
+
+<p>2 </p>
+
+<p>+1)) ICRG </p>
+
+<p>democracy </p>
+
+<p>index </p>
+
+<p>No but 
+dependent 
+variable is 
+transformed </p>
+
+<p>Positive direct 
+impact </p>
+
+<p>(Continues) </p>
+
+<p>FOREIGN DIRECT INVESTMENT AND DEMOCRACY </p>
+
+
+
+<p>© 2017 John Wiley &amp; Sons Australia, Ltd </p>
+
+<p>Table 1. (Continued) </p>
+
+<p>Reference </p>
+
+<p>Citations </p>
+
+<p>Sample 
+Main estimator(s) </p>
+
+<p>Dependent variable 
+Main proxy (proxies) </p>
+
+<p>Explicit control 
+for outliers </p>
+
+<p>Findings </p>
+
+<p>Büthe and 
+Milner (2008) </p>
+
+<p>433 
+122 developing 
+countries; 
+1970-2000 </p>
+
+<p>Fixed effects </p>
+
+<p>FDI/GDP </p>
+
+<p>POLCON III; </p>
+
+<p>Polity IV 
+score; Freedom 
+House score </p>
+
+<p>Yes (exclusion 
+East Asian or 
+transition countries) </p>
+
+<p>Stronger political 
+constraints increase </p>
+
+<p>FDI; coefficients 
+on other proxies 
+are not statistically 
+significant </p>
+
+<p>Choi and 
+Samy (2008) </p>
+
+<p>47 
+80 developing 
+countries; 
+1985-2002 
+Fixed effects; 
+dynamic </p>
+
+<p>FDI/GDP </p>
+
+<p>POLCON III </p>
+
+<p>or Van Belle 
+(1997) Global 
+Press Freedom 
++ combination 
+Polity IV and 
+Institutional 
+Investor's 
+country credit </p>
+
+<p>risk ratings </p>
+
+<p>No </p>
+
+<p>Stronger political 
+constraints increase </p>
+
+<p>FDI; coefficients 
+on other proxies 
+are not statistically 
+significant </p>
+
+<p>Choi (2009) </p>
+
+<p>33 </p>
+
+<p>Replication Li </p>
+
+<p>and Resnick 
+(2003) </p>
+
+<p>Pooled </p>
+
+<p>FDI or 
+FDI/GDP </p>
+
+<p>Polity IV score </p>
+
+<p>Yes; DFBETAs 
+leading to dummy 
+variables for China </p>
+
+<p>and Albania; robust 
+regression (Àrreg-
+command in <rs type="software">Stata</rs>) </p>
+
+<p>Positive direct 
+impact when 
+outliers are 
+controlled for </p>
+
+<p>with or wihout 
+controlling for 
+property rights 
+protection </p>
+
+<p>Li (2009) </p>
+
+<p>29 </p>
+
+<p>Replication Li </p>
+
+<p>and Resnick 
+(2003) </p>
+
+<p>Pooled </p>
+
+<p>FDI or 
+ln(FDI + x) </p>
+
+<p>Polity IV score </p>
+
+<p>Yes; median 
+regression (Àqreg-</p>
+
+<p>in <rs type="software">Stata</rs>); use of 
+ln(FDI) </p>
+
+<p>Confirmation of </p>
+
+<p>original results </p>
+
+<p>(Continues) </p>
+
+<p>R. DESBORDES AND V. VERARDI </p>
+
+
+
+<p>© 2017 John Wiley &amp; Sons Australia, Ltd </p>
+
+<p>Table 1. (Continued) </p>
+
+<p>Reference </p>
+
+<p>Citations </p>
+
+<p>Sample 
+Main estimator(s) </p>
+
+<p>Dependent variable 
+Main proxy (proxies) </p>
+
+<p>Explicit control 
+for outliers </p>
+
+<p>Findings </p>
+
+<p>Asiedu and 
+Lien (2011) </p>
+
+<p>127 
+122 developing 
+countries; 
+1982-2007 </p>
+
+<p>DIFF/SYS-</p>
+
+<p>GMM; 
+dynamic </p>
+
+<p>FDI/GDP </p>
+
+<p>Freedom House 
+political rights; 
+Polity IV score; 
+ICRG democracy 
+index </p>
+
+<p>Positive (negative) 
+direct impact of 
+democracy when </p>
+
+<p>natural resource 
+abundance is low </p>
+
+<p>(high) </p>
+
+<p>Notes: FDI, foreign direct investent inflows. See Table 1 in Section 5 for definitions and sources of the various proxies for democracy. Citations taken from Google Scholar. </p>
+
+<p>FOREIGN DIRECT INVESTMENT AND DEMOCRACY </p>
+
+<p>47 </p>
+
+<p>© 2017 John Wiley &amp; Sons Australia, Ltd </p>
+
+<p>our econometric approach. Section 6 presents and interprets our empirical 
+results. Section 7 concludes. </p>
+
+<p>2. THE ROBUST DUMMY ESTIMATOR </p>
+
+<p>The objective of linear regression analysis is to examine how a dependent vari-
+able is linearly related to a set of explanatory variables. Technically speaking, 
+it consists in estimating the vector θ of unknown parameters in: </p>
+
+<p>y ¼ X θ þ ε; 
+(1) </p>
+
+<p>where y is the dependent variable and X is the (n × p) matrix of regressors. 
+Matrix X = (X 1 , X 2 ) is composed of two blocks: X 1 , which is the (n × p 1 ) matrix 
+of dummy variables, and X 2 , which is the (n × p 2 ) matrix of the continuous 
+variables (p = p 1 + p 2 ). 
+On the basis of the estimated parameters ^ 
+θ , it is possible to predict the 
+dependent variable ^ y and to fit the residual r i ¼ y i À ^ y i . Although θ can be 
+estimated in several ways, the underlying idea is always to try to get as close 
+as possible to the true model by minimizing an aggregate measure of dispersion 
+of the residuals. In the case of the well-known ordinary least squares (LS) 
+estimator, the measure of spread used is the variance. The vector of parameters 
+estimated by LS is, therefore: </p>
+
+<p>^ 
+θ LS ¼ arg min </p>
+
+<p>θ </p>
+
+<p>X n </p>
+
+<p>i¼1 </p>
+
+<p>r 2 
+i θ 
+ð Þ: 
+(2) </p>
+
+<p>A well-known feature of the variance (and, consequently, of LS) is that it is 
+extremely sensitive to the presence of outliers. To take this into account, 
+Rousseuw and Yohai (1984) propose another estimator, an S-estimator, that is 
+based on the minimization of another measure of dispersion, s, of the residuals, 
+an M-estimator of scale. 
+An M-estimator of scale is a very general class of estimators of dispersion that 
+do include the variance. Indeed, the M-estimator of scale is defined as a value of 
+s satisfying equality </p>
+
+<p>1 
+n </p>
+
+<p>X n </p>
+
+<p>i¼1 </p>
+
+<p>ρ 
+r i θ 
+ð Þ </p>
+
+<p>s </p>
+
+
+
+<p>¼ δ; 
+(3) </p>
+
+<p>where δ = E[ρ(Z)] with Z ∼ N(0, 1). If we choose as ρ function the square func-</p>
+
+<p>tion, δ = 1 and this equality becomes 1 
+n ∑ n </p>
+
+<p>i¼1 </p>
+
+<p>r i θ 
+ð Þ 
+s </p>
+
+<p>2 ¼ 1, which can be rewritten </p>
+
+<p>as 1 
+n ∑ n 
+i¼1 r i θ 
+ð Þ 2 ¼ s 2 , which is the definition of the variance (because r θ 
+ð Þ ¼ 0). </p>
+
+<p>As previously stated, an S-estimator of regression minimizes an M-estimator 
+of scale of the residuals. Because LS minimizes the variance of the residuals, 
+the LS estimator is a special type of S-estimator. </p>
+
+<p>R. DESBORDES AND V. VERARDI </p>
+
+
+
+<p>© 2017 John Wiley &amp; Sons Australia, Ltd </p>
+
+<p>A common choice for the ρ function in equation 3 is Tukey's biweight func-
+tion as defined in equation 4: </p>
+
+<p>ρ u 
+ð Þ ¼ </p>
+
+<p>k 2 
+6 
+1 À 1 À 
+u 
+k </p>
+
+<p>2 
+! 3 
+! </p>
+
+<p>if u 
+j j ≤ k </p>
+
+<p>k 2 
+6 
+if u 
+j j &gt; k </p>
+
+<p>8 
+&gt; &gt; &gt; &lt; </p>
+
+<p>&gt; &gt; &gt; : 
+; 
+(4) </p>
+
+<p>where u corresponds to standardized residuals. The loss function of LS can still 
+be obtained by considering a tuning parameter k going to infinity, as </p>
+
+<p>lim k→∞ </p>
+
+<p>k 2 
+6 </p>
+
+<p>1 À 1 À u </p>
+
+<p>k </p>
+
+<p>À Á 2 
+h 
+i 3 </p>
+
+<p>
+¼ 1 
+2 u 2 : 
+To increase robustness, the loss function should award less importance to 
+atypical observations (i.e. observations associated with very large residuals). 
+This is obtained by reducing the value of tuning parameter k. Figure 1 shows 
+Tukey's biweights function for different values of the tuning constant. In the 
+LS case (k = ∞), the importance of the standardized residuals u increases with 
+u. In the other cases, the importance awarded to residuals is bounded. If one sets 
+the tuning parameter very low, the resistance to outliers is very high but this will 
+come at a cost because the Gaussian efficiency of the estimator will be low. 
+There is, therefore, a trade-off between robustness and efficiency. A common 
+value for the tuning constant k is 1.546, which results in an estimator that has 
+a breakdown point of 50% (i.e. an estimator that withstands a contamination 
+of up to 50% of outliers before producing an arbitrary result). 
+Explicit formulas for ^ 
+θ are generally not available and it is necessary to call 
+on numerical optimization based on subsampling and iteratively reweighted al-
+gorithms to find a solution to equation 3. Unfortunately, it can be shown that 
+these algorithms turn out to be inapplicable when several dummy variables are 
+present, as can be the case in a fixed effects panel data setting. Indeed, as </p>
+
+<p>Figure 1. Tukey's biweights function for different values of the tuning constant (k). </p>
+
+<p>FOREIGN DIRECT INVESTMENT AND DEMOCRACY </p>
+
+
+
+<p>© 2017 John Wiley &amp; Sons Australia, Ltd </p>
+
+<p>emphasized by Maronna and Yohai (2000), subsampling algorithms can easily 
+lead to collinearity within subsamples if various dummies are among the 
+regressors. 
+To cope with this issue, several procedures have been proposed. Rousseeuw 
+and Wagner (1994) propose a procedure that guarantees that individuals in all 
+the categories identified by the dummies are present in the subsets, therefore 
+circumventing the issue of perfect multicollinearity. This algorithm, however, 
+leads to a great number of replications and, therefore, becomes excessively 
+slow (and unapplicable) when data sets are large. Hubert and Rousseeuw 
+(1997) suggest using a multivariate outlier detection tool to identify leverage 
+points (i.e. outliers in the x-dimension), which they then apply a weight zero 
+to, and subsequently, to use an estimator that withstands contamination on 
+the vertical dimension (such as median regression), but that does not need 
+to be robust against leverage points (because these have already been re-
+moved). However, they focus exclusively on continuous right-hand side 
+variables. 
+Finally, Maronna and Yohai (2000) propose two estimators. First is the M-
+GM estimator, which is similar to that of Hubert and Rousseeuw (1997), but 
+where the influence of dummies in the multivariate setup is tackled by 
+partialling them out. This estimator has a low breakdown point. Second is 
+the M-S estimator, which alternates two estimators: an M-estimator and an 
+S-estimator. Regression monotonic M-estimators are easy to compute and 
+minimize the sum of a less rapidly increasing function of the residuals than 
+the quadratic loss function. The drawback of these estimators is that they 
+can only be used when outliers belong to the dependent variable and there 
+is no outlyingness in the space of the explanatory variables (i.e. when no le-
+verage points are present). This is the case when a continuous variable is 
+regressed on a set of dummy variables. In contrast, S-estimators cope well 
+with leverage points but their practical implementation is often unfeasible 
+when several dummies are present due to the existence of collinear subsam-
+ples. The MS algorithm alternates, therefore, between an M-estimator after 
+partialling-out continuous variables and an S-estimator after partialling-out 
+dummy explanatory variables. The partialling-out is done using the estimated 
+parameters obtained in the previous M or S step. A disadvantage of this 
+method is that the algorithm has to be stopped after a set number of itera-
+tions, even though there is no guarantee that no better solution would have 
+appeared in further replications. Indeed, as stated by Maronna and Yohai 
+(2000), the scale (the measure of dispersion of the residuals) does not neces-
+sarily decrease after each iteration. 
+To avoid these drawbacks, we advocate working with an S-estimator that has 
+good properties and that can theoretically handle dummies. However, we pro-
+pose modifying the optimization code in a manner that avoids perfectly collinear 
+subsamples. The algorithm is described in detail in the Appendix. Once the pa-
+rameters are estimated, it is straightforward to identify outliers. This is done by 
+calculating standardized residuals (i.e. robust residuals divided by their disper-
+sion) and identifying those larger than a given cut-off point. The cut-off point </p>
+
+<p>R. DESBORDES AND V. VERARDI </p>
+
+
+
+<p>© 2017 John Wiley &amp; Sons Australia, Ltd </p>
+
+<p>that we use is 2.25. 1 Having identified the outliers, we can award them a weight 
+zero and run a standard LS regression. 
+In the next section, we present some Monte-Carlo simulations to show the 
+good behaviour of the S-estimator programmed in this way. </p>
+
+<p>3. MONTE-CARLO SIMULATIONS </p>
+
+<p>We run three different simulations: </p>
+
+<p>a. For a first set of simulations, three design variables, X 1 , X 2 , X 3 and an error 
+term u are generated from four N(0, 1) series. The dependent variable y is 
+generated according to the data generating process (DGP): y it = X 1it + X 2it 
++ X 3it + u it . 
+b. For a second set of simulations, 20 dummy variables, generated from inde-
+pendent Bernouilli distributions (p = 0.5), are added to the design space. 
+The DGP becomes y it ¼ X 1it þ X 2it þ X 3it þ ∑ 20 
+j¼1 d j þ u it : 
+c. For a final set of simulations, a panel fixed effects (FE) setup is created. Var-
+iables X 2 , X 3 and the error term u are generated from three independent 
+N(0, 1) series. Variable X 1 and the individual constants are not independent 
+and are generated in the following way: 
+(i) variables X 1 and d come from a bivariate normal distribution N(μ, Σ), </p>
+
+<p>where μ = (0, 0) and Σ ¼ 
+1 0:8 </p>
+
+<p>0:8 1 </p>
+
+<p>! 
+: </p>
+
+<p>(ii) the d variable is modified according to transformation d = round(d * 5) 
+and the DGP becomes y it = X 1it + X 2it + X 3it + d i + u it , with Corr(X 1it , 
+d i ) ≠ 0. The unit-specific effects will be estimated using dummy 
+variables. </p>
+
+<p>To create outliers, 10 observations for the X 1 variable are modified and ran-
+domly picked from an N(0, 10) series. For all simulations the sample size is 
+200 and the number of simulations is 1000. In all simulations, y is regressed 
+on the Xs and the dummies using, respectively, a robust dummy estimator (the 
+S-estimator programmed using the code we propose) and a classical LS estima-
+tor. We report </p>
+
+<p>• in Figure 2, the histogram of the coefficients associated to variables X 1 , X 2 and 
+X 3 , in all three scenarios. We call the estimated coefficients B 1 , B 2 and B 3 ; 
+and 
+• in Tables 2 and 3, the bias and the mean squared error (MSE) of the param-
+eters estimated using the robust dummy estimator and the classical LS 
+estimator. </p>
+
+<p>1 If the residuals were normally distributed, values above or below these cut-off points would be 
+strongly atypical because they would be 2.25 standard deviations away from the mean (which is zero 
+by construction), with a probability of occurrence of 0.025. </p>
+
+<p>FOREIGN DIRECT INVESTMENT AND DEMOCRACY </p>
+
+
+
+<p>© 2017 John Wiley &amp; Sons Australia, Ltd </p>
+
+<p>Figure 2. Behaviour of the robust dummy estimator. </p>
+
+<p>Table 2. Bias and MSE of the robust dummy estimator </p>
+
+<p>Setup1 
+Setup 2 
+Setup 3 </p>
+
+<p>Bias 
+MSE 
+Bias 
+MSE 
+Bias 
+MSE </p>
+
+<p>B1 
+À0.004 
+0.007 
+À0.007 
+0.016 
+À0.004 
+0.044 
+B2 
+À0.003 
+0.006 
+À0.01 
+0.015 
+À0.004 
+0.016 
+B3 
+À0.003 
+0.007 
+À0.005 
+0.0131 
+À0.015 
+0.014 </p>
+
+<p>Note: Values for parameters B1, B2, B3: 1, 1, 1. MSE, mean squared error. </p>
+
+<p>Table 3. Bias and MSE of the LS estimator </p>
+
+<p>Setup 1 
+Setup 2 
+Setup 3 </p>
+
+<p>Bias 
+MSE 
+Bias 
+MSE 
+Bias 
+MSE </p>
+
+<p>B1 
+À0.829 
+0.688 
+À0.806 
+0.651 
+À1.001 
+1.003 
+B2 
+À0.013 
+0.006 
+À0.042 
+0.007 
+0.003 
+0.008 
+B3 
+À0.119 
+0.020 
+0.091 
+0.014 
+0.008 
+0.010 </p>
+
+<p>Note: Values for parameters B1, B2, B3: 1, 1, 1. MSE, mean squared error. </p>
+
+<p>R. DESBORDES AND V. VERARDI </p>
+
+
+
+<p>© 2017 John Wiley &amp; Sons Australia, Ltd </p>
+
+<p>As can be seen from the simulations, the robust dummy estimator behaves 
+well when dummies are present. All estimated coefficients are normally dis-
+tributed (Fig. 2) and the bias and MSE are minimal (Tables 2 and 3). In 
+contrast, and as expected, the least squares estimator behaves poorly in 
+every scenario. 
+Having shown the good behaviour of our robust-to-outliers dummy estima-
+tor, we now investigate the robustness of the findings of a key study on the rela-
+tionship between FDI and democracy. </p>
+
+<p>4. REPLICATION </p>
+
+<p>According to Google Scholar, Jensen (2003) is the most cited empirical study on 
+the relationship between FDI and democracy. It has been cited 650 times, and, 
+as shown in Figure 3, it remains a key reference today. In this section, we inves-
+tigate the robustness of this study's findings to outliers. 2 The sample covers 112 
+countries over the period 1970-1997, the dependent variable is FDI inflows as a 
+share of GDP, and the proxy for democracy is Polity IV score (see Table 5 for a 
+description). We focus on the key regression of the paper: model 10 in Table 4. 
+The estimates suggest that a fully autocratic government (score of 0) becoming 
+fully democratic (score of 20) can be expected to attract 0.4% more FDI flows 
+as a percentage of GDP). Given that the average level of FDI flows in the 
+sample is 1.3% of GDP, this is a sizeable amount. 
+Table 4 presents our results. Column (1) replicates perfectly the estimates 
+found in Jensen (2003). In column (2), we remove the observations identified 
+as outliers by the Cook distance, which is a scaled measure of the distance be-
+tween the coefficient vectors when a given observation is omitted. Five percent 
+of the observations are deemed to be outliers. Their omission has no qualitative 
+impact on the results. In column (3) we use an M-estimator, which gives a lower 
+weight to observations with large standardized residuals but is not robust to le-
+verage points. The estimated impact of democracy falls by half. In column (4), 
+the M-estimator is used again, but the sample now only includes observations 
+that have not been identified as outliers, and, therefore, potential leverage 
+points, in column (2). This is essentially what the <rs type="software">Stata</rs> command -rreg-is doing. 
+Results are similar to those in column (4). </p>
+
+<p>Figure 3. Citations of Jensen (2003). </p>
+
+<p>2 Data are downloaded from Nathan Jensen's website (http://www.natemjensen.com/replication-
+data/). </p>
+
+<p>FOREIGN DIRECT INVESTMENT AND DEMOCRACY </p>
+
+
+
+<p>© 2017 John Wiley &amp; Sons Australia, Ltd </p>
+
+<p>Table 4. The sensitivity of Jensen (2003) </p>
+
+<p>findings to outliers </p>
+
+<p>Dependent variable: FDI inflows/GDP </p>
+
+<p>FE </p>
+
+<p>FE </p>
+
+<p>M </p>
+
+<p>M </p>
+
+<p>R-FE </p>
+
+<p>FE </p>
+
+<p>MS </p>
+
+<p>FE </p>
+
+<p>FE </p>
+
+<p>R-FE </p>
+
+<p>Omission 
+'Cook' 
+outliers </p>
+
+<p>Omission 
+'Cook' 
+outliers </p>
+
+<p>Outliers 
+only </p>
+
+<p>Omission 
+transition 
+countries </p>
+
+<p>Interaction 
+regional 
+dummies </p>
+
+<p>Interaction 
+regional 
+dummies </p>
+
+<p>(1) </p>
+
+<p>(2) </p>
+
+<p>(3) </p>
+
+<p>(4) </p>
+
+<p>(5) </p>
+
+<p>(6) </p>
+
+<p>(7) </p>
+
+<p>(8) </p>
+
+<p>(9) </p>
+
+<p>(10) </p>
+
+<p>Lagged FDI </p>
+
+<p>0.364*** 
+(0.072) </p>
+
+<p>0.451*** 
+(0.031) </p>
+
+<p>0.498*** 
+(0.036) </p>
+
+<p>0.509*** 
+(0.022) </p>
+
+<p>0.601*** 
+(0.016) </p>
+
+<p>0.200* 
+(0.106) </p>
+
+<p>0.583*** 
+(0.014) </p>
+
+<p>0.356*** 
+(0.072) </p>
+
+<p>0.328*** 
+(0.061) </p>
+
+<p>0.522*** 
+(0.007) </p>
+
+<p>Market size </p>
+
+<p>À0.554 
+(0.448) </p>
+
+<p>À0.498** 
+(0.242) </p>
+
+<p>À0.267 
+(0.188) </p>
+
+<p>À0.287* 
+(0.151) </p>
+
+<p>À0.055 
+(0.081) </p>
+
+<p>0.063 
+(1.713) </p>
+
+<p>À0.021 
+(0.078) </p>
+
+<p>À0.184 
+(0.432) </p>
+
+<p>À0.212 
+(0.251) </p>
+
+<p>0.178* 
+(0.093) </p>
+
+<p>Growth </p>
+
+<p>0.024*** 
+(0.008) </p>
+
+<p>0.013*** 
+(0.004) </p>
+
+<p>0.010*** 
+(0.004) </p>
+
+<p>0.009*** 
+(0.003) </p>
+
+<p>0.003* 
+(0.002) </p>
+
+<p>0.086*** 
+(0.025) </p>
+
+<p>0.004* 
+(0.002) </p>
+
+<p>0.026*** 
+(0.008) </p>
+
+<p>0.023*** 
+(0.008) </p>
+
+<p>0.003*** 
+(0.001) </p>
+
+<p>Development level </p>
+
+<p>0.834* 
+(0.447) </p>
+
+<p>0.782*** 
+(0.279) </p>
+
+<p>0.508** 
+(0.203) </p>
+
+<p>0.519*** 
+(0.170) </p>
+
+<p>0.180* 
+(0.097) </p>
+
+<p>0.250 
+(1.673) </p>
+
+<p>0.111 
+(0.092) </p>
+
+<p>0.477 
+(0.420) </p>
+
+<p>0.669** 
+(0.297) </p>
+
+<p>À0.020 
+(0.113) </p>
+
+<p>Budget deficit </p>
+
+<p>À0.023** 
+(0.011) </p>
+
+<p>À0.000 
+(0.005) </p>
+
+<p>0.003 
+(0.004) </p>
+
+<p>0.004 
+(0.003) </p>
+
+<p>À0.002 
+(0.002) </p>
+
+<p>À0.077** 
+(0.033) </p>
+
+<p>0.000 
+(0.002) </p>
+
+<p>À0.021** 
+(0.011) </p>
+
+<p>À0.024** 
+(0.011) </p>
+
+<p>0.001 
+(0.002) </p>
+
+<p>Government 
+consumption </p>
+
+<p>À0.039** 
+(0.017) </p>
+
+<p>À0.024*** 
+(0.009) </p>
+
+<p>À0.010 
+(0.007) </p>
+
+<p>À0.009 
+(0.006) </p>
+
+<p>À0.005 
+(0.004) </p>
+
+<p>À0.074 
+(0.058) </p>
+
+<p>À0.006 
+(0.004) </p>
+
+<p>À0.044** 
+(0.017) </p>
+
+<p>À0.042*** 
+(0.014) </p>
+
+<p>À0.002 
+(0.003) </p>
+
+<p>Polity IV score </p>
+
+<p>0.021*** 
+(0.008) </p>
+
+<p>0.021*** 
+(0.006) </p>
+
+<p>0.011*** 
+(0.004) </p>
+
+<p>0.011*** 
+(0.003) </p>
+
+<p>0.005** 
+(0.002) </p>
+
+<p>0.037 
+(0.043) </p>
+
+<p>0.006** 
+(0.002) </p>
+
+<p>0.004 
+(0.008) </p>
+
+<p>À0.008 
+(0.006) </p>
+
+<p>0.001 
+(0.002) </p>
+
+<p>Eighties </p>
+
+<p>À0.077 
+(0.187) </p>
+
+<p>À0.042 
+(0.076) </p>
+
+<p>À0.040 
+(0.075) </p>
+
+<p>À0.034 
+(0.052) </p>
+
+<p>À0.035 
+(0.025) </p>
+
+<p>À0.334 
+(0.714) </p>
+
+<p>À0.008 
+(0.031) </p>
+
+<p>À0.106 
+(0.185) </p>
+
+<p>À0.188 
+(0.151) </p>
+
+<p>À0.051* 
+(0.027) </p>
+
+<p>Nineties </p>
+
+<p>0.263 
+(0.289) </p>
+
+<p>0.131 
+(0.125) </p>
+
+<p>0.102 
+(0.116) </p>
+
+<p>0.081 
+(0.082) </p>
+
+<p>0.030 
+(0.039) </p>
+
+<p>0.021 
+(1.159) </p>
+
+<p>0.090** 
+(0.046) </p>
+
+<p>0.144 
+(0.289) </p>
+
+<p>À0.091 
+(0.337) </p>
+
+<p>À0.029 
+(0.040) </p>
+
+<p>Nineties × EAS </p>
+
+<p>2.624*** 
+(0.394) </p>
+
+<p>1.852*** 
+(0.068) </p>
+
+<p>Nineties × SSA </p>
+
+<p>À0.280 
+(0.231) </p>
+
+<p>À0.166*** 
+(0.044) </p>
+
+<p>Nineties × LAC </p>
+
+<p>1.055*** 
+(0.316) </p>
+
+<p>0.332*** 
+(0.044) </p>
+
+<p>(Continues) </p>
+
+<p>R. DESBORDES AND V. VERARDI </p>
+
+
+
+<p>© 2017 John Wiley &amp; Sons Australia, Ltd </p>
+
+<p>Table 4. (Continued) </p>
+
+<p>Dependent variable: FDI inflows/GDP </p>
+
+<p>FE </p>
+
+<p>FE </p>
+
+<p>M </p>
+
+<p>M </p>
+
+<p>R-FE </p>
+
+<p>FE </p>
+
+<p>MS </p>
+
+<p>FE </p>
+
+<p>FE </p>
+
+<p>R-FE </p>
+
+<p>Omission 
+'Cook' 
+outliers </p>
+
+<p>Omission 
+'Cook' 
+outliers </p>
+
+<p>Outliers 
+only </p>
+
+<p>Omission 
+transition 
+countries </p>
+
+<p>Interaction 
+regional 
+dummies </p>
+
+<p>Interaction 
+regional 
+dummies </p>
+
+<p>(1) </p>
+
+<p>(2) </p>
+
+<p>(3) </p>
+
+<p>(4) </p>
+
+<p>(5) </p>
+
+<p>(6) </p>
+
+<p>(7) </p>
+
+<p>(8) </p>
+
+<p>(9) </p>
+
+<p>(10) </p>
+
+<p>Observations </p>
+
+<p>1628 </p>
+
+<p>1541 </p>
+
+<p>1628 </p>
+
+<p>1541 </p>
+
+<p>1229 </p>
+
+<p>399 </p>
+
+<p>1257 </p>
+
+<p>1562 </p>
+
+<p>1628 </p>
+
+<p>1227 </p>
+
+<p>Number of countries </p>
+
+<p>112 </p>
+
+<p>111 </p>
+
+<p>112 </p>
+
+<p>111 </p>
+
+<p>112 </p>
+
+<p>80 </p>
+
+<p>112 </p>
+
+<p>101 </p>
+
+<p>112 </p>
+
+<p>111 </p>
+
+<p>R </p>
+
+<p>2 </p>
+
+<p>0.613 </p>
+
+<p>0.798 </p>
+
+<p>0.823 </p>
+
+<p>0.873 </p>
+
+<p>0.945 </p>
+
+<p>0.518 </p>
+
+<p>0.944 </p>
+
+<p>0.612 </p>
+
+<p>0.627 </p>
+
+<p>0.951 </p>
+
+<p>Notes: ***p 
+&lt; 0.01; **p </p>
+
+<p>&lt; 0.05; *p 
+&lt; 0.10. Cluster-robust standard errors are in parentheses. Country </p>
+
+<p>fixed effects are included but not reported. FE, standard </p>
+
+<p>fixed effects </p>
+
+<p>estimator; R-FE, robust 
+fixed effects estimator; M-S, estimator of regression, another robust 
+fitting approach; M, Huber M-estimator of regression, robust to vertical outliers </p>
+
+<p>only. Cook, Cook distance: a diagnostic tool to detect outliers after estimation by OLS. Eighties: dummy variable for period 1980-1999; Nineties: dummy variable for period 
+1990-1997. EAS: dummy variable for transition countries; SSA: dummy variable for Sub-Saharan African countries; LAC: dummy variable for Latin American and Caribbean 
+countries. Estimation of model 10 in Table 4 of Jensen (2003) using various robust estimators and different specifications. </p>
+
+<p>FOREIGN DIRECT INVESTMENT AND DEMOCRACY </p>
+
+
+
+<p>© 2017 John Wiley &amp; Sons Australia, Ltd </p>
+
+<p>In column (5), we now use our robust-to-outliers dummy estimator. The coef-
+ficient on democracy remains positive and statistically significant. However, the 
+estimated effect of democracy on FDI is only 25% of the magnitude of the initial 
+estimate. A fully autocratic government becoming fully democratic can now be 
+expected to attract only 0.1% more FDI flows as a percentage of GDP. It is 
+worth noting than the fit of this regression is much better than that of column 
+(1): the R 2 increases from 0.613 to 0.945. This reflects the fact that a sizeable 
+number of observations (25%) are not well explained by the empirical model. 
+In column (6), the model is estimated using the outlying observations. It can 
+be seen that the vast majority of countries had experienced atypical FDI flows. 
+These episodes are not well predicted by past FDI flows and tend to coincide 
+with changes in economic growth and fiscal stance. In column (7), we use the 
+MS estimator. Results are very close to those in column (5). 3 
+Figure 4 provides a way of assessing the most outlying countries. Countries 
+are classified as outliers when the value of the mean of the residuals standardized 
+by a robust estimate of their standard deviation is greater than 2.25 (dashed 
+lines). The most outlying countries tend to be small countries, located in Eastern 
+Europe, Latin America or Sub-Saharan Africa. It is often not straightforward to 
+explain why some observations are outliers. However, in the case of Eastern 
+Europe countries, it is easy to interpret their atypical behaviour as the conse-
+quence of the fall of the Berlin Wall, and their subsequent adoption of 
+market-based economic systems with mixed results. Figure 5 shows that the 
+Eastern Europe countries in the sample experienced a boom in FDI and rapid 
+democratization after the year 1989, despite deteriorating macroeconomic con-
+ditions. These two concomitant trends may explain the positive relationship be-
+tween FDI and democracy identified in column (1). </p>
+
+<p>3 In the final estimation stage, the M-S estimator uses all (weighted) observations, whereas our ro-
+bust dummy estimator omits identified outliers. This explains why the reported number of observa-
+tions is different in columns (5) and (7). </p>
+
+<p>Figure 4. Large outliers. </p>
+
+<p>R. DESBORDES AND V. VERARDI </p>
+
+
+
+<p>© 2017 John Wiley &amp; Sons Australia, Ltd </p>
+
+<p>We investigate this possibility in column (8) where we remove Eastern Euro-
+pean countries from the sample (4% of the observations). We now fail to find 
+a statistically significant impact of democracy on FDI. It could be argued that 
+these observations provide valuable information because they could be 
+interpreted as encompassing a 'natural experiment' on the effects of democracy 
+on FDI. Hence, in column (9), we use the full sample but we include interaction 
+terms between the nineties dummy variable and three regional dummy variables 
+(EAS, Eastern Europe; SSA, Sub-Saharan Africa; LAC, Latin America and the 
+Carribean). In that way, we control for common effects in each region that may 
+influence FDI and may also be correlated with democracy. The coefficients on 
+the interaction terms indicate that the EAS and LAC regions have, indeed, 
+attracted, holding other factors constant, much more FDI than other regions 
+in the nineties. Once we control for these regional effects, the coefficient on de-
+mocracy becomes negative and statistically insignificant, suggesting that democ-
+ratization occurred at the same time as the improvement of the business 
+environment for foreign investors, but did not have a direct effect on a country's 
+attractiveness. Finally, in column (10), we estimate the model of column (9) 
+using our robust-to-outliers dummy estimator. Relative to column (5), the num-
+ber of outliers identified is roughly the same but we now fail to find a statistically 
+significant impact of democracy on FDI. 
+To sum up, we initially found that the estimated impact of democracy on FDI 
+put forward by Jensen (2003) is reduced by three-quarters when we control for 
+outliers. The outlying observations were not identified by common robust 
+methods and diagnostic tools. Analysis of the outliers suggested the adoption 
+of a more flexible model, which took into account that some regions have expe-
+rienced dramatic changes in their political and economic conditions. When we 
+did so, controlling for outliers or not, we failed to find a statistically significant 
+positive impact of democracy on FDI. Hence, the findings of Jensen (2003) </p>
+
+<p>Figure 5. Key indicators for transition countries.Note: FDI, foreign direct 
+investment. </p>
+
+<p>FOREIGN DIRECT INVESTMENT AND DEMOCRACY </p>
+
+
+
+<p>© 2017 John Wiley &amp; Sons Australia, Ltd </p>
+
+<p>seems to stem from model misspecification (a restrictive empirical model) that 
+we were able to identify and mitigate thanks to our robust-to-outliers dummy 
+estimator. 
+We now turn to our contribution to the empirical literature. </p>
+
+<p>5. EFFECTS OF DEMOCRACY ON FOREIGN DIRECT INVESTMENT: EMPIRICAL 
+MODEL AND DATA </p>
+
+<p>Democracy is an elusive concept. Schumpeter (1942, p. 250) adopted a minimal-
+ist perspective by defining it as 'the institutional arrangement for arriving at po-
+litical decisions in which individuals acquire the power to decide by means of a 
+competitive struggle for the people's vote'. His vision revolves around the exis-
+tence of contested elections, which can be interpreted as a disciplining device, 
+but does not involve any reference to the institutional arrangements constraining 
+the abuse of political powers between elections. These constitutional checks and 
+balances are, nevertheless, often judged to be a vital democratic attribute 
+(Munck and Verkuilen, 2002). Media freedom is also perceived as a crucial com-
+ponent of a well-functioning democracy as it guarantees that formal and real ac-
+countability overlap. The various proxies that we use in this paper cover these 
+various aspects of democracy. Table 5 provides detailed information on each 
+measure. To facilitate comparison of estimates, we normalize all variables: each 
+proxy of democracy is rescaled to have a mean of zero and a standard deviation 
+of one. 
+We will test each of these democracies' proxies, using the following fixed 
+effects dynamic panel data model: </p>
+
+<p>ln FDI 
+ð 
+Þ it ¼ γ 1 ln FDI 
+ð 
+Þ itÀ1 þ β 1 Democracy it þ β 2 Regulatory Quality it 
+þβ 3 ln GDP 
+ð 
+Þ it þ β 4 ln POP 
+ð 
+Þ it þ C i þ T t þ ε it </p>
+
+<p>; </p>
+
+<p>where C i are time-invariant country-specific effects, T t are country-invariant 
+time effects and ε it is the error term. Our measure of FDI is the log of financial 
+FDI stock (liabilities), which have been carefully compiled for a large sample of 
+countries over the period 1970-2006 by Lane and Milesi-Ferretti (2007). Note 
+that unlike the studies reported in Table 1, we use FDI stocks instead of FDI 
+flows. As explained by Egger and Merlo (2007), theoretical models of FDI sug-
+gest that this is the appropriate dependent variable; change in the value of a 
+given determinant leads to FDI flows until a new steady-state FDI stock is 
+reached. 
+We wish to keep the sample constant across all regressors. Data for the 
+Worldwide Governance Indicators (WGI) voice and accountability indicator 
+start in 1996, and are only available in even years from 1998 to 2002. We de-
+cided, therefore, to work with the same 2-year interval data set, whichever the 
+measure of democracy tested. Overall, our sample covers 111 developing coun-
+tries and 5 years: 1998, 2000, 2002, 2004 and 2006. For each country, we have, 
+therefore, a maximum of five observations. 
+This short time dimension of our panel, the presence of a lagged dependent 
+variable and the inclusion of fixed effects, motivate us to keep our empirical </p>
+
+<p>R. DESBORDES AND V. VERARDI </p>
+
+
+
+<p>© 2017 John Wiley &amp; Sons Australia, Ltd </p>
+
+<p>Table 5. Various proxies of democracy </p>
+
+<p>Full name </p>
+
+<p>Database name </p>
+
+<p>Source </p>
+
+<p>Definition </p>
+
+<p>Original scale 
+(worst to best) </p>
+
+<p>Availability </p>
+
+<p>Polity IV score </p>
+
+<p>POLITY2 </p>
+
+<p>Marshall </p>
+
+<p>et al. </p>
+
+<p>(2010) 
+Computed as subtracting the autocracy score form the democracy </p>
+
+<p>score. Both scores are derived from codings of the competitiveness </p>
+
+<p>of political participation, the openness and competitiveness of 
+executive recruitment, and constraints on the chief executive. </p>
+
+<p>À10 to 10 </p>
+
+<p>167 countries; 
+1800-2014 </p>
+
+<p>Freedom House </p>
+
+<p>(FH) political 
+rights </p>
+
+<p>PR </p>
+
+<p>Freedom House 
+(2010b) 
+Based on a checklist of 10 political rights questions. The political 
+rights questions are grouped into three subcategories: electoral 
+process, political pluralism and participation, functioning of 
+government. </p>
+
+<p>7 to 1 </p>
+
+<p>195 countries; 
+1973-2015 </p>
+
+<p>Polity IV 
+constraints on 
+executive </p>
+
+<p>XCONST </p>
+
+<p>Marshall </p>
+
+<p>et al. </p>
+
+<p>(2010) 
+Extent of institutionalized constraints on the decision-making 
+powers of chief executives, whether individuals or collectivities. 
+Such limitations may be imposed by any </p>
+
+<p>'accountability groups'. </p>
+
+<p>1 to 7 </p>
+
+<p>167 countries; 
+1800-2014 </p>
+
+<p>Henisz 
+political 
+constraints </p>
+
+<p>POLCONIII 
+Henisz (2000) 
+Degree of constraints on policy change using data on the number </p>
+
+<p>of independent veto points in the policy system (executive, 
+legislative, judicial, and sub-federal branches of government) and </p>
+
+<p>the distribution of political preferences both across and within 
+these branches. </p>
+
+<p>0 to 1 </p>
+
+<p>208 countries; 
+1800-2012 </p>
+
+<p>Database of 
+Political 
+Institutions </p>
+
+<p>(DPI) checks 
+and balances </p>
+
+<p>CHECKS </p>
+
+<p>Beck et al. 
+(2001) 
+Number of veto players in a political system, adjusting for 
+whether these veto players are independent of each other, as 
+determined by the level of electoral competitiveness in a </p>
+
+<p>system, their respective party affiliation, and the electoral rules. </p>
+
+<p>1 to 18 </p>
+
+<p>181 countries; 
+1975-2012 </p>
+
+<p>Worldwide 
+governance 
+indicators (WGI) </p>
+
+<p>voice and 
+accountability </p>
+
+<p>VA </p>
+
+<p>Kaufmann </p>
+
+<p>et al. </p>
+
+<p>(2004) 
+Perceptions of the extent to which a country's citizens are able </p>
+
+<p>to participate in selecting their government, as well as freedom 
+of expression, freedom of association, and a free media. 
+Aggregation of 32 different measures of democracy. </p>
+
+<p>À2.5 to 2.5 </p>
+
+<p>215 countries; 
+1996-2013 </p>
+
+<p>Freedom House </p>
+
+<p>(FH) press 
+freedom </p>
+
+<p>GLOBAL </p>
+
+<p>Freedom House 
+(2010a) 
+Assesses the degree of print, broadcast, and internet freedom </p>
+
+<p>100 to 0 </p>
+
+<p>199 countries; 
+1980-2015 </p>
+
+<p>Notes: In the empirical analysis, all variables are standardized; they have been rescaled to have a mean of zero and a standard deviation of one. </p>
+
+<p>FOREIGN DIRECT INVESTMENT AND DEMOCRACY </p>
+
+
+
+<p>© 2017 John Wiley &amp; Sons Australia, Ltd </p>
+
+<p>model parsimonious. In addition to democracy, we control for four other vari-
+ables. The lagged dependent variable captures the sluggish adjustment of FDI 
+stocks towards their long-run levels over time (Kinoshita and Mody, 2001). 
+Market size (GDP) is the most accepted determinant of FDI (Chakrabarti, 
+2001). The combination of GDP and population size allows us to control for 
+the level of development, which can be seen as a catchall proxy for various fac-
+tors attracting or deterring FDI (e.g. consumers' purchasing power or labour 
+costs; Benassy-Quere et al., 2007; Cheung and Qian, 2009; Lane, 2015). Finally, 
+we include the World Bank governance measure of regulatory quality. This gov-
+ernance dimension has frequently been found to be one of the most statistically 
+significant institutional determinants of FDI (Globerman and Shapiro, 2003; 
+Daude and Stein, 2007) and is well-correlated with the different measures of de-
+mocracy (r≃0:60). We do not include other governance variables because we do 
+not want to eliminate the channels of influence through which democratic 
+changes can influence FDI (e.g. a strengthening of property rights protection). 
+Finally, we assume that other FDI determinants are captured adequately by 
+the fixed effects, including time-invariant country characteristics that may be 
+correlated with democracy. 
+It could be argued that the time-series dimension of our panel is too short to 
+identify the impact of democracy on FDI through the investigation of how 
+changes in FDI are related to changes in democracy. However, Table 6 shows 
+that the within variation of the measures of democracy is relatively high, with 
+values ranging between one-third and half of the between-variation. This rela-
+tively high time-series variation indicates that many countries have experienced 
+changes in their political regimes over the period 1998-2006. In more economet-
+ric terms, although we do not exploit the between-variation of the data, the 
+within-variation of the data is high enough to allow the relatively precise identi-
+fication of the parameters of our empirical model. 
+It is well known that the fixed effects estimator for dynamic panel models is 
+biased and inconsistent for fixed T time periods, due to the correlation of the 
+within transformed lagged dependent variable with the within transformed er-
+ror term (Nickell, 1981). Using instrumental variables methods to obtain con-
+sistent estimates would singularly complicate the implementation of our </p>
+
+<p>Table 6. Between and within components of the standard deviations of democratic 
+proxies </p>
+
+<p>Measure 
+Between 
+Within 
+Ratio B/W </p>
+
+<p>Polity IV score 
+0.95 
+0.26 
+0.27 
+FH political rights 
+0.95 
+0.29 
+0.31 
+Polity IV constraints on executive 
+0.95 
+0.30 
+0.32 
+Henisz strength of veto players 
+0.90 
+0.43 
+0.48 
+DPI strength of veto players 
+0.92 
+0.40 
+0.43 
+FH press freedom 
+0.93 
+0.33 
+0.35 
+WGI voice and accountability 
+0.96 
+0.24 
+0.25 </p>
+
+<p>Notes: DPI, Database of Political Institutions; FH, Freedom House; WGI, Worldwide Governance Indi-
+cator. Between-variation: standard deviation of x i . Within variation: standard deviation of (x it À x i Þ.) </p>
+
+<p>R. DESBORDES AND V. VERARDI </p>
+
+
+
+<p>© 2017 John Wiley &amp; Sons Australia, Ltd </p>
+
+<p>robust-to-outliers dummy estimator and distract us from our main focus. We 
+circumvent this issue by constraining γ 1 = 0.75, which is the value that we ob-
+tain when we estimate this coefficient over the 1980-2006 period for our sam-
+ple of countries, using a robust application (see Desbordes and Verardim 
+2011) of the Anderson and Hsiao (1981) dynamic panel data estimator. 4 </p>
+
+<p>6. EMPIRICAL RESULTS </p>
+
+<p>6.1. Baseline results </p>
+
+<p>Our initial empirical results are presented in Table 7. For each measure of de-
+mocracy, we provide the classical FE estimates, the robust dummy (R-FE) esti-
+mates, and, for comparison, Maronna and Yohai (2000) M-S estimates. 
+Supporters of democracy would find the FE estimates extremely disappoint-
+ing as no democratic attribute appears to exert a substantial and statistically sig-
+nificant effect on FDI. Furthermore, it is disconcerting to find that GDP, the 
+most robust FDI determinant in the literature, is not statistically significant. In 
+contrast, the R-FE estimates paint a much different and nuanced picture. For 
+most proxies, democracy appears to have a positive and statistically significant 
+impact on FDI. A one standard deviation increase in democracy would increase 
+FDI by approximately 3-10% in the short run. These effects are not negligible 
+because they are equivalent to a 20-40% rise in GDP (holding population con-
+stant), which is now also a statistically significant determinant of FDI, along 
+with population. Foreign investors seem to be particularly attracted by countries 
+in which political decisions become more constrained by institutional checks and 
+balances and greater media freedom. Column (8 0 ) of Table 7 shows that a free 
+press trumps other democratic attributes defining a 'liberal democracy', includ-
+ing checks and balances. 
+Media freedom does not necessarily coincide with free and fair elections 
+(r ≈ 0.82) or the level of political constraints faced by policy-makers (r ≈ 0.49). 
+In other words, autocracies and (partially) free media seem compatible. Egorov 
+et al. (2009) suggest that this coexistence results from the need for an autocrat to 
+obtain some independent feedback on the performance of the bureaucracy. In 
+column (9 0 ) of Table 7, the Freedom House (FH) Press Freedom index is 
+decomposed into its three subcategories: (1) legal environment, which assesses 
+'both and examination of the laws and regulations that could influence media 
+content as well as the government's inclination to use these laws and legal insti-
+tutions in order to restrict the media's ability to operate'; (2) political environ-
+ment, which measures 'the degree of political control over the content of news 
+media'; 3) economic environment, which is related to 'the economic consider-
+ations that can influence the media's activities' (Freedom House, 2010a, pp. 
+12-13). Only the last two dimensions appear to be significant FDI determinants. 
+Freille et al. (2007) find a similar outcome when investigating the impact of </p>
+
+<p>4 Due to data availability, the estimated empirical model did not include the World Bank gover-
+nance measure of regulatory quality. Results are similar when we use different values within the 
+95% confidence interval [0.77,0.84] of the coefficient. </p>
+
+<p>FOREIGN DIRECT INVESTMENT AND DEMOCRACY </p>
+
+
+
+<p>© 2017 John Wiley &amp; Sons Australia, Ltd </p>
+
+<p>Table 7. Foreign direct investment (FDI) and democracy </p>
+
+<p>Dependent variable: </p>
+
+<p>ln(FDI stock </p>
+
+<p>t ) 
+À 0.75 </p>
+
+<p>* </p>
+
+<p>ln(FDI stock </p>
+
+<p>t </p>
+
+<p>À 1 ) </p>
+
+<p>FE (1) </p>
+
+<p>R-FE (1 0 
+) M-S (1″) </p>
+
+<p>FE (2) </p>
+
+<p>R-FE (2 0 
+) M-S (2″) </p>
+
+<p>FE (3) </p>
+
+<p>R-FE (3 0 
+) M-S (3″) </p>
+
+<p>FE (4) </p>
+
+<p>R-FE (4 0 
+) M-S (4″) </p>
+
+<p>Polity IV score </p>
+
+<p>0.014 
+(0.031) </p>
+
+<p>0.031** 
+(0.015) </p>
+
+<p>0.005 
+(0.020) </p>
+
+<p>FH political rights </p>
+
+<p>À0.002 
+(0.028) </p>
+
+<p>À0.007 
+(0.013) </p>
+
+<p>À0.023** 
+(0.011) </p>
+
+<p>Polity IV 
+constraints </p>
+
+<p>on executive </p>
+
+<p>0.020 
+(0.032) </p>
+
+<p>0.090*** 
+(0.020) </p>
+
+<p>0.012 
+(0.014) </p>
+
+<p>Henisz political 
+constraints </p>
+
+<p>À0.022 
+(0.018) </p>
+
+<p>0.008 </p>
+
+<p>(0.009) </p>
+
+<p>À0.019*** </p>
+
+<p>(0.006) </p>
+
+<p>ln(market size) </p>
+
+<p>0.155 
+(0.102) </p>
+
+<p>0.160*** 
+(0.038) </p>
+
+<p>0.201*** 
+(0.048) </p>
+
+<p>0.155 
+(0.103) </p>
+
+<p>0.176*** 
+(0.033) </p>
+
+<p>0.205*** 
+(0.009) </p>
+
+<p>0.157 
+(0.102) </p>
+
+<p>0.217*** 
+(0.029) </p>
+
+<p>0.179*** 
+(0.039) </p>
+
+<p>0.153 
+(0.100) </p>
+
+<p>0.172*** </p>
+
+<p>(0.035) </p>
+
+<p>0.200*** </p>
+
+<p>(0.034) </p>
+
+<p>ln(population) </p>
+
+<p>À0.149 
+(0.509) </p>
+
+<p>À0.950*** 
+(0.117) </p>
+
+<p>À0.555*** 
+(0.089) </p>
+
+<p>À0.124 
+(0.488) </p>
+
+<p>À1.007*** 
+(0.123) </p>
+
+<p>À0.586*** 
+(0.013) </p>
+
+<p>À0.157 
+(0.507) </p>
+
+<p>À0.626*** 
+(0.125) </p>
+
+<p>À0.571*** 
+(0.073) </p>
+
+<p>À0.109 
+(0.492) </p>
+
+<p>À1.024*** </p>
+
+<p>(0.123) </p>
+
+<p>À0.520*** </p>
+
+<p>(0.053) </p>
+
+<p>WGI Regulatory 
+Quality </p>
+
+<p>0.121*** 
+(0.039) </p>
+
+<p>0.072*** 
+(0.018) </p>
+
+<p>0.037*** 
+(0.011) </p>
+
+<p>0.123*** 
+(0.039) </p>
+
+<p>0.078*** 
+(0.018) </p>
+
+<p>0.036** 
+(0.016) </p>
+
+<p>0.119*** 
+(0.040) </p>
+
+<p>0.109*** 
+(0.015) </p>
+
+<p>0.039*** 
+(0.013) </p>
+
+<p>0.126*** 
+(0.038) </p>
+
+<p>0.074*** </p>
+
+<p>(0.019) </p>
+
+<p>0.039*** </p>
+
+<p>(0.009) </p>
+
+<p>Observations </p>
+
+<p>489 </p>
+
+<p>357 </p>
+
+<p>489 </p>
+
+<p>489 </p>
+
+<p>358 </p>
+
+<p>489 </p>
+
+<p>489 </p>
+
+<p>352 </p>
+
+<p>489 </p>
+
+<p>489 </p>
+
+<p>357 </p>
+
+<p>489 </p>
+
+<p>Countries </p>
+
+<p>111 </p>
+
+<p>107 </p>
+
+<p>111 </p>
+
+<p>111 </p>
+
+<p>105 </p>
+
+<p>111 </p>
+
+<p>111 </p>
+
+<p>106 </p>
+
+<p>111 </p>
+
+<p>111 </p>
+
+<p>104 </p>
+
+<p>111 </p>
+
+<p>R </p>
+
+<p>2 </p>
+
+<p>0.855 </p>
+
+<p>0.991 </p>
+
+<p>0.823 </p>
+
+<p>0.855 </p>
+
+<p>0.992 </p>
+
+<p>0.821 </p>
+
+<p>0.855 </p>
+
+<p>0.992 </p>
+
+<p>0.823 </p>
+
+<p>0.856 </p>
+
+<p>0.991 </p>
+
+<p>0.822 </p>
+
+<p>Dependent variable: ln(FDI stock </p>
+
+<p>t ) 
+À 0.75 </p>
+
+<p>* </p>
+
+<p>ln(FDI stock </p>
+
+<p>t </p>
+
+<p>À 1 ) </p>
+
+<p>FE (5) </p>
+
+<p>R-FE (5 0 </p>
+
+<p>) 
+M-S (5″) </p>
+
+<p>FE (6) </p>
+
+<p>R-FE (6 0 </p>
+
+<p>) 
+M-S (6″) </p>
+
+<p>FE (7) </p>
+
+<p>R-FE (7 0 </p>
+
+<p>) 
+M-S (7″) </p>
+
+<p>R-FE (8 0 </p>
+
+<p>) </p>
+
+<p>R-FE (9 0 </p>
+
+<p>) </p>
+
+<p>FH political rights </p>
+
+<p>À0.005 
+(0.021) </p>
+
+<p>DPI checks and 
+balances </p>
+
+<p>À0.024 
+(0.021) </p>
+
+<p>0.032*** 
+(0.012) </p>
+
+<p>0.057*** 
+(0.007) </p>
+
+<p>0.004 
+(0.026) </p>
+
+<p>(Continues) </p>
+
+<p>R. DESBORDES AND V. VERARDI </p>
+
+
+
+<p>© 2017 John Wiley &amp; Sons Australia, Ltd </p>
+
+<p>Table 7. (Continued) </p>
+
+<p>Dependent variable: ln(FDI stock </p>
+
+<p>t ) 
+À 0.75 </p>
+
+<p>* </p>
+
+<p>ln(FDI stock </p>
+
+<p>t </p>
+
+<p>À 1 ) </p>
+
+<p>FE (5) </p>
+
+<p>R-FE (5 0 </p>
+
+<p>) 
+M-S (5″) </p>
+
+<p>FE (6) </p>
+
+<p>R-FE (6 0 </p>
+
+<p>) 
+M-S (6″) </p>
+
+<p>FE (7) </p>
+
+<p>R-FE (7 0 </p>
+
+<p>) 
+M-S (7″) </p>
+
+<p>R-FE (8 0 </p>
+
+<p>) </p>
+
+<p>R-FE (9 0 </p>
+
+<p>) </p>
+
+<p>FH press freedom </p>
+
+<p>0.005 
+(0.026) </p>
+
+<p>0.057*** 
+(0.008) </p>
+
+<p>0.040*** 
+(0.014) </p>
+
+<p>0.067*** 
+(0.020) </p>
+
+<p>WGI voice and 
+accountability </p>
+
+<p>À0.007 
+(0.040) </p>
+
+<p>0.087*** 
+(0.020) </p>
+
+<p>0.103*** 
+(0.022) </p>
+
+<p>FHP legal 
+environment </p>
+
+<p>0.013 
+(0.011) </p>
+
+<p>FHP political 
+environment </p>
+
+<p>0.035*** 
+(0.007) </p>
+
+<p>FHP economic 
+environment </p>
+
+<p>0.029*** 
+(0.008) </p>
+
+<p>ln(market size) </p>
+
+<p>0.144 
+(0.100) </p>
+
+<p>0.218*** 
+(0.029) </p>
+
+<p>0.209*** 
+(0.031) </p>
+
+<p>0.153 
+(0.102) </p>
+
+<p>0.248*** 
+(0.031) </p>
+
+<p>0.225 
+(0.181) </p>
+
+<p>0.154 
+(0.103) </p>
+
+<p>0.194*** 
+(0.046) </p>
+
+<p>0.121 
+(0.098) </p>
+
+<p>0.182*** 
+(0.054) </p>
+
+<p>0.173*** 
+(0.036) </p>
+
+<p>ln(population) </p>
+
+<p>À0.128 
+(0.486) </p>
+
+<p>À0.711*** 
+(0.127) </p>
+
+<p>À0.800*** 
+(0.063) </p>
+
+<p>À0.136 
+(0.509) </p>
+
+<p>À0.813*** 
+(0.115) </p>
+
+<p>À0.663* 
+(0.338) </p>
+
+<p>À0.119 
+(0.510) </p>
+
+<p>À0.768*** 
+(0.147) </p>
+
+<p>À0.707*** 
+(0.189) </p>
+
+<p>À0.817 
+(0.189) </p>
+
+<p>À0.713 
+(0.114) </p>
+
+<p>WGI regulatory 
+quality </p>
+
+<p>0.130*** 
+(0.039) </p>
+
+<p>0.036** 
+(0.014) </p>
+
+<p>À0.015 
+(0.021) </p>
+
+<p>0.122*** 
+(0.039) </p>
+
+<p>0.100*** 
+(0.014) </p>
+
+<p>0.050 
+(0.087) </p>
+
+<p>0.124*** 
+(0.038) </p>
+
+<p>0.088*** 
+(0.016) </p>
+
+<p>0.036 
+(0.042) </p>
+
+<p>0.071*** 
+(0.027) </p>
+
+<p>0.120*** 
+(0.012) </p>
+
+<p>Observations </p>
+
+<p>489 </p>
+
+<p>352 </p>
+
+<p>489 </p>
+
+<p>489 </p>
+
+<p>351 </p>
+
+<p>489 </p>
+
+<p>489 </p>
+
+<p>350 </p>
+
+<p>489 </p>
+
+<p>331 </p>
+
+<p>349 </p>
+
+<p>Countries </p>
+
+<p>111 </p>
+
+<p>109 </p>
+
+<p>111 </p>
+
+<p>111 </p>
+
+<p>108 </p>
+
+<p>111 </p>
+
+<p>111 </p>
+
+<p>109 </p>
+
+<p>111 </p>
+
+<p>88 </p>
+
+<p>107 </p>
+
+<p>R </p>
+
+<p>2 </p>
+
+<p>0.856 </p>
+
+<p>0.994 </p>
+
+<p>0.819 </p>
+
+<p>0.855 </p>
+
+<p>0.994 </p>
+
+<p>0.825 </p>
+
+<p>0.855 </p>
+
+<p>0.994 </p>
+
+<p>0.823 </p>
+
+<p>0.980 </p>
+
+<p>0.994 </p>
+
+<p>Notes: ***p 
+&lt; 0.01; **p </p>
+
+<p>&lt; 0.05; *p 
+&lt; 0.10. Cluster-robust standard errors are in parentheses, except when the M-S estimator is used (heteroskedasticity-robust only). Time and </p>
+
+<p>country effects are included but not reported. FDI, foreign direct investment; FH, Freedom House. For each proxy of democracy, the empirical model is estimated using a (i) 
+standard 
+fixed effects estimator (FE); (ii) our robust 
+fixed effects estimator (R-FE); and (iii) a M-S estimator of regression (M-S), another robust </p>
+
+<p>fitting approach. </p>
+
+<p>FOREIGN DIRECT INVESTMENT AND DEMOCRACY </p>
+
+
+
+<p>© 2017 John Wiley &amp; Sons Australia, Ltd </p>
+
+<p>media freedom on corruption. Overall, these results suggest that the key factor 
+that explains why democracies attract more FDI than autocracies is their ten-
+dency to exhibit greater media freedom, which presumably restrains bureau-
+cratic corruption and enhances policy transparency. From another perspective, 
+an autocracy can be as successful as a democracy in terms of attracting FDI 
+as long as these two outcomes are met; the success of Singapore immediately 
+comes to mind. 
+The other dimension of public governance, regulatory quality, always exerts a 
+positive and statistically significant impact on FDI, whatever the estimator used, 
+although its influence appears to be smaller when outliers are controlled for. 
+Based on column (6 0 ), a one standard deviation improvement in the quality of 
+regulations would have approximately twice the short-run positive impact as a 
+one standard deviation move towards more media freedom (10%). Amin and 
+Djankov (2009) show that democratic regimes tend to favour pro-business 
+microeconomic reforms. On this basis, it is likely that the direct impact of 
+democracy on FDI that we have estimated represents a lower bound effect 
+because it does not account for the positive impact of democracy via better 
+regulatory quality. 
+For each regression, approximately 28% of the observations are flagged as 
+outliers by the R-FE estimator. As can be seen at the bottom of Table 7, many 
+countries are occasionally outliers during the period 1996-2006. Predominant 
+sources of R-FE and M-S outliers for regressions (7 0 ) and (7″) can be observed in 
+Figure 6a. This Figure indicates the countries for which the average standard-
+ized residual is outside the non-outlying range delimited by the two horizontal 
+lines. When [only] the median standardized residual is also outside this range, 
+a square [triangle] is used instead of a circle. The two estimators tend to identify 
+the same countries as sources of large outliers although divergences occur. For 
+example, the R-FE estimator considers that some observations related to Haiti 
+are large outliers, whereas this is not the case for the MS estimator. The choice </p>
+
+<p>Figure 6. Identification of outliers: (a) R-FE estimator and (b) M-S estimator. 
+Notes: Circle: value of the average standardized residual smaller than À2.25 or 
+greater than 2.25. Triangle: value of the median standardized residual smaller than 
+À2.25 or greater than 2.25. Square: values of both the average and median stan-
+dardized residuals smaller than À2.25 or greater than 2.25. </p>
+
+<p>R. DESBORDES AND V. VERARDI </p>
+
+
+
+<p>© 2017 John Wiley &amp; Sons Australia, Ltd </p>
+
+<p>between these two estimators can be based on the R 2 values, reported at the bot-
+tom of Table 7. It can be seen that the R-FE estimator drastically increases the 
+fit of the empirical model, whereas this is not true for the MS-estimator. Hence, 
+the former estimator seems more suitable to explain the typical response of FDI 
+to democratic changes. 5 
+The presence of few squares and triangles in the left and right panels of 
+Figure 6 shows that very few countries are block concentrated outliers (Bramati 
+and Croux, 2007); that is, for most countries, the volume of FDI that they re-
+ceived was, most of the time, well predicted by the empirical model estimated. 
+For regression (7), the block outliers are Djibouti and Lybia. Interestingly, the 
+FDI performance of the so-called BRICS countries, 6 which accounted for 
+48% of the change in total FDI liabilities during the sample period, does not 
+appear to have been atypical, despite the fact that some studies have frequently 
+suggested that they are outliers (Choi, 2009). Hence, contrary to some of the 
+worries raised in the political science literature (Li, 2009), the use of robust 
+regression methods does not necessarily imply a drastic loss of coverage of the 
+activities of foreign investors. Large FDI recipients are not necessary outliers, 
+as long as the empirical model is reasonably well specified. 
+The use of summary statistics in Figure 6a is not informative about the FDI 
+trajectory of 'atypical' countries and obscures the fact that not all observations 
+related to these countries are outliers. Figure 7 illustrates these two issues by 
+plotting the yearly standardized residuals for four countries previously flagged 
+as source of outliers. It shows that the empirical model was unable to explain 
+the large fluctuations in FDI received by countries like Botswana (BWA) or 
+Zambia (ZMB) over the period 1998-2006 or the greater attractiveness of </p>
+
+<p>5 An additional advantage of our estimator is that it allows easy correction of the standard errors for 
+clustering. </p>
+
+<p>Figure 7. Foreign direct investment attractiveness of four atypical countries. </p>
+
+<p>6 BRICS countries are Brazil, Russia, India, China and South Africa. </p>
+
+<p>FOREIGN DIRECT INVESTMENT AND DEMOCRACY </p>
+
+
+
+<p>© 2017 John Wiley &amp; Sons Australia, Ltd </p>
+
+<p>Zambia (ZMB) or Tajikistan (TJK) after the year 2002. Figure 7 reflects the dif-
+ficulty for the researcher to model the economic developments of heterogenous 
+countries with a parsimonious set of control variables; the empirical model 
+may explain well the average response but necessarily struggle to account for 
+country-specific idiosyncracies. </p>
+
+<p>6.2. Democracy and natural resources </p>
+
+<p>Asiedu and Lien (2011) argue that democracy promotes FDI only in non-
+resource exporting countries. Their rationale, supported by their empirical anal-
+ysis is that, in resource-exporting countries, which tend to attract FDI mainly 
+concentrated in extractive industries, foreign investors prefer the stability and 
+easy access to natural resources that an autocracy presumably offers. This is a 
+remarkable finding as it goes against the alleged benefits of democracy outlined 
+in the Introduction and because Guriev et al. (2011) and Jensen and Johnston 
+(2011) have shown that autocracies are more likely to expropriate foreign inves-
+tors, including in the petroleum, natural gas and mining sectors. Nevertheless, 
+we re-estimate our econometric model, which now includes the proxy of Asiedu 
+and Lien (2011) for natural resource rich countries, the share of fuel and min-
+erals in total merchandise exports, and its interaction with our different mea-
+sures of democracy. Data on exports come from UNCTAD. 7 
+Table 8 shows that estimates based on the classical FE estimator would, to a 
+certain extent, support the arguments of Asiedu and Lien (2011). However, once 
+again, the R-FE estimates tell a different story. In most regressions, the coeffi-
+cient on the interaction term is positive, large, and statistically significant, indi-
+cating that the higher a country's natural resource export intensity, the more 
+positive the effect of democracy on FDI. Figure 8 summarizes the relationship 
+between the effect of democracy on FDI and natural resource abundance; the 
+impact of democracy is presented at different deciles of the share of fuel and 
+minerals in total merchandise exports. For high levels of natural resources, 
+whichever the measure of democracy employed, the impact of greater democ-
+racy is positive, statistically significant and substantially much larger than in 
+resource-poor countries. 
+The negative association between violent conflicts and democracy may ex-
+plain why the latter matters particularly for FDI in extractive industries. Given 
+the high sunk costs that foreign firms in the mining and oil sectors incur, they are 
+likely to be strongly deterred by violent sociopolitical instability and other forms 
+of destructive conflicts (e.g. riots and guerilla warfare) that threaten their assets 
+(Barham et al., 1998). Democracy may reduce social and political unrest, which 
+may also be more likely in resource-exporting countries. 
+From an exogenous perspective, it can be expected that democracy provides 
+to dissatisfied groups both the political opportunity to become actively involved 
+into the decision-making progress and peaceful channels of expression to voice </p>
+
+<p>7 Data available from: http://unctadstat.unctad.org/. </p>
+
+<p>R. DESBORDES AND V. VERARDI </p>
+
+
+
+<p>© 2017 John Wiley &amp; Sons Australia, Ltd </p>
+
+<p>Table 8. Foreign direct investment (FDI), democracy and natural resource abundance </p>
+
+<p>Dependent variable: ln(FDI stock </p>
+
+<p>t ) 
+À 0.75 </p>
+
+<p>* </p>
+
+<p>ln(FDI stock </p>
+
+<p>t </p>
+
+<p>À 1 ) </p>
+
+<p>FE (1) </p>
+
+<p>R-FE (1 0 </p>
+
+<p>) </p>
+
+<p>FE (2) </p>
+
+<p>R-FE (2 0 </p>
+
+<p>) </p>
+
+<p>FE (3) </p>
+
+<p>R-FE (3 0 </p>
+
+<p>) </p>
+
+<p>FE (4) </p>
+
+<p>R-FE (4 0 </p>
+
+<p>) </p>
+
+<p>Polity IV score </p>
+
+<p>À0.006 
+(0.031) </p>
+
+<p>0.358*** 
+(0.041) </p>
+
+<p>FH political rights </p>
+
+<p>0.005 
+(0.027) </p>
+
+<p>À0.017 
+(0.015) </p>
+
+<p>Polity IV constraints 
+on executive </p>
+
+<p>0.001 
+(0.031) </p>
+
+<p>0.115*** 
+(0.030) </p>
+
+<p>Henisz political 
+constraints </p>
+
+<p>À0.017 
+(0.022) </p>
+
+<p>À0.002 
+(0.012) </p>
+
+<p>Natural resource 
+abundance </p>
+
+<p>À0.144 
+(0.099) </p>
+
+<p>À0.215*** 
+(0.057) </p>
+
+<p>À0.189* 
+(0.105) </p>
+
+<p>À0.115*** 
+(0.040) </p>
+
+<p>À0.136 
+(0.107) </p>
+
+<p>À0.189*** 
+(0.056) </p>
+
+<p>À0.191** 
+(0.095) </p>
+
+<p>À0.251*** 
+(0.058) </p>
+
+<p>Democracy × Natural 
+resource abundance </p>
+
+<p>0.075 
+(0.067) </p>
+
+<p>0.318*** 
+(0.052) </p>
+
+<p>À0.021 
+(0.078) </p>
+
+<p>0.117*** 
+(0.038) </p>
+
+<p>0.075 
+(0.075) </p>
+
+<p>0.220*** 
+(0.046) </p>
+
+<p>À0.019 
+(0.054) </p>
+
+<p>0.136*** 
+(0.030) </p>
+
+<p>Observations </p>
+
+<p>489 </p>
+
+<p>348 </p>
+
+<p>489 </p>
+
+<p>345 </p>
+
+<p>489 </p>
+
+<p>341 </p>
+
+<p>489 </p>
+
+<p>345 </p>
+
+<p>Countries </p>
+
+<p>111 </p>
+
+<p>106 </p>
+
+<p>111 </p>
+
+<p>105 </p>
+
+<p>111 </p>
+
+<p>107 </p>
+
+<p>111 </p>
+
+<p>107 </p>
+
+<p>R </p>
+
+<p>2 </p>
+
+<p>0.856 </p>
+
+<p>0.993 </p>
+
+<p>0.856 </p>
+
+<p>0.994 </p>
+
+<p>0.857 </p>
+
+<p>0.991 </p>
+
+<p>0.857 </p>
+
+<p>0.992 </p>
+
+<p>FE (5) </p>
+
+<p>RÀFE (5 0 </p>
+
+<p>) </p>
+
+<p>FE (6) </p>
+
+<p>RÀFE (6 0 </p>
+
+<p>) </p>
+
+<p>FE (7) </p>
+
+<p>RÀFE (7 0 </p>
+
+<p>) </p>
+
+<p>R 
+ÀFE (8 0 </p>
+
+<p>) </p>
+
+<p>FH political rights </p>
+
+<p>À0.015 
+(0.027) </p>
+
+<p>DPI checks and 
+balances </p>
+
+<p>À0.013 
+(0.026) </p>
+
+<p>À0.022 
+(0.015) </p>
+
+<p>À0.057** 
+(0.022) </p>
+
+<p>FH press freedom </p>
+
+<p>0.009 
+(0.022) </p>
+
+<p>0.041*** 
+(0.015) </p>
+
+<p>0.004 
+(0.026) </p>
+
+<p>WGI voice and 
+accountability </p>
+
+<p>0.013 
+(0.033) </p>
+
+<p>0.054*** 
+(0.018) </p>
+
+<p>Natural resource 
+abundance </p>
+
+<p>À0.176* 
+(0.091) </p>
+
+<p>À0.060 
+(0.048) </p>
+
+<p>À0.189 
+(0.120) </p>
+
+<p>À0.034 
+(0.050) </p>
+
+<p>À0.221** 
+(0.111) </p>
+
+<p>À0.105** 
+(0.041) </p>
+
+<p>À0.356*** 
+(0.092) </p>
+
+<p>Democracy × Natural 
+resource abundance </p>
+
+<p>À0.028 
+(0.069) </p>
+
+<p>0.175*** 
+(0.025) </p>
+
+<p>À0.023 
+(0.109) </p>
+
+<p>0.062 
+(0.047) </p>
+
+<p>À0.068 
+(0.081) </p>
+
+<p>0.061* 
+(0.034) </p>
+
+<p>(Continues) </p>
+
+<p>FOREIGN DIRECT INVESTMENT AND DEMOCRACY </p>
+
+
+
+<p>© 2017 John Wiley &amp; Sons Australia, Ltd </p>
+
+<p>Table 8. (Continued) </p>
+
+<p>Dependent variable: ln(FDI stock </p>
+
+<p>t ) 
+À 0.75 </p>
+
+<p>* </p>
+
+<p>ln(FDI stock </p>
+
+<p>t </p>
+
+<p>À 1 ) </p>
+
+<p>FE (1) </p>
+
+<p>R-FE (1 0 </p>
+
+<p>) </p>
+
+<p>FE (2) </p>
+
+<p>R-FE (2 0 </p>
+
+<p>) </p>
+
+<p>FE (3) </p>
+
+<p>R-FE (3 0 </p>
+
+<p>) </p>
+
+<p>FE (4) </p>
+
+<p>R-FE (4 0 </p>
+
+<p>) </p>
+
+<p>FH political rights × 
+Natural resource 
+abundance </p>
+
+<p>0.234** 
+(0.098) </p>
+
+<p>DPI checks and balances × 
+Natural resource abundance </p>
+
+<p>0.262*** 
+(0.069) </p>
+
+<p>FH press freedom × Natural 
+resource abundance </p>
+
+<p>À0.026 
+(0.070) </p>
+
+<p>Observations </p>
+
+<p>489 </p>
+
+<p>346 </p>
+
+<p>489 </p>
+
+<p>346 </p>
+
+<p>489 </p>
+
+<p>350 </p>
+
+<p>350 </p>
+
+<p>Countries </p>
+
+<p>111 </p>
+
+<p>104 </p>
+
+<p>111 </p>
+
+<p>105 </p>
+
+<p>111 </p>
+
+<p>108 </p>
+
+<p>100 </p>
+
+<p>R </p>
+
+<p>2 </p>
+
+<p>0.856 </p>
+
+<p>0.993 </p>
+
+<p>0.856 </p>
+
+<p>0.993 </p>
+
+<p>0.856 </p>
+
+<p>0.994 </p>
+
+<p>0.990 </p>
+
+<p>Notes: ***p 
+&lt; 0.01; **p </p>
+
+<p>&lt; 0.05; *p 
+&lt; 0.10. Cluster-robust standard errors are in parentheses. Time and country effects are included but not reported. All regressions control for </p>
+
+<p>market size, population, and regulatory quality. FH, Freedom House; FHP, Freedom House Press freedom; DPI, Database of Political Institutions; WGI, Worldwide Gover-
+nance Indicator. Natural resource abundance: share of fuel and minerals in total merchandise exports. For each proxy of democracy, the empirical model is estimated using: (i) a 
+standard 
+fixed effects estimator (FE); and (ii) our robust 
+fixed effects estimator (R-FE). Relative to the initial regression model, an interaction term between natural resource </p>
+
+<p>abundance and democracy is included. </p>
+
+<p>R. DESBORDES AND V. VERARDI </p>
+
+
+
+<p>© 2017 John Wiley &amp; Sons Australia, Ltd </p>
+
+<p>their grievances (Rummel, 1995; Ellingsen, 2000). Hence, stronger checks and 
+balances, which may not only proxy for policy stability but also for the degree 
+of political inclusiveness (Reynal-Querol, 2005), and media freedom, may guar-
+antee that discontent is expressed in non-violent and destructive ways, such as 
+protests (Przeworski et al., 2000; Pal, 2011). From an endogenous perspective, 
+democratization may have been the rational choice of the elites that do not wish 
+to be expropriated when faced with the likelihood of a revolution too costly to 
+repress or to avoid via redistributive policies (Acemoglu and Robinson, 2006). 
+Even though democracy and violence are again negatively correlated, it is the 
+threat of the later that has triggered the emergence of the latter. Whichever the 
+causality sense, the premium that FDI in extractive industries put on non-
+violence can explain their attractiveness for democracy. </p>
+
+<p>6.3. The mediating role of inequality </p>
+
+<p>It is possible that the link between FDI, democracy and natural resources de-
+pends on an additional factor. A prominent candidate from the growth literature 
+is income inequality. In a textbook median voter model, greater income inequal-
+ity leads to more demands for redistribution, resulting in more taxation (Alesina 
+and Perotti, 1994). A government wishing to maximize its chances to be </p>
+
+<p>Figure 8. Foreign direct investment (FDI) in resource exporting countries and 
+democracyNote: Dashed lines delimit the 95% confidence interval. DPI, Database 
+of Political Institutions; FH, Freedom House; WGI, Worldwide Governance 
+Indicators. </p>
+
+<p>FOREIGN DIRECT INVESTMENT AND DEMOCRACY </p>
+
+
+
+<p>© 2017 John Wiley &amp; Sons Australia, Ltd </p>
+
+<p>Table 9. Foreign direct investment (FDI) in resource exporting countries, democracy and income inequality </p>
+
+<p>Dependent variable: ln(FDI stock </p>
+
+<p>t ) 
+À 0.75 </p>
+
+<p>* </p>
+
+<p>ln(FDI stock </p>
+
+<p>t </p>
+
+<p>À 1 ) </p>
+
+<p>FE (1) </p>
+
+<p>R-FE (1 0 </p>
+
+<p>) </p>
+
+<p>FE (2) </p>
+
+<p>R-FE (2 0 </p>
+
+<p>) </p>
+
+<p>FE (3) </p>
+
+<p>R-FE (3 0 </p>
+
+<p>) </p>
+
+<p>FE (4) </p>
+
+<p>R-FE (4 0 </p>
+
+<p>) </p>
+
+<p>Polity IV score </p>
+
+<p>À0.191 
+(0.178) </p>
+
+<p>À0.528*** 
+(0.064) </p>
+
+<p>FH political rights </p>
+
+<p>À0.258 
+(0.202) </p>
+
+<p>0.348*** 
+(0.125) </p>
+
+<p>Polity IV constraints 
+on executive </p>
+
+<p>À0.135 
+(0.162) </p>
+
+<p>À0.416*** 
+(0.124) </p>
+
+<p>Henisz political 
+constraints </p>
+
+<p>À0.233 
+(0.156) </p>
+
+<p>À0.191*** 
+(0.068) </p>
+
+<p>Natural resource 
+abundance </p>
+
+<p>À0.383 
+(0.731) </p>
+
+<p>À1.404*** 
+(0.339) </p>
+
+<p>À0.417 
+(0.779) </p>
+
+<p>0.998*** 
+(0.249) </p>
+
+<p>À0.128 
+(0.683) </p>
+
+<p>À0.801* 
+(0.462) </p>
+
+<p>À0.564 
+(0.645) </p>
+
+<p>0.998*** 
+(0.312) </p>
+
+<p>Gini index </p>
+
+<p>0.009 
+(0.007) </p>
+
+<p>0.006** 
+(0.003) </p>
+
+<p>0.008 
+(0.007) </p>
+
+<p>0.019*** 
+(0.004) </p>
+
+<p>0.009 
+(0.007) </p>
+
+<p>0.008** 
+(0.003) </p>
+
+<p>0.008 
+(0.003) </p>
+
+<p>0.012*** 
+(0.004) </p>
+
+<p>Natural resource 
+abundance × Gini index </p>
+
+<p>0.004 
+(0.015) </p>
+
+<p>0.030*** 
+(0.008) </p>
+
+<p>0.005 
+(0.016) </p>
+
+<p>À0.035*** 
+(0.006) </p>
+
+<p>À0.001 
+(0.014) </p>
+
+<p>0.006 
+(0.010) </p>
+
+<p>0.007 
+(0.013) </p>
+
+<p>À0.033*** 
+(0.007) </p>
+
+<p>Democracy × Natural 
+Resources </p>
+
+<p>0.595 
+(0.433) </p>
+
+<p>3.126*** 
+(0.294) </p>
+
+<p>0.886* 
+(0.494) </p>
+
+<p>À0.089 
+(0.233) </p>
+
+<p>0.926* 
+(0.499) </p>
+
+<p>2.464*** 
+(0.301) </p>
+
+<p>0.445 
+(0.531) </p>
+
+<p>0.722*** 
+(0.243) </p>
+
+<p>Democracy × Gini index </p>
+
+<p>0.004 
+(0.004) </p>
+
+<p>0.017*** 
+(0.002) </p>
+
+<p>0.005 
+(0.005) </p>
+
+<p>À0.008** 
+(0.003) </p>
+
+<p>0.003 
+(0.004) </p>
+
+<p>0.009*** 
+(0.003) </p>
+
+<p>0.005 
+(0.003) </p>
+
+<p>0.004*** 
+(0.002) </p>
+
+<p>Democracy × Gini index </p>
+
+<p>× Natural resource 
+abundance </p>
+
+<p>À0.011 
+(0.009) </p>
+
+<p>À0.067*** 
+(0.007) </p>
+
+<p>À0.017 
+(0.011) </p>
+
+<p>0.010* 
+(0.006) </p>
+
+<p>À0.017 
+(0.011) </p>
+
+<p>À0.046*** 
+(0.007) </p>
+
+<p>À0.010 
+(0.012) </p>
+
+<p>À0.011** 
+(0.005) </p>
+
+<p>Observations </p>
+
+<p>411 </p>
+
+<p>282 </p>
+
+<p>411 </p>
+
+<p>279 </p>
+
+<p>411 </p>
+
+<p>283 </p>
+
+<p>411 </p>
+
+<p>281 </p>
+
+<p>Countries </p>
+
+<p>103 </p>
+
+<p>95 </p>
+
+<p>103 </p>
+
+<p>89 </p>
+
+<p>103 </p>
+
+<p>96 </p>
+
+<p>103 </p>
+
+<p>93 </p>
+
+<p>R </p>
+
+<p>2 </p>
+
+<p>0.922 </p>
+
+<p>0.994 </p>
+
+<p>0.923 </p>
+
+<p>0.991 </p>
+
+<p>0.923 </p>
+
+<p>0.992 </p>
+
+<p>0.922 </p>
+
+<p>0.992 </p>
+
+<p>(Continues) </p>
+
+<p>R. DESBORDES AND V. VERARDI </p>
+
+
+
+<p>© 2017 John Wiley &amp; Sons Australia, Ltd </p>
+
+<p>Dependent variable: ln(FDI stock </p>
+
+<p>t ) 
+À 0.75 </p>
+
+<p>* </p>
+
+<p>ln(FDI stock </p>
+
+<p>tÀ1 ) </p>
+
+<p>FE (5) </p>
+
+<p>R-FE (5 0 </p>
+
+<p>) </p>
+
+<p>FE (6) </p>
+
+<p>R-FE (6 0 </p>
+
+<p>) </p>
+
+<p>FE (7) </p>
+
+<p>R-FE (7 0 </p>
+
+<p>) </p>
+
+<p>R-FE (8 0 </p>
+
+<p>) </p>
+
+<p>FH political rights </p>
+
+<p>0.151 </p>
+
+<p>(0.173) </p>
+
+<p>DPI strength of veto players </p>
+
+<p>0.032 
+(0.130) </p>
+
+<p>À0.278*** 
+(0.069) </p>
+
+<p>À0.049 </p>
+
+<p>(0.075) </p>
+
+<p>FH press freedom </p>
+
+<p>À0.381* 
+(0.197) </p>
+
+<p>À0.174* 
+(0.100) </p>
+
+<p>À0.524*** </p>
+
+<p>(0.188) </p>
+
+<p>WGI voice and accountability </p>
+
+<p>À0.252 
+(0.221) </p>
+
+<p>0.167 </p>
+
+<p>(0.108) </p>
+
+<p>Natural resource abundance </p>
+
+<p>À0.780 
+(0.671) </p>
+
+<p>À0.835** 
+(0.373) </p>
+
+<p>À0.476 
+(0.835) </p>
+
+<p>0.865*** 
+(0.245) </p>
+
+<p>À0.419 
+(0.837) </p>
+
+<p>0.609** </p>
+
+<p>(0.251) </p>
+
+<p>À0.507 </p>
+
+<p>(0.442) </p>
+
+<p>Gini index </p>
+
+<p>0.011 
+(0.007) </p>
+
+<p>0.010** 
+(0.004) </p>
+
+<p>0.008 
+(0.007) </p>
+
+<p>0.017*** 
+(0.003) </p>
+
+<p>0.008 
+(0.007) </p>
+
+<p>0.011*** </p>
+
+<p>(0.003) </p>
+
+<p>0.004 </p>
+
+<p>(0.004) </p>
+
+<p>Democracy × Natural 
+resource abundance </p>
+
+<p>À0.520 
+(0.484) </p>
+
+<p>2.873*** 
+(0.404) </p>
+
+<p>1.064** 
+(0.464) </p>
+
+<p>1.128*** 
+(0.267) </p>
+
+<p>0.950** 
+(0.425) </p>
+
+<p>0.254 </p>
+
+<p>(0.263) </p>
+
+<p>DPI strength of veto players × 
+Natural resource abundance </p>
+
+<p>À0.602* </p>
+
+<p>(0.323) </p>
+
+<p>FH political rights × Natural 
+resource abundance </p>
+
+<p>6.376*** </p>
+
+<p>(0.941) </p>
+
+<p>FH political rights × Natural 
+resource abundance </p>
+
+<p>À2.324*** </p>
+
+<p>(0.852) </p>
+
+<p>Natural resource abundances </p>
+
+<p>× Gini index </p>
+
+<p>0.012 
+(0.014) </p>
+
+<p>0.012 
+(0.008) </p>
+
+<p>0.007 
+(0.017) </p>
+
+<p>À0.024*** 
+(0.006) </p>
+
+<p>0.006 
+(0.017) </p>
+
+<p>À0.018*** </p>
+
+<p>(0.006) </p>
+
+<p>0.007 </p>
+
+<p>(0.011) </p>
+
+<p>Democracy × Gini index </p>
+
+<p>À0.001 
+(0.003) </p>
+
+<p>0.005*** 
+(0.002) </p>
+
+<p>0.009* 
+(0.005) </p>
+
+<p>0.006** 
+(0.002) </p>
+
+<p>0.006 
+(0.005) </p>
+
+<p>À0.003 </p>
+
+<p>(0.003) </p>
+
+<p>DPI strength of veto players × 
+Gini index </p>
+
+<p>À0.000 </p>
+
+<p>(0.002) </p>
+
+<p>FH political rights × Gini index </p>
+
+<p>0.015*** </p>
+
+<p>(0.004) </p>
+
+<p>FH press freedom × Gini index </p>
+
+<p>(Continues) </p>
+
+<p>Table 9. (Continued) </p>
+
+<p>FOREIGN DIRECT INVESTMENT AND DEMOCRACY </p>
+
+
+
+<p>© 2017 John Wiley &amp; Sons Australia, Ltd </p>
+
+<p>Table 9. (Continued) </p>
+
+<p>Dependent variable: ln(FDI stock </p>
+
+<p>t ) 
+À 0.75 </p>
+
+<p>* </p>
+
+<p>ln(FDI stock </p>
+
+<p>tÀ1 ) </p>
+
+<p>FE (5) </p>
+
+<p>R-FE (5 0 </p>
+
+<p>) </p>
+
+<p>FE (6) </p>
+
+<p>R-FE (6 0 </p>
+
+<p>) </p>
+
+<p>FE (7) </p>
+
+<p>R-FE (7 0 </p>
+
+<p>) </p>
+
+<p>R-FE (8 0 </p>
+
+<p>) 
+À0.005 </p>
+
+<p>(0.004) </p>
+
+<p>Democracy × Gini index × </p>
+
+<p>Natural resource abundance </p>
+
+<p>0.013 
+(0.011) </p>
+
+<p>À0.055*** 
+(0.009) </p>
+
+<p>À0.024** 
+(0.009) </p>
+
+<p>À0.029*** 
+(0.006) </p>
+
+<p>À0.021** 
+(0.009) </p>
+
+<p>0.003 </p>
+
+<p>(0.006) </p>
+
+<p>DCHECKS × Gini index × </p>
+
+<p>Natural resource abundance </p>
+
+<p>0.025*** </p>
+
+<p>(0.008) </p>
+
+<p>FHPF × Gini index × Natural 
+resource abundance </p>
+
+<p>À0.168*** </p>
+
+<p>(0.023) </p>
+
+<p>FHPR × Gini index × Natural 
+resource abundance </p>
+
+<p>0.073*** </p>
+
+<p>(0.020) </p>
+
+<p>Observations </p>
+
+<p>411 </p>
+
+<p>281 </p>
+
+<p>411 </p>
+
+<p>278 </p>
+
+<p>411 </p>
+
+<p>277 </p>
+
+<p>271 </p>
+
+<p>R </p>
+
+<p>2 </p>
+
+<p>0.922 </p>
+
+<p>0.993 </p>
+
+<p>0.923 </p>
+
+<p>0.995 </p>
+
+<p>0.923 </p>
+
+<p>0.993 </p>
+
+<p>0.995 </p>
+
+<p>Countries </p>
+
+<p>103 </p>
+
+<p>92 </p>
+
+<p>103 </p>
+
+<p>97 </p>
+
+<p>103 </p>
+
+<p>91 </p>
+
+<p>101 </p>
+
+<p>Notes: ***p 
+&lt; 0.01; **p </p>
+
+<p>&lt; 0.05; *p 
+&lt; 0.10. Cluster-robust standard errors are in parentheses. Time and country effects are included but not reported. All regressions control for </p>
+
+<p>market size, population and regulatory quality. DPI, Database of Political Institutions; FH, Freedom House; FHPF, Freedom House Press Freedom; FHPR, Freedom House 
+Political Rights; WGI, Worldwide Governance Indicator. Natural resource abundance: share of fuel and minerals in total merchandise exports. For each proxy of democracy, </p>
+
+<p>the empirical model is estimated using: (i) a standard </p>
+
+<p>fixed effects estimator (FE); and (ii) our robust 
+fixed effects estimator (R-FE). Relative to the initial regression model, </p>
+
+<p>interaction terms between natural resources abundance, Gini index, and democracy are included. </p>
+
+<p>R. DESBORDES AND V. VERARDI </p>
+
+
+
+<p>© 2017 John Wiley &amp; Sons Australia, Ltd </p>
+
+<p>reelected would tend to avoid taxing domestic producers and, therefore, prefer 
+to redistribute income via an increase in the tax burden of foreign investors, or 
+other means of (creeping) expropriation (Caves, 1996; Desbordes and Vauday, 
+2007). In periods of high commodity prices, such as the 1998-2006 period, for-
+eign firms in extractive industries are ideal targets as governments can easily ar-
+gue that the visible windfall profits of those firms, unrelated to the intrinsic merit 
+of their operative capabilities and generated by the exploitation of territorial re-
+sources, ought to be shared in a more balanced way. Furthermore, given the rel-
+atively scarcity of natural resources and the extremely high level of sunk costs 
+required to extract, process and distribute them, capital mobility in these indus-
+tries is low. Foreign firms cannot credibly threaten to move their operations 
+abroad in response to an increase in taxation or the formulation of adverse pol-
+icies. Hence, while democracy may reduce the risk of conflict, it may also in-
+crease regulatory uncertainty. We investigate this possibility by including in 
+our model the Gini index of net income inequality and its interactions with de-
+mocracy, natural resource export intensity and both. Data on the Gini coeffi-
+cient come from Solt (2009). 
+Table 9 and Figure 9 summarize our results. 8 The number of outliers remains 
+about the same as in previous regressions (approximately 30%), despite our </p>
+
+<p>Figure 9. Foreign direct investment (FDI) in resource exporting countries, de-
+mocracy and income inequality. DPI, Database of Political Institutions; FH, 
+Freedom House; WGI, Worldwide Governance Indicators. </p>
+
+<p>8 For clarity's sake, confidence intervals are not reported in Figure 9. </p>
+
+<p>FOREIGN DIRECT INVESTMENT AND DEMOCRACY </p>
+
+
+
+<p>© 2017 John Wiley &amp; Sons Australia, Ltd </p>
+
+<p>Table 10. M-S estimation: Foreign direct investment (FDI), democracy and natural resource abundance </p>
+
+<p>Dependent variable: ln(FDI stock </p>
+
+<p>t ) 
+À 0.75 </p>
+
+<p>* </p>
+
+<p>ln(FDI stocktÀ1) </p>
+
+<p>(1) </p>
+
+<p>(2) </p>
+
+<p>(3) </p>
+
+<p>(4) </p>
+
+<p>(5) </p>
+
+<p>(6) </p>
+
+<p>(7) </p>
+
+<p>(8) </p>
+
+<p>Polity IV score </p>
+
+<p>0.011 (0.034) </p>
+
+<p>FH political Rights </p>
+
+<p>À0.030** (0.013) </p>
+
+<p>À0.004 (0.008) </p>
+
+<p>Polity IV constraints 
+on executive </p>
+
+<p>0.025 (0.019) </p>
+
+<p>Henisz political constraints </p>
+
+<p>À0.012* (0.007) </p>
+
+<p>DPI checks and balances </p>
+
+<p>0.062*** (0.015) </p>
+
+<p>0.043*** (0.014) </p>
+
+<p>WGI voice and 
+accountability </p>
+
+<p>0.095** (0.038) </p>
+
+<p>FH press freedom </p>
+
+<p>0.027 (0.113) 0.022*** (0.008) </p>
+
+<p>Natural resource abundance </p>
+
+<p>À0.110 (0.097) 
+0.031 (0.097) 0.025 (0.147) </p>
+
+<p>0.007 (0.087) 
+0.010 (0.087) 0.053 (0.215) </p>
+
+<p>À0.102 (0.304) </p>
+
+<p>0.047** (0.024) </p>
+
+<p>Democracy × Natural 
+resource abundance </p>
+
+<p>0.025 (0.139) 
+0.024 (0.081) 0.009 (0.106) </p>
+
+<p>À0.022 (0.025) </p>
+
+<p>À0.021 (0.032) 
+À0.006 (0.054) 0.068 (0.576) </p>
+
+<p>FH political Rights × 
+Natural resource abundance </p>
+
+<p>À0.071*** (0.027) </p>
+
+<p>DPI checks and balances × 
+Natural resource abundance </p>
+
+<p>0.047* (0.025) </p>
+
+<p>FH press freedom × 
+Natural resource abundance </p>
+
+<p>0.065*** (0.023) </p>
+
+<p>Observations </p>
+
+<p>489 </p>
+
+<p>489 </p>
+
+<p>489 </p>
+
+<p>489 </p>
+
+<p>489 </p>
+
+<p>489 </p>
+
+<p>489 </p>
+
+<p>489 </p>
+
+<p>Countries </p>
+
+<p>111 </p>
+
+<p>111 </p>
+
+<p>111 </p>
+
+<p>111 </p>
+
+<p>111 </p>
+
+<p>111 </p>
+
+<p>111 </p>
+
+<p>111 </p>
+
+<p>R </p>
+
+<p>2 </p>
+
+<p>0.827 </p>
+
+<p>0.819 </p>
+
+<p>0.822 </p>
+
+<p>0.822 </p>
+
+<p>0.818 </p>
+
+<p>0.824 </p>
+
+<p>0.824 </p>
+
+<p>0.824 </p>
+
+<p>Notes: ***p 
+&lt; 0.01; **p </p>
+
+<p>&lt; 0.05; *p 
+&lt; 0.10. Heteroskedasticity-robust standard errors in parentheses. Time and country effects are included but not reported. All regressions </p>
+
+<p>control for market size, population, and regulatory quality. DPI, Database of Political Institutions; FH, Freedom House; FHP, Freedom House Press freedom; WGI, World-
+wide Governance Indicator. Natural resource abundance: share of fuel and minerals in total merchandise exports. For each proxy of democracy, the empirical model is esti-
+mated using a MS-estimator. Relative to the initial regression model, an interaction term between natural resource abundance and democracy is included. </p>
+
+<p>R. DESBORDES AND V. VERARDI </p>
+
+
+
+<p>© 2017 John Wiley &amp; Sons Australia, Ltd </p>
+
+<p>Table 11. M-S estimation: Foreign direct investment (FDI), democracy and natural resource abundance </p>
+
+<p>Dependent variable: ln(FDI stockt) </p>
+
+<p>À 0.75 </p>
+
+<p>* </p>
+
+<p>ln(FDI stockt-1) </p>
+
+<p>(1) </p>
+
+<p>(2) </p>
+
+<p>(3) </p>
+
+<p>(4) </p>
+
+<p>(5) </p>
+
+<p>(6) </p>
+
+<p>(7) </p>
+
+<p>(8) </p>
+
+<p>Polity IV score </p>
+
+<p>À0.298*** (0.077) </p>
+
+<p>FH political rights </p>
+
+<p>À0.182 (0.189) </p>
+
+<p>0.296 (0.187) </p>
+
+<p>Polity IV constraints 
+on executive </p>
+
+<p>0.095 (0.271) </p>
+
+<p>Henisz political constraints </p>
+
+<p>À0.238 (0.240) </p>
+
+<p>DPI checks and balances </p>
+
+<p>À0.244*** (0.035) </p>
+
+<p>À0.426*** (0.085) </p>
+
+<p>WGI voice and 
+accountability </p>
+
+<p>À0.060 (0.726) </p>
+
+<p>FH press freedom </p>
+
+<p>0.267*** (0.073) </p>
+
+<p>À0.122 (0.144) </p>
+
+<p>Natural resource 
+abundance 
+0.066 (0.526)À0.014 (0.000) </p>
+
+<p>À0.364 (0.592) </p>
+
+<p>0.266 (1.578) 
+À0.065 (0.128)À0.677 (4.734) </p>
+
+<p>À0.416** (0.162) </p>
+
+<p>À0.368 (0.287) </p>
+
+<p>ln(Gini index) 
+0.010*** (0.003) 0.007 (0.010) </p>
+
+<p>0.006 (0.009)0.006*** (0.002) 
+0.005 (0.004) 0.009 (0.105) 0.008*** (0.002) </p>
+
+<p>0.002 (0.004) </p>
+
+<p>Democracy × Natural 
+resource abundance </p>
+
+<p>À0.043 (0.211) 0.381 (1.002) </p>
+
+<p>À0.111 (0.232) </p>
+
+<p>0.130 (1.457) 
+0.004 (0.164)À0.230 (0.588)À0.416*** (0.143) </p>
+
+<p>DPI checks and balances 
+× Natural resource 
+abundance </p>
+
+<p>0.544*** (0.174) </p>
+
+<p>FH political rights × 
+Natural resource 
+abundance </p>
+
+<p>À1.889*** (0.367) </p>
+
+<p>FH press freedom × 
+Natural resource 
+abundance </p>
+
+<p>1.350*** (0.221) </p>
+
+<p>Natural resource 
+abundance × Gini index 
+À0.002 (0.015)À0.002 (0.008)0.006*** (0.002) </p>
+
+<p>À0.008 (0.041) 
+À0.000 (0.003) 0.014 (0.133) </p>
+
+<p>0.004 (0.004) </p>
+
+<p>0.007 (0.007) </p>
+
+<p>Democracy × Gini index 
+0.007*** (0.002) 0.003 (0.002) </p>
+
+<p>À0.000 (0.007) 
+0.006 (0.006) 0.006*** (0.001) 0.003 (0.004)À0.006*** (0.002) </p>
+
+<p>DPI strength of veto 
+players × Gini index </p>
+
+<p>0.010*** (0.002) </p>
+
+<p>(Continues) </p>
+
+<p>FOREIGN DIRECT INVESTMENT AND DEMOCRACY </p>
+
+
+
+<p>© 2017 John Wiley &amp; Sons Australia, Ltd </p>
+
+<p>Table 11. (Continued) </p>
+
+<p>Dependent variable: ln(FDI stockt) </p>
+
+<p>À 0.75 </p>
+
+<p>* </p>
+
+<p>ln(FDI stockt-1) </p>
+
+<p>(1) </p>
+
+<p>(2) </p>
+
+<p>(3) </p>
+
+<p>(4) </p>
+
+<p>(5) </p>
+
+<p>(6) </p>
+
+<p>(7) </p>
+
+<p>(8) </p>
+
+<p>FH political rights × 
+Gini index </p>
+
+<p>À0.007 (0.004) </p>
+
+<p>FH press freedom × 
+Gini index </p>
+
+<p>0.004 (0.004) </p>
+
+<p>Democracy × Gini </p>
+
+<p>index × Natural 
+resource abundance </p>
+
+<p>0.001 (0.004)À0.007 (0.014) </p>
+
+<p>0.001 (0.005) </p>
+
+<p>À0.005 (0.035) 
+0.000 (0.003) 0.005 (0.015) 0.011*** (0.003) </p>
+
+<p>DPI strength of veto 
+players × Gini index × 
+Natural resource 
+abundance </p>
+
+<p>À0.010*** (0.003) </p>
+
+<p>FH political rights 
+× Gini index × Natural 
+resource abundance </p>
+
+<p>0.038*** (0.008) </p>
+
+<p>FH press freedom 
+× Gini index × 
+Natural resource 
+abundances </p>
+
+<p>À0.029*** (0.005) </p>
+
+<p>Observations </p>
+
+<p>411 </p>
+
+<p>411 </p>
+
+<p>411 </p>
+
+<p>411 </p>
+
+<p>411 </p>
+
+<p>411 </p>
+
+<p>411 </p>
+
+<p>411 </p>
+
+<p>Countries </p>
+
+<p>109 </p>
+
+<p>109 </p>
+
+<p>109 </p>
+
+<p>109 </p>
+
+<p>109 </p>
+
+<p>411 </p>
+
+<p>109 </p>
+
+<p>109 </p>
+
+<p>R </p>
+
+<p>2 </p>
+
+<p>0.88 </p>
+
+<p>0.89 </p>
+
+<p>0.88 </p>
+
+<p>0.89 </p>
+
+<p>0.80 </p>
+
+<p>0.88 </p>
+
+<p>0.89 </p>
+
+<p>0.83 </p>
+
+<p>Notes: ***p 
+&lt; 0.01; **p </p>
+
+<p>&lt; 0.05; *p 
+&lt; 0.10. Heteroskedasticity-robust standard errors in parentheses. Time and country effects are included but not reported. All regressions </p>
+
+<p>control for market size, population, and regulatory quality. DPI, Database of Political Institutions; FH, Freedom House; FHP, Freedom House Press Freedom; FHPR, Free-
+dom House Political Rights; WGI, Worldwide Governance Indicator. Natural resource abundance: share of fuel and minerals in total merchandise exports. For each proxy of 
+democracy, the empirical model is estimated using a MS-estimator. Relative to the initial regression model, interaction terms between natural resource abundance, democracy, </p>
+
+<p>and the log of the Gini index are included. </p>
+
+<p>R. DESBORDES AND V. VERARDI </p>
+
+
+
+<p>© 2017 John Wiley &amp; Sons Australia, Ltd </p>
+
+<p>adoption of a more flexible specification. A comparison of the classical and 
+robust FE estimates shows again that results tend to be very different once the 
+influence of outliers is controlled for. Focusing on the R-FE estimates, the 
+impact of democracy on FDI is now less clear-cut than before as it is the product 
+of the proxy used, natural resource export intensity and income inequality. As 
+hypothesized, when a country's natural resource export intensity is high, the 
+positive impact of democracy is weaker when income inequality is high. Foreign 
+investors in the oil or mining industries presumably discount the benefits of more 
+democracy by the probability of being confronted, now or once the investment 
+has been 'sunk', with higher taxation or more stringent regulations. 
+For some measures, when a country's natural resource export intensity is 
+low, democracy exerts its strongest positive impact on FDI when income 
+inequality is high. Assuming that FDI in extractive industries is relatively 
+low, this effect can be interpreted as the belief that democratic progress, in 
+addition to all the previously mentioned benefits, will favour socio-political 
+stability, while high capital mobility ought to deter greater taxation of foreign 
+firms. 
+Remarkably, in high resource exporting/income inequality countries, greater 
+press freedom seems to deter FDI. That is possibly because more press freedom 
+allows the emergence, persistence and dissemination of redistribution demands 
+beyond the election date. In other words, it is possible that media freedom acts </p>
+
+<p>Figure 10. M-S estimation.Notes: Dashed lines delimit the 95% confidence 
+interval. DPI, Database of Political Institutions; FDI, democracy and natural 
+resources; FH, Freedom House; WGI, Worldwide Governance Indicators. </p>
+
+<p>FOREIGN DIRECT INVESTMENT AND DEMOCRACY </p>
+
+
+
+<p>© 2017 John Wiley &amp; Sons Australia, Ltd </p>
+
+<p>as a commitment device, guaranteeing that politicians hold their electoral prom-
+ises (Besley et al., 2002). Column (8 0 ) of Table 9 and Figure 9 (bottom right) 
+show that this negative impact of greater media freedom outweighs the positive 
+impact of other democratic attributes when both natural resources and income 
+inequality are high. The recent expropriations, nationalizations, forced renegoti-
+ations of contracts, and higher taxes and royalties that foreign firms operating in 
+extractive industries have endured in relatively democratic countries meeting 
+these two criteria (e.g. Bolivia, Ecuador or Zambia) provide additional factual 
+support to our hypothesis. 
+The coefficients on the proxies of democracies, in Tables 8 and 9, correspond 
+to the impact of democratic changes when a country is characterized by an 
+absence of natural resources and perfectly equal distribution of income. In this 
+hypothetical case, stronger democracy often appears to deter FDI (e.g column 
+(1 0 ) in Table 9). As shown in Figure 9, for low values of natural resource abun-
+dance, this is especially the case when the proxy for democracy corresponds to 
+the degree of political constraints on policy change. This result shows again that 
+the impact of a given democratic attribute on FDI is context-specific. When the 
+threat of socio-political instability is low and foreign firms do not incur high 
+sunk costs to extract natural resources, multinational enterprises may be reluc-
+tant to invest in countries where the likelihood of reforms becomes smaller 
+due to a rise in veto players. 
+Before concluding, it is worth investigating whether our results would have 
+been different if we had estimated our models with an M-S estimator. In the </p>
+
+<p>Figure 11. M-S estimation: The mediating role of inequality. </p>
+
+<p>R. DESBORDES AND V. VERARDI </p>
+
+
+
+<p>© 2017 John Wiley &amp; Sons Australia, Ltd </p>
+
+<p>Appendix, Tables 10 and 11 report the M-S estimates and Figures 10 and 11 
+summarize the results. In Figure 10, it can be seen that we often fail to find 
+that the effect of democracy on FDI is a function of natural resource 
+abundance. In Figure 11, democracy tends to exert its highest impact in 
+countries characterized by high income inequality and high natural resource 
+abundance. These findings are different from those obtained using an R-FE 
+estimator. We can use the R 2 of the R-FE and M-S regression models to 
+make a choice between the two sets of 'robust' results. The empirical models 
+estimated by R-FE fit much better the data than those estimated by the M-S 
+estimator; the average R 2 is 0.99 with the former and 0.82 (0.87) for 
+Figure 10 with the latter, worse than the R 2 obtained with the standard fixed 
+effects estimator. On that basis, the results obtained using a R-FE estimators 
+ought to be preferred. </p>
+
+<p>7. CONCLUSION </p>
+
+<p>The contributions of this paper have been twofold. First, we developed a new 
+robust-to-outliers dummy estimator, which ought to be extremely useful to 
+applied economists, given the increasing preference for panel data fixed effects 
+models in economics. Second, we used this estimator to investigate the recent 
+impact of democracy on FDI. We show that once outliers are controlled for, 
+democratic attributes tend to attract FDI, especially when they are associated 
+with stronger checks and balances, greater inclusiveness or media freedom. 
+Furthermore, we find that the positive effects of democracy are even larger when 
+FDI is concentrated in natural resources. A plausible explanation is that democ-
+racy reduces the occurrence of violent conflicts, which are a major deterrent for 
+FDI in extractive industries characterized by large sunk costs. Finally, we put 
+forward the case that other factors, such as income inequality, also play a medi-
+ating role in the relationship between FDI and democracy. Even though democ-
+racy may reduce social and political unrest in highly unequal societies, it may 
+also trigger damaging redistributive policies for FDI in resource-abundant coun-
+tries. Overall, this paper demonstrates that the impact of democracy on FDI is 
+extremely complex and difficult to measure as it depends on the democratic 
+attribute considered, the host country's characteristics and the estimator used. </p>
+
+
+
+
+
+<p>© 2017 John Wiley &amp; Sons Australia, Ltd </p>
+
+
+
+<p>R. DESBORDES AND V. VERARDI </p>
+
+
+
+<p>© 2017 John Wiley &amp; Sons Australia, Ltd </p>
+
+
+
+<p>Intuitively, the least squares (LS) estimator of θ is 
+^ 
+θ LS ¼ </p>
+
+<p>∑XX X 
+0 X ∑ XX Þ 
+À1 ∑Xy X 
+0 y ∑ Xy </p>
+
+<p>, where ∑ XX and ∑ Xy are, respectively, n times </p>
+
+<p>the covariance of X and (X, y). If we replace ∑ XX and ∑ Xy by some robust </p>
+
+<p>FOREIGN DIRECT INVESTMENT AND DEMOCRACY </p>
+
+
+
+<p>© 2017 John Wiley &amp; Sons Australia, Ltd </p>
+
+<p>counterparts, this estimator will become resistant to outliers. Hence, we propose 
+to use the Stahel-Donoho estimate (see Maronna and Yohai, 2000) to identify 
+and remove multivariate outliers in the set M = (y, X) = (y, X 1 , X 2 ) and obtain 
+robust ∑ XX and∑ Xy : Once we have preliminary estimates for parameters θ and 
+residuals r i , we can use an iterative algorithm to find a solution to equation 3. 
+Our algorithm is, therefore: </p>
+
+<p>1. Use a multivariate outlier detection tool (more precisely, as suggested by 
+Maronna and Yohai (2000), the Stahel-Donoho estimate) to measure the 
+'outlyingness' of each individual considering the data cloud M= (y, X 1 , 
+X 2 ). This estimator is a multivariate outlier identification tool based on 
+univariate projections. Outlyingness distances correspond to the largest 
+distance of each point with respect to a centre of the projected data cloud 
+when considering all possible directions for the projections. The effect of 
+dummies is partialled-out in each projection. This has the advantage of taking 
+into account the effect of dummies, but without facing the issue of collinear 
+subsamples. Because these distances are distributed for Gaussian data as 
+ffiffiffiffiffiffiffiffiffi 
+χ 2 </p>
+
+<p>p 2 þ1 </p>
+
+<p>q 
+we can flag individuals as being outliers when their outlyingness </p>
+
+<p>distance is larger than a given quantile of 
+ffiffiffiffiffiffiffiffiffi 
+χ 2 </p>
+
+<p>p 2 þ1 </p>
+
+<p>q 
+(generally the 95 th or 99th </p>
+
+<p>percentile). 9 
+2. Apply a weight zero to all the outliers, and use a standard LS estimator to fit 
+the model robustly and to estimate 'robust' residuals for all observations. 
+3. Use the robust residuals to start a standard iterative algorithm. Note that 
+dummies are now treated like the other explanatory variables because no 
+subsampling is needed anymore. </p>
+
+<p>MS estimates </p>
+
+<p>Tables 10 and 11 report the M-S estimates. Figures 10 and 11 summarize the 
+results. </p>
+
+<p>9 Note that the degree of freedom is p 2 + 1 and not p + 1 because dummy variables will be partialled-
+out. </p>
+
+<p>R. DESBORDES AND V. VERARDI </p>
+
+
+
+<p>© 2017 John Wiley &amp; Sons Australia, Ltd </p>
+
+</text></tei>

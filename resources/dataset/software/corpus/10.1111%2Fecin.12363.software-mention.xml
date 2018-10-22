@@ -1,0 +1,5876 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1111%2Fecin.12363" /><encodingDesc><appInfo><application version="0.5.2-SNAPSHOT" ident="GROBID" when="2018-10-20T01:02+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>This article revisits the sectoral shifts hypothesis by examining unemployment 
+fluctuations for 48 U.S. states over the period 1990:M01-2011:M12. We develop a 
+panel approach that incorporates dynamics, parameter heterogeneity, aggregate factors, 
+and cross-sectional dependence (CSD). Our findings provide support for a positive and 
+significant effect of the employment dispersion index on unemployment. This outcome 
+is robust under alternative specifications and measures of employment dispersion. The 
+empirical evidence corroborates the presence and relevance of CSD and heterogeneity 
+among states. The results show that, once unobserved common factors and cross-state 
+heterogeneity are taken into account, labor reallocation has a significant effect on 
+unemployment that is half the size of the estimate when cross-sectional dependence is 
+not taken into account. (JEL E24, E32, J21, R23, C23) </p>
+
+<p>There has been considerable discussion over 
+sectoral shifts (shifts in sectors employment 
+demand) as a triggering force of unemployment 
+fluctuations in the United States (see Chen et al. 
+2011; Diamond 2013; Elsby, Hobijn, and Sahin 
+2010; Estevão and Tsounta 2011). In a recent 
+work, Dao, Furceri, and Loungani (2014) com-
+pare regional labor market adjustments in the 
+United States and Europe and find that dispersion </p>
+
+<p> *  We thank the Co-Editor and an anonymous referee 
+for their constructive comments and helpful suggestions. 
+We thank Karim Abadir, Richard Baillie, Ramazan Gençay, 
+Jerzy Konieczny, Angelo Melino, Roberto Patuelli, Hashem 
+Pesaran, Vasilis Sarafidis, and Thanasis Stengos for their use-
+ful comments and suggestions on earlier versions of this work. 
+Also we thank <rs corresp="#software-0" type="creator">Markus Eberhardt</rs> for kindly providing his 
+<rs id="software-0" type="software">STATA</rs> routines. Finally, we are grateful to the participants 
+of the second Time Series Workshop of the Rimini Center for 
+Economic Analysis. All remaining errors are our own. 
+Bakas: Lecturer, Division of Economics, Nottingham Busi-
+ness School, Nottingham Trent University, Nottingham, 
+UK; Rimini Centre for Economic Analysis (RCEA), Rim-
+ini, Italy. Phone +44 115 941 8418, Fax +44 115 848 
+8150, E-mail dimitrios.bakas@ntu.ac.uk 
+Panagiotidis: Assistant Professor, Department of Economics, 
+University of Macedonia, Thessaloniki, Greece; Rimini 
+Centre for Economic Analysis (RCEA), Rimini, Italy. 
+Phone +302310891736, Fax +302310 891292, E-mail 
+tpanag@uom.edu.gr 
+Pelloni: Professor, Rimini Centre for Economic Analysis 
+(RCEA), Rimini, Italy; Department of Economics, Uni-
+versity of Bologna, Rimini, Italy; Wilfrid Laurier Univer-
+sity, Waterloo, Canada; Johns Hopkins University, SAIS 
+Bologna Center, Bologna, Italy. Phone +390541434142, 
+Fax +390512086281, E-mail gianluigi.pelloni@unibo.it </p>
+
+<p>has narrowed across regions in the United States. 
+Lilien's (1982) seminal paper on sectoral shifts 
+started a cottage industry of studies which has </p>
+
+<p>ABBREVIATIONS </p>
+
+<p>ADF: Augmented Dickey-Fuller 
+AMG: Augmented Mean Group 
+ARDL: AutoRegressive Distributed Lag 
+BEA: Bureau of Economic Analysis 
+BLS: Bureau of Labor Statistics 
+CADF: Cross-Sectionally Augmented ADF 
+CCE: Common Correlated Effects 
+CCEMG: Common Correlated Effects Mean Group 
+CIPS: Cross-Sectionally Augmented IPS 
+CSD: Cross-Sectional Dependence 
+dynCCEMG: Dynamic Common Correlated Effects 
+Mean Group 
+FE: Fixed Effects 
+FRED: Federal Reserve Economic Data 
+GARCH: Generalized AutoRegressive Conditional 
+Heteroskedasticity 
+GMM: Generalized Method of Moments 
+IPS: Im, Pesaran, and Shin 
+LM: Lagrange Multiplier 
+MG: Mean Group 
+NBER: National Bureau of Economic Research 
+OLS: Ordinary Least Squares 
+PMG: Pooled Mean Group 
+POLS: Pooled Ordinary Least Squares 
+RH: Reallocation Hypothesis 
+RMSE: Root Mean Squared Error 
+RSS: Residual Sum of Squares 
+SBC: Schwarz Bayesian Criterion 
+SSH: Sectoral Shifts Hypothesis </p>
+
+<p>501 
+Economic Inquiry 
+(ISSN 0095-2583) 
+Vol. 55, No. 1, January 2017, 501-526 </p>
+
+<p>doi:10.1111/ecin.12363 
+Online Early publication June 2, 2016 
+© 2016 Western Economic Association International </p>
+
+
+
+<p>ECONOMIC INQUIRY </p>
+
+<p>been developing along several dimensions and a 
+variety of econometric methodologies. Follow-
+ing the pioneering efforts of Blanchard and Katz 
+(1992), Medoff (1983), and Neumann and Topel 
+(1991), we bring together both the sectoral and 
+regional dimensions of intersectoral reallocations 
+and explore the impact of a purged measure of 
+labor reallocation on unemployment using an 
+extensive panel dataset for the United States 
+spanning more than two decades. 
+Panel data analyses in the field of sectoral 
+shifts have mostly relied on fixed effects (FE) 
+estimators and have neglected recent advances 
+in panel data econometrics (see Gallipoli and 
+Pelloni 2008, 2013, Section 5 and in particular 
+Table 2). This oversight is a startling omission 
+given the importance of heterogeneity, spillover 
+effects, and common factors in the analysis of 
+the macroeconomic effects of labor reallocation 
+for the U.S. states. It is the purpose of this paper 
+to re-examine this state of the art by extending 
+previous research in three directions. First, we 
+employ up-to-date dynamic panel data tech-
+niques. The relevant novel aspects of this article 
+include recent developments in panel data econo-
+metrics concerning dynamics, heterogeneity, and 
+cross-sectional dependence (CSD) which, to 
+the best of our knowledge, have never been 
+applied before in this field and certainly not in 
+this context. Second, we have built an extensive 
+dataset for U.S. states. The size of our panel 
+dataset alleviates the problem of degrees of free-
+dom which impaired previous studies. Finally, 
+since in recent years most sectoral panel studies 
+have focused on wages, our approach refocuses 
+on the unemployment, as in the early analy-
+ses of Neumann and Topel (1991) and Parker 
+(1992). Our model specification is akin to that 
+used by Mills, Pelloni, and Zervoyianni (1995) 
+and employs a purged Lilien's type dispersion 
+measure instead of Neumann and Topel's proxy. 
+The remainder of the article is organized 
+as follows. Section II discusses the paper 
+background and motivation. Section III pro-
+vides the econometric model and estimation 
+methodology. Section IV presents the data 
+and provides a preliminary data analysis. 
+Section V reports the empirical results and 
+Section VI concludes. </p>
+
+<p>II. LABOR REALLOCATION AND REGIONS </p>
+
+<p>A perpetual reallocation of jobs and workers 
+lies beneath labor market activities while an </p>
+
+<p>economy is growing. 1 Though much reallocation 
+may take place within each individual sector, it 
+is also true that declining sectors are destroy-
+ing more jobs than they are creating while the 
+opposite is happening in expanding sectors. 
+Differences in job creation and destruction 
+within sectors imply intersectoral movements of 
+workers. 2 The Sectoral Shifts Hypothesis (SSH) 
+claims that workers move from declining sectors 
+to expanding sectors and that such an activity 
+requires time and entails a temporary increase in 
+unemployment (Lilien 1982, for surveys of the 
+literature see Gallipoli and Pelloni 2008, 2013). 3 
+The SSH has been often analyzed by looking 
+at the reallocation of workers across sectors at 
+country level. Some researchers (Medoff 1983; 
+Neumann and Topel 1984, 1991) investigated 
+the regional component instead of focusing only 
+on the aggregate level. This analytical extension 
+provides a more accurate and informative view 
+of the phenomenon and its underlying dynamics. 
+Draghi (2014) reminds us that aggregation can 
+conceal the heterogeneity that exists in the data. 
+Taking into account the regional dimension 
+alongside the sectoral one allows us to observe 
+how changes in the industrial composition of 
+labor demand affect different regions, how these 
+local effects are interrelated, and how they could 
+reverberate at national level. 
+If Lilien (1982) led the revival of the SSH 
+and the reallocation hypothesis (RH), 4 Medoff 
+(1983) steered their courses towards the regional 
+dimension. He analyzed differences in labor mar-
+ket imbalances in the North-East-Atlantic and 
+South-West-Pacific U.S. states. Using alternative 
+definitions of the Beveridge curve (the relation-
+ship between unemployment and vacancies) and </p>
+
+<p>1. Unemployment is an essential feature in the process 
+of creative destruction and growth. Schumpeter (1976, ch. 
+7) advanced the notion of creative destruction which was 
+developed in its contemporary form by Aghion and Howitt 
+(1992). The reallocation underlying labor market workings 
+has been pioneered by Davis and Haltiwanger (1992), see also 
+Davis, Faberman, and Haltiwanger (2006, 2012)) who have 
+been building on an early contribution by Lilien (1982). 
+2. Furthermore, existing evidence (Abowd, Corbel, and 
+Kramarz 1999; Burgess, Lane, and Stevens 2000; Hamer-
+mesh, Hassink, and van Ours 1996) suggests that worker 
+turnover (hiring plus separation) is about two to three times 
+the size of job reallocations (creations plus destructions). 
+3. It could also involve an increase in long-term unem-
+ployment if a sufficiently large share of "movers" will not be 
+able to find employment in the expanding sectors for lack of 
+skills or other reasons. 
+4. Davis (1987) points out that Ricardo (1891, ch. 19) 
+was already aware of the intuition behind the RH. In this 
+perspective, Lilien's contribution has been leading a revival. </p>
+
+<p>BAKAS, PANAGIOTIDIS, &amp; PELLONI: MACROECONOMIC EFFECTS OF LABOR REALLOCATION </p>
+
+
+
+<p>a battery of reduced form equations, he could 
+relate Beveridge curve(s) shifts to the changing 
+labor conditions across areas for the pre-and 
+post-1973 periods. Medoff's evidence favors 
+labor market imbalances across time and regions 
+and suggests a high structural unemployment. 
+Inevitably, the analytical framework reflects the 
+state of econometrics of its time and has been 
+superseded since then. Nevertheless, Medoff's 
+work has brought to the fore the importance of 
+regional productive structure and its potential 
+impact vis-à-vis large economic restructuring. 
+Neumann and Topel (1984, 1991) brought the 
+analysis a step forward and explored simultane-
+ously the geographical and sectoral dimensions 
+using a panel data approach. They tested whether 
+demand uncertainty, diversification, and sectoral 
+shifts are important determinants of equilibrium 
+unemployment differentials among labor mar-
+kets for the period 1948-1981. Neumann and 
+Topel estimated alternative specifications of their 
+benchmark model pooled across states and over 
+time using FE estimators (as dictated by the 
+then prevailing state of the art). The emerging 
+outcomes bear out that regional differences in 
+unemployment are quite large and persistent over 
+time. Permanent sectoral demand shifts are sig-
+nificant determinants of unemployment, but their 
+impact is modest relative to the typical unemploy-
+ment fluctuations. 
+The regional analysis of Neumann and Topel 
+(1984, 1991), contrary to Medoff (1983), cannot 
+fully corroborate the relevance of sectoral shifts. 
+Two factors may affect negatively Neumann and 
+Topel's analysis. First, their dispersion index 
+may belittle the role of allocative shocks (Shaw 
+1989). Second, because of the FE estimator, 
+their outcomes could be subject to a significant 
+bias, occurring when parameter heterogeneity 
+and cross-section dependence are ignored. While 
+the robustness of their dispersion index could 
+be tested using different measures of dispersion, 
+the second problem was untreatable at the time 
+of Neumann and Topel's article publication as 
+it involved developments in econometrics not 
+yet available. 
+Parker (1992) studied the unemployment 
+effects of sectoral shifts by controlling for 
+several market distortions and changes in the 
+demographic composition of the labor force. 
+By examining the relative explanatory power 
+of alternative measures of intersectoral and 
+interregional dispersion indexes, he could bear 
+out the significant impact of both interindus-
+try and geographical employment shifts on </p>
+
+<p>unemployment. These effects are magnified 
+when sectors and regions are broadly defined. 
+Subsequent panel data analyses in this field 
+have mostly focused on the sectoral and not 
+the regional dimension, and have also been 
+more concerned with wage differentials than 
+unemployment changes. Methodologically, 
+they are restricted to FE estimators (Keane 
+1991; Keane and Prasad 1996; Shaw 1989). 
+Recently at regional level, the FE approach of 
+Estevão and Tsounta (2011) corroborates the 
+links between state-level unemployment rates 
+changes, skill mismatches, and the housing 
+market performance (even after controlling for 
+cyclical effects). 
+De Serres, Scarpetta, and De La Maison-
+neuve (2002) upgraded the sectoral panel data 
+methodology. They study the share of wages 
+in the total income for five European countries 
+and the United States using pooled time series 
+and cross-section data and imposing partial het-
+erogeneity by means of the Pesaran, Shin, and 
+Smith's (1999) pooled mean group (PMG) esti-
+mator. Short-run coefficients could differ across 
+groups, but at the same time the long-run coeffi-
+cients are constrained to be identical. The authors 
+conclude that the persistent trend decline in the 
+aggregate real wage share in the 1980s and 
+1990s is not necessarily only the effect of a per-
+vasive wage moderation but could also reflect 
+changes in sectoral composition. Besides the 
+wages focus, the methodological improvement is 
+limited. FE approaches, while convenient, sub-
+stantially restrict the nature of heterogeneity and 
+fail to take into account potential common fac-
+tors effects across individuals and the potential 
+interdependence of the individual units (Baltagi 
+2008, chapter 12; Chudik and Pesaran 2015b). 
+De Serres, Scarpetta, and De La Maisonneuve 
+(2002) extend the methodology to the PMG esti-
+mator, which is only an intermediate heteroge-
+neous estimator. 
+Simon (2014) explored the relationship 
+between unemployment and sectoral change 
+across U.S. states during the Great Recession 
+using Neumann and Topel's (1991) dispersion 
+measure in a random effects model. Simon's 
+findings stress the importance of structural fac-
+tors and show that sectoral changes can account 
+for an increase between 34% and 61% in median 
+state unemployment between 2007 and 2009. 
+Notwithstanding its methodological improve-
+ment, Simon's approach cannot account for 
+dynamics, heterogeneity, and CSD in the data. 
+Even less so could previous attempts as they </p>
+
+
+
+<p>ECONOMIC INQUIRY </p>
+
+<p>were still framed in terms of pooled and FE 
+estimation approaches. 
+The relevance of the regional component lies 
+in the different industrial composition of regions 
+(states in the case of the United States). Behind 
+aggregate data lies a very heterogeneous picture 
+of regional labor markets reflecting disparate 
+initial conditions (see also Draghi 2014). These 
+dissimilar conditions encompass varying sectoral 
+compositions of employment and unemployment 
+across regions with unemployment rates his-
+torically persistently higher in some areas than 
+others. 5 
+Dissimilar industrial compositions entail 
+different levels of industrial agglomeration, 
+concentration, and specialization. Clearly, the 
+reallocation movements of a region with high 
+agglomeration would have a different impact at 
+aggregate level than those of a region with oppo-
+site characteristics. The concentration levels of 
+a specific industry may vary widely from region 
+to region. If a sector is highly concentrated in 
+a limited number of regions, then its fortunes 
+would mostly affect a restricted area of the 
+country, at least initially. At the same time, the 
+regional degree of sectoral specialization (how 
+an industrial sector is relatively large within the 
+economy of a specific region) is likely to differ 
+greatly across U.S. states. Allocative shocks 
+would affect regional labor markets differently 
+according to the initial state of the region indus-
+trial composition and result in different patterns 
+of inter and intra reallocation. A change in 
+demand composition would affect differently a 
+region highly specialized in declining sectors 
+from one with a high specialization in expanding 
+industries. Flows of workers from declining to 
+expanding sectors could not necessarily take 
+place within the same region. In some regions, 
+the scale of job destruction relative to that of 
+job creation may reduce the job-finding rate, 
+increase the unemployment rate, the unemploy-
+ment duration spells, and workers migration to 
+more favorable areas. For instance, vis-à-vis a 
+change in demand composition a region with an 
+initially high specialization in declining sectors 
+could not provide sufficient opportunities for 
+reallocation in a short or medium run. Its work-
+ers would have to look for employment in other </p>
+
+<p>5. Dao, Furceri, and Loungani (2014) using state-specific 
+data, estimate the dynamic effects of regional employment 
+and unemployment. They conclude that the long-run effect 
+of a state-specific shock on the state employment level has 
+decreased over time. </p>
+
+<p>regions and look for employment in regions with 
+a favorable industrial composition. 
+The process of intersectoral reallocation is 
+characterized by heterogeneity, common global 
+factors, and spillover effects at regional level. 
+Conventional panel estimators (fixed or random 
+effects), which have been the basis of previous 
+research in this field, would result in misleading 
+inferences and inconsistent estimators (Chudik 
+and Pesaran 2015b). Recent advances in panel 
+data econometrics with heterogenous slopes and 
+a common factor structure (i.e., cross-sectional 
+dependence) and in data availability would allow 
+us to take into account with more rigor the issues 
+of heterogeneity, spillovers, and common factors 
+and thus testing and measuring the relevance of 
+sectoral shifts with a higher degree of reliability. 
+Because the outstanding literature on regional 
+labor reallocation has not filled this gap, it is the 
+aim of this article to do so. 
+The current study revisits the SSH by bringing 
+to bear heterogeneity, common factors, and CSD. 
+We account for common factors (i.e., aggregate 
+shocks and local spillovers) and investigate the 
+effects of labor reallocation within U.S. states. 
+First, we extend the homogeneous panel data 
+approach, by employing the Driscoll and Kraay's 
+(1998) pooled and fixed effects estimators. Sec-
+ond, in order to obtain consistent estimates in 
+a dynamic panel with substantial heterogeneity 
+across regions, we use the Pesaran and Smith's 
+(1995) mean group (MG) estimators. Third, 
+because estimators assuming cross-sectional 
+independence across regions could be inefficient, 
+we extend the heterogeneous slopes MG esti-
+mation procedure by implementing the common 
+correlated effects (CCE) estimator proposed 
+by Pesaran (2006), as well as the augmented 
+mean group (AMG) estimator by Bond and 
+Eberhardt (2009) and Eberhardt and Teal (2010) 
+that accounts for CSD by means of a "common 
+dynamic process." Fourth, given the presence of 
+a lagged dependent variable in our specification 
+form, we apply the recently proposed extension 
+of the CCE estimator by Chudik and Pesaran 
+(2015a) that allows for dynamic panels and 
+relaxes the assumption of strict exogeneity. </p>
+
+<p>III. ECONOMETRIC MODEL AND METHODOLOGY </p>
+
+<p>Using pooled time series cross-section data 
+(with N = 48 and T = 264, comprising 12,672 
+observations) on state unemployment and aggre-
+gate U.S. employment, we estimate Lilien's 
+reduced form unemployment equation in a </p>
+
+<p>BAKAS, PANAGIOTIDIS, &amp; PELLONI: MACROECONOMIC EFFECTS OF LABOR REALLOCATION </p>
+
+
+
+<p>dynamic heterogeneous panel data context as 
+follows: </p>
+
+<p>(1) 
+U i,t = μ i + ϕ i U i,t−1 + β i σ i,t + λ ′ 
+i z i , t + π ′ 
+i w t + u i,t , 
+where U i,t is the unemployment rate for state i 
+at time t; σ i,t is the state measure of employ-
+ment cross-sectoral dispersion; the vector z i,t rep-
+resents a vector of state-specific control variables; 
+in our specification, the state personal income 
+growth, Δln(PI i,t ), is included. The vector of 
+aggregate factors w t represents common control 
+variables that capture aggregate demand shocks, 
+common to all states, which in our specification 
+includes the federal funds rate growth, ΔFR t , its 
+variability, H t , and the government expenditures 
+growth, Δln(G t ). Finally, μ i stands for a set of 
+state-specific FE capturing the influence of unob-
+served state-specific heterogeneity and u i,t is the 
+error term. 6 
+We allow for cross-correlation of the distur-
+bances, u i,t , assuming that they follow a multifac-
+tor error structure: </p>
+
+<p>(2) 
+u i,t = γ ′ 
+i f t + ε i,t , 
+where f t is a m × 1 vector of unobserved common 
+factors that capture cross-sectional dependencies 
+across states, and γ ′ </p>
+
+<p>i </p>
+
+<p>are the state-specific asso-
+ciated factor loadings. The idiosyncratic errors, 
+ε i,t , are assumed to be independently distributed 
+across i and t with zero mean and constant vari-
+ance. Following Chudik and Pesaran (2015b) and 
+Chudik, Pesaran, and Tosetti (2011), the factor 
+structure can be further decomposed as f t = f s </p>
+
+<p>t </p>
+
+<p>+ 
+f w </p>
+
+<p>t </p>
+
+<p>, with f s </p>
+
+<p>t </p>
+
+<p>is a vector of a finite number of 
+"strong" factors, which capture common global 
+shocks to all states, and f w </p>
+
+<p>t </p>
+
+<p>is a vector of an infinite 
+number of "weak" factors, which reflect regional 
+spillover effects across subsets of states. 
+In this heterogeneous dynamic panel data 
+modeling with a common factor approach, </p>
+
+<p>the vector of regressors x i , t = </p>
+
+<p>( 
+σ i,t , z ′ </p>
+
+<p>i , t </p>
+
+<p>) ′ 
+is a 
+(k + 1) × 1 vector of observed individual-specific 
+regressors on the ith state at time t, vector w t is 
+a n × 1 vector of observed common (aggregate) 
+factors with state-specific impact (i.e., observed </p>
+
+<p>6. The analysis builds on Lilien's reduced form unem-
+ployment equation embedded into a dynamic heteroge-
+neous panel in the form of an ARDL(1,0,0,0) model. The 
+ARDL(1,0,0,0) specification is found to be the most appro-
+priate model according to the Schwarz Bayesian criterion 
+(SBC) and starting with a general ARDL(1,1,1,1) form on a 
+state-by-state basis. We, thus, continue our analysis using the 
+ARDL(1,0,0,0) specification. </p>
+
+<p>heterogeneity), while f t is a m × 1 vector of unob-
+served "strong" and "weak" common factors 
+(i.e., unobserved heterogeneity due to country 
+characteristics or regional spillover effects). 7 
+Following Lilien (1982), the dispersion proxy 
+for each state i at time t is calculated as the 
+weighted standard deviation of the cross-sectoral 
+employment growth rates using a K-sectoral 
+decomposition as follows: 
+(3) </p>
+
+<p>σ i,t = </p>
+
+<p>[ K 
+∑ </p>
+
+<p>j=1 </p>
+
+<p>( </p>
+
+<p>n j,i,t∕ N i,t </p>
+
+<p>) ( 
+Δ ln n j,i,t − Δ ln N i,t 
+) 2 
+] 1∕2 </p>
+
+<p>, </p>
+
+<p>where n j,i,t is employment in sector j for state i at 
+time t, N i,t = 
+∑ K 
+j=1 n j,i,t is aggregate employment 
+at time t for state i, K is the number of sectors 
+(with j = 1, 2, … , K sectors) in the state i, and the 
+term n j,i,t∕ N i,t is the sector j share of total regional 
+employment at time t. 
+From the outset, the SSH has been beset 
+by the problem of "observational equivalence" 
+(Abraham and Katz 1986; Lilien 1982). The 
+positive correlation between unemployment 
+and sectoral dispersion (as measured by using 
+Lilien's proxy) could be an outcome determined 
+by either aggregate shocks, if cyclical respon-
+siveness varies across sectors, or by changes 
+in labor demand composition. Two alternative 
+theories could accommodate the same stylized 
+facts. Because of the "observation equivalence" 
+problem, we filter out aggregate effects from 
+the dispersion proxy (σ i,t ) and decompose it into 
+an idiosyncratic component and a component 
+measuring the response to aggregate shock. 8,9 To 
+obtain the "purged" measure, we have regressed 
+σ i,t on the vector of aggregate variables ̃ 
+w t : 10 </p>
+
+<p>(4) 
+σ i,t = α i + </p>
+
+<p>q </p>
+
+<p>∑ </p>
+
+<p>j=0 </p>
+
+<p>φ j ̃ 
+w t−j + ξ i,t . </p>
+
+<p>The estimated residual ̂ ξ i,t from Equation (4) 
+stands as the "purged" component of σ i,t . This </p>
+
+<p>7. For an extensive survey on heterogeneous panel data 
+models with cross-sectional dependence, see Chudik and 
+Pesaran (2015b). 
+8. This a standard procedure well established in the lit-
+erature. For a full discussion of the issue, see Gallipoli and 
+Pelloni (2008, 2013). 
+9. Note that aggregate factors are also taken into account 
+in the panel econometric specification and as a result any 
+evidence in favor of labor reallocation can be considered as 
+relatively "conservative." 
+10. The choice of variables included in ̃ 
+w t varies across 
+articles. Here, the vector of aggregate variables ̃ 
+w t is exactly 
+the same as the vector w t . For a full discussion of this issue, 
+see Gallipoli and Pelloni (2008, 2013). </p>
+
+
+
+<p>ECONOMIC INQUIRY </p>
+
+<p>"purged" dispersion index, that measures only the 
+reallocation shocks, is then used in the reduced 
+form unemployment Equation (1). 
+We have included the federal funds rate 
+growth, ΔFR t , as a proxy for the monetary 
+policy instrument as well as its variability, H t . 
+The measure of monetary policy variability 
+has been generated by estimating a generalized 
+autoregressive conditional heteroskedasticity 
+(GARCH) (1,1) model for ΔFR t and inter-
+preting the estimated conditional variance as a 
+parametric proxy of the monetary uncertainty 
+(H t ). 11 The growth of government expenditures, 
+Δln(G t ), is introduced to capture the effects of 
+fiscal policy (Mills, Pelloni, and Zervoyianni 
+1995) while the growth rate of state's personal 
+income (Δln(PI i,t )) is used as a potential source 
+of regional demand shocks. 12 
+In order to analyze the effect of sectoral shifts 
+using panel regressions for the U.S. states, we 
+need to consider the issues of dynamics, hetero-
+geneity, and CSD that emerge from the specifica-
+tion of Equation (1). </p>
+
+<p>A. Homogeneous Estimation Approach </p>
+
+<p>The standard empirical macroeconometric 
+literature employs pooled estimators adopted 
+from the microeconometric literature, such as the 
+least square dummy variable estimator allowing 
+for individual FE. The FE model allows the 
+intercepts to differ across regions, while all 
+other coefficients are forced to be identical, 
+and can be estimated by ordinary least squares 
+(OLS) using a simple transformation (within 
+estimator). We extend the homogeneous pooled 
+OLS and FE estimators, by using the Driscoll 
+and Kraay's (1998) extension of nonparametric 
+variance-covariance matrix estimation, which 
+produces heteroskedasticity and autocorrelation 
+consistent standard errors that are robust to the 
+presence of general forms of spatial and CSD. 
+The presence of a lagged dependent variable 
+among the regressors (U i,t − 1 ) results in a biased 
+OLS FE estimator when T is fixed (Nickell 
+1981). Therefore, several suggestions were pro-
+posed in the literature. Kiviet (1995) proposes a </p>
+
+<p>11. Caporale, Doroodian, and Abeyratne (1996) follow a 
+similar approach to measure inflation uncertainty. 
+12. We also implement the analysis using the 3-Month T-
+Bill interest rate growth, ΔTB t , as the instrument for monetary 
+policy and the government expenditures disaggregated in two 
+parts, the federal government expenditure, Δln(FG t ), and the 
+local/state government expenditures, Δln(SG t ), as the fiscal 
+policy instruments for robustness purposes. </p>
+
+<p>bias-corrected FE estimator, while Arellano and 
+Bond (1991) recommend a generalized method 
+of moments (GMM) estimation procedure. The 
+difference GMM estimator (AB-GMM) of Arel-
+lano and Bond (1991) first transforms the model 
+using first differences to eliminate the individual 
+effects and then uses the GMM framework of 
+Hansen (1982). Following the work of Arellano 
+and Bover (1995), Blundell and Bond (1998) 
+put forward an extended system estimator that 
+applies additional moment conditions, the sys-
+tem GMM estimator (BB GMM), which we 
+implement as a complement to the dynamic 
+FE estimation. </p>
+
+<p>B. Heterogeneous Estimation Approach </p>
+
+<p>The previous standard pooled estimators 
+assume slopes homogeneity across regions. 
+These estimators yield inconsistent estimates in 
+the case of a dynamic panel data model when the 
+slope coefficients differ across regions (Pesaran 
+and Smith 1995). Given the differences in labor 
+market across the U.S. states, the homogeneity 
+assumption is quite restrictive, and therefore 
+the usage of pooled estimation methods may 
+lead to a substantial heterogeneity bias in the 
+estimated parameters of Lilien's panel version of 
+Equation (1). 
+One way to obtain consistent estimates in 
+dynamic panels with considerable heterogene-
+ity across regions is to use estimators that allow 
+for slope heterogeneity across states. Pesaran 
+and Smith (1995) propose the MG estimators 
+that consists of estimating separate OLS regres-
+sions for each region and then calculating aver-
+ages of the specific coefficients over groups. 
+Furthermore, Pesaran, Shin, and Smith (1999) 
+suggest an intermediate estimator that imposes 
+long-run slope homogeneity between regions but 
+allows for short-run parameters heterogeneity. 
+The PMG estimator involves both pooling and 
+averaging of the individual regression coeffi-
+cients in order to obtain more efficient estimates 
+than the MG estimators under the assumption of 
+slope homogeneity. 
+Another crucial issue, that is relevant for 
+the regional panel sectoral shifts analysis of 
+unemployment, is the issue of CSD among 
+states. Interdependence between cross-sections 
+is an important characteristic in the analysis 
+of macro-and regional panel data models, and 
+estimators based on the assumption of cross-
+sectional independence may prove inefficient 
+or even inconsistent (Sarafidis and Wansbeek </p>
+
+<p>BAKAS, PANAGIOTIDIS, &amp; PELLONI: MACROECONOMIC EFFECTS OF LABOR REALLOCATION </p>
+
+
+
+<p>2012). Therefore, we extend the heterogeneous 
+slopes estimation procedure by implementing 
+the Pesaran (2006) CCE estimators that account 
+for the presence of unobserved common factors 
+by using cross-section averages of the depen-
+dent and independent variables as additional 
+regressors. Specifically, we consider the mean 
+group CCE (CCEMG) extension of the estimator 
+proposed in Pesaran and Smith (1995) as it is 
+more appropriate for our heterogeneous panel 
+data setting. In addition to the CCE approach, 
+we implement the AMG estimator proposed by 
+Bond and Eberhardt (2009) and Eberhardt and 
+Teal (2010) that accounts for CSD by means of 
+a "common dynamic process" in the regional 
+regressions. The "common dynamic process" 
+is extracted using year dummy coefficients of 
+a pooled regression in first differences and rep-
+resents the levels-equivalent mean evolution of 
+unobserved common factors across all regions 
+(Eberhardt and Teal 2010). 13 Finally, given the 
+presence of a lagged dependent variable in our 
+specification and the need to take into account 
+simultaneously the issues of dynamics, hetero-
+geneity, and CSD, we implement the recent 
+extension of the Pesaran (2006) CCEMG esti-
+mator proposed in Chudik and Pesaran (2015a) 
+that permits the inclusion of lagged values of 
+the dependent variable and/or weakly exogenous 
+regressors in the panel data model. 
+Chudik and Pesaran (2015a) allow the estima-
+tion of heterogeneous panel data models with a 
+lagged dependent variable. They show that the 
+dynamic CCEMG (dynCCEMG) extension of the 
+CCE estimator performs well and is asymptoti-
+cally valid when (1) there is a sufficient number 
+of lags of cross-section averages included in the 
+individual equations of the panel alongside with 
+the cross-section averages, and (2) the number of 
+cross-section averages is at least as large as the 
+number of unobserved common factors. 
+In order to apply the dynCCEMG estimator, 
+we augment Equation (1) with cross-section 
+averages of the dependent and independent 
+variables as well as their lags as additional 
+regressors: </p>
+
+<p>U i,t = μ i + ϕ i U i,t−1 + β i σ i,t + λ ′ 
+i z i , t 
+(5) </p>
+
+<p>+ π ′ 
+i w t + </p>
+
+<p>p T </p>
+
+<p>∑ </p>
+
+<p>l=0 </p>
+
+<p>δ ′ 
+il v t−l + ε i,t , </p>
+
+<p>13. Bond and Eberhardt (2009) provide evidence that 
+both the CCEMG estimators and the AMG approach perform 
+very well and with similar results in Monte Carlo studies. </p>
+
+<p>where v t = N −1 ∑ N 
+i=1 v i , t = </p>
+
+<p>( 
+U t , σ t , z t </p>
+
+<p>) ′ 
+. We 
+perform the estimation using a different number 
+of lags of cross-section averages up to the p T , 
+where p T is equal to the integer part of T 1/3 as 
+suggested by Chudik and Pesaran (2015a). 14 
+Pesaran and Tosetti (2011) show that the CCE 
+type estimators provide consistent estimates 
+of the slope coefficients (and their SEs) under 
+general cases of cross-sectional dependencies. 
+The latter can arise from spatial spillovers 
+or can be due to the presence of unobserved 
+common factors. 
+Prior to estimation, we examine the panel 
+data properties of the series. Notably, we inves-
+tigate (1) the order of integration of the series 
+using panel unit root tests, (2) the assumption 
+of cross-sectional independence among states 
+using CSD tests, and (3) the issue of slopes het-
+erogeneity across states using poolability tests. 
+Detailed description of the tests is presented in 
+the Appendix. 
+Following this, we proceed to the main stage 
+of the analysis by estimating the Lilien's dynamic 
+reduced form unemployment relationship for the 
+U.S. states panel, taking into account the issues 
+of dynamics, heterogeneity, and common (aggre-
+gate) factors through the induction of CSD, by 
+considering alternative estimation procedures for 
+homogeneous and heterogeneous panel data. </p>
+
+<p>IV. DATA AND PRELIMINARY ANALYSIS </p>
+
+<p>A. Data </p>
+
+<p>The empirical analysis has been car-
+ried out using monthly data over the period 
+1990:M1-2011:M12 for the 48 contiguous U.S. 
+states (12,672 observations overall). 15 Table 1 
+presents the abbreviations of the U.S. states used 
+in our analysis. The employment and unemploy-
+ment per state series were obtained from the U.S. 
+Bureau of Labor Statistics (BLS). 
+The sectoral shifts proxy is computed per 
+state by using the employment shares of the 
+available sectoral decomposition of monthly </p>
+
+<p>14. Chudik and Pesaran (2015a) have also proposed time 
+series bias-corrected versions of the mean group dynamic 
+CCE (dynCCEMG) estimator. Because our interest is on the 
+coefficient of σ i,t and not on the parameter of the lagged 
+depended variable (U i,t − 1 ), and following the suggestion of 
+Chudik and Pesaran (2015a) that the uncorrected dynCCEMG 
+estimator is preferred, we thus present results without the 
+bias-corrected version of the dynCCEMG estimator. 
+15. We exclude from our analysis the nonadjoining states 
+of Alaska and Hawaii. </p>
+
+
+
+<p>ECONOMIC INQUIRY </p>
+
+<p>TABLE 1 
+U.S. States and Abbreviations </p>
+
+<p>State 
+Abbreviations 
+State 
+Abbreviations </p>
+
+<p>Alabama 
+AL 
+Nebraska 
+NE 
+Arizona 
+AZ 
+Nevada 
+NV 
+Arkansas 
+AR 
+New Hampshire 
+NH 
+California 
+CA 
+New Jersey 
+NJ 
+Colorado 
+CO 
+New Mexico 
+NM 
+Connecticut 
+CT 
+New York 
+NY 
+Delaware 
+DE 
+North Carolina 
+NC 
+Florida 
+FL 
+North Dakota 
+ND 
+Georgia 
+GA 
+Ohio 
+OH 
+Idaho 
+ID 
+Oklahoma 
+OK 
+Illinois 
+IL 
+Oregon 
+OR 
+Indiana 
+IN 
+Pennsylvania 
+PA 
+Iowa 
+IA 
+Rhode Island 
+RI 
+Kansas 
+KS 
+South Carolina 
+SC 
+Kentucky 
+KY 
+South Dakota 
+SD 
+Louisiana 
+LA 
+Tennessee 
+TN 
+Maine 
+ME 
+Texas 
+TX 
+Maryland 
+MD 
+Utah 
+UT 
+Massachusetts 
+MA 
+Vermont 
+VT 
+Michigan 
+MI 
+Virginia 
+VA 
+Minnesota 
+MN 
+Washington 
+WA 
+Mississippi 
+MS 
+West Virginia 
+WV 
+Missouri 
+MO 
+Wisconsin 
+WI 
+Montana 
+MT 
+Wyoming 
+WY </p>
+
+<p>Note: N = 48; T = 264 (1990:M01-2011:M12); Obs = 12,672. </p>
+
+<p>nonagricultural employment consisting of the 
+following sectors: (I) Goods providing: (1) 
+mining-logging-construction, (2) manu-
+facturing (with a further disaggregation on 
+(2.1) durable and (2.2) nondurable goods), (3) 
+trade-transportations (with a further disaggre-
+gation on (3.1) wholesale trade, (3.2) retail trade, 
+and (3.3) transportations), (II) Services provid-
+ing: (4) information, (5) financial activities, (6) 
+professional activities, (7) education-health, 
+(8) leisure-hospitality, (9) other services, and 
+(10) government sector for the U.S. states. 16 
+Using this 10-industry decomposition, we 
+compute our benchmark measure σ 9 </p>
+
+<p>i,t </p>
+
+<p>using infor-
+mation on the 9 "super-sectors" of the economy 
+(excluding the government sector) while we 
+also build the σ 13 </p>
+
+<p>i,t </p>
+
+<p>, a 13-sectors decomposition 
+measure of labor reallocation by using all the 
+available disaggregation in our dataset (including 
+the government sector). Finally, for robustness 
+purposes and by following the work of Pelloni 
+and Polasek (2003) and Panagiotidis and Pel-
+loni (2007), the measure of sectoral shifts is 
+computed using the employment shares of the 
+construction, finance, manufacturing, and trade </p>
+
+<p>16. All sectoral series were seasonally adjusted using 
+Eviews Census X12 program. </p>
+
+<p>sectors for the 48 U.S. states (σ 4 </p>
+
+<p>i,t </p>
+
+<p>). 17 Panel (A) 
+of Table 2 presents pooled descriptive statistics 
+for the sectoral employment data. 
+For the purposes of our econometric analysis, 
+we use the logarithmic form of the unemploy-
+ment rate, U </p>
+
+<p>Logarithmic 
+i,t </p>
+
+<p>= ln 
+( 
+u i,t 
+) 
+, as well as the 
+logistic transformation, U </p>
+
+<p>Logistic 
+i,t </p>
+
+<p>= ln 
+( </p>
+
+<p>u i,t∕ 1−u i,t </p>
+
+<p>) 
+, 
+where u i,t is the unemployment rate, following 
+the suggestion by Wallis (1987) to employ the 
+logistic transformation of the unemployment rate, 
+a variable bounded between 0 and 1 (see also 
+Panagiotidis and Pelloni 2007). 18 
+The aggregate series on the monetary vari-
+ables, FR t and TB t , as well as the fiscal variables, 
+G t , FG t , and SG t , are taken from the Federal 
+Reserve Economic Data (FRED) database and 
+transformed into first-differences (ΔFR t and 
+ΔTB t ) and logarithmic first-differences (Δln(G t ), 
+Δln(FG t ), and Δln(SG t )). 19 The conditional </p>
+
+<p>17. In a similar manner, we compute also two intermedi-
+ate decomposition measures, the σ 10 </p>
+
+<p>i,t </p>
+
+<p>and σ 7 </p>
+
+<p>i,t </p>
+
+<p>for completeness 
+of the analysis. 
+18. Cavaliere and Xu (2014) stress the issue of stationar-
+ity properties of variables in the presence of bounds. 
+19. All fiscal variables were published in quarterly fre-
+quency and have been transformed into monthly using a lineal 
+interpolation method. </p>
+
+<p>BAKAS, PANAGIOTIDIS, &amp; PELLONI: MACROECONOMIC EFFECTS OF LABOR REALLOCATION </p>
+
+
+
+<p>TABLE 2 
+Summary Statistics </p>
+
+<p>Mean 
+SD 
+Minimum 
+Maximum 
+Skewness 
+Kurtosis </p>
+
+<p>Panel (A): sectoral variables 
+Sectoral employment shares 
+Total 
+2579.012 
+2621.074 
+195.208 
+15239.910 
+2.233 
+8.955 
+Mining-logging-construction 
+139.514 
+147.259 
+11.993 
+976.468 
+2.744 
+11.900 
+Manufacturing 
+322.320 
+322.359 
+8.607 
+1983.681 
+1.937 
+7.918 
+Trade-transportations 
+509.766 
+511.573 
+40.699 
+2938.358 
+2.128 
+8.234 
+Information 
+61.722 
+80.106 
+3.444 
+598.669 
+3.170 
+15.245 
+Financial activities 
+155.144 
+173.136 
+7.813 
+935.687 
+2.245 
+8.071 
+Professional activities 
+302.468 
+356.647 
+8.484 
+2270.799 
+2.686 
+12.302 
+Education-health 
+323.131 
+340.305 
+12.528 
+1855.177 
+2.006 
+7.021 
+Leisure-hospitality 
+239.441 
+248.973 
+23.001 
+1583.518 
+2.525 
+10.842 
+Other services 
+100.239 
+98.989 
+6.512 
+517.006 
+1.810 
+6.338 
+Government 
+425.105 
+427.011 
+42.156 
+2528.923 
+2.455 
+10.136 </p>
+
+<p>Panel (B): macro variables 
+State specific 
+U i,t 
+5.539 
+1.900 
+2.100 
+14.200 
+1.122 
+4.593 
+U </p>
+
+<p>Logistic 
+i,t </p>
+
+<p>−2.890 
+0.346 
+−3.842 
+−1.799 
+0.218 
+2.952 </p>
+
+<p>U </p>
+
+<p>Logarithmic 
+i,t </p>
+
+<p>−2.948 
+0.327 
+−3.863 
+−1.952 
+0.162 
+2.903 
+σ 13 </p>
+
+<p>i,t </p>
+
+<p>0.006 
+0.004 
+0.001 
+0.085 
+5.492 
+69.419 
+σ 9 </p>
+
+<p>i,t </p>
+
+<p>0.005 
+0.003 
+0.000 
+0.044 
+3.328 
+26.559 
+σ 4 </p>
+
+<p>i,t </p>
+
+<p>0.003 
+0.002 
+0.000 
+0.043 
+4.326 
+43.993 </p>
+
+<p>σ </p>
+
+<p>9 purged 
+i,t </p>
+
+<p>0.000 
+0.003 
+−0.005 
+0.038 
+3.328 
+26.482 
+ln(PI i,t ) 
+1 1 .532 
+1.083 
+8.958 
+14.316 
+−0.018 
+2.460 
+Δln(PI i,t ) 
+0 .004 
+0.036 
+−0.029 
+0.004 
+−0.485 
+8.436 
+Common to all states 
+FR t 
+3.694 
+2.250 
+0.070 
+8.290 
+−0.151 
+2.014 
+ΔFR t 
+−0.031 
+0.193 
+−0.960 
+0.530 
+−1.336 
+6.760 
+H t 
+0.057 
+0.107 
+0.006 
+0.954 
+4.448 
+28.808 
+TB t 
+3.438 
+2.104 
+0.010 
+7.900 
+−0.173 
+2.008 
+ΔTB t 
+−0.029 
+0.201 
+−0.860 
+0.460 
+−1.083 
+5.348 
+ln(G t ) 
+8 .118 
+0.329 
+7.568 
+8.667 
+0.224 
+1.788 
+Δln(G t ) 
+0 .004 
+0.004 
+−0.010 
+0.015 
+−0.053 
+4.460 
+ln(FG t ) 
+7 .684 
+0.333 
+7.156 
+8.295 
+0.404 
+1.945 
+Δln(FG t ) 
+0 .004 
+0.006 
+−0.016 
+0.022 
+0.102 
+4.511 
+ln(SG t ) 
+7 .287 
+0.348 
+6.646 
+7.782 
+−0.082 
+1.680 
+Δln(SG t ) 
+0 .004 
+0.003 
+−0.005 
+0.013 
+−0.120 
+3.410 </p>
+
+<p>Notes: Descriptive statistics for sectoral employment and macroeconomic series for the full sample of 12,672 observations, 
+based on N = 48 and T = 264. All variables are defined in the Data section of the article. </p>
+
+<p>variance (H t ) of a GARCH (1,1) model for 
+ΔFR t proxies monetary variability. Finally, the 
+state personal income, PI i,t , transformed into 
+logarithmic first-differences is obtained from 
+the U.S. Bureau of Economic Analysis (BEA). 
+Panel (B) of Table 2 presents pooled descrip-
+tive statistics for the unemployment series, 
+the sectoral shifts measures, and the aggre-
+gate monetary and fiscal variables used in our 
+regression analysis. </p>
+
+<p>B. Preliminary Data Analysis </p>
+
+<p>Our preliminary analysis starts with the 
+Lilien's proxy (dispersion per state). Figures 1 </p>
+
+<p>and 2 present the unemployment rate and Lilien's 
+proxy graphs at the national and regional U.S. 
+level, respectively. Figure 1 shows the aggregate 
+unemployment rate and the alternative measures 
+of the dispersion index for the United States. We 
+can observe that both dispersion indexes (σ 9 </p>
+
+<p>i,t </p>
+
+<p>and σ 13 </p>
+
+<p>i,t </p>
+
+<p>) have similar patterns, and that both are 
+rising sharply during recessions (early 1990s, 
+2001, and the Great Recession of 2007-2009) as 
+measured by the National Bureau of Economic 
+Research (NBER). Furthermore, the two dis-
+persion indexes, the unpurged Lilien's measure 
+as well as its "purged" counterpart, display a 
+similar behavior. </p>
+
+
+
+<p>ECONOMIC INQUIRY </p>
+
+<p>FIGURE 1 
+Unemployment Rate and Lilien's Index for the U.S. Aggregate, 1990:M1-2011:M12 </p>
+
+<p>Figure 2 present the state-by-state graphs 
+of the unemployment rate and the dispersion 
+indexes. The graphs per state reveal similar 
+patterns to the aggregate behavior. However, the 
+presence of substantial heterogeneity is obvious 
+for both the unemployment rate and the disper-
+sion index across states. Thus, it is essential to 
+take into account this heterogeneity (alongside </p>
+
+<p>any potential interdependence across U.S. states) 
+in our panel data analysis. 
+Table 3 presents the values of Lilien's index 
+(σ 9 </p>
+
+<p>i,t </p>
+
+<p>) in 1990, 2000, and 2011. Looking first 
+at the averages, among the four largest U.S. 
+states (population wise) (CA, TX, NY, and 
+FL), FL has the highest average over the two 
+decade period (0.0039), which implies more </p>
+
+<p>BAKAS, PANAGIOTIDIS, &amp; PELLONI: MACROECONOMIC EFFECTS OF LABOR REALLOCATION </p>
+
+
+
+<p>FIGURE 2 </p>
+
+<p>Unemployment Rate and Lilien's Index for the 48 U.S. States, 1990:M1-2011:M12 </p>
+
+
+
+<p>ECONOMIC INQUIRY </p>
+
+<p>TABLE 3 </p>
+
+<p>Lilien's Index (σ 9 </p>
+
+<p>i,t </p>
+
+<p>) </p>
+
+<p>AL </p>
+
+<p>AZ </p>
+
+<p>AR </p>
+
+<p>CA </p>
+
+<p>CO </p>
+
+<p>CT </p>
+
+<p>DE </p>
+
+<p>FL </p>
+
+<p>GA </p>
+
+<p>ID </p>
+
+<p>IL </p>
+
+<p>IN </p>
+
+<p>IA </p>
+
+<p>KS </p>
+
+<p>KY </p>
+
+<p>LA </p>
+
+<p>ME </p>
+
+<p>MD </p>
+
+<p>MA </p>
+
+<p>MI </p>
+
+<p>MN </p>
+
+<p>MS </p>
+
+<p>MO </p>
+
+<p>MT </p>
+
+<p>1990 
+0.0049 0.0055 0.0060 0.0034 0.0041 0.0061 0.0134 0.0044 0.0046 0.0083 0.0040 0.0051 0.0041 0.0060 0.0041 0.0050 0.0094 0.0065 0.0057 0.0060 0.0036 0.0068 0.0049 0.0091 </p>
+
+<p>2000 
+0.0037 0.0045 0.0042 0.0031 0.0037 0.0031 0.0098 0.0043 0.0052 0.0058 0.0030 0.0039 0.0050 0.0051 0.0050 0.0043 0.0091 0.0058 0.0055 0.0045 0.0035 0.0051 0.0046 0.0053 </p>
+
+<p>2011 
+0.0055 0.0047 0.0065 0.0024 0.0045 0.0047 0.0082 0.0032 0.0047 0.0066 0.0027 0.0042 0.0043 0.0060 0.0041 0.0058 0.0059 0.0058 0.0052 0.0053 0.0056 0.0046 0.0046 0.0070 </p>
+
+<p>1990-2011 0.0038 0.0047 0.0042 0.0035 0.0040 0.0044 0.0099 0.0039 0.0040 0.0061 0.0035 0.0040 0.0042 0.0050 0.0043 0.0051 0.0056 0.0041 0.0037 0.0049 0.0038 0.0054 0.0042 0.0062 </p>
+
+<p>NE </p>
+
+<p>NV </p>
+
+<p>NH </p>
+
+<p>NJ </p>
+
+<p>NM </p>
+
+<p>NY </p>
+
+<p>NC </p>
+
+<p>ND </p>
+
+<p>OH </p>
+
+<p>OK </p>
+
+<p>OR </p>
+
+<p>PA </p>
+
+<p>RI </p>
+
+<p>SC </p>
+
+<p>SD </p>
+
+<p>TN </p>
+
+<p>TX </p>
+
+<p>UT </p>
+
+<p>VT </p>
+
+<p>VA </p>
+
+<p>WA </p>
+
+<p>WV </p>
+
+<p>WI </p>
+
+<p>WY </p>
+
+<p>1990 
+0.0055 0.0075 0.0081 0.0053 0.0053 0.0041 0.0045 0.0054 0.0040 0.0055 0.0059 0.0035 0.0084 0.0055 0.0068 0.0054 0.0036 0.0043 0.0087 0.0046 0.0047 0.0071 0.0035 0.0085 </p>
+
+<p>2000 
+0.0050 0.0062 0.0046 0.0045 0.0047 0.0053 0.0036 0.0062 0.0034 0.0039 0.0034 0.0043 0.0090 0.0046 0.0069 0.0059 0.0023 0.0039 0.0106 0.0052 0.0066 0.0111 0.0034 0.0069 </p>
+
+<p>2011 
+0.0050 0.0054 0.0064 0.0048 0.0072 0.0050 0.0035 0.0072 0.0032 0.0050 0.0041 0.0029 0.0080 0.0042 0.0067 0.0047 0.0029 0.0051 0.0066 0.0040 0.0044 0.0061 0.0051 0.0074 </p>
+
+<p>1990-2011 0.0046 0.0062 0.0054 0.0038 0.0056 0.0033 0.0041 0.0061 0.0033 0.0044 0.0039 0.0031 0.0067 0.0045 0.0058 0.0052 0.0027 0.0046 0.0066 0.0037 0.0044 0.0060 0.0036 0.0068 
+Notes: 
+The data show the averages of Lilien's dispersion index (σ 9 </p>
+
+<p>i,t </p>
+
+<p>) for each state using information on the nine main sectors of the economy (excluding the government sector) in 1990, 2000, 2011, and over the </p>
+
+<p>period 1990-2011. See Table 1 for U.S. state abbreviations. </p>
+
+<p>reallocation, followed by CA, NY, and TX. A 
+more clear picture is emerging from Table 4 that 
+presents the regional employment structure per 
+U.S. state. Comparing 1990 with 2011, one of 
+the most important characteristics emerging from 
+these two decades was the decline of traditional 
+sectors such as manufacturing. Focusing again 
+on the four largest states, we can observe that 
+in 1990, manufacturing did represent 15.70% 
+of employment in CA, 13.30% in TX, 12% in 
+NY, and 9.46% in FL. Twenty-one years later, 
+the percentages are 8.9% (CA), 7.9% (TX), 
+5.3% (NY), and 4.28% (FL). This momentous 
+decline was accompanied by an increase in new, 
+more dynamic sectors on the services side of 
+the economy. </p>
+
+<p>V. EMPIRICAL RESULTS </p>
+
+<p>We begin our analysis by conducting formal 
+tests to examine the properties of poolability, 
+CSD, and stationarity (unit roots) for our panel 
+data set. Specifically, we conduct univariate and 
+panel unit root tests to determine the level of 
+integration of our series. We perform the aug-
+mented Dickey-Fuller (ADF) unit root tests for 
+the variables that are common to all states, FR t , 
+H t , TB t , ln(G t ), ln(FG t ), and ln(SG t ). Addition-
+ally, we employ one first-generation (the IPS test 
+of Im, Pesaran, and Shin 2003) and one second-
+generation (the cross-sectionally augmented IPS 
+[CIPS] test of Pesaran 2007 that accounts for 
+CSD) panel unit root test for our panel variables 
+(U i,t , σ i,t , and ln(PI i,t )). Table 5 presents the 
+ADF unit root tests. They reveal that all variables 
+are I(1) except H t which is I(0). The panel 
+results, reported in Table 6, bear out that both 
+tests clearly indicate that the unemployment 
+series and the sectoral shifts index are stationary 
+variables, while state personal income is found 
+to be I(1). Within a time series perspective, 
+Abadir, Caggiano, and Talmain (2013) also 
+claim that unemployment series are not of the 
+integrated type. 
+The issue of CSD is examined by apply-
+ing the CD P and CD LM versions of the CSD 
+test (Table 7). The null hypothesis of no cross-
+sectional correlation among the U.S. states panel 
+is rejected at the 5% level of significance, indi-
+cating that the hypothesis of cross-sectional inde-
+pendence in our dataset is clearly violated and 
+thus we need to account for CSD across the 
+U.S. states. 
+Furthermore, the assumption of common 
+slope parameters in our states panel estimation is </p>
+
+<p>BAKAS, PANAGIOTIDIS, &amp; PELLONI: MACROECONOMIC EFFECTS OF LABOR REALLOCATION </p>
+
+
+
+<p>TABLE 4 </p>
+
+<p>U.S. Regional Employment Structure (%) </p>
+
+<p>AL </p>
+
+<p>AZ </p>
+
+<p>AR </p>
+
+<p>CA </p>
+
+<p>CO </p>
+
+<p>CT </p>
+
+<p>DE </p>
+
+<p>FL </p>
+
+<p>GA </p>
+
+<p>ID </p>
+
+<p>IL </p>
+
+<p>IN </p>
+
+<p>IA </p>
+
+<p>KS </p>
+
+<p>KY </p>
+
+<p>LA </p>
+
+<p>ME </p>
+
+<p>MD </p>
+
+<p>MA </p>
+
+<p>MI </p>
+
+<p>MN </p>
+
+<p>MS </p>
+
+<p>MO </p>
+
+<p>MT </p>
+
+<p>1990 (%) 
+Mining-log-</p>
+
+<p>constr </p>
+
+<p>6.38 </p>
+
+<p>6.53 </p>
+
+<p>4.93 </p>
+
+<p>5.45 </p>
+
+<p>5.29 </p>
+
+<p>3.92 </p>
+
+<p>6.23 </p>
+
+<p>7.73 </p>
+
+<p>5.50 </p>
+
+<p>6.70 </p>
+
+<p>4.59 </p>
+
+<p>4.92 </p>
+
+<p>3.82 </p>
+
+<p>4.80 </p>
+
+<p>6.74 </p>
+
+<p>9.54 </p>
+
+<p>6.05 </p>
+
+<p>7.38 </p>
+
+<p>3.41 </p>
+
+<p>3.93 </p>
+
+<p>4.05 </p>
+
+<p>5.08 </p>
+
+<p>4.31 </p>
+
+<p>6.25 </p>
+
+<p>Manufacturing 22.20 11.90 23.70 </p>
+
+<p>15.70 11.20 18.60 13.20 
+9.46 17.50 13.60 17.30 24.00 17.90 16.30 18.30 11.10 17.40 </p>
+
+<p>9.14 16.10 21.30 16.00 24.50 16.70 </p>
+
+<p>6.57 </p>
+
+<p>Trade-
+transport 
+19.40 20.90 21.10 
+19.40 20.00 19.60 19.40 22.70 22.30 22.20 21.70 21.10 22.00 21.90 20.70 22.40 21.00 20.40 19.10 19.60 21.00 20.00 21.50 23.70 </p>
+
+<p>Information </p>
+
+<p>1.83 </p>
+
+<p>2.20 </p>
+
+<p>1.92 </p>
+
+<p>3.14 </p>
+
+<p>3.43 </p>
+
+<p>2.60 </p>
+
+<p>1.44 </p>
+
+<p>2.38 </p>
+
+<p>2.85 </p>
+
+<p>1.97 </p>
+
+<p>2.48 </p>
+
+<p>1.78 </p>
+
+<p>2.44 </p>
+
+<p>2.79 </p>
+
+<p>1.81 </p>
+
+<p>1.69 </p>
+
+<p>1.91 </p>
+
+<p>2.18 </p>
+
+<p>2.93 </p>
+
+<p>1.77 </p>
+
+<p>2.54 </p>
+
+<p>1.39 </p>
+
+<p>2.85 </p>
+
+<p>2.16 </p>
+
+<p>Financial 
+activities </p>
+
+<p>4.90 </p>
+
+<p>6.65 </p>
+
+<p>4.34 </p>
+
+<p>6.55 </p>
+
+<p>6.88 
+9.47 10.60 </p>
+
+<p>7.17 </p>
+
+<p>5.32 </p>
+
+<p>4.98 </p>
+
+<p>7.08 </p>
+
+<p>5.17 </p>
+
+<p>5.67 </p>
+
+<p>5.48 </p>
+
+<p>4.35 </p>
+
+<p>5.47 </p>
+
+<p>4.96 </p>
+
+<p>6.32 </p>
+
+<p>6.73 </p>
+
+<p>4.88 </p>
+
+<p>6.05 </p>
+
+<p>4.40 </p>
+
+<p>5.95 </p>
+
+<p>4.65 </p>
+
+<p>Professional 
+activities </p>
+
+<p>7.20 </p>
+
+<p>9.63 </p>
+
+<p>6.22 
+12.00 11.80 10.40 14.50 </p>
+
+<p>5.80 </p>
+
+<p>9.50 
+8.50 10.80 </p>
+
+<p>6.20 </p>
+
+<p>5.63 </p>
+
+<p>7.70 </p>
+
+<p>6.70 </p>
+
+<p>7.30 
+6.29 11.90 11.50 10.10 10.00 </p>
+
+<p>5.48 </p>
+
+<p>9.30 </p>
+
+<p>5.24 </p>
+
+<p>Education-</p>
+
+<p>health </p>
+
+<p>7.90 </p>
+
+<p>9.12 </p>
+
+<p>9.88 </p>
+
+<p>8.97 
+8.50 12.20 </p>
+
+<p>9.50 11.30 </p>
+
+<p>8.20 
+8.40 10.20 </p>
+
+<p>9.90 12.00 
+9.60 11.50 10.30 12.40 10.40 15.40 10.40 11.30 </p>
+
+<p>8.00 10.90 11.80 </p>
+
+<p>Leisure-
+hospitality </p>
+
+<p>6.51 10.70 </p>
+
+<p>7.04 
+8.84 11.00 </p>
+
+<p>6.66 
+8.00 13.20 </p>
+
+<p>8.05 </p>
+
+<p>9.53 </p>
+
+<p>7.45 </p>
+
+<p>8.25 </p>
+
+<p>8.27 </p>
+
+<p>8.03 </p>
+
+<p>8.19 </p>
+
+<p>8.00 </p>
+
+<p>9.00 </p>
+
+<p>8.51 </p>
+
+<p>7.94 </p>
+
+<p>8.38 </p>
+
+<p>8.45 </p>
+
+<p>6.00 
+8.80 11.80 </p>
+
+<p>Other services </p>
+
+<p>3.74 </p>
+
+<p>3.89 </p>
+
+<p>3.61 </p>
+
+<p>3.34 </p>
+
+<p>3.68 </p>
+
+<p>3.54 </p>
+
+<p>3.39 </p>
+
+<p>4.30 </p>
+
+<p>3.06 </p>
+
+<p>2.99 </p>
+
+<p>3.92 </p>
+
+<p>3.84 </p>
+
+<p>4.53 </p>
+
+<p>3.76 </p>
+
+<p>4.22 </p>
+
+<p>3.65 </p>
+
+<p>3.23 </p>
+
+<p>4.43 </p>
+
+<p>3.26 </p>
+
+<p>3.65 </p>
+
+<p>4.27 </p>
+
+<p>3.36 </p>
+
+<p>3.90 </p>
+
+<p>3.89 </p>
+
+<p>Government 
+20.00 18.40 17.20 
+16.60 18.20 13.00 13.80 15.80 17.80 21.10 14.50 14.90 17.90 19.60 17.50 20.50 17.90 19.40 13.70 16.00 16.30 21.70 15.80 24.00 </p>
+
+<p>Total (000 s) 1635.7 
+1483.1 923.8 12500.2 1520.8 1619.6 347.5 5373.3 2991.8 385.3 5287.6 2522.0 1226.3 1091.9 1487.2 1587.6 535.1 2173.3 2988.2 3946.6 2135.9 936.5 2345.1 297.2 </p>
+
+<p>NE </p>
+
+<p>NV </p>
+
+<p>NH </p>
+
+<p>NJ </p>
+
+<p>NM </p>
+
+<p>NY </p>
+
+<p>NC </p>
+
+<p>ND </p>
+
+<p>OH </p>
+
+<p>OK </p>
+
+<p>OR </p>
+
+<p>PA </p>
+
+<p>RI </p>
+
+<p>SC </p>
+
+<p>SD </p>
+
+<p>TN </p>
+
+<p>TX </p>
+
+<p>UT </p>
+
+<p>VT </p>
+
+<p>VA </p>
+
+<p>WA </p>
+
+<p>WV </p>
+
+<p>WI </p>
+
+<p>WY </p>
+
+<p>1990 (%) 
+Mining-log-</p>
+
+<p>constr </p>
+
+<p>3.98 10.20 </p>
+
+<p>4.59 </p>
+
+<p>4.16 </p>
+
+<p>8.04 </p>
+
+<p>4.02 </p>
+
+<p>5.59 </p>
+
+<p>5.20 </p>
+
+<p>4.31 </p>
+
+<p>6.68 </p>
+
+<p>5.34 </p>
+
+<p>4.91 </p>
+
+<p>4.13 </p>
+
+<p>6.58 </p>
+
+<p>4.87 </p>
+
+<p>4.61 </p>
+
+<p>7.16 </p>
+
+<p>5.02 </p>
+
+<p>6.05 </p>
+
+<p>6.87 </p>
+
+<p>6.03 </p>
+
+<p>9.87 
+4.01 14.40 </p>
+
+<p>Manufacturing 13.30 </p>
+
+<p>3.90 19.40 </p>
+
+<p>14.60 
+6.55 12.00 26.40 
+5.85 21.70 13.20 16.30 18.40 21.00 22.60 11.60 22.80 13.30 14.30 16.60 13.40 15.70 13.00 22.80 </p>
+
+<p>4.60 </p>
+
+<p>Trade-
+transport 
+23.00 17.90 21.50 
+22.90 20.30 19.10 20.30 24.30 19.70 20.90 21.10 20.20 17.10 19.70 22.30 22.00 22.20 21.20 19.80 19.90 20.20 21.50 20.00 21.00 </p>
+
+<p>Information </p>
+
+<p>3.01 </p>
+
+<p>1.77 </p>
+
+<p>2.07 </p>
+
+<p>3.31 </p>
+
+<p>1.84 </p>
+
+<p>3.48 </p>
+
+<p>1.66 </p>
+
+<p>2.25 </p>
+
+<p>2.07 </p>
+
+<p>1.93 </p>
+
+<p>2.15 </p>
+
+<p>2.11 </p>
+
+<p>2.22 </p>
+
+<p>1.50 </p>
+
+<p>1.90 </p>
+
+<p>2.04 </p>
+
+<p>2.49 </p>
+
+<p>1.85 </p>
+
+<p>2.13 </p>
+
+<p>2.56 </p>
+
+<p>2.31 </p>
+
+<p>1.90 </p>
+
+<p>1.94 </p>
+
+<p>1.85 </p>
+
+<p>Financial 
+activities </p>
+
+<p>6.67 </p>
+
+<p>5.11 </p>
+
+<p>6.49 </p>
+
+<p>6.44 </p>
+
+<p>4.76 </p>
+
+<p>9.49 </p>
+
+<p>4.51 </p>
+
+<p>4.79 </p>
+
+<p>5.22 </p>
+
+<p>5.71 </p>
+
+<p>5.79 </p>
+
+<p>6.28 </p>
+
+<p>5.90 </p>
+
+<p>4.62 </p>
+
+<p>5.92 </p>
+
+<p>5.17 </p>
+
+<p>6.46 </p>
+
+<p>4.81 </p>
+
+<p>5.24 </p>
+
+<p>4.97 </p>
+
+<p>5.28 </p>
+
+<p>4.15 </p>
+
+<p>5.41 </p>
+
+<p>3.99 </p>
+
+<p>Professional 
+activities </p>
+
+<p>8.40 </p>
+
+<p>9.50 </p>
+
+<p>7.20 </p>
+
+<p>12.10 
+9.80 10.50 </p>
+
+<p>7.70 </p>
+
+<p>4.50 </p>
+
+<p>9.30 </p>
+
+<p>8.20 </p>
+
+<p>8.20 </p>
+
+<p>8.80 </p>
+
+<p>9.40 </p>
+
+<p>8.60 </p>
+
+<p>3.86 </p>
+
+<p>7.60 
+9.00 10.30 </p>
+
+<p>5.50 12.00 </p>
+
+<p>9.20 </p>
+
+<p>5.19 </p>
+
+<p>6.70 </p>
+
+<p>4.47 </p>
+
+<p>Education-</p>
+
+<p>health </p>
+
+<p>10.20 
+5.63 12.10 </p>
+
+<p>10.00 
+8.80 13.10 
+7.40 13.50 11.10 
+9.80 10.30 14.30 15.20 </p>
+
+<p>6.40 12.80 </p>
+
+<p>9.60 </p>
+
+<p>9.50 
+9.30 13.50 </p>
+
+<p>8.30 
+9.60 11.10 10.40 </p>
+
+<p>6.50 </p>
+
+<p>Leisure-
+hospitality </p>
+
+<p>8.19 31.00 </p>
+
+<p>8.90 
+7.42 10.40 </p>
+
+<p>6.99 </p>
+
+<p>7.70 </p>
+
+<p>9.19 </p>
+
+<p>8.19 </p>
+
+<p>8.02 </p>
+
+<p>8.70 </p>
+
+<p>7.42 </p>
+
+<p>7.90 
+8.60 10.10 </p>
+
+<p>8.10 </p>
+
+<p>8.36 
+8.74 11.20 </p>
+
+<p>8.08 </p>
+
+<p>8.90 </p>
+
+<p>7.59 
+8.69 12.00 </p>
+
+<p>Other services </p>
+
+<p>3.52 </p>
+
+<p>2.70 </p>
+
+<p>3.48 </p>
+
+<p>3.29 </p>
+
+<p>3.76 </p>
+
+<p>3.39 </p>
+
+<p>3.25 </p>
+
+<p>4.88 </p>
+
+<p>3.64 </p>
+
+<p>3.55 </p>
+
+<p>3.68 </p>
+
+<p>4.06 </p>
+
+<p>3.54 </p>
+
+<p>3.08 </p>
+
+<p>4.82 </p>
+
+<p>2.12 </p>
+
+<p>3.70 </p>
+
+<p>3.53 </p>
+
+<p>3.07 </p>
+
+<p>4.03 </p>
+
+<p>4.18 </p>
+
+<p>5.42 </p>
+
+<p>5.09 </p>
+
+<p>3.37 </p>
+
+<p>Government 
+19.60 12.20 14.30 
+15.90 25.80 17.90 15.50 25.50 14.80 22.10 18.50 13.60 13.80 18.30 21.90 16.00 17.80 20.80 16.90 20.00 18.60 20.20 15.00 27.80 </p>
+
+<p>Total (000 s) </p>
+
+<p>730.8 
+620.9 508.2 3635.5 580.4 8214.6 3125.5 265.8 4882.3 1183.9 1255.6 5173.0 454.1 1541.9 288.5 2196.0 7101.0 723.6 257.7 2894.3 2142.9 630.0 2291.4 198.5 </p>
+
+
+
+<p>ECONOMIC INQUIRY </p>
+
+<p>TABLE 4 
+Continued </p>
+
+<p>AL </p>
+
+<p>AZ </p>
+
+<p>AR </p>
+
+<p>CA </p>
+
+<p>CO </p>
+
+<p>CT </p>
+
+<p>DE </p>
+
+<p>FL </p>
+
+<p>GA </p>
+
+<p>ID </p>
+
+<p>IL </p>
+
+<p>IN </p>
+
+<p>IA </p>
+
+<p>KS </p>
+
+<p>KY </p>
+
+<p>LA </p>
+
+<p>ME </p>
+
+<p>MD </p>
+
+<p>MA </p>
+
+<p>MI </p>
+
+<p>MN </p>
+
+<p>MS </p>
+
+<p>MO </p>
+
+<p>MT </p>
+
+<p>2011 (%) 
+Mining-log-</p>
+
+<p>constr </p>
+
+<p>4.89 </p>
+
+<p>5.12 </p>
+
+<p>4.98 </p>
+
+<p>4.14 </p>
+
+<p>6.20 </p>
+
+<p>3.19 </p>
+
+<p>4.69 </p>
+
+<p>4.54 </p>
+
+<p>3.98 </p>
+
+<p>5.56 </p>
+
+<p>3.62 </p>
+
+<p>4.49 </p>
+
+<p>4.36 </p>
+
+<p>4.62 </p>
+
+<p>5.04 </p>
+
+<p>9.19 </p>
+
+<p>4.60 </p>
+
+<p>5.74 </p>
+
+<p>3.39 </p>
+
+<p>3.35 </p>
+
+<p>3.64 </p>
+
+<p>5.31 </p>
+
+<p>4.02 </p>
+
+<p>7.22 </p>
+
+<p>Manufacturing 12.70 </p>
+
+<p>6.20 13.60 </p>
+
+<p>8.90 
+5.70 10.30 </p>
+
+<p>6.10 </p>
+
+<p>4.28 </p>
+
+<p>9.00 
+9.10 10.10 16.40 14.00 12.00 11.90 </p>
+
+<p>7.30 </p>
+
+<p>8.50 </p>
+
+<p>4.44 
+7.90 12.90 11.20 12.30 </p>
+
+<p>9.30 </p>
+
+<p>3.94 </p>
+
+<p>Trade-
+transport 
+19.50 19.60 20.30 
+18.90 17.80 18.10 18.00 20.60 21.20 20.10 20.10 19.40 20.40 19.00 20.30 19.60 19.80 17.30 17.10 18.30 18.50 19.70 19.30 20.20 </p>
+
+<p>Information </p>
+
+<p>1.25 </p>
+
+<p>1.52 </p>
+
+<p>1.26 </p>
+
+<p>3.07 </p>
+
+<p>3.17 </p>
+
+<p>1.94 </p>
+
+<p>1.38 </p>
+
+<p>1.85 </p>
+
+<p>2.51 </p>
+
+<p>1.55 </p>
+
+<p>1.77 </p>
+
+<p>1.21 </p>
+
+<p>1.89 </p>
+
+<p>2.08 </p>
+
+<p>1.49 </p>
+
+<p>1.25 </p>
+
+<p>1.38 </p>
+
+<p>1.66 </p>
+
+<p>2.58 </p>
+
+<p>1.36 </p>
+
+<p>1.97 </p>
+
+<p>1.09 </p>
+
+<p>2.20 </p>
+
+<p>1.70 </p>
+
+<p>Financial 
+activities </p>
+
+<p>4.96 </p>
+
+<p>6.90 </p>
+
+<p>4.15 </p>
+
+<p>5.42 </p>
+
+<p>6.37 
+8.31 10.20 </p>
+
+<p>6.64 </p>
+
+<p>5.38 </p>
+
+<p>4.84 </p>
+
+<p>6.39 </p>
+
+<p>4.64 </p>
+
+<p>6.80 </p>
+
+<p>5.47 </p>
+
+<p>4.71 </p>
+
+<p>4.98 </p>
+
+<p>5.34 </p>
+
+<p>5.60 </p>
+
+<p>6.41 </p>
+
+<p>4.91 </p>
+
+<p>6.51 </p>
+
+<p>4.11 </p>
+
+<p>6.01 </p>
+
+<p>4.88 </p>
+
+<p>Professional 
+activities 
+11.40 14.30 10.20 
+15.10 15.10 12.00 13.30 14.50 14.10 12.30 14.60 10.10 </p>
+
+<p>8.37 11.20 10.50 10.30 
+9.61 15.60 14.80 14.00 12.30 </p>
+
+<p>8.62 12.50 </p>
+
+<p>9.56 </p>
+
+<p>Education-</p>
+
+<p>health 
+11.60 14.80 14.40 
+13.00 12.10 19.40 16.00 15.20 12.90 14.30 15.00 15.10 14.60 13.80 14.30 14.80 20.30 16.10 20.90 15.80 17.50 12.40 15.70 15.00 </p>
+
+<p>Leisure-
+hospitality </p>
+
+<p>9.04 10.80 </p>
+
+<p>8.53 
+10.90 12.00 
+8.40 10.20 13.10 </p>
+
+<p>9.78 </p>
+
+<p>9.67 </p>
+
+<p>9.16 </p>
+
+<p>9.83 </p>
+
+<p>8.84 </p>
+
+<p>8.64 
+9.46 10.40 10.00 </p>
+
+<p>9.14 </p>
+
+<p>9.63 </p>
+
+<p>9.54 
+8.78 10.80 10.20 13.00 </p>
+
+<p>Other services </p>
+
+<p>4.28 </p>
+
+<p>3.72 </p>
+
+<p>3.74 </p>
+
+<p>3.46 </p>
+
+<p>4.14 </p>
+
+<p>3.72 </p>
+
+<p>4.67 </p>
+
+<p>4.22 </p>
+
+<p>3.95 </p>
+
+<p>3.46 </p>
+
+<p>4.38 </p>
+
+<p>3.86 </p>
+
+<p>3.82 </p>
+
+<p>3.91 </p>
+
+<p>3.92 </p>
+
+<p>3.31 </p>
+
+<p>3.38 </p>
+
+<p>4.54 </p>
+
+<p>3.78 </p>
+
+<p>4.25 </p>
+
+<p>4.31 </p>
+
+<p>3.12 </p>
+
+<p>4.24 </p>
+
+<p>3.87 </p>
+
+<p>Government 
+20.40 17.10 18.90 
+17.10 17.40 14.70 15.40 15.10 17.20 19.20 14.80 15.00 16.90 19.30 18.40 18.90 17.10 19.90 13.50 15.70 15.20 22.60 16.50 20.60 </p>
+
+<p>Total (000 s) 1866.6 
+2405.4 1160.0 14060.6 2255.3 1623.5 417.3 7271.5 3879.9 606.8 5663.1 2830.4 1477.8 1335.9 1790.4 1905.7 593.4 2548.0 3210.6 3935.6 2675.7 1090.0 2650.4 427.3 </p>
+
+<p>NE </p>
+
+<p>NV </p>
+
+<p>NH </p>
+
+<p>NJ </p>
+
+<p>NM </p>
+
+<p>NY </p>
+
+<p>NC </p>
+
+<p>ND </p>
+
+<p>OH </p>
+
+<p>OK </p>
+
+<p>OR </p>
+
+<p>PA </p>
+
+<p>RI </p>
+
+<p>SC </p>
+
+<p>SD </p>
+
+<p>TN </p>
+
+<p>TX </p>
+
+<p>UT </p>
+
+<p>VT </p>
+
+<p>VA </p>
+
+<p>WA </p>
+
+<p>WV </p>
+
+<p>WI </p>
+
+<p>WY </p>
+
+<p>2011 (%) 
+Mining-log-</p>
+
+<p>constr </p>
+
+<p>4.35 </p>
+
+<p>5.90 </p>
+
+<p>3.64 </p>
+
+<p>3.39 </p>
+
+<p>7.94 </p>
+
+<p>3.59 
+4.62 10.20 </p>
+
+<p>3.65 </p>
+
+<p>7.69 </p>
+
+<p>4.68 </p>
+
+<p>4.49 </p>
+
+<p>3.44 </p>
+
+<p>4.38 </p>
+
+<p>5.13 </p>
+
+<p>4.12 </p>
+
+<p>7.53 </p>
+
+<p>6.37 </p>
+
+<p>4.81 </p>
+
+<p>5.15 </p>
+
+<p>5.08 </p>
+
+<p>8.82 
+3.41 16.80 </p>
+
+<p>Manufacturing </p>
+
+<p>9.90 
+3.38 10.60 </p>
+
+<p>6.60 </p>
+
+<p>3.66 
+5.30 11.10 </p>
+
+<p>6.00 12.60 </p>
+
+<p>8.30 10.30 </p>
+
+<p>9.90 
+8.80 11.80 </p>
+
+<p>9.60 11.50 </p>
+
+<p>7.90 
+9.40 10.30 </p>
+
+<p>6.20 </p>
+
+<p>9.50 
+6.60 16.20 </p>
+
+<p>3.15 </p>
+
+<p>Trade-
+transport 
+20.70 18.90 21.30 
+21.20 16.50 17.10 18.50 21.80 18.80 18.10 19.30 19.20 15.90 19.10 20.20 21.00 19.90 19.30 18.80 17.10 18.60 17.90 18.60 18.40 </p>
+
+<p>Information </p>
+
+<p>1.79 </p>
+
+<p>1.12 </p>
+
+<p>1.78 </p>
+
+<p>1.92 </p>
+
+<p>1.77 </p>
+
+<p>2.94 </p>
+
+<p>1.75 </p>
+
+<p>1.81 </p>
+
+<p>1.50 </p>
+
+<p>1.56 </p>
+
+<p>1.99 </p>
+
+<p>1.59 </p>
+
+<p>2.21 </p>
+
+<p>1.41 </p>
+
+<p>1.57 </p>
+
+<p>1.66 </p>
+
+<p>1.85 </p>
+
+<p>2.44 </p>
+
+<p>1.67 </p>
+
+<p>2.01 </p>
+
+<p>3.68 </p>
+
+<p>1.39 </p>
+
+<p>1.69 </p>
+
+<p>1.35 </p>
+
+<p>Financial 
+activities </p>
+
+<p>7.36 </p>
+
+<p>4.62 </p>
+
+<p>5.54 </p>
+
+<p>6.51 </p>
+
+<p>4.10 </p>
+
+<p>7.87 </p>
+
+<p>5.17 </p>
+
+<p>5.35 </p>
+
+<p>5.47 </p>
+
+<p>5.13 </p>
+
+<p>5.68 </p>
+
+<p>5.44 </p>
+
+<p>6.68 </p>
+
+<p>5.24 </p>
+
+<p>6.88 </p>
+
+<p>5.10 </p>
+
+<p>6.05 </p>
+
+<p>5.71 </p>
+
+<p>4.04 </p>
+
+<p>4.96 </p>
+
+<p>4.87 </p>
+
+<p>3.62 </p>
+
+<p>5.77 </p>
+
+<p>3.73 </p>
+
+<p>Professional 
+activities 
+11.00 12.40 10.50 
+15.60 12.40 13.10 13.00 
+7.66 12.70 11.20 11.50 12.50 11.80 12.40 </p>
+
+<p>7.02 12.10 12.70 13.20 </p>
+
+<p>8.31 18.00 12.00 </p>
+
+<p>8.27 10.30 </p>
+
+<p>6.13 </p>
+
+<p>Education-</p>
+
+<p>health </p>
+
+<p>14.50 
+9.22 18.20 
+15.80 15.30 19.90 13.90 14.30 16.70 13.30 14.50 20.30 22.50 11.80 16.10 14.40 13.50 13.20 20.10 12.70 13.50 16.30 15.00 </p>
+
+<p>9.36 </p>
+
+<p>Leisure-
+hospitality 
+8.71 28.20 10.10 </p>
+
+<p>8.68 10.50 </p>
+
+<p>8.82 10.20 </p>
+
+<p>8.86 </p>
+
+<p>9.40 
+9.17 10.20 
+8.96 10.70 11.40 10.40 10.00 </p>
+
+<p>9.88 
+9.41 10.90 </p>
+
+<p>9.45 </p>
+
+<p>9.64 </p>
+
+<p>9.67 
+9.10 11.30 </p>
+
+<p>Other services </p>
+
+<p>3.88 </p>
+
+<p>2.96 </p>
+
+<p>3.63 </p>
+
+<p>4.24 </p>
+
+<p>3.41 </p>
+
+<p>4.26 </p>
+
+<p>3.97 </p>
+
+<p>3.95 </p>
+
+<p>4.13 </p>
+
+<p>3.86 </p>
+
+<p>3.56 </p>
+
+<p>4.47 </p>
+
+<p>4.79 </p>
+
+<p>3.76 </p>
+
+<p>3.83 </p>
+
+<p>3.82 </p>
+
+<p>3.50 </p>
+
+<p>2.81 </p>
+
+<p>3.28 </p>
+
+<p>5.07 </p>
+
+<p>3.80 </p>
+
+<p>7.27 </p>
+
+<p>4.95 </p>
+
+<p>4.14 </p>
+
+<p>Government 
+17.80 13.30 14.80 
+16.10 24.40 17.10 17.80 20.10 15.10 21.70 18.30 13.10 13.20 18.60 19.20 16.30 17.20 18.20 17.70 19.30 19.20 20.10 15.10 25.70 </p>
+
+<p>Total (000 s) </p>
+
+<p>944.0 
+1125.0 626.4 3856.1 804.1 8683.3 3922.4 394.2 5083.0 1550.3 1618.1 5687.0 460.2 1832.1 406.2 2656.210557.1 1208.0 299.6 3680.3 2820.4 753.8 2740.8 285.7 </p>
+
+<p>BAKAS, PANAGIOTIDIS, &amp; PELLONI: MACROECONOMIC EFFECTS OF LABOR REALLOCATION </p>
+
+
+
+<p>TABLE 4 
+Continued </p>
+
+<p>AL </p>
+
+<p>AZ </p>
+
+<p>AR </p>
+
+<p>CA </p>
+
+<p>CO </p>
+
+<p>CT </p>
+
+<p>DE </p>
+
+<p>FL </p>
+
+<p>GA </p>
+
+<p>ID </p>
+
+<p>IL </p>
+
+<p>IN </p>
+
+<p>IA </p>
+
+<p>KS </p>
+
+<p>KY </p>
+
+<p>LA </p>
+
+<p>ME </p>
+
+<p>MD </p>
+
+<p>MA </p>
+
+<p>MI </p>
+
+<p>MN </p>
+
+<p>MS </p>
+
+<p>MO </p>
+
+<p>MT </p>
+
+<p>1990:2001-2011:2012 (%) </p>
+
+<p>Mining-log-</p>
+
+<p>constr </p>
+
+<p>−1.49 −1.41 </p>
+
+<p>0.05 −1.31 
+0.91 −0.73 −1.54 −3.19 −1.52 −1.14 −0.97 −0.43 
+0.54 −0.18 −1.70 −0.35 −1.45 −1.64 −0.02 −0.58 −0.41 </p>
+
+<p>0.23 −0.29 </p>
+
+<p>0.97 </p>
+
+<p>Manufacturing −9.50 −5.70 −10.10 
+−6.80 −5.50 −8.30 −7.10 −5.18 −8.50 −4.50 −7.20 −7.60 −3.90 −4.30 −6.40 −3.80 −8.90 −4.70 −8.20 −8.40 −4.80 −12.20 −7.40 −2.63 </p>
+
+<p>Trade-
+transport 
+0.10 −1.30 −0.80 −0.50 
+−2.20 −1.50 −1.40 −2.10 −1.10 −2.10 −1.60 −1.70 −1.60 −2.90 −0.40 −2.80 −1.20 −3.10 −2.00 −1.30 −2.50 −0.30 −2.20 −3.50 </p>
+
+<p>Information 
+−0.58 −0.68 −0.66 −0.07 −0.26 −0.66 −0.06 −0.53 −0.34 −0.42 −0.71 −0.57 −0.55 −0.71 −0.32 −0.44 −0.53 −0.52 −0.35 −0.41 −0.57 −0.30 −0.65 −0.46 </p>
+
+<p>Financial 
+activities </p>
+
+<p>0.06 
+0.25 −0.19 −1.13 −0.51 −1.16 −0.40 </p>
+
+<p>−0.53 
+0.06 −0.14 −0.69 −0.53 </p>
+
+<p>1.13 −0.01 </p>
+
+<p>0.36 −0.49 
+0.38 −0.72 −0.32 </p>
+
+<p>0.03 
+0.46 −0.29 </p>
+
+<p>0.06 </p>
+
+<p>0.23 </p>
+
+<p>Professional 
+activities </p>
+
+<p>4.20 </p>
+
+<p>4.67 </p>
+
+<p>3.98 </p>
+
+<p>3.10 </p>
+
+<p>3.30 
+1.60 −1.20 </p>
+
+<p>8.70 </p>
+
+<p>4.60 </p>
+
+<p>3.80 </p>
+
+<p>3.80 </p>
+
+<p>3.90 </p>
+
+<p>2.74 </p>
+
+<p>3.50 </p>
+
+<p>3.80 </p>
+
+<p>3.00 </p>
+
+<p>3.32 </p>
+
+<p>3.70 </p>
+
+<p>3.30 </p>
+
+<p>3.90 </p>
+
+<p>2.30 </p>
+
+<p>3.14 </p>
+
+<p>3.20 </p>
+
+<p>4.32 </p>
+
+<p>Education-</p>
+
+<p>health </p>
+
+<p>3.70 </p>
+
+<p>5.68 </p>
+
+<p>4.52 </p>
+
+<p>4.03 </p>
+
+<p>3.60 </p>
+
+<p>7.20 </p>
+
+<p>6.50 </p>
+
+<p>3.90 </p>
+
+<p>4.70 </p>
+
+<p>5.90 </p>
+
+<p>4.80 </p>
+
+<p>5.20 </p>
+
+<p>2.60 </p>
+
+<p>4.20 </p>
+
+<p>2.80 </p>
+
+<p>4.50 </p>
+
+<p>7.90 </p>
+
+<p>5.70 </p>
+
+<p>5.50 </p>
+
+<p>5.40 </p>
+
+<p>6.20 </p>
+
+<p>4.40 </p>
+
+<p>4.80 </p>
+
+<p>3.20 </p>
+
+<p>Leisure-
+hospitality </p>
+
+<p>2.53 </p>
+
+<p>0.10 </p>
+
+<p>1.49 </p>
+
+<p>2.06 </p>
+
+<p>1.00 </p>
+
+<p>1.74 
+2.20 −0.10 </p>
+
+<p>1.73 </p>
+
+<p>0.14 </p>
+
+<p>1.71 </p>
+
+<p>1.58 </p>
+
+<p>0.57 </p>
+
+<p>0.61 </p>
+
+<p>1.27 </p>
+
+<p>2.40 </p>
+
+<p>1.00 </p>
+
+<p>0.63 </p>
+
+<p>1.69 </p>
+
+<p>1.16 </p>
+
+<p>0.33 </p>
+
+<p>4.80 </p>
+
+<p>1.40 </p>
+
+<p>1.20 </p>
+
+<p>Other services </p>
+
+<p>0.54 −0.17 </p>
+
+<p>0.13 </p>
+
+<p>0.12 </p>
+
+<p>0.46 </p>
+
+<p>0.18 
+1.28 −0.08 </p>
+
+<p>0.89 </p>
+
+<p>0.47 </p>
+
+<p>0.46 
+0.02 −0.71 
+0.15 −0.30 −0.34 </p>
+
+<p>0.15 </p>
+
+<p>0.11 </p>
+
+<p>0.52 </p>
+
+<p>0.60 
+0.04 −0.24 </p>
+
+<p>0.34 −0.02 </p>
+
+<p>Government 
+0.40 −1.30 </p>
+
+<p>1.70 
+0.50 −0.80 </p>
+
+<p>1.70 
+1.60 −0.70 −0.60 −1.90 </p>
+
+<p>0.30 
+0.10 −1.00 −0.30 </p>
+
+<p>0.90 −1.60 −0.80 
+0.50 −0.20 −0.30 −1.10 </p>
+
+<p>0.90 
+0.70 −3.40 </p>
+
+<p>Total (000 s) 
+230.8 922.3 236.2 1560.4 734.4 </p>
+
+<p>3.9 
+69.8 1898.2 888.1 221.5 375.5 308.3 251.5 244.1 303.2 318.1 </p>
+
+<p>58.2 374.6 222.5 −10.9 539.8 153.5 305.2 130.0 </p>
+
+<p>NE </p>
+
+<p>NV </p>
+
+<p>NH </p>
+
+<p>NJ </p>
+
+<p>NM </p>
+
+<p>NY </p>
+
+<p>NC </p>
+
+<p>ND </p>
+
+<p>OH </p>
+
+<p>OK </p>
+
+<p>OR </p>
+
+<p>PA </p>
+
+<p>RI </p>
+
+<p>SC </p>
+
+<p>SD </p>
+
+<p>TN </p>
+
+<p>TX </p>
+
+<p>UT </p>
+
+<p>VT </p>
+
+<p>VA </p>
+
+<p>WA </p>
+
+<p>WV </p>
+
+<p>WI </p>
+
+<p>WY </p>
+
+<p>1990:2001-2011:2012 (%) </p>
+
+<p>Mining-log-</p>
+
+<p>constr 
+0.37 −4.30 −0.95 −0.77 −0.10 −0.43 −0.97 </p>
+
+<p>5.00 −0.66 
+1.01 −0.66 −0.42 −0.69 −2.20 </p>
+
+<p>0.26 −0.49 </p>
+
+<p>0.37 
+1.35 −1.24 −1.72 −0.95 −1.05 −0.60 </p>
+
+<p>2.40 </p>
+
+<p>Manufacturing −3.40 −0.52 −8.80 −8.00 </p>
+
+<p>−2.89 −6.70 −15.30 
+0.15 −9.10 −4.90 −6.00 −8.50 −12.20 −10.80 −2.00 −11.30 −5.40 −4.90 −6.30 −7.20 −6.20 −6.40 −6.60 −1.45 </p>
+
+<p>Trade-
+transport </p>
+
+<p>−2.30 
+1.00 −0.20 −1.70 −3.80 −2.00 
+−1.80 −2.50 −0.90 −2.80 −1.80 −1.00 −1.20 −0.60 −2.10 −1.00 −2.30 −1.90 −1.00 −2.80 −1.60 −3.60 −1.40 −2.60 </p>
+
+<p>Information 
+−1.22 −0.65 −0.29 −1.39 −0.07 −0.54 
+0.09 −0.44 −0.57 −0.37 −0.16 −0.52 −0.01 −0.09 −0.33 −0.38 −0.64 </p>
+
+<p>0.59 −0.46 −0.55 
+1.37 −0.51 −0.25 −0.50 </p>
+
+<p>Financial 
+activities 
+0.69 −0.49 −0.95 </p>
+
+<p>0.07 −0.66 −1.62 </p>
+
+<p>0.66 </p>
+
+<p>0.56 
+0.25 −0.58 −0.11 </p>
+
+<p>−0.84 </p>
+
+<p>0.78 </p>
+
+<p>0.62 
+0.96 −0.07 −0.41 
+0.90 −1.20 −0.01 −0.41 −0.53 </p>
+
+<p>0.36 −0.26 </p>
+
+<p>Professional 
+activities </p>
+
+<p>2.60 </p>
+
+<p>2.90 </p>
+
+<p>3.30 </p>
+
+<p>3.50 </p>
+
+<p>2.60 </p>
+
+<p>2.60 </p>
+
+<p>5.30 </p>
+
+<p>3.16 </p>
+
+<p>3.40 </p>
+
+<p>3.00 </p>
+
+<p>3.30 </p>
+
+<p>3.70 </p>
+
+<p>2.40 </p>
+
+<p>3.80 </p>
+
+<p>3.16 </p>
+
+<p>4.50 </p>
+
+<p>3.70 </p>
+
+<p>2.90 </p>
+
+<p>2.81 </p>
+
+<p>6.00 </p>
+
+<p>2.80 </p>
+
+<p>3.08 </p>
+
+<p>3.60 </p>
+
+<p>1.66 </p>
+
+<p>Education-</p>
+
+<p>health </p>
+
+<p>4.30 </p>
+
+<p>3.59 </p>
+
+<p>6.10 </p>
+
+<p>5.80 </p>
+
+<p>6.50 </p>
+
+<p>6.80 </p>
+
+<p>6.50 </p>
+
+<p>0.80 </p>
+
+<p>5.60 </p>
+
+<p>3.50 </p>
+
+<p>4.20 </p>
+
+<p>6.00 </p>
+
+<p>7.30 </p>
+
+<p>5.40 </p>
+
+<p>3.30 </p>
+
+<p>4.80 </p>
+
+<p>4.00 </p>
+
+<p>3.90 </p>
+
+<p>6.60 </p>
+
+<p>4.40 </p>
+
+<p>3.90 </p>
+
+<p>5.20 </p>
+
+<p>4.60 </p>
+
+<p>2.86 </p>
+
+<p>Leisure-
+hospitality </p>
+
+<p>0.52 −2.80 </p>
+
+<p>1.20 </p>
+
+<p>1.26 </p>
+
+<p>0.10 </p>
+
+<p>1.83 
+2.50 −0.33 </p>
+
+<p>1.21 </p>
+
+<p>1.15 </p>
+
+<p>1.50 </p>
+
+<p>1.54 </p>
+
+<p>2.80 </p>
+
+<p>2.80 </p>
+
+<p>0.30 </p>
+
+<p>1.90 </p>
+
+<p>1.52 
+0.67 −0.30 </p>
+
+<p>1.37 </p>
+
+<p>0.74 </p>
+
+<p>2.08 
+0.41 −0.70 </p>
+
+<p>Other services </p>
+
+<p>0.36 </p>
+
+<p>0.26 </p>
+
+<p>0.15 
+0.95 −0.35 </p>
+
+<p>0.87 
+0.72 −0.93 </p>
+
+<p>0.49 
+0.31 −0.12 </p>
+
+<p>0.41 </p>
+
+<p>1.25 
+0.68 −0.99 
+1.70 −0.20 −0.72 </p>
+
+<p>0.21 
+1.04 −0.38 </p>
+
+<p>1.85 −0.14 </p>
+
+<p>0.77 </p>
+
+<p>Government </p>
+
+<p>−1.80 </p>
+
+<p>1.10 </p>
+
+<p>0.50 
+0.20 −1.40 −0.80 </p>
+
+<p>2.30 −5.40 
+0.30 −0.40 −0.20 </p>
+
+<p>−0.50 −0.60 </p>
+
+<p>0.30 −2.70 
+0.30 −0.60 −2.60 </p>
+
+<p>0.80 −0.70 </p>
+
+<p>0.60 −0.10 </p>
+
+<p>0.10 −2.10 </p>
+
+<p>Total (000 s) 
+213.1 504.1 118.2 
+220.6 223.7 468.8 796.9 128.4 200.7 366.4 362.5 514.1 </p>
+
+<p>6.1 290.2 117.7 460.2 3456.1 484.5 </p>
+
+<p>41.8 786.0 677.5 123.9 449.4 </p>
+
+<p>87.2 </p>
+
+<p>Notes: 
+The data show the percentage of employment in the 10 main sectors of the economy and the total employment for each U.S. state in 1990, 2011, and over the period 1990-2011. See Table 1 for U.S. state 
+abbreviations. </p>
+
+
+
+<p>ECONOMIC INQUIRY </p>
+
+<p>TABLE 5 
+ADF Unit Root Tests </p>
+
+<p>FR t 
+H t 
+TB t 
+ln(G t ) 
+ln(FG t ) 
+ln(SG t ) </p>
+
+<p>Statistic </p>
+
+<p>p 
+Value Statistic </p>
+
+<p>p 
+Value Statistic </p>
+
+<p>p 
+Value Statistic </p>
+
+<p>p 
+Value Statistic </p>
+
+<p>p 
+Value Statistic </p>
+
+<p>p 
+Value </p>
+
+<p>Levels 
+−2.095 0.247 −8.920* 0.000 −2.097 0.246 −0.327 0.918 
+0.269 0.976 −1.778 
+0.390 
+Differences −5.731* 0.000 −12.123* 0.000 −5.399* 0.000 −3.865* 0.003 −4.238* 0.000 −2.821** 0.056 </p>
+
+<p>Note: ADF refers to the augmented Dickey-Fuller unit root test. 
+* and **indicate rejection of the null hypothesis at the 5% and 10% significance levels, respectively. The 5% and 10% critical 
+values for the ADF statistics are −2.872 and −2.573. </p>
+
+<p>TABLE 6 
+Panel Unit Root Tests </p>
+
+<p>U </p>
+
+<p>Logistic 
+i,t </p>
+
+<p>U </p>
+
+<p>Logarithmic 
+i,t </p>
+
+<p>í µí» 13 </p>
+
+<p>i,t </p>
+
+<p>í µí» 9 </p>
+
+<p>i,t </p>
+
+<p>í µí» </p>
+
+<p>9 purged 
+i,t </p>
+
+<p>ln(PI i,t ) </p>
+
+<p>Statistic </p>
+
+<p>p 
+Value Statistic </p>
+
+<p>p 
+Value Statistic </p>
+
+<p>p 
+Value Statistic </p>
+
+<p>p 
+Value Statistic </p>
+
+<p>p 
+Value Statistic </p>
+
+<p>p 
+Value </p>
+
+<p>IPS 
+−3.654* 0.000 −3.423* 0.000 −55.580* 0.000 −52.395* 0.000 −54.350* 0.000 
+1.420 0.922 
+CIPS −2.767* 0.003 −2.709* 0.003 −32.762* 0.000 −32.150* 0.000 −32.136* 0.000 −0.660 0.255 </p>
+
+<p>Notes: IPS refers to the panel unit root test of Im, Pesaran, and Shin (2003) and CIPS refers to the panel unit root test of 
+Pesaran (2007) that takes into account cross-sectional dependence among states. 
+*Rejection of the null hypothesis at 5% significance level. The 5% critical value for the IPS statistics is −1.730 and the 5% 
+critical value for the CIPS statistics is −2.120. </p>
+
+<p>TABLE 7 
+Cross-Sectional Dependence Tests </p>
+
+<p>U </p>
+
+<p>Logistic 
+i,t </p>
+
+<p>U </p>
+
+<p>Logarithmic 
+i,t </p>
+
+<p>í µí» 13 </p>
+
+<p>i,t </p>
+
+<p>í µí» 9 </p>
+
+<p>i,t </p>
+
+<p>í µí» </p>
+
+<p>9 purged 
+i,t </p>
+
+<p>ln(PI i,t ) </p>
+
+<p>CD P test 
+127.321 * 
+126.065 * 
+147.924 * 
+152.285 * 
+148.459 * 
+295.189 * 
+p value 
+0.000 
+0.000 
+0.000 
+0.000 
+0.000 
+0.000 
+CD LM test 
+406.707 * 
+398.912 * 
+517.977 * 
+538.868 * 
+511.302 * 
+1951.529 * 
+p value 
+0.000 
+0.000 
+0.000 
+0.000 
+0.000 
+0.000 
+Abs(Corr) 
+0 .237 
+0.235 
+0.275 
+0.281 
+0.274 
+0.543 </p>
+
+<p>Notes: The CD P test refers to the cross-sectional dependence test of Pesaran (2004) and the CD LM test refers to the scaled 
+version of the Lagrange multiplier (LM) cross-sectional dependence test of Breusch and Pagan (1980) that is proposed by Pesaran 
+(2004). Abs(Corr) refers to the average absolute pair-wise correlation coefficients. 
+*Rejection of the null hypothesis at 5% significance level. </p>
+
+<p>tested by an F-test (Chow test) and Pesaran 
+and Yamagata's (2008) standardized version of 
+Swamy's test (Delta test). From Table 8, the 
+poolability tests reject the hypothesis of com-
+mon slopes. It indicates substantial heterogeneity 
+among U.S. states. 
+Before we proceed with the panel estimates, 
+we report the results for Lilien's dynamic reduced 
+form unemployment relationship at the aggre-
+gate level in the United States over the period 
+1990:M1-2011:M12 (Table 9). Clearly, in all 
+different specifications of the estimated equation, 
+using alternative transformation of the unemploy-
+ment series (logistic and logarithmic transforma-
+tion), alternative disaggregation levels </p>
+
+<p>TABLE 8 
+Poolability Tests </p>
+
+<p>U </p>
+
+<p>Logistic 
+i,t </p>
+
+<p>U </p>
+
+<p>Logarithmic 
+i,t </p>
+
+<p>Full 
+Reduced 
+Full 
+Reduced </p>
+
+<p>Chow test 
+3.442 * 
+4.372 * 
+3.339 * 
+4.181 * 
+p value 
+0.000 
+0.000 
+0.000 
+0.000 
+Delta test 
+16.821 * 
+11.539 * 
+16.178 * 
+11.231 * 
+p value 
+0.000 
+0.000 
+0.000 
+0.000 
+Delta adj test 17.081 * 
+11.628 * 
+16.429 * 
+11.317 * 
+p value 
+0.000 
+0.000 
+0.000 
+0.000 </p>
+
+<p>Notes: Chow refers to the poolability test of Chow (1960). 
+Delta and Delta adj refer to the standardized Delta test and the 
+bias-adjusted version of the Delta test for slope homogeneity 
+in large panels, proposed by Pesaran and Yamagata (2008). 
+*Rejection of the null hypothesis at 5% significance level. </p>
+
+<p>BAKAS, PANAGIOTIDIS, &amp; PELLONI: MACROECONOMIC EFFECTS OF LABOR REALLOCATION </p>
+
+
+
+<p>TABLE 9 
+Lilien's Index and Sectoral Shifts: Aggregate Estimates </p>
+
+<p>U </p>
+
+<p>Logistic 
+t </p>
+
+<p>U </p>
+
+<p>Logarithmic 
+t </p>
+
+<p>OLS 
+GMM 
+OLS 
+GMM 
+OLS 
+GMM 
+OLS 
+GMM </p>
+
+<p>U </p>
+
+<p>Logistic 
+t−1 </p>
+
+<p>0.998** 
+0.999** 
+0.998** 
+0.999** 
+(173.34) 
+(173.56) 
+(172.21) 
+(171.93) 
+U </p>
+
+<p>Logarithmic 
+t−1 </p>
+
+<p>0.998** 
+0.999** 
+0.998** 
+0.999** 
+(173.46) 
+(173.67) 
+(172.65) 
+(172.34) 
+σ 9 </p>
+
+<p>t </p>
+
+<p>5.753** 
+5.202** 
+5.295** 
+4.820** 
+(2.51) 
+(2.32) 
+(2.48) 
+(2.30) 
+σ 13 </p>
+
+<p>t </p>
+
+<p>3.654** 
+2.986* 
+3.400** 
+2.826* 
+(2.02) 
+(1.69) 
+(2.02) 
+(1.72) 
+Δln(PI t ) 
+−0.300 
+−0.286 
+−0.373 
+−0.331 
+−0.279 
+−0.267 
+−0.346 
+−0.309 
+(−0.99) 
+(−0.95) 
+(−1.18) 
+(−1.05) 
+(−0.99) 
+(−0.95) 
+(−1.18) 
+(−1.06) 
+ΔFR t 
+−0.026** 
+−0.026** 
+−0.026** 
+−0.026** 
+−0.025** 
+−0.025** 
+−0.025** 
+−0.025** 
+(−2.50) 
+(−2.50) 
+(−2.47) 
+(−2.51) 
+(−2.50) 
+(−2.49) 
+(−2.47) 
+(−2.50) 
+H t 
+0.048** 
+0.047** 
+0.047** 
+0.047** 
+0.045** 
+0.045** 
+0.045** 
+0.044** 
+(3.90) 
+(3.85) 
+(3.69) 
+(3.63) 
+(3.90) 
+(3.84) 
+(3.69) 
+(3.64) 
+Δln(G t ) 
+0.463 
+0.473 
+0.532 
+0.530 
+0.428 
+0.440 
+0.491 
+0.492 
+(1.28) 
+(1.31) 
+(1.45) 
+(1.45) 
+(1.26) 
+(1.30) 
+(1.43) 
+(1.44) 
+Obs 
+263 
+261 
+263 
+261 
+263 
+261 
+263 
+261 
+RMSE 
+0.0266 
+0.0266 
+0.0267 
+0.0268 
+0.0251 
+0.0251 
+0.0252 
+0.0252 
+Hansen J 
+0.130 
+0.083 
+0.138 
+0.090 </p>
+
+<p>Notes: Aggregate time series estimates using OLS and GMM estimation methods. All estimations were carried out using Newey-West HAC 
+robust standard errors. t-statistics in parentheses. RMSE refers to the root mean squared error. Hansen J refers to the p value of the Hansen test for 
+the validity of overidentifying restrictions. 
+* and **significance at the 10% and 5% level respectively. </p>
+
+<p>(σ 9 
+t and σ 13 
+t ), and different methods of estimation 
+(OLS and GMM), we can observe a positive 
+and significant relationship between unemploy-
+ment rate and the measures of dispersion. These 
+results support the view of Mills, Pelloni, and 
+Zervoyianni (1995) and extend their time series 
+evidence to the recent period (1990-2011). The 
+time series approach for the aggregate specifica-
+tion (Table 9) reflects Lilien's initial specification 
+that cannot discriminate between aggregate and 
+sectoral shocks. Furthermore, it does not take 
+into account the regional dimension and the 
+mobility between states (note also the increase 
+in the number of observations from 263 in the 
+time series case to 12,624 in the panel data case). 
+Such time series modeling suffers from poten-
+tial aggregation bias and employs a relatively 
+limited dataset. 
+Hence, we proceed by estimating a panel ver-
+sion of Lilien's dynamic reduced form unemploy-
+ment relationship for the U.S. states, and take into 
+account the issues of dynamics, heterogeneity, 
+and common factors. In addition, for robustness, 
+we also employ alternative estimation approaches 
+for both homogeneous and heterogeneous 
+panel data. Analogously to the classification of 
+Eberhardt, Helmers, and Strauss (2013), Table 10 
+presents an overview of the adopted estimators 
+and classifies them according to the assumptions 
+made over CSD and parameter heterogeneity. </p>
+
+<p>TABLE 10 
+Assumptions about Panel Estimators </p>
+
+<p>Parameter Heterogeneity </p>
+
+<p>Homogeneity Heterogeneity </p>
+
+<p>Cross-sectional 
+correlation </p>
+
+<p>Independence BB GMM 
+MG </p>
+
+<p>Dependence DK POLS, 
+DK FE </p>
+
+<p>CCEMG, AMG, 
+dynCCEMG </p>
+
+<p>Notes: BB GMM, Blundell and Bond's (1998) system GMM 
+estimator; MG, Pesaran and Smith's (1995) mean group estimator; DK 
+POLS and DK FE, Driscoll and Kraay's (1998) pooled OLS and fixed 
+effects estimators; CCEMG, Pesaran's (2006) common correlated 
+effects mean group estimator; AMG, Bond and Eberhardt's (2009) 
+augmented mean group estimator; dynCCEMG, Chudik and Pesaran's 
+(2015a) dynamic common correlated effects mean group estimator. </p>
+
+<p>Having established a significant positive evi-
+dence on the aggregate level, we examine the 
+regional dimension of the sectoral reallocation 
+for the 48 U.S. states using panel estimates of 
+the dynamic reduced form Equation (1) as an 
+autoregressive distributed lag (ARDL)(1,0,0,0) 
+specification (see footnote 3). 20 Table 11 presents 
+the initial (homogeneous) panel estimates of the </p>
+
+<p>20. In order to produce results that clearly distinguish 
+the aggregate effects from the dispersion proxy, we proceed 
+to estimate the dynamic reduced form Equation (1) using 
+the "purged" dispersion index in our analysis (Abraham and 
+Katz 1986). The results using the unpurged sigma index are 
+qualitatively similar. These results are available upon request. </p>
+
+
+
+<p>ECONOMIC INQUIRY </p>
+
+<p>TABLE 11 
+Lilien's Index and Sectoral Shifts: Homogeneous Parameter Estimates </p>
+
+<p>U </p>
+
+<p>Logistic 
+i,t </p>
+
+<p>U </p>
+
+<p>Logarithmic 
+i,t </p>
+
+<p>DK POLS 
+DK FE 
+BB GMM 
+DK POLS 
+DK FE 
+BB GMM </p>
+
+<p>U </p>
+
+<p>Logistic 
+i,t−1 </p>
+
+<p>0.997** 
+0.995** 
+0.999** 
+(455.88) 
+(329.66) 
+(787.07) 
+U </p>
+
+<p>Logarithmic 
+i,t−1 </p>
+
+<p>0.997** 
+0.995** 
+0.999** 
+(456.09) 
+(328.64) 
+(795.71) 
+σ </p>
+
+<p>purged 
+i,t </p>
+
+<p>0.658* 
+0.819** 
+0.723** 
+0.609* 
+0.758** 
+0.670** 
+(1.97) 
+(2.11) 
+(3.19) 
+(1.97) 
+(2.11) 
+(3.20) 
+Δln(PI i,t ) 
+−1.654** 
+−1.705** 
+−2.029** 
+−1.552** 
+−1.600** 
+−1.903** 
+(−3.57) 
+(−3.69) 
+(−14.38) 
+(−3.60) 
+(−3.73) 
+(−14.54) 
+ΔFR t 
+−0.025** 
+−0.025** 
+−0.024** 
+−0.024** 
+−0.024** 
+−0.023** 
+(−5.48) 
+(−5.52) 
+(−17.82) 
+(−5.52) 
+(−5.56) 
+(−17.85) 
+H t 
+0.038** 
+0.038** 
+0.039** 
+0.036** 
+0.035** 
+0.036** 
+(3.98) 
+(3.95) 
+(11.45) 
+(4.03) 
+(4.00) 
+(11.38) 
+Δln(G t ) 
+0.859** 
+0.843** 
+0.879** 
+0.803** 
+0.788** 
+0.823** 
+(3.52) 
+(3.45) 
+(13.99) 
+(3.52) 
+(3.46) 
+(14.06) 
+Obs 
+12,624 
+12,624 
+12,624 
+12,624 
+12,624 
+12,624 
+N 
+48 
+48 
+48 
+48 
+48 
+48 
+T 
+263 
+263 
+263 
+263 
+263 
+263 
+RMSE 
+0.0254 
+0.0255 
+0.0255 
+0.0254 
+0.0255 
+0.0241 
+Hansen J 
+1.000 
+1.000 
+AR (1) 
+0.000 
+0.000 </p>
+
+<p>Notes: DK POLS and DK FE, Driscoll and Kraay's (1998) pooled OLS and fixed effects estimators; BB GMM, Blundell and 
+Bond's (1998) system GMM estimator. t-statistics in parentheses. All estimations were carried out using robust standard errors. 
+RMSE refers to the root mean squared error. Hansen J refers to the p value of the Hansen test for the validity of overidentifying 
+restrictions. AR (1) refers to the p value of the test for first-order residual serial correlation. 
+* and **significance at the 10% and 5% level respectively. </p>
+
+<p>effects of Lilien's sigma index on the unem-
+ployment rate in the U.S. states. In all alter-
+native specifications-the Driscoll and Kraay's 
+(1998) pooled ordinary least squares (POLS) and 
+FE estimators, robust to CSD, and the dynamic 
+GMM approach, robust to endogeneity issues 
+of explanatory variables-we observe a signifi-
+cant but almost negligible negative effect of the 
+measure of monetary policy shock (ΔFR t ) on 
+unemployment and a small positive impact of 
+monetary policy variability (H t ). The impact of 
+the fiscal policy (Δln(G t )) is found to be posi-
+tive and significant. Finally, the effect of state-
+specific personal income (Δln(PI i,t )) is negative 
+and highly significant in all specifications. All 
+alternative estimation methods yield a positive 
+and significant effect of the dispersion index 
+on unemployment, with an impact ranging from 
+0.61 (in the case of the logarithmic transforma-
+tion using the POLS estimator) to 0.82 (in the 
+version of logistic transformation with the FE 
+model). The evidence from the homogeneous 
+panel estimates strongly corroborates previous 
+results of a significant effect of allocative shocks 
+(see among others, De Serres, Scarpetta, and </p>
+
+<p>De La Maisonneuve 2002, Estevão and Tsounta 
+2011, Simon 2014). 
+So far, we have established that purged sigma 
+as a measure of labor reallocation is positive and 
+statistically significant at the aggregate level for 
+the United States (Table 9). The same holds as we 
+move from the time series dimension (T = 264) to 
+the homogeneous panel (POLS, FE, and GMM) 
+estimation (T = 264 and N = 48) in Table 11. 
+However, these homogeneous parameter method-
+ologies, used by all previous studies, do not take 
+into account aggregate factors and state spillover 
+effects which is macroeconomically important in 
+this framework. As a result, we proceed with 
+Table 12 that presents the heterogeneous panel 
+estimates of the same specification. In particu-
+lar, we present the MG, AMG, and alternative 
+forms of the CCE MG estimators such as the 
+CCEMG, the dynCCEMG, and the neighbor-
+weighted CCEMG (CCEMG W ) estimators. 
+Table 12 presents the estimates that were 
+described in Section III.B, that is, estimates that 
+take into account heterogeneity (MG) as well as 
+both heterogeneity and CSD (AMG, CCEMG, 
+and dynCCEMG). The results from Table 12 </p>
+
+<p>BAKAS, PANAGIOTIDIS, &amp; PELLONI: MACROECONOMIC EFFECTS OF LABOR REALLOCATION </p>
+
+
+
+<p>TABLE 12 </p>
+
+<p>Lilien's Index and Sectoral Shifts: Heterogeneous Parameter Estimates </p>
+
+<p>U </p>
+
+<p>Logistic </p>
+
+<p>i,t </p>
+
+<p>U </p>
+
+<p>Logarithmic </p>
+
+<p>i,t </p>
+
+<p>MG 
+AMG CCEMG CCEMG </p>
+
+<p>T </p>
+
+<p>dyn 
+CCEMG </p>
+
+<p>1 </p>
+
+<p>dyn 
+CCEMG 
+6 CCEMG W </p>
+
+<p>CCEMG W </p>
+
+<p>T </p>
+
+<p>dyn 
+CCEMG W </p>
+
+<p>1 </p>
+
+<p>MG 
+AMG CCEMG CCEMG </p>
+
+<p>T </p>
+
+<p>dyn 
+CCEMG </p>
+
+<p>1 </p>
+
+<p>dyn 
+CCEMG 
+6 CCEMG W </p>
+
+<p>CCEMG W </p>
+
+<p>T </p>
+
+<p>dyn 
+CCEMG W </p>
+
+<p>1 </p>
+
+<p>U </p>
+
+<p>Logistic 
+i,t−1 </p>
+
+<p>0.993** 0.964 ** 0.980** 0.970** 0.981** 0.977** 0.974** </p>
+
+<p>0.967** </p>
+
+<p>0.976** </p>
+
+<p>(853.50) (242.90) (386.34) (237.78) (390.58) (245.04) (275.79) (225.47) (274.81) </p>
+
+<p>U </p>
+
+<p>Logarithmic </p>
+
+<p>i,t−1 </p>
+
+<p>0.993** 0.964** 0.981** 0.970** 0.981** 0.977** 0.974** </p>
+
+<p>0.967** </p>
+
+<p>0.976** </p>
+
+<p>(882.98) (244.87) (391.43) (242.81) (393.54) (246.95) (274.61) (225.16) (273.75) </p>
+
+<p>σ </p>
+
+<p>purged </p>
+
+<p>i,t </p>
+
+<p>0.877** 0.843** 0.406** 0.412** 0.433** 0.491** 0.464** </p>
+
+<p>0.511** 
+0.424** 0.813** 0.781** 0.377** 0.381** 0.402** 0.456** 0.432** </p>
+
+<p>0.477** </p>
+
+<p>0.396** </p>
+
+<p>(4.67) </p>
+
+<p>(4.58) </p>
+
+<p>(2.27) </p>
+
+<p>(1.99) </p>
+
+<p>(2.09) </p>
+
+<p>(2.15) </p>
+
+<p>(3.72) </p>
+
+<p>(3.63) </p>
+
+<p>(2.86) </p>
+
+<p>(4.67) </p>
+
+<p>(4.58) </p>
+
+<p>(2.26) </p>
+
+<p>(1.99) </p>
+
+<p>(2.09) </p>
+
+<p>(2.16) </p>
+
+<p>(3.70) </p>
+
+<p>(3.63) </p>
+
+<p>(2.84) </p>
+
+<p>Δln(PI 
+i,t ) −1.961** −1.813** −0.452** −0.421** −0.436** −0.434** −0.527** −0.471** −0.412** −1.835** −1.696** −0.432** −0.402** −0.416** −0.416** −0.499** −0.446** −0.390** 
+(−12.96) (−10.98) (−2.55) (−2.42) (−2.53) (−2.23) </p>
+
+<p>(−3.74) </p>
+
+<p>(−3.23) 
+(−3.08) (−13.02) (−11.07) (−2.60) (−2.46) (−2.56) (−2.27) </p>
+
+<p>(−3.74) </p>
+
+<p>(−3.22) </p>
+
+<p>(−3.07) </p>
+
+<p>ΔFR </p>
+
+<p>t </p>
+
+<p>−0.024** −0.017** 0.000 </p>
+
+<p>0.000 </p>
+
+<p>0.000 </p>
+
+<p>0.000 
+−0.007** −0.007** −0.004** −0.023** −0.016** 0.000 </p>
+
+<p>0.000 </p>
+
+<p>0.000 </p>
+
+<p>0.000 
+−0.007** −0.007** −0.004** </p>
+
+<p>(−17.98) (−10.10) (0.16) </p>
+
+<p>(0.21) </p>
+
+<p>(0.21) </p>
+
+<p>(0.18) </p>
+
+<p>(−3.31) </p>
+
+<p>(−3.10) 
+(−2.11) (−18.02) (−10.10) (0.16) </p>
+
+<p>(0.21) </p>
+
+<p>(0.21) </p>
+
+<p>(0.17) </p>
+
+<p>(−3.36) </p>
+
+<p>(−3.16) </p>
+
+<p>(−2.14) </p>
+
+<p>H </p>
+
+<p>t </p>
+
+<p>0.038** 0.034** 0.001 </p>
+
+<p>0.001 </p>
+
+<p>0.000 </p>
+
+<p>0.000 </p>
+
+<p>0.013** </p>
+
+<p>0.013** </p>
+
+<p>0.004 
+0.035** 0.032** 0.001 </p>
+
+<p>0.001 </p>
+
+<p>0.000 </p>
+
+<p>0.000 </p>
+
+<p>0.012** </p>
+
+<p>0.013** </p>
+
+<p>0.004 </p>
+
+<p>(11.30) (10.40) </p>
+
+<p>(0.21) </p>
+
+<p>(0.37) </p>
+
+<p>(0.10) </p>
+
+<p>(0.14) </p>
+
+<p>(3.44) </p>
+
+<p>(3.53) </p>
+
+<p>(1.14) 
+(11.24) (10.35) </p>
+
+<p>(0.21) </p>
+
+<p>(0.36) </p>
+
+<p>(0.09) </p>
+
+<p>(0.13) </p>
+
+<p>(3.48) </p>
+
+<p>(3.56) </p>
+
+<p>(1.13) </p>
+
+<p>Δln(G 
+t ) 
+0.818** 0.809** −0.021 −0.019 </p>
+
+<p>0.001 </p>
+
+<p>−0.011 </p>
+
+<p>0.279** </p>
+
+<p>0.279** </p>
+
+<p>0.103* 
+0.766** 0.757** −0.020 −0.018 </p>
+
+<p>0.001 </p>
+
+<p>−0.011 </p>
+
+<p>0.264** </p>
+
+<p>0.265** </p>
+
+<p>0.097* </p>
+
+<p>(16.65) (15.76) (−0.38) (−0.34) </p>
+
+<p>(0.01) </p>
+
+<p>(−0.13) </p>
+
+<p>(4.92) </p>
+
+<p>(4.91) </p>
+
+<p>(1.73) 
+(16.63) (15.73) (−0.38) (−0.33) </p>
+
+<p>(0.01) </p>
+
+<p>(−0.13) </p>
+
+<p>(4.98) </p>
+
+<p>(4.98) </p>
+
+<p>(1.73) </p>
+
+<p>Obs 
+12,624 12,624 12,624 </p>
+
+<p>12,624 </p>
+
+<p>12,576 </p>
+
+<p>12,336 </p>
+
+<p>12,624 </p>
+
+<p>12,624 </p>
+
+<p>12,576 
+12,624 12,624 12,624 </p>
+
+<p>12,624 </p>
+
+<p>12,576 </p>
+
+<p>12,336 </p>
+
+<p>12,624 </p>
+
+<p>12,624 </p>
+
+<p>12,576 </p>
+
+<p>N </p>
+
+<p>48 </p>
+
+<p>48 </p>
+
+<p>48 </p>
+
+<p>48 </p>
+
+<p>48 </p>
+
+<p>48 </p>
+
+<p>48 </p>
+
+<p>48 </p>
+
+<p>48 </p>
+
+<p>48 </p>
+
+<p>48 </p>
+
+<p>48 </p>
+
+<p>48 </p>
+
+<p>48 </p>
+
+<p>48 </p>
+
+<p>48 </p>
+
+<p>48 </p>
+
+<p>48 </p>
+
+<p>T </p>
+
+<p>263 </p>
+
+<p>263 </p>
+
+<p>263 </p>
+
+<p>263 </p>
+
+<p>262 </p>
+
+<p>257 </p>
+
+<p>263 </p>
+
+<p>263 </p>
+
+<p>262 </p>
+
+<p>263 </p>
+
+<p>263 </p>
+
+<p>263 </p>
+
+<p>263 </p>
+
+<p>262 </p>
+
+<p>257 </p>
+
+<p>263 </p>
+
+<p>263 </p>
+
+<p>262 </p>
+
+<p>RMSE 
+0.0244 0.0239 0.0208 </p>
+
+<p>0.0206 </p>
+
+<p>0.0203 </p>
+
+<p>0.0187 </p>
+
+<p>0.0208 </p>
+
+<p>0.0206 </p>
+
+<p>0.0201 
+0.0231 0.0226 0.0197 </p>
+
+<p>0.0195 </p>
+
+<p>0.0192 </p>
+
+<p>0.0177 </p>
+
+<p>0.0197 </p>
+
+<p>0.0196 </p>
+
+<p>0.0191 </p>
+
+<p>Notes: 
+MG, Pesaran and Smith's (1995) mean group estimator. AMG, Bond and Eberhardt's (2009) augmented mean group estimator. CCEMG and CCEMGT, Pesaran's (2006) common correlated effects mean </p>
+
+<p>group estimator (without and with state-specific linear trend). dynCCEMG1 and dynCCEMG6, Chudik and Pesaran's (2015a) common correlated effects mean group estimator (augmented with one and six additional 
+lags of the cross-section averages). CCEMG W </p>
+
+<p>, CCEMG W </p>
+
+<p>T </p>
+
+<p>, and dynCCEMG W </p>
+
+<p>1 </p>
+
+<p>, "neighbor"-weighted versions of the CCEMG and dynCCEMG estimators. t-statistics </p>
+
+<p>in parentheses. RMSE </p>
+
+<p>refers to the root mean </p>
+
+<p>squared error. 
+* and **significance at the 10% and 5% level respectively. </p>
+
+
+
+<p>ECONOMIC INQUIRY </p>
+
+<p>highlight the statistical significance of the lagged 
+value of unemployment. This persistence is well 
+documented in the literature. With regard to 
+the coefficient of sigma, we observe that the 
+"purged" dispersion index is affecting unemploy-
+ment rate in a positive and statistically signifi-
+cant way in all alternative estimation techniques 
+for both the logistic and the logarithmic trans-
+formation of unemployment. The sigma (σ i,t ) 
+coefficient ranges from 0.41 (0.38) in the logis-
+tic transformation (logarithmic transformation) 
+using the heterogeneous CCEMG estimator of 
+Pesaran (2006) that accounts for CSD to 0.88 
+(0.81) in the MG estimator of Pesaran and Smith 
+(1995) that allows for slope heterogeneity but 
+assumes cross-sectional independence. The MG 
+(heterogeneous) coefficient of 0.877 (column 1 
+in Table 12) is of similar magnitude with the DK 
+FE (homogeneous) coefficient of 0.819 (column 
+2 in Table 11) but is reduced (almost by half) 
+to the 0.433 under dynCCEMG that accounds 
+for both heterogeneity and CSD. The latter high-
+lights that when the cross-state dependence is 
+taken into account, the effects of labor realloca-
+tion is halved. Moreover, once we consider the 
+heterogeneous estimates that account for CSD 
+through the CCE approach (CCEMG and dynC-
+CEMG), the impact of sigma on unemployment 
+is about half of that emerging from the homo-
+geneous estimates in Table 11. This positive and 
+significant effect of purged sigma is a notewor-
+thy result because it corroborates the labor RH 
+when one takes into account aggregate factors in 
+the econometric specification via the CSD. 
+The coefficient of the growth rate of the 
+state's personal income (Δln(PI i,t )) is negative 
+and significant under all specifications. This vari-
+able is state specific and the estimates reflect 
+the inverse relationship between unemployment 
+and the growth rate of income (an estimate of 
+the Okun's coefficient in a sense). The mone-
+tary policy growth rate (ΔFR t ) is significant with 
+a negative sign in the homogeneous parameter 
+estimates and for the MG and AMG. Once we 
+properly account for common factors through 
+the Pesaran's CCE approach in the specifica-
+tion (CCEMG and dynCCEMG), its significance 
+evaporates. The monetary policy variability (H t ) 
+displays a similar behavior: it is positive and 
+significant under cross-sectional independence 
+while it becomes insignificant when we allow for 
+CSD. Finally, Δln(G t ) has a coefficient which 
+is positive and significant both in the homo-
+geneous parameter estimates (Table 11) and in 
+the heterogeneous parameter estimates if CSD is </p>
+
+<p>ignored (MG in Table 12). Under the CCEMG 
+and dynCCEMG approaches, its significance dis-
+appears. The root mean squared error (RMSE) 
+statistic is provided in both the homogeneous and 
+in the heterogeneous case (Tables 11 and 12). 
+We observe a reduction of the RMSE of about 
+20.4% for the dynCCEMG 1 and 26.7% for the 
+dynCCEMG 6 estimates in the logistic specifica-
+tion and 24.7% for the dynCCEMG 1 and 30.6% 
+for the dynCCEMG 6 estimates in the logarithmic 
+specification compared to the homogeneous esti-
+mates (DK FE). This decrease in the measure of 
+goodness of fit indicates the importance of CSD 
+and parameter heterogeneity in the U.S. states 
+panel analysis. The preferred model for both 
+the logistic and the logarithmic transformation 
+of unemployment is the Chudik and Pesaran's 
+dynCCEMG 6 (with the addition of six lags of 
+cross-section averages) estimator that accounts 
+for dynamics in the specification where labor 
+reallocation and state income are the only vari-
+ables that enter in a statistically significant fash-
+ion (positive the former and negative the latter). 21 
+The CCE type estimators (CCEMG and dynC-
+CEMG) account for the presence of unobserved 
+common factors with state-specific impact, such 
+as "strong" factors which reflects aggregate 
+shocks that affect all states and "weak" factors 
+which reflects regional spillovers that affects only 
+subsets of states. The augmentation of the panel 
+regression equations with the cross-section aver-
+ages of the dependent and independent variables, 
+as formulated by the standard CCE approach, is 
+based on an equal weighting scheme of the cross-
+section averages for all states. In order to test 
+whether the cross-sectional spillover effects are 
+stronger among states which share borders, and 
+thus, have an impact on the estimated coefficient 
+of sigma, we follow the approach of Eberhardt 
+and Teal (2013), and impose a weighting scheme 
+for the construction of the cross-section averages 
+based on the spatial neighborhood informa-
+tion among the U.S. states. 22 Thus, using this </p>
+
+<p>21. The vector of aggregate common control variables 
+w t (which here includes ΔFR t , H t , and Δln(G t )) that capture 
+aggregate demand shocks can be viewed in the heterogeneous 
+dynamic panel data modeling with a common factor approach 
+(CCEMG and dynCCEMG) as a vector of "observed" com-
+mon factors with state-specific impact. Thus, the inclusion 
+of these variables in the CCEMG and dynCCEMG models 
+tend to approximate the unobservable common factors, f t , in 
+addition to the cross-sectional averages of the dependent and 
+independent variables (see Chudik and Pesaran 2015b and 
+Pesaran, Smith, and Yamagata 2013). 
+22. We would like to thank an anonymous referee for 
+drawing our attention to this point. </p>
+
+<p>BAKAS, PANAGIOTIDIS, &amp; PELLONI: MACROECONOMIC EFFECTS OF LABOR REALLOCATION </p>
+
+
+
+<p>"border/neighborhood impact"-weighted CCE 
+approach, we can test the hypothesis that state i is 
+affected mainly by "weak" unobserved common 
+factors which are similar in states that share bor-
+ders (i.e., spatial spillovers), but is less affected 
+by the set of the common "strong" factors which 
+influence states without border neighborhoods. 
+Table 12 (columns 7-9 and 16-18) presents the 
+estimations based on the "neighbor"-weighted 
+CCEMG estimator. The results show that the 
+"neighbor"-weighted CCE approach provides 
+similar estimated coefficients of sigma with the 
+estimates without the neighborhood-weighted 
+scheme, and confirms that the CCE approach 
+of Pesaran (2006) is effective to deal with more 
+general cases of error cross-section dependencies 
+such as spatial error spillover effects, see Pesaran 
+and Tosetti (2011). 23 
+Independently from the different set-up 
+assumptions, all the alternative empirical esti-
+mators, bear out a positive and significant effect 
+of the dispersion index on unemployment. How-
+ever, we can observe that in the preferred model 
+(dynCCEMG 6 ), which accounts for both het-
+erogeneity and CSD, the coefficient of sigma 
+is half what is under the FE (homogeneous 
+case) as well as under the MG (heterogeneous 
+case) estimators. </p>
+
+<p>A. Robustness Check </p>
+
+<p>Given the conclusion from the previous 
+section where labor reallocation was found 
+to have a positive and significant effect on 
+unemployment, we assess the robustness of our 
+results. Table 13 presents the results for the 
+dynCCEMG estimator under alternative specifi-
+cations (dynCCEMG 1 ). The first column repeats 
+the column 5 from Table 12 (coefficient 0.433). 
+In the second specification, we replace purged 
+sigma with the unpurged reallocation index. In 
+columns 3, 5, 6, and 8, we consider alternative 
+purging mechanisms and a more disaggregated 
+sigma (σ 13 </p>
+
+<p>i,t </p>
+
+<p>). In column 4, we examine the impact 
+of state's personal income on the results. In 
+column 5, we have replaced ΔFR t with the 
+growth rate of the Treasury Bill (ΔTB t ) and 
+its GARCH volatility (H TB 
+t ). Finally, column 
+7 replaces Δln(G t ) with fiscal policy dissagre-
+gated in federal government, Δln(FG t ), and state 
+government, Δln(SG t ). The overall conclusion </p>
+
+<p>23. According to Pesaran and Tosetti (2011), the attrac-
+tion of the CCE approach is that it does not require a quan-
+tification of the exact relative position of the units in space, 
+which is required by the spatial type estimators. </p>
+
+<p>is that the effect of labor reallocation on unem-
+ployment remains positive and significant in all 
+cases, so further strengthening the above results 
+(average coefficient 0.43). 
+How could the first-generation "homoge-
+neous" estimates compare with those taking into 
+account the dynamics, heterogeneity, and CSD? 
+Looking at Tables 11 and 12, we can compare the 
+dispersion index effect on unemployment both 
+under POLS and FE (first-generation estimates) 
+with the "heterogeneous" dynCCEMG estimator 
+that accounts for dynamics in the specification. 
+The former overestimates the impact of reallo-
+cation (0.66 and 0.82 compared with 0.43 and 
+0.49 when accounting for both heterogeneity and 
+CSD). This upward bias stems from ignoring 
+CSD in the estimates. The heterogeneity bias is 
+negligible due to the relatively large time dimen-
+sion of our data set (T = 264 and T &gt; N). 24,25 
+Our results, using a "purged" Lilien's (1982) dis-
+persion proxy, are considerably higher than those 
+reported by Simon (2014) based on Neumann 
+and Topel's (1991) dispersion measure. 
+Finally, when we deal with CSD by means of 
+a "common dynamic process" using the AMG 
+estimator, we can see that the impact of sigma is 
+higher and more significant than that computed 
+with the CCE approach (CCEMG and dynC-
+CEMG). Instead, it is close to the effect generated 
+by the standard heterogeneous MG estimator. 
+However, the t-stat for the coefficient generated 
+under the AMG estimator is at least twice as 
+large. This outcome holds also when we use the 
+logarithmic transformation of unemployment. 
+Given the evidence so far and taking into 
+account the verification of CSD and parameter 
+heterogeneity in the U.S. states panel, we turn our 
+analysis to the response of the unemployment rate 
+to different levels of disaggregation of the disper-
+sion index using the dynamic common correlated 
+effects mean group (dynCCEMG) estimator of 
+Chudik and Pesaran (2015a). To facilitate com-
+parisons, we implement a homogeneous counter-
+part, the Driscoll and Kraay's (1998) FE estima-
+tor. The alternative measures of dispersion affect 
+unemployment both positively and significantly </p>
+
+<p>24. The mean group "heterogeneous" estimation results 
+are found to be qualitatively but also quantitatively very sim-
+ilar with those of the fixed effects "homogeneous" estimates. 
+25. Sarafidis and Wansbeek (2012) present evidence 
+that estimators neglecting cross-sectional dependence across 
+errors are inefficient and their estimated standard errors are 
+biased and inconsistent. Everaert and De Groote (2016) show 
+that the bias due to cross-sectional dependence is positive for 
+large values of T, as it is in our case, and that the bias does 
+not decrease as T grows. </p>
+
+
+
+<p>ECONOMIC INQUIRY </p>
+
+<p>TABLE 13 
+Lilien's Index and Sectoral Shifts: Robustness Checks </p>
+
+<p>(1) 
+(2) 
+(3) 
+(4) 
+(5) 
+(6) 
+(7) 
+(8) </p>
+
+<p>U </p>
+
+<p>Logistic 
+i,t−1 </p>
+
+<p>0.981** 
+0.980** 
+0.981** 
+0.982** 
+0.982** 
+0.980** 
+0.980** 
+0.980** 
+(390.58) 
+(390.44) 
+(412.94) 
+(368.79) 
+(358.09) 
+(390.64) 
+(378.88) 
+(362.55) 
+σ </p>
+
+<p>purged 
+i,t </p>
+
+<p>0.433** 
+0.455** 
+0.435** 
+(2.09) 
+(2.21) 
+(2.14) 
+σ </p>
+
+<p>unpurged 
+i,t </p>
+
+<p>0.429** 
+(2.13) 
+σ </p>
+
+<p>purged(PI) 
+i,t </p>
+
+<p>0.447** 
+(2.17) 
+σ </p>
+
+<p>purged(TB) 
+i,t </p>
+
+<p>0.428** 
+(2.02) 
+σ </p>
+
+<p>purged(ALL) 
+i,t </p>
+
+<p>0.429** 
+(2.12) 
+σ </p>
+
+<p>purged(13) 
+i,t </p>
+
+<p>0.344* 
+(1.89) 
+Δln(PI i,t ) 
+−0.436** 
+−0.465** 
+−0.542** 
+−0.483** 
+−0.463** 
+−0.492** 
+(−2.53) 
+(−2.72) 
+(−3.31) 
+(−2.91) 
+(−2.72) 
+(−2.94) 
+ΔFR t 
+0.000 
+0.000 
+0.000 
+0.000 
+0.000 
+0.000 
+(0.21) 
+(0.13) 
+(0.01) 
+(0.14) 
+(0.11) 
+(0.18) 
+H t 
+0.000 
+0.001 
+0.000 
+0.001 
+0.001 
+0.001 
+(0.10) 
+(0.23) 
+(0.07) 
+(0.23) 
+(0.27) 
+(0.29) 
+ΔTB t 
+−0.000 
+(−0.03) 
+H TB </p>
+
+<p>t </p>
+
+<p>−0.000 
+(−0.12) 
+Δln(G t ) 
+0.001 
+−0.016 
+−0.016 
+−0.021 
+(0.01) 
+(−0.28) 
+(−0.28) 
+(−0.38) 
+Δln(FG t ) 
+0.003 
+(0.09) 
+Δln(SG t ) 
+−0.049 
+(−0.58) 
+Obs 
+12,576 
+12,576 
+12,576 
+12,576 
+12,576 
+12,576 
+12,576 
+12,576 
+N 
+48 
+48 
+48 
+48 
+48 
+48 
+48 
+48 
+T 
+262 
+262 
+262 
+262 
+262 
+262 
+262 
+262 
+RMSE 
+0.0203 
+0.0205 
+0.0208 
+0.0208 
+0.0208 
+0.0205 
+0.0204 
+0.0204 </p>
+
+<p>Notes: Estimations are based on the dynCCEMG 1 , Chudik and Pesaran's (2015a) dynamic common correlated effects mean 
+group estimator (augmented with a reduced number of the first lag of the cross-section averages). t-statistics in parentheses. 
+RMSE refers to the root mean squared error. 
+* and **significance at the 10% and 5% level respectively. </p>
+
+<p>(Table 14). When we focus on the effectiveness of 
+the dispersion index on unemployment, we find 
+that the impact of the dispersion index depends on 
+the level of disaggregation embodied in its con-
+struction. The more disaggregated sigma is (σ i,t ), 
+the weaker is its impact and the lower is its signif-
+icance (lower estimate and t-stat in the case of 13 
+sectors, see Table 14). This is of interest because 
+these alternative indexes appear to be qualita-
+tively similar (see the summary statistics of the 
+dispersion indexes in Table 2). This result sup-
+ports Parker's (1992) argument suggesting that 
+it is mobility across the four major sectors that </p>
+
+<p>matters (σ 4 </p>
+
+<p>i,t </p>
+
+<p>index, includes construction, finance, 
+manufacturing, and trade sectors). 
+Summing up, our results highlight the posi-
+tive (though not as large as initially though under 
+simpler assumptions) and significant impact of 
+the dispersion index on unemployment and bear 
+out the evidence of Lilien (1982). This corrob-
+oration emerges in the dual sectoral and geo-
+graphical dimension of our panel data approach 
+which accounts for dynamics, heterogeneity, and 
+common (aggregate) factors via CSD. The evi-
+dence that emerges conforms with the recent 
+empirical literature (see Estevão and Tsounta 
+2011 and Simon 2014). Our estimators that take </p>
+
+<p>BAKAS, PANAGIOTIDIS, &amp; PELLONI: MACROECONOMIC EFFECTS OF LABOR REALLOCATION </p>
+
+
+
+<p>TABLE 14 </p>
+
+<p>Lilien's Index and Sectoral Shifts: Alternative Sectoral Decomposition </p>
+
+<p>U </p>
+
+<p>Logistic </p>
+
+<p>i,t </p>
+
+<p>U </p>
+
+<p>Logarithmic </p>
+
+<p>i,t </p>
+
+<p>í µí» </p>
+
+<p>13 purged 
+i,t </p>
+
+<p>í µí» </p>
+
+<p>10 purged 
+i,t </p>
+
+<p>í µí» </p>
+
+<p>9 purged 
+i,t </p>
+
+<p>í µí» </p>
+
+<p>7 purged 
+i,t </p>
+
+<p>í µí» </p>
+
+<p>4 purged 
+i,t </p>
+
+<p>í µí» </p>
+
+<p>13 purged 
+i,t </p>
+
+<p>í µí» </p>
+
+<p>10 purged 
+i,t </p>
+
+<p>í µí» </p>
+
+<p>9 purged 
+i,t </p>
+
+<p>í µí» </p>
+
+<p>7 purged 
+i,t </p>
+
+<p>í µí» </p>
+
+<p>4 purged 
+i,t </p>
+
+<p>DK FE CCEMG DK FE CCEMG DK FE CCEMG DK FE CCEMG DK FE CCEMG DK FE CCEMG DK FE CCEMG DK FE CCEMG DK FE CCEMG DK FE CCEMG </p>
+
+<p>U </p>
+
+<p>Logistic 
+i,t−1 </p>
+
+<p>0.995** 0.980** 0.995** 0.980** 0.995** 0.980** 0.995** 0.980** 0.995** 0.980** 
+(329.78) (362.41) (330.79) (371.93) (329.66) (390.44) (331.03) (393.62) (333.93) (374.01) </p>
+
+<p>U </p>
+
+<p>Logarithmic </p>
+
+<p>i,t−1 </p>
+
+<p>0.995** 0.980** 0.995** 0.980** 0.995** 0.980** 0.995** 0.980** 0.995** 0.980** 
+(328.93) (366.10) (329.93) (375.41) (328.64) (394.03) (329.94) (397.11) (332.51) (378.24) </p>
+
+<p>σ </p>
+
+<p>purged </p>
+
+<p>i,t </p>
+
+<p>0.497* 0.344* 0.727** 0.365** 0.819** 0.429** 0.797** 0.406** 1.055** 0.641** 0.461* 0.319* 0.676** 0.339** 0.758** 0.399** 0.797** 0.406** 1.055** 0.641** 
+(1.76) </p>
+
+<p>(1.89) </p>
+
+<p>(2.04) </p>
+
+<p>(2.00) </p>
+
+<p>(2.11) </p>
+
+<p>(2.13) </p>
+
+<p>(2.38) </p>
+
+<p>(2.24) </p>
+
+<p>(2.68) </p>
+
+<p>(2.19) </p>
+
+<p>(1.76) </p>
+
+<p>(1.89) </p>
+
+<p>(1.98) </p>
+
+<p>(2.05) </p>
+
+<p>(2.01) </p>
+
+<p>(2.11) </p>
+
+<p>(2.38) </p>
+
+<p>(2.24) </p>
+
+<p>(2.68) </p>
+
+<p>(2.19) </p>
+
+<p>Obs 
+12,576 12,576 12,576 12,576 12,576 12,576 12,576 12,576 12,576 12,576 12,576 12,576 12,576 12,576 12,576 12,576 12,576 12,576 12,576 12,576 </p>
+
+<p>N </p>
+
+<p>48 </p>
+
+<p>48 </p>
+
+<p>48 </p>
+
+<p>48 </p>
+
+<p>48 </p>
+
+<p>48 </p>
+
+<p>48 </p>
+
+<p>48 </p>
+
+<p>48 </p>
+
+<p>48 </p>
+
+<p>48 </p>
+
+<p>48 </p>
+
+<p>48 </p>
+
+<p>48 </p>
+
+<p>48 </p>
+
+<p>48 </p>
+
+<p>48 </p>
+
+<p>48 </p>
+
+<p>48 </p>
+
+<p>48 </p>
+
+<p>T </p>
+
+<p>262 </p>
+
+<p>262 </p>
+
+<p>262 </p>
+
+<p>262 </p>
+
+<p>262 </p>
+
+<p>262 </p>
+
+<p>262 </p>
+
+<p>262 </p>
+
+<p>262 </p>
+
+<p>262 </p>
+
+<p>262 </p>
+
+<p>262 </p>
+
+<p>262 </p>
+
+<p>262 </p>
+
+<p>262 </p>
+
+<p>262 </p>
+
+<p>262 </p>
+
+<p>262 </p>
+
+<p>262 </p>
+
+<p>262 </p>
+
+<p>RMSE 
+0.0255 0.0204 0.0254 0.0205 0.0255 0.0205 0.0255 0.0206 0.0254 0.0205 0.0240 0.0193 0.0240 0.0194 0.0240 0.0194 0.0240 0.0195 0.0240 0.0194 </p>
+
+<p>Notes: 
+DK FE denotes the Driscoll and Kraay's (1998) fixed effects estimator and the CCEMG denotes the dynCCEMG </p>
+
+<p>1 -Chudik and Pesaran's (2015a) dynamic common correlated effects mean group estimator </p>
+
+<p>(augmented with a reduced number of the first lag of the cross-section averages). t-statistics </p>
+
+<p>in parentheses. RMSE 
+refers to the root mean squared error. </p>
+
+<p>* and **significance at the 10% and 5% level respectively. </p>
+
+<p>into account the above mentioned characteris-
+tics provide moderate but significant coefficients. 
+Our analysis reveals the significance of labor 
+reallocation (sectoral shocks) for unemployment 
+even when unobserved common factors (aggre-
+gate shocks) are taken into account. </p>
+
+<p>VI. CONCLUSIONS </p>
+
+<p>Draghi (2014) points out that behind aggre-
+gate data lies a very heterogeneous picture. Our 
+exercise walks in a similar path with the aim to 
+reveal the extend at which the regional dimension 
+in the labor reallocation process is affecting the 
+macroeconomic behavior of unemployment. We 
+study the unemployment effects of labor realloca-
+tion within U.S. states and extend previous anal-
+ysis in this field in two dimensions. First, we use 
+a large monthly dataset spanning more than two 
+decades for 48 U.S. states (12,672 observations). 
+Thus, we can overcome the limited data sets 
+constraint of several past aggregate time series 
+approaches. Second, for the first time in the anal-
+ysis of the unemployment effects of labor real-
+location, we introduce recent panel data estima-
+tion techniques that can account for the dynam-
+ics, parameter heterogeneity, aggregate factors, 
+and CSD. These issues are inherent and crucial 
+to the macroeconomic problem and have not been 
+addressed previously. 
+Labor reallocation has been captured by a 
+"purged" Lilien's dispersion index which was 
+calculated for different levels of disaggregation to 
+examine the sensitivity of the outcome. Empirical 
+evidence bears out the presence of CSD as well 
+as the heterogeneity among states and as a result 
+they should be taken into account explicitly. The 
+findings provide strong support for a positive 
+and significant effect of the alternative measures 
+of dispersion on unemployment. The impact of 
+labor dispersion index on unemployment is half 
+the size (although still positive and significant) 
+when heterogeneity and cross-state dependence 
+is taken into account. This outcome is robust 
+under alternative specifications and assumptions. </p>
+
+<p>APPENDIX </p>
+
+<p>POOLABILITY TESTS </p>
+
+<p>An important issue for the estimation of panel data mod-
+els is the assumption of common slope coefficients across 
+regions, that is β i = β with i = 1, 2, … , N. Following Baltagi 
+(2008), this can be tested by a simple Chow test, see Chow </p>
+
+
+
+<p>ECONOMIC INQUIRY </p>
+
+<p>(1960), that is extended to the case of N linear regressions. 
+The test for the poolability of the data across regions sim-
+ply compares the restricted residual sum of squares (RSS r ) of 
+the fixed effects model with the unrestricted residual sum of 
+squares (RSS u ) obtained by the region-specific OLS regres-
+sions. Under the null hypothesis of poolability across regions 
+the Chow test can be defined as: </p>
+
+<p>(A1) 
+F = ((RSS r −RSS u )∕(N−1)k) ∕(RSS u ∕N(T−k−1)), </p>
+
+<p>where, under the null of homogeneity, the Chow test is 
+distributed as an F-statistic with (N − 1)k and N(T − k − 1) 
+degrees of freedom, and is valid for panels where N is small 
+relative to T, as in our case. 
+Pesaran and Yamagata (2008) proposed a standardized 
+version of Swamy's (1970) statistic in order to test for slope 
+homogeneity in large panels (where N and T are both large). 
+The standardized Delta test statistic ( ̃ 
+Δ) can be defined by </p>
+
+<p>(A2) 
+̃ 
+Δ = 
+√ 
+N </p>
+
+<p>(( </p>
+
+<p>N −1̃ S−k </p>
+
+<p>) </p>
+
+<p>∕ </p>
+
+<p>√ 
+2k </p>
+
+<p>) 
+, </p>
+
+<p>and the bias-adjusted version of the Delta test statistic is </p>
+
+<p>(A3) 
+̃ 
+Δ adj = 
+√ 
+N </p>
+
+<p>(( </p>
+
+<p>N −1̃ S−E(̃ z iT) </p>
+
+<p>) </p>
+
+<p>∕ 
+√ </p>
+
+<p>Var(̃ z iT) </p>
+
+<p>) 
+, </p>
+
+<p>where E 
+( 
+̃ z iT 
+) 
+= k and Var 
+( 
+̃ z iT 
+) 
+= (2k(T−k−1)) ∕(T+1), and ̃ S is 
+the modified version of Swamy's (1970) statistic that based on 
+the dispersion of individual slope estimates from a weighted 
+fixed effects pooled estimator. The Delta test and its bias-
+adjusted version have an asymptotic standard normal dis-
+tribution under homogeneity null and as (N, T) → ∞ with 
+√ 
+N∕T 2 → 0. </p>
+
+<p>CROSS-SECTIONAL DEPENDENCE TEST </p>
+
+<p>In order to determine the existence of CSD among 
+states, we employ the simple tests suggested by Pesaran 
+(2004). The CSD test statistics are based on the average of 
+pair-wise correlation coefficients (̂ ρ ij ) of the OLS residuals, 
+obtained from the individual ADF regressions. The CD P test 
+is given by: </p>
+
+<p>(A4) 
+CD P = 
+√ ( 
+2T ∕(N(N−1)) 
+) 
+( N−1 ∑ </p>
+
+<p>i=1 </p>
+
+<p>N </p>
+
+<p>∑ </p>
+
+<p>j=i+1 </p>
+
+<p>̂ ρ ij </p>
+
+<p>) </p>
+
+<p>. </p>
+
+<p>The CD P statistic under the null of cross-independence is 
+distributed as a two-tailed standard normal distribution, that 
+is, CD P ∼ N(0, 1) for T ij &gt; 3 and sufficient large N. 
+Since in our context we have relatively small N and 
+sufficiently large T (T &gt; N), we also employ the scaled version 
+of the Lagrange multiplier (LM) test of Breusch and Pagan 
+(1980), that is proposed by Pesaran (2004) and is based on 
+the squares of the pair-wise correlation coefficients, that can 
+be written as follows: </p>
+
+<p>(A5) CD LM = 
+√ ( 
+1 ∕(N(N−1)) 
+) 
+( N−1 ∑ </p>
+
+<p>i=1 </p>
+
+<p>N </p>
+
+<p>∑ </p>
+
+<p>j=i+1 </p>
+
+<p>( 
+T̂ ρ 2 
+ij − 1 </p>
+
+<p>) 
+) </p>
+
+<p>. </p>
+
+<p>which under the null hypothesis and following that T → ∞ 
+first and then N → ∞ the CD LM statistic is asymptotically 
+N(0, 1). 
+Baltagi, Bresson, and Pirotte (2007) provide evidence that 
+the general cross-sectional dependency test, CD p , can be also 
+employed as a useful diagnostic test for various models of 
+spatial dependence. </p>
+
+<p>PANEL UNIT ROOT TESTS </p>
+
+<p>Before proceeding with the panel estimation, we need 
+to examine the order of integration of the series under con-
+sideration. We employ conventional univariate ADF tests 
+(on the series that are not state specific) as well as the 
+IPS panel unit root test of Im, Pesaran, and Shin (2003) 
+and the CIPS panel test of Pesaran (2007) that takes into 
+account CSD among panel members (on the state-specific 
+panel variables). </p>
+
+<p>Panel Unit Root Tests without CSD </p>
+
+<p>This panel test is an extension of the univariate ADF 
+regression as follows: </p>
+
+<p>(A6) 
+Δy i,t = α i + ϕ i y i,t−1 + </p>
+
+<p>p i </p>
+
+<p>∑ </p>
+
+<p>j=1 </p>
+
+<p>θ i,j Δy i,t−j + e i,t , </p>
+
+<p>where y i,t stands for each series under consideration for 
+state i at time t. The null hypothesis is that all series 
+contains a unit root, ϕ i = 0 for all i (with i = 1, 2, … , N), 
+while the alternative hypothesis assumes that some of 
+the N panel units are stationary with individual specific 
+autoregressive coefficients. 
+Im, Pesaran, and Shin (2003) propose a test based on the 
+average of the ADF statistics computed for each individual in 
+the panel. Specifically, the IPS statistic is defined as: </p>
+
+<p>(A7) 
+t N,T = 
+1 
+N </p>
+
+<p>N </p>
+
+<p>∑ </p>
+
+<p>i=1 </p>
+
+<p>t iT 
+( 
+p i , θ i 
+) 
+. </p>
+
+<p>Under the assumption of cross-sectional independence, 
+this statistic is shown to converge to a normal distribution. </p>
+
+<p>Panel Unit Root Tests with CSD </p>
+
+<p>The IPS test that is based on the restrictive assumption 
+that the series are independent across states i, suffers from 
+serious size distortion and restricted power in the presence of 
+CSD (O'Connell 1998) and cross-sectional cointegrating rela-
+tionships (Banerjee, Marcellino, and Osbat 2004). In order to 
+overcome this, Pesaran (2007) proposes a simple approach to 
+deal with the problem of CSD. A one-factor model is con-
+sidered with heterogeneous factor loadings for residuals and 
+suggests augmenting the standard ADF regression with the 
+cross-section averages of lagged levels and first-differences 
+of the individual series. The regression used for the i th cross-
+section unit is defined as: </p>
+
+<p>Δy i,t = α i + ϕ i y i,t−1 + c i y t−1 + </p>
+
+<p>p i </p>
+
+<p>∑ </p>
+
+<p>j=0 </p>
+
+<p>θ i,j Δy t−j 
+(A8) </p>
+
+<p>+ </p>
+
+<p>p i </p>
+
+<p>∑ </p>
+
+<p>j=1 </p>
+
+<p>θ i,j Δy i,t−j + e i,t , </p>
+
+<p>where y t−1 = N −1 ∑ N 
+i=1 y i,t−1 and Δy t = N −1 ∑ N 
+i=1 y i,t = y t − 
+y t−1 . The CIPS test is based on the average of individual cross-
+sectionally augmented ADF statistics (CADF) as follows: </p>
+
+<p>(A9) 
+CIPS = 
+1 
+N </p>
+
+<p>N </p>
+
+<p>∑ </p>
+
+<p>i=1 </p>
+
+<p>t i (N, T) . </p>
+
+<p>Simulated critical values of CIPS are listed in Pesaran 
+(2007). Baltagi, Bresson, and Pirotte (2007) show that the 
+CIPS test is found to be robust to the presence of other sources 
+of CSD such as the spatial form. </p>
+
+<p>BAKAS, PANAGIOTIDIS, &amp; PELLONI: MACROECONOMIC EFFECTS OF LABOR REALLOCATION </p>
+
+
+
+
+
+
+
+<p>ECONOMIC INQUIRY </p>
+
+
+
+</text></tei>

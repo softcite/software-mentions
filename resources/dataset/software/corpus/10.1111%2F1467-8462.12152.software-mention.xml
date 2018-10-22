@@ -1,0 +1,1101 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1111%2F1467-8462.12152" /><encodingDesc><appInfo><application version="0.5.2-SNAPSHOT" ident="GROBID" when="2018-10-20T01:01+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>Abstract </p>
+
+<p>Rapid urban growth is occurring across 
+Australia. This has implications for planning 
+and management of cities. Data is key to 
+tackling this. Hitherto, an extensive range of 
+organisations has held the data for Australian 
+cities, crossing government, industry and 
+academia. With the growing demand for 
+open data and capabilities to support big 
+data analytics, new opportunities now exist to 
+rectify this situation. The Australian Urban 
+Research Infrastructure Network (AURIN) 
+project has been funded to provide seamless, 
+secure access to data from definitive organ-
+isations of Australia. We describe the AURIN 
+platform; it's data, together with a representa-
+tive big data case study. </p>
+
+<p>Globally, more people now live in urban areas 
+than elsewhere (United Nations 2011). The 
+urban population was growing at 3.5 per cent 
+per annum during the 2000s and there are now 
+estimated to be 500 urban agglomerations with 
+populations in excess of 1 million people 
+(Garland 2014). It is projected that the number 
+of people living in cities will increase to over 
+5 billion over the next two decades, with most 
+of that increase being in the developing world 
+(McKinsey Global Institute 2011). There are 
+also projected to be 135 megacities, with 
+populations over 10 million, by the end of 2015 
+(World Bank 2009). Cities and the populations 
+they comprise are more than just collections 
+of individuals and infrastructure (housing, 
+schools, roads etc) built around them. Depend-
+ing on how they are planned and developed, 
+cities can play pivotal roles of great societal 
+impact for most of the planet's inhabitants. 
+Poorly designed cities can cause a range of 
+challenges and frustrations to the inhabitants: 
+transport systems, environmental challenges, 
+over-population and challenges of increasing 
+numbers of migrants, socioeconomic chal-
+lenges stemming from the evolving global 
+economies and associated employment oppor-
+tunities are just some of the issues that city 
+planners should be aware of in the future 
+growth and form of the urban environments 
+they are ultimately responsible for. 
+Tackling such issues should be based on the 
+definitive quantititative and qualititative data 
+for the associated urban settlements. Within 
+Australia, there is a multitude of organisations 
+that hold, and are responsible for, data related </p>
+
+<p>* Department of Computing and Information Systems, 
+The University of Melbourne, Victoria 3010 Australia. 
+Corresponding author: Sinnott, email &lt;rsinnott@unimelb. 
+edu.au&gt;. The AURIN technical team includes Christopher 
+Bayliss, Andrew Bromage, Gerson Galang, Philip Green-
+wood, Dr Glenn Tesla Jayaputera, Davis Mota Marques 
+Luca Morandini, Ghazal Nogoorani, Dr Hossein Pursultani, 
+Muhammad Sarwar, Dr William Voorsluys and Dr Ivo 
+Widjaja. The AURIN project is funded through the 
+Australian Education Investment Fund SuperScience initia-
+tive. We gratefully acknowledge their support and the 
+broader network of AURIN collaborators. </p>
+
+<p>The Australian Economic Review, vol. 49, no. 2, pp. 208-23 </p>
+
+<p>° C 2016 The University of Melbourne, Melbourne Institute of Applied Economic and Social Research 
+Published by John Wiley &amp; Sons Australia, Ltd </p>
+
+<p>to the urban environments. These organisations 
+cover government (federal, state and local), 
+industry and, in some cases, academia. Ideally, 
+all of these data would be directly accessible to 
+city planners and researchers more generally. 
+Until recently, this was not the case and a siloed 
+set of data enclaves existed. 
+However, recently there has been a signifi-
+cant momentum through the implementation of 
+'Open Data' initiatives across the world and 
+new approaches for tackling the challenges of 
+large-scale and heterogeneous data resources, 
+often referred to as 'big data' (Clifford 2008). 
+One example of such an initiative is the 
+Australian Urban Research Infrastructure 
+Network (AURIN) (Stimson, Sinnott and 
+Tomko 2011). 
+The AURIN project was established in 2010 
+to provide an Australia-wide infrastructure 
+supporting access to, management and integra-
+tion of, datasets related to the urban settlements 
+of Australia. In developing such an infrastruc-
+ture, it was essential that the infrastructure 
+developed was flexible, searchable with 
+enriched metadata, scaleable and essentially 
+extensible. Thus, there was/is no fixed set of 
+data providers and datasets, nor a pre-defined 
+set of tools that must be incorporated into 
+this infrastructure. Rather, the system had to 
+be developed to accommodate flexible and 
+streamlined ingestion of new, heteregeneous 
+data from new organisations and include new 
+tools as they arrive. Developing such extensi-
+bility demanded that a data-driven approach 
+was taken. Thus, rather than building bespoke 
+solutions to access and use data from particular 
+organisations, generic data-driven solutions 
+were required that work across a multitude of 
+organisations and support a variety of research 
+efforts. 
+At the heart of the AURIN approach was 
+access to data. Rather than establish an 
+independent data warehouse of data collected 
+from various agencies that would become 
+outdated, the project sought to build live 
+(programmatic) access to the official data 
+sources from a multitude of agencies. This 
+article provides an overview of the infrastruc-
+ture used to achieve this, and importantly, 
+provides a snapshot of the data and tools that </p>
+
+<p>are currently available through the AURIN 
+environment. 
+The rest of the article is structured as 
+follows. Section 2 describes the background 
+to the AURIN project and presents a summary 
+of related work. Section 3 focuses on the 
+AURIN architecture and the components it 
+supports for data-driven, urban research, with 
+an overview of the kinds of data that are 
+currently accessible through the platform. 
+Section 4 focuses on the utility of this 
+e-infrastructure through a data-driven example 
+case study regarding areas of advantage 
+and disadvantage across Australia. Finally, 
+Section 5 draws some conclusions on the work 
+and plans for the future. </p>
+
+<p>2. Australian Urban Research Infrastructure 
+Network: Background and Related Work </p>
+
+<p>All research disciplines are becoming increas-
+ingly driven by the volume of data that can be 
+created and/or exist in various forms on the 
+Internet. Many research endeavours in dispa-
+rate disciplines are now limited by the ability to 
+discover, access and optimally use data. The 
+work on e-infrastructures, allowing seamless 
+access to distributed data resources, has been 
+ongoing for decades: from the original efforts 
+in large-scale data grid efforts, typified by 
+Hey and Trefethen (2003), Shiers (2007) and 
+Per ez-S anchez et al. (2015), to more recent 
+Cloud-based efforts, typified by Amazon. 
+'Big data' is the current buzz word that 
+captures the nature of the challenge facing 
+many research communities. Cities are 
+extremely diverse with numerous potentially 
+inter-related datasets: health, housing, trans-
+port, population demographics amongst many 
+other issues. To tackle this, AURIN focused on 
+a set of key themes (lenses) of particular 
+importance to the urban research community of 
+Australia. Each of these lenses had their own 
+datasets, services and tools that needed to be 
+brought together. The set of AURIN lenses 
+included: population and demographic futures 
+and benchmarked social indicators; economic 
+activity and urban labour markets; urban 
+health, well-being and quality of life; urban 
+housing; urban transport; energy and water </p>
+
+<p>Sinnott and AURIN Technical Team: Australian Data-Driven Urban Research Platform </p>
+
+<p>
+° C 2016 The University of Melbourne, Melbourne Institute of Applied Economic and Social Research </p>
+
+<p>supply and consumption; and innovative 
+urban design. These lenses are described in 
+McCafferty et al. (2010). Each of these lenses 
+represented a significant urban research area in 
+its own right. However, each of these is inter-
+related. Thus, the changing profile of popula-
+tion demographics in cities is essential for 
+planning for urban transport, housing, energy, 
+water use and health care. 
+Across Australia (and indeed in most other 
+countries), a huge array of organisations 
+collects and holds datasets that are fundamental 
+to tackling the current and future challenges 
+facing cities. On the one hand, some of these 
+data providers have data that are directly 
+accessible on the Web. For example, the 
+Australian Bureau of Statistics (ABS, 
+&lt;http://www.abs.gov.au&gt;) has over 1 million 
+web pages through which a huge array of past 
+and present Census data can be accessed, as 
+well as an extensive array of surveys and 
+reports related to the Australian population. On 
+the other hand, many other national and state-
+based agencies do not offer access to their 
+'data', preferring instead to release data in 
+aggregated forms; for example, as written 
+reports. Being able to access and combine 
+distributed data from multiple independent and 
+autonomous organisations through a unified 
+environment would greatly simplify the life of 
+many urban researchers and allow major urban 
+research challenges to be systematically tack-
+led. Ideally, such a solution would offer live 
+(programmatic) access to in situ remote data 
+resources from the definitive data providers 
+and avoid web scraping or other ad hoc data 
+collection mechanisms that would break when 
+websites and their content change. The solution 
+should provide tools to support collection and 
+enrichment of provider-specific metadata to 
+enable complex data analytics scenarios using 
+this diverse ecosystem of data. The <rs type="software">AURIN</rs> 
+platform has delivered such an integrated, 
+data-rich research environment. AURIN is not 
+unique in this endeavour and a range of efforts 
+is currently ongoing-albeit on a much more 
+focused domain; for example, with a fixed or 
+known set of data providers. 
+The UK Economic and Social Research 
+Council-funded Data Management through </p>
+
+<p>e-Social Science project (&lt;http://www.dames. 
+org.uk&gt;) developed a variety of specialised 
+research environments, through which a range 
+of distributed social science datasets and 
+associated tools was provisioned, including: 
+occupational data resources; educational data 
+resources; ethnicity or minority data resources; 
+and e-Health data resources (Higgins et al. 
+2009). These are used to support specialised 
+solutions; for example, in the area of mental 
+health, combining data from the UK Census, 
+the National Health Service and data from 
+geospatial data providers (EDINA) (Birkin et al. 
+2010). 
+The National e-Infrastructure for Social 
+Simulation (&lt;http://www.geog.leeds.ac.uk/ 
+projects/neiss/about.php&gt;) project developed 
+a portfolio of e-social science solutions that 
+allowed researchers to explore a variety of 
+what-if urban scenarios, using datasets such as 
+the UK Census and the British Household 
+Panel Survey combined with real-time data 
+such as Twitter. 
+A range of efforts has been ongoing to 
+harmonise international data resources and 
+archives of relevance to urban and built 
+environment researchers. Examples of these 
+include the European Council for European 
+Social Science Data Archives (&lt;http://www. 
+cessda.org&gt;) and the EU INSPIRE initiative 
+(&lt;http://inspire.ec.europa.eu/&gt;). The Open 
+Indicators Consortium initiative (&lt;http:// 
+www.oicweave.org&gt;) developed a visualisa-
+tion platform for any dataset by anyone. Other 
+commerical initiatives, such as www.qgi-
+scloud.com and www.giscloud.com, offer 
+Cloud-based hosting and visual interfaces to 
+user-provided geospatial information system 
+(GIS) datasets. These are useful tools for 
+sharing GIS data amongst distributed user 
+groups or for sharing with the public, but so 
+far they do not offer advanced analytical 
+capabilities. Furthermore, the interfaces are 
+aimed at expert GIS users. 
+Across Australia, the Australia National Data 
+Service (&lt;http://www.ands.org.au&gt;) has been 
+established to help support community-wide 
+access to, and use of, research datasets. Core 
+services include support for metadata cata-
+logues and persistent data object identifiers; </p>
+
+<p>° C 2016 The University of Melbourne, Melbourne Institute of Applied Economic and Social Research </p>
+
+<p> 
+The Australian Economic Review 
+June 2016 </p>
+
+<p>however, these are primarily at the metadata 
+level only and do not provide live access to 
+definitive data from the actual data providers. 
+Data storage solutions are now widely available 
+across Australia through projects such as the 
+Research Data Services (&lt;http://www.rds.edu. 
+au&gt;); however, these are technology-supporting 
+activities and do not in themselves tackle data 
+re-use and integration issues, which are typically 
+domain-specific. 
+All of these efforts showcase the pace of data 
+generation brought about by the rise in the use 
+of the Internet and associated technologies. 
+This accelerated pace has overtaken the way in 
+which researchers are able to discover and 
+utilise the ever-expanding volumes of digital 
+data. The urban research landscape faces acute 
+challenges in this regard due to its heterogene-
+ity since urban research can require access to a 
+multiplicity of inter-disciplinary datasets. Each 
+urban sub-domain (health, transport etc) has its 
+own particular demands and knowledge that 
+are often as isolated as the datasets themselves. </p>
+
+<p>There is no urban-wide standard format, no 
+defined ontology, and as such, a spectrum of 
+data use and re-use challenges exist. 
+The primary challenges faced by the 
+AURIN project were the development of an 
+e-infrastructure through which an already 
+existing and extensive set of data from a large 
+portfolio of organisations could be provisioned 
+in a federated manner and ensuring that future 
+datasets and tools could be accommodated and 
+incorporated into the platform. A distributed, 
+Cloud-enabled, and importantly, data-driven 
+architecture has been developed to tackle this 
+challenge and is described in the following 
+section. It is noted that this architecture has 
+evolved and been hardened over time with 
+different earlier realisations of the platform 
+described in detail in Sinnott et al. (2012, 2013) 
+and Nino-Ruiz et al. (2014). A simplified 
+version of the overall AURIN architecture is 
+shown in Figure 1. 
+It is important to note that AURIN offers 
+single sign-on to all of the datasets, services </p>
+
+<p>Figure 1 Australian Urban Research Infrastructure Network (AURIN) Implementation Architecture </p>
+
+<p>Note: NECTAR denotes National eResearch Collaboration Tools and Resources and RDSI denotes Research Data Storage 
+Infrastructure. </p>
+
+<p>Source: Sinnott et al. (2012). </p>
+
+<p>° C 2016 The University of Melbourne, Melbourne Institute of Applied Economic and Social Research </p>
+
+<p>Sinnott and AURIN Technical Team: Australian Data-Driven Urban Research Platform </p>
+
+<p>
+and tools offered by all providers through 
+federated authentication to the <rs type="software">AURIN</rs> portal, 
+available at &lt;https://portal.aurin.org.au&gt;; that 
+is, users authenticate at their (potentially 
+remote) home organisation and are subse-
+quently able to access all data without further 
+challenge or response demands from any data 
+provider. It is important to note that single 
+sign-on here does not imply that all data and 
+tools are accessible to all users at all times. 
+Several data providers place specific demands 
+on who can access their data and tools and what 
+they can subsequently do with these data. 
+The Public Sector Mapping Agency (PSMA, 
+&lt;http://www.psma.com.au&gt;) is one example 
+of a commercial partner that requires restricted 
+usage to their data. It should also be pointed 
+out that through the federated authentication 
+model, any academic across Australia (that is, 
+those with an email address ending in 
+'.edu.au') is able to access the portal directly. 
+Other non-academics (for example, those from 
+industry and government) are able to access the 
+portal through targeted accounts that are set up 
+through the access federation virtual home 
+organisation. </p>
+
+<p>3. Australian Urban Research Infrastructure 
+Network: Data Landscape </p>
+
+<p>There are at present (December 2015) 1,661 
+datasets that are accessible through the <rs type="software">AURIN</rs> 
+platform from 66 separate organisations. These 
+data providers and the nature and number of data 
+they make available are summarised in Table 1. 
+As seen, these datasets cross federal govern-
+ment, state government, local government, 
+industry and academia. The data shown in 
+Table 1 represent the total data that are currently 
+available across Australia. However, it is often 
+(typically) the case that researchers are interested 
+in data related to a particular regional setting; for 
+example, transport issues in Melbourne or 
+property prices in Sydney. The <rs type="software">AURIN</rs> platform 
+provides a user-driven interface that allows 
+researchers to access data through selecting the 
+area of interest through a map-based interface, as 
+shown in Figure 2, or through selection of data 
+based upon the geospatial aggregation level, as 
+shown in Figure 3. </p>
+
+<p>It is important to note that the <rs type="software">AURIN</rs> 
+platform provides an extensive variety of 
+geospatial coordinate systems that capture 
+changes over time. Thus, Figure 2 shows the 
+postal areas as defined by the ABS in 2011. A 
+different set of polygons for those portal areas 
+existed historically-this is the case for the 
+many other flavours of geospatial classification 
+that exists or has existed across Australia: local 
+government areas, statistical local areas, 
+working zones, statistical areas (SA4 down 
+to SA1) as shown in Figure 3, labour force 
+regions, greater capital city areas, statistical 
+divisions, urban centre localities, suburbs, 
+Commonwealth electronic divisions amongst 
+many others. Capturing these changes over 
+time is essential for researchers so that they can 
+compare meaningful data in meaningful con-
+texts. This is especially the case for those 
+interested in longitudinal studies of cities. 
+The datasets cover an extensive variety of 
+information related to Australian urban settle-
+ments. As an example of the diversity of the 
+information available through the <rs type="software">AURIN</rs> 
+platform, searching across a range of keywords 
+returns extensive data, as shown in Table 2. It is 
+noted that the platform supports a range of 
+fuzzy search capabilities; for example, search-
+ing for employ will return matching datasets 
+with data or metadata including terms such as 
+unemployed and employment. 
+The <rs type="software">AURIN</rs> platform allows much more 
+targeted searching for specific data that might 
+be available. Thus, transport researchers might 
+be interested in terms such as train (34), tram 
+(21), car (79), station (12), bus stop (2), 
+accident (31), bicycle (10), pedestrian (4) and 
+commute (7), where the numbers in parentheses 
+represent the number of datasets that include 
+the italicised keywords. 
+It is essential that the <rs type="software">AURIN</rs> platform 
+supports the access to, and integration of, 
+diverse datasets. In supporting access to data, 
+it was recognised that each remote data 
+provider is autonomous and can make its data 
+available through technologies that it deems 
+appropriate; that is, AURIN cannot demand 
+that the provider install a particular software 
+stack. A rich variety of technical solutions has 
+been developed and delivered to meet the </p>
+
+<p>° C 2016 The University of Melbourne, Melbourne Institute of Applied Economic and Social Research </p>
+
+<p> 
+The Australian Economic Review 
+June 2016 </p>
+
+<p>Table 1 Australian Urban Research Infrastructure Network Data Providers 
+and Number/Type of Datasets Made Available (December 2015) </p>
+
+<p>Organisation </p>
+
+<p>Federal 
+government </p>
+
+<p>State 
+government </p>
+
+<p>Local 
+government Industry Academia </p>
+
+<p>Australian Energy Market Operator (AEMO) 
+2 
+Australian Bureau of Statistics (AU_Govt_ABS) 
+557 
+Australian Children's Education and Care Quality 
+Authority (AU_Govt_ACECQA) 
+1 
+Bureau of Infrastructure, Transport and Regional 
+Economics (AU_Govt_BITRE) 
+38 
+Bureau of Meteorology (AU_Govt_BoM) 
+2 
+Department of Employment (AU_Govt_DE) 
+8 
+Department of the Environment (AU_Govt_DotE) 
+1 
+Geoscience Australia (AU_Govt_GA) 
+6 
+National Water Commission (AU_Govt_NWC) 
+1 
+Ausgrid 
+1 
+Central Highlands Water (CHW) 
+1 
+City West Water Corporation (CWW) 
+1 
+Energex 
+1 
+Ergon 
+2 
+Energy Supply Association of Australia (ESAA) 
+1 
+Grattan Institute (GI) 
+3 
+Griffith University Urban Research Program (GU_URP) 
+3 
+Internode Pty Ltd (INODE) 
+1 
+Jemena 
+1 
+Melbourne Water Corporation (MW) 
+6 
+National Information and Communications Technology 
+Ltd Australia (NICTA) 
+6 
+New South Wales -Department of Planning and the 
+Environment (NSW_Govt_DPE) 
+102 
+New South Wales Fair Trading (NSW_Govt_FT) 
+36 
+Public Sector Mapping Agency (PSMA) 
+15 
+Queensland Department of Natural Resources and Mines 
+(QLD_Govt_NRM) 
+1 
+Queensland Treasury and Trade (QLD_Govt_QTT) 
+1 
+Queensland Townsville County Council 
+(QLD_LGovt_TCC) 
+2 
+Queensland Smart Transport Research Centre 
+(QLD_STRC) 
+30 
+Regional Australia Institute (RAI) 
+10 
+South Australia Attorney General's Department 
+(SA_Govt_AGD) 
+10 
+South Australia Department for Communities and Social 
+Inclusion (SA_Govt_DCSI) 
+11 
+South Australia Department for Education and Child 
+Development (SA_Govt_DECD) 
+1 
+South Australia Department of Environment, Water and 
+Natural Resources (SA_Govt_DEWNR) 
+5 
+South Australia Department of Planning, Transport and 
+Infrastructure (SA_Govt_DPTI) 
+94 
+South Australia Department for State Development 
+(SA_Govt_DSD) 
+1 
+South Australia Local Government Association of South 
+Australia (SA_Govt_LGA) 
+3 
+Renewal South Australia (SA_Govt_RenewalSA) 
+41 
+South Australia Health (SA_Govt_SA_Health) 
+5 </p>
+
+<p>Continued </p>
+
+<p>° C 2016 The University of Melbourne, Melbourne Institute of Applied Economic and Social Research </p>
+
+<p>Sinnott and AURIN Technical Team: Australian Data-Driven Urban Research Platform </p>
+
+<p>
+Table 1 Continued </p>
+
+<p>Organisation </p>
+
+<p>Federal 
+government </p>
+
+<p>State 
+government </p>
+
+<p>Local 
+government Industry Academia </p>
+
+<p>South Australia City of Salisbury (SA_Lgovt_CSC) 
+7 
+South East Water Corporation (SEW) 
+1 
+Sydney Water (SW) 
+1 
+University of Adelaide Australian Population and 
+Migration Research Centre (UA_APMRC) 
+1 
+University of Adelaide Population Health Information 
+Development Unit (UA_PHIDU) 
+169 
+University of Canberra National Centre for Social and 
+Economic Modelling (UC_NATSEM) 
+25 
+University of New South Wales City Futures Research 
+Centre (UNSW_CFRC) 
+7 
+University of Newcastle -Centre of Full Employment 
+and Equity (UoN_CofFEE) 
+33 
+University of Queensland eResearch Group (UQ_ERG) 
+38 
+University of Queensland -Queensland Centre for 
+Population Research (UQ_QCPR) 
+3 
+Victoria Government Department of Environment, Land, 
+Water and Planning (Vic_Govt_DELWP) 
+16 
+Victoria Government Department of Environment and 
+Primary Industries (Vic_Govt_DEPI) 
+55 
+Victoria Government Department of Education and 
+Training (Vic_Govt_DET) 
+34 
+Victoria Government Department of Human Services 
+(Vic_Govt_DHS) 
+10 
+Victoria Government Department of Health 
+(Vic_Govt_DOH) 
+3 
+Victoria Government Department of State Development, 
+Business and Innovation (Vic_Govt_DSDBI) 
+10 
+Victoria Government Environmental Protection Agency 
+(Vic_Govt_EPA) 
+3 
+Victoria Government Sustainability Victoria 
+(Vic_Govt_SV) 
+1 
+Victoria Government -Victoria Commission for 
+Gambling and Liquor Regulation 
+(Vic_Govt_VCGLR) 
+5 
+Government of Victoria VicHealth 
+(Vic_Govt_VicHealth) 
+42 
+Government of Victoria VicRoads 
+(Vic_Govt_VicRoads) 
+11 
+Local Government of Victoria -Brimbank City Council 
+(Vic_LGovt_Brimbank) 
+5 
+Local Government of Victoria -City of Melbourne 
+(Vic_LGovt_COM) 
+16 
+Local Government of Victoria -Hume City Council 
+(Vic_LGovt_Hume) 
+1 
+Local Government of Victoria -Melton City Council 
+(Vic_LGovt_Melton) 
+3 
+Local Government of Victoria -Wyndham City Council 
+(Vic_LGovt_Wyndham) 
+5 
+Western Australia Government Landgate 
+(WA_Govt_LGATE) 
+144 
+Yarra Valley Water (YVW) 
+1 </p>
+
+<p>° C 2016 The University of Melbourne, Melbourne Institute of Applied Economic and Social Research </p>
+
+<p>214 
+The Australian Economic Review 
+June 2016 </p>
+
+<p>Figure 2 2011 Geospatial Area Selection (Postal Areas) </p>
+
+<p>Source: Australian Bureau of Statistics. </p>
+
+<p>Figure 3 Geospatial Area Selection </p>
+
+<p>Source: Australian Urban Research Infrastructure Network. </p>
+
+<p>° C 2016 The University of Melbourne, Melbourne Institute of Applied Economic and Social Research </p>
+
+<p>Sinnott and AURIN Technical Team: Australian Data-Driven Urban Research Platform </p>
+
+<p>
+diversity of the urban data ecosystem across 
+Australia. Many of these are based around 
+geospatial software systems and standards; for 
+example, Open Geospatial Consortium stand-
+ards (&lt;http://www.opengeospatial.org/ogc&gt;). 
+To support the integration of data, the 
+platform utilises next-generation Cloud-based 
+noSQL systems (<rs type="software">CouchDB</rs>) and associated 
+data translation systems. We demonstrate the 
+data integration capabilities through a repre-
+sentative case study. </p>
+
+<p>4. Case Study </p>
+
+<p>Socio-Economic Indexes for Areas (SEIFA) is 
+a product developed by the ABS that ranks 
+areas in Australia according to relative socio-
+economic advantage and disadvantage. The 
+indices are based on information from the 
+5 yearly Census. SEIFA 2011 is (at present) 
+the latest version of this product and consists 
+of four indices. The Index of Relative 
+Socio-Economic Advantage and Disadvantage 
+(IRSAD) summarises information about 
+the economic and social conditions of people 
+and households within an area, including 
+both relative advantage and disadvantage 
+measures. The <rs type="software">AURIN</rs> platform provides 
+access to the IRSAD data from the ABS-
+specifically, the data classified across the SA2s 
+across Australia. 
+One typical scenario in using the IRSAD 
+data is to identify regions facing particular 
+challenges regarding disadvantage. Creation 
+of a choropleth map through the <rs type="software">AURIN</rs> </p>
+
+<p>environment allows visualisation of the levels 
+of advantage and disadvantage for all SA2s of 
+Australia, as shown in Figure 4. As seen from 
+Figure 4, there are areas of particular disad-
+vantage in the Northern Territory, South 
+Australia and northern Queensland. Here, the 
+paler colour represents a lower SEIFA IRSAD 
+score and the darker colour represents areas of 
+higher scores. The <rs type="software">AURIN</rs> platform allows 
+arbitrary selection of the classification scales. 
+As seen from Figure 4, the table (lower left) 
+shows the actual numeric values associated 
+with the SEIFA IRSAD score. 
+Understanding the issues surrounding SA2s 
+with a lower IRSAD score can be explored 
+through the <rs type="software">AURIN</rs> platform. Here, we 
+consider the number of children in welfare-
+dependent or low income families (earning less 
+that $20,799), which is available from 
+UA_PHIDU. Combining (merging) the SEIFA 
+dataset and the UA_PHIDU dataset allows for 
+a range of statistical analyses to be undertaken. 
+Through selecting data at the SA2 level, these 
+datasets can be combined directly (utilising the 
+unique codes associated with the SA2s across 
+Australia). Once merged, a range of analyses 
+can be undertaken. Here, we consider a basic 
+linear regression, although we note that the 
+<rs type="software">AURIN</rs> platform contains over 100 analytical 
+tools that are available for richer geospatial 
+analytics. These tools are outlined in Sinnott 
+and Voorsluys (2015). 
+Figure 5 shows the correlation between the 
+SEIFA IRSAD score and the number of lower 
+income or welfare-dependent families in the 
+SA2s across Australia. It is noted that the 
+<rs type="software">AURIN</rs> platform enforces intelligent decision-
+making where it can; for example, by checking 
+that the datasets that are joined are at the same 
+geospatial aggregation level (SA2). Outliers in 
+these correlations (for example, areas with low 
+SEIFA scores or areas with large numbers of 
+children in welfare-dependent or low income 
+families) can be seen directly. What is key here 
+is that these are independent datasets from 
+independent organisations that hitherto have not 
+allowed direct comparison. Instead, researchers 
+typically have to source these datasets them-
+selves through ad hoc means and undertake such 
+analysis using a range of tools. </p>
+
+<p>Table 2 Volume and Variety of the Australian 
+Urban Research Infrastructure Network Data </p>
+
+<p>Search term </p>
+
+<p>Number of datasets from data providers 
+with the corresponding matching data </p>
+
+<p>Economy 
+123 
+Industry 
+74 
+Education 
+74 
+Transport 
+128 
+Health 
+157 
+Population 
+347 
+Crime 
+14 
+Business 
+49 
+Employment 
+120 
+Indigenous 
+28 </p>
+
+<p>° C 2016 The University of Melbourne, Melbourne Institute of Applied Economic and Social Research </p>
+
+<p> 
+The Australian Economic Review 
+June 2016 </p>
+
+<p>A further analysis that might be considered 
+is the SEIFA IRSAD score and the percentage 
+of 16 year olds in secondary college; that is, do 
+we observe more people leaving school earlier 
+in more disadvantaged areas? This dataset is 
+also available from UA_PHIDU. Using the 
+<rs type="software">AURIN</rs> tools to merge the datasets and analyse 
+the data, we see the correlation shown in 
+Figure 6. The data points in the lower-left 
+portion of the scatter plot represent those SA2s 
+with a low SEIFA IRSAD score and lower 
+school-leaving age. 
+Figure 4 shows that many of the disadvan-
+tages arise in areas with increased numbers of 
+Indigenous persons. A further dimension to 
+this analysis is to explore the correlation 
+between the poor health of the Indigenous 
+communities and the SEIFA IRSAD score. </p>
+
+<p>Information on the health of the Indigenous 
+population is available from UC_NATSEM. 
+The correlation between the SEIFA IRSAD 
+score and poor-health information of the 
+Indigenous population of Australia is shown 
+in Figure 7. Figure 7 also shows the interactive, 
+user-oriented nature of the <rs type="software">AURIN</rs> portal. 
+Thus, the outlier in the scatter plot is shown 
+(in red) along with the location (East Arnhem) 
+on the map (top). This interactivity of the 
+underlying data is key to helping support the 
+advanced visual analytics of the urban data 
+landscape. 
+The <rs type="software">AURIN</rs> platform supports rich spatial 
+data analytics capabilities. One scenario of 
+interest is whether areas of advantage 
+and/or disadvantage tend to cluster together 
+geospatially. As one example of a spatial </p>
+
+<p>Figure 4 2011 SEIFA IRSAD Score for the SA2s of Australia and Visualisation through the Choropleth Map </p>
+
+<p>Note: IRSAD denotes Index of Relative Socio-Economic Advantage and Disadvantage, SA denotes statistical area and 
+SEIFA denotes Socio-Economic Indexes for Areas. </p>
+
+<p>Source: Australian Urban Research Infrastructure Network. </p>
+
+<p>° C 2016 The University of Melbourne, Melbourne Institute of Applied Economic and Social Research </p>
+
+<p>Sinnott and AURIN Technical Team: Australian Data-Driven Urban Research Platform </p>
+
+<p>
+autocorrelation tool, Moran's I supports com-
+parison of similarity in location with similarity 
+in attribute values (Sinnott 2015). Here, 
+similarity of location is based upon the sharing </p>
+
+<p>of a boundary with a given SA2; that is, here we 
+seek to explore whether SA2s that share a 
+boundary with other SA2s share similar SEIFA 
+scores. </p>
+
+<p>Figure 5 2011 SEIFA IRSAD Score versus Children in Welfare-Dependent/Low Income Families </p>
+
+<p>Note: IRSAD denotes Index of Relative Socio-Economic Advantage and Disadvantage and SEIFA denotes Socio-Economic 
+Indexes for Areas. </p>
+
+<p>Sources: SEIFA IRSAD score is from Australian Bureau of Statistics and Welfare-Dependent/Low Income Families is from 
+UA_PHIDU, Australian Urban Research Infrastructure Network. </p>
+
+<p>Figure 6 2011 SEIFA IRSAD Score versus Percentage of 16 Year Olds in Secondary School </p>
+
+<p>Note: IRSAD denotes Index of Relative Socio-Economic Advantage and Disadvantage and SEIFA denotes Socio-Economic 
+Indexes for Areas. </p>
+
+<p>Sources: SEIFA IRSAD score is from Australian Bureau of Statistics and Welfare-Dependent/Low Income Families is from 
+UA_PHIDU, Australian Urban Research Infrastructure Network. </p>
+
+<p>° C 2016 The University of Melbourne, Melbourne Institute of Applied Economic and Social Research </p>
+
+<p> 
+The Australian Economic Review 
+June 2016 </p>
+
+<p>To support these analyses, it is necessary to 
+spatialise (add the geometry) to the SA2s and 
+calculate their contiguous spatial weights; that 
+is, count SA2s if they share a border or a corner 
+with other SA2s. The range of possible 
+Moran's I values is between -1 and 1. An 
+estimate of 0 implies no spatial autocorrelation 
+exists. For a significant estimate, the closer it 
+gets to 1, the greater the degree of positive 
+spatial autocorrelation, while the closer it 
+is to -1, the stronger the negative spatial 
+autocorrelation. 
+Applying the <rs type="software">AURIN</rs> statistical analysis 
+tools to the 2011 SEIFA IRSAD scores for 
+the SA2s of Australia produces the spatial 
+autocorrelation scores shown in Figure 8. As 
+shown, there is a slight correlation between the 
+spatial correlation (0.1922) of the 2011 SEIFA 
+IRSAD scores and the SA2s of Australia. 
+A Moran scatter plot is used to visualise and 
+identify the degree of local spatial instability in 
+spatial association that is present in the Moran's 
+I statistic. The scatter plot is useful in identifying 
+those observations that do not conform; that is, 
+they differ significantly from the global Moran's 
+I in magnitude and/or direction. </p>
+
+<p>The scatter plot centres on the point where 
+the mean of the variable meets the mean 
+of the lagged variable and the four quadrants of 
+the plot relative to this point give information 
+about the type of association that is present. 
+The upper-right and lower-left quadrants 
+shown in Figure 9 represent positive spatial 
+association, while the upper-left and lower-
+right quadrants show those observations that 
+have negative spatial association. The density 
+of each of the quadrants indicates which spatial 
+pattern dominates and also provides informa-
+tion on the distribution of the individual spatial 
+associations and the contribution of each to the 
+global statistic. Furthermore, the plot shows 
+outliers and leverage points and can provide an 
+overall picture of the consistency of the global 
+indicator. 
+Moran's I is just one of the more advanced 
+spatial statistical correlations that are available in 
+the <rs type="software">AURIN</rs> platform. These tools represent best 
+practice in statistical analyses. Detailed docu-
+mentation on all of these tools is available 
+through the AURIN website (&lt;http://docs.aurin. 
+org.au&gt;), together with a range of advanced 
+tutorials covering which analyses should be </p>
+
+<p>Figure 7 Indigenous Health and 2011 SEIFA IRSAD Score </p>
+
+<p>Note: IRSAD denotes Index of Relative Socio-Economic Advantage and Disadvantage and SEIFA denotes Socio-Economic 
+Indexes for Areas. </p>
+
+<p>Sources: SEIFA IRSAD score is from Australian Bureau of Statistics and Indigenous health is from National Centre for 
+Social and Economic Modelling. </p>
+
+<p>° C 2016 The University of Melbourne, Melbourne Institute of Applied Economic and Social Research </p>
+
+<p>Sinnott and AURIN Technical Team: Australian Data-Driven Urban Research Platform </p>
+
+<p>
+Figure 9 Moran's I Scatter Plot of the 2011 SEIFA IRSAD Scores for the SA2s of Australia </p>
+
+<p>Note: IRSAD denotes Index of Relative Socio-Economic Advantage and Disadvantage, SA denotes statistical area and 
+SEIFA denotes Socio-Economic Indexes for Areas. </p>
+
+<p>Source: Australian Urban Research Infrastructure Network. </p>
+
+<p>Figure 8 Moran's I Spatial Correlation of the 2011 SEIFA IRSAD Scores for the SA2s of Australia </p>
+
+<p>Note: IRSAD denotes Index of Relative Socio-Economic Advantage and Disadvantage, SA denotes statistical area and 
+SEIFA denotes Socio-Economic Indexes for Areas. </p>
+
+<p>Source: Australian Urban Research Infrastructure Network. </p>
+
+<p>° C 2016 The University of Melbourne, Melbourne Institute of Applied Economic and Social Research </p>
+
+<p>220 
+The Australian Economic Review 
+June 2016 </p>
+
+<p>applied in which context. Such capabilities allow 
+more advanced analyses to be made available to 
+non-spatial statistics experts. 
+It is noted that whilst many researchers 
+derive great benefit from the rich variety of 
+tools that is available within the portal, some 
+researchers prefer to simply have access to the 
+AURIN datasets and download them to their 
+own desktop to undertake their own desktop-
+based analytics; for example, using tools such 
+as <rs type="software">ArcGIS</rs>, <rs type="software">STATA</rs> or <rs type="software">SPSS</rs>. The <rs type="software">AURIN</rs> 
+portal supports the download of data in 
+comma-separated-variable format, Javascript 
+Object Notation and as Shapefiles. The 
+platform also supports the notion of projects 
+and a range of separate experiments can be 
+supported. 
+The platform also allows researchers to 
+upload their own data and compare or analyse 
+their datasets with other datasets that are made 
+available through the <rs type="software">AURIN</rs> environment. </p>
+
+<p>5. Conclusions </p>
+
+<p>In this article, we described the <rs type="software">AURIN</rs> 
+e-infrastructure and its support for diverse 
+data use/re-use and integration scenarios. 
+The system currently supports seamless and 
+secure access to data from, at present, 66 
+independent and typically definitive and auton-
+omous data organisations across Australia, 
+with over 1,661 unique datasets currently 
+accessible. These cover unit-level datasets 
+through to aggregated data across a multitude 
+of scales (both temporal and spatial). These 
+systems are driven by metadata with tools to 
+support data harvesting and subsequent enrich-
+ment by data providers. The AURIN model of 
+data access, use/re-use and integration 
+has already demonstrated its flexibility and 
+scaleability, with new data sources being 
+continually added with minimal impact on 
+the underlying infrastructure. 
+The work described here has primarily 
+focused on the technical aspects of the 
+e-infrastructure and exemplar uses. It should 
+be noted that the systems have gained signifi-
+cant traction across the urban research land-
+scape, and interestingly, in government, with 
+many government agencies now accessing and </p>
+
+<p>using the systems for their own needs. There 
+have been over 50,000 user sessions in 
+accessing the <rs type="software">AURIN</rs> platform, with major 
+acceptance by academic and non-academic 
+users. There are over 3,000 regular users of the 
+<rs type="software">AURIN</rs> platform. 
+The <rs type="software">AURIN</rs> platform is very much focused 
+on urban and built environment research 
+challenges, but it is broadly applicable to other 
+domains of application. For example, it is now 
+used as the basis for a range of other new 
+projects including the Department of the 
+Environment's $8.8 million Clean Air and 
+Urban Landscapes initiative. 
+This article has focused upon the openly 
+accessible aggregate data; however, many 
+urban researchers face considerable challenges 
+in accessing disaggregated (unit-level) data-
+sets. The <rs type="software">AURIN</rs> platform has capabilities 
+for secure data access and usage. These are 
+described in more detail in Ma (2015). 
+Furthermore, many researchers require access 
+to real-time information on the state of cities. 
+Social media is one example of data that can 
+capture what is happening in cities at any given 
+time. Future work on <rs type="software">AURIN</rs> will include data 
+from organisations such as Twitter. 
+Future work on <rs type="software">AURIN</rs> involves the 
+extension of the platform to include more 
+datasets, and importantly, more recent datasets; 
+for example, the 2016 Census. Work is also 
+ongoing in supporting an open application 
+programming interface for direct program-
+matic access to the data and tools within the 
+platform. Initial prototyping of mobile appli-
+cations has already commenced in both the <rs type="software">iOS</rs> 
+and <rs type="software">Android</rs> platforms (Moran 1950; Zhang 
+2015). 
+One of the challenges facing <rs type="software">AURIN</rs> is its 
+longer term sustainability. In 2015, the project 
+faced challenges due to the economic uncer-
+tainty of the national funding landscape. As a 
+result, certain commercial (fee-for-use) data-
+sets, such as the Fairfax Australian Property 
+Monitor housing data, had to be withdrawn due 
+to lack of funds. These datasets were amongst 
+the most widely accessed and used within the 
+<rs type="software">AURIN</rs> platform. Despite the obvious uptake 
+of the platform by the research community and 
+technical sophistication of the solution, such </p>
+
+<p>° C 2016 The University of Melbourne, Melbourne Institute of Applied Economic and Social Research </p>
+
+<p>Sinnott and AURIN Technical Team: Australian Data-Driven Urban Research Platform </p>
+
+<p>
+funding issues remain a challenge of long-term 
+sustainability going forward. </p>
+
+<p>January 2016 </p>
+
+
+
+<p> 
+The Australian Economic Review 
+June 2016 </p>
+
+
+
+<p>° C 2016 The University of Melbourne, Melbourne Institute of Applied Economic and Social Research </p>
+
+<p>Sinnott and AURIN Technical Team: Australian Data-Driven Urban Research Platform </p>
+
+<p>
+</p></text></tei>

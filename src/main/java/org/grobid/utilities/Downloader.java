@@ -26,9 +26,10 @@ public class Downloader {
 
         CloseableHttpClient httpclient = HttpClients.custom()
                 .setUserAgent("Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0")
-                .setDefaultRequestConfig(RequestConfig.custom().setCookieSpec(CookieSpecs.STANDARD).build())
+                .setDefaultRequestConfig(RequestConfig.custom().setCookieSpec(CookieSpecs.STANDARD).setCircularRedirectsAllowed(true).build())
                 .setRedirectStrategy(new LaxRedirectStrategy()) // adds HTTP REDIRECT support to GET and POST methods 
                 .build();
+        //httpclient.getParams().setParameter(ClientPNames.ALLOW_CIRCULAR_REDIRECTS, true); // allow redirects to the same location
         try {
             HttpGet get = new HttpGet(url.toURI()); // we're using GET but it could be via POST as well
             File downloaded = httpclient.execute(get, new FileDownloadResponseHandler(dstFile));

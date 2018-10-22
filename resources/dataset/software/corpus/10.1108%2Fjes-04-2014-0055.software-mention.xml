@@ -1,0 +1,1931 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1108%2Fjes-04-2014-0055" /><encodingDesc><appInfo><application version="0.5.2-SNAPSHOT" ident="GROBID" when="2018-10-20T01:04+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>Abstract </p>
+
+<p>Purpose -The purpose of this paper is to combine multidimensional welfare analysis and entropy 
+metrics to derive not only the best relative weights but also substitution degree among different 
+attributes to construct multidimensional indices of well-being with Chinese Household Income Project 
+Survey 2002 data. 
+Design/methodology/approach -The authors follow Maasoumi's two-step measures of multivariate 
+inequality to calculate the inequality for three social groups in China, urban residents, migrants, and rural 
+residents. The two-step approach provides an aggregation formula which is numerically identified in this 
+paper based on a metric entropy distance measure between the distribution of the aggregate well-being 
+functions, on the one hand, and the distribution of the self-reported "happiness" indicator. The authors 
+compare the differences in relative weights and substitution degree for the three groups, and link them to 
+some institutional factors. 
+Findings -The authors find that incorporating substitution among attributes, and taking into 
+consideration group heterogeneity are very important in multidimensional analysis of well-being. 
+Originality/value -The two-step approach provides an aggregation formula which is numerically 
+identified in this paper based on a metric entropy distance measure between the distribution of the aggregate 
+well-being functions, on the one hand, and the distribution of the self-reported "happiness" indicator. 
+Journal of Economic Studies 
+Vol. 42 No. 1, 2015 
+pp. 4-19 
+Emerald Group Publishing Limited 
+0144-3585 
+DOI 10.1108/JES-04-2014-0055 </p>
+
+<p>The current issue and full text archive of this journal is available on Emerald Insight at: 
+www.emeraldinsight.com/0144-3585.htm </p>
+
+<p>© Asian Development Bank. The views expressed in this publication are those of the authors and 
+do not necessarily reflect the views and policies or the Asian Development Bank (ADB) or its 
+Board of Governors or the governments they represent. ADB does not guarantee the accuracy of 
+the data included in this publication and accepts no responsibility for any consequence of their 
+use. By making any designation of or reference to a particular territory or geographic areas, or by 
+using the term "country" in this document, ADB does not intend to make any judgments as to the 
+legal or other status of any territory or area. 
+JEL Classification -I31, C43 
+The authors would like to thank Le Wang and anonymous referees and Almas Heshamti for 
+comments and suggestions. The usual disclaimer applies. </p>
+
+<p>4 </p>
+
+<p>JES 
+42,1 </p>
+
+<p>Downloaded by University of Texas Libraries At 10:13 30 March 2018 (PT) </p>
+
+<p>which is to infer information on weights based on self-reported "happiness." Nardo 
+et al. (2005) proposed a regression of life satisfaction on various variables to derive 
+the relative weights. However, this approach suffers from a number of disadvantages. 
+First, there is over reliance on self-reported indicator of "happiness." Second, it is 
+complex to take into consideration explicit non-linear relationships in regressions. 
+Third, this approach does not handle the substitution relationship among different 
+attributes in a satisfactory manner. In this paper we propose a different strategy. 
+First, we adopt ideal aggregation functions that combine different attributes so as to 
+minimize general entropic divergence between the aggregate's distribution, and 
+the distributions of the constituent attributes. This procedure leaves the parameters 
+of the aggregator function undetermined. But these parameters can be obtained 
+to, again, minimize the entropic divergence between the distribution of the aggregates 
+and the distribution of any desired measure of "happiness." A metric entropy 
+measure is a proper measure of "distance" and suitable to compare two or more 
+distributions, with a minimand that identifies weights and other parameters 
+uniquely. This offers an aggregation formula, as in Maasoumi (1986), which is 
+extended in this paper by a numerical optimization routine to identify suitable 
+numerical values for weights and other parameters. These numerically identified 
+well-being measures provide a basis for multidimensional consideration of poverty 
+and inequity. 
+The structure of this paper is as follows. In Section 2, we introduce Maasoumi's 
+two-step measures of multivariate well-being and inequality; In Section 3, we introduce 
+the two metric entropy measures; Section 4 describes the numerical optimization 
+procedures; Section 5 contains the empirical results based on CHIPS; and Section 6 
+provides the conclusion and potential future research directions. </p>
+
+<p>2. Multivariate measure of well-being and inequality 
+It has been widely accepted that only using one attribute (usually income or GDP) to 
+measure individuals' or countries' welfare is insufficient. We should incorporate more 
+attributes (especially non-tradable ones) to obtain more comprehensive information. 
+However, including more attributes brings in the problem of aggregation, that is how to 
+aggregate different indicators of well-being to represent the welfare level. Maasoumi 
+(1986) proposed a two-step measure of multivariate inequality. In the first step, he used 
+different attributes to construct a welfare aggregate or "average," and in the second 
+step, he calculated the inequality index using each person's welfare evaluation obtained 
+in the first step. We now describe this two-step measures of multivariate inequality 
+method in detail. 
+In the first step, we address the aggregation problem using the generalized entropy 
+measure to have a representation of the divergence between the multiple distribution of 
+the attributes, on the one hand, and the distribution of the latent aggregator index, on 
+the other. Let S i be the individual i's aggregate welfare, which can be seen as 
+individual's utility evaluation or welfare assessment. Let X ij be individual i's amount 
+of jth attribute. Then we can define the multivariate generalized entropy measure of 
+closeness as follows: </p>
+
+<p>D b S; X ; a 
+ð 
+Þ¼ 
+X m </p>
+
+<p>j¼1 </p>
+
+<p>a j 
+X n </p>
+
+<p>i¼1 </p>
+
+<p>S i S i =X ij 
+À 
+Á b À1 
+h 
+i 
+=b bþ 1 
+ð 
+Þ </p>
+
+<p>( 
+) </p>
+
+<p>(1) </p>
+
+<p>5 </p>
+
+<p>Weights and 
+substitution 
+degree </p>
+
+<p>Downloaded by University of Texas Libraries At 10:13 30 March 2018 (PT) </p>
+
+<p>where α j 's are the relative weights of each attributes ð 
+P m 
+j¼1 a j ¼ 1Þ. By minimizing the 
+D β function regarding S i 's, which are subject to restriction that 
+P n 
+i¼1 S i ¼ 1, that is: </p>
+
+<p>min </p>
+
+<p>S i 
+f g </p>
+
+<p>D b S; X ; a 
+ð 
+Þmin </p>
+
+<p>S i 
+f g </p>
+
+<p>X m </p>
+
+<p>j¼1 </p>
+
+<p>a j 
+X n </p>
+
+<p>i¼1 </p>
+
+<p>S i S i =X ij 
+À 
+Á b À1 
+h 
+i 
+=b bþ 1 
+ð 
+Þ </p>
+
+<p>( 
+) </p>
+
+<p>(2) </p>
+
+<p>s:t: 
+X n </p>
+
+<p>i¼1 </p>
+
+<p>S i ¼ 1 </p>
+
+<p>we can get our welfare or aggregate function: </p>
+
+<p>S i p 
+X m </p>
+
+<p>j¼1 </p>
+
+<p>a j X Àb </p>
+
+<p>ij </p>
+
+<p>! À1=b </p>
+
+<p>; b a 0; À1; 
+(3) </p>
+
+<p>S i p 
+Y m </p>
+
+<p>j¼1 </p>
+
+<p>X </p>
+
+<p>a j </p>
+
+<p>ij ; b ¼ 0; 
+(4) </p>
+
+<p>S i p 
+X m </p>
+
+<p>j¼1 </p>
+
+<p>a j X ij ; b ¼ À1: 
+(5) </p>
+
+<p>These are different averages of the attributes for each person, and the elasticity of 
+substitution between different attributes is 1/(1+β). By minimizing the "divergence 
+measure" D β , we make the welfare vector S ¼ (S 1 , S 2 , …, S n ) as close to their 
+corresponding multivariate attributes as possible. From Information Theory, the vector S 
+absorbs all the objective information from data, and any deviation from S will cause some 
+distortion. The underlying assumption in this step is that we know the exact weights for 
+different attributes(α j 's) and substitution degree between attributes( β). However, in 
+reality, we do not know. Finding out the parameters is one main issue in this paper, and 
+we will discuss it later. There is also a welfare theoretic basis for this conundrum. Every 
+scalar aggregator endows individual attributes with weights, and levels of substitution, 
+that reflect social valuations. Arrow's impossibility theorems speak to the difficulty of 
+reaching consensus. Generalized entropy measures are equivalent, up to monotonically 
+increasing transformations, very flexible welfare functions. But this merely identifies a 
+family of aggregator functions. The choice of a metric entropy which satisfies the 
+triangularity property of distances resolves some of this indeterminacy, but not all. Here 
+"calibrating" toward the distribution of observed "happiness" will find parameter values 
+that would be required to "match" the underlying attributes and their valuations to the 
+"happiness" observation. No more, and no less. 
+In the second step (Maasoumi, 1986), adopted the generalized entropy index on 
+inequality for the S i distribution as the measure of multidimensional inequality, that is: </p>
+
+<p>M g S 
+ð Þ ¼ 
+X n </p>
+
+<p>i¼1 </p>
+
+<p>p i S n 
+i =p i </p>
+
+<p>À 
+Á 1 þ g À1 
+h 
+i 
+=g 1 þ g 
+ð 
+Þ; g a 0; À1 
+(6) </p>
+
+<p>M 0 S 
+ð Þ ¼ 
+X n </p>
+
+<p>i¼1 </p>
+
+<p>S n 
+i log S n 
+i =p i </p>
+
+<p>À 
+Á ; Theil's first index 
+(7) </p>
+
+<p>6 </p>
+
+<p>JES 
+42,1 </p>
+
+<p>Downloaded by University of Texas Libraries At 10:13 30 March 2018 (PT) </p>
+
+<p>M À1 S 
+ð Þ ¼ 
+X n </p>
+
+<p>i¼1 </p>
+
+<p>p i log p i =S n </p>
+
+<p>i </p>
+
+<p>À 
+Á ; Theil's second index 
+(8) </p>
+
+<p>where p i is individual i's population share (usually ¼ 1/n), and S n 
+i is normalized S i which 
+is divided by the total K ¼ 
+P n 
+i¼1 S i . </p>
+
+<p>3. Two metric entropy measures 
+The entropy measures of similarity or association we will introduce below are 
+supported by a set of desirable axiomatic properties. These include invariance to 
+non-linear (monotone) transformations, invariance to dimensionality, capability 
+to reproduce correlation and other linear measures of linear association (when that is 
+appropriate as for jointly Gaussian variables), metricness, normalization, and others. 
+In Maasoumi and Racine's (2002) and Granger et al.'s (2004) paper, they proposed 
+a metric entropy to test dependence of two univariate variable X and Y, which is 
+"Matusita-Bhattacharya-Hellinger measure of dependence" (we call it metric entropy 
+measure 1 later) given by: </p>
+
+<p>S r ¼ 
+1 
+2 </p>
+
+<p>Z þ 1 </p>
+
+<p>À1 </p>
+
+<p>Z þ 1 </p>
+
+<p>À1 </p>
+
+<p>f 1=2 x; y 
+ð ÞÀf </p>
+
+<p>1=2 
+1 </p>
+
+<p>x 
+ð Þf </p>
+
+<p>1=2 
+2 </p>
+
+<p>y 
+ð Þ </p>
+
+<p>2 
+dxdy 
+(9) </p>
+
+<p>where f(x, y) is the joint pdf of X and Y, f 1 (x) is the marginal pdf of X, and f 2 (y) is the 
+marginal pdf of Y. This metric is able to measure the non-linear dependence 
+relationship between X and Y, with the range [0, 1). S ρ is zero when X and Y are 
+independent variables and is positive but less than one otherwise. Because it is a metric, 
+we can say the larger it is, the farther the two variables are from independence. For 
+discrete or categorical variables, suppose X∈{x 1 , x 2 , …, x m }, Y∈{y 1 , y 2 , …, y n }, joint 
+probability mass function is P xy (i, j) ¼ Prob(X ¼ x i , Y ¼ y j ) and the corresponding 
+marginal probability mass functions are P x (i) ¼ Prob(X ¼ x i ) and P y ( j) ¼ Prob(Y ¼ y j ), 
+then we can rewrite (9) as: </p>
+
+<p>S r ¼ 
+1 
+2 </p>
+
+<p>X m </p>
+
+<p>i¼1 </p>
+
+<p>X n </p>
+
+<p>j¼1 </p>
+
+<p>P 1=2 
+xy i; j 
+ð ÞÀP 1=2 </p>
+
+<p>x </p>
+
+<p>i 
+ð ÞP 1=2 </p>
+
+<p>y </p>
+
+<p>j 
+ð Þ 
+h 
+i 2 : 
+(10) </p>
+
+<p>This metric can also be used to measure the distance between the distributions of X 1 
+and X 2 if we write it in the following form (we call it metric entropy measure 2 later): </p>
+
+<p>S r ¼ 
+1 
+2 </p>
+
+<p>Z þ 1 </p>
+
+<p>À1 </p>
+
+<p>f </p>
+
+<p>1=2 
+1 </p>
+
+<p>x 
+ð ÞÀf </p>
+
+<p>1=2 
+2 </p>
+
+<p>x 
+ð Þ </p>
+
+<p>2 
+dx: 
+(11) </p>
+
+<p>Equation (11) measures the closeness of random variables X 1 and X 2 's distributions. S ρ 
+equals zero if they have identical distribution, and it is positive and less than one 
+otherwise. Larger S ρ means that the difference between their distributions is larger. 
+For discrete or categorical variables, suppose X 1 , X 2 ∈{x 1 , x 2 , …, x n }[1], and the 
+corresponding probability mass functions are P 1 (i) ¼ Prob(X 1 ¼ x i ) and P 2 (i) ¼ Prob 
+(X 2 ¼ x i ), and then we can rewrite (11) as: </p>
+
+<p>S r ¼ 
+1 
+2 </p>
+
+<p>X n </p>
+
+<p>i¼1 </p>
+
+<p>P 1 i 
+ð Þ 1=2 ÀP 2 i 
+ð Þ 1=2 
+h 
+i 2 : 
+(12) </p>
+
+<p>7 </p>
+
+<p>Weights and 
+substitution 
+degree </p>
+
+<p>Downloaded by University of Texas Libraries At 10:13 30 March 2018 (PT) </p>
+
+<p>4. Numerical procedure 
+4.1 Data 
+In this paper, we use Chinese Household Income Project Survey (CHIPS) 2002[2], which 
+is provided by Shi (2009). CHIPS2002 is a countrywide survey conducted in the year 
+2002, containing samples from urban residents, migrants, and rural residents. We treat 
+urban residents, migrants (in cities) and rural residents as separate groups[3], and we 
+only keep urban residents with local hukou and migrants with rural hukou. After 
+deleting observations with missing values, the final sample contains 6,553 urban 
+residents, 5,035 migrants, and 8,533 rural residents. </p>
+
+<p>4.2 Variables 
+In attribute selection, we include five attributes proxying in four types. The first and 
+second attributes are household per capita income (income for short later)[4] and 
+household per capita net asset (net asset for short later), which represent "economic" 
+conditions. For income, it is net income, and we adjust it for provincial CPI and 
+household composition (children count as one half). In Maasoumi and Nickelsburg 
+(1988) and Pasha et al.'s (2005) papers, they both used annual nominal income. And 
+because in CHIPS there is information about assets and debts, we also choose 
+household per capita net asset to capture "permanent income." For urban residents, 
+CHIPS has information about annual personal income, and we calculate household per 
+capita income by taking the average of personal incomes in the same household. For 
+migrants, we calculate household per capita income by dividing the answer to "total 
+household income from working in cities and family production in 2002" by the size of 
+household. For rural residents, we use total annual household income divided by family 
+size. For net asset, we first calculate the household net asset by total household 
+financial asset (for rural residents, we also include fixed productive assets) minus total 
+household debt and then divide it by household size. The third attribute is household 
+per capita usable house area (house area for short later)[5], which reflect the housing 
+conditions. In Pasha et al.'s (2005) paper, they used building area. In this paper, we use 
+usable house area for two reasons. First, usable house area reflects better how much 
+space the person can use and live in. Second, most migrants cannot afford buying or 
+renting a whole apartment in cities so they share apartments or rooms with other 
+people. Thus, CHIPS only has data on usable house area for migrants. To calculate 
+household per capita usable house area, we divide the usable house area by family size 
+for urban residents and by the number of family members living together for migrants 
+and rural residents. The fourth attribute is health. It is the answer to body conditions, 
+which contains five categories, "Worst," "Worse," "Just so-so," "Good," and "Very 
+good," and we assign number 1-5 to them, respectively. The fifth attribute is years of 
+education (education for short later), which represent human capital (Maasoumi and 
+Nickelsburg, 1988). Statistical summaries are in Table I. 
+In calculating the individual's welfare S, the weights indicate the relative importance 
+of different attributes. To eliminate the effects of the scale difference in attributes, we 
+normalize them by calculating the "shares" of attributes to the total amount in their 
+group, i.e. dividing individuals' attribute amount by the total amount in their group. 
+This is also consistent with research in happiness, which finds that relative amount 
+plays an important role in determining happiness or subjective well-being. One 
+exception is net asset because for some observations the values of net asset are 
+negative. We add the absolute value of the minimal net asset (which is negative) in the 
+group to each person within the group and then calculate their share of net asset. </p>
+
+<p>8 </p>
+
+<p>JES 
+42,1 </p>
+
+<p>Downloaded by University of Texas Libraries At 10:13 30 March 2018 (PT) </p>
+
+<p>Obs. 
+Income (RMB) 
+Net asset (RMB) </p>
+
+<p>House area (m 2 </p>
+
+<p>) 
+Health (scale) </p>
+
+<p>Education (year) </p>
+
+<p>Age (year) </p>
+
+<p>Married (percent) </p>
+
+<p>Urban </p>
+
+<p>6,553 </p>
+
+<p>9,050.61 </p>
+
+<p>13,264.27 </p>
+
+<p>18.86 </p>
+
+<p>3.74 </p>
+
+<p>10.83 </p>
+
+<p>46.74 </p>
+
+<p>93.68 </p>
+
+<p>(5,874.49) </p>
+
+<p>(41,809.52) </p>
+
+<p>(10.19) </p>
+
+<p>(0.86) </p>
+
+<p>(3.18) </p>
+
+<p>(11.28) </p>
+
+<p>Migrant </p>
+
+<p>5,035 </p>
+
+<p>6,979.73 </p>
+
+<p>7,233.45 </p>
+
+<p>10.73 </p>
+
+<p>4.21 </p>
+
+<p>6.60 </p>
+
+<p>28.69 </p>
+
+<p>68.51 </p>
+
+<p>(6,278.85) </p>
+
+<p>(42,146.60) </p>
+
+<p>(10.58) </p>
+
+<p>(0.68) </p>
+
+<p>(3.50) </p>
+
+<p>(14.06) </p>
+
+<p>Rural </p>
+
+<p>8,533 </p>
+
+<p>3,176.11 </p>
+
+<p>3,262.13 </p>
+
+<p>30.34 </p>
+
+<p>3.95 </p>
+
+<p>7.12 </p>
+
+<p>45.13 </p>
+
+<p>95.47 </p>
+
+<p>(2,615.35) </p>
+
+<p>(5,780.14) </p>
+
+<p>(21.28) </p>
+
+<p>(0.78) </p>
+
+<p>(2.56) </p>
+
+<p>(10.63) </p>
+
+<p>Table I. 
+Statistical 
+description for 
+attributes </p>
+
+<p>9 </p>
+
+<p>Weights and 
+substitution 
+degree </p>
+
+<p>Downloaded by University of Texas Libraries At 10:13 30 March 2018 (PT) </p>
+
+<p>Another variable we use is the happiness level. The question for interviewees is 
+"Generally speaking, do you feel happy?" and their answers can be categorized 
+into "very happy," "happy," "so-so," "not very happy," "not happy at all," and "don't 
+know"[6]. We keep observations with the first five answers and assign values 5, 4, 3, 2, 
+and 1, respectively, to interviewees' reported happiness. Table II shows the reported 
+happiness distributions in the three groups. </p>
+
+<p>4.3 Choosing parameters 
+In assessing the multidimensional welfare of individuals, one critical issue is to choose 
+the parameters, i.e. weights for different attributes α j 's and the substitution degree β. 
+Given the data, the choice of parameters determines everyone's welfare and then the 
+distribution, which can be used to conduct some research on inequality or implement 
+some policy analysis. However, there is no wide consensus on how to choose these 
+parameters. In this paper, we will choose the parameters using a method similar to 
+calibration, which can be included in the category "Hedonic Weights" in Decancq and 
+Lugo's (2013) paper. Simply speaking, we search the whole parameter space to find the 
+set of parameters making the distance of reported happiness and objective measures of 
+individual welfare smallest. To measure the distance between reported happiness and 
+welfare, we adopt the two methods mentioned in Section 3. 
+Given individuals' attributes and parameters, we can calculate individuals' welfare S i 's, 
+which can be seen as continuous variables across observations. To compare the 
+individuals' welfare with their reported happiness, we transform individuals' welfare into 
+discrete variables. The procedure is as follows: first, we normalize S i into the range [0, 1] by: </p>
+
+<p>normalized S i ¼ 
+S i ÀS min 
+S max ÀS min 
+(13) </p>
+
+<p>where S min and S max are the minimal and maximal values among S i 's; second, we assign 
+values 1, 2, 3, 4, or 5 to individuals' welfare if their normalized S 's are in the range [0, 0.2], 
+(0.2, 0.4], (0.4, 0.6], (0.6, 0.8], or (0.8, 1]. 
+It is possible to be economical in searching the parameter space[7], we adopt 
+algorithms to reduce the computation burden and time, as follows. 
+4.3.1 Step 1: rough search. First, we go through the parameter space roughly and 
+record 50 best parameter sets. Parameter sets are judged by the smallest distance 
+between reported happiness and welfare given the parameter set in different measures. 
+For the first measure of Section 3, that is (9) and (10), the larger the value the smaller 
+the distance between reported happiness and calculated welfare because it indicates the 
+dependence of reported happiness and welfare in the individual level. We call it "Metric 
+entropy measure 1" and denote it as S 1 
+r. For the second measure of Section 3, that is (11) 
+and (12), the smaller the value the smaller the distance between reported happiness and 
+calculated welfare because it indicates the difference between reported happiness 
+and individual welfare in the distribution level. We call it "Metric entropy measure 2" and </p>
+
+<p>Not happy at all 
+Not very happy 
+So-so 
+Happy 
+Very happy </p>
+
+<p>Urban 
+2.23 
+10.21 
+31.39 
+49.02 
+7.15 
+Migrant 
+1.65 
+9.22 
+44.83 
+37.97 
+6.34 
+Rural 
+1.02 
+7.98 
+29.02 
+46.58 
+15.40 </p>
+
+<p>Table II. 
+Happiness 
+distribution (percent) </p>
+
+<p>10 </p>
+
+<p>JES 
+42,1 </p>
+
+<p>Downloaded by University of Texas Libraries At 10:13 30 March 2018 (PT) </p>
+
+<p>denote it as S 2 
+r . In this rough search, we set the interval of weights α j 's as 0.05[8] and the 
+interval of substitution degree β as 0.01, and we let α j 's change in {0, 0.05, 0.10, …, 0.95, 
+1.00} with 
+P 5 
+j¼1 a j ¼ 1 and β change in {0, 0.01, 0.02, …, 0.99, 1.00}. Then we record 50 
+best-performed parameter sets in each measure for future use. 
+4.3.2 Step 2: refinement. After we get results from the rough search in the step 1, we 
+conduct some refinement and obtain best parameter sets with α j s' change interval as 0.01. 
+Due to the huge computation burden, we only make more accurate search around the 
+best 50 results from step 1[9]. Let us denote any of the results from step 1 as 
+b 1 ; a 1 
+1 ; a 1 
+2 ; a 1 
+3 ; a 1 
+4 ; a 1 </p>
+
+<p>5 </p>
+
+<p>À 
+Á 
+. In the refinement step, we let β change in the range [ β 1 −0.01, 
+β 1 +0.01] with interval 0.01 and each α j change in the range a 1 
+j À0:05; a 1 
+j þ 0:05 </p>
+
+<p>h 
+i 
+with </p>
+
+<p>interval 0.01, and α j 's also need to satisfy 
+P 5 
+j¼1 a j ¼ 1. And after comparing the 
+distances between happiness and different parameter sets, we record best-performed 100 
+parameter sets in this step. 
+4.3.3 Step 3: bootstrap. In a sense, the best S 1 
+r and S 2 
+r can be regarded as an estimate 
+based on a specific data sample. To report some degree of reliability, we bootstrap non-
+parametrically from the data set to test the performance of the 100 parameter sets 
+recorded in step two. We record the percentage of each parameter set performing best 
+in the bootstrap procedure. </p>
+
+<p>5. Numerical results 
+The main task above is to find out relative weights for different attributes and their 
+degree of substitution. Then we can interpret the findings in two contexts. The first is 
+welfare analysis, which focusses on multidimensional index of well-being and, we use 
+certain parameter sets to investigate the inequality in different groups. The second 
+examination is a form of utility analysis, which explains the relative weights as 
+contributions to utility for each attribute. We consider some historical and family 
+characteristics to shed light on findings that help policy decisions. </p>
+
+<p>5.1 Welfare analysis 
+Table III shows the best parameter sets for metric entropy measures 1 and 2 in different 
+groups after refinement. The second column is entropy metric S ρ , the third one is β, the 
+fourth to the eighth columns are relative weights for income, net asset, house area, 
+health, and education. However, the refinement results may be not robust in the 
+statistical sense. We give the best parameter sets in bootstrap procedure (having 
+the highest percentage to be the best parameter sets) in Table IV for different metrics 
+with the bootstrap number 999. The second column is the percentage of performing 
+best for the parameter sets. Because there are some very similar parameter sets, so the </p>
+
+<p>S 1 </p>
+
+<p>r </p>
+
+<p>β 
+Income 
+Net asset 
+House area 
+Health 
+Education 
+Urban 
+0.01045 
+−0.23 
+0.19 
+0.15 
+0.10 
+0.55 
+0.01 
+Migrant 
+0.00818 
+−0.23 
+0.29 
+0.26 
+0.11 
+0.34 
+0.00 
+Rural 
+0.00950 
+−0.24 
+0.03 
+0.09 
+0.01 
+0.87 
+0.00 
+S 2 </p>
+
+<p>r </p>
+
+<p>β 
+Income 
+Net asset 
+House area 
+Health 
+Education 
+Urban 
+0.00418 
+−0.02 
+0.06 
+0.03 
+0.05 
+0.84 
+0.02 
+Migrant 
+0.00163 
+−0.13 
+0.01 
+0.00 
+0.10 
+0.86 
+0.03 
+Rural 
+0.00089 
+−0.63 
+0.00 
+0.00 
+0.00 
+0.76 
+0.24 </p>
+
+<p>Table III. 
+Best parameter set 
+in refinement for 
+S 1 
+r and S 2 </p>
+
+<p>r </p>
+
+<p>11 </p>
+
+<p>Weights and 
+substitution 
+degree </p>
+
+<p>Downloaded by University of Texas Libraries At 10:13 30 March 2018 (PT) </p>
+
+<p>percentage is not very high. The third to ninth columns are the same to the second to 
+eighth columns in Table III. And also we can see that the percentage in metric entropy 
+measure 2 is higher than in metric entropy measure 1, which means parameter sets 
+perform more stable in metric entropy measure 2. 
+In addition, we can obtain the desired parameter sets by taking the percentage-
+weighted average of the bootstrap results (in Table V). In this way, how much weight 
+we give to different parameter sets is the percentage they become the best parameter 
+set in bootstrap procedure, so we give larger weights to parameter sets which perform 
+better in the statistical sense. 
+Another way to calculate the relative weight from the data is using the (normalized) 
+metric entropy measures between each attribute and happiness as their respective 
+relative weights. The results are in Table VI. However, this results are not consistent 
+with other results. The possible reason is that this method does not take into 
+consideration of substitution effects in different attributes, i.e. β. So it may provide </p>
+
+<p>% 
+S 1 </p>
+
+<p>r </p>
+
+<p>β 
+Income 
+Net asset 
+House area 
+Health 
+Education 
+Urban 
+5.3 
+0.01028 
+0.00 
+0.24 
+0.13 
+0.02 
+0.38 
+0.23 
+Migrant 
+9.7 
+0.00770 
+−0.20 
+0.20 
+0.28 
+0.13 
+0.39 
+0.00 
+Rural 
+12.0 
+0.00920 
+−0.51 
+0.05 
+0.00 
+0.01 
+0.94 
+0.00 
+% 
+S 2 </p>
+
+<p>r </p>
+
+<p>β 
+Income 
+Net asset 
+House area 
+Health 
+Education 
+Urban 
+11.5 
+0.00441 
+−0.09 
+0.06 
+0.11 
+0.03 
+0.74 
+0.06 
+Migrant 
+20.0 
+0.00163 
+−0.13 
+0.01 
+0.00 
+0.10 
+0.86 
+0.03 
+Rural 
+41.7 
+0.00089 
+−0.63 
+0.00 
+0.00 
+0.00 
+0.76 
+0.24 </p>
+
+<p>Table IV. 
+Best parameter 
+set in bootstrap 
+for S 1 
+r and S 2 </p>
+
+<p>r </p>
+
+<p>β 
+Income 
+Net asset 
+House area 
+Health 
+Education </p>
+
+<p>S 1 </p>
+
+<p>r </p>
+
+<p>Urban 
+−0.170 
+0.209 
+0.164 
+0.075 
+0.490 
+0.062 
+Migrant 
+−0.235 
+0.267 
+0.284 
+0.089 
+0.360 
+0.000 
+Rural 
+−0.331 
+0.044 
+0.038 
+0.015 
+0.899 
+0.004 
+S 2 </p>
+
+<p>r </p>
+
+<p>Urban 
+−0.032 
+0.058 
+0.052 
+0.047 
+0.813 
+0.030 
+Migrant 
+−0.133 
+0.005 
+0.006 
+0.105 
+0.848 
+0.036 
+Rural 
+−0.587 
+0.016 
+0.001 
+0.000 
+0.815 
+0.167 </p>
+
+<p>Table V. 
+Weighted average 
+parameter set 
+in bootstrap for 
+S 1 
+r and S 2 </p>
+
+<p>r </p>
+
+<p>Income 
+Net asset 
+House area 
+Health 
+Education </p>
+
+<p>S 1 </p>
+
+<p>r </p>
+
+<p>Urban 
+0.253 
+0.027 
+0.114 
+0.466 
+0.140 
+Migrant 
+0.112 
+0.174 
+0.281 
+0.297 
+0.136 
+Rural 
+0.064 
+0.077 
+0.069 
+0.717 
+0.073 
+S 2 </p>
+
+<p>r </p>
+
+<p>Urban 
+0.354 
+0.212 
+0.371 
+0.013 
+0.050 
+Migrant 
+0.377 
+0.253 
+0.270 
+0.058 
+0.042 
+Rural 
+0.339 
+0.266 
+0.312 
+0.009 
+0.074 </p>
+
+<p>Table VI. 
+Relative weights by 
+calculating S 1 
+r and 
+S 2 
+r between 
+attributes and 
+happiness </p>
+
+<p>12 </p>
+
+<p>JES 
+42,1 </p>
+
+<p>Downloaded by University of Texas Libraries At 10:13 30 March 2018 (PT) </p>
+
+<p>some evidence for the importance of adding attribute substitution into the 
+multidimensional indices of well-being. 
+Next, we calculate the inequality based on the parameter sets we obtained above. Here 
+we use the best and weighted average parameter sets in bootstrap to calculate individuals' 
+welfare without discretizing them, and then we calculate Theil's first and second indices 
+and generalized entropy index with γ ¼ −1/2 using R package "<rs type="software">ineq</rs>." Here we use 
+generalized entropy index with γ ¼ −1/2 because the metric entropy measure we use is the 
+same entropy metric with γ ¼ −1/2. The results are in Table VII. The second column is the 
+inequality in reported happiness, where happiness is a discrete variable. The third and 
+fourth columns are inequality of welfare S calculated through the best and weighted 
+average parameter sets in the bootstrap, using metric entropy measure 1. The fifth and 
+sixth columns are inequality of welfare S calculated through the best and weighted 
+average parameter sets in the bootstrap, using metric entropy measure 2. The results for 
+discrete individual welfare are in Table VIII. When we analyze inequality results, we 
+should focus more on results from metric entropy measure 2 because it focusses on the 
+similarity of two distributions. It is interesting to note from Tables VII and VIII, that 
+inequality in self-reported "happiness" is always higher than that in multidimensional 
+welfare based on entropy metric 2. One possible explanation is that this is due to the </p>
+
+<p>Happiness 
+Best in S 1 </p>
+
+<p>r </p>
+
+<p>Average in S 1 </p>
+
+<p>r </p>
+
+<p>Best in S 2 </p>
+
+<p>r </p>
+
+<p>Average in S 2 </p>
+
+<p>r </p>
+
+<p>Theil's 1st index 
+Urban 
+0.03310635 
+0.02096783 
+0.01882967 
+0.01938336 
+0.02362107 
+Migrant 
+0.02997603 
+0.02424105 
+0.02820155 
+0.01788124 
+0.01882405 
+Rural 
+0.0297519 
+0.02066842 
+0.01913168 
+0.01961511 
+0.01907011 
+Theil's 2nd index 
+Urban 
+0.03863011 
+Inf a 
+0.01963884 
+0.02109975 
+0.0265901 
+Migrant 
+0.0335238 
+0.02364874 
+0.02687041 
+0.0197093 
+0.02074389 
+Rural 
+0.03345007 
+0.02405269 
+0.02212287 
+0.022138 
+0.02167807 
+GE (γ ¼ −1/2) 
+Urban 
+0.03546201 
+0.04373861 
+0.01915617 
+0.02013176 
+0.02487101 
+Migrant 
+0.0314595 
+0.02378915 
+0.02732712 
+0.01866831 
+0.01965113 
+Rural 
+0.03133147 
+0.02212602 
+0.02042914 
+0.02071965 
+0.02021248 
+Note: a Inf comes from the fact that some person's welfare equals to zero </p>
+
+<p>Table VII. 
+Inequality indices 
+for happiness and 
+original individual 
+welfare S </p>
+
+<p>Happiness 
+Best in S 1 </p>
+
+<p>r </p>
+
+<p>Average in S 1 </p>
+
+<p>r </p>
+
+<p>Best in S 2 </p>
+
+<p>r </p>
+
+<p>Average in S 2 </p>
+
+<p>r </p>
+
+<p>Theil's 1st index 
+Urban 
+0.03310635 
+0.02214269 
+0.02716573 
+0.02494992 
+0.02496797 
+Migrant 
+0.02997603 
+0.04447686 
+0.0621958 
+0.02500336 
+0.02569485 
+Rural 
+0.0297519 
+0.02979672 
+0.02786803 
+0.02747622 
+0.02431393 
+Theil's 2nd index 
+Urban 
+0.03863011 
+0.02415579 
+0.02813996 
+0.02798481 
+0.02833565 
+Migrant 
+0.0335238 
+0.04900813 
+0.0639305 
+0.02733607 
+0.02806306 
+Rural 
+0.03345007 
+0.03405223 
+0.03188229 
+0.03125789 
+0.02858245 
+GE (γ ¼ −1/2) 
+Urban 
+0.03546201 
+0.02299552 
+0.02753501 
+0.02624043 
+0.02639708 
+Migrant 
+0.0314595 
+0.04646297 
+0.06276656 
+0.02599023 
+0.02670232 
+Rural 
+0.03133147 
+0.03159864 
+0.02957278 
+0.02909023 
+0.02613244 </p>
+
+<p>Table VIII. 
+Inequality indices 
+for happiness and 
+discrete individual 
+welfare S </p>
+
+<p>13 </p>
+
+<p>Weights and 
+substitution 
+degree </p>
+
+<p>Downloaded by University of Texas Libraries At 10:13 30 March 2018 (PT) </p>
+
+<p>substitution between different attributes. Individuals may report based on the most 
+pressing needs and dimensions, as perceived by them at a moment in time. Even though 
+our approach aggregates different dimensions "toward' this self-reported indicator, it still 
+allows for formal consideration of other objective indicators. Another possible explanation 
+is that there exist some hidden factors such as personality which affect happiness and are 
+not captured by the variables used in this paper[10]. </p>
+
+<p>5.2 Utility analysis 
+The other way to interpret the best parameter sets we get is to explain them as the 
+utility of different groups, and we can compare the difference across groups. In this 
+sense, parameter sets obtained by metric entropy measure 1 may be more suitable, 
+since using it implicitly imposes a correspondence relationship between reported 
+happiness and aggregated welfare. Thus, we will mainly use the S 1 
+r 's results to 
+represent the utilities in different groups. And because some parameter sets are very 
+close in the results, we group them up. The principle is that substitution degree is 
+within 0.1 from the group mean and the sum of distance of relative weights to group 
+mean is &lt;0.2. The results are in Table IX. For the weighted average parameter sets, the 
+numbers in the parenthesis are the standard errors, and for grouped parameter sets, the 
+numbers in the bracket are the ranges. To gain greater intuition, we plot the absolute 
+value of β and α j 's in Figures 1 and 2. 
+By comparing the parameter values of the three groups, we find some similarities and 
+differences. First, it seems the average substitution degrees across different attributes in 
+different groups are relatively similar, and they are different from perfect substitution, 
+which suggests that it may be problematical assuming perfect substitution (as in linear 
+aggregators and regressions). Second, migrants' preference is very similar to urban 
+residents other than for education. Education does not contribute to migrants' utility. 
+A possible explanation is that this phenomenon is related to the Household Registration 
+(Hukou) system in China. There are segregated labor markets in Chinese cities, and 
+migrants are discriminated against for entry in mainly the "good" industries, where 
+"good" means higher wages combined with higher demand for education and skills (Chen 
+et al., 2009, 2012; Meng and Zhang, 2001). Thus, the contribution of migrants' education to 
+welfare is nearly zero. Third, compared with urban residents and migrants, rural residents </p>
+
+<p>β 
+Income 
+Net asset 
+House area 
+Health 
+Education </p>
+
+<p>Weighted average 
+Urban 
+−0.170 
+0.209 
+0.164 
+0.075 
+0.490 
+0.062 
+(0.097) 
+(0.023) 
+(0.090) 
+(0.036) 
+(0.085) 
+(0.100) 
+Migrant 
+−0.235 
+0.267 
+0.284 
+0.089 
+0.360 
+0.000 
+(0.054) 
+(0.037) 
+(0.061) 
+(0.028) 
+(0.053) 
+(0.000) 
+Rural 
+−0.331 
+0.044 
+0.038 
+0.015 
+0.899 
+0.004 
+(0.162) 
+(0.012) 
+(0.038) 
+(0.008) 
+(0.026) 
+(0.005) 
+Grouped 
+Urban 
+−0.005 
+0.240 
+0.120 
+0.020 
+0.377 
+0.243 </p>
+
+<p>
+Table IX. 
+Weighted average 
+and grouped 
+parameter set in 
+bootstrap for S 1 </p>
+
+<p>r </p>
+
+<p>14 </p>
+
+<p>JES 
+42,1 </p>
+
+<p>Downloaded by University of Texas Libraries At 10:13 30 March 2018 (PT) </p>
+
+<p>put most of their weights on health and less on economic factors (income, net asset, and 
+house area) and education. On the one hand, from happiness literature (Clark et al., 2008; 
+Luttmer, 2005), relative income matters a lot for happiness, which means people would like 
+to compare their income and asset with others. Rural residents are less exposed to external 
+world due to lack of media so they are less likely to compare their income or property with 
+others[11]. Thus, economic factors matter relatively less to their utility. On the other hand, 
+the relatively poor medical conditions and lack of medical security in rural area may be 
+another reason why rural residents care more about health[12]. </p>
+
+<p>5.3 Control for marital status 
+One concern of the above method is that it only includes five attributes due to data 
+limitations, and many other characteristics correlated with happiness are omitted, such </p>
+
+<p>1 </p>
+
+<p>0.9 </p>
+
+<p>0.8 </p>
+
+<p>0.7 </p>
+
+<p>0.6 </p>
+
+<p>0.5 </p>
+
+<p>0.4 </p>
+
+<p>0.3 </p>
+
+<p>0.2 </p>
+
+<p>0.1 </p>
+
+<p>0 
+beta(abs) income 
+asset 
+house 
+health education </p>
+
+<p>Urban 
+Migrant 
+Rural </p>
+
+<p>Figure 2. 
+Grouped 
+parameter set </p>
+
+<p>1 </p>
+
+<p>0.9 </p>
+
+<p>0.8 </p>
+
+<p>0.7 </p>
+
+<p>0.6 </p>
+
+<p>0.5 </p>
+
+<p>0.4 </p>
+
+<p>0.3 </p>
+
+<p>0.2 </p>
+
+<p>0.1 </p>
+
+<p>0 
+beta(abs) income 
+asset 
+house 
+health education </p>
+
+<p>Urban 
+Migrant 
+Rural </p>
+
+<p>Figure 1. 
+Weighted average 
+parameter set </p>
+
+<p>15 </p>
+
+<p>Weights and 
+substitution 
+degree </p>
+
+<p>Downloaded by University of Texas Libraries At 10:13 30 March 2018 (PT) </p>
+
+<p>as age and marital status. Here we adopt cell decomposition method to address this 
+issue[13]. As is shown in Table AI in the Appendix, the subgroup/cell differences in 
+characteristics mainly come from marital status rather than age. This is based on 
+summary statistics, including quantiles. Thus, we divide the sample further according 
+to marital status within each group in order to isolate its potential impact. 
+Table X shows the weighted average parameter set for married and unmarried within 
+each group, respectively. We can see that substitution degrees are different between the 
+married and unmarried within each group, but especially for urban and rural residents. 
+Although there also exist differences in weights for different marital status, the differences 
+are not very large. It should be noted that migrant group is youngest and most single. </p>
+
+<p>6. Conclusion 
+In this paper,with CHIPS2002 data, we combine multidimensional welfare analysis and 
+entropy metrics to identify the best relative weights and substitution degree among 
+five attributes which make individuals' welfare have the smallest distance to reported 
+happiness for three social groups, urban residents, migrants, and rural residents. We 
+use the obtained parameter sets to calculate inequality in the three groups. In addition, 
+we compare the differences among the three groups and attempt to link them to 
+institutional factors. Main findings in this paper are as follows: first, substitution 
+among attributes matters for multidimensional indices of well-being; second, there are 
+significant group differences in relative weights of attributes in China, which may be 
+related to some social and institutional factors; third, inequality in calculated welfare 
+from metric entropy measure 2 is less than reported happiness inequality. From this 
+study, we learn that we should incorporate substitution among attributes and take into 
+consideration group heterogeneity in multidimensional assessments of well-being and 
+poverty. This would seem to suggest that one size-fits-all policies are not appropriate 
+for China, and perceptions of well-being, objectively and as self-reported, reflect very 
+different concerns, requiring very different approaches. For example, health issues 
+dominate rural perceptions of well-being, whereas education and income are more 
+prominent among other groups. Based on finite and different substitution values, it is 
+safe to assume that different groups place very different monetary values on non-
+monetary attributes. This is quite significant for policy analysis going forward. 
+There are several potential future research directions. First, we can search more 
+precisely in our numerical algorithms. Second, we can further investigate the role of 
+attribute substitution in multidimensional well-being. Third, we can adopt clustering 
+techniques to identify unique attribute dimensions and reduce double counting 
+(Hirschberg et al., 1991, 2001). Fourth, when CHIPS2007 releases specific data on asset </p>
+
+<p>S 1 </p>
+
+<p>r </p>
+
+<p>β 
+Income 
+Net asset 
+House area 
+Health 
+Education </p>
+
+<p>Married 
+Urban 
+−0.097 
+0.250 
+0.060 
+0.115 
+0.461 
+0.115 
+Migrant 
+−0.256 
+0.263 
+0.313 
+0.071 
+0.318 
+0.035 
+Rural 
+−0.260 
+0.044 
+0.042 
+0.020 
+0.893 
+0.002 
+Unmarried 
+Urban 
+−0.334 
+0.134 
+0.053 
+0.174 
+0.193 
+0.446 
+Migrant 
+−0.443 
+0.186 
+0.075 
+0.098 
+0.639 
+0.002 
+Rural 
+−0.764 
+0.183 
+0.206 
+0.099 
+0.470 
+0.041 </p>
+
+<p>Table X. 
+Weighted average 
+parameter set in 
+bootstrap for 
+married and 
+unmarried </p>
+
+<p>16 </p>
+
+<p>JES 
+42,1 </p>
+
+<p>Downloaded by University of Texas Libraries At 10:13 30 March 2018 (PT) </p>
+
+<p>and housing, we can investigate how the relative weights and substation degree change 
+over time. </p>
+
+<p>Notes 
+1. In this case, we need the two random variables in the same support. </p>
+
+<p>2. We cannot use panel data to control individual fixed effect because CHIPS data is cross-
+sectional. However, the focus of this paper is not on investigating the causality of happiness 
+but on the methodology of constructing a mapping from self-reported happiness to a 
+number of objectively measured attributes. </p>
+
+<p>3. On the one hand, we expect the welfare functions of different groups to be different due to 
+the great disparity in their living environment, opportunities, and life style (Meng and 
+Zhang, 2001), and we wish to compare their differences. On the other hand, if we combine all 
+the groups into one, we will get a biased result for welfare function or distribution because 
+we lack an accurate and reliable proportion of the three groups, most of which comes from 
+the lack of exact data on migrants. </p>
+
+<p>4. We use income rather than consumption for two reasons. First, consumption data are 
+not available for CHIPS. Second, income is a generally broader indicator of economic 
+opportunity. </p>
+
+<p>5. Due to data limitation, we cannot impute housing expenses for people who live in their own 
+houses. However, our computation is mainly based on each group (urban residents, 
+migrants and rural residents) so it partly alleviates this problem. </p>
+
+<p>6. We treat answers in the category "don't know" as missing values, and the fractions are &lt;1 
+percent in all the three samples. </p>
+
+<p>7. In theory, it is very intensive to search all of the parameter space because it is continuous. </p>
+
+<p>8. If we reduce the α j 's' interval to 0.01, the computation time will increase approximately 
+5 4 ¼ 625 times. </p>
+
+<p>9. The implicit assumption is that there is continuity with respect to parameter intervals. We 
+make some trials and find that this holds for well-performed parameters after refinement. 
+With more powerful computation ability, we can let parameters change in smaller intervals, 
+and then the continuity assumption is more plausible. </p>
+
+<p>10. We thank anonymous referee for this explanation. </p>
+
+<p>11. Another possible explanation is that rural residents conduct self-consumed production, and 
+that is not included in the income variable. Thus, income is not relatively important for rural 
+residents. We thank anonymous referee for pointing this out. </p>
+
+<p>12. From Table I, we can see that average age of rural residents is not larger than that of urban 
+residents, so age should not be the reason why rural residents care more about health. </p>
+
+<p>13. Another method is regression-or model-based method to adjust all the attributes for age 
+and marital status. One problem is that it is hard to adjust category variables such as 
+happiness and health with this method, another challenge is specification issues for proper 
+modeling for each attribute, and jointly. </p>
+
+
+
+
+
+<p>Weights and 
+substitution 
+degree </p>
+
+<p>Downloaded by University of Texas Libraries At 10:13 30 March 2018 (PT) </p>
+
+
+
+<p>18 </p>
+
+<p>JES 
+42,1 </p>
+
+<p>Downloaded by University of Texas Libraries At 10:13 30 March 2018 (PT) </p>
+
+<p>Appendix </p>
+
+<p>Corresponding author 
+Professor Esfandiar Maasoumi can be contacted at: esfandiar.maasoumi@emory.edu </p>
+
+<p>Income 
+Net asset 
+House area 
+Health 
+Education 
+Happiness 
+Obs. 
+(RMB) 
+(RMB) 
+(m 2 ) 
+(scale) 
+(year) 
+(scale) </p>
+
+<p>Age o30 and unmarried 
+Urban 
+88 
+9,771.57 
+12,429.08 
+18.93 
+4.15 
+12.92 
+3.50 
+(9,940.64) 
+(19,314.31) 
+(14.15) 
+(0.78) 
+(2.60) 
+(0.82) 
+Migrant 
+1,513 
+6,698.52 
+7,338.93 
+10.50 
+4.26 
+4.38 
+3.37 
+(5,956.73) 
+(51,368.19) 
+(10.34) 
+(0.60) 
+(3.91) 
+(0.80) 
+Rural 
+111 
+2,610.78 
+2,497.21 
+31.50 
+4.18 
+7.97 
+3.60 
+(1,709.03) 
+(3,450.37) 
+(21.44) 
+(0.56) 
+(2.83) 
+(1.01) 
+Age o30 and married 
+Urban 
+167 
+7,920.34 
+7,361.50 
+17.76 
+4.16 
+12.44 
+3.62 
+(4,968.59) 
+(16,387.08) 
+(8.81) 
+(0.79) 
+(2.66) 
+(0.89) 
+Migrant 
+744 
+7,002.45 
+5,045.39 
+10.05 
+4.28 
+8.64 
+3.37 
+(4,192.52) 
+(11,531.09) 
+(8.25) 
+(0.67) 
+(2.37) 
+(0.80) 
+Rural 
+329 
+2,738.15 
+2,874.91 
+24.44 
+4.12 
+7.77 
+3.61 
+(2,727.24) 
+(4,238.83) 
+(14.50) 
+(0.72) 
+(2.25) 
+(0.98) 
+30 ⩾ Age ⩽ and unmarried 
+Urban 
+168 
+8,330.37 
+12,709.83 
+21.06 
+3.68 
+11.09 
+3.02 
+(5,168.96) 
+(28,324.24) 
+(15.60) 
+(0.90) 
+(3.09) 
+(0.99) 
+Migrant 
+41 
+7,173.61 
+8,843.88 
+13.48 
+4.12 
+6.63 
+2.95 
+(5,056.30) 
+(20,823.30) 
+(11.08) 
+(0.64) 
+(3.37) 
+(0.74) 
+Rural 
+123 
+3,090.98 
+1,969.45 
+33.13 
+3.84 
+6.85 
+3.10 
+(2,832.77) 
+(4,201.32) 
+(29.86) 
+(0.92) 
+(2.80) 
+(1.11) 
+30 ⩾ Age ⩽ 50 and married 
+Urban 
+3,953 
+8,972.41 
+13,071.21 
+17.82 
+3.82 
+11.17 
+3.46 
+(6,040.24) 
+(48,764.71) 
+(9.20) 
+(0.84) 
+(2.90) 
+(0.86) 
+Migrant 
+2,460 
+7,227.42 
+7,877.01 
+10.78 
+4.21 
+7.50 
+3.40 
+(6,815.61) 
+(43,474.59) 
+(10.95) 
+(0.68) 
+(2.68) 
+(0.79) 
+Rural 
+5,288 
+3,339.56 
+3,393.75 
+29.50 
+4.06 
+7.48 
+3.68 
+(2,711.24) 
+(6,318.62) 
+(21.06) 
+(0.72) 
+(2.44) 
+(0.85) 
+Age W50 and unmarried 
+Urban 
+158 
+9,167.59 
+13,077.64 
+25.37 
+3.45 
+8.81 
+3.46 
+(5,712.32) 
+(18,172.00) 
+(14.61) 
+(0.93) 
+(4.01) 
+(0.84) 
+Migrant 
+27 
+6,789.93 
+10,641.35 
+9.32 
+3.70 
+4.15 
+3.37 
+(10,917.96) 
+(36,551.89) 
+(8.04) 
+(1.14) 
+(3.52) 
+(0.88) 
+Rural 
+152 
+3,010.61 
+2,848.60 
+32.01 
+3.44 
+5.31 
+3.39 
+(1,935.27) 
+(5,665.93) 
+(22.70) 
+(0.96) 
+(2.84) 
+(1.07) 
+Age W50 and married 
+Urban 
+2,014 
+9,322.74 
+14,243.70 
+20.31 
+3.54 
+10.09 
+3.57 
+(5,416.78) 
+(29,771.28) 
+(10.57) 
+(0.86) 
+(3.44) 
+(0.81) 
+Migrant 
+236 
+6,090.95 
+5,883.73 
+12.84 
+3.83 
+5.55 
+3.33 
+(7,303.52) 
+(24,484.50) 
+(11.49) 
+(0.97) 
+(3.35) 
+(0.88) 
+Rural 
+2,510 
+2,931.13 
+3,168.23 
+32.56 
+3.72 
+6.36 
+3.73 
+(2,422.56) 
+(4,857.50) 
+(21.56) 
+(0.84) 
+(2.60) 
+(0.83) </p>
+
+<p>Table AI. 
+Statistical 
+description for 
+attributes by cells </p>
+
+<p>For instructions on how to order reprints of this article, please visit our website: 
+www.emeraldgrouppublishing.com/licensing/reprints.htm 
+Or contact us for further details: permissions@emeraldinsight.com </p>
+
+<p>19 </p>
+
+<p>Weights and 
+substitution 
+degree </p>
+
+<p>Downloaded by University of Texas Libraries At 10:13 30 March 2018 (PT) </p>
+
+</text></tei>
