@@ -68,6 +68,7 @@ public class SoftwareParser extends AbstractParser {
 
     private SoftwareLexicon softwareLexicon = null;
 	private EngineParsers parsers;
+    private SoftwareDisambiguator disambiguator;
 
     private SoftwareParser() {
         super(GrobidModels.SOFTWARE);
@@ -92,17 +93,9 @@ public class SoftwareParser extends AbstractParser {
                 return null;
             }
 
-            String ress = null;
-            List<String> texts = new ArrayList<>();
-            for (LayoutToken token : tokens) {
-                if (!token.getText().equals(" ") && !token.getText().equals("\t") && !token.getText().equals("\u00A0")) {
-                    texts.add(token.getText());
-                }
-            }
-
             // to store software name positions (names coming from the optional dictionary)
             List<OffsetPosition> softwareTokenPositions = softwareLexicon.tokenPositionsSoftwareNames(tokens);
-            ress = addFeatures(tokens, softwareTokenPositions);
+            String ress = addFeatures(tokens, softwareTokenPositions);
             String res;
             try {
                 res = label(ress);
@@ -114,6 +107,9 @@ public class SoftwareParser extends AbstractParser {
 
             // we group the identified components by full entities
             entities = groupByEntities(components);
+
+            // disambiguation
+            entities = disambiguator.disambiguate(entities, tokens);
         } catch (Exception e) {
             throw new GrobidException("An exception occured while running Grobid.", e);
         }
@@ -125,7 +121,7 @@ public class SoftwareParser extends AbstractParser {
      * Identify components corresponding to the same software entities
      */
     public List<SoftwareEntity> groupByEntities(List<SoftwareComponent> components) {
-System.out.println(components.size() + " components found");
+//System.out.println(components.size() + " components found");
 
         // we anchor the process to the software names and aggregate other closest components
         // to form full entities
@@ -133,10 +129,10 @@ System.out.println(components.size() + " components found");
         SoftwareEntity currentEntity = null;
         // first pass for creating entities based on software names
         for(SoftwareComponent component : components) {
-System.out.println(component.toJson());
-System.out.println(component.getLabel().getLabel());
+//System.out.println(component.toJson());
+//System.out.println(component.getLabel().getLabel());
             if (component.getLabel().equals(SoftwareTaggingLabels.SOFTWARE)) {
-System.out.println("entity added");                
+//System.out.println("entity added");                
                 currentEntity = new SoftwareEntity();
                 currentEntity.setSoftwareName(component);
                 currentEntity.setType(SoftwareLexicon.Software_Type.SOFTWARE);
@@ -162,8 +158,8 @@ System.out.println("entity added");
             if (component.getLabel().equals(SoftwareTaggingLabels.SOFTWARE))
                 continue;
 
-System.out.println(component.toJson());
-System.out.println(component.getLabel().getLabel());
+//System.out.println(component.toJson());
+//System.out.println(component.getLabel().getLabel());
 
             while ( (currentEntity != null) && 
                  (component.getOffsetStart() >= currentEntity.getSoftwareName().getOffsetEnd()) ) {
@@ -573,17 +569,9 @@ System.out.println(component.getLabel().getLabel());
                 if (tokens.size() == 0)
                     continue;
 
-                String ress = null;
-                /*List<String> texts = new ArrayList<>();
-                for (LayoutToken token : tokens) {
-                    if (!token.getText().equals(" ") && !token.getText().equals("\t") && !token.getText().equals("\u00A0")) {
-                        texts.add(token.getText());
-                    }
-                }*/
-
                 // to store unit term positions
                 List<OffsetPosition> softwareTokenPositions = softwareLexicon.tokenPositionsSoftwareNames(tokens);
-                ress = addFeatures(tokens, softwareTokenPositions);
+                String ress = addFeatures(tokens, softwareTokenPositions);
                 String res = null;
                 try {
                     res = label(ress);
@@ -649,19 +637,9 @@ System.out.println(component.getLabel().getLabel());
                 if (tokenizations.size() == 0)
                     continue;
 
-                String ress = null;
-                /*List<String> texts = new ArrayList<String>();
-                for (LayoutToken token : tokenizations) {
-                    if (!token.getText().equals(" ") && 
-                        !token.getText().equals("\t") && 
-                        !token.getText().equals("\u00A0")) {
-                        texts.add(token.getText());
-                    }
-                }*/
-
                 // to store unit term positions
                 List<OffsetPosition> softwareTokenPositions = softwareLexicon.tokenPositionsSoftwareNames(tokenizations);
-                ress = addFeatures(tokenizations, softwareTokenPositions);
+                String ress = addFeatures(tokenizations, softwareTokenPositions);
                 String res = null;
                 try {
                     res = label(ress);
