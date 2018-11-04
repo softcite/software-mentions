@@ -74,6 +74,7 @@ public class SoftwareParser extends AbstractParser {
         super(GrobidModels.SOFTWARE);
         softwareLexicon = SoftwareLexicon.getInstance();
 		parsers = new EngineParsers();
+        disambiguator = SoftwareDisambiguator.getInstance();
     }
 
     /**
@@ -360,11 +361,15 @@ public class SoftwareParser extends AbstractParser {
            
             // labeled result from CRF lib
             String res = label(ress);
-//System.out.println(res);
+
             List<SoftwareComponent> components = extractSoftwareComponents(text, res, layoutTokens);
 
-            // we group the identified components by full entities
-            entities.addAll(groupByEntities(components));
+            List<SoftwareEntity> localEntities = groupByEntities(components);
+
+            // disambiguation
+            localEntities = disambiguator.disambiguate(localEntities, layoutTokens);
+
+            entities.addAll(localEntities);
         }
         return entities;
     }
@@ -408,7 +413,12 @@ public class SoftwareParser extends AbstractParser {
             List<SoftwareComponent> components = extractSoftwareComponents(text, res, localLayoutTokens);
 
             // we group the identified components by full entities
-            entities.addAll(groupByEntities(components));
+            List<SoftwareEntity> localEntities = groupByEntities(components);
+
+            // disambiguation
+            localEntities = disambiguator.disambiguate(localEntities, localLayoutTokens);
+
+            entities.addAll(localEntities);
 
             localLayoutTokens = null;
             pos++;

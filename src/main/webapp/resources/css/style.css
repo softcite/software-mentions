@@ -16,6 +16,7 @@
     -moz-border-radius: 3px;
     border-radius: 3px;
 }
+
 .label.software {
     background-color: #800080;
 }
@@ -36,6 +37,7 @@ html, body {
   background-color: #D8D8D8;
   color:#70695C; 
   word-break:normal;
+  font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 body {
   padding-top: 20px; /* 40px to make the container go all the way to the bottom of the topbar */
@@ -147,15 +149,52 @@ a.version-number { border-color: #0066ff !important; }
 a.url { border-color: #ff3399 !important; } 
 a.creator { border-color: #993300 !important; } 
 
-/*.table th{background-color:#FCF8E3;} */
-.table {background-color:#fff;border:0px solid #ddd;}
+table.statements {
+  border-collapse: separate; 
+  font-size: 12px;
+  font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  border-spacing: 2;
+  padding: 0px;
+  border-collapse: separate;
+}
+table.statements tr { 
+  font-size: 12px;
+  background-color: #FCF8E3; 
+  word-break:normal; 
+  font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  border-spacing: 2;
+  padding: 0px;
+  border-collapse: separate;
+}
+table.statements td { 
+  font-size: 12px;
+  font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding: 0px;
+}
+
+table.concept th {}
+table.concept tr {}
+table.concept td {
+  word-break:normal; 
+  padding:4px;
+  border-top:1px solid #ddd;
+}
+
+/*.table {background-color:#fff;border:0px solid #ddd;}
 .table th {background-color:#fff;} 
 .table tr {background-color:#fff;border:0px solid #ddd;}
 .table td {background-color:#fff;border:0px;font-size:14;}
-/*.table tr{background-color:#FCF8E3;} */
-.table tbody tr.highlight td { background-color: #F2DEDE; word-break:normal; }
-  
-p {word-break:normal;}
+.table tbody tr.highlight td { background-color: #F2DEDE; word-break:normal; }*/
+
+div {
+  font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+}
+p {
+  word-break:normal;
+  font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+}
 span {word-break:normal;}
 
 [rel=popover][data-color=software] + .popover .popover-title {
@@ -176,7 +215,7 @@ span {word-break:normal;}
 
 .info-sense-box,.details-list {
 	margin:1px 1;padding:5px 2px 3px 2px;border:1px solid #87A1A8;background-color:#87A1A8;border-radius:5px;
-	font-size:12px;
+	font-size:14px;
 }
 
 /* entity */
@@ -196,3 +235,20 @@ span {word-break:normal;}
     background-color: #993300;
 }
 
+/* for chevron toggle icon*/
+.panel-heading .accordion-toggle h5:after {
+    /* chevron icon for "opening" panels */
+    font-family: 'FontAwesome';
+    content: "\f077";
+    float: right;
+    color: grey;
+    overflow: hidden;
+}
+.panel-heading .accordion-toggle.collapsed h5:after {
+    /* chevron icon for "collapsed" panels */
+    content: "\f078";
+}
+
+a.accordion-toggle{
+    text-decoration: none;
+}

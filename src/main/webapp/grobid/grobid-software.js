@@ -5,6 +5,7 @@
  */
 
 var grobid = (function ($) {
+    var supportedLanguages = ["en", "es", "it", "fr", "de"];
 
     // for components view
     var entities = null;
@@ -114,7 +115,7 @@ var grobid = (function ($) {
 
     function ShowRequest(formData, jqForm, options) {
         var queryString = $.param(formData);
-        $('#infoResult').html('<font color="grey">Requesting server...</font>');
+        $('#infoResult').html('<font color="red">Requesting server...</font>');
         return true;
     }
 
@@ -350,46 +351,61 @@ var grobid = (function ($) {
         //var string = responseJson.text;
 
         display += '<tr style="background-color:#FFF;">';
-        entities = responseJson.entities;      
+        entities = responseJson.entities;
+        var lang = 'en';
+        if (responseJson.lang)   
+            lang = responseJson.lang;
         if (entities) {
             var pos = 0; // current position in the text
 
             for (var currentEntityIndex = 0; currentEntityIndex < entities.length; currentEntityIndex++) {
-                var annotation = entities[currentEntityIndex];
-                var entityType = annotation.type;
+
+                var entity = entities[currentEntityIndex];
+                var identifier = entity.wikipediaExternalRef;
+                var wikidataId = entity.wikidataId;
+                
+                var localLang = lang
+                if (entity.lang)
+                    localLang = entity.lang;
+
+                if (identifier && (conceptMap[identifier] == null)) {
+                    fetchConcept(identifier, localLang, function (result) {
+                        conceptMap[result.wikipediaExternalRef] = result;
+                    });
+                }
 
                 var pieces = []
 
-                var softwareName = annotation['software-name']
+                var softwareName = entity['software-name']
                 softwareName['subtype'] = 'software'
                 pieces.push(softwareName)
                 
-                var versionNumber = annotation['version-number']
+                var versionNumber = entity['version-number']
                 if (versionNumber) {
                     versionNumber['subtype'] = 'version-number'
                     pieces.push(versionNumber);
                 }
                 
-                var versionDate = annotation['version-date']
+                var versionDate = entity['version-date']
                 if (versionDate) {
                     versionDate['subtype'] = 'version-date'
                     pieces.push(versionDate)
                 }
 
-                var softwareUrl = annotation['url']
+                var softwareUrl = entity['url']
                 if (softwareUrl) {
                     softwareUrl['subtype'] = 'url'
                     pieces.push(softwareUrl)
                 }
 
-                var creator = annotation['creator']
+                var creator = entity['creator']
                 if (creator) {
                     creator['subtype'] = 'creator'
                     pieces.push(creator)
                 }
 
-                var type = annotation['type']
-                var id = annotation['id']
+                //var type = entity['type']
+                //var id = entity['id']
 
                 for (var pi in pieces) {
                     piece = pieces[pi]
@@ -405,9 +421,11 @@ var grobid = (function ($) {
                         // note: this should never happen?
                     } else {
                         newString += string.substring(pos, start)
-                            + '<span id="annot-' + currentEntityIndex + '" rel="popover" data-color="' + piece['subtype'] + '">'
-                            + '<span class="label ' + piece['subtype'] + '" style="cursor:hand;cursor:pointer;" >'
-                            + string.substring(start, end) + '</span></span>';
+                            //+ '<span id="annot-' + currentEntityIndex + '" rel="popover" data-color="' + piece['subtype'] + '">'
+                            //+ '<span id="annot-' + currentEntityIndex + '-' + pi + '">'
+                            //+ '<span class="label ' + piece['subtype'] + '" style="cursor:hand;cursor:pointer;" >'
+                            + '<span id="annot-' + currentEntityIndex + '-' + pi + '" class="label ' + piece['subtype'] + '" style="cursor:hand;cursor:pointer;" >'
+                            + string.substring(start, end) + '</span>';
                         pos = end;
                     }
                 }
@@ -439,14 +457,38 @@ var grobid = (function ($) {
 
         if (entities) {
             for (var entityIndex = 0; entityIndex < entities.length; entityIndex++) {
-                //$('#annot-' + entityIndex).bind('hover', viewEntity);
-                $('#annot-' + entityIndex).bind('click', viewEntity);
+                var entity = entities[entityIndex];
+                var indexComp = 0;
+                if (entity['software-name'])
+                    indexComp++;
+                if (entity['version-number'])
+                    indexComp++;
+                if (entity['version-date'])
+                    indexComp++;
+                if (entity['url'])
+                    indexComp++;
+                if (entity['creator'])
+                    indexComp++;
+                for(var currentIndexComp = 0; currentIndexComp< indexComp; currentIndexComp++) {
+                    $('#annot-' + entityIndex + '-' + currentIndexComp).bind('mouseenter', viewEntity);
+                    $('#annot-' + entityIndex + '-' + currentIndexComp).bind('click', viewEntity);
+                }
+                //$('#annot-' + entityIndex).bind('click', viewEntity);
             }
         }
 
         $('#detailed_annot-0').hide();
 
         $('#requestResult').show();
+    }
+
+    function fetchConcept(identifier, lang, successFunction) {
+        $.ajax({
+            type: 'GET',
+            url: 'http://cloud.science-miner.com/nerd/service/kb/concept/' + identifier + '?lang=' + lang,
+            success: successFunction,
+            dataType: 'json'
+        });
     }
 
     function setupAnnotations(response) {
@@ -468,43 +510,56 @@ var grobid = (function ($) {
         entities = json.entities;
         if (entities) {
             // hey bro, this must be asynchronous to avoid blocking the brothers
-            entities.forEach(function (annotation, n) {
+            entities.forEach(function (entity, n) {
                 entityMap[n] = [];
-                entityMap[n].push(annotation);
+                entityMap[n].push(entity);
+
+                var identifier = entity.wikipediaExternalRef;
+                var wikidataId = entity.wikidataId;
+                
+                var localLang = lang
+                if (entity.lang)
+                    localLang = entity.lang;
+
+                if (identifier && (conceptMap[identifier] == null)) {
+                    fetchConcept(identifier, localLang, function (result) {
+                        conceptMap[result.wikipediaExternalRef] = result;
+                    });
+                }
 
                 //console.log(annotation)
                 var pieces = []
 
-                var softwareName = annotation['software-name']
+                var softwareName = entity['software-name']
                 softwareName['subtype'] = 'software'
                 pieces.push(softwareName)
                 
-                var versionNumber = annotation['version-number']
+                var versionNumber = entity['version-number']
                 if (versionNumber) {
                     versionNumber['subtype'] = 'version-number'
                     pieces.push(versionNumber);
                 }
                 
-                var versionDate = annotation['version-date']
+                var versionDate = entity['version-date']
                 if (versionDate) {
                     versionDate['subtype'] = 'version-date'
                     pieces.push(versionDate)
                 }
 
-                var softwareUrl = annotation['url']
+                var softwareUrl = entity['url']
                 if (softwareUrl) {
                     softwareUrl['subtype'] = 'url'
                     pieces.push(softwareUrl)
                 }
 
-                var creator = annotation['creator']
+                var creator = entity['creator']
                 if (creator) {
                     creator['subtype'] = 'creator'
                     pieces.push(creator)
                 }
 
-                var type = annotation['type']
-                var id = annotation['id']
+                var type = entity['type']
+                var id = entity['id']
 
                 for (var pi in pieces) {
                     piece = pieces[pi]
@@ -568,18 +623,29 @@ var grobid = (function ($) {
 
         pageDiv.append(element);
 
-        $('#annot-' + entityIndex + '-' + positionIndex).bind('hover', viewEntityPDF);
+        $('#annot-' + entityIndex + '-' + positionIndex).bind('mouseenter', viewEntityPDF);
         $('#annot-' + entityIndex + '-' + positionIndex).bind('click', viewEntityPDF);
     }
 
-    function viewEntity() {
+    function viewEntity(event) {
+        if (responseJson == null)
+            return;
+
+        if (responseJson.entities == null) {
+            return;
+        }
+
         var localID = $(this).attr('id');
+        //console.log(localID)
         if (entities == null) {
             return;
         }
 
-        var ind = localID.indexOf('-');
-        var localEntityNumber = parseInt(localID.substring(ind+1,localID.length));
+        var ind1 = localID.indexOf('-');
+        var ind2 = localID.indexOf('-', ind1+1);
+
+        var localEntityNumber = parseInt(localID.substring(ind1+1,ind2));
+        //console.log(localEntityNumber)
         if (localEntityNumber < entities.length) {
 
             var string = toHtml(entities[localEntityNumber], -1);
@@ -593,8 +659,7 @@ var grobid = (function ($) {
         var pageIndex = $(this).attr('page');
         var localID = $(this).attr('id');
 
-        console.log('viewEntityPDF ' + pageIndex + ' / ' + localID);
-
+        //console.log('viewEntityPDF ' + pageIndex + ' / ' + localID);
         if (entities == null) {
             return;
         }
@@ -632,14 +697,16 @@ var grobid = (function ($) {
         if (type)
             colorLabel = type;
 
-        var definitions = null;
-        if (wikipedia)
-            definitions = getDefinitions(wikipedia);
+        var definitions = getDefinitions(wikipedia);
+
+        var lang = null;
+        if (entity.lang)
+            lang = entity.lang;
 
         var content = entity['software-name'].rawForm;
         var normalized = null;
-        if (wikipedia)
-            normalized = getPreferredTerm(wikipedia);
+        //if (wikipedia)
+        //    normalized = getPreferredTerm(wikipedia);
 
         string = "<div class='info-sense-box " + colorLabel + "'";
         if (topPos != -1)
@@ -664,7 +731,7 @@ var grobid = (function ($) {
             versionNumber = entity['version-number'].rawForm;
 
         if (versionNumber)
-            string += "<p>Version number: <b>" + versionNumber + "</b></p>"
+            string += "<p>Version nb: <b>" + versionNumber + "</b></p>"
 
         var versionDate = null
         if (entity['version-date'])
@@ -677,8 +744,13 @@ var grobid = (function ($) {
         if (entity['url'])
             url = entity['url'].rawForm;
 
-        if (url)
-            string += "<p>URL: <b>" + url + "</b></p>"
+        if (url) {
+            url = url.trim()
+            if (!url.startsWith('http://') && !url.startsWith('https://'))
+                url = 'http://' + url;
+
+            string += '<p>URL: <b><a href=\"' + url + '\" target=\"_blank\">' + url + '</b></p>'
+        }
 
         var creator = null
         if (entity['creator'])
@@ -689,11 +761,15 @@ var grobid = (function ($) {
 
         //string += "<p>conf: <i>" + conf + "</i></p>";
         
+        if (entity.confidence)
+            string += "<p>conf: <i>" + entity.confidence + "</i></p>";
+
         if (wikipedia) {
             string += "</td><td style='align:right;bgcolor:#fff'>";
             string += '<span id="img-' + wikipedia + '"><script type="text/javascript">lookupWikiMediaImage("' + wikipedia + '", "' + lang + '")</script></span>';
-            string += "</td></tr></table>";
         }
+
+        string += "</td></tr></table>";
 
         if ((definitions != null) && (definitions.length > 0)) {
             var localHtml = wiki2html(definitions[0]['definition'], lang);
@@ -701,16 +777,29 @@ var grobid = (function ($) {
         }
 
         // statements
-        if (wikipedia) {
-            var statements = getStatements(wikipedia);
-            if ((statements != null) && (statements.length > 0)) {
-                var localHtml = "";
-                for (var i in statements) {
-                    var statement = statements[i];
-                    localHtml += displayStatement(statement);
-                }
-                string += "<p><div><table class='statements' style='width:100%;border-color:#fff;border:1px'>" + localHtml + "</table></div></p>";
+        var statements = getStatements(wikipedia);
+        if ((statements != null) && (statements.length > 0)) {
+            var localHtml = "";
+            for (var i in statements) {
+                var statement = statements[i];
+                localHtml += displayStatement(statement);
             }
+//                string += "<p><div><table class='statements' style='width:100%;background-color:#fff;border:1px'>" + localHtml + "</table></div></p>";
+
+            // make the statements information collapsible
+            string += "<p><div class='panel-group' id='accordionParent'>";
+            string += "<div class='panel panel-default'>";
+            string += "<div class='panel-heading' style='background-color:#F9F9F9;color:#70695C;border:padding:0px;font-size:small;'>";
+            // accordion-toggle collapsed: put the chevron icon down when starting the page; accordion-toggle : put the chevron icon up
+            string += "<a class='accordion-toggle collapsed' data-toggle='collapse' data-parent='#accordionParent' href='#collapseElement"+ 0+ "' style='outline:0;'>";
+            string += "<h5 class='panel-title' style='font-weight:normal;'>Wikidata statements</h5>";
+            string += "</a>";
+            string += "</div>";
+            // panel-collapse collapse: hide the content of statemes when starting the page; panel-collapse collapse in: show it
+            string += "<div id='collapseElement"+ 0 +"' class='panel-collapse collapse'>";
+            string += "<div class='panel-body'>";
+            string += "<table class='statements' style='width:100%;background-color:#fff;border:1px'>" + localHtml + "</table>";
+            string += "</div></div></div></div></p>";
         }
 
         if ((wikipedia != null) || (wikidataId != null)) {
@@ -747,6 +836,172 @@ var grobid = (function ($) {
             //$('#consolidateBlock').hide();
             setBaseUrl('annotateSoftwarePDF');
         }
+    };
+
+    const wikimediaURL_prefix = 'https://';
+    const wikimediaURL_suffix = '.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&pithumbsize=200&pageids=';
+
+    wikimediaUrls = {};
+    for (var i = 0; i < supportedLanguages.length; i++) {
+        var lang = supportedLanguages[i];
+        wikimediaUrls[lang] = wikimediaURL_prefix + lang + wikimediaURL_suffix
+    }
+
+    var imgCache = {};
+
+    window.lookupWikiMediaImage = function (wikipedia, lang) {
+        // first look in the local cache
+        if (lang + wikipedia in imgCache) {
+            var imgUrl = imgCache[lang + wikipedia];
+            var document = (window.content) ? window.content.document : window.document;
+            var spanNode = document.getElementById("img-" + wikipedia);
+            spanNode.innerHTML = '<img src="' + imgUrl + '"/>';
+        } else {
+            // otherwise call the wikipedia API
+            var theUrl = wikimediaUrls[lang] + wikipedia;
+
+            // note: we could maybe use the en cross-lingual correspondence for getting more images in case of
+            // non-English pages
+            $.ajax({
+                url: theUrl,
+                jsonp: "callback",
+                dataType: "jsonp",
+                xhrFields: {withCredentials: true},
+                success: function (response) {
+                    var document = (window.content) ? window.content.document : window.document;
+                    var spanNode = document.getElementById("img-" + wikipedia);
+                    if (response.query && spanNode) {
+                        if (response.query.pages[wikipedia]) {
+                            if (response.query.pages[wikipedia].thumbnail) {
+                                var imgUrl = response.query.pages[wikipedia].thumbnail.source;
+                                spanNode.innerHTML = '<img src="' + imgUrl + '"/>';
+                                // add to local cache for next time
+                                imgCache[lang + wikipedia] = imgUrl;
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    };
+
+    function getDefinitions(identifier) {
+        var localEntity = conceptMap[identifier];
+        if (localEntity != null) {
+            return localEntity.definitions;
+        } else
+            return null;
+    }
+
+    function getCategories(identifier) {
+        var localEntity = conceptMap[identifier];
+        if (localEntity != null) {
+            return localEntity.categories;
+        } else
+            return null;
+    }
+
+    function getMultilingual(identifier) {
+        var localEntity = conceptMap[identifier];
+        if (localEntity != null) {
+            return localEntity.multilingual;
+        } else
+            return null;
+    }
+
+    function getPreferredTerm(identifier) {
+        var localEntity = conceptMap[identifier];
+        if (localEntity != null) {
+            return localEntity.preferredTerm;
+        } else
+            return null;
+    }
+
+    function getStatements(identifier) {
+        var localEntity = conceptMap[identifier];
+        if (localEntity != null) {
+            return localEntity.statements;
+        } else
+            return null;
+    }
+
+    function displayStatement(statement) {
+        var localHtml = "";
+        if (statement.propertyId) {
+            if (statement.propertyName) {
+                localHtml += "<tr><td>" + statement.propertyName + "</td>";
+            } else if (statement.propertyId) {
+                localHtml += "<tr><td>" + statement.propertyId + "</td>";
+            }
+
+            // value dislay depends on the valueType of the property
+            var valueType = statement.valueType;
+            if (valueType && (valueType == 'time')) {
+                // we have here an ISO time expression
+                if (statement.value) {
+                    var time = statement.value.time;
+                    if (time) {
+                        var ind = time.indexOf("T");
+                        if (ind == -1)
+                            localHtml += "<td>" + time.substring(1) + "</td></tr>";
+                        else
+                            localHtml += "<td>" + time.substring(1, ind) + "</td></tr>";
+                    }
+                }
+            } else if (valueType && (valueType == 'globe-coordinate')) {
+                // we have some (Earth) GPS coordinates
+                if (statement.value) {
+                    var latitude = statement.value.latitude;
+                    var longitude = statement.value.longitude;
+                    var precision = statement.value.precision;
+                    var gpsString = "";
+                    if (latitude) {
+                        gpsString += "latitude: " + latitude;
+                    }
+                    if (longitude) {
+                        gpsString += ", longitude: " + longitude;
+                    }
+                    if (precision) {
+                        gpsString += ", precision: " + precision;
+                    }
+                    localHtml += "<td>" + gpsString + "</td></tr>";
+                }
+            } else if (valueType && (valueType == 'string')) {
+                if (statement.propertyId == "P2572") {
+                    // twitter hashtag
+                    if (statement.value) {
+                        localHtml += "<td><a href='https://twitter.com/hashtag/" + statement.value.trim() + "?src=hash' target='_blank'>#" +
+                            statement.value + "</a></td></tr>";
+                    } else {
+                        localHtml += "<td>" + "</td></tr>";
+                    }
+                } else {
+                    if (statement.value) {
+                        localHtml += "<td>" + statement.value + "</td></tr>";
+                    } else {
+                        localHtml += "<td>" + "</td></tr>";
+                    }
+                }
+            } else if (valueType && (valueType == 'url')) {
+                if (statement.value) {
+                    if ( statement.value.startsWith("https://") || statement.value.startsWith("http://") ) {
+                        localHtml += '<td><a href=\"'+ statement.value + '\" target=\"_blank\">' + statement.value + "</a></td></tr>";
+                    } else {
+                        localHtml += "<td>" + "</td></tr>";
+                    }
+                }
+            } else {
+                // default
+                if (statement.valueName) {
+                    localHtml += "<td>" + statement.valueName + "</td></tr>";
+                } else if (statement.value) {
+                    localHtml += "<td>" + statement.value + "</td></tr>";
+                } else {
+                    localHtml += "<td>" + "</td></tr>";
+                }
+            }
+        }
+        return localHtml;
     }
 
     function createInputFile(selected) {

@@ -32,12 +32,40 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.InputSource;
 
+import com.fasterxml.jackson.core.*;
+import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.node.*;
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.core.io.*;
+
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.HttpEntity;
+import org.apache.http.util.EntityUtils;
+import org.apache.http.entity.mime.content.StringBody;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.entity.mime.HttpMultipartMode;
 
 import static org.apache.commons.lang3.StringUtils.*;
 import static org.grobid.core.document.xml.XmlBuilderUtils.teiElement;
@@ -52,6 +80,8 @@ import static org.grobid.core.document.xml.XmlBuilderUtils.teiElement;
  */
 public class SoftwareDisambiguator {
     private static final Logger LOGGER = LoggerFactory.getLogger(SoftwareDisambiguator.class);
+
+    private static volatile SoftwareDisambiguator instance;
 
     private static String nerd_host = null;
     private static String nerd_port = null;
@@ -79,6 +109,8 @@ public class SoftwareDisambiguator {
         }
     }
 
+    private static int CONTEXT_WINDOW = 50;
+
     /**
      * Disambiguate against Wikidata a list of raw entities extracted from text 
      * represented as a list of tokens. The tokens will be used as disambiguisation 
@@ -86,47 +118,113 @@ public class SoftwareDisambiguator {
      * 
      * @return list of disambiguated software entities
      */
-    public disambiguate(List<SoftwareEntity> entities, List<LayoutToken> tokens) {
+    public List<SoftwareEntity> disambiguate(List<SoftwareEntity> entities, List<LayoutToken> tokens) {
+        if ( (entities == null) || (entities.size() == 0) ) 
+            return entities;
+        String json = null;
+        try {
+            json = runNerd(entities, tokens, "en");
+        } catch(RuntimeException e) {
+            LOGGER.error("Call to entity-fishing failed.", e);
+        }
+        if (json == null)
+            return entities;
+
+        System.out.println(json);
+
+        // build a map for the existing entities in order to catch them easily
+        // based on their positions
+        Map<Integer, SoftwareComponent> entityPositions = new TreeMap<Integer, SoftwareComponent>();
         for(SoftwareEntity entity : entities) {
-            // get the software components
             SoftwareComponent softwareName = entity.getSoftwareName();
             SoftwareComponent softwareCreator = entity.getCreator();
 
-            int start = softwareName.getOffsetStart();
-            int end = softwareName.getOffsetEnd();
-
-            if (softwareCreator.getOffsetStart() < start)
-                start = softwareCreator.getOffsetStart();
-            if (end < softwareCreator.getOffsetEnd()) 
-                end = softwareCreator.getOffsetEnd();
-
-            start = start - CONTEXT_WINDOW;
-            if (start < 0)
-                start = 0;
-
-            end = end + CONTEXT_WINDOW;
-            if (end > tokens.size()-1)
-                end = tokens.size()-1;
-
-            // apply a window for the contextual text
-            List<LayoutToken> subtokens = tokens.sublist(start, end);
-            List<SoftwareComponent> components = new ArrayList<SoftwareComponent>();
-            String json = null;
-            try {
-                json = runNerd(components, subtokens, "en");
-            } cacth(RuntimeException e) {
-
-            }
-
+            entityPositions.put(new Integer(softwareName.getOffsetStart()), softwareName);
+            if (softwareCreator != null)
+                entityPositions.put(new Integer(softwareCreator.getOffsetStart()), softwareCreator);
         }
 
+        // merge entity disambiguation with actual extracted mentions
+        JsonNode root = null;
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            root = mapper.readTree(json);
+
+            // given that we have potentially a wikipedia identifier, we need the language
+            // to be able to solve it in the right wikipedia version
+            String lang = null;
+            JsonNode languageNode = root.findPath("language");
+            if ((languageNode != null) && (!languageNode.isMissingNode())) {
+                JsonNode langNode = languageNode.findPath("lang");
+                if ((langNode != null) && (!langNode.isMissingNode())) {
+                    lang = langNode.textValue();
+                }
+            }
+            
+            JsonNode entitiesNode = root.findPath("entities");
+            if ((entitiesNode != null) && (!entitiesNode.isMissingNode())) {
+                // we have an array of entity
+                Iterator<JsonNode> ite = entitiesNode.elements();
+                while (ite.hasNext()) {
+                    JsonNode entityNode = ite.next();
+                    JsonNode startNode = entityNode.findPath("offsetStart");
+                    int startOff = -1;
+                    int endOff = -1;
+                    if ((startNode != null) && (!startNode.isMissingNode())) {
+                        startOff = startNode.intValue();
+                    }
+                    JsonNode endNode = entityNode.findPath("offsetEnd");
+                    if ((endNode != null) && (!endNode.isMissingNode())) {
+                        endOff = endNode.intValue();
+                    }
+                    double score = -1;
+                    JsonNode scoreNode = entityNode.findPath("nerd_selection_score");
+                    if ((scoreNode != null) && (!scoreNode.isMissingNode())) {
+                        score = scoreNode.doubleValue();
+                    }
+                    int wikipediaId = -1;
+                    JsonNode wikipediaNode = entityNode.findPath("wikipediaExternalRef");
+                    if ((wikipediaNode != null) && (!wikipediaNode.isMissingNode())) {
+                        wikipediaId = wikipediaNode.intValue();
+                    }
+                    String wikidataId = null;
+                    JsonNode wikidataNode = entityNode.findPath("wikidataId");
+                    if ((wikidataNode != null) && (!wikidataNode.isMissingNode())) {
+                        wikidataId = wikidataNode.textValue();
+                    }
+
+                    // domains, e.g. "domains" : [ "Biology", "Engineering" ]
+                    
+                    SoftwareComponent component = entityPositions.get(startOff);
+                    if (component != null) {
+                        // merging
+                        if (wikidataId != null)
+                            component.setWikidataId(wikidataId);
+                        if (wikipediaId != -1)
+                            component.setWikipediaExternalRef(wikipediaId);
+                        if (score != -1)
+                            component.setDisambiguationScore(score);
+                        if (lang != null)
+                            component.setLang(lang);
+                    }
+                }
+            }
+
+            // we could also retrive "global_categories": 
+            // e.g. [{"weight" : 0.16666666666666666, "source" : "wikipedia-en", "category" : "Bioinformatics", "page_id" : 726312}, ...
+
+        } catch (Exception e) {
+            LOGGER.error("Invalid JSON answer from the NERD", e);
+            e.printStackTrace();
+        }
+
+
+        
 
         return entities;
     }
 
     private static String RESOURCEPATH = "disambiguate";
-
-    private static int CONTEXT_WINDOW = 15;
 
     /**
      * Call entity fishing disambiguation service on server.
@@ -135,7 +233,7 @@ public class SoftwareDisambiguator {
      *
      * @return the resulting disambiguated context in JSON or null
      */
-    public String runNerd(List<SoftwareComponent> components, List<LayoutToken> subtokens, String lang) throws RuntimeException {
+    public String runNerd(List<SoftwareEntity> entities, List<LayoutToken> subtokens, String lang) throws RuntimeException {
         StringBuffer output = new StringBuffer();
         try {
             URL url = null;
@@ -158,19 +256,48 @@ System.out.println("Calling: " + url.toString());
             //buffer.append(",\"nbest\": 0");
             // we ask for French and German language correspondences in the result
             //buffer.append(", \"resultLanguages\":[ \"de\", \"fr\"]");
-            buffer.append(", \"termVector\":[");
-            boolean first = true;
-            for(Keyterm term : toDisambiguate) {
-                byte[] encodedTerm = encoder.quoteAsUTF8(term.classes);
-                String outputTerm  = new String(encodedTerm); 
-                if (!first)
-                    buffer.append(", ");
-                else
-                    first = false;
-                buffer.append("{ \"term\":\""+outputTerm+"\",\"score\":"+term.val+" }");
+            buffer.append(", \"text\": \"");
+            for(LayoutToken token : subtokens) {
+                byte[] encodedText = encoder.quoteAsUTF8(token.getText());
+                String outputEncodedText = new String(encodedText);
+                buffer.append(outputEncodedText);
             }
-            buffer.append("]}");
 
+            // no mention, it means only the mentions given in the query will be dismabiguated!
+            buffer.append("\", \"mentions\": []");
+
+            buffer.append(", \"entities\": [");
+            boolean first = true;
+            List<SoftwareComponent> components = new ArrayList<SoftwareComponent>();
+            for(SoftwareEntity entity : entities) {
+                // get the software components interesting to disambiguate
+                SoftwareComponent softwareName = entity.getSoftwareName();
+                SoftwareComponent softwareCreator = entity.getCreator();
+
+                components.add(softwareName);
+                if (softwareCreator != null)
+                    components.add(softwareName);
+            }
+
+            for(SoftwareComponent component: components) {
+                if (first) {
+                    first = false;
+                } else {
+                    buffer.append(", ");
+                }
+
+                byte[] encodedText = encoder.quoteAsUTF8(component.getRawForm() );
+                String outputEncodedText = new String(encodedText);
+               
+                buffer.append("{\"rawName\": \"" + outputEncodedText + "\", \"offsetStart\": " + component.getOffsetStart() + 
+                    ", \"offsetEnd\": " +  component.getOffsetEnd());
+                //buffer.append(", \"type\": \"");
+                buffer.append(" }");
+            }
+
+            buffer.append("] }");
+
+            System.out.println(buffer.toString());
 
             //params.add(new BasicNameValuePair("query", buffer.toString()));
 
@@ -179,9 +306,6 @@ System.out.println("Calling: " + url.toString());
             builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
             builder.addPart("query", stringBody);
             HttpEntity entity = builder.build();
-
-            //node.put("vector", buffer.toString());
-            //byte[] postDataBytes = buffer.toString().getBytes("UTF-8");
 
             CloseableHttpResponse response = null;
             Scanner in = null;
@@ -205,8 +329,10 @@ System.out.println("Calling: " + url.toString());
                 }
                 EntityUtils.consume(entityResp);
             } finally {
-                in.close();
-                response.close();
+                if (in != null)
+                    in.close();
+                if (response != null)
+                    response.close();
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();
