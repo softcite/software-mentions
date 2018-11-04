@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+        Copyright 2015
+        Ubiquitous Knowledge Processing (UKP) Lab
+        Technische Universität Darmstadt
+
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.dkpro.statistics</groupId>
+	<artifactId>dkpro-statistics</artifactId>
+	<version>2.2.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>DKPro Statistics</name>
+	<url>https://dkpro.github.io/dkpro-statistics/</url>
+	<description>DKPro Statistics is a collection of open-licensed statistical tools, currently including inter-rater agreement, correlation, and significance measures.</description>
+
+	<organization>
+		<name>Ubiquitous Knowledge Processing (UKP) Lab</name>
+		<url>https://www.ukp.tu-darmstadt.de/</url>
+	</organization>
+	<developers>
+		<developer>
+			<id>chmeyer.de</id>
+			<name>Christian M. Meyer</name>
+			<email>chmeyer.de@gmail.com</email>
+		</developer>
+		<developer>
+			<id>ChristianStab</id>
+			<name>Christian Stab</name>
+			<email>zemes@gmx.de</email>
+		</developer>
+		<developer>
+			<id>RolandKluge</id>
+			<name>Roland Kluge</name>
+			<email>mail@roland-kluge.de</email>
+		</developer>
+	</developers>
+
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<parent>
+		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+		 <artifactId>dkpro-parent-pom</artifactId>
+		<version>11</version>
+	</parent>
+
+	<modules>
+		<module>dkpro-statistics-agreement</module>
+		<module>dkpro-statistics-correlation</module>
+		<module>dkpro-statistics-significance</module>
+	</modules>
+
+	<scm>
+		<connection>scm:git:git://github.com/dkpro/dkpro-statistics</connection>
+		<developerConnection>scm:git:git@github.com:dkpro/dkpro-statistics.git</developerConnection>
+		<url>https://github.com/dkpro/dkpro-statistics</url>
+		<tag>head</tag>
+	</scm>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.10</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>rat-check</id>
+			<activation>
+				<file><exists>src/main/java</exists></file>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.rat</groupId>
+						<artifactId>apache-rat-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>default</id>
+								<phase>verify</phase>
+								<goals><goal>check</goal></goals>
+								<configuration>
+									<excludes>
+										<exclude>.gitignore</exclude>
+										<!-- release generated artifact -->
+										<exclude>release.properties</exclude>
+										<exclude>CHANGES.txt</exclude>
+										<exclude>NOTICE.txt</exclude>
+										<exclude>README.txt</exclude>
+										<exclude>src/main/resources/**/*</exclude>
+										<exclude>src/test/resources/**/*</exclude>
+									</excludes>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>2.5</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-gpg-plugin</artifactId>
+					<version>1.4</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-enforcer-plugin</artifactId>
+					<version>1.3.1</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<configuration>
+						<additionalparam>-Xdoclint:none</additionalparam>
+					</configuration>
+			</plugin>
+			</plugins>
+		</pluginManagement>
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-webdav</artifactId>
+				<version>1.0-beta-2</version>
+			</extension>
+		</extensions>
+	</build>
+</project>
