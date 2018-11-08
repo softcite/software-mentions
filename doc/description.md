@@ -2,9 +2,25 @@
 
 The goal of this component is to recognize in textual documents and in PDF any mentions of softwares with associated attribute information such as number version, author, url or version date.   
 
+## Existing work
+
+Existing work is mainly based on rule-based approach and gazeteers of software names. 
+
+Using the rule-based technique, Duck et al identify software mentions with a precision of 0.58 and recall of 0.68 (Duck, Nenadic, Brass, Robertson, & Stevens, 2013). In a later paper they improve this to 0.80 and 0.64 respectively
+(Duck et al., 2016).
+
+Priem and Piwowar (2016) employ a related approach in the Depsy application (http://depsy.org), using preset search phrases to find mentions.
+
+All these efforts rely on researcher intuition to guide the selection and weighting of rules, limiting the ability to
+optimize them systematically. Pan et al. (2015) address this limitation by generating the rules automatically, using a machine-learning bootstrapping technique. Their approach sacrifices recall (0.43) but results in greatly improved precision in identifying software mentions (0.94). However, it still relies on bootstrapping from a discreet ruleset.
+
+...
+
 ## Description
 
-The recognition of software mentions is an information extraction task similar to NER (Named Entity Recognition). It is implemented as a sequence labelling problem, where the labels applied to sequence of _words_ (named _tokens_ in this context), with indications of attachment for the attribute information (_version number_, _url_, etc.) to the appropriate software name mention. 
+The recognition of software mentions is an information extraction task similar to NER (Named Entity Recognition), which means that it would best approached with machine learning techniques. Machine learning techniques for NER lead to signifcantly more accurate, more portable (with respect to domains), more reproducible and easier to maintain solutions (reference needed).
+
+Software mention is here implemented as a sequence labelling problem, where the labels applied to sequence of _words_ (named _tokens_ in this context), with indications of attachment for the attribute information (_version number_, _url_, etc.) to the appropriate software name mention. 
 
 The software component is implemented as a Java sub-module of the Open Source tool [GROBID](https://github.com/kermitt2/grobid) to take advantage of the functionalities of GROBID for parsing and automatically structuring PDF, in particular scholar PDF. This approach has several advantages:
 
