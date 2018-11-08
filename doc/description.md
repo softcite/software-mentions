@@ -2,9 +2,9 @@
 
 The goal of this component is to recognize in textual documents and in PDF any mentions of softwares with associated attribute information such as number version, author, url or version date.   
 
-## Existing work
+## Existing works
 
-Existing work is mainly based on rule-based approach and gazeteers of software names. 
+Existing works are mainly relying on rule-based approaches and gazeteers of software names. 
 
 Using the rule-based technique, Duck et al identify software mentions with a precision of 0.58 and recall of 0.68 (Duck, Nenadic, Brass, Robertson, & Stevens, 2013). In a later paper they improve this to 0.80 and 0.64 respectively
 (Duck et al., 2016).
@@ -175,9 +175,24 @@ Our target is a f-score between 80-90, which would allow us to address the next 
 
 # References
 
+Duck, G., Nenadic, G., Brass, A., Robertson, D. L., & Stevens, R. (2013). bioNerDS: exploring
+bioinformatics’ database and software use through literature mining. BMC
+Bioinformatics, 14, 194. http://doi.org/10.1186/1471-2105-14-194
+
+Duck, G., Nenadic, G., Filannino, M., Brass, A., Robertson, D. L., & Stevens, R. (2016). A
+Survey of Bioinformatics Database and Software Usage through Mining the Literature.
+PLOS ONE, 11(6), e0157989. http://doi.org/10.1371/journal.pone.0157989
+
 _(Lipinski and al. 2013)_ [Evaluation of Header Metadata Extraction Approaches and Tools for Scientific PDF Documents](http://docear.org/papers/Evaluation_of_Header_Metadata_Extraction_Approaches_and_Tools_for_Scientific_PDF_Documents.pdf). M. Lipinski, K. Yao, C. Breitinger, J. Beel, and B. Gipp, in Proceedings of the 13th ACM/IEEE-CS Joint Conference on Digital Libraries (JCDL), Indianapolis, IN, USA, 2013. 
 
+Pan, X., Yan, E., Wang, Q., & Hua, W. (2015). Assessing the impact of software on science: A
+bootstrapped learning of software entities in full-text papers. Journal of Informetrics,
+9(4), 860–871. http://doi.org/10.1016/j.joi.2015.07.012
+
 _(Peters and al. 2018)_ Deep contextualized word representations. Matthew E. Peters, Mark Neumann, Mohit Iyyer, Matt Gardner, Christopher Clark, Kenton Lee, Luke Zettlemoyer, NAACL 2018. [arXiv:1802.05365](https://arxiv.org/abs/1802.05365)
+
+Piwowar, H. A., & Priem, J. (2016). Depsy: valuing the software that powers science. Retrieved
+from https://github.com/Impactstory/depsy-research
 
 _(Tkaczyk and al. 2018)_ Evaluation and Comparison of Open Source Bibliographic Reference Parsers: A Business Use Case. Tkaczyk, D., Collins, A., Sheridan, P., & Beel, J., 2018. [arXiv:1802.01168](https://arxiv.org/pdf/1802.01168).
 
