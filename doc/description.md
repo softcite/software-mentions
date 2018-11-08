@@ -43,6 +43,8 @@ The text mining process is thus not limited to populating a database, but also o
 
 We present below the current metrics of the software mention model, as produced by the software component. The annotated corpus is divided randomly with 90% for training and 10% for evaluation. We use traditional precision, recall and f1 scores. Token-level evaluation indicates how good the labeling is for each token. Field-level evaluation indicates accuracy for a complete multi-word sequence, including correct attachment of attributes (`creator`, `url`, `version-date`, `version-number`) to the correct `software`.
 
+### Linear CRF approach
+
 Version Aug. 24th 2018 
 
 ```
@@ -113,6 +115,7 @@ With this current model, 33.9% of the PDF of the evaluation set (213 documents) 
 
 Note that we present here simply intermediary results, and final evaluation metrics will be averaged over 10 random annotated corpus segmentations or via a 10-fold approach to match good practice. 
 
+
 ## Deep learning model
 
 We developed a Keras deep learning framework called [DeLFT](https://github.com/kermitt2/delft) (**De**ep **L**earning **F**ramework for **T**ext) for text processing, covering in particular sequence labelling as used in GROBID. This library re-implements the most recent state-of-the-art Deep Learning architectures. 
@@ -120,7 +123,25 @@ It re-implements in particular the current state of the art model (BiLSTM-CRF wi
 
 The training data of GROBID is supported by DeLFT and, as a consequence, any GROBID CRF models can have an equivalent Deep Learning model counterpart. 
 
-We plan to generate different Deep Learning models for the software mention recognition and benchmark them with the CRF model. We will thus be able to report reliable evaluations for all the best current named entity recognition algorithms and select the highest performing one. The evaluation will cover accuracy, but also processing speed and memory usage, with and without GPU.  
+The following results have been obtained with a BiLSTM-CRF architecture, using GloVes 300d embeddings, with the same partition between train and test set as the above Oct. 19th 2018 results for CRF. 
+
+```
+                  precision    recall  f1-score   support
+
+           <url>     0.3077    0.5000    0.3810         8
+      <software>     0.7507    0.7341    0.7423       361
+         number>     0.7018    0.7207    0.7111       111
+       <creator>     0.6667    0.6022    0.6328        93
+           date>     0.6000    0.6000    0.6000         5
+
+all (micro avg.)     0.7170    0.7059    0.7114       578
+```
+
+F-score is improved almost 9 points as compared to CRF which is a very significant difference. Given that we are not using without ELMo yet, nor parameter tuning, and other possible other improvements, DL for this task appears particularly strong, in a quite similar way as general NER. 
+
+With a high-end GPU (GTX 1080Ti), speed is 8000 tokens per second, relatively similar to CRF. However, it should be noted that using some more recent sophisticated contextalized embeddings or LM like ELMo, while certainly improving accuracy, will have a very strong impact on runtime, running between 25 and 30 slower than with traditional embeddings following our benchmarking. 
+
+We plan to generate more Deep Learning models for the software mention recognition and benchmark them with the CRF model. We will thus be able to report reliable evaluations for all the best current named entity recognition algorithms and select the highest performing one. The evaluation will cover accuracy, but also processing speed and memory usage, with and without GPU.  
 
 ## Next iterations
 
