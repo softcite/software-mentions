@@ -1,6 +1,7 @@
 package org.grobid.core.data;
 
 import org.grobid.core.engines.label.TaggingLabel;
+import org.grobid.core.utilities.TextUtilities;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.lexicon.SoftwareLexicon;
 import org.grobid.core.layout.BoundingBox;
@@ -17,7 +18,7 @@ import java.util.List;
  *  or the software URL.  
  *
  */
-public class SoftwareComponent implements Comparable<SoftwareComponent> {   
+public class SoftwareComponent extends KnowledgeEntity implements Comparable<SoftwareComponent> {   
 	
 	// Orign of the component definition
 	public enum Origin {
@@ -44,7 +45,7 @@ public class SoftwareComponent implements Comparable<SoftwareComponent> {
 	// normalized form of the component
     private String normalizedForm = null;
 	
-	// relative offset positions in context, if defined
+	// relative offset positions in context, if defined and expressed as (Java) character offset
 	private OffsetPosition offsets = null;
 	
 	// confidence score of the component in context, if defined
@@ -56,6 +57,9 @@ public class SoftwareComponent implements Comparable<SoftwareComponent> {
 	// orign of the component definition
 	private Origin origin = Origin.GROBID;
 	
+	// language
+	private String lang = null;
+
 	// tagging label of the LayoutToken cluster corresponding to the component
 	private TaggingLabel label = null;
 
@@ -156,6 +160,14 @@ public class SoftwareComponent implements Comparable<SoftwareComponent> {
 		this.label = label;
 	}
 
+	public String getLang() {
+		return this.lang;
+	}
+
+	public void setLang(String lang) {
+		this.lang = lang;
+	}
+
 	public void normalize() {
 		// TBD is necessary
 	}
@@ -204,6 +216,20 @@ public class SoftwareComponent implements Comparable<SoftwareComponent> {
 				componentType = "software-name";
 			buffer.append(", \"component-type\" : \"" + componentType + "\"");	
 		}*/
+
+		// knowledge information
+		if (wikidataId != null) {
+			buffer.append(", \"wikidataId\": \"" + wikidataId + "\"");
+		}
+		if (wikipediaExternalRef != -1) {
+			buffer.append(", \"wikipediaExternalRef\": " + wikipediaExternalRef);
+		}
+		if (lang != null) {
+			buffer.append(", \"lang\": \"" + lang + "\"");
+		}
+		if (disambiguationScore != null) {
+			buffer.append(", \"confidence\": " + TextUtilities.formatFourDecimals(disambiguationScore.doubleValue()));
+		}
 
 		buffer.append(", \"offsetStart\" : " + offsets.start);
 		buffer.append(", \"offsetEnd\" : " + offsets.end);	
@@ -254,12 +280,4 @@ public class SoftwareComponent implements Comparable<SoftwareComponent> {
         return buffer.toString();
     }
 	
-	/** 
-	 * Export of entity annotation in TEI standoff format 
-	 */	 
-	public String toTEI(String id, int n) {
-		StringBuffer buffer = new StringBuffer();
-		// tbd if necessary
-		return buffer.toString();
-	}
 }

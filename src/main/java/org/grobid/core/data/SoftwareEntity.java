@@ -1,6 +1,7 @@
- package org.grobid.core.data;
+package org.grobid.core.data;
 
 import org.grobid.core.utilities.OffsetPosition;
+import org.grobid.core.utilities.TextUtilities;
 import org.grobid.core.lexicon.SoftwareLexicon;
 import org.grobid.core.layout.BoundingBox;
 import org.grobid.core.layout.LayoutToken;
@@ -17,7 +18,7 @@ import java.util.List;
  *  Representation of a mention of a software entity with all its components.
  *
  */
-public class SoftwareEntity implements Comparable<SoftwareEntity> {   
+public class SoftwareEntity extends KnowledgeEntity implements Comparable<SoftwareEntity> {   
 
 	// type of the entity
 	private SoftwareLexicon.Software_Type type = null;
@@ -154,6 +155,27 @@ public class SoftwareEntity implements Comparable<SoftwareEntity> {
 		}
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("{ ");
+
+		// knowledge information
+		if (softwareName.getWikidataId() != null) {
+			buffer.append("\"wikidataId\": \"" + softwareName.getWikidataId() + "\"");
+		}
+		if (softwareName.getWikipediaExternalRef() != -1) {
+			buffer.append(", \"wikipediaExternalRef\": " + softwareName.getWikipediaExternalRef());
+		}
+		if (softwareName.getLang() != null) {
+			buffer.append(", \"lang\": \"" + softwareName.getLang() + "\"");
+		}
+		if (softwareName.getDisambiguationScore() != null) {
+			buffer.append(", \"confidence\": " + TextUtilities.formatFourDecimals(softwareName.getDisambiguationScore().doubleValue()));
+		}
+
+		if ((softwareName.getWikidataId() != null) || 
+			(softwareName.getWikipediaExternalRef() != -1) || 
+			(softwareName.getDisambiguationScore() != null) ||
+			(softwareName.getLang() != null))
+			buffer.append(", ");
+
 		buffer.append("\"software-name\": ");
 		buffer.append(softwareName.toJson());
 		if (type != null)
@@ -172,6 +194,7 @@ public class SoftwareEntity implements Comparable<SoftwareEntity> {
 		if (softwareURL != null) {
 			buffer.append(", \"url\":" + softwareURL.toJson());
 		}
+
 		buffer.append(" }");
 		return buffer.toString();
 	}
