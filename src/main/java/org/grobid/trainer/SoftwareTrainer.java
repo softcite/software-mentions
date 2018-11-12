@@ -84,7 +84,8 @@ public class SoftwareTrainer extends AbstractTrainer {
         try {
             System.out.println("labeled corpus path: " + corpusDir.getPath());
             System.out.println("training data path: " + trainingOutputPath.getPath());
-            System.out.println("evaluation data path: " + trainingOutputPath.getPath());
+            if (evalOutputPath != null)
+                System.out.println("evaluation data path: " + evalOutputPath.getPath());
 
             // we convert first the tei files into the usual CRF label format
             // we process all tei files in the output directory

@@ -87,11 +87,15 @@ public class ArticleUtilities {
                         urll = getUnpaywallOAUrl(identifier);
                         if (urll == null) {
                             totalDOIFail++;
+                            logger.warn("No Open Access PDF found via Unpaywall for DOI: " + identifier);
+                            System.out.println("No Open Access PDF found via Unpaywall for DOI: " + identifier);
                         }
                     } catch(UnsupportedEncodingException e) {
                         logger.warn("Invalid DOI identifier encoding: " + identifier, e);
+                        System.out.println("Invalid DOI: " + identifier);
                     } catch(Exception e) {
                         logger.warn("No Open Access PDF found for DOI: " + identifier, e);
+                        System.out.println("No Open Access PDF found via Unpaywall for DOI: " + identifier);
                     }
             }
 

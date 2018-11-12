@@ -26,6 +26,10 @@ public class AnnotatedDocument {
 
     private String documentID = null;
 
+    /* This is the "corpus" the document belongs to, so pmc_article or econ_article */
+    // TODO move that to an enumerated type for safety
+    private String articleSet = null;
+
     /** 
      * This is a representation of the softcate annotation, capturing the particular data scheme of the dataset.
      * Note that the annotations are not necessary located/aligned with the PDF content: for this the whole PDF
@@ -50,6 +54,14 @@ public class AnnotatedDocument {
 
     public void setDocumentID(String documentID) {
         this.documentID = documentID;
+    }
+
+    public String getArticleSet() {
+        return this.articleSet;
+    }
+
+    public void setArticleSet(String articleSet) {
+        this.articleSet = articleSet;
     }
 
     public String getUrl() {

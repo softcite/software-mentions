@@ -138,7 +138,7 @@ public class AnnotatedCorpusGeneratorCSV {
 
         // computing and reporting cross-agreement for the loaded set
         CrossAgreement crossAgreement = new CrossAgreement(fields);
-        CrossAgreement.AgreementStatistics stats = crossAgreement.evaluate(documents); 
+        CrossAgreement.AgreementStatistics stats = crossAgreement.evaluate(documents, "econ_article"); 
         System.out.println("\n****** Inter-Annotator Agreement (Percentage agreement) ******** \n\n" + stats.toString());
 
         // we keep GROBID analysis as close as possible to the actual content
@@ -962,8 +962,11 @@ public class AnnotatedCorpusGeneratorCSV {
         // this csv file gives the attributes for each mention, including the "string" of mention
         File softciteAttributes = new File(csvPath + File.separator + "softcite_codes_applied.csv");
         
-        // this csv fives information on the bibliographical reference associated to a mention 
+        // this csv file gives information on the bibliographical reference associated to a mention 
         File softciteReferences = new File(csvPath + File.separator + "softcite_references.csv");
+
+        // this csv file gives information on the article set to which each article belongs to 
+        File softciteArticles = new File(csvPath + File.separator + "softcite_articles.csv");
 
         try {
             CSVParser parser = CSVParser.parse(softciteAttributes, UTF_8, CSVFormat.RFC4180);
@@ -1197,6 +1200,41 @@ public class AnnotatedCorpusGeneratorCSV {
             e.printStackTrace();
         }
         System.out.println(nbMentionAnnotations + " mentions annotations from " + softciteMentions.getName());
+
+        try {
+            CSVParser parser = CSVParser.parse(softciteArticles, UTF_8, CSVFormat.RFC4180);
+            // article,article_set,coder,no_selections_found
+            boolean start = true;
+            int nbCSVlines = 0;
+            for (CSVRecord csvRecord : parser) {
+                nbCSVlines++;
+                if (start) {
+                    start = false;
+                    continue;
+                }
+                AnnotatedDocument document = null;
+                for(int i=0; i<csvRecord.size(); i++) {
+                    String value = csvRecord.get(i);
+                    if (value.trim().length() == 0)
+                        continue;
+                    value = cleanValue(value);
+                    if (i == 0) {
+                        String documentID = value;
+                        if (documents.get(documentID) == null) {
+                            //System.out.println("warning unknown document: " + documentID);
+                        } else 
+                            document = documents.get(documentID);
+                    } else if (i == 1) {
+                        String articleSet = value;
+                        if (document != null)
+                            document.setArticleSet(value);
+                    } 
+                }
+            }
+            System.out.println(nbCSVlines + " csv lines");
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private String cleanValue(String value) {

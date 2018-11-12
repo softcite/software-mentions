@@ -44,13 +44,28 @@ public class CrossAgreement {
         return field.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
     }
 
-    public AgreementStatistics evaluate(Map<String, AnnotatedDocument> documents) {
+    /**
+     * Evaluate inter-annotator agreement for a list of annotated documents. 
+     * First step is to find documents annotated by multiple annotators.
+     * If parameter articleSet is null, all the documents are considered, otherwise
+     * only document belonging to this set will be considered for calculating the IAA. 
+     * 
+     */
+    public AgreementStatistics evaluate(Map<String, AnnotatedDocument> documents, String articleSet) {
         AgreementStatistics stats = new AgreementStatistics(fields);
+        int nbMultipleAnnotatedDocuments = 0;
         // go thought all annotated documents of softcite
         for (Map.Entry<String, AnnotatedDocument> entry : documents.entrySet()) {
             String docName = entry.getKey();
 
             AnnotatedDocument annotatedDocument = entry.getValue();
+
+            if (articleSet != null) {
+                // check if the document belongs to the document set
+                if ( (annotatedDocument.getArticleSet() != null) && 
+                     (!annotatedDocument.getArticleSet().equals(articleSet)) )
+                    continue;
+            }
 
             List<SoftciteAnnotation> annotations = annotatedDocument.getAnnotations();
 
@@ -65,6 +80,8 @@ public class CrossAgreement {
             if (annotators.size() < 2)
                 continue;
 
+            nbMultipleAnnotatedDocuments++;
+
             //System.out.println("nb annotators: " + annotators.size());
             //System.out.println("nb annotations: " + annotations.size());
 
@@ -78,6 +95,9 @@ public class CrossAgreement {
             //UnitizingAnnotationStudy study = new UnitizingAnnotationStudy(annotators.size());
         }
 
+        // update the number of documents involved in the calculation
+        stats.setNbMultipleAnnotatedDocuments(nbMultipleAnnotatedDocuments);
+        
         // finally compute agreement measure
         stats.computePourcentageAgreement();
 
@@ -237,8 +257,11 @@ public class CrossAgreement {
 
         // total number of agreements used for the measure among all the samples
         private Map<String, Integer> numberAgreements = null;
-        //total number of samples considered for the measure
+        // total number of samples considered for the measure
         private Map<String, Integer> numberSamples = null;
+
+        // total number of documents with multiple annotators
+        private int nbMultipleAnnotatedDocuments = 0;
 
         private double allFieldAgreement = 0.0;
         private double allStandardError = 0.0;
@@ -390,6 +413,14 @@ public class CrossAgreement {
             return this.numberSamples.get(field);
         }
 
+        public int getNbMultipleAnnotatedDocuments() {
+            return this.nbMultipleAnnotatedDocuments;
+        }
+
+        public void setNbMultipleAnnotatedDocuments(int nb) {
+            this.nbMultipleAnnotatedDocuments = nb;
+        }
+
         /**
          * Combine (addition only) only counts information of two statistics object 
          * (number of agreement and number of samples).  
@@ -492,6 +523,11 @@ public class CrossAgreement {
         @Override
         public String toString() {
             StringBuffer buffer = new StringBuffer();
+
+            buffer.append("number of documents annotated by multiple annotators: ");
+            buffer.append(nbMultipleAnnotatedDocuments);
+            buffer.append("\n\n");
+
             for (String field : fields) {
                 boolean first = true;
                 if (!hasValue(field))
