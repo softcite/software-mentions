@@ -108,20 +108,14 @@ public class AnnotatedCorpusGeneratorCSV {
     private int totalContexts = 0;
     private int unmatchedContexts = 0;
 
-    private List<String> fields = Arrays.asList("software", "version-number", "version-date", "creator", "url");
+    public static List<String> fields = Arrays.asList("software", "version-number", "version-date", "creator", "url");
 
     // these PDF fail with current version of GROBID, they will work with then next which will integrate pdfalto
-    private List<String> failingPDF = Arrays.asList("PMC4153526", "PMC5378987"); // hanging for first, pdf2xml error for second
+    private List<String> failingPDF = Arrays.asList("PMC4153526", "PMC5378987"); 
+    // hanging for first, pdf2xml error for second
     
     private ArticleUtilities articleUtilities = new ArticleUtilities();
 
-    // wrongly duplicated annotation identiers, resulting in mess in csv files and in our alignments, we thus ignore 
-    // them for the moment
-    /*private List<String> duplicateAnnotationIdentifiers = Arrays.asList("PMC3727320_CB01", "PMC3727320_CB02", "PMC3727320_CB03", 
-        "PMC3727320_CB04", "PMC4303630_CB12", "PMC2686520_HR01", "PMC4303630_CB12", "PMC3782730_TL06", 
-        "PMC4230620_BB03", "PMC3035800_SK22", "PMC3322527_CB13", "PMC3281721_TZ10", 
-        "PMC2686520_HR01", "PMC3281721_TZ07");
-    */
     /**
      * Start the conversion/fusion process for generating MUC-style annotated XML documents
      * from PDF, parsed by GROBID core, and softcite dataset  
@@ -133,8 +127,28 @@ public class AnnotatedCorpusGeneratorCSV {
 
         importCSVFiles(csvPath, documents, annotations);
 
-        System.out.println(annotations.size() + " total annotations");
+        System.out.println("\n" + annotations.size() + " total annotations");
         System.out.println(documents.size() + " total annotated documents");    
+
+        // breakdown per articleSet (e.g. pmc, econ)
+        Map<String, Integer> articleSetMap = new TreeMap<String, Integer>();
+        for (Map.Entry<String, AnnotatedDocument> entry : documents.entrySet()) {
+            AnnotatedDocument document = entry.getValue();
+            if (document.getArticleSet() != null) {
+                int nb = 0;
+                if (articleSetMap.get(document.getArticleSet()) != null)
+                    nb = articleSetMap.get(document.getArticleSet())+1;
+                else 
+                    nb = 1;
+                articleSetMap.put(document.getArticleSet(), nb);
+            }
+        }
+        // go thought all annotated documents of softcite
+        for (Map.Entry<String, Integer> entry : articleSetMap.entrySet()) {
+            String setName = entry.getKey();
+            int setCount = entry.getValue();
+            System.out.println(setName + ": " + setCount + " documents");
+        }
 
         // computing and reporting cross-agreement for the loaded set
         CrossAgreement crossAgreement = new CrossAgreement(fields);
@@ -970,7 +984,17 @@ public class AnnotatedCorpusGeneratorCSV {
 
         try {
             CSVParser parser = CSVParser.parse(softciteAttributes, UTF_8, CSVFormat.RFC4180);
+            // csv fields in this file are as follow
             // selection,coder,code,was_code_present,code_label
+            
+            // *selection* is an identifier for the text mention, normally we have one per annotation, 
+            // but maybe it's a full context passage?
+            // *coder* is the id of the annotator
+            // *code* is the name of the annotation class/attribute (e.g. software_name, version date)
+            // *was_code_present* is a boolean indicating if the annotation class appears in the 
+            // "selection" (context passage probably), not sure what is the purpose of this
+            // *code_label* is the raw string corresponding to the annotated chunk
+            
             boolean start = true;
             for (CSVRecord csvRecord : parser) {
                 if (start) {
@@ -1107,7 +1131,20 @@ public class AnnotatedCorpusGeneratorCSV {
         int nbMentionAnnotations = 0;
         try {
             CSVParser parser = CSVParser.parse(softciteMentions, UTF_8, CSVFormat.RFC4180);
+            // csv fields in this file are as follow
             // selection,coder,article,quote,page,mention_type,certainty,memo
+            
+            // *selection* is an identifier for the text mention, normally we have one per annotation, 
+            // but maybe it's a full context passage?
+            // *coder* is the id of the annotator
+            // *article* is the nidentifier of the annotated article
+            // *quote* is the full passage where something is annotated, as a raw string (a snippet)
+            // *page* is the PDF page number where the annotation appears
+            // *mention_type* is the type of what is annotated - values listed in the doc are "software", 
+            // "algorithm", "hardware" and "other", but actual values appear to be much more diverse 
+            // *certainty* is an integer between 1-10 for annotator subjective certainty on the annotation
+            // *meno* is a free text field for comments
+
             boolean start = true;
             int nbCSVlines = 0;
             for (CSVRecord csvRecord : parser) {
