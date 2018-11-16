@@ -37,15 +37,27 @@ repositories {
     mavenCentral()
     jcenter()
     maven { url "https://dl.bintray.com/rookies/maven" }
+    maven {
+        url new File(rootProject.rootDir, "lib")
+    }
+}
+
+ext {
+    // treating them separately, these jars will be flattened into grobid-core.jar on installing,
+    // to avoid missing dependencies from the projects that include grobid-core (see 'jar' taskin grobid-core)
+    localLibs = ['org/dkpro/statistics/dkpro-statistics-agreement/2.2.0-SNAPSHOT/dkpro-statistics-agreement-2.2.0-SNAPSHOT.jar']
 }
 
 dependencies {
+
+    // packaging local libs inside output jar
+    compile fileTree(dir: new File(rootProject.rootDir, 'lib'), include: localLibs)
 
     //Grobid
     compile group: 'org.grobid', name: 'grobid-core', version: '0.5.3-SNAPSHOT'
     compile group: 'org.grobid', name: 'grobid-trainer', version: '0.5.3-SNAPSHOT'
     compile group: 'net.arnx', name: 'jsonic', version: '1.3.5'
-    compile group: 'org.dkpro.statistics', name: 'dkpro-statistics-agreement', version: '2.1.0'
+    compile group: 'org.dkpro.statistics', name: 'dkpro-statistics-agreement', version: '2.2.0-SNAPSHOT'
 
     //Logging
     compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.25'
@@ -126,6 +138,12 @@ ext.getArg = { propName, defaultVal ->
 war {
     classifier = 'war'
     enabled true
+
+    from {
+        project.configurations.compile.collect {
+            it.isDirectory() ? [] : localLibs.contains(it.getName()) ? zipTree(it) : []
+        }
+    }
 }
 
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
@@ -133,13 +151,25 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 task mainJar(type: ShadowJar, group: 'test') {
     zip64 true
     from sourceSets.main.output
+
+    from {
+        project.configurations.compile.collect {
+            it.isDirectory() ? [] : localLibs.contains(it.getName()) ? zipTree(it) : []
+        }
+    }
 }
 
 shadowJar {
     classifier = 'onejar'
     zip64 true
     manifest {
-        attributes 'Main-Class': 'org.grobid.core.main.batch.QuantityMain'
+        attributes 'Main-Class': 'org.grobid.core.main.batch.SoftwareMain'
+    }
+
+    from {
+        project.configurations.compile.collect {
+            it.isDirectory() ? [] : localLibs.contains(it.getName()) ? zipTree(it) : []
+        }
     }
 }
 
