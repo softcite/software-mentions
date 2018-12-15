@@ -143,8 +143,8 @@ public class AnnotatedCorpusGeneratorCSV {
 
         // we keep GROBID analysis as close as possible to the actual content
         GrobidAnalysisConfig config = new GrobidAnalysisConfig.GrobidAnalysisConfigBuilder()
-                                    .consolidateHeader(false)
-                                    .consolidateCitations(false)
+                                    .consolidateHeader(0)
+                                    .consolidateCitations(0)
                                     .build();
         LibraryLoader.load();
         Engine engine = GrobidFactory.getInstance().getEngine();
