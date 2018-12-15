@@ -1,6 +1,8 @@
 package org.grobid.trainer;
 
 import java.util.*;
+import java.io.*;
+import java.nio.charset.Charset;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,11 +26,16 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * @author Patrice
  */
 public class CrossAgreement {
+    private static final Logger logger = LoggerFactory.getLogger(CrossAgreement.class);
+
+    //static Charset UTF_8 = Charset.forName("UTF-8"); // StandardCharsets.UTF_8
 
     private List<String> fields = null;
 
     // record mismatches for further study
     private Map<String, List<Mismatch>> mismatches = null;
+
+    private int certaintyThreshold = 0;
 
     public CrossAgreement(List<String> fields) {
         this.fields = new ArrayList<String>();
@@ -44,6 +51,14 @@ public class CrossAgreement {
         return field.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
     }
 
+    public int getCertaintyThreshold() {
+        return this.certaintyThreshold;
+    }
+
+    public void setCertaintyThreshold(int threshold) {
+        this.certaintyThreshold = threshold;
+    }
+
     /**
      * Evaluate inter-annotator agreement for a list of annotated documents. 
      * First step is to find documents annotated by multiple annotators.
@@ -55,8 +70,10 @@ public class CrossAgreement {
         AgreementStatistics stats = new AgreementStatistics(fields);
         int nbMultipleAnnotatedDocuments = 0;
         // go thought all annotated documents of softcite
+        initReportMismatches(null);
         for (Map.Entry<String, AnnotatedDocument> entry : documents.entrySet()) {
             String docName = entry.getKey();
+            mismatches = new HashMap<String, List<Mismatch>>();
 
             AnnotatedDocument annotatedDocument = entry.getValue();
 
@@ -82,17 +99,13 @@ public class CrossAgreement {
 
             nbMultipleAnnotatedDocuments++;
 
-            //System.out.println("nb annotators: " + annotators.size());
-            //System.out.println("nb annotations: " + annotations.size());
-
             // naive pourcentage-based agreement for the document
             AgreementStatistics documentStats = this.agreementCounts(annotations, annotators);
-            //System.out.println("documentStats: \n" + documentStats.toString());
 
             stats = stats.combineCounts(documentStats);
-            //System.out.println("stats: \n" + stats.toString());
 
             //UnitizingAnnotationStudy study = new UnitizingAnnotationStudy(annotators.size());
+            this.reportMismatches(docName, null);
         }
 
         // update the number of documents involved in the calculation
@@ -158,7 +171,9 @@ public class CrossAgreement {
                     if (matchFieldValue(field, fieldContent, annotations2))
                         allAgreements++;
                     else {
-                        Pair<String, List<SoftciteAnnotation>> annot1 = new Pair(annotator1, annotations1);
+                        // all the annotations from annotator1
+                        Pair<String, SoftciteAnnotation> annot1 = new Pair(annotator1, annotation1);
+                        // all the annotations from annotator2
                         Pair<String, List<SoftciteAnnotation>> annot2 = new Pair(annotator2, annotations2);
 
                         Mismatch mismatch = new Mismatch(annot1, annot2);
@@ -180,8 +195,8 @@ public class CrossAgreement {
                     if (matchFieldValue(field, fieldContent, annotations1))
                         allAgreements++;
                     else {
-                        Pair<String, List<SoftciteAnnotation>> annot1 = new Pair(annotator1, annotations1);
-                        Pair<String, List<SoftciteAnnotation>> annot2 = new Pair(annotator2, annotations2);
+                        Pair<String, SoftciteAnnotation> annot1 = new Pair(annotator2, annotation2);
+                        Pair<String, List<SoftciteAnnotation>> annot2 = new Pair(annotator1, annotations1);
 
                         Mismatch mismatch = new Mismatch(annot1, annot2);
                         List<Mismatch> listMismatches = mismatches.get(field);
@@ -578,7 +593,7 @@ public class CrossAgreement {
                     .append(TextUtilities.formatFourDecimals(allConfidenceInterval.getB())).append("]");
             }
             buffer.append("\n\t\t").append("number of agreements:\t").append(this.allNumberAgreements);
-            buffer.append("\n\t\t").append("number of samples:\t").append(this.allNumberSamples);
+            buffer.append("\n\t\t").append("number of samples:\t").append(this.allNumberSamples).append("\n");
 
             return buffer.toString();
         }
@@ -601,21 +616,105 @@ public class CrossAgreement {
      */
     public class Mismatch {
 
-        private Pair<String, List<SoftciteAnnotation>> annotations1 = null;
+        private Pair<String, SoftciteAnnotation> annotations1 = null;
         private Pair<String, List<SoftciteAnnotation>> annotations2 = null;
 
-        public Mismatch(Pair<String, List<SoftciteAnnotation>> annotations1, 
+        public Mismatch(Pair<String, SoftciteAnnotation> annotations1, 
                         Pair<String, List<SoftciteAnnotation>> annotations2) {
             this.annotations1 = annotations1;
             this.annotations2 = annotations2;
         }
 
-        public Pair<String, List<SoftciteAnnotation>> getAnnotations1() {
+        public Pair<String, SoftciteAnnotation> getAnnotations1() {
             return annotations1;
         }
 
         public Pair<String, List<SoftciteAnnotation>> getAnnotations2() {
             return annotations2;
+        }
+    }
+
+    /**
+     *  Create a report per field for all associated mismatched, ad write
+     *  the report in a file. 
+     *
+     */
+    public void reportMismatches(String documentID, String outputPath) {
+        for (Map.Entry<String, List<Mismatch>> entry : mismatches.entrySet()) {
+            String field = entry.getKey();
+            List<Mismatch> fieldMismatches = entry.getValue();
+
+            // open report file for this field in append mode
+            Writer writerMismatch = null;
+            try {
+                if ( (outputPath == null) || (outputPath.trim().length() == 0))
+                    outputPath = "mismatch-"+field+".txt";
+                else 
+                    outputPath += "/mismatch-"+field+".txt";
+                writerMismatch = new PrintWriter(new BufferedWriter(new FileWriter("mismatch-"+field+".txt", true)));
+
+                writerMismatch.write("\n" + documentID + "\n-------------------\n");
+
+                for(Mismatch mismatch : fieldMismatches) {
+                    // first annotator
+                    Pair<String, SoftciteAnnotation> annotation1 = mismatch.getAnnotations1();
+
+                    // second annotator
+                    Pair<String, List<SoftciteAnnotation>> annotations2 = mismatch.getAnnotations2();
+
+                    writerMismatch.write(annotation1.getA() + ":\t");
+                    SoftciteAnnotation annot = annotation1.getB();
+                    if (annot.getField(field) != null) {
+                        writerMismatch.write(annot.getField(field) + " ");
+                    }
+
+                    writerMismatch.write("\n" + annotations2.getA() + ":\t");
+                    boolean first = true;
+                    for(SoftciteAnnotation annotation : annotations2.getB()) {
+                        if (annotation.getField(field) != null) {
+                            if (first)
+                                first = false;
+                            else
+                                writerMismatch.write(" / ");    
+                            writerMismatch.write(annotation.getField(field));
+                        }
+                    }
+                    writerMismatch.write("\n\n");
+                }
+
+            } catch(Exception e) {
+                logger.error("Could not write the mismatch report for field " + field, e);
+            } finally {
+                try {
+                    if (writerMismatch != null)
+                        writerMismatch.close();
+                } catch(Exception e) {
+                    logger.error("Problem closing the mismatch report file", e);
+                }
+            }
+        }
+    }
+
+    private void initReportMismatches(String outputPath) {
+        for(String field : AnnotatedCorpusGeneratorCSV.fields) {
+            // reinit report file for this field
+            Writer writerMismatch = null;
+            try {
+                if ( (outputPath == null) || (outputPath.trim().length() == 0))
+                    outputPath = "mismatch-"+field+".txt";
+                else 
+                    outputPath += "/mismatch-"+field+".txt";
+                writerMismatch = new PrintWriter(new BufferedWriter(new FileWriter("mismatch-"+field+".txt")));
+            } catch(Exception e) {
+                logger.error("Could not write the mismatch report for field " + field, e);
+            } finally {
+                try {
+                    if (writerMismatch != null)
+                        writerMismatch.close();
+                } catch(Exception e) {
+                    logger.error("Problem closing the mismatch report file", e);
+                }
+            }
         }
     }
 }
