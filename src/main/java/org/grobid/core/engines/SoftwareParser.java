@@ -309,6 +309,9 @@ public class SoftwareParser extends AbstractParser {
                 processDocumentPart(documentParts, doc, components);
             }*/
 
+            // second pass for document level consistency 
+                
+
         } catch (Exception e) {
             e.printStackTrace();
             throw new GrobidException("Cannot process pdf file: " + file.getPath());
