@@ -13,6 +13,8 @@ import org.grobid.trainer.LabelStat;
 import org.grobid.core.analyzers.GrobidAnalyzer;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.utilities.UnicodeUtil;
+import org.grobid.core.features.*;
+import org.grobid.core.exceptions.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,7 +53,7 @@ public class ConfidenceScorer extends ScorerModel {
 			// load model
 			File modelFile = new File(MODEL_PATH+"-software.model"); 
 			if (!modelFile.exists()) {
-                logger.debug("Invalid model file for software scorer.");
+                LOGGER.debug("Invalid model file for software scorer.");
 			}
 			InputStream xml = new FileInputStream(modelFile);
 			if (model == MLModel.RANDOM_FOREST)
@@ -62,7 +64,7 @@ public class ConfidenceScorer extends ScorerModel {
 				attributes = attributeDataset.attributes();
 			else {
 				StringBuilder arffBuilder = new StringBuilder();
-				GenericSelectionFeatureVector feat = new SoftwareScorerFeatureVector();
+				GenericScorerFeatureVector feat = new SoftwareScorerFeatureVector();
 				arffBuilder.append(feat.getArffHeader()).append("\n");
 				arffBuilder.append(feat.printVector());
 				String arff = arffBuilder.toString();
@@ -70,13 +72,13 @@ public class ConfidenceScorer extends ScorerModel {
 				attributes = attributeDataset.attributes();
 				attributeDataset = null;
 			}
-			logger.info("Model for software scorer loaded: " + 
+			LOGGER.info("Model for software scorer loaded: " + 
 				MODEL_PATH+"-software.model");
 		}
 
-		GenericScorerFeatureVector feature = getNewFeature();
+		GenericScorerFeatureVector feature = new SoftwareScorerFeatureVector();
 		feature.tf_idf = tf_idf;
-		feature.dice = dice;
+		feature.dice_coef = dice;
 		double[] features = feature.toVector(attributes);
 		
 		smile.math.Math.setSeed(7);
@@ -91,19 +93,19 @@ public class ConfidenceScorer extends ScorerModel {
 	}
 
 	public void saveModel() throws Exception {
-		logger.info("saving model");
+		LOGGER.info("saving model");
 		// save the model with XStream
 		String xml = xstream.toXML(forest);
 		File modelFile = new File(MODEL_PATH+"-software.model"); 
 		if (!modelFile.exists()) {
-            logger.debug("Invalid file for saving software scorer model.");
+            LOGGER.debug("Invalid file for saving software scorer model.");
 		}
 		FileUtils.writeStringToFile(modelFile, xml, "UTF-8");
 		LOGGER.debug("Model saved under " + modelFile.getPath());
 	}
 
 	public void loadModel() throws Exception {
-		logger.info("loading model");
+		LOGGER.info("loading model");
 		// load model
 		File modelFile = new File(MODEL_PATH+"-software.model"); 
 		if (!modelFile.exists()) {
@@ -121,9 +123,9 @@ public class ConfidenceScorer extends ScorerModel {
 	public void trainModel() throws Exception {
 		if (attributeDataset == null) {
 			LOGGER.debug("Training data for software scorer has not been loaded or prepared");
-			throw new NerdResourceException("Training data for nerd selector has not been loaded or prepared");
+			throw new GrobidResourceException("Training data for nerd selector has not been loaded or prepared");
 		}
-		logger.info("building model");
+		LOGGER.info("building model");
 		double[][] x = attributeDataset.toArray(new double[attributeDataset.size()][]);
 		double[] y = attributeDataset.toArray(new double[attributeDataset.size()]);
 		
@@ -140,8 +142,8 @@ public class ConfidenceScorer extends ScorerModel {
 			(System.currentTimeMillis() - start) / (1000.00) + " seconds");
 	}
 
-	public void train(ArticleTrainingSample articles, File file) throws Exception {
-		if (articles.size() == 0) {
+	public void train(String samples, File file) throws Exception {
+		if (samples.trim().length() == 0) {
 			return;
 		}
 		StringBuilder arffBuilder = new StringBuilder();
@@ -166,17 +168,11 @@ public class ConfidenceScorer extends ScorerModel {
 	 * Boolean parameter `full` indicates if only the selector is evaluated or if the full end-to-end
 	 * process is evaluated with additional overlap pruning.
 	 */
-	public LabelStat evaluate(ArticleTrainingSample testSet, boolean full) throws Exception {	
+	/*public LabelStat evaluate(String testSet, boolean full) throws Exception {	
 		List<LabelStat> stats = new ArrayList<LabelStat>();
 		int n = 0;
-		for (Article article : testSet.getSample()) {
-			System.out.println("Evaluating on article " + (n+1) + " / " + testSet.getSample().size());
-			
-			
-			
-			n++;
-		}
+		
 		return EvaluationUtil.evaluate(testSet, stats);
-	}
+	}*/
 
 }

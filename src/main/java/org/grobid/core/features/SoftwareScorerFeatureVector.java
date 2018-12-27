@@ -14,7 +14,7 @@ public class SoftwareScorerFeatureVector extends GenericScorerFeatureVector {
 		super();
 		title = "Confidence scorer for software mentions";
 		add_tf_idf = true;
-		add_dice = true;
+		add_dice_coef = true;
 		add_is_software_name = true;
 		target_numeric = true;
 	}

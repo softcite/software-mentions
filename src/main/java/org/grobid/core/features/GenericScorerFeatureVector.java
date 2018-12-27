@@ -62,7 +62,7 @@ public class GenericScorerFeatureVector {
 		if (add_tf_idf)
 			num++;
 		if (add_is_software_name)
-			num+;
+			num++;
 		// class
 		num++;
 		return num;
@@ -110,11 +110,8 @@ public class GenericScorerFeatureVector {
 		}
 
 		// target variable - for training data (regression: 1.0 or 0.0 for training data)
-		if (target_numeric)
-			res.append("," + label);
-		else
-			res.append("," + classes);
-			
+		res.append("," + label);
+
 		return res.toString();	
 	}
 	

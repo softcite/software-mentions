@@ -576,5 +576,6 @@ public class SoftwareTrainer extends AbstractTrainer {
         Trainer trainer = new SoftwareTrainer();
         AbstractTrainer.runTraining(trainer);
         AbstractTrainer.runEvaluation(trainer);
+        System.exit(0);
     }
 }

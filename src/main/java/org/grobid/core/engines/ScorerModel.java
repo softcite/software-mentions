@@ -7,7 +7,6 @@ import java.util.regex.*;
 import java.text.*;
 
 import org.grobid.core.utilities.OffsetPosition;
-import org.grobid.core.data.Entity;
 import org.grobid.core.lang.Language;
 import org.grobid.core.utilities.LanguageUtilities;
 import org.grobid.trainer.LabelStat;
@@ -26,8 +25,8 @@ import com.thoughtworks.xstream.*;
 /**
  * Class for sharing data structures and methods to be used by the machine learning scorers
  */
-public class NerdModel {
-	private static final Logger LOGGER = LoggerFactory.getLogger(NerdModel.class);
+public class ScorerModel {
+	private static final Logger LOGGER = LoggerFactory.getLogger(ScorerModel.class);
 
 	public enum MLModel {
     	RANDOM_FOREST, GRADIENT_TREE_BOOST
@@ -54,7 +53,7 @@ public class NerdModel {
 	// for sample < 1.0, positive increases correspondingly
 	protected double sampling = 1.0;
 
-	public NerdModel() {
+	public ScorerModel() {
 		xstream = new XStream();
 		XStream.setupDefaultSecurity(xstream);
 		Class[] classArray = new Class[] {

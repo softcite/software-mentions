@@ -7,7 +7,7 @@
     <groupId>org.grobid</groupId>
     <artifactId>software-mentions</artifactId>
     <name>${project.artifactId}</name>
-    <version>0.5.3-SNAPSHOT</version>
+    <version>0.5.4-SNAPSHOT</version>
     <packaging>war</packaging>
 
     <properties>
@@ -48,12 +48,12 @@
         <dependency>
             <groupId>org.grobid</groupId>
             <artifactId>grobid-core</artifactId>
-            <version>0.5.3-SNAPSHOT</version>
+            <version>0.5.4-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.grobid</groupId>
             <artifactId>grobid-trainer</artifactId>
-            <version>0.5.3-SNAPSHOT</version>
+            <version>0.5.4-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>net.arnx</groupId>
@@ -153,6 +153,11 @@
             <version>2.8.11</version>
         </dependency>
         <dependency>
+            <groupId>com.thoughtworks.xstream</groupId>
+            <artifactId>xstream</artifactId>
+            <version>1.4.10</version>
+        </dependency>    
+        <dependency>
             <groupId>xom</groupId>
             <artifactId>xom</artifactId>
             <version>1.2.5</version>
@@ -235,6 +240,13 @@
             <groupId>org.semanticweb.yars</groupId>
             <artifactId>nxparser-parsers</artifactId>
             <version>2.3.3</version>
+        </dependency>
+
+        <!-- additional machine learning library -->
+        <dependency>
+            <groupId>com.github.haifengl</groupId>
+            <artifactId>smile-core</artifactId>
+            <version>1.5.2</version>
         </dependency>
 
     </dependencies>
