@@ -160,7 +160,7 @@ public class AnnotatedCorpusGeneratorCSV {
                                     .consolidateHeader(0)
                                     .consolidateCitations(0)
                                     .build();
-        LibraryLoader.load();
+        //LibraryLoader.load();
         Engine engine = GrobidFactory.getInstance().getEngine();
 
         // for reporting unmatched mention/context 

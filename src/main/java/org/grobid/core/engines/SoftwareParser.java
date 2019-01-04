@@ -17,6 +17,7 @@ import org.grobid.core.engines.label.SoftwareTaggingLabels;
 import org.grobid.core.engines.label.SegmentationLabels;
 import org.grobid.core.engines.label.TaggingLabel;
 import org.grobid.core.engines.label.TaggingLabels;
+import org.grobid.core.engines.tagging.GrobidCRFEngine;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.factory.GrobidFactory;
 import org.grobid.core.features.FeaturesVectorSoftware;
@@ -28,6 +29,8 @@ import org.grobid.core.sax.TextChunkSaxHandler;
 import org.grobid.core.tokenization.TaggingTokenCluster;
 import org.grobid.core.tokenization.TaggingTokenClusteror;
 import org.grobid.core.utilities.*;
+import org.grobid.core.utilities.counters.CntManager;
+import org.grobid.core.utilities.counters.impl.CntManagerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.InputSource;
@@ -71,7 +74,14 @@ public class SoftwareParser extends AbstractParser {
     private SoftwareDisambiguator disambiguator;
 
     private SoftwareParser() {
-        super(GrobidModels.SOFTWARE);
+        super(GrobidModels.SOFTWARE, CntManagerFactory.getCntManager(), GrobidCRFEngine.valueOf(SoftwareProperties.get("grobid.software.engine")));
+        /*String engineOption = ;
+        if ((engineOption == null) || engineOption.equals("delft"))
+            engine = GrobidCRFEngine.DELFT;
+        else 
+            engine = GrobidCRFEngine.WAPITI;*/
+
+        
         softwareLexicon = SoftwareLexicon.getInstance();
 		parsers = new EngineParsers();
         disambiguator = SoftwareDisambiguator.getInstance();

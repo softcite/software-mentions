@@ -47,7 +47,7 @@ public class SoftwareRestService implements SoftwarePaths {
     
             LOGGER.info(">>>>>>>> GROBID_HOME="+GrobidProperties.get_GROBID_HOME_PATH());
 
-            LibraryLoader.load();
+            //LibraryLoader.load();
             SoftwareLexicon.getInstance();
         } catch (final Exception exp) {
             System.err.println("GROBID software initialisation failed: " + exp);

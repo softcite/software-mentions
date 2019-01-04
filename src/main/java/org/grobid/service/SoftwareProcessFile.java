@@ -67,7 +67,7 @@ public class SoftwareProcessFile {
         Engine engine = null;
 
         try {
-            LibraryLoader.load();
+            //LibraryLoader.load();
             engine = GrobidFactory.getInstance().getEngine();
             originFile = IOUtilities.writeInputFile(inputStream);
             GrobidAnalysisConfig config = new GrobidAnalysisConfig.GrobidAnalysisConfigBuilder().build();
