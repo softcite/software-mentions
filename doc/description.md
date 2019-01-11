@@ -89,7 +89,7 @@ label                precision    recall       f1
 all fields           70.71        51.15        59.36   (micro average)
 ```
 
-Version Oct. 19th 2018
+Version Oct. 19th 2018, this version uses a gazetteer for additional lexical features based on an extraction of software names from WikiData.
 
 ```
 Labeling took: 1821 ms
@@ -137,9 +137,9 @@ Note that we present here simply intermediary results, and final evaluation metr
 We developed a Keras deep learning framework called [DeLFT](https://github.com/kermitt2/delft) (**De**ep **L**earning **F**ramework for **T**ext) for text processing, covering in particular sequence labelling as used in GROBID. This library re-implements the most recent state-of-the-art Deep Learning architectures. 
 It re-implements in particular the current state of the art model (BiLSTM-CRF with ELMo embeddings) for NER (_Peters and al. 2018_), with even [slightly improved performance](http://science-miner.com/a-reproducibility-study-on-neural-ner/) on the reference evaluation dataset CoNLL NER 2003.
 
-The training data of GROBID is supported by DeLFT and, as a consequence, any GROBID CRF models can have an equivalent Deep Learning model counterpart. 
+The training data of GROBID is supported by DeLFT and, as a consequence, any GROBID CRF models can have an equivalent Deep Learning model counterpart. DeLFT training and decoding, as well as all these models, are integrated natively to Java GROBID via JEP (Java Embedded Python).
 
-The following results have been obtained with a BiLSTM-CRF architecture, using GloVes 300d embeddings, with the same partition between train and test set as the above Oct. 19th 2018 results for CRF. 
+The following results have been obtained with a BiLSTM-CRF architecture, using GloVes 300d embeddings, with the same partition between train and test set as the above Oct. 19th 2018 results for CRF. Contrary to CRF, no "hand-crafted" features, for instance based on gazetteer, are used. 
 
 ```
                   precision    recall  f1-score   support
@@ -153,9 +153,84 @@ The following results have been obtained with a BiLSTM-CRF architecture, using G
 all (micro avg.)     0.7170    0.7059    0.7114       578
 ```
 
-F-score is improved almost 9 points as compared to CRF which is a very significant difference. Given that we are not using without ELMo yet, nor parameter tuning, and other possible other improvements, DL for this task appears particularly strong, in a quite similar way as general NER. 
+Results Nov. 2th 2018, averaged over 10 training, leading to 72.8 f-score.
 
-With a high-end GPU (GTX 1080Ti), speed is 8000 tokens per second, relatively similar to CRF. However, it should be noted that using some more recent sophisticated contextalized embeddings or LM like ELMo, while certainly improving accuracy, will have a very strong impact on runtime, running between 25 and 30 slower than with traditional embeddings following our benchmarking. 
+```
+average over 10 folds
+    macro f1 = 0.728
+    macro precision = 0.751
+    macro recall = 0.707 
+
+
+** Worst ** model scores - 
+
+                  precision    recall  f1-score   support
+
+           <url>     0.3571    0.3846    0.3704        13
+       <creator>     0.7867    0.5268    0.6310       112
+         number>     0.7049    0.7544    0.7288       114
+      <software>     0.8163    0.6557    0.7273       427
+           date>     0.5000    0.1250    0.2000        16
+
+all (micro avg.)     0.7742    0.6334    0.6968       682
+
+
+** Best ** model scores - 
+
+                  precision    recall  f1-score   support
+
+           <url>     0.6000    0.4615    0.5217        13
+       <creator>     0.7475    0.6607    0.7014       112
+         number>     0.7339    0.7982    0.7647       114
+      <software>     0.7540    0.7822    0.7678       427
+           date>     0.3333    0.1250    0.1818        16
+
+all (micro avg.)     0.7434    0.7434    0.7434       682
+
+```
+
+F-score is improved 10 points as compared to CRF which is a very significant difference, DL for this task appears particularly strong. With a high-end GPU (GTX 1080Ti), speed is 8000 tokens per second, relatively similar to CRF. 
+
+The usage of ELMo futher improve the performance significantly: 
+
+```
+Gloves with ELMo
+max sequence length 3000, batch size 3
+
+average over 10 folds
+    macro f1 = 0.7529150918720532
+    macro precision = 0.7427923520879355
+    macro recall = 0.763782991202346 
+
+
+** Worst ** model scores - 
+
+                  precision    recall  f1-score   support
+
+           date>     0.5263    0.6250    0.5714        16
+      <software>     0.7363    0.7845    0.7596       427
+       <creator>     0.7379    0.6786    0.7070       112
+         number>     0.7109    0.7982    0.7521       114
+           <url>     0.4118    0.5385    0.4667        13
+
+all (micro avg.)     0.7188    0.7610    0.7393       682
+
+
+** Best ** model scores - 
+
+                  precision    recall  f1-score   support
+
+           date>     0.5789    0.6875    0.6286        16
+      <software>     0.7813    0.8033    0.7921       427
+       <creator>     0.7830    0.7411    0.7615       112
+         number>     0.7045    0.8158    0.7561       114
+           <url>     0.5294    0.6923    0.6000        13
+
+all (micro avg.)     0.7560    0.7903    0.7728       682
+
+```
+
+F-score is improved by 12.5 points as compared to CRF. However, it should be noted that using some more recent sophisticated contextalized embeddings or LM like ELMo, while certainly improving accuracy, will have a very strong impact on runtime, running between 25 and 30 slower than with traditional embeddings following our benchmarking. 
 
 We plan to generate more Deep Learning models for the software mention recognition and benchmark them with the CRF model. We will thus be able to report reliable evaluations for all the best current named entity recognition algorithms and select the highest performing one. The evaluation will cover accuracy, but also processing speed and memory usage, with and without GPU.  
 
@@ -167,7 +242,7 @@ The above preliminary results are given for information and to illustrate the ev
 
 - the quality of the training data is currently the object of the effort of the James Howison Lab. Supervised training is very sensitve to the quality of the training data, and this will automatically improve the accuracy of the model by a large margin,
 
-- no effort at this stage have been dedicated to feature engineering, which is a key aspect of CRF. We need to wait for the improvement of the quality of the training data to address this step,
+- more effort could be dedicated to feature engineering for CRF. We would need to wait for the improvement of the quality of the training data to address this step,
 
 - some techniques like sub- or over-sampling can be used to optimize accuracy.
 
