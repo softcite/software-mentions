@@ -57,7 +57,9 @@ public class SoftwareLexicon {
         LOGGER.info("Init software lexicon");
         softwareVocabulary = new HashSet<String>();
 
-        File file = new File(GrobidProperties.getGrobidHomePath()+"/../software-mentions/resources/lexicon/wikidata-softwares.txt");
+//        File file = new File(GrobidProperties.getGrobidHomePath()+"/../software-mentions/resources/lexicon/wikidata-softwares.txt");
+        // it's convenient to have everything assembled in the same grobid-home
+        File file = new File(GrobidProperties.getGrobidHomePath() + "/lexicon/software/wikidata-softwares.txt");
         if (!file.exists()) {
             throw new GrobidResourceException("Cannot initialize software dictionary, because file '" + 
                 file.getAbsolutePath() + "' does not exists.");
