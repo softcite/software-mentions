@@ -79,7 +79,7 @@ public class SoftwareMain {
             final GrobidHomeFinder grobidHomeFinder = new GrobidHomeFinder(Arrays.asList(grobidHome));
             grobidHomeFinder.findGrobidHomeOrFail();
             GrobidProperties.getInstance(grobidHomeFinder);
-            LibraryLoader.load();
+            //LibraryLoader.load();
         } catch (final Exception exp) {
             System.err.println("Grobid initialisation failed: " + exp);
         }

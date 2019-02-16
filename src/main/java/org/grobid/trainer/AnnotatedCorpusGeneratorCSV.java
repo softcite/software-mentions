@@ -38,6 +38,7 @@ import java.text.NumberFormat;
 
 import org.apache.commons.io.*;
 import org.apache.commons.csv.*;
+import org.apache.commons.lang3.tuple.Pair;
 
 import org.semanticweb.yars.turtle.*;
 import org.semanticweb.yars.nx.*;
@@ -160,7 +161,7 @@ public class AnnotatedCorpusGeneratorCSV {
                                     .consolidateHeader(0)
                                     .consolidateCitations(0)
                                     .build();
-        LibraryLoader.load();
+        //LibraryLoader.load();
         Engine engine = GrobidFactory.getInstance().getEngine();
 
         // for reporting unmatched mention/context 
@@ -212,7 +213,8 @@ public class AnnotatedCorpusGeneratorCSV {
             SortedSet<DocumentPiece> documentParts = doc.getDocumentPart(SegmentationLabels.HEADER);
             List<LayoutToken> titleTokens = null;
             if (documentParts != null) {
-                String header = engine.getParsers().getHeaderParser().getSectionHeaderFeatured(doc, documentParts, true);
+                Pair<String,List<LayoutToken>> headerFeatured = engine.getParsers().getHeaderParser().getSectionHeaderFeatured(doc, documentParts, true);
+                String header = headerFeatured.getLeft();
                 List<LayoutToken> tokenizationHeader = Document.getTokenizationParts(documentParts, doc.getTokenizations());
                 String labeledResult = null;
 
@@ -492,86 +494,8 @@ public class AnnotatedCorpusGeneratorCSV {
                     writer.write(System.lineSeparator());
                 }
             }
-
         }
     }
-
-    /*private void alignLayoutTokenSequenceOld(List<LayoutToken> layoutTokens, List<SoftciteAnnotation> localAnnotations) {
-        if ( (layoutTokens == null) || (layoutTokens.size() == 0) )
-            return;
-        String previousContext = null;
-        String previousMention = null;
-        for(SoftciteAnnotation annotation : localAnnotations) {
-            if (annotation.getSoftwareMention() == null)
-                continue;
-            totalMentions++;
-            if (annotation.getContext() == null)
-                continue;
-            totalContexts++;
-
-            // first try to locate the context: this can be hard because the context string might 
-            // have changed via cut and paste and formatting
-            int unmatchedContext = 0;
-            String alltext = LayoutTokensUtil.toText(layoutTokens);
-            // simplify text for soft matching
-            //alltext = alltext.replace(" ", "").replace("\n", "");
-            alltext = alltext.replaceAll("[^a-zA-Z0-9]", "");
-            alltext = alltext.toLowerCase();
-
-            String context = annotation.getContext();
-            int page = annotation.getPage();
-
-            String simplifiedContext = context.replaceAll("[^a-zA-Z0-9]", "");
-            simplifiedContext = simplifiedContext.toLowerCase();
-            
-            int ind = alltext.indexOf(simplifiedContext);
-            if (ind == -1) {
-                //System.out.println("failed: " + context);
-                // try by segmenting the context
-                unmatchedContexts++;
-            } else {
-                //System.out.println("match context: " + ind);
-            }
-
-            // try to locate the mention
-
-            //String chunk = LayoutTokensUtil.toText(layoutTokens);
-            String softwareMention = annotation.getSoftwareMention();
-
-            Pattern mentionPattern = Pattern.compile(Pattern.quote(softwareMention));
-            Matcher mentionMatcher = mentionPattern.matcher(context);
-            boolean matchFound = false;
-            
-            while (mentionMatcher.find()) {
-                // we found a match :)
-                matchFound = true;
-                //System.out.println("match: " + mentionMatcher.start() + " = " + mentionMatcher.end() + " | " + 
-                //    context.substring(mentionMatcher.start(), mentionMatcher.end()));
-            }
-            if (!matchFound) {
-                //System.out.println("failed mention: " + softwareMention + " -> " + context);
-                // we try after lower casing if the mention is long enough
-                if (softwareMention.length() > 3) {
-                    mentionPattern = Pattern.compile(Pattern.quote(softwareMention.toLowerCase()));
-                    mentionMatcher = mentionPattern.matcher(context.toLowerCase());
-                    while (mentionMatcher.find()) {
-                        // we found a match :)
-                        matchFound = true;
-                        //System.out.println("recover match: " + mentionMatcher.start() + " = " + mentionMatcher.end() + " | " + 
-                        //    context.substring(mentionMatcher.start(), mentionMatcher.end()));
-                    }
-                    if (!matchFound) {
-                        if ( (previousContext == null) || !context.equals(previousContext) || 
-                             (previousMention == null) || !softwareMention.equals(previousMention) ) 
-                            System.out.println("Failed mention/context match: " + softwareMention + " -> " + context);
-                        unmatchedMentions++;
-                    }
-                }
-            }
-            previousContext = context;
-            previousMention = softwareMention;
-        }
-    }*/
 
     private void alignLayoutTokenSequence(AnnotatedDocument annotatedDocument, List<LayoutToken> layoutTokens, List<SoftciteAnnotation> localAnnotations) {
         if ( (layoutTokens == null) || (layoutTokens.size() == 0) )

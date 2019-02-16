@@ -6,7 +6,9 @@ __Work in progress.__
 
 The goal of this GROBID module is to recognize in textual documents and PDF any mentions of softwares.   
 
-As the other GROBID models, the module relies only on machine learning and uses linear CRF. 
+As the other GROBID models, the module relies only on machine learning and can use linear CRF (via (Wapiti)[https://github.com/kermitt2/Wapiti] JNI integration) or Deep Learning model such as BiLSTM-CRF with or without ELMo (via [DeLFT](https://github.com/kermitt2/delft) JNI integration). 
+
+A description of the task and some preliminary evaluation can be found [here](doc/description.md).
 
 ## Install, build, run
 

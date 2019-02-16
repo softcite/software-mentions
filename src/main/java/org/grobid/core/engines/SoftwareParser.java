@@ -17,6 +17,7 @@ import org.grobid.core.engines.label.SoftwareTaggingLabels;
 import org.grobid.core.engines.label.SegmentationLabels;
 import org.grobid.core.engines.label.TaggingLabel;
 import org.grobid.core.engines.label.TaggingLabels;
+import org.grobid.core.engines.tagging.GrobidCRFEngine;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.factory.GrobidFactory;
 import org.grobid.core.features.FeaturesVectorSoftware;
@@ -28,6 +29,8 @@ import org.grobid.core.sax.TextChunkSaxHandler;
 import org.grobid.core.tokenization.TaggingTokenCluster;
 import org.grobid.core.tokenization.TaggingTokenClusteror;
 import org.grobid.core.utilities.*;
+import org.grobid.core.utilities.counters.CntManager;
+import org.grobid.core.utilities.counters.impl.CntManagerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.InputSource;
@@ -41,6 +44,7 @@ import java.util.*;
 
 import static org.apache.commons.lang3.StringUtils.*;
 import static org.grobid.core.document.xml.XmlBuilderUtils.teiElement;
+import org.apache.commons.lang3.tuple.Pair;
 
 /**
  * Software mentions extraction.
@@ -71,7 +75,14 @@ public class SoftwareParser extends AbstractParser {
     private SoftwareDisambiguator disambiguator;
 
     private SoftwareParser() {
-        super(GrobidModels.SOFTWARE);
+        super(GrobidModels.SOFTWARE, CntManagerFactory.getCntManager(), GrobidCRFEngine.valueOf(SoftwareProperties.get("grobid.software.engine")));
+        /*String engineOption = ;
+        if ((engineOption == null) || engineOption.equals("delft"))
+            engine = GrobidCRFEngine.DELFT;
+        else 
+            engine = GrobidCRFEngine.WAPITI;*/
+
+        
         softwareLexicon = SoftwareLexicon.getInstance();
 		parsers = new EngineParsers();
         disambiguator = SoftwareDisambiguator.getInstance();
@@ -218,7 +229,8 @@ public class SoftwareParser extends AbstractParser {
             // from the header, we are interested in title, abstract and keywords
             SortedSet<DocumentPiece> documentParts = doc.getDocumentPart(SegmentationLabels.HEADER);
             if (documentParts != null) {
-                String header = parsers.getHeaderParser().getSectionHeaderFeatured(doc, documentParts, true);
+                Pair<String,List<LayoutToken>> headerFeatured = parsers.getHeaderParser().getSectionHeaderFeatured(doc, documentParts, true);
+                String header = headerFeatured.getLeft();
                 List<LayoutToken> tokenizationHeader = doc.getTokenizationParts(documentParts, doc.getTokenizations());
                 String labeledResult = null;
                 if ((header != null) && (header.trim().length() > 0)) {
@@ -256,9 +268,9 @@ public class SoftwareParser extends AbstractParser {
                 if (featSeg != null) {
                     // if featSeg is null, it usually means that no body segment is found in the
                     // document segmentation
-                    String bodytext = featSeg.getA();
+                    String bodytext = featSeg.getLeft();
 
-                    LayoutTokenization tokenizationBody = featSeg.getB();
+                    LayoutTokenization tokenizationBody = featSeg.getRight();
                     String rese = null;
                     if ( (bodytext != null) && (bodytext.trim().length() > 0) ) {               
                         rese = parsers.getFullTextParser().label(bodytext);
@@ -309,13 +321,17 @@ public class SoftwareParser extends AbstractParser {
                 processDocumentPart(documentParts, doc, components);
             }*/
 
+            // second pass for document level consistency 
+                
+
         } catch (Exception e) {
             e.printStackTrace();
             throw new GrobidException("Cannot process pdf file: " + file.getPath());
         }
 
         Collections.sort(entities);
-        return new Pair<List<SoftwareEntity>,Document>(entities, doc);
+        //return new Pair<List<SoftwareEntity>,Document>(entities, doc);
+        return Pair.of(entities, doc);
     }
 
     /**

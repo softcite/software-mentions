@@ -131,5 +131,6 @@ public class SoftwareTrainerRunner {
             default:
                 throw new IllegalStateException("Invalid RunType: " + mode.name());
         }
+        System.exit(0);
     }
 }
