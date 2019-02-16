@@ -38,6 +38,7 @@ import java.text.NumberFormat;
 
 import org.apache.commons.io.*;
 import org.apache.commons.csv.*;
+import org.apache.commons.lang3.tuple.Pair;
 
 import org.semanticweb.yars.turtle.*;
 import org.semanticweb.yars.nx.*;
@@ -212,7 +213,8 @@ public class AnnotatedCorpusGeneratorCSV {
             SortedSet<DocumentPiece> documentParts = doc.getDocumentPart(SegmentationLabels.HEADER);
             List<LayoutToken> titleTokens = null;
             if (documentParts != null) {
-                String header = engine.getParsers().getHeaderParser().getSectionHeaderFeatured(doc, documentParts, true);
+                Pair<String,List<LayoutToken>> headerFeatured = engine.getParsers().getHeaderParser().getSectionHeaderFeatured(doc, documentParts, true);
+                String header = headerFeatured.getLeft();
                 List<LayoutToken> tokenizationHeader = Document.getTokenizationParts(documentParts, doc.getTokenizations());
                 String labeledResult = null;
 

@@ -8,7 +8,7 @@ import org.grobid.core.factory.GrobidFactory;
 import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.utilities.SoftwareProperties;
 import org.grobid.core.main.GrobidHomeFinder;
-import org.grobid.core.utilities.Pair;
+//import org.grobid.core.utilities.Pair;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -17,6 +17,8 @@ import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Arrays;
+
+import org.apache.commons.lang3.tuple.Pair;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
@@ -64,7 +66,7 @@ public class SoftwareParserTest {
     //@Test
     public void testSoftwareParserPDF() throws Exception {
         Pair<List<SoftwareEntity>, Document> res = SoftwareParser.getInstance().processPDF(new File("./src/test/resources/annot.pdf"));
-        List<SoftwareEntity> entities = res.getA();
+        List<SoftwareEntity> entities = res.getLeft();
 
         assertThat(entities, hasSize(19));
     }

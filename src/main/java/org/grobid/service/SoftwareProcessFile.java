@@ -13,7 +13,7 @@ import org.grobid.core.factory.GrobidPoolingFactory;
 import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.utilities.IOUtilities;
 import org.grobid.core.utilities.KeyGen;
-import org.grobid.core.utilities.Pair;
+//import org.grobid.core.utilities.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.InputSource;
@@ -39,6 +39,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
 import org.grobid.core.layout.Page;
 
@@ -79,8 +80,8 @@ public class SoftwareProcessFile {
                 Pair<List<SoftwareEntity>, Document> extractedEntities = parser.processPDF(originFile);
                 long end = System.currentTimeMillis();
 
-                Document doc = extractedEntities.getB();
-                List<SoftwareEntity> entities = extractedEntities.getA();
+                Document doc = extractedEntities.getRight();
+                List<SoftwareEntity> entities = extractedEntities.getLeft();
                 StringBuilder json = new StringBuilder();
 				json.append("{ ");
 
