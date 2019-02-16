@@ -75,7 +75,7 @@ public class SoftwareParser extends AbstractParser {
     private SoftwareDisambiguator disambiguator;
 
     private SoftwareParser() {
-        super(GrobidModels.SOFTWARE, CntManagerFactory.getCntManager(), GrobidCRFEngine.valueOf(SoftwareProperties.get("grobid.software.engine")));
+        super(GrobidModels.SOFTWARE, CntManagerFactory.getCntManager(), GrobidCRFEngine.valueOf(SoftwareProperties.get("grobid.software.engine").toUpperCase()));
         /*String engineOption = ;
         if ((engineOption == null) || engineOption.equals("delft"))
             engine = GrobidCRFEngine.DELFT;
