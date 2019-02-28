@@ -612,13 +612,20 @@ var grobid = (function ($) {
 
         var canvasHeight = canvas.height();
         var canvasWidth = canvas.width();
-        var scale_x = canvasHeight / page_height;
-        var scale_y = canvasWidth / page_width;
+        var scale_y = canvasHeight / page_height;
+        var scale_x = canvasWidth / page_width;
 
-        var x = thePos.x * scale_x - 1;
-        var y = thePos.y * scale_y - 1 ;
-        var width = thePos.w * scale_x + 1;
-        var height = thePos.h * scale_y + 1;
+        /*console.log('canvasHeight: ' + canvasHeight);
+        console.log('canvasWidth: ' + canvasWidth);
+        console.log('page_height: ' + page_height);
+        console.log('page_width: ' + page_width);
+        console.log('scale_x: ' + scale_x);
+        console.log('scale_y: ' + scale_y);*/
+
+        var x = (thePos.x * scale_x) - 1;
+        var y = (thePos.y * scale_y) - 1;
+        var width = (thePos.w * scale_x) + 1;
+        var height = (thePos.h * scale_y) + 1;
 
         //make clickable the area
         var element = document.createElement("a");
@@ -787,11 +794,11 @@ var grobid = (function ($) {
 
         if (wikipedia) {
             string += "</td><td style='align:right;bgcolor:#fff'>";
-            string += '<span id="img-' + wikipedia + '"><script type="text/javascript">lookupWikiMediaImage("' + wikipedia + '", "' + lang + '")</script></span>';
+            string += '<span id="img-' + wikipedia + '-' + pageIndex + '"><script type="text/javascript">lookupWikiMediaImage("' + wikipedia + '", "' + 
+                lang + '", "' + pageIndex + '")</script></span>';
         }
 
         string += "</td></tr></table>";
-
 
         // bibliographical reference(s)
         if (entity['references']) {
@@ -844,16 +851,17 @@ var grobid = (function ($) {
                     }
 
                     // make the biblio reference information collapsible
-                    string += "<p><div class='panel-group' id='accordionParentReferences'>";
+                    string += "<p><div class='panel-group' id='accordionParentReferences-" + pageIndex + "-" + r + "'>";
                     string += "<div class='panel panel-default'>";
                     string += "<div class='panel-heading' style='background-color:#FFF;color:#70695C;border:padding:0px;font-size:small;'>";
                     // accordion-toggle collapsed: put the chevron icon down when starting the page; accordion-toggle : put the chevron icon up
-                    string += "<a class='accordion-toggle collapsed' data-toggle='collapse' data-parent='#accordionParentReferences' href='#collapseElementReferences"+ pageIndex + "' style='outline:0;'>";
+                    string += "<a class='accordion-toggle collapsed' data-toggle='collapse' data-parent='#accordionParentReferences-" + pageIndex + "-" + r + 
+                        "' href='#collapseElementReferences-"+ pageIndex + "-" + r + "' style='outline:0;'>";
                     string += "<h5 class='panel-title' style='font-weight:normal;'>" + entity['references'][r]['label'] + " " + localLabel + "</h5>";
                     string += "</a>";
                     string += "</div>";
                     // panel-collapse collapse: hide the content of statemes when starting the page; panel-collapse collapse in: show it
-                    string += "<div id='collapseElementReferences"+ pageIndex +"' class='panel-collapse collapse'>";
+                    string += "<div id='collapseElementReferences-"+ pageIndex + "-" + r +"' class='panel-collapse collapse'>";
                     string += "<div class='panel-body'>";
                     string += "<table class='statements' style='width:100%;background-color:#fff;border:1px'>" + localHtml + "</table>";
                     string += "</div></div></div></div></p>";
@@ -940,12 +948,12 @@ var grobid = (function ($) {
 
     var imgCache = {};
 
-    window.lookupWikiMediaImage = function (wikipedia, lang) {
+    window.lookupWikiMediaImage = function (wikipedia, lang, pageIndex) {
         // first look in the local cache
         if (lang + wikipedia in imgCache) {
             var imgUrl = imgCache[lang + wikipedia];
             var document = (window.content) ? window.content.document : window.document;
-            var spanNode = document.getElementById("img-" + wikipedia);
+            var spanNode = document.getElementById("img-" + wikipedia + "-" + pageIndex);
             spanNode.innerHTML = '<img src="' + imgUrl + '"/>';
         } else {
             // otherwise call the wikipedia API
@@ -960,7 +968,7 @@ var grobid = (function ($) {
                 xhrFields: {withCredentials: true},
                 success: function (response) {
                     var document = (window.content) ? window.content.document : window.document;
-                    var spanNode = document.getElementById("img-" + wikipedia);
+                    var spanNode = document.getElementById("img-" + wikipedia + "-" + pageIndex);
                     if (response.query && spanNode) {
                         if (response.query.pages[wikipedia]) {
                             if (response.query.pages[wikipedia].thumbnail) {

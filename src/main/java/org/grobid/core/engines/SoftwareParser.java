@@ -402,7 +402,7 @@ public class SoftwareParser extends AbstractParser {
                                 if (refNode instanceof Element) {
                                     // get the bib ref key
                                     String refKey = ((Element)refNode).getAttributeValue("target");
-System.out.println(refKey + " / " + refNode.getValue());                             
+//System.out.println(refKey + " / " + refNode.getValue());                             
                                     if (refKey == null)
                                         continue;
 
@@ -429,7 +429,7 @@ System.out.println(refKey + " / " + refNode.getValue());
                                         List<BoundingBox> boundingBoxes = BoundingBoxCalculator.calculate(refTokens);
                                         biblioComponent.setBoundingBoxes(boundingBoxes);
                                         bibRefComponents.add(biblioComponent);
-                                        break;
+                                        //break;
                                     }
                                 }
                             }
@@ -593,28 +593,22 @@ System.out.println(refKey + " / " + refNode.getValue());
             return entities;
         }
         
-System.out.println(results.size() + " matches");
         for(OffsetPosition position : results) {
             List<LayoutToken> matchedTokens = layoutTokens.subList(position.start, position.end+1);
             OffsetPosition localPosition = new OffsetPosition(matchedTokens.get(0).getOffset(), 
                 matchedTokens.get(matchedTokens.size()-1).getOffset() + matchedTokens.get(matchedTokens.size()-1).getText().length());
 
             String term = LayoutTokensUtil.toText(matchedTokens);
-System.out.println(term);
             int termFrequency = 1;
             if (frequencies != null && frequencies.get(term) != null)
                 termFrequency = frequencies.get(term);
-System.out.println("termFrequency: " + termFrequency);
+
             // check the tf-idf of the term
             double tfidf = -1.0;
             if (termProfiles.get(term) != null) {
-System.out.println(termProfiles.get(term).getLeft().size() + " total existing term annotations in doc" );
                 // is the match already present in the entity list? 
                 List<OffsetPosition> thePositions = termProfiles.get(term).getLeft();
-System.out.println("localPosition: " + localPosition.toString()); 
-System.out.println("thePositions: " + thePositions.toString()); 
                 if (containsPosition(thePositions, localPosition)) {
-System.out.println("occurrence already annotated, go on...");
                     continue;
                 }
                 tfidf = termFrequency * termProfiles.get(term).getRight();
@@ -622,10 +616,8 @@ System.out.println("occurrence already annotated, go on...");
             // ideally we should make a small classifier here with entity frequency, tfidf, disambiguation success and 
             // and/or log-likelyhood/dice coefficient as features - but for the time being we introduce a simple rule
             // with an experimentally defined threshold:
-System.out.println("tf-idf: " + tfidf);
             if ( (tfidf <= 0) || (tfidf > 0.001) ) {
                 // add new entity mention
-System.out.println("new entity");              
                 SoftwareComponent name = new SoftwareComponent();
                 name.setRawForm(term);
                 name.setOffsetStart(localPosition.start);
@@ -640,7 +632,6 @@ System.out.println("new entity");
                 entity.setSoftwareName(name);
                 entity.setType(SoftwareLexicon.Software_Type.SOFTWARE);
                 // add disambiguation infos if any
-System.out.println("add disamb infos for: " + term);  
                 for(SoftwareEntity ent : entities) {
                     if (ent.getSoftwareName().getWikipediaExternalRef() != -1) {
                         if (term.equals(ent.getSoftwareName().getRawForm())) {
@@ -757,12 +748,10 @@ System.out.println("add disamb infos for: " + term);
         // we anchor the process to the software names and aggregate other closest components on the right
         // if we cross a bib ref component we attach it, if a bib ref component is just after the last 
         // component of the entity group, we attach it 
-System.out.println("nb entities: " + entities.size());
         for(SoftwareEntity entity : entities) {
             // find the name component
             SoftwareComponent nameComponent = entity.getSoftwareName();
             int pos = nameComponent.getOffsetEnd();
-System.out.println("name component at " + pos);
             
             // find end boundary
             int endPos = pos;
@@ -788,10 +777,10 @@ System.out.println("name component at " + pos);
 
             // find included or just next bib ref callout
             for(BiblioComponent refBib : refBibComponents) {
-System.out.println("bib ref component at " + refBib.getOffsetStart() );
+//System.out.println("bib ref component at " + refBib.getOffsetStart() + " / " + refBib.getRefKey());
                 if ( (refBib.getOffsetStart() >= pos) &&
                      (refBib.getOffsetStart() <= endPos+5) ) {
-System.out.println("bib ref attached / " +  refBib.getRefKey());                 
+//System.out.println("bib ref attached / " +  refBib.getRefKey()); 
                     entity.addBibRef(refBib);
                     endPos = refBib.getOffsetEnd();
                 }
