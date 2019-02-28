@@ -5,7 +5,7 @@
  */
 
 var grobid = (function ($) {
-    var supportedLanguages = ["en", "es", "it", "fr", "de"];
+    var supportedLanguages = ["en"];
 
     // for components view
     var entities = null;
@@ -404,6 +404,16 @@ var grobid = (function ($) {
                     pieces.push(creator)
                 }
 
+                var references = entity['references']
+                if (references) {
+                    for(var reference in references) {
+                        reference['subtype'] = 'reference';
+                        if (!reference['rawForm'])
+                            reference['rawForm'] = reference['label']
+                        pieces.push(reference)    
+                    }
+                }
+
                 //var type = entity['type']
                 //var id = entity['id']
 
@@ -415,7 +425,7 @@ var grobid = (function ($) {
                     var end = parseInt(piece.offsetEnd, 10);
         
                     if (start < pos) {
-                        // we have a problem in the initial sort of the quantities
+                        // we have a problem in the initial sort of the entities
                         // the server response is not compatible with the present client 
                         console.log("Sorting of entities as present in the server's response not valid for this client.");
                         // note: this should never happen?
@@ -558,9 +568,19 @@ var grobid = (function ($) {
                     pieces.push(creator)
                 }
 
+                var references = entity['references']
+                if (references) {
+                    for(var r in references) {
+                        references[r]['subtype'] = 'reference';
+                        if (!references[r]['rawForm']) {
+                            references[r]['rawForm'] = references[r]['label']
+                        }
+                        pieces.push(references[r])    
+                    }
+                }
+
                 var type = entity['type']
                 var id = entity['id']
-
                 for (var pi in pieces) {
                     piece = pieces[pi]
                     //console.log(piece)
@@ -574,7 +594,7 @@ var grobid = (function ($) {
                                 page_height = pageInfo[pageNumber-1].page_height;
                                 page_width = pageInfo[pageNumber-1].page_width;
                             }
-                            annotateEntity(id, rawForm, piece['subtype'], thePos, page_height, page_width, n, m);
+                            annotateEntity(id, rawForm, piece['subtype'], thePos, page_height, page_width, n, pi+m);
                         });
                     }
                 }
@@ -605,6 +625,7 @@ var grobid = (function ($) {
         var attributes = "display:block; width:"+width+"px; height:"+height+"px; position:absolute; top:"+
             y+"px; left:"+x+"px;";
         element.setAttribute("style", attributes + "border:2px solid;");
+        
         // to have a pop-up window, uncomment
         //element.setAttribute("data-toggle", "popover");
         //element.setAttribute("data-placement", "top");
@@ -648,7 +669,7 @@ var grobid = (function ($) {
         //console.log(localEntityNumber)
         if (localEntityNumber < entities.length) {
 
-            var string = toHtml(entities[localEntityNumber], -1);
+            var string = toHtml(entities[localEntityNumber], -1, 0);
 
             $('#detailed_annot-0').html(string);
             $('#detailed_annot-0').show();
@@ -682,13 +703,13 @@ var grobid = (function ($) {
              entityListIndex--) {
             var entity = entityMap[localEntityNumber][entityListIndex];
 
-            string = toHtml(entity, topPos);
+            string = toHtml(entity, topPos, pageIndex);
         }
         $('#detailed_annot-' + pageIndex).html(string);
         $('#detailed_annot-' + pageIndex).show();
     }
 
-    function toHtml(entity, topPos) {
+    function toHtml(entity, topPos, pageIndex) {
         var wikipedia = entity.wikipediaExternalRef;
         var wikidataId = entity.wikidataId;
         var type = entity.type;
@@ -771,6 +792,76 @@ var grobid = (function ($) {
 
         string += "</td></tr></table>";
 
+
+        // bibliographical reference(s)
+        if (entity['references']) {
+            string += "<br/><p>References: "
+            for(var r in entity['references']) {
+                if (entity['references'][r]['label']) {
+                    //string += "<b>" + entity['references'][r]['label'] + "</b>"    
+                    localLabel = ""
+                    localHtml = ""
+                    if (entity['references'][r]['tei']) {
+                        //localHtml += entity['references'][r]['tei']
+//console.log(entity['references'][r]['tei']);
+                        var doc = parse(entity['references'][r]['tei']);
+                        var authors = doc.getElementsByTagName("author");
+                        max = authors.length
+                        if (max > 3)
+                            max = 1;
+                        for(var n=0; n < authors.length; n++) {
+                            var lastName = "";
+                            var firstName = "";
+                            var localNodes = authors[n].getElementsByTagName("surname");
+                            if (localNodes && localNodes.length > 0)
+                                lastName = localNodes[0].childNodes[0].nodeValue;
+                            localNodes = authors[n].getElementsByTagName("forename");
+                            if (localNodes && localNodes.length > 0)
+                                foreName = localNodes[0].childNodes[0].nodeValue;
+                            if (n == 0 && authors.length > 3) {
+                                localLabel += lastName + " et al";
+                            } else if (n == 0) {
+                                localLabel += lastName;
+                            } else if (n == max-1 && authors.length <= 3) {
+                                localLabel += " & " + lastName;
+                            } else if (authors.length <= 3) { 
+                                localLabel += ", " + lastName;
+                            }
+                        }
+
+                        var dateNodes = doc.evaluate("//date[@type='published']/@when", doc, null, XPathResult.ANY_TYPE, null);
+                        var date = dateNodes.iterateNext();
+                        var dateStr = "";
+                        if (date) {
+                            var ind = date.textContent.indexOf("-");
+                            var year  = date.textContent;
+                            if (ind != -1)
+                                year  = year.substring(0, ind);
+                            localLabel += " (" + year + ")";
+                        }
+
+                        localHtml += displayBiblio(doc);
+                    }
+
+                    // make the biblio reference information collapsible
+                    string += "<p><div class='panel-group' id='accordionParentReferences'>";
+                    string += "<div class='panel panel-default'>";
+                    string += "<div class='panel-heading' style='background-color:#FFF;color:#70695C;border:padding:0px;font-size:small;'>";
+                    // accordion-toggle collapsed: put the chevron icon down when starting the page; accordion-toggle : put the chevron icon up
+                    string += "<a class='accordion-toggle collapsed' data-toggle='collapse' data-parent='#accordionParentReferences' href='#collapseElementReferences"+ pageIndex + "' style='outline:0;'>";
+                    string += "<h5 class='panel-title' style='font-weight:normal;'>" + entity['references'][r]['label'] + " " + localLabel + "</h5>";
+                    string += "</a>";
+                    string += "</div>";
+                    // panel-collapse collapse: hide the content of statemes when starting the page; panel-collapse collapse in: show it
+                    string += "<div id='collapseElementReferences"+ pageIndex +"' class='panel-collapse collapse'>";
+                    string += "<div class='panel-body'>";
+                    string += "<table class='statements' style='width:100%;background-color:#fff;border:1px'>" + localHtml + "</table>";
+                    string += "</div></div></div></div></p>";
+                }
+            }
+            string += "</p>"
+        }
+
         if ((definitions != null) && (definitions.length > 0)) {
             var localHtml = wiki2html(definitions[0]['definition'], lang);
             string += "<p><div class='wiky_preview_area2'>" + localHtml + "</div></p>";
@@ -787,16 +878,16 @@ var grobid = (function ($) {
 //                string += "<p><div><table class='statements' style='width:100%;background-color:#fff;border:1px'>" + localHtml + "</table></div></p>";
 
             // make the statements information collapsible
-            string += "<p><div class='panel-group' id='accordionParent'>";
+            string += "<p><div class='panel-group' id='accordionParentStatements'>";
             string += "<div class='panel panel-default'>";
-            string += "<div class='panel-heading' style='background-color:#F9F9F9;color:#70695C;border:padding:0px;font-size:small;'>";
+            string += "<div class='panel-heading' style='background-color:#FFF;color:#70695C;border:padding:0px;font-size:small;'>";
             // accordion-toggle collapsed: put the chevron icon down when starting the page; accordion-toggle : put the chevron icon up
-            string += "<a class='accordion-toggle collapsed' data-toggle='collapse' data-parent='#accordionParent' href='#collapseElement"+ 0+ "' style='outline:0;'>";
+            string += "<a class='accordion-toggle collapsed' data-toggle='collapse' data-parent='#accordionParentStatements' href='#collapseElementStatements"+ pageIndex + "' style='outline:0;'>";
             string += "<h5 class='panel-title' style='font-weight:normal;'>Wikidata statements</h5>";
             string += "</a>";
             string += "</div>";
             // panel-collapse collapse: hide the content of statemes when starting the page; panel-collapse collapse in: show it
-            string += "<div id='collapseElement"+ 0 +"' class='panel-collapse collapse'>";
+            string += "<div id='collapseElementStatements"+ pageIndex +"' class='panel-collapse collapse'>";
             string += "<div class='panel-body'>";
             string += "<table class='statements' style='width:100%;background-color:#fff;border:1px'>" + localHtml + "</table>";
             string += "</div></div></div></div></p>";
@@ -1004,6 +1095,147 @@ var grobid = (function ($) {
         return localHtml;
     }
 
+    function displayBiblio(doc) {
+        // authors
+        var authors = doc.getElementsByTagName("author");
+        var localHtml = "<tr><td>authors</td><td>";
+        for(var n=0; n < authors.length; n++) {
+
+            var lastName = "";
+            var localNodes = authors[n].getElementsByTagName("surname");
+            if (localNodes && localNodes.length > 0)
+                lastName = localNodes[0].childNodes[0].nodeValue;
+            
+            var foreNames = [];
+            localNodes = authors[n].getElementsByTagName("forename");
+            if (localNodes && localNodes.length > 0) {
+                for(var m=0; m < localNodes.length; m++) {
+                    foreNames.push(localNodes[m].childNodes[0].nodeValue);
+                }
+            }
+
+            if (n != 0)
+                localHtml += ", ";
+            for(var m=0; m < foreNames.length; m++) {
+                localHtml += foreNames[m];
+            }
+            localHtml += " " + lastName;
+        }
+        localHtml += "</td></tr>";
+
+        // article title
+        var titleNodes = doc.evaluate("//title[@level='a']", doc, null, XPathResult.ANY_TYPE, null);
+        var theTitle = titleNodes.iterateNext();
+        if (theTitle) {
+            localHtml += "<tr><td>title</td><td>"+theTitle.textContent+"</td></tr>";
+        }
+
+        // date
+        var dateNodes = doc.evaluate("//date[@type='published']/@when", doc, null, XPathResult.ANY_TYPE, null);
+        var date = dateNodes.iterateNext();
+        if (date) {
+            localHtml += "<tr><td>date</td><td>"+date.textContent+"</td></tr>";
+        }
+        
+
+        // journal title
+        titleNodes = doc.evaluate("//title[@level='j']", doc, null, XPathResult.ANY_TYPE, null);
+        var theTitle = titleNodes.iterateNext();
+        if (theTitle) {
+            localHtml += "<tr><td>journal</td><td>"+theTitle.textContent+"</td></tr>";
+        }
+
+        // monograph title
+        titleNodes = doc.evaluate("//title[@level='m']", doc, null, XPathResult.ANY_TYPE, null);
+        theTitle = titleNodes.iterateNext();
+        if (theTitle) {
+            localHtml += "<tr><td>book title</td><td>"+theTitle.textContent+"</td></tr>";
+        }
+
+        // conference
+        meetingNodes = doc.evaluate("//meeting", doc, null, XPathResult.ANY_TYPE, null);
+        theMeeting = meetingNodes.iterateNext();
+        if (theMeeting) {
+            localHtml += "<tr><td>conference</td><td>"+theMeeting.textContent+"</td></tr>";
+        }
+
+        // address
+        addressNodes = doc.evaluate("//address", doc, null, XPathResult.ANY_TYPE, null);
+        theAddress = addressNodes.iterateNext();
+        if (theAddress) {
+            localHtml += "<tr><td>address</td><td>"+theAddress.textContent+"</td></tr>";
+        }
+
+        // volume
+        var volumeNodes = doc.evaluate("//biblScope[@unit='volume']", doc, null, XPathResult.ANY_TYPE, null);
+        var volume = volumeNodes.iterateNext();
+        if (volume) {
+            localHtml += "<tr><td>volume</td><td>"+volume.textContent+"</td></tr>";
+        }
+
+        // issue
+        var issueNodes = doc.evaluate("//biblScope[@unit='issue']", doc, null, XPathResult.ANY_TYPE, null);
+        var issue = issueNodes.iterateNext();
+        if (issue) {
+            localHtml += "<tr><td>issue</td><td>"+issue.textContent+"</td></tr>";
+        }
+
+        // pages
+        var pageNodes = doc.evaluate("//biblScope[@unit='page']/@from", doc, null, XPathResult.ANY_TYPE, null);
+        var firstPage = pageNodes.iterateNext();
+        if (firstPage) {
+            localHtml += "<tr><td>first page</td><td>"+firstPage.textContent+"</td></tr>";
+        }
+        pageNodes = doc.evaluate("//biblScope[@unit='page']/@to", doc, null, XPathResult.ANY_TYPE, null);
+        var lastPage = pageNodes.iterateNext();
+        if (lastPage) {
+            localHtml += "<tr><td>last page</td><td>"+lastPage.textContent+"</td></tr>";
+        }
+        pageNodes = doc.evaluate("//biblScope[@unit='page']", doc, null, XPathResult.ANY_TYPE, null);
+        var pages = pageNodes.iterateNext();
+        if (pages && pages.textContent != null && pages.textContent.length > 0) {
+            localHtml += "<tr><td>pages</td><td>"+pages.textContent+"</td></tr>";
+        }
+
+        // issn
+        var issnNodes = doc.evaluate("//idno[@type='ISSN']", doc, null, XPathResult.ANY_TYPE, null);
+        var issn = issnNodes.iterateNext();
+        if (issn) {
+            localHtml += "<tr><td>ISSN</td><td>"+issn.textContent+"</td></tr>";
+        }
+        issnNodes = doc.evaluate("//idno[@type='ISSNe']", doc, null, XPathResult.ANY_TYPE, null);
+        var issne = issnNodes.iterateNext();
+        if (issne) {
+            localHtml += "<tr><td>e ISSN</td><td>"+issne.textContent+"</td></tr>";
+        }
+
+        //doi
+        var doiNodes = doc.evaluate("//idno[@type='doi']", doc, null, XPathResult.ANY_TYPE, null);
+        var doi = doiNodes.iterateNext();
+        if (doi && doi.textContent) {
+            //if (doi.textContent.startsWith("10."))
+                localHtml += "<tr><td>DOI</td><td><a href=\"https://doi.org/" + doi.textContent + "\">"+doi.textContent+"</a></td></tr>";
+            /*else 
+                localHtml += "<tr><td>DOI</td><td><a href=\"https://doi.org/" + doi.textContent + "\">"+doi.textContent+"</a></td></tr>";*/
+        }
+
+        // publisher
+        var publisherNodes = doc.evaluate("//publisher", doc, null, XPathResult.ANY_TYPE, null);
+        var publisher = publisherNodes.iterateNext();
+        if (publisher) {
+            localHtml += "<tr><td>publisher</td><td>"+publisher.textContent+"</td></tr>";
+        }
+
+        // editor
+        var editorNodes = doc.evaluate("//editor", doc, null, XPathResult.ANY_TYPE, null);
+        var editor = editorNodes.iterateNext();
+        if (editor) {
+            localHtml += "<tr><td>editor</td><td>"+editor.textContent+"</td></tr>";
+        }
+
+        return localHtml;
+    }
+
     function createInputFile(selected) {
         $('#textInputDiv').hide();
         $('#fileInputDiv').show();
@@ -1015,6 +1247,22 @@ var grobid = (function ($) {
     function createInputTextArea() {
         $('#fileInputDiv').hide();
         $('#textInputDiv').show();
+    }
+
+    function parse(xmlStr) {
+        var parseXml;
+
+        if (typeof window.DOMParser != "undefined") {
+            return ( new window.DOMParser() ).parseFromString(xmlStr, "text/xml");
+        } else if (typeof window.ActiveXObject != "undefined" &&
+               new window.ActiveXObject("Microsoft.XMLDOM")) {
+            var xmlDoc = new window.ActiveXObject("Microsoft.XMLDOM");
+            xmlDoc.async = "false";
+            xmlDoc.loadXML(xmlStr);
+            return xmlDoc;
+        } else {
+            throw new Error("No XML parser found");
+        }
     }
 
     var examples = ["The column scores (the fraction of entirely correct columns) were  reported  in  addition  " +

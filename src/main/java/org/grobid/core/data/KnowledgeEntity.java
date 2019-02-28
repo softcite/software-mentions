@@ -49,4 +49,13 @@ public class KnowledgeEntity {
         this.disambiguationScore = disambiguationScore;
     }
 
+    /** 
+     * Copy the knowledge entity information to another entity
+     */
+    public void copyKnowledgeInformationTo(KnowledgeEntity otherEntity) {
+        otherEntity.setWikidataId(wikidataId);
+        otherEntity.setWikipediaExternalRef(wikipediaExternalRef);
+        otherEntity.setDisambiguationScore(disambiguationScore);
+    }
+
 }   

@@ -2,7 +2,7 @@ package org.grobid.trainer;
 
 import java.util.*;
 import java.io.*;
-import java.nio.charset.Charset;
+//import java.nio.charset.Charset;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.grobid.core.utilities.Pair;
 import org.grobid.core.utilities.TextUtilities;
 
-import org.dkpro.statistics.agreement.unitizing.*;
+//import org.dkpro.statistics.agreement.unitizing.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

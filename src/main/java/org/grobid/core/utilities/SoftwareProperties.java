@@ -22,4 +22,14 @@ public class SoftwareProperties {
 		return SoftwareProperties.get("grobid.software.tmpPath");
 	}
 	
+	public static String getEmbeddings() {
+		return SoftwareProperties.get("grobid.software.engine.embeddings");
+	}
+
+	/**
+	 *  This will override engine selection in GROBID
+	 */
+	public static String getEngine() {
+		return SoftwareProperties.get("grobid.software.engine");
+	}
 }

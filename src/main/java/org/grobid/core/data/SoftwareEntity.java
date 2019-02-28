@@ -11,8 +11,10 @@ import org.grobid.core.engines.label.TaggingLabels;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.io.JsonStringEncoder;
 
 import java.util.List;
+import java.util.ArrayList;
 
 /**
  *  Representation of a mention of a software entity with all its components.
@@ -29,6 +31,9 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 	private SoftwareComponent versionDate = null;
 	private SoftwareComponent creator = null;
 	private SoftwareComponent softwareURL = null;
+
+	// one or several bibliographical references attached to the software entity
+	private List<BiblioComponent> bibRefs = null;
 
 	// Entity identifier if the mention has been solved/disambiguated against the
 	// knowledge base of software entities. The identifier is the unique 
@@ -83,6 +88,21 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 		this.softwareURL = softwareURL;
 	}
 
+	public List<BiblioComponent> getBibRefs() {
+		return this.bibRefs;
+	}
+
+	public void setBibRefs(List<BiblioComponent> bibRefs) {
+		this.bibRefs = bibRefs;
+	}
+
+	public void addBibRef(BiblioComponent bibRef) {
+		if (bibRefs == null) {
+			bibRefs = new ArrayList<BiblioComponent>();
+		}
+		bibRefs.add(bibRef);
+	}
+
 	public String getEntityId() {
 		return entityId;
 	}
@@ -92,7 +112,8 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 	}
 
 	/**
-	 * Check if a component corresponding to a given label is already present in a software entity
+	 * Check if a component corresponding to a given label is already present in a software entity.
+	 * Bibliographical references are ignored because they can be accumulated to the same entity.
 	 */
 	public boolean freeField(TaggingLabel label) {
 		if (label.equals(SoftwareTaggingLabels.SOFTWARE) && (this.softwareName != null)) {
@@ -105,7 +126,7 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 			return false;
 		} else if (label.equals(SoftwareTaggingLabels.VERSION_DATE) && (this.softwareURL != null)) {
 			return false;
-		}
+		} 
 		return true;
 	}
 
@@ -153,6 +174,7 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 		if (this.softwareName == null) {
 			return "{}";
 		}
+		JsonStringEncoder encoder = JsonStringEncoder.getInstance();
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("{ ");
 
@@ -176,12 +198,19 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 			(softwareName.getLang() != null))
 			buffer.append(", ");
 
+		byte[] encoded = null;
+		String output = null;
+		
 		buffer.append("\"software-name\": ");
 		buffer.append(softwareName.toJson());
-		if (type != null)
-			buffer.append(", \"type\" : \"" + type.getName().toLowerCase() + "\"");	
-		if (entityId != null)
+		if (type != null) {
+			encoded = encoder.quoteAsUTF8(type.getName().toLowerCase());
+            output = new String(encoded);
+			buffer.append(", \"type\" : \"" + output + "\"");	
+		}
+		if (entityId != null) {
 			buffer.append(", \"id\" : \"" + entityId + "\"");	
+		}
 		if (versionNumber != null) {
 			buffer.append(", \"version-number\":" + versionNumber.toJson());
 		}
@@ -194,6 +223,23 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 		if (softwareURL != null) {
 			buffer.append(", \"url\":" + softwareURL.toJson());
 		}
+
+		if (bibRefs != null) {
+			buffer.append(", \"references\" : ["); 
+			boolean first = true;
+			for(BiblioComponent bibRef : bibRefs) {
+				if (bibRef.getBiblio() == null)
+					continue;
+				if (!first)
+					buffer.append(", ");
+				else
+					first = false;
+				buffer.append(bibRef.toJson());
+			}
+
+			buffer.append(" ] ");
+		}
+
 
 		buffer.append(" }");
 		return buffer.toString();

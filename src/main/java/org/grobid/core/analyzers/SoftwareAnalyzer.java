@@ -71,6 +71,7 @@ public class SoftwareAnalyzer implements org.grobid.core.analyzers.Analyzer {
     public List<LayoutToken> tokenizeWithLayoutToken(String text) {
         List<LayoutToken> result = new ArrayList<>();
         StringTokenizer st = new StringTokenizer(text, DELIMITERS, true);
+        int ind = 0;
         while (st.hasMoreTokens()) {
             String token = st.nextToken();
             // in addition we split "letter" characters and digits
@@ -78,7 +79,9 @@ public class SoftwareAnalyzer implements org.grobid.core.analyzers.Analyzer {
             for (int i = 0; i < subtokens.length; i++) {
                 LayoutToken layoutToken = new LayoutToken();
                 layoutToken.setText(subtokens[i]);
+                layoutToken.setOffset(ind);
                 result.add(layoutToken);
+                ind += layoutToken.getText().length();
             }
         }
 

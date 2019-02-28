@@ -4,11 +4,11 @@
 
 __Work in progress.__
 
-The goal of this GROBID module is to recognize in textual documents and PDF any mentions of softwares.   
+The goal of this GROBID module is to recognize in textual documents and PDF any mentions of software.   
 
-As the other GROBID models, the module relies only on machine learning and can use linear CRF (via (Wapiti)[https://github.com/kermitt2/Wapiti] JNI integration) or Deep Learning model such as BiLSTM-CRF with or without ELMo (via [DeLFT](https://github.com/kermitt2/delft) JNI integration). 
+As the other GROBID models, the module relies only on machine learning and can use linear CRF (via [Wapiti](https://github.com/kermitt2/Wapiti) JNI integration) or Deep Learning model such as BiLSTM-CRF with or without ELMo (via [DeLFT](https://github.com/kermitt2/delft) JNI integration). 
 
-A description of the task and some preliminary evaluation can be found [here](doc/description.md).
+A description of the task and some preliminary evaluations can be found [here](doc/description.md).
 
 ## Install, build, run
 
@@ -49,7 +49,7 @@ Javascript demo/console web app is then accessible at ```http://localhost:8060``
 Using ```curl``` POST/GET requests with some text:
 
 ```
-curl -X POST -d "text=The next step is to install GROBID version 0.5.1." localhost:8060/processSoftwareText
+curl -X POST -d "text=The next step is to install GROBID version 0.5.4." localhost:8060/processSoftwareText
 ```
 
 which should return this:
@@ -64,7 +64,7 @@ which should return this:
         },
         "type": "software",
         "version-number": {
-            "rawForm": "version 0.5.1",
+            "rawForm": "version 0.5.4",
             "offsetStart": 35,
             "offsetEnd": 48
         }
@@ -74,7 +74,7 @@ which should return this:
 ```
 
 ```
-curl -GET --data-urlencode "text=The final step is to update GROBID version 0.5.2-SNAPSHOT." localhost:8060/processSoftwareText
+curl -GET --data-urlencode "text=The final step is to update GROBID version 0.5.5." localhost:8060/processSoftwareText
 ```
 
 Using ```curl``` POST/PUT requests with a PDF file:

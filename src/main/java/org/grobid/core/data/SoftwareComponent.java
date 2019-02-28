@@ -37,31 +37,31 @@ public class SoftwareComponent extends KnowledgeEntity implements Comparable<Sof
 	};
 	
 	// surface form of the component as it appears in the source document
-	private String rawForm = null;
+	protected String rawForm = null;
 	
 	// list of layout tokens corresponding to the component mention in the source document
-	private List<LayoutToken> tokens = null;
+	protected List<LayoutToken> tokens = null;
 	
 	// normalized form of the component
-    private String normalizedForm = null;
+    protected String normalizedForm = null;
 	
 	// relative offset positions in context, if defined and expressed as (Java) character offset
-	private OffsetPosition offsets = null;
+	protected OffsetPosition offsets = null;
 	
 	// confidence score of the component in context, if defined
-	private double conf = 0.8;
+	protected double conf = 0.8;
 	
 	// optional bounding box in the source document
-	private List<BoundingBox> boundingBoxes = null;
+	protected List<BoundingBox> boundingBoxes = null;
 		
 	// orign of the component definition
-	private Origin origin = Origin.GROBID;
+	protected Origin origin = Origin.GROBID;
 	
 	// language
-	private String lang = null;
+	protected String lang = null;
 
 	// tagging label of the LayoutToken cluster corresponding to the component
-	private TaggingLabel label = null;
+	protected TaggingLabel label = null;
 
     public SoftwareComponent() {
 		this.offsets = new OffsetPosition();

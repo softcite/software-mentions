@@ -34,7 +34,7 @@ As additional services required for the above feature:
 
 - a software entity similarity measure,
 
-- ability to request the most relevant softwares, ranked according to the similarity measure based on an input which could be one or several software mentions, software entities and/or textual contexts. 
+- ability to request the most relevant software, ranked according to the similarity measure based on an input which could be one or several software mentions, software entities and/or textual contexts. 
 
 
 Code/script can also alternatively been submited by an author/user, and used software will be identified based on the library/package dependencies. Similarly for these identified software, prefered citations will be made available. 
@@ -69,7 +69,7 @@ Software Impactstory is an interface to help scholars that contribute software t
 
 The objective is to identify all of a user’s software products and papers related to those products.
 
-Note that such a tool might be conflicting with GDPR, European users having developed softwares have not given their explicit consent for being part of a database of software authors and for profiling mechanisms. GDPR applies to European citizens wherever a system is operating.  
+Note that such a tool might be conflicting with GDPR, European users having developed software have not given their explicit consent for being part of a database of software authors and for profiling mechanisms. GDPR applies to European citizens wherever a system is operating.  
 
 The described features would imply as additional requirements:
 
@@ -94,7 +94,7 @@ Although we would in theory only need to store the attributes that can be extrac
 
 ### Need for software entity similarity / recommendation
 
-The goal is from a given publication, find the related softwares not mentioned. 
+The goal is from a given publication, find the related software not mentioned. 
 
 
 ### Determining best citable sources
@@ -473,7 +473,7 @@ The response will complement the input with disambiguated software entity `id` a
 
 ### Extract all raw mention of a software in a PDF
 
-Endpoint: `/api/softwares/mentions`
+Endpoint: `/api/software/mentions`
 
 |   method  |  response type      | 
 |---        |---                  |
@@ -531,12 +531,12 @@ The response will list the extracted mentions similarly as the current software 
 
 Example:
 
-> curl --form file=@./thefile.pdf localhost:8070/api/softwares/mentions
+> curl --form file=@./thefile.pdf localhost:8070/api/software/mentions
 
 
 ### Extract all disambiguated software entities in a PDF
 
-Endpoint: `/api/softwares/entities`
+Endpoint: `/api/software/entities`
 
 |   method  |  response type      | 
 |---        |---                  |
@@ -594,7 +594,7 @@ The response response if similar to the previous mention extraction service, but
 
 Example:
 
-> curl --form file=@./thefile.pdf localhost:8070/api/softwares/entities
+> curl --form file=@./thefile.pdf localhost:8070/api/software/entities
 
 
 ### Provide the n-best citations for a software entity
@@ -677,7 +677,7 @@ The response lists the top software entities with a relatedness score, ranked in
 
 ### Provide for a given PDF the n most relevant related software entities not mentioned in the PDF
 
-Endpoint: `/api/softwares/related`
+Endpoint: `/api/software/related`
 
 |   method  |  response type      | 
 |---        |---                  |
@@ -694,7 +694,7 @@ Parameters:
 
 Example:
 
-> curl --form file=@./thefile.pdf localhost:8070/api/softwares/mentions --form n=2
+> curl --form file=@./thefile.pdf localhost:8070/api/software/mentions --form n=2
 
 The response lists the top software entities with a relatedness score, ranked in a decreasing order:
 
@@ -718,7 +718,7 @@ The service must ensure that none of the returned software entity is actually me
 
 ### Provide for a given person, all the software entities he has authored 
 
-Endpoint: `/api/{id}/softwares`
+Endpoint: `/api/{id}/software`
 
 |   method  |  response type      | 
 |---        |---                  |
@@ -733,7 +733,7 @@ Parameters:
 
 Example: 
 
-> curl localhost:8070/api/Q93068/softwares 
+> curl localhost:8070/api/Q93068/software 
 
 The response lists the software entities having the person as author or co-author. 
 

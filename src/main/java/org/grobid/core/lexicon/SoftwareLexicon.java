@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.util.*;
+import java.util.zip.GZIPInputStream;
 
 /**
  * Class for managing the lexical resources for software entities.
@@ -43,6 +44,8 @@ public class SoftwareLexicon {
     private Set<String> softwareVocabulary = null;
     private FastMatcher softwarePattern = null;
 
+    private Map<String, Double> termIDF = null;
+
     private static volatile SoftwareLexicon instance;
 
     public static synchronized SoftwareLexicon getInstance() {
@@ -57,7 +60,10 @@ public class SoftwareLexicon {
         LOGGER.info("Init software lexicon");
         softwareVocabulary = new HashSet<String>();
 
-        File file = new File(GrobidProperties.getGrobidHomePath()+"/../software-mentions/resources/lexicon/wikidata-softwares.txt");
+        // Software lexicon
+
+        //File file = new File(GrobidProperties.getGrobidHomePath()+"/../software-mentions/resources/lexicon/wikidata-softwares.txt");
+        File file = new File("resources/lexicon/wikidata-software.txt.gz");
         if (!file.exists()) {
             throw new GrobidResourceException("Cannot initialize software dictionary, because file '" + 
                 file.getAbsolutePath() + "' does not exists.");
@@ -72,7 +78,8 @@ public class SoftwareLexicon {
         try {
             softwarePattern = new FastMatcher(file, SoftwareAnalyzer.getInstance(), true); // case sensitive
 
-            dis = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF8"));
+            dis = new BufferedReader(new InputStreamReader(new GZIPInputStream(new FileInputStream(file)), "UTF-8"));
+            //dis = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
             String l = null;
             while ((l = dis.readLine()) != null) {
                 if (l.length() == 0) continue;
@@ -98,6 +105,59 @@ public class SoftwareLexicon {
                 throw new GrobidResourceException("Cannot close IO stream.", e);
             }
         }
+
+        // term idf
+        file = new File("resources/lexicon/idf.label.en.txt.gz");
+        if (!file.exists()) {
+            throw new GrobidResourceException("Cannot initialize software dictionary, because file '" + 
+                file.getAbsolutePath() + "' does not exists.");
+        }
+        if (!file.canRead()) {
+            throw new GrobidResourceException("Cannot initialize software dictionary, because cannot read file '" + 
+                file.getAbsolutePath() + "'.");
+        }
+
+        // read the idf file
+        try {
+            termIDF = new TreeMap<String, Double>();
+
+            dis = new BufferedReader(new InputStreamReader(new GZIPInputStream(new FileInputStream(file)), "UTF-8"));
+            //dis = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
+            String l = null;
+            while ((l = dis.readLine()) != null) {
+                if (l.length() == 0) continue;
+
+                String[] pieces = l.split("\t");
+                if (pieces.length != 2) {
+                    LOGGER.warn("Invalid term/idf line format: " + l);
+                    continue;
+                }
+
+                String term = pieces[0];
+                String idfString = pieces[1];
+                double idf = 0.0;
+                try {
+                    idf = Double.parseDouble(idfString);
+                } catch(Exception e) {
+                    LOGGER.warn("Invalid idf format: " + idfString);
+                    continue;
+                }
+
+                termIDF.put(term, new Double(idf));
+            }
+        } catch (FileNotFoundException e) {
+            throw new GrobidException("SoftwareLexicon file not found.", e);
+        } catch (IOException e) {
+            throw new GrobidException("Cannot read SoftwareLexicon file.", e);
+        } finally {
+            try {
+                if (dis != null)
+                    dis.close();
+            } catch(Exception e) {
+                throw new GrobidResourceException("Cannot close IO stream.", e);
+            }
+        }
+
     }
 	
 	public boolean inSoftwareDictionary(String string) {
@@ -113,5 +173,13 @@ public class SoftwareLexicon {
     public List<OffsetPosition> tokenPositionsSoftwareNames(List<LayoutToken> vector) {
         List<OffsetPosition> results = softwarePattern.matchLayoutToken(vector, true, true); // case sensitive
         return results;
+    }
+
+    public double getTermIDF(String term) {
+        Double idf = termIDF.get(term);
+        if (idf != null)
+            return idf.doubleValue();
+        else 
+            return 0.0;
     }
 }

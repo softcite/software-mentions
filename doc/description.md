@@ -1,6 +1,6 @@
 # Software mention recognizer in scientific literature
 
-The goal of this component is to recognize in textual documents and in PDF any mentions of softwares with associated attribute information such as number version, author, url or version date.   
+The goal of this component is to recognize in textual documents and in PDF any mentions of software with associated attribute information such as number version, author, url or version date.   
 
 ## Existing works
 
@@ -51,7 +51,7 @@ In the case of PDF, the service allows the client to exploit the coordinates of 
 
 ![Example of software mention recognition service on PDF](images/screen2.png)
 
-The text mining process is thus not limited to populating a database, but also offers the possibility to come back to users and show them in context the mentions of softwares. 
+The text mining process is thus not limited to populating a database, but also offers the possibility to come back to users and show them in context the mentions of software. 
  
 
 ## Preliminary results
