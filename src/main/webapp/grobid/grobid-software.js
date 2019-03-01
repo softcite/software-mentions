@@ -1222,7 +1222,7 @@ var grobid = (function ($) {
         var doi = doiNodes.iterateNext();
         if (doi && doi.textContent) {
             //if (doi.textContent.startsWith("10."))
-                localHtml += "<tr><td>DOI</td><td><a href=\"https://doi.org/" + doi.textContent + "\">"+doi.textContent+"</a></td></tr>";
+                localHtml += "<tr><td>DOI</td><td><a href=\"https://doi.org/" + doi.textContent + "\" target=\"_blank\">"+doi.textContent+"</a></td></tr>";
             /*else 
                 localHtml += "<tr><td>DOI</td><td><a href=\"https://doi.org/" + doi.textContent + "\">"+doi.textContent+"</a></td></tr>";*/
         }
