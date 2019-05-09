@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.5935%2F0034-7140.20150005" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T19:57+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.5935%2F0034-7140.20150005" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:04+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>We develop a theoretical model for parental behavior regarding land inheri-
 tance, accounting for consumption and savings strategies. We identify two 
@@ -218,10 +218,7 @@ problem is given by </p>
 
 <p>R + </p>
 
-<p>u ((1 + r)a i + t i ) f i (r) dr </p>
-
-<p>
-c i + a i ≤ y i </p>
+<p>u ((1 + r)a i + t i ) f i (r) dr c i + a i ≤ y i </p>
 
 <p>} </p>
 
@@ -229,9 +226,7 @@ c i + a i ≤ y i </p>
 
 <p>and the corresponding choices given by </p>
 
-<p>( ˆ 
-c i (t i ), ˆ 
-a i (t i )) = arg max </p>
+<p>(ĉ i (t i ),â i (t i )) = arg max </p>
 
 <p>{ </p>
 
@@ -241,10 +236,7 @@ a i (t i )) = arg max </p>
 
 <p>R + </p>
 
-<p>u ((1 + r)a i + t i ) f i (r) dr </p>
-
-<p>
-c i + a i ≤ y i </p>
+<p>u ((1 + r)a i + t i ) f i (r) dr c i + a i ≤ y i </p>
 
 <p>} </p>
 
@@ -257,14 +249,18 @@ saving rate 6 . Lemma A.1 in the Appendix shows that v i is strictly concave for
 Consider µ the parameter representing a parent's utility discount relative to the child's utility. A 
 risk-free asset with returns r p is available for the parent. The problem of the parent p is given by </p>
 
-<p>v p = max 
-{ 
-u(c p ) + βu 
-( 
-(1 + r p )a p − t j − t k 
-) 
-+ µv j (t j ) + µv k (t k ) 
-} 
+<p>v p = max </p>
+
+<p>{ 
+u(c p ) + βu </p>
+
+<p>( 
+(1 + r p )a p − t j − t k </p>
+
+<p>) 
++ µv j (t j ) + µv k (t k ) </p>
+
+<p>} 
 , 
 (3) </p>
 
@@ -279,8 +275,7 @@ To assure this result we establish two assumptions. Assumption 3.1 below assumes
 with the lowest return always invests a strictly positive amount on land-specific human capital under 
 the optimal choice. 7 </p>
 
-<p>Assumption 3.1. Letâ j , ˆ 
-a k be given by (2). There exits a constant a k &gt; 0 such thatâ k (t) ≥ a k for all 
+<p>Assumption 3.1. Letâ j ,â k be given by (2). There exits a constant a k &gt; 0 such thatâ k (t) ≥ a k for all 
 t ∈ R + . </p>
 
 <p>4 For the sake of simplicity we use a two-period instead of a three-period model. Ideally, parents should pass on the land after their 
@@ -306,33 +301,49 @@ his/her minimum second period consumption level. Thus, even when consumption is 
 for the more productive child he/she still has a propensity to save, rendering an expected marginal 
 benefit higher than the one for his/her sibling. </p>
 
-<p>Assumption 3.2. Consider a k the constant given in Assumption 3.1 and write y = max 
-{ 
-y j , y k 
-} 
+<p>Assumption 3.2. Consider a k the constant given in Assumption 3.1 and write y = max </p>
+
+<p>{ 
+y j , y k </p>
+
+<p>} 
 . The 
 subjective densities f j , f k satisfy 
 ∫ </p>
 
 <p>R + </p>
 
-<p>u ′ ((1 + r)y + t) f j (r) dr &gt; </p>
+<p>u 
+′ ((1 + r)y + t) f j (r) dr &gt; </p>
 
 <p>∫ </p>
 
 <p>R + </p>
 
-<p>u ′ ((1 + r)a k + t) f k (r) dr for all t ∈ R + . 
+<p>u 
+′ ((1 + r)a k + t) f k (r) dr for all t ∈ R + . 
 (4) </p>
 
 <p>The following result exhibits certain conditions that favor a non-altruistic behavior. Intuitively, As-
 sumption 3.2 assures that child j has higher expected returns. </p>
 
-<p>Theorem 3.3. Suppose Assumptions 3.1 and 3.2. Then, the optimal transfers t  *  
-j , t  *  
-k must satisfy t  *  
-j &gt; t  *  
-k . </p>
+<p>Theorem 3.3. Suppose Assumptions 3.1 and 3.2. Then, the optimal transfers t </p>
+
+<p> *  </p>
+
+<p>j , t </p>
+
+<p> *  </p>
+
+<p>k must satisfy t </p>
+
+<p> *  </p>
+
+<p>j &gt; t </p>
+
+<p> *  </p>
+
+<p>k . </p>
 
 <p>Proof: See appendix. 
 □ </p>
@@ -380,10 +391,7 @@ The value function of child i 's problem is then given by </p>
 
 <p>R + </p>
 
-<p>u ((1 + r)a i + s i t i ) f i (r) dr </p>
-
-<p>
-c i + a i + s i ≤ y i </p>
+<p>u ((1 + r)a i + s i t i ) f i (r) dr c i + a i + s i ≤ y i </p>
 
 <p>} </p>
 
@@ -397,10 +405,7 @@ c i + a i + s i ≤ y i </p>
 
 <p>and the corresponding choices given by </p>
 
-<p>( ˆ 
-c i (t i ), ˆ 
-a i (t i ), ˆ 
-s i (t i )) = arg max </p>
+<p>(ĉ i (t i ),â i (t i ),ŝ i (t i )) = arg max </p>
 
 <p>{ </p>
 
@@ -418,56 +423,65 @@ s i (t i )) = arg max </p>
 (6) </p>
 
 <p>where the max operator is chosen over all (c i , a i , s i ) such that c i + a i + s i ≤ y i . 
-Consider µ the parameter representing a parent's utility discount relative to the child's utility. Write˜u 
-  p (c p , a p , s j , s k , t j , t k ) = u p (c p , s j , s k ) + βu 
-( 
-(1 + r p )a p − s j t j − s k t k 
-) 
+Consider µ the parameter representing a parent's utility discount relative to the child's utility. Writẽ </p>
+
+<p>u p (c p , a p , s j , s k , t j , t k ) = u p (c p , s j , s k ) + βu </p>
+
+<p>( 
+(1 + r p )a p − s j t j − s k t k </p>
+
+<p>) 
 + µv j (t j ) + µv k (t k ) </p>
 
 <p>as the parents' utility function. The parent's problem is given by </p>
 
-<p>v p (s j , s k ) = max 
-{ 
-˜ 
-u p 
-( 
-c p , a p , s j , s k , t j , t k 
-) 
-( 
-c p , a p , t j , t k 
-) 
-∈ R 4 </p>
+<p>v p (s j , s k ) = max </p>
 
-<p>+ </p>
+<p>{ũ </p>
+
+<p>p </p>
+
+<p>( 
+c p , a p , s j , s k , t j , t k </p>
+
+<p>) ( 
+c p , a p , t j , t k </p>
+
+<p>) 
+∈ R </p>
+
+<p>4 
++ </p>
 
 <p>} 
 (7) </p>
 
 <p>and such that c p + a p ≤ y p and s j t j + s k t k ≤ (1 + r p )a p . The corresponding optimal choice, 
-( 
-ˆ 
-c p (s j , s k ), ˆ 
-a p (s j , s k ), ˆ 
-t j (s j , s k ), ˆ 
-t k (s j , s k ) 
-) 
+(ĉ 
+p (s j , s k ),â p (s j , s k ),t j (s j , s k ),t k (s j , s k ) </p>
+
+<p>) 
 , </p>
 
-<p>written asˆx  p (s j , s k ) is given byˆx 
-  p (s j , s k ) = arg max 
-{ 
-˜ 
-u p 
-( 
-c p , a p , s j , s k , t j , t k 
-) 
-( 
-c p , a p , t j , t k 
-) 
-∈ R 4 </p>
+<p>written asx p (s j , s k ) is given bŷ </p>
 
-<p>+ </p>
+<p>x p (s j , s k ) = arg max </p>
+
+<p>{ũ </p>
+
+<p>p </p>
+
+<p>( 
+c p , a p , s j , s k , t j , t k </p>
+
+<p>) ( 
+c p , a p , t j , t k </p>
+
+<p>) 
+∈ R </p>
+
+<p>4 
++ </p>
 
 <p>} </p>
 
@@ -475,27 +489,65 @@ c p , a p , t j , t k
 The next theorem characterizes the solution for this case. It will be given as a Nash Equilibrium. Its 
 proof is similar to that found in Nash (1951). </p>
 
-<p>Theorem 3.4. There exists a profile of bilateral transfers (t  *  
-j , t  *  
-k , s  *  
-j , s  *  
-k ) such that: </p>
+<p>Theorem 3.4. There exists a profile of bilateral transfers (t </p>
 
-<p>s  *  
-j = ˆ 
-s j (t  *  
-j ), s  *  
-k = ˆ 
-s k (t  *  
-k ), t  *  
-j = ˆ 
-t j (s  *  
-j , s  *  
-k ), t  *  
-k = ˆ 
-t k (s  *  
-j , s  *  
-k ). </p>
+<p> *  </p>
+
+<p>j , t </p>
+
+<p> *  </p>
+
+<p>k , s </p>
+
+<p> *  </p>
+
+<p>j , s </p>
+
+<p> *  </p>
+
+<p>k ) such that: </p>
+
+<p>s </p>
+
+<p> *  </p>
+
+<p>j =ŝ j (t </p>
+
+<p> *  </p>
+
+<p>j ), s </p>
+
+<p> *  </p>
+
+<p>k =ŝ k (t </p>
+
+<p> *  </p>
+
+<p>k ), t </p>
+
+<p> *  </p>
+
+<p>j =t j (s </p>
+
+<p> *  </p>
+
+<p>j , s </p>
+
+<p> *  </p>
+
+<p>k ), t </p>
+
+<p> *  </p>
+
+<p>k =t k (s </p>
+
+<p> *  </p>
+
+<p>j , s </p>
+
+<p> *  </p>
+
+<p>k ). </p>
 
 <p>3.3. Examples </p>
 
@@ -515,8 +567,11 @@ greater than the gain obtained by the additional investment in the more producti
 <p>Example 3.5. Suppose that β = 1/2, y p = y j = y k := y , and µ = 1/2. The probability distributions of 
 returns are induced by the densities f j ∼ U [0, 0.6] and f k ∼ U [0, 0.5]. Under these distributions the 
 expected values of returns are given by 0.3 and 0.25, respectively. In the case of identical preferences 
-with the utility function given by u(c) = y c 
-2 − c 2 , the optimal choices and bequests, conditional to some 
+with the utility function given by u(c) = y </p>
+
+<p>c </p>
+
+<p>2 − c 2 , the optimal choices and bequests, conditional to some 
 specific income level y , are 8 </p>
 
 <p>c j (t j ) = 0.3495t j + 0.5094y 
@@ -543,8 +598,11 @@ transfers do not favor altruistic parental behavior. </p>
 <p>Example 3.6. Suppose that β = 1/2, y p = y j = y k := y , and µ = 1/2. The probability distributions of 
 returns are induced by the densities f j ∼ U [0, 1] and f k ∼ U [0, 1/2]. Under these distributions, the 
 expected values of returns are given by 0.5 and 0.25, respectively. In the case of identical preferences 
-with utility function given by u(c) = y c 
-2 − c 2 , the optimal choices and bequests, conditional to some 
+with utility function given by u(c) = y </p>
+
+<p>c </p>
+
+<p>2 − c 2 , the optimal choices and bequests, conditional to some 
 specific income level y , are </p>
 
 <p>c j (t j ) = 0.3461t j + 0.5673y 
@@ -560,8 +618,11 @@ t k = 0.2356y </p>
 In the last example, children behave strategically by providing services to the parent. </p>
 
 <p>Example 3.7. Suppose that β = 1/2, y p = y j = y k := 5, and µ = 9/10. The utility function of the 
-children is identical and given by u(c i ) = 20c i − c 2 
-i and their utility for services is given by u i (s i ) = −s i 
+children is identical and given by u(c i ) = 20c i − c </p>
+
+<p>2 </p>
+
+<p>i and their utility for services is given by u i (s i ) = −s i 
 for i = j, k. The utility function of the parent is given by u(c p ) = 20c p − c 2 
 p and his utility for services 
 given by u(s j , s k ) = s j + s k . A risk-free asset with return r p = 9/10 is available for the parent. The 
@@ -1334,69 +1395,65 @@ transferred to more productive children. </p>
 
 
 
-<p>Private Transfer Choices under Uncertainty in Human Capital </p>
 
-<p>VanWey, L. K., &amp; Cebulko, K. B. (2007). Intergenerational coresidence among small farmers in 
-Brazilian Amazônia. Journal of Marriage and Family, 69(5), 1257-1270. doi: 10.1111/j.1741-
-3737.2007.00445.x 
-VanWey, L. K., D'Antona, A. O., &amp; Brondízio, E. S. (2007). Household demographic change and land 
-use/land cover change in the Brazilian Amazon. Population and Environment, 28(3), 163-185. doi: 
-10.1007/s11111-007-004 
-VanWey, L. K., Guedes, G. R., &amp; Dantona, A. O. (2012). Out-migration and land-use change in agricultural 
-frontiers: insights from Altamira settlement project. Population and Environment, 34(1), 44-68. 
-doi: 10.1007/s11111-011-0161-1 
-VanWey, L. K., &amp; Nelson, K. (2007). Intergenerational financial transfers from older Americans: Evidence 
-from the Health and Retirement Study. In Proceedings of the Population Association of America. </p>
 
 <p>A. APPENDIX </p>
 
 <p>Lemma A.1. The value function v i : R + → R + defined by (1) is strictly concave. </p>
 
-<p>Proof: Fix α &gt; 0. First note thatˆc  i (t) + ˆ 
-a i (t) ≤ y i for t ∈ 
-{ 
-t i , t ′ </p>
+<p>Proof: Fix α &gt; 0. First note thatĉ i (t) +â i (t) ≤ y i for t ∈ </p>
 
-<p>i </p>
+<p>{ 
+t i , t </p>
+
+<p>′ 
+i </p>
 
 <p>} 
 implies </p>
 
-<p>α ˆ 
-c i (t i ) + (1 − α) ˆ 
-c i (t ′ 
-i ) + α ˆ 
-a i (t i ) + (1 − α) ˆ 
-a i (t ′ 
-i ) ≤ y i . 
+<p>αĉ i (t i ) + (1 − α)ĉ i (t </p>
+
+<p>′ </p>
+
+<p>i ) + αâ i (t i ) + (1 − α)â i (t </p>
+
+<p>′ </p>
+
+<p>i ) ≤ y i . 
 (A-1) </p>
 
 <p>Furthermore 
-v i (t) = u( ˆ 
-c i (t)) + β </p>
+v i (t) = u(ĉ i (t)) + β </p>
 
 <p>∫ </p>
 
 <p>R + </p>
 
-<p>u ((1 + r) ˆ 
-a i (t) + t) f i (r) dr for t ∈ 
-{ 
-t i , t ′ </p>
+<p>u ((1 + r)â i (t) + t) f i (r) dr for t ∈ </p>
 
-<p>i </p>
+<p>{ 
+t i , t </p>
+
+<p>′ 
+i </p>
 
 <p>} </p>
 
 <p>and the concavity of u imply </p>
 
-<p>αv i (t i ) + (1 − α)v i (t ′ 
-i ) = αu( ˆ 
-c i (t i )) + (1 − α)u 
-( 
-ˆ 
-c i (t ′ 
-i ) </p>
+<p>αv i (t i ) + (1 − α)v i (t </p>
+
+<p>′ </p>
+
+<p>i ) = αu(ĉ i (t i )) + (1 − α)u </p>
+
+<p>(ĉ 
+i (t </p>
+
+<p>′ </p>
+
+<p>i ) </p>
 
 <p>) </p>
 
@@ -1406,18 +1463,24 @@ i ) </p>
 
 <p>R + </p>
 
-<p>αu ((1 + r) ˆ 
-a i (t i ) + t i ) + (1 − α)u((1 + r) ˆ 
-a i (t ′ 
-i ) + t ′ 
-i )f i (r) dr </p>
+<p>αu ((1 + r)â i (t i ) + t i ) + (1 − α)u((1 + r)â i (t </p>
 
-<p>≤ u 
-( 
-α ˆ 
-c i (t i ) + (1 − α) ˆ 
-c i (t ′ 
-i ) </p>
+<p>′ </p>
+
+<p>i ) + t </p>
+
+<p>′ </p>
+
+<p>i )f i (r) dr </p>
+
+<p>≤ u </p>
+
+<p>( 
+αĉ i (t i ) + (1 − α)ĉ i (t </p>
+
+<p>′ </p>
+
+<p>i ) </p>
 
 <p>) </p>
 
@@ -1427,26 +1490,32 @@ i ) </p>
 
 <p>R + </p>
 
-<p>u 
-[ 
-α ((1 + r) ˆ 
-a i (t i ) + t i ) + (1 − α) 
-( 
-(1 + r) ˆ 
-a i (t ′ 
-i ) + t ′ </p>
+<p>u </p>
 
-<p>i </p>
+<p>[ 
+α ((1 + r)â i (t i ) + t i ) + (1 − α) </p>
+
+<p>( 
+(1 + r)â i (t </p>
+
+<p>′ </p>
+
+<p>i ) + t </p>
+
+<p>′ 
+i </p>
 
 <p>)] 
 f i (r) dr </p>
 
-<p>≤ u 
-( 
-α ˆ 
-c i (t i ) + (1 − α) ˆ 
-c i (t ′ 
-i ) </p>
+<p>≤ u </p>
+
+<p>( 
+αĉ i (t i ) + (1 − α)ĉ i (t </p>
+
+<p>′ </p>
+
+<p>i ) </p>
 
 <p>) </p>
 
@@ -1456,54 +1525,78 @@ i ) </p>
 
 <p>R + </p>
 
-<p>u 
-[ 
-(1 + r) 
-( 
-α ˆ 
-a i (t i ) + (1 − α) ˆ 
-a i (t ′ 
-i ) </p>
+<p>u </p>
+
+<p>[ 
+(1 + r) </p>
+
+<p>( 
+αâ i (t i ) + (1 − α)â i (t </p>
+
+<p>′ </p>
+
+<p>i ) </p>
 
 <p>) 
-+ αt i + (1 − α)t ′ </p>
++ αt i + (1 − α)t </p>
 
-<p>i </p>
+<p>′ 
+i </p>
 
 <p>] 
 f i (r) dr </p>
 
-<p>≤ v i 
-( 
-αt i + (1 − α)t ′ </p>
+<p>≤ v i </p>
 
-<p>i </p>
+<p>( 
+αt i + (1 − α)t </p>
+
+<p>′ 
+i </p>
 
 <p>) </p>
 
-<p>by Equation (A-1) and (1). Clearly, when t i t ′ 
-i , the inequations can be chosen strictly because u is 
+<p>by Equation (A-1) and (1). Clearly, when t i t </p>
+
+<p>′ </p>
+
+<p>i , the inequations can be chosen strictly because u is 
 strictly concave. 
 □ </p>
 
-<p>Theorem A.2. Suppose Assumptions 3.1 and 3.2. Then, the optimal transfers t  *  
-j , t  *  
-k must satisfy t  *  
-j &gt; t  *  
-k . </p>
+<p>Theorem A.2. Suppose Assumptions 3.1 and 3.2. Then, the optimal transfers t </p>
+
+<p> *  </p>
+
+<p>j , t </p>
+
+<p> *  </p>
+
+<p>k must satisfy t </p>
+
+<p> *  </p>
+
+<p>j &gt; t </p>
+
+<p> *  </p>
+
+<p>k . </p>
 
 <p>Proof: Assuming an interior solution, 14 differentiating with respect to t i and applying the Envelop 
 theorem to equation (1) we get for each t i ∈ R + </p>
 
-<p>v ′ 
-i (t i ) = β </p>
+<p>v </p>
+
+<p>′ </p>
+
+<p>i (t i ) = β </p>
 
 <p>∫ </p>
 
 <p>R + </p>
 
-<p>u ′ ((1 + r) ˆ 
-a i (t i ) + t i ) f i (r) dr for i = j, k. 
+<p>u 
+′ ((1 + r)â i (t i ) + t i ) f i (r) dr for i = j, k. 
 (A-2) </p>
 
 <p>14 The condition lim c→0 + u ′ (c) = ∞ assures the interior optimum. </p>
@@ -1515,42 +1608,79 @@ a i (t i ) + t i ) f i (r) dr for i = j, k.
 <p>Rodrigo J. Raad and Gilvan R. Guedes </p>
 
 <p>Moreover, the F.O.C. of equation (3) with respect to t j , t k evaluated on the optimum (a  *  
-p , t  *  
-j , t  *  
-k ) for a 
+p , t </p>
+
+<p> *  </p>
+
+<p>j , t </p>
+
+<p> *  </p>
+
+<p>k ) for a 
 interior solution yields </p>
 
-<p>βu ′ 
-( 
-(1 + r p )a  *  
-p − t  *  
-j − t  *  </p>
+<p>βu </p>
 
-<p>k </p>
+<p>′ </p>
+
+<p>( 
+(1 + r p )a </p>
+
+<p> *  </p>
+
+<p>p − t </p>
+
+<p> *  </p>
+
+<p>j − t </p>
+
+<p> *  
+k </p>
 
 <p>) 
-= µv ′ 
-i (t  *  
-i ) for i = j, k. </p>
+= µv </p>
 
-<p>Assumptions 3.1, 3.2 and equation (A-2) evaluated on t i = t  *  
-k imply that 15 </p>
+<p>′ </p>
 
-<p>v ′ 
-j (t  *  
-k ) = β </p>
+<p>i (t </p>
+
+<p> *  </p>
+
+<p>i ) for i = j, k. </p>
+
+<p>Assumptions 3.1, 3.2 and equation (A-2) evaluated on t i = t </p>
+
+<p> *  </p>
+
+<p>k imply that 15 </p>
+
+<p>v </p>
+
+<p>′ </p>
+
+<p>j (t </p>
+
+<p> *  </p>
+
+<p>k ) = β </p>
 
 <p>∫ </p>
 
 <p>R + </p>
 
-<p>u ′ 
-( 
-(1 + r) ˆ 
-a j (t  *  
-k ) + t  *  </p>
+<p>u </p>
 
-<p>k </p>
+<p>′ </p>
+
+<p>( 
+(1 + r)â j (t </p>
+
+<p> *  </p>
+
+<p>k ) + t </p>
+
+<p> *  
+k </p>
 
 <p>) 
 f j (r) dr </p>
@@ -1561,11 +1691,15 @@ f j (r) dr </p>
 
 <p>R + </p>
 
-<p>u ′ 
-( 
-(1 + r)y + t  *  </p>
+<p>u </p>
 
-<p>k </p>
+<p>′ </p>
+
+<p>( 
+(1 + r)y + t </p>
+
+<p> *  
+k </p>
 
 <p>) 
 f j (r) dr </p>
@@ -1576,11 +1710,15 @@ f j (r) dr </p>
 
 <p>R + </p>
 
-<p>u ′ 
-( 
-(1 + r)a k + t  *  </p>
+<p>u </p>
 
-<p>k </p>
+<p>′ </p>
+
+<p>( 
+(1 + r)a k + t </p>
+
+<p> *  
+k </p>
 
 <p>) 
 f k (r) dr </p>
@@ -1591,36 +1729,74 @@ f k (r) dr </p>
 
 <p>R + </p>
 
-<p>u ′ 
-( 
-(1 + r) ˆ 
-a k (t  *  
-k ) + t  *  </p>
+<p>u </p>
 
-<p>k </p>
+<p>′ </p>
+
+<p>( 
+(1 + r)â k (t </p>
+
+<p> *  </p>
+
+<p>k ) + t </p>
+
+<p> *  
+k </p>
 
 <p>) 
 f k (r) dr </p>
 
-<p>= v ′ 
-k (t  *  
-k ) = v ′ 
-j (t  *  
-j ). </p>
+<p>= v </p>
 
-<p>Therefore we conclude that v ′ 
-j (t  *  
-k ) &gt; v ′ 
-j (t  *  
-j ). This implies that t  *  
-j &gt; t  *  
-k since Lemma A.1 assures that v j is 
-concave and hence v ′ 
-j is decreasing. 
+<p>′ </p>
+
+<p>k (t </p>
+
+<p> *  </p>
+
+<p>k ) = v </p>
+
+<p>′ </p>
+
+<p>j (t </p>
+
+<p> *  </p>
+
+<p>j ). </p>
+
+<p>Therefore we conclude that v </p>
+
+<p>′ </p>
+
+<p>j (t </p>
+
+<p> *  </p>
+
+<p>k ) &gt; v </p>
+
+<p>′ </p>
+
+<p>j (t </p>
+
+<p> *  </p>
+
+<p>j ). This implies that t </p>
+
+<p> *  </p>
+
+<p>j &gt; t </p>
+
+<p> *  </p>
+
+<p>k since Lemma A.1 assures that v j is 
+concave and hence v </p>
+
+<p>′ </p>
+
+<p>j is decreasing. 
 □ </p>
 
-<p>15 Observe that in the second and fourth inequality we use that u ′ is decreasing, ˆ 
-a j (t  *  </p>
+<p>15 Observe that in the second and fourth inequality we use that u ′ is decreasing,â j (t  *  </p>
 
 <p>k </p>
 

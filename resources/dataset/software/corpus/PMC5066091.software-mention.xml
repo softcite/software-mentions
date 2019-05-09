@@ -1,0 +1,1363 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC5066091" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-03-28T23:03+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>In recent years, there has been a growing interest in the 
+development of quantitative spectral optoacoustic (OA) imaging 
+for medical diagnostics [1]. This technique exploits the wave-
+length-dependent optical absorption properties of specific chro-
+mophores in tissue (e.g. hemoglobin), to provide quantitative 
+estimates of their spatially varying concentrations [2-7]. A 
+physiologically important example is the determination of local 
+blood oxygen saturation, based on the distinct absorption spectra 
+of oxy-and deoxyhemoglobin in the near-infrared range [8,9]. This 
+is of particular relevance for the study of oxygenation heterogene-
+ity in tumors, the early detection and monitoring of cerebral 
+ischemia in brain, and of other abnormalities characterized by a 
+change in tissue oxygenation or perfusion status [10]. 
+Quantitative spectroscopic OA imaging, however, faces impor-
+tant challenges, as well-described by Cox et al. [11]; and among 
+them is the spectral distortion due to wavelength-dependent 
+fluence attenuation. The retrieval of accurate functional informa-
+tion will only be possible if this wavelength-dependency of the 
+optical attenuation in the tissue is taken into account (which we </p>
+
+<p>shall refer to as ''spectral correction'') [12,13]. Many groups have 
+been working on this problem, proposing a number of different 
+correction approaches, each of which has certain advantages and 
+disadvantages [4,13-18]. An ideal method to estimate the fluence 
+distribution would be non-invasive, not rely on any additional 
+modality, or any a priori knowledge. 
+In this study, we present a technique that aims at fulfilling all 
+the aforementioned criteria. Our approach ties in with the concept 
+introduced by Zemp et al. [19,20], which employs multiple 
+irradiation positions to estimate optical properties of highly 
+scattering media, a concept similar to optical tomography. 
+However, as opposed to superficial optical detection, it employs 
+optically absorbing structures inside the tissue as intrinsic ''fluence 
+detectors''. The practical feasibility of this concept was shown in 
+the context of OA microscopy, demonstrating for a single-
+wavelength a depth-dependent correction for the optical attenua-
+tion [21,22]. The work described in the present study constitutes a 
+natural continuation of the aforesaid study, in that the multiple-
+irradiation technique is extended to a spectral correction, which is 
+essential to retrieve quantitative functional information. Further, 
+to emphasize the suitability of this technique for clinical OA 
+imaging with a handheld probe, we make use of a linear array 
+transducer for 2D image acquisition. 
+We conducted phantom experiments with a tissue-mimicking 
+bulk material showing a spectrally varying optical attenuation in </p>
+
+<p>Photoacoustics 4 (2016) 70-80 </p>
+
+<p>A R T I C L E I N F O </p>
+
+<p>Article history: 
+Received 21 December 2015 
+Received in revised form 2 May 2016 
+Accepted 26 May 2016 
+Available online 4 June 2016 </p>
+
+<p>Keywords: 
+Optoacoustic 
+Quantitative optoacoustic imaging 
+Fluence compensation 
+Spectral correction 
+Multiple irradiation sensing 
+Light diffusion 
+Blood oxygenation saturation </p>
+
+<p>A B S T R A C T </p>
+
+<p>Spectral optoacoustic (OA) imaging enables spatially-resolved measurement of blood oxygenation 
+levels, based on the distinct optical absorption spectra of oxygenated and de-oxygenated blood. 
+Wavelength-dependent optical attenuation in the bulk tissue, however, distorts the acquired OA 
+spectrum and thus makes quantitative oxygenation measurements challenging. We demonstrate a 
+correction for this spectral distortion without requiring a priori knowledge of the tissue optical 
+properties, using the concept of multiple irradiation sensing: recording the OA signal amplitude of an 
+absorbing structure (e.g. blood vessel), which serves as an intrinsic fluence detector, as function of 
+irradiation position. This permits the reconstruction of the bulk effective optical attenuation coefficient </p>
+
+<p>m eff,l . If performed at various irradiation wavelengths, a correction for the wavelength-dependent </p>
+
+<p>fluence attenuation is achieved, revealing accurate spectral information on the absorbing structures. 
+Phantom studies were performed to show the potential of this technique for handheld clinical combined 
+OA and ultrasound imaging. 
+ß 2016 The Author(s). Published by Elsevier GmbH. This is an open access article under the CC BY-NC-ND 
+license (http://creativecommons.org/licenses/by-nc-nd/4.0/). </p>
+
+<p>* Corresponding author. 
+E-mail address: Martin.Frenz@iap.unibe.ch (M. Frenz). </p>
+
+<p>Contents lists available at ScienceDirect </p>
+
+<p>Photoacoustics </p>
+
+<p>j o u r n a l h o m e p a g e : w w w . e l s e v i e r . c o m / l o c a t e / p a c s </p>
+
+<p>http://dx.doi.org/10.1016/j.pacs.2016.05.004 
+2213-5979/ß 2016 The Author(s). Published by Elsevier GmbH. This is an open access article under the CC BY-NC-ND license (http://creativecommons.org/licenses/by-nc-nd/ 
+4.0/). </p>
+
+<p>which vessel-like cylindrical absorbers characterized by a distinct 
+absorption peak were embedded. Our results demonstrate that the 
+multiple optical irradiation approach allows a successful correc-
+tion of the measured OA spectrum of the absorbers, which was 
+initially distorted by the spectral attenuation of the surrounding 
+medium. </p>
+
+<p>2. Theory </p>
+
+<p>2.1. Spectral optoacoustic signal amplitude </p>
+
+<p>The initial pressure, p l (r, t = 0) = p 0,l (r), generated at position r 
+after tissue irradiation, acts as a source of acoustic energy emitting 
+a broadband transient wavefield (OA signal). The initial pressure 
+can be described by </p>
+
+<p>p 0;l ðrÞ ¼ GðrÞÁm a;l ðrÞÁF l ðrÞ </p>
+
+<p>(1) </p>
+
+<p>where the Grueneisen parameter G(r) characterizes the thermo-
+elastic expansion of the tissue, m a (r) is the wavelength-dependent 
+absorption coefficient of the chromophore of interest and F l (r) </p>
+
+<p>refers to the fluence at a position r. Under ideal conditions (i.e., full 
+information, thus no detection bandwidth limitation, sample-
+encompassing detection area), p 0,l (r) can be reconstructed from 
+the OA signal p(r 0 , t) measured at detection points r 0 , by solving an 
+acoustic inverse problem. The reconstructed signal, S l (r), can be 
+expressed as </p>
+
+<p>S l ðrÞ ¼ p 0;l ðrÞ </p>
+
+<p>/ a d;l ðrÞ ¼ m a;l ðrÞÁF l ðrÞ </p>
+
+<p>(2) </p>
+
+<p>Eq. (2) highlights the proportionality between the recon-
+structed signal, S l (r), at any point r = (x, y, z) inside the investigated </p>
+
+<p>tissue and the absorbed energy density, a d,l (r), which corresponds 
+to the product of m a,l (r) and the fluence F l (r). This holds true if the 
+product of m a,l (r) and diameter of the absorbers is significantly </p>
+
+<p>smaller than 1 (see [23]). For quantitative spectroscopic OA 
+imaging it is therefore inevitable to have knowledge on the light </p>
+
+<p>fluence distribution F l (r), which itself is not self-evident to </p>
+
+<p>formulate, as it depends in a complex way on the tissue geometry </p>
+
+<p>and composition. To describe F l (r) in a simplified situation, the </p>
+
+<p>following significant assumptions were made: 
+First, we presume that the tissue can be modeled as an optically 
+homogeneous bulk material, which is strongly scattering and 
+weakly absorbing. In the diffusion approximation for light 
+propagation in a semi-infinite 3D geometry (infinite along x À y 
+plane and with a boundary at z = 0, infinite along z &gt; 0 -see next </p>
+
+<p>section for more details) 1 the fluence F 0,l (r j |m eff ) at a virtual </p>
+
+<p>intrinsic detection point r j = (x j , y j , z j ) inside the bulk material is 
+fully determined by the optical effective attenuation coefficient </p>
+
+<p>m eff,l . For a point-like irradiation, it can be analytically expressed </p>
+
+<p>as: </p>
+
+<p>F 0;l ðd; z j ; m eff Þ / z j 
+d 3 Á½1 þ m eff Ád e Àm eff Ád </p>
+
+<p>(3) </p>
+
+<p>where z j denotes the depth of the virtual detection point, and d the 
+distance, from the said point to the source position. 
+Secondly, we presume that absorbing structures (e.g., blood </p>
+
+<p>vessels containing specific chromophores, m chr </p>
+
+<p>a;l ðr j Þ) which are 
+optically more absorbing than the background, are sparsely 
+distributed within the bulk medium. The assumption is made 
+that these absorbing structures do not affect the light propagation, 
+so that the actual fluence inside the tissue is undisturbed and can </p>
+
+<p>be taken equal to F 0,l (r j |m eff ) (This zero-order assumption is akin </p>
+
+<p>to the first Born approximation commonly used in light scattering 
+problems). As such, S l (r j ) can be written as: </p>
+
+<p>S l ðr j Þ / m chr </p>
+
+<p>a;l ðr j ÞÁF 0;l ðr j jm eff ;l Þ 
+(4) </p>
+
+<p>2.2. Optically absorbing structures as intrinsic fluence detectors </p>
+
+<p>If F 0,l (r j |m eff ) is known for all wavelengths of interest, the </p>
+
+<p>undistorted absorption spectrum of the absorbing structures can 
+be retrieved by inverting Eq. (4): </p>
+
+<p>S l ðr j Þ </p>
+
+<p>F 0;l ðr j jm eff ;l Þ / m chr </p>
+
+<p>a;l ðr j Þ 
+(5) </p>
+
+<p>As F 0,l (r j |m eff ) is fully determined by m eff,l , the bulk effective </p>
+
+<p>attenuation coefficient can be derived by ''measuring'' the 
+fluence for various source-detection distances d and fitting 
+Eq. (3) to the outcome. A conventional way to measure the 
+fluence would be to use an external optical detector (e.g., a 
+photodiode) [25], but this requires additional equipment and 
+can be rather cumbersome in a clinical environment. Instead, we 
+make use of the judicious approach proposed in [19], which 
+suggests using the investigated absorbing structures themselves 
+as point-like ''intrinsic fluence detectors''. As the OA signal </p>
+
+<p>amplitude is proportional to F 0,l (r j |m eff ), the idea is that 
+successively acquired OA images at different l and with varying </p>
+
+<p>irradiation positions effectively sample the fluence for different 
+source-detection distances d. </p>
+
+<p>3. Materials and methods </p>
+
+<p>3.1. Experimental model </p>
+
+<p>To demonstrate the feasibility of the proposed method, we have 
+conducted phantom experiments in a well-defined and controlla-
+ble setting, where the phantom was chosen to fulfill the 
+assumptions made so far. A liquid fat emulsion was taken as a 
+homogeneous and spectrally attenuating bulk medium because (i) 
+it is commonly considered as a fairly realistic model for optical 
+tissue properties [26], (ii) it is strongly scattering and weakly 
+absorbing, and (iii) it is well-studied, easy to manipulate and 
+perfectly reproducible. The fat emulsion was placed in a large 
+cuboid container, so that boundary effects can be neglected. To 
+mimic sparsely distributed absorbing structures (e.g. blood 
+vessels), cylindrical tubings were embedded in the liquid bulk 
+medium, aligned on top of each other, in parallel to the y-axis (see 
+Fig. 1). The total number of absorbers was limited to three, to avoid 
+excessive reverberations of OA transients between the different 
+absorbers. The tubings were filled with a dye solution, whose 
+absorption spectrum displays a significant wavelength dependen-
+cy. The tubings were chosen thin to minimize the influence on </p>
+
+<p>F 0,l (r|m eff,l ), while still providing a good signal-to-noise ratio of </p>
+
+<p>the OA signal. 
+Fig. 1a and c shows a sketch of the experimental model, 
+illustrating the position and orientation of the absorbers inside the 
+bulk medium, the irradiation optics and the linear transducer 
+array, which is placed on top of the phantom surface for OA signal 
+detection. The x-z plane underneath the transducer, represented 
+by a red-dashed rectangle in Fig. 1c, defines the so-called 
+''imaging-plane'', i.e., the plane of maximum sensitivity of the 
+linear US transducer. 
+To fulfill the requirements needed for the validity of Eq. (3) in 
+terms of irradiation geometry, an optical fiber was used to 
+approximate a point-like irradiation. The irradiation spot was 
+translated along the phantom surface, parallel to the linear </p>
+
+<p>1 We prefer to use here a simplified version of the stationary solution of the </p>
+
+<p>diffusion model, which can be found in, e.g. Arridge et al. [24]. This version holds 
+true for source-detection distances d used in our applications. </p>
+
+<p>K.G. Held et al. / Photoacoustics 4 (2016) 70-80 </p>
+
+<p>
+transducer in the x-direction, leading to different distances d ij 
+between the irradiation spot and the virtual fluence detection 
+point r j , i.e., the intersection of the cylindrical tubings with the 
+imaging plane (Fig. 1a). The ith irradiation spot position is 
+described by x i , the depth of the jth dye-filled tubing of interest 
+by z j and the fixed spacing distance between the transducer 
+imaging plane and the fiber translation axis by y. This distance 
+was set to 16 mm, dictated by the finite width of the linear 
+transducer array. The orientation of the linear transducer array, 
+aligned perpendicularly to the embedded absorbers, enabled a 2D 
+reconstruction that represents a cross-sectional view of the dye-
+filled tubings within the imaging plane. Fig. 1d exemplarily shows 
+an OA image acquired with one irradiation spot position x i at one </p>
+
+<p>irradiation wavelength l. It displays the spatially-resolved OA </p>
+
+<p>signal, S l (r), of the embedded absorbers at various depths z j . 
+In Section 2.1 we made the assumption of a calibrated OA 
+detection system providing full information. Yet in practice, a 
+typical linear array transducer has a limited aperture and detection 
+bandwidth, thus not strictly fulfilling the made assumption. 
+Despite that, S l (r) can be regarded as an entity, which is, in case of a 
+moderate optical absorption, proportional to the absorbed energy </p>
+
+<p>density a d,l (r), at the cross-sectional position r j of the absorbers in </p>
+
+<p>the imaging plane and is thus proportional to the fluence, </p>
+
+<p>F 0,l (r j |m eff,l ), ''detected'' at those positions. The cross-section </p>
+
+<p>points of the imaging plane with the vessels act in this manner as 
+intrinsic fluence detectors. </p>
+
+<p>3.2. Phantom preparation </p>
+
+<p>The background medium was prepared by diluting an optically 
+scattering stock fat emulsion (SMOFlipid 20%, Fresenius Kabi, 
+Switzerland) with de-ionized water. 2 To produce a total volume of 
+4100 ml, 6 wt% of the stock fat emulsion was mixed with de-
+ionized water, resulting in a total fat concentration of 1.2 wt%. 
+Optical reference measurements of the fat emulsion were 
+performed in the spectral range from 700 nm to 830 nm, using 
+various optical characterization techniques (see supplementary 
+material). The spectrally-absorbing dye Indocyanine green (ICG) 
+(IR-125, Laser Grade, ACROS Organics, NJ, USA), diluted in ethanol 
+(Ethanol, p.a., Sigma-Aldrich), was used to fill the embedded 
+cylindrical tubings. The absorption coefficient of the ICG-ethanol 
+solution was assessed from extinction measurements using a 
+transmission photo-spectrometer. The measured absorption spec-
+trum agrees with literature values [27]. The peak absorption 
+coefficient value (m chr 
+a;l ¼ 0.35 mm À1 at 785 nm) has the same order 
+of magnitude as the absorption of hemoglobin for the spectral 
+range of interest (see Section 5). </p>
+
+<p>[ ( F i g . _ 1 ) T D $ F I G ] </p>
+
+<p>Fig. 1. (a) Experimental model including a spectrally-attenuating bulk medium and three embedded dye-filled tubings; the light propagation distance d ij is defined as the 
+distance between the ith irradiation spot position and the intersection of the jth cylindrical absorber with the transducer imaging plane. (b) Experimental setup, showing the 
+mounting of the linear transducer and the multimode fiber attached to the translation stage. (c) 2D cross-section of the experimental model, indicating the locations of the 
+three absorbers at depths z j=1,. . .,3 laterally centered in the imaging plane. (d) 2D reconstructed OA image showing the vertical alignment of the absorbers inside the spectral 
+attenuating bulk medium. (For interpretation of the references to color in text, the reader is referred to the web version of the article.) </p>
+
+<p>2 1000 g of the homogeneous stock emulsion consisted of 60 g soybean oil, 60 g </p>
+
+<p>medium-chain triglyceride, 50 g olive oil, 30 g fish oil, leading to a total fat 
+concentration of 20% by mass (wt%), assuming a density of 1 g/cm 3 . </p>
+
+<p>K.G. Held et al. / Photoacoustics 4 (2016) 70-80 </p>
+
+<p>
+3.3. Measurement setup </p>
+
+<p>An overview of the experimental setup is given in Fig. 1b. The 
+cuboid container for the bulk medium was made of polymethyl-
+methacrylate (PMMA) and had geometrical dimensions of 23 cm 
+(length), 17 cm (width) and 14 cm (height). Cylindrical polyure-
+thane (PU) tubings (Harvard Apparatus GmbH, Germany), with an 
+inner-diameter of 0.28 mm and an outer-diameter of 0.6 mm, 
+were used as embedded absorbers filled with the dye solution. The 
+tubings were placed at depths of 14.8 mm, 25.4 mm and 28 mm, 
+respectively. For OA signal generation, a diode-pumped Q-
+switched Nd:YAG laser (Spitlight DPSS OPO, InnoLas Laser GmbH, 
+Germany) with an integrated optical parametric oscillator (OPO) 
+was used, delivering laser pulses with a tuneable wavelength in 
+the range of 680-900 nm, a pulse duration of 10 ns and a 
+repetition rate of 100 Hz. The laser light was coupled into a </p>
+
+<p>1000 mm core, multimode fiber (Thorlabs Inc., NJ, USA), delivering </p>
+
+<p>a wavelength-dependent average output pulse energy at the fiber 
+tip of around 4 mJ. The energy of each single pulse was measured 
+before the fiber coupling with a pyroelectric energy sensor. The 
+fiber terminal was fixed on a motorized translation stage (T-series, 
+Zaber Inc., Canada), allowing an automated, stepwise translation 
+of the irradiation spot parallel to the x-axis. The OA pressure 
+transients, generated from the absorbing inclusions, were 
+detected by a linear array transducer (ATL L7-4, Philips N.V., 
+NL) containing 128 elements at a pitch of 0.298 mm with a center 
+frequency of 5 MHz and fractional bandwidth of 80%. OA signal 
+acquisition and reconstruction was carried out with an ultrasound 
+research system (V 1-64, Verasonics Inc., Redmond, WA), which 
+allowed parallel signal readout of 64 channels and continuous 
+data transfer for real-time processing on a host PC. This system 
+facilitates the acquisition and reconstruction of a full OA image 
+with each single laser pulse, at a frame rate corresponding to the 
+laser pulse repetition rate. The software of the ultrasound 
+research system was programmed in order to alternately acquire 
+US and OA images, which offer a direct one-to-one comparison 
+between the two modalities. 
+For image acquisition, the transducer was mounted with its 
+imaging plane perpendicular to the cylindrical PU tubings, 
+permitting a cross-sectional image with a high signal-to-noise 
+ratio (SNR) [28]. The fiber tip was dipped into the liquid at a 
+distance of 16 mm from the imaging plane (y-direction). The fiber 
+tip and the transducer aperture were aligned to be at the same 
+depth z relative to the liquid surface. The initial irradiation 
+location x 0 corresponded to the minimal light propagation 
+distance to all absorbers. The fiber tip was then laterally translated 
+over a total distance of 25 mm, with a step size of 0.5 mm. For each 
+irradiation position an OA image was acquired. To reduce any 
+non-systematic background, such as thermal noise, 100 OA 
+images were averaged for each irradiation position. The OA 
+images (Fig. 1c) were reconstructed using a frequency domain 
+algorithm [29]. </p>
+
+<p>3.4. Correction procedure </p>
+
+<p>The implementation of the proposed method for the spectral 
+correction can be summarized in the following steps: </p>
+
+<p>(i) Positioning of the transducer array, as described in the 
+previous section. </p>
+
+<p>(ii) Acquiring N * M OA images for N irradiation wavelengths, l, </p>
+
+<p>and M different irradiation spot positions, x i . 
+(iii) Determining the OA signal amplitudes, S l (r j , x i ), of the jth </p>
+
+<p>detection point for each l and each x i by fitting a 2D Gaussian </p>
+
+<p>profile to the reconstructed OA signal envelope and taking the 
+resulting prefactor as a measure for the amplitudes. </p>
+
+<p>(iv) Estimating m eff,l separately for each detection point and each l </p>
+
+<p>by fitting the diffusion model to the OA amplitude values (as 
+function of d ij , instead of r j as in Eq. (3)), fS l ðd ij Þg i¼1;...;M;j¼1;...;3 , 
+where d ij denotes the distance between the ith irradiation spot 
+position and the jth detection point. 
+(v) Calculating the undisturbed fluence, {F 0,l (r j=1,. . .,3 )|m eff,l }, for </p>
+
+<p>each l in the tissue, using the previously estimated m eff,l </p>
+
+<p>coefficient values as input to Eq. (3), which is now taken as a 
+forward model. </p>
+
+<p>(vi) Finally, knowing F 0 (r j |m eff,l ), the correction of the spectral </p>
+
+<p>optical attenuation in the tissue is possible, according to Eq. (5). </p>
+
+<p>4. Results </p>
+
+<p>4.1. Estimation of the optical effective attenuation </p>
+
+<p>In Fig. 2, the OA signal amplitude, S l (r j ), is exemplarily shown </p>
+
+<p>for one wavelength, l = 760 nm, as function of source-detection </p>
+
+<p>distance, d ij . For visualization purposes, the signals yielded by the 
+three absorbers are represented by different symbols and 
+normalized to the maximum amplitude for each absorber. The </p>
+
+<p>fluence model F 0,l (r j=1,. . .,3 |m eff,l ) (dotted lines) was fitted to S l (r j ), </p>
+
+<p>to retrieve the bulk medium's effective attenuation coefficient </p>
+
+<p>m eff,l . It is apparent that the fit accurately describes the decay of the </p>
+
+<p>measurements for all three absorbers. </p>
+
+<p>The estimated m eff,l values, using the different absorbers as </p>
+
+<p>fluence detectors, are in good agreement with the results of the 
+independently performed optical characterization described in the 
+supplementary material. Table 1 summarizes the results with an </p>
+
+<p>[ ( F i g . _ 2 ) T D $ F I G ] </p>
+
+<p>Fig. 2. OA signal amplitudes of the three absorbers as function of source-detection </p>
+
+<p>distances at l = 760 nm. For better visual comparison, all amplitude values were </p>
+
+<p>normalized to the maximum values of the respective absorber and plotted on a 
+logarithmic scale. The dotted lines are the result of the fit of the diffusion model to the 
+measured amplitude values, whereas the solid lines show the results of MC </p>
+
+<p>simulations based on the m eff,l values determined by the reference optical </p>
+
+<p>measurements. </p>
+
+<p>Table 1 </p>
+
+<p>Estimated m eff,l values of the bulk medium for one exemplarily </p>
+
+<p>selected wavelength (l = 760 nm), together with the results obtained 
+from the independently performed reference measurements using 
+frequency-domain diffuse optical spectroscopy (Imagent TM ). </p>
+
+<p>jth absorber </p>
+
+<p>m eff,l=760 nm </p>
+
+<p>j = 1 
+0.092 mm À1 AE 0.0041 
+j = 2 
+0.089 mm À1 AE 0.0072 
+j = 3 
+0.071 mm À1 AE 0.01 </p>
+
+<p>Reference 
+Imagent TM (760 nm) 
+0.099 mm À1 AE 0.009 </p>
+
+<p>K.G. Held et al. / Photoacoustics 4 (2016) 70-80 </p>
+
+<p>
+error estimation based on the 95% confidence interval (CI) of the </p>
+
+<p>least-square fit. The estimated m eff,l values based on the first and </p>
+
+<p>second absorber lie within the range of the reference measure-</p>
+
+<p>ments. Yet, using the third absorber, m eff,l shows an underestima-</p>
+
+<p>tion relative to the reference by around À0.02 mm À1 : This is visible 
+in Fig. 2, where the fitted slope for the third absorber differs from 
+those obtained with the first and second absorbers. This is further 
+discussed in Section 5. 
+To validate the applicability of the diffusion approximation to 
+our experimental model, we performed Monte Carlo (MC) 
+simulations by thoroughly reproducing the phantom and irradia-
+tion geometry. All simulations were conducted by generating 
+1.5 Â 10 9 photon paths with our general purpose MC software </p>
+
+<p>''<rs type="software">jaMCp 3</rs> '' [30-33]. The input optical parameters (m a,l (r), m s,l (r), </p>
+
+<p>and g l (r)) were taken from the reference measurements. The MC 
+simulations of the OA amplitudes agree very well with the decay of 
+the experimental data and the diffusion model, supporting the 
+assumption that the applied model accurately describes the light 
+propagation in the considered experimental situation, where 
+boundaries other than the surface could be neglected. </p>
+
+<p>Fig. 3 presents the estimated m eff,l values retrieved from a </p>
+
+<p>single experiment over the full investigated spectral range, from 
+700 nm to 830 nm. These values are based on fitting the fluence </p>
+
+<p>model F 0,l (r j=1,. . .,3 |m eff,l ) to N = 27 sets of measurements, one for 
+each l. A single set is in turn composed of M = 50 measurements </p>
+
+<p>(each obtained by averaging 100 OA signal acquisitions) corre-
+sponding to different irradiation spot positions, x i . The error 
+estimation for each set is based on the 95% CI of the single least-
+square fit. (Note that this entire experiment was repeated five 
+times in total, with a reproducibility error 6%, which lies within 
+these 95% CI values.) 
+For comparison, the results obtained from each absorber are </p>
+
+<p>separately plotted along with the reference m eff,l values. The </p>
+
+<p>experimental results based on the first and second absorber (Fig. 3a 
+and b) show a very good quantitative agreement with the reference 
+values, except for the slight overestimation between 700 and 
+720 nm. In contrast, the results obtained with the third absorber 
+show a good agreement with the reference values between 700 </p>
+
+<p>and 730 nm, but a strong underestimation of m eff,l for l &gt; 730 nm. </p>
+
+<p>4.2. Spectral correction </p>
+
+<p>The results in Fig. 3 underline the spectrally varying attenuation 
+of the fluence within the bulk medium. This leads to a distorted OA 
+spectrum with respect to the actual absorption spectrum of the 
+investigated ICG solution, as shown in Fig. 4a, c and e. The observed 
+distortion is getting more pronounced for deeper absorber 
+positions. It is particularly accentuated at the spectral range from </p>
+
+<p>700 nm to 790 nm, where m eff,l of the bulk medium strongly </p>
+
+<p>changes from around 0.04 mm À1 to 0.09 mm À1 (see Fig. 3). 
+To verify the reliability of our measurements, the expected OA 
+amplitude values were calculated according to Eq. (4), using the </p>
+
+<p>m eff,l values retrieved from the optical reference measurements </p>
+
+<p>and plotted over the actual measurements: see Fig. 4a, c and e. The 
+expected values coincide well with the measured amplitudes, with </p>
+
+<p>a slight underestimation for l 720 nm. In this range, the OA 
+measurements provide a better estimation of m eff,l than the optical </p>
+
+<p>reference measurements, which is apparent in the excellent </p>
+
+<p>spectral correction for l 720 nm in Fig. 4b, d and f. The 
+underestimation of the m eff,l values in the reference measurements </p>
+
+<p>(see Fig. 3) is due to the higher scattering, that reduces the accuracy 
+of the spectrometric analysis presented in the supplementary 
+material. 
+Our goal is to correct for this distortion, using the relation given </p>
+
+<p>in Eq. (5). Having determined m eff,l at all wavelengths, we calculate 
+the corresponding fluence F 0 (r j=1,. . .,3 |m eff,l ), following the steps </p>
+
+<p>(v-vi) described in Section 3.4. The corrected OA spectra are shown 
+in Fig. 4b, d and f for all three absorbers, respectively. The shapes of 
+the corrected spectra of the first and second absorbers (Fig. 4b and 
+d) show a very good agreement with the reference absorption </p>
+
+<p>spectrum m chr </p>
+
+<p>a;l ðr j Þ of the dye-solution. As for the third absorber, 
+despite the observed systematic underestimation of the bulk </p>
+
+<p>[ ( F i g . _ 3 ) T D $ F I G ] </p>
+
+<p>Fig. 3. m eff,l values of the background medium as determined using the different </p>
+
+<p>absorbers, displayed separately for each absorber (a) j = 1, (b) j = 2, (c) j = 3, over the 
+spectral range of interest (700-830 nm). The results of the independent optical 
+characterization, are presented as reference (gray dashed line, black circles, orange 
+squares). (For interpretation of the references to color in this legend, the reader is 
+referred to the web version of the article.) </p>
+
+<p>K.G. Held et al. / Photoacoustics 4 (2016) 70-80 </p>
+
+<p>
+effective attenuation (see Fig. 3c), the spectral correction is still 
+apparent. 
+In practical applications such as the determination of local 
+blood oxygen saturation levels, we are interested in the ratio of OA 
+amplitudes at different wavelengths [13,6], rather than in absolute </p>
+
+<p>values of m chr </p>
+
+<p>a;l ðr j Þ. The reason is the incapability to measure 
+absolute pressure amplitudes owing to the a priori unknown 
+influence of the limitations of the imaging system (e.g. bandwidth 
+limitation, restricted detection aperture) on the OA signal 
+amplitude [28]. Even though these system inherent parameters 
+are not known a priori, they can be considered to be independent of 
+the irradiation wavelength. 
+Therefore, to provide quantitative evidence of the efficiency 
+of our spectral correction, we are interested in the ratio </p>
+
+<p>R OA (r j )/R ref (r j ). R OA ðr j Þ ¼ S l 1 ðr j Þ=S l 2 ðr j Þ is the OA signal amplitude </p>
+
+<p>ratio and R ref ðr j Þ ¼ m chr </p>
+
+<p>a;l 1 ðr j Þ=m chr 
+a;l 2 ðr j Þ is the absorption coefficient </p>
+
+<p>ratio, both calculated for different wavelength pairs l 1 ; l 2 </p>
+
+<p>f 
+g . The 
+amplitude ratios are affected by two types of error: (i) the 
+distortion of R OA relative to the reference spectrum, caused by the 
+wavelength-dependent attenuation (akin to a systematic error) 
+and (ii) a random error owing to measurement noise, which leads 
+to an uncertainty in the experimental data. R OA (r j )/R ref (r j ) can be 
+considered as a random variable, which, in the case of an ideal 
+spectral correction, would be uniformly distributed, whereby </p>
+
+<p>each l 1 ; l 2 </p>
+
+<p>f 
+g pair yields a ratio equal to 1. To illustrate our 
+purpose, Fig. 5 displays the histogram of realizations of the ratio 
+R OA (r j )/R ref (r j ) obtained from our experimental data at r j=2 , 
+before and after spectral correction. These histograms are </p>
+
+<p>[ ( F i g . _ 4 ) T D $ F I G ] </p>
+
+<p>Fig. 4. OA signal spectra of the 3 embedded absorbers as function of wavelength, {S l (r j=1,. . .,3 )} and the reference absorption spectrum, m chr </p>
+
+<p>a;l ðr j Þ (red solid line). For each 
+absorber, (a), (c) and (e) show the amplitude values before correction. Additionally, the expected OA amplitude values (dashed line), calculated according to Eq. (4) and using </p>
+
+<p>the m eff,l values retrieved from the optical reference measurements, are plotted to verify the reliability of our measurements. (b), (d) and (f) present the amplitude spectra </p>
+
+<p>after spectral correction. All spectra were normalized to their respective mean value for better comparability with the reference. (For interpretation of the references to color 
+in this legend, the reader is referred to the web version of the article.) </p>
+
+<p>K.G. Held et al. / Photoacoustics 4 (2016) 70-80 </p>
+
+<p>
+restricted to spectral regions where the distortion is noteworthy, </p>
+
+<p>e.g., 700 nm l 1 725 nm and 740 nm l 2 810 nm. Before </p>
+
+<p>spectral correction, the R OA (r j )/R ref (r j ) values are significantly 
+larger than 1 and the realizations are strongly scattered, as a 
+result of the systematic error, which prevails over the random 
+error. Yet, after spectral correction, the systematic error vanishes 
+and the random error becomes dominant. The ensuing histogram 
+follows a normal distribution with a mean equal to 1 and a 
+standard deviation of 0.15. This, together with the fact that the 
+two histograms do not show any overlap, underlines the 
+relevance of the spectral correction. For our following analysis 
+in the next section, we consider the ratio R OA (r j )/R ref (r j ) for one </p>
+
+<p>particular wavelength pair l 1 ¼ 800 nm; l 2 ¼ 715 nm </p>
+
+<p>f 
+g . The 
+corresponding ratios are shown for all three absorbers in Table 2. </p>
+
+<p>5. Discussion and conclusion </p>
+
+<p>5.1. Validity of the tissue model </p>
+
+<p>Overall, our results demonstrate that we have successfully 
+applied the concept of multiple optical irradiations to correct for 
+the spectral attenuation of the bulk medium. The optoacoustically </p>
+
+<p>determined m eff,l values, based on the first and second absorbers, </p>
+
+<p>agree very well with the reference measurements, showing a </p>
+
+<p>variation in m eff,l from 0.04 mm À1 at 700 nm to 0.11 mm À1 at </p>
+
+<p>830 nm. These values lay within the physiological range of 
+superficial human tissue, such as breast tissue ($0.1 mm À1 ) or </p>
+
+<p>muscle tissue ($0.2 mm À1 ) [34], which are at the site of potential 
+target applications. 3 </p>
+
+<p>Yet, for l&gt; 730 nm, the m eff,l values obtained from the third </p>
+
+<p>absorber are consistently underestimated with deviations reach-
+ing À0.02 mm À1 with respect to the reference measurements. An 
+explanation for this underestimation is the small spacing in the z-
+direction ($2.5 mm) between the second and third absorbers. This 
+geometry was purposefully chosen to demonstrate the fact that the 
+fluence at the location of deeper absorbers is perturbed by the 
+presence of absorbing structures located above (this models an in 
+vivo setting, where, for instance, the trajectories of two or more 
+blood vessels/arteries are bound to intertwine): see preliminary 
+studies reported in [35]. In other terms, the absorbers do disturb to </p>
+
+<p>some extent the fluence F 0,l (r j=1,. . .,3 |m eff,l ), on the contrary to </p>
+
+<p>what has been assumed in Section 2. This influence can be seen in 
+the different slopes of the OA amplitudes of the three absorbers in 
+Fig. 2. For the exemplarily chosen wavelength, the slope of the 
+third absorber is less steep than that of the first and second 
+absorbers. Thus, the fitting of the diffusion model to the OA </p>
+
+<p>amplitudes generated by the third absorber yields m eff,l values, </p>
+
+<p>which differ from the expected ones. We have further validated 
+this explanation with additional MC simulations: see Fig. 6, 
+showing a ''close-up'' of Fig. 2. It is apparent that the light diffusion 
+model based on the optical reference measurements is appropriate 
+to describe the fluence at the depth of the third absorber (z j = 
+28 mm), in case of a single embedded absorber. Yet, in the presence 
+of two additional absorbers located at z j &lt; 28 mm, the fluence is </p>
+
+<p>Table 2 </p>
+
+<p>Quantitative comparison of R OA (r j )/R ref (r j ) of each individual absorber at one wavelength pair, l 1 ¼ 800 nm; l 2 ¼ 715 nm </p>
+
+<p>f 
+g , before and after spectral correction. </p>
+
+<p>jth absorber 
+Correction [before/after] 
+R OA (r j ) [S 800 (r j )/S 715 (r j )] 
+R ref ðr j Þ½m chr 
+a;800 ðr j Þ=m chr 
+a;715 ðr j Þ 
+R OA ðr j Þ </p>
+
+<p>R ref ðr j Þ AE s </p>
+
+<p>j = 1 
+Before 
+1.73 AE 0.15 
+2.65 AE 0.03 
+0.65 AE 0.06 
+After 
+2.51 AE 0.27 
+0.94 AE 0.1 </p>
+
+<p>j = 2 
+Before 
+1.52 AE 0.18 
+2.65 AE 0.03 
+0.57 AE 0.07 
+After 
+2.57 AE 0.57 
+0.97 AE 0.19 </p>
+
+<p>j = 3 
+Before 
+1.55 AE 0.38 
+2.65 AE 0.03 
+0.58 AE 0.14 
+After 
+2.2 AE 0.88 
+0.84 AE 0.33 </p>
+
+<p>[ ( F i g . _ 5 ) T D $ F I G ] </p>
+
+<p>Fig. 5. Histogram of realizations of the ratio of R OA (r j )/R ref (r j ) for various wavelength </p>
+
+<p>pairs l 1 ; l 2 </p>
+
+<p>f </p>
+
+<p>g , before (blue) and after (red) spectral correction; l 1 ; l 2 </p>
+
+<p>f 
+g were 
+restricted to a spectral region with significant spectral distortion, e.g., </p>
+
+<p>700 nm l 1 725 nm and 740 nm l 2 810 nm; after spectral correction, the </p>
+
+<p>histogram is dominated by the random error and can be approximated by a normal 
+distribution with a mean value of 1 and a standard deviation of 0.15. (For 
+interpretation of the references to color in this legend, the reader is referred to the 
+web version of the article.) </p>
+
+<p>[ ( F i g . _ 6 ) T D $ F I G ] </p>
+
+<p>Fig. 6. MC simulations were performed at 760 nm to demonstrate the effect of the 
+presence of additional absorbers on the fluence at the position of the third absorber 
+r j=3 . It can be seen that the light diffusion model (solid red line) based on the optical 
+reference measurements is inappropriate to describe the fluence at r j=3 . (For 
+interpretation of the references to color in this legend, the reader is referred to the 
+web version of the article.) </p>
+
+<p>3 It should be noted that the proposed technique can also be applied on tissue </p>
+
+<p>types with a higher effective attenuation coefficient. </p>
+
+<p>K.G. Held et al. / Photoacoustics 4 (2016) 70-80 </p>
+
+<p>
+significantly reduced at r j=3 , depending on the number of absorbers 
+present. This effect is particularly pronounced for 32 mm 
+d ij 35 mm (see Fig. 6, squares and dots), when the irradiation 
+location is positioned close to the center, i.e. when the source-
+detector distance is the shortest. Under such conditions, the 
+proposed diffusion model fails at correctly describing the fluence at 
+the position r j=3 . 
+Ultimately, a few more general remarks can be made regarding 
+the quality of the proposed method to optically characterize the 
+bulk medium. We have quantitatively assessed the accuracy of our 
+results by comparison to independently performed reference </p>
+
+<p>measurements of the absorption coefficient m a,l (r), the scattering 
+coefficient m s,l (r) and the anisotropy factor g l (r), needed to 
+express m eff,l . Naturally, these reference values are to be </p>
+
+<p>considered with precaution, insofar as the factor g l (r) was not 
+directly measured but estimated based on indirect measurements 
+and different literature sources. Nonetheless, we have noticed that 
+all estimations agree on the spectral trend of g l (r). This means that </p>
+
+<p>the spectral behavior of m eff,l remains unaffected by the absolute </p>
+
+<p>value of g l (r), as the latter simply adds a systematic offset, which 
+was taken into account in our error propagation calculations. In 
+comparison, the source-detection distance d ij is of higher influence </p>
+
+<p>on the accuracy of the m eff,l determination. For instance, a change </p>
+
+<p>in d ij by 2 mm results in a variation in the optoacoustically </p>
+
+<p>determined m eff,l of up to 20%. This error, however, can be avoided </p>
+
+<p>with an appropriate geometrical calibration of the position of the 
+optical fiber relative to the imaging plane. In conclusion, the </p>
+
+<p>retrieved m eff,l values show a very good agreement with the </p>
+
+<p>independently performed optical reference measurements and 
+thus, underline the general ability of the proposed technique to </p>
+
+<p>determine absolute m eff,l values of strongly scattering bulk </p>
+
+<p>materials. </p>
+
+<p>5.2. Influence of the number of irradiation spot positions and number 
+of acquisitions on the estimation of the optical effective attenuation </p>
+
+<p>The high number (M = 50) of irradiation spot positions, x i , for 
+this proof-of-principle study was chosen so as to fully understand 
+the behavior of the light fluence for a large number of d ij and over a 
+broad spectral range. To provide a good SNR, particularly for x i far 
+off the absorbers, 100 OA acquisitions per x i were used for 
+averaging. The resulting measurement time per x i of around 3 s 
+(including 100 OA acquisitions, image reconstruction and me-
+chanical translation of the irradiation spot position) led to long 
+acquisition times for a single experiment. 
+With the aim of shortening the acquisition time, we investigat-</p>
+
+<p>ed how the accuracy of the estimated m eff,l values is affected by </p>
+
+<p>reducing (i) the number of x i and (ii) the number of acquisitions per 
+x i . Exemplarily, for one absorber (j = 2) and one set of measure-</p>
+
+<p>ments (l = 760 nm), we estimated m eff,l based on smaller subsets </p>
+
+<p>with n number of x i values, randomly sampled (Â100) out of M. The 
+number of acquisitions for each x i was kept constant. The resulting </p>
+
+<p>mean and 95% CI of m eff,l for different n values are summarized in </p>
+
+<p>Fig. 7a. The results show that for this specific absorber and </p>
+
+<p>wavelength, the estimated m eff,l values converge to the reference </p>
+
+<p>value for n ! 10, accompanied by a decrease in the fit uncertainty. 
+For the same absorber (j = 2) and set of measurements </p>
+
+<p>(l = 760 nm), we subsequently estimated m eff,l by averaging k </p>
+
+<p>acquisitions for M irradiation spot positions. The resulting mean </p>
+
+<p>and 95% CI of m eff,l for different k are presented in Fig. 7b. The </p>
+
+<p>results show that for the specific absorber and wavelength, the </p>
+
+<p>estimated m eff,l values converge to the reference value for k ! 15, </p>
+
+<p>accompanied by a slightly decreasing fit uncertainty. The 
+underestimation for small k results from the noise contribution 
+to the fit, observed for x i positions far off the absorbers. Excluding 
+those noise dominated measurements (i.e., effectively reducing the </p>
+
+<p>number of x i values) from the fit improves the m eff,l estimation, </p>
+
+<p>even for k 15. 
+Certainly, these results suggest that n ! 10 positions and k ! 15 </p>
+
+<p>acquisitions would suffice to accurately determine m eff,l , leading in </p>
+
+<p>practice to a significant reduction in acquisition time. Yet, it is 
+difficult to draw a universal conclusion with respect to clinical 
+applications, since the slope will be perturbed in an in vivo setting, 
+where not only geometrical boundaries, but also optical hetero-
+geneities play an influential role. Actually, the effect of the optical 
+heterogeneities can already be observed here in the case of the 
+third absorber: see Fig. 6. As such, we can only claim that there is 
+trade-off between the number of irradiation spot positions and the 
+number of acquisitions, and that this needs to be further 
+investigated with in vivo studies. </p>
+
+<p>5.3. Accuracy of the spectral correction and ensuing blood oxygen 
+saturation level calculations </p>
+
+<p>We shall recall that the main purpose of this ''proof-of-
+principle'' study was to correct for the spectral distortion of the </p>
+
+<p>measured OA spectra. The key point was to calculate F 0,l (r j |m eff,l ), 
+based on the spectrally determined m eff,l using multiple-irradia-</p>
+
+<p>tion sensing, and to subsequently assess the accuracy of the 
+spectral correction. The latter is of particular relevance if 
+quantitative OA imaging is applied to measure physiological 
+parameters such as the blood oxygen saturation level [1]. 
+Compared to the distorted OA spectra, the corrected ones 
+presented in Fig. 4(b), (d), and (f), indicate a significantly better </p>
+
+<p>[ ( F i g . _ 7 ) T D $ F I G ] </p>
+
+<p>Fig. 7. (a) Mean and 95% CI of m eff,l , estimated based on (a) randomly sampled subsets of irradiation spot positions with size n out of M, (b) by averaging over k acquisitions for 
+M irradiation spot positions; all results are based on the second absorber (j = 2) acquired at l = 760 nm. </p>
+
+<p>K.G. Held et al. / Photoacoustics 4 (2016) 70-80 </p>
+
+<p>
+agreement with the reference absorption spectrum of the ICG 
+solution. This qualitative observation can be quantitatively 
+judged by the ratio of R OA (r j )/R ref (r j ) at 800 nm and 715 nm given 
+in Table 2. After spectral correction, R OA (r j )/R ref (r j ) of the first 
+(0.93 AE 0.11) and second (0.94 AE 0.2) absorbers agree, within the 
+standard deviation, with the target value (i.e. R OA (r j )/R ref (r j ) = 1). 
+Yet, the correction of the third absorber (0.84 AE 0.4) does not yield 
+the intended ratio, despite a significant correction compared to the 
+initial value (0.58 AE 0.087). This is related to the observed </p>
+
+<p>systematic underestimation of m eff,l , as thoroughly explained </p>
+
+<p>above. 
+The choice of R OA (r j )/R ref (r j ) was motivated by the target 
+application example, i.e. quantification of the relative concentra-
+tions of deoxyhemoglobin (HHb) and oxyhemoglobin (HbO 2 ) 
+based on the distinct optical absorption ratios of HHb and HbO 2 at 
+two different wavelengths. Assuming HHb and HbO 2 to be the 
+main optically absorbing blood constituents, their relative con-
+centrations at r j can be retrieved using the following relation 
+between the known molar absorption coefficient and the resulting 
+OA amplitudes at two different wavelengths: </p>
+
+<p>S l1 </p>
+
+<p>S l2 </p>
+
+<p>¼ </p>
+
+<p>k l 
+m a;l1 
+m a;l2 </p>
+
+<p>" 
+# </p>
+
+<p>¼ k l1 0 </p>
+
+<p>0 </p>
+
+<p>k l2 </p>
+
+<p>e HbO 2 </p>
+
+<p>l1 </p>
+
+<p>e HHb </p>
+
+<p>l1 </p>
+
+<p>e HbO 2 </p>
+
+<p>l2 </p>
+
+<p>e HHb </p>
+
+<p>l2 </p>
+
+<p>" 
+# 
+c HbO 2 </p>
+
+<p>c HHb </p>
+
+<p>" 
+# </p>
+
+<p>(6) </p>
+
+<p>where the product of the total hemoglobin (Hb) concentration 
+($150 g Hb/L) and the wavelength-dependent molar extinction </p>
+
+<p>coefficient is given as e. The relative concentrations of HHb and 
+HbO 2 is denoted by c HHb and c HbO2 , respectively and the factors k l </p>
+
+<p>depend on the wavelength-dependent fluence, as well as on </p>
+
+<p>various system parameters. (Although, S l , m a,l , c HbO2 , and c HHb are </p>
+
+<p>all a function of r j , this dependency is omitted in Eqs. (6)-(8), for 
+sake of simplicity.) The inversion of Eq. (6) yields </p>
+
+<p>c HbO 2 
+c HHb </p>
+
+<p>" 
+# </p>
+
+<p>¼ 1 
+det e </p>
+
+<p>S l1 </p>
+
+<p>k l1 
+Á e HHb </p>
+
+<p>l2 Àe HHb </p>
+
+<p>l1 Á k l1 
+k l2 </p>
+
+<p>ÁR OA </p>
+
+<p>S </p>
+
+<p>l1 </p>
+
+<p>k l1 </p>
+
+<p>Á Àe HbO 2 </p>
+
+<p>l2 </p>
+
+<p>þ e HbO 2 
+l1 Á k l1 
+k l2 </p>
+
+<p>ÁR OA </p>
+
+<p>2 
+6 
+6 
+4 </p>
+
+<p>3 </p>
+
+<p>7 
+7 
+5 
+(7) </p>
+
+<p>in which det e is the determinant of the molar extinction coefficient 
+matrix and R OA ðr j Þ ¼ S l 2 ðr j Þ=S l 1 ðr j Þ refers to the ratio between OA 
+signal amplitudes at two different wavelengths. The resulting 
+blood oxygen saturation (SO 2 ) level can be expressed as a function 
+of the relative concentrations of HHb and HbO 2 [36], where the </p>
+
+<p>ratio between k l1 and k l2 accounts for the wavelength-depen-</p>
+
+<p>dency of the fluence at the two wavelengths of interest. The 
+accuracy of the SO 2 level quantification depends on the accurate </p>
+
+<p>determination of this ratio, i.e. the spectral correction of the 
+amplitude ratio R OA (r j ): </p>
+
+<p>SO 2 ¼ 
+c HbO 2 
+c HHb þ c HbO 2 </p>
+
+<p>¼ </p>
+
+<p>e HHb </p>
+
+<p>l2 Àe HHb </p>
+
+<p>l1 Á k l1 
+k l2 </p>
+
+<p>R OA </p>
+
+<p>e HHb </p>
+
+<p>l2 Àe HbO 2 
+l2 À½e HHb 
+l1 Àe HbO 2 </p>
+
+<p>l1 </p>
+
+<p>Á k l1 
+k l2 </p>
+
+<p>R OA </p>
+
+<p>(8) </p>
+
+<p>To discuss the accuracy of the achieved spectral correction in 
+the context of SO 2 level quantification, we extrapolate the 
+measured OA spectra (see Fig. 4) to a literature-based blood 
+absorption spectrum, corresponding to a nominal SO 2 level of 90%, 
+which is reasonable for a healthy adult [36] (black solid line in 
+Fig. 8). The extrapolated spectra were obtained by multiplying the 
+ratios S l ðr j Þ=m chr 
+a;l ðr j Þ of the measured OA spectra (see Fig. 4) with 
+the said nominal blood spectrum. Fig. 8 shows the extrapolated 
+spectra for the second absorber (blue dots), before and after 
+spectral correction, together with the literature-based nominal 
+blood absorption spectrum. The SO 2 levels were quantified for the </p>
+
+<p>particular wavelength pair l 1 ¼ 800 nm; l 2 ¼ 715 nm </p>
+
+<p>f 
+g using 
+Eq. (8). It should be noted that this wavelength pair, which was 
+already considered in Section 4, was chosen so that the efficiency of 
+our approach could be assessed in the case of a strong initial 
+distortion of the OA spectrum. To underline the sensitivity of the 
+SO 2 level determination to small deviations from the extrapolated 
+spectrum, the absorption spectra corresponding to the two 
+''extreme'' blood oxygenation states (1% O 2 and 99% O 2 saturation) 
+are added in Fig. 8. 
+Table 3 presents the nominal and the estimated SO 2 levels, 
+before and after spectral correction, together with the experimen-
+tally obtained 95% CI values. The estimated SO 2 values before </p>
+
+<p>[ ( F i g . _ 8 ) T D $ F I G ] </p>
+
+<p>Fig. 8. OA spectrum of the second absorber (blue dots), before (a) and after (b) spectral correction, extrapolated to a literature-based nominal blood absorption spectrum of </p>
+
+<p>90% SO 2 (black solid line); the SO 2 level estimation is based on the extrapolated OA spectra at the two wavelengths, l 1 = 800 nm and l 2 = 715 nm; the absorption spectra of </p>
+
+<p>oxygenated (99% SO 2 ) and deoxygenated (1% SO 2 ) blood illustrate the full possible absorption range. (For interpretation of the references to color in this legend and in the text, 
+the reader is referred to the web version of the article.) </p>
+
+<p>Table 3 
+The nominal and estimated SO 2 levels based on all three absorbers, before and after 
+spectral correction, together with the corresponding 95% CI. </p>
+
+<p>jth 
+absorber </p>
+
+<p>Correction 
+[before/after] </p>
+
+<p>Estimated 
+SO 2 [%] </p>
+
+<p>95% CI 
+[%] </p>
+
+<p>Nominal SO 2 [%] </p>
+
+<p>j=1 
+Before 
+69.5 
+AE6.4 
+90 
+After 
+87.2 
+AE 7.3 </p>
+
+<p>j=2 
+Before 
+62.1 
+AE8.6 
+90 
+After 
+88.9 
+AE 16.4 </p>
+
+<p>j=3 
+Before 
+62.8 
+AE18.9 
+90 
+After 
+82.2 
+AE 26.8 </p>
+
+<p>K.G. Held et al. / Photoacoustics 4 (2016) 70-80 </p>
+
+<p>
+spectral correction show for all three absorbers a significant 
+deviation from the reference value, which leads in practical 
+applications to an erroneous diagnostic outcome. Yet, after spectral 
+correction, the estimated SO 2 values approach the nominal value. 
+The corresponding CI values increase after spectral correction, as a </p>
+
+<p>consequence of the error in the experimental m eff,l determination. </p>
+
+<p>It is apparent that despite the increased CI values, the improve-
+ment in SO 2 level determination is significant, underlining the 
+power of this technique. Even in the case of a strong initial 
+distortion of the OA spectrum, the accuracy of our results with the 
+first absorber lies within the CI, which is comparable not only to 
+other OA based methods [6], but also to commercially available 
+pulse oximeters (95% CI &lt;AE6%) [37,38]. Moreover, our approach 
+does not require any a priori knowledge about the tissue geometrical 
+properties, unlike the study of Laufer et al. [6], and provides spatially 
+resolved information, not possible with pulse oximetry. Furthermore, 
+we would like to point out that the accuracy of our results could 
+further be increased when using a larger wavelength range. 
+In conclusion, we presented a method to correct for the 
+wavelength-dependent optical attenuation in highly scattering 
+media such as biological tissues, which is of great relevance in the 
+frame of quantitative OA imaging. The method is based on the 
+concept of multiple irradiation sensing which was implemented on 
+a system designed for handheld, clinical combined OA and US 
+imaging. The fact that the proposed technique is non-invasive, 
+does not require a priori knowledge or any other additional 
+detection modalities and has low computational cost, makes it 
+promising for real-time clinical application. The results of this 
+feasibility study emphasize its applicability also for deep 
+optoacoustic imaging. Its benefit for the estimation of blood 
+oxygen saturation levels was underlined. More importantly, this 
+proof-of-principle study helped identifying the challenges and the 
+limitations of this approach. These include the applicability limits 
+of the tissue model in the presence of several strong optical 
+absorbers, as well as the influence of the noise on the fit of the 
+diffusion model. Future steps will involve more realistic situations, 
+i.e., simulation and experimental work on strongly heterogeneous 
+phantoms (multi-layered, non-trivial vasculature model, etc.) with 
+influential boundaries, and the corresponding adaptation of the 
+light propagation model. This will pave the way to quantitative OA 
+imaging in a clinical settings. </p>
+
+<p>Conflict of interest 
+The authors declare that there are no conflicts of interest. </p>
+
+<p>Acknowledgment </p>
+
+<p>We would like to thank on the one hand René Nyffenegger for 
+his valuable contribution to the experimental work and on the 
+other hand, Salvador Sanchez Majos and Jingjing Jiang from the 
+University Hospital Zurich for their help in validating our results, 
+through an independent analysis of our measurements. This 
+research was funded in part by the European Community 
+Framework Programme (FP7/2007-2013) under grant agreement 
+no. 31806, the Swiss TransMed platform 'ONIRIUS' and the Swiss 
+Science Foundation (grant no. 205320-144443). The Imagent TM 
+measurements could not be realized without the financial support 
+of the Swiss Science Foundation 'R'EQUIP' (grant no. 139238). 
+Michael Jaeger acknowledges support from the career develop-
+ment scheme 'Ambizione' (grant no. PZ00P3-142585) and K. Gerrit 
+Held from the Hans-Sigrist Foundation. </p>
+
+<p>Appendix A. Supplementary data </p>
+
+<p>Supplementary data associated with this article can be found, in 
+the online version, at http://dx.doi.org/10.1016/j.pacs.2016.05.004. </p>
+
+
+
+<p>K.G. Held et al. / Photoacoustics 4 (2016) 70-80 </p>
+
+
+
+<p>
+K. Gerrit Held received his BSc in Biomedical Technol-
+ogy, in 2010, and his MSc degree in Biomedical 
+Engineering, in 2013, both from the University of 
+Twente, The Netherlands. He is currently working 
+towards a PhD degree at the Institute of Applied Physics 
+(IAP) of the University of Bern, Switzerland. His current 
+research focuses on real-time quantitative optoacoustic 
+imaging implemented on a handheld, clinical combined 
+OA and US system. </p>
+
+<p>Michael Jaeger received the Dipl. Phil. Nat. degree in 
+physics from the University of Bern, Switzerland, in 
+2002, and the PhD in physics from the same university 
+in 2007. In 2010/2011 he joined the Institute of Cancer 
+Research and the Royal Marsden Hospital, Sutton, UK. 
+In 2012 he won a grant for a three-year project under 
+the career development scheme Ambizione and is since 
+them group leader of the Optoacoustic Imaging Team at 
+the Institute of Applied Physics, University of Bern. His 
+research includes optoacoustic imaging with focus on 
+clinical imaging, as well as novel ultrasound techniques 
+such as speed-of-sound imaging using echo ultrasound. </p>
+
+<p>Jaro Rička received his Doctorate degrees from the 
+University of Bern, Switzerland. After completing a 
+PostDoc at MIT in Boston he returned back to the 
+Institute of Applied Physics of the University of Bern for 
+heading the research group, time correlated photon-
+counting and complex liquids. In 2001 he became a 
+professor at the University of Bern where he retired in 
+2014. His research interests are in optical measurement 
+techniques and their applications in physics, biology 
+and chemistry. </p>
+
+<p>Martin Frenz received the Master degree in physics 
+from the Albert-Ludwig University of Freiburg, 
+Germany, in 1985, and the PhD in physics from the 
+University of Bern, Switzerland in 1990. In 1995 he 
+joined the University of Texas at Austin, USA. In 2002 he 
+became a professor and head of the biomedical 
+photonics department of the Institute of Applied 
+Physics at the University of Bern, Switzerland. Since 
+2008 he is director of the Institute of Applied Physics. 
+His most recent work has explored new imaging 
+modalities in biomedicine, including quantitative 
+optoacoustic imaging and sensing, in vivo microscopy, 
+optoacoustic contrast agents for imaging and therapy, 
+light propagation in tissue as well as biomedical laser 
+applications for medical diagnostics and therapy. </p>
+
+<p>H. Gü nhan Akarçay completed his MSc at the Ecole 
+Nationale Superieure de Physique de Strasbourg before 
+joining the Institute of Applied Physics (IAP) of the 
+University of Bern to work on his PhD. He then carried 
+out postdoctoral research in Montreal and Ulm. His 
+work focuses on the numerical modeling of light 
+propagation in condensed soft matter and his interests 
+cover radiative transfer, electromagnetism, statistical 
+physics and biophysics. He currently pursues his work 
+as a postdoctoral fellow at the IAP. </p>
+
+<p>K.G. Held et al. / Photoacoustics 4 (2016) 70-80 </p>
+
+<p>
+</p></text></tei>

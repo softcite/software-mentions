@@ -1,6 +1,20 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1007%2Fs11149-006-9012-x" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T19:52+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1007%2Fs11149-006-9012-x" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T03:59+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
-<p>Proactive planning and valuation of transmission investments </p>
+<p>Abstract Traditional methods of evaluating transmission expansions focus on 
+the social impact of the investments based on the current generation stock 
+which may include firm generation expansion plans. In this paper, we evaluate 
+the social welfare implications of transmission investments based on equilib-
+rium models characterizing the competitive interaction among generation firms 
+whose decisions in generation capacity investments and production are affected 
+by both the transmission investments and the congestion management proto-
+cols of the transmission system operator. Our analysis shows that both the 
+magnitude of the welfare gains associated with transmission investments and 
+the location of the best transmission expansions may change when the gener-
+ation expansion response is taken into consideration. We illustrate our results 
+using a 30-bus network example. </p>
+
+<p>An incorrect version of this article was published online. The correct version is given here. The 
+online version of the original article can be found at http://dx.Proactive planning and valuation of transmission investments </p>
 
 <p>359 </p>
 
@@ -405,12 +419,10 @@ made in period 1. </p>
 
 <p>g 0 
 i : expected generation capacity available at node i before period 2. 
-f 0 
-: expected thermal capacity limit of line before period 1. 
+f 0 : expected thermal capacity limit of line before period 1. 
 g c 
 i : generation capacity available at node i in state c, given g i . 
-f c 
-: thermal capacity limit of line in state c, given f . 
+f c : thermal capacity limit of line in state c, given f . 
 P c 
 i (·): inverse demand function at node i in state c. 
 CP c 
@@ -420,8 +432,7 @@ i ): production cost function at node i in state c.
 CIG i (g i , g 0 
 i ): cost of investment in generation capacity at node i to bring 
 expected generation capacity to g i . 
-CI (f , f 0 
-): investment cost in line to bring expected transmission capacity 
+CI (f , f 0 ): investment cost in line to bring expected transmission capacity 
 to f 
 φ c 
 ,i (L): PTDF on line with respect to a unit injection/withdrawal at node 
@@ -443,27 +454,49 @@ Nature determines the state of the world. In the second stage, for a given state
 generation firm G (G ∈ ) solves the following profit-maximization problem: </p>
 
 <p>max {q c 
-i ,i∈N G } π c 
-G = </p>
+i ,i∈N G } π </p>
 
+<p>c </p>
 
+<p>G = </p>
 
 <p>i∈N G </p>
 
-<p>
-P c 
-i (q c 
-i + r c 
-i ) · q c 
-i − CP c 
-i (q c 
-i , g c 
-i ) </p>
+<p>P </p>
 
+<p>c </p>
 
+<p>i (q </p>
 
-<p>s.t. q c 
-i ≥ 0, i ∈ N G </p>
+<p>c </p>
+
+<p>i + r </p>
+
+<p>c </p>
+
+<p>i ) · q </p>
+
+<p>c </p>
+
+<p>i − CP </p>
+
+<p>c </p>
+
+<p>i (q </p>
+
+<p>c </p>
+
+<p>i , g </p>
+
+<p>c </p>
+
+<p>i ) </p>
+
+<p>s.t. q </p>
+
+<p>c </p>
+
+<p>i ≥ 0, i ∈ N G </p>
 
 <p>(1) </p>
 
@@ -472,9 +505,8 @@ operator solves the following welfare maximizing redispatch problem (for the
 given state c): </p>
 
 <p>max {r c 
-i ,i∈N} W c = </p>
-
-
+i ,i∈N} W 
+c = </p>
 
 <p>i∈N </p>
 
@@ -482,37 +514,50 @@ i ,i∈N} W c = </p>
 
 <p>i </p>
 
-
-
 <p>0 </p>
 
-<p>P c 
-i (q c 
-i + x i )dx i </p>
+<p>P </p>
+
+<p>c </p>
+
+<p>i (q </p>
+
+<p>c </p>
+
+<p>i + x i )dx i </p>
 
 <p>s.t. </p>
 
-<p>
-i∈N </p>
+<p>i∈N </p>
 
-<p>r c 
-i = 0 </p>
+<p>r </p>
 
-<p>−f c 
-≤ </p>
+<p>c </p>
 
+<p>i = 0 </p>
 
+<p>−f 
+c ≤ </p>
 
 <p>i∈N </p>
 
-<p>φ c 
-,i (L) · r c 
-i ≤ f c 
-, ∀ ∈ L </p>
+<p>φ </p>
+
+<p>c </p>
+
+<p>,i (L) · r </p>
+
+<p>c </p>
+
+<p>i ≤ f 
+c , ∀ ∈ L </p>
 
 <p>q c 
-i + r c 
-i 0, ∀i ∈ N </p>
+i + r c </p>
+
+<p>i </p>
+
+<p>0, ∀i ∈ N </p>
 
 <p>(2) </p>
 
@@ -535,8 +580,11 @@ i ) + P c
 i (q c 
 i + r c 
 i ) · q c 
-i − 
-∂ CP c </p>
+i − </p>
+
+<p>∂ CP </p>
+
+<p>c </p>
 
 <p>i (q c 
 i ,g c 
@@ -575,25 +623,20 @@ straints in (1).
 The KKT conditions for the problem defined in (2) are: </p>
 
 <p>P c 
-i (q c 
-i + r c 
+i (q </p>
+
+<p>c </p>
+
+<p>i + r c 
 i ) + α c + </p>
-
-
 
 <p>∈L </p>
 
-<p>
-λ c 
-− − λ c </p>
-
-<p>+ </p>
-
-<p>· φ c 
+<p>λ c 
+− − λ c 
++ · φ c 
 ,i (L) + β c 
 i = 0, ∀i ∈ N, c ∈ C (7) </p>
-
-
 
 <p>i∈N </p>
 
@@ -601,90 +644,111 @@ i = 0, ∀i ∈ N, c ∈ C (7) </p>
 i = 0, ∀c ∈ C 
 (8) </p>
 
-<p>− f c 
-≤ </p>
-
-
+<p>− f 
+c ≤ </p>
 
 <p>i∈N </p>
 
-<p>φ c 
-,i (L) · r c 
-i f c 
-, ∀ ∈ L, c ∈ C 
+<p>φ </p>
+
+<p>c </p>
+
+<p>,i (L) · r </p>
+
+<p>c 
+i </p>
+
+<p>f 
+c , ∀ ∈ L, c ∈ C 
 (9) </p>
 
-<p>q c 
-i + r c 
-i ≥ 0, ∀i ∈ N, c ∈ C 
+<p>q </p>
+
+<p>c </p>
+
+<p>i + r </p>
+
+<p>c </p>
+
+<p>i ≥ 0, ∀i ∈ N, c ∈ C 
 (10) </p>
 
-<p>λ c 
-− · </p>
+<p>λ </p>
 
+<p>c </p>
 
-
-<p>f c 
-+ </p>
-
-
+<p>− · f 
+c + </p>
 
 <p>i∈N </p>
 
-<p>φ c 
-,i (L) · r c </p>
+<p>φ </p>
 
-<p>i </p>
+<p>c </p>
 
+<p>,i (L) · r </p>
 
+<p>c 
+i </p>
 
 <p>= 0, ∀ ∈ L, c ∈ C 
 (11) </p>
 
-<p>λ c 
-+ · </p>
+<p>λ </p>
 
+<p>c </p>
 
-
-<p>f c 
-− </p>
-
-
+<p>+ · f 
+c − </p>
 
 <p>i∈N </p>
 
-<p>φ c 
-,i (L) · r c </p>
+<p>φ </p>
 
-<p>i </p>
+<p>c </p>
 
+<p>,i (L) · r </p>
 
+<p>c 
+i </p>
 
 <p>= 0, ∀ ∈ L, c ∈ C 
 (12) </p>
 
-<p>β c 
-i · </p>
+<p>β </p>
 
-<p>
-q c 
-i + r c </p>
+<p>c </p>
 
-<p>i </p>
+<p>i · q </p>
 
-<p>= 0, ∀i ∈ N, c ∈ C 
+<p>c </p>
+
+<p>i + r </p>
+
+<p>c </p>
+
+<p>i = 0, ∀i ∈ N, c ∈ C 
 (13) </p>
 
-<p>λ c 
-− ≥ 0, ∀ ∈ L, c ∈ C 
+<p>λ </p>
+
+<p>c </p>
+
+<p>− ≥ 0, ∀ ∈ L, c ∈ C 
 (14) </p>
 
-<p>λ c 
-+ ≥ 0, ∀ ∈ L, c ∈ C 
+<p>λ </p>
+
+<p>c </p>
+
+<p>+ ≥ 0, ∀ ∈ L, c ∈ C 
 (15) </p>
 
-<p>β c 
-i ≥ 0, ∀i ∈ N, c ∈ C 
+<p>β </p>
+
+<p>c </p>
+
+<p>i ≥ 0, ∀i ∈ N, c ∈ C 
 (16) </p>
 
 <p>where α c is the Lagrange multiplier corresponding to the adjustment-quantities 
@@ -707,22 +771,13 @@ period 3. Since the investments in new generation capacity reduce the expected <
 occurs in period 3. Thus, in period 2, each firm G (G ∈ ) solves the following 
 optimization problem: </p>
 
-<p>max {g i , i∈N G } E c </p>
+<p>max {g i , i∈N G } E c π c 
+G − </p>
 
-<p>π c </p>
+<p>i∈N G </p>
 
-<p>G </p>
-
-<p>− </p>
-
-<p>
-i∈N G </p>
-
-<p>
-CIG i (g i , g 0 
+<p>CIG i (g i , g 0 
 i ) </p>
-
-
 
 <p>s.t. (3)-(16) </p>
 
@@ -747,8 +802,7 @@ period 1, the PNP's social-welfare-maximizing problem is: </p>
 
 <p>max , f </p>
 
-<p>
-i∈N </p>
+<p>i∈N </p>
 
 <p> 
   </p>
@@ -766,28 +820,41 @@ i +r c </p>
 
 <p>i </p>
 
-
-
 <p>0 </p>
 
-<p>P c 
-i (q)dq − CP c 
-i (q c 
-i , g c 
-i ) </p>
+<p>P </p>
+
+<p>c </p>
+
+<p>i (q)dq − CP </p>
+
+<p>c </p>
+
+<p>i (q </p>
+
+<p>c </p>
+
+<p>i , g </p>
+
+<p>c </p>
+
+<p>i ) </p>
 
 <p> </p>
 
 <p> 
- − CIG i (g i , g 0 
-i ) </p>
+ − CIG i (g i , g </p>
+
+<p>0 </p>
+
+<p>i ) </p>
 
 <p> 
   </p>
 
 <p>  
-− CI (f ,f 0 
-) </p>
+− CI (f ,f 
+0 ) </p>
 
 <p>s.t. (3)-(16) </p>
 
@@ -862,11 +929,8 @@ be considered. </p>
 <p>max {q c </p>
 
 <p>i , r c 
-i , i∈N} </p>
-
-
-
-<p>i∈N </p>
+i , i∈N} 
+i∈N </p>
 
 <p> 
   </p>
@@ -878,15 +942,25 @@ i +r c </p>
 
 <p>i </p>
 
-
-
 <p>0 </p>
 
-<p>P c 
-i (q)dq − CP c 
-i (q c 
-i , g c 
-i ) </p>
+<p>P </p>
+
+<p>c </p>
+
+<p>i (q)dq − CP </p>
+
+<p>c </p>
+
+<p>i (q </p>
+
+<p>c </p>
+
+<p>i , g </p>
+
+<p>c </p>
+
+<p>i ) </p>
 
 <p> 
   </p>
@@ -895,29 +969,46 @@ i ) </p>
 
 <p>s.t. </p>
 
-<p>
-i∈N </p>
+<p>i∈N </p>
 
-<p>r c 
-i = 0 </p>
+<p>r </p>
 
-<p>−f c </p>
+<p>c </p>
 
+<p>i = 0 </p>
 
+<p>−f </p>
 
-<p>
-i∈N </p>
+<p>c </p>
 
-<p>φ c 
-,i (L) · r c 
-i ≤ f c 
-, ∀ ∈ L </p>
+<p>i∈N </p>
 
-<p>q c 
-i + r c 
-i 0, ∀i ∈ N 
-q c 
-i ≥ 0, ∀i ∈ N </p>
+<p>φ </p>
+
+<p>c </p>
+
+<p>,i (L) · r </p>
+
+<p>c </p>
+
+<p>i ≤ f 
+c , ∀ ∈ L </p>
+
+<p>q </p>
+
+<p>c </p>
+
+<p>i + r </p>
+
+<p>c 
+i </p>
+
+<p>0, ∀i ∈ N 
+q </p>
+
+<p>c </p>
+
+<p>i ≥ 0, ∀i ∈ N </p>
 
 <p>In the first period (period A), the IRP jointly selects the generation investment 
 levels and the social-welfare-maximizing location and magnitude for transmis-
@@ -926,8 +1017,7 @@ maximizing problem: </p>
 
 <p>max {g i }, , f </p>
 
-<p>
-i∈N </p>
+<p>i∈N </p>
 
 <p> 
   </p>
@@ -945,28 +1035,41 @@ i +r c </p>
 
 <p>i </p>
 
-
-
 <p>0 </p>
 
-<p>P c 
-i (q)dq − CP c 
-i (q c 
-i , g c 
-i ) </p>
+<p>P </p>
+
+<p>c </p>
+
+<p>i (q)dq − CP </p>
+
+<p>c </p>
+
+<p>i (q </p>
+
+<p>c </p>
+
+<p>i , g </p>
+
+<p>c </p>
+
+<p>i ) </p>
 
 <p> </p>
 
 <p> 
- − CIG i (g i , g 0 
-i ) </p>
+ − CIG i (g i , g </p>
+
+<p>0 </p>
+
+<p>i ) </p>
 
 <p> 
   </p>
 
 <p>  
-− CI (f , f 0 
-), </p>
+− CI (f , f 
+0 ), </p>
 
 <p>s.t. all optimality conditions of period-B problem </p>
 
@@ -975,11 +1078,8 @@ i ) </p>
 <p>max {q c </p>
 
 <p>i , r c 
-i , g i , , f , i∈N} </p>
-
-
-
-<p>i∈N </p>
+i , g i , , f , i∈N} 
+i∈N </p>
 
 <p> 
   </p>
@@ -996,8 +1096,6 @@ E c </p>
 i +r c </p>
 
 <p>i </p>
-
-
 
 <p>0 </p>
 
@@ -1017,29 +1115,23 @@ i ) </p>
   </p>
 
 <p>  
-− CI (f , f 0 
-) </p>
+− CI (f , f 0 ) </p>
 
 <p>s.t. </p>
 
-<p>
-i∈N </p>
+<p>i∈N </p>
 
 <p>r c 
 i = 0, 
 ∀c ∈ C </p>
 
-<p>−f c 
-≤ </p>
-
-
+<p>−f c ≤ </p>
 
 <p>i∈N </p>
 
 <p>φ c 
 ,i (L) · r c 
-i ≤ f c 
-, ∀ ∈ L, ∀c ∈ C </p>
+i ≤ f c , ∀ ∈ L, ∀c ∈ C </p>
 
 <p>q c 
 i + r c 
@@ -1080,8 +1172,7 @@ the following social-welfare-maximizing problem in the first period: </p>
 
 <p>max , f </p>
 
-<p>
-i∈N </p>
+<p>i∈N </p>
 
 <p> 
   </p>
@@ -1099,28 +1190,41 @@ i +r c </p>
 
 <p>i </p>
 
-
-
 <p>0 </p>
 
-<p>P c 
-i (q)dq − CP c 
-i (q c 
-i , g c 
-i ) </p>
+<p>P </p>
+
+<p>c </p>
+
+<p>i (q)dq − CP </p>
+
+<p>c </p>
+
+<p>i (q </p>
+
+<p>c </p>
+
+<p>i , g </p>
+
+<p>c </p>
+
+<p>i ) </p>
 
 <p> </p>
 
 <p> 
- − CIG i (g i , g 0 
-i ) </p>
+ − CIG i (g i , g </p>
+
+<p>0 </p>
+
+<p>i ) </p>
 
 <p> 
   </p>
 
 <p>  
-− CI (f , f 0 
-) </p>
+− CI (f , f 
+0 ) </p>
 
 <p>s.t. (3)-(16) 
 g i = g 0 
@@ -1151,8 +1255,7 @@ be in the feasible set of (19), which implies that the optimal solution to (19)
 cannot be worse (in terms of expected social welfare) than the optimal solution 
 of (18). </p>
 
-<p>
-Proposition 2: The optimal expected social welfare obtained from the PNP 
+<p>Proposition 2: The optimal expected social welfare obtained from the PNP 
 model is never smaller than the optimal expected social welfare obtained from 
 the RNP model. </p>
 
@@ -1180,7 +1283,9 @@ the RNP model. </p>
 
 <p>f* RNP </p>
 
-<p>g 0 </p>
+<p>g </p>
+
+<p>0 </p>
 
 <p>Fig. 2 Optimal transmission investments in the PNP and the RNP models </p>
 
@@ -1216,8 +1321,7 @@ RNP ), is a feasible solution of the PNP model, as it is evident in Fig. 2. Ther
 fore, the optimal solution of (18) cannot be worse (in terms of expected social 
 welfare) than the optimal solution of (20). </p>
 
-<p>
-Note that the previous two propositions are also valid under a different trans-
+<p>Note that the previous two propositions are also valid under a different trans-
 mission-planning objective (other than expected social welfare). Consequently, 
 we can generalize the previous propositions as in the following statement: 
 "Under any transmission-planning objective, the optimal value obtained from 
@@ -1293,24 +1397,41 @@ introducing some adequate penalty functions into the objective function of the p
 
 <p>max {g i , i∈N G } </p>
 
-<p>
-i∈N G </p>
+<p>i∈N G </p>
 
-<p>
-E c </p>
+<p>E c P </p>
 
-<p>P c 
-i (q c *  
-i + r c *  
-i ) · q c *  
-i − CP c 
-i (q c *  
-i , g c 
-i ) 
-− CIG i (g i g 0 
-i ) </p>
+<p>c </p>
 
+<p>i (q </p>
 
+<p>c *  </p>
+
+<p>i + r </p>
+
+<p>c *  </p>
+
+<p>i ) · q </p>
+
+<p>c *  </p>
+
+<p>i − CP </p>
+
+<p>c </p>
+
+<p>i (q </p>
+
+<p>c *  </p>
+
+<p>i , g </p>
+
+<p>c </p>
+
+<p>i ) − CIG i (g i g </p>
+
+<p>0 </p>
+
+<p>i ) </p>
 
 <p>(21) </p>
 
@@ -1319,48 +1440,58 @@ i and r c *
 i , we can write the KKT conditions for the 
 problems defined in (21), ∀i ∈ N G , as: </p>
 
-
-
 <p>j∈N G </p>
 
+<p>E c P </p>
 
+<p>c </p>
 
-<p>E c </p>
+<p>j (q </p>
 
+<p>c *  </p>
 
+<p>j + r </p>
 
-<p>P c 
-j (q c *  
-j + r c *  
-j ) · </p>
+<p>c *  </p>
+
+<p>j ) · </p>
 
 <p>∂q c *  </p>
 
 <p>j </p>
 
 <p>∂g i 
-+ P c 
-j (q c *  
-j + r c *  
-j ) · </p>
++ P </p>
 
-<p>∂ </p>
+<p>c </p>
 
-<p>q c *  
+<p>j (q </p>
+
+<p>c *  </p>
+
+<p>j + r </p>
+
+<p>c *  </p>
+
+<p>j ) · </p>
+
+<p>∂ q c *  
 j + r c *  </p>
 
 <p>j </p>
 
-
-
 <p>∂g i 
-· q c *  </p>
+· q </p>
 
-<p>j </p>
+<p>c *  
+j </p>
 
 <p>− 
-∂ CP c 
-j (q c *  
+∂ CP </p>
+
+<p>c </p>
+
+<p>j (q c *  
 j , g c 
 j ) 
 ∂q c *  </p>
@@ -1372,17 +1503,19 @@ j )
 
 <p>j </p>
 
-<p>∂g i </p>
-
-<p>
+<p>∂g i 
 − E c 
-∂CP c 
-i (q c *  
-i , g c 
-i ) 
-∂g i </p>
+∂CP </p>
 
-<p>
+<p>c </p>
+
+<p>i (q </p>
+
+<p>c *  </p>
+
+<p>i , g c 
+i ) 
+∂g i 
 − 
 ∂ CIG i (g i , g 0 
 i ) 
@@ -1406,8 +1539,7 @@ as the following unconstrained problem: </p>
 
 <p>max ,f </p>
 
-<p>
-i∈N </p>
+<p>i∈N </p>
 
 <p> 
   </p>
@@ -1424,8 +1556,6 @@ E c </p>
 i +r c *  </p>
 
 <p>i </p>
-
-
 
 <p>0 </p>
 
@@ -1446,8 +1576,7 @@ i ) </p>
   </p>
 
 <p>  
-− CI (f f 0 
-) </p>
+− CI (f f 0 ) </p>
 
 <p>(23) </p>
 
@@ -1459,8 +1588,6 @@ For given functions g  *  , q c *
 i and r c *  
 i , we can write the KKT conditions for the 
 problem defined in (23), for some optimal ∈ L, as: </p>
-
-
 
 <p>i∈N </p>
 
@@ -1481,11 +1608,9 @@ i ) · </p>
 
 <p> </p>
 
-<p>
-j∈N </p>
+<p>j∈N </p>
 
-<p>
-∂q c *  </p>
+<p>∂q c *  </p>
 
 <p>i </p>
 
@@ -1493,16 +1618,14 @@ j∈N </p>
 
 <p>j </p>
 
-<p>· 
-∂g  *  </p>
+<p>· </p>
+
+<p>∂g  *  </p>
 
 <p>j </p>
 
-<p>∂f </p>
-
-
-
-<p>+ 
+<p>∂f 
++ 
 ∂q c *  </p>
 
 <p>i </p>
@@ -1510,11 +1633,9 @@ j∈N </p>
 <p>∂f 
 + </p>
 
-<p>
-j∈N </p>
+<p>j∈N </p>
 
-<p>
-∂r c *  </p>
+<p>∂r c *  </p>
 
 <p>i </p>
 
@@ -1522,16 +1643,14 @@ j∈N </p>
 
 <p>j </p>
 
-<p>· 
-∂g  *  </p>
+<p>· </p>
+
+<p>∂g  *  </p>
 
 <p>j </p>
 
-<p>∂f </p>
-
-
-
-<p>+ 
+<p>∂f 
++ 
 ∂r c *  </p>
 
 <p>i </p>
@@ -1557,11 +1676,9 @@ i )
 
 <p> </p>
 
-<p>
-j∈N </p>
+<p>j∈N </p>
 
-<p>
-∂q c *  </p>
+<p>∂q c *  </p>
 
 <p>i </p>
 
@@ -1569,16 +1686,14 @@ j∈N </p>
 
 <p>j </p>
 
-<p>· 
-∂g  *  </p>
+<p>· </p>
+
+<p>∂g  *  </p>
 
 <p>j </p>
 
-<p>∂f </p>
-
-
-
-<p>+ 
+<p>∂f 
++ 
 ∂q c *  </p>
 
 <p>i </p>
@@ -1627,9 +1742,9 @@ i )
 
 <p> 
 − 
-∂ CI (f , f 0 
-) 
-∂f 
+∂ CI (f , f 0 ) </p>
+
+<p>∂f 
 = 0 </p>
 
 <p>(24) </p>
@@ -1659,8 +1774,6 @@ i (∀i ∈ N, c ∈ C),
 any optimal solution to the first-period optimization of the RNP model must 
 satisfy the following first order optimality condition (for some optimal ∈ L): </p>
 
-
-
 <p>i∈N </p>
 
 <p> </p>
@@ -1678,31 +1791,37 @@ i +r c  *  </p>
 
 <p>i </p>
 
-
-
 <p>0 </p>
 
-<p>P c 
-i (q)dq − CP c 
-i (q c *  
-i , g c 
-i ) </p>
+<p>P </p>
+
+<p>c </p>
+
+<p>i (q)dq − CP </p>
+
+<p>c </p>
+
+<p>i (q </p>
+
+<p>c *  </p>
+
+<p>i , g </p>
+
+<p>c </p>
+
+<p>i ) </p>
 
 <p> </p>
 
 <p> 
- </p>
-
-
-
-<p>∂f </p>
+ 
+∂f </p>
 
 <p> </p>
 
 <p> 
  − 
-∂CI (f , f 0 
-) 
+∂CI (f , f 0 ) 
 ∂f 
 = 0 </p>
 
@@ -1713,12 +1832,6 @@ both the RNP model and the PNP model): </p>
 
 <p>Reactivenetworkplanner </p>
 
-
-
-
-
-
-
 <p>i∈N </p>
 
 <p> </p>
@@ -1736,8 +1849,6 @@ i +r c *  </p>
 
 <p>i </p>
 
-
-
 <p>0 </p>
 
 <p>P c 
@@ -1749,33 +1860,24 @@ i ) </p>
 <p> </p>
 
 <p> 
- </p>
-
-
-
-<p>∂f </p>
+ ∂f </p>
 
 <p> </p>
 
 <p> 
  − 
-∂CI (f , f 0 
-) 
-∂f </p>
+∂CI (f , f 0 ) </p>
+
+<p>∂f </p>
 
 <p>+ </p>
 
-<p>
-j∈N </p>
+<p>j∈N </p>
 
 <p> 
   </p>
 
-<p>  </p>
-
-
-
-<p>i∈N </p>
+<p>  i∈N </p>
 
 <p> </p>
 
@@ -1792,8 +1894,6 @@ i +r c *  </p>
 
 <p>i </p>
 
-
-
 <p>0 </p>
 
 <p>P c 
@@ -1805,11 +1905,7 @@ i ) </p>
 <p> </p>
 
 <p> 
- </p>
-
-
-
-<p>∂g  *  
+ ∂g  *  
 j − </p>
 
 <p>∂CIG i (g  *  
@@ -1822,8 +1918,9 @@ i )
 <p> </p>
 
 <p> 
- · 
-∂g  *  </p>
+ · </p>
+
+<p>∂g  *  </p>
 
 <p>j </p>
 
@@ -1833,10 +1930,6 @@ i )
   </p>
 
 <p>  </p>
-
-
-
-
 
 <p>Period-2 NE enhancenment effect by the PNP </p>
 
@@ -1853,8 +1946,7 @@ which implies that the RNP will underinvest in transmission capacity as com-
 pared to the PNP (assuming that the optimal location of the next transmission 
 upgrade is the same under both the RNP model and the PNP model). </p>
 
-<p>
-Equation (25) reflects how the PNP differs from its reactive counterpart 
+<p>Equation (25) reflects how the PNP differs from its reactive counterpart 
 (i.e., from a network planner that ignores the dependency of the equilibrium of </p>
 
 <p>Proactive planning and valuation of transmission investments </p>
@@ -1909,24 +2001,27 @@ the IRP model must satisfy the following first order optimality condition: </p>
 
 <p> </p>
 
-<p>
-j∈N </p>
+<p>j∈N </p>
 
+<p>P </p>
 
+<p>c </p>
 
-<p>P c 
-j (q cIRP </p>
+<p>j (q </p>
 
-<p>j </p>
+<p>cIRP 
+j </p>
 
-<p>+ r cIRP </p>
+<p>+ r </p>
 
-<p>j </p>
+<p>cIRP 
+j </p>
 
 <p>) · 
-∂(q cIRP </p>
+∂(q </p>
 
-<p>j </p>
+<p>cIRP 
+j </p>
 
 <p>+ r cIRP </p>
 
@@ -1936,10 +2031,14 @@ j (q cIRP </p>
 
 <p>∂g i 
 − 
-∂ CP c 
-j (q cIRP </p>
+∂ CP </p>
 
-<p>j </p>
+<p>c </p>
+
+<p>j (q </p>
+
+<p>cIRP 
+j </p>
 
 <p>, g c 
 j ) 
@@ -1954,24 +2053,24 @@ j )
 
 <p>∂g i </p>
 
-<p> 
- </p>
+<p> </p>
 
-<p>−E c </p>
+<p> </p>
 
-<p>
-∂ CP c 
-i (q cIRP </p>
+<p>−E c 
+∂ CP </p>
 
-<p>i </p>
+<p>c </p>
+
+<p>i (q </p>
+
+<p>cIRP 
+i </p>
 
 <p>, g c 
 i ) 
-∂g i </p>
-
-
-
-<p>− 
+∂g i 
+− 
 ∂ CIG i (g i , g 0 
 i ) 
 ∂g i 
@@ -1988,20 +2087,24 @@ capacity at node i, it is clear that it suffices to prove that: </p>
 <p> </p>
 
 <p> 
-∂ </p>
+∂ P c 
+i (q </p>
 
-<p>P c 
-i (q c *  
-i + r c *  
+<p>c *  </p>
+
+<p>i + r c *  
 i ) · q c *  
-i − CP c 
-j (q c *  
-j , g c 
-j ) </p>
+i − CP </p>
 
+<p>c </p>
 
+<p>j (q </p>
 
-<p>∂g i </p>
+<p>c *  </p>
+
+<p>j , g c 
+j ) 
+∂g i </p>
 
 <p> </p>
 
@@ -2009,8 +2112,7 @@ j ) </p>
 
 <p>&lt; </p>
 
-<p>
-j∈N </p>
+<p>j∈N </p>
 
 <p> 
    </p>
@@ -2038,28 +2140,32 @@ E c </p>
 
 <p>j </p>
 
-
-
 <p>0 </p>
 
-<p>P c 
-j (q)dq − CP c 
-j (q cIRP </p>
+<p>P </p>
 
-<p>j </p>
+<p>c </p>
 
-<p>, g c 
-j ) </p>
+<p>j (q)dq − CP </p>
+
+<p>c </p>
+
+<p>j (q </p>
+
+<p>cIRP 
+j </p>
+
+<p>, g </p>
+
+<p>c </p>
+
+<p>j ) </p>
 
 <p> </p>
 
 <p> 
  
- </p>
-
-
-
-<p>∂g i </p>
+ ∂g i </p>
 
 <p> </p>
 
@@ -2077,8 +2183,7 @@ j ) </p>
 
 
 
-<p>
-E. E. Sauma, S. S. Oren </p>
+<p>E. E. Sauma, S. S. Oren </p>
 
 <p>Fig. 3 30-bus Cornell network </p>
 
@@ -2192,8 +2297,8 @@ from previously solved problems. Thus, starting from a feasible solution, we
 solve for g 1 using g (−1) as data in the first firm's optimization problem (where 
 g (−1) means all firms' generation capacities except for firm 1's), then solve for </p>
 
-<p>17 Recall that any LCP can be written as the problem of finding a vector x ∈ ∈ n such that 
-x = q + M · y, x T · y = 0, x ≥ 0, and y ≥ 0, where M ∈ ∈ n×n , q ∈ ∈ n , and y ∈ ∈ n . Thus, we can 
+<p>17 Recall that any LCP can be written as the problem of finding a vector x ∈ n such that 
+x = q + M · y, x T · y = 0, x ≥ 0, and y ≥ 0, where M ∈ n×n , q ∈ n , and y ∈ n . Thus, we can 
 solve it by minimizing x T · y subject to x = q + M · y, x ≥ 0, and y ≥ 0. If the previous problem 
 has an optimal solution where the objective function is zero, then that solution also solves the 
 corresponding LCP. Greater details about the methodology used for solving LCPs are given in 
@@ -2849,8 +2954,7 @@ From node #
 To node # 
 Resistance (p.u.) 
 Reactance (p.u.) 
-f 0 
-(MVA) </p>
+f 0 (MVA) </p>
 
 <p>1 
 1 
@@ -3026,8 +3130,7 @@ From node #
 To node # 
 Resistance (p.u.) 
 Reactance (p.u.) 
-f 0 
-(MVA) </p>
+f 0 (MVA) </p>
 
 <p>28 
 15 

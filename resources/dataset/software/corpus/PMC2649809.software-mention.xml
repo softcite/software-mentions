@@ -1,13 +1,34 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC2649809" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T19:56+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC2649809" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:03+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
-<p>1 The abbreviations used are: HD, Huntington disease; CSF, cerebro-
+<p>We integrated five sets of proteomics data profiling the 
+constituents of cerebrospinal fluid (CSF) derived from Hun-
+tington disease (HD)-affected and -unaffected individuals 
+with genomics data profiling various human and mouse 
+tissues, including the human HD brain. Based on an inte-
+grated analysis, we found that brain-specific proteins are 
+1.8 times more likely to be observed in CSF than in plasma, 
+that brain-specific proteins tend to decrease in HD CSF 
+compared with unaffected CSF, and that 81% of brain-
+specific proteins have quantitative changes concordant 
+with transcriptional changes identified in different regions 
+of HD brain. The proteins found to increase in HD CSF tend 
+to be liver-associated. These protein changes are consist-
+ent with neurodegeneration, microgliosis, and astrocytosis 
+known to occur in HD. We also discuss concordance be-
+tween laboratories and find that ratios of individual proteins 
+can vary greatly, but the overall trends with respect to brain 
+or liver specificity were consistent. Concordance is highest 
+between the two laboratories observing the largest numThe abbreviations used are: HD, Huntington disease; CSF, cerebro-
 spinal fluid; IPI, International Protein Index; AMT, accurate mass and 
 time; LTQ-FT, hybrid linear ion trap-Fourier transform ICR mass spec-
 trometer designed by Thermo Finnigan; LTQ OrbiTrap XL, mass spec-
-trometer by Thermo Finnigan that is based on LTQ XL TM linear ion trap </p>
+trometer by Thermo Finnigan that is based on LTQ XL 
+TM linear ion trap </p>
 
-<p>and the patented Orbitrap TM technology; HCT-Ultra ion trap, High-
-Capacity Trap (HCT TM ) mass spectrometer system by Bruker Dalton-
+<p>and the patented Orbitrap 
+TM technology; HCT-Ultra ion trap, High-
+Capacity Trap (HCT 
+TM ) mass spectrometer system by Bruker Dalton-
 ics; mzXML, XML (extensible markup language)-based common file 
 format for proteomics mass spectrometric data; FDR, false discovery 
 rate; MAS5, Affymetrix microarray suite version 5 software; GSEA, 
@@ -94,27 +115,27 @@ complete United Huntington Disease Rating Scale. Based on the
 United Huntington Disease Rating Scale independence score as de-
 fined by the Huntington Study Group (31), 10 of the 20 gene-positive 
 individuals were categorized as early stage (independence score 
-80), and the other 10 were categorized as moderate stage (65 
-independence score 80). About 5-7 ml of CSF samples were 
+Ͼ80), and the other 10 were categorized as moderate stage (65 Ͻ 
+independence score Յ 80). About 5-7 ml of CSF samples were 
 collected in four or five standard lumbar puncture kit tubes (Cardinal-
 Health, safe-t-LP kit) (catalog number 4301CSDF). Each collected 
-sample was placed on ice and then centrifuged at 2000 g (4000 
+sample was placed on ice and then centrifuged at 2000 ϫ g (4000 
 rpm) for 10 min to eliminate cells and other insoluble material. The 
 collected CSF was examined by microscopy, aliquoted, and frozen 
 immediately on dry ice in polypropylene tubes in 1-or 3-ml aliquots 
-and stored at 80 °C. Tubes were filled to the top to minimize 
+and stored at Ϫ80°C. Tubes were filled to the top to minimize 
 oxidation during storage. Average total processing time was 76 min 
 from the start of collection to final storage. No anticoagulants, pre-
 servatives, and protease inhibitors were added. The lumbar punctures 
 were atraumatic with CSF cell counts revealing red blood cells from 0 
 to 171 counts/l and white blood cells from 0 to 17 counts/l, 
 indicating no significant blood cell contamination (supplemental Table 
-S1). Samples were stored at 80 °C for various lengths of time 
+S1). Samples were stored at Ϫ80°C for various lengths of time 
 ranging from 17 to 27 months before they were thawed and subdi-
 vided into aliquots of 0.5 ml to be shipped using dry ice to individual 
 labs for analysis. The duration of shipment was between 1 and 3 days, 
 and dry ice was replenished during the shipment to keep samples 
-frozen. All 30 samples were stored at 80 °C before thawing once 
+frozen. All 30 samples were stored at Ϫ80°C before thawing once 
 again for analysis. Therefore, except one (HDU-2) that was thawed 
 three times, all samples were thawed twice before analysis. </p>
 
@@ -136,7 +157,7 @@ protein identification. Experimental designs varied in many respects </p>
 
 <p>Huntington Disease Cerebrospinal Fluid </p>
 
-<p>452 Molecular &amp; Cellular Proteomics 8.3 </p>
+
 
 <p>across the labs, including the use of pooled and non-pooled designs, 
 depletion and non-depletion of abundant proteins in the samples, and 
@@ -152,11 +173,11 @@ scribed in the supplemental text, Part A. </p>
 
 <p>All data files were transmitted to the bioinformatics data-process-
 ing lab for analysis after converting to the standard mzXML format 
-(32, 33) and then searched with <rs id="software-31" type="software">X! Tandem</rs> (<rs corresp="#software-31" type="version-date">January 1, 2007</rs> release) 
+(32, 33) and then searched with <rs id="software-6" type="software">X! Tandem</rs> (<rs corresp="#software-6" type="version-date">January 1, 2007</rs> release) 
 configured with a scoring function (24) compatible with <rs type="software">Peptide-
 Prophet</rs> (25) and <rs type="software">ProteinProphet</rs> (26). The same database (human 
 IPI version 3.20 consisting of 61,225 IPI numbers) was used to search 
-all data. <rs id="software-17" type="software">PeptideProphet</rs> (<rs corresp="#software-17" type="version-number">version 3.0</rs>) and <rs id="software-8" type="software">ProteinProphet</rs> (<rs corresp="#software-8" type="version-number">version 3.0</rs>) 
+all data. <rs id="software-9" type="software">PeptideProphet</rs> (<rs corresp="#software-9" type="version-number">version 3.0</rs>) and <rs id="software-10" type="software">ProteinProphet</rs> (<rs corresp="#software-10" type="version-number">version 3.0</rs>) 
 were used to assign identified peptide and protein confidence scores 
 for all but Lab 1 (details described below) where the complexity of 
 samples interrogated was not sufficient to estimate the Peptide-
@@ -165,46 +186,46 @@ search and protein inference. Finally multiple experiments within a lab
 were then aligned to create analytic data sets sufficient to determine 
 relative disease status. 
 The following common criteria were applied to all searches. A 
-2.0-Da error from the calculated peptide monoisotopic mass was 
+Ϯ2.0-Da error from the calculated peptide monoisotopic mass was 
 allowed to determine whether a particular peptide sequence is to be 
 considered as a possible model for a spectrum. Mass tolerance for 
 fragment ions was 1 Da (24). The maximal number of missed cleav-
-ages permitted was 2. A static modification on cysteines of 57.021 
+ages permitted was 2. A static modification on cysteines of ϩ57.021 
 Da was used for all labs except Lab 4, which performed acrylamide 
 labeling on cysteines. A potential modification on methionines of 
-15.9949 Da was used. A weighted average mass was used to 
+ϩ15.9949 Da was used. A weighted average mass was used to 
 calculate the masses of the fragment ions in a tandem mass spec-
 trum. A minimum number of one ion was required for a peptide to be 
 scored. A default minimum <rs type="software">PeptideProphet</rs> probability of 0.2 was 
 used to calculate the protein group probability. Only peptides with 
-probability 0.75 and mass error 20 ppm were selected for quan-
+probability Ն0.75 and mass error Ͻ20 ppm were selected for quan-
 titation. Specific search parameters for the different labeling schemes 
 by different labs are specified in the supplemental text, Part B. The 
 following are descriptions of the software used for each lab's data 
 and quantitation methods (summarized in supplemental Table S2) 
 during data processing. 
 Lab 1-Lab 1 used a DIGE method and quantitated a large number 
-of fluorescent spots with two commercial software algorithms (<rs id="software-9" type="software">DeCyder</rs> 
-<rs corresp="#software-9" type="version-number">6.5</rs> (<rs corresp="#software-9" type="creator">GE Healthcare</rs>) and <rs id="software-38" type="software">SameSpots</rs> <rs corresp="#software-38" type="version-number">2.0</rs> (<rs corresp="#software-38" type="creator">Nonlinear Dynamics</rs>)). A </p>
+of fluorescent spots with two commercial software algorithms (<rs id="software-12" type="software">DeCyder</rs> 
+<rs corresp="#software-12" type="version-number">6.5</rs> (<rs corresp="#software-12" type="creator">GE Healthcare</rs>) and <rs id="software-13" type="software">SameSpots</rs> <rs corresp="#software-13" type="version-number">2.0</rs> (<rs corresp="#software-13" type="creator">Nonlinear Dynamics</rs>)). A </p>
 
-<p>t test was performed on the log ratios using <rs id="software-26" type="software">Statistica</rs> for Windows 
-(<rs corresp="#software-26" type="creator">StatSoft, Inc.</rs>.) <rs corresp="#software-26" type="version-number">version 7</rs> to estimate the significant difference of a 
+<p>t test was performed on the log ratios using <rs id="software-14" type="software">Statistica</rs> for Windows 
+(<rs corresp="#software-14" type="creator">StatSoft, Inc.</rs>.) <rs corresp="#software-14" type="version-number">version 7</rs> to estimate the significant difference of a 
 protein. Only those spots found to have significant changes, based on 
 fluorescence, between the HD and the control were selected for 
 tandem MS analysis. Peak lists of MS/MS spectra acquired on the 
 HCT-Ultra ion trap instrument (Bruker Daltonics) were generated us-
-ing the software tool <rs id="software-28" type="software">DataAnalysis</rs> <rs corresp="#software-28" type="version-number">3.4.179</rs> (<rs corresp="#software-28" type="creator">Bruker Daltonics</rs>) with 
+ing the software tool <rs id="software-15" type="software">DataAnalysis</rs> <rs corresp="#software-15" type="version-number">3.4.179</rs> (<rs corresp="#software-15" type="creator">Bruker Daltonics</rs>) with 
 default parameters. The built-in algorithm version 2.0 was used, and 
 neither smoothing nor any signal-to-noise filter was applied for com-
 pound detection. A maximum charge state of 3 was considered for 
 deconvolution. Data were then converted to mzXML files using 
-<rs id="software-20" type="software">CompassXport</rs> (<rs corresp="#software-20" type="version-number">version 1.2.3</rs>). Peptides were identified using decoy 
+<rs id="software-16" type="software">CompassXport</rs> (<rs corresp="#software-16" type="version-number">version 1.2.3</rs>). Peptides were identified using decoy 
 database methods with an approach described by Elias and Gygi (34). 
 After proteins were identified for selected spots using false discovery 
 rate (FDR) and <rs type="software">ProteinProphet</rs> (see details in the supplemental text, 
 Part B), quantitation of -fold changes among different disease sta-
 tuses was processed based on the following rules. 1) If a spot was 
-quantitated by both <rs id="software-12" type="software">DeCyder</rs> <rs corresp="#software-12" type="version-number">6.5</rs> and <rs type="software">SameSpots</rs> methods, -fold 
+quantitated by both <rs id="software-18" type="software">DeCyder</rs> <rs corresp="#software-18" type="version-number">6.5</rs> and <rs type="software">SameSpots</rs> methods, -fold 
 changes by DeCyder 6.5 were selected because the differential ex-
 pression resulting from this method is more significant on average. On 
 the other hand, if only one quantitation method was used, results from 
@@ -213,10 +234,10 @@ protein identification, -fold changes were averaged for that protein. 3)
 When a spot resulted in several protein identifications, the same -fold 
 changes were assigned to all proteins. 
 Lab 2-Lab 2 performed label-free analysis. Peak lists were gen-
-erated using <rs id="software-11" type="software">MassLynx</rs> (<rs corresp="#software-11" type="version-number">4.0</rs>) based on signals obtained by Q-ToF 
+erated using <rs id="software-21" type="software">MassLynx</rs> (<rs corresp="#software-21" type="version-number">4.0</rs>) based on signals obtained by Q-ToF 
 Micro spectrometer from Waters Micromass. The MS duty cycle was 
 set at 1,1,4 as described in detail in the supplemental text, Part A. 
-These data were converted to mzXML files using <rs id="software-7" type="software">MassWolf</rs> <rs corresp="#software-7" type="version-number">1.02</rs> with 
+These data were converted to mzXML files using <rs id="software-22" type="software">MassWolf</rs> <rs corresp="#software-22" type="version-number">1.02</rs> with 
 the Waters Datafile Access Component (DAC) library. Following the 
 database search using the common criteria, quantitation was per-
 formed using a spectral count approach (35), which sums the number 
@@ -280,7 +301,11 @@ System </p>
 
 <p>Anion exchange and reverse 
 phase chromatography 
-Lab 5 a LC-MALDI-TOF/TOF iTRAQ 
+Lab 5 </p>
+
+<p>a </p>
+
+<p>LC-MALDI-TOF/TOF iTRAQ 
 Yes 
 Multiple Affinity Removal 
 System </p>
@@ -289,29 +314,28 @@ System </p>
 
 <p>a Data from Lab 5 was dropped prior to data synthesis across labs because of quality control issues (see "Experimental Procedures"). </p>
 
-
+<p>Huntington Disease Cerebrospinal Fluid </p>
 
 <p>Molecular &amp; Cellular Proteomics 8.3 453 </p>
 
 <p>plots) and histograms of light/heavy ratios were examined to ensure 
 the quality of data for the labeled experiments. M is the y-axis and A 
-is the x-axis, where in this paper, M Log 2 (Heavy) Log 2 (Light); 
-A [ 1 ⁄2] (Log 2 (Heavy) Log 2 (Light)). 
+is the x-axis, where in this paper, M ϭ Log 2 (Heavy) Ϫ Log 2 (Light); 
+A ϭ [ 1 ⁄2] (Log 2 (Heavy) ϩ Log 2 (Light)). 
 Lab 3-Data from Lab 3 were acquired from the LTQ-FT instrument 
-(Thermo Finnigan). Peak lists were generated by <rs id="software-18" type="software">Xcalibur</rs> (<rs corresp="#software-18" type="version-number">version 1.1</rs>) 
-and converted to mzXML files using <rs id="software-6" type="software">ReAdW</rs> <rs corresp="#software-6" type="version-number">1.1</rs> with XRawfile library. 
+(Thermo Finnigan). Peak lists were generated by <rs id="software-24" type="software">Xcalibur</rs> (<rs corresp="#software-24" type="version-number">version 1.1</rs>) 
+and converted to mzXML files using <rs id="software-25" type="software">ReAdW</rs> <rs corresp="#software-25" type="version-number">1.1</rs> with XRawfile library. 
 Default parameters were used. Database search was carried out 
 using the common parameters and the designated specific modifica-
 tions (supplemental text, Part B). Protein groups with probability 
-score 0.9 (corresponding to an overall error rate of 0.01) were 
+score Ͼ0.9 (corresponding to an overall error rate of 0.01) were 
 considered confident proteins for downstream analysis. The Q3 al-
 gorithm (27), developed to accommodate a 3-dalton mass shift in 
 heavy and light peptides, was used to compute the ratios between the 
 light and heavy isotopic pairs using peak areas. More specifically, 
 only confidently identified peptides (<rs type="software">PeptideProphet</rs> probability 
-0.75 and mass error 20 ppm) were selected for further quantita-</p>
-
-<p>tion at the protein level. In three pairwise comparisons, the internal 
+Ͼ0.75 and mass error Ͻ20 ppm) were selected for further quantita-
+tion at the protein level. In three pairwise comparisons, the internal 
 standard (IS) containing equal amounts of 30 samples was labeled 
 with light acetyl group, and each of the three disease statuses (A, B, 
 or C) was labeled with heavy acetyl group (for details, see supple-
@@ -330,11 +354,11 @@ versus control, HD-early versus control, and HD-mid versus HD-early
 ratios for each protein group were calculated using IS/control, IS/HD-
 mid, and IS/HD-early ratios from the three experiments. 
 Lab 4 -LTQ OrbiTrap XL mass spectrometer from Thermo Finni-
-gan was used, and <rs id="software-33" type="software">Xcalibur</rs> (<rs corresp="#software-33" type="version-number">version 2.2</rs>) was applied to generate 
+gan was used, and <rs id="software-28" type="software">Xcalibur</rs> (<rs corresp="#software-28" type="version-number">version 2.2</rs>) was applied to generate 
 peak lists. Data were converted to mzXML files using <rs id="software-29" type="software">ReAdW</rs> <rs corresp="#software-29" type="version-number">1.1</rs> with 
 XRawfile library. Default parameters were used. Data were then 
 searched with the common criteria plus specific modifications. Pro-
-tein groups with probability score 0.9 (corresponding to an overall 
+tein groups with probability score Ͼ0.9 (corresponding to an overall 
 error rate of 0.01) were considered confident proteins for downstream 
 analysis. For the labeled analysis, as with Lab 3, the Q3 algorithm (27) 
 was used to compute ratios between light and heavy isotopic pairs. 
@@ -350,14 +374,14 @@ of quantitation at the protein level, only those proteins with at least
 three quantitated peptides were used for further analysis. For the 
 label-free analysis, accurate mass and time (AMT) methods were used 
 to identify peptides in LC-MS data using a single AMT database 
-containing all high quality (<rs type="software">PeptideProphet</rs> probability 0.95) peptide 
+containing all high quality (<rs type="software">PeptideProphet</rs> probability Ն0.95) peptide 
 identifications from all labeled (fractionated) and unlabeled (unfrac-
 tionated) data from Lab 4. The LC-MS peptide features from each 
 unlabeled sample were matched against the combined AMT data-
 base to provide peptide assignments. Each match was assigned a 
 probability value based on mass error and normalized retention time 
 error between the MS1 feature and the AMT peptide entry, and only 
-matches with probability 0.95 or a false assignment rate 0.05 were </p>
+matches with probability Ն0.95 or a false assignment rate Յ0.05 were </p>
 
 <p>kept. LC-MS peptide intensity values for the peptides were normal-
 ized across runs, and peptide ratios were calculated. The AMT data-
@@ -449,7 +473,7 @@ this proteomics study with the log 2 -fold changes of mRNA in HD
 versus normal brain in caudate nucleus, cerebellum, and motor cortex 
 (Brodmann area 4 (BA4)) based on a previously published study by 
 Hodges et al. (2). Probe sets with significant changes (p values 
-0.001) were selected and collapsed to gene level based on gene 
+Ͻ0.001) were selected and collapsed to gene level based on gene 
 symbols. When a gene has multiple probe sets, the median log 2 -fold 
 change of that gene was selected as the estimate of the mRNA 
 change. As a result, 6183 genes in caudate nucleus, 1143 genes in 
@@ -477,7 +501,7 @@ extensive study that was carried out on four parts of human normal
 brain (caudate nucleus, cerebellum, and BA4 and BA9 cortex) using 
 the same microarray chips (2). After these brain data were obtained 
 from Gene Expression Omnibus (GEO) DataSets, signals detected 
-using <rs id="software-10" type="software">Affymetrix microarray suite</rs> <rs corresp="#software-10" type="version-number">version 5</rs> software (MAS5) for each 
+using <rs id="software-35" type="software">Affymetrix microarray suite</rs> <rs corresp="#software-35" type="version-number">version 5</rs> software (MAS5) for each 
 probe were averaged over 21 caudate nucleus, 21 cerebellum, and 24 
 cortex (12 BA4 and 12 BA9) arrays. We plotted log 2 MAS5 signal of 
 the caudate nucleus and cerebellum from Ge et al. (29) versus those 
@@ -546,7 +570,8 @@ to address: 1) that CSF is enriched for brain-specific proteins com-
 pared with plasma, 2) that brain-specific proteins change in CSF with 
 HD development, and 3) that brain-specific protein changes in CSF 
 are concordant with transcriptional changes in the brain. 
-To evaluate hypothesis 1, we performed Pearson's 2 tests on an 
+To evaluate hypothesis 1, we performed Pearson's 
+2 tests on an 
 over-representation analysis to compare the fraction of proteins an-
 notated as being brain-specific in CSF and the Human Proteome 
 Organization Plasma Proteome Project plasma data (results summa-
@@ -556,7 +581,8 @@ bution of ratios between brain-specific and non-brain-specific pro-
 teins (see "Results"). For hypothesis 3, we coded all brain-derived 
 proteins as up or down based on the sign of their sums of z-scores 
 and all transcripts as up or down based on the sign of their log 2 -fold 
-changes of mRNA from the array and then applied Pearson's 2 tests 
+changes of mRNA from the array and then applied Pearson's 
+2 tests 
 to evaluate the association (results are summarized in Table V). </p>
 
 <p>Huntington Disease Cerebrospinal Fluid </p>
@@ -612,7 +638,7 @@ results provided by Lab 1 using the Mascot search engine
 sistency between the two results. In addition, proteins from 
 more spots have been identified in this study. Lab 2 is the only 
 lab that performed individual (non-pooled) interrogation. 335 
-confident protein groups (with <rs type="software">ProteinProphet</rs> probability 0.9) 
+confident protein groups (with <rs type="software">ProteinProphet</rs> probability Ͼ0.9) 
 were found and of these, 319 were quantitated using spectral 
 counting (35) of highly confident peptide spectra ("Experimen-
 tal Procedures"). Lab 3 pooled samples by disease status and 
@@ -630,7 +656,7 @@ groups) reported in this study of which 377 were confidently
 quantitated by the Q3 algorithm (27) ("Experimental Proce-
 dures"). In addition, Lab 4's label-free analysis using AMT 
 methods (37) identified and quantitated 277 protein groups 
-(Table II), 100 of which are not quantitated by the labeled 
+(Table II), ϳ100 of which are not quantitated by the labeled 
 approach (Table III). 
 Overall the number of proteins identified is highly related to 
 the number of sample fractions and to the number of MS/MS 
@@ -638,7 +664,7 @@ spectra obtained. Because of the limited publication space
 and the large amount of data, all the confident protein groups 
 identified and their quantitation results from each lab are 
 provided in supplemental spreadsheets (supplemental Table 
-S3). For each protein group (probability 0.9) identified, the 
+S3). For each protein group (probability Ͼ0.9) identified, the 
 number of total and unique peptide identifications are pro-
 vided in the spreadsheets. p values (Lab 1 and Lab 2) and 
 standard deviations (Lab 3 and Lab 4) are also included to 
@@ -651,10 +677,14 @@ different methods </p>
 
 <p>Methods 
 Total 
-peptides a </p>
+peptides </p>
+
+<p>a </p>
 
 <p>Unique 
-peptides a </p>
+peptides </p>
+
+<p>a </p>
 
 <p>Unique 
 protein 
@@ -667,9 +697,15 @@ groups </p>
 <p>Lab 1 
 2,041 
 403 
-19 b 
-19 b 
-Lab 2 
+19 </p>
+
+<p>b </p>
+
+<p>19 </p>
+
+<p>b </p>
+
+<p>Lab 2 
 122,353 
 3,556 
 335 
@@ -690,8 +726,8 @@ Lab 4 (unlabeled)
 277 
 277 </p>
 
-<p>a Number of peptides with FDR 0.1 for Lab 1 and PeptideProphet 
-probability 0.75 for Labs 2-4. 
+<p>a Number of peptides with FDR Ͻ0.1 for Lab 1 and PeptideProphet 
+probability Ͼ0.75 for Labs 2-4. 
 b These are number of unique proteins, not protein groups. </p>
 
 <p>TABLE III 
@@ -709,7 +745,15 @@ labeled </p>
 unlabeled </p>
 
 <p>Lab 1 
-23 (23) a 22 (22) b 20 (19) 
+23 (23) </p>
+
+<p>a </p>
+
+<p>22 (22) </p>
+
+<p>b </p>
+
+<p>20 (19) 
 23 (20) 
 20 (20) 
 Lab 2 
@@ -791,8 +835,8 @@ cedures," 1941 tissue-specific proteins are identified: 445 are
 brain-and 225 are liver-specific (supplemental Table S6). 
 Integration with the CSF proteomics data found that 298 
 proteins/genes of 1574 are tissue markers, among which two 
-major species are brain-specific (30%) and liver-specific 
-(33%) (Table IV). One intriguing question is how represent-
+major species are brain-specific (ϳ30%) and liver-specific 
+(ϳ33%) (Table IV). One intriguing question is how represent-
 ative these proteins are compared with plasma. Starting from 
 a list of 3020 proteins identified with two or more peptides 
 provided by the Human Proteome Organization Plasma Pro-
@@ -801,7 +845,8 @@ that of 414 proteins that are annotated as tissue-specific
 proteins 17% are brain-and 53% are liver-specific (Table IV). 
 Therefore, brain-specific proteins are 1.8-fold enriched in CSF 
 over plasma, whereas liver-specific proteins are about half as 
-represented in CSF as in plasma. The Pearson's 2 test shows 
+represented in CSF as in plasma. The Pearson's 
+2 test shows 
 that brain-specific proteins significantly predominate in CSF </p>
 
 <p>0 </p>
@@ -832,9 +877,12 @@ Comparisons of brain-and liver-specific proteins in CSF and plasma </p>
 <p>Marker genes detected in 
 -Fold of enrichment 
 (CSF/plasma) 
-p value a 
-CSF (all 298) 
-Plasma (all 414) </p>
+p value </p>
+
+<p>a </p>
+
+<p>CSF (all ϭ 298) 
+Plasma (all ϭ 414) </p>
 
 <p>Number 
 Percentage 
@@ -856,7 +904,8 @@ Liver
 0.6 
 0.15 </p>
 
-<p>a p value is based on Pearson's 2 test to evaluate the significance of differences of representativeness of brain (liver) proteins in CSF and 
+<p>a p value is based on Pearson's 
+2 test to evaluate the significance of differences of representativeness of brain (liver) proteins in CSF and 
 plasma. Numbers of brain (88) versus non-brain (210) marker genes in CSF were tested against those numbers in plasma (71 versus 340). 
 Likewise for liver proteins, numbers of liver (97) versus non-liver (201) proteins in CSF were tested against those numbers in plasma (113 versus 
 301). </p>
@@ -899,8 +948,10 @@ higher scores and brain proteins at lower scores, indicating
 that liver-specific proteins tend to increase and brain-specific 
 proteins decrease in HD CSF. The p value based on Wilcoxon 
 test on sums of z-scores of brain-specific proteins versus 
-other proteins is 6.3 10 9 , and that on sums of z-scores of 
-liver-specific proteins versus others is 3.3 10 8 . This result 
+other proteins is 6.3 ϫ 10 
+Ϫ9 , and that on sums of z-scores of 
+liver-specific proteins versus others is 3.3 ϫ 10 
+Ϫ8 . This result 
 indicates that the trends of changes in HD CSF from the 
 normal are significant for brain-and liver-specific proteins. 
 Comparison of Protein Changes with Human HD Brain 
@@ -913,7 +964,7 @@ and that no significant changes were found for BA9. An im-
 mediate question raised is what the concordance of changes 
 in HD patients is between the proteomics and microarray 
 studies. Among the genes that are significantly differentially 
-expressed in HD caudate, cerebellum, and BA4 cortex, 665, 
+expressed in HD caudate, cerebellum, and BA4 cortex, ϳ665, 
 57, and 165 of their products are identified in CSF, respec-
 tively. Because the most significant mRNA changes occur in 
 HD caudate and the expression profile of HD BA4 is strikingly 
@@ -936,8 +987,11 @@ the 227 proteins, 47 have tissue annotations, and 16 are
 brain-specific. We found that 13 of 16 (81%) brain-specific 
 proteins are concordant. However, only 42 and 47% of the 
 proteins are concordant for non-brain tissue-specific proteins 
-and proteins with unknown tissue origin, respectively. The 2 
-tests on the numbers of concordant and discordant for 1) 
+and proteins with unknown tissue origin, respectively. The </p>
+
+<p>2 </p>
+
+<p>tests on the numbers of concordant and discordant for 1) 
 brain-specific versus other tissue-specific proteins and 2) </p>
 
 <p>FIG. 2. Patterns of tissue-specific proteins in CSF. A, proteins 
@@ -954,7 +1008,7 @@ specific proteins; white, other tissue-specific proteins. </p>
 
 
 <p>brain-specific versus those that are not tissue markers both 
-gave a p value 0.024, indicating that the consistency of 
+gave a p value Յ0.024, indicating that the consistency of 
 expression changes in HD status measured by a proteomics 
 and genomics approach are significant for brain-specific pro-
 teins compared with other proteins (Table V). This concord-
@@ -975,11 +1029,11 @@ changes in HD CSF.
 Among the identified proteins, 12 of them (CHGB, SIAE, 
 IDS, NRXN3, GSN, ENDOD1, GRIA4, GGH, GC, C4B, and 
 PRNP; see Table VI for the full protein names) have a trend of 
-declining with disease progression (control HD-early 
+declining with disease progression (control Ͼ HD-early Ͼ 
 HD-mid). Among the most increasing proteins, seven of them 
 (C1QC, HPX, TPI1, PKM2/PKLR, LYZ, FAM3C, and LMAN2) 
 follow the trend consistent with elevating as disease 
-progresses (control HD-early HD-mid). C1QC, C2, and 
+progresses (control Ͻ HD-early Ͻ HD-mid). C1QC, C2, and 
 C3 are complement factors. PGLYRP2 and APOA4 are also 
 associated with the inflammatory pathway. SERPINC1, 
 APOH, FGG, FGB, and KNG1 are related to the coagulation 
@@ -1072,26 +1126,33 @@ specific </p>
 18 
 31 
 0.42 
-0.024 a </p>
+0.024 </p>
+
+<p>a </p>
 
 <p>Unknown origin 
 85 
 95 
 180 
 0.47 
-0.019 b 
-All 
+0.019 </p>
+
+<p>b </p>
+
+<p>All 
 111 
 116 
 227 
 0.49 
 NA </p>
 
-<p>a This p value is from the Pearson's 2 test of brain-specific proteins 
+<p>a This p value is from the Pearson's 
+2 test of brain-specific proteins 
 versus non-brain specific proteins. Numbers of concordant and dis-
 cordant brain-specific proteins versus the two numbers for non-brain-
 specific proteins were used for the test. 
-b This p value is from the Pearson's 2 test of brain-specific pro-
+b This p value is from the Pearson's 
+2 test of brain-specific pro-
 teins versus proteins of unknown sources. Numbers of concordant 
 and discordant brain-specific proteins versus the two numbers for 
 proteins with unknown tissue origin were used for the test. </p>
@@ -1122,7 +1183,9 @@ z-scores </p>
 
 <p>for each </p>
 
-<p>lab a </p>
+<p>lab </p>
+
+<p>a </p>
 
 <p>Decreasing proteins </p>
 
@@ -1730,7 +1793,9 @@ z-scores </p>
 
 <p>for each </p>
 
-<p>lab a </p>
+<p>lab </p>
+
+<p>a </p>
 
 <p>a Each bar in this column represents the sums of z-scores based on logarithm of early/control and mid/control ratios for each lab. The 
 negative scores are plotted in blue, and the positive scores are in red. </p>
@@ -1785,7 +1850,9 @@ tissue </p>
 <p>Highest mRNA 
 expression tissue </p>
 
-<p>Expression ratio a </p>
+<p>Expression ratio </p>
+
+<p>a </p>
 
 <p>Brain/median 
 Liver/median </p>
@@ -2221,30 +2288,38 @@ liver-specific proteins observed by each laboratory </p>
 <p>Methods 
 Brain-specific 
 Liver-specific 
-p value c 
-Count a Mean b Count a Mean b </p>
+p value </p>
+
+<p>c </p>
+
+<p>Count 
+a Mean 
+b Count 
+a Mean </p>
+
+<p>b </p>
 
 <p>Lab 2 
 9 
-1.28 
+Ϫ1.28 
 27 
 0.96 
 0.0039 
 Lab 3 
 6 
-1.15 
+Ϫ1.15 
 21 
 0.25 
 0.025 
 Lab 4 (labeled) 
 9 
-0.94 
+Ϫ0.94 
 31 
 1.64 
 0.0002 
 Lab 4 (unlabeled) 
 8 
-1.26 
+Ϫ1.26 
 30 
 1.26 
 0.0009 </p>

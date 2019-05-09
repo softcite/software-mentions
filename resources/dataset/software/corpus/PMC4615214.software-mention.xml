@@ -1,8 +1,9 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4615214" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T19:53+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4615214" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:00+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
-<p>P rotein-coding and non-coding RNA </p>
+<p>P </p>
 
-<p>transcripts perform a wide variety of 
+<p>rotein-coding and non-coding RNA 
+transcripts perform a wide variety of 
 cellular functions in diverse organisms. 
 Several of their functional roles are 
 expressed and modulated via RNA struc-
@@ -40,10 +41,12 @@ operon transcription in response to tryp-
 tophan abundance through alternative 
 structures. The second alignment is the 
 HDV ribozyme which we extend to the 
-5 0 flanking sequence. This flanking 
+5 
+0 flanking sequence. This flanking 
 sequence is involved in the regulation of 
 the transcript's self-cleavage activity. 
-The third alignment is the 5 0 UTR of 
+The third alignment is the 5 
+0 UTR of 
 the maturation protein from Levivirus </p>
 
 <p>which contains a transient structure that 
@@ -76,7 +79,8 @@ tional roles they play, for example in
 regulating the transcription and transla-
 tion of eukaryotic genes, have been the 
 subject of intense study for several deca-
-des. Databases such as RFAM 1 provide a 
+des. Databases such as RFAM 
+1 provide a 
 catalogue of RNA families and the cor-
 responding key RNA secondary-struc-
 ture features across a range of 
@@ -137,7 +141,8 @@ plays a distinct functional role at differ-
 ent times of the molecule's life. One 
 early example of sequences with more 
 than one functional RNA structure is 
-so-called riboswitch 2-4 which consists of 
+so-called riboswitch 
+2-4 which consists of 
 two distinct, mutually exclusive RNA 
 structures each with a distinct func-
 tional role. We thus need to start look-
@@ -152,7 +157,8 @@ formation in vivo involves transient RNA
 structure elements which can not only 
 help to define co-transcriptional folding 
 pathways, but can also play distinct func-
-tional roles of their own. 5 These transient 
+tional roles of their own. 
+5 These transient 
 structures can, for example, aid the correct 
 formation of long range interaction (LRI), 
 as seen in Bacterial RNase P Type A RNA 
@@ -160,23 +166,31 @@ and Bacterial SRP 4.5S RNA where the
 transient structures are formed preceding 
 a transcriptional pausing site to sequester 
 the 5' portion of a LRI until the cognate 
-3' portion is synthesised. 6 Moreover, 
+3' portion is synthesised. 
+6 Moreover, 
 such transient structures can be employed 
 to regulate gene expression either via 
 translational control as exemplified in 
-Levivirus 7,8 or via a transcriptional mech-
+Levivirus 
+7,8 or via a transcriptional mech-
 anism as exhibited by Tryptophan operon 
-leader 9,10 and SAM riboswitch. 11 Last 
+leader 
+9,10 and SAM riboswitch. 
+11 Last 
 but not the least, transient structures 
 incorporating the 5' flanking sequence 
 are involved in adjusting the self-cleavage 
 activity of HDV ribozyme, CPEB3 ribo-
-zyme and group I intron. 12,13 
-Recent statistical evidence suggests that 
+zyme and group I intron. </p>
+
+<p>12,13 </p>
+
+<p>Recent statistical evidence suggests that 
 some transient structures are evolution-
 arily conserved across homologous 
 sequences thus confirming their potential 
-functional importance. 14 It is thus possi-
+functional importance. 
+14 It is thus possi-
 ble to provide entries in RFAM with a more 
 complete structural annotation which 
 should in turn allow us to gain a better 
@@ -192,8 +206,11 @@ of the experimentally confirmed transient/
 alternative structures is critical to confer to 
 the RNA molecule the ability to modulate 
 gene expression or regulate ribozyme activ-
-ity. Moreover, our previous research 14 
-shows that the computationally predicted 
+ity. Moreover, our previous research </p>
+
+<p>14 </p>
+
+<p>shows that the computationally predicted 
 co-transcriptional folding pathways for 
 homologous RNA sequences go through 
 similar transient structural configurations, 
@@ -205,10 +222,12 @@ all, the functional and structural annota-
 tion of any RNA family should thus 
 naturally include any conserved transient 
 and alternative strutures with functional 
-roles. Right now, however, RFAM 1 only 
+roles. Right now, however, RFAM 
+1 only 
 specifies a single functional structure for 
 each RNA family. The RFAM database of 
-RNA families 1 features three of them -
+RNA families 
+1 features three of them -
 Trp operon leader (RF00513), HDV ribo-
 zyme (RF00094), SAM riboswitch 
 (RF00162) -but lacks the annotation and 
@@ -230,7 +249,8 @@ new and not yet part of RFAM. In order to
 provide more complete structural annota-
 tions including conserved transient and 
 alternative structures, we set up a pipeline 
-involving INFERNAL program 92 to structur-
+involving INFERNAL program 
+92 to structur-
 ally align sequences for multiple structures. 
 We here show that it is possible to go 
 beyond the one-sequence-one-structure 
@@ -252,47 +272,68 @@ operon
 The E.coli trp operon spans approxi-
 mately 7000 nucleotides (nt) which con-
 secutively encode the promoter containing 
-an operator, 15,16 the transcribed leader 
+an operator, 
+15,16 the transcribed leader 
 region, and structural genes essential for 
 the biosynthesis of tryptophan(trp), i.e. E, 
-D, C, B, A. 17 The leader transcript refers 
+D, C, B, A. 
+17 The leader transcript refers 
 to the 162 nt long untranslated region 
-(UTR) preceding the structural genes. 10 
-Along this leader transcript, the ribo-
-somal binding site resides at the 5' end, 18 
-and an internal transcription termination 
+(UTR) preceding the structural genes. </p>
+
+<p>10 </p>
+
+<p>Along this leader transcript, the ribo-
+somal binding site resides at the 5' end, </p>
+
+<p>18 </p>
+
+<p>and an internal transcription termination 
 signal is located distally before the first 
-structural gene E. 10,19 This termination 
+structural gene E. 
+10,19 This termination 
 signal, lying within the attenuator, can be 
 recognised by RNA polymerase to pro-
 duce a transcript of about 140 nt (137-
-141) length. 9.20 This shorter transcript 
+141) length. 
+9.20 This shorter transcript 
 generates a leader peptide consisting of 
 14 residues whose distal end has a tan-
-dem of trp residues. 10 This leader peptide 
+dem of trp residues. 
+10 This leader peptide 
 is involved in the attenuation regulatory 
 strategy where the Trp operon leader is 
 utilised for adaptation to the metabolic 
 condition concerning the biosynthesis of 
-trp. 9 </p>
+trp. </p>
+
+<p>9 </p>
 
 <p>Attenuation in Tryptophan operon leader 
 The trp-activated repressor protein 
 (trpR) is stimulated upon trp binding to 
-compete against RNA polymerase, 21 and 
+compete against RNA polymerase, 
+21 and 
 consequently switches off the initiation of 
-trp operon transcription. 22 An additional 
+trp operon transcription. 
+22 An additional 
 repression mechanism is postulated to 
 operate directly on the progressing tran-
 scription along the starting segment of the 
-operon. 23,24 Further deletion mutagenesis 
+operon. 
+23,24 Further deletion mutagenesis 
 studies narrow down the regulatory region 
 onto the leader region of the trp 
-operon 25,26 wherein transcription stops at 
-a distal transcription termination site. 19,27 
-The transcription and translation of this 
+operon 
+25,26 wherein transcription stops at 
+a distal transcription termination site. </p>
+
+<p>19,27 </p>
+
+<p>The transcription and translation of this 
 short leader transcript have been demon-
-strated in vivo and in vitro. 9,28,29 The </p>
+strated in vivo and in vitro. 
+9,28,29 The </p>
 
 <p>6 
 Volume 12 Issue 1 
@@ -304,11 +345,15 @@ which is essentially an internal transcrip-
 tion termination signal that is modulated 
 in response to the abundance of metabo-
 lites relevant to the products of this 
-operon. 25 Consequently, the ongoing 
+operon. 
+25 Consequently, the ongoing 
 transcription of the downstream operon 
 genes could be regulated accordingly and 
-promptly in an "economical" way. 9,25 
-The attenuation mechanism requires 
+promptly in an "economical" way. </p>
+
+<p>9,25 </p>
+
+<p>The attenuation mechanism requires 
 the translation of the leader peptide as 
 shown by the altered termination fre-
 quency observed in mutants with deficient 
@@ -318,7 +363,8 @@ tRNA
 synthetase 
 and 
 start 
-codon. 10,18,30,31 Whether the ribosome 
+codon. 
+10,18,30,31 Whether the ribosome 
 stalls during translation and where this 
 occurs is likely to influence this regulatory 
 attenuation mechanism because it depends 
@@ -327,18 +373,22 @@ loaded tRNA; given the trailing trp tan-
 dem observed in this trp operon, the trp 
 codon is found to be the codon </p>
 
-<p>responsible for this. 10,32 Where the ribo-
+<p>responsible for this. 
+10,32 Where the ribo-
 some stalls dictates which alternative RNA 
 structure the leader transcript forms: 
 either the transcription termination hair-
 pin forms or it is disrupted to permit tran-
-scriptional read-through. 30 In essence, the 
+scriptional read-through. 
+30 In essence, the 
 choice between terminator and anti-termi-
 nator structures bridges the communica-
 tion between the translation of the leader 
 peptide and the transcription of operon 
 genes in exchanging the message for the 
-abundance of trp. 10,33 </p>
+abundance of trp. </p>
+
+<p>10,33 </p>
 
 <p>Dual regulatory systems for the operon 
 expression 
@@ -348,25 +398,34 @@ of other amino acids in starvation; here,
 the trpR repressor operates on the tran-
 scription initiation whereas the attenua-
 tion operates on the progressing 
-transcription. 10 The repression system tar-
+transcription. 
+10 The repression system tar-
 gets the intracellular trp concentration 
 which depends on the influx trp, the 
 newly synthesised trp, and finally the </p>
 
 <p>consumption of trp for protein synthe-
-sis. 10 In contrast, the attenuation measures 
-the concentration of charged tRNA Trp , 
+sis. 
+10 In contrast, the attenuation measures 
+the concentration of charged tRNA 
+Trp , 
 which is contributed by cellular capability 
 of protein synthesis, trp concentration, 
 tryptophanyl-tRNA 
 synthetase, 
 and 
-tRNA Trp . 10 The intracellular trp concen-
+tRNA 
+Trp . 
+10 The intracellular trp concen-
 tration does not always correlate with the 
-concentration of charged tRNA Trp . 9 This 
+concentration of charged tRNA 
+Trp . 
+9 This 
 dual system thus acts in concert to tune 
 the biosynthesis level of trp on a wide 
-spectrum. 10,34 </p>
+spectrum. </p>
+
+<p>10,34 </p>
 
 <p>Terminator Structure 
 The terminator structure consists of two 
@@ -374,7 +433,8 @@ hairpins
 The 5' portion of the first hairpin 
 encompasses the region encoding the trail-
 ing residues of the leader peptide: Trp, 
-Trp, Arg, Thr, Ser 10 (Figure 1). Other 
+Trp, Arg, Thr, Ser 
+10 (Figure 1). Other 
 than the trp tandem required for sensing 
 trp deficiency, base pairs embedded in this 
 region also impose constraints on the 
@@ -394,32 +454,51 @@ RNA Biology </p>
 <p>conservation is observed in these five suc-
 cessive codons and mutating the upstream 
 codons does not alter the operon expres-
-sion. 9,10,35-37 The second hairpin, 
+sion. </p>
+
+<p>9,10,35-37 </p>
+
+<p>The second hairpin, 
 enriched in G/C and immediately fol-
 lowed by several uracil residues, comprises 
 the termination signal that attenuates the 
-operon transcription. 10,20 
-The terminator structure forms when 
+operon transcription. </p>
+
+<p>10,20 </p>
+
+<p>The terminator structure forms when 
 no ribosome stalls in the vicinity of the Trp 
 tandem (i.e., Trp or Arg codon); that is, 
 either the leader peptide is not translated 
 or the translation proceeds smoothly along 
-the 5 0 portion of the first hairpin with 
-abundant charged tRNA Trp . 9,10 More spe-
+the 5 
+0 portion of the first hairpin with 
+abundant charged tRNA </p>
+
+<p>Trp </p>
+
+<p>. 
+9,10 More spe-
 cifically, the ribosome is proposed to steri-
 cally mask about 10 nts downstream, thus 
 ribosome stalling in either the upstream 
 Gly or further downstream Thr does not 
 disrupt the formation of the termination 
-hairpin. 9,10 Thereafter, co-transcriptional 
+hairpin. 
+9,10 Thereafter, co-transcriptional 
 folding only allows the two hairpins to 
 form sequentially; the first hairpin forms 
 right after its pairing portions are tran-
-scribed, rendering the 3 0 portion of the first 
+scribed, rendering the 3 
+0 portion of the first 
 hairpin unavailable to pair with the newly 
-synthesised 5 0 half of the second termina-
-tion hairpin. 10 
-Experimental evidence. In the past, the 
+synthesised 5 
+0 half of the second termina-
+tion hairpin. </p>
+
+<p>10 </p>
+
+<p>Experimental evidence. In the past, the 
 terminator structure responsible for pro-
 ducing the 140 nt-long attenuated leader 
 transcript has been investigated via experi-
@@ -433,7 +512,11 @@ proposed structures agree with results of a
 partial RNase T1 digestion that exhibit 
 digestion resistance in the distal portion of 
 this transcript, i.e., where the structural 
-features are located. 32 Thereafter, 
+features are located. </p>
+
+<p>32 </p>
+
+<p>Thereafter, 
 Oxender et al. (1979) conducted struc-
 tural probing with RNase T1 partial 
 digestion followed by isolation of the co-
@@ -443,12 +526,14 @@ regions were subsequently identified via
 denaturing gel electrophoresis and finger-
 printing, based on which the two hairpins 
 comprising the terminator structure were 
-drawn. 33 Later on, the secondary structure 
+drawn. 
+33 Later on, the secondary structure 
 of DNA template was ruled out as a con-
 tributor for this termination signal so the 
 RNA structural features are the one </p>
 
-<p>causing the termination. 9,38,39 Indeed, the 
+<p>causing the termination. 
+9,38,39 Indeed, the 
 functional importance of the second hair-
 pin for the transcriptional termination is 
 illustrated by the reduced transcription 
@@ -456,48 +541,71 @@ termination frequency observed in experi-
 ments destabilising the central GCC pair-
 ing of this hairpin, such as by in vivo 
 mutational analysis or in vitro substitution 
-of G-C bond by I-C bond. 32,40-42 More-
+of G-C bond by I-C bond. 
+32,40-42 More-
 over, mutational analysis progressively dis-
 rupting the first hairpin still preserves the 
 production of the attenuated transcript, 
 suggesting that the second hairpin itself is 
-sufficient for the termination. 9,42 </p>
+sufficient for the termination. </p>
+
+<p>9,42 </p>
 
 <p>Anti-terminator structure 
 Anti-terminator structure disrupts the 
 two terminator hairpins 
 The anti-terminator hairpin is formed 
-by the pairing between the 3 0 portion of 
-the first hairpin and the 5 0 portion of the 
+by the pairing between the 3 
+0 portion of 
+the first hairpin and the 5 
+0 portion of the 
 second hairpin from the terminator 
-structure. 10 
-This structure occurs when charged 
-tRNA Trp (or tRNA Arg ) is starving, and the 
+structure. </p>
+
+<p>10 </p>
+
+<p>This structure occurs when charged 
+tRNA 
+Trp (or tRNA 
+Arg ) is starving, and the 
 ribosome is impeded around the tandem 
-Trp codon where the 5 0 portion of the first 
-terminator hairpin resides. 10 This stalling 
+Trp codon where the 5 
+0 portion of the first 
+terminator hairpin resides. 
+10 This stalling 
 ribosome spans approximately 10 nucleo-
 tides downstream and thereby prevents 
 the formation of the first terminator hair-
-pin. 10 Instead, it promotes the base-pair-
-ing between the 3 0 half of the first 
-terminator hairpin and the 5 0 half of the 
+pin. 
+10 Instead, it promotes the base-pair-
+ing between the 3 
+0 half of the first 
+terminator hairpin and the 5 
+0 half of the 
 second terminator hairpin once they are 
-transcribed. 10 Co-transcriptionally, this 
-removes the pairing option held by the 3 0 
-of the second terminator hairpin, render-
-ing it single-stranded. 10 Since the tran-
+transcribed. 
+10 Co-transcriptionally, this 
+removes the pairing option held by the 3 </p>
+
+<p>0 </p>
+
+<p>of the second terminator hairpin, render-
+ing it single-stranded. 
+10 Since the tran-
 scriptional termination hairpin is 
 sequestered under this circumstance, the 
 progressing RNA polymerase no longer 
 dissociates at the attenuation site, and the 
 mRNA encoding the trp operon poly-pep-
-tides gets fully transcribed. 9,10 Nonethe-
+tides gets fully transcribed. 
+9,10 Nonethe-
 less, the anti-terminator hairpin is 
 speculated to still form occasionally after 
 the ribosome dissociates from the leader 
 transcript even in the absence of ribosome 
-stalling. 9 </p>
+stalling. </p>
+
+<p>9 </p>
 
 <p>Experimental evidence 
 Both the translation of the leader pep-
@@ -507,125 +615,163 @@ inhibiting
 the 
 transcription </p>
 
-<p>termination. 31 Moreover, mutational 
+<p>termination. </p>
+
+<p>31 </p>
+
+<p>Moreover, mutational 
 analysis destabilising or disrupting the 
 base-pairing of the anti-terminator hair-
 pin, e.g., trpL75 mutant, demonstrates 
 increased termination of several folds; 
 consistent with the attenuation model, 
 this mutation prevents the relief of attenu-
-ation even with Trp starvation. 9,31 In con-
+ation even with Trp starvation. 
+9,31 In con-
 trast, complementary oligonucleotides 
-targeting the 5 0 portion of the first termi-
+targeting the 5 
+0 portion of the first termi-
 nator hairpin increase the operon expres-
 sion, presumably promoting the anti-
-terminator formation. 9,43 However, there 
+terminator formation. 
+9,43 However, there 
 is no direct experimental evidence con-
 firming the base-pairing of the anti-termi-
 nator hairpin (i.e., structural probing) due 
 to the co-transcriptional nature, i.e. the 
 other two terminator hairpins render the 
-anti-terminator formation infeasible. 9 </p>
+anti-terminator formation infeasible. </p>
+
+<p>9 </p>
 
 <p>Half-life of the structures 
 The formation of the alternative struc-
 tures is determined by whether or not the 
 translating ribosome is impeded, which 
 must be concomitantly captured by the 
-transcribing polymerase. 9 The time scale 
+transcribing polymerase. 
+9 The time scale 
 of the structural modulation must thus be 
 comparable to that of the transcribing 
-polymerase. 10 Evidence supporting this 
+polymerase. 
+10 Evidence supporting this 
 requirement is a transcriptional pausing 
 site located at the end of the first termina-
 tor hairpin which allows time to put the 
 ribosome in sync with the RNA polymer-
-ase along the same transcript. 10 The 
+ase along the same transcript. 
+10 The 
 amount of trp abundance can thus be mea-
 sured in a timely manner via the proper 
 formation of the alternative structure. Sub-
 sequently, either attenuation or read-
-through occurs accordingly. 10 </p>
+through occurs accordingly. </p>
 
-<p>5 0 UTR of Leviviridae Levivirus </p>
+<p>10 </p>
+
+<p>5 
+0 UTR of Leviviridae Levivirus </p>
 
 <p>Translational control 
 of maturation protein in Leviviridae 
-Levivirus </p>
-
-<p>Phylogeny and host specificity of family 
+Levivirus 
+Phylogeny and host specificity of family 
 Leviviridae 
 The family Leviviridae, a prevalent 
 family targeting gram-negative bacteria, 
 comprises positive single-stranded (ss) 
 RNA bacteriophages with one of the 
 smallest genome sizes (around 3500 to 
-4200 nt). 44-47 Most of the family mem-
+4200 nt). 
+44-47 Most of the family mem-
 bers exhibit infection specificity for E. coli 
 bearing F pilus receptors; moreover, the </p>
 
-<p>8 
+<p> 
 Volume 12 Issue 1 
 RNA Biology </p>
 
 <p>family members exploit similar mecha-
 nisms and host factors for replication and 
-translational regulation. 44 This family was 
+translational regulation. 
+44 This family was 
 proposed to be a monophyletic group 
 with main constituent genera Levivirus 
 and Allolevivirus based on maximum like-
 lihood and Bayesian estimation using the 
-coat and replicase genes of nine species. 44 
-Levivirus and Allolevivirus have difference 
+coat and replicase genes of nine species. </p>
+
+<p>44 </p>
+
+<p>Levivirus and Allolevivirus have difference 
 in the genes encoded and the orientation 
 of the open reading frame (ORF), albeit 
-both having four genes. 44 Each of these 
+both having four genes. 
+44 Each of these 
 two genera is further sub-divided into two 
 groups according to their serological 
 cross-reactivity and the characteristics of 
-the virion. 44,45,48,49 Among them, MS2 
+the virion. 
+44,45,48,49 Among them, MS2 
 and GA are the typical species of Group I, 
 II of the Levivirus, respectively; Qb and 
 SP are the representative ones of Group 
 III and IV of the Allolevivirus, 
-respectively. 44,50 </p>
+respectively. </p>
 
-<p>Structure of 5 0 UTR of maturation gene 
+<p>44,50 </p>
+
+<p>Structure of 5 
+0 UTR of maturation gene 
 solves the competition between translation 
 and replication on ssRNA template 
 MS2, a model organism for Group I 
 coli-phage of Levivirus, has a sense RNA 
 genome encoding four proteins (starting 
-from the 5 0 end): maturation, coat, lysis, 
-and replicase. 8,51 Both maturation and 
+from the 5 
+0 end): maturation, coat, lysis, 
+and replicase. 
+8,51 Both maturation and 
 coat proteins serve as the structural com-
 ponent of the icosahedral virion, present-
-ing a per-virion ratio of 1:180. 8 The lysis 
+ing a per-virion ratio of 1:180. 
+8 The lysis 
 protein lyses the host cell; the replicase 
 and host factors comprise a holoenzyme 
 responsible for the replication of strands 
-in both polarities. 8 As a result of the RNA 
+in both polarities. 
+8 As a result of the RNA 
 genome, transcriptional regulatory tools 
 are no longer available and the viral gene 
 expression is thus regulated translationally 
 to achieve the desired quantity and timing 
-pertaining to these proteins. 8 
-As Levivirus has a ss RNA genome serv-
+pertaining to these proteins. </p>
+
+<p>8 </p>
+
+<p>As Levivirus has a ss RNA genome serv-
 ing as the template for both translation and 
 replication, the ribosome and the replicase 
-tend to compete in binding the template. 8 
-To solve this conflict, the three distal genes 
+tend to compete in binding the template. </p>
+
+<p>8 </p>
+
+<p>To solve this conflict, the three distal genes 
 share a single ribosomal entry site; more-
 over, the ribosome and replicase share the 
 same binding site around the start codon 
-of the coat gene. 7,8,52,53 The translation of 
+of the coat gene. 
+7,8,52,53 The translation of 
 the three distal genes is therefore coupled 
 as the binding of replicase and of ribosome 
-is mutually exclusive. 7 Nevertheless, ribo-
+is mutually exclusive. 
+7 Nevertheless, ribo-
 some bound to the ORF of the maturation 
 gene could potentially dislodge the </p>
 
-<p>replicase travelling to the 5 0 end. 7 To pre-
+<p>replicase travelling to the 5 
+0 end. 
+7 To pre-
 vent this, transcript folding can exert a 
 translational control by gate-keeping the 
 ribosomal binding site(RBS) in a long-dis-
@@ -633,112 +779,158 @@ tance interaction (LDI) via an inhibitory
 upstream 
 complementary 
 sequence 
-(UCS). 8 This structure prevents the bind-
+(UCS). 
+8 This structure prevents the bind-
 ing of the ribosome and yields way to the 
-replicase. 8,54 The translation of maturation 
+replicase. 
+8,54 The translation of maturation 
 protein is thus usually suppressed. When 
 the formation of the secondary structure is 
 prevented, 
 translation 
-increases. 8,55 
-Expression of the maturation protein is key 
+increases. </p>
+
+<p>8,55 </p>
+
+<p>Expression of the maturation protein is key 
 for the viral infection process as it can pro-
 teolytically trigger the releasing of viral 
 genome through contacting the F-pili of 
 male; this only requires low copies of the 
-maturation protein in Escherichia coli. 8,56 
-The virus employs a co-transcriptional 
+maturation protein in Escherichia coli. </p>
+
+<p>8,56 </p>
+
+<p>The virus employs a co-transcriptional 
 folding strategy to postpone the forma-
 tion of this inhibitory LDI via seques-
 tering the UCS in a metastable hairpin, 
 enabling a transient translation of matu-
-ration protein. 7 Moreover, studying this 
+ration protein. 
+7 Moreover, studying this 
 translational control of the maturation 
 protein brings deeper insight into the 
 evolutionary divergence of Levivirus and 
-Allolevivirus in the Family Leviviridae. 44 
-Gene expansion is proposed to have 
+Allolevivirus in the Family Leviviridae. </p>
+
+<p>44 </p>
+
+<p>Gene expansion is proposed to have 
 occurred in Allolevivirus, which post-
 pones the formation of the inhibitory 
 LDI and therefore up-regulates the mat-
 uration protein; subsequent mutations 
 accumulate and restore the virus fitness, 
 resulting in the difference between these 
-two genera. 44,57 </p>
+two genera. </p>
+
+<p>44,57 </p>
 
 <p>Final inhibitory Structure 
 The final cloverleaf-like structure consists 
 of four hairpins 
 The cloverleaf-like structure assumed 
-by the 5 0 UTR of equilibrated RNA from 
+by the 5 
+0 UTR of equilibrated RNA from 
 MS2 was first proposed by Groeneveld et 
-al. (1995), consisting of a 5 0 hairpin, and 
+al. (1995), consisting of a 5 
+0 hairpin, and 
 the downstream West (W), South (S) and 
-East (E) arms 7,8 (Fig. 2). An inhibitory 
-UCS, immediately 3 0 to the 5 0 hairpin, 
+East (E) arms 
+7,8 (Fig. 2). An inhibitory 
+UCS, immediately 3 
+0 to the 5 
+0 hairpin, 
 pairs with the 7 nt Shine-Dalgarno(SD, 
-AGGAGGU) sequence, forming a LDI. 8 
-This cloverleaf-like structure, even includ-
+AGGAGGU) sequence, forming a LDI. </p>
+
+<p>8 </p>
+
+<p>This cloverleaf-like structure, even includ-
 ing the bulge in the bottom of the S arm, 
 is evolutionarily conserved between MS2 
 and KU1 which is a Group II Levivirus 
 that varies from MS2 in terms of primary 
-sequence. 8 </p>
+sequence. </p>
+
+<p>8 </p>
 
 <p>The cloverleaf-like and inactive struc-
 ture forms once the first 123 nt of the 
-plus-strand is synthesised. 7 Meanwhile, 
+plus-strand is synthesised. 
+7 Meanwhile, 
 the start codon is not replicated yet, and 
 the translation initiation complex requires 
-the transcript up to the first 145 nt. 7 The 
+the transcript up to the first 145 nt. 
+7 The 
 maturation protein can therefore not be 
-translated. 7 The RBS of the maturation 
+translated. 
+7 The RBS of the maturation 
 protein spanning from nucleotide 110 to 
 145 can also pair with a stretch of down-
 stream sequence to further sequester the 
-RNA molecule in an inactive form. 8 This 
+RNA molecule in an inactive form. 
+8 This 
 ensures that the RBS is not accessible to 
 the ribosome once the inactive cloverleaf 
 structure is formed, otherwise the ribo-
 some could be there to dislodge the pro-
-gressing replicase. 8 </p>
+gressing replicase. </p>
+
+<p>8 </p>
 
 <p>Experimental evidence 
 Phylogenetic analysis reveals the con-
 servation of the cloverleaf structure in the 
-5 0 UTR sequences of the maturation gene 
+5 
+0 UTR sequences of the maturation gene 
 among Levivirus members: Groeneveld et 
 al. (1995) assembled an alignment consist-
 ing of four group I phages (fr, M12, 
 JP501, MS2), and two group II phages 
-(KU1, GA). 8 They noticed that the struc-
+(KU1, GA). 
+8 They noticed that the struc-
 tural features are generally preserved, 
 albeit some variations in the W arm com-
 paring the two groups and bulge shifting 
 in the S arm comparing MS2 and 
-M12. 8,58,59 They also reported covariation 
+M12. 
+8,58,59 They also reported covariation 
 being observed in all arms and, most 
 importantly, in the LDI; particularly, the 
 amount of covariations present in Group I 
-and II are similar. 8 In addition, they were 
+and II are similar. 
+8 In addition, they were 
 able to employ the secondary-structure 
 prediction program MFOLD (GCG sof-
 ware, Genetics Computer Group, Madi-
 son, WI) to predict the cloverleaf 
-structure. 8 
-Biochemical probing of the structure 
+structure. </p>
+
+<p>8 </p>
+
+<p>Biochemical probing of the structure 
 from a reference MS2 sequence is initial-
 ised as well using a combination of DMS, 
-DEP, CMCT, and RNase T1/T2/VT. 8 
-The resultant probing pattern is consistent 
+DEP, CMCT, and RNase T1/T2/VT. </p>
+
+<p>8 </p>
+
+<p>The resultant probing pattern is consistent 
 with the proposed structure in terms of 
 sensitivity to modification or cleavage, 
-including the bulge region. 8 
-Functional analyses have been con-
+including the bulge region. </p>
+
+<p>8 </p>
+
+<p>Functional analyses have been con-
 ducted on the components of this cloverleaf 
 structure through a series of mutants with 
-deletions in variable portions of the arms. 8 
-Any changes in the synthesis of the matura-
+deletions in variable portions of the arms. </p>
+
+<p>8 </p>
+
+<p>Any changes in the synthesis of the matura-
 tion protein were thus attributed to the 
 structural feature being mutated because </p>
 
@@ -747,16 +939,20 @@ structural feature being mutated because </p>
 RNA Biology </p>
 
 <p>the stability of these mutant RNAs was 
-confirmed to be unchanged. 8 Only the 
+confirmed to be unchanged. 
+8 Only the 
 base-pairing potential rather than the pri-
 mary sequence composition of the W arm 
 is required for maturation protein transla-
-tion. 8 Moreover, deleting the entire UCS 
+tion. 
+8 Moreover, deleting the entire UCS 
 sequence or destabilising the LDI via muta-
 tions significantly enhances the maturation 
 protein synthesis, which is further evidence 
 for the negative regulatory role of the UCS 
-strand. 8 </p>
+strand. </p>
+
+<p>8 </p>
 
 <p>Transient permissive Structure 
 The transient structure consists of a 
@@ -768,24 +964,40 @@ maturation protein, a series of MS2
 mutants were designed by Van Meerten et 
 al. (2001) to progressively locate the 
 kinetic trap that contributes to the slow 
-folding of the cloverleaf-like structure. 7,60 </p>
+folding of the cloverleaf-like structure. </p>
+
+<p>7,60 </p>
 
 <p>This temporary kinetic trap, essentially a 
-transient structure, is located in the 5 0 
-UTR. 7 The precise position was further 
+transient structure, is located in the 5 </p>
+
+<p>0 </p>
+
+<p>UTR. 
+7 The precise position was further 
 explored by replacing the W, S and E 
 arms of MS2 arm by arm by the cognate 
-arm from KU1. 7 Finally, nt 37-45 of 
-MS2, residing in the 5 0 segment of the W 
+arm from KU1. 
+7 Finally, nt 37-45 of 
+MS2, residing in the 5 
+0 segment of the W 
 arm, was identified as the functional 
-sequence corresponding to the 3 0 portion 
+sequence corresponding to the 3 
+0 portion 
 of a metastable hairpin which is conserved 
-among MS2, KU1 and fr. 7 
-This transient hairpin encompasses 4 
-nts from the 3 0 portion of the 5 0 hairpin, 
-the UCS, and 7 nts from the 5 0 portion of 
+among MS2, KU1 and fr. </p>
+
+<p>7 </p>
+
+<p>This transient hairpin encompasses 4 
+nts from the 3 
+0 portion of the 5 
+0 hairpin, 
+the UCS, and 7 nts from the 5 
+0 portion of 
 the West arm originally in the cloverleaf-
-like structure. 7 Therefore, it disrupts the 
+like structure. 
+7 Therefore, it disrupts the 
 inhibitory LDI and thereafter frees the SD 
 sequence, temporarily permitting the non-
 equilibrated RNA to be captured by the 
@@ -793,23 +1005,37 @@ translation machinery for a brief transla-
 tion of the maturation protein during the 
 limited time window, i.e., after the syn-
 thesis of the RBS but before the LDI 
-forms. 7 Moreover, this truncates the 5 0 </p>
+forms. 
+7 Moreover, this truncates the 5 </p>
 
-<p>hairpin and exposes the G 0 s at the start of 
-the 5 0 UTR as ss, which is stipulated by 
+<p>0 </p>
+
+<p>hairpin and exposes the G 
+0 s at the start of 
+the 5 
+0 UTR as ss, which is stipulated by 
 the viral replication; maturation protein 
 complemented in trans is not enough to 
 rescue a mutant with no metastable hair-
 pin, which agrees with this additional 
-role. 7 
-This structure forms only co-transcrip-
+role. </p>
+
+<p>7 </p>
+
+<p>This structure forms only co-transcrip-
 tionally during the synthesis of the posi-
 tive strand from an antisense template, 
 and will be eventually replaced by the 
-mutually exclusive LDI. 7 This requires the 
+mutually exclusive LDI. 
+7 This requires the 
 ribosome to bind the RBS fast enough 
-compared to the formation of the LDI, 8 
-which is demonstrated feasible. 61 </p>
+compared to the formation of the LDI, </p>
+
+<p>8 </p>
+
+<p>which is demonstrated feasible. </p>
+
+<p>61 </p>
 
 <p>Experimental evidence 
 Firstly, Groeneveld et al. indirectly 
@@ -828,14 +1054,18 @@ impede ribosome binding. </p>
 Volume 12 Issue 1 
 RNA Biology </p>
 
-<p>binding. 8 Through modulating 
+<p>binding. 
+8 Through modulating 
 the stability of the LDI via muta-
 tions, they eliminated the possi-
 bility of maturation protein 
 being mostly synthesised by the 
 equilibrated cloverleaf confor-
-mation. 7,8 
-Secondly, 
+mation. </p>
+
+<p>7,8 </p>
+
+<p>Secondly, 
 they 
 directly assessed the kinetic 
 model via adjusting the co-tran-
@@ -843,7 +1073,11 @@ scriptional time delayed for the
 LDI formation, and concluded 
 that this duration is positively 
 correlated with the yield of mat-
-uration protein. 8 Moreover, 
+uration protein. </p>
+
+<p>8 </p>
+
+<p>Moreover, 
 computational simulation of the 
 co-transcriptional folding trajec-
 tory using <rs type="software">KINWALKER</rs> does pre-
@@ -852,8 +1086,11 @@ trap
 and 
 the 
 cloverleaf 
-structure. 51 
-Mutational analysis also pro-
+structure. </p>
+
+<p>51 </p>
+
+<p>Mutational analysis also pro-
 vides evidence supporting the 
 functional importance of this 
 metastable hairpin -the kinetic 
@@ -864,16 +1101,21 @@ stable hairpin disrupted pro-
 duce no plaque whereas 
 compensatory double mutation 
 is able to rescue the fitness of 
-the phage. 7 On the other hand, 
+the phage. 
+7 On the other hand, 
 mutation stabilising the meta-
 stable structure via replacing the 
 bulge by a base pair increases 
-the translation of maturation. 7 
-Furthermore, bulk evolution of 
+the translation of maturation. </p>
+
+<p>7 </p>
+
+<p>Furthermore, bulk evolution of 
 those mutants with no metasta-
 ble hairpin eventually leads to 
 the restoration of the metastable 
-hairpin. 7 Taken together, they 
+hairpin. 
+7 Taken together, they 
 imply the necessity of the meta-
 stable hairpin for the synthesis 
 of maturation protein and thus 
@@ -886,17 +1128,21 @@ ture requires several minutes to
 fully fold, whereas a tRNA with 
 comparable size and conforma-
 tion folds only on a millisecond time 
-scale. 7,60 This further suggests that the 
-MS2 5 0 UTR folding is delayed by being 
+scale. 
+7,60 This further suggests that the 
+MS2 5 
+0 UTR folding is delayed by being 
 kinetically trapped in a non-native </p>
 
-<p>structure. 7 Given that coli-phage replicase 
+<p>structure. 
+7 Given that coli-phage replicase 
 proceeds at 30 nt per second (sec), the 
 ribosome can stably bind the maturation 
 protein start codon as long as the </p>
 
 <p>cloverleaf structure is postponed to form 
-by about 1 sec. 7,62 Hence, the proposed 
+by about 1 sec. 
+7,62 Hence, the proposed 
 translational control is convincing in 
 terms of time. </p>
 
@@ -918,36 +1164,48 @@ cleaving activity
 HDV HDV is an RNA satellite virus 
 depending on hepatitis B virus (HBV), 
 and aggravates the virulency of HBV-caus-
-ing hepatitis. 63 HDV has a circular and 
+ing hepatitis. 
+63 HDV has a circular and 
 1700 nt long ssRNA genome, encoding 
-the delta antigen protein. 12,64 The high 
+the delta antigen protein. 
+12,64 The high 
 self-complementarity of the genome ena-
-bles it to assumes a rod-like structure. 65-68 
-A double-rolling-circle mechanism is 
+bles it to assumes a rod-like structure. </p>
+
+<p>65-68 </p>
+
+<p>A double-rolling-circle mechanism is 
 exploited by HDV to replicate via the 
 host RNA polymerase II, yielding linear 
 multimers of both genomic and antige-
-nomic senses 64,68 .The multimers are sub-
+nomic senses 
+64,68 .The multimers are sub-
 sequently self-cleaved into monomers via 
 a trans-esterification reaction catalyzed by 
-the HDV ribozyme in cis. 64,68 The linear 
+the HDV ribozyme in cis. 
+64,68 The linear 
 monomers are then ligated into a circular 
 genome via a host factor, which harbours 
 the ribozyme-targeting cleavage site 
-again. 12,13 The ribozyme activity is turned 
+again. 
+12,13 The ribozyme activity is turned 
 off in the ligated RNA by interacting a 
 downstream attenuator in order to serve 
 as a template during the upcoming repli-
-cation cycles. 12,69 </p>
+cation cycles. </p>
+
+<p>12,69 </p>
 
 <p>HDV ribozyme catalyses the self-cleavage 
 activity 
 This HDV ribozyme has a fast reaction 
 rate which only depends on 85 nucleotides 
 of either genomic or antigenomic RNAs 
-requiring one nucleotide located 5 0 of the 
+requiring one nucleotide located 5 
+0 of the 
 cleavage site; limited variation is observed 
-in this ribozyme. 64,68,70,71 Both genomic 
+in this ribozyme. 
+64,68,70,71 Both genomic 
 and antigenomic ribozymes are enriched in 
 G and fold into similar secondary struc-
 tures, as concluded by aligning the geno-
@@ -955,7 +1213,9 @@ mic and antigenomic sequences in search
 of sequence and structural similarity, sec-
 ondary-structure prediction via minimum-
 free-energy minimisation, and ribonucle-
-ase digestion. 72 </p>
+ase digestion. </p>
+
+<p>72 </p>
 
 <p>Flanking sequence participates in the 
 regulation of HDV ribozyme self-cleavage 
@@ -964,13 +1224,19 @@ the group I intron of Tetrahymena thermo-
 phila can modulate the ribozyme self-
 processing activity through base-pairing a 
 functional portion of the ribozyme 
-sequence. 12,73-75 Consistent with this reg-
+sequence. 
+12,73-75 Consistent with this reg-
 ulatory model, flanking sequences origi-
 nated from virus and vector have been 
 shown to affect the HDV ribozyme self-</p>
 
-<p>cleaving activity. 71,76 The upstream 
-sequence 5 0 to the self-cleavage site could 
+<p>cleaving activity. </p>
+
+<p>71,76 </p>
+
+<p>The upstream 
+sequence 5 
+0 to the self-cleavage site could 
 thus be involved in regulating the self-
 cleavage activity of the HDV ribozyme 
 when the self-cleavage activity is not 
@@ -979,22 +1245,34 @@ not readily available. That is, alternative
 structures formed co-transcriptionally and 
 being mutually exclusive to the active con-
 formation could potentially temporarily 
-adjust the HDV ribozyme activity. 12 This 
+adjust the HDV ribozyme activity. 
+12 This 
 would require a thorough investigation of 
 the co-transcriptional folding kinetics of 
-the HDV ribozyme incorporating the 5 0 
-upstream sequence. 13 Here, we summarise 
+the HDV ribozyme incorporating the 5 </p>
+
+<p>0 </p>
+
+<p>upstream sequence. 
+13 Here, we summarise 
 the findings in one inhibitory and one per-
 missive structure for the HDV ribozyme 
-self-cleaving activity. 12 </p>
+self-cleaving activity. </p>
+
+<p>12 </p>
 
 <p>Active structure 
 Active conformation consists of 5 stems: 
-P1, P1.1, P2, P3, P4. 64 (Fig. 3) 
+P1, P1.1, P2, P3, P4. </p>
+
+<p>64 </p>
+
+<p>(Fig. 3) 
 The active double-pseudo-knotted 
 structure assumes a nested structure fold-
 ing the active site inside a catalytic cleft to 
-shield it against the solvents. 64 Coaxial 
+shield it against the solvents. 
+64 Coaxial 
 stacking occurs among P1, P1.1 and P4; </p>
 
 <p>Figure 4. Schematic drawing for SAM riboswitch. For both RNA structures, the stem of the terminator is colored in red, and the stem of the anti-anti-ter-
@@ -1006,23 +1284,32 @@ Volume 12 Issue 1
 RNA Biology </p>
 
 <p>P2 and P3 share another stack parallel to 
-the aforementioned stack. 64 Both pseudo-
-knots are required for cleavage. 64 The 
+the aforementioned stack. 
+64 Both pseudo-
+knots are required for cleavage. 
+64 The 
 composition of helix P1 can be modulated 
 without affecting the activity as long as 
 the length, base-pairing potential and the 
-G1*U37 wobble base pair are intact. 64 
-Helix P1.1 consists of only two base pairs, 
+G1*U37 wobble base pair are intact. </p>
+
+<p>64 </p>
+
+<p>Helix P1.1 consists of only two base pairs, 
 but it is critical for rendering the ribozyme 
 into its correct 3D conformation, espe-
 cially the active site responsible for cleav-
-age activity. 64 Mutations breaking the 
+age activity. 
+64 Mutations breaking the 
 P1.1 stem result in a significantly reduced 
-ribozyme activity. 64,77,78 The active con-
+ribozyme activity. 
+64,77,78 The active con-
 formation of the genomic HDV ribozyme 
 has been examined by X-ray crystallogra-
 phy, ribonuclease probing and site-specific 
-mutagenesis. 64 </p>
+mutagenesis. </p>
+
+<p>64 </p>
 
 <p>Structure preventing self-cleavage 
 The inhibitory structure consists of Alt1, 
@@ -1030,53 +1317,75 @@ Alt2 and Alt3
 Due to the rapid self-cleavage of the 
 HDV ribozyme, the ribonuclease </p>
 
-<p>experiments were performed on the 3 0 
-self-cleavage product rather than the pre-
-cursor. 72 An extended transcript extending 
+<p>experiments were performed on the 3 </p>
+
+<p>0 </p>
+
+<p>self-cleavage product rather than the pre-
+cursor. 
+72 An extended transcript extending 
 from 30 nt upstream of the cleavage site to 
-15 nt downstream of the 3 0 -end, denoted 
+15 nt downstream of the 3 
+0 -end, denoted 
 as ¡30/99 RNA, was found to have 
-extremely diminished activity. 12 The 
+extremely diminished activity. 
+12 The 
 flanking sequence kinetically traps the 
 ribozyme during transcription and results 
 in a slow reaction rate, which can be 
 improved by the addition of heat and 
 denaturants to facilitate the formation of 
-the active conformation. 12,71,72 
-Alt1, Alt2 and Alt3 disrupt the P1.1, 
+the active conformation. </p>
+
+<p>12,71,72 </p>
+
+<p>Alt1, Alt2 and Alt3 disrupt the P1.1, 
 P2 and P3 stems in the active conforma-
 tion, as revealed by the biochemical, 
 computational, and mutational studies 
 conducted by Chadalavada et al. (2000); 
 in contrast, P1 and P4 remain the native 
-conformation. 12 P2 is proposed to form 
+conformation. 
+12 P2 is proposed to form 
 prior to the remaining HDV ribozyme 
 and activate both genomic and antige-
 nomic ribozyme, which may explain the 
-resultant inactive conformation. 12,79,80 </p>
+resultant inactive conformation. </p>
+
+<p>12,79,80 </p>
 
 <p>Alt1 is a 10-bp LDI formed between an 
 upstream inhibitory stretch (nt ¡25/-15 
 related to the cleavage site) and the 
-downstream stretch (nt 76/86). 12,81,82 
-Alt2 is an interaction between upstream 
+downstream stretch (nt 76/86). </p>
+
+<p>12,81,82 </p>
+
+<p>Alt2 is an interaction between upstream 
 flanking sequence and the ribozyme, and 
 Alt3 is a non-native ribozyme-ribozyme 
-interaction. 12 </p>
+interaction. </p>
+
+<p>12 </p>
 
 <p>Experimental evidence 
 Three experimental approaches provide 
 evidence for the inhibitory secondary 
-structure. 12 Firstly, this extended tran-
+structure. 
+12 Firstly, this extended tran-
 script was directly probed via ribonu-
 cleases due to its slow self-cleaving rate, 
 and the cleavage results were used to con-
 strain the structural prediction by MFOLD 
 3.0, yielding the structure shown in Fig-
-ure 7. 12 Secondly, a series of DNA 
+ure 7. 
+12 Secondly, a series of DNA 
 oligomers were used to rescue the ribo-
-zyme activity of this inactive transcript. 12 
-Among the oligomers, AS1 anneals to the 
+zyme activity of this inactive transcript. </p>
+
+<p>12 </p>
+
+<p>Among the oligomers, AS1 anneals to the 
 entire upstream inhibitory stretch of Alt1, 
 raising the reactivity rate by 2700-to </p>
 
@@ -1145,7 +1454,9 @@ SAM riboswitch, the structure included is the SAM-bound structure. Since the lev
 Levivirus alignment is shown. Values for the covariation range from ¡2 to 2 and measure the relative frequency of compensatory mutations maintaining 
 the base-pairing potential. A positive covariation implies the presence of compensatory mutations. No. BPs refers to the number of base pairs in the corre-
 sponding structure. Frac. Canonical BPs is the fraction of canonical base pairs in the alignment for the aforementioned structure. No. seqs is the number of 
-sequences in the alignment. Align. length is the length of the gapped alignment in nucleotides. The alignment statistics are calculated using <rs type="software">R-CHIE</rs>. 96 </p>
+sequences in the alignment. Align. length is the length of the gapped alignment in nucleotides. The alignment statistics are calculated using <rs type="software">R-CHIE</rs>. </p>
+
+<p>96 </p>
 
 <p>Table 2. The alignment quality measures for the transient structural features for our alignments. For Trp, the numbers refer to the anti-terminator structure. </p>
 
@@ -1186,32 +1497,40 @@ RNA Biology </p>
 
 <p>20,000-fold; AS2 only partially disrupts 
 Alt1, nevertheless, it still accelerates the 
-reactivity by 14-fold. 12 These two oligom-
+reactivity by 14-fold. 
+12 These two oligom-
 ers have no additive effect since sequester-
 ing either portion of Alt1 is sufficient for 
-disrupting this inhibitory LDI. 12 Thirdly, 
+disrupting this inhibitory LDI. 
+12 Thirdly, 
 mutations were introduced outside the 
 ribozyme to ensure that the observed </p>
 
 <p>ribozyme activity is caused by the stability 
-of Alt1. 12 Single mutations, destabilising 
+of Alt1. 
+12 Single mutations, destabilising 
 Alt1, exhibit 150-fold increase in the reac-
 tivity rate or even co-transcriptional self-
 cleavage; double compensatory mutation, 
 restoring Alt1, has similar reactivity to the 
-inactive RNA transcript. 12 Upon addition 
+inactive RNA transcript. 
+12 Upon addition 
 of AS1, these mutants show similar </p>
 
 <p>reactivity rate to the active ribo-
-zyme. 12 Lastly, Alt1 and Alt 3 
+zyme. 
+12 Lastly, Alt1 and Alt 3 
 are conserved among 21 geno-
-mic isolates. 12 These non-native 
+mic isolates. 
+12 These non-native 
 structures are conserved perhaps 
 due to their potential role in 
 facilitating the formation of the 
 genome rod-like structure 
 which is required for replication 
-and packaging. 12 </p>
+and packaging. </p>
+
+<p>12 </p>
 
 <p>Structure permitting self-
 cleavage 
@@ -1222,28 +1541,36 @@ the self-cleavage of the HDV
 ribozyme is mapped to the nt 
 ¡54/-18 of the RNA transcript 
 using the secondary-structure 
-prediction program <rs type="software">MFOLD</rs>. 12 
-This structure sequesters the 
+prediction program <rs type="software">MFOLD</rs>. </p>
+
+<p>12 </p>
+
+<p>This structure sequesters the 
 inhibitory stretch of nt ¡24/-15 
 from Alt1 in a hairpin P(-1) 
 located upstream of the cleavage 
-site. 12,81,82 This extended RNA 
+site. 
+12,81,82 This extended RNA 
 transcript is demonstrated 
 experimentally to cleave co-
-transcriptionally. 12 P(-1) has 
+transcriptionally. 
+12 P(-1) has 
 bulges allowing G migrating, 
 resulting in a more stable con-
 formation due to the increased 
-structural entropy. 12,83 Hairpin 
+structural entropy. 
+12,83 Hairpin 
 P(-1) does not appear to inter-
 act with the ribozyme domain 
 as the ribozyme has similar self-
 cleaving activity regardless of 
 whether it is activated in trans 
-(AS1 or AS2) or in cis. 83 How-
+(AS1 or AS2) or in cis. 
+83 How-
 ever, the P(-1) motif is not 
 found in the antigenomic 
-sequences, 12 so only genomic 
+sequences, 
+12 so only genomic 
 sequences are assembled in our 
 updated alignment for HDV 
 ribozyme. </p>
@@ -1255,7 +1582,8 @@ via ribonuclease was used to probe the nt
 cursor transcript due to the fast-cleaving 
 nature of this structure, which reveals a 
 local hairpin P(-1) pairing nt ¡54/¡40 
-with ¡18/-30. 12 This structure is consis-
+with ¡18/-30. 
+12 This structure is consis-
 tent with the ss-count values calculated </p>
 
 <p>Figure 5. Arc-plot of Tryptophan operon leader made using the visualisation program <rs type="software">R-CHIE</rs> [96]. The left legend 
@@ -1280,12 +1608,16 @@ RNA Biology </p>
 
 <p>using <rs type="software">MFOLD</rs> which represent 
 the propensity for a nucleotide 
-position to be single-stranded. 12 
-Secondly, evolutionary conser-
+position to be single-stranded. </p>
+
+<p>12 </p>
+
+<p>Secondly, evolutionary conser-
 vation is found in hairpin P(-1) 
 and the linking region between 
 P(-1) and P1 among 21 geno-
-mic HDV RNA isolates. 12 Min-
+mic HDV RNA isolates. 
+12 Min-
 imal sequence variation is also 
 observed in this linking region 
 (nt ¡17/¡1) which is pyrimi-
@@ -1293,33 +1625,45 @@ dine-rich and suspected to melt
 the annealing between the 
 nascent transcript and the tem-
 plate, facilitating the subsequent 
-ribozyme folding. 12 </p>
+ribozyme folding. </p>
+
+<p>12 </p>
 
 <p>Half-life of the structures 
 No direct data exists regard-
 ing the half-life, but the mecha-
 nism proposed for the HDV 
 ribozyme resembles the one uti-
-lised by the group I intron. 12 
-Moreover, in the human HDV-
+lised by the group I intron. </p>
+
+<p>12 </p>
+
+<p>Moreover, in the human HDV-
 like CPEB3 ribozyme, a similar 
 regulatory mechanism involving 
 the flanking sequence was dis-
-covered. 13 As a follow-up study, 
+covered. 
+13 As a follow-up study, 
 an equilibrium model is pro-
 posed comprising two interme-
 diate and the native fold, which 
 is confirmed by mutagenesis 
-and kinetic characterization. 84 In this 
-model, the 5 0 portion of P2 can base-pair 
-with either the native 3 0 portion or non-
+and kinetic characterization. 
+84 In this 
+model, the 5 
+0 portion of P2 can base-pair 
+with either the native 3 
+0 portion or non-
 native ribozyme sequence made of nucleo-
 tides from P1, P3 and single-stranded 
-regions. 84 Given that P2 has a driving role 
+regions. 
+84 Given that P2 has a driving role 
 in the correct folding of the HDV ribo-
 zyme, the direction of the shifting of this 
 equilibrium may explain the resultant 
-ribozyme activity. 84 </p>
+ribozyme activity. </p>
+
+<p>84 </p>
 
 <p>SAM-responsive riboswitch </p>
 
@@ -1327,14 +1671,16 @@ ribozyme activity. 84 </p>
 riboswitch 
 Riboswitches are proposed to be regu-
 latory mechanisms that derive from the 
-RNA world. 85,86 They correspond to 
+RNA world. 
+85,86 They correspond to 
 non-coding RNA structure elements 
 located in the leader sequence of 
 mRNA strands, which selectively bind 
 certain metabolites to regulate the syn-
 thesis of downstream products relevant </p>
 
-<p>to this metabolite. 2-4,11,87 This regula-
+<p>to this metabolite. 
+2-4,11,87 This regula-
 tory response is achieved by the coordi-
 nation 
 between 
@@ -1344,20 +1690,25 @@ metabolite-binding aptamer domain
 and the expression platform which 
 switches between alternative structures 
 upon sensing a change in the aptamer 
-domain when a metabolite binds. 3,4,11 
-The riboswitch can generally assume 
+domain when a metabolite binds. </p>
+
+<p>3,4,11 </p>
+
+<p>The riboswitch can generally assume 
 two mutually-exclusive structures -one 
 metabolite-bound, and one metabolite-
 unbound. This ligand recognition via 
 aptamer can sequentially affect the 
 interaction between the mRNA and the 
 translational or transcriptional appara-
-tus. 88 The structure of the aptamer is 
+tus. 
+88 The structure of the aptamer is 
 typically evolutionarily conserved; for 
 instance, the S-adenosylmethionine 
 (SAM) riboswitch discussed in this 
 paper is well conserved among bacteria 
-species. 11 In SAM riboswitch, S box is 
+species. 
+11 In SAM riboswitch, S box is 
 the aptamer where the coenzyme SAM 
 binds with high affinity, which often </p>
 
@@ -1369,23 +1720,30 @@ allosteric
 change 
 that 
 subsequently terminates the transcrip-
-tion. 11,89 Overall, a riboswitch assigns 
+tion. 
+11,89 Overall, a riboswitch assigns 
 the same mRNA both a sensory and an 
 action role without requiring an inter-
-mediate. 90 This amounts to a speedy 
+mediate. 
+90 This amounts to a speedy 
 and sensitive responsive mechanism that 
 is able to sense the conditions of the 
 cellular environment with an accuracy 
 comparable to mechanisms involving 
-protein factors. 11,90 </p>
+protein factors. </p>
+
+<p>11,90 </p>
 
 <p>Sam-unbound structure 
 If the SAM is unbound, the anti-termi-
 nator sequence can sequester the termina-
 tor sequence to prevent the formation of 
 terminator and the polymerase can prog-
-ress through the downstream gene 11 
-(Fig. 4). The structure without binding of 
+ress through the downstream gene </p>
+
+<p>11 </p>
+
+<p>(Fig. 4). The structure without binding of 
 SAM was derived from in vitro transcrip-
 tion and in-line probing using the first </p>
 
@@ -1398,7 +1756,9 @@ tein translation. See the caption of Figure 5 for more information on arc-plots 
 RNA Biology </p>
 
 <p>251 nt of yitJ gene in B. subtilis as the 
-model. 11,89 </p>
+model. </p>
+
+<p>11,89 </p>
 
 <p>Sam-bound structure 
 Once the SAM is bound to the con-
@@ -1406,29 +1766,40 @@ served core of the aptamer, the anti-termi-
 nator is sequestered by an anti-anti-
 terminator; the terminator sequence is 
 then freed to assume a terminator hairpin 
-to end the transcription. 11,91 </p>
+to end the transcription. </p>
+
+<p>11,91 </p>
 
 <p>Experimental evidence 
 The SAM-bound structure was origi-
 nally derived from the phylogenetic con-
-servation observed in an alignment, 11,89 
-and subsequently verified with disruptive 
+servation observed in an alignment, </p>
+
+<p>11,89 </p>
+
+<p>and subsequently verified with disruptive 
 and compensatory mutations using a 124-
 nt long construct (from leader mRNA of </p>
 
 <p>yitJ gene in B. subtilis) fused with a 
-reporter gene, 11 and later determined by 
-X-ray crystallography. 97 
-The proposed transcriptional termi-
+reporter gene, 
+11 and later determined by 
+X-ray crystallography. </p>
+
+<p>97 </p>
+
+<p>The proposed transcriptional termi-
 nation mechanism upon SAM addition 
 was tested in vitro using the transcrip-
 tion of 11 DNA templates harbouring 
-the S box. 11,86 The percentage of tran-
+the S box. 
+11,86 The percentage of tran-
 scription termination was compared 
 between presence and absence of SAM, 
 which demonstrated increasing tran-
 scription termination upon addition of 
-SAM. 11 Moreover, all structural features 
+SAM. 
+11 Moreover, all structural features 
 involved in the transcription termina-
 tion mechanism (i.e., the anti-termina-
 tor, 
@@ -1438,31 +1809,44 @@ anti-anti-
 terminator) were directly confirmed 
 using disruptive and compensatory </p>
 
-<p>mutations. 11 Such disruptive 
+<p>mutations. </p>
+
+<p>11 </p>
+
+<p>Such disruptive 
 mutations destabilise terminator 
 and anti-terminator individually 
 or both; in comparison, the 
 compensatory mutations restore 
 terminator and anti-terminator 
-individually or simultaneously. 11 
-The corresponding percentage 
+individually or simultaneously. </p>
+
+<p>11 </p>
+
+<p>The corresponding percentage 
 of SAM-induced transcription 
 termination 
 was 
 compared 
-among these mutants. 11 The 
+among these mutants. 
+11 The 
 results show that terminator is 
 required for the mechanism to 
 respond to SAM and anti-termi-
 nator is critical for relieving the 
 transcriptional 
-termination. 11 
-Hence, such mutational analysis 
+termination. </p>
+
+<p>11 </p>
+
+<p>Hence, such mutational analysis 
 supports the functional roles of 
 those proposed structural fea-
 tures participating in the SAM-
 induced transcriptional termina-
-tion mechanism. 11 </p>
+tion mechanism. </p>
+
+<p>11 </p>
 
 <p>Results </p>
 
@@ -1472,13 +1856,18 @@ tures of our alignments in
 Tables 1 and 2. A small multi-
 ple sequence alignment (MSA) 
 from a previous project pub-
-lished by us 14 was used to build 
+lished by us 
+14 was used to build 
 a primary covariance model 
 (CM) using the <rs type="software">INFERNAL</rs> pro-
-gram 92 to search the full align-
-ments in RFAM 1 and the NCBI 
-TAXONOMY BROWSER. 93 In our 
-previous research, 14 these small 
+gram 
+92 to search the full align-
+ments in RFAM 
+1 and the NCBI 
+TAXONOMY BROWSER. 
+93 In our 
+previous research, 
+14 these small 
 MSA were compiled using evolution-
 arily related sequences for these four 
 RNA families, respectively. These small 
@@ -1543,7 +1932,8 @@ Figures 5-8. </p>
 <p>Conclusions </p>
 
 <p>We introduce four RNA families, the 
-Trp operon leader, the Levivirus 5 0 UTR, </p>
+Trp operon leader, the Levivirus 5 
+0 UTR, </p>
 
 <p>the HDV ribozyme, and the Sam 
 riboswitch, with transient struc-
@@ -1556,7 +1946,8 @@ prise transcription regulation
 (Trp operon and SAM ribos-
 witch), self-cleavage (HDV ribo-
 zyme) and translation regulation 
-(Levivirus 5 0 UTR). Moreover, 
+(Levivirus 5 
+0 UTR). Moreover, 
 we show for all four alignments 
 that both the dominant and tran-
 sient structures are evolutionarily 
@@ -1596,7 +1987,8 @@ manual curation and expertise. Ribonu-
 clease probing, for example, of regions 
 embedded in alternative structures may 
 display only minor hits, rendering the 
-interpretation ambiguous. 72 A concerted 
+interpretation ambiguous. 
+72 A concerted 
 effort using a variety of experimental 
 techniques as well as more sophisticated 
 computational analysis tools will thus 
@@ -1619,7 +2011,8 @@ Small Alignment
 A primary covariation model (cm) is 
 constructed using a small good-quality 
 alignment assembled previously by our 
-group; 14 repeat the CM compilation (i.e., 
+group; 
+14 repeat the CM compilation (i.e., 
 build and calibrate in <rs type="software">INFERNAL</rs>-1.1RC2) 
 for each of the alternative structures. If the 
 structure contains pseudo-knots, it must 
@@ -1660,7 +2053,8 @@ alignment generated by the CM with the
 structure with the largest number of base 
 pairs, and the other alternative structural 
 features are mapped onto the same align-
-ment. During curation, <rs type="software">RALEE</rs> 94 is used to 
+ment. During curation, <rs type="software">RALEE</rs> 
+94 is used to 
 visually compare the resultant alignments 
 generated by the covariation models per-
 taining to each alternative structure, and </p>
@@ -1684,7 +2078,8 @@ is used by downloading the branch of the
 tree of life in which this non-coding RNA 
 resides; for SAM riboswitch, we start our 
 curation from an alignment provided by 
-Winkler et al. (2003) 11 and the SAM-
+Winkler et al. (2003) 
+11 and the SAM-
 bound structure is also annotated by 
 them). A sequence is retained only if the 
 searches using the CM of each individual 
@@ -1722,7 +2117,8 @@ ment sequences comprised of the
 overlapped hits are clustered based on </p>
 
 <p>primary sequence conservation via 
-<rs type="software">USEARCH</rs>; 95 different percentage iden-
+<rs type="software">USEARCH</rs>; 
+95 different percentage iden-
 tity cutoffs are tested to obtain around 50 
 to 100 clusters. For each alternative struc-
 ture, a best-fit sequence is chosen for each 

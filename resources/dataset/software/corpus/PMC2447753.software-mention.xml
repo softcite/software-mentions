@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC2447753" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T20:01+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC2447753" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:08+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p><rs type="software">MAGNOLIA</rs>ABSTRACT </p>
 
@@ -97,7 +97,7 @@ doing so, it also predicts the associated reading frame for
 each sequence. If the sequences are classified as protein-
 coding sequences, then the multiple alignment of nucleic 
 acid sequences is built from the hypothetical amino 
-acid sequences using <rs type="software">ClustalW</rs> (13), Dialign2 (10) or 
+acid sequences using <rs type="software">ClustalW</rs> (13), <rs id="software-29" type="software">Dialign</rs><rs corresp="#software-29" type="version-number">2</rs> (10) or 
 <rs type="software">T-coffee</rs> (14). <rs type="software">caRNAc</rs> is for structural RNA genes (15). In 
 this model, the selection pressure tends to preserve the 
 secondary structure of the molecule, and mutations should 
@@ -115,7 +115,7 @@ sequences. Then all pairwise foldings are combined into
 a graph-theoretical structure called the stem graph. 
 Only frequent common stems that correspond to highly 
 connected subgraphs in the stem graph are retained. 
-Gardenia is used to build the multiple alignment for 
+<rs type="software">Gardenia</rs> is used to build the multiple alignment for 
 potential structural RNA sequences. The method takes 
 into account both the nucleic sequence and the putative 
 common secondary structure predicted by <rs type="software">caRNAc</rs>. It 
@@ -296,7 +296,7 @@ classified as coding sequences, among them more than
 99% with the correct reading frame predicted for each 
 sequence. Less than 3% of the families are classified as 
 structural RNA. To estimate the quality of the alignments, 
-we used the sum-of-pairs score (SPS) of the Baliscore 
+we used the sum-of-pairs score (SPS) of the <rs type="software">Baliscore</rs> 
 software (23). The SPS is calculated such that it increases 
 with the number of sequences correctly aligned. We 
 compared <rs type="software">MAGNOLIA</rs> with <rs type="software">ClustalW</rs>, <rs type="software">T-coffee</rs> and 
@@ -319,7 +319,7 @@ reference alignment available in RFAM-RF00005 (21). </p>
 <p>Figure 2. Alignment for Zn-finger in Ran binding proteins (PFAM PF00641). The average length is 92 nt and the average identity percentage is 
 45.1%. Triplets are colorized according to the encoded amino acid. The reference alignment provided in Pandit is almost identical (20). </p>
 
-<p>W16 Nucleic Acids Research, 2008, Vol. 36, Web Server issue </p>
+
 
 <p>accuracy of alignments. This score provides a measure of 
 the conserved secondary structure information contained 
@@ -348,8 +348,8 @@ Recherche Scientifique). </p>
 
 
 
-<p>Table 1. Accuracy percentage for <rs type="software">MAGNOLIA</rs>, <rs type="software">Murlet</rs> and Mlocarna 
-for reference secondary structures of <rs id="software-74" type="software">BRaliBase</rs> <rs corresp="#software-74" type="version-number">II</rs> </p>
+<p>Table 1. Accuracy percentage for <rs type="software">MAGNOLIA</rs>, <rs type="software">Murlet</rs> and <rs type="software">Mlocarna</rs> 
+for reference secondary structures of <rs id="software-75" type="software">BRaliBase</rs> <rs corresp="#software-75" type="version-number">II</rs> </p>
 
 <p>Identity class </p>
 
@@ -463,6 +463,6 @@ percentages, all methods show similar performances. </p>
 
 
 
-<p>W18 Nucleic Acids Research, 2008, Vol. 36, Web Server issue </p>
+
 
 </text></tei>

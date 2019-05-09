@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1007%2Fs11123-009-0142-x" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T19:55+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1007%2Fs11123-009-0142-x" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:02+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>Abstract We show that the monotonicity condition is 
 conceptually important in Stochastic Frontier Analysis 
@@ -41,7 +41,8 @@ empirical applications of SFA present results in which the
 monotonicity condition is not fulfilled, despite its impor-
 tance (Sauer et al. 2006). Although procedures for impos-
 ing monotonicity of frontier functions have been proposed 
-in the literature, they are rarely used 1 -probably because 
+in the literature, they are rarely used 
+1 -probably because 
 these procedures are rather complex and laborious. 
 Therefore, we present a new three-step procedure that is 
 much simpler and can be used also by practitioners. Fur-
@@ -64,7 +65,7 @@ frontier) microeconomic models. These models are frequently
 estimated under restrictions derived from microeconomic theory 
 since three decades (see e.g. Lau 1978). </p>
 
-
+<p>123 </p>
 
 <p>J Prod Anal (2009) 32:217-229 
 DOI 10.1007/s11123-009-0142-x </p>
@@ -148,7 +149,9 @@ sets and hence, decreasing marginal rates of technical
 substitution. However, quasiconcave production functions 
 do not guarantee that the input demand functions are 
 ''everywhere'' differentiable (Dhrymes 1967; Barten et al. 
-1969). 2 </p>
+1969). </p>
+
+<p>2 </p>
 
 <p>Fig. 1 Non-monotone production frontier </p>
 
@@ -156,7 +159,7 @@ do not guarantee that the input demand functions are
 
 <p>2 We thank an anonymous reviewer for pointing this out to us. </p>
 
-<p>218 
+<p> 
 J Prod Anal (2009) 32:217-229 </p>
 
 
@@ -188,7 +191,11 @@ microeconomic theory (e.g. convex input sets) do not hold
 in case of non-quasiconcavity. 
 A function is quasiconcave if </p>
 
-<p>f ðkx 0 þ ð1 À kÞx 00 ; bÞ ! min f ðx 0 ; bÞ; f ðx 00 ; bÞ 
+<p>f ðkx 
+0 þ ð1 À kÞx 
+00 ; bÞ ! min f ðx 
+0 ; bÞ; f ðx 
+00 ; bÞ 
 ð 
 Þ 
 ð 3Þ </p>
@@ -239,12 +246,14 @@ f 2 f 21 f 22 . . . f 2n
 <p>; 
 ð5Þ </p>
 
-<p>where f ij ¼ o 2 f =ðox i ox j Þ is the second derivative of the 
+<p>where f ij ¼ o 
+2 f =ðox i ox j Þ is the second derivative of the 
 production function with respect to the ith and jth input 
 quantity. Because all input quantities are generally non-
 negative (x i ! 08i), a necessary condition for quasiconcavity is </p>
 
-<p>jB 1 j 0; jB 2 j ! 0; jB 3 j 0; . . .; jB n j Á ðÀ1Þ n ! 0; 
+<p>jB 1 j 0; jB 2 j ! 0; jB 3 j 0; . . .; jB n j Á ðÀ1Þ 
+n ! 0; 
 ð6Þ </p>
 
 <p>where </p>
@@ -334,7 +343,8 @@ production frontier </p>
 <p>ln y ¼ ln f ðx; bÞ À u þ v 
 ð8Þ </p>
 
-<p>E½u ¼ z 0 d; 
+<p>E½u ¼ z 
+0 d; 
 ð9Þ </p>
 
 <p>where u C 0 captures technical inefficiency, v captures 
@@ -348,91 +358,104 @@ software package for SFA. We extract the unrestricted </p>
 
 
 
-<p>parameters of the production frontier ^ 
-b and their covari-
-ance matrix ^ 
-R b from the estimation results. 
+<p>parameters of the production frontierb and their covari-
+ance matrixR b from the estimation results. 
 In the second step, we obtain restricted b parameters by 
-a minimum distance estimation 3 : </p>
+a minimum distance estimation 
+3 : </p>
 
-<p>^ 
-b 0 ¼ arg min ^ 
-b 0 À ^ 
-b </p>
+<p>b 
+0 ¼ arg minb 
+0 Àb </p>
 
-<p>
-^ 
-R À1 </p>
+<p>R </p>
 
-<p>b </p>
+<p>À1 
+bb </p>
 
-<p>^ 
-b 0 À ^ 
-b </p>
+<p>0 Àb </p>
 
 <p>
 ð10Þ </p>
 
-<p>s.t. f i ðx; ^ 
-b 0 Þ ! 0 8 i; x 
+<p>s.t. f i ðx;b 
+0 Þ ! 0 8 i; x 
 ð11Þ </p>
 
 <p>This restricted minimization can be easily done by several 
-software packages. 4 The restricted parameters ( ^ 
-b 0 ) are 
+software packages. 
+4 The restricted parameters (b 
+0 ) are 
 asymptotically equivalent to a (successful) restricted one-
 step ML estimation (Koebel et al. 2003). However, it might 
 be problematic to obtain a (consistent) covariance matrix of 
-the restricted parameters ^ 
-R 0 
-b , because standard bootstrap-
+the restricted parametersR </p>
+
+<p>0 </p>
+
+<p>b , because standard bootstrap-
 ping leads to an inconsistent covariance matrix if the 
 restricted parameters are at the boundary of the feasible 
-parameter space (Andrews 2000; Dhrymes 2006). 5 
-Andrews (2000) suggests alternative methods, e.g. rescaled 
+parameter space (Andrews 2000; Dhrymes 2006). </p>
+
+<p>5 </p>
+
+<p>Andrews (2000) suggests alternative methods, e.g. rescaled 
 bootstrapping, that lead to a consistent covariance matrix 
 even in the case of binding inequality constraints. How-
 ever, these alternative methods are only valid under spe-
 cific conditions that need to be checked for our specific 
 case. Thus we leave this interesting topic for future 
-research. 6 
-In the third step, we determine the efficiency estimates 
+research. </p>
+
+<p>6 </p>
+
+<p>In the third step, we determine the efficiency estimates 
 of the firms and the effects of the variables explaining 
 technical inefficiency based on the theoretical consistent 
 production frontier. We estimate the stochastic frontier 
 model </p>
 
-<p>ln y ¼ a 0 þ a 1 ln ~ 
-y À u 0 þ v 0 
-ð12Þ </p>
+<p>ln y ¼ a 0 þ a 1 lnỹ À u 
+0 þ v </p>
 
-<p>E½u 0  ¼ z 0 d 0 ; 
+<p>0 </p>
+
+<p>ð12Þ </p>
+
+<p>E½u 
+0 ¼ z 
+0 d 
+0 ; 
 ð13Þ </p>
 
 <p>where the only ''input variable'' is the ''frontier output'' of 
 each firm calculated with the parameters of the restricted 
-model: ~ 
-y ¼ f ðx; ^ 
-b 0 Þ. Again, this estimation can be done 
+model:ỹ ¼ f ðx;b 
+0 Þ. Again, this estimation can be done 
 with a standard software package for SFA. Parameters a 0 
 and a 1 allow an adjustment of the restricted production 
 frontier, which gets </p>
 
-<p>y ¼ e a 0 f x; ^ 
-b 0 </p>
+<p>y ¼ e 
+a 0 f x;b </p>
 
-<p>a 1 
+<p>0 </p>
+
+<p>
+a 1 
 : 
 ð14Þ </p>
 
 <p>As long as a 1 is positive, this adjustment is a strictly 
 monotonically increasing transformation. Hence, it does 
 not affect the monotonicity and quasiconcavity (Arrow and 
-Enthoven 1961, p. 781) condition of f ðx; ^ 
-b 0 Þ. However, if 
+Enthoven 1961, p. 781) condition of f ðx;b 
+0 Þ. However, if 
 desired, an adjustment can be prevented by restricting a 0 to 
-zero and a 1 to one. 7 Since the estimation of Eq. 12 includes 
-a generated regressor (~ y), the standard errors obtained in 
+zero and a 1 to one. 
+7 Since the estimation of Eq. 12 includes 
+a generated regressor (ỹ), the standard errors obtained in 
 the third step might be biased (see Pagan 1984). 
 The monotonicity restrictions can be checked by sta-
 tistical tests. In a first step, the inequality restrictions in 
@@ -531,27 +554,24 @@ discussed in Appendix 1.
 4 The speed and probability of convergence of the non-linear distance 
 minimization can be increased by providing analytical gradients: </p>
 
-<p>o ^ 
-b 0 À ^ 
-b </p>
+<p>ob 
+0 Àb </p>
 
-<p>
-^ 
-R À1 </p>
+<p>R </p>
 
-<p>b </p>
+<p>À1 
+bb </p>
 
-<p>^ 
-b 0 À ^ 
-b </p>
+<p>0 Àb </p>
 
 <p>. 
-o ^ 
-b 0 ¼ 2 ^ 
-R À1 
-b ð ^ 
-b 0 À ^ 
-bÞ. </p>
+ob 
+0 ¼ 2R </p>
+
+<p>À1 </p>
+
+<p>b ðb 
+0 ÀbÞ. </p>
 
 <p>5 We thank two anonymous reviewers for pointing this out. 
 6 Bayesian MCMC estimations deliver a consistent covariance 
@@ -561,8 +581,7 @@ estimators of our three step procedure can still be useful to specify
 prior distributions and starting values for Bayesian MCMC 
 approaches. We thank Christian Aßmann for this comment. </p>
 
-<p>7 While a 1 can be easily restricted to one by using ðln y À ln ~ 
-yÞ as the 
+<p>7 While a 1 can be easily restricted to one by using ðln y À lnỹÞ as the 
 output variable and using no input variable in Eq. 10, not all software 
 packages allow the restriction of a 0 to zero. However, in our empirical 
 applications, a 0 and a 1 were always very close to zero and one, 
@@ -594,7 +613,9 @@ with </p>
 
 <p>b ¼ b 0 ; b 1 ; b 2 ; . . .; b n ; b 11 ; b 12 ; . . .; b 1n ; b 22 ; . . .; b 2n ; . . .; b nn 
 ð 
-Þ 0 </p>
+Þ </p>
+
+<p>0 </p>
 
 <p>ð21Þ </p>
 
@@ -609,30 +630,33 @@ function are linear in parameters, the quadratic distance
 minimization in (10) can be converted to a usual quadratic 
 programming problem </p>
 
-<p>s Ã ¼ arg min </p>
+<p>s 
+Ã ¼ arg min </p>
 
 <p>s </p>
 
-<p>c 0 s þ 
+<p>c 
+0 s þ 
 1 
 2 
-s 0 Qs; 
+s 
+0 Qs; 
 ð22Þ </p>
 
 <p>s.t. As b; 
 ð23Þ </p>
 
-<p>where s ¼ ^ 
-b 0 À ^ 
-b, c ¼ ð0; . . .; 0Þ, Q ¼ 2 ^ 
-R À1 
-b , A = R, and 
-b ¼ ÀR ^ 
-b. After solving this quadratic programming 
-problem, the restricted b coefficients can be obtained by 
-^ 
-b 0 ¼ s Ã þ ^ 
-b. Hence, this distance minimization can be 
+<p>where s ¼b 
+0 Àb, c ¼ ð0; . . .; 0Þ, Q ¼ 2R </p>
+
+<p>À1 </p>
+
+<p>b , A = R, and 
+b ¼ ÀRb. After solving this quadratic programming 
+problem, the restricted b coefficients can be obtained bŷ 
+b 
+0 ¼ s 
+Ã þb. Hence, this distance minimization can be 
 done easily by any quadratic programming software. 
 As stated in Theorem 1 below, the translog functional 
 form has the advantage that monotonicity can be easily 
@@ -670,7 +694,8 @@ g; x 2 x 1 ; . . .; x p
 sured in logarithmic terms, imposing monotonicity at the 
 vertices of a convex polyhedron in the n-dimensional space 
 of (logarithmic) input quantities ensures that monotonicity 
-is fulfilled in the entire polyhedron. 8 Hence, if monoto-
+is fulfilled in the entire polyhedron. 
+8 Hence, if monoto-
 nicity is imposed at all sample points, the monotonicity 
 condition also is fulfilled on all points on the straight lines 
 between each two sample points (given that input quanti-
@@ -778,44 +803,47 @@ trated in Fig. 4.
 If the unrestricted production frontier (9) is of the 
 translog functional form, the adjusted restricted frontier 
 function (14) is also of the translog form. Its coefficients 
-can be calculated by </p>
+can be calculated bŷ </p>
 
-<p>^ ^ 
-b </p>
-
-<p>0 </p>
-
-<p>0 ¼ ^ a 0 þ ^ a 1 ^ 
-b 0 </p>
+<p>b </p>
 
 <p>0 </p>
+
+<p>0 ¼â 0 þâ 1b </p>
+
+<p>0 
+0 </p>
 
 <p>ð26Þ </p>
 
-<p>^ ^ 
-b </p>
+<p>b </p>
 
 <p>0 </p>
 
-<p>i ¼ ^ a 1 ^ 
-b 0 
-i 8 i [ 0 
+<p>i ¼â 1b </p>
+
+<p>0 </p>
+
+<p>i 8 i [ 0 
 ð27Þ </p>
 
-<p>^ ^ 
-b </p>
+<p>b </p>
 
 <p>0 </p>
 
-<p>ij ¼ ^ a 1 ^ 
-b 0 
-ij 8 i; j; 
+<p>ij ¼â 1b </p>
+
+<p>0 </p>
+
+<p>ij 8 i; j; 
 ð28Þ </p>
 
-<p>where ^ 
-b 0 
-: are the restricted coefficients obtained from the 
-distance minimization (10) and ^ a are the coefficients for 
+<p>whereb </p>
+
+<p>0 </p>
+
+<p>: are the restricted coefficients obtained from the 
+distance minimization (10) andâ are the coefficients for 
 adjusting the restricted production frontier estimated in the 
 final stochastic frontier estimation (12). </p>
 
@@ -824,7 +852,8 @@ final stochastic frontier estimation (12). </p>
 <p>We demonstrate this method using panel data collected 
 from 43 smallholder rice producers in the Tarlac region of 
 the Philippines from 1990 to 1997. This data set is published 
-as a supplement to Coelli et al. (2005). 9 The data include 
+as a supplement to Coelli et al. (2005). 
+9 The data include 
 one output (tons of freshly threshed rice) and three inputs: 
 area planted (in hectares), labour used (in man-days of 
 family and hired labour), and fertilizer used (in kg of active 
@@ -948,18 +977,32 @@ J Prod Anal (2009) 32:217-229 </p>
 
 
 
-<p>packages ''frontier'' (Coelli and <rs corresp="#software-9" type="creator">Henningsen</rs> 2009), ''<rs id="software-9" type="software">mic-
-Econ</rs>'' (Henningsen 2008), and ''<rs id="software-6" type="software">quadprog</rs>'' (<rs corresp="#software-6" type="creator">Turlach and Weingessel</rs> 2007). The commands that have been used for 
+<p>packages ''frontier'' (Coelli and <rs corresp="#software-10" type="creator">Henningsen</rs> 2009), ''<rs id="software-10" type="software">mic-
+Econ</rs>'' (Henningsen 2008), and ''<rs id="software-11" type="software">quadprog</rs>'' (<rs corresp="#software-11" type="creator">Turlach and Weingessel</rs> 2007). The commands that have been used for 
 this analysis are available in Appendix 3. 
 The estimation results of the unrestricted stochastic 
-frontier production function are presented in Table 1. 10 
-The b and d coefficients are defined as before, r 2 is the 
-total error variance (r 2 
-u þ r 2 
-v ), and c is the proportion of the 
+frontier production function are presented in Table 1. </p>
+
+<p>10 </p>
+
+<p>The b and d coefficients are defined as before, r 
+2 is the 
+total error variance (r </p>
+
+<p>2 </p>
+
+<p>u þ r </p>
+
+<p>2 </p>
+
+<p>v ), and c is the proportion of the 
 variance of technical inefficiency in the total error variance 
-(r 2 
-u =r 2 ). The monotonicity condition is violated at 39 out 
+(r </p>
+
+<p>2 </p>
+
+<p>u =r 
+2 ). The monotonicity condition is violated at 39 out 
 of 344 observations and quasiconcavity is not fulfilled at 
 four observations. While the education of the household 
 head has no significant influence on technical efficiency, 
@@ -995,7 +1038,11 @@ production frontier are almost identical (compare columns
 and the proportion of ''bantog'' (upland) fields on technical 
 efficiency are rather similar to the unrestricted model. The 
 imposition of the monotonicity restriction caused an increase 
-of the total error variance (r 2 ) from around 0.41 to 0.46. In 
+of the total error variance (r </p>
+
+<p>2 </p>
+
+<p>) from around 0.41 to 0.46. In 
 contrast, the proportion of the variance of technical ineffi-
 ciency in the total error variance (c) does not change much. 
 We test the monotonicity restrictions by a Wald test and 
@@ -1079,8 +1126,11 @@ d 2
 0.5914 
 -1.8134 
 0.0707 
-r 2 
-0.4089 
+r </p>
+
+<p>2 </p>
+
+<p>0.4089 
 0.1720 
 2.3771 
 0.0180 
@@ -1097,81 +1147,91 @@ diff
 diff/std.err 
 adj.coef </p>
 
-<p>b 0 </p>
+<p>b </p>
 
-<p>0 </p>
+<p>0 
+0 </p>
 
 <p>-4.8927 
 2.6619 
 1.5753 
 -4.8918 
-b 0 </p>
+b </p>
 
-<p>1 </p>
+<p>0 
+1 </p>
 
 <p>-0.9999 
 1.0887 
 1.3935 
 -0.9998 
-b 0 </p>
+b </p>
 
-<p>2 </p>
+<p>0 
+2 </p>
 
 <p>1.8159 
 -1.2575 
 -1.5811 
 1.8157 
-b 0 </p>
+b </p>
 
-<p>3 </p>
+<p>0 
+3 </p>
 
 <p>0.6851 
 -0.1040 
 -0.1900 
 0.6850 
-b 0 </p>
+b </p>
 
-<p>11 </p>
+<p>0 
+11 </p>
 
 <p>-0.1918 
 0.2055 
 0.9603 
 -0.1918 
-b 0 </p>
+b </p>
 
-<p>12 </p>
+<p>0 
+12 </p>
 
 <p>0.3323 
 -0.2506 
 -1.4091 
 0.3323 
-b 0 </p>
+b </p>
 
-<p>13 </p>
+<p>0 
+13 </p>
 
 <p>0.0168 
 -0.0260 
 -0.1838 
 0.0168 
-b 0 </p>
+b </p>
 
-<p>22 </p>
+<p>0 
+22 </p>
 
 <p>-0.2431 
 0.3216 
 1.1674 
 -0.2430 
-b 0 </p>
+b </p>
 
-<p>23 </p>
+<p>0 
+23 </p>
 
 <p>-0.1275 
 0.0002 
 0.0013 
 -0.1275 
-b 0 </p>
+b </p>
 
-<p>33 </p>
+<p>0 
+33 </p>
 
 <p>0.0217 
 0.0246 
@@ -1195,24 +1255,29 @@ a 1
 0.0190 
 52.5687 
 0.0000 
-d 0 </p>
+d </p>
 
-<p>1 </p>
+<p>0 
+1 </p>
 
 <p>-0.0231 
 0.0571 
 -0.4045 
 0.6861 
-d 0 </p>
+d </p>
 
-<p>2 </p>
+<p>0 
+2 </p>
 
 <p>-1.1885 
 0.6733 
 -1.7653 
 0.0784 
-r 2 
-0.4620 
+r </p>
+
+<p>2 </p>
+
+<p>0.4620 
 0.2039 
 2.2656 
 0.0241 
@@ -1240,7 +1305,7 @@ ted models are contrasted in Fig. 8. The average technical </p>
 <p>efficiencies of the unrestricted (0.7749) and the restricted 
 model (0.7744) are almost identical and most individual 
 technical efficiencies of the restricted and unrestricted 
-models are very similar (i.e. lying on the 45° line). How-
+models are very similar (i.e. lying on the 45°line). How-
 ever, a few technical efficiencies are considerably smaller 
 in the theoretically consistent model, where the observa-
 tions with the largest differences in the efficiency estimates 
@@ -1356,25 +1421,31 @@ medium, provided the original author(s) and source are credited. </p>
 <p>It also is possible to include the d parameters in the dis-
 tance minimization (10, 11): </p>
 
-<p>^ h 0 ¼ arg min ^ h 0 À ^ h </p>
+<p>h 
+0 ¼ arg minĥ 
+0 Àĥ </p>
 
-<p>
-^ 
-R À1 </p>
+<p>R </p>
 
-<p>h </p>
+<p>À1 
+hĥ </p>
 
-<p>^ h 0 À ^ h </p>
+<p>0 Àĥ </p>
 
 <p>
 ; 
 ð29Þ </p>
 
-<p>s.t. f i ðx; ^ h 0 Þ ! 0 8 i; x; 
+<p>s.t. f i ðx;ĥ 
+0 Þ ! 0 8 i; x; 
 ð30Þ </p>
 
-<p>where h ¼ ðb 0 ; d 0 Þ 0 . This approach also adjusts the d coef-
-ficients, but both approaches result in identical restricted b </p>
+<p>where h ¼ ðb 
+0 ; d 
+0 Þ 
+0 . This approach also adjusts the d coef-</p>
+
+<p>ficients, but both approaches result in identical restricted b </p>
 
 <p>coefficients (see proof below). We suggest including only 
 the b coefficients in this minimization because d coeffi-
@@ -1383,115 +1454,172 @@ tion function are obtained in the third step anyway. </p>
 
 <p>Distance minimization of the b coefficients </p>
 
-<p>b 0 ¼ arg min </p>
+<p>b 
+0 ¼ arg min </p>
 
-<p>b 0 </p>
+<p>b </p>
 
-<p>b 0 À b 
+<p>0 </p>
+
+<p>b 
+0 À b 
 À 
-Á 0 R À1 
-11 b 0 À b 
+Á 0 R </p>
+
+<p>À1 </p>
+
+<p>11 b 
+0 À b 
 À 
 Á 
 ; 
 ð31Þ </p>
 
-<p>s.t. Rb 0 ! r 
+<p>s.t. Rb 
+0 ! r 
 ð32Þ </p>
 
 <p>Lagrangian function </p>
 
-<p>L ¼ b 0 À b 
+<p>L ¼ b 
+0 À b 
 À 
-Á 0 R À1 
-11 b 0 À b 
+Á 0 R </p>
+
+<p>À1 </p>
+
+<p>11 b 
+0 À b 
 À 
 Á 
-þ l 0 r À Rb 0 
-À 
+þ l 
+0 r À Rb </p>
+
+<p>0 </p>
+
+<p>À 
 Á 
 ð33Þ </p>
 
 <p>Kuhn-Tucker conditions </p>
 
 <p>oL 
-ob 0 ¼ 2R À1 
-11 b 0 À b 
+ob </p>
+
+<p>0 </p>
+
+<p>¼ 2R </p>
+
+<p>À1 </p>
+
+<p>11 b 
+0 À b 
 À 
 Á 
-À R 0 l ¼ 0 
+À R 
+0 l ¼ 0 
 ð34Þ </p>
 
 <p>l ! 0 
 ð35Þ </p>
 
-<p>r À Rb 0 0 
+<p>r À Rb </p>
+
+<p>0 </p>
+
+<p>0 
 ð36Þ </p>
 
-<p>l r À Rb 0 
-À 
+<p>l r À Rb </p>
+
+<p>0 </p>
+
+<p>À 
 Á 
 ¼ 0 
 ð37Þ </p>
 
 <p>Distance minimization of the b and d coefficients </p>
 
-<p>b 0 
-d 0 </p>
+<p>b </p>
+
+<p>0 </p>
+
+<p>d </p>
+
+<p>0 </p>
 
 <p>
 ¼ arg min </p>
 
-<p>b 0 ;d 0 </p>
+<p>b 
+0 ;d </p>
 
-<p>b 0 À b 
-d 0 À d </p>
+<p>0 </p>
+
+<p>b 
+0 À b 
+d 
+0 À d </p>
 
 <p>
 0 R 11 R 12 </p>
 
-<p>R 0 </p>
+<p>R </p>
 
-<p>12 </p>
+<p>0 
+12 </p>
 
 <p>R 22 </p>
 
-<p>! À1 b 0 À b </p>
+<p>! À1 b 
+0 À b 
+d 
+0 À d </p>
 
-<p>d 0 À d </p>
 
 
-
-<p>; </p>
+<p>
+; </p>
 
 <p>ð38Þ </p>
 
-<p>s.t. Rb 0 ! r 
+<p>s.t. Rb 
+0 ! r 
 ð39Þ </p>
 
 <p>Lagrangian function </p>
 
 <p>L ¼ 
-b 0 À b 
-d 0 À d </p>
+b 
+0 À b 
+d 
+0 À d </p>
 
 <p>
 0 X 11 X 12 </p>
 
-<p>X 0 </p>
+<p>X </p>
 
-<p>12 </p>
+<p>0 
+12 </p>
 
 <p>X 22 </p>
 
 <p>! 
-b 0 À b 
-d 0 À d </p>
+b 
+0 À b 
+d 
+0 À d </p>
 
 
 
-<p>þ l 0 r À Rb 0 
-À 
+<p>þ l 
+0 r À Rb </p>
+
+<p>0 </p>
+
+<p>À 
 Á </p>
 
 <p>ð40Þ </p>
@@ -1501,22 +1629,32 @@ d 0 À d </p>
 <p>oL </p>
 
 <p>o 
-b 0 
-d 0 </p>
+b </p>
+
+<p>0 </p>
+
+<p>d </p>
+
+<p>0 </p>
 
 <p>¼ 2 
 R 11 R 12 
-R 0 
-12 R 22 </p>
+R </p>
 
-<p>! À1 b 0 À b </p>
+<p>0 </p>
 
-<p>d 0 À d </p>
+<p>12 R 22 </p>
+
+<p>! À1 b 
+0 À b 
+d 
+0 À d </p>
 
 
 
 <p>þ 
-ÀR 0 l 
+ÀR 
+0 l 
 0 </p>
 
 
@@ -1528,33 +1666,52 @@ R 0
 <p>l ! 0 
 ð42Þ </p>
 
-<p>r À Rb 0 0 
+<p>r À Rb </p>
+
+<p>0 </p>
+
+<p>0 
 ð43Þ </p>
 
-<p>l r À Rb 0 
-À 
+<p>l r À Rb </p>
+
+<p>0 </p>
+
+<p>À 
 Á 
 ¼ 0 
 ð44Þ </p>
 
-<p>Equation 41 can be split into 
-oL 
-ob 0 ¼ 2X 11 b 0 À b </p>
+<p>Equation 41 can be split into </p>
 
-<p>À 
-Á 
-þ 2X 12 d 0 À d 
+<p>oL 
+ob </p>
+
+<p>0 </p>
+
+<p>¼ 2X 11 b 
+0 À b 
 À 
 Á 
-À R 0 l ¼ 0 
+þ 2X 12 d 
+0 À d 
+À 
+Á 
+À R 
+0 l ¼ 0 
 ð45Þ </p>
 
 <p>oL 
-od 0 ¼ 2X 21 b 0 À b </p>
+od </p>
 
-<p>À 
+<p>0 </p>
+
+<p>¼ 2X 21 b 
+0 À b 
+À 
 Á 
-þ 2X 22 d 0 À d 
+þ 2X 22 d 
+0 À d 
 À 
 Á 
 ¼ 0 
@@ -1588,19 +1745,20 @@ technical efficiency calculated from the restricted model </p>
 Note: the unfilled circles indicate observations with monotonicity 
 violated in the unrestrestricted model </p>
 
-<p>J Prod Anal (2009) 32:217-229 
-225 </p>
+<p>J Prod Anal (2009) 32:217-229 </p>
 
-
-
-<p>X 11 X 12 
+<p>
+X 11 X 12 
 X 22 X 22 </p>
 
 <p>! 
 ¼ 
 R 11 R 12 
-R 0 
-12 R 22 </p>
+R </p>
+
+<p>0 </p>
+
+<p>12 R 22 </p>
 
 <p>! À1 </p>
 
@@ -1611,9 +1769,10 @@ X 21 X 22 </p>
 <p>! 
 ¼ 
 R 11 R 12 
-R 0 </p>
+R </p>
 
-<p>12 </p>
+<p>0 
+12 </p>
 
 <p>R 22 </p>
 
@@ -1621,147 +1780,274 @@ R 0 </p>
 ð47Þ </p>
 
 <p>¼ 
-R À1 
-11 þ R À1 
-11 R 12 Q À1 R 0 
-12 R À1 </p>
+R </p>
 
-<p>11 </p>
+<p>À1 </p>
 
-<p>ÀR À1 
-11 R 12 Q À1 
-ÀQ À1 R 0 
-12 R À1 </p>
+<p>11 þ R </p>
 
-<p>11 </p>
+<p>À1 </p>
 
-<p>Q À1 </p>
+<p>11 R 12 Q 
+À1 R </p>
+
+<p>0 </p>
+
+<p>12 R </p>
+
+<p>À1 
+11 </p>
+
+<p>ÀR </p>
+
+<p>À1 </p>
+
+<p>11 R 12 Q </p>
+
+<p>À1 </p>
+
+<p>ÀQ 
+À1 R </p>
+
+<p>0 </p>
+
+<p>12 R </p>
+
+<p>À1 
+11 </p>
+
+<p>Q </p>
+
+<p>À1 </p>
 
 <p>! 
 ð48Þ </p>
 
 <p>¼ 
-P À1 
-ÀP À1 R 12 R À1 </p>
+P </p>
 
-<p>22 </p>
+<p>À1 </p>
 
-<p>ÀR À1 
-22 R 0 
-12 P À1 R À1 
-22 þ R À1 
-22 R 0 
-12 P À1 R 12 R À1 </p>
+<p>ÀP 
+À1 R 12 R </p>
 
-<p>22 </p>
+<p>À1 
+22 </p>
+
+<p>ÀR </p>
+
+<p>À1 </p>
+
+<p>22 R </p>
+
+<p>0 </p>
+
+<p>12 P 
+À1 R </p>
+
+<p>À1 </p>
+
+<p>22 þ R </p>
+
+<p>À1 </p>
+
+<p>22 R </p>
+
+<p>0 </p>
+
+<p>12 P 
+À1 R 12 R </p>
+
+<p>À1 
+22 </p>
 
 <p>! 
 ð49Þ </p>
 
-<p>with Q = R 22 -R 12 
-0 R 11 R 12 and P ¼ R 11 À R 12 R À1 
-22 R 0 </p>
+<p>with Q = R 22 -R 12 </p>
 
-<p>12 </p>
+<p>0 </p>
+
+<p>R 11 R 12 and P ¼ R 11 À R 12 R </p>
+
+<p>À1 </p>
+
+<p>22 R </p>
+
+<p>0 
+12 </p>
 
 <p>(Harville 1997, p. 99). From Eq. 46 we get </p>
 
-<p>d 0 À d 
+<p>d 
+0 À d 
 À 
 Á 
-¼ ÀX À1 
-22 X 21 b 0 À b 
+¼ ÀX </p>
+
+<p>À1 </p>
+
+<p>22 X 21 b 
+0 À b 
 À 
 Á 
 ð50Þ </p>
 
 <p>Substituting this into (45) and applying (48) we get 
 oL 
-ob 0 ¼ 2X 11 b 0 À b </p>
+ob </p>
 
-<p>À 
-Á 
-À 2X 12 X À1 
-22 X 21 b 0 À b 
+<p>0 </p>
+
+<p>¼ 2X 11 b 
+0 À b 
 À 
 Á 
-À R 0 l ¼ 0 </p>
+À 2X 12 X </p>
+
+<p>À1 </p>
+
+<p>22 X 21 b 
+0 À b 
+À 
+Á 
+À R 
+0 l ¼ 0 </p>
 
 <p>ð51Þ </p>
 
-<p>¼ 2 X 11 À X 12 X À1 
-22 X 21 
+<p>¼ 2 X 11 À X 12 X </p>
+
+<p>À1 </p>
+
+<p>22 X 21 </p>
+
+<p>À 
+Á 
+b 
+0 À b 
 À 
 Á 
-b 0 À b 
-À 
-Á 
-À R 0 l ¼ 0 
+À R 
+0 l ¼ 0 
 ð52Þ </p>
 
 <p>¼ 2 </p>
 
-<p>R À1 
-11 þ R À1 
-11 R 12 Q À1 R 0 
-12 R À1 </p>
+<p>R </p>
 
-<p>11 </p>
+<p>À1 </p>
 
-<p>À R À1 
-11 R 12 Q À1 QQ À1 R 0 
-12 R À1 </p>
+<p>11 þ R </p>
 
-<p>11 </p>
+<p>À1 </p>
+
+<p>11 R 12 Q 
+À1 R </p>
+
+<p>0 </p>
+
+<p>12 R </p>
+
+<p>À1 
+11 </p>
+
+<p>À R </p>
+
+<p>À1 </p>
+
+<p>11 R 12 Q 
+À1 QQ 
+À1 R </p>
+
+<p>0 </p>
+
+<p>12 R </p>
+
+<p>À1 
+11 </p>
 
 <p>
-b 0 À b </p>
+b 
+0 À b </p>
 
-<p>À R 0 l ¼ 0 </p>
+<p>À R 
+0 l ¼ 0 
+ð53Þ </p>
 
-<p>ð53Þ </p>
+<p>¼ 2R </p>
 
-<p>¼ 2R À1 
-11 b 0 À b 
+<p>À1 </p>
+
+<p>11 b 
+0 À b 
 À 
 Á 
-À R 0 l ¼ 0 
+À R 
+0 l ¼ 0 
 ð54Þ </p>
 
 <p>From Eq. 54 we get </p>
 
-<p>b 0 À b 
+<p>b 
+0 À b 
 À 
 Á 
 ¼ 
 1 
 2 
-R 11 R 0 l 
+R 11 R 
+0 l 
 ð55Þ </p>
 
 <p>Substituting this into (46) and applying (49) we get </p>
 
 <p>oL 
-od 0 ¼ X 21 R 11 R 0 l þ 2X 22 d 0 À d </p>
+od </p>
 
-<p>À 
+<p>0 </p>
+
+<p>¼ X 21 R 11 R 
+0 l þ 2X 22 d 
+0 À d 
+À 
 Á 
 ¼ 0 
 ð56Þ </p>
 
-<p>¼ ÀR À1 
-22 R 0 
-12 P À1 R 11 R 0 l þ 2 R À1 
-22 þ R À1 
-22 R 0 
-12 P À1 R 12 R À1 </p>
+<p>¼ ÀR </p>
 
-<p>22 </p>
+<p>À1 </p>
+
+<p>22 R </p>
+
+<p>0 </p>
+
+<p>12 P 
+À1 R 11 R 
+0 l þ 2 R </p>
+
+<p>À1 </p>
+
+<p>22 þ R </p>
+
+<p>À1 </p>
+
+<p>22 R </p>
+
+<p>0 </p>
+
+<p>12 P 
+À1 R 12 R </p>
+
+<p>À1 
+22 </p>
 
 <p>À 
 Á </p>
 
-<p>d 0 À d 
+<p>d 
+0 À d 
 À 
 Á 
 ¼ 0 
@@ -1771,27 +2057,60 @@ od 0 ¼ X 21 R 11 R 0 l þ 2X 22 d 0 À d </p>
 re-written as </p>
 
 <p>oL 
-ob 0 ¼ 2R À1 
-11 b 0 À b 
+ob </p>
+
+<p>0 </p>
+
+<p>¼ 2R </p>
+
+<p>À1 </p>
+
+<p>11 b 
+0 À b 
 À 
 Á 
-À R 0 l ¼ 0 
+À R 
+0 l ¼ 0 
 ð58Þ </p>
 
 <p>oL 
-od 0 ¼ À R À1 
-22 R 0 
-12 P À1 R 11 R 0 l þ 2 R À1 
-22 þ R À1 
-22 R 0 
-12 P À1 R 12 R À1 </p>
+od </p>
 
-<p>22 </p>
+<p>0 </p>
+
+<p>¼ À R </p>
+
+<p>À1 </p>
+
+<p>22 R </p>
+
+<p>0 </p>
+
+<p>12 P 
+À1 R 11 R 
+0 l þ 2 R </p>
+
+<p>À1 </p>
+
+<p>22 þ R </p>
+
+<p>À1 </p>
+
+<p>22 R </p>
+
+<p>0 </p>
+
+<p>12 P 
+À1 R 12 R </p>
+
+<p>À1 
+22 </p>
 
 <p>À 
 Á </p>
 
-<p>d 0 À d 
+<p>d 
+0 À d 
 À 
 Á 
 ¼ 0 
@@ -1800,11 +2119,18 @@ od 0 ¼ À R À1
 <p>l ! 0 
 ð60Þ </p>
 
-<p>r À Rb 0 0 
+<p>r À Rb </p>
+
+<p>0 </p>
+
+<p>0 
 ð61Þ </p>
 
-<p>l r À Rb 0 
-À 
+<p>l r À Rb </p>
+
+<p>0 </p>
+
+<p>À 
 Á 
 ¼ 0 
 ð62Þ </p>
@@ -1812,8 +2138,13 @@ od 0 ¼ À R À1
 <p>Because the Kuhn-Tucker conditions (58) and (60-62) are 
 identical to the conditions (34-37) and Eq. 59 does not </p>
 
-<p>contain a b 0 , both minimization approaches result in the 
-same values for b 0 . </p>
+<p>contain a b </p>
+
+<p>0 </p>
+
+<p>, both minimization approaches result in the 
+same values for b 
+0 . </p>
 
 <p>Appendix 2: Proof of Theorem 1 </p>
 
@@ -1877,7 +2208,7 @@ of f ðx; bÞ and gðw; bÞ always have the same sign: </p>
 
 <p>sgn f i ðx; bÞ 
 ½ 
-¼sgn 
+¼sgn 
 f ðx; bÞ 
 x i 
 b i þ 
@@ -1905,11 +2236,11 @@ X n </p>
 
 <p>¼ sgn g i ðln x; bÞ 
 ½ 
-¼sgn g i ðw; bÞ 
-½ 
- </p>
+¼sgn g i ðw; bÞ 
+½ </p>
 
-<p>8 b; w ¼ ln x; and i 2 1; . . .; n 
+<p>
+8 b; w ¼ ln x; and i 2 1; . . .; n 
 f 
 g </p>
 
@@ -1951,17 +2282,7 @@ J Prod Anal (2009) 32:217-229 </p>
 
 
 
-<p>Commands to display the results </p>
 
-<p>The following commands can be used to display the esti-
-mation results. </p>
-
-<p>Unrestrcited stochastic frontier estimation (step 1) </p>
-
-<p>Minimum distance estimation (step 2) </p>
-
-<p>J Prod Anal (2009) 32:217-229 
-227 </p>
 
 
 

@@ -65,39 +65,34 @@ public class SoftwareTrainerRunner {
 
         RunType mode = RunType.getRunType(Integer.parseInt(args[0]));
         if ((mode == RunType.SPLIT) && (args.length < 5)) {
-            throw new IllegalStateException(
-                    USAGE);
+            throw new IllegalStateException(USAGE);
         }
 
         String path2GbdHome = SoftwareProperties.get("grobid.home");
+        String grobidHome = args[2];
+        if (grobidHome != null) {
+            path2GbdHome = grobidHome;
+        }
         System.out.println("path2GbdHome=" + path2GbdHome);
         initProcess(path2GbdHome);
 
         Double split = 0.0;
-
         boolean breakParams = false;
         double epsilon = 0.000001;
         int window = 20;
         int nbMaxIterations = 0;
 
         for (int i = 0; i < args.length; i++) {
-            if (args[i].equals("-t")) {
-                if (i + 1 == args.length) {
-                    throw new IllegalStateException("Missing Threads number. ");
-                }
-                GrobidProperties.getInstance().setNBThreads(args[i + 1]);
-            } else if (args[i].equals("-s")) {
-                if (i + 1 == args.length) {
-                    throw new IllegalStateException("Missing split ratio value. ");
-                }
-                String splitRatio = args[i + 1];
+            if (i == 4) {
+                GrobidProperties.getInstance().setNBThreads(args[i]);
+            } else if (i == 3) {
+                String splitRatio = args[i];
                 try {
-                    split = Double.parseDouble(args[i + 1]);
+                    split = Double.parseDouble(args[i]);
                 } catch (Exception e) {
-                    throw new IllegalStateException("Invalid split value: " + args[i + 1]);
+                    throw new IllegalStateException("Invalid split value: " + args[i]);
                 }
-
-            } else if (args[i].equals("-b")) {
+            } /*else if (args[i].equals("-b")) {
                 if ((mode == RunType.TRAIN) && (args.length >= 7)) {
                     breakParams = true;
                     epsilon = Double.parseDouble(args[i + 1]);
@@ -105,18 +100,17 @@ public class SoftwareTrainerRunner {
                     nbMaxIterations = Integer.parseInt(args[i + 3]);
                 } else
                     throw new IllegalStateException(USAGE);
-            }
+            }*/
         }
 
         if (path2GbdHome == null) {
-            throw new IllegalStateException(
-                    USAGE);
+            throw new IllegalStateException(USAGE);
         }
 
         SoftwareTrainer trainer = new SoftwareTrainer();
 
-        if (breakParams)
-            trainer.setParams(epsilon, window, nbMaxIterations);
+        /*if (breakParams)
+            trainer.setParams(epsilon, window, nbMaxIterations);*/
 
         switch (mode) {
             case TRAIN:

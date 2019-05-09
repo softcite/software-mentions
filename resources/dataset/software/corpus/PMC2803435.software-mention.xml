@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC2803435" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T19:58+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC2803435" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:05+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>Abstract: We describe the application of a new QSAR (quantitative structure-activity relationship) formalism to the 
 analysis and modeling of PDE-4 inhibitors. This new method takes advantage of the X-ray structural information of the 
@@ -84,7 +84,7 @@ of the 3D structure of the target enzyme (i.e., PDE-4) in
 these models poses a major limitation on the reliability and 
 interpretability of these models. Other traditional 2D QSAR </p>
 
-<p>30 Current Chemical Genomics, 2008, Volume 2 </p>
+
 
 <p>Dong and Zheng </p>
 
@@ -684,8 +684,8 @@ splitting or clustering-based splitting of the original dataset. </p>
 indole derivatives. </p>
 
 <p>The 3D conformations of all the inhibitors were gener-
-ated using the OMEGA 2.0 program available from 
-OpenEye Scientific (OMEGA 2.0, OE Scientific, NM, 
+ated using the <rs id="software-0" type="software">OMEGA</rs> <rs corresp="#software-0" type="version-number">2.0</rs> program available from 
+<rs corresp="#software-0" type="creator">OpenEye Scientific</rs> (OMEGA 2.0, OE Scientific, NM, 
 USA). In this study, only the best conformer of each mole-
 cule was used to generate the pharmacophore points. </p>
 
@@ -787,7 +787,7 @@ Method </p>
 <p>The relationship between the molecular descriptors and 
 the biological activities is modeled by the PLS (Partial Least 
 Square) method [26]. Specifically, the PLS implementation 
-in the <rs id="software-1" type="software">MOE</rs> package (<rs corresp="#software-1" type="creator">Chemical Computing Group</rs>, Mont-
+in the <rs id="software-3" type="software">MOE</rs> package (<rs corresp="#software-3" type="creator">Chemical Computing Group</rs>, Mont-
 real, Canada) was used in this study. Other types of machine 
 learning methods can be used as well to analyze the dataset. </p>
 
@@ -815,9 +815,12 @@ in order to build a PLS regression model. Regression coeffi-</p>
 
 <p>Dong and Zheng </p>
 
-<p>cients were then calculated for both the training set (r 2 ) and 
-the test set (R 2 ). While the former reflects the model quality 
-as measured on the training set, the latter (R 2 ) is a more ro-
+<p>cients were then calculated for both the training set (r 
+2 ) and 
+the test set (R 
+2 ). While the former reflects the model quality 
+as measured on the training set, the latter (R 
+2 ) is a more ro-
 bust indicator of the predictive power of the model. In the 
 end, only those model(s) with both coefficients greater than 
 set thresholds are retained as the final model(s). </p>
@@ -974,8 +977,11 @@ depiction of the pharmacophore features perceived from the Ligand-bound PDE4 str
 
 <p>Table 2. Structure-BASED Pharmacophore Feature Pairs of PDE4 Binding Site </p>
 
-<p>AA1 a 
-AA2 
+<p>AA1 </p>
+
+<p>a </p>
+
+<p>AA2 
 AA3 
 AA4 
 AA5 
@@ -984,8 +990,11 @@ AD1
 AD2 
 AD3 </p>
 
-<p>6.34 b 
-10.69 
+<p>6.34 </p>
+
+<p>b </p>
+
+<p>10.69 
 2.72 
 4.94 
 5.05 
@@ -1102,9 +1111,11 @@ PHE372A </p>
 <p>Dong and Zheng </p>
 
 <p>of the resulting models for the best partitioning of training 
-and test sets. The conventional correlation coefficient r 2 ob-
+and test sets. The conventional correlation coefficient r 
+2 ob-
 tained for the training set monotonically increases while the 
-predictive R 2 obtained for the testing set reaches a plateau 
+predictive R 
+2 obtained for the testing set reaches a plateau 
 before it starts to decrease. When the number of principle 
 components (PC) is less than 3, the resulting QSAR models 
 are not predictive for either the training set or the test set. 
@@ -1115,7 +1126,9 @@ components. According to our model validation protocol
 (Fig. 4), the models with the number of principle compo-
 nents between 5 and 8 are predictive for both the training 
 and the test sets. The best models should be a trade-off be-
-tween conventional r 2 and the predictive R 2 . Also, to com-
+tween conventional r 
+2 and the predictive R 
+2 . Also, to com-
 pare with other literature work which uses number of princi-
 ple components of 6 [15], we decided to use 6 components to 
 build the final best models. </p>
@@ -1133,9 +1146,13 @@ ten different training/test sets, and built 90 different QSAR </p>
 
 <p>models with the number of principal components ranging 
 from 2 to 10. Of all 180 QSAR models, the conventional 
-correlation coefficient r 2 ranges from 0.69 to 0.89, and the 
-predictive R 2 values range from 0.05 to 0.75. The splitting 
-which renders the highest r 2 and R 2 for corresponding mod-
+correlation coefficient r 
+2 ranges from 0.69 to 0.89, and the 
+predictive R 
+2 values range from 0.05 to 0.75. The splitting 
+which renders the highest r 
+2 and R 
+2 for corresponding mod-
 els with number of principle components between 5 and 8 is 
 selected as the partitioning of training and test sets to build 
 the final QSAR models. </p>
@@ -1152,7 +1169,8 @@ ods. We have compared the results obtained with CoMFA
 SB-PPK (our own method). All methods use PLS as the 
 modeling tool with number of principle components set at 6. 
 Both CoMFA and CoMSIA afforded highly predictive mod-
-els based on the training set; however, the predictive R 2 for 
+els based on the training set; however, the predictive R 
+2 for 
 the test set are both significantly lower than that for the train-
 ing set. Our method, on the other hand, afforded much more 
 balanced predictive quality, for both the training set and the 
@@ -1197,34 +1215,54 @@ b </p>
 <p>Fig. (8). a. QSAR model-predicted activity versus the actual activity for the molecules in the training set. b. QSAR model-predicted activity 
 versus the actual activity for the molecules in the test set. </p>
 
-<p>Table 3. Comparison of Model Performance in Terms of r 2 and Predicted R 2 when Different Set of Descriptors are Used </p>
+<p>Table 3. Comparison of Model Performance in Terms of r 
+2 and Predicted R 
+2 when Different Set of Descriptors are Used </p>
 
 <p>Molecular Descriptors 
 Regression Method 
 Number of Components 
-Correlation Coefficient (r 2 ) 
-Predicted R 2 </p>
+Correlation Coefficient (r 
+2 ) 
+Predicted R </p>
+
+<p>2 </p>
 
 <p>SBPPK 
-PLS d 
-6 
+PLS </p>
+
+<p>d </p>
+
+<p>6 
 0.747 
 0.624 </p>
 
-<p>MOE-2D a 
-PLS d 
-6 
+<p>MOE-2D </p>
+
+<p>a </p>
+
+<p>PLS </p>
+
+<p>d </p>
+
+<p>6 
 0.664 
 0.579 </p>
 
-<p>CoMFA b 
-PLS 
+<p>CoMFA </p>
+
+<p>b </p>
+
+<p>PLS 
 6 
 0.986 
 0.560 </p>
 
-<p>CoMSIA c 
-PLS 
+<p>CoMSIA </p>
+
+<p>c </p>
+
+<p>PLS 
 6 
 0.967 
 0.590 </p>
@@ -1266,13 +1304,17 @@ cophore features for PDE-4 inhibition. </p>
 <p>To ensure the predictive ability of the built QSAR mod-
 els, we have adopted a rigorous model validation protocol 
 that emphasizes rational design of the training and test sets, 
-and uses the statistics calculated for both the training set (r 2 ) 
-and test set (R 2 ) as the model selection criteria. Conse-
+and uses the statistics calculated for both the training set (r 
+2 ) 
+and test set (R 
+2 ) as the model selection criteria. Conse-
 quently, our models display highly balanced predictive abil-
 ity for both the training and the test sets (Table 3). In con-
 trast, CoMFA and CoMSIA models have shown signs of 
-over fitting, with high r 2 for the training set but much lower 
-R 2 for the test set. Thus, this model validation protocol based 
+over fitting, with high r 
+2 for the training set but much lower 
+R 
+2 for the test set. Thus, this model validation protocol based 
 on both training and test set statistics is critical for the suc-
 cess of this study. </p>
 

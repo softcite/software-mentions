@@ -1,5 +1,18 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1007%2Fs00148-015-0566-8" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T19:59+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1007%2Fs00148-015-0566-8" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:06+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
+<p>Abstract We quantify the importance of family background and neighborhood 
+effects as determinants of criminal convictions and incarceration by estimating sib-
+ling correlations. At the extensive margin, factors common to siblings account for 
+24 % of the variation in criminal convictions and 39 % of the variation in incarcera-
+tion. At the intensive margin, these factors typically account for slightly less than half 
+of the variation in prison sentence length and between one third and one half of the 
+variation in criminal convictions, depending on crime type and gender. Further anal-
+ysis shows that parental criminality and family structure can account for more of the 
+sibling crime correlation than parental income and education or neighborhood char-
+acteristics. The lion's share of the sibling correlation, however, is unaccounted for by </p>
+
+<p>Responsible editor: Erdal Tekin </p>
+
 <p>Sweden </p>
 
 <p>220 </p>
@@ -104,7 +117,7 @@ criminology literature, see Lauritsen (1993). </p>
 ing the variance components used to construct our sibling correlations), we assess 
 how much of the sibling similarities in criminal behavior they account for. While 
 this decomposition approach has been used to investigate the determinants of sib-
-ling similarities in income, health, and education (Mazumder 2008, 2011;  
+ling similarities in income, health, and education (Mazumder 2008, 2011; Björklund 
 et al. 2010; Anger and Schnitzlein 2013), it has not been applied to criminal behavior. 
 Sibling correlations decrease by at most 9 % when we control for parental 
 income and education, by at most 21 % when we control for parental criminality, 
@@ -174,22 +187,49 @@ hood components (including measurement error in our crime variable). If we assum
 that these components are independent, then the variance of c if n is the sum of the 
 variances of the family, neighborhood, and individual components: </p>
 
-<p>σ 2 
-c = σ 2 
-a + σ 2 
-b + σ 2 
-e . 
+<p>σ </p>
+
+<p>2 </p>
+
+<p>c = σ </p>
+
+<p>2 </p>
+
+<p>a + σ </p>
+
+<p>2 </p>
+
+<p>b + σ </p>
+
+<p>2 </p>
+
+<p>e . 
 (2) </p>
 
 <p>We can also allow families to sort into neighborhoods based on (for example) income 
 and education, which induces a covariance term, 2σ 2 
 ab , so that 7 
-σ 2 
-c = σ 2 
-a + σ 2 
-b + 2σ 2 
-ab + σ 2 
-e . 
+σ </p>
+
+<p>2 </p>
+
+<p>c = σ </p>
+
+<p>2 </p>
+
+<p>a + σ </p>
+
+<p>2 </p>
+
+<p>b + 2σ </p>
+
+<p>2 </p>
+
+<p>ab + σ </p>
+
+<p>2 </p>
+
+<p>e . 
 (3) </p>
 
 <p>The share of the variance in the outcome variable, c if n , which can be attributed to 
@@ -255,8 +295,11 @@ variation. These can be obtained by estimating the following mixed-effects model
 and birth year dummies are included in x if . 
 Since our outcome variables are binary, we reformulate Eq. 5 as a latent linear 
 response model 
-c  *  
-if = x if β + a f + e if , 
+c </p>
+
+<p> *  </p>
+
+<p>if = x if β + a f + e if , 
 (6) </p>
 
 <p>where we only observe C if = I (C  *  
@@ -268,7 +311,7 @@ likelihood. The random family effect is estimated conditional on the random indi
 vidual effect being logistically distributed with mean zero, variance σ 2 
 e = π 2 /3 and 
 independent of a f . 
-Inspired by the approach used in Mazumder (2008) and  et al. (2010), 
+Inspired by the approach used in Mazumder (2008) and Björklund et al. (2010), 
 we then go on to include potentially important family-wide variables, either one 
 at a time or simultaneously, in the x if matrix. For example, consider the inclusion 
 of parental income and education in x if . These additional control variables should 
@@ -283,7 +326,7 @@ variance in the family component that can be explained by parental income and ed
 cation. It is viewed as an upper bound since it includes other factors that are correlated 
 with parental income and education. 10 </p>
 
-<p>9  and  (2012) discuss this issue in great detail and provide quantitative examples of its 
+<p>9 Björklund and Jäntti (2012) discuss this issue in great detail and provide quantitative examples of its 
 importance. 
 10 In the presence of measurement error, this difference, σ 2 
 a − σ 2 *  
@@ -1089,7 +1132,7 @@ We also include a dummy for missing education. Parental income is measured as th
 <p>24 In addition, Hjalmarsson and Lindquist (2012) find that sons whose fathers have at least one sentence 
 have 2.06 times higher odds of having at least one criminal conviction than sons whose fathers do not have 
 any sentence. 
-25 -Delpiano and Giolito (2012) provide recent evidence of a causal relationship, as they demon-
+25 Cáceres-Delpiano and Giolito (2012) provide recent evidence of a causal relationship, as they demon-
 strate that the change in US divorce laws to unilateral divorce (i.e., making divorce easier) increased violent 
 crime rates by almost 9 %. </p>
 
@@ -1702,11 +1745,18 @@ year t, C 2
 t , and the older sibling's lagged crime in year t − 1, C 1 
 t−1 , </p>
 
-<p>C 2 
-t = β 0 + ρC 1 
-t−1 + u 2 </p>
+<p>C </p>
 
-<p>t </p>
+<p>2 </p>
+
+<p>t = β 0 + ρC </p>
+
+<p>1 </p>
+
+<p>t−1 + u </p>
+
+<p>2 
+t </p>
 
 <p>(9) </p>
 
@@ -1715,11 +1765,24 @@ We then re-estimate this association including all of our shared family backgrou
 controls, X f , and age dummies, age 2 
 t , at time t for the younger sibling, </p>
 
-<p>C 2 
-t = β 0 + ρC 1 
-t−1 + X f + age 2 
-t + ε 2 
-t . 
+<p>C </p>
+
+<p>2 </p>
+
+<p>t = β 0 + ρC </p>
+
+<p>1 </p>
+
+<p>t−1 + X 
+f + age </p>
+
+<p>2 </p>
+
+<p>t + ε </p>
+
+<p>2 </p>
+
+<p>t . 
 (10) </p>
 
 <p>In order to estimate Eqs. 9 and 10, we have created an annual panel data set for 
@@ -1863,14 +1926,36 @@ children more stringently. </p>
 <p>t −1 and t +1 as a control for correlated random effects (i.e., the unobservable family 
 component). Including this control, Eq. 10 can be re-written as </p>
 
-<p>C 2 
-t = β 0 + β 1 (C 1 
-t−1 + C 1 
-t+1 ) + λ 0 C 1 
-t−1 + X f + age 2 
-t + age 1 
-t + ε 2 
-t , 
+<p>C </p>
+
+<p>2 </p>
+
+<p>t = β 0 + β 1 (C </p>
+
+<p>1 </p>
+
+<p>t−1 + C </p>
+
+<p>1 </p>
+
+<p>t+1 ) + λ 0 C </p>
+
+<p>1 </p>
+
+<p>t−1 + X 
+f + age </p>
+
+<p>2 </p>
+
+<p>t + age </p>
+
+<p>1 </p>
+
+<p>t + ε </p>
+
+<p>2 </p>
+
+<p>t , 
 (11) </p>
 
 <p>where λ 0 , the coefficient on the early behavior, represents the direct sibling influence 
@@ -1879,24 +1964,46 @@ also allow for a contemporaneous effect, i.e., a direct influence of the older s
 current crime, C 1 
 t , on the younger sibling's current crime </p>
 
-<p>C 2 
-t = β 0 +β 1 </p>
+<p>C </p>
 
-<p>
-C 1 
-t−1 + C 1 
-t + C 1 </p>
+<p>2 </p>
 
-<p>t+1 </p>
+<p>t = β 0 +β 1 C </p>
 
-<p>
-+λ 0 C 1 
-t−1 +λ 1 C 1 
-t +X f +age 2 
-t +age 1 
-t +ξ 2 
-t , (12) 
-where the contemporaneous effect is given by λ 1 . 
+<p>1 </p>
+
+<p>t−1 + C </p>
+
+<p>1 </p>
+
+<p>t + C </p>
+
+<p>1 </p>
+
+<p>t+1 +λ 0 C </p>
+
+<p>1 </p>
+
+<p>t−1 +λ 1 C </p>
+
+<p>1 </p>
+
+<p>t +X 
+f +age </p>
+
+<p>2 </p>
+
+<p>t +age </p>
+
+<p>1 </p>
+
+<p>t +ξ </p>
+
+<p>2 </p>
+
+<p>t , (12) </p>
+
+<p>where the contemporaneous effect is given by λ 1 . 
 We report results from estimating Eqs. 11 and 12 in columns (3) and (4) in Table 4. 
 Controlling for the correlated random effect appears to explain the remainder of the 
 relationship between the younger sibling's crime at time t and the older sibling's 
@@ -2030,7 +2137,9 @@ that the younger sibling is female, and M2 that the younger sibling is male. Odd
 using logistic regressions. Standard errors clustered on individuals (the younger sibling) are reported in 
 parentheses. Family background controls include parental income and education, parental criminality, and 
 family structure (household size at age 15, unknown father, mother's age at first birth, and household type 
-at age 15). Sibling correlations are approximated using the following formula, ρ ≈ (OR φ − 1)/(OR φ − 
+at age 15). Sibling correlations are approximated using the following formula, ρ ≈ (OR 
+φ − 1)/(OR 
+φ − 
 1), where φ is calibrated using the appropriate gender-specific or mixed-gender odds ratio and sibling 
 correlation, both estimated without controls. See also the note to Table 4 
  *   *   *  p &lt; 0.01 </p>
@@ -2098,7 +2207,7 @@ women, which are both 0.03. These correlations indicate that at most 3 % of the
 variation in property crime can be attributed to shared neighborhood factors. These </p>
 
 <p>36 Most Swedish studies using observational data tend to find limited influences of neighborhoods on chil-
-dren's outcomes (e.g.,  2004 and Lindahl 2011). However, several quasi-experimental studies 
+dren's outcomes (e.g., Brännström 2004 and Lindahl 2011). However, several quasi-experimental studies 
 have demonstrated that growing up in an ethnic enclave in Sweden does have an important effect on 
 children's outcomes (e.g., Edin et al. 2003 andÅslund et al. 2011). 
 37 We cannot get information on schools attended nor on the Small Area Marketing Statistics used to define 
@@ -2287,13 +2396,13 @@ One potential explanation for our small estimated neighborhood correlations is
 that our definition of neighborhoods is too broad, both in the geographical sense 
 and in the sense that neighborhoods may not map well into peer groups. Alter-
 natively, one might want to focus more on the schools that children attend (as in 
-Gaviria and Raphael 2001, -Armengol et al. 2009, and Liu et al. 2012) or on 
+Gaviria and Raphael 2001, Calvó-Armengol et al. 2009, and Liu et al. 2012) or on 
 close neighbors. Sariaslan et al. (2013) study younger cohorts and, therefore, have 
 access to more narrow measures of neighborhoods. They look within the Small Area 
 Marketing codes created by Statistics Sweden to define small, homogenous neigh-
 borhoods. They also look within schools. But they still find no large neighborhood 
 effect. 
- (2004) argues that the small neighborhood effects reported in many 
+Brännström (2004) argues that the small neighborhood effects reported in many 
 Swedish studies may be due to the success of the Swedish welfare state. This is 
 certainly one possibility. For the USA, Johnson (2007) reports large neighborhood 
 correlations in criminal behavior and incarceration. He also reports that growing up 
@@ -2900,7 +3009,7 @@ the etiology of antisocial behavior and crime (Ishikawa and Raine 2002; Eley et 
 2013). We would argue, however, that by controlling for the education, income, and 
 criminal behavior of both biological parents, we have indeed controlled for most of 
 the relevant genetic factors (albeit very imprecisely). 
-Using survey data from the Stockholm Birth Cohort,  et al. (2010) show 
+Using survey data from the Stockholm Birth Cohort, Björklund et al. (2010) show 
 that parental involvement in school work, parenting practices, and maternal attitudes 
 are important for generating sibling similarities in their adult incomes. In particu-
 lar, a mother's willingness to plan and save for the future appears to matter. These 
@@ -2916,7 +3025,7 @@ behavior is one avenue for moving beyond the analysis of statistical risk factor
 into the realm of understanding the mechanisms underlying antisocial behavior and 
 crime. </p>
 
-<p>Acknowledgments We would like to thank Anders , Fredrik Carlsson, Magnus Johannesson, 
+<p>Acknowledgments We would like to thank Anders Björklund, Fredrik Carlsson, Magnus Johannesson, 
 Mikael Lindahl, Erdal Tekin, two anonymous referees, and seminar participants at EALE 2013, Stock-
 holm School of Economics, and ASSA 2014 for their valuable comments and suggestions. Karin Hederos 
 Eriksson and Matthew Lindquist gratefully acknowledge financial support from the Swedish Research 
@@ -3160,9 +3269,7 @@ Women </p>
 
 <p>K. Hederos Eriksson et al. </p>
 
-<p>.1 .2 .3 .4 .5 </p>
 
-<p>.6 .7 </p>
 
 <p>correlation </p>
 
@@ -3330,7 +3437,9 @@ in grey (black) </p>
 
 
 
+<p>.1 .2 .3 .4 .5 .6 .7 </p>
 
+<p>correlation </p>
 
 <p>1 
 2 
@@ -3694,61 +3803,7 @@ grey (black) </p>
 
 
 
-<p>
- O, Edin PA,  H, Fredriksson P (2011) Peers, neighborhoods, and immigrant student 
-achievement-evidence from a placement policy. Am Econ J Appl Econ 3(2):67-95 
-Akee RKQ, Copeland WE, Keeler G, Angold A, Costello EJ (2010) Parents' incomes and children's 
-outcomes: a quasi-experiment using transfer payments from casino profits. Am Econ J Appl Econ 
-2(1):86-115 
-Altonji JG, Cattan S, Ware I (2013) Identifying sibling influence on teenage substance use. IFS Working 
-Papers W13/04 
-Anger S, Schnitzlein DD (2013) Like brother, like sister?-the importance of family background for 
-cognitive and non-cognitive skills. Unpublished manuscript. DIW Berlin 
-Bayer P, Hjalmarsson R, Pozen D (2008) Building criminal capital behind bars: peer effects in juvenile 
-corrections. Q J Econ 124(1):105-147 
- A, Lindahl L, Lindquist MJ (2010) What more than parental income, education and occupation? 
-An exploration of what Swedish siblings get from their parents. BE J Econ Anal Poli 10(1):1-38. 
-Contributions, Article 102 
- A,  M (2012) How important is family background for labor-economic outcomes? Labour 
-Econ 19(4):465-474 
- L (2004) Poor places, poor prospects? Counterfactual models of neighbourhood effects on 
-social exclusion in Stockholm. Sweden Urban Stud 41(13):2515-2537 
-Buhrmester D (1992) The developmental courses of sibling and peer relationships. In: Boer F, Dunn 
-J (eds) Children's Sibling Relationships: Developmental and Clinical Issues. Hillsdale, NJ: Lawrence 
-Erlbaum Associates 
--Delpiano J, Giolito E (2012) The impact of unilateral divorce on crime. J Labor Econ 30(1):215-
-248 
--Armengol A, Patacchini E, Zenou Y (2009) Peer effects and social networks in education. Rev 
-Econ Stud 76(4):1239-1267 
-Case AC, Katz LF (1991) The company you keep: the effects of family and neighborhood on disadvan-
-taged youths. NBER Working Papers 3705 
-Currie J, Tekin E (2012) Understanding the cycle: childhood maltreatment and future crime. J Hum Resour 
-47(2):509-549 
-Damm AP, Dustmann C (2014) Does growing up in a high crime neighborhood affect youth criminal 
-behavior? Am Econ Rev 104(6):1806-32 
-Doyle JJ (2008) Child protection and adult crime: using investigator assignment to estimate causal effects 
-of foster care. J Polit Econ 116(4):746-770 
-Edin PA, Fredriksson P, ˚ 
-Aslund O (2003) Ethnic enclaves and the economic success of immigrants: 
-evidence from a natural experiment. Q J Econ 118(1):329-357 
-Eley TC, Lichtenstein P, Moffitt TE (2013) A longitudinal behavioral genetic analysis of the etiology of 
-aggressive and nonaggressive antisocial behavior. Dev Psychopathol 15(2):383-402 
-Frisell T, Lichtenstein P,  N (2011) Violent crime runs in families: a total population study of 
-12.5 million individuals. Psychol Med 41(1):97-105 
-Gaviria A, Raphael S (2001) School-based peer effects and juvenile behavior. Rev Econ Stat 83(2):257-
-268 
-Glaze L, Maruschak L (2008) Parents in prison and their minor children. Bureau of Justice Statistics 
-Special Report, NCJ 222984 
-Hjalmarsson R, Lindquist MJ (2010) Driving under the influence of our fathers. BE J Econ Anal Poli 
-10(1):1-15. Topics, Article 100 
-Hjalmarsson R, Lindquist MJ (2012) Like godfather, like son: exploring the intergenerational nature of 
-crime. J Hum Resour 47(2):550-582 
-Hjalmarsson R, Lindquist MJ (2013) The origins of intergenerational associations in crime: lessons from 
-Swedish adoption data. Labour Econ 20:68-81 
-Hjalmarsson R, Holmlund H, Lindquist MJ (forthcoming) The Effect of education on criminal convictions 
-and incarceration: causal evidence from micro-data. Econ J. doi:10.1111/ecoj.12204 
-Holmlund H, Lindahl M, Plug E (2011) The causal effect of parents' schooling on children's schooling: a 
-comparison of estimation methods. J Econ Lit 49(3):615-51 </p>
+
 
 
 

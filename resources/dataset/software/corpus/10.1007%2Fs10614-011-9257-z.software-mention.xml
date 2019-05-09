@@ -1,0 +1,4387 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1007%2Fs10614-011-9257-z" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T03:59+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>Abstract We present an algorithm and a corresponding <rs type="software">MATLAB</rs> numerical 
+toolbox to solve any form of infinite-planning horizon affine linear quadratic open-loop 
+differential games. By rewriting a specific application into the standard framework one 
+can use the toolbox to calculate and verify the existence of both the open-loop non-
+cooperative Nash equilibrium (equilibria) and cooperative Pareto equilibrium (equi-
+libria). In case there is more than one equilibrium for the non-cooperative case, the 
+toolbox determines all solutions that can be implemented as a feedback strategy. Alter-
+natively, the toolbox can apply a number of choice methods in order to discriminate 
+between multiple equilibria. The user can predefine a set of coalition structures for 
+which they would like to calculate the non-cooperative Nash solution(s). It is also 
+possible to specify the relative importance of each player in any coalition structure. 
+Furthermore, the toolbox offers plotting facilities as well as other options to analyse 
+the outcome of the game. For instance, it is possible to disaggregate each player's 
+total loss into its contributing elements. The toolbox is available as a freeware from 
+the authors of this paper. </p>
+
+<p>Many situations in, for example, economics and management are characterised by 
+multiple decision makers/players who can enforce decisions that have enduring 
+consequences. This often invokes coordination problems and so a natural frame-
+work to analyze these kinds of problems involves dynamic game theoretical set-
+tings. Dynamic game theory tries to arrive at appropriate models describing a 
+dynamic process affected by different players. Depending on the specific problem 
+such models can sometimes be used by an individual decision maker to opti-
+mise her performance. In other cases it may serve as a starting point to intro-
+duce new communication lines which may help to improve upon the outcome of 
+the current process. Furthermore it is possible to analyze the robustness of play-
+ers' strategies w.r.t. worst-case scenarios. To this end one can introduce "nature" 
+as an additional player which tries to work against the other decision makers in a 
+process. 
+In, for example, policy coordination problems two basic questions usually arise: 
+(i) whether policies are coordinated and, (ii) which information the participating par-
+ties have. Both these points are rather unclear and, therefore, strategies for differ-
+ent possible scenarios are calculated and compared with each other. Often, one of 
+these scenarios is the so-called open-loop scenario. In this open-loop information sce-
+nario it is assumed that all players know just the initial state of the process and the 
+model structure. More specifically, it is assumed that players simultaneously deter-
+mine their actions for the whole planning horizon of the process before it starts. 
+Next they submit their actions to some central authority who then enforces these 
+plans as binding commitments. In other words, players cannot react on any devi-
+ations occurring during the evolution of the process. Obviously, since according 
+to this scenario the participating parties can not react to each other's policies, its 
+economic relevance is mostly rather limited. However, as a benchmark to see how 
+much parties can gain by playing other strategies, its role is fundamental. Due to its 
+analytic tractability the open-loop Nash equilibrium strategy is in particular very pop-
+ular for problems where the underlying model can be described by a (set of) linear 
+differential equation(s) and the individual objectives can be approximated by func-
+tions that quadratically penalise deviations from some (equilibrium) targets. Exam-
+ples and additional references of differential games in economics and management 
+science can be found e.g. in Dockner et al. (2000), Jørgensen and Zaccour (2003) 
+and Plasmans et al. (2006). 
+Under the assumption that the parties have a finite-planning horizon, the linear 
+quadratic differential game was first modeled and solved in a mathematically rigorous 
+way by Starr and Ho (1969a,b). A recent exposition (and additional references) on lin-
+ear quadratic differential games can be found in Engwerda (2005), whereas Başar and 
+Olsder (1999) give a good overview and introduction on dynamic games in general. 
+In the rest of this paper we will concentrate on the case that the players base 
+their decisions on a performance criterion that has an infinite-planning horizon. We 
+will present an algorithm and a corresponding <rs type="software">MATLAB</rs> numerical toolbox which 
+solves any form of an infinite-planning horizon affine linear quadratic open-loop 
+differential game. The software, called <rs type="software">LQDG Toolbox</rs>, is available as a freeware </p>
+
+
+
+<p>A Numerical Toolbox to Solve N -Player Affine LQ Open-Loop Differential Games </p>
+
+
+
+<p>from the authors of this paper. 1 By rewriting a specific application into the standard 
+framework, one can use the toolbox to calculate and verify the existence of both the 
+open-loop non-cooperative Nash equilibrium (equilibria) and cooperative Pareto equi-
+librium (equilibria) of any infinite-planning horizon affine linear quadratic open-loop 
+differential game. In case there is more than one equilibrium for the non-cooperative 
+case, the toolbox determines all solutions that can be implemented as a state-feed-
+back strategy that is a common assumption in most of the applications. 2 Alternatively, 
+the toolbox can apply a number of choice methods in order to discriminate between 
+multiple equilibria. For instance, one can choose to report only Pareto-undominated 
+solutions or only those that are characterised by the lowest combined loss of all the 
+players. In order to determine the cooperative solution, the user is asked to specify the 
+relative importance of each player in the cooperative game. Moreover, the user can 
+predefine a set of coalition structures for which they would like to calculate the non-
+cooperative Nash solution(s). Conversely, a coalition structure generator is provided 
+that automatically creates a whole space of coalition structures for a given number 
+of players. Furthermore, the toolbox offers plotting facilities as well as other options 
+to analyze the outcome of the game. For instance, it is possible to disaggregate each 
+player's total loss into its contributing elements, which correspond to the quadratic 
+expressions constituting the player's loss function. 
+The paper is organised as follows. In Sect. 2 we will outline the model considered 
+and present both necessary and sufficient conditions under which there will exist a 
+unique equilibrium, a number of multiple equilibria or an infinite number of these. 
+The basic algorithm underlying the numerical toolbox that is presented in Sect. 4 is 
+discussed in Sect. 3. In Sect. 4 we will discuss the toolbox that has been constructed 
+to verify in typical applications whether there will be a unique equilibrium, multiple 
+equilibria or infinite number of these and how to obtain the solution in the first two 
+cases. In Sect. 5 we illustrate the use and capabilities of this software with a number 
+of examples. Section 6 concludes. </p>
+
+<p>2 The Open-Loop Game </p>
+
+<p>In this section we consider two players who control a different set of inputs v i to the 
+single system described by the structural (simultaneous) form model: </p>
+
+<p>y(t) = P 1ṗ (t) + P 2 p(t) + P 3 y(t) + P 41 v 1 (t) + P 42 v 2 (t) + P 5 c, 
+(1) </p>
+
+<p>p(t) = P 6ṗ (t) + P 7 p(t) + P 8 y(t) + P 91 v 1 (t) + P 92 v 2 (t) + P 10 c, p(0) = p 0 , (2) </p>
+
+<p>where p is the n-dimensional state of the system; v i is an m i -dimensional (con-
+trol) vector that player i, i = 1, 2, can manipulate; y is a b-dimensional vector of </p>
+
+<p>1 A dedicated webpage will be available on-line soon. Mean while contact T. Michalak for obtaining the 
+software. 
+2 A state-feedback strategy can be expressed as a linear function of the state variables of the model. 
+Specifically, if we denote a vector of state variables by x, a state-feedback strategy can be written as F x, 
+where F is a real valued function of appropriate dimension. </p>
+
+
+
+<p>T. Michalak et al. </p>
+
+<p>endogenous variables; c is a constant (that can be chosen without loss of generality 
+equal to 1) and p 0 is the initial state of the system. We assume that all variables can 
+be observed at any point of time and that n, m i ≥ 1 and b ≥ 0. Model (1,2) is a 
+formulation which one frequently encounters in economic modeling. Since we like 
+to stay close to the original equations formulated by the modeler we choose for this 
+formulation instead of the standard state-space formulation. Notice that, by choos-
+ing P 1 = P 3 = P 6 = P 8 = 0, our formulation includes the standard state-space 
+formulation. 
+The performance criterion player i likes to minimise is: </p>
+
+<p>∞ </p>
+
+<p>0 </p>
+
+<p>e 
+−θt ( i1 w(t) − f ) 
+T L i1 ( i1 w(t) − f ) + 2( i2 w(t) − g) 
+T L i2 e dt, (3) </p>
+
+<p>where w T (t) := [ṗ T (t) p T (t) y T (t) v T 
+1 (t) v T 
+2 (t)]; f and g are some constant vec-
+tors in IR 2n+b+m 1 +m 2 ; e := [1, . . . , 1] T ∈ IR 2n+b+m 1 +m 2 and θ is a non-negative 
+discounting factor. In this formulation the introduction of the i j matrices makes 
+it possible to deal with several interpretations of the model. For instance by choos-
+ing in (3) i1 = i2 and f = g the vector i j w(t) can be interpreted as an out-
+put vector of the system player i likes to track towards some specific value. 
+By choosing a specific column of the i j, j = 1, 2, matrices equal to zero, e.g., 
+one can express the fact that some variable is not an important variable for 
+player i. The matrices L i1 are (without loss of generality) assumed to be sym-
+metric. Later on additional assumptions will be made w.r.t. some of the above 
+matrices. 
+It is assumed that the players act non-cooperatively and that their information struc-
+ture about the game is of the open-loop type. More specifically, we suppose that the 
+players choose their actions from the following set of actions: </p>
+
+<p>U s = v ∈ L 2 | J i (x 0 , v) exists in IR ∪ {−∞, ∞}, lim </p>
+
+<p>t→∞ </p>
+
+<p>x(t) = 0 . </p>
+
+<p>The assumption that both players simultaneously use stabilizing controls introduces 
+the cooperative meta-objective to stabilise the system (see e.g. Engwerda (2005), for 
+a discussion). 
+We are looking for the Nash equilibria of this game. That is, for the combinations 
+of actions of all players which are secure against any attempt by one player to uni-
+laterally alter her strategy, or, stated differently, for such sets of actions that if one 
+player deviates she will only lose. In the literature on dynamic games this problem 
+is known as the open-loop Nash non-zero-sum linear quadratic differential game and 
+has been analyzed by several authors (see e.g. Starr and Ho 1969a; Simaan and Cruz 
+1973; Başar and Olsder 1999; Abou-Kandil and Bertrand 1986; Feucht 1994; Kremer 
+2002; Engwerda 2005). To avoid cumbersome notation, we restrict the analyses in 
+this section to the two-player case. The algorithm is, however, implemented for the 
+general N -player case. </p>
+
+
+
+<p>A Numerical Toolbox to Solve N -Player Affine LQ Open-Loop Differential Games </p>
+
+
+
+<p>To analyze the question under which conditions this game will have a unique equi-
+librium we first rewrite the model into the standard framework considered in Engwerda 
+(2008). 3 
+Assuming that I − P 6 is invertible, we have from (2) thaṫ </p>
+
+<p>p(t) = (I − P 6 ) 
+−1 (P 7 p(t) + P 8 y(t) + P 91 v 1 (t) + P 92 v 2 (t) + P 10 c) . 
+(4) </p>
+
+<p>Substitution of this into (1) and, under the assumption thatP 1 := I − P 1 (I − P 6 ) −1 P 8 − 
+P 3 is invertible we can perform a number of elementary operations in order to arrive 
+at the following reduced form of the model: </p>
+
+<p>p(t) =Â p(t) +B 1 v 1 (t) +B 2 v 2 (t) +Ê 1 c, p(0) = p 0 , 
+(5) 
+y(t) =Ĉ p(t) +D 1 v 1 (t) +D 2 v 2 (t) +Ê 2 c, 
+(6) </p>
+
+<p>withĈ </p>
+
+<p>:=P </p>
+
+<p>−1 </p>
+
+<p>1 (P 1 (I − P 6 ) 
+−1 P 7 + P 2 ), 
+(7) </p>
+
+<p>D 1 :=P </p>
+
+<p>−1 </p>
+
+<p>1 (P 1 (I − P 6 ) 
+−1 P 91 + P 41 ), 
+(8) </p>
+
+<p>D 2 :=P </p>
+
+<p>−1 </p>
+
+<p>1 (P 1 (I − P 6 ) 
+−1 P 92 + P 42 ), 
+(9) </p>
+
+<p>E 2 :=P </p>
+
+<p>−1 </p>
+
+<p>1 (P 1 (I − P 6 ) 
+−1 P 10 + P 5 ), 
+(10) </p>
+
+<p>A := (I − P 6 ) 
+−1 (P 8Ĉ + P 7 ), 
+(11) 
+B 1 := (I − P 6 ) 
+−1 (P 8D1 + P 91 ), 
+(12) </p>
+
+<p>B 2 := (I − P 6 ) 
+−1 (P 8D2 + P 92 ), 
+(13) 
+E 1 := (I − P 6 ) 
+−1 (P 8Ê2 + P 10 ). 
+(14) </p>
+
+<p>Next, introduce z T := p T c v T 
+1 v T 
+2 . Substitutingṗ and y from (5) and (6), respec-
+tively, into w yields: </p>
+
+<p>w = </p>
+
+<p>⎡ </p>
+
+<p>⎢ 
+⎢ 
+⎢ 
+⎢ 
+⎣ÂÊ </p>
+
+<p>1B1B2 </p>
+
+<p>I 0 0 
+0 
+CÊ 2D1D2 
+0 0 
+I 
+0 
+0 0 0 
+I </p>
+
+<p>⎤ </p>
+
+<p>⎥ 
+⎥ 
+⎥ 
+⎥ 
+⎦ 
+z =: N z. 
+(15) </p>
+
+<p>Using this, J i can be rewritten as: </p>
+
+<p>J i = </p>
+
+<p>∞ </p>
+
+<p>0 </p>
+
+<p>e 
+−θt z 
+T (t)( i1 N − [0 f 0 0]) 
+T L i1 ( i1 N − [0 f 0 0])z(t) </p>
+
+<p>+2z 
+T (t)( i2 N − [0 g 0 0]) 
+T L i2 [0 e 0 0]z(t) dt </p>
+
+<p>3 See also Engwerda (2005, Chap. 7). </p>
+
+
+
+<p>T. Michalak et al. </p>
+
+<p>= </p>
+
+<p>∞ </p>
+
+<p>0 </p>
+
+<p>e 
+−θt z 
+T (t) ( i1 N − [0 f 0 0]) 
+T L i1 ( i1 N − [0 f 0 0]) </p>
+
+<p>+ ( i2 N − [0 g 0 0]) 
+T L i2 [0 e 0 0] + [0 e 0 0] 
+T L </p>
+
+<p>T </p>
+
+<p>i2 ( i2 N − [0 g 0 0]) z(t)dt </p>
+
+<p>=: </p>
+
+<p>∞ </p>
+
+<p>0 </p>
+
+<p>e 
+−θt z 
+T (t)M i z(t)dt. 
+(16) </p>
+
+<p>Finally, we introduce the extended state variable x T (t) := e </p>
+
+<p>− </p>
+
+<p>1 </p>
+
+<p>2 θt [ p T (t) c] and con-
+trol variable u i (t) := e </p>
+
+<p>− </p>
+
+<p>1 </p>
+
+<p>2 θt v i (t) so that the state of the system isn = n + 1-dimen-
+sional. Now, the game can be rewritten into the standard form. Players minimise: </p>
+
+<p>J i (u 1 , u 2 ) := </p>
+
+<p>∞ </p>
+
+<p>0 </p>
+
+<p>[x 
+T (t), u </p>
+
+<p>T </p>
+
+<p>1 (t), u </p>
+
+<p>T </p>
+
+<p>2 (t)]M i </p>
+
+<p>⎡ </p>
+
+<p>⎣ </p>
+
+<p>x(t) 
+u 1 (t) 
+u 2 (t) </p>
+
+<p>⎤ </p>
+
+<p>⎦ dt, 
+(17) </p>
+
+<p>where x(t) is the solution to the linear differential equation: </p>
+
+<p>x(t) = Ax(t) + B 1 u 1 (t) + B 2 u 2 (t), x 
+T (0) = p </p>
+
+<p>T </p>
+
+<p>0 c , 
+(18) </p>
+
+<p>with: </p>
+
+<p>A := 
+Â − </p>
+
+<p>1 </p>
+
+<p>2 θ IÊ 1 
+0 
+− </p>
+
+<p>1 </p>
+
+<p>2 θ </p>
+
+<p>; and B i := 
+B i 
+0 
+. 
+(19) </p>
+
+<p>Now, factorise M i as follows: </p>
+
+<p>M i =: </p>
+
+<p>⎡ </p>
+
+<p>⎣ 
+Q i V i W i 
+V T </p>
+
+<p>i </p>
+
+<p>R 1i N i 
+W T </p>
+
+<p>i </p>
+
+<p>N T </p>
+
+<p>i </p>
+
+<p>R 2i </p>
+
+<p>⎤ </p>
+
+<p>⎦ , </p>
+
+<p>with Q i ∈ IRn ×n , R 1i ∈ IR m i ×m i , V i ∈ IRn ×m 1 , W i ∈ IRn ×m 2 and N i ∈ IR m 1 ×m 2 . 
+In the rest of the paper we will assume that the matrices R ii are positive definite 
+and matrix G (see Appendix A for some additional notation including matrix G) is 
+invertible. In the solution of this game the next algebraic Riccati equations play an 
+important role: </p>
+
+<p>A 
+T K 1 + K 1 A − (K 1 B 1 + V 1 )R </p>
+
+<p>−1 </p>
+
+<p>11 B </p>
+
+<p>T </p>
+
+<p>1 K 1 + V </p>
+
+<p>T 
+1 </p>
+
+<p>+ Q 1 = 0, 
+(20) 
+A 
+T K 2 + K 2 A − (K 2 B 2 + W 2 )R </p>
+
+<p>−1 </p>
+
+<p>22 B </p>
+
+<p>T </p>
+
+<p>2 K 2 + W </p>
+
+<p>T </p>
+
+<p>2 + Q 2 = 0, </p>
+
+<p>as well as the set of (coupled) algebraic Riccati equations: </p>
+
+<p>0 = A </p>
+
+<p>T </p>
+
+<p>2P +P A −P BG 
+−1 B 
+TP + Q, 
+(21) </p>
+
+
+
+<p>A Numerical Toolbox to Solve N -Player Affine LQ Open-Loop Differential Games </p>
+
+
+
+<p>or, equivalently: </p>
+
+<p>0 = A </p>
+
+<p>T </p>
+
+<p>2P +P A − P B + </p>
+
+<p>Z 1 
+Z 2 
+G 
+−1 ( B 
+TP + Z ) + Q. </p>
+
+<p>In particular, the existence of a so-called strongly stabilizing solution of (21) plays 
+an important role. A solutionP T =: (P T 
+1 ,P T 
+2 ), withP i ∈ IRn, of (21) is called a 
+strongly stabilizing solution if both σ Ã − BG −1B TP and σ Ã T 
+2 −P BG −1B T 
+⊂ C − . 4 
+The next relationship between certain invariant subspaces of matrix: </p>
+
+<p>M := 
+Ã −BG −1B T </p>
+
+<p>−Q 
+−Ã T </p>
+
+<p>2 </p>
+
+<p>(22) </p>
+
+<p>and the solutions of the Riccati equations (21) are well-known (see e.g. Engwerda 
+2007). This property will also be used to calculate the strongly stabilizing solutions 
+of (21). </p>
+
+<p>Lemma 1 Let V ⊂ IR 3n be ann-dimensional invariant subspace of M, and let X i ∈ 
+IRn ×n , i = 0, 1, 2, be three real matrices such that: </p>
+
+<p>V = im X </p>
+
+<p>T </p>
+
+<p>0 , X </p>
+
+<p>T </p>
+
+<p>1 , X </p>
+
+<p>T 
+2 </p>
+
+<p>T </p>
+
+<p>. 
+(23) </p>
+
+<p>If X 0 is invertible, thenP i := X i X </p>
+
+<p>−1 </p>
+
+<p>0 , i = 1, 2, solves (21) and σ (A − BG −1 (Z + 
+B TP )) = σ (M| V ). Furthermore, (P 1 ,P 2 ) is independent of the specific choice of a 
+basis of V . </p>
+
+<p>When X 0 is invertible, then-dimensional invariant subspace V in (23) is called a 
+graph subspace. The next lemma provides a characterisation of the strongly stabilizing 
+solution of (21): </p>
+
+<p>Lemma 2 1. The set of algebraic Riccati equations (21) has a strongly stabilizing 
+solutionP if and only if matrix M has ann-dimensional stable graph subspace 
+and M has 2n eigenvalues (counting algebraic multiplicities) with a real part 
+larger than or equal to zero. 
+2. If the set of algebraic Riccati equations (21) has a strongly stabilizing solution, 
+then it is unique. </p>
+
+<p>A proof of both this lemma and the next theorem follow directly from Engwerda 
+(2008). </p>
+
+<p>Theorem 3 Consider the differential game (17-18) with symmetric M i , R ii &gt; 0, 
+invertible matrix G and (A, B i ) stabilizable. 
+This game has a unique open-loop Nash equilibrium for every initial state if and only if </p>
+
+<p>4 σ (H ) denotes the spectrum of matrix H ; C − = {λ ∈ C | Re(λ) &lt; 0}. </p>
+
+
+
+<p>T. Michalak et al. </p>
+
+<p>1. The set of coupled algebraic Riccati equations (21) has a strongly stabilizing 
+solution, and 
+2. the two algebraic Riccati equations (20) have a (strongly) stabilizing solution. </p>
+
+<p>Moreover, in case this game has a unique equilibrium, the equilibrium actions are 
+given by: </p>
+
+<p>u  *  
+1 (t) 
+u  *  
+2 (t) </p>
+
+<p>= −G 
+−1 Z +B 
+TP ˜ (t, 0)x 0 , 
+(24) </p>
+
+<p>where˜ (t, 0) is the solution of the transition equation: </p>
+
+<p>(t, 0) = A − BG 
+−1 Z +B TP 
+˜ (t, 0);˜ (0, 0) = I. </p>
+
+<p>The costs by using the actions (24) for the players are: </p>
+
+<p>x </p>
+
+<p>T </p>
+
+<p>0L i x 0 , i = 1, 2, 
+(25) </p>
+
+<p>where, with A cl := A− BG −1 Z +B TP ,L i is the unique solution of the Lyapunov 
+equation: </p>
+
+<p>I, −G 
+−1 Z +B </p>
+
+<p>TP </p>
+
+<p>M i I, −G 
+−1 Z +B </p>
+
+<p>TP 
+T </p>
+
+<p>+ A </p>
+
+<p>T </p>
+
+<p>clL i +L i A cl = 0. </p>
+
+<p>In case the game has more than one equilibrium, generically, there exists an infi-
+nite number of equilibria (see Engwerda 2005; Kremer 2002). However, usually for 
+a finite number of them only, the corresponding actions can be implemented as a 
+state-feedback strategy (i.e., such strategy that can be written as a linear function of 
+the state variables of the model like, for instance, in Theorem 3; see also footnote 1 
+in this paper). In economics it is often argued that actions by policymakers have a 
+(state-)feedback structure (Taylor rule etc.). For that reason, in case there is more than 
+one equilibrium, the algorithm will determine only those that can be implemented as 
+a (state-)feedback rule. From Engwerda (2005) we recall the following result. </p>
+
+<p>Theorem 4 The differential game (17-18), with M i symmetric, R ii &gt; 0, matrix G 
+invertible and (A, B i ) stabilizable, has for every initial state an open-loop Nash set 
+of equilibrium actions (u  *  
+1 , u  *  
+2 ) which permit a feedback synthesis if and only if 
+1. The set of coupled algebraic Riccati equations (21) has a stabilizing solution, and 
+2. the two algebraic Riccati equations (20) have a stabilizing solution. </p>
+
+<p>Moreover, ifP is stabilizing solution of (21), the actions (24) yield an open-loop 
+Nash equilibrium that can be synthesised as a state feedback. The corresponding costs 
+are given by (25). </p>
+
+<p>Finally, if one would like to consider the game (17-18) without a constant that, in 
+particular, allows for a zero discount rate, the state variable should not be extended, </p>
+
+
+
+<p>A Numerical Toolbox to Solve N -Player Affine LQ Open-Loop Differential Games </p>
+
+
+
+<p>i.e., x T (t) := e </p>
+
+<p>− </p>
+
+<p>1 </p>
+
+<p>2 θt p T (t) is to be used instead of x T (t) := e </p>
+
+<p>− </p>
+
+<p>1 </p>
+
+<p>2 θt p T (t) c . The 
+system in (18) becomes: </p>
+
+<p>x(t) = Ax(t) + B 1 u 1 (t) + B 2 u 2 (t), x 
+T (0) = p </p>
+
+<p>T </p>
+
+<p>0 , 
+(26) </p>
+
+<p>where: </p>
+
+<p>A :=Â − 
+1 
+2 
+θ I ; 
+(27) </p>
+
+<p>B i :=B i . 
+(28) </p>
+
+<p>The rest of the above analysis remains valid but withn = n. </p>
+
+<p>3 The Computational Framework </p>
+
+<p>To verify the existence, the number and numerical values of equilibria in the game 
+(17-18), in the numerical toolbox we use the following algorithm 5 : </p>
+
+<p>Algorithm 5 </p>
+
+<p>Step A1: Verify whether R ii &gt; 0, G is invertible and (A, B i ) are stabilizable. If this 
+is not the case, go to Step A6. 
+Step A2: Calculate the eigenstructure of: </p>
+
+<p>H 1 := 
+A − B 1 R </p>
+
+<p>−1 </p>
+
+<p>11 V 1 
+−S 1 </p>
+
+<p>−Q 1 
+− A − B 1 R </p>
+
+<p>−1 </p>
+
+<p>11 V 1 </p>
+
+<p>T </p>
+
+<p>and </p>
+
+<p>H 2 := 
+A − B 2 R </p>
+
+<p>−1 </p>
+
+<p>22 W 2 
+−S 2 </p>
+
+<p>−Q 2 
+− A − B 2 R </p>
+
+<p>−1 </p>
+
+<p>22 W 2 </p>
+
+<p>T . </p>
+
+<p>If H i , i = 1, 2, has ann-dimensional stable graph subspace, then proceed. 
+Otherwise there is not an equilibrium and go to Step A6. 6 </p>
+
+<p>Step A3: Calculate matrix M := 
+Ã −BG −1B T </p>
+
+<p>−Q 
+−Ã T </p>
+
+<p>2 </p>
+
+<p>. </p>
+
+<p>If M has s ≥n stable eigenvalues and u ≤ 2n unstable eigenvalues (count-
+ing algebraic multiplicities) then proceed to Step A4. Otherwise, i.e., if 
+s &lt;n, the game has no equilibrium and go to Step A6. 
+Step A4: The number of equilibria equals the number of differentn-dimensional sta-
+ble invariant graph subspaces of matrix M. In particular this implies that if </p>
+
+<p>5 Notice that we just present those equilibria that can be synthesized as a feedback strategy. </p>
+
+<p>6 With an equilibrium we mean everywhere in the algorithm an equilibrium that can be synthesized as a 
+state feedback. </p>
+
+
+
+<p>T. Michalak et al. </p>
+
+<p>matrix M has eigenvalues that have a geometric multiplicity that is larger 
+than one, it may happen that there are an infinite number of equilibria (see 
+e.g. Engwerda 2005, Example 7.11). The algorithm does not elaborate this 
+case because (i) it is numerically more involved to decide whether an eigen-
+value has a geometric multiplicity that is larger than one; (ii) the occurrence 
+of such cases requires a more detailed inspection of how many different 
+n-dimensional subspaces can be generated; and (iii) generically, the alge-
+braic multiplicity of the eigenvalues is one. If s ≥n and there is at least 
+one eigenvalue that has an algebraic multiplicity larger than one, then the 
+algorithm terminates and the user is informed about the possibility that in 
+the simulation an infinite number of equilibria might occur. It is then up to 
+the user either to choose some parameters that differ a little bit from the 
+previous choice (yielding probably a simulation that produces no difficul-
+ties), or to take a serious look at the eigenstructure of matrix M and draw 
+own conclusions. Therefore the algorithm proceeds as follows: 
+A4.1: If at least one eigenvalue has an algebraic multiplicity larger than 
+one then the game may have an infinite number of equilibria if s &gt;n. 
+If s =n there probably exists a unique equilibrium, but this has to 
+be verified using the generalised eigenspace(s). For both cases: go 
+to Step A6. Otherwise proceed with Step A4.2. 
+A4.2: All stable eigenvalues have an algebraic multiplicity of one. 
+A4.2.1: Case s =n. Let λ s denote the set of all stable eigenvalues 
+andṼ s denote the matrix which columns consist of the 
+eigenvectors corresponding with these stable eigenvalues. 
+A4.2.1.1: If λ s contains no complex eigenvalues then the 
+image ofṼ s represents then-dimensional sta-
+ble invariant subspace of M. Go to Step A5. 
+A4.2.1.2: If λ s contains complex eigenvalues then replace 
+every pair of conjugate complex eigenvectors 
+x + iy and x − iy inṼ s by the real part of 
+this eigenvector, x, and the imaginary part, y, 
+respectively (see Example 6 below for further 
+details). The image of this modified real matrix 
+represents then then -dimensional stable invari-
+ant subspace of M. Go to Step A5. 
+A4.2.2: If s &gt;n and: 
+A4.2.2.1: If there are no complex eigenvalues then: 
+• Calculate the set Cn λ s of all </p>
+
+<p>s! </p>
+
+<p>(s−n)!n!n -element 
+combinations from s stable eigenvalues; 
+• For every combination λ s 
+i ∈ Cn λ s : (i) letṼ s 
+i be 
+the matrix which columns consist of eigenvec-
+tors corresponding with eigenvalues from the 
+set λ s 
+i ; (ii) go to Step A5. 
+A4.2.2.2: If there are complex eigenvalues then: 
+• Calculate the set Cn λ s of all </p>
+
+<p>s! </p>
+
+<p>(s−n)!n!n -element 
+combinations from s stable eigenvalues that </p>
+
+
+
+<p>A Numerical Toolbox to Solve N -Player Affine LQ Open-Loop Differential Games </p>
+
+
+
+<p>have the property where if λ s 
+i contains a com-
+plex eigenvalue it contains the complex conju-
+gate of this eigenvalue too. 
+• For every such combination λ s 
+i ∈ Cn λ s : (i) let 
+V s 
+i be the matrix constructed in a similar way 
+as in item A4.2.1.2; (ii) go to Step A5. 
+Step A5: For every matrix of eigenvectorsṼ s 
+i calculate the corresponding M-invari-
+ant graph subspace P. To that end proceed as follows: 
+A5.1: Let X 1 , X 2 and X 3 be such that </p>
+
+<p>⎡ </p>
+
+<p>⎣ 
+X 1 
+X 2 
+X 3 </p>
+
+<p>⎤ </p>
+
+<p>⎦ =Ṽ </p>
+
+<p>s </p>
+
+<p>i . </p>
+
+<p>Verify whether matrix X 1 is invertible. If not then ImṼ s 
+i is not a graph 
+subspace and there is no equilibrium corresponding with this set of 
+eigenvalues. Choose another matrixṼ s 
+i from the set of potential can-
+didates and return to the beginning of the current step (Step A5.1). 
+If there are no other candidates left, go to Step 6. 
+ *  DenoteP 1 := X 2 X </p>
+
+<p>−1 </p>
+
+<p>1 andP 2 := X 3 X </p>
+
+<p>−1 </p>
+
+<p>1 . 
+ *  Then: </p>
+
+<p>u  *  
+1 (t) 
+u  *  
+2 (t) </p>
+
+<p>:= −G 
+−1 (Z + B 
+TP )x 
+ *  (t), </p>
+
+<p>where withP T := P T </p>
+
+<p>1P </p>
+
+<p>T </p>
+
+<p>2 is the open-loop Nash equilibrium 
+strategy. Here x  *  (t) is the solution of the differential equatioṅ 
+x(t) = (A − BG −1 (Z + B TP ))x(t), x(0) = x 0 . 
+ *  The spectrum of the corresponding closed-loop matrix A cl equals 
+λ s 
+i . 
+ *  Players' losses can be computed from J i = p T 
+0L i p 0 whereL i 
+solves the following Lyapunov equation: </p>
+
+<p>A </p>
+
+<p>T </p>
+
+<p>C LL i +L i A C L + </p>
+
+<p>1 
+2 
+I, F 
+T M i 
+I 
+F 
+= 0. 
+(29) </p>
+
+<p>Step A6: End of algorithm. </p>
+
+<p>Step A2 in the above algorithm verifies whether the algebraic Riccati equations 
+(20) have a stabilizing solution. Of course one can use here <rs type="software">MATLAB</rs> to verify this. 
+Concerning the numerical stability of Algorithm 5 we notice that various sugges-
+tions have been made in the literature to calculate solutions of Riccati equations in 
+a numerically reliable way (see e.g. Laub (1979, 1991), Paige and van Loan (1981), 
+van Dooren (1981), Mehrmann (1991) and Abou-Kandil and Bertrand (1986) for a 
+more general survey on various types of Riccati equations). These methods can also be </p>
+
+
+
+<p>T. Michalak et al. </p>
+
+<p>used to improve the numerical stability of Algorithm 5. In particular, if one considers 
+the implementation of large scale models one should consult this literature. 
+As already indicated one can also try to solve the (set of coupled) algebraic Riccati 
+equations (20) iteratively. In particular, for large scale systems one might hope that 
+such algorithms will be more efficient. For that reason various iteration schemes have 
+been suggested in literature (see e.g. Abou-Kandil and Bertrand 1986 or Engwerda 
+2007). However, since Eq. 20 may admit several solutions, convergence of any game 
+is quite difficult to obtain under general conditions (see Azevedo-Perdicoúlis and Jank 
+(2005), for a result on positive solutions). An important problem with these algorithms 
+is related to the a priori verification of the system's strong stabilizability. If one does 
+not want to do it there is an open question how to proceed in case the algorithm 
+terminates at a non-stabilizing solution. </p>
+
+<p>4 <rs type="software">LQDG Toolbox</rs> </p>
+
+<p>Next we proceed with an outline of the numerical toolbox. The software verifies the 
+existence of and, provided that a finite number of equilibria exists, calculates the 
+outcome of the N -player extension of the game (1-3). The scheme presenting all 
+the components of the toolbox software is displayed in Fig. 1. The main file, called 
+<rs type="software">LQDGsolver.exe</rs>, solves the LQDG which is to be defined in the input. The input file 
+can be created by the user using an intuitive input interface provided (file TBXinput-
+GUI.exe). Alternatively, more proficient users might choose to create the input file 
+directly (in <rs type="software">MATLAB</rs> or text formats). <rs type="software">LQDGsolver</rs> produces the following output 
+for every coalition structure considered: </p>
+
+<p>• number of equilibria, intermediate matrices constructed during the solution process 
+(H 1 , H 2 , H 3 and M) and eigenvalues; 
+• output actions; 
+• closed-loop matrices A cl ; 
+• solution of Lyapunov equationsL i for every player; and 
+• loss J i for every player. </p>
+
+<p>The above output is saved in <rs type="software">MATLAB</rs> and text formats in a directory that corre-
+sponds to the chosen name of the project. The following output files are created: </p>
+
+<p>• PROJECT_NAME_model.txt: text file containing the structural and reduced form 
+of the dynamic system; 
+• inputPROJECT_NAME.m: binary <rs type="software">MATLAB</rs> file containing (processed) input to 
+the project; 
+• PROJECT_NAME_validation.txt: text file containing all the information about the 
+various stages of model validation; 
+• PROJECT_NAME_output.txt: text file containing all the output produced; and 
+• outputPROJECT_NAME.m: binary <rs type="software">MATLAB</rs> file containing all the project's 
+output. </p>
+
+<p>The plotting tool is provided that uses the above output to draw the dynamics of 
+every variable in the model for a chosen coalition structure and equilibrium. Less 
+advanced users can use a simple output interface (file <rs type="software">TBXoutputGUI.exe</rs>) that allows </p>
+
+
+
+<p>A Numerical Toolbox to Solve N -Player Affine LQ Open-Loop Differential Games </p>
+
+
+
+<p>Fig. 1 Scheme of the <rs type="software">LQDG Toolbox</rs> software </p>
+
+<p>both to edit the toolbox output and to plot the graphs required. Conversely, more 
+advanced users can directly analyse output of all numerical simulations and create 
+graphs. 
+The input for the toolbox is the following model: </p>
+
+<p>y(t) = P 1ṗ (t) + P 2 p(t) + P 3 y(t) + </p>
+
+<p>N </p>
+
+<p>i=1 </p>
+
+<p>P 4i v i (t) + P 5 , 
+(30) </p>
+
+<p>p(t) = P 6ṗ (t) + P 7 p(t) + P 8 y(t) + </p>
+
+<p>N </p>
+
+<p>i=1 </p>
+
+<p>P 9i v i (t) + P 10 , p(0) = p 0 , (31) </p>
+
+<p>where p is the n-dimensional state of the system, v i is the m i -dimensional (control) 
+vector player i (where i = 1, . . . , |N |) can manipulate (with 
+m i =: m), y is the 
+b-dimensional vector of endogenous variables and p 0 is the initial state of the sys-
+tem. Defining z(t) := [ p(t)ṗ(t) y(t) v(t) c] 
+T , the general form of the performance 
+criterion that player i likes to minimise is: </p>
+
+<p>J i = 
+1 
+2 </p>
+
+<p>∞ </p>
+
+<p>0 </p>
+
+<p>z 
+T (t) i z(t) e 
+−θ(t−t 0 ) dt, 
+(32) </p>
+
+<p>where: </p>
+
+<p>i := </p>
+
+<p>⎡ </p>
+
+<p>⎢ 
+⎢ 
+⎣ </p>
+
+<p>φ (1,1),i 
+φ (1,2),i 
+. . . φ (1,2n+b+m+1),i 
+φ (2,1),i 
+φ (2,2),i 
+. . . φ (2,2n+b+m+1),i 
+. . . 
+. . . 
+. . . . . . 
+φ (2n+b+m+1,1,i) φ (2n+b+m+1,2),i . . . φ (2n+b+m+1,2n+b+m+1),i </p>
+
+<p>⎤ </p>
+
+<p>⎥ 
+⎥ 
+⎦ . </p>
+
+<p>Matrix i can be factorised as follows: </p>
+
+
+
+<p>T. Michalak et al. </p>
+
+<p>i := </p>
+
+<p>⎡ </p>
+
+<p>⎢ 
+⎢ 
+⎢ 
+⎢ 
+⎣ </p>
+
+<p>p 2 ,i 
+pṗ,i 
+py,i 
+pv,i 
+pc,i </p>
+
+<p>ṗ p,i 
+ṗ 2 ,i 
+ṗy,i 
+ṗv,i 
+ṗc,i </p>
+
+<p>yp,i 
+yṗ,i 
+y 2 ,i 
+yv,i 
+yc,i </p>
+
+<p>vp,i 
+vṗ,i 
+vy,i 
+v 2 ,i 
+vc,i </p>
+
+<p>cp,i 
+cṗ,i 
+cy,i 
+cv,i 
+c 2 ,i </p>
+
+<p>⎤ </p>
+
+<p>⎥ 
+⎥ 
+⎥ 
+⎥ 
+⎦ 
+. </p>
+
+<p>with all submatrices .,i defined in Appendix B. Furthermore, in Appendix C it is 
+shown how, using the appropriate notation, it is possible to define any linear qua-
+dratic loss function containing the variables from vector z(t) in the input file (if 
+the user chooses to create this file by himself not using the provided interface). Of 
+course, the user is supposed to define only those coefficients φ (i.e., elements of 
+matrix˜ i ) that are different from zero. The cost criterion (32) can be rewritten as 
+follows: </p>
+
+<p>J i := 
+1 
+2 </p>
+
+<p>∞ </p>
+
+<p>0 </p>
+
+<p>⎧ 
+⎨ </p>
+
+<p>⎩ 
+p(t) c v(t) </p>
+
+<p>T 
+i </p>
+
+<p>⎡ </p>
+
+<p>⎣ </p>
+
+<p>p(t) 
+c 
+v(t) </p>
+
+<p>⎤ </p>
+
+<p>⎦ </p>
+
+<p>⎫ 
+⎬ </p>
+
+<p>⎭ 
+e 
+−θ(t−t 0 ) dt </p>
+
+<p>:= 
+1 
+2 </p>
+
+<p>∞ </p>
+
+<p>0 </p>
+
+<p>⎧ 
+⎨ </p>
+
+<p>⎩ 
+p(t) c v(t) M i </p>
+
+<p>⎡ </p>
+
+<p>⎣ </p>
+
+<p>p(t) 
+c 
+v(t) </p>
+
+<p>⎤ </p>
+
+<p>⎦ </p>
+
+<p>⎫ 
+⎬ </p>
+
+<p>⎭ 
+e 
+−θ(t−t 0 ) dt, </p>
+
+<p>where </p>
+
+<p>:= </p>
+
+<p>⎡ </p>
+
+<p>⎢ 
+⎢ 
+⎢ 
+⎢ 
+⎢ 
+⎣ </p>
+
+<p>I n×n 0 n×1 0 n×m n×(n+m+1) 
+Â 1Ê1B 
+ĈÊ 2D 
+0 m×n 0 m×1 I m×m m×(n+m+1) 
+0 1×n 1 0 1×m 1×(n+m+1) </p>
+
+<p>⎤ </p>
+
+<p>⎥ 
+⎥ 
+⎥ 
+⎥ 
+⎥ 
+⎦ </p>
+
+<p>(33) </p>
+
+<p>and M i := T i . 
+The toolbox also offers the possibility to analyze equilibria for different coa-
+lition structures which are formally defined as divisions of all the players in the 
+game into exhaustive and disjoint coalitions. That is, if, for instance, five players 
+participate in the game and players 1, 3, 4 and players 2, 5 decide to cooper-
+ate, then the toolbox offers the possibility to calculate the open-loop Nash equi-
+librium for the resulting two-player game. Obviously the outcome depends on the 
+relative weight of every players' performance criterion within the coalition. There-
+fore, the user is asked to specify both the coalition structure and these relative 
+weights. 
+The number of coalitions structures that can be created from even a small number 
+of players is a non-trivial issue. More in detail, let denote the set of all possible 
+coalition structures. The number of all possible coalition structures is a function of 
+the number of players N and equals the so-called Bell number B |N | . The Bell number 
+is the number of ways a set of |N | elements can be partitioned into non-empty subsets. </p>
+
+
+
+<p>A Numerical Toolbox to Solve N -Player Affine LQ Open-Loop Differential Games </p>
+
+
+
+<p>The following Dobinsky's formula is one way to compute Bell numbers (Comtet 
+1974): B |N | = </p>
+
+<p>1 
+e </p>
+
+<p>∞ 
+j=0 </p>
+
+<p>j |N | </p>
+
+<p>j! . 7 
+To simplify the presentation of coalition structures we will use the following short-
+hand notation: [C 1 |C 2 | . . . |C m ] where C 1≤k≤m is represented by the sequence of 
+players that belong to this coalition. For example: [123|4|56] stands for a coalition 
+structure where players 1, 2, 3 and players 5, 6 cooperate, respectively and player 4 
+remains single. </p>
+
+<p>Example 6 Let N = {1, 2, 3, 4}. Listing all the possible partitions of the set N into 
+coalitions, we obtain: [1234], [123|4], [124|3], [134|2], [1|234], [12|3|4], [13|2|4], 
+[14|2|3], [23|1|4], [24|1|3], [1|2|34], [12|34], [13|24], [14|23], [1|2|3|4]. Indeed, 
+using simple recursive software to compute Dobinsky's formula we obtain: B 4 = 15. 
+The number of possible partitions increases exponentially when n increases linearly. 
+For |N | = 1, 2, . . . , 15, we have the following numbers of coalitions according to 
+Dobinski's formula: B 1 =1, B 2 = 2, B 3 = 5, B 4 = 15, B 5 = 52; B 6 =203, B 7 =877, 
+B 8 =4140;B 9 =21147,B 10 =115975,B 11 =678570, B 12 =4213597, B 13 =27644437; 
+B 14 = 190899322, and B 15 = 1382958545. </p>
+
+<p>It is clear that an examination of all possible coalition structures is not always inter-
+esting for the user. Usually, the researcher should choose and restrict her attention to a 
+subset of coalition structures. In the sequel we will use the notation F for the full set 
+of feasible coalition structures and R for a reduced set of relevant feasible coalition 
+structures. 
+We will now briefly discuss the various steps the user is confronted with while 
+using the toolbox. </p>
+
+<p>Step T1: <rs type="software">LQDG Toolbox</rs> Initialisation To define the LQDG problem the user is sup-
+posed to provide a number of compulsory components of the model. As it has been 
+mentioned before, it is the most convenient to use the interface provided in order to 
+create the project. The main window of the user interface is shown in Fig. 2. More 
+proficient users also may create the input file directly in <rs type="software">MATLAB</rs> or text formats. 
+Compulsory components of the LQDG problem include: 
+• the name of the new project; 
+• number of players, number of state and output variables, whether the model include 
+constant or not; 
+• the number of control instruments per player; 
+• the nonzero P i and P i j matrices from the structural form model (30-31); 
+• the parameters from the performance criterion (32); 
+• the initial condition p 0 ; and 
+• the coalition structures to be considered. 8 
+• If the model includes constants, i.e., at least one element of matrices P 5 and P 10 
+is non-zero, then it is mandatory to specify a strictly positive discount rate. </p>
+
+<p>7 See Chapter 5 of Plasmans et al. (2006) for more details on this issue. </p>
+
+<p>8 For less than 6 players <rs type="software">LQDG Toolbox</rs> has predefined sets of all coalition structures so that the user does 
+not have to define them himself. </p>
+
+
+
+<p>T. Michalak et al. </p>
+
+<p>Fig. 2 Main window of the User Input Interface </p>
+
+<p><rs type="software">LQDG Toolbox</rs> offers an opportunity to control and verify every important 
+intermediate step of the solution process as well as the results obtained. The list of all 
+the available options can be edited in the user interface. </p>
+
+<p>Step T2: Model Validation by <rs type="software">LQDG Toolbox</rs> Based on the input that is provided in 
+Step A1, the toolbox verifies various regularity conditions: </p>
+
+<p>1. The invertibility of the matrices I − P 3 and I − P 7 (I − P 3 ) −1 P 1 − P 5 ; 
+2. Positive definiteness of the matrices R ii ; 
+3. Invertibility of G; and stabilizability of (A, B i ); and 
+4. The final validation step that is performed checks whether the algebraic Riccati 
+equations (20) have a stabilizing solution. </p>
+
+<p>If conditions 1 or 2 fail the toolbox terminates. If conditions 3 and 4 fail then it 
+means that no equilibrium can be found for the particular coalition structure and the 
+toolbox considers the next coalition structure in the queue. </p>
+
+<p>Step T3: Calculation of Equilibria In this phase, open-loop Nash equilibria as out-
+lined in Theorem 3 are calculated for every specified coalition structure (if such equi-
+libria exists). </p>
+
+<p>5 Examples </p>
+
+<p>In this section we illustrate the various steps of the algorithm in three simple exam-
+ples. Firstly, we analyze a dynamic duopoly game with sticky prices as considered by 
+Fershtman and Kamien (1987); secondly, we present the solution of the problem used 
+in Example 7.10 by Engwerda (2005), where a multiple finite number of equilibria </p>
+
+
+
+<p>A Numerical Toolbox to Solve N -Player Affine LQ Open-Loop Differential Games </p>
+
+
+
+<p>emerges; thirdly, we present the solution of the problem used in Example 7.12 by 
+Engwerda (2005) characterised by complex eigenvalues. </p>
+
+<p>5.1 A Game on Dynamic Duopolistic Competition from Fershtman and Kamien 
+(1987) </p>
+
+<p>The problem we address here is to find the open-loop Nash equilibria of the game 
+defined by the revenue functions: </p>
+
+<p>J i (v 1 , v 2 ) = </p>
+
+<p>∞ </p>
+
+<p>0 </p>
+
+<p>e 
+−θt p(t)v i (t) − c v v i (t) − 
+1 
+2 
+v </p>
+
+<p>2 </p>
+
+<p>i (t) dt, 
+(34) </p>
+
+<p>subject to the dynamic constraint: </p>
+
+<p>p(t) = s{a − (v 1 (t) + v 2 (t)) − p(t)}, p(0) = p 0 . 
+(35) </p>
+
+<p>Recall that, in this model, θ &gt; 0 denotes the discount rate of future profits and 
+s ∈ (0, ∞) is the adjustment speed parameter of the market price, p(t), towards the 
+price dictated by the demand function. That is, for larger values of s the market price 
+adjusts more quickly along the demand function. The cost functions of the compa-
+nies are assumed to be C(v i ) := c v v i + </p>
+
+<p>1 </p>
+
+<p>2 v 2 
+i , where c v ∈ (0, a) is a fixed parameter. 
+Furthermore, the inverse demand function is assumed to be given byp = a −(v 1 +v 2 ). 
+To determine the open-loop equilibrium actions for this game (34-35) we proceed 
+along the steps outlined in Sect. 3. To that end we first notice that the maximisation 
+of (34) can be rewritten as the minimisation of −J i . </p>
+
+<p>Step T1: <rs type="software">LQDG Toolbox</rs> Initialisation The above maximisation problems can be 
+rewritten in terms of (32) as: </p>
+
+<p>− min </p>
+
+<p>v 1 </p>
+
+<p>J 1 (v 1 , v 2 ) = 
+1 
+2 </p>
+
+<p>T </p>
+
+<p>0 </p>
+
+<p>e </p>
+
+<p>−θt </p>
+
+<p>⎧ 
+⎪ ⎪ ⎪ ⎪ ⎪ ⎪ ⎪ ⎪ ⎪ ⎨ </p>
+
+<p>⎪ ⎪ ⎪ ⎪ ⎪ ⎪ ⎪ ⎪ ⎪ ⎩ 
+z 
+T (t) </p>
+
+<p>⎡ </p>
+
+<p>⎢ 
+⎢ 
+⎢ 
+⎢ 
+⎣ </p>
+
+<p>0 0 −2 0 0 
+0 0 0 0 0 
+0 0 1 0 2c v 
+0 0 0 0 0 
+0 0 0 0 0 </p>
+
+<p>⎤ </p>
+
+<p>⎥ 
+⎥ 
+⎥ 
+⎥ 
+⎦ </p>
+
+<p>1 </p>
+
+<p>z(t) </p>
+
+<p>⎫ 
+⎪ ⎪ ⎪ ⎪ ⎪ ⎪ ⎪ ⎪ ⎪ ⎬ </p>
+
+<p>⎪ ⎪ ⎪ ⎪ ⎪ ⎪ ⎪ ⎪ ⎪ ⎭ 
+dt and </p>
+
+<p>− min </p>
+
+<p>v 2 </p>
+
+<p>J 2 (v 1 , v 2 ) = 
+1 
+2 </p>
+
+<p>T </p>
+
+<p>0 </p>
+
+<p>e </p>
+
+<p>−θt </p>
+
+<p>⎧ 
+⎪ ⎪ ⎪ ⎪ ⎪ ⎪ ⎪ ⎪ ⎪ ⎨ </p>
+
+<p>⎪ ⎪ ⎪ ⎪ ⎪ ⎪ ⎪ ⎪ ⎪ ⎩ 
+z 
+T (t) </p>
+
+<p>⎡ </p>
+
+<p>⎢ 
+⎢ 
+⎢ 
+⎢ 
+⎣ </p>
+
+<p>0 0 0 −2 0 
+0 0 0 0 
+0 
+0 0 0 0 
+0 
+0 0 0 1 2c v 
+0 0 0 0 
+0 </p>
+
+<p>⎤ </p>
+
+<p>⎥ 
+⎥ 
+⎥ 
+⎥ 
+⎦ </p>
+
+<p>2 </p>
+
+<p>z(t) </p>
+
+<p>⎫ 
+⎪ ⎪ ⎪ ⎪ ⎪ ⎪ ⎪ ⎪ ⎪ ⎬ </p>
+
+<p>⎪ ⎪ ⎪ ⎪ ⎪ ⎪ ⎪ ⎪ ⎪ ⎭ 
+dt, </p>
+
+
+
+<p>T. Michalak et al. </p>
+
+<p>subject to the dynamics (35), where z T (t) := [ p(t)ṗ(t) v 1 (t) v 2 (t)c]. 
+The model fits into our standard model (30-31) if we specify the various parameters 
+in the input file of the toolbox as follows: </p>
+
+<p>P 1 = P 2 = P 3 = P 4i = P 5 = P 6 = P 8 = 0, P 7 = −s, P 9i = −s and P 10 = c. </p>
+
+<p>Notice that in this example n = m 1 = m 2 = 1 (and therefore m = 2) and b = 0. In 
+the performance specification all parameters are zero for both players except the next 
+ones. For player 1 we have φ (1,3),1 = −2, φ (3,3),1 = 1, and φ (3,5),1 = 2c v , whereas 
+for player 2 φ (1,4),2 = −2, φ (4,4),2 = 1 and φ (4,5),2 = 2c v . 
+There are two players in the game. Hence B 2 = 2 and F = {[1|2], [12]}. As 
+already mentioned before, the user can either choose to compute the Nash equilibria 
+for all coalition structures (if such equilibria exist) or only for some elements of F 
+by creating own set of feasible coalition structures R . We choose in this example to 
+calculate analytically the equilibrium for non-cooperative CS [1|2]. </p>
+
+<p>Step T2: Model Validation by <rs type="software">LQDG Toolbox</rs> With this input the toolbox next cal-
+culates the standard form (17-18) by considering the new variables: </p>
+
+<p>x 1 (t) := e </p>
+
+<p>− </p>
+
+<p>1 </p>
+
+<p>2 θt p(t), x 2 (t) := e </p>
+
+<p>− </p>
+
+<p>1 </p>
+
+<p>2 θt and u i (t) := e </p>
+
+<p>− </p>
+
+<p>1 </p>
+
+<p>2 θt v i (t), i = 1, 2. (36) </p>
+
+<p>With these variables the problem (34-35) can be rewritten as finding the open-loop 
+Nash equilibrium of </p>
+
+<p>− min </p>
+
+<p>u i (.) </p>
+
+<p>1 
+2 </p>
+
+<p>∞ </p>
+
+<p>0 </p>
+
+<p>[x 1 (t) x 2 (t) u 1 (t) u 2 (t)]M i </p>
+
+<p>⎡ </p>
+
+<p>⎢ 
+⎢ 
+⎣ </p>
+
+<p>x 1 (t) 
+x 2 (t) 
+u 1 (t) 
+u 2 (t) </p>
+
+<p>⎤ </p>
+
+<p>⎥ 
+⎥ 
+⎦ dt, 
+(37) </p>
+
+<p>subject to the dynamicṡ </p>
+
+<p>x(t) = 
+−s − </p>
+
+<p>1 </p>
+
+<p>2 θ as 
+0 
+− </p>
+
+<p>1 </p>
+
+<p>2 θ </p>
+
+<p>x(t) + 
+−s 
+0 
+u 1 (t) + 
+−s 
+0 
+u 2 (t). 
+(38) </p>
+
+<p>where M i = T i as in (33) with i defined by the user in Step T1. 9 
+Following the notation in Sect. 2 the toolbox generates the following matrices: </p>
+
+<p>A = 
+−s − </p>
+
+<p>1 </p>
+
+<p>2 θ as 
+0 
+− </p>
+
+<p>1 </p>
+
+<p>2 θ </p>
+
+<p>, B i = 
+−s 
+0 
+, Q i = 
+0 0 
+0 0 
+, R ii = 1, R i j = 0 (i = j), </p>
+
+<p>V 1 = W 2 = 
+−1 
+c v 
+, W 1 = V 2 = 
+0 
+0 
+, and N i = 0. </p>
+
+<p>9 Note that y(t) is not taken into account in vector z(t) in the cost criteria in Step T1 as y(t) := 0. Toolbox 
+automatically extends matrices 1 and 2 by two appropriate zero vectors. </p>
+
+
+
+<p>A Numerical Toolbox to Solve N -Player Affine LQ Open-Loop Differential Games </p>
+
+
+
+<p>So, clearly R ii &gt; 0 and (A, B i ) is stabilizable. Furthermore: </p>
+
+<p>G := 
+1 0 
+0 1 
+, B := 
+−s −s 
+0 
+0 
+, Z 1 := 
+−1 0 
+c v 0 
+, Z 2 := 
+0 −1 
+0 c v 
+, </p>
+
+<p>Z := 
+−1 c v 
+−1 c v 
+,B </p>
+
+<p>T </p>
+
+<p>1 := </p>
+
+<p>−s 0 
+0 0 
+,B </p>
+
+<p>T </p>
+
+<p>2 := </p>
+
+<p>0 0 
+−s 0 
+,B 
+T := 
+−s 0 0 0 
+0 0 −s 0 
+. </p>
+
+<p>and from this: </p>
+
+<p>M = </p>
+
+<p>⎡ </p>
+
+<p>⎢ 
+⎢ 
+⎢ 
+⎢ 
+⎢ 
+⎢ 
+⎣ </p>
+
+<p>−3s − </p>
+
+<p>1 </p>
+
+<p>2 θ s(a + 2c v ) 
+−s 2 
+0 
+−s 2 
+0 
+0 
+− </p>
+
+<p>1 </p>
+
+<p>2 θ 
+0 
+0 
+0 
+0 
+1 
+−c v 
+2s + </p>
+
+<p>1 </p>
+
+<p>2 θ 
+0 
+0 
+0 
+−c v 
+c 2 </p>
+
+<p>v </p>
+
+<p>−s(a + c v ) </p>
+
+<p>1 </p>
+
+<p>2 θ 
+0 
+0 
+1 
+−c v 
+0 
+0 
+2 s + </p>
+
+<p>1 </p>
+
+<p>2 θ 
+0 
+−c v 
+c 2 </p>
+
+<p>v </p>
+
+<p>0 
+0 −s(a + c v ) </p>
+
+<p>1 </p>
+
+<p>2 θ </p>
+
+<p>⎤ </p>
+
+<p>⎥ 
+⎥ 
+⎥ 
+⎥ 
+⎥ 
+⎥ 
+⎦ </p>
+
+<p>=: 
+Ã 
+−S 
+−Q −Ã T </p>
+
+<p>2 </p>
+
+<p>. </p>
+
+<p>Following Sect. 2 the game has, for all p 0 , a unique open-loop Nash equilibrium if 
+the following sets of algebraic Riccati equations have a (strongly) stabilizing solution 
+P i and K i , (where i = 1, 2, respectively): </p>
+
+<p>1. The set of coupled Riccati differential equations: </p>
+
+<p>0 = −Ã </p>
+
+<p>T </p>
+
+<p>2 P − PÃ + P BG 
+−1B T P −Q. 
+(39) </p>
+
+<p>2. The two Riccati equations: </p>
+
+<p>0 = −A 
+T K 1 − K 1 A + (K 1 B 1 + V 1 )R 11 B </p>
+
+<p>T </p>
+
+<p>1 K 1 + V </p>
+
+<p>T 
+1 </p>
+
+<p>− Q 1 , 
+(40) </p>
+
+<p>0 = −A 
+T K 2 − K 2 A + (K 2 B 2 + W 2 )R 22 B </p>
+
+<p>T </p>
+
+<p>2 K 2 + W </p>
+
+<p>T </p>
+
+<p>2 − Q 2 . (41) </p>
+
+<p>To verify whether, e.g., the algebraic Riccati equation (40) has a stabilizing solution 
+it is sufficient to check whether the following equation satisfies this property: </p>
+
+<p>A − B 1 R </p>
+
+<p>−1 </p>
+
+<p>11 V </p>
+
+<p>T 
+1 </p>
+
+<p>T </p>
+
+<p>K + K A − B 1 R </p>
+
+<p>−1 </p>
+
+<p>11 V </p>
+
+<p>T 
+1 </p>
+
+<p>− K S 1 K + Q 1 − V 1 R </p>
+
+<p>−1 </p>
+
+<p>11 V </p>
+
+<p>T </p>
+
+<p>1 = 0. 
+(42) </p>
+
+<p>It is easily verified that the Hamiltonian matrix associated with this Riccati equation: </p>
+
+<p>A − B 1 R </p>
+
+<p>−1 </p>
+
+<p>11 V T </p>
+
+<p>1 </p>
+
+<p>−S 1 </p>
+
+<p>−Q 1 + V 1 R </p>
+
+<p>−1 </p>
+
+<p>11 V T </p>
+
+<p>1 </p>
+
+<p>− A − B 1 R </p>
+
+<p>−1 </p>
+
+<p>11 V T </p>
+
+<p>1 </p>
+
+<p>T </p>
+
+<p>= </p>
+
+<p>⎡ </p>
+
+<p>⎢ 
+⎢ 
+⎣ </p>
+
+<p>−2s − </p>
+
+<p>1 </p>
+
+<p>2 θ s(a + c v ) 
+−s 2 
+0 
+0 
+− </p>
+
+<p>1 </p>
+
+<p>2 θ 
+0 
+0 
+1 
+−c v 
+2s + </p>
+
+<p>1 </p>
+
+<p>2 θ 
+0 
+−c v 
+c 2 </p>
+
+<p>v </p>
+
+<p>−s(a + c v ) </p>
+
+<p>1 </p>
+
+<p>2 θ </p>
+
+<p>⎤ </p>
+
+<p>⎥ 
+⎥ 
+⎦ </p>
+
+
+
+<p>T. Michalak et al. </p>
+
+<p>has a two-dimensional stable graph subspace. Thus, Eq. 40 has a stabilizing solution. 
+In a similar way one can verify whether (41) has a strongly stabilizing solution. The 
+procedure to verify whether (39) has a strongly stabilizing solution is presented in the 
+next step. </p>
+
+<p>Step T3: Calculation of Equilibria Again, following Algorithm 5, the toolbox first 
+computes the eigenvalues of matrix M to determine whether (42) has a strongly sta-
+bilizing solution. These eigenvalues are − </p>
+
+<p>1 </p>
+
+<p>2 θ, − </p>
+
+<p>1 </p>
+
+<p>2 s − </p>
+
+<p>1 </p>
+
+<p>2 λ 1 , </p>
+
+<p>1 </p>
+
+<p>2 θ, </p>
+
+<p>1 </p>
+
+<p>2 θ, </p>
+
+<p>1 </p>
+
+<p>2 θ + 2s, − </p>
+
+<p>1 </p>
+
+<p>2 s 
++ </p>
+
+<p>1 </p>
+
+<p>2 λ 1 , where: </p>
+
+<p>λ 1 = 17s 2 + 10sθ + θ 2 . </p>
+
+<p>Clearly, matrix M has 2 stable and 4 unstable eigenvalues. Therefore, the only 
+open-loop Nash equilibrium candidate is obtained by considering the eigenspaces 
+of M corresponding with the eigenvalues − </p>
+
+<p>1 </p>
+
+<p>2 θ and − </p>
+
+<p>1 </p>
+
+<p>2 s − </p>
+
+<p>1 </p>
+
+<p>2 λ 1 . The eigenspaces 
+corresponding with these eigenvalues are: </p>
+
+<p>T 1 = Span{T 1 } where </p>
+
+<p>T 1 = [−(2c v θ + 2c v s + θa + 2sa), −(3θ + 4s), a − c v , 
+(a − c v )(as − c v s − c v θ)/θ, a − c v , (a − c v )(as − c v s − c v θ)/θ] 
+T , and </p>
+
+<p>T 2 = Span{T 2 } where </p>
+
+<p>T 2 = [−5s − θ − λ 1 , 0, 2, v, 2, v] 
+T , </p>
+
+<p>respectively, with v := − </p>
+
+<p>(s+θ−λ 1 )(2sa−3sc v −c v θ−c v λ 1 ) 
+4s(2s+θ) </p>
+
+<p>. In particular we see that for the 
+values − </p>
+
+<p>1 </p>
+
+<p>2 θ, − </p>
+
+<p>1 </p>
+
+<p>2 s − </p>
+
+<p>1 </p>
+
+<p>2 λ 1 the corresponding eigenspace is a graph subspace (i.e., 
+V s 
+i = Span{T 1 , T 2 }). 
+Since (A, B i ), where i = 1, 2, are stabilizable, R ii &gt; 0, G is invertible, M has 
+a 2-dimensional stable graph subspace and 4 unstable eigenvalues, and the algebraic 
+Riccati equations (39-40) have a stabilizing solution, then all conditions are satisfied 
+for the game to have a unique open-loop Nash equilibrium. The corresponding actions 
+are: </p>
+
+<p>u  *  
+1 (t) 
+u  *  
+2 (t) </p>
+
+<p>= − 
+−1 c v 
+−1 c v 
++ 
+−s 0 
+−s 0 
+P x(t), 
+(43) </p>
+
+<p>whereP </p>
+
+<p>1 =P 2 = 
+a − c v 
+2 </p>
+
+<p>(a−c v )(as−c v s−c v θ) 
+θ </p>
+
+<p>v </p>
+
+<p>−(2c v θ + 2c v s + θa + 2sa) −5s − θ − λ 1 
+−(3θ + 4s) 
+0 </p>
+
+<p>−1 </p>
+
+<p>=: 
+f o g o 
+h o l o 
+, i = 1, 2. </p>
+
+
+
+<p>A Numerical Toolbox to Solve N -Player Affine LQ Open-Loop Differential Games </p>
+
+
+
+<p>Using the equilibrium actions: </p>
+
+<p>u </p>
+
+<p> *  </p>
+
+<p>i (t) = (1 + s f 0 )x 1 (t) + (sg 0 − c v )x 2 (t), </p>
+
+<p>the resulting closed-loop system is: </p>
+
+<p>x(t) = 
+− </p>
+
+<p>1 </p>
+
+<p>2 s − </p>
+
+<p>1 </p>
+
+<p>2 λ 1 </p>
+
+<p>1 </p>
+
+<p>2 (s − θ + λ 1 ) </p>
+
+<p>as+(a+2c v )(θ+s) 
+3θ+4s </p>
+
+<p>0 
+− </p>
+
+<p>1 </p>
+
+<p>2 θ </p>
+
+<p>x(t). </p>
+
+<p>Next, we reformulate this result in terms of our original model parameters. From 
+the above differential equation in x, one obtains the next differential equation for the 
+equilibrium price path p(t): </p>
+
+<p>p(t) = 
+1 
+2 
+(θ − s − λ 1 ) p(t) − 
+as + (a + 2c v )(θ + s) 
+3θ + 4s 
+. </p>
+
+<p>The equilibrium actions are: </p>
+
+<p>v </p>
+
+<p> *  </p>
+
+<p>i (t) = (1 + s f 0 ) p(t) + sg 0 − c v , i = 1, 2. </p>
+
+<p>For the parameters' values: a = 4, s = 0.1, c v = 1.5, θ = 0.05 and initial condition 
+p 0 = [3] , the toolbox produces the following numerical values (N e non-cooperative 
+and C e cooperative equilibrium between players): </p>
+
+<p>1. The equilibrium actions: </p>
+
+<p>C L 
+ *  (N 
+e ) = 
+0.8042 −1.4385 
+0.8042 −1.4385 
+and C L 
+ *  (C 
+e ) = 
+0.6559 −1.2898 
+0.6559 −1.2898 
+; </p>
+
+<p>2. The closed-loop system: </p>
+
+<p>A </p>
+
+<p> *  </p>
+
+<p>cl (N 
+e ) = 
+−0.2858 
+0.6877 
+0 −0.0250 
+and A </p>
+
+<p> *  </p>
+
+<p>cl (C 
+e ) = 
+−0.2562 
+0.6580 
+0 −0.0250 
+; </p>
+
+<p>3. Lyapunov equations' solutions (see Eq. 29 in Step A5 of the algorithm) 10 : </p>
+
+<p>L </p>
+
+<p> *  </p>
+
+<p>1 (N 
+e ) = 
+−0.8411 
+0.5327 
+0.5327 −7.8099 
+,L </p>
+
+<p> *  </p>
+
+<p>1 (C 
+e ) = 
+−0.8603 
+0.5255 
+0.5255 −8.2266 
+; </p>
+
+<p>L </p>
+
+<p> *  </p>
+
+<p>2 (N 
+e ) = 
+−0.8411 
+0.5327 
+0.5327 −7.8099 
+,L </p>
+
+<p> *  </p>
+
+<p>2 (C 
+e ) = 
+−0.8603 
+0.5255 
+0.5255 −8.2266 
+; </p>
+
+<p>10 These matrices can be used to calculate players' losses for any given initial condition p 0 . </p>
+
+
+
+<p>396 </p>
+
+<p>T. Michalak et al. </p>
+
+<p>Fig. 3 Control variables in the duopoly game (non-cooperative equilibrium) </p>
+
+<p>4. The optimal losses of players 11 : J  *  
+1 (N e ) = p T 
+0L 1 (N e ) p 0 = J  *  
+2 (N e ) = p T 
+0L 2 (N e ) 
+p 0 = − 12.1836; and J  *  
+1 (C e ) = p T 
+0L 1 (C e ) p 0 = J  *  
+2 (C e ) = p T </p>
+
+<p>0L 
+ *  </p>
+
+<p>2 (C e ) p 0 = 
+− 12.8162. </p>
+
+<p>The toolbox offers a possibility to plot graphs of control, state and output vari-
+ables' dynamics. To plot graphs for a particular equilibrium the toolbox command 
+plot_graph should be used. 12 Figure 3 shows the dynamics of the control variables 
+for both players (i.e., output of both firms) for the assumed parameter values, whereas 
+Fig. 4 shows the dynamics of the state variables (i.e., market price as well as a constant, 
+which is added to the state variables of the system as outlined in Sect. 2). 
+Furthermore, as it has been already mentioned, the toolbox offers an option to 
+decompose the loss function of every player into its linear components showing what 
+is each element's contribution to the total outcome. It is especially useful in both model 
+calibration and analysis. When disaggregate losses option is chosen the toolbox creates 
+a dummy player j for every non-zero element φ (a,b),i of matrix i in the loss function 
+of player i. Player j s matrix j has φ (a,b), j as the only non-zero entry. Furthermore, 
+every dummy player is assigned a control variable added to the first state equation of 
+the system with a coefficient 0 so that it does not have any influence on the system. The 
+weight of dummy players' control variables in their loss functions can be defined by 
+the user using the (advanced) option dummy_control_instrument_multiplier (δ) whose 
+default value is 1. 
+In the above example, there are 3 non-zero entries in each i matrix, namely, 
+φ (1,3),1 , φ (3,3),1 , and φ (3,5),1 in 1 and φ (1,4),2 , φ (4,4),2 and φ (4,5),2 in 2 . 
+Consequently, the toolbox creates 6 dummy players j = 3, 4, 5, 6, 7 and 8 with: </p>
+
+<p>11 Note that it is not possible to calculate the analytic solution of the corresponding Lyapunov equations, 
+so it is not possible to calculate the analytic formulas for players' losses. 
+12 See the toolbox manual for more details. </p>
+
+
+
+<p>A Numerical Toolbox to Solve N -Player Affine LQ Open-Loop Differential Games </p>
+
+
+
+<p>Fig. 4 State variable and constant in the duopoly game (non-cooperative equilibrium) </p>
+
+<p>3 = </p>
+
+<p>⎡ </p>
+
+<p>⎢ 
+⎢ 
+⎢ 
+⎢ 
+⎢ 
+⎢ 
+⎢ 
+⎢ 
+⎢ 
+⎢ 
+⎢ 
+⎢ 
+⎢ 
+⎢ 
+⎢ 
+⎢ 
+⎣ </p>
+
+<p>0 0 −2 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 δ 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 </p>
+
+<p>⎤ </p>
+
+<p>⎥ 
+⎥ 
+⎥ 
+⎥ 
+⎥ 
+⎥ 
+⎥ 
+⎥ 
+⎥ 
+⎥ 
+⎥ 
+⎥ 
+⎥ 
+⎥ 
+⎥ 
+⎥ 
+⎦ </p>
+
+<p>and analogous 4 , 5 , 6 , 7 and 8 . 
+Furthermore, the toolbox adds 6 new control variables to the model and solves the 
+following game 13 : </p>
+
+<p>− min </p>
+
+<p>v i </p>
+
+<p>J i (v 1 , v 2 , . . . , v 8 ) = − min </p>
+
+<p>v i </p>
+
+<p>1 
+2 </p>
+
+<p>∞ </p>
+
+<p>0 </p>
+
+<p>e 
+−θt − p(t)v i (t) + c v v i (t) + 
+1 
+2 
+v </p>
+
+<p>2 </p>
+
+<p>i (t) dt, </p>
+
+<p>for i = 1, 2 and </p>
+
+<p>− min </p>
+
+<p>v 3 </p>
+
+<p>J 3 (v 1 , v 2 , . . . , v 8 ) = − min </p>
+
+<p>v 3 </p>
+
+<p>1 
+2 </p>
+
+<p>∞ </p>
+
+<p>0 </p>
+
+<p>e 
+−θt {− p(t)v 1 (t) + v </p>
+
+<p>2 </p>
+
+<p>3 (t)}dt, </p>
+
+<p>13 Note that dummy players which corresponds to elements that involve a constant are always positioned 
+last. </p>
+
+
+
+<p>T. Michalak et al. </p>
+
+<p>− min </p>
+
+<p>v 4 </p>
+
+<p>J 3 (v 1 , v 2 , . . . , v 8 ) = − min </p>
+
+<p>v 4 </p>
+
+<p>1 
+2 </p>
+
+<p>∞ </p>
+
+<p>0 </p>
+
+<p>e 
+−θt 1 
+2 
+v </p>
+
+<p>2 </p>
+
+<p>1 (t) + v </p>
+
+<p>2 </p>
+
+<p>4 (t) dt, </p>
+
+<p>− min </p>
+
+<p>v 5 </p>
+
+<p>J 5 (v 1 , v 2 , . . . , v 8 ) = − min </p>
+
+<p>v 5 </p>
+
+<p>1 
+2 </p>
+
+<p>∞ </p>
+
+<p>0 </p>
+
+<p>e 
+−θt {− p(t)v 2 (t) + v </p>
+
+<p>2 </p>
+
+<p>5 (t)}dt, </p>
+
+<p>− min </p>
+
+<p>v 6 </p>
+
+<p>J 6 (v 1 , v 2 , . . . , v 8 ) = − min </p>
+
+<p>v 6 </p>
+
+<p>1 
+2 </p>
+
+<p>∞ </p>
+
+<p>0 </p>
+
+<p>e 
+−θt 1 
+2 
+v </p>
+
+<p>2 </p>
+
+<p>2 (t) + v </p>
+
+<p>2 </p>
+
+<p>6 (t) dt, </p>
+
+<p>− min </p>
+
+<p>v 7 </p>
+
+<p>J 7 (v 1 , v 2 , . . . , v 8 ) = − min </p>
+
+<p>v 7 </p>
+
+<p>1 
+2 </p>
+
+<p>∞ </p>
+
+<p>0 </p>
+
+<p>e 
+−θt {c v v 1 (t) + v </p>
+
+<p>2 </p>
+
+<p>7 (t)}dt, </p>
+
+<p>− min </p>
+
+<p>v 8 </p>
+
+<p>J 8 (v 1 , v 2 , . . . , v 8 ) = − min </p>
+
+<p>v 8 </p>
+
+<p>1 
+2 </p>
+
+<p>∞ </p>
+
+<p>0 </p>
+
+<p>e 
+−θt {c v v 2 (t) + v </p>
+
+<p>2 </p>
+
+<p>8 (t)}dt, </p>
+
+<p>subject to dynamics: </p>
+
+<p>p(t) = s{a − (v 1 (t) + v 2 (t)) − p(t)} + 0v 3 + · · · + 0v 8 , p(0) = p 0 . </p>
+
+<p>Since dummy players have no influence on the system then their optimal strat-
+egy is to never use the control instrument as it cannot improve their loss. Conse-
+quently, all the obtained results will be the same up to additional dimensions in 
+losses corresponding to dummy players. These losses can be always interpreted 
+in terms of the losses of real players. In our example, since v 2 
+3 (t) and v 2 
+5 (t) are 
+always zero, J 3 and J 5 can be interpreted as the loss from </p>
+
+<p>∞ </p>
+
+<p>0 e −θt {− p(t)v 1 (t)}dt 
+and </p>
+
+<p>∞ </p>
+
+<p>0 e −θt {− p(t)v 2 (t)}dt obtained by players 1 and 2, respectively. Thus, J  *  </p>
+
+<p>3 </p>
+
+<p>and J  *  
+5 are revenues from sales, whereas J  *  
+4 + J  *  
+7 and J  *  
+6 + J  *  
+8 are costs func-
+tions of both oligopolistic firms. For the parametrisation assumed above the tool-
+box produces the following disaggregation of optimal losses in both regimes: </p>
+
+<p>N e 
+C e 
+Interpretation 
+J  *  </p>
+
+<p>3 </p>
+
+<p>−39.4144 
+−34.2076 
+Revenue (player 1) 
+J  *  </p>
+
+<p>4 </p>
+
+<p>5.3650 
+3.5454 
+Cost (player 1) 
+J  *  </p>
+
+<p>5 </p>
+
+<p>−39.4144 
+−34.2076 
+Revenue (player 2) 
+J  *  </p>
+
+<p>6 </p>
+
+<p>5.3650 
+3.5454 
+Cost (player 2) 
+J  *  </p>
+
+<p>7 </p>
+
+<p>21.8658 
+17.8460 
+Cost (player 1) 
+J  *  </p>
+
+<p>8 </p>
+
+<p>21.8658 
+17.8460 
+Cost (player 2) </p>
+
+<p>which has the following interpretation: while non-cooperating the first/second com-
+pany has a revenue with an equilibrium of −J  *  
+3/5 (N e ) = 39.4144 while it incurs a 
+cost of J  *  
+4/6 (N e ) + J  *  
+7/8 (N e ) = 5.3650 + 21.8658 = 27.2308. Total profit for each 
+company is −J  *  
+3/5 (N e ) − J  *  
+4/6 (N e ) − J  *  
+7/8 (N e ) = 12.1836 = J  *  
+1/2 (N e ). In contrast, 
+when companies cooperate, their production is much smaller J  *  
+4/6 (C e ) &lt;&lt; J  *  
+4/6 (N e ) </p>
+
+
+
+<p>A Numerical Toolbox to Solve N -Player Affine LQ Open-Loop Differential Games </p>
+
+
+
+<p>but due to a degree of monopolistic power they are able to obtain higher profits: 
+J  *  
+1/2 (C e ) = 12.8162. </p>
+
+<p>5.2 Example 7.10 of Engwerda (2005) With Multiple Equilibria </p>
+
+<p>A two-player Example 7.10 from Engwerda (2005) can be rewritten using the notation 
+outlined in Sect. 2 as follows: </p>
+
+<p>A = 
+−0.1 0 
+0 
+−2 
+, B 1 = 
+1 0 
+0 1 
+, B 2 = 
+1 
+0 
+, Q 1 = 
+1 0 
+0 0.1 
+, Q 2 = 
+1 1 
+1 2 
+, </p>
+
+<p>R 1 = 
+2 −1 
+−1 1 
+, R 2 = 1, R i j = 0 (i = j), V 1 = V 2 = W 1 = W 2 = 
+0 
+0 
+and N i = 0. </p>
+
+<p>Step T1: <rs type="software">LQDG Toolbox</rs> Initialisation We can rewrite the above example to fit our 
+standard model (30-31) by specifying: </p>
+
+<p>P 1 = P 2 = P 3 = P 4i = P 5 = P 6 = P 8 = 0, P 7 = A, P 9i = B i and P 10 = 
+0 
+0 
+. </p>
+
+<p>Notice that in this example n = m 1 = 2, m 2 = 1 (and therefore m = 3) and b = 0. In 
+the performance specification all parameters are zero for both players, except for 
+φ (1,1),1 = 1; φ (2,2),1 = 0.1; φ (5,5),1 = 2; φ (5,6),1 = −1; φ (6,5),1 = −1; and φ (6,6),1 = 1, 
+for the first player, and: φ (1,1),2 = 1; φ (2,1),2 = 1; φ (1,2),2 = 1; φ (2,2),2 = 2; and 
+φ (7,7),2 = 1 for the second player. In this example, we specify the discount rate to 
+be 0. </p>
+
+<p>Step T2: Model Validation by <rs type="software">LQDG Toolbox</rs> With this input the toolbox next calcu-
+lates the standard form (17-18). Clearly, (i) R ii &gt; 0; (ii) (A, B i ) is stabilizable; and 
+(iii) G is invertible (see Appendix A for a definition of G). </p>
+
+<p>Step T3: Calculation of Equilibria Again, we will follow Algorithm 5 for the non-
+cooperative case where matrix M is: </p>
+
+<p>M = − </p>
+
+<p>⎡ </p>
+
+<p>⎢ 
+⎢ 
+⎢ 
+⎢ 
+⎢ 
+⎢ 
+⎣ </p>
+
+<p>0.1 0 
+1 
+1 
+1 
+0 
+0 
+2 
+1 
+2 
+0 
+0 
+1 
+0 −0.1 0 
+0 
+0 
+0 0.1 
+0 
+−2 
+0 
+0 
+1 
+1 
+0 
+0 −0.1 0 
+1 
+2 
+0 
+0 
+0 
+−2 </p>
+
+<p>⎤ </p>
+
+<p>⎥ 
+⎥ 
+⎥ 
+⎥ 
+⎥ 
+⎥ 
+⎦ </p>
+
+<p>. </p>
+
+<p>In Step A4 of the algorithm, the toolbox determines the spectrum of M. Numeri-
+cal calculations show that M = T J T −1 , where J is a diagonal matrix with entries 
+λ = {2; −2.2073; −1.0584; 2.0637; −0.1648; 1.4668} and </p>
+
+
+
+<p>T. Michalak et al. </p>
+
+<p>T = </p>
+
+<p>⎡ </p>
+
+<p>⎢ 
+⎢ 
+⎢ 
+⎢ 
+⎢ 
+⎢ 
+⎣ </p>
+
+<p>0 0.2724 −0.6261 −0.0303 −0.1714 
+0.3326 
+0 0.7391 
+0.5368 −0.0167 
+0.3358 
+0.0633 
+0 0.1181 −0.5405 
+0.0154 −0.6473 −0.2433 
+0 0.0176 
+0.0176 
+0.0262 
+0.0155 
+0.0119 
+0 0.4384 −0.0771 
+0.0239 
+0.6207 −0.2897 
+1 0.4161 
+0.1463 
+0.9987 
+0.2311 
+0.8614 </p>
+
+<p>⎤ </p>
+
+<p>⎥ 
+⎥ 
+⎥ 
+⎥ 
+⎥ 
+⎥ 
+⎦ </p>
+
+<p>. </p>
+
+<p>Let us factorise matrix T into [T 1 T 2 T 3 T 4 T 5 T 6 ]. Matrix M has six different eigen-
+values, where three of them are negative, i.e., λ s = {−2.2073; −1.0584; −0.1648}. 
+They correspond to eigenvectors T 2 , T 3 and T 5 . Since no eigenvalue has an 
+algebraic multiplicity higher than one and there are no complex eigenvalues, 
+the toolbox determines in Step A4.2.2.1 of the algorithm that there are at most 
+3 
+2 
+= 3 different equilibrium strategies that permit a feedback synthesis, i.e., </p>
+
+<p>Cn λ s = {(−2.2073, −1.0584), (−2.2073, −0.1648), (−1.0584, −0.1648)} orṼ s ∈ 
+{(T 2 , T 3 ), (T 2 , T 5 ), (T 3 , T 5 )}. For all three combinations of two eigenvectorsṼ s the 
+toolbox executes Step A5. 
+Consider P 1 := Im[T 2 T 3 ]. The first 2 × 2 block of this matrix equals 
+0.2724 −0.6261 
+0.7391 0.5368 
+. This matrix is invertible. P 1 is an element of P pos and </p>
+
+<p>σ (M| P 1 ) = {−2.2073, −1.0584}. In a similar way it can be verified that P 2 := 
+Im[T 2 T 5 ] and P 3 := Im[T 3 T 5 ] are also appropriate graph subspaces. On the whole, 
+all three M-invariant subspaces satisfy all conditions. 
+As an example, we will calculate the equilibrium strategy that permits a feedback 
+synthesis resulting from P 3 . To that end we factorise P 3 as follows: </p>
+
+<p>P 3 = </p>
+
+<p>⎡ </p>
+
+<p>⎢ 
+⎢ 
+⎢ 
+⎢ 
+⎢ 
+⎢ 
+⎣ </p>
+
+<p>−0.6261 −0.1714 
+0.5368 
+0.3358 
+−0.5405 −0.6473 
+0.0176 
+0.0155 
+−0.0771 0.6207 
+0.1463 
+0.2311 </p>
+
+<p>⎤ </p>
+
+<p>⎥ 
+⎥ 
+⎥ 
+⎥ 
+⎥ 
+⎥ 
+⎦ </p>
+
+<p>=: </p>
+
+<p>⎡ </p>
+
+<p>⎣ </p>
+
+<p>X 
+Y 
+Z </p>
+
+<p>⎤ </p>
+
+<p>⎦ , </p>
+
+<p>where X, Y and Z are 2 × 2 matrices. We obtain then: </p>
+
+<p>P 1 := Y X 
+−1 = 
+−0.5405 −0.6473 
+0.0176 
+0.0155 </p>
+
+<p>−0.6261 −0.1714 
+0.5368 
+0.3358 </p>
+
+<p>−1 </p>
+
+<p>and </p>
+
+<p>P 2 := Z X 
+−1 = 
+−0.0771 0.6207 
+0.1463 0.2311 </p>
+
+<p>−0.6261 −0.1714 
+0.5368 
+0.3358 </p>
+
+<p>−1 </p>
+
+<p>. </p>
+
+<p>The corresponding open-loop Nash strategy is u  *  
+i (t) := −R </p>
+
+<p>−1 </p>
+
+<p>i B T 
+iP i e A cl t x 0 . Here the 
+closed-loop matrix A cl := A − S 1P1 − S 2P2 is 
+−1.7538 −0.8112 
+1.3622 0.5305 
+. It is easily </p>
+
+<p>verified that the spectrum of this matrix A cl indeed equals {−1.0584, −0.1648}. The 
+cost for both players in this equilibrium is obtained by solving the corresponding </p>
+
+
+
+<p>A Numerical Toolbox to Solve N -Player Affine LQ Open-Loop Differential Games </p>
+
+
+
+<p>Lyapunov equation (29). This gives a cost: </p>
+
+<p>J 1 (N </p>
+
+<p>e </p>
+
+<p>3 ) = x </p>
+
+<p>T 
+0 </p>
+
+<p>10.2694 12.6875 
+12.6875 16.1956 
+x 0 and J 2 (N </p>
+
+<p>e </p>
+
+<p>3 ) = x </p>
+
+<p>T 
+0 </p>
+
+<p>15.7425 18.3929 
+18.3929 21.7370 
+x 0 . </p>
+
+<p>The other two non-cooperative equilibria are: </p>
+
+<p>J 1 (N </p>
+
+<p>e </p>
+
+<p>1 ) = x </p>
+
+<p>T 
+0 </p>
+
+<p>0.3207 −0.0476 
+−0.0476 
+0.0221 
+x 0 and J 2 (N </p>
+
+<p>e </p>
+
+<p>1 ) = x </p>
+
+<p>T 
+0 </p>
+
+<p>0.1708 0.1065 
+0.1065 0.2636 
+x 0 </p>
+
+<p>as well as </p>
+
+<p>J 1 (N </p>
+
+<p>e </p>
+
+<p>2 ) = x </p>
+
+<p>T 
+0 </p>
+
+<p>7.9338 −2.7856 
+−2.7856 
+1.0062 
+x 0 and J 2 (N </p>
+
+<p>e </p>
+
+<p>2 ) = x </p>
+
+<p>T 
+0 </p>
+
+<p>8.1006 −3.2333 
+−3.2333 
+1.6482 
+x 0 . </p>
+
+<p>Thus, there are altogether 3 non-cooperative equilibria N e 
+1 , N e 
+2 and N e 
+3 . Assum-
+ing x 0 = 
+1 
+1 
+we obtain the following optimal losses of players in this regime: </p>
+
+<p>N e </p>
+
+<p>1 </p>
+
+<p>N e </p>
+
+<p>2 </p>
+
+<p>N e </p>
+
+<p>3 </p>
+
+<p>J 1 
+0.2476 
+3.3688 
+51.8401 
+J 2 
+0.6473 
+3.2821 
+74.2653 </p>
+
+<p>The key question is whether it is possible to discriminate between multiple equi-
+libria of a particular coalition structure. It is especially important in more complex 
+games, where a practically intractable number of equilibria can be obtained. One of 
+the widely accepted solution concepts to discriminate between various equilibria of 
+a game is Pareto-domination. An equilibrium is said to be Pareto-dominated if it is 
+possible to find another equilibrium in which all the players in the game will not be 
+worse off and at least one of them will be better off. If option discriminate between 
+equilibria using Pareto domination is chosen, the toolbox is going to report a list of 
+Pareto-undominated equilibria. In the above case, it is clear that in the non-cooperative 
+regime equilibrium N e 
+1 dominates the other two as J 1 (N e 
+1 ) &lt; J 1 (N e 
+2 ) &lt; J 1 (N e 
+3 ) and 
+at the same time J 2 (N e 
+1 ) &lt; J 2 (N e 
+2 ) &lt; J 2 (N e 
+3 ). Consequently, apart from all the equi-
+libria, the toolbox is going to report also a set of Pareto-undominated equilibria which 
+consists of N e 
+1 . 
+The particular advantage of the Pareto concept is based on the fact that it is in the 
+interest of all the players to play only Pareto -undominated equilibria. However, the 
+downside is that there can be a whole spectrum of them. Because of this, we propose 
+another two ways to discriminate between multiple equilibria. The first method is based 
+on the concept of so called social optimum, i.e., such an equilibrium is chosen that mini-
+mises the sum of all the players' losses, or, in our two-player game: J 1 (N e 
+1 ) + J 2 (N e 
+1 ). 
+In our example J 1 (N e 
+1 ) + J 2 (N e 
+1 ) &lt; J 1 (N e 
+2 ) + J 2 (N e 
+2 ) &lt; J 1 (N e 
+3 ) + J 2 (N e 
+3 ) so the 
+first equilibrium is chosen when this option is on. The other method we propose to 
+discriminate between multiple equilibria refers to the adjustment speed of the equilib-
+rium closed-loop system towards its long-term equilibrium, measured by the smallest </p>
+
+
+
+<p>T. Michalak et al. </p>
+
+<p>absolute value of the eigenvalues of the A cl matrix that are located in the left half of 
+the complex plane. In our example: </p>
+
+<p>A cl (N </p>
+
+<p>e </p>
+
+<p>1 ) = </p>
+
+<p>−1.7538 −0.8112 
+1.3622 
+0.5305 
+, λ 
+s (N </p>
+
+<p>e </p>
+
+<p>1 ) = {−1.0584, −2.2073}; </p>
+
+<p>A cl (N </p>
+
+<p>e </p>
+
+<p>2 ) = </p>
+
+<p>−1.0212 −0.4372 
+−2.3234 −1.3510 
+, λ 
+s (N </p>
+
+<p>e </p>
+
+<p>2 ) = {−0.1648, −2.2073}; and </p>
+
+<p>A cl (N </p>
+
+<p>e </p>
+
+<p>3 ) = </p>
+
+<p>−1.7538 −0.8112 
+1.3622 
+0.5305 
+, λ 
+s (N </p>
+
+<p>e </p>
+
+<p>3 ) = {−1.0584, −0.1648}. </p>
+
+<p>Consequently, the toolbox will choose the equilibrium such that their graph sub-
+space consists of eigenvector corresponding to −1.0584, −2.2073, i.e., N e 
+1 . </p>
+
+<p>5.3 Example 7.12 of Engwerda (2005) With Complex Eigenvalues </p>
+
+<p>A two-player Example 7.12 from Engwerda (2005) can be rewritten in terms of nota-
+tion outlined in Sect. 2 as follows: </p>
+
+<p>A = 
+− </p>
+
+<p>1 
+2 </p>
+
+<p>0 
+0 − </p>
+
+<p>1 
+4 </p>
+
+<p>, B 1 = B 2 = 
+1 0 
+0 1 
+, Q 1 = 
+1 
+2 </p>
+
+<p>1 1 
+1 3 
+, Q 2 = 
+1 
+2 </p>
+
+<p>2 − </p>
+
+<p>7 
+9 </p>
+
+<p>− </p>
+
+<p>7 
+9 </p>
+
+<p>1 
+, </p>
+
+<p>R </p>
+
+<p>−1 </p>
+
+<p>1 = </p>
+
+<p>1 
+2 </p>
+
+<p>1 − </p>
+
+<p>7 
+90 </p>
+
+<p>− </p>
+
+<p>7 </p>
+
+<p>90 1 </p>
+
+<p>, R </p>
+
+<p>−1 </p>
+
+<p>2 = </p>
+
+<p>1 
+2 </p>
+
+<p>1 − </p>
+
+<p>1 
+10 </p>
+
+<p>− </p>
+
+<p>1 
+10 </p>
+
+<p>3 
+4 </p>
+
+<p>, </p>
+
+<p>V 1 = V 2 = W 1 = W 2 = 
+0 
+0 
+, and N i = 0. </p>
+
+<p>Step T1: <rs type="software">LQDG Toolbox</rs> Initialisation We can rewrite the above example to fit our 
+standard model (30-31) by specifying: </p>
+
+<p>P 1 = P 2 = P 3 = P 4i = P 5 = P 6 = P 8 = 0, P 7 = A, P 9i = B i and P 10 = 
+0 
+0 
+. </p>
+
+<p>Notice that in this example n = m 1 = m 2 = 2 (and therefore m = 4) and b = 0. 
+In the performance specification, all parameters are zero for both players, except for 
+φ (1,1),1 = </p>
+
+<p>1 </p>
+
+<p>2 , φ (1,2),1 = </p>
+
+<p>1 </p>
+
+<p>2 , φ (2,1),1 = </p>
+
+<p>1 </p>
+
+<p>2 , φ (2,2),1 = </p>
+
+<p>3 </p>
+
+<p>2 , φ (5,5),1 = r 11 , φ (5,6),1 = 
+r 12 , φ (6,5),1 = r 21 , φ (6,6),1 = r 22 , φ (1,1),2 = 1, φ (1,2),2 = − </p>
+
+<p>7 </p>
+
+<p>18 , φ (2,1),2 = 
+− </p>
+
+<p>7 </p>
+
+<p>18 , φ (2,2),2 = </p>
+
+<p>1 </p>
+
+<p>2 , φ (7,7),2 = s 11 , φ (7,8),2 = s 12 , φ (8,7),2 = s 21 , and φ (8,8),2 = s 22 , 
+where: </p>
+
+<p>r 11 r 12 
+r 21 r 22 
+= 
+1 
+2 </p>
+
+<p>1 − </p>
+
+<p>7 
+90 </p>
+
+<p>− </p>
+
+<p>7 
+90 </p>
+
+<p>1 </p>
+
+<p>−1 </p>
+
+<p>and 
+s 11 s 12 
+s 21 s 22 
+= 
+1 
+2 </p>
+
+<p>1 − </p>
+
+<p>1 
+10 </p>
+
+<p>− </p>
+
+<p>1 
+10 </p>
+
+<p>3 
+4 </p>
+
+<p>−1 </p>
+
+<p>, </p>
+
+<p>for the first and second players, respectively. Also in this example, we specify the 
+discount rate to be 0. </p>
+
+
+
+<p>A Numerical Toolbox to Solve N -Player Affine LQ Open-Loop Differential Games </p>
+
+
+
+<p>Step T2: Model Validation by <rs type="software">LQDG Toolbox</rs> With this input, the toolbox next cal-
+culates the standard form (17-18) and checks that both Q i and R i are positive definite, 
+(A, B i ) are stabilizable and G is invertible. </p>
+
+<p>Step T3: Calculation of Equilibria Again, we will follow Algorithm 5 for the non-
+cooperative case. We have that: </p>
+
+<p>M = − </p>
+
+<p>⎡ </p>
+
+<p>⎢ 
+⎢ 
+⎢ 
+⎢ 
+⎢ 
+⎢ 
+⎣ </p>
+
+<p>0.5000 
+0.0000 
+0.5000 −0.0389 
+0.5000 −0.0500 
+0.0000 
+0.2500 −0.0389 
+0.5000 −0.0500 
+0.3750 
+0.5000 
+0.5000 −0.5000 
+0.0000 
+0.0000 
+0.0000 
+0.5000 
+1.5000 
+0.0000 −0.2500 
+0.0000 
+0.0000 
+1.0000 −0.3889 
+0.0000 
+0.0000 −0.5000 
+0.0000 
+−0.3889 
+0.5000 
+0.0000 
+0.0000 
+0.0000 −0.2500 </p>
+
+<p>⎤ </p>
+
+<p>⎥ 
+⎥ 
+⎥ 
+⎥ 
+⎥ 
+⎥ 
+⎦ </p>
+
+<p>. </p>
+
+<p>In Step A4 of the algorithm the toolbox determines the spectrum of M. Numeri-
+cal calculations show that M = T J T −1 , where J is a diagonal matrix with entries 
+λ = {−1.0004 + 0.0227i; −1.0004 − 0.0227i; 0.2525; 0.4983; 1; 1} and </p>
+
+<p>T = </p>
+
+<p>⎡ </p>
+
+<p>⎢ 
+⎢ 
+⎢ 
+⎢ 
+⎢ 
+⎢ 
+⎣ </p>
+
+<p>0.1358 + 0.4406i 
+0.1358 − 0.4406i −0.0045 −0.0002 
+0.3848 
+0.0003 
+0.4499 − 0.1379i 
+0.4499 + 0.1379i 
+0.0005 
+0.0026 
+0.0134 −0.3767 
+0.1966 + 0.0979i 
+0.1966 − 0.0979i −0.0080 
+0.7063 −0.3982 
+0.3764 
+0.5940 
+0.5940 
+0.5979 −0.0156 −0.2833 
+0.7531 
+−0.0211 + 0.3297i −0.0211 − 0.3297i −0.0189 −0.7077 −0.7593 −0.2935 
+0.1341 − 0.1946i 
+0.1341 + 0.1946i −0.8013 −0.0056 
+0.1906 
+0.2513 </p>
+
+<p>⎤ </p>
+
+<p>⎥ 
+⎥ 
+⎥ 
+⎥ 
+⎥ 
+⎥ 
+⎦ </p>
+
+<p>. </p>
+
+<p>Matrix M has two (complex) eigenvalues with a negative real part. Let x be the 
+real part of the eigenvector corresponding with the eigenvalue −1.0004 + 0.0227i and 
+y the imaginary part of this eigenvector </p>
+
+<p>x 
+T := [0.1358, 0.4499, 0.1966, 0.5940, −0.0211, 0.1341] and </p>
+
+<p>y 
+T := [0.4406, −0.1379, 0.0979, 0, 0.3279, −0.1964]. </p>
+
+<p>The invariant subspace corresponding with eigenvalues {−1.0004 + 0.0227i; 
+−1.0004 − 0.0227i} is S =Im[x y]. According to Sect. 2, the unique equilibrium 
+actions are u  *  
+i (t) = −R </p>
+
+<p>−1 </p>
+
+<p>i B T 
+iP i x(t), where: </p>
+
+<p>P 1 = 
+0.1966 0.0979 
+0.5940 0 </p>
+
+<p>0.1358 0.4406 
+0.4499 −0.1379 </p>
+
+<p>−1 </p>
+
+<p>= 
+0.3280 0.3380 
+0.3776 1.2063 
+and </p>
+
+<p>P 2 = 
+−0.0211 0.3297 
+0.1341 −0.1964 </p>
+
+<p>0.1358 
+0.4406 
+0.4499 −0.1379 </p>
+
+<p>−1 </p>
+
+<p>= 
+0.6703 −0.2493 
+−0.3183 
+0.3942 
+. </p>
+
+<p>The with these actions corresponding closed-loop system matrix is then: </p>
+
+<p>A cl := 
+−1.0004 0.0222 
+−0.0231 −1.003 
+. </p>
+
+
+
+<p>T. Michalak et al. </p>
+
+<p>The eigenvalues of this matrix are {−1.0004 + 0.0227i; −1.0004 − 0.0227i}. The 
+corresponding equilibrium costs are </p>
+
+<p>J 1 (N 
+e ) = x </p>
+
+<p>T </p>
+
+<p>0L 1 (N 
+e )x 0 = 
+1 
+2 
+x </p>
+
+<p>T 
+0 </p>
+
+<p>0.2990 0.3715 
+0.3715 1.1344 
+x 0 and </p>
+
+<p>J 2 (N 
+e ) = x </p>
+
+<p>T </p>
+
+<p>0L 2 (N 
+e )x 0 = 
+1 
+2 
+x </p>
+
+<p>T 
+0 </p>
+
+<p>0.6479 −0.2644 
+−0.2644 0.2936 
+x 0 . </p>
+
+<p>6 Concluding Remarks </p>
+
+<p>In this paper we considered a dynamic linear affine structural form model that is 
+affected by different players who all like to minimise their own performance criterion 
+that is a quadratic affine function of the variables occurring in the model. The costs 
+are assumed to be discounted over time and the considered planning horizon by the 
+players is assumed to be infinite. Under the assumption that in the minimisation of 
+their performance the players do not cooperate, we presented both necessary and suffi-
+cient conditions under which this problem has a unique open-loop Nash equilibrium, a 
+multiple but finite number of equilibria and or an infinite number of equilibria. A com-
+putational framework was provided for how one can numerically solve the problem. 
+The algorithm has been implemented in a form of a numerical toolbox available on 
+the internet. Users, starting from the structural model, can calculate for their specific 
+application the equilibrium strategies and involved cost (if they exist). The toolbox 
+also provides the possibility to calculate for different coalition structures whether the 
+corresponding game will have an open-loop Nash solution. For that purpose the user 
+has to define which coalition structures they like to analyze and what the relative 
+importance is of each player within a certain coalition. We demonstrated both theoret-
+ically and numerically in a worked example on dynamic duopolistic competition the 
+use of the toolbox. 
+<rs type="software">LQDG Toolbox</rs> is implemented in <rs type="software">MATLAB</rs>. In particular, it uses some standard 
+functions of <rs type="software">MATLAB</rs> to calculate the eigenstructure of a (|N |n) × (|N |n) matrix, 
+where |N | is the number of involved players andn is the state dimension of the model. 
+Since no additional efforts are taken to calculate this eigenstructure in a numerically 
+efficient way, the practical use of the current toolbox is limited to some extent. This is 
+because for either a large number of players and/or a large state dimension, the accu-
+racy and efficiency is restricted by that of the implemented <rs type="software">MATLAB</rs> functions. So 
+for large N and/orn the user should look for an own code to implement the algorithm. 
+Another way one might choose to calculate the equilibrium strategies is by using iter-
+ative algorithms. In the literature a number of iterative schemes have been suggested 
+(see e.g. Engwerda 2007). A disadvantage of these schemes is that on the one hand 
+they do not provide an answer to the question whether the game will have a unique 
+equilibrium. On the other hand these schemes may converge without providing the 
+appropriate equilibrium strategy. If this happens one is stuck with the question how to 
+proceed. 
+For the corresponding problem with a finite planning horizon, at least from a the-
+oretical point, it is clear under which conditions there exists a unique equilibrium </p>
+
+
+
+<p>A Numerical Toolbox to Solve N -Player Affine LQ Open-Loop Differential Games </p>
+
+
+
+<p>(see e.g. Engwerda 2005). From a computational point it is also clear how one can 
+calculate this equilibrium. Either one can solve the involved set of nonlinear differen-
+tial two-point boundary-value equations directly using standard <rs type="software">MATLAB</rs> functions. 
+Another possibility is to transform the involved set of Riccati differential equations 
+(in the spirit of Reid (1972)) to a set of linear differential equations and then solve 
+this set first (see e.g. Tabak 1975; Engwerda 2007). Since the calculations require 
+the numerical solution of a set of (nonlinear) differential equations the dimension of 
+the games for which one can still calculate the equilibrium actions (using standard 
+<rs type="software">MATLAB</rs> functions) without problems is usually smaller than in the infinite horizon 
+case. 
+In the literature, also different equilibrium concepts have been studied for games 
+considered above. Probably the most well-known is the feedback Nash concept. Unfor-
+tunately, for this case there are no general conditions known, except for the scalar case, 
+i.e.,n = 1 (see e.g. Engwerda 2005) under which the game has a unique feedback 
+Nash equilibrium. 
+Finally, we would like to mention that for discrete time systems much work has 
+been done by Neck et al. in the development of the numerical software <rs type="software">OPTGAME</rs> 
+for the calculation of Nash equilibria in (non-)linear systems in case the performances 
+of players are quadratic (see e.g. Neck et al. 2001). </p>
+
+<p>Acknowledgments Tomasz Michalak acknowledges support from (a) the EPSRC under the project 
+ALADDIN (Autonomous Learning Agents for Decentralised Data and Information Systems) project and 
+is jointly funded by a BAE Systems and EPSRC strategic partnership; and (b) the FWO (Fonds voor 
+Wetenschappelijk Onderzoek Vlaanderen, Belgium). </p>
+
+<p>Open Access This article is distributed under the terms of the Creative Commons Attribution Noncom-
+mercial License which permits any noncommercial use, distribution, and reproduction in any medium, 
+provided the original author(s) and source are credited. </p>
+
+<p>Appendix A: Notation </p>
+
+<p>The following shorthand notation is used: </p>
+
+<p>S i := B i R </p>
+
+<p>−1 </p>
+
+<p>ii B </p>
+
+<p>T </p>
+
+<p>i , G := </p>
+
+<p>[0 I 0] M 1 
+[0 0 I ] M 2 </p>
+
+<p>⎡ </p>
+
+<p>⎣ </p>
+
+<p>0 0 
+I 0 
+0 I </p>
+
+<p>⎤ </p>
+
+<p>⎦ = 
+R 11 N 1 
+N T </p>
+
+<p>2 </p>
+
+<p>R 22 
+, </p>
+
+<p>where we assume throughout that this matrix G is invertible. Furthermore: </p>
+
+<p>A 2 := 
+A 0 
+0 A 
+, B := [B 1 , B 2 ], B 
+T := 
+B T </p>
+
+<p>1 </p>
+
+<p>0 
+0 B T </p>
+
+<p>2 </p>
+
+<p>, </p>
+
+<p>B </p>
+
+<p>T </p>
+
+<p>1 := </p>
+
+<p>B T </p>
+
+<p>1 </p>
+
+<p>0 
+, B </p>
+
+<p>T </p>
+
+<p>2 := </p>
+
+<p>0 
+B T </p>
+
+<p>2 </p>
+
+<p>, </p>
+
+<p>Q := 
+Q 1 
+Q 2 
+, Z := 
+[0 I 0] M 1 
+[0 0 I ] M 2 </p>
+
+<p>⎡ </p>
+
+<p>⎣ </p>
+
+<p>I 
+0 
+0 </p>
+
+<p>⎤ </p>
+
+<p>⎦ = 
+V T </p>
+
+<p>1 </p>
+
+<p>W T </p>
+
+<p>2 </p>
+
+<p>, </p>
+
+
+
+<p>T. Michalak et al. </p>
+
+<p>Z i := [I 0 0]M i </p>
+
+<p>⎡ </p>
+
+<p>⎣ </p>
+
+<p>0 0 
+I 0 
+0 I </p>
+
+<p>⎤ </p>
+
+<p>⎦ = [V i , W i ], i = 1, 2, </p>
+
+<p>A := A − BG 
+−1 Z , A </p>
+
+<p>T </p>
+
+<p>2 := A </p>
+
+<p>T </p>
+
+<p>2 − </p>
+
+<p>Z 1 
+Z 2 
+G 
+−1 B 
+T , </p>
+
+<p>Q i := Q i − Z i G 
+−1 Z , Q := 
+Q 1 
+Q 2 
+, S i := BG 
+−1 B </p>
+
+<p>T </p>
+
+<p>i , </p>
+
+<p>S := [ S 1 , S 2 ], and M := 
+A 
+− S 
+− Q − A T </p>
+
+<p>2 </p>
+
+<p>. </p>
+
+<p>Notice that: </p>
+
+<p>M = H 1 + H 2 G 
+−1 H 3 , </p>
+
+<p>where: </p>
+
+<p>H 1 := </p>
+
+<p>⎡ </p>
+
+<p>⎣ </p>
+
+<p>A 
+0 
+0 
+−Q 1 −A T 
+0 
+−Q 2 
+0 
+−A T </p>
+
+<p>⎤ </p>
+
+<p>⎦ , H 2 := </p>
+
+<p>⎡ </p>
+
+<p>⎣ </p>
+
+<p>−B 
+Z 1 
+Z 2 </p>
+
+<p>⎤ </p>
+
+<p>⎦ and H 3 := Z ,B T 
+1 ,B T 
+2 . </p>
+
+<p>Matrices H 1 , H 2 , H 3 and G to construct the M are stored in the <rs type="software">LQDG Toolbox</rs> output 
+file. </p>
+
+<p>Appendix B: Cost Function Submatrices </p>
+
+<p>p 2 ,i := </p>
+
+<p>⎡ </p>
+
+<p>⎢ 
+⎢ 
+⎣ </p>
+
+<p>φ (1,1),i p 2 </p>
+
+<p>1 </p>
+
+<p>φ (1,2),i p 1 p 2 . . . φ (1,n),i p 1 p n 
+φ (2,1),i p 2 p 1 φ (2,2),i p 2 </p>
+
+<p>2 </p>
+
+<p>. . . φ (2,n),i p 2 p n 
+. . . 
+. . . 
+. . . . . . 
+φ (n,1),i p n p 1 φ (n,2),i p n p 2 . . . φ (n,n),i p 2 </p>
+
+<p>n </p>
+
+<p>⎤ </p>
+
+<p>⎥ 
+⎥ 
+⎦ , </p>
+
+<p>ṗ p,i := </p>
+
+<p>⎡ </p>
+
+<p>⎢ 
+⎢ 
+⎣ </p>
+
+<p>φ (n+1,1),iṗ1 p 1 φ (n+1,2),iṗ1 p 2 . . . φ (n+1,n),iṗ1 p n 
+φ (n+2,1),iṗ2 p 1 φ (n+2,2),iṗ2 p 2 . . . φ (n+2,n),iṗ2 p n 
+. . . 
+. . . 
+. . . . . . 
+φ (n+n,1),iṗn p 1 φ (n+n,2),iṗn p 2 . . . φ (n+n,n),iṗn p n </p>
+
+<p>⎤ </p>
+
+<p>⎥ 
+⎥ 
+⎦ , </p>
+
+<p>yp,i := </p>
+
+<p>⎡ </p>
+
+<p>⎢ 
+⎢ 
+⎣ </p>
+
+<p>φ (2n+1,1),i y 1 p 1 φ (2n+1,2),i y 1 p 2 . . . φ (2n+1,n),i y 1 p n 
+φ (2n+2,1),i y 2 p 1 φ (2n+2,2),i y 2 p 2 . . . φ (2n+2,n),i y 2 p n 
+. . . 
+. . . 
+. . . . . . 
+φ (2n+b,1),i y b p 1 φ (2n+b,2),i y b p 2 . . . φ (2n+b,n),i y b p n </p>
+
+<p>⎤ </p>
+
+<p>⎥ 
+⎥ 
+⎦ , </p>
+
+<p>vp,i := </p>
+
+<p>⎡ </p>
+
+<p>⎢ 
+⎢ 
+⎣ </p>
+
+<p>φ (2n+b+1,1),i v 1 p 1 φ (2n+b+1,2),i v 1 p 2 . . . φ (2n+b+1,n),i v 1 p n 
+φ (2n+b+2,1),i v 2 p 1 φ (2n+b+2,2),i v 2 p 2 . . . φ (2n+b+2,n),i v 2 p n 
+. . . 
+. . . 
+. . . . . . 
+φ (2n+b+m,1),i v m p 1 φ (2n+b+m,2),i v m p 2 . . . φ (2n+b+m,n),i v m p n </p>
+
+<p>⎤ </p>
+
+<p>⎥ 
+⎥ 
+⎦ , </p>
+
+<p>cp,i := φ (2n+b+m+1,1),i cp 1 φ (2n+b+1,2,i) cp 2 . . . φ (2n+b+1,n,i) cp n , </p>
+
+
+
+<p>A Numerical Toolbox to Solve N -Player Affine LQ Open-Loop Differential Games </p>
+
+
+
+<p>pṗ,i := </p>
+
+<p>⎡ </p>
+
+<p>⎢ 
+⎢ 
+⎣ </p>
+
+<p>φ (1,n+1),i p 1ṗ1 φ (1,n+2),i p 1ṗ2 . . . φ (1,n+n),i p 1ṗn 
+φ (2,n+1),i p 2ṗ1 φ (2,n+2),i p 2ṗ2 . . . φ (2,n+n),i p 2ṗn 
+. . . 
+. . . 
+. . . . . . 
+φ (n,n+1),i p nṗ1 φ (n,n+2),i p nṗ2 . . . φ (n,n+n),i p nṗn </p>
+
+<p>⎤ </p>
+
+<p>⎥ 
+⎥ 
+⎦ , </p>
+
+<p>ṗ 2 ,i := </p>
+
+<p>⎡ </p>
+
+<p>⎢ 
+⎢ 
+⎣ </p>
+
+<p>φ (n+1,n+1),iṗ </p>
+
+<p>2 
+1 </p>
+
+<p>φ (n+1,n+2),iṗ1ṗ2 . . . φ (n+1,n+n),iṗ1ṗn 
+φ (n+2,n+1),iṗ2ṗ1 φ (n+2,n+2),iṗ </p>
+
+<p>2 
+2 </p>
+
+<p>. . . φ (n+2,n+n),iṗ1ṗn 
+. . . 
+. . . 
+. . . . . . 
+φ (n+n,n+1),iṗnṗ1 φ (n+n,n+2),iṗnṗ2 . . . φ (n+n,n+n),iṗ </p>
+
+<p>2 
+n </p>
+
+<p>⎤ </p>
+
+<p>⎥ 
+⎥ 
+⎦ , </p>
+
+<p>yṗ,i := </p>
+
+<p>⎡ </p>
+
+<p>⎢ 
+⎢ 
+⎣ </p>
+
+<p>φ (2n+1,1,i) y 1ṗ1 φ (2n+1,2,i) y 1ṗ2 . . . φ (2n+1,n),i y 1ṗn 
+φ (2n+2,1,i) y 2ṗ1 φ (2n+2,2,i) y 2ṗ2 . . . φ (2n+2,n),i y 2ṗn 
+. . . 
+. . . 
+. . . . . . 
+φ (2n+b,1,i) y bṗ1 φ (2n+b,2,i) y bṗ2 . . . φ (2n+b,n),i y bṗn </p>
+
+<p>⎤ </p>
+
+<p>⎥ 
+⎥ 
+⎦ , </p>
+
+<p>vṗ,i := </p>
+
+<p>⎡ </p>
+
+<p>⎢ 
+⎢ 
+⎣ </p>
+
+<p>φ (2n+b+1,n+1,i) v 1ṗ1 φ (2n+b+1,n+2,i) v 1ṗ2 . . . φ (2n+b+1,n+n),i v 1ṗn 
+φ (2n+b+2,n+1,i) v 2ṗ1 φ (2n+b+2,n+2,i) v 2ṗ2 . . . φ (2n+b+2,n+n),i v 2ṗn 
+. . . 
+. . . 
+. . . . . . 
+φ (2n+b+m,n+1,i) v mṗ1 φ (2n+b+m,n+2,i) v mṗ2 . . . φ (2n+b+m,n+n),i v mṗn </p>
+
+<p>⎤ </p>
+
+<p>⎥ 
+⎥ 
+⎦ , </p>
+
+<p>cṗ,i := φ (2n+b+m+1,n+1),i cṗ 1 φ (2n+b+1,n+2,i) cṗ 2 . . . φ (2n+b+1,n+n,i) cṗ n , </p>
+
+<p>py,i := </p>
+
+<p>⎡ </p>
+
+<p>⎢ 
+⎢ 
+⎣ </p>
+
+<p>φ (1,2n+1),i p 1 y 1 φ (1,2n+2),i p 1 y 2 . . . φ (1,2n+b),i p 1 y b 
+φ (2,2n+1),i p 2 y 1 φ (2,2n+2),i p 2 y 2 . . . φ (2,2n+b),i p 2 y b 
+. . . 
+. . . 
+. . . . . . 
+φ (n,2n+1),i p n y 1 φ (n,2n+2),i p n y 2 . . . φ (n,2n+b),i p n y b </p>
+
+<p>⎤ </p>
+
+<p>⎥ 
+⎥ 
+⎦ , </p>
+
+<p>ṗy,i := </p>
+
+<p>⎡ </p>
+
+<p>⎢ 
+⎢ 
+⎣ </p>
+
+<p>φ (n+1,2n+1),iṗ1 y 1 φ (n+1,2n+2),iṗ1 y 2 . . . φ (n+1,2n+b),iṗ1 y b 
+φ (n+2,2n+1),iṗ2 y 1 φ (n+2,2n+2),iṗ2 y 2 . . . φ (n+2,2n+b),iṗ2 y b 
+. . . 
+. . . 
+. . . . . . 
+φ (n+n,2n+1),iṗn y 1 φ (n+n,2n+2),iṗn y 2 . . . φ (n+n,2n+b),iṗn y b </p>
+
+<p>⎤ </p>
+
+<p>⎥ 
+⎥ 
+⎦ , </p>
+
+<p>y 2 ,i := </p>
+
+<p>⎡ </p>
+
+<p>⎢ 
+⎢ 
+⎣ </p>
+
+<p>φ (2n+1,2n+1),i y 2 </p>
+
+<p>1 </p>
+
+<p>φ (2n+1,2n+2),i y 1 y 2 . . . φ (2n+1,2n+b),i y 1 y b 
+φ (2n+2,2n+1),i y 2 y 1 φ (2n+2,n+2),i y 2 </p>
+
+<p>2 </p>
+
+<p>. . . φ (2n+2,2n+b),i y 2 y b 
+. . . 
+. . . 
+. . . . . . 
+φ (2n+b,2n+1),i y b y 1 φ (2n+b,2n+2),i y b y 2 . . . φ (2n+b,2n+1),i y 2 </p>
+
+<p>b </p>
+
+<p>⎤ </p>
+
+<p>⎥ 
+⎥ 
+⎦ , </p>
+
+<p>vy,i := </p>
+
+<p>⎡ </p>
+
+<p>⎢ 
+⎢ 
+⎣ </p>
+
+<p>φ (2n+b+1,2n+1,i) v 1 y 1 φ (2n+b+1,2n+2,i) v 1 y 2 . . . φ (2n+b+1,2n+b),i v 1 y b 
+φ (2n+b+2,2n+1,i) v 2 y 1 φ (2n+b+2,2n+2,i) v 2 y 2 . . . φ (2n+b+2,2n+b),i v 2 y b 
+. . . 
+. . . 
+. . . . . . 
+φ (2n+b+m,2n+1,i) v m y 1 φ (2n+b+m,2n+2,i) v m y 2 . . . φ (2n+b+m,2n+b),i v m y b </p>
+
+<p>⎤ </p>
+
+<p>⎥ 
+⎥ 
+⎦ , </p>
+
+<p>cy,i := φ (2n+b+m+1,2n+1,i) cy 1 φ (2n+b+m+1,2n+2,i) cy 2 . . . φ (2n+b+m+1,2n+b),i cy b , </p>
+
+<p>pv,i := </p>
+
+<p>⎡ </p>
+
+<p>⎢ 
+⎢ 
+⎣ </p>
+
+<p>φ (1,2n+b+1),i p 1 v 1 φ (1,2n+b+2),i p 1 v 2 
+. . . φ (1,2n+b+m),i p 1 v m 
+φ (2,2n+b+1),i p 2 v 1 φ (2,2n+b+2),i p 2 v 2 
+. . . φ (2,2n+b+m),i p 2 v m 
+. . . 
+. . . 
+. . . . . . 
+φ (n,2n+b+1),i p n v 1 φ (n+n,2n+b+2),i p n v 2 . . . φ (n,2n+b+m),i p n v m </p>
+
+<p>⎤ </p>
+
+<p>⎥ 
+⎥ 
+⎦ , </p>
+
+<p>ṗv,i := </p>
+
+<p>⎡ </p>
+
+<p>⎢ 
+⎢ 
+⎣ </p>
+
+<p>φ (n+1,2n+b+1),iṗ1 v 1 φ (n+1,2n+b+2),iṗ1 v 2 . . . φ (n+1,2n+b+m),iṗ1 v m 
+φ (n+2,2n+b+1),iṗ2 v 1 φ (n+2,2n+b+2),iṗ2 v 2 . . . φ (n+2,2n+b+m),iṗ2 v m 
+. . . 
+. . . 
+. . . . . . 
+φ (n+n,2n+b+1),iṗn v 1 φ (n+n,2n+b+2),iṗn v 2 . . . φ (n+n,2n+b+m),iṗn v m </p>
+
+<p>⎤ </p>
+
+<p>⎥ 
+⎥ 
+⎦ , </p>
+
+
+
+<p>T. Michalak et al. </p>
+
+<p>yv,i := </p>
+
+<p>⎡ </p>
+
+<p>⎢ 
+⎢ 
+⎣ </p>
+
+<p>φ (2n+1,2n+b+1),i y 1 v 1 φ (2n+1,2n+b+2),i y 1 v 2 . . . φ (2n+1,2n+b+m),i y 1 v m 
+φ (2n+2,2n+b+1),i y 2 v 1 φ (2n+2,2n+b+2),i y 2 v 2 . . . φ (2n+2,2n+b+m),i y 2 v m 
+. . . 
+. . . 
+. . . . . . 
+φ (2n+b,2n+b+1),i y b v 1 φ (2n+b,2n+b+2),i y b v 2 . . . φ (2n+b,2n+b+m),i y b v m </p>
+
+<p>⎤ </p>
+
+<p>⎥ 
+⎥ 
+⎦ , </p>
+
+<p>v 2 ,i := </p>
+
+<p>⎡ </p>
+
+<p>⎢ 
+⎢ 
+⎣ </p>
+
+<p>φ (2n+b+1,2n+b+1),i v 2 </p>
+
+<p>1 </p>
+
+<p>φ (2n+b+1,2n+b+2),i v 1 v 2 . . . φ (2n+b+1,2n+b+m),i v 1 v m 
+φ (2n+b+2,2n+b+1),i v 2 v 1 φ (2n+b+2,2n+b+2),i v 2 v 2 . . . φ (2n+b+2,2n+b+m),i v 2 v m 
+. . . 
+. . . 
+. . . . . . 
+φ (2n+b+m,2n+b+1),i v m v 1 φ (2n+b+m,2n+b+2),i v m v 2 . . . φ (2n+b+m,2n+b+m),i v 2 </p>
+
+<p>m </p>
+
+<p>⎤ </p>
+
+<p>⎥ 
+⎥ 
+⎦ , </p>
+
+<p>cv,i := φ (2n+b+m+1,2n+b+1,i) cv 1 φ (2n+b+m+1,2n+b+2,i) cv 2 . . . φ (2n+b+m+1,2n+b+m),i cv m , </p>
+
+<p>pc,i := </p>
+
+<p>⎡ </p>
+
+<p>⎢ 
+⎢ 
+⎣ </p>
+
+<p>φ (1,2n+b+m+1),i p 1 c 
+φ 2,2n+b+m+1),i p 2 c 
+. . . 
+φ n,2n+b+m+1),i p n c </p>
+
+<p>⎤ </p>
+
+<p>⎥ 
+⎥ 
+⎦ , ṗc,i := </p>
+
+<p>⎡ </p>
+
+<p>⎢ 
+⎢ 
+⎣ </p>
+
+<p>φ (n+1,2n+b+m+1),iṗ1 c 
+φ n+2,2n+b+m+1),iṗ2 c 
+. . . 
+φ n+n,2n+b+m+1),iṗn c </p>
+
+<p>⎤ </p>
+
+<p>⎥ 
+⎥ 
+⎦ , </p>
+
+<p>yc,i := </p>
+
+<p>⎡ </p>
+
+<p>⎢ 
+⎢ 
+⎣ </p>
+
+<p>φ (2n+1,2n+b+m+1),i y 1 c 
+φ 2n+2,2n+b+m+1),i y 2 c 
+. . . 
+φ 2n+m,2n+b+m+1),i y b c </p>
+
+<p>⎤ </p>
+
+<p>⎥ 
+⎥ 
+⎦ , vc,i := </p>
+
+<p>⎡ </p>
+
+<p>⎢ 
+⎢ 
+⎣ </p>
+
+<p>φ (2n+b+1,2n+b+m+1),i v 1 c 
+φ 2n+b+2,2n+b+m+1),i v 2 c 
+. . . 
+φ 2n+b+m,2n+b+m+1),i v n c </p>
+
+<p>⎤ </p>
+
+<p>⎥ 
+⎥ 
+⎦ , and </p>
+
+<p>c 2 ,i := φ (2n+b+m+1,2n+b+m+1),i c 2 . </p>
+
+<p>Appendix C: Defining Linear Quadratic Loss Function in the Input File </p>
+
+<p>If the user chooses to create by themselves the input file, the linear-quadratic loss of 
+every player in the game should be defined as follows. According to the definition of 
+vector z(t), i.e., z(t) := [ p(t)ṗ(t) y(t) v(t) c] 
+T , coefficient φ (in the loss of player i) 
+that regards: </p>
+
+<p>(i) variable p 1≤k≤n has an index (k, .), i, i.e. , φ (k,.),i ; 
+(ii) variableṗ 1≤k≤n has an index (n + k, .), i, i.e., φ (n+k,.),i ; 
+(iii) variable y 1≤k≤b has an index (2n + k, .), i, i.e., φ (2n+k,.),i ; 
+(iv) variable v 1≤k≤m has an index (2n + b + k, .), i, i.e., φ (2n+b+k,.),i ; and 
+(v) variable c has an index (2n + b + m + 1, .), i, i.e., φ (2n+b+m+1,.),i . </p>
+
+<p>For example, to define in the toolbox the following loss function of player i: </p>
+
+<p>J i = 
+1 
+2 </p>
+
+<p>∞ </p>
+
+<p>0 </p>
+
+<p>5 p </p>
+
+<p>2 </p>
+
+<p>1 − </p>
+
+<p>1 
+2 
+p 2 p 6 + α 1ṗ3 ( p 3 +ṗ 2 ) + v 2 ( p 3 + 2v i ) + 
+√ 
+3v </p>
+
+<p>2 </p>
+
+<p>i + 4 e 
+−θt dt, </p>
+
+<p>where α 1 is some parameter, we need to simplify it first into linear quadratic form: </p>
+
+<p>J i = 
+1 
+2 </p>
+
+<p>∞ </p>
+
+<p>0 </p>
+
+<p>5 p </p>
+
+<p>2 </p>
+
+<p>1 − </p>
+
+<p>1 
+2 
+p 2 p 6 + α 1 p 3ṗ3 + α 1ṗ2ṗ3 + p 3 v 2 + 2v i v 2 + 
+√ 
+3v </p>
+
+<p>2 </p>
+
+<p>i + 4 e 
+−θ t dt, </p>
+
+
+
+<p>A Numerical Toolbox to Solve N -Player Affine LQ Open-Loop Differential Games </p>
+
+
+
+<p>and set: </p>
+
+<p>φ (1,1),i = 5, φ (2,6),i = − 
+1 
+2 
+, φ (3,n+3),i = α 1 , φ (n+2,n+3),i = α 1 , φ (3,2n+b+2),i = 1, </p>
+
+<p>φ (2n+b+i,2n+b+2),i = 2, φ (2n+b+i,2n+b+i),i = 
+√ 
+3, and φ (2n+b+m+1,2n+b+m+1),i = 4. </p>
+
+<p>Of course, instead of φ (2,6),i = − </p>
+
+<p>1 </p>
+
+<p>2 one might as well set φ (6,2),i = − </p>
+
+<p>1 </p>
+
+<p>2 or φ (2,6),i = 
+− </p>
+
+<p>1 </p>
+
+<p>4 and φ (6,2),i = − </p>
+
+<p>1 </p>
+
+<p>4 or any other linear combination that sums up to − </p>
+
+<p>1 </p>
+
+<p>2 . </p>
+
+
+
+
+
+<p>T. Michalak et al. </p>
+
+
+
+
+
+</text></tei>

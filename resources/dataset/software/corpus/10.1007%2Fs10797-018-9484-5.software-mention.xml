@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1007%2Fs10797-018-9484-5" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T19:55+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1007%2Fs10797-018-9484-5" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:02+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>Abstract Contrary to frequent recommendations of the public finance literature and 
 international institutions, a persistently high tax wedge on labor is observed in Europe. 
@@ -427,34 +427,18 @@ shows the smallest distance metric based on the set of matching variables. Speci
 we transform the data into uncorrelated, standardized variables with variance equal to 
 1 and then compute the Euclidean distance between two vectors x and y (McLachlan 
 2004). Let C denote covariance matrix and the superscript T the matrix transpose, 
-the distance between a HFCS observation x = </p>
-
-<p>x 1 , x 2, x 3, . . . , x N 
+the distance between a HFCS observation x = x 1 , x 2, x 3, . . . , x N 
 T and a SILC </p>
 
-<p>observation y = </p>
-
-<p>y 1 , y 2, y 3, . . . , y N 
+<p>observation y = y 1 , y 2, y 3, . . . , y N 
 T is then defined as: </p>
 
-<p>d </p>
-
-<p>
-x, y </p>
-
-<p>
-= </p>
-
-<p>
+<p>d x, y = 
 x − y </p>
 
-<p>T 
-C −1 </p>
+<p>T </p>
 
-<p>
-x − y </p>
-
-<p>
+<p>C −1 x − y 
 (1) </p>
 
 <p>Since our recipient dataset (EU-SILC) is more than three times larger than our 
@@ -658,7 +642,7 @@ next section, we will run our simulations on this matched dataset. </p>
 
 <p>5.1 The tax-benefit model <rs type="software">EUROMOD</rs> </p>
 
-<p>Our policy reform simulations are performed on <rs id="software-14" type="software">EUROMOD</rs> (<rs corresp="#software-14" type="version-number">version G2.0</rs>), the 
+<p>Our policy reform simulations are performed on <rs id="software-5" type="software">EUROMOD</rs> (<rs corresp="#software-5" type="version-number">version G2.0</rs>), the 
 tax-benefit microsimulation model designed for EU member states. It applies national 
 tax-benefit policy rules to harmonized microdata and calculates their effects on house-
 hold disposable income (Sutherland and Figari 2013). Unlike computable general 
@@ -1885,27 +1869,15 @@ of 1 as perfect discrepancy. As commonly stated in the literature, an HD of over
 5% raises concerns about the similarity in marginal distributions (e.g., Leulescu and 
 Agafitei 2013). </p>
 
-<p>HD </p>
+<p>HD V, V = </p>
 
-<p>V, V = </p>
-
-
-
-
-
-<p>
-K </p>
-
-
+<p>K </p>
 
 <p>n </p>
 
-<p>
-n Di 
+<p>n Di 
 N D 
-− </p>
-
-<p>
+− 
 n Ri 
 N R </p>
 
@@ -2398,154 +2370,89 @@ power </p>
 
 <p>Max age </p>
 
-
-
-<p>
-Average age </p>
-
-<p>
+<p>Average age 
 × </p>
 
-<p>Number of females </p>
-
-<p>
+<p>Number of females 
 × </p>
 
-<p>Number of children </p>
-
-<p>
+<p>Number of children 
 × </p>
 
 <p>Household size </p>
 
-
-
-<p>
-Marital status </p>
-
-<p>
+<p>Marital status 
 × </p>
 
-<p>Any migrant </p>
+<p>Any migrant 
+× </p>
 
-<p>× </p>
+<p>Years in country 
+× </p>
 
-<p>Years in country </p>
-
-<p>× </p>
-
-<p>Employment status </p>
-
-<p>
+<p>Employment status 
 × </p>
 
 <p>Higher education </p>
 
+<p>ISCO-88 
+× </p>
 
+<p>NACE 
+× </p>
 
-<p>
-ISCO-88 </p>
-
-<p>× </p>
-
-<p>NACE </p>
-
-<p>× </p>
-
-<p>Work contract </p>
-
-<p>
+<p>Work contract 
 × </p>
 
 <p>Years worked </p>
 
+<p>Working hours </p>
 
+<p>Employee income 
+× </p>
 
-<p>
-Working hours </p>
-
-
-
-<p>
-Employee income </p>
-
-<p>× </p>
-
-<p>Self-employed income </p>
-
-<p>× </p>
+<p>Self-employed income 
+× </p>
 
 <p>Self-employed dummy </p>
 
+<p>Public pension income </p>
 
+<p>Unemployment benefit 
+× </p>
 
-<p>
-Public pension income </p>
+<p>Income from financial investment 
+× </p>
 
-
-
-<p>
-Unemployment benefit </p>
-
-<p>× </p>
-
-<p>Income from financial investment </p>
-
-<p>× </p>
-
-<p>Other benefits </p>
-
-<p>× </p>
+<p>Other benefits 
+× </p>
 
 <p>Private pension contribution </p>
 
-
-
-<p>
-Mortgage </p>
-
-<p>× </p>
+<p>Mortgage 
+× </p>
 
 <p>Mortgage dummy </p>
 
-
-
-<p>
-Rental income </p>
-
-<p>× </p>
+<p>Rental income 
+× </p>
 
 <p>Rental income dummy </p>
 
-
-
-<p>
-Intra-household income </p>
-
-<p>× </p>
+<p>Intra-household income 
+× </p>
 
 <p>Total income </p>
 
+<p>Tenure status </p>
 
-
-<p>
-Tenure status </p>
-
-
-
-<p>
-Rent </p>
-
-<p>× </p>
+<p>Rent 
+× </p>
 
 <p>Years in residence </p>
 
-
-
-<p>
-Vehicle </p>
-
-<p>× </p>
+<p>Vehicle 
+× </p>
 
 <p>B Appendix B: Second-order effects </p>
 

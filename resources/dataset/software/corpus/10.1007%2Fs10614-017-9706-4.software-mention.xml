@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1007%2Fs10614-017-9706-4" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T20:00+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1007%2Fs10614-017-9706-4" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:07+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>Abstract The importance of network externalities for the development of technol-
 ogy and industry structure has been recognized in evolutionary economic for a long 
@@ -190,8 +190,11 @@ The starting point of the model is a replicator equation 11 </p>
 evolutionary fitness term of this standard, and φ j,t is the average evolutionary fitness 
 in segment j at time t. </p>
 
-<p>φ j,t = f T 
-j ,t p j ,t </p>
+<p>φ j,t = f </p>
+
+<p>T </p>
+
+<p>j ,t p j ,t </p>
 
 <p>where f j ,t = </p>
 
@@ -248,8 +251,7 @@ the level of interaction of network externalities to be fine-tuned or investigat
 
 <p>f j ,t = w j , j A j p j ,t + </p>
 
-<p>
-j = j </p>
+<p>j = j </p>
 
 <p>w j , j C j , j p j,t . </p>
 
@@ -266,20 +268,13 @@ Consider for illustrative purposes a system with one segment and two standards.
 The above function would become </p>
 
 <p>f 1,1,t 
-f 2,1,t </p>
-
-<p>
-= w 1,1 </p>
-
-<p>
+f 2,1,t 
+= w 1,1 
 a 11,1,t a 12,1,t 
 a 21,1,t a 22,1,t </p>
 
-<p>
-p 1,1,t 
-p 2,1,t </p>
-
-<p>
+<p>p 1,1,t 
+p 2,1,t 
 . </p>
 
 <p>and would not have to contain any cross-segmental compatibility matrices C. In case 
@@ -287,31 +282,19 @@ of a two-segment system with two standards in each segment, the fitness function
 standards in segment 1 would read </p>
 
 <p>f 1,1,t 
-f 2,1,t </p>
-
-<p>
-= w 1,1 </p>
-
-<p>
+f 2,1,t 
+= w 1,1 
 a 11,1,t a 12,1,t 
 a 21,1,t a 22,1,t </p>
 
-<p>
-p 1,1,t 
-p 2,1,t </p>
-
-<p>
-+w 1,2 </p>
-
-<p>
+<p>p 1,1,t 
+p 2,1,t 
++w 1,2 
 c 11,1,2,t c 12,1,2,t 
 c 21,1,2,t c 22,1,2,t </p>
 
-<p>
-p 1,2,t 
-p 2,2,t </p>
-
-<p>
+<p>p 1,2,t 
+p 2,2,t 
 . </p>
 
 <p>(1) </p>
@@ -400,9 +383,8 @@ is obtained that </p>
 <p>∂ p 1,1,t+1 
 ∂c 22,1,2 </p>
 
-<p>≤ 0. However, in </p>
-
-<p>the inter-segmental case, there may be irreducible indirect effects that work by first 
+<p>≤ 0. However, in 
+the inter-segmental case, there may be irreducible indirect effects that work by first 
 influencing the usage shares in the other segment and then taking an indirect effect by 
 means of these. This will be discussed in more detail in Sect. 4.2. 
 The proper way to analyze this is by computing the attractors in this dynamical 
@@ -455,29 +437,53 @@ truthfully. In order to keep the model close and comparable to the aggregated le
 replicator model above, the future population shares p i, j,t+1 in the replicator model 
 are used as probabilities for the agent to adopt the respective technologies, hence </p>
 
-<p>p i, j,t+1 = p L 
-i, j,t (1 + f L 
-i, j,t − φ L 
-j,t ) </p>
+<p>p i, j,t+1 = p </p>
+
+<p>L </p>
+
+<p>i, j,t (1 + f </p>
+
+<p>L </p>
+
+<p>i, j,t − φ </p>
+
+<p>L </p>
+
+<p>j,t ) </p>
 
 <p>with </p>
 
-<p>f L 
-j ,t = w j , j A j p L 
-j ,t + </p>
+<p>f </p>
 
+<p>L </p>
 
+<p>j ,t = w j , j A j p </p>
+
+<p>L </p>
+
+<p>j ,t + </p>
 
 <p>j = j </p>
 
-<p>w j , j C j , j p L 
-j,t . </p>
+<p>w j , j C j , j p </p>
 
-<p>φ L 
-j,t = ( f L 
-j ,t ) T p L </p>
+<p>L </p>
 
-<p>j ,t </p>
+<p>j,t . </p>
+
+<p>φ </p>
+
+<p>L </p>
+
+<p>j,t = ( f </p>
+
+<p>L </p>
+
+<p>j ,t ) 
+T p </p>
+
+<p>L 
+j ,t </p>
 
 <p>where the variables with superscript L indicates quantities in the immediate neigh-
 borhood of the respective agent that are not necessarily constant across the network. 
@@ -582,24 +588,15 @@ must be the case for all models of this type. For the multi-segment models, howe
 this is less easy to assess. 
 If not indicated otherwise, the parameters for the following two-and three-segment </p>
 
-<p>Monte Carlo simulations are set as follows: A = </p>
-
-<p>
+<p>Monte Carlo simulations are set as follows: A = 
 1 0.9 
-0.9 1 </p>
-
-
-
-<p>, C = </p>
-
-<p>
+0.9 1 
+, C = 
 0.1 0 
-0 0.1 </p>
+0 0.1 
+, </p>
 
-
-
-<p>, 
-w 1,1 = w 2,2 = 1, w 1,2 = w 2,1 = 2; the settings for the initial usage shares vary 
+<p>w 1,1 = w 2,2 = 1, w 1,2 = w 2,1 = 2; the settings for the initial usage shares vary 
 according to the scenario needed for the study of the respective effect. 
 The agent-based simulation follows the same principle (just one effect or variable is 
 varied ceteris paribus) but with 100 runs per effect and setting with all studies repeated 
@@ -616,30 +613,17 @@ w 1,1 = w 2,2 = 1, and 2 for inter-segmental influence, w 1,2 = w 2,1 = 2 but so
 contrasted by runs without intra-segmental network effect (hence, w 1,1 = w 2,2 = 0) in order to show a 
 more pronounced inter-segmental effect. </p>
 
-<p>22 Panel 1a with A = </p>
-
-<p>
+<p>22 Panel 1a with A = 
 1 0.9 
-0.9 1 </p>
-
-
-
-<p>, varying usage share p 1 ; Panel 1b with A = </p>
-
-<p>
+0.9 1 
+, varying usage share p 1 ; Panel 1b with A = 
 1 0.9 
-a 12 1 </p>
-
-
-
-<p>, p t=0 = </p>
+a 12 1 
+, p t=0 = </p>
 
 <p>0.3 
-0.7 </p>
-
-
-
-<p>and varying a 12 . </p>
+0.7 
+and varying a 12 . </p>
 
 <p>23 Which is between 0.4 and 0.5 for the current settings. </p>
 
@@ -732,8 +716,9 @@ Improved inter-segmental compatibility c </p>
 
 <p>in segment j </p>
 
-<p>with standard i 
-in segments j 
+<p>with standard i </p>
+
+<p>in segments j 
 which is/was tied (has higher </p>
 
 <p>compatibility to) standard i </p>
@@ -902,8 +887,9 @@ the initial usage share p 1, j,0 = 0.3 </p>
 400 
 500 
 600 
-700 
-0 </p>
+700 </p>
+
+<p>0 </p>
 
 <p>0.2 </p>
 
@@ -925,8 +911,9 @@ Shares Segm.1 </p>
 400 
 500 
 600 
-700 
-0 </p>
+700 </p>
+
+<p>0 </p>
 
 <p>0.2 </p>
 
@@ -954,8 +941,9 @@ p(1,j,0)=0.1 </p>
 400 
 500 
 600 
-700 
-0 </p>
+700 </p>
+
+<p>0 </p>
 
 <p>0.2 </p>
 
@@ -977,8 +965,9 @@ Shares Segm.1 </p>
 400 
 500 
 600 
-700 
-0 </p>
+700 </p>
+
+<p>0 </p>
 
 <p>0.2 </p>
 
@@ -1152,42 +1141,26 @@ other standard in the other segment (i.e. increasing c 12 . This standard in the
 segment is then temporarily highly compatible both standard i and its competitor in 
 the same segment. If standard i, as would be expected, increases its usage share-is </p>
 
-<p>24 Initial usage shares in the shown case are p 1,0 = </p>
-
-<p>
+<p>24 Initial usage shares in the shown case are p 1,0 = 
 0.3 
-0.7 </p>
-
-
-
-<p>, p 2,0 = </p>
-
-<p>
+0.7 
+, p 2,0 = 
 0.6 
-0.4 </p>
-
-
-
-<p>; the compatibility term of </p>
+0.4 
+; the compatibility term of </p>
 
 <p>the first (tied) standards in both segments is varied; about c = 0.135 is sufficient for the pair to become 
 dominant. 
 25 A three-segment model as shown in Fig. 7 uses the same matrices A for all segments and the basic </p>
 
-<p>inter-segmental compatibility matrices C = </p>
-
-<p>
+<p>inter-segmental compatibility matrices C = 
 0.1 0 
-0 0.1 </p>
-
-
-
-<p>between segments 1 and 3 and between segments </p>
+0 0.1 
+between segments 1 and 3 and between segments </p>
 
 <p>2 and 3 while only varying c 12 between segments 1 and 2. (w 1,1 = w 2,2 = w 3,3 = 1, w 1,2 = w 2,1 = 
-w 3,1 = w 1,3 = w 3,2 = w 2,3 = 2). </p>
-
-<p>26 For instance, both standards of each pair might be offered by the same respective vendor. </p>
+w 3,1 = w 1,3 = w 3,2 = w 2,3 = 2). 
+26 For instance, both standards of each pair might be offered by the same respective vendor. </p>
 
 
 
@@ -1310,15 +1283,10 @@ otherwise identical </p>
 <p>there a threshold beyond which it is better to end this temporary engagement, reduce 
 c 12 again and return to the initial two-pair situation? Fig. 5 hence shows a setting </p>
 
-<p>with a compatibility matrix C = </p>
-
-<p>
+<p>with a compatibility matrix C = 
 0.103 0.05 
-0 0.1 </p>
-
-
-
-<p>and assumes that a standard's vendor </p>
+0 0.1 
+and assumes that a standard's vendor </p>
 
 <p>is theoretically capable to reduce compatibility terms by inserting artificial obstacles 
 preventing interaction between the standards. In these simulation runs, c 12 is reduced 
@@ -1435,8 +1403,9 @@ version (otherwise they might be accidental results of the macro-level model). S
 
 <p>⎛ </p>
 
-<p>⎝ 
-1 0.9 0.9 
+<p>⎝ </p>
+
+<p>1 0.9 0.9 
 0.9 1 0.9 
 0.9 0.9 1 </p>
 
@@ -1444,17 +1413,12 @@ version (otherwise they might be accidental results of the macro-level model). S
 
 <p>⎠ , </p>
 
-<p>C = </p>
-
-<p>
+<p>C = 
 0.1 0 c 13 
-0 0.1 0 </p>
+0 0.1 0 
+. </p>
 
 
-
-<p>. </p>
-
-<p>123 </p>
 
 <p>T. Heinrich </p>
 
@@ -1723,9 +1687,7 @@ compatibility between standard 1 in segment 1 and standard 2 in segment 2 (other
 bilities are 0.1 between all standards 1 and between all standards 2 across all three segments, 0.0 otherwise) </p>
 
 <p>the impact of the network structure and that of the initial share of total adopters 
-( </p>
-
-<p>i p i, j,t ) can be investigated. 
+( i p i, j,t ) can be investigated. 
 Where not indicated otherwise, the agent-based simulations use the same parameter 
 setup as the Monte Carlo simulations with 75% early adopters in each segment (25% 
 of the agents as non-adopters). 29 A single time step indicates one agent reevaluating </p>
@@ -1740,8 +1702,9 @@ for the positioning of early adopters. The share of early adopters is more close
 <p>Network Externalities and Compatibility Among Standards... </p>
 
 <p>0 
-2000 4000 6000 8000 10000 
-0.2 </p>
+2000 4000 6000 8000 10000 </p>
+
+<p>0.2 </p>
 
 <p>0.3 </p>
 
@@ -1780,8 +1743,9 @@ Time </p>
 <p>Shares Segm.2 </p>
 
 <p>0 
-2000 4000 6000 8000 10000 
-0.2 </p>
+2000 4000 6000 8000 10000 </p>
+
+<p>0.2 </p>
 
 <p>0.3 </p>
 
@@ -1827,15 +1791,10 @@ compared to the replicator dynamic above.
 Figure 10 shows the result of 9 example runs in a complete network for 9 differ-
 ent initial relative shares of the second segment while the first segment is divided </p>
 
-<p>p 1,0 = </p>
-
-<p>
+<p>p 1,0 = 
 0.6 
-0.4 </p>
-
-
-
-<p>for all 9 runs. The simulations show that the monopolization towards </p>
+0.4 
+for all 9 runs. The simulations show that the monopolization towards </p>
 
 <p>the pair of tied standards with the larger overall usage share as predicted above does 
 occur and that it does occur in both segments. This was to be expected since the 
@@ -1850,35 +1809,55 @@ structures. </p>
 
 <p>T. Heinrich </p>
 
-<p>0.0 
-0.2 
-0.4 
-0.6 
-0.8 
-1.0 </p>
+<p>0.0 </p>
 
-<p>0.0 
-0.2 
-0.4 
-0.6 
-0.8 
-1.0 </p>
+<p>0.2 </p>
 
-<p>0.0 
-0.2 
-0.4 
-0.6 
-0.8 
-1.0 </p>
+<p>0.4 </p>
+
+<p>0.6 </p>
+
+<p>0.8 </p>
+
+<p>1.0 </p>
+
+<p>0.0 </p>
+
+<p>0.2 </p>
+
+<p>0.4 </p>
+
+<p>0.6 </p>
+
+<p>0.8 </p>
+
+<p>1.0 </p>
+
+<p>0.0 </p>
+
+<p>0.2 </p>
+
+<p>0.4 </p>
+
+<p>0.6 </p>
+
+<p>0.8 </p>
+
+<p>1.0 </p>
 
 <p>Shares Segm.1 </p>
 
-<p>0.0 
-0.2 
-0.4 
-0.6 
-0.8 
-1.0 </p>
+<p>0.0 </p>
+
+<p>0.2 </p>
+
+<p>0.4 </p>
+
+<p>0.6 </p>
+
+<p>0.8 </p>
+
+<p>1.0 </p>
 
 <p>0.0 
 0.2 
@@ -1889,12 +1868,17 @@ structures. </p>
 
 <p>p1 </p>
 
-<p>0.0 
-0.2 
-0.4 
-0.6 
-0.8 
-1.0 </p>
+<p>0.0 </p>
+
+<p>0.2 </p>
+
+<p>0.4 </p>
+
+<p>0.6 </p>
+
+<p>0.8 </p>
+
+<p>1.0 </p>
 
 <p>(a) </p>
 
@@ -1933,35 +1917,55 @@ homogenizing the network. </p>
 
 <p>Network Externalities and Compatibility Among Standards... </p>
 
-<p>0.0 
-0.2 
-0.4 
-0.6 
-0.8 
-1.0 </p>
+<p>0.0 </p>
 
-<p>0.0 
-0.2 
-0.4 
-0.6 
-0.8 
-1.0 </p>
+<p>0.2 </p>
 
-<p>0.0 
-0.2 
-0.4 
-0.6 
-0.8 
-1.0 </p>
+<p>0.4 </p>
+
+<p>0.6 </p>
+
+<p>0.8 </p>
+
+<p>1.0 </p>
+
+<p>0.0 </p>
+
+<p>0.2 </p>
+
+<p>0.4 </p>
+
+<p>0.6 </p>
+
+<p>0.8 </p>
+
+<p>1.0 </p>
+
+<p>0.0 </p>
+
+<p>0.2 </p>
+
+<p>0.4 </p>
+
+<p>0.6 </p>
+
+<p>0.8 </p>
+
+<p>1.0 </p>
 
 <p>Shares Segm.1 </p>
 
-<p>0.0 
-0.2 
-0.4 
-0.6 
-0.8 
-1.0 </p>
+<p>0.0 </p>
+
+<p>0.2 </p>
+
+<p>0.4 </p>
+
+<p>0.6 </p>
+
+<p>0.8 </p>
+
+<p>1.0 </p>
 
 <p>0.10 
 0.15 
@@ -1971,12 +1975,17 @@ homogenizing the network. </p>
 
 <p>c11 </p>
 
-<p>0.0 
-0.2 
-0.4 
-0.6 
-0.8 
-1.0 </p>
+<p>0.0 </p>
+
+<p>0.2 </p>
+
+<p>0.4 </p>
+
+<p>0.6 </p>
+
+<p>0.8 </p>
+
+<p>1.0 </p>
 
 <p>(a) </p>
 
@@ -1995,37 +2004,22 @@ closure, e k = 2 Barabàsi-Albert with triadic closure </p>
 
 <p>4.3.3 Initial Non-Adopters (Effect 8) </p>
 
-<p>The effect of the initial total usage share ( </p>
+<p>The effect of the initial total usage share ( i p i, j,0 ) is given in Fig. 12. Starting from </p>
 
-<p>i p i, j,0 ) is given in Fig. 12. Starting from 
-an initial equal sharing </p>
-
-
-
-<p>p j,0 = </p>
-
-<p>
+<p>an initial equal sharing p j,0 = 
 0.5 
-0.5 </p>
-
-
-
-<p>between the standards, the shares of the </p>
+0.5 
+between the standards, the shares of the </p>
 
 <p>then largest standard are studied after t max = 10,000 time steps. While the complete 
 network leads to an asymmetric final distribution, particularly if the initial total usage 
 share was low, this is not so much the case for the other network structures; particularly 
 network structure D (k = 1 preferential attachment network with triadic closure) does </p>
 
-<p>not deviate far from the initial distribution p j,0 = </p>
-
-<p>
+<p>not deviate far from the initial distribution p j,0 = 
 0.5 
-0.5 </p>
-
-
-
-<p>and also has a markedly </p>
+0.5 
+and also has a markedly </p>
 
 <p>lower standard deviation. This is probably also a result of the presence of multitudes 
 of isolated clusters. </p>
@@ -2039,35 +2033,55 @@ the potential of positioning in networks in this context. Many other effects of 
 
 <p>T. Heinrich </p>
 
-<p>0.0 
-0.2 
-0.4 
-0.6 
-0.8 
-1.0 </p>
+<p>0.0 </p>
 
-<p>0.0 
-0.2 
-0.4 
-0.6 
-0.8 
-1.0 </p>
+<p>0.2 </p>
 
-<p>0.0 
-0.2 
-0.4 
-0.6 
-0.8 
-1.0 </p>
+<p>0.4 </p>
+
+<p>0.6 </p>
+
+<p>0.8 </p>
+
+<p>1.0 </p>
+
+<p>0.0 </p>
+
+<p>0.2 </p>
+
+<p>0.4 </p>
+
+<p>0.6 </p>
+
+<p>0.8 </p>
+
+<p>1.0 </p>
+
+<p>0.0 </p>
+
+<p>0.2 </p>
+
+<p>0.4 </p>
+
+<p>0.6 </p>
+
+<p>0.8 </p>
+
+<p>1.0 </p>
 
 <p>Shares Segm.1 </p>
 
-<p>0.0 
-0.2 
-0.4 
-0.6 
-0.8 
-1.0 </p>
+<p>0.0 </p>
+
+<p>0.2 </p>
+
+<p>0.4 </p>
+
+<p>0.6 </p>
+
+<p>0.8 </p>
+
+<p>1.0 </p>
 
 <p>0.00 
 0.05 
@@ -2078,12 +2092,17 @@ the potential of positioning in networks in this context. Many other effects of 
 
 <p>c12 </p>
 
-<p>0.0 
-0.2 
-0.4 
-0.6 
-0.8 
-1.0 </p>
+<p>0.0 </p>
+
+<p>0.2 </p>
+
+<p>0.4 </p>
+
+<p>0.6 </p>
+
+<p>0.8 </p>
+
+<p>1.0 </p>
 
 <p>(a) </p>
 
@@ -2124,35 +2143,55 @@ tradition on product bundling (Choi 2004; Nalebuff 2004; Miao 2010; Eisenmann et
 
 <p>Network Externalities and Compatibility Among Standards... </p>
 
-<p>0.5 
-0.6 
-0.7 
-0.8 
-0.9 
-1.0 </p>
+<p>0.5 </p>
 
-<p>0.5 
-0.6 
-0.7 
-0.8 
-0.9 
-1.0 </p>
+<p>0.6 </p>
 
-<p>0.5 
-0.6 
-0.7 
-0.8 
-0.9 
-1.0 </p>
+<p>0.7 </p>
+
+<p>0.8 </p>
+
+<p>0.9 </p>
+
+<p>1.0 </p>
+
+<p>0.5 </p>
+
+<p>0.6 </p>
+
+<p>0.7 </p>
+
+<p>0.8 </p>
+
+<p>0.9 </p>
+
+<p>1.0 </p>
+
+<p>0.5 </p>
+
+<p>0.6 </p>
+
+<p>0.7 </p>
+
+<p>0.8 </p>
+
+<p>0.9 </p>
+
+<p>1.0 </p>
 
 <p>Shares Segm.1 </p>
 
-<p>0.5 
-0.6 
-0.7 
-0.8 
-0.9 
-1.0 </p>
+<p>0.5 </p>
+
+<p>0.6 </p>
+
+<p>0.7 </p>
+
+<p>0.8 </p>
+
+<p>0.9 </p>
+
+<p>1.0 </p>
 
 <p>0.0 
 0.2 
@@ -2163,12 +2202,17 @@ tradition on product bundling (Choi 2004; Nalebuff 2004; Miao 2010; Eisenmann et
 
 <p>Initial Share of Adopters </p>
 
-<p>0.5 
-0.6 
-0.7 
-0.8 
-0.9 
-1.0 </p>
+<p>0.5 </p>
+
+<p>0.6 </p>
+
+<p>0.7 </p>
+
+<p>0.8 </p>
+
+<p>0.9 </p>
+
+<p>1.0 </p>
 
 <p>(a) </p>
 
@@ -2209,35 +2253,55 @@ rather common. The case of Sun's Java offers a prime example of a huge marketing
 
 <p>T. Heinrich </p>
 
-<p>0.0 
-0.2 
-0.4 
-0.6 
-0.8 
-1.0 </p>
+<p>0.0 </p>
 
-<p>0.0 
-0.2 
-0.4 
-0.6 
-0.8 
-1.0 </p>
+<p>0.2 </p>
 
-<p>0.0 
-0.2 
-0.4 
-0.6 
-0.8 
-1.0 </p>
+<p>0.4 </p>
+
+<p>0.6 </p>
+
+<p>0.8 </p>
+
+<p>1.0 </p>
+
+<p>0.0 </p>
+
+<p>0.2 </p>
+
+<p>0.4 </p>
+
+<p>0.6 </p>
+
+<p>0.8 </p>
+
+<p>1.0 </p>
+
+<p>0.0 </p>
+
+<p>0.2 </p>
+
+<p>0.4 </p>
+
+<p>0.6 </p>
+
+<p>0.8 </p>
+
+<p>1.0 </p>
 
 <p>Shares Segm.1 </p>
 
-<p>0.0 
-0.2 
-0.4 
-0.6 
-0.8 
-1.0 </p>
+<p>0.0 </p>
+
+<p>0.2 </p>
+
+<p>0.4 </p>
+
+<p>0.6 </p>
+
+<p>0.8 </p>
+
+<p>1.0 </p>
 
 <p>0.0 
 0.2 
@@ -2248,40 +2312,65 @@ rather common. The case of Sun's Java offers a prime example of a huge marketing
 
 <p>p1 </p>
 
-<p>0.0 
-0.2 
-0.4 
-0.6 
-0.8 
-1.0 </p>
+<p>0.0 </p>
 
-<p>0.0 
-0.2 
-0.4 
-0.6 
-0.8 
-1.0 </p>
+<p>0.2 </p>
 
-<p>0.0 
-0.2 
-0.4 
-0.6 
-0.8 
-1.0 </p>
+<p>0.4 </p>
 
-<p>0.0 
-0.2 
-0.4 
-0.6 
-0.8 
-1.0 </p>
+<p>0.6 </p>
 
-<p>0.0 
-0.2 
-0.4 
-0.6 
-0.8 
-1.0 </p>
+<p>0.8 </p>
+
+<p>1.0 </p>
+
+<p>0.0 </p>
+
+<p>0.2 </p>
+
+<p>0.4 </p>
+
+<p>0.6 </p>
+
+<p>0.8 </p>
+
+<p>1.0 </p>
+
+<p>0.0 </p>
+
+<p>0.2 </p>
+
+<p>0.4 </p>
+
+<p>0.6 </p>
+
+<p>0.8 </p>
+
+<p>1.0 </p>
+
+<p>0.0 </p>
+
+<p>0.2 </p>
+
+<p>0.4 </p>
+
+<p>0.6 </p>
+
+<p>0.8 </p>
+
+<p>1.0 </p>
+
+<p>0.0 </p>
+
+<p>0.2 </p>
+
+<p>0.4 </p>
+
+<p>0.6 </p>
+
+<p>0.8 </p>
+
+<p>1.0 </p>
 
 <p>0.0 </p>
 
@@ -2293,12 +2382,17 @@ rather common. The case of Sun's Java offers a prime example of a huge marketing
 
 <p>p1 </p>
 
-<p>0.0 
-0.2 
-0.4 
-0.6 
-0.8 
-1.0 </p>
+<p>0.0 </p>
+
+<p>0.2 </p>
+
+<p>0.4 </p>
+
+<p>0.6 </p>
+
+<p>0.8 </p>
+
+<p>1.0 </p>
 
 <p>(a) </p>
 
@@ -2441,8 +2535,7 @@ questionable. </p>
 
 <p>Network Externalities and Compatibility Among Standards... </p>
 
-<p>and reproduction in any medium, provided you give appropriate credit to the original author(s) and the 
-source, provide a link to the Creative Commons license, and indicate if changes were made. </p>
+
 
 <p>Appendix 1: Derivation of the Marginal Effects of the Compatibility 
 Terms in the 2-Segment Replicator Model </p>
@@ -2484,29 +2577,48 @@ studied; particularly the compatibility terms are of interest. For the terms of 
 
 <p>∂ p 1,1,t+1 
 ∂a 11,1 
-= w 1,1 p 2 
-1,1,t − a 11,1 p 3 
-1,1,t ≥ 0 
-∂ p 1,1,t+1 
+= w 1,1 p </p>
+
+<p>2 </p>
+
+<p>1,1,t − a 11,1 p </p>
+
+<p>3 </p>
+
+<p>1,1,t ≥ 0 </p>
+
+<p>∂ p 1,1,t+1 
 ∂a 12,1 
-= w 1,1 p 2,1,t p 1,1,t − w 1,1 p 2,1,t p 2 
-1,1,t ≥ 0 
-∂ p 1,1,t+1 
+= w 1,1 p 2,1,t p 1,1,t − w 1,1 p 2,1,t p </p>
+
+<p>2 </p>
+
+<p>1,1,t ≥ 0 </p>
+
+<p>∂ p 1,1,t+1 
 ∂a 21,1 
-= −w 1,1 p 2 
-1,1,t p 2,1,t ≤ 0 
-∂ p 1,1,t+1 
+= −w 1,1 p </p>
+
+<p>2 </p>
+
+<p>1,1,t p 2,1,t ≤ 0 </p>
+
+<p>∂ p 1,1,t+1 
 ∂a 22,1 
-= −w 1,1 p 2 
-2,1,t p 1,1,t ≤ 0 </p>
+= −w 1,1 p </p>
+
+<p>2 </p>
+
+<p>2,1,t p 1,1,t ≤ 0 </p>
 
 <p>and, specifically if A is to be symmetric, hence α = a 12,1 = a 21,1 , </p>
 
 <p>∂ p 1,1,t+1 
 ∂α 
-= w 1,1 p 2,1,t p 1,1,t − 2w 1,1 p 2,1,t p 2 </p>
+= w 1,1 p 2,1,t p 1,1,t − 2w 1,1 p 2,1,t p </p>
 
-<p>1,1,t </p>
+<p>2 
+1,1,t </p>
 
 <p>which is </p>
 
@@ -2524,13 +2636,21 @@ obtained in the same way as </p>
 
 <p>∂ p 1,1,t+1 
 ∂c 11,1,2 
-= w 1,2 p 1,2,t p 1,1,t − w 1,2 p 1,2,t p 2 
-1,1,t ≥ 0 
-∂ p 1,1,t+1 
+= w 1,2 p 1,2,t p 1,1,t − w 1,2 p 1,2,t p </p>
+
+<p>2 </p>
+
+<p>1,1,t ≥ 0 </p>
+
+<p>∂ p 1,1,t+1 
 ∂c 12,1,2 
-= w 1,2 p 2,2,t p 1,1,t − w 1,2 p 2,2,t p 2 
-1,1,t ≥ 0 
-∂ p 1,1,t+1 
+= w 1,2 p 2,2,t p 1,1,t − w 1,2 p 2,2,t p </p>
+
+<p>2 </p>
+
+<p>1,1,t ≥ 0 </p>
+
+<p>∂ p 1,1,t+1 
 ∂c 21,1,2 
 = −w 1,2 p 1,2,t p 2,1,t p 1,1,t ≤ 0 </p>
 
@@ -2543,33 +2663,46 @@ Segment Replicator Model </p>
 
 <p>In this case, we have </p>
 
-<p>A = </p>
-
-<p>
+<p>A = 
 1α 
-α1 </p>
+α1 
+p 1,1,t+1 = p 1,1,t + w 1,1 p </p>
 
+<p>2 </p>
 
+<p>1,1,t + w 1,1 α(1 − p 1,1,t ) p 1,1,t − w 1,1 p </p>
 
-<p>p 1,1,t+1 = p 1,1,t + w 1,1 p 2 
-1,1,t + w 1,1 α(1 − p 1,1,t ) p 1,1,t − w 1,1 p 3 </p>
+<p>3 
+1,1,t </p>
 
-<p>1,1,t </p>
+<p>− w 1,1 α(1 − p 1,1,t ) p </p>
 
-<p>− w 1,1 α(1 − p 1,1,t ) p 2 
-1,1,t − w 1,1 αp 2 
-1,1,t (1 − p 1,1,t ) 
-− w 1,1 (1 − p 1,1,t ) 2 p 1,1,t 
-= p 1,1,t + w 1,1 p 1,1,t (1 − p 1,1,t )( p 1,1,t + α − αp 1,1,t − αp 1,1,t </p>
+<p>2 </p>
+
+<p>1,1,t − w 1,1 αp </p>
+
+<p>2 </p>
+
+<p>1,1,t (1 − p 1,1,t ) 
+− w 1,1 (1 − p 1,1,t ) 
+2 p 1,1,t </p>
+
+<p>= p 1,1,t + w 1,1 p 1,1,t (1 − p 1,1,t )( p 1,1,t + α − αp 1,1,t − αp 1,1,t </p>
 
 <p>− (1 − p 1,1,t )) = p 1,1,t + w 1,1 p 1,1,t (1 − p 1,1,t )(2 p 1,1,t 
 − 2αp 1,1,t − 1 + α) </p>
 
 <p>= p 1,1,t + w 1,1 p 1,1,t (1 − p 1,1,t )(1 − α)(2 p 1,1,t − 1) </p>
 
-<p>= −2w 1,1 (1 − α) p 3 
-1,1,t + 3w 1,1 (1 − α) p 2 
-1,1,t + (1 − (1 − α)w 1,1 ) p 1,1,t </p>
+<p>= −2w 1,1 (1 − α) p </p>
+
+<p>3 </p>
+
+<p>1,1,t + 3w 1,1 (1 − α) p </p>
+
+<p>2 </p>
+
+<p>1,1,t + (1 − (1 − α)w 1,1 ) p 1,1,t </p>
 
 <p>which has the equilibrium set (most easily seen from the second-to last form) </p>
 
@@ -2577,12 +2710,21 @@ Segment Replicator Model </p>
 
 <p>with solutions (assuming w 1,1 = 0) </p>
 
-<p>p  *  
-1,1,1 = 0 
-p  *  
-1,1,2 = 1 
-p  *  
-1,1,3 = 0.5 </p>
+<p>p </p>
+
+<p> *  </p>
+
+<p>1,1,1 = 0 
+p </p>
+
+<p> *  </p>
+
+<p>1,1,2 = 1 
+p </p>
+
+<p> *  </p>
+
+<p>1,1,3 = 0.5 </p>
 
 <p>and stability conditions following from the system's eigenvalue λ (linearized for the 
 equilibria) with the equilibrium being stable if, and only if, |λ| &lt; 1. </p>
@@ -2590,9 +2732,13 @@ equilibria) with the equilibrium being stable if, and only if, |λ| &lt; 1. </p>
 <p>λ = 
 ∂ p 1,1,t+1 ( p 1,1,t ) 
 ∂ p 1,1,t 
-= −6w 1,1 (1 − α) p 2 
-1,1,t + 6w 1,1 (1 − α) p 1,1,t 
-+ (1 − (1 − α)w 1,1 ), </p>
+= −6w 1,1 (1 − α) p </p>
+
+<p>2 </p>
+
+<p>1,1,t + 6w 1,1 (1 − α) p 1,1,t </p>
+
+<p>+ (1 − (1 − α)w 1,1 ), </p>
 
 
 
@@ -2605,8 +2751,11 @@ equilibria) with the equilibrium being stable if, and only if, |λ| &lt; 1. </p>
 λ( p  *  
 1,1,2 ) = λ(1) = 1 − (1 − α)w 1,1 
 λ( p  *  
-1,1,3 ) = λ(0.5) = 1 
-2 (1 − α)w 1,1 + 1. </p>
+1,1,3 ) = λ(0.5) = </p>
+
+<p>1 </p>
+
+<p>2 (1 − α)w 1,1 + 1. </p>
 
 <p>The first two equilibria are thus stable if w 1,1 is small enough in comparison to α, 32 
 specifically if 2 &gt; (1 − α)w 1,1 . These are the monopolization equilibria. The third 

@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1080%2F17421770903541772" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T20:04+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1080%2F17421770903541772" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:11+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>ABSTRACT This paper places the key issues and implications of the new 'introductory' book on 
 spatial econometrics by James LeSage &amp; Kelley Pace (2009) in a broader perspective: the argument in 
@@ -8,25 +8,26 @@ spatial weights matrix best describes the data, and the book's contribution to t
 temporal models. The main conclusion is that the state of the art of applied spatial econometrics has 
 taken a step change with the publication of this book. </p>
 
-<p>Relever le niveau de l'e ´conometrie spatial  </p>
+<p>Relever le niveau de l'économetrie spatial appliquée </p>
 
-<p>  La pre´sente communication place les principales questions et implications du nouvel ouvrage 
+<p>RÉ SUMÉ La pre´sente communication place les principales questions et implications du nouvel ouvrage 
 d'introduction sur l'e´conome´tries spatiale de James LeSage &amp; Kelley Pace (2009) dans un contexte 
-plus ge´ne´ral: l'argument favorisant lele spatial de Durbin, l'emploi d'effets indirects comme base 
-plus valable pour e´valuer l'aspect significatif des de´versements spatiaux, l'emploi des probabilite´s d'un le baysien poste´rieur pour e´valuer laquelle des matrices de poids spatiaux de´crit le mieux les 
-donnes, et la contribution de l'ouvrage la documentation sur lesles spatio-temporels. La principale 
+plus ge´ne´ral: l'argument favorisant le mode`le spatial de Durbin, l'emploi d'effets indirects comme base 
+plus valable pour e´valuer l'aspect significatif des de´versements spatiaux, l'emploi des probabilite´s d'un 
+mode`le baysien poste´rieur pour e´valuer laquelle des matrices de poids spatiaux de´crit le mieux les 
+donnes, et la contribution de l'ouvrage la documentation sur les mode`les spatio-temporels. La principale 
 conclusion est qu'avec la publication de cet ouvrage, l'e´tat de l'art de l'e´conome´tries spatiale applique a 
- grand pas en avant. </p>
+effectue´un grand pas en avant. </p>
 
-<p>Alzar el nivel de la  espacial aplicada </p>
+<p>Alzar el nivel de la econometría espacial aplicada </p>
 
-<p>  Este trabajo plantea las cuestiones e implicaciones clave del nuevo libro introductorio sobre 
+<p>RÉ SUMÉ Este trabajo plantea las cuestiones e implicaciones clave del nuevo libro introductorio sobre 
 econo´metra espacial de James LeSage &amp; Kelley Pace (2009) dentro de una perspectiva ma´s amplia: el 
-argumento a favor del modelo espacial Durbin, el uso de efectos indirectos como una base ma´s  
+argumento a favor del modelo espacial Durbin, el uso de efectos indirectos como una base ma´s válida 
 para poner a prueba si los desbordamientos espaciales son significativos, el uso de probabilidades 
 posteriores bayesianas para descubrir que matriz de pesos espaciales describe mejor los datos, y la 
 contribucio´n del libro a la biblio´grafa sobre modelos espaciotemporales. La principal conclusio´n es que la 
- espacial aplicada ma´s avanzada ha experimentado un cambio radical con la publicacio´n de 
+econometría espacial aplicada ma´s avanzada ha experimentado un cambio radical con la publicacio´n de 
 este libro. </p>
 
 <p>The year 2007 marks a sea change in spatial econometricians' way of thinking. 
@@ -84,9 +85,12 @@ general approach. The non-spatial linear regression model takes the form </p>
 dependent variable for every unit in the sample (i 01, . . ., N), i N is an N)1 
 vector of ones associated with the constant term parameter a, X denotes an 
 N)K matrix of exogenous explanatory variables, with the associated parameters 
-b contained in a K)1 vector, and o 0 (o 1 ; :::; o N ) T is a vector of disturbance 
-terms, 1 where o i are independently and identically distributed error terms for all i 
-with zero mean and variance s 2 . Since the linear regression model is commonly 
+b contained in a K)1 vector, and o 0 (o 1 ; :::; o N ) 
+T is a vector of disturbance 
+terms, 
+1 where o i are independently and identically distributed error terms for all i 
+with zero mean and variance s 
+2 . Since the linear regression model is commonly 
 estimated by ordinary least squares (OLS), it is often labelled the OLS model. 
 Furthermore, even though the OLS model in most studies focusing on spatial 
 interaction effects is rejected in favour of a more general model, its results often 
@@ -136,7 +140,9 @@ may have complex characteristic roots. LeSage &amp; Pace (pp. 88Á89) demonstrat
 that in that case r and l are restricted to the interval (1/r min , 1), where r min equals 
 the most negative purely real characteristic root of W after this matrix is row 
 normalized. Finally, one of the following two conditions should be satisfied: (a) the 
-row and column sums of the matrices W, (I Á rW) Á1 and (I Á lW) Á1 before W is 
+row and column sums of the matrices W, (I Á rW) 
+Á1 and (I Á lW) 
+Á1 before W is 
 row normalized should be uniformly bounded in absolute value as N goes to 
 infinity, or (b) the row and column sums of W before W is row normalized should 
 not diverge to infinity at a rate equal to or faster than the rate of the sample size N. 
@@ -154,8 +160,21 @@ the distance is 2d; and so on. When W is an inverse distance matrix and the off-
 diagonal elements of W are of the form 1/d ij , where d ij is the distance between two 
 spatial units i and j, each row sum is 2)( 1 =d ' 1 =2d ' 1 =3d '. . .); representing a 
 series that is not finite. This is perhaps the reason why some empirical applications 
-introduce a cut-off point d + such that w ij 00 if d ij d + . However, since the ratio 
-2)( 1 =d ' 1 =2d ' 1 =3d '. . .)=N 00 as N goes to infinity, condition (b) is satisfied, 
+introduce a cut-off point d 
++ such that w ij 00 if d ij d </p>
+
+<p>+ </p>
+
+<p>. However, since the ratio 
+2)( </p>
+
+<p>1 </p>
+
+<p>=d ' </p>
+
+<p>1 </p>
+
+<p>=2d ' 1 =3d '. . .)=N 00 as N goes to infinity, condition (b) is satisfied, 
 which implies that an inverse distance matrix without a cut-off point does not 
 necessarily have to be excluded in an empirical study for reasons of consistency. 
 The opposite situation occurs when all cross-sectional units are assumed to be 
@@ -196,7 +215,8 @@ autocorrelated error term simultaneously. However, as Manski (1993) notes, at le
 one of the K'2 interaction effects must be excluded, because otherwise the 
 parameters are unidentified. To verify this, I carried out a simple Monte Carlo 
 experiment generating Y by (2a) and (2b), one X variable drawn from a uniform 
-distribution on the interval [Á1,1], r 0 a 0 b 0 u 0 l 0 0:25; s 2 00.01, N060, 
+distribution on the interval [Á1,1], r 0 a 0 b 0 u 0 l 0 0:25; s 
+2 00.01, N060, 
 and a spatial weights matrix W corresponding to the corners of the seams in a soccer 
 ball (in <rs type="software">Matlab</rs> known as the Bucky Ball). Based on 1,000 repetitions, I found biases 
 in the parameter estimates of the endogenous and exogenous interaction effects 
@@ -208,7 +228,8 @@ disturbance terms, but that the parameter estimates cannot be interpreted in a
 meaningful way since the endogenous and exogenous effects cannot be 
 distinguished from each other. 
 Following LeSage &amp; Pace (pp. 155Á158), the best option in such circumstances 
-is to exclude the spatially autocorrelated error term. 2 The cost of ignoring spatial 
+is to exclude the spatially autocorrelated error term. 
+2 The cost of ignoring spatial 
 dependence in the dependent variable and/or in the independent variables is 
 relatively high since the econometrics literature has pointed out that if one or more 
 relevant explanatory variable are omitted from a regression equation, the estimator 
@@ -279,25 +300,33 @@ impossible, to derive. The same applies to models with a spatial error process (
 the spatial error model and the spatial Durbin error model). By contrast, models 
 including a spatial lag and additional endogenous variables can be straightforwardly 
 estimated by two-stage least squares (2SLS). To instrument the spatially lagged 
-dependent variable, Kelejian et al. (2004) suggest [/X t WX t . . . W g X t ]; where g is a </p>
+dependent variable, Kelejian et al. (2004) suggest [/X t WX t . . . W 
+g X t ]; where g is a </p>
 
 <p>Applied Spatial Econometrics 15 </p>
 
-<p>pre-selected constant. 3 Typically, one would take g 01 or g 02, dependent on the 
+<p>pre-selected constant. 
+3 Typically, one would take g 01 or g 02, dependent on the 
 number of regressors and the type of model. For example, in the case of the spatial 
 Durbin model g should be greater than one, since this model already contains 
 the variables X and WX on the right-hand side. If one or more of the explana-
 tory variables are endogenous, the set of instruments must be limited to 
-[/X ex </p>
+[/X </p>
 
-<p>t </p>
+<p>ex 
+t </p>
 
-<p>WX ex </p>
+<p>WX </p>
 
-<p>t </p>
+<p>ex 
+t </p>
 
-<p>. . . W d X ex 
-t ]; where 'ex' denotes the X variables that are exogenous. 
+<p>. . . W 
+d X </p>
+
+<p>ex </p>
+
+<p>t ]; where 'ex' denotes the X variables that are exogenous. 
 Another difference is that this set may also be used to instrument the additional 
 endogenous explanatory variables. A similar type of extension applies to Kelejian &amp; 
 Prucha's (1999) GMM estimator for models including a spatial error process 
@@ -312,13 +341,20 @@ or the specific-to-general approach. This is understandable. Whereas LeSage &amp
 Pace argue that the spatial Durbin model is the best point of departure, Florax et al. 
 (2003) have found that the expansion of a linear regression equation with spatially 
 lagged variables, conditional on the results of misspecification tests, outperforms 
-the general-to-specific approach for finding the true data-generation process. 4 
-I therefore propose the following test procedure to find out which model is the 
-most likely candidate to explain the data. 5 
-First estimate the OLS model and test whether the spatial lag model or the 
+the general-to-specific approach for finding the true data-generation process. </p>
+
+<p>4 </p>
+
+<p>I therefore propose the following test procedure to find out which model is the 
+most likely candidate to explain the data. </p>
+
+<p>5 </p>
+
+<p>First estimate the OLS model and test whether the spatial lag model or the 
 spatial error model is more appropriate to describe the data. For this purpose, one 
 may use the classic LM-tests proposed by Anselin (1988), and the robust LM-tests 
-proposed by Anselin et al. (1996). 6 Both the classic and the robust tests are based on 
+proposed by Anselin et al. (1996). 
+6 Both the classic and the robust tests are based on 
 the residuals of the OLS model and follow a chi-squared distribution with one 
 degree of freedom. 
 If the OLS model is rejected in favour of the spatial lag, the spatial error model 
@@ -339,7 +375,8 @@ these conditions is not satisfied, i.e. if the (robust) LM tests point to a mode
 than the LR tests, then the spatial Durbin model should be adopted. This is because 
 this model generalizes both the spatial lag and the spatial error model (see Figure 1). 
 If the OLS model is estimated and not rejected in favour of both the spatial lag 
-and the spatial error model, 7 the OLS model should be re-estimated including 
+and the spatial error model, 
+7 the OLS model should be re-estimated including 
 spatially lagged independent variables (WX) or a particular selection of these K 
 variables to be able to test the hypothesis H 0 : u00. If this hypothesis cannot also be </p>
 
@@ -365,9 +402,14 @@ including spatial dependence structures in theoretical economic relationships
 explaining economic growth per capita, they end up with an empirical model 
 that takes the form of a spatial Durbin model. However, since the theoretical model 
 offers no guidance as to how to specify the spatial weights matrix, they consider 
-two alternatives: one matrix whose non-diagonal elements are measured by 1/d 2 , 
+two alternatives: one matrix whose non-diagonal elements are measured by 1/d 
+2 , 
 where d reflects the distance between two units, and another matrix whose 
-elements are measured by e Á2d . Since many other specifications have been 
+elements are measured by e </p>
+
+<p>Á2d </p>
+
+<p>. Since many other specifications have been 
 considered in the spatial econometrics literature, among which are a binary 
 contiguity matrix, an inverse distance matrix with or without a cut-off point, a 
 q nearest-neighbour matrix (where q is a positive integer, such as 5 or 10), a 
@@ -410,10 +452,10 @@ differences in governance (Seldadyo et al., 2010), the posterior model probabili
 a 10 nearest-neighbour matrix appeared to be more than six times as large as that of 
 an inverse distance matrix, more than three times as large as that of a five nearest-
 neighbour matrix, and more than twice as large as an inverse distance matrix with a 
-cut-off point. Second, since Matlab routines applying Bayesian methods to the 
+cut-off point. Second, since <rs type="software">Matlab</rs> routines applying Bayesian methods to the 
 spatial lag, spatial error and spatial Durbin models are made downloadable for free 
 on LeSage's website (www.spatial-econometrics.com), these kinds of comparisons 
-can be carried out relatively easily. Furthermore, since LeSage also provides Matlab 
+can be carried out relatively easily. Furthermore, since <rs corresp="#software-1" type="creator">LeSage</rs> also provides <rs id="software-1" type="software">Matlab</rs> 
 routines applying the Bayesian method to the spatial lag, spatial error and spatial 
 Durbin models of limited dependent variables, similar types of selection procedures 
 as discussed in this and the previous sections can be used for empirical problems 
@@ -440,7 +482,10 @@ insignificant (table 3.3), while its spatial spillover effect is positive and si
 (table 3.4). 
 If the spatial Durbin model is taken as the point of departure and rewritten as </p>
 
-<p>Y 0 (I (rW ) (1 ai N '(I (rW ) (1 (Xb'WXu)'(I (rW ) (1 o; 
+<p>Y 0 (I (rW ) 
+(1 ai N '(I (rW ) 
+(1 (Xb'WXu)'(I (rW ) 
+(1 o; 
 (3) </p>
 
 <p>the matrix of partial derivatives of Y with respect to the kth explanatory variable of 
@@ -498,7 +543,9 @@ obtain: </p>
 7 
 5 </p>
 
-<p>0 (I (rW ) (1 </p>
+<p>0 (I (rW ) </p>
+
+<p>(1 </p>
 
 <p>b k 
 w 12 u k : w 1N u k 
@@ -535,8 +582,12 @@ example possible without loss of generality, and use this example to explain LeS
 
 <p>Suppose we have three spatial units that are arranged linearly: unit 1 is a neighbour 
 of unit 2, unit 2 is a neighbour of both units 1 and 3, and unit 3 is a neighbour of 
-unit 2. 8 Then the row-normalized spatial weights matrix W and the spatial 
-multiplier matrix (I (rW) Á1 are 9 </p>
+unit 2. 
+8 Then the row-normalized spatial weights matrix W and the spatial 
+multiplier matrix (I (rW) 
+Á1 are </p>
+
+<p>9 </p>
 
 <p>W 0 </p>
 
@@ -550,20 +601,30 @@ w 21 0 w 23
 
 <p>3 </p>
 
-<p>5 and (I (rW ) (1 </p>
+<p>5 and (I (rW ) </p>
+
+<p>(1 </p>
 
 <p>0 
 1 </p>
 
 <p>1 ( r 2 </p>
 
-<p>1(w 23 r 2 r 
-r 2 w 23 
+<p>1(w 23 r </p>
+
+<p>2 </p>
+
+<p>r 
+r 
+2 w 23 
 rw 21 
 1 
 rw 23 
-r 2 w 21 
-r 1(w 21 r 2 </p>
+r 
+2 w 21 
+r 1(w 21 r </p>
+
+<p>2 </p>
 
 <p>2 </p>
 
@@ -600,13 +661,17 @@ and 3 of the dependent variable turns out to be </p>
 
 <p>1 ( r 2 </p>
 
-<p>(1(w 23 r 2 )b k '(w 21 r)u k rb k 'u k 
-(w 23 r 2 )b k '(rw 23 )u k 
+<p>(1(w 23 r 
+2 )b k '(w 21 r)u k rb k 'u k 
+(w 23 r 
+2 )b k '(rw 23 )u k 
 (w 21 r)b k 'w 21 u k 
 b k 'ru k 
 (w 23 r)b k 'w 23 u k 
-(w 21 r 2 )b k '(w 21 r)u k 
-rb k 'u k (1(w 21 r 2 )b k '(w 23 r)u k </p>
+(w 21 r 
+2 )b k '(w 21 r)u k 
+rb k 'u k (1(w 21 r 
+2 )b k '(w 23 r)u k </p>
 
 <p>2 </p>
 
@@ -631,10 +696,14 @@ indirect effect. Note that every diagonal element of the matrix of partial deriv
 an indirect effect. Consequently, indirect effects do not occur if both r00 and 
 u k 00, since all non-diagonal elements will then be zero [see (4) and (6)]. 
 Second, direct and indirect effects are different for different units in the sample. 
-Direct effects are different because the diagonal elements of the matrix (I Á rW) Á1 
-are different for different units, provided that r"0 [see the diagonal elements of (5) 
+Direct effects are different because the diagonal elements of the matrix (I Á rW) </p>
+
+<p>Á1 </p>
+
+<p>are different for different units, provided that r"0 [see the diagonal elements of (5) 
 and (6)]. Indirect effects are different because both the non-diagonal elements of 
-the matrix (I Á rW) Á1 and of the matrix W are different for different units, provided 
+the matrix (I Á rW) 
+Á1 and of the matrix W are different for different units, provided 
 that r"0 and/or u k "0 [see the non-diagonal elements of (5) and (6)]. 
 Third, indirect effects that occur if u k "0 are known as local effects, as opposed 
 to indirect effects that occur if r"0 and that are known as global effects. Local effects 
@@ -642,8 +711,10 @@ got their name because they arise only from a unit's neighbourhood set; if the
 element w ij of the spatial weights matrix is non-zero (zero), then the effect of x jk on 
 y i is also non-zero (zero). Global effects got their name because they also arise from 
 units that do not belong to a unit's neighbourhood set. This follows from the fact 
-that the matrix (I(rW) Á1 , in contrast to W, does not contain zero elements 
-(provided that r"0) [see W and (I Á rW) Á1 in (5)]. </p>
+that the matrix (I(rW) 
+Á1 , in contrast to W, does not contain zero elements 
+(provided that r"0) [see W and (I Á rW) 
+Á1 in (5)]. </p>
 
 <p>6.2. Implications for Reporting Direct and Indirect Effects </p>
 
@@ -667,7 +738,8 @@ Table 1 reports the direct and indirect effects of the models that have been
 recorded in Figure 1 for the example with N03 and the spatial weights matrix 
 in (5). In the case of the spatial Durbin model [using (6)], we obtain a direct effect of </p>
 
-<p>(3 ( r 2 ) </p>
+<p>(3 ( r 
+2 ) </p>
 
 <p>3(1 ( r 2 ) 
 b k ' 
@@ -678,7 +750,9 @@ u k </p>
 
 <p>and an indirect effect of </p>
 
-<p>3r ' r 2 </p>
+<p>3r ' r </p>
+
+<p>2 </p>
 
 <p>3(1 ( r 2 ) 
 b k ' 
@@ -690,7 +764,7 @@ u k : </p>
 <p>Unfortunately, since every empirical application will have its own unique number of 
 observations (N) and spatial weights matrix (W), these formulae cannot be </p>
 
-<p>20 J. P. Elhorst </p>
+
 
 <p>generalized. Nevertheless, the results in Table 1 do illustrate that the direct and 
 indirect effects of different model specifications have the general properties as 
@@ -721,20 +795,30 @@ two notable differences can be observed. First, whereas the direct effect of the
 explanatory variable in the OLS model is b k , the direct effect in the spatial 
 lag model is b k pre-multiplied with a number that will be greater than or equal 
 to unity. Table 1 shows that this number in the example amounts to 
-(3(r 2 )=3(1(r 2 ): Second, whereas the indirect effect in the OLS model is 
+(3(r 
+2 )=3(1(r 
+2 ): Second, whereas the indirect effect in the OLS model is 
 zero by construction, it is non-zero in the spatial lag model. 
 The property that the number with which b k is pre-multiplied when 
 calculating the direct effect is greater than or equal to unity is due to the spatial 
-multiplier matrix (I (rW) Á1 that can be decomposed as follows (pp. 40Á41): </p>
+multiplier matrix (I (rW) 
+Á1 that can be decomposed as follows (pp. 40Á41): </p>
 
-<p>(I (rW ) (1 0 
+<p>(I (rW ) 
+(1 0 
 X </p>
 
 <p>q00 </p>
 
-<p>r q W q </p>
+<p>r 
+q W </p>
 
-<p>0I 'rW 'r 2 W 2 ' . . . 
+<p>q </p>
+
+<p>
+0I 'rW 'r 
+2 W 
+2 ' . . . 
 (7) </p>
 
 <p>Table 1. Direct and indirect effects of different model specifications </p>
@@ -750,9 +834,10 @@ Indirect effect </p>
 <p>(3(r 2 ) 
 3(1(r 2 ) </p>
 
-<p>b k ' 2r </p>
+<p>b k ' </p>
 
-<p>3(1(r 2 ) </p>
+<p>2r 
+3(1(r 2 ) </p>
 
 <p>u k </p>
 
@@ -761,9 +846,10 @@ Indirect effect </p>
 <p>3r'r 2 
 3(1(r 2 ) </p>
 
-<p>b k ' 3'r </p>
+<p>b k ' </p>
 
-<p>3(1(r 2 ) </p>
+<p>3'r 
+3(1(r 2 ) </p>
 
 <p>u k 
 Manski model 
@@ -806,21 +892,31 @@ hand side represent second-and higher-order direct and indirect effects. Higher-
 order direct effects arise as a result of feedback effects, i.e. impacts passing through 
 neighbouring units and back to the unit itself (e.g. 1 02 01 and 1 02 03 02 01). 
 It is these feedback effects that are responsible for the fact that the overall direct 
-effect eventually increases. 10 
-One important limitation of the spatial lag model is that the ratio between the 
+effect eventually increases. </p>
+
+<p>10 </p>
+
+<p>One important limitation of the spatial lag model is that the ratio between the 
 indirect and the direct effect of a particular explanatory variable is independent of 
 b k . Table 1 illustrates that b k in the numerator and b k in the denominator of this 
 ratio cancel each other out: </p>
 
-<p>(3 ( r 2 ) </p>
+<p>(3 ( r 
+2 ) </p>
 
 <p>3(1 ( r 2 ) </p>
 
-<p>b k = 3r ' r 2 </p>
+<p>b k = </p>
+
+<p>3r ' r </p>
+
+<p>2 </p>
 
 <p>3(1 ( r 2 ) 
 b k 0 
-3 ( r 2 </p>
+3 ( r </p>
+
+<p>2 </p>
 
 <p>3r ' r 2 
 : </p>
@@ -869,60 +965,43 @@ regarding the statistical significance of the direct and indirect effects, LeSag
 (p. 39) therefore suggest simulating the distribution of the direct and indirect effects 
 using the varianceÁcovariance matrix implied by the maximum likelihood 
 estimates. 
-Elhorst &amp;  (2009) show that the varianceÁcovariance matrix of the 
+Elhorst &amp; Fréret (2009) show that the varianceÁcovariance matrix of the 
 parameter estimates of the spatial Durbin model, a matrix that is not reported in 
 LeSage &amp; Pace's book, takes the form: </p>
 
-<p>Var(r ˆ; ˆ 
-a; ˆ 
-b; ˆ 
-u; ˆ 
-s 2 ) </p>
+<p>Var(r;â;b;û;ŝ 
+2 ) </p>
 
 <p>0 </p>
 
-<p>trace( ˜ 
-W ˜ 
-W ' ˜ 
-W T ˜ 
-W )' 
+<p>trace(WW 'W 
+TW )' 
 1 
-ˆ 
-s 2 
-ˆ 
-g ˜ 
-X T ˜ 
-W T ˜ 
-W ˜ 
-X ˆ 
-g 
-: 
+s 2ĝX </p>
+
+<p>TW TWXĝ </p>
+
+<p>: 
 : </p>
 
-<p>˜ 
-X T ˜ 
-W ˜ 
-X ˆ 
-g 
-1 
-ˆ 
-s 2 </p>
+<p>X </p>
 
-<p>˜ 
-X T ˜ 
-X 
-: </p>
+<p>TWXĝ </p>
 
 <p>1 
-ˆ 
+s 2X </p>
+
+<p>TX </p>
+
+<p>: </p>
+
+<p>1 
 s 2 
-trace( ˜ 
-W ) 
+trace(W ) 
 0 
 N </p>
 
-<p>2 ˆ 
-s 4 </p>
+<p>2ŝ 4 </p>
 
 <p>2 </p>
 
@@ -952,40 +1031,36 @@ s 4 </p>
 
 <p>; (8) </p>
 
-<p>where˜W  0 W (I (r ˆW ) (1 ; ˜ 
-X 0 [i N X WX] andˆg  0 [ ˆ 
-a ˆ 
-b T ˆ 
-u T ] T to 
+<p>whereW 0 W (I (rW ) 
+(1 ;X 0 [i N X WX] andĝ 0 [âb TûT ] 
+T to 
 simplify notation. Since this matrix is symmetric the upper diagonal elements 
 are not shown. 
-Using the Matlab routine 'sar' posted on LeSage's website (www.spatial-
-econometrics.com), one particular parameter combination drawn from this 
+Using the <rs id="software-2" type="software">Matlab</rs> routine 'sar' posted on <rs corresp="#software-2" type="creator">LeSage</rs>'s website (<rs corresp="#software-2" type="url">www.spatial-econometrics.com</rs>), one particular parameter combination drawn from this 
 varianceÁcovariance matrix (indexed by d ) can be obtained by: </p>
 
-<p>[r d a d b T </p>
+<p>[r d a d b </p>
 
-<p>d </p>
+<p>T 
+d </p>
 
-<p>u T </p>
+<p>u </p>
 
-<p>d </p>
+<p>T 
+d </p>
 
-<p>s 2 
-d ] T 0 P T q '[ ˆ 
-r ˆ 
-a ˆ 
-b T ˆ 
-u T ˆ 
-s 2 ] T ; 
+<p>s </p>
+
+<p>2 </p>
+
+<p>d ] 
+T 0 P 
+T q '[râb TûTŝ2 ] 
+T ; 
 (9) </p>
 
-<p>where P denotes the upper-triangular Cholesky decomposition of Var( ˆ 
-r; ˆ 
-a; ˆ 
-b; ˆ 
-u; ˆ 
-s 2 ) 
+<p>where P denotes the upper-triangular Cholesky decomposition of Var(r;â;b;û;ŝ 
+2 ) 
 and q is a vector of length 3'2K (the number of parameters that have been 
 estimated) containing random values drawn from a normal distribution with mean 
 zero and standard deviation one. If D parameter combinations are drawn like this 
@@ -993,11 +1068,11 @@ and the (in)direct effect of a particular explanatory variable is determined for
 parameter combination, the overall (in)direct effect can be approximated by 
 computing the mean value over these D draws and its significance level (t-value) by 
 dividing this mean by the corresponding standard deviation. If m kd denotes the 
-indirect effect of the kth explanatory variable of draw d, 11 the overall indirect effect 
+indirect effect of the kth explanatory variable of draw d, 
+11 the overall indirect effect 
 over all draws and the corresponding t-value will be: </p>
 
-<p>¯ 
-m k (ind: eff : kth var:) 0 
+<p>m k (ind: eff : kth var:) 0 
 1 
 D </p>
 
@@ -1010,9 +1085,7 @@ D </p>
 
 <p>Applied Spatial Econometrics 23 </p>
 
-<p>t-value (of ind: eff : kth var:) 0 ¯ </p>
-
-<p>m k = </p>
+<p>t-value (of ind: eff : kth var:) 0m k = </p>
 
 <p>1 </p>
 
@@ -1022,10 +1095,12 @@ D </p>
 
 <p>d01 </p>
 
-<p>(m kd ( ¯ 
-m k ) 2 </p>
+<p>(m kd (m k ) </p>
 
-<p>: 
+<p>2 </p>
+
+<p>
+: 
 (10b) </p>
 
 <p>Given the t-value of this indirect effect, one can finally test whether the kth variable 
@@ -1056,23 +1131,31 @@ The first candidate is the time-space dynamic model </p>
 <p>Y t 0 tY t(1 'rWY t 'hWY t(1 'X t b'o t ; 
 (12) </p>
 
-<p>whose properties have been analysed by Yu et al. (2008). 12 By continuous 
+<p>whose properties have been analysed by Yu et al. (2008). 
+12 By continuous 
 substitution of Y t-1 up to Y t((T(1) into this equation and rearranging terms, (12) 
 can be rewritten as: </p>
 
-<p>Y t 0 (I (rW ) (T (tI 'hW ) T Y t(T ' 
+<p>Y t 0 (I (rW ) 
+(T (tI 'hW ) 
+T Y t(T ' 
 X T </p>
 
 <p>p01 </p>
 
-<p>(I (rW ) (p (tI 'hW ) p(1 </p>
+<p>(I (rW ) 
+(p (tI 'hW ) </p>
+
+<p>p(1 </p>
 
 <p>Â (X t((p(1) b'o t((p(1) ): 
 (13) </p>
 
 <p>Anselin et al. (2008) criticize this model because it might still create identification 
 problems. The difficulty is that two global spatial multiplier matrices are at work at 
-the same time, (I (rW ) (p and (tI 'hW ) p(1 ; rather than one process that 
+the same time, (I (rW ) 
+(p and (tI 'hW ) 
+p(1 ; rather than one process that 
 produces global spatial spillover effects and another one that produces local spatial 
 spillover effects. Anselin et al. (2008) therefore suggest setting h 0 0 (the model so 
 obtained is labelled the time-space simultaneous model). In his keynote speech at 
@@ -1083,28 +1166,37 @@ factor t, as a result of which (13) simplifies to: </p>
 
 
 
-<p>Y t 0 t T Y t(T ' 
+<p>Y t 0 t 
+T Y t(T ' 
 X T </p>
 
 <p>p01 </p>
 
-<p>t p(1 (I (rW ) (1 (X t((p(1) b'o t((p(1) ): 
+<p>t 
+p(1 (I (rW ) 
+(1 (X t((p(1) b'o t((p(1) ): 
 (14) </p>
 
 <p>Using (7), (14) can be rewritten as: </p>
 
-<p>Y t 0 t T Y t(T ' 
+<p>Y t 0 t 
+T Y t(T ' 
 X T </p>
 
 <p>p01 </p>
 
 <p>
-t p(1 
-X </p>
+t </p>
+
+<p>p(1 </p>
+
+<p>X </p>
 
 <p>q00 </p>
 
-<p>r q W q (X t((p(1) b'o t((p(1) ) </p>
+<p>r 
+q W 
+q (X t((p(1) b'o t((p(1) ) </p>
 
 <p>: 
 (15) </p>
@@ -1134,51 +1226,71 @@ The second candidate is the time-space recursive model </p>
 <p>introduced by LeSage &amp; Pace (pp. 190Á191). By continuous substitution and 
 rearranging terms, this model can be rewritten as: </p>
 
-<p>Y t 0 (tI 'hW ) T Y t(T ' 
+<p>Y t 0 (tI 'hW ) 
+T Y t(T ' 
 X </p>
 
 <p>T (1 </p>
 
 <p>p00 </p>
 
-<p>(tI 'hW ) p (X t(p b'WX t(p u'o t(p ): (17) </p>
+<p>(tI 'hW ) 
+p (X t(p b'WX t(p u'o t(p ): (17) </p>
 
 <p>This equation shows that Y t depends not only on present but also on past values of X t 
 and WX t . This is exactly the reason why the extension of (16) with X t(1 and WX t(1 
-would create identification problems. If the stationarity conditions are satisfied, 13 the 
-impact of the matrix (tI 'hW ) p diminishes over both space and time. To determine 
+would create identification problems. If the stationarity conditions are satisfied, 
+13 the 
+impact of the matrix (tI 'hW ) 
+p diminishes over both space and time. To determine 
 the extent of this, the matrix of partial derivatives with respect to the kth explanatory 
 for every spatial unit may again be contemplated. One difference between this and 
-the earlier spatio-temporal model is that the decomposition of the matrix (tI 'hW ) p 
-is more complex. If t is non-zero, we have: </p>
+the earlier spatio-temporal model is that the decomposition of the matrix (tI 'hW ) </p>
 
-<p>(tI 'hW ) p 0 t p (I ' h </p>
+<p>p </p>
 
-<p>t </p>
+<p>is more complex. If t is non-zero, we have: </p>
 
-<p>W ) p </p>
+<p>(tI 'hW ) 
+p 0 t 
+p (I ' </p>
 
-<p>0 t p [I 'p h </p>
+<p>h 
+t </p>
 
-<p>t </p>
+<p>W ) </p>
 
-<p>W ' p( p(1) </p>
+<p>p </p>
 
-<p>2! </p>
+<p>0 t 
+p [I 'p </p>
 
-<p>( h </p>
+<p>h 
+t </p>
 
-<p>t </p>
+<p>W ' </p>
 
-<p>W ) 2 ' p( p(1)( p(2) </p>
+<p>p( p(1) 
+2! </p>
 
-<p>3! </p>
+<p>( </p>
 
-<p>( h </p>
+<p>h 
+t </p>
 
-<p>t </p>
+<p>W ) 
+2 ' </p>
 
-<p>W ) 3 '. . .]: (18) </p>
+<p>p( p(1)( p(2) 
+3! </p>
+
+<p>( </p>
+
+<p>h 
+t </p>
+
+<p>W ) 
+3 '. . .]: (18) </p>
 
 <p>This equation shows that the impact of a change in one of the explanatory variables 
 over time falls by the factor t for every next time period, and that the impact over 
@@ -1193,8 +1305,9 @@ O </p>
 
 <p>(1 </p>
 
-<p>
-h 
+
+
+<p>h 
 t </p>
 
 <p>W </p>
@@ -1250,14 +1363,7 @@ of groups. </p>
 
 <p>26 J. P. Elhorst </p>
 
-<p>3. Lee (2003) introduces the optimal instrument 2SLS estimator, but Kelejian et al. (2004) show that the 2SLS 
-estimator based on this set of instruments has quite similar small-sample properties. 
-4. One objection to this study is that the null rejection frequencies have not been standardized (Hendry, 2006). 
-Another objection is that the model that has been used in Florax et al. (2003) as a point of departure did not 
-include spatially lagged independent variables. 
-5. Based partly on Elhorst &amp;  (2009) and Seldadyo et al. (2010). 
-6. The latter tests are called robust because the existence of one type of spatial dependence does not bias the test 
-for the other type of spatial dependence. 
+<p> 
 7. If the (robust) LM tests reject these extensions of the OLS model, it is still useful to estimate the spatial lag and 
 the spatial error model. In case the spatial autoregressive coefficient r and/or the spatial autocorrelation 
 coefficient l turns out to be significant, we may again conclude that the OLS model must be rejected in favour 
@@ -1269,10 +1375,39 @@ enough.
 9. I abstract here from the problem that a cross-sectional model with an intercept, WY, X and WX variables 
 cannot be estimated on the basis of N03 observations. 
 10. This also holds if the spatial autoregressive parameter is negative. The first term that produces feedback effects 
-is r 2 W 2 . This term will always be positive. The second term is r 3 W 3 . Since r is restricted to the interval 
+is r </p>
+
+<p>2 </p>
+
+<p>W 
+2 . This term will always be positive. The second term is r 
+3 W 
+3 . Since r is restricted to the interval 
 (1/r min , 1) and the non-negative elements of W after row normalization are smaller than or equal to 1, 
-the diagonal elements of r 3 W 3 are smaller in absolute value than those of r 2 W 2 . Since the series r 2 W 2 ' 
-r 3 W 3 'r 4 W 4 ' . . . alternates in sign if r is negative, the sum of the diagonal elements of the matrix 
+the diagonal elements of r </p>
+
+<p>3 </p>
+
+<p>W 
+3 are smaller in absolute value than those of r </p>
+
+<p>2 </p>
+
+<p>W </p>
+
+<p>2 </p>
+
+<p>. Since the series r 
+2 W 
+2 ' 
+r 
+3 W </p>
+
+<p>3 </p>
+
+<p>'r 
+4 W 
+4 ' . . . alternates in sign if r is negative, the sum of the diagonal elements of the matrix 
 represented by this series will always be positive. 
 11. For example, the indirect effect of the kth variable in the spatial Durbin model of draw d that is used for 
 illustration purposes in Table 1 would be equal to </p>
@@ -1289,9 +1424,10 @@ illustration purposes in Table 1 would be equal to </p>
 
 <p>) </p>
 
-<p>(b k ) d ' 3'r d </p>
+<p>(b k ) d ' </p>
 
-<p>3(1(r 2 </p>
+<p>3'r d 
+3(1(r 2 </p>
 
 <p>d </p>
 

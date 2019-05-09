@@ -52,6 +52,8 @@ import nu.xom.*;
 import static org.grobid.core.document.xml.XmlBuilderUtils.teiElement;
 import org.apache.commons.lang3.StringUtils;
 
+import com.fasterxml.jackson.core.io.JsonStringEncoder;
+
 /**
  * This class aims at converting annotations in .csv format from the original 
  * softcite dataset into annotated XML files (at document level) usable for training 
@@ -94,11 +96,20 @@ public class AnnotatedCorpusGeneratorCSV {
     // TBD: use counter classes and a map
     private int totalMentions = 0;
     
+    // count mismatches between mention and quotes
     private int unmatchedSoftwareMentions = 0;
     private int unmatchedVersionNumberMentions = 0;
     private int unmatchedVersionDateMentions = 0;
     private int unmatchedCreatorMentions = 0;
     private int unmatchedUrlMentions = 0;
+
+    // count mismatches between mention and actual PDF content
+    //private int unmatchedFullPDFMentions = 0;
+    private int unmatchedFullSoftwarePDFMentions = 0;
+    private int unmatchedFullVersionNumberPDFMentions = 0;
+    private int unmatchedFullVersionDatePDFMentions = 0;
+    private int unmatchedFullCreatorPDFMentions = 0;
+    private int unmatchedFullUrlPDFMentions = 0;
 
     private int totalSoftwareMentions = 0;
     private int totalVersionNumberMentions = 0;
@@ -131,48 +142,41 @@ public class AnnotatedCorpusGeneratorCSV {
         System.out.println("\n" + annotations.size() + " total annotations");
         System.out.println(documents.size() + " total annotated documents");    
 
-        // breakdown per articleSet (e.g. pmc, econ)
-        Map<String, Integer> articleSetMap = new TreeMap<String, Integer>();
-        for (Map.Entry<String, AnnotatedDocument> entry : documents.entrySet()) {
-            AnnotatedDocument document = entry.getValue();
-            if (document.getArticleSet() != null) {
-                int nb = 0;
-                if (articleSetMap.get(document.getArticleSet()) != null)
-                    nb = articleSetMap.get(document.getArticleSet())+1;
-                else 
-                    nb = 1;
-                articleSetMap.put(document.getArticleSet(), nb);
-            }
-        }
-        // go thought all annotated documents of softcite
-        for (Map.Entry<String, Integer> entry : articleSetMap.entrySet()) {
-            String setName = entry.getKey();
-            int setCount = entry.getValue();
-            System.out.println(setName + ": " + setCount + " documents");
-        }
-
-        // computing and reporting cross-agreement for the loaded set
-        CrossAgreement crossAgreement = new CrossAgreement(fields);
-        CrossAgreement.AgreementStatistics stats = crossAgreement.evaluate(documents, "econ_article"); 
-        System.out.println("\n****** Inter-Annotator Agreement (Percentage agreement) ******** \n\n" + stats.toString());
+        // from the loadeed annotations, we rank the annotators by their number of annotations, this information
+        // could be used to decide which annotation to pick when we have inter-annotator disagreement (by default 
+        // the annotator having produced the most annotations could be selected)
+        Map<String,Integer> annotators = new HashMap<String, Integer>();
+        createAnnotatorMap(annotations, annotators);
 
         // we keep GROBID analysis as close as possible to the actual content
         GrobidAnalysisConfig config = new GrobidAnalysisConfig.GrobidAnalysisConfigBuilder()
                                     .consolidateHeader(0)
                                     .consolidateCitations(0)
+                                    .analyzer(SoftwareAnalyzer.getInstance())
                                     .build();
-        //LibraryLoader.load();
         Engine engine = GrobidFactory.getInstance().getEngine();
 
         // for reporting unmatched mention/context 
-        Writer writerSoftware = new PrintWriter(new BufferedWriter(new FileWriter("unmatched-software-mention-context.txt")));
-        Writer writerVersionNumber = new PrintWriter(new BufferedWriter(new FileWriter("unmatched-version-number-mention-context.txt")));
-        Writer writerVersionDate = new PrintWriter(new BufferedWriter(new FileWriter("unmatched-version-date-mention-context.txt")));
-        Writer writerCreator = new PrintWriter(new BufferedWriter(new FileWriter("unmatched-creator-mention-context.txt")));
-        Writer writerUrl = new PrintWriter(new BufferedWriter(new FileWriter("unmatched-url-mention-context.txt")));
+        Writer writerSoftware = new PrintWriter(new BufferedWriter(new FileWriter("doc/unmatched-software-mention-context.txt")));
+        Writer writerVersionNumber = new PrintWriter(new BufferedWriter(new FileWriter("doc/unmatched-version-number-mention-context.txt")));
+        Writer writerVersionDate = new PrintWriter(new BufferedWriter(new FileWriter("doc/unmatched-version-date-mention-context.txt")));
+        Writer writerCreator = new PrintWriter(new BufferedWriter(new FileWriter("doc/unmatched-creator-mention-context.txt")));
+        Writer writerUrl = new PrintWriter(new BufferedWriter(new FileWriter("doc/unmatched-url-mention-context.txt")));
+
+        // for reporting misalignments with actual PDF content
+        Writer writerMisalignmentSoftwarePDF = new PrintWriter(new BufferedWriter(new FileWriter("doc/misalignments-software-mentions-pdf.txt")));
+        Writer writerMisalignmentVersionNumberPDF = new PrintWriter(new BufferedWriter(new FileWriter("doc/misalignments-version-number-mentions-pdf.txt")));
+        Writer writerMisalignmentVersionDatePDF = new PrintWriter(new BufferedWriter(new FileWriter("doc/misalignments-version-date-mentions-pdf.txt")));
+        Writer writerMisalignmentCreatorPDF = new PrintWriter(new BufferedWriter(new FileWriter("doc/misalignments-creator-mentions-pdf.txt")));
+        Writer writerMisalignmentUrlPDF = new PrintWriter(new BufferedWriter(new FileWriter("doc/misalignments-url-mentions-pdf.txt")));
 
         // go thought all annotated documents of softcite
+        int m = 0;
         for (Map.Entry<String, AnnotatedDocument> entry : documents.entrySet()) {
+            /*if (m > 20) {
+                break;
+            }
+            m++;*/
             String docName = entry.getKey();
             File pdfFile = getPDF(documentPath, docName);
 
@@ -206,6 +210,10 @@ public class AnnotatedCorpusGeneratorCSV {
 
             Language lang = new Language("en", 1.0);
             
+            // we consider all layout tokens to be usable for matching annotations back to the actual documents
+            // except certain structures which have been ignored in the annotation guidelines
+            // -> we use GROBID structuring to identify the layout tokens to exclude 
+
             List<Integer> toExclude = new ArrayList<Integer>();
 
             // add more structures via GROBID
@@ -251,30 +259,7 @@ public class AnnotatedCorpusGeneratorCSV {
                 }
             }
 
-            // body
-            /*documentParts = doc.getDocumentPart(SegmentationLabels.BODY);
-            if (documentParts != null) {
-                logger.debug("Process body...");
-                // full text processing
-                Pair<String, LayoutTokenization> featSeg = FullTextParser.getBodyTextFeatured(doc, documentParts);
-                if (featSeg != null) {
-                    // if featSeg is null, it usually means that no body segment is found in the
-                    // document segmentation
-                    String bodytext = featSeg.getA();
-
-                    LayoutTokenization tokenizationBody = featSeg.getB();
-                    if ((bodytext != null) && (bodytext.trim().length() > 0)) {
-                        engine.getParsers().getFullTextParser().label(bodytext);
-                    } else {
-                        logger.debug("Fulltext model: The input to the CRF processing is empty");
-                    }
-                }
-            }*/
-
-            // we need the tokens of the reference sections (to exclude them!)
-
-
-
+            // similarly we need the tokens of the reference sections (to exclude them!)
             documentParts = doc.getDocumentPart(SegmentationLabels.REFERENCES);
             List<LayoutToken> tokenizationReferences = null;
             if (documentParts != null) {
@@ -287,7 +272,7 @@ public class AnnotatedCorpusGeneratorCSV {
             if (documentParts != null) {
                 tokenizationHeadNotes = Document.getTokenizationParts(documentParts, doc.getTokenizations());
             }
-            // and the page number
+            // and the page number (to exclude them!)
             documentParts = doc.getDocumentPart(SegmentationLabels.PAGE_NUMBER);
             List<LayoutToken> tokenizationPageNumber = null;
             if (documentParts != null) {
@@ -322,19 +307,28 @@ public class AnnotatedCorpusGeneratorCSV {
                      (annotation.getVersionNumber() != null) ||
                      (annotation.getVersionDate() != null) ||
                      (annotation.getCreator() != null) ||
-                     (annotation.getUrl() != null) ) 
-                    totalMentions++;
+                     (annotation.getUrl() != null) )                     
 
-                if (annotation.getSoftwareMention() != null)
+                if (annotation.getSoftwareMention() != null) {
                     totalSoftwareMentions++;
-                if (annotation.getVersionNumber() != null)
+                    totalMentions++;
+                }
+                if (annotation.getVersionNumber() != null) {
                     totalVersionNumberMentions++;
-                if (annotation.getVersionDate() != null)
+                    totalMentions++;
+                }
+                if (annotation.getVersionDate() != null) {
                     totalVersionDateMentions++;
-                if (annotation.getCreator() != null)
+                    totalMentions++;
+                }
+                if (annotation.getCreator() != null) {
                     totalCreatorMentions++;
-                if (annotation.getUrl() != null)
+                    totalMentions++;
+                }
+                if (annotation.getUrl() != null) {
                     totalUrlMentions++;
+                    totalMentions++;
+                }
             }
 
             // TBD: use a map...
@@ -344,20 +338,29 @@ public class AnnotatedCorpusGeneratorCSV {
             checkMentionContextMatch(localAnnotations, "creator", docName, writerCreator);
             checkMentionContextMatch(localAnnotations, "url", docName, writerUrl);
 
-            // now try to align annotations with actual article content
-            
+            // now this is the key part -> we try to align annotations with actual article content
             List<LayoutToken> tokens = doc.getTokenizations();
             if (tokens != null) {
                 logger.debug("Process content... ");
-                //LOGGER.debug(LayoutTokensUtil.toText(titleTokens));
-                alignLayoutTokenSequence(document, tokens, localAnnotations);
+                System.out.println("\n______________________");
+                System.out.println("______> " + document.getDocumentID());
+                try {
+                    alignLayoutTokenSequence(document, tokens, localAnnotations, 
+                        writerMisalignmentSoftwarePDF,
+                        writerMisalignmentVersionNumberPDF,
+                        writerMisalignmentVersionDatePDF,
+                        writerMisalignmentCreatorPDF,
+                        writerMisalignmentUrlPDF);
+                } catch(IOException e) {
+                    logger.error("Failed to write report for PDF alignment process", e);
+                }
             }
 
+            // finally, we will output an annotated training file for the whole document content, only 
+            // annotations that have been matched back to the actual document content are used
             List<Annotation> inlineAnnotations = document.getInlineAnnotations();
             if (inlineAnnotations != null) {
-               Collections.sort(inlineAnnotations);
-
-                // now we can output an annotated training file for the whole document content
+                Collections.sort(inlineAnnotations);
                 try {
                     generateAnnotatedXMLDocument(xmlPath + File.separator + new File(pdfFile.getAbsolutePath())
                                                                 .getName().replace(".pdf", ".software-mention.xml"),
@@ -378,40 +381,96 @@ public class AnnotatedCorpusGeneratorCSV {
         writerCreator.close();
         writerUrl.close();
 
+        writerMisalignmentSoftwarePDF.close();
+        writerMisalignmentVersionNumberPDF.close();
+        writerMisalignmentVersionDatePDF.close();
+        writerMisalignmentCreatorPDF.close();
+        writerMisalignmentUrlPDF.close();
+
+        this.softwareTermVector(annotations, "doc/software-term-vector.json");
+
+        // breakdown per articleSet (e.g. pmc, econ)
+        Map<String, Integer> articleSetMap = new TreeMap<String, Integer>();
+        for (Map.Entry<String, AnnotatedDocument> entry : documents.entrySet()) {
+            AnnotatedDocument document = entry.getValue();
+            if (document.getArticleSet() != null) {
+                int nb = 0;
+                if (articleSetMap.get(document.getArticleSet()) != null)
+                    nb = articleSetMap.get(document.getArticleSet())+1;
+                else 
+                    nb = 1;
+                articleSetMap.put(document.getArticleSet(), nb);
+            }
+        }
+        // print the breakdown per document set, 
+        for (Map.Entry<String, Integer> entry : articleSetMap.entrySet()) {
+            String setName = entry.getKey();
+            int setCount = entry.getValue();
+            System.out.println(setName + ": " + setCount + " documents");
+        }
+
+        // computing and reporting cross-agreement for the loaded set
+        CrossAgreement crossAgreement = new CrossAgreement(fields);
+        //CrossAgreement.AgreementStatistics stats = crossAgreement.evaluate(documents, "econ_article"); 
+        CrossAgreement.AgreementStatistics stats = crossAgreement.evaluate(documents, "pmc"); 
+        System.out.println("\n****** Inter-Annotator Agreement (Percentage agreement) ****** PMC SET ****** \n\n" + stats.toString());
+
+        crossAgreement = new CrossAgreement(fields);
+        stats = crossAgreement.evaluate(documents, "econ_article"); 
+        System.out.println("\n****** Inter-Annotator Agreement (Percentage agreement) ****** ECON SET ***** \n\n" + stats.toString());
+
+        // some stat reporting 
         System.out.println("\ntotal number of failed article PDF download: " + articleUtilities.totalFail);
         System.out.println("total number of failed article PDF download based on DOI: " + articleUtilities.totalDOIFail + "\n");
 
         // to be done: use a map...
-        System.out.println("\nUnmatched contexts: " + unmatchedContexts + " out of " + totalContexts + " total contexts\n");
+        //System.out.println("\nUnmatched contexts: " + unmatchedContexts + " out of " + totalContexts + " total contexts\n");
 
         //System.out.println("Unmatched software mentions: " + unmatchedSoftwareMentions + " out of " + totalMentions + " total mentions");
-        System.out.println("Unmatched software mentions: " + unmatchedSoftwareMentions + " out of " + 
+        System.out.println("Unmatched software mentions/quotes: " + unmatchedSoftwareMentions + " out of " + 
             totalSoftwareMentions + " total software mentions (" +
             formatPourcent((double)unmatchedSoftwareMentions/totalSoftwareMentions) + ")");
 
         //System.out.println("Unmatched version number mentions: " + unmatchedVersionNumberMentions + " out of " + totalMentions + " total mentions");
-        System.out.println("Unmatched version number mentions: " + unmatchedVersionNumberMentions + " out of " + 
+        System.out.println("Unmatched version number mentions/quotes: " + unmatchedVersionNumberMentions + " out of " + 
             totalVersionNumberMentions + " total version number mentions (" +
             formatPourcent((double)unmatchedVersionNumberMentions/totalVersionNumberMentions) + ")");
 
         //System.out.println("Unmatched version date mentions: " + unmatchedVersionDateMentions + " out of " + totalMentions + " total mentions");
-        System.out.println("Unmatched version date mentions: " + unmatchedVersionDateMentions + " out of " + 
+        System.out.println("Unmatched version date mentions/quotes: " + unmatchedVersionDateMentions + " out of " + 
             totalVersionDateMentions + " total version date mentions (" +
             formatPourcent((double)unmatchedVersionDateMentions/totalVersionDateMentions) + ")");
 
         //System.out.println("Unmatched creator mentions: " + unmatchedCreatorMentions + " out of " + totalMentions + " total mentions");
-        System.out.println("Unmatched creator mentions: " + unmatchedCreatorMentions + " out of " + 
+        System.out.println("Unmatched creator mentions/quotes: " + unmatchedCreatorMentions + " out of " + 
             totalCreatorMentions + " total creator mentions (" +
             formatPourcent((double)unmatchedCreatorMentions/totalCreatorMentions) + ")");
 
         //System.out.println("Unmatched url mentions: " + unmatchedUrlMentions + " out of " + totalMentions + " total mentions");
-        System.out.println("Unmatched url mentions: " + unmatchedUrlMentions + " out of " + totalUrlMentions + " total url mentions (" +
+        System.out.println("Unmatched url mentions/quotes: " + unmatchedUrlMentions + " out of " + totalUrlMentions + " total url mentions (" +
             formatPourcent((double)unmatchedUrlMentions/totalUrlMentions) + ")");
 
         int unmatchedMentions = unmatchedSoftwareMentions + unmatchedVersionNumberMentions + unmatchedVersionDateMentions +
                                 unmatchedCreatorMentions + unmatchedUrlMentions;
-        System.out.println("\nTotal unmatched mentions: " + unmatchedMentions + " out of " + totalMentions + " total mentions (" + 
+        System.out.println("\nTotal unmatched mentions/quotes: " + unmatchedMentions + " out of " + totalMentions + " total mentions (" + 
             formatPourcent((double)unmatchedMentions/totalMentions) + ") \n");
+
+        int unmatchedFullPDFMentions = unmatchedFullSoftwarePDFMentions + unmatchedFullVersionNumberPDFMentions + unmatchedFullVersionDatePDFMentions +
+            unmatchedFullCreatorPDFMentions + unmatchedFullUrlPDFMentions;
+
+        System.out.println("Unmatched mentions/PDF: " + unmatchedFullPDFMentions + " out of " + totalMentions + " total mentions (" +
+            formatPourcent((double)unmatchedFullPDFMentions/totalMentions) + ")");
+
+        System.out.println("Unmatched software name mentions/PDF: " + unmatchedFullSoftwarePDFMentions + " out of " + totalSoftwareMentions + 
+            " total software name mentions (" + formatPourcent((double)unmatchedFullSoftwarePDFMentions/totalSoftwareMentions) + ")");
+        System.out.println("Unmatched version number mentions/PDF: " + unmatchedFullVersionNumberPDFMentions + " out of " + totalVersionNumberMentions + 
+            " total version number mentions (" + formatPourcent((double)unmatchedFullVersionNumberPDFMentions/totalVersionNumberMentions) + ")");
+        System.out.println("Unmatched version date mentions/PDF: " + unmatchedFullVersionDatePDFMentions + " out of " + totalVersionDateMentions + 
+            " total version date mentions (" + formatPourcent((double)unmatchedFullVersionDatePDFMentions/totalVersionDateMentions) + ")");
+        System.out.println("Unmatched creator mentions/PDF: " + unmatchedFullCreatorPDFMentions + " out of " + totalCreatorMentions + 
+            " total creator mentions (" + formatPourcent((double)unmatchedFullCreatorPDFMentions/totalCreatorMentions) + ")");
+        System.out.println("Unmatched url mentions/PDF: " + unmatchedFullUrlPDFMentions + " out of " + totalUrlMentions + 
+            " total url mentions (" + formatPourcent((double)unmatchedFullUrlPDFMentions/totalUrlMentions) + ")");
     }
 
 
@@ -490,14 +549,21 @@ public class AnnotatedCorpusGeneratorCSV {
                     context = context.replace("\t", " ").replace("\n", " ");
                     context = context.replaceAll(" +", " ");
                     writer.write(documentId + "\t" + annotation.getIdentifier() + "\t" + field + "\t" + 
-                        mention + "\t" + context + "\t" + annotation.getPage());
+                        mention.replace("\t", " ") + "\t" + context.replace("\t", " ") + "\t" + annotation.getPage());
                     writer.write(System.lineSeparator());
                 }
             }
         }
     }
 
-    private void alignLayoutTokenSequence(AnnotatedDocument annotatedDocument, List<LayoutToken> layoutTokens, List<SoftciteAnnotation> localAnnotations) {
+    private void alignLayoutTokenSequence(AnnotatedDocument annotatedDocument, 
+                                        List<LayoutToken> layoutTokens, 
+                                        List<SoftciteAnnotation> localAnnotations,
+                                        Writer writerMisalignmentSoftwarePDF,
+                                        Writer writerMisalignmentVersionNumberPDF,
+                                        Writer writerMisalignmentVersionDatePDF,
+                                        Writer writerMisalignmentCreatorPDF,
+                                        Writer writerMisalignmentUrlPDF) throws IOException {
         if ( (layoutTokens == null) || (layoutTokens.size() == 0) )
             return;
 
@@ -514,15 +580,48 @@ public class AnnotatedCorpusGeneratorCSV {
             totalContexts++;
 
             boolean matchFound = false;
+            boolean overlap = false;
             String softwareMention = annotation.getSoftwareMention();
+            //System.out.println("new annotation / " + softwareMention);
             FastMatcher matcher = new FastMatcher();
-            matcher.loadTerm(softwareMention, GrobidAnalyzer.getInstance(), true);
-            // case sensitive matching, ignore standard delimeters
-            List<OffsetPosition> positions = matcher.matchLayoutToken(layoutTokens, true, true);
-
+            matcher.loadTerm(softwareMention.toLowerCase(), SoftwareAnalyzer.getInstance(), true); // ignoreDelimiters
+            // we add a couple of variants for better recall
+            String softwareMentionNoHyphen = softwareMention.replace("-", "");
+            if (!softwareMentionNoHyphen.equals(softwareMention))
+                matcher.loadTerm(softwareMentionNoHyphen, SoftwareAnalyzer.getInstance(), true);
+            
+            // if "BlablaBli" we add also "Blabla Bli" 
+            String subSegments = this.subSegment(softwareMention);
+            if (!subSegments.equals(softwareMention))
+                matcher.loadTerm(subSegments, SoftwareAnalyzer.getInstance(), true);
+            if (softwareMention.indexOf("®") != -1) 
+                matcher.loadTerm(softwareMention.replace("®",""), SoftwareAnalyzer.getInstance(), true);
+            else
+                matcher.loadTerm(softwareMention+"©", SoftwareAnalyzer.getInstance(), true);
+            // not case sensitive matching, ignore standard delimeters
+            List<OffsetPosition> positions = matcher.matchLayoutToken(layoutTokens, true, false);
             if ( (positions == null) || (positions.size() == 0) ) {
-                //unmatchedMentions++;
-                System.out.println("\t\t!!!!!!!!! " + softwareMention + ": failed mention");
+                //unmatchedFullPDFMentions++;
+                unmatchedFullSoftwarePDFMentions++;
+                writerMisalignmentSoftwarePDF.write(annotatedDocument.getDocumentID() + "\t" + softwareMention + "\t" + "\t" + "no mention match\n");
+                System.out.println("\t\t!!!!!!!!! " + softwareMention + ": failed mention, no matching found in the whole document");
+                // we add all the attribute mentions as mismatches
+                String versionNumber = annotation.getVersionNumber();
+                if (versionNumber != null) {
+                    unmatchedFullVersionNumberPDFMentions++;
+                }
+                String versionDate = annotation.getVersionDate();
+                if (versionDate != null) {
+                    unmatchedFullVersionDatePDFMentions++;
+                }
+                String creator = annotation.getCreator();
+                if (creator != null) {
+                    unmatchedFullCreatorPDFMentions++;
+                }
+                String url = annotation.getUrl();
+                if (url != null) {
+                    unmatchedFullUrlPDFMentions++;
+                }
                 continue;
             }
 
@@ -530,25 +629,31 @@ public class AnnotatedCorpusGeneratorCSV {
             String quote = annotation.getContext();
             for(OffsetPosition position : positions) {
                 // check if we are at the right page
-                if (layoutTokens.get(position.start).getPage() != page)
+                if (layoutTokens.get(position.start).getPage() != page) {
+                    //System.out.println("page check failed !");
                     continue;
+                }
 
                 // check if the position already taken
-                if (isOverlapping(occupiedPositions, position))
+                if (isOverlapping(occupiedPositions, position)) {
+                    //System.out.println("overlap check failed !");
+                    overlap = true;
                     continue;
+                }
 
                 // check if we are within the quote
-                if (!inQuote(position, softwareMention, layoutTokens, quote))
+                if (!inQuote(position, softwareMention, layoutTokens, quote)) {
+                    //System.out.println("in quote check failed !");
                     continue;
+                }
 
                 annotation.setOccurence(position);
                 occupiedPositions.add(position);
                 matchFound = true;
-                System.out.print(softwareMention + ": match position : " + position.toString() + " : ");
-                for(int i=position.start; i<=position.end; i++) {
+                //System.out.print(softwareMention + ": match position : " + position.toString() + " : ");
+                /*for(int i=position.start; i<=position.end; i++) {
                     System.out.print(layoutTokens.get(i).getText());
-                }
-                System.out.println("");
+                }*/
 
                 String softwareContent = LayoutTokensUtil.toText(layoutTokens.subList(position.start, position.end+1));
 
@@ -558,7 +663,7 @@ public class AnnotatedCorpusGeneratorCSV {
                 String versionNumber = annotation.getVersionNumber();
                 if (versionNumber != null) {
                     FastMatcher matcher2 = new FastMatcher();
-                    matcher2.loadTerm(versionNumber, GrobidAnalyzer.getInstance(), true);
+                    matcher2.loadTerm(versionNumber, SoftwareAnalyzer.getInstance(), true);
                     // case sensitive matching, ignore standard delimeters
                     List<OffsetPosition> positions2 = matcher2.matchLayoutToken(layoutTokens, true, true);
                     OffsetPosition positionVersionNumber = null;
@@ -583,6 +688,14 @@ public class AnnotatedCorpusGeneratorCSV {
                         versionNumberInlineAnnotation.setOccurence(positionVersionNumber);
                         annotatedDocument.addInlineAnnotation(versionNumberInlineAnnotation);
                         occupiedPositions.add(positionVersionNumber);
+                    } else if (positionVersionNumber == null) {
+                        unmatchedFullVersionNumberPDFMentions++;
+                        if (positions2 == null) 
+                            writerMisalignmentVersionNumberPDF.write(annotatedDocument.getDocumentID() + "\t" + "\t" + versionNumber.replace("\t", "") + "\t" + 
+                                    "no mention match\n");
+                        else
+                            writerMisalignmentVersionNumberPDF.write(annotatedDocument.getDocumentID() + "\t" + versionNumber.replace("\t", "") + "\t" + 
+                                    quote.replace("\t", "") + "\t" + "mention match but not in indicated page or quote\n");
                     }
                 }
 
@@ -590,7 +703,7 @@ public class AnnotatedCorpusGeneratorCSV {
                 String versionDate = annotation.getVersionDate();
                 if (versionDate != null) {
                     FastMatcher matcher2 = new FastMatcher();
-                    matcher2.loadTerm(versionDate, GrobidAnalyzer.getInstance(), true);
+                    matcher2.loadTerm(versionDate, SoftwareAnalyzer.getInstance(), true);
                     // case sensitive matching, ignore standard delimeters
                     List<OffsetPosition> positions2 = matcher2.matchLayoutToken(layoutTokens, true, true);
                     OffsetPosition positionVersionDate = null;
@@ -615,6 +728,14 @@ public class AnnotatedCorpusGeneratorCSV {
                         versionDateInlineAnnotation.setOccurence(positionVersionDate);
                         annotatedDocument.addInlineAnnotation(versionDateInlineAnnotation);
                         occupiedPositions.add(positionVersionDate);
+                    } else if (positionVersionDate == null) {
+                        unmatchedFullVersionDatePDFMentions++;
+                        if (positions2 == null) 
+                            writerMisalignmentVersionDatePDF.write(annotatedDocument.getDocumentID() + "\t"+ "\t" + versionDate.replace("\t", "") + "\t" + 
+                                    "no mention match\n");
+                        else
+                            writerMisalignmentVersionDatePDF.write(annotatedDocument.getDocumentID() + "\t" + versionDate.replace("\t", "") + "\t" + 
+                                    quote.replace("\t", "") + "\t" + "mention match but not in indicated page or quote\n");
                     }
                 }
 
@@ -622,7 +743,7 @@ public class AnnotatedCorpusGeneratorCSV {
                 String creator = annotation.getCreator();
                 if (creator != null) {
                     FastMatcher matcher2 = new FastMatcher();
-                    matcher2.loadTerm(creator, GrobidAnalyzer.getInstance(), true);
+                    matcher2.loadTerm(creator, SoftwareAnalyzer.getInstance(), true);
                     // case sensitive matching, ignore standard delimeters
                     List<OffsetPosition> positions2 = matcher2.matchLayoutToken(layoutTokens, true, true);
                     OffsetPosition positionCreator = null;
@@ -647,6 +768,14 @@ public class AnnotatedCorpusGeneratorCSV {
                         creatorInlineAnnotation.setOccurence(positionCreator);
                         annotatedDocument.addInlineAnnotation(creatorInlineAnnotation);
                         occupiedPositions.add(positionCreator);
+                    } else if (positionCreator == null) {
+                        unmatchedFullCreatorPDFMentions++;
+                        if (positions2 == null) 
+                            writerMisalignmentCreatorPDF.write(annotatedDocument.getDocumentID() + "\t" + "\t" + creator.replace("\t", "") + "\t" + 
+                                    "no mention match\n");
+                        else
+                            writerMisalignmentCreatorPDF.write(annotatedDocument.getDocumentID() + "\t" + creator.replace("\t", "") + "\t" + 
+                                    quote.replace("\t", "") + "\t" + "mention match but not in indicated page or quote\n");
                     }
                 }
                 
@@ -654,7 +783,7 @@ public class AnnotatedCorpusGeneratorCSV {
                 String url = annotation.getUrl();
                 if (url != null) {
                     FastMatcher matcher2 = new FastMatcher();
-                    matcher2.loadTerm(url, GrobidAnalyzer.getInstance(), true);
+                    matcher2.loadTerm(url, SoftwareAnalyzer.getInstance(), true);
                     // case sensitive matching, ignore standard delimeters
                     List<OffsetPosition> positions2 = matcher2.matchLayoutToken(layoutTokens, true, true);
                     OffsetPosition positionUrl = null;
@@ -679,7 +808,15 @@ public class AnnotatedCorpusGeneratorCSV {
                         urlInlineAnnotation.setOccurence(positionUrl);
                         annotatedDocument.addInlineAnnotation(urlInlineAnnotation);
                         occupiedPositions.add(positionUrl);
-                    }
+                    } else if (positionUrl == null) {
+                        unmatchedFullUrlPDFMentions++;
+                        if (positions2 == null) 
+                            writerMisalignmentUrlPDF.write(annotatedDocument.getDocumentID() + "\t" + "\t" + url.replace("\t", "") + "\t" + 
+                                    "no mention match\n");
+                        else
+                            writerMisalignmentUrlPDF.write(annotatedDocument.getDocumentID() + "\t" + url.replace("\t", "") + "\t" + 
+                                    quote.replace("\t", "") + "\t" + "mention match but not in indicated page or quote\n");
+                    } 
                 }
 
                 // create the inline annotations corresponding to this annotation
@@ -694,9 +831,12 @@ public class AnnotatedCorpusGeneratorCSV {
 
                 break;
             }
-            if (!matchFound) {
-                //unmatchedMentions++;
-                System.out.println("\t\t!!!!!!!!! " + softwareMention + ": failed mention after position check");
+            if (!matchFound && !overlap) {
+                //unmatchedFullPDFMentions++;
+                unmatchedFullSoftwarePDFMentions++;
+                writerMisalignmentSoftwarePDF.write(annotatedDocument.getDocumentID() + "\t" + softwareMention.replace("\t", "") + "\t" + 
+                    quote.replace("\t", "") + "\t" + "mention match but not in indicated page or quote\n");
+                System.out.println("\t\t!!!!!!!!! " + softwareMention  + ": failed mention after position check");
             }
         }
     }
@@ -741,32 +881,32 @@ public class AnnotatedCorpusGeneratorCSV {
             rightQuoteSimplified = CrossAgreement.simplifiedField(rightQuote);
         } else {
             // more agressive soft matching 
-            String simplifiedContext = CrossAgreement.simplifiedField(quote);
+            String simplifiedQuote = CrossAgreement.simplifiedField(quote);
             String softwareNameSimplified = CrossAgreement.simplifiedField(softwareName);
 
-            int ind = simplifiedContext.indexOf(softwareNameSimplified);
+            int ind = simplifiedQuote.indexOf(softwareNameSimplified);
             if (ind == -1)
                 return false;
             else {
-                leftQuoteSimplified = simplifiedContext.substring(0, ind);
-                rightQuoteSimplified = simplifiedContext.substring(ind+softwareNameSimplified.length(), simplifiedContext.length());
+                leftQuoteSimplified = simplifiedQuote.substring(0, ind);
+                rightQuoteSimplified = simplifiedQuote.substring(ind+softwareNameSimplified.length(), simplifiedQuote.length());
             }
         }
 
-        System.out.println("Mention: " + LayoutTokensUtil.toText(layoutTokens.subList(position.start, position.end+1)));
+        /*System.out.println("Mention: " + LayoutTokensUtil.toText(layoutTokens.subList(position.start, position.end+1)));
         System.out.println("Quote: " + quote);
         System.out.println("leftContextSimplified: " + leftContextSimplified);
         System.out.println("rigthContextSimplified: " + rigthContextSimplified);
         System.out.println("leftQuoteSimplified: " + leftQuoteSimplified);
-        System.out.println("rightQuoteSimplified: " + rightQuoteSimplified);
+        System.out.println("rightQuoteSimplified: " + rightQuoteSimplified);*/
 
         // it might need to be relaxed, with Ratcliff/Obershelp Matching
         if ( (rigthContextSimplified.startsWith(rightQuoteSimplified) || rightQuoteSimplified.startsWith(rigthContextSimplified)) && 
              (leftContextSimplified.endsWith(leftQuoteSimplified) || leftQuoteSimplified.endsWith(leftContextSimplified)) ) {
-            System.out.println("-> match !");
+            //System.out.println("-> match !");
             return true;  
         }
-        System.out.println("-> NO match !");
+        //System.out.println("-> NO match !");
         return false;
     }
 
@@ -817,7 +957,7 @@ public class AnnotatedCorpusGeneratorCSV {
             p.appendChild(this.toText(tokenizations, toExclude));
             return p;
         }
-        System.out.println(inlineAnnotations.size() + " inline annotations");
+        //System.out.println(inlineAnnotations.size() + " inline annotations");
         for (Annotation annotation : inlineAnnotations) {
             //if (annotation.getType() == SoftciteAnnotation.AnnotationType.SOFTWARE && 
             //    annotation.getOccurence() != null) {
@@ -848,6 +988,24 @@ public class AnnotatedCorpusGeneratorCSV {
         p.appendChild(this.toText(tokenizations.subList(pos, tokenizations.size()), toExclude));
 
         return p;
+    }
+
+    private void createAnnotatorMap(Map<String, SoftciteAnnotation> annotations, Map<String, Integer> annotators) {
+        if ( (annotations == null) || (annotators == null) ) {
+            return;
+        }
+
+        for (Map.Entry<String, SoftciteAnnotation> entry : annotations.entrySet()) {
+            SoftciteAnnotation annotation = entry.getValue();
+            if (annotation != null) {
+                String annotatorID = annotation.getAnnotatorID();
+                Integer numberAnnotations = annotators.get(annotatorID);
+                if (numberAnnotations == null)
+                    numberAnnotations = new Integer(0);
+                numberAnnotations += 1;
+                annotators.put(annotatorID, numberAnnotations);
+            }
+        }
     }
 
     /**
@@ -929,7 +1087,7 @@ public class AnnotatedCorpusGeneratorCSV {
                 String attribute = null;
                 for(int i=0; i<csvRecord.size(); i++) {
                     String value = csvRecord.get(i);
-                    if (value.trim().length() == 0)
+                    if ( (value.trim().length() == 0) || (value.trim().equals("NA")) )
                         continue;
                     value = cleanValue(value);
                     if (i == 0) {
@@ -1063,12 +1221,13 @@ public class AnnotatedCorpusGeneratorCSV {
             // *coder* is the id of the annotator
             // *article* is the nidentifier of the annotated article
             // *quote* is the full passage where something is annotated, as a raw string (a snippet)
+            // *tei_quote* (new from May 1st 2019) is the quote not cut and paste from PDF but from the TEI  
+            // document following a GROBID conversion
             // *page* is the PDF page number where the annotation appears
             // *mention_type* is the type of what is annotated - values listed in the doc are "software", 
             // "algorithm", "hardware" and "other", but actual values appear to be much more diverse 
             // *certainty* is an integer between 1-10 for annotator subjective certainty on the annotation
             // *meno* is a free text field for comments
-
             boolean start = true;
             int nbCSVlines = 0;
             for (CSVRecord csvRecord : parser) {
@@ -1129,9 +1288,18 @@ public class AnnotatedCorpusGeneratorCSV {
                             document = documents.get(documentID);
                         document.addAnnotation(annotation); 
                     } else if (i == 3) {
+                        // quote (cut and paste from PDF)
                         annotation.setContext(value);
                         nbMentionAnnotations++;
                     } else if (i == 4) {
+                        // tei_quote (from TEI)
+                        if ( (value != null) && (value.length()>0) && (!value.equals("NA")) ) {
+                            // we have a real TEI quote, then we prioritize it 
+                            if (annotation.getContext() == null)
+                                nbMentionAnnotations++;
+                            annotation.setContext(value);
+                        } 
+                    } else if (i == 5) {
                         int intValue = -1;
                         try {
                             intValue = Integer.parseInt(value);
@@ -1140,9 +1308,9 @@ public class AnnotatedCorpusGeneratorCSV {
                         }
                         if (intValue != -1)
                             annotation.setPage(intValue);
-                    } else if (i == 5) {
-                        annotation.setType(value.toLowerCase()); 
                     } else if (i == 6) {
+                        annotation.setType(value.toLowerCase()); 
+                    } else if (i == 7) {
                         int intValue = -1;
                         try {
                             intValue = Integer.parseInt(value);
@@ -1151,7 +1319,7 @@ public class AnnotatedCorpusGeneratorCSV {
                         }
                         if (intValue != -1)
                             annotation.setCertainty(intValue);
-                    } else if (i == 7) {
+                    } else if (i == 8) {
                         annotation.setMemo(value);
                     }
                 }
@@ -1210,6 +1378,33 @@ public class AnnotatedCorpusGeneratorCSV {
     }
 
     /**
+     * Sub-segment a string in case of unregular Uppercase in the middle of a token:
+     * "BlablaBliBlo" we segment to "Blabla Bli Blo"    
+     */ 
+    private String subSegment(String string) {
+        StringBuilder builder = new StringBuilder();
+        SoftwareAnalyzer analyzer = SoftwareAnalyzer.getInstance();
+        List<String> tokens = analyzer.tokenize(string);
+        for(String token : tokens) {
+            String lastToken = token;
+            int ind = 0;
+            for(int i=0; i<token.length(); i++) {
+                if (i>0) {
+                    if (Character.isLowerCase(token.charAt(i-1)) && Character.isUpperCase(token.charAt(i))) {
+                        builder.append(token.substring(ind,i));
+                        builder.append(" ");
+                        lastToken = token.substring(i, token.length());
+                        ind = i;
+                    }
+                }
+            }
+            builder.append(lastToken);
+        }
+
+        return builder.toString();
+    }
+
+    /**
      * Access a PDF in a directory:
      * - if present, return the path of the PDF
      * - if not present download the OA PDF, store it in the repo and 
@@ -1237,6 +1432,59 @@ public class AnnotatedCorpusGeneratorCSV {
             }
         } else 
             return inRepo;
+    }
+
+    /**
+     * Output the list of software names as a (huge) term vector to be disambiguated by entity fishing.
+     */ 
+    public static void softwareTermVector(Map<String, SoftciteAnnotation> annotations, String outputPath) {
+        List<String> allSoftwareNames = new ArrayList<String>();
+        //System.out.println(annotations.size());
+        for (Map.Entry<String, SoftciteAnnotation> entry : annotations.entrySet()) {
+            SoftciteAnnotation annotation = entry.getValue();
+            if (annotation != null) {
+                String softwareName = annotation.getSoftwareMention();
+                if ( (softwareName != null) && (softwareName.length() > 0) ) {
+                    if (!allSoftwareNames.contains(softwareName)) {
+                        allSoftwareNames.add(softwareName);
+                    }
+                }
+            }
+        }
+        //System.out.println(allSoftwareNames.size());
+        allSoftwareNames.sort(String.CASE_INSENSITIVE_ORDER);
+
+        JsonStringEncoder encoder = JsonStringEncoder.getInstance();
+        Writer writerVector = null;
+
+        try {
+            writerVector = new PrintWriter(new BufferedWriter(new FileWriter(outputPath)));
+            writerVector.write("{"+"\n\t"+"\"termVector\": [\n\t\t[");
+
+            boolean first = true;
+            for(String term : allSoftwareNames) {
+                byte[] encodedTerm = encoder.quoteAsUTF8(term);
+                String outputTerm  = new String(encodedTerm);
+                if (first) {
+                    first = false;
+                } else {
+                    writerVector.write(", ");
+                }
+                writerVector.write("{\n\t\t\t\"term\": \"" + outputTerm + "\",\n\t\t\t\"weight\": 1.0\n\t\t}");
+            }
+
+            writerVector.write("]\n\t],\n\t\"language\": {\n\t\t\"lang\": \"en\"\n\t},\n\t\"entities\": [],\n\t\"onlyNER\": false,\n\t\"" + 
+                "\"nbest\": false,\n\t\"customisation\": \"generic\"\n}");
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (writerVector != null)
+                    writerVector.close();
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 

@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC5054108" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T19:56+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC5054108" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:02+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>A glycosylphosphatidylinositol (GPI) anchor is a common but complex C-terminal 
 post-translational modif ication of extracellular proteins in eukaryotes. Here we 
@@ -128,8 +128,8 @@ gion outside the parameters), lowering automatically
 the sensitivity of the predictions based on methods 
 using such rules in a strict way. 
 Currently, there exist three different predictors 
-publicly available: <rs id="software-9" type="software">big-π</rs> (15 ) from the <rs corresp="#software-9" type="creator">University of Vienna</rs> (available in two versions, one for meta-
-zoa and one for protozoa), <rs id="software-28" type="software">DGPI</rs> from the <rs corresp="#software-28" type="creator">University of Geneva</rs> (retrieved from <rs corresp="#software-28" type="url">http://129.194.185.165/dgpi/</rs>/), and the large-scale annotator <rs type="software">GPI-SOM</rs> (16 ) 
+publicly available: <rs id="software-11" type="software">big-π</rs> (15 ) from the <rs corresp="#software-11" type="creator">University of Vienna</rs> (available in two versions, one for meta-
+zoa and one for protozoa), <rs id="software-12" type="software">DGPI</rs> from the <rs corresp="#software-12" type="creator">University of Geneva</rs> (retrieved from <rs corresp="#software-12" type="url">http://129.194.185.165/dgpi/</rs>/), and the large-scale annotator <rs type="software">GPI-SOM</rs> (16 ) 
 from the University of Bern. The first two also pre-
 dict potential cleavage sites while the third does not. 
 These tools target the C-terminal and N-terminal sig-
@@ -389,9 +389,8 @@ Geno. Prot. Bioinfo. Vol. 5 No. 2 2007 </p>
 
 <p>Poisson et al. </p>
 
-<p>π, FragAnchor is more sensitive to the GPI-anchoring </p>
-
-<p>pattern even if we consider only the first three classes 
+<p>π, FragAnchor is more sensitive to the GPI-anchoring 
+pattern even if we consider only the first three classes 
 (highly probable, probable, and weakly probable). 
 For the first set of 121 GPI-anchored sequences, Fra-
 gAnchor correctly predicted 88.43% of them (82.64% 
@@ -529,7 +528,7 @@ environment; (2) process their input with a transfer
 function; (3) output a value to other neurons or back 
 to the external environment. 
 The Stuttgart Neural Network Simulator 
-(<rs id="software-29" type="software">javaNNS</rs> <rs corresp="#software-29" type="version-number">1.1</rs>) developed at the University of 
+(<rs id="software-64" type="software">javaNNS</rs> <rs corresp="#software-64" type="version-number">1.1</rs>) developed at the University of 
 Stuttgart (http://www-ra.informatik.uni-tuebingen. 
 de/downloads/JavaNNS/) was used to design and 
 train our NN predictor. The learning set for this 
@@ -659,9 +658,8 @@ applied a simple min-max normalization: </p>
  *  (max − min ) + min </p>
 
 <p>where v represents the normalized value of data v, 
-min and max represent the minimal and maximal </p>
-
-<p>value of the target interval, while min and max are 
+min and max represent the minimal and maximal 
+value of the target interval, while min and max are 
 the minimal and maximal value of our actual data in-
 tervals: [−4.5, 4.5] for hydropathy, and [75.07, 204.23] 
 for molecular weight. 

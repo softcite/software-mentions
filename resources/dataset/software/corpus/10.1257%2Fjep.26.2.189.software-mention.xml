@@ -1,0 +1,1229 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1257%2Fjep.26.2.189" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:04+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p><rs type="software">Monster.com</rs><rs type="software">Amazon.com</rs><rs type="software">eBay</rs><rs type="software">Facebook</rs><rs type="software">Twitter</rs></p>
+
+<p>The second main section of the paper then considers online experiments. This 
+The second main section of the paper then considers online experiments. This 
+category includes experiments that the economic researcher observes but does not 
+category includes experiments that the economic researcher observes but does not 
+control-for example, when <rs type="software">Amazon</rs> or eBay alters site design or bidding rules. It 
+control-for example, when Amazon or eBay alters site design or bidding rules. It 
+also includes experiments in which a researcher participates in design, including 
+also includes experiments in which a researcher participates in design, including 
+researcher-designed experiments; experiments conducted in partnership with 
+researcher-designed experiments; experiments conducted in partnership with 
+a company or website; and online versions of laboratory experiments. Finally, I 
+a company or website; and online versions of laboratory experiments. Finally, I 
+discuss certain limits to this type of data collection, including both "terms of use" 
+discuss certain limits to this type of data collection, including both "terms of use" 
+restrictions on websites and concerns about privacy and confi dentiality. 
+restrictions on websites and concerns about privacy and confi dentiality. 
+A wealth of data exists online mainly because the general public wants access 
+A wealth of data exists online mainly because the general public wants access 
+to it. With so much data readily accessible, researchers often need not obtain any 
+to it. With so much data readily accessible, researchers often need not obtain any 
+special permission to obtain the data they seek. Furthermore, easy data availability 
+special permission to obtain the data they seek. Furthermore, easy data availability 
+helps avoid selection bias: data providers tend to decline researcher requests for 
+helps avoid selection bias: data providers tend to decline researcher requests for 
+data that (they believe) refl ect unfavorably on them, but comprehensive online 
+data that (they believe) refl ect unfavorably on them, but comprehensive online 
+postings sometimes reveal surprisingly detailed information. The panorama of avail-
+postings sometimes reveal surprisingly detailed information. The panorama of avail-
+able online data may especially benefi t researchers early in their careers. Online 
+able online data may especially benefi t researchers early in their careers. Online 
+data is often available without delay and thus allows the preparation of original 
+data is often available without delay and thus allows the preparation of original 
+empirical research under tight time constraints-particularly helpful for students 
+empirical research under tight time constraints-particularly helpful for students 
+writing papers within the constraint of an academic term. Unrestricted access also 
+writing papers within the constraint of an academic term. Unrestricted access also 
+assists anyone whose credentials might fail to satisfy the gatekeepers who evaluate 
+assists anyone whose credentials might fail to satisfy the gatekeepers who evaluate 
+requests for internal data from companies and organizations. Meanwhile, the costs 
+requests for internal data from companies and organizations. Meanwhile, the costs 
+and diffi culty of collecting such data are modest. Most undergraduate computer 
+and diffi culty of collecting such data are modest. Most undergraduate computer 
+science students can design a basic system to collect data from a website, using tools 
+science students can design a basic system to collect data from a website, using tools 
+as basic as macros or scripts, so lack of advanced programming skills need not stand 
+as basic as macros or scripts, so lack of advanced programming skills need not stand 
+in the way. 
+in the way. 
+Online data can speak to almost every fi eld of economics, including subjects 
+Online data can speak to almost every fi eld of economics, including subjects 
+well beyond software, networks, and information technology. The next section iden-
+well beyond software, networks, and information technology. The next section iden-
+tifi es representative examples, focusing on novel data sources while fl agging useful 
+tifi es representative examples, focusing on novel data sources while fl agging useful 
+tools and techniques as well as recurring challenges. 
+tools and techniques as well as recurring challenges. </p>
+
+<p>Scraping the Internet to Collect Data </p>
+
+<p>Consumers and competitors push websites to post remarkable amounts of 
+Consumers and competitors push websites to post remarkable amounts of 
+information online. For example, most retail booksellers would hesitate to share 
+information online. For example, most retail booksellers would hesitate to share 
+information about which items they sold. Yet eBay posts the full bid history 
+information about which items they sold. Yet eBay posts the full bid history 
+for every item offered for sale, and Amazon updates its rankings of top-selling 
+for every item offered for sale, and Amazon updates its rankings of top-selling 
+items every hour. Surveying job seekers can be time consuming, but sites like 
+items every hour. Surveying job seekers can be time consuming, but sites like 
+Monster.com organize available jobs, making it easier and quicker to track job 
+Monster.com organize available jobs, making it easier and quicker to track job 
+search among narrower groups. Researchers in many fi elds of economics have 
+search among narrower groups. Researchers in many fi elds of economics have 
+discovered the benefi ts of online data collection. Table 1 presents papers, each 
+discovered the benefi ts of online data collection. Table 1 presents papers, each 
+using online data, drawn from every top-level category in the 
+using online data, drawn from every top-level category in the Journal of Economic 
+Literature classifi cation system. Below, I turn to specifi c methods of online data 
+classifi cation system. Below, I turn to specifi c methods of online data 
+collection, with details on their respective applications as well as representative 
+collection, with details on their respective applications as well as representative 
+research using each method. 
+research using each method. </p>
+
+<p>Benjamin Edelman 191 </p>
+
+<p>Table 1 
+Diverse Papers Grounded in Online Data </p>
+
+<p>History of Economic Thought 
+Azar, Ofer H. 2007. "The Slowdown in First-Response Times of Economics Journals: Can it Be 
+Benefi cial?" Economic Inquiry 45(1): 179-87. </p>
+
+<p>Examines trends in the timing of journals' responses to submitted manuscript, collecting response 
+time data from journals websites. 
+Microeconomics 
+Bajari, Patrick, and Ali Hortacsu. 2003. "The Winner's Curse, Reserve Prices, and Endogenous Entry: 
+Empirical Insights from eBay Auctions." RAND Journal of Economics 34(2): 329-55. </p>
+
+<p>Bid data from coin sales on eBay reveal bidder behavior in auctions, including the magnitude of the 
+winner's curse. 
+Macroeconomics and Monetary Economics 
+Cavallo, Alberto. 2011. "Scraped Data and Sticky Prices." January 27. http://www.mit.edu/~afc 
+/papers/Cavallo-Scraped.pdf. </p>
+
+<p>Daily price data from online supermarkets reveal price adjustment and price stickiness. 
+International Economics 
+Philipp Maier. 2005. "A 'Global Village' without Borders? International Price Differentials at eBay." 
+DNB Working Paper No. 044, De Nederlandsche Bank. </p>
+
+<p>Purchases at eBay reveal differences in real prices between countries, including differences between 
+countries without currency friction. 
+Financial Economics 
+Antweiler, Werner, and Murray Z. Frank. 2004. "Is All That Talk Just Noise? The Information Content of 
+Internet Stock Message Boards." Journal of Finance 59(3): 1259-94. </p>
+
+<p>Finds that online discussions help predict market volatility; effects on stock returns are statistically 
+signifi cant but economically small. 
+Public Economics 
+Ellison, Glen, and Sara Fisher Ellison. 2009. "Tax Sensitivity and Home State Preferences in Internet 
+Purchasing." American Economic Journal: Economic Policy 1(2): 53-71. </p>
+
+<p>At a comparison shopping service, click patterns reveal users' efforts to avoid sales taxes. 
+Health, Education, and Welfare 
+Ginsberg, Jeremy, Matthew H. Mohebbi, Rajan S. Patel, Lynnette Brammer, Mark S. Smolinski, and 
+Larry Brilliant. 2009. "Detecting Infl uenza Epidemics Using Search Engine Query Data." Nature, 
+February 19, Volume 457(7232): 1012-14. </p>
+
+<p>Trends in users' web searches identify infl uenza epidemics. 
+Labor and Demographic Economics 
+Edelman, Benjamin. Forthcoming. "Earnings and Ratings at Google Answers." Economic Inquiry. </p>
+
+<p>Measures labor market outcomes in an online research service, including higher earnings for 
+experience, fl exibility, and disfavored work schedules. 
+Law and Economics 
+Bhattacharjee, Sudip, Ram D. Gopal, Kaveepan Lertwachara, and James R. Marsden. 2006. "Impact of 
+Legal Threats on Online Music Sharing Activity: An Analysis of Music Industry Legal Actions." Journal 
+of Law and Economics 49(1): 91-114. </p>
+
+<p>Observes the prevalence of users sharing music fi les via peer-to-peer networks, and analyzes users' 
+response to an increased likelihood of litigation. 
+Industrial Organization 
+Chevalier Judith, and Austan Goolsbee. 2003. "Measuring Prices and Price Competition Online: 
+Amazon.com vs. BarnesandNoble.com." Quantitative Marketing and Economics 1(2): 203-222. </p>
+
+<p>Uses publicly available price and rank data to estimate demand elasticities at two leading sellers of 
+online books, fi nding greater price sensitivity at Barnes &amp; Noble than at Amazon. </p>
+
+
+
+<p>The Basics of Online Data Collection 
+For a researcher seeking to collect data from the Internet, the simplest 
+For a researcher seeking to collect data from the Internet, the simplest 
+approach is typically a one-time collection of structured information from a single 
+approach is typically a one-time collection of structured information from a single 
+site. For example, Roth and Ockenfels (2002) retrieve data from about 480 eBay and 
+site. For example, Roth and Ockenfels (2002) retrieve data from about 480 eBay and 
+Amazon auctions, fi nding that Amazon's automatic extension of auction closing 
+Amazon auctions, fi nding that Amazon's automatic extension of auction closing 
+time obviated the incentive for late bidding (which was observed much more often 
+time obviated the incentive for late bidding (which was observed much more often 
+at eBay). Carlton and Chevalier (2001) retrieve data about prices of fragrances, 
+at eBay). Carlton and Chevalier (2001) retrieve data about prices of fragrances, 
+DVD players, and refrigerators from an array of retail sites to explore the relation-
+DVD players, and refrigerators from an array of retail sites to explore the relation-
+ship between retail promotion, online availability, and price dispersion. They fi nd 
+ship between retail promotion, online availability, and price dispersion. They fi nd </p>
+
+<p>Business Administration and Business Economics; Marketing; Accounting 
+Brynjolfsson, Erik, Yu (Jeffrey) Hu, and Duncan Simester. 2011. "Goodbye Pareto Principle, Hello 
+Long Tail: The Effect of Search Costs on the Concentration of Product Sales." Management Science 
+57(8): 1373-86. </p>
+
+<p>Data from an online clothing store show that the Internet reduces product search times and 
+enables successful niche products. 
+Economic History 
+Michel, Jean-Baptiste, Yuan Kui Shen, Aviva Presser Aiden, Adrian Veres, Matthew K. Gray, The Google 
+Books Team, Joseph P. Pickett, Dale Hoiberg, Dan Clancy, Peter Norvig, Jon Orwant, Steven Pinker, 
+Martin A. Nowak, and Erez Lieberman Aiden. 2011. "Quantitative Analysis of Culture Using Millions of 
+Digitized Books." Science, January 14, 331(6014): 176-82. </p>
+
+<p>Analyzing approximately 4 percent of all books ever printed, as scanned by Google Books, the 
+authors profi le changes in word choice and grammar, the duration of celebrity, and the problems of 
+censorship and suppression. 
+Economic Development, Technological Change, and Growth 
+Seamans, Robert, and Feng Zhu. 2010. "Technology Shocks in Multi-Sided Markets: The Impact of 
+Craigslist on Local Newspapers." NET Institute Working Paper 10-11. </p>
+
+<p>Explores the response of local newspapers to entry by Craigslist, including increase in subscription 
+price, decreasing advertising price, and decreasing classifi ed price. 
+Economic Systems 
+Hsieh, Chang-Tai, Edward Miguel, Daniel Ortega, and Francisco Rodríguez. 2011. "The Price of 
+Political Opposition: Evidence from Venezuela's Maisanta." American Economic Journal: Applied 
+Economics 3(2): 196-214. </p>
+
+<p>Drawing on a "punishment list" published by Hugo Chavez, containing the names of people who 
+signed a petition against him, this paper estimates the "price of political opposition"-the lost 
+earnings of disfavored persons. 
+Agricultural and Natural Resource Economics 
+Camacho, Adriana, and Emily Conover. 2011. "The Impact of Receiving Price and Climate Information 
+in the Agricultural Sector." IDB Working Paper IDB-WP-220. </p>
+
+<p>Finds that farmers who received SMS (text message) information about price and weather had a 
+narrower dispersion in expected price of their crops and a signifi cant reduction in crop loss. 
+Urban, Rural, and Regional Economics 
+Kroft, Kory, and Devin G. Pope. 2008. "Does Online Search Crowd Out Traditional Search and 
+Improve Matching Effi ciency? Evidence from Craigslist." http://faculty.chicagobooth.edu/devin.pope 
+/research/pdf/JPE_Final_with_fi gures.pdf. </p>
+
+<p>Measures the number of Craigslist posts in metropolitan areas to observe Craigslist's effect on 
+classifi ed ads, apartment and housing rental vacancy, and unemployment. </p>
+
+<p>Table 1-continued </p>
+
+<p>Using Internet Data for Economic Research 193 </p>
+
+<p>that manufacturer websites tend to charge higher prices than retail websites, and 
+that manufacturer websites tend to charge higher prices than retail websites, and 
+that manufacturers who limit distribution of their product in the physical world also 
+that manufacturers who limit distribution of their product in the physical world also 
+tend to avoid having their product appear on websites that offer especially deep 
+tend to avoid having their product appear on websites that offer especially deep 
+discounts. Freedman and Jin (2011) retrieve data about lenders and borrowers at 
+discounts. Freedman and Jin (2011) retrieve data about lenders and borrowers at 
+the microfi nance person-to-person lending site Prosper.com, assessing the magni-
+the microfi nance person-to-person lending site Prosper.com, assessing the magni-
+tude of asymmetric information, efforts to mitigate information asymmetry, and 
+tude of asymmetric information, efforts to mitigate information asymmetry, and 
+pricing of risk. They fi nd that early lenders apparently did not understand the risks 
+pricing of risk. They fi nd that early lenders apparently did not understand the risks 
+involved, and as the lenders learned to evaluate these risks, high-risk borrowers 
+involved, and as the lenders learned to evaluate these risks, high-risk borrowers 
+found themselves unable to receive loans through this mechanism. 
+found themselves unable to receive loans through this mechanism. 
+Online data collection typically calls for a three-step procedure: A fi rst compo-
+Online data collection typically calls for a three-step procedure: A fi rst compo-
+nent retrieves web pages from a web server, often checking an input fi le for a list of 
+nent retrieves web pages from a web server, often checking an input fi le for a list of 
+pages to retrieve, terms to search for, or similar instructions. Next, a parser receives 
+pages to retrieve, terms to search for, or similar instructions. Next, a parser receives 
+web server replies and extracts the data elements of interest to the researcher, storing 
+web server replies and extracts the data elements of interest to the researcher, storing 
+this data in an output fi le. Finally, a researcher can use standard tools to import 
+this data in an output fi le. Finally, a researcher can use standard tools to import 
+and analyze the output fi le. Of course numerous refi nements on this approach are 
+and analyze the output fi le. Of course numerous refi nements on this approach are 
+possible, and subsequent sections present some of the variations. 
+possible, and subsequent sections present some of the variations. 
+Researchers can implement data collection systems in a number of program-
+Researchers can implement data collection systems in a number of program-
+ming languages. When demonstrating data collection in a classroom or assignment, 
+ming languages. When demonstrating data collection in a classroom or assignment, 
+I often offer <rs type="software">Visual Basic for Applications (VBA</rs>) code that stores data directly in 
+I often offer Visual Basic for Applications (VBA) code that stores data directly in 
+<rs type="software">Excel</rs>-letting Excel handle storage of both inputs and outputs. Figure 1 presents 
+Excel-letting Excel handle storage of both inputs and outputs. Figure 1 presents 
+sample code from this approach. For larger projects, researchers often choose Perl, 
+sample code from this approach. For larger projects, researchers often choose Perl, 
+PHP, or Python. 
+PHP, or Python. </p>
+
+<p>Long-Term Data Retrieval 
+It is sometimes helpful to collect data over an extended period, which yields 
+It is sometimes helpful to collect data over an extended period, which yields 
+a larger sample as well as insight into changes over time. When data collection is 
+a larger sample as well as insight into changes over time. When data collection is 
+repeated periodically-a step that can be programmed to occur at preset time inter-
+repeated periodically-a step that can be programmed to occur at preset time inter-
+vals-a one-time script can be converted into a system for continued data retrieval. 
+vals-a one-time script can be converted into a system for continued data retrieval. 
+For example, Ellison and Ellison (2009) collect data on consumers making 
+For example, Ellison and Ellison (2009) collect data on consumers making 
+online purchases of computer memory modules. They examine hourly data over a 
+online purchases of computer memory modules. They examine hourly data over a 
+year, using the Pricewatch.com search engine, which displays lists of products being 
+year, using the Pricewatch.com search engine, which displays lists of products being 
+sold by participating online retailers at their own website. To measure users' incen-
+sold by participating online retailers at their own website. To measure users' incen-
+tive to buy from out-of-state online sellers (often thereby avoiding state sales tax), 
+tive to buy from out-of-state online sellers (often thereby avoiding state sales tax), 
+Ellison and Ellison need variation in users' choice sets to draw conclusions about 
+Ellison and Ellison need variation in users' choice sets to draw conclusions about 
+user preferences. Because choices change as online sellers adjust their prices, more-
+user preferences. Because choices change as online sellers adjust their prices, more-
+frequent data improves the power of the analysis. They fi nd that states with higher 
+frequent data improves the power of the analysis. They fi nd that states with higher 
+sales taxes for off-line purchases tend to have more online purchases-with buyers 
+sales taxes for off-line purchases tend to have more online purchases-with buyers 
+thereby often avoiding the state sales tax. 
+thereby often avoiding the state sales tax. 
+Long-term data collection can be particularly important for analysis of price 
+Long-term data collection can be particularly important for analysis of price 
+levels and infl ation. Cavallo (2011) collected daily prices of 80,000 supermarket 
+levels and infl ation. Cavallo (2011) collected daily prices of 80,000 supermarket 
+products taken from the public web pages of online retailers in four countries over 
+products taken from the public web pages of online retailers in four countries over 
+a period of three years. This price data is then used to explore patterns in price 
+a period of three years. This price data is then used to explore patterns in price 
+stickiness. Cavallo fi nds a bimodal pattern of price changes-that is, price changes 
+stickiness. Cavallo fi nds a bimodal pattern of price changes-that is, price changes 
+are signifi cantly positive or negative but few changes are close to zero, confi rming 
+are signifi cantly positive or negative but few changes are close to zero, confi rming </p>
+
+
+
+<p>Figure 1 
+Sample Worksheet and Script for Basic Online Data Collection </p>
+
+<p>A 
+B 
+1 
+ISBN 
+Rank 
+2 
+0300151241 
+3 
+0691143285 
+4 
+0195340671 </p>
+
+<p>Sub GetAmazonDataDemo() 
+'retrieves sales ranks from Amazon 
+'INPUT: 
+sheet1 column A --gives a list of ISBN-10 numbers 
+'OUTPUT: 
+sheet 1 column B --reports Amazon sales ranks </p>
+
+<p>Dim curcell As Range, htmlresponse As String 'required variables </p>
+
+<p>'iterate through rows of the fi rst column 
+For Each curcell In ActiveWorkbook.Sheets("Sheet1").Range("A:A") 
+'leave the loop when encounter a blank value in column A 
+If curcell.Value = "" Then Exit For </p>
+
+<p>'row 1 is the header row --don't do anything there 
+If curcell.Row &gt; 1 Then 
+'get Amazon product detail page with this ISBN 
+htmlresponse = GetURL("http://www.amazon.com/o/ASIN/" &amp; Trim(curcell.Value)) </p>
+
+<p>parse1 = GetBetween(htmlresponse, "Sales Rank:", " in") 
+rankval = GetAfter(parse1, "#") </p>
+
+<p>'store rank in column B 
+curcell.Offset(0, 1).Value = rankval 
+End If 
+Next curcell 
+'proceed to next row 
+End Sub </p>
+
+<p>Function GetURL(url) 
+'INPUT: a URL to be retrieved 
+'OUTPUT: the HTTP body at the specifi ed URL 
+'REQUIREMENTS: 
+a HTTP object: Winhttp, Xmlhttp, Winhttprequest, or Serverxmlhttp 
+'ERROR HANDLING: 
+none --should be added for production use! </p>
+
+<p>On Error Resume Next 
+Set objHTTP = CreateObject("WinHttp.WinHttpRequest.5.1") 
+If objHTTP Is Nothing Then Set o = CreateObject("Microsoft.xmlhttp") 
+If objHTTP Is Nothing Then Set o = CreateObject("winhttp.winhttprequest") 
+If objHTTP Is Nothing Then Set o = CreateObject("MSXML2.ServerXMLHTTP") 
+objHTTP.Open "GET", url, False 
+objHTTP.send 
+GetURL = objHTTP.responsetext 
+End Function </p>
+
+<p>Function GetBetween(s, s1, s2) 
+'INPUT: s -string to search; 
+s1 -string that marks start of retrieval 
+s2 -string that marks end of retrieval 
+'OUTPUT: the portion of s that comes strictly between s1 and s2 
+'ERROR HANDLING: if s1 or s2 is not found, returns a blank string </p>
+
+<p>p1 = InStr(s, s1) 
+If p1 = 0 Then Exit Function 
+'s1 was not found 
+p2 = InStr(p1 + Len(s1), s, s2) 
+If p2 = 0 Then Exit Function 
+'s2 was not found 
+GetBetween = Mid(s, p1 + Len(s1), p2 -p1 -Len(s1)) 
+End Function </p>
+
+<p>Function GetAfter(ByVal s As String, ByVal s1 As String) 
+'INPUT: s -string to search; s1 -string that marks start of retrieval 
+'OUTPUT: the portion of s that comes strictly after s1; if s1 is not found, all of s 
+p1 = InStr(s, s1) 
+If p1 = 0 Then GetAfter = s: Exit Function 
+GetAfter = Mid(s, p1 + Len(s1), Len(s) -p1 -Len(s1) + 1) 
+End Function </p>
+
+<p>Benjamin Edelman 195 </p>
+
+<p>the predictions of menu cost models. He also fi nds synchronization of prices for 
+the predictions of menu cost models. He also fi nds synchronization of prices for 
+goods that are close competitors within product categories. 
+goods that are close competitors within product categories. </p>
+
+<p>Multistep Data Retrieval 
+More complex data retrieval systems can monitor multiple sources and adjust 
+More complex data retrieval systems can monitor multiple sources and adjust 
+their confi gurations based on what occurs. For example, in Edelman (2002), I use 
+their confi gurations based on what occurs. For example, in Edelman (2002), I use 
+a two-step process to measure the effects of recommendations by Amazon's edito-
+a two-step process to measure the effects of recommendations by Amazon's edito-
+rial staff. A fi rst system identifi es which books Amazon's editorial staff recommend, 
+rial staff. A fi rst system identifi es which books Amazon's editorial staff recommend, 
+running repeatedly to uncover new books soon after the recommendations begin. 
+running repeatedly to uncover new books soon after the recommendations begin. 
+Then a second system tracks the sales rank of each such book-allowing measure-
+Then a second system tracks the sales rank of each such book-allowing measure-
+ment of the sales increase attributable to Amazon's recommendation. This approach 
+ment of the sales increase attributable to Amazon's recommendation. This approach 
+allows examination of interaction between multiple economic actors, and if one set 
+allows examination of interaction between multiple economic actors, and if one set 
+of events is at least locally exogenous, this approach can identify causal effects. 
+of events is at least locally exogenous, this approach can identify causal effects. 
+To measure users' sharing on peer-to-peer networks, Bhattacharjee, Gopal, 
+To measure users' sharing on peer-to-peer networks, Bhattacharjee, Gopal, 
+Lertwachara, and Marsden (2006) also rely on a multistep collection process. A 
+Lertwachara, and Marsden (2006) also rely on a multistep collection process. A 
+fi rst system searches for randomly selected genres to retrieve a list of users sharing 
+fi rst system searches for randomly selected genres to retrieve a list of users sharing 
+music. For selected users, a second system then activates a "Find More From Same 
+music. For selected users, a second system then activates a "Find More From Same 
+User" function to retrieve information about the total number of songs that user 
+User" function to retrieve information about the total number of songs that user 
+is sharing. The authors collect weekly data for a year, yielding a measurement 
+is sharing. The authors collect weekly data for a year, yielding a measurement 
+of users' response to threatened litigation by the recording industry. Notably, 
+of users' response to threatened litigation by the recording industry. Notably, 
+Bhattacharjee et al. collect data not from sites presented to users in browsers such as 
+Bhattacharjee et al. collect data not from sites presented to users in browsers such as 
+<rs type="software">Internet Explorer</rs> and <rs type="software">Firefox</rs>, but rather from <rs type="software">Kazaa</rs> and <rs type="software">WinMx</rs>, two fi le-sharing 
+Internet Explorer and Firefox, but rather from Kazaa and WinMx, two fi le-sharing 
+programs users can install on their computers. Data collection in this context calls 
+programs users can install on their computers. Data collection in this context calls 
+for scripting to operate programs' menus and buttons and to capture results from 
+for scripting to operate programs' menus and buttons and to capture results from 
+program windows. 
+program windows. </p>
+
+<p>Collecting Data from Secondary Sources 
+For some purposes, researchers may fi nd it preferable to collect data from 
+For some purposes, researchers may fi nd it preferable to collect data from 
+aggregators that assemble data from multiple underlying sources. For example, 
+aggregators that assemble data from multiple underlying sources. For example, 
+Baye, Morgan, and Scholten (2004) examine retailers' prices at a comparison shop-
+Baye, Morgan, and Scholten (2004) examine retailers' prices at a comparison shop-
+ping service (a website that lists prices of selected items at multiple retailers) to 
+ping service (a website that lists prices of selected items at multiple retailers) to 
+measure the breadth of price dispersion. Baye, Morgan, and Scholten fi nd substan-
+measure the breadth of price dispersion. Baye, Morgan, and Scholten fi nd substan-
+tial price dispersion and little evidence of "the law of one price." 
+tial price dispersion and little evidence of "the law of one price." 
+For any researcher needing information about the history of a website-
+For any researcher needing information about the history of a website-
+whether on a one-off basis or for large-sample analysis-the Internet Archive is 
+whether on a one-off basis or for large-sample analysis-the Internet Archive is 
+the natural choice. With copies of 150 billion pages dating back to 1996 (Internet 
+the natural choice. With copies of 150 billion pages dating back to 1996 (Internet 
+Archive 2011), the Internet Archive provides no-charge access to prior versions of 
+Archive 2011), the Internet Archive provides no-charge access to prior versions of 
+most online materials, facilitating all manner of historic analysis. Seamans and Zhu 
+most online materials, facilitating all manner of historic analysis. Seamans and Zhu 
+(2010) use the <rs type="software">Internet Archive</rs> to gather historic data on <rs type="software">Craigslist</rs> postings to 
+(2010) use the Internet Archive to gather historic data on Craigslist postings to 
+explore relationships between the entry of Craigslist into a market and newspaper 
+explore relationships between the entry of Craigslist into a market and newspaper 
+circulation and pricing. 
+circulation and pricing. 
+While <rs type="software">Internet Archive</rs> preserves historic materials, certain secondary sources 
+While Internet Archive preserves historic materials, certain secondary sources 
+analyze and tabulate 
+analyze and tabulate current user behavior. For example, <rs type="software">Google Trends</rs> reports 
+user behavior. For example, Google Trends reports 
+the frequency of particular searches at Google. Using Google Trends data, Choi 
+the frequency of particular searches at Google. Using Google Trends data, Choi </p>
+
+
+
+<p>and Varian (2009) predict future fi lings for unemployment benefi ts, fi nding an 
+and Varian (2009) predict future fi lings for unemployment benefi ts, fi nding an 
+improvement over offi cial government forecasts. Wu and Brynjolfsson (2009) use 
+improvement over offi cial government forecasts. Wu and Brynjolfsson (2009) use 
+Google searches to predict housing prices and sales, while Ginsberg, Mohebbi, 
+Google searches to predict housing prices and sales, while Ginsberg, Mohebbi, 
+Patel, Brammer, Smolinski, and Brilliant (2009) use data from Google searches to 
+Patel, Brammer, Smolinski, and Brilliant (2009) use data from Google searches to 
+detect infl uenza epidemics. 
+detect infl uenza epidemics. </p>
+
+<p>Web 2.0 Data Sources 
+The term "Web 2.0" denotes the Internet's change from simple screens of 
+The term "Web 2.0" denotes the Internet's change from simple screens of 
+unchanging information to interactive communications in which users contribute 
+unchanging information to interactive communications in which users contribute 
+ever more content-often making sharply more information available to the 
+ever more content-often making sharply more information available to the 
+general public and to researchers. Facebook and Twitter are prominent examples 
+general public and to researchers. Facebook and Twitter are prominent examples 
+in this vein. 
+in this vein. 
+Researchers seeking to study activity at Facebook benefi t from default privacy 
+Researchers seeking to study activity at Facebook benefi t from default privacy 
+settings that let the general public view each user's name, friends, networks, 
+settings that let the general public view each user's name, friends, networks, 
+wall posts, photos, likes, and more. The resulting data can facilitate research on 
+wall posts, photos, likes, and more. The resulting data can facilitate research on 
+myriad topics. For example, Baker, Mayer, and Puller (2011) use Facebook to 
+myriad topics. For example, Baker, Mayer, and Puller (2011) use <rs type="software">Facebook</rs> to 
+assess the diversity effects of randomized dormitory assignment. They fi nd that 
+assess the diversity effects of randomized dormitory assignment. They fi nd that 
+students randomly exposed to persons of a different race have more friends of 
+students randomly exposed to persons of a different race have more friends of 
+that race within the dormitory, but no greater diversity in social networks outside 
+that race within the dormitory, but no greater diversity in social networks outside 
+that environment. 
+that environment. 
+Iyengar, Han, and Gupta (2009) look at data from Cyworld, a social 
+Iyengar, Han, and Gupta (2009) look at data from <rs type="software">Cyworld</rs>, a social 
+networking site in Korea, in which users often decorate their mini-homepages 
+networking site in Korea, in which users often decorate their mini-homepages 
+with items like wallpaper or music purchased from Cyworld. Using 10 weeks of 
+with items like wallpaper or music purchased from Cyworld. Using 10 weeks of 
+purchase and nonpurchase data from 208 users, they identify a low-status group 
+purchase and nonpurchase data from 208 users, they identify a low-status group 
+that is not affected by the purchases of others; a medium-status group that has a 
+that is not affected by the purchases of others; a medium-status group that has a 
+positive correlation with the purchases of others; and a high-status group that has 
+positive correlation with the purchases of others; and a high-status group that has 
+a negative correlation with the purchases of others. Acquisti and Gross (2006) 
+a negative correlation with the purchases of others. Acquisti and Gross (2006) 
+examine demographic and behavioral differences in users' views of privacy. They 
+examine demographic and behavioral differences in users' views of privacy. They 
+fi nd that privacy concerns expressed in survey results did not seem to limit which 
+fi nd that privacy concerns expressed in survey results did not seem to limit which 
+people joined Facebook nor how much information they revealed-in part, 
+people joined Facebook nor how much information they revealed-in part, 
+because those who joined did not fully understand what data was public. Default 
+because those who joined did not fully understand what data was public. Default 
+privacy settings at the short-message service <rs type="software">Twitter</rs> also facilitate research: with 
+privacy settings at the short-message service Twitter also facilitate research: with 
+few exceptions, Twitter messages are public, and Twitter also publishes the list of 
+few exceptions, Twitter messages are public, and Twitter also publishes the list of 
+all authors each Twitter user is "following." While few researchers have embraced 
+all authors each Twitter user is "following." While few researchers have embraced 
+Twitter data, Vincent and Armstrong (2010) assess high-frequency trading strate-
+Twitter data, Vincent and Armstrong (2010) assess high-frequency trading strate-
+gies grounded in messages on Twitter, fi nding a profi t opportunity in fast-breaking 
+gies grounded in messages on Twitter, fi nding a profi t opportunity in fast-breaking 
+Twitter discussions. 
+Twitter discussions. 
+The Internet's newest services also facilitate research on users' views of 
+The Internet's newest services also facilitate research on users' views of 
+companies and organizations. Every company and organization page on Facebook 
+companies and organizations. Every company and organization page on Facebook 
+includes a "like" button, and Facebook, Google, and others now let sites present 
+includes a "like" button, and Facebook, Google, and others now let sites present 
+"like," " 
+"like," "+ +1," and similar buttons to garner user endorsements. The number and/or 
+1," and similar buttons to garner user endorsements. The number and/or 
+identity of users clicking these buttons is often available to researchers and the 
+identity of users clicking these buttons is often available to researchers and the 
+interested public-facilitating research about trends and trendsetters, reaction to 
+interested public-facilitating research about trends and trendsetters, reaction to 
+news, and more. 
+news, and more. </p>
+
+<p>Using Internet Data for Economic Research 197 </p>
+
+<p>Monitoring Network Activity 
+The computer science literature features papers that analyze users' network 
+The computer science literature features papers that analyze users' network 
+traffi c to draw conclusions about online activity. For example, Saroiu, Gribble, 
+traffi c to draw conclusions about online activity. For example, Saroiu, Gribble, 
+and Levy (2004) monitor the online activity of students at a university to identify 
+and Levy (2004) monitor the online activity of students at a university to identify 
+computers infected with "spyware"-software like <rs type="software">Gator</rs>, <rs type="software">Cydoor</rs>, <rs type="software">SaveNow</rs>, and 
+computers infected with "spyware"-software like Gator, Cydoor, SaveNow, and 
+<rs type="software">eZula</rs> that gathers information about computer use and relays it to a third party, 
+eZula that gathers information about computer use and relays it to a third party, 
+often without the consent (or informed consent) of the computer user. The authors 
+often without the consent (or informed consent) of the computer user. The authors 
+monitor infections to identify types of users and behaviors particularly likely to 
+monitor infections to identify types of users and behaviors particularly likely to 
+suffer from spyware. Karagiannis, Broido, Brownless, claffy, and Faloutsos (2004) 
+suffer from spyware. Karagiannis, Broido, Brownless, claffy, and Faloutsos (2004) 
+observe network activity at two Internet service providers to measure the prevalence 
+observe network activity at two Internet service providers to measure the prevalence 
+of peer-to-peer fi le-sharing software, fi nding that contrary to a common belief at 
+of peer-to-peer fi le-sharing software, fi nding that contrary to a common belief at 
+that time, peer-to-peer fi le sharing was not declining in response to concerns over 
+that time, peer-to-peer fi le sharing was not declining in response to concerns over 
+its legality, but was in fact continuing to increase. In principle, economists could use 
+its legality, but was in fact continuing to increase. In principle, economists could use 
+similar methods. As Saroiu, Gribble, and Levy (2004) and Karagiannis et al. (2004) 
+similar methods. As Saroiu, Gribble, and Levy (2004) and Karagiannis et al. (2004) 
+demonstrate, network monitoring systems are notable for the breadth of data they 
+demonstrate, network monitoring systems are notable for the breadth of data they 
+can observe-in principle, every online activity of users on the corresponding 
+can observe-in principle, every online activity of users on the corresponding 
+networks. They are also notable for their ability to collect data no individual site 
+networks. They are also notable for their ability to collect data no individual site 
+can, or cares to, assemble. 
+can, or cares to, assemble. 
+On a larger scale, commercial services analyze network traffi c to identify trends 
+On a larger scale, commercial services analyze network traffi c to identify trends 
+in user behavior and site popularity. Best known is comScore (2011), which offers a 
+in user behavior and site popularity. Best known is comScore (2011), which offers a 
+two-million member panel of users recruited to install tracking software that moni-
+two-million member panel of users recruited to install tracking software that moni-
+tors their browsing, purchasing, and other online activities. Compete offers a similar 
+tors their browsing, purchasing, and other online activities. Compete offers a similar 
+service, also via a panel of participating users, while Hitwise collects data from both 
+service, also via a panel of participating users, while Hitwise collects data from both 
+users and Internet service providers. 
+users and Internet service providers. </p>
+
+<p>What Types of Data are Abundant or Scarce? 
+Online data collection projects tend to reveal certain data far more readily 
+Online data collection projects tend to reveal certain data far more readily 
+than others. For example, researchers seeking prices are easily satisfi ed; myriad sites 
+than others. For example, researchers seeking prices are easily satisfi ed; myriad sites 
+post product price information as they offer items for purchase. But a researcher 
+post product price information as they offer items for purchase. But a researcher 
+needing sales quantities faces greater diffi culty: while a few sites, most notably eBay, 
+needing sales quantities faces greater diffi culty: while a few sites, most notably eBay, 
+post substantial information about each sale, most sites have no business need to 
+post substantial information about each sale, most sites have no business need to 
+distribute sales information systematically and publicly. 
+distribute sales information systematically and publicly. 
+Work-arounds can yield quantity data. Some sites report the quantity of in-stock 
+Work-arounds can yield quantity data. Some sites report the quantity of in-stock 
+inventory available for each listed product. Slow decreases in this quantity are typi-
+inventory available for each listed product. Slow decreases in this quantity are typi-
+cally interpreted as indicating items sold. Large increases are understood to refl ect 
+cally interpreted as indicating items sold. Large increases are understood to refl ect 
+arrival of additional inventory. By checking suffi ciently frequently, a researcher can 
+arrival of additional inventory. By checking suffi ciently frequently, a researcher can 
+infer purchases. 
+infer purchases. 
+Other sites report sales ranks, which offer insight into sales quantities. Best 
+Other sites report sales ranks, which offer insight into sales quantities. Best 
+known in this area is Amazon, where many an author diligently tracks sales rank. 
+known in this area is Amazon, where many an author diligently tracks sales rank. 
+Chevalier and Goolsbee (2003) pioneered procedures for converting Amazon 
+Chevalier and Goolsbee (2003) pioneered procedures for converting Amazon 
+sales ranks to sales quantities using multiple methods including cross-checks with 
+sales ranks to sales quantities using multiple methods including cross-checks with 
+publishers (who report that a given sales rank in a given week matches a given 
+publishers (who report that a given sales rank in a given week matches a given 
+quantity), controlled experiments (purchasing and/or returning a given quantity 
+quantity), controlled experiments (purchasing and/or returning a given quantity 
+of books and monitoring changes in rank), and fi tting a portion of the distribution 
+of books and monitoring changes in rank), and fi tting a portion of the distribution </p>
+
+
+
+<p>using publicly known sales quantities (for example, for bestsellers whose sales are 
+using publicly known sales quantities (for example, for bestsellers whose sales are 
+occasionally revealed to the public). Depending on available data, these approaches 
+occasionally revealed to the public). Depending on available data, these approaches 
+can be u sed to extract quantities from other ranking systems. 
+can be u sed to extract quantities from other ranking systems. 
+In certain contexts, researchers may be able to infer useful information about 
+In certain contexts, researchers may be able to infer useful information about 
+sales from other materials that are posted at sites, such as "top sellers," "recom-
+sales from other materials that are posted at sites, such as "top sellers," "recom-
+mended items," or "people who bought this also bought . . ." suggestions. However, 
+mended items," or "people who bought this also bought . . ." suggestions. However, 
+such methods are not yet well developed. 
+such methods are not yet well developed. </p>
+
+<p>Data Requiring Company or Site Cooperation 
+While the preceding sections identify data that researchers can collect directly 
+While the preceding sections identify data that researchers can collect directly 
+from websites, some research questions require data that sites decline to publish to 
+from websites, some research questions require data that sites decline to publish to 
+the public. In this context, it has proven fruitful to request additional data from the 
+the public. In this context, it has proven fruitful to request additional data from the 
+companies and organizations that run such sites. For example, Hitsch, Hortaçsu, and 
+companies and organizations that run such sites. For example, Hitsch, Hortaçsu, and 
+Ariely (2010) obtained records from an online dating site revealing all aspects of users' 
+Ariely (2010) obtained records from an online dating site revealing all aspects of users' 
+activities, including browsing, viewing photos, and sending and receiving messages. 
+activities, including browsing, viewing photos, and sending and receiving messages. 
+This data is necessary for Hitsch, Hortaçsu, and Ariely's evaluation of the quality of 
+This data is necessary for Hitsch, Hortaçsu, and Ariely's evaluation of the quality of 
+users' matches; they fi nd that at the dating site, "the actual matches are approximately 
+users' matches; they fi nd that at the dating site, "the actual matches are approximately 
+effi cient." Data providers are often concerned about distribution of their internal 
+effi cient." Data providers are often concerned about distribution of their internal 
+records. Below, I discuss methods to address such concerns and protect privacy. 
+records. Below, I discuss methods to address such concerns and protect privacy. </p>
+
+<p>Online Experiments </p>
+
+<p>Scraping the web for existing data can raise concerns about whether observed 
+Scraping the web for existing data can raise concerns about whether observed 
+changes can be treated as exogenous or endogenous. After all, when users and sites 
+changes can be treated as exogenous or endogenous. After all, when users and sites 
+make decisions based on changing external circumstances to advance their respec-
+make decisions based on changing external circumstances to advance their respec-
+tive objectives, it can be diffi cult to draw inferences about what factor caused what 
+tive objectives, it can be diffi cult to draw inferences about what factor caused what 
+outcome. An experimental method can yield better insight into causation. Online 
+outcome. An experimental method can yield better insight into causation. Online 
+experiments can also observe long-run behavior changes, whereas most short-run 
+experiments can also observe long-run behavior changes, whereas most short-run 
+experiments risk overemphasizing short-run substitution effects. 
+experiments risk overemphasizing short-run substitution effects. 
+In the taxonomy of List (2011) in this journal, online experiments can take 
+In the taxonomy of List (2011) in this journal, online experiments can take 
+four forms: "Natural experiments" arise from exogenous changes created by third 
+four forms: "Natural experiments" arise from exogenous changes created by third 
+parties (or nature) that mimic the conditions of an experiment. "Laboratory experi-
+parties (or nature) that mimic the conditions of an experiment. "Laboratory experi-
+ments" place the agents in an artifi cial game-like setting to see how they react. "Field 
+ments" place the agents in an artifi cial game-like setting to see how they react. "Field 
+experiments" present agents with randomized variation in conditions-changes 
+experiments" present agents with randomized variation in conditions-changes 
+agents experience while carrying out their usual online activities in their homes 
+agents experience while carrying out their usual online activities in their homes 
+or at work, though they are aware that an experiment is being conducted. Finally, 
+or at work, though they are aware that an experiment is being conducted. Finally, 
+"natural fi eld experiments" present agents with randomized variation in natural 
+"natural fi eld experiments" present agents with randomized variation in natural 
+settings without informing agents that they are involved in an experiment. 
+settings without informing agents that they are involved in an experiment. </p>
+
+<p>Natural Experiments 
+Sometimes, a site or service changes design parameters arbitrarily or in a time 
+Sometimes, a site or service changes design parameters arbitrarily or in a time 
+or manner unlikely to be correlated with other outcomes. Such circumstances can 
+or manner unlikely to be correlated with other outcomes. Such circumstances can 
+create a natural experiment yielding insight into lines of causation. 
+create a natural experiment yielding insight into lines of causation. </p>
+
+<p>Benjamin Edelman 199 </p>
+
+<p>For example, Roth and Ockenfels (2002) point out that system designers set 
+For example, Roth and Ockenfels (2002) point out that system designers set 
+the ending rules for <rs type="software">eBay</rs> and <rs type="software">Amazon</rs> auctions without consideration of implica-
+the ending rules for eBay and Amazon auctions without consideration of implica-
+tions for bidder behavior. Thus, these sites provide a reasonable context to assess 
+tions for bidder behavior. Thus, these sites provide a reasonable context to assess 
+the effect of such rules. At the time of their study, eBay auctions closed at a fi xed 
+the effect of such rules. At the time of their study, eBay auctions closed at a fi xed 
+time, while Amazon auctions continued until ten minutes had gone by without a 
+time, while Amazon auctions continued until ten minutes had gone by without a 
+bid. Bidders reacted to such rules, submitting a higher fraction of late bids on eBay. 
+bid. Bidders reacted to such rules, submitting a higher fraction of late bids on eBay. 
+Other exogenous variation comes from unexpected changes. For example, 
+Other exogenous variation comes from unexpected changes. For example, 
+Miller (2011) relies on a large increase in the amount of information available about 
+Miller (2011) relies on a large increase in the amount of information available about 
+borrowers on <rs type="software">Prosper.com</rs>, a change which made lenders more selective among 
+borrowers on Prosper.com, a change which made lenders more selective among 
+high-risk borrowers. Chiou and Tucker (2011) note a 2009-2010 dispute between 
+high-risk borrowers. Chiou and Tucker (2011) note a 2009-2010 dispute between 
+Google and Associated Press that led to the temporary removal of AP stories from 
+Google and Associated Press that led to the temporary removal of AP stories from 
+<rs type="software">Google News</rs> (which aggregates news content from many sources). During that 
+Google News (which aggregates news content from many sources). During that 
+period, Google News referred fewer users to 
+period, Google News referred fewer users to all traditional news sites, compared to 
+traditional news sites, compared to 
+other news aggregators that continued to host AP articles. 
+other news aggregators that continued to host AP articles. </p>
+
+<p>Researcher-Designed Experiments 
+Some researchers participate in online markets in order to build what are, in 
+Some researchers participate in online markets in order to build what are, in 
+essence, online fi eld experiments. For example, Hossain and Morgan (2006) list 
+essence, online fi eld experiments. For example, Hossain and Morgan (2006) list 
+items on eBay with varying listing prices and shipping prices, showing that users 
+items on eBay with varying listing prices and shipping prices, showing that users 
+undervalue shipping cost relative to item price. By varying reserve policies in list-
+undervalue shipping cost relative to item price. By varying reserve policies in list-
+ings at <rs type="software">eBay</rs>, Katkar and Reiley (2006) fi nd that secret reserve prices deter bidder 
+ings at eBay, Katkar and Reiley (2006) fi nd that secret reserve prices deter bidder 
+entry and reduce the likelihood of a listing resulting in a sale. Resnick, Zeckhauser, 
+entry and reduce the likelihood of a listing resulting in a sale. Resnick, Zeckhauser, 
+Swanson, and Lockwood (2006) auction matched pairs of items on eBay, some 
+Swanson, and Lockwood (2006) auction matched pairs of items on eBay, some 
+using a seller's well-established identity and others using new identities, thereby 
+using a seller's well-established identity and others using new identities, thereby 
+identifying the willingness of buyers to pay for seller reputation. 
+identifying the willingness of buyers to pay for seller reputation. 
+Many companies have recognized the benefi t of experiments in improving 
+Many companies have recognized the benefi t of experiments in improving 
+their own operations. For example, online marketers test dozens of alternative 
+their own operations. For example, online marketers test dozens of alternative 
+advertisements. Tools like <rs type="software">Optimizely</rs> and Visual Website Optimizer let a designer 
+advertisements. Tools like Optimizely and <rs type="software">Visual Website Optimizer</rs> let a designer 
+evaluate user behavior in multiple variants of a site-testing alternative layout, color, 
+evaluate user behavior in multiple variants of a site-testing alternative layout, color, 
+text, and more. Varian (2010) discusses the benefi ts Google has achieved through 
+text, and more. Varian (2010) discusses the benefi ts Google has achieved through 
+comprehensive experiments to evaluate possible changes to its services. 
+comprehensive experiments to evaluate possible changes to its services. 
+In lieu of a researcher running experiments, Einav, Kuchler, Levin, and 
+In lieu of a researcher running experiments, Einav, Kuchler, Levin, and 
+Sundaresan (2011) fl ag the possibility of a researcher identifying experiments others 
+Sundaresan (2011) fl ag the possibility of a researcher identifying experiments others 
+are already running. If an <rs type="software">eBay</rs> seller is testing variations in item listing (perhaps 
+are already running. If an eBay seller is testing variations in item listing (perhaps 
+which format, description, or pricing achieves the highest price), a researcher can 
+which format, description, or pricing achieves the highest price), a researcher can 
+fi nd these variations, retrieve data about both the experimenter's changes and the 
+fi nd these variations, retrieve data about both the experimenter's changes and the 
+public's response, and thereby draw conclusions about the effect of the changes at 
+public's response, and thereby draw conclusions about the effect of the changes at 
+issue. Einav et al. fi nd that of the 100 million listings on eBay each day, more than half 
+issue. Einav et al. fi nd that of the 100 million listings on eBay each day, more than half 
+will reappear on the site, often with differing parameters for the sale. Assembling 
+will reappear on the site, often with differing parameters for the sale. Assembling 
+a dataset with hundreds of thousands of such matching pairs during a single year, 
+a dataset with hundreds of thousands of such matching pairs during a single year, 
+these authors examine questions about price dispersion, bidding under different 
+these authors examine questions about price dispersion, bidding under different 
+sets of rules, and customers' reaction to shipping fees. Practitioners' experiments 
+sets of rules, and customers' reaction to shipping fees. Practitioners' experiments 
+can offer a vastly larger sample than researcher-implemented experiments-in turn, 
+can offer a vastly larger sample than researcher-implemented experiments-in turn, 
+yielding more precise estimates. Practitioners' experiments also often occur across 
+yielding more precise estimates. Practitioners' experiments also often occur across </p>
+
+
+
+<p>product categories, whereas practical concerns often limit researcher-implemented 
+product categories, whereas practical concerns often limit researcher-implemented 
+experiments to narrow categories, impeding inferences about other areas. 
+experiments to narrow categories, impeding inferences about other areas. </p>
+
+<p>Experiments in Partnership with a Company or Site 
+Some kinds of online fi eld experiments tend to require cooperation from a 
+Some kinds of online fi eld experiments tend to require cooperation from a 
+company or site operator. For example, Chen, Harper, Konstan, and Li (2010) look 
+company or site operator. For example, Chen, Harper, Konstan, and Li (2010) look 
+at <rs type="software">MovieLens</rs>, an online site that offers recommendations for movies. Submitting 
+at MovieLens, an online site that offers recommendations for movies. Submitting 
+movie recommendations is a public good-benefi ting all other users of the site, 
+movie recommendations is a public good-benefi ting all other users of the site, 
+at some cost to the specifi c user who makes time to contribute. Many movies had 
+at some cost to the specifi c user who makes time to contribute. Many movies had 
+too few recommendations for the software to match them with potential users, but 
+too few recommendations for the software to match them with potential users, but 
+Chen et al. fi nd that when MovieLens subscribers are informed of their standing 
+Chen et al. fi nd that when MovieLens subscribers are informed of their standing 
+in terms of how many recommendations they make relative to other users, they 
+in terms of how many recommendations they make relative to other users, they 
+tend to contribute more recommendations. Chen et al. partnered with Movielens in 
+tend to contribute more recommendations. Chen et al. partnered with Movielens in 
+order to provide such notifi cations to a random set of users. Online advertising has 
+order to provide such notifi cations to a random set of users. Online advertising has 
+proven particularly well suited to experiments with company cooperation. Reiley, 
+proven particularly well suited to experiments with company cooperation. Reiley, 
+Li, and Lewis (2010) change the number of advertisements presented at the top of 
+Li, and Lewis (2010) change the number of advertisements presented at the top of 
+the page at an Internet search engine, fi nding that when more such advertisements 
+the page at an Internet search engine, fi nding that when more such advertisements 
+are presented, users click more often on the top-most advertisement. Ostrovsky and 
+are presented, users click more often on the top-most advertisement. Ostrovsky and 
+Schwarz (2011) adjust reserve prices in <rs type="software">Yahoo</rs>! auctions for online advertisements, 
+Schwarz (2011) adjust reserve prices in Yahoo! auctions for online advertisements, 
+fi nding large revenue increases when reserve prices are set optimally. 
+fi nding large revenue increases when reserve prices are set optimally. 
+With additional technical complexity, researchers may be able to conduct 
+With additional technical complexity, researchers may be able to conduct 
+experiments entailing modifi cation of a website even without participation by or 
+experiments entailing modifi cation of a website even without participation by or 
+cooperation from that site. In Edelman and Gilchrist (2010), my coauthor and I 
+cooperation from that site. In Edelman and Gilchrist (2010), my coauthor and I 
+build a proxy that presents some users with modifi ed search result pages showing 
+build a proxy that presents some users with modifi ed search result pages showing 
+hypothetical alternative advertisement labels: in place of the usual "sponsored link" 
+hypothetical alternative advertisement labels: in place of the usual "sponsored link" 
+or "ad" labels, some users instead saw labels reading "paid advertisement." Users 
+or "ad" labels, some users instead saw labels reading "paid advertisement." Users 
+with low education or little online experience benefi t most from the "paid adver-
+with low education or little online experience benefi t most from the "paid adver-
+tisement" label, which the Federal Trade Commission has sought in other media. 
+tisement" label, which the Federal Trade Commission has sought in other media. 
+Similarly, Schechter, Dhamija, Ozment, and Fischer (2007) present varying secu-
+Similarly, Schechter, Dhamija, Ozment, and Fischer (2007) present varying secu-
+rity warnings as users attempt to access online banking applications, fi nding that 
+rity warnings as users attempt to access online banking applications, fi nding that 
+few users recognize the warnings intended to fl ag possible attacks. They also fl ag 
+few users recognize the warnings intended to fl ag possible attacks. They also fl ag 
+the importance of realistic experimental conditions: users who participated in the 
+the importance of realistic experimental conditions: users who participated in the 
+experiments as role players were far less concerned with security than those who 
+experiments as role players were far less concerned with security than those who 
+used their own actual passwords. 
+used their own actual passwords. </p>
+
+<p>Online Lab Experiments 
+Online experiments can address many of the questions historically explored 
+Online experiments can address many of the questions historically explored 
+in real-world economics laboratories. For example, Horton, Rand, and Zeckhauser 
+in real-world economics laboratories. For example, Horton, Rand, and Zeckhauser 
+(2011) replicate three classic lab experiments in an online lab: the extent of coop-
+(2011) replicate three classic lab experiments in an online lab: the extent of coop-
+eration in a one-shot prisoners' dilemma game; playing the prisoners' dilemma 
+eration in a one-shot prisoners' dilemma game; playing the prisoners' dilemma 
+game after being "primed" by reading various religious or nonreligious texts (which 
+game after being "primed" by reading various religious or nonreligious texts (which 
+tends to reduce rates of defection); and testing the "framing" result of Kahneman 
+tends to reduce rates of defection); and testing the "framing" result of Kahneman 
+and Tversky(1979) that choices will differ depending on how questions are framed, 
+and Tversky(1979) that choices will differ depending on how questions are framed, 
+because people are risk averse in the domain of gains but risk seeking as to losses. 
+because people are risk averse in the domain of gains but risk seeking as to losses. </p>
+
+<p>Using Internet Data for Economic Research 201 </p>
+
+<p>Horton, Rand, and Zeckhauser also conducted a natural fi eld experiment in which 
+Horton, Rand, and Zeckhauser also conducted a natural fi eld experiment in which 
+subjects were offered the opportunity to be paid to transcribe a simple passage of 
+subjects were offered the opportunity to be paid to transcribe a simple passage of 
+text in return for a compensation that had been randomly determined-demon-
+text in return for a compensation that had been randomly determined-demon-
+strating an upward-sloping supply of labor. Mason and Suri (2011) argue that online 
+strating an upward-sloping supply of labor. Mason and Suri (2011) argue that online 
+lab experiments using Mechanical Turk (which allows hiring people anywhere in 
+lab experiments using Mechanical Turk (which allows hiring people anywhere in 
+the world to carry out tasks that can be performed online) can offer important 
+the world to carry out tasks that can be performed online) can offer important 
+benefi ts over traditional laboratory experiments, including easier access to a large 
+benefi ts over traditional laboratory experiments, including easier access to a large 
+and diverse subject pool, low cost, and faster deployment of new experiments. 
+and diverse subject pool, low cost, and faster deployment of new experiments. 
+Online lab experiments also present potential downfalls. As in physical 
+Online lab experiments also present potential downfalls. As in physical 
+economics laboratories, participants who sign up to participate are unlikely to be 
+economics laboratories, participants who sign up to participate are unlikely to be 
+representative of the population as a whole, and their differences might be corre-
+representative of the population as a whole, and their differences might be corre-
+lated with some treatments. Online subjects can exit a study more readily than 
+lated with some treatments. Online subjects can exit a study more readily than 
+subjects in a lab, which may be a concern if certain treatments disproportionately 
+subjects in a lab, which may be a concern if certain treatments disproportionately 
+prompt early exit. Communication between online subjects may be possible, both 
+prompt early exit. Communication between online subjects may be possible, both 
+during an experiment and between experiments, depending on a researcher's 
+during an experiment and between experiments, depending on a researcher's 
+method of recruiting subjects. To deter communication among subjects, Horton, 
+method of recruiting subjects. To deter communication among subjects, Horton, 
+Rand, and Zeckhauser (2011) suggest running online experiments quickly and 
+Rand, and Zeckhauser (2011) suggest running online experiments quickly and 
+avoiding notoriety. 
+avoiding notoriety. 
+If researchers so choose, online experiments can blur the boundaries between 
+If researchers so choose, online experiments can blur the boundaries between 
+the lab and the fi eld. For example, Centola (2010) builds an online social network 
+the lab and the fi eld. For example, Centola (2010) builds an online social network 
+where participants can see the health behaviors of selected other participants 
+where participants can see the health behaviors of selected other participants 
+assigned to be their "health buddies." From one perspective, this appears to be a 
+assigned to be their "health buddies." From one perspective, this appears to be a 
+natural fi eld experiment: users participate from home or work, for an extended 
+natural fi eld experiment: users participate from home or work, for an extended 
+period, not knowing that they are subject to randomized variation in an academic 
+period, not knowing that they are subject to randomized variation in an academic 
+research project. Yet participants are interacting in an environment constructed 
+research project. Yet participants are interacting in an environment constructed 
+from scratch specifi cally for research purposes. Just as designers of a lab experiment 
+from scratch specifi cally for research purposes. Just as designers of a lab experiment 
+design the rules of their system, Centola controlled most aspects of what partici-
+design the rules of their system, Centola controlled most aspects of what partici-
+pants could see, say, and do. With the right design, online experiments may be able 
+pants could see, say, and do. With the right design, online experiments may be able 
+to combine positive aspects of lab and fi eld experiments. 
+to combine positive aspects of lab and fi eld experiments. </p>
+
+<p>Limits to Internet-Based Data Collection </p>
+
+<p>Terms of Use and Similar Restrictions 
+Most websites present a "Terms of Use" or similar document that purports to 
+Most websites present a "Terms of Use" or similar document that purports to 
+restrict the methods and purposes of data access. Such statements are widespread; 
+restrict the methods and purposes of data access. Such statements are widespread; 
+for example, Amazon, eBay, and Google all include provisions stating that users 
+for example, Amazon, eBay, and Google all include provisions stating that users 
+must not copy data from their sites. A series of court cases hold that such agree-
+must not copy data from their sites. A series of court cases hold that such agree-
+ments are enforceable against competitors seeking to copy data for reasons courts 
+ments are enforceable against competitors seeking to copy data for reasons courts 
+view as improper. For example, in 
+view as improper. For example, in eBay vs. Bidders' Edge (100 F.Supp.2d 1058 [N.D. 
+(100 F.Supp.2d 1058 [N.D. 
+Cal. 2000]), Bidders' Edge sought to copy eBay data to build an auction aggrega-
+Cal. 2000]), Bidders' Edge sought to copy eBay data to build an auction aggrega-
+tion service-a service which, if successful, would have undercut eBay's competitive 
+tion service-a service which, if successful, would have undercut eBay's competitive 
+advantage. eBay could therefore offer a cogent notion of harm-not just a few extra 
+advantage. eBay could therefore offer a cogent notion of harm-not just a few extra 
+requests for its web server to answer, but a genuine business loss. 
+requests for its web server to answer, but a genuine business loss. </p>
+
+
+
+<p>In contrast, researchers are far less disruptive to the site whose data is being 
+In contrast, researchers are far less disruptive to the site whose data is being 
+copied. For example, researchers' activities are usually limited to analyzing data but 
+copied. For example, researchers' activities are usually limited to analyzing data but 
+not republishing or redistributing-and certainly not reselling-the information 
+not republishing or redistributing-and certainly not reselling-the information 
+they collect. Furthermore, most researchers access online data that sites produce 
+they collect. Furthermore, most researchers access online data that sites produce 
+and distribute incidental to other activity, and researchers' activities do not inter-
+and distribute incidental to other activity, and researchers' activities do not inter-
+fere with sites' core business models. In this context, researchers typically perceive 
+fere with sites' core business models. In this context, researchers typically perceive 
+that they have strong defenses to any claims that data providers might bring. Finally, 
+that they have strong defenses to any claims that data providers might bring. Finally, 
+for lack of an urgent business harm, a target site is less likely to press the point. 
+for lack of an urgent business harm, a target site is less likely to press the point. 
+In practice, sites most often respond to researchers' activities not by fi ling 
+In practice, sites most often respond to researchers' activities not by fi ling 
+lawsuits, but by blocking access from computers that send too many requests. Seeing 
+lawsuits, but by blocking access from computers that send too many requests. Seeing 
+many requests from a single IP address (roughly, a single computer), it is usually 
+many requests from a single IP address (roughly, a single computer), it is usually 
+straightforward for a site to confi gure its web server to deny further requests from 
+straightforward for a site to confi gure its web server to deny further requests from 
+that computer. Such a blockage often suffi ces to prompt a researcher to scale back 
+that computer. Such a blockage often suffi ces to prompt a researcher to scale back 
+data collection. That said, many researchers nonetheless continue requesting data 
+data collection. That said, many researchers nonetheless continue requesting data 
+even after a blockage-for example, using a different computer or a different IP 
+even after a blockage-for example, using a different computer or a different IP 
+address. Excessive requests could slow access by others and invite further bans, 
+address. Excessive requests could slow access by others and invite further bans, 
+but most researchers' data requirements can be adequately addressed using a data 
+but most researchers' data requirements can be adequately addressed using a data 
+collection system that operates at a rate similar to an ordinary user, sending perhaps 
+collection system that operates at a rate similar to an ordinary user, sending perhaps 
+one request every few seconds. 
+one request every few seconds. 
+To date, to the best of my knowledge, no data provider has fi led suit against 
+To date, to the best of my knowledge, no data provider has fi led suit against 
+a researcher collecting data that is available, in smaller quantities, to the general 
+a researcher collecting data that is available, in smaller quantities, to the general 
+public without charge. Of course a researcher facing notable problems-perhaps 
+public without charge. Of course a researcher facing notable problems-perhaps 
+accessing data that is otherwise made available only under a paid license-might do 
+accessing data that is otherwise made available only under a paid license-might do 
+well to seek guidance from a qualifi ed attorney. 
+well to seek guidance from a qualifi ed attorney. </p>
+
+<p>Privacy and Confi dentiality 
+A researcher collecting online data must also consider privacy concerns. 
+A researcher collecting online data must also consider privacy concerns. 
+If collecting data about individuals, a researcher should consult the appropriate 
+If collecting data about individuals, a researcher should consult the appropriate 
+human subjects committee. That said, many human subjects committees will readily 
+human subjects committee. That said, many human subjects committees will readily 
+give the researcher permission for an online data collection project to proceed 
+give the researcher permission for an online data collection project to proceed 
+quickly and without conditions. In particular, human subject committees often give 
+quickly and without conditions. In particular, human subject committees often give 
+blanket permission or even waivers for studies that involve observation of public 
+blanket permission or even waivers for studies that involve observation of public 
+behavior, analysis of existing data, and gathering information in a way that that 
+behavior, analysis of existing data, and gathering information in a way that that 
+presents minimal risk to subjects. 
+presents minimal risk to subjects. 
+When collecting data from a secure or semisecure site or when analyzing 
+When collecting data from a secure or semisecure site or when analyzing 
+company data or other internal data, researchers may want to shield themselves 
+company data or other internal data, researchers may want to shield themselves 
+from user-specifi c data. Sometimes, researchers need not even receive sensitive 
+from user-specifi c data. Sometimes, researchers need not even receive sensitive 
+information. For example, when Hitsch, Hortaçsu, and Ariely (2010) analyzed user 
+information. For example, when Hitsch, Hortaçsu, and Ariely (2010) analyzed user 
+behavior at a dating website, they analyzed user data that contained no names, 
+behavior at a dating website, they analyzed user data that contained no names, 
+contact information, or images. But other research requires at least limited analysis 
+contact information, or images. But other research requires at least limited analysis 
+of sensitive information or data derived from sensitive information. For example, 
+of sensitive information or data derived from sensitive information. For example, 
+Ian Larkin and I analyzed working paper downloads at the SSRN (Social Science 
+Ian Larkin and I analyzed working paper downloads at the SSRN (Social Science 
+Research Network) website to investigate whether the numbers were being "gamed" 
+Research Network) website to investigate whether the numbers were being "gamed" 
+by authors downloading their own papers repeatedly to increase reported download 
+by authors downloading their own papers repeatedly to increase reported download </p>
+
+<p>Benjamin Edelman 203 </p>
+
+<p>counts. In doing this analysis, we did not want to see the names of the authors 
+counts. In doing this analysis, we did not want to see the names of the authors 
+whose papers were most downloaded in circumstances suggesting gaming, but 
+whose papers were most downloaded in circumstances suggesting gaming, but 
+we did seek to analyze relationships between gaming and authors' professional 
+we did seek to analyze relationships between gaming and authors' professional 
+standing, coauthors, and peers. To limit data in this way, we kept author names in 
+standing, coauthors, and peers. To limit data in this way, we kept author names in 
+a restricted table with limited access rights. When we needed analysis of authors' 
+a restricted table with limited access rights. When we needed analysis of authors' 
+resumes and biographical information, we provided our research assistants with 
+resumes and biographical information, we provided our research assistants with 
+access to authors' names, but our assistants could not view information about paper 
+access to authors' names, but our assistants could not view information about paper 
+downloads, and they did not know the purpose of our study. These procedures 
+downloads, and they did not know the purpose of our study. These procedures 
+prevented anyone, including us, from connecting particular download data to a 
+prevented anyone, including us, from connecting particular download data to a 
+particular author. We found limited evidence of gaming due to demographic factors 
+particular author. We found limited evidence of gaming due to demographic factors 
+and career concerns, but strong evidence of gaming driven by social comparisons 
+and career concerns, but strong evidence of gaming driven by social comparisons 
+with various peer groups (Edelman and Larkin 2009). 
+with various peer groups (Edelman and Larkin 2009). 
+When requesting data from companies, additional protections can help address 
+When requesting data from companies, additional protections can help address 
+concerns about confi dentiality and about the possibility of readers uncovering 
+concerns about confi dentiality and about the possibility of readers uncovering 
+company identity. It is routine to describe a corporate data source in general terms 
+company identity. It is routine to describe a corporate data source in general terms 
+(like sector and approximate size) but to decline to name the specifi c company. 
+(like sector and approximate size) but to decline to name the specifi c company. 
+But creative researchers can do more to protect data details. For example, when 
+But creative researchers can do more to protect data details. For example, when 
+analyzing effectiveness of an online advertising campaign performed by Yahoo! and 
+analyzing effectiveness of an online advertising campaign performed by Yahoo! and 
+a major retailer, Lewis and Reiley (2011) created a database of over one million 
+a major retailer, Lewis and Reiley (2011) created a database of over one million 
+customers matched in the databases of the two companies. However, they then 
+customers matched in the databases of the two companies. However, they then 
+hired an outside vendor to render the data anonymous by merging together all of 
+hired an outside vendor to render the data anonymous by merging together all of 
+the personally-identifying information about users' online and offl ine activities. In 
+the personally-identifying information about users' online and offl ine activities. In 
+addition, the vendor multiplied actual sales amounts by an undisclosed number 
+addition, the vendor multiplied actual sales amounts by an undisclosed number 
+between 0.1 and 10-preventing readers, or even the researchers, from learning 
+between 0.1 and 10-preventing readers, or even the researchers, from learning 
+the true amount of the company's advertising costs, incremental revenue, or other 
+the true amount of the company's advertising costs, incremental revenue, or other 
+dollar fi gures. 
+dollar fi gures. 
+Even data not intended to identify individuals may prove easily linked to 
+Even data not intended to identify individuals may prove easily linked to 
+specifi c persons. For example, in 2006 AOL's research division posted search data 
+specifi c persons. For example, in 2006 AOL's research division posted search data 
+from 650,000 users-a dataset AOL intended to offer for academic research by 
+from 650,000 users-a dataset AOL intended to offer for academic research by 
+anyone interested. AOL believed users' privacy was adequately protected because 
+anyone interested. AOL believed users' privacy was adequately protected because 
+AOL published only users' search requests, not their names, usernames, or e-mail 
+AOL published only users' search requests, not their names, usernames, or e-mail 
+addresses. But some users could be identifi ed from their unusual searches-
+addresses. But some users could be identifi ed from their unusual searches-
+including searches for their own names, value of their homes, and the like (Barbaro 
+including searches for their own names, value of their homes, and the like (Barbaro 
+and Zeller 2006). Indeed, even a narrow range of possibilities for users' Social Secu-
+and Zeller 2006). Indeed, even a narrow range of possibilities for users' Social Secu-
+rity numbers can be inferred based on birthplace and date of birth, which are often 
+rity numbers can be inferred based on birthplace and date of birth, which are often 
+publicly available (Acquisti and Gross 2009). With re-identifi cation of individuals 
+publicly available (Acquisti and Gross 2009). With re-identifi cation of individuals 
+possible in unexpected circumstances, protecting privacy requires careful planning 
+possible in unexpected circumstances, protecting privacy requires careful planning 
+and ongoing vigilance. 
+and ongoing vigilance. </p>
+
+<p>Opportunities </p>
+
+<p>Opportunities for research using the Internet expand every year. New sites 
+Opportunities for research using the Internet expand every year. New sites 
+and services collect and retain ever more data, while mobile devices collect data 
+and services collect and retain ever more data, while mobile devices collect data </p>
+
+
+
+<p>even more widely. Sites and users have been remarkably willing to share much of 
+even more widely. Sites and users have been remarkably willing to share much of 
+their data with anyone interested, and the opportunities for economic research 
+their data with anyone interested, and the opportunities for economic research 
+are limited primarily by researcher time and creativity. Furthermore, with certain 
+are limited primarily by researcher time and creativity. Furthermore, with certain 
+kinds of data increasingly widely available, future researchers may be able to repli-
+kinds of data increasingly widely available, future researchers may be able to repli-
+cate results with similar methods and different datasets rather than using different 
+cate results with similar methods and different datasets rather than using different 
+methods on the same sections. 
+methods on the same sections. 
+Meanwhile, in the realm of experiments, online data offers advances on ques-
+Meanwhile, in the realm of experiments, online data offers advances on ques-
+tions of exogeneity and identifi cation. A website design change is often plausibly 
+tions of exogeneity and identifi cation. A website design change is often plausibly 
+exogenous, whereas real-world events like government policies are typically corre-
+exogenous, whereas real-world events like government policies are typically corre-
+lated with other events. Online systems also make it particularly easy-and, in some 
+lated with other events. Online systems also make it particularly easy-and, in some 
+contexts, increasingly routine-for different users to receive different treatments 
+contexts, increasingly routine-for different users to receive different treatments 
+on a widespread and ongoing basis. These circumstances combine the identifi cation 
+on a widespread and ongoing basis. These circumstances combine the identifi cation 
+offered by experiments with the realism of naturally occurring data-potentially 
+offered by experiments with the realism of naturally occurring data-potentially 
+giving researchers the best of both methodologies. 
+giving researchers the best of both methodologies. </p>
+
+<p>■ ■ I thank Paul Kominers and Xiaoxiao Wu for excellent research assistance. </p>
+
+
+
+<p>Using Internet Data for Economic Research 205 </p>
+
+
+
+
+
+
+
+<p>This article has been cited by: </p>
+
+
+
+</text></tei>

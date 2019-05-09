@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC2241875" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T20:06+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC2241875" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:12+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>Malignant transformation of normal, healthy cells is 
 strongly dependent on changes in the expression of </p>
@@ -173,10 +173,10 @@ GSE7794. Gene expression data are deposited at the
 Arrayexpress database accession number E-NCMF-6, 
 details are in the Supplementary Data. </p>
 
-<p>e13 Nucleic Acids Research, 2008, Vol. 36, No. 2 
-PAGE 2 OF 16 </p>
+<p>e13 Nucleic Acids Research, 2008, Vol. 36, No. 2 </p>
 
-<p>KC-SMART analysis </p>
+<p>
+KC-SMART analysis </p>
 
 <p>Both datasets were analyzed equally by permutation 
 analysis. The KC-SMART permutation analysis was 
@@ -204,7 +204,8 @@ describe the significance threshold as a function of the
 kernel width. The function found to fit the relationship 
 best was a modified power function: </p>
 
-<p>¼ a Á b w kernel þ c 
+<p>¼ a Á b 
+w kernel þ c 
 1 </p>
 
 <p>where is the significance threshold for the given w kernel . 
@@ -262,7 +263,7 @@ and Ensembl IDs that were present on the gene expression
 microarray platform were considered. As background, 
 gene list of all genes with Entrez and Ensembl Ids on the 
 array platform was used. Association with cancer was 
-calculated using the <rs id="software-1" type="software">DAVID</rs> web interface (<rs corresp="#software-1" type="url">david.abcc.ncifcrf.gov</rs>) and as described in ref. 24. </p>
+calculated using the <rs id="software-3" type="software">DAVID</rs> web interface (<rs corresp="#software-3" type="url">david.abcc.ncifcrf.gov</rs>) and as described in ref. 24. </p>
 
 <p>Discrete data </p>
 
@@ -290,7 +291,7 @@ MergeLevels (13), courtesy of J. Fridlyand. All positive
 copy number changes were counted as gains (1); all 
 negative copy number changes were counted as losses (À1) 
 and no copy-number change was set to 0. We followed the 
-advice on the <rs id="software-3" type="software">STAC</rs> website (<rs corresp="#software-3" type="url">cbil.upenn.edu/STAC/</rs>/) and 
+advice on the <rs id="software-4" type="software">STAC</rs> website (<rs corresp="#software-4" type="url">cbil.upenn.edu/STAC/</rs>/) and 
 divided each chromosome arm into stretches of 1 Mb. 
 A stretch was called aberrant whenever a BAC clone 
 present in that stretch was called aberrant. Stretches 
@@ -392,7 +393,7 @@ Figure 2. The function g i (x) is defined as: </p>
 
 <p>2 2 </p>
 
-<p>þ I fx2½ i1 , i2 g 
+<p>þ I fx2½ i1 , i2 g 
 3 </p>
 
 <p>The variables i1 and i2 represent the mapped genomic 
@@ -481,9 +482,13 @@ CNA correlates well (P &lt; 0.05, Bonferroni corrected) with </p>
 4.5 
 5 
 5.5 
-6 
-× 10 6 
-Genomic position (bp) 
+6 </p>
+
+<p>× 10 </p>
+
+<p>6 </p>
+
+<p>Genomic position (bp) 
 Amplitude of kernel (log2 values) </p>
 
 <p>Flat-top gaussian kernel </p>
@@ -590,7 +595,8 @@ tumors and the Luminal A subtype (28). The loss on 9p is
 most common in normal-like tumors, which are associated 
 with a genomically stable diploid genotype (33). This 
 region contains the well-known tumor suppressor 
-CDKN2A (p14 ARF ). CDKN2A gene expression was also 
+CDKN2A (p14 
+ARF ). CDKN2A gene expression was also 
 found to significantly correlate with the 9p CNA profile, 
 and can therefore be considered a putative driver gene for 
 this location. These results show that association studies 
@@ -608,30 +614,52 @@ results to frequency-based analyses we employed a </p>
 <p>Table 1. Enrichment of correlating genes found by KC-SMART for known cancer genes </p>
 
 <p>Cancer Gene Census Enrichment 
-Number of genes in gene set a 
-Number of CGC b genes in gene set 
-P-value enrichment for CGC b genes c </p>
+Number of genes in gene set </p>
 
-<p>KC-SMART gains Ã 
-521 
+<p>a </p>
+
+<p>Number of CGC 
+b genes in gene set 
+P-value enrichment for CGC 
+b genes </p>
+
+<p>c </p>
+
+<p>KC-SMART gains </p>
+
+<p>Ã </p>
+
+<p>521 
 17 
 0.0213 
-KC-SMART losses Ã 
-590 
+KC-SMART losses </p>
+
+<p>Ã </p>
+
+<p>590 
 9 
 0.0006 
 DAVID analysis 
-Number of correlating genes d 
-Number of cancer genes 
+Number of correlating genes </p>
+
+<p>d </p>
+
+<p>Number of cancer genes 
 P-value association with cancer 
 category (EASE score) </p>
 
-<p>KC-SMART gains Ã 
-529 
+<p>KC-SMART gains </p>
+
+<p>Ã </p>
+
+<p>529 
 13 
 0.021 
-KC-SMART losses Ã 
-609 
+KC-SMART losses </p>
+
+<p>Ã </p>
+
+<p>609 
 11 
 0.046 </p>
 
@@ -727,13 +755,18 @@ Subtype
 ER 
 PR 
 ERBB2 
-P53 mutated b </p>
+P53 mutated </p>
+
+<p>b </p>
 
 <p>5q loss (53 Mb-138 Mb) 
 Basal 
 neg 
-neg a 
-neg 
+neg </p>
+
+<p>a </p>
+
+<p>neg 
 pos 
 16p gain (0 Mb-10 Mb) 
 Luminal A 
@@ -759,10 +792,10 @@ significant association was used. </p>
 
 <p>As determined by immunohistochemistry. </p>
 
-<p>e13 Nucleic Acids Research, 2008, Vol. 36, No. 2 
-PAGE 8 OF 16 </p>
+<p>e13 Nucleic Acids Research, 2008, Vol. 36, No. 2 </p>
 
-<p>of chromosome arms. This could point to a bias in the 
+<p>
+of chromosome arms. This could point to a bias in the 
 algorithm for boundary regions. To investigate the nature 
 of the significant regions detected by STAC but not by 
 KC-SMART, we analyzed the raw log2 values and 
@@ -1069,7 +1102,9 @@ genes </p>
 
 <p>Correlating 
 cancer 
-genes 1 </p>
+genes </p>
+
+<p>1 </p>
 
 <p>Candidate 
 cancer genes </p>
@@ -1176,10 +1211,10 @@ analysis (Pearson correlation, P &lt; 0.05, Bonferroni-corrected) and
 based on functional analysis. When no likely candidates were found 
 in the correlating genes based on functional analysis, none were listed. </p>
 
-<p>e13 Nucleic Acids Research, 2008, Vol. 36, No. 2 
-PAGE 10 OF 16 </p>
+<p>e13 Nucleic Acids Research, 2008, Vol. 36, No. 2 </p>
 
-<p>the TCF/LEF complex, thereby downregulating the 
+<p>
+the TCF/LEF complex, thereby downregulating the 
 Wnt-signaling target genes (43). Derepression of Wnt 
 target genes due to loss of TCF/LEF might promote 
 tumorigenesis. </p>
@@ -1371,10 +1406,10 @@ values as green. No probe against Pvt1 was present on the gene expression array.
 chromosome 17. The analysis is from a set of 89 human breast tumors. (g) A scale-space analysis of chromosome 9 losses. The analysis is from a set 
 of 89 human breast tumors. </p>
 
-<p>e13 Nucleic Acids Research, 2008, Vol. 36, No. 2 
-PAGE 12 OF 16 </p>
+<p>e13 Nucleic Acids Research, 2008, Vol. 36, No. 2 </p>
 
-<p>affected by sample inhomogeneity. While KC-SMART 
+<p>
+affected by sample inhomogeneity. While KC-SMART 
 will employ the measured aberration level in the analysis, 
 discretization approaches will, depending on the chosen 
 discretization threshold, either fully count an aberration 
@@ -1582,6 +1617,16 @@ Access publication charges for this article were provided
 by the Dutch Cancer Society (NKI 2002-2635). </p>
 
 <p>Conflict of interest statement. None declared. </p>
+
+
+
+<p>e13 Nucleic Acids Research, 2008, Vol. 36, No. 2 </p>
+
+
+
+<p>
+PAGE 15 OF 16 
+Nucleic Acids Research, 2008, Vol. 36, No. 2 e13 </p>
 
 
 

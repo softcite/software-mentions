@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1257%2Fjep.15.4.157" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T20:05+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1257%2Fjep.15.4.157" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:11+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>T </p>
 
@@ -114,25 +114,23 @@ suggests that the forecast for tomorrow could be even higher. However, the fact
 that the long-term average is only 1 percent might lead the forecaster to lower the 
 forecast. The best strategy depends upon the dependence between days. If these 
 three numbers are each squared and weighted equally, then the new forecast would 
-be 2.16 (1 4 9)/3. However, rather than weighting these equally, it is 
+be 2.16 ϭ ͌ (1 ϩ 4 ϩ 9)/3. However, rather than weighting these equally, it is 
 generally found for daily data that weights such as those in the em-
 pirical example of (.02, .9, .08) are much more accurate. Hence the forecast is 
-2.08 .02*1 .9*4 .08*9. 
+2.08 ϭ ͌ .02*1 ϩ .9*4 ϩ .08*9. 
 To be precise, we can use h t to define the variance of the residuals of a 
-regression r t m t h t t . In this definition, the variance of is one. The GARCH 
+regression r t ϭ m t ϩ ͌ h t t . In this definition, the variance of is one. The GARCH 
 model for variance looks like this: </p>
 
-<p>h t1 r t m t 2 h t h t t </p>
+<p>h tϩ1 ϭ ϩ ␣͑r t Ϫ m t ͒ 
+2 ϩ ␤h t ϭ ϩ ␣h t t 
+2 ϩ ␤h t . </p>
 
-<p>2 </p>
-
-<p>h t . </p>
-
-<p>The econometrician must estimate the constants , , ; updating simply requires 
-knowing the previous forecast h and residual. The weights are (1 , , ), 
-and the long-run average variance is /(1 ). It should be noted that this 
-only works if 1, and it only really makes sense if the weights are positive, 
-requiring 0, 0, 0. 
+<p>The econometrician must estimate the constants , ␣, ␤; updating simply requires 
+knowing the previous forecast h and residual. The weights are (1 Ϫ ␣ Ϫ ␤, ␤, ␣), 
+and the long-run average variance is ͌ /(1 Ϫ ␣ Ϫ ␤). It should be noted that this 
+only works if ␣ ϩ ␤ Ͻ 1, and it only really makes sense if the weights are positive, 
+requiring ␣ Ͼ 0, ␤ Ͼ 0, Ͼ 0. 
 The GARCH model that has been described is typically called the GARCH(1,1) 
 model. The (1,1) in parentheses is a standard notation in which the first number 
 refers to how many autoregressive lags, or ARCH terms, appear in the equation, 
@@ -144,19 +142,20 @@ out that based on the one-period forecast, a two-period forecast can be made.
 Ultimately, by repeating this step, long-horizon forecasts can be constructed. For 
 the GARCH(1,1), the two-step forecast is a little closer to the long-run average 
 variance than is the one-step forecast, and, ultimately, the distant-horizon forecast 
-is the same for all time periods as long as 1. This is just the unconditional 
+is the same for all time periods as long as ␣ ϩ ␤ Ͻ 1. This is just the unconditional 
 variance. Thus, the GARCH models are mean reverting and conditionally het-
 eroskedastic, but have a constant unconditional variance. 
 I turn now to the question of how the econometrician can possibly estimate an 
 equation like the GARCH(1,1) when the only variable on which there are data is r t . 
-The simple answer is to use maximum likelihood by substituting h t for 2 in the 
+The simple answer is to use maximum likelihood by substituting h t for 
+2 in the 
 normal likelihood and then maximizing with respect to the parameters. An even </p>
 
 
 
 <p>simpler answer is to use software such as <rs type="software">EViews</rs>, <rs type="software">SAS</rs>, <rs type="software">GAUSS</rs>, <rs type="software">TSP</rs>, <rs type="software">Matlab</rs>, <rs type="software">RATS</rs> 
 and many others where there exist already packaged programs to do this. 
-But the process is not really mysterious. For any set of parameters , , and 
+But the process is not really mysterious. For any set of parameters , ␣, ␤ and 
 a starting estimate for the variance of the first observation, which is often taken to 
 be the observed variance of the residuals, it is easy to calculate the variance forecast 
 for the second observation. The GARCH updating formula takes the weighted 
@@ -165,7 +164,7 @@ and the starting variance and estimates the variance of the second observation. 
 is input into the forecast of the third variance, and so forth. Eventually, an entire 
 time series of variance forecasts is constructed. Ideally, this series is large when the 
 residuals are large and small when they are small. The likelihood function provides 
-a systematic way to adjust the parameters , , to give the best fit. 
+a systematic way to adjust the parameters , ␣, ␤ to give the best fit. 
 Of course, it is entirely possible that the true variance process is different from 
 the one specified by the econometrician. In order to detect this, a variety of 
 diagnostic tests are available. The simplest is to construct the series of { t }, which 
@@ -184,7 +183,8 @@ this a 1 percent quantile, because 1 percent of the outcomes are worse and
 99 percent are better. Let's use the GARCH(1,1) tools to estimate the 1 percent 
 value at risk of a $1,000,000 portfolio on March 23, 2000. This portfolio consists of 
 50 percent Nasdaq, 30 percent Dow Jones and 20 percent long bonds. The long 
-bond is a ten-year constant maturity Treasury bond. 1 This date is chosen to be just 
+bond is a ten-year constant maturity Treasury bond. 
+1 This date is chosen to be just 
 before the big market slide at the end of March and April. It is a time of high 
 volatility and great anxiety. 
 First, we construct the hypothetical historical portfolio. (All calculations in this 
@@ -253,12 +253,11 @@ Std. Dev.
 0.0073 
 0.0083 
 Skewness 
-0.5310 
-0.3593 
-0.2031 
-0.4738 </p>
-
-<p>Kurtosis 
+Ϫ0.5310 
+Ϫ0.3593 
+Ϫ0.2031 
+Ϫ0.4738 
+Kurtosis 
 7.4936 
 8.3288 
 4.9579 
@@ -390,7 +389,7 @@ The forecast standard deviation for the next day is 0.0146, which is almost
 double the average standard deviation of 0.0083 presented in the last column of 
 Table 1. If the residuals were normally distributed, then this would be multiplied by 
 2.327, because 1 percent of a normal random variable lies 2.327 standard deviations 
-below the mean. The estimated normal value at risk $33,977. As it turns out, the 
+below the mean. The estimated normal value at risk ϭ $33,977. As it turns out, the 
 standardized residuals, which are the estimated values of { t }, are not very close to 
 a normal distribution. They have a 1 percent quantile of 2.844, which reflects the 
 fat tails of the asset price distribution. Based on the actual distribution, the 
@@ -400,7 +399,7 @@ Finally, the value at risk can be computed based solely on estimation of the
 quantile of the forecast distribution. This has recently been proposed by Engle and 
 Manganelli (2001), adapting the quantile regression methods of Koenker and 
 Basset (1978) and Koenker and Hallock in this symposium. Application of their 
-method to this data set delivers a value at risk $38,228. 
+method to this data set delivers a value at risk ϭ $38,228. 
 What actually did happen on March 24, 2000, and subsequently? The 
 portfolio lost more than $1000 on March 24 and more than $3000 on March 27. 
 The biggest hit was $67,000 on April 14. We all know that Nasdaq declined 
@@ -427,11 +426,11 @@ Prob </p>
 4.0240 
 0.134 
 3 
-0.011 
+Ϫ0.011 
 4.3367 
 0.227 
 4 
-0.017 
+Ϫ0.017 
 5.0981 
 0.277 
 5 
@@ -443,31 +442,31 @@ Prob </p>
 5.3228 
 0.503 
 7 
-0.015 
+Ϫ0.015 
 5.8836 
 0.553 
 8 
-0.013 
+Ϫ0.013 
 6.3272 
 0.611 
 9 
-0.024 
+Ϫ0.024 
 7.8169 
 0.553 
 10 
-0.006 
+Ϫ0.006 
 7.9043 
 0.638 
 11 
-0.023 
+Ϫ0.023 
 9.3163 
 0.593 
 12 
-0.013 
+Ϫ0.013 
 9.7897 
 0.634 
 13 
-0.003 
+Ϫ0.003 
 9.8110 
 0.709 
 14 
@@ -475,7 +474,7 @@ Prob </p>
 10.038 
 0.759 
 15 
-0.012 
+Ϫ0.012 
 10.444 
 0.791 </p>
 
@@ -642,155 +641,7 @@ ary/March, 8:1, pp. 31-49. </p>
 
 <p>This article has been cited by: </p>
 
-<p>1. Wenzhao Wang. 2018. The mean-variance relation and the role of institutional investor sentiment. 
-Economics Letters 168, 61-64. [Crossref] </p>
 
-<p>2. Carlos A. Tapia Cortez, Michael Hitch, Claude Sammut, Jeff Coulton, Robert Shishko, Serkan 
-Saydam. 2018. Determining the embedding parameters governing long-term dynamics of copper 
-prices. Chaos, Solitons &amp; Fractals 111, 186-197. [Crossref] </p>
-
-<p>3. Singgih Wijayana, Sidney J. Gray. 2018. Capital market consequences of cultural influences on 
-earnings: The case of cross-listed firms in the U.S. stock market. International Review of Financial 
-Analysis 57, 134-147. [Crossref] </p>
-
-<p>4. Werner Kristjanpoller, Marcel C. Minutolo. 2018. A hybrid volatility forecasting framework 
-integrating GARCH, Artificial Neural network, Technical Analysis and Principal Components 
-Analysis. Expert Systems with Applications . [Crossref] </p>
-
-<p>5. Rui Huo, Abdullahi D. Ahmed. 2018. Relationships between Chinese stock market and its index 
-futures market: Evaluating the impact of QFII scheme. Research in International Business and Finance 
-44, 135-152. [Crossref] </p>
-
-<p>6. Nektarios A. Michail. 2018. EXAMINING THE STABILITY OF OKUN'S COEFFICIENT. 
-Bulletin of Economic Research 20. . [Crossref] </p>
-
-<p>7. Nik Ahmad Sufian Burhan, Razli Che Razak, Saifuzzaman Ibrahim, Muhamad Rosli Selamat, 
-Muhamad Ridhwan Rosli. 2018. Social Classes of Intelligence, Economic Growth and Technological 
-Achievement: Robust Regression and Outlier Detection. Journal of Interdisciplinary Economics 1, 
-026010791876192. [Crossref] </p>
-
-<p>8. Lorna Katusiime, Frank W. Agbola. 2018. Modelling the impact of central bank intervention on 
-exchange rate volatility under inflation targeting. Applied Economics 52, 1-14. [Crossref] </p>
-
-<p>9. Asmerilda Hitaj, Cesario Mateus, Ilaria Peri. 2018. Lambda Value at Risk and Regulatory Capital: A 
-Dynamic Approach to Tail Risk. Risks 6:1, 17. [Crossref] </p>
-
-<p>10. Raed Alzghool, Loai M. Al-Zubi. 2018. Semi-parametric estimation for ARCH models. Alexandria 
-Engineering Journal 57:1, 367-373. [Crossref] </p>
-
-<p>11. Wenzhao Wang. 2018. Investor sentiment and the mean-variance relationship: European evidence. 
-Research in International Business and Finance . [Crossref] </p>
-
-<p>12. C.A. Tapia Cortez, S. Saydam, J. Coulton, C. Sammut. 2018. Alternative techniques for forecasting 
-mineral commodity prices. International Journal of Mining Science and Technology 28:2, 309-322. 
-[Crossref] </p>
-
-<p>13. Muhammad Umair Siddiqui, Azfar Abbas, Syed Muhammad AbdurRehman, Akif Jawed, Muhammad 
-Rafi. Comparison of garch model and artificial neural network for mutual fund's growth prediction 
-1-7. [Crossref] </p>
-
-<p>14. Richard A. Ajayi, Seyed Mehdian, Ovidiu Stoica. 2018. An Empirical Examination of the 
-Dissemination of Equity Price Innovations Between the Emerging Markets of Nordic-Baltic States 
-and Major Advanced Markets. Emerging Markets Finance and Trade 54:3, 642-660. [Crossref] </p>
-
-<p>15. 可可 可. 2018. Using Difference Method to Improve the Prediction Accuracy-An Empirical Study 
-Based on China Shanghai and Shenzhen 300 Stock Index. Finance 08:01, 1-13. [Crossref] </p>
-
-<p>16. Rasha S. Aboul-Yazeed, Ahmed El-Bialy, Abdalla S. A. Mohamed. Medical Equipment Failure Rate 
-Analysis Using Supervised Machine Learning 319-327. [Crossref] </p>
-
-<p>17. Siti Nor Nadrah Muhamad, Izleen Ibrahim, Nordianah Jusoh@Hussain, Siti Hannariah Mansor, Wan 
-Juliyana Wan Ibrahim. Modeling Relationship Between Cocoa Beans Commodity Export Volatility 
-and Stock Market Index (KLCI) 649-657. [Crossref] </p>
-
-<p>18. Sébastien Casault, Aard J. Groen, Jonathan D. Linton. 2017. Towards a better understanding of the 
-dynamics of value creation in R&amp;D intensive small firms. R&amp;D Management 47:5, E1-E12. [Crossref] 
-19. Trino-Manuel Ñíguez, Javier Perote. 2017. Moments expansion densities for quantifying financial 
-risk. The North American Journal of Economics and Finance 42, 53-69. [Crossref] </p>
-
-<p>20. George P Malanson. 2017. Mixed signals in trends of variance in high-elevation tree ring chronologies. 
-Journal of Mountain Science 14:10, 1961-1968. [Crossref] </p>
-
-<p>21. Michael J. O'Neill, Zhangxin Liu. 2017. Fund Volatility Index using equity market state prices. 
-Accounting &amp; Finance 57:3, 837-853. [Crossref] </p>
-
-<p>22. Safia Raslain, Fella Hachouf, Soumia Kharfouchi. Using 2D ARMA-GARCH for ultrasound images 
-denoising 2672-2676. [Crossref] </p>
-
-<p>23. Hubert Gabrisch. 2017. Monetary policy independence reconsidered: evidence from six non-euro 
-members of the European Union. Empirica 44:3, 567-584. [Crossref] </p>
-
-<p>24. Yaqi Zhang, Lei Guo. Convergence of self-tuning regulators under conditional heteroscedastic noises 
-422-426. [Crossref] </p>
-
-<p>25. Yedidya Rabinovitz. 2017. A new S.D.E. and instantaneous mean reversion rate formula (presented 
-via a numerical empirical model comparison). International Journal of Financial Engineering 04:02n03, 
-1750029. [Crossref] </p>
-
-<p>26. Cheng Yan, Huazhu Zhang. 2017. Mean-variance versus naïve diversification: The role of mispricing. 
-Journal of International Financial Markets, Institutions and Money 48, 61-81. [Crossref] </p>
-
-<p>27. Ayman M.A. Omar, Tomasz Piotr Wisniewski, Sandra Nolte. 2017. Diversifying away the risk of war 
-and cross-border political crisis. Energy Economics 64, 494-510. [Crossref] </p>
-
-<p>28. Brenda González-Hermosillo, Christian Johnson. 2017. Transmission of financial stress in Europe: 
-The pivotal role of Italy and Spain, but not Greece. Journal of Economics and Business 90, 49-64. 
-[Crossref] </p>
-
-<p>29. Silvia Dal Bianco, Nguyen Loan. 2017. FDI Inflows, Price and Exchange Rate Volatility: New 
-Empirical Evidence from Latin America. International Journal of Financial Studies 5:1, 6. [Crossref] </p>
-
-<p>30. Marcel Ausloos, Olgica Nedic, Aleksandar Dekanski, Maciej J. Mrowinski, Piotr Fronczak, Agata 
-Fronczak. 2017. Day of the week effect in paper submission/acceptance/rejection to/in/by peer review 
-journals. II. An ARCH econometric-like modeling. Physica A: Statistical Mechanics and its Applications 
-468, 462-474. [Crossref] </p>
-
-<p>31. Rui Huo, Abdullahi D. Ahmed. 2017. Return and volatility spillovers effects: Evaluating the impact 
-of Shanghai-Hong Kong Stock Connect. Economic Modelling 61, 260-272. [Crossref] </p>
-
-<p>32. Shuang Xiao, Guo Li, Yunjing Jia. 2017. Estimating the Constant Elasticity of Variance Model with 
-Data-Driven Markov Chain Monte Carlo Methods. Asia-Pacific Journal of Operational Research 34:01, 
-1740009. [Crossref] </p>
-
-<p>33. Jun Sik Kim, Da-Hea Kim, Sung Won Seo. 2017. Individual mean-variance relation and stock-level 
-investor sentiment. Journal of Business Economics and Management 18:1, 20-34. [Crossref] </p>
-
-<p>34. Satish Kumar. 2017. New evidence on stock market reaction to dividend announcements in India. 
-Research in International Business and Finance 39, 327-337. [Crossref] </p>
-
-<p>35. David E. Allen, Michael McAleer, Robert J. Powell, Abhay K. Singh. 2017. Volatility Spillovers from 
-Australia's major trading partners across the GFC. International Review of Economics &amp; Finance 47, 
-159-175. [Crossref] </p>
-
-<p>36. Małgorzata Wiśniewska, Agnieszka Wyłomańska. GARCH Process with GED Distribution 83-103. 
-[Crossref] </p>
-
-
-
-<p>115. Sandro C. Andrade, Gennaro Bernile, Frederick M. Hood. 2014. SOX, corporate transparency, and 
-the cost of debt. Journal of Banking &amp; Finance 38, 145-165. [Crossref] </p>
-
-<p>116. Edward Ngailo, Eliab Luvanda, Estomih S. Massawe. 2014. Time Series Modelling with Application 
-to Tanzania Inflation Data. Journal of Data Analysis and Information Processing 02:02, 49-59. [Crossref] 
-117. Yi-Kai Su, Chun-Chou Wu. 2014. A New Range-Based Regime-Switching Dynamic Conditional 
-Correlation Model for Minimum-Variance Hedging. Journal of Mathematical Finance 04:03, 207-219. 
-[Crossref] </p>
-
-<p>118. Brenda GonzÃ¡lez-Hermosillo, Christian Johnson. 2014. Transmission of Financial Stress in Europe: 
-The Pivotal Role of Italy and Spain, but not Greece. IMF Working Papers 14:76, 1. [Crossref] </p>
-
-<p>119. Yongjie Zhang, Lina Feng, Xi Jin, Dehua Shen, Xiong Xiong, Wei Zhang. 2013. Internet information 
-arrival and volatility of SME PRICE INDEX. Physica A: Statistical Mechanics and its Applications . 
-[Crossref] 
-120. John L Moran, Patricia J Solomon. 2013. Statistical process control of mortality series in the Australian 
-and New Zealand Intensive Care Society (ANZICS) adult patient database: implications of the data 
-generating process. BMC Medical Research Methodology 13:1. . [Crossref] </p>
-
-<p>121. Benedicto Lukanima, Raymond Swaray. 2013. Market Reforms and Commodity Price Volatility: The 
-Case of East African Coffee Market. The World Economy n/a-n/a. [Crossref] </p>
-
-<p>122. Hassan Mohammadi, Daniel P. Rich. 2013. Dynamics of Unemployment Insurance Claims: An 
-Application of ARIMA-GARCH Models. Atlantic Economic Journal 41:4, 413-425. [Crossref] </p>
 
 <p>123. Teresa Serra. 2013. Time-series econometric analyses of biofuel-related price volatility. Agricultural 
 Economics 44:s1, 53-62. [Crossref] </p>

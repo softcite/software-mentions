@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4987885" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T20:07+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4987885" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:14+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>ABSTRACT </p>
 
@@ -14,7 +14,7 @@ tures of globular and helical membrane proteins, and
 the integration of a new protein viewer. The database, 
 now with double the content, significantly improved 
 the coverage of fragment conformations and predic-
-tion quality. The employment of the NGL viewer for 
+tion quality. The employment of the <rs type="software">NGL viewer</rs> for 
 visualization of the protein under investigation and 
 interactive selection of appropriate loops makes <rs type="software">SL2</rs> 
 independent of third-party plug-ins and additional in-
@@ -82,9 +82,7 @@ the stem atoms of the template loop to the gap is an evalua-</p>
 
 <p>Present address: Alexander S. Rose, San Diego Supercomputer Center, University of California, San Diego, CA 92093-0743, USA. </p>
 
-<p>C </p>
-
-<p>The Author(s) 2016. Published by Oxford University Press on behalf of Nucleic Acids Research. 
+<p>C The Author(s) 2016. Published by Oxford University Press on behalf of Nucleic Acids Research. 
 This is an Open Access article distributed under the terms of the Creative Commons Attribution License (http://creativecommons.org/licenses/by-nc/4.0/), which 
 permits non-commercial re-use, distribution, and reproduction in any medium, provided the original work is properly cited. For commercial re-use, please contact 
 journals.permissions@oup.com </p>
@@ -127,7 +125,7 @@ prediction as well as an up-to-date visualization. </p>
 ments of 3-35 amino acids length extracted from the RSCB 
 PDB entries in December 2015. Here, not only loops 
 are considered but also fragments derived from secondary 
-structure elements like helices and -sheets. For each frag-
+structure elements like helices and ␤-sheets. For each frag-
 ment, the amino acid sequence, PDB identifier, chain iden-
 tifier, residue number of stem atoms and a geometrical fin-
 gerprint is stored. 
@@ -156,9 +154,9 @@ fragments are extracted from a given template structure, </p>
 <p>Figure 1. Schematic representation of the geometrical fingerprint: The ge-
 ometrical fingerprint is characterized by the distance d between the N-
 terminal C-and the C-terminal N atom and the following three angles: 
-defined by the line between C (N) , C (N) and d, is spanned by the line 
-between N (C) , C (C) and d, is the angle between the two planes A (de-
-fined by C (N) , C (N) and N (C) ) and B (C (C) , C (N) and N (C) ). </p>
+␣ defined by the line between C␣ (N) , C (N) and d, ␤ is spanned by the line 
+between N (C) , C␣ (C) and d, ␥ is the angle between the two planes A (de-
+fined by C␣ (N) , C (N) and N (C) ) and B (C␣ (C) , C (N) and N (C) ). </p>
 
 <p>Figure 2. Length dependency of the number of fragments stored in our 
 previous (black) and present fragment (gray) database; (A) loops in pro-
@@ -194,7 +192,7 @@ teins (24). As a result, the loops stored in LIMP doubled
 from 179 580 to 378 839. For LIMP is composed mainly 
 of loop structures, the length distribution differs from LIP 
 where the fragments also include helical fragments and frag-
-ments derived from -sheets. In LIMP (Figure 2B), few loop 
+ments derived from ␤-sheets. In LIMP (Figure 2B), few loop 
 templates are available for short loops of 3-5 amino acids 
 in length. The number of loops stored in LIMP increases 
 markedly to a maximum of 20 000 up to a length of 20 
@@ -217,8 +215,7 @@ tween missing segment and template loop' and 'fingerprint
 matching of the template loop to the gap in the model.' 
 Only one representative of fragments with identical primary 
 structure and high tertiary structure similarity (with back-
-bone RMSD &lt; 0.5 ˚ 
-A) is kept in the results list to maximize 
+bone RMSD &lt; 0.5Å) is kept in the results list to maximize 
 the conformational space of fragments used for further cal-
 culations. The top 100 loop candidates are finally displayed 
 in the results list. Suitable candidates can be selected from 
@@ -226,16 +223,16 @@ that list by visual inspection. </p>
 
 <p>VISUALIZATION AND USER INTERFACE </p>
 
-<p>For visual inspection of results, we employed the NGL 
-viewer which works without installation of additional plug-
+<p>For visual inspection of results, we employed the <rs type="software">NGL 
+viewer</rs> which works without installation of additional plug-
 ins (20). As a common graphical user interface for the 
-NGL viewer (Figure 3) the search mask and the results list 
+<rs type="software">NGL viewer</rs> (Figure 3) the search mask and the results list 
 were implemented within JavaScript. A protein structure 
 uploaded via the file selection dialog is instantly loaded to 
-the NGL viewer. The stem residues of the gap in the protein 
+the <rs type="software">NGL viewer</rs>. The stem residues of the gap in the protein 
 model must either be typed into the according search field or </p>
 
-<p>can be selected by clicking them in the NGL viewer. The se-
+<p>can be selected by clicking them in the <rs type="software">NGL viewer</rs>. The se-
 quence of the missing segment must be typed or copied into 
 the search mask. If the membrane protein-specific LIMP 
 data base (Membrane DB) is not checked, the LIP data base 
@@ -269,8 +266,8 @@ for further analysis. </p>
 
 <p>TECHNICAL ASPECTS </p>
 
-<p>Visualization is carried out by the NGL viewer (20). To use 
-the full feature set of the NGL viewer an up-to-date web 
+<p>Visualization is carried out by the <rs type="software">NGL viewer</rs> (20). To use 
+the full feature set of the <rs type="software">NGL viewer</rs> an up-to-date web 
 browser (tested on the recent versions of Firefox, Google 
 Chrome, Safari, IE and Edge) is recommended. The spe-
 cialized graphical user interface is written in JavaScript. For 
@@ -299,7 +296,7 @@ determined structure even for short loops. There are several </p>
 
 <p>Nucleic Acids Research, 2016, Vol. 44, Web Server issue W393 </p>
 
-<p>Figure 3. Screenshot of the <rs type="software">SL2</rs> results page (NGL viewer). Structure of the human cytomegalovirus GPCR US28 (PDB-ID: 4xt1) in a gray cartoon rep-
+<p>Figure 3. Screenshot of the <rs type="software">SL2</rs> results page (<rs type="software">NGL viewer</rs>). Structure of the human cytomegalovirus GPCR US28 (PDB-ID: 4xt1) in a gray cartoon rep-
 resentation with top ranked loop (green) and calculated membrane planes. The list of loop candidates filling the gap 94 to 103 in the GPCR structure is 
 displayed as table on the right hand just below the search mask. </p>
 
@@ -326,10 +323,8 @@ particle cryo-electron microscopy (32). </p>
 <p>FUNDING </p>
 
 <p>Deutsche Forschungsgemeinschaft [Sfb740/B6, DFG HI 
-1502/1-2, BI 893/8]; 'Norddeutscher Verbund f ¨ 
-ur Hoch-
-und H ¨ 
-ochstleistungsrechner' (HLRN) (in part). Funding 
+1502/1-2, BI 893/8]; 'Norddeutscher Verbund für Hoch-
+und Höchstleistungsrechner' (HLRN) (in part). Funding 
 for open access charge: Sfb740 / B6. 
 Conflict of interest statement. None declared. </p>
 

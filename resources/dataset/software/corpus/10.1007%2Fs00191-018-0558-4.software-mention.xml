@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1007%2Fs00191-018-0558-4" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T19:53+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1007%2Fs00191-018-0558-4" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T03:59+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>Abstract Using an agent-based model, this paper revisits the merits for a central 
 bank of announcing its inflation target. The model preserves the main transmission 
@@ -163,23 +163,24 @@ ing to an expectation channel of monetary policy in the model. In every period t
 household i sets its reservation wage following the first rule of thumb: </p>
 
 <p>w i,t = w i,t−1 × (1 + 1 (π e 
-i,t+1 &gt;0) γ w 
-i,t .π e 
-i,t+1 ) 
+i,t+1 &gt;0) γ </p>
+
+<p>w </p>
+
+<p>i,t .π </p>
+
+<p>e </p>
+
+<p>i,t+1 ) 
 (1) </p>
 
 <p>Heuristic (1) indicates that households raise their reservation wage w i,t only if their 
 inflation expectation π e 
 i,t+1 is positive (and, consequently, 1 () = 1). A wage index-
-ation process then prevails, according to which households raise their wage by </p>
-
-<p>γ w 
-i,t .π e </p>
-
-<p>i,t+1 </p>
-
-<p>
-. Otherwise, they keep it unchanged (1 () = 0). Wages are increasing 
+ation process then prevails, according to which households raise their wage by 
+γ w 
+i,t .π e 
+i,t+1 . Otherwise, they keep it unchanged (1 () = 0). Wages are increasing 
 with expected inflation, while being subject to nominal wage downward stickiness 
 (γ w 
 i,t &gt; 0). 6 In this set-up, coefficients γ w 
@@ -216,9 +217,7 @@ models, we assume that households desire to smooth their consumption path. Accor
 ingly, each household computes a proxy of its permanent income, as defined by 
 Friedman (1957, Chap. III), as a moving average of its past incomes: </p>
 
-<p>˜ 
-y i,t ≡ (1 − ρ)y i,t + ρ ˜ 
-y i,t−1 
+<p>y i,t ≡ (1 − ρ)y i,t + ρỹ i,t−1 
 (3) </p>
 
 <p>where ρ ∈ [0, 1[ is a memory parameter common to all households. Each 
@@ -230,19 +229,29 @@ household then intends to consume a share d i,t &gt; 0 of its permanent income. 
 
 <p>Formally, the demand for the goods of each household i in period t is expressed 
 as: 7 
-c d 
-i,t = d i,t . ˜ 
-y i,t where d i,t ∈ [d, ¯ 
-d] 
+c </p>
+
+<p>d </p>
+
+<p>i,t = d i,t .ỹ i,t where d i,t ∈ [d,d] 
 (4) 
 Households adjust their consumption rate, d i,t , according to the second rule of 
 thumb. We specify a counterpart of the standard Euler condition where the real 
 interest rate dictates consumption and savings decisions: 8 </p>
 
-<p>d i,t = d i,t−1 − γ d 
-i,t (i t − π e 
-i,t+1 − r n 
-t ) 
+<p>d i,t = d i,t−1 − γ </p>
+
+<p>d </p>
+
+<p>i,t (i t − π </p>
+
+<p>e </p>
+
+<p>i,t+1 − r </p>
+
+<p>n </p>
+
+<p>t ) 
 (5) </p>
 
 <p>The adjustments of d i,t depend on the gap between the current real interest rate 
@@ -271,17 +280,14 @@ ing two learning operators: a social learning mechanism (imitation) and random
 experiments in the strategy space. 9 
 Imitation is based on households' performance, measured by smoothed utility: </p>
 
-<p>˜ 
-u i,t = (1 − ρ)u i,t + ρ ˜ 
-u i,t−1 = (1 − ρ) </p>
+<p>u i,t = (1 − ρ)u i,t + ρũ i,t−1 = (1 − ρ) </p>
 
 <p>t </p>
 
-
-
 <p>l=0 </p>
 
-<p>ρ t−l u i,l 
+<p>ρ 
+t−l u i,l 
 (6) </p>
 
 <p>where u(c i,t ) ≡ ln(c i,t ) in the numerical simulations and ρ is the same memory 
@@ -293,8 +299,7 @@ j,t ) of another household j = i. The household to be </p>
 
 <p>7 In DSGE models, transversality conditions are imposed to avoid explosive dynamics in the bond accumu-
 lation process. Such restrictions cannot be set in our model, in which we have to impose period-by-period 
-constraints. In that respect, we impose an upper limit ¯ 
-d &gt; 1 to the consumption adjustment rate d, in 
+constraints. In that respect, we impose an upper limitd &gt; 1 to the consumption adjustment rate d, in 
 order to rule out excessive debt and household defaulting, and we impose a lower bound d &gt; 0 to ensure 
 minimal subsistence consumption at each period. This way, consumption cannot be driven to zero. 
 8 We depart from the behavioral rules introduced in the literature on learning about consumption (see 
@@ -311,12 +316,13 @@ in macroeconomics. </p>
 of household j to be imitated is proportional to its relative utility in the households' 
 population: </p>
 
-<p>exp( ˜ 
-u j ) 
-n 
-l=1 exp( ˜ 
-u l ) 
-(7) </p>
+<p>exp(ũ j ) </p>
+
+<p>n </p>
+
+<p>l=1 exp(ũ l ) </p>
+
+<p>(7) </p>
 
 <p>where the exponential function is set to cope with negative utility values. Conse-
 quently, better strategies in terms of utility are favored by the selection process, and 
@@ -326,8 +332,9 @@ order potentially to discover better strategies than those already present among
 households' population. In this case, it draws a new γ w 
 i,t+1 coefficient from a nor-
 mal distribution with the mean equal to the average of the coefficients γ w 
-i,t across 
-all households, and a given standard-deviation σ w : N </p>
+i,t across </p>
+
+<p>all households, and a given standard-deviation σ w : N </p>
 
 <p>n </p>
 
@@ -337,11 +344,7 @@ all households, and a given standard-deviation σ w : N </p>
 
 <p>n </p>
 
-<p>, σ w </p>
-
-
-
-<p>. We truncate </p>
+<p>, σ w . We truncate </p>
 
 <p>the draw at zero, as negative indexation coefficients are not relevant. The new strat-
 egy γ d 
@@ -356,11 +359,7 @@ i,t+1 is also drawn from a normal distribution, with a given standard deviation
 
 <p>n </p>
 
-<p>, σ d </p>
-
-
-
-<p>, but this draw does allow for negative coefficients, as both </p>
+<p>, σ d , but this draw does allow for negative coefficients, as both </p>
 
 <p>substitution and income effects are plausible (see Eq. 5). 
 With a probability 1 − P imit − P mut , the household keeps its strategies (γ w 
@@ -386,7 +385,7 @@ feed the inflation dynamics, and can endogenously drive the inflation process. F
 these reasons, it becomes important that the CB acts as a manager of expectations 
 (Woodford 2003). </p>
 
-<p>10 See, for instance, Brainard (1967) for a standard reference and  (2002) and Giannoni (2007) 
+<p>10 See, for instance, Brainard (1967) for a standard reference and Söderström (2002) and Giannoni (2007) 
 for recent treatments. </p>
 
 <p>I. Salle et al. </p>
@@ -404,11 +403,7 @@ arises. </p>
 <p>Under IT, agents assess the credibility they attribute to the CB by evaluating its 
 past performances in terms of inflation over a finite number of past periods, denoted 
 by window. In each period in which past inflation has been contained between 
-the announced range </p>
-
-<p>π T − ζ, π T + ζ </p>
-
-<p>, they consider the CB as successful. If the 
+the announced range π T − ζ, π T + ζ , they consider the CB as successful. If the 
 CB has been successful in x periods over the last window periods, they compute 
 their perceived credibility, denoted by P target , as P target = </p>
 
@@ -417,12 +412,14 @@ their perceived credibility, denoted by P target , as P target = </p>
 <p>window ∈ [0, 1]. Each 
 household then determines its inflation expectation as follows: </p>
 
-<p>π e 
-i,t+1 → </p>
+<p>π </p>
 
-<p>U (π T − ζ, π T + ζ ) with probability P target </p>
+<p>e </p>
 
-<p>π t + ξ i with probability 1 − P target 
+<p>i,t+1 → </p>
+
+<p>U (π T − ζ, π T + ζ ) with probability P target 
+π t + ξ i with probability 1 − P target 
 (8) </p>
 
 <p>where ξ i is an i.d.d. noise with mean zero and variance σ ξ . The first case in Eq. 8 is in 
@@ -455,16 +452,17 @@ an inflation target by the central bank into account.
 <p>of the target, because they do not know it. 13 This is the only difference between the 
 two regimes. Each household then determines its inflation expectation as follows: </p>
 
-<p>π e 
-i,t+1 → </p>
+<p>π </p>
 
-<p>U ( ˜ 
-π t − ζ, ˜ 
-π t + ζ ) with probability P target 
+<p>e </p>
+
+<p>i,t+1 → </p>
+
+<p>U (π t − ζ,π t + ζ ) with probability P target 
 π t + ξ i with probability 1 − P target 
 (9) </p>
 
-<p>where˜π  t is the average inflation over the last window periods. Admittedly, the radius 
+<p>whereπ t is the average inflation over the last window periods. Admittedly, the radius 
 of tolerance ζ under non-IT is not a choice of the CB, and finds a slightly different 
 interpretation than under IT: the radius of tolerance is the tolerance that households 
 use to determine whether inflation has been far from or close to its past average value. 
@@ -527,22 +525,27 @@ the actual quantity of labor (H t ) that the firm hires, and the corresponding w
 The firm uses that quantity to produce goods through a standard production function 
 (see, for example, Gali 2008): </p>
 
-<p>Y s 
-t = A t H 1−α </p>
+<p>Y </p>
 
-<p>t </p>
+<p>s </p>
+
+<p>t = A t H </p>
+
+<p>1−α 
+t </p>
 
 <p>(10) </p>
 
 <p>where α ∈ [0, 1[ encompasses decreasing returns, A t is the technology factor. 15 The 
 only production costs of the firm result from the wage bill: </p>
 
-<p>(Y s 
-t ) = </p>
+<p>(Y </p>
+
+<p>s </p>
+
+<p>t ) = </p>
 
 <p>n </p>
-
-
 
 <p>i=1 </p>
 
@@ -579,8 +582,11 @@ The rationing mechanism in the goods market (see Section 2.5) determines the
 quantity that the firm actually sells to households (Y t ), which gives its corresponding 
 profit: </p>
 
-<p>t = P t Y t − (Y s 
-t ) 
+<p>t = P t Y t − (Y </p>
+
+<p>s </p>
+
+<p>t ) 
 (13) </p>
 
 <p>15 We assume a deterministic natural production level, we set A t = 1, ∀t (the long run value of the 
@@ -622,15 +628,19 @@ direction of profit increase. </p>
 <p>The CB reacts to both inflation and the level of activity, and sets the nominal interest 
 rate i t according to a non-linear Taylor (1993) instrumental rule. 19 </p>
 
-<p>1 + i t = (1 + π T )(1 + r n 
-t−1 ) </p>
+<p>1 + i t = (1 + π 
+T )(1 + r </p>
 
-<p>
-1 + π t−1 
+<p>n </p>
+
+<p>t−1 ) </p>
+
+<p>1 + π t−1 
 1 + π T </p>
 
-<p>φ π 
-1 + u  *  
+<p>φ π </p>
+
+<p>1 + u  *  
 1 + u t−1 </p>
 
 <p>φ u </p>
@@ -665,44 +675,59 @@ dynamics of our framework; see Ashraf and Howitt (2012) for a comparable specifi
 t , while aggregate supply is given 
 by: </p>
 
-<p>H s 
-t = </p>
+<p>H </p>
+
+<p>s </p>
+
+<p>t = </p>
 
 <p>n </p>
 
-
-
 <p>i=1 </p>
 
-<p>h s 
-i,t = n 
+<p>h </p>
+
+<p>s </p>
+
+<p>i,t = n 
 (16) </p>
 
 <p>The two are matched according to a process that is designed to be consistent with 
 the firm aiming at minimizing its production costs: the firm hires households by 
 increasing reservation wages. 20 The aggregate hired labor is then set as: </p>
 
-<p>H t = min(H d 
-t , n) = </p>
+<p>H t = min(H </p>
+
+<p>d </p>
+
+<p>t , n) = </p>
 
 <p>n </p>
-
-
 
 <p>i=1 </p>
 
 <p>h i,t 
 (17) </p>
 
-<p>The corresponding unemployment rate is computed as u t = n−H t 
-n . The real wage 
-rate is given by ω ≡ W t </p>
+<p>The corresponding unemployment rate is computed as u t = </p>
 
-<p>P t </p>
+<p>n−H t </p>
 
-<p>= (1−α) 
-(1+μ) H −α 
-t , decreasing with H . </p>
+<p>n . The real wage 
+rate is given by ω ≡ </p>
+
+<p>W t 
+P t </p>
+
+<p>= </p>
+
+<p>(1−α) </p>
+
+<p>(1+μ) H </p>
+
+<p>−α </p>
+
+<p>t , decreasing with H . </p>
 
 <p>2.5.2 Goods market </p>
 
@@ -713,9 +738,10 @@ confronted according to an efficient rationing mechanism: households are ranked 
 decreasing goods demand, so that the firm first faces the highest demand. This mech-
 anism stands for the counterpart of the standard assumption of households aiming at 
 maximizing their utility, derived from their consumption. If a household is rationed, 
-it buys bonds b with its remaining cash. Inflation π t is computed as π t = P t −P t−1 </p>
+it buys bonds b with its remaining cash. Inflation π t is computed as π t = </p>
 
-<p>P t−1 </p>
+<p>P t −P t−1 
+P t−1 </p>
 
 <p>. </p>
 
@@ -725,57 +751,66 @@ it buys bonds b with its remaining cash. Inflation π t is computed as π t = P 
 First, notice that, through Eq. 1, we have: </p>
 
 <p>w i,t = 1 (π e 
-i,t+1 &gt;0) (γ w 
-i,t π e 
-i,t+1 w i,t−1 ) ≥ 0 
+i,t+1 &gt;0) (γ </p>
+
+<p>w </p>
+
+<p>i,t π </p>
+
+<p>e </p>
+
+<p>i,t+1 w i,t−1 ) ≥ 0 
 (18) </p>
 
 <p>and, by using the expression of the price (12) and the aggregate labor costs (11), and 
-noticing that H ≡ 
-n 
-i=1 h i , we obtain: </p>
+noticing that H ≡ </p>
+
+<p>n </p>
+
+<p>i=1 h i , we obtain: </p>
 
 <p>π t ≡ 
 P t 
 P t−1 
 = </p>
 
-<p>t−1 
-− (1 − α) 
+<p>t−1 </p>
+
+<p>− (1 − α) 
 H 
 H t−1 </p>
 
 <p>= </p>
 
-<p>n 
-i=1 w i,t h i,t−1 
-t−1 
-+ </p>
-
 <p>n </p>
 
+<p>i=1 w i,t h i,t−1 </p>
 
+<p>t−1 </p>
+
+<p>+ </p>
+
+<p>n </p>
 
 <p>i=1 </p>
 
 <p>h i,t 
 H t−1 </p>
 
-<p>
-w i,t−1 
+<p>w i,t−1 
 W t−1 
 + α − 1 </p>
 
+<p>⇒ π t = π(π </p>
 
-
-<p>⇒ π t = π(π e </p>
-
-<p>t+1 
+<p>e 
+t+1 
 + </p>
 
-<p>, Y S </p>
+<p>, Y </p>
 
-<p>t 
+<p>S 
+t 
 + </p>
 
 <p>) 
@@ -809,8 +844,7 @@ this paper. </p>
 
 <p>The structural parameters that underlie the microfoundations of the economy have 
 been set according to standard values in the NK literature (see, notably, Woodford 
-2003). As for the consumption bounds (d and ¯ 
-d), the adjustment rate of the firm , 
+2003). As for the consumption bounds (d andd), the adjustment rate of the firm , 
 the number of households n and the length of the simulations T , we set their value by 
 relying on results of intensive sensitivity analyses performed on the model to allow </p>
 
@@ -819,9 +853,9 @@ relying on results of intensive sensitivity analyses performed on the model to a
 <p>I. Salle et al. </p>
 
 <p>for a first screening of the parameter space. 21 This screening has been performed by 
-following the validation procedure proposed by  (2008) that consists in a suc-
+following the validation procedure proposed by Klügl (2008) that consists in a suc-
 cessive sub-sampling of parameter values and systemic analyses of the plausibility of 
-emergent dynamics vis-` a-vis the specific research question at hand. 22 This procedure 
+emergent dynamics vis-à-vis the specific research question at hand. 22 This procedure 
 results in a so-called minimal model, i.e., a model that incorporates the minimum set 
 of assumptions and parameters to design consistent mechanisms regarding a specific 
 research question. In particular, we checked whether the choice of specific parame-
@@ -832,8 +866,11 @@ omy as a whole. 23 During this step, we specifically observe that i) the size of
 macroeconomic variables is plausible, ii) aggregate welfare is increasing and stabi-
 lizes, indicating that learning is efficient, iii) explosive dynamics of real variables are 
 ruled out. Accordingly, we use n = 500 households and T = 800 periods. We further 
-set σ ξ ≡ σ w 
-40 , meaning that the variance of the noise ξ is related to the variance of the 
+set σ ξ ≡ </p>
+
+<p>σ w </p>
+
+<p>40 , meaning that the variance of the noise ξ is related to the variance of the 
 proxy for supply shocks σ w (where 40 is a scaling parameter). It is a rather intuitive 
 modelling device: the more unstable the economy (i.e., the bigger the shocks affect-
 ing the inflation rate are), the further from the objective the inflation rate is likely to 
@@ -861,8 +898,7 @@ rience) is simulated 30 times, in order to account for the non-deterministic nat
 main author, see Salle (2012). 
 22 To the best of our knowledge, it has been only applied to ABMs in economics in Oeffner (2008) and 
 Salle (2012). 
-23 For this reason, we rule out parameter values such that &gt; 0.05, ¯ 
-d &gt; 2 and d &lt; 0.2. Other values of 
+23 For this reason, we rule out parameter values such that &gt; 0.05,d &gt; 2 and d &lt; 0.2. Other values of 
 this parameter have been found to have little, if any, influence on aggregate emergent dynamics. 
 24 See, for example, Goupy and Creighton (2007) for an introduction. This method is widely used in 
 computer simulations in areas such as industry, chemistry, computer science, biology, etc. </p>
@@ -877,9 +913,15 @@ to 5% of the variance of the loss values are displayed </p>
 vide a relevant comparison of the outcomes and dynamics of the model over those 
 two regimes. 
 As for the outcomes, we summarize the CB's performances with a usual loss 
-function (see, for example, Svensson 1999): 
-L(π, u) = (π − π T ) 2 + u 2 
-(20) </p>
+function (see, for example, Svensson 1999): </p>
+
+<p>L(π, u) = (π − π 
+T ) 
+2 + u </p>
+
+<p>2 </p>
+
+<p>(20) </p>
 
 <p>where the inflation rate π t and the unemployment rate u t are measured for each run 
 as the average over the whole simulation, with a 100 period burn-in phase. </p>
@@ -1028,15 +1070,8 @@ interest rate, and hence the stabilization of inflation, as coefficients γ d
 i,t directly mea-
 sure the reactivity of individual consumption decisions to the level of the real interest 
 rate (see Eq. 5). In turn, this configuration backs the anchoring process of the infla-
-tion expectations to the target. As for the indexation coefficients </p>
-
-<p>
-γ w </p>
-
-<p>i,t </p>
-
-<p>
-, they stabilise 
+tion expectations to the target. As for the indexation coefficients γ w 
+i,t , they stabilise 
 at a level less than one, which rules out emergent self-reinforcing price-wage infla-
 tion spirals. Therefore, the expectation channel reinforces the stabilising effects of 
 the inflation expectations anchoring on the inflation process itself. 
@@ -1137,14 +1172,11 @@ P mut
 1.5 
 0.02 </p>
 
-<p>
-α 
+<p>α 
 μ 
 w i n d o w 
 σ W 
-σ ξ 
-¯ 
-d 
+σ ξd 
 d </p>
 
 <p>0.01 
@@ -1385,9 +1417,10 @@ around the target: </p>
 
 <p>1 
 i f E(π) = π T 
-1 − E(π)−π T </p>
+1 − </p>
 
-<p>ρ </p>
+<p>E(π)−π T 
+ρ </p>
 
 <p>if π T − ρ ≤ E(π) ≤ π T + ρ 
 0 
@@ -1479,7 +1512,7 @@ strong one with σ w = 0.4. 30 When unchanged, the other parameters are kept at 
 baseline values, reported in Table 1. We measure the CB's performance with a loss 
 function as given in Eq. 20. The entire methodology we use to map the loss func-
 tion values to the monetary policy parameters in our non-linear ABM is detailed in 
-Appendix B, and is based on Roustant et al. (2010) and Salle and Yıldızo˘ glu (2014). </p>
+Appendix B, and is based on Roustant et al. (2010) and Salle and Yıldızoglu (2014). </p>
 
 <p>4.1 Transparency, variability and optimal monetary policy rule </p>
 
@@ -1814,7 +1847,7 @@ erate rule. However, when shocks and parameters are correlated, as it is the cas
 in our model, the Brainard principle does not hold. Other contributions call for an 
 aggressive rule under other cases of "Brainardian" uncertainty, for example when 
 the CB cannot accurately estimate how inflation responds to inflation expectations 
-(see  2002). Moreover, when radical uncertainty surrounds the economic 
+(see Söderström 2002). Moreover, when radical uncertainty surrounds the economic 
 model and is tackled through the tools of robust control theory, optimal monetary pol-
 icy rules are hawkish ones (Giannoni 2007), especially when the CB cannot identify 
 which parameters are uncertain (Tetlow and von zur Muehlen 2001). We also con-
@@ -1993,8 +2026,8 @@ fully transparent inflation targeting regime under volatile economic environment
 
 <p>Acknowledgments We are grateful to Jouko Vilmunen for interesting comments and fruitful discussions 
 throughout the redaction of this paper, as well as to Camille Cornand and Prof. Jean-Christophe Poutineau 
-for helpful advices, and to Prof. Paul De Grauwe, Prof. Cars Hommes, Prof. Jean-Christophe  reau and 
-Prof. Thomas  for interesting comments on an earlier draft of this paper. We also thank participants 
+for helpful advices, and to Prof. Paul De Grauwe, Prof. Cars Hommes, Prof. Jean-Christophe Pé reau and 
+Prof. Thomas Vallée for interesting comments on an earlier draft of this paper. We also thank participants 
 of the 2012 SMYE in ZEW, Mannheim, Germany, of the 2012 AFSE conference in Paris, of the 2013 
 CEF conference in Vancouver, Canada, of the 1st Bordeaux Workshop on Macro ABM co-organized by 
 the Bank of Finland for interesting remarks and of a seminar at the University of Surrey on February, 
@@ -2013,7 +2046,7 @@ and the source, provide a link to the Creative Commons license, and indicate if 
 
 <p>Each configuration is repeated 30 times as the model is not deterministic. We use 
 a design of experiments (DoE, hereafter) to cover the space of parameters -see, 
-notably, Salle and Yıldızo˘ glu (2014) for a pedagogical statement. Large sampling </p>
+notably, Salle and Yıldızoglu (2014) for a pedagogical statement. Large sampling </p>
 
 <p>I. Salle et al. </p>
 
@@ -2604,9 +2637,11 @@ denoted by {L(x 1 ), ..., L(x 17 )}: 35 </p>
 <p>L(x) = μ(x) + Z(x) 
 (22) </p>
 
-<p>where μ : x ∈ D → μ(x) ≡ 
-l 
-j =1 β j f j (x) ∈ R, l &gt; 0, f j are fixed functions and 
+<p>where μ : x ∈ D → μ(x) ≡ </p>
+
+<p>l </p>
+
+<p>j =1 β j f j (x) ∈ R, l &gt; 0, f j are fixed functions and 
 β j are unknown coefficients to be estimated, and Z is a stochastic process with zero 
 mean and covariance C : (u, v) ∈ D 2 → C(u, v) ∈ R. 
 Kriging has the following properties: it is an exact interpolator (i.e. L(x) = L(x)), 
@@ -2614,21 +2649,21 @@ it is global (i.e. L is defined over the whole domain D) and it is spatial: inde
 contrary to LS fitting, in order to determine L at a point x ∈ D, kriging models put 
 more weight on observations of L at points x in the neighborhood of x. That is why 
 kriging needs a DoE with good space-filling properties to give accurate estimations. 
-We use the  v = 5 
-2 covariance function, which is the default one in 
-<rs id="software-12" type="software">DiceKriging</rs>-package of <rs corresp="#software-12" type="creator">R Development Core Team</rs> (<rs corresp="#software-12" type="version-date">2009</rs>): </p>
+We use the Matérn v = </p>
 
-<p>C(x i , x j ) = σ 2 </p>
+<p>5 </p>
 
-<p>L </p>
+<p>2 covariance function, which is the default one in 
+<rs id="software-10" type="software">DiceKriging</rs>-package of <rs corresp="#software-10" type="creator">R Development Core Team</rs> (<rs corresp="#software-10" type="version-date">2009</rs>): </p>
+
+<p>C(x i , x j ) = σ </p>
+
+<p>2 
+L </p>
 
 <p>k </p>
 
-
-
 <p>g=1 </p>
-
-
 
 <p>1 + </p>
 
@@ -2641,19 +2676,11 @@ We use the  v = 5
 
 <p>g </p>
 
-
-
-<p>exp </p>
-
-
-
-<p>− </p>
+<p>exp − </p>
 
 <p>√ 
 5|x i − x j | 
 θ g </p>
-
-
 
 <p>(23) 
 with k = 2 as we have two factors φ π and φ u . It is a continuous Gaussian process that 
@@ -2673,7 +2700,8 @@ which is a single trend (called ordinary kriging), a first order polynomial: </p
 (II) </p>
 
 <p>34 This kind of models originally comes from geostatistics (see Matheron 1963). See Sacks et al. (1989) for 
-a complete treatment. We use packages <rs type="software">DiceKriging</rs>, <rs type="software">DiceEval</rs> and <rs id="software-7" type="software">DiceOptim</rs> of <rs corresp="#software-7" type="creator">R Development Core Team</rs> (<rs corresp="#software-7" type="version-date">2009</rs>) to perform all kriging estimations (see Roustant et al. 2010). 
+a complete treatment. We use packages DiceKriging, DiceEval and DiceOptim of R Development 
+Core Team (2009) to perform all kriging estimations (see Roustant et al. 2010). 
 35 We have n = 17 observation points of L over D (see DoE Table 6, Appendix A). As the model is 
 stochastic, we repeat each 30 times. The kriging estimation has then to be performed in averaging L values 
 over the 30 repetitions (van Beers and Kleijnen 2004). This results in n = 17 observations of L over D. 
@@ -2692,14 +2720,18 @@ L , θ φπ and θ φu . </p>
 
 <p>π </p>
 
-<p>φ 2 
-π + β φ 2 </p>
+<p>φ </p>
+
+<p>2 </p>
+
+<p>π + β φ 2 </p>
 
 <p>u </p>
 
-<p>φ 2 </p>
+<p>φ </p>
 
-<p>u </p>
+<p>2 
+u </p>
 
 <p>(IV) </p>
 
@@ -2714,8 +2746,9 @@ As soon as we have a satisfying metamodel L, we determine the pair (φ  *
 π , φ  *  
 u ) 
 that minimizes the estimated value of loss L, denoted by L  *  . This is done through 
-the packages rgenoud (R-GENetic Optimization Using Derivatives, see Mebane 
-and Sekhon 2011) and <rs id="software-11" type="software">DiceOptim</rs> (see Roustant et al. 2010) provided by <rs corresp="#software-11" type="creator">R Development Core Team</rs> (2009). This is a quite powerful optimization function 
+the packages <rs type="software">rgenoud</rs> (R-GENetic Optimization Using Derivatives, see Mebane 
+and Sekhon 2011) and DiceOptim (see Roustant et al. 2010) provided by R 
+Development Core Team (2009). This is a quite powerful optimization function 
 that efficiently combines evolutionary algorithm methods for global purpose with a 
 derivative-based (quasi-Newton) method for local search of optima. </p>
 
@@ -2741,9 +2774,8 @@ derivative-based (quasi-Newton) method for local search of optima. </p>
 
 <p>L </p>
 
-<p>{σ w , σ d } = {0.05, 0.05} </p>
-
-<p>IT, ζ = 0.1% 
+<p>{σ w , σ d } = {0.05, 0.05} 
+IT, ζ = 0.1% 
 RMSE: 0.0458 (I) -0.0497 (II) -0.0471 (III) -0.0491 (IV) 
 0.0696 
 0.174 0.881 0.0022 
@@ -2758,9 +2790,8 @@ non-IT, ζ = 1%
 RMSE: 0.0185 (I) -0.0197 (II) -0.0196 (III) -0.0195 (IV) 
 0.0385 
 0.0402 0.000 0.0006 
-{σ w , σ d } = {0.05, 0.25} </p>
-
-<p>IT, ζ = 0.1% 
+{σ w , σ d } = {0.05, 0.25} 
+IT, ζ = 0.1% 
 RMSE: 0.0502 (I) -0.043 (II) -0.0366 (III) -0.0428 (IV) 
 0.0288 0.0279 0.1329 0.0019 
 0.001 0.000 0.0011 
@@ -3027,6 +3058,14 @@ RMSE: 0.036 (I) -0.0303 (II) -0.03 (III) -0.024 (IV) </p>
 0.071 
 0.003 
 0.0000 </p>
+
+
+
+<p>I. Salle et al. </p>
+
+
+
+<p>How transparent about its inflation target... </p>
 
 
 

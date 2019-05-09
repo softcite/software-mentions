@@ -215,7 +215,7 @@ task(trainer, dependsOn: 'classes', type: JavaExec, group: 'training') {
 //    jvmArgs '-Xms2g', '-Xmx8g'
 }
 
-// Run like: ./gradlew train_software -PgH=/path/grobid/home
+// Run like: ./gradlew train_software -PgH=/path/grobid/home 
 task(train_software, dependsOn: 'classes', type: JavaExec, group: 'training') {
     main = 'org.grobid.trainer.SoftwareTrainer'
     classpath = sourceSets.main.runtimeClasspath
@@ -235,7 +235,7 @@ task(eval_software, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
 task(eval_software_split, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
     main = 'org.grobid.trainer.SoftwareTrainerRunner'
     classpath = sourceSets.main.runtimeClasspath
-    args '2', 'software', getArg('gH', '../grobid-home'), getArg('s', 0.9), getArg('t', '1')
+    args '2', 'software', getArg('gH', '../grobid-home'), getArg('s', 0.9), getArg('t', '0')
     jvmArgs '-Xms2g', '-Xmx8g'
 }
 

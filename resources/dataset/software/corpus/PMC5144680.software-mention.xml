@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC5144680" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T20:00+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC5144680" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:06+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>Abstract </p>
 
@@ -21,52 +21,81 @@ delineation of their function in embryogenesis and other biological processes. <
 
 <p>Now that the genomes of many organisms have been sequenced, 
 their comprehensive annotation is required to fully understand the 
-functional elements that are encoded therein. 1-3 Although the focus 
-of much of this annotation is of longer open reading frames (ORFs), 
+functional elements that are encoded therein. 
+1-3 Although the focus </p>
+
+<p>of much of this annotation is of longer open reading frames (ORFs), 
 there is growing appreciation that the much less studied small ORFs 
 (sORFs), historically defined as &lt;100 amino acids (aa) in length, 
 may prove to be as widely significant in many biological processes as 
-the larger class. 4-16 For example, the tarsal-less (tal) gene in 
-Drosophila, which was previously thought to be a long non-coding 
+the larger class. 
+4-16 For example, the tarsal-less (tal) gene in </p>
+
+<p>Drosophila, which was previously thought to be a long non-coding 
 RNA (lncRNA), has been found to contain four conserved sORFs 
 encoding three 11-aa and one 32-aa peptides, that are required for 
-embryonic tracheal development and leg morphogenesis. 5,13,17 
-Similarly, a conserved 56-aa peptide encoded by the Toddler gene in 
+embryonic tracheal development and leg morphogenesis. </p>
+
+<p>5,13,17 </p>
+
+<p>Similarly, a conserved 56-aa peptide encoded by the Toddler gene in 
 zebrafish has been found to function as a mitogen to promote cell mi-
-gration during gastrulation. 18 
-However, what has primarily hindered our appreciation of the ex-
+gration during gastrulation. </p>
+
+<p>18 </p>
+
+<p>However, what has primarily hindered our appreciation of the ex-
 tent to which the sORFs are biologically significant is, in fact, their 
 reliable identification, the necessary first step before any detailed 
-functional characterization. 19,20 In general, strictly bioinformatic 
-approaches require a large number of experimentally validated 
+functional characterization. 
+19,20 In general, strictly bioinformatic </p>
+
+<p>approaches require a large number of experimentally validated 
 ORFs to serve as a training set to enable subsequent de novo predic-
 tion, but there are presently not a sufficient number of identified 
 sORFs for this purpose. Alternatively, ORFs can be identified based 
 on conservation alone, but for that, reliable prediction generally re-
-quires sequences that encode peptides that are longer than 100-aa. 21-
-26 Direct identification of translated peptides in the cell by proteomic </p>
+quires sequences that encode peptides that are longer than 100-aa. </p>
+
+<p>21-</p>
+
+<p>26 Direct identification of translated peptides in the cell by proteomic </p>
 
 <p>methods is also often highly effective, however these methods are 
-well known to be inefficient at detecting proteins of small size. 10,27,28 
-Thus, it is highly likely that many sORFs have been misclassified as 
+well known to be inefficient at detecting proteins of small size. </p>
+
+<p>10,27,28 </p>
+
+<p>Thus, it is highly likely that many sORFs have been misclassified as 
 lncRNAs or missed entirely from present annotation. 
 Several attempts have been made to identify sORFs on a genome-
 wide scale in model organisms such as Drosophila using more tar-
-geted bioinformatics approaches. 29-32 Yet, while this work suggests 
-that there may be thousands of sORFs translated in these organisms, 
+geted bioinformatics approaches. 
+29-32 Yet, while this work suggests </p>
+
+<p>that there may be thousands of sORFs translated in these organisms, 
 there is presently a lack of experimental translational verification for 
 the majority of the predictions. Perhaps the most successful experi-
 mental method to identify sORFs so far has been deep sequencing of 
-ribosome-associated RNA. 10,31-33 However, recent work has sug-
-gested that ribosome occupancy alone is insufficient to unequivocally 
-conclude that a potential sORF is indeed translated. 34,35 Instead, 
-combining deep sequencing of ribosome-associated RNAs with bio-
+ribosome-associated RNA. 
+10,31-33 However, recent work has sug-</p>
+
+<p>gested that ribosome occupancy alone is insufficient to unequivocally 
+conclude that a potential sORF is indeed translated. 
+34,35 Instead, </p>
+
+<p>combining deep sequencing of ribosome-associated RNAs with bio-
 informatics analysis has emerged as a powerful approach to identify 
-translated sORFs, genome-wide. 34-37 
-Of the few well characterized sORFs, a surprisingly large fraction, 
+translated sORFs, genome-wide. </p>
+
+<p>34-37 </p>
+
+<p>Of the few well characterized sORFs, a surprisingly large fraction, 
 like tal and Toddler mentioned above, has been found to play vital 
-roles during development. 14,16-18,38,39 We thus speculated that there 
-might be a large number of presently unannotated sORFs that per-
+roles during development. 
+14,16-18,38,39 We thus speculated that there </p>
+
+<p>might be a large number of presently unannotated sORFs that per-
 form critical functions during development, and that identifying the 
 complete repertoire of translated sORFs during embryogenesis 
 would prove both a useful strategy to identify a large set of sORFs to 
@@ -76,8 +105,11 @@ Thus, to this end, we have performed ultra-deep sequencing of
 ribosome-associated poly-adenylated RNAs together with conserva-
 tion analyses to identify conserved translated sORFs during the first 
 4 hours of embryogenesis in Drosophila, the period during which 
-control shifts from maternal-to zygotic-encoded transcripts. 40 
-Overall, we have identified 399 sORFs that are translated during 
+control shifts from maternal-to zygotic-encoded transcripts. </p>
+
+<p>40 </p>
+
+<p>Overall, we have identified 399 sORFs that are translated during 
 early embryogenesis, which substantially increases the number of </p>
 
 <p>verified sORFs in Drosophila. Of these, 128 were previously pre-
@@ -103,8 +135,10 @@ biological processes in general. </p>
 <p>Early (0-4 h) Canton S embryos were collected from egg laying 
 dishes. The embryos were then dechorionated by treatment with 
 50% bleach for 3-5 min and washed thoroughly with phosphate 
-buffer solution (PBS buffer, pH7.4). 41 The embryos were then trans-
-ferred into Eppendorf tubes. </p>
+buffer solution (PBS buffer, pH7.4). 
+41 The embryos were then trans-</p>
+
+<p>ferred into Eppendorf tubes. </p>
 
 <p>2.2. Ribosome material preparation </p>
 
@@ -115,14 +149,18 @@ let pestle in 100 ml of a mild ribosome lysis buffer (20 mM Tris-HCl,
 pH 7.4, 140 mM KCl, 5 mM MgCl 2 , 0.5 mM DTT, 1% Triton X-
 100, 100 mg/ml cycloheximide, 0.5 U/ml RNasin) and incubated for 
 10 min on ice. The nuclei and whole cells were removed by centrifu-
-gation at 16,000 Â g for 10 min at 4 C, and the lipid and other mem-
-branes were filtered out from the supernatant using a 100 mm sieve 
+gation at 16,000 Â g for 10 min at 4 
+C, and the lipid and other mem-</p>
+
+<p>branes were filtered out from the supernatant using a 100 mm sieve 
 mesh. Finally, the cytosolic supernatant was loaded onto 20-50% 
 continuous sucrose density gradients with the lysis buffer (20 mM 
 Tris-HCl, pH 7.4, 140 mM KCl, 5 mM MgCl 2 , 0.5 mM DTT), fol-
 lowed by ultracentrifugation at 35,000 rpm for 2.5 h in a SW41 ro-
-tor at 4 C (OptimaL-100 XP 2100 Ultracentrifuge, Beckman). 
-Absorbance in each layer of the sucrose density gradient was mea-
+tor at 4 
+C (OptimaL-100 XP 2100 Ultracentrifuge, Beckman). </p>
+
+<p>Absorbance in each layer of the sucrose density gradient was mea-
 sured at an optical density of 254 nm using the Piston Gradient 
 Fractionater (BioComp). The RNA components and the amount of 
 ribosomes were determined based on distinct peaks in the polysome 
@@ -171,8 +209,10 @@ ples were sequenced as the ribosome-associated RNA above. </p>
 
 <p>The ribosome-associated RNA, total RNA, and cytosolic RNA deep 
 sequencing reads were each separately aligned using the TopHat 
-v2.0.9 package. 42 We used a built-in strategy of TopHat for a higher 
-mapping rate. Raw data were first mapped to the Drosophila mela-
+v2.0.9 package. 
+42 We used a built-in strategy of TopHat for a higher </p>
+
+<p>mapping rate. Raw data were first mapped to the Drosophila mela-
 nogaster transcriptome (FlyBase r5.57 release) using the '-G' parame-
 ter with other parameters set as default. The read pairs that were not 
 completely mapped were then aligned to the D. melanogaster ge-
@@ -180,8 +220,10 @@ nome (dm3) for a second run. Only the uniquely aligned and concor-
 dant read pairs were used for further analysis. We used <rs id="software-4" type="software">Cufflinks</rs> 
 <rs corresp="#software-4" type="version-number">v2.2.1</rs> with parameters set as default except using '-G' parameter to 
 assemble transcripts in the ribosome RNA, total RNA, and cytosolic 
-RNA separately, 43 and merged the three assembled gtf files and 
-Flybase r5.57 annotation into a comprehensive transcriptome anno-
+RNA separately, 
+43 and merged the three assembled gtf files and </p>
+
+<p>Flybase r5.57 annotation into a comprehensive transcriptome anno-
 tation, from which all further analysis was based. The raw read 
 counts were normalized by the FPKM (fragments per kilobase of 
 exon model per million mapped fragments) for each transcript based 
@@ -190,8 +232,10 @@ using the Cufflinks v2.2.1 package with parameters set as default. </p>
 
 <p>2.6. Estimation of detectable level of transcription </p>
 
-<p>A machine learning algorithm described by  ld et al. 44 was 
-first used to determine an optimal FPKM cutoff by comparing the ex-
+<p>A machine learning algorithm described by Ramskö ld et al. 
+44 was </p>
+
+<p>first used to determine an optimal FPKM cutoff by comparing the ex-
 pression levels of all annotated genes with that of randomly selected 
 intergenic regions. The intergenic regions were at least 5 kb away 
 from any annotated genes of FlyBase and the length distribution of 
@@ -202,8 +246,10 @@ To increase the confidence of the expression, we further required
 that the read counts be &gt;20 reads. This value was determined based 
 on an analysis of the annotated genes in our data of length between 
 0.2 and 0.6 kb, assuming that background reads for a gene would 
-follow a geometric distribution. 45 Small RNAs (shorter than 200 nt) 
-were excluded because these were not efficiently captured and would 
+follow a geometric distribution. 
+45 Small RNAs (shorter than 200 nt) </p>
+
+<p>were excluded because these were not efficiently captured and would 
 be more likely resulting in assembly artifacts. For translation detec-
 tion, we also required that the transcripts exhibit an expression level 
 of ! 0.15 FPKM and ! 20 reads in our ribosome-associated RNA 
@@ -224,7 +270,9 @@ sORFs </p>
 as either: (i) the peptide fragment corresponding to the sORF was 
 present in the most-recent proteomic screen (FlyBase r5.57 release); 
 or (ii) the sORF was identified as a translated sORF in a previous ri-
-bosome profiling study in Drosophila S2 cells. 46 </p>
+bosome profiling study in Drosophila S2 cells. </p>
+
+<p>46 </p>
 
 <p>2.9. Analysis of translated potential by PhyloCSF </p>
 
@@ -244,7 +292,9 @@ which was intended to find all ORFs longer than 10-aa in frame. To
 avoid any influence of annotated ORFs, we excluded the ORFs 
 which overlapped with annotated ORFs in the same or opposite 
 strand. The multi-alignment file of 12 flies species were downloaded 
-from the <rs type="software">Galaxy</rs> cloud tool. 47-49 </p>
+from the <rs type="software">Galaxy</rs> cloud tool. </p>
+
+<p>47-49 </p>
 
 <p>2.10. Identification of embryo specific sORFs </p>
 
@@ -260,10 +310,14 @@ sORFs </p>
 <p>We calculated the arginine frequency by counting the number of ar-
 ginines within all sORFs in each set. For the random control, we de-
 termined the expected frequencies of arginine based on that encoded 
-from a random distribution of nucleotides. 50 For this calculation we 
-used, as observed frequencies of the four DNA bases in nature, as 
+from a random distribution of nucleotides. 
+50 For this calculation we </p>
+
+<p>used, as observed frequencies of the four DNA bases in nature, as 
 0.22 of uracil, 0.303 of adenine, 0.217 of cytosine, and 0.261 of 
-guanine. 50 </p>
+guanine. </p>
+
+<p>50 </p>
 
 <p>2.12. eGFP-tagged sORF construction </p>
 
@@ -317,22 +371,30 @@ of ribosome-associated RNAs </p>
 <p>To globally identify translated sORFs in the 0-4 h Drosophila em-
 bryos, we performed ultra-deep sequencing of ribosome-associated 
 poly-adenylated RNAs isolated using density gradient velocity sedi-
-mentation (see Materials and methods) (Fig. 1A). 41 Our ribosome 
-profile revealed the presence of ribosomal subunits (40S and 60S) as 
+mentation (see Materials and methods) (Fig. 1A). 
+41 Our ribosome </p>
+
+<p>profile revealed the presence of ribosomal subunits (40S and 60S) as 
 well as monosomes (80S) and polysomes (Fig. 1B). To verify the 
 identity of this ribosome material, prior to the sucrose gradient sepa-
 ration, we treated the embryo extract with 50 mM EDTA, which is 
 known to dissociate intact ribosomes into their constituent subu-
-nits. 51,52 As expected, this treatment completely eliminated the peaks 
-of the intact ribosomes in the profile, while the peaks associated with 
+nits. 
+51,52 As expected, this treatment completely eliminated the peaks </p>
+
+<p>of the intact ribosomes in the profile, while the peaks associated with 
 the 40S and 60S subunits increased significantly (Fig. 1C). For our 
 analysis, we collected not only polysomes as is typical with this ap-
 proach but also monosomes as well, with which some short 
-transcripts are only associated. 53,54 Further, we purified only 
-the poly-adenylated RNAs from this ribosome material, since non-
+transcripts are only associated. 
+53,54 Further, we purified only </p>
+
+<p>the poly-adenylated RNAs from this ribosome material, since non-
 poly-adenylated RNAs, a large proportion of the transcriptome, do 
-not likely contain translated ORFs. 55 The ribosome-associated poly-
-adenylated RNAs were converted into cDNA libraries for strand-
+not likely contain translated ORFs. 
+55 The ribosome-associated poly-</p>
+
+<p>adenylated RNAs were converted into cDNA libraries for strand-
 specific, paired-end 100 base-pair (bp) sequencing with HiSeq 2000. 
 Overall, we obtained a total of 71.2 million (M) aligned reads, of 
 which 68.9 M (96.8%) were uniquely mapped to the Drosophila ge-
@@ -348,8 +410,10 @@ scripts (see 'Materials and methods' section). In total, 213.9 M
 paired-end aligned reads were obtained in the combined dataset, of 
 which 91.7% were uniquely aligned to Dm3, nearly 10-fold higher 
 in depth than previously obtained transcriptomic datasets of this 
-stage. 46,56,57 Following a procedure detailed in the Materials and 
-methods, we finally identified 20,614 unique transcripts from 9,582 
+stage. 
+46,56,57 Following a procedure detailed in the Materials and </p>
+
+<p>methods, we finally identified 20,614 unique transcripts from 9,582 
 loci with high confidence in the 0-4 h Drosophila embryo 
 (Supplementary Table S1). Comparing this with the latest release of 
 the Drosophila transcriptome (FlyBase r5.57), we found that 18,613 
@@ -364,8 +428,10 @@ bined dataset, we found that 17,166 from 8,803 loci are ribosome-
 associated (Supplementary Table S1). We directly compared the 
 FPKM values for each transcript in the ribosome RNA data with the 
 corresponding average intensities measured in a previous microarray 
-study of 0-2 h embryos, 41 and found a high degree of correlation 
-(Spearman correlation coefficient 0.76). These ribosome-associated 
+study of 0-2 h embryos, 
+41 and found a high degree of correlation </p>
+
+<p>(Spearman correlation coefficient 0.76). These ribosome-associated 
 transcripts thus represent a large fraction of the Drosophila tran-
 scriptome (83.3%). We classified these transcripts into three catego-
 ries based on the annotation in FlyBase: protein-coding transcripts 
@@ -383,8 +449,10 @@ evidence for annotated sORFs </p>
 spond to 11,092 different ORFs, including 332 sORFs 
 (Supplementary Table S2). Of the latter, inspection of FlyBase re-
 vealed that there was prior evidence of translation for only 204 an-
-notated sORFs (Fig. 2A). 46 Thus, our data provides the first 
-necessary translational evidence for 128 annotated sORFs, substan-
+notated sORFs (Fig. 2A). 
+46 Thus, our data provides the first </p>
+
+<p>necessary translational evidence for 128 annotated sORFs, substan-
 tially increasing the number of sORFs in Drosophila with evidence 
 of translation. We note that the well-studied functional sORFs in 
 Drosophila, tal and scl, were highly enriched in our ribosome-
@@ -392,8 +460,10 @@ associated fraction (Fig. 2B), lending further confidence in the quality
 of our data. 
 Much of this previous translational evidence for the annotated 
 sORFs was obtained from Drosophila S2 cells, which are derived 
-from late stage embryos (20-24 h). 46,58 Of the 332 sORFs in our 
-data, 148 are not translated in the S2 cell line. Though cultured cells 
+from late stage embryos (20-24 h). 
+46,58 Of the 332 sORFs in our </p>
+
+<p>data, 148 are not translated in the S2 cell line. Though cultured cells 
 can exhibit phenotypes different from the original cells from which 
 they are derived, these results indicate that a substantial fraction of 
 the sORFs might be translated specifically during defined develop-
@@ -402,7 +472,8 @@ terization of the ribosome-associated RNAs at the other stages of
 development might uncover evidence for the translation of other 
 sORFs. </p>
 
-
+<p> 
+Ultra-deep sequencing of ribosome-associated poly-adenylated RNA </p>
 
 <p>One advantage of our experimental approach is that we obtain 
 the identity of the full-length of the ribosome-associated transcripts, 
@@ -414,31 +485,46 @@ genes with variant isoforms not previously described. This is, in fact,
 the first detection of variant isoforms of translated sORFs. For exam-
 ple, with the gene CG40228, we found five isoforms with (in total) 3 
 different sORFs, including a variant isoform not previously charac-
-terized with a unique 5 0 untranslated region (UTR) that is 19 bp up-
-stream of all other isoforms. Variant isoforms in longer ORFs are 
+terized with a unique 5 
+0 untranslated region (UTR) that is 19 bp up-</p>
+
+<p>stream of all other isoforms. Variant isoforms in longer ORFs are 
 usually associated with their highly regulated, differential transla-
-tion, 59,60 and so this observation of variant sORF isoforms suggests 
-that the translational processing of the sORFs may be as complex as 
+tion, 
+59,60 and so this observation of variant sORF isoforms suggests </p>
+
+<p>that the translational processing of the sORFs may be as complex as 
 that governing their longer counterpart. Ribosome profiling might 
 prove useful in this regard, since a recent study employing this 
 method thoroughly characterized stop codon readthrough in many 
-genes in early Drosophila embryos. 61 </p>
+genes in early Drosophila embryos. </p>
+
+<p>61 </p>
 
 <p>3.3. Ribosome-associated RNA sequencing identifies 
 translated sORFs among the lncRNAs </p>
 
 <p>Transcripts that do not encode peptides and lack a 100-aa ORF are 
-usually classified as lncRNAs. 62,63 Although a number of these 
-transcripts have been found to indeed function in a non-coding </p>
+usually classified as lncRNAs. 
+62,63 Although a number of these </p>
 
-<p>capacity, 64-67 it remains to be determined whether at least some of 
-these transcripts are misclassified and actually encode sORFs. 20,68 In 
-this regard, it is interesting that we have found 349 lncRNA tran-
+<p>transcripts have been found to indeed function in a non-coding </p>
+
+<p>capacity, 
+64-67 it remains to be determined whether at least some of </p>
+
+<p>these transcripts are misclassified and actually encode sORFs. 
+20,68 In </p>
+
+<p>this regard, it is interesting that we have found 349 lncRNA tran-
 scripts associated with 264 genes that are associated to ribosomes, 
 which corresponds to 76.9% of the expressed lncRNAs in these early 
 embryos (Fig. 2C), an amount that is consistent with previous find-
-ings in different species. 69 
-We reasoned that if these lncRNAs actually encode for peptides, 
+ings in different species. </p>
+
+<p>69 </p>
+
+<p>We reasoned that if these lncRNAs actually encode for peptides, 
 then they may be associated to ribosomes to a similar extent as estab-
 lished protein-coding genes. We thus evaluated the degree to which 
 these lncRNAs and the protein-coding genes are associated with ri-
@@ -452,8 +538,10 @@ ferent from that of the protein-coding genes (Wilcoxon test, P-value
 deed associated to ribosomes to a similar extent as bona fide protein-
 coding transcripts. 
 Although it is likely that many of these transcripts are indeed non-
-coding, 70-72 we reasoned that at least some of these transcripts may 
-encode sORFs and thus examined these transcripts with a bioinfor-
+coding, 
+70-72 we reasoned that at least some of these transcripts may </p>
+
+<p>encode sORFs and thus examined these transcripts with a bioinfor-
 matics approach for potential sORFs. In particular, we first identified 
 ORFs with an ATG start codon and an in-frame stop codon, using 
 the longest ORF for each stop codon. We then discarded those ORFs </p>
@@ -472,24 +560,33 @@ tated ORFs in the same or opposite strand. In this way, we identified
 ORFs in 347 out of the 349 ribosome-associated lncRNAs (Fig. 3C). 
 As a stricter criterion, we examined the conservation at the amino-
 acid level of these putative sORFs using PhyloCSF, which has been 
-demonstrated to be a highly effective method to identify sORFs. 69,70 
-Using annotated sORFs and lincRNAs to establish rigorous thresh-
+demonstrated to be a highly effective method to identify sORFs. </p>
+
+<p>69,70 </p>
+
+<p>Using annotated sORFs and lincRNAs to establish rigorous thresh-
 old values in this approach (see 'Materials and methods' section), we 
 identified 28 ORFs located in 21 ribosome-associated lncRNA genes 
 as conserved translated ORFs. Of these, 22 are sORFs 
 (Supplementary Table S2), including 3 that are poly-cistronic like tal 
-and scl. 5,16,17 We note that among these 22 novel sORFs, 64% are 
-not found in the late-stage Drosophila S2 cell line, and thus may be 
+and scl. 
+5,16,17 We note that among these 22 novel sORFs, 64% are </p>
+
+<p>not found in the late-stage Drosophila S2 cell line, and thus may be 
 specific for early embryos. The finding of a fair number of ribosome-
 associated lncRNAs that lack coding potential is intriguing and re-
 mains to be resolved. Based on the current understanding, one might 
 speculate that they may play roles in RNA localization, RNA non-
 sense mediated decay, translational regulation, or they may produce 
-non-canonical proteins that are quickly degraded. 71-73 Alternatively, 
-these lncRNAs may encode proteins with non-AUG start </p>
+non-canonical proteins that are quickly degraded. 
+71-73 Alternatively, </p>
 
-<p>codons. 74,75 . However, one should also not exclude the possibility 
-that a further analysis would yield functions that are not yet known. </p>
+<p>these lncRNAs may encode proteins with non-AUG start </p>
+
+<p>codons. 
+74,75 . However, one should also not exclude the possibility </p>
+
+<p>that a further analysis would yield functions that are not yet known. </p>
 
 <p>3.4. Ribosome-associated RNA sequencing identifies 
 translated sORFs in novel transcripts </p>
@@ -524,10 +621,14 @@ sORFs </p>
 
 <p>As a low frequency of arginine occurrence is a common feature of 
 proteins, and has been used as an indicator of the translational ca-
-pacity of potential ORFs, 46 we compared the arginine usage of our 
-identified translated ORFs with that expected from the aa frequen-
-cies associated with randomly distributed nucleotides. 50 We indeed 
-found that, like the annotated sORFs, the novel translated ORFs in 
+pacity of potential ORFs, 
+46 we compared the arginine usage of our </p>
+
+<p>identified translated ORFs with that expected from the aa frequen-
+cies associated with randomly distributed nucleotides. 
+50 We indeed </p>
+
+<p>found that, like the annotated sORFs, the novel translated ORFs in 
 both the previously identified lncRNAs and in the novel transcripts 
 exhibit a much lower usage of arginine than this random distribu-
 tion, consistent with the notion that these are indeed translatable 
@@ -539,8 +640,11 @@ annotated sORFs without evidence for translation, 4 sORFs in </p>
 <p>lncRNAs, and 4 sORFs in novel transcripts, to be translated in 
 Drosophila S2Rþ cells (Supplementary Table S3). We generated 
 eGFP-fusion vectors that contained all of the translation-related ele-
-ments of the sORF, including the 5 0 UTR and 3 0 UTR, together with 
-the enhanced green fluorescent protein (eGFP) coding sequence 
+ments of the sORF, including the 5 
+0 UTR and 3 
+0 UTR, together with </p>
+
+<p>the enhanced green fluorescent protein (eGFP) coding sequence 
 (CDS) in-frame following the sORF (Fig. 4B). Thus, translation of 
 this eGFP-tagged sORF would produce an eGFP-fusion protein, for 
 which we examined using Western blotting and fluorescence micros-
@@ -582,8 +686,10 @@ ological process. The 399 sORFs identified here significantly
 expands the population of known sORFs in this model organism, 
 which we anticipate will aid in future bioinformatics approaches for 
 de novo predictions of sORFs both in Drosophila, as well as in much 
-less well studied organisms, such as humans. 10,76 Determining if their 
-translation is indeed as complex as the longer ORFs, or if they form 
+less well studied organisms, such as humans. 
+10,76 Determining if their </p>
+
+<p>translation is indeed as complex as the longer ORFs, or if they form 
 and evolve by mechanisms distinct from their longer counterparts, or 
 indeed if their spectrums of biological functions are as diverse as the 
 longer ORFs will be fascinating to now resolve. </p>

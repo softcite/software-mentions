@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1007%2Fs10258-013-0091-1" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T20:07+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1007%2Fs10258-013-0091-1" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:14+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>Abstract This paper investigates changes in the dynamics of linkages between 
 selected national stock markets during the period 1995-2009. The analysis focuses 
@@ -70,7 +70,7 @@ sure the linkages was correlation (e.g., Hamao et al. 1990; Karolyi and Stulz 19
 Next, multivariate GARCH models were used to describe the time-varying condi-
 tional correlations of global equity returns (see e.g. Capiello et al. 2006). There also 
 exist papers using cointegration as a tool to examine the long-run equilibrium rela-
-tionships between national capital markets (Bachman et al. 1996;  et al. 2003). 
+tionships between national capital markets (Bachman et al. 1996; Gérard et al. 2003). 
 Another useful tool applied recently to describe inter-market dependencies are cop-
 ulas (Jondeau and Rockinger 2006; Bartram et al. 2007; Rodriguez 2007; Chen and 
 Poon 2007; Okimoto 2008; Chollete et al. 2009; Markwat et al. 2009). 
@@ -144,7 +144,9 @@ H (x, y) = C(F (x), G(y)).
 
 <p>If F and G are continuous then the function C is uniquely given by the formula </p>
 
-<p>C(u, v) = H (F −1 (u), G −1 (v)), 
+<p>C(u, v) = H (F 
+−1 (u), G 
+−1 (v)), 
 (2) </p>
 
 <p>for u, v ∈ [0, 1], where F −1 (u) = inf{x : F (x) ≥ u}. In this case, C is called the 
@@ -158,18 +160,28 @@ independence of marginal distributions.
 In the empirical part of this paper we will also use the Gaussian and Joe-Clayton 
 copulas. They are defined as follows: </p>
 
-<p>C Gauss </p>
+<p>C </p>
 
-<p>ρ </p>
+<p>Gauss 
+ρ </p>
 
-<p>(u, v) = ρ (( −1 (u), −1 (v)), 
+<p>(u, v) = ρ ( 
+−1 (u), 
+−1 (v)), 
 (3) </p>
 
-<p>C J oe−Clayton </p>
+<p>C </p>
 
-<p>κ,γ </p>
+<p>J oe−Clayton 
+κ,γ </p>
 
-<p>(u, v) = 1−(1−([1−(1−u) κ ] −γ +[1−(1−v) κ ] −γ −1) −1/γ ) 1/κ (4) </p>
+<p>(u, v) = 1−(1−([1−(1−u) 
+κ ] 
+−γ +[1−(1−v) 
+κ ] 
+−γ −1) 
+−1/γ ) 
+1/κ (4) </p>
 
 <p>Here in (3), ρ denotes the distribution of a 2-dimensional standardized normal 
 vector with the linear correlation coefficient ρ, and stands for the standard normal </p>
@@ -186,11 +198,7 @@ Clayton copula C </p>
 γ </p>
 
 <p>. In the limit case γ = 0, the Clayton copula approaches the 
-independence copula C </p>
-
-
-
-<p>(Nelsen 2006). 
+independence copula C (Nelsen 2006). 
 The density associated to an absolutely continuous copula C is a function c 
 defined by </p>
 
@@ -224,8 +232,6 @@ particular, it is given by the formula </p>
 
 <p>ρ S (X, Y ) = ρ C = 12 </p>
 
-
-
 <p>[0,1] 2 </p>
 
 <p>C(u, v)dudv − 3 
@@ -241,21 +247,31 @@ C 2 : C = αC 1 + (1 − α)C 2 , 0 ≤ α ≤ 1, then </p>
 
 <p>ρ </p>
 
-<p>, Spearman's rho equals 6 
-π arcsin 1 
-2 ρ, and for the 
+<p>, Spearman's rho equals </p>
+
+<p>6 </p>
+
+<p>π arcsin </p>
+
+<p>1 </p>
+
+<p>2 ρ, and for the 
 Joe-Clayton copula it can be computed numerically using (8). 
 A very important concept connected with copula, relevant to dependence in 
 extreme values, is tail dependence. If X and Y are random variables with distribution 
 functions F and G then the coefficient of upper tail dependence is defined as follows </p>
 
-<p>λ U = lim q→1 − P (Y &gt; G −1 (q)|X &gt; F −1 (q)), 
+<p>λ U = lim q→1 − P (Y &gt; G 
+−1 (q)|X &gt; F 
+−1 (q)), 
 (10) </p>
 
 <p>provided a limit λ U ∈ [0, 1] exists. Analogously, the coefficient of lower tail 
 dependence is defined as </p>
 
-<p>λ L = lim q→0 + P (Y ≤ G −1 (q)|X ≤ F −1 (q)), 
+<p>λ L = lim q→0 + P (Y ≤ G 
+−1 (q)|X ≤ F 
+−1 (q)), 
 (11) </p>
 
 <p>provided that a limit λ L ∈ [0, 1] exists. If λ U ∈ (0, 1] (λ L ∈ (0, 1]), then X and 
@@ -274,15 +290,13 @@ q
 , 
 (12) </p>
 
-<p>λ U = lim q→0 + 
-ˆ 
-C(q, q) 
+<p>λ U = lim q→0 +Ĉ 
+(q, q) 
 q 
 , 
 (13) </p>
 
-<p> 
-C(u, v) = u + v − 1 + C(1 − u, 1 − v). For the Gaussian copula it holds 
+<p>whereĈ(u, v) = u + v − 1 + C(1 − u, 1 − v). For the Gaussian copula it holds 
 λ U = λ L = 0 (see Embrechts et al. 2002), meaning asymptotic independence in the 
 tails. In the Joe-Clayton copula, λ U = 2 − 2 1/κ and λ L = 2 −1/γ for γ &gt; 0 (Patton 
 2006). Thus both upper and lower dependence can be nonzero, and, moreover, they 
@@ -305,8 +319,11 @@ distributions. Further, we assume that </p>
 <p>r t = µ t + y t , µ t = E(r t | t −1 ), 
 (16) </p>
 
-<p>y i,t = σ i,t ε i,t , σ 2 
-i,t = var(r i,t | t −1 ), 
+<p>y i,t = σ i,t ε i,t , σ </p>
+
+<p>2 </p>
+
+<p>i,t = var(r i,t | t −1 ), 
 (17) </p>
 
 <p>ε i,t ∼ iid Skew t (0, 1, ξ i , η i ), 
@@ -352,8 +369,6 @@ P (S t = j | t −1 ), j = 1, 2. They are calculated by means of Hamilton's filt
 
 <p>2 </p>
 
-
-
 <p>i=1 </p>
 
 <p>p ij P (S t −1 = i| t −1 ), 
@@ -363,8 +378,6 @@ P (S t = j | t −1 ), j = 1, 2. They are calculated by means of Hamilton's filt
 c j (u t |S t = j, t −1 )P (S t = j | t −1 ) </p>
 
 <p>2 </p>
-
-
 
 <p>i=1 </p>
 
@@ -387,8 +400,6 @@ tional marginal distributions in regime j. By the arguments of Hamilton (1994) a
 
 <p>T </p>
 
-
-
 <p>t =1 </p>
 
 <p>ln </p>
@@ -398,8 +409,6 @@ tional marginal distributions in regime j. By the arguments of Hamilton (1994) a
 <p>⎝ </p>
 
 <p>2 </p>
-
-
 
 <p>j =1 </p>
 
@@ -413,26 +422,15 @@ tional marginal distributions in regime j. By the arguments of Hamilton (1994) a
 
 <p>T </p>
 
-
-
 <p>t =1 </p>
 
-<p>ln </p>
-
-<p>f t (r 1,t | t −1 ; θ 1 ) 
-+ </p>
+<p>ln f t (r 1,t | t −1 ; θ 1 ) + </p>
 
 <p>T </p>
 
-
-
 <p>t =1 </p>
 
-<p>ln </p>
-
-<p>g t (r 2,t | t −1 ; θ 2 ) </p>
-
-<p>, 
+<p>ln g t (r 2,t | t −1 ; θ 2 ) , 
 (24) </p>
 
 <p>where f t and g t are the density functions corresponding to F t and G t , fitted using 
@@ -442,17 +440,28 @@ ARMA-GARCH models. </p>
 
 <p>The Model Confidence Set (MCS) methodology was originally introduced by Hansen 
 et al. (2003) in order to improve choosing the best volatility forecasting models from 
-a larger set. The objective of this approach is to determine the set M  *  that consists 
-of the best models from some collection M 0 . Given a significance level α, the MCS 
-procedure produces a subsetˆM  </p>
+a larger set. The objective of this approach is to determine the set M 
+ *  that consists 
+of the best models from some collection M 
+0 . Given a significance level α, the MCS </p>
+
+<p>procedure produces a subsetM </p>
 
 <p> *  </p>
 
-<p>1−α of M 0 that contains M  *  with confidence level 
-1 − α. Thus the MCS resembles a confidence interval for a parameter. In fact, M 0 
-can be a finite set of objects indexed by i = 1, . . . , m 0 and evaluated in terms of a 
+<p>1−α of M 
+0 that contains M 
+ *  with confidence level </p>
+
+<p>1 − α. Thus the MCS resembles a confidence interval for a parameter. In fact, M </p>
+
+<p>0 </p>
+
+<p>can be a finite set of objects indexed by i = 1, . . . , m 0 and evaluated in terms of a 
 loss function that assigns to the object i in period t the loss L i,t , t = 1, . . . , n. When 
-one defines the relative performance variables as d ij,t ≡ L i,t − L j,t for i, j ∈ M 0 </p>
+one defines the relative performance variables as d ij,t ≡ L i,t − L j,t for i, j ∈ M </p>
+
+<p>0 </p>
 
 
 
@@ -461,28 +470,29 @@ one defines the relative performance variables as d ij,t ≡ L i,t − L j,t for
 <p>and assumes that the mean μ ij ≡ E(d ij,t ) is finite and does not depend on t, then the 
 set of superior objects is defined by </p>
 
-<p>M  *  ≡ </p>
-
-<p>i ∈ M 0 : μ ij ≤ 0 for all j ∈ M 0 </p>
-
-<p>
-. 
+<p>M 
+ *  ≡ i ∈ M 
+0 : μ ij ≤ 0 for all j ∈ M 
+0 . 
 (25) </p>
 
-<p>In order to determine M  *  , one tests the hypotheses of the form </p>
+<p>In order to determine M 
+ *  , one tests the hypotheses of the form </p>
 
 <p>H 0,M : μ ij = 0 for all i, j ∈ M, </p>
 
-<p>where M ⊂ M 0 . The alternative hypothesis, μ ij = 0 for some i, j ∈ M, is 
+<p>where M ⊂ M 
+0 . The alternative hypothesis, μ ij = 0 for some i, j ∈ M, is 
 denoted by H A,M . The MCS procedure is based on an equivalence test δ M that tests 
-the hypothesis H 0,M for any M ⊂ M 0 , and an elimination rule e M that identifies 
+the hypothesis H 0,M for any M ⊂ M 
+0 , and an elimination rule e M that identifies 
 the object of M that is to be removed from M when H 0,M is rejected. The MCS 
 algorithm proposed by Hansen et al. (2003) is as follows: </p>
 
-<p>Step 0: Set M = M 0 . 
+<p>Step 0: Set M = M 
+0 . 
 Step 1: Test H 0,M using δ M at significance level α. 
-Step 2: If H 0,M is not rejected define, ˆ 
-M </p>
+Step 2: If H 0,M is not rejected define,M </p>
 
 <p> *  </p>
 
@@ -492,52 +502,35 @@ eliminate an object from M and repeat the procedure from Step 1. </p>
 <p>It is proved in Hansen et al. (2011) that under some standard requirements for the 
 equivalence test and the elimination rule, it holds that </p>
 
-<p>lim inf n→∞ P </p>
-
-<p>
-M  *  ⊂ ˆ 
-M </p>
+<p>lim inf n→∞ P M 
+ *  ⊂M </p>
 
 <p> *  </p>
 
-<p>1−α </p>
-
-<p>
-≥ 1 − α, 
+<p>1−α ≥ 1 − α, 
 (26) </p>
 
-<p>lim n→∞ P </p>
-
-<p>
-i ∈ ˆ 
-M </p>
+<p>lim n→∞ P i ∈M </p>
 
 <p> *  </p>
 
-<p>1−α </p>
-
-<p>
-= 0 for all i / 
-∈ M  *  , 
+<p>1−α = 0 for all i / 
+∈ M 
+ *  , 
 (27) </p>
 
-<p>lim n→∞ P </p>
-
-<p>
-M  *  = ˆ 
-M </p>
+<p>lim n→∞ P M 
+ *  =M </p>
 
 <p> *  </p>
 
-<p>1−α </p>
-
-<p>
-= 1 if M  *  is a singleton. 
+<p>1−α = 1 if M 
+ *  is a singleton. 
 (28) </p>
 
 <p>If P H 0 ,M i denotes the p-value associated with the null hypothesis H 0,M i (with con-
 vention that P H 0 ,M m 0 = 1) then the MCS p-value for model e M j ∈ M 0 is defined 
-asˆp  e M j ≡ max i≤j P H 0 ,M i . 
+asp e M j ≡ max i≤j P H 0 ,M i . 
 It is shown in Hansen et al. (2011) that H 0,M can be tested using traditional 
 quadratic-form statistics or multiple t-statistics. The latter approach has an advan-
 tage that it simplifies the construction of an elimination rule that satisfies the notion 
@@ -553,17 +546,16 @@ because we apply it in this paper. It is defined as </p>
 
 <p>where </p>
 
-<p>t ij = 
-¯ 
-d ijˆvar 
-  
-¯ 
-d ij 
-for i, j ∈ M, 
+<p>t ij =d </p>
+
+<p>ij </p>
+
+<p>v ar d ij </p>
+
+<p>for i, j ∈ M, 
 (30) </p>
 
-<p>and ¯ 
-d ij = n −1 n 
+<p>andd ij = n −1 n 
 t =1 d ij,t . The asymptotic distribution of the statistic T R,M is 
 nonstandard but it can be estimated with bootstrap methods. The bootstrap imple-
 mentation of the MCS procedure involving this statistic is described in Appendix B 
@@ -576,53 +568,44 @@ in the paper by Hansen et al. (2003). For generating B resamples the block boots
 <p>is used. The estimated bootstrap distribution of T R,M , under the null hypothesis, is 
 given by the empirical distribution of </p>
 
-<p>T  *  
-b,R = max </p>
+<p>T </p>
+
+<p> *  </p>
+
+<p>b,R = max </p>
 
 <p>i,j ∈M </p>
 
+<p>d  *  
+b,ij −d ij </p>
 
+<p>v ar d ij </p>
 
-<p>¯ 
-d  *  
-b,ij − ¯ 
-d ijˆvar </p>
-
-
-
-<p>
-  
-¯ 
-d ij 
-, 
+<p>, 
 (31) </p>
 
-<p>where ¯ 
-d  *  
-b,ij = 1 </p>
+<p>whered  *  
+b,ij = </p>
+
+<p>1 
+n </p>
 
 <p>n </p>
 
-<p>n 
-t =1 d ij,τ b t is the bootstrap resample average, andˆvar  
-¯ 
-d ij 
-= </p>
+<p>t =1 d ij,τ b t is the bootstrap resample average, andv ar d ij = </p>
 
 <p>1 
 B </p>
 
-<p>B </p>
+<p>B 
+b=1 </p>
 
-<p>b=1 </p>
+<p>d  *  
+b,ij −d ij </p>
 
-<p>¯ 
-d  *  
-b,ij − ¯ 
-d ij </p>
+<p>2 </p>
 
-<p>2 
-. The p-value of H 0,M is given by </p>
+<p>. The p-value of H 0,M is given by </p>
 
 <p>P H 0,M = 
 1 
@@ -630,17 +613,13 @@ B </p>
 
 <p>B </p>
 
-
-
 <p>b=1 </p>
 
-<p>1 </p>
+<p>1 T </p>
 
-<p>T  *  
-b,R &gt; T R,M </p>
+<p> *  </p>
 
-<p>
-. 
+<p>b,R &gt; T R,M . 
 (32) </p>
 
 <p>It should be mentioned here that even though the MCS methodology was origi-
@@ -807,11 +786,7 @@ C </p>
 <p>J oe−Clayton 
 κ,γ </p>
 
-<p>, or C </p>
-
-
-
-<p>and C Gauss </p>
+<p>, or C and C Gauss </p>
 
 <p>ρ </p>
 
@@ -831,10 +806,8 @@ follows from (8) that the ρ t is Spearman's rho for the mixture of copulas gove
 
 
 
-<p>Table 2 
-Linkages with the S&amp;P 500: parameter estimates for the MSC models for the period 1995-2002 </p>
-
-<p>S&amp;P500 and </p>
+<p>Table 2 Linkages with the S&amp;P 500: parameter estimates for the MSC models for the period 1995-2002 
+S&amp;P500 and </p>
 
 <p>FTSE </p>
 
@@ -949,8 +922,6 @@ Linkages with the S&amp;P 500: parameter estimates for the MSC models for the pe
 <p>-</p>
 
 <p>C </p>
-
-
 
 <p>C Gauss </p>
 
@@ -1224,10 +1195,8 @@ Linkages with the S&amp;P 500: parameter estimates for the MSC models for the pe
 
 <p>M. Doman, R. Doman </p>
 
-<p>Table 3 
-Linkages with the S&amp;P 500: parameter estimates for the MSC models for the period 2002-2009 </p>
-
-<p>S&amp;P500 and </p>
+<p>Table 3 Linkages with the S&amp;P 500: parameter estimates for the MSC models for the period 2002-2009 
+S&amp;P500 and </p>
 
 <p>FTSE </p>
 
@@ -1451,8 +1420,6 @@ Linkages with the S&amp;P 500: parameter estimates for the MSC models for the pe
 κ,γ </p>
 
 <p>C </p>
-
-
 
 <p>C </p>
 
@@ -1710,11 +1677,8 @@ C Gauss </p>
 
 <p>ρ </p>
 
-<p>C </p>
-
-
-
-<p>C Gauss </p>
+<p>C 
+C Gauss </p>
 
 <p>ρ </p>
 
@@ -1768,8 +1732,6 @@ C </p>
 κ,γ </p>
 
 <p>C </p>
-
-
 
 <p>in regime 2 </p>
 
@@ -1835,7 +1797,7 @@ GJR-GARCH) with a skewed Student t distribution for the innovations ε i,t . The
 ted models are sometimes fractionally integrated models but this is rather a result of 
 possible structural breaks in the data than long memory effects (Beine and Laurent 
 2001). 
-The standardized residualsˆε  i,t from the fitted models were routinely examined 
+The standardized residualsε i,t from the fitted models were routinely examined 
 for the presence of desirable distributional and serial properties. Next, they were 
 transformed by means of the corresponding distribution functions into the series of 
 the form (23). The parameters of the MSC models were estimated by the maximum 
@@ -3790,10 +3752,87 @@ K OSPI </p>
 9 
 11 </p>
 
-<p>1997 </p>
+<p>1997 
+4.5 
+3.5 
+4.5 
+12.5 
+4.5 
+8.5 </p>
 
-<p>
-2007 
+<p>1998 
+11 
+10.5 
+14 
+3.5 
+1 
+.5 </p>
+
+<p>1999 
+9 
+3.5 
+4.5 
+10 
+9 
+3.5 </p>
+
+<p>2000 
+13 
+12 
+12 
+3.5 
+4.5 
+3.5 </p>
+
+<p>2001 
+4.5 
+3.5 
+4.5 
+3.5 
+11 
+3.5 </p>
+
+<p>2002 
+15 
+14 
+4.5 
+3.5 
+10 
+3.5 </p>
+
+<p>2003 
+4.5 
+15 
+4.5 
+8 
+1 
+3 </p>
+
+<p>2004 
+14 
+3.5 
+10 
+14 
+4.5 
+14 </p>
+
+<p>2005 
+4.5 
+13 
+4.5 
+3.5 
+1 
+5 </p>
+
+<p>2006 
+4.5 
+8 
+4.5 
+3.5 
+15 
+11.5 </p>
+
+<p>2007 
 4.5 
 9 
 11 
@@ -3909,7 +3948,7 @@ K OSPI </p>
 11 
 4.5 </p>
 
-<p>110 </p>
+
 
 <p>M. Doman, R. Doman </p>
 

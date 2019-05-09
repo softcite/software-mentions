@@ -1,5 +1,29 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4135079" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T19:59+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4135079" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:06+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
+<p>Abstract </p>
+
+<p>Introduction-Unwanted drug interactions with ionic currents in the heart can lead to an 
+increased proarrhythmic risk to patients in the clinic. It is therefore a priority for safety 
+pharmacology teams to detect block of cardiac ion channels, and new technologies have enabled 
+the development of automated and high-throughput screening assays using cell lines. As a result of 
+screening multiple ion-channels there is a need to integrate information, particularly for 
+compounds affecting more than one current, and mathematical electrophysiology in-silico action 
+potential models are beginning to be used for this. </p>
+
+<p>Methods-We quantified the variability associated with concentration-effect curves fitted to 
+recordings from high-throughput Molecular Devices IonWorks® Quattro™ screens when 
+detecting block of I Kr (hERG), I Na (NaV1.5), I CaL (CaV1.2), I Ks (KCNQ1/minK) and I to (Kv4.3/ 
+KChIP2.2), and the Molecular Devices FLIPR® Tetra fluorescence screen for I CaL (CaV1.2), for 
+control compounds used at AstraZeneca and GlaxoSmithKline. We examined how screening 
+variability propagates through in-silico action potential models for whole cell electrical behaviour, 
+and how confidence intervals on model predictions can be estimated with repeated simulations. </p>
+
+<p>Results-There are significant levels of variability associated with high-throughput ion channel 
+electrophysiology screens. This variability is of a similar magnitude for different cardiac ion 
+currents and different compounds. Uncertainty in the Hill coefficients of reported concentration-
+effect curves is particularly high. Depending on a compound's ion channel blocking profile, the 
+uncertainty introduced into whole-cell predictions can become significant. </p>
+
 <p>Discussion-Our technique allows confidence intervals to be placed on computational model 
 predictions that are based on high-throughput ion channel screens. This allows us to suggest when 
 repeated screens should be performed to reduce uncertainty in a compound's action to acceptable 
@@ -209,10 +233,10 @@ that the logistic distribution is a good descriptor of pIC 50 variability in thi
 true for all of the different HTS control assays (please see Supplementary material S2 for 
 more detail). </p>
 
-<p>Elkins et al. </p>
+<p>Elkins et al. 
+Page 5 </p>
 
-<p>
-J Pharmacol Toxicol Methods. Author manuscript; available in PMC 2014 August 18. </p>
+<p>J Pharmacol Toxicol Methods. Author manuscript; available in PMC 2014 August 18. </p>
 
 <p>Europe PMC Funders Author Manuscripts </p>
 
@@ -234,8 +258,8 @@ related by α = e μ and β = 1/σ. For the equations of the distributions pleas
 
 <p>We perform a similar characterisation of the variability in Hill coefficients, that were fitted 
 to concentration-effect curves at the same time as pIC 50 values. In this case all Hill 
-coefficients appeared to follow a log-logistic distribution, as IC 50 values do (Hill ~ 
-LogLogistic(α, β)). In Fig. 1 we present a histogram of the Hill coefficients that correspond </p>
+coefficients appeared to follow a log-logistic distribution, as IC 50 values do (Hill L 
+ogLogistic(α, β)). In Fig. 1 we present a histogram of the Hill coefficients that correspond </p>
 
 <p>to the same assay as the pIC 50 values shown in Fig. 1. </p>
 
@@ -397,10 +421,10 @@ modern desktop PC (the time varies depending on the action-potential model used)
 moving the calculations to parallel evaluation on larger computing resources is trivial. </p>
 
 <p>For the interested reader we have made the following resources available: the full control 
-datasets to which distributions were fitted, with the corresponding MatLab script; the 
+datasets to which distributions were fitted, with the corresponding <rs type="software">MatLab</rs> script; the 
 Bayesian sampling code; the action potential modelling software; and the scripts for 
 generating the figures presented in this article. These can be downloaded as a 'bolt-on 
-project' for the open-source cardiac simulation software <rs id="software-3" type="software">Chaste</rs> (written to work with <rs corresp="#software-3" type="version-number">v3.1</rs>) 
+project' for the open-source cardiac simulation software <rs id="software-4" type="software">Chaste</rs> (written to work with <rs corresp="#software-4" type="version-number">v3.1</rs>) 
 from http://www.cs.ox.ac.uk/chaste/download. </p>
 
 <p>A brief description of the computational techniques follows. We used a machine readable 
@@ -447,7 +471,7 @@ reasonable for these assays. A possible exception to this is the NaV1.5 IonWorks
 <p>
 J Pharmacol Toxicol Methods. Author manuscript; available in PMC 2014 August 18. </p>
 
-<p>Europe PMC Funders Author Manuscripts </p>
+
 
 <p>Europe PMC Funders Author Manuscripts </p>
 
@@ -863,8 +887,7 @@ Page 22 </p>
 
 <p>Europe PMC Funders Author Manuscripts </p>
 
-<p>Elkins et al. 
-Page 23 </p>
+
 
 <p>Table 1 </p>
 
@@ -1009,10 +1032,9 @@ AZ
 
 <p>Europe PMC Funders Author Manuscripts </p>
 
-<p>Elkins et al. </p>
 
-<p>
-Table 2 </p>
+
+<p>Table 2 </p>
 
 <p>Results of a screen for a number of compounds with varying ion-channel blocking profiles. These screens 
 were performed once for each ion channel at AZ. Where 50% block was not achieved, we have performed a 

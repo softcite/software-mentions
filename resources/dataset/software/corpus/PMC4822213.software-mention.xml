@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4822213" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T20:01+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4822213" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:08+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>a b s t r a c t </p>
 
@@ -140,7 +140,7 @@ As a no-PreAmp control, stock cDNA was used to quantify gene tar-
 gets directly by standard qPCR using SsoAdvanced Universal SYBR 
 Green Supermix. qPCR conditions were: 98 • C for 2 min; 40 cycles 
 of (98 • C, 5 s; 60 • C, 30 s); melt curve analysis, 65-98 • C, 0.5 • C incre-
-ments, 5 s hold. <rs id="software-0" type="software">CFX Manager</rs> <rs corresp="#software-0" type="version-number">version 3.1</rs> was used for qPCR analysis 
+ments, 5 s hold. <rs id="software-1" type="software">CFX Manager</rs> <rs corresp="#software-1" type="version-number">version 3.1</rs> was used for qPCR analysis 
 (Bio-Rad Laboratories, Hercules, CA). A synthetic DNA interplate 
 calibrator was used to set the Cq baseline. </p>
 
@@ -168,15 +168,16 @@ value. Fold-change bias was calculated as the difference between
 the observed Cq and the theoretical Cq for each ERCC target. The 
 theoretical Cq is 0, 0.585, 1.0 and 2.0 for the 1:1, 1:1.5, 1:2 and 
 4:1 sub-pools, respectively. Variation in fold-change measurement 
-error was calculated using the equivalence test from <rs id="software-1" type="software">JMP</rs> statisti-
-cal software <rs corresp="#software-1" type="version-number">version 12.1.0</rs> (<rs corresp="#software-1" type="creator">SAS</rs>, Cary, NC), the practical difference 
+error was calculated using the equivalence test from <rs id="software-2" type="software">JMP</rs> statisti-
+cal software <rs corresp="#software-2" type="version-number">version 12.1.0</rs> (<rs corresp="#software-2" type="creator">SAS</rs>, Cary, NC), the practical difference 
 threshold was specified as the standard deviation of the no PreAmp 
 fold change measurement error. </p>
 
 <p>2.3. Limits-of-detection of fold-change measurement </p>
 
 <p>Fold-change bias 95% confidence intervals were determined 
-using Microsoft Excel 2010 for the Cq values illustrated in 
+using Microsoft Excel 2010 for the 
+Cq values illustrated in 
 Fig. 1B and rounded-up to the closest 0.5Cq. We analyzed three 
 different ranges of target abundance, average no PreAmp Cq value 
 less than 30, between 30 and 32.5, and greater than 32.5. The limit 
@@ -241,7 +242,9 @@ defined difference of each ERCC RNA spiked into the two samples
 similar when comparing the no PreAmp, 88-plex PreAmp and 
 355-plex PreAmp results. In Fig. 1D we show the measurement 
 error in fold-change results; no measurement error would have 
-a Cq value of 0, a Cq value of 1 indicates a measurement 
+a 
+Cq value of 0, a 
+Cq value of 1 indicates a measurement 
 error of 100%. We observe that measurement error increases as 
 the amount of ERCC target RNA decreases. This finding is expected 
 and is consistent with stochastic partitioning of a small number 
@@ -357,14 +360,29 @@ Average fold change measurement error (percent)
 12% 
 49% 
 Statistical equivalence with no PreAmp. p-value (upper threshold) 
-&lt;0.0001 a 
-0.0121 a 
-0.0515 
+&lt;0.0001 </p>
+
+<p>a </p>
+
+<p>0.0121 </p>
+
+<p>a </p>
+
+<p>0.0515 
 Statistical equivalence with no PreAmp. p-value (lower threshold) 
-0.0021 a 
-0.0003 a 
-&lt;0.0001 a 
-355-plex PreAmp 
+0.0021 </p>
+
+<p>a </p>
+
+<p>0.0003 </p>
+
+<p>a </p>
+
+<p>&lt;0.0001 </p>
+
+<p>a </p>
+
+<p>355-plex PreAmp 
 Average fold change measurement error (Cq) 
 0.108 
 0.119 
@@ -374,14 +392,32 @@ Average fold change measurement error (percent)
 9% 
 30% 
 Statistical equivalence with no PreAmp. p-value (upper threshold) 
-&lt;0.0001 a 
-0.0010 a 
-0.0074 a 
-Statistical equivalence with no PreAmp. p-value (lower threshold) 
-0.0205 a 
-0.0050 a 
-0.0002 a 
-Estimated fold-change limits-of-detection 
+&lt;0.0001 </p>
+
+<p>a </p>
+
+<p>0.0010 </p>
+
+<p>a </p>
+
+<p>0.0074 </p>
+
+<p>a </p>
+
+<p>Statistical equivalence with no PreAmp. p-value (lower threshold) 
+0.0205 </p>
+
+<p>a </p>
+
+<p>0.0050 </p>
+
+<p>a </p>
+
+<p>0.0002 </p>
+
+<p>a </p>
+
+<p>Estimated fold-change limits-of-detection 
 2-fold 
 4-fold 
 8-fold </p>
@@ -570,8 +606,11 @@ Effect of PreAmp cycles on RNA detection. </p>
 ERCC mix 
 PreAmp plex 
 Slope 
-R 2 
-X-int (Cq) </p>
+R </p>
+
+<p>2 </p>
+
+<p>X-int (Cq) </p>
 
 <p>0 
 Mix 1 
@@ -752,10 +791,13 @@ that our PreAmp reagent performs well on this metric, even under
 high multiplex conditions (Fig. 5). 
 In a previous report the amplification bias of 194 genes was 
 analyzed using standard qPCR; 80% of targets were not altered by 
-more than 1.0 Cq and about 91% of targets were not altered 
-by more than 1.5 Cq [2]. Our results show less amplification 
+more than 1.0 
+Cq and about 91% of targets were not altered 
+by more than 1.5 
+Cq [2]. Our results show less amplification 
 bias when analyzing 346 genes; 91% of targets were not altered by 
-more than 1.0 Cq. This difference may reflect differences in the 
+more than 1.0 
+Cq. This difference may reflect differences in the 
 samples and/or target genes analyzed, it may also reflect differences 
 in the reagents and overall workflow used in the analysis. 
 Interestingly however, even if a target gene exhibits ampli-

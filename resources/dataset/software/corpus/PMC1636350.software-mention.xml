@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC1636350" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T20:03+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC1636350" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:10+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>ABSTRACT </p>
 
@@ -234,7 +234,8 @@ babilities among hidden states [match state(s), 'X' state,
 of residue pairs for each match state, and residue emission 
 probabilities for 'X' state and 'Y' state (22). Given a training 
 dataset, we assign a weight to each sequence. If a sequence 
-occurs N times in the dataset, its weight is 1/N 1/2 . For large 
+occurs N times in the dataset, its weight is 1/N 
+1/2 . For large 
 SCOP superfamilies, one sequence is involved in a large 
 number of pairwise alignments. Sequence weighting aims 
 to reduce the bias introduced by large superfamilies and </p>
@@ -264,7 +265,7 @@ erated by an HMM, with the last position of the two sub-
 sequences being in a certain hidden state. The formula of 
 forward probability is: </p>
 
-<p>F K ði‚jÞ ¼ P½x 1 ‚. . .‚ x i ‚y 1 ‚ . . .‚ y j ‚pði‚jÞ ¼ K 
+<p>F K ði‚jÞ ¼ P½x 1 ‚. . .‚ x i ‚y 1 ‚ . . .‚ y j ‚pði‚jÞ ¼ K 
 1 </p>
 
 <p>Here, p(i, j) is the hidden state of the last position. K is one 
@@ -276,12 +277,12 @@ given the condition that the previous position of the two
 subsequences is of a certain type of hidden state. The formula 
 of the backward probability is: </p>
 
-<p>B K ði‚jÞ ¼ P½x iþ1 ‚. . .‚ x m ‚y jþ1 ‚. . .‚ y n j pði‚ jÞ ¼ K 
+<p>B K ði‚jÞ ¼ P½x iþ1 ‚. . .‚ x m ‚y jþ1 ‚. . .‚ y n j pði‚ jÞ ¼ K 
 2 </p>
 
 <p>The following formula can be derived (22): </p>
 
-<p>P½pði‚jÞ ¼ K j x‚y ¼ F K ði‚ jÞ * B K ði‚ jÞ/Pðx‚ yÞ‚ 
+<p>P½pði‚jÞ ¼ K j x‚y ¼ F K ði‚ jÞ * B K ði‚ jÞ/Pðx‚ yÞ‚ 
 3 </p>
 
 <p>where P[p(i, j) ¼ K j x, y] is the probability of aligned residue 
@@ -299,7 +300,7 @@ X </p>
 
 <p>K m </p>
 
-<p>P½pði‚jÞ ¼ K m j x‚y 
+<p>P½pði‚jÞ ¼ K m j x‚y 
 4 </p>
 
 <p>Here, K m belongs to a set of match states. For model 
@@ -393,9 +394,9 @@ The column scores (the fraction of entirely correct columns)
 were reported in addition to Q-scores for BAliBASE3.0. 
 Wilcoxon signed-ranks tests were performed to calculate 
 statistical significance of comparisons between alignment 
-programs, which include <rs id="software-213" type="software">ProbCons</rs> (<rs corresp="#software-213" type="version-number">version 1.10</rs>) (23), 
-<rs id="software-69" type="software">MAFFT</rs> (<rs corresp="#software-69" type="version-number">version 5.667</rs>) (11) with several options, <rs id="software-152" type="software">MUSCLE</rs> 
-(<rs corresp="#software-152" type="version-number">version 3.52</rs>) (10) and <rs id="software-78" type="software">ClustalW</rs> (<rs corresp="#software-78" type="version-number">version 1.83</rs>) (7). 
+programs, which include <rs id="software-124" type="software">ProbCons</rs> (<rs corresp="#software-124" type="version-number">version 1.10</rs>) (23), 
+<rs id="software-125" type="software">MAFFT</rs> (<rs corresp="#software-125" type="version-number">version 5.667</rs>) (11) with several options, <rs id="software-126" type="software">MUSCLE</rs> 
+(<rs corresp="#software-126" type="version-number">version 3.52</rs>) (10) and <rs id="software-127" type="software">ClustalW</rs> (<rs corresp="#software-127" type="version-number">version 1.83</rs>) (7). 
 In addition to Q-score, we utilized a reference-independent 
 assessment of alignment quality from a structural modeling 
 perspective. Given a test sequence alignment of two SCOP 
@@ -423,8 +424,8 @@ scoring schemes more comparable to each other. </p>
 
 <p>Availability </p>
 
-<p>The <rs type="software">MUMMALS</rs> multiple alignment web server is at: 
-http://prodata.swmed.edu/mummals/, with the source code 
+<p>The <rs id="software-128" type="software">MUMMALS</rs> multiple alignment web server is at: 
+<rs corresp="#software-128" type="url">http://prodata.swmed.edu/mummals/</rs>/, with the source code 
 of MUMMALS available for download. </p>
 
 <p>RESULTS </p>
@@ -526,44 +527,134 @@ SCOP All
 (578) 
 (1785) </p>
 
-<p>HMM_1_1_0 a 
-0.146 
-0.322 c 
-0.568 c 
-0.851 c 
-0.516 c 
-HMM_1_1_1 a 
-0.146 
-0.328 c 
-0.573 c 
-0.855 c 
-0.520 c 
-HMM_3_1_1 a 
-0.150 c 
-0.327 c 
-0.574 c 
-0.858 c 
-0.521 c 
-HMM_1_3_1 a 
-0.152 c 
-0.334 c 
-0.585 c 
-0.858 c 
-0.526 c 
-HMM_3_3_1 a 
-0.151 c 
-0.335 c 
-0.586 c 
-0.860 c 
-0.527 c 
-HMM_1_1_0 b 
-0.123 
+<p>HMM_1_1_0 </p>
+
+<p>a </p>
+
+<p>0.146 
+0.322 </p>
+
+<p>c </p>
+
+<p>0.568 </p>
+
+<p>c </p>
+
+<p>0.851 </p>
+
+<p>c </p>
+
+<p>0.516 </p>
+
+<p>c </p>
+
+<p>HMM_1_1_1 </p>
+
+<p>a </p>
+
+<p>0.146 
+0.328 </p>
+
+<p>c </p>
+
+<p>0.573 </p>
+
+<p>c </p>
+
+<p>0.855 </p>
+
+<p>c </p>
+
+<p>0.520 </p>
+
+<p>c </p>
+
+<p>HMM_3_1_1 </p>
+
+<p>a </p>
+
+<p>0.150 </p>
+
+<p>c </p>
+
+<p>0.327 </p>
+
+<p>c </p>
+
+<p>0.574 </p>
+
+<p>c </p>
+
+<p>0.858 </p>
+
+<p>c </p>
+
+<p>0.521 </p>
+
+<p>c </p>
+
+<p>HMM_1_3_1 </p>
+
+<p>a </p>
+
+<p>0.152 </p>
+
+<p>c </p>
+
+<p>0.334 </p>
+
+<p>c </p>
+
+<p>0.585 </p>
+
+<p>c </p>
+
+<p>0.858 </p>
+
+<p>c </p>
+
+<p>0.526 </p>
+
+<p>c </p>
+
+<p>HMM_3_3_1 </p>
+
+<p>a </p>
+
+<p>0.151 </p>
+
+<p>c </p>
+
+<p>0.335 </p>
+
+<p>c </p>
+
+<p>0.586 </p>
+
+<p>c </p>
+
+<p>0.860 </p>
+
+<p>c </p>
+
+<p>0.527 </p>
+
+<p>c </p>
+
+<p>HMM_1_1_0 </p>
+
+<p>b </p>
+
+<p>0.123 
 0.295 
 0.551 
 0.843 
 0.498 
-HMM_1_1_1 b 
-0.132 
+HMM_1_1_1 </p>
+
+<p>b </p>
+
+<p>0.132 
 0.31 
 0.572 
 0.851 
@@ -717,54 +808,159 @@ Sup (425) Twi (209) Q/col (218) </p>
 
 <p>HMM_1_1_0 
 0.313 
-0.514 a 
-0.727 a 
-0.885 
-0.644 a 
-0.723 a 
-0.516 a 
-0.193 a 
-0.862/0.551 
+0.514 </p>
+
+<p>a </p>
+
+<p>0.727 </p>
+
+<p>a </p>
+
+<p>0.885 
+0.644 </p>
+
+<p>a </p>
+
+<p>0.723 </p>
+
+<p>a </p>
+
+<p>0.516 </p>
+
+<p>a </p>
+
+<p>0.193 </p>
+
+<p>a </p>
+
+<p>0.862/0.551 
 HMM_1_1_1 
 0.313 
-0.512 a 
-0.728 a 
-0.886 
-0.644 a 
-0.724 a 
-0.512 a 
-0.186 a 
-0.861/0.550 
+0.512 </p>
+
+<p>a </p>
+
+<p>0.728 </p>
+
+<p>a </p>
+
+<p>0.886 
+0.644 </p>
+
+<p>a </p>
+
+<p>0.724 </p>
+
+<p>a </p>
+
+<p>0.512 </p>
+
+<p>a </p>
+
+<p>0.186 </p>
+
+<p>a </p>
+
+<p>0.861/0.550 
 HMM_3_1_1 
-0.321 a 
-0.514 a 
-0.730 a 
-0.888 
-0.647 a 
-0.726 a 
-0.516 a 
-0.186 a 
-0.862/0.554 
+0.321 </p>
+
+<p>a </p>
+
+<p>0.514 </p>
+
+<p>a </p>
+
+<p>0.730 </p>
+
+<p>a </p>
+
+<p>0.888 
+0.647 </p>
+
+<p>a </p>
+
+<p>0.726 </p>
+
+<p>a </p>
+
+<p>0.516 </p>
+
+<p>a </p>
+
+<p>0.186 </p>
+
+<p>a </p>
+
+<p>0.862/0.554 
 HMM_1_3_1 
-0.327 a 
-0.518 a 
-0.732 a 
-0.889 a 
-0.650 a 
-0.729 a 
-0.519 a 
-0.194 a 
-0.863/0.554 
+0.327 </p>
+
+<p>a </p>
+
+<p>0.518 </p>
+
+<p>a </p>
+
+<p>0.732 </p>
+
+<p>a </p>
+
+<p>0.889 </p>
+
+<p>a </p>
+
+<p>0.650 </p>
+
+<p>a </p>
+
+<p>0.729 </p>
+
+<p>a </p>
+
+<p>0.519 </p>
+
+<p>a </p>
+
+<p>0.194 </p>
+
+<p>a </p>
+
+<p>0.863/0.554 
 HMM_3_3_1 
-0.329 a 
-0.520 a 
-0.733 a 
-0.889 a 
-0.651 a 
-0.731 a 
-0.522 a 
-0.196 a 
-0.863/0.557 
+0.329 </p>
+
+<p>a </p>
+
+<p>0.520 </p>
+
+<p>a </p>
+
+<p>0.733 </p>
+
+<p>a </p>
+
+<p>0.889 </p>
+
+<p>a </p>
+
+<p>0.651 </p>
+
+<p>a </p>
+
+<p>0.731 </p>
+
+<p>a </p>
+
+<p>0.522 </p>
+
+<p>a </p>
+
+<p>0.196 </p>
+
+<p>a </p>
+
+<p>0.863/0.557 
 ProbCons 
 0.291 
 0.486 
@@ -774,8 +970,15 @@ ProbCons
 0.716 
 0.485 
 0.166 
-0.862 c /0.556 b 
-MAFFT-fftnsi 
+0.862 </p>
+
+<p>c </p>
+
+<p>/0.556 </p>
+
+<p>b </p>
+
+<p>MAFFT-fftnsi 
 0.283 
 0.472 
 0.673 
@@ -784,8 +987,15 @@ MAFFT-fftnsi
 0.7 
 0.45 
 0.147 
-0.829 c /0.515 c 
-MAFFT-einsi 
+0.829 </p>
+
+<p>c </p>
+
+<p>/0.515 </p>
+
+<p>c </p>
+
+<p>MAFFT-einsi 
 0.293 
 0.498 
 0.71 
@@ -794,8 +1004,15 @@ MAFFT-einsi
 0.72 
 0.502 
 0.175 
-0.866 c /0.585 b 
-MAFFT-linsi 
+0.866 </p>
+
+<p>c </p>
+
+<p>/0.585 </p>
+
+<p>b </p>
+
+<p>MAFFT-linsi 
 0.301 
 0.5 
 0.707 
@@ -804,8 +1021,15 @@ MAFFT-linsi
 0.722 
 0.51 
 0.184 
-0.868 c /0.586 b 
-MAFFT-ginsi 
+0.868 </p>
+
+<p>c </p>
+
+<p>/0.586 </p>
+
+<p>b </p>
+
+<p>MAFFT-ginsi 
 0.308 
 0.497 
 0.714 
@@ -814,8 +1038,15 @@ MAFFT-ginsi
 0.715 
 0.495 
 0.176 
-0.840 c /0.526 c 
-MUSCLE 
+0.840 </p>
+
+<p>c </p>
+
+<p>/0.526 </p>
+
+<p>c </p>
+
+<p>MUSCLE 
 0.262 
 0.453 
 0.662 
@@ -824,8 +1055,15 @@ MUSCLE
 0.68 
 0.433 
 0.136 
-0.816 c /0.472 c 
-ClustalW 
+0.816 </p>
+
+<p>c </p>
+
+<p>/0.472 </p>
+
+<p>c </p>
+
+<p>ClustalW 
 0.21 
 0.357 
 0.566 
@@ -834,7 +1072,13 @@ ClustalW
 0.617 
 0.39 
 0.127 
-0.749 c /0.373 c </p>
+0.749 </p>
+
+<p>c </p>
+
+<p>/0.373 </p>
+
+<p>c </p>
 
 <p>The format of the HMM names ('HMM_solv_ss_u') is explained in Table1. Average Q-scores are shown for all the testing datasets. For the BAliBASE3.0 dataset, 
 both the Q-score ('Q', first number) and column score ('col', second number, fraction of entirely correct columns) are shown. The first four testing datasets are 
@@ -863,7 +1107,7 @@ measured by column score.
 We found that the major cause of lower average column 
 score of <rs type="software">MUMMALS</rs> is due to a few alignments that 
 MUMMALS gives considerably lower scores as compared 
-to <rs type="software">MAFFT</rs>-linsi (10 alignments with a score difference larger 
+to <rs type="software">MAFFT-linsi</rs> (10 alignments with a score difference larger 
 than 0.5). Manual inspections of these alignments revealed 
 some interesting scenarios. In some cases, the low scores of 
 <rs type="software">MUMMALS</rs> are due to wrong alignment of a few divergent 
@@ -967,8 +1211,8 @@ reference unnecessary for alignment evaluation. </p>
 
 <p>Pairwise comparisons of multiple sequence aligners </p>
 
-<p><rs type="software">MUMMALS</rs> shows improvement over <rs type="software">MAFFT</rs> and <rs type="software">Prob-
-Cons</rs> by only a few percent in terms of average alignment 
+<p><rs type="software">MUMMALS</rs> shows improvement over <rs type="software">MAFFT</rs> and Prob-
+Cons by only a few percent in terms of average alignment 
 quality scores on various testing datasets. Although this 
 improvement is statistically significant and does not depend 
 on the testing dataset (assembled by us, or by other 
@@ -981,7 +1225,7 @@ for individual domain pairs. Table 4 shows the number of
 alignments where one program performs better than another 
 program by 10% or more (measured by Q-score or </p>
 
-<p>4370 Nucleic Acids Research, 2006, Vol. 34, No. 16 </p>
+
 
 <p>normalized TM-score) for 1207 divergent SCOP40 pairs with 
 added homologs (sequence identity &lt;20%). The numbers for 
@@ -993,7 +1237,7 @@ not that different from each other. The differences between
 For example, <rs type="software">MUMMALS</rs> with HMM_3_3_1 has a large 
 Q-score increase (&gt;10%) over <rs type="software">ProbCons</rs> on 201 alignments, 
 while ProbCons is better by 10% or more on 62 alignments. 
-For <rs type="software">MUMMALS</rs> with HMM_3_3_1 and <rs type="software">MAFFT</rs>-ginsi, these 
+For <rs type="software">MUMMALS</rs> with HMM_3_3_1 and <rs type="software">MAFFT-ginsi</rs>, these 
 numbers are 199 and 117, respectively. Our comparisons thus 
 suggest that different programs can explore somewhat differ-
 ent regions in alignment space, and the program giving lower 
@@ -1086,46 +1330,118 @@ Blosum62 score </p>
 0.1178 
 0.2510 
 0.3005 
-0.2499 a 
-0.2181 
+0.2499 </p>
+
+<p>a </p>
+
+<p>0.2181 
 0.2828 
 0.0953 
 0.1687 
 HMM_1_1_1 
-0.1200 a 
-0.2519 a 
-0.3010 a 
-0.2514 a 
-0.2190 a 
-0.2838 
+0.1200 </p>
+
+<p>a </p>
+
+<p>0.2519 </p>
+
+<p>a </p>
+
+<p>0.3010 </p>
+
+<p>a </p>
+
+<p>0.2514 </p>
+
+<p>a </p>
+
+<p>0.2190 </p>
+
+<p>a </p>
+
+<p>0.2838 
 0.0955 
 0.1688 
 HMM_3_1_1 
-0.1217 a 
-0.2540 a 
-0.3034 a 
-0.2532 a 
-0.2215 a 
-0.2872 a 
-0.0938 
+0.1217 </p>
+
+<p>a </p>
+
+<p>0.2540 </p>
+
+<p>a </p>
+
+<p>0.3034 </p>
+
+<p>a </p>
+
+<p>0.2532 </p>
+
+<p>a </p>
+
+<p>0.2215 </p>
+
+<p>a </p>
+
+<p>0.2872 </p>
+
+<p>a </p>
+
+<p>0.0938 
 0.1665 
 HMM_1_3_1 
-0.1226 a 
-0.2564 a 
-0.3061 a 
-0.2557 a 
-0.2230 a 
-0.2892 a 
-0.0944 
+0.1226 </p>
+
+<p>a </p>
+
+<p>0.2564 </p>
+
+<p>a </p>
+
+<p>0.3061 </p>
+
+<p>a </p>
+
+<p>0.2557 </p>
+
+<p>a </p>
+
+<p>0.2230 </p>
+
+<p>a </p>
+
+<p>0.2892 </p>
+
+<p>a </p>
+
+<p>0.0944 
 0.1662 
 HMM_3_3_1 
-0.1231 a 
-0.2570 a 
-0.3070 a 
-0.2563 a 
-0.2240 a 
-0.2909 a 
-0.0932 
+0.1231 </p>
+
+<p>a </p>
+
+<p>0.2570 </p>
+
+<p>a </p>
+
+<p>0.3070 </p>
+
+<p>a </p>
+
+<p>0.2563 </p>
+
+<p>a </p>
+
+<p>0.2240 </p>
+
+<p>a </p>
+
+<p>0.2909 </p>
+
+<p>a </p>
+
+<p>0.0932 
 0.1651 
 ProbCons 
 0.1003 
@@ -1215,11 +1531,19 @@ structure) is most efficient in balancing alignment accuracy
 and speed. 
 For <rs type="software">MUMMALS</rs>, the rate-limiting steps are the computa-
 tion of match probabilities using forward and backward algo-
-rithms (time order is N 2 *L 2 *K 2 , N: number of sequences, 
+rithms (time order is N 
+2 *L 
+2 *K </p>
+
+<p>2 </p>
+
+<p>, N: number of sequences, 
 L: average length, K: number of hidden states), and the com-
 putation of the consistency-based scoring function, which 
 requires operations on all sequence triplets (time order is 
-N 3 *L 2 ). If probabilistic consistency measure is applied to 
+N 
+3 *L 
+2 ). If probabilistic consistency measure is applied to 
 every sequence pair, <rs type="software">MUMMALS</rs> is much slower than 
 <rs type="software">MAFFT</rs>, <rs type="software">MUSCLE</rs> and <rs type="software">ClustalW</rs> (Supplementary Table S9). 
 For example, the median CPU time of <rs type="software">MUMMALS</rs> with 
@@ -1685,6 +2009,10 @@ grant GM67165 to NVG. </p>
 
 
 
-<p>4374 Nucleic Acids Research, 2006, Vol. 34, No. 16 </p>
+<p>Nucleic Acids Research, 2006, Vol. 34, No. 16 4373 </p>
+
+
+
+
 
 </text></tei>

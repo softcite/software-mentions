@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC2650971" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T19:59+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC2650971" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:06+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p><rs type="software">R program</rs>To address the debate on the safety of generic substitution quantitatively, the author 
 compared the change in AUC in virtual patients who were simulated for several dif-
@@ -31,12 +31,15 @@ Equations (3) and (4) were used to produce the AUC for the
 i th simulated patient after taking the original (AUCOri_ij) and 
 generic (AUCGen_i) formulations of Drug X. </p>
 
-<p>AUCOri_ij=Indiv Mean AUCOri_i×(1+ε Ori_ij), ε Ori_ij~N (0, 0.1 2 ) 
+<p>AUCOri_ij=Indiv Mean AUCOri_i×(1+ε Ori_ij), ε Ori_ij~N (0, 0.1 
+2 ) 
 (3) 
 AUCGen1_i=Indiv Mean AUCGen1_i×(1+ε Gen1_i), ε Gen1_i~N (0, 
-ω Gen1 2 ) (4-1) 
+ω Gen1 
+2 ) (4-1) 
 AUCGen2_i=Indiv Mean AUCGen2_i×(1+ε Gen2_i), ε Gen2_i~N (0, 
-ω Gen2 2 ) (4-2) </p>
+ω Gen2 
+2 ) (4-2) </p>
 
 <p>Because the simulated patient was assumed to take the orig-
 inal formulation on two separate occasions, the subscript j in 
@@ -50,7 +53,9 @@ assumed to be given to the same virtual patient. The AUC-
 Gen symbols in the above equations were not given the sub-
 script j because they were separately expressed in two differ-
 ent equations, (4-1) and (4-2) by ε Gen1_i and ε Gen2_i. The ε Gen1_i 
-and ε Gen2_i had different variance (ω Gen1 2 and ω Gen2 2 , respective-
+and ε Gen2_i had different variance (ω Gen1 
+2 and ω Gen2 
+2 , respective-
 ly) defined by each scenario. The time intervals between the 
 four events of drug administrations (twice for the original and 
 twice for the generics) per patient were assumed to be long 
@@ -104,9 +109,21 @@ scription and dispensing for the equivalent number of patients. </p>
 <p>8 
 D.-S. Yim </p>
 
-<p>*Between subject variability (BSV) η i~N (0, 0.2 2 ); � Residual variability (RV), including the variability coming from within-subject and within-formulation </p>
+<p>*Between subject variability (BSV) η i~N (0, 0.2 </p>
 
-<p>differences. ε ~N (0, ω 2 ). </p>
+<p>2 </p>
+
+<p>); </p>
+
+<p>� </p>
+
+<p>Residual variability (RV), including the variability coming from within-subject and within-formulation </p>
+
+<p>differences. εN (0, ω </p>
+
+<p>2 </p>
+
+<p>). </p>
 
 <p>Scenario 
 Original </p>
@@ -136,13 +153,25 @@ D
 
 <p>Same as original: </p>
 
-<p>η i~N (0, 0.2 2 ) </p>
+<p>η i~N (0, 0.2 </p>
+
+<p>2 </p>
+
+<p>) </p>
 
 <p>Pop Mean AUC=100 </p>
 
-<p>BSV: η i~N (0, 0.2 2 ) </p>
+<p>BSV: η i~N (0, 0.2 </p>
 
-<p>RV: ε Ori_ij~N (0, 0.1 2 ) </p>
+<p>2 </p>
+
+<p>) </p>
+
+<p>RV: ε Ori_ij~N (0, 0.1 </p>
+
+<p>2 </p>
+
+<p>) </p>
 
 <p>Table 1. Summary of scenarios A to D </p>
 
@@ -386,7 +415,11 @@ assessed, well-designed prospective studies are recommend-
 ed. However, because it is not practical in clinical settings, 
 Rosenbaum et al. (16) detected 20-30% lower phenytoin 
 concentrations in generic formulation-treated patients than 
-in those treated with the original formulation (Dilantin � ) via 
+in those treated with the original formulation (Dilantin </p>
+
+<p>� </p>
+
+<p>) via 
 retrospective analysis of the therapeutic drug monitoring data. 
 Against this background, computer simulation is thought to 
 be an appropriate method to predict the changes in drug expo-</p>

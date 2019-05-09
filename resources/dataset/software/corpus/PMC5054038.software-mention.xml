@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC5054038" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T19:52+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC5054038" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T03:59+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>Studies on high-t hroughput global gene expression using microarray technology </p>
 
@@ -153,9 +153,8 @@ experimental pipeline at different points in time, and
 then are considered for normalization. However, such 
 methods have significant disadvantages. The notion 
 of a house-keeping gene is at best empiric and often 
-circumstantial (23). Dynamic determination (no a </p>
-
-<p>priori assumptions made) of the probes to be con-
+circumstantial (23). Dynamic determination (no a 
+priori assumptions made) of the probes to be con-
 sidered for normalization could be a solution to this 
 problem. Unfortunately, few methods exist for such 
 a type of inter-assay normalization (22,24 ). Those 
@@ -190,12 +189,12 @@ ized to directly proceed with inter-assay compar-</p>
 <p>ever, when carefully analyzing the phenomenon of 
 asymmetric probe variance distributions, we realized </p>
 
-<p>Vol. 4 No. 2 2006 
-91 </p>
+<p>Vol. 4 No. 2 2006 </p>
 
-<p>NeONORM for Inter-assay Normalization </p>
+<p>
+NeONORM for Inter-assay Normalization </p>
 
-<p>_ _ _ ~ ~-</p>
+<p>_ _ _~ ~-</p>
 
 <p>_ _ _ _ </p>
 
@@ -208,9 +207,8 @@ a different technology, we realized that this problem
 seems to be not limited to a particular technology or 
 biologic model (19,20). Unsatisfied with existing so-</p>
 
-<p>lutions to the normalization problem, we developed </p>
-
-<p>a novel method, namely NeONORM, for inter-assay 
+<p>lutions to the normalization problem, we developed 
+a novel method, namely NeONORM, for inter-assay 
 normalization that is insensitive to asymmetries in 
 probe variation distributions. This study summarizes 
 the development of NeONORM and its evaluation us-
@@ -323,8 +321,9 @@ introduction of weights: </p>
 <p>good results. Nevertheless, a parameter k to con-
 lim </p>
 
-<p>NeONORM error function: 
-trol the sensitivity was introduced to yield the final </p>
+<p>NeONORM error function: </p>
+
+<p>trol the sensitivity was introduced to yield the final </p>
 
 <p>k+O </p>
 
@@ -372,9 +371,8 @@ discussed here, referring in particular to Figure 3. </p>
 <p>The free parameter k , which we also refer to as </p>
 
 <p>the "sensitivity parameter", has crucial influence on 
-the shape of the total error function. For two values </p>
-
-<p>x, and xk, differences in their summation depend-
+the shape of the total error function. For two values 
+x, and xk, differences in their summation depend-
 ing on their distance are depicted in Figure 3, where </p>
 
 <p>The point pm = (x, + xk)/2 is crucial for distin-</p>
@@ -451,9 +449,8 @@ distance between the global minima of the individual error functions in units of
 <p>parameter identical to the absolute distance between the inclination points and the global minimum of each function. 
 In the upper panel, we schematize the derivatives of the individual NeONORM contributing error functions (black: 
 probe 1, blue: probe 2 ) , and their composite (red) for different values of T at constant k (shown are the first order 
-derivates in the normalization factor u). The lower panel displays the original functions. Only when T increases above </p>
-
-<p>2, the NeONORM error function acquires two distinct minima. </p>
+derivates in the normalization factor u). The lower panel displays the original functions. Only when T increases above 
+2, the NeONORM error function acquires two distinct minima. </p>
 
 <p> 
 Geno. Prot. Bioinfo. Vol. 4 No. 2 2006 </p>
@@ -481,12 +478,7 @@ in both cases. </p>
 NeONORM for Inter-assay Normalization </p>
 
 <p>_ 
-_ 
-~ 
-~ 
-~ </p>
-
-<p>~ </p>
+_~~~ ~ </p>
 
 <p>local minima. These bifurcations process onset at </p>
 
@@ -507,9 +499,8 @@ We then plotted the first derivative of the
 NeONORM error function for an inter-assay compari-
 son where we used artificially distorted data (in order 
 to generate asymmetry in the logQ distribution, see 
-Materials and Methods). Briefly, the HT29(l)mod </p>
-
-<p>1/4 1.5 f 0.15 dataset was generated from HT29(1) 
+Materials and Methods). Briefly, the HT29(l)mod 
+1/4 1.5 f 0.15 dataset was generated from HT29(1) 
 by randomly choosing a quarter of all probe signals 
 and multiplying each of them with a factor randomly 
 drawn from a normal distribution with a mean of 21.5 </p>
@@ -562,7 +553,7 @@ function at selected k (increasing from top to bottom) </p>
 
 <p>amm. </p>
 
-<p>96 
+<p> 
 Geno. Prot. Bioinfo. </p>
 
 <p>(bottom) HT29 inter-assay comparison. In the case 
@@ -619,12 +610,10 @@ below has been done at k=0.20. </p>
 <p>In order to evaluate the NeONORM method, sev-
 eral well defined test datasets had to be acquired. 
 First, we were looking for "real world'' inter-assay 
-comparisons where the fold-change distributions were </p>
-
-<p>as close to symmetric as possible. To this end, we 
-decided to use two technical replicates generated in </p>
-
-<p>our laboratory from the total RNA extracted from 
+comparisons where the fold-change distributions were 
+as close to symmetric as possible. To this end, we 
+decided to use two technical replicates generated in 
+our laboratory from the total RNA extracted from 
 HT29 cells. These technical replicates, here de-
 nominated as HT29(1) and HT29(2), share a Pear-</p>
 
@@ -671,17 +660,15 @@ method at k=0.20. </p>
 <p>Fig. 5 Artificial "asymmetric" datasets. Sign plots of the NeONORM error function for the first series of artificial </p>
 
 <p>test data generated are shown (see Materials and Methods). A. From left to right: (1) Unmodified (original) dataset 
-HT29(1) vs. HT29(2). (2) Asymmetrically modified dataset HT29(1) 1/4 1.5f1.5 (random chosen quarter, p=21.5 and </p>
-
-<p>a = p ) . (3) Double modified dataset HT29(1) 1/4 1.5f0.15 was once more modified by subsequently choosing another 
+HT29(1) vs. HT29(2). (2) Asymmetrically modified dataset HT29(1) 1/4 1.5f1.5 (random chosen quarter, p=21.5 and 
+a = p ) . (3) Double modified dataset HT29(1) 1/4 1.5f0.15 was once more modified by subsequently choosing another 
 random quarter of probe signals and multiplying them with a random value drawn from a normal distribution with 
 p=2-1.5 and a=O.l*p. This second operation generates almost symmetrically modified data, where the average total </p>
 
 <p>of modified probe signals is 7/16. B. As in panel A. To the right of each row the fraction of modified probe signals </p>
 
-<p>(1/16, 1/8, 1/4), and on the top of each column the average ratio change parameters (log2 of p and the corresponding </p>
-
-<p>a ) are indicated. </p>
+<p>(1/16, 1/8, 1/4), and on the top of each column the average ratio change parameters (log2 of p and the corresponding 
+a ) are indicated. </p>
 
 <p>Geno. Prot. Bioinfo. Vol. 4 No. 2 2006 </p>
 
@@ -1136,9 +1123,8 @@ can be made available upon written inquiry to the authors. </p>
 NeONORM for Inter-assay Normalizatiop </p>
 
 <p>number of steps and is shown to be sufficient for the 
-described purpose. </p>
-
-<p>Step 2: For every such candidate q, the minimum 
+described purpose. 
+Step 2: For every such candidate q, the minimum 
 m; is further approached iteratively, halving the size 
 of the interval [xlow, xhigh] in every iteration step. In 
 every step, the function calculates the error deriva-
@@ -1167,10 +1153,8 @@ to be calculated for Step 1 is proportional to n . s / k . </p>
 one minimum in the given interval if at least one ex-
 ists. If there exist several minima, the method will 
 find one of them ignoring the existence of others. The 
-method is fast, stable, and rarely requires more than </p>
-
-<p>30 iterations to converge under ~ o n v = l O -~ 
-for all con-
+method is fast, stable, and rarely requires more than 
+30 iterations to converge under ~o n v = l O -~ for all con-
 sidered cases so far. </p>
 
 <p>The algorithm was tested for k less than the nu-</p>
@@ -1182,9 +1166,8 @@ ing more than 500 minima in the interval [-0.1 : 0.11. </p>
 <p>Comparative 
 validation 
 of 
-the </p>
-
-<p>NeONORM method </p>
+the 
+NeONORM method </p>
 
 <p>We proceeded to evaluate the performance, robust-
 ness, and sensitivity of the NeONORM method on 
@@ -1322,9 +1305,8 @@ Furthermore, due to the nature of the non-linear ap-</p>
 <p>proach, the relative stability of LOWESS at low f </p>
 
 <p>values is counterbalanced by a significant distortion 
-of the data (compare characteristic peaks at the max-</p>
-
-<p>imum or the heavy tails between all distributions and 
+of the data (compare characteristic peaks at the max-
+imum or the heavy tails between all distributions and 
 with respect to the normalization methods). By con-
 trast, NeONORM again performs equally well on all 
 eight conditions, with the maxima of the distribu-
@@ -1349,9 +1331,8 @@ ues, note that variation (negative values) is due to the
 normal distribution properties of the random drawing 
 of factors during the perturbation of the data]. f i r -
 thermore, the logQ&gt; 1 calls are proportional to the 
-severity of the perturbation. Median normalized data, </p>
-
-<p>as expected by the nature of the operation, almost 
+severity of the perturbation. Median normalized data, 
+as expected by the nature of the operation, almost 
 "grow" symmetrically over both thresholds, whereas 
 LOWESS normalization generates satisfactory results 
 for slightly biased test data and just starts to diverge </p>
@@ -1881,7 +1862,7 @@ terplay of different non-linear intra-assay and linear
 inter-assay normalization methods does not seem to 
 have been studied systematically yet. Potentially, a </p>
 
-<p>106 
+<p> 
 Geno. Prot. Bioinfo. </p>
 
 <p>combination of particularly robust and situation/data 
@@ -1975,8 +1956,8 @@ bridized and detected (Applied Biosystems, ProdNo:
 <p>Data preprocessing and primary analy-
 sis </p>
 
-<p><rs id="software-13" type="software">Applied Biosystems Expression Array System Soft-
-ware</rs> (<rs corresp="#software-13" type="version-number">V1.l.l</rs>, ProdNo: 4364137) has been used to 
+<p><rs id="software-2" type="software">Applied Biosystems Expression Array System Soft-
+ware</rs> (<rs corresp="#software-2" type="version-number">V1.l.l</rs>, ProdNo: 4364137) has been used to 
 acquire the CL and fluorescence (FL) images and 
 primary data analysis. Briefly, the primary analy-
 sis consists of the following individual operations: (1) 
@@ -2100,9 +2081,8 @@ well for poorly preprocessed data. The LOWESS </p>
 
 <p>implementation used to compare to NeONORM 
 is a <rs type="software">Java</rs> port of Cleveland's original <rs type="software">FORTRAN</rs> 
-code from 1985 freely available (http://netlib.bell-</p>
-
-<p>labs.com/netlib/go/lowess.f.gz), which was temporar-
+code from 1985 freely available (http://netlib.bell-
+labs.com/netlib/go/lowess.f.gz), which was temporar-
 ily embedded in the <rs type="software">ace.map</rs> platform for direct com-
 parative testing. 
 For the Median and NeONORM normalization 
@@ -2121,9 +2101,8 @@ iterations=2; delta=0.00001. </p>
 <p>Histograms and frequency plots appearing in the 
 figures were generated using <rs type="software">ace.map</rs>, however, are 
 standard means of data representation. The 3D-
-surface plots in Figure 4 were rendered using <rs id="software-12" type="software">gnupplot</rs> </p>
-
-<p><rs corresp="#software-12" type="version-number">4.0</rs>. Sign plots (blue = negative, red = positive) were 
+surface plots in Figure 4 were rendered using <rs id="software-11" type="software">gnupplot</rs> 
+<rs corresp="#software-11" type="version-number">4.0</rs>. Sign plots (blue = negative, red = positive) were 
 rendered by an <rs type="software">ace.map</rs> plug-in. Subtraction profiles 
 consist of logs-transformed quotients (logQ) of signal 
 intensities for the intersection set of the probe IDS, 
@@ -2174,71 +2153,9 @@ ests exist. </p>
 
 
 
-<p>24. Bolstad, B.M., et al. 2003. A comparison of normal-
-ization methods for high density oligonucleotide array 
-data based on variance and bias. Bioinfomatics 19: </p>
+<p>Noth et al. </p>
 
-<p>25. Pan, W. 2002. A comparative review of statistical </p>
-
-<p>methods for discovering differentially expressed genes 
-in replicated microarray experiments. Bioinfomatics </p>
-
-<p>26. Wang, H. and Huang, H. 2004. SED, a normalization 
-free method for DNA microarray data analysis. BMC </p>
-
-<p>Bioinfomatics 5: 121. 
-27. Khan, J., et al. 2001. Classification and diagnostic </p>
-
-<p>prediction of cancers using gene expression profiling 
-and artificial neural networks. Nat. Med. 7: 673-679. </p>
-
-<p>28. Lanotte, M., et al. 1991. NB4, a maturation inducible 
-cell line with t(15;17) marker isolated from a human 
-acute promyelocytic leukemia. Blood 77: 1080. </p>
-
-<p>29. Chambon, P. 1994. The retinoid signaling pathway: 
-molecular and genetic analyses. Semin. Cell Biol. 5: </p>
-
-<p>30. Mangelsdorf, D.J., et al. 1995. The nuclear receptor 
-superfamily: the second decade. Cell 83: 835. </p>
-
-<p>31. Di Croce, L., et aZ. 2002. Methyltransferase recruit-
-ment and DNA hypermethylation of target promot-
-ers by an oncogenic transcription factor. Science 295: </p>
-
-<p>32. Dudoit, S., et al. 2002. Statistical methods for identi-
-fying differentially expressed genes in replicated cDNA </p>
-
-<p>microarray experiments. Statistics Sinica 12: 111-139. </p>
-
-<p>33. Cleveland, W.S. 1979. Robust locally weighted regres-
-sion and smoothing scatterplots. J. Amer. Statist. </p>
-
-<p>34. Cleveland, W.S. and Devlin, S. 1988. Locally weighted 
-regression: an approach to regression analysis by local </p>
-
-<p>fitting. J. Amer. Statist. Assoc. 83: 596-610. </p>
-
-<p>35. Heuze, M.L., et al. 2005. ASB2 is an Elongin BC-
-interacting protein that can assemble with Cullin 5 
-and Rbxl to reconstitute an E3 ubiquitin ligase com-
-plex. J. Biol. Chem. 280 5468-5474. </p>
-
-<p>185-193. </p>
-
-<p>18: 546-554. </p>
-
-<p>115-125. </p>
-
-<p>1079-1082. </p>
-
-<p>ASSOC. 74: 829-836. </p>
-
-<p>Supporting Online Material </p>
-
-<p>http://www.iri.cnrs.fr/seg/NeONORMsuppData.zip </p>
-
-<p>Geno. Prot. Bioinfo. Vol. 4 No. 2 2006 </p>
+<p> </p>
 
 <p>
 </p></text></tei>

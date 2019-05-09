@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4093824" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T19:57+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4093824" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:04+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>Poultry industry, in the process of rapid industrialization, 
 developed commercial chicken strains from a small number 
@@ -60,9 +60,14 @@ collected from NIAS. It comprised of 245 KNC H strains </p>
 
 <p>Genome-wide Association Study of Chicken Plumage Pigmentation </p>
 
-<p>Mi Na Park, Jin Ae Choi, Kyung-Tai Lee, Hyun-Jeong Lee, Bong-Hwan Choi, Heebal Kim 1 , 
-Tae-Hun Kim, Seoae Cho 2 , and Taeheon Lee 1, * 
-Division of Animal Genomics and Bioinformatics, National Institute of Animal Science, 
+<p>Mi Na Park, Jin Ae Choi, Kyung-Tai Lee, Hyun-Jeong Lee, Bong-Hwan Choi, Heebal Kim 
+1 , </p>
+
+<p>Tae-Hun Kim, Seoae Cho 
+2 , and Taeheon Lee 
+1, * </p>
+
+<p>Division of Animal Genomics and Bioinformatics, National Institute of Animal Science, 
 Rural Development Administration, Suwon, Korea </p>
 
 <p>ABSTRACT: To increase plumage color uniformity and understand the genetic background of Korean chickens, we performed a </p>
@@ -111,16 +116,23 @@ The 60K SNP Illumina iSelect chicken array contains
 57,637 SNPs that are distributed across the chicken genome. 
 SNPs were excluded if it had a missing rate of &gt;5%, a 
 minor allele frequency (MAF) of &lt;0.01, or a Hardy-
-Weinberg equilibrium (HWE) test p-value of &lt;10 -6 using 
-PLINK 1.07 (Purcell et al., 2007). After the quality control, 
+Weinberg equilibrium (HWE) test p-value of &lt;10 
+-6 using </p>
+
+<p>PLINK 1.07 (Purcell et al., 2007). After the quality control, 
 53,257 SNPs were retained for further analysis. GWAS 
 analyses on plumage coloration of whole body and the body 
-parts traits were performed using mixed model of <rs id="software-5" type="software">GEMMA</rs> 
-(<rs corresp="#software-5" type="version-number">v0.93</rs>) (<rs corresp="#software-5" type="creator">Zhou and Stephens</rs>, <rs corresp="#software-5" type="version-date">2012</rs>), which accounts for 
+parts traits were performed using mixed model of <rs id="software-0" type="software">GEMMA</rs> 
+(<rs corresp="#software-0" type="version-number">v0.93</rs>) (<rs corresp="#software-0" type="creator">Zhou and Stephens</rs>, <rs corresp="#software-0" type="version-date">2012</rs>), which accounts for 
 population stratification and sample structure. </p>
 
 <p>y = W+x+u+, 
-u~MVN n (0, -1 K), ~MVNn (0, -1 I n ) </p>
+u~MVN n (0, </p>
+
+<p>-1 </p>
+
+<p>K), ~MVNn (0, 
+-1 I n ) </p>
 
 <p>Where y is an n-vector of traits (plumage coloration) for 
 n individuals; W = (w 1 , w 2 , … ,w c ) is an nc matrix of 
@@ -128,7 +140,8 @@ covariates (fixed effects) including a column of 1s;  is a c-
 vector of the corresponding coefficients including the 
 intercept; x is an n-vector of marker genotypes;  is the 
 effect size of the marker; u is an n-vector of random effects; 
- is an n-vector of errors;  -1 is the variance of the residual </p>
+ is an n-vector of errors;  
+-1 is the variance of the residual </p>
 
 <p>errors;  is the ratio between the two variance components; 
 K is a known nn relatedness matrix and I n is an nn 
@@ -187,13 +200,12 @@ test results was shown as a Manhattan plot constructed by
 the statistical package R. Base pair position of SNP markers 
 were given based on the chicken genome assembly build 
 WASHUC2. Inflation factor was calculated by the R 
-package <rs id="software-3" type="software">GenABEL</rs> with "median" option (<rs corresp="#software-3" type="creator">Aulchenko et al.</rs>., </p>
-
-<p>2007). </p>
+package <rs id="software-4" type="software">GenABEL</rs> with "median" option (<rs corresp="#software-4" type="creator">Aulchenko et al.</rs>., 
+2007). </p>
 
 <p>Estimating genetic variance 
 We estimated the genetic variance of plumage by using 
-<rs id="software-1" type="software">GCTA</rs> (<rs corresp="#software-1" type="creator">Yang et al.</rs>., <rs corresp="#software-1" type="version-date">2011</rs>). After calculating the genetic 
+<rs id="software-5" type="software">GCTA</rs> (<rs corresp="#software-5" type="creator">Yang et al.</rs>., <rs corresp="#software-5" type="version-date">2011</rs>). After calculating the genetic 
 relationship matrix (GRM) between all pairs of samples 
 using all the autosomal SNPs, we estimated the genetic 
 component, or heritability, for each trait by REML analysis 
@@ -275,11 +287,18 @@ factor is 0.987, it can be concluded that the GWAS result is
 not inflated by considering relatedness using <rs type="software">GEMMA</rs> 
 (Figure 3). Among the significant SNPs, we identified 4 
 susceptibility SNPs: rs14339964 (Gga3:36327458, p = 4.07 
-10 -9 ), GGaluGA344987 (Gga3:705798, p = 1.1210 -6 ), </p>
+10 
+-9 ), GGaluGA344987 (Gga3:705798, p = 1.1210 
+-6 ), </p>
 
-<p>rs14641648 (Gga8:12987908, p = 2.0610 -6 ), and </p>
+<p>rs14641648 (Gga8:12987908, p = 2.0610 
+-6 ), and </p>
 
-<p>GGaluGA193591 (Gga24:5696828, p = 2.3810 -6 ) in the 
+<p>GGaluGA193591 (Gga24:5696828, p = 2.3810 </p>
+
+<p>-6 </p>
+
+<p>) in the 
 population (Table 2). SNP rs14339964 at Gga3:36327458 is 
 located in an intron region of AKT3 which is known to be 
 regulators of cell signaling in response to insulin and 
@@ -406,7 +425,8 @@ mRNA degradation (Weston and Sommerville, 2006).
 DDX6 is a previously confirmed gene for vitiligo which is a 
 disease related with pigmentation of skin (Tang et al., 2012). 
 Interestingly, although rs15175679 (Gga20: 8397089, p = 
-3.9110 -6 ) is not significant, the variant exits in gga-mir-
+3.9110 
+-6 ) is not significant, the variant exits in gga-mir-
 668 which is a region that harbors a small RNA. Previous 
 studies of chicken embryogenesis has shown that this small 
 RNA regulates developmental signaling pathways (Shao et 
@@ -435,8 +455,11 @@ Estimated genetic heritability was 18.2%, but estimated </p>
 CHR 
 Position 
 Min 
-/Maj 1 
-Freq 
+/Maj </p>
+
+<p>1 </p>
+
+<p>Freq 
 Beta 
 SE 
 p value 
@@ -636,8 +659,11 @@ rs ID
 CHR 
 Position 
 Min 
-/Maj 1 
-Freq 
+/Maj </p>
+
+<p>1 </p>
+
+<p>Freq 
 Beta 
 SE 
 p value 

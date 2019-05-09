@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC3035800" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T20:03+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC3035800" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:09+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p><rs type="software">Ct3d</rs>ABSTRACT </p>
 
@@ -16,8 +16,7 @@ allows to track microglia in three dimensional confocal time-lapse
 microscopy images. We also evaluate our method on synthetically 
 generated data, demonstrating that our algorithm is robust even in 
 the presence of different types of inhomogeneous background noise. 
-Availability: Our algorithm is implemented in the <rs id="software-24" type="software">ct3d</rs> package, 
-which is available under <rs corresp="#software-24" type="url">http://www.picb.ac.cn/patterns/Software/ct3d</rs>Capturing the motility of cells using time-lapse microscopy has 
+<rs id="software-20" type="software">ct3d</rs><rs corresp="#software-20" type="url">http://www.picb.ac.cn/patterns/Software/ct3d</rs>Capturing the motility of cells using time-lapse microscopy has 
 become an important approach to understanding processes such 
 as the cell cycle (Harder et al., 2009), neuronal division and 
 migration (Norden et al., 2009), immune response (Cahalan and 
@@ -83,11 +82,7 @@ making it difficult to clearly separate them from their surrounding </p>
 This is an Open Access article distributed under the terms of the Creative Commons Attribution Non-Commercial License (http://creativecommons.org/licenses/ 
 by-nc/2.5), which permits unrestricted non-commercial use, distribution, and reproduction in any medium, provided the original work is properly cited. </p>
 
-<p>[09:57 2/2/2011 Bioinformatics-btq691.tex] </p>
 
-<p>Page: 565 564-571 </p>
-
-<p>Ct3d </p>
 
 <p>Fig. 1. 3D motion patterns of two microglia in vivo reconstructed using 
 <rs type="software">ct3d</rs>. The red and green areas indicate initial positions of the two microglia. 
@@ -189,11 +184,7 @@ tree assignments on the complete component trees would be computationally
 too demanding. The goal of pruning is thus to eliminate as many vertices 
 as possible, keeping only those that reflect the relevant structures of the </p>
 
-<p>565 </p>
 
-<p>[09:57 2/2/2011 Bioinformatics-btq691.tex] </p>
-
-<p>Page: 566 564-571 </p>
 
 <p>H.Xiao et al. </p>
 
@@ -247,15 +238,12 @@ pruning parameters θ min ,θ max , single-
 node cutoff σ. </p>
 
 <p>• Output: Sequence of segmented images 
-S 
-1 ,...,S 
-N . </p>
+S 1 ,...,S N . </p>
 
 <p>(1) Compute component tree T i for all i ∈[1 : 
 N]. </p>
 
-<p>(2) Prune T i to obtain T 
-i using θ min ,θ max ,σ. </p>
+<p>(2) Prune T i to obtain T i using θ min ,θ max ,σ. </p>
 
 <p>(3) For each i ∈[1 : N −1], compute A i = 
 treeassign(T i ,T i+1 ). </p>
@@ -270,19 +258,13 @@ maximum-weighted bipartite matching
 between the segments in S i and S i+1 . </p>
 
 <p>(6) Assign random color to each segment in 
-S 1 to obtain S 
-1 . In S 
-i+1 , assign the same 
+S 1 to obtain S 1 . In S i+1 , assign the same 
 color to the segment as the one matched 
 in S i . </p>
 
 <p>Fig. 3. Overview of complete cell tracking algorithm. </p>
 
-<p>566 </p>
 
-<p>[09:57 2/2/2011 Bioinformatics-btq691.tex] </p>
-
-<p>Page: 567 564-571 </p>
 
 <p>Ct3d </p>
 
@@ -296,10 +278,10 @@ linear program is established by introducing one constraint for each root-
 leaf path in each of the two trees; the sum of all variables involving any 
 vertex along the path must be constraint to at most 1. 
 Weights for tree assignments: an important role is taken by the weights 
-ω a,b . A straightforward choice is the 'relative overlap' between the </p>
+ω a,b . A straightforward choice is the 'relative overlap' between the 
+corresponding areas γ(a) and δ(b), i.e. </p>
 
-<p>corresponding areas γ(a) and δ(b), i.e. 
-ω a,b := |γ(a)∩δ(b)|/|γ(a)∪δ(b)|. </p>
+<p>ω a,b := |γ(a)∩δ(b)|/|γ(a)∪δ(b)|. </p>
 
 <p>This score is also known as the Jaccard-Index or the Tanimoto Score. An 
 important observation is that these weights are restricted to the interval [0,1]. 
@@ -333,8 +315,7 @@ the other one, Q i , from the cosegmentation of frames i and i+1. We resolve
 this by computing a consensus segmentation. We generally use P i as the 
 starting point of a consensus segmentation. Any segment in Q i that does not 
 overlap with any segment P i is supplement to P i to obtain the consensus 
-segmentation P 
-i . This ensures that cells entering the scene in frame i can be 
+segmentation P i . This ensures that cells entering the scene in frame i can be 
 identified in frame i (rather than frame i+1). 
 Filtering results: as for most segmentation and tracking approaches, the 
 results obtained from the steps described above has a tendency toward 
@@ -343,7 +324,7 @@ cells. To filter out those segments, we utilize life span filtering, i.e. we fil
 out all cells whose identity can be traced across less than a certain minimum 
 number of frames. This cell filter, along with several other ways to eliminate 
 cells with unsuitable size or volume features, follows corresponding features 
-of the <rs type="software">Celltrack</rs> software (Sacan et al., 2008) for 2D cell tracking; for 
+of the <rs id="software-69" type="software">Celltrack</rs> software (<rs corresp="#software-69" type="creator">Sacan et al.</rs>., 2008) for 2D cell tracking; for 
 <rs type="software">ct3d</rs>, they are implemented in the graphical user interface of the <rs type="software">at3d</rs> tool 
 shown in Figure 4. </p>
 
@@ -395,7 +376,7 @@ and extract specific cells identified by the cell tracking procedure, and derive
 their motility parameters such as velocity and deformation. The <rs type="software">at3d</rs> tool is 
 implemented using the <rs type="software">qt</rs> framework for graphical user interfaces. Input and 
 output of image series is designed to be compatible with other visualization 
-software, most notably <rs id="software-58" type="software">v3d</rs> (<rs corresp="#software-58" type="creator">Peng et al.</rs>., 2010) for producing rendered 
+software, most notably <rs id="software-74" type="software">v3d</rs> (<rs corresp="#software-74" type="creator">Peng et al.</rs>., 2010) for producing rendered 
 visualizations of the output. </p>
 
 <p>2.4 Experimental materials and methods </p>
@@ -409,11 +390,7 @@ China) with an automatic fish housing system (ESEN, Beijing, China) at
 
 <p>1 http://lpsolve.sourceforge.net/5.5/. </p>
 
-<p>567 </p>
 
-<p>[09:57 2/2/2011 Bioinformatics-btq691.tex] </p>
-
-<p>Page: 568 564-571 </p>
 
 <p>H.Xiao et al. </p>
 
@@ -493,7 +470,8 @@ second on average; the pruned component trees typically comprised
 a few dozens of vertices. 
 As a reference algorithm to compare against the performance of 
 <rs type="software">ct3d</rs>, we computed a segmentation of each time frame using the 
-active contour approach by Chan and Vese (2001), 2 which is a well-
+active contour approach by Chan and Vese (2001), 
+2 which is a well-
 established and state-of-the-art representative of the large family of 
 level set methods. As shown in Table 1, this method works highly 
 accurate in the absence of background inhomogeneity while getting 
@@ -527,10 +505,6 @@ observer due to their characteristic shape or motion patterns. The </p>
 0.8 running 100 iterations. </p>
 
 
-
-<p>[09:57 2/2/2011 Bioinformatics-btq691.tex] </p>
-
-<p>Page: 569 564-571 </p>
 
 <p>Ct3d </p>
 
@@ -748,11 +722,7 @@ Yet, a fully automated approach remains a major and certainly
 non-trivial challenge. A first step in this direction might be the 
 combination with level-set based approaches as utilized for 2D cell </p>
 
-<p>569 </p>
 
-<p>[09:57 2/2/2011 Bioinformatics-btq691.tex] </p>
-
-<p>Page: 570 564-571 </p>
 
 <p>H.Xiao et al. </p>
 

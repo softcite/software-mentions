@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC2881388" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T19:57+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC2881388" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:04+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>ABSTRACT </p>
 
@@ -33,7 +33,7 @@ related functions from ones consisting of randomly grouped genes.
 It is commonly evaluated by analyzing the genes' functional 
 annotations, which are almost invariably in the form of the controlled 
 vocabulary from the Gene Ontology (GO; Ashburner et al., 2000; 
-Brown et al., 2000; Huang et al., 2009; Khatri and Dr˘ aghici, 2005; 
+Brown et al., 2000; Huang et al., 2009; Khatri and Drȃghici, 2005; 
 Mateos et al., 2002). The vocabulary terms are organized as a 
 graph, with concepts ranging from very general to very specific. </p>
 
@@ -67,8 +67,8 @@ by random chance-to determine if an individual term is over-
 represented in a gene set. The widely used count-based methods 
 are based on the hypergeometric distribution or other similar 
 probabilistic models (Cho et al., 2001; Huang et al., 2009; Khatri 
-and Dr˘ aghici, 2005; Man et al., 2000). The merits and limitations of 
-this family of methods are well documented (Khatri and Dr˘ aghici, 
+and Drȃghici, 2005; Man et al., 2000). The merits and limitations of 
+this family of methods are well documented (Khatri and Drȃghici, 
 2005; Zheng and Lu, 2007). Since the objective of count-based 
 methods is focused on individual terms, directly utilizing their 
 results, e.g. P-values, to assess overall coherence encounters the 
@@ -90,10 +90,6 @@ is to find the representative summary term(s) utilizing the graph </p>
 <p>© The Author(s) 2010. Published by Oxford University Press. 
 This is an Open Access article distributed under the terms of the Creative Commons Attribution Non-Commercial License (http://creativecommons.org/licenses/ 
 by-nc/2.5), which permits unrestricted non-commercial use, distribution, and reproduction in any medium, provided the original work is properly cited. </p>
-
-<p>[11:05 12/5/2010 Bioinformatics-btq203.tex] </p>
-
-<p>Page: i80 i79-i87 </p>
 
 <p>A.J.Richards et al. </p>
 
@@ -203,10 +199,6 @@ is based on information theory, in which differences in the information </p>
 
 <p>i80 </p>
 
-<p>[11:05 12/5/2010 Bioinformatics-btq203.tex] </p>
-
-<p>Page: i81 i79-i87 </p>
-
 <p>Graph-based gene set coherence </p>
 
 <p>content (IC; Jiang and Conrath, 1998; Lord et al., 2003; Pesquita et al., 
@@ -269,17 +261,18 @@ Algorithm 2. </p>
 trees in order to reflect the functional coherence of a gene set. Building on the 
 concept of enrichment, we define the number of genes associated with a seed 
 term as seed degree (k s ) and the averaged seed degree of a tree, is denoted as 
-k s , which reflects a global measure of enrichment for the GO terms in the </p>
-
-<p>gene set. To integrate the semantic relationships between terms, we define 
+k s , which reflects a global measure of enrichment for the GO terms in the 
+gene set. To integrate the semantic relationships between terms, we define 
 the sum of the lengths of all edges within a tree as the total length (l) of a 
 GO Steiner tree, which reflects the overall relatedness of the functions. We 
-also define k rs = ks 
-l as a measure of relative seed degree, which combines 
-the above two aspects of functional coherence. The GO Steiner-tree metrics 
-k s and l are produced by summing a number of variables, in proportion to </p>
+also define k rs = </p>
 
-<p>the size of a gene set n and with respect to a given n they tend to be Gaussian 
+<p>ks </p>
+
+<p>l as a measure of relative seed degree, which combines 
+the above two aspects of functional coherence. The GO Steiner-tree metrics 
+k s and l are produced by summing a number of variables, in proportion to 
+the size of a gene set n and with respect to a given n they tend to be Gaussian 
 distributed, with estimable parameters µ n and σ 2 
 n . </p>
 
@@ -298,12 +291,18 @@ the following relationships: </p>
 <p>µ n = f (n) 
 (4) </p>
 
-<p>σ 2 
-n = g(n) 
+<p>σ </p>
+
+<p>2 </p>
+
+<p>n = g(n) 
 (5) </p>
 
-<p>y n ∼ N (µ n ,σ 2 
-n ). 
+<p>y n ∼ N (µ n ,σ </p>
+
+<p>2 </p>
+
+<p>n ). 
 (6) </p>
 
 <p>The relationship between the gene set size n and the parameters governing 
@@ -315,52 +314,50 @@ D ={(y i ,n i )} </p>
 
 <p>i=1 , followed by estimation of the parameters µ n and σ 2 
 n for a 
-n as follows: </p>
+n as follows:μ </p>
 
-<p>ˆ 
-µ n = </p>
+<p>n = </p>
 
 <p>|D| </p>
 
-<p>i=1 w n (n i )y i 
-|D| </p>
+<p>i=1 w n (n i )y i </p>
+
+<p>|D| </p>
 
 <p>i=1 w n (n i ) </p>
 
 <p>(7) </p>
 
-<p>ˆ 
-σ 2 
-n = </p>
+<p>σ </p>
+
+<p>2 </p>
+
+<p>n = </p>
 
 <p>|D| </p>
 
-<p>i=1 w n (n i )(y i − ˆ 
-µ n ) 2 
-|D| </p>
+<p>i=1 w n (n i )(y i −μ n ) 2 </p>
+
+<p>|D| </p>
 
 <p>i=1 w n (n i ) </p>
 
 <p>(8) </p>
 
-<p>w n (n i ) = exp </p>
-
-
-
-<p>− 
+<p>w n (n i ) = exp − 
 1 
 p 
-(n i −n) 2 </p>
-
-
-
-<p>, 
+(n i −n) 
+2 , 
 (9) </p>
 
-<p>where wn(n i ) </p>
+<p>where </p>
 
-<p>|D| 
-i=1 wn(n i ) </p>
+<p>wn(n i ) </p>
+
+<p>|D| </p>
+
+<p>i=1 wn(n i ) </p>
 
 <p>is the Nadaraya-Watson weight for the i-th observation </p>
 
@@ -377,9 +374,8 @@ certain assumptions, the distribution of the statistic k rs can be represented
 using a Cauchy distribution. However, empirical results indicated that the 
 majority of samples could be represented with Gaussian distributions , which 
 also provided better discriminative performances. Hence, the P-values for 
-k rs were determined according to the Gaussian distribution. All tests for </p>
-
-<p>significance are one-sided. A value of k s or k rs is considered to be 
+k rs were determined according to the Gaussian distribution. All tests for 
+significance are one-sided. A value of k s or k rs is considered to be 
 significant if it is higher than an upper critical value; while a value of l 
 is significant when it is less than a lower critical value. </p>
 
@@ -403,11 +399,7 @@ transformed into a weighted, undirected graph, of which an edge's
 length was calculated according to the semantic distance between a 
 pair of GO terms. More details about the graph construction are </p>
 
-<p>i81 </p>
 
-<p>[11:05 12/5/2010 Bioinformatics-btq203.tex] </p>
-
-<p>Page: i82 i79-i87 </p>
 
 <p>A.J.Richards et al. </p>
 
@@ -553,10 +545,6 @@ of edge distances are shown (Fig. 2G-I) in order to quantitatively </p>
 
 <p>i82 </p>
 
-<p>[11:05 12/5/2010 Bioinformatics-btq203.tex] </p>
-
-<p>Page: i83 i79-i87 </p>
-
 <p>Graph-based gene set coherence </p>
 
 <p>summarize the semantic relationships among the GO terms. The 
@@ -584,8 +572,11 @@ distinct annotations.
 Three metrics were devised based on the topological properties of 
 GO Steiner trees in order to reflect the functional coherence of a gene 
 set: the sum of the lengths of all edges within the tree l, the averaged 
-seed degree of a tree k s and the combined metric k rs = k s 
-l . The 
+seed degree of a tree k s and the combined metric k rs = </p>
+
+<p>k s </p>
+
+<p>l . The 
 values of the metrics can be interpreted as follows. A greater k s 
 than expected by random chance indicates a functionally coherent 
 gene set, because many genes within the set share the same function 
@@ -634,9 +625,8 @@ F </p>
 network statistics corresponding to 8850 randomly sampled gene sets 
 (gray dots) and 90 pathways (black crosses) from the KEGG database for 
 S.cerevisiae are shown as functions of gene set size n for the three metrics, 
-k s , l and k rs . The red lines in (A-C) are the means of the random gene sets </p>
-
-<p>as functions of n fitted with the Nadaraya-Watson method (see Section 2). 
+k s , l and k rs . The red lines in (A-C) are the means of the random gene sets 
+as functions of n fitted with the Nadaraya-Watson method (see Section 2). 
 (D-F) The ROC curves for the network statistics, where AUC values are 
 shown in Table 2. (D-F) illustrate the discriminative performance for k s , 
 l and k rs , respectively. The colors indicate the species and the colored 
@@ -665,10 +655,6 @@ be assessed with the receiver operating characteristics (ROCs) curve
 (Zweig and Campbell, 1993) analysis, in which the area under the </p>
 
 <p>i83 </p>
-
-<p>[11:05 12/5/2010 Bioinformatics-btq203.tex] </p>
-
-<p>Page: i84 i79-i87 </p>
 
 <p>A.J.Richards et al. </p>
 
@@ -745,7 +731,7 @@ this conventional threshold (P&lt; 0.05) of statistical significance can
 be readily applied in our statistical test, whereas in the count-based 
 methods one often needs to adjust the significance threshold to avoid 
 false positive calls (Cho et al., 2001; Huang et al., 2009; Khatri and 
-Dr˘ aghici, 2005; Man et al., 2000). </p>
+Drȃghici, 2005; Man et al., 2000). </p>
 
 <p>3.5 Robustness of the metrics </p>
 
@@ -755,7 +741,7 @@ against noise, we performed a noise simulation experiment by
 replacing different percentages of the genes from KEGG pathways 
 with randomly selected ones, followed by the evaluation of the 
 metrics' discriminative power. As an example, we studied the 
-discriminative power of the unified metric (k rs ) tested with </p>
+discriminative power of the unified metric ( k rs ) tested with </p>
 
 <p>0 
 20 
@@ -873,9 +859,8 @@ the metrics in the presence of different amounts of simulated noise. (A) With
 the P ≤ 0.05 as the threshold, the percent of KEGG pathways classified as 
 coherent in the presence of noise was plotted against the percent of simulated 
 noise. The line colors indicate the species. (B-D) The ROC curves using 
-k rs in presence of different degrees of noise are shown for S.cerevisiae, </p>
-
-<p>M.musculus and H.sapiens, respectively. Specifically, the AUCs for curves 
+k rs in presence of different degrees of noise are shown for S.cerevisiae, 
+M.musculus and H.sapiens, respectively. Specifically, the AUCs for curves 
 with 0-60% (increasing by 20%) are presented. </p>
 
 <p>contaminated data for all three species (Fig. 4). With a P-value 
@@ -907,10 +892,6 @@ by graph-based metrics and cluster size (Fig. 5A). As a comparison,
 we also calculated the enrichment P-values of each GO term </p>
 
 <p>i84 </p>
-
-<p>[11:05 12/5/2010 Bioinformatics-btq203.tex] </p>
-
-<p>Page: i85 i79-i87 </p>
 
 <p>Graph-based gene set coherence </p>
 
@@ -966,7 +947,7 @@ et al., 2001; Kong et al., 2006), and an averaged P-value of the
 cluster was determined and subsequently plotted in Figure 5A. The 
 P-values from the GO term enrichment analysis are often sensitive 
 to geneome size and the extent of annotation completeness (Khatri 
-and Dr˘ aghici, 2005). Similarly, if these methods are extended to 
+and Drȃghici, 2005). Similarly, if these methods are extended to 
 evaluate global functional coherence of a gene set as by simple 
 averaging of P-values the results can be shown to be sensitive 
 to the gene set sizes. The averaged P-values by the count-based 
@@ -976,7 +957,7 @@ metric span a broader range, indicating cluster size has little if
 any impact on its coherence evaluation. The results confirm a 
 well-known phenomenon that GO terms observed within a small 
 cluster are more likely to be evaluated as 'enriched' due to the 
-characteristics of hypergeometric distribution (Khatri and Dr˘ aghici, 
+characteristics of hypergeometric distribution (Khatri and Drȃghici, 
 2005; Zheng and Lu, 2007). The panel also shows that the clusters 
 evaluated as significant by the graph-based metric tend to be rich 
 with differentially expressed genes per a gene set analysis (GSA) 
@@ -1041,10 +1022,6 @@ when inspecting the GO Steiner tree for the gene set, we found that
 there are two major clusters of nodes consisting of both genes and </p>
 
 <p>i85 </p>
-
-<p>[11:05 12/5/2010 Bioinformatics-btq203.tex] </p>
-
-<p>Page: i86 i79-i87 </p>
 
 <p>A.J.Richards et al. </p>
 
@@ -1139,6 +1116,12 @@ R01LM009153, 5R01LM010144 to X.L., T15LM07438 to X.L. and
 A.J.R., 2P20RR107677 to X.L. and R01EY13520 to B.R.). </p>
 
 <p>Conflict of Interest: none declared. </p>
+
+
+
+
+
+<p>Graph-based gene set coherence </p>
 
 
 

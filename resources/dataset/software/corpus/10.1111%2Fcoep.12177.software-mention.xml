@@ -1,0 +1,1541 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1111%2Fcoep.12177" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:12+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>Eliminating or reducing the federal charitable deduction can have serious impacts 
+on the level of charitable donations. Tax price elasticity estimates from a multivari-
+ate sample selection model indicate that changing the deduction to a 12% tax credit 
+would have reduced individual donations in 2012 by 18.9% if applied to itemizing 
+taxpayers and by 10.5% if extended to nonitemizers. Elimination of the deduction 
+would have led to a 35% reduction in individual charitable donations. Even if cou-
+pled with cuts in marginal tax rates, eliminating the charitable deduction will still 
+likely result in substantial reductions given the inelastic income elasticities of chari-
+table donations. The estimates justify the ardent opposition of many in the nonprofit 
+sector to the more radical proposals for changing the tax treatment of charitable 
+contributions. (JEL D34, C34) </p>
+
+<p>The empirical literature on charitable dona-
+tions is comprised largely of studies that examine 
+total giving (e.g., Andreoni, Gale, and Scholz 
+1996; Bakija and Heims 2011; Brown and 
+Lankford 1992; Jones 2006; Yörük 2009) and/or 
+religious and secular giving (e.g., Brooks 2005; 
+Brown and Ferris 2007; Brown and Lankford 
+1992; Helms and Thornton 2012; Vaidyanathan, 
+Hill, and Smith 2011; Yen and Zampelli 2014). 
+The "secular" category combines donations 
+across all charitable organizations other than 
+churches, mosques, and synagogues. Few stud-
+ies disaggregate secular donations by purpose. 
+Some exceptions stand out. Brooks (2007) and 
+Ottoni-Wilhelm and Hungerman (2007) examine 
+both total giving and giving by purpose in the 
+United States, focusing on estimates of tax price 
+elasticities and their implications for income 
+tax policy. 1 Using Canadian data, Hossain and 
+Lamb (2012) assess the effects of tax incentives </p>
+
+<p>Zampelli: Professor, School of Business and Economics, The 
+Catholic University of America, Washington, DC 20064. 
+Phone 202-319-6683, Fax 202-319-4426, E-mail zam-
+pelli@cua.edu 
+Yen: Senior Economist, STY Health Econometrics, 
+Knoxville, TN 37931. 
+Phone 865-769-4769, Fax 
+865-769-4769, E-mail syen04@gmail.com 
+1. Ottoni-Wilhelm (2010) examines charitable donations 
+to the needy but does not include a tax price in his model, 
+focusing rather on the impact of religious denomination. </p>
+
+<p>on donations across charitable categories. To 
+overcome the econometric problems that arise 
+when the dependent variable is censored at zero 
+for a non-negligible portion of the sample, the 
+Tobit model, single-(Tobin 1958) or multiequa-
+tion (Amemiya 1974), is normally relied upon. 2 
+There are, however, important shortcomings 
+with the Tobit parameterization upon which we 
+elaborate in the sections below. 
+In this article, we use Yen's (2005) multi-
+variate sample selection model (MSSM) which 
+extends Heckman's (1979) bivariate selection 
+model to a three-good system. Like all selection 
+models, the procedure allows the binary (selec-
+tion) and level outcomes to be determined by sep-
+arate stochastic processes and relaxes the Tobit 
+parameterization restrictions noted above and 
+discussed below. It also allows correlations of the 
+error terms among all equations, accommodating 
+feedback among all binary and level decisions on 
+donations. To the extent that unobserved factors </p>
+
+<p>2. Hossain and Lamb (2012) estimate separate Tobit 
+models for donations to religious and international organi-
+zations. They use the bivariate selection model to inves-
+tigate total donations and donations to health and social 
+service organizations. </p>
+
+<p>ABBREVIATIONS </p>
+
+<p>CP&amp;IA: Combined Purpose and International Aid 
+MSSM: Multivariate Sample Selection Model 
+OPPS: Center on Philanthropy Panel Study 
+PSID: Panel Study on Income Dynamics </p>
+
+<p>113 
+Contemporary Economic Policy (ISSN 1465-7287) 
+Vol. 35, No. 1, January 2017, 113-124 
+Online Early publication April 20, 2016 </p>
+
+<p>doi:10.1111/coep.12177 
+© 2016 Western Economic Association International </p>
+
+
+
+<p>CONTEMPORARY ECONOMIC POLICY </p>
+
+<p>such as household and institutional character-
+istics can affect donation activities jointly, the 
+MSSM constitutes an improvement over single 
+equation and bivariate models and multiequation 
+two-step procedures by enhancing the statistical 
+efficiency of the estimates. 
+The article is intended as a contribution to 
+the literature on charitable giving by purpose 
+in the spirit of Brooks (2007) and Hossain and 
+Lamb (2012). 3 We develop and estimate a model 
+of charitable donations to organizations that 
+help people in need, combined purpose and 
+international aid (CP&amp;IA) organizations, and 
+all other organizations. The primary objective is 
+to provide estimated tax price elasticities which 
+can be used to predict the impacts of changes 
+in the tax treatment of charitable contributions 
+on the levels of individual monetary donations 
+to charity. 4 For example, how would changing 
+the charitable deduction to a 12% tax credit, as 
+proposed by the National Commission on Fiscal 
+Responsibility and Reform, impact individual 
+contributions to charity? 5 The answer to this 
+question is of enormous importance to nonprofits 
+given that over 70% of all charitable donations 
+comes from individuals. 6 
+Below in Section II, we detail the short-
+comings of the Tobit model and present the 
+MSSM. Data and variables are described in 
+Section III. Results are presented and discussed 
+in Section IV. Section V provides the discussion 
+and conclusions. </p>
+
+<p>II. ECONOMETRIC MODEL </p>
+
+<p>A large body of the charitable donation liter-
+ature is based on the Tobit model (Tobin 1958). 
+The Tobit model is known to be restrictive in 
+that any variable which positively (negatively) 
+impacts the level of a dependent variable is </p>
+
+<p>3. Ottoni-Wilhelm and Hungerman (2007) estimate 
+panel data model using data for households making 
+positive charitable contributions. Households with zero 
+contributions are excluded, resulting in a great loss 
+of information. 
+4. Charitable donations to combined purpose and interna-
+tional aid organizations are included in the analysis because 
+some of these contributions are certainly directed toward the 
+poor and needy. We choose to treat them separately since con-
+tributions to these types of charities may also be directed to a 
+myriad of other purposes. 
+5. For a listing of proposals to reform the tax treatment of 
+charitable contributions, the reader is referred to the Indepen-
+dent Sector (2016). 
+6. The National Philanthropic Trust (2016) reported 
+that, in 2014, 72% of all donations to charity came 
+from individuals. </p>
+
+<p>forced to have a positive (negative) impact on 
+the probability of a positive outcome (Lin and 
+Schmidt 1984). 7 Further, the relative effects of 
+two continuous explanatory variables on the 
+probability, conditional mean, and unconditional 
+mean of the dependent variable are identical and 
+equal to the ratio of the corresponding coeffi-
+cients. Such presumptions are questionable in 
+the context of charitable donation and, in fact, 
+of most empirical applications. Recently, Brooks 
+(2007) estimates tax price elasticities across 
+six nonprofit subsectors using the log-Tobit 
+model, with the logarithmic transformation for 
+the dependent variable. Apart from the afore-
+mentioned parametric restrictions, an additional 
+issue with the log-Tobit model is that maximum-
+likelihood estimates are not invariant with respect 
+to scaling of the dependent variable. Further, a 
+common approximation to the relative marginal 
+effects of unconditional level of the dependent 
+variable can have a poor property, because 
+the unconditional mean of the dependent vari-
+able (c) is E(c) = E[exp(log c)] ≥ exp[E(log c)] 
+by Jensen's inequality. Using property of the 
+truncated log-normal distribution for the error 
+term (Johnson, Kotz, and Balakrishnan 1994, 
+241), the unconditional mean for the log-Tobit 
+model is E(c) = exp(x ′ β + σ 2 /2)Φ(σ + x ′ β/σ), 
+where x ′ β is the mean of the latent regression 
+function, σ is error standard deviation, and Φ(·) 
+is cumulative distribution function of the unit 
+normal (see Appendix S2, Supporting Infor-
+mation). This suggests that interpreting the 
+coefficient of a log-transformed variable (i.e., 
+an element of β) as the elasticity based on the 
+exponential term of the expression can result in 
+substantial error as the remaining (probability) 
+term is ignored. We demonstrate the lack of 
+invariance of log-Tobit estimates and proper 
+calculation of elasticity estimates by estimating 
+a log-Tobit model for donation for the needy, 
+a category considered in this article. Further 
+details of (issues with) the log-Tobit model are 
+presented in Appendix S2 and estimation results 
+in Table S1. 
+When households are not necessarily poten-
+tial consumers of the donated goods, the Tobit 
+model cannot properly handle zero observa-
+tions of the dependent variables. The sample </p>
+
+<p>7. Recent studies by Forbes and Zampelli (2011, 2013) 
+provide formal hypothesis tests which demonstrate the gen-
+eral superiority of sample selection models, for example, 
+Cragg's (1971) "single-hurdle" model and Heckman's (1979) 
+bivariate selection model, over Tobit specifications for both 
+time and money donations. </p>
+
+<p>ZAMPELLI &amp; YEN: CHARITABLE CONTRIBUTIONS TO THE NEEDY </p>
+
+
+
+<p>selection model (Heckman 1979) offers a 
+richer behavioral explanation and more flexi-
+ble parameterization to accommodate the zero 
+observations. For this analysis of joint dona-
+tion activities, we use the MSSM (Yen 2005), 
+which is an extension of Heckman's (1979) 
+bivariate sample selection model to the mul-
+tivariate case. The outcome for each type of 
+contribution (c i ) is governed by a binary sample 
+selection rule (observation subscript suppressed 
+for brevity) </p>
+
+<p>(1) 
+log c i = x 
+′ β i + σ i v i if z 
+′ α i + u i &gt; 0 </p>
+
+<p>c i = 0 
+i f z 
+′ α i + u i ≤ 0, </p>
+
+<p>i = 1, 2, 3, </p>
+
+<p>where z and x are vectors of explanatory vari-
+ables with conformable parameter vectors α i 
+and β i , σ i is a scale parameter, and (u i , v i ) are 
+random error terms. In contrast to the Tobit 
+model in which one stochastic process deter-
+mines both the binary and level outcomes, the 
+binary outcome for each good i is governed by 
+a sample selection process and level by another. 
+The logarithmic transformation of the dependent 
+variables also accommodates potential non-
+normality and heteroscedasticity of the error 
+terms (Yen and Rosinski 2008). Assuming the 
+error terms (u 1 , u 2 , u 3 , v 1 , v 2 , v 3 ) are distributed 
+as six-dimensional standard normal with zero 
+means and a finite correlation matrix, the system 
+can be estimated by the method of maximum 
+likelihood. The sample likelihood function is 
+presented in Yen (2005) but is much simplified 
+for a three-good system, which we present in 
+Appendix S1. 
+The MSSM nests two restricted specifica-
+tions: (1) an independent system in which all 
+unique error correlations are zeros; (2) a pairwise 
+selection system in which only the correlation 
+between each selection equation and its corre-
+sponding level equation is allowed (Yen 2005). 
+Tests against these nested specifications can be 
+done with the Wald, likelihood ratio, or Lagrange 
+multiplier test. 
+Marginal effects of probabilities, conditional 
+levels, and unconditional levels allow in-depth 
+analysis of the effects of explanatory variables. 
+Denote the cumulative distribution function 
+of the unit normal as Φ(·) and the correlation 
+between the selection and level equations for 
+each good as ρ i . Then, for each i, the probability 
+of a positive c i and conditional mean (Yen and 
+Rosinski 2008, 5) are </p>
+
+<p>(2) 
+Pr 
+( 
+c i &gt; 0 
+) 
+= ϕ 
+( 
+z 
+′ α i 
+) 
+, </p>
+
+<p>E 
+( 
+c i | c i &gt; 0 
+) 
+= exp 
+( 
+x 
+′ β i + σ </p>
+
+<p>2 </p>
+
+<p>i ∕2 </p>
+
+<p>) 
+(3) </p>
+
+<p>× Φ 
+( 
+z 
+′ α i + ρ i σ i 
+) 
+∕Φ 
+( 
+z 
+′ α i 
+) 
+. </p>
+
+<p>Given E(c i ) = Pr (c i &gt; 0)E(c i | c i &gt; 0), the 
+unconditional mean of c i is </p>
+
+<p>(4) 
+E 
+( 
+c i 
+) 
+= exp 
+( 
+x 
+′ β i + σ </p>
+
+<p>2 </p>
+
+<p>i ∕2 </p>
+
+<p>) 
+Φ 
+( 
+z 
+′ α i + ρ i σ i 
+) 
+. </p>
+
+<p>This multiplicative relationship also implies 
+that the elasticities of probability and conditional 
+mean with respect to a variable add up to the elas-
+ticity of the unconditional mean. Differentiating 
+(differencing) Equations (2)-(4) with respect to 
+explanatory variables x and z yields the marginal 
+effects of continuous (discrete) explanatory 
+variables. Unlike the restrictions imposed by 
+Tobit parameterization, these expressions and 
+the resulting marginal effects (Yen and Rosinski 
+2008, 5) suggest that though the marginal effect 
+of a common variable in the selection and level 
+equations (say x k = z k with coefficients β ik = α ik ) 
+on the probability of positive c i is determined 
+exclusively by the coefficients α ik , the marginal 
+effects on the conditional and unconditional 
+means of c i are functions of both α ik and β ik , 
+which can take either sign. This, again, shows the 
+advantage of the sample selection parameteriza-
+tion over the Tobit. We calculate elasticities with 
+respect to tax price, for all observations and aver-
+aged over the sample. For statistical inference, 
+standard errors of elasticities are calculated by 
+a mathematical approximation procedure known 
+as the delta method. </p>
+
+<p>III. DATA AND VARIABLE DESCRIPTIONS </p>
+
+<p>Our empirical analysis uses data from the 
+2009 Center on Philanthropy Panel Study 
+(COPPS) and Panel Study on Income Dynamics 
+(PSID). The COPPS is the philanthropy module 
+of the PSID and contains data on charitable 
+donations by purpose, religious affiliation, and 
+a number of important economic, demographic, 
+and cultural characteristics for a sample of 8,690 
+American families. Additional data are extracted 
+from the PSID 2009 family file and merged 
+with the COPPS data. Importantly, because the 
+PSID has a low-income oversample, all analyses 
+are weighted. The weights account for unequal 
+sampling probabilities of families in the PSID as 
+well as for differential attrition (Gouskova 2007). 
+Also noted is that the COPPS data on monetary </p>
+
+
+
+<p>CONTEMPORARY ECONOMIC POLICY </p>
+
+<p>giving by households which itemize charitable 
+contributions are similar to tax return data except 
+for the very top of the income distribution. The 
+COPPS data have a distinct advantage in exam-
+ining the charitable behavior of nonitemizers 
+as such data are unavailable from tax returns. 
+For more details regarding COPPS and the 
+PSID, the reader is referred to Wilhelm (2005, 
+2008a, 2008b). 
+From the total sample, we dropped house-
+holds with a head residing in a foreign country 
+(43 observations), for which the respondent was 
+not the head or the wife (206) or the philan-
+thropy module questions were not asked (6), 
+cohabitating (772), or with a separated or unclear 
+marital status (367). Additionally, we dropped 
+observations with missing values on important 
+variables: 342 on educational level, 30 on race, 
+12 on life satisfaction, and one on age, all of 
+the household head. Finally, 153 "borderline 
+itemizer" households (explained below) were 
+eliminated. This left us with an estimation sam-
+ple of 6,758 households whose marital status is 
+married with husband and wife living together, 
+single head of household, or single. All variable 
+definitions and weighted sample statistics are 
+provided in Table 1. 
+The dependent variables are donations to 
+organizations who help people in need of food, 
+shelter, or other basic necessities (needy), to 
+CP&amp;IA/peace organizations, and to all other 
+charities (all other). These data were taken 
+directly or calculated from the COPPS database 
+which identifies monetary donations to charita-
+ble organizations by purpose. 8 Federal and state 
+marginal tax rates are estimated using Internet 
+<rs id="software-1" type="software">TAXSIM</rs> <rs corresp="#software-1" type="version-number">Version 9</rs>, the <rs corresp="#software-1" type="creator">NBER</rs>'s FORTRAN pro-
+gram for calculating liabilities under U.S. federal 
+and state income tax laws from individual data. 9 
+These rates are estimated presuming zero char-
+itable contributions so that they represent "first 
+dollar" tax rates. 10 This ameliorates the potential 
+endogeneity problem with actual marginal tax 
+rates that arises because large donation amounts </p>
+
+<p>8. The all other categories include religious organiza-
+tions, health and medical research, education, neighborhood 
+and community improvement, youth and family services, the 
+arts, the environment, and other organizations. 
+9. For a complete description, readers are directed to 
+the TAXSIM website at http://users.nber.org/~taxsim/ and 
+Feenberg and Coutts (1993). 
+10. The term "first dollar" tax rate refers to the tax rate 
+that would be applied to the first dollar the individual con-
+tributes to charity. Correspondingly, the "first dollar" tax price 
+refers to the cost to the individual of the first dollar the indi-
+vidual contributes to charity. </p>
+
+<p>may reduce taxable income enough to lower the 
+household's marginal tax bracket. The first dollar 
+tax price of monetary donations is calculated as 
+P = (1 − Iτ) = 1 − I 
+[( 
+τ f + d s τ s − d f τ s τ f 
+(5) </p>
+
+<p>−d s τ s τ f 
+) 
+∕ 
+( 
+1 − d f τ s τ f 
+)] 
+, </p>
+
+<p>where I = 1 for itemizers and 0 otherwise, τ is 
+the marginal tax rate, τ f is the marginal fed-
+eral tax rate, τ s is the marginal state tax rate, 
+d s = 1 if contributions are deductible on the state 
+return and 0 otherwise, and d f = 1 if federal taxes 
+are deductible on state returns (Bradley, Holden, 
+and McClelland 2005). 11 We note, however, that 
+even the first dollar tax price can be suscepti-
+ble to omitted variables bias due to unobserved 
+heterogeneity across states, that is, differences 
+across states that are correlated with both tax rates 
+and the philanthropic behavior of its citizenry. 
+As a precaution, therefore, we include a set of 
+state dummy variables to reduce the likelihood of 
+such bias. 
+The formulation of the tax price in Equation 
+(5) presumes that an itemizing household remains 
+an itemizing household even in the absence of the 
+charitable deduction, that is, that itemization sta-
+tus is itself exogenous to charitable giving. For 
+borderline itemizers, such is not the case; as with-
+out the charitable deduction, they would choose 
+the standard deduction, so that their itemization 
+status is endogenous to giving. In our sample, 
+such borderline itemizers are identified as house-
+holds which itemize and make positive monetary 
+donations to charity but face a tax price of one. 
+Following Clotfelter (1980) and as noted above, 
+we exclude these households. 
+Similar to Brooks (2007), our measure of 
+income is pretax family income. We use this 
+broad measure of income because it is likely to 
+be much less responsive to variations in marginal 
+tax rates (Saez, Slemrod, and Giertz 2012). Both 
+tax price and income are included in the natural 
+log form. 
+Remaining variables are taken directly or 
+calculated from the COPPS and/or PSID data </p>
+
+<p>11. Most taxpayers are allowed a choice between the 
+itemized deductions and the standard deduction. They can 
+itemize their deductions (from a list of allowable items) and 
+subtract those itemized deductions (and any applicable per-
+sonal exemption deductions) from their adjusted gross income 
+to arrive at the taxable income. Alternatively, they can elect 
+to subtract the standard deduction for their filing status and 
+any applicable personal exemption deduction. In other words, 
+the taxpayer may generally deduct the total itemized deduc-
+tion amount, or the standard deduction amount, whichever 
+is greater. Those choosing the former are "itemizers" while 
+those choosing the latter are "non-itemizers." </p>
+
+<p>ZAMPELLI &amp; YEN: CHARITABLE CONTRIBUTIONS TO THE NEEDY </p>
+
+
+
+<p>TABLE 1 
+Variable Definitions and Sample Statistics </p>
+
+<p>Variable 
+Definition 
+Mean </p>
+
+<p>Dependent variables: annual charitable contribution in dollars, 2008 
+Needy 
+To the needy 
+182.86 
+(936.36) 
+Among donors (28.54% of sample) 
+570.15 
+(1585.49) 
+CP&amp;IA 
+To combined purpose and international/peace orgs 
+186.86 
+(1016.55) 
+Among donors (25.73% of sample) 
+648.03 
+(1812.78) 
+All other 
+To all other charities 
+1206.15 
+(3253.39) 
+Among donors (54.92% of sample) 
+2002.37 
+(3997.40) 
+Continuous explanatory variables 
+Tax price 
+First dollar tax price (defined in text) 
+0.89 
+(0.14) 
+For itemizers (41.4% of sample) 
+0.74 
+(0.08) 
+Income 
+Total family income 2008, in $10,000 
+7.73 
+(12.19) 
+Wealth 
+Wealth excluding home equity in $10,000 
+26.64 
+(179.09) 
+Home equity 
+Home equity in $1,000 
+95.55 
+(20.41) 
+Kids 
+Number of children under 18 years of age 
+0.55 
+(1.01) 
+Age young child 
+Age of youngest child 
+2.17 
+(4.45) 
+Binary explanatory variables (household head characteristics): yes = 1, no = 0 
+No high school 
+Did not complete high school (reference) 
+0.14 
+High school 
+Has a high school diploma 
+0.31 
+Some college 
+Completed some college work 
+0.24 
+College 
+Has a college degree 
+0.19 
+Some grad school 
+Has some graduate work or graduate degree 
+0.12 
+Catholic 
+Religion is Catholic 
+0.24 
+Jewish 
+Jewish 
+0.03 
+Protestant 
+Protestant 
+0.55 
+Other relig. 
+Greek/Russian/Eastern Orthodox 
+0.00 
+No relig. 
+Espouses no religion, is agnostic or atheist (reference) 
+0.18 
+Same relig. 
+Has same religion as spouse 
+0.35 
+Married 
+Is married 
+0.52 
+Working 
+Working now 
+0.68 
+Retired 
+Retired 
+0.18 
+Disabled 
+Disabled 
+0.04 
+Other labor status 
+Unemployed, student, homemaker, other (reference) 
+0.10 
+Work (both) 
+Head and wife both work 
+0.27 
+Retired (both) 
+Head and wife both retired 
+0.05 
+African Amer. 
+Race is African American 
+0.15 
+Hispanic 
+Hispanic 
+0.07 
+Other race 
+Neither African American nor Hispanic (reference) 
+0.78 
+Large metro. 
+Resides in large metro area 
+0.40 
+Small metro. 
+Resides in small metro area 
+0.34 
+Large urban 
+Resides in large urban area 
+0.07 
+Small urban 
+Resides in small urban area 
+0.15 
+Rural 
+Resides in completely rural area (reference) 
+0.04 
+Farm 
+Grew up on a farm or in the country 
+0.13 
+Small town 
+Grew up in a small town or suburb 
+0.45 
+City 
+Grew up in a large city 
+0.37 
+Elsewhere 
+Grew up elsewhere 
+0.05 
+Satisfied 0 
+Not satisfied with life at all (reference) 
+0.02 
+Satisfied 1 
+Not very satisfied with life 
+0.04 
+Satisfied 2 
+Somewhat satisfied with life 
+0.31 
+Satisfied 3 
+Very satisfied with life 
+0.43 
+Satisfied 4 
+Completely satisfied with life 
+0.20 
+Sample size 
+6,758 </p>
+
+<p>Notes: Standard deviations in parentheses. All sample statistics are weighted. </p>
+
+
+
+<p>CONTEMPORARY ECONOMIC POLICY </p>
+
+<p>sets and are considered rather standard fare in 
+most empirical studies of philanthropic behavior. 
+These include wealth measures, homeownership, 
+age, gender, race, marital status, labor market 
+status, education, religious affiliation, life satis-
+faction, and the rural/urban character of place 
+of residence. 
+Finally, unlike two-step estimation which 
+requires exclusion restrictions, that is, explana-
+tory variables unique to the selection equations 
+and excluded from the levels equations, for 
+parameter identification, such restrictions are 
+unnecessary for maximum-likelihood estimation 
+because the parameters are identified through the 
+nonlinearity inherent in the error distributional 
+assumptions. However, to avoid relying entirely 
+on the distributional assumption for identifi-
+cation, we do impose exclusion restrictions. 
+Given the limitations of the data, we include in 
+the selection equations three binary variables 
+indicating whether the household head grew up 
+on a farm, in a small city, or in a large city. These 
+are intended to capture the effects of the social 
+ties, norms, and diversity that are identified with 
+the geographic area where the household head 
+was raised (Bekkers 2006; Putnam 2000; Steblay 
+1987). 12 Use of these instruments is supported 
+by statistical tests below. </p>
+
+<p>IV. RESULTS </p>
+
+<p>Weighted maximum-likelihood estimates 
+for the instruments and error correlations are 
+presented in Table A1 (see Table S1 for all 
+estimates). The three instrumental variables 
+(farm, small town, and city) are individually 
+significant in all selection equations with one 
+exception and jointly significant in the selection 
+equations for needy (Wald = 7.02, p = .071), 
+CP&amp;IA (Wald = 10.26, p = .016), and all other 
+(Wald = 8.83, p = .032), with df = 3, rejecting 
+the null hypothesis of weak instruments. Based 
+on a specification with no exclusion restrictions, 
+Wald test results suggest the three variables are 
+jointly insignificant in the level equations for 
+the needy (Wald = 1.40), CP&amp;IA (Wald = 2.74), 
+and all other (Wald = 1.94), all with df = 3 and a 
+p &gt; .40, supporting their excludability from the 
+level equations. In sum, our test results provide 
+evidence of adequate instrumentation. </p>
+
+<p>12. Initially, the exclusion restrictions included the four 
+educational variables. Subsequent test result, however, did not 
+support their exclusion from the level equations. It is worth 
+noting, however, that the tax-price elasticities are found to be 
+fairly robust with respect to exclusion restrictions. </p>
+
+<p>TABLE 2 
+Estimated Tax Price Elasticities (Full Sample) </p>
+
+<p>Probability </p>
+
+<p>Conditional 
+Level </p>
+
+<p>Unconditional 
+Level </p>
+
+<p>Needy 
+−1.375 
+(0.129)*** </p>
+
+<p>−0.972 
+(0.192)*** </p>
+
+<p>−2.347 
+(0.235)*** 
+CP&amp;IA 
+−1.333 
+(0.143)*** </p>
+
+<p>−0.091 
+(0.185) </p>
+
+<p>−1.423 
+(0.227)*** 
+All other 
+−1.050 
+(0.076)*** </p>
+
+<p>−1.671 
+(0.147)*** </p>
+
+<p>−2.720 
+(0.173)*** </p>
+
+<p>Note: Asymptotic standard errors in parentheses. 
+Statistical significance *** at the 1% level. </p>
+
+<p>Individually, 9 of the 15 error correlation 
+coefficients are statistically significant at the 
+1% level. By Wald tests, the three error corre-
+lations (df = 3) are jointly significant among 
+the selection equations (Wald = 1153.96) and 
+level equations (Wald = 113.58). The two nested 
+specifications, the pairwise selection system 
+(Wald = 1552.75, df = 12) and independent sys-
+tem (Wald = 2466.83, df = 15), are both rejected. 
+Lagrange multiplier and likelihood-ratio tests 
+produce similar results. These test results, all 
+with a p &lt; .0001, support both joint estimation 
+and the use of the MSSM over the two nested 
+specifications. Finally, using Vuong's (1989) 
+non-nested test, the Tobit system (Amemiya 
+1974) is rejected in favor of the MSSM (standard 
+normal statistic Z = 12.73, p &lt; .0001). As we are 
+primarily concerned with tax price elasticities, 
+we tabulate and discuss only these results, with 
+the remaining marginal effect estimates available 
+upon request. 
+By the adding-up property of elasticities noted 
+above, the price elasticity of each probability 
+of a positive donation and of the corresponding 
+conditional mean add up to the price elasticity 
+of the unconditional mean. The total impact of 
+a tax price change on the unconditional mean 
+giving level, therefore, derives from two distinct 
+sources: the impact on the likelihood of giving, 
+or equivalently, on the proportion of households 
+that donate and the impact on the amount that 
+donors give. 
+Table 2 reports the tax price elasticities of 
+probabilities, conditional levels, and uncondi-
+tional levels for the three donation categories, 
+for the full sample. With only one exception, all 
+are highly statistically significant. For both needy 
+and all other, changes in tax prices precipitate 
+changes in both the probability of donating and 
+in the amounts that donors give. In contrast, a tax 
+price change works largely through its impact on 
+the likelihood of giving to CP&amp;IA organizations. </p>
+
+<p>ZAMPELLI &amp; YEN: CHARITABLE CONTRIBUTIONS TO THE NEEDY </p>
+
+
+
+<p>In all cases, the tax price elasticities of uncon-
+ditional levels are statistically greater than unity 
+in absolute value, indicating that the charitable 
+deduction is fiscally or treasury efficient, that 
+is, the foregone tax revenue is more than offset 
+by the greater amount of monetary donations to 
+charity (Andreoni 2008). 
+These estimates are well within historical 
+bounds that run from zero to −7.07 as reported 
+by Peloza and Steel (2005) in their meta-analysis 
+of 69 studies on charitable giving. These bounds, 
+however, are specific largely to total charitable 
+donations. A more relevant comparison is to tax 
+price elasticities of donations to our particular 
+categories of charity. In this regard, we can 
+compare our estimates only to those reported 
+by Brooks (2007). 13 Brooks (2007) reports a 
+tax price elasticity of donations to the needy 
+of −1.33, statistically indistinguishable from 
+minus unity. In contrast, our higher estimate 
+of −2.347 strongly supports the alternative 
+hypothesis that donation to the needy is tax-price 
+elastic (p &lt; .0001). For combined purpose giv-
+ing, Brooks estimates a price elasticity of −2.68 
+in comparison with our much lower estimate 
+of −1.423 for CP&amp;IA donations which, again, 
+is significantly greater than unity in absolute 
+value (with a one-tail p = .03). 14 For Canada, 
+Hossain and Lamb (2012) report price elasticity 
+estimates in the range of −0.81 for religious 
+donations to −2.25 for donations to international 
+organizations. Except for the religious category, 
+their price elasticity estimates are statistically 
+greater than unity. 
+The range of tax price elasticity estimates 
+reported in Table 2 (along with those from 
+Brooks and Hossain and Lamb) is at the higher 
+end of the historical spectrum. Indeed, one might 
+suspect that the estimates are unrealistically 
+high for a number of reasons. For example, it is 
+hypothesized that the response of donations to 
+temporary (short-run) tax changes is greater than 
+to permanent (long-run) tax changes. If so, then 
+tax prices calculated in the year of donation will 
+likely contain a large transitory component and 
+hence lead to artificially higher price elasticities </p>
+
+<p>13. Ottoni-Wilhelm and Hungerman (2007) estimate tax 
+price elasticities for specific categories of donations, none 
+of which match ours. Their reported (significant) elasticity 
+estimates range from −1.80 to −2.50. 
+14. Though Brooks (2007) does not include giving for 
+peace and international relief services in the combined pur-
+pose category as we do, the difference in definition is unlikely 
+to be a major source of the difference in magnitudes as dona-
+tions to combined purpose organizations make up about 90% 
+of total CP&amp;IA giving. </p>
+
+<p>than estimates calculated over a number of years. 
+Similarly, because cross-sectional studies are 
+likely to reflect short-term donor responses, they 
+are hypothesized to yield higher price elasticities 
+than results from panel data analysis. Though 
+acknowledging such possibilities, we note that 
+the (only) meta-analyses of historical tax price 
+elasticity estimates conducted by Peloza and 
+Steel (2005) do not support either of these 
+claims. Their analysis does suggest, however, 
+that our estimates may be higher because of 
+the use of survey data rather than tax-filer data. 
+Unfortunately, tax-filer data are not conducive 
+to investigation of differences among different 
+types of cash contributions. 
+The policy implication of our tax price elastic-
+ity estimates is fairly straightforward. Changing 
+the tax treatment of charitable contributions 
+can have substantial impacts on the amounts 
+contributed. We consider a simple proposal put 
+forth by the National Commission on Fiscal 
+Responsibility and Reform (Bowles-Simpson 
+Commission) empaneled by President Obama 
+to change the charitable deduction into a nonre-
+fundable tax credit of 12% under two alternative 
+scenarios. Scenario 1 maintains current law and 
+allows only itemizers to take advantage of the 
+credit, while Scenario 2 extends the credit to 
+the charitable donations by taxpayers who do 
+not itemize deductions. The latter scenario is 
+consistent with the Commission's recommen-
+dation. Under this proposal, the tax price is 
+equal to 0.88, with a one dollar contribution to 
+charity costing the tax payer $0.88. As such, 
+this exercise can also be viewed as at least a 
+partial evaluation of the proposed changes to the 
+charitable deduction included in the Tax Reform 
+Act of 2014 put forth by former House Ways 
+and Means Committee Chairman Representative 
+David Camp. Those proposed changes have been 
+estimated by Rosenberg et al. (2014) to yield an 
+average tax price of $0.88. 15 
+For the predictions, we presume that the three 
+types of households in our sample-married, 
+single with children, and single-map into the 
+three tax filing statuses of married filing jointly, 
+single head of household, and single. Table 3 </p>
+
+<p>15. We note that our evaluation does not incorporate the 
+Bowles-Simpson Commission's accompanying recommen-
+dation that the credit apply only to contributions above 2% 
+of adjusted gross income. Nor does it account for any other 
+changes recommended by Camp's tax reform act. Possible 
+macroeconomic effects of these changes are also ignored. The 
+evaluation is partial in nature focusing solely on the effects of 
+a change in tax price on cash donations to charity. </p>
+
+
+
+<p>CONTEMPORARY ECONOMIC POLICY </p>
+
+<p>TABLE 3 
+Tax-Price Elasticities by Itemization and Marital Status </p>
+
+<p>Itemizers 
+Nonitemizers </p>
+
+<p>Donation 
+Probability </p>
+
+<p>Conditional 
+Level </p>
+
+<p>Unconditional 
+Level 
+Probability </p>
+
+<p>Conditional 
+Level </p>
+
+<p>Unconditional 
+Level </p>
+
+<p>Married = 1 (n = 1,906) 
+Married = 1 (n = 1,794) </p>
+
+<p>Needy 
+−0.990 (0.088)*** −0.977 (0.195)*** −1.968 (0.215)*** −1.491 (0.151)*** −0.970 (0.195)*** −2.461 (0.252)*** 
+CP&amp;IA 
+−0.918 (0.094)*** −0.079 (0.184) 
+−0.997 (0.201)*** −1.413 (0.162)*** −0.094 (0.187) 
+−1.507 (0.241)*** 
+All other 
+−0.499 (0.033)*** −1.423 (0.144)*** −1.922 (0.147)*** −1.080 (0.092)*** −1.727 (0.149)*** −2.807 (0.189)*** </p>
+
+<p>Married = 0 &amp; Kids &gt; 0 (n = 126) 
+Married = 0 &amp; Kids &gt; 0 (n = 808) </p>
+
+<p>Needy 
+−1.233 (0.109)*** −0.973 (0.191)*** −2.207 (0.223)*** −1.829 (0.178)*** −0.966 (0.207)*** −2.795 (0.280)*** 
+CP&amp;IA 
+−1.237 (0.128)*** −0.090 (0.185) 
+−1.328 (0.218)*** −1.827 (0.202)*** −0.102 (0.192) 
+−1.928 (0.272)*** 
+All other −0.899 (0.061)*** −1.654 (0.146)*** −2.553 (0.163)*** −1.807 (0.139)*** −1.912 (0.152)*** −3.719 (0.229)*** </p>
+
+<p>Married = 0 &amp; Kids = 0 (n = 473) 
+Married = 0 &amp; Kids = 0 (n = 1,651) </p>
+
+<p>Needy 
+−1.118 (0.094)*** −0.975 (0.191)*** −2.092 (0.215)*** −1.672 (0.161)*** −0.968 (0.201)*** −2.640 (0.263)*** 
+CP&amp;IA 
+−1.086 (0.107)*** −0.086 (0.183) 
+−1.171 (0.205)*** −1.673 (0.183)*** −0.099 (0.190) 
+−1.772 (0.257)*** 
+All other −0.741 (0.042)*** −1.586 (0.145)*** −2.327 (0.152)*** −1.533 (0.116)*** −1.853 (0.151)*** −3.386 (0.209)*** </p>
+
+<p>Note: Asymptotic standard errors are in parentheses. 
+Statistical significance *** at the 1% level. </p>
+
+<p>provides estimated tax price elasticities for each 
+of the three types by itemizing status. Note that in 
+all cases, the unconditional tax price elasticities 
+for all categories are higher for nonitemizers than 
+for itemizers. This is consistent with Peloza and 
+Steel (2005) whose meta-analysis tests the usual 
+claim that tax price elasticities will be higher 
+for itemizers than for nonitemizers and finds the 
+exact opposite. Such differences are important 
+when analyzing policies that propose extending 
+the preferential treatment of charitable donations 
+to nonitemizing taxpayers. We use sample mean 
+tax prices and unconditional contribution levels 
+for each household group to calculate changes in 
+donations per household. Using data from Table 
+1.3 of the 2012 Individual Income Tax Returns 
+available from the Internal Revenue Service, we 
+multiply the per household donation change by 
+the total number of returns filed under each filing 
+status to get estimates of the total change in 
+donations (in billions of 2012 dollars). 16 For the 
+interested reader, details of the calculations are 
+provided in the Tables A2-A4. 
+For Scenario 1, the reduction in contributions 
+is large and comes mostly from the all other 
+category. Summing across the donation types, 
+the total reduction is estimated to be almost 
+$43.3 billion. In 2012, this would have amounted 
+to a 18.9% reduction in individual charitable 
+contributions and a 13.7% reduction in total </p>
+
+<p>16. Table 1.3 for 2012 can be downloaded at http://www. 
+irs.gov/uac/SOI-Tax-Stats-Individual-Income-Tax-Returns-
+Publication-1304-(Complete-Report). </p>
+
+<p>charitable contributions. 17 For Scenario 2 which 
+extends the credit nonitemizers, the reduction 
+is almost $24 billion, amounting to a 10.5% 
+reduction in individual contributions and a 7.6% 
+reduction in total contributions. 18 The difference 
+indicates clearly that the moderating impact of 
+extending the credit to nonitemizing taxpayers 
+is substantial. Such estimated impacts are far 
+larger than those that were and would be pre-
+dicted by Congressional Budget Office (CBO) 
+(2011), Cordes (2011), and Galle, Colinvaux, and 
+Steurle (2012) as these studies assumed a low tax 
+price elasticity of −0.5 and a high tax price elas-
+ticity of only −1.0. Indeed, using these elasticity 
+estimates, we would have predicted reductions 
+in individual (total) contributions ranging from 
+2.3% to 7.5% (1.7%-5.4%). </p>
+
+<p>V. SUMMARY AND CONCLUSIONS </p>
+
+<p>We estimated an MSSM of charitable dona-
+tions to organizations that help people in need, 
+to CP&amp;IA organizations, and to all other orga-
+nizations. The methodology relaxes some of the </p>
+
+<p>17. Giving USA (2013) estimated individual charitable 
+contributions of $228.9 billion and total contributions of 
+$316.2 billion for 2012. 
+18. The substantial change in donations resulting from 
+the switch from deduction to credit is contrary to the Canadian 
+experience where a change from deduction to credit was 
+estimated to have very little impact on charitable donations. 
+In Canada, however, as Duff (2001) acknowledges, this was 
+to be expected since their two-tier "credit" still depended on 
+income as did the previous deduction. </p>
+
+<p>ZAMPELLI &amp; YEN: CHARITABLE CONTRIBUTIONS TO THE NEEDY </p>
+
+
+
+<p>restrictions of the Tobit model that is often used 
+when the dependent variable takes on zero val-
+ues for a non-negligible portion of the sample. 
+Our primary objective was to provide efficient 
+and unrestricted estimates of the tax price elastic-
+ities of charitable donations with which we could 
+predict the impact of proposed changes in the tax 
+treatment of charitable contributions on the level 
+of contributions. 
+The estimated tax price elasticities all exceed 
+one in absolute value and are therefore consis-
+tent with the argument that the deductibility of 
+charitable contributions is a fiscally efficient 
+subsidy, that is, the amount of tax revenue lost 
+from the deduction is accompanied by an even 
+greater increase in amount of private charitable 
+donations (Andreoni 2008). Of course, fiscal 
+efficiency is a double-edged sword. Proposals 
+prompted primarily by deficit worries regard-
+ing elimination of or reduction in the subsidy 
+for charitable contributions (Cordes 2011) will 
+have serious consequences for charitable dona-
+tions with price elasticities exceeding unity. For 
+example, we predicted that changing the deduc-
+tion to a 12% tax credit would have reduced total 
+donations in 2012 by $43.3 billion if applied only 
+to itemizing taxpayers and by almost $24 billion 
+if extended to nonitemizers. These losses could 
+not have been offset fully even in the (highly 
+unlikely) case where the government used the 
+entire increase in tax revenues to do so. 
+Given our price elasticity estimates, complete 
+elimination of the deduction, as proposed by the 
+Bipartisan Policy Center Panel and Republican 
+Presidential Candidate Ben Carson, could have 
+serious consequences for monetary donations </p>
+
+<p>to charitable organizations. We estimate that in 
+2012, elimination of the deduction, by itself, 
+would have led to a 35% reduction in individual 
+charitable donations and a 25% reduction in total 
+charitable donations. 
+Proposals to eliminate the charitable deduc-
+tion, however, are often coupled with proposed 
+deep cuts in marginal income tax rates. For 
+example, the Carson plan calls for elimination of 
+the charitable deduction with a flat 15% income 
+tax rate. Proponents of such plans argue that 
+reductions in charitable donations would be min-
+imal at worst, given that the cuts in marginal tax 
+rates will raise incomes along with the rate of eco-
+nomic growth. Such optimism may be misplaced. 
+Specifically, estimates of the income elasticity 
+of charitable donations are usually well below 
+one. Our (unreported) income elasticity estimates 
+range from a low of 0.299 for donations to the 
+needy to a high of 0.956 for donations to CP&amp;IA. 
+Using our price elasticity estimates, the percent-
+age reduction in donations from eliminating the 
+charitable deduction range from a low of 35% 
+for CP&amp;IA to a high of 85% for the all other 
+category. Given the income inelastic nature of 
+charitable donations, to offset completely or even 
+substantially these reductions would require any 
+marginal tax rate reduction to yield percentage 
+increases in incomes that are simply not believ-
+able. This remains true even with a presumed 
+low price elasticity of −0.50. Fundamentally, our 
+results provide justification for the ardent oppo-
+sition expressed by many in the nonprofit sector 
+and philanthropic community to the more radical 
+proposals for changing the tax treatment of char-
+itable contributions. </p>
+
+<p>APPENDIX 
+TABLE A1 
+Weighted Maximum-Likelihood Estimates: Coefficients of Instruments and Error Correlations </p>
+
+<p>Selection Equations 
+Level Equations </p>
+
+<p>Variable 
+Needy 
+CP&amp;IA 
+All Other 
+Needy 
+CP&amp;IA </p>
+
+<p>Instruments 
+Farm 
+−0.129 (0.074)* 
+−0.201 (0.078)** 
+−0.133 (0.075)* 
+Small town 
+−0.171 (0.067)** 
+−0.156 (0.069)** 
+−0.087 (0.069) 
+City 
+−0.164 (0.068)** 
+−0.212 (0.070)*** −0.159 (0.070)** 
+Error correlations 
+Selection: CP&amp;IA 
+0.270 (0.019)*** 
+Selection: all other 
+0.506 (0.018)*** 
+0.387 (0.020)*** 
+Level: needy 
+0.046 (0.494) 
+−0.112 (0.098) 
+−0.111 (0.192) 
+Level: CP&amp;IA 
+−0.073 (0.072) 
+−0.110 (0.380) 
+−0.116 (0.107) 
+0.384 (0.042)*** 
+Level: all other 
+−0.183 (0.019)*** −0.114 (0.020)*** −0.674 (0.033)*** 0.231 (0.070)*** 0.246 (0.031)*** </p>
+
+<p>Notes: Asymptotic standard errors are in parentheses. All donation amounts, the dependent variables, are expressed in $100. 
+Not reported are estimates of common regressors (see Table 1) and state dummy variables. 
+Statistical significance *** at the 1% level; ** at the 5% level; * at the 10% level. </p>
+
+
+
+<p>CONTEMPORARY ECONOMIC POLICY </p>
+
+<p>TABLE A2 
+Calculation of Changes in Contributions to the Needy from Policy Changes </p>
+
+<p>Tax Price </p>
+
+<p>Tax Price 
+with Credit </p>
+
+<p>% tax 
+Price </p>
+
+<p>Tax-Price 
+Elasticity </p>
+
+<p>% 
+Donation </p>
+
+<p>Avg. 
+Donation </p>
+
+<p>avg. 
+Donation </p>
+
+<p>No. of 
+Returns 
+Donations </p>
+
+<p>Married 
+Itemizers 
+0.74 
+0.88 
+18.9 
+−1.968 
+−37.2 
+371 
+−138 
+25,887,574 
+−3.576 
+Nonitemizers 
+1.00 
+0.88 
+−12.0 
+−2.461 
+29.5 
+83 
+25 
+27,830,822 
+0.682 
+Head of household 
+Itemizers 
+0.75 
+0.88 
+17.3 
+−2.207 
+−38.3 
+259 
+−99 
+3,877,508 
+−0.384 
+Nonitemizers 
+1.00 
+0.88 
+−12.0 
+−2.795 
+33.5 
+48 
+16 
+17,936,676 
+0.289 
+Single 
+Itemizers 
+0.74 
+0.88 
+18.9 
+−2.092 
+−39.6 
+319 
+−126 
+14,635,170 
+−1.848 
+Nonitemizers 
+1.00 
+0.88 
+−12.0 
+−2.640 
+31.7 
+49 
+16 
+52,020,685 
+0.808 
+Totals 
+Scenario 1 
+−5.808 
+Scenario 2 
+−4.029 </p>
+
+<p>Notes: ΔAvg. donation in dollars; ΔDonations in billions of dollars. Totals may not add up due to rounding. </p>
+
+<p>TABLE A3 
+Calculation of Changes in Contributions to CP&amp;IA from Policy Changes </p>
+
+<p>Tax Price </p>
+
+<p>Tax Price 
+with Credit </p>
+
+<p>% tax 
+Price </p>
+
+<p>Tax-Price 
+Elasticity </p>
+
+<p>% 
+Donation </p>
+
+<p>Avg. 
+Donation </p>
+
+<p>avg. 
+Donation </p>
+
+<p>No. of 
+Returns 
+Donations </p>
+
+<p>Married 
+Itemizers 
+0.74 
+0.88 
+18.9 
+−0.997 
+−18.9 
+418 
+−79 
+25,887,574 
+−2.041 
+Nonitemizers 
+1.00 
+0.88 
+−12.0 
+−1.507 
+18.1 
+97 
+18 
+27,830,822 
+0.488 
+Head of household 
+Itemizers 
+0.75 
+0.88 
+17.3 
+−1.328 
+−23.0 
+319 
+−73 
+3,877,508 
+−0.285 
+Nonitemizers 
+1.00 
+0.88 
+−12.0 
+−1.928 
+23.1 
+24 
+6 
+17,936,676 
+0.100 
+Single 
+Itemizers 
+0.74 
+0.88 
+18.9 
+−1.171 
+−22.2 
+213 
+−47 
+14,635,170 
+−0.691 
+Nonitemizers 
+1.00 
+0.88 
+−12.0 
+−1.772 
+21.3 
+49 
+10 
+52,020,685 
+0.542 
+Totals 
+Scenario 1 
+−3.016 
+Scenario 2 
+−1.887 </p>
+
+<p>Notes: ΔAvg. donation in dollars; ΔDonations in billions of dollars. Totals may not add up due to rounding. </p>
+
+<p>TABLE A4 
+Calculation of Changes in Contributions to All Other Charities from Policy Changes </p>
+
+<p>Tax Price </p>
+
+<p>Tax Price 
+with Credit </p>
+
+<p>% tax 
+Price </p>
+
+<p>Tax-Price 
+Elasticity </p>
+
+<p>% 
+Donation </p>
+
+<p>Avg. 
+Donation </p>
+
+<p>avg. 
+Donation </p>
+
+<p>No. of 
+Returns 
+Donations </p>
+
+<p>Married 
+Itemizers 
+0.74 
+0.88 
+18.9 
+−1.922 
+−36.4 
+2,608 
+−948 
+25,887,574 
+−24.550 
+Nonitemizers 
+1.00 
+0.88 
+−12.0 
+−2.807 
+33.7 
+831 
+280 
+27,830,822 
+7.790 
+Head of household 
+Itemizers 
+0.75 
+0.88 
+17.3 
+−2.553 
+−44.3 
+1,230 
+−544 
+3,877,508 
+−2.111 
+Nonitemizers 
+1.00 
+0.88 
+−12.0 
+−3.719 
+44.6 
+198 
+88 
+17,936,676 
+1.585 
+Single 
+Itemizers 
+0.74 
+0.88 
+18.9 
+−2.327 
+−44.0 
+1,209 
+−532 
+14,635,170 
+−7.790 
+Nonitemizers 
+1.00 
+0.88 
+−12.0 
+−3.386 
+40.6 
+332 
+135 
+52,020,685 
+7.017 
+Totals 
+Scenario 1 
+−34.450 
+Scenario 2 
+−18.057 </p>
+
+<p>Notes: ΔAvg. donation in dollars; ΔDonations in billions of dollars. Totals may not add up due to rounding. </p>
+
+
+
+<p>ZAMPELLI &amp; YEN: CHARITABLE CONTRIBUTIONS TO THE NEEDY </p>
+
+
+
+
+
+
+
+<p>CONTEMPORARY ECONOMIC POLICY </p>
+
+<p>Yörük, B. "How Responsive Are Charitable Donors to 
+Requests to Give?" Journal of Public Economics, 
+93(9), 2009, 1111-17. </p>
+
+<p>SUPPORTING INFORMATION </p>
+
+<p>Additional Supporting Information may be found in the 
+online version of this article: 
+Appendix S1. The sample likelihood function </p>
+
+<p>Appendix S2. Invariance issue and marginal effects for 
+the log-Tobit model 
+Table S1. Weighted maximum-likelihood estimates of 
+sample selection system of charitable giving 
+Table S2. Maximum-likelihood estimates of log-Tobit 
+model for donation to the needy (partial) </p>
+
+</text></tei>

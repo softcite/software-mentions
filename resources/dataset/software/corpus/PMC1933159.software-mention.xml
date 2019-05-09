@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC1933159" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T20:01+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC1933159" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:08+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>ABSTRACT </p>
 
@@ -16,8 +16,8 @@ structure of the two interacting RNAs. Lastly,
 <rs type="software">pRuNA</rs> is an efficient database pruning service; 
 which given a query RNA, eliminates a significant 
 portion of an ncRNA database and returns only 
-a few ncRNAs as potential regulators. <rs id="software-40" type="software">taveRNA</rs> is 
-available at <rs corresp="#software-40" type="url">http://compbio.cs.sfu.ca/taverna</rs>Until recently RNA was thought to have only two 
+a few ncRNAs as potential regulators. <rs id="software-4" type="software">taveRNA</rs> is 
+available at <rs corresp="#software-4" type="url">http://compbio.cs.sfu.ca/taverna</rs>Until recently RNA was thought to have only two 
 functions: (i) primarily as an information transmitter 
 between DNA and proteins in the form of a messenger 
 RNA (mRNA) and (ii) as a catalyser or an information 
@@ -117,7 +117,7 @@ molecule. However, until recently no such algorithm
 existed for reliably predicting the joint secondary structure 
 of two interacting RNA molecules, or measuring the 
 stability of such a joint structure. At SFU Lab for 
-Computational Biology, <rs corresp="#software-23" type="creator">we</rs> developed <rs id="software-23" type="software">inteRNA</rs> the first 
+Computational Biology, <rs corresp="#software-14" type="creator">we</rs> developed <rs id="software-14" type="software">inteRNA</rs> the first 
 program that aims to compute the joint structure 
 prediction of two given RNA sequences through 
 minimizing their total free energy, which is a function of 
@@ -188,7 +188,9 @@ s and b, which will be explained in detail later.
 alteRNA outputs the results in three different forms: </p>
 
 <p>1. The predicted RNA structure in dot-parenthesis 
-format. The sequence is given from 5 0 to 3 0 end, 
+format. The sequence is given from 5 
+0 to 3 
+0 end, 
 and the structure is given with matching parenthesis 
 denoting a base pair and a dot denoting an 
 unbounded base. 
@@ -214,7 +216,7 @@ plt2. </p>
 dynamic cost of forming an RNA substructure can be 
 achieved by consideration of the energy density of the </p>
 
-<p>W326 Nucleic Acids Research, 2007, Vol. 35, Web Server issue </p>
+
 
 <p>substructure, which, in return, can improve the secondary 
 structure prediction of several ncRNA families. 
@@ -401,19 +403,25 @@ the underlying algorithms are all implemented in C/Cþþ.
 Our server is hosted on a Linux machine with 16 GB 
 RAM and 4 AMD Opteron 2200 processors. On an RNA 
 sequence with length n, the running time of <rs type="software">alteRNA</rs> is 
-O(n 4 ) and the memory requirement is O(n 4 ). On two input 
+O(n 
+4 ) and the memory requirement is O(n 
+4 ). On two input 
 RNA sequences S and R, where |S| ¼ n and |R| ¼ m, the 
-running time of <rs type="software">inteRNA</rs> is O(n 3 m 3 ) and the memory 
-requirement is O(n 2 m 2 ). It is possible to improve the 
+running time of <rs type="software">inteRNA</rs> is O(n 
+3 m 
+3 ) and the memory 
+requirement is O(n 
+2 m 
+2 ). It is possible to improve the 
 running time using the loop model to where k is the 
 maximum independent structure size. The running time of 
 <rs type="software">pRuNA</rs> is linear with the input sequence length and the 
 result set. Because of the large running-time requirements 
 of <rs type="software">inteRNA</rs> and <rs type="software">alteRNA</rs>, <rs type="software">taveRNA</rs> has an e-mail 
 notification option. 
-<rs id="software-31" type="software">taveRNA</rs> has been developed by <rs corresp="#software-31" type="creator">the Lab for Computational Biology at Simon Fraser University</rs> and </p>
+<rs id="software-58" type="software">taveRNA</rs> has been developed by <rs corresp="#software-58" type="creator">the Lab for Computational Biology at Simon Fraser University</rs> and </p>
 
-<p>W328 Nucleic Acids Research, 2007, Vol. 35, Web Server issue </p>
+
 
 <p>it is accessible from http://compbio.cs.sfu.ca/taverna. 
 We acknowledge our funding sources, in particular 

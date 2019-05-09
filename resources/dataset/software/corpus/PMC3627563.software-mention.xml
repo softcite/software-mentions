@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC3627563" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T19:59+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC3627563" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:06+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>ABSTRACT </p>
 
@@ -161,8 +161,10 @@ concepts used in our context-object model. </p>
 <p>Structure 
 A structure S of the seed (or just structure) is the formula 
 C a1,a2,..an O b1,b2,..bn-1 , where a i (i from 1 to n) and b i (i from 
-1 to n À 1) are the lengths of the i th consecutive 1s segment 
-and the i th consecutive 0s segment, respectively. For 
+1 to n À 1) are the lengths of the i 
+th consecutive 1s segment 
+and the i 
+th consecutive 0s segment, respectively. For 
 example, the seed 1110111 has a structure S = C 3,3 O 1 . It 
 is clear that the C part of the structure S has a length 
 L(C S ) = 
@@ -184,16 +186,20 @@ w = s 1 s 2 . . . s k be a k-tuple of length k = L(S), and divide
 w into 2nÀ1 parts from left to right with lengths of a 1 , b 1 , 
 a 2 , b 2 ,., a n-1 , b n-1 and a n, respectively. Then the C-gram of 
 w, denoted by C S (w), is the concatenation of the first, 
-third,., (2nÀ1) th parts of w, and the O-gram of w, 
+third,., (2nÀ1) 
+th parts of w, and the O-gram of w, 
 denoted by O S (w), is the concatenation of the second, 
-fourth,., (2nÀ2) th parts of w (Figure 1c). For example, 
+fourth,., (2nÀ2) 
+th parts of w (Figure 1c). For example, 
 given S = C 3,3 O 1 and w = actgact, then C S (w) = actact 
 and O S (w) = g. </p>
 
 <p>The k-tuples set 
 Given a genome (either assembled or not, denoted by G or 
-G 0 , respectively), the k-tuples set, denoted by H k,G or 
-H k,G 0 , consists of all the overlapped k-tuples from both 
+G 
+0 , respectively), the k-tuples set, denoted by H k,G or 
+H k,G 
+0 , consists of all the overlapped k-tuples from both 
 the genome and its reverse-complement counterparts 
 (Figure 1b, see Supplementary Data for the formal 
 definition). </p>
@@ -221,13 +227,14 @@ given a structure S, we have their context sets C S (G 1 )
 and C S (G 2 ), respectively. The intersection of the two 
 context sets (denoted by R, use jRj to denote the </p>
 
-<p>e75 Nucleic Acids Research, 2013, Vol. 41, No. 7 
-PAGE 2 OF 13 </p>
+<p>e75 Nucleic Acids Research, 2013, Vol. 41, No. 7 </p>
 
-<p>number of members in R) contains all of the common 
+<p>
+number of members in R) contains all of the common 
 contexts (Figure 1e). For i from 1 to jRj, let I i = 0 if 
 object G1,S (c i ) = object G2,S (c i ), otherwise let I i = 1, where 
-c i is the i th member of R. The context-object distance 
+c i is the i 
+th member of R. The context-object distance 
 (or co-distance) between G 1 and G 2 is given by </p>
 
 <p>d co G 1, G 2 
@@ -271,9 +278,11 @@ indexed, the unmarked C-grams and their respective
 O-grams, i.e. the context-object pairs, are output. 
 This process is formally expressed by the sub-
 algorithm fasta2co (see Supplementary Data). For 
-each genome G 0 in fastq format (unassembled raw 
+each genome G 
+0 in fastq format (unassembled raw 
 data), we need to first filter low-quality L(S)-tuples. 
-Let W be an L(S)-tuple on a read of G 0 . If the lowest 
+Let W be an L(S)-tuple on a read of G 
+0 . If the lowest 
 value of all of the L(S) base qualities of W, denoted 
 by min(W), is smaller than a specific threshold, F, 
 then the W is discarded. For the L(S)-tuples that 
@@ -362,8 +371,8 @@ to build trees, and the trees' accuracies were evaluated in
 the same way. We then made comparisons of the trees' 
 accuracies among the different phylogenomic methods. 
 The symmetric differences were evaluated using the 
-'<rs type="software">treedist</rs>' program that is contained in the PHYLIP 
-package (http://evolution.gs.washington.edu/phylip.html). 
+'<rs type="software">treedist</rs>' program that is contained in the <rs id="software-1" type="software">PHYLIP 
+package</rs> (<rs corresp="#software-1" type="url">http://evolution.gs.washington.edu/phylip.html</rs>). 
 The benchmark tree that was constructed using the same 
 dataset from the work of Zhou et al. (23), in which they 
 concatenated the alignments of the 2034 core genes of the </p>
@@ -382,8 +391,8 @@ in-house Perl script, using the web file 40 way
 Escherichia/Shigella genomes alignment (http://www 
 .biotorrents.net/details.php?id=87), which includes all 
 the Escherichia/Shigella 26 genomes. This alignment was 
-previously produced by the MSA tool <rs id="software-4" type="software">progressiveMauve</rs> 
-(<rs corresp="#software-4" type="version-number">24</rs>) (<rs corresp="#software-4" type="url">http://gel.ahabs.wisc.edu/mauve/</rs>/). </p>
+previously produced by the MSA tool progressiveMauve 
+(24) (http://gel.ahabs.wisc.edu/mauve/). </p>
 
 <p>Tests on Enterobacteriaceae 63 genomes and 
 Gammaproteobacteria 70 genomes 
@@ -403,8 +412,8 @@ The 16S rDNA tree was generated as follows. For each
 organism, we first retrieved its 16S rDNA sequence using the 
 'Browsers' on the Ribosomal Database Project (http://rdp 
 .cme.msu.edu/index.jsp) website, and then created MSA of 
-these 16S rDNAs and built a tree using the '<rs id="software-10" type="software">Tree Builder</rs>' 
-tools (<rs corresp="#software-10" type="url">http://rdp.cme.msu.edu/treebuilderpub/index.jsp</rs>) (25). </p>
+these 16S rDNAs and built a tree using the '<rs id="software-3" type="software">Tree Builder</rs>' 
+tools (<rs corresp="#software-3" type="url">http://rdp.cme.msu.edu/treebuilderpub/index.jsp</rs>) (25). </p>
 
 <p>Explore the acceptable working range of co-phylog using 
 in silico evolution 
@@ -430,10 +439,10 @@ The parameters for ALF simulation were as follows. The
 ancestor genome, Escherichia coli 536 (NC_008253.ffn), 
 was evolved into two genomes over 150 runs with an </p>
 
-<p>e75 Nucleic Acids Research, 2013, Vol. 41, No. 7 
-PAGE 4 OF 13 </p>
+<p>e75 Nucleic Acids Research, 2013, Vol. 41, No. 7 </p>
 
-<p>initial substitution rate of 0.01 substitutions per site, and 
+<p>
+initial substitution rate of 0.01 substitutions per site, and 
 each run increased the number of substitutions per site by 
 0.01 (the rates of other evolutionary events was increased 
 proportionally with the default coefficient defined in the 
@@ -458,10 +467,19 @@ varied in sequencing depth (depth = 2Â, 6Â, 16Â, 30Â
 and 50Â) using an in-house Perl script and the Brucella 
 13 genomes as the 'sequencing sample genomes'. This 
 means that each of the five test NGS datasets consists of 
-13 unassembled counterparts (G 0 
-1 , G 0 
-2 ,., G 0 
-13 ) at the same 
+13 unassembled counterparts (G </p>
+
+<p>0 </p>
+
+<p>1 , G </p>
+
+<p>0 </p>
+
+<p>2 ,., G </p>
+
+<p>0 </p>
+
+<p>13 ) at the same 
 depth for the Brucella 13 genomes (G 1 , G 2 ,., G 13 ). All of 
 the reads simulated in the perfect NGS datasets were 
 75 bp, error-free and uniformly distributed, which 
@@ -484,14 +502,16 @@ ation of the co-distance computed, while too large of an
 F might filter too much genomic information. We there-
 fore explored the proper value range of F using simulated 
 NGS data with sequencing qualities, which were generated 
-using the tool 'Maq simulation' in the <rs id="software-1" type="software">MAQ package</rs> 
-(<rs corresp="#software-1" type="url">http://maq.sourceforge.net/</rs>/). MAQ NGS data (distin-
+using the tool '<rs type="software">Maq simulation</rs>' in the <rs id="software-6" type="software">MAQ package</rs> 
+(<rs corresp="#software-6" type="url">http://maq.sourceforge.net/</rs>/). MAQ NGS data (distin-
 guished from the perfect NGS data, using genome B. 
 abortus 2308) of different depths were generated and dif-
 ferent F values were tested on these MAQ NGS data; the 
 proper range of F values were determined according to 
-the co-distance d co (G 0 , G) between the MAQ NGS data 
-G 0 and the complete genome G and the proportion q of 
+the co-distance d co (G 
+0 , G) between the MAQ NGS data 
+G 
+0 and the complete genome G and the proportion q of 
 genomic information taken by co-phylog. </p>
 
 <p>Tests on real NGS datasets 
@@ -561,7 +581,7 @@ across evolutionary history (see 'Discussion' section).
 One possible explanation is that the CVtree and FFPs 
 trees represent the taxonomy based on genomic features, </p>
 
-<p>PAGE 5 OF 13 
+<p> 
 Nucleic Acids Research, 2013, Vol. 41, No. 7 e75 </p>
 
 <p>whereas the co-phylog and alignment-based trees represent 
@@ -595,10 +615,10 @@ relationship between the co-distance and the p-distance </p>
 <p>Figure 2. Comparisons of the alignment-based tree and the co-phylog trees constructed with different structures, on the Brucella 13 genomes. All the 
 trees share the same organisms list. The Ochrobactrum anthropi genome is adopted as the out-group taxon. </p>
 
-<p>e75 Nucleic Acids Research, 2013, Vol. 41, No. 7 
-PAGE 6 OF 13 </p>
+<p>e75 Nucleic Acids Research, 2013, Vol. 41, No. 7 </p>
 
-<p>are also seen in other closely related organisms based 
+<p>
+are also seen in other closely related organisms based 
 on our test data using primate mitochondria DNA 
 alignments (data not shown). This linear relation-
 ship explains why the co-phylog tree agrees so well 
@@ -677,10 +697,10 @@ divergence being &lt;0.58 substitution per site and have a </p>
 <p>Figure 4. Comparison between the 16S rDNA tree and the co-phylog tree, constructed on the Enterobacteriaceae 63 genomes. The number near the 
 node represents the bootstrap value (see Supplementary Data for details). </p>
 
-<p>e75 Nucleic Acids Research, 2013, Vol. 41, No. 7 
-PAGE 8 OF 13 </p>
+<p>e75 Nucleic Acids Research, 2013, Vol. 41, No. 7 </p>
 
-<p>co-distance &lt;0.09, indicating that using long contexts 
+<p>
+co-distance &lt;0.09, indicating that using long contexts 
 loses more distant homologies. Therefore, when the 
 criteria given in Supplementary Equation (S2) (see 
 Supplementary Data) are satisfied, it is better to choose 
@@ -702,36 +722,65 @@ tree generated is identical to the benchmark tree. Using
 B.abortus 2308 (one of the Brucella 13 genomes; the other 
 12 genomes are of similar lengths) as a representation, the 
 L(S)-tuples count of the complete B.abortus 2308 genome 
-G is jH k,G j = 6 485 644, and the 6Â perfect NGS data G 0 of 
-the B.abortus 2308 genome generated jH k,G 0 j = 6 366 349; 
+G is jH k,G j = 6 485 644, and the 6Â perfect NGS data G 
+0 of 
+the B.abortus 2308 genome generated jH k,G 
+0 j = 6 366 349; 
 therefore, the proportion q of L(S)-tuples in jH k,G j that </p>
 
-<p>were included in jH k,G 0 j is 0.98 (see the 'The k-tuples set' 
-section for the definitions of jH k,G j and jH k,G 0 j), which 
+<p>were included in jH k,G 
+0 j is 0.98 (see the 'The k-tuples set' 
+section for the definitions of jH k,G j and jH k,G 
+0 j), which 
 indicates that the minimal proportion, P, of the genome 
 required by co-phylog is $0.98. This value is close to a 
 proportion of 0.97 estimated by Supplementary 
 Equation (S1), illustrating the accuracy of Supplementary 
 Equation (S1) (see Supplementary Data). 
-The experiment on the MAQ NGS data G 0 of the 
+The experiment on the MAQ NGS data G 
+0 of the 
 B. abortus 2308 genome G shows that the smaller the 
 qualities filter threshold F is or the 'deeper' the MAQ 
 NGS data are, the larger the computed co-distance 
-d co (G 0 , G) is (Table 1), as anticipated. Suppose that G 0 </p>
+d co (G 
+0 , G) is (Table 1), as anticipated. Suppose that G </p>
+
+<p>0 </p>
 
 <p>1 </p>
 
-<p>and G 0 
-2 are the NGS data generated from the 'sequencing 
+<p>and G </p>
+
+<p>0 </p>
+
+<p>2 are the NGS data generated from the 'sequencing 
 sample genomes' G 1 and G 2 , respectively. According to the 
-triangle inequality, we have d co (G 0 
-1 , G 0 
-2 ) &lt; d co (G 0 
-1 , G 2 ) + 
-d co (G 2 , G 0 
-2 ) &lt; d co (G 1 , G 2 ) + d co (G 1 , G 0 
-1 ) + d co (G 2 , G 0 
-2 ); 
+triangle inequality, we have d co (G </p>
+
+<p>0 </p>
+
+<p>1 , G </p>
+
+<p>0 </p>
+
+<p>2 ) &lt; d co (G </p>
+
+<p>0 </p>
+
+<p>1 , G 2 ) + 
+d co (G 2 , G </p>
+
+<p>0 </p>
+
+<p>2 ) &lt; d co (G 1 , G 2 ) + d co (G 1 , G </p>
+
+<p>0 </p>
+
+<p>1 ) + d co (G 2 , G </p>
+
+<p>0 </p>
+
+<p>2 ); 
 therefore, </p>
 
 <p>d co ðG0 1 ,G0 2 Þd co G 1 ,G 2 
@@ -743,7 +792,8 @@ therefore, </p>
 <p>d co ðG 1 ,G0 1 Þd co ðG 2 ,G0 2 Þ 
 ð 2Þ </p>
 
-<p>Equation (2) illustrates that the co-distance, d co (G 0 , G), 
+<p>Equation (2) illustrates that the co-distance, d co (G 
+0 , G), 
 determines the extent to which the co-distance computed 
 using NGS data deviates from the real co-distance of the 
 two compared genomes and therefore determines the limit 
@@ -755,10 +805,12 @@ gradually increased evolutionary divergence (substitutions per codon), using two
 <p>PAGE 9 OF 13 
 Nucleic Acids Research, 2013, Vol. 41, No. 7 e75 </p>
 
-<p>phylogenetic analysis at the genus or species level, d co (G 0 , 
+<p>phylogenetic analysis at the genus or species level, d co (G 
+0 , 
 G) 1e-5 ensure sufficiently high resolution and is there-
 fore adopted as a criterion for choosing F. Combining this 
-d co (G 0 , G) criterion and the minimal required genome pro-
+d co (G 
+0 , G) criterion and the minimal required genome pro-
 portion previously inferred and considering that the NGS 
 data generated from most bacterial sequencing projects 
 would be higher than 16Â, an F from 10 to 15 should 
@@ -812,8 +864,8 @@ large diploid organisms matched well with the known
 taxonomy (Supplementary Figure S3), illustrating that 
 the tool co-phylog can handle large size analyses and the 
 complication of diploidy. 
-The time and memory consumption of co-phylog 
-program (coded in C) were tested on a platform equipped 
+The time and memory consumption of <rs type="software">co-phylog 
+program</rs> (coded in C) were tested on a platform equipped 
 with Intel Xeon X5650 2.67 GHz cpu (only one cpu was 
 used for this test) and SUSE Linux Enterprise Server 10 
 SP2 (Â86_64). For real NGS dataset from the E. coli 29, 
@@ -822,7 +874,7 @@ took 160M memory and 19 min completing the whole
 computing, including 14 min converting all NGS data 
 into corresponding context-object sets and 5 min 
 computing all pairwise co-distances. For the five mamma-
-lian organisms, co-phylog took 60G memory and 20 h 
+lian organisms, <rs type="software">co-phylog</rs> took 60G memory and 20 h 
 completing the whole computing, including 17 h converting 
 all NGS data into corresponding context-object sets and 
 3 h computing all pairwise co-distances. </p>
@@ -847,7 +899,8 @@ O-grams, and the context-object model is an alignment
 process with a span of only $20$30 bp, a so-called 
 'micro-alignment'. </p>
 
-<p>Table 1. The co-distances d co (G 0 , G) and the proportion q% (the bracketed value) of L(S)-tuples taken by co-phylog computed for each depth-F 
+<p>Table 1. The co-distances d co (G 
+0 , G) and the proportion q% (the bracketed value) of L(S)-tuples taken by co-phylog computed for each depth-F 
 combination </p>
 
 <p>F 
@@ -908,12 +961,13 @@ NA (0)
 NA (0) 
 NA (0) </p>
 
-<p>NA represents that the d co (G 0 , G) cannot be computed because there is no L(S)-tuples taken. </p>
+<p>NA represents that the d co (G 
+0 , G) cannot be computed because there is no L(S)-tuples taken. </p>
 
-<p>e75 Nucleic Acids Research, 2013, Vol. 41, No. 7 
-PAGE 10 OF 13 </p>
+<p>e75 Nucleic Acids Research, 2013, Vol. 41, No. 7 </p>
 
-<p>There are two main features that make micro-alignment 
+<p>
+There are two main features that make micro-alignment 
 much more efficient than traditional alignment. First, a 
 context match is created only once between the two 
 compared genomes, while a normal 'seed match', which 
@@ -951,9 +1005,14 @@ structed using their corresponding NGS raw data. The Escherichia fergusonii geno
 <p>Table 2. The extents of co-distance biases due to sequencing error, PCR and contamination </p>
 
 <p>Coverage 
-Error rate a (%) 
-PCR b 
-Contamination levels c (%) </p>
+Error rate 
+a (%) 
+PCR </p>
+
+<p>b </p>
+
+<p>Contamination levels 
+c (%) </p>
 
 <p>0.01 
 0.05 
@@ -1017,7 +1076,8 @@ minðn,mÞ À k+1
 , 
 ð3Þ </p>
 
-<p>where w = j{A, C, G, T}j k , for DNA sequences compari-
+<p>where w = j{A, C, G, T}j 
+k , for DNA sequences compari-
 sons, and n and m are the lengths of X and Y, respectively. 
 This was then transformed into a distance, d F (X, Y) = 
 Àlog(0.1+F) (32). The similar calculation formulas of 
@@ -1093,5 +1153,13 @@ access charge: National Basic Research Program
 <p>Conflict of interest statement. None declared. </p>
 
 
+
+<p>e75 Nucleic Acids Research, 2013, Vol. 41, No. 7 </p>
+
+
+
+<p>
+PAGE 13 OF 13 
+Nucleic Acids Research, 2013, Vol. 41, No. 7 e75 </p>
 
 </text></tei>

@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC1538888" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T19:55+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC1538888" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:02+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>ABSTRACT </p>
 
@@ -15,7 +15,8 @@ ments, including those involving permutations
 is well known. We have recently developed a novel 
 PSC method that can detect alternative alignments 
 of statistical significance (alignment similarity 
-P-value ,10 À5 Protein structure comparison (PSC) has been a staple method 
+P-value ,10 
+À5 Protein structure comparison (PSC) has been a staple method 
 for obtaining information about a protein when its 3D struc-
 ture is determined experimentally or predicted computation-
 ally. It is therefore not surprising that the development of 
@@ -57,11 +58,15 @@ devised a permutation index (PI) as follows: </p>
 <p>PI ¼ 
 ð 
 P n 
-i¼1 S i Þ 2 
-P n 
-i¼1 S 2 </p>
+i¼1 S i Þ </p>
 
-<p>i </p>
+<p>2 </p>
+
+<p>P n 
+i¼1 S </p>
+
+<p>2 
+i </p>
 
 <p>‚ </p>
 
@@ -120,7 +125,7 @@ classification of proteins (<rs type="software">SCOP</rs>) (23) database. One of
 following three input options (left panel in Figure 1b and </p>
 
 <p>user guide 3.1.1) is available for the search: a structure 
-domain already in SCOP90 (SCOP version 1.55, &lt;90% 
+domain already in <rs id="software-1" type="software">SCOP</rs>90 (SCOP <rs corresp="#software-1" type="version-number">version 1.55</rs>, &lt;90% 
 sequence identity non-redundant set), a structure in the cur-
 rent Protein Data Bank (PDB; the server updates its local 
 PDB weekly) (24) with a specified chain (PDB ID option), 
@@ -159,7 +164,7 @@ respectively. (c) This table of matched results is retrieved from a database con
 with the one-against-all function. (d) The input page for the function of two chain alignment. (e) Output of a two chain alignment. The information of all 
 alignment solutions ('optimal' and alternatives) is hierarchically laid out in three frames. </p>
 
-<p>W96 Nucleic Acids Research, 2006, Vol. 34, Web Server issue </p>
+
 
 <p>details of each alignment solution, which will have exactly 
 the same output as that from using the function of '2 chains 
@@ -225,7 +230,8 @@ Moreover, with an intuitive hierarchical layout of the com-</p>
 
 <p>parison results and optional parameter settings to view most 
 significant alignments (e.g. with similarity P-value set at 
-10 À5 , a typical comparison usually resulted in &lt;5 such solu-
+10 
+À5 , a typical comparison usually resulted in &lt;5 such solu-
 tions), an informative summary that could lead to unexpected 
 insight from unexpected alternative alignments is effectively 
 produced. The main limitation of OPAAS, at its current ver-
@@ -247,6 +253,12 @@ article was provided by the Academia Sinica and National
 Science Council of Taiwan. </p>
 
 <p>Conflict of interest statement. None declared. </p>
+
+
+
+
+
+
 
 
 

@@ -1,6 +1,199 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC2950835" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T20:00+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC2950835" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:07+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
-<p>majority-rule consensus tree showing support values 
+<p>Abstract.-The recent explosion in the availability of genetic sequence data has made large-scale phylogenetic inference 
+routine in many life sciences laboratories. The outcomes of such analyses are, typically, a variety of candidate phyloge-
+netic relationships or tree topologies, even when the power of genome-scale data is exploited. Because much phylogenetic 
+information must be buried in such topology distributions, it is important to reveal that information as effectively as pos-
+sible; however, existing methods need to adopt complex structures to represent such information. Hence, researchers, in 
+particular those not experts in evolutionary studies, sometimes hesitate to adopt these methods and much phylogenetic 
+information could be overlooked and wasted. In this paper, we propose the centroid wheel tree representation, which is 
+an informative representation of phylogenetic topology distributions, and which can be readily interpreted even by nonex-
+perts. Furthermore, we mathematically prove this to be the most balanced representation of phylogenetic topologies and 
+efficiently solvable in the framework of the traveling salesman problem, for which very sophisticated program packages 
+are available. This theoretically and practically superior representation should aid biologists faced with abundant data. 
+The centroid representation introduced here is fairly general, so it can be applied to other fields that are characterized by 
+high-dimensional solution spaces and large quantities of noisy data. The software is implemented in Java and available via 
+. , T N . In addition, the traditional con-
+sensus tree that CWT relies on is also a centroid repre-
+sentation regarding the split incongruity loss function, 
+which quantifies how the split sets of two trees dis-
+agree with each other. See the Appendix for details and 
+proofs. 
+It is useful to provide some intuitive explanation of 
+the fact that a CWT is the centroid representation here. 
+Imagine a heap of stones, each of which has a drawing 
+of a phylogenetic topology and whose mass is pro-
+portional to the probability of the tree. If we place the 
+stones so that similar topologies are close to each other, 
+a map of a topology distribution is created, as in Hillis 
+et al. (2005) and Nye (2008). If this distribution is uni-
+modal and unbiased, the heaviest stone or the best tree 
+is anticipated to be at the "center" of the distribution 
+and represent it well, although sometimes this assump-
+tion does not hold true, as discussed in the references 
+above. Instead, the CWT representation tries to find the 
+centroid (or the center of gravity) of the topologies, by 
+placing them on a light plate on which each position 
+corresponds to a wheel tree. In classical mechanics, the 
+centroid is the point that balances the moment of grav-
+ity and minimizes the sum of the products of mass and 
+squared distances. This clearly resembles the definition 
+of a CWT, as we use the cost functions defined above 
+instead of the squared distances, to quantify how close 
+a wheel tree and a phylogenetic topology are. There-
+fore, the CWT representation can be regarded as the 
+centroid that balances the background topology distri-
+butions best. </p>
+
+<p>APPLICATIONS 
+Visualization of CWTs </p>
+
+<p>In addition to making the circular orderings around 
+multifurcating wheel nodes best represent the topology 
+distributions, it is useful if some statistical information 
+on them is available. Our current implementation of the 
+CWT program provides visualization as in Figure 3. 
+First, as in ordinary phylogenetic representations, 
+numbers at internal branches are the proportions of 
+the input trees containing the corresponding splits. 
+Second, numbers around the wheel nodes indicate the 
+proportions that the flanking splits constitute in a mono-
+phyletic group. For example, in Figure 3, Z 1 % of the 
+trees have the 3-furcation {a | d | b,c,e,f} (i.e., the three 
+splits {a | b,c,d,e,f}, {d | a,b,c,e,f}, and {a,d | b,c,e,f}). 
+Third, numbers within wheel nodes indicate the extent 
+to which each circular ordering of the branches naturally 
+represents the candidate topologies. In other words, the 
+numbers indicate the proportion of the input topolo-
+gies that can be restored by just "pulling out" branches 
+without changing the orderings. (See the right-hand </p>
+
+<p>588 </p>
+
+<p>SYSTEMATIC BIOLOGY </p>
+
+<p>VOL. 59 </p>
+
+<p>FIGURE 3. Information that the CWT representation conveys. 
+Branches around multifurcating nodes (wheel nodes) are circularly or-
+dered by the procedure in Figure 2. As in the ordinary phylogenetic 
+representations, numbers at internal branches (X) are the support val-
+ues of the corresponding splits. Numbers around wheel nodes (Z 1 , . . . , 
+Z 5 ) indicate the proportions of the flanking splits that constitute a 3-
+furcation. Numbers within wheel nodes (Y) indicate the proportions 
+of the input trees for which their circular ordering is the best (i.e., does 
+not require traversing the same branches three times to visit all splits). 
+Note that the input trees that do not have all the split sets adjacent to 
+the wheel node are also used to estimate the values within and around 
+the wheel nodes. Options for displaying the strict supports excluding 
+them and the average distances are also available. </p>
+
+<p>box in Figure 3 for an example. As another example, 
+the value for the wheel node in Figure 1d is 85%, which 
+is the total support of the first and second topologies 
+in Figure 1a). Mathematically, this equals the propor-
+tion of the ordering that constitutes a shortest TSP tour, 
+given the distance matrices derived using each topology 
+only. 
+Note that, at the default settings, the values within 
+and around the wheel nodes are calculated "on the 
+assumption of the consensus tree topology." For the 
+input trees that do not have all the split sets adjacent 
+to the wheel node, the proportion of topologies within 
+all possible combinations of the corresponding branch 
+positions (see "Formulation" and Fig. 2b) that con-
+tain the corresponding topologies are added to those 
+values. Therefore, they are not strict support values 
+(like the ones at internal branches) but expected val-
+ues based on the assumption of the consensus tree 
+topology. For the users' sake, the current implementa-
+tion also offers options for showing the strict values 
+that input trees contain the corresponding topologies 
+as well as the average distances used for the TSP 
+calculation. </p>
+
+<p>CWT Applied to a Real Data Set 
+Figure 4a is a CWT representation derived from a real 
+data set. The input trees were 246 phylogenetic trees 
+obtained by applying the maximum-likelihood method 
+to reliable single-copy orthologs conserved among 21 
+fungal species (downloaded from FUNYBASE; Marthey 
+et al. 2008); a 60% threshold was used in building the 
+consensus tree. 
+The wheel node indicated by the thick arrow connects 
+the four splits Ago, Kla, X, and Y. This node indicates </p>
+
+<p>that, given the topology of the consensus tree, 73% of 
+the input trees are expected to contain either of the splits 
+{Ago,Kla | X,Y} or {Kla,X | Ago,Y}, and 39% and 34% 
+contain the 3-furcations {Ago | Kla | X,Y} and {Kla | 
+X | Ago,Y}, respectively. Neither the best tree nor the 
+consensus tree representation provides such detailed 
+information, unless multiple trees are used or the tree 
+shapes are abandoned as in the phylogenetic network 
+representation (Fig. 4b). Note that the values on the 
+opposite sides of the wheel nodes are the same. This is 
+because in cases of 4-furcating nodes, for example, if 
+the splits Ago and Kla are adjacent (i.e., {Ago | Kla 
+| X,Y}) then X and Y are adjacent (i.e., {X | Y | Ago, 
+Kla}). This property does not hold true without the 
+consensus tree topology assumption, because the input 
+trees can contain trees that do not contain the splits 
+X and Y and in such cases trees with {Ago | Kla | 
+X,Y} can be without {X | Y | Ago,Kla} (Fig. 4a, left 
+sides of the dotted rectangles). It is also worthwhile 
+to examine the average distance around each wheel 
+node used in the TSP calculation (Fig. 4a, right sides 
+of the dotted rectangles); in cases of 4-furcating nodes, 
+the distances between splits are equal to the propor-
+tions that they do not constitute in a monophyletic 
+group. 
+In addition, because a CWT uses a tree shape, tax-
+onomic groups at multiple levels can be recognized 
+fairly intuitively. In particular, a CWT can suggest the 
+existence of taxonomic groups with support below the 
+consensus-tree threshold, in addition to those making 
+splits on the consensus trees, as successive branches 
+around wheel nodes. Figure 5a is a CWT representa-
+tion of the same data set as in Figure 4, based on an 
+80% consensus tree. To avoid a cluttered appearance be-
+cause of the many multifurcations, a color visualization 
+option that uses colors instead of numbers is used to 
+show the support values around the wheel nodes. For 
+example, the thick gray arc lines α, β, γ, and δ indicate 
+the class Eurotiomycetes, class Sordariomycetes, order 
+Hypocreales, and subphylum Agaricomycotina, respec-
+tively. An interesting application is the star-like CWT, 
+obtained by specifying high threshold values where no 
+split is supported at a level above the threshold (Fig. 5b; 
+branch lengths are ignored and only the topology is 
+shown). The star-like CWT shows "the optimal sequen-
+tial ordering" of all taxa based on the distribution of 
+the input topologies and, as a result, many biological 
+groups appear as successive branches around the wheel 
+node (thick gray arc lines). By virtue of the sophistica-
+tion of the present TSP solvers (Applegate et al.), it takes 
+only a few seconds to obtain such star-like CWTs of this 
+size. </p>
+
+<p>Characteristics of CWTs Clarified by an Artificial Data Set 
+To help understand how the CWT representation 
+works, we show an artificially created example that 
+sheds light on the characteristics of CWTs. Figure 6a 
+is a data set containing 15 trees, and Figure 6b,c are 
+the produced CWT representations based on the 50% </p>
+
+
+
+<p>IWASAKI AND TAKAGI-CENTROID WHEEL TREE REPRESENTATION OF PHYLOGENIES </p>
+
+
+
+<p>FIGURE 4. CWT for 264 trees based on single orthologs conserved over 21 fungal species. a) CWT based on the 60% consensus tree. The 
+values at the wheel nodes include the estimated values for trees that do not contain all splits adjacent to them (default option). For each wheel 
+node, the strict values excluding them and the average distances are shown in the dotted rectangles on the left and right sides, respectively. 
+For the branch lengths, those stored in the original database (Marthey et al. 2008) are directly incorporated in their original units. b) Consensus 
+phylogenetic network with a threshold of 0.2 (Holland and Moulton 2003). The scientific names of the species are as follows: majority-rule consensus tree showing support values 
 and average distances, respectively. The strict option 
 does not change the support values because there is no 
 nontrivial split exceeding the 50% threshold (Fig. 6d) 
@@ -43,72 +236,10 @@ successive branches around the wheel node (gray arcs). </p>
 the support for the 3-furcation {c | e | a,b,d} is over twice 
 as ones of {a | d | b,c,e} and {b | d | a,c,e}, the distances 
 between c and e, a and d, and b and d are the same. 
-Such information cannot be easily obtained by glancing 
-at the input trees (Fig. 6a), the split sets (Fig. 6d), or 
-the greedy consensus tree (Fig. 6f). The other character-
-istic of CWTs that can be seen in this example is that, 
-although the smallest distance is between the splits a 
-and b (Fig. 6e), they are not successive around the resul-
-tant wheel node (Fig. 6b,c). This occurs because of the 
-intrinsic nature of TSP: choosing locally optimal paths 
-does not always derive the globally best tour, and in 
-this example the total distance of any tour containing 
-the path a-b exceeds that of the tour a-c-e-b-d (Fig. 6e). 
-This is intentional and reflects the very objective of a </p>
+<rs id="software-3" type="software">Java SE</rs><rs corresp="#software-3" type="version-number">5.0</rs><rs type="software">Phyutility</rs><rs type="software">Apache XML Graphics</rs><rs type="software">Args4j</rs></p>
 
-<p>CWT: the most balanced representation of the topology 
-distributions. </p>
-
-<p>Software Availability 
-The software for building a CWT was implemented in 
-Java, and is available at http://cwt.cb.k.u-tokyo.ac.jp/. 
-Users can run the program on the Web or download 
-it under the GNU General Public License. To run the 
-program locally, it is necessary to install Java SE 5.0 (or 
-higher), Concorde (one of the best exact TSP solvers 
-currently available; Applegate et al.), <rs type="software">Phyutility</rs> Java 
-archive; Smith and Dunn 2008), <rs type="software">Apache XML Graphics</rs> 
-Commons Java archives, and <rs type="software">Args4j</rs> Java archive. 
-The software accepts any set of rooted or unrooted 
-phylogenetic trees in the Newick format covering the </p>
-
-<p>2010 </p>
-
-<p>IWASAKI AND TAKAGI-CENTROID WHEEL TREE REPRESENTATION OF PHYLOGENIES </p>
-
-<p>591 </p>
-
-<p>FIGURE 6. Characteristics of CWTs demonstrated with an artificial 
-data set. a) The 15 input tree topologies. b) The CWT based on the 
-50% majority rule consensus tree. The support values do not change 
-by the strict value option because this CWT contains trivial splits only. 
-c) The CWT displaying the average distances. Because they use more 
-information than the existence of splits, the distances are not propor-
-tional to the values in (b). For example, the distances can differ at po-
-sitions with the same support values. d) The observed frequencies of 
-every non-trivial split. Note that none exceeds the 50% threshold. e) 
-The sums of the distances between each split pair for the TSP calcula-
-tion. This figure illustrates the following characteristics of CWTs: The 
-strongest supported split does not always correspond to the closest 
-pair, and the closest pair is not always adopted in the circular order-
-ing, which is based on the best TSP tour. f) Greedy consensus tree for 
-the same data set. </p>
-
-<p>same taxa set, with one tree per line. A real value sep-
-arated by space at the beginning of each line can be 
-provided to indicate the weight of the tree. A thresh-
-old value for building the consensus tree should be 
-designated. If a threshold &gt;100 is given, no split is 
-supported stronger than the threshold and thus a star-
-like CWT is produced. Options to use rooted trees, 
-show strict support values, show average distances, use 
-the color visualization, and output only topologies are 
-available. </p>
-
-<p>
-APPENDIX </p>
-
-<p>Definitions 
+<p>APPENDIX 
+Definitions 
 Let T 1 , . . . , T N be N input phylogenetic trees and 
 w 1 , . . . , w N be their weights. Each phylogenetic tree is 
 defined by T i = (V i , E i ), where V i is the set of all exter-
@@ -120,9 +251,11 @@ set X into two groups. We call such a bipartition sys-
 tem Split(e, T). Let SplitSet(T) = {Split(e, T)|e ∈ E} and </p>
 
 <p>Freq(s) be the weighted frequency of the trees that con-
-tain the split s in T 1 , . . . , T N , i.e., Freq(s) = 
-N 
-i=1 δ i w i 
+tain the split s in T 1 , . . . , T N , i.e., Freq(s) = </p>
+
+<p>N </p>
+
+<p>i=1 δ i w i 
 where δ i = 1 if s ∈ SplitSet(T i ) and δ i = 0 otherwise. 
 AdjBranches(v, T) is the set of branches directly at-
 tached to node v on T, and MultiFurcatingNodes(T) = 
@@ -145,27 +278,22 @@ and ExtBranch(x b , T ) themselves are not counted
 (i.e., if they are adjacent each other, then Dist(x a , x b , 
 X sub , T) = 0). </p>
 
-<p>Pseudocode for Obtaining CWTs 
-Given T 1 , . . . , T N , w 1 , . . . , w N , and a threshold value 
+<p>Pseudocode for Obtaining CWTs </p>
+
+<p>Given T 1 , . . . , T N , w 1 , . . . , w N , and a threshold value 
 γ for building the consensus tree, the following pseu-
 docode produces a CWT. Note that the function c is 
 symmetric. i.e., c(e p , e q ) ≡ c(e q , e p ). </p>
 
 <p>Construct the consensus tree T C = (V C , E C ), where </p>
 
-<p>SplitSet(T C ) = </p>
-
-<p>s|Freq(s) γ </p>
+<p>SplitSet(T C ) = s|Freq(s) γ </p>
 
 <p>N </p>
 
-
-
 <p>i=1 </p>
 
-<p>w i </p>
-
-<p>. </p>
+<p>w i . </p>
 
 <p>For each v ∈ MultiFurcatingNodes(T C ) { 
 {e 1 , e 2 , . . . , e k } = AdjBranches(v, T C ) 
@@ -173,13 +301,11 @@ For each {p, q} ⊂ {1, 2, . . . , k} {
 Set c(e p , e q ) = 0 
 For each T i ∈ T 1 , . . . , T N { 
 For each taxa set X sub = {x 1 , x 2 , . . . , x k } that 
-∀ 1tk x t ∈ Descendants(e t , v, T c ) { </p>
+∀ 1 t k x t ∈ Descendants(e t , v, T c ) { </p>
 
 <p>c(e p , e q ) = c(e p , e q ) + Dist(x p , x q , X sub , T i ) • w i / </p>
 
 <p>k </p>
-
-
 
 <p>t=1 </p>
 
@@ -189,11 +315,12 @@ For each taxa set X sub = {x 1 , x 2 , . . . , x k } that
 } 
 } 
 } 
-Find the TSP cycle (e f (1) e f (2) • • • e f (k) ) for AdjBranches </p>
+Find the TSP cycle (e f (1) e f (2) • • • e f (k) ) for AdjBranches 
+(v, T C ), which minimizes </p>
 
-<p>(v, T C ), which minimizes 
-k−1 
-t=1 c(e f (t) , e f (t+1) )+c(e f (k) , e f (1) ) 
+<p>k−1 </p>
+
+<p>t=1 c(e f (t) , e f (t+1) )+c(e f (k) , e f (1) ) 
 } 
 Lay out T C by following the TSP-cycle orderings for the 
 branches around MultiFurcatingNodes(T C ). </p>
@@ -222,8 +349,9 @@ incongruity loss function" is defined as </p>
 ∈ SplitSet (T i ) }| </p>
 
 <p>FN (T , T i ) = |{s |s / 
-∈ SplitSet (T ) ∧ s ∈ SplitSet (T i ) }| 
-. </p>
+∈ SplitSet (T ) ∧ s ∈ SplitSet (T i ) }| </p>
+
+<p>. </p>
 
 <p>This function becomes large if T contains splits that 
 are absent from T i ("false positives") and vice versa 
@@ -240,28 +368,17 @@ et al. 2001). If we define w 1 , . . . , w N as w i ∝ P(T i |D), the
 "split incongruity centroid tree" T SplitCentroid is the tree 
 that fulfills </p>
 
-<p>SplitSet 
-T SplitCentroid </p>
-
-<p>= </p>
-
-<p>
-s </p>
-
-
-
-
-
-<p>
+<p>SplitSet T SplitCentroid = s 
 ξ 
 1 + ξ </p>
 
-<p>Freq (s) 
-N 
-i=1 w i </p>
+<p>Freq (s) </p>
 
-<p>
-(Berry and Gascuel 1996; Holder et al. 2008; Margush 
+<p>N </p>
+
+<p>i=1 w i </p>
+
+<p>(Berry and Gascuel 1996; Holder et al. 2008; Margush 
 and McMorris 1981). Therefore, T SplitCentroid with the 
 penalty parameter ξ is the consensus tree with the 
 threshold ξ/(1 + ξ). In other words, the consensus tree 
@@ -287,8 +404,7 @@ is defined as </p>
 
 <p>L Layout (Φ, T i ) = </p>
 
-<p>
-v∈MultiFurcatingNodes(T C ) </p>
+<p>v∈MultiFurcatingNodes(T C ) </p>
 
 <p>l Layout (Φ, v, T i ), </p>
 
@@ -297,8 +413,6 @@ v∈MultiFurcatingNodes(T C ) </p>
 <p>l Layout (Φ, v, T i ) = </p>
 
 <p>k(v,T C )−1 </p>
-
-
 
 <p>t=1 </p>
 
@@ -309,14 +423,11 @@ v∈MultiFurcatingNodes(T C ) </p>
  
  </p>
 
-<p>
-{X sub ={x 1, x 2, ...,x k(v,T C ) }|∀ 1tk(v,T C ) x t ∈Descendants(e t ,v,T c )} </p>
+<p>{X sub ={x 1, x 2, ...,x k(v,T C ) }|∀ 1 t k(v,T C ) x t ∈Descendants(e t ,v,T c )} </p>
 
 <p>Dist(x f (v,t) , x f (v,t+1) , X sub , T i ) </p>
 
 <p>k </p>
-
-
 
 <p>t=1 </p>
 
@@ -331,14 +442,11 @@ v∈MultiFurcatingNodes(T C ) </p>
 
 <p>+ </p>
 
-<p>
-{X sub ={x 1, x 2, ...,x k(v,T C ) }|∀ 1tk(v,T C ) x t ∈Descendants(e t ,v,T c )} </p>
+<p>{X sub ={x 1, x 2, ...,x k(v,T C ) }|∀ 1 t k(v,T C ) x t ∈Descendants(e t ,v,T c )} </p>
 
 <p>Dist(x f (v,k(v,T C )) , x f (v,1) , X sub , T i ) </p>
 
 <p>k </p>
-
-
 
 <p>t=1 </p>
 
@@ -358,8 +466,6 @@ L Layout for all T 1 , . . . , T N : </p>
 
 <p>N </p>
 
-
-
 <p>i=1 </p>
 
 <p>L Layout (Φ, T i ) P (T i |D ) </p>
@@ -368,45 +474,41 @@ L Layout for all T 1 , . . . , T N : </p>
 
 <p>N </p>
 
-
-
 <p>i=1 </p>
 
 <p> </p>
 
-<p> 
- </p>
+<p> </p>
+
+<p> </p>
 
 <p> </p>
 
-<p>
-v∈MultiFurcatingNodes(T C ) </p>
+<p>v∈MultiFurcatingNodes(T C ) </p>
 
-<p>l Layout (Φ, T i , v) 
- </p>
+<p>l Layout (Φ, T i , v) </p>
 
-<p> w i 
- </p>
+<p> </p>
+
+<p> w i </p>
+
+<p> </p>
 
 <p> </p>
 
 <p>= </p>
 
-<p>
-v∈MultiFurcatingNodes(T C ) </p>
+<p>v∈MultiFurcatingNodes(T C ) </p>
 
 <p>N </p>
 
-<p>
-i=1 </p>
+<p>i=1 </p>
 
 <p>l Layout (Φ, T i , v) • w i </p>
 
-<p>
-= </p>
+<p>= </p>
 
-<p>
-v∈MultiFurcatingNodes(T C ) </p>
+<p>v∈MultiFurcatingNodes(T C ) </p>
 
 <p> </p>
 
@@ -414,14 +516,13 @@ v∈MultiFurcatingNodes(T C ) </p>
 
 <p>k(v,T C )−1 </p>
 
-
-
 <p>t=1 </p>
 
 <p>c(e f (v,t) , e f (v,t+1) ) </p>
 
-<p>+ c(e f (v,(v,T C )) , e f (v,1) ) 
- </p>
+<p>+ c(e f (v,(v,T C )) , e f (v,1) ) </p>
+
+<p> </p>
 
 <p> </p>
 

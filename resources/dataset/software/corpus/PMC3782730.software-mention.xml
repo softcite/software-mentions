@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC3782730" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T20:04+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC3782730" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:11+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>OBJECTIVE: To understand the relationships between brain structures and function (behavior and cognition) in 
 healthy aging. 
@@ -155,8 +155,8 @@ Foss MP et al. </p>
 
 
 
-<p>procedure was accomplished using the <rs id="software-7" type="software">Freesurfer</rs> package 
-<rs corresp="#software-7" type="version-number">version 4.5</rs> (Martinos Center for Biomedical Imaging, 
+<p>procedure was accomplished using the <rs id="software-1" type="software">Freesurfer</rs> package 
+<rs corresp="#software-1" type="version-number">version 4.5</rs> (Martinos Center for Biomedical Imaging, 
 Charlestown, Massachusetts, USA). This software classifies 
 each voxel with a neuroanatomical label based on 
 probabilistic information automatically estimated from 
@@ -178,8 +178,8 @@ calculated voxel-by-voxel from one pair of identical
 sequences, except for the presence or absence of the MT 
 pulse, using the following formula (18): </p>
 
-<p>MTR~ 
-M 0 -M S 
+<p>MTR~M 
+0 -M S 
 M 0 
 |100 
 ð1Þ </p>
@@ -193,28 +193,28 @@ Relaxometry map. A natural logarithm (ln) was applied
 in the multi-echo images. A linear equation results from this 
 procedure: </p>
 
-<p>ln S ~ r r,TE 
+<p>ln Sr r,TE 
 ð 
 Þ 
 ½ 
- ~ ln S 0 ~ r r 
+ln S 0r r 
 ð Þ 
 ½ 
-{ 
+{ 
 1 
-T2 ~ r r 
+T2r r 
 ð Þ 
 |TE 
 ð2Þ </p>
 
-<p>where S ~ r r,TE 
+<p>where Sr r,TE 
 ð 
-Þand S 0 ~ r r 
+Þand S 0r r 
 ð Þ represent the pixel intensity at the 
-position ~ r r in the image obtained at the TE echo time and 
+positionr r in the image obtained at the TE echo time and 
 ''ideal'' 0 echo time, respectively. Therefore, a linear least 
 squares method can be used to estimate the T2 pixel value 
-(T2 ~ r r 
+(T2r r 
 ð Þ) from the obtained TE images. The in-house script 
 "Relaxon" was implemented for this purpose using <rs type="software">MINC</rs> 
 tools. 
@@ -224,8 +224,8 @@ following parameters were calculated: </p>
 
 <p>Brain parenchyma fraction (%). </p>
 
-<p>BPF~ 
-WMVzGMV 
+<p>BPF~W 
+MVzGMV 
 ð 
 Þ 
 ICV 
@@ -237,8 +237,8 @@ matter volume, and ICV is the intracranial volume. </p>
 
 <p>Percentage of white matter (%). </p>
 
-<p>PWM~ 
-LWMVCerebralzRWMVCerebralzLWMVCerebellumzRWMVCerebellum 
+<p>PWM~L 
+WMVCerebralzRWMVCerebralzLWMVCerebellumzRWMVCerebellum 
 ð 
 Þ 
 ICV 
@@ -250,8 +250,8 @@ right hemisphere, and ICV is the intracranial volume. </p>
 
 <p>Percentage of gray matter (%). </p>
 
-<p>PGM~ 
-LGMVCerebralzRGMVCerebralzLGMVCerebellumzRGMVCerebellum 
+<p>PGM~L 
+GMVCerebralzRGMVCerebralzLGMVCerebellumzRGMVCerebellum 
 ð 
 Þ 
 ICV 
@@ -360,7 +360,7 @@ was the case for the measures of processing time.
 These neuropsychological results were divided according 
 to the quantitative MRI measures, and a comparison 
 between the groups was performed by the Mann-Whitney 
-nonparametric test of the <rs id="software-1" type="software">SPSS</rs> <rs corresp="#software-1" type="version-number">13.0</rs> for Windows including 
+nonparametric test of the <rs id="software-6" type="software">SPSS</rs> <rs corresp="#software-6" type="version-number">13.0</rs> for Windows including 
 the variables age and schooling. </p>
 
 <p>&amp; RESULTS </p>
@@ -678,6 +678,8 @@ served as the post-graduate supervisor of the project and revised the
 manuscript. Santos AC served as the second post-graduate supervisor of 
 the project, analyzed the MRI data, and revised the manuscript. </p>
 
+<p>&amp; REFERENCES </p>
+
 
 
 <p>Spectrum of Normal Aging 
@@ -688,6 +690,10 @@ Foss MP et al. </p>
 
 
 
+
+<p>CLINICS 2013;68(9):1197-1205 
+Spectrum of Normal Aging 
+Foss MP et al. </p>
 
 
 

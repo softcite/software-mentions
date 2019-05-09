@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1007%2Fs10368-017-0398-y" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T19:56+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1007%2Fs10368-017-0398-y" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:02+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>Abstract This paper analyses the existence of a bubble in the Chinese real estate 
 market and examines its driving factors with a state-space model. The model considers 
@@ -72,7 +72,7 @@ tially discounted prices. In addition, there was also a programme to raise the r
 towards more market oriented levels, which had limited success as the new rents were 
 often still insufficient to cover the maintenance. 
 A second reform effort started in 1994, when the Chinese central government issued 
-BThe Decision on Deepening the Urban Housing Reform.^ The reform tried to improve 
+BThe Decision on Deepening the Urban Housing Reform.^The reform tried to improve 
 both the supply and demand sides to create a housing market. On the supply side there 
 was provision of subsidized housing for low income groups, while high-income groups 
 were expected to purchase regular market housing. On the demand side, a dual housing 
@@ -81,7 +81,7 @@ savings. Further emphasis was given to privatize more of the public housing stoc
 more realistic market prices. 
 The most important set of reforms came with the 1998 notice: BNotification from the 
 State Council on Further Deepening the Reform of the Urban Housing System and 
-Accelerating Housing Construction.^ This notice banned SOEs from either building or 
+Accelerating Housing Construction.^This notice banned SOEs from either building or 
 buying new housing units for their employees, replacing it with a system of employee 
 subsidies. It also encouraged the private sector to step into housebuilding and banks to 
 lend to consumers with the object to create a proper functioning private market for 
@@ -295,11 +295,17 @@ to estimate the unobserved overvaluation component by estimating a fundamen-
 tal price through the Kalman filter, which is the standard estimation technique 
 in SSM. 
 SSMs allow the researcher to model an observed (multiple) time series, y t 
-f g T 
-t¼1 , as 
+f g </p>
+
+<p>T </p>
+
+<p>t¼1 , as 
 being explained by a vector of (possibly unobserved) state variables, ξ t 
-f g T 
-t¼1 , which are 
+f g </p>
+
+<p>T </p>
+
+<p>t¼1 , which are 
 driven by a stochastic process. A basic linear state SSM is formed by two equations. 
 The first equation, called measurement equation, describes the relation between the 
 observed time series, y t , and the (possibly unobserved) state ξ t : </p>
@@ -341,8 +347,8 @@ variables are not observable Least Squares estimation is not the correct way to 
 However, even in this case, one can apply likelihood based inference, since the Kalman 
 filter allows to construct the likelihood function associated with a state space model. 
 The SSM is therefore estimated by maximizing the estimated likelihood function 
-through a numerical procedure. We apply this procedure by using the Sspace package 
-in the EViews® software. 
+through a numerical procedure. We apply this procedure by using the <rs type="software">Sspace</rs> package 
+in the <rs type="software">EViews</rs>® software. 
 Our first step is to obtain consistent estimations of real estate demand and supply 
 functions for China. To do this, we select a number of macroeconomic variables for 
 each function. We verify their stationarity properties and co-integration. We opt to only 
@@ -368,7 +374,8 @@ changes that are due to non-equilibrium between supply and demand, where demand
 includes not only the users' market but also investors' demand. This feature is 
 important because real estate markets can be characterized by a fundamental mismatch 
 between supply and demand which can take time to correct and by a component of 
-demand that is investment driven and that is typically not decreasing in price. 1 A fair </p>
+demand that is investment driven and that is typically not decreasing in price. 
+1 A fair </p>
 
 <p>1 See for example DiPasquale and Wheaton (1992). </p>
 
@@ -428,18 +435,30 @@ equation has economic meaning. The resulting demand equation is the following: <
 being transformed into the natural logarithm. The coefficients are also time-varying and 
 are assumed to be random walk series in the signal equations: </p>
 
-<p>dv 1t ¼ dv 1t−1 þ ε 1 
-t ; dv 2t ¼ dv 2t−1 þ ε 2 
-t ; dv 3t ¼ dv 3t−1 þ ε 3 
-t ; dv 4t ¼ dv 4t−1 þ ε 4 
-t ð4Þ </p>
+<p>dv 1t ¼ dv 1t−1 þ ε </p>
+
+<p>1 </p>
+
+<p>t ; dv 2t ¼ dv 2t−1 þ ε </p>
+
+<p>2 </p>
+
+<p>t ; dv 3t ¼ dv 3t−1 þ ε </p>
+
+<p>3 </p>
+
+<p>t ; dv 4t ¼ dv 4t−1 þ ε </p>
+
+<p>4 </p>
+
+<p>t ð4Þ </p>
 
 <p>Estimation of bubble dynamics in the Chinese real estate market: a... </p>
 
 <p>
 The residuals of the above five equations are assumed to have independent and 
 identical distributions. Equations (3) and (4) form a SSM are estimated by Kalman filter 
-using the Sspace analysis tools in Eviews7.0®. The estimated coefficients represent the 
+using the Sspace analysis tools in <rs type="software">Eviews</rs>7.0®. The estimated coefficients represent the 
 long term and stable elasticity of sold real estate space with respect to each variables. 
 Results are reported in Table 2 below. 
 We notice from Table 2 that the coefficient DV1 is positive and significant, this 
@@ -548,14 +567,26 @@ GDP. The resulting supply equation is the following: </p>
 <p>Also the coefficients are assumed to be random walk series with i.i.d. errors in the 
 signal equations: </p>
 
-<p>sv 1t ¼ sv 1t−1 þ ξ 1 
-t ; sv 2t ¼ sv 2t−1 þ ξ 2 
-t ; sv 3t ¼ sv 3t−1 þ ξ 3 
-t ; sv 4t ¼ sv 4t−1 þ ξ 4 
-t ð6Þ </p>
+<p>sv 1t ¼ sv 1t−1 þ ξ </p>
+
+<p>1 </p>
+
+<p>t ; sv 2t ¼ sv 2t−1 þ ξ </p>
+
+<p>2 </p>
+
+<p>t ; sv 3t ¼ sv 3t−1 þ ξ </p>
+
+<p>3 </p>
+
+<p>t ; sv 4t ¼ sv 4t−1 þ ξ </p>
+
+<p>4 </p>
+
+<p>t ð6Þ </p>
 
 <p>In this case, eqs. (5) and (6) form a SSM are estimated by Kalman filter using the 
-Sspace analysis tools in Eviews7.0®. The estimated coefficients represent the long term 
+Sspace analysis tools in <rs type="software">Eviews</rs>7.0®. The estimated coefficients represent the long term 
 and stable elasticity of completed real estate space with respect to each variable. Results 
 are reported in Table 4 below. 
 We notice from Table 4 that all coefficients are significant. SV1 is positive 
@@ -764,7 +795,8 @@ March 2007 to August 2008, the PBOC increased the residential loan rates 6 times
 and the deposit reserve ratio 13 times. These were extreme measures that the 
 PBOC had never adopted before. Moreover, the Ministry of Housing and Urban-
 Rural Development increased the Housing Provident Fund (HPF) loan rates 6 
-times in a row. 2 Researchers have commented that those policies may have a 
+times in a row. 
+2 Researchers have commented that those policies may have a 
 distortive impact and unintended consequences. Moreover, the suppression on the 
 bubble in the real estate market does not last long as the deviation ratio still 
 reaches 30% in 2007, signalling that the real estate market is overheated and is 

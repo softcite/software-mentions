@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC2920066" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T19:57+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC2920066" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:04+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>Microarray-based prediction of clinical endpoints may be performed using 
 either a one-color approach reflecting mRNA abundance in absolute intensity 
@@ -17,7 +17,9 @@ correlated inversely with endpoint prediction difficulty. In summary, our
 data strongly substantiate that the choice of platform is not a primary factor 
 for successful gene expression based-prediction of clinical endpoints. 
 This study is part of the second phase of the microarray quality control (MAQC) 
-project (MAQC-II). 1 The main design of MAQC-II is laid out in Shi et al. 1 (see also 
+project (MAQC-II). 
+1 The main design of MAQC-II is laid out in Shi et al. 
+1 (see also 
 project summary in Supplemental Material and Supplemental Table S1). This 
 study aimed at comparing the performance of classifiers for clinical endpoints 
 that were trained on one-color or two-color microarray data. 
@@ -45,8 +47,10 @@ and flexibility of the experimental design might favor one-
 color analyses in a clinical setting, two-color measurements 
 are often believed to be more robust due to the internal 
 reference, which should cancel out biases related to single 
-array measurements. 2-4 However, two-color approaches may 
-be affected by dye bias 5 and, although dye influence can be 
+array measurements. 
+2-4 However, two-color approaches may 
+be affected by dye bias 
+5 and, although dye influence can be 
 corrected for by performing dye-flipped replicate hybridiza-
 tions, this strategy substantially augments experimental 
 costs. Therefore, most researchers refrain from following 
@@ -57,8 +61,11 @@ the course of the measurements, even if the study may take
 years to complete. It is also not easy to choose an 
 appropriate reference for each application, and there have 
 been controversial discussions on the use of reference RNAs 
-with divergent similarity to the sample RNAs of the study. 6,7 
-While some laboratories stick to mixtures of RNA prepared 
+with divergent similarity to the sample RNAs of the study. </p>
+
+<p>6,7 </p>
+
+<p>While some laboratories stick to mixtures of RNA prepared 
 from various human tissues (far reference), it may be 
 sometimes more appropriate to choose a pool of related cell 
 lines or tissue samples as a source of reference RNA (near 
@@ -70,7 +77,8 @@ similarly convincing outcome. However, while consistency
 and correlation of primary measurements obtained with 
 one-and two-color platforms in terms of identifying 
 differentially expressed genes have been addressed pre-
-viously, 8,9 to the best of our knowledge, a systematic 
+viously, 
+8,9 to the best of our knowledge, a systematic 
 comparison of the classification performance of these two 
 different techniques has not been reported. Therefore, it is 
 still unclear if either of these platforms is better suited for 
@@ -101,8 +109,11 @@ models. Classification performance of these models was
 then compared between one-color and two-color data by 
 area under the receiver operating-characteristics curve 
 (AUC), Matthews correlation coefficient (MCC), accuracy 
-and root mean squared error (RMSE) as defined by MAQC. 1 
-Moreover, for models that were trained to choose only a 
+and root mean squared error (RMSE) as defined by MAQC. </p>
+
+<p>1 </p>
+
+<p>Moreover, for models that were trained to choose only a 
 small number of features for classification, the overlap of the 
 resulting gene signatures was computed. </p>
 
@@ -120,7 +131,8 @@ generated according to a protocol of the same manufacturer
 (92.9% overlap). Clinical co-variates of the patient cohort 
 are given in Supplementary Tables S2 and S3. 
 Sample and RNA preparation was performed as de-
-scribed. 10 In summary, tumor samples were checked by a 
+scribed. 
+10 In summary, tumor samples were checked by a 
 pathologist before RNA isolation. Subsequently, samples 
 with at least 60% tumor content were utilized and total RNA 
 was isolated from B50 mg of snap-frozen neuroblastoma 
@@ -136,7 +148,8 @@ considered for further processing. </p>
 <p>Neuroblastoma two-color gene-expression profiles 
 All two-color gene-expression of the MAQC-II training set 
 were generated using a customized 2 Â 11K neuroblastoma-
-related microarray. 10 Furthermore, 20 patients of the 
+related microarray. 
+10 Furthermore, 20 patients of the 
 MAQC-II two-color validation set were also profiled utilizing 
 this microarray. Two-color profiles of the remaining patients 
 of the MAQC-II validation set were performed using a 
@@ -149,7 +162,8 @@ These minor modifications of the microarray design resulted
 in a total of 9986 probes present on both versions of the 
 2 Â 11K microarray. The experimental protocol did not differ 
 between both sets, and gene-expression profiles were 
-performed as described. 10 In summary, 1 mg of total RNA of 
+performed as described. 
+10 In summary, 1 mg of total RNA of 
 each tumor sample was linearly amplified and labeled with 
 Cy3 and Cy5, respectively, using Agilent's Low-RNA-Input 
 LinearAmp Kit. Then, 500 ng of labeled cRNA was hybri-
@@ -159,7 +173,7 @@ dized together with 500 ng of reverse color Cy-labeled cRNA </p>
 
 <p>A Oberthuer et al </p>
 
-<p>259 </p>
+
 
 <p>The Pharmacogenomics Journal </p>
 
@@ -215,10 +229,12 @@ MAQC web site (http://www.fda.gov/nctr/science/centers/
 toxicoinformatics/maqc/). </p>
 
 <p>Statistical analysis 
-Classifiers were trained as described. 1 Classification was 
+Classifiers were trained as described. 
+1 Classification was 
 based on microarray data only, clinical data have not been 
 taken into account. Briefly, data were normalized using the 
-quantile algorithm from limma. 11 Normalization by the vsn 
+quantile algorithm from limma. 
+11 Normalization by the vsn 
 algorithm yielded similar results (data not shown). For </p>
 
 <p>normalization of the validation set, the training set was used 
@@ -230,7 +246,8 @@ As performance measures, accuracy (Acc), sensitivity
 operating characteristics curve were used. For prediction, a 
 classifier was trained on all available training data using 
 variables that have been selected in 65% of all cross-
-validation runs; 10 where no features were selected (endpoint 
+validation runs; 
+10 where no features were selected (endpoint 
 N only), this threshold was lowered to 25%. 
 Sensitivity (SENS) and specificity (SPEC) are given by: </p>
 
@@ -259,7 +276,9 @@ X </p>
 
 <p>k2testset </p>
 
-<p>ðt k À y k Þ 2 </p>
+<p>ðt k À y k Þ </p>
+
+<p>2 </p>
 
 <p>" 
 # 1=2 </p>
@@ -267,17 +286,28 @@ X </p>
 <p>where t k are the prediction scores (binary or continuous), 
 the y k are the true class of sample k and summation is over 
 all samples k in the testset. 
-The area under an ROC curve 12 is given as: 13 </p>
+The area under an ROC curve 
+12 is given as: </p>
+
+<p>13 </p>
 
 <p>AUC ¼ </p>
 
 <p>P 
-r þ 
-i À n þ ðn þ þ 1Þ=2 
-n þ n À 
+r </p>
+
+<p>þ </p>
+
+<p>i À n 
+þ ðn 
+þ þ 1Þ=2 </p>
+
+<p>n þ n À 
 where r i 
-þ is the rank of the ith positive sample, and n þ and 
-n À are the number of samples in the positive and negative 
+þ is the rank of the ith positive sample, and n 
+þ and 
+n 
+À are the number of samples in the positive and negative 
 group, respectively. </p>
 
 <p>Results </p>
@@ -286,7 +316,8 @@ group, respectively. </p>
 Two-color gene expression profiles for a total of 499 
 neuroblastoma (NB) tumor samples were provided to the 
 MAQC-II consortium as a benchmark set for evaluation of 
-classification workflows. 1 These profiles were generated as 
+classification workflows. 
+1 These profiles were generated as 
 dye-flipped replicates using a 2 Â 11K oligonucleotide 
 microarray manufactured by Agilent Technologies (Santa 
 Clara, CA, USA). 
@@ -350,10 +381,18 @@ a comprehensive comparison of the prediction performance
 of both experimental systems, eight different algorithms 
 were applied to both data sets, including discriminant 
 analysis, generalized linear models, logistic regression (LR), 
-prediction analysis of microarrays (PAM 14 ), partial least 
+prediction analysis of microarrays (PAM </p>
+
+<p>14 </p>
+
+<p>), partial least 
 squares (PLS), partition tree (PT), radial basis machine (RBM) 
 and support vector machines in combination with recursive 
-feature elimination (SVM þ RFE 15 ). Combination of these 
+feature elimination (SVM þ RFE </p>
+
+<p>15 </p>
+
+<p>). Combination of these 
 algorithms with other processing steps (for example, 
 normalization, feature selection, etc.) resulted in a total of 
 196 different classification models that were applied to both 
@@ -362,7 +401,8 @@ performance (all results are summarized in Supplementary
 Table S5). 
 Cross-validated classification performance of both plat-
 forms was measured by MCC, a balanced measure composed 
-of sensitivity and specificity, 16 AUC, RMSE and accuracy. 
+of sensitivity and specificity, 
+16 AUC, RMSE and accuracy. 
 Then, values of these parameters for classifiers built from 
 one-color data were plotted against values observed for 
 classifiers built from two-color data (Figure 1, Supplemen-
@@ -484,7 +524,8 @@ the data analysis teams. Used as a
 <p>(MCC: À0.09-0.11, mean MCC: À0.04; AUC: 0.44-0.57, 
 mean AUC: 0.48). In contrast, endpoints J (overall survival) 
 and K (event-free survival) were true clinical endpoints with 
-medium classification difficulty. 1 Results for endpoint J 
+medium classification difficulty. 
+1 Results for endpoint J 
 ranged from MCC values of À0.02 to 0.41 (mean 0.19) and 
 from AUC values of 0.76-0.88 (mean 0.84), respectively. 
 Results for endpoint K yielded MCC values ranging from 
@@ -591,7 +632,8 @@ rently selected for classification of this endpoint,
 X (inactive)-specific transcript (XIST) and ribosomal protein S4, 
 Y-linked 1 (RPS4Y1), are known to be expressed in a highly 
 sex-specific manner. XIST is a non-coding RNA involved in 
-silencing of the second X chromosome in female cells, 17 and 
+silencing of the second X chromosome in female cells, 
+17 and 
 RPS4Y1 is a ribosomal protein encoded by Y chromosome. 
 Thus, with respect to this endpoint, both systems not only 
 performed equivalently well with only a very small number 
@@ -875,14 +917,16 @@ difficulty of the predicted endpoint is also in line with
 results of the MAQC-II main study, in which it was shown </p>
 
 <p>that feature list stability is inversely correlated with end-
-point difficulty. 1 However, the higher degree of replication 
+point difficulty. 
+1 However, the higher degree of replication 
 underlying the two-color data set clearly influenced feature 
 selection in our study, thereby making it difficult to draw 
 definite conclusions from this analysis. In addition, over-
 lapping genes do not appear to be a true indicator of 
 performance, since it has been shown clearly that differing 
 sets of genes may be derived from a single data set and 
-perform equally well in terms of classification. 18 Yet, the fact 
+perform equally well in terms of classification. 
+18 Yet, the fact 
 that both platforms identified features with biological 
 relevance with high overlap for an easily predictable 
 endpoint (L) appears to further underscore the equivalent 
@@ -971,12 +1015,6 @@ sex (endpoint L). </p>
 of the US Food and Drug Administration. </p>
 
 
-
-<p>This work is licensed under the Creative 
-Commons Attribution-NonCommercial-No 
-Derivative Works 3.0 License. To view a copy of this 
-license, visit http://creativecommons.org/licenses/ 
-by-nc-nd/3.0/ </p>
 
 <p>Supplementary Information accompanies the paper on The Pharmacogenomics Journal website (http://www.nature.com/tpj) </p>
 

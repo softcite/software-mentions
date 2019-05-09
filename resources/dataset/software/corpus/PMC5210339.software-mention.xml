@@ -1,6 +1,707 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC5210339" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T20:04+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC5210339" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:11+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
-<p><rs id="software-0" type="software">SAS</rs><rs corresp="#software-0" type="creator">SAS Institute Inc.</rs><rs corresp="#software-0" type="version-number">version 9.4</rs></p>
+<p>Background--Although several risk factors for acute kidney injury (AKI) have been identified, early detection of AKI in acute 
+decompensated heart failure patients remains a challenge. The aim of this study was to develop and validate a risk score for early 
+prediction of AKI in acute decompensated heart failure patients. </p>
+
+<p>Methods and Results--A total of 676 consecutive acute decompensated heart failure participants were prospectively enrolled 
+from 6 regional central hospitals. Data from 507 participants were analyzed. Participants from 4 of the 6 hospitals (n=321) were 
+used to develop a risk score and conduct internal validation. External validation of the developed risk score was conducted in 
+participants from the other 2 hospitals (n=186). Sequential logistic regression was used to develop and validate the risk score. The 
+c statistic and calibration plot were used to assess the discrimination and calibration of the proposed risk score. The overall 
+occurrence of AKI was 33.1% (168/507). The risk score, ranging from 0 to 55, demonstrated good discriminative power with an 
+optimism-corrected c statistic of 0.859. Similar results were obtained from external validation with c statistic of 0.847 (95% CI 
+0.819-0.927). The risk score had good calibration with no apparent over-or under-prediction observed from calibration plots. </p>
+
+<p>Conclusions--The novel risk score is a simple and accurate tool that can help clinicians assess the risk of AKI in acute 
+decompensated heart failure patients, which in turn helps them plan and initiate the most appropriate disease management for 
+patients in time. ( J Am Heart Assoc. 2016;5:e004035 ORIGINAL RESEARCH </p>
+
+<p>renal dysfunction, these studies have yielded varied perfor-
+mance. This suggests that a single biomarker (or single type 
+of biomarkers) is not sufficient for the evaluation of clinical 
+settings such as CRS. 
+15,17 Therefore, reformulating the </p>
+
+<p>predictive approach of AKI, ie, a multimarker approach, is 
+more likely to be of greater use. 
+23 The major purpose of our </p>
+
+<p>study is to incorporate both clinical risk factors and the novel 
+kidney injury biomarkers for such prediction that we can 
+predict CRS early and improve the risk reclassification in this 
+disorder. Precisely, we will develop and validate a risk score 
+that can identify patients with either a very high or a very low 
+probability of developing AKI using only baseline character-
+istics and effective urine biomarkers before a detectable 
+change in serum creatinine in ADHF patients. </p>
+
+<p>The primary outcome was the development of AKI. It was 
+defined as an increase in serum creatinine by 26.5 lmol/L 
+(0.3 mg/dL) within 48 hours of admission, or a 50% 
+increase in serum creatinine from preadmission level (mean 
+of at least 3 measurements over a 6-month period before 
+admission) within 7 days of admission according to the </p>
+
+<p>KDIGO Clinical Practice Guidelines for Acute Kidney Injury. </p>
+
+<p>26 </p>
+
+<p>We did not use urine output criteria (ie, &lt;0.5 mL/kg per 
+hour for &gt;6 hours) for AKI diagnosis because of lack of 
+practicality in measurement when an indwelling urinary 
+catheter was not present. </p>
+
+<p>Sample Size and Missing Data </p>
+
+<p>Sample size determination for observational study is difficult, 
+especially in multiple regression model settings. We had used 
+the rule of thumb recommended by Peduzzi et al 
+27 and Harrell </p>
+
+<p>et al, 
+28 namely, events per variable (EPV) being 10 or greater </p>
+
+<p>under this circumstance. We considered about 5 to 8 
+significant clinical factors and 2 to 3 biomarkers in developing 
+a model. This would have required us to recruit a minimum of 
+110 (11910) participants who had events to predict the 
+development of AKI. 
+There were 2 cases with incomplete measurements. We 
+performed simple imputation for these 2 cases. One case with 
+missing serum albumin was imputed by mean, and the other 
+with missing N-terminal pro-B-type natriuretic peptide (NT-
+proBNP) by median because of skewness. All analyses were 
+performed based on imputed complete cases. </p>
+
+<p>Statistical Analysis </p>
+
+<p>We took 2 steps to develop the risk model based on the 
+development cohort. The first step was to select meaningful 
+clinical risk factors (nonurine markers) by logistic regression 
+with backward elimination. Clinical candidate predictors 
+significant at P&lt;0.1 in univariate logistic regression models 
+were considered for backward elimination. In this step, a 
+clinical model with clinical factors was developed. Then, urine 
+biomarkers (urine albumin-to-creatinine ratio [UACR], urinary 
+NGAL [uNGAL], and uAGT) were evaluated sequentially based 
+on this clinical model. Category-free (continuous) net reclas-
+sification index (NRI), integrated discrimination improvement 
+(IDI), 
+29 and added value of c statistics were used to quantify </p>
+
+<p>the additional contribution of these urine biomarkers to risk 
+reclassification. 
+To develop the risk score, the scoring method similar to 
+that of Sullivan et al, 
+30 was employed based on the developed </p>
+
+<p>risk model. The predictive accuracy of the risk score was 
+assessed by both discrimination measured by c statistic 
+31 and </p>
+
+<p>calibration evaluated by Hosmer-Lemeshow chi-squared 
+statistic 
+32 and calibration plot, a plot of observed proportions </p>
+
+<p>versus predicted probabilities. Bootstrapping technique was 
+used to adjust for overfitting and overoptimistic model 
+performance. An optimism-corrected c statistic using 1000 
+bootstrap samples created with replacement was reported. 
+Furthermore, external validation of the risk score was 
+conducted to assess the stability of the model. </p>
+
+
+
+<p>Risk Prediction for AKI in ADHF Patients 
+Zhou et al </p>
+
+<p>ORIGINAL RESEARCH </p>
+
+<p>Predefined interactions (sex9preexisting chronic kidney 
+disease [pre-CKD], pre-CKD9uNGAL, and pre-CKD9uAGT) 
+between predictors and potential nonlinear association of 
+included biomarkers were also examined at the 5% signifi-
+cance level. Sensitivity analysis was conducted to assess the 
+influence of the 2 incomplete measures by leaving the 
+corresponding 2 cases out. All analyses were done with <rs id="software-0" type="software">SAS</rs> 
+(<rs corresp="#software-0" type="creator">SAS Institute Inc.</rs>, Cary, NC, <rs corresp="#software-0" type="version-number">version 9.4</rs>). A 2-sided P&lt;0.05 
+was considered statistically significant. 
+The reporting of the present study closely follows the 
+Transparent Reporting of a multivariable prediction model for 
+Individual Prognosis Or Diagnosis (TRIPOD) statement. </p>
+
+<p>33 </p>
+
+<p>Additional study methods are described in Data S1. </p>
+
+<p>Results </p>
+
+<p>The flow of participants is presented as Figure S1. Among the 
+507 participants, 168 (33.1%) developed AKI during the first 
+7 days of hospitalization, of whom 108 (64.3%) developed AKI 
+during the first 48 hours of hospitalization. A total of 113 
+(35.2%) participants developed AKI during hospitalization in 
+the development cohort, and 55 (29.6%) in the validation 
+cohort. Sixty-one (12.0%) patients died during hospitalization. 
+Overall, the mean age of the participants was 65.2 years, and 
+63.1% were male. For the clinical conditions, participants with 
+hypertension, diabetes mellitus and pre-CKD accounted for 
+49.9%, 25.4%, and 26.2%, respectively. Table 1 shows the 
+characteristics of eligible participants for both the develop-
+ment and validation cohort recorded on admission. The 
+baseline characteristics of the validation cohort were gener-
+ally similar to those of the development cohort, although the 
+validation cohort was drawn from an independent group of 
+participants. Two cases with incomplete measurements were 
+imputed as described in the Sample Size and Missing Data 
+section. Baseline characteristics outlining those who devel-
+oped versus those who did not develop AKI were presented in 
+Table S1. </p>
+
+<p>Risk Score Development </p>
+
+<p>The clinical model, including age, sex, pre-CKD, serum 
+albumin (ALB), and NT-proBNP (Table 2), had a c statistic of 
+0.767 (95% CI 0.714-0.820). The first urine biomarker added 
+to the clinical model was uAGT, with a category-free NRI of 
+0.809 (P&lt;0.001) and an IDI of 0.169 (P&lt;0.001). The second 
+urine biomarker added to the clinical model with uAGT was 
+uNGAL, with a category-free NRI of 0.293 (P=0.012) and an 
+IDI of 0.023 (P=0.011). However, UACR did not improve 
+model prediction significantly, nor did it make an additional 
+contribution to risk reclassification (Table S2). Thus, the risk 
+model was obtained by adding uAGT and uNGAL rather than </p>
+
+<p>UACR to the clinical model. Neither nonlinearity nor interac-
+tions were found significant. The risk model has excellent 
+discriminative power with a c statistic of 0.874 (95% CI 0.835-
+0.913), significantly larger than that of the clinical model 
+(DeLong test, P&lt;0.001). 
+Scores based on the risk model for all predictors are 
+presented in Table 3. The estimated predicted probability of 
+developing AKI during the first 7 days after admission for an 
+individual ADHF patient according to the proposed risk score 
+is expressed as </p>
+
+<p>p(AKI) ¼ 
+1 
+1 þ e ÀðÀ4:027þ0:115ÃtotalriskscoreÞ </p>
+
+<p>where À4.027 and 0.115 are the intercept and slope 
+coefficients of the regression, respectively. The total risk 
+score ranges from a minimum value of 0 (lowest risk) to a 
+maximum value of 55 (highest risk), with corresponding 
+estimated predicted probabilities of developing AKI ranging 
+from 1.8% to 90.9% (Table S3). The optimism-corrected c 
+statistic of the risk score in the development cohort, by the 
+bootstrapping technique, was 0.859. 
+To illustrate the application of the risk score, consider a 
+60-year-old woman with ADHF, preexisting CKD, ALB of 40 g/ 
+L, NT-proBNP of 3200 pg/mL, uNGAL of 65 lg/g Cr, and 
+uAGT of 35 lg/g Cr. The total risk score she gets is 
+0+2+9+0+0+6+13=30 from Table 3, and the estimated 
+predicted probability that she will develop AKI is 36.0% 
+according to Table S3. An easy-to-use online tool (http:// 
+www.echobelt.org/risk/) as well as an Excel tool was 
+developed whereby an individual's underlying risk of AKI can 
+be estimated by entering the individual's own characteristics. </p>
+
+<p>Validation of Risk Score </p>
+
+<p>In an independent validation cohort, the c statistics of the 
+developed risk score was 0.847 (95% CI 0.795-0.910). The 
+receiver operating characteristics curves (ROCs) of the clinical 
+model, the risk model, the risk score, and models with only 
+uNGAL or uAGT are shown in Figure 1. The calibration plots 
+for both cohorts show the close agreement between predicted 
+and observed risk of AKI, with no apparent over-or under-
+prediction (Figure 2). AKI rates from both development and 
+validation cohorts are also concordant with each other. </p>
+
+<p>Clinical Implications of the Risk Score </p>
+
+<p>We divided the risk scores into 4 groups, that is, low risk (0-24 
+points), moderate risk (25-34 points), high risk (35-44 points), 
+and very high risk (45-55 points) (Figure 3), according to the 
+quartiles of estimated risk, to enhance the clinical utility of the 
+risk score. In the development and validation cohorts AKI was </p>
+
+<p>Demographics </p>
+
+<p>Mean (SD) age, y 
+64.9 (15.5) 
+65.7 (14.0) 
+65.2 (15.0) </p>
+
+<p>Male 
+216 (67.3) 
+104 (55.9) 
+320 (63.1) </p>
+
+<p>Preexisting clinical conditions </p>
+
+<p>Hypertension 
+169 (52.6) 
+84 (45.2) 
+253 (49.9) </p>
+
+<p>Diabetes mellitus 
+86 (26.8) 
+43 (23.1) 
+129 (25.4) </p>
+
+<p>Pre-CKD* 
+90 (28.0) 
+43 (23.1) 
+133 (26.2) </p>
+
+<p>Prior hospitalization for HF 
+165 (51.4) 
+96 (51.6) 
+261 (51.5) </p>
+
+<p>Primary causes of heart failure </p>
+
+<p>Ischemic heart disease 
+165 (51.4) 
+106 (57.0) 
+271 (53.5) </p>
+
+<p>Hypertension 
+44 (13.7) 
+21 (11.3) 
+65 (12.8) </p>
+
+<p>Rheumatic heart disease 
+46 (14.3) 
+24 (12.9) 
+70 (13.8) </p>
+
+<p>Cardiomyopathy 
+42 (13.1) 
+20 (10.8) 
+62 (12.2) </p>
+
+<p>Other 
+24 (7.5) 
+15 (8.1) 
+39 (7.7) </p>
+
+<p>Characteristics on admission </p>
+
+<p>LVEF &lt;45% 
+155 (48.3) 
+79 (42.5) 
+234 (46.2) </p>
+
+<p>NYHA, class IV 
+151 (47.0) 
+92 (49.5) 
+243 (47.9) </p>
+
+<p>Median (IQR) NT-proBNP, pg/mL 
+5500 (2292-9000) 
+4235 (2271-8540) 
+5099 (2284-9000) </p>
+
+<p>Mean (SD) SBP, mm Hg 
+125.2 (24.1) 
+130.6 (24.4) 
+127.2 (24.3) </p>
+
+<p>Mean (SD) DBP, mm Hg 
+73.7 (14.7) 
+78.1 (16.7) 
+75.3 (15.6) </p>
+
+<p>Mean (SD) serum creatinine, lmol/L 
+Prognosis </p>
+
+<p>AKI, n (%) 
+113 (35.2) 
+55 (29.6) 
+168 (33.1) </p>
+
+<p>Values are numbers (percentages) unless stated otherwise. AKI indicates acute kidney injury; pre-CKD, preexisting chronic kidney disease; DBP, diastolic blood pressure; HF, heart failure; 
+IQR, interquartile range; LVEF, left ventricular ejection fraction; NYHA, New York Heart Association; SBP, systolic blood pressure; UACR, urine albumin-to-creatinine ratio; uAGT, urinary 
+angiotensionogen; uNGAL, urinary neutrophil gelatinase-associated lipocalin. 
+*Defined as preadmission eGFR &lt;60 mL/min per 1.73 m 
+2 . Preadmission eGFR is the mean of at least 3 measurements over a 6-month period before admission. </p>
+
+
+
+<p>Risk Prediction for AKI in ADHF Patients 
+Zhou et al </p>
+
+<p>ORIGINAL RESEARCH </p>
+
+<p>present in, respectively, 9.3% and 9.5% participants of the 
+low-risk group, 31.1% and 40.0% of the moderate-risk group, 
+63.9% and 66.7% of the high-risk group, and 83.7% and 78.6% 
+of the very high-risk group. As Figure 3 shows, the risk of 
+developing AKI is highly and positively associated with the risk 
+scores (Pearson contingency coefficient=0.517, P for trend 
+&lt;0.001). We also performed subgroup analysis according to 
+LVEF. The c statistics of the risk score for participants with 
+LVEF &lt;45% and ≥45% are 0.849 (95% CI 0.786-0.912) and 
+0.870 (95% CI 0.811-0.928), respectively. The discrimination 
+power of 2 subgroups was similar, suggesting that the risk 
+score was applicable for both subgroups of participants. 
+The generated risk score was also correlated with the 
+presence and stage of AKI. The score was significantly higher 
+in those patients who developed AKI than those who did not. 
+Higher risk score was observed in patients with higher stage 
+of AKI (Spearman rank correlation coefficient, r=0.59, 
+P&lt;0.001, Figure S2). In addition, the discriminatory ability of 
+the score for predicting death was also good, with a c statistic 
+of 0.815 (95% CI 0.762-0.867) (Figure S3). </p>
+
+<p>Furthermore, we also developed a clinical score based on 
+the clinical model with prognostic factors presented in 
+Table 2. The clinical score had an acceptable c statistic of 
+0.729 (95% CI 0.672-0.786). Validation of the clinical score 
+was performed on the development data set with bootstrap 
+internal validation and the validation data set as external 
+validation, with c statistic of 0.730 (95% CI 0.673-0.786) and 
+0.742 (95% CI 0.666-0.818), respectively. Risk score for each 
+variable is given in Table S4. The ROCs and calibration plots, 
+as well as risk categories, are presented in Figures S4 through 
+S6. </p>
+
+<p>Sensitivity Analysis </p>
+
+<p>First, to assess the influence of the 2 incomplete measures, 
+we derived a risk model on a complete data set by leaving the 
+corresponding 2 cases out. The discrimination power (c 
+statistic 0.873, 95% CI 0.834-0.912) was almost the same as 
+that from imputed complete cases. Further, applying the risk 
+score to all participants yielded a c statistic of 0.855 (95% CI </p>
+
+<p>Table 2. Univariate and Multivariate Logistic Regression Analysis of Candidate Risk Factors for AKI (Development Cohort, n=321) </p>
+
+<p>Variable </p>
+
+<p>Univariate Analysis 
+Clinical Model 
+Risk Model* </p>
+
+<p>OR (95% CI) 
+P Value 
+OR (95% CI) 
+P Value 
+Coefficient 
+OR (95% CI) 
+P Value </p>
+
+<p>Age 
+1.03 (1.02-1.05) 
+&lt;0.001 
+1.03 (1.01-1.05) 
+0.002 
+0.0141 
+1.01 (0.99-1.04) 
+0.22 </p>
+
+<p>Serum albumin 
+0.92 (0.88-0.96) 
+0.001 
+0.94 (0.90-0.98) 
+0.007 
+À0.0117 
+0.99 (0.93-1.05) 
+0.69 </p>
+
+<p>Hemoglobin 
+0.99 (0.98-0.99) 
+0.003 </p>
+
+<p>Use ACEI/ARB preadmission 
+1.16 (0.71-1.91) 
+0.55 </p>
+
+<p>Use diuretic preadmission 
+1.22 (0.75-1.99) 
+0.42 </p>
+
+<p>ln-UACR </p>
+
+<p> † </p>
+
+
+
+<p>Risk Prediction for AKI in ADHF Patients 
+Zhou et al </p>
+
+<p>ORIGINAL RESEARCH </p>
+
+<p>0.820-0.890), which was similar to that from the development 
+cohort, suggesting high stability of the risk score. We also 
+conducted sensitivity analysis to assess the single biomarker 
+discriminative power by adding a single biomarker to the 
+clinical model. The results are presented in Table S5. Briefly, 
+the final risk model had the lowest AIC and highest c statistic 
+in the development data set. Furthermore, because of the 
+correlation between pre-CKD and eGFR, eGFR was not 
+selected during the backward selection. Thus, we kept the 
+final risk model with pre-CKD. </p>
+
+<p>Discussion </p>
+
+<p>Main Finding </p>
+
+<p>We have developed and validated a clinical scoring system to 
+identify patients at a very high as well as a very low risk of </p>
+
+<p>Table 3. Risk Score for Single Risk Factors Associated With 
+Developing AKI in ADHF Patients (Development Cohort)* </p>
+
+<p>Risk Factor 
+Score 
+c-Statistic for Single Variable </p>
+
+<p>Age, y 
+0.638 (0.574-0.701) </p>
+
+<p>≤55 
+0 </p>
+
+<p>56 to 65 
+2 </p>
+
+<p>66 to 75 
+3 </p>
+
+<p>76 and older 
+5 </p>
+
+<p>Sex 
+0.514 (0.460-0.568) </p>
+
+<p>Male 
+1 </p>
+
+<p>Female 
+0 </p>
+
+<p>Pre-CKD 
+0.680 (0.627-0.732) </p>
+
+<p>Yes 
+9 </p>
+
+<p>No 
+0 </p>
+
+<p>Serum albumin, mmol/L 
+0.640 (0.576-0.704) </p>
+
+<p>≤35 
+1 </p>
+
+<p>&gt;35 
+0 </p>
+
+<p>NT-proBNP, pg/mL </p>
+
+<p> † </p>
+
+<p>0.635 (0.572-0.698) </p>
+
+<p>&lt;5578 
+0 </p>
+
+<p>≥5578 
+5 </p>
+
+<p>uNGAL, lg/g Cr </p>
+
+<p> † </p>
+
+<p>0.762 (0.707-0.816) </p>
+
+<p>&lt;25 
+0 </p>
+
+<p>25 to 49.99 
+5 </p>
+
+<p>50 to 99.99 
+6 </p>
+
+<p>≥100 
+11 </p>
+
+<p>uAGT, lg/g Cr </p>
+
+<p> † </p>
+
+<p>0.814 (0.767-0.861) </p>
+
+<p>&lt;25 
+0 </p>
+
+<p>25 to 49.99 
+13 </p>
+
+<p>50 to 99.99 
+16 </p>
+
+<p>≥100 
+23 </p>
+
+<p>ADHF indicates acute decompensated heart failure; AKI, acute kidney injury; Pre-CKD, 
+preexisting chronic kidney disease; UACR, urine albumin-to-creatinine ratio; uAGT, 
+urinary angiotensionogen; uNGAL, urinary neutrophil gelatinase-associated lipocalin. 
+*The highest observed total risk score of 55 coincides with the highest theoretical risk 
+score. </p>
+
+<p> † </p>
+
+<p>Categories and scores of those variables are present according to their untransformed 
+value for clinical use. </p>
+
+<p>Figure 1. Receiver operator characteristic curves showing area </p>
+
+<p>under the curve for AKI in ADHF patients. Receiver operator 
+characteristic curves showing area under the curve for clinical 
+model alone, 0.765; uNGAL, 0.762; uAGT, 0.814; risk model, 
+0.874; risk score in development cohort, 0.859; risk score in 
+validation cohort, 0.847. </p>
+
+<p>Figure 2. Calibration plot of observed vs predicted fracture risk </p>
+
+<p>for developing AKI during the first 7 days of hospitalization. 
+Hosmer-Lemeshow chi-squared statistic is shown for the risk 
+score in both development and validation cohorts. The points and 
+circles indicate the observed frequencies by decile of predicted 
+probability. </p>
+
+
+
+<p>Risk Prediction for AKI in ADHF Patients 
+Zhou et al </p>
+
+<p>ORIGINAL RESEARCH </p>
+
+<p>developing AKI before a detectable change in serum crea-
+tinine in ADHF patients. The risk score was derived from a risk 
+model including 5 clinical factors and 2 urine biomarkers. The 
+clinical risk factors in the model were similar to those in 
+previous reports. 
+34,35 Two selected biomarkers, uAGT and </p>
+
+<p>uNGAL, were highly predictive. The proposed risk score shows 
+high discriminant power (optimism-corrected c statistic of 
+0.859) and is strongly supported by external validation (c 
+statistics of 0.847). To our knowledge, this is the first clinical 
+scoring system derived and validated for early prediction of 
+AKI in ADHF patients incorporating clinical risk factors and 
+novel kidney injury biomarkers. </p>
+
+<p>Need for Early Predicting AKI in ADHF </p>
+
+<p>Coexistence of ADHF and AKI, namely acute CRS, is a 
+serious clinical condition associated with significantly 
+increased morbidity and mortality in patients with heart 
+failure. 
+10,36 A major barrier to improving clinical outcomes in </p>
+
+<p>ADHF patients is the lack of ability to identify patients at 
+high-risk of CRS early enough to initiate interventions. 
+37 The </p>
+
+<p>clinical benefits of an early diagnosis of AKI have not been 
+fully realized due to the restriction of using serum creatinine 
+for diagnosis. This restriction often leads to diagnostic 
+delays and potential misclassification of actual injury status 
+and provides little information regarding underlying cause. 
+Actually, all successful therapeutic approaches in animal 
+models used in patients have yielded disappointing results. </p>
+
+<p>38 </p>
+
+<p>Major reasons are the scarcity of early biomarkers for AKI 
+and consequent unacceptable delay in initiating treatment 
+regimens. </p>
+
+<p>15 </p>
+
+<p>AKI is a major contributor to poor patient outcomes. The 
+International Society of Nephrology (ISN)'s 0by25 (zero 
+preventable deaths by 2025) initiative aims to eliminate 
+preventable deaths from AKI by 2025 by calling for global 
+strategies that permit timely diagnosis and treatment of 
+potentially reversible AKI. 
+39 As Mehta et al addressed in the </p>
+
+<p>Future Perspective Section, "the effect of AKI on morbidity 
+and mortality will be shaped by advances in methods to 
+detect AKI earlier in the disease course." 
+39 Because early </p>
+
+<p>detection of AKI is helpful in identifying early kidney injury and 
+preventing the progression of the kidney damage, our work 
+may provide the first step forward to avoid harm to the kidney 
+and devise early preventive strategies in CRS. </p>
+
+<p>Clinical and Policy Implications </p>
+
+<p>The present study derived and validated a potential clinical 
+prediction tool rather than a decision rule. It is to aid the 
+attending physician who will make the clinical decision. The 
+factors incorporated in the proposed risk score are readily 
+available data recorded on admission or from routine medical 
+examination. Both uAGT and uNGAL are accepted and utilized 
+biomarkers of kidney injury. To date, clinical studies that use 
+the biomarkers to predict acute CRS yield only modest 
+performance in general. 
+40,41 Individual prediction of AKI </p>
+
+<p>remains a challenge in the setting of ADHF. Therefore, 
+stratification of risk level according to the score incorporating 
+both clinical factors and biomarkers is clinically relevant, 
+particularly in critically ill patients with multiorgan dysfunc-
+tions. </p>
+
+<p>Comparison With NGAL and Other Risk Score </p>
+
+<p>NGAL is a novel biomarker widely utilized to identify AKI 
+patients and detect patients with likely subclinical AKI who 
+have an increased risk of adverse outcomes. 
+42 A systematic </p>
+
+<p>review and meta-analysis 
+43 demonstrated that the overall c </p>
+
+<p>statistic of NGAL to predict AKI is 0.815. This meta-analysis 
+synthesized data from different settings and varied study 
+populations, such as contrast-induced nephropathy, cardiac 
+surgery-associated acute kidney injury. The c statistics of 
+NGAL reported from individual study were less than 0.74, 
+except for 1 study with the c statistic of 0.93, 
+13 the study </p>
+
+<p>population of which was a subgroup of children with an 
+extremely high cutoff point (170 ng/L) and relative small 
+sample size of 119. In contrast, our study has included 507 
+ADHF adult patients, and the c statistic of NGAL alone as a 
+predictor is only 0.761, much less than that of our risk model 
+(c statistic of 0.874) and risk score (c statistic of 0.859). 
+Thakar et al 
+44 reported a risk score using clinical param-</p>
+
+<p>eters from patients receiving open-heart surgery and yielded 
+an excellent c statistic of 0.81 (95% CI 0.78-0.83). Our score </p>
+
+<p>Figure 3. Risk levels according to the risk score in development </p>
+
+<p>and validation cohorts. Risks were categorized into low risk (0-24 
+points), moderate risk (25-34 points), high risk (35-44 points), and 
+very high risk (45-55 points). Higher points means higher risk of 
+developing AKI in patients with ADHF; P for trend &lt;0.001. </p>
+
+
 
 <p>Risk Prediction for AKI in ADHF Patients 
 Zhou et al </p>
@@ -19,8 +720,10 @@ risk model, although they were not statistically significant.
 Age and sex were given factors for controlling potential 
 patients' heterogeneity. NT-proBNP and serum albumin were 
 also found significantly associated with the development of 
-AKI in univariate analysis and by other researchers. 45,46 We 
-also developed a clinical score that reached acceptable 
+AKI in univariate analysis and by other researchers. 
+45,46 We </p>
+
+<p>also developed a clinical score that reached acceptable 
 performance. Clinicians could choose the one that fits their 
 clinical practice best. </p>
 
@@ -46,16 +749,21 @@ Last, our article closely follows the TRIPOD statement.
 The study also has limitations. First, AKI diagnosed by an 
 increase in serum creatinine may introduce the dilemma of 
 using a surrogate outcome to assess the performance of 
-novel models. 47 Evidence of AKI on renal biopsy would be the 
-gold standard but was not feasible in our large cohort. As is 
+novel models. 
+47 Evidence of AKI on renal biopsy would be the </p>
+
+<p>gold standard but was not feasible in our large cohort. As is 
 the case in most AKI studies, we did not use urine output 
 criteria (ie, &lt;0.5 mL/kg per hour for &gt;6 hours) for AKI 
 diagnosis because urine output as the diagnostic criterion for 
 AKI has been questioned recently for its limited sensitivity 
 when diuretics are administered, reduced specificity in the 
 presence of dehydration, and lack of practicality when an 
-indwelling urinary catheter is not present (as in our setting). 15 
-Second, our findings remain to be confirmed by other 
+indwelling urinary catheter is not present (as in our setting). </p>
+
+<p>15 </p>
+
+<p>Second, our findings remain to be confirmed by other 
 independent studies. The question of whether the model 
 predicts AKI in the special setting of ADHF versus AKI from 
 other causes remains to be addressed. Third, although the </p>
@@ -108,6 +816,17 @@ Zhou et al </p>
 
 
 
+<p>46. Pfister R, M€ uller Ehmsen J, Hagemeister J, Hellmich M, Erdmann E, Schneider 
+CA. NT-pro-BNP predicts worsening renal function in patients with chronic 
+systolic heart failure. Intern Med J. 2011;41:467-472. </p>
+
+<p>47. McIlroy DR, Wagener G, Lee HT. Neutrophil gelatinase-associated lipocalin and 
+acute kidney injury after cardiac surgery: the effect of baseline renal function 
+on diagnostic performance. Clin J Am Soc Nephrol. 2010;5:211-219. </p>
+
+<p>DOI: 10.1161/JAHA.116.004035 
+Journal of the American Heart Association </p>
+
 
 
 <p>Risk Prediction for AKI in ADHF Patients 
@@ -153,7 +872,8 @@ Zhou et al </p>
 
 <p>stay, 2) pre-existing advanced chronic kidney disease (CKD) (chronic dialysis or </p>
 
-<p>pre-admission estimated glomerular filtration rate [Egfr] &lt;30 ml/min/1•73m 2 ), 3) urinary </p>
+<p>pre-admission estimated glomerular filtration rate [Egfr] &lt;30 ml/min/1•73m 
+2 ), 3) urinary </p>
 
 <p>tract infection or obstruction, cancer, a concurrent diagnosis of an acute coronary syndrome, </p>
 
@@ -215,7 +935,8 @@ Zhou et al </p>
 
 <p>with clinical factors was developed. Then, urine biomarkers (UACR, uNGAL and uAGT) </p>
 
-<p>were evaluated sequentially based on this clinical model. The likelihood ratio χ 2 test (2) was </p>
+<p>were evaluated sequentially based on this clinical model. The likelihood ratio χ 
+2 test (2) was </p>
 
 <p>used to evaluate the significance of the added urine biomarkers, and net-reclassification index </p>
 
@@ -233,9 +954,11 @@ Zhou et al </p>
 
 <p>chosen to yield good sensitivity and specificity. Mid-point value was defined as the reference </p>
 
-<p>value of each category. For the first and last categories of each variable, we used the 1 st and </p>
+<p>value of each category. For the first and last categories of each variable, we used the 1 
+st and </p>
 
-<p>the 99 th percentiles to minimize the influence of extreme values. For each risk factor, the </p>
+<p>the 99 
+th percentiles to minimize the influence of extreme values. For each risk factor, the </p>
 
 <p>lowest risk category was chosen as the base category, and the distance of other categories </p>
 
@@ -275,7 +998,10 @@ Zhou et al </p>
 
 <p>and the outcome. The clinical meaningful interactions between predictors were also </p>
 
-<p>examined. Continuous variables were expressed as mean (SD) or median (1 st Quarter-3 rd </p>
+<p>examined. Continuous variables were expressed as mean (SD) or median (1 
+st Quarter-3 </p>
+
+<p>rd </p>
 
 <p>Quarter). Categorical variables were expressed as percentages. Sensitivity analysis was </p>
 
@@ -428,8 +1154,11 @@ Median (IQR) uNGAL (μg/g Cr)
 
 <p>Models 
 VS 
-LR χ 2 
-P 
+LR χ </p>
+
+<p>2 </p>
+
+<p>P 
 C-statistic(95%CI) 
 NRI 
 IDI </p>
@@ -439,8 +1168,11 @@ IDI </p>
 
 <p>M1 + uAGT (M2) 
 M1 
-64.923 &lt;0.001 0.861(0.820-0.925) # 
-0.809 
+64.923 &lt;0.001 0.861(0.820-0.925) </p>
+
+<p># </p>
+
+<p>0.809 
 （p&lt;0.001） </p>
 
 <p>0.169 
@@ -719,7 +1451,7 @@ Significant difference in average risk score of different AKI stage was found, w
 higher risk score in patients with higher stage of AKI (P value by one-way ANOVA 
 analysis, &lt;0.001). </p>
 
-<p>14 </p>
+
 
 <p>Figure S3. Receiver Operator Characteristic Curves showing the discriminatory 
 power of the risk score for predicting death during hospitalization. </p>

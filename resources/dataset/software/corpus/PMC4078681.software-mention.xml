@@ -1,13 +1,50 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4078681" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T19:58+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4078681" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:05+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
+<p>ABSTRACT 
+Background Rapid increases in marketing of 
+e-cigarettes coincide with growth in e-cigarette use in 
+recent years; however, little is known about how 
+e-cigarettes are marketed on social media platforms. 
+Methods Keywords were used to collect tweets related 
+to e-cigarettes from the Twitter Firehose between 1 May 
+2012 and 30 June 2012. Tweets were coded for 
+smoking cessation mentions, as well as health and 
+safety mentions, and were classified as commercial or 
+non-commercial ('organic') tweets using a combination 
+of Naïve Bayes machine learning methods, keyword 
+algorithms and human coding. Metadata associated with 
+each tweet were used to examine the characteristics of 
+accounts tweeting about e-cigarettes. 
+Results 73 672 tweets related to e-cigarettes were 
+captured in the study period, 90% of which were 
+classified as commercial tweets. Accounts tweeting 
+commercial e-cigarette content were associated with 
+lower Klout scores, a measure of influence. Commercial 
+tweeting was largely driven by a small group of highly 
+active accounts, and 94% of commercial tweets included 
+links to websites, many of which sell or promote 
+e-cigarettes. Approximately 10% of commercial and 
+organic tweets mentioned smoking cessation, and 34% 
+of commercial tweets included mentions of prices or 
+discounts for e-cigarettes. 
+Conclusions Twitter appears to be an important 
+marketing platform for e-cigarettes. Tweets related to 
+e-cigarettes were overwhelmingly commercial, and a 
+substantial proportion mentioned smoking cessation. 
+E-cigarette marketing on Twitter may have public health 
+implications. Continued surveillance of e-cigarette 
+marketing on social media platforms is needed. </p>
+
 <p>Awareness and use of Electronic Nicotine Delivery 
 Systems (commonly known as electronic cigarettes 
 or e-cigarettes) have increased rapidly among adults 
 and youth in the past few years. Two recent studies 
 found that ever use of e-cigarettes doubled among 
 adults between 2010 and 2011 (from 3.3% to 
-6.2%), 1 and among youth between 2011 and 2012 
-(from 3.3% to 6.8%). 2 Coinciding with this 
+6.2%), 
+1 and among youth between 2011 and 2012 
+(from 3.3% to 6.8%). 
+2 Coinciding with this 
 increase is the rapid expansion of e-cigarette mar-
 keting on a variety of media channels, including the 
 internet and traditional platforms ( print, radio, 
@@ -23,7 +60,8 @@ e-cigarette initiation and transition to regular use of </p>
 <p>electronic and combustible cigarettes, especially 
 given limited scientific evidence related to these 
 products' long-term health impact, efficacy in 
-smoking substitution or cessation, 3 and potential 
+smoking substitution or cessation, 
+3 and potential 
 role in combustible tobacco uptake. Therefore 
 understanding the scope and content of e-cigarette 
 marketing across various media platforms becomes 
@@ -31,7 +69,8 @@ critically important. Social media could be used to
 promote e-cigarettes' role in smoking cessation 
 despite limited scientific evidence supporting such 
 claims, and there is evidence that such claims are 
-found on social media. 4 Better understanding of 
+found on social media. 
+4 Better understanding of 
 e-cigarette marketing on social media can provide 
 valuable insights towards characterising forces that 
 propelled the exponential growth of e-cigarettes 
@@ -39,20 +78,25 @@ from 2010 to 2012. Isolating and analysing the
 impact of e-cigarette marketing on the microblog-
 ging platform Twitter is important because Twitter 
 use is widespread and growing rapidly, particularly 
-among young adults and minority populations. 5 
-Examining e-cigarette marketing on social media 
+among young adults and minority populations. </p>
+
+<p>5 </p>
+
+<p>Examining e-cigarette marketing on social media 
 platforms is also important from a US policy per-
 spective. Due to recent court rulings, the US Food 
 and Drug Administration (FDA) cannot regulate 
 e-cigarettes as drugs or medical devices unless they 
-are marketed for therapeutic purposes. 6 While 
+are marketed for therapeutic purposes. 
+6 While 
 FDA can regulate e-cigarettes as tobacco products 
 as a result of the 2009 Family Smoking Prevention 
 and Tobacco Control Act, the agency has yet to 
 announce its specific plan for e-cigarette regulation 
 in the USA. Ample evidence indicates that internet 
 messaging has been employed to bypass marketing 
-restrictions on combustible tobacco. 7 8 Discovering 
+restrictions on combustible tobacco. 
+7 8 Discovering 
 how e-cigarettes are marketed online and on social 
 media has important and direct relevance to poten-
 tial FDA regulations for these products. 
@@ -65,12 +109,14 @@ and behaviours. Twitter's popularity has increased
 rapidly since its founding in 2006; over 200 
 million active monthly users worldwide now 
 produce more than 500 million tweets and 2.1 
-billion Twitter search engine queries daily. 9 Users of 
+billion Twitter search engine queries daily. 
+9 Users of 
 Twitter tend to be young (30% of internet users on 
 Twitter were aged 18-29 years in 2013) and 
 members of minority groups (27% of internet users 
 on Twitter were African American and 28% Latino 
-in 2013, compared with 14% White). 5 Data gener-
+in 2013, compared with 14% White). 
+5 Data gener-
 ated through Twitter is not limited to the content 
 of tweets themselves, but also includes metadata 
 attached to each tweet, such as time posted and 
@@ -81,13 +127,14 @@ user-level information including geo-identifiers
 Scan to access more 
 free content </p>
 
-<p>iii26 
+<p> 
 Huang J, et al. Tob Control 2014;23:iii26-iii30. doi:10.1136/tobaccocontrol-2014-051551 </p>
 
 <p>Original article </p>
 
 <p>is followed by and follows, and user's Klout score (a measure of 
-a user's influence on social media platforms). 10 Tweet content 
+a user's influence on social media platforms). 
+10 Tweet content 
 and associated metadata can be leveraged to track communica-
 tions by consumers and companies. 
 In this paper, we use a novel methodology to capture and 
@@ -112,8 +159,11 @@ fee) to the Twitter Firehose. In contrast to the publicly available
 Twitter data stream (Twitter API), which provides approximately 
 1% of all real-time tweets, the Firehose provides real-time 
 search access to 100% of all tweets, as well as metadata asso-
-ciated with each tweet. 11 
-Tweets related to e-cigarettes were identified and collected 
+ciated with each tweet. </p>
+
+<p>11 </p>
+
+<p>Tweets related to e-cigarettes were identified and collected 
 from the Firehose if they contained one or more keywords of 
 interest, identified via expert consensus ('e-cigarette,' 'ecigar-
 ette,' 'e-cig,' or 'ecig'). By 'expert consensus' we refer to review 
@@ -123,7 +173,8 @@ research. Tweets that included additional relevant keywords
 ('electronic,' 'blu,' 'njoy') along with the word 'cig' or 'cigarette' 
 anywhere in the tweet text also were included. Blu and Njoy 
 were selected as the top-selling e-cigarette brands in the USA 
-according to Nielsen. 12 It should also be noted that variations 
+according to Nielsen. 
+12 It should also be noted that variations 
 of the keyword 'vape' were not included in our search terms; 
 we focused on search terms with extremely high precision at the 
 expense of recalling the corpus of e-cigarette related tweets. 
@@ -158,7 +209,11 @@ it was posted by an ostensibly individual account. Thus our defin-
 ition of 'commercial' would include many tweets posted by 
 'affiliate marketers.' Commercial websites included those that dir-
 ectly sold e-cigarette related products as well as 'landing' or 
-'affiliate' websites for sales 13 ; these sites did not themselves sell 
+'affiliate' websites for sales </p>
+
+<p>13 </p>
+
+<p>; these sites did not themselves sell 
 e-cigarette related products but promoted or reviewed these pro-
 ducts and linked to retailer sites. 
 Two human coders coded a random sample of 2000 collected 
@@ -230,7 +285,8 @@ user-level information was analysed, focusing on (A) number of
 followers and (B) Klout score, a proprietary measure of influ-
 ence calculated using data from Twitter and other social net-
 works (Klout scores range from 1 to 100; higher scores indicate 
-greater influence). 16 Klout was not available for 1889 users 
+greater influence). 
+16 Klout was not available for 1889 users 
 (8%) and follower data became available from Gnip only as of 
 28 May 2012; thus the total times tweets were posted (sum of 
 followers for all tweets) is calculated as of June 2012. </p>
@@ -316,9 +372,11 @@ e-cigarette tweets contained price or discount mentions. </p>
 <p>SUMMARY AND DISCUSSION </p>
 
 <p>Whereas prior studies of tobacco-related content on social net-
-works have noted the presence of e-cigarette promotion, 4 14 our 
+works have noted the presence of e-cigarette promotion, 
+4 14 our 
 study is the first to quantify overall presence of e-cigarette rele-
-vant content on Twitter. Unlike previous studies, 4 15 we analysed </p>
+vant content on Twitter. Unlike previous studies, 
+4 15 we analysed </p>
 
 <p>Table 1 Characteristics of organic and commercial tweets </p>
 
@@ -413,8 +471,10 @@ tained links to websites and a third included price or discount
 appeals; more than 1 in 10 commercial tweets mentioned 
 smoking cessation. The finding that e-cigarettes are extensively 
 marketed on Twitter is consistent with the increasing levels of 
-e-cigarette web searches and sales. 12 16 Our findings are consist-
-ent with those of Prochaska et al 4 who found that many Twitter 
+e-cigarette web searches and sales. 
+12 16 Our findings are consist-
+ent with those of Prochaska et al 
+4 who found that many Twitter 
 accounts dedicated to smoking cessation included links to com-
 mercial e-cigarette sites. While only 11% of the e-cigarette tweets 
 collected in this study mentioned smoking cessation, the high 
@@ -425,21 +485,27 @@ extent of which has been demonstrated by our findings in this
 study. Some researchers have hypothesised that, due to lack of </p>
 
 <p>regulatory standards, social media may play an increased role in 
-the diffusion of tobacco products and pro-smoking messages. 7 
-Prior to emergence of e-cigarette TV ads in late 2012, e-cigarettes 
-were primarily marketed online 17 ; however, the extent and strat-
+the diffusion of tobacco products and pro-smoking messages. </p>
+
+<p>7 </p>
+
+<p>Prior to emergence of e-cigarette TV ads in late 2012, e-cigarettes 
+were primarily marketed online 
+17 ; however, the extent and strat-
 egies of online marketing were not well-understood. 
 Our study offers strong evidence of the presence of e-cigarettes 
 marketing on Twitter, a non-trivial portion of which contains 
 mentions related to smoking cessation and price promotions. 
 Price promotion and discounting significantly influence product 
 uptake and consumption, an association strongly demonstrated 
-for regular cigarettes. 18 E-cigarette marketing on Twitter may 
+for regular cigarettes. 
+18 E-cigarette marketing on Twitter may 
 have contributed to the rapid rise in e-cigarette popularity. 
 Results of our analysis of Twitter data have implications for the 
 marketing of e-cigarettes on other social media platforms due to 
 high levels of cross-platform interaction. Given the substantial 
-youth presence on social media, 5 the marketing of e-cigarettes on 
+youth presence on social media, 
+5 the marketing of e-cigarettes on 
 those platforms may entice non-smokers-youth in particular-
 to experiment with and initiate e-cigarette use. 
 These results have direct and important implications for 
@@ -448,12 +514,14 @@ ticularly with respect to marketing restrictions on social media.
 To the extent that e-cigarette safety and efficacy have not yet 
 been fully studied, extensive marketing of the products on social 
 media may carry public health risks. The recent court case deci-
-sion 6 was predicated on the company's assertion that 
+sion 
+6 was predicated on the company's assertion that 
 e-cigarettes were not marketed as cessation devices, a claim con-
 tradicted by our findings. Learning the extent to which 
 e-cigarette marketing appeals to new users who had not previ-
 ously used tobacco-especially children and adolescents-and 
-affects initiation is a stated FDA research priority. 19 Given the 
+affects initiation is a stated FDA research priority. 
+19 Given the 
 pervasiveness of e-cigarette marketing on Twitter (and likely 
 other social media platforms) and the substantial youth presence 
 on those platforms, it is imperative for the FDA to closely 
@@ -547,8 +615,11 @@ content was paid or encouraged to do so by a commercial
 entity. Our estimates do not take into account content viewed 
 by actively searching for e-cigarette-related keywords using the 
 Twitter search interface. By 2010 Twitter was the world's fastest 
-growing search engine. 9 
-Finally, more research is needed to better understand how 
+growing search engine. </p>
+
+<p>9 </p>
+
+<p>Finally, more research is needed to better understand how 
 social media marketing affects smokers' and non-smokers' 
 beliefs and attitudes about e-cigarettes, and ultimately whether 
 it influences product use. Future studies could examine the 
@@ -560,20 +631,25 @@ tion about individual users, external validity of inferences
 drawn from Twitter data partly depends upon available informa-
 tion about user characteristics at the population level. Internet 
 users on Twitter are described as primarily young (30% aged 
-18-29 years), African American (27%) or Latino (28%). 5 While 
+18-29 years), African American (27%) or Latino (28%). 
+5 While 
 Klout score is not universally acknowledged as the top measure 
 of online influence, the measure is useful to characterise poten-
 tial reach and impact of Twitter messaging. It is generated using 
 an undisclosed algorithm to capture influence, defined as 'ability 
 to drive people to action'-thus retweets and replies are likely 
-weighted most heavily. 10 
-Despite the limitations, this study contributes to the literature 
+weighted most heavily. </p>
+
+<p>10 </p>
+
+<p>Despite the limitations, this study contributes to the literature 
 by beginning to characterise the presence and nature of 
 e-cigarette marketing on social media and identifying potential 
 directions for future research. This paper extends the line of 
 research on tobacco-related information using 'big data' by 
 adopting a standard statistical algorithm-based machine learning 
-method which, until recently, 14 has received little attention from 
+method which, until recently, 
+14 has received little attention from 
 tobacco control researchers. Research using Twitter data is rela-
 tively new and standardised methodologies for classifying and 
 analysing those data are needed. The study described here con-

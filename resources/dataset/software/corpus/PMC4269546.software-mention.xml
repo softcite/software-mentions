@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4269546" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T20:01+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4269546" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:08+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>To respond appropriately to objects, we must process visual inputs 
 rapidly and assign them meaning. This involves highly dynamic, inter-
@@ -129,7 +129,7 @@ order of stimuli was pseudo-randomized such that consecutive stimuli
 were not phonologically related (i.e., shared an initial phoneme) and 
 no more than 4 living or nonliving items could occur in a row. The 
 stimuli were presented in 3 blocks. Stimuli were presented using 
-<rs id="software-5" type="software">Eprime</rs> (version <rs corresp="#software-5" type="version-number">2</rs>; <rs corresp="#software-5" type="creator">Psychology Software Tools</rs>, Pittsburgh, PA, USA) 
+<rs id="software-0" type="software">Eprime</rs> (<rs corresp="#software-0" type="version-number">version 2</rs>; <rs corresp="#software-0" type="creator">Psychology Software Tools</rs>, Pittsburgh, PA, USA) 
 and object naming accuracy was recorded by the experimenter during 
 data acquisition. </p>
 
@@ -193,7 +193,11 @@ Continuous MEG data were recorded using a whole-head 306 channel
 (Elekta Neuromag, Helsinki, Finland) located at the MRC Cognition </p>
 
 <p>Figure 1. Schematic of data analysis. Multiple linear regression was performed using MEG signals from each sensor and time point independently for the HMaxC1-only, HMax, and 
-HMax + SemFeat sets of predictors. For the model fit analyses (top path), model fit (R 2 ) was calculated for each predictor set for statistic comparison. For the classification 
+HMax + SemFeat sets of predictors. For the model fit analyses (top path), model fit (R </p>
+
+<p>2 </p>
+
+<p>) was calculated for each predictor set for statistic comparison. For the classification 
 analysis (bottom path), the regression coefficients from the multiple linear regression (based on all but 2 objects) were used to predict the MEG signals to the 2 left-out objects at 
 each time point. The predicted data were constructed by applying the learned regression coefficients to the known visual and semantic parameters for the 2 left-out objects. The 
 predicted patterns were classified as correct if they matched the observed patterns. The process is repeated for all possible leave-out object pairs, and accuracy is calculated as the 
@@ -210,14 +214,17 @@ was digitally recorded using a 3D digitizer (Fastrak Polhemus, Inc.,
 Colchester, VA, USA), along with the positions of the EOG electrodes, 
 HPI coils, and fiducial points (nasion, left and right periaricular). MEG 
 signals were recorded at a sampling rate of 1000 Hz, with a band-pass 
-filter from 0.03 to 125 Hz. To facilitate source reconstruction, 1-mm 3 
-T 1 -weighted MPRAGE scans were acquired during a separate session 
+filter from 0.03 to 125 Hz. To facilitate source reconstruction, 1-mm </p>
+
+<p>3 </p>
+
+<p>T 1 -weighted MPRAGE scans were acquired during a separate session 
 with a Siemens 3 T Tim Trio scanner (Siemens Medical Solutions, Cam-
 berley, UK) located at the MRC Cognition and Brain Sciences Unit, 
 Cambridge, UK. </p>
 
 <p>MEG Preprocessing 
-Initial processing of the raw data used <rs id="software-1" type="software">MaxFilter</rs> version <rs corresp="#software-1" type="version-number">2.0</rs> (<rs corresp="#software-1" type="creator">Elektra-Neuromag</rs>). First, static bad channels were detected that were subse-
+Initial processing of the raw data used <rs id="software-2" type="software">MaxFilter</rs> <rs corresp="#software-2" type="version-number">version 2.0</rs> (<rs corresp="#software-2" type="creator">Elektra-Neuromag</rs>). First, static bad channels were detected that were subse-
 quently reconstructed by interpolating neighboring channels, as were 
 bad channels containing long periods of high amplitude or noisy 
 signals. The temporal extension of the signal-space separation tech-
@@ -234,7 +241,7 @@ ometers and gradiometers separately.
 The resulting MEG data were low-pass filtered at 40 Hz in forward 
 and reverse directions using a fifth-order Butterworth digital filter, 
 epoched from −200 to 600 ms, and downsampled to 100 Hz using 
-SPM8 (Wellcome Institute of Imaging Neuroscience, London, UK). 
+<rs id="software-3" type="software">SPM</rs><rs corresp="#software-3" type="version-number">8</rs> (<rs corresp="#software-3" type="creator">Wellcome Institute of Imaging Neuroscience</rs>, London, UK). 
 Items that were incorrectly named were excluded, where an incorrect 
 name was defined as a response that did not match the correct 
 concept. We did not explicitly account for potential muscle artifacts 
@@ -248,7 +255,8 @@ affect classification accuracy or model fit. </p>
 
 <p>Model fit 
 To determine how much variance in the MEG signals was captured by 
-each of the 3 models, we calculated each model's R 2 using multiple 
+each of the 3 models, we calculated each model's R 
+2 using multiple 
 linear regression (no regularization) at each sensor and for each time 
 point independently. We performed an item-wise analysis where the 
 MEG activity to each object was averaged over participants, which also 
@@ -256,7 +264,8 @@ acted to increase signal-to-noise ratio. The 3 models tested contained
 different numbers of predictors-HMaxC1 predictors alone (n = 12), 
 HMaxC1 and HMaxC2 predictors (n = 18), and HMax and semantic-
 feature predictors (n = 24). Significant changes in model fit were calcu-
-lated by the F-ratio of the change in R 2 between models with different 
+lated by the F-ratio of the change in R 
+2 between models with different 
 sets of predictors, and corrected for multiple comparisons over sensors 
 and time using a false discovery rate (FDR) with an α of 0.05. </p>
 
@@ -326,7 +335,7 @@ the other. </p>
 <p>Source Localization: Visualizing Regression Coefficients 
 To visualize the cortical representation of the regression weights, the 
 minimum norm source localization technique was implemented in 
-SPM8 using the IID option. Instead of using the regression weights 
+<rs id="software-4" type="software">SPM</rs><rs corresp="#software-4" type="version-number">8</rs> using the IID option. Instead of using the regression weights 
 derived from MEG data averaged over participants (those used for 
 model fit and classification), for source localization, we calculated the 
 regression weights for each participant separately, that were then used 
@@ -356,7 +365,7 @@ image in MNI space (absolute regression coefficient values), which
 was smoothed with a 6-mm FWHM Gaussian smoothing kernel. This 
 produces a cortical representation of the regression weights for each 
 predictor, which were then averaged across participants, and displayed 
-on an inflated cortex using <rs id="software-0" type="software">Caret</rs> (<rs corresp="#software-0" type="url">http://www.nitrc.org/projects/caret/</rs>/). 
+on an inflated cortex using <rs id="software-5" type="software">Caret</rs> (<rs corresp="#software-5" type="url">http://www.nitrc.org/projects/caret/</rs>/). 
 The color scale used was defined by the maximum absolute regression 
 coefficient over all time windows and conditions with no thresholds 
 applied. </p>
@@ -375,12 +384,14 @@ coefficients after averaging over time windows and all predictors, and
 had a 10 mm radius. The MNI coordinates for the peak locations were 
 in the occipital (left: −10, −94, −16, right: 22, −92, −14), inferior tem-
 poral (left: −50, −52, −20, right: 52, −56, −16) and anterior temporal 
-lobes (left: −30, −6, −40, right: 30, −4, −42). Each model's R 2 was cal-
+lobes (left: −30, −6, −40, right: 30, −4, −42). Each model's R 
+2 was cal-
 culated for 2 time windows (as above) and 6 regions separately using 
 multiple linear regression between the mean source activity in the time 
 window and the 3 models (HMaxC1, HMaxC1 and HMaxC2, and HMax 
 and semantic features). Significant changes in model fit were calculated 
-by the F-ratio of the change in R 2 between models with different sets of 
+by the F-ratio of the change in R 
+2 between models with different sets of 
 predictors. </p>
 
 <p>Results </p>
@@ -419,11 +430,13 @@ same model. </p>
 Model fit &amp; Concept Classification 
 We first determined how much variance in the MEG data was 
 captured by each of the 3 models by calculating each model's 
-R 2 at each sensor and for each time point for the multiple 
+R 
+2 at each sensor and for each time point for the multiple 
 linear regression models. This approach allows us to test how 
 each model relates to the data across time, and importantly can 
 show time-specific improvements in model fit. 
-The maximum R 2 for all models occurred between 50 and 
+The maximum R 
+2 for all models occurred between 50 and 
 150 ms, while models including the C2 responses and 
 semantic-feature information showed an increased fit follow-
 ing this period (Fig. 2a). The HMax model (combining C1 and 
@@ -432,7 +445,8 @@ pared with the HMaxC1-only model from 100 to 150 ms in pos-
 terior sensors, followed by fewer effects primarily between 
 290 and 450 ms (all qs &lt; 0.05, FDR corrected; Fig. 2b). Import-
 antly, the model including semantic-feature information 
-showed a significant and sustained increase in R 2 compared 
+showed a significant and sustained increase in R 
+2 compared 
 with the HMax model from 200 to 580 ms with a focus over left 
 anterior sensors (all qs &lt; 0.05, FDR corrected; Fig. 2c). As all 
 models include the C1 responses, our results suggest that 
@@ -511,8 +525,10 @@ within-category classification using bootstrapping showed no
 significant difference in latency (P = 0.96). While early classifi-
 cation accuracies were similar overall, after 120 ms accuracy </p>
 
-<p>Figure 2. Regression model fits. (a) Model fits across MEG sensors and time showing R 2 values for the HMaxC1-only, HMax, and HMax + SemFeat models. (b) F-Ratio of the 
-change in R 2 from the HMaxC1-only to the HMax model, and (c) from the HMax model to the HMax + SemFeat model. Plots show the F-ratio across sensors and time with a 
+<p>Figure 2. Regression model fits. (a) Model fits across MEG sensors and time showing R 
+2 values for the HMaxC1-only, HMax, and HMax + SemFeat models. (b) F-Ratio of the 
+change in R 
+2 from the HMaxC1-only to the HMax model, and (c) from the HMax model to the HMax + SemFeat model. Plots show the F-ratio across sensors and time with a 
 significant change in F-ratio shown by the gray plane (P &lt; 0.05 FDR corrected over time and sensors). Sensor topographies are shown for peak times for both magnetometers and 
 the mean F-ratio over the planar gradiometer pairs. </p>
 
@@ -931,8 +947,9 @@ Research Council under the European Community's Seventh
 Framework Programme (FP7/2007-2013)/ERC Grant agree-
 ment no 249640 to L.K.T. </p>
 
-<p>Notes 
-Conflict of Interest: None declared. </p>
+<p>Notes </p>
+
+<p>Conflict of Interest: None declared. </p>
 
 
 

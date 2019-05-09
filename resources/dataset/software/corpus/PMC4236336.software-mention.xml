@@ -1,14 +1,17 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4236336" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T19:53+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4236336" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:00+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>Artificial neural networks imitate learning processes and 
-interactions between human neurons. 8 During the training phase, 
+interactions between human neurons. 
+8 During the training phase, 
 it gradually reduces the deviation of prediction by learning the 
 relationships among inputs (variables) and outputs (prediction results) 
 as well as relationships between the input variables. Finally, the ANN 
 has the ability to predict the probability of BCR. 
 Opinions vary regarding the comparison between ANN and 
-LR. 9-14 Most criticism arises from the limited prediction accuracy due 
-to limitations of the algorithm. 15,16 LR is a special form of ANN. If the 
+LR. 
+9-14 Most criticism arises from the limited prediction accuracy due 
+to limitations of the algorithm. 
+15,16 LR is a special form of ANN. If the 
 relationships among input parameters are nonlinear, ANN models will 
 perform better than LR. Otherwise, the LR is preferable because the 
 influence of each parameter can be observed much easier than in ANNs. 
@@ -17,10 +20,24 @@ tools for BCR. Evaluation of the ability of a computer model to predict
 of BCR after radical prostatectomy is mainly based on the following 
 parameters: the accuracy of the predicting models, the universality 
 of the internal/external validation, correction capability, complexity, 
-and clinical value. 17 Here, we analyzed ANN and LR performance in 
+and clinical value. 
+17 Here, we analyzed ANN and LR performance in 
 predicting BCR based on these criteria. In addition to the ANN and LR 
 models immediately after surgery, we analyzed ANN and LR models 
 that evaluate BCR risk at 6-month intervals, which allows for a more </p>
+
+<p>5 </p>
+
+<p>For higher accuracy and specificity; multivariate logistic regression 
+(LR) models such as nomograms 
+6 have been used to improve 
+prediction. Most applications of LR in BCR prediction are available 
+with standard nomograms, but there are only few artificial neural 
+networks (ANNs) available for BCR prediction 
+7 and none is freely 
+available online. Further, there are no available models that calculate the 
+individual BCR free probability at multiple time-points after operation 
+especially after different time periods without BCR. </p>
 
 <p>ORIGINAL ARTICLE </p>
 
@@ -28,8 +45,30 @@ that evaluate BCR risk at 6-month intervals, which allows for a more </p>
 after radical prostatectomy using prostate-specific 
 antigen and Gleason score </p>
 
-<p>Xin-Hai Hu 1 , Henning Cammann 2 , Hellmuth-A Meyer 1 , Klaus Jung 1,3 , Hong-Biao Lu 1,4 , Natalia Leva 5 , 
-Ahmed Magheli 1 , Carsten Stephan 1,3 , Jonas Busch 1 </p>
+<p>Xin-Hai Hu 
+1 , Henning Cammann 
+2 , Hellmuth-A Meyer </p>
+
+<p>1 </p>
+
+<p>, Klaus Jung </p>
+
+<p>1,3 </p>
+
+<p>, Hong-Biao Lu </p>
+
+<p>1,4 </p>
+
+<p>, Natalia Leva 
+5 , 
+Ahmed Magheli 
+1 , Carsten Stephan </p>
+
+<p>1,3 </p>
+
+<p>, Jonas Busch </p>
+
+<p>1 </p>
 
 <p>Many computer models for predicting the risk of prostate cancer have been developed including for prediction of biochemical recurrence 
 (BCR). However, models for individual BCR free probability at individual time-points after a BCR free period are rare. Follow-up data 
@@ -47,8 +86,17 @@ Asian Journal of Andrology (2014) 16, 897-901; doi: 10.4103/1008-682X.129940; pu
 
 <p>Keywords: artificial neural network; prostate cancer; recurrence </p>
 
-<p>1 Department of Urology, Charité -Universitätsmedizin Berlin, Berlin, Germany; 2 Institute of Medical Informatics, Charité -Universitätsmedizin Berlin, Berlin, Germany; 
-3 Berlin Institute for Urologic Research, Berlin, Germany; 4 Department of Urology, Changzhou No. 2 People's Hospital, Changzhou, China; 5 Stanford University School of 
+<p>1 Department of Urology, Charité -Universitätsmedizin Berlin, Berlin, Germany; 
+2 Institute of Medical Informatics, Charité -Universitätsmedizin Berlin, Berlin, Germany; 
+3 Berlin Institute for Urologic Research, Berlin, Germany; </p>
+
+<p>4 </p>
+
+<p>Department of Urology, Changzhou No. 2 People's Hospital, Changzhou, China; </p>
+
+<p>5 </p>
+
+<p>Stanford University School of 
 Medicine, Stanford, CA, USA. 
 Correspondence: Dr. J Busch (jonas.busch@charite.de) 
 Received: 29 October 2013; Revised: 08 December 2013; Accepted: 22 January 2014 </p>
@@ -62,11 +110,12 @@ Received: 29 October 2013; Revised: 08 December 2013; Accepted: 22 January 2014 
 <p>Recurrence models for PCa 
 XH Hu et al </p>
 
-<p>898 </p>
+
 
 <p>accurate prediction of BCR at any given time after surgery. ANN has 
 already been described as a good alternative to Cox and other regression 
-models. 18 From a practical point of view, there is an urgent need for 
+models. 
+18 From a practical point of view, there is an urgent need for 
 tools that provide information on recurrence-free survival (FS) at 
 distinct time points after radical prostatectomy taking into account 
 the already elapsed recurrence-free interval. </p>
@@ -83,22 +132,27 @@ period was 82.1 months (range from 0.2 to 129.5). </p>
 
 <p>Data collection 
 Biochemical recurrence was defined as serum PSA levels greater than 
-0.1 ng ml −1 at two consecutive time points. All preoperative blood 
+0.1 ng ml 
+−1 at two consecutive time points. All preoperative blood 
 samples were measured by Immulite® 2000 assays (Siemens Healthcare, 
 Erlangen, Germany). Data collection included: age, PSA, free/total 
 PSA (%fPSA), prostate weight, digital rectal examination (DRE) 
-status, pT, 19 margin status (positive surgical margin [PSM] or negative 
-surgical margin [NSM]) and GS. 20 For the parameter distribution 
+status, pT, 
+19 margin status (positive surgical margin [PSM] or negative 
+surgical margin [NSM]) and GS. 
+20 For the parameter distribution 
 analysis, pTs of the prostatectomy specimens were classified into 
 pT2, pT3/4; GS &lt;7, GS =7, GS &gt;7; PSM or NSM; positive DRE or 
 negative DRE. PSA, margin status, pT and GS were used for ANN 
 and LR analysis. 
 This study was conducted under a local Ethics Committee approved 
-protocol and obeys Reporting of Diagnostic Accuracy guidelines. 21 </p>
+protocol and obeys Reporting of Diagnostic Accuracy guidelines. </p>
+
+<p>21 </p>
 
 <p>Statistical analysis 
 Artificial neural network and LR models were computed using the 
-<rs id="software-1" type="software">MATLAB</rs>-software and the <rs type="software">Neural Network Toolbox</rs> (<rs corresp="#software-1" type="creator">Mathworks</rs>, 
+<rs id="software-0" type="software">MATLAB</rs>-software and the <rs type="software">Neural Network Toolbox</rs> (<rs corresp="#software-0" type="creator">Mathworks</rs>, 
 Natick, MA, USA). Each ANN (feed forward network with error back 
 propagation) had three layers: input layer with four neurons, hidden 
 layer with two neurons and output layer with one neuron representing 
@@ -108,8 +162,8 @@ the nonBCR probability. Follow-up data after LRP were collected every
 patients still not having a BCR at this time-point (those with a BCR 
 earlier were excluded) and those who were not censored. For all models, 
 internal validation was performed with the leave one out method. 
-Statistical analysis was performed using <rs id="software-3" type="software">SPSS</rs> <rs corresp="#software-3" type="version-number">19.0</rs> (<rs corresp="#software-3" type="creator">IBM</rs>, Chicago, 
-IL, USA) and <rs id="software-0" type="software">MedCalc</rs> <rs corresp="#software-0" type="version-number">12.4.0</rs> (<rs corresp="#software-0" type="creator">MedCalc Software</rs>, Mariakerke, Belgium) 
+Statistical analysis was performed using <rs id="software-2" type="software">SPSS</rs> <rs corresp="#software-2" type="version-number">19.0</rs> (<rs corresp="#software-2" type="creator">IBM</rs>, Chicago, 
+IL, USA) and <rs id="software-3" type="software">MedCalc</rs> <rs corresp="#software-3" type="version-number">12.4.0</rs> (<rs corresp="#software-3" type="creator">MedCalc Software</rs>, Mariakerke, Belgium) 
 to compare all variables using receiver operating characteristic (ROC) 
 analyses regarding sensitivity, specificity and areas under ROC curve 
 (AUC). The comparison of ROC curves were performed with the 
@@ -139,7 +193,9 @@ two models compared with GS and PSA alone. Table 3 displays the
 pairwise comparison of all parameters. While ANN and LR were not 
 different (P = 0.39), ANN and LR predicted BCR better than PSA or </p>
 
-<p>Table 1: Clinical characteristics of the study population a </p>
+<p>Table 1: Clinical characteristics of the study population </p>
+
+<p>a </p>
 
 <p>Characteristics 
 Total 
@@ -166,14 +222,20 @@ P </p>
 <p>63 
 (59-67) </p>
 
-<p>0.374 b </p>
+<p>0.374 </p>
+
+<p>b </p>
 
 <p>Range 
 43-75 
 43-75 
 43-75 </p>
 
-<p>PSA (ng ml −1 ) </p>
+<p>PSA (ng ml </p>
+
+<p>−1 </p>
+
+<p>) </p>
 
 <p>Median 
 (IQR 25%-75%) </p>
@@ -187,7 +249,9 @@ P </p>
 <p>7.5 
 (6.3-14.1) </p>
 
-<p>0.115 b </p>
+<p>0.115 </p>
+
+<p>b </p>
 
 <p>Range 
 1.3-50.7 
@@ -208,7 +272,9 @@ P </p>
 <p>8.0 
 (6.07-11.6) </p>
 
-<p>0.257 b </p>
+<p>0.257 </p>
+
+<p>b </p>
 
 <p>Range 
 1.18-41.2 
@@ -229,7 +295,9 @@ P </p>
 <p>30 
 (25-42) </p>
 
-<p>0.334 b </p>
+<p>0.334 </p>
+
+<p>b </p>
 
 <p>Range 
 7-190 
@@ -250,7 +318,9 @@ P </p>
 <p>0.29 
 (0.18-0.44) </p>
 
-<p>0.108 b </p>
+<p>0.108 </p>
+
+<p>b </p>
 
 <p>Range 
 0.02-1.66 
@@ -261,13 +331,17 @@ P </p>
 548 
 410 
 138 
-&lt;0.0001 c </p>
+&lt;0.0001 </p>
+
+<p>c </p>
 
 <p>R1=1 
 488 
 341 
 147 
-&lt;0.0001 c </p>
+&lt;0.0001 </p>
+
+<p>c </p>
 
 <p>Gleason, n (%) </p>
 
@@ -275,7 +349,9 @@ P </p>
 549 (35) 
 509 (39) 
 40 (15) 
-&lt;0.0001 c </p>
+&lt;0.0001 </p>
+
+<p>c </p>
 
 <p>Gleason=7 
 766 (49) 
@@ -293,7 +369,9 @@ P </p>
 1119 (71) 
 1004 (77) 
 115 (42) 
-&lt;0.0001 c </p>
+&lt;0.0001 </p>
+
+<p>c </p>
 
 <p>pT=3 
 446 (28) 
@@ -316,7 +394,9 @@ b Mann-Whitney U test; c Fisher's exact test </p>
 <p>90% sensitivity 
 95% sensitivity 
 AUC 
-95% CI a </p>
+95% CI </p>
+
+<p>a </p>
 
 <p>Specificity 
 CI 
@@ -391,23 +471,42 @@ had a BCR (85 of 164). </p>
 <p>DISCUSSION 
 Different types of ANNs have been used for a variety of purposes in 
 management of PCa. For example, PSA, prostate volume, DRE, and 
-other variables are used as input parameters for diagnosing PCa. 22 
-ANN is also used to predict the outcome of repeat prostate biopsies, 23 
-and furthermore, to predict the risk of lymph node metastasis in PCa 
-patients. 24 However, ANN applications to predict BCR are rare. 7,10 
-Our data on BCR prediction show that ANN and LR models 
+other variables are used as input parameters for diagnosing PCa. </p>
+
+<p>22 </p>
+
+<p>ANN is also used to predict the outcome of repeat prostate biopsies, </p>
+
+<p>23 </p>
+
+<p>and furthermore, to predict the risk of lymph node metastasis in PCa 
+patients. 
+24 However, ANN applications to predict BCR are rare. </p>
+
+<p>7,10 </p>
+
+<p>Our data on BCR prediction show that ANN and LR models 
 including the parameters PSA, margin status, pT and GS, can 
 correctly simulate and reflect interactions between variables in 
 the training set. The models improve the prediction better than 
 any single variable and thus estimate BCR more accurately for 
-each individual patient with PCa. 25 Some studies have verified 
+each individual patient with PCa. 
+25 Some studies have verified 
 that ANN models have the ability to improve prognosis prediction 
-for PCa patients after prostatectomy. 7,10,26-29 These data have been 
+for PCa patients after prostatectomy. 
+7,10,26-29 These data have been 
 summarized in Table 5. One of the first studies in 1994 demonstrated 
-87% accuracy. 26 
-Among all available studies to date, the results by Tewari et al. 7 
-showed the best AUC with 0.83; however, their accuracy was somewhat 
-lower than in the present study and in other studies. Potter et al. 26 gained 
+87% accuracy. </p>
+
+<p>26 </p>
+
+<p>Among all available studies to date, the results by Tewari et al. </p>
+
+<p>7 </p>
+
+<p>showed the best AUC with 0.83; however, their accuracy was somewhat 
+lower than in the present study and in other studies. Potter et al. 
+26 gained 
 similar AUCs of 0.71, 0.74, 0.74 using different input parameters, but 
 the specificity was relatively lower than in our present study. However, 
 despite large differences in sensitivity and specificity levels there are 
@@ -415,7 +514,8 @@ relatively small accuracy ranges (70%-87%) and AUCs between
 0.71 and 0.83 for all studies. This demonstrates that the parameters 
 that were used do not allow a better prediction of BCR. Interestingly, 
 PSA has been thought to improve prediction of BCR following PCa 
-diagnosis; 30 however in our study, %fPSA did not improve prognosis. 
+diagnosis; 
+30 however in our study, %fPSA did not improve prognosis. 
 The median values were not different between the non-BCR and BCR 
 group (10.7 vs 9.2%; P = 0.26) (Table 1). 
 An important finding was the additional benefit of our ANN for 
@@ -464,8 +564,11 @@ Gleason versus PSA </p>
 0.095-0.177 
 0.048-0.143 </p>
 
-<p>P a 
-0.39 
+<p>P </p>
+
+<p>a </p>
+
+<p>0.39 
 0.0015 
 &lt;0.0001 
 0.0001 
@@ -503,13 +606,15 @@ the possibility of improving individual BCR estimation at any point
 after LRP. Another limitation was the decreased available patient data 
 with increased follow-up time. 
 Nevertheless, patient's age, PSA, and GS were found to play 
-a distinct role in PCa prognosis. 3,31,32 Currently, those prediction 
+a distinct role in PCa prognosis. 
+3,31,32 Currently, those prediction 
 parameters and the ANN output value best predict a PCa recurrence. 
 Further, with our ANN models, this prediction can be made for an 
 individual time point after LRP and with patients who have BCR free 
 time-points. Other parameters such as %fPSA or the margin status 
-did not contribute as speculated before. The %fPSA performs well in 
-PCa diagnosis, but is less competitive in the prognosis of PCa or BCR, 
+did not contribute as speculated before. The %fPSA performs well in </p>
+
+<p>PCa diagnosis, but is less competitive in the prognosis of PCa or BCR, 
 therefore it is not used in our models. </p>
 
 <p>Table 5: Comparison of ANNs with different parameters </p>
@@ -531,7 +636,9 @@ Sensitivity
 <p>AUC </p>
 
 <p>Tewari 
-et al. 7 </p>
+et al. </p>
+
+<p>7 </p>
 
 <p>1280 Age, PSA, systematic 
 biopsy-based, 
@@ -546,7 +653,9 @@ in months </p>
 0.831 </p>
 
 <p>Ziada 
-et al. 29 </p>
+et al. </p>
+
+<p>29 </p>
 
 <p>309 TNM stage, prostate 
 size, PSA, GS, 
@@ -558,7 +667,9 @@ positive biopsy, age </p>
 80 </p>
 
 <p>Potter 
-et al. 26 </p>
+et al. </p>
+
+<p>26 </p>
 
 <p>214 GS, extraprostatic 
 extension, surgical 
@@ -569,7 +680,9 @@ margin status, age </p>
 74.3 0.713 </p>
 
 <p>Potter 
-et al. 26 </p>
+et al. </p>
+
+<p>26 </p>
 
 <p>214 DNA ploidy, the 
 variance of 41 
@@ -583,7 +696,9 @@ descriptors </p>
 0.74 </p>
 
 <p>Potter 
-et al. 26 </p>
+et al. </p>
+
+<p>26 </p>
 
 <p>214 GS, extraprostatic 
 extension, surgical 
@@ -599,7 +714,9 @@ descriptors) </p>
 78.1 0.735 </p>
 
 <p>Porter 
-et al. 28 </p>
+et al. </p>
+
+<p>28 </p>
 
 <p>196 Biopsy primary, 
 secondary Gleason 
@@ -627,7 +744,9 @@ QNG: quantitative nuclear grade, TNM: tumor, node, metastases, DNA: deoxyribonuc
 of Gleason score and artificial neural network output </p>
 
 <p>No. patients (n) Patients with BCR (n, %) 
-P a </p>
+P </p>
+
+<p>a </p>
 
 <p>GS 7-10 
 1026 
@@ -678,7 +797,7 @@ for patients which are under investigation, that is, patients without biochemica
 <p>Recurrence models for PCa 
 XH Hu et al </p>
 
-<p>901 </p>
+
 
 <p>CONCLUSION 
 The predictive ability of our ANN and LR models is better than single 

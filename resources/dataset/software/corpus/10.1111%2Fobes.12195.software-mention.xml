@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1111%2Fobes.12195" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T19:51+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1111%2Fobes.12195" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T03:58+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>Abstract </p>
 
@@ -28,10 +28,7 @@ addressed in Harbo et al. (1998) [HJNR hereafter], see also Johansen (1992a, b, 
 The idea of the conditional analysis is that the dimensionality of the system is reduced, 
 and, when conditioning is valid, co-integration tests may have better power properties. The 
 'partial system' approach proves to be useful in situations where (i) the dimension of the 
-whole VAR system p := dim(X t ), X 
-t := (Y 
-t , Z 
-t ), is large relative to the sample size T ; (ii) 
+whole VAR system p := dim(X t ), X t := (Y t , Z t ), is large relative to the sample size T ; (ii) 
 the practitioner is essentially interested in modelling Y t and it is known that Z t contributes 
 to the long-run equilibrium of the system but either the theory is silent about the short run 
 properties of Z t , or the scope of the analysis does not require modelling Z t explicitly; (iii) 
@@ -58,7 +55,7 @@ weak exogeneity in error-correction models, see also Boswijk and Urbain (1997). 
 not surprising, therefore, that despite conditional (structural) error-correction models have 
 been widely applied in applied work, only seldom the partial system approach has been 
 used for inference on the co-integration rank, see Doornik, Hendry and Nielsen (1998), 
- and Fisher (1999), Bruggeman, Donati and Warne (2003), and Johansen (1992b) 
+Bårdsen and Fisher (1999), Bruggeman, Donati and Warne (2003), and Johansen (1992b) 
 for an early example. In empirical studies where a (structural) conditional system for Y t 
 given Z t is used, the co-integration rank is typically either assumed to be known, or is 
 assumed to be inferred from a full system analysis in a previous stage, see e.g. Boswijk 
@@ -160,8 +157,6 @@ reduced rank VAR model: </p>
 
 <p>k−1 </p>
 
-
-
 <p>i=1 </p>
 
 <p>i X t−i + D t + d t + " t , t = 1,…, T 
@@ -178,14 +173,16 @@ matrix. Conditional heteroscedasticity can be allowed as in Cavaliere et al. (20
 deterministic variables in equation (1) are taken to satisfy one of the following cases (see 
 e.g. Johansen, 1996): (i) D t = 0, d t = 0 (no deterministic components); (ii) D t = 1, d t = 0 
 (restricted constant); or (iii) D t = t, d t = 1 (restricted linear trend). 
-We decompose X t as X 
-t = (Y 
-t , Z 
-t ), where Y t is of dimension p Y and Z t is of dimension 
-p Z , with p Y + p Z =: p. Therefore, " 
-t = (" Y 
-t , " Z 
-t ) in equation (1) are i.i.d. Gaussian with mean </p>
+We decompose X t as X t = (Y t , Z t ), where Y t is of dimension p Y and Z t is of dimension 
+p Z , with p Y + p Z =: p. Therefore, " t = (" </p>
+
+<p>Y </p>
+
+<p>t , " </p>
+
+<p>Z </p>
+
+<p>t ) in equation (1) are i.i.d. Gaussian with mean </p>
 
 <p>© 2017 The Department of Economics, University of Oxford and John Wiley &amp; Sons Ltd </p>
 
@@ -195,39 +192,55 @@ t ) in equation (1) are i.i.d. Gaussian with mean </p>
 
 <p>zero and covariance matrix </p>
 
-<p>:= 
-YY YZ </p>
+<p>:= </p>
 
-<p>ZY ZZ </p>
+<p>YY 
+YZ </p>
 
-<p>
-. </p>
+<p>ZY 
+ZZ </p>
+
+<p>. </p>
 
 <p>All other matrices of parameters in system (1) are partitioned conformably. As in HJNR, 
 we define the partial and marginal models assuming, for simplicity and without loss of 
 generality, that k = 2 (extension to the case k &gt; 2 is straightforward). 
 The conditional (or partial) model is </p>
 
-<p>Y t = Z t + c X t−1 + c X t−1 + 
-c D t + c d t + " ct 
+<p>Y t = 
+Z t + c X t−1 + c X t−1 + c D t + c d t + " ct 
 (2) </p>
 
-<p>where := YZ −1 
-ZZ , c := Y − Z , c := Y 1 − Z1 
-1 := ( 
-Y 1 , 
-Z1 ), 
-c := Y 
-Y − 
-Z 
-Z , c := Y − Z and " ct := " Y 
-t − " Z 
-t , with covariance matrix c = YY .Z := YY − 
-YZ −1 
-ZZ ZY . 1 The marginal model is 
-Z t = Z X t−1 + Z1 X t−1 + Z 
-Z D t + Z d t + " Z 
-t . 
+<p>where := YZ </p>
+
+<p>−1 </p>
+
+<p>ZZ , c := Y − Z , c := Y 1 − </p>
+
+<p>Z1 </p>
+
+<p>1 := ( Y 1 , Z1 ), c := Y Y − 
+Z Z , c := Y − Z and " ct := " </p>
+
+<p>Y </p>
+
+<p>t − " </p>
+
+<p>Z </p>
+
+<p>t , with covariance matrix c = YY .Z := YY − </p>
+
+<p>YZ 
+−1 </p>
+
+<p>ZZ ZY . 
+1 The marginal model is </p>
+
+<p>Z t = Z X t−1 + Z1 X t−1 + Z Z D t + Z d t + " </p>
+
+<p>Z </p>
+
+<p>t . 
 (3) </p>
 
 <p>In general, both the conditional model in equation (2) and the marginal model in equa-
@@ -236,60 +249,62 @@ conditional model (2) solely incorporates information about the co-integration r
 The statistical analysis of the likelihood function of the partial model in equation (2) 
 can be performed by reduced rank regression of the process Y t on X t , corrected for lagged 
 differences and the conditioning (stationary) variable Z t (see chapter 8 in Johansen, 1996, 
-and HJNR). 2 By concentrating the likelihood function of the partial model in equation 
+and HJNR). 
+2 By concentrating the likelihood function of the partial model in equation 
 (2) with respect to the parameters , Y , , c and c , the residuals R 0t , R 1t , and R "t 
 corresponding to Y t , X t−1 , and " ct , respectively, are obtained, as well as the corresponding 
 residual product moments </p>
 
-<p>S ij := T −1 </p>
+<p>S ij := T </p>
+
+<p>−1 </p>
 
 <p>T </p>
 
-
-
 <p>t=1 </p>
 
-<p>R it R 
-jt , i, j = 0, 1, ". </p>
+<p>R it R jt , i, j = 0, 1, ". </p>
 
 <p>Up to a constant term which does not depend on r, the maximized pseudo log-likelihood 
-function associated with equation (1) is`T (r) := − T </p>
+function associated with equation (1) is`T (r) := − </p>
 
-<p>2 </p>
+<p>T 
+2 </p>
 
-<p>log | ˆ 
-c,r |,  
-c,r is the residual 
+<p>log |ˆ c,r |, whereˆ c,r is the residual 
 covariance matrix estimated from the conventional reduced rank regression based on equa-
-tion (2) with rank r (see Johansen, 1996). Moreover, | ˆ 
-c,r | := |S 00 | 
-r </p>
+tion (2) with rank r (see Johansen, 1996). Moreover, |ˆ c,r | := |S 00 | </p>
 
-<p>i=1 (1 − ˆ 
-i ), and hencè T (r) := − T </p>
+<p>r </p>
 
-<p>2 </p>
+<p>i=1 (1 −ˆ i ), and hencè 
+T (r) := − </p>
 
-<p>log |S 00 | − T </p>
+<p>T 
+2 </p>
 
-<p>2 </p>
+<p>log |S 00 | − </p>
 
-<p>r 
-i=1 log(1 − ˆ 
-i ),  
-1 &gt; · · · &gt; ˆ 
-p Y are the p Y largest solutions 
+<p>T 
+2 </p>
+
+<p>r </p>
+
+<p>i=1 log(1 −ˆ i ), whereˆ 1 &gt; · · · &gt;ˆ p Y are the p Y largest solutions 
 of the eigenvalue problem </p>
 
-<p>S 11 − S 10 S −1 
-00 S 01 </p>
+<p>S 11 − S 10 S </p>
 
-<p>
-= 0. 
+<p>−1 </p>
+
+<p>00 S 01 = 0. 
 (4) </p>
 
-<p>Note that since S 11 is p × p and S 00 is p Y × p Y , the rank of S 10 S −1 
-00 S 01 is at most p Y . There-
+<p>Note that since S 11 is p × p and S 00 is p Y × p Y , the rank of S 10 S </p>
+
+<p>−1 </p>
+
+<p>00 S 01 is at most p Y . There-
 fore, the eigenvalue problem in equation (4) has p Z = p − p Y zero solutions, thus reducing 
 the possible choice of the (maximum) number of co-integration relations from p to p Y . </p>
 
@@ -309,12 +324,13 @@ of the hypothesis of weak exogeneity, but also inconsistent.
 and the implied eigenvalue problem in equation (4) 'HJNR's testing procedure'. 
 Johansen (1992a) shows that when r = r 0 p Y , if Z t is weakly exogenous for , the con-
 ditional model in equation (2) conveys full information on the co-integration relations and 
-the maximum likelihood estimator for (, ) in the partial (conditional) model (2) has the 
+the maximum likelihood estimator for ( , ) in the partial (conditional) model (2) has the 
 same asymptotic efficiency of the full system (unconditional) maximum likelihood estima-
 tor. In this case, the asymptotic distribution of HJNR's testing procedure for co-integration 
 rank is free of nuisance parameters. Asymptotic critical values have been tabulated under 
-such conditions in HJNR. This is no longer the case if the assumption of weak exogeneity, 
-Z = 0, does not hold. More precisely, when Z = 0, the conditional model does not convey 
+such conditions in HJNR. This is no longer the case if the assumption of weak exogeneity, </p>
+
+<p>Z = 0, does not hold. More precisely, when Z = 0, the conditional model does not convey 
 all the information on the co-integration relations and maximum likelihood inference on 
 based on system (2) is neither fully efficient nor of standard type. However, we will show 
 below that when 0 r 0 p Y , it is possible to consistently recover the co-integration rank 
@@ -327,33 +343,28 @@ exogeneity condition of Z t with respect to . </p>
 systems </p>
 
 <p>We now focus on the conditional partial model (2) and the implied eigenvalue problem dis-
-cussed in the previous section. Let IC(r) := −2` T (r) + p T denote an information criterion, 
+cussed in the previous section. Let IC(r) := −2`T (r) + p T denote an information criterion, 
 where p T := c T (r) is a penalty function that depends upon the number of parameters (r) 
 and on a term c T , to be specified below. We have that </p>
 
-<p>IC(r) := T log | ˆ 
-c,r | + c T (r) = T log |S 00 | + T </p>
+<p>IC(r) := T log |ˆ c,r | + c T (r) = T log |S 00 | + T </p>
 
 <p>r </p>
 
-
-
 <p>i=1 </p>
 
-<p>log(1 − ˆ 
-i ) + c T (r) 
+<p>log(1 −ˆ i ) + c T (r) 
 (5) </p>
 
-<p>where the eigenvaluesî , i = 1,…, r, are determined from equation (4) and (r) := 
+<p>where the eigenvaluesˆ i , i = 1,…, r, are determined from equation (4) and (r) := 
 r(p Y + p − r) when no deterministic components are involved, (r) := r(p Y + p − r + 1) 
 in the case of a restricted constant and (r) := r(p Y + p − r + 1) + p Y in the restricted trend 
 case. Different values of the coefficient c T yield different information criteria through the 
 resulting penalty function, p T . In particular, as is well-known, c T = 2, log T , and 2 log log T 
 yields the AIC, BIC, and HQC, respectively. 
-The co-integration rank estimator is then given, in generic form, by </p>
+The co-integration rank estimator is then given, in generic form, bŷ </p>
 
-<p>ˆ 
-r := arg min </p>
+<p>r := arg min </p>
 
 <p>r=0,1,…,p Y </p>
 
@@ -391,10 +402,9 @@ satisfy condition (a.i) in Theorem 1. Therefore, this criterion will not be cons
 system is lower than the true number of co-integration relations in the full system (1), 
 only certain linear combinations of the co-integrating vectors can be estimated on the basis 
 of the partial model in equation (2). In such cases, the co-integration rank estimator in 
-equation (6) will tend to select the maximum possible rank, ˆ 
-r = p Y . Therefore, the results 
-in Theorem 1 imply that, in general, ˆ 
-r will converge to min(r 0 , p Y ). Hence, in the limitˆr   = p Y whenever r 0 p Y . </p>
+equation (6) will tend to select the maximum possible rank,r = p Y . Therefore, the results 
+in Theorem 1 imply that, in general,r will converge to min(r 0 , p Y ). Hence, in the limit 
+r = p Y whenever r 0 p Y . </p>
 
 <p>Remark 3. Importantly, inTheorem 1 the determination of the co-integration rank based 
 on the estimator in equation (6) does not require Z to be zero in equation (3). That is, our 
@@ -408,18 +418,24 @@ eigenvalues from the determinantal problem (4) is such that, for 0 r p Y , the c
 IC(r) &gt; IC(r 0 ) holds, under the conditions (a.i) and (a.ii) of Theorem 1, irrespective of 
 Z t being weakly exogenous for or not. More precisely, as formally shown in the proof 
 of Theorem 1 (see the accompanying online appendix), when r &gt; r 0 , information criteria 
-rely on a consistent estimator of the error variance matrix c,r 0 because the eigenvaluesˆr   0 +1 ,…, ˆ 
-r of the determinantal problem (4) are O p (T −1 ). This is valid regardless of the 
+rely on a consistent estimator of the error variance matrix c,r 0 because the eigenvalueŝ </p>
+
+<p>r 0 +1 ,…,ˆ r of the determinantal problem (4) are O p (T 
+−1 ). This is valid regardless of the 
 weak exogeneity condition. In this case, the difference IC(r) − IC(r 0 ) involves the term 
-T r 
-i=r 0 +1 log(1 − ˆ 
-i ) which is O p (1), plus a term which diverges under the condition (a.i) 
+T </p>
+
+<p>r </p>
+
+<p>i=r 0 +1 log(1 −ˆ i ) which is O p (1), plus a term which diverges under the condition (a.i) 
 of Theorem 1, leading to IC(r 0 ) &lt; IC(r). Instead, when r &lt; r 0 p Y , albeit when the weak 
 exogeneity condition fails nuisance parameters are involved in the limit distribution of the 
 eigenvalues of the determinantal problem (4), there are still r 0 − r positive solutions. In this 
-case, the difference IC(r) − IC(r 0 ) involves the term −T r 0 
-i=r+1 log(1 − ˆ 
-i ) which is O p (T ), 
+case, the difference IC(r) − IC(r 0 ) involves the term −T </p>
+
+<p>r 0 </p>
+
+<p>i=r+1 log(1 −ˆ i ) which is O p (T ), 
 plus a term which converges to zero under the condition (a.ii) of Theorem 1, leading again 
 to IC(r 0 ) &lt; IC(r). When r 0 &gt; p Y (case (b) of Theorem 1), the argument is similar. Finally, 
 notice that since we do not have any particular restriction on the conditioning variables, Z t 
@@ -454,20 +470,24 @@ in these cases. </p>
 
 <p>In this section, we investigate the finite sample performance of BIC and HQC in partial sys-
 tems through a Monte Carlo experiment which uses large scale systems of p = dim(X t ) = 7 
-variables as data generating processes. 3 In particular, we consider a DGP where the seven-
+variables as data generating processes. 
+3 In particular, we consider a DGP where the seven-
 dimensional process {X t } satisfies the following VAR(2) model with 'true' co-integration 
 rank r 0 = 1: </p>
 
-<p>X t = X t−1 + 1 X t−1 + + " t , " t ∼ iidN (0, ), t = 1,…, T 
+<p>X t = X t−1 + 1 X t−1 + 
++ " t , " t ∼ iidN (0, ), t = 1,…, T 
 (7) </p>
 
-<p>where := (a, 0, 0, 0, c, c/ 2, c/ 3), := (1, 0, 0, 0, 0, 0, 0) and 1 := I 7 . 4 For the sake of 
+<p>where := (a, 0, 0, 0, c, c/ 2, c/ 3), := (1, 0, 0, 0, 0, 0, 0) and 1 := I 7 . 
+4 For the sake of 
 comparison and with the intention of gathering additional insights, the DGP is chosen by 
 extending the Monte Carlo set-up already exploited by Cavaliere et al. (2012), CDRT and 
 Cavaliere et al. (2016) to the case of larger dimensional VARs. Moreover, in order to fully 
 exploit the potential of the conditional analysis we specify a 'full' (and rather arbitrary) 
 structure for the covariance matrix such that the resultant matrix in equation (2) is 
-non-zero for all DGPs considered. 5 The initial conditions X −1 and X 0 are fixed to zero. 
+non-zero for all DGPs considered. 
+5 The initial conditions X −1 and X 0 are fixed to zero. 
 Data are generated by setting a = −0.4 and = 0.5. The settings for the parameter c are 
 discussed below because in our Monte Carlo design the condition c = 0 is related to the </p>
 
@@ -477,9 +497,17 @@ discussed below because in our Monte Carlo design the condition c = 0 is related
 4 Note that the assumption := (1, 0,…, 0) does not imply any loss of generality. Indeed, any process X t satisfying </p>
 
 <p>equation (1) under the I(1,r 0 ) conditions with r 0 = 1 and = (1, 0,…, 0) can be suitably linearly transformed into the 
-new process X * 
-t such that * X * 
-t ∼ I (0) with * := (1, 0,…, 0) . The likelihood ratio test is invariant to such rotation. 
+new process X </p>
+
+<p>* </p>
+
+<p>t such that 
+* X </p>
+
+<p>* </p>
+
+<p>t ∼ I (0) with 
+* := (1, 0,…, 0) . The likelihood ratio test is invariant to such rotation. 
 5 The matrix has been obtained using the following spectral decomposition: = GDG , where the diagonal </p>
 
 <p>elements of D are generated randomly from a truncated standard normal and the elements of G are generated randomly 
@@ -495,25 +523,27 @@ upon request to the authors. We also considered Monte Carlo experiments based on
 
 <p>failure of the weak exogeneity of the conditional variables. Samples of length T = 100, 
 200 and 1,000 are generated M = 5, 000 times from VARs of the form equation (7) with 
-k = 2 lags. 6 
-For each generated sample, the partial (conditional) system (2) is estimated and the 
+k = 2 lags. </p>
+
+<p>6 </p>
+
+<p>For each generated sample, the partial (conditional) system (2) is estimated and the 
 procedure for co-integration rank determination discussed in section III is applied. In 
 particular, to evaluate the impact of the dimension of the conditioning variable vector Z t 
 on the ability of the information criteria to determine the true co-integration rank, we 
-consider the partition X 
-t = (Y 
-t , Z 
-t ), where the dimension of Y t ranges from two to four, i.e. 
+consider the partition X t = (Y t , Z t ), where the dimension of Y t ranges from two to four, i.e. 
 p Y = 2, 3 and 4, which implies a dimension for Z t of p Z = 5, 4 and 3, respectively. Thus, it 
 is seen that the scalar parameter c in the matrix in equation (7) determines whether Z t is 
 weakly exogenous (c = 0) or not (c = 0) for . 
 We consider two scenarios. In the first scenario, 'A' in the following, the parameter c is 
 set to zero hence Z t is weakly exogenous for . In the second scenario, 'B' in the following, 
-the parameter c is fixed to 3 </p>
+the parameter c is fixed to </p>
 
-<p>4 </p>
+<p>3 
+4 </p>
 
-<p>. 7 Consequently, the asymptotic distribution of HJNR's test 
+<p>. 
+7 Consequently, the asymptotic distribution of HJNR's test 
 statistic will depend on nuisance parameters and tabulated critical values are no longer valid. 
 Within Scenario B, we consider two additional situations which are of potential interest 
 for applied work. One is the case where, in addition to the violation of the assumption of 
@@ -526,7 +556,8 @@ VAR disturbances are non-Gaussian and driven by GARCH-type components. </p>
 <p>The results for the case of weak exogeneity (c = 0 in of equation (7)) are reported in 
 Table 1, which summarizes the selection frequencies, i.e. the percentage of times BIC and 
 HQC select co-integration rank r = 0,…, p Y in the partial systems out of the M = 5, 000 
-Monte Carlo replications. 8 The finite sample performance of these information criteria are 
+Monte Carlo replications. 
+8 The finite sample performance of these information criteria are 
 compared with that of HJNR's sequential test at the 5% nominal significance level. The 
 asymptotic critical values for this test are taken from table 3 of HJNR. Results are also 
 compared with those obtained from the (unconditional) full VAR analysis. Specifically, for 
@@ -905,9 +936,10 @@ variables on the performance of the methods for co-integration rank determinatio
 systems. Since such an hypothesis is difficult to test in practice, it is interesting to quan-
 tify possible drawbacks associated with a partial system analysis, when the conditioning 
 variables Z t are not weakly exogenous. Table 2 reports, for the case of no weak exogeneity 
-(c = 3 </p>
+(c = </p>
 
-<p>4 </p>
+<p>3 
+4 </p>
 
 <p>in of equation (7)), the estimated selection probabilities, i.e. the percentage of 
 times BIC and HQC select r = 0,…, p Y , respectively, for p Y = 2, 3 and 4. Also in this case, 
@@ -1263,32 +1295,25 @@ r = 7
 <p>of p Y = 2, 3 and 4, respectively. Furthermore, as in the case of weak exogeneity (Table 1), 
 the empirical performance of HJNR's sequential test and HQC in partial systems are simi-
 lar. As such, these two methods usefully complement each other in practice and are rather 
-robust to violations of the hypothesis of weak exogeneity. 9 
-We consider a further case which, in addition to the violation of the weak exogeneity 
+robust to violations of the hypothesis of weak exogeneity. </p>
+
+<p>9 </p>
+
+<p>We consider a further case which, in addition to the violation of the weak exogeneity 
 hypothesis, allows Z t to contain co-integrated variables. In particular, we add a further 
 co-integration relation in model (7), ceteris paribus, by specifying </p>
 
-<p>:= </p>
-
-<p>
+<p>:= 
 a 
 0 0 0 
 c 
 c/2 
 c/ 3 
-−a/ 2 0 0 0 −0.5 −0.3 0.25 </p>
-
-
-
-<p>and := </p>
-
-<p>
+−a/ 2 0 0 0 −0.5 −0.3 0.25 
+and := 
 1 0 0 0 0 0 0 
-0 0 0 0 0 1 −1 </p>
-
-
-
-<p>, </p>
+0 0 0 0 0 1 −1 
+, </p>
 
 <p>9 It is also interesting to stress that the finite sample behaviour of BIC is the one which is more sensitive to the </p>
 
@@ -1304,9 +1329,10 @@ exogeneity assumption. Results for different values of c are available from the 
 
 
 
-<p>where, as in the previous case of Scenario B, we set a = −0.4 and c = 3 </p>
+<p>where, as in the previous case of Scenario B, we set a = −0.4 and c = </p>
 
-<p>4 </p>
+<p>3 
+4 </p>
 
 <p>. In this case, we have 
 that the last two variables in X t (and in Z t ) co-integrate among themselves, so that the true 
@@ -1330,7 +1356,8 @@ dimensionality tends to fully compensate the possible loss of power in co-integr
 determination from the conditional system. 
 As we noticed in section II, co-integration rank determination in partial systems can 
 potentially be extended to the case of conditional heteroscedasticity along the lines of 
-Cavaliere et al. (2010) and CDRT. 10 When the actual unconditional probability distribution 
+Cavaliere et al. (2010) and CDRT. 
+10 When the actual unconditional probability distribution 
 of " t in system (1) is non-Gaussian, it is still in principle possible to factorize the density of 
 X t as the product of the conditional density for Y t given Z t and the marginal density for Z t . 
 However, the dynamic structure of the conditional system might not necessarily conform 
@@ -1340,17 +1367,29 @@ and BIC to conditional heteroscedasticity in partial systems is crucial for appl
 perform such robustness check by considering the same DGP as in Table 2 but specifying 
 the innovation process " t in equation (7) as a CCC-GARCH (Bollerslev, 1990) process, i.e., </p>
 
-<p>" t =H 1/ 2 
-t t , t ∼ iidN (0, I p ) 
-H t :=D t RD t = ( ij </p>
+<p>" t =H </p>
 
-<p>h it h jt ) </p>
+<p>1/ 2 
+t </p>
 
-<p>D t :=diag(h 1/ 2 
-1t ,…, h 1/ 2 
-pt ) 
-h it =d 0,i + d 1 " 2 
-it−1 + d 2 h it−1 , i = 1,…, p 
+<p>t , 
+t ∼ iidN (0, I p ) 
+H t :=D t RD t = ( ij h it h jt ) </p>
+
+<p>D t :=diag(h </p>
+
+<p>1/ 2 </p>
+
+<p>1t ,…, h </p>
+
+<p>1/ 2 </p>
+
+<p>pt ) 
+h it =d 0,i + d 1 " </p>
+
+<p>2 </p>
+
+<p>it−1 + d 2 h it−1 , i = 1,…, p 
 R :=( ij ), ii = 1, i, j = 1,…, p </p>
 
 <p>(8) </p>
@@ -1358,7 +1397,11 @@ R :=( ij ), ii = 1, i, j = 1,…, p </p>
 <p>10 Cavaliere et al. (2010) show that the extension to conditional heteroscedasticity is allowed as long as that </p>
 
 <p>the innovations {" t } in equation (1) (i) form a martingale difference sequence with respect to the filtration F t := 
-(X t ,…, X t−1 ), where F t−1 ⊆ F t for t =…, − 1, 0, 1, 2,…, (ii) satisfy the condition E" t 4 K &lt; ∞, · · being the 
+(X t ,…, X t−1 ), where F t−1 ⊆ F t for t =…, − 1, 0, 1, 2,…, (ii) satisfy the condition E " t </p>
+
+<p>4 </p>
+
+<p>K &lt; ∞, · being the 
 Euclidean norm, and (iii) fulfil the global homoscedasticity condition: </p>
 
 <p>1 
@@ -1366,16 +1409,9 @@ T </p>
 
 <p>T </p>
 
-
-
 <p>t=1 </p>
 
-<p>E </p>
-
-
-
-<p>" t " 
-t |F t−1 </p>
+<p>E " t " t |F t−1 </p>
 
 <p>p </p>
 
@@ -1702,10 +1738,10 @@ r = 7
 0.0 
 0.0 </p>
 
-<p>where H t = E(" t " 
-t |F t−1 ) is the conditional variance of " t , F t := (X t ,…, X t−1 ) is the filtration 
+<p>where H t = E(" t " t |F t−1 ) is the conditional variance of " t , F t := (X t ,…, X t−1 ) is the filtration 
 at time t and R is a symmetric positive definite matrix containing the constant conditional 
-correlations ij . 11 Results are reported in Table 4. By comparing selection frequencies in 
+correlations ij . 
+11 Results are reported in Table 4. By comparing selection frequencies in 
 Table 4 with those in Table 2, we observe that the CCC-GARCH(1,1) disturbances have 
 only a limited impact on the finite sample ability of information criteria (as well as HJNR's 
 sequential procedure) to correctly select co-integration rank. This evidence confirms, as 
@@ -2040,7 +2076,7 @@ normality induced by GARCH-type innovations. </p>
 <p>Despite conditional (possibly uni-equational) error-correction models have been used ex-
 tensively in the literature (e.g. Urbain, 1992), only seldom the partial system approach 
 to co-integration rank determination has been applied in empirical works. Doornik et al. 
-(1998), , Jansen and Nymoen (2003) and Bruggeman et al. (2003) are some of 
+(1998), Bårdsen, Jansen and Nymoen (2003) and Bruggeman et al. (2003) are some of 
 the few examples where HJNR's testing procedure is implemented. As already observed, </p>
 
 <p>© 2017 The Department of Economics, University of Oxford and John Wiley &amp; Sons Ltd </p>
@@ -2060,10 +2096,7 @@ co-integration rank in the conditional model Y t given Z t in equation (2), with
 concerned about the weak exogeneity of Z t . Moreover, the Monte Carlo results show that 
 the finite sample performance of BIC and HQC in the conditional model Y t given Z t 
 is generally not worse than the empirical performance of the BIC and HQC in the full 
-system for X 
-t := (Y 
-t , Z 
-t ) regardless of whether VAR disturbances are Gaussian or driven 
+system for X t := (Y t , Z t ) regardless of whether VAR disturbances are Gaussian or driven 
 by GARCH-type components. In this section, we illustrate the advantages of our approach 
 by two empirical examples, both based on the estimation of VAR models on US quarterly 
 data. 
@@ -2073,10 +2106,7 @@ tion' period, 1984Q1-2008Q2. The idea in this case is to show that, other than r
 the dimensionality of the system, the partial system approach combined with the use of 
 information criteria can be useful for co-integration rank determination. In particular, it is 
 argued that in the absence of clear theoretical guidances about the number of stochastic 
-trends in X 
-t := (Y 
-t , Z 
-t ), one useful empirical specification strategy is to start the analysis 
+trends in X t := (Y t , Z t ), one useful empirical specification strategy is to start the analysis 
 by including in Z t time series that are not supposed to co-integrate. Indeed, although Z t can 
 be co-integrated in our approach (see Remark 3 and the Monte Carlo results in Table 3), 
 in large systems it can be relatively easier to make conjectures on which time series should 
@@ -2287,7 +2317,7 @@ monetary policy undertaken by the Fed to fight inflation since the end of the se
 All this evidence is consistent with the view that it was the change in conduct of monetary 
 policy undertaken by the Fed at the end of the seventies/beginning of the eighties that 
 'stabilized' the US economy through an aggressive behaviour against inflation. In line with 
-the 'Great Moderation' explanation of the US business cycle (Clarida, ı and Gertler, 
+the 'Great Moderation' explanation of the US business cycle (Clarida, Galì and Gertler, 
 2000), one can hardly claim that there are only two common stochastic trends (i.e. five 
 co-integrating relations) driving the variables in X t . Rather, it would seem reasonable to 
 expect the presence of not more than three co-integrating relationships in the 1984Q1-
@@ -2306,10 +2336,7 @@ rank procedure at the 5% nominal (asymptotic) level and using BIC and HQC. We se
 co-integration ranks of 4 (Johansen's test), 2 (BIC) and 4 (HQC), respectively. 
 Given the relatively large dimension of X t and the relatively small number of observa-
 tions, we investigate whether a partial system analysis delivers a different co-integration 
-rank. Consider, for instance, the following partition of X t : X 
-t = (Y 
-t , Z 
-t ) , with Y t := 
+rank. Consider, for instance, the following partition of X t : X t = (Y t , Z t ) , with Y t := 
 (cnd t , cd t , R t , y t , f t ) (p Y = 5) and Z t := (i t , inf t ) (p Z = 2). In this case, we have included in Z t 
 as initial step of the analysis a set of conditioning variables (the fixed-private investments 
 and the inflation rate) which are expected to be I(1) but not co-integrated. Albeit Z t can 
@@ -2339,39 +2366,21 @@ of length T = 100 irrespective of whether Z t is weakly exogenous or not (or co-
 t := (cnd </p>
 
 <p>t , i 
-t , inf </p>
-
-<p>t ) </p>
-
-<p>( p </p>
-
-<p>Z </p>
-
-<p>= 3) </p>
+t , inf 
+t ) ( p 
+Z = 3) </p>
 
 <p>Partial: Z 
 t := (i </p>
 
-<p>t , inf </p>
+<p>t , inf 
+t ) ( p 
+Z = 2) </p>
 
-<p>t ) </p>
-
-<p>( p </p>
-
-<p>Z </p>
-
-<p>= 2) </p>
-
-<p>Full: p </p>
-
-<p>Y </p>
-
-<p>= p 
-= 7 ( p </p>
-
-<p>Z </p>
-
-<p>= 0) </p>
+<p>Full: p 
+Y = p 
+= 7 ( p 
+Z = 0) </p>
 
 <p>HJNR 
 (5% c.v.) </p>
@@ -2610,11 +2619,8 @@ t , y
 t , inf </p>
 
 <p>t , f 
-t , R </p>
-
-<p>t ) </p>
-
-<p>(p 
+t , R 
+t ) (p 
 = 7). VAR model with k 
 = 4 lags and restricted trend. The 5% c.v. for </p>
 
@@ -2667,17 +2673,11 @@ rank is 3 appears a sensible one. </p>
 <p>Small-scale DSGE model </p>
 
 <p>We consider the small-scale DSGE monetary model of Benati and Surico (2009), also 
-estimated in  and Fanelli (2015). The structural model features the following equa-
-tions: </p>
+estimated in Bårdsen and Fanelli (2015). The structural model features the following equa-
+tions:x </p>
 
-<p>˜ 
-x t = E t ˜ 
-x t+1 + (1 − ) ˜ 
-x t−1 − (i t − E t t+1 ) + ˜ </p>
-
-<p>x,t </p>
-
-<p>(9) </p>
+<p>t = E txt+1 + (1 − )x t−1 − (i t − E t t+1 ) + x,t 
+(9) </p>
 
 <p>© 2017 The Department of Economics, University of Oxford and John Wiley &amp; Sons Ltd </p>
 
@@ -2685,95 +2685,115 @@ x t−1 − (i t − E t t+1 ) + ˜ </p>
 
 
 
-<p>t = </p>
-
-<p>
+<p>t = 
 1 + 
-E t t+1 + </p>
-
-<p>
+E t t+1 + 
 1 + 
-t−1 + ˜ 
-x t + ,t 
+t−1 + x t + ,t 
 (10) </p>
 
-<p>i t = i t−1 + (1 − )( t + ˜ 
-x ˜ 
-x t ) + i,t 
+<p>i t = i t−1 + (1 − )( 
+t + xxt ) + i,t 
 (11) </p>
 
-<p>a,t = a a,t−1 + u a,t , − 1 &lt; a &lt; 1, u a,t ∼ WN(0, 2 
-a ), a = ˜ 
-x, , i 
+<p>a,t = a a,t−1 + u a,t , − 1 &lt; a &lt; 1, u a,t ∼ WN(0, </p>
+
+<p>2 </p>
+
+<p>a ), a =x, , i 
 (12) </p>
 
 <p>and expectations are conditional on the agents' information set F t , i.e. E t · := E(· | F t ). The 
 first equation is a forward-looking IS curve, the second is the New Keynesian Phillips 
 curve and the third is the policy rule through which the Central Bank fixes the short 
-term interest rate. ˜ 
-x t = (x t − x n 
-t ) is the output gap, where x t is the log of output and x n 
-t the 
+term interest rate.x t = (x t − x </p>
+
+<p>n </p>
+
+<p>t ) is the output gap, where x t is the log of output and x </p>
+
+<p>n </p>
+
+<p>t the 
 natural rate of output; t is the inflation rate and i t is the nominal policy interest rate; a,t , 
-a = ˜ 
-x, , i, are stochastic disturbances autocorrelated of order one, while u a,t , a = ˜ 
-x, , i, 
+a =x, , i, are stochastic disturbances autocorrelated of order one, while u a,t , a =x, , i, 
 can be interpreted as demand, supply and monetary shocks, respectively. The structural 
-parameters are collected in the vector = (, , , , , , , ˜ 
-x , ˜ 
-x , , i , 2 </p>
+parameters are collected in the vector = ( , , , , , , , x , x , , i , </p>
 
-<p>˜ </p>
+<p>2 </p>
 
-<p>x , 2 
-, 2 
-i ) and 
+<p>x , 
+2 , </p>
+
+<p>2 </p>
+
+<p>i ) and 
 their economic interpretation may be found in Benati and Surico (2009). Notice that system 
 (9)-(12) does not specify how the natural rate of output is generated. To complete the model, 
-we assume that x n 
-t obeys the equation 
-x n 
-t = (i t−1 − t−1 ) + x n ,t , x n ,t ∼ WN(0, 2 
-x n ) 
+we assume that x </p>
+
+<p>n </p>
+
+<p>t obeys the equation 
+x </p>
+
+<p>n </p>
+
+<p>t = (i t−1 − t−1 ) + x n ,t , 
+x n ,t ∼ WN(0, </p>
+
+<p>2 </p>
+
+<p>x n ) 
 (13) </p>
 
-<p>where 0 is an additional auxiliary parameter. When = 0, x n 
-t in equation (13) follows 
+<p>where 
+0 is an additional auxiliary parameter. When = 0, x </p>
+
+<p>n </p>
+
+<p>t in equation (13) follows 
 a driftless random walk which captures the effects of technology shocks and represents 
-the I(1) stochastic trend driving system. With &lt; 0, instead, x n 
-t is still I(1) but the natural 
+the I(1) stochastic trend driving system. With &lt; 0, instead, x </p>
+
+<p>n </p>
+
+<p>t is still I(1) but the natural 
 growth rate of output is negatively tied to the level of the (ex post) real interest rate. 
-System (9)-(13) with = 0 is analysed in  and Fanelli (2015) to investi-
+System (9)-(13) with = 0 is analysed in Bårdsen and Fanelli (2015) to investi-
 gate the testable implications of small DSGE models, including their common trend/co-
 integration properties. The appealing feature of system (9)-(13) is that, under particular 
 conditions, the rational expectations solution of the DSGE model can be approximated by 
-a four-dimensional (p = 4) co-integrated VAR system for X t := (x t , t , i t , x n 
-t ) . More specif-
+a four-dimensional (p = 4) co-integrated VAR system for X t := (x t , t , i t , x </p>
+
+<p>n </p>
+
+<p>t ) . More specif-
 ically, the testable co-integration implications of this DSGE model are captured by the 
-term </p>
+term˜ </p>
 
-<p>˜ </p>
+<p>X t−1 := </p>
 
-<p>X t−1 := 
-1 0 0 −1 </p>
-
-<p>0 1 0 
+<p>1 0 0 −1 
+0 1 0 
 0 
 0 0 1 
 0 </p>
 
-<p>
-⎛ </p>
+<p>⎛ </p>
 
 <p>⎜ 
 ⎝ </p>
 
-<p>x t−1 
-t−1 
-i t−1 
-x n </p>
+<p>x t−1 </p>
 
 <p>t−1 </p>
+
+<p>i t−1 
+x </p>
+
+<p>n 
+t−1 </p>
 
 <p>⎞ </p>
 
@@ -2781,23 +2801,40 @@ x n </p>
 ⎠ 
 (14) </p>
 
-<p>which implies (true) co-integration rank r 0 = 3, and requires the 'output gap' x t − x n 
-t , the 
+<p>which implies (true) co-integration rank r 0 = 3, and requires the 'output gap' x t − x </p>
+
+<p>n </p>
+
+<p>t , the 
 inflation rate t and the policy rate i t to be jointly stationary. Moreover, it can be shown 
-that when = 0 in equation (13), the variable x n 
-t does not adjust to the three co-integrating 
-relations, i.e. it is weakly exogenous with respect to = ˜ 
-in equation (14). In contrast, 
-when &lt; 0, x n 
-t adjusts to the inflation rate and the policy rate. Equation (14) suggests that if 
-the solution of the DSGE model (9)-(13) is captured by a VAR model for X t = (x t , t , i t , x n 
-t ) , 
+that when = 0 in equation (13), the variable x </p>
+
+<p>n </p>
+
+<p>t does not adjust to the three co-integrating 
+relations, i.e. it is weakly exogenous with respect to =˜ in equation (14). In contrast, 
+when &lt; 0, x </p>
+
+<p>n </p>
+
+<p>t adjusts to the inflation rate and the policy rate. Equation (14) suggests that if 
+the solution of the DSGE model (9)-(13) is captured by a VAR model for X t = (x t , t , i t , x </p>
+
+<p>n </p>
+
+<p>t ) , 
 the system should be driven by a single stochastic trend representing the cumulated effects 
 of technology shocks. 
-In this model, the natural rate of output x n 
-t enters the co-integration relations in equation 
-(14). However, a practitioner might not be interested in modelling x n 
-t directly within the </p>
+In this model, the natural rate of output x </p>
+
+<p>n </p>
+
+<p>t enters the co-integration relations in equation 
+(14). However, a practitioner might not be interested in modelling x </p>
+
+<p>n </p>
+
+<p>t directly within the </p>
 
 <p>© 2017 The Department of Economics, University of Oxford and John Wiley &amp; Sons Ltd </p>
 
@@ -2809,42 +2846,60 @@ t directly within the </p>
 variable which captures a highly theoretical concept: it refers to the highest level of real 
 output that can be sustained over the long term and there is some disagreement among 
 economists about how to characterize such a concept in applied work. In many empirical 
-business cycle models, x n 
-t is treated as an unobserved (latent) state variable, while in 
-empirical applications, x n 
-t is often proxied with measures of economic activity provided 
+business cycle models, x </p>
+
+<p>n </p>
+
+<p>t is treated as an unobserved (latent) state variable, while in 
+empirical applications, x </p>
+
+<p>n </p>
+
+<p>t is often proxied with measures of economic activity provided 
 by official institutions or national statistical institutes. Thus, albeit in this example the 
-dimension of X t is not particularly large, x n 
-t represents a 'natural' conditioning variable for 
+dimension of X t is not particularly large, x </p>
+
+<p>n </p>
+
+<p>t represents a 'natural' conditioning variable for 
 the purpose of testing the co-integration implications of the DSGE model. In addition, the 
-practitioner might not be interested in modelling x n 
-t directly within the VAR framework due 
-to poor confidence on the short run properties of the time series used to proxy x n 
-t . Hence, it 
+practitioner might not be interested in modelling x </p>
+
+<p>n </p>
+
+<p>t directly within the VAR framework due 
+to poor confidence on the short run properties of the time series used to proxy x </p>
+
+<p>n </p>
+
+<p>t . Hence, it 
 seems reasonable to investigate whether the data support the co-integration/common trend 
-implications predicted by the DSGE model by considering the partition X 
-t = (Y 
-t , Z 
-t ), with 
-Y t = (x t , t , i t ) (p Y = 3) and Z t = x n 
-t (p Z = 1), and then apply BIC and HQC to the conditional 
+implications predicted by the DSGE model by considering the partition X t = (Y t , Z t ), with 
+Y t = (x t , t , i t ) (p Y = 3) and Z t = x </p>
+
+<p>n </p>
+
+<p>t (p Z = 1), and then apply BIC and HQC to the conditional 
 model for Y t given Z t . For comparative purposes, we also compute the sequential co-
 integration rank testing procedure of HJNR which requires Z t to be weakly exogenous 
-with respect  
-matrix in equation (14), namely that = 0 in equation (13). As in the 
+with respect to˜ matrix in equation (14), namely that = 0 in equation (13). As in the 
 previous example, in order to show the usefulness of the partial system approach relative 
 to the (unconditional) full system analysis, we also determine the co-integration rank of X t 
 through the full VAR system approach. 
-The variables in X t = (x t , t , i t , x n 
-t ) are chosen as follows: x t is the (logged) real GDP, 
-t is measured by the quarterly growth rate of the GDP deflator, i t is measured by the 
-effective federal funds rate expressed in quarterly terms (averages of monthly values), x n </p>
+The variables in X t = (x t , t , i t , x </p>
 
-<p>t </p>
+<p>n </p>
+
+<p>t ) are chosen as follows: x t is the (logged) real GDP, 
+t is measured by the quarterly growth rate of the GDP deflator, i t is measured by the 
+effective federal funds rate expressed in quarterly terms (averages of monthly values), x </p>
+
+<p>n 
+t </p>
 
 <p>is approximated with the official measure provided by the Congressional Budget Office 
 (CBO). The data source is the web site of the Federal Reserve Bank of St. Louis. Also in 
-this case the data cover the 'Great Moderation' period. To compare results with  
+this case the data cover the 'Great Moderation' period. To compare results with Bårdsen 
 and Fanelli (2015), we focus on the sample 1985Q1-2008Q3 which comprises T = 95 
 quarterly observations. The partial (conditional) system (2) is estimated with k = 2 lags 
 and a restricted constant (corresponding to case (ii) D t = 1 and d t = 0 in the full system 
@@ -2853,8 +2908,11 @@ rank selected by the BIC and HQC, as well as HJNR's sequential procedure. While 
 selects co-integration rank r = 1, HQC selects r = 3 as predicted by the DSGE model. 
 Instead, HJNR's sequential procedure selects r = 2 at the 5% nominal significance level. 
 Recall, however, that the asymptotic critical values reported in Table 6 have been tabulated 
-under the maintained hypothesis of weak exogeneity of Z t = (x n 
-t ) which might not hold 
+under the maintained hypothesis of weak exogeneity of Z t = (x </p>
+
+<p>n </p>
+
+<p>t ) which might not hold 
 (see below). The right panel of Table 6 summarizes the results obtained from the full 
 VAR system analysis and reports the co-integration rank selected by BIC and HQC and 
 Johansen's sequential procedure. We notice that in this case BIC selects r = 1, HQC selects 
@@ -2863,8 +2921,11 @@ level. Aside from BIC and compared to the full system analysis, the co-integrati
 selected by HQC and HJNR's sequential procedure in the conditional model are in line 
 with the prediction of the DSGE model. 
 It is interesting in this case to test whether for fixed co-integration rank r = 3, which is 
-the value selected by the HQC in the partial system analysis, the variable Z t = (x n 
-t ) is weakly 
+the value selected by the HQC in the partial system analysis, the variable Z t = (x </p>
+
+<p>n </p>
+
+<p>t ) is weakly 
 exogenous with respect to in the full system. This amounts to testing whether the last row </p>
 
 <p>© 2017 The Department of Economics, University of Oxford and John Wiley &amp; Sons Ltd </p>
@@ -2919,10 +2980,16 @@ r = 4 = p
 -
 -</p>
 
-<p>Notes: Results from the full system analysis of X t := (x t , t , i t , x n 
-t ) (p = 4) and from the partial system analysis of 
-Y t := (x t , t , i t ) and Z t := (x n 
-t ) (p Y = 3 and p Z = 1). The 5% c.v. for HJNR's test are taken from table 3 of Harbo et al. 
+<p>Notes: Results from the full system analysis of X t := (x t , t , i t , x </p>
+
+<p>n </p>
+
+<p>t ) (p = 4) and from the partial system analysis of 
+Y t := (x t , t , i t ) and Z t := (x </p>
+
+<p>n </p>
+
+<p>t ) (p Y = 3 and p Z = 1). The 5% c.v. for HJNR's test are taken from table 3 of Harbo et al. 
 (1998) and the 5% c.v. for Johansen's test ('Johan') are taken from table 15.2 of Johansen (1996) (restricted constant). 
 The selected co-integration rank according to the test/criterion used are denoted in bold. The co-integration rank 
 predicted by the theory under the null of the DSGE model is r = r 0 = 3. </p>
@@ -2938,10 +3005,9 @@ our approach based on information criteria, allows us to disregard any considera
 the weak exogeneity of Z t and therefore is robust to whether the parameter is = 0 or 
 &lt; 0 in the structural equations of our DSGE model. 
 We complete our investigation of the small scale DSGE model by comparing results 
-with  and Fanelli (2015). The analysis in  and Fanelli (2015), based on a 
+with Bårdsen and Fanelli (2015). The analysis in Bårdsen and Fanelli (2015), based on a 
 full system approach, suggests that if the co-integration rank is fixed at r = 3, a likelihood-
-ratio test for the restrictions that = ˜ 
-as in equation (14) leads to a p-value of 0.009 
+ratio test for the restrictions that =˜ as in equation (14) leads to a p-value of 0.009 
 when asymptotic critical values are used, and to a p-value of 0.04 when a non-parametric 
 bootstrap version of the likelihood-ratio test is computed along the lines of Boswijk et al. 
 (2016). Overall, we can interpret these evidences as supportive of the small-DSGE model 

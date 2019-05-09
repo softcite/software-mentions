@@ -1,0 +1,634 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1257%2Fjep.15.4.129" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:11+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>are important in the toolkits of applied econometricians and statisticians, and they 
+are likely to be more important in the future. We will focus our intuitive discussion 
+on deriving more accurate confidence bands in ordinary least squares regressions, 
+the most commonly used model in applied econometrics. However, computation-
+ally intensive approaches also can be used to remove biases in estimated coefficients 
+and can be applied to more general models. Indeed, these techniques may be most 
+appealing or powerful when applied in more complex settings as an alternative to 
+analytical estimates. 
+The theoretical justification for the bootstrap, multiple imputations and stan-
+dard analytic inference methods commonly used in applied econometrics is based 
+on large-sample approximations. In the remainder of this paper, we will use the 
+formal term "consistent" to mean that as the sample size of the estimation data set 
+increases, the estimator gets closer to its true value in the underlying population. </p>
+
+<p>The Bootstrap </p>
+
+<p>To motivate the discussion of the bootstrap approach in regression analysis, 
+begin by considering the simpler problem of estimating the sampling distribution 
+(for example, standard errors, confidence intervals and other statistical measures) 
+of the mean height among a country's population, based on a small random 
+sample. The sample mean typically will differ from the population mean due to 
+sampling error, and the sampling distribution summarizes how the sample mean 
+will vary across a large number of independent samples from the same population. 
+Efron's (1979, 1982) bootstrap method treats the observed sample as the popula-
+tion and draws samples from this approximate population to estimate the sampling 
+distribution. These bootstrap samples are drawn with replacement from the origi-
+nal observed data, and the mean is computed for each bootstrap sample. This 
+produces a data set of estimated means, with size equal to the number of bootstrap 
+repetitions. The distribution of these resampled means is used to approximate the 
+sampling distribution of the population mean. 
+This bootstrap method described above will only give accurate estimates if the 
+original sample is large enough to reflect the true population accurately. The 
+traditional analytic approach approximates the sampling distribution by a normal 
+distribution centered at the sample mean with variance equal to the sample 
+variance. This traditional approximation requires that the sample be large enough 
+for the Central Limit Theorem to apply to the sample mean. If the sample size is 
+small and the true population is not normally distributed, then the bootstrap 
+approximation should be more accurate. 
+The application of the bootstrap to linear regression models is similar to the 
+sample mean case above, although several different approaches are possible. The 
+most popular way to implement the bootstrap to estimate the sampling distribution 
+of the least squares coefficient estimators is the XY, or paired bootstrap. Using this 
+approach, with an observed sample of size N, randomly draw N complete data </p>
+
+
+
+<p>points with replacement from the observed sample (or, in other words, sample rows 
+of the data matrix). Then recompute the least squares estimator for each bootstrap 
+sample. This produces a different estimate of the coefficients for each repetition. 
+The distribution of the resulting set of estimated coefficients is an estimate of their 
+sampling distribution. Whether the error terms are homoskedastic or heteroske-
+dastic, the paired bootstrap will generate consistent estimates of the sampling 
+distribution of the least squares estimator. Brownstone and Kazimi (2000), Efron 
+and Tibshirani (1993), Horowitz (2001) and Jeong and Maddala (1993) provide 
+more complete applied discussions of this and other bootstrap procedures, includ-
+ing details regarding hypothesis tests and confidence intervals based on the boot-
+strapped estimates. </p>
+
+<p>1 </p>
+
+<p>Horowitz (1997) points out that the different nature of the bootstrap approx-
+imation provides a rough check on the adequacy of large-sample theory. If the 
+assumptions commonly made for large-sample econometrics hold-for example, 
+residuals that are independent and distributed identically with finite variance-
+then the bootstrap and standard methods used in econometric software packages 
+should yield the same answers. If significant departures from these assumptions are 
+present, then one or both of the methods are not reliable for the particular 
+problem and data. Deciding between them requires more detailed analysis, which 
+explains why much of the ongoing research on the bootstrap is based on simula-
+tions rather than on empirical data sets. 
+Despite this inherent uncertainty about the superiority of the bootstrap in 
+specific applications, Hall (1992) has shown that in many cases the bootstrap 
+achieves accurate estimates of sampling distributions at smaller sample sizes than 
+standard large-sample analytic techniques. This finding holds for most of the 
+statistics that are commonly used for testing hypotheses about parameter estimates 
+from econometric models, such as t-statistics and others based on standard normal 
+and chi-square distributions. 
+2 This feature of the bootstrap provides the strongest </p>
+
+<p>argument for its widespread application in common econometric models, although 
+the simple bootstrap methods described in this paper need to be modified to 
+simulate the distribution of test statistics rather than coefficient estimates for Hall's 
+results to apply. </p>
+
+<p>1 Here are two other common ways to implement the bootstrap in this case. In a nonparametric residual 
+bootstrap, first estimate an ordinary least squares regression equation and then sample from the residuals; 
+in this case, the bootstrap distribution will be the empirical distribution function of the least squares 
+residuals. In a parametric residual bootstrap, one again generates a resampled residual vector, but the 
+sampling is done independently from a standard normal distribution. The parametric approach is 
+consistent only if the error terms follow a normal distribution, in which case it yields the most accurate 
+estimates. The nonparametric approach provides consistent estimates as long as the errors are homoske-
+dastic. Neither the parametric nor the nonparametric approach provides consistent estimates if the true 
+errors are heteroskedastic, whereas the paired approach described in the text does. 
+2 We are referring here to "asymptotically pivotal" statistics, whose asymptotic distributions do not 
+depend on unknown population parameters; see Horowitz (2001) for discussion. </p>
+
+<p>David Brownstone and Robert Valletta 131 </p>
+
+<p>An Empirical Example: An Earnings Regression 
+We illustrate these ideas with an example based on a standard regression 
+equation for explaining male earnings. The dependent variable is the log of yearly 
+earnings, deflated by the GDP deflator for personal consumption expenditure. We 
+report coefficient estimates for the following explanatory variables: years of formal 
+education, potential labor market experience (and its square), and tenure at the 
+current firm, along with dummy variables indicating whether the respondent is a 
+union member, black, married and resides in a metropolitan statistical area (MSA). 
+We also included a constant and dummy variables representing region of residence 
+and observation years. The data are drawn from the Panel Study of Income 
+Dynamics (PSID) for the years 1984 -1993. We restricted the sample to male 
+household heads, aged 21-64 and employed in the private sector (excluding 
+self-employed individuals). We report results based on a 2 percent random sample 
+of individuals observed at any time in the panel (260 observations on 50 individu-
+als), since in large samples all the procedures give the same results. Using a small 
+subsample also allows us to simulate the true sampling distribution by drawing 
+many independent subsamples of 50 individuals from the data and reestimating the 
+model for each subsample. This simulation uses the original PSID sample of 2,789 
+individuals (16,327 panel observations) to approximate the true population of 
+anybody who could have been sampled by the PSID. 
+Table 1 presents results for the male wage equation. The estimated regression 
+coefficients are listed in the second column. The next column gives the true 
+confidence intervals calculated from 1000 independent subsamples of 50 individ-
+uals from the data. These are the true confidence intervals if the PSID main sample 
+is identical to the population. If the PSID main sample is only an approximation of 
+the true population, then these "true" confidence intervals are bootstrap intervals 
+with bootstrap sample size much smaller than the data. It is, of course, more 
+efficient to use the entire sample in this case, but we are only interested in using 
+these intervals as a benchmark for comparing results based on only one subsample. 
+The subsequent four columns in Table 1 list 95 percent confidence intervals 
+estimated in different ways from the original subsample of 260 observations. The 
+first column of confidence intervals shows those obtained through ordinary least 
+squares regression analysis. The next column provides confidence intervals based 
+on the "robust" estimator of the model's sampling variance, which was developed 
+independently by Huber (1967) and White (1980, 1982). The robust estimator of 
+sampling variance does not require homoskedasticity-that the errors in the re-
+gression model have constant variance. Instead, the Huber-White estimator approx-
+imates the variance of each residual by the square of the least squares residual. We 
+use a generalization of the Huber-White estimator that also allows for the residuals 
+to be correlated across time for a given individual. In the example in Table 1, the 
+confidence intervals from the robust regression are noticeably wider than the 
+ordinary least squares confidence intervals, which suggests that heteroskedasticity 
+or a similar departure from the common assumptions used in applying ordinary 
+least squares is present. </p>
+
+
+
+<p>The third set of confidence intervals is obtained through application of the 
+paired (XY ) bootstrap procedure. For each bootstrap repetition, we sample ran-
+domly with replacement from the set of 50 individuals in the original sample. We 
+take all of the dependent and independent variables for all years for the sampled 
+individual and continue until a bootstrap sample of approximately the same size as 
+the empirical data set has been selected. The regression equation is then reesti-
+mated for each bootstrap sample. The coefficient estimates from each repetition 
+are saved in a file, and the resulting data set (whose size is determined by the 
+number of coefficients and bootstrap repetitions) provides an estimate of the 
+sampling distribution of the estimated coefficients. 
+All of the bootstrapped distributions reported in the table were obtained using 
+1000 bootstrap repetitions. Although standard errors can be reliably estimated with 
+fewer repetitions (on the order of 100), confidence intervals directly based on the 
+bootstrap distribution will be more accurate than those based on standard errors if 
+the bootstrap distribution is skewed. Once the repetitions were completed, we 
+obtained the 95 percent confidence intervals through the simple "percentile 
+method"-by setting them equal to the values corresponding to the 2.5 and 
+97.5 percentiles of the bootstrap distributions of the estimated coefficients. </p>
+
+<p>3 </p>
+
+<p>3 See Efron and Tibshirani (1993) regarding the appropriate number of repetitions and calculation of 
+confidence intervals. </p>
+
+<p>Table 1 
+Bootstrap Confidence Intervals, Regression Equation, Log Yearly Earnings, Male 
+Heads, PSID, 1984 -1993, 2 Percent Sample 
+(260 observations, 50 individuals) </p>
+
+<p>Pooled Cross-Section Ordinary Least Squares </p>
+
+<p>Variable 
+Coefficient </p>
+
+<p>95 Percent Confidence Intervals </p>
+
+<p>Truth 
+Least Squares </p>
+
+<p>Robust 
+Regression </p>
+
+<p>(x,y) 
+Bootstrap </p>
+
+<p>Wild 
+Bootstrap </p>
+
+<p>Education 
+.125 
+.033, .186 
+.087, .164 
+.060, .191 
+.053, .217 
+.053, .196 </p>
+
+<p>a </p>
+
+<p>Potential 
+Experience </p>
+
+<p>.047 
+Ϫ.002, .097 
+.003, .092 
+Ϫ.006, .101 </p>
+
+<p>a </p>
+
+<p>Ϫ.013, .115 Ϫ.005, .105 </p>
+
+<p>(Pot. Exp.) 
+2 /100 
+Ϫ.116 
+Ϫ.194, .023 Ϫ.245, .013 </p>
+
+<p>a </p>
+
+<p>Ϫ.273, .042 
+Ϫ.318, .080 Ϫ.283, .032 
+Tenure 
+.024 
+Ϫ.003, .045 
+.011, .036 
+.005, .042 
+.004, .056 
+.001, .041 </p>
+
+<p>a </p>
+
+<p>Union 
+.239 
+Ϫ.157, .474 
+.034, .443 
+Ϫ.036, .514 
+Ϫ.043, .668 Ϫ.067, .515 </p>
+
+<p>a </p>
+
+<p>Black 
+Ϫ.380 
+Ϫ1.58, .365 Ϫ.717, Ϫ.042 Ϫ.971, .212 Ϫ1.238, .292 
+a Ϫ.965, .208 
+Married 
+.076 
+Ϫ.228, .596 Ϫ.129, .281 
+Ϫ.407, .559 
+Ϫ.395, .599 
+a Ϫ.413, .581 
+MSA 
+.164 
+Ϫ.174, .508 
+.003, .326 
+Ϫ.114, .443 
+Ϫ.156, .445 
+a Ϫ.119, .479 </p>
+
+<p>a Denotes closest confidence region to the true confidence bands as measured by the sum of the absolute 
+deviations from the upper and lower bands, respectively. 
+Notes: The sample is restricted to male heads aged 21-64 and employed in the private sector. Other 
+variables controlled for include three region dummies, nine year dummies and a constant. </p>
+
+<p>The Bootstrap and Multiple Imputations 133 </p>
+
+<p>For the final column, we used a different bootstrap approach due to Wu 
+(1986), known as the "wild bootstrap." First, run an ordinary least squares regres-
+sion, and save the residuals. Then multiply each value of the residual by a random 
+variable that takes on one of two values: i) (1 Ϫ ͌ 5)/2 with probability 
+(1 ϩ ͌ 5)/(2 ͌ 5); or ii) (1 ϩ ͌ 5)/2 with probability 1 Ϫ (1 ϩ ͌ 5)/(2 ͌ 5). Note 
+that this random variable has a mean of zero with variance equal to one. The 
+resulting bootstrap residuals therefore will have mean zero and variance equal to 
+the square of the least squares residual for that observation, which is identical to the 
+approximation used to calculate Huber-White robust standard errors. The re-
+sampled residual vector is then added to the predicted value from the original 
+regression to create the resampled dependent variable. We modified the wild 
+bootstrap to account for the panel data structure of our data by multiplying the 
+entire vector of residuals for each individual by the same draw of the two-point 
+random variable defined above. The wild bootstrap confidence intervals reported 
+in the table are based on the calculation of t-statistics using the Huber-White robust 
+standard errors for each bootstrap sample. This method should be superior to 
+simple percentile method intervals in small samples (for details, see Brownstone 
+and Kazimi, 2000; Horowitz, 2001). Both paired bootstrapping and wild bootstrap-
+ping will provide consistent inference with heteroskedasticity, but wild bootstrap-
+ping generally will be more accurate, since, unlike the paired bootstrap, it imposes 
+a restriction on each bootstrap sample that is identical to the conditions used to 
+identify the ordinary least squares model. </p>
+
+<p>4 </p>
+
+<p>The least squares confidence intervals in Table 1 are much narrower than the 
+true bands. The other confidence intervals are usually narrower than the true 
+bands, but not for all of the coefficients. The confidence intervals based on the 
+paired bootstrap are somewhat wider than the robust confidence intervals. In 
+contrast, the wild bootstrap confidence intervals are narrower than the paired 
+bootstrap intervals and are close to the robust intervals in width. The bootstrap 
+intervals are closer to the truth for six of the eight coefficients in Table 1, although 
+the theoretical superiority of the wild bootstrap bands is not clear from this 
+example. Of course, the results in Table 1 are just based on one subsample from the 
+PSID, and the differences between the bootstrap and robust regression intervals are 
+not large. Most of the studies finding large differences between the bootstrap and 
+standard methods have used nonlinear models and more complex estimators 
+(Horowitz, 1997; 2001). </p>
+
+<p>Extensions and Limitations of the Bootstrap 
+The discussion of the bootstrap to this point has focused on a linear regression 
+model with error terms that are independent, but not necessarily normally distrib-</p>
+
+<p>4 Mammen (1992, chapter 8) shows that the distribution of the wild bootstrap converges to the correct 
+sampling distribution faster than the paired bootstrap, and Horowitz (2001, section 5.2) gives support-
+ing simulation evidence. </p>
+
+
+
+<p>uted or homoskedastic. However, there has been considerable work in recent years 
+applying the bootstrap approach to other situations. 
+Cross-section extensions are numerous. Any of the bootstrapping methods 
+discussed above for the linear regression model can be applied to the nonlinear 
+regression model, with the caveat that bootstrapped residuals must be adjusted to 
+insure that their mean is zero. In the standard analytic approach, obtaining the 
+sampling distribution of nonlinear regression estimates relies on a linear approx-
+imation to the regression function. Because bootstrap methods evaluate the appro-
+priate transformations by simulation rather than approximation, we would expect 
+bootstrap estimates of the sampling distribution to be more accurate than the 
+standard analytic estimates as the linear approximation becomes less accurate. 
+Horowitz (2001, section 5.3) verified this in a small simulation study of a particular 
+nonlinear regression model. </p>
+
+<p>5 </p>
+
+<p>In time series models, error terms are often serially correlated, and this 
+requires bootstrap approaches that differ from the cross-section case. The simplest 
+approach, called model-based bootstrapping, is to assume that the time series can 
+be fit by an appropriate autoregressive moving average model with serially uncor-
+related residuals. Then the bootstrap can be implemented using bootstrap ap-
+proaches that take samples from the residuals of a regression (as discussed in more 
+detail in footnote 1), although the method of generating the bootstrap samples 
+from these bootstrapped residuals needs to be modified to account for the dynamic 
+nature of the time series model. 
+6 Similarly, in panel data settings, the bootstrap 
+must be modified to account for time dependence for observations within cross-
+section units-for example, through bootstrap sampling of the complete set of 
+observations for cross-section units (Ziliak, 1997). 
+Although it is mechanically possible to apply the bootstrap to any model, there 
+are circumstances where the bootstrap will fail to estimate the sampling distribution 
+consistently (for details, see Horowitz, 2001, section 2.1). For example, Andrews 
+(2000) shows that the bootstrap does not accurately estimate the sampling distri-
+bution of a coefficient whose true value is zero and whose estimate is constrained 
+to be greater than or equal to zero. 
+Despite these caveats and inherent uncertainty about the superiority of the 
+bootstrap in specific settings, the availability of powerful desktop computers makes 
+widespread use of the bootstrap very tempting. Bootstrap estimates-especially 
+based on the paired approach-are trivial to obtain once the estimation model is 
+specified. The statistical package <rs type="software">Stata</rs> has several bootstrap procedures and sub-
+routines available in its core program, and a researcher who has never read a single </p>
+
+<p>5 Other useful cross-section applications, surveyed in Brownstone and Kazimi (2000), include quantile 
+regression, discrete choice and hazard models, and frontier production function estimates. 
+6 Bickel and Freedman (1983) provided an early example of model-based bootstrapping for time series. 
+Their approach has been generalized to autoregressive moving average models (Berkowitz and Kilian, 
+2000; Li and Maddala, 1996) and cointegrated regression models (Li and Maddala, 1997). Kilian (1998a, 
+b) considers bootstrapping vector autoregression models and applies this technique to examine inter-
+national effects of monetary policy. </p>
+
+<p>David Brownstone and Robert Valletta 135 </p>
+
+<p>word about the bootstrap could produce bootstrapped estimates in Stata with little 
+difficulty. Researchers should be cautious about such casual application, because 
+results regarding the reliability and accuracy of bootstrapped sampling distribu-
+tions are not yet available for many classes of econometric models. However, while 
+we await further results, the bootstrap can be very useful for simple applications 
+such as estimating the sampling distributions of nonparametric statistics (for ex-
+ample, quantiles and percentiles of univariate distributions) or statistics with ill-
+defined distributions (see Valletta, 1993, footnote 13, for an example). </p>
+
+<p>Multiple Imputations </p>
+
+<p>Applied econometricians routinely face the problem of missing values of key 
+variables in their data. The multiple imputation technique was developed by Rubin 
+(1987) as a general, computationally intensive method "to handle the problem of 
+missing data in public-use data bases where the data-base constructor and the 
+ultimate user are distinct entities" (Rubin, 1996). This approach represents a useful 
+compromise between the naïve extremes of eliminating observations with missing 
+values from the analysis sample or replacing missing values with a single imputed 
+(fitted) value. The former approach typically underutilizes the full information 
+available in the data, whereas the latter typically leads to an overstatement of 
+statistical precision in resulting estimates. The technique also can be used for 
+consistent inference using data that are mismeasured rather than missing. 
+Consider the general application to a linear regression model. Multiple impu-
+tation consists of two main steps. In the first step, the data provider or analyst uses 
+all available data to estimate a proper imputation model, which provides multiple 
+fitted values of the missing or erroneous variables. In the second step, the analyst 
+combines the estimated imputations with the main data set and estimates the 
+regression equation of interest. 
+The full definition of a proper imputation procedure is given in Rubin (1987, 
+pp. 118 -119). If we have a model for predicting the missing (or erroneous) values 
+conditional on all observed data, then we can use this model to make independent 
+simulated draws for the missing data. The safest way to implement a proper 
+imputation procedure, as Rubin first proposed, is to draw explicitly from the 
+(Bayesian) posterior predictive distribution of the missing values under a specific 
+model. 
+7 However, there are other proper multiple imputation procedures that 
+require no explicit Bayesian calculations. Indeed, although Rubin developed the 
+theoretical properties of this methodology for Bayesian models, he showed that 
+these results also apply in large samples to classical statistical models (Rubin, 1987, 
+chapter 4). 
+Whether the prediction approach is Bayesian or non-Bayesian, any proper </p>
+
+<p>7 Meng (2000) shows that the process of drawing proper imputations is identical to Bayesian data 
+augmentation (Tanner and Wong, 1987). </p>
+
+
+
+<p>imputation procedure must condition on all observed data. In addition, different 
+sets of imputed values must be drawn independently so that they reflect all sources 
+of uncertainty in the response process. 
+Once the imputations are provided, the substantive model is estimated once 
+for each set of imputed values. The resulting estimates are averaged to obtain 
+consistent parameter estimates; depending on the pattern of missing responses, the 
+estimates are likely to differ from those obtained using naïve approaches to missing 
+data. The covariance matrix of these coefficient estimates is determined by the 
+average of the usual covariance matrix of the coefficient estimates across different 
+sets of imputations, plus a term that represents the variability of the estimates across 
+the different imputed data sets (see Rubin, 1987, or Brownstone and Valletta, 1996, 
+for the exact expressions). This covariance estimator is consistent as long as there 
+are at least two sets of imputed values, but increasing the number of sets of imputed 
+values clearly improves the accuracy of the covariance component due to uncer-
+tainty in the imputation process. 
+The goal is for the imputed data to provide both consistent estimators of 
+coefficients and a measure of the statistical precision or confidence intervals for 
+these coefficients, where the confidence intervals must be broadened somewhat to 
+account for the component of variance associated with imputation error. As long as 
+the variables used in the imputation model have an identifiable, systematic rela-
+tionship with the imputed variables, the imputation process adds information; the 
+precision of this information is limited by the precision of the imputation process. 
+The computations required typically can be performed using standard econometric 
+packages with relatively minimal programming, although we are not aware of any 
+econometrics packages that currently provide multiple imputation routines or 
+subroutines. 
+Several statistical agencies have incorporated or are experimenting with mul-
+tiply imputed values in public-use survey data. Such applications are a key compo-
+nent of Rubin's original vision for the methodology, which he views as an appro-
+priate form of data enhancement by public agencies whose survey information may 
+be more extensive than that available to end users (Rubin, 1996). By exploiting 
+confidential information (such as precise location or financial characteristics) in 
+the imputation procedure, data agencies can better meet the simultaneous de-
+mands of providing high-quality data, while protecting survey respondents against 
+breaches of confidentiality. Moreover, one advantage of multiple imputations is 
+that it can be done once by the data provider and then used for a variety of 
+purposes by many analysts. 
+Among the first major applications of multiple imputations was a project 
+conducted at the U.S. Census Bureau to assess the comparability of the different 
+industry and occupation codings in the 1970 and 1980 censuses (Clogg et al., 
+1991). In this project, analysts used a Bayesian strategy to provide multiply imputed 
+values of 1980 industry and occupation codes in public-use samples from the 1970 
+census. The imputations were based on logistic regression models estimated from 
+a special subsample of the 1970 census units for which the 1970 and 1980 codes had </p>
+
+<p>The Bootstrap and Multiple Imputations 137 </p>
+
+<p>been recorded. The resulting multiply imputed data set has provided a useful 
+bridge for analysts who rely on accurate assessment of trends in the relative 
+prevalence of precise industry and occupation categories. 
+In probably the most important ongoing application, the Federal Reserve has 
+provided multiply imputed income and wealth variables in the public release of its 
+Survey of Consumer Finances since 1989 (Kennickell, 1998). This survey focuses on 
+household finances, a subject for which responses are sensitive and often defined 
+imprecisely. As a result, the survey exhibits high rates of missing information. Fed 
+analysts have developed and implemented a complex iterative imputation proce-
+dure for continuous, multinomial and binary variables. The imputation model 
+relies on the publicly available survey information concerning consumer income 
+and wealth, combined with confidential information such as census tract charac-
+teristics and industry and occupation characteristics tabulated from the Current 
+Population Survey of the U.S. Bureau of Labor Statistics. Although these multiply 
+imputed data have been used successfully by many researchers, Kennickell reports 
+frequent misuse and notes that "the need for education is great." </p>
+
+<p>8 </p>
+
+<p>Multiple imputations have been used less in specific applications than in 
+general data provision. However, Brownstone and Valletta (1996) extended the 
+basic approach to the specific application of correcting for measurement error in 
+the dependent variable in earnings regression equations. 
+9 Research on earnings 
+data, which compares surveyed earnings responses to validated earnings data 
+gathered through company personnel files or Social Security records, has shown 
+that measurement error in survey earnings is large and correlated with important 
+explanatory variables (for example, Bound et al., 1994; Bound and Krueger, 1991; 
+and Duncan and Hill, 1985). Thus, measurement error in earnings is likely to bias 
+estimated coefficients and statistical confidence in earnings regression models. 
+In Brownstone and Valletta (1996), we estimated equations for the determi-
+nants of earnings where the explanatory variables included experience, job tenure, 
+union membership and dummy variables for union membership, race, marriage, 
+blue-collar work and whether the job was hourly. We used survey data on earnings 
+from the Panel Study of Income Dynamics (PSID) combined with information from 
+the PSID Validation Study (PSIDVS). The PSIDVS collected standard PSID vari-
+ables for several hundred employees from a large Detroit area manufacturing firm 
+in 1983 and 1987 and matched this information with company personnel records 
+on earnings and other variables. The company earnings records are highly accurate 
+and were treated as error-free in our analyses. 
+The first step in the multiple imputation process is to estimate an imputation 
+model for company record earnings in the PSIDVS as a function of an error-prone 
+survey earnings variable and the other variables as the explanatory variables. The </p>
+
+<p>8 In a similar vein, the U.S. Bureau of Labor Statistics is experimenting with multiple imputation as a 
+solution to income item nonresponse in the Consumer Expenditure Survey (Paulin, 1999). 
+9 Brownstone, Golob and Kazimi (1999) and Clogg et al. (1991) show that multiple imputations also can 
+be implemented with discrete choice models. </p>
+
+
+
+<p>estimated imputation model is used to provide multiply imputed estimates of true 
+earnings in the main data set. The procedure is completed by combining the 
+multiply imputed estimates of true earnings with observed values of the explanatory 
+variables and using the pooled data for estimating the final earnings equation. 
+In our analysis of data for income years 1982 and 1986, we found that 
+measurement error biases several coefficients from the earnings equation and often 
+causes underestimation of their sampling variance. In both cross-section and lon-
+gitudinal equations, accounting for measurement error reduces the estimated 
+effect of union membership on earnings and causes the negative effect of working 
+in a blue-collar occupation to become less negative or perhaps positive. We also 
+found that measurement error in earnings appears to pose more significant prob-
+lems during recessionary periods than expansionary periods, probably because 
+errors in reported earnings are based largely on misperceptions of hours worked. 
+Moreover, the standard errors in the earnings equations typically were increased by 
+the multiple imputation procedure, because the procedure correctly accounts for 
+sampling error that is ignored in analyses that treat earnings as an error-free 
+variable. Clearly, multiple imputation can make a substantial difference in both 
+qualitative conclusions and statistical accuracy. </p>
+
+<p>Conclusions </p>
+
+<p>Grand claims sometimes have been made for bootstrap analysis. For instance, 
+Efron and Tibshirani (1993) and Vinod (1998) envision the bootstrap as part of a 
+strategy to find universally applicable methods for estimation and inference, which 
+can be implemented with very little effort or analysis by researchers. This vision is 
+tempting, especially given the ease and speed with which bootstrap estimates for 
+many models can be obtained using modern desktop computers. However, Manski 
+(1996) argues that this vision is flawed due to the inherent ambiguity of statistical 
+theory in comparing alternative estimation procedures. Moreover, the current state 
+of the art in bootstrap methods cannot support such universal application because 
+the necessary evidence regarding bootstrap superiority (or even consistency) is not 
+available for many classes of models. At this point, however, the bootstrap can 
+effectively serve the less grandiose but very practical purpose of deriving better 
+confidence bands in models characterized by deviations from a variety of assump-
+tions commonly made in least squares analysis. 
+Similarly, multiple imputations is an approach that applied economists should 
+consider to help alleviate problems caused by survey nonresponse, missing data and 
+measurement error. The best way to circumvent these problems is to put more 
+resources into reducing response biases during survey administration. The second-
+best solutions include the collection of external validation data or incorporation of 
+confidential survey information to enable accurate estimation of the nonresponse 
+or error process. Under these second-best circumstances, the multiple imputation 
+methods presented in this paper provide a straightforward and consistent way for </p>
+
+<p>David Brownstone and Robert Valletta 139 </p>
+
+<p>researchers to adjust for missing and erroneous data in their modeling and fore-
+casting efforts. Multiple imputation is like an adjustable crescent wrench-it rarely 
+is the ideal tool for any particular job, but it works well for a wide variety of 
+problems. </p>
+
+<p>y We gratefully acknowledge the unusually thorough and helpful comments from the editors. </p>
+
+<p>Much of this work was completed while the second author was visiting at the Organization for 
+Economic Cooperation and Development (OECD) in Paris, France. The views expressed in this 
+paper are solely those of the authors and do not necessarily represent the views of the Federal 
+Reserve Bank of San Francisco, the Federal Reserve System or the OECD. The authors also are 
+solely responsible for any errors or omissions. </p>
+
+<p> 
+Bound, John and Alan B. Krueger. 1991. "The 
+Extent of Measurement Error in Longitudinal 
+Earnings Data: Do Two Wrongs Make a Right?" 
+Journal of Labor Economics. January, 9:1, pp. 1-24. 
+Brownstone, David and Camilla Kazimi. 2000. 
+"Applying the Bootstrap." Working Paper, De-
+partment of Economics, University of California, 
+Irvine. Forthcoming in Handbook of Econometrics, 
+Volume V. E. E. Leamer and J. J. Heckman, eds. 
+Amsterdam: Elsevier. 
+Brownstone, David and Robert G. Valletta. 
+1996. "Modeling Earnings Measurement Error: 
+A Multiple Imputations Approach." Review of Eco-
+nomics and Statistics. November, 78:4, pp. 705-17. 
+Brownstone, David, Thomas F. Golob and Ca-</p>
+
+<p>milla Kazimi. 1999. "Modeling Non-Ignorable 
+Attrition and Measurement Error in Panel Sur-
+veys: An Application to Travel Demand Model-
+ing." Presented at the International Conference 
+on Survey Nonresponse, October 28 -31, Port-
+land, Oregon. Forthcoming, Survey Nonresponse. 
+New York: Wiley. 
+Clogg, Clifford C. et al. 1991. "Multiple Im-
+putation of Industry and Occupation Codes in 
+Census Public-Use Samples Using Bayesian Lo-
+gistic Regression." Journal of the American Statisti-
+cal Association. March, 86, pp. 68 -78. 
+Duncan, Greg J. and Daniel H. Hill. 1985. "An 
+Investigation of the Extent and Consequences of 
+Measurement Error in Labor-Economics Survey 
+Data." Journal of Labor Economics. October, 3:4, 
+pp. 508 -32. 
+Efron, Bradley. 1979. "Bootstrap Methods: 
+Another Look at the Jackknife." Annals of Statis-
+tics. 7:1, pp. 1-26. 
+Efron, Bradley. 1982. The Jackknife, the Boot-
+strap and Other Resampling Plans. Philadelphia, 
+Pennsylvania: SIAM. 
+Efron, Bradley and Robert Tibshirani. 1993. 
+An Introduction to the Bootstrap. New York: Chap-
+man &amp; Hall. 
+Hall, Peter. 1992. The Bootstrap and Edgeworth 
+Expansion. New York: Springer Verlag. 
+Horowitz, Joel L. 1997. "Bootstrap Methods in 
+Econometrics: Theory and Numerical Perfor-
+mance," in Advances in Economics and Economet-
+rics: Seventh World Congress of the Econometric Soci-</p>
+
+
+
+
+
+<p>The Bootstrap and Multiple Imputations 141 </p>
+
+
+
+</text></tei>

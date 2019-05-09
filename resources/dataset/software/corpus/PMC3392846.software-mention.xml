@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC3392846" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T20:04+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC3392846" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:10+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>ABSTRACT 
 Objective Competing tools are available online to assess 
@@ -41,86 +41,14 @@ patients. </p>
 <p>Complexity in decisions involving multiple factors 
 and variability in interpretation of data motivate 
 the development of computerized techniques to 
-assist humans in decision-making. 1e3 Predictive 
-models are used in medical practice, for example, 
-for automating the discovery of drug treatment 
-patterns in an electronic health record, 4 improving 
-patient safety via automated laboratory-based 
-adverse event grading, 5 prioritizing the national 
-liver transplant 'queue' given the severity of 
-disease, 6 predicting the outcome of renal trans-
-plantation, 7 guiding the treatment of hypercholes-
-terolemia, 8 making prognoses for patients 
-undergoing certain procedures, 9 10 and estimating 
-the success of assisted reproduction techniques. 11 </p>
-
-<p>Numerous risk assessment tools for medical deci-
-sion support are available on the web 12e14 and are 
-increasingly available for smart phones. 15e17 
-While many predictive models have been devel-
-oped and validated on data from cohort studies, 
-little attention has been paid to ensure the reli-
-ability of a prediction for an individual, which is 
-critical for point-of-care decisions. Because the goal 
-of predictive models is to estimate outcomes in new 
-patients (who may or may not be similar to the 
-patients used to develop the model), a critical 
-challenge in prognostic research is to determine 
-what evidence beyond validation is needed before 
-practitioners can confidently apply a model to their 
-patients. 18 This is important to determine 
-a patient's individual risk. 19e21 As each model is 
-constructed using different features, parameters, 
-and samples, specific models may work best for 
-certain subgroups of individuals. For example, 
-many calculators and charts use the Framingham 
-model to estimate cardiovascular disease (CVD) 
-risk. 8 22e24 These models work well, but may 
-underestimate the CVD risk in patients with dia-
-betes. 25 Table 1 illustrates a case in which a patient 
-can get significantly different CVD risk scores from 
-different online risk estimation calculators. This 
-type of inconsistency provides another motivation 
-for selecting an appropriate model. 29 
-In order to obtain a patient-specific recommen-
-dation at the point of care, it is necessary that 
-physicians interpret the information in the context 
-of that patient. These scenarios are related to 
-personalized medicine, which emphasizes the 
-customization of healthcare. 30 31 In this research, 
-we address the problem of selecting the most 
-appropriate model for assessing the risk for 
-a particular patient. We developed an algorithm for 
-online model selection based on the CI of predic-
-tions so that clinicians can choose the model at the 
-point of care for their patients, as illustrated in 
-figure 1. 
-Our approach is purely data driven because it 
-adapts to any 'appropriate' model that is available 
-for assessing the risk of a patient without the 
-need for external knowledge. The 'appropriateness' 
-refers to the ability of the model to generate 
-a narrow CI for the individualized prediction. 
-The article is organized as follows: the following 
-paragraphs present related work, the Methods 
-section introduces the details of the proposed 
-method, the Results section presents results on 
-simulated and clinically related datasets, and the 
-Discussion section discusses advantages and 
-limitations. </p>
-
-<p>&lt; Additional appendices are 
-published online only. To view 
-these files please visit the 
-journal online (www.jamia.bmj. 
-com/content/19/e1.toc). </p>
-
-<p>A possible approach to determining the best model for 
+assist humans in decision-making. 
+A possible approach to determining the best model for 
 a patient is to compare the patient with individuals in the study 
 population used to build the model. However, it is non-trivial to 
 gather datasets from every published study. The barriers are 
 partly related to the laws and regulations on privacy and 
-confidentiality. 32 Therefore, we aimed at developing a new 
+confidentiality. 
+32 Therefore, we aimed at developing a new 
 method to determine the most reliable predictive model for an 
 individual from a candidate pool of models without requiring 
 the availability of training datasets. Note that our motivation 
@@ -128,23 +56,33 @@ for selecting the appropriate model in a distributed environment
 is somewhat different from the one that motivates adaptive 
 model selection. Adaptive model selection operates in a central-
 ized environment and searches for an optimal subset of patterns 
-from the entire training set to minimize certain loss functions. 33 
-The idea of data-driven model selection for medical decision 
-support is related to dynamic switching and mixture models, 34 
-which emphasize capturing the structural changes over time to 
-adapt a predictive model. Fox et al 35 proposed a method for learning 
+from the entire training set to minimize certain loss functions. </p>
+
+<p>33 </p>
+
+<p>The idea of data-driven model selection for medical decision 
+support is related to dynamic switching and mixture models, </p>
+
+<p>34 </p>
+
+<p>which emphasize capturing the structural changes over time to 
+adapt a predictive model. Fox et al 
+35 proposed a method for learning 
 and switching between an unknown number of dynamic modes 
-with possibly varying state dimensions. Huang et al 36 presented 
+with possibly varying state dimensions. Huang et al 
+36 presented 
 a segmentation approach that divided deterministic dynamics in 
 a higher-dimensional space into segments of patterns. Siddiqui and 
-Medioni 37 developed an efficient and robust method of tracking 
+Medioni 
+37 developed an efficient and robust method of tracking 
 human forearms by leveraging a state transition diagram, which 
 adaptively selected the appropriate model for the current observa-
 tion. Other methods were used in the context of wireless sensor 
 networks in which the goal was to provide an effective way to 
 reduce the communication effort while guaranteeing that user-
 specified accuracy requirements were met. For example, Le Borgne 
-et al 38 suggested a lightweight, online algorithm that allowed 
+et al 
+38 suggested a lightweight, online algorithm that allowed 
 sensor nodes to determine autonomously a statistically good 
 performing model among a set of candidate models. 
 However, most of the aforementioned methods describing 
@@ -161,7 +99,7 @@ of candidate models and uses its predicted probability. </p>
 <p>METHODS 
 A patient-driven adaptive prediction technique </p>
 
-<p>We consider a binary classification task. Let Y K ˛f0; 1g and X K ¼ 
+<p>We consider a binary classification task. Let Y K˛f 0; 1g and X K ¼ 
 &lt; x 1 ,.,x i .,x n &gt;, respectively be the true class label (ie, the 
 outcome of interest) and the vector of feature values (ie, the 
 vector representing values for age, gender, blood pressure, etc) of 
@@ -173,12 +111,17 @@ Note that m denotes the number of models, which are trained
 from individual pairs of feature vectors X j and label vectors Y j . 
 In particular, we can build a classifier f j : X J /Y J by minimizing 
 some loss function, for example, the hinge loss for a support 
-vector machine 39 40 or the Hamming distance for a model based 
-on conditional random fields. 41 42 
-To simplify the analysis, we assume that all candidate models 
+vector machine 
+39 40 or the Hamming distance for a model based 
+on conditional random fields. </p>
+
+<p>41 42 </p>
+
+<p>To simplify the analysis, we assume that all candidate models 
 are constructed by minimizing the log loss function commonly 
 used in logistic regression, as this is a model widely used and 
-published in biomedical research, 21 43e45 but that they use 
+published in biomedical research, 
+21 43e45 but that they use 
 different training populations. Under this scenario, imagine 
 a test pattern X* (ie, feature values of a new patient) that 
 corresponds to the clinical findings and demographic informa-
@@ -204,13 +147,14 @@ CI for the prediction of a test pattern X* </p>
 
 <p>f Ã </p>
 
-<p>X Ã </p>
+<p>
+X Ã </p>
 
-<p>¼ argmin jCIjðXÃÞj f j ðX Ã </p>
+<p>
+¼ argmin jCIjðXÃÞj f j ðX Ã </p>
 
-<p>; cj˛ </p>
-
-<p>1; .; m </p>
+<p>
+; cj˛1; .; m </p>
 
 <p>
 (1) </p>
@@ -233,20 +177,28 @@ HDL cholesterol
 Treatment for HBP 
 Yes 
 . 
-. </p>
-
-<p>Systolic blood pressure 
+. 
+Systolic blood pressure 
 145 mm Hg 
 Family history of early heart disease 
 Yes </p>
 
 <p>Bob's cardiovascular disease risk 
-<rs type="software">NHLBI risk assessment web tool</rs> 26 
-16% 
-American Heart Association online 27 
-25% 
-Cleveland Clinic 28 
-20% </p>
+<rs type="software">NHLBI risk assessment web tool</rs> </p>
+
+<p>26 </p>
+
+<p>16% 
+American Heart Association online </p>
+
+<p>27 </p>
+
+<p>25% 
+Cleveland Clinic </p>
+
+<p>28 </p>
+
+<p>20% </p>
 
 <p>HBP, high blood pressure; HDL, high-density lipoprotein; NHLBI, National Heart, Lung, and 
 Blood Institute. </p>
@@ -267,7 +219,8 @@ J Am Med Inform Assoc 2012;19:e137ee144. doi:10.1136/amiajnl-2011-000751 </p>
 <p>Research and applications </p>
 
 <p>from. The CI of individual predictions are calculated using the 
-covariance matrix of the coefficients 46 and the feature values for 
+covariance matrix of the coefficients 
+46 and the feature values for 
 the individual. In well-specified models, the non-diagonal </p>
 
 <p>elements of this matrix should be close to zero. For a well-
@@ -619,20 +572,29 @@ h 1; 0 </p>
 <p>respectively. Next, we assigned class labels of these simulated 
 data using the logistic regression model, ie, drawing random 
 samples from the binomial distribution using probability 
-pÀ ¼ logit À1 ðu 0 þ + </p>
+pÀ ¼ logit 
+À1 ðu 0 þ + </p>
 
 <p>2 </p>
 
-<p>i¼1 u i x l </p>
+<p>i¼1 u i x </p>
 
-<p>i Þ, where x l 
-i is the ith feature of the ith </p>
+<p>l </p>
 
-<p>sample in one of the simulated datasets and W ¼ ½u 0 ; u 1 ; u 2  9 is </p>
+<p>i Þ, where x </p>
 
-<p>the weight (ie, intercept and coefficients) parameter. In particular, 
+<p>l </p>
+
+<p>i is the ith feature of the ith </p>
+
+<p>sample in one of the simulated datasets and W ¼ ½u 0 ; u 1 ; u 2 </p>
+
+<p>9 is 
+the weight (ie, intercept and coefficients) parameter. In particular, 
 we used weight vectors that are nearly orthogonal to each other 
-(W A ¼ ½À0:3; 0:5; 0:5 9 ), W B ¼ ½0; À0:5; 0:5 9 so that class labels 
+(W A ¼ ½À0:3; 0:5; 0:5 
+9 ), W B ¼ ½0; À0:5; 0:5 
+9 so that class labels 
 generated by one model would generalize poorly to the other. 
 For both datasets, we drew 300 samples, of which 80% were 
 used for training, and the remaining 20% were used for testing. 
@@ -795,7 +757,7 @@ B </p>
 regression (LR)(A), LR(B) learned from each dataset. We show both datasets combined, and their nearly orthogonal decision boundaries in the last 
 figure. </p>
 
-<p> 
+<p>e140 
 J Am Med Inform Assoc 2012;19:e137ee144. doi:10.1136/amiajnl-2011-000751 </p>
 
 <p>Research and applications </p>
@@ -809,7 +771,8 @@ clinical data. </p>
 purposes. The myocardial infarction (MI) data contain infor-
 mation about patients with and without MI. These patients 
 were seen at emergency departments at two medical centers in 
-the UK, 47 where 500 patients with chest pain were observed in 
+the UK, 
+47 where 500 patients with chest pain were observed in 
 Sheffield, England, and 1253 patients with the same symptoms 
 were observed in Edinburgh, Scotland. The total number of 
 patients is 1753, and the feature size is 48. The target is a binary 
@@ -832,8 +795,10 @@ discrimination and calibration, as explained next. </p>
 <p>Evaluation methods </p>
 
 <p>We used two measures, the area under the receiver operating 
-characteristic curve (AUC) 48 and the HosmereLemeshow good-
-ness-of-fit test (HL test), 49 to evaluate the performance of </p>
+characteristic curve (AUC) 
+48 and the HosmereLemeshow good-
+ness-of-fit test (HL test), 
+49 to evaluate the performance of </p>
 
 <p>predictive models in terms of discrimination and calibration, 
 respectively. In particular, we used a one-tailed paired t test to 
@@ -856,9 +821,10 @@ is no gold standard for the probability estimate for one indi-
 vidual, cases are pooled into groups and the sum of probabilities 
 in the groups is compared with the sum of positive cases in these </p>
 
-<p>groups using a c 2 test. When the p value for the test is below </p>
+<p>groups using a c </p>
 
-<p>0.05, we reject the hypothesis that the model fits the data well. 
+<p>2 test. When the p value for the test is below 
+0.05, we reject the hypothesis that the model fits the data well. 
 Note that we adopted the C version of the HL test for which 
 equal-sized subgroups (ie, deciles in our case) are sorted by 
 probability estimates. </p>
@@ -971,7 +937,8 @@ for individual patients. While many previous studies have
 shown good predictive accuracy for cohort studies, they did not 
 always make clear which model would be most appropriate for 
 an individual. Due to the real-world concerns related to privacy 
-and confidentiality, 50 it is often difficult to access the raw data 
+and confidentiality, 
+50 it is often difficult to access the raw data 
 that were used to construct these predictive models. We devel-
 oped ADAPT to consider the model-specific information that 
 may be published without the accompanying training datasets. 
@@ -998,11 +965,17 @@ Another advantage of ADAPT is that the approach can assess
 models trained differently. In practice, even for the same risk 
 prediction task, different institutions might build their models 
 with different features, for example, the three CVD risk 
-models 26e28 shown in table 1 used seven, 17, and eight feature 
+models 
+26e28 shown in table 1 used seven, 17, and eight feature 
 variables, respectively. The model from the American Heart 
-Association 27 consists of a superset of features included in the 
-other models (ie, National Heart, Lung, and Blood Institute 26 
-and Cleveland Clinic). 28 Such differences, however, would not be 
+Association 
+27 consists of a superset of features included in the 
+other models (ie, National Heart, Lung, and Blood Institute </p>
+
+<p>26 </p>
+
+<p>and Cleveland Clinic). 
+28 Such differences, however, would not be 
 an obstacle for ADAPT, as our model always evaluates 'appro-
 priateness' in output space, which is one-dimensional. As long as </p>
 

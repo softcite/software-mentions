@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1007%2Fs10614-014-9465-4" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T19:57+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1007%2Fs10614-014-9465-4" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:04+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>Abstract Standard solution methods of DSGE models do not necessarily deliver 
 minimal state space forms. When the ABCD form is non-minimal, the conditions 
@@ -149,9 +149,14 @@ In this case one can substitute w t = D −1 (y t − C x t−1 ) in the first e
 rewrite the square ABCD form in the 'associate state space form', see e.g. Ch.2.2 in 
 Bart et al. (2008), </p>
 
-<p>x t = F x t−1 + B D −1 y t , 
-F = A − B D −1 C, 
-w t = −D −1 C x t−1 + D −1 y t , 
+<p>x t = F x t−1 + B D 
+−1 y t , 
+F = A − B D 
+−1 C, </p>
+
+<p>w t = −D 
+−1 C x t−1 + D 
+−1 y t , 
 (2) </p>
 
 <p>where the role of input and output of system (1) are interchanged; F is called the 
@@ -161,10 +166,7 @@ Hannan and Deistler (1988), if the dimension of x t is as small as possibile. Mi
 holds if and only if the ABCD form is both controllable and observable, i.e. if rank C = 
 rank O = n x , where </p>
 
-<p>C = </p>
-
-<p>B AB · · · A n x −1 B 
-, 
+<p>C = B AB · · · A n x −1 B , 
 O = </p>
 
 <p>⎛ </p>
@@ -223,11 +225,10 @@ A(z) = I n y − </p>
 
 <p>∞ </p>
 
-
-
 <p>j=1 </p>
 
-<p>A j z j , 
+<p>A j z 
+j , 
 u t = Mw t , 
 (4) </p>
 
@@ -242,7 +243,9 @@ In this section we link the existence of a (possibly finite) VAR representation 
 to properties of the transfer function from y t to Dw t , T (L)y t = Dw t , implied by the 
 associate state space form (2), where </p>
 
-<p>T (z) = I n y − C(I n x − Fz) −1 B D −1 z, 
+<p>T (z) = I n y − C(I n x − Fz) 
+−1 B D 
+−1 z, 
 z ∈ C. 
 (5) </p>
 
@@ -250,9 +253,11 @@ z ∈ C.
 T (z) is presented next; in the following we say that a function is regular if it is finite 
 on the unit disc, i.e. for all z ∈ C such that |z| &lt; 1 + δ, for some δ &gt; 0, see Johansen 
 (2009) for a similar notion of regularity. Remark that the coefficients of the expansion 
-of a regular function f (z) = 
-∞ 
-j=0 f j z j are geometrically decreasing and hence 
+of a regular function f (z) = </p>
+
+<p>∞ </p>
+
+<p>j=0 f j z j are geometrically decreasing and hence 
 absolutely summable. </p>
 
 <p>Proposition 3.1 (Transfer function conditions). The vector of observables y t admits 
@@ -286,26 +291,26 @@ example, which serves as a running example in the rest of the paper. </p>
 <p>Example 3.2 (Running example). This is a special case of the model in Chang et al. 
 (2007). Let n x = 4, n w = n y = 2 and </p>
 
-<p>A = 
-1 0 </p>
+<p>A = </p>
+
+<p>1 </p>
 
 <p>0 
-I 2 </p>
-
-<p>
+0 
+I 2 
 , 
 B = </p>
 
 <p>1 </p>
 
 <p>2 I 2 
-I 2 </p>
+I 2 
+, 
+C = </p>
 
-<p>
-, 
-C = 
-1 2 
-, 
+<p>1 </p>
+
+<p>2 , 
 D = 2 + 
 1 
 2 
@@ -315,42 +320,44 @@ I 2 , </p>
 
 <p>1 = </p>
 
-<p>
+<p>1 1 
+− </p>
+
+<p>1 </p>
+
+<p>2 − </p>
+
+<p>1 
+2 </p>
+
+<p>, 
+2 = </p>
+
+<p>1 1 
 1 1 
-− 1 
-2 − 1 </p>
-
-<p>2 </p>
-
-<p>
-, 
-, 2 = </p>
-
-<p>
-1 1 
-1 1 </p>
-
-<p>
 . </p>
 
 <p>Observe that D is non-singular so that the ABCD form is square. Moreover F = 
 A − B D −1 C has eigenvalues {1, 3/5, 0, 0}, and (I − Fz) −1 has a pole at z = 1 and 
 thus it is non-regular. At the same time T (z) is regular, because </p>
 
-<p>C(I n x − Fz) −1 B = 
+<p>C(I n x − Fz) 
+−1 B = 
 5 
 4(3z − 5) </p>
 
-<p>
-4z − 6 4z − 6 
+<p>4z − 6 4z − 6 
 z − 3 z − 3 </p>
 
+<p>has no pole at z = 1 (it only has a pole at z = </p>
 
+<p>5 </p>
 
-<p>has no pole at z = 1 (it only has a pole at z = 5 
-3 ) and hence the expansion T (z) = 
-∞ 
-j=0 T j z j has absolutely summable coefficients. This illustrates that one can have 
+<p>3 ) and hence the expansion T (z) = </p>
+
+<p>∞ </p>
+
+<p>j=0 T j z j has absolutely summable coefficients. This illustrates that one can have 
 fundamentalness together with unstable F. </p>
 
 <p>Similarly, one can construct examples in which B and C cancel every pole of 
@@ -380,12 +387,11 @@ matrix function T (z).
 We introduce the following notation: let λ u , u = 1, . . . , q, be all the distinct nonzero 
 eigenvalues of F and apply the partial fraction expansion 5 </p>
 
-<p>(I − Fz) −1 = P(z) + H (z), 
+<p>(I − Fz) 
+−1 = P(z) + H (z), 
 P(z) = </p>
 
 <p>q </p>
-
-
 
 <p>u=1 </p>
 
@@ -393,8 +399,6 @@ P(z) = </p>
 P u (z) = </p>
 
 <p>m u </p>
-
-
 
 <p>j=1 </p>
 
@@ -468,8 +472,7 @@ An equivalent and more directly implementable rank condition is provided next. 6
 pose F − λ u I = αβ , where α, β are n x × r full column rank matrices, and define 
 α ⊥ , β ⊥ as bases 7 of the orthogonal complements of the column spaces spanned by 
 α and β respectively. Then the orthogonality condition holds at λ u if and only if 
-rank(α 
-⊥ B) &lt; n x − r or rank(Cβ ⊥ ) &lt; n x − r (or both). </p>
+rank(α ⊥ B) &lt; n x − r or rank(Cβ ⊥ ) &lt; n x − r (or both). </p>
 
 <p>In the light of this equivalence one can thus restate the main characterization result 
 in Proposition 4.3 replacing orthogonality conditions with rank conditions. </p>
@@ -504,23 +507,21 @@ real.
 α ⊥ , β ⊥ of dimension 4 × 1 as bases of the orthogonal complements of col α and col β, 
 one finds α ⊥ = (−3 : −3 : 2 : 1) and β ⊥ = (0 : 0 : 1 : −1) . Because </p>
 
-<p>C = </p>
-
-<p>
+<p>C = 
 1 
 1 
 1 1 
-− 1 </p>
+− </p>
 
-<p>2 </p>
+<p>1 
+2 </p>
 
-<p>− 1 </p>
+<p>− </p>
 
-<p>2 </p>
+<p>1 
+2 </p>
 
-<p>1 1 </p>
-
-<p>
+<p>1 1 
 , </p>
 
 <p>one has Cβ ⊥ = 0 and hence the rank condition in Proposition 4.4 is satisfied at the 
@@ -559,26 +560,19 @@ A minimal representation can be derived as follows; here we use the subscript m
 to index quantities in the minimal state space representation. Write C as C = C m v , 
 where </p>
 
-<p>C m = </p>
-
-<p>
+<p>C m = 
 1 
 1 
-− 1 </p>
+− </p>
 
-<p>2 </p>
+<p>1 
+2 </p>
 
-<p>1 </p>
-
-<p>
+<p>1 
 , 
-v = </p>
-
-<p>
+v = 
 1 1 0 0 
-0 0 1 1 </p>
-
-<p>
+0 0 1 1 
 , </p>
 
 
@@ -587,14 +581,11 @@ v = </p>
 
 <p>and observe that v A = A m v , where A m = </p>
 
-<p>1 </p>
-
-<p>2 </p>
+<p>1 
+2 </p>
 
 <p>0 
-0 1 </p>
-
-<p>
+0 1 
 . Define x m,t = v x t and </p>
 
 <p>B m = v B, pre-multiply the state equation by v and write the system as </p>
@@ -662,21 +653,19 @@ and University of Insubria. </p>
 inition. (Necessity.) If (4) holds, then w t = M −1 A(L)y t and hence T (L)y t = 
 DM −1 A(L)y t , which implies M = D and T (z) = A(z). </p>
 
-<p>
-Proof of Proposition 3.3. If F is stable, then (I − Fz) −1 is regular and so is T (z); 
+<p>Proof of Proposition 3.3. If F is stable, then (I − Fz) −1 is regular and so is T (z); 
 then apply Proposition 3.1. If F is nilpotent, then I − Fz is unimodular, (I − Fz) −1 
 is a matrix polynomial and so is T (z); then apply Proposition 3.1. </p>
 
-<p>
-Proof of Lemma 4.1. Consider (5) and (6); if C P u (z)B = 0 then C(I − Fz) −1 B 
+<p>Proof of Lemma 4.1. Consider (5) and (6); if C P u (z)B = 0 then C(I − Fz) −1 B 
 has no pole at z = λ −1 
 u and hence the same holds for T (z). Conversely, assume 
 T (z) has no pole at z = λ −1 
 u ; then the same holds for C(I − Fz) −1 B and thus 
-C P u (z)B = 0. Because C P u (z)B = 
-m u </p>
+C P u (z)B = 0. Because C P u (z)B = </p>
 
-<p>j=1 </p>
+<p>m u 
+j=1 </p>
 
 <p>C P λu ,mu − j B </p>
 
@@ -686,28 +675,43 @@ Next we show that if the orthogonality condition holds, then λ u is also an eig
 of A. If the orthogonality condition holds, C P λ u ,0 B = 0. Write I − Fz = (I − 
 Fλ −1 
 u ) + (1 − λ u z)λ −1 
-u F and (6) as (I − Fz) −1 = P u (z) + P −u (z), where P −u (z) = 
-q 
-v=1,v =u P v (z) + H (z); then (I − Fz)(I − Fz) −1 = I implies </p>
+u F and (6) as (I − Fz) −1 = P u (z) + P −u (z), where P −u (z) = </p>
 
-<p>(I − Fλ −1 
-u )P u (z) + (I − Fλ −1 
-u )P −u (z) + (1 − λ u z)λ −1 
-u F(I − Fz) −1 = I. (8) </p>
+<p>q </p>
+
+<p>v=1,v =u P v (z) + H (z); then (I − Fz)(I − Fz) −1 = I implies </p>
+
+<p>(I − Fλ </p>
+
+<p>−1 </p>
+
+<p>u )P u (z) + (I − Fλ </p>
+
+<p>−1 </p>
+
+<p>u )P −u (z) + (1 − λ u z)λ </p>
+
+<p>−1 </p>
+
+<p>u F(I − Fz) 
+−1 = I. (8) </p>
 
 <p>Consider the first term (I − Fλ −1 
-u )P u (z) and substitute P u (z) = 
-m u </p>
+u )P u (z) and substitute P u (z) = </p>
 
-<p>j=1 </p>
+<p>m u 
+j=1 </p>
 
 <p>P λu ,mu − j </p>
 
 <p>(1−λ u z) j ; one 
 finds </p>
 
-<p>(I − Fλ −1 
-u )P u (z) = </p>
+<p>(I − Fλ </p>
+
+<p>−1 </p>
+
+<p>u )P u (z) = </p>
 
 <p>(I − Fλ −1 
 u )P λ u ,0 
@@ -715,8 +719,6 @@ u )P λ u ,0
 + </p>
 
 <p>m u −1 </p>
-
-
 
 <p>j=1 </p>
 
@@ -738,89 +740,56 @@ where α, β are n x × r full column rank matrices, and r = rank(F − λ u I )
 moreover, because λ u = 0, one finds I − Fλ −1 
 u = −λ −1 
 u αβ . One then has P λ u ,0 = 
-β ⊥ ϕα 
-⊥ = 0, where α ⊥ , β ⊥ are bases of the orthogonal complements of the column 
-spaces spanned by α, β and ϕ = 0, and hence C P λ u ,0 B = Cβ ⊥ ϕα 
-⊥ B = 0. Because 
-rank(Cβ ⊥ ) = rank(α 
-⊥ B) = n x − r imply ϕ = 0, it must be that rank(Cβ ⊥ ) &lt; n x − r 
-and/or rank(α 
-⊥ B) &lt; n x − r . Next use the projection identities I = α ¯ 
-α + ¯ 
-α ⊥ α 
-⊥ = 
-¯ 
-ββ + β ⊥ ¯ 
-β 
-⊥ , where ¯ 
-a = a(a a) −1 , and write </p>
+β ⊥ ϕα ⊥ = 0, where α ⊥ , β ⊥ are bases of the orthogonal complements of the column 
+spaces spanned by α, β and ϕ = 0, and hence C P λ u ,0 B = Cβ ⊥ ϕα ⊥ B = 0. Because 
+rank(Cβ ⊥ ) = rank(α ⊥ B) = n x − r imply ϕ = 0, it must be that rank(Cβ ⊥ ) &lt; n x − r 
+and/or rank(α ⊥ B) &lt; n x − r . Next use the projection identities I = αᾱ +ᾱ ⊥ α ⊥ = 
+ββ + β ⊥β ⊥ , whereā = a(a a) −1 , and write </p>
 
-<p>A − λ u I = F − λ u I + B D −1 C = αβ + B D −1 C = 
-α B </p>
-
-<p>
+<p>A − λ u I = F − λ u I + B D 
+−1 C = αβ + B D 
+−1 C = α B 
 I r 
 0 
 0 D −1 </p>
 
-<p>β </p>
+<p>β 
+C </p>
 
-<p>C </p>
+<p>= αᾱ ⊥ 
+I rᾱ B 
+0 α ⊥ B </p>
 
-
-
-<p>= 
-α ¯ 
-α ⊥ </p>
-
-<p>
-I r 
-¯ 
-α B 
-0 α 
-⊥ B </p>
-
-<p>
-I r 
+<p>I r 
 0 
 0 D −1 </p>
 
-<p>
-I r 
+<p>I r 
 0 
-C ¯ 
-β Cβ ⊥ 
-β </p>
+Cβ Cβ ⊥ </p>
 
-<p>¯ 
+<p>β 
 β </p>
 
 <p>⊥ </p>
 
-<p>
-. </p>
+<p>. </p>
 
 
 
 <p>M. Franchi, P. Paruolo </p>
 
-<p>Because rank(Cβ ⊥ ) &lt; n x − r or rank(α 
-⊥ B) &lt; n x − r , one has that A − λ u I is 
+<p>Because rank(Cβ ⊥ ) &lt; n x − r or rank(α ⊥ B) &lt; n x − r , one has that A − λ u I is 
 singular; this shows that λ u is an eigenvalue of A. </p>
 
-<p>
-Proof of Propositions 4.2 and 4.3. T (z) is regular if and only if C P u (z)B = 0 for all 
+<p>Proof of Propositions 4.2 and 4.3. T (z) is regular if and only if C P u (z)B = 0 for all 
 unstable eigenvalues and it is a matrix polynomial if and only if C P u (z)B = 0 for all 
 eigenvalues. The statement then follows from Proposition 3.1 and Lemma 4.1. </p>
 
-<p>
-Proof of Proposition 4.4. (Sufficiency.) If the orthogonality condition holds at λ u , 
-then C P λ u ,0 B = 0; because C P λ u ,0 B = Cβ ⊥ ϕα 
-⊥ B and ϕ = 0, it follows that 
-rank(Cβ ⊥ ) &lt; n x − r and/or rank(α 
-⊥ B) &lt; n x − r , see the proof of Lemma 4.1. 
-(Necessity.) We first show that if rank(Cβ ⊥ ) &lt; n x − r and/or rank(α 
-⊥ B) &lt; n x − r , 
+<p>Proof of Proposition 4.4. (Sufficiency.) If the orthogonality condition holds at λ u , 
+then C P λ u ,0 B = 0; because C P λ u ,0 B = Cβ ⊥ ϕα ⊥ B and ϕ = 0, it follows that 
+rank(Cβ ⊥ ) &lt; n x − r and/or rank(α ⊥ B) &lt; n x − r , see the proof of Lemma 4.1. 
+(Necessity.) We first show that if rank(Cβ ⊥ ) &lt; n x − r and/or rank(α ⊥ B) &lt; n x − r , 
 then λ u is non-controllable and/or non-observable; we then apply Kalman's decom-
 position theorem for non-controllable and/or non-observable linear systems. 
 For the PBH rank test, see e.g. Kailath (1980, Theorem 6.2.6), one has that λ u is 
@@ -828,81 +797,39 @@ controllable if and only if rank(A − λ u I : B) = n x and it is observable if
 rank(A −λ u I : C ) = n x . Observe that rank(A−λ u I : B) = rank(F −λ u I : B D −1 ); 
 in fact </p>
 
-<p>
-A − λ u I B </p>
-
-<p>
+<p>A − λ u I B 
 I n x 
 0 
-−D −1 C D −1 </p>
-
-<p>
-= </p>
-
-<p>F − λ u I BD −1 </p>
+−D −1 C D −1 = F − λ u I BD −1 </p>
 
 <p>and similarly one finds that rank(A −λ u I : C ) = rank(F −λ u I : −C D −1 ). Recall 
-that F − λ u I = αβ and use the projection identities I = α ¯ 
-α + ¯ 
-α ⊥ α 
-⊥ = ¯ 
-ββ + β ⊥ ¯ 
-β </p>
+that F − λ u I = αβ and use the projection identities I = αᾱ +ᾱ ⊥ α ⊥ =ββ + β ⊥β ⊥ 
+to write </p>
 
-<p>⊥ </p>
+<p>F − λ u I BD −1 = αβ αᾱ B D −1 +ᾱ ⊥ α ⊥ B D −1 </p>
 
-<p>to write </p>
-
-<p>F − λ u I BD −1 = 
-αβ α ¯ 
-α B D −1 + ¯ 
-α ⊥ α 
-⊥ B D −1 </p>
-
-<p>= 
-α ¯ 
-α ⊥ </p>
-
-<p>β ¯ 
-α B D −1 
-0 α 
-⊥ B D −1 </p>
-
-<p>
-, </p>
+<p>= αᾱ ⊥ 
+β 
+ᾱ B D −1 
+0 α ⊥ B D −1 , </p>
 
 <p>F − λ u I 
-−D −1 C </p>
-
-<p>
-= </p>
-
-<p>
+−D −1 C 
+= 
 αβ 
-−D −1 C ¯ 
-ββ − D −1 Cβ ⊥ ¯ 
-β </p>
+−D −1 Cββ − D −1 Cβ ⊥β ⊥ </p>
 
-<p>⊥ </p>
-
-
-
-<p>= </p>
-
-<p>
+<p>= 
 α 
 0 
-−D −1 C ¯ 
-β −D −1 Cβ ⊥ 
-β </p>
+−D −1 Cβ −D −1 Cβ ⊥ </p>
 
-<p>¯ 
+<p>β 
 β </p>
 
 <p>⊥ </p>
 
-<p>
-. </p>
+<p>. </p>
 
 <p>Similar expressions hold replacing F, B D −1 , −D −1 C with A, B, C. This shows that 
 λ u is non-controllable and/or non-observable, both for the original ABCD form (1) 
@@ -917,23 +844,19 @@ observable, and H 1 , G 1 are constructed as C 1 , B 1 in eq. (7.6) of Antsaklis
 u ) is finite, and hence that C P u (z)B = 0 by Lemma 
 4.1. </p>
 
-<p>
-Proof of Proposition 4.5. Direct consequence of Propositions 4.3 and 4.4. </p>
+<p>Proof of Proposition 4.5. Direct consequence of Propositions 4.3 and 4.4. </p>
 
 
 
-<p>
-VAR Representations for DSGE Models </p>
+<p>VAR Representations for DSGE Models </p>
 
 
 
 <p>Proof of Proposition 5.1. (Sufficiency.) See proof of Proposition 3.3. (Necessity.) For 
 the PBH rank test, see e.g. Kailath (1980, Theorem 6.2.6), one has that if the ABCD 
 form is minimal then rank(A −λI : B) = rank(A −λI : C ) = n x for all λ ∈ C. This 
-implies, see the proof of Proposition 4.4, that rank(Cβ ⊥ ) = rank(α 
-⊥ B) = n x − r ; 
-hence C P λ u ,0 B = Cβ ⊥ ϕα 
-⊥ B = 0 contradicts ϕ = 0 and thus the orthogonality 
+implies, see the proof of Proposition 4.4, that rank(Cβ ⊥ ) = rank(α ⊥ B) = n x − r ; 
+hence C P λ u ,0 B = Cβ ⊥ ϕα ⊥ B = 0 contradicts ϕ = 0 and thus the orthogonality 
 condition cannot hold. This implies that T (z) is regular only if F is stable and it is a 
 matrix polynomial only if F is nilpotent. Finally apply Proposition 3.1. </p>
 
@@ -941,8 +864,7 @@ matrix polynomial only if F is nilpotent. Finally apply Proposition 3.1. </p>
 
 
 
-<p>
-M. Franchi, P. Paruolo </p>
+<p>M. Franchi, P. Paruolo </p>
 
 
 

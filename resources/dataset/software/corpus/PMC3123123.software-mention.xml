@@ -1,22 +1,29 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC3123123" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T20:03+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC3123123" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:10+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>The histone H3 variant CENP-A is the most favored candidate 
 for an epigenetic mark that specifies the centromere. In fission 
-yeast, adjacent heterochromatin can direct CENP-A Cnp1 chro-
+yeast, adjacent heterochromatin can direct CENP-A 
+Cnp1 chro-
 matin establishment, but the underlying features governing 
-where CENP-A Cnp1 chromatin assembles are unknown. We 
+where CENP-A 
+Cnp1 chromatin assembles are unknown. We 
 show that, in addition to centromeric regions, a low level of 
-CENP-A Cnp1 associates with gene promoters where histone 
-H3 is depleted by the activity of the Hrp1 Chd1 chromatin-
+CENP-A 
+Cnp1 associates with gene promoters where histone 
+H3 is depleted by the activity of the Hrp1 
+Chd1 chromatin-
 remodeling factor. Moreover, we demonstrate that noncod-
 ing RNAs are transcribed by RNA polymerase II (RNAPII) 
-from CENP-A Cnp1 chromatin at centromeres. These analyses 
+from CENP-A 
+Cnp1 chromatin at centromeres. These analyses 
 reveal a similarity between centromeres and a subset of RNA-
 PII genes and suggest a role for remodeling at RNAPII pro-
 moters within centromeres that influences the replacement 
-of histone H3 with CENP-A Cnp1 . </p>
+of histone H3 with CENP-A 
+Cnp1 . </p>
 
-<p>of chromatin extract. Hrp1 Chd1 binding data and histone H3 
+<p>of chromatin extract. Hrp1 
+Chd1 binding data and histone H3 
 density maps are from a previous study (16). 
 Raw data from Affymetrix (.CEL format) were analyzed 
 with <rs id="software-0" type="software">Affymetrix TAS</rs> (tiling analysis) <rs corresp="#software-0" type="version-number">version 1.1</rs> software 
@@ -28,66 +35,104 @@ tion in R version 2.12.0. </p>
 
 <p>RESULTS </p>
 
-<p>Hrp1 Chd1 has previously been implicated in CENP-A Cnp1 
-deposition but is not essential for cell viability (12). Expression 
-of RNAPII-transcribed marker genes such as arg3 is repressed 
+<p>Hrp1 
+Chd1 has previously been implicated in CENP-A </p>
+
+<p>Cnp1 </p>
+
+<p>deposition but is not essential for cell viability (12). Expression 
+of RNAPII-transcribed marker genes such as arg3 
+ϩ is repressed 
 when placed within the central domain, and silencing of cen1: 
-arg3 is highly sensitive to defective CENP-A Cnp1 deposition 
-(17); however, this silencing is only partially impaired in hrp1 
+arg3 
+ϩ is highly sensitive to defective CENP-A 
+Cnp1 deposition 
+(17); however, this silencing is only partially impaired in hrp1⌬ 
 cells (Fig. 1A). This suggests that redundant mechanisms oper-
-ate to ensure CENP-A Cnp1 deposition in the absence of 
-Hrp1 Chd1 . In agreement with this and previous analyses (12), 
-when hrp1 was combined with the mis6-302 temperature-
-sensitive mutation (defective in CENP-A Cnp1 deposition), it 
+ate to ensure CENP-A 
+Cnp1 deposition in the absence of 
+Hrp1 
+Chd1 . In agreement with this and previous analyses (12), 
+when hrp1⌬ was combined with the mis6-302 temperature-
+sensitive mutation (defective in CENP-A 
+Cnp1 deposition), it 
 reduced the restrictive temperature of mis6-302. Furthermore, 
-hrp1 also reduced the restrictive temperature of cnp1-87, a 
+hrp1⌬ also reduced the restrictive temperature of cnp1-87, a 
 weak temperature-sensitive allele (Fig. 1B) (18). Consistent 
-with this, the levels of CENP-A Cnp1 associated with the central 
-domain were further reduced in hrp1 cnp1-87 double mutants 
+with this, the levels of CENP-A 
+Cnp1 associated with the central 
+domain were further reduced in hrp1⌬ cnp1-87 double mutants 
 compared with either single mutant (Fig. 1C). We conclude that 
-Hrp1 facilitates the assembly of CENP-A Cnp1 chromatin, and it 
-becomes essential when Mis6 or CENP-A Cnp1 function is 
+Hrp1 facilitates the assembly of CENP-A 
+Cnp1 chromatin, and it 
+becomes essential when Mis6 or CENP-A 
+Cnp1 function is 
 impaired. 
-Genome-wide analyses of CENP-A Cnp1 and histone H3 
-localization by ChIP on tiling arrays with anti-CENP-A Cnp1 
-and anti-H3 antibodies confirmed that Hrp1 Chd1 is required 
-to maintain normal levels of CENP-A Cnp1 and that, in hrp1 
+Genome-wide analyses of CENP-A 
+Cnp1 and histone H3 
+localization by ChIP on tiling arrays with anti-CENP-A </p>
+
+<p>Cnp1 </p>
+
+<p>and anti-H3 antibodies confirmed that Hrp1 
+Chd1 is required 
+to maintain normal levels of CENP-A 
+Cnp1 and that, in hrp1⌬ 
 cells, H3 levels increase across the central domain (Fig. 1D 
 and supplemental Fig. S1). Previously, we have shown that 
-Hrp1 Chd1 acts at a subset of gene promoters to disassemble 
+Hrp1 
+Chd1 acts at a subset of gene promoters to disassemble 
 histone H3-containing nucleosomes close to the transcrip-
 tion start sites (16). Further examination of the genome-
 wide analyses revealed that low but detectable levels of 
-CENP-A Cnp1 associate with a significant proportion of pro-
-moters in wild-type cells at which Hrp1 Chd1 acts to disassem-
-ble H3-containing nucleosomes (Fig. 2A). CENP-A Cnp1 asso-
+CENP-A 
+Cnp1 associate with a significant proportion of pro-
+moters in wild-type cells at which Hrp1 
+Chd1 acts to disassem-
+ble H3-containing nucleosomes (Fig. 2A). CENP-A 
+Cnp1 asso-
 ciation is significantly reduced at some, but not all, of these 
-promoters in hrp1 cells, and in agreement with this, we saw 
-an increase in H3 (p 2.7e 4 , hypergeometric probability) 
+promoters in hrp1⌬ cells, and in agreement with this, we saw 
+an increase in H3 (p ϭ 2.7e 
+Ϫ4 , hypergeometric probability) 
 (Fig. 2, B and C). Some promoters show an increase in CENP-
-A Cnp1 association and a decrease in H3 in hrp1 cells; how-
+A 
+Cnp1 association and a decrease in H3 in hrp1⌬ cells; how-
 ever, this is less significant (Fig. 2D). These analyses imply 
-that Hrp1 Chd1 directly participates in a remodeling process 
-that evicts H3 and allows CENP-A Cnp1 deposition at the pro-
+that Hrp1 
+Chd1 directly participates in a remodeling process 
+that evicts H3 and allows CENP-A 
+Cnp1 deposition at the pro-
 moters of some genes. However, additional factors, such as 
 Scm3, must also contribute to the replacement of H3 with 
-CENP-A Cnp1 and/or CENP-A Cnp1 maintenance at centrom-
+CENP-A 
+Cnp1 and/or CENP-A 
+Cnp1 maintenance at centrom-
 eres (19, 20). This bears resemblance to the transcription-
 coupled replacement of H3.1 with H3.3 in metazoa (21) and 
 suggests that remodeling at some promoters of RNAPII </p>
 
 <p>genes is intimately associated with the destabilization of 
 H3-containing nucleosomes to encourage the assembly of 
-CENP-A Cnp1 chromatin. Nucleosome replacement in 
+CENP-A </p>
+
+<p>Cnp1 </p>
+
+<p>chromatin. Nucleosome replacement in 
 S. cerevisiae is more prominent at promoters than within 
 coding regions (22), and the genome-wide effects of 
-Hrp1 Chd1 on H3 eviction in fission yeast are more pro-
+Hrp1 
+Chd1 on H3 eviction in fission yeast are more pro-
 nounced at promoters compared with coding regions and 
-3-intergenic regions (16), accounting for the preferential 
-association of CENP-A Cnp1 with the promoters of genes at 
-which Hrp1 Chd1 functions. 
-The close correlation between CENP-A Cnp1 association 
-and Hrp1 Chd1 function at gene promoters as well as at cen-
+3Ј-intergenic regions (16), accounting for the preferential 
+association of CENP-A 
+Cnp1 with the promoters of genes at 
+which Hrp1 
+Chd1 functions. 
+The close correlation between CENP-A 
+Cnp1 association 
+and Hrp1 
+Chd1 function at gene promoters as well as at cen-
 tromeres raises the possibility that centromeric DNA may 
 contain promoters for hitherto unidentified transcription 
 elements. It is well established that transcripts are produced 
@@ -97,7 +142,9 @@ determine whether the central kinetochore domain is also
 transcribed, RT-PCR was performed with primer pairs 
 (PP1-PP10) complementary to centromere 1 (cen1) (Fig. 
 3A). PP1-PP3 detect part of the outer repeat heterochro-
-matic transcript. PP4 flanks the tRNA Ala /tRNA Glu genes, 
+matic transcript. PP4 flanks the tRNA 
+Ala /tRNA 
+Glu genes, 
 whereas PP5-PP10 lie within the central subkinetochore 
 domain. In wild-type cells, heterochromatic transcripts were 
 detected in a region immediately adjacent to the outer 
@@ -106,20 +153,20 @@ the central domain (Fig. 3B). Outer repeat transcripts are
 known to accumulate in mutants defective in RNAi or het-
 erochromatin integrity (23, 24). Several studies in S. cerevi-
 siae indicate that aberrant or cryptic transcripts are 
-degraded by 5-3-and/or 3-5-exoribonucleases; 3-end 
+degraded by 5Ј-3Ј-and/or 3Ј-5Ј-exoribonucleases; 3Ј-end 
 processing can contribute to RNA stability (25). Indeed, in 
 fission yeast, outer repeat heterochromatin transcript levels 
 are also regulated by the exosome (26 -28). We therefore 
 tested whether conditional mutations in Pfs2 (pfs2-11 tem-
 perature-sensitive; polyadenylation factor I subunit 2) (29), 
-Dhp1 (dhp1-1 temperature-sensitive; 5-3-exoribonu-
+Dhp1 (dhp1-1 temperature-sensitive; 5Ј-3Ј-exoribonu-
 clease orthologous to Xrn2/Rat1) (30), or Dis3 (dis3-54 cold-
-sensitive; 3-5-exoribonuclease component of the exo-
+sensitive; 3Ј-5Ј-exoribonuclease component of the exo-
 some) (27) allow accumulation of RNA homologous to the 
 central domain. Transcripts from the central domain were 
 clearly detected with PP5, PP6, PP7, PP9, and PP10 in 
 dhp1-1, pfs2-11, and dis3-54 cells, but not in wild-type cells, 
-under restrictive conditions (36 or 18 °C) (Fig. 3B). We con-
+under restrictive conditions (36 or 18°C) (Fig. 3B). We con-
 clude that a large proportion of the central domain is tran-
 scribed but that the resulting transcripts are normally unde-
 tectable due to their rapid turnover. RT-PCR also detected 
@@ -141,9 +188,10 @@ the temperature-sensitive mutants mis6-302 and cnp1-1, </p>
 
 <p>JOURNAL OF BIOLOGICAL CHEMISTRY 23601 </p>
 
-<p>which have reduced levels of CENP-A Cnp1 chromatin over 
+<p>which have reduced levels of CENP-A 
+Cnp1 chromatin over 
 the central domain (31, 32). Surprisingly, transcripts with 
-discrete sizes (0.5 kb) were identified in both mutants (Fig. 
+discrete sizes (ϳ0.5 kb) were identified in both mutants (Fig. 
 4A); these discrete transcripts (discrete TUKs) were highly 
 enriched in poly(A)-selected RNA (Fig. 4B). A lower level of 
 these specific transcripts was also enriched in the poly(A) 
@@ -151,22 +199,32 @@ fraction from dis3-54 (Fig. 4B, arrowhead). Dis3 is the key
 catalytic subunit of the exosome required to degrade aber-
 rant transcripts, whereas Pfs2 and Dhp1 are required for </p>
 
-<p>normal 3-end formation/termination (27, 29, 30). pfs2-11 
-and dhp1-1 may generate transcripts with extended 3-ends 
+<p>normal 3Ј-end formation/termination (27, 29, 30). pfs2-11 
+and dhp1-1 may generate transcripts with extended 3Ј-ends 
 due to transcriptional read-through into downstream 
 regions, resulting in the observed heterogeneous smear of 
 transcripts (Fig. 4, A and B). The specific increase in discrete 
 TUKs observed in mis6-302 and cnp1-1 cells could be inter-
-preted to mean that intact CENP-A Cnp1 chromatin prevents 
+preted to mean that intact CENP-A 
+Cnp1 chromatin prevents 
 expression of these transcripts; however, our analyses sug-
 gest that TUKs are constitutively produced and turned over </p>
 
-<p>FIGURE 1. Chromatin-remodeling factor Hrp1 Chd1 contributes to CENP-A Cnp1 chromatin formation. A, silencing of cen1:arg3 in WT, cnp1-169, and hrp1 
-cells. The growth assay was performed on non-selective (N/S) or arginine-depleted (Arg) plates at 25, 32, and 36 °C. B, viability of cells bearing hrp1 
-combined with mis6-302 (upper panels) or with cnp1-87 (lower panels) compared with wild-type and single mutants grown at 25, 32, or 36 °C. C, CENP-A Cnp1 ChIP 
-analyses in WT, hrp1, cnp1-87, and hrp1 cnp1-87 cells grown at 36 °C. The enrichment of the cnt1 product was compared with input DNA relative to the act1 
-control by quantitative PCR. D, genome browser view of cen1 showing ChIP-chip binding profiles for CENP-A Cnp1 (purple) and H3 (green) in WT and hrp1 cells 
-(as indicated) at 30 °C. The relative ratios of CENP-A Cnp1 and H3 (hrp1/WT) are indicated (black). Data on the y axis are presented in log 2 scale, and the x axis 
+<p>FIGURE 1. Chromatin-remodeling factor Hrp1 
+Chd1 contributes to CENP-A 
+Cnp1 chromatin formation. A, silencing of cen1:arg3 
+ϩ in WT, cnp1-169, and hrp1⌬ 
+cells. The growth assay was performed on non-selective (N/S) or arginine-depleted (ϪArg) plates at 25, 32, and 36°C. B, viability of cells bearing hrp1⌬ 
+combined with mis6-302 (upper panels) or with cnp1-87 (lower panels) compared with wild-type and single mutants grown at 25, 32, or 36°C. C, CENP-A 
+Cnp1 ChIP 
+analyses in WT, hrp1⌬, cnp1-87, and hrp1⌬ cnp1-87 cells grown at 36°C. The enrichment of the cnt1 product was compared with input DNA relative to the act1 </p>
+
+<p>ϩ </p>
+
+<p>control by quantitative PCR. D, genome browser view of cen1 showing ChIP-chip binding profiles for CENP-A 
+Cnp1 (purple) and H3 (green) in WT and hrp1⌬ cells 
+(as indicated) at 30°C. The relative ratios of CENP-A 
+Cnp1 and H3 (hrp1⌬/WT) are indicated (black). Data on the y axis are presented in log 2 scale, and the x axis 
 shows genome positions in base pairs. </p>
 
 <p>CENP-A Chromatin Transcription in Fission Yeast </p>
@@ -177,43 +235,47 @@ shows genome positions in base pairs. </p>
 
 <p>by the exosome in wild-type cells. The chromatin context in 
 mis6-302 and cnp1-1 cells is dramatically altered from 
-CENP-A Cnp1 to H3 chromatin; CENP-A Cnp1 chromatin may 
+CENP-A 
+Cnp1 to H3 chromatin; CENP-A 
+Cnp1 chromatin may 
 interfere with events required for the formation of specific 
-transcripts, such as accurate 3-termination, ensuring their 
+transcripts, such as accurate 3Ј-termination, ensuring their 
 turnover. Using RNA probes complementary to either 
 reverse or forward strands of the cen1 central core (cc1/tm1) 
 (supplemental Fig. S2), we detected other discrete tran-
 scripts in distinct central domain regions in poly(A) RNA 
-from cnp1-1 cells (Fig. 4, C and D). To identify the 5-ends of 
+from cnp1-1 cells (Fig. 4, C and D). To identify the 5Ј-ends of 
 these central domain noncoding transcripts, we employed 
-5-rapid amplification of cDNA ends (RACE)/PCR on 
-5-capped poly(A) RNA extracted from wild-type and cnp1-1 
+5Ј-rapid amplification of cDNA ends (RACE)/PCR on 
+5Ј-capped poly(A) RNA extracted from wild-type and cnp1-1 
 cells. This demonstrated that these novel/unusual tran-
 scripts are produced from within the central domain and do 
 not arise by read-through from outer repeat transcripts (Fig. 
 4E and supplemental Fig. S3). The high sensitivity of 
-5-RACE/PCR allowed the detection of transcripts in wild-
+5Ј-RACE/PCR allowed the detection of transcripts in wild-
 type cells with some primers (Fig. 4E, black arrows, and sup-
 plemental Fig. S3). The transcription start sites for these 
 transcripts were identical in wild-type and cnp1-1 cells, sug-
 gesting that they are indeed produced from wild-type cen-
 tromeres, albeit at a lower level. The fact that these tran-
-scripts are 5-capped and polyadenylated indicates that 
+scripts are 5Ј-capped and polyadenylated indicates that 
 TUKs are produced by RNAPII. Consistent with alterations </p>
 
 <p>in central domain chromatin affecting transcription (lower 
-CENP-A Cnp1 and higher H3 deposition) (Fig. 1D), increased 
+CENP-A 
+Cnp1 and higher H3 deposition) (Fig. 1D), increased 
 levels of the central domain transcript were also detectable 
-in hrp1 cells (supplemental Fig. S4). 
-On the basis of the 5-RACE analyses above, we designed 
+in hrp1⌬ cells (supplemental Fig. S4). 
+On the basis of the 5Ј-RACE analyses above, we designed 
 improved probes for Northern analyses to detect the forward 
 and reverse strands of the cen1 central core (cc1/tm1) (sup-
 plemental Fig. S2) in additional mutants known to affect 
 kinetochore integrity (mis12-537, mis16-53, and mis18-262 
-in addition to mis6-302 and cnp1-1) (6). At 36 °C, transcripts 
+in addition to mis6-302 and cnp1-1) (6). At 36°C, transcripts 
 were detected in all mutants apart from mis12-537 with this 
-TM-forward 5 probe (Fig. 4F). Some transcripts were even 
-detectable in mis6-302, cnp1-1, and mis16-53 at 25 °C, the 
+TM-forward 
+5 probe (Fig. 4F). Some transcripts were even 
+detectable in mis6-302, cnp1-1, and mis16-53 at 25°C, the 
 permissive temperature. In all mutants, including mis12-
 537, this TM-reverse probe allowed detection of other tran-
 scripts (Fig. 4G) in addition to those observed with the orig-
@@ -226,15 +288,26 @@ chore chromatin. In support of this, low levels of H3K4 </p>
 <p>5 TM represents a 3.3-kb element shared between the central domains of 
 cen2 and cen3. </p>
 
-<p>FIGURE 2. Genome-wide CENP-A Cnp1 localization correlates with Hrp1 Chd1 occupancy and H3 density changes in hrp1 cells. A, Venn diagram 
-illustrating the overlap of CENP-A Cnp1 enrichment with Hrp1 Chd1 occupancy and H3 density increase in hrp1 cells (16). A cutoff of 1.5 was used for 
-CENP-A Cnp1 enrichment. The p values indicate the probability of overlap generated by a hypergeometric probability test using R. B, genome browser 
-view of gene SPBC839.06 with reduced CENP-A Cnp1 (purple) and increased H3 (green) levels at its promoter in hrp1 cells. The arrow indicates the 
-direction of transcription. The relative ratios of CENP-A Cnp1 and H3 are indicated (black). Data on the y axis are presented in log 2 scale, and the x axis 
-shows genome positions in base pairs. C, Venn diagram showing the overlap between promoters where CENP-A Cnp1 is reduced, promoters where H3 is 
-increased, and promoters where H3 is reduced in hrp1 cells. A cutoff of 1.2 was used for CENP-A Cnp1 reduction. D, Venn diagram showing the overlap 
-between promoters where CENP-A Cnp1 is increased, promoters where H3 is increased, and promoters where H3 is reduced in hrp1 cells. A cutoff of 1.2 
-was used for the CENP-A Cnp1 increase. </p>
+<p>FIGURE 2. Genome-wide CENP-A 
+Cnp1 localization correlates with Hrp1 
+Chd1 occupancy and H3 density changes in hrp1⌬ cells. A, Venn diagram 
+illustrating the overlap of CENP-A 
+Cnp1 enrichment with Hrp1 
+Chd1 occupancy and H3 density increase in hrp1⌬ cells (16). A cutoff of 1.5 was used for 
+CENP-A 
+Cnp1 enrichment. The p values indicate the probability of overlap generated by a hypergeometric probability test using R. B, genome browser 
+view of gene SPBC839.06 with reduced CENP-A 
+Cnp1 (purple) and increased H3 (green) levels at its promoter in hrp1⌬ cells. The arrow indicates the 
+direction of transcription. The relative ratios of CENP-A 
+Cnp1 and H3 are indicated (black). Data on the y axis are presented in log 2 scale, and the x axis 
+shows genome positions in base pairs. C, Venn diagram showing the overlap between promoters where CENP-A 
+Cnp1 is reduced, promoters where H3 is 
+increased, and promoters where H3 is reduced in hrp1⌬ cells. A cutoff of 1.2 was used for CENP-A 
+Cnp1 reduction. D, Venn diagram showing the overlap 
+between promoters where CENP-A 
+Cnp1 is increased, promoters where H3 is increased, and promoters where H3 is reduced in hrp1⌬ cells. A cutoff of 1.2 
+was used for the CENP-A 
+Cnp1 increase. </p>
 
 <p>CENP-A Chromatin Transcription in Fission Yeast </p>
 
@@ -256,24 +329,30 @@ rial at the base of kinetochore microtubules in newt lung
 cells (34). Since then, centromeric transcripts have been 
 found to associate with kinetochore proteins (9, 10). In this 
 study, we demonstrated an analogy between the central 
-domain-associated CENP-A Cnp1 chromatin of centromeres 
-and genes whose promoters are associated with Hrp1 Chd1 in 
-fission yeast. The fact that Hrp1 Chd1 promotes eviction of 
+domain-associated CENP-A 
+Cnp1 chromatin of centromeres 
+and genes whose promoters are associated with Hrp1 
+Chd1 in 
+fission yeast. The fact that Hrp1 
+Chd1 promotes eviction of 
 histone H3 at a set of promoters suggests that similar remod-
 eling processes may occur at RNAPII promoters within cen-
 tromeres and may contribute to exchange of canonical 
-H3-containing nucleosomes for CENP-A Cnp1 -containing 
+H3-containing nucleosomes for CENP-A 
+Cnp1 -containing 
 nucleosomes (summarized in Fig. 5). 
 It is possible that transcription within centromeres occurs 
 merely as a consequence of having RNAPII promoters whose 
 presence or activation is critical to act as a seed for remod-
-eling events that promote CENP-A Cnp1 deposition. The 
+eling events that promote CENP-A 
+Cnp1 deposition. The 
 resulting TUK transcripts are degraded by the exosome and 
 thus may represent just nonfunctional by-products of tran-</p>
 
 <p>scription. However, we cannot rule out the possibility that 
 these unstable transcripts might also have a dedicated func-
-tion in guiding some components of the CENP-A Cnp1 depo-
+tion in guiding some components of the CENP-A 
+Cnp1 depo-
 sition machineries and/or kinetochore complex to their cog-
 nate DNA sequences (10). Alternatively, the production of 
 TUKs might influence chromatin modification within cen-
@@ -281,17 +360,26 @@ tromeric chromatin by processes analogous to those associ-
 ated with cryptic or antisense noncoding RNA production in 
 S. cerevisiae (35, 36). However, we found that the accumula-
 tion of TUKs in pfs2-11, dhp1-1, or dis3-54 cells had no 
-obvious effect on CENP-A Cnp1 chromatin formation. 6 It is 
+obvious effect on CENP-A 
+Cnp1 chromatin formation. 
+6 It is 
 also conceivable that these transcripts are processed into a 
-specific class of small RNAs that have a role in CENP-A Cnp1 
-chromatin formation and/or kinetochore assembly analo-
+specific class of small RNAs that have a role in CENP-A </p>
+
+<p>Cnp1 </p>
+
+<p>chromatin formation and/or kinetochore assembly analo-
 gous to how siRNAs derived from outer repeat transcripts 
 induce heterochromatin formation. However, with our 
 detection methods, we did not find evidence for the presence 
 of small RNAs corresponding to the central domain of 
-centromeres. 5 
-Intriguingly, it has recently been reported that S. cerevi-
-siae CENP-A Cse4 also tends to associate with a number of 
+centromeres. </p>
+
+<p>5 </p>
+
+<p>Intriguingly, it has recently been reported that S. cerevi-
+siae CENP-A 
+Cse4 also tends to associate with a number of 
 RNAPII promoters where RNAPII binding is high (37); how-
 ever, it is not known if these promoters share any structural 
 or mechanistically related features with S. cerevisiae centro-</p>
@@ -300,10 +388,12 @@ or mechanistically related features with S. cerevisiae centro-</p>
 
 <p>FIGURE 3. Accumulation of central domain transcripts in RNA-processing mutants. A, schematic of fission yeast cen1, indicating the central core 
 (cnt), innermost repeat (imr), and outer repeats (otr/dg-dh). Regions amplified by primer pairs (PP1-PP10) used in RT-PCR are indicated below (black 
-bars). B, RT-PCR analysis of transcripts from cen1 and the act1 control. Wild-type, dhp1-1, and pfs2-11 cells were grown at 25 °C and then shifted to 36 °C 
-for 6 h before RNA extraction. Wild-type and dis3-54 cells were grown at 36 °C and shifted to 18 °C for 9 h before RNA extraction. RT, negative control 
+bars). B, RT-PCR analysis of transcripts from cen1 and the act1 
+ϩ control. Wild-type, dhp1-1, and pfs2-11 cells were grown at 25°C and then shifted to 36°C 
+for 6 h before RNA extraction. Wild-type and dis3-54 cells were grown at 36°C and shifted to 18°C for 9 h before RNA extraction. ϪRT, negative control 
 performed without reverse transcriptase; *, unspecific products. PCR with a chromosomal DNA (chr. DNA) template was included as a positive control. 
-C, RT-PCR analysis of transcripts from cnt2, cnt3, and the act1 control. PP-cnt2 and PP-cnt3 are specific for the central domain of cen2 and cen3, 
+C, RT-PCR analysis of transcripts from cnt2, cnt3, and the act1 
+ϩ control. PP-cnt2 and PP-cnt3 are specific for the central domain of cen2 and cen3, 
 respectively. </p>
 
 <p>CENP-A Chromatin Transcription in Fission Yeast </p>
@@ -312,7 +402,8 @@ respectively. </p>
 
 <p>VOLUME 286 • NUMBER 26 • JULY 1, 2011 </p>
 
-<p>meres that contribute to CENP-A Cse4 deposition. Interest-
+<p>meres that contribute to CENP-A 
+Cse4 deposition. Interest-
 ingly, the S. cerevisiae centromeric protein Cbf1, which 
 binds centromere DNA element I, functions as a transcrip-
 tion factor at the MET16 promoter (38). In this regard, it is 
@@ -331,16 +422,17 @@ incorporation of newly synthesized CENP-A in chicken cells
 and is required for centromeric localization of CENP-A in </p>
 
 <p>FIGURE 4. Northern and 5-RACE/PCR analyses of central domain transcripts. A, Northern analysis of total RNAs in RNA-processing and kinetochore 
-mutants. An RNA probe complementary to cnt1 was used. Cells grown at the permissive temperature (25 °C for WT, pfs2-11, dhp1-1, mis6-302, and cnp1-1 
-cells and 36 °C for WT and dis3-54 cells) were shifted to the restrictive temperature (6 h at 36 °C for WT, pfs2-11, dhp1-1, mis6-302, and cnp1-1 cells and 
-9 h at 18 °C for WT and dis3-54 cells) before RNA extraction. act1 was used as a loading control. *, rRNA interference with hybridization. For additional 
+mutants. An RNA probe complementary to cnt1 was used. Cells grown at the permissive temperature (25°C for WT, pfs2-11, dhp1-1, mis6-302, and cnp1-1 
+cells and 36°C for WT and dis3-54 cells) were shifted to the restrictive temperature (6 h at 36°C for WT, pfs2-11, dhp1-1, mis6-302, and cnp1-1 cells and 
+9 h at 18°C for WT and dis3-54 cells) before RNA extraction. act1 
+ϩ was used as a loading control. *, rRNA interference with hybridization. For additional 
 EtBr images, see supplemental Fig. S5A. B, the same cnt1 probe used on poly(A) RNA. For additional EtBr images, see supplemental Fig. S5B. C and D, 
 Northern analysis of total or poly(A) RNAs from WT and cnp1-1 cells with an RNA probe complementary to the reverse strand (forward probe; C) or the 
 forward strand (reverse probe; D) of the cc1/tm1 sequence, which is shared by cnt1 and cnt3. *, nonspecific band. For additional EtBr images, see 
-supplemental Fig. S5 (C and D). E, schematic representation of transcription start sites determined by 5-RACE/PCR in WT and cnp1-1 cells. Black arrows, 
+supplemental Fig. S5 (C and D). E, schematic representation of transcription start sites determined by 5Ј-RACE/PCR in WT and cnp1-1 cells. Black arrows, 
 transcription start sites identified in WT and cnp1-1 cells; gray arrows, transcription start sites identified only in cnp1-1 cells. F and G, Northern blots 
 showing transcripts complementary to the TM-forward (F) or TM-reverse (G) probes in WT, mis6-302, cnp1-1, mis12-537, mis16-53, and mis18-262 cells 
-grown at permissive (25 °C) and restrictive (36 °C) temperatures. *, nonspecific band. EtBr staining confirmed equal loading. </p>
+grown at permissive (25°C) and restrictive (36°C) temperatures. *, nonspecific band. EtBr staining confirmed equal loading. </p>
 
 <p>CENP-A Chromatin Transcription in Fission Yeast </p>
 

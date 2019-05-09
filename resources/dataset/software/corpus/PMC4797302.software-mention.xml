@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4797302" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T20:07+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4797302" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:13+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>ABSTRACT </p>
 
@@ -80,9 +80,7 @@ reconstructions (15). </p>
 
 <p>* To whom correspondence should be addressed. Tel: +1 415 514 8034; Fax: +1 415 514 8150; Email: Mark.Segal@ucsf.edu </p>
 
-<p>C </p>
-
-<p>The Author(s) 2016. Published by Oxford University Press on behalf of Nucleic Acids Research. 
+<p>C The Author(s) 2016. Published by Oxford University Press on behalf of Nucleic Acids Research. 
 This is an Open Access article distributed under the terms of the Creative Commons Attribution License (http://creativecommons.org/licenses/by-nc/4.0/), which 
 permits non-commercial re-use, distribution, and reproduction in any medium, provided the original work is properly cited. For commercial re-use, please contact 
 journals.permissions@oup.com </p>
@@ -194,16 +192,17 @@ precipitation (IP) control sample (DMSO, Illumina), was
 obtained from GEO (data set GSE51251; http://www.ncbi. 
 nlm.nih.gov/geo/query/acc.cgi?acc = GSE51251). We con-
 verted the raw sequencing SRA data to FASTQ format us-
-ing '<rs id="software-24" type="software">fastq-dump</rs>' <rs corresp="#software-24" type="version-number">version 2.3.4</rs> in the sequence read archive 
+ing '<rs id="software-12" type="software">fastq-dump</rs>' <rs corresp="#software-12" type="version-number">version 2.3.4</rs> in the sequence read archive 
 (<rs type="software">SRA) Toolkit</rs> (26). We aligned the reads to the S. cere-
 visiae reference genome (sacCer2) using <rs type="software">Bowtie 2</rs> (27) ver-
 sion 2.2.1 with default parameters and then converted the 
 sequence alignment / map (SAM) output to binary align-
-ment / map (BAM) format using <rs id="software-22" type="software">SAMtools</rs> (28) <rs corresp="#software-22" type="version-number">version 0.1.19–44428cd</rs>. We filtered the sequencing reads (using the 
-R package '<rs id="software-15" type="software">ShortRead</rs>' (29) <rs corresp="#software-15" type="version-number">version 1.20.0</rs> with a custom fil-
+ment / map (BAM) format using <rs id="software-15" type="software">SAMtools</rs> (28) <rs corresp="#software-15" type="version-number">version 0.1.19–44428cd</rs>. We filtered the sequencing reads (using the 
+R package '<rs id="software-16" type="software">ShortRead</rs>' (29) <rs corresp="#software-16" type="version-number">version 1.20.0</rs> with a custom fil-
 ter) to retain only those with two or less expected errors per 
 read: given a Phred quality score q for each base call, the 
-probability that a base call is erroneous is P = 10 (− q / 10) , 
+probability that a base call is erroneous is P = 10 
+(− q / 10) , 
 which is then summed over the bases in the read to give 
 the expected errors per read. Using '<rs type="software">ShortRead</rs>' (29), we 
 deduplicated the reads to control for PCR amplification 
@@ -244,15 +243,15 @@ from the bin centered on that bead. The result is a 3D chro-
 matin configuration reconstruction overlaid with functional 
 genomic data: each bead now has a genomic position, phys-
 ical coordinates (X,Y,Z) and a ChIP-seq peak height value. 
-We visualized this superposed 3D reconstruction in <rs id="software-16" type="software">MacPy-
-MOL</rs> <rs corresp="#software-16" type="version-number">1.3</rs> (34) by first converting the data to the Protein 
+We visualized this superposed 3D reconstruction in <rs id="software-23" type="software">MacPy-
+MOL</rs> <rs corresp="#software-23" type="version-number">1.3</rs> (34) by first converting the data to the Protein 
 Data Bank (PDB) file format (35) with the ChIP-seq peak 
 height value rescaled as the temperature factor (B-factor) in 
 the PDB file. </p>
 
 <p>PRIM </p>
 
-<p>We applied PRIM using the R package 'prim' (36) to dis-
+<p>We applied <rs type="software">PRIM</rs> using the R package 'prim' (36) to dis-
 cover 3D hotspots in ChIP-seq peak height superposed on 
 the 3D reconstruction. We used the default parameter set-
 tings peel alpha = 0.5 and paste alpha = 0.01 (we explored 
@@ -270,7 +269,8 @@ served the mapping of beads to PRIM boxes, and then per-
 muted the ChIP-seq peak height along each chromosome. 
 Then, we computed the mean ChIP-seq peak height for 
 each PRIM box from the permuted data. We repeated this 
-for a total of 10 5 permutations. The P-value of each box 
+for a total of 10 
+5 permutations. The P-value of each box 
 was estimated by comparing its mean ChIP-seq peak height 
 from the observed data to its mean ChIP-seq peak height 
 values from the permuted data. We ranked these potential 
@@ -551,8 +551,10 @@ since the 3D reconstruction is coordinate free with no pre-
 ferred orientation. To address this concern, we applied rota-
 tion matrices to the original 3D reconstruction to generate 
 six rotated 3D reconstructions (three combinations of two-
-angle 45 • rotations, and three combinations of two-angle 
-315 • rotations) and then applied PRIM to each of these. 
+angle 45 
+• rotations, and three combinations of two-angle 
+315 
+• rotations) and then applied PRIM to each of these. 
 The 3D hotspot containing MSB2 and ERG11 ranked 
 1st (of 652 to 712 potential hotspots) for three of these ro-
 tated 3D reconstructions, and ranked 12th(of 663 poten-
@@ -642,10 +644,13 @@ regression model (13).
 Encouragingly, MSB2 and ERG11 were found to be 
 closer together than expected not only in the 3D recon-
 struction that was used for hotspot discovery (P = 9.9 × 
-10 −4 ), but also in the two 3D reconstructions generated via 
+10 
+−4 ), but also in the two 3D reconstructions generated via 
 a different normalization algorithm followed by an uncon-
-strained MDS optimization (P = 4.6 × 10 −2 ) or by a Pois-
-son regression model (P = 4.0 × 10 −2 ) (Figure 3). This 
+strained MDS optimization (P = 4.6 × 10 
+−2 ) or by a Pois-
+son regression model (P = 4.0 × 10 
+−2 ) (Figure 3). This 
 result provides evidence that the biological finding is not 
 reconstruction-specific. We were not able to discover this 
 hotspot de novo by applying PRIM to the 3D reconstruc-
@@ -786,6 +791,10 @@ ing [T32 GM007175 to D.C. in part]. Funding for open
 access charge: National Institutes of Health (NIH) [R01 
 GM109457]. 
 Conflict of interest statement. None declared. </p>
+
+
+
+<p>Nucleic Acids Research, 2016, Vol. 44, No. 5 2035 </p>
 
 
 

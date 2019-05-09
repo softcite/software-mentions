@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1007%2Fs10818-017-9252-0" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T19:52+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1007%2Fs10818-017-9252-0" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T03:59+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>Abstract A two-species bioeconomic model is analyzed, but in contrast to most 
 similar models, there is no biological interaction between the species, only economic. 
@@ -128,7 +128,8 @@ surplus growth functions, one for each species: f (x) and g(y). The infinite hor
 dynamic optimization problem resulting from this leads to the following discounted 
 Hamiltonian: </p>
 
-<p>H = e −δt R(x, y, h x , h y ) + λ[ f (x) − h x ] + γ [g(y) − h y ] </p>
+<p>H = e 
+−δt R(x, y, h x , h y ) + λ[ f (x) − h x ] + γ [g(y) − h y ] </p>
 
 
 
@@ -147,8 +148,9 @@ first-order conditions for this general case are given by 1 </p>
 <p>together with the dynamic constraints </p>
 
 <p>dx/dt = f (x) − h x 
-(3) 
-dy/dt = g(y) − h y 
+(3) </p>
+
+<p>dy/dt = g(y) − h y 
 (4) </p>
 
 <p>and initial conditions x(0) = x 0 and y(0) = y 0 . Now let R with subscripts represent the 
@@ -302,8 +304,7 @@ derivatives are zero, the last terms in (7) and ( 8) will disappear as R 1 = R 2
 these two equations will be two independent equations in x and y, and the steady state 
 will only depend on biological parameters and the discount rate </p>
 
-<p>
-The implication of Proposition 1 is that without stock-dependence the Golden Rule, 
+<p>The implication of Proposition 1 is that without stock-dependence the Golden Rule, 
 as stated, for example, in Grafton et al. (2004, p. 113) is exactly the same in a two-
 species model with market interactions as it would be with two single-species models, 
 namely that the marginal biological productivity of each stock should equal the alter-
@@ -373,21 +374,21 @@ h y −
 
 <p>&lt; 0 in (9) </p>
 
-<p>and ∂ p x </p>
+<p>and </p>
 
-<p>∂h y </p>
+<p>∂ p x 
+∂h y </p>
 
-<p>&lt; 0 in (10). Let us concentrate on R 4 , as the analysis of R 3 is equivalent. As </p>
-
-<p>the two species are supposed to be substitutes, the cross-price elasticities are negative 
+<p>&lt; 0 in (10). Let us concentrate on R 4 , as the analysis of R 3 is equivalent. As 
+the two species are supposed to be substitutes, the cross-price elasticities are negative 
 implying that R 4 is smaller when the cross-price effect is taken into account than if 
-the species are economically independent, that is ∂ p x </p>
+the species are economically independent, that is </p>
 
-<p>∂h y </p>
+<p>∂ p x 
+∂h y </p>
 
-<p>= 0. This will unambiguously </p>
-
-<p>lead to a higher steady state stock and a more conservative harvest policy. This can be 
+<p>= 0. This will unambiguously 
+lead to a higher steady state stock and a more conservative harvest policy. This can be 
 stated in the following proposition: </p>
 
 <p>Proposition 2 Assuming strictly concave growth functions and net revenue that 
@@ -397,19 +398,18 @@ state stock for the affecting stock. </p>
 
 <p>Proof Assume that the only cross-price effect present is from h y to p x . Then it is 
 seen from (10) that having such a cross-price effect compared to not having it, will 
-reduce R 4 through the term ∂ p x </p>
+reduce R 4 through the term </p>
 
-<p>∂h y </p>
+<p>∂ p x 
+∂h y </p>
 
-<p>&lt; 0. As R 2 &gt; 0, reducing R 4 will make the fraction </p>
-
-<p>R 2 /R 4 larger. From (8) it is seen that making R 2 /R 4 larger has to be compensated by 
+<p>&lt; 0. As R 2 &gt; 0, reducing R 4 will make the fraction 
+R 2 /R 4 larger. From (8) it is seen that making R 2 /R 4 larger has to be compensated by 
 a smaller g (y) for a given δ. R 4 and g (y) therefore goes in the same direction. As 
 g is assumed to be concave, smaller g (y) implies going to the right (higher stock). 
 Exactly the same reasoning applies to (9). </p>
 
-<p>
-Proposition 2 says that if the harvest of y affects the price of x negatively, then this 
+<p>Proposition 2 says that if the harvest of y affects the price of x negatively, then this 
 will imply a higher optimal standing stock of y, and vice versa, compared to when 
 there is no such effect. The intuition is that the downward pressure on revenue from the 
 other species can be regarded as an addition to the marginal cost for the sole owner, and 
@@ -433,8 +433,7 @@ but R 2 = 0 or vice versa. </p>
 
 
 
-<p>
-S. I. Steinshamn </p>
+<p>S. I. Steinshamn </p>
 
 <p>Even though (7) and (8) are easy to relate to conceptually, closed-form solutions 
 for the steady state levels are almost impossible to find except for the simplest spec-
@@ -443,8 +442,9 @@ to become too long and messy to be of any practical value.
 In the case of linear demand functions, that is when </p>
 
 <p>p x (h x , h y ) = a x − b x h x − c x h y 
-(11) 
-p y (h x , h y ) = a y − b y h y − c y h x 
+(11) </p>
+
+<p>p y (h x , h y ) = a y − b y h y − c y h x 
 (12) </p>
 
 <p>where a i is the constant term, b i is the sensitivity to own harvest and c i is the cross-price 
@@ -463,8 +463,7 @@ R 4 = a y − 2b y h y − (c x + c y )h x . </p>
 <p>Thus it is seen that the cross-price parameters enter the equations that determine the 
 steady state in the form of the sum of the two parameters. </p>
 
-<p>
-In other words, no matter how asymmetric the economic and biological submodels 
+<p>In other words, no matter how asymmetric the economic and biological submodels 
 are with respect to demand, cost structure and surplus growth function, if the cross-
 price parameters change value such that their sum remains the same, the steady state 
 will remain unchanged. In practice this means that the two fish stocks can be quite 
@@ -552,25 +551,13 @@ species depends on both own harvest and the harvest of the other species as spec
 by Eqs. (11) and (12). In addition it is assumed that the growth functions, f and g, 
 are standard logistic surplus growth functions: </p>
 
-<p>f (x) = r x x </p>
-
-
-
-<p>1 − 
+<p>f (x) = r x x 1 − 
 x 
 K x </p>
 
-
-
-<p>g(y) = r y y </p>
-
-
-
-<p>1 − 
+<p>g(y) = r y y 1 − 
 y 
 K y </p>
-
-
 
 <p>where r i and K i have the conventional interpretations as intrinsic growth rate and 
 carrying capacity for i = (x, y), see Clark (2010). The numerical specification of the 
@@ -597,15 +584,11 @@ h y
 <p>case the steady state is independent of the cross-price parameters c i . In a non-linear 
 four-dimensional system, there are multiple possible solutions, but fortunately, for the 
 cases considered here, there is only one possible solution within the feasible region 
-x ∈ [0, K x ], y ∈ [0, K y ] and h i ∈ </p>
+x ∈ [0, K x ], y ∈ [0, K y ] and h i ∈ 0, </p>
 
-<p>
-0, r i K i </p>
+<p>r i K i </p>
 
-<p>4 </p>
-
-<p>
-. Remember that with the logistic model </p>
+<p>4 . Remember that with the logistic model </p>
 
 <p>r K </p>
 
@@ -640,7 +623,7 @@ bang like with cross-price effect from y on x. </p>
 <p>In the section "Steady state analysis" there was significant difference between the cases 
 with and without stock-dependent net revenue, in practice costs. It may therefore be </p>
 
-<p>3 The numerical solutions have been found using dsolve (numeric) in <rs id="software-1" type="software">Maple</rs> <rs corresp="#software-1" type="version-number">18</rs>. </p>
+<p>3 The numerical solutions have been found using dsolve (numeric) in <rs id="software-0" type="software">Maple</rs> <rs corresp="#software-0" type="version-number">18</rs>. </p>
 
 
 

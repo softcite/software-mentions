@@ -1,6 +1,22 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1007%2Fs00191-011-0230-8" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T19:53+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1007%2Fs00191-011-0230-8" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T03:59+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
-<p>540 </p>
+<p>Abstract In this paper we explore how specific aspects of market transparency 
+and agents' behavior affect the efficiency of the market outcome. In particular, 
+we are interested whether learning behavior with and without information 
+about actions of other participants improves market efficiency. We consider 
+a simple market for a homogeneous good populated by buyers and sellers. 
+The valuations of the buyers and the costs of the sellers are given exogenously. 
+Agents are involved in consecutive trading sessions, which are organized as 
+a continuous double auction with order book. Using Individual Evolutionary 
+Learning agents submit price bids and offers, trying to learn the most profitable 
+strategy by looking at their realized and counterfactual or "foregone" payoffs. 
+We find that learning outcomes heavily depend on information treatments. 
+Under full information about actions of others, agents' orders tend to be 
+similar, while under limited information agents tend to submit their valua-
+tions/costs. This behavioral outcome results in higher price volatility for the </p>
+
+<p>M. Anufriev (B) 
+CeNDEF, 540 </p>
 
 <p>M. Anufriev et al. </p>
 
@@ -66,8 +82,11 @@ bidding behavior does. We use the Individual Evolutionary Learning (IEL)
 algorithm, introduced in 2003 and published as Arifovic and Ledyard (2011). 
 This algorithm builds on the framework introduced by Arifovic (1994) who 
 examined genetic algorithms (GA) as a model of social as well as indi-
-vidual learning of economic agents in the context of the cobweb model. 1 
-According to the IEL algorithm agents select their strategies (limit order 
+vidual learning of economic agents in the context of the cobweb model. </p>
+
+<p>1 </p>
+
+<p>According to the IEL algorithm agents select their strategies (limit order 
 prices) not only on the basis of their actual performance, but also of their 
 counterfactual performance. To take the informational aspect into account, we 
 distinguish between two scenarios. We compare an outcome of learning based 
@@ -85,7 +104,8 @@ the agents learn to behave differently depending on the information available.
 In the open order book treatment the agents participating in trade learn to sub-
 mit bids and asks that fall within the range of equilibrium prices. On the other 
 hand, in the closed book treatment the trading agents submit bid/ask prices 
-which are close to their valuations/costs. 2 Consequently, usage of the book </p>
+which are close to their valuations/costs. 
+2 Consequently, usage of the book </p>
 
 <p>1 See closely related research in Fano et al. (2011) for an application of the GA to the CDA and 
 batch auction market with a large number of traders. 
@@ -105,7 +125,8 @@ The rest of the paper is organized as follows. The market environment
 is explained in Section 2, where we also recall the definition of allocative 
 efficiency and derive a benchmark for ZI traders. We describe the individual 
 evolutionary learning model in Section 3. The resulting market outcomes are 
-simulated 3 and discussed in Section 4. In Section 5 we report the results of a 
+simulated 
+3 and discussed in Section 4. In Section 5 we report the results of a 
 number of robustness tests that we conducted. Section 6 concludes. For brevity 
 the paper uses a number of acronyms. The detailed list of acronyms and the 
 corresponding definitions are given in Appendix. </p>
@@ -126,7 +147,8 @@ one unit of commodity. The same agents transact during T trading sessions.
 Throughout the paper index b ∈ {1, . . . , B} denotes a buyer and index s ∈ 
 {1, . . . , S} denotes a seller. 
 We consider a situation in which the valuation of every buyer and the cost 
-of every seller is fixed over time. 4 A buyer's valuation of a good, V b , is the 
+of every seller is fixed over time. 
+4 A buyer's valuation of a good, V b , is the 
 amount, which is received when a unit is bought. A seller's cost, C s , is the 
 amount, which is paid when a unit is sold. It is assumed that each trader knows 
 his own valuation/cost, but neither the exact valuations and costs of others, nor 
@@ -167,32 +189,42 @@ the arrow shows the range of equilibrium prices </p>
 
 <p>Traders care about payoff defined as their surplus obtained from trade, i.e., </p>
 
-<p>U b ( p) = </p>
-
-<p>
+<p>U b ( p) = 
 V b − p if buyer b traded at price p 
 0 
 if buyer b did not trade , </p>
 
-<p>U s ( p) = </p>
-
-<p>
+<p>U s ( p) = 
 p − C s if seller s traded at price p 
 0 
 if seller s did not trade . </p>
 
 <p>(2.1) </p>
 
-<p>Given the set of valuations, {V b } B 
-b =1 , and costs, {C s } S 
-s=1 , one can build step-
+<p>Given the set of valuations, {V b } </p>
+
+<p>B </p>
+
+<p>b =1 , and costs, {C s } </p>
+
+<p>S </p>
+
+<p>s=1 , one can build step-
 wise aggregate demand and supply curves, whose intersection determines the 
 competitive equilibrium. This outcome will serve as a theoretical benchmark, 
 as it maximizes the mutual benefits from trade. More specifically, the intersec-
-tion of demand and supply determines a unique 5 equilibrium quantity q  *  ≥ 0 
-and, in general, an interval of the equilibrium prices [ p  *  
-L , p  *  
-H ]. This situation 
+tion of demand and supply determines a unique 
+5 equilibrium quantity q 
+ *  ≥ 0 
+and, in general, an interval of the equilibrium prices [ p </p>
+
+<p> *  </p>
+
+<p>L , p </p>
+
+<p> *  </p>
+
+<p>H ]. This situation 
 is illustrated in Fig. 1 for two different market environments. The units, which 
 would yield a nonnegative payoff if traded at an equilibrium price, are called 
 intramarginal (in the figure they are to the left of the equilibrium quantity). 
@@ -231,46 +263,45 @@ by varying β, we can demonstrate that the allocative efficiency of the CDA
 depends on the environment. 
 While in the first environment the seller has a higher market power than the 
 buyers, in the second environment this asymmetry is removed and the number 
-of buyers and sellers is equal to N. For a given N the set of valuations is 
-k </p>
+of buyers and sellers is equal to N. For a given N the set of valuations is </p>
 
-<p>N </p>
-
-
-
-<p>and the set of costs is 
-k−1 </p>
-
-<p>N </p>
-
-<p>
-with integer k ∈ [1, N]. Consequently the demand 
-and supply schedules are symmetric and the equilibrium quantity is given by 
+<p>k 
 N </p>
 
-<p>2 </p>
+<p>and the set of costs is </p>
 
-<p>
-. 6 We call this symmetric environment with N buyers and N sellers "SN-
-environment". When N is even, there exists a unique equilibrium price 1 </p>
+<p>k−1 
+N </p>
 
-<p>2 </p>
+<p>with integer k ∈ [1, N]. Consequently the demand 
+and supply schedules are symmetric and the equilibrium quantity is given by </p>
+
+<p>N 
+2 </p>
+
+<p>. 
+6 We call this symmetric environment with N buyers and N sellers "SN-
+environment". When N is even, there exists a unique equilibrium price </p>
+
+<p>1 
+2 </p>
 
 <p>, and 
-when N is odd, the equilibrium price range is given by 
-N−1 </p>
+when N is odd, the equilibrium price range is given by </p>
 
-<p>2N </p>
+<p>N−1 
+2N </p>
 
-<p>, N+1 </p>
+<p>, </p>
 
-<p>2N </p>
+<p>N+1 
+2N </p>
 
-<p>
-. Figure 1b 
+<p>. Figure 1b 
 shows the "S5-environment" which we study in this paper. 
 The last environment we consider is depicted in Fig. 1c. There are 5 buyers 
-and 5 sellers in this market, 4 IMBs and 4 IMSs. 7 This example is similar to 
+and 5 sellers in this market, 4 IMBs and 4 IMSs. 
+7 This example is similar to 
 the previous environment for N = 5 but less symmetric. Furthermore, it is one 
 of the configurations for which Arifovic and Ledyard (2007) study the effect 
 of the transparency in the market organized as a call auction, so that a direct 
@@ -280,11 +311,12 @@ AL, henceforth. </p>
 <p>2.2 Continuous double auction </p>
 
 <p>In our model in every trading session the market is operating as the Continuous 
-Double Auction (CDA) with an order book. 8 This is a market mechanism for 
+Double Auction (CDA) with an order book. 
+8 This is a market mechanism for 
 a-synchronous trading, common to the stock exchanges nowadays. If a newly 
 submitted order finds a "matching order," it is satisfied at the price of this </p>
 
-<p>6 The ceiling function, x, gives the smallest integer greater than or equal to x. 
+<p>6 The ceiling function, x , gives the smallest integer greater than or equal to x. 
 7 The valuations/costs are V 1 = 1, V 2 = 0.93, V 3 = 0.92, V 4 = 0.81, V 5 = 0.5, C 1 = 0.3, C 2 = C 3 = 
 0.39, C 4 = 0.55 and C 5 = 0.66. First four buyers and sellers are intramarginal. The equilibrium 
 quantity is 4 and equilibrium price range is [0.55, 0.66). 
@@ -301,7 +333,8 @@ matching order with which the trade occurs is selected according to the price-
 time priority. If the submitted order does not find a matching order, it is stored 
 in the book and deleted only at the end of the session when the book is cleared. 
 We assume that every agent submits only one order (bid or ask depending 
-on the agent's type) during a trading session. 9 The agents determine their 
+on the agent's type) during a trading session. 
+9 The agents determine their 
 orders before the session starts. Consequently, they cannot condition their 
 order on the state of the book. The sequence of traders' arrivals to the market 
 is randomly permuted for every session. At the end of each trading session the 
@@ -323,7 +356,8 @@ only on submitted orders but also on the sequence of their trade. </p>
 
 <p>What is the role of a market mechanism in determining market efficiency? A 
 benchmark for efficiency of a market mechanism might be given by its per-
-formance when the traders are Zero Intelligent (ZI). 10 Every trading period 
+formance when the traders are Zero Intelligent (ZI). 
+10 Every trading period 
 ZI traders submit random orders, drawing them independently from a uniform 
 distribution. Gode and Sunder (1993) distinguish between constrained and 
 unconstrained ZI traders. Unconstrained ZI traders can draw orders from a 
@@ -362,12 +396,10 @@ expected allocative ef f iciency under ZI agents with IR converges to </p>
 
 <p>E = 
 1 
-2 </p>
-
-<p>
-1 + β 3 + β 2 − β </p>
-
-<p>, 
+2 
+1 + β 
+3 + β 
+2 − β , 
 (2.2) </p>
 
 <p>the expected allocative ef f iciency under ZI agents without IR converges to </p>
@@ -376,8 +408,7 @@ expected allocative ef f iciency under ZI agents with IR converges to </p>
 
 <p>Proof See Appendix. </p>
 
-<p>
-Consider first the IR case. The solid line in Fig. 2a shows the theoretical 
+<p>Consider first the IR case. The solid line in Fig. 2a shows the theoretical 
 efficiency (Eq. 2.2) as a function of β. Its U-shape reflects a trade-off between 
 the probability of inefficient transaction and the size of inefficiency. The 
 probability of a transaction with an EMB increases in β, while the losses of 
@@ -455,7 +486,9 @@ ciency E is compared with average efficiency for finite number of traders. Avera
 (1997) reproduced below </p>
 
 <p>E = 1 − (1 − β) 
-β + β 2 </p>
+β + β </p>
+
+<p>2 </p>
 
 <p>2(1 − β(1 − β)) 
 , </p>
@@ -584,12 +617,12 @@ tionary mechanism of individual learning, which reinforces successful and dis-
 courages unsuccessful strategies. 
 In our setting, an observed action of every agent during a trading round is 
 one submitted order. The evolution of the orders is modeled by the Individual 
-Evolutionary Learning (IEL) algorithm which involves the following steps: 
-• specification of a space of strategies (or messages); 
-• limiting this space to a small pool of strategies for every trader; 
-• choosing one message from the pool on the basis of its performance </p>
+Evolutionary Learning (IEL) algorithm which involves the following steps: </p>
 
-<p>measure; 
+<p>• specification of a space of strategies (or messages); 
+• limiting this space to a small pool of strategies for every trader; 
+• choosing one message from the pool on the basis of its performance 
+measure; 
 • evolving the pool using experimentation and replication. </p>
 
 <p>IEL is based on an individual (not social) evolutionary process. It is well 
@@ -663,10 +696,16 @@ CL treatment the agents are informed only about some price aggregate, say </p>
 
 
 
-<p>average price, from the previous session, P av 
-t . If no transaction occurred during 
-this session, P av 
-t is set to an average price of the most recent past session for 
+<p>average price, from the previous session, P </p>
+
+<p>av </p>
+
+<p>t . If no transaction occurred during 
+this session, P </p>
+
+<p>av </p>
+
+<p>t is set to an average price of the most recent past session for 
 which at least one transaction had occurred. Note that the availability and use 
 of the information from the book may be attributed either to market design, 
 e.g., openness of the market or costs of the access to the book, or to individual 
@@ -678,62 +717,73 @@ they arrive at the market. Under the CL treatment this whole set is not known
 to traders: they know only their own bids and asks as well as an average price. 
 Thus, under the CL treatment the information sets of buyers and sellers at the 
 end of session t are given as 
-I CL 
-b ,t = </p>
+I </p>
 
-<p>
-b b ,t , P av </p>
+<p>CL </p>
 
-<p>t </p>
+<p>b ,t = b b ,t , P </p>
 
-<p>∪ I CL </p>
+<p>av 
+t </p>
 
-<p>b ,t−1 , I CL 
-s,t = </p>
+<p>∪ I </p>
 
-<p>
-a s,t , P av </p>
+<p>CL </p>
 
-<p>t </p>
+<p>b ,t−1 , I </p>
 
-<p>∪ I CL </p>
+<p>CL </p>
+
+<p>s,t = a s,t , P </p>
+
+<p>av 
+t </p>
+
+<p>∪ I </p>
+
+<p>CL </p>
 
 <p>s,t−1 . 
 The order book of the past period cannot be reconstructed with this informa-
 tion. Hence, agent can only use average price of the previous session as an in-
-dication for possible realized price given alternative message submitted. 11 We 
+dication for possible realized price given alternative message submitted. 
+11 We 
 assume that under the CL treatment, agents' foregone payoffs are computed as </p>
 
-<p>U b ,t 
-ε b |I CL </p>
+<p>U b ,t ε b |I </p>
 
-<p>b ,t </p>
+<p>CL </p>
 
-<p>= </p>
+<p>b ,t = </p>
 
-<p>V b − P av </p>
+<p>V b − P </p>
 
-<p>t </p>
+<p>av 
+t </p>
 
-<p>if ε b ≥ P av </p>
+<p>if ε b ≥ P </p>
 
-<p>t </p>
+<p>av 
+t </p>
 
 <p>0 
 otherwise 
 , </p>
 
-<p>U s,t 
-ε s |I CL </p>
+<p>U s,t ε s |I </p>
 
-<p>s,t </p>
+<p>CL 
+s,t </p>
 
-<p>= </p>
+<p>= 
+P </p>
 
-<p>P av 
-t − C s if ε s ≤ P av </p>
+<p>av </p>
 
-<p>t </p>
+<p>t − C s if ε s ≤ P </p>
+
+<p>av 
+t </p>
 
 <p>0 
 otherwise 
@@ -748,40 +798,53 @@ We choose this specific mechanism because of its close resemblance to the
 mechanism used in Arifovic and Ledyard (2007). 
 Under the OP treatment, an agent knows the state of the order book at 
 every moment of the previous trading session. Assuming that his arrival time 
-does not change, the agent can find a price of a (notional) transaction, p  *  
-·,t (ε · ), 
+does not change, the agent can find a price of a (notional) transaction, p </p>
+
+<p> *  </p>
+
+<p>·,t (ε · ), 
 for any alternative message ε · and compute his own payoff using Eq. 2.1. Thus, 
 the foregone payoffs under OP treatment are given by </p>
 
-<p>U b ,t 
-ε b |I OP </p>
+<p>U b ,t ε b |I </p>
 
-<p>b ,t </p>
+<p>OP </p>
 
-<p>= </p>
+<p>b ,t = </p>
 
-<p>V b − p  *  
-b ,t (ε b ) if order ε b of buyer b transacts 
+<p>V b − p </p>
+
+<p> *  </p>
+
+<p>b ,t (ε b ) if order ε b of buyer b transacts 
 0 
 otherwise 
 , </p>
 
-<p>U s,t 
-ε s |I OP </p>
+<p>U s,t ε s |I </p>
 
-<p>s,t </p>
+<p>OP 
+s,t </p>
 
-<p>= </p>
+<p>= 
+p </p>
 
-<p>p  *  
-s,t (ε s ) − C s if order ε s of seller s transacts 
+<p> *  </p>
+
+<p>s,t (ε s ) − C s if order ε s of seller s transacts 
 0 
 otherwise 
 , </p>
 
-<p>with corresponding information sets I OP 
-b ,t , I OP 
-s,t ⊂ I t . </p>
+<p>with corresponding information sets I </p>
+
+<p>OP </p>
+
+<p>b ,t , I </p>
+
+<p>OP </p>
+
+<p>s,t ⊂ I t . </p>
 
 <p>11 Another plausible possibility is to consider the closing price of the day. This modification does 
 not influence our qualitative results. </p>
@@ -797,16 +860,10 @@ based upon foregone payoffs from the previous period. For example, for buyer
 b the selection probability of each particular message ε b ,t+1 from pool B b ,t+1 
 is computed as </p>
 
-<p>π b ,t+1 
-ε b ,t+1 
-= 
-U b ,t 
-ε b ,t+1 |I t </p>
+<p>π b ,t+1 ε b ,t+1 = 
+U b ,t ε b ,t+1 |I t </p>
 
-
-
-<p>
-ε∈B b ,t+1 </p>
+<p>ε∈B b ,t+1 </p>
 
 <p>U b ,t (ε|I t ) 
 , 
@@ -814,8 +871,11 @@ U b ,t
 
 <p>where I t is an information set, which varies depending on the type of market. 
 Under IR all messages have non-negative performances. This guarantees that 
-Eq. 3.2 gives a number between 0 and 1. 12 
-Other specifications for selection probabilities are also possible. Popular 
+Eq. 3.2 gives a number between 0 and 1. </p>
+
+<p>12 </p>
+
+<p>Other specifications for selection probabilities are also possible. Popular 
 choices in the literature are discrete choice models (probit or logit type). The 
 logit probability model is popular, for example, in modeling the individual 
 learning in the literature on financial markets with heterogeneous agents 
@@ -1044,40 +1104,37 @@ the GS-environment. </p>
 
 <p>We explain this result as follows. Consider the rule for the foregone 
 payoffs (Eq. 3.1), which agents use in their learning procedure. Under the 
-GS-environment there is only one price during the trading session, p t = P av 
-t . 
+GS-environment there is only one price during the trading session, p t = P </p>
+
+<p>av </p>
+
+<p>t . 
 After this price is realized each buyer (seller) receives the same nonnegative 
 payoff for any allowed message above (below) p t and zero payoff for all 
 other messages. Suppose now that the pool of every agent consists only of his 
 valuations/costs, and that one of the agents, say an EMB, has a mutant strategy, 
-ε 
-b &lt; β, in his pool. Observe, that for any transaction price p the foregone 
+ε b &lt; β, in his pool. Observe, that for any transaction price p the foregone 
 payoff of the mutant is no larger than the foregone payoff of the incumbent 
-message, β. Indeed, when p ∈ (ε 
-b , β), the payoff of the mutant is 0, and the </p>
+message, β. Indeed, when p ∈ (ε b , β), the payoff of the mutant is 0, and the </p>
 
 <p>Efficiency of continuous double auctions under individual evolutionary learning </p>
 
 
 
 <p>payoff of the incumbent is β − p &gt; 0. For every other price the payoffs are the 
-same, 0 for p ≥ β and β for p ≤ ε 
-b . Hence, the mutant cannot increase the 
+same, 0 for p ≥ β and β for p ≤ ε b . Hence, the mutant cannot increase the 
 probability of its presence in the pool in the subsequent periods. For instance, 
 until no new mutations to the initial profile occur, the transaction price can 
-be 13 1, β, ε 
-b , or 0. In all these cases all the messages in the EMB's pool (i.e., β 
-and ε 
-b ) receive the same payoffs and the mutant is expected to occupy exactly 
+be 
+13 1, β, ε b , or 0. In all these cases all the messages in the EMB's pool (i.e., β 
+and ε b ) receive the same payoffs and the mutant is expected to occupy exactly 
 one place in the pool after the replication. 
 Furthermore, the mutant must eventually leave the pool after a mutated 
-message ε ∈ (ε 
-b , β) enters the pool of the same or other trader. At a period, 
+message ε ∈ (ε b , β) enters the pool of the same or other trader. At a period, 
 when this message determines the transaction price (such period comes about 
 with probability 1, since every sequence of traders' arrival has equal, non-zero 
 probability), the incumbent message β of our EMB receives higher payoff 
-than the mutant message ε 
-b . The mutant does not survive the replication 
+than the mutant message ε b . The mutant does not survive the replication 
 stage. In case if the message ε belongs to the pool of the same trader, this 
 new mutant may "replace" the old mutant in the pool. The same reasoning 
 implies, however, that the new mutant will also be replaced in the long-run 
@@ -1090,18 +1147,18 @@ Result 1 has the following consequence for the efficiency. </p>
 <p>Corollary 1 Under the conf iguration in Result 1 the price oscillates in the range 
 [0, 1], and the expected ef f iciency is given by </p>
 
-<p>E CL = 
-4 + </p>
+<p>E 
+CL = 
+4 + 3 + n 
+2 (1 + β) </p>
 
-<p>3 + n 2 (1 + β) 
-2(n + 1)(n + 2) 
+<p>2(n + 1)(n + 2) 
 . 
 (4.1) </p>
 
 <p>Proof See Appendix. </p>
 
-<p>
-When number of agents n → ∞ the expression 4.1 converges to (1 + β)/2, 
+<p>When number of agents n → ∞ the expression 4.1 converges to (1 + β)/2, 
 shown by a solid line in Fig. 4a. Notice that the evolution of submitted orders in 
 the CL treatment (see Figs. 5c and 6c) is not fully consistent with Result 1 due 
 to persistent experimentations. A noise due to experimentation is especially 
@@ -1127,7 +1184,9 @@ be "sustained" in the sense that any single mutant message added to this
 profile will be replaced by the message from the initial profile. There is a small 
 probability, however, that a chain of mutations will force agents to jump out of 
 this profile and coordinate on a similar homogeneous profile but with another 
-price from the equilibrium range. 14 </p>
+price from the equilibrium range. </p>
+
+<p>14 </p>
 
 <p>Result 2 For any price p from the range (β, 1) the strategy prof ile under which 
 the pools of the IMB and the IMS consist of messages equal to this price 
@@ -1139,25 +1198,17 @@ homogeneous pools with messages equal to p ∈ (β, 1) . Given these pools, the
 realized price is p. Assume that during the experimentation stage a mutant 
 message is introduced in the pool of the IMB and/or the IMS. Consider 
 the replication stage immediately after the experimentation. For any mutant 
-message of the IMS, ε 
-s , such that ε 
-s &gt; p, no counterfactual transaction is 
+message of the IMS, ε s , such that ε s &gt; p, no counterfactual transaction is 
 possible implying 0 foregone payoff for the mutant. Similarly, any mutant 
-message of the IMB, ε 
-b , such that ε 
-b &lt; p, will have 0 foregone payoff. Hence, 
+message of the IMB, ε b , such that ε b &lt; p, will have 0 foregone payoff. Hence, 
 these mutants will not survive the replication stage, and will not be present in 
-the pools during the subsequent session. In case, when ε 
-s &lt; p or ε 
-b &gt; p, the 
+the pools during the subsequent session. In case, when ε s &lt; p or ε b &gt; p, the 
 sequence of traders' arrival in the previous (pre-mutation) session becomes 
 important. With probability 1/2 the IMB arrived before the IMS. In this case 
 the counterfactual order of the IMB determines the counterfactual transaction 
-price. Hence, the mutant of the IMB, ε 
-b , will yield a smaller foregone payoff 
+price. Hence, the mutant of the IMB, ε b , will yield a smaller foregone payoff 
 than the original message, p, and will be eliminated at the replication stage. 
-The mutant of the IMS, ε 
-s , attains the same level of the foregone payoff as 
+The mutant of the IMS, ε s , attains the same level of the foregone payoff as 
 the original message. The analysis of the case when the IMS arrived before the 
 IMB is analogous. 
 We have shown that every mutation can, on average, occupy less than one 
@@ -1184,24 +1235,22 @@ There is a chance that the original pool will be completely abandoned
 through a chain of mutations, so that the return to the original profile becomes 
 impossible. However, this chance is very small. Through the analysis of all 
 possible outcomes, one can find the most probable scenario for such profile 
-jump. Let us assume that the original mutant of the seller, ε 
-s &lt; p, that survived 
+jump. Let us assume that the original mutant of the seller, ε s &lt; p, that survived 
 the replication stage, was selected as an order for one of the subsequent 
 sessions and determined the transaction price of this session. Under these 
-circumstances, the IMB can generate a mutant ε 
-b ∈ (ε 
-s , p) surviving the repli-
+circumstances, the IMB can generate a mutant ε b ∈ (ε s , p) surviving the repli-
 cation stage. If in the next period this mutant is submitted as an order of the 
 IMB along with the incumbent message p of the IMS, there will be no trade. 
 Now all the messages and mutations, which can facilitate counterfactual trade, 
 e.g. increasing bid and decreasing ask, will receive relatively high foregone 
 payoff and will have a high chance to be selected in the subsequent round. 
 It means that after the following replication messages equal to p or larger will 
-increase their presence in the pool of the IMB, while messages equal to ε 
-s or 
+increase their presence in the pool of the IMB, while messages equal to ε s or 
 smaller will increase their presence in the pool of the IMS. In this way, the IMS 
 may abandon its initial profile. The probability of such chain of events is of the 
-order ρ 2 /J 2 , since two mutations and their choice from the profiles are needed. 
+order ρ 
+2 /J 
+2 , since two mutations and their choice from the profiles are needed. 
 According to Result 2 the IEL can converge to any price within the 
 equilibrium range. The jumps within the equilibrium range may occur with 
 a small probability, but all such "multiple equilibria" are equivalent from the 
@@ -1210,15 +1259,16 @@ efficiency point of view. </p>
 <p>Corollary 2 Under the conf iguration in Result 2 the price is constant and the 
 expected ef f iciency is given by </p>
 
-<p>E OP = 1 </p>
+<p>E 
+OP = 1 </p>
 
 <p>Proof Since the strategy profiles of the IMB and the IMS are constant, the 
 price is also constant. Given the price in the competitive equilibrium range the 
-IMB trades with the IMS and the maximum expected efficiency, E OP = 1, is 
+IMB trades with the IMS and the maximum expected efficiency, E 
+OP = 1, is 
 obtained for any β. </p>
 
-<p>
-This result is consistent with our simulations. For example, in Fig. 6d the 
+<p>This result is consistent with our simulations. For example, in Fig. 6d the 
 strategies of the IMB and IMS converged to the same submitted orders 
 approximately equal to 0.53. Notice that the EMBs never trade in such a </p>
 
@@ -1368,10 +1418,16 @@ the GS-environment. Result 2 still holds. However, under the CL (Figs. 8c
 and 9c) traders' orders converge to their valuations/costs only if the latter fall 
 within the range of price fluctuations. It follows from Eq. 3.1 that the IEL 
 process creates an upward pressure only on those buy orders which lie below 
-average price of the last trading session, P av 
-t , and downward pressure only on 
-those sell orders which lie above P av 
-t . Whereas in the GS-environment only </p>
+average price of the last trading session, P </p>
+
+<p>av </p>
+
+<p>t , and downward pressure only on 
+those sell orders which lie above P </p>
+
+<p>av </p>
+
+<p>t . Whereas in the GS-environment only </p>
 
 
 
@@ -1391,8 +1447,11 @@ stars denote valuations/costs of agents and vertical line shows equilibrium pric
 
 <p>one transaction per session is possible and the "average" price reflecting this 
 transaction fluctuates within the whole range of [0, 1], in the AL-environment 
-the price P av 
-t averages out the individual orders. It leads to smaller range of </p>
+the price P </p>
+
+<p>av </p>
+
+<p>t averages out the individual orders. It leads to smaller range of </p>
 
 <p>Efficiency of continuous double auctions under individual evolutionary learning </p>
 
@@ -1492,7 +1551,8 @@ the efficiency with ZI agents without IR, which equals to β (and is not shown f
 
 <p>Gjerstad and Shachat (2007) argue that one of the key conditions for high 
 allocative efficiency under the ZI traders in Gode and Sunder (1993) are the 
-constraints on individual rationality. 15 In this section we investigate whether 
+constraints on individual rationality. 
+15 In this section we investigate whether 
 the assumption of Individual Rationality plays an important role under the 
 IEL learning. It turns out that, in general, our findings of the long run outcome 
 of the IEL learning mechanism are robust towards a violation of the IR 
@@ -1500,7 +1560,8 @@ constraints by agents. In fact, the behavior violating the IR constraints will
 often lead to messages with negative foregone payoff. Under the IEL the 
 agents have enough intelligence to discard these messages on the replication 
 or selection stage. Nevertheless, occasionally the messages violating IR will be 
-submitted 16 obviously leading to higher price volatility. We are interested also 
+submitted 
+16 obviously leading to higher price volatility. We are interested also 
 in the effect of these messages on efficiency. 
 Figure 10 shows the results of simulation of the GS-environment with n = 3 
 and n = 10 EMBs populated by agents relying on the IEL but without IR. For 
@@ -2044,17 +2105,15 @@ Section 2.1 </p>
 <p>Proof of Proposition 2.1 First, let us consider ZI agents with IR. We have 
 three types of traders: </p>
 
-<p>• one intramarginal buyer (IMB) whose valuation is 1 and whose bid price </p>
-
-<p>is drawn from the uniform distribution on [0, 1]; </p>
+<p>• one intramarginal buyer (IMB) whose valuation is 1 and whose bid price 
+is drawn from the uniform distribution on [0, 1]; </p>
 
 <p>Efficiency of continuous double auctions under individual evolutionary learning </p>
 
 
 
-<p>• one intramarginal seller (IMS) whose valuation is 0 and whose ask price is </p>
-
-<p>drawn from the uniform distribution on [0, 1]; 
+<p>• one intramarginal seller (IMS) whose valuation is 0 and whose ask price is 
+drawn from the uniform distribution on [0, 1]; 
 • an infinite number of extramarginal buyers (EMBs) whose valuations are 
 β and whose bid prices are drawn from the uniform distribution on [0, β]. </p>
 
@@ -2072,9 +2131,10 @@ probability of each outcome and its allocative efficiency. Below we distinguish
 between two equiprobable outcomes (the IMB arrives before the IMS and vice 
 versa) and then compute the (conditional) probabilities of every single event. </p>
 
-<p>1. the IMB arrives before the IMS. This event occur with probability 1 </p>
+<p>1. the IMB arrives before the IMS. This event occur with probability </p>
 
-<p>2 </p>
+<p>1 
+2 </p>
 
 <p>. The 
 further development depends on whether the IMB outbids the EMB with 
@@ -2121,39 +2181,37 @@ trades with the IMS; efficiency is 1. </p>
 
 <p>E = 
 1 
-2 </p>
-
-<p>
-β 3 + 
-(1 − β) 2 </p>
-
-<p>2 
-+ β(1 − β) </p>
-
-<p>
-+ 
-1 
-2 </p>
-
-<p>
-β 2 + 
-(1 − β) 2 </p>
+2 
+β 
+3 + 
+(1 − β) </p>
 
 <p>2 </p>
 
-<p>
+<p>2 
++ β(1 − β) + 
+1 
+2 
+β 
+2 + 
+(1 − β) </p>
+
+<p>2 </p>
+
+<p>2 
 = 
 1 
 2 
-(1 + β 3 + β 2 − β) </p>
+(1 + β 
+3 + β 
+2 − β) </p>
 
 <p>Second, we consider the case of ZI agents without IR. In this case there is 
 no difference in bidding behavior between the IMB and EMB traders. Thus, 
 when the number of the EMB traders converges to infinity with probability 1, 
 one EMB will trade. Such trade delivers efficiency β. </p>
 
-<p>
-Proof of Corollary 1 A transaction price in the CDA is determined using 
+<p>Proof of Corollary 1 A transaction price in the CDA is determined using 
 price/time priority and highly depends on the order of the agents' arrival. 
 Given that agents bid/ask their valuations/costs and the fact the order of their 
 arrival is randomly permuted, price vary for different trading sessions and, 
@@ -2180,8 +2238,7 @@ is 1, in this situation the price is 1. </p>
 
 
 
-<p>
-Efficiency of continuous double auctions under individual evolutionary learning </p>
+<p>Efficiency of continuous double auctions under individual evolutionary learning </p>
 
 
 

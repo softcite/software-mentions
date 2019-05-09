@@ -1,0 +1,645 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1257%2Fjep.4.1.99" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T03:58+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<text xml:lang="en">
+<p>S </p>
+
+<p>imulation models, now widely used in the physical sciences, can also help 
+economists in depicting the actions and interactions of individuals and firms 
+through time. Such models can be built and run on any personal computer. 
+They can illuminate a wide variety of issues that are difficult to analyze with an 
+economist's conventional tool-kit and are especially useful in studying dynamic 
+processes. Microsimulation models allow the analyst to produce simulated aggregate 
+time series that are rigorously consistent with the assumptions made about behavior on 
+the micro level. Thus, simulations provide a means of bridging the micro-macro split 
+in economic analysis. 
+This article provides an introduction to microsimulation: how it works, how to do 
+it, its potential, and its drawbacks. It then allows readers, even those with no 
+experience in computer programming, to work through the details of a simple 
+microsimulation model. Readers can put this model on their PCs, watch it run 
+through its paces, and experiment with their own modifications. With this model as an 
+example, it should be fairly easy to create programs for new models on other subjects 
+for use in theoretical exploration, empirical research, or classroom demonstrations. 
+The demonstration model I present depicts the experience of individual workers 
+during recession and recovery in the labor market. As the model runs, its internal 
+"Census Bureau" performs surveys on the microlevel, and sums up to macrolevel 
+variables. The model is simple, but it has some interesting applications. After 
+explaining how to set it up, I use it to explore the effect of unemployment insurance 
+on the level of unemployment, and to point up a common fallacy in current labor 
+market literature. </p>
+
+<p>100 </p>
+
+<p>Journal of Economic Perspectives </p>
+
+<p>A diskette containing the program for the model discussed in this article, plus programs for the 
+microsimulation models of Pryor (1973), Nelson, Winter, and Schuette (1976), and some others is 
+available free from Member Services, Inter-university Consortium for Political and Social Research, 
+University of Michigan, P.O. Box 1248, Ann Arbor, MI 48106. However, you do not need the 
+diskette to follow the discussion in this article, or to try out the program it presents on a PC. </p>
+
+<p>Constructing a Computer-Simulated Scenario and 
+Watching It Play Out </p>
+
+<p>A microsimulation of an economic activity is constructed by assembling an 
+appropriate cast of characters, and fitting out each individual person or firm with a 
+set of behavioral rules. An actor in the simulation will "exist" in the computer's 
+memory space as a collection of pieces of information, rather like the record of an 
+actual person's account in the computer of a brokerage house, which is updated each 
+time a transaction is made. The analyst may derive the behavioral rules for the actors 
+from a theory depicting a utility-maximizing process of choice, from a regression study 
+on Census data, from a laboratory experiment with human subjects, or may simply 
+make up rules that seem reasonably realistic or that are merely serviceable to the 
+analytic task at hand. Wherever the rules come from, all the functional forms and 
+parameter values must be specified for each run of the simulation on the computer. 
+The analyst must also set highly specific ground rules for the simulated interac-
+tions of the individuals (or firms) with each other. Interactions are recorded as they 
+occur. Numerical reports summarizing the action are issued at suitable intervals, as 
+Dow Jones indexes are issued during the trading day, or unemployment rates are 
+issued each month. The analyst uses the reports to try to make generalizations about 
+how the specified micro situation, as well as any exogenous events, have affected the 
+simulated macro outcomes. 
+Microsimulation models have a number of advantages over conventional meth-
+ods used by economists. One advantage is the explicitness with which the interactions 
+on the micro level can be depicted. Conventional methods of economic analysis often 
+provide cogent derivations of individuals' contingency plans, but tend to be weak in 
+describing the process that allows all the contingency plans to mesh together. Highly 
+mathematical accounts of the derivation of individuals' behavior rules are not 
+infrequently followed by vague verbal descriptions of what goes on when the individu-
+als come together and interact. This vagueness can lead to error, as has been the case 
+in the labor market issues discussed below. 
+Simulation can be especially helpful in dealing with problems of information and 
+expectations. The model builder can specify in a precise way the information the 
+actors come to have as the action proceeds, the expectations they form, and how they 
+react to that knowledge and those expectations. The actors can be allowed to be led 
+into mistakes by their decision rules, suffer from their mistakes, and even learn from 
+them. </p>
+
+<p>Barbara R. Bergmann 101 </p>
+
+<p>Another advantage of simulation models is that they can be set up to be 
+completely recursive, as real life is. The elimination of simultaneous equations allows 
+us to get results from a simulation model without having to go through a process of 
+solution. Instead one gets the computer to play out the scenario and analyzes the 
+numerical outcome, which may or may not achieve an equilibrium. Models that don't 
+have to be solved can be changed or added to freely and easily, as exemplified below. 
+Nonlinearities, switches of regime, and other complexities are easily accommodated. 
+A number of small-scale simulation models have been built to explore subjects 
+that conventional methods handle only awkwardly, if at all. For example, Nelson, 
+Winter, and Schuette (1976) modeled the spread and effects of technical change. 
+Individual firms were depicted discovering and trying out new modes of production, 
+or imitating successful competitors. The hiring, capital purchases, and profits of every 
+firm at each moment in time were kept track of, and parameter values were found 
+that allowed the model's simulated macrodata to track U.S. macrodata on income and 
+productivity. 
+In other examples, Bergmann (1973) simulated U.S. poverty rates by tracking 
+the incomes of simulated individuals as unemployment rates and wage rates changed 
+in accordance with historical patterns. Pryor (1973) looked at the effect of marriage 
+and inheritance patterns on income distribution through many generations. He 
+simulated individuals picking spouses, accumulating assets, having children, dying, 
+and leaving an inheritance to one or more of the children. His model displays the 
+resulting trends in the degree of inequality by computing simulated time series of Gini 
+coefficients based on the simulated microdata. Pryor's model can be embodied in a 
+program of 75 lines. Large-scale microsimulation models that sum to national income 
+accounts have been built by Eliason for Sweden (1976), by Adelman and Robinson 
+for Korea (1978), and by Bennett and Bergmann for the United States (1986). 
+For studies of policy, simulation models offer an opportunity to embed into a 
+formal model a realistic description of how a regulation, tax, or subsidy affects the 
+economic actors. (See Orcutt, Caldwell and Wertheimer, 1976; Haveman and Hollen-
+beck, 1980). Our delineation here of unemployment insurance shows how a govern-
+ment program with nonlinear rules can easily be added to a simulation model with a 
+very few additional computer instructions. Simulation models can also serve as a 
+theoretical framework for empirical studies, just as conventional models can. Data can 
+be used to estimate a model's parameters and to gauge its goodness of fit (Bergmann, 
+1974; 1989). 
+Of course, simulation models have their drawbacks. When using them, the 
+analyst has to give up the formal or informal deduction used in conventional models 
+and has to rely instead on inductive analysis of numerical results. This may be less 
+certain and is certainly less entertaining. Drawing qualitative generalizations from the 
+numerical results is fraught with the possibility of error. The very ease with which new 
+detail can be added to simulation models poses a danger. When the models grow more 
+complex, the job of checking their cogency, of rooting out bugs, and interpreting and 
+generalizing from their results becomes more problematical. </p>
+
+<p>102 Journal of Economic Perspectives </p>
+
+<p>A simulation study can explore what happens when the actors follow optimizing 
+behavioral rules, as in Fair (1974). But simulations can just as easily explore what 
+happens when the actors follow rules of thumb which have not been proved out as 
+optimal. Such simulations may seem sleazy to those economists for whom respectable 
+microeconomics is synonymous with solving optimization problems. They fear that 
+simulation opens the door to a loss of quality control in the profession, if the stringent 
+paradigm of mathematical specification and solution for optima is relaxed. 
+However, the way to make an optimum decision is not known in many important 
+economic arenas that deserve economists' attention and analysis. Sometimes the actor 
+does not have the information that economic theory assumes, like a reliable demand 
+curve for one's product, or a good line on what one's competitor is likely to do. 
+Sometimes there is too much information around, and it is difficult to process it all. 
+Sometimes the actor cannot be presumed to know the optimization technique. In such 
+cases, simulated experimentation with the effects of varying rules of thumb may be the 
+nearest possible approach to optimization. Some empirical research (Tversky and 
+Kahneman, 1988; Thaler's columns in this Journal) suggests that human beings are 
+apt to follow rules that produce results that are inferior to those obtained with rules 
+that economists might devise. Where this is the case, simulations of non-optimal but 
+empirically true behavior patterns should yield more realistic predictions than norma-
+tive theories that are empirically false. 
+Obviously, simulation models that depict individuals who endlessly repeat obvi-
+ous mistakes deserve condemnation, and all models can benefit from criticism. But 
+treating the simulation methodology itself as entirely taboo cuts out a lot of valuable 
+possibilities for exploration. Economists need more tools in our kits, not fewer. 
+Let me now turn to an example that will display some of the advantages and 
+disadvantages of the simulation methodology. The reader, after studying it, can draw 
+his or her own conclusions. </p>
+
+<p>An Example of Labor Market Simulation </p>
+
+<p>The labor market makes a good subject for simulation, since the results of the 
+search process of individuals are not easy to represent as functions, or to aggregate. 
+The demand side of the market and the interactions of workers with potential 
+employers, which have been left rather vague in much of the current literature, can be 
+fleshed out. 
+Much conventional analysis of the labor market concentrates on the individual 
+unemployed worker who searches for a job and finds an ample array of vacancies for 
+his or her consideration. In each period, the utility-maximizing worker weighs the 
+benefits of taking one of these available jobs at the offered wage against the benefits of 
+remaining unemployed. Unemployed people are then thought of, following Lucas and 
+Rapping (1969), as a group of workers who could have taken jobs at some wage or </p>
+
+<p>Micro-to-Macro Simulation 103 </p>
+
+<p>other, but chose otherwise. Anything that increases the propensity of some workers to 
+refuse employment is viewed as increasing the number of unemployed. 
+The microsimulation approach presented here seeks to develop a dynamic 
+portrayal of the action on the microeconomic level that characterizes the behavior of 
+individual workers but also the behavior of employers, rejecting the usual implicit 
+assumption of unlimited job availability. The model also sets a protocol for the 
+interactions of employers and unemployed workers. After these steps have been taken, 
+one can run the simulation program, and watch unemployed workers searching for 
+jobs, interacting with employers who have empty job slots they want to fill. 
+An unemployment insurance system is added to this simulated labor market, 
+complete with eligibility requirements and limited-time benefits. Then, by running the 
+model again, we can see what difference the unemployment insurance program makes 
+to the unemployment rate. To preview the results, the simulation will show that, 
+contrary to the claims of conventional analysts, refusals of job offers by stipend-receiv-
+ing malingerers does not in all circumstances increase the number of unemployed 
+people. The simulation avoids a narrow focus on the isolated choice of a single worker, 
+thus bringing to visibility a point that conventional analysts tend to lose sight of as 
+they verbally pass from the micro to the macro: that the refusal of one worker to take 
+a particular job allows another worker a shot at that vacancy. </p>
+
+<p>The Simulation Technique 
+The core of the model is an extremely simple representation of worker move-
+ments into and out of jobs. It is written in <rs type="software">BASIC</rs>, a close analogue to <rs type="software">FORTRAN</rs>. 
+Most PC owners have access to the software necessary to build and run BASIC 
+programs. 
+In this simple model, workers will be homogeneous as to skills and other 
+characteristics, and all will be equally acceptable to employers for all jobs. Considera-
+tions relating to wage levels, either on the supply side or the demand side, will be 
+pushed under the rug. (The significance of this formulation is discussed below.) The 
+number of jobs that employers want to fill each week will be exogenously determined: 
+fed into the computer as data. Workers, after a brief period of search, will take any 
+job that is offered. The size of the labor force will be constant. If the analyst desires a 
+more realistic model, all of these features can be changed quite easily. 
+Each "week," the actors in the model carry out a round of simulated activities. 
+The micro-level scenario for a week is as follows: First, employers decide on the stock 
+of jobs they wish to have filled this week. Some workers will be laid off, others will 
+quit. The workers to be separated from jobs are picked at random from the ranks of 
+the employed to join the ranks of the unemployed. After the separations have 
+occurred, the unemployed (including some separated in previous periods who have not 
+yet taken jobs) search for job vacancies; some are chosen at random to come to an 
+interview, and some of these agree to become employed. At the end of the weekly 
+activity, the "Census Bureau" surveys the situations of all the simulated individuals. It 
+notes whether they are in a state of unemployment, and how long that state has </p>
+
+<p>104 Journal of Economic Perspectives </p>
+
+<p>persisted. It "publishes" simulated macro-data based on its survey: the unemployment 
+rate and the average of unemployment durations. 
+The individual workers and their activities are "depicted" by the information in 
+the computer's memory spaces. This model will use just two pieces of information 
+about each of them. IEMPST(I) is the current employment status of the Ith worker, 
+which takes the value 0 if the worker is unemployed and the value 1 if the worker is 
+employed. IDATE(I) is the week the Ith worker last moved from employment to 
+unemployment. For example, if the 4th worker makes such a move in the 3rd week of 
+the simulation, IDATE(4) is at that point set equal to 3. In the course of the 
+simulation, the worker's activities take the form of changes in those values. A worker 
+can be "observed" by the analyst at any point in simulated time by asking the 
+computer for a printout of the current value of these two variables for that worker. </p>
+
+<p>1 </p>
+
+<p>One device used in many simulation programs, including this one, is the 
+introduction of an element of randomness to the action. For example, in depicting 
+labor turnover, individual workers are picked at random to leave their jobs and 
+become unemployed, rather than being chosen by some systematic rule, as might be 
+the case in a more complex model. 
+2 BASIC provides the computer with a routine for </p>
+
+<p>the computation of random numbers with uniform distribution between 0 and 1. 
+Whenever the variable RND appears in an instruction the computer is executing, a 
+new random number is computed, and RND takes on the value of that number. 
+The variable names used in the BASIC program that performs the simulation are 
+listed in Table 1, and the program itself is listed in Table 2. Each line of the program 
+is an instruction, or a set of instructions to the computer. 
+3 The beginning of the </p>
+
+<p>program is devoted to computer setup, so it is more interesting to skip down and 
+examine first the lines of the program which arrange for some individuals to move 
+from employment to unemployment. 
+Lines 180-210 of the program pick out a particular employed worker and 
+change that worker's status to unemployed: </p>
+
+<p>180 ICHOSE = RND*LABFOR + .5 [A random integer between 1 and LABFOR is 
+generated and stored in the memory location designated to hold the value for </p>
+
+<p>1 Obviously, for a more detailed model it would be useful to depict additional characteristics of the 
+individual actors. In a labor market model, each individual's race, sex, skill, experience, current reservation 
+wage, and so on, might be kept track of. Initial values for some of these characteristics might be imported 
+from a (real) census database, as pioneered by Orcutt (1960). 
+2 Other assumptions might be implemented. For example, those more recently hired, or those marked as 
+having low skills might be given a relatively high chance of leaving. In a model by Nichols (1980) in which 
+jobs and workers are heterogeneous, quits are motivated when workers find out about higher-wage openings 
+for which they consider themselves competent. 
+3 Some lines have several instructions, separated by the symbol ":", as in line 70. The computer performs 
+instructions one after the other in the order they appear, unless directed elsewhere by a GOTO, as in line 
+190. Repetition may be called for, as in line 130, which calls for 69 repetitions of the instructions between 
+130 and 410. Each variable has a memory space associated with it that stores its current value. Almost all 
+instructions tell the computer to change the value recorded in a single memory space. </p>
+
+<p>Barbara R. Bergmann 105 </p>
+
+<p>Table 1 </p>
+
+<p>Variables Used in Labor Market Simulation Programs </p>
+
+<p>ICHOSE, which will serve as the ID number of the worker chosen to be moved from 
+employment to unemployment.] </p>
+
+<p>4 </p>
+
+<p>190 IF IEMPST(ICHOSE) = 0 THEN GOTO 180 [If the worker chosen in line 
+180 is already unemployed, go back and chose another. Otherwise, go on to the next 
+instruction.] 
+200 IEMPST(ICHOSE) = 0 [Change the status of the employed worker chosen to 
+"unemployed."] 
+210 IDATE(ICHOSE) = IWEEK [Record the current week, IWEEK, as the date of 
+this worker's most recent transition from employment to unemployment.] 
+The number of workers who move from employment to unemployment in a 
+given week depends on changes in the number of jobs and rates of turnover among 
+workers in jobs. In each week the simulation runs, we want the appropriate number of 
+people to make such a transition in status. That means determining how many times 
+the program should run through lines 180-210, and then instructing the computer to </p>
+
+<p>4 When a random number between 0 and 1, RND, is multiplied by LABFOR, the size of the labor force, 
+and .5 is added, we get a real number X between .5 and LABFOR + .5. When that number is stored in the 
+memory space for ICHOSE, which has been marked as an integer as a result of instruction 10, BASIC 
+rounds it off to the nearest integer. This procedure produces an ICHOSE that is an integer between 1 and 
+LABFOR. </p>
+
+<p>Table 2 
+BASIC program of labor market simulation </p>
+
+<p>Micro-to-Macro Simulation 107 </p>
+
+<p>do the required number of run-throughs. These tasks are accomplished in lines 
+140-170: </p>
+
+<p>140 LEAVS = RATLV*( LABFOR -UN) [The number of persons involved in turnover 
+(other than turnover due to a net change in the number of jobs), LEAVS, is 
+determined. The (exogenously supplied) turnover rate, RATLV, is multiplied by the 
+number of currently occupied job slots, LABFOR-UN.] 
+150 DIFEMP -NEMP(IWEEK) -NEMP(IWEEK -1) [The change since the previous 
+week in the number of job slots employers wish to fill is computed.] 
+160 IF DIFEMP&lt;0 THEN ISEP = LEAVS -DIFEMP ELSE ISEP = LEAVS 
+[The number of persons going from employment to unemployment this week, ISEP, is 
+calculated. ISEP is set at the number of jobs that have been vacated, LEAVS, unless 
+there has been a net loss of jobs. If that has been the case, ISEP is increased (by 
+subtracting a negative number) by the number of jobs lost.] 
+170 FOR K = 1 TO ISEP [Perform the disemployment routine ISEP times.] 
+Then come the four steps already explained above: </p>
+
+<p>180 ICHOSE = RND*LABFOR + .5 
+190 IF IEMPST(ICHOSE) = 0 THEN GOTO 180 
+200 IEMPST(ICHOSE) = 0 
+210 IDATE(ICHOSE) = IWEEK 
+and the instruction that serves to mark the end of the disemployment routine: 
+220 NEXT K </p>
+
+<p>The movement of workers from unemployment into employment is achieved in 
+an analogous way. The appropriate number of hires is calculated (line 230), and the 
+computer instructed to perform that many (lines 240, 290). The people to be 
+"interviewed" by employers are chosen at random from among the unemployed (lines 
+250-260). Employers are programmed to accept any interviewed worker who wants a 
+job. But workers who have become unemployed in the current week refuse any job 
+offer (line 265), so as to have time to feel out the market. Workers unemployed at least 
+a week who are chosen for an interview are programmed to accept any offered job, 
+and if chosen their status is changed (line 270). 
+This depiction of hiring can be thought of as a rudimentary, shorthand account 
+of a search process. Searchers for job openings walk the streets of the business district 
+at random, and the person who happens to be closest to the window in which a sign 
+announcing a vacancy has appeared gets the next interview with the employer who 
+controls the slot. 
+The program starts with a group of lines which feed the computer the informa-
+tion it needs to start the simulation off. The computer memory is set up (lines 10-30). 
+An exogenous macroeconomic time series giving the number of jobs that employers 
+want filled each week is entered (lines 40-60) into NEMP(IWEEK). In the first 19 
+weeks, we assume employers wish to employ 950 workers, out of a constant labor force 
+LABFOR of 1000. Thereafter, desired employment falls steadily for 10 weeks, </p>
+
+<p>108 Journal of Economic Perspectives </p>
+
+<p>remains steady at 895 for 11 weeks, and then rises again to its old value. Any 
+alternative pattern of fluctuations in labor demand that the researcher wants to test, 
+including actual time series data, can be entered instead. 
+In lines 90-120, initial values of IEMPST and IDATE are assigned. 
+5 In line 130, </p>
+
+<p>the simulation is set running, with IWEEK taking on the values 2, 3, 4 . . . 70, in turn. 
+The commands between lines 130 and 410 are performed each week. 
+Following the changes in workers' status that constitute each week's activity, a 
+"census" of the computer memory is taken, so that the information may be printed 
+out on the simulated economy's macro-level variables. The counting of the unem-
+ployed is done on lines 320-330, which tell the computer to add 1 to the current value 
+of UN for each worker found whose value of IEMPST is 0. UTIMAV, the average 
+duration of unemployment (lines 340, 380), is the macro-level analogue of the micro-
+level expression IWEEK-IDATE(I). </p>
+
+<p>6 </p>
+
+<p>On line 350, the computer is ordered to printed the ID number of each 
+unemployed worker, and the length of time the current spell of unemployment has 
+lasted for that worker. Printing out microdata provides a check that the program is 
+working properly and provides some insight into the process being simulated. The 
+macrodata generated are sent to the computer's screen on line 400 and sent to a file 
+called "results" on line 405. </p>
+
+<p>Results of Running the Simulation 
+Given the program, the output of the simulation depends on the sequence of 
+values given to NEMP(IWEEK), the number of employees that employers wish to 
+have on board each week, the turnover rate RATLV, and the sequence of random 
+numbers generated. The macroseries shown in Figure 1 were generated by a single run 
+of the model in Table 2. 
+The fall and subsequent recovery in job availability produces changes in the 
+average length of unemployment spells that are more complex than one might have 
+imagined. As unemployment starts to rise, average duration of uncompleted spells 
+falls for a time. This results from the increase in the number of newly unemployed 
+people, whose spells so far are short. However, unemployed workers experience 
+increasing difficulty in re-entering employment, as more of them are vying for a 
+slightly smaller number of openings. So average duration starts to increase. Durations 
+start to fall only after the recovery in demand has been going on for some time, but 
+then fall rapidly. </p>
+
+<p>5 Better initial conditions on the microeconomic level can be generated by running the simulation for a 
+considerable number of time periods at an appropriate setting of the exogenous variables, and printing the 
+microeconomic information about the actors into a data file at the end of the last period. In subsequent 
+runs, this file can be read in, and can replace lines 90-120. If this technique is used, care must be taken to 
+insure that the macro and micro conditions that one starts off with are consistent. 
+6 Of course, the simulation's Census Bureau can be programmed to print the average length of completed 
+spells. This is a good exercise for the novice. </p>
+
+<p>Barbara R. Bergmann 109 </p>
+
+<p>Figure 1 </p>
+
+<p>Unemployment Rates and Average Durations from the Simulation Model in 
+Table 2 </p>
+
+<p>In this first version of the model, all jobs employers wish to fill are filled, so the 
+unemployment rate has no random element. However, there is a random element to 
+the average duration. The unemployed group is small, and if those people picked at 
+random out of that group to go into jobs have unusually long or short durations, the 
+average duration of those remaining unemployed shifts down or up in response. The 
+reported duration series could be smoothed out by running the simulation repeatedly 
+with different sequences of random numbers and averaging out the duration series or 
+by increasing the size of the population represented. 
+The conventional analysis implicitly assumes that the number of open job slots 
+could increase so as to take care of all unemployed workers, if only the unemployed 
+(or the employers) would bid the wage down to a sufficiently low level. Of course, the 
+simulation could be rewritten to allow for varying wage bids, and for elasticity in the 
+supply of and demand for labor. But in that case, unemployment would occur solely 
+on account of the job refusals induced by line 265, and would reflect only the number 
+of recent separations. Durations would no longer reflect any difficulty in getting 
+reemployed, because such difficulty would have been assumed away. 
+The simulation presented here, by leaving wage offers out of the picture, 
+implicitly casts the unemployed as passive "wage takers" and employers as "wage 
+makers," who do not adjust wages downward when there is unemployment. This may 
+well be more realistic than the conventional approach, and comport better with the 
+"efficiency wage" ideas now current (for example, see the articles collected in Akerlof 
+and Yellen, 1986). </p>
+
+<p>110 Journal of Economic Perspectives </p>
+
+<p>Putting Unemployment Insurance into the Model </p>
+
+<p>When practitioners of the conventional approach tackle the effect of unemploy-
+ment insurance on the rate of unemployment, they concentrate on the effect of 
+unemployment insurance coverage on the duration of unemployment for current 
+individual workers. A utility-maximizing unemployed worker will factor the availabil-
+ity of unemployment benefits into the decision as to whether to take one of the open 
+job slots or to prolong his or her spell of unemployment. Common sense suggests that 
+these substantial stipends motivate some covered workers into prolonging their unem-
+ployment, and regression analysis of microdata on unemployed workers supports this. 
+The implication is then drawn that each person who stays out of work because of 
+the availability of an unemployment insurance stipend thereby constitutes a net 
+addition to the stock of unemployed persons. Those taking this approach and drawing 
+this implication include Feldstein (1973), Hamermesh (1977), Baily (1977), Clark and 
+Summers (1982), and Topel (1985). 
+7 However, the simulation will demonstrate that </p>
+
+<p>this one-for-one increase does not necessarily occur. 
+Our labor market simulation program can be easily amended to add an unem-
+ployment insurance regime, and to study its effects on the level of unemployment. 
+Table 3 shows the new program, which is the old program of Table 2 with some new 
+lines interpolated in bold-faced type. 
+I have created for each worker a new piece of information, ELIG(I), the weeks of 
+unemployment insurance that the Ith worker is currently eligible for. Each week the 
+simulation runs, the value of ELIG is altered for each worker according to the 
+assumed rules governing eligibility. I will assume that an employed worker gets a 
+week of eligibility for each three weeks of employment, to a maximum of 6 weeks. The 
+model can keep track of each worker's value of ELIG by adding four lines: </p>
+
+<p>311 IF IEMPST(IPERS) = 1 THEN ELIG(IPERS) = ELIG(IPERS) + 1/3 </p>
+
+<p>[Each week, an employed worker earns an additional eligibility credit of 1/3 of a 
+week.] 
+312 IF IEMPST(IPERS) = O THEN ELIG(IPERS) = ELIG(IPERS) -1 [Each 
+week, an unemployed person uses up one week of eligibility.] 
+313 IF ELIG(IPERS)&gt;6 THEN ELIG(IPERS) = 6 [Number of weeks of eligi-
+bility cannot exceed 6.] 
+314 IF ELIG(IPERS)&lt;0 THEN ELIG(IPERS) = 0 [Number of weeks of eligi-
+bility cannot be negative.] 
+The next step is to make workers with unemployment insurance coverage pickier 
+about the jobs they will accept. To do so in a simple way, let us make an extreme </p>
+
+<p>7 Many of these authors also discuss the probability that the existence of unemployment insurance raises the 
+unemployment rate in a second way-it motivates employers to conduct temporary layoffs that would not 
+occur without it. A simulation model that took account of that possibility might have to model employers' 
+weighting of the likelihood of laid-off workers taking another job given the expected timing of callbacks, the 
+firm's investment in these workers' training, and the benefits of having a large crew at times of peak load. </p>
+
+<p>Micro-to-Macro Simulation 111 </p>
+
+<p>assumption and suppose that out-of-work persons malinger by refusing any job offer 
+whatever until their remaining eligibility for unemployment insurance is down to one 
+week. An employer may fill a job slot with a non-malingerer, if one can be found. But 
+if the employer cannot fill a job after a certain number of interviews (here set at 10), 
+the job remains vacant until the next period. This can be expressed by adding the 
+following lines: </p>
+
+<p>241 NFAIL = 0 [NFAIL is a variable used to keep track of the number of times the 
+employer tries unsuccessfully to fill the job. At the initiation of the effort to fill each 
+job, NFAIL is set back to zero.] 
+266 IF ELIG(ICHOSE) &lt;2 THEN GOTO 270 [If the chosen worker has less 
+than 2 periods of eligibility left, the worker consents to take the job offer. In this case, 
+control passes to line 270, an instruction to reemploy that worker. Otherwise, the 
+instruction on line 267 is performed.] 
+267 NFAIL = NFAIL + 1 [Control has passed to this instruction (rather than line 
+270) because the worker chosen is malingering, and not yet ready to accept a job. The 
+number of times the employer has tried to fill this job, NFAIL, is recorded as 
+increased by 1.] 
+268 IF NFAIL&lt;10 THEN GOTO 250 ELSE GOTO 290 [If there have been 
+fewer than 10 unsuccessful tries to fill this job, the employer chooses another 
+out-of-work candidate to interview by passing to line 250. If 10 tries have been made, 
+the job will remain vacant until next week. In this case, control will pass to statement 
+290, and efforts commence to fill the next job.] </p>
+
+<p>We interpolate a line to compute the number of held-over vacancies: </p>
+
+<p>372 VAC = NEMP(IWEEK) -(LABFOR -UN) [Vacancies, VAC, are calculated as 
+the difference between the employment desired by employers, NEMP(IWEEK), and 
+the number of workers actually in jobs.] 
+In the next week, when the hiring routine is performed, the number of hires 
+employers desire should be augmented by the number of vacancies. This is done by 
+adding a line: </p>
+
+<p>231 IHIR = IHIR + VAC [The hires that employers would like to make is 
+increased by the number of jobs left vacant at the end of the previous week.] </p>
+
+<p>Results of Running the Unemployment Insurance Simulation </p>
+
+<p>Figure 2 compares simulated unemployment rates when malingering is absent 
+and when it is present due to the availability of unemployment insurance. Malinger-
+ing does have a positive effect on the unemployment rate under some circumstances, 
+but the effect is shown by the simulation model to be dependent on the degree of slack 
+in the labor market. In the tighter labor market periods, when employers want to fill 
+jobs that would employ all but 5 percent of the labor force, the heavy malingering 
+behavior we have assumed in the simulation raises the measured unemployment rate 
+to 6.2 percent. In the slacker period, where employers would prefer to employ all but </p>
+
+
+
+<p>Journal of Economic Perspectives </p>
+
+<p>Table 3 </p>
+
+<p>Simulation of Labor Market with Unemployment Insurance </p>
+
+<p>Barbara R. Bergmann 113 </p>
+
+<p>Table 3 </p>
+
+<p>(Continued) </p>
+
+<p>10.5 percent, malingering does not increase measured unemployment at all. This 
+conclusion also holds for much of the recovery period. 
+It must be emphasized that this simulation is "theoretical" in the sense that no 
+effort has been made to produce a realistic account of job availability, or of 
+separations, or of the unemployment insurance system itself. The simulation results 
+thus allow only a qualitative conclusion. Nevertheless, they do present a proof that 
+lengthened durations of unemployment for unemployment insurance beneficiaries 
+need not necessarily translate into an increase in the number of unemployed persons, 
+as conventional theoretical analysts of the labor market have claimed. 
+The parameter NFAIL, the maximum number of interviews an employer can 
+hold in a hiring period, is clearly influential in the numerical result. We could conduct 
+a sensitivity analysis by running the model with differing values of NFAIL to gauge its 
+effect. Obviously, the larger is the value given to NFAIL, the lower is the effect of 
+malingering on the unemployment rate. If NFAIL were infinite-as it implicitly is in 
+the program of Table 2-malingering would have no effect on measured unemploy-
+ment in all but the tightest labor markets. If this model was fit to actual time series 
+macrodata, NFAIL could be one of the parameters whose values were chosen to 
+optimize goodness of fit of the unemployment and duration series. Then it might be 
+said that we had "estimated" NFAIL empirically. 
+The conventional analysis neglects the fact that a malingerer's refusal of a job 
+offer makes that job available to a non-malingerer. So an act of malingering does not </p>
+
+
+
+<p>Figure 2 </p>
+
+<p>Unemployment Rates with and without an Unemployment Insurance System, from 
+the Simulation Model in Table 3. </p>
+
+<p>necessarily create unemployment beyond what is caused by a shortage of job open-
+ings, provided there is a good supply of non-malingerers in the market. </p>
+
+<p>8 </p>
+
+<p>The explanation of the different effect of malingering at different unemployment 
+levels is readily apparent. 
+9 The number of non-malingerers available to take jobs </p>
+
+<p>differs, depending on the degree of slack in the labor market. The addition of a line in 
+the program (not shown) allows a survey of the proportion of non-malingerers among 
+the unemployed. In the tighter labor market periods, only about 22 percent of the 
+unemployed were willing to take jobs. In the slack period, 60 percent of a much larger 
+pool of unemployed are willing. 
+The slacker the labor market, the larger will be the number of people who have 
+been out of a job for long enough to have exhausted their unemployment insurance 
+benefits (or be close to having done so), and who would welcome a job. In slack 
+markets, malingering merely changes the order in which unemployed people reenter 
+employment. It has the effect of reserving whatever job openings there are for those 
+who have been out of work the longest. It promotes uniformity of experience among </p>
+
+<p>8 Clark and Summers (1982) and Topel (1985) did run simulations of the Orcutt type, using the work 
+history records of actual individuals derived from a survey. Estimates based on regressions were made of 
+what the behavior of each individual would have been in the absence of unemployment insurance. 
+However, their simulations look at individuals and their unemployment spells one at a time, and neglect the 
+way one worker's actions affect another's opportunities. 
+9 Hamermesh (1977) and Clark and Summers (1982) speculated that the state of the labor market would 
+affect the extent to which unemployment insurance raised the level of unemployment, and suggested that 
+high unemployment leads to a low impact of unemployment insurance. The simulation study presented 
+here can be thought of as a systematic exploration of this hypothesis. </p>
+
+<p>Micro-to-Macro Simulation 115 </p>
+
+<p>the unemployed. Malingering reduces the right-hand tail of the distribution of 
+durations of unfinished spells. 
+Of course, a malingerer, a person not actively seeking work, should not be 
+counted unemployed according to the official definition of that term, but should be 
+labelled as out of the labor force. Since many of the out-of-work people counted as 
+unemployed in the simulation are malingerers, the "true" unemployment rate is much 
+lower than the measured rate throughout the period. However, if unemployment 
+insurance were abolished, and malingering on this account ended, measured employ-
+ment would change only by the amounts shown in Figure 2. </p>
+
+<p>Final Comments </p>
+
+<p>The focus of the simulation presented here is not, "How will utility maximizing 
+individuals behave?" Rather, I have specified a particular behavioral pattern for the 
+actors and asked, "What will the mechanical result of their interactions be?" Even 
+though the actors are not depicted as fervid optimizers, the simulation does shed light 
+on the pattern of spell durations over the cycle and on the effect of unemployment 
+insurance on unemployment rates, which were goals of the analysis. 
+Of course, one could construct a model in which the simulated actors behaved 
+with greater rationality. For example, one might try to depict them optimizing the 
+degree of their malingering. They might be shown calculating, as the expiration date 
+of their unemployment insurance benefits grows nearer, the probability that the 
+failure to accept an offer now will lead to a period of unemployment without benefits 
+later. The analyst might assume that a mathematical derivation of the optimal 
+malingering rule is within the workers' capabilities. Unfortunately, it is not within the 
+present author's. 
+But it is unlikely that a simulation model with actors more inclined toward 
+finding and following optimal rules of behavior would give answers that differ 
+qualitatively from those given by this model. The nonoptimizing actors of this model 
+were servicable for the analysis we aimed at. The reader should remember, moreover, 
+that the simulation model with nonoptimizing actors provided better insights about 
+how unemployment is generated than the conventional models depicting allegedly 
+optimizing actors. </p>
+
+<p>• Much of the work underlying this paper was done while I was a member of the Department of 
+Economics of the University of Maryland at College Park, where I was immeasurably helped by 
+generous access to computers of all kinds. </p>
+
+
+
+
+
+</text></tei>

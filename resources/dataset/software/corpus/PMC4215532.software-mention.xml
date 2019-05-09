@@ -1,6 +1,29 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4215532" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T20:05+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4215532" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:12+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
-<p>(A.V. Lebedev). </p>
+<p>Computer-aided diagnosis of Alzheimer3s disease (AD) is a rapidly developing field of neuroimaging with strong 
+potential to be used in practice. In this context, assessment of models3 robustness to noise and imaging protocol 
+differences together with post-processing and tuning strategies are key tasks to be addressed in order to move 
+towards successful clinical applications. In this study, we investigated the efficacy of Random Forest classifiers 
+trained using different structural MRI measures, with and without neuroanatomical constraints in the detection 
+and prediction of AD in terms of accuracy and between-cohort robustness. 
+From The ADNI database, 185 AD, and 225 healthy controls (HC) were randomly split into training and testing 
+datasets. 165 subjects with mild cognitive impairment (MCI) were distributed according to the month of 
+conversion to dementia (4-year follow-up). Structural 1.5-T MRI-scans were processed using Freesurfer segmen-
+tation and cortical reconstruction. Using the resulting output, AD/HC classifiers were trained. Training included 
+model tuning and performance assessment using out-of-bag estimation. Subsequently the classifiers were vali-
+dated on the AD/HC test set and for the ability to predict MCI-to-AD conversion. Models3 between-cohort robust-
+ness was additionally assessed using the AddNeuroMed dataset acquired with harmonized clinical and imaging 
+protocols. 
+In the ADNI set, the best AD/HC sensitivity/specificity (88.6%/92.0% -test set) was achieved by combining corti-
+cal thickness and volumetric measures. The Random Forest model resulted in significantly higher accuracy com-
+pared to the reference classifier (linear Support Vector Machine). The models trained using parcelled and high-
+dimensional (HD) input demonstrated equivalent performance, but the former was more effective in terms of 
+computation/memory and time costs. The sensitivity/specificity for detecting MCI-to-AD conversion (but not 
+AD/HC classification performance) was further improved from 79.5%/75%-83.3%/81.3% by a combination of mor-
+phometric measurements with ApoE-genotype and demographics (age, sex, education). When applied to the in-
+dependent AddNeuroMed cohort, the best ADNI models produced equivalent performance without substantial 
+accuracy drop, suggesting good robustness sufficient for future clinical implementation. 
+(A.V. Lebedev). </p>
 
 <p>The application of pattern recognition approaches to neuroimaging 
 offers the potential for diagnostically relevant analysis techniques, in 
@@ -126,7 +149,7 @@ for clinical depression at baseline, MCI or dementia within 3 years of
 follow-up. One HC subject (ID # 0223) was excluded from the sample 
 due to conversion to AD at follow-up. One AD subject (ID # 0805) was </p>
 
-<p>116 
+<p> 
 A.V. Lebedev et al. / NeuroImage: Clinical 6 (2014) 115-125 </p>
 
 <p>excluded during the outlier detection procedure, leaving 575 subjects. 
@@ -250,8 +273,9 @@ ture subset, m try -parameter adjustment was also performed using 1000 </p>
 ffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffi 
 N f eatures 
 p 
-Ã 2:5, step = 
-ffiffiffiffiffiffiffiffiffiffiffiffi ffi </p>
+Ã 2:5, step = </p>
+
+<p>ffiffiffiffiffiffiffiffiffiffiffiffi ffi </p>
 
 <p>N f eatures </p>
 
@@ -292,8 +316,11 @@ L Þ þ p R iðτ
 R ÞÞ 
 ð1Þ </p>
 
-<p>where iðτÞ ¼ 1−∑ c∈C p 2 
-c is the Gini index at node τ, p L ¼ </p>
+<p>where iðτÞ ¼ 1−∑ c∈C p </p>
+
+<p>2 </p>
+
+<p>c is the Gini index at node τ, p L ¼ </p>
 
 <p>js L </p>
 
@@ -450,14 +477,15 @@ test (p-value) </p>
 185 
 225 
 165 
-− </p>
-
-<p>Age 
+− 
+Age 
 75.2 [±7.48] 75.95 [±5.02] 
 75.46 [±7.37] T = -1.17 (0.24) 
 M/F ratio 
-1.01 (93/92) 1.05 (115/110) 1.66 (103/62) χ 2 = 0.01 (0.93) 
-Education 14.6 [±3.24] 16.0 [±2.85] 
+1.01 (93/92) 1.05 (115/110) 1.66 (103/62) χ 
+2 = 0.01 (0.93) </p>
+
+<p>Education 14.6 [±3.24] 16.0 [±2.85] 
 15.65 [±2.97] T = -4.65 (0.001) 
 MMSE 
 23.3 [±1.99] 29.1 [±0.98] 
@@ -946,8 +974,9 @@ as 100%, 95%, … etc., up to 50%), and by the subsequent accuracy comparison wi
 ffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffi 
 N f eatures 
 p 
-Ã 2:5, step = 
-ffiffiffiffiffiffiffiffiffiffiffiffi ffi </p>
+Ã 2:5, step = </p>
+
+<p>ffiffiffiffiffiffiffiffiffiffiffiffi ffi </p>
 
 <p>N f eatures </p>
 

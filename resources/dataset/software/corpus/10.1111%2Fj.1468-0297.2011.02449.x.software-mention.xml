@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1111%2Fj.1468-0297.2011.02449.x" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T19:51+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1111%2Fj.1468-0297.2011.02449.x" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T03:57+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>Recent substantive reforms to the English National Health Service expanded patient choice and 
 encouraged hospitals to compete within a market with fixed prices. This study investigates whether 
@@ -10,10 +10,12 @@ in more competitive markets. Our results suggest that hospital competition can l
 ments in hospital quality. </p>
 
 <p>Across the developed world, health care spending accounts for a large and growing 
-share of most countriesÕ gross domestic product (GDP). 1 In an effort to slow the rate of 
+share of most countriesÕ gross domestic product (GDP). 
+1 In an effort to slow the rate of 
 spending growth and improve health system performance, a number of countries have 
 enacted market-based health care reforms that have centred on increasing user choice 
-and promoting competition between health care providers. 2 These reforms have been 
+and promoting competition between health care providers. 
+2 These reforms have been 
 primarily designed to create financial incentives in a sector that has typically been more 
 state-directed and centrally controlled than others. However, there is not a consensus 
 on how health care markets should be structured and the evidence on the impact of 
@@ -25,6 +27,14 @@ patient choice and provider competition. We take advantage of the explicit intro
 tion of choice and competition into the NHS in 2006 to create a quasi-natural experi-
 ment where we can examine whether greater exposure to competition prompted 
 hospitals to improve their performance. </p>
+
+<p>1 According to the most recent OECD data recorded for 2008, health care spending as a percentage of 
+GDP was 16.0% for the US, 10.4% for Canada, 11.2% for France, 10.5% for Germany, 9.9% for the 
+Netherlands and 8.7% for the United Kingdom (OECD, 2010). 
+2 In the health care sector, these have included policies to increase the choice of health insurers in the 
+Netherlands, policies to increase choice and introduce competition into Medicare prescription drug coverage 
+for seniors in the US, and efforts to expand patientsÕ choice of health care providers in England, the 
+Netherlands, Sweden and Denmark. </p>
 
 <p>The recent English NHS reforms had three central elements (Department of Health, 
 2003). First, patients were given the ability to select the hospital they attend for surgery 
@@ -51,8 +61,11 @@ AMIs are easily clinically identifiable, AMI mortality is not subject to gaming 
 manipulation like many elective outcomes, and for patients with an AMI, there is a 
 clear link between appropriate treatment and good outcomes (Bradley et al., 2006; Jha 
 et al., 2007). Indeed, 30-day AMI mortality is frequently used in the literature assessing 
-the relationship between competition and overall hospital quality. 3 
-This work adds to the existing literature examining the impact of public sector 
+the relationship between competition and overall hospital quality. </p>
+
+<p>3 </p>
+
+<p>This work adds to the existing literature examining the impact of public sector 
 reform on service quality. To evaluate the reforms, we use a DiD estimator and (a) 
 develop a range of concentration measures and illustrate that our results are robust 
 across each; (b) calculate concentration using elective patient flows and measure quality 
@@ -110,8 +123,11 @@ found that increased competition in a fixed price market led to an increase in
 mortality, but argue that their results stem from the fact that hospitals in California 
 were underpaid for treating Medicare patients with AMI. This hypothesis is consistent 
 with research, which found that lower Medicare reimbursement rates led to increases in 
-mortality, particularly in competitive markets (Shen, 2003). 4 
-Nearly, all of the English literature on hospital competition examines an earlier set of 
+mortality, particularly in competitive markets (Shen, 2003). </p>
+
+<p>4 </p>
+
+<p>Nearly, all of the English literature on hospital competition examines an earlier set of 
 NHS reforms -the 1990s internal market. This market allowed hospitals to compete on 
 quality and price for bulk purchasing contracts but, in general, there is a near uniform 
 consensus that the internal market never created significant financial incentives for 
@@ -346,7 +362,7 @@ serve as agents for different patients for the same set of conditions on an ongo
 they are well positioned to observe quality ex post and use that information to advise 
 future patients. In effect, despite the fact that patients seldom attend hospitals for the </p>
 
-<p> 
+<p>2011 ] 
 F233 </p>
 
 <p>D O E S H O S P I T A L C O M P E T I T I O N S A V E L I V E S ? </p>
@@ -421,32 +437,29 @@ gradual improvement in quality as the reforms begin to bite. However, as describ
 below, we test and relax this restriction in our robustness tests. 
 Our general empirical regression specification is therefore: </p>
 
-<p>death ijkt ¼b 1 t þ b 2 I t À ~ 
-tjt ! ~ 
-t 
+<p>death ijkt ¼b 1 t þ b 2 I t Àtjt !t 
 f 
-gþb 3 z jt t þ b 4 z jt I t À ~ 
-tjt ! ~ 
-t 
+gþb 3 z jt t þ b 4 z jt I t Àtjt !t 
 f 
 g 
-þ b 5 z jt þ b 6 I t ! ~ 
-t 
+þ b 5 z jt þ b 6 I t !t 
 f 
-gþ b 7 z jt I t ! ~ 
-t 
+gþ b 7 z jt I t !t 
 f 
-gþ c 0 controls ijkt þ error ijkt 
+gþ c 
+0 controls ijkt þ error ijkt 
 ð1Þ </p>
 
 <p>Here, death ijkt is an indicator for whether patient i, from GP market j, treated at hospital 
 site k died within 30 days of admission for AMI in period t. Subscript t indicates a 
-running counter of quarters since quarter 1, 2002 (the first period in our data), and ~ 
-t is 
+running counter of quarters since quarter 1, 2002 (the first period in our data), andt is 
 the break point in the spline, corresponding to our policy-on period starting the end of 
 the second quarter of 2006. Variable z jt is the market structure index of GP market j at 
-time t, which we describe in Section 3.3 below. 5 
-We can estimate various alternative specifications by imposing restrictions on 
+time t, which we describe in Section 3.3 below. </p>
+
+<p>5 </p>
+
+<p>We can estimate various alternative specifications by imposing restrictions on 
 these parameters. Setting b 1 = b 2 = b 3 = b 4 = 0 gives rise to a standard DiD specifi-
 cation with continuous treatment variable, in which coefficient b 7 is the estimated 
 effect of the policy on the change in death rates between the pre and post-policy 
@@ -465,12 +478,14 @@ b 1 + b 3 equals the time trend in mortality in these areas before the reform. T
 b 1 + b 2 + b 3 + b 4 is the time trend in mortality in highly competitive areas after the 
 2006 reform. The second partial derivate of the death rate trend with respect to dif-
 ferences in competition in the post-policy period is b 4 . This is our coefficient of interest 
-and is a DiD estimate of the effect of competition on the trends in mortality. 6 </p>
+and is a DiD estimate of the effect of competition on the trends in mortality. </p>
+
+<p>6 </p>
 
 <p>5 This index is calculated from data for the whole calendar year, rather than the quarter. 
 6 This is easily deduced since: </p>
 
-<p>Treatment effect ¼ ½ðb 1 þ b 2 þ b 3 Dnlhhi þ b 4 DnlhhiÞ À ðb 1 þ b 3 DnlhhiÞ À ½ðb 1 þ b 2 Þ À b 1  
+<p>Treatment effect ¼ ½ðb 1 þ b 2 þ b 3 Dnlhhi þ b 4 DnlhhiÞ À ðb 1 þ b 3 DnlhhiÞ À ½ðb 1 þ b 2 Þ À b 1 
 ¼ b 4 Dnlhhi: </p>
 
 <p>2011 ] 
@@ -491,7 +506,9 @@ specification in equation (1) includes a vector of control variables as discusse
 data section and can be generalised to include hospital and GP fixed effects. Our 
 specifications further include an interaction between Strategic Health Authorities 
 (SHAs) and time trends, controlling for trends associated with local SHA policies and 
-changes in regional funding. 7 </p>
+changes in regional funding. </p>
+
+<p>7 </p>
 
 <p>3. Data, Our Measures of Competition, Our Quality Indicator and the 
 Instrumental Variable Strategy </p>
@@ -508,13 +525,18 @@ hospitals, FTs status) and hospital size. Our work improves on previous research
 using the hospital site-specific locations, rather than the trust headquarters. There are 
 typically multiple treatment sites for each trust, separated by distances of up to 50 km, 
 so using Trust locations provides only a very approximate indicator of the location at 
-which treatment is carried out. 8 
-We use GP and hospital site postcodes to calculate distances between patientsÕ GPs 
+which treatment is carried out. </p>
+
+<p>8 </p>
+
+<p>We use GP and hospital site postcodes to calculate distances between patientsÕ GPs 
 and the hospital where care was delivered. This distance is a key component in our 
 analysis and is used as an input into most of our competition measures. For our main 
 analysis, we use matrices of straight-line distances between GPs and NHS sites. For some 
 of our supplementary results, we calculate origin-destination matrices from minimum 
-road travel times along the primary road network. 9 </p>
+road travel times along the primary road network. </p>
+
+<p>9 </p>
 
 <p>7 There are ten NHS Strategic Health Authorities (SHAs) in England; each represents a different region of 
 the country. SHAs are responsible for implementing the policy that is set by the Department of Health and 
@@ -541,13 +563,19 @@ The Economic Journal published by John Wiley &amp; Sons Ltd on behalf of Royal E
 
 <p>3.2. Measures of Health Care Quality </p>
 
-<p>Our measure of hospital quality is the 30-day mortality rate for patients with an AMI. 10 
-In our analysis, we include every patient who had a main International Classification of 
+<p>Our measure of hospital quality is the 30-day mortality rate for patients with an AMI. </p>
+
+<p>10 </p>
+
+<p>In our analysis, we include every patient who had a main International Classification of 
 Disease 10 code of I21 or I22 and only include emergency AMI admissions and 
 admissions where the patientsÕ length of stay was three days or more (unless the patient 
 died within the first three days of being admitted) (World Health Organization, 
-2009). 11 
-We chose to use AMI mortality as our measure of performance for four primary 
+2009). </p>
+
+<p>11 </p>
+
+<p>We chose to use AMI mortality as our measure of performance for four primary 
 reasons. First, AMIs are a relatively frequent, easily observable medical occurrences that 
 are clinically identifiable and have a substantial mortality rate. For example, in 2008 the 
 overall, 30-day mortality rate for emergency AMI was 11.7% compared to a mortality 
@@ -565,7 +593,8 @@ fact that AMI is a non-elective procedure also mitigates biases due to the endog
 market structure to elective quality. This point is illustrated in Appendix A. 
 A further impetus for using AMI mortality is that it is frequently used by governments 
 and private organisations to rank and compare hospital performance (including by the 
-UK government). 12,13 Consequently, 30-day AMI mortality is also often used in the 
+UK government). 
+12,13 Consequently, 30-day AMI mortality is also often used in the 
 academic literature as a measure of overall hospital performance in the UK and the US 
 (Kessler and McClellan, 2000; Volpp et al., 2003; Propper et al., 2004, 2008; Kessler and 
 Geppert, 2005; Bloom et al., 2010; Gaynor et al., 2010; Propper and van Reenen, 2010). 
@@ -603,7 +632,8 @@ The Economic Journal published by John Wiley &amp; Sons Ltd on behalf of Royal E
 according to data made publicly available by Dr. Foster Health, despite accounting for 
 less than 3% of total hospital deaths, standardised AMI mortality in English hospitals 
 was positively correlated (r = 0.33) with overall hospital mortality for the financial year 
-beginning in 2009. 14 Likewise, in our administrative data, we have found that raw AMI 
+beginning in 2009. 
+14 Likewise, in our administrative data, we have found that raw AMI 
 mortality is positively correlated with elective hip and knee replacement waiting times 
 (r = 0.33) and positively correlated with length of stay for elective hip and knee 
 replacement (r = 0.11 and r = 0.22, respectively). 
@@ -619,7 +649,9 @@ socioeconomic status, age and co-morbidities, mitigates this problem. In our est
 tion, we control for co-morbidities using the Charlson co-morbidity index (Charlson 
 et al., 1978) and control for patientsÕ socio-economic status using the income vector of 
 the 2007 Index of Multiple Deprivation, which we include at the Census Output Area 
-level (Communities and Local Government Department, 2009). 15,16 </p>
+level (Communities and Local Government Department, 2009). </p>
+
+<p>15,16 </p>
 
 <p>3.3. Market Measures and Estimates of Market Structure </p>
 
@@ -718,11 +750,8 @@ X K </p>
 
 <p>k¼1 </p>
 
-<p>n ^ </p>
-
-<p>k </p>
-
-<p>N j </p>
+<p>nk 
+N j </p>
 
 <p>2 </p>
 
@@ -748,8 +777,11 @@ hospitals providing hip replacements within this GPÕs market, regardless of whe
 this GP actually refers patients to all of these hospitals. This process is repeated for all GPs, 
 for all years 2002-8 and for all five key elective procedures. A single elective HHI is 
 calculated for each GP per year as a weighted average of the procedure-specific HHIs with 
-weights proportional to the volume of patients in each procedure category. 17 
-In addition to calculating this HHI within a variable radius market, we also compute 
+weights proportional to the volume of patients in each procedure category. </p>
+
+<p>17 </p>
+
+<p>In addition to calculating this HHI within a variable radius market, we also compute 
 a number of alternative HHIs using other market definitions. These include an HHI 
 measured within a fixed radius market, which is derived in a similar way to the variable 
 radius HHI described above, except that we use a fixed 30 km radius drawn around 
@@ -767,7 +799,8 @@ Alongside the HHIs we generated using actual patient flows, we also created an
 HHI derived from predicted patient flows that is based on the strategy used in Kessler 
 and McClellan (2000). Building our predicted patient flow HHI is a two-step pro-
 cedure. The first step involves estimating a patient choice model based on hospital 
-and GP locations, and hospital and patient characteristics. 18 From this step we predict 
+and GP locations, and hospital and patient characteristics. 
+18 From this step we predict 
 the number of patients each GP refers to their local hospitals, controlling for patient </p>
 
 <p>17 It is important to note that GPs do not need to refer patients to a particular hospital within their market 
@@ -785,7 +818,8 @@ Distance was measured as the straight-line distance from GPs to hospital sites. 
 The Economic Journal published by John Wiley &amp; Sons Ltd on behalf of Royal Economic Society. </p>
 
 <p>and provider characteristics and GP-hospital differential distances. We then use these 
-numbers to generate the HHIs. 19 However, whereas Kessler and McClellan (2000) 
+numbers to generate the HHIs. 
+19 However, whereas Kessler and McClellan (2000) 
 used a conditional logit to model patient choices, we use a Poisson regression on 
 aggregate GP-hospital flows, which is equivalent but is simpler to compute (Gui-
 maraes et al., 2003). 
@@ -795,10 +829,14 @@ correlated. Indices based on market definitions using GP hospital flows are quit
 correlated with each other and only moderately correlated with the fixed distance and 
 time-based indices. We favour the variable radius methods that infer markets from 
 de-facto patient choices over hospitals, not least because this is less correlated with 
-urban density. 20 
-As a further check of robustness, we estimate (1) substituting an indicator variable 
+urban density. </p>
+
+<p>20 </p>
+
+<p>As a further check of robustness, we estimate (1) substituting an indicator variable 
 for our competition measure, which is equal to one if a patientÕs GP practice is located 
-in an urban area. 21 For further robustness, we also reconstruct the competition index </p>
+in an urban area. 
+21 For further robustness, we also reconstruct the competition index </p>
 
 <p>19 Following Kessler and McClellan (2000), we used these predicted counts (count jk ), which is the expected 
 number of patients each GP j refers to hospital k in a given year to generate market shares, denoted a jk , for all 
@@ -822,10 +860,11 @@ of providers within 100 km of j: </p>
 <p>HHI j ¼ 
 X K </p>
 
-<p>k¼1 </p>
+<p>k¼1â </p>
 
-<p>^ a 2 
-jk : </p>
+<p>2 </p>
+
+<p>jk : </p>
 
 <p>This measure would be similar to our fixed radius HHIs centred on GP practices, except that the market 
 shares used to create the HHI j would be based on predicted patient flows. Consistent with Kessler and 
@@ -833,8 +872,7 @@ McClellan (2000), we weight these GP HHIs by b jk , which is the share of patien
 the total activity of hospital k, in order to generate hospital level HHIs that are vary based on the competi-
 tiveness of the various GP markets served by hospital k, such that </p>
 
-<p>^ 
-b jk ¼ 
+<p>b jk ¼ 
 d 
 count jk 
 P J </p>
@@ -851,27 +889,25 @@ count jk </p>
 <p>HHI k ¼ 
 X J </p>
 
-<p>j¼1 </p>
-
-<p>^ 
-b jk 
-X K </p>
-
-<p>k¼1 </p>
-
-<p>^ a 2 </p>
+<p>j¼1b </p>
 
 <p>jk </p>
+
+<p>X K </p>
+
+<p>k¼1â </p>
+
+<p>2 
+jk </p>
 
 <p>! </p>
 
 <p>¼ 
 X J </p>
 
-<p>j¼1 </p>
+<p>j¼1b </p>
 
-<p>^ 
-b jk HHI j : </p>
+<p>jk HHI j : </p>
 
 <p>However, as Kessler and McClellan (2000) noted, since there is potential that unobserved determinants of 
 patientsÕ hospital choice could be correlated with patientsÕ underlying health status, we assign HHI k back to 
@@ -881,22 +917,22 @@ GP practices based on the shares of patients from GP j treated at all hospitals 
 <p>HHI j Ã ¼ 
 X K </p>
 
-<p>k¼1 </p>
-
-<p>^ a jk 
-X J </p>
-
-<p>j¼1 </p>
-
-<p>^ 
-b jk 
-X K </p>
-
-<p>k¼1 </p>
-
-<p>^ a 2 </p>
+<p>k¼1â </p>
 
 <p>jk </p>
+
+<p>X J </p>
+
+<p>j¼1b </p>
+
+<p>jk </p>
+
+<p>X K </p>
+
+<p>k¼1â </p>
+
+<p>2 
+jk </p>
 
 <p>! 
 " 
@@ -905,9 +941,9 @@ X K </p>
 <p>¼ 
 X K </p>
 
-<p>k¼1 </p>
+<p>k¼1â </p>
 
-<p>^ a jk HHI j </p>
+<p>jk HHI j </p>
 
 <p>This HHI j* is calculated for all years and for all five procedures and then averaged across the five procedures 
 weighted by the total volume of each procedure performed per year. Thus, this measure varies both by year 
@@ -918,7 +954,7 @@ These mappings are available from the authors on request.
 of 10,000 or more, according to the UK Office of National Statistics -available at http://www.statistics.gov.uk/ 
 geography/census_geog.asp. </p>
 
-<p> 
+<p>2011 ] 
 F241 </p>
 
 <p>D O E S H O S P I T A L C O M P E T I T I O N S A V E L I V E S ? </p>
@@ -1233,8 +1269,11 @@ Yes </p>
 422,350 
 422,350 
 422,350 
-R 2 
-0.036 
+R </p>
+
+<p>2 </p>
+
+<p>0.036 
 0.105 
 0.126 
 0.125 
@@ -1256,7 +1295,8 @@ output area. Standard errors are clustered on GP-practices. AMI, acute myocardia
 The Economic Journal published by John Wiley &amp; Sons Ltd on behalf of Royal Economic Society. </p>
 
 <p>Table 4 shows that the results we observed in Table 3 are not highly sensitive to 
-the choice of which market structure index we use to define the treated groups. 22 It 
+the choice of which market structure index we use to define the treated groups. 
+22 It 
 presents OLS estimates of (1) using seven separate measures of market structure. Our 
 findings remain consistent and significant across the seven different measures of 
 market structure. The coefficient on the interaction between market structure and the 
@@ -1414,8 +1454,11 @@ Yes </p>
 437,185 
 421,094 
 461,508 
-R 2 
-0.126 
+R </p>
+
+<p>2 </p>
+
+<p>0.126 
 0.126 
 0.127 
 0.126 
@@ -1566,8 +1609,11 @@ Yes </p>
 382,026 
 439,365 
 433,699 
-R 2 
-0.126 
+R </p>
+
+<p>2 </p>
+
+<p>0.126 
 0.127 
 0.126 
 0.126 </p>
@@ -1727,8 +1773,11 @@ Yes </p>
 422,350 
 422,350 
 422,350 
-R 2 
-0.125 
+R </p>
+
+<p>2 </p>
+
+<p>0.125 
 0.126 
 0.126 </p>
 
@@ -1826,7 +1875,8 @@ not simply spurious associations with urban density or driven by problematic (en
 genous) associations between market structure and firm performance. In Column (1), 
 we present interactions between the time trends and an indicator variable for whether 
 or not the patientÕs local hospital market is located in a city, substituted for the measure 
-of market structure. 23 The interaction term between the city indicator and our 
+of market structure. 
+23 The interaction term between the city indicator and our 
 post-policy trend is not significant and is approximately half as large as our main </p>
 
 <p>Table 7 
@@ -1904,8 +1954,11 @@ Yes </p>
 422,350 
 414,230 
 425,408 
-R 2 
-0.126 
+R </p>
+
+<p>2 </p>
+
+<p>0.126 
 0.126 
 0.105 </p>
 
@@ -2084,7 +2137,7 @@ w, but also partly on patient choices in response to observed elective quality e
 
 <p>So the bias in using elective procedures as a quality measure in (A.2) is: </p>
 
-<p>cov½comp e; ðu þ v eÞ=varðcomp eÞ ¼ p varðu þ v eÞ=varðcomp eÞ 
+<p>cov½comp e; ðu þ v eÞ=varðcomp eÞ ¼ p varðu þ v eÞ=varðcomp eÞ 
 ¼ p varðuÞ=varðcomp eÞ þ p varðv eÞ=varðcomp eÞ </p>
 
 <p>Now, suppose we have an alternative measure of quality from non-elective AMI outcomes: </p>
@@ -2097,9 +2150,8 @@ w, but also partly on patient choices in response to observed elective quality e
 
 <p>Now the bias is: </p>
 
-<p>cov½comp e; ðu þ v aÞ=varðcomp eÞ ¼ p varðuÞ=varðcomp eÞ </p>
-
-<p>&lt; p varðuÞ=varðcomp eÞ þ p varðv eÞ=varðcomp eÞ </p>
+<p>cov½comp e; ðu þ v aÞ=varðcomp eÞ ¼ p varðuÞ=varðcomp eÞ 
+&lt; p varðuÞ=varðcomp eÞ þ p varðv eÞ=varðcomp eÞ </p>
 
 <p>(as long as Var(v_e) &gt; 0, and c &gt; 0 in (A.3)). </p>
 
@@ -2544,8 +2596,11 @@ Yes </p>
 
 <p>N 
 422,350 
-R 2 
-0.126 </p>
+R </p>
+
+<p>2 </p>
+
+<p>0.126 </p>
 
 <p>Notes. * Significant at 10% level. ** Significant at 5%. *** Significant at 1%. Dependent variable = 1 if patient 
 died within 30-days of their admission to hospital. Standard errors are clustered on GP-practices. Reference 
@@ -3134,7 +3189,7 @@ The Economic Journal published by John Wiley &amp; Sons Ltd on behalf of Royal E
 
 
 
-<p> 
+<p>2011 ] 
 F259 </p>
 
 <p>D O E S H O S P I T A L C O M P E T I T I O N S A V E L I V E S ? </p>

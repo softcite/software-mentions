@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC5089661" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T19:55+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC5089661" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:02+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>Abstract </p>
 
@@ -7,18 +7,31 @@ can be employed in triage radiation biodosimetry to estimate whole body doses of
 tion to potentially exposed individuals through quantitation of the frequency of micronu-
 clei (MN) in binucleated lymphocyte cells (BNCs). The assay has been partially 
 automated using traditional microscope-based methods and most recently has been 
-modified for application on the ImageStream X (IS X ) imaging flow cytometer. This modi-
+modified for application on the ImageStream 
+X (IS </p>
+
+<p>X </p>
+
+<p>) imaging flow cytometer. This modi-
 fication has allowed for a similar number of BNCs to be automatically scored as com-
 pared to traditional microscopy in a much shorter time period. However, the MN 
 frequency measured was much lower than both manual and automated slide-based meth-
 ods of performing the assay. This work describes the optimized analysis template which 
-implements newly developed functions in the <rs type="software">IDEAS</rs> V R data analysis software for the IS X 
-that enhances specificity for BNCs and increases the frequency of scored MN. A new dose 
+implements newly developed functions in the <rs type="software">IDEAS</rs> 
+V R data analysis software for the IS </p>
+
+<p>X </p>
+
+<p>that enhances specificity for BNCs and increases the frequency of scored MN. A new dose 
 response calibration curve is presented in which the average rate of MN per BNC is of 
 similar magnitude to those presented in the literature using automated CBMN slide scor-
 ing methods. In addition, dose estimates were generated for nine irradiated, blinded sam-
 ples and were found to be within 60.5 Gy of the delivered dose. Results demonstrate that 
-the improved identification accuracy for MN and BNCs in the IS X -based version of the 
+the improved identification accuracy for MN and BNCs in the IS </p>
+
+<p>X </p>
+
+<p>-based version of the 
 CBMN assay will translate to increased accuracy when estimating unknown radiation 
 doses received by exposed individuals following large-scale radiological or nuclear 
 emergencies. IT is desirable to estimate doses received by individuals potentially exposed to ioniz-</p>
@@ -127,14 +140,20 @@ lymphocyte cells in first mitosis (16). To quantify this parame-
 ter, MN must be scored inside the cytoplasm of a BNC and 
 therefore, the Litron Laboratories method is less than ideal. 
 A novel method recently developed by our group (17-19) 
-uses imaging flow cytometry (FCM) on the ImageStream X 
-(IS X ) imaging flow cytometer (MilliporeSigma, Billerica, MA) 
-to automate the CBMN assay. The IS X system combines the 
+uses imaging flow cytometry (FCM) on the ImageStream </p>
+
+<p>X </p>
+
+<p>(IS 
+X ) imaging flow cytometer (MilliporeSigma, Billerica, MA) 
+to automate the CBMN assay. The IS 
+X system combines the 
 speed of traditional FCM with the high resolution image capa-
 bilities of microscopy. Similar to traditional FCM, cells are </p>
 
 <p>labelled with fluorescent dyes and are passed in suspension 
-through the flow cell of the cytometer. In the IS X , a bright-
+through the flow cell of the cytometer. In the IS 
+X , a bright-
 field (BF) LED light source and at least one solid state laser 
 (405, 488, and 658 nm in our system) orthogonally interro-
 gate each cell, creating transmitted and scattered light signals. 
@@ -147,20 +166,26 @@ device (CCD) camera that takes the place of photomultiplier
 tubes found in traditional flow cytometers. Each channel cap-
 tures optically divided sub-images which can be viewed indi-
 vidually or can be combined to view the co-location of several 
-signals. In this way, the IS X generates high resolution imagery 
+signals. In this way, the IS 
+X generates high resolution imagery 
 for each cell that passes through the instrument that allows 
 for visual confirmation of micronucleus identification 
 (20-22). This is a substantial advantage over traditional FCM 
 methods. 
-The IS X is capable of capturing high-resolution images of 
+The IS 
+X is capable of capturing high-resolution images of 
 individual cells at a rate of up to 5,000 cells per second. The 
-new IS X -CBMN method is able to process cell samples sus-
+new IS 
+X -CBMN method is able to process cell samples sus-
 pended in solution and eliminates the need to create micro-
 scope slides, thereby reducing the time required for sample 
-preparation (17-19). All images captured on the IS X are saved 
+preparation (17-19). All images captured on the IS 
+X are saved 
 to a data file which is analyzed using the Image Data Explora-
-tion and Analysis Software (<rs type="software">IDEAS</rs> V R ) built specifically for the 
-IS X . Previously, we generated dose response calibration curves 
+tion and Analysis Software (<rs type="software">IDEAS</rs> 
+V R ) built specifically for the 
+IS 
+X . Previously, we generated dose response calibration curves 
 from 0-4 Gy (17,19) and 0-10 Gy (18) but in both cases, while 
 a large number of BNCs were scored (about 2,000), a reduc-
 tion in MN frequency by a factor of about 5-10 was observed 
@@ -168,7 +193,8 @@ when compared to curves generated by automated and man-
 ual slide-scoring methods respectively. 
 This paper describes the optimization of the <rs type="software">IDEAS</rs> anal-
 ysis template for identifying and scoring BNCs and MN in the 
-IS X -based version of the CBMN assay. In this work, we re-
+IS 
+X -based version of the CBMN assay. In this work, we re-
 analyzed existing data in order to demonstrate improvements 
 in the accuracy of identifying and separating BNCs from other 
 cells and cellular debris, as well as improved detection of MN 
@@ -180,16 +206,20 @@ authors using automated slide-scoring versions of the CBMN
 assay. Finally the improved accuracy of the template is evi-
 denced by the re-analysis of blinded samples to generate dose 
 estimations to within 60.5 Gy of the delivered dose following 
-only 5 minutes of data collection on the IS X . </p>
+only 5 minutes of data collection on the IS 
+X . </p>
 
 <p>MATERIALS AND METHODS </p>
 
 <p>Blood Collection and Irradiation, the CBMN Assay and 
-Data Collection on the IS X 
-Blood collection, irradiation, and processing was per-
+Data Collection on the IS </p>
+
+<p>X </p>
+
+<p>Blood collection, irradiation, and processing was per-
 formed previously as described by Rodrigues et al. (17-19) 
-and all data was saved as raw image files for analysis in <rs id="software-18" type="software">IDEAS</rs> 
-(<rs corresp="#software-18" type="version-number">version 6.2</rs>). For the dose response calibration curve, </p>
+and all data was saved as raw image files for analysis in <rs id="software-4" type="software">IDEAS</rs> 
+(<rs corresp="#software-4" type="version-number">version 6.2</rs>). For the dose response calibration curve, </p>
 
 <p>Original Article </p>
 
@@ -202,7 +232,8 @@ healthy, non-smoking anonymous donors (three male and
 three female between the ages of 27 and 48). For the blinded 
 samples, nine blood samples were collected from five healthy 
 anonymous donors (males between the ages of 34 and 56 years 
-of age) in 6 mL lithium-heparinized Vacutainer V R tubes (BD 
+of age) in 6 mL lithium-heparinized Vacutainer 
+V R tubes (BD 
 Biosciences, Mississauga, ON) with the same health and his-
 torical radiation exposure criteria as described above. Each 
 whole blood sample was then irradiated to a known dose 
@@ -214,7 +245,8 @@ blood samples were diluted with RPMI 1640 culture medium
 containing 10% fetal bovine serum, 2 mmol L-glutamine, 100 
 U/mL penicillin, 100 mg/mL streptomycin (Sigma-Aldrich, 
 Oakville, ON) and 1% PHA (Life Technologies, Burlington, 
-ON) to achieve 20 mL cultures in 25 cm 2 vented flasks. The 
+ON) to achieve 20 mL cultures in 25 cm 
+2 vented flasks. The 
 cultures were incubated for 24 h before the addition of cyto-
 chalasin B (Sigma-Aldrich) then incubated for an additional 
 48 h. Cell suspensions were centrifuged, resuspended in FACS 
@@ -222,22 +254,31 @@ Lysing Solution (BD Biosciences) to lyse red blood cells and
 fix lymphocytes, washed twice with PBS and resuspended in 
 100 mL of PBS. All samples in solution were stained with a 
 1:100 dilution of DRAQ5 (eBioscience, San Diego, CA) to a 
-final concentration of 1.25 nM per 1310 7 cells/mL and run 
-on the IS X at 403 magnification with the 658 nm laser set to 
+final concentration of 1.25 nM per 1310 
+7 cells/mL and run 
+on the IS 
+X at 403 magnification with the 658 nm laser set to 
 20 mW to allow DRAQ5 signal to be collected in channel 5 
 and the BF LED in channel 1 (18). Early in the development 
 of this method we examined the extended depth of field 
-(EDF) option on the IS X and found no improvement in image 
+(EDF) option on the IS 
+X and found no improvement in image 
 quality and therefore, all data were collected without the EDF. 
 For the calibration curve, approximately 100,000 events were 
 collected in about 20 min at each dose point for each donor. 
 For the blinded samples, events were collected for 40 min in 
 5 min increments. For all acquisitions, a minimum area 
-threshold was set to 75 pixels (18.75 mm 2 ) in both channels 1 
+threshold was set to 75 pixels (18.75 mm </p>
+
+<p>2 </p>
+
+<p>) in both channels 1 
 and 5 resulting in a collection speed of approximately 100-
 150 events per second which was related directly to the cell 
-concentrations of 1-2 3 10 7 cells/mL. An event is defined as 
-any image collected by the IS X that meets both criteria and is 
+concentrations of 1-2 3 10 
+7 cells/mL. An event is defined as 
+any image collected by the IS 
+X that meets both criteria and is 
 stored in the data file. </p>
 
 <p>RESULTS </p>
@@ -247,7 +288,7 @@ in <rs type="software">IDEAS</rs>
 In <rs type="software">IDEAS</rs>, a mask identifies pixels within a defined region 
 of in an image. Optimized BNC and MN masks were devel-
 oped by applying and combining several new and existing 
-mask functions in <rs id="software-5" type="software">IDEAS</rs> (<rs corresp="#software-5" type="version-number">version 6.2</rs>). The steps to create 
+mask functions in <rs id="software-7" type="software">IDEAS</rs> (<rs corresp="#software-7" type="version-number">version 6.2</rs>). The steps to create 
 both masks are outlined below. 
 The BNC mask was optimized to better delineate pixels 
 in the main nuclei to allow more precise classification of 
@@ -268,7 +309,8 @@ nuclei by creating a border for the intensity valley within the
 nuclear image (fifth row). The Range function was then 
 applied to the Watershed (Levelset) mask to exclude spots 
 smaller than the main nuclei by setting a minimum area 
-threshold of 115 pixels (28.7 mm 2 ) resulting in the final BNC 
+threshold of 115 pixels (28.7 mm 
+2 ) resulting in the final BNC 
 mask that excludes the MN in both images (sixth row). In 
 order to quantify features of individual nuclei within the 
 BNC mask, the Component mask was applied to identify 
@@ -278,7 +320,9 @@ The new MN mask, created using a combination of the
 Spot, Dilate and Morphology functions, identifies DRAQ5 
 stained spots that are separate from the main nuclei. This 
 more specific MN mask allowed the minimum area to be 
-reduced from 10 pixels (2.5 mm 2 ) to 6 pixels (1.5 mm 2 ), 
+reduced from 10 pixels (2.5 mm 
+2 ) to 6 pixels (1.5 mm 
+2 ), 
 thereby allowing the scoring of smaller MN as compared to 
 the previous analysis. Figure 1B demonstrates the process for 
 two BNCs containing MN with the first row illustrating the 
@@ -297,13 +341,15 @@ phology function mask dilated by three pixels (sixth row), is
 used to highlight the main nuclei. Subtracting the morphol-
 ogy function mask from the second spot identification mask 
 gives the second MN spot mask (seventh row) and allows for 
-smaller nuclei (1.5 mm 2 ) to be masked than can be achieved 
+smaller nuclei (1.5 mm 
+2 ) to be masked than can be achieved 
 by the first MN spot mask while ensuring that no small arti-
 facts near the edge of the main nuclei are incorrectly masked 
 as MN. The final spot mask (eighth row) is a combination of 
 the two spot masks and ensures that MN identified by either 
 mask are correctly scored. 
-Figure 2 shows images captured by the IS X that highlight 
+Figure 2 shows images captured by the IS 
+X that highlight 
 the improvements in the optimized BNC and MN masks over 
 the original masks. The optimized BNC mask more tightly 
 highlights the main nuclei in comparison to the original BNC 
@@ -342,7 +388,8 @@ mask are now correctly scored by the optimized MN mask
 <p>Gating Strategy in <rs type="software">IDEAS</rs> 
 To filter, identify and score BNCs and MN, an opti-
 mized analysis template using new features and image 
-masks developed by Amnis V R was created in <rs type="software">IDEAS</rs>. To </p>
+masks developed by Amnis 
+V R was created in <rs type="software">IDEAS</rs>. To </p>
 
 <p>Figure 3. (A) Bivariate plot of DRAQ5 Gradient RMS versus BF Gradient RMS for the selection of focused cells. (B) Bivariate plot of BF 
 ASPECT RATIO versus BF AREA for elimination of small debris and multicellular aggregates. (C) Histogram of DRAQ5 INTENSITY used to 
@@ -353,7 +400,8 @@ Bivariate plot of COMPONENT INTENSITY RATIO versus COMPONENT AREA RATIO allowing
 main nuclei that were similar in both area and intensity. (H) Bivariate plot of ASPECT RATIO INTENSITY versus SHAPE RATIO that allowed 
 for removal of events that contained two distinct but overlapping nuclei. (I) Bivariate plot of DRAQ5 SYMMETRY versus the ratio of BNC 
 AREA to Levelset AREA for selection of cells with two well-separated, distinct nuclei. The tagged BNC and non-BNC populations are repre-
-sented by the yellow squares/bins and blue squares/bins, respectively. Representative images captured by the IS X are shown in each panel. </p>
+sented by the yellow squares/bins and blue squares/bins, respectively. Representative images captured by the IS 
+X are shown in each panel. </p>
 
 <p>Original Article </p>
 
@@ -436,7 +484,11 @@ Eliminates small debris and multicellular aggregates </p>
 
 <p>3C 
 DRAQ5 INTENSITY 
-1 3 10 5 /NA 
+1 3 10 </p>
+
+<p>5 </p>
+
+<p>/NA 
 Removes events with insufficient nuclear content to 
 be a BNC </p>
 
@@ -463,7 +515,9 @@ ASPECT RATIO INTENSITY COMPONENT 2 </p>
 0.65/1 </p>
 
 <p>Compares the circularity of each of the main nuclei 
-in each BNC against one another a </p>
+in each BNC against one another </p>
+
+<p>a </p>
 
 <p>3G 
 COMPONENT INTENSITY RATIO (BNC) 
@@ -474,8 +528,11 @@ COMPONENT AREA RATIO (BNC) </p>
 <p>0.5/1 </p>
 
 <p>Selects for BNCs having two nuclei with similar 
-DRAQ5 intensity a 
-Selects for BNCs having two nuclei with similar area </p>
+DRAQ5 intensity </p>
+
+<p>a </p>
+
+<p>Selects for BNCs having two nuclei with similar area </p>
 
 <p>3H 
 ASPECT RATIO INTENSITY 
@@ -485,7 +542,9 @@ SHAPE RATIO </p>
 0.2/0.7 </p>
 
 <p>Selects for events that contain two distinct, non-
-overlapping nuclei a </p>
+overlapping nuclei </p>
+
+<p>a </p>
 
 <p>3I 
 DRAQ5 SYMMETRY 
@@ -533,11 +592,12 @@ dose range) despite the fact that fewer BNCs were identified, </p>
 mask. 
 Figure 5A presents the rate of MN per BNC as a function 
 of dose for all six donors, the average rate of MN per BNC at 
-the 95% confidence intervals as determined in <rs id="software-27" type="software">Matlab</rs> (ver-
-sion 7.11.0.584, <rs corresp="#software-27" type="creator">Mathworks</rs>, MA). A quadratic increase with 
+the 95% confidence intervals as determined in <rs id="software-25" type="software">Matlab</rs> (ver-
+sion 7.11.0.584, <rs corresp="#software-25" type="creator">Mathworks</rs>, MA). A quadratic increase with 
 dose up to 4 Gy is expected from biological considerations 
 (3), historical work on the CBMN assay (4,5,23) and from our 
-previous work with IS X -CBMN method (17-19) and was 
+previous work with IS 
+X -CBMN method (17-19) and was 
 observed in this work. At 0 Gy, the average rate of MN per 
 BNC at 0 Gy for all six donors was 0.022 which was within the 
 0-0.040 range typical of background MN frequencies (24). 
@@ -546,7 +606,8 @@ which was observed in our previous work (17-19), was once
 again observed here as the rate of MN per BNC varied 
 between approximately 0.30-0.45 for all donors at 4 Gy. </p>
 
-<p>Table 2. The percentage of 100 tagged BNCs and non-BNCs remaining following application of each gate in the optimized <rs type="software">IDEAS</rs> V R analy-
+<p>Table 2. The percentage of 100 tagged BNCs and non-BNCs remaining following application of each gate in the optimized <rs type="software">IDEAS</rs> 
+V R analy-
 sis template at each dose point for one donor. The percentage of events remaining in the final BNC population in the original analysis 
 template is also shown (18). The numbers of BNCs and MN scored are also shown for one donor across the dose range from both the opti-
 mized and original analysis templates </p>
@@ -749,7 +810,8 @@ Original template
 87 </p>
 
 <p>Figure 4. Histogram of the SPOT COUNT applied to the MN mask using final BNC population from a sample irradiated with 2 Gy. Repre-
-sentative images captured by the IS X are shown in each panel. </p>
+sentative images captured by the IS 
+X are shown in each panel. </p>
 
 <p>Original Article </p>
 
@@ -762,7 +824,8 @@ the dose range, compared to 26% in our previous work (18).
 The average rate of MN per BNC (Y) as a function of dose 
 (D) was fitted to the following quadratic equation in <rs type="software">Matlab</rs>: </p>
 
-<p>Y 5 0:0185 1 0:0237D 1 0:0106D 2 : 
+<p>Y 5 0:0185 1 0:0237D 1 0:0106D 
+2 : 
 (1) </p>
 
 <p>Figure 5B shows the average calibration curve for the rate 
@@ -780,12 +843,13 @@ Figures 5C and 5D show graphical representations of the
 delivered dose (Gy) versus the estimated dose (Gy) (black </p>
 
 <p>circles) for all nine blinded samples after collecting data on 
-the IS X for 40 and 5 min, respectively. Also plotted are the 
+the IS 
+X for 40 and 5 min, respectively. Also plotted are the 
 dose estimations from our previous work (19) (black squares), 
 the ideal line with a slope of 1 where the delivered dose and 
 the estimated dose would be equal (dashed line) as well as the 
 60.5 Gy lines (dotted lines). All dose estimations were deter-
-mined using <rs id="software-10" type="software">CABAS</rs> <rs corresp="#software-10" type="version-number">v2</rs> (Chromosome Aberration Calculation 
+mined using <rs id="software-27" type="software">CABAS</rs> <rs corresp="#software-27" type="version-number">v2</rs> (Chromosome Aberration Calculation 
 Software) (28) and the error bars represent the standard errors 
 (SE) on the dose estimations. Figure 5C illustrates that after 
 40 min of data collection, the newly optimized analysis tem-
@@ -806,8 +870,13 @@ point is also plotted, the error bars represent the standard error of the mean a
 (B) The average rate of MN per BNC from A (squares) and the average rate of MN per BNC from our previous work in Rodrigues et al. (18) 
 (circles) including error bars which represent the standard error of the mean. The rate of MN per BNC from Schunck et al. (7) (solid line), 
 Willems et al. (25) (dashed line), De Sanctis et al. (26) (dashed-dotted line), and Thierens et al. (27) (dotted line) are also plotted using the 
-equations provided in those publications. (C, D) Estimated dose (Gy) versus delivered dose (Gy) determined by the IS X -CBMN method for 
-nine blinded samples using the optimized (circles) and original (squares) <rs type="software">IDEAS</rs> V R analysis templates following 40 min (C) and 5 min (D) of 
+equations provided in those publications. (C, D) Estimated dose (Gy) versus delivered dose (Gy) determined by the IS </p>
+
+<p>X </p>
+
+<p>-CBMN method for 
+nine blinded samples using the optimized (circles) and original (squares) <rs type="software">IDEAS</rs> 
+V R analysis templates following 40 min (C) and 5 min (D) of 
 data collection. The dashed line represents a slope of one, where the estimated dose would equal the delivered dose and the dotted lines 
 represent 60.5 Gy from the ideal slope. The error bars represent the standard error on the estimated dose. </p>
 
@@ -849,17 +918,21 @@ Figure 3 shows the sequential application of bivariate
 plots and histograms in the analysis template and demon-
 strates the effectiveness with which BNCs could be separated 
 from cellular debris and other undesired objects in the data 
-acquired by the IS X . While identification of focused, single 
+acquired by the IS 
+X . While identification of focused, single 
 cells can be attained from the BF images, the addition of a 
 DRAQ5 nuclear stain also allows apoptotic cells to be gated 
 out based on the hallmarks of apoptosis (chromatin conden-
 sation, nuclear condensation, and increased blebbing) without 
 the use of an additional viability dye (13). All DRAQ5 stained 
-BNCs were shown to fall between 1 3 10 5 AU and 1 3 10 6 AU 
+BNCs were shown to fall between 1 3 10 
+5 AU and 1 3 10 
+6 AU 
 of intensity indicating that the main nuclei show a relatively 
 uniform uptake of DRAQ5. This result may allow for 
 improved data collection to be obtained through the applica-
-tion of more stringent intensity classifiers on the IS X which 
+tion of more stringent intensity classifiers on the IS 
+X which 
 would filter out more unwanted events during acquisition. 
 Furthermore, the newly created BNC mask was able to better 
 differentiate images with two DRAQ5 stained objects from 
@@ -938,7 +1011,11 @@ BNCs. </p>
 <p>
 This paper has introduced the application of new features 
 and masks developed in the <rs type="software">IDEAS</rs> software designed specifi-
-cally for improved detection of BNCs and MN in the IS X -
+cally for improved detection of BNCs and MN in the IS </p>
+
+<p>X </p>
+
+<p>-
 based version of the CBMN assay with applications in radia-
 tion biodosimetry. Using these tools, an optimized data analy-
 sis template was created which more effectively identified 
@@ -949,10 +1026,12 @@ lar in magnitude to those presented in the literature which
 were generated by automated slide scoring methods. Finally, 
 dose estimations of blinded samples were correctly generated 
 to within 0.5 Gy of the delivered dose following only 5 
-minutes of data collection on the IS X , a marked improvement 
+minutes of data collection on the IS 
+X , a marked improvement 
 over our previous work. The improved analysis template, 
 combined with the reduction in data collection time on the 
-IS X , will allow for increased accuracy and throughput when 
+IS 
+X , will allow for increased accuracy and throughput when 
 performing biodosimetry to estimate unknown radiation 
 doses received by exposed individuals following large-scale 
 radiological or nuclear emergencies. </p>

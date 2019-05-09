@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4401865" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T19:57+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4401865" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:03+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>ABSTRACT 
 Objective: Microarray-related studies often involve a </p>
@@ -38,12 +38,14 @@ the prediction/classification performance of a
 gene signature is to be made. Popular cross-
 validation (CV) methods are k-fold CV, Monte 
 Carlo CV and leave-one-out CV (LOOCV, also 
-known as jackknifing). 16 These methods parti-
+known as jackknifing). 
+16 These methods parti-
 tion the original data into a training set and a 
 testing set. The training sample size, therefore, 
 is reduced. The bootstrap method is an alter-
 native to CV that operates by sampling with 
-replacement of the original data. 17 18 Even 
+replacement of the original data. 
+17 18 Even 
 though the bootstrap sample has the same 
 sample size as the original one, the overlap-
 ping of subjects between the bootstrap sample 
@@ -52,8 +54,11 @@ and the original data still reduces the effective
 reduced training sample size will curtail the 
 prediction/classification performance of a 
 gene signature, especially when the sample 
-size of a study is already small. 19 
-Estimating the performance of a predic-
+size of a study is already small. </p>
+
+<p>19 </p>
+
+<p>Estimating the performance of a predic-
 tion model built from a small study is a 
 vexing task. For CV purposes, the already 
 small sample size still needs to be partitioned 
@@ -63,7 +68,9 @@ sible (such as LOOCV), it would be nearly
 unbiased, but the effective sample size left 
 for validation is one subject and we would 
 get a variance that is unduly large, that is, 
-the notorious bias-variance dilemma. 20 21 </p>
+the notorious bias-variance dilemma. </p>
+
+<p>20 21 </p>
 
 <p>Strengths and limitations of this study </p>
 
@@ -89,7 +96,8 @@ Research </p>
 <p>The accuracy rate, the error rate and the area under 
 the receiver operating characteristic curve (AUC) are 
 commonly used performance indicators of a prediction 
-model for a binary outcome. 15 22 In this paper, we focus 
+model for a binary outcome. 
+15 22 In this paper, we focus 
 on the AUC index because it evaluates the global per-
 formance of a prediction model, not just at a particular 
 cut-off point, but for each and every possible cut-off 
@@ -116,7 +124,8 @@ partition to partition the data set into two parts: the
 training set and the testing set. The random partitions 
 are operated separately for the case group and the 
 control group to ensure that the number of cases and 
-controls is as balanced as possible; 23 24 the training set 
+controls is as balanced as possible; 
+23 24 the training set 
 has a total of n 1 ¼ N 1 À ðN 1 =kÞ cases and 
 n 0 ¼ N 0 À ðN 0 =kÞ controls (both to the nearest inte-
 gers), where k ¼ N 1 ðN 0 Þ; 10; 5; 3; 2 for LOOCV, 10-fold, 
@@ -127,7 +136,8 @@ tions for all folds, although this may be superfluous for
 some situations. (For example, there are only 8 Â 8 ¼ 64 
 distinctive partitions for LOOCV with N 1 ¼ N 0 ¼ 8. Note 
 that in a random partition, we leave out 'one pair' of a 
-case and a control, instead of 'one subject'. 24 ) For each 
+case and a control, instead of 'one subject'. 
+24 ) For each 
 Monte Carlo partition, a prediction model will be built 
 from the training set, and the testing set used to evalu-
 ate the performance of this model. The AUCs under 
@@ -137,11 +147,21 @@ which leaves us with a total of five AUCs. </p>
 <p>Learning curve for AUC 
 A learning curve is an assumed functional relation 
 between prediction performance and training sample 
-size. 25 In this study, we take y ¼ a þ bx as our learning 
-curve, where y ¼ Z À2 
-AUC and x ¼ n À1 
-1 þ n À1 
-0 . Essentially, 
+size. 
+25 In this study, we take y ¼ a þ bx as our learning 
+curve, where y ¼ Z </p>
+
+<p>À2 </p>
+
+<p>AUC and x ¼ n </p>
+
+<p>À1 </p>
+
+<p>1 þ n </p>
+
+<p>À1 </p>
+
+<p>0 . Essentially, 
 this learning curve is a straight line in a double-inverse 
 coordinate. For the ordinate, the AUC values are first 
 transformed to quantiles of standard normal distribu-
@@ -158,13 +178,20 @@ training sample size when normality and independence
 of the data are assumed. </p>
 
 <p>One-step extrapolation from the learning curve 
-We calculate y ¼ Z À2 </p>
+We calculate y ¼ Z </p>
 
-<p>AUC </p>
+<p>À2 
+AUC </p>
 
-<p>and x ¼ n À1 
-1 þ n À1 
-0 for each fold. 
+<p>and x ¼ n </p>
+
+<p>À1 </p>
+
+<p>1 þ n </p>
+
+<p>À1 </p>
+
+<p>0 for each fold. 
 On the basis of the five coordinate points, (x, y)s, we 
 draw a linear regression line, that is, y ¼ a þ bx: To 
 extrapolate the performance (denoted as AUC T ) of the 
@@ -176,23 +203,32 @@ the
 subjects 
 N T ¼ N 1 þ N 0 (N T ¼ N 1 þ N 0 ) are used as training 
 samples, we enter N 1 ; N 0 into the equation to get 
-Z À2 </p>
+Z </p>
 
-<p>AUC T </p>
+<p>À2 
+AUC T </p>
 
-<p>¼ a þ b Â ðN À1 
-1 þ N À1 
-0 Þ. 
-With 
-^ y ¼ Z À2 
-AUC T calculated, 
+<p>¼ a þ b Â ðN </p>
+
+<p>À1 </p>
+
+<p>1 þ N </p>
+
+<p>À1 </p>
+
+<p>0 Þ. 
+Withŷ ¼ Z </p>
+
+<p>À2 </p>
+
+<p>AUC T calculated, 
 we 
 then 
 obtain 
 d 
 AUC T ¼ F 
-ffiffiffiffiffiffiffi 
-^ y À1 
+ffiffiffiffiffiffif 
+y À1 
 p 
 À 
 Á 
@@ -253,7 +289,8 @@ i¼1 </p>
 b i x ij , where χ ij is the observed gene expression level 
 of the ith gene for this jth subject. (The naïve multiple 
 regression used in this study is similar to a previously 
-proposed compound covariate method 26 where the pre-
+proposed compound covariate method 
+26 where the pre-
 diction score for the jth subject in the testing set is 
 S </p>
 
@@ -267,10 +304,13 @@ classification, regression and pattern recognition. The
 basis of SVM is to implicitly map data to a higher dimen-
 sional space via a kernel function in order to identify an 
 optimal hyperplane that maximises the margin between 
-the two groups. 27 There are many software packages 
+the two groups. 
+27 There are many software packages 
 available to implement SVM. In this study, we use the 
 <rs type="software">e1071-package of R</rs> with a default radial basis function 
-kernel to obtain the prediction scores. 28 </p>
+kernel to obtain the prediction scores. </p>
+
+<p>28 </p>
 
 <p>CVs of the prediction models 
 In our simulation study, we perform a total of 5000 simu-
@@ -286,14 +326,19 @@ modified bootstrap procedure of the ordinary bootstrap.
 We draw a total of 100 resamplings. At each draw, the 
 observations left out serve as the testing set. The effect-
 ive (non-overlapping) training sample size of the LOO 
-bootstrap is around 63.2% of the total sample size. 17 18 
-(Out-of-bag (OOB) 29 estimation employs a majority vote 
+bootstrap is around 63.2% of the total sample size. </p>
+
+<p>17 18 </p>
+
+<p>(Out-of-bag (OOB) 
+29 estimation employs a majority vote 
 on the multiple prediction made for observation i based 
 on the bootstrap samples at each draw, while the LOO 
 bootstrap takes an average on error of these predictions. 
 Therefore, OOB estimation may have larger variability 
 than the LOO bootstrap when the sample size is 
-small. 30 ) In the simulation, we additionally create a large 
+small. 
+30 ) In the simulation, we additionally create a large 
 data set of 1000 cases and 1000 controls for external val-
 idation. For a prediction model, an externally validated 
 AUC against this data set is considered as its true AUC 
@@ -335,7 +380,8 @@ total sample size (total sample size minus one pair);
 hence, it is the least biased (blue line) among all the 
 fold-based CV methods. The training sample size of the 
 LOO bootstrap is about 63% of the total sample 
-size, 17 18 which makes its bias (black dashed line) com-
+size, 
+17 18 which makes its bias (black dashed line) com-
 parable to that of the twofold CV (with 50% of the total 
 sample size; green line). As for the bias of our extrapola-
 tion method (red line), it is comparable to that of 
@@ -359,8 +405,10 @@ We simulated a more substantially non-normal data set
 the proposed extrapolation method can still strike a 
 good balance between bias and variance (see online sup-
 plementary appendix 4). In addition, we examined the 
-performances of the 0.632 bootstrap 17 and the 0.632+ 
-bootstrap, 31 both of which are weighted averages 
+performances of the 0.632 bootstrap 
+17 and the 0.632+ 
+bootstrap, 
+31 both of which are weighted averages 
 between the LOO bootstrap estimate and the resubstitu-
 tion estimate. (The 0.632+ bootstrap is an improved 
 version of the 0.632 bootstrap.) We found that the 0.632 
@@ -389,13 +437,21 @@ and
 a 
 quadratic 
 equation 
-y ¼ a þ bx þ cx 2 with y ¼ Z À2 </p>
+y ¼ a þ bx þ cx 
+2 with y ¼ Z </p>
 
-<p>AUC </p>
+<p>À2 
+AUC </p>
 
-<p>and x ¼ n À1 
-1 þ n À1 
-0 ), but 
+<p>and x ¼ n </p>
+
+<p>À1 </p>
+
+<p>1 þ n </p>
+
+<p>À1 </p>
+
+<p>0 ), but 
 we found the results to be no better than using the 
 learning curve in this paper (see online supplementary 
 appendices 7 and 8). </p>
@@ -416,7 +472,8 @@ panels is for complex data (mixture of normal distributions). The horizontal thi
 <p>REAL DATA DEMONSTRATION 
 We take three microarray data sets to demonstrate 
 how the extrapolation method can be applied step by 
-step. 32-34 As this paper focuses on prediction model </p>
+step. 
+32-34 As this paper focuses on prediction model </p>
 
 <p>evaluation, and not on gene selection, we conveniently 
 construct a 10-gene signature based on the top 10 genes 
@@ -444,7 +501,8 @@ model for each data set. Monte Carlo random partition
 obtain the cross-validated AUCs. </p>
 
 <p>Example 1 
-The first data set is colon cancer data. 32 The data consist 
+The first data set is colon cancer data. 
+32 The data consist 
 of 2000 gene expressions in 62 tissue samples (40 tumour 
 and 22 normal colon tissue samples). The data are avail-
 able at http://genomics-pubs.princeton.edu/oncology/. 
@@ -468,8 +526,13 @@ For naïve multiple regression, the AUCs (averaged
 from 1000 Monte Carlo partitions) are 0.936 (LOOCV), 
 0.929 (10-fold CV), 0.928 (5-fold CV), 0.925 (3-fold CV) 
 and 0.921 (2-fold CV), respectively. The (x, y)s are then 
-calculated as: (11 À1 þ 11 À1 ; Z À2 
-0:936 )=(0.182, 0.432) for 
+calculated as: (11 
+À1 þ 11 
+À1 ; Z </p>
+
+<p>À2 </p>
+
+<p>0:936 )=(0.182, 0.432) for 
 LOOCV, (0.200, 0.465) for 10-fold CV, (0.220, 0.466) for 
 5-fold CV, (0.250, 0.483) for 3-fold CV and (0.330, 0.503) 
 for 2-fold CV, respectively. These results are plotted in 
@@ -478,8 +541,12 @@ the five (x, y) points: y ¼ 0:373 þ 0:409x (the red line in
 figure 3A). To predict the performance with a sample 
 size of 24 (all samples in the model building and CV 
 data set are used as the training set, ie, 12 tumour and 
-12 normal tissue samples), we enter x ¼ 12 À1 þ 12 À1 
-into the regression equation to get ^ y ¼ 0:441 (* in 
+12 normal tissue samples), we enter x ¼ 12 
+À1 þ 12 </p>
+
+<p>À1 </p>
+
+<p>into the regression equation to getŷ ¼ 0:441 (* in 
 figure 3A). The extrapolated performance is therefore 
 d 
 AUC T ¼ F 
@@ -488,9 +555,8 @@ ffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffi
 p </p>
 
 <p>
-¼ 0:930. We next perform a total </p>
-
-<p>of 100 bootstrapping for this example and the boot-
+¼ 0:930. We next perform a total 
+of 100 bootstrapping for this example and the boot-
 strapped SE for d 
 AUC T is calculated as 0.080. The results 
 for this example when SVM is used for constructing the 
@@ -499,7 +565,8 @@ AUC T
 (± bootstrapped SE) is calculated as 0.940 (±0.079). </p>
 
 <p>Example 2 
-The second example is a breast cancer data set, 33 which 
+The second example is a breast cancer data set, 
+33 which 
 is available at the Gene Expression Omnibus database 
 (http://www.ncbi.nlm.nih.gov/geo), with accession code 
 GSE2990. These data consist of 22 215 genes for 189 
@@ -537,14 +604,16 @@ calculated as 0.781 (±0.063). </p>
 
 <p>Example 3 
 The third example is a different breast cancer data set. 
-The data set 34 and its patient profile are available at the 
+The data set 
+34 and its patient profile are available at the 
 GEO database (http://www.ncbi.nlm.nih.gov/geo) with 
 accession code GSE2034. The data consisting of 107 
 patients with breast cancer with distant relapse and 197 
 without distant relapse) was divided into training (115 
 patients) and testing (171 patients) by concentration of 
 the oestrogen receptor and a 76-gene signature was 
-identified by previous researchers. 34 We use our method 
+identified by previous researchers. 
+34 We use our method 
 to estimate the prediction performance of this 76-gene 
 signature. 
 The results for naïve multiple regression are presented 
@@ -561,13 +630,20 @@ for a sample size of N T À 1 (or N T À 2, in a leave-
 one-pair-out CV), since what we are looking for is the 
 performance at sample size N T . In this study, we extrapo-
 late the performance to N T by exploiting the linear rela-
-tion between Z À2 </p>
+tion between Z </p>
 
-<p>AUC </p>
+<p>À2 
+AUC </p>
 
-<p>and n À1 
-1 þ n À1 
-0 . The extrapolation is </p>
+<p>and n </p>
+
+<p>À1 </p>
+
+<p>1 þ n </p>
+
+<p>À1 </p>
+
+<p>0 . The extrapolation is </p>
 
 
 
@@ -601,7 +677,8 @@ available, to significantly enhance the model perform-
 ance. In either case, our method amounts to taking the 
 average of the five CV estimates, thereby stabilising the 
 variances. 
-Two previous studies 30 35 also exploited the extrapola-
+Two previous studies 
+30 35 also exploited the extrapola-
 tion concept. Both used an inverse power-law model as 
 the empirical learning curve. In this paper, we are only 
 interested in how the performance will result if all the 

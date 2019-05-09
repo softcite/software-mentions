@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC3630384" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T20:01+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC3630384" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:07+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>In cancer genome studies, the annotation of newly detected oncogene/tumor suppressor gene candidates is a challenging 
 process. We propose using concept lattice analysis for the annotation and interpretation of genes having candidate somatic 
@@ -63,13 +63,13 @@ exome sequencing of normal matched samples from 10 acute
 myeloid leukemia. </p>
 
 <p>teristic data. We aligned the sequencing reads to the human 
-reference genome (hg 19, GRCh37) from USCC by <rs id="software-17" type="software">BWA</rs> 
-<rs corresp="#software-17" type="version-number">0.6.2</rs> [12] (Figs. 1 and 2). To filter the known single nucle-
+reference genome (hg 19, GRCh37) from USCC by <rs id="software-11" type="software">BWA</rs> 
+<rs corresp="#software-11" type="version-number">0.6.2</rs> [12] (Figs. 1 and 2). To filter the known single nucle-
 otide polymorphisms (SNPs), we used dbSNP bulid 137. We 
 removed PCR duplicates and filtering low-quality SNPs by 
-<rs id="software-10" type="software">Samtools</rs> <rs corresp="#software-10" type="version-number">0.1.18</rs> [13], <rs id="software-13" type="software">Picard</rs> <rs corresp="#software-13" type="version-number">1.68</rs> [14], and <rs id="software-15" type="software">GATK</rs> <rs corresp="#software-15" type="version-number">2.3.4</rs> 
+<rs id="software-8" type="software">Samtools</rs> <rs corresp="#software-8" type="version-number">0.1.18</rs> [13], <rs id="software-9" type="software">Picard</rs> <rs corresp="#software-9" type="version-number">1.68</rs> [14], and <rs id="software-10" type="software">GATK</rs> <rs corresp="#software-10" type="version-number">2.3.4</rs> 
 [15]. After the filtering process, the SAM file was converted 
-to VCF file by <rs id="software-19" type="software">VCF Tools</rs> <rs corresp="#software-19" type="version-number">0.1.10</rs> [16]. For detecting somatic 
+to VCF file by <rs id="software-15" type="software">VCF Tools</rs> <rs corresp="#software-15" type="version-number">0.1.10</rs> [16]. For detecting somatic 
 mutation candidates, we obtained the difference in VCF files 
 between tumor and normal samples. For annotation of these 
 somatic mutation candidates, we used the ANNOVAR tool 
@@ -399,11 +399,50 @@ no.
 Symbols of 3 or more mutated genes </p>
 
 <p>1 
-USP9Y a , MUC5B a , TCF19 c , MUC2 c , C6orf10, VPS13A, TMEM131 
+USP9Y </p>
+
+<p>a </p>
+
+<p>, MUC5B </p>
+
+<p>a </p>
+
+<p>, TCF19 </p>
+
+<p>c </p>
+
+<p>, MUC2 </p>
+
+<p>c </p>
+
+<p>, C6orf10, VPS13A, TMEM131 
 2 
-USP9Y a , MUC5B a , BRD2 c 
-3 
-USP9Y a , SYNE1 b , CDH23, TCF19 c , MYH10, KIF16B, ITGAX, GRIK1, DMBT1 
+USP9Y </p>
+
+<p>a </p>
+
+<p>, MUC5B </p>
+
+<p>a </p>
+
+<p>, BRD2 </p>
+
+<p>c </p>
+
+<p>3 
+USP9Y </p>
+
+<p>a </p>
+
+<p>, SYNE1 </p>
+
+<p>b </p>
+
+<p>, CDH23, TCF19 </p>
+
+<p>c </p>
+
+<p>, MYH10, KIF16B, ITGAX, GRIK1, DMBT1 
 4 
 SYNE1 </p>
 
@@ -411,23 +450,61 @@ SYNE1 </p>
 
 <p>, LAMC3, HELZ2, DNAH8 
 5 
-MUC5B a , MUC6 b , TCF19 c , FOXD4L6, ZC3H7B, MYOM2, USP48 
+MUC5B 
+a , MUC6 </p>
+
+<p>b </p>
+
+<p>, TCF19 </p>
+
+<p>c </p>
+
+<p>, FOXD4L6, ZC3H7B, MYOM2, USP48 
 6 
 USP9Y </p>
 
 <p>a </p>
 
-<p>, MUC5B a , MUC6 b , CDSN c , WDR81, DMBT1, CYFIP1, TMUB2, PITRM1, PCDHB10, MUC17, KIFC2, KIAA1199, 
+<p>, MUC5B </p>
+
+<p>a </p>
+
+<p>, MUC6 </p>
+
+<p>b </p>
+
+<p>, CDSN </p>
+
+<p>c </p>
+
+<p>, WDR81, DMBT1, CYFIP1, TMUB2, PITRM1, PCDHB10, MUC17, KIFC2, KIAA1199, 
 ABCA7 
 7 
-USP9Y a , SYNE1 b , THAP3, CYFIP1, ANKRD18A 
+USP9Y </p>
+
+<p>a </p>
+
+<p>, SYNE1 </p>
+
+<p>b </p>
+
+<p>, THAP3, CYFIP1, ANKRD18A 
 8 
 MUC2 
 c , HELZ2, TNRC6C, TNRC18, TECTA, MUC16, MLL3, KANSL1, GPR98, FAM195A 
 9 
-MUC5B a , CDSN c 
-10 
-MUC6 b , BRD2 c , CDH23, OR6V1, DNAH17 </p>
+MUC5B 
+a , CDSN </p>
+
+<p>c </p>
+
+<p>10 
+MUC6 </p>
+
+<p>b </p>
+
+<p>, BRD2 
+c , CDH23, OR6V1, DNAH17 </p>
 
 <p>a </p>
 

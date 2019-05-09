@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4898791" /><encodingDesc><appInfo><application version="0.5.3-SNAPSHOT" ident="GROBID" when="2018-12-07T20:04+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4898791" /><encodingDesc><appInfo><application version="0.5.5-SNAPSHOT" ident="GROBID" when="2019-05-09T04:10+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>Abstract </p>
 
@@ -50,7 +50,7 @@ morphism-databases. Inference methods based on the coales-
 cent such as <rs id="software-1" type="software">SNAPP</rs> (<rs corresp="#software-1" type="creator">Bryant et al.</rs>. 2012) do not scale well as 
 the number of individuals grows, while those based on con-
 tinuous models of gene frequencies (Cavalli-Sforza and 
-Edwards 1967; Felsenstein 1981b;  n et al. 2011) depend 
+Edwards 1967; Felsenstein 1981b; Siré n et al. 2011) depend 
 only on proportions of populations with each allele, so scale 
 extremely well. In addition, it is often easier to model the 
 effect of selection on continuous gene frequency models 
@@ -66,7 +66,7 @@ with these models, and to expand the range of models we can </p>
 This is an Open Access article distributed under the terms of the Creative Commons Attribution Non-Commercial License (http://creativecommons.org/licenses/by-nc/4.0/), which permits 
 non-commercial re-use, distribution, and reproduction in any medium, provided the original work is properly cited. For commercial re-use, please contact journals.permissions@oup.com </p>
 
-
+<p>1338 Genome Biol. Evol. 8(5):1338-1350. doi:10.1093/gbe/evw064 Advance Access publication April 6, 2016 </p>
 
 <p>work with. Early work of Felsenstein (1968, 1973), revisited by 
 Freckleton (2012) and FitzJohn (2012), demonstrated that if 
@@ -76,7 +76,7 @@ exactly. Felsenstein's approach extends to other Gaussian pro-
 cesses, notably the Ornstein-Uhlenbeck (OU) process (Lande 
 1976; Felsenstein 1988; Hansen 1997), and for several dec-
 ades, Gaussian models were used almost exclusively to model 
-the evolution of quantitative traits. Ho and  (2014) used 
+the evolution of quantitative traits. Ho and Ané (2014) used 
 clever algebraic techniques to develop an alternative algorithm 
 for computing the likelihood and related quantities. They 
 survey several other models which can be handled using the 
@@ -87,7 +87,7 @@ that they are fundamentally restricted to models which are
 Gaussian processes or transforms of Gaussian processes, 
 where the computational bottleneck lies in the computation 
 of a quadratic form involving the covariance matrix of Ho and 
- (2014). Many evolutionary models cannot be handled 
+Ané (2014). Many evolutionary models cannot be handled 
 within this framework (e.g., Ronquist 2004; Landis et al. 
 2013). Some of the properties of Gaussian processes are 
 quite restrictive: Gaussian processes have single modes, so 
@@ -96,7 +96,7 @@ Brownian motion has independent increments, so the rate
 of change is independent of the value of a trait. The standard 
 strategy for computing with non-Gaussian models is to resort 
 to Monte-Carlo strategies. Even when we are working with a 
-model satisfying the assumptions of Ho and  (2014), the 
+model satisfying the assumptions of Ho and Ané (2014), the 
 algorithms they describe do not give an efficient method for 
 integrating over sets of trait values at the tips, as in the thresh-
 old models we discuss below. 
@@ -124,13 +124,23 @@ Z 1 </p>
 
 <p>where f is a "nice" function with continuous and bounded 
 derivatives. Simpson's rule, a simple textbook method re-
-viewed below, can be shown to have an OðN À4 Þ rate of </p>
+viewed below, can be shown to have an OðN 
+À4 Þ rate of </p>
 
 <p>convergence, meaning that, asymptotically in N, evaluating 
-ten times more points reduces the error by a factor of 10 4 . 
+ten times more points reduces the error by a factor of 10 </p>
+
+<p>4 </p>
+
+<p>. 
 In contrast, a standard Monte Carlo method has a rate of 
-convergence of OðN À 1 
-2 Þ, meaning that evaluating ten times 
+convergence of OðN </p>
+
+<p>À </p>
+
+<p>1 </p>
+
+<p>2 Þ, meaning that evaluating ten times 
 more points will only reduce the error by a factor of around 
 3. For this reason, numerical analysis texts often refer to 
 Monte Carlo approaches as "methods of last resort." 
@@ -144,8 +154,13 @@ rate, quoted above, is only achieved for an infeasibly large
 number of function evaluations N. The effective convergence 
 rate for small N can be very poor, and typically worse than 
 Monte Carlo. In contrast, there are Monte Carlo approaches 
-which achieve close to OðN À 1 
-2 Þ convergence irrespective of 
+which achieve close to OðN </p>
+
+<p>À </p>
+
+<p>1 </p>
+
+<p>2 Þ convergence irrespective of 
 dimension. This has been critical when computing the likeli-
 hoods of complex evolutionary models with as many dimen-
 sions as there are nodes in the phylogeny. 
@@ -161,11 +176,13 @@ difference between our approach and Felsenstein's discrete
 character algorithm is that we use numerical integration tech-
 niques to integrate states at ancestral nodes, instead of just 
 carrying out a summation. 
-The running time of the algorithm is OðN 2 nÞ, where N is 
+The running time of the algorithm is OðN 
+2 nÞ, where N is 
 the number of points used in the numerical integration at 
 each node and n is the number of taxa (leaves) in the tree. 
 Using Simpson's method, we obtain a convergence rate of 
-OðnN À4 Þ, meaning that if we increase N by a factor of 10, we 
+OðnN 
+À4 Þ, meaning that if we increase N by a factor of 10, we 
 will obtain an estimate which is accurate to four more decimal 
 places. 
 To illustrate the application of our general framework, we 
@@ -266,8 +283,11 @@ The oldest, and most widely used, continuous trait models
 assume that traits (or transformed gene frequencies) evolve 
 like Brownian motion (Cavalli-Sforza and Edwards 1967; 
 Felsenstein 1973). For these models, the root density f ðx r jyÞ 
-is Gaussian (normal) with mean 0 and unknown variance s 2 
-r . 
+is Gaussian (normal) with mean 0 and unknown variance s </p>
+
+<p>2 </p>
+
+<p>r . 
 The transition densities f ðx i jx j ; y v Þ are also Gaussian, with 
 mean x j (the trait value of the parent) and variance propor-
 tional to branch length. Note that there are identifiability 
@@ -280,7 +300,7 @@ Gaussian. Furthermore, the covariance matrix for this density
 has a special structure which methods such as the pruning 
 techniques of Felsenstein (1968, 1973), Freckleton (2012), 
 and FitzJohn (2012) exploit, as does the top-down approach 
-of Ho and  (2014). This general approach continues to 
+of Ho and Ané (2014). This general approach continues to 
 work when Brownian motion is replaced by an OU process 
 (Lande 1976; Felsenstein 1988; Hansen 1997), or indeed to 
 many linear or generalized linear models. 
@@ -291,7 +311,7 @@ Numerous researchers have implemented models which do
 not fit into the general Gaussian framework; most have re-
 sorted to Monte Carlo computation to carry out their analyses. 
 Landis et al. (2013) discuss a class of continuous trait 
-models which are based on  vy processes and include 
+models which are based on Lé vy processes and include 
 jumps. At particular times, as governed by a Poisson process, 
 the trait value jumps to a value drawn from a given density. 
 Examples include a compound Poisson process with Gaussian 
@@ -321,7 +341,7 @@ follow a double exponential distribution. Kutsukake and Innan </p>
 
 <p>(2013) use approximate Bayesian computation to carry out 
 inference. 
- n et al. (2011) propose a simple and elegant model for 
+Siré n et al. (2011) propose a simple and elegant model for 
 gene frequencies whereby the root value is drawn from a Beta 
 distribution and each transitional density is Beta with appro-
 priately chosen parameters. 
@@ -333,7 +353,7 @@ whether or not the value is positive or negative. A similar
 complication arises when dealing with gene frequency data 
 as we typically do not observe the actual gene frequency but 
 instead a binomially distributed sample based on that fre-
-quency ( n et al. 2011). 
+quency (Siré n et al. 2011). 
 If the trait values at the tip are not directly observed we 
 integrate over these values as well. Let pðz i jx i Þ denote the 
 probability of observing z i given the trait value x i . The margin-
@@ -372,7 +392,7 @@ values at a finite number of points. Hence, we can obtain
 approximate integrals of functions even when we do not 
 have an equation for the function itself. See Cheney and 
 Kincaid (2012) for an introduction to numerical integration, 
-and Dahlquist and  rck (2008) and Davis and Rabinowitz 
+and Dahlquist and Bjö rck (2008) and Davis and Rabinowitz 
 (1984) for more comprehensive technical surveys. 
 The idea behind most numerical integration techniques is 
 to approximate the target function using a function which is 
@@ -417,10 +437,10 @@ X N=2 </p>
 <p>f ðxÞdx: 
 ð7Þ </p>
 
-<p>Within each interval ½x 2'À2 ; x 2' , there is a unique quadratic 
+<p>Within each interval ½x 2'À2 ; x 2' , there is a unique quadratic 
 function which equals f(x) at each the three points 
 x ¼ x 2'À2 ; x ¼ x 2'À1, and x ¼ x 2' . The integral of this qua-
-dratic on the interval ½x 2'À2 ; x 2'  is </p>
+dratic on the interval ½x 2'À2 ; x 2' is </p>
 
 <p>ðb À aÞ 
 3N 
@@ -465,9 +485,11 @@ N </p>
 <p>where w k ¼ 4=3 when k is odd and w k ¼ 2=3 when k 
 is even, with the exception of w 0 and w N which both equal 
 1/3. Simpson's method is easy to implement and has a con-
-vergence rate of OðN À4 Þ. Increasing the number of intervals 
-by a factor of 10 decreases the error by a factor of 10 À4 . See 
-Dahlquist and  rck (2008) and Davis and Rabinowitz (1984) 
+vergence rate of OðN 
+À4 Þ. Increasing the number of intervals 
+by a factor of 10 decreases the error by a factor of 10 
+À4 . See 
+Dahlquist and Bjö rck (2008) and Davis and Rabinowitz (1984) 
 for further details. 
 It should be remembered, however, that the convergence 
 rate is still only an asymptotic bound, and gives no guarantees 
@@ -483,19 +505,34 @@ Z b </p>
 
 <p>a </p>
 
-<p>e À ðxÀmÞ 2 
-2s 2 f ðxÞdx 
+<p>e </p>
+
+<p>À </p>
+
+<p>ðxÀmÞ 2 </p>
+
+<p>2s 2 f ðxÞdx 
 ð11Þ </p>
 
 <p>where and varied. Using the same general approach as 
 Simpson's rule, we approximated f(x), rather than the whole </p>
 
-<p>function e À ðxÀmÞ 2 
-2s 2 f ðxÞ, by a piecewise quadratic function p(x). 
+<p>function e </p>
+
+<p>À </p>
+
+<p>ðxÀmÞ 2 </p>
+
+<p>2s 2 f ðxÞ, by a piecewise quadratic function p(x). 
 We could then use standard techniques and tools to evaluate 
 R b 
-a e À ðxÀmÞ 2 
-2s 2 pðxÞdx numerically. The resulting integration for-
+a e </p>
+
+<p>À </p>
+
+<p>ðxÀmÞ 2 </p>
+
+<p>2s 2 pðxÞdx numerically. The resulting integration for-
 mula, which we call the "Gaussian kernel method," gives a 
 significant improvement in numerical accuracy. 
 A further complication is that, in models of continuous 
@@ -546,7 +583,7 @@ R 1
 gral 
 R U 
 L f ðxÞdx can be bounded analytically. Other strategies 
-are possible; see Dahlquist and  rck (2008) for a compre-
+are possible; see Dahlquist and Bjö rck (2008) for a compre-
 hensive review. </p>
 
 <p>A Pruning Algorithm for Integrating Continuous Traits </p>
@@ -586,7 +623,7 @@ given by </p>
 <p>F i ðx j Þ ¼ </p>
 
 <p>Z 
-f ð~ x i jx j ; y i Þpðz i j~ x i Þd~ x i : 
+f ðx i jx j ; y i Þpðz i jx i Þdx i : 
 ð15Þ </p>
 
 <p>Suppose node i is not the root and that it has two children u 
@@ -596,8 +633,7 @@ disjoint subtrees, we obtain the recursive formula </p>
 <p>F i ðx j Þ ¼ </p>
 
 <p>Z 
-f ð~ x i jx j ; y i ÞF u ð~ x i ÞF v ð~ x i Þd ~ 
-x i : 
+f ðx i jx j ; y i ÞF u ðx i ÞF v ðx i Þdx i : 
 ð16Þ </p>
 
 <p>Finally, suppose that node i is the root and has two children 
@@ -619,22 +655,25 @@ of function evaluations for each node. In practice, this might
 vary over the tree, but for simplicity we assume that it is con-
 stant. For each node i, we select N + 1 trait values </p>
 
-<p>X i ½0 &lt; X i ½1 &lt; Á Á Á &lt; X i ½N: 
+<p>X i ½0 &lt; X i ½1 &lt; Á Á Á &lt; X i ½N: 
 ð18Þ </p>
 
 <p>How we do this will depend on the trait model and the 
 numerical integration technique. If, for example, the trait 
 values vary between a and b and we are applying Simpson's 
-method with N intervals we would use X i ½k ¼ a þ bÀa 
-N k for 
+method with N intervals we would use X i ½k ¼ a þ </p>
+
+<p>bÀa </p>
+
+<p>N k for 
 k ¼ 0; 1; 2; . . . ; N. 
 We traverse the tree starting at the tips and working to-
 ward the root. For each nonroot node i and k ¼ 0; 1; . . . ; N 
-we compute and store an approximation F i ½k of F i ðX j ½kÞ, 
+we compute and store an approximation F i ½k of F i ðX j ½kÞ, 
 where node j is the parent of node i. Note that this is an ap-
-proximation of F i ðX j ½kÞ rather than of F i ðX i ½kÞ since F i ðxÞ is 
+proximation of F i ðX j ½kÞ rather than of F i ðX i ½kÞ since F i ðxÞ is 
 the partial likelihood conditional on the trait value for the 
-parent of node i. The value approximation F v ½i is computed 
+parent of node i. The value approximation F v ½i is computed 
 by applying the numerical integration method to the appro-
 priate integral (15)-(17), where we replace function evalua-
 tions with approximations previously computed. See below 
@@ -642,7 +681,8 @@ for a worked example of this general approach.
 The numerical integration methods we use run in time linear 
 in the number of points being evaluated. Hence, if n is the 
 number of tips in the tree, the algorithm will run in time 
-OðnN 2 Þ. For the integration techniques described above, the 
+OðnN 
+2 Þ. For the integration techniques described above, the 
 convergence rate (in N) for the likelihood on the entire tree had 
 the same order as the convergence rate for the individual one-
 dimensional integrations (see below for a formal proof of a 
@@ -662,7 +702,7 @@ tree. Here, we show how to carry out reconstruction of </p>
 
 <p>GBE </p>
 
-
+<p>1342 Genome Biol. Evol. 8(5):1338-1350. doi:10.1093/gbe/evw064 Advance Access publication April 6, 2016 </p>
 
 <p>the marginal posterior density of a state at a particular node. 
 The differences between marginal and joint reconstructions 
@@ -698,19 +738,17 @@ descendants of node i, conditional on node i having trait value
 x. If node i is the root r, then G r ðxÞ is 1 for all x. 
 Let node i be any node apart from the root, let node j be its 
 parent and let node u be the other child of j (that is, the sibling 
-of node i). We let ~ 
-x denote the trait value at node j. Then G i ðxÞ 
+of node i). We letx denote the trait value at node j. Then G i ðxÞ 
 can be written </p>
 
 <p>G i ðxÞ ¼ </p>
 
 <p>Z 
-f ð~ xjx; y i ÞG j ð~ xÞF u ð~ xÞd ~ 
-x: 
+f ðxjx; y i ÞG j ðxÞF u ðxÞdx: 
 ð20Þ </p>
 
 <p>This integral can be evaluated using the same numerical 
-integrators used when computing likelihoods. Note that f ð~ xj 
+integrators used when computing likelihoods. Note that f ðxj 
 x; y i Þ is the conditional density of the parent state given the 
 child state, which is the reverse of the transition densities used 
 to formulate the model. It should be noted that while 
@@ -739,37 +777,50 @@ liability is continuous, the observed data are discrete: at each
 tip we observe only whether the liability is above or below 
 some threshold. 
 We will use standard notation for Gaussian densities. Let 
-ðxjm; s 2 Þ denote the density of a Gaussian random variable x 
-with mean and variance s 2 ; let </p>
+ðxjm; s 
+2 Þ denote the density of a Gaussian random variable x 
+with mean and variance s 
+2 ; let </p>
 
-<p>Èðyjm; s 2 Þ ¼ </p>
-
-<p>Z y </p>
+<p>Èðyjm; s 
+2 Þ ¼ 
+Z y </p>
 
 <p>À1 </p>
 
-<p>ðxjm; s 2 Þ 
+<p>ðxjm; s 
+2 Þ 
 ð 22Þ </p>
 
 <p>denote its cumulative density function, with inverse 
-È À1 ðajm; s 2 Þ. 
+È 
+À1 ðajm; s 
+2 Þ. 
 Let X 1 ; . . . ; X 2nÀ1 denote the (unobserved) liability values at 
 the n tips and nÀ1 internal nodes. As above we assume that 
 the i &lt; j whenever node i is a child of node j, so that the root 
 has index 2n À 1. 
 The liability value at the root has a Gaussian density with 
-mean r and variance s 2 
-r : 
-f ðx 2nÀ1 jy r Þ ¼ ðx 2nÀ1 jm r ; s 2 
-r Þ: 
+mean r and variance s </p>
+
+<p>2 </p>
+
+<p>r : 
+f ðx 2nÀ1 jy r Þ ¼ ðx 2nÀ1 jm r ; s </p>
+
+<p>2 </p>
+
+<p>r Þ: 
 ð23Þ </p>
 
 <p>Consider any nonroot node i and let j be the index of its 
 parent. Let t i denote the length of the branch connecting 
 nodes i and j. Then X i has a Gaussian density with mean x j 
-and variance s 2 t v : </p>
+and variance s 
+2 t v : </p>
 
-<p>f ðx i jx j ; y i Þ ¼ ðx i jx j ; s 2 t i Þ: 
+<p>f ðx i jx j ; y i Þ ¼ ðx i jx j ; s 
+2 t i Þ: 
 ð24Þ </p>
 
 <p>Following Felsenstein (2005), we assume thresholds for the 
@@ -803,14 +854,18 @@ on the tree: </p>
 
 <p>À1 </p>
 
-<p>ðx 2nÀ1 jm r ; s 2 
-r Þ </p>
+<p>ðx 2nÀ1 jm r ; s </p>
+
+<p>2 </p>
+
+<p>r Þ </p>
 
 <p>Y </p>
 
 <p>ði;jÞ </p>
 
-<p>ðx i jx j ; s 2 t i Þ 
+<p>ðx i jx j ; s 
+2 t i Þ 
 Y n </p>
 
 <p>i¼1 </p>
@@ -842,8 +897,13 @@ variance at the root and the transition variances on the path
 from the root to node i. If P i is the set of nodes from the root to 
 node i, then </p>
 
-<p>v i ¼ s 2 
-r þ s 2 </p>
+<p>v i ¼ s </p>
+
+<p>2 </p>
+
+<p>r þ s </p>
+
+<p>2 </p>
 
 <p>X </p>
 
@@ -857,9 +917,12 @@ the integrals with infinite domain. Let be the desired bound
 on this truncation error. Recall that the number of internal 
 nodes in the tree is nÀ1. Define </p>
 
-<p>L i ¼ È À1 </p>
+<p>L i ¼ È </p>
 
-<p>2ðn À 1Þ 
+<p>À1 </p>
+
+<p>
+2ðn À 1Þ 
 jm r ; v i </p>
 
 
@@ -868,7 +931,8 @@ jm r ; v i </p>
 
 <p>and </p>
 
-<p>U i ¼ È À1 1 À </p>
+<p>U i ¼ È 
+À1 1 À </p>
 
 <p>2ðn À 1Þ 
 jm r ; v i </p>
@@ -879,11 +943,11 @@ jm r ; v i </p>
 ð29Þ </p>
 
 <p>The bounds L i and U i are chosen so that the (marginal) prob-
-ability X i lies outside the interval ½L i ; U i  is at most =ðn À 1Þ. 
+ability X i lies outside the interval ½L i ; U i is at most =ðn À 1Þ. 
 For this model, these are given by the inverse distribution 
 function of a Gaussian; other models would involved different 
 transition densities. By the inclusion-exclusion principle, the 
-joint probability X i 2 ½L i ; U i  for any internal node i is at 
+joint probability X i 2 ½L i ; U i for any internal node i is at 
 most . We use this fact to bound the contribution of the 
 regions outside these bounds. 
 Z 1 </p>
@@ -896,8 +960,11 @@ Z 1 </p>
 
 <p>À1 </p>
 
-<p>f ðx 2nÀ1 jm r ; s 2 
-r Þ </p>
+<p>f ðx 2nÀ1 jm r ; s </p>
+
+<p>2 </p>
+
+<p>r Þ </p>
 
 <p>Y </p>
 
@@ -933,8 +1000,11 @@ r Þ </p>
 
 <p>À1 </p>
 
-<p>f ðx 2nÀ1 jm r ; s 2 
-r Þ </p>
+<p>f ðx 2nÀ1 jm r ; s </p>
+
+<p>2 </p>
+
+<p>r Þ </p>
 
 <p>Y </p>
 
@@ -959,8 +1029,11 @@ Y n </p>
 
 <p>À1 </p>
 
-<p>f ðx 2nÀ1 jm r ; s 2 
-r Þ </p>
+<p>f ðx 2nÀ1 jm r ; s </p>
+
+<p>2 </p>
+
+<p>r Þ </p>
 
 <p>Y </p>
 
@@ -990,8 +1063,11 @@ r Þ </p>
 
 <p>À1 </p>
 
-<p>f ðx 2nÀ1 jm r ; s 2 
-r Þ </p>
+<p>f ðx 2nÀ1 jm r ; s </p>
+
+<p>2 </p>
+
+<p>r Þ </p>
 
 <p>Y </p>
 
@@ -1001,10 +1077,10 @@ r Þ </p>
 ð31Þ </p>
 
 <p>PðX nþ1 = 
-2 ½L nþ1 ; U nþ1  or X nþ2 = 
-2 ½L nþ2 ; U nþ2  or Á Á Á orX 2nÀ1 
+2 ½L nþ1 ; U nþ1 or X nþ2 = 
+2 ½L nþ2 ; U nþ2 or Á Á Á orX 2nÀ1 
 = 
-2½L 2nÀ1 ; U 2nÀ1 Þ </p>
+2½L 2nÀ1 ; U 2nÀ1 Þ </p>
 
 <p>ð32Þ </p>
 
@@ -1015,7 +1091,7 @@ r Þ </p>
 using (28) and (29) repeatedly, and use these bounds when 
 carrying out integration at the internal nodes. We define </p>
 
-<p>X i ½k ¼ L i þ 
+<p>X i ½k ¼ L i þ 
 U i À L i 
 N 
 k 
@@ -1028,7 +1104,7 @@ node i be a tip of the tree, let node j be its parent and let z i
 be the binary trait value at this tip. For each k ¼ 0; 1; . . . ; N 
 we use standard error functions to compute </p>
 
-<p>F i ½k ¼ F i ðX j ½kÞ 
+<p>F i ½k ¼ F i ðX j ½kÞ 
 ð35Þ </p>
 
 <p>¼ </p>
@@ -1037,13 +1113,15 @@ we use standard error functions to compute </p>
 
 <p>0 </p>
 
-<p>ð~ xjX j ½k; s 2 t i Þd~ x if z i ¼ 1 </p>
+<p>ðxjX j ½k; s 
+2 t i Þdx if z i ¼ 1 </p>
 
 <p>Z 0 </p>
 
 <p>À1 </p>
 
-<p>ð~ xjX j ½k; s 2 t i Þd~ x if z i ¼ 0 </p>
+<p>ðxjX j ½k; s 
+2 t i Þdx if z i ¼ 0 </p>
 
 <p>1 
 i fz i ¼ ?: </p>
@@ -1054,13 +1132,15 @@ i fz i ¼ ?: </p>
 <p>&gt; &gt; &gt; &gt; &gt; &gt; : 
 ð36Þ </p>
 
-<p>Here, ðxjm; s 2 Þ is the density of a Gaussian with mean 
-and variance s 2 . 
+<p>Here, ðxjm; s 
+2 Þ is the density of a Gaussian with mean 
+and variance s 
+2 . 
 Now suppose that node i is an internal node with parent 
 node j and children u and v. Applying Simpson's rule to the 
 bounds L i , U i to (16) we have for each k ¼ 0; 1; . . . ; N: </p>
 
-<p>F i ½k ¼ 
+<p>F i ½k ¼ 
 U i À L i 
 N </p>
 
@@ -1068,10 +1148,11 @@ N </p>
 
 <p>'¼0 </p>
 
-<p>w ' ðX i ½'jX j ½k; s 2 t i ÞF u ½'F v ½' 
+<p>w ' ðX i ½'jX j ½k; s 
+2 t i ÞF u ½'F v ½' 
 ð37Þ </p>
 
-<p>&amp;F i ðX j ½kÞ: 
+<p>&amp;F i ðX j ½kÞ: 
 ð38Þ </p>
 
 <p>Suppose node i is the root, and u, v are its children. 
@@ -1085,8 +1166,11 @@ N </p>
 
 <p>'¼0 </p>
 
-<p>w ' ðX i ½'jm r ; s 2 
-r ÞF u ½'F v ½': 
+<p>w ' ðX i ½'jm r ; s </p>
+
+<p>2 </p>
+
+<p>r ÞF u ½'F v ½': 
 ð39Þ </p>
 
 <p>Hiscott et al. </p>
@@ -1102,9 +1186,13 @@ r ÞF u ½'F v ½':
 <p>Input: 
 N : Number of intervals in numerical integration. 
 t 1 , . . . , t 2n−2 : branch lengths in tree. 
-μ r , σ 2 
-r : mean and variance of root density 
-σ 2 : variance of transition densities (per unit branch length) 
+μ r , σ </p>
+
+<p>2 </p>
+
+<p>r : mean and variance of root density 
+σ 
+2 : variance of transition densities (per unit branch length) 
 z 1 , . . . , z n observed character (z i ∈ {+1, 0, ?}) 
 Output: 
 Probability L of observed character under the threshold model. </p>
@@ -1114,20 +1202,43 @@ Construct the vector w = [1, 4, 2, 4, 2, . . . , 4, 2, 1] as in (??)
 Compute the path length p i from the root to each node i. 
 Initialize F i [k] ← 1 for all nodes i and 0 ≤ k ≤ N . 
 For all i = n + 1, n + 2, . . . , 2n−1 
-L i ← Φ −1 ( nN −4 
-2(n−1) |μ r , σ 2 
-r + σ 2 p i ) 
-U i ← Φ −1 (1 − nN −4 
-2(n−1) |μ r , σ 2 
-r + σ 2 p i ) 
+L i ← Φ 
+−1 ( </p>
+
+<p>nN </p>
+
+<p>−4 </p>
+
+<p>2(n−1) |μ r , σ </p>
+
+<p>2 </p>
+
+<p>r + σ 
+2 p i ) </p>
+
+<p>U i ← Φ 
+−1 (1 − </p>
+
+<p>nN </p>
+
+<p>−4 </p>
+
+<p>2(n−1) |μ r , σ </p>
+
+<p>2 </p>
+
+<p>r + σ 
+2 p i ) 
 X i ← (U i − L i )x + L i 
 For all tip nodes i = 1, 2, . . . , n 
 Let j be the index of the parent of node i 
 For k = 0, . . . , N 
 If z i = 1 
-F i [k] = 1 − Φ(0; X j [k], σ 2 t i ) 
+F i [k] = 1 − Φ(0; X j [k], σ 
+2 t i ) 
 else if z i = 0 
-F i [k] = Φ(0; X j [k], σ 2 t i ) 
+F i [k] = Φ(0; X j [k], σ 
+2 t i ) 
 For all internal nodes i = n+1, ..., 2n−2, excluding the root 
 Let j be the index of the parent of node i 
 Let u, v be the indices of the children of node i 
@@ -1139,11 +1250,10 @@ N </p>
 
 <p>N </p>
 
-
-
 <p>=0 </p>
 
-<p>w φ(X i []; X j [k], σ 2 t i )F u []F v [] </p>
+<p>w φ(X i [ ]; X j [k], σ 
+2 t i )F u [ ]F v [ ] </p>
 
 <p>Let u, v be indices of the the children of the root. </p>
 
@@ -1153,54 +1263,64 @@ N </p>
 
 <p>N </p>
 
-
-
 <p>=0 </p>
 
-<p>w φ(X i []; μ r , σ 2 
-r )F u []F v [] </p>
+<p>w φ(X i [ ]; μ r , σ </p>
+
+<p>2 </p>
+
+<p>r )F u [ ]F v [ ] </p>
 
 <p>Algorithm 1 Pseudo-code of the likelihood approximation 
 algorithm for a single character, under the threshold model. 
 The nodes are numbered in increasing order from tips to the 
 root. 
 Regarding efficiency and convergence we have: 
-Theorem 1 Algorithm 1 runs in OðnN 2 Þ time and approx-
-imates L(T) with OðnN À4 Þ error. 
+Theorem 1 Algorithm 1 runs in OðnN 
+2 Þ time and approx-
+imates L(T) with OðnN 
+À4 Þ error. 
 Proof 
 The running time follows from the fact that for each of the 
 O(n) nodes in the tree we carry out O(N) applications of 
 Simpson's method. 
-Simpson's rule has OðN À4 Þ convergence on functions with 
-bounded fourth derivatives (Dahlquist and  rck 2008). The 
+Simpson's rule has OðN 
+À4 Þ convergence on functions with 
+bounded fourth derivatives (Dahlquist and Bjö rck 2008). The 
 root density and each of the transition densities are Gaussians, 
 so individually have bounded fourth derivatives. For each node 
 i, let n i denote the number of tips which are descendants of 
 the node. Using induction on (16), we see that for all nodes i, 
 the fourth derivative of F i ðxÞ is Oðn i Þ. 
-If we use ¼ nN À4 in (28) and (29) then replacing the 
-infinite domain integrals with integrals on ½L i ; U i  introduces 
-at most nN À4 error. Using a second induction proof on (16) 
+If we use ¼ nN 
+À4 in (28) and (29) then replacing the 
+infinite domain integrals with integrals on ½L i ; U i introduces 
+at most nN 
+À4 error. Using a second induction proof on (16) 
 and (37) together with the bound on fourth derivatives, we 
-have that jF i ðX j ½kÞ À F i ½kj is at most Oðn i N À4 Þ for all nodes i, 
+have that jF i ðX j ½kÞ À F i ½kj is at most Oðn i N 
+À4 Þ for all nodes i, 
 where node j is the parent of node i. In this way we obtain </p>
 
-<p>error bound of Oðn 2nÀ1 N À4 Þ ¼ OðnN À4 Þ on the approxima-
+<p>error bound of Oðn 2nÀ1 N 
+À4 Þ ¼ OðnN 
+À4 Þ on the approxima-
 tion of LðT jz 1 ; . . . ; z n ; yÞ: 
 « 
 We can estimate posterior densities using the recursion (20) 
 followed by equation (21). The conditional density </p>
 
-<p>f ð~ xjx; y i Þ ¼ ~ 
-xjm r þ 
+<p>f ðxjx; y i Þ ¼ xjm r þ 
 v j 
 v i 
 x À m r 
 À 
 Á 
 ; 
-s 2 t i v j 
-v i </p>
+s 
+2 t i v j </p>
+
+<p>v i </p>
 
 
 
@@ -1208,22 +1328,25 @@ v i </p>
 
 <p>can be obtained by plugging the transitional density </p>
 
-<p>f ðxj~ x; y i Þ ¼ ðxj~ x; s 2 t i Þ 
+<p>f ðxjx; y i Þ ¼ ðxjx; s 
+2 t i Þ 
 ð 41Þ </p>
 
 <p>and the two marginal densities (27) </p>
 
-<p>f ð~ xÞ ¼ ð~ x; v j Þ; f ðxÞ ¼ ðx; v i Þ 
+<p>f ðxÞ ¼ ðx; v j Þ; f ðxÞ ¼ ðx; v i Þ 
 ð 42Þ </p>
 
-<p>into the identity f ð~ xjx; y i Þ ¼ f ðxj~ x; y i Þ f ð~ x Þ 
-f ðxÞ . We thereby obtain 
+<p>into the identity f ðxjx; y i Þ ¼ f ðxjx; y i Þ </p>
+
+<p>f ðx Þ </p>
+
+<p>f ðxÞ . We thereby obtain 
 the recursion </p>
 
 <p>G i ðxÞ ¼ </p>
 
 <p>Z 
-~ 
 xjm r þ 
 v j 
 v i 
@@ -1231,13 +1354,14 @@ x À m r
 À 
 Á 
 ; 
-s 2 t i v j 
-v i </p>
+s 
+2 t i v j </p>
+
+<p>v i </p>
 
 
 
-<p>G j ð~ xÞF u ð~ xÞd ~ 
-x ð43Þ </p>
+<p>G j ðxÞF u ðxÞdx ð43Þ </p>
 
 <p>which we estimate using Simpson's method. Algorithm esti-
 mates values of the posterior densities at each node, evaluated 
@@ -1284,12 +1408,21 @@ character (Character 1 in Marazzi et al. [2012]) for a range of </p>
 
 
 
-<p>estimates for the liability variance at the root, s 2 
-r . The interest 
-in s 2 
-r stems from its use in determining bounds L i , U i for each 
-node, with the expectation that as s 2 
-r increases, the conver-
+<p>estimates for the liability variance at the root, s </p>
+
+<p>2 </p>
+
+<p>r . The interest 
+in s </p>
+
+<p>2 </p>
+
+<p>r stems from its use in determining bounds L i , U i for each 
+node, with the expectation that as s </p>
+
+<p>2 </p>
+
+<p>r increases, the conver-
 gence of the integration algorithm will slow. The mean liability 
 at the root, r , was determined from the data using Maximum 
 Likelihood estimation. 
@@ -1302,12 +1435,18 @@ characters by simulated coin flipping. Twenty replicates
 were carried out for each case. 
 The second experiment extends the model comparisons 
 carried out in Marazzi et al. (2012) to include the threshold 
-models. For this comparison we fix the transitional variance s 2 
-at one, since changing this values corresponds to a rescaling of 
+models. For this comparison we fix the transitional variance s </p>
+
+<p>2 </p>
+
+<p>at one, since changing this values corresponds to a rescaling of 
 the Brownian process, with no change in likelihood. With only 
 one character, the maximum likelihood estimate of the root 
-variance s 2 
-r is zero, irrespective of the data. This leaves a single 
+variance s </p>
+
+<p>2 </p>
+
+<p>r is zero, irrespective of the data. This leaves a single 
 parameter to infer: the value of the liability at the root state. 
 We computed a maximum likelihood estimate for the state at 
 the root, then applied our algorithm with a sufficiently large 
@@ -1322,8 +1461,12 @@ terior densities for the liabilities at internal nodes, using </p>
 <p>Algorithm 2: Compute posterior densities </p>
 
 <p>Input: 
-N , t 1 , . . . 2n − 2, μ r , σ 2 
-r , and σ 2 as in Algorithm 1 
+N , t 1 , . . . 2n − 2, μ r , σ </p>
+
+<p>2 </p>
+
+<p>r , and σ 
+2 as in Algorithm 1 
 Vector p, likelihood L and arrays F i computed in Algorithm 1. 
 Output: 
 Arrays H i for each internal node i. 
@@ -1356,24 +1499,29 @@ N </p>
 
 <p>N </p>
 
-
-
 <p>=0 </p>
 
-<p>w φ(X j []; μ, V )G j []F v [] </p>
+<p>w φ(X j [ ]; μ, V )G j [ ]F v [ ] </p>
 
 <p>For all i = n + 1, . . . , 2n − 1 
 Let u, v be the children of node i. 
 For all k = 0, 1, . . . , N 
-H i [k] ← 1 
-L G i [k]F u [k]F v [k]φ(X i [k]|μ r , σ 2 
-r + σ 2 p i ) </p>
+H i [k] ← </p>
+
+<p>1 </p>
+
+<p>L G i [k]F u [k]F v [k]φ(X i [k]|μ r , σ </p>
+
+<p>2 </p>
+
+<p>r + σ 
+2 p i ) </p>
 
 <p>Algorithm 2 Pseudocode for the algorithm to efficiently 
 compute ancestral posterior densities under the threshold 
-model. At the termination of the algorithm, H i ½k is an esti-
+model. At the termination of the algorithm, H i ½k is an esti-
 mate of the posterior density at internal node i, evaluated at 
-x ¼ X i ½k. 
+x ¼ X i ½k. 
 These posterior probabilities are then mapped onto the phy-
 logeny, using shading to denote the (marginal) posterior prob-
 ability that a liability is larger than zero. We therefore obtain a 
@@ -1448,11 +1596,22 @@ Material online, of Marazzi et al. (2012). </p>
 
 <p>FIG. 1.-Log-log plots of error as a function of N for the dynamic programming algorithm with Simpson's method (left) and with the Gaussian kernel 
 method (right). The likelihoods were computed under the threshold model on EFN trait data for an 839 taxon tree. Dotted lines have slope À4 (corresponding 
-to convergence rate of N À4 . Note the difference in scale for the two methods.). Logarithms computed to base 10. Letting h be the height of the tree, the 
-circles in both plots represent errors when s 2 
-r ¼ h, the asterisks represent errors when s 2 
-r ¼ 0:1h, and the triangles represent errors when s 2 
-r ¼ 10h. </p>
+to convergence rate of N 
+À4 . Note the difference in scale for the two methods.). Logarithms computed to base 10. Letting h be the height of the tree, the </p>
+
+<p>circles in both plots represent errors when s </p>
+
+<p>2 </p>
+
+<p>r ¼ h, the asterisks represent errors when s </p>
+
+<p>2 </p>
+
+<p>r ¼ 0:1h, and the triangles represent errors when s </p>
+
+<p>2 </p>
+
+<p>r ¼ 10h. </p>
 
 <p>Hiscott et al. </p>
 
@@ -1470,7 +1629,8 @@ not available we use the approximation when N = 1,000. Plots
 of error versus N are given in figure 1, both for Simpson's 
 method (left) and for the modified Gaussian kernel method 
 (right). For larger N, the error in a log-log plot decreases with 
-slope at most À4 (as indicated), corresponding to N À4 con-
+slope at most À4 (as indicated), corresponding to N 
+À4 con-
 vergence of the method. Log-log plots of error versus N for 
 the simulated data are given in figure 2. In each case, the 
 method converges for by N&amp;30. 
@@ -1794,8 +1954,6 @@ cial support to all authors from the University of Otago. </p>
 
 
 
-
-<p>Associate editor: Laura Katz </p>
 
 <p>Hiscott et al. </p>
 

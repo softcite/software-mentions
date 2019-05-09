@@ -97,7 +97,7 @@ For training the software model with all the available training data:
 > ./gradlew train_software 
 ```
 
-The training data must be under ```software-mentions/resources/dataset/software/corpus```
+The training data must be under ```software-mentions/resources/dataset/software/corpus```. 
 
 ### Evaluating only
 
@@ -107,7 +107,7 @@ For evaluating under the labeled data under ```grobid-astro/resources/dataset/so
 >  ./gradlew eval_software [-PgH=/path/grobid/home]
 ```
 
-The grobid home can be optionally specified. By default it will take `../grobid-home`  
+The grobid home can be optionally specified with parameter `-PgH`. By default it will take `../grobid-home`  
 
 
 ### Training and evaluating with automatic corpus split
@@ -118,7 +118,9 @@ The following commands will split automatically and randomly the available annot
 >  ./gradlew eval_software_split [-PgH=/custom/grobid/home -Ps=0.8 -Pt=10] 
 ```
 
-In this mode, by default, 90% of the available data is used for training and the remaining for evaluation. This ratio can be changed by editing the corresponding exec profile in the `pom.xml` file. 
+In this mode, by default, 90% of the available data is used for training and the remaining for evaluation. This default ratio can be changed with the parameter `-Ps`. By default, the training will use the available number of threads of the machine, but it can also be specified by the paramter `-Pt`.
+The grobid home can be optionally specified with parameter `-PgH`. By default it will take `../grobid-home`  
+
 
 ## Training data import
 
@@ -134,7 +136,7 @@ The path to the PDF repo is the path where the PDF corresponding to the annotate
 
 
 ```
-> ./gradlew annotated_corpus_generator_csv -Ppdf=/home/lopez/repository/softcite-dataset/pdf/ -Pcsv= /home/lopez/tools/softcite-dataset/data/csv_dataset/ -Poutput=resources/dataset/software/corpus/
+> ./gradlew annotated_corpus_generator_csv -Ppdf=/home/lopez/repository/softcite-dataset/pdf/ -Pcsv=/home/lopez/tools/softcite-dataset/data/csv_dataset/ -Poutput=resources/dataset/software/corpus/
 ```
 
 The compiled XML training files will be written in the standard GROBID training path for the softwate recognition model under `grobid/software-mentions/resources/dataset/software/corpus/`.
