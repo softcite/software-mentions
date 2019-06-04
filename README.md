@@ -124,7 +124,7 @@ The grobid home can be optionally specified with parameter `-PgH`. By default it
 
 ## Training data import
 
-### Importing the softcite dataset
+### Assembling the softcite dataset
 
 The source of training data is the [softcite dataset](https://github.com/howisonlab/softcite-dataset) developed by [James Howison](http://james.howison.name/) Lab at the University of Texas at Austin. The data need to be compiled with actual PDF content prelimiary to training in order to create XML annotated document (MUC conference style). This is done with the following command which takes 3 arguments: 
 
