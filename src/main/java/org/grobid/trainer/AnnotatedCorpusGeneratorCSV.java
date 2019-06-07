@@ -180,6 +180,11 @@ public class AnnotatedCorpusGeneratorCSV {
                 new FileWriter("doc/reports/all-mentions-"+field+".txt")));
             allMentionsWriters.put(field, writer);
         }
+        // init
+        Map<String, List<String>> mentionLists = new HashMap<String, List<String>>();
+        for(String field : fields) {
+            mentionLists.put(field, new ArrayList<String>());
+        }
 
         // go thought all annotated documents of softcite
         int m = 0;
@@ -303,10 +308,6 @@ public class AnnotatedCorpusGeneratorCSV {
             }
 
             // update total number of mentions and output a list report for each type
-            Map<String, List<String>> mentionLists = new HashMap<String, List<String>>();
-            for(String field : fields) {
-                mentionLists.put(field, new ArrayList<String>());
-            }
             for(SoftciteAnnotation annotation : localAnnotations) {
                 // context
                 String context = annotation.getContext();
@@ -315,41 +316,48 @@ public class AnnotatedCorpusGeneratorCSV {
                 if (annotation.getSoftwareMention() != null) {
                     totalSoftwareMentions++;
                     totalMentions++;
-                    if (!mentionLists.get(SOFTWARE_LABEL).contains(annotation.getSoftwareMention()))
-                        mentionLists.get(SOFTWARE_LABEL).add(annotation.getSoftwareMention());
+                    List<String> mentionList = mentionLists.get(SOFTWARE_LABEL);
+                    if (!mentionList.contains(annotation.getSoftwareMention())) {
+                        mentionList.add(annotation.getSoftwareMention());
+                        //mentionLists.put(SOFTWARE_LABEL, mentionList);
+                    }
                 }
                 if (annotation.getVersionNumber() != null) {
                     totalVersionNumberMentions++;
                     totalMentions++;
-                    if (!mentionLists.get(VERSION_NUMBER_LABEL).contains(annotation.getVersionNumber()))
-                        mentionLists.get(VERSION_NUMBER_LABEL).add(annotation.getVersionNumber());
+                    List<String> mentionList = mentionLists.get(VERSION_NUMBER_LABEL);
+                    if (!mentionList.contains(annotation.getVersionNumber())) {
+                        mentionList.add(annotation.getVersionNumber());
+                        //mentionLists.put(VERSION_NUMBER_LABEL, mentionList);
+                    }
                 }
                 if (annotation.getVersionDate() != null) {
                     totalVersionDateMentions++;
                     totalMentions++;
-                    if (!mentionLists.get(VERSION_DATE_LABEL).contains(annotation.getVersionDate()))
-                        mentionLists.get(VERSION_DATE_LABEL).add(annotation.getVersionDate());
+                    List<String> mentionList = mentionLists.get(VERSION_DATE_LABEL);
+                    if (!mentionList.contains(annotation.getVersionDate())) {
+                        mentionList.add(annotation.getVersionDate());
+                        //mentionLists.put(VERSION_DATE_LABEL, mentionList);
+                    }
                 }
                 if (annotation.getCreator() != null) {
                     totalCreatorMentions++;
                     totalMentions++;
-                    if (!mentionLists.get(CREATOR_LABEL).contains(annotation.getCreator()))
-                        mentionLists.get(CREATOR_LABEL).add(annotation.getCreator());
+                    List<String> mentionList = mentionLists.get(CREATOR_LABEL);
+                    if (!mentionList.contains(annotation.getCreator())) {
+                        mentionList.add(annotation.getCreator());
+                        //mentionLists.put(CREATOR_LABEL, mentionList);
+                    }
                 }
                 if (annotation.getUrl() != null) {
                     totalUrlMentions++;
                     totalMentions++;
-                    if (!mentionLists.get(URL_LABEL).contains(annotation.getUrl()))
-                        mentionLists.get(URL_LABEL).add(annotation.getUrl());
+                    List<String> mentionList = mentionLists.get(URL_LABEL);
+                    if (!mentionList.contains(annotation.getUrl())) {
+                        mentionList.add(annotation.getUrl());
+                        //mentionLists.put(URL_LABEL, mentionList);
+                    }
                 }
-            }
-
-            for(String field : fields) {
-                List<String> mentionList = mentionLists.get(field);
-                //Collections.sort(mentionList);
-                mentionList.sort(String::compareToIgnoreCase);
-                for(String mention : mentionList)
-                    allMentionsWriters.get(field).write(mention+"\n");
             }
 
             // TBD: use a map...
@@ -390,27 +398,23 @@ public class AnnotatedCorpusGeneratorCSV {
         }
 
         for(String field : fields) {
+            List<String> mentionList = mentionLists.get(field);
+            mentionList.sort(String::compareToIgnoreCase);
+            for(String mention : mentionList)
+                allMentionsWriters.get(field).write(mention+"\n");
+        }
+
+        for(String field : fields) {
             allMentionsWriters.get(field).close();
         }
 
         for(String field : fields) {
             unmatchMentionContextWriters.get(field).close();
         }
-        /*writerSoftware.close();
-        writerVersionDate.close();
-        writerVersionNumber.close();
-        writerCreator.close();
-        writerUrl.close();*/
 
         for(String field : fields) {
             misalignmentPDFWriters.get(field).close();
         }
-
-        /*writerMisalignmentSoftwarePDF.close();
-        writerMisalignmentVersionNumberPDF.close();
-        writerMisalignmentVersionDatePDF.close();
-        writerMisalignmentCreatorPDF.close();
-        writerMisalignmentUrlPDF.close();*/
 
         this.softwareTermVector(annotations, "doc/reports/software-term-vector.json");
 
