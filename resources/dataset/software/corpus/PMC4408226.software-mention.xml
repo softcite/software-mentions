@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4408226" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-06-04T06:36+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4408226" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-06-07T17:19+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>Abstract </p>
 
@@ -143,7 +143,7 @@ Chemicals were removed if their structures could not be found. Each dataset was 
 curated according to previously established guidelines (Fourches et al., 2010). Briefly, 
 counterions were removed, whereas specific chemotypes such as aromatic and nitro groups 
 were normalized using the <rs id="software-0" type="software">ChemAxon Standardizer</rs> (<rs corresp="#software-0" type="version-number">v.5.3</rs>, <rs corresp="#software-0" type="creator">ChemAxon Budapest, Hungary</rs>, 
-http://www.chemaxon.com). The presence of duplicates, i.e., identical compounds reported 
+<rs corresp="#software-0" type="url">http://www.chemaxon.com</rs>). The presence of duplicates, i.e., identical compounds reported 
 more than once in the same dataset, is known to lead to over-optimistic estimations of the 
 predictivity for developed QSAR models. However, the analysis of such records also gives 
 an estimate of the dataset quality: if activity data for the same compound are consistent, the 
@@ -279,10 +279,8 @@ could be used for validation and model selection, no cross-validation was perfor
 OOB set. The local (tree) applicability domain approach (Artemenko et al., 2011) was used 
 for all RF models developed in this study. </p>
 
-<p>DERMWIN-The <rs type="software">Dermal Permeability Coefficient Program (DERMWIN</rs>) is a module 
-available in the EPI Suite package developed by the EPA's Office of Pollution Prevention 
-Toxics and Syracuse Research Corporation and available at http://www.epa.gov/oppt/ 
-exposure/pubs/episuitedl.htm. The <rs id="software-10" type="software">DERMWIN</rs> <rs corresp="#software-10" type="version-number">v.2.02</rs> estimates chemicals' dermal 
+<p>DERMWIN-The <rs id="software-9" type="software">Dermal Permeability Coefficient Program (DERMWIN</rs>) is a module 
+available in the EPI Suite package developed by the <rs corresp="#software-9" type="creator">EPA’s Office of Pollution Prevention Toxics and Syracuse Research Corporation.</rs> and available at <rs corresp="#software-9" type="url">http://www.epa.gov/oppt/ exposure/pubs/episuitedl.htm.</rs>. The <rs id="software-10" type="software">DERMWIN</rs> <rs corresp="#software-10" type="version-number">v.2.02</rs> estimates chemicals' dermal 
 permeability coefficient using the following equation 1 (USEPA, 2004): </p>
 
 <p>(1) </p>
@@ -456,7 +454,7 @@ retained for in silico screening of chemical libraries. </p>
 
 <p>Comparison of developed QSAR models vs. DERMWIN permeability predictions </p>
 
-<p>The <rs type="software">DERMWIN</rs> module available as part of the EPI Suite software has been employed in 
+<p>The <rs id="software-12" type="software">DERMWIN</rs> module available as part of the <rs corresp="#software-12" type="creator">EPI suite software</rs> has been employed in 
 several recent studies (Fong and Tong, 2012; Fong et al., 2014; Zhang et al., 2013) for 
 evaluating skin permeability. For this reason, we decided to compare our models with that 
 implemented in this software. <rs type="software">DERMWIN</rs> uses a linear equation that relates the 

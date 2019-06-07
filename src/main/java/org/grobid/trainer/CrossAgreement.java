@@ -648,7 +648,7 @@ public class CrossAgreement {
             Writer writerMismatch = null;
             try {
                 if ( (outputPath == null) || (outputPath.trim().length() == 0))
-                    outputPath = "doc/iaa-mismatch-"+field+".txt";
+                    outputPath = "doc/reports/iaa-mismatch-"+field+".txt";
                 else 
                     outputPath += "/iaa-mismatch-"+field+".txt";
                 writerMismatch = new PrintWriter(new BufferedWriter(new FileWriter(outputPath, true)));
@@ -701,7 +701,7 @@ public class CrossAgreement {
             Writer writerMismatch = null;
             try {
                 if ( (outputPath == null) || (outputPath.trim().length() == 0))
-                    outputPath = "doc/iaa-mismatch-"+field+".txt";
+                    outputPath = "doc/reports/iaa-mismatch-"+field+".txt";
                 else 
                     outputPath += "/iaa-mismatch-"+field+".txt";
                 writerMismatch = new PrintWriter(new BufferedWriter(new FileWriter(outputPath)));

@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC2935446" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-06-04T06:27+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC2935446" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-06-07T17:09+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>ABSTRACT </p>
 
@@ -199,12 +199,12 @@ We use a machine learning-based predictor <rs type="software">DISOPRED2</rs>, re
 propensity-based <rs type="software">IUPred</rs> and a recent <rs type="software">DISOclust</rs> that is based on 
 tertiary structure predictions (i.e. prediction based on the sequence-
 derived tertiary structure). The usage of the 3D-based predictor is 
-the novel aspect of our ensemble. We select <rs type="software">DISOPRED2</rs> since 
+the novel aspect of our ensemble. We select DISOPRED2 since 
 it was demonstrated to provide high-quality predictions and to be 
 orthogonal to other machine learning-based methods (Schlessinger 
 et al., 2009). The <rs type="software">IUPred</rs> provides two models that specialize 
 in prediction of long-and short-disordered regions, respectively. 
-The <rs type="software">DISOclust</rs> utilizes a premise that ordered residues should be 
+The DISOclust utilizes a premise that ordered residues should be 
 conserved in 3D space in multiple models, whereas residues that 
 vary or are consistently missing are correlated with the disorder. It 
 predicts per-residue error in multiple fold recognition models which 
@@ -363,10 +363,9 @@ methods chosen based on two criteria: (i) their quality is comparable
 to the leading relevant predictors; and (ii) they provide a stand-alone 
 implementation that could be utilized to build an autonomous implementation 
 of the proposed disorder predictor. We utilize PSIPRED (McGuffin et al., 
-2000) for the SS prediction, <rs type="software">Real-SPINE3</rs> for the prediction of the relative 
-solvent accessibility (RSA) and backbone dihedral torsion angles (Faraggi 
-et al., 2009), <rs type="software">PROFbval</rs> for the B-factor prediction and residue flexibility 
-prediction (Schlessinger et al., 2006) and RPSP for the signal peptide 
+2000) for the SS prediction, <rs id="software-56" type="software">Real-SPINE3</rs> for the prediction of the relative 
+solvent accessibility (RSA) and backbone dihedral torsion angles (<rs corresp="#software-56" type="creator">Faraggi et al.</rs>., 2009), <rs id="software-57" type="software">PROFbval</rs> for the B-factor prediction and residue flexibility 
+prediction (<rs corresp="#software-57" type="creator">Schlessinger</rs> et al., 2006) and RPSP for the signal peptide 
 prediction (Plewczynski et al., 2008). We also use <rs type="software">IUPred</rs> to predict globular 
 domains. The selection of the SVM as the classifiers was motivated by its 
 prior extensive use in disorder prediction (Hirose et al., 2007; Ishida and 
