@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC2935446" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-06-07T18:05+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC2935446" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-06-11T20:01+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>ABSTRACT </p>
 
@@ -61,13 +61,16 @@ regions. These methods allow for high-throughput annotations
 of protein chains which provide a viable solution to close the 
 annotation gap. These predictors could be categorized into four 
 groups: (i) methods based on relative propensity of amino acids 
-to form disorder/ordered regions which include <rs id="software-26" type="software">GlobPlot</rs> (<rs corresp="#software-26" type="creator">Linding et al.</rs>., 2003), IUPred (Dosztányi et al., 2005), <rs id="software-28" type="software">FoldIndex</rs> (<rs corresp="#software-28" type="creator">Prilusky et al.</rs>., 2005) and Ucon (Schlessinger et al., 2007a); (ii) methods 
-built utilizing machine-learning classifiers, such as <rs id="software-29" type="software">DISpro</rs> (<rs corresp="#software-29" type="creator">Hecker et al.</rs>., 2008), <rs id="software-30" type="software">DISOPRED</rs> (<rs corresp="#software-30" type="creator">Jones and Ward</rs>, 2003) <rs id="software-31" type="software">DISOPRED2</rs> 
-(<rs corresp="#software-31" type="creator">Ward et al.</rs>., 2004), PrDOS (Ishida and Kinoshita, 2007), <rs id="software-32" type="software">POODLE-
-S</rs> (<rs corresp="#software-32" type="creator">Shimizu et al.</rs>., 2007a), <rs id="software-33" type="software">POODLE-L</rs> (<rs corresp="#software-33" type="creator">Hirose et al.</rs>., 2007), 
-<rs id="software-34" type="software">POODLE-W</rs> (<rs corresp="#software-34" type="creator">Shimizu et al.</rs>., 2007b), Spritz (Vullo et al., 2006), 
-<rs id="software-35" type="software">DisPSSMP</rs> (<rs corresp="#software-35" type="creator">Su et al.</rs>., 2006), <rs id="software-36" type="software">DisPSSMP2</rs> (<rs corresp="#software-36" type="creator">Su et al.</rs>., 2007), <rs id="software-37" type="software">IUP</rs> 
-(<rs corresp="#software-37" type="creator">Yang and Yang</rs>, 2006), <rs id="software-38" type="software">NORSnet</rs> (<rs corresp="#software-38" type="creator">Schlessinger et al.</rs>., 2007b) and 
+to form disorder/ordered regions which include <rs type="software">GlobPlot</rs> (Linding 
+et al., 2003), IUPred (Dosztányi et al., 2005), <rs type="software">FoldIndex</rs> (Prilusky 
+et al., 2005) and Ucon (Schlessinger et al., 2007a); (ii) methods 
+built utilizing machine-learning classifiers, such as <rs type="software">DISpro</rs> (Hecker 
+et al., 2008), <rs type="software">DISOPRED</rs> (Jones and Ward, 2003) <rs type="software">DISOPRED2</rs> 
+(Ward et al., 2004), PrDOS (Ishida and Kinoshita, 2007), <rs type="software">POODLE-
+S</rs> (Shimizu et al., 2007a), <rs type="software">POODLE-L</rs> (Hirose et al., 2007), 
+<rs type="software">POODLE-W</rs> (Shimizu et al., 2007b), Spritz (Vullo et al., 2006), 
+<rs type="software">DisPSSMP</rs> (Su et al., 2006), <rs type="software">DisPSSMP2</rs> (Su et al., 2007), <rs type="software">IUP</rs> 
+(Yang and Yang, 2006), <rs type="software">NORSnet</rs> (Schlessinger et al., 2007b) and 
 OnD-CRFs (Wang and Sauer, 2008); (iii) methods based on a meta-
 approach which combines predictions from multiple base predictors 
 including recent MD (Schlessinger et al., 2009), metaPrDOS (Ishida 
@@ -363,8 +366,9 @@ methods chosen based on two criteria: (i) their quality is comparable
 to the leading relevant predictors; and (ii) they provide a stand-alone 
 implementation that could be utilized to build an autonomous implementation 
 of the proposed disorder predictor. We utilize PSIPRED (McGuffin et al., 
-2000) for the SS prediction, <rs id="software-56" type="software">Real-SPINE3</rs> for the prediction of the relative 
-solvent accessibility (RSA) and backbone dihedral torsion angles (<rs corresp="#software-56" type="creator">Faraggi et al.</rs>., 2009), <rs id="software-57" type="software">PROFbval</rs> for the B-factor prediction and residue flexibility 
+2000) for the SS prediction, <rs type="software">Real-SPINE3</rs> for the prediction of the relative 
+solvent accessibility (RSA) and backbone dihedral torsion angles (Faraggi 
+et al., 2009), <rs id="software-57" type="software">PROFbval</rs> for the B-factor prediction and residue flexibility 
 prediction (<rs corresp="#software-57" type="creator">Schlessinger</rs> et al., 2006) and RPSP for the signal peptide 
 prediction (Plewczynski et al., 2008). We also use <rs type="software">IUPred</rs> to predict globular 
 domains. The selection of the SVM as the classifiers was motivated by its 
