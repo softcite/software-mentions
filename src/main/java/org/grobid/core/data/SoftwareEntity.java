@@ -112,6 +112,37 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 	}
 
 	/**
+	 * Assuming that software names are identical, this method merges the attributes
+	 * of the two entities.    
+	 */
+	public static void merge(SoftwareEntity entity1, SoftwareEntity entity2) {
+		if (entity1.getVersionNumber() == null)
+			entity1.setVersionNumber(entity2.getVersionNumber());
+		else if (entity2.getVersionNumber() == null)
+			entity2.setVersionNumber(entity1.getVersionNumber());
+
+		if (entity1.getVersionDate() == null)
+			entity1.setVersionDate(entity2.getVersionDate());
+		else if (entity2.getVersionDate() == null)
+			entity2.setVersionDate(entity1.getVersionDate());
+
+		if (entity1.getCreator() == null)
+			entity1.setCreator(entity2.getCreator());
+		else if (entity2.getCreator() == null)
+			entity2.setCreator(entity1.getCreator());
+
+		if (entity1.getSoftwareURL() == null)
+			entity1.setSoftwareURL(entity2.getSoftwareURL());
+		else if (entity2.getSoftwareURL() == null)
+			entity2.setSoftwareURL(entity1.getSoftwareURL());
+
+		if (entity1.getBibRefs() == null)
+			entity1.setBibRefs(entity2.getBibRefs());
+		else if (entity2.getBibRefs() == null)
+			entity2.setBibRefs(entity1.getBibRefs());
+	}
+
+	/**
 	 * Check if a component corresponding to a given label is already present in a software entity.
 	 * Bibliographical references are ignored because they can be accumulated to the same entity.
 	 */

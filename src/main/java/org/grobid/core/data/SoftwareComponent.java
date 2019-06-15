@@ -86,6 +86,7 @@ public class SoftwareComponent extends KnowledgeEntity implements Comparable<Sof
 	
 	public void setRawForm(String raw) {
         this.rawForm = raw;
+        this.normalizedForm = normalizeRawForm(raw);
     }
 
 	public String getNormalizedForm() {
@@ -93,7 +94,7 @@ public class SoftwareComponent extends KnowledgeEntity implements Comparable<Sof
     }
 	
 	public void setNormalizedForm(String normalized) {
-        this.normalizedForm = normalized;
+        this.normalizedForm = normalizeRawForm(normalized);
     }
 
 	public OffsetPosition getOffsets() {
@@ -278,6 +279,19 @@ public class SoftwareComponent extends KnowledgeEntity implements Comparable<Sof
 		}
 
         return buffer.toString();
+    }
+
+    /**
+     * This is a string normalization process adapted to the software 
+     * attribute strings
+     */
+    private static String normalizeRawForm(String raw) {
+    	if (raw == null)
+    		return null;
+    	String result = raw.replace("\n", " ");
+    	result = result.replaceAll("( )+", " ");
+    	result = TextUtilities.cleanField(result, false);
+    	return result;
     }
 	
 }

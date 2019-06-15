@@ -210,7 +210,7 @@ public class SoftwareDisambiguator {
                 }
             }
 
-            // we could also retrive "global_categories": 
+            // we could also retrieve the "global_categories" and use that for filtering out some non-software senses
             // e.g. [{"weight" : 0.16666666666666666, "source" : "wikipedia-en", "category" : "Bioinformatics", "page_id" : 726312}, ...
 
         } catch (Exception e) {

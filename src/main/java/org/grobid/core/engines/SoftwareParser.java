@@ -459,9 +459,30 @@ public class SoftwareParser extends AbstractParser {
                         }
                     }
                 }
-
-                Collections.sort(entities);
             }
+
+            System.out.println(entities.size() + " total software entities");  
+            // propagate the non-disambiguated entities attributes to the new propagated entities corresponding 
+            // to the same software name
+            for(SoftwareEntity entity1 : entities) {
+                if (entity1.getSoftwareName() != null) {
+                    for (SoftwareEntity entity2 : entities) {
+                        if (entity2.getSoftwareName() != null && 
+                            entity2.getSoftwareName().getNormalizedForm().equals(entity1.getSoftwareName().getNormalizedForm())) {
+                            SoftwareEntity.merge(entity1, entity2);
+                            if (entity1.getSoftwareName().getWikidataId() != null && entity2.getSoftwareName().getWikidataId() == null) {
+                                entity1.getSoftwareName().copyKnowledgeInformationTo(entity2.getSoftwareName());
+                                entity2.getSoftwareName().setLang(entity1.getSoftwareName().getLang());
+                            } else if (entity2.getSoftwareName().getWikidataId() != null && entity1.getSoftwareName().getWikidataId() == null) {
+                                entity2.getSoftwareName().copyKnowledgeInformationTo(entity1.getSoftwareName());
+                                entity1.getSoftwareName().setLang(entity2.getSoftwareName().getLang());
+                            }
+                        }
+                    }
+                }
+            }
+
+            Collections.sort(entities);
 
         } catch (Exception e) {
             e.printStackTrace();
