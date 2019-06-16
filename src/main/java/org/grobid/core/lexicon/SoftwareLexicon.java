@@ -46,6 +46,12 @@ public class SoftwareLexicon {
 
     private Map<String, Double> termIDF = null;
 
+    // the list of Wikipedia categories where software articles belong to
+    private List<String> wikipediaCategories = null;
+
+    // the list of P31 and P279 values of the Wikidata software entities
+    private List<String> propertyValues = null;
+
     private static volatile SoftwareLexicon instance;
 
     public static synchronized SoftwareLexicon getInstance() {
@@ -158,6 +164,71 @@ public class SoftwareLexicon {
             }
         }
 
+        // load the list of Wikipedia categories where software articles belong to
+        file = new File("resources/lexicon/softwareVoc.txt.categories");
+        if (!file.exists()) {
+            throw new GrobidResourceException("Cannot initialize software category dictionary, because file '" + 
+                file.getAbsolutePath() + "' does not exists.");
+        }
+        if (!file.canRead()) {
+            throw new GrobidResourceException("Cannot initialize software category dictionary, because cannot read file '" + 
+                file.getAbsolutePath() + "'.");
+        }
+        // read the file
+        try {
+            wikipediaCategories = new ArrayList<String>();
+
+            dis = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
+            String l = null;
+            while ((l = dis.readLine()) != null) {
+                if (l.length() == 0) continue;
+                wikipediaCategories.add(l.trim().toLowerCase());
+            }
+        } catch (FileNotFoundException e) {
+            throw new GrobidException("Software category dictionary file not found.", e);
+        } catch (IOException e) {
+            throw new GrobidException("Cannot read software category dictionary file.", e);
+        } finally {
+            try {
+                if (dis != null)
+                    dis.close();
+            } catch(Exception e) {
+                throw new GrobidResourceException("Cannot close IO stream.", e);
+            }
+        }
+
+        // load the list of P31 and P279 values of the Wikidata software entities
+        file = new File("resources/lexicon/softwareVoc.txt.types");
+        if (!file.exists()) {
+            throw new GrobidResourceException("Cannot initialize software subtype dictionary, because file '" + 
+                file.getAbsolutePath() + "' does not exists.");
+        }
+        if (!file.canRead()) {
+            throw new GrobidResourceException("Cannot initialize software subtype dictionary, because cannot read file '" + 
+                file.getAbsolutePath() + "'.");
+        }
+        // read the file
+        try {
+            propertyValues = new ArrayList<String>();
+
+            dis = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
+            String l = null;
+            while ((l = dis.readLine()) != null) {
+                if (l.length() == 0) continue;
+                propertyValues.add(l.trim().toLowerCase());
+            }
+        } catch (FileNotFoundException e) {
+            throw new GrobidException("Software subtypes dictionary file not found.", e);
+        } catch (IOException e) {
+            throw new GrobidException("Cannot read software subtypes dictionary file.", e);
+        } finally {
+            try {
+                if (dis != null)
+                    dis.close();
+            } catch(Exception e) {
+                throw new GrobidResourceException("Cannot close IO stream.", e);
+            }
+        }
     }
 	
 	public boolean inSoftwareDictionary(String string) {
@@ -182,4 +253,12 @@ public class SoftwareLexicon {
         else 
             return 0.0;
     }
+
+    public boolean inSoftwarePropertyValues(String value) {
+        return propertyValues.contains(value.toLowerCase());
+    }
+
+    public boolean inSoftwareCategories(String value) {
+        return wikipediaCategories.contains(value.toLowerCase());
+    }   
 }

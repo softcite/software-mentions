@@ -195,6 +195,54 @@ public class SoftwareDisambiguator {
 
                     // domains, e.g. "domains" : [ "Biology", "Engineering" ]
                     
+                    // statements
+                    Map<String, List<String>> statements = new TreeMap<String,List<String>>();
+                    JsonNode statementsNode = entityNode.findPath("statements");
+                    if ((statementsNode != null) && (!statementsNode.isMissingNode())) {
+                        if (statementsNode.isArray()) {
+                            for (JsonNode statement : statementsNode) {
+                                JsonNode propertyIdNode = statement.findPath("propertyId");
+                                JsonNode valueNode = statement.findPath("value");
+                                if ( (propertyIdNode != null) && (!propertyIdNode.isMissingNode()) &&
+                                     (valueNode != null) && (!valueNode.isMissingNode()) ) {
+                                    List<String> localValues = statements.get(propertyIdNode.textValue());
+                                    if (localValues == null)
+                                        localValues = new ArrayList<String>();
+                                    localValues.add(valueNode.textValue());
+
+                                    statements.put(propertyIdNode.textValue(), localValues);
+                                }
+                            }
+                        }
+                    }
+
+                    // statements can be used to filter obvious non-software entities which are
+                    // mere disambiguation errors
+                    boolean toBeFiltered = true;
+                    if ( (statements != null) && (statements.get("P31") != null) ) {
+                        List<String> p31 = statements.get("P31");
+                        for(String p31Value : p31) {
+                            if (SoftwareLexicon.getInstance().inSoftwarePropertyValues(p31Value)) {
+                                toBeFiltered = false;
+                                break;
+                            }
+                        }
+                    }
+                    if ( toBeFiltered && (statements != null) && (statements.get("P279") != null) ) {
+                        List<String> p279 = statements.get("P279");
+                        for(String p279Value : p279) {
+                            if (SoftwareLexicon.getInstance().inSoftwarePropertyValues(p279Value)) {
+                                toBeFiltered = false;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (toBeFiltered) {
+System.out.println("filtered entity: " + wikidataId);
+                        continue;
+                    }
+
                     SoftwareComponent component = entityPositions.get(startOff);
                     if (component != null) {
                         // merging
@@ -207,6 +255,7 @@ public class SoftwareDisambiguator {
                         if (lang != null)
                             component.setLang(lang);
                     }
+
                 }
             }
 
@@ -217,9 +266,6 @@ public class SoftwareDisambiguator {
             LOGGER.error("Invalid JSON answer from the NERD", e);
             e.printStackTrace();
         }
-
-
-        
 
         return entities;
     }
@@ -258,7 +304,10 @@ System.out.println("Calling: " + url.toString());
             //buffer.append(", \"resultLanguages\":[ \"de\", \"fr\"]");
             buffer.append(", \"text\": \"");
             for(LayoutToken token : subtokens) {
-                byte[] encodedText = encoder.quoteAsUTF8(token.getText());
+                String tokenText = token.getText();
+                if (tokenText.equals("\n")) 
+                    tokenText = " ";
+                byte[] encodedText = encoder.quoteAsUTF8(tokenText);
                 String outputEncodedText = new String(encodedText);
                 buffer.append(outputEncodedText);
             }
@@ -295,7 +344,7 @@ System.out.println("Calling: " + url.toString());
                 buffer.append(" }");
             }
 
-            buffer.append("] }");
+            buffer.append("], \"full\": true }");
 
             System.out.println(buffer.toString());
 
