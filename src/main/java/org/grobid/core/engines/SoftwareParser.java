@@ -119,7 +119,7 @@ public class SoftwareParser extends AbstractParser {
             } catch (Exception e) {
                 throw new GrobidException("CRF labeling for software parsing failed.", e);
             }
-//System.out.println(res);
+
             components = extractSoftwareComponents(text, res, tokens);
 
             // we group the identified components by full entities
@@ -243,7 +243,7 @@ public class SoftwareParser extends AbstractParser {
                         if ((localTokenization == null) || (localTokenization.size() == 0))
                             continue;
 
-                        String clusterContent = LayoutTokensUtil.normalizeText(LayoutTokensUtil.toText(cluster.concatTokens()));
+                        //String clusterContent = LayoutTokensUtil.normalizeText(LayoutTokensUtil.toText(cluster.concatTokens()));
                         if (clusterLabel.equals(TaggingLabels.PARAGRAPH) || clusterLabel.equals(TaggingLabels.ITEM)) {
                             //|| clusterLabel.equals(TaggingLabels.SECTION) {
                             processLayoutTokenSequence(localTokenization, entities);
@@ -333,7 +333,6 @@ public class SoftwareParser extends AbstractParser {
                     if ((localTokenization == null) || (localTokenization.size() == 0))
                         continue;
 
-                    String clusterContent = LayoutTokensUtil.normalizeText(LayoutTokensUtil.toText(cluster.concatTokens()));
                     if (clusterLabel.equals(TaggingLabels.PARAGRAPH) || clusterLabel.equals(TaggingLabels.ITEM)) {
                         //|| clusterLabel.equals(TaggingLabels.SECTION) ) {
                         propagateLayoutTokenSequence(localTokenization, entities, termProfiles, termPattern, frequencies);
@@ -376,7 +375,6 @@ public class SoftwareParser extends AbstractParser {
                     if ((localTokenization == null) || (localTokenization.size() == 0))
                         continue;
 
-                    String clusterContent = LayoutTokensUtil.normalizeText(LayoutTokensUtil.toText(cluster.concatTokens()));
                     if (clusterLabel.equals(TaggingLabels.CITATION_MARKER)) {
                         List<LayoutToken> refTokens = TextUtilities.dehyphenize(localTokenization);
                         String chunkRefString = LayoutTokensUtil.toText(refTokens);

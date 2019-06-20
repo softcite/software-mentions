@@ -329,7 +329,7 @@ Note by default the citations information (with the position information of the 
 
 ### Retrieve citation information for a software entity
 
-Endpoint: `/api/concept/{id}/citations`
+Endpoint: `/api/software/{id}/citations`
 
 |   method  |  response type      | 
 |---        |---                  |
@@ -343,7 +343,7 @@ Parameters:
 
 Example: 
 
-> curl localhost:8070/api/concept/Q8029/citations
+> curl localhost:8070/api/software/Q8029/citations
 
 ```json
 {
@@ -599,7 +599,7 @@ Example:
 
 ### Provide the n-best citations for a software entity
 
-Endpoint: `/api/{id}/citations/nbest`
+Endpoint: `/api/software/{id}/citations/nbest`
 
 |   method  |  response type      | 
 |---        |---                  |
@@ -639,7 +639,7 @@ The response lists the top citing documents with a relevance score, ranked in a 
 
 ### Provide the n most related software entities for a given software entity
 
-Endpoint: `/api/{id}/related`
+Endpoint: `/api/software/{id}/related`
 
 |   method  |  response type      | 
 |---        |---                  |
@@ -718,7 +718,7 @@ The service must ensure that none of the returned software entity is actually me
 
 ### Provide for a given person, all the software entities he has authored 
 
-Endpoint: `/api/{id}/software`
+Endpoint: `/api/person/{id}/software`
 
 |   method  |  response type      | 
 |---        |---                  |
