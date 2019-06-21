@@ -680,14 +680,14 @@ Parameters:
 
 Example: 
 
-> curl localhost:8070/api/Q8029/citations/nbest -d 'n=2'
+> curl localhost:8070/api/Q8029/documents/nbest -d 'n=2'
 
 The response lists the top citing documents with a relevance score, ranked in a decreasing order:
 
 ```json
 {
     "id": "Q8029",
-    "citations": [ 
+    "documents": [ 
     {
         "document": { "doi": "https://doi.org/10.1093/pcp/pcg126", 
                       "url": "",
