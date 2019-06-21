@@ -293,7 +293,7 @@ For all services, the response status codes will be as follow:
 
 ### Retrieve information about a software entity in the KB
 
-Endpoint: `/api/concept/{id}`
+Endpoint: `/api/software/{id}`
 
 |   method  |  response type      | 
 |---        |---                  |
@@ -307,7 +307,7 @@ Parameters:
 
 Example: 
 
-> curl localhost:8070/api/concept/Q8029
+> curl localhost:8070/api/software/Q8029
 
 
 ```json
@@ -471,9 +471,9 @@ The response will complement the input with disambiguated software entity `id` a
 }
 ```
 
-### Extract all raw mention of a software in a PDF
+### Get all raw mentions of a software
 
-Endpoint: `/api/software/mentions`
+Endpoint: `/api/software/{id}/mentions`
 
 |   method  |  response type      | 
 |---        |---                  |
@@ -482,16 +482,81 @@ Endpoint: `/api/software/mentions`
 
 Parameters:
 
-
 |requirement |   name  |  content-type value   |  description |
 |---         |---      |---                    |---                        |
-|required    |   file  |  multipart/form-data  |  PDF file (as multipart)  |
+|required    |   id    |  String               |  Software identifer in the database  |
 
 
-The response will list the extracted mentions similarly as the current software mention module with PDF coordinate information for each text chunk. The dimentions of each page of the document are also provided, in case the client needs to display the annotations in the PDF with the given coordinates: 
+The response will list the extracted mentions of the software entity in documents, with PDF coordinate information for each text chunk. The dimentions of each page of the documents are also provided, in case the client needs to display the annotations in the PDF with the given coordinates: 
 
 ```json
 {
+  "id": "Q8029",
+  "documents": [{
+    "id": { "..."},
+    "mentions": [{
+        "type": "software",
+        "software-name": {
+            "rawForm": "ImagePro Plus",
+            "offsetStart": 351,
+            "offsetEnd": 364,
+            "boundingBoxes": [{
+                "p": 8,
+                "x": 118.928,
+                "y": 461.363,
+                "w": 49.98600000000002,
+                "h": 7.749360000000024
+            }]
+        },
+        "creator": {
+            "rawForm": "Media Cybernetics, Silver Spring, \nU.S.A.",
+            "offsetStart": 366,
+            "offsetEnd": 407,
+            "boundingBoxes": [{
+                "p": 8,
+                "x": 175.37953333333334,
+                "y": 461.363,
+                "w": 115.15626666666665,
+                "h": 7.749360000000024
+            }, {
+                "p": 8,
+                "x": 48.5996,
+                "y": 471.623,
+                "w": 21.192299999999996,
+                "h": 7.749360000000024
+            }]
+        }
+        }],
+    "pages": [ {"page_height":842.0, "page_width":595.0}, {"page_height":842.0, "page_width":595.0}, ...]
+  }]
+}
+```
+
+Example:
+
+> curl localhost:8070/api/software/Q8029/mentions
+
+### Get all raw mentions of a document
+
+Endpoint: `/api/document/{id}/mentions`
+
+|   method  |  response type      | 
+|---        |---                  |
+| POST      |   application/json  |   
+
+
+Parameters:
+
+|requirement |   name  |  content-type value   |  description |
+|---         |---      |---                    |---                        |
+|required    |   id    |  String               |  Document identifer in the database  |
+
+
+The response will list the extracted software mentions of in a document, with PDF coordinate information for each text chunk. The dimentions of each page of the documents are also provided, in case the client needs to display the annotations in the PDF with the given coordinates: 
+
+```json
+{
+    "id": { "..."},
     "mentions": [{
         "type": "software",
         "software-name": {
@@ -531,12 +596,11 @@ The response will list the extracted mentions similarly as the current software 
 
 Example:
 
-> curl --form file=@./thefile.pdf localhost:8070/api/software/mentions
+> curl localhost:8070/api/software/Q8029/mentions
 
+### Get all disambiguated software entities of a publication
 
-### Extract all disambiguated software entities in a PDF
-
-Endpoint: `/api/software/entities`
+Endpoint: `/api/document/{id}/software`
 
 |   method  |  response type      | 
 |---        |---                  |
@@ -547,12 +611,14 @@ Parameters:
 
 |requirement |   name  |  content-type value   |  description |
 |---         |---      |---                    |---                        |
-|required    |   file  |  multipart/form-data  |  PDF file (as multipart)  |
+|required    |   id    |  String               |  Document identifer in the database  |
 
-The response response if similar to the previous mention extraction service, but the mention are disambiguated against the software database, with disambiguated software entity `id` and a disambiguation confidence score. Non-disambiguated mentions are not appearing. 
+
+The response response if similar to the previous document mention access service, but the mention are disambiguated against the software database, with disambiguated software entity identifier and a disambiguation confidence score. Non-disambiguated mentions are not appearing. 
 
 ```json
 {
+    "id": { "..."},
     "mentions": [{
         "type": "software",
         "id": "E280",
@@ -594,12 +660,12 @@ The response response if similar to the previous mention extraction service, but
 
 Example:
 
-> curl --form file=@./thefile.pdf localhost:8070/api/software/entities
+> curl localhost:8070/api/document/Q8029/software
 
 
-### Provide the n-best citations for a software entity
+### Provide the n-best citing documents for a software entity
 
-Endpoint: `/api/software/{id}/citations/nbest`
+Endpoint: `/api/software/{id}/documents/nbest`
 
 |   method  |  response type      | 
 |---        |---                  |
@@ -649,7 +715,7 @@ Parameters:
 
 |requirement |   name  |  content-type value   |  description |
 |---         |---      |---                    |---                        |
-|required    |   id    |  String               |  Software identifer in the databse  |
+|required    |   id    |  String               |  Software identifer in the database  |
 |optional    |   n     |  Integer              |  number of related software entities to return (ranked), default is 1   |
 
 
@@ -675,9 +741,9 @@ The response lists the top software entities with a relatedness score, ranked in
 }
 ```
 
-### Provide for a given PDF the n most relevant related software entities not mentioned in the PDF
+### Provide for a given document the n most relevant related software entities NOT mentioned in the document
 
-Endpoint: `/api/software/related`
+Endpoint: `/api/document/{id}/software/related`
 
 |   method  |  response type      | 
 |---        |---                  |
@@ -688,13 +754,13 @@ Parameters:
 
 |requirement |   name  |  content-type value   |  description |
 |---         |---      |---                    |---                        |
-|required    |   file  |  multipart/form-data  |  PDF file (as multipart)  |
+|required    |   id    |  String               |  Document identifer in the database  |
 |optional    |   n     |  multipart/form-data  |  number of related software entities to return (ranked), default is 1   |
 
 
 Example:
 
-> curl --form file=@./thefile.pdf localhost:8070/api/software/mentions --form n=2
+> curl --form n=5 localhost:8070/api/document/Q836222/software/related 
 
 The response lists the top software entities with a relatedness score, ranked in a decreasing order:
 
@@ -713,7 +779,7 @@ The response lists the top software entities with a relatedness score, ranked in
 }
 ```
 
-The service must ensure that none of the returned software entity is actually mentioned in the PDF. 
+The service must ensure that none of the returned software entity is actually mentioned in the document. 
 
 
 ### Provide for a given person, all the software entities he has authored 
@@ -733,7 +799,7 @@ Parameters:
 
 Example: 
 
-> curl localhost:8070/api/Q93068/software 
+> curl localhost:8070/api/person/Q93068/software 
 
 The response lists the software entities having the person as author or co-author. 
 
