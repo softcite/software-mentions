@@ -230,7 +230,7 @@ citations: [ {
     "mentions": [{
         "type": "software",
         "id": "Q8029",
-        "confidence": 0.9511,
+        "conf": 0.9511,
         "software-name": {
             "rawForm": "ImagePro Plus",
             "offsetStart": 351,
@@ -355,7 +355,7 @@ Example:
         "mentions": [{
             "type": "software",
             "id": "Q8029",
-            "confidence": 0.9511,
+            "conf": 0.9511,
             "software-name": {
                 "rawForm": "bibtex",
                 "offsetStart": 351,
@@ -395,7 +395,7 @@ Example:
         "mentions": [{
             "type": "software",
             "id": "Q8029",
-            "confidence": 0.7719,
+            "conf": 0.7719,
             "software-name": {
             "rawForm": "BibTeX",
             "offsetStart": 113,
@@ -459,7 +459,7 @@ The response will complement the input with disambiguated software entity `id` a
     "mentions": [{
         "type": "software",
         "id": "Q8029",
-        "confidence": 1.0,
+        "conf": 1.0,
         "software-name": {
             "rawForm": "bibtex"
         },
@@ -554,42 +554,12 @@ The response response if similar to the previous document mention access service
 ```json
 {
     "id": { "..."},
-    "mentions": [{
-        "type": "software",
+    "software": [
+      {
         "id": "E280",
-        "confidence": 0.7130,
-        "software-name": {
-            "rawForm": "ImagePro Plus",
-            "offsetStart": 351,
-            "offsetEnd": 364,
-            "boundingBoxes": [{
-                "p": 8,
-                "x": 118.928,
-                "y": 461.363,
-                "w": 49.98600000000002,
-                "h": 7.749360000000024
-            }]
-        },
-        "creator": {
-            "rawForm": "Media Cybernetics, Silver Spring, \nU.S.A.",
-            "offsetStart": 366,
-            "offsetEnd": 407,
-            "boundingBoxes": [{
-                "p": 8,
-                "x": 175.37953333333334,
-                "y": 461.363,
-                "w": 115.15626666666665,
-                "h": 7.749360000000024
-            }, {
-                "p": 8,
-                "x": 48.5996,
-                "y": 471.623,
-                "w": 21.192299999999996,
-                "h": 7.749360000000024
-            }]
-        }
-        }],
-    "pages": [ {"page_height":842.0, "page_width":595.0}, {"page_height":842.0, "page_width":595.0}, ...]
+        "conf": 0.7130
+      }
+    ]
 }
 ```
 
@@ -656,7 +626,7 @@ Parameters:
 
 Example: 
 
-> curl localhost:8070/api/Q8029/related -d 'n=2'
+> curl localhost:8070/api/software/Q8029/related -d 'n=2'
 
 The response lists the top software entities with a relatedness score, ranked in a decreasing order:
 
@@ -736,18 +706,42 @@ Example:
 
 > curl localhost:8070/api/person/Q93068/software 
 
-The response lists the software entities having the person as author or co-author. 
+The response lists the software entities having the person as author or co-author, and for each software the citing documents supporting the authorship 
 
 ```json
 {
-    "id": "Q93068",
-    "entities": [ 
-    {
-        "id": "Q8029"
-    }] 
+    "id": { "Q93068"},
+    "software": [
+        {
+            "id": "E280",
+            "documents": [
+                {
+                    "document": { "doi": "https://doi.org/10.1093/pcp/pcg126", 
+                                  "url": "",
+                                  "sha1": ""}
+                }, 
+                {
+                    "document": { "doi": "https://doi.org/10.1038/s41699-018-0076-0", 
+                                  "url": "",
+                                  "sha1": ""}
+                }
+            ]
+        },
+        {
+            "id": "Q8029",
+            "documents": [
+                {
+                    "document": { "doi": "https://doi.org/10.1038/s41699-018-0076-0", 
+                                  "url": "",
+                                  "sha1": ""}
+                }
+            ]
+        }
+    ]
+    
 }
 ```
-From the software entity identifier, the client can then get the different software information and citations. 
+From the software entity identifier, the client can then get additional software information and citations. 
 
 
 ## Issues 
