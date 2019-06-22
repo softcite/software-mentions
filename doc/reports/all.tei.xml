@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="softcite" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-06-11T20:26+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader></tei>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="softcite" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-06-22T17:22+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader></tei>
 <p>The study consisted of a retrospective analysis of 200 mobile 
 digital AP chest X-rays (stored on phosphor plates) carried out on 
 20 preterm neonates at two different hospitals, including patients 
@@ -1365,7 +1365,7 @@ quality of less than 15 and also all reads that
 contained errors in the primer regions. Multiplex 
 Identifiers were used to separate the different 
 samples. Chimeras were removed using UCHIME 
-(<rs id="software-0" type="software">USEARCH</rs> <rs corresp="#software-0" type="version-number">v.6</rs>) (Edgar et al., 2011). Subsequently, 
+(<rs id="software-0" type="software">USEARCH</rs> <rs corresp="#software-0" type="version-number">v.6</rs>) (<rs corresp="#software-0" type="creator">Edgar et al.</rs>., 2011). Subsequently, 
 the sequences that passed the quality filtering were 
 clustered into Operational Taxonomic Units (OTUs) 
 with <rs id="software-1" type="software">UCLUST</rs> <rs corresp="#software-1" type="version-number">version 6</rs> (<rs corresp="#software-1" type="creator">Edgar</rs>, 2010) at 97% 
@@ -6554,6 +6554,16 @@ Jerusalem, Israel). The time versus </p>
 signed-rank test. The level of significance was P ＜ 0.050. 
 Statistical analyses were performed with the <rs id="software-1" type="software">Stat View</rs> software 
 (<rs corresp="#software-1" type="creator">SAS Institute</rs>, Cary, NC, USA). </p>
+
+<p>correlation coefficients. Interactions of any predictors with FIGO 
+stage were evaluated by comparing the cross-validated partial 
+likelihood with and without these interactions. Likewise, we 
+checked for non-linear effects of age or LNR by employing the 
+technique of fractional polynomials and compared the cross-
+validated partial likelihood with and without nonlinear modelling 
+(Royston and Altman, 1994). We used the R package glmnet 
+(R Foundation for Statistical Computing) for estimating the model 
+coefficients (<rs corresp="#software-1" type="creator">Simon et al</rs>, 2011). </p>
 
 <p>history of hip disease in childhood or adolescence and peri-
 pheral vascular disease have been excluded. No patient was 
@@ -21065,7 +21075,7 @@ tetra-, penta-, and hexanuclotides. Perfect microsatellite motifs were found in
 10,685 (2.6%) reads, of which dinucleotide repeats were most abundant (62%), 
 followed by trinucleotide repeats (31%), and tetranucleotide repeats (6%). 
 Using <rs id="software-9" type="software">Primer</rs><rs corresp="#software-9" type="version-number">3</rs> software ( <rs corresp="#software-9" type="creator">Rozen and Skaletsky</rs>, <rs corresp="#software-9" type="version-date">2000</rs> ) embedded in the <rs id="software-10" type="software">QDD</rs> 
-software ( Meglécz et al., <rs corresp="#software-10" type="version-date">2010</rs> ), primer design was possible in 282 reads, with 
+software ( <rs corresp="#software-10" type="creator">Meglécz et al.</rs>., <rs corresp="#software-10" type="version-date">2010</rs> ), primer design was possible in 282 reads, with 
 the following parameters: (1) melting temperatures 50-70 ° C, (2) PCR product 
 between 90 and 320 bp, (3) GC content &gt;40%, (4) primer length between 17 
 and 27 nucleotides, (5) primer self-complementarities and complement between 
@@ -28601,7 +28611,7 @@ curves in mutant males and females for each gene, and then the param-
 eters corresponding to the interaction of time and sex were evaluated to </p>
 
 <p>Weighted Gene Co-expression Network and Pathway Analysis was 
-performed using the <rs type="software">WGCNA</rs> R package (Langfelder and Horvath, 
+performed using the <rs id="software-22" type="software">WGCNA</rs> R package (<rs corresp="#software-22" type="creator">Langfelder and Horvath</rs>, 
 2008) with soft thresholding powers selected based on the approximate 
 scale-free topology criterion (Zhang and Horvath, 2005), followed by 
 blockwise network construction, module detection, correlation with 
@@ -29754,14 +29764,13 @@ et al. 2007) using the SbHCT structure (PDB ID 4KE4) (Walker et al. 2013) as a
 search model. The PvHCT2a-p-coumaroyl-CoA-shikimate structure was 
 used as a search model to solve the PvHCT2a-p-coumaroyl-CoA-protoca-
 techuate structure. Structure refinement was performed using the phenix.re-
-fine program (Afonine et al. 2012). Manual rebuilding using <rs type="software">COOT</rs> (Emsley 
-and Cowtan 2004) and the addition of water molecules allowed construction 
+fine program (Afonine et al. 2012). Manual rebuilding using <rs id="software-8" type="software">COOT</rs> (<rs corresp="#software-8" type="creator">Emsley and Cowtan</rs> 2004) and the addition of water molecules allowed construction 
 of the final model. Five percent of the data were randomly selected for cross-
 validation. The final model of PvHCT2a-p-coumaroyl-CoA-shikimate and 
 PvHCT2a-p-coumaroyl-CoA-protocatechuate have R and R free factors of 
 15.9%/18.6% and 17.9%/20.5%, respectively. Root-mean-square deviation dif-
 ferences from ideal geometry for bond lengths, angles and dihedrals were 
-calculated with <rs type="software">Phenix</rs> (Adams et al. 2010). The overall stereochemical qual-
+calculated with <rs id="software-9" type="software">Phenix</rs> (<rs corresp="#software-9" type="creator">Adams et al.</rs>. 2010). The overall stereochemical qual-
 ity of the final models was assessed using the program <rs type="software">MolProbity</rs> (Davis 
 et al. 2007). </p>
 
@@ -31100,7 +31109,7 @@ between each sample in a statistically significant manner were selected
 as having a fold change &gt;2× and an FDR (Benjamini-Hochberg correc-
 tion) &lt;0.1 after empirical Bayes processing using the limma package. 
 These gene lists were submitted to <rs type="software">Venn</rs> software for comparisons or 
-uploaded into <rs type="software">IPA</rs> and <rs type="software">Voronto</rs> (Santamaría and Pierre, 2012) to test for 
+uploaded into <rs type="software">IPA</rs> and <rs id="software-23" type="software">Voronto</rs> (<rs corresp="#software-23" type="creator">Santamaría and Pierre</rs>, 2012) to test for 
 significant enrichment of functional annotations. </p>
 
 <p>In the external validation sample, Spearman's correla-
@@ -34722,7 +34731,7 @@ et al., 2014) domains present in P. flava transcripts using
 <rs id="software-14" type="software">hmmscan</rs>, <rs corresp="#software-14" type="version-number">version 3.1b1</rs>, from the <rs id="software-15" type="software">HMMER package</rs> (<rs corresp="#software-15" type="creator">Eddy</rs>, <rs corresp="#software-15" type="version-date">2011</rs>) 
 with an e-value cutoff of 0.01. In addition, we annotated these 
 transcripts with tmhmm, version 2.0c, (Krogh et al., 2001) <rs id="software-17" type="software">signalP</rs> 
-<rs corresp="#software-17" type="version-number">version 4.1</rs> (Petersen et al., <rs corresp="#software-17" type="version-date">2011</rs>), and <rs id="software-18" type="software">ncoils</rs> (Lupas et al., <rs corresp="#software-18" type="version-date">1991</rs>). 
+<rs corresp="#software-17" type="version-number">version 4.1</rs> (<rs corresp="#software-17" type="creator">Petersen et al.</rs>., <rs corresp="#software-17" type="version-date">2011</rs>), and <rs id="software-18" type="software">ncoils</rs> (Lupas et al., <rs corresp="#software-18" type="version-date">1991</rs>). 
 We identified putative transcription factors based on PFAM 
 domain hits using a list from transcriptionfactor.org. For tran-
 scripts with multiple isoforms, annotations were collapsed to the 
@@ -34734,7 +34743,7 @@ each time point were aligned to the transcriptome using Bowtie2
 ments were quantified using Samtools (Li et al., 2009). Isoform 
 counts were summed to generate a "per gene" count. Differential 
 expression analysis and normalization was performed using the 
-R package <rs id="software-19" type="software">DESeq2</rs> (Love et al., <rs corresp="#software-19" type="version-date">2014</rs>). All time points were con-
+R package <rs id="software-19" type="software">DESeq2</rs> (<rs corresp="#software-19" type="creator">Love et al.</rs>., <rs corresp="#software-19" type="version-date">2014</rs>). All time points were con-
 trasted with the zero hour (0 hr) time point. Data used for the 
 gene expression analysis have been deposited in the Gene 
 Expression Omnibus (GEO) under accession number GSE70295. </p>
@@ -38019,7 +38028,7 @@ cells. To filter out those segments, we utilize life span filtering, i.e. we fil
 out all cells whose identity can be traced across less than a certain minimum 
 number of frames. This cell filter, along with several other ways to eliminate 
 cells with unsuitable size or volume features, follows corresponding features 
-of the <rs type="software">Celltrack</rs> software (Sacan et al., 2008) for 2D cell tracking; for 
+of the <rs id="software-69" type="software">Celltrack</rs> software (<rs corresp="#software-69" type="creator">Sacan et al.</rs>., 2008) for 2D cell tracking; for 
 <rs type="software">ct3d</rs>, they are implemented in the graphical user interface of the <rs type="software">at3d</rs> tool 
 shown in Figure 4. </p>
 
@@ -40516,7 +40525,7 @@ analysed using the one-way ANOVA. Mortality data were
 analysed by chi-square test. Significant means were then 
 elucidated using the Duncan multiple range tests. All 
 statistical tests were conducted at 95% confidence level 
-using <rs id="software-0" type="software">SAS</rs> program (<rs corresp="#software-0" type="version-number">version 6.0</rs>, SAS Institute Inc, <rs corresp="#software-0" type="version-date">2003</rs>). 
+using <rs id="software-0" type="software">SAS</rs> program (<rs corresp="#software-0" type="version-number">version 6.0</rs>, <rs corresp="#software-0" type="creator">SAS Institute Inc.</rs>, <rs corresp="#software-0" type="version-date">2003</rs>). 
 The results were expressed as means with pooled of 
 standard error of mean (SEM). </p>
 
@@ -44351,7 +44360,7 @@ agreement. Usually, these systems implement the formal models deriving from oper
 tional research and decision science that are used to help negotiators define negotiation 
 space, evaluate offers and determine efficient solutions. There are a lot of NSSs and 
 ENSs that have been used for simulating, training and teaching negotiations or for 
-research purposes like <rs id="software-12" type="software">INSPIRE</rs> (Kersten and Noronha <rs corresp="#software-12" type="version-date">1999</rs>), <rs id="software-13" type="software">Negoisst</rs> (Schoop et al. 
+research purposes like <rs id="software-12" type="software">INSPIRE</rs> (<rs corresp="#software-12" type="creator">Kersten and Noronha</rs> <rs corresp="#software-12" type="version-date">1999</rs>), <rs id="software-13" type="software">Negoisst</rs> (Schoop et al. 
 <rs corresp="#software-13" type="version-date">2003</rs>), NeGoGo (Lai et al. 2007) or <rs id="software-14" type="software">NegoCalc</rs> (<rs corresp="#software-14" type="creator">Wachowicz</rs> <rs corresp="#software-14" type="version-date">2008</rs>). Lots of theoretical 
 and practical solutions for electronic negotiation support are also proposed in the lit-
 erature, that focuse on both the methodological and applicational aspects of electronic 
@@ -46811,8 +46820,7 @@ option (<rs corresp="#software-89" type="creator">Thompson et al.</rs>. 1994) in
 <rs id="software-82" type="software">collapse 1.0</rs> tool provided by <rs corresp="#software-82" type="creator">David Posada</rs> (<rs corresp="#software-82" type="url">http://bioag.byu.edu /zoology/crandall_lab</rs>). For the maximum 
 likelihood (ML) analyses, the best-fit model of nucleotide 
 substitution (TrNef + G) was selected using the hierarchy of 
-likelihood ratio tests implemented in <rs id="software-56" type="software">modeltest</rs> <rs corresp="#software-56" type="version-number">3.0</rs> (Posada 
-&amp; Crandall <rs corresp="#software-56" type="version-date">1998</rs>). ML heuristic search was conducted with 
+likelihood ratio tests implemented in <rs id="software-56" type="software">modeltest</rs> <rs corresp="#software-56" type="version-number">3.0</rs> (<rs corresp="#software-56" type="creator">Posada &amp; Crandall</rs> <rs corresp="#software-56" type="version-date">1998</rs>). ML heuristic search was conducted with 
 100 random sequence addition replicates. Nodal support 
 was estimated using the bootstrap approach (Felsenstein 
 1985) with 1000 replicates. ML analyses were performed 
@@ -49473,7 +49481,7 @@ software. Experiments were done in duplicates. </p>
 <p>intercept shared by all individuals, households and communes. m k is the effect of commune k, w jk . 
 The effect of household j and 1 ijk is the child level residual error. 
 The models here are computedsing second-order penalized quasi-likelihood (PQL2) in <rs id="software-2" type="software">MLwiN</rs> 
-(Rasbash et al. <rs corresp="#software-2" type="version-date">2015</rs>) via the <rs id="software-3" type="software">Stata module runmlwin</rs> (<rs corresp="#software-3" type="creator">Leckie and Charlton</rs> <rs corresp="#software-3" type="version-date">2013</rs>). When selecting 
+(<rs corresp="#software-2" type="creator">Rasbash et al.</rs>. <rs corresp="#software-2" type="version-date">2015</rs>) via the <rs id="software-3" type="software">Stata module runmlwin</rs> (<rs corresp="#software-3" type="creator">Leckie and Charlton</rs> <rs corresp="#software-3" type="version-date">2013</rs>). When selecting 
 the appropriate means by which to estimate multilevel equations, it is necessary to choose a 
 method at is both the most unbiased, but also computationally feasible. Simulations in Rodriguez 
 and Goldman (2001) show that 2nd order Penalised Quasi Likelihood (PQL) estimation provided 
@@ -50552,7 +50560,7 @@ the re-weighting error term.
 Further, within the decomposition analysis we use the normalization suggested by Yun 
 (2005) such that the results are not sensitive to the omitted category for the categorical 
 variables. 
-In our empirical application we use the <rs type="software">STATA</rs> ado file '<rs id="software-2" type="software">RIFREG</rs>' written by <rs corresp="#software-2" type="creator">Firpo et al</rs>. 
+In our empirical application we use the <rs type="software">STATA</rs> ado file '<rs id="software-2" type="software">RIFREG</rs>' written by Firpo et al. 
 (<rs corresp="#software-2" type="version-date">2009</rs>), downloaded from: <rs corresp="#software-2" type="url">http://faculty.arts.ubc.ca/nfortin/datahead.html</rs>. </p>
 
 <p>Live confocal imaging 

@@ -19,6 +19,9 @@ import org.semanticweb.yars.nx.*;
 import java.net.URI;
 
 /**
+ * Not used anymore! We use the .csv files, which are largely enough for this kind 
+ * of information and so less painful.  
+ *
  * This class aims at converting annotations in .ttl format from the original 
  * softcite dataset into annotated XML files (at document level) usable for training 
  * text mining tools and readable by humans. We convert into MUC conferences 

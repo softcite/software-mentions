@@ -184,9 +184,9 @@ public class AnnotatedCorpusGeneratorCSV {
             allMentionsWriters.put(field, writer);
         }
         // init
-        Map<String, List<String>> mentionLists = new HashMap<String, List<String>>();
+        Map<String, Map<String,List<String>>> mentionLists = new TreeMap<String, Map<String,List<String>>>();
         for(String field : fields) {
-            mentionLists.put(field, new ArrayList<String>());
+            mentionLists.put(field, new TreeMap<String, List<String>>());
         }
 
         // go thought all annotated documents of softcite
@@ -363,47 +363,66 @@ public class AnnotatedCorpusGeneratorCSV {
                 if (annotation.getSoftwareMention() != null) {
                     totalSoftwareMentions++;
                     totalMentions++;
-                    List<String> mentionList = mentionLists.get(SOFTWARE_LABEL);
-                    if (!mentionList.contains(annotation.getSoftwareMention())) {
-                        mentionList.add(annotation.getSoftwareMention());
-                        //mentionLists.put(SOFTWARE_LABEL, mentionList);
+                    Map<String, List<String>> mentionList = mentionLists.get(SOFTWARE_LABEL);
+                    List<String> localDocs = mentionList.get(annotation.getSoftwareMention());
+                    if (localDocs == null) {
+                        localDocs = new ArrayList<String>();
                     }
+                    if (!localDocs.contains(document.getDocumentID()))
+                       localDocs.add(document.getDocumentID());
+                    mentionList.put(annotation.getSoftwareMention(), localDocs);
                 }
                 if (annotation.getVersionNumber() != null) {
                     totalVersionNumberMentions++;
                     totalMentions++;
-                    List<String> mentionList = mentionLists.get(VERSION_NUMBER_LABEL);
-                    if (!mentionList.contains(annotation.getVersionNumber())) {
-                        mentionList.add(annotation.getVersionNumber());
-                        //mentionLists.put(VERSION_NUMBER_LABEL, mentionList);
+                    Map<String, List<String>> mentionList = mentionLists.get(VERSION_NUMBER_LABEL);
+                    List<String> localDocs = mentionList.get(annotation.getVersionNumber());
+                    if (localDocs == null) {
+                        localDocs = new ArrayList<String>();
                     }
+                    if (!localDocs.contains(document.getDocumentID())) {
+                        localDocs.add(document.getDocumentID());
+                    }
+                    mentionList.put(annotation.getVersionNumber(), localDocs);
                 }
                 if (annotation.getVersionDate() != null) {
                     totalVersionDateMentions++;
                     totalMentions++;
-                    List<String> mentionList = mentionLists.get(VERSION_DATE_LABEL);
-                    if (!mentionList.contains(annotation.getVersionDate())) {
-                        mentionList.add(annotation.getVersionDate());
-                        //mentionLists.put(VERSION_DATE_LABEL, mentionList);
+                    Map<String, List<String>> mentionList = mentionLists.get(VERSION_DATE_LABEL);
+                    List<String> localDocs = mentionList.get(annotation.getVersionDate());
+                    if (localDocs == null) {
+                        localDocs = new ArrayList<String>();
                     }
+                    if (!localDocs.contains(document.getDocumentID())) {
+                        localDocs.add(document.getDocumentID());
+                    }
+                    mentionList.put(annotation.getVersionDate(), localDocs);
                 }
                 if (annotation.getCreator() != null) {
                     totalCreatorMentions++;
                     totalMentions++;
-                    List<String> mentionList = mentionLists.get(CREATOR_LABEL);
-                    if (!mentionList.contains(annotation.getCreator())) {
-                        mentionList.add(annotation.getCreator());
-                        //mentionLists.put(CREATOR_LABEL, mentionList);
+                    Map<String, List<String>> mentionList = mentionLists.get(CREATOR_LABEL);
+                    List<String> localDocs = mentionList.get(annotation.getCreator());
+                    if (localDocs == null) {
+                        localDocs = new ArrayList<String>();
                     }
+                    if (!localDocs.contains(document.getDocumentID())) {
+                        localDocs.add(document.getDocumentID());
+                    }
+                    mentionList.put(annotation.getCreator(), localDocs);
                 }
                 if (annotation.getUrl() != null) {
                     totalUrlMentions++;
                     totalMentions++;
-                    List<String> mentionList = mentionLists.get(URL_LABEL);
-                    if (!mentionList.contains(annotation.getUrl())) {
-                        mentionList.add(annotation.getUrl());
-                        //mentionLists.put(URL_LABEL, mentionList);
+                    Map<String, List<String>> mentionList = mentionLists.get(URL_LABEL);
+                    List<String> localDocs = mentionList.get(annotation.getUrl());
+                    if (localDocs == null) {
+                        localDocs = new ArrayList<String>();
                     }
+                    if (!localDocs.contains(document.getDocumentID())) {
+                        localDocs.add(document.getDocumentID());
+                    }
+                    mentionList.put(annotation.getUrl(), localDocs);
                 }
             }
 
@@ -449,10 +468,20 @@ public class AnnotatedCorpusGeneratorCSV {
         createCompactXMLDoc(xmlFiles, "doc/reports/all.tei.xml");
 
         for(String field : fields) {
-            List<String> mentionList = mentionLists.get(field);
-            mentionList.sort(String::compareToIgnoreCase);
-            for(String mention : mentionList)
-                allMentionsWriters.get(field).write(mention+"\n");
+            Map<String,List<String>> mentionList = mentionLists.get(field);
+            //mentionList.sort(String::compareToIgnoreCase);
+            for (Map.Entry<String,List<String>> entry : mentionList.entrySet())  {
+                allMentionsWriters.get(field).write(entry.getKey() + "\t[");
+                boolean first = true;
+                for(String docid : entry.getValue()) {
+                    if (first) {
+                        first = false;
+                        allMentionsWriters.get(field).write(docid);
+                    } else  
+                        allMentionsWriters.get(field).write(","+docid);
+                }
+                allMentionsWriters.get(field).write("]\n");
+            }
         }
 
         for(String field : fields) {
