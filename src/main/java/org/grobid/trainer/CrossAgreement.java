@@ -647,10 +647,10 @@ public class CrossAgreement {
             // open report file for this field in append mode
             Writer writerMismatch = null;
             try {
-                if ( (outputPath == null) || (outputPath.trim().length() == 0))
+                //if ( (outputPath == null) || (outputPath.trim().length() == 0))
                     outputPath = "doc/reports/iaa-mismatch-"+field+".txt";
-                else 
-                    outputPath += "/iaa-mismatch-"+field+".txt";
+                /*else 
+                    outputPath += "/iaa-mismatch-"+field+".txt";*/
                 writerMismatch = new PrintWriter(new BufferedWriter(new FileWriter(outputPath, true)));
 
                 writerMismatch.write("\n" + documentID + "\n-------------------\n");
@@ -700,10 +700,10 @@ public class CrossAgreement {
             // reinit report file for this field
             Writer writerMismatch = null;
             try {
-                if ( (outputPath == null) || (outputPath.trim().length() == 0))
+                //if ( (outputPath == null) || (outputPath.trim().length() == 0))
                     outputPath = "doc/reports/iaa-mismatch-"+field+".txt";
-                else 
-                    outputPath += "/iaa-mismatch-"+field+".txt";
+                /*else 
+                    outputPath += "/iaa-mismatch-"+field+".txt";*/
                 writerMismatch = new PrintWriter(new BufferedWriter(new FileWriter(outputPath)));
             } catch(Exception e) {
                 logger.error("Could not write the mismatch report for field " + field, e);

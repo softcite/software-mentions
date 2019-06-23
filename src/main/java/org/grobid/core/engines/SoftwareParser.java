@@ -1,7 +1,5 @@
 package org.grobid.core.engines;
 
-import nu.xom.Attribute;
-import nu.xom.Element;
 import org.apache.commons.io.FileUtils;
 import org.grobid.core.GrobidModels;
 import org.grobid.core.analyzers.SoftwareAnalyzer;
@@ -1306,10 +1304,10 @@ public class SoftwareParser extends AbstractParser {
         return p;
     }
 
-	/**
-	 *  Create a standard TEI header to be included in the TEI training files.
-	 */
-    static public Element getTEIHeader(String id) {
+    /**
+     *  Create a standard TEI header to be included in the TEI training files.
+     */
+    static public nu.xom.Element getTEIHeader(String id) {
         Element tei = teiElement("tei");
         Element teiHeader = teiElement("teiHeader");
 
@@ -1340,6 +1338,31 @@ public class SoftwareParser extends AbstractParser {
         application.appendChild(ref);
         appInfo.appendChild(application);
         encodingDesc.appendChild(appInfo);
+        teiHeader.appendChild(encodingDesc);
+        tei.appendChild(teiHeader);
+
+        return tei;
+    }
+
+    /**
+     *  Create a simplified TEI header to be included in a TEI corpus file.
+     */
+    static public Element getTEIHeaderSimple(String id) {
+        Element tei = teiElement("tei");
+        Element teiHeader = teiElement("teiHeader");
+
+        if (id != null) {
+            Element fileDesc = teiElement("fileDesc");
+            fileDesc.addAttribute(new Attribute("xml:id", "http://www.w3.org/XML/1998/namespace", id));
+
+            Element titleStatement = teiElement("titleStatement");
+            fileDesc.appendChild(titleStatement);
+            
+            teiHeader.appendChild(fileDesc);
+        }
+
+        Element encodingDesc = teiElement("encodingDesc");
+
         teiHeader.appendChild(encodingDesc);
         tei.appendChild(teiHeader);
 

@@ -11,6 +11,7 @@ import org.grobid.core.document.Document;
 import org.grobid.core.document.DocumentPiece;
 import org.grobid.core.document.DocumentSource;
 import org.grobid.core.document.xml.XmlBuilderUtils;
+import org.grobid.core.document.TEIFormatter;
 import org.grobid.core.GrobidModels;
 import org.grobid.core.engines.Engine;
 import org.grobid.core.engines.SoftwareParser;
@@ -189,6 +190,11 @@ public class AnnotatedCorpusGeneratorCSV {
             mentionLists.put(field, new TreeMap<String, List<String>>());
         }
 
+        // this is a TEI corpus file to represent all the annotated snippets, with a bit more 
+        // of textual styling
+        StringBuilder builderTEICorpus = new StringBuilder();
+        writerCorpusHeader(builderTEICorpus);
+
         // go thought all annotated documents of softcite
         int m = 0;
         List<String> xmlFiles = new ArrayList<String>();
@@ -314,6 +320,8 @@ public class AnnotatedCorpusGeneratorCSV {
             // we keep track of the LayoutToken corresponding to reference callout, in order to applied
             // special filter to exclude creator and version date annotation in the bibliographical reference
             // callout
+            String reseFullText = null;
+            LayoutTokenization tokenizationBody = null;
             List<LayoutToken> citationCalloutTokens = new ArrayList<LayoutToken>();
             documentParts = doc.getDocumentPart(SegmentationLabels.BODY);
             List<TaggingTokenCluster> bodyClusters = null;
@@ -325,15 +333,15 @@ public class AnnotatedCorpusGeneratorCSV {
                     // document segmentation
                     String bodytext = featSeg.getLeft();
 
-                    LayoutTokenization tokenizationBody = featSeg.getRight();
-                    String rese = null;
+                    tokenizationBody = featSeg.getRight();
+                    
                     if ( (bodytext != null) && (bodytext.trim().length() > 0) ) {               
-                        rese = engine.getParsers().getFullTextParser().label(bodytext);
+                        reseFullText = engine.getParsers().getFullTextParser().label(bodytext);
                     } else {
                         logger.debug("Fulltext model: The input to the CRF processing is empty");
                     }
 
-                    TaggingTokenClusteror clusteror = new TaggingTokenClusteror(GrobidModels.FULLTEXT, rese, 
+                    TaggingTokenClusteror clusteror = new TaggingTokenClusteror(GrobidModels.FULLTEXT, reseFullText, 
                         tokenizationBody.getTokenization(), true);
                     bodyClusters = clusteror.cluster();
                     for (TaggingTokenCluster cluster : bodyClusters) {
@@ -447,7 +455,7 @@ public class AnnotatedCorpusGeneratorCSV {
             // finally, we will output an annotated training file for the whole document content, only 
             // annotations that have been matched back to the actual document content are used
             List<Annotation> inlineAnnotations = document.getInlineAnnotations();
-            if (inlineAnnotations != null) {
+            if ( (inlineAnnotations != null) && (inlineAnnotations.size() > 0) ) {
                 Collections.sort(inlineAnnotations);
                 try {
                     String xmlFile = xmlPath + File.separator + new File(pdfFile.getAbsolutePath())
@@ -457,6 +465,7 @@ public class AnnotatedCorpusGeneratorCSV {
                                                 inlineAnnotations, 
                                                 entry.getKey(),
                                                 toExclude);
+                    insertSnippet(builderTEICorpus, doc, tokenizationBody, reseFullText, inlineAnnotations, entry.getKey(), toExclude);
                     xmlFiles.add(xmlFile);
                 } catch(Exception e) {
                     logger.error("Failed to write the resulting annotated document in xml", e);
@@ -465,7 +474,7 @@ public class AnnotatedCorpusGeneratorCSV {
             
         }
 
-        createCompactXMLDoc(xmlFiles, "doc/reports/all.tei.xml");
+        //createCompactXMLDoc(xmlFiles, "doc/reports/all2.tei.xml");
 
         for(String field : fields) {
             Map<String,List<String>> mentionList = mentionLists.get(field);
@@ -518,6 +527,14 @@ public class AnnotatedCorpusGeneratorCSV {
             int setCount = entry.getValue();
             System.out.println(setName + ": " + setCount + " documents");
         }
+
+        builderTEICorpus.append("</teiCorpus>\n");
+
+        // this is a TEI corpus file to represent all the annotated snippets, with a bit more 
+        // of textual styling
+        Writer writerTEICorpus = new PrintWriter(new BufferedWriter(new FileWriter("doc/reports/all.tei.xml")));
+        writerTEICorpus.write(XMLUtilities.toPrettyString(builderTEICorpus.toString(), 4));
+        writerTEICorpus.close();
 
         // computing and reporting cross-agreement for the loaded set
         CrossAgreement crossAgreement = new CrossAgreement(fields);
@@ -1100,6 +1117,186 @@ System.out.print("\n");*/
         }*/
     }
 
+    private void insertSnippet(StringBuilder builderTEICorpus, 
+                               Document doc, 
+                               LayoutTokenization layoutTokenization,
+                               String reseFullText,
+                               List<Annotation> inlineAnnotations, 
+                               String docID, 
+                               List<Integer> toExclude)  throws IOException, ParsingException {
+        Element root = SoftwareParser.getTEIHeaderSimple(docID);
+        
+        Element textNode = teiElement("text");
+        textNode.addAttribute(new Attribute("xml:lang", "http://www.w3.org/XML/1998/namespace", "en"));
+
+        Element body = teiElement("body");
+        textNode.appendChild(body);
+
+        // now this is similar to GROBID core TEIFormatter toTEITextPiece, but we want to keep only paragraphs
+        // with software annotations and simplify all other aspects
+
+        TaggingLabel lastClusterLabel = null;
+
+        List<LayoutToken> tokenizations = layoutTokenization.getTokenization();
+        TaggingTokenClusteror clusteror = new TaggingTokenClusteror(GrobidModels.FULLTEXT, reseFullText, tokenizations);
+
+        String tokenLabel = null;
+        List<TaggingTokenCluster> clusters = clusteror.cluster();
+
+        List<Element> allParagraphs = new ArrayList<>();
+        Element curParagraph = null;
+        Element curList = null;
+        int equationIndex = 0; // current equation index position 
+        for (TaggingTokenCluster cluster : clusters) {
+            if (cluster == null) {
+                continue;
+            }
+
+            TaggingLabel clusterLabel = cluster.getTaggingLabel();
+            Engine.getCntManager().i(clusterLabel);
+            
+            // check if we have an annotation in this cluster
+            //if (!isAnnotatedCluster(cluster.concatTokens(), inlineAnnotations, toExclude, doc.getTokenizations()))
+            //    continue;
+
+            if (clusterLabel.equals(TaggingLabels.PARAGRAPH)) {
+                List<LayoutToken> localTokens = cluster.concatTokens();
+                if ( (localTokens.size() == 0) || (inlineAnnotations.size()==0) )
+                    continue;
+                int pos = 0;
+                int offsetFirstToken = localTokens.get(0).getOffset();
+                int offsetLastToken = localTokens.get(localTokens.size()-1).getOffset();;
+                if (isNewParagraph(lastClusterLabel, curParagraph)) {
+                    curParagraph = teiElement("p");
+                    allParagraphs.add(curParagraph);
+                }
+                if (isAnnotatedCluster(cluster.concatTokens(), inlineAnnotations, toExclude, doc.getTokenizations())) {
+                    for (Annotation annotation : inlineAnnotations) {
+                        OffsetPosition position = annotation.getOccurence();
+                        
+                        Map<String, String> attributes = annotation.getAttributes();
+                        if (attributes == null)
+                            continue;
+                        
+                        // following position is relative to the full document tokenization
+                        int startE = position.start;
+                        int endE = position.end;
+                        // translate position into offset allocated to the LayoutToken object from the PDF
+                        int offsetS = doc.getTokenizations().get(startE).getOffset();
+                        int offsetE = doc.getTokenizations().get(endE).getOffset();
+
+                        if ( (offsetS >= offsetFirstToken) && (offsetE <= offsetLastToken) ) {
+                            Element entityElement = teiElement("rs");
+                            for (Map.Entry<String, String> entry : attributes.entrySet()) {
+                                entityElement.addAttribute(new Attribute(entry.getKey(), entry.getValue()));
+                            }
+
+                            int annotationPosS = localTokens.indexOf(doc.getTokenizations().get(startE));
+                            int annotationPosE = localTokens.indexOf(doc.getTokenizations().get(endE));
+                            curParagraph.appendChild(this.toTextDehyphenize(localTokens.subList(pos, annotationPosS), toExclude));
+                    
+                            //entityElement.appendChild(LayoutTokensUtil.toText(localTokens.subList(startE, endE+1)));
+                            entityElement.appendChild(cleanValue(annotation.getText()));
+                            pos = annotationPosE+1;
+
+                            curParagraph.appendChild(entityElement);
+                        }
+                    }
+                }
+                // total or remaining text
+                curParagraph.appendChild(this.toTextDehyphenize(localTokens.subList(pos, localTokens.size()-1), toExclude));
+                
+                /*if (isNewParagraph(lastClusterLabel, curParagraph)) {
+                    curParagraph = teiElement("p");
+                    curDiv.appendChild(curParagraph);
+                }
+                String clusterContent = LayoutTokensUtil.normalizeDehyphenizeText(cluster.concatTokens());
+                curParagraph.appendChild(clusterContent);*/
+            } else if (TEIFormatter.MARKER_LABELS.contains(clusterLabel)) {
+                List<LayoutToken> refTokens = cluster.concatTokens();
+                refTokens = TextUtilities.dehyphenize(refTokens);
+                String chunkRefString = LayoutTokensUtil.toText(refTokens);
+
+                Element parent = curParagraph != null ? curParagraph : body;
+                parent.appendChild(new Text(" "));
+
+                Element ref = null;
+                String markerText = LayoutTokensUtil.toText(refTokens);
+                markerText = cleanValue(markerText);
+                if (clusterLabel.equals(TaggingLabels.CITATION_MARKER)) {
+                    ref = teiElement("ref");
+                    ref.addAttribute(new Attribute("type", "bibr"));
+                } else if (clusterLabel.equals(TaggingLabels.FIGURE_MARKER)) {
+                    ref = teiElement("ref");
+                    ref.addAttribute(new Attribute("type", "figure"));
+                } else if (clusterLabel.equals(TaggingLabels.TABLE_MARKER)) {
+                    ref = teiElement("ref");
+                    ref.addAttribute(new Attribute("type", "table"));
+                } else if (clusterLabel.equals(TaggingLabels.EQUATION_MARKER)) {
+                    ref = teiElement("ref");
+                    ref.addAttribute(new Attribute("type", "formula"));                   
+                }
+                if (ref != null) {
+                    ref.appendChild(markerText);
+                    parent.appendChild(ref);
+                }
+            }
+            lastClusterLabel = cluster.getTaggingLabel();
+        }
+
+        // remove possibly empty div in the paragraph list or paragraph without <rs>
+        if (allParagraphs.size() != 0) {
+            for(int i = allParagraphs.size()-1; i>=0; i--) {
+                Element theParagraph = allParagraphs.get(i);
+                // check if the paragrpah is empty
+                if ( (theParagraph.getChildElements() == null) || (theParagraph.getChildElements().size() == 0) ) {
+                    allParagraphs.remove(i);
+                } else {
+                    // check if the paragraph does not contain at least a <rs>
+                    Elements elements = theParagraph.getChildElements("rs", "http://www.tei-c.org/ns/1.0");
+                    if ((elements == null) || (elements.size() == 0)) {
+                        allParagraphs.remove(i);
+                    }
+                }
+            } 
+        }
+
+        for(Element paragraph : allParagraphs)
+            body.appendChild(paragraph);
+        root.appendChild(textNode);
+
+        builderTEICorpus.append(XmlBuilderUtils.toXml(root));
+        builderTEICorpus.append("\n");
+    }
+
+    private boolean isNewParagraph(TaggingLabel lastClusterLabel, Element curParagraph) {
+        return (!TEIFormatter.MARKER_LABELS.contains(lastClusterLabel) && lastClusterLabel != TaggingLabels.FIGURE
+                && lastClusterLabel != TaggingLabels.TABLE) || curParagraph == null;
+    }
+
+    private boolean isAnnotatedCluster(List<LayoutToken> clusterTokens, 
+                                       List<Annotation> inlineAnnotations, 
+                                       List<Integer> toExclude,
+                                       List<LayoutToken> tokenizations) {
+        for (Annotation annotation : inlineAnnotations) {
+            //if (annotation.getType() == SoftciteAnnotation.AnnotationType.SOFTWARE && 
+            //    annotation.getOccurence() != null) {
+            OffsetPosition position = annotation.getOccurence();
+            int startE = position.start;
+            int endE = position.end;
+            // translate position into offset at the level of the full document tokenization
+            int offsetS = tokenizations.get(startE).getOffset();
+            int offsetE = tokenizations.get(endE).getOffset();
+            for(LayoutToken token : clusterTokens) {
+                if (toExclude.contains(token.getOffset()))
+                    continue;
+                if ( (token.getOffset() >= offsetS) && (token.getOffset() <= offsetE) ) 
+                    return true;
+            }
+        }
+        return false;
+    }
+
     /**
      *  Add XML annotations corresponding to entities in a piece of text, to be included in
      *  generated training data.
@@ -1140,53 +1337,11 @@ System.out.print("\n");*/
             pos = endE+1;
 
             p.appendChild(entityElement);
-            //}
         }
         //p.appendChild(LayoutTokensUtil.toText(tokenizations.subList(pos, tokenizations.size())));
         p.appendChild(this.toText(tokenizations.subList(pos, tokenizations.size()), toExclude));
 
         return p;
-    }
-
-
-    public void createCompactXMLDoc(List<String> documentPaths, String outPath) {
-        // generate a single XML files with all annotated paragraphs
-        StringBuffer xml = new StringBuffer(); 
-        Element root = SoftwareParser.getTEIHeader("softcite");
-        Element textNode = teiElement("text");
-        // for the moment we suppose we have english only...
-        textNode.addAttribute(new Attribute("xml:lang", "http://www.w3.org/XML/1998/namespace", "en"));
-        String baseXml = XmlBuilderUtils.toXml(root);
-        baseXml = baseXml.replace("</text></tei>", "");
-        xml.append(baseXml);
-
-        for (String documentPath : documentPaths) {
-            try {
-                String content = FileUtils.readFileToString(new File(documentPath), "UTF-8");
-                // iterate on all paragraphs
-                String[] chunks = content.split("(<p>)|(</p>)");
-                for(int i=0; i<chunks.length; i++) {
-                    String chunk = chunks[i];
-                    if (chunk.indexOf("<rs") != -1) {
-                        xml.append("\n<p>");
-                        xml.append(chunk);
-                        xml.append("</p>\n");
-                    }
-                }
-
-            } catch (IOException ex) {
-                System.out.println("Due to an IOException, the parser could not parse " + documentPath); 
-            }
-        }
-
-        xml.append("\n</text></tei>\n");
-        // write the compact document
-        try {
-            
-            FileUtils.writeStringToFile(new File(outPath), xml.toString());
-        } catch (IOException e) {
-            System.out.println("Cannot create training data because output file can not be accessed: " + outPath);
-        }
     }
 
     private void createAnnotatorMap(Map<String, SoftciteAnnotation> annotations, Map<String, Integer> annotators) {
@@ -1221,6 +1376,17 @@ System.out.print("\n");*/
         }
 
         return builder.toString();
+    }
+
+    private String toTextDehyphenize(List<LayoutToken> tokens, List<Integer> toExclude) {
+        List<LayoutToken> localTokens = new ArrayList<LayoutToken>();
+        for(LayoutToken token : tokens) {
+            if (toExclude.contains(token.getOffset())) 
+                continue;
+            localTokens.add(token);
+        }
+
+        return LayoutTokensUtil.normalizeDehyphenizeText(localTokens);
     }
 
     public static String format(nu.xom.Element root) throws ParsingException, IOException {
@@ -1580,6 +1746,62 @@ System.out.print("\n");*/
         value = value.replaceAll(" +", " ");
         return value.trim();
     }
+
+    /**
+     * Write the header of the TEI corpus containing all the annotated ssnippet of the collection
+     */
+    private void writerCorpusHeader(StringBuilder builderTEICorpus) {
+        builderTEICorpus.append("<teiCorpus version=\"3.3.0\" xmlns=\"http://www.tei-c.org/ns/1.0\">\n");
+        builderTEICorpus.append("\t<teiHeader>\n");
+        builderTEICorpus.append("\t\t<fileDesc>\n");
+        builderTEICorpus.append("\t\t\t<titleStmt>\n");
+        builderTEICorpus.append("\t\t\t\t<title>Softcite annotated corpus</title>\n");
+        builderTEICorpus.append("\t\t\t\t<respStmt>\n");
+        builderTEICorpus.append("\t\t\t\t\t<resp>James Howinson Lab, University of Texas at Austin, School of Information</resp>\n");
+        builderTEICorpus.append("\t\t\t\t</respStmt>\n");
+        builderTEICorpus.append("\t\t\t</titleStmt>\n");
+        builderTEICorpus.append("\t\t\t<publicationStmt>\n");
+        builderTEICorpus.append("\t\t\t\t<date when=\"2019\"/>\n");
+        builderTEICorpus.append("\t\t\t\t<availability>CC-BY</availability>\n");
+        builderTEICorpus.append("\t\t\t</publicationStmt>\n");
+        builderTEICorpus.append("\t\t\t<sourceDesc>\n");
+        builderTEICorpus.append("\t\t\t\t<bibl>Softcite corpus, 2019</bibl>\n");
+        builderTEICorpus.append("\t\t\t</sourceDesc>\n");
+        builderTEICorpus.append("\t\t</fileDesc>\n");
+        builderTEICorpus.append("\t</teiHeader>\n");
+        // then each snippet will be an independent <TEI> sub-structure
+    }
+
+    /* Example:
+     <fileDesc>
+      <titleStmt>
+       <title>Shakespeare: the first folio (1623) in electronic form</title>
+       <author>Shakespeare, William (1564–1616)</author>
+       <respStmt>
+        <resp>Originally prepared by</resp>
+        <name>Trevor Howard-Hill</name>
+       </respStmt>
+       <respStmt>
+        <resp>Revised and edited by</resp>
+        <name>Christine Avern-Carr</name>
+       </respStmt>
+      </titleStmt>
+      <publicationStmt>
+       <distributor>Oxford Text Archive</distributor>
+       <address>
+        <addrLine>13 Banbury Road, Oxford OX2 6NN, UK</addrLine>
+       </address>
+       <idno type="OTA">119</idno>
+       <availability>
+        <p>Freely available on a non-commercial basis.</p>
+       </availability>
+       <date when="1968">1968</date>
+      </publicationStmt>
+      <sourceDesc>
+       <bibl>The first folio of Shakespeare, prepared by Charlton Hinman (The Norton Facsimile,
+           1968)</bibl>
+      </sourceDesc>
+     </fileDesc>*/
 
     /**
      * Sub-segment a string in case of unregular Uppercase in the middle of a token:
