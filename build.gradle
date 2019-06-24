@@ -246,3 +246,12 @@ task(annotated_corpus_generator_csv, dependsOn: 'classes', type: JavaExec, group
     args getArg('pdf', ''), getArg('csv', ''), getArg('output', 'resources/dataset/software/corpus/')
     jvmArgs '-Xms2g', '-Xmx8g'
 }
+
+// Run like: ./gradlew export_corpus_json -Pinput=/path/input/in.tei.xml -Poutput=/path/output/out.json
+task(export_corpus_json, dependsOn: 'classes', type: JavaExec, group: 'export') {
+    main = 'org.grobid.trainer.org.grobid.trainer.ExportCorpusJson'
+    classpath = sourceSets.main.runtimeClasspath
+    args getArg('input', ''), getArg('output', '')
+    jvmArgs '-Xms2g', '-Xmx8g'
+}
+

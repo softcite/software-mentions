@@ -38,7 +38,10 @@ import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+
 import java.text.NumberFormat;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import org.apache.commons.io.*;
 import org.apache.commons.csv.*;
@@ -206,6 +209,22 @@ public class AnnotatedCorpusGeneratorCSV {
             String docName = entry.getKey();
             File pdfFile = getPDF(documentPath, docName);
 
+            // process header with consolidation to get some nice header metadata for this document
+            BiblioItem biblio = new BiblioItem();
+            GrobidAnalysisConfig configHeader = new GrobidAnalysisConfig.GrobidAnalysisConfigBuilder()
+                                    .startPage(0)
+                                    .endPage(2)
+                                    .consolidateHeader(1)
+                                    .build();
+            try {
+                engine.processHeader(pdfFile.getPath(), configHeader, biblio);
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+            AnnotatedDocument document = entry.getValue();
+            document.setBiblio(biblio);
+
+            // process full document
             DocumentSource documentSource = null;
             try {
                 // process PDF documents with GROBID
@@ -218,14 +237,12 @@ public class AnnotatedCorpusGeneratorCSV {
                 continue;
 
             Document doc = engine.getParsers().getSegmentationParser().processing(documentSource, config);
-
             if (doc == null) {
                 logger.error("The parsing of the PDF file corresponding to " + docName + " failed");
                 // TBD
                 continue;
             }
 
-            AnnotatedDocument document = entry.getValue();
             List<SoftciteAnnotation> localAnnotations = document.getAnnotations();
             //System.out.println(docName + ": " + localAnnotations.size() + " annotations");
 
@@ -465,7 +482,7 @@ public class AnnotatedCorpusGeneratorCSV {
                                                 inlineAnnotations, 
                                                 entry.getKey(),
                                                 toExclude);
-                    insertSnippet(builderTEICorpus, doc, tokenizationBody, reseFullText, inlineAnnotations, entry.getKey(), toExclude);
+                    insertSnippet(builderTEICorpus, doc, tokenizationBody, reseFullText, inlineAnnotations, entry.getKey(), toExclude, biblio);
                     xmlFiles.add(xmlFile);
                 } catch(Exception e) {
                     logger.error("Failed to write the resulting annotated document in xml", e);
@@ -1123,8 +1140,9 @@ System.out.print("\n");*/
                                String reseFullText,
                                List<Annotation> inlineAnnotations, 
                                String docID, 
-                               List<Integer> toExclude)  throws IOException, ParsingException {
-        Element root = SoftwareParser.getTEIHeaderSimple(docID);
+                               List<Integer> toExclude,
+                               BiblioItem biblio)  throws IOException, ParsingException {
+        Element root = SoftwareParser.getTEIHeaderSimple(docID, biblio);
         
         Element textNode = teiElement("text");
         textNode.addAttribute(new Attribute("xml:lang", "http://www.w3.org/XML/1998/namespace", "en"));
@@ -1154,10 +1172,6 @@ System.out.print("\n");*/
 
             TaggingLabel clusterLabel = cluster.getTaggingLabel();
             Engine.getCntManager().i(clusterLabel);
-            
-            // check if we have an annotation in this cluster
-            //if (!isAnnotatedCluster(cluster.concatTokens(), inlineAnnotations, toExclude, doc.getTokenizations()))
-            //    continue;
 
             if (clusterLabel.equals(TaggingLabels.PARAGRAPH)) {
                 List<LayoutToken> localTokens = cluster.concatTokens();
@@ -1195,23 +1209,22 @@ System.out.print("\n");*/
                             int annotationPosE = localTokens.indexOf(doc.getTokenizations().get(endE));
                             curParagraph.appendChild(this.toTextDehyphenize(localTokens.subList(pos, annotationPosS), toExclude));
                     
-                            //entityElement.appendChild(LayoutTokensUtil.toText(localTokens.subList(startE, endE+1)));
+                            if ((annotationPosS-1 >= 0) && localTokens.get(annotationPosS-1).getText().equals(" "))
+                                curParagraph.appendChild(" ");
+
                             entityElement.appendChild(cleanValue(annotation.getText()));
                             pos = annotationPosE+1;
 
                             curParagraph.appendChild(entityElement);
+
+                            if ((annotationPosE+1 < localTokens.size()) && localTokens.get(annotationPosE+1).getText().equals(" "))
+                                curParagraph.appendChild(" ");
                         }
                     }
                 }
                 // total or remaining text
                 curParagraph.appendChild(this.toTextDehyphenize(localTokens.subList(pos, localTokens.size()-1), toExclude));
-                
-                /*if (isNewParagraph(lastClusterLabel, curParagraph)) {
-                    curParagraph = teiElement("p");
-                    curDiv.appendChild(curParagraph);
-                }
-                String clusterContent = LayoutTokensUtil.normalizeDehyphenizeText(cluster.concatTokens());
-                curParagraph.appendChild(clusterContent);*/
+
             } else if (TEIFormatter.MARKER_LABELS.contains(clusterLabel)) {
                 List<LayoutToken> refTokens = cluster.concatTokens();
                 refTokens = TextUtilities.dehyphenize(refTokens);
@@ -1222,6 +1235,10 @@ System.out.print("\n");*/
 
                 Element ref = null;
                 String markerText = LayoutTokensUtil.toText(refTokens);
+                boolean spaceEnd = false;
+                markerText = markerText.replace("\n", " ");
+                if (markerText.endsWith(" "))
+                    spaceEnd = true;
                 markerText = cleanValue(markerText);
                 if (clusterLabel.equals(TaggingLabels.CITATION_MARKER)) {
                     ref = teiElement("ref");
@@ -1239,6 +1256,8 @@ System.out.print("\n");*/
                 if (ref != null) {
                     ref.appendChild(markerText);
                     parent.appendChild(ref);
+                    if (spaceEnd)
+                        parent.appendChild(" ");
                 }
             }
             lastClusterLabel = cluster.getTaggingLabel();
@@ -1765,43 +1784,27 @@ System.out.print("\n");*/
         builderTEICorpus.append("\t\t\t\t<availability>CC-BY</availability>\n");
         builderTEICorpus.append("\t\t\t</publicationStmt>\n");
         builderTEICorpus.append("\t\t\t<sourceDesc>\n");
-        builderTEICorpus.append("\t\t\t\t<bibl>Softcite corpus, 2019</bibl>\n");
+        builderTEICorpus.append("\t\t\t\t<bibl>Softcite corpus, version 0.1, 2019</bibl>\n");
         builderTEICorpus.append("\t\t\t</sourceDesc>\n");
         builderTEICorpus.append("\t\t</fileDesc>\n");
+
+        builderTEICorpus.append("\t\t<encodingDesc>\n");
+        builderTEICorpus.append("\t\t\t<appInfo>\n");
+
+        TimeZone tz = TimeZone.getTimeZone("UTC");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mmZ");
+        df.setTimeZone(tz);
+        String dateISOString = df.format(new java.util.Date());
+
+        builderTEICorpus.append("\t\t\t\t<application version=\""+GrobidProperties.getVersion()+"\" ident=\"GROBID\" when=\""+dateISOString+"\">\n");
+        builderTEICorpus.append("\t\t\t\t\t<ref target=\"https://github.com/kermitt2/grobid\">A machine learning software for extracting information from scholarly documents</ref>\n");
+        builderTEICorpus.append("\t\t\t\t</application>\n");
+        builderTEICorpus.append("\t\t\t</appInfo>\n");
+        builderTEICorpus.append("\t\t</encodingDesc>\n");
+
         builderTEICorpus.append("\t</teiHeader>\n");
         // then each snippet will be an independent <TEI> sub-structure
     }
-
-    /* Example:
-     <fileDesc>
-      <titleStmt>
-       <title>Shakespeare: the first folio (1623) in electronic form</title>
-       <author>Shakespeare, William (1564–1616)</author>
-       <respStmt>
-        <resp>Originally prepared by</resp>
-        <name>Trevor Howard-Hill</name>
-       </respStmt>
-       <respStmt>
-        <resp>Revised and edited by</resp>
-        <name>Christine Avern-Carr</name>
-       </respStmt>
-      </titleStmt>
-      <publicationStmt>
-       <distributor>Oxford Text Archive</distributor>
-       <address>
-        <addrLine>13 Banbury Road, Oxford OX2 6NN, UK</addrLine>
-       </address>
-       <idno type="OTA">119</idno>
-       <availability>
-        <p>Freely available on a non-commercial basis.</p>
-       </availability>
-       <date when="1968">1968</date>
-      </publicationStmt>
-      <sourceDesc>
-       <bibl>The first folio of Shakespeare, prepared by Charlton Hinman (The Norton Facsimile,
-           1968)</bibl>
-      </sourceDesc>
-     </fileDesc>*/
 
     /**
      * Sub-segment a string in case of unregular Uppercase in the middle of a token:

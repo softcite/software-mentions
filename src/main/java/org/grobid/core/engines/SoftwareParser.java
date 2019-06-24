@@ -1347,7 +1347,7 @@ public class SoftwareParser extends AbstractParser {
     /**
      *  Create a simplified TEI header to be included in a TEI corpus file.
      */
-    static public Element getTEIHeaderSimple(String id) {
+    static public Element getTEIHeaderSimple(String id, BiblioItem biblio) {
         Element tei = teiElement("tei");
         Element teiHeader = teiElement("teiHeader");
 
@@ -1356,8 +1356,31 @@ public class SoftwareParser extends AbstractParser {
             fileDesc.addAttribute(new Attribute("xml:id", "http://www.w3.org/XML/1998/namespace", id));
 
             Element titleStatement = teiElement("titleStatement");
+            Element title = teiElement("title");
+            title.appendChild(biblio.getTitle());
+            titleStatement.appendChild(title);
             fileDesc.appendChild(titleStatement);
-            
+            Element biblStruct = teiElement("biblStruct");
+            if (biblio.getDOI() != null) {
+                Element idno = teiElement("idno");
+                idno.addAttribute(new Attribute("DOI", null, biblio.getDOI()));
+                biblStruct.appendChild(idno);
+            }
+            if (biblio.getPMCID() != null) {  
+                Element idno = teiElement("idno");
+                idno.addAttribute(new Attribute("PMC", null, biblio.getPMCID()));
+                biblStruct.appendChild(idno);
+            } else if (id.startsWith("PMC")) {
+                Element idno = teiElement("idno");
+                idno.addAttribute(new Attribute("PMC", null, id));
+                biblStruct.appendChild(idno);
+            }
+            if (biblio.getPMID() != null) {
+                Element idno = teiElement("idno");
+                idno.addAttribute(new Attribute("PMID", null, biblio.getPMID()));
+                biblStruct.appendChild(idno);
+            }
+            fileDesc.appendChild(biblStruct);
             teiHeader.appendChild(fileDesc);
         }
 

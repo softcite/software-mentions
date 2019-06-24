@@ -1,5 +1,7 @@
 package org.grobid.trainer;
 
+import org.grobid.core.data.BiblioItem;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonGenerationException;
@@ -25,6 +27,7 @@ public class AnnotatedDocument {
     private static final Logger logger = LoggerFactory.getLogger(AnnotatedDocument.class);
 
     private String documentID = null;
+    private BiblioItem biblio = null;
 
     /* This is the "corpus" the document belongs to, so pmc_article or econ_article */
     // TODO move that to an enumerated type for safety
@@ -54,6 +57,14 @@ public class AnnotatedDocument {
 
     public void setDocumentID(String documentID) {
         this.documentID = documentID;
+    }
+
+    public BiblioItem getBiblio() {
+        return this.biblio;
+    }
+
+    public void setBiblio(BiblioItem biblio) {
+        this.biblio = biblio;
     }
 
     public String getArticleSet() {
