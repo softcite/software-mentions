@@ -22,7 +22,7 @@ public class Annotation implements Comparable<Annotation> {
 
     // Gives the actual occurence of the annotation in the PDF document as offset relatively to 
     // the LayoutToken of the whole document.
-    // These LayoutTokens provide the exact position in the document with coordinates and so on.
+    // These LayoutTokens provide then the exact position in the document with coordinates and so on.
     @JsonIgnore
     protected OffsetPosition occurence = null;
 
@@ -67,7 +67,7 @@ public class Annotation implements Comparable<Annotation> {
         if (attributes == null)
             return null;
         else
-            return attributes.get(attributes);
+            return attributes.get(attribute);
     }
 
     public void addAttributeValue(String attribute, String value) {

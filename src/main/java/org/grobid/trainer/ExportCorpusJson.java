@@ -33,7 +33,7 @@ public class ExportCorpusJson {
         Writer writer = null;
         try {
             writer = new OutputStreamWriter(new FileOutputStream(outputPath), "UTF8");
-            writer.write("[\n");
+            writer.write("[ ");
             // get a factory for SAX parser
             SAXParserFactory spf = SAXParserFactory.newInstance();
 
@@ -49,7 +49,7 @@ public class ExportCorpusJson {
         } finally {
             try {
                 if (writer != null) {
-                    writer.write("]\n");
+                    writer.write(" ]\n");
                     writer.close();
                 }
             } catch (IOException e) {
