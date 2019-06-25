@@ -752,7 +752,12 @@ Some issues to be considered:
 
 - We have not distinguished in the returned citations, 1) the documents to be used as reference for a software because the document is dedicted to the software (the "software paper" that acts as hook for citations instead of the software itself, cf. Depsy) and 2) the documents that are simply citing and/or discussing a lot a software (the most informative publication regarding the software, but not only about it). 
 
-- In the REST API, we have not considered so far restricting or separating the citations according to versions of the software (as a parameter of the services, or as a way to group the citations).  
+- In the web API, we have not considered so far restricting or separating the citations according to versions of the software (as a parameter of the services, or as a way to group the citations).  
 
 - We could at some point aggregate reliable citation information in order to enrich the Wikidata claims, by adding references, authors, etc. 
 
+- We need some pagination parameters for managing long result lists
+
+- We include author names in the knowledge base, which raises the conformance to GDPR in relation to personal data - a name being explicitely a personal information which suppose a consent in a normal situation. However, Article 5 GDPR states explicitly that "processing (personal data) for archiving purposes in the public interest, scientific or historical research purposes or statistical purposes shall not be considered to be incompatible with the initial purpose". Personal data - here author names- in scientific publications have necessarily been incorporated to the bibliographic metadata and a scientific paper with the consent of the concerned person, in many cases by these persons themselves. As a consequence, reuse of such data for scientific research purposes is compatible with the initial purpose and therefore legitimate.  
+
+- Still following GDPR, we need to offer to the authors the right to data portability, Right to access, Right to object, Right to erasure and Right to rectify. GDPR applies to all European authors. 
