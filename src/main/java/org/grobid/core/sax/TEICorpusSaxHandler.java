@@ -161,7 +161,7 @@ public class TEICorpusSaxHandler extends DefaultHandler {
         int index = 0;
         for(String text : texts) {
             StringBuilder builder = new StringBuilder();
-
+System.out.println(index);
             byte[] encoded = encoder.quoteAsUTF8(identifier+"-"+index);
             String output = new String(encoded);
             
@@ -208,6 +208,25 @@ public class TEICorpusSaxHandler extends DefaultHandler {
                         }
 
                         OffsetPosition occurence = annot.getOccurence();
+                        // we want to adjust the offsets, as the pure sax parsing offset introduces
+                        // some shift from time to time (blank between mixed content tags?)
+                        int ind = 0;
+                        boolean first = true;
+                        while(ind != -1) {
+                            if ((ind == 0) && first)
+                                ind = -1;
+                            if (first)
+                                first = false;
+                            ind = text.indexOf(annot.getText(), ind+1);
+                            if (ind != -1) {
+                                if (ind != occurence.start && Math.abs(ind - occurence.start) < annot.getText().length()) {
+                                    // we adjust the offset
+                                    occurence.start = ind;
+                                    occurence.end = occurence.start + annot.getText().length() - 1;
+                                    break;
+                                }
+                            }
+                        }
                         builder.append("\t\t\t\t\"start\":"  + occurence.start + ",\n");
                         builder.append("\t\t\t\t\"end\":"  + occurence.end + "\n");
                         builder.append("\t\t\t}");

@@ -67,10 +67,9 @@ class software_mention_client(object):
             for filename in filenames: 
                 if filename.endswith(".pdf") or filename.endswith(".PDF"):
                     print(os.path.join(root,filename))
-                    #self.annotation(os.path.join(root,filename), file_out=None, doi=None)
                     pdf_files.append(os.path.join(root,filename))
                     if len(pdf_files) == self.config["batch_size"]:
-                        self.annotate_batch(pdf_files, None, None)
+                        self.annotate_batch(pdf_files, None, None, None)
                         pdf_files = []
         # last batch
         if len(pdf_files) > 0:
@@ -98,13 +97,42 @@ class software_mention_client(object):
 
     def annotate_collection(self):
         # init lmdb transactions
-        txn = self.env.begin(write=True)
-        txn_fail = self.env_fail.begin(write=True)
+        # open in read mode
+        envFilePath = os.path.join(self.config["data_path"], 'entries')
+        self.env = lmdb.open(envFilePath, map_size=map_size)
 
-        # the db will provide additional metadata for each file
-        
+        #envFilePath = os.path.join(self.config["data_path"], 'doi')
+        #self.env_doi = lmdb.open(envFilePath, map_size=map_size)
 
-        
+        with self.env.begin(write=False) as txn:
+            nb_total = txn.stat()['entries']
+        print("number of entries to process:", nb_total, "entries")
+
+        # iterate over the entries in lmdb
+        pdf_files = []
+        dois = []
+        pmcs = []
+        with self.env.begin(write=True) as txn:
+            cursor = txn.cursor()
+            for key, value in cursor:
+                local_entry = _deserialize_pickle(value)
+                local_entry["id"] = key.decode(encoding='UTF-8');
+
+                print(local_entry)
+
+                pdf_files.append(os.path.join(self.config["data_path"], generateUUIDPath(local_entry['id']), local_entry['id']+".pdf"))
+                dois.append(local_entry['doi'])
+                pmcs.append(local_entry['pmc'])
+
+                if i == self.config["batch_size"]:
+                    annotate_batch(pdf_files, None, dois, pmcs)
+                    pdf_files = []
+                    dois = []
+                    pmcs = []
+        # last batch
+        if len(pdf_files) > 0:
+            self.annotate_batch(pdf_files, None, dois, pmcs)
+
 
     """
     def reprocess_failed(self):
@@ -128,6 +156,12 @@ class software_mention_client(object):
         # re-init the environments
         self._init_lmdb()
 
+def generateUUIDPath(filename):
+    '''
+    Convert a file name into a path with file prefix as directory paths:
+    123456789 -> 12/34/56/123456789
+    '''
+    return filename[:2] + '/' + filename[2:4] + '/' + filename[4:6] + "/" + filename[6:8] + "/"
 
 def annotate(file_in, config, file_out=None, doi=None, pmc=None):
     the_file = {'input': open(file_in, 'rb')}
@@ -140,18 +174,16 @@ def annotate(file_in, config, file_out=None, doi=None, pmc=None):
 
     response = requests.post(url, files=the_file)
     jsonObject = None
-    if response.status_code >= 500:
+    if status == 503:
+        time.sleep(self.config['sleep_time'])
+        return self.annotate(file_in, config, file_out, doi, pmc)
+    elif response.status_code >= 500:
         print('[{0}] Server Error'.format(response.status_code))
     elif response.status_code == 404:
         print('[{0}] URL not found: [{1}]'.format(response.status_code,api_url))
-    elif response.status_code == 401:
-        print('[{0}] Authentication Failed'.format(response.status_code))
     elif response.status_code >= 400:
         print('[{0}] Bad Request'.format(response.status_code))
-        print(ssh_key )
         print(response.content )
-    elif response.status_code >= 300:
-        print('[{0}] Unexpected redirect.'.format(response.status_code))
     elif response.status_code == 200:
         jsonObject = response.json()
     else:
@@ -192,7 +224,7 @@ if __name__ == "__main__":
     parser.add_argument("--reset", action="store_true", help="Ignore previous processing states, and re-init the annotation process from the beginning") 
     parser.add_argument("--file-in", default=None, help="A PDF input file to be processed by the GROBID software mention recognizer") 
     parser.add_argument("--file-out", default=None, help="Path to output the software mentions in JSON format, extracted from the PDF file-in") 
-    parser.add_argument("--repo-in", default=None, help="Path to directory of PDf files to be processed by the GROBID software mention recognizer") 
+    parser.add_argument("--repo-in", default=None, help="Path to a directory of PDF files to be processed by the GROBID software mention recognizer")  
     
     args = parser.parse_args()
 
