@@ -1,19 +1,15 @@
-#import boto3
-#import botocore
 import sys
 import os
 import shutil
 import json
 import pickle
 import lmdb
-import subprocess
 import argparse
 import time
 import datetime
 import S3
 import concurrent.futures
 import requests
-import subprocess
 import pymongo
 
 map_size = 100 * 1024 * 1024 * 1024 
@@ -42,7 +38,8 @@ class software_mention_client(object):
         if self.config['bucket_name'] is not None and len(self.config['bucket_name']) > 0:
             self.s3 = S3.S3(self.config)
 
-        self.mongo_client = None
+        #self.mongo_client = None
+        self.mongo_db = None
 
     def _load_config(self, path='./config.json'):
         """
@@ -92,19 +89,20 @@ class software_mention_client(object):
                     pmc = None
                 else:
                     pmc = pmcs[i]    
-                executor.submit(annotate, pdf_file, self.config, file_out, doi, pmc)
+                executor.submit(annotate, pdf_file, self.config, self.mongo_db, file_out, doi, pmc)
 
 
-    def annotate_collection(self):
+    def annotate_collection(self, data_path):
         # init lmdb transactions
         # open in read mode
-        envFilePath = os.path.join(self.config["data_path"], 'entries')
+        #print(os.path.join(data_path, 'entries'))
+        envFilePath = os.path.join(data_path, 'entries')
         self.env = lmdb.open(envFilePath, map_size=map_size)
 
         #envFilePath = os.path.join(self.config["data_path"], 'doi')
         #self.env_doi = lmdb.open(envFilePath, map_size=map_size)
 
-        with self.env.begin(write=False) as txn:
+        with self.env.begin(write=True) as txn:
             nb_total = txn.stat()['entries']
         print("number of entries to process:", nb_total, "entries")
 
@@ -112,6 +110,7 @@ class software_mention_client(object):
         pdf_files = []
         dois = []
         pmcs = []
+        i = 0
         with self.env.begin(write=True) as txn:
             cursor = txn.cursor()
             for key, value in cursor:
@@ -120,15 +119,22 @@ class software_mention_client(object):
 
                 print(local_entry)
 
-                pdf_files.append(os.path.join(self.config["data_path"], generateUUIDPath(local_entry['id']), local_entry['id']+".pdf"))
+                pdf_files.append(os.path.join(data_path, 
+                    _generateUUIDPath(local_entry['id']), local_entry['id']+".pdf"))
                 dois.append(local_entry['doi'])
-                pmcs.append(local_entry['pmc'])
+                if local_entry.get('pmcid') is not None:
+                    pmcs.append(local_entry.get('pmcid'))
+                else:
+                    pmcs.append(None)
+                i += 1
 
                 if i == self.config["batch_size"]:
-                    annotate_batch(pdf_files, None, dois, pmcs)
+                    self.annotate_batch(pdf_files, None, dois, pmcs)
                     pdf_files = []
                     dois = []
                     pmcs = []
+                    i = 0
+
         # last batch
         if len(pdf_files) > 0:
             self.annotate_batch(pdf_files, None, dois, pmcs)
@@ -156,16 +162,21 @@ class software_mention_client(object):
         # re-init the environments
         self._init_lmdb()
 
-def generateUUIDPath(filename):
+def _generateUUIDPath(filename):
     '''
     Convert a file name into a path with file prefix as directory paths:
     123456789 -> 12/34/56/123456789
     '''
     return filename[:2] + '/' + filename[2:4] + '/' + filename[4:6] + "/" + filename[6:8] + "/"
 
-def annotate(file_in, config, file_out=None, doi=None, pmc=None):
+def _serialize_pickle(a):
+    return pickle.dumps(a)
+
+def _deserialize_pickle(serialized):
+    return pickle.loads(serialized)
+
+def annotate(file_in, config, mongo_db, file_out=None, doi=None, pmc=None):
     the_file = {'input': open(file_in, 'rb')}
-    
     url = "http://" + config["software_mention_host"]
     if config["software_mention_port"] is not None:
         url += ":" + str(config["software_mention_port"])
@@ -174,9 +185,10 @@ def annotate(file_in, config, file_out=None, doi=None, pmc=None):
 
     response = requests.post(url, files=the_file)
     jsonObject = None
-    if status == 503:
-        time.sleep(self.config['sleep_time'])
-        return self.annotate(file_in, config, file_out, doi, pmc)
+    if response.status_code == 503:
+        print('sleep')
+        time.sleep(config['sleep_time'])
+        return annotate(file_in, config, file_out, doi, pmc)
     elif response.status_code >= 500:
         print('[{0}] Server Error'.format(response.status_code))
     elif response.status_code == 404:
@@ -185,35 +197,43 @@ def annotate(file_in, config, file_out=None, doi=None, pmc=None):
         print('[{0}] Bad Request'.format(response.status_code))
         print(response.content )
     elif response.status_code == 200:
+        print('softcite suceed')
         jsonObject = response.json()
     else:
         print('Unexpected Error: [HTTP {0}]: Content: {1}'.format(response.status_code, response.content))
 
     if jsonObject is not None:
         print(jsonObject)
-
-    # add file, DOI, date and version info in the JSON, if available
-    if doi is not None:
-        jsonObject['DOI'] = doi;
-    if pmc is not None:
-        jsonObject['PMC'] = pmc;
-    jsonObject['file_name'] = os.path.basename(file_in)
-    jsonObject['file_path'] = file_in
-    jsonObject['date'] = datetime.datetime.now().isoformat();
-    # TODO: get the version via the server
-    jsonObject['version'] = "0.5.6-SNAPSHOT";
-
-    if file_out is not None: 
-        # we write the json result into a file
-        with open(file_out, "w", encoding="utf-8") as json_file:
-            json_file.write(json.dumps(jsonObject))
     else:
-        # we store the result in mongo db (this is the common case)
-        if self.mongo_client is None:
-            self.mongo_client = pymongo.MongoClient(config["mongo_host"], int(config["mongo_port"]))
-            self.mongo_db = self.mongo_client[config["mongo_db"]]
+        print("jsonObject is None")
 
-        inserted_id = self.mongo_db.annotations.insert_one(jsonObject).inserted_id
+    if jsonObject is not None and len(jsonObject['entities']) != 0:
+        # add file, DOI, date and version info in the JSON, if available
+        if doi is not None:
+            jsonObject['DOI'] = doi;
+        if pmc is not None and pmc != doi:
+            jsonObject['PMC'] = pmc;
+        jsonObject['file_name'] = os.path.basename(file_in)
+        jsonObject['file_path'] = file_in
+        jsonObject['date'] = datetime.datetime.now().isoformat();
+        # TODO: get the version via the server
+        jsonObject['version'] = "0.5.6-SNAPSHOT";
+
+        print(jsonObject)
+
+        if file_out is not None: 
+            # we write the json result into a file
+            with open(file_out, "w", encoding="utf-8") as json_file:
+                json_file.write(json.dumps(jsonObject))
+        else:
+            # we store the result in mongo db (this is the common case)
+            print('storing to mongodb...')
+            if mongo_db is None:
+                mongo_client = pymongo.MongoClient(config["mongo_host"], int(config["mongo_port"]))
+                mongo_db = mongo_client[config["mongo_db"]]
+            print('mongo client is up...')
+            inserted_id = mongo_db.annotations.insert_one(jsonObject).inserted_id
+            print("inserted annotations with id", inserted_id)
 
 
 if __name__ == "__main__":
@@ -248,5 +268,5 @@ if __name__ == "__main__":
     elif file_in is not None:
         annotate(file_in, client.config, file_out)
     elif data_path is not None: 
-        client.annotate_collection()
+        client.annotate_collection(data_path)
     

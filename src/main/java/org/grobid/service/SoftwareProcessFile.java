@@ -98,7 +98,7 @@ public class SoftwareProcessFile {
     				json.append(", \"page_width\":" + page.getWidth() + "}");
                 }
 
-				json.append("], \"entities\":[");
+				json.append("], \"mentions\":[");
 				first = true;
 				for(SoftwareEntity entity : entities) {
 					if (!first)
