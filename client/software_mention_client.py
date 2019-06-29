@@ -181,7 +181,7 @@ def annotate(file_in, config, mongo_db, file_out=None, doi=None, pmc=None):
     if config["software_mention_port"] is not None:
         url += ":" + str(config["software_mention_port"])
     url += endpoint_pdf
-    print("calling... ", url)
+    #print("calling... ", url)
 
     response = requests.post(url, files=the_file)
     jsonObject = None
@@ -202,16 +202,11 @@ def annotate(file_in, config, mongo_db, file_out=None, doi=None, pmc=None):
     else:
         print('Unexpected Error: [HTTP {0}]: Content: {1}'.format(response.status_code, response.content))
 
-    if jsonObject is not None:
-        print(jsonObject)
-    else:
-        print("jsonObject is None")
-
-    if jsonObject is not None and len(jsonObject['entities']) != 0:
+    if jsonObject is not None and len(jsonObject['mentions']) != 0:
         # add file, DOI, date and version info in the JSON, if available
         if doi is not None:
             jsonObject['DOI'] = doi;
-        if pmc is not None and pmc != doi:
+        if pmc is not None:
             jsonObject['PMC'] = pmc;
         jsonObject['file_name'] = os.path.basename(file_in)
         jsonObject['file_path'] = file_in
@@ -227,13 +222,11 @@ def annotate(file_in, config, mongo_db, file_out=None, doi=None, pmc=None):
                 json_file.write(json.dumps(jsonObject))
         else:
             # we store the result in mongo db (this is the common case)
-            print('storing to mongodb...')
             if mongo_db is None:
                 mongo_client = pymongo.MongoClient(config["mongo_host"], int(config["mongo_port"]))
                 mongo_db = mongo_client[config["mongo_db"]]
-            print('mongo client is up...')
             inserted_id = mongo_db.annotations.insert_one(jsonObject).inserted_id
-            print("inserted annotations with id", inserted_id)
+            #print("inserted annotations with id", inserted_id)
 
 
 if __name__ == "__main__":

@@ -351,7 +351,7 @@ var grobid = (function ($) {
         //var string = responseJson.text;
 
         display += '<tr style="background-color:#FFF;">';
-        entities = responseJson.entities;
+        entities = responseJson.mentions;
         var lang = 'en';
         if (responseJson.lang)   
             lang = responseJson.lang;
@@ -517,7 +517,7 @@ var grobid = (function ($) {
         var page_height = 0.0;
         var page_width = 0.0;
 
-        entities = json.entities;
+        entities = json.mentions;
         if (entities) {
             // hey bro, this must be asynchronous to avoid blocking the brothers
             entities.forEach(function (entity, n) {
