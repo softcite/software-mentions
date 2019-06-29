@@ -54,12 +54,12 @@ public class SoftwareProcessString {
 			if (entities != null) {
 				retVal.append("{ ");
 				if (entities.size() == 0)
-					retVal.append("\"entities\" : []");
+					retVal.append("\"mentions\" : []");
 				else {
 					boolean first = true;
 					for(SoftwareEntity entity : entities)	{
 						if (first) {
-							retVal.append("\"entities\" : [ ");
+							retVal.append("\"mentions\" : [ ");
 							first = false;
 						} else {	
 							retVal.append(", ");
