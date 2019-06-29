@@ -659,7 +659,7 @@ var grobid = (function ($) {
         if (responseJson == null)
             return;
 
-        if (responseJson.entities == null) {
+        if (responseJson.mentions == null) {
             return;
         }
 
