@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC3371863" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-06-24T04:50+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC3371863" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-07-03T15:57+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>ABSTRACT </p>
 
@@ -23,13 +23,11 @@ many important areas of applications, one of which is epigenome
 sequencing. DNA methylation may repress or activate transcription, 
 and is known to be involved in embryogenesis, genomic imprinting 
 and tumorigenesis in mammals, and transposon silencing in 
-plants (Bestor, 2000; Li et al., 1992; Lippman et al., 2004; Rhee 
-et al., 2002; Zhang et al., 2006; Zilberman et al., 2007). To 
+plants (Bestor, 2000; Li et al., 1992; Lippman et al., 2004; Rhee  et al., 2002; Zhang et al., 2006; Zilberman et al., 2007). To 
 understand the regulation and dynamics of DNA methylation, the 
 locations of the modified cytosines need to be identified. The first 
 single-base resolution mappings of DNA methylation were produced 
-for the whole Arabidopsis thaliana genome (Cokus et al., 2008; 
-Lister et al., 2008) and for selected subsets of sites in the mouse 
+for the whole Arabidopsis thaliana genome (Cokus et al., 2008;  Lister et al., 2008) and for selected subsets of sites in the mouse 
 genome (Meissner et al., 2008) using various bisulfite sequencing 
 technologies. DNA methylation is the modification of DNA base 
 cytosine (methylcytosine). A map of DNA methylation at single-base 
@@ -47,12 +45,10 @@ methylated (Lister et al., 2008). This may be as a result of the </p>
 methylation is also a general feature of cancer genomes. A better 
 understanding of methylation patterns in cancer genomes may lead 
 to both new diagnostic markers and therapies based on the detection 
-of methylation changes occurring early in tumorigenesis (Laird, 
-2003). In a tumor tissue particularly of an early stage, however, 
+of methylation changes occurring early in tumorigenesis (Laird,  2003). In a tumor tissue particularly of an early stage, however, 
 cancerous cells and normal cells are often mixed together. DNA 
 methylation patterns can also act as markers for tracing stem cell 
-expansion and tumor growth (Kim et al., 2005; Shibata and Tavaré, 
-2006; Yatabe et al., 2001). Making use of methylation patterns in 
+expansion and tumor growth (Kim et al., 2005; Shibata and Tavaré,  2006; Yatabe et al., 2001). Making use of methylation patterns in 
 this way requires determining methylation patterns associated with 
 individual cells or cells from the same clone. 
 When comparing human fibroblast cell IMR90 and H1 embryonic 
@@ -98,13 +94,11 @@ by-nc/3.0), which permits unrestricted non-commercial use, distribution, and rep
 
 <p>IMR90 cells (Lister et al., 2009). It has also been observed that 
 changes in cytosine methylation occur at a frequency much greater 
-than that of the DNA sequence mutations (Ossowski et al., 2010; 
-Schmitz et al., 2011). As a result, SNPs are absent in large portions of 
+than that of the DNA sequence mutations (Ossowski et al., 2010;  Schmitz et al., 2011). As a result, SNPs are absent in large portions of 
 the methylomes. We will describe a method in this article that detects 
 ASM without the assistance of SNPs. In addition, even though the 
 functionalities of ASM are not well understood except that they play 
-an important role in imprinting (Hellman and Chess, 2007; Kerkel 
-et al., 2008), it seems that the methylation level of an individual 
+an important role in imprinting (Hellman and Chess, 2007; Kerkel  et al., 2008), it seems that the methylation level of an individual 
 cytosine is less important than the overall levels of methylations 
 within a region, which is also in contrast to the SNPs. We, therefore, 
 focus our effort in detecting regions of ASM. 
@@ -138,9 +132,7 @@ follows: if there are x reads that map to the position, and y out of the
 x reads have at this position a methylcytosine, then the methylation 
 level is y/x. Note that if the read depth at a cytosine position is 
 below a certain threshold, which is determined by the allowed false 
-positive rate, the methylation is not called, i.e. y = 0. (Lister et al., 
-2008) 
-If the original sample is composed of a mixture of epigenomes, 
+positive rate, the methylation is not called, i.e. y = 0. (Lister et al.,  2008)  If the original sample is composed of a mixture of epigenomes, 
 be it from a set of different cell types, tissues or alleles, the mapped 
 reads will reflect the mixture. Our goal is to infer the original makeup 
 of the mixture from the mapped reads. It should be noted that the 
@@ -904,8 +896,7 @@ than transposon. For the protein coding genes, the gene ontology
 annotations are summarized in Table 8. One region from group (3), 
 on forward strand of chromosome 1: 11267775 -11268327, is on 
 the antisense of an exon of protein coding gene AT3G29360, an 
-imprinted gene in A. thaliana seed reported by McKeown et al. 
-(2011). The region has 26 methylcytosines. </p>
+imprinted gene in A. thaliana seed reported by McKeown et al.  (2011). The region has 26 methylcytosines. </p>
 
 <p>Table 8. GO annotation summary for protein coding genes in Table 7 </p>
 

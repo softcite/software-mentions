@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4066774" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-06-24T04:40+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4066774" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-07-03T15:45+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>ABSTRACT </p>
 
@@ -292,8 +292,8 @@ lumina) and sequenced with 50-bp single-end reads using
 the TruSeq SBS Kit version 3 -HS (Illumina). Ten percent 
 X174 phage DNA was spiked into all sequencing lanes for 
 sequencer calibration. Real-time image analysis and base 
-calling were performed on the instrument using the <rs type="software">HiSeq 
-Sequencing Control Software</rs>. <rs id="software-6" type="software">CASAVA</rs> software <rs corresp="#software-6" type="version-number">version 1.8</rs> (<rs corresp="#software-6" type="creator">Illumina</rs>) was used for de-multiplexing and production 
+calling were performed on the instrument using the <rs type="software">HiSeq Sequencing Control Software</rs>. <rs id="software-6" type="software">CASAVA</rs> software version 
+<rs corresp="#software-6" type="version-number">1.8</rs> (<rs corresp="#software-6" type="creator">Illumina</rs>) was used for de-multiplexing and production 
 of FASTQ sequence files. </p>
 
 <p>Analysis of small RNA sequence data </p>
@@ -304,7 +304,8 @@ the sequence read, discard any sequence of &lt;17 nts after
 trimming and to collapse identical reads into single en-
 tries retaining the read count for each unique sequence. 
 Non-redundant sequences were then aligned to genomic 
-RNA and mRNA sequences of hg19 using <rs id="software-8" type="software">Bowtie 2</rs> (<rs corresp="#software-8" type="url">www.bowtie-bio.sf.net</rs>) (35) and matched sequences were re-
+RNA and mRNA sequences of hg19 using Bowtie 2 (www. 
+bowtie-bio.sf.net) (35) and matched sequences were re-
 tained and aligned to common and abundant non-coding 
 RNAs (tRNAs, rRNAs, snoRNAs). Remaining sequences 
 were further aligned to known mature and precursor 
@@ -313,13 +314,13 @@ org). Additional alignments to a transcript database (En-
 sembl version 75, http://www.ensembl.org) (36) and the spe-
 cific piRNA database <rs id="software-17" type="software">piRNABank</rs> (<rs corresp="#software-17" type="url">http://pirnabank.ibab. ac.in</rs>/) were also performed (37). Alignment result files 
 were parsed using the R statistical language (http://www. 
-R-project.org) and the <rs id="software-10" type="software">Bioconductor</rs> project (<rs corresp="#software-10" type="url">http://www.bioconductor.org</rs>) (38) to generate tables including the read 
+R-project.org) and the <rs id="software-10" type="software">Bioconductor</rs> project (<rs corresp="#software-10" type="url">http://www. bioconductor.org</rs>) (38) to generate tables including the read 
 count and annotation information for each entry in the tar-
 get database. Raw read counts for each RNA class from all 
 samples in the study were then joined in raw data tables. 
 The raw reads were converted to reads per kilobase of target 
 length per million mapped reads (39). All sequences were 
-deposited into the <rs id="software-20" type="software">GEO</rs> database (<rs corresp="#software-20" type="url">http://www.ncbi.nlm.nih.gov/geo</rs>/) under accession number GSE56076. Calculation 
+deposited into the <rs id="software-20" type="software">GEO</rs> database (<rs corresp="#software-20" type="url">http://www.ncbi.nlm.nih. gov/geo</rs>/) under accession number GSE56076. Calculation 
 of percent of reads by biotype was based on raw read counts 
 of perfectly matched transcripts for each biotype compared 
 to total reads for each library. </p>
@@ -336,9 +337,7 @@ cel-miR-39 (Qiagen) was added during lysis to normalize
 extractions and reverse transcription across samples. Re-
 verse transcription was carried out as in (40), starting with </p>
 
-<p>Nucleic Acids Research, 2014, Vol. 42, No. 11 7293 </p>
-
-<p>10 ng of RNA. After reverse transcription cDNA was di-
+<p>Nucleic Acids Research, 2014, Vol. 42, No. 11 7293   10 ng of RNA. After reverse transcription cDNA was di-
 luted 7-fold with water and 9 l was used in a 20 l final 
 PCR reaction volume. Droplets were generated and read us-
 ing a QX100 droplet digital PCR system (Biorad), accord-
@@ -1361,9 +1360,7 @@ cells that take up SE. In addition, some 3'-derived tRNA
 fragments have been found to be associated with argonaute 
 proteins and thus potentially act as miRNAs. However, we </p>
 
-<p>Nucleic Acids Research, 2014, Vol. 42, No. 11 7301 </p>
-
-<p>observed very few 3' tRNA fragments in SE, so tRNA-
+<p>Nucleic Acids Research, 2014, Vol. 42, No. 11 7301   observed very few 3' tRNA fragments in SE, so tRNA-
 derived specific translation repression mediated by SE is un-
 likely. </p>
 

@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4797302" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-06-24T04:49+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4797302" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-07-03T15:55+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>ABSTRACT </p>
 
@@ -176,8 +176,7 @@ no masking) from (7) (Supplementary Data) were down-
 loaded from https://noble.gs.washington.edu/proj/yeast-
 architecture/sup.html. We performed explicit-factor 
 normalization of this contact data to control for GC 
-content, mappability and fragment length using <rs type="software">HiC-
-Norm</rs> (25) genome-wide (chromosome by chromosome) 
+content, mappability and fragment length using <rs type="software">HiC- Norm</rs> (25) genome-wide (chromosome by chromosome) 
 as per (17) and then generated a new 3D reconstruc-
 tion using the constrained optimization approach (7). 
 The HiCNorm source code was downloaded from 
@@ -192,13 +191,14 @@ precipitation (IP) control sample (DMSO, Illumina), was
 obtained from GEO (data set GSE51251; http://www.ncbi. 
 nlm.nih.gov/geo/query/acc.cgi?acc = GSE51251). We con-
 verted the raw sequencing SRA data to FASTQ format us-
-ing '<rs id="software-12" type="software">fastq-dump</rs>' <rs corresp="#software-12" type="version-number">version 2.3.4</rs> in the sequence read archive 
+ing '<rs id="software-12" type="software">fastq-dump</rs>' version <rs corresp="#software-12" type="version-number">2.3.4</rs> in the sequence read archive 
 (<rs type="software">SRA) Toolkit</rs> (26). We aligned the reads to the S. cere-
-visiae reference genome (sacCer2) using Bowtie 2 (27) ver-
-sion 2.2.1 with default parameters and then converted the 
+visiae reference genome (sacCer2) using <rs id="software-14" type="software">Bowtie 2</rs> (27) ver-
+sion <rs corresp="#software-14" type="version-number">2.2.1</rs> with default parameters and then converted the 
 sequence alignment / map (SAM) output to binary align-
-ment / map (BAM) format using <rs id="software-15" type="software">SAMtools</rs> (28) <rs corresp="#software-15" type="version-number">version 0.1.19–44428cd</rs>. We filtered the sequencing reads (using the 
-R package '<rs id="software-16" type="software">ShortRead</rs>' (29) <rs corresp="#software-16" type="version-number">version 1.20.0</rs> with a custom fil-
+ment / map (BAM) format using <rs id="software-15" type="software">SAMtools</rs> (28) version 
+<rs corresp="#software-15" type="version-number">0.1.19-44428cd</rs>. We filtered the sequencing reads (using the 
+R package '<rs id="software-16" type="software">ShortRead</rs>' (29) version <rs corresp="#software-16" type="version-number">1.20.0</rs> with a custom fil-
 ter) to retain only those with two or less expected errors per 
 read: given a Phred quality score q for each base call, the 
 probability that a base call is erroneous is P = 10 
@@ -243,8 +243,7 @@ from the bin centered on that bead. The result is a 3D chro-
 matin configuration reconstruction overlaid with functional 
 genomic data: each bead now has a genomic position, phys-
 ical coordinates (X,Y,Z) and a ChIP-seq peak height value. 
-We visualized this superposed 3D reconstruction in <rs id="software-23" type="software">MacPy-
-MOL</rs> <rs corresp="#software-23" type="version-number">1.3</rs> (34) by first converting the data to the Protein 
+We visualized this superposed 3D reconstruction in <rs id="software-23" type="software">MacPy- MOL</rs> <rs corresp="#software-23" type="version-number">1.3</rs> (34) by first converting the data to the Protein 
 Data Bank (PDB) file format (35) with the ChIP-seq peak 
 height value rescaled as the temperature factor (B-factor) in 
 the PDB file. </p>
@@ -306,8 +305,7 @@ ing <rs type="software">HiCNorm</rs> (25) (see 'Methods') and then generated a
 new 3D genome reconstruction from the normalized con-
 tact data via the constrained optimization approach from 
 (7) as per (17) (the original study (7) preceded the formaliza-
-tion of pipelines for normalizing Hi-C contact data (25,38-
-40)). 
+tion of pipelines for normalizing Hi-C contact data (25,38- 40)). 
 We focus on ChIP-seq data for the transcription fac-
 tor Swi6 as the continuous functional genomic outcome. 
 Swi6 is a component of two transcriptional regulatory 
@@ -440,9 +438,7 @@ ERG11 </p>
 
 <p>&lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; </p>
 
-<p>TDA3 </p>
-
-<p>515 
+<p>TDA3   515 
 517 </p>
 
 <p>chrXVI </p>
@@ -621,9 +617,7 @@ on a 3D reconstruction is that the hotspots depend on the
 the accuracy of a given 3D reconstruction is challenging 
 (15). </p>
 
-<p>Nucleic Acids Research, 2016, Vol. 44, No. 5 2033 </p>
-
-<p>To address this concern, we tested whether the two 
+<p>Nucleic Acids Research, 2016, Vol. 44, No. 5 2033   To address this concern, we tested whether the two 
 Swi6 target genes in the top 3D hotspot from PRIM were 
 closer together than expected in various 3D reconstruc-
 tions. Specifically, we assessed the significance of the Eu-

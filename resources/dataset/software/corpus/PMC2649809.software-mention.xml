@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC2649809" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-06-24T04:24+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC2649809" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-07-03T15:26+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>We integrated five sets of proteomics data profiling the 
 constituents of cerebrospinal fluid (CSF) derived from Hun-
@@ -54,8 +54,7 @@ pooling strategies, depletion of proteins, quantitation meth-
 ods, and mass spectrometry instruments. Although acquired 
 using different biochemical approaches, all data were inter-
 preted using a common protein database, algorithms for da-
-tabase search (24), and peptide and protein identification (25, 
-26) and quantitation (27) methods to allow comparison across 
+tabase search (24), and peptide and protein identification (25,  26) and quantitation (27) methods to allow comparison across 
 laboratories. 
 The preplanned primary analysis of these data includes 
 deriving rankings for protein changes in HD based on the 
@@ -174,10 +173,9 @@ scribed in the supplemental text, Part A. </p>
 <p>All data files were transmitted to the bioinformatics data-process-
 ing lab for analysis after converting to the standard mzXML format 
 (32, 33) and then searched with <rs id="software-6" type="software">X! Tandem</rs> (<rs corresp="#software-6" type="version-date">January 1, 2007</rs> release) 
-configured with a scoring function (24) compatible with <rs type="software">Peptide-
-Prophet</rs> (25) and <rs type="software">ProteinProphet</rs> (26). The same database (human 
+configured with a scoring function (24) compatible with <rs type="software">Peptide- Prophet</rs> (25) and <rs type="software">ProteinProphet</rs> (26). The same database (human 
 IPI version 3.20 consisting of 61,225 IPI numbers) was used to search 
-all data. <rs id="software-9" type="software">PeptideProphet</rs> (<rs corresp="#software-9" type="version-number">version 3.0</rs>) and <rs id="software-10" type="software">ProteinProphet</rs> (<rs corresp="#software-10" type="version-number">version 3.0</rs>) 
+all data. <rs id="software-9" type="software">PeptideProphet</rs> (version <rs corresp="#software-9" type="version-number">3.0</rs>) and <rs id="software-10" type="software">ProteinProphet</rs> (version <rs corresp="#software-10" type="version-number">3.0</rs>) 
 were used to assign identified peptide and protein confidence scores 
 for all but Lab 1 (details described below) where the complexity of 
 samples interrogated was not sufficient to estimate the Peptide-
@@ -209,7 +207,7 @@ of fluorescent spots with two commercial software algorithms (<rs id="software-1
 <rs corresp="#software-12" type="version-number">6.5</rs> (<rs corresp="#software-12" type="creator">GE Healthcare</rs>) and <rs id="software-13" type="software">SameSpots</rs> <rs corresp="#software-13" type="version-number">2.0</rs> (<rs corresp="#software-13" type="creator">Nonlinear Dynamics</rs>)). A </p>
 
 <p>t test was performed on the log ratios using <rs id="software-14" type="software">Statistica</rs> for Windows 
-(<rs corresp="#software-14" type="creator">StatSoft, Inc.</rs>.) <rs corresp="#software-14" type="version-number">version 7</rs> to estimate the significant difference of a 
+(<rs corresp="#software-14" type="creator">StatSoft, Inc</rs>.) version <rs corresp="#software-14" type="version-number">7</rs> to estimate the significant difference of a 
 protein. Only those spots found to have significant changes, based on 
 fluorescence, between the HD and the control were selected for 
 tandem MS analysis. Peak lists of MS/MS spectra acquired on the 
@@ -219,7 +217,7 @@ default parameters. The built-in algorithm version 2.0 was used, and
 neither smoothing nor any signal-to-noise filter was applied for com-
 pound detection. A maximum charge state of 3 was considered for 
 deconvolution. Data were then converted to mzXML files using 
-<rs id="software-16" type="software">CompassXport</rs> (<rs corresp="#software-16" type="version-number">version 1.2.3</rs>). Peptides were identified using decoy 
+<rs id="software-16" type="software">CompassXport</rs> (version <rs corresp="#software-16" type="version-number">1.2.3</rs>). Peptides were identified using decoy 
 database methods with an approach described by Elias and Gygi (34). 
 After proteins were identified for selected spots using false discovery 
 rate (FDR) and <rs type="software">ProteinProphet</rs> (see details in the supplemental text, 
@@ -323,7 +321,7 @@ the quality of data for the labeled experiments. M is the y-axis and A
 is the x-axis, where in this paper, M ϭ Log 2 (Heavy) Ϫ Log 2 (Light); 
 A ϭ [ 1 ⁄2] (Log 2 (Heavy) ϩ Log 2 (Light)). 
 Lab 3-Data from Lab 3 were acquired from the LTQ-FT instrument 
-(Thermo Finnigan). Peak lists were generated by <rs id="software-24" type="software">Xcalibur</rs> (<rs corresp="#software-24" type="version-number">version 1.1</rs>) 
+(Thermo Finnigan). Peak lists were generated by <rs id="software-24" type="software">Xcalibur</rs> (version <rs corresp="#software-24" type="version-number">1.1</rs>) 
 and converted to mzXML files using <rs id="software-25" type="software">ReAdW</rs> <rs corresp="#software-25" type="version-number">1.1</rs> with XRawfile library. 
 Default parameters were used. Database search was carried out 
 using the common parameters and the designated specific modifica-
@@ -354,14 +352,13 @@ versus control, HD-early versus control, and HD-mid versus HD-early
 ratios for each protein group were calculated using IS/control, IS/HD-
 mid, and IS/HD-early ratios from the three experiments. 
 Lab 4 -LTQ OrbiTrap XL mass spectrometer from Thermo Finni-
-gan was used, and <rs id="software-28" type="software">Xcalibur</rs> (<rs corresp="#software-28" type="version-number">version 2.2</rs>) was applied to generate 
+gan was used, and <rs id="software-28" type="software">Xcalibur</rs> (version <rs corresp="#software-28" type="version-number">2.2</rs>) was applied to generate 
 peak lists. Data were converted to mzXML files using <rs id="software-29" type="software">ReAdW</rs> <rs corresp="#software-29" type="version-number">1.1</rs> with 
 XRawfile library. Default parameters were used. Data were then 
 searched with the common criteria plus specific modifications. Pro-
 tein groups with probability score Ͼ0.9 (corresponding to an overall 
 error rate of 0.01) were considered confident proteins for downstream 
-analysis. For the labeled analysis, as with Lab 3, the Q3 algorithm (27) 
-was used to compute ratios between light and heavy isotopic pairs. 
+analysis. For the labeled analysis, as with Lab 3, the Q3 algorithm (27)  was used to compute ratios between light and heavy isotopic pairs. 
 And similarly to the methods used for Lab 3, peptides with Peptide-
 Prophet scores greater than 0.75 and a mass error of less than 20 
 ppm were selected for the protein level quantitation. Histograms of 
@@ -501,7 +498,7 @@ extensive study that was carried out on four parts of human normal
 brain (caudate nucleus, cerebellum, and BA4 and BA9 cortex) using 
 the same microarray chips (2). After these brain data were obtained 
 from Gene Expression Omnibus (GEO) DataSets, signals detected 
-using <rs id="software-35" type="software">Affymetrix microarray suite</rs> <rs corresp="#software-35" type="version-number">version 5</rs> software (MAS5) for each 
+using <rs id="software-35" type="software">Affymetrix microarray suite</rs> version <rs corresp="#software-35" type="version-number">5</rs> software (MAS5) for each 
 probe were averaged over 21 caudate nucleus, 21 cerebellum, and 24 
 cortex (12 BA4 and 12 BA9) arrays. We plotted log 2 MAS5 signal of 
 the caudate nucleus and cerebellum from Ge et al. (29) versus those 
@@ -916,8 +913,7 @@ Likewise for liver proteins, numbers of liver (97) versus non-liver (201) protei
 
 <p>compared with plasma (Table IV). This observation can also 
 be confirmed by performing the same analysis using the 
-normal mouse gene expression data from Zapala et al. (39) 
-that covered 20 neural tissues from the adult mouse central 
+normal mouse gene expression data from Zapala et al. (39)  that covered 20 neural tissues from the adult mouse central 
 nervous system plus 14 tissues from other parts of the body 
 (data not shown). 
 Next we examined whether the brain-specific proteins are 
@@ -2378,8 +2374,7 @@ However, an interesting alternative mechanism may cause
 or contribute to the increase of blood-derived proteins and 
 decrease of brain-derived proteins in HD CSF. Disruption of 
 the blood-brain barrier is widely accepted in inflammatory 
-conditions such as neurosystemic lupus erythematosus (48, 
-49) and multiple sclerosis (50, 51) and increasingly in condi-
+conditions such as neurosystemic lupus erythematosus (48,  49) and multiple sclerosis (50, 51) and increasingly in condi-
 tions traditionally seen as degenerative with secondary neu-
 roinflammation, like Alzheimer disease (52). Interestingly mi-
 croglial activation and the presence of inflammatory cytokines 

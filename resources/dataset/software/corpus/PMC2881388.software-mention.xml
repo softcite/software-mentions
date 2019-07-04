@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC2881388" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-06-24T04:28+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC2881388" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-07-03T15:31+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>ABSTRACT </p>
 
@@ -32,9 +32,7 @@ can be used to differentiate a set of genes performing coherently
 related functions from ones consisting of randomly grouped genes. 
 It is commonly evaluated by analyzing the genes' functional 
 annotations, which are almost invariably in the form of the controlled 
-vocabulary from the Gene Ontology (GO; Ashburner et al., 2000; 
-Brown et al., 2000; Huang et al., 2009; Khatri and Drȃghici, 2005; 
-Mateos et al., 2002). The vocabulary terms are organized as a 
+vocabulary from the Gene Ontology (GO; Ashburner et al., 2000;  Brown et al., 2000; Huang et al., 2009; Khatri and Drȃghici, 2005;  Mateos et al., 2002). The vocabulary terms are organized as a 
 graph, with concepts ranging from very general to very specific. </p>
 
 <p> *  To whom correspondence should be addressed. </p>
@@ -66,10 +64,8 @@ that evaluate the probability of observing a GO term in a set
 by random chance-to determine if an individual term is over-
 represented in a gene set. The widely used count-based methods 
 are based on the hypergeometric distribution or other similar 
-probabilistic models (Cho et al., 2001; Huang et al., 2009; Khatri 
-and Drȃghici, 2005; Man et al., 2000). The merits and limitations of 
-this family of methods are well documented (Khatri and Drȃghici, 
-2005; Zheng and Lu, 2007). Since the objective of count-based 
+probabilistic models (Cho et al., 2001; Huang et al., 2009; Khatri  and Drȃghici, 2005; Man et al., 2000). The merits and limitations of 
+this family of methods are well documented (Khatri and Drȃghici,  2005; Zheng and Lu, 2007). Since the objective of count-based 
 methods is focused on individual terms, directly utilizing their 
 results, e.g. P-values, to assess overall coherence encounters the 
 following difficulties: (i) schemes (ad hoc or sophisticated) need to 
@@ -110,8 +106,7 @@ the total ancestry measure, was developed by Yu and co-workers
 from a gene set. Furthermore, GO graph-based studies have been 
 carried out to evaluate the functional coherence of gene sets via the 
 integration of multiple data sources. Several methods make use of 
-microarray expression data (Goeman and Mansmann, 2008; Kong 
-et al., 2006), while others use the biomedical literature associated 
+microarray expression data (Goeman and Mansmann, 2008; Kong  et al., 2006), while others use the biomedical literature associated 
 with genes (Raychaudhuri and Altman, 2003; Zheng and Lu, 2007). 
 However, none of these methods have considered both aspects 
 of functional coherence, nor have they explicitly considered the 
@@ -126,8 +121,7 @@ represented with a subgraph derived from the GO graph, in which
 genes and GO terms are represented as nodes, and their relationships 
 are represented as quantifiable edges (gene-to-term and term-to-
 term). By studying the topological properties of the graph with 
-methods from graph theory (Barabási and Oltvai, 2004; Newman, 
-2003), we have identified a set of metrics that reflect both the 
+methods from graph theory (Barabási and Oltvai, 2004; Newman,  2003), we have identified a set of metrics that reflect both the 
 enrichment of GO terms and the relationships among them, which 
 makes possible the differentiation of known coherent gene sets from 
 randomly grouped ones. Second, we utilized the information of co-
@@ -201,8 +195,7 @@ is based on information theory, in which differences in the information </p>
 
 <p>Graph-based gene set coherence </p>
 
-<p>content (IC; Jiang and Conrath, 1998; Lord et al., 2003; Pesquita et al., 
-2009; Resnik, 1995) of semantic entities are employed as a measure of the 
+<p>content (IC; Jiang and Conrath, 1998; Lord et al., 2003; Pesquita et al.,  2009; Resnik, 1995) of semantic entities are employed as a measure of the 
 semantic distance. Adopting the same principle, the IC of a GO term was 
 calculated as follows: 
 IC(t) =−lnP(t), 
@@ -250,8 +243,7 @@ Equations (2) and (3)], such that the sum of all edge lengths for the subgraph
 is minimized for all possible subgraphs connecting the terms. The problem 
 of finding such a subgraph is known as the Steiner-tree problem in computer 
 science (Gilbert and Pollak, 1968). We refer to the Steiner tree subgraph of a 
-GOGeneGraph as a GO Steiner tree (T st ). In this study, Kou's algorithm (Kou 
-et al., 1981) is adopted to extract a GO Steiner tree from a GOGeneGraph. 
+GOGeneGraph as a GO Steiner tree (T st ). In this study, Kou's algorithm (Kou  et al., 1981) is adopted to extract a GO Steiner tree from a GOGeneGraph. 
 The heuristic algorithm for obtaining T st is summarized in Supplementary 
 Algorithm 2. </p>
 
@@ -366,8 +358,7 @@ was set to 15 for all regressions in this study. All numerical analyses were
 carried out using the Python package Numpy (http://numpy.scipy.org) and 
 the statistical language R (http://www.r-project.org). 
 The assumption that k s and l are Gaussian distributed with respect to the 
-size of a gene set n was tested using the Shapiro-Wilk (Shapiro and Wilk, 
-1965) test, as implemented in R, and the results (see Supplementary Methods) 
+size of a gene set n was tested using the Shapiro-Wilk (Shapiro and Wilk,  1965) test, as implemented in R, and the results (see Supplementary Methods) 
 indicate that the P-value for observing a statistic from a tree with n genes 
 can be calculated according to the Gaussian distribution function. Under 
 certain assumptions, the distribution of the statistic k rs can be represented 
@@ -533,8 +524,7 @@ from the three species, respectively. (G-I) The distributions (histograms) of
 edge distances of GOGraphs for the species. </p>
 
 <p>that the GOGraphs have the characteristics of scale-free graphs with 
-a hub-spoke-like organization (Barabási and Oltvai, 2004; Newman, 
-2003). With respect to the GO, this means that some concepts 
+a hub-spoke-like organization (Barabási and Oltvai, 2004; Newman,  2003). With respect to the GO, this means that some concepts 
 are highly connected and play critical roles in connecting various 
 concepts. Similarly, the GOGeneGraphs from the three species 
 have comparable power-law exponents and are thus similar in 
@@ -730,8 +720,7 @@ optimal decision threshold for all three metrics in all species. Thus,
 this conventional threshold (P&lt; 0.05) of statistical significance can 
 be readily applied in our statistical test, whereas in the count-based 
 methods one often needs to adjust the significance threshold to avoid 
-false positive calls (Cho et al., 2001; Huang et al., 2009; Khatri and 
-Drȃghici, 2005; Man et al., 2000). </p>
+false positive calls (Cho et al., 2001; Huang et al., 2009; Khatri and  Drȃghici, 2005; Man et al., 2000). </p>
 
 <p>3.5 Robustness of the metrics </p>
 
@@ -942,12 +931,10 @@ According to their silhouette index ranks, the 132 clusters were divided into
 four evenly sized groups then the percent of clusters classified as significant 
 within each group was plotted. </p>
 
-<p>within the clusters based on a hypergeometric assumption (Cho 
-et al., 2001; Kong et al., 2006), and an averaged P-value of the 
+<p>within the clusters based on a hypergeometric assumption (Cho  et al., 2001; Kong et al., 2006), and an averaged P-value of the 
 cluster was determined and subsequently plotted in Figure 5A. The 
 P-values from the GO term enrichment analysis are often sensitive 
-to geneome size and the extent of annotation completeness (Khatri 
-and Drȃghici, 2005). Similarly, if these methods are extended to 
+to geneome size and the extent of annotation completeness (Khatri  and Drȃghici, 2005). Similarly, if these methods are extended to 
 evaluate global functional coherence of a gene set as by simple 
 averaging of P-values the results can be shown to be sensitive 
 to the gene set sizes. The averaged P-values by the count-based 
@@ -957,8 +944,7 @@ metric span a broader range, indicating cluster size has little if
 any impact on its coherence evaluation. The results confirm a 
 well-known phenomenon that GO terms observed within a small 
 cluster are more likely to be evaluated as 'enriched' due to the 
-characteristics of hypergeometric distribution (Khatri and Drȃghici, 
-2005; Zheng and Lu, 2007). The panel also shows that the clusters 
+characteristics of hypergeometric distribution (Khatri and Drȃghici,  2005; Zheng and Lu, 2007). The panel also shows that the clusters 
 evaluated as significant by the graph-based metric tend to be rich 
 with differentially expressed genes per a gene set analysis (GSA) 
 method (Efron and Tibshirani, 2007). 

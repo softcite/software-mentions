@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC3035800" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-06-24T04:39+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC3035800" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-07-03T15:44+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p><rs type="software">Ct3d</rs>ABSTRACT </p>
 
@@ -16,11 +16,10 @@ allows to track microglia in three dimensional confocal time-lapse
 microscopy images. We also evaluate our method on synthetically 
 generated data, demonstrating that our algorithm is robust even in 
 the presence of different types of inhomogeneous background noise. 
-<rs id="software-20" type="software">ct3d</rs><rs corresp="#software-20" type="url">http://www.picb.ac.cn/patterns/Software/ct3d</rs>Capturing the motility of cells using time-lapse microscopy has 
+<rs id="software-20" type="software">ct3d</rs><rs corresp="#software-20" type="url">http://www.picb.ac.cn/patterns/Software/ ct3d</rs>Capturing the motility of cells using time-lapse microscopy has 
 become an important approach to understanding processes such 
 as the cell cycle (Harder et al., 2009), neuronal division and 
-migration (Norden et al., 2009), immune response (Cahalan and 
-Parker, 2008) or the development of cancer (Ianzini et al., 2009). 
+migration (Norden et al., 2009), immune response (Cahalan and  Parker, 2008) or the development of cancer (Ianzini et al., 2009). 
 Based on phase-contrast, confocal or two-photon microscopy, such 
 live cell imaging protocols are now commonly established and 
 corresponding equipment is commonly available. This has triggered 
@@ -33,17 +32,14 @@ for computational analysis. Hence, cell tracking algorithms have </p>
  † The authors wish it to be known that, in their opinion, the first two authors 
 should be regarded as joint First Authors. </p>
 
-<p>attracted considerable attention in recent years (Meijering et al., 
-2006; Miura, 2005). Here, we introduce a novel algorithm for cell 
+<p>attracted considerable attention in recent years (Meijering et al.,  2006; Miura, 2005). Here, we introduce a novel algorithm for cell 
 tracking that allows to track cells, in particular zebrafish microglia, 
 in 3D two-photon image sequences over time. 
-The majority of cell tracking algorithms, as surveyed by Meijering 
-et al. (2006) or Miura (2005), deals with cell tracking in 2D over 
+The majority of cell tracking algorithms, as surveyed by Meijering  et al. (2006) or Miura (2005), deals with cell tracking in 2D over 
 time. Methods range from linking cells identified in individual 
 frames using different segmentation approaches to active-contour 
 (Dufour et al., 2005; Sacan et al., 2008; Shen et al., 2006) or 
-level-set algorithms (Dzyubachyk et al., 2008; Li et al., 2008b; 
-Mukherjee et al., 2004; Nath et al., 2006). The challenges imposed 
+level-set algorithms (Dzyubachyk et al., 2008; Li et al., 2008b;  Mukherjee et al., 2004; Nath et al., 2006). The challenges imposed 
 by the nature of the images to be analyzed lie in phenomena such 
 as cell divisions (Al-Kofahi et al., 2006; Li et al., 2008a), cells 
 entering or leaving the displayed area, or a large number of cells 
@@ -63,8 +59,7 @@ spot of a specific size. Such assumptions, however, are not satisfied
 by the complex and highly variable shapes of microglia under 
 consideration here. Cell tracking is also relevant in the context of 
 tracking cell populations in vitro, which has attracted considerable 
-attention recently (House et al., 2009; Ong et al., 2010; Padfield 
-et al., 2009). 
+attention recently (House et al., 2009; Ong et al., 2010; Padfield  et al., 2009). 
 The lack of methods for tracking cells in 3D has been reported 
 as a limiting factor, for instance in the context of immunoimaging 
 (Cahalan and Parker, 2008). Despite the well-established protocol to 
@@ -106,8 +101,7 @@ intensity based on the gray-value histogram of an image, considering
 pixel intensities below this threshold as background and pixels 
 exceeding the threshold intensity as foreground. To deal with 
 background inhomogeneities and objects of varying intensities, 
-different approaches such as locally adaptive thresholding (Kim 
-and Park, 2005) have been developed. Our approach utilizes a 
+different approaches such as locally adaptive thresholding (Kim  and Park, 2005) have been developed. Our approach utilizes a 
 highly systematic way of picking local thresholds in a hierarchical 
 representation of all possible thresholds of an image, the so-
 called component tree (Jones, 1999; Najman and Couprie, 2004). 
@@ -119,8 +113,7 @@ Comparing component trees by computing tree assignments yields
 a cosegmentation of two images; for cell tracking, cosegmentations 
 between two time frames in a video sequence are of particular 
 relevance. 
-While the term cosegmentation has been coined by Rother et al. 
-(2006), our approach significantly differs from their approach, which </p>
+While the term cosegmentation has been coined by Rother et al.  (2006), our approach significantly differs from their approach, which </p>
 
 <p>is based on comparing histograms. On the contrary, our approach is 
 morphological in the sense that it attempts to identify overlapping 
@@ -130,8 +123,7 @@ location proteomics beyond the cell tracking problem investigated
 in this article. Tree assignments as a generalization of bipartite 
 matchings were introduced and applied by the last author 
 recently (Mosig et al., 2009), and were recently shown to 
-be computationally hard in general (Canzar, Elbassioni and 
-Klau, personal communication, 2010). Applying tree assignments 
+be computationally hard in general (Canzar, Elbassioni and  Klau, personal communication, 2010). Applying tree assignments 
 to component trees for obtaining cosegmentations is a novel 
 contribution in this work. In fact, cosegmentations promise to 
 be useful in other bioimaging (and eventually image processing) 
@@ -139,9 +131,7 @@ applications beyond cell tracking. One straightforward application
 where cosegmentation is of high relevance are protein colocalization 
 studies. Studying colocalization has recently become of relevance 
 through the availability of corresponding two-or multi-label 
-fluorescence microscopy (Schubert et al., 2006; Zinchuk and 
-Zinchuk, 2008) or in situ hybridization (Boettiger and Levine, 2009; 
-Carson et al., 2009) techniques. 
+fluorescence microscopy (Schubert et al., 2006; Zinchuk and  Zinchuk, 2008) or in situ hybridization (Boettiger and Levine, 2009;  Carson et al., 2009) techniques. 
 We implemented our algorithm in the publicly available <rs type="software">ct3d</rs> 
 software package, which is accompanied by the <rs type="software">at3d</rs> graphical 
 user interface. In terms of applying our algorithm, this article 
@@ -324,7 +314,7 @@ cells. To filter out those segments, we utilize life span filtering, i.e. we fil
 out all cells whose identity can be traced across less than a certain minimum 
 number of frames. This cell filter, along with several other ways to eliminate 
 cells with unsuitable size or volume features, follows corresponding features 
-of the <rs id="software-69" type="software">Celltrack</rs> software (<rs corresp="#software-69" type="creator">Sacan et al.</rs>., 2008) for 2D cell tracking; for 
+of the Celltrack software (Sacan et al., 2008) for 2D cell tracking; for 
 <rs type="software">ct3d</rs>, they are implemented in the graphical user interface of the <rs type="software">at3d</rs> tool 
 shown in Figure 4. </p>
 
@@ -356,8 +346,7 @@ of background inhomogeneity. </p>
 <p>• Alternative matching schemes: one class of cell tracking approaches 
 is based on computing bipartite matchings between segmentations of 
 individual time frames. As bipartite matchings may not capture events 
-such as cell division or cell fusion, recent works such as Padfield et al. 
-(2009) introduced alternative matching schemes that are more flexible. 
+such as cell division or cell fusion, recent works such as Padfield et al.  (2009) introduced alternative matching schemes that are more flexible. 
 Truly generalizing bipartite matchings, tree assignments can be seen 
 as such alternative matching scheme. They are particularly interesting 
 for cell tracking, as they may capture events such as cell division, 
@@ -376,7 +365,7 @@ and extract specific cells identified by the cell tracking procedure, and derive
 their motility parameters such as velocity and deformation. The <rs type="software">at3d</rs> tool is 
 implemented using the <rs type="software">qt</rs> framework for graphical user interfaces. Input and 
 output of image series is designed to be compatible with other visualization 
-software, most notably <rs id="software-74" type="software">v3d</rs> (<rs corresp="#software-74" type="creator">Peng et al.</rs>., 2010) for producing rendered 
+software, most notably v3d (Peng et al., 2010) for producing rendered 
 visualizations of the output. </p>
 
 <p>2.4 Experimental materials and methods </p>
@@ -680,9 +669,7 @@ mean square distance between the <rs type="software">ct3d</rs> and the manual tr
 turned out to be 2.9 voxels, 5.5 voxels, 2.6 voxels and 5.4 voxels, 
 respectively, in the four different datasets. These deviations can be 
 considered relatively small in relation to the cell diameters, which 
-were measured as 22.8, 22, 19.6 and 44.3 voxels, respectively. 
-We also applied the active-contour approach from Chan and Vese 
-(2001) to the datasets. Identifying the the four microglia in our 
+were measured as 22.8, 22, 19.6 and 44.3 voxels, respectively.  We also applied the active-contour approach from Chan and Vese  (2001) to the datasets. Identifying the the four microglia in our 
 annotated evaluation dataset required intensive tuning of the four 
 major parameters. In fact, we could not identify a single set of 
 parameters that works across all datasets. A parameter set tuned 
@@ -752,8 +739,7 @@ these parameters. See Supplementary Figure S2 for further illustrations. </p>
 boundaries in some cases. Yet, <rs type="software">ct3d</rs> promises to be a key tool 
 for further studying open questions regarding microglia, such as to 
 determine if and how glia and microglia share the task of finding 
-and removing apoptotic neurons from the vertebrate brain (Peri and 
-Nüsslein-Volhard, 2008). 
+and removing apoptotic neurons from the vertebrate brain (Peri and  Nüsslein-Volhard, 2008). 
 Beside the direct relevance for in vivo time-lapse microscopy, our 
 study indicates that our morphological approach to cosegmentation 
 is both practical and of relevance in bioimaging. Consequentially, 

@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC2773253" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-06-24T04:19+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC2773253" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-07-03T15:21+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p><rs type="software">Mobyle</rs>ABSTRACT </p>
 
@@ -12,16 +12,13 @@ these tools particularly challenging.
 Several systems propose a solution to automate the access to 
 bioinformatics resources. Web-based user interfaces, such as the 
 <rs id="software-25" type="software">Biology Workbench</rs> (<rs corresp="#software-25" type="creator">Subramaniam</rs>, 1998), <rs id="software-36" type="software">PISE</rs> (<rs corresp="#software-36" type="creator">Letondal</rs>, 2001), 
-<rs type="software">wEMBOSS</rs> (Sarachu and Colet, 2005), <rs type="software">Galaxy</rs> (Giardine et al., 
-2005), <rs type="software">GenePattern</rs> (Reich et al., 2006), <rs type="software">MOWServ</rs> (Navas-Delgado 
-et al., 2006), the <rs type="software">New Generation Biology Workbench</rs> (Rifaieh 
-et al., 2007), <rs type="software">BioManager</rs> (Cattley and Arthur, 2007) and <rs type="software">BioExtract</rs> 
+wEMBOSS (Sarachu and Colet, 2005), Galaxy (Giardine et al.,  2005), GenePattern (Reich et al., 2006), MOWServ (Navas-Delgado  et al., 2006), the New Generation Biology Workbench (Rifaieh  et al., 2007), BioManager (Cattley and Arthur, 2007) and BioExtract 
 (Lushbough et al., 2008), simplify the access to powerful computer 
 resources by providing a familiar graphical-based environment for 
 inexperienced users and by saving them from installing software on 
 their own computer. In contrast with these tools which focus on the 
 execution of programs, and where the users can often interactively 
-chain analyses, <rs id="software-50" type="software">GBrowse MOBY</rs> (<rs corresp="#software-50" type="creator">Wilkinson</rs>, 2006) and <rs type="software">Seahawk</rs> 
+chain analyses, <rs id="software-50" type="software">GBrowse MOBY</rs> (<rs corresp="#software-50" type="creator">Wilkinson</rs>, 2006) and Seahawk 
 (Gordon and Sensen, 2007b) propose data-centric solutions where 
 the user can explore a set of BioMOBY (Wilkinson, 2004) services to 
 analyse a set of given data, with edition, navigation and visualization 
@@ -33,7 +30,7 @@ to combine tools within desktop applications, using graphically
 specified workflows. It is hence possible, for bioinformaticians, to 
 organize and automate complex data processing. Such possibilities 
 have also been offered on web interfaces, either in dedicated systems 
-such as <rs type="software">Remora</rs> (Carrere and Gouzy, 2006), or within some of the 
+such as Remora (Carrere and Gouzy, 2006), or within some of the 
 web-based systems cited above. <rs type="software">PISE</rs>, <rs type="software">Galaxy</rs> and <rs type="software">BioExtract</rs> also 
 offer the possibility to save interactively designed protocols. 
 Many of these systems now offer the possibility of accessing 
@@ -82,8 +79,7 @@ capabilities that provide the bases for service quality monitoring. </p>
 <p>2 SYSTEM DESIGN </p>
 
 <p>The <rs type="software">Mobyle</rs> design process was based on a user-centered design 
-process (Javahery et al., 2004; Letondal and Amanatian, 2004; 
-Shachak et al., 2007), involving numerous interviews and a number 
+process (Javahery et al., 2004; Letondal and Amanatian, 2004;  Shachak et al., 2007), involving numerous interviews and a number 
 of users workshops (see Section 4.1). We identified the major 
 end-user concerns that needed to be addressed: </p>
 
@@ -127,8 +123,7 @@ interface, the server components and the distributed architecture. </p>
 
 <p>3.1.1 Homogeneous user interfaces to heterogeneous programs 
 The steep learning curve involved in the use of command-line tools 
-invocation is problematic for inexperienced users (Shneiderman, 
-1983). A classical solution involves wrapping each application in 
+invocation is problematic for inexperienced users (Shneiderman,  1983). A classical solution involves wrapping each application in 
 a custom CGI script and providing a web interface to reduce the 
 burden of remembering the syntax of the command line and the 
 name of the parameters. Given the sheer number of bioinformatics 
@@ -188,7 +183,7 @@ the publication of a program as a BioMoby service using
 <rs type="software">PlayMOBY</rs> (see Section 3.6). </p>
 
 <p>A formal description of the XML grammar used to describe 
-<rs id="software-73" type="software">Mobyle</rs> programs is available on the project webpage (see <rs corresp="#software-73" type="url">http://bioweb2.pasteur.fr/projects/mobyle/downloads.html</rs>), using Relax 
+<rs id="software-73" type="software">Mobyle</rs> programs is available on the project webpage (see <rs corresp="#software-73" type="url">http:// bioweb2.pasteur.fr/projects/mobyle/downloads.html</rs>), using Relax 
 NG (Clark et al., 2001). </p>
 
 <p>3.1.4 Network-enabled bioinformatics tools The <rs type="software">Mobyle</rs> system 
@@ -443,8 +438,8 @@ The tests consist in verifying accessibility to the web service and
 consistency and stability of the results on test data. Their results 
 are published as XML reports and RSS feeds. The <rs type="software">PlayMOBY</rs> 
 description for the QoS presently follows the specifications stated 
-by the <rs type="software">BioWorkflow</rs> group (Wessner et al., 2008). However, it could 
-easily be extended to other frameworks such as the <rs type="software">BioCatalogue</rs> 
+by the BioWorkflow group (Wessner et al., 2008). However, it could 
+easily be extended to other frameworks such as the BioCatalogue 
 project (Belhajjame et al., 2008). In the case of failures or 
 unexpected results, alerts are sent by e-mail to the developers. Thus, 
 <rs type="software">PlayMOBY</rs> also provides the framework to evaluate <rs type="software">Mobyle</rs> service 
@@ -560,8 +555,7 @@ distributed between local and remote servers, and orchestrates the
 tasks to synchronize their execution with the availability of all their 
 input data. 
 <rs type="software">Mobyle</rs> workflows modelize a set of tasks, but in contrast with 
-existing workflow languages such as SCUFL in <rs type="software">Taverna</rs> (Oinn 
-et al., 2004) or MoML in <rs type="software">Kepler</rs> (Altintas et al., 2004), do 
+existing workflow languages such as SCUFL in Taverna (Oinn  et al., 2004) or MoML in Kepler (Altintas et al., 2004), do 
 not specify explicitly some low-level data format detection and 
 transformation tasks. Authors are, whenever possible according 
 to local configuration, not asked to specify these steps. Hence, 

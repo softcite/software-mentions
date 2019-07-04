@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC2935446" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-06-24T04:15+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC2935446" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-07-03T15:16+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>ABSTRACT </p>
 
@@ -43,16 +43,14 @@ disorder lag behind the rapidly accumulating number of known </p>
 
 <p> *  To whom correspondence should be addressed. </p>
 
-<p>protein chains. To compare, the curated DisProt database (Sickmeier 
-et al., 2007) includes little over 500 chains, the PDB database 
+<p>protein chains. To compare, the curated DisProt database (Sickmeier  et al., 2007) includes little over 500 chains, the PDB database 
 (Berman et al., 2000) that allows finding unstructured segments in 
 the solved tertiary structures (which are assumed to be equivalent to 
 disordered segments) includes ∼58 000 proteins, while the overall 
 number of known protein chains is &gt;9 million. The disorder 
 is frequently observed in regions with low-sequence complexity 
 and with low content of hydrophobic amino acids, which would 
-often form a core of a folded globular protein (Dyson and 
-Wright, 2005; Uversky et al., 2000). These and other sequence 
+often form a core of a folded globular protein (Dyson and  Wright, 2005; Uversky et al., 2000). These and other sequence 
 characteristics can be used to differentiate between disordered and 
 ordered regions, which in turn implies that disorder is predictable 
 from the sequence. The past decade observed development of a 
@@ -61,20 +59,16 @@ regions. These methods allow for high-throughput annotations
 of protein chains which provide a viable solution to close the 
 annotation gap. These predictors could be categorized into four 
 groups: (i) methods based on relative propensity of amino acids 
-to form disorder/ordered regions which include <rs type="software">GlobPlot</rs> (Linding 
-et al., 2003), IUPred (Dosztányi et al., 2005), <rs type="software">FoldIndex</rs> (Prilusky 
-et al., 2005) and Ucon (Schlessinger et al., 2007a); (ii) methods 
-built utilizing machine-learning classifiers, such as <rs type="software">DISpro</rs> (Hecker 
-et al., 2008), <rs type="software">DISOPRED</rs> (Jones and Ward, 2003) <rs type="software">DISOPRED2</rs> 
-(Ward et al., 2004), PrDOS (Ishida and Kinoshita, 2007), <rs type="software">POODLE-
-S</rs> (Shimizu et al., 2007a), <rs type="software">POODLE-L</rs> (Hirose et al., 2007), 
-<rs type="software">POODLE-W</rs> (Shimizu et al., 2007b), Spritz (Vullo et al., 2006), 
-<rs type="software">DisPSSMP</rs> (Su et al., 2006), <rs type="software">DisPSSMP2</rs> (Su et al., 2007), <rs type="software">IUP</rs> 
-(Yang and Yang, 2006), <rs type="software">NORSnet</rs> (Schlessinger et al., 2007b) and 
+to form disorder/ordered regions which include GlobPlot (Linding  et al., 2003), IUPred (Dosztányi et al., 2005), FoldIndex (Prilusky  et al., 2005) and Ucon (Schlessinger et al., 2007a); (ii) methods 
+built utilizing machine-learning classifiers, such as DISpro (Hecker  et al., 2008), DISOPRED (Jones and Ward, 2003) DISOPRED2 
+(Ward et al., 2004), PrDOS (Ishida and Kinoshita, 2007), POODLE-
+S (Shimizu et al., 2007a), <rs id="software-33" type="software">POODLE-L</rs> (<rs corresp="#software-33" type="creator">Hirose et al</rs>., 2007), 
+POODLE-W (Shimizu et al., 2007b), Spritz (Vullo et al., 2006), 
+DisPSSMP (Su et al., 2006), DisPSSMP2 (Su et al., 2007), IUP 
+(Yang and Yang, 2006), NORSnet (Schlessinger et al., 2007b) and 
 OnD-CRFs (Wang and Sauer, 2008); (iii) methods based on a meta-
 approach which combines predictions from multiple base predictors 
-including recent MD (Schlessinger et al., 2009), metaPrDOS (Ishida 
-and Kinoshita, 2008), GS-metaDisorder (J.Bujnicki, unpublished 
+including recent MD (Schlessinger et al., 2009), metaPrDOS (Ishida  and Kinoshita, 2008), GS-metaDisorder (J.Bujnicki, unpublished 
 data) and MULTICOM (Cheng et al., 2005); and (iv) methods 
 based on analysis of predicted 3D structural models, such as 
 <rs id="software-39" type="software">DISOclust</rs> (<rs corresp="#software-39" type="creator">McGuffin</rs>, 2008). Since 2002, the sequence-based 
@@ -83,8 +77,7 @@ the critical assessment of structure prediction (CASP) experiments.
 Although the prediction quality continues to rise, as shown in the 
 most recent CASP8 (Noivirt-Brik et al., 2009), improved prediction 
 methods are still urgently needed (Schlessinger et al., 2009). 
-We propose a novel architecture, named MFDp (Multilayered 
-Fusion-based Disorder predictor), that aims to improve the overall 
+We propose a novel architecture, named MFDp (Multilayered  Fusion-based Disorder predictor), that aims to improve the overall 
 quality of the prediction when compared with modern methods. We 
 analyze and quantify improvements provided by MFDp for a generic 
 prediction of all disordered segments and also for the prediction of 
@@ -202,10 +195,9 @@ We use a machine learning-based predictor <rs type="software">DISOPRED2</rs>, re
 propensity-based <rs type="software">IUPred</rs> and a recent <rs type="software">DISOclust</rs> that is based on 
 tertiary structure predictions (i.e. prediction based on the sequence-
 derived tertiary structure). The usage of the 3D-based predictor is 
-the novel aspect of our ensemble. We select DISOPRED2 since 
+the novel aspect of our ensemble. We select <rs id="software-48" type="software">DISOPRED2</rs> since 
 it was demonstrated to provide high-quality predictions and to be 
-orthogonal to other machine learning-based methods (Schlessinger 
-et al., 2009). The <rs type="software">IUPred</rs> provides two models that specialize 
+orthogonal to other machine learning-based methods (<rs corresp="#software-48" type="creator">Schlessinger</rs>  et al., 2009). The <rs type="software">IUPred</rs> provides two models that specialize 
 in prediction of long-and short-disordered regions, respectively. 
 The DISOclust utilizes a premise that ordered residues should be 
 conserved in 3D space in multiple models, whereas residues that 
@@ -222,14 +214,10 @@ lack of SS (Radivojac et al., 2004, 2007; Vucetic et al., 2003)]
 and solvent accessibility [unstructured regions have a large solvent-
 accessible area (Schlessinger et al., 2009)]. We also utilize sequence-
 based predictions of backbone dihedral torsion angles, B-factor 
-[which are associated with disordered regions (Zhang et al., 2009)] </p>
-
-<p>and the sequence terminus indicator [similarly to PrDOS (Su et al., 
-2007)]. The usage of the backbone angles is motivated by their 
+[which are associated with disordered regions (Zhang et al., 2009)]   and the sequence terminus indicator [similarly to PrDOS (Su et al.,  2007)]. The usage of the backbone angles is motivated by their 
 usefulness in building-scoring function for fold recognition and 3D 
 structure prediction (Wu and Zhang, 2008), and by the success of 
-the 3D-based <rs type="software">DISOclust</rs> that ranked fourth in CASP8 (Noivirt-Brik 
-et al., 2009). We tried predictions of signal peptides, but we did not 
+the 3D-based <rs type="software">DISOclust</rs> that ranked fourth in CASP8 (Noivirt-Brik  et al., 2009). We tried predictions of signal peptides, but we did not 
 find them useful. 
 Third, we aggregate the predictions, before feeding them into a 
 classifier, using a sliding window to facilitate predictions of long-
@@ -254,8 +242,7 @@ database and X-ray structures from the PDB. </p>
 
 <p>The proposed method was designed and tested on a dataset with 514 protein 
 sequences. These sequences were harvested from the PDB and the DisProt 
-databases. The PDB sequences were filtered using the culled PDB list (Wang 
-and Dunbrack, 1993) to extract a high-quality and low-sequence identity 
+databases. The PDB sequences were filtered using the culled PDB list (Wang  and Dunbrack, 1993) to extract a high-quality and low-sequence identity 
 subset. We selected sequences that have structures with R-factor &lt;0.2 and 
 resolution &lt;2.0 Å, and that are characterized by sequence identity &lt;5%. 
 The above follows the selection process used by GS-metaDisorder, one 
@@ -282,11 +269,9 @@ this dataset are given in Noivirt-Brik et al. (2009). </p>
 <p>2.2 Definition of disorder </p>
 
 <p>Prior works show that the assignment of the disordered regions performed 
-using different experimental methods is not always consistent (Vucetic et al., 
-2003). The disorder predictors that were trained on regions identified by 
+using different experimental methods is not always consistent (Vucetic et al.,  2003). The disorder predictors that were trained on regions identified by 
 one experimental method could be less accurate for prediction of disordered 
-regions that were characterized by other methods (Schlessinger et al., 2007a, 
-b). To date, there is no golden standard for the assignment of the disordered 
+regions that were characterized by other methods (Schlessinger et al., 2007a,  b). To date, there is no golden standard for the assignment of the disordered 
 regions. In the past CASP experiments the disordered regions were defined as 
 residues that lack coordinates in structures solved by X-ray crystallography 
 and as residues that exhibit high variability within ensemble or are annotated 
@@ -365,17 +350,12 @@ sequence-based predictions. The latter predictions are performed using
 methods chosen based on two criteria: (i) their quality is comparable 
 to the leading relevant predictors; and (ii) they provide a stand-alone 
 implementation that could be utilized to build an autonomous implementation 
-of the proposed disorder predictor. We utilize PSIPRED (McGuffin et al., 
-2000) for the SS prediction, <rs type="software">Real-SPINE3</rs> for the prediction of the relative 
-solvent accessibility (RSA) and backbone dihedral torsion angles (Faraggi 
-et al., 2009), <rs id="software-57" type="software">PROFbval</rs> for the B-factor prediction and residue flexibility 
+of the proposed disorder predictor. We utilize PSIPRED (McGuffin et al.,  2000) for the SS prediction, Real-SPINE3 for the prediction of the relative 
+solvent accessibility (RSA) and backbone dihedral torsion angles (Faraggi  et al., 2009), <rs id="software-57" type="software">PROFbval</rs> for the B-factor prediction and residue flexibility 
 prediction (<rs corresp="#software-57" type="creator">Schlessinger</rs> et al., 2006) and RPSP for the signal peptide 
 prediction (Plewczynski et al., 2008). We also use <rs type="software">IUPred</rs> to predict globular 
 domains. The selection of the SVM as the classifiers was motivated by its 
-prior extensive use in disorder prediction (Hirose et al., 2007; Ishida and 
-Kinoshita 2007, 2008; Peng et al., 2006; Shimizu et al., 2007a, b; Vullo, 
-et al. 2006). We use a linear-kernel-based SVM introduced in Fan et al. 
-(2008). The real-valued prediction is computed as a maximum among the 
+prior extensive use in disorder prediction (Hirose et al., 2007; Ishida and  Kinoshita 2007, 2008; Peng et al., 2006; Shimizu et al., 2007a, b; Vullo,  et al. 2006). We use a linear-kernel-based SVM introduced in Fan et al.  (2008). The real-valued prediction is computed as a maximum among the 
 probabilities generated by SVM ALL , SVM SHORT and SVM LONG (we combine 
 all predicted disordered residues) and the resulting value is binarized using 
 the threshold that equals 0.37. The value of the threshold was found using the 
@@ -388,8 +368,7 @@ is shown in Figure 1. </p>
 
 <p>2.5 Feature space representation </p>
 
-<p>The MFDp utilizes four complementary disorder predictors, <rs type="software">IUPred LONG 
-(IUPREDL</rs>), <rs type="software">IUPred SHORT (IUPREDS</rs>), <rs type="software">DISOPRED2</rs> and <rs type="software">DISOclust</rs>; 
+<p>The MFDp utilizes four complementary disorder predictors, <rs type="software">IUPred LONG (IUPREDL</rs>), <rs type="software">IUPred SHORT (IUPREDS</rs>), <rs type="software">DISOPRED2</rs> and <rs type="software">DISOclust</rs>; 
 the sequence, the PSSM profile (Altschul et al., 1997), the predicted SS, 
 the predicted RSA, the predicted globular domains (IUPREDG), backbone 
 dihedral torsion angles and signal peptides. The predictors were run with 
@@ -1540,8 +1519,7 @@ with NMR, and CASP8 target T0404 (PDBid 2DFE) which was
 solved with X-ray crystallography, as our case studies. We compare 
 side-by-side prediction of MFDp, its input predictors <rs type="software">DISOPRED2</rs>, 
 <rs type="software">IUPred</rs>, <rs type="software">DISOclust</rs>, the recent ensemble-based MD, and two top-
-performing on the CASP8 (with respect to MCC) McGuffin 
-[379] and <rs type="software">GeneSilicoMetaServer</rs> [297] methods (Fig. 4). For the 
+performing on the CASP8 (with respect to MCC) McGuffin  [379] and <rs type="software">GeneSilicoMetaServer</rs> [297] methods (Fig. 4). For the 
 T0480, which is a small protein with ∼50% disordered residues 
 located at sequence termini, MFDp finds both disordered segments, 
 achieves below-average MCC of 0.59 and improves over predictions 

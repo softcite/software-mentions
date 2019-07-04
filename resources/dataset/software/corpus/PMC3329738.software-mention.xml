@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC3329738" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-06-24T04:25+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC3329738" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-07-03T15:27+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>One of the important goals of most biological investigations is to classify and organize the 
 experimental findings so that they are readily useful for deriving generalized rules. Although 
@@ -27,15 +27,12 @@ mination of various RNA structures, such as the hammerhead
 ribozyme (Scott et al., 1995), SRP-RNA (Zwieb et al., 2005), and 
 the 5S, 16S and 23S RNAs of ribosome has greatly increased our 
 knowledge of RNA folds and the three-dimensional organization 
-of RNA chains (Batey et al., 1999; Ferre-d'Amare and Doudna, 
-1999; Hermann and Patel, 1999). Collectively, these structures pro-
+of RNA chains (Batey et al., 1999; Ferre-d'Amare and Doudna,  1999; Hermann and Patel, 1999). Collectively, these structures pro-
 vide a large amount of information about RNA structural motifs 
 (Moore, 1999). Similar exponential growth in number of crystal 
 structures of proteins is also taking place in the PDB. Consider-
 ing the need of classification of these proteins, there are a number 
-of methods available, such as SCOP (Murzin et al., 1995; Hub-
-bard et al., 1997), FSSP (Holm and Sander, 1997), Pisces (Wang 
-and Dunbrack, 2005), BIPA (Lee and Blundell, 2009) etc. These 
+of methods available, such as SCOP (Murzin et al., 1995; Hub- bard et al., 1997), FSSP (Holm and Sander, 1997), Pisces (Wang  and Dunbrack, 2005), BIPA (Lee and Blundell, 2009) etc. These 
 methods can classify a protein structure based on its structural 
 class, source organism, secondary structure content, resolution, 
 etc. One can further determine a set of non-redundant structures 
@@ -49,21 +46,18 @@ and from same source, which have identical sequence, to under-
 stand effect of ligand binding, crystallization environments etc., 
 on the three-dimensional folding. Such sets of structures could 
 reveal significant information on structural flexibility, binding 
-thermodynamics etc., of the biological macromolecules (Halder 
-and Bhattacharyya, 2010; Samanta et al., 2010). They carry signa-
+thermodynamics etc., of the biological macromolecules (Halder  and Bhattacharyya, 2010; Samanta et al., 2010). They carry signa-
 tures that may indicate variations introduced in the molecular 
 structure due to ligand binding or alteration of crystallization 
 conditions. In our recent study, we also found that structural vari-
 ability of double-helical RNA as observed in molecular dynamics 
 simulation studies mimic that of the crystallographic ensembles 
-(Halder and Bhattacharyya, 2010; Halder and Bhattacharyya, man-
-uscript in preparation). Likewise, the differences in RNA structural 
+(Halder and Bhattacharyya, 2010; Halder and Bhattacharyya, man- uscript in preparation). Likewise, the differences in RNA structural 
 organization among various species can be studied if a classifica-
 tion is available. A non-redundant set of RNA structures is also 
 necessary to analyze the local environments at basepairing level, 
 which provided important information in recent analyses of struc-
-ture and energetics of different non-canonical basepairs (Panigrahi 
-et al., 2011). Databases like RNABase (Murthy and Rose, 2003) and 
+ture and energetics of different non-canonical basepairs (Panigrahi  et al., 2011). Databases like RNABase (Murthy and Rose, 2003) and 
 SCOR (Klosterman et al., 2002) attempted to classify the available 
 RNA structures but failed to regularly update these only by man-
 ual curation of the RNA structures, as the number of structures 
@@ -81,11 +75,8 @@ more activities toward classification of RNA structures on the basis </p>
 <p>Structural classification of RNA </p>
 
 <p>of secondary structure (Tamura et al., 2004; Sarver et al., 2008), 
-canonical as well as unusual base pairing (Lu and Olson, 2003; 
-Das et al., 2006; Roy et al., 2008), isosteric base pairs (Leontis et al., 
-2002), etc., but the determination of non-redundant set of struc-
-tures is only done partially by a few groups (Leontis and Westhof, 
-2001; Stombaugh et al., 2009). 
+canonical as well as unusual base pairing (Lu and Olson, 2003;  Das et al., 2006; Roy et al., 2008), isosteric base pairs (Leontis et al.,  2002), etc., but the determination of non-redundant set of struc-
+tures is only done partially by a few groups (Leontis and Westhof,  2001; Stombaugh et al., 2009). 
 In order to organize and classify the information of RNA 
 structures in PDB files and make it available to the general 
 users, we have developed a web-server, called Hierarchical Data-
@@ -392,8 +383,7 @@ equipped with a search tool to determine a non-redundant set
 of structures with user-defined criteria of functional type, source 
 organism, chain length, and resolution. Such non-redundant set 
 of RNA structures was used recently in analyzing structure and 
-energetics of different non-canonical basepairs (Panigrahi et al., 
-2011). 
+energetics of different non-canonical basepairs (Panigrahi et al.,  2011). 
 In our non-redundant dataset, we find that there are a large 
 number of structures of RNA with length less than 30 nucleotides. 
 These are mainly synthetic sequences for which functional anno-
@@ -437,7 +427,7 @@ performed pair-wise secondary structure comparison for these
 classes to compare the structural similarity between them. For 
 secondary structure assignment, the base pairing patterns of 
 each RNA structure in a functional class have been obtained 
-using <rs id="software-5" type="software">BPFind</rs> software tool (Das et al., <rs corresp="#software-5" type="version-date">2006</rs>). <rs type="software">BPFind</rs> gives 
+using BPFind software tool (Das et al., 2006). <rs type="software">BPFind</rs> gives 
 us the secondary structure of a nucleic acid at the basepair-
 ing level. These secondary structural information of basepairing 
 for each chain have been converted to a one-dimensional string 
@@ -658,8 +648,8 @@ spond to individual RNA chains separately and do not consider
 inter-chain base pairing information. These secondary structural 
 sequences are then compared with that of the best representa-
 tive structure of that class using Needleman-Wunsch algorithm 
-(Needleman and Wunsch, 1970) as implemented in <rs id="software-7" type="software">EMBOSS</rs> 
-(Rice et al., <rs corresp="#software-7" type="version-date">2000</rs>). An identity scoring matrix (EDNAMAT) was 
+(Needleman and Wunsch, 1970) as implemented in EMBOSS 
+(Rice et al., 2000). An identity scoring matrix (EDNAMAT) was 
 used for such alignment with a gap-open penalty of −10.0 and 
 gap-extension penalty of -0.5. We find that the average simi-
 larity is 80% or more for a set of similar structures of a given </p>

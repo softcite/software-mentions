@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC5238813" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-06-24T04:16+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC5238813" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-07-03T15:18+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>Abstract: The effects of different formulations and manufacturing process conditions on the 
 physical properties of a solid dosage form are of importance to the pharmaceutical industry. It is 
@@ -65,18 +65,14 @@ Number of times this article has been viewed </p>
 <p>prerequisites, even bioavailability. Porosity measurements 
 are also known to be relevant indicators of drug stability. </p>
 
-<p>2 </p>
-
-<p>The effect of shape and porosity of granules has been stud-
+<p>2   The effect of shape and porosity of granules has been stud-
 ied by Johansson and Alderborn, 
 3 suggesting that stronger 
 tablets are formed when granules with irregular porosity are 
 compressed. Theoretically, the porosity of a tablet can be a 
 predictor of its dissolution behavior as well. </p>
 
-<p>4 </p>
-
-<p>Previous works on this topic have revealed that porosity 
+<p>4   Previous works on this topic have revealed that porosity 
 influences tablet strength; lactose tablets with larger pores 
 were weak 
 5-7 and similar relationships were observed with 
@@ -86,8 +82,7 @@ tance of porosity as an indirect measurement of dissolution
 was demonstrated using rate of water uptake, and solvent 
 penetration was studied in microcrystalline cellulose (MCC) 
 tablets with different porosities. Results showed that tablets 
-with 10% and 15% porosity take up water much faster (30 s) 
-and expand by up to 50% of original thickness, while tablets 
+with 10% and 15% porosity take up water much faster (30 s)  and expand by up to 50% of original thickness, while tablets 
 with 5% porosity are much slower in water uptake behavior 
 (148 s), in addition to showing less expansion. 
 9 The corre-
@@ -104,9 +99,7 @@ lic powders.
 exponential growth function of porosity using a diverse set 
 of pharmaceutical tablets by Gong et al. </p>
 
-<p>13 </p>
-
-<p>Data-driven empirical models established using compu-
+<p>13   Data-driven empirical models established using compu-
 tational intelligence (CI) methods can be used as surrogates 
 to run in silico experiments to predict porosity. Use of CI 
 offers reduction in experiments, leading to cost and time sav-
@@ -115,9 +108,7 @@ been used in works addressing the pharmaceutical industry's
 various problems, including tensile strength, porosity, and 
 dissolution problems. </p>
 
-<p>14-18 </p>
-
-<p>Generally, modeling and simulation (M-and-S) is a huge 
+<p>14-18   Generally, modeling and simulation (M-and-S) is a huge 
 area of science, in which various paradigms of modeling are 
 used, mostly based on well-established theory. In pharma-
 ceutical sciences, a broad area of molecular modeling, using 
@@ -158,9 +149,7 @@ feed powders (binary mixtures) and their granules from each
 size range were die compacted using six different die compac-
 tion forces. The experiments were done in triplicates. </p>
 
-<p>22 </p>
-
-<p>The tablets were characterized through the porosity. 
+<p>22   The tablets were characterized through the porosity. 
 Therefore, the porosity is an outcome (Table 1A). After 
 ejection, the tablet dimensions (diameter and thickness) were 
 measured with a digital micrometer (Mitutoyo, Takatsu-ku, 
@@ -304,9 +293,7 @@ be used by the next model, until the final model is achieved.
 The final prediction is a simple average of the predictions 
 from each tree in the ensemble. </p>
 
-<p>25 </p>
-
-<p>random forest </p>
+<p>25   random forest </p>
 
 <p>Random forests are well known tree-based models. One 
 model is shaped by numerous trees in the collection. Indepen-
@@ -446,16 +433,12 @@ GP implements a tree structure representation to show the
 mathematical equations. The tree structure is composed of 
 two parts: function set (nodes) and a terminal set (leaves). </p>
 
-<p>30 </p>
-
-<p>The function set can be chosen through the operators {+, -, 
+<p>30   The function set can be chosen through the operators {+, -, 
 *, /, sin, cos, log, abs}, mathematical functions, conditional 
 statements, or even the user-defined operators. In addition, 
 the terminal set includes constants and model variables. </p>
 
-<p>31,32 </p>
-
-<p>To find the best solution, different runs were conducted 
+<p>31,32   To find the best solution, different runs were conducted 
 by iterating over GP tuning parameters. The most important 
 tuning parameters are maximum size of the chromosome, 
 the number of generations, and population size. 
@@ -466,17 +449,13 @@ was set to 1,000, and the number of generations was set to
 500 million evolution steps divided into 100 stages. 
 These equations can be optimized by different strategies. </p>
 
-<p>33,34 </p>
-
-<p>For this experiment, equations were created on the whole 
+<p>33,34   For this experiment, equations were created on the whole 
 data set, and then selected ones were optimized using the 
 simulated annealing (SANN) algorithm, followed by a quasi-
 Newton (Broyden-Fletcher-Goldfarb-Shanno [BFGS]) 
 method. </p>
 
-<p>35,36 </p>
-
-<p>independent feature selection by <rs type="software">fscaret</rs> </p>
+<p>35,36   independent feature selection by <rs type="software">fscaret</rs> </p>
 
 <p>The package <rs type="software">fscaret</rs> allows semiautomatic feature selection, 
 working as a wrapper for the caret package in R. <rs type="software">Fscaret</rs> 
@@ -712,12 +691,9 @@ variety of roll compactor settings introduces variance in the
 external data set unknown to the trained models. Although 
 CI systems are not known for their extrapolation abilities, </p>
 
-<p>42 </p>
-
-<p>the models presented herein are able to extrapolate success-
+<p>42   the models presented herein are able to extrapolate success-
 fully in a small range. Regardless of the complexity in the 
-external data set, the <rs type="software">rgp</rs> model represented by Equation 4 
-makes accurate predictions of the test cases from all different </p>
+external data set, the <rs type="software">rgp</rs> model represented by Equation 4  makes accurate predictions of the test cases from all different </p>
 
 <p>tooling and force conditions (Figure 4). Table 4 shows the 
 levels of accuracy of prediction for the external validation 
@@ -760,9 +736,7 @@ tablets (Figure 6), a behavior that can be attributed to particle
 rearrangement followed by plastic deformation during the 
 compression stage. </p>
 
-<p>44 </p>
-
-<p>Feature selection on the external data set to 
+<p>44   Feature selection on the external data set to 
 establish the surplus of discarded variables </p>
 
 <p>Plausible performance of the trained CI models on a signifi-

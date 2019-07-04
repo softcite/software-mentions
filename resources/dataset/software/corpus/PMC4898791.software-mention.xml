@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4898791" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-06-24T04:42+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4898791" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-07-03T15:47+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>Abstract </p>
 
@@ -35,22 +35,19 @@ There is already a wide range of evolutionary phenomena
 that are studied using continuous trait models. Much of </p>
 
 <p>comparative genomics relies on implicit or explicit models 
-for the evolution of morphology (Stevens 1991; Felsenstein 
-2002; Ronquist 2004; Harmon et al. 2010; O'Meara 2012), 
+for the evolution of morphology (Stevens 1991; Felsenstein  2002; Ronquist 2004; Harmon et al. 2010; O'Meara 2012), 
 many of which make gross simplifying assumptions about 
 how traits vary over time. Continuous evolutionary models 
 have been used in comparative transcriptomics to study her-
-itable aspects of gene expression levels (Khaitovich et al. 2005, 
-2006), an area with exceptional promise given recent im-
+itable aspects of gene expression levels (Khaitovich et al. 2005,  2006), an area with exceptional promise given recent im-
 provements in accuracy and the ability to sample in situ 
 (Voelckel et al. 2002). 
 Continuous trait models will be of growing importance in 
 evolutionary studies of whole-genome single nucleotide poly-
 morphism-databases. Inference methods based on the coales-
-cent such as <rs type="software">SNAPP</rs> (Bryant et al. 2012) do not scale well as 
+cent such as SNAPP (Bryant et al. 2012) do not scale well as 
 the number of individuals grows, while those based on con-
-tinuous models of gene frequencies (Cavalli-Sforza and 
-Edwards 1967; Felsenstein 1981b; Siré n et al. 2011) depend 
+tinuous models of gene frequencies (Cavalli-Sforza and  Edwards 1967; Felsenstein 1981b; Siré n et al. 2011) depend 
 only on proportions of populations with each allele, so scale 
 extremely well. In addition, it is often easier to model the 
 effect of selection on continuous gene frequency models 
@@ -73,8 +70,7 @@ Freckleton (2012) and FitzJohn (2012), demonstrated that if
 traits are evolving according to Brownian motion then we can 
 compute likelihoods quickly and (up to numerical precision) 
 exactly. Felsenstein's approach extends to other Gaussian pro-
-cesses, notably the Ornstein-Uhlenbeck (OU) process (Lande 
-1976; Felsenstein 1988; Hansen 1997), and for several dec-
+cesses, notably the Ornstein-Uhlenbeck (OU) process (Lande  1976; Felsenstein 1988; Hansen 1997), and for several dec-
 ades, Gaussian models were used almost exclusively to model 
 the evolution of quantitative traits. Ho and Ané (2014) used 
 clever algebraic techniques to develop an alternative algorithm 
@@ -86,10 +82,8 @@ used, they should be used. The drawback of these methods is
 that they are fundamentally restricted to models which are 
 Gaussian processes or transforms of Gaussian processes, 
 where the computational bottleneck lies in the computation 
-of a quadratic form involving the covariance matrix of Ho and 
-Ané (2014). Many evolutionary models cannot be handled 
-within this framework (e.g., Ronquist 2004; Landis et al. 
-2013). Some of the properties of Gaussian processes are 
+of a quadratic form involving the covariance matrix of Ho and  Ané (2014). Many evolutionary models cannot be handled 
+within this framework (e.g., Ronquist 2004; Landis et al.  2013). Some of the properties of Gaussian processes are 
 quite restrictive: Gaussian processes have single modes, so 
 can only model adaptive landscapes with single peaks; 
 Brownian motion has independent increments, so the rate 
@@ -187,8 +181,7 @@ will obtain an estimate which is accurate to four more decimal
 places. 
 To illustrate the application of our general framework, we 
 develop an efficient algorithm for computing the likelihood 
-of a tree under the threshold model of Wright (1934) 
-and Felsenstein (2005, 2012). We also show how to infer 
+of a tree under the threshold model of Wright (1934)  and Felsenstein (2005, 2012). We also show how to infer 
 marginal trait densities at ancestral nodes. We have imple-
 mented these algorithms and used them to study evolution 
 of extrafloral nectaries (EFN) on an 839-taxon phylogeny of 
@@ -281,8 +274,7 @@ Y </p>
 cording to the model. 
 The oldest, and most widely used, continuous trait models 
 assume that traits (or transformed gene frequencies) evolve 
-like Brownian motion (Cavalli-Sforza and Edwards 1967; 
-Felsenstein 1973). For these models, the root density f ðx r jyÞ 
+like Brownian motion (Cavalli-Sforza and Edwards 1967;  Felsenstein 1973). For these models, the root density f ðx r jyÞ 
 is Gaussian (normal) with mean 0 and unknown variance s </p>
 
 <p>2 </p>
@@ -390,10 +382,8 @@ are often easy to implement. A numerical integration method
 computes an approximation of the integral from function 
 values at a finite number of points. Hence, we can obtain 
 approximate integrals of functions even when we do not 
-have an equation for the function itself. See Cheney and 
-Kincaid (2012) for an introduction to numerical integration, 
-and Dahlquist and Bjö rck (2008) and Davis and Rabinowitz 
-(1984) for more comprehensive technical surveys. 
+have an equation for the function itself. See Cheney and  Kincaid (2012) for an introduction to numerical integration, 
+and Dahlquist and Bjö rck (2008) and Davis and Rabinowitz  (1984) for more comprehensive technical surveys. 
 The idea behind most numerical integration techniques is 
 to approximate the target function using a function which is 
 easy to integrate. In this article, we will restrict our attention to 
@@ -489,8 +479,7 @@ vergence rate of OðN
 À4 Þ. Increasing the number of intervals 
 by a factor of 10 decreases the error by a factor of 10 
 À4 . See 
-Dahlquist and Bjö rck (2008) and Davis and Rabinowitz (1984) 
-for further details. 
+Dahlquist and Bjö rck (2008) and Davis and Rabinowitz (1984)  for further details. 
 It should be remembered, however, that the convergence 
 rate is still only an asymptotic bound, and gives no guarantees 
 on how well the method performs for a specific function and 
@@ -731,8 +720,7 @@ Furthermore, recomputing likelihoods for each possible root
 entails a large amount of unnecessary computation. 
 Instead, we derive a second recursion, this one starting at 
 the root and working toward the tips. A similar trick is used to 
-compute derivatives of the likelihood function in Felsenstein 
-and Churchill (1996). For a node i and state x we let G i ðxÞ 
+compute derivatives of the likelihood function in Felsenstein  and Churchill (1996). For a node i and state x we let G i ðxÞ 
 denote the likelihood for the trait values at tips which are not 
 descendants of node i, conditional on node i having trait value 
 x. If node i is the root r, then G r ðxÞ is 1 for all x. 
@@ -1382,8 +1370,7 @@ behind the model is that the intermediate state represents
 evolutionary precursors, changes which are necessary for 
 the evolution of a new state but which may not be directly 
 observed. These precursors could explain repeated parallel 
-evolution of a trait in closely related traits (Marazzi et al. 
-2012). They compiled a data set recording presence or ab-
+evolution of a trait in closely related traits (Marazzi et al.  2012). They compiled a data set recording presence or ab-
 sence of plant EFNs across a phylogeny of 839 species of 
 Fabales, fitting their models to these data. 
 The threshold model also involves evolutionary precursors 
@@ -1744,12 +1731,10 @@ Threshold
 252.6 </p>
 
 <p>NOTE.-Column k indicates numbers of parameters for each model. Data 
-for the binary and precursor models copied from table 1 in Marazzi et al. 
-(2012). All likelihoods and AIC values rounded to 1 d.p. Boldface indicates the 
+for the binary and precursor models copied from table 1 in Marazzi et al.  (2012). All likelihoods and AIC values rounded to 1 d.p. Boldface indicates the 
 best fitting model for each trait. A pre-cursor model with one parameter was 
 used for all experiments, except for trait 6 where a two-parameter model gave 
-a better AIC than the one-parameter model (see discussion in Marazzi et al. 
-(2012). </p>
+a better AIC than the one-parameter model (see discussion in Marazzi et al.  (2012). </p>
 
 <p>log(N) </p>
 
@@ -1830,8 +1815,7 @@ together with the Gaussian kernel method. Logarithms computed to base 10. </p>
 precursor model and a conventional binary trait model. We 
 extend this comparison to include the threshold model. This is 
 a one parameter model, the parameter being the value of the 
-liability at the root. We used the <rs type="software">MATLAB</rs> command <rs type="software">fmin-
-search</rs> with multiple starting points to compute the maximum 
+liability at the root. We used the <rs type="software">MATLAB</rs> command <rs type="software">fmin- search</rs> with multiple starting points to compute the maximum 
 likelihood estimate for this value. The resulting log-likelihood 
 was log?L ¼ À240:6, giving an AIC of 483.2. This compares 
 to an AIC of 507.4 for the (two parameter) binary character 
@@ -1840,8 +1824,7 @@ model of Marazzi et al. (2012).
 We analyzed the five other EFN traits in the same way, and 
 present the computed AIC values in table 1, together with AIC 
 values for the two parameter binary state model and one pa-
-rameter precursor model computed by Marazzi et al. (2012) 
-(and the two parameter precursor model for trait 6). We see </p>
+rameter precursor model computed by Marazzi et al. (2012)  (and the two parameter precursor model for trait 6). We see </p>
 
 <p>that the threshold model fits better than either the binary or 
 precursor models for all of the six traits. 
@@ -1850,8 +1833,7 @@ appear to fit some data better than the precursor model be-
 cause they appear to capture similar evolutionary phenomena. 
 It would be useful to explore this observation more thor-
 oughly, given the new computational tools, perhaps incorpo-
-rating phylogenetic error in a manner similar to Marazzi et al. 
-(2012). </p>
+rating phylogenetic error in a manner similar to Marazzi et al.  (2012). </p>
 
 <p>Inferring Ancestral Liabilities </p>
 
@@ -1897,9 +1879,7 @@ carried out. </p>
 <p>We have introduced a new framework for the computation 
 of likelihoods from continuous characters, and illustrated the 
 framework using an efficient algorithm for evaluating (ap-
-proximate) likelihoods under Wright and Felsenstein's thresh-
-old model. 
-This framework opens up possibilities in several directions. 
+proximate) likelihoods under Wright and Felsenstein's thresh- old model.  This framework opens up possibilities in several directions. 
 The numerical integration, or numerical quadrature, literature 
 is vast. In this article, we have focused in on a popular and 
 simple numerical integration method, and our algorithm 
@@ -1913,9 +1893,7 @@ The connection with Felsenstein's (discrete character) prun-
 ing algorithm also opens up opportunities for efficiency gains. 
 Techniques such as storing partial likelihoods, or approximat-
 ing local neighborhoods, are fundamental to efficient phylo-
-genetic computations on sequence data (Felsenstein 1981a; 
-Larget and Simon 1998; Swofford 2002; Pond and Muse 
-2004; Stamatakis 2006). These tricks could all be now applied 
+genetic computations on sequence data (Felsenstein 1981a;  Larget and Simon 1998; Swofford 2002; Pond and Muse  2004; Stamatakis 2006). These tricks could all be now applied 
 to the calculation of likelihoods from continuous traits. 
 Finally, we stress that the algorithm does not depend on 
 special characteristics of the continuous trait model, beyond 

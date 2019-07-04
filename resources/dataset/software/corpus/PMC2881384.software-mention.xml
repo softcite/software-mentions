@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC2881384" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-06-24T04:27+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC2881384" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-07-03T15:31+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>ABSTRACT </p>
 
@@ -24,27 +24,21 @@ that HMMs trained with our pairwise model of simulated evolution </p>
 Profile hidden Markov models (HMMs) have been one of the most 
 successful methods to date for recognizing both close and distant 
 homologs of given protein sequences. Popular HMM methods such 
-as <rs id="software-0" type="software">HMMER</rs> (Eddy et al., <rs corresp="#software-0" type="version-date">1998</rs>a, b) and <rs id="software-1" type="software">SAM</rs> (Hughey and Krogh, 
-<rs corresp="#software-1" type="version-date">1996</rs>) have been behind the design of databases such as Pfam (Finn 
-et al., 2006), PROSITE (Hulo et al., 2006) and SUPERFAMIILY 
+as <rs id="software-0" type="software">HMMER</rs> (<rs corresp="#software-0" type="creator">Eddy et al</rs>., <rs corresp="#software-0" type="version-date">1998</rs>a, b) and SAM (Hughey and Krogh,  1996) have been behind the design of databases such as Pfam (Finn  et al., 2006), PROSITE (Hulo et al., 2006) and SUPERFAMIILY 
 (Wilson et al., 2007). However, a limitation of these HMMs is, since 
 there is only finite state information about the sequence that can be 
 held in any particular position, HMMs cannot capture dependencies 
 that are far, and variable distance apart, in sequence. 
 On the other hand, in β-structural motifs, as was noticed by 
-Lifson, Sander and others (Hubbard and Park, 1995; Lifson and 
-Sander, 1980; Olmea et al., 1999; Steward and Thornton, 2002; Zhu 
-and Braun, 1995), amino acid residues that are hydrogen bonded 
+Lifson, Sander and others (Hubbard and Park, 1995; Lifson and  Sander, 1980; Olmea et al., 1999; Steward and Thornton, 2002; Zhu  and Braun, 1995), amino acid residues that are hydrogen bonded 
 in β-sheets exhibit strong pairwise statistical dependencies. These 
 residues, however, can be far away and a variable distance apart in 
 sequence, making them impossible to capture in an HMM. Early 
-work of Bradley et al. (Bradley et al., 2001; Cowen et al., 2002) 
-show that these pairwise correlations help to recognize protein 
+work of Bradley et al. (Bradley et al., 2001; Cowen et al., 2002)  show that these pairwise correlations help to recognize protein 
 sequences that fold into the right-handed parallel β-helix fold. More 
 recent work has used a conditional random field or Markov random 
 field framework, both of which generalize HMMs beyond linear 
-dependencies, to identify the right-handed parallel β-helix fold (Liu 
-et al., 2009), the leucine rich repeat fold (Liu et al., 2009) and the 
+dependencies, to identify the right-handed parallel β-helix fold (Liu  et al., 2009), the leucine rich repeat fold (Liu et al., 2009) and the 
 β-propeller folds (Menke et al., 2010). </p>
 
 <p> *  To whom correspondence should be addressed. </p>
@@ -82,13 +76,11 @@ introduced in Kumar and Cowen (2009). The possibility that motif
 recognition methods could be improved with the addition of artificial 
 training sequences had been previously suggested in the protein 
 design community (Koehl and Levitt, 1999), though the methods of 
-Koehl and Levitt (1999); Larson et al. (2003) and Am Busch et al. 
-(2009) to generate these sequences are much more computationally 
+Koehl and Levitt (1999); Larson et al. (2003) and Am Busch et al.  (2009) to generate these sequences are much more computationally 
 intensive than the simple sequence-based mutation model of Kumar 
 and Cowen. In particular, Kumar and Cowen created new training 
 sequences by artificially adding point mutations to the original 
-sequences in the training set, using the BLOSUM62 matrix (Eddy, 
-2004). The HMM training was then used on this larger, augmented 
+sequences in the training set, using the BLOSUM62 matrix (Eddy,  2004). The HMM training was then used on this larger, augmented 
 training set unchanged. 
 In this article, we compare ordinary <rs type="software">HMMER</rs> Profile HMMs, 
 <rs type="software">HMMER</rs> Profile HMMs augmented with a point mutation model 
@@ -320,8 +312,7 @@ of the family of the training set. </p>
 
 <p>3.1 Datasets </p>
 
-<p>We employed an approach similar to that of Wistrand and Sonnhammer 
-(2004) to pick SCOP families and superfamilies from among those that 
+<p>We employed an approach similar to that of Wistrand and Sonnhammer  (2004) to pick SCOP families and superfamilies from among those that 
 belong to the 'mainly beta proteins' class in SCOP and train HMMs. First, 
 we chose sequences from SCOP that are &lt;95% identical based on the 
 ASTRAL database version 1.73 (Chandonia et al., 2004). The dataset was 
@@ -340,7 +331,8 @@ http://bcb.cs.tufts.edu/pairwise/. </p>
 into columns and thus generating a multiple sequence alignment (MSA). </p>
 
 <p>3.2.1 Aligning sequences with <rs type="software">MUSCLE</rs> For the single frequency 
-augmented training model, we used the popular program <rs id="software-8" type="software">MUSCLE</rs> <rs corresp="#software-8" type="version-number">Version 4</rs> (<rs corresp="#software-8" type="creator">Edgar</rs>, <rs corresp="#software-8" type="version-date">2004</rs>) to generate the MSA that was provided to the HMM training 
+augmented training model, we used the popular program <rs id="software-8" type="software">MUSCLE</rs> Version 
+<rs corresp="#software-8" type="version-number">4</rs> (<rs corresp="#software-8" type="creator">Edgar</rs>, <rs corresp="#software-8" type="version-date">2004</rs>) to generate the MSA that was provided to the HMM training 
 methods. It is one of the fastest programs available and produces global 
 sequence alignments for the set of sequences from a family. We developed a 
 script to transform the <rs type="software">MUSCLE</rs> alignment output to .ssi (STOCKHOLM) 
@@ -349,7 +341,7 @@ format since other <rs type="software">MUSCLE</rs> output formats are not suppor
 
 <p>3.2.2 Aligning sequences with Matt For the pairwise augmented training 
 model, and the hybrid model, we used multiple alignment with translations 
-and twists (<rs id="software-12" type="software">Matt</rs>) (Menke et al., <rs corresp="#software-12" type="version-date">2008</rs>) to align the sequences based on 
+and twists (Matt) (Menke et al., 2008) to align the sequences based on 
 the structure. By allowing local flexibility and allowing small translations 
 and rotations, Matt demonstrates an ability to better align the ends of α-
 helices and β-strands. We used Matt in default configuration for aligning the 
@@ -382,8 +374,7 @@ positions, respectively, for β-sheets that have one side buried and one side
 exposed to solvent. The tables were learned from solved protein structures 
 in the PDB. 
 β−Strands in the aligned set of structures are found by the program 
-SmurfPreparse which is part of the Smurf Package (<rs corresp="#software-13" type="creator">Menke</rs>, 2009; Menke 
-et al., 2010). The program not only outputs the positions of the consensus 
+<rs id="software-13" type="software">SmurfPreparse</rs> which is part of the Smurf Package (<rs corresp="#software-13" type="creator">Menke</rs>, <rs corresp="#software-13" type="version-date">2009</rs>; Menke  et al., 2010). The program not only outputs the positions of the consensus 
 β-strands in the alignment, it also declares a position buried or exposed based 
 on which of the two tables is the best fit to the amino acids that appear in 
 that position in the training data. 
@@ -411,11 +402,11 @@ stable at the 20% mutation rate (see Section 3.5). </p>
 <p>In our approach, the primary steps in building the HMM remain the same 
 except the training set is augmented with mutated sequences based on the 
 two evolutionary models. The process is shown in Figure 1. 
-Two packages are widely adopted to work width profile HMMs: <rs id="software-15" type="software">SAM</rs> 
-(<rs corresp="#software-15" type="creator">Hughey and Krogh</rs>, <rs corresp="#software-15" type="version-date">1996</rs>) and <rs id="software-16" type="software">HMMER</rs> (<rs corresp="#software-16" type="creator">Eddy</rs>, <rs corresp="#software-16" type="version-date">1998</rs>a, b). <rs type="software">SAM</rs> has been 
+Two packages are widely adopted to work width profile HMMs: SAM 
+(Hughey and Krogh, 1996) and <rs id="software-16" type="software">HMMER</rs> (<rs corresp="#software-16" type="creator">Eddy</rs>, <rs corresp="#software-16" type="version-date">1998</rs>a, b). <rs type="software">SAM</rs> has been 
 demonstrated to be more sensitive overall, while HMMER's model scoring 
 is more accurate (Wistrand and Sonnhammer, 2004). In this study we use 
-<rs id="software-18" type="software">HMMER</rs> <rs corresp="#software-18" type="version-number">versions 3.0a2</rs> to evaluate the models of protein families as it is 
+<rs id="software-18" type="software">HMMER</rs> versions <rs corresp="#software-18" type="version-number">3.0a2</rs> to evaluate the models of protein families as it is 
 freely available and can be easily downloaded from the website. We construct 
 HMMs from the MSAs using the <rs type="software">hmmbuild</rs> program which is part of the 
 <rs type="software">HMMER</rs> package. 
@@ -458,8 +449,7 @@ to sequences that are over-represented (Gerstein et al., 1994). In addition,
 <rs type="software">HMMER</rs> supports external and internal sequence weighting strategies based 
 on information theoretic principles. Based on our study of different sequence 
 weighting options for HMMs with and without the point mutation augmented 
-training for the task of learning SCOP superfamilies (Kumar and Cowen, 
-2009) we used <rs type="software">SAM</rs> sequence entropy (Karplus et al., 1998) throughout the 
+training for the task of learning SCOP superfamilies (Kumar and Cowen,  2009) we used <rs type="software">SAM</rs> sequence entropy (Karplus et al., 1998) throughout the 
 present study. </p>
 
 <p>3.5 HMM scoring </p>
@@ -637,11 +627,9 @@ interesting open question. Secondary-structure prediction programs
 they are paired and hydrogen bonded is a much more difficult 
 issue. Computationally predicting how β-strands are paired in the 
 absence of structural information is a well-studied problem since 
-1995 (Cheng and Baldi, 2006; Hubbard and Park, 1995; Jeong 
-et al., 2007; Steward and Thornton, 2002; Zhu and Braun, 1999). 
+1995 (Cheng and Baldi, 2006; Hubbard and Park, 1995; Jeong  et al., 2007; Steward and Thornton, 2002; Zhu and Braun, 1999). 
 Recent work that has tried to computationally model transmembrane 
-β-barels (Waldispuhl et al., 2008) and β-amyloids (Bryan et al., 
-2009) without a structural template may also be relevant. </p>
+β-barels (Waldispuhl et al., 2008) and β-amyloids (Bryan et al.,  2009) without a structural template may also be relevant. </p>
 
 <p>ACKNOWLEDGEMENTS </p>
 

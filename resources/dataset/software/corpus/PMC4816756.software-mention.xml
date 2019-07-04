@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4816756" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-06-24T04:32+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4816756" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-07-03T15:36+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>Background: The major gene mutated in autosomal dominant polycystic kidney disease was first identified over 
 20 years ago, yet its function remains poorly understood. We have used a systems-based approach to examine 
@@ -19,14 +19,12 @@ Published by Elsevier B.V. This is an open access article under the CC BY-NC-ND 
 
 <p>Autosomal Dominant Polycystic Kidney Disease (ADPKD; MIM ID's 
 173900, 601313, 613095) is estimated to affect almost 1/1000 and is 
-the most common genetic cause of end stage renal disease (Torres 
-et al., 2007). While advances have been made in slowing the progres-
+the most common genetic cause of end stage renal disease (Torres  et al., 2007). While advances have been made in slowing the progres-
 sion of some other forms of chronic kidney disease, standard treatments 
 have not reduced the need for renal replacement therapy in ADPKD 
 (Spithoven et al., 2014). Unfortunately, several experimental interven-
 tions also have recently failed to show significant benefit in slowing 
-the rate of functional decline (Serra et al., 2010; Walz et al., 2010; 
-Schrier et al., 2014; Torres et al., 2014), and the only positive study 
+the rate of functional decline (Serra et al., 2010; Walz et al., 2010;  Schrier et al., 2014; Torres et al., 2014), and the only positive study 
 reported very modest effects (Torres et al., 2012). These findings 
 suggest new treatment strategies are required. 
 A central dogma of molecular genetics is that discovery of the 
@@ -57,8 +55,7 @@ unknown.
 We have taken a systems-based approach to study Pkd1 gene 
 function. Building on our previous work identifying markedly different 
 outcomes in animals with induced Pkd1 inactivation before or after 
-P12 and correlating this susceptibility with metabolic status (Piontek 
-et al., 2007; Menezes et al., 2012), we now show that female sex is 
+P12 and correlating this susceptibility with metabolic status (Piontek  et al., 2007; Menezes et al., 2012), we now show that female sex is 
 partially protective in adult-induced Pkd1 inactivation, that sex differ-
 ences in metabolic status may account for this effect, and that cells </p>
 
@@ -198,8 +195,7 @@ each done with 3 or 4 replicates. </p>
 <p>2.6. Statistical Analysis </p>
 
 <p>Comparison of kidney/body weight (KBW) mutant male vs. female 
-curves was performed using generalized linear model in R (Team, 
-2014) and the effect size was estimated calculating Cohen's d with the 
+curves was performed using generalized linear model in R (Team,  2014) and the effect size was estimated calculating Cohen's d with the 
 <rs type="software">compute.es</rs> package in R. Analysis of KBW in mutants fed NIH31 or 
 NIH37 was done using Student's t test. Real time PCR data was analyzed 
 fitting an anova model including within subject error. Fatty acid 
@@ -210,8 +206,7 @@ were analyzed using paired t-test. </p>
 <p>2.7. Gene Array Expression Analyses </p>
 
 <p>Raw Illumina gene expression data were processed using variance 
-stabilization and quantile normalization with the lumi package (Du 
-et al., 2008; Lin et al., 2008) in R (Team, 2014), filtered to include only 
+stabilization and quantile normalization with the lumi package (Du  et al., 2008; Lin et al., 2008) in R (Team, 2014), filtered to include only 
 probes with detection call p value b0.05 in at least seven of the arrays, 
 followed by batch-removal using COMBAT (Johnson et al., 2007). 
 Same-gene probes were consolidated to a single identifier keeping the 
@@ -243,8 +238,7 @@ expressed in both. </p>
 <p>2.8. Network and Pathway Analysis </p>
 
 <p>Weighted Gene Co-expression Network and Pathway Analysis was 
-performed using the <rs id="software-22" type="software">WGCNA</rs> R package (<rs corresp="#software-22" type="creator">Langfelder and Horvath</rs>, 
-2008) with soft thresholding powers selected based on the approximate 
+performed using the WGCNA R package (Langfelder and Horvath,  2008) with soft thresholding powers selected based on the approximate 
 scale-free topology criterion (Zhang and Horvath, 2005), followed by 
 blockwise network construction, module detection, correlation with 
 sex/genotype and comparative network analysis to determine module 
@@ -271,8 +265,7 @@ GC-TOF, samples were prepared and analyzed using Gerstel CIS4 -with
 dual MPS Injector, Agilent 6890 GC and Pegasus III TOF MS, as described 
 in (Fiehn et al., 2008). 
 Analysis was performed in R (Team, 2014). Data were log2-
-transformed and centered using Pareto scaling (van den Berg et al., 
-2006). Exploratory data analysis was conducted using principal compo-
+transformed and centered using Pareto scaling (van den Berg et al.,  2006). Exploratory data analysis was conducted using principal compo-
 nent analysis. The Shapiro-Wilk normality test was used to identify 
 metabolites that were normally distributed, which were then analyzed 
 for differential detection using linear models and empirical Bayes 
@@ -341,8 +334,7 @@ Sexes </p>
 
 <p>Cystogenesis could be delayed in females because different path-
 ways are responsible for disease in males and females, or because path-
-ways are activated to different degrees. Using WGCNA (Langfelder and 
-Horvath, 2008) to cluster co-expressed genes into modules and track 
+ways are activated to different degrees. Using WGCNA (Langfelder and  Horvath, 2008) to cluster co-expressed genes into modules and track 
 changes in co-expression patterns in males and females, our data 
 suggest networks are mostly preserved between wild type males and 
 females and, in fact, between all genotype/sex groups (Supplementary 
@@ -466,8 +458,7 @@ related to lipid metabolism; c) lipid metabolism pathways were also
 different between mutant and controls. In addition, other groups have 
 reported slower progression of many kidney diseases in females 
 (reviewed in (Silbiger and Neugarten, 2008)) and that impaired fatty 
-acid oxidation is a component of chronic kidney disease (Kang et al., 
-2015; Silbiger and Neugarten, 2008). We tested a role for lipid metabo-
+acid oxidation is a component of chronic kidney disease (Kang et al.,  2015; Silbiger and Neugarten, 2008). We tested a role for lipid metabo-
 lism in PKD in two ways: a) fatty acid oxidation assay using cell lines (to 
 differentiate between changes secondary to renal damage versus intrin-
 sic defects in Pkd1 
@@ -477,8 +468,7 @@ ko/ko cells); and b) the effects of dietary lipid on PKD </p>
 ko/ko mice. We found that renal epithelial cells lack-</p>
 
 <p>ing Pkd1 have cell autonomous defects in fatty acid oxidation. Notably, 
-consistent with Warner et al., but not Rowe et al., (Warner et al., 
-2015; Rowe et al., 2013), we did not find elevated lactic acid levels in 
+consistent with Warner et al., but not Rowe et al., (Warner et al.,  2015; Rowe et al., 2013), we did not find elevated lactic acid levels in 
 cystic kidneys nor enhanced glycolytic activity in renal epithelial cells 
 lacking Pkd1. 
 To what extent these metabolic defects contribute to PKD is still an 
@@ -513,19 +503,15 @@ cystic kidneys result from an intrinsic defect in lipid metabolism.
 There are a number of other lines of evidence that suggest that 
 altered cellular metabolism might be a primary factor in PKD: 1) drugs 
 known to have significant metabolic effects, like rapamycin and metfor-
-min, slowed cyst growth in Pkd1 ADPKD mouse models (Shillingford 
-et al., 2010; Takiar et al., 2011); 2) ciliary signaling -believed to be a 
+min, slowed cyst growth in Pkd1 ADPKD mouse models (Shillingford  et al., 2010; Takiar et al., 2011); 2) ciliary signaling -believed to be a 
 major player in PKD -plays an important role in regulating cellular 
 metabolism via a number of different mechanisms, including direct con-
-trol of mitochondrial function (Boehlke et al., 2010; Oh et al., 2015; Hoff 
-et al., 2013); 3) mutations of several genes that encode proteins with 
+trol of mitochondrial function (Boehlke et al., 2010; Oh et al., 2015; Hoff  et al., 2013); 3) mutations of several genes that encode proteins with 
 primary metabolic functions have been reported to cause renal cysts, </p>
 
-<p>including fumarate hydratase (OMIM 150800) (Lehtonen et al., 2006; 
-Adam et al., 2011) and, in glutaric acidemia type II (OMIM 231680), 
+<p>including fumarate hydratase (OMIM 150800) (Lehtonen et al., 2006;  Adam et al., 2011) and, in glutaric acidemia type II (OMIM 231680), 
 genes encoding proteins involved in electron transfer in the mitochon-
-drial respiratory chain (ETFA, ETFB, ETFDH (Böhm et al., 1982; Wilson 
-et al., 1989); 4) finally, a recent report describing that Fat (ft), an 
+drial respiratory chain (ETFA, ETFB, ETFDH (Böhm et al., 1982; Wilson  et al., 1989); 4) finally, a recent report describing that Fat (ft), an 
 atypical cadherin, long-studied as a prototypical member of the planar 
 cell polarity pathway (PCP) (Sing et al., 2014), undergoes proteolytic 
 cleavage to release a soluble 68 kDa fragment that is imported into 
@@ -568,11 +554,7 @@ L.F. Menezes et al. / EBioMedicine 5 (2016) 183-192 </p>
 
 <p>occurs on multiple levels, as previous studies have identified inflamma-
 tory pathways and cAMP signaling as both important progression 
-factors in PKD (Torres et al., 2004, 2012; Torres and Harris, 2014; 
-Menon et al., 2011; Klawitter et al., 2013; Karihaloo et al., 2011) 
-and subject to sex effects (Grimble, 2002; Barton and Prossnitz, 2015; 
-Davis et al., 2014; Auger, 2003; Abrahám and Herbison, 2005; 
-Liu et al., 2011; Juul et al., 2014). Our data suggest that sexual 
+factors in PKD (Torres et al., 2004, 2012; Torres and Harris, 2014;  Menon et al., 2011; Klawitter et al., 2013; Karihaloo et al., 2011)  and subject to sex effects (Grimble, 2002; Barton and Prossnitz, 2015;  Davis et al., 2014; Auger, 2003; Abrahám and Herbison, 2005;  Liu et al., 2011; Juul et al., 2014). Our data suggest that sexual 
 differences in fatty acid metabolism may be another important 
 disease-modulating factor. 
 Our findings also may have broader implications for other forms of 
@@ -613,8 +595,7 @@ in some forms of PKD, hyperproliferation is not a universal feature of all
 forms of cystic disease. One intriguing speculation is that the abnormal-
 ities we have identified are associated with altered lipid biosynthetic 
 pathways, the latter playing important roles in regulating cellular mem-
-brane properties and hence cellular structure and function (Holthuis 
-and Menon, 2014). 
+brane properties and hence cellular structure and function (Holthuis  and Menon, 2014). 
 In conclusion, we have shown a significant sexual difference in 
 PKD progression in this mouse model, identified altered lipid 
 metabolism as a possible underlying cause and confirmed that 

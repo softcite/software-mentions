@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1111%2Fj.1467-6419.2007.00527.x" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-06-24T04:21+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1111%2Fj.1467-6419.2007.00527.x" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-07-03T15:23+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>Abstract. Propensity score matching (PSM) has become a popular approach to 
 estimate causal treatment effects. It is widely applied when evaluating labour 
@@ -18,8 +18,7 @@ is to discuss these implementation issues and give some guidance to researchers
 who want to use PSM for evaluation purposes. </p>
 
 <p>Matching has become a popular approach to estimate causal treatment effects. It is 
-widely applied when evaluating labour market policies (see e.g., Heckman et al., 
-1997a; Dehejia and Wahba, 1999), but empirical examples can be found in very 
+widely applied when evaluating labour market policies (see e.g., Heckman et al.,  1997a; Dehejia and Wahba, 1999), but empirical examples can be found in very 
 diverse fields of study. It applies for all situations where one has a treatment, a 
 group of treated individuals and a group of untreated individuals. The nature of 
 treatment may be very diverse. For example, Perkins et al. (2000) discuss the usage of 
@@ -63,8 +62,7 @@ understanding of the institutional set-up by which selection into treatment take
 place (see for example the discussion in Blundell et al., 2005). For the rest of the 
 paper we will assume that this assumption holds. 
 Since conditioning on all relevant covariates is limited in the case of a high 
-dimensional vector X ('curse of dimensionality'), Rosenbaum and Rubin (1983b) 
-suggest the use of so-called balancing scores b(X), i.e. functions of the relevant 
+dimensional vector X ('curse of dimensionality'), Rosenbaum and Rubin (1983b)  suggest the use of so-called balancing scores b(X), i.e. functions of the relevant 
 observed covariates X such that the conditional distribution of X given b(X) is 
 independent of assignment into treatment. One possible balancing score is the 
 propensity score, i.e. the probability of participating in a programme given observed 
@@ -74,9 +72,7 @@ researcher has decided to use PSM, he is confronted with a lot of questions rega
 its implementation. Figure 1 summarizes the necessary steps when implementing 
 PSM. </p>
 
-<p>2 </p>
-
-<p>The aim of this paper is to discuss these issues and give some practical guidance 
+<p>2   The aim of this paper is to discuss these issues and give some practical guidance 
 to researchers who want to use PSM for evaluation purposes. The paper is organized 
 as follows. In Section 2, we will describe the basic evaluation framework and 
 possible treatment effects of interest. Furthermore we show how PSM solves the 
@@ -161,8 +157,7 @@ reviews all steps and concludes. </p>
 <p>Inference about the impact of a treatment on the outcome of an individual involves 
 speculation about how this individual would have performed had (s)he not received 
 the treatment. The standard framework in evaluation analysis to formalize this 
-problem is the potential outcome approach or Roy-Rubin model (Roy, 1951; Rubin, 
-1974). The main pillars of this model are individuals, treatment and potential 
+problem is the potential outcome approach or Roy-Rubin model (Roy, 1951; Rubin,  1974). The main pillars of this model are individuals, treatment and potential 
 outcomes. In the case of a binary treatment the treatment indicator D i equals one if 
 individual i receives treatment and zero otherwise. The potential outcomes are then 
 defined as Y i (D i ) for each individual i, where i = 1, . . . , N and N denotes the total 
@@ -183,9 +178,7 @@ outcomes is observed for each individual i. The unobserved outcome is called the
 counterfactual outcome. Hence, estimating the individual treatment effect τ i is not 
 possible and one has to concentrate on (population) average treatment effects. </p>
 
-<p>3 </p>
-
-<p>Parameter of Interest and Selection Bias </p>
+<p>3   Parameter of Interest and Selection Bias </p>
 
 <p>Two parameters are most frequently estimated in the literature. The first one is the 
 population average treatment effect (ATE), which is simply the difference of the 
@@ -195,8 +188,7 @@ expected outcomes after participation and nonparticipation: </p>
 (2) </p>
 
 <p>This parameter answers the question: 'What is the expected effect on the outcome if 
-individuals in the population were randomly assigned to treatment?' Heckman (1997) 
-notes that this estimate might not be of relevance to policy makers because it includes 
+individuals in the population were randomly assigned to treatment?' Heckman (1997)  notes that this estimate might not be of relevance to policy makers because it includes 
 the effect on persons for whom the programme was never intended. For example, 
 if a programme is specifically targeted at individuals with low family income, there 
 is little interest in the effect of such a programme for a millionaire. Therefore, the 
@@ -211,8 +203,7 @@ programme is actually intended. It is given by </p>
 values with and without treatment for those who actually participated in treatment. 
 In the sense that this parameter focuses directly on actual treatment participants, it 
 determines the realized gross gain from the programme and can be compared with its 
-costs, helping to decide whether the programme is successful or not (Heckman et al., 
-1999). The most interesting parameter to estimate depends on the specific evaluation 
+costs, helping to decide whether the programme is successful or not (Heckman et al.,  1999). The most interesting parameter to estimate depends on the specific evaluation 
 context and the specific question asked. Heckman et al. (1999) discuss further 
 parameters, like the proportion of participants who benefit from the programme 
 or the distribution of gains at selected base state values. For most evaluation studies, 
@@ -252,8 +243,7 @@ identifying assumptions to solve the selection problem stated in equation (4). <
 <p>One major strand of evaluation literature focuses on the estimation of treatment 
 effects under the assumption that the treatment satisfies some form of exogene-
 ity. Different versions of this assumption are referred to as unconfoundedness 
-(Rosenbaum and Rubin, 1983b), selection on observables (Heckman and Robb, 
-1985) or conditional independence assumption (CIA) (Lechner, 1999). We will 
+(Rosenbaum and Rubin, 1983b), selection on observables (Heckman and Robb,  1985) or conditional independence assumption (CIA) (Lechner, 1999). We will 
 use these terms throughout the paper interchangeably. This assumption implies that 
 systematic differences in outcomes between treated and comparison individuals with 
 the same values for covariates are attributable to treatment. Imbens (2004) gives an 
@@ -281,10 +271,8 @@ condition. It rules out the phenomenon of perfect predictability of D given X. <
 <p>Assumption 2. Overlap: 0 &lt; P(D = 1|X ) &lt; 1. </p>
 
 <p>It ensures that persons with the same X values have a positive probability of being 
-both participants and nonparticipants (Heckman et al., 1999). Rosenbaum and Rubin 
-(1983b) call Assumptions 1 and 2 together 'strong ignorability'. Under 'strong 
-ignorability' ATE in (2) and ATT in (3) can be defined for all values of X. Heckman 
-et al. (1998b) demonstrate that the ignorability or unconfoundedness conditions are 
+both participants and nonparticipants (Heckman et al., 1999). Rosenbaum and Rubin  (1983b) call Assumptions 1 and 2 together 'strong ignorability'. Under 'strong 
+ignorability' ATE in (2) and ATT in (3) can be defined for all values of X. Heckman  et al. (1998b) demonstrate that the ignorability or unconfoundedness conditions are 
 overly strong. All that is needed for estimation of (2) and (3) is mean independence. 
 However, Lechner (2002) argues that Assumption 1 has the virtue of identifying </p>
 
@@ -392,8 +380,7 @@ the multinomial logit is based on stronger assumptions than the multinomial prob
 model, making the latter the preferable option. 
 8 However, since the multinomial 
 probit is computationally more burdensome, a practical alternative is to estimate a 
-series of binomial models as suggested by Lechner (2001a). Bryson et al. (2002) 
-note that there are two shortcomings regarding this approach. First, as the number of 
+series of binomial models as suggested by Lechner (2001a). Bryson et al. (2002)  note that there are two shortcomings regarding this approach. First, as the number of 
 options increases, the number of models to be estimated increases disproportionately 
 (for L options we need 0.5(L(L − 1)) models). Second, in each model only two 
 options at a time are considered and consequently the choice is conditional on being 
@@ -416,13 +403,11 @@ C 2008 The Authors. Journal compilation C 2008 Blackwell Publishing Ltd </p>
 the propensity score model. The matching strategy builds on the CIA, requiring 
 that the outcome variable(s) must be independent of treatment conditional on the 
 propensity score. Hence, implementing matching requires choosing a set of variables 
-X that credibly satisfy this condition. Heckman et al. (1997a) and Dehejia and Wahba 
-(1999) show that omitting important variables can seriously increase bias in resulting 
+X that credibly satisfy this condition. Heckman et al. (1997a) and Dehejia and Wahba  (1999) show that omitting important variables can seriously increase bias in resulting 
 estimates. Only variables that influence simultaneously the participation decision 
 and the outcome variable should be included. Hence, economic theory, a sound 
 knowledge of previous research and also information about the institutional settings 
-should guide the researcher in building up the model (see e.g., Sianesi, 2004; Smith 
-and Todd, 2005). It should also be clear that only variables that are unaffected by 
+should guide the researcher in building up the model (see e.g., Sianesi, 2004; Smith  and Todd, 2005). It should also be clear that only variables that are unaffected by 
 participation (or the anticipation of it) should be included in the model. To ensure 
 this, variables should either be fixed over time or measured before participation. In 
 the latter case, it must be guaranteed that the variable has not been influenced by 
@@ -435,11 +420,9 @@ values of X, then we cannot use matching conditional on those X values to estima
 a treatment effect, because persons with such characteristics either always or never 
 receive treatment. Hence, the common support condition as stated in Assumption 2 
 fails and matches cannot be performed. Some randomness is needed that guarantees 
-that persons with identical characteristics can be observed in both states (Heckman 
-et al., 1998b). 
+that persons with identical characteristics can be observed in both states (Heckman  et al., 1998b). 
 In cases of uncertainty of the proper specification, sometimes the question may 
-arise whether it is better to include too many rather than too few variables. Bryson 
-et al. (2002) note that there are two reasons why over-parameterized models should 
+arise whether it is better to include too many rather than too few variables. Bryson  et al. (2002) note that there are two reasons why over-parameterized models should 
 be avoided. First, it may be the case that including extraneous variables in the 
 participation model exacerbates the support problem. Second, although the inclusion 
 of nonsignificant variables in the propensity score specification will not bias the 
@@ -475,8 +458,7 @@ By these criteria, there are both reasons for and against including all of the
 reasonable covariates available. Basically, the points made so far imply that the 
 choice of variables should be based on economic theory and previous empirical 
 findings. But clearly, there are also some formal (statistical) tests which can be 
-used. Heckman et al. (1998a), Heckman and Smith (1999) and Black and Smith 
-(2004) discuss three strategies for the selection of variables to be used in estimating 
+used. Heckman et al. (1998a), Heckman and Smith (1999) and Black and Smith  (2004) discuss three strategies for the selection of variables to be used in estimating 
 the propensity score. </p>
 
 <p>Hit or Miss Method </p>
@@ -490,8 +472,7 @@ rate for the sample assuming that the costs for the misclassification are equal 
 the two groups (Heckman et al., 1997a). 
 9 But clearly, it has to be kept in mind that 
 the main purpose of the propensity score estimation is not to predict selection into 
-treatment as well as possible but to balance all covariates (Augurzky and Schmidt, 
-2001). </p>
+treatment as well as possible but to balance all covariates (Augurzky and Schmidt,  2001). </p>
 
 <p>Statistical Significance </p>
 
@@ -613,9 +594,7 @@ different PSM estimators and the inherent choices to be made when they are used.
 We will not discuss the technical details of each estimator here at depth but rather 
 present the general ideas and the involved trade-offs with each algorithm. </p>
 
-<p>10 </p>
-
-<p>Nearest Neighbour Matching </p>
+<p>10   Nearest Neighbour Matching </p>
 
 <p>The most straightforward matching estimator is nearest neighbour (NN) matching. 
 The individual from the comparison group is chosen as a matching partner for a 
@@ -692,8 +671,7 @@ C 2008 The Authors. Journal compilation C 2008 Blackwell Publishing Ltd </p>
 
 <p>control observations. This method is also known as interval matching, blocking 
 and subclassification (Rosenbaum and Rubin, 1984). Clearly, one question to 
-be answered is how many strata should be used in empirical analysis. Cochran 
-(1968) shows that five subclasses are often enough to remove 95% of the bias 
+be answered is how many strata should be used in empirical analysis. Cochran  (1968) shows that five subclasses are often enough to remove 95% of the bias 
 associated with one single covariate. Since, as Imbens (2004) notes, all bias under 
 unconfoundedness is associated with the propensity score, this suggests that under 
 normality the use of five strata removes most of the bias associated with all 
@@ -732,9 +710,7 @@ propensity score of a treated individual. This is an advantage whenever comparis
 group observations are distributed asymmetrically around the treated observation, 
 e.g. at boundary points, or when there are gaps in the propensity score distribution. 
 When applying KM one has to choose the kernel function and the bandwidth 
-parameter. The first point appears to be relatively unimportant in practice (DiNardo 
-and Tobias, 2001). What is seen as more important (see e.g. Silverman, 1986; 
-Pagan and Ullah, 1999) is the choice of the bandwidth parameter with the following </p>
+parameter. The first point appears to be relatively unimportant in practice (DiNardo  and Tobias, 2001). What is seen as more important (see e.g. Silverman, 1986;  Pagan and Ullah, 1999) is the choice of the bandwidth parameter with the following </p>
 
 <p>Journal of Economic Surveys (2008) Vol. 22, No. 1, pp. 31-72 
 C 2008 The Authors. Journal compilation C 2008 Blackwell Publishing Ltd </p>
@@ -823,8 +799,7 @@ lot of comparable untreated individuals it might be worth using more than one NN
 (either by oversampling or KM) to gain more precision in estimates. Pragmatically, 
 it seems sensible to try a number of approaches. Should they give similar results, 
 the choice may be unimportant. Should results differ, further investigation may be 
-needed in order to reveal more about the source of the disparity (Bryson et al., 
-2002). </p>
+needed in order to reveal more about the source of the disparity (Bryson et al.,  2002). </p>
 
 <p>3.3 Overlap and Common Support </p>
 
@@ -836,8 +811,7 @@ comparison group that is comparable to the treatment group should be used in the
 analysis (Dehejia and Wahba, 1999). Hence, an important step is to check the overlap 
 and the region of common support between treatment and comparison group. Several 
 ways are suggested in the literature, where the most straightforward one is a visual 
-analysis of the density distribution of the propensity score in both groups. Lechner 
-(2001b) argues that given that the support problem can be spotted by inspecting the 
+analysis of the density distribution of the propensity score in both groups. Lechner  (2001b) argues that given that the support problem can be spotted by inspecting the 
 propensity score distribution, there is no need to implement a complicated estimator. 
 However, some guidelines might help the researcher to determine the region of 
 common support more precisely. We will present two methods, where the first 
@@ -855,8 +829,7 @@ group may also be observed in the treatment group (Bryson et al., 2002). </p>
 <p>The basic criterion of this approach is to delete all observations whose propensity 
 score is smaller than the minimum and larger than the maximum in the opposite 
 group. To give an example let us assume for a moment that the propensity score 
-lies within the interval [0.07, 0.94] in the treatment group and within [0.04, 0.89] 
-in the control group. Hence, with the 'minima and maxima criterion', the common 
+lies within the interval [0.07, 0.94] in the treatment group and within [0.04, 0.89]  in the control group. Hence, with the 'minima and maxima criterion', the common 
 support is given by [0.07, 0.89]. Observations which lie outside this region are 
 discarded from analysis. Clearly a two-sided test is only necessary if the parameter </p>
 
@@ -887,8 +860,7 @@ tenth largest observation. </p>
 
 <p>Trimming to Determine the Common Support </p>
 
-<p>A different way to overcome these possible problems is described by Smith and 
-Todd (2005). 
+<p>A different way to overcome these possible problems is described by Smith and  Todd (2005). 
 13 They use a trimming procedure to determine the common support 
 region and define the region of common support as those values of P that have 
 positive density within both the D = 1 and D = 0 distributions, i.e. </p>
@@ -936,9 +908,7 @@ making the estimation of treatment effects in the region [0.4, 0.7] questionable
 trimming method on the other hand would explicitly exclude treated observations 
 in that propensity score range and would therefore deliver more reliable results. </p>
 
-<p>15 </p>
-
-<p>Hence, the choice of the method depends on the data situation at hand and before 
+<p>15   Hence, the choice of the method depends on the data situation at hand and before 
 making any decisions a visual analysis is recommended. </p>
 
 <p>Failure of the Common Support </p>
@@ -975,8 +945,7 @@ is to compare the situation before and after matching and check if there remain
 any differences after conditioning on the propensity score. If there are differences, 
 matching on the score was not (completely) successful and remedial measures have 
 to be done, e.g. by including interaction terms in the estimation of the propensity 
-score. A helpful theorem in this context is suggested by Rosenbaum and Rubin 
-(1983b) and states that </p>
+score. A helpful theorem in this context is suggested by Rosenbaum and Rubin  (1983b) and states that </p>
 
 <p>X D|P(D = 1|X ) 
 (9) </p>
@@ -984,13 +953,10 @@ score. A helpful theorem in this context is suggested by Rosenbaum and Rubin
 <p>This means that after conditioning on P(D = 1|X ), additional conditioning on X 
 should not provide new information about the treatment decision. Hence, if after 
 conditioning on the propensity score there is still dependence on X, this suggests 
-either mis-specification in the model used to estimate P(D = 1|X ) (see Smith 
-and Todd, 2005) or a fundamental lack of comparability between the two groups 
+either mis-specification in the model used to estimate P(D = 1|X ) (see Smith  and Todd, 2005) or a fundamental lack of comparability between the two groups 
 (Blundell et al., 2005). </p>
 
-<p>16 </p>
-
-<p>Standardized Bias </p>
+<p>16   Standardized Bias </p>
 
 <p>One suitable indicator to assess the distance in marginal distributions of the X 
 variables is the standardized bias (SB) suggested by Rosenbaum and Rubin (1985). 
@@ -1015,8 +981,7 @@ X 1M − X 0M
 <p>where X 1 (V 1 ) is the mean (variance) in the treatment group before matching and 
 X 0 (V 0 ) the analogue for the control group. X 1M (V 1M ) and X 0M (V 0M ) are the 
 corresponding values for the matched samples. This is a common approach used in 
-many evaluation studies, e.g. by Lechner (1999), Sianesi (2004) and Caliendo et al. 
-(2007). One possible problem with the SB approach is that one does not have a clear 
+many evaluation studies, e.g. by Lechner (1999), Sianesi (2004) and Caliendo et al.  (2007). One possible problem with the SB approach is that one does not have a clear 
 indication for the success of the matching procedure, even though in most empirical 
 studies an SB below 3% or 5% after matching is seen as sufficient. </p>
 
@@ -1131,9 +1096,7 @@ entails an endogeneity problem (Gerfin and Lechner, 2002), since the abortion of
 the programme may be caused by several factors which are usually not observed by 
 the researcher. </p>
 
-<p>17 </p>
-
-<p>The above mentioned second approach is predominant in the recent evaluation 
+<p>17   The above mentioned second approach is predominant in the recent evaluation 
 literature (see e.g. Gerfin and Lechner, 2002; Sianesi, 2004) and measures the effects 
 from the beginning of the programme. One major argument to do so concerns the 
 policy relevance. In the above example the policy maker is faced with the decision 
@@ -1184,8 +1147,7 @@ empirical literature. </p>
 <p>Efficiency and Large Sample Properties of Matching Estimators </p>
 
 <p>The asymptotic properties of matching and weighting estimators have been studied 
-by for example Hahn (1998), Heckman et al. (1998b) and Abadie and Imbens 
-(2006a). The results from Hahn (1998) are a good starting point for the efficiency 
+by for example Hahn (1998), Heckman et al. (1998b) and Abadie and Imbens  (2006a). The results from Hahn (1998) are a good starting point for the efficiency 
 discussion. He derives the semi-parametric efficiency bounds for ATE and ATT under 
 various assumptions. He especially takes into account cases where the propensity 
 score is known and where it has to be estimated. 
@@ -1259,8 +1221,7 @@ There is an ongoing discussion in the literature on how the efficiency bounds
 are achieved and if the propensity score should be used for estimation of ATT 
 and ATE or not. In the above cited paper Hahn (1998) shows that when using 
 nonparametric series regression, adjusting for all covariates can achieve the efficiency 
-bound, whereas adjusting for the propensity score does not. Hirano et al. (2003) 
-show that weighting with the inverse of a nonparametric estimate of the propensity 
+bound, whereas adjusting for the propensity score does not. Hirano et al. (2003)  show that weighting with the inverse of a nonparametric estimate of the propensity 
 score can achieve the efficiency bound, too. Angrist and Hahn (2004) use the results 
 from Hahn (1998) as a starting point for their analysis and note that conventional 
 asymptotic arguments would appear to offer no justification for anything other 
@@ -1279,9 +1240,7 @@ that none of the approaches dominates the others per se. In the case of matching
 on the known propensity score, the asymptotic variance of Var ATT is not necessarily 
 smaller than that when matching on X. </p>
 
-<p>20 </p>
-
-<p>Abadie and Imbens (2006a) analyse the asymptotic efficiency of n nearest 
+<p>20   Abadie and Imbens (2006a) analyse the asymptotic efficiency of n nearest 
 neighbour matching when n is fixed, i.e. when the number of neighbours does 
 not grow with increasing sample size. They show that simple matching estimators 
 include a conditional bias term of order O(N 
@@ -1328,8 +1287,7 @@ and hence the asymptotic variance will be consistent, too, Imbens (2004) notes t
 this might be an additional computational burden. Hence, practical alternatives are 
 called for and we are going to present three of them. Two of them, bootstrapping and 
 the variance approximation by Lechner (2001a), are very common in the applied 
-literature. Additionally, we are going to present a new method from Abadie and 
-Imbens (2006a) that is based on the distinction between average treatment effects 
+literature. Additionally, we are going to present a new method from Abadie and  Imbens (2006a) that is based on the distinction between average treatment effects 
 and sample average treatment effects. </p>
 
 <p>Bootstrapping </p>
@@ -1338,8 +1296,7 @@ and sample average treatment effects. </p>
 by Lechner (2002). This method is a popular way to estimate standard errors in 
 case analytical estimates are biased or unavailable. 
 21 Even though Imbens (2004) 
-notes that there is little formal evidence to justify bootstrapping and Abadie and 
-Imbens (2006b) even show that the standard bootstrap fails for the case of NN 
+notes that there is little formal evidence to justify bootstrapping and Abadie and  Imbens (2006b) even show that the standard bootstrap fails for the case of NN 
 matching with replacement on a continuous covariate it is widely applied. An early 
 example of use can be found in Heckman et al. (1997a) who report bootstrap standard 
 errors for LLM estimators. Other application examples for bootstrapping are for 
@@ -1445,8 +1402,7 @@ estimation of conditional outcome variances σ </p>
 
 <p>2 </p>
 
-<p>D (X i ). Abadie and Imbens (2006a) 
-offer two options. With the first option one assumes that the treatment effect is 
+<p>D (X i ). Abadie and Imbens (2006a)  offer two options. With the first option one assumes that the treatment effect is 
 constant for all individuals i and that σ </p>
 
 <p>2 </p>
@@ -1459,9 +1415,7 @@ option, where it is explicitly allowed that σ </p>
 
 <p>D (X i ) differ in D and X. </p>
 
-<p>22 </p>
-
-<p>3.8 Combined and Other Propensity Score Methods </p>
+<p>22   3.8 Combined and Other Propensity Score Methods </p>
 
 <p>What we have discussed so far is the estimation of treatment effects under 
 unconfoundedness with (propensity score) matching estimators. Imbens (2004) notes 
@@ -1487,9 +1441,7 @@ correction procedure after matching may help to improve estimates. Third, we
 present how weighting on the propensity score can be used to obtain a balanced 
 sample of treated and untreated individuals. </p>
 
-<p>23 </p>
-
-<p>Conditional DID or DID Matching Estimator </p>
+<p>23   Conditional DID or DID Matching Estimator </p>
 
 <p>The matching estimator described so far assumes that after conditioning on a set of 
 observable characteristics, (mean) outcomes are independent of programme partici-
@@ -1513,14 +1465,12 @@ following identifying assumption: </p>
 support condition to hold. If panel data on participants and nonparticipants are 
 available, it can be easily implemented by constructing propensity score matching 
 estimates in both periods and calculating the difference between them. 
-24 Smith and 
-Todd (2005) find that such estimators are more robust than traditional cross-section 
+24 Smith and  Todd (2005) find that such estimators are more robust than traditional cross-section 
 matching estimators. </p>
 
 <p>Regression-Adjusted and Bias-Corrected Matching Estimators </p>
 
-<p>The regression-adjusted matching estimator (developed by Heckman et al., 1997a, 
-1998a) combines LLM on the propensity score with regression adjustment on 
+<p>The regression-adjusted matching estimator (developed by Heckman et al., 1997a,  1998a) combines LLM on the propensity score with regression adjustment on 
 covariates. By utilizing information on the functional form of outcome equations and 
 by incorporating exclusion restrictions across outcome and participation equation, it 
 extends classical matching methods. Heckman et al. (1998b) present a proof of 
@@ -1539,8 +1489,7 @@ In cases where (substantial) differences in covariates between matched pairs
 remain after matching, additional regression adjustments may be helpful to reduce 
 such differences. If matching is not exact, there will be some discrepancies that 
 lead to a potential bias. The basic idea of the bias-correction estimators is to use 
-the difference in the covariates to reduce the bias of the matching estimator. Rubin 
-(1973, 1979) first proposed several matched sample regression adjustments in the 
+the difference in the covariates to reduce the bias of the matching estimator. Rubin  (1973, 1979) first proposed several matched sample regression adjustments in the 
 context of Mahalanobis metric matching and they have been more recently discussed 
 by Abadie and Imbens (2006a) and Imbens (2004). </p>
 
@@ -1556,16 +1505,13 @@ the probability of receiving treatment.
 is that the weights do not necessarily add up to one. One approach to improve the 
 propensity score weighting estimator is to normalize the weights to unity. If the 
 propensity score is known, the estimator can directly by implemented. But, even 
-in randomized settings where the propensity score is known, Hirano et al. (2003) 
-show that it could be advantageous in terms of efficiency considerations to use the 
+in randomized settings where the propensity score is known, Hirano et al. (2003)  show that it could be advantageous in terms of efficiency considerations to use the 
 estimated rather than the 'true' propensity score. However, as Zhao (2004) notes, 
 the way propensity scores are estimated is crucial when implementing weighting 
 estimators and mis-specification of the propensity score may lead to substantial 
 bias. </p>
 
-<p>27 </p>
-
-<p>3.9 Sensitivity Analysis </p>
+<p>27   3.9 Sensitivity Analysis </p>
 
 <p>Checking the sensitivity of the estimated results becomes an increasingly important 
 topic in the applied evaluation literature. We will address two possible topics for 
@@ -1635,8 +1581,7 @@ However, if there is hidden bias, two individuals with the same observed covaria
 x have differing chances of receiving treatment. Varying the value of γ allows the 
 researcher to assess the sensitivity of the results with respect to 'hidden bias'. Based 
 on that, bounds for significance levels and confidence intervals can be derived. 
-(For details see Rosenbaum (2002) and Aakvik (2001). Becker and Caliendo (2007) 
-provide an implementation in <rs type="software">Stata</rs>). 
+(For details see Rosenbaum (2002) and Aakvik (2001). Becker and Caliendo (2007)  provide an implementation in Stata). 
 A different approach was recently proposed by Ichino et al. (2006). It additionally 
 allows assessment of the sensitivity of point estimates and specifically the sensitivity 
 of ATT matching estimates. They derive point estimates of the ATT under different </p>
@@ -1801,8 +1746,7 @@ C 2008 The Authors. Journal compilation C 2008 Blackwell Publishing Ltd </p>
 
 <p>The standard evaluation framework as presented in Section 2 considers only two 
 possible states for each individual, i.e. participation and nonparticipation. To account 
-for programme heterogeneity, this approach has been extended by Imbens (2000) 
-and Lechner (2001a) to the multiple treatment framework which considers the case 
+for programme heterogeneity, this approach has been extended by Imbens (2000)  and Lechner (2001a) to the multiple treatment framework which considers the case 
 of L + 1 mutually different and exclusive treatments. For every individual only 
 one component of the L + 1 different outcomes {Y (0), Y (1), . . . , Y (L)} can be 
 observed, leaving L as counterfactuals. Participation in treatment l is indicated by 
@@ -1830,8 +1774,7 @@ D | X
 <p>This assumption can be weakened when one is interested in pairwise programme 
 comparisons only. If we further assume that those receiving treatment m have 
 a counterpart in the comparison group, i.e. if there is common support, the 
-counterfactual mean can be constructed as E[Y (l) | D = m, X ]. Lechner (2001a) 
-also shows that the generalization of the balancing property holds for the case of 
+counterfactual mean can be constructed as E[Y (l) | D = m, X ]. Lechner (2001a)  also shows that the generalization of the balancing property holds for the case of 
 multiple treatments as well. To estimate τ </p>
 
 <p>ml </p>
@@ -1866,8 +1809,7 @@ C 2008 The Authors. Journal compilation C 2008 Blackwell Publishing Ltd </p>
 <p>Sequential Matching Estimators </p>
 
 <p>Extending the standard evaluation framework for the case where individuals can 
-participate in subsequent treatments has been recently proposed by Lechner and 
-Miquel (2005). 
+participate in subsequent treatments has been recently proposed by Lechner and  Miquel (2005). 
 30 These 'programme careers' cannot be addressed properly in 
 the basic framework. Problems occur because the assignment into a subsequent 
 programme is not independent of the assignment into previous programmes. 
@@ -1899,14 +1841,12 @@ appropriate. She suggests a solution which is based on a redefinition of the con
 group. Instead of defining controls as those who never participate, she defines 
 controls as those who did not participate until a certain time period. Hence, the 
 corresponding parameter of interest in this setting is then defined as the effect of 
-joining a programme now in contrast to waiting longer. Fredriksson and Johansson 
-(2004) formalize her approach and argue that the standard way of defining a control 
+joining a programme now in contrast to waiting longer. Fredriksson and Johansson  (2004) formalize her approach and argue that the standard way of defining a control 
 group might lead to biased results, because the unconfoundedness assumption might 
 be violated. The reason for this is that in the standard approach the treatment 
 indicator itself is defined conditional on future outcomes. In fact, in the context 
 of labour market policies it can be argued that an unemployed individual will join a 
-programme at some time, provided his unemployment spell is long enough (Sianesi, 
-2004). Hence, if the reason for nonparticipation is that the individual has found a 
+programme at some time, provided his unemployment spell is long enough (Sianesi,  2004). Hence, if the reason for nonparticipation is that the individual has found a 
 job before a participation in the programme was offered or considered, it leads to 
 negatively biased effects. </p>
 
@@ -1925,10 +1865,9 @@ most commonly used platform for these tools is <rs type="software">Stata</rs> an
 most distributed ones here. Becker and Ichino (2002) provide a programme for PSM 
 estimators (pscore, attnd, attnw, attr, atts, attk) which includes estimation routines for 
 NN, kernel, radius, and stratification matching. To obtain standard errors the user can 
-choose between bootstrapping and the variance approximation proposed by Lechner 
-(2001a). Additionally the authors offer balancing tests (blocking, stratification) as 
+choose between bootstrapping and the variance approximation proposed by Lechner  (2001a). Additionally the authors offer balancing tests (blocking, stratification) as 
 discussed in Section 3.4. 
-Leuven and Sianesi (2003) provide the programme <rs type="software">psmatch2</rs> for implementing 
+Leuven and Sianesi (2003) provide the programme psmatch2 for implementing 
 different kinds of matching estimators including covariate and propensity score 
 matching. It includes NN and caliper matching (with and without replacement), KM, 
 radius matching, LLM and Mahalanobis metric (covariate) matching. Furthermore, 
@@ -2224,8 +2163,7 @@ C 2008 The Authors. Journal compilation C 2008 Blackwell Publishing Ltd </p>
 
 <p>CALIENDO AND KOPEINIG </p>
 
-<p>identity of future participants and nonparticipants may not be known in t , Blundell 
-and Costa Dias (2000) suggest a solution for that case. 
+<p>identity of future participants and nonparticipants may not be known in t , Blundell  and Costa Dias (2000) suggest a solution for that case. 
 25. See e.g. Imbens (2004) or Wooldridge (2004), Section 18.3.2, for a formal 
 description of weighting on propensity score estimators. 
 26. See Imbens (2004) for a formal proof that this weighting estimator removes the 

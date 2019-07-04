@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC5221592" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-06-24T04:14+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC5221592" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-07-03T15:16+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>ABSTRACT Photobleaching event counting is a single-molecule fluorescence technique that 
 is increasingly being used to determine the stoichiometry of protein and RNA complexes 
@@ -21,15 +21,12 @@ vorable noise profiles, and is computationally inexpensive. </p>
 
 <p>Fluorophores photobleach when exposed to light over time. That is, 
 they irreversibly photochemically transition to a state no longer de-
-tectable by fluorescence (White and Stelzer, 1999; Lippincott-</p>
-
-<p>Schwartz et al., 2003). Although photobleaching can be a nuisance 
+tectable by fluorescence (White and Stelzer, 1999; Lippincott-  Schwartz et al., 2003). Although photobleaching can be a nuisance 
 in single-particle tracking experiments, it is critical to other experi-
 mental approaches, such as fluorescence recovery after photo-
 bleaching (Lippincott-Schwartz et al., 2003), photoactivated local-
 ization microscopy (PALM), and photobleaching event counting 
-(Lippincott-Schwartz et al., 2003; Leake et al., 2006; Ulbrich and 
-Isacoff, 2007; Coffman and Wu, 2012). As its name implies, photo-
+(Lippincott-Schwartz et al., 2003; Leake et al., 2006; Ulbrich and  Isacoff, 2007; Coffman and Wu, 2012). As its name implies, photo-
 bleaching event counting is used to enumerate molecules by moni-
 toring how the light intensity in some region decreases by quanta as 
 individual fluorophores photobleach (Shu et al., 2007). This can be 
@@ -147,8 +144,7 @@ the (stochastic) blinking properties of fluorophores "on the fly" in
 order to avoid overcounting fluorophores-and thus protein sub-
 units-in an ROI. Although PALM provides greater spatial resolution 
 than photobleaching event counting, allowing us to characterize 
-complexes localized down to the tens of nanometers (Watanabe 
-et al., 2011), PALM analysis is computationally intensive. The advan-
+complexes localized down to the tens of nanometers (Watanabe  et al., 2011), PALM analysis is computationally intensive. The advan-
 tage of photobleaching, and the reason we focus on this here, is that 
 photobleaching event counting has the potential to reveal the stoi-
 chiometry of complexes involving hundreds of proteins. Unfortu-
@@ -174,8 +170,7 @@ rophore-tagged molecules present within the ROI (Das et al., 2007).
 For instance, photobleaching event counting has been used to 
 quantify the stoichiometry of a number of complexes involved in the 
 bacterial flagellar switch (FliM; Delalez et al., 2010), eukaryotic fla-
-gella (Engel et al., 2009), and the point centromere (Lawrimore et al., 
-2011; Coffman et al., 2011). It also has been used to determine the 
+gella (Engel et al., 2009), and the point centromere (Lawrimore et al.,  2011; Coffman et al., 2011). It also has been used to determine the 
 stoichiometry of complexes and biomolecules such as mammalian 
 neurotransmitter receptors (McGuire et al., 2012), human calcium 
 channels (Demuro et al., 2011), transmembrane α-amino-3-hydroxy-
@@ -208,12 +203,9 @@ shows an example of a photobleaching trace along with its increas-
 ing noise level as more fluorophores become active. 
 Earlier counting methods used filters-such as the median filter 
 or the Chung-Kennedy filter (Leake et al., 2006)-as well as binning 
-and constructing pairwise distance distributions (Svoboda et al., 
-1993) and other techniques (Coffman and Wu, 2012) and were able 
+and constructing pairwise distance distributions (Svoboda et al.,  1993) and other techniques (Coffman and Wu, 2012) and were able 
 to count ∼10 steps. With more recent step-finding algorithms 
-(Kerssemakers et al., 2006; Kalafut and Visscher, 2008; Carter et al., 
-2008), the number of detectable steps increases to ∼15-30 (Das 
-et al., 2007; Engel et al., 2009; Coffman and Wu, 2012). 
+(Kerssemakers et al., 2006; Kalafut and Visscher, 2008; Carter et al.,  2008), the number of detectable steps increases to ∼15-30 (Das  et al., 2007; Engel et al., 2009; Coffman and Wu, 2012). 
 The latest approaches-relying on the Schwarz information crite-
 rion (SIC; also sometimes called the Bayesian information criterion; 
 Schwarz, 1978; Chen et al., 2014) and the Student's two-sample t 
@@ -266,13 +258,10 @@ variance σ i </p>
 since, as is well known, likelihood maximization would overfit the 
 data by favoring too many steps in the photobleaching time trace 
 (Kalafut and Visscher, 2008). Typically, to prevent overfitting, model 
-selection criteria-including the SIC (Schwarz, 1978; Cavanaugh 
-and Neath, 1999), the Akaike information criterion (AIC; Akaike, 
-1974), and others (Kadane and Lazar, 2004; reviewed most recently 
+selection criteria-including the SIC (Schwarz, 1978; Cavanaugh  and Neath, 1999), the Akaike information criterion (AIC; Akaike,  1974), and others (Kadane and Lazar, 2004; reviewed most recently 
 in Tavakoli et al., 2016)-compare different models on the basis of 
 1) their fit to the data and 2) the number of parameters (i.e., the 
-complexity) of the model (Claeskens and Hjort, 2008; Tavakoli et al., 
-2016). 
+complexity) of the model (Claeskens and Hjort, 2008; Tavakoli et al.,  2016). 
 Our Bayesian approach uses model averaging-a method that 
 also inspired the SIC-to penalize complex models. The idea be-
 hind model averaging is simple: the likelihood function depends on 
@@ -356,9 +345,7 @@ events m (which we later ascribe to fluorescence intensity changes </p>
 cally obtained when fluorophore-tagged molecules of interest are 
 illuminated at some time, say t = 0, and then monitored until all fluo-
 rophores have photobleached. Photobleaching time traces present 
-a model selection problem (Ludden et al., 1994; Cavanaugh and 
-Neath, 1999; Stoica and Selen, 2004; Kalafut and Visscher, 2008; 
-Pressé et al., 2013) for which a different number of steps and their 
+a model selection problem (Ludden et al., 1994; Cavanaugh and  Neath, 1999; Stoica and Selen, 2004; Kalafut and Visscher, 2008;  Pressé et al., 2013) for which a different number of steps and their 
 locations within the trace, that is, the "model," must be found. 
 Concretely, we use a Bayesian method to determine both the 
 number of photobleaching steps, K, and their location in time, s = 
@@ -577,8 +564,7 @@ steps given the arrangements, number of
 steps, and number of events. Because we 
 have no prior expectation on how step lo-
 cations are affected by arr, K, and m, we 
-always assume a flat (constant) prior P(s|arr, 
-K, m). The form of the remaining prior 
+always assume a flat (constant) prior P(s|arr,  K, m). The form of the remaining prior 
 terms depends on the conditions of our 
 problem, which we motivate in the next 
 two subsections. </p>
@@ -1741,16 +1727,14 @@ window and the latest two steps in the trace. </p>
 
 <p>1. Data set I (published data): We used green fluorescent protein 
 (GFP)-tagged mitotic centromere-associated kinase (MCAK) 
-protein provided by the Walczak group (Ems-McClung et al., 
-2013). MCAK proteins-members of the kinesin-13 protein 
+protein provided by the Walczak group (Ems-McClung et al.,  2013). MCAK proteins-members of the kinesin-13 protein 
 family-are involved in spindle assembly during mitosis, chromo-
 some segregation, and error correction (Walczak et al., 2013). 
 MCAK is also unique among kinesins because it can bind to mi-
 crotubule ends directly from solution and rapidly diffuse along 
 the microtubule; once attached to the microtubule's end, it 
 causes a conformational change that results in microtubule de-
-polymerization and its own detachment. It is known (Walczak 
-et al., 2013) that when Aurora B kinase phosphorylates MCAK, 
+polymerization and its own detachment. It is known (Walczak  et al., 2013) that when Aurora B kinase phosphorylates MCAK, 
 the latter's depolymerization activity is inhibited. To discover the 
 mechanism of inhibition, MCAK proteins were tagged with GFP, 
 and photobleaching event counting was used to see how quickly 
@@ -1884,16 +1868,14 @@ fixed to some determinable value.
 In this section, we compare our approach 
 to existing methods. 
 The first approach is based on hidden 
-Markov models (HMMs; Messina et al., 
-2006). These methods are generally very re-
+Markov models (HMMs; Messina et al.,  2006). These methods are generally very re-
 liable and have been used to great effect in 
 other problems; however, for photobleach-
 ing event counting, HMMs are hampered 
 because their computational cost quickly 
 becomes prohibitive unless one limits the 
 number of fluorescence intensity states that 
-can be considered. For example, in Messina 
-et al. (2006), working on multichromophore 
+can be considered. For example, in Messina  et al. (2006), working on multichromophore 
 photobleaching, to make the model com-
 putationally tractable, it was necessary to 
 postulate that only single-level jumps occur, 
@@ -1914,8 +1896,7 @@ sufficient to analyze slow-release events, low DDS concentrations,
 and events that occur outside of the endocytotic transport path-
 way (e.g., directly into the cytoplasm). By contrast, photobleach-
 ing event counting holds the promise to quantify release of DDS 
-cargo more accurately (Pitchiaya et al., 2012, 2013, 2014; Shankar 
-et al., 2016). </p>
+cargo more accurately (Pitchiaya et al., 2012, 2013, 2014; Shankar  et al., 2016). </p>
 
 <p>FIGURE 8: Our analysis of a trace obtained on GFP-tagged MCAK 
 protein. These data are expected to show a large reactivation event 
@@ -1977,8 +1958,7 @@ steps in time and therefore cannot address problems for which ki-
 netic measurements are needed, such as when MCAK proteins 
 move in and out of the spindle assembly during mitosis. </p>
 
-<p>steps. Such methods include the KV algorithm (Kalafut and Visscher, 
-2008), which assumes fixed noise and is captured by Eq. 8 and Stu-
+<p>steps. Such methods include the KV algorithm (Kalafut and Visscher,  2008), which assumes fixed noise and is captured by Eq. 8 and Stu-
 dent's two-sample t test (Chen et al., 2014). 
 Chen et al. (2014) tested four different algorithms-two based 
 on the SIC (with constant and variable variance) and two based on 
@@ -2073,8 +2053,7 @@ On reaching ∼80% confluency, cells were split and seeded onto
 DeltaT (Bioptechs, Butler, PA) dishes to a density of 1 × 10 
 5 cells/ 
 dish. After 24 h, each dish of cells had half of its medium removed 
-and was supplemented with 500 μl of transfection mixture (Lipo-
-fectamine 2000 [11668019; Invitrogen, Carlsbad, CA] and 40 
+and was supplemented with 500 μl of transfection mixture (Lipo- fectamine 2000 [11668019; Invitrogen, Carlsbad, CA] and 40 
 pmol of miR-7 duplex in OptiMEM [31985070; Invitrogen]). To 
 prevent overloading the cell with excessive fluorescently labeled 
 miR-7, only 1% of the total duplexed guide strand contained 
@@ -2108,8 +2087,7 @@ Despite its advantages, counting from superresolution data may
 become computationally expensive (Rollins et al., 2015) except 
 when realized via very sparse activations-but in that case, the ex-
 periments are difficult-and may be complicated by photophysical 
-artifacts such as incomplete maturation of the fluorophore (Durisic 
-et al., 2014). 
+artifacts such as incomplete maturation of the fluorophore (Durisic  et al., 2014). 
 Although photobleaching event counting does not provide sub-
 diffraction-limited information, it is computationally inexpensive 
 and, for this reason, more complicated effects (such as blinking) can 
@@ -2151,11 +2129,9 @@ where the bulk of overfitting by the fixed-noise model occurs. </p>
 
 <p>Original trace analysis (done and then com-
 pared with the method described here) 
-was performed using a custom-written <rs id="software-6" type="software">Lab-
-View</rs> (<rs corresp="#software-6" type="creator">National Instruments</rs>, Austin, TX) 
+was performed using a custom-written <rs id="software-6" type="software">Lab- View</rs> (<rs corresp="#software-6" type="creator">National Instruments</rs>, Austin, TX) 
 software code similar to previously de-
-scribed procedures (Pitchiaya et al., 2012, 
-2013). In short, the <rs type="software">LabView</rs> code uses 
+scribed procedures (Pitchiaya et al., 2012,  2013). In short, the <rs type="software">LabView</rs> code uses 
 noise-filtering and photon-counting histo-
 gram algorithms to identify particles of in-
 terest and removes nonuniform back-
@@ -2170,8 +2146,7 @@ bleaching event. For each trace, the num-
 ber of photobleaching events corresponds 
 to the total fluorescent miR-7 molecules 
 within a focus since &gt;90% of dye molecules 
-are found to be fluorescent (Pitchiaya et al., 
-2012, 2013). </p>
+are found to be fluorescent (Pitchiaya et al.,  2012, 2013). </p>
 
 <p>Data analysis: fixed-cell photobleaching 
 analysis of transfected fluorescent 
@@ -2225,8 +2200,7 @@ dichroic (Chroma) 405/488/532/647 was used to detect miR-7 fluo-
 rescent particles and cell boundaries. All videos were acquired at a 
 100-ms camera exposure time for 400 or 600 frames. </p>
 
-<p>FIGURE 14: Our algorithm offers an improvement over a recent Tdetector2 algorithm (Chen 
-et al., 2014). In this 10,000-data point data set, 50 fluorophores photobleach to background 
+<p>FIGURE 14: Our algorithm offers an improvement over a recent Tdetector2 algorithm (Chen  et al., 2014). In this 10,000-data point data set, 50 fluorophores photobleach to background 
 with μ f = 2.0, σ f = 0.2, μ b = 20.0, and σ b = 0.0001. As before, we show the theoretical signal 
 (thick black line) around which we added noise (light blue), the results of the Tdetector2 
 algorithm (red), and results of our approach (dark blue). The dark blue and red curves are 

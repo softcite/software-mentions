@@ -1,8 +1,7 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1515%2Fjbnst-2017-1004" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-06-24T04:44+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1515%2Fjbnst-2017-1004" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-07-03T15:50+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>Linking data on the same units (such as persons, enterprises or patents) is 
-an increasingly popular research strategy, also in the social sciences (Schnell, 
-2014b). Since in many cases the required information resides in different organ-
+an increasingly popular research strategy, also in the social sciences (Schnell,  2014b). Since in many cases the required information resides in different organ-
 izations, for many applications, a central linkage unit is needed as trusted third 
 party. Because of the federal structure of Germany and the strict data protection 
 jurisdiction, the legal requirements for a linkage operation have to be negoti-
@@ -55,8 +54,7 @@ tifiers. This field of research is called privacy preserving record linkage or P
 
 <p>2.1.1 High-speed PPRL </p>
 
-<p>We systematically compared different approaches for high-speed PPRL (Schnell, 
-2013, 2014a; Sehili et al., 2015). In large record-linkage operations not all pos-
+<p>We systematically compared different approaches for high-speed PPRL (Schnell,  2013, 2014a; Sehili et al., 2015). In large record-linkage operations not all pos-
 sible pairs of records are being compared, but only subsets (blocks). The choice 
 of these blocks is an active field of research within record-linkage (Christen, 2012). 
 The current recommendation (Schnell, 2015) for linking with encrypted identifi-
@@ -64,8 +62,7 @@ ers are multibit-trees (Kristensen et al., 2010) with additional encrypted ident
 such as year of birth as blocking variable. Combing external blocks such as year 
 of birth with multi-bit trees allows for privacy preserving linkage of two census 
 scale data sets within a few hours (Schnell, 2014a). For most applications, this 
-solution is sufficient with regard to speed, accuracy and privacy (Brown et al., 
-2017). Therefore, this combination is provided with the record-linkage software of 
+solution is sufficient with regard to speed, accuracy and privacy (Brown et al.,  2017). Therefore, this combination is provided with the record-linkage software of 
 the GRLC (see Section 2.2). </p>
 
 <p>2.1.2 Security against de-anonymization </p>
@@ -98,9 +95,7 @@ absolute guarantees in cryptography: </p>
 
 <p>"Breakthroughs in cryptanalysis can happen suddenly and unexpectedly (. . . ). We can 
 choose to design cryptographic primitives [functions, MA/RS] conservatively, but we can 
-never guarantee security against an unknown future" (Martin, 2012, p. 69). </p>
-
-<p>Therefore, data custodians have to be convinced that the privacy demands of the 
+never guarantee security against an unknown future" (Martin, 2012, p. 69).   Therefore, data custodians have to be convinced that the privacy demands of the 
 EU privacy regulation are met. These regulations do not require absolute anonym-
 ization, but demands that "(. . . ) costs of and the amount of time required for 
 identification, taking into consideration the available technology" has to be con-
@@ -138,8 +133,7 @@ Download Date | 3/30/18 6:48 PM </p>
 <p>2.2 Linkage software </p>
 
 <p>During the last decade, the research group of the second author has developed 
-a Java program for record linkage called <rs id="software-6" type="software">Merge Toolbox</rs> (MTB, <rs corresp="#software-6" type="creator">Schnell</rs> et al., 
-2004). GRLC has extended the capabilities of the program by including routines 
+a Java program for record linkage called <rs id="software-6" type="software">Merge Toolbox</rs> (MTB, <rs corresp="#software-6" type="creator">Schnell</rs> et al.,  2004). GRLC has extended the capabilities of the program by including routines 
 for privacy preserving record linkage (Schnell et al., 2009), special routines 
 for self-generated-identification codes (<rs corresp="#software-7" type="creator">Schnell</rs> et al., 2010) and updated the 
 input/output-options so that <rs id="software-7" type="software">MTB</rs> is able to read and write CSV files and native 
@@ -150,8 +144,7 @@ linkage by Christen (2012). An implementation of multibit-trees for privacy pre-
 serving record linkage based on Bloomfilters (Schnell, 2015) is provided as a C++ 
 stand-alone program and as a library for R. 
 Due to the research on privacy preserving record linkage within the GRLC, 
-many new functions for encrypting linkage keys have been developed (Schnell 
-and Borgs, 2016). These new functions have not been implemented in <rs type="software">MTB</rs>, but 
+many new functions for encrypting linkage keys have been developed (Schnell  and Borgs, 2016). These new functions have not been implemented in <rs type="software">MTB</rs>, but 
 in a new R library <rs type="software">PPRL</rs>. Since record linkage often involves large datasets with 
 millions of records, most functions within <rs type="software">PPRL</rs> have been been optimized for 
 speed using C++ as the main language. The <rs type="software">PPRL</rs> library will be released within 
@@ -195,8 +188,7 @@ gested by a technical working group consisting of medical, mathematical and
 record linkage experts to include more information, for example an encrypted 
 version of the name of the mother to the two datasets (Schnell et al., 2015). As 
 researchers of the Federal Institute for Data Security (BSI) have been involved in 
-the proposal, it has been adopted by the GBA (Gemeinsamer Bundesausschuss, 
-2015). The Duisburg group of the GRLC is involved in the technical implement-
+the proposal, it has been adopted by the GBA (Gemeinsamer Bundesausschuss,  2015). The Duisburg group of the GRLC is involved in the technical implement-
 ation of the procedure (Meier et al., 2017). This implementation will be the first 
 population covering record linkage in Germany using modern methods of PPRL. 
 This linkage model has also been suggested for the planned German National 
@@ -410,8 +402,7 @@ tions regarding subsequent access to the linked data. The required personnel
 resources and therefore funding for a linkage project as well as its very feasib-
 ility will therefore have to be determined on a project-by-project basis. We thus 
 encourage potential scientific clients or cooperation partners to contact the GRLC 
-to discuss the feasibility of any linkage ideas. 4 
-Due to administrative constraints of the GRLC hosting institutions, any link-
+to discuss the feasibility of any linkage ideas. 4  Due to administrative constraints of the GRLC hosting institutions, any link-
 age project will have to cover personnel and overhead costs of GRLC staff for at 
 least three months full-time equivalent. Even if these financial requirements are 
 fulfilled, a requested linkage project has to be declined by the GRLC if not all legal 
@@ -434,13 +425,11 @@ context. Since all GRLC linkages of data covered by privacy regulations are done
 within the Research Data Centre (FDZ) of the Federal Employment Agency, the 
 legal rules of the FDZ may apply to these datasets. 
 The FDZ provides cost-free access to several linked data sets to the gen-
-eral scientific community (see, for instance, Antoni and Seth, 2012; Antoni and 
-Bethmann, 2014; Trübswetter and Fendel, 2016). Some of the underlying linkage 
+eral scientific community (see, for instance, Antoni and Seth, 2012; Antoni and  Bethmann, 2014; Trübswetter and Fendel, 2016). Some of the underlying linkage 
 operations were done by members of the GRLC, some by staff of the FDZ after con-
 sulting the GRLC. Access to these and other linked standard data sets of the FDZ 
 is provided through the FDZ's secure infrastructure. As the administrative data of 
-the IAB are subject to strict social security data protection (see Hochfellner et al., 
-2014), access to such linked data is limited to on-site use or remote access. 5 </p>
+the IAB are subject to strict social security data protection (see Hochfellner et al.,  2014), access to such linked data is limited to on-site use or remote access. 5 </p>
 
 <p>4 Any request should be addressed to contact@record-linkage.de. 
 5 See Eberle et al. (2017) or http://fdz.iab.de/en/FDZ_Data_Access.aspx for more details. </p>
@@ -474,8 +463,7 @@ process, preprocessing, blocking, comparison, classification, privacy preserving
 record linkage and software options. The training format ranged from university 
 classes over short workshops of up to two days (e.g., within the Joint Program 
 in Survey Methodology, JPSM) to online workshops with video-recorded lectures 
-and live online sessions. 6 
-Within the limits of professional courtesy, the GRLC will continue to consult 
+and live online sessions. 6  Within the limits of professional courtesy, the GRLC will continue to consult 
 academic researchers on topics such as record linkage techniques, the wording of 
 linkage consent questions, the general feasibility of linkage projects or on suitable 
 software solutions. While such a limited consulting will remain free of charge, any 
@@ -510,8 +498,7 @@ same units are obvious. Since the amount of information on persons or institu-
 tions is increasing, the demand for record linkage will increase as well. The new 
 data protection regulation of the EU (Council of European Union, 2016) allows 
 such linkages for research purposes and asks for the use of pseudonymization 
-techniques. Therefore, research on these techniques will also increase (Schnell 
-et al., 2017). The recently founded International Journal of Population Data Sci-
+techniques. Therefore, research on these techniques will also increase (Schnell  et al., 2017). The recently founded International Journal of Population Data Sci-
 ence (IJPDS) will facilitate the publication of research on data linkage. This ever 
 more favorable research climate for linkage will yield more and more requests 
 for linkage solutions. By developing and implementing such solutions, the GRLC 

@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1111%2Fj.1538-4616.2008.00153.x" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-06-24T04:16+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1111%2Fj.1538-4616.2008.00153.x" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-07-03T15:17+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>This paper generalizes the standard homoscedastic macro-finance model by 
 allowing for stochastic volatility, using the "square root" specification of the 
@@ -15,8 +15,7 @@ models. </p>
 of the U.S. macroeconomy and the Treasury bond market. As the name suggests 
 the macro-finance approach allows bond yields to reflect macro-economic variables 
 as well as latent variables representing financial market factors. It is based on the 
-central bank model (CBM) developed by Svensson (1999), Rudebusch (2002), Smets 
-(1999), Kozicki and Tinsley (2005), and others, which represents the behavior of 
+central bank model (CBM) developed by Svensson (1999), Rudebusch (2002), Smets  (1999), Kozicki and Tinsley (2005), and others, which represents the behavior of 
 the macroeconomy in terms of the output gap (g t ), inflation (π t ) and the short-term 
 interest rate (r t ). The model developed in this paper allows bond yields to reflect 
 changes in macro-economic volatility related to the underlying rate of inflation. </p>
@@ -38,30 +37,25 @@ situation is familiar to macro-economic modelers but poses a potential problem f
 term structure researchers: it is well known that asymptotic (long-maturity) yields are 
 not properly defined if the interest rate is driven by a random walk (a homoskedastic 
 unit root process). 
-This theoretical problem was first raised as an empirical issue by Dewachter and 
-Lyrio (2006), but with this notable exception, macro-finance modelers have avoided 
+This theoretical problem was first raised as an empirical issue by Dewachter and  Lyrio (2006), but with this notable exception, macro-finance modelers have avoided 
 it by assuming that the underlying inflation variable follows a near-unit-root process 
 (Ang and Piazzesi 2003, Rudebusch and Wu 2003, Dewachter, Lyrio, and Maes 2006). 
 However, because this variable is stationary, it mean-reverts to a constant rather than 
-the variable end-point suggested by unit root macro-economic models. As Kozicki 
-and Tinsley (2005), Dewachter and Lyrio (2006), and others note, this means that it 
+the variable end-point suggested by unit root macro-economic models. As Kozicki  and Tinsley (2005), Dewachter and Lyrio (2006), and others note, this means that it 
 cannot be interpreted as a long-run inflation expectation because it is anchored to a 
 constant that cannot be influenced by monetary policy. 
 Mainstream finance yield curve research avoids these problems by using het-
-eroskedastic (stochastic volatility) interest rate models based on Cox, Ingersoll, and 
-Ross (1985, hereafter CIR). I modify their continuous time specification for use with 
+eroskedastic (stochastic volatility) interest rate models based on Cox, Ingersoll, and  Ross (1985, hereafter CIR). I modify their continuous time specification for use with 
 discrete-time macro-economic data, getting a sensible forward rate asymptote with-
 out placing constraints on the roots of system. The stochastic trend is estimated using 
 the extended Kalman filter, which is also standard in the mainstream finance liter-
 ature. Model restrictions allow the stochastic trend-volatility term to be interpreted 
 as an inflation trend, consistent with the hypothesis that macro-economic volatility 
-is influenced by the underlying rate of inflation (Okun 1971, Friedman 1977, Engel 
-1982). 
+is influenced by the underlying rate of inflation (Okun 1971, Friedman 1977, Engel  1982). 
 1 This specification encompasses the standard macro-finance model, which is 
 decisively rejected by the data. 
 The research described in this paper was initially motivated by my interest in the 
-asymptotic yield problem raised by early drafts of the Dewachter and Lyrio (2006) 
-paper. I expected the new specification to outperform the standard one in explain-
+asymptotic yield problem raised by early drafts of the Dewachter and Lyrio (2006)  paper. I expected the new specification to outperform the standard one in explain-
 ing long maturity yields and with this in mind I extended the conventional (10-year 
 maximum) maturity data set to include a 15-year yield, the longest available his-
 torically. However, the results are surprising in this respect. The new specification </p>
@@ -94,8 +88,7 @@ Section 3. Section 4 offers a brief conclusion and suggestions for further resea
 <p>1. THE GENERAL AFFINE MACRO-MODEL FRAMEWORK </p>
 
 <p>This section specifies the macro-economic framework. This is "general affine" or 
-"exponential-affine" in the sense of Duffie and Kan (1996) and Duffie, Filipovic, 
-and Schachtermayer (2003, to be explained). It consists of a heteroscedastic macro-
+"exponential-affine" in the sense of Duffie and Kan (1996) and Duffie, Filipovic,  and Schachtermayer (2003, to be explained). It consists of a heteroscedastic macro-
 economic vector autoregression (VAR) augmented by two latent variables, which is 
 specified under the physical (or observed) probability measure P. The yield model is 
 specified under the risk neutral measure Q in the next section. </p>
@@ -131,8 +124,7 @@ and zeros elsewhere. 0 a is the (a × 1) × 1 zero vector, 1 a is the (a × 1) �
 
 <p>1180 : MONEY, CREDIT AND BANKING </p>
 
-<p>unobservable. I estimate y t using the extended Kalman filter (Harvey 1989, Duffee 
-and Stanton 2004) as described in Appendix C. 
+<p>unobservable. I estimate y t using the extended Kalman filter (Harvey 1989, Duffee  and Stanton 2004) as described in Appendix C. 
 The specific model developed in this paper defines z t = {g t , π t , r 1,t } , y t = 
 {y π  *  ,t , y r  *  ,t } , ε t = {ε π  *  ,t , ε r  *  ,t } , ξ = {ξ π  *  , ξ r  *  }, and θ = {θ π  *  , θ r  *  } . In my preferred 
 model, y π  *  ,t is a martingale driving the inflation asymptote: π </p>
@@ -541,8 +533,7 @@ finance model (which is homoskedastic) is classified as A 0 (N ) and the mainstr
 specification (with a single stochastic volatility term) as A 1 (N ). 
 This paper develops a model that encompasses the A 0 (N ) and A 1 (N ) specifi-
 cations. These models all generate affine yield curves because the probability dis-
-tributions underpinning them are all "exponential-affine" in the sense of Duffie, 
-Filipovic, and Schachtermayer (2003). They define a process as exponential-affine 
+tributions underpinning them are all "exponential-affine" in the sense of Duffie,  Filipovic, and Schachtermayer (2003). They define a process as exponential-affine 
 under any measure M if the conditional moment generating function (MGF) (L 
 M [ν, 
 X t ] = E 
@@ -670,19 +661,16 @@ the limit as c tends to infinity. Setting δ 11 and 1 to zero then makes x 1,t a
 homoskedastic. This also renders the distribution of y π  *  ,t+1 Gaussian, allowing this 
 to be defined in the A 0 (N ) model as another zero-mean-reverting latent variable (θ 1 
 = 0). 
-5 These models are "admissible" in the sense of Dai and Singleton (2000, 2002) 
-in that they ensure that the variance structure remains nonnegative definite. 
+5 These models are "admissible" in the sense of Dai and Singleton (2000, 2002)  in that they ensure that the variance structure remains nonnegative definite. 
 6 They 
-can be used independently of the yield specification, as for example by Kozicki and 
-Tinsley (2005). However, my interest is to use them jointly with bond market data, 
+can be used independently of the yield specification, as for example by Kozicki and  Tinsley (2005). However, my interest is to use them jointly with bond market data, 
 using the macro-yield framework developed in the next section. </p>
 
 <p>2. THE GENERAL AFFINE YIELD CURVE FRAMEWORK </p>
 
 <p>This section is supported by Appendix B and shows how exponential-affine MGFs 
 can be used to model the yield curve consistently with the macro-models of the 
-previous section. It is based on the fact (Duffie, Filipovic, and Schachtermayer 2003) 
-that the MGF of a distribution that is exponential-affine under the risk neutral measure 
+previous section. It is based on the fact (Duffie, Filipovic, and Schachtermayer 2003)  that the MGF of a distribution that is exponential-affine under the risk neutral measure 
 Q generates an exponential-affine discount bond price model: </p>
 
 <p>P τ,t = exp[−γ τ − τ X t ]; τ = 1, . . . , M. 
@@ -736,8 +724,7 @@ depend only upon variations in volatility, such as those induced by x 1,t in A 1
 This parameter plays the key role in that model. If λ 11 is also nonzero then the trend 
 can influence the risk premia thorough variations in the price of risk, even if volatility 
 is fixed as in A 0 (N ), so λ 11 plays the key role in that model. Appendix B shows how 
-the prices of risk associated with the other variables are adjusted, following Duffee 
-(2002). After this modification, the models A 0 (N ) and A 1 (N ) are classified as the 
+the prices of risk associated with the other variables are adjusted, following Duffee  (2002). After this modification, the models A 0 (N ) and A 1 (N ) are classified as the 
 "essentially affine" models EA 0 (N ) and EA 1 (N ), respectively, represented by the 
 empirical models M0 and M1 in Section 3. Following Dewachter and Lyrio (2006), 
 both models incorporate the restrictions: ξ 1 = 1; 12 = 0 N −1 . 
@@ -1368,15 +1355,13 @@ P(µ = 0, ξ 1 = 1) but is mean reverting under Q : (|ξ </p>
 
 <p>1 | = |ξ 1 − δ 01 λ 11 | &lt; 1). This 
 provides a neat way of avoiding the asymptotic yield problem while allowing the 
-inflation asymptote in the macro-model to be a variable end-point as in Kozicki and 
-Tinsley (2001). However, this restriction constrains the rate at which ψ 1,τ grows in the 
+inflation asymptote in the macro-model to be a variable end-point as in Kozicki and  Tinsley (2001). However, this restriction constrains the rate at which ψ 1,τ grows in the 
 recursion (21), constraining the effect of the stochastic trend on short-maturity yields. 
 It also means that the associated factor risk premium, the excess return expected for 
 holding the "asymptotic" portfolio (constructed so that the portfolio weights sum 
 to: ψ 1 = 1, 2 = 0 N −1 ), is negatively related to the inflation trend, as Appendix B 
 demonstrates. Moreover, the EA 1 (N ) model relaxes this restriction and my results, 
-reflecting those of mainstream research (e.g., Chen and Scott 1993, Dai and Singleton 
-2002), suggest that this root is significantly greater than unity under Q. </p>
+reflecting those of mainstream research (e.g., Chen and Scott 1993, Dai and Singleton  2002), suggest that this root is significantly greater than unity under Q. </p>
 
 
 
@@ -1803,8 +1788,7 @@ apparent at the beginning of the estimation period when the underlying inflation
 is low. This variable drives the conditional heteroskedasticity in the macro-variables. 
 Their one-quarter-ahead forecasts values and 95% confidence intervals are shown in 
 Figure 5. The effect of heteroskedasticity is particularly pronounced in the case of 
-the spot rate, consistent with the finding in univariate models (Chen et al. 1992, Ait-
-Sahalia 1996, Stanton 1997, and others). Its variance is low over the first 4 years of the 
+the spot rate, consistent with the finding in univariate models (Chen et al. 1992, Ait- Sahalia 1996, Stanton 1997, and others). Its variance is low over the first 4 years of the 
 estimation period, consistent with the ex post stability of interest rates over this period </p>
 
 <p>PETER D. SPENCER : 1193 </p>
@@ -2882,8 +2866,7 @@ effects implied by GARCH macro-models, this conditional heteroskedasticity is </
 model, generating linear structures that could lend themselves not just to research on 
 the term structure but to optimal control and similar intertemporal optimization prob-
 lems. Empirically, this finding helps to explain the "Great Moderation"-the fall in 
-output, interest rate, and inflation volatility seen since the mid 1980s (Bernanke 2004, 
-Kim, Nelson, and Piger 2004)-attributing it to the fall in the inflation trend associated 
+output, interest rate, and inflation volatility seen since the mid 1980s (Bernanke 2004,  Kim, Nelson, and Piger 2004)-attributing it to the fall in the inflation trend associated 
 with the recession of the early 1980s. It reminds us that this so-called moderation is 
 actually a return to the low-inflation, low-volatility epoch that characterized the early 
 postwar years. The "general affine" macro-model A 1 helps to explain both the rise 
@@ -3593,9 +3576,7 @@ related to x 1,t if λ 10 &lt; 0, and negatively related if λ 10 &gt; 0 since: 
 
 <p>given (19). The risk premium in the EA 0 (N ) model is: </p>
 
-<p>ρ τ,t = − 2,τ −1 (H 0 + ϒ 0 x 1,t + 22 X 2,t ) − ψ 1,τ −1 δ 01 (λ 10 + λ 11 x 1,t ). (B13) </p>
-
-<p>Recall that this model requires the restriction λ 11 &gt; 0. This means that the associated 
+<p>ρ τ,t = − 2,τ −1 (H 0 + ϒ 0 x 1,t + 22 X 2,t ) − ψ 1,τ −1 δ 01 (λ 10 + λ 11 x 1,t ). (B13)   Recall that this model requires the restriction λ 11 &gt; 0. This means that the associated 
 factor risk premium (the asymptotic premium) is negatively related to the inflation 
 trend. This premium is shown by δ 01 (λ 10 + λ 11 x 1,t ) in the second term. In prac-
 tice, this effect has the effect of offsetting the effect of the component 2,τ −1 ϒ 0 x 1,t 
@@ -3696,9 +3677,7 @@ model), or must asymptote to a constant (EA 1 ). </p>
 
 <p>APPENDIX C : THE KALMAN FILTER AND THE LIKELIHOOD FUNCTION </p>
 
-<p>These models were estimated and tested using the fminsearch algorithm on Mat-
-lab. 
-14 In this model, the unobservable variables are modeled using the extended 
+<p>These models were estimated and tested using the fminsearch algorithm on Mat- lab.  14 In this model, the unobservable variables are modeled using the extended 
 Kalman filter (Harvey 1989, Duffee and Stanton 2004). This method assumes that the 
 revisions in (2) are approximately normally distributed: </p>
 

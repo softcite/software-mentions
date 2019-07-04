@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1257%2Fjep.15.4.129" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-06-24T04:42+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1257%2Fjep.15.4.129" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-07-03T15:48+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>are important in the toolkits of applied econometricians and statisticians, and they 
 are likely to be more important in the future. We will focus our intuitive discussion 
@@ -268,8 +268,7 @@ variables controlled for include three region dummies, nine year dummies and a c
 
 <p>The Bootstrap and Multiple Imputations 133 </p>
 
-<p>For the final column, we used a different bootstrap approach due to Wu 
-(1986), known as the "wild bootstrap." First, run an ordinary least squares regres-
+<p>For the final column, we used a different bootstrap approach due to Wu  (1986), known as the "wild bootstrap." First, run an ordinary least squares regres-
 sion, and save the residuals. Then multiply each value of the residual by a random 
 variable that takes on one of two values: i) (1 Ϫ ͌ 5)/2 with probability 
 (1 ϩ ͌ 5)/(2 ͌ 5); or ii) (1 ϩ ͌ 5)/2 with probability 1 Ϫ (1 ϩ ͌ 5)/(2 ͌ 5). Note 
@@ -291,9 +290,7 @@ ping generally will be more accurate, since, unlike the paired bootstrap, it imp
 a restriction on each bootstrap sample that is identical to the conditions used to 
 identify the ordinary least squares model. </p>
 
-<p>4 </p>
-
-<p>The least squares confidence intervals in Table 1 are much narrower than the 
+<p>4   The least squares confidence intervals in Table 1 are much narrower than the 
 true bands. The other confidence intervals are usually narrower than the true 
 bands, but not for all of the coefficients. The confidence intervals based on the 
 paired bootstrap are somewhat wider than the robust confidence intervals. In 
@@ -331,9 +328,7 @@ standard analytic estimates as the linear approximation becomes less accurate.
 Horowitz (2001, section 5.3) verified this in a small simulation study of a particular 
 nonlinear regression model. </p>
 
-<p>5 </p>
-
-<p>In time series models, error terms are often serially correlated, and this 
+<p>5   In time series models, error terms are often serially correlated, and this 
 requires bootstrap approaches that differ from the cross-section case. The simplest 
 approach, called model-based bootstrapping, is to assume that the time series can 
 be fit by an appropriate autoregressive moving average model with serially uncor-
@@ -348,8 +343,7 @@ section units-for example, through bootstrap sampling of the complete set of
 observations for cross-section units (Ziliak, 1997). 
 Although it is mechanically possible to apply the bootstrap to any model, there 
 are circumstances where the bootstrap will fail to estimate the sampling distribution 
-consistently (for details, see Horowitz, 2001, section 2.1). For example, Andrews 
-(2000) shows that the bootstrap does not accurately estimate the sampling distri-
+consistently (for details, see Horowitz, 2001, section 2.1). For example, Andrews  (2000) shows that the bootstrap does not accurately estimate the sampling distri-
 bution of a coefficient whose true value is zero and whose estimate is constrained 
 to be greater than or equal to zero. 
 Despite these caveats and inherent uncertainty about the superiority of the 
@@ -381,8 +375,7 @@ defined distributions (see Valletta, 1993, footnote 13, for an example). </p>
 <p>Multiple Imputations </p>
 
 <p>Applied econometricians routinely face the problem of missing values of key 
-variables in their data. The multiple imputation technique was developed by Rubin 
-(1987) as a general, computationally intensive method "to handle the problem of 
+variables in their data. The multiple imputation technique was developed by Rubin  (1987) as a general, computationally intensive method "to handle the problem of 
 missing data in public-use data bases where the data-base constructor and the 
 ultimate user are distinct entities" (Rubin, 1996). This approach represents a useful 
 compromise between the naïve extremes of eliminating observations with missing 
@@ -407,8 +400,7 @@ model.
 7 However, there are other proper multiple imputation procedures that 
 require no explicit Bayesian calculations. Indeed, although Rubin developed the 
 theoretical properties of this methodology for Bayesian models, he showed that 
-these results also apply in large samples to classical statistical models (Rubin, 1987, 
-chapter 4). 
+these results also apply in large samples to classical statistical models (Rubin, 1987,  chapter 4). 
 Whether the prediction approach is Bayesian or non-Bayesian, any proper </p>
 
 <p>7 Meng (2000) shows that the process of drawing proper imputations is identical to Bayesian data 
@@ -455,8 +447,7 @@ that it can be done once by the data provider and then used for a variety of
 purposes by many analysts. 
 Among the first major applications of multiple imputations was a project 
 conducted at the U.S. Census Bureau to assess the comparability of the different 
-industry and occupation codings in the 1970 and 1980 censuses (Clogg et al., 
-1991). In this project, analysts used a Bayesian strategy to provide multiply imputed 
+industry and occupation codings in the 1970 and 1980 censuses (Clogg et al.,  1991). In this project, analysts used a Bayesian strategy to provide multiply imputed 
 values of 1980 industry and occupation codes in public-use samples from the 1970 
 census. The imputations were based on logistic regression models estimated from 
 a special subsample of the 1970 census units for which the 1970 and 1980 codes had </p>
@@ -480,9 +471,7 @@ Population Survey of the U.S. Bureau of Labor Statistics. Although these multipl
 imputed data have been used successfully by many researchers, Kennickell reports 
 frequent misuse and notes that "the need for education is great." </p>
 
-<p>8 </p>
-
-<p>Multiple imputations have been used less in specific applications than in 
+<p>8   Multiple imputations have been used less in specific applications than in 
 general data provision. However, Brownstone and Valletta (1996) extended the 
 basic approach to the specific application of correcting for measurement error in 
 the dependent variable in earnings regression equations. 
@@ -540,8 +529,7 @@ Efron and Tibshirani (1993) and Vinod (1998) envision the bootstrap as part of a
 strategy to find universally applicable methods for estimation and inference, which 
 can be implemented with very little effort or analysis by researchers. This vision is 
 tempting, especially given the ease and speed with which bootstrap estimates for 
-many models can be obtained using modern desktop computers. However, Manski 
-(1996) argues that this vision is flawed due to the inherent ambiguity of statistical 
+many models can be obtained using modern desktop computers. However, Manski  (1996) argues that this vision is flawed due to the inherent ambiguity of statistical 
 theory in comparing alternative estimation procedures. Moreover, the current state 
 of the art in bootstrap methods cannot support such universal application because 
 the necessary evidence regarding bootstrap superiority (or even consistency) is not 

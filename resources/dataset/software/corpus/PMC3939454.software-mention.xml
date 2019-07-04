@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC3939454" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-06-24T04:40+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC3939454" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-07-03T15:45+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>High-throughput AP-MS methods have allowed the identification of many protein complexes. However, 
 most post-processing methods of this type of data have been focused on detection of protein complexes and 
@@ -23,24 +23,18 @@ complex detection from affinity-purification (AP) high-throughput (HT) data is n
 and to convert such data to a list of complexes demands the application of a series of post-processing steps that are 
 still an open field of research </p>
 
-<p>3 </p>
-
-<p>. 
+<p>3   . 
 Raw data from an AP experiment is essentially a list of bait proteins mapped to all the prey proteins that they 
 pulled out. Such a list is subject to false positives and false negatives (see Supplementary file, section 1, for a 
 detailed review) and it is traditionally corrected by scoring the interactions according to different methods that 
 measure the propensity of two proteins to interact given the background of interactions. Reliable interactions are 
 integrated into a network which is then clustered to generate protein complexes </p>
 
-<p>3,4 </p>
-
-<p>. These methods became very 
+<p>3,4   . These methods became very 
 relevant as it was noticed that the differences between the conclusions of the first two main comprehensive maps 
 of the yeast complexome were mainly a result of the pre-processing methods they employed </p>
 
-<p>3,5 </p>
-
-<p>. 
+<p>3,5   . 
 The way in which the scoring step is done has adopted a multiplicity of forms. The socio-affinity index (SA) 
 scored the interaction between proteins i and j by including terms for how often i retrieves j and a term for how 
 often pairs of proteins are seen together as preys. These were calculated as the log-odds of the number of times the 
@@ -58,14 +52,10 @@ Bayes' theorem
 purification patterns of two proteins across all different purification experiments; this is, constructing a pull-
 down matrix of proteins versus experiments and using a Dice index to compare each pair of protein profiles </p>
 
-<p>4 </p>
-
-<p>. 
+<p>4   . 
 Additional scoring systems have been proposed in recent years </p>
 
-<p>8,9 </p>
-
-<p>. </p>
+<p>8,9   . </p>
 
 <p>Regarding the clustering step, the options are even wider. The 
 classical AP HT studies 
@@ -101,9 +91,7 @@ A similar approach focuses on studying multi-cluster and mono-
 cluster proteins after applying overlapping clustering algorithms to 
 protein interaction networks </p>
 
-<p>11 </p>
-
-<p>. Together with all these approaches, 
+<p>11   . Together with all these approaches, 
 the ''subcomplex'' term can also be used to strictly define a biologic-
 ally-relevant subcomplex, i.e., the subcomplexes that have been 
 experimentally found to be functional and independent from the 
@@ -121,9 +109,7 @@ iRefIndex, which is a consolidation of 13 of the most popular protein
 interaction databases, contains 8145 cases of complex-subcomplex 
 pairs </p>
 
-<p>12 </p>
-
-<p>. But, at the same time, some of the algorithms used in the AP 
+<p>12   . But, at the same time, some of the algorithms used in the AP 
 complex prediction pipeline, such as MCL, are non-overlapping 
 clustering algorithms, making impossible any subcomplex detection. 
 New methods that face the subcomplex detection problem have 
@@ -140,13 +126,9 @@ Most have been proposed following the assumption that complexes
 can be reconstructed from highly densely connected regions in the 
 network </p>
 
-<p>13 </p>
+<p>13   : RNSC and MCL are some important examples </p>
 
-<p>: RNSC and MCL are some important examples </p>
-
-<p>14 </p>
-
-<p>. A review 
+<p>14   . A review 
 of twelve of these algorithms 
 15 claim that the best prediction method 
 is ''Infomap'', followed by ''Fast modularity'', and ''Potts model 
@@ -154,9 +136,7 @@ approach''. However, it has also been argued that densely connected
 regions do not reflect functional units; hence, alternative ways to look 
 at the complex prediction problem have been proposed </p>
 
-<p>13,16,17 </p>
-
-<p>. In 
+<p>13,16,17   . In 
 addition, complex prediction algorithms have also evolved from 
 algorithms that generate non-intersecting or non-overlapping clus-
 ters to algorithms that take into account the fact that protein com-
@@ -165,17 +145,11 @@ plexes share subunits with other complexes, i.e., overlapping </p>
 <p>community detection algorithms. Some of these methods are 
 <rs type="software">MCODE</rs> </p>
 
-<p>18 </p>
+<p>18   , <rs type="software">CFinder</rs> </p>
 
-<p>, <rs type="software">CFinder</rs> </p>
+<p>19   , Link-communities </p>
 
-<p>19 </p>
-
-<p>, Link-communities </p>
-
-<p>10,20 </p>
-
-<p>, OCG 
+<p>10,20   , OCG 
 11 , Cluster-
 ONE 
 21 and RSRGM </p>
@@ -188,9 +162,7 @@ detection, an early strategy to take into account the overlapping
 nature of complexes and apply it to complex identification from 
 AP experiments was introduced by Gavin et al. </p>
 
-<p>6 </p>
-
-<p>, who, after applying 
+<p>6   , who, after applying 
 the SA score to AP data, performed repeated hierarchical clustering 
 using different parameters to generate overlapping complexes that 
 they described as composed of common ''cores'' and ''attachments''. 
@@ -200,21 +172,15 @@ Two recent papers,
 methods applied to protein complex identification. A group of meth-
 ods, including <rs type="software">CORE</rs> </p>
 
-<p>24 </p>
-
-<p>, COACH 
+<p>24   , COACH 
 25 and CACHET 
 26 , deserve a special 
 mention for explicitly incorporating the above-mentioned ''core-
 attachment'' model (other methods include: Markov random fields </p>
 
-<p>27 </p>
+<p>27   and CODEC </p>
 
-<p>and CODEC </p>
-
-<p>28 </p>
-
-<p>). 
+<p>28   ). 
 In this paper, we will explore the detection of biologically relevant 
 subcomplexes from AP data through some of the above-mentioned 
 techniques, and suggest a new strategy which might be able to 
@@ -232,9 +198,7 @@ clustering methods explicitly remove any subcomplex candidates.
 An example of this is the Leu4-Leu9 interaction from Gavin's data-
 set </p>
 
-<p>6 </p>
-
-<p>: This interaction does not end up in any complexes when using 
+<p>6   : This interaction does not end up in any complexes when using 
 the PE score, whilst the SA scores produce three complexes and the 
 Dice score produces 2 complexes containing Leu4, Leu9 and a few 
 more subunits. A Leu4-Leu9 complex does not appear in the results 
@@ -318,9 +282,7 @@ The four PINs were clustered using two different overlap-detect-
 ing clustering methods: ''Link-communities'' 
 10,20 and ''<rs type="software">OCG</rs>'' </p>
 
-<p>11 </p>
-
-<p>. A 
+<p>11   . A 
 description of the results can be observed in the Supplementary file 
 (Supplementary Table 1). 
 For comparison purposes, we also constructed clusters by using 
@@ -1036,7 +998,7 @@ important step to achieve a better validation of predictions. </p>
 
 <p>All analyses in this paper were performed using R v.2.15.2 and some of its packages, 
 including ''iRefR'' v.1.00 
-12 , ''<rs id="software-41" type="software">igraph</rs>'' <rs corresp="#software-41" type="version-number">v.0.64</rs>, and ''<rs id="software-42" type="software">org.Sc.sgd.db</rs>'' <rs corresp="#software-42" type="version-number">v.2.9.1</rs>. All code 
+12 , ''<rs id="software-41" type="software">igraph</rs>'' v.<rs corresp="#software-41" type="version-number">0.64</rs>, and ''<rs id="software-42" type="software">org.Sc.sgd.db</rs>'' v.<rs corresp="#software-42" type="version-number">2.9.1</rs>. All code 
 needed to reproduce the following analyses can be found as Supplementary code. </p>
 
 <p>Purification data. The raw purification dataset used in this study was taken from the 
@@ -1257,9 +1219,7 @@ not co-purify.
 SA, Hart, PE and Dice scores applied to the raw data and to the clustering methods 
 below specified, were computed using the ProCope software </p>
 
-<p>29 </p>
-
-<p>. 
+<p>29   . 
 Our modified Dice score for the TRIBAL algorithm is explained in Results. </p>
 
 <p>Clustering methods. Link-communities is a method that uses communities of edges 
@@ -1267,9 +1227,7 @@ and not of nodes. <rs type="software">OCG</rs> hierarchically merges edges into 
 of a special modularity function Q. Both <rs type="software">OCG</rs> and Link-communities were 
 performed using the ''<rs type="software">linkcomm</rs>'' R package </p>
 
-<p>20 </p>
-
-<p>. </p>
+<p>20   . </p>
 
 <p>CACHET. The 369 complexes generated by <rs type="software">CACHET</rs> from Gavin's dataset, were 
 retrieved from their web page 
@@ -1285,9 +1243,7 @@ have been proposed
 30 ; however, the MIPS data set is still used as a validation 
 instrument for the complex detection tools above mentioned </p>
 
-<p>17,21,29 </p>
-
-<p>. 
+<p>17,21,29   . 
 The comparison is done through three strategies: Firstly, through a hypergeometric 
 test, as defined in eq. (5). In this test, the population is the total number of proteins, 
 the population success is the size of the MIPS complex, the sample is the predicted 

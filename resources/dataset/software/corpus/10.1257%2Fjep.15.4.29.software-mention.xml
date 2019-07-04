@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1257%2Fjep.15.4.29" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-06-24T04:48+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="10.1257%2Fjep.15.4.29" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-07-03T15:55+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>A </p>
 
@@ -85,8 +85,7 @@ consistent and approximately normal estimator of the regression coefficients ␤
 (see, for example, Amemiya, 1985, chapter 10). However, in many empirical 
 problems, the distribution of the errors is not known or is subject to heteroskedas-
 ticity of unknown form. In such cases, the maximum likelihood estimator will not 
-provide a consistent estimate (Goldberger, 1983; Arabmazar and Schmidt, 1981, 
-1982). Also, for censored panel data with fixed effects-that is, censored data with 
+provide a consistent estimate (Goldberger, 1983; Arabmazar and Schmidt, 1981,  1982). Also, for censored panel data with fixed effects-that is, censored data with 
 repeated observations on individuals over time and intercept terms that are allowed 
 to vary freely across individuals-maximum likelihood estimation methods will 
 generally be inconsistent even when the parametric form of the conditional error 
@@ -125,9 +124,7 @@ and estimating the regression coefficients by applying least absolute deviations
 <p>the remaining observations (the "regression" step), as described by Buchinsky 
 (1994). </p>
 
-<p>2 </p>
-
-<p>The symmetrically censored least squares (SCLS) estimation method, proposed by 
+<p>2   The symmetrically censored least squares (SCLS) estimation method, proposed by 
 Powell (1986b), is based on a "symmetric trimming" idea. For simplicity, suppose 
 that a ϭ Ϫϱ, so that the data are "top-coded" at b (as in our empirical application), 
 and assume that the true dependent variable y* is symmetrically distributed around 
@@ -143,8 +140,7 @@ variable using the current estimates (which drops observations with values of th
 regression function above b) and least squares estimation of the regression coeffi-
 cients using the "symmetrically trimmed" data yields the SCLS estimator. 
 Finally, the identically censored least absolute deviations (ICLAD) and identically 
-censored least squares (ICLS) estimation methods were proposed by Honoré and 
-Powell (1994). The motivation for these estimators is similar to the "symmetric 
+censored least squares (ICLS) estimation methods were proposed by Honoré and  Powell (1994). The motivation for these estimators is similar to the "symmetric 
 trimming" idea used to derive the SCLS estimator, but involves recensoring the 
 dependent variable for pairs of observations so that their density functions have the 
 same shape. Suppose that the dependent variables for two observations, y 1 and y 2 , 
@@ -207,9 +203,7 @@ rors. The ICLAD and ICLS estimators assume that the error terms are identically
 (but not necessarily symmetrically) distributed, ruling out heteroskedasticity, but 
 permitting asymmetry of the error distribution. </p>
 
-<p>4 </p>
-
-<p>As with the choice of regressors, it is ultimately up to the empirical researcher 
+<p>4   As with the choice of regressors, it is ultimately up to the empirical researcher 
 to determine which assumption is most plausible for the particular application. In 
 practice, though, computation of several parametric and semiparametric estimators 
 provides a useful guide to the sensitivity of the results to the identifying assump-
@@ -295,9 +289,7 @@ analysis is used to control for the changing composition of workers over time. T
 final sample consists of 10,105 men, and our analysis uses all men with nonzero 
 earnings in a given year. </p>
 
-<p>7 </p>
-
-<p>A significant shortcoming of the earnings data is that many records are 
+<p>7   A significant shortcoming of the earnings data is that many records are 
 censored at the Social Security maximum taxable earnings level. In addition, the 
 real value of the tax ceiling changed substantially during the time period of 
 interest, rising from a little over $15,000 (in 1982-1984 dollars) in 1963-1964 to 
@@ -322,9 +314,7 @@ mented using the <rs type="software">Stata</rs> software package, while the ICLA
 using the <rs type="software">Gauss</rs> package. For each estimator, we have created <rs type="software">Stata</rs> "ado" files that 
 are available at ͗http://elsa.berkeley.edu/ϳkenchay͘. </p>
 
-<p>8 </p>
-
-<p>It is clear from Table 1 that the least squares and maximum likelihood 
+<p>8   It is clear from Table 1 that the least squares and maximum likelihood 
 estimates of the black-white log-earnings gap and the returns to education are 
 extremely biased when compared to the semiparametric estimators. We think of 
 the CLAD estimator as the natural benchmark, since it is consistent under the 
@@ -349,9 +339,7 @@ ignoring the censoring problem entirely and using least squares estimation. A mo
 formal test of the normality assumption also suggests that it is violated for the 
 log-earnings model. </p>
 
-<p>9 </p>
-
-<p>There are sizeable differences in the estimated effects of education on earn-
+<p>9   There are sizeable differences in the estimated effects of education on earn-
 ings across the three semiparametric estimators. While the ICLAD and SCLS 
 estimators of the education premium are similar, they are always greater than the 
 CLAD estimator. These differences are significant given the precision of the 
@@ -503,9 +491,7 @@ proaches all result in more precise estimates of the race coefficient than maxim
 likelihood estimation. For example, the standard errors of the CLAD estimator are 
 25 percent to 55 percent smaller than the standard errors of the Tobit estimator. </p>
 
-<p>10 </p>
-
-<p>The differences in the coefficient estimates across the various estimators can 
+<p>10   The differences in the coefficient estimates across the various estimators can 
 be used as a sort of specification check, similar in spirit to the Newey (1987) 
 specification analysis mentioned earlier. For the education coefficient, the large 
 differences between the maximum likelihood and semiparametric estimates sug-
@@ -517,8 +503,7 @@ the black-white earnings gap, the smaller differences among the semiparametric
 estimates suggest that nonnormality is the biggest source of bias in the Tobit 
 estimator, with heteroskedasticity and asymmetry playing smaller roles. 
 To examine the question of specification in more detail, we estimated the 
-distribution of the error terms derived from the CLAD estimates, using the Kaplan 
-and Meier (1958) estimator. The resulting estimated error distribution for log-
+distribution of the error terms derived from the CLAD estimates, using the Kaplan  and Meier (1958) estimator. The resulting estimated error distribution for log-
 earnings has fatter tails than does a normal distribution. The maximum likelihood 
 estimator is sensitive to values in the tails, while the least absolute deviations 
 estimator, which focuses on the median value, is unaffected by extreme observa-
@@ -527,8 +512,7 @@ fat tails can explain the consistently larger (in magnitude) maximum likelihood
 estimates of the race coefficient. They can also explain the larger sampling errors 
 of the Tobit estimator relative to the semiparametric estimators. Thus, abnormally 
 long tails in the log-earnings distribution may be the major source of misspecifica-
-tion in the maximum likelihood estimates of the black-white earnings gap (Chay, 
-1995; Chay and Honoré, 1998). 
+tion in the maximum likelihood estimates of the black-white earnings gap (Chay,  1995; Chay and Honoré, 1998). 
 Based on the series of cross-sectional estimators for the four years shown in 
 Table 1, the maximum likelihood and semiparametric approaches yield very similar 
 estimates of changes in black-white relative earnings during the late 1960s. The 
