@@ -1,9 +1,9 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC2773253" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-07-03T15:21+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC2773253" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-07-07T23:18+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p><rs type="software">Mobyle</rs>ABSTRACT </p>
 
 <p>Motivation: For the biologist, running bioinformatics analyses 
-involves a time-consuming management of data and tools. <rs type="software">Mobyle</rs><rs type="software">PlayMOBY</rs><rs id="software-23" type="software">Mobyle</rs><rs corresp="#software-23" type="url">http://bioweb2.pasteur.fr/ projects/mobyle</rs><rs id="software-24" type="software">PlayMOBY</rs><rs corresp="#software-24" type="url">http://lipm-bioinfo.toulouse.inra.fr/biomoby/PlayMOBY</rs>Over the last 10 years, an increasing number of bioinformatics tools, 
+involves a time-consuming management of data and tools. <rs type="software">Mobyle</rs><rs type="software">Mobyle</rs><rs type="software">PlayMOBY</rs><rs type="software">BioMOBY</rs><rs id="software-23" type="software">Mobyle</rs><rs corresp="#software-23" type="url">http://bioweb2.pasteur.fr/ projects/mobyle</rs><rs id="software-24" type="software">PlayMOBY</rs><rs corresp="#software-24" type="url">http://lipm-bioinfo.toulouse.inra.fr/biomoby/PlayMOBY</rs>Over the last 10 years, an increasing number of bioinformatics tools, 
 covering a growing spectrum of applications, including aspects of 
 genomics, systems and structural biology have been made available 
 to the community. The complexity of analyses undertaken in these 
@@ -20,9 +20,9 @@ their own computer. In contrast with these tools which focus on the
 execution of programs, and where the users can often interactively 
 chain analyses, <rs id="software-50" type="software">GBrowse MOBY</rs> (<rs corresp="#software-50" type="creator">Wilkinson</rs>, 2006) and Seahawk 
 (Gordon and Sensen, 2007b) propose data-centric solutions where 
-the user can explore a set of BioMOBY (Wilkinson, 2004) services to 
+the user can explore a set of <rs type="software">BioMOBY</rs> (Wilkinson, 2004) services to 
 analyse a set of given data, with edition, navigation and visualization 
-components which fully exploit the composite nature of BioMOBY 
+components which fully exploit the composite nature of <rs type="software">BioMOBY</rs> 
 objects. 
 Standalone workflow systems such as Taverna (Oinn et al., 2004), 
 Kepler (Altintas et al., 2004) or BioSide (Hallard et al., 2004) enable 
@@ -35,7 +35,7 @@ web-based systems cited above. <rs type="software">PISE</rs>, <rs type="software
 offer the possibility to save interactively designed protocols. 
 Many of these systems now offer the possibility of accessing 
 distributed resources, often using dedicated web-service solutions 
-such as BioMOBY and SoapLab (Senger et al., 2003). While 
+such as <rs type="software">BioMOBY</rs> and SoapLab (Senger et al., 2003). While 
 SoapLab offers a system to automate the distribution of 
 asynchronous analytical services, the BioMOBY protocol provides 
 in addition more detailed descriptions, including semantic metadata 
@@ -67,7 +67,7 @@ services, from genome analysis to structural bioinformatics. The
 description language it uses to generate user interfaces is sufficiently 
 extensive and flexible for rich user interfaces to be generated. Its 
 core partly relies on concepts previously embedded in PISE and 
-the RPBS portal (Alland et al., 2005). Moreover, different Mobyle 
+the <rs type="software">RPBS</rs> portal (Alland et al., 2005). Moreover, different Mobyle 
 servers can be federated to integrate services distributed over various 
 sites. This functionality enables the federation of a network of 
 curated portals, combining the skills of each of them. The <rs type="software">Mobyle</rs> 
@@ -398,16 +398,16 @@ into several successive steps: inferring protein sequence from the
 genomic information, performing a search for a template structure, 
 fitting the query sequence to the template and then generating a 
 3D model. Protein sequence inference can currently be performed 
-through the <rs type="software">LIPM Mobyle</rs> server, using the heliagene resource 
+through the LIPM <rs type="software">Mobyle</rs> server, using the heliagene resource 
 dedicated to sunflower genomic information. The next steps can 
-be achieved through the <rs type="software">RPBS Mobyle</rs> server using a two pass blast 
+be achieved through the RPBS <rs type="software">Mobyle</rs> server using a two pass blast 
 (PDBblast service) to identify candidate template structures from 
 the query sequence. Sequence alignment can be performed through 
-the <rs type="software">Institut Pasteur Mobyle</rs> server using the clustalw service. Finally, 
+the Institut Pasteur Mobyle server using the <rs type="software">clustalw</rs> service. Finally, 
 the 3D modelling and model visualization/analysis can be performed 
 through the <rs type="software">RPBS</rs> site (Fig. 2). The <rs type="software">Mobyle</rs> network allows efficient 
 organization of the complete sequence of tasks as a pipeline, without 
-having to leave the <rs type="software">RPBS Mobyle</rs> portal, but making use of the 
+having to leave the RPBS Mobyle portal, but making use of the 
 resources and services at the three sites. </p>
 
 <p>3.6 Deploying BioMOBY services from <rs type="software">Mobyle</rs> 
@@ -486,7 +486,7 @@ solved, were related to (i) having to navigate back and forth between
 forms and results; (ii) user accounting; (iii) not fully understanding 
 some English terms (such as 'pairwise' alignment) used in program 
 classification; and (iv) ambiguities concerning data storage. 
-The <rs type="software">Institut Pasteur</rs>, <rs type="software">RPBS</rs> and <rs type="software">LIPM</rs> Mobyle servers have been 
+The Institut Pasteur, <rs type="software">RPBS</rs> and LIPM <rs type="software">Mobyle</rs> servers have been 
 publicly available since January 2008, October 2008 and January 
 2009, respectively. The Pasteur server provides access to a wide 
 range of bioinformatics tools mainly focused on sequence analysis 
