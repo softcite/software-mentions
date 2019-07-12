@@ -136,6 +136,8 @@ public class AnnotatedCorpusGeneratorCSV {
     public static List<String> fields = Arrays.asList(SOFTWARE_LABEL, VERSION_NUMBER_LABEL, VERSION_DATE_LABEL, CREATOR_LABEL, URL_LABEL);  
     private ArticleUtilities articleUtilities = new ArticleUtilities();
 
+    private FieldNormalizer fieldNormalizer = new FieldNormalizer();
+
     /**
      * Start the conversion/fusion process for generating MUC-style annotated XML documents
      * from PDF, parsed by GROBID core, and softcite dataset  
@@ -521,11 +523,13 @@ public class AnnotatedCorpusGeneratorCSV {
             for (Map.Entry<String,List<String>> entry : mentionList.entrySet())  {
                 allMentionsWriters.get(field).write(entry.getKey() + "\t");
                 if (field.equals("version-number"))
-                    allMentionsWriters.get(field).write(FieldNormalizer.normalizeVersionNumber(entry.getKey()));
+                    allMentionsWriters.get(field).write(fieldNormalizer.normalizeVersionNumber(entry.getKey()));
                 else if (field.equals("url"))
-                    allMentionsWriters.get(field).write(FieldNormalizer.normalizeUrl(entry.getKey()));
+                    allMentionsWriters.get(field).write(fieldNormalizer.normalizeUrl(entry.getKey()));
                 else if (field.equals("creator"))
-                    allMentionsWriters.get(field).write(FieldNormalizer.normalizeCreator(entry.getKey()));
+                    allMentionsWriters.get(field).write(fieldNormalizer.normalizeCreator(entry.getKey()));
+                else if (field.equals("software"))
+                    allMentionsWriters.get(field).write(fieldNormalizer.normalizeSoftwareName(entry.getKey()));
                 allMentionsWriters.get(field).write("\t[");
 
                 boolean first = true;
@@ -736,11 +740,11 @@ public class AnnotatedCorpusGeneratorCSV {
         int annotationIndex = -1;
         for(SoftciteAnnotation annotation : localAnnotations) {
             annotationIndex++;
-            if (annotation.getSoftwareMention() == null || annotation.getSoftwareMention().length() == 0) {
+            if (annotation.getSoftwareMention() == null || annotation.getSoftwareMention().trim().length() == 0) {
                 // there is no software name usable, we have to skip this case
                 continue;
             }
-            if (annotation.getContext() == null || annotation.getContext().length() == 0) {
+            if (annotation.getContext() == null || annotation.getContext().trim().length() == 0) {
                 // there is no context usable
                 continue;
             }
@@ -1598,19 +1602,19 @@ System.out.print("\n");*/
                         }
                     } else if (i == 4) {
                         if (attribute.equals("software_name")) {
-                            annotation.setSoftwareMention(FieldNormalizer.removeLeadingAndTrailing(value, "’“\""));
+                            annotation.setSoftwareMention(fieldNormalizer.normalizeSoftwareName(value));
                         }
                         else if (attribute.equals("version_number")) {
-                            annotation.setVersionNumber(FieldNormalizer.normalizeVersionNumber(value));
+                            annotation.setVersionNumber(fieldNormalizer.normalizeVersionNumber(value));
                         }
                         else if (attribute.equals("version_date"))
                             annotation.setVersionDate(value);
                         else if (attribute.equals("url"))
-                            annotation.setUrl(FieldNormalizer.normalizeUrl(value));
+                            annotation.setUrl(fieldNormalizer.normalizeUrl(value));
                         else if (attribute.equals("creator")) {
                             // we filter obvious reference person names (not reliable nor consistent)
                             if (value.toLowerCase().indexOf("et al") == -1 || value.toLowerCase().indexOf("et. al") == -1) {
-                                annotation.setCreator(FieldNormalizer.normalizeCreator(value));
+                                annotation.setCreator(fieldNormalizer.normalizeCreator(value));
                                 //annotation.setCreator(value);
                             }
                         }

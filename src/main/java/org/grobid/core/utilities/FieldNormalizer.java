@@ -18,6 +18,8 @@ import com.fasterxml.jackson.databind.*;
 
 import java.nio.charset.StandardCharsets;
 import java.io.*;
+import java.nio.file.*;
+import java.util.*;
 import java.util.regex.*;
 import java.net.URL;
 import org.xml.sax.*;
@@ -36,6 +38,16 @@ import org.grobid.core.utilities.TextUtilities;
  *  and we try here to regularize them.   
  */
 public class FieldNormalizer {
+
+    public List<String> addresses = null;
+
+    public FieldNormalizer() {
+        try {
+            addresses = new ArrayList<>(Files.readAllLines(Paths.get("resources/lexicon/addresses.txt")));
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+    } 
 
     /**
      * The main issue with version number is the inclusion or not of the term "version" (and all its variants)
@@ -92,8 +104,9 @@ public class FieldNormalizer {
     static public final Pattern urlPattern = Pattern
         .compile("(?i)(https?|ftp)\\s?:\\s?//\\s?[-A-Z0-9+&@#/%?=~_()|!:,.;\\s]*[-A-Z0-9+&@#/%=~_()|]");
 
-    public static String normalizeCreator(String creator) {
+    public String normalizeCreator(String creator) {
         creator = creator.replace("\n", " ");
+        creator = creator.replace("\t", " ");
         creator = creator.replaceAll("( )+", " ");
         creator = creator.trim();
         
@@ -109,8 +122,33 @@ public class FieldNormalizer {
             creator = creator.replaceAll("( )+", " ");
         }
 
+        for(String address : addresses) {
+            if (creator.endsWith(address)) {
+                creator = creator.replace(address, "");
+            }
+        }
+
         return creator.trim();
     }    
+
+    public static String normalizeSoftwareName(String software) {
+        software = software.replace("\n", " ");
+        software = software.replaceAll("( )+", " ");
+        software = software.trim();
+
+        // leading and trailing parenthesis and similar
+        software = removeLeadingAndTrailing(software, "()[],;.’“\"");
+
+        // remove extra ending "software" word which brings nothing and is not consistently annotated
+        if (software.endsWith("software")) {
+            software = software.substring(0,software.length()-8).trim();
+            // we remove a possible "and"
+            if (software.endsWith("and")) 
+                software = software.substring(0,software.length()-3).trim();
+        }
+
+        return software.trim();
+    }
 
     static public final Pattern companyPattern = Pattern
         .compile("(incorporated|inc|corporation|corp|ltd)\\s?\\.?", Pattern.CASE_INSENSITIVE);

@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4408226" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-07-11T06:55+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4408226" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-07-12T00:51+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>Abstract </p>
 
@@ -135,7 +135,7 @@ www.chemspider.com/, accessed in March 2012) databases using chemical names.
 Chemicals were removed if their structures could not be found. Each dataset was carefully 
 curated according to previously established guidelines (Fourches et al., 2010). Briefly, 
 counterions were removed, whereas specific chemotypes such as aromatic and nitro groups 
-were normalized using the <rs id="software-0" type="software">ChemAxon Standardizer</rs> (v.<rs corresp="#software-0" type="version-number">5.3</rs>, <rs corresp="#software-0" type="creator">ChemAxon, Budapest, Hungary</rs>, 
+were normalized using the <rs id="software-0" type="software">ChemAxon Standardizer</rs> (v.<rs corresp="#software-0" type="version-number">5.3</rs>, <rs corresp="#software-0" type="creator">ChemAxon</rs>, Budapest, Hungary, 
 <rs corresp="#software-0" type="url">http://www.chemaxon.com</rs>). The presence of duplicates, i.e., identical compounds reported 
 more than once in the same dataset, is known to lead to over-optimistic estimations of the 
 predictivity for developed QSAR models. However, the analysis of such records also gives 
@@ -184,7 +184,8 @@ parent-child relationships between clusters result in a hierarchical data repres
 dendrogram. In particular, we used <rs type="software">ISIDA/Cluster</rs> to obtain the heat map (see Results 
 section) of the proximity matrix. </p>
 
-<p>Dragon Descriptors-The following types of descriptors were generated using <rs id="software-5" type="software">Dragon software</rs> (v.<rs corresp="#software-5" type="version-number">5.5</rs>, <rs corresp="#software-5" type="creator">Talete SRL, Milan, Italy</rs>): 0D constitutional (atom and group counts), 1D 
+<p>Dragon Descriptors-The following types of descriptors were generated using <rs id="software-5" type="software">Dragon</rs> 
+software (v.<rs corresp="#software-5" type="version-number">5.5</rs>, <rs corresp="#software-5" type="creator">Talete SRL</rs>, Milan, Italy): 0D constitutional (atom and group counts), 1D 
 functional groups, 1D atom-centered fragments, 2D topological descriptors, 2D walk and 
 path counts, 2D autocorrelations, 2D connectivity indices, 2D information indices, 2D 
 topological charge indices, 2D eigenvalue-based indices, 2D topological descriptors, 2D 
@@ -252,7 +253,7 @@ performed for each dataset to assure that the high accuracy of the models built 
 was not due to chance correlations. </p>
 
 <p>Random Forest-Random Forest models were constructed according to the original RF 
-algorithm (Breiman, 2001) using the <rs id="software-8" type="software">CF software</rs> version <rs corresp="#software-8" type="version-number">2.12</rs> (Polishchuk et al., 2009). RF 
+algorithm (Breiman, 2001) using the <rs id="software-8" type="software">CF</rs> software version <rs corresp="#software-8" type="version-number">2.12</rs> (Polishchuk et al., 2009). RF 
 is an ensemble of single decision trees. Outputs of all trees are aggregated to obtain one final 
 prediction. Each tree is grown as follows: (i) a bootstrap sample is produced from the whole 
 set of N compounds to form a training set for the current tree. Compounds that are not in the 
