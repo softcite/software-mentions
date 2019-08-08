@@ -148,6 +148,367 @@ Split, training and evaluation for software model is realized in 11844491 ms
 
 
 
+
+
+
+Version July 15th 2019 (CRF)
+
+Labeling took: 2024 ms
+
+===== Token-level results =====
+
+
+label                accuracy     precision    recall       f1     
+
+<creator>            99.72        79.32        65.73        71.89  
+<software>           99.26        81.56        46.47        59.21  
+<url>                99.53        38.38        35.15        36.69  
+<version>            99.81        91.37        83.5         87.26  
+
+all fields           99.58        77.28        58.62        66.67   (micro average)
+                     99.58        72.66        57.71        63.76   (macro average)
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1     
+
+<creator>            96.01        80.58        65.35        72.17  
+<software>           82.25        71.9         44.5         54.98  
+<url>                98.63        41.18        36.84        38.89  
+<version>            96.76        88.28        75.33        81.29  
+
+all fields           93.42        76.94        54.88        64.06   (micro average)
+                     93.42        70.49        55.51        61.83   (macro average)
+
+===== Instance-level results =====
+
+Total expected instances:   265
+Correct instances:          102
+Instance-level recall:      38.49
+
+Split, training and evaluation for software model is realized in 8501912 ms
+
+
+
+
+
+
+July 17th 2019 (CRF)
+Training restricted to paragraph where at least one annotation is present (no negative examples)
+
+Labeling took: 1796 ms
+
+===== Token-level results =====
+
+
+label                accuracy     precision    recall       f1     
+
+<creator>            99.79        86.74        65.69        74.76  
+<software>           99.49        80.71        66.22        72.75  
+<url>                99.63        82.19        25.75        39.22  
+<version>            99.74        78.55        83.68        81.03  
+
+all fields           99.66        81.12        63.45        71.21   (micro average)
+                     99.66        82.05        60.33        66.94   (macro average)
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1     
+
+<creator>            96.72        87.06        66.07        75.13  
+<software>           87.77        79.44        68.55        73.59  
+<url>                98.66        40           10.53        16.67  
+<version>            96.26        77.87        76.61        77.24  
+
+all fields           94.85        79.92        67.94        73.45   (micro average)
+                     94.85        71.09        55.44        60.66   (macro average)
+
+===== Instance-level results =====
+
+Total expected instances:   244
+Correct instances:          104
+Instance-level recall:      42.62
+
+Split, training and evaluation for software model is realized in 8107718 ms
+
+
+BUILD SUCCESSFUL in 2h 15m 9s
+
+
+
+
+
+July 18th 2019 - 10% XML corpus reviewed
+
+Labeling took: 1718 ms
+
+===== Token-level results =====
+
+
+label                accuracy     precision    recall       f1     
+
+<creator>            99.78        77.03        75.59        76.3   
+<software>           99.5         82.99        66.8         74.02  
+<url>                99.58        40.88        33.94        37.09  
+<version>            99.85        91.99        85.99        88.89  
+
+all fields           99.68        78.65        68.81        73.4    (micro average)
+                     99.68        73.22        65.58        69.08   (macro average)
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1     
+
+<creator>            97.06        82.61        76.77        79.58  
+<software>           86.79        77.37        65.23        70.78  
+<url>                98.87        50           40           44.44  
+<version>            97.89        88.79        85.59        87.16  
+
+all fields           95.15        80.21        70.73        75.17   (micro average)
+                     95.15        74.69        66.9         70.49   (macro average)
+
+===== Instance-level results =====
+
+Total expected instances:   227
+Correct instances:          107
+Instance-level recall:      47.14
+
+Split, training and evaluation for software model is realized in 8298033 ms
+
+
+
+
+August 6th 2019 - 75% XML corpus reviewed
+
+Labeling took: 1687 ms
+
+===== Token-level results =====
+
+
+label                accuracy     precision    recall       f1     
+
+<creator>            99.79        79.27        72.86        75.93  
+<software>           99.48        88.86        65.04        75.1   
+<url>                99.75        77.85        59.18        67.25  
+<version>            99.81        86.79        83.22        84.97  
+
+all fields           99.71        84.89        69.68        76.54   (micro average)
+                     99.71        83.19        70.07        75.81   (macro average)
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1     
+
+<creator>            96.8         82.56        72.45        77.17  
+<software>           87.82        84.47        65.2         73.6   
+<url>                99.32        80           53.33        64     
+<version>            97.18        85.71        80.36        82.95  
+
+all fields           95.28        84.3         69.14        75.97   (micro average)
+                     95.28        83.19        67.84        74.43   (macro average)
+
+===== Instance-level results =====
+
+Total expected instances:   203
+Correct instances:          96
+Instance-level recall:      47.29
+
+Split, training and evaluation for software model is realized in 8524881 ms
+
+
+Labeling took: 1526 ms
+
+===== Token-level results =====
+
+
+label                accuracy     precision    recall       f1     
+
+<creator>            99.84        79.39        78.92        79.15  
+<software>           99.5         85.19        73.36        78.83  
+<url>                99.83        86.11        71.26        77.99  
+<version>            99.83        91.23        84.14        87.54  
+
+all fields           99.75        86.04        76.65        81.07   (micro average)
+                     99.75        85.48        76.92        80.88   (macro average)
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1     
+
+<creator>            97.42        82.43        73.49        77.71  
+<software>           88.13        83.6         70.86        76.7   
+<url>                99.48        83.33        66.67        74.07  
+<version>            97.64        90.11        78.1         83.67  
+
+all fields           95.67        84.62        72.44        78.06   (micro average)
+                     95.67        84.87        72.28        78.04   (macro average)
+
+===== Instance-level results =====
+
+Total expected instances:   199
+Correct instances:          94
+Instance-level recall:      47.24
+
+Split, training and evaluation for software model is realized in 8143269 ms
+
+
+
+
+August 8th 2019 - 100% XML corpus reviewed
+
+Labeling took: 1820 ms
+
+===== Token-level results =====
+
+
+label                accuracy     precision    recall       f1     
+
+<creator>            99.85        83.72        82.19        82.95  
+<software>           99.56        85.81        72.68        78.7   
+<url>                99.81        86.02        71.11        77.86  
+<version>            99.87        89.22        86.96        88.07  
+
+all fields           99.77        86.26        77.15        81.45   (micro average)
+                     99.77        86.19        78.23        81.89   (macro average)
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1     
+
+<creator>            97.31        84.21        78.43        81.22  
+<software>           87.58        83.81        68.75        75.54  
+<url>                99.56        85.71        75           80     
+<version>            98.18        88.66        86           87.31  
+
+all fields           95.66        84.84        73.42        78.72   (micro average)
+                     95.66        85.6         77.05        81.02   (macro average)
+
+===== Instance-level results =====
+
+Total expected instances:   217
+Correct instances:          107
+Instance-level recall:      49.31
+
+Split, training and evaluation for software model is realized in 7936500 ms
+
+
+
+Labeling took: 1679 ms
+
+===== Token-level results =====
+
+
+label                accuracy     precision    recall       f1     
+
+<creator>            99.79        89.27        77.04        82.7   
+<software>           99.36        81.25        69.6         74.98  
+<url>                99.82        75.21        66.91        70.82  
+<version>            99.8         88.73        87.46        88.09  
+
+all fields           99.69        84.36        75.52        79.7    (micro average)
+                     99.69        83.61        75.25        79.15   (macro average)
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1     
+
+<creator>            96.94        86.24        76.42        81.03  
+<software>           87.4         80.84        67.12        73.34  
+<url>                99.58        80           66.67        72.73  
+<version>            97.56        85.95        85.25        85.6   
+
+all fields           95.37        83.03        72.45        77.38   (micro average)
+                     95.37        83.26        73.86        78.18   (macro average)
+
+===== Instance-level results =====
+
+Total expected instances:   214
+Correct instances:          110
+Instance-level recall:      51.4
+
+Split, training and evaluation for software model is realized in 7967147 ms
+
+
+
+Labeling took: 1679 ms
+
+===== Token-level results =====
+
+
+label                accuracy     precision    recall       f1     
+
+<creator>            99.79        88.89        65.75        75.59  
+<software>           99.5         86.97        66.73        75.52  
+<url>                99.59        62.84        41.33        49.87  
+<version>            99.92        93.86        93.22        93.54  
+
+all fields           99.7         85.73        68.23        75.98   (micro average)
+                     99.7         83.14        66.76        73.63   (macro average)
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1     
+
+<creator>            96.78        88.16        66.34        75.71  
+<software>           88.26        84.78        68.44        75.73  
+<url>                98.8         63.64        36.84        46.67  
+<version>            98.43        92.45        88.29        90.32  
+
+all fields           95.57        86.51        70.8         77.87   (micro average)
+                     95.57        82.26        64.98        72.11   (macro average)
+
+===== Instance-level results =====
+
+Total expected instances:   226
+Correct instances:          119
+Instance-level recall:      52.65
+
+Split, training and evaluation for software model is realized in 7310007 ms
+
+
+
+
+Labeling took: 2028 ms
+
+===== Token-level results =====
+
+
+label                accuracy     precision    recall       f1     
+
+<creator>            99.82        86.73        73.41        79.51  
+<software>           99.5         85.84        72.17        78.41  
+<url>                99.76        70.13        71.37        70.74  
+<version>            99.79        85.02        88.94        86.94  
+
+all fields           99.72        83.3         76.74        79.88   (micro average)
+                     99.72        81.93        76.47        78.9    (macro average)
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1     
+
+<creator>            97.55        88.35        75.21        81.25  
+<software>           89.08        86.62        71.91        78.58  
+<url>                99.36        62.5         66.67        64.52  
+<version>            97.31        84.62        85.71        85.16  
+
+all fields           95.83        85.84        75.1         80.11   (micro average)
+                     95.83        80.52        74.87        77.38   (macro average)
+
+===== Instance-level results =====
+
+Total expected instances:   262
+Correct instances:          147
+Instance-level recall:      56.11
+
+Split, training and evaluation for software model is realized in 7586399 ms
+
+
+
+
+
+
+
 -----
 DeLFT (December 2018)
 

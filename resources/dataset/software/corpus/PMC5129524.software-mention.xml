@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC5129524" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-07-12T00:51+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC5129524" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-07-14T13:51+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>Regeneration has captured the interest and imagination of people 
 for centuries. Popularized in myths, science fiction, and even hor-
@@ -841,9 +841,9 @@ directions for the TruSeq RNA Sample Prep Kit v2 (Illumina, RS-
 quality and quantity using the Bioanalyzer. Equal molar libraries 
 were pooled, requantified and sequenced as 100 bp paired read 
 on the Illumina HiSeq, 2000 instrument using <rs id="software-9" type="software">HiSeq Control</rs> 
-Software <rs corresp="#software-9" type="version-number">1.5.15</rs>. Following sequencing, Illumina Primary Analy-
+Software <rs corresp="#software-9" type="version">1.5.15</rs>. Following sequencing, Illumina Primary Analy-
 sis version RTA 1.13.48 and <rs id="software-11" type="software">Secondary Analysis</rs> version 
-<rs corresp="#software-11" type="version-number">CASAVA-1.8.2</rs> were run to demultiplex reads for all libraries and 
+<rs corresp="#software-11" type="version">CASAVA-1.8.2</rs> were run to demultiplex reads for all libraries and 
 generate FASTQ files. </p>
 
 <p>Transcriptome Assembly and Annotation </p>
@@ -862,7 +862,7 @@ equal to a gene, treated as a single gene.
 To maximize the utility of this transcriptome assembly, 
 sequences were annotated with the best BLASTx (Camacho et al.,  2008) hit to Swissprot (UniProt, 2015) and NCBI's NR database, 
 using an e-value cutoff of 0.001. We also identified PFAM (Finn  et al., 2014) domains present in P. flava transcripts using 
-<rs id="software-14" type="software">hmmscan</rs>, version <rs corresp="#software-14" type="version-number">3.1b1</rs>, from the <rs id="software-15" type="software">HMMER package</rs> (<rs corresp="#software-15" type="creator">Eddy</rs>, <rs corresp="#software-15" type="version-date">2011</rs>)  with an e-value cutoff of 0.01. In addition, we annotated these 
+<rs id="software-14" type="software">hmmscan</rs>, version <rs corresp="#software-14" type="version">3.1b1</rs>, from the <rs id="software-15" type="software">HMMER package</rs> (<rs corresp="#software-15" type="creator">Eddy</rs>, <rs corresp="#software-15" type="version">2011</rs>)  with an e-value cutoff of 0.01. In addition, we annotated these 
 transcripts with tmhmm, version 2.0c, (Krogh et al., 2001) signalP 
 version 4.1 (Petersen et al., 2011), and ncoils (Lupas et al., 1991). 
 We identified putative transcription factors based on PFAM 
@@ -901,7 +901,7 @@ that had transcription factor domains were clustered on the dis-
 tances of the Pearson correlation of the log2 fold change, using 
 Ward's minimum variance method to find similar clusters (Fig. 
 9). All heatmaps were created using the R package <rs id="software-20" type="software">pheatmap</rs> 
-(<rs corresp="#software-20" type="creator">Kolde</rs>, <rs corresp="#software-20" type="version-date">2013</rs>). </p>
+(<rs corresp="#software-20" type="creator">Kolde</rs>, <rs corresp="#software-20" type="version">2013</rs>). </p>
 
 <p>Gene Ontology Analysis </p>
 
@@ -912,7 +912,7 @@ functional categories of differentially expressed genes and calcu-
 late categorical enrichment. The GO slim terms used were from 
 the generic GO slim terms list available at the Gene Ontology 
 Web site. GO term enrichment was performed using the R pack-
-age <rs id="software-21" type="software">topGO</rs> (<rs corresp="#software-21" type="creator">Alexa and Rahnenfuhrer</rs>, <rs corresp="#software-21" type="version-date">2010</rs>). To examine higher-
+age <rs id="software-21" type="software">topGO</rs> (<rs corresp="#software-21" type="creator">Alexa and Rahnenfuhrer</rs>, <rs corresp="#software-21" type="version">2010</rs>). To examine higher-
 level GO terms, significantly enriched (P &lt; 0.01) GO terms were 
 mapped to select higher-level GO terms using GO.db. These select 
 GO terms were then mapped to the significantly differentially 

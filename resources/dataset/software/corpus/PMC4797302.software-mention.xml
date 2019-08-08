@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4797302" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-07-12T01:14+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC4797302" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-07-14T14:05+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>ABSTRACT </p>
 
@@ -191,14 +191,14 @@ precipitation (IP) control sample (DMSO, Illumina), was
 obtained from GEO (data set GSE51251; http://www.ncbi. 
 nlm.nih.gov/geo/query/acc.cgi?acc = GSE51251). We con-
 verted the raw sequencing SRA data to FASTQ format us-
-ing '<rs id="software-12" type="software">fastq-dump</rs>' version <rs corresp="#software-12" type="version-number">2.3.4</rs> in the sequence read archive 
+ing '<rs id="software-12" type="software">fastq-dump</rs>' version <rs corresp="#software-12" type="version">2.3.4</rs> in the sequence read archive 
 (<rs type="software">SRA) Toolkit</rs> (26). We aligned the reads to the S. cere-
 visiae reference genome (sacCer2) using <rs id="software-14" type="software">Bowtie 2</rs> (27) ver-
-sion <rs corresp="#software-14" type="version-number">2.2.1</rs> with default parameters and then converted the 
+sion <rs corresp="#software-14" type="version">2.2.1</rs> with default parameters and then converted the 
 sequence alignment / map (SAM) output to binary align-
 ment / map (BAM) format using <rs id="software-15" type="software">SAMtools</rs> (28) version 
-<rs corresp="#software-15" type="version-number">0.1.19-44428cd</rs>. We filtered the sequencing reads (using the 
-R package '<rs id="software-16" type="software">ShortRead</rs>' (29) version <rs corresp="#software-16" type="version-number">1.20.0</rs> with a custom fil-
+<rs corresp="#software-15" type="version">0.1.19-44428cd</rs>. We filtered the sequencing reads (using the 
+R package '<rs id="software-16" type="software">ShortRead</rs>' (29) version <rs corresp="#software-16" type="version">1.20.0</rs> with a custom fil-
 ter) to retain only those with two or less expected errors per 
 read: given a Phred quality score q for each base call, the 
 probability that a base call is erroneous is P = 10 
@@ -243,7 +243,7 @@ from the bin centered on that bead. The result is a 3D chro-
 matin configuration reconstruction overlaid with functional 
 genomic data: each bead now has a genomic position, phys-
 ical coordinates (X,Y,Z) and a ChIP-seq peak height value. 
-We visualized this superposed 3D reconstruction in <rs id="software-23" type="software">MacPy- MOL</rs> <rs corresp="#software-23" type="version-number">1.3</rs> (34) by first converting the data to the Protein 
+We visualized this superposed 3D reconstruction in <rs id="software-23" type="software">MacPy- MOL</rs> <rs corresp="#software-23" type="version">1.3</rs> (34) by first converting the data to the Protein 
 Data Bank (PDB) file format (35) with the ChIP-seq peak 
 height value rescaled as the temperature factor (B-factor) in 
 the PDB file. </p>

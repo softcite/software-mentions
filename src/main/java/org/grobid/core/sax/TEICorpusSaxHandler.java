@@ -40,7 +40,7 @@ public class TEICorpusSaxHandler extends DefaultHandler {
 
     private boolean first = true;
 
-    private List<String> validAnnotationTypes = Arrays.asList("software", "version-number", "version-date", "creator", "url");
+    private List<String> validAnnotationTypes = Arrays.asList("software", "version", "creator", "url");
 
     public TEICorpusSaxHandler() {
         encoder = JsonStringEncoder.getInstance();

@@ -429,3 +429,107 @@ software.
 The experiment was programmed in <rs id="software-1" type="software">Z-tree</rs> (<rs corresp="#software-1" type="creator">Fischbacher</rs> <rs corresp="#software-1" type="version-date">2007</rs>). 
 
 
+-> annotation policy on redundant software publisher: 
+1) only one-time annotation
+2) most extented one (e.g. with corp, or followed by address)
+
+example:
+
+All the statistical analyses were carried out using the IBM <rs id="software-1" type="software">SPSS</rs> Statistics (Version <rs corresp="#software-1" type="version">21.0</rs>; <rs corresp="#software-1" type="creator">IBM corp</rs>., New York, USA).
+
+
+
+-> need to distinguish software main author and software publisher, in general creator is not meaningful for software (it is an industrial product).
+
+example:
+
+For FCS data processing we used the <rs id="software-6" type="software">Fluctuation Analyzer</rs> software (written by <rs corresp="#software-6" type="creator">Malte Wachsmuth</rs>, European Molecular Biology Laboratory, Heidelberg, Germany; available upon request).</p>
+
+
+
+-> quite a few biotech "hardware" device annotated as software - without consistency, e.g.:
+
+size and zeta potential experiment A <rs id="software-5" type="software">Multisizer 4 Coulter counter</rs> (<rs corresp="#software-5" type="creator">Beckman Coulter Inc</rs>., Miami, FL, USA) and ZetaSizer Nano ZS (Malvern Instruments, Malvern, UK) were employed to measure the size and the zeta potential, respectively.
+
+Multisizer 4e Coulter Cell Analyzer is a particule detector for bio stuff.
+
+
+It is probable that many clinical isolates of P dagmatis have been misidentified due to the limitation of commercial biochemical identification systems, such as <rs type="software">VITEK 2</rs>.
+
+VITEK 2 is a complete device, which contains a Windows based software
+
+
+-> Keep acronym in the annotation
+
+using the <rs type="software">Ingenuity Pathways Analysis (IPA)</rs> tool <ref type="figure">(Figure 3</ref>b). 
+The user interface was linked to a <rs type="software">My Structured Query Language (MySQL)</rs> database 
+
+
+
+-> "models" are not software:
+
+10.1111/j.1467-8381.2009.02008.x
+
+The CGE model we describe in this section is the <rs id="software-1" type="software">GTAP6inGAMS</rs> model developed by <ref type="bibr">Rutherford (2005)</ref>.
+
+The CGE model we describe in this section is the GTAP6inGAMS model developed by <ref type="bibr">Rutherford (2005)</ref>.
+
+The software that uses the model is called here GAMS, which was actually on the other hand not annotated as software. 
+
+
+
+-> issue with the "command" or "command line" part of some framework, e.g. 
+
+We used the <rs type="software">MATLAB</rs> command <rs type="software">fmin- search</rs> with multiple starting points to compute the maximum likelihood estimate for this value.
+
+Thus, linear regression with robust standard errors using the <rs type="software">STATA</rs> command "cluster (cluster variable)"was used-which relaxes the independence assumption and requires only that the observations should be independent across the clusters (STATA 2013).
+
+sometimes encoded as another software entity as above, sometimes both together in one, sometimes only the framework is annotated (e.g. MATLAB)
+
+
+
+-> non named software mentions, e.g. custom script, in-house script, etc.
+
+Data analysis and model fitting were performed using <rs type="software">custom scripts</rs> written in <rs id="software-1" type="software">Igor Pro</rs> <rs corresp="#software-1" type="version">6</rs> (<rs corresp="#software-1" type="creator">WaveMetrics</rs>).</p>
+
+Second, since <rs type="software">Matlab</rs> <rs id="software-0" type="software">routines</rs> applying Bayesian methods to the spatial lag, spatial error and spatial Durbin models are made downloadable for free on <rs corresp="#software-0" type="creator">LeSage</rs>'s website (<rs corresp="#software-0" type="url">www.spatial-econometrics.com</rs>), these kinds of comparisons can be carried out relatively easily. Furthermore, since <rs corresp="#software-1" type="creator">LeSage</rs> also provides <rs type="software">Matlab</rs> <rs id="software-1" type="software">routines</rs> applying the Bayesian method to the spatial lag, spatial error and spatial Durbin models of limited dependent variables, similar types of selection procedures as discussed in this and the previous sections can be used for empirical problems requiring a probit or tobit approach (Ch. 10).
+
+It's interesting to detect them, as it could be used to drive the authors to some Open Science best practice on written code. 
+
+
+
+-> not considered for the moment, the "GraphPad Prism" case, where the name of the software is actually Prism and its editor is GraphPad, it should be annotated like the "Microsoft Excel" case.
+
+<rs id="software-1" type="software">GraphPad Prism</rs> <rs corresp="#software-1" type="version">5</rs> software (<rs corresp="#software-1" type="creator">GraphPad Software, Inc</rs>., La Jolla, CA, USA).
+
+On the other hand "Lotus Notes" is always identified as such, and not as "notes" from Lotus Inc. (though it is now IBM Notes, but i's another story).
+
+
+
+-> confusion method/software
+
+for instance in PMC4927739, cathodoluminescence (CL) is a physical reaction used as a measurement method. CL is not a software in the following: 
+
+> Start the <rs type="software">CL</rs> control program 
+
+The software is not named, it controls the cathodoluminescence. 
+
+Same for cross-correlation electron backscatter diffraction (ccEBSD):
+
+> Open the <rs type="software">EBSD</rs> control software and load the calibration file for the chosen WD. 8. Set up the measurement in the <rs type="software">EBSD</rs> control software according to the operating manual
+
+The software is not named EBSD! There is a software mention, but it remains unnamed. 
+
+Some non-software cases are obvious (PMC1933234): 
+
+> Several software were used by different authors to identify these particular repeats but usually a manual discard of background was necessary, and generally some <rs type="software">CRISPR</rs> clusters were missed or neglected, especially the shortest one (less than three motifs).
+
+
+
+
+-> R package name are annotated as one entity (not two, one for R and one for the package):
+
+using the <rs type="software">R package proCIs</rs>
+
+reason is for facilitating further disambiguation/matching of the software.
+

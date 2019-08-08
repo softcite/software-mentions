@@ -140,12 +140,12 @@ public class FieldNormalizer {
         software = removeLeadingAndTrailing(software, "()[],;.’“\"");
 
         // remove extra ending "software" word which brings nothing and is not consistently annotated
-        if (software.endsWith("software")) {
+        /*if (software.endsWith("software")) {
             software = software.substring(0,software.length()-8).trim();
             // we remove a possible "and"
             if (software.endsWith("and")) 
                 software = software.substring(0,software.length()-3).trim();
-        }
+        }*/
 
         return software.trim();
     }

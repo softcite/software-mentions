@@ -1,4 +1,4 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC3630384" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-07-12T00:48+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
+<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="PMC3630384" /><encodingDesc><appInfo><application version="0.5.6-SNAPSHOT" ident="GROBID" when="2019-07-14T13:49+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader>
 <text xml:lang="en">
 <p>In cancer genome studies, the annotation of newly detected oncogene/tumor suppressor gene candidates is a challenging 
 process. We propose using concept lattice analysis for the annotation and interpretation of genes having candidate somatic 
@@ -64,12 +64,12 @@ myeloid leukemia. </p>
 
 <p>teristic data. We aligned the sequencing reads to the human 
 reference genome (hg 19, GRCh37) from USCC by <rs id="software-11" type="software">BWA</rs> 
-<rs corresp="#software-11" type="version-number">0.6.2</rs> [12] (Figs. 1 and 2). To filter the known single nucle-
+<rs corresp="#software-11" type="version">0.6.2</rs> [12] (Figs. 1 and 2). To filter the known single nucle-
 otide polymorphisms (SNPs), we used dbSNP bulid 137. We 
 removed PCR duplicates and filtering low-quality SNPs by 
-<rs id="software-8" type="software">Samtools</rs> <rs corresp="#software-8" type="version-number">0.1.18</rs> [13], <rs id="software-9" type="software">Picard</rs> <rs corresp="#software-9" type="version-number">1.68</rs> [14], and <rs id="software-10" type="software">GATK</rs> <rs corresp="#software-10" type="version-number">2.3.4</rs> 
+<rs id="software-8" type="software">Samtools</rs> <rs corresp="#software-8" type="version">0.1.18</rs> [13], <rs id="software-9" type="software">Picard</rs> <rs corresp="#software-9" type="version">1.68</rs> [14], and <rs id="software-10" type="software">GATK</rs> <rs corresp="#software-10" type="version">2.3.4</rs> 
 [15]. After the filtering process, the SAM file was converted 
-to VCF file by <rs id="software-15" type="software">VCF Tools</rs> <rs corresp="#software-15" type="version-number">0.1.10</rs> [16]. For detecting somatic 
+to VCF file by <rs id="software-15" type="software">VCF Tools</rs> <rs corresp="#software-15" type="version">0.1.10</rs> [16]. For detecting somatic 
 mutation candidates, we obtained the difference in VCF files 
 between tumor and normal samples. For annotation of these 
 somatic mutation candidates, we used the ANNOVAR tool 

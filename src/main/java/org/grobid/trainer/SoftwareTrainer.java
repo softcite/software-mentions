@@ -73,7 +73,120 @@ public class SoftwareTrainer extends AbstractTrainer {
         return createCRFPPData(corpusDir, trainingOutputPath, evalOutputPath, splitRatio, true);
     }
 
+
+    /**
+     * CRF training data here are produced from the unique training TEI file containing labelled paragraphs only
+     */
     public int createCRFPPData(final File corpusDir,
+                               final File trainingOutputPath,
+                               final File evalOutputPath,
+                               double splitRatio,
+                               boolean splitRandom) {
+
+        int totalExamples = 0;
+        Writer writerTraining = null;
+        Writer writerEvaluation = null;
+        try {
+            System.out.println("labeled corpus path: " + corpusDir.getPath());
+            System.out.println("training data path: " + trainingOutputPath.getPath());
+            if (evalOutputPath != null)
+                System.out.println("evaluation data path: " + evalOutputPath.getPath());
+
+            // the file for writing the training data
+            writerTraining = new OutputStreamWriter(new FileOutputStream(trainingOutputPath), "UTF8");
+
+            // the file for writing the evaluation data
+            if (evalOutputPath != null)
+                writerEvaluation = new OutputStreamWriter(new FileOutputStream(evalOutputPath), "UTF8");
+
+            // the active writer
+            Writer writer = null;
+
+            // this ratio this the minimum proportion of token with non default label, it is used to 
+            // decide to keep or not a paragraph without any entities in the training data
+            //double ratioNegativeSample = 0.01;
+
+            // get a factory for SAX parser
+            SAXParserFactory spf = SAXParserFactory.newInstance();
+            SoftwareAnnotationSaxHandler handler = new SoftwareAnnotationSaxHandler();
+
+            File thefile = new File(corpusDir.getPath() + "/all.tei.xml");
+
+            if (!thefile.exists()) {
+
+            } else {
+                //get anew instance of parser
+                SAXParser p = spf.newSAXParser();
+                p.parse(thefile, handler);
+
+                List<List<Pair<String, String>>> allLabeled = handler.getLabeledResult();
+                //labeled = subSample(labeled, ratioNegativeSample);
+
+                int n = 0;
+                for(List<Pair<String, String>> labeled : allLabeled) {
+
+                    // we need to add now the features to the labeled tokens
+                    List<Pair<String, String>> bufferLabeled = null;
+                    int pos = 0;
+
+                    // segmentation into training/evaluation is done file by file
+                    if (splitRandom) {
+                        if (Math.random() <= splitRatio)
+                            writer = writerTraining;
+                        else
+                            writer = writerEvaluation;
+                    } else {
+                        if ((double) n / allLabeled.size() <= splitRatio)
+                            writer = writerTraining;
+                        else
+                            writer = writerEvaluation;
+                    }
+
+                    // let's iterate by defined CRF input (separated by new line)
+                    while (pos < labeled.size()) {
+                        bufferLabeled = new ArrayList<>();
+                        while (pos < labeled.size()) {
+                            if (labeled.get(pos).getA().equals("\n")) {
+                                pos++;
+                                break;
+                            }
+                            bufferLabeled.add(labeled.get(pos));
+                            pos++;
+                        }
+
+                        if (bufferLabeled.size() == 0)
+                            continue;
+
+                        List<OffsetPosition> softwareTokenPositions = softwareLexicon.tokenPositionsSoftwareNamesVectorLabeled(bufferLabeled);
+
+                        addFeatures(bufferLabeled, writer, softwareTokenPositions);
+                        writer.write("\n");
+                    }
+                    writer.write("\n");
+                    n++;
+                }
+            }
+        } catch (Exception e) {
+            throw new GrobidException("An exception occured while training GROBID.", e);
+        } finally {
+            try {
+                if (writerTraining != null)
+                    writerTraining.close();
+                if (writerEvaluation != null)
+                    writerEvaluation.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return totalExamples;
+    }
+
+
+    /**
+     * CRF training data here are produced from the training TEI files generated for each PDF file, containing 
+     * all content, labelled and unlabelled paragraphs. 
+     */
+    public int createCRFPPDataCollection(final File corpusDir,
                                final File trainingOutputPath,
                                final File evalOutputPath,
                                double splitRatio,
@@ -119,10 +232,12 @@ public class SoftwareTrainer extends AbstractTrainer {
                 for (int n = 0; n < refFiles.length; n++) {
                     File thefile = refFiles[n];
                     name = thefile.getName();
+                    if (name.equals("all.tei.xml"))
+                        continue;
                     //System.out.println(name);
                     //if (n > 100)
                     //    break;
-                    SoftwareAnnotationSaxHandler handler = new SoftwareAnnotationSaxHandler();
+                    SoftwareAnnotationCollectionSaxHandler handler = new SoftwareAnnotationCollectionSaxHandler();
 
                     //get a new instance of parser
                     SAXParser p = spf.newSAXParser();

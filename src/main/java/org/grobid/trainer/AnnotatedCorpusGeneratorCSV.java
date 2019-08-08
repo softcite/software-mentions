@@ -584,7 +584,8 @@ public class AnnotatedCorpusGeneratorCSV {
 
         // this is a TEI corpus file to represent all the annotated snippets, with a bit more 
         // of textual styling
-        Writer writerTEICorpus = new PrintWriter(new BufferedWriter(new FileWriter("doc/reports/all.tei.xml")));
+        //Writer writerTEICorpus = new PrintWriter(new BufferedWriter(new FileWriter("resources/dataset/software/corpus/all.tei.xml")));
+        Writer writerTEICorpus = new PrintWriter(new BufferedWriter(new FileWriter("doc/report/all.tei.xml")));
         writerTEICorpus.write(XMLUtilities.toPrettyString(builderTEICorpus.toString(), 4));
         writerTEICorpus.close();
 
@@ -860,7 +861,7 @@ public class AnnotatedCorpusGeneratorCSV {
                     // annotation for the version number
                     if ( (positionVersionNumber != null) && (!isOverlapping(occupiedPositions, positionVersionNumber)) ) {
                         versionNumberInlineAnnotation = new Annotation();
-                        versionNumberInlineAnnotation.addAttributeValue("type", "version-number");
+                        versionNumberInlineAnnotation.addAttributeValue("type", "version");
                         versionNumberInlineAnnotation.addAttributeValue("corresp", "#software-"+annotationIndex);
                         correspPresent = true;
                         versionNumberInlineAnnotation.setText(versionNumber);
@@ -918,7 +919,7 @@ public class AnnotatedCorpusGeneratorCSV {
                         (!isOverlapping(occupiedPositions, positionVersionDate)) &&
                         (!isOverlappingTokens(citationCalloutTokens, layoutTokensVersionDate))) {
                         versionDateInlineAnnotation = new Annotation();
-                        versionDateInlineAnnotation.addAttributeValue("type", "version-date");
+                        versionDateInlineAnnotation.addAttributeValue("type", "version");
                         versionDateInlineAnnotation.addAttributeValue("corresp", "#software-"+annotationIndex);
                         correspPresent = true;
                         versionDateInlineAnnotation.setText(versionDate);
@@ -948,7 +949,7 @@ public class AnnotatedCorpusGeneratorCSV {
                 // annotation for the creator
                 String creator = annotation.getCreator();
                 Annotation creatorInlineAnnotation = null;
-                if (creator != null) {
+                if ((creator != null) && (creator.trim().length()>0)) {
                     FastMatcher matcher2 = new FastMatcher();
                     matcher2.loadTerm(creator, SoftwareAnalyzer.getInstance(), true, false); // not case sensitive
                     // case sensitive matching, ignore standard delimeters
@@ -1413,7 +1414,7 @@ System.out.print("\n");*/
 
     /**
      *  Add XML annotations corresponding to entities in a piece of text, to be included in
-     *  generated training data.
+     *  generated full training data (one file per document).
      */
     public Element insertAnnotations(List<LayoutToken> tokenizations, 
                                      List<Integer> toExclude, 
@@ -1602,7 +1603,9 @@ System.out.print("\n");*/
                         }
                     } else if (i == 4) {
                         if (attribute.equals("software_name")) {
-                            annotation.setSoftwareMention(fieldNormalizer.normalizeSoftwareName(value));
+                            //annotation.setSoftwareMention(value);
+                            annotation.setSoftwareMention(FieldNormalizer.removeLeadingAndTrailing(value, "`’“\""));
+                            //annotation.setSoftwareMention(fieldNormalizer.normalizeSoftwareName(value));
                         }
                         else if (attribute.equals("version_number")) {
                             annotation.setVersionNumber(fieldNormalizer.normalizeVersionNumber(value));
@@ -1615,7 +1618,6 @@ System.out.print("\n");*/
                             // we filter obvious reference person names (not reliable nor consistent)
                             if (value.toLowerCase().indexOf("et al") == -1 || value.toLowerCase().indexOf("et. al") == -1) {
                                 annotation.setCreator(fieldNormalizer.normalizeCreator(value));
-                                //annotation.setCreator(value);
                             }
                         }
                         else {

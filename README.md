@@ -109,7 +109,6 @@ For evaluating under the labeled data under ```grobid-astro/resources/dataset/so
 
 The grobid home can be optionally specified with parameter `-PgH`. By default it will take `../grobid-home`  
 
-
 ### Training and evaluating with automatic corpus split
 
 The following commands will split automatically and randomly the available annotated data (under ```resources/dataset/software/corpus/```) into a training set and an evaluation set, train a model based on the first set and launch an evaluation based on the second set. 
@@ -119,8 +118,7 @@ The following commands will split automatically and randomly the available annot
 ```
 
 In this mode, by default, 90% of the available data is used for training and the remaining for evaluation. This default ratio can be changed with the parameter `-Ps`. By default, the training will use the available number of threads of the machine, but it can also be specified by the parameter `-Pt`.
-The grobid home can be optionally specified with parameter `-PgH`. By default it will take `../grobid-home`  
-
+The grobid home can be optionally specified with parameter `-PgH`. By default it will take `../grobid-home`. 
 
 ## Training data import
 
@@ -133,7 +131,6 @@ The source of training data is the [softcite dataset](https://github.com/howison
 ```
 
 The path to the PDF repo is the path where the PDF corresponding to the annotated document will be downloaded (done only the first time). For instance:
-
 
 ```
 > ./gradlew annotated_corpus_generator_csv -Ppdf=/home/lopez/repository/softcite-dataset/pdf/ -Pcsv=/home/lopez/tools/softcite-dataset/data/csv_dataset/ -Poutput=resources/dataset/software/corpus/
