@@ -113,9 +113,9 @@ public class SoftwareTrainer extends AbstractTrainer {
             File thefile = new File(corpusDir.getPath() + "/all.tei.xml");
 
             if (!thefile.exists()) {
-
+                System.out.println("The XML TEI corpus training document does not exist: " + corpusDir.getPath() + "/all.tei.xml");
             } else {
-                //get anew instance of parser
+                //get a new instance of parser
                 SAXParser p = spf.newSAXParser();
                 p.parse(thefile, handler);
 

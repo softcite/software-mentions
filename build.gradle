@@ -207,7 +207,7 @@ wrapper {
 
 // Custom Tasks
 
-// Run like: ./gradlew eval_software -PgH=/path/grobid/home
+// Run like this: ./gradlew eval_software -PgH=/path/grobid/home
 task(trainer, dependsOn: 'classes', type: JavaExec, group: 'training') {
     main = 'org.grobid.trainer.SoftwareTrainerRunner'
     classpath = sourceSets.main.runtimeClasspath
@@ -215,7 +215,7 @@ task(trainer, dependsOn: 'classes', type: JavaExec, group: 'training') {
 //    jvmArgs '-Xms2g', '-Xmx8g'
 }
 
-// Run like: ./gradlew train_software -PgH=/path/grobid/home 
+// Run like this: ./gradlew train_software -PgH=/path/grobid/home 
 task(train_software, dependsOn: 'classes', type: JavaExec, group: 'training') {
     main = 'org.grobid.trainer.SoftwareTrainer'
     classpath = sourceSets.main.runtimeClasspath
@@ -223,7 +223,7 @@ task(train_software, dependsOn: 'classes', type: JavaExec, group: 'training') {
 //    jvmArgs '-Xms2g', '-Xmx8g'
 }
 
-// Run like: ./gradlew eval_software -PgH=/path/grobid/home
+// Run like this: ./gradlew eval_software -PgH=/path/grobid/home
 task(eval_software, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
     main = 'org.grobid.trainer.SoftwareTrainerRunner'
     classpath = sourceSets.main.runtimeClasspath
@@ -231,7 +231,7 @@ task(eval_software, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
 //    jvmArgs '-Xms2g', '-Xmx8g'
 }
 
-// Run like: ./gradlew eval_software_split -PgH=/path/grobid/home -Ps=0.8 -Pt=10
+// Run like this: ./gradlew eval_software_split -PgH=/path/grobid/home -Ps=0.8 -Pt=10
 task(eval_software_split, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
     main = 'org.grobid.trainer.SoftwareTrainerRunner'
     classpath = sourceSets.main.runtimeClasspath
@@ -239,7 +239,7 @@ task(eval_software_split, dependsOn: 'classes', type: JavaExec, group: 'evaluati
     jvmArgs '-Xms2g', '-Xmx8g'
 }
 
-// Run like: ./gradlew annotated_corpus_generator_csv -Ppdf=/path/input/pdf -Pcsv=path/csv -Poutput=/output/directory
+// Run like this: ./gradlew annotated_corpus_generator_csv -Ppdf=/path/input/pdf -Pcsv=path/csv -Poutput=/output/directory
 task(annotated_corpus_generator_csv, dependsOn: 'classes', type: JavaExec, group: 'import') {
     main = 'org.grobid.trainer.AnnotatedCorpusGeneratorCSV'
     classpath = sourceSets.main.runtimeClasspath
@@ -247,7 +247,7 @@ task(annotated_corpus_generator_csv, dependsOn: 'classes', type: JavaExec, group
     jvmArgs '-Xms2g', '-Xmx8g'
 }
 
-// Run like: ./gradlew export_corpus_json -Pinput=/path/input/in.tei.xml -Poutput=/path/output/out.json
+// Run like this: ./gradlew export_corpus_json -Pinput=/path/input/in.tei.xml -Poutput=/path/output/out.json
 task(export_corpus_json, dependsOn: 'classes', type: JavaExec, group: 'export') {
     main = 'org.grobid.trainer.ExportCorpusJson'
     classpath = sourceSets.main.runtimeClasspath
@@ -255,3 +255,10 @@ task(export_corpus_json, dependsOn: 'classes', type: JavaExec, group: 'export') 
     jvmArgs '-Xms2g', '-Xmx8g'
 }
 
+// Run like this: ./gradlew clean_tei_corpus_file -Ptei=/path/input/tei 
+task(clean_tei_corpus_file, dependsOn: 'classes', type: JavaExec, group: 'import') {
+    main = 'org.grobid.core.utilities.XMLUtilities'
+    classpath = sourceSets.main.runtimeClasspath
+    args getArg('xml', 'resources/dataset/software/corpus/all.tei.xml')
+    jvmArgs '-Xms2g', '-Xmx8g'
+}
