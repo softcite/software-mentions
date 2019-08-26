@@ -533,3 +533,28 @@ using the <rs type="software">R package proCIs</rs>
 
 reason is for facilitating further disambiguation/matching of the software.
 
+
+
+-> "XYZ for Windows", "Windows" here is not annotated (it is some additional information on the version used of another software XYZ, and the fact that it is usually introduced in the middle of the mention of another software with several components makes a readable annotation impossible), but when Windows is cited as such (as an operating system), we annotate its mention. For example: 
+  
+    Convertible tablets, for which <rs type="software">Windows</rs> was the dominant operating system, are being overwhelmed by the new popularity of slate tablets. 
+
+
+
+
+
+-> difficulty when the full software name (with acronym) is not continuous, for example: 
+
+    signals detected using <rs type="software" xml:id="PMC2649809-software-35">Affymetrix microarray suite</rs> version <rs corresp="#PMC2649809-software-35" type="version">5</rs> software (MAS5) for each probe were averaged over 21 caudate nucleus
+
+We leave "MAS5" (the acronym of "Affymetrix microarray suite") unannotated while it could be valuable for disambiguation. Currently software name are always considered as a continuous chunk. 
+
+
+
+
+-> Sometimes, name of the software publisher are used to refer to a software (PMC3534176):
+
+    calculates the area on the binary images that can be produced by <rs type="software">MathWorks</rs>.
+
+MathWorks is the company developing MATLAB (the correct name was introduced at the beginning of the paper, but a strange shift in referring expressions happened in the middle of the paper ;)
+
