@@ -69,6 +69,8 @@ bright = '\x1b[1m'
 bold_yellow = '\x1b[1;33m'
 reset = '\x1b[0m'
 
+pathout = "."
+
 type_to_process = ['software']
 
 def main(data_path, mode):
@@ -88,27 +90,29 @@ def main(data_path, mode):
         mode == 'standard'
 
     output = None
-    if mode is 'text':
+    if mode == 'text':
         # output in a text file (no color, so a bit of decorations to conpensate)
-        output = open(os.path.join(pathout, "eng.train"),'w+')
+        output = open(os.path.join(pathout, "consistency_analysis.txt"),'w+')
     # otherwise results are written in the standard output with console colors
 
     # catch all rs tags
     rs = [] # rs contain all rs values
     sfiles = "" # sfiles is all files in a string variable it serves at line 127
     files = [file_ for file_ in files if file_.endswith(".xml") ]
-    #print(files)
     for file in files:
         with open(data_path + os.sep + file, 'r') as file_:
             sfiles = sfiles + ''.join(file_.readlines())
+
         #try:
         tree = ET.ElementTree()
         tree.parse(data_path+os.sep+file)
         tree = tree.getroot()
-        for t in tree.findall(u"{http://www.tei-c.org/ns/1.0}text"):
-            for p in t.findall(u"{http://www.tei-c.org/ns/1.0}p"):
-                rs = rs + p.findall(u"{http://www.tei-c.org/ns/1.0}rs")
-
+        for d in tree.findall(u"{http://www.tei-c.org/ns/1.0}tei"):
+            for t in d.findall(u"{http://www.tei-c.org/ns/1.0}text"):
+                for b in t.findall(u"{http://www.tei-c.org/ns/1.0}body"):
+                    for p in b.findall(u"{http://www.tei-c.org/ns/1.0}p"):
+                        rs = rs + p.findall(u"{http://www.tei-c.org/ns/1.0}rs")
+    
     # the dictionary "ambiguous" contains the text annotation (string) as key and class (list) as values
     dic = {}
     for elt in rs:
@@ -137,7 +141,7 @@ def main(data_path, mode):
             if output is None:
                 print(bold_yellow, tok, reset, " ", dic[tok], "\n")
             else:
-                output.write(tok, "\n")
+                output.write("\n" + tok + " " + str(dic[tok]) + "\n")
             if len(tok) <= 2:
                 #print("\t-> object name too short !","\n")
                 continue
@@ -161,13 +165,15 @@ def main(data_path, mode):
                 if output is None:
                     print(res, "\n")
                 else:
-                    output.write(res, "\n")
+                    res = res.replace("[1;31m", "**")
+                    res = res.replace("[0m", "**")
+                    output.write("\n" + res + "\n")
             '''
             else:
                 if output is None:
                     print("\t-> nothing stinky found !","\n")
                 else:
-                    output.write("\t-> nothing stinky found !","\n")   
+                    output.write("\t-> nothing stinky found !\n")   
             '''
             
             #then print part where a dic key has multiple value
@@ -182,11 +188,11 @@ def main(data_path, mode):
                     if output is None:
                         print(class_, ": ", shortexample, "\n")
                     else:
-                        output.write(class_, ": ", shortexample, "\n")
+                        output.write("\n" + class_ + ": " + shortexample + "\n")
                 if output is None:
                     print("_____\n")
                 else:
-                    output.write("_____\n")
+                    output.write("\n_____\n")
         except Exception as e:
             print("Issue with key token:", tok)
             print(str(e))
