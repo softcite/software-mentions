@@ -543,6 +543,44 @@ Instance-level recall:      54.81
 
 
 
+Labeling took: 1878 ms
+
+===== Token-level results =====
+
+
+label                accuracy     precision    recall       f1     
+
+<creator>            99.82        89.67        77.22        82.98  
+<software>           99.49        88.2         73.25        80.03  
+<url>                99.53        70.29        69.01        69.65  
+<version>            99.86        90           90.78        90.39  
+
+all fields           99.68        84.45        76.53        80.3    (micro average)
+                     99.68        84.54        77.56        80.76   (macro average)
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1     
+
+<creator>            97.25        87.27        75           80.67  
+<software>           89.89        85.45        74.43        79.56  
+<url>                98.86        66.67        68.97        67.8   
+<version>            97.73        86.72        84.09        85.38  
+
+all fields           95.93        85.15        76.06        80.35   (micro average)
+                     95.93        81.53        75.62        78.35   (macro average)
+
+===== Instance-level results =====
+
+Total expected instances:   241
+Correct instances:          128
+Instance-level recall:      53.11
+
+Split, training and evaluation for software model is realized in 7491470 ms
+
+
+BUILD SUCCESSFUL in 2h 4m 53s
+
 
 
 

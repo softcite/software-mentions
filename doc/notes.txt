@@ -445,6 +445,7 @@ example:
 
 For FCS data processing we used the <rs id="software-6" type="software">Fluctuation Analyzer</rs> software (written by <rs corresp="#software-6" type="creator">Malte Wachsmuth</rs>, European Molecular Biology Laboratory, Heidelberg, Germany; available upon request).</p>
 
+In practice, without callout creator/version date, we don't have anymore person as software creator now. 
 
 
 -> quite a few biotech "hardware" device annotated as software - without consistency, e.g.:
@@ -558,3 +559,10 @@ We leave "MAS5" (the acronym of "Affymetrix microarray suite") unannotated while
 
 MathWorks is the company developing MATLAB (the correct name was introduced at the beginning of the paper, but a strange shift in referring expressions happened in the middle of the paper ;)
 
+
+
+-> in the corpus XML version, a few annotation guidelines have been changed
+- version number: we annotate only the version number or date, and remove all the functional/synctatic sugar (like version, v. etc.), this is to have a uniform annotations, it is easier to exclude automatically than add and for disambiguation, only the number is relevant so an additional version number cleaning step would have been necessary
+- for the software creator, usually an organization, address and company legal form are excluded
+motivation is same as above, in particular we want to avoid an arbitrary mixture of case including or excluding the address/country and additional post-processing step of the annotated string
+- programming language when used a language are normally not annotated, however they are annotated when used as implemented "framework" (R environment), C++ compiler. The problem was the lack of uniform annotations when used as a programming language (usually not annotated). 
