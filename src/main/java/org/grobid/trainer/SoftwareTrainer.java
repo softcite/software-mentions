@@ -631,11 +631,11 @@ public class SoftwareTrainer extends AbstractTrainer {
         File tmpEvalPath = getTempEvaluationDataPath();
         createCRFPPData(evalDataF, tmpEvalPath);
 
-        return EvaluationUtilities.evaluateStandard(tmpEvalPath.getAbsolutePath(), getTagger());
+        return EvaluationUtilities.evaluateStandard(tmpEvalPath.getAbsolutePath(), getTagger()).toString();
     }
 
     public String splitTrainEvaluate(Double split, boolean random) {
-        System.out.println("PAths :\n" + getCorpusPath() + "\n" + GrobidProperties.getModelPath(model).getAbsolutePath() + "\n" + getTempTrainingDataPath().getAbsolutePath() + "\n" + getTempEvaluationDataPath().getAbsolutePath() + " \nrand " + random);
+        System.out.println("Paths :\n" + getCorpusPath() + "\n" + GrobidProperties.getModelPath(model).getAbsolutePath() + "\n" + getTempTrainingDataPath().getAbsolutePath() + "\n" + getTempEvaluationDataPath().getAbsolutePath() + " \nrand " + random);
 
         File trainDataPath = getTempTrainingDataPath();
         File evalDataPath = getTempEvaluationDataPath();
@@ -659,7 +659,7 @@ public class SoftwareTrainer extends AbstractTrainer {
         // if we are here, that means that training succeeded
         renameModels(oldModelPath, tempModelPath);
 
-        return EvaluationUtilities.evaluateStandard(evalDataPath.getAbsolutePath(), getTagger());
+        return EvaluationUtilities.evaluateStandard(evalDataPath.getAbsolutePath(), getTagger()).toString();
     }
 
     protected final File getCorpusPath() {
@@ -687,10 +687,9 @@ public class SoftwareTrainer extends AbstractTrainer {
             System.err.println("GROBID software initialisation failed: " + exp);
             exp.printStackTrace();
         }
-
         Trainer trainer = new SoftwareTrainer();
         AbstractTrainer.runTraining(trainer);
-        AbstractTrainer.runEvaluation(trainer);
+        System.out.println(AbstractTrainer.runEvaluation(trainer));
         System.exit(0);
     }
 }
