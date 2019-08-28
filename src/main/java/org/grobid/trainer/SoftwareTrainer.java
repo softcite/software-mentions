@@ -688,7 +688,6 @@ public class SoftwareTrainer extends AbstractTrainer {
             exp.printStackTrace();
         }
         Trainer trainer = new SoftwareTrainer();
-        AbstractTrainer.runTraining(trainer);
         System.out.println(AbstractTrainer.runEvaluation(trainer));
         System.exit(0);
     }
