@@ -11,19 +11,19 @@ import org.grobid.core.layout.Block;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.layout.PDFAnnotation;
 import org.grobid.core.lexicon.SoftwareLexicon;
-import org.grobid.core.utilities.SoftwareProperties;
+import org.grobid.core.main.GrobidHomeFinder;
 import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.Pair;
+import org.grobid.core.utilities.SoftwareProperties;
 import org.grobid.trainer.evaluation.EvaluationUtilities;
-import org.grobid.core.main.GrobidHomeFinder;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Training of the software entity recognition model
@@ -631,7 +631,7 @@ public class SoftwareTrainer extends AbstractTrainer {
         File tmpEvalPath = getTempEvaluationDataPath();
         createCRFPPData(evalDataF, tmpEvalPath);
 
-        return EvaluationUtilities.evaluateStandard(tmpEvalPath.getAbsolutePath(), getTagger());
+        return EvaluationUtilities.evaluateStandard(tmpEvalPath.getAbsolutePath(), getTagger()).toString();
     }
 
     public String splitTrainEvaluate(Double split, boolean random) {
@@ -659,7 +659,7 @@ public class SoftwareTrainer extends AbstractTrainer {
         // if we are here, that means that training succeeded
         renameModels(oldModelPath, tempModelPath);
 
-        return EvaluationUtilities.evaluateStandard(evalDataPath.getAbsolutePath(), getTagger());
+        return EvaluationUtilities.evaluateStandard(evalDataPath.getAbsolutePath(), getTagger()).toString();
     }
 
     protected final File getCorpusPath() {
@@ -690,7 +690,7 @@ public class SoftwareTrainer extends AbstractTrainer {
 
         Trainer trainer = new SoftwareTrainer();
         AbstractTrainer.runTraining(trainer);
-        AbstractTrainer.runEvaluation(trainer);
+        System.out.println(AbstractTrainer.runEvaluation(trainer));
         System.exit(0);
     }
 }
