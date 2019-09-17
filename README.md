@@ -99,15 +99,7 @@ For training the software model with all the available training data:
 
 The training data must be under ```software-mentions/resources/dataset/software/corpus```. 
 
-### Evaluating only
 
-For evaluating under the labeled data under ```grobid-astro/resources/dataset/software/evaluation```, use the command:
-
-```
->  ./gradlew eval_software [-PgH=/path/grobid/home]
-```
-
-The grobid home can be optionally specified with parameter `-PgH`. By default it will take `../grobid-home`  
 
 ### Training and evaluating with automatic corpus split
 
@@ -117,8 +109,27 @@ The following commands will split automatically and randomly the available annot
 >  ./gradlew eval_software_split [-PgH=/custom/grobid/home -Ps=0.8 -Pt=10] 
 ```
 
-In this mode, by default, 90% of the available data is used for training and the remaining for evaluation. This default ratio can be changed with the parameter `-Ps`. By default, the training will use the available number of threads of the machine, but it can also be specified by the parameter `-Pt`.
-The grobid home can be optionally specified with parameter `-PgH`. By default it will take `../grobid-home`. 
+In this mode, by default, 90% of the available data is used for training and the remaining for evaluation. This default ratio can be changed with the parameter `-Ps`. By default, the training will use the available number of threads of the machine, but it can also be specified by the parameter `-Pt`. The grobid home can be optionally specified with parameter `-PgH`. By default it will take `../grobid-home`. 
+
+### Evaluation with n-fold
+
+For n-fold evaluation using the available annotated data (under ```resources/dataset/software/corpus/```), use the command:
+
+```
+>  ./gradlew eval_software_nfold [-PgH=/path/grobid/home -n=10 -Pt=10]
+```
+
+where `n` is the parameter for the number of folds, by default 10. Still by default, the training will use the available number of threads of the machine, but it can also be specified by the parameter `-Pt`. The grobid home can be optionally specified with parameter `-PgH`. By default it will take `../grobid-home`. 
+
+### Evaluating only
+
+For evaluating under the labeled data under ```grobid-astro/resources/dataset/software/evaluation``` (fixed "holdout set" approach), use the command:
+
+```
+>  ./gradlew eval_software [-PgH=/path/grobid/home]
+```
+
+The grobid home can be optionally specified with parameter `-PgH`. By default it will take `../grobid-home`  
 
 ## Training data import
 
