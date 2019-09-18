@@ -137,16 +137,7 @@ public class SoftwareTrainerRunner {
                 if(numFolds == 0) {
                     throw new IllegalArgumentException("N should be > 0");
                 }
-                /*if (StringUtils.isNotEmpty(outputFilePath)) {
-                    Path outputPath = Paths.get(outputFilePath);
-                    if (Files.exists(outputPath)) {
-                        System.err.println("Output file exists. ");
-                    }
-                } else */ 
-                {
-                    String results = AbstractTrainer.runNFoldEvaluation(trainer, numFolds);
-                    System.out.println(results);
-                }
+                System.out.println(AbstractTrainer.runNFoldEvaluation(trainer, numFolds));
                 break;
             default:
                 throw new IllegalStateException("Invalid RunType: " + mode.name());
