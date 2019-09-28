@@ -61,3 +61,95 @@ Total expected instances:   231.7
 Correct instances:          126.1
 Instance-level recall:      54.42
 
+
+
+
+
+
+---------------
+28.09.2019
+-------------------------------
+BidLSTM-CRF Gloves embeddings
+-------------------------------
+
+average over 10 folds
+              precision    recall  f1-score   support
+
+  <software>     0.7970    0.7521    0.7737       428
+   <creator>     0.7757    0.8248    0.7994       105
+   <version>     0.8855    0.9057    0.8955       140
+       <url>     0.2822    0.3600    0.3136        15
+
+    macro f1 = 0.7909
+    macro precision = 0.7962
+    macro recall = 0.7859 
+
+
+** Worst ** model scores -
+                  precision    recall  f1-score   support
+
+      <software>     0.7855    0.7103    0.7460       428
+       <version>     0.8811    0.9000    0.8905       140
+       <creator>     0.7589    0.8095    0.7834       105
+           <url>     0.1786    0.3333    0.2326        15
+
+all (micro avg.)     0.7761    0.7558    0.7658       688
+
+
+** Best ** model scores -
+                  precision    recall  f1-score   support
+
+      <software>     0.8173    0.7734    0.7947       428
+       <version>     0.8889    0.9143    0.9014       140
+       <creator>     0.8108    0.8571    0.8333       105
+           <url>     0.6000    0.6000    0.6000        15
+
+all (micro avg.)     0.8267    0.8110    0.8188       688
+
+
+
+
+
+
+
+Sept. 23th 2019
+-------------------------------------
+BidLSTM-CRF Gloves embeddings + ELMo
+-------------------------------------
+
+
+average over 10 folds
+              precision    recall  f1-score   support
+
+  <software>     0.8687    0.8072    0.8363       428
+   <creator>     0.8640    0.8781    0.8707       105
+   <version>     0.8961    0.8907    0.8933       140
+       <url>     0.6138    0.6400    0.6219        15
+
+    macro f1 = 0.8487
+    macro precision = 0.8672
+    macro recall = 0.8314 
+
+
+** Worst ** model scores -
+                  precision    recall  f1-score   support
+
+       <creator>     0.8142    0.8762    0.8440       105
+      <software>     0.8233    0.8271    0.8252       428
+           <url>     0.5789    0.7333    0.6471        15
+       <version>     0.8971    0.8714    0.8841       140
+
+all (micro avg.)     0.8295    0.8416    0.8355       688
+
+
+** Best ** model scores -
+                  precision    recall  f1-score   support
+
+       <creator>     0.9057    0.9143    0.9100       105
+      <software>     0.8675    0.8411    0.8541       428
+           <url>     0.6923    0.6000    0.6429        15
+       <version>     0.8794    0.8857    0.8826       140
+
+all (micro avg.)     0.8726    0.8561    0.8643       688
+
+
