@@ -32,12 +32,12 @@ public class SoftwareProcessString {
 	/**
 	 * Parse a raw date and return the corresponding normalized date.
 	 * 
-	 * @param the
-	 *            raw date string
+	 * @param text the raw date string
+	 * @param disambiguate if true, the extracted mention will be disambiguated
 	 * @return a response object containing the structured xml representation of
 	 *         the date
 	 */
-	public static Response processText(String text) {
+	public static Response processText(String text, boolean disambiguate) {
 		LOGGER.debug(methodLogIn());
 		Response response = null;
 		StringBuilder retVal = new StringBuilder();
@@ -48,7 +48,7 @@ public class SoftwareProcessString {
 			List<SoftwareEntity> entities = null;
 			text = text.replaceAll("\\n", " ").replaceAll("\\t", " ");
 			long start = System.currentTimeMillis();
-			entities = parser.processText(text);
+			entities = parser.processText(text, disambiguate);
 			long end = System.currentTimeMillis();
 
 			if (entities != null) {
@@ -87,6 +87,25 @@ public class SoftwareProcessString {
 		LOGGER.debug(methodLogOut());
 		return response;
 	}
+
+	/**
+     * Returns a string containing true, if the service is alive.
+     *
+     * @return a response object containing the string true if service
+     * is alive.
+     */
+    public static String isAlive() {
+        LOGGER.debug("called isAlive()...");
+
+        String retVal = null;
+        try {
+            retVal = Boolean.valueOf(true).toString();
+        } catch (Exception e) {
+            LOGGER.error("software-mention service is not alive, because of: ", e);
+            retVal = Boolean.valueOf(false).toString();
+        }
+        return retVal;
+    }
 
 	/**
 	 * @return

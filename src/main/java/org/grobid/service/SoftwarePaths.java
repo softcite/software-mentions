@@ -13,6 +13,11 @@ public interface SoftwarePaths {
     public static final String PATH_SOFTWARE = "/";
     
     /**
+     * path extension for is alive request.
+     */
+    String PATH_IS_ALIVE = "isalive";
+
+    /**
      * path extension for extracting software entities from a text.
      */
     public static final String PATH_SOFTWARE_TEXT= "processSoftwareText";

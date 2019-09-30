@@ -66,6 +66,7 @@ import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.conn.HttpHostConnectException;
 
 import static org.apache.commons.lang3.StringUtils.*;
 import static org.grobid.core.document.xml.XmlBuilderUtils.teiElement;
@@ -86,6 +87,8 @@ public class SoftwareDisambiguator {
     private static String nerd_host = null;
     private static String nerd_port = null;
 
+    private static boolean serverStatus = false;
+
     public static SoftwareDisambiguator getInstance() {
         if (instance == null) {
             getNewInstance();
@@ -104,12 +107,61 @@ public class SoftwareDisambiguator {
         try {
             nerd_host = SoftwareProperties.get("grobid.software.entity-fishing.host");
             nerd_port = SoftwareProperties.get("grobid.software.entity-fishing.port");
+
+            serverStatus = checkIfAlive();
         } catch(Exception e) {
             LOGGER.error("Cannot read properties for disambiguation service", e);
         }
     }
 
     private static int CONTEXT_WINDOW = 50;
+
+    /**
+     * Check if the disambiguation service is available using its isalive status service
+     */
+    public boolean checkIfAlive() {
+        boolean result = false;
+
+        try {
+            URL url = null;
+            if ( (nerd_port != null) && (nerd_port.length() > 0) )
+                url = new URL("http://" + nerd_host + ":" + nerd_port + "/service/isalive");
+            else
+                url = new URL("http://" + nerd_host + "/service/isalive");
+
+            System.out.println("Calling: " + url.toString());
+            CloseableHttpClient httpClient = HttpClients.createDefault();
+            HttpGet get = new HttpGet(url.toString());
+
+            CloseableHttpResponse response = null;
+            Scanner in = null;
+            try {
+                response = httpClient.execute(get);
+                // System.out.println(response.getStatusLine());
+
+                int code = response.getStatusLine().getStatusCode();
+                if (code != 200) {
+                    LOGGER.error("Failed isalive service: HTTP error code : " + code);
+                    return false;
+                } else {
+                    result = true;
+                }
+            } finally {
+                if (in != null)
+                    in.close();
+                if (response != null)
+                    response.close();
+            }
+        } catch (MalformedURLException e) {
+            LOGGER.error("disambiguation service not available: MalformedURLException");
+        } catch (HttpHostConnectException e) {
+            LOGGER.error("cannot connect to the disambiguation service");
+        } catch(Exception e) {
+            LOGGER.error("disambiguation service not available", e);
+        }
+
+        return result;
+    }
 
     /**
      * Disambiguate against Wikidata a list of raw entities extracted from text 
@@ -280,6 +332,9 @@ System.out.println("filtered entity: " + wikidataId);
      * @return the resulting disambiguated context in JSON or null
      */
     public String runNerd(List<SoftwareEntity> entities, List<LayoutToken> subtokens, String lang) throws RuntimeException {
+        if (!serverStatus)
+            return null;
+
         StringBuffer output = new StringBuffer();
         try {
             URL url = null;

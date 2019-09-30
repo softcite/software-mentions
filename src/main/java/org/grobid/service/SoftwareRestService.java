@@ -58,27 +58,51 @@ public class SoftwareRestService implements SoftwarePaths {
         LOGGER.info("Init of Servlet SoftwareRestService finished.");
     }
 
+    /**
+     * @see org.grobid.service.process.GrobidRestProcessGeneric#isAlive()
+     */
+    @Path(PATH_IS_ALIVE)
+    @Produces(MediaType.TEXT_PLAIN)
+    @GET
+    public Response isAlive() {
+        return Response.status(Response.Status.OK).entity(SoftwareProcessString.isAlive()).build();
+    }
+
     @Path(PATH_SOFTWARE_TEXT)
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     @POST
-    public Response processText_post(@FormParam(TEXT) String text) {
-        LOGGER.info(text);
-        return SoftwareProcessString.processText(text);
+    public Response processText_post(@FormParam(TEXT) String text, 
+                                     @DefaultValue("0") @FormParam(TEXT) String disambiguate) {
+        LOGGER.info(text); 
+        boolean disambiguateBoolean = validateBooleanRawParam(disambiguate);
+        return SoftwareProcessString.processText(text, disambiguateBoolean);
     }
 
     @Path(PATH_SOFTWARE_TEXT)
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     @GET
-    public Response processText_get(@QueryParam(TEXT) String text) {
+    public Response processText_get(@QueryParam(TEXT) String text, 
+                                    @DefaultValue("0") @QueryParam(TEXT) String disambiguate) {
         LOGGER.info(text);
-        return SoftwareProcessString.processText(text);
+        boolean disambiguateBoolean = validateBooleanRawParam(disambiguate);
+        return SoftwareProcessString.processText(text, disambiguateBoolean);
     }
 	
 	@Path(PATH_ANNOTATE_SOFTWARE_PDF)
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces("application/json")
 	@POST
-	public Response processPDFAnnotation(@FormDataParam(INPUT) InputStream inputStream) {
-		return SoftwareProcessFile.processPDFAnnotation(inputStream);
+	public Response processPDFAnnotation(@FormDataParam(INPUT) InputStream inputStream, 
+                                         @DefaultValue("0") @FormDataParam(TEXT) String disambiguate) {
+        boolean disambiguateBoolean = validateBooleanRawParam(disambiguate);
+		return SoftwareProcessFile.processPDFAnnotation(inputStream, disambiguateBoolean);
 	}
+
+    private boolean validateBooleanRawParam(String raw) {
+        boolean result = false;
+        if ((raw != null) && (raw.equals("1") || raw.toLowerCase().equals("true"))) {
+            result = true;
+        }
+        return result;
+    }
 }

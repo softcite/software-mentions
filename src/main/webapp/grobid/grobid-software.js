@@ -148,17 +148,20 @@ var grobid = (function ($) {
         var selected = $('#selectedService option:selected').attr('value');
         if (selected == 'processSoftwareText') {
             var urlLocal = $('#gbdForm').attr('action');
-            {
-                $.ajax({
-                    type: 'GET',
-                    url: urlLocal,
-                    data: {text: $('#inputTextArea').val()},
-                    success: SubmitSuccesful,
-                    error: AjaxError,
-                    contentType: false
-                    //dataType: "text"
-                });
-            }
+            if ($("#disambiguate").is(":checked"))  
+                disambiguateVal = '1';
+            else
+                disambiguateVal = '0';
+            
+            $.ajax({
+                type: 'GET',
+                url: urlLocal,
+                data: {text: $('#inputTextArea').val(), disambiguate: disambiguateVal},
+                success: SubmitSuccesful,
+                error: AjaxError,
+                contentType: false
+                //dataType: "text"
+            });
         }
         else if (selected == 'annotateSoftwarePDF') {
             // we will have JSON annotations to be layered on the PDF
@@ -166,6 +169,10 @@ var grobid = (function ($) {
             // request for the annotation information
             var form = document.getElementById('gbdForm');
             var formData = new FormData(form);
+
+            if (!$("#disambiguate").is(":checked"))  
+                formData.append('disambiguate', '0');
+
             var xhr = new XMLHttpRequest();
             var url = $('#gbdForm').attr('action');
             xhr.responseType = 'json'; 

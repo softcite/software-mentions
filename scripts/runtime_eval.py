@@ -46,7 +46,7 @@ import json
 import requests
 import time
 import concurrent.futures
-from client import ApiClient
+#from client import ApiClient
 
 # for making console output less boring
 green = '\x1b[32m'
@@ -69,14 +69,16 @@ def run_eval_pdf(pdf_repo_path, config, nb_threads=1):
 
     batch_size_pdf = config['batch_size']
     pdf_files = []
+    nb_files = 0
 
-    for (dirpath, dirnames, filenames) in os.walk(input2):
+    for (dirpath, dirnames, filenames) in os.walk(pdf_repo_path):
         for filename in filenames:
             if filename.endswith('.pdf') or filename.endswith('.PDF'): 
                 pdf_files.append(os.sep.join([dirpath, filename]))
+                nb_files += 1
 
                 if len(pdf_files) == batch_size_pdf:
-                    process_batch_pdf(pdf_files, output, n, service, generateIDs, consolidate_header, consolidate_citations, force, teiCoordinates)
+                    process_batch_pdf(pdf_files, config, nb_threads)
                     pdf_files = []
 
     # last batch
@@ -85,7 +87,7 @@ def run_eval_pdf(pdf_repo_path, config, nb_threads=1):
 
     runtime = round(time.time() - start_time, 3)
     print("runtime: %s seconds " % (runtime))
-
+    print("pdf files/s:", nb_files/runtime)
 
 def process_batch_pdf(pdf_files, config, nb_threads=1):
     print(len(pdf_files), "PDF files to process")
@@ -96,7 +98,7 @@ def process_batch_pdf(pdf_files, config, nb_threads=1):
 
 def process_pdf(pdf_file, config):
     # we use ntpath here to be sure it will work on Windows too
-    pdf_file_name = ntpath.basename(pdf_file)
+    #pdf_file_name = ntpath.basename(pdf_file)
 
     print(pdf_file)
     files = {
@@ -113,12 +115,22 @@ def process_pdf(pdf_file, config):
         the_url += ":"+config['grobid_port']
     the_url += "/annotateSoftwarePDF"
 
+    the_data = {}
+    the_data['disambiguate'] = '0'
+
+    response = requests.post(the_url, files=files, data=the_data)
+    
+    status = response.status_code
+
+    '''
     client = ApiClient()
     res, status = client.post(
         url=the_url,
         files=files,
+        data=the_data,
         headers={'Accept': 'text/plain'}
     )
+    '''
 
     if status == 503:
         time.sleep(config['sleep_time'])
@@ -185,6 +197,7 @@ def process_txt(text, config):
 
     the_data = {}
     the_data['text'] = text
+    the_data['disambiguate'] = '0'
 
     #print(the_url)
     #print(the_data)

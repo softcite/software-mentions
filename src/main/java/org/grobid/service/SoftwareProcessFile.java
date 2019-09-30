@@ -58,9 +58,10 @@ public class SoftwareProcessFile {
      * Uploads the origin PDF, process it and return PDF annotations for references in JSON.
      *
      * @param inputStream the data of origin PDF
+     * @param disambiguate if true, the extracted mention will be disambiguated
      * @return a response object containing the JSON annotations
      */
-	public static Response processPDFAnnotation(final InputStream inputStream) {
+	public static Response processPDFAnnotation(final InputStream inputStream, boolean disambiguate) {
         LOGGER.debug(methodLogIn()); 
         Response response = null;
         File originFile = null;
@@ -77,7 +78,7 @@ public class SoftwareProcessFile {
                 response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
             } else {
                 long start = System.currentTimeMillis();
-                Pair<List<SoftwareEntity>, Document> extractedEntities = parser.processPDF(originFile);
+                Pair<List<SoftwareEntity>, Document> extractedEntities = parser.processPDF(originFile, disambiguate);
                 long end = System.currentTimeMillis();
 
                 Document doc = extractedEntities.getRight();

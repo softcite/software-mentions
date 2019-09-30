@@ -93,7 +93,7 @@ public class SoftwareParser extends AbstractParser {
     /**
      * Extract all Software mentions from a simple piece of text.
      */
-    public List<SoftwareEntity> processText(String text) throws Exception {
+    public List<SoftwareEntity> processText(String text, boolean disambiguate) throws Exception {
         if (isBlank(text)) {
             return null;
         }
@@ -124,7 +124,8 @@ public class SoftwareParser extends AbstractParser {
             entities = groupByEntities(components);
 
             // disambiguation
-            entities = disambiguator.disambiguate(entities, tokens);
+            if (disambiguate)
+                entities = disambiguator.disambiguate(entities, tokens);
 
             // propagate
             // we prepare a matcher for all the identified software names 
@@ -144,9 +145,9 @@ public class SoftwareParser extends AbstractParser {
     }
 
 	/**
-	  * Extract all Software mentions from a pdf file, with 
+	  * Extract all Software mentions from a pdf file 
 	  */
-    public Pair<List<SoftwareEntity>,Document> processPDF(File file) throws IOException {
+    public Pair<List<SoftwareEntity>,Document> processPDF(File file, boolean disambiguate) throws IOException {
 
         List<SoftwareEntity> entities = new ArrayList<SoftwareEntity>();
         Document doc = null;
@@ -191,19 +192,19 @@ public class SoftwareParser extends AbstractParser {
                     // title
                     List<LayoutToken> titleTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_TITLE);
                     if (titleTokens != null) {
-                        processLayoutTokenSequence(titleTokens, entities);
+                        processLayoutTokenSequence(titleTokens, entities, disambiguate);
                     } 
 
                     // abstract
                     List<LayoutToken> abstractTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_ABSTRACT);
                     if (abstractTokens != null) {
-                        processLayoutTokenSequence(abstractTokens, entities);
+                        processLayoutTokenSequence(abstractTokens, entities, disambiguate);
                     } 
 
                     // keywords
                     List<LayoutToken> keywordTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_KEYWORD);
                     if (keywordTokens != null) {
-                        processLayoutTokenSequence(keywordTokens, entities);
+                        processLayoutTokenSequence(keywordTokens, entities, disambiguate);
                     }
                 }
             }
@@ -244,7 +245,7 @@ public class SoftwareParser extends AbstractParser {
                         //String clusterContent = LayoutTokensUtil.normalizeText(LayoutTokensUtil.toText(cluster.concatTokens()));
                         if (clusterLabel.equals(TaggingLabels.PARAGRAPH) || clusterLabel.equals(TaggingLabels.ITEM)) {
                             //|| clusterLabel.equals(TaggingLabels.SECTION) {
-                            processLayoutTokenSequence(localTokenization, entities);
+                            processLayoutTokenSequence(localTokenization, entities, disambiguate);
                         } else if (clusterLabel.equals(TaggingLabels.TABLE)) {
                             //processLayoutTokenSequenceTableFigure(localTokenization, entities);
                         } else if (clusterLabel.equals(TaggingLabels.FIGURE)) {
@@ -495,26 +496,29 @@ public class SoftwareParser extends AbstractParser {
      */
     private List<SoftwareEntity> processDocumentPart(SortedSet<DocumentPiece> documentParts, 
                                                   Document doc,
-                                                  List<SoftwareEntity> entities) {
+                                                  List<SoftwareEntity> entities,
+                                                  boolean disambiguate) {
         List<LayoutToken> tokenizationParts = doc.getTokenizationParts(documentParts, doc.getTokenizations());
-        return processLayoutTokenSequence(tokenizationParts, entities);
+        return processLayoutTokenSequence(tokenizationParts, entities, disambiguate);
     }
 
     /**
      * Process with the software model an arbitrary sequence of LayoutToken objects
      */ 
     private List<SoftwareEntity> processLayoutTokenSequence(List<LayoutToken> layoutTokens, 
-                                                            List<SoftwareEntity> entities) {
+                                                            List<SoftwareEntity> entities,
+                                                            boolean disambiguate) {
         List<LayoutTokenization> layoutTokenizations = new ArrayList<LayoutTokenization>();
         layoutTokenizations.add(new LayoutTokenization(layoutTokens));
-        return processLayoutTokenSequences(layoutTokenizations, entities);
+        return processLayoutTokenSequences(layoutTokenizations, entities, disambiguate);
     }
 
     /**
      * Process with the software model a set of arbitrary sequence of LayoutTokenization
      */ 
     private List<SoftwareEntity> processLayoutTokenSequences(List<LayoutTokenization> layoutTokenizations, 
-                                                  List<SoftwareEntity> entities) {
+                                                  List<SoftwareEntity> entities, 
+                                                  boolean disambiguate) {
         for(LayoutTokenization layoutTokenization : layoutTokenizations) {
             List<LayoutToken> layoutTokens = layoutTokenization.getTokenization();
             layoutTokens = SoftwareAnalyzer.getInstance().retokenizeLayoutTokens(layoutTokens);
@@ -539,7 +543,8 @@ public class SoftwareParser extends AbstractParser {
             List<SoftwareEntity> localEntities = groupByEntities(components);
 
             // disambiguation
-            localEntities = disambiguator.disambiguate(localEntities, layoutTokens);
+            if (disambiguate)
+                localEntities = disambiguator.disambiguate(localEntities, layoutTokens);
 
             entities.addAll(localEntities);
         }
@@ -551,7 +556,8 @@ public class SoftwareParser extends AbstractParser {
      * from tables and figures, where the content is not structured (yet)
      */ 
     private List<SoftwareEntity> processLayoutTokenSequenceTableFigure(List<LayoutToken> layoutTokens, 
-                                                  List<SoftwareEntity> entities) {
+                                                  List<SoftwareEntity> entities, 
+                                                  boolean disambiguate) {
 
         layoutTokens = SoftwareAnalyzer.getInstance().retokenizeLayoutTokens(layoutTokens);
 
@@ -588,7 +594,8 @@ public class SoftwareParser extends AbstractParser {
             List<SoftwareEntity> localEntities = groupByEntities(components);
 
             // disambiguation
-            localEntities = disambiguator.disambiguate(localEntities, localLayoutTokens);
+            if (disambiguate)
+                localEntities = disambiguator.disambiguate(localEntities, localLayoutTokens);
 
             entities.addAll(localEntities);
 
