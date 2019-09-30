@@ -166,14 +166,14 @@ Artstein, R., & Poesio, M. (2008). [Inter-coder agreement for computational ling
 A Python 3.* script is available under `script/` to analyse XML training data and spot possible unconsistencies to review. To launch the script: 
 
 ```
-> python3 script/consistency.py _absolute_path_to_training_directory_
+> python3 scripts/consistency.py _absolute_path_to_training_directory_
 ```
 
 For instance: 
 
 
 ```
-> python3 script/consistency.py /home/lopez/grobid/software-mentions/resources/dataset/software/corpus/
+> python3 scripts/consistency.py /home/lopez/grobid/software-mentions/resources/dataset/software/corpus/
 ```
 
 See the description of the output directly in the header of the `script/consistency.py` file. 
@@ -186,6 +186,53 @@ For generating training data in XML/TEI, based on the current model, from a list
 ```
 > java -Xmx4G -jar target/software-mentions/-0.5.1-SNAPSHOT.onejar.jar -gH ../grobid-home -dIn ~/test_software/ -dOut ~/test_software/out/ -exe createTraining
 ```
+
+## Runtime benchmark
+
+A python script is available for benchmarking the services. The main motivation is to evaluation the runtime of the different machine learning models from an end-to-end perspective and on a similar hardware. 
+
+By default, the text content for the benchmark is taken from the xml files from the training/eval directory under `resources/dataset/software/corpus`, to call the script for evaluation the text processing service:
+
+```bash
+> cd scripts/
+> python3 runtime_eval.py
+software-mention server is up and running
+1000 texts to process
+1000 texts to process
+317 texts to process
+-----------------------------
+nb xml files: 1
+nb texts: 2317
+nb tokens: 962875
+-----------------------------
+total runtime: 38.769 seconds 
+-----------------------------
+xml files/s:     0.0258
+    texts/s:     59.7642
+   tokens/s:     24836.2093
+```
+
+optionally you can provide a path to a particular repository of XML files in order to benchmark the text processing processing:
+
+> python3 runtime_eval.py --xml-repo /my/xml/directory/
+
+For benchmarking PDF processing, you need to provide a path to a repository of PDF in order to benchmark PDF processing:
+
+> python3 runtime_eval.py --pdf-repo /the/path/to/the/pdf/directory
+
+By default the config file `./config.json` will be used, but you can also set a particular config file with the parameter `--config`:
+
+> python3 runtime_eval.py --config ./my_config.json
+
+The config file gives the hostname and port of the software-mention service to be used. Default values are service default values (localhost:8060).
+
+Last but not least, you can indicate the number of thread to be used for querying the service in parallel:
+
+> python3 runtime_eval.py --threads 10
+
+The default value is 1, so there is no parallelization in the call to the service by default.  
+
+Tested with python 3.*
 
 
 ## License

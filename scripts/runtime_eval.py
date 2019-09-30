@@ -97,9 +97,6 @@ def process_batch_pdf(pdf_files, config, nb_threads=1):
             executor.submit(process_pdf, pdf_file, config)
 
 def process_pdf(pdf_file, config):
-    # we use ntpath here to be sure it will work on Windows too
-    #pdf_file_name = ntpath.basename(pdf_file)
-
     print(pdf_file)
     files = {
         'input': (
@@ -121,16 +118,6 @@ def process_pdf(pdf_file, config):
     response = requests.post(the_url, files=files, data=the_data)
     
     status = response.status_code
-
-    '''
-    client = ApiClient()
-    res, status = client.post(
-        url=the_url,
-        files=files,
-        data=the_data,
-        headers={'Accept': 'text/plain'}
-    )
-    '''
 
     if status == 503:
         time.sleep(config['sleep_time'])
@@ -170,16 +157,18 @@ def run_eval_txt(xml_repo_path, config, nb_threads=1):
     if len(texts) > 0:
         process_batch_txt(texts, config, nb_threads)
 
+    print("-----------------------------")
     print("nb xml files:", nb_files)
     print("nb texts:", nb_texts)
     print("nb tokens:", nb_tokens)
 
-    runtime = round(time.time() - start_time, 3)
-
-    print("runtime: %s seconds " % (runtime))
-    print("xml files/s:", nb_files/runtime)
-    print("texts/s:", nb_texts/runtime)
-    print("tokens/s:", nb_tokens/runtime)
+    runtime = round(time.time() - start_time, 4)
+    print("-----------------------------")
+    print("total runtime: %s seconds " % (runtime))
+    print("-----------------------------")
+    print("xml files/s:\t {:.4f}".format(nb_files/runtime))
+    print("    texts/s:\t {:.4f}".format(nb_texts/runtime))
+    print("   tokens/s:\t {:.4f}".format(nb_tokens/runtime)) 
 
 
 def process_batch_txt(texts, config, nb_threads=1):
@@ -198,9 +187,6 @@ def process_txt(text, config):
     the_data = {}
     the_data['text'] = text
     the_data['disambiguate'] = '0'
-
-    #print(the_url)
-    #print(the_data)
 
     response = requests.post(the_url, data=the_data)
     
