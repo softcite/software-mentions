@@ -212,6 +212,8 @@ xml files/s:     0.0258
    tokens/s:     24836.2093
 ```
 
+In the above example, 24,836 tokens per second is the processing rate of the CRF model with 1 thread (it goes beyond 100K tokens per second with 8 threads). 
+
 optionally you can provide a path to a particular repository of XML files in order to benchmark the text processing processing:
 
 > python3 runtime_eval.py --xml-repo /my/xml/directory/
