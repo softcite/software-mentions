@@ -1,5 +1,5 @@
 """
-    Consistency.py
+    consistency.py
     ======================
  
     Use it to check possible annotation consistency to review (very roughly without any context) in TEI training file.
