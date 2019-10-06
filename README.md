@@ -10,6 +10,8 @@ As the other GROBID models, the module relies only on machine learning and can u
 
 A description of the task and some preliminary evaluations can be found [here](doc/description.md).
 
+Latest performance (accuracy and runtime) can be found [below](https://github.com/Impactstory/software-mentions#Benchmarking).
+
 ## Install, build, run
 
 Building module requires maven and JDK 1.8.  
@@ -84,6 +86,51 @@ curl --form input=@./thefile.pdf localhost:8060/annotateSoftwarePDF
 ```
 
 Runtimes are expressed in milliseconds. 
+
+## Benchmarking
+
+Notations:
+
+-    __CRF__: Conditional Random Fields with custom feature engineering 
+
+-    __BiLSTM-CRF__: Bidirectional LSTM-CRF with Gloves static embeddings
+
+-    __BiLSTM-CRF+ELMo__: Bidirectional LSTM-CRF with Gloves static embeddings and ELMo dynamic embeddings 
+
+### Accuracy
+
+Evaluation made on 03.10.2019
+
+The results (Precision, Recall, F-score) for all the models have been obtained using 10-fold cross-validation (average metrics over the 10 folds). We also indicate the best and worst results over the 10 folds. 
+
+`<software>` label means “software name”. `<creator>` corresponds usually to the publisher of the software or, more rarely, the main developer. `<version>` correspond to both version number and version dates, when available. 
+
+|Labels | CRF | BiLSTM-CRF | BiLSTM-CRF+ELMo|
+|--- | --- | --- | ---|
+|Metrics | Precis. | Recall | f-score | Precis. | Recall | f-score | Precis. | Recall | f-score|
+|<software> | 86.5 | 72.24 | 78.67 | 79.70 | 75.21 | 77.37 | 86.87 | 80.72 | 83.63|
+|<creator> | 85.45 | 74.84 | 79.72 | 77.57 | 82.48 | 79.94 | 86.40 | 87.81 | 87.07|
+|<version> | 89.65 | 84.99 | 87.14 | 88.55 | 90.57 | 89.55 | 89.61 | 89.07 | 89.33|
+|<url> | 69.19 | 63.35 | 65.03 | 28.22 | 36.00 | 31.36 | 61.38 | 64.00 | 62.19|
+|micro-average | 82.7 | 73.85 | 77.64 | 79.62 | 78.59 | 79.09 | 86.72 | 83.14 | 84.87|
+
+### Runtimes
+
+|CRF | BiLSTM-CRF | BiLSTM-CRF+ELMo|
+|--- | --- | ---|
+|threads | tokens/s | batch size | tokens/s | batch size | tokens/s|
+|1 | 23,685 | 50 | 24,774 | 5 | 271|
+|2 | 43,281|
+|3 | 59,867 | 100 | 28,707 | 7 | 365|
+|4 | 73,339|
+|6 | 92,385 | 150 | 30,247|
+|7 | 97,659|
+|8 | 100,879 | 200 | 30,520|
+
+Batch size is a parameter constrained by the capacity of the available GPU. An improvement of the performance of the deep learning architecture requires increasing the number of GPU and the amount of memory of these GPU, similarly as improving CRF capacity requires increasing the number of available threads and CPU. Running a Deep Learning architectures on CPU is around 50 times slower than on GPU (although it depends on the amount of RAM available with the CPU, which can allow to increase the batch size significantly). 
+
+For the latest and complete evaluation data, see [here](https://github.com/Impactstory/software-mentions/blob/master/doc/scores-1.0.txt)
+
 
 ## Training and evaluation
 
