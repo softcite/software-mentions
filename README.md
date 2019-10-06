@@ -43,9 +43,9 @@ Run some test:
 
 Javascript demo/console web app is then accessible at ```http://localhost:8060```. From the console and the `RESTfull services` tab, you can process chunk of text (select `ProcessText`) or process a complete PDF document (select `Annotate PDF document`).
 
-![GROBID Software mentions Demo](doc/images/screen1.png)
+![GROBID Software mentions Demo](doc/images/screen5.png)
 
-![GROBID Software mentions Demo](doc/images/screen2.png)
+![GROBID Software mentions Demo](doc/images/screen4.png)
 
 
 Using ```curl``` POST/GET requests with some text:
@@ -101,13 +101,13 @@ Notations:
 
 Evaluation made on 03.10.2019
 
-The results (Precision, Recall, F-score) for all the models have been obtained using 10-fold cross-validation (average metrics over the 10 folds). We also indicate the best and worst results over the 10 folds. 
+The results (Precision, Recall, F-score) for all the models have been obtained using 10-fold cross-validation (average metrics over the 10 folds). We also indicate the best and worst results over the 10 folds in the [complete result page](https://github.com/Impactstory/software-mentions/blob/master/doc/scores-1.0.txt). 
 
 `<software>` label means “software name”. `<creator>` corresponds usually to the publisher of the software or, more rarely, the main developer. `<version>` correspond to both version number and version dates, when available. 
 
 |Labels | CRF ||| BiLSTM-CRF ||| BiLSTM-CRF+ELMo|||
 |--- | --- | --- | --- | --- | --- | --- | ---| --- | --- |
-|Metrics | Precis. | Recall | f-score | Precis. | Recall | f-score | Precis. | Recall | f-score|
+|Metrics | Precision | Recall | f-score | Precision | Recall | f-score | Precision | Recall | f-score|
 | `<software>` | 86.5 | 72.24 | 78.67 | 79.70 | 75.21 | 77.37 | 86.87 | 80.72 | 83.63|
 | `<creator>` | 85.45 | 74.84 | 79.72 | 77.57 | 82.48 | 79.94 | 86.40 | 87.81 | 87.07|
 | `<version>`  | 89.65 | 84.99 | 87.14 | 88.55 | 90.57 | 89.55 | 89.61 | 89.07 | 89.33|
