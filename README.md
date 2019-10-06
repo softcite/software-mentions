@@ -105,19 +105,19 @@ The results (Precision, Recall, F-score) for all the models have been obtained u
 
 `<software>` label means “software name”. `<creator>` corresponds usually to the publisher of the software or, more rarely, the main developer. `<version>` correspond to both version number and version dates, when available. 
 
-|Labels | CRF | BiLSTM-CRF | BiLSTM-CRF+ELMo|
-|--- | --- | --- | ---|
+|Labels | CRF ||| BiLSTM-CRF ||| BiLSTM-CRF+ELMo|||
+|--- | --- | --- | --- | --- | --- | --- | ---| --- | --- |
 |Metrics | Precis. | Recall | f-score | Precis. | Recall | f-score | Precis. | Recall | f-score|
-|<software> | 86.5 | 72.24 | 78.67 | 79.70 | 75.21 | 77.37 | 86.87 | 80.72 | 83.63|
-|<creator> | 85.45 | 74.84 | 79.72 | 77.57 | 82.48 | 79.94 | 86.40 | 87.81 | 87.07|
-|<version> | 89.65 | 84.99 | 87.14 | 88.55 | 90.57 | 89.55 | 89.61 | 89.07 | 89.33|
-|<url> | 69.19 | 63.35 | 65.03 | 28.22 | 36.00 | 31.36 | 61.38 | 64.00 | 62.19|
+| `<software>` | 86.5 | 72.24 | 78.67 | 79.70 | 75.21 | 77.37 | 86.87 | 80.72 | 83.63|
+| `<creator>` | 85.45 | 74.84 | 79.72 | 77.57 | 82.48 | 79.94 | 86.40 | 87.81 | 87.07|
+| `<version>`  | 89.65 | 84.99 | 87.14 | 88.55 | 90.57 | 89.55 | 89.61 | 89.07 | 89.33|
+| `<url>`  | 69.19 | 63.35 | 65.03 | 28.22 | 36.00 | 31.36 | 61.38 | 64.00 | 62.19|
 |micro-average | 82.7 | 73.85 | 77.64 | 79.62 | 78.59 | 79.09 | 86.72 | 83.14 | 84.87|
 
 ### Runtimes
 
-|CRF | BiLSTM-CRF | BiLSTM-CRF+ELMo|
-|--- | --- | ---|
+|CRF || BiLSTM-CRF || BiLSTM-CRF+ELMo||
+|--- | --- | --- |--- | ---| --- |
 |threads | tokens/s | batch size | tokens/s | batch size | tokens/s|
 |1 | 23,685 | 50 | 24,774 | 5 | 271|
 |2 | 43,281|
