@@ -1516,7 +1516,7 @@ System.out.print("\n");*/
         return out.toString("UTF-8");
     }
 
-    private void importCSVFiles(String csvPath, Map<String, AnnotatedDocument> documents, Map<String, SoftciteAnnotation> annotations) {
+    public void importCSVFiles(String csvPath, Map<String, AnnotatedDocument> documents, Map<String, SoftciteAnnotation> annotations) {
         // process is driven by what's available in the softcite dataset
         File softciteRoot = new File(csvPath);
         // if the given root is the softcite repo root, we go down to data/ and then csv_dataset 
@@ -1598,7 +1598,7 @@ System.out.print("\n");*/
                         attribute = value;
                     } else if (i == 3) {
                         if (attribute.equals("software_was_used")) {
-                            if (value.equals("true"))
+                            if (value.equals("TRUE"))
                                 annotation.setIsUsed(true);
                         }
                     } else if (i == 4) {
@@ -1675,6 +1675,9 @@ System.out.print("\n");*/
                         }
                     } else if (i == 2) {
                         String documentID = value;
+                        int ind = documentID.indexOf("_");
+                        if (ind != -1)
+                            documentID = documentID.substring(0,ind);
                         if (documents.get(documentID) == null) {
                             document = new AnnotatedDocument();
                             document.setDocumentID(value);
@@ -1776,6 +1779,9 @@ System.out.print("\n");*/
                         annotation.setAnnotatorID(value);
                     } else if (i == 2) {
                         String documentID = value;
+                        int ind = documentID.indexOf("_");
+                        if (ind != -1)
+                            documentID = documentID.substring(0,ind);
                         if (documents.get(documentID) == null) {
                             document = new AnnotatedDocument();
                             document.setDocumentID(documentID);
@@ -1845,6 +1851,9 @@ System.out.print("\n");*/
                     value = cleanValue(value);
                     if (i == 0) {
                         String documentID = value;
+                        int ind = documentID.indexOf("_");
+                        if (ind != -1)
+                            documentID = documentID.substring(0,ind);
                         if (documents.get(documentID) == null) {
                             //System.out.println("warning unknown document: " + documentID);
                         } else 
@@ -2022,7 +2031,6 @@ System.out.print("\n");*/
             }
         }
     }
-
 
     /**
      * Command line execution.
