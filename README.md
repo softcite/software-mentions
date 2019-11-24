@@ -114,6 +114,8 @@ The results (Precision, Recall, F-score) for all the models have been obtained u
 
 ### Runtimes
 
+The following runtimes were obtained based on a Ubuntu 16.04 server Intel i7-4790 (4 CPU), 4.00 GHz with 16 GB memory. The runtimes for the Deep Learning architectures are based on the same machine with a nvidia GPU GeForce 1080Ti (11 GB).
+
 |CRF ||
 |--- | --- |
 |threads | tokens/s | 
