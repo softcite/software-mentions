@@ -79,7 +79,7 @@ public class XMLCorpusPostProcessor {
             org.w3c.dom.Document document = builder.parse(new InputSource(new StringReader(tei)));
             //document.getDocumentElement().normalize();
             document = enrichTEIDocument(document, documents);
-            document.getDocumentElement().normalize();
+            //document.getDocumentElement().normalize();
 
             tei = serialize(document, null);
         } catch(ParserConfigurationException e) {
@@ -129,9 +129,9 @@ public class XMLCorpusPostProcessor {
 
             String articleSet = annotatedDocument.getArticleSet();
             if (articleSet != null) {
-                //teiElement.setAttribute("type", articleSet);
-                teiElement.setAttribute("type", "article");
+                teiElement.setAttribute("subtype", articleSet.replace("_article", ""));
             }
+            teiElement.setAttribute("type", "article");
 
             // get text element (unique) for this document
             Element textElement = this.getFirstDirectChild(teiElement, "text");
