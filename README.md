@@ -114,16 +114,30 @@ The results (Precision, Recall, F-score) for all the models have been obtained u
 
 ### Runtimes
 
-|CRF ||| BiLSTM-CRF || BiLSTM-CRF+ELMo||
-|--- | --- || --- |--- | ---| --- |
-|threads | tokens/s || batch size | tokens/s | batch size | tokens/s|
-|1 | 23,685 || 50 | 24,774 | 5 | 271|
-|2 | 43,281 ||
-|3 | 59,867 || 100 | 28,707 | 7 | 365|
-|4 | 73,339 ||
-|6 | 92,385 || 150 | 30,247|
-|7 | 97,659 ||
-|8 | 100,879|| 200 | 30,520|
+|CRF ||
+|--- | --- |
+|threads | tokens/s | 
+|1 | 23,685 | 
+|2 | 43,281|
+|3 | 59,867 | 
+|4 | 73,339|
+|6 | 92,385 | 
+|7 | 97,659|
+|8 | 100,879 | 
+
+| BiLSTM-CRF || 
+| --- |--- | 
+| batch size | tokens/s | 
+| 50 | 24,774 | 
+| 100 | 28,707| 
+| 150 | 30,247|
+| 200 | 30,520|
+
+| BiLSTM-CRF+ELMo||
+| ---| --- |
+| batch size | tokens/s|
+| 5 | 271|
+| 7 | 365|
 
 Batch size is a parameter constrained by the capacity of the available GPU. An improvement of the performance of the deep learning architecture requires increasing the number of GPU and the amount of memory of these GPU, similarly as improving CRF capacity requires increasing the number of available threads and CPU. Running a Deep Learning architectures on CPU is around 50 times slower than on GPU (although it depends on the amount of RAM available with the CPU, which can allow to increase the batch size significantly). 
 
