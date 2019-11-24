@@ -101,7 +101,7 @@ public class XMLCorpusPostProcessor {
         List<String> annotators = new ArrayList<String>();
 
         // iterate through the corpus document to visit document level nodes
-        NodeList sectionList = document.getElementsByTagName("tei");
+        NodeList sectionList = document.getElementsByTagName("TEI");
         System.out.println("number of tei elements/articles: " + sectionList.getLength());
         for (int i = 0; i < sectionList.getLength(); i++) {
             Element teiElement = (Element) sectionList.item(i);
@@ -128,7 +128,8 @@ public class XMLCorpusPostProcessor {
 
             String articleSet = annotatedDocument.getArticleSet();
             if (articleSet != null) {
-                teiElement.setAttribute("type", articleSet);
+                //teiElement.setAttribute("type", articleSet);
+                teiElement.setAttribute("type", "article");
             }
 
             // get text element (unique) for this document

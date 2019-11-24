@@ -1919,7 +1919,7 @@ System.out.print("\n");*/
         builderTEICorpus.append("\t\t</encodingDesc>\n");
 
         builderTEICorpus.append("\t</teiHeader>\n");
-        // then each snippet will be an independent <TEI> sub-structure
+        // then each snippet will be in an independent <TEI> sub-structure
     }
 
     /**
