@@ -1355,39 +1355,41 @@ public class SoftwareParser extends AbstractParser {
      *  Create a simplified TEI header to be included in a TEI corpus file.
      */
     static public Element getTEIHeaderSimple(String id, BiblioItem biblio) {
-        Element tei = teiElement("tei");
+        Element tei = teiElement("TEI");
         Element teiHeader = teiElement("teiHeader");
 
         if (id != null) {
             Element fileDesc = teiElement("fileDesc");
             fileDesc.addAttribute(new Attribute("xml:id", "http://www.w3.org/XML/1998/namespace", id));
 
-            Element titleStatement = teiElement("titleStatement");
+            Element titleStatement = teiElement("titleStmt");
             Element title = teiElement("title");
             title.appendChild(biblio.getTitle());
             titleStatement.appendChild(title);
             fileDesc.appendChild(titleStatement);
-            Element biblStruct = teiElement("biblStruct");
+            Element sourceDesc = teiElement("sourceDesc");
+            Element bibl = teiElement("bibl");
             if (biblio.getDOI() != null) {
                 Element idno = teiElement("idno");
                 idno.addAttribute(new Attribute("DOI", null, biblio.getDOI()));
-                biblStruct.appendChild(idno);
+                bibl.appendChild(idno);
             }
             if (biblio.getPMCID() != null) {  
                 Element idno = teiElement("idno");
                 idno.addAttribute(new Attribute("PMC", null, biblio.getPMCID()));
-                biblStruct.appendChild(idno);
+                bibl.appendChild(idno);
             } else if (id.startsWith("PMC")) {
                 Element idno = teiElement("idno");
                 idno.addAttribute(new Attribute("PMC", null, id));
-                biblStruct.appendChild(idno);
+                bibl.appendChild(idno);
             }
             if (biblio.getPMID() != null) {
                 Element idno = teiElement("idno");
                 idno.addAttribute(new Attribute("PMID", null, biblio.getPMID()));
-                biblStruct.appendChild(idno);
+                bibl.appendChild(idno);
             }
-            fileDesc.appendChild(biblStruct);
+            sourceDesc.appendChild(bibl);
+            fileDesc.appendChild(sourceDesc);
             teiHeader.appendChild(fileDesc);
         }
 

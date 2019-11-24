@@ -128,7 +128,8 @@ public class XMLCorpusPostProcessor {
 
             String articleSet = annotatedDocument.getArticleSet();
             if (articleSet != null) {
-                teiElement.setAttribute("type", articleSet);
+                //teiElement.setAttribute("type", articleSet);
+                teiElement.setAttribute("type", "article");
             }
 
             // get text element (unique) for this document
