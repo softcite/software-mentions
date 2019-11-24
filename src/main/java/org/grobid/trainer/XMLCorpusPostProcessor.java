@@ -77,8 +77,9 @@ public class XMLCorpusPostProcessor {
             tei = FileUtils.readFileToString(new File(xmlCorpusPath), UTF_8);
 
             org.w3c.dom.Document document = builder.parse(new InputSource(new StringReader(tei)));
-            document.getDocumentElement().normalize();
+            //document.getDocumentElement().normalize();
             document = enrichTEIDocument(document, documents);
+            document.getDocumentElement().normalize();
 
             tei = serialize(document, null);
         } catch(ParserConfigurationException e) {
@@ -96,7 +97,7 @@ public class XMLCorpusPostProcessor {
     }
 
     private org.w3c.dom.Document enrichTEIDocument(org.w3c.dom.Document document, 
-                                                        Map<String, AnnotatedDocument> documents) {
+                                                   Map<String, AnnotatedDocument> documents) {
         // this is the list of annotators, in order to anonymize them 
         List<String> annotators = new ArrayList<String>();
 
@@ -170,6 +171,8 @@ public class XMLCorpusPostProcessor {
                                                           
                             // softcite annotations for the document
                             List<SoftciteAnnotation> annotations = annotatedDocument.getAnnotations();
+                            if (annotations == null)
+                                continue;
                             for(SoftciteAnnotation annotation : annotations) {
                                 //if (annotation.getType() != AnnotationType.SOFTWARE) 
                                 //    continue;
@@ -276,12 +279,13 @@ System.out.println(annotationContextLeftSignature + " / " + annotationContextRig
                                         String annotatorID = annotation.getAnnotatorID();
                                         if (annotatorID != null) {
                                             int index = annotators.indexOf(annotatorID);
-                                            if (index == -1) {
+                                            if (index == -1) {   
                                                 annotators.add(annotatorID);
                                                 index = annotators.size()-1;
                                             }
-                                            // add an attribute
-                                            entityElement.setAttribute("resp", "annotator"+index);
+                                            // add an attribute (xml pointer)
+                                            entityElement.setAttribute("resp", "#annotator"+index);
+                                            
                                         }
                                         break;
                                     }
@@ -290,7 +294,7 @@ System.out.println(annotationContextLeftSignature + " / " + annotationContextRig
                         }
                     }
 
-                    // second pass to put "reconciliation" for the entity annotation without resp
+                    // second pass to put "curator" for the entity annotation without resp
                     pList = bodyElement.getElementsByTagName("p");
                     for (int j = 0; j < pList.getLength(); j++) {
                         Element snippetElement = (Element) pList.item(j);
@@ -301,11 +305,32 @@ System.out.println(annotationContextLeftSignature + " / " + annotationContextRig
                             Element entityElement = (Element) entityList.item(k);
                             String resp = entityElement.getAttribute("resp");
                             if (resp == null || resp.length() == 0) {
-                                entityElement.setAttribute("resp", "reconciliation");
+                                entityElement.setAttribute("resp", "#curator");
                             }
                         }
                     }
                 }
+            }
+        }
+
+        // inject annotator descriptions 
+        NodeList corpusTitleStmtList = document.getElementsByTagName("titleStmt");
+        // take the first, which is the titleStmt of the teiCorpus header
+        if (corpusTitleStmtList.getLength() > 0) {
+            Element corpusTitleStmtElement = (Element) corpusTitleStmtList.item(0); 
+            for(int index=0; index < annotators.size(); index++) {
+                Element respStmt = document.createElement("respStmt");
+                respStmt.setAttribute("xml:id", "annotator"+index);
+                Element resp = document.createElement("resp");
+                resp.setTextContent("annotator");
+
+                Element name = document.createElement("name");
+                name.setTextContent("ANONYMIZED");
+
+                respStmt.appendChild(resp);
+                respStmt.appendChild(name);
+
+                corpusTitleStmtElement.appendChild(respStmt);
             }
         }
 
@@ -372,6 +397,8 @@ System.out.println(annotationContextLeftSignature + " / " + annotationContextRig
             transformer.setOutputProperty(OutputKeys.METHOD, "xml");
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+
             if (node != null)
                 transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
             transformer.transform(domSource, result);
