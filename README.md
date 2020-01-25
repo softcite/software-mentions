@@ -99,7 +99,7 @@ Notations:
 
 Evaluation made on 03.10.2019
 
-The results (Precision, Recall, F-score) for all the models have been obtained using 10-fold cross-validation (average metrics over the 10 folds). We also indicate the best and worst results over the 10 folds in the [complete result page](https://github.com/Impactstory/software-mentions/blob/master/doc/scores-1.0.txt). 
+The results (Precision, Recall, F-score) for all the models have been obtained using 10-fold cross-validation (average metrics over the 10 folds). We also indicate the best and worst results over the 10 folds in the [complete result page](https://github.com/Impactstory/software-mentions/blob/master/doc/scores-1.0.txt). See [DeLFT](https://github.com/kermitt2/delft) for more details about the models and reproducing all these evaluations. 
 
 `<software>` label means “software name”. `<creator>` corresponds usually to the publisher of the software or, more rarely, the main developer. `<version>` correspond to both version number and version dates, when available. 
 
@@ -111,6 +111,20 @@ The results (Precision, Recall, F-score) for all the models have been obtained u
 | `<version>`  | 89.65 | 84.99 | 87.14 | 88.55 | 90.57 | 89.55 | 89.61 | 89.07 | 89.33|
 | `<url>`  | 69.19 | 63.35 | 65.03 | 28.22 | 36.00 | 31.36 | 61.38 | 64.00 | 62.19|
 |micro-average | 82.7 | 73.85 | 77.64 | 79.62 | 78.59 | 79.09 | 86.72 | 83.14 | 84.87|
+
+
+|Labels | bert-base-en+CRF ||| SciBERT+CRF ||| 
+|--- | --- | --- | --- | --- | --- | --- | ---| --- | --- |
+|Metrics | Precision | Recall | f-score | Precision | Recall | f-score |
+| `<software>` | 75.58 | 71.64 | 73.55 | 84.85 | 82.43 | 83.62 | 
+| `<creator>` | 72.93 | 70.57 | 71.72 | 79.51 | 77.71 | 78.59 | 
+| `<version>`  | 78.54 | 79.14 | 78.83 | 89.98 | 88.00 | 88.97 |
+| `<url>`  | 38.70 | 38.70 | 38.70 | 63.62 | 75.33 | 68.77 | 
+|micro-average | 74.48 | 72.67 | 73.56 | 84.42 | 82.69 | 83.54 | 
+
+
+
+
 
 ### Runtimes
 
