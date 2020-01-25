@@ -106,21 +106,21 @@ The results (Precision, Recall, F-score) for all the models have been obtained u
 |Labels | CRF ||| BiLSTM-CRF ||| BiLSTM-CRF+ELMo|||
 |--- | --- | --- | --- | --- | --- | --- | ---| --- | --- |
 |Metrics | Precision | Recall | f-score | Precision | Recall | f-score | Precision | Recall | f-score|
-| `<software>` | 86.5 | 72.24 | 78.67 | 79.70 | 75.21 | 77.37 | 86.87 | 80.72 | 83.63|
-| `<creator>` | 85.45 | 74.84 | 79.72 | 77.57 | 82.48 | 79.94 | 86.40 | 87.81 | 87.07|
-| `<version>`  | 89.65 | 84.99 | 87.14 | 88.55 | 90.57 | 89.55 | 89.61 | 89.07 | 89.33|
-| `<url>`  | 69.19 | 63.35 | 65.03 | 28.22 | 36.00 | 31.36 | 61.38 | 64.00 | 62.19|
-|micro-average | 82.7 | 73.85 | 77.64 | 79.62 | 78.59 | 79.09 | 86.72 | 83.14 | 84.87|
+| `<software>` | 86.5 | 72.24 | 78.67 | 79.70 | 75.21 | 77.37 | **86.87** | 80.72 | **83.63** |
+| `<creator>` | 85.45 | 74.84 | 79.72 | 77.57 | 82.48 | 79.94 | **86.40** | **87.81** | **87.07** |
+| `<version>`  | 89.65 | 84.99 | 87.14 | 88.55 | **90.57** | **89.55** | 89.61 | 89.07 | 89.33|
+| `<url>`  | **69.19** | 63.35 | 65.03 | 28.22 | 36.00 | 31.36 | 61.38 | 64.00 | 62.19|
+|micro-average | 82.7 | 73.85 | 77.64 | 79.62 | 78.59 | 79.09 | **86.72** | **83.14** | **84.87** |
 
 Evaluation made on 09.01.2020 for BERT fine-tuned architectures:
 
 |Labels | bert-base-en+CRF ||| SciBERT+CRF ||| 
 |--- | --- | --- | --- | --- | --- | --- | 
 |Metrics | Precision | Recall | f-score | Precision | Recall | f-score |
-| `<software>` | 75.58 | 71.64 | 73.55 | 84.85 | 82.43 | 83.62 | 
+| `<software>` | 75.58 | 71.64 | 73.55 | 84.85 | **82.43** | 83.62 | 
 | `<creator>` | 72.93 | 70.57 | 71.72 | 79.51 | 77.71 | 78.59 | 
-| `<version>`  | 78.54 | 79.14 | 78.83 | 89.98 | 88.00 | 88.97 |
-| `<url>`  | 38.70 | 38.70 | 38.70 | 63.62 | 75.33 | 68.77 | 
+| `<version>`  | 78.54 | 79.14 | 78.83 | **89.98** | 88.00 | 88.97 |
+| `<url>`  | 38.70 | 56.67 | 45.50 | 63.62 | **75.33** | **68.77** | 
 |micro-average | 74.48 | 72.67 | 73.56 | 84.42 | 82.69 | 83.54 | 
 
 Note that the maximum sequence length is normally 1,500 tokens, except for BERT architectures, which have a limit of 512 for the input sequence length. Tokens beyond 1,500 or 512 are truncated and ignored.  
