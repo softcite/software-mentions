@@ -179,3 +179,92 @@ tokens/s: 270.8676 (batch size = 5)
 
 
 
+Jan. 9th 2020
+-------------------------------------
+bert-base en (cased)
+-------------------------------------
+
+sequence length 512 strict
+batch size 6
+
+** Worst ** model scores - run 4
+                  precision    recall  f1-score   support
+
+       <creator>     0.3796    0.3905    0.3850       105
+      <software>     0.4860    0.4463    0.4653       428
+           <url>     0.1304    0.2000    0.1579        15
+       <version>     0.4714    0.4714    0.4714       140
+
+all (micro avg.)     0.4533    0.4375    0.4453       688
+
+
+** Best ** model scores - run 9
+                  precision    recall  f1-score   support
+
+       <creator>     0.7282    0.7143    0.7212       105
+      <software>     0.8069    0.7617    0.7837       428
+           <url>     0.5714    0.5333    0.5517        15
+       <version>     0.8429    0.8429    0.8429       140
+
+all (micro avg.)     0.7973    0.7660    0.7813       688
+
+----------------------------------------------------------------------
+
+Average over 10 folds
+                  precision    recall  f1-score   support
+
+       <creator>     0.7293    0.7057    0.7172       105
+      <software>     0.7558    0.7164    0.7355       428
+           <url>     0.3870    0.5667    0.4550        15
+       <version>     0.7854    0.7914    0.7883       140
+
+all (macro avg.)     0.7448    0.7267    0.7356
+
+
+
+
+
+Jan. 9th 2020
+-------------------------------------
+SciBERT
+-------------------------------------
+
+sequence length 512 strict
+batch size 6
+
+** Worst ** model scores - run 1
+                  precision    recall  f1-score   support
+
+       <creator>     0.8039    0.7810    0.7923       105
+      <software>     0.8249    0.8037    0.8142       428
+           <url>     0.6111    0.7333    0.6667        15
+       <version>     0.8841    0.8714    0.8777       140
+
+all (micro avg.)     0.8281    0.8125    0.8202       688
+
+
+** Best ** model scores - run 5
+                  precision    recall  f1-score   support
+
+       <creator>     0.8367    0.7810    0.8079       105
+      <software>     0.8623    0.8341    0.8480       428
+           <url>     0.6667    0.8000    0.7273        15
+       <version>     0.9254    0.8857    0.9051       140
+
+all (micro avg.)     0.8660    0.8358    0.8506       688
+
+----------------------------------------------------------------------
+
+Average over 10 folds
+                  precision    recall  f1-score   support
+
+       <creator>     0.7951    0.7771    0.7859       105
+      <software>     0.8485    0.8243    0.8362       428
+           <url>     0.6362    0.7533    0.6877        15
+       <version>     0.8998    0.8800    0.8897       140
+
+all (macro avg.)     0.8442    0.8269    0.8354 
+
+-------------
+
+

@@ -115,7 +115,7 @@ The results (Precision, Recall, F-score) for all the models have been obtained u
 Evaluation made on 09.01.2020 for BERT fine-tuned architectures:
 
 |Labels | bert-base-en+CRF ||| SciBERT+CRF ||| 
-|--- | --- | --- | --- | --- | --- | --- | ---| 
+|--- | --- | --- | --- | --- | --- | --- | 
 |Metrics | Precision | Recall | f-score | Precision | Recall | f-score |
 | `<software>` | 75.58 | 71.64 | 73.55 | 84.85 | 82.43 | 83.62 | 
 | `<creator>` | 72.93 | 70.57 | 71.72 | 79.51 | 77.71 | 78.59 | 
