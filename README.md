@@ -12,7 +12,7 @@ Latest performance (accuracy and runtime) can be found [below](https://github.co
 
 ## Install, build, run
 
-Building module requires maven and JDK 1.8.  
+Building module requires JDK 1.8.  
 
 First install and build the latest development version of GROBID as explained by the [documentation](http://grobid.readthedocs.org).
 
