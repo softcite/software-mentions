@@ -41,7 +41,7 @@ public class CrossAgreement {
         this.fields = new ArrayList<String>();
         for(String field : fields)
             this.fields.add(field);
-        this.fields.add("quote");
+        //this.fields.add("quote");
         mismatches = new HashMap<String, List<Mismatch>>();
     }
 
@@ -99,8 +99,13 @@ public class CrossAgreement {
 
             nbMultipleAnnotatedDocuments++;
 
+            //System.out.println(docName + " - multiple annotated document by " + annotators.size() + 
+            //    " annotators , nb annotation for the document: " + annotations.size());
+
             // naive pourcentage-based agreement for the document
             AgreementStatistics documentStats = this.agreementCounts(annotations, annotators);
+
+            //System.out.println(documentStats.toString());
 
             stats = stats.combineCounts(documentStats);
 
@@ -330,6 +335,8 @@ public class CrossAgreement {
                     this.numberSamples.put(entry.getKey(), entry.getValue());
                 }
             }
+
+            this.nbMultipleAnnotatedDocuments = toCopy.nbMultipleAnnotatedDocuments;
         }
 
         public void computePourcentageAgreement() {
@@ -457,6 +464,8 @@ public class CrossAgreement {
                 }
             }
 
+            result.setNbMultipleAnnotatedDocuments(result.getNbMultipleAnnotatedDocuments() + this.getNbMultipleAnnotatedDocuments());
+
             return result;
         }
 
@@ -540,7 +549,7 @@ public class CrossAgreement {
             StringBuffer buffer = new StringBuffer();
 
             buffer.append("number of documents annotated by multiple annotators: ");
-            buffer.append(nbMultipleAnnotatedDocuments);
+            buffer.append(this.nbMultipleAnnotatedDocuments);
             buffer.append("\n\n");
 
             for (String field : fields) {

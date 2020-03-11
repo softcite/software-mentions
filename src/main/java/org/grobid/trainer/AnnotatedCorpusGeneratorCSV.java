@@ -204,10 +204,10 @@ public class AnnotatedCorpusGeneratorCSV {
         int m = 0;
         List<String> xmlFiles = new ArrayList<String>();
         for (Map.Entry<String, AnnotatedDocument> entry : documents.entrySet()) {
-            /*if (m > 20) {
-                break;
-            }
-            m++;*/
+            //if (m > 20) {
+            //    break;
+            //}
+            //m++;
             String docName = entry.getKey();
             File pdfFile = getPDF(documentPath, docName);
 
@@ -585,14 +585,14 @@ public class AnnotatedCorpusGeneratorCSV {
         // this is a TEI corpus file to represent all the annotated snippets, with a bit more 
         // of textual styling
         //Writer writerTEICorpus = new PrintWriter(new BufferedWriter(new FileWriter("resources/dataset/software/corpus/all.tei.xml")));
-        Writer writerTEICorpus = new PrintWriter(new BufferedWriter(new FileWriter("doc/report/all.tei.xml")));
+        /*Writer writerTEICorpus = new PrintWriter(new BufferedWriter(new FileWriter("doc/reports/all.tei.xml")));
         writerTEICorpus.write(XMLUtilities.toPrettyString(builderTEICorpus.toString(), 4));
         writerTEICorpus.close();
 
         // computing and reporting cross-agreement for the loaded set
         CrossAgreement crossAgreement = new CrossAgreement(fields);
         //CrossAgreement.AgreementStatistics stats = crossAgreement.evaluate(documents, "econ_article"); 
-        CrossAgreement.AgreementStatistics stats = crossAgreement.evaluate(documents, "pmc"); 
+        CrossAgreement.AgreementStatistics stats = crossAgreement.evaluate(documents, "pmc_article"); 
         System.out.println("\n****** Inter-Annotator Agreement (Percentage agreement) ****** PMC SET ****** \n\n" + stats.toString());
 
         crossAgreement = new CrossAgreement(fields);
