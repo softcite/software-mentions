@@ -12,7 +12,7 @@ Latest performance (accuracy and runtime) can be found [below](https://github.co
 
 ## Install, build, run
 
-Building module requires maven and JDK 1.8.  
+Building module requires JDK 1.8.  
 
 First install and build the latest development version of GROBID as explained by the [documentation](http://grobid.readthedocs.org).
 
@@ -99,18 +99,33 @@ Notations:
 
 Evaluation made on 03.10.2019
 
-The results (Precision, Recall, F-score) for all the models have been obtained using 10-fold cross-validation (average metrics over the 10 folds). We also indicate the best and worst results over the 10 folds in the [complete result page](https://github.com/Impactstory/software-mentions/blob/master/doc/scores-1.0.txt). 
+The results (Precision, Recall, F-score) for all the models have been obtained using 10-fold cross-validation (average metrics over the 10 folds). We also indicate the best and worst results over the 10 folds in the [complete result page](https://github.com/Impactstory/software-mentions/blob/master/doc/scores-1.0.txt). See [DeLFT](https://github.com/kermitt2/delft) for more details about the models and reproducing all these evaluations. 
 
 `<software>` label means “software name”. `<creator>` corresponds usually to the publisher of the software or, more rarely, the main developer. `<version>` correspond to both version number and version dates, when available. 
 
 |Labels | CRF ||| BiLSTM-CRF ||| BiLSTM-CRF+ELMo|||
 |--- | --- | --- | --- | --- | --- | --- | ---| --- | --- |
 |Metrics | Precision | Recall | f-score | Precision | Recall | f-score | Precision | Recall | f-score|
-| `<software>` | 86.5 | 72.24 | 78.67 | 79.70 | 75.21 | 77.37 | 86.87 | 80.72 | 83.63|
-| `<creator>` | 85.45 | 74.84 | 79.72 | 77.57 | 82.48 | 79.94 | 86.40 | 87.81 | 87.07|
-| `<version>`  | 89.65 | 84.99 | 87.14 | 88.55 | 90.57 | 89.55 | 89.61 | 89.07 | 89.33|
-| `<url>`  | 69.19 | 63.35 | 65.03 | 28.22 | 36.00 | 31.36 | 61.38 | 64.00 | 62.19|
-|micro-average | 82.7 | 73.85 | 77.64 | 79.62 | 78.59 | 79.09 | 86.72 | 83.14 | 84.87|
+| `<software>` | 86.5 | 72.24 | 78.67 | 79.70 | 75.21 | 77.37 | **86.87** | 80.72 | **83.63** |
+| `<creator>` | 85.45 | 74.84 | 79.72 | 77.57 | 82.48 | 79.94 | **86.40** | **87.81** | **87.07** |
+| `<version>`  | 89.65 | 84.99 | 87.14 | 88.55 | **90.57** | **89.55** | 89.61 | 89.07 | 89.33|
+| `<url>`  | **69.19** | 63.35 | 65.03 | 28.22 | 36.00 | 31.36 | 61.38 | 64.00 | 62.19|
+|micro-average | 82.7 | 73.85 | 77.64 | 79.62 | 78.59 | 79.09 | **86.72** | **83.14** | **84.87** |
+
+Evaluation made on 09.01.2020 for BERT fine-tuned architectures:
+
+|Labels | bert-base-en+CRF ||| SciBERT+CRF ||| 
+|--- | --- | --- | --- | --- | --- | --- | 
+|Metrics | Precision | Recall | f-score | Precision | Recall | f-score |
+| `<software>` | 75.58 | 71.64 | 73.55 | 84.85 | **82.43** | 83.62 | 
+| `<creator>` | 72.93 | 70.57 | 71.72 | 79.51 | 77.71 | 78.59 | 
+| `<version>`  | 78.54 | 79.14 | 78.83 | **89.98** | 88.00 | 88.97 |
+| `<url>`  | 38.70 | 56.67 | 45.50 | 63.62 | **75.33** | **68.77** | 
+|micro-average | 74.48 | 72.67 | 73.56 | 84.42 | 82.69 | 83.54 | 
+
+Note that the maximum sequence length is normally 1,500 tokens, except for BERT architectures, which have a limit of 512 for the input sequence length. Tokens beyond 1,500 or 512 are truncated and ignored.  
+
+For this reason, BERT architectures are in practice difficult to exploit for our use case due to the our input sequence length, which correspond to a complete paragraph to annotate. The software attributes can be distributed in more than one sentence, and some key elements introducting a software mention can be spread in the whole paragraph. The number of tokens in a paragraph frequently go beyond 512, which also degrades the above reported metrics for these models.  
 
 ### Runtimes
 
@@ -140,6 +155,12 @@ The following runtimes were obtained based on a Ubuntu 16.04 server Intel i7-479
 | batch size | tokens/s|
 | 5 | 271|
 | 7 | 365|
+
+| SciBERT+CRF||
+| ---| --- |
+| batch size | tokens/s|
+| 5 | 4,729|
+| 6 | 5,060|
 
 Batch size is a parameter constrained by the capacity of the available GPU. An improvement of the performance of the deep learning architecture requires increasing the number of GPU and the amount of memory of these GPU, similarly as improving CRF capacity requires increasing the number of available threads and CPU. Running a Deep Learning architectures on CPU is around 50 times slower than on GPU (although it depends on the amount of RAM available with the CPU, which can allow to increase the batch size significantly). 
 
