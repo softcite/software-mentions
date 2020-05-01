@@ -20,7 +20,7 @@ public class SoftciteAnnotation extends Annotation {
     private static final Logger logger = LoggerFactory.getLogger(SoftciteAnnotation.class);
 
     enum AnnotationType {
-        SOFTWARE, ALGORITHM, DATABASE, HARDWARE, REFERENCE, OTHER;
+        SOFTWARE, ALGORITHM, DATABASE, HARDWARE, REFERENCE, DUMMY, OTHER;
     }
 
     enum ReferenceType {
@@ -124,6 +124,8 @@ public class SoftciteAnnotation extends Annotation {
             this.type = AnnotationType.HARDWARE;
         /*else if (typeString.equals("database"))
             this.type = AnnotationType.DATABASE;*/
+        else if (typeString.equals("dummy"))
+           this.type = AnnotationType.DUMMY;
         else if (typeString.equals("other"))
             this.type = AnnotationType.OTHER;
         else

@@ -3,6 +3,7 @@ package org.grobid.trainer;
 import org.grobid.core.analyzers.SoftwareAnalyzer;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.utilities.ArticleUtilities;
+import org.grobid.trainer.SoftciteAnnotation.AnnotationType;
 
 import org.grobid.core.analyzers.GrobidAnalyzer;
 import org.grobid.core.data.BibDataSet;
@@ -149,7 +150,18 @@ public class AnnotatedCorpusGeneratorCSV {
 
         importCSVFiles(csvPath, documents, annotations);
 
-        System.out.println("\n" + annotations.size() + " total annotations");
+        // count annotations but skipping dummy ones
+        int totalAnnotations = 0;
+        for (Map.Entry<String, SoftciteAnnotation> entry : annotations.entrySet()) {
+            SoftciteAnnotation annotation = entry.getValue();
+            if (annotation != null) {
+                if (annotation.getType() == AnnotationType.DUMMY)
+                    continue;
+                totalAnnotations++;
+            }
+        }
+
+        System.out.println("\n" + totalAnnotations + " total annotations");
         System.out.println(documents.size() + " total annotated documents");    
 
         // from the loadeed annotations, we rank the annotators by their number of annotations, this information
@@ -585,7 +597,7 @@ public class AnnotatedCorpusGeneratorCSV {
         // this is a TEI corpus file to represent all the annotated snippets, with a bit more 
         // of textual styling
         //Writer writerTEICorpus = new PrintWriter(new BufferedWriter(new FileWriter("resources/dataset/software/corpus/all.tei.xml")));
-        /*Writer writerTEICorpus = new PrintWriter(new BufferedWriter(new FileWriter("doc/reports/all.tei.xml")));
+        Writer writerTEICorpus = new PrintWriter(new BufferedWriter(new FileWriter("doc/reports/all.tei.xml")));
         writerTEICorpus.write(XMLUtilities.toPrettyString(builderTEICorpus.toString(), 4));
         writerTEICorpus.close();
 
@@ -661,6 +673,8 @@ public class AnnotatedCorpusGeneratorCSV {
                                         String documentId, 
                                         Writer writer) throws IOException, IllegalArgumentException {
         for(SoftciteAnnotation annotation : localAnnotations) {
+            if (annotation.getType() == AnnotationType.DUMMY)
+                continue;
             // context
             String context = annotation.getContext();
             if (context == null)
@@ -740,6 +754,8 @@ public class AnnotatedCorpusGeneratorCSV {
 
         int annotationIndex = -1;
         for(SoftciteAnnotation annotation : localAnnotations) {
+            if (annotation.getType() == AnnotationType.DUMMY)
+                continue;
             annotationIndex++;
             if (annotation.getSoftwareMention() == null || annotation.getSoftwareMention().trim().length() == 0) {
                 // there is no software name usable, we have to skip this case
@@ -1844,6 +1860,7 @@ System.out.print("\n");*/
                     continue;
                 }
                 AnnotatedDocument document = null;
+                String annotatorID = null;
                 for(int i=0; i<csvRecord.size(); i++) {
                     String value = csvRecord.get(i);
                     if (value.trim().length() == 0)
@@ -1862,7 +1879,27 @@ System.out.print("\n");*/
                         String articleSet = value;
                         if (document != null)
                             document.setArticleSet(value);
-                    } 
+                    } else if (i == 2) {
+                        annotatorID = value;
+                    } else if (i == 3) {
+                        // we need to record that no selection is found for the particular annotator (full negative case)
+                        // this is relevant toknow for IIA metrics
+                        if (document != null) {
+                            if (value.equals("TRUE")) {
+                                // no annotation realized by the annotator, but he has review the document
+                                // we add a dummy annotation for the annotator and the document, this will help to keep track
+                                // of the "annotation" effort, but the dummy annotation will be ignoredin further process,
+                                // except for IIA metrics
+                                SoftciteAnnotation annotation = new SoftciteAnnotation();
+                                annotation.setType("dummy");
+                                String identifier = document.getDocumentID()+"_dummy_"+annotatorID;
+                                annotation.setIdentifier(identifier);
+                                annotation.setAnnotatorID(annotatorID);
+                                annotations.put(identifier, annotation);   
+                                document.addAnnotation(annotation);
+                            } 
+                        }
+                    }
                 }
             }
             System.out.println(nbCSVlines + " csv lines");
