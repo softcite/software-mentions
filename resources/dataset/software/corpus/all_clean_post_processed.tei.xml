@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<teiCorpus xmlns="http://www.tei-c.org/ns/1.0" version="3.3.0">
+<teiCorpus xmlns="http://www.tei-c.org/ns/1.0" version="4.0.0">
   <teiHeader>
     <fileDesc>
       <titleStmt>
@@ -191,6 +191,22 @@
           <ref target="https://github.com/ourresearch/software-mentions"/>
         </application>
       </appInfo>
+      <classDecl>
+        <taxonomy>
+          <category xml:id="unique_annotator">
+            <catDesc>Document analyzed by one annotator</catDesc>
+          </category>
+          <category xml:id="multiple_annotators">
+            <catDesc>Document analyzed by more than one annotator</catDesc>
+          </category>
+          <category xml:id="with_reconciliation">
+            <catDesc>Document analyzed by one or more annotators with review by the curator team</catDesc>
+          </category>
+          <category xml:id="with_reconciliation_and_scripts">
+            <catDesc>Document analyzed by one or more annotators with review by the curator team, combined with additional corrections driven by automated consistency checks</catDesc>
+          </category>
+        </taxonomy>
+      </classDecl>
     </encodingDesc>
   </teiHeader>
   <TEI subtype="pmc" type="article" xmlns="http://www.tei-c.org/ns/1.0">
