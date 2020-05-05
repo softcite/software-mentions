@@ -416,7 +416,7 @@ System.out.println(annotationContextLeftSignature + " / " + annotationContextRig
      */
     public static void main(String[] args) {
        
-        // we are expecting three arguments, absolute path to the original PDF 
+        // we are expecting three arguments, absolute path to the curated TEI XML file
         // documents, absolute path to the softcite data in csv and abolute path
         // where to put the generated XML files
 

@@ -1355,6 +1355,10 @@ public class SoftwareParser extends AbstractParser {
      *  Create a simplified TEI header to be included in a TEI corpus file.
      */
     static public Element getTEIHeaderSimple(String id, BiblioItem biblio) {
+        return getTEIHeaderSimple(id, biblio, null);
+    }
+
+    static public Element getTEIHeaderSimple(String id, BiblioItem biblio, String catCuration) {
         Element tei = teiElement("TEI");
         Element teiHeader = teiElement("teiHeader");
 
@@ -1394,8 +1398,22 @@ public class SoftwareParser extends AbstractParser {
         }
 
         Element encodingDesc = teiElement("encodingDesc");
-
         teiHeader.appendChild(encodingDesc);
+
+        if (catCuration != null) {
+            Element profileDesc = teiElement("profileDesc");
+
+            Element textClass = teiElement("textClass");
+            Element catRef = teiElement("catRef");
+
+            catRef.addAttribute(new Attribute("target", null, "#"+catCuration));
+
+            textClass.appendChild(catRef);
+            profileDesc.appendChild(textClass);
+
+            teiHeader.appendChild(profileDesc);
+        }
+
         tei.appendChild(teiHeader);
 
         return tei;

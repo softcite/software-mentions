@@ -221,7 +221,7 @@ public class AnnotatedCorpusGeneratorCSV {
             //}
             //m++;
             String docName = entry.getKey();
-            File pdfFile = getPDF(documentPath, docName);
+            File pdfFile = getPDF(documentPath, docName, articleUtilities);
 
             // process header with consolidation to get some nice header metadata for this document
             BiblioItem biblio = new BiblioItem();
@@ -1872,7 +1872,10 @@ System.out.print("\n");*/
                         if (ind != -1)
                             documentID = documentID.substring(0,ind);
                         if (documents.get(documentID) == null) {
-                            //System.out.println("warning unknown document: " + documentID);
+                            // we need to create a document representation even for documents not having annotations
+                            document = new AnnotatedDocument();
+                            document.setDocumentID(documentID);
+                            documents.put(documentID, document);
                         } else 
                             document = documents.get(documentID);
                     } else if (i == 1) {
@@ -1898,7 +1901,7 @@ System.out.print("\n");*/
                                 annotations.put(identifier, annotation);   
                                 document.addAnnotation(annotation);
                             } 
-                        }
+                        } 
                     }
                 }
             }
@@ -1994,7 +1997,7 @@ System.out.print("\n");*/
      *
      * If PDF not available, return null
      */
-    private File getPDF(String pathPDFs, String identifier) {
+    public static File getPDF(String pathPDFs, String identifier, ArticleUtilities articleUtilities) {
         File inRepo = new File(pathPDFs + File.separator + identifier + ".pdf");
         if (!inRepo.exists()) {
             File notInRepo = articleUtilities.getPDFDoc(identifier);
