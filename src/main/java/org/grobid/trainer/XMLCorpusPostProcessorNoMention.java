@@ -212,6 +212,8 @@ public class XMLCorpusPostProcessorNoMention {
                 }
             } catch(XPathExpressionException e) {
                 e.printStackTrace();
+            } catch(Exception e) {
+                e.printStackTrace();
             }
             
             AnnotatedDocument softciteDocument = entry.getValue();
@@ -219,13 +221,12 @@ public class XMLCorpusPostProcessorNoMention {
             List<SoftciteAnnotation> localAnnotations = softciteDocument.getAnnotations();
             if (localAnnotations == null) {
                 System.out.println(" **** Warning **** document with null localAnnotation object");
-                continue;
             }
 //System.out.println(docName + " - " + localAnnotations.size() + " annotations");
             /*if (localAnnotations.size() == 1) {
                 System.out.println(docName + " - " + localAnnotations.get(0).getType());
             }*/
-            if (localAnnotations.size() == 1 && localAnnotations.get(0).getType() == AnnotationType.DUMMY) {
+            if (localAnnotations != null && localAnnotations.size() == 1 && localAnnotations.get(0).getType() == AnnotationType.DUMMY) {
 //System.out.println(docName + " - " + localAnnotations.get(0).getType());
                 File pdfFile = AnnotatedCorpusGeneratorCSV.getPDF(documentPath, docName, articleUtilities);
 
@@ -338,18 +339,20 @@ public class XMLCorpusPostProcessorNoMention {
                     biblio = engine.getParsers().getHeaderParser().consolidateHeader(biblio, 1);
                 }
 
-                if (biblio.getTitle() == null || biblio.getTitle().trim().length() ==0) 
-                    continue;
+                //if (biblio.getTitle() == null || biblio.getTitle().trim().length() ==0) 
+                //    continue;
 
                 AnnotatedDocument annotatedDocument = entry.getValue();
                 annotatedDocument.setBiblio(biblio);
 
                 // number of annotators
                 List<String> annotators = new ArrayList<String>();
-                for(SoftciteAnnotation localAnnotation : localAnnotations) {
-                    String annotatorID = localAnnotation.getAnnotatorID();
-                    if (!annotators.contains(annotatorID)) {
-                        annotators.add(annotatorID);
+                if (localAnnotations != null) {
+                    for(SoftciteAnnotation localAnnotation : localAnnotations) {
+                        String annotatorID = localAnnotation.getAnnotatorID();
+                        if (!annotators.contains(annotatorID)) {
+                            annotators.add(annotatorID);
+                        }
                     }
                 }
 
