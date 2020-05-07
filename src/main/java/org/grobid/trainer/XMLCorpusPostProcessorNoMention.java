@@ -92,7 +92,8 @@ public class XMLCorpusPostProcessorNoMention {
             tei = FileUtils.readFileToString(new File(xmlCorpusPath), UTF_8);
 
             org.w3c.dom.Document document = builder.parse(new InputSource(new StringReader(tei)));
-            document = enrichTEIDocument(document, documents, pdfPath);
+            document = enrichTEIDocumentNoMention(document, documents, pdfPath);
+            //document = enrichTEIDocument(document, documents, pdfPath);
 
             tei = XMLCorpusPostProcessor.serialize(document, null);
         } catch(ParserConfigurationException e) {
@@ -112,11 +113,85 @@ public class XMLCorpusPostProcessorNoMention {
     private org.w3c.dom.Document enrichTEIDocument(org.w3c.dom.Document document, 
                                                    Map<String, AnnotatedDocument> documents,
                                                    String documentPath) {
+        org.w3c.dom.Element documentRoot = document.getDocumentElement();
+        XPathFactory xpathFactory = XPathFactory.newInstance();
+
+        try {
+            XPath xpath = xpathFactory.newXPath();
+            XPathExpression expr = xpath.compile("//TEI");
+            //XPathExpression expr = xpath.compile("//*[@id='"+docName+"']");
+            NodeList result = (NodeList)expr.evaluate(document, XPathConstants.NODESET);
+            NodeList nodes = (NodeList) result;
+            for(int i=0; i < nodes.getLength(); i++) {
+                org.w3c.dom.Element teiElement = (org.w3c.dom.Element)nodes.item(i);
+
+                org.w3c.dom.Element teiHeaderElement = XMLCorpusPostProcessor.getFirstDirectChild(teiElement, "teiHeader");
+                if (teiHeaderElement != null) {
+                    org.w3c.dom.Element fileDescElement = XMLCorpusPostProcessor.getFirstDirectChild(teiHeaderElement, "fileDesc");
+                    if (fileDescElement != null) {
+                        String docId = fileDescElement.getAttribute("xml:id");
+                        //System.out.println(docId);
+
+                        // add curation class information
+                        org.w3c.dom.Element profileDesc = document.createElement("profileDesc");
+
+                        org.w3c.dom.Element textClass = document.createElement("textClass");
+                        org.w3c.dom.Element catRef = document.createElement("catRef");
+
+                        String catCuration = "with_reconciliation_and_scripts";
+                        catRef.setAttribute("target", "#"+catCuration);
+
+                        textClass.appendChild(catRef);
+
+                        AnnotatedDocument softciteDocument = documents.get(docId);
+                        if (softciteDocument == null)
+                            continue;
+
+                        List<SoftciteAnnotation> localAnnotations = softciteDocument.getAnnotations();
+
+                        // number of annotators
+                        List<String> annotators = new ArrayList<String>();
+                        for(SoftciteAnnotation localAnnotation : localAnnotations) {
+                            String annotatorID = localAnnotation.getAnnotatorID();
+                            if (!annotators.contains(annotatorID)) {
+                                annotators.add(annotatorID);
+                            }
+                        }
+
+                        if (annotators.size() == 1) {
+                            org.w3c.dom.Element catRef2 = document.createElement("catRef");
+
+                            catCuration = "unique_annotator";
+                            catRef2.setAttribute("target", "#"+catCuration);
+
+                            textClass.appendChild(catRef2);
+                        } else if (annotators.size() > 1) {
+                            org.w3c.dom.Element catRef2 = document.createElement("catRef");
+
+                            catCuration = "multiple_annotator";
+                            catRef2.setAttribute("target", "#"+catCuration);
+
+                            textClass.appendChild(catRef2);
+                        }
+
+                        profileDesc.appendChild(textClass);
+                        teiHeaderElement.appendChild(profileDesc);
+                    }
+                }
+            }
+        } catch(XPathExpressionException e) {
+            e.printStackTrace();
+        }
+        return document;
+    }
+
+    private org.w3c.dom.Document enrichTEIDocumentNoMention(org.w3c.dom.Document document, 
+                                                   Map<String, AnnotatedDocument> documents,
+                                                   String documentPath) {
 
         org.w3c.dom.Element documentRoot = document.getDocumentElement();
         Engine engine = GrobidFactory.getInstance().getEngine();
         XPathFactory xpathFactory = XPathFactory.newInstance();
-        int notFoundAnnotatedDocument = 0;
         int m = 0;
         for (Map.Entry<String, AnnotatedDocument> entry : documents.entrySet()) {
             /*if (m > 100) {
@@ -124,18 +199,34 @@ public class XMLCorpusPostProcessorNoMention {
             }
             m++;*/
             String docName = entry.getKey();
+
+            // ensure that the document is not already present 
+            try {
+                XPath xpath = xpathFactory.newXPath();
+                XPathExpression expr = xpath.compile("//*[@id='"+docName+"']");
+                NodeList result = (NodeList)expr.evaluate(document, XPathConstants.NODESET);
+                NodeList nodes = (NodeList) result;
+                if (nodes.getLength() != 0) {
+                    // document already present, nothing to do !
+                    continue;
+                }
+            } catch(XPathExpressionException e) {
+                e.printStackTrace();
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+            
             AnnotatedDocument softciteDocument = entry.getValue();
 
             List<SoftciteAnnotation> localAnnotations = softciteDocument.getAnnotations();
             if (localAnnotations == null) {
                 System.out.println(" **** Warning **** document with null localAnnotation object");
-                continue;
             }
 //System.out.println(docName + " - " + localAnnotations.size() + " annotations");
             /*if (localAnnotations.size() == 1) {
                 System.out.println(docName + " - " + localAnnotations.get(0).getType());
             }*/
-            if (localAnnotations.size() == 1 && localAnnotations.get(0).getType() == AnnotationType.DUMMY) {
+            if (localAnnotations != null && localAnnotations.size() == 1 && localAnnotations.get(0).getType() == AnnotationType.DUMMY) {
 //System.out.println(docName + " - " + localAnnotations.get(0).getType());
                 File pdfFile = AnnotatedCorpusGeneratorCSV.getPDF(documentPath, docName, articleUtilities);
 
@@ -162,8 +253,8 @@ public class XMLCorpusPostProcessorNoMention {
                     biblio = engine.getParsers().getHeaderParser().consolidateHeader(biblio, 1);
                 }
 
-                if (biblio.getTitle() == null || biblio.getTitle().trim().length() ==0) 
-                    continue;
+                //if (biblio.getTitle() == null || biblio.getTitle().trim().length() ==0) 
+                //    continue;
 
                 AnnotatedDocument annotatedDocument = entry.getValue();
                 annotatedDocument.setBiblio(biblio);
@@ -211,15 +302,8 @@ public class XMLCorpusPostProcessorNoMention {
                     }
                     ((org.w3c.dom.Element)importedFragmentNode).setAttribute("type", "article");
 
-                    // ensure that the document is not present 
+                    documentRoot.appendChild(importedFragmentNode);
 
-                    XPath xpath = xpathFactory.newXPath();
-                    XPathExpression expr = xpath.compile("//*[@id='"+docName+"']");
-                    NodeList result = (NodeList)expr.evaluate(document, XPathConstants.NODESET);
-                    NodeList nodes = (NodeList) result;
-                    if (nodes.getLength() == 0) {
-                        documentRoot.appendChild(importedFragmentNode);
-                    }
                 } catch(ParserConfigurationException e) {
                     e.printStackTrace();
                 } catch(IOException e) {
@@ -230,65 +314,95 @@ public class XMLCorpusPostProcessorNoMention {
             } else {
                 // we still need to add the curation level information/class for the documents having annotations
                 // get the document node
+                File pdfFile = AnnotatedCorpusGeneratorCSV.getPDF(documentPath, docName, articleUtilities);
+
+                // process header with consolidation to get some nice header metadata for this document
+                BiblioItem biblio = new BiblioItem();
+                GrobidAnalysisConfig configHeader = new GrobidAnalysisConfig.GrobidAnalysisConfigBuilder()
+                                        .startPage(0)
+                                        .endPage(2)
+                                        .consolidateHeader(1)
+                                        .build();
                 try {
-                    XPath xpath = xpathFactory.newXPath();
-                    XPathExpression expr = xpath.compile("//*[@id='"+docName+"']");
-                    NodeList result = (NodeList)expr.evaluate(document, XPathConstants.NODESET);
-                    NodeList nodes = (NodeList) result;
-                    if (nodes.getLength() == 1) {
-                        org.w3c.dom.Element docFileDescElement = (org.w3c.dom.Element)nodes.item(0);
-
-                        // we get the fileDesc element
-                        org.w3c.dom.Element docRootElement = (org.w3c.dom.Element) docFileDescElement.getParentNode();
-
-                        // add curation class information
-                        org.w3c.dom.Element profileDesc = document.createElement("profileDesc");
-
-                        org.w3c.dom.Element textClass = document.createElement("textClass");
-                        org.w3c.dom.Element catRef = document.createElement("catRef");
-
-                        String catCuration = "with_reconciliation_and_scripts";
-                        catRef.setAttribute("target", "#"+catCuration);
-
-                        textClass.appendChild(catRef);
-
-                        // number of annotators
-                        List<String> annotators = new ArrayList<String>();
-                        for(SoftciteAnnotation localAnnotation : localAnnotations) {
-                            String annotatorID = localAnnotation.getAnnotatorID();
-                            if (!annotators.contains(annotatorID)) {
-                                annotators.add(annotatorID);
-                            }
-                        }
-
-                        if (annotators.size() == 1) {
-                            org.w3c.dom.Element catRef2 = document.createElement("catRef");
-
-                            catCuration = "unique_annotator";
-                            catRef2.setAttribute("target", "#"+catCuration);
-
-                            textClass.appendChild(catRef2);
-                        } else if (annotators.size() > 1) {
-                            org.w3c.dom.Element catRef2 = document.createElement("catRef");
-
-                            catCuration = "multiple_annotator";
-                            catRef2.setAttribute("target", "#"+catCuration);
-
-                            textClass.appendChild(catRef2);
-                        }
-
-                        profileDesc.appendChild(textClass);
-                        docRootElement.appendChild(profileDesc);
-                    } else {
-                        notFoundAnnotatedDocument++;
-                    }
-                } catch(XPathExpressionException e) {
+                    engine.processHeader(pdfFile.getPath(), configHeader, biblio);
+                } catch(Exception e) {
                     e.printStackTrace();
                 }
+                if (biblio.getTitle() == null || biblio.getTitle().trim().length() ==0) {
+                    // get metadata by consolidation
+                    if (docName.startsWith("10."))
+                        biblio.setDOI(docName.replace("%2F", "/"));
+                    else if (docName.startsWith("PMC"))
+                        biblio.setPMCID(docName);
+
+                    // consolidation
+                    biblio = engine.getParsers().getHeaderParser().consolidateHeader(biblio, 1);
+                }
+
+                //if (biblio.getTitle() == null || biblio.getTitle().trim().length() ==0) 
+                //    continue;
+
+                AnnotatedDocument annotatedDocument = entry.getValue();
+                annotatedDocument.setBiblio(biblio);
+
+                // number of annotators
+                List<String> annotators = new ArrayList<String>();
+                if (localAnnotations != null) {
+                    for(SoftciteAnnotation localAnnotation : localAnnotations) {
+                        String annotatorID = localAnnotation.getAnnotatorID();
+                        if (!annotators.contains(annotatorID)) {
+                            annotators.add(annotatorID);
+                        }
+                    }
+                }
+
+                nu.xom.Element root = null;
+                if (annotators.size() > 1) {
+                    root = SoftwareParser.getTEIHeaderSimple(docName, biblio, "multiple_annotator");
+                } else {
+                    root = SoftwareParser.getTEIHeaderSimple(docName, biblio, "unique_annotator");
+                }
+                // empty body for TEI conformance
+
+                nu.xom.Element textNode = teiElement("text");
+                textNode.addAttribute(new Attribute("xml:lang", "http://www.w3.org/XML/1998/namespace", "en"));
+
+                nu.xom.Element body = teiElement("body");                
+                textNode.appendChild(body);
+
+                root.appendChild(textNode);
+
+                // we could imagine add the 
+
+                // convert to DOM
+                String fragmentXml = XmlBuilderUtils.toXml(root);
+                try {
+                    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+                    factory.setNamespaceAware(true);
+                    DocumentBuilder builder = factory.newDocumentBuilder();
+                    org.w3c.dom.Document fragmentDocument = builder.parse(new InputSource(new StringReader(fragmentXml)));
+
+                    // import fragment document into the main document (true argument is for deep import)
+                    org.w3c.dom.Node importedFragmentNode = document.importNode(fragmentDocument.getDocumentElement(), true);
+
+                    // inject extra document info
+                    String articleSet = annotatedDocument.getArticleSet();
+                    if (articleSet != null) {
+                        ((org.w3c.dom.Element)importedFragmentNode).setAttribute("subtype", articleSet.replace("_article", ""));
+                    }
+                    ((org.w3c.dom.Element)importedFragmentNode).setAttribute("type", "article");
+
+                    documentRoot.appendChild(importedFragmentNode);
+                    
+                } catch(ParserConfigurationException e) {
+                    e.printStackTrace();
+                } catch(IOException e) {
+                    e.printStackTrace();
+                } catch(Exception e) {
+                    e.printStackTrace();
+                } 
             }
         }
-
-        System.out.println("number of annotated document not found in TEI: " + notFoundAnnotatedDocument);
 
         return document;
     }

@@ -1861,6 +1861,9 @@ System.out.print("\n");*/
                 }
                 AnnotatedDocument document = null;
                 String annotatorID = null;
+                if (csvRecord.size() != 4)
+                    System.out.println(" **** Warning **** softcite_articles.csv -> size of csv line " + nbCSVlines + " is " + 
+                        csvRecord.size() + " (should be 4)");
                 for(int i=0; i<csvRecord.size(); i++) {
                     String value = csvRecord.get(i);
                     if (value.trim().length() == 0)
@@ -1906,6 +1909,7 @@ System.out.print("\n");*/
                 }
             }
             System.out.println(nbCSVlines + " csv lines");
+            System.out.println("number of documents: " + documents.keySet().size());
         } catch(Exception e) {
             e.printStackTrace();
         }

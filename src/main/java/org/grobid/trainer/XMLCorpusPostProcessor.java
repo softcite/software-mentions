@@ -337,7 +337,7 @@ System.out.println(annotationContextLeftSignature + " / " + annotationContextRig
         return document;
     }
 
-    private static Element getFirstDirectChild(Element parent, String name) {
+    public static Element getFirstDirectChild(Element parent, String name) {
         for(Node child = parent.getFirstChild(); child != null; child = child.getNextSibling()) {
             if (child instanceof Element && name.equals(child.getNodeName())) 
                 return (Element) child;
