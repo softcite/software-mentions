@@ -1114,13 +1114,13 @@ public class AnnotatedCorpusGeneratorCSV {
         }
     }
 
-    private boolean isOverlapping(List<OffsetPosition> occupiedPositions, OffsetPosition position) {
+    public static boolean isOverlapping(List<OffsetPosition> occupiedPositions, OffsetPosition position) {
         for(OffsetPosition occupiedPosition : occupiedPositions) {
             if (occupiedPosition.start == position.start || occupiedPosition.end == position.end)
                 return true;
             if (position.start <= occupiedPosition.start && position.end > occupiedPosition.start)
                 return true;
-            if (position.start >= occupiedPosition.start && occupiedPosition.end >= position.start)
+            if (position.start >= occupiedPosition.start && occupiedPosition.end > position.start)
                 return true;
         }
         return false;
