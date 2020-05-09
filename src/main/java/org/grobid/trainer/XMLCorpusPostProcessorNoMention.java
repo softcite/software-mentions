@@ -826,11 +826,11 @@ public class XMLCorpusPostProcessorNoMention {
             e.printStackTrace();
         } 
 
-        System.out.println("annotations located in PDF|"+software_annotation_count+"|"+all_mention_annotation_count+"|"+
+        System.out.println("|annotations located in PDF|"+software_annotation_count+"|"+all_mention_annotation_count+"|"+
             nb_articles_with_annotations+"|-|");
 
         // annotation reviewed by curator
-        System.out.println("annotation reviewed by curator|"+software_annotation_count+"|"+all_mention_annotation_count+"|"+
+        System.out.println("|annotation reviewed by curator|"+software_annotation_count+"|"+all_mention_annotation_count+"|"+
             nb_articles_with_annotations+"|-|");
 
         // annotation edited by curator
@@ -901,7 +901,7 @@ public class XMLCorpusPostProcessorNoMention {
             e.printStackTrace();
         } 
 
-        System.out.println("annotation edited by curator|"+software_annotation_count+"|"+all_mention_annotation_count+"|"+
+        System.out.println("|annotation edited by curator|"+software_annotation_count+"|"+all_mention_annotation_count+"|"+
             nb_articles_with_annotations+"|-|");
     }
 
