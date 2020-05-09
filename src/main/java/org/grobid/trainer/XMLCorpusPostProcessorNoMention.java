@@ -86,13 +86,14 @@ public class XMLCorpusPostProcessorNoMention {
         // documents without annotation are present with a "dummy" annotation 
         
         // we unfortunately need to use DOM to update the XML file which is always a lot of pain
-        String tei = null;
+        /*String tei = null;
+        org.w3c.dom.Document document = null;
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             tei = FileUtils.readFileToString(new File(xmlCorpusPath), UTF_8);
 
-            org.w3c.dom.Document document = builder.parse(new InputSource(new StringReader(tei)));
+            document = builder.parse(new InputSource(new StringReader(tei)));
             document = enrichTEIDocumentNoMention(document, documents, pdfPath);
             //document = enrichTEIDocument(document, documents, pdfPath);
 
@@ -108,7 +109,9 @@ public class XMLCorpusPostProcessorNoMention {
         // write updated TEI file
         if (tei != null) {
             FileUtils.writeStringToFile(new File(newXmlCorpusPath), tei, UTF_8);
-        }
+        }*/
+
+        this.generalCountAnnotations(documents, annotations, xmlCorpusPath);
     }
 
     private org.w3c.dom.Document enrichTEIDocument(org.w3c.dom.Document document, 
@@ -681,7 +684,226 @@ public class XMLCorpusPostProcessorNoMention {
         return inlineAnnotations;
     }
 
+    public static void generalCountAnnotations(Map<String, AnnotatedDocument> documents, 
+                                        Map<String, SoftciteAnnotation> annotations,
+                                        String xmlCorpusPath) {
+        System.out.println("\n|annotation type|software entity annotations|all software annotations|articles with annotations|article without annotation|");
+        System.out.println("|---               |---         |---        |---         |---      |");
 
+        // raw annotation runs (article x annotator assigment)
+        int software_annotation_count = 0;
+        int all_mention_annotation_count = 0;
+        int nb_articles_with_annotations = 0;
+        int nb_articles_without_annotations = 0;
+        int totalDocuments = 0;
+        for (Map.Entry<String,AnnotatedDocument> entry : documents.entrySet()) {
+            List<SoftciteAnnotation> localAnnotations = entry.getValue().getAnnotations();
+            totalDocuments++;
+            if (localAnnotations != null && localAnnotations.size()>0) {
+                boolean hasSoftwareAnnotation = false;
+                for(SoftciteAnnotation annotation : localAnnotations) {
+                    if (annotation.getType() == AnnotationType.SOFTWARE) {
+                        if (annotation.getSoftwareMention() == null || annotation.getSoftwareMention().trim().length() == 0)
+                            continue; 
+                        software_annotation_count += 1;
+                        hasSoftwareAnnotation = true;
+                        // software mention
+                        all_mention_annotation_count += 1;
+                        if (annotation.getVersionDate() != null && annotation.getVersionDate().trim().length()>0)
+                            all_mention_annotation_count += 1;
+                        if (annotation.getVersionNumber() != null && annotation.getVersionNumber().trim().length()>0)
+                            all_mention_annotation_count += 1;
+                        if (annotation.getCreator() != null && annotation.getCreator().trim().length()>0)
+                            all_mention_annotation_count += 1;
+                        if (annotation.getUrl() != null && annotation.getUrl().trim().length()>0)
+                            all_mention_annotation_count += 1;
+                    }
+                }
+                if (hasSoftwareAnnotation) 
+                    nb_articles_with_annotations += 1;
+                else
+                    nb_articles_without_annotations += 1;
+            } else
+                nb_articles_without_annotations += 1;
+        }
+        System.out.println("|raw annotation runs|"+software_annotation_count+"|"+all_mention_annotation_count+"|"+
+            nb_articles_with_annotations+"|"+nb_articles_without_annotations+"|");
+
+        // raw annotation largest run per article
+        all_mention_annotation_count = 0;
+        software_annotation_count = 0;
+        // for each article we restrict the count to the annotator who has produced the largest number of annotation
+        // (or do we want to merge annotations for having the largest set as alternative?)
+        for (Map.Entry<String,AnnotatedDocument> entry : documents.entrySet()) {
+            // count the number of annotations per annotator
+            Map<String,Integer> annotatorCountAll = new TreeMap<String,Integer>();
+            Map<String,Integer> annotatorCountEntities = new TreeMap<String,Integer>();
+
+            List<SoftciteAnnotation> localAnnotations = entry.getValue().getAnnotations();
+            if (localAnnotations == null || localAnnotations.size() ==0)
+                continue;
+            for(SoftciteAnnotation annotation : localAnnotations) {
+                if (annotation.getType() == AnnotationType.SOFTWARE) {
+                    if (annotation.getSoftwareMention() == null || annotation.getSoftwareMention().trim().length() == 0)
+                        continue; 
+
+                    String annotator = annotation.getAnnotatorID();
+                    
+                    // per global software entity
+                    if (annotatorCountEntities.get(annotator) == null) {
+                        annotatorCountEntities.put(annotator, new Integer(1));
+                    } else {
+                        annotatorCountEntities.put(annotator, annotatorCountEntities.get(annotator)+1);
+                    }
+
+                    // per annotation, software mention is always present so we start at 1
+                    int theSum = 1;
+                    if (annotation.getVersionDate() != null && annotation.getVersionDate().trim().length()>0) 
+                        theSum++;
+                    if (annotation.getVersionNumber() != null && annotation.getVersionNumber().trim().length()>0) 
+                        theSum++;
+                    if (annotation.getCreator() != null && annotation.getCreator().trim().length()>0) 
+                        theSum++;
+                    if (annotation.getUrl() != null && annotation.getUrl().trim().length()>0) 
+                        theSum++;
+
+                    if (annotatorCountAll.get(annotator) == null) {
+                        annotatorCountAll.put(annotator, new Integer(theSum));
+                    } else {
+                        annotatorCountAll.put(annotator, annotatorCountAll.get(annotator)+theSum);
+                    }
+                }
+            }
+
+            // keep the largest count
+            int maxCountEntities = 0;
+            int maxCountAll = 0;
+            for (Map.Entry<String, Integer> entry2 : annotatorCountEntities.entrySet()) {
+                if (entry2.getValue() > maxCountEntities)
+                    maxCountEntities = entry2.getValue();
+            }
+            for (Map.Entry<String, Integer> entry2 : annotatorCountAll.entrySet()) {
+                if (entry2.getValue() > maxCountAll)
+                    maxCountAll = entry2.getValue();
+            }
+
+            // update count for the document
+            all_mention_annotation_count += maxCountAll;
+            software_annotation_count += maxCountEntities;
+        }
+
+        System.out.println("|raw annotation largest run|"+software_annotation_count+"|"+all_mention_annotation_count+"|"+
+            nb_articles_with_annotations+"|"+nb_articles_without_annotations+"|");
+
+        // annotations located in PDF
+        org.w3c.dom.Document document = null;
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            String tei = FileUtils.readFileToString(new File(xmlCorpusPath), UTF_8);
+
+            document = builder.parse(new InputSource(new StringReader(tei)));
+
+            XPath xPath = XPathFactory.newInstance().newXPath();
+            String expression = "//rs";
+            NodeList nodes = (NodeList) xPath.compile(expression).evaluate(document, XPathConstants.NODESET);
+            all_mention_annotation_count = nodes.getLength();
+
+            expression = "//rs[@type='software']";
+            nodes = (NodeList) xPath.compile(expression).evaluate(document, XPathConstants.NODESET);
+            software_annotation_count = nodes.getLength();
+
+            expression = "//TEI";
+            nodes = (NodeList) xPath.compile(expression).evaluate(document, XPathConstants.NODESET);
+            nb_articles_with_annotations = nodes.getLength();
+
+            nb_articles_without_annotations = totalDocuments - nb_articles_with_annotations;
+        } catch(ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch(IOException e) {
+            e.printStackTrace();
+        } catch(Exception e) {
+            e.printStackTrace();
+        } 
+
+        System.out.println("annotations located in PDF|"+software_annotation_count+"|"+all_mention_annotation_count+"|"+
+            nb_articles_with_annotations+"|-|");
+
+        // annotation reviewed by curator
+        System.out.println("annotation reviewed by curator|"+software_annotation_count+"|"+all_mention_annotation_count+"|"+
+            nb_articles_with_annotations+"|-|");
+
+        // annotation edited by curator
+        all_mention_annotation_count = 0;
+        software_annotation_count = 0;
+        nb_articles_with_annotations = 0;
+        nb_articles_without_annotations = 0;
+        document = null;
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            String tei = FileUtils.readFileToString(new File(xmlCorpusPath), UTF_8);
+
+            document = builder.parse(new InputSource(new StringReader(tei)));
+
+            XPath xPath = XPathFactory.newInstance().newXPath();
+            String expression = "//rs[@resp='#curator']";
+            NodeList nodes = (NodeList) xPath.compile(expression).evaluate(document, XPathConstants.NODESET);
+            all_mention_annotation_count = nodes.getLength();
+
+            expression = "//TEI[descendant::rs[@resp='#curator']]";
+            nodes = (NodeList) xPath.compile(expression).evaluate(document, XPathConstants.NODESET);
+            nb_articles_with_annotations = nodes.getLength();
+
+        } catch(ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch(IOException e) {
+            e.printStackTrace();
+        } catch(Exception e) {
+            e.printStackTrace();
+        } 
+
+        document = null;
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            String tei = FileUtils.readFileToString(new File(xmlCorpusPath), UTF_8);
+
+            document = builder.parse(new InputSource(new StringReader(tei)));
+
+            XPath xPath = XPathFactory.newInstance().newXPath();
+            String expression = "//rs/@id";
+            List<String> localIds = new ArrayList<String>();
+            NodeList nodes = (NodeList) xPath.compile(expression).evaluate(document, XPathConstants.NODESET);
+            for (int i = 0; i < nodes.getLength(); i++) {
+                org.w3c.dom.Node idElement = nodes.item(i);
+                if (!localIds.contains(idElement.getNodeValue()))
+                    localIds.add(idElement.getNodeValue());
+            }
+
+            for(String localId : localIds) {
+                String expression3 = "//rs[@resp='#curator'][@corresp='#" + localId + "']";
+                NodeList nodes3 = (NodeList) xPath.compile(expression3).evaluate(document, XPathConstants.NODESET);
+
+                String expression4 = "//rs[@resp='#curator'][@id='" + localId + "']";
+                NodeList nodes4 = (NodeList) xPath.compile(expression4).evaluate(document, XPathConstants.NODESET);
+
+                if (nodes3.getLength() > 0 || nodes4.getLength() > 0) {
+                    software_annotation_count++;
+                }
+            }
+
+        } catch(ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch(IOException e) {
+            e.printStackTrace();
+        } catch(Exception e) {
+            e.printStackTrace();
+        } 
+
+        System.out.println("annotation edited by curator|"+software_annotation_count+"|"+all_mention_annotation_count+"|"+
+            nb_articles_with_annotations+"|-|");
+    }
 
     /**
      * Command line execution.
