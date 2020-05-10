@@ -51,6 +51,12 @@ public class CrossAgreement {
         return field.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
     }
 
+    public static String simplifiedFieldNoDigits(String field) { 
+        if (field == null)
+            return "";
+        return field.replaceAll("[^a-zA-Z]", "").toLowerCase();
+    }
+
     public int getCertaintyThreshold() {
         return this.certaintyThreshold;
     }

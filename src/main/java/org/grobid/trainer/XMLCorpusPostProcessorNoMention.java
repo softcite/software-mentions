@@ -86,7 +86,7 @@ public class XMLCorpusPostProcessorNoMention {
         // documents without annotation are present with a "dummy" annotation 
         
         // we unfortunately need to use DOM to update the XML file which is always a lot of pain
-        /*String tei = null;
+        String tei = null;
         org.w3c.dom.Document document = null;
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -109,9 +109,9 @@ public class XMLCorpusPostProcessorNoMention {
         // write updated TEI file
         if (tei != null) {
             FileUtils.writeStringToFile(new File(newXmlCorpusPath), tei, UTF_8);
-        }*/
+        }
 
-        this.generalCountAnnotations(documents, annotations, xmlCorpusPath);
+        //this.generalCountAnnotations(documents, annotations, xmlCorpusPath);
     }
 
     private org.w3c.dom.Document enrichTEIDocument(org.w3c.dom.Document document, 
@@ -242,15 +242,19 @@ public class XMLCorpusPostProcessorNoMention {
             }
             m++;*/
             String docName = entry.getKey();
+            AnnotatedDocument softciteDocument = entry.getValue();
 
-            // ensure that the document is not already present 
+            // check if the document is already present in the TEI corpus, it means it has at 
+            // least one annotation matching with its PDF  
             try {
                 XPath xpath = xpathFactory.newXPath();
                 XPathExpression expr = xpath.compile("//*[@id='"+docName+"']");
                 NodeList result = (NodeList)expr.evaluate(document, XPathConstants.NODESET);
                 NodeList nodes = (NodeList) result;
                 if (nodes.getLength() != 0) {
-                    // document already present, nothing to do !
+                    // document already present, we can still add the PDF-unmatched annotations 
+                    // corresponding to this document
+                    this.addUnmatchedAnnotations(docName, document, softciteDocument, annotators);
                     continue;
                 }
             } catch(XPathExpressionException e) {
@@ -258,8 +262,6 @@ public class XMLCorpusPostProcessorNoMention {
             } catch(Exception e) {
                 e.printStackTrace();
             }
-            
-            AnnotatedDocument softciteDocument = entry.getValue();
 
             List<SoftciteAnnotation> localAnnotations = softciteDocument.getAnnotations();
             if (localAnnotations == null) {
@@ -298,8 +300,7 @@ public class XMLCorpusPostProcessorNoMention {
                     biblio = engine.getParsers().getHeaderParser().consolidateHeader(biblio, 1);
                 }
 
-                AnnotatedDocument annotatedDocument = entry.getValue();
-                annotatedDocument.setBiblio(biblio);
+                softciteDocument.setBiblio(biblio);
 
                 // number of local annotators
                 List<String> localAnnotators = new ArrayList<String>();
@@ -338,7 +339,7 @@ public class XMLCorpusPostProcessorNoMention {
                     org.w3c.dom.Node importedFragmentNode = document.importNode(fragmentDocument.getDocumentElement(), true);
 
                     // inject extra document info
-                    String articleSet = annotatedDocument.getArticleSet();
+                    String articleSet = softciteDocument.getArticleSet();
                     if (articleSet != null) {
                         ((org.w3c.dom.Element)importedFragmentNode).setAttribute("subtype", articleSet.replace("_article", ""));
                     }
@@ -354,7 +355,7 @@ public class XMLCorpusPostProcessorNoMention {
                     e.printStackTrace();
                 } 
             } else {
-                // we still need to add the curation level information/class for the documents having annotations
+                // we add the curation level information/class for the documents having annotations
                 // for document without annotations, we can use the ones, unmatched in the PDF, from the CSV file
 
                 // get the document node
@@ -383,8 +384,7 @@ public class XMLCorpusPostProcessorNoMention {
                     biblio = engine.getParsers().getHeaderParser().consolidateHeader(biblio, 1);
                 }
 
-                AnnotatedDocument annotatedDocument = entry.getValue();
-                annotatedDocument.setBiblio(biblio);
+                softciteDocument.setBiblio(biblio);
 
                 // number of annotators
                 List<String> localAnnotators = new ArrayList<String>();
@@ -410,7 +410,6 @@ public class XMLCorpusPostProcessorNoMention {
 
                 nu.xom.Element body = teiElement("body");                
                 textNode.appendChild(body);
-
                 
                 if (localAnnotations != null && localAnnotations.size() > 0) {
                     nbDocWithNonPresentAnnotation++;
@@ -434,13 +433,12 @@ public class XMLCorpusPostProcessorNoMention {
 
                         //System.out.println("raw: " + localContext);
 
-                        localContext = localContext.replaceAll("[\\000\\001\\002\\003\\006]+", "");
+                        localContext = XMLUtilities.stripNonValidXMLCharacters(localContext);
                         localContext = localContext.replaceAll("<[^>]+>", " ");                        
                         localContext = localContext.replace("\n", " ");
                         localContext = localContext.replaceAll("( )+", " ");
                         localContext = localContext.trim();
 
-                        nu.xom.Element curParagraph = null;
                         String localContextSignature = CrossAgreement.simplifiedField(localContext);
                         if (previousLocalContexts != null && previousLocalContexts.contains(localContextSignature)) {
                             continue;
@@ -459,7 +457,8 @@ public class XMLCorpusPostProcessorNoMention {
                             continue;
                         }
 
-                        curParagraph = teiElement("p");
+                        nu.xom.Element curParagraph = teiElement("p");
+                        nu.xom.Element curSentence = teiElement("s");
                         int lastPosition = 0;
                         boolean hasSoftware = false;
                         List<OffsetPosition> occupiedPositions = new ArrayList<OffsetPosition>();
@@ -477,9 +476,9 @@ public class XMLCorpusPostProcessorNoMention {
                             }
 
                             if (inlineAnnotation.getText().startsWith(" ")) {
-                                curParagraph.appendChild(localContext.substring(lastPosition,position.start)+" ");
+                                curSentence.appendChild(localContext.substring(lastPosition,position.start)+" ");
                             } else
-                                curParagraph.appendChild(localContext.substring(lastPosition,position.start));
+                                curSentence.appendChild(localContext.substring(lastPosition,position.start));
 
                             nu.xom.Element rs = teiElement("rs");
                             rs.appendChild(inlineAnnotation.getText().trim());
@@ -515,7 +514,7 @@ public class XMLCorpusPostProcessorNoMention {
                             if (indexAnnotator != -1)
                                 rs.addAttribute(new Attribute("resp", "#annotator"+indexAnnotator));
                             
-                            curParagraph.appendChild(rs);
+                            curSentence.appendChild(rs);
 
                             if (inlineAnnotation.getText().endsWith(" ")) {
                                 lastPosition = position.end-1;
@@ -523,7 +522,8 @@ public class XMLCorpusPostProcessorNoMention {
                                 lastPosition = position.end;
                         }
 
-                        curParagraph.appendChild(localContext.substring(lastPosition));
+                        curSentence.appendChild(localContext.substring(lastPosition));
+                        curParagraph.appendChild(curSentence);
 
                         if (hasSoftware)
                             body.appendChild(curParagraph);
@@ -553,7 +553,7 @@ public class XMLCorpusPostProcessorNoMention {
                     org.w3c.dom.Node importedFragmentNode = document.importNode(fragmentDocument.getDocumentElement(), true);
 
                     // inject extra document info
-                    String articleSet = annotatedDocument.getArticleSet();
+                    String articleSet = softciteDocument.getArticleSet();
                     if (articleSet != null) {
                         ((org.w3c.dom.Element)importedFragmentNode).setAttribute("subtype", articleSet.replace("_article", ""));
                     }
@@ -576,6 +576,182 @@ public class XMLCorpusPostProcessorNoMention {
         return document;
     }
 
+    private void addUnmatchedAnnotations(String docName, 
+                                        org.w3c.dom.Document document, 
+                                        AnnotatedDocument softciteDocument, 
+                                        List<String> annotators) {
+        List<SoftciteAnnotation> localAnnotations = softciteDocument.getAnnotations();
+        if (localAnnotations == null) {
+            // it should never be the case
+            return;
+        }
+
+        org.w3c.dom.Element documentRoot = null;
+        try {
+            XPath xPath = XPathFactory.newInstance().newXPath();
+            String expression = "//TEI[descendant::fileDesc[@id='"+docName+"']]/text/body";
+            NodeList nodes = (NodeList) xPath.compile(expression).evaluate(document, XPathConstants.NODESET);
+            if (nodes.getLength() == 1)
+                documentRoot = (org.w3c.dom.Element)nodes.item(0);
+            else 
+                System.out.println(" **** Warning ***** " + docName + 
+                    ": could not get root element node for this document in the TEI XML");
+        } catch(Exception e) {
+            e.printStackTrace();
+        } 
+
+        if (documentRoot == null) 
+            return;
+
+        String reviewText = documentRoot.getTextContent();
+        String reviewTextSimplified = CrossAgreement.simplifiedFieldNoDigits(reviewText);
+
+        // we init the entity index beyond the highest possible high number to avoid possible clash with the existing
+        // software annatation identifiers present in the TEI XML
+        int index_entity = localAnnotations.size();
+        List<String> previousLocalContexts = null;
+        for(SoftciteAnnotation localAnnotation : localAnnotations) {
+            if (localAnnotation.getType() != AnnotationType.SOFTWARE)
+                continue;
+
+            String localContext = localAnnotation.getContext();
+            if (localContext == null || localContext.trim().length() == 0)
+                continue;
+
+            String softwareString = localAnnotation.getSoftwareMention();
+            if (softwareString == null || softwareString.trim().length() == 0)
+                continue;
+
+            localContext = XMLUtilities.stripNonValidXMLCharacters(localContext);
+            localContext = localContext.replaceAll("<[^>]+>", " ");                        
+            localContext = localContext.replace("\n", " ");
+            localContext = localContext.replaceAll("( )+", " ");
+            localContext = localContext.trim();
+
+            // if the local context is already present in the paragraphs reviewed by the
+            // curator, we skip the annotation
+            String localContextSimplified = CrossAgreement.simplifiedFieldNoDigits(localContext);
+            if (reviewTextSimplified.indexOf(localContextSimplified) != -1)
+                continue;
+
+            if (previousLocalContexts != null && previousLocalContexts.contains(localContextSimplified)) {
+                continue;
+            } 
+
+            List<Annotation> sortedAnnotations = this.alignAnnotations(localAnnotation, localContext);
+            //System.out.println("nb of inline annotations: " + sortedAnnotations.size());
+
+            if (sortedAnnotations == null || sortedAnnotations.size() == 0) {
+                System.out.println(" **** WARNING **** " + docName + 
+                    " - No inline annotation possible for local annotation ");
+                continue;
+            }
+
+            nu.xom.Element curParagraph = teiElement("p");
+            nu.xom.Element curSentence = teiElement("s");
+            int lastPosition = 0;
+            boolean hasSoftware = false;
+            List<OffsetPosition> occupiedPositions = new ArrayList<OffsetPosition>();
+            for(Annotation inlineAnnotation : sortedAnnotations) {
+                if (inlineAnnotation.getAttributeValue("type") == null)
+                    continue;
+
+                OffsetPosition position = inlineAnnotation.getOccurence();
+
+                // check if the position already taken
+                if (AnnotatedCorpusGeneratorCSV.isOverlapping(occupiedPositions, position)) {
+                    continue;
+                } else {
+                    occupiedPositions.add(position);
+                }
+
+                if (inlineAnnotation.getText().startsWith(" ")) {
+                    curSentence.appendChild(localContext.substring(lastPosition,position.start)+" ");
+                } else
+                    curSentence.appendChild(localContext.substring(lastPosition,position.start));
+
+                nu.xom.Element rs = teiElement("rs");
+                rs.appendChild(inlineAnnotation.getText().trim());
+
+                if (inlineAnnotation.getAttributeValue("type").equals("software")) { 
+                    hasSoftware = true;
+                    rs.addAttribute(new Attribute("type", "software"));
+                    rs.addAttribute(new Attribute("id", docName+"-software-"+index_entity));
+                    
+                    // do we have a "software_was_used" information?
+                    if (localAnnotation.getIsUsed()) {
+                        // add an attribute
+                        rs.addAttribute(new Attribute("subtype", "used"));
+                    }
+
+                    // add certainty provided by annotator
+                    if (localAnnotation.getCertainty() != -1) {
+                        // add an attribute
+                        rs.addAttribute(new Attribute("cert", String.format("%.1f", ((float)localAnnotation.getCertainty())/10)));
+                    } 
+                } else if (inlineAnnotation.getAttributeValue("type").equals("version")) {
+                    rs.addAttribute(new Attribute("type", "version"));
+                    rs.addAttribute(new Attribute("corresp", "#software-"+index_entity));
+                } else if (inlineAnnotation.getAttributeValue("type").equals("publisher")) {
+                    rs.addAttribute(new Attribute("type", "publisher"));
+                    rs.addAttribute(new Attribute("corresp", "#software-"+index_entity));
+                } else if (inlineAnnotation.getAttributeValue("type").equals("url")) {
+                    rs.addAttribute(new Attribute("type", "url"));
+                    rs.addAttribute(new Attribute("corresp", "#software-"+index_entity));
+                }
+
+                int indexAnnotator = annotators.indexOf(localAnnotation.getAnnotatorID());
+                if (indexAnnotator != -1)
+                    rs.addAttribute(new Attribute("resp", "#annotator"+indexAnnotator));
+                
+                curSentence.appendChild(rs);
+
+                if (inlineAnnotation.getText().endsWith(" ")) {
+                    lastPosition = position.end-1;
+                } else
+                    lastPosition = position.end;
+            }
+
+            curSentence.appendChild(localContext.substring(lastPosition));
+            curParagraph.appendChild(curSentence);
+
+            if (!hasSoftware)
+                continue;
+            if (previousLocalContexts == null)
+                previousLocalContexts = new ArrayList<String>();
+            previousLocalContexts.add(localContextSimplified);
+
+            index_entity++;
+        
+
+
+
+
+            // convert to DOM
+            String fragmentXml = XmlBuilderUtils.toXml(curParagraph);
+            try {
+                DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+                factory.setNamespaceAware(true);
+                DocumentBuilder builder = factory.newDocumentBuilder();
+                org.w3c.dom.Document fragmentDocument = builder.parse(new InputSource(new StringReader(fragmentXml)));
+
+                // import fragment document into the main document (true argument is for deep import)
+                org.w3c.dom.Node importedFragmentNode = document.importNode(fragmentDocument.getDocumentElement(), true);
+
+                documentRoot.appendChild(importedFragmentNode);
+                
+            } catch(ParserConfigurationException e) {
+                e.printStackTrace();
+            } catch(IOException e) {
+                e.printStackTrace();
+            } catch(Exception e) {
+                e.printStackTrace();
+            } 
+
+
+
+        }
+    }
 
     private List<Annotation> alignAnnotations(SoftciteAnnotation annotation, 
                                             String localContext) {
