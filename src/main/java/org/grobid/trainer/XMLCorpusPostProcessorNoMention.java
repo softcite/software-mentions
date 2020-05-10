@@ -134,7 +134,6 @@ public class XMLCorpusPostProcessorNoMention {
                     org.w3c.dom.Element fileDescElement = XMLCorpusPostProcessor.getFirstDirectChild(teiHeaderElement, "fileDesc");
                     if (fileDescElement != null) {
                         String docId = fileDescElement.getAttribute("xml:id");
-                        //System.out.println(docId);
 
                         // add curation class information
                         org.w3c.dom.Element profileDesc = document.createElement("profileDesc");
@@ -209,9 +208,6 @@ public class XMLCorpusPostProcessorNoMention {
                 // get annotator name under <name>
                 org.w3c.dom.Element nameElement = XMLCorpusPostProcessor.getFirstDirectChild((org.w3c.dom.Element)nNode, "name");
                 String annotatorName = XMLCorpusPostProcessor.getText(nameElement);
-
-                //System.out.println(identifier + " / " + annotatorName);
-
                 result.add(annotatorName);
             }
         }
@@ -265,16 +261,10 @@ public class XMLCorpusPostProcessorNoMention {
 
             List<SoftciteAnnotation> localAnnotations = softciteDocument.getAnnotations();
             if (localAnnotations == null) {
-                System.out.println(" **** Warning ****" + docName + " - document with null localAnnotation object");
-            } /*else {
-                System.out.println(docName + " - " + localAnnotations.size() + " annotations");
-                if (localAnnotations.size() == 1) {
-                    System.out.println(docName + " - " + localAnnotations.get(0).getType());
-                }
-            }*/
+                System.out.println(" **** Warning **** " + docName + " - document with null localAnnotation object");
+            } 
             
             if (localAnnotations != null && localAnnotations.size() == 1 && localAnnotations.get(0).getType() == AnnotationType.DUMMY) {
-//System.out.println(docName + " - " + localAnnotations.get(0).getType());
                 File pdfFile = AnnotatedCorpusGeneratorCSV.getPDF(documentPath, docName, articleUtilities);
 
                 // process header with consolidation to get some nice header metadata for this document
@@ -570,8 +560,8 @@ public class XMLCorpusPostProcessorNoMention {
                 } 
             }
         }
-        System.out.println(nbDocWithNonPresentAnnotation + " documents WithNonPresentAnnotation");
-        System.out.println(nbDocWithValidNonPresentAnnotation + " documents nbDocWithValidNonPresentAnnotation");
+        //System.out.println(nbDocWithNonPresentAnnotation + " documents WithNonPresentAnnotation");
+        //System.out.println(nbDocWithValidNonPresentAnnotation + " documents nbDocWithValidNonPresentAnnotation");
 
         return document;
     }
@@ -722,10 +712,6 @@ public class XMLCorpusPostProcessorNoMention {
             previousLocalContexts.add(localContextSimplified);
 
             index_entity++;
-        
-
-
-
 
             // convert to DOM
             String fragmentXml = XmlBuilderUtils.toXml(curParagraph);
@@ -747,9 +733,6 @@ public class XMLCorpusPostProcessorNoMention {
             } catch(Exception e) {
                 e.printStackTrace();
             } 
-
-
-
         }
     }
 

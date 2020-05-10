@@ -43,6 +43,7 @@ import javax.xml.transform.stream.*;
 import org.w3c.dom.traversal.DocumentTraversal;
 import org.w3c.dom.traversal.NodeFilter;
 import org.w3c.dom.traversal.TreeWalker;
+import javax.xml.xpath.*;
 
 /**
  * Post-process an existing TEI XML package version of the corpus which has been manually reviewed/reconciled.
@@ -383,6 +384,24 @@ System.out.println(annotationContextLeftSignature + " / " + annotationContextRig
     }
 
     public static String serialize(org.w3c.dom.Document doc, Node node) {
+        // to avoid issues with space reamining from deleted nodes
+        try {
+            XPathFactory xpathFactory = XPathFactory.newInstance();
+            // XPath to find empty text nodes.
+            XPathExpression xpathExp = xpathFactory.newXPath().compile(
+                    "//text()[normalize-space(.) = '']");  
+            NodeList emptyTextNodes = (NodeList) 
+                    xpathExp.evaluate(doc, XPathConstants.NODESET);
+
+            // Remove each empty text node from document.
+            for (int i = 0; i < emptyTextNodes.getLength(); i++) {
+                Node emptyTextNode = emptyTextNodes.item(i);
+                emptyTextNode.getParentNode().removeChild(emptyTextNode);
+            }
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        }
+
         DOMSource domSource = null;
         String xml = null;
         try {
