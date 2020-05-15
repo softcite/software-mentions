@@ -335,7 +335,8 @@ public class XMLCorpusPostProcessorNoMention {
                     }
                     ((org.w3c.dom.Element)importedFragmentNode).setAttribute("type", "article");
 
-                    documentRoot.appendChild(importedFragmentNode);
+                    if (!articleSet.equals("training_article"))
+                        documentRoot.appendChild(importedFragmentNode);
 
                 } catch(ParserConfigurationException e) {
                     e.printStackTrace();
@@ -549,7 +550,8 @@ public class XMLCorpusPostProcessorNoMention {
                     }
                     ((org.w3c.dom.Element)importedFragmentNode).setAttribute("type", "article");
 
-                    documentRoot.appendChild(importedFragmentNode);
+                    if (!articleSet.equals("training_article"))
+                        documentRoot.appendChild(importedFragmentNode);
                     
                 } catch(ParserConfigurationException e) {
                     e.printStackTrace();
@@ -637,8 +639,10 @@ public class XMLCorpusPostProcessorNoMention {
                 continue;
             }
 
-            nu.xom.Element curParagraph = teiElement("p");
-            nu.xom.Element curSentence = teiElement("s");
+            //nu.xom.Element curParagraph = teiElement("p");
+            //nu.xom.Element curSentence = teiElement("s");
+            nu.xom.Element curSentence = teiElement("ab");
+            curSentence.addAttribute(new Attribute("type", "unmatched_with_pdf"));
             int lastPosition = 0;
             boolean hasSoftware = false;
             List<OffsetPosition> occupiedPositions = new ArrayList<OffsetPosition>();
@@ -703,7 +707,7 @@ public class XMLCorpusPostProcessorNoMention {
             }
 
             curSentence.appendChild(localContext.substring(lastPosition));
-            curParagraph.appendChild(curSentence);
+            //curParagraph.appendChild(curSentence);
 
             if (!hasSoftware)
                 continue;
@@ -714,7 +718,9 @@ public class XMLCorpusPostProcessorNoMention {
             index_entity++;
 
             // convert to DOM
-            String fragmentXml = XmlBuilderUtils.toXml(curParagraph);
+            //String fragmentXml = XmlBuilderUtils.toXml(curParagraph);
+            String fragmentXml = XmlBuilderUtils.toXml(curSentence);
+            fragmentXml = fragmentXml.replace("xmlns=\"http://www.tei-c.org/ns/1.0\"", "");
             try {
                 DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
                 factory.setNamespaceAware(true);
