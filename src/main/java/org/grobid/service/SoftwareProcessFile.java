@@ -13,7 +13,6 @@ import org.grobid.core.factory.GrobidPoolingFactory;
 import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.utilities.IOUtilities;
 import org.grobid.core.utilities.KeyGen;
-//import org.grobid.core.utilities.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.InputSource;
@@ -26,17 +25,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.StreamingOutput;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
@@ -85,9 +76,10 @@ public class SoftwareProcessFile {
                 List<SoftwareEntity> entities = extractedEntities.getLeft();
                 StringBuilder json = new StringBuilder();
 				json.append("{ ");
+                json.append(SoftwareServiceUtil.applicationDetails(GrobidProperties.getVersion()));
 
 				// page height and width
-                json.append("\"pages\":[");
+                json.append(", \"pages\":[");
 				List<Page> pages = doc.getPages();
                 boolean first = true;
                 for(Page page : pages) {

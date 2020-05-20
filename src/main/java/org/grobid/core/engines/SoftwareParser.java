@@ -780,12 +780,12 @@ public class SoftwareParser extends AbstractParser {
             // find end boundary
             int endPos = pos;
             List<SoftwareComponent> theComps = new ArrayList<SoftwareComponent>();
-            SoftwareComponent comp = entity.getVersionNumber();
+            SoftwareComponent comp = entity.getVersion();
             if (comp != null) 
                 theComps.add(comp);
-            comp = entity.getVersionDate();
+            /*comp = entity.getVersionDate();
             if (comp != null) 
-                theComps.add(comp);
+                theComps.add(comp);*/
             comp = entity.getCreator();
             if (comp != null) 
                 theComps.add(comp);
@@ -821,12 +821,12 @@ public class SoftwareParser extends AbstractParser {
     public List<SoftwareEntity> filterByRefCallout(List<SoftwareEntity> entities, List<BiblioComponent> refBibComponents) {
         for(BiblioComponent refBib : refBibComponents) {
             for(SoftwareEntity entity : entities) {
-                if (entity.getVersionNumber() == null)
+                if (entity.getVersion() == null)
                     continue;
-                SoftwareComponent versionNumber = entity.getVersionNumber();
-                if ( (refBib.getOffsetStart() >= versionNumber.getOffsetStart()) &&
-                     (refBib.getOffsetEnd() <= versionNumber.getOffsetEnd()) ) {
-                    entity.setVersionNumber(null);
+                SoftwareComponent version = entity.getVersion();
+                if ( (refBib.getOffsetStart() >= version.getOffsetStart()) &&
+                     (refBib.getOffsetEnd() <= version.getOffsetEnd()) ) {
+                    entity.setVersion(null);
                 }
             }
         }
@@ -1190,8 +1190,7 @@ public class SoftwareParser extends AbstractParser {
                 }
 
                 FeaturesVectorSoftware featuresVector =
-                        FeaturesVectorSoftware.addFeaturesSoftware(text, null,
-                                softwareLexicon.inSoftwareDictionary(token.getText()), isSoftwarePattern);
+                        FeaturesVectorSoftware.addFeaturesSoftware(text, null, isSoftwarePattern);
                 result.append(featuresVector.printVector());
                 result.append("\n");
                 posit++;
@@ -1216,7 +1215,7 @@ public class SoftwareParser extends AbstractParser {
 
         SoftwareComponent currentComponent = null;
         SoftwareLexicon.Software_Type openEntity = null;
-
+//System.out.println(result);
         int pos = 0; // position in term of characters for creating the offsets
 
         for (TaggingTokenCluster cluster : clusters) {

@@ -11,7 +11,7 @@ Python client for using the GROBID software mention recogntion service. It can b
 
 ## Requirements
 
-The client has been tested with Python 3.5. 
+The client has been tested with Python 3.5 and 3.6. 
 
 ## Install
 
@@ -62,7 +62,11 @@ For processing a single file., the resulting json being written as file at the i
 
 > python3 software_mention_client.py --file-in toto.pdf --file-out toto.json
 
-For processing recursively a directory of PDF files, the results will be written on the mongodb server and database indicated in the config file:
+For processing recursively a directory of PDF files, the results can be either
+
+* written to a mongodb server and database indicated in the config file:
+
+* in the directory of PDF files, as json files, together with each processed PDF
 
 > python3 software_mention_client.py --repo-in /mnt/data/biblio/pmc_oa_dir/
 

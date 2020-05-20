@@ -119,6 +119,7 @@ configurations.all {
 }
 
 test {
+    testLogging.showStandardStreams = true
     exclude '**/**IntegrationTest**'
 }
 
@@ -149,7 +150,7 @@ war {
 
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
-task mainJar(type: ShadowJar, group: 'test') {
+task mainJar(type: ShadowJar) {
     zip64 true
     from sourceSets.main.output
 
@@ -179,8 +180,6 @@ jar {
     enabled false
 }
 
-
-
 artifacts {
     archives jar
     archives shadowJar
@@ -189,7 +188,7 @@ artifacts {
 
 task copyModels(type: Copy) {
     from "${rootDir}/resources/model"
-    include "*.wapiti"
+    include "*"
     into "${rootDir}/../grobid-home/models/software/"
 }
 

@@ -36,6 +36,10 @@ public class SoftwareTrainer extends AbstractTrainer {
 
     public SoftwareTrainer() {
         this(0.00001, 20, 0);
+
+        epsilon = 0.00001;
+        window = 30;
+        nbMaxIterations = 1500;
     }
 
     public SoftwareTrainer(double epsilon, int window, int nbMaxIterations) {
@@ -606,8 +610,7 @@ public class SoftwareTrainer extends AbstractTrainer {
                 }
 
                 FeaturesVectorSoftware featuresVector =
-                        FeaturesVectorSoftware.addFeaturesSoftware(token, label,
-                                softwareLexicon.inSoftwareDictionary(token), isSoftwarePattern);
+                        FeaturesVectorSoftware.addFeaturesSoftware(token, label, isSoftwarePattern);
                 if (featuresVector.label == null)
                     continue;
                 writer.write(featuresVector.printVector());

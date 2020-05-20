@@ -57,7 +57,7 @@ public class SoftwareParserTest {
         System.out.println("testSoftwareParserText - testSoftwareParserText - testSoftwareParserText");
         String text = IOUtils.toString(this.getClass().getResourceAsStream("/text.txt"), StandardCharsets.UTF_8.toString());
         text = text.replaceAll("\\n", " ").replaceAll("\\t", " ");
-        List<SoftwareEntity> entities = SoftwareParser.getInstance().processText(text);
+        List<SoftwareEntity> entities = SoftwareParser.getInstance().processText(text, false);
         //System.out.println(text);
         //System.out.println(entities.size());
         assertThat(entities, hasSize(5));
@@ -65,7 +65,7 @@ public class SoftwareParserTest {
 
     //@Test
     public void testSoftwareParserPDF() throws Exception {
-        Pair<List<SoftwareEntity>, Document> res = SoftwareParser.getInstance().processPDF(new File("./src/test/resources/annot.pdf"));
+        Pair<List<SoftwareEntity>, Document> res = SoftwareParser.getInstance().processPDF(new File("./src/test/resources/annot.pdf"), false);
         List<SoftwareEntity> entities = res.getLeft();
 
         assertThat(entities, hasSize(19));

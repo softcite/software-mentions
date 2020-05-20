@@ -111,7 +111,7 @@ public class SoftwareAnnotationSaxHandler extends DefaultHandler {
                                     currentTag = "<version-date>";
                                 }*/ else if (value.equals("url")) {
                                     currentTag = "<url>";
-                                } else if (value.equals("creator")) {
+                                } else if (value.equals("creator") || value.equals("publisher")) {
                                     currentTag = "<creator>";
                                 } else if (value.equals("version")) {
                                     currentTag = "<version>";

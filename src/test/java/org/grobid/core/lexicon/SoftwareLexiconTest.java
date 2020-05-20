@@ -47,9 +47,9 @@ public class SoftwareLexiconTest {
         softwareLexicon = SoftwareLexicon.getInstance();
     }
 
-    //@Test
+    @Test
     public void testTokenPositionsSoftwareNames() throws Exception {
-        String testString = "...";
+        String testString = "The next step is to install GROBID version 0.5.4.";
 
         List<LayoutToken> tokens = SoftwareAnalyzer.getInstance().tokenizeWithLayoutToken(testString);
         List<OffsetPosition> softwareTokenPositions = softwareLexicon.tokenPositionsSoftwareNames(tokens);
@@ -59,12 +59,12 @@ public class SoftwareLexiconTest {
                 System.out.print(tokens.get(i));
             System.out.println(" / " + position.start + " " + position.end);
         }*/
-        assertThat(softwareTokenPositions, hasSize(8));
+        assertThat(softwareTokenPositions, hasSize(1));
     }
 
-    //@Test
+    @Test
     public void testTokenPositionsSoftwareNameShort() throws Exception {
-        String testString = "...";
+        String testString = "The next step is to install Libreoffice version 12.1";
 
         List<LayoutToken> tokens = SoftwareAnalyzer.getInstance().tokenizeWithLayoutToken(testString);
         List<OffsetPosition> softwareTokenPositions = softwareLexicon.tokenPositionsSoftwareNames(tokens);
@@ -75,23 +75,11 @@ public class SoftwareLexiconTest {
             System.out.println(" / " + position.start + " " + position.end);
         }*/
         assertThat(softwareTokenPositions, hasSize(1));
-
-        testString = "...";
-
-        tokens = SoftwareAnalyzer.getInstance().tokenizeWithLayoutToken(testString);
-        softwareTokenPositions = softwareLexicon.tokenPositionsSoftwareNames(tokens);
-
-        /*for(OffsetPosition position : softwareTokenPositions) {
-            for(int i=position.start; i <= position.end; i++)
-                System.out.print(tokens.get(i));
-            System.out.println(" / " + position.start + " " + position.end);
-        }*/
-        assertThat(softwareTokenPositions, hasSize(1));
     }
 
-    //@Test
+    @Test
     public void testTokenPositionsSoftwareNameComplex() throws Exception {
-        String testString = "...";
+        String testString = "The next step is to install LibreOffice Draw version 12.1 and LibreOffice Math version 0.9.";
 
         List<LayoutToken> tokens = SoftwareAnalyzer.getInstance().tokenizeWithLayoutToken(testString);
         List<OffsetPosition> softwareTokenPositions = softwareLexicon.tokenPositionsSoftwareNames(tokens);
@@ -101,8 +89,7 @@ public class SoftwareLexiconTest {
                 System.out.print(tokens.get(i));
             System.out.println(" / " + position.start + " " + position.end);
         }*/
-
-        assertThat(softwareTokenPositions, hasSize(2));
+        assertThat(softwareTokenPositions, hasSize(4));
     }
 
 }

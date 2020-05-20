@@ -12,17 +12,17 @@ Latest performance (accuracy and runtime) can be found [below](https://github.co
 
 ## Install, build, run
 
-Building module requires JDK 1.8.  
+Building module requires JDK 1.8 or higher (note: it was not tested with JDK 1.14 yet).  
 
 First install and build the latest development version of GROBID as explained by the [documentation](http://grobid.readthedocs.org).
 
-Copy the module software-mentions as sibling sub-project to grobid-core, grobid-trainer, etc.:
+Under the installed `grobid/` directory, clone the present module software-mentions (it will appear as sibling sub-project to grobid-core, grobid-trainer, etc.):
 
-> cp -r software-mentions grobid/
+> cd grobid/
+
+> git clone https://github.com/kermitt2/software-mentions
 
 Copy the provided pre-trained model in the standard grobid-home path:
-
-> cd grobid/software-mentions/
 
 > ./gradlew copyModels 
 
@@ -32,12 +32,12 @@ Try compiling everything with:
 
 Run some test: 
 
-> ./gradlew clean test
+> ./gradlew test
 
 
 ## Start the service
 
-> ./gradlew clean appRun
+> ./gradlew appRun
 
 Javascript demo/console web app is then accessible at ```http://localhost:8060```. From the console and the `RESTfull services` tab, you can process chunk of text (select `ProcessText`) or process a complete PDF document (select `Annotate PDF document`).
 

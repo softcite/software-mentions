@@ -69,7 +69,7 @@ public class SoftwareLexicon {
         // Software lexicon
 
         //File file = new File(GrobidProperties.getGrobidHomePath()+"/../software-mentions/resources/lexicon/wikidata-softwares.txt");
-        File file = new File("resources/lexicon/wikidata-software.txt.gz");
+        File file = new File("resources/lexicon/wikidata-software.txt");
         if (!file.exists()) {
             throw new GrobidResourceException("Cannot initialize software dictionary, because file '" + 
                 file.getAbsolutePath() + "' does not exists.");
@@ -84,8 +84,8 @@ public class SoftwareLexicon {
         try {
             softwarePattern = new FastMatcher(file, SoftwareAnalyzer.getInstance(), true); // case sensitive
 
-            dis = new BufferedReader(new InputStreamReader(new GZIPInputStream(new FileInputStream(file)), "UTF-8"));
-            //dis = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
+            //dis = new BufferedReader(new InputStreamReader(new GZIPInputStream(new FileInputStream(file)), "UTF-8"));
+            dis = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
             String l = null;
             while ((l = dis.readLine()) != null) {
                 if (l.length() == 0) continue;

@@ -53,9 +53,8 @@ class software_mention_client(object):
         envFilePath = os.path.join(self.config["data_path"], 'entries')
         self.env = lmdb.open(envFilePath, map_size=map_size)
 
-        envFilePath = os.path.join(self.config["data_path"], 'fail')
+        envFilePath = os.path.join(self.config["data_path"], 'fail_software')
         self.env_fail = lmdb.open(envFilePath, map_size=map_size)
-
 
     def annotate_directory(self, directory):
         # recursive directory walk for all pdf documents
@@ -74,6 +73,7 @@ class software_mention_client(object):
 
 
     def annotate_batch(self, pdf_files, out_files=None, dois=None, pmcs=None):
+        # process a provided list of PDF
         print("annotate_batch", len(pdf_files))
         with concurrent.futures.ProcessPoolExecutor(max_workers=self.config["concurrency"]) as executor:
             for i, pdf_file in enumerate(pdf_files):
@@ -156,7 +156,7 @@ class software_mention_client(object):
         envFilePath = os.path.join(self.config["data_path"], 'entries')
         shutil.rmtree(envFilePath)
 
-        envFilePath = os.path.join(self.config["data_path"], 'fail')
+        envFilePath = os.path.join(self.config["data_path"], 'fail_software')
         shutil.rmtree(envFilePath)
 
         # re-init the environments
@@ -212,12 +212,12 @@ def annotate(file_in, config, mongo_db, file_out=None, doi=None, pmc=None):
         jsonObject['file_path'] = file_in
         jsonObject['date'] = datetime.datetime.now().isoformat();
         # TODO: get the version via the server
-        jsonObject['version'] = "0.5.6-SNAPSHOT";
+        jsonObject['version'] = "0.6.1-SNAPSHOT";
 
         print(jsonObject)
 
         if file_out is not None: 
-            # we write the json result into a file
+            # we write the json result into a file together with the processed pdf
             with open(file_out, "w", encoding="utf-8") as json_file:
                 json_file.write(json.dumps(jsonObject))
         else:
@@ -231,13 +231,13 @@ def annotate(file_in, config, mongo_db, file_out=None, doi=None, pmc=None):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = "GROBID Software Mention recognition client")
+    parser.add_argument("--repo-in", default=None, help="path to a directory of PDF files to be processed by the GROBID software mention recognizer")  
+    parser.add_argument("--file-in", default=None, help="a single PDF input file to be processed by the GROBID software mention recognizer") 
+    parser.add_argument("--file-out", default=None, help="path to a single output the software mentions in JSON format, extracted from the PDF file-in") 
     parser.add_argument("--data-path", default=None, help="path to the JSON dump file created by biblio-glutton-harvester") 
     parser.add_argument("--config", default="./config.json", help="path to the config file, default is ./config.json") 
-    parser.add_argument("--reprocess", action="store_true", help="Reprocessed failed PDF") 
-    parser.add_argument("--reset", action="store_true", help="Ignore previous processing states, and re-init the annotation process from the beginning") 
-    parser.add_argument("--file-in", default=None, help="A PDF input file to be processed by the GROBID software mention recognizer") 
-    parser.add_argument("--file-out", default=None, help="Path to output the software mentions in JSON format, extracted from the PDF file-in") 
-    parser.add_argument("--repo-in", default=None, help="Path to a directory of PDF files to be processed by the GROBID software mention recognizer")  
+    parser.add_argument("--reprocess", action="store_true", help="reprocessed failed PDF") 
+    parser.add_argument("--reset", action="store_true", help="ignore previous processing states and re-init the annotation process from the beginning") 
     
     args = parser.parse_args()
 

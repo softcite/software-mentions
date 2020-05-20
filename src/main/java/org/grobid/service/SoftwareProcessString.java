@@ -12,6 +12,8 @@ import org.grobid.core.data.SoftwareComponent;
 import org.grobid.core.data.SoftwareEntity;
 import org.grobid.core.engines.SoftwareParser;
 import org.grobid.core.factory.GrobidPoolingFactory;
+import org.grobid.core.utilities.GrobidProperties;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -53,13 +55,14 @@ public class SoftwareProcessString {
 
 			if (entities != null) {
 				retVal.append("{ ");
+				retVal.append(SoftwareServiceUtil.applicationDetails(GrobidProperties.getVersion()));
 				if (entities.size() == 0)
-					retVal.append("\"mentions\" : []");
+					retVal.append(", \"mentions\" : []");
 				else {
 					boolean first = true;
 					for(SoftwareEntity entity : entities)	{
 						if (first) {
-							retVal.append("\"mentions\" : [ ");
+							retVal.append(", \"mentions\" : [ ");
 							first = false;
 						} else {	
 							retVal.append(", ");

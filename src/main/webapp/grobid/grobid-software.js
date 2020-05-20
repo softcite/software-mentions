@@ -399,15 +399,21 @@ var grobid = (function ($) {
                     pieces.push(versionDate)
                 }
 
+                var version = entity['version']
+                if (version) {
+                    version['subtype'] = 'version'
+                    pieces.push(version)
+                }
+
                 var softwareUrl = entity['url']
                 if (softwareUrl) {
                     softwareUrl['subtype'] = 'url'
                     pieces.push(softwareUrl)
                 }
 
-                var creator = entity['creator']
+                var creator = entity['publisher']
                 if (creator) {
-                    creator['subtype'] = 'creator'
+                    creator['subtype'] = 'publisher'
                     pieces.push(creator)
                 }
 
@@ -482,9 +488,11 @@ var grobid = (function ($) {
                     indexComp++;
                 if (entity['version-date'])
                     indexComp++;
+                if (entity['version'])
+                    indexComp++;
                 if (entity['url'])
                     indexComp++;
-                if (entity['creator'])
+                if (entity['publisher'])
                     indexComp++;
                 for(var currentIndexComp = 0; currentIndexComp< indexComp; currentIndexComp++) {
                     $('#annot-' + entityIndex + '-' + currentIndexComp).bind('mouseenter', viewEntity);
@@ -563,15 +571,21 @@ var grobid = (function ($) {
                     pieces.push(versionDate)
                 }
 
+                var version = entity['version']
+                if (version) {
+                    version['subtype'] = 'version'
+                    pieces.push(version)
+                }
+
                 var softwareUrl = entity['url']
                 if (softwareUrl) {
                     softwareUrl['subtype'] = 'url'
                     pieces.push(softwareUrl)
                 }
 
-                var creator = entity['creator']
+                var creator = entity['publisher']
                 if (creator) {
-                    creator['subtype'] = 'creator'
+                    creator['subtype'] = 'publisher'
                     pieces.push(creator)
                 }
 
@@ -775,6 +789,13 @@ var grobid = (function ($) {
         if (versionDate)
             string += "<p>Version date: <b>" + versionDate + "</b></p>"
 
+        var version = null
+        if (entity['version'])
+            version = entity['version'].rawForm;
+
+        if (version)
+            string += "<p>Version: <b>" + version + "</b></p>"
+
         var url = null
         if (entity['url'])
             url = entity['url'].rawForm;
@@ -788,11 +809,11 @@ var grobid = (function ($) {
         }
 
         var creator = null
-        if (entity['creator'])
-            creator = entity['creator'].rawForm;
+        if (entity['publisher'])
+            creator = entity['publisher'].rawForm;
 
         if (creator)
-            string += "<p>Creator: <b>" + creator + "</b></p>"            
+            string += "<p>Publisher: <b>" + creator + "</b></p>"            
 
         //string += "<p>conf: <i>" + conf + "</i></p>";
         

@@ -27,8 +27,7 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 	
 	// component of the entity
 	private SoftwareComponent softwareName = null;
-	private SoftwareComponent versionNumber = null;
-	private SoftwareComponent versionDate = null;
+	private SoftwareComponent version = null;
 	private SoftwareComponent creator = null;
 	private SoftwareComponent softwareURL = null;
 
@@ -56,20 +55,12 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 		this.softwareName = softwareName;
 	}
 
-	public SoftwareComponent getVersionNumber() {
-		return this.versionNumber;
+	public SoftwareComponent getVersion() {
+		return this.version;
 	}
 
-	public void setVersionNumber(SoftwareComponent versionNumber) {
-		this.versionNumber = versionNumber;
-	}
-
-	public SoftwareComponent getVersionDate() {
-		return this.versionDate;
-	}
-
-	public void setVersionDate(SoftwareComponent versionDate) {
-		this.versionDate = versionDate;
+	public void setVersion(SoftwareComponent version) {
+		this.version = version;
 	}
 
 	public SoftwareComponent getCreator() {
@@ -116,15 +107,11 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 	 * of the two entities.    
 	 */
 	public static void merge(SoftwareEntity entity1, SoftwareEntity entity2) {
-		if (entity1.getVersionNumber() == null)
-			entity1.setVersionNumber(entity2.getVersionNumber());
-		else if (entity2.getVersionNumber() == null)
-			entity2.setVersionNumber(entity1.getVersionNumber());
 
-		if (entity1.getVersionDate() == null)
-			entity1.setVersionDate(entity2.getVersionDate());
-		else if (entity2.getVersionDate() == null)
-			entity2.setVersionDate(entity1.getVersionDate());
+		if (entity1.getVersion() == null)
+			entity1.setVersion(entity2.getVersion());
+		else if (entity2.getVersion() == null)
+			entity2.setVersion(entity1.getVersion());
 
 		if (entity1.getCreator() == null)
 			entity1.setCreator(entity2.getCreator());
@@ -149,13 +136,15 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 	public boolean freeField(TaggingLabel label) {
 		if (label.equals(SoftwareTaggingLabels.SOFTWARE) && (this.softwareName != null)) {
 			return false;
-		} else if (label.equals(SoftwareTaggingLabels.SOFTWARE_URL) && (this.versionNumber != null)) {
+		} else if (label.equals(SoftwareTaggingLabels.SOFTWARE_URL) && (this.version != null)) {
 			return false;
-		} else if (label.equals(SoftwareTaggingLabels.CREATOR) && (this.versionDate != null)) {
+		} else if (label.equals(SoftwareTaggingLabels.CREATOR) && (this.creator != null)) {
 			return false;
-		} else if (label.equals(SoftwareTaggingLabels.VERSION_NUMBER) && (this.creator != null)) {
+		} /*else if (label.equals(SoftwareTaggingLabels.VERSION_NUMBER) && (this.creator != null)) {
 			return false;
 		} else if (label.equals(SoftwareTaggingLabels.VERSION_DATE) && (this.softwareURL != null)) {
+			return false;
+		}*/ else if (label.equals(SoftwareTaggingLabels.VERSION) && (this.creator != null)) {
 			return false;
 		} 
 		return true;
@@ -168,10 +157,13 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 			this.softwareURL = component;
 		} else if (component.getLabel().equals(SoftwareTaggingLabels.CREATOR)) {
 			this.creator = component;
-		} else if (component.getLabel().equals(SoftwareTaggingLabels.VERSION_NUMBER)) {
+		} /*else if (component.getLabel().equals(SoftwareTaggingLabels.VERSION_NUMBER)) {
 			this.versionNumber = component;
 		} else if (component.getLabel().equals(SoftwareTaggingLabels.VERSION_DATE)) {
 			this.versionDate = component;
+		}*/ 
+		else if (component.getLabel().equals(SoftwareTaggingLabels.VERSION)) {
+			this.version = component;
 		}
 	}
 
@@ -242,14 +234,11 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 		if (entityId != null) {
 			buffer.append(", \"id\" : \"" + entityId + "\"");	
 		}
-		if (versionNumber != null) {
-			buffer.append(", \"version-number\":" + versionNumber.toJson());
-		}
-		if (versionDate != null) {
-			buffer.append(", \"version-date\":" + versionDate.toJson());
+		if (version != null) {
+			buffer.append(", \"version\":" + version.toJson());
 		}
 		if (creator != null) {
-			buffer.append(", \"creator\":" + creator.toJson());
+			buffer.append(", \"publisher\":" + creator.toJson());
 		}
 		if (softwareURL != null) {
 			buffer.append(", \"url\":" + softwareURL.toJson());

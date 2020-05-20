@@ -27,7 +27,7 @@ public class FeaturesVectorSoftware {
     // OPENQUOTE, ENDQUOTE
 
 	// lexical features to inject some vocabularies/dictionaries of software names
-    public boolean softwareName = false; // can be part of a known software name without looking at 
+    //public boolean softwareName = false; // can be part of a known software name without looking at 
 									  // the other tokens around
 	public boolean isSoftwareToken = false; // is part of a known software name, possibly a 
                                       // multi-token expression
@@ -89,10 +89,10 @@ public class FeaturesVectorSoftware {
         res.append(" " + punctType); // in case the token is a punctuation (NO otherwise)
 
 		// lexical information (1), token is a token in the software vocabulary
-        if (softwareName)
+        /*if (softwareName)
             res.append(" 1");
         else
-            res.append(" 0");
+            res.append(" 0");*/
 		
 		// lexical feature: belongs to a known full software name (1)
 		if (isSoftwareToken)
@@ -126,7 +126,6 @@ public class FeaturesVectorSoftware {
      */
     static public FeaturesVectorSoftware addFeaturesSoftware(String line,
                                             String label,
-                                            boolean isSoftwareToken,
                                             boolean isSoftwarePattern) {
         FeatureFactory featureFactory = FeatureFactory.getInstance();
 
@@ -190,9 +189,7 @@ public class FeaturesVectorSoftware {
                 featuresVector.commonName = true;
             }
 
-            featuresVector.softwareName = isSoftwareToken;
-
-			featuresVector.isSoftwareToken = isSoftwarePattern; 
+            featuresVector.isSoftwareToken = isSoftwarePattern;
 
 			featuresVector.shadowNumber = TextUtilities.shadowNumbers(word);
 			
