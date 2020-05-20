@@ -49,27 +49,34 @@ Javascript demo/console web app is then accessible at ```http://localhost:8060``
 Using ```curl``` POST/GET requests with some text:
 
 ```
-curl -X POST -d "text=The next step is to install GROBID version 0.5.4." localhost:8060/processSoftwareText
+curl -X POST -d "text=We test GROBID (version 0.6.1)." localhost:8060/processSoftwareText
 ```
 
-which should return this:
+which should return this (runtime in ms):
 
 ```json
 {
-    "entities": [{
-        "software-name": {
-            "rawForm": "GROBID",
-            "offsetStart": 28,
-            "offsetEnd": 34
-        },
-        "type": "software",
-        "version-number": {
-            "rawForm": "version 0.5.4",
-            "offsetStart": 35,
-            "offsetEnd": 48
+    "application": "software-mentions",
+    "version": "0.6.1-SNAPSHOT",
+    "date": "2020-05-20T22:31+0000",
+    "mentions": [
+        {
+            "software-name": {
+                "rawForm": "GROBID",
+                "normalizedForm": "GROBID",
+                "offsetStart": 8,
+                "offsetEnd": 15
+            },
+            "type": "software",
+            "version": {
+                "rawForm": "0.6.1",
+                "normalizedForm": "0.6.1",
+                "offsetStart": 24,
+                "offsetEnd": 29
+            }
         }
-    }],
-    "runtime": 2
+    ],
+    "runtime": 1
 }
 ```
 
