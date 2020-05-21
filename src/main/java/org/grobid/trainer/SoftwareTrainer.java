@@ -114,10 +114,12 @@ public class SoftwareTrainer extends AbstractTrainer {
             SAXParserFactory spf = SAXParserFactory.newInstance();
             SoftwareAnnotationSaxHandler handler = new SoftwareAnnotationSaxHandler();
 
-            File thefile = new File(corpusDir.getPath() + "/all.clean.tei.xml");
+            //File thefile = new File(corpusDir.getPath() + "/all.clean.tei.xml");
+            File thefile = new File(corpusDir.getPath() + "all_clean_post_processed.tei.xml");
+            //all_clean_post_processed_with_no_mention.tei.xml
 
             if (!thefile.exists()) {
-                System.out.println("The XML TEI corpus training document does not exist: " + corpusDir.getPath() + "/all.clean.tei.xml");
+                System.out.println("The XML TEI corpus training document does not exist: " + corpusDir.getPath() + "/all_clean_post_processed.tei.xml");
             } else {
                 //get a new instance of parser
                 SAXParser p = spf.newSAXParser();

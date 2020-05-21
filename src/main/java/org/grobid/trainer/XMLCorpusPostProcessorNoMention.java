@@ -448,8 +448,10 @@ public class XMLCorpusPostProcessorNoMention {
                             continue;
                         }
 
-                        nu.xom.Element curParagraph = teiElement("p");
-                        nu.xom.Element curSentence = teiElement("s");
+                        //nu.xom.Element curParagraph = teiElement("p");
+                        //nu.xom.Element curSentence = teiElement("s");
+                        nu.xom.Element curSentence = teiElement("ab");
+                        curSentence.addAttribute(new Attribute("type", "unmatched_with_pdf"));
                         int lastPosition = 0;
                         boolean hasSoftware = false;
                         List<OffsetPosition> occupiedPositions = new ArrayList<OffsetPosition>();
@@ -514,10 +516,10 @@ public class XMLCorpusPostProcessorNoMention {
                         }
 
                         curSentence.appendChild(localContext.substring(lastPosition));
-                        curParagraph.appendChild(curSentence);
+                        //curParagraph.appendChild(curSentence);
 
                         if (hasSoftware)
-                            body.appendChild(curParagraph);
+                            body.appendChild(curSentence);
                         hasTextContent = true;
                         if (previousLocalContexts == null)
                             previousLocalContexts = new ArrayList<String>();

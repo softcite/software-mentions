@@ -39,20 +39,29 @@ Run some test:
 
 > ./gradlew appRun
 
+### Console web app
+
 Javascript demo/console web app is then accessible at ```http://localhost:8060```. From the console and the `RESTfull services` tab, you can process chunk of text (select `ProcessText`) or process a complete PDF document (select `Annotate PDF document`).
 
 ![GROBID Software mentions Demo](doc/images/screen5.png)
 
+When processing the PDF of a scientific article, the tool will also identify bibliographical reference markers and, when possible, attach the full parsed bibliographical reference to the identified software entity. In addition, bibliographical references are resolved via [biblio-glutton](https://github.com/kermitt2/biblio-glutton), providing a unique DOI, and optionally additional identifiers like PubMed ID, PMC ID, etc. and a link to the Open Access full text of the reference work when available (via Unpaywall).
+
 ![GROBID Software mentions Demo](doc/images/screen4.png)
 
+### Usage examples
 
-Using ```curl``` POST/GET requests with some text:
+Using ```curl``` POST/GET requests with some __text__:
 
 ```
 curl -X POST -d "text=We test GROBID (version 0.6.1)." localhost:8060/processSoftwareText
 ```
 
-which should return this (runtime in ms):
+```
+curl -GET --data-urlencode "text=We test GROBID (version 0.6.1)." localhost:8060/processSoftwareText
+```
+
+which should return this:
 
 ```json
 {
@@ -80,27 +89,34 @@ which should return this (runtime in ms):
 }
 ```
 
-```
-curl -GET --data-urlencode "text=The final step is to update GROBID version 0.5.5." localhost:8060/processSoftwareText
-```
+Runtimes are expressed in milliseconds. 
 
-Using ```curl``` POST/PUT requests with a PDF file:
+
+Using ```curl``` POST/PUT requests with a __PDF file__:
 
 ```bash
 curl --form input=@./thefile.pdf localhost:8060/annotateSoftwarePDF
 ```
 
-Runtimes are expressed in milliseconds. 
+For PDF, each entity will be associated with a list of bounding box coordinates relative to the PDF, See [here](https://grobid.readthedocs.io/en/latest/Coordinates-in-PDF/#coordinate-system-in-the-pdf) for more explanation about the coordinate system. 
 
 ## Benchmarking
 
-Notations:
+The following sequence labelling algorithms have been benchmarked:
 
 -    __CRF__: Conditional Random Fields with custom feature engineering 
 
 -    __BiLSTM-CRF__: Bidirectional LSTM-CRF with Gloves static embeddings
 
 -    __BiLSTM-CRF+ELMo__: Bidirectional LSTM-CRF with Gloves static embeddings and ELMo dynamic embeddings 
+
+-    __bert-base-en+CRF__: fine tuned standard BERT base model with CRF activation layer, pre-trained on general English text
+
+-    __SciBERT+CRF__: fine tuned BERT base model with CRF activation layer, pre-trained on scientific text 
+
+The CRF implementation is based on a custom fork of [Wapiti](https://github.com/kermitt2/wapiti).
+The other algorithms rely on the Deep Learning library [DeLFT](https://github.com/kermitt2/delft).
+All are natively integrated in the JVM to provide state-of-the-art performance both in accuracy and runtime. 
 
 ### Accuracy
 
@@ -195,7 +211,7 @@ The training data must be under ```software-mentions/resources/dataset/software/
 The following commands will split automatically and randomly the available annotated data (under ```resources/dataset/software/corpus/```) into a training set and an evaluation set, train a model based on the first set and launch an evaluation based on the second set. 
 
 ```
->  ./gradlew eval_software_split [-PgH=/custom/grobid/home -Ps=0.8 -Pt=10] 
+>  ./gradlew eval_software_split [-Ps=0.8 -PgH=/custom/grobid/home -Pt=10] 
 ```
 
 In this mode, by default, 90% of the available data is used for training and the remaining for evaluation. This default ratio can be changed with the parameter `-Ps`. By default, the training will use the available number of threads of the machine, but it can also be specified by the parameter `-Pt`. The grobid home can be optionally specified with parameter `-PgH`. By default it will take `../grobid-home`. 
@@ -205,7 +221,7 @@ In this mode, by default, 90% of the available data is used for training and the
 For n-fold evaluation using the available annotated data (under ```resources/dataset/software/corpus/```), use the command:
 
 ```
->  ./gradlew eval_software_nfold [-PgH=/path/grobid/home -n=10 -Pt=10]
+>  ./gradlew eval_software_nfold [-n=10 -PgH=/path/grobid/home -Pt=10]
 ```
 
 where `n` is the parameter for the number of folds, by default 10. Still by default, the training will use the available number of threads of the machine, but it can also be specified by the parameter `-Pt`. The grobid home can be optionally specified with parameter `-PgH`. By default it will take `../grobid-home`. 
@@ -238,7 +254,7 @@ The path to the PDF repo is the path where the PDF corresponding to the annotate
 
 The compiled XML training files will be written in the standard GROBID training path for the softwate recognition model under `grobid/software-mentions/resources/dataset/software/corpus/`.
 
-### Psot-processing for adding provenance information in the corpus XML TEI file
+### Post-processing for adding provenance information in the corpus XML TEI file
 
 Once the generated snippet-oriented corpus TEI file is generated, manually reviewed and reconciled, it is possible to re-inject back provenance information (when possible) with the following command:
 
