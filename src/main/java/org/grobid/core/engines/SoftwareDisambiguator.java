@@ -270,6 +270,8 @@ public class SoftwareDisambiguator {
 
                     // statements can be used to filter obvious non-software entities which are
                     // mere disambiguation errors
+
+                    // check if value of P31 (instance of) are observed software values
                     boolean toBeFiltered = true;
                     if ( (statements != null) && (statements.get("P31") != null) ) {
                         List<String> p31 = statements.get("P31");
@@ -280,6 +282,9 @@ public class SoftwareDisambiguator {
                             }
                         }
                     }
+
+                    // check if any of the P279 (subclass of) values are compatible with software entities, 
+                    // as collected in existing wikidata software entities
                     if ( toBeFiltered && (statements != null) && (statements.get("P279") != null) ) {
                         List<String> p279 = statements.get("P279");
                         for(String p279Value : p279) {
@@ -290,7 +295,7 @@ public class SoftwareDisambiguator {
                         }
                     }
 
-                    // any of these properties mean a software
+                    // occurence of any of these properties mean a software (to be refined)
                     // P178: developer, P3499: Gentoo package identifier, P1324: source code repository, 
                     // P277: programing language, P348: software version
                     if ( toBeFiltered && (statements != null) && (statements.get("P178") != null 
@@ -298,13 +303,14 @@ public class SoftwareDisambiguator {
                         toBeFiltered = false;
                     }
                     
-                    // to be reviewed
+                    // completely hacky for the moment and to be reviewed
                     if ( toBeFiltered && (statements != null) && (statements.get("P856") != null) ) {
                         List<String> p856 = statements.get("P856");
                         for(String p856Value : p856) {
-                            // these are official web page values, we allow .edu, .org and apache as possible software web page
+                            // these are official web page values, we allow .edu, .org, github and apache as possible software web page
                             // keyterms
-                            if (p856Value.indexOf(".edu") != -1 || p856Value.indexOf(".edu") != -1 || p856Value.indexOf("apache") != -1 ) {
+                            if (p856Value.indexOf(".edu") != -1 || p856Value.indexOf(".org") != -1 || 
+                                p856Value.indexOf("apache") != -1 || p856Value.indexOf("github") != -1) {
                                 toBeFiltered = false;
                                 break;
                             }

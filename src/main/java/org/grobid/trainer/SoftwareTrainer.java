@@ -115,7 +115,7 @@ public class SoftwareTrainer extends AbstractTrainer {
             SoftwareAnnotationSaxHandler handler = new SoftwareAnnotationSaxHandler();
 
             //File thefile = new File(corpusDir.getPath() + "/all.clean.tei.xml");
-            File thefile = new File(corpusDir.getPath() + "all_clean_post_processed.tei.xml");
+            File thefile = new File(corpusDir.getPath() + "/all_clean_post_processed.tei.xml");
             //all_clean_post_processed_with_no_mention.tei.xml
 
             if (!thefile.exists()) {
