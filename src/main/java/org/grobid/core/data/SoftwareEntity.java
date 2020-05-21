@@ -132,11 +132,10 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 	/**
 	 * Check if a component corresponding to a given label is already present in a software entity.
 	 * Bibliographical references are ignored because they can be accumulated to the same entity.
+	 * SOFTWARE labels are ignored because they anchor the process of attaching components. 
 	 */
 	public boolean freeField(TaggingLabel label) {
-		if (label.equals(SoftwareTaggingLabels.SOFTWARE) && (this.softwareName != null)) {
-			return false;
-		} else if (label.equals(SoftwareTaggingLabels.SOFTWARE_URL) && (this.version != null)) {
+		if (label.equals(SoftwareTaggingLabels.SOFTWARE_URL) && (this.softwareURL != null)) {
 			return false;
 		} else if (label.equals(SoftwareTaggingLabels.CREATOR) && (this.creator != null)) {
 			return false;
@@ -144,7 +143,7 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 			return false;
 		} else if (label.equals(SoftwareTaggingLabels.VERSION_DATE) && (this.softwareURL != null)) {
 			return false;
-		}*/ else if (label.equals(SoftwareTaggingLabels.VERSION) && (this.creator != null)) {
+		}*/ else if (label.equals(SoftwareTaggingLabels.VERSION) && (this.version != null)) {
 			return false;
 		} 
 		return true;

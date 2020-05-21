@@ -182,7 +182,7 @@ public class SoftwareDisambiguator {
         if (json == null)
             return entities;
 
-        System.out.println(json);
+//System.out.println(json);
 
         // build a map for the existing entities in order to catch them easily
         // based on their positions
@@ -290,6 +290,27 @@ public class SoftwareDisambiguator {
                         }
                     }
 
+                    // any of these properties mean a software
+                    // P178: developer, P3499: Gentoo package identifier, P1324: source code repository, 
+                    // P277: programing language, P348: software version
+                    if ( toBeFiltered && (statements != null) && (statements.get("P178") != null 
+                        || statements.get("P1324") != null || statements.get("P277") != null || statements.get("P348") != null) ) {
+                        toBeFiltered = false;
+                    }
+                    
+                    // to be reviewed
+                    if ( toBeFiltered && (statements != null) && (statements.get("P856") != null) ) {
+                        List<String> p856 = statements.get("P856");
+                        for(String p856Value : p856) {
+                            // these are official web page values, we allow .edu, .org and apache as possible software web page
+                            // keyterms
+                            if (p856Value.indexOf(".edu") != -1 || p856Value.indexOf(".edu") != -1 || p856Value.indexOf("apache") != -1 ) {
+                                toBeFiltered = false;
+                                break;
+                            }
+                        }
+                    }
+
                     if (toBeFiltered) {
 System.out.println("filtered entity: " + wikidataId);
                         continue;
@@ -343,7 +364,7 @@ System.out.println("filtered entity: " + wikidataId);
             else
                 url = new URL("http://" + nerd_host + "/service/" + RESOURCEPATH);
 
-System.out.println("Calling: " + url.toString());
+//System.out.println("Calling: " + url.toString());
             CloseableHttpClient httpClient = HttpClients.createDefault();
             HttpPost post = new HttpPost(url.toString());
             //post.addHeader("Content-Type", "application/json");
@@ -400,8 +421,7 @@ System.out.println("Calling: " + url.toString());
             }
 
             buffer.append("], \"full\": true }");
-
-            System.out.println(buffer.toString());
+System.out.println(buffer.toString());
 
             //params.add(new BasicNameValuePair("query", buffer.toString()));
 

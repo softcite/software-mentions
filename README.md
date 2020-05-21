@@ -45,7 +45,7 @@ Javascript demo/console web app is then accessible at ```http://localhost:8060``
 
 ![GROBID Software mentions Demo](doc/images/screen5.png)
 
-When processing the PDF of a scientific article, the tool will also identify bibliographical reference markers and, when possible, attach the full parsed bibliographical reference to the identified software entity. In addition, bibliographical references are resolved via [biblio-glutton](https://github.com/kermitt2/biblio-glutton), providing a unique DOI, and optionally additional identifiers like PubMed ID, PMC ID, etc. and a link to the Open Access full text of the reference work when available (via Unpaywall).
+When processing the PDF of a scientific article, the tool will also identify bibliographical reference markers and, when possible, attach the full parsed bibliographical reference to the identified software entity. In addition, bibliographical references can be resolved via [biblio-glutton](https://github.com/kermitt2/biblio-glutton), providing a unique DOI, and optionally additional identifiers like PubMed ID, PMC ID, etc. and a link to the Open Access full text of the reference work when available (via Unpaywall).
 
 ![GROBID Software mentions Demo](doc/images/screen4.png)
 
@@ -98,7 +98,7 @@ Using ```curl``` POST/PUT requests with a __PDF file__:
 curl --form input=@./thefile.pdf localhost:8060/annotateSoftwarePDF
 ```
 
-For PDF, each entity will be associated with a list of bounding box coordinates relative to the PDF, See [here](https://grobid.readthedocs.io/en/latest/Coordinates-in-PDF/#coordinate-system-in-the-pdf) for more explanation about the coordinate system. 
+For PDF, each entity will be associated with a list of bounding box coordinates relative to the PDF, see [here](https://grobid.readthedocs.io/en/latest/Coordinates-in-PDF/#coordinate-system-in-the-pdf) for more explanation about the coordinate system. 
 
 ## Benchmarking
 

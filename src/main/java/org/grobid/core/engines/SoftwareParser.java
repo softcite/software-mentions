@@ -749,10 +749,11 @@ public class SoftwareParser extends AbstractParser {
                 }
             } else if (component.getOffsetEnd() < currentEntity.getSoftwareName().getOffsetStart()) {
                 // we are in the middle of the two entities, we use proximity to attach the component
-                // to an entity
+                // to an entity, with a strong bonus to the entity on the left 
+                // using sentence boundary could be helpful too in this situation
                 int dist1 = currentEntity.getSoftwareName().getOffsetStart() - component.getOffsetEnd();
                 int dist2 = component.getOffsetStart() - previousEntity.getSoftwareName().getOffsetEnd(); 
-                if (dist2 <= dist1) {
+                if (dist2 <= dist1*2) {
                     previousEntity.setComponent(component);
                 } else
                     currentEntity.setComponent(component);

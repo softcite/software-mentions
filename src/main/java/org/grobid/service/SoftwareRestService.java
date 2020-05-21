@@ -32,6 +32,7 @@ public class SoftwareRestService implements SoftwarePaths {
     private static final Logger LOGGER = LoggerFactory.getLogger(SoftwareRestService.class);
 
     private static final String TEXT = "text";
+    private static final String DISAMBIGUATE = "disambiguate";
     private static final String XML = "xml";
     private static final String PDF = "pdf";
     private static final String INPUT = "input";
@@ -72,9 +73,10 @@ public class SoftwareRestService implements SoftwarePaths {
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     @POST
     public Response processText_post(@FormParam(TEXT) String text, 
-                                     @DefaultValue("0") @FormParam(TEXT) String disambiguate) {
+                                     @DefaultValue("0") @FormParam(DISAMBIGUATE) String disambiguate) {
         LOGGER.info(text); 
         boolean disambiguateBoolean = validateBooleanRawParam(disambiguate);
+
         return SoftwareProcessString.processText(text, disambiguateBoolean);
     }
 
@@ -82,8 +84,8 @@ public class SoftwareRestService implements SoftwarePaths {
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     @GET
     public Response processText_get(@QueryParam(TEXT) String text, 
-                                    @DefaultValue("0") @QueryParam(TEXT) String disambiguate) {
-        LOGGER.info(text);
+                                    @DefaultValue("0") @QueryParam(DISAMBIGUATE) String disambiguate) {
+        //LOGGER.info(text);
         boolean disambiguateBoolean = validateBooleanRawParam(disambiguate);
         return SoftwareProcessString.processText(text, disambiguateBoolean);
     }
@@ -93,7 +95,7 @@ public class SoftwareRestService implements SoftwarePaths {
 	@Produces("application/json")
 	@POST
 	public Response processPDFAnnotation(@FormDataParam(INPUT) InputStream inputStream, 
-                                         @DefaultValue("0") @FormDataParam(TEXT) String disambiguate) {
+                                         @DefaultValue("0") @FormDataParam(DISAMBIGUATE) String disambiguate) {
         boolean disambiguateBoolean = validateBooleanRawParam(disambiguate);
 		return SoftwareProcessFile.processPDFAnnotation(inputStream, disambiguateBoolean);
 	}
