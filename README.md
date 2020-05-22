@@ -34,8 +34,12 @@ Run some test:
 
 > ./gradlew test
 
+To disambiguate the extracted mentions against Wikidata (match the software entity if known by Wikidata), you need to specify an [entity-fishing](https://github.com/kermitt2/entity-fishing) service. 
+
 
 ## Start the service
+
+To start the service:
 
 > ./gradlew appRun
 
@@ -51,9 +55,9 @@ When processing the PDF of a scientific article, the tool will also identify bib
 
 ### Web API
 
-#### processSoftwareText
+#### /processSoftwareText
 
-Identify software mention in text and optionally disambiguate the extracted software mention against Wikidata.  
+Identify the software mentions in text and optionally disambiguate the extracted software mentions against Wikidata.  
 
 |  method   |  request type         |  response type    |  parameters            |  requirement  |  description  |
 |---        |---                    |---                |---                     |---            |---            |
@@ -112,7 +116,7 @@ which should return this:
 
 Runtimes are expressed in milliseconds. 
 
-#### annotateSoftwarePDF
+#### /annotateSoftwarePDF
 
 |  method   |  request type         |  response type       |  parameters         |  requirement  |  description  |
 |---        |---                    |---                   |---                  |---            |---            |
@@ -131,7 +135,7 @@ Response status codes:
 
 A `503` error normally means that all the threads available to GROBID are currently used for processing concurrent requests. The client need to re-send the query after a wait time that will allow the server to free some threads. The wait time depends on the service and the capacities of the server, we suggest 2 seconds for the `annotateSoftwarePDF` service or 3 seconds when disambiguation is also requested.
 
-Using ```curl``` POST/PUT requests with a __PDF file__:
+Using ```curl``` POST request with a __PDF file__:
 
 ```console
 curl --form input=@./src/test/resources/PMC1636350.pdf --form disambiguate=1 localhost:8060/annotateSoftwarePDF
