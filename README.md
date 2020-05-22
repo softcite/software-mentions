@@ -49,15 +49,36 @@ When processing the PDF of a scientific article, the tool will also identify bib
 
 ![GROBID Software mentions Demo](doc/images/screen4.png)
 
-### Usage examples
+### Web API
+
+#### processSoftwareText
+
+Identify software mention in text and optionally disambiguate the extracted software mention against Wikidata.  
+
+|  method   |  request type         |  response type    |  parameters            |  requirement  |  description  |
+|---        |---                    |---                |---                     |---            |---            |
+| GET, POST | `multipart/form-data` | `application/json` | `text`            | required      | the text to be processed |
+|           |                       |                   | `disambiguate` | optional      | `disambiguate` is a string of value `0` (no disambiguation, default value) or `1` (disambiguate and inject Wikidata entity id and Wikipedia pageId) |
+
+Response status codes:
+
+|     HTTP Status code |   reason                                               |
+|---                   |---                                                     |
+|         200          |     Successful operation.                              |
+|         204          |     Process was completed, but no content could be extracted and structured |
+|         400          |     Wrong request, missing parameters, missing header  |
+|         500          |     Indicate an internal service error, further described by a provided message           |
+|         503          |     The service is not available, which usually means that all the threads are currently used                       |
+
+A `503` error normally means that all the threads available to GROBID are currently used for processing concurrent requests. The client need to re-send the query after a wait time that will allow the server to free some threads. The wait time depends on the service and the capacities of the server, we suggest 1 seconds for the `processSoftwareText` service.
 
 Using ```curl``` POST/GET requests with some __text__:
 
-```
+```console
 curl -X POST -d "text=We test GROBID (version 0.6.1)." localhost:8060/processSoftwareText
 ```
 
-```
+```console
 curl -GET --data-urlencode "text=We test GROBID (version 0.6.1)." localhost:8060/processSoftwareText
 ```
 
@@ -91,14 +112,34 @@ which should return this:
 
 Runtimes are expressed in milliseconds. 
 
+#### annotateSoftwarePDF
+
+|  method   |  request type         |  response type       |  parameters         |  requirement  |  description  |
+|---        |---                    |---                   |---                  |---            |---            |
+| POST      | `multipart/form-data` | `application/json`   | `input`             | required      | PDF file to be processed |
+|           |                       |                      | `disambiguate`      | optional      | `disambiguate` is a string of value `0` (no disambiguation, default value) or `1` (disambiguate and inject Wikidata entity id and Wikipedia pageId) |
+
+Response status codes:
+
+|     HTTP Status code |   reason                                               |
+|---                   |---                                                     |
+|         200          |     Successful operation.                              |
+|         204          |     Process was completed, but no content could be extracted and structured |
+|         400          |     Wrong request, missing parameters, missing header  |
+|         500          |     Indicate an internal service error, further described by a provided message           |
+|         503          |     The service is not available, which usually means that all the threads are currently used                       |
+
+A `503` error normally means that all the threads available to GROBID are currently used for processing concurrent requests. The client need to re-send the query after a wait time that will allow the server to free some threads. The wait time depends on the service and the capacities of the server, we suggest 2 seconds for the `annotateSoftwarePDF` service or 3 seconds when disambiguation is also requested.
 
 Using ```curl``` POST/PUT requests with a __PDF file__:
 
-```bash
-curl --form input=@./thefile.pdf localhost:8060/annotateSoftwarePDF
+```console
+curl --form input=@./src/test/resources/PMC1636350.pdf --form disambiguate=1 localhost:8060/annotateSoftwarePDF
 ```
 
 For PDF, each entity will be associated with a list of bounding box coordinates relative to the PDF, see [here](https://grobid.readthedocs.io/en/latest/Coordinates-in-PDF/#coordinate-system-in-the-pdf) for more explanation about the coordinate system. 
+
+In addition, the response will contain the bibliographical reference information associated to a software mention when found. The bibliographical information are provided in XML TEI (similar format as GROBID).  
 
 ## Benchmarking
 

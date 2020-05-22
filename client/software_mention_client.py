@@ -210,9 +210,9 @@ def annotate(file_in, config, mongo_db, file_out=None, doi=None, pmc=None):
             jsonObject['PMC'] = pmc;
         jsonObject['file_name'] = os.path.basename(file_in)
         jsonObject['file_path'] = file_in
-        jsonObject['date'] = datetime.datetime.now().isoformat();
+        #jsonObject['date'] = datetime.datetime.now().isoformat();
         # TODO: get the version via the server
-        jsonObject['version'] = "0.6.1-SNAPSHOT";
+        #jsonObject['version'] = "0.6.1-SNAPSHOT";
 
         print(jsonObject)
 
