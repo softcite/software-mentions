@@ -72,6 +72,7 @@ public class XMLCorpusPostProcessorNoMention {
     static Charset UTF_8 = Charset.forName("UTF-8"); // StandardCharsets.UTF_8
 
     private ArticleUtilities articleUtilities = new ArticleUtilities();
+    private Map<String,String> missingTitles = new TreeMap<>();
 
     /**
      * Inject curation class description, document entries without mention and curation class at document level     
@@ -84,6 +85,8 @@ public class XMLCorpusPostProcessorNoMention {
         AnnotatedCorpusGeneratorCSV converter = new AnnotatedCorpusGeneratorCSV();
         converter.importCSVFiles(csvPath, documents, annotations);
         // documents without annotation are present with a "dummy" annotation 
+
+        this.importCSVMissingTitles(csvPath, documents);
         
         // we unfortunately need to use DOM to update the XML file which is always a lot of pain
         String tei = null;
@@ -290,6 +293,13 @@ public class XMLCorpusPostProcessorNoMention {
                     biblio = engine.getParsers().getHeaderParser().consolidateHeader(biblio, 1);
                 }
 
+                // check missing title
+                String missingTitle = this.missingTitles.get(softciteDocument.getDocumentID());
+                if (missingTitle != null) {
+                    biblio.setTitle(missingTitle);
+                    biblio.setArticleTitle(missingTitle);
+                }
+
                 softciteDocument.setBiblio(biblio);
 
                 // number of local annotators
@@ -373,6 +383,13 @@ public class XMLCorpusPostProcessorNoMention {
 
                     // consolidation
                     biblio = engine.getParsers().getHeaderParser().consolidateHeader(biblio, 1);
+                }
+
+                // check missing title
+                String missingTitle = this.missingTitles.get(softciteDocument.getDocumentID());
+                if (missingTitle != null) {
+                    biblio.setTitle(missingTitle);
+                    biblio.setArticleTitle(missingTitle);
                 }
 
                 softciteDocument.setBiblio(biblio);
@@ -578,6 +595,23 @@ public class XMLCorpusPostProcessorNoMention {
         if (localAnnotations == null) {
             // it should never be the case
             return;
+        }
+
+        // check possible missing title
+        // check missing title
+        String missingTitle = this.missingTitles.get(softciteDocument.getDocumentID());
+        if (missingTitle != null) {   
+            try {
+                XPath xPath = XPathFactory.newInstance().newXPath();
+                String expression = "//TEI[descendant::fileDesc[@id='"+docName+"']]//title";
+                NodeList nodes = (NodeList) xPath.compile(expression).evaluate(document, XPathConstants.NODESET);
+                if (nodes.getLength() == 1) {
+                    org.w3c.dom.Element titleNode = (org.w3c.dom.Element)nodes.item(0);
+                    titleNode.setTextContent(missingTitle);
+                }
+            } catch(Exception e) {
+                e.printStackTrace();
+            } 
         }
 
         org.w3c.dom.Element documentRoot = null;
@@ -1070,6 +1104,44 @@ public class XMLCorpusPostProcessorNoMention {
 
         System.out.println("|annotation edited by curator|"+software_annotation_count+"|"+all_mention_annotation_count+"|"+
             nb_articles_with_annotations+"|-|");
+    }
+
+    private void importCSVMissingTitles(String csvPath, Map<String, AnnotatedDocument> documents) {
+        // this csv file gives missing titles for some hard to process articles
+        File softciteTitles = new File(csvPath + File.separator + "imputation-tei-article-missing-title.csv");
+        try {
+            BufferedReader b = new BufferedReader(new FileReader(softciteTitles));
+            boolean start = true;
+            int nbCSVlines = 0;
+            String line;
+            while ((line = b.readLine()) != null) {
+                // article_id,article_title 
+                // however the csv file is not a valid csv so we need to go manually and not with a csv parser
+                if (start) {
+                    start = false;
+                    continue;
+                }
+                int ind = line.indexOf(",");
+                String documentID = line.substring(0,ind).trim();
+                String title = line.substring(ind+1).trim();
+
+                AnnotatedDocument document = documents.get(documentID);
+                /*int ind = documentID.indexOf("_");
+                if (ind != -1)
+                    documentID = documentID.substring(0,ind);*/
+                if (documents.get(documentID) == null) {
+                    System.out.println(" **** Warning **** unknown document identifier: " + documentID);
+                    continue;
+                }
+                this.missingTitles.put(documentID, title);
+                //documentID = documentID.replace("%2F", "/");
+                //this.missingTitles.put(documentID, title);
+                nbCSVlines++;
+            }
+            System.out.println("number of documents with missing titles: " + nbCSVlines);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
