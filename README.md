@@ -39,7 +39,7 @@ Run some test:
 
 To start the service:
 
-> ./gradlew appRun
+> ./gradlew run
 
 ### Console web app
 
