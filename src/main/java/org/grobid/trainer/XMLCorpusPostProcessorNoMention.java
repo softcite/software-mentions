@@ -8,7 +8,7 @@ import org.grobid.core.data.BiblioItem;
 import org.grobid.core.engines.config.GrobidAnalysisConfig;
 import org.grobid.core.document.xml.XmlBuilderUtils;
 import org.grobid.core.utilities.*;
-
+import org.grobid.service.configuration.SoftwareConfiguration;
 import org.grobid.trainer.SoftciteAnnotation.AnnotationType;
 import org.grobid.core.engines.SoftwareParser;
 
@@ -38,6 +38,8 @@ import static org.grobid.core.document.xml.XmlBuilderUtils.teiElement;
 import org.apache.commons.lang3.StringUtils;
 
 import com.fasterxml.jackson.core.io.JsonStringEncoder;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 import org.xml.sax.InputSource;
 import org.w3c.dom.*;
@@ -73,6 +75,11 @@ public class XMLCorpusPostProcessorNoMention {
 
     private ArticleUtilities articleUtilities = new ArticleUtilities();
     private Map<String,String> missingTitles = new TreeMap<>();
+    private SoftwareConfiguration configuration;
+
+    public XMLCorpusPostProcessorNoMention(SoftwareConfiguration conf) {
+        this.configuration = conf;
+    }
 
     /**
      * Inject curation class description, document entries without mention and curation class at document level     
@@ -82,7 +89,7 @@ public class XMLCorpusPostProcessorNoMention {
         Map<String, AnnotatedDocument> documents = new HashMap<String, AnnotatedDocument>();
         Map<String, SoftciteAnnotation> annotations = new HashMap<String, SoftciteAnnotation>();
 
-        AnnotatedCorpusGeneratorCSV converter = new AnnotatedCorpusGeneratorCSV();
+        AnnotatedCorpusGeneratorCSV converter = new AnnotatedCorpusGeneratorCSV(this.configuration);
         converter.importCSVFiles(csvPath, documents, annotations);
         // documents without annotation are present with a "dummy" annotation 
 
@@ -268,7 +275,7 @@ public class XMLCorpusPostProcessorNoMention {
             } 
             
             if (localAnnotations != null && localAnnotations.size() == 1 && localAnnotations.get(0).getType() == AnnotationType.DUMMY) {
-                File pdfFile = AnnotatedCorpusGeneratorCSV.getPDF(documentPath, docName, articleUtilities);
+                File pdfFile = AnnotatedCorpusGeneratorCSV.getPDF(documentPath, docName, articleUtilities, this.configuration);
 
                 // process header with consolidation to get some nice header metadata for this document
                 BiblioItem biblio = new BiblioItem();
@@ -360,7 +367,7 @@ public class XMLCorpusPostProcessorNoMention {
                 // for document without annotations, we can use the ones, unmatched in the PDF, from the CSV file
 
                 // get the document node
-                File pdfFile = AnnotatedCorpusGeneratorCSV.getPDF(documentPath, docName, articleUtilities);
+                File pdfFile = AnnotatedCorpusGeneratorCSV.getPDF(documentPath, docName, articleUtilities, this.configuration);
 
                 // process header with consolidation to get some nice header metadata for this document
                 BiblioItem biblio = new BiblioItem();
@@ -1149,7 +1156,7 @@ public class XMLCorpusPostProcessorNoMention {
      *
      * @param args Command line arguments.
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
        
         // we are expecting four arguments: absolute path to the curated TEI XML corpus file, 
         // absolute path to softcite data in csv and abolute path
@@ -1192,7 +1199,10 @@ public class XMLCorpusPostProcessorNoMention {
             System.exit(-1);
         }  
 
-        XMLCorpusPostProcessorNoMention postProcessor = new XMLCorpusPostProcessorNoMention();
+        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+        SoftwareConfiguration conf = mapper.readValue("resources/config/config.yml", SoftwareConfiguration.class);
+
+        XMLCorpusPostProcessorNoMention postProcessor = new XMLCorpusPostProcessorNoMention(conf);
         try {
             postProcessor.process(xmlPath, csvPath, pdfPath, outputXmlPath);
         } catch (Exception e) {

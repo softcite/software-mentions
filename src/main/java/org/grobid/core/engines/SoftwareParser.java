@@ -33,6 +33,7 @@ import org.grobid.core.utilities.*;
 import org.grobid.core.utilities.counters.CntManager;
 import org.grobid.core.utilities.counters.impl.CntManagerFactory;
 import org.grobid.core.lexicon.FastMatcher;
+import org.grobid.service.configuration.SoftwareConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -63,9 +64,9 @@ public class SoftwareParser extends AbstractParser {
 
     private static volatile SoftwareParser instance;
 
-    public static SoftwareParser getInstance() {
+    public static SoftwareParser getInstance(SoftwareConfiguration configuration) {
         if (instance == null) {
-            getNewInstance();
+            getNewInstance(configuration);
         }
         return instance;
     }
@@ -73,21 +74,21 @@ public class SoftwareParser extends AbstractParser {
     /**
      * Create a new instance.
      */
-    private static synchronized void getNewInstance() {
-        instance = new SoftwareParser();
+    private static synchronized void getNewInstance(SoftwareConfiguration configuration) {
+        instance = new SoftwareParser(configuration);
     }
 
     private SoftwareLexicon softwareLexicon = null;
 	private EngineParsers parsers;
     private SoftwareDisambiguator disambiguator;
 
-    private SoftwareParser() {
+    private SoftwareParser(SoftwareConfiguration configuration) {
         super(GrobidModels.SOFTWARE, CntManagerFactory.getCntManager(), 
-            GrobidCRFEngine.valueOf(SoftwareProperties.get("grobid.software.engine").toUpperCase()));
+            GrobidCRFEngine.valueOf(configuration.getEngine().toUpperCase()));
 
         softwareLexicon = SoftwareLexicon.getInstance();
 		parsers = new EngineParsers();
-        disambiguator = SoftwareDisambiguator.getInstance();
+        disambiguator = SoftwareDisambiguator.getInstance(configuration);
     }
 
     /**

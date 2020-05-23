@@ -30,6 +30,7 @@ import org.grobid.core.tokenization.TaggingTokenClusteror;
 import org.grobid.core.lexicon.FastMatcher;
 import org.grobid.core.main.LibraryLoader;
 import org.grobid.core.utilities.*;
+import org.grobid.service.configuration.SoftwareConfiguration;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,6 +62,8 @@ import static org.grobid.core.document.xml.XmlBuilderUtils.teiElement;
 import org.apache.commons.lang3.StringUtils;
 
 import com.fasterxml.jackson.core.io.JsonStringEncoder;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 /**
  * This class aims at converting annotations in .csv format from the original 
@@ -83,8 +86,8 @@ import com.fasterxml.jackson.core.io.JsonStringEncoder;
  * Just as a reference, I mention here that, from the text mining point of view,
  * a standard XML annotations framework like (MUC's ENAMEX or TEI style annotations) 
  * should be preferably used for reliable, constrained, readable and complete corpus 
- * annotations rather than the heavy and painful semantic web framework which 
- * is too disconnected from the actual linguistic and layout material. 
+ * annotations rather than the semantic web framework which is too disconnected 
+ * from the actual linguistic and layout material. 
  *
  * Once the corpus is an XML format, we can use the consistency scripts under 
  * scripts/ to analyse, review and correct the annotations in a simple manner.
@@ -138,6 +141,11 @@ public class AnnotatedCorpusGeneratorCSV {
     private ArticleUtilities articleUtilities = new ArticleUtilities();
 
     private FieldNormalizer fieldNormalizer = new FieldNormalizer();
+    private SoftwareConfiguration configuration;
+
+    public AnnotatedCorpusGeneratorCSV(SoftwareConfiguration conf) {
+        this.configuration = conf;
+    }
 
     /**
      * Start the conversion/fusion process for generating MUC-style annotated XML documents
@@ -221,7 +229,7 @@ public class AnnotatedCorpusGeneratorCSV {
             //}
             //m++;
             String docName = entry.getKey();
-            File pdfFile = getPDF(documentPath, docName, articleUtilities);
+            File pdfFile = getPDF(documentPath, docName, articleUtilities, this.configuration);
 
             // process header with consolidation to get some nice header metadata for this document
             BiblioItem biblio = new BiblioItem();
@@ -2001,10 +2009,10 @@ System.out.print("\n");*/
      *
      * If PDF not available, return null
      */
-    public static File getPDF(String pathPDFs, String identifier, ArticleUtilities articleUtilities) {
+    public static File getPDF(String pathPDFs, String identifier, ArticleUtilities articleUtilities, SoftwareConfiguration conf) {
         File inRepo = new File(pathPDFs + File.separator + identifier + ".pdf");
         if (!inRepo.exists()) {
-            File notInRepo = articleUtilities.getPDFDoc(identifier);
+            File notInRepo = articleUtilities.getPDFDoc(identifier, conf);
             if (notInRepo == null) {
                 return null;
             } else {
@@ -2081,7 +2089,7 @@ System.out.print("\n");*/
      *
      * @param args Command line arguments.
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
        
         // we are expecting three arguments, absolute path to the original PDF 
         // documents, absolute path to the softcite data in csv and abolute path
@@ -2113,7 +2121,10 @@ System.out.print("\n");*/
             new File(xmlPath).mkdirs();
         }       
 
-        AnnotatedCorpusGeneratorCSV converter = new AnnotatedCorpusGeneratorCSV();
+        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+        SoftwareConfiguration conf = mapper.readValue("resources/config/config.yml", SoftwareConfiguration.class);
+
+        AnnotatedCorpusGeneratorCSV converter = new AnnotatedCorpusGeneratorCSV(conf);
         try {
             converter.process(documentPath, csvPath, xmlPath);
         } catch (Exception e) {

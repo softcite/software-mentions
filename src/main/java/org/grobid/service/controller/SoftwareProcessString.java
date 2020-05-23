@@ -1,4 +1,7 @@
-package org.grobid.service;
+package org.grobid.service.controller;
+
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -13,6 +16,7 @@ import org.grobid.core.data.SoftwareEntity;
 import org.grobid.core.engines.SoftwareParser;
 import org.grobid.core.factory.GrobidPoolingFactory;
 import org.grobid.core.utilities.GrobidProperties;
+import org.grobid.service.configuration.SoftwareConfiguration;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,12 +28,17 @@ import org.apache.commons.lang3.StringUtils;
  * @author Patrice
  * 
  */
+@Singleton
 public class SoftwareProcessString {
 
 	/**
 	 * The class Logger.
 	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(SoftwareProcessString.class);
+
+	@Inject
+    public SoftwareProcessString() {
+    }
 
 	/**
 	 * Parse a raw date and return the corresponding normalized date.
@@ -39,11 +48,11 @@ public class SoftwareProcessString {
 	 * @return a response object containing the structured xml representation of
 	 *         the date
 	 */
-	public static Response processText(String text, boolean disambiguate) {
+	public static Response processText(String text, boolean disambiguate, SoftwareConfiguration configuration) {
 		LOGGER.debug(methodLogIn());
 		Response response = null;
 		StringBuilder retVal = new StringBuilder();
-		SoftwareParser parser = SoftwareParser.getInstance();
+		SoftwareParser parser = SoftwareParser.getInstance(configuration);
 		try {
 			LOGGER.debug(">> set raw text for stateless service'...");
 			

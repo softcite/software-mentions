@@ -1,6 +1,5 @@
 package org.grobid.core.utilities;
 
-
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -9,10 +8,6 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-
-/*import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.client.config.ClientConfig;
-import com.sun.jersey.api.client.config.DefaultClientConfig;*/
 
 import com.fasterxml.jackson.databind.*;
 
@@ -30,6 +25,7 @@ import org.slf4j.LoggerFactory;
 
 import org.grobid.core.utilities.KeyGen;
 import org.grobid.core.utilities.TextUtilities;
+import org.grobid.service.configuration.SoftwareConfiguration;
 
 /**
  *  Some convenient methods for retrieving the original PDF files from the annotated set.
@@ -55,7 +51,7 @@ public class ArticleUtilities {
      *
      *  Return null if the identification fails.
      */
-    public File getPDFDoc(String identifier, Source source) {
+    public File getPDFDoc(String identifier, Source source, SoftwareConfiguration configuration) {
         try {
             if (source == null) {
                 source = guessDomain(identifier);
@@ -106,7 +102,7 @@ public class ArticleUtilities {
             }
 
             File file = uploadFile(urll, 
-                SoftwareProperties.getTmpPath(), 
+                configuration.getTmpPath(), 
                 KeyGen.getKey()+".pdf");
             return file;
         }
@@ -117,8 +113,8 @@ public class ArticleUtilities {
         return null;
     }
     
-    public File getPDFDoc(String identifier) {
-        return getPDFDoc(identifier, null);
+    public File getPDFDoc(String identifier, SoftwareConfiguration configuration) {
+        return getPDFDoc(identifier, null, configuration);
     }
 
     private static String urlDecode(String value) throws Exception {

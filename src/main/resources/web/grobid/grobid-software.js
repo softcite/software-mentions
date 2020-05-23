@@ -21,7 +21,7 @@ var grobid = (function ($) {
         if ($(location).attr('href').indexOf("index.html") != -1)
             baseUrl = $(location).attr('href').replace("index.html", ext);
         else
-            baseUrl = $(location).attr('href') + ext;
+            baseUrl = $(location).attr('href') + 'service' + '/' + ext;
         return baseUrl;
     }
 

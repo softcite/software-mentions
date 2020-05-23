@@ -34,8 +34,6 @@ Run some test:
 
 > ./gradlew test
 
-To disambiguate the extracted mentions against Wikidata (match the software entity if known by Wikidata), you need to specify an [entity-fishing](https://github.com/kermitt2/entity-fishing) service. 
-
 
 ## Start the service
 
@@ -55,7 +53,7 @@ When processing the PDF of a scientific article, the tool will also identify bib
 
 ### Web API
 
-#### /processSoftwareText
+#### /service/processSoftwareText
 
 Identify the software mentions in text and optionally disambiguate the extracted software mentions against Wikidata.  
 
@@ -79,11 +77,11 @@ A `503` error normally means that all the threads available to GROBID are curren
 Using ```curl``` POST/GET requests with some __text__:
 
 ```console
-curl -X POST -d "text=We test GROBID (version 0.6.1)." localhost:8060/processSoftwareText
+curl -X POST -d "text=We test GROBID (version 0.6.1)." localhost:8060/service/processSoftwareText
 ```
 
 ```console
-curl -GET --data-urlencode "text=We test GROBID (version 0.6.1)." localhost:8060/processSoftwareText
+curl -GET --data-urlencode "text=We test GROBID (version 0.6.1)." localhost:8060/service/processSoftwareText
 ```
 
 which should return this:
@@ -116,7 +114,7 @@ which should return this:
 
 Runtimes are expressed in milliseconds. 
 
-#### /annotateSoftwarePDF
+#### /service/annotateSoftwarePDF
 
 |  method   |  request type         |  response type       |  parameters         |  requirement  |  description  |
 |---        |---                    |---                   |---                  |---            |---            |
@@ -138,12 +136,90 @@ A `503` error normally means that all the threads available to GROBID are curren
 Using ```curl``` POST request with a __PDF file__:
 
 ```console
-curl --form input=@./src/test/resources/PMC1636350.pdf --form disambiguate=1 localhost:8060/annotateSoftwarePDF
+curl --form input=@./src/test/resources/PMC1636350.pdf --form disambiguate=1 localhost:8060/service/annotateSoftwarePDF
 ```
 
 For PDF, each entity will be associated with a list of bounding box coordinates relative to the PDF, see [here](https://grobid.readthedocs.io/en/latest/Coordinates-in-PDF/#coordinate-system-in-the-pdf) for more explanation about the coordinate system. 
 
 In addition, the response will contain the bibliographical reference information associated to a software mention when found. The bibliographical information are provided in XML TEI (similar format as GROBID).  
+
+
+#### /service/isalive
+
+The service check `/service/isalive` will return true/false whether the service is up and running.
+
+### Service admin and usage information
+
+The service provides also an admin console, reachable at <http://yourhost:8071> where some additional checks like ping, metrics, hearthbeat are available.
+We recommend, in particular to have a look at the metrics (using the [Metric library](https://metrics.dropwizard.io/3.1.0/getting-started/)) which are providing the rate of execution as well as the throughput of each entry point.
+
+## Configuration
+
+The `software-mention` module inherits the configuration of GROBID. 
+
+The configuration parameters specific to the `software-mention` module can be modified in the file `resources/config/config.yml`:
+
+- to disambiguate the extracted mentions against Wikidata (match the software entity if known by Wikidata), you need to specify an [entity-fishing](https://github.com/kermitt2/entity-fishing) service. For test, the public entity-fishing instance can be used:
+
+```yaml
+entityFishingHost: cloud.science-miner.com/nerd
+entityFishingPort:
+```
+
+for larger scale PDF processing and to take advantage of a more recent Wikidata dump, a local instance of entity-fishing should be installed and used:
+
+
+```yaml
+entityFishingHost: localhost
+entityFishingPort: 8090
+```
+
+- to select the sequence labelling algorithm to be used, use the config parameter `engine`:
+
+For CRF:
+
+```yaml
+engine=wapiti
+```
+
+For Deep Learning architectures, indicate `delft` and indicate the installation path of the `DeLFT` library. To install and take advantage of DeLFT, see the installation instructions [here](https://github.com/kermitt2/delft).
+
+
+```yaml
+engine=delft
+delftInstall: ../../delft
+delftArchitecture: bilstm-crf
+delftEmbeddings: glove
+```
+
+
+For further selecting the Deep Learning architecture to be used:
+
+```yaml
+engine=delft
+delftArchitecture: scibert
+```
+
+Possible values are:
+
+- for __BiLSTM-CRF__: `bilstm-crf`
+
+- for __bert-base-en+CRF__: `bert`
+
+- for __SciBERT+CRF__: `scibert`
+
+For __BiLSTM-CRF__ you can further specify the embeddings to be used:
+
+- for using Gloves embeddings (default):
+
+```yaml
+delftEmbeddings: glove
+```
+
+Other possibilities are `elmo` and `bert`. Note that in the later case, BERT is used to generate contextual embeddings used by the __BiLSTM-CRF__ architecture, in contrast to the usage of a fine-tuned BERT when BERT or SciBERT are selected as architecture.
+
+Note that the default setting is __CRF Wapiti__, which does not require any further installation.
+
 
 ## Benchmarking
 
@@ -162,6 +238,7 @@ The following sequence labelling algorithms have been benchmarked:
 The CRF implementation is based on a custom fork of [Wapiti](https://github.com/kermitt2/wapiti).
 The other algorithms rely on the Deep Learning library [DeLFT](https://github.com/kermitt2/delft).
 All are natively integrated in the JVM to provide state-of-the-art performance both in accuracy and runtime. 
+
 
 ### Accuracy
 
@@ -198,7 +275,7 @@ For this reason, BERT architectures are in practice difficult to exploit for our
 
 ### Runtimes
 
-The following runtimes were obtained based on a Ubuntu 16.04 server Intel i7-4790 (4 CPU), 4.00 GHz with 16 GB memory. The runtimes for the Deep Learning architectures are based on the same machine with a nvidia GPU GeForce 1080Ti (11 GB).
+The following runtimes were obtained based on a Ubuntu 16.04 server Intel i7-4790 (4 CPU), 4.00 GHz with 16 GB memory. The runtimes for the Deep Learning architectures are based on the same machine with a nvidia GPU GeForce 1080Ti (11 GB). Runtime can be reproduced with the [python script below](#runtime-benchmark).
 
 |CRF ||
 |--- | --- |
@@ -242,7 +319,7 @@ For the latest and complete evaluation data, see [here](https://github.com/Impac
 
 For training the software model with all the available training data:
 
-```
+```console
 > cd PATH-TO-GROBID/grobid/software-mentions/
 
 > ./gradlew train_software 
@@ -256,7 +333,7 @@ The training data must be under ```software-mentions/resources/dataset/software/
 
 The following commands will split automatically and randomly the available annotated data (under ```resources/dataset/software/corpus/```) into a training set and an evaluation set, train a model based on the first set and launch an evaluation based on the second set. 
 
-```
+```console
 >  ./gradlew eval_software_split [-Ps=0.8 -PgH=/custom/grobid/home -Pt=10] 
 ```
 
@@ -266,7 +343,7 @@ In this mode, by default, 90% of the available data is used for training and the
 
 For n-fold evaluation using the available annotated data (under ```resources/dataset/software/corpus/```), use the command:
 
-```
+```console
 >  ./gradlew eval_software_nfold [-n=10 -PgH=/path/grobid/home -Pt=10]
 ```
 
@@ -276,11 +353,12 @@ where `n` is the parameter for the number of folds, by default 10. Still by defa
 
 For evaluating under the labeled data under ```grobid-astro/resources/dataset/software/evaluation``` (fixed "holdout set" approach), use the command:
 
-```
+```console
 >  ./gradlew eval_software [-PgH=/path/grobid/home]
 ```
 
 The grobid home can be optionally specified with parameter `-PgH`. By default it will take `../grobid-home`  
+
 
 ## Training data import
 
@@ -288,13 +366,13 @@ The grobid home can be optionally specified with parameter `-PgH`. By default it
 
 The source of training data is the [softcite dataset](https://github.com/howisonlab/softcite-dataset) developed by [James Howison](http://james.howison.name/) Lab at the University of Texas at Austin. The data need to be compiled with actual PDF content preliminary to training in order to create XML annotated document (MUC conference style). This is done with the following command which takes 3 arguments: 
 
-```
+```console
 > ./gradlew annotated_corpus_generator_csv -Ppdf=/path/input/pdf -Pcsv=path/csv -Poutput=/output/directory
 ```
 
 The path to the PDF repo is the path where the PDF corresponding to the annotated document will be downloaded (done only the first time). For instance:
 
-```
+```console
 > ./gradlew annotated_corpus_generator_csv -Ppdf=/home/lopez/repository/softcite-dataset/pdf/ -Pcsv=/home/lopez/tools/softcite-dataset/data/csv_dataset/ -Poutput=resources/dataset/software/corpus/
 ```
 
@@ -304,17 +382,16 @@ The compiled XML training files will be written in the standard GROBID training 
 
 Once the generated snippet-oriented corpus TEI file is generated, manually reviewed and reconciled, it is possible to re-inject back provenance information (when possible) with the following command:
 
-```
+```console
 > ./gradlew post_process_corpus -Pxml=/path/input/corpus/tei/xml/file -Pcsv=path/csv -Poutput=/output/path/tei/corpus/file
 ```
 
 
 For instance 
 
-```
+```console
 > ./gradlew post_process_corpus -Pxml=/home/lopez/grobid/software-mentions/resources/dataset/software/corpus/all.clean.tei.xml -Pcsv=/home/lopez/tools/softcite-dataset/data/csv_dataset/ -Poutput=/home/lopez/grobid/software-mentions/resources/dataset/software/corpus/all_clean_post_processed.tei.xml
 ```
-
 
 ### Inter-Annotator Agreement measures
 
@@ -332,14 +409,14 @@ Artstein, R., & Poesio, M. (2008). [Inter-coder agreement for computational ling
 
 A Python 3.* script is available under `script/` to analyse XML training data and spot possible unconsistencies to review. To launch the script: 
 
-```
+```console
 > python3 scripts/consistency.py _absolute_path_to_training_directory_
 ```
 
 For instance: 
 
 
-```
+```console
 > python3 scripts/consistency.py /home/lopez/grobid/software-mentions/resources/dataset/software/corpus/
 ```
 
@@ -350,7 +427,7 @@ See the description of the output directly in the header of the `script/consiste
 
 For generating training data in XML/TEI, based on the current model, from a list of text or PDF files in a input repository, use the following command: 
 
-```
+```console
 > java -Xmx4G -jar target/software-mentions/-0.5.1-SNAPSHOT.onejar.jar -gH ../grobid-home -dIn ~/test_software/ -dOut ~/test_software/out/ -exe createTraining
 ```
 
@@ -360,7 +437,7 @@ A python script is available for benchmarking the services. The main motivation 
 
 By default, the text content for the benchmark is taken from the xml files from the training/eval directory under `resources/dataset/software/corpus`, to call the script for evaluation the text processing service:
 
-```bash
+```console
 > cd scripts/
 > python3 runtime_eval.py
 software-mention server is up and running

@@ -1,4 +1,7 @@
-package org.grobid.service;
+package org.grobid.service.controller;
+
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 import org.grobid.core.data.SoftwareComponent;
 import org.grobid.core.data.SoftwareEntity;
@@ -13,6 +16,8 @@ import org.grobid.core.factory.GrobidPoolingFactory;
 import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.utilities.IOUtilities;
 import org.grobid.core.utilities.KeyGen;
+import org.grobid.service.configuration.SoftwareConfiguration;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.InputSource;
@@ -38,12 +43,17 @@ import org.grobid.core.layout.Page;
  *
  * @author Patrice
  */
+@Singleton
 public class SoftwareProcessFile {
 
     /**
      * The class Logger.
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(SoftwareProcessFile.class);
+
+    @Inject
+    public SoftwareProcessFile() {
+    }
 
     /**
      * Uploads the origin PDF, process it and return PDF annotations for references in JSON.
@@ -52,11 +62,11 @@ public class SoftwareProcessFile {
      * @param disambiguate if true, the extracted mention will be disambiguated
      * @return a response object containing the JSON annotations
      */
-	public static Response processPDFAnnotation(final InputStream inputStream, boolean disambiguate) {
+	public static Response processPDFAnnotation(final InputStream inputStream, boolean disambiguate, SoftwareConfiguration configuration) {
         LOGGER.debug(methodLogIn()); 
         Response response = null;
         File originFile = null;
-        SoftwareParser parser = SoftwareParser.getInstance();
+        SoftwareParser parser = SoftwareParser.getInstance(configuration);
         Engine engine = null;
 
         try {
