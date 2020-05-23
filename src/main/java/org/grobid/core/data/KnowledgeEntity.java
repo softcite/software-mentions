@@ -1,6 +1,5 @@
 package org.grobid.core.data;
 
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

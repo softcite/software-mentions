@@ -139,11 +139,7 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 			return false;
 		} else if (label.equals(SoftwareTaggingLabels.CREATOR) && (this.creator != null)) {
 			return false;
-		} /*else if (label.equals(SoftwareTaggingLabels.VERSION_NUMBER) && (this.creator != null)) {
-			return false;
-		} else if (label.equals(SoftwareTaggingLabels.VERSION_DATE) && (this.softwareURL != null)) {
-			return false;
-		}*/ else if (label.equals(SoftwareTaggingLabels.VERSION) && (this.version != null)) {
+		} else if (label.equals(SoftwareTaggingLabels.VERSION) && (this.version != null)) {
 			return false;
 		} 
 		return true;
@@ -156,12 +152,7 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 			this.softwareURL = component;
 		} else if (component.getLabel().equals(SoftwareTaggingLabels.CREATOR)) {
 			this.creator = component;
-		} /*else if (component.getLabel().equals(SoftwareTaggingLabels.VERSION_NUMBER)) {
-			this.versionNumber = component;
-		} else if (component.getLabel().equals(SoftwareTaggingLabels.VERSION_DATE)) {
-			this.versionDate = component;
-		}*/ 
-		else if (component.getLabel().equals(SoftwareTaggingLabels.VERSION)) {
+		} else if (component.getLabel().equals(SoftwareTaggingLabels.VERSION)) {
 			this.version = component;
 		}
 	}

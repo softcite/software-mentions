@@ -58,7 +58,7 @@ public class SoftwareController implements SoftwarePaths {
         LOGGER.info(text); 
         boolean disambiguateBoolean = SoftwareServiceUtil.validateBooleanRawParam(disambiguate);
 
-        return SoftwareProcessString.processText(text, disambiguateBoolean);
+        return SoftwareProcessString.processText(text, disambiguateBoolean, this.configuration);
     }
 
     @Path(PATH_SOFTWARE_TEXT)
@@ -68,7 +68,7 @@ public class SoftwareController implements SoftwarePaths {
                                     @DefaultValue("0") @QueryParam(DISAMBIGUATE) String disambiguate) {
         //LOGGER.info(text);
         boolean disambiguateBoolean = SoftwareServiceUtil.validateBooleanRawParam(disambiguate);
-        return SoftwareProcessString.processText(text, disambiguateBoolean);
+        return SoftwareProcessString.processText(text, disambiguateBoolean, this.configuration);
     }
     
     @Path(PATH_ANNOTATE_SOFTWARE_PDF)
@@ -78,7 +78,7 @@ public class SoftwareController implements SoftwarePaths {
     public Response processPDFAnnotation(@FormDataParam(INPUT) InputStream inputStream, 
                                          @DefaultValue("0") @FormDataParam(DISAMBIGUATE) String disambiguate) {
         boolean disambiguateBoolean = SoftwareServiceUtil.validateBooleanRawParam(disambiguate);
-        return SoftwareProcessFile.processPDFAnnotation(inputStream, disambiguateBoolean);
+        return SoftwareProcessFile.processPDFAnnotation(inputStream, disambiguateBoolean, this.configuration);
     }
 
 }

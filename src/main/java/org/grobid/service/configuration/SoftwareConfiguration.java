@@ -1,4 +1,4 @@
- package org.grobid.service.configuration;
+package org.grobid.service.configuration;
 
 import io.dropwizard.Configuration;
 

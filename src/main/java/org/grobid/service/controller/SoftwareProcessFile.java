@@ -16,6 +16,8 @@ import org.grobid.core.factory.GrobidPoolingFactory;
 import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.utilities.IOUtilities;
 import org.grobid.core.utilities.KeyGen;
+import org.grobid.service.configuration.SoftwareConfiguration;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.InputSource;
@@ -60,11 +62,11 @@ public class SoftwareProcessFile {
      * @param disambiguate if true, the extracted mention will be disambiguated
      * @return a response object containing the JSON annotations
      */
-	public static Response processPDFAnnotation(final InputStream inputStream, boolean disambiguate) {
+	public static Response processPDFAnnotation(final InputStream inputStream, boolean disambiguate, SoftwareConfiguration configuration) {
         LOGGER.debug(methodLogIn()); 
         Response response = null;
         File originFile = null;
-        SoftwareParser parser = SoftwareParser.getInstance();
+        SoftwareParser parser = SoftwareParser.getInstance(configuration);
         Engine engine = null;
 
         try {

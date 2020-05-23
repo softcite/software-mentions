@@ -148,45 +148,56 @@ In addition, the response will contain the bibliographical reference information
 
 The service check `/service/isalive` will return true/false whether the service is up and running.
 
+### Service admin and usage information
+
+The service provides also an admin console, reachable at <http://yourhost:8071> where some additional checks like ping, metrics, hearthbeat are available.
+We recommend, in particular to have a look at the metrics (using the [Metric library](https://metrics.dropwizard.io/3.1.0/getting-started/)) which are providing the rate of execution as well as the throughput of each entry point.
+
 ## Configuration
 
 The `software-mention` module inherits the configuration of GROBID. 
 
-The configuration parameters specific to the `software-mention` module can be modified in the file `software-mention/src/main/resources/grobid-software.properties`:
+The configuration parameters specific to the `software-mention` module can be modified in the file `resources/config/config.yml`:
 
 - to disambiguate the extracted mentions against Wikidata (match the software entity if known by Wikidata), you need to specify an [entity-fishing](https://github.com/kermitt2/entity-fishing) service. For test, the public entity-fishing instance can be used:
 
-```
-grobid.software.entity-fishing.host=cloud.science-miner.com/nerd
-grobid.software.entity-fishing.port=
+```yaml
+entityFishingHost: cloud.science-miner.com/nerd
+entityFishingPort:
 ```
 
 for larger scale PDF processing and to take advantage of a more recent Wikidata dump, a local instance of entity-fishing should be installed and used:
 
-```
-grobid.software.entity-fishing.host=localhost
-grobid.software.entity-fishing.port=8090
+
+```yaml
+entityFishingHost: localhost
+entityFishingPort: 8090
 ```
 
-- to select the sequence labelling algorithm to be used, use the property `grobid.software.engine`:
+- to select the sequence labelling algorithm to be used, use the config parameter `engine`:
 
 For CRF:
 
-```
-grobid.software.engine=wapiti
+```yaml
+engine=wapiti
 ```
 
-For Deep Learning architectures, select `delft` and indicate the installation path of the `DeLFT` library. To install and take advantage of DeLFT, see the installation instructions [here](https://github.com/kermitt2/delft).
+For Deep Learning architectures, indicate `delft` and indicate the installation path of the `DeLFT` library. To install and take advantage of DeLFT, see the installation instructions [here](https://github.com/kermitt2/delft).
 
+
+```yaml
+engine=delft
+delftInstall: ../../delft
+delftArchitecture: bilstm-crf
+delftEmbeddings: glove
 ```
-grobid.software.engine=delft
-grobid.software.delft.install=../delft
-```
+
 
 For further selecting the Deep Learning architecture to be used:
 
-```
-grobid.software.delft.architecture=scibert
+```yaml
+engine=delft
+delftArchitecture: scibert
 ```
 
 Possible values are:
@@ -201,8 +212,8 @@ For __BiLSTM-CRF__ you can further specify the embeddings to be used:
 
 - for using Gloves embeddings (default):
 
-```
-grobid.software.delft.embeddings=glove
+```yaml
+delftEmbeddings: glove
 ```
 
 Other possibilities are `elmo` and `bert`. Note that in the later case, BERT is used to generate contextual embeddings used by the __BiLSTM-CRF__ architecture, in contrast to the usage of a fine-tuned BERT when BERT or SciBERT are selected as architecture.

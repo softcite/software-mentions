@@ -27,6 +27,7 @@ import org.grobid.core.lexicon.SoftwareLexicon;
 import org.grobid.core.sax.TextChunkSaxHandler;
 import org.grobid.core.tokenization.TaggingTokenCluster;
 import org.grobid.core.tokenization.TaggingTokenClusteror;
+import org.grobid.service.configuration.SoftwareConfiguration;
 import org.grobid.core.utilities.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -89,9 +90,9 @@ public class SoftwareDisambiguator {
 
     private static boolean serverStatus = false;
 
-    public static SoftwareDisambiguator getInstance() {
+    public static SoftwareDisambiguator getInstance(SoftwareConfiguration configuration) {
         if (instance == null) {
-            getNewInstance();
+            getNewInstance(configuration);
         }
         return instance;
     }
@@ -99,15 +100,14 @@ public class SoftwareDisambiguator {
     /**
      * Create a new instance.
      */
-    private static synchronized void getNewInstance() {
-        instance = new SoftwareDisambiguator();
+    private static synchronized void getNewInstance(SoftwareConfiguration configuration) {
+        instance = new SoftwareDisambiguator(configuration);
     }
 
-    private SoftwareDisambiguator() {
+    private SoftwareDisambiguator(SoftwareConfiguration configuration) {
         try {
-            nerd_host = SoftwareProperties.get("grobid.software.entity-fishing.host");
-            nerd_port = SoftwareProperties.get("grobid.software.entity-fishing.port");
-
+            nerd_host = configuration.getEntityFishingHost();
+            nerd_port = configuration.getEntityFishingPort();
             serverStatus = checkIfAlive();
         } catch(Exception e) {
             LOGGER.error("Cannot read properties for disambiguation service", e);
