@@ -1,4 +1,7 @@
-package org.grobid.service;
+package org.grobid.service.controller;
+
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -24,12 +27,17 @@ import org.apache.commons.lang3.StringUtils;
  * @author Patrice
  * 
  */
+@Singleton
 public class SoftwareProcessString {
 
 	/**
 	 * The class Logger.
 	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(SoftwareProcessString.class);
+
+	@Inject
+    public SoftwareProcessString() {
+    }
 
 	/**
 	 * Parse a raw date and return the corresponding normalized date.

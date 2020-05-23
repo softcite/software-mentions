@@ -1,4 +1,4 @@
- package org.grobid.service;
+package org.grobid.service.controller;
 
 import java.util.*;
 import java.text.DateFormat;
@@ -30,4 +30,11 @@ public class SoftwareServiceUtil {
         return sb.toString();
     }
 
+    public static boolean validateBooleanRawParam(String raw) {
+        boolean result = false;
+        if ((raw != null) && (raw.equals("1") || raw.toLowerCase().equals("true"))) {
+            result = true;
+        }
+        return result;
+    }
 }

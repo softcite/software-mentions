@@ -15,8 +15,12 @@ import org.grobid.core.main.GrobidHomeFinder;
 import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.Pair;
-import org.grobid.core.utilities.SoftwareProperties;
+import org.grobid.service.configuration.SoftwareConfiguration;
+//import org.grobid.core.utilities.SoftwareProperties;
 import org.grobid.trainer.evaluation.EvaluationUtilities;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -33,6 +37,8 @@ import java.util.List;
 public class SoftwareTrainer extends AbstractTrainer {
 
     private SoftwareLexicon softwareLexicon = null;
+
+    private SoftwareConfiguration conf = null;
 
     public SoftwareTrainer() {
         this(0.00001, 20, 0);
@@ -51,6 +57,10 @@ public class SoftwareTrainer extends AbstractTrainer {
         //this.nbMaxIterations = nbMaxIterations;
         this.nbMaxIterations = 2000;
         softwareLexicon = SoftwareLexicon.getInstance();
+    }
+
+    public void setSoftwareConf(SoftwareConfiguration conf) {
+        this.conf = conf;
     }
 
     /**
@@ -668,11 +678,11 @@ public class SoftwareTrainer extends AbstractTrainer {
     }
 
     protected final File getCorpusPath() {
-        return new File(SoftwareProperties.get("grobid.software.corpusPath"));
+        return new File(conf.getCorpusPath());
     }
 
     protected final File getTemplatePath() {
-        return new File(SoftwareProperties.get("grobid.software.templatePath"));
+        return new File(conf.getTemplatePath());
     }
 
     /**
@@ -681,8 +691,13 @@ public class SoftwareTrainer extends AbstractTrainer {
      * @param args Command line arguments.
      */
     public static void main(String[] args) {
+        SoftwareConfiguration conf = null;
         try {
-            String pGrobidHome = SoftwareProperties.get("grobid.home");
+            ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+            conf = mapper.readValue("resources/config/config.yml", SoftwareConfiguration.class);
+            String pGrobidHome = conf.getGrobidHome();
+
+            //String pGrobidHome = SoftwareProperties.get("grobid.home");
 
             GrobidHomeFinder grobidHomeFinder = new GrobidHomeFinder(Arrays.asList(pGrobidHome));
             GrobidProperties.getInstance(grobidHomeFinder);
@@ -693,7 +708,8 @@ public class SoftwareTrainer extends AbstractTrainer {
             exp.printStackTrace();
         }
 
-        Trainer trainer = new SoftwareTrainer();
+        SoftwareTrainer trainer = new SoftwareTrainer();
+        trainer.setSoftwareConf(conf);
         AbstractTrainer.runTraining(trainer);
         System.out.println(AbstractTrainer.runEvaluation(trainer));
         System.exit(0);

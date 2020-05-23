@@ -1,4 +1,7 @@
-package org.grobid.service;
+package org.grobid.service.controller;
+
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 import org.grobid.core.data.SoftwareComponent;
 import org.grobid.core.data.SoftwareEntity;
@@ -38,12 +41,17 @@ import org.grobid.core.layout.Page;
  *
  * @author Patrice
  */
+@Singleton
 public class SoftwareProcessFile {
 
     /**
      * The class Logger.
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(SoftwareProcessFile.class);
+
+    @Inject
+    public SoftwareProcessFile() {
+    }
 
     /**
      * Uploads the origin PDF, process it and return PDF annotations for references in JSON.

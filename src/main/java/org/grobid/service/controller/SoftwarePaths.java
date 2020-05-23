@@ -1,4 +1,4 @@
-package org.grobid.service;
+package org.grobid.service.controller;
 
 /**
  * This interface only contains the path extensions for accessing the software entity recognition service.

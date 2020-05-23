@@ -15,8 +15,8 @@ import pymongo
 map_size = 100 * 1024 * 1024 * 1024 
 
 # default endpoint
-endpoint_pdf = '/annotateSoftwarePDF'
-endpoint_txt = '/annotateSoftwareText'
+endpoint_pdf = '/service/annotateSoftwarePDF'
+endpoint_txt = '/service/annotateSoftwareText'
 
 class software_mention_client(object):
     """
