@@ -145,6 +145,21 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 		return true;
 	}
 
+	/**
+	 * In case of duplicated field, check if the one in parameter isbetter quality than the 
+	 * existing object instance one. 
+	 */
+	public boolean betterField(SoftwareComponent component) {
+		if (this.version != null && 
+			component.getLabel().equals(SoftwareTaggingLabels.VERSION) &&
+			component.getNormalizedForm() != null &&
+			this.version.getNormalizedForm() != null &&
+			component.getNormalizedForm().length() > this.version.getNormalizedForm().length()) {
+			return true;
+		} 
+		return false;
+	}
+
 	public void setComponent(SoftwareComponent component) {
 		if (component.getLabel().equals(SoftwareTaggingLabels.SOFTWARE)) {
 			this.softwareName = component;

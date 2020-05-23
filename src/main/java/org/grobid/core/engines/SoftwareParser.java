@@ -741,11 +741,11 @@ public class SoftwareParser extends AbstractParser {
                     break;
             }
             if (currentEntity == null) {
-                if (previousEntity.freeField(component.getLabel())) {
+                if (previousEntity.freeField(component.getLabel()) || previousEntity.betterField(component)) {
                     previousEntity.setComponent(component);
                 }
             } else if (component.getOffsetEnd() < previousEntity.getSoftwareName().getOffsetStart()) {
-                if (previousEntity.freeField(component.getLabel())) {
+                if (previousEntity.freeField(component.getLabel()) || previousEntity.betterField(component)) {
                     previousEntity.setComponent(component);
                 }
             } else if (component.getOffsetEnd() < currentEntity.getSoftwareName().getOffsetStart()) {
