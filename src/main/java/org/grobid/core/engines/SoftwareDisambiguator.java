@@ -27,7 +27,7 @@ import org.grobid.core.lexicon.SoftwareLexicon;
 import org.grobid.core.sax.TextChunkSaxHandler;
 import org.grobid.core.tokenization.TaggingTokenCluster;
 import org.grobid.core.tokenization.TaggingTokenClusteror;
-import org.grobid.service.configuration.SoftwareConfiguration;
+import org.grobid.core.utilities.SoftwareConfiguration;
 import org.grobid.core.utilities.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -129,7 +129,7 @@ public class SoftwareDisambiguator {
             else
                 url = new URL("http://" + nerd_host + "/service/isalive");
 
-            LOGGER.info("Calling: " + url.toString());
+            LOGGER.debug("Calling: " + url.toString());
             CloseableHttpClient httpClient = HttpClients.createDefault();
             HttpGet get = new HttpGet(url.toString());
 
@@ -427,7 +427,7 @@ public class SoftwareDisambiguator {
             }
 
             buffer.append("], \"full\": true }");
-            LOGGER.info(buffer.toString());
+            LOGGER.debug(buffer.toString());
 
             //params.add(new BasicNameValuePair("query", buffer.toString()));
 

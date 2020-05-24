@@ -30,7 +30,7 @@ import org.grobid.core.tokenization.TaggingTokenClusteror;
 import org.grobid.core.lexicon.FastMatcher;
 import org.grobid.core.main.LibraryLoader;
 import org.grobid.core.utilities.*;
-import org.grobid.service.configuration.SoftwareConfiguration;
+import org.grobid.core.utilities.SoftwareConfiguration;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -2122,7 +2122,7 @@ System.out.print("\n");*/
         }       
 
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-        SoftwareConfiguration conf = mapper.readValue("resources/config/config.yml", SoftwareConfiguration.class);
+        SoftwareConfiguration conf = mapper.readValue(new File("resources/config/config.yml"), SoftwareConfiguration.class);
 
         AnnotatedCorpusGeneratorCSV converter = new AnnotatedCorpusGeneratorCSV(conf);
         try {

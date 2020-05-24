@@ -24,34 +24,3 @@ delftEmbeddings: glove
 
 corpusPath: resources/dataset/software/corpus
 templatePath: resources/dataset/software/crfpp-templates/software.template
-
-server:
-  type: custom
-  idleTimeout: 120 seconds
-  applicationConnectors:
-    - type: http
-      port: 8060
-  adminConnectors:
-    - type: http
-      port: 8061
-  registerDefaultExceptionMappers: false
-  maxThreads: 2048
-  maxQueuedRequests: 2048
-  acceptQueueSize: 2048
-
-logging:
-  level: DEBUG
-
-  appenders:
-    - type: console
-      threshold: INFO
-    - type: file
-      threshold: DEBUG
-      logFormat: "%-6level [%d{HH:mm:ss.SSS}] [%t] %logger{5} - %X{code} %msg %n"
-      currentLogFilename: logs/software.log
-      archivedLogFilenamePattern: logs/grobid-keyterm-%d{yyyy-MM-dd}-%i.log.gz
-      archivedFileCount: 7
-      timeZone: UTC
-      maxFileSize: 50MB
-
-timeZone: UTC

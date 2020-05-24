@@ -7,7 +7,7 @@ import org.grobid.core.document.Document;
 import org.grobid.core.factory.GrobidFactory;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.utilities.GrobidProperties;
-import org.grobid.core.utilities.SoftwareProperties;
+import org.grobid.core.utilities.SoftwareConfiguration;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.main.GrobidHomeFinder;
 import org.grobid.core.utilities.Pair;
@@ -24,6 +24,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertNotNull;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+
 /**
  * @author Patrice
  */
@@ -33,7 +36,10 @@ public class SoftwareLexiconTest {
     @BeforeClass
     public static void setUpClass() throws Exception {
         try {
-            String pGrobidHome = SoftwareProperties.get("grobid.home");
+            ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+            SoftwareConfiguration conf = mapper.readValue(new File("resources/config/config.yml"), SoftwareConfiguration.class);
+
+            String pGrobidHome = conf.getGrobidHome();
 
             GrobidHomeFinder grobidHomeFinder = new GrobidHomeFinder(Arrays.asList(pGrobidHome));
             GrobidProperties.getInstance(grobidHomeFinder);

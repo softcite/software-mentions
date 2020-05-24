@@ -1,8 +1,6 @@
-package org.grobid.service.configuration;
+package org.grobid.core.utilities;
 
-import io.dropwizard.Configuration;
-
-public class SoftwareConfiguration extends Configuration {
+public class SoftwareConfiguration {
 
     private String grobidHome;
 

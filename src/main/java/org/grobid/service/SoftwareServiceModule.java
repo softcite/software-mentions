@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Binder;
 import com.google.inject.Provides;
 import com.hubspot.dropwizard.guicier.DropwizardAwareModule;
-import org.grobid.service.configuration.SoftwareConfiguration;
+import org.grobid.service.configuration.SoftwareServiceConfiguration;
 import org.grobid.service.controller.SoftwareController;
 import org.grobid.service.controller.HealthCheck;
 import org.grobid.service.controller.SoftwareProcessFile;
@@ -15,7 +15,7 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 
 
-public class SoftwareServiceModule extends DropwizardAwareModule<SoftwareConfiguration> {
+public class SoftwareServiceModule extends DropwizardAwareModule<SoftwareServiceConfiguration> {
 
     @Override
     public void configure(Binder binder) {

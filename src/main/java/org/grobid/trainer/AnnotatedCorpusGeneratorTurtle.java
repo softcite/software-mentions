@@ -3,7 +3,7 @@ package org.grobid.trainer;
 import org.grobid.core.analyzers.SoftwareAnalyzer;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.utilities.ArticleUtilities;
-import org.grobid.service.configuration.SoftwareConfiguration;
+import org.grobid.core.utilities.SoftwareConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -204,7 +204,7 @@ public class AnnotatedCorpusGeneratorTurtle {
         }       
 
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-        SoftwareConfiguration conf = mapper.readValue("resources/config/config.yml", SoftwareConfiguration.class);
+        SoftwareConfiguration conf = mapper.readValue(new File("resources/config/config.yml"), SoftwareConfiguration.class);
 
         AnnotatedCorpusGeneratorTurtle converter = new AnnotatedCorpusGeneratorTurtle(conf);
         converter.process(documentPath, ttlPath, xmlPath);

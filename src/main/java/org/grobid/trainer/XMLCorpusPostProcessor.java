@@ -3,7 +3,7 @@ package org.grobid.trainer;
 import org.grobid.core.analyzers.SoftwareAnalyzer;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.utilities.ArticleUtilities;
-import org.grobid.service.configuration.SoftwareConfiguration;
+import org.grobid.core.utilities.SoftwareConfiguration;
 
 import org.grobid.trainer.SoftciteAnnotation.AnnotationType;
 
@@ -477,7 +477,7 @@ System.out.println(annotationContextLeftSignature + " / " + annotationContextRig
         }  
 
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-        SoftwareConfiguration conf = mapper.readValue("resources/config/config.yml", SoftwareConfiguration.class);
+        SoftwareConfiguration conf = mapper.readValue(new File("resources/config/config.yml"), SoftwareConfiguration.class);
 
         XMLCorpusPostProcessor postProcessor = new XMLCorpusPostProcessor(conf);
         try {

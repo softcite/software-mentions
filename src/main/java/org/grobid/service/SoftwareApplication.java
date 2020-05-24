@@ -8,7 +8,7 @@ import io.dropwizard.forms.MultiPartBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import org.eclipse.jetty.servlets.CrossOriginFilter;
-import org.grobid.service.configuration.SoftwareConfiguration;
+import org.grobid.service.configuration.SoftwareServiceConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,9 +17,8 @@ import javax.servlet.FilterRegistration;
 import java.util.Arrays;
 import java.util.EnumSet;
 
-public class SoftwareApplication extends Application<SoftwareConfiguration> {
+public class SoftwareApplication extends Application<SoftwareServiceConfiguration> {
     private static final String RESOURCES = "/service";
-    //private static final String RESOURCES = "";
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SoftwareApplication.class);
 
@@ -37,17 +36,18 @@ public class SoftwareApplication extends Application<SoftwareConfiguration> {
     }
 
     @Override
-    public void initialize(Bootstrap<SoftwareConfiguration> bootstrap) {
-        GuiceBundle<SoftwareConfiguration> guiceBundle = GuiceBundle.defaultBuilder(SoftwareConfiguration.class)
+    public void initialize(Bootstrap<SoftwareServiceConfiguration> bootstrap) {
+        GuiceBundle<SoftwareServiceConfiguration> guiceBundle = GuiceBundle.defaultBuilder(SoftwareServiceConfiguration.class)
                 .modules(getGuiceModules())
                 .build();
         bootstrap.addBundle(guiceBundle);
         bootstrap.addBundle(new MultiPartBundle());
         bootstrap.addBundle(new AssetsBundle("/web", "/", "index.html", "assets"));
+        //bootstrap.addCommand(new CreateTrainingCommand());
     }
 
     @Override
-    public void run(SoftwareConfiguration configuration, Environment environment) {
+    public void run(SoftwareServiceConfiguration configuration, Environment environment) {
         // Enable CORS headers
         final FilterRegistration.Dynamic cors =
                 environment.servlets().addFilter("CORS", CrossOriginFilter.class);

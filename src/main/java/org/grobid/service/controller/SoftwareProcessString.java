@@ -16,7 +16,7 @@ import org.grobid.core.data.SoftwareEntity;
 import org.grobid.core.engines.SoftwareParser;
 import org.grobid.core.factory.GrobidPoolingFactory;
 import org.grobid.core.utilities.GrobidProperties;
-import org.grobid.service.configuration.SoftwareConfiguration;
+import org.grobid.core.utilities.SoftwareConfiguration;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

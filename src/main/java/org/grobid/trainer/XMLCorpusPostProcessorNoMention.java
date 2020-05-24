@@ -8,7 +8,7 @@ import org.grobid.core.data.BiblioItem;
 import org.grobid.core.engines.config.GrobidAnalysisConfig;
 import org.grobid.core.document.xml.XmlBuilderUtils;
 import org.grobid.core.utilities.*;
-import org.grobid.service.configuration.SoftwareConfiguration;
+import org.grobid.core.utilities.SoftwareConfiguration;
 import org.grobid.trainer.SoftciteAnnotation.AnnotationType;
 import org.grobid.core.engines.SoftwareParser;
 
@@ -1200,7 +1200,7 @@ public class XMLCorpusPostProcessorNoMention {
         }  
 
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-        SoftwareConfiguration conf = mapper.readValue("resources/config/config.yml", SoftwareConfiguration.class);
+        SoftwareConfiguration conf = mapper.readValue(new File("resources/config/config.yml"), SoftwareConfiguration.class);
 
         XMLCorpusPostProcessorNoMention postProcessor = new XMLCorpusPostProcessorNoMention(conf);
         try {

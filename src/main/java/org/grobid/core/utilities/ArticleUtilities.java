@@ -25,7 +25,7 @@ import org.slf4j.LoggerFactory;
 
 import org.grobid.core.utilities.KeyGen;
 import org.grobid.core.utilities.TextUtilities;
-import org.grobid.service.configuration.SoftwareConfiguration;
+import org.grobid.core.utilities.SoftwareConfiguration;
 
 /**
  *  Some convenient methods for retrieving the original PDF files from the annotated set.

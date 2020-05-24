@@ -3,7 +3,7 @@ package org.grobid.core.main.batch;
 import org.grobid.core.engines.SoftwareParser;
 import org.grobid.core.main.GrobidHomeFinder;
 import org.grobid.core.utilities.GrobidProperties;
-import org.grobid.service.configuration.SoftwareConfiguration;
+import org.grobid.core.utilities.SoftwareConfiguration;
 import org.grobid.core.main.LibraryLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -185,7 +185,7 @@ public class SoftwareMain {
         gbdArgs = new GrobidMainArgs();
 
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-        SoftwareConfiguration conf = mapper.readValue("resources/config/config.yml", SoftwareConfiguration.class);
+        SoftwareConfiguration conf = mapper.readValue(new File("resources/config/config.yml"), SoftwareConfiguration.class);
 
         if (processArgs(args) && (gbdArgs.getProcessMethodName() != null)) {
             inferParamsNotSet(conf);

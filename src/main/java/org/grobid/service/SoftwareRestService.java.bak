@@ -74,7 +74,7 @@ public class SoftwareRestService implements SoftwarePaths {
     @POST
     public Response processText_post(@FormParam(TEXT) String text, 
                                      @DefaultValue("0") @FormParam(DISAMBIGUATE) String disambiguate) {
-        LOGGER.info(text); 
+        //LOGGER.info(text); 
         boolean disambiguateBoolean = validateBooleanRawParam(disambiguate);
 
         return SoftwareProcessString.processText(text, disambiguateBoolean);

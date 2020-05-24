@@ -7,7 +7,7 @@ import org.grobid.core.document.Document;
 import org.grobid.core.factory.GrobidFactory;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.utilities.GrobidProperties;
-import org.grobid.core.utilities.SoftwareProperties;
+import org.grobid.core.utilities.SoftwareConfiguration;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.main.GrobidHomeFinder;
 import org.grobid.core.utilities.Pair;

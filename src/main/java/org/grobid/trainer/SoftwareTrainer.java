@@ -15,8 +15,7 @@ import org.grobid.core.main.GrobidHomeFinder;
 import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.Pair;
-import org.grobid.service.configuration.SoftwareConfiguration;
-//import org.grobid.core.utilities.SoftwareProperties;
+import org.grobid.core.utilities.SoftwareConfiguration;
 import org.grobid.trainer.evaluation.EvaluationUtilities;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -694,7 +693,7 @@ public class SoftwareTrainer extends AbstractTrainer {
         SoftwareConfiguration conf = null;
         try {
             ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-            conf = mapper.readValue("resources/config/config.yml", SoftwareConfiguration.class);
+            conf = mapper.readValue(new File("resources/config/config.yml"), SoftwareConfiguration.class);
             String pGrobidHome = conf.getGrobidHome();
 
             //String pGrobidHome = SoftwareProperties.get("grobid.home");

@@ -1,13 +1,14 @@
 package org.grobid.trainer;
 
 import org.grobid.core.main.GrobidHomeFinder;
-import org.grobid.service.configuration.SoftwareConfiguration;
+import org.grobid.core.utilities.SoftwareConfiguration;
 import org.grobid.core.utilities.GrobidProperties;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 import java.util.Arrays;
+import java.io.File;
 
 /**
  * Training application for training a target model.
@@ -73,7 +74,7 @@ public class SoftwareTrainerRunner {
         String path2GbdHome = null;
         try {
             ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-            SoftwareConfiguration conf = mapper.readValue("resources/config/config.yml", SoftwareConfiguration.class);
+            SoftwareConfiguration conf = mapper.readValue(new File("resources/config/config.yml"), SoftwareConfiguration.class);
 
             //String path2GbdHome = SoftwareProperties.get("grobid.home");
             path2GbdHome = conf.getGrobidHome();
