@@ -173,8 +173,9 @@ public class SoftwareTrainer extends AbstractTrainer {
                             continue;
 
                         List<OffsetPosition> softwareTokenPositions = softwareLexicon.tokenPositionsSoftwareNamesVectorLabeled(bufferLabeled);
+                        List<OffsetPosition> urlPositions = softwareLexicon.tokenPositionsUrlVectorLabeled(bufferLabeled);
 
-                        addFeatures(bufferLabeled, writer, softwareTokenPositions);
+                        addFeatures(bufferLabeled, writer, softwareTokenPositions, urlPositions);
                         writer.write("\n");
                     }
                     writer.write("\n");
@@ -294,8 +295,9 @@ public class SoftwareTrainer extends AbstractTrainer {
                             continue;
 
                         List<OffsetPosition> softwareTokenPositions = softwareLexicon.tokenPositionsSoftwareNamesVectorLabeled(bufferLabeled);
+                        List<OffsetPosition> urlPositions = softwareLexicon.tokenPositionsUrlVectorLabeled(bufferLabeled);
 
-                        addFeatures(bufferLabeled, writer, softwareTokenPositions);
+                        addFeatures(bufferLabeled, writer, softwareTokenPositions, urlPositions);
                         writer.write("\n");
                     }
                     writer.write("\n");
@@ -475,7 +477,7 @@ public class SoftwareTrainer extends AbstractTrainer {
      * A: crf text
      * B: tokenizations list
      */
-    public Pair<String, List<LayoutToken>> getCRFData(File pdfFile, List<PDFAnnotation> annotations) {
+    /*public Pair<String, List<LayoutToken>> getCRFData(File pdfFile, List<PDFAnnotation> annotations) {
 
         Writer crfWriter = null;
         List<LayoutToken> tokenizations = null;
@@ -560,8 +562,9 @@ public class SoftwareTrainer extends AbstractTrainer {
                 }
                 // add features
                 List<OffsetPosition> softwareTokenPositions = softwareLexicon.tokenPositionsSoftwareNamesVectorLabeled(labeled);
+                List<OffsetPosition> urlPositions = softwareLexicon.tokenPositionsUrlVectorLabeled(labeled);
 
-                addFeatures(labeled, crfWriter, softwareTokenPositions);
+                addFeatures(labeled, crfWriter, softwareTokenPositions, urlPositions);
             }
             crfWriter.write("\n");
         } catch (Exception e) {
@@ -579,23 +582,30 @@ public class SoftwareTrainer extends AbstractTrainer {
             return new Pair<String, List<LayoutToken>>(crfWriter.toString(), tokenizations);
         else
             return null;
-    }
+    }*/
 
     @SuppressWarnings({"UnusedParameters"})
     private void addFeatures(List<Pair<String, String>> texts,
                              Writer writer,
-                             List<OffsetPosition> softwareTokenPositions) {
+                             List<OffsetPosition> softwareTokenPositions,
+                             List<OffsetPosition> urlPositions) {
         int totalLine = texts.size();
         int posit = 0;
         int currentSoftwareIndex = 0;
         List<OffsetPosition> localPositions = softwareTokenPositions;
         boolean isSoftwarePattern = false;
+        boolean isUrl = false;
         try {
             for (Pair<String, String> lineP : texts) {
                 String token = lineP.getA();
                 if (token.trim().equals("@newline")) {
                     writer.write("\n");
                     writer.flush();
+                }
+
+                if (token.trim().length() == 0) {
+                    posit++;
+                    continue;
                 }
 
                 String label = lineP.getB();
@@ -620,8 +630,18 @@ public class SoftwareTrainer extends AbstractTrainer {
                     }
                 }
 
+                isUrl = false;
+                if (urlPositions != null) {
+                    for(OffsetPosition thePosition : urlPositions) {
+                        if (posit >= thePosition.start && posit <= thePosition.end) {     
+                            isUrl = true;
+                            break;
+                        } 
+                    }
+                }
+
                 FeaturesVectorSoftware featuresVector =
-                        FeaturesVectorSoftware.addFeaturesSoftware(token, label, isSoftwarePattern);
+                        FeaturesVectorSoftware.addFeaturesSoftware(token, label, isSoftwarePattern, isUrl);
                 if (featuresVector.label == null)
                     continue;
                 writer.write(featuresVector.printVector());

@@ -26,6 +26,7 @@ import org.grobid.core.layout.BoundingBox;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.layout.LayoutTokenization;
 import org.grobid.core.lexicon.SoftwareLexicon;
+import org.grobid.core.lexicon.Lexicon;
 import org.grobid.core.sax.TextChunkSaxHandler;
 import org.grobid.core.tokenization.TaggingTokenCluster;
 import org.grobid.core.tokenization.TaggingTokenClusteror;
@@ -111,7 +112,8 @@ public class SoftwareParser extends AbstractParser {
 
             // to store software name positions (names coming from the optional dictionary)
             List<OffsetPosition> softwareTokenPositions = softwareLexicon.tokenPositionsSoftwareNames(tokens);
-            String ress = addFeatures(tokens, softwareTokenPositions);
+            List<OffsetPosition> urlPositions = Lexicon.getInstance().tokenPositionsUrlPattern(tokens);
+            String ress = addFeatures(tokens, softwareTokenPositions, urlPositions);
             String res;
             try {
                 res = label(ress);
@@ -532,9 +534,10 @@ public class SoftwareParser extends AbstractParser {
             
             // positions for lexical match
             List<OffsetPosition> softwareTokenPositions = softwareLexicon.tokenPositionsSoftwareNames(layoutTokens);
-            
+            List<OffsetPosition> urlPositions = Lexicon.getInstance().tokenPositionsUrlPattern(layoutTokens);
+
             // string representation of the feature matrix for CRF lib
-            String ress = addFeatures(layoutTokens, softwareTokenPositions);     
+            String ress = addFeatures(layoutTokens, softwareTokenPositions, urlPositions);     
            
             // labeled result from CRF lib
             String res = label(ress);
@@ -582,9 +585,10 @@ public class SoftwareParser extends AbstractParser {
 
             // positions for lexical match
             List<OffsetPosition> softwareTokenPositions = softwareLexicon.tokenPositionsSoftwareNames(localLayoutTokens);
-            
+            List<OffsetPosition> urlPositions = Lexicon.getInstance().tokenPositionsUrlPattern(localLayoutTokens);
+
             // string representation of the feature matrix for CRF lib
-            String ress = addFeatures(localLayoutTokens, softwareTokenPositions);     
+            String ress = addFeatures(localLayoutTokens, softwareTokenPositions, urlPositions);     
             
             // labeled result from CRF lib
             String res = label(ress);
@@ -990,7 +994,8 @@ public class SoftwareParser extends AbstractParser {
 
                 // to store unit term positions
                 List<OffsetPosition> softwareTokenPositions = softwareLexicon.tokenPositionsSoftwareNames(tokens);
-                String ress = addFeatures(tokens, softwareTokenPositions);
+                List<OffsetPosition> urlPositions = Lexicon.getInstance().tokenPositionsUrlPattern(tokens);
+                String ress = addFeatures(tokens, softwareTokenPositions, urlPositions);
                 String res = null;
                 try {
                     res = label(ress);
@@ -1058,7 +1063,8 @@ public class SoftwareParser extends AbstractParser {
 
                 // to store unit term positions
                 List<OffsetPosition> softwareTokenPositions = softwareLexicon.tokenPositionsSoftwareNames(tokenizations);
-                String ress = addFeatures(tokenizations, softwareTokenPositions);
+                List<OffsetPosition> urlPositions = Lexicon.getInstance().tokenPositionsUrlPattern(tokenizations);
+                String ress = addFeatures(tokenizations, softwareTokenPositions, urlPositions);
                 String res = null;
                 try {
                     res = label(ress);
@@ -1147,12 +1153,14 @@ public class SoftwareParser extends AbstractParser {
 
     @SuppressWarnings({"UnusedParameters"})
     public String addFeatures(List<LayoutToken> tokens,
-                               List<OffsetPosition> softwareTokenPositions) {
+                               List<OffsetPosition> softwareTokenPositions,
+                               List<OffsetPosition> urlPositions) {
         int totalLine = tokens.size();
         int posit = 0;
         int currentSoftwareIndex = 0;
         List<OffsetPosition> localPositions = softwareTokenPositions;
         boolean isSoftwarePattern = false;
+        boolean isUrl = false;
         StringBuilder result = new StringBuilder();
         try {
             for (LayoutToken token : tokens) {
@@ -1175,7 +1183,7 @@ public class SoftwareParser extends AbstractParser {
                     continue;
                 }
 
-                // do we have a unit at position posit?
+                // do we have a software-match token at position posit?
                 if ((localPositions != null) && (localPositions.size() > 0)) {
                     for (int mm = currentSoftwareIndex; mm < localPositions.size(); mm++) {
                         if ((posit >= localPositions.get(mm).start) && (posit <= localPositions.get(mm).end)) {
@@ -1191,8 +1199,18 @@ public class SoftwareParser extends AbstractParser {
                     }
                 }
 
+                isUrl = false;
+                if (urlPositions != null) {
+                    for(OffsetPosition thePosition : urlPositions) {
+                        if (posit >= thePosition.start && posit <= thePosition.end) {     
+                            isUrl = true;
+                            break;
+                        } 
+                    }
+                }
+
                 FeaturesVectorSoftware featuresVector =
-                        FeaturesVectorSoftware.addFeaturesSoftware(text, null, isSoftwarePattern);
+                        FeaturesVectorSoftware.addFeaturesSoftware(text, null, isSoftwarePattern, isUrl);
                 result.append(featuresVector.printVector());
                 result.append("\n");
                 posit++;

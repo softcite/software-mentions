@@ -6,6 +6,8 @@ import org.grobid.core.exceptions.GrobidResourceException;
 import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.utilities.Pair;
 import org.grobid.core.utilities.OffsetPosition;
+import org.grobid.core.utilities.LayoutTokensUtil;
+import org.grobid.core.utilities.Utilities;
 import org.grobid.core.lexicon.FastMatcher;
 import org.grobid.core.layout.LayoutToken;
 
@@ -15,6 +17,9 @@ import org.slf4j.LoggerFactory;
 import java.io.*;
 import java.util.*;
 import java.util.zip.GZIPInputStream;
+
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 /**
  * Class for managing the lexical resources for software entities.
@@ -244,6 +249,82 @@ public class SoftwareLexicon {
     public List<OffsetPosition> tokenPositionsSoftwareNames(List<LayoutToken> vector) {
         List<OffsetPosition> results = softwarePattern.matchLayoutToken(vector, true, true); // case sensitive
         return results;
+    }
+
+    // to use the url pattern in grobid-core after merging branch update_header
+    static public final Pattern urlPattern = Pattern
+        .compile("(?i)(https?|ftp)\\s?:\\s?//\\s?[-A-Z0-9+&@#/%=~_:.]*[-A-Z0-9+&@#/%=~_]");
+        //.compile("(?i)(https?|ftp)\\s?:\\s?//\\s?[-A-Z0-9+&@#/%?=~_()|!:,.;]*[-A-Z0-9+&@#/%=~_()|]");
+
+    // to use the same method in grobid-core Utilities.java after merging branch update_header
+    public static List<OffsetPosition> convertStringOffsetToTokenOffset(
+        List<OffsetPosition> stringPosition, List<LayoutToken> tokens) {
+        List<OffsetPosition> result = new ArrayList<OffsetPosition>();
+        int indexText = 0;
+        int indexToken = 0;
+        OffsetPosition currentPosition = null;
+        LayoutToken token = null;
+        for(OffsetPosition pos : stringPosition) {
+            while(indexToken < tokens.size()) {
+
+                token = tokens.get(indexToken);
+                if (token.getText() == null) {
+                    indexToken++;
+                    continue;
+                }
+                
+                if (indexText >= pos.start) {
+                    // we have a start
+                    currentPosition = new OffsetPosition(indexToken, indexToken);
+                    // we need an end
+                    boolean found = false;
+                    while(indexToken < tokens.size()) {
+                        token = tokens.get(indexToken);
+
+                        if (token.getText() == null) {
+                            indexToken++;
+                            continue;
+                        }
+
+                        if (indexText+token.getText().length() >= pos.end) {
+                            // we have an end
+                            currentPosition.end = indexToken;
+                            result.add(currentPosition);
+                            found = true;
+                            break;
+                        }
+                        indexToken++;
+                        indexText += token.getText().length();
+                    }
+                    if (found) {
+                        indexToken++;
+                        indexText += token.getText().length();
+                        break;
+                    } else {
+                        currentPosition.end = indexToken-1;
+                        result.add(currentPosition);
+                    }
+                }
+                indexToken++;
+                indexText += token.getText().length();
+            }
+        }
+        return result;
+    }
+
+    public List<OffsetPosition> tokenPositionsUrlVectorLabeled(List<Pair<String, String>> pairs) {
+        List<LayoutToken> tokens = new ArrayList<LayoutToken>();
+        for(Pair<String, String> thePair : pairs) {
+            tokens.add(new LayoutToken(thePair.getA()));
+        }
+        String text = LayoutTokensUtil.toText(tokens);
+        List<OffsetPosition> textResult = new ArrayList<OffsetPosition>();
+        Matcher urlMatcher = urlPattern.matcher(text);
+        while (urlMatcher.find()) {  
+            //System.out.println(urlMatcher.start() + " / " + urlMatcher.end() + " / " + text.substring(urlMatcher.start(), urlMatcher.end()));                 
+            textResult.add(new OffsetPosition(urlMatcher.start(), urlMatcher.end()));
+        }
+        return convertStringOffsetToTokenOffset(textResult, tokens);
     }
 
     public double getTermIDF(String term) {

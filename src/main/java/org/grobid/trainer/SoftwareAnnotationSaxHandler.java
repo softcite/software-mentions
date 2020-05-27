@@ -151,7 +151,7 @@ public class SoftwareAnnotationSaxHandler extends DefaultHandler {
             List<String> tokenizations = SoftwareAnalyzer.getInstance().tokenize(text);
             boolean begin = true;
             for (String tok : tokenizations) {
-                tok = tok.trim();
+                //tok = tok.trim();
                 if (tok.length() == 0)
                     continue;
                 
