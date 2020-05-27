@@ -5,6 +5,7 @@ import com.google.inject.Singleton;
 
 import org.grobid.core.data.SoftwareComponent;
 import org.grobid.core.data.SoftwareEntity;
+import org.grobid.core.data.BibDataSet;
 import org.grobid.core.document.Document;
 import org.grobid.core.engines.Engine;
 import org.grobid.core.main.LibraryLoader;
@@ -110,9 +111,14 @@ public class SoftwareProcessFile {
 						first = false;
 					json.append(entity.toJson());
 				}
-				
-				json.append("]");
-                json.append(", \"runtime\" :" + (end-start));
+				json.append("], \"references\":[");
+
+                List<BibDataSet> bibDataSet = doc.getBibDataSets();
+                if (bibDataSet != null && bibDataSet.size()>0) {
+                    SoftwareServiceUtil.serializeReferences(json, bibDataSet, entities);
+                }
+
+                json.append("], \"runtime\" :" + (end-start));
                 json.append("}");
 
                 if (json != null) {

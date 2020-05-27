@@ -16,6 +16,9 @@ var grobid = (function ($) {
     // store the current entities extracted by the service
     var entityMap = new Object();
 
+    // store the references attached to the entities and extracted by the service
+    var referenceMap = new Object();
+
     function defineBaseURL(ext) {
         var baseUrl = null;
         if ($(location).attr('href').indexOf("index.html") != -1)
@@ -144,6 +147,7 @@ var grobid = (function ($) {
         // re-init the entity map
         entityMap = new Object();
         conceptMap = new Object();
+        referenceMap = new Object();
 
         var selected = $('#selectedService option:selected').attr('value');
         if (selected == 'processSoftwareText') {
@@ -621,6 +625,13 @@ var grobid = (function ($) {
                 }
             });
         }
+
+        var references = json.references
+        if (references) {
+            references.forEach(function (reference, n) {
+                referenceMap[reference.refKey] = reference.tei;
+            });
+        }
     }
 
     function annotateEntity(theId, rawForm, theType, thePos, page_height, page_width, entityIndex, positionIndex) {
@@ -836,10 +847,10 @@ var grobid = (function ($) {
                     //string += "<b>" + entity['references'][r]['label'] + "</b>"    
                     localLabel = ""
                     localHtml = ""
-                    if (entity['references'][r]['tei']) {
+                    if (entity['references'][r]['refKey'] && referenceMap[entity['references'][r]['refKey']]) {
                         //localHtml += entity['references'][r]['tei']
 //console.log(entity['references'][r]['tei']);
-                        var doc = parse(entity['references'][r]['tei']);
+                        var doc = parse(referenceMap[entity['references'][r]['refKey']]);
                         var authors = doc.getElementsByTagName("author");
                         max = authors.length
                         if (max > 3)
