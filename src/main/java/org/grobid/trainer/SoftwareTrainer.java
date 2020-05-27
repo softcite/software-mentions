@@ -669,7 +669,7 @@ public class SoftwareTrainer extends AbstractTrainer {
     }
 
     public String splitTrainEvaluate(Double split, boolean random) {
-        System.out.println("PAths :\n" + getCorpusPath() + "\n" + GrobidProperties.getModelPath(model).getAbsolutePath() + "\n" + getTempTrainingDataPath().getAbsolutePath() + "\n" + getTempEvaluationDataPath().getAbsolutePath() + " \nrand " + random);
+        System.out.println("Paths :\n" + getCorpusPath() + "\n" + GrobidProperties.getModelPath(model).getAbsolutePath() + "\n" + getTempTrainingDataPath().getAbsolutePath() + "\n" + getTempEvaluationDataPath().getAbsolutePath() + " \nrand " + random);
 
         File trainDataPath = getTempTrainingDataPath();
         File evalDataPath = getTempEvaluationDataPath();
