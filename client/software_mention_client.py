@@ -38,7 +38,6 @@ class software_mention_client(object):
         if self.config['bucket_name'] is not None and len(self.config['bucket_name']) > 0:
             self.s3 = S3.S3(self.config)
 
-        #self.mongo_client = None
         self.mongo_db = None
 
     def _load_config(self, path='./config.json'):
@@ -48,9 +47,25 @@ class software_mention_client(object):
         config_json = open(path).read()
         self.config = json.loads(config_json)
 
+    def service_isalive(self):
+        # test if GROBID software mention recognizer is up and running...
+        the_url = _grobid_software_url(self.config['software_mention_host'], self.config['software_mention_port'])
+        the_url += "isalive"
+        try:
+            r = requests.get(the_url)
+            if r.status_code != 200:
+                print('Grobid software mention server does not appear up and running ' + str(r.status_code))
+            else:
+                print("Grobid software mention server is up and running")
+                return True
+        except: 
+            print('Grobid software mention server does not appear up and running:',
+                'test call to grobid software mention failed, please check and re-start a server.')
+        return False
+
     def _init_lmdb(self):
         # open in write mode
-        envFilePath = os.path.join(self.config["data_path"], 'entries')
+        envFilePath = os.path.join(self.config["data_path"], 'entries_software')
         self.env = lmdb.open(envFilePath, map_size=map_size)
 
         envFilePath = os.path.join(self.config["data_path"], 'fail_software')
@@ -59,22 +74,29 @@ class software_mention_client(object):
     def annotate_directory(self, directory):
         # recursive directory walk for all pdf documents
         pdf_files = []
+        out_files = []
         for root, directories, filenames in os.walk(directory):
             for filename in filenames: 
                 if filename.endswith(".pdf") or filename.endswith(".PDF"):
                     print(os.path.join(root,filename))
                     pdf_files.append(os.path.join(root,filename))
+                    if filename.endswith(".pdf"):
+                        out_file = filename.replace(".pdf", ".software.json")
+                    if filename.endswith(".PDF"):
+                        out_file = filename.replace(".PDF", ".software.json")    
+                    out_files.append(os.path.join(root,out_file))
                     if len(pdf_files) == self.config["batch_size"]:
-                        self.annotate_batch(pdf_files, None, None, None)
+                        self.annotate_batch(pdf_files, out_files, None, None)
                         pdf_files = []
+                        out_files = []
         # last batch
         if len(pdf_files) > 0:
-            self.annotate_batch(pdf_files, None, None, None)
+            self.annotate_batch(pdf_files, out_files, None, None)
 
 
     def annotate_batch(self, pdf_files, out_files=None, dois=None, pmcs=None):
         # process a provided list of PDF
-        print("annotate_batch", len(pdf_files))
+        #print("annotate_batch", len(pdf_files))
         with concurrent.futures.ProcessPoolExecutor(max_workers=self.config["concurrency"]) as executor:
             for i, pdf_file in enumerate(pdf_files):
                 if out_files is None:
@@ -89,14 +111,14 @@ class software_mention_client(object):
                     pmc = None
                 else:
                     pmc = pmcs[i]    
-                executor.submit(annotate, pdf_file, self.config, self.mongo_db, file_out, doi, pmc)
+                executor.submit(annotate, pdf_file, self.config, self.mongo_db, out_file, doi, pmc)
 
 
     def annotate_collection(self, data_path):
         # init lmdb transactions
         # open in read mode
-        #print(os.path.join(data_path, 'entries'))
-        envFilePath = os.path.join(data_path, 'entries')
+        #print(os.path.join(data_path, 'entries_software'))
+        envFilePath = os.path.join(data_path, 'entries_software')
         self.env = lmdb.open(envFilePath, map_size=map_size)
 
         #envFilePath = os.path.join(self.config["data_path"], 'doi')
@@ -153,7 +175,7 @@ class software_mention_client(object):
         self.env.close()
         self.env_fail.close()
 
-        envFilePath = os.path.join(self.config["data_path"], 'entries')
+        envFilePath = os.path.join(self.config["data_path"], 'entries_software')
         shutil.rmtree(envFilePath)
 
         envFilePath = os.path.join(self.config["data_path"], 'fail_software')
@@ -162,12 +184,12 @@ class software_mention_client(object):
         # re-init the environments
         self._init_lmdb()
 
-def _generateUUIDPath(filename):
+def generateS3Path(identifier):
     '''
     Convert a file name into a path with file prefix as directory paths:
     123456789 -> 12/34/56/123456789
     '''
-    return filename[:2] + '/' + filename[2:4] + '/' + filename[4:6] + "/" + filename[6:8] + "/"
+    return os.path.join(identifier[:2], identifier[2:4], identifier[4:6], identifier[6:8], "")
 
 def _serialize_pickle(a):
     return pickle.dumps(a)
@@ -197,7 +219,7 @@ def annotate(file_in, config, mongo_db, file_out=None, doi=None, pmc=None):
         print('[{0}] Bad Request'.format(response.status_code))
         print(response.content )
     elif response.status_code == 200:
-        print('softcite suceed')
+        #print('softcite succeed')
         jsonObject = response.json()
     else:
         print('Unexpected Error: [HTTP {0}]: Content: {1}'.format(response.status_code, response.content))
@@ -213,21 +235,27 @@ def annotate(file_in, config, mongo_db, file_out=None, doi=None, pmc=None):
         #jsonObject['date'] = datetime.datetime.now().isoformat();
         # TODO: get the version via the server
         #jsonObject['version'] = "0.6.1-SNAPSHOT";
-
-        print(jsonObject)
+        #print(jsonObject)
 
         if file_out is not None: 
             # we write the json result into a file together with the processed pdf
             with open(file_out, "w", encoding="utf-8") as json_file:
                 json_file.write(json.dumps(jsonObject))
-        else:
-            # we store the result in mongo db (this is the common case)
+
+        if config["mongo_host"] is not None:
+            # we store the result in mongo db 
             if mongo_db is None:
                 mongo_client = pymongo.MongoClient(config["mongo_host"], int(config["mongo_port"]))
                 mongo_db = mongo_client[config["mongo_db"]]
             inserted_id = mongo_db.annotations.insert_one(jsonObject).inserted_id
             #print("inserted annotations with id", inserted_id)
 
+def _grobid_software_url(grobid_base, grobid_port):
+    the_url = 'http://'+grobid_base
+    if grobid_port is not None and len(grobid_port)>0:
+        the_url += ":"+grobid_port
+    the_url += "/service/"
+    return the_url
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = "GROBID Software Mention recognition client")
@@ -250,6 +278,9 @@ if __name__ == "__main__":
     repo_in = args.repo_in
 
     client = software_mention_client(config_path=config_path)
+
+    if not client.service_isalive():
+        sys.exit("Grobid software mention service not available, leaving...")
 
     if reset:
         client.reset()
