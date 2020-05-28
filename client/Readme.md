@@ -56,17 +56,17 @@ optional arguments:
 ```
 
 
-### Processing local text files or PDF files
+### Processing local PDF files
 
 For processing a single file., the resulting json being written as file at the indicated output path:
 
 > python3 software_mention_client.py --file-in toto.pdf --file-out toto.json
 
-For processing recursively a directory of PDF files, the results can be either
+For processing recursively a directory of PDF files, the results will be:
 
-* written to a mongodb server and database indicated in the config file:
+* written to a mongodb server and database indicated in the config file
 
-* in the directory of PDF files, as json files, together with each processed PDF
+* *and* in the directory of PDF files, as json files, together with each processed PDF
 
 > python3 software_mention_client.py --repo-in /mnt/data/biblio/pmc_oa_dir/
 
@@ -75,14 +75,17 @@ The default config file is `./config.json`, but could also be specified via the 
 > python3 software_mention_client.py --repo-in /mnt/data/biblio/pmc_oa_dir/ --config ./my_config.json
 
 
-### Processing a collection of PDF stored on AWS S3 harvested by biblio-glutton-harvester
+### Processing a collection of PDF harvested by biblio-glutton-harvester stored locally
 
-[biblio-glutton-harvester](https://github.com/kermitt2/biblio-glutton-harvester) creates a collection manifest as a LMDB database to keep track of the harvesting of large collection of files. Storage of the resource can be located on a (local) file system or on a AWS S3 storage. The `software-mention` client can use the JSON dump file corresponding to the collection manifest to process the harvested documents. 
+[biblio-glutton-harvester](https://github.com/kermitt2/biblio-glutton-harvester) creates a collection manifest as a LMDB database to keep track of the harvesting of large collection of files. Storage of the resource can be located on a local file system or on a AWS S3 storage. The `software-mention` client can use the local data repository produced by [biblio-glutton-harvester](https://github.com/kermitt2/biblio-glutton-harvester) and in particular its collection manifest to process these harvested documents. 
 
-> python3 software_mention_client.py --data-path ./data/dump.json
+* locally:
 
-`--data-path` indicates the path where the json resource description is located
+> python3 software_mention_client.py --data-path /mnt/data/biblio-glutton-harvester/data/
 
+`--data-path` indicates the path to the repository of data harvested by [biblio-glutton-harvester](https://github.com/kermitt2/biblio-glutton-harvester).
+
+The resulting JSON files will be enriched by the metadata records of the processed PDF and will be stored together with each processed PDF in the data repository. 
 
 ## License and contact
 

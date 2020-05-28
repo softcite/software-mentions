@@ -1210,7 +1210,8 @@ public class SoftwareParser extends AbstractParser {
                 }
 
                 FeaturesVectorSoftware featuresVector =
-                        FeaturesVectorSoftware.addFeaturesSoftware(text, null, isSoftwarePattern, isUrl);
+                        FeaturesVectorSoftware.addFeaturesSoftware(text, null, 
+                            softwareLexicon.inSoftwareDictionary(text), isSoftwarePattern, isUrl);
                 result.append(featuresVector.printVector());
                 result.append("\n");
                 posit++;

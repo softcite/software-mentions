@@ -100,6 +100,30 @@ public class SoftwareLexiconTest {
     }
 
     @Test
+    public void testTokenPositionsSoftwareNameFromLabels() throws Exception {
+        List<Pair<String, String>> labeled = new ArrayList<Pair<String, String>>();
+
+        String testString = "The next step is to install LibreOffice Draw version 12.1 from https://www.libreoffice.org/download/download/ online";
+
+        List<LayoutToken> tokens = SoftwareAnalyzer.getInstance().tokenizeWithLayoutToken(testString);
+        for(LayoutToken token : tokens) {
+            if (token.getText().trim().length() == 0)
+                continue;
+            Pair<String, String> pair = new Pair<String, String>(token.getText(), "toto");
+            labeled.add(pair);
+        }
+
+        List<OffsetPosition> urlPositions = softwareLexicon.tokenPositionsSoftwareNamesVectorLabeled(labeled);
+
+        /*for(OffsetPosition position : urlPositions) {
+            for(int i=position.start; i <= position.end; i++) 
+                System.out.print(labeled.get(i).getA());
+            System.out.println(" / " + position.start + " " + position.end);
+        }*/
+        assertThat(urlPositions, hasSize(2));
+    }
+
+    @Test
     public void testTokenPositionsUrl() throws Exception {
         String testString = "The next step is to install LibreOffice Draw version 12.1 from https://www.libreoffice.org/ online";
 

@@ -591,6 +591,7 @@ public class SoftwareTrainer extends AbstractTrainer {
                              List<OffsetPosition> urlPositions) {
         int totalLine = texts.size();
         int posit = 0;
+        int positUrl = 0;
         int currentSoftwareIndex = 0;
         List<OffsetPosition> localPositions = softwareTokenPositions;
         boolean isSoftwarePattern = false;
@@ -604,17 +605,24 @@ public class SoftwareTrainer extends AbstractTrainer {
                 }
 
                 if (token.trim().length() == 0) {
-                    posit++;
+                    positUrl++;
                     continue;
                 }
 
                 String label = lineP.getB();
-                /*if (label != null) {
-                    isSoftwarePattern = true;
-                }*/
 
                 // do we have an software at position posit?
-                if ((localPositions != null) && (localPositions.size() > 0)) {
+                isSoftwarePattern = false;
+                if (localPositions != null) {
+                    for(OffsetPosition thePosition : localPositions) {
+                        if (posit >= thePosition.start && posit <= thePosition.end) {     
+                            isSoftwarePattern = true;
+                            break;
+                        } 
+                    }
+                }
+
+                /*if ((localPositions != null) && (localPositions.size() > 0)) {
                     for (int mm = currentSoftwareIndex; mm < localPositions.size(); mm++) {
                         if ((posit >= localPositions.get(mm).start) &&
                                 (posit <= localPositions.get(mm).end)) {
@@ -628,12 +636,12 @@ public class SoftwareTrainer extends AbstractTrainer {
                             continue;
                         }
                     }
-                }
+                }*/
 
                 isUrl = false;
                 if (urlPositions != null) {
                     for(OffsetPosition thePosition : urlPositions) {
-                        if (posit >= thePosition.start && posit <= thePosition.end) {     
+                        if (positUrl >= thePosition.start && positUrl <= thePosition.end) {     
                             isUrl = true;
                             break;
                         } 
@@ -641,13 +649,15 @@ public class SoftwareTrainer extends AbstractTrainer {
                 }
 
                 FeaturesVectorSoftware featuresVector =
-                        FeaturesVectorSoftware.addFeaturesSoftware(token, label, isSoftwarePattern, isUrl);
+                        FeaturesVectorSoftware.addFeaturesSoftware(token, label, 
+                            softwareLexicon.inSoftwareDictionary(token), isSoftwarePattern, isUrl);
                 if (featuresVector.label == null)
                     continue;
                 writer.write(featuresVector.printVector());
                 writer.write("\n");
                 writer.flush();
                 posit++;
+                positUrl++;
                 isSoftwarePattern = false;
             }
         } catch (Exception e) {
