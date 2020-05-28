@@ -26,6 +26,7 @@ import org.grobid.core.layout.BoundingBox;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.layout.LayoutTokenization;
 import org.grobid.core.lexicon.SoftwareLexicon;
+import org.grobid.core.lexicon.Lexicon;
 import org.grobid.core.sax.TextChunkSaxHandler;
 import org.grobid.core.tokenization.TaggingTokenCluster;
 import org.grobid.core.tokenization.TaggingTokenClusteror;
@@ -33,6 +34,7 @@ import org.grobid.core.utilities.*;
 import org.grobid.core.utilities.counters.CntManager;
 import org.grobid.core.utilities.counters.impl.CntManagerFactory;
 import org.grobid.core.lexicon.FastMatcher;
+import org.grobid.core.utilities.SoftwareConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -63,9 +65,9 @@ public class SoftwareParser extends AbstractParser {
 
     private static volatile SoftwareParser instance;
 
-    public static SoftwareParser getInstance() {
+    public static SoftwareParser getInstance(SoftwareConfiguration configuration) {
         if (instance == null) {
-            getNewInstance();
+            getNewInstance(configuration);
         }
         return instance;
     }
@@ -73,21 +75,21 @@ public class SoftwareParser extends AbstractParser {
     /**
      * Create a new instance.
      */
-    private static synchronized void getNewInstance() {
-        instance = new SoftwareParser();
+    private static synchronized void getNewInstance(SoftwareConfiguration configuration) {
+        instance = new SoftwareParser(configuration);
     }
 
     private SoftwareLexicon softwareLexicon = null;
 	private EngineParsers parsers;
     private SoftwareDisambiguator disambiguator;
 
-    private SoftwareParser() {
+    private SoftwareParser(SoftwareConfiguration configuration) {
         super(GrobidModels.SOFTWARE, CntManagerFactory.getCntManager(), 
-            GrobidCRFEngine.valueOf(SoftwareProperties.get("grobid.software.engine").toUpperCase()));
+            GrobidCRFEngine.valueOf(configuration.getEngine().toUpperCase()));
 
         softwareLexicon = SoftwareLexicon.getInstance();
 		parsers = new EngineParsers();
-        disambiguator = SoftwareDisambiguator.getInstance();
+        disambiguator = SoftwareDisambiguator.getInstance(configuration);
     }
 
     /**
@@ -110,7 +112,8 @@ public class SoftwareParser extends AbstractParser {
 
             // to store software name positions (names coming from the optional dictionary)
             List<OffsetPosition> softwareTokenPositions = softwareLexicon.tokenPositionsSoftwareNames(tokens);
-            String ress = addFeatures(tokens, softwareTokenPositions);
+            List<OffsetPosition> urlPositions = Lexicon.getInstance().tokenPositionsUrlPattern(tokens);
+            String ress = addFeatures(tokens, softwareTokenPositions, urlPositions);
             String res;
             try {
                 res = label(ress);
@@ -531,9 +534,10 @@ public class SoftwareParser extends AbstractParser {
             
             // positions for lexical match
             List<OffsetPosition> softwareTokenPositions = softwareLexicon.tokenPositionsSoftwareNames(layoutTokens);
-            
+            List<OffsetPosition> urlPositions = Lexicon.getInstance().tokenPositionsUrlPattern(layoutTokens);
+
             // string representation of the feature matrix for CRF lib
-            String ress = addFeatures(layoutTokens, softwareTokenPositions);     
+            String ress = addFeatures(layoutTokens, softwareTokenPositions, urlPositions);     
            
             // labeled result from CRF lib
             String res = label(ress);
@@ -581,9 +585,10 @@ public class SoftwareParser extends AbstractParser {
 
             // positions for lexical match
             List<OffsetPosition> softwareTokenPositions = softwareLexicon.tokenPositionsSoftwareNames(localLayoutTokens);
-            
+            List<OffsetPosition> urlPositions = Lexicon.getInstance().tokenPositionsUrlPattern(localLayoutTokens);
+
             // string representation of the feature matrix for CRF lib
-            String ress = addFeatures(localLayoutTokens, softwareTokenPositions);     
+            String ress = addFeatures(localLayoutTokens, softwareTokenPositions, urlPositions);     
             
             // labeled result from CRF lib
             String res = label(ress);
@@ -740,19 +745,20 @@ public class SoftwareParser extends AbstractParser {
                     break;
             }
             if (currentEntity == null) {
-                if (previousEntity.freeField(component.getLabel())) {
+                if (previousEntity.freeField(component.getLabel()) || previousEntity.betterField(component)) {
                     previousEntity.setComponent(component);
                 }
             } else if (component.getOffsetEnd() < previousEntity.getSoftwareName().getOffsetStart()) {
-                if (previousEntity.freeField(component.getLabel())) {
+                if (previousEntity.freeField(component.getLabel()) || previousEntity.betterField(component)) {
                     previousEntity.setComponent(component);
                 }
             } else if (component.getOffsetEnd() < currentEntity.getSoftwareName().getOffsetStart()) {
                 // we are in the middle of the two entities, we use proximity to attach the component
-                // to an entity
+                // to an entity, with a strong bonus to the entity on the left 
+                // using sentence boundary could be helpful too in this situation
                 int dist1 = currentEntity.getSoftwareName().getOffsetStart() - component.getOffsetEnd();
                 int dist2 = component.getOffsetStart() - previousEntity.getSoftwareName().getOffsetEnd(); 
-                if (dist2 <= dist1) {
+                if (dist2 <= dist1*2) {
                     previousEntity.setComponent(component);
                 } else
                     currentEntity.setComponent(component);
@@ -780,12 +786,12 @@ public class SoftwareParser extends AbstractParser {
             // find end boundary
             int endPos = pos;
             List<SoftwareComponent> theComps = new ArrayList<SoftwareComponent>();
-            SoftwareComponent comp = entity.getVersionNumber();
+            SoftwareComponent comp = entity.getVersion();
             if (comp != null) 
                 theComps.add(comp);
-            comp = entity.getVersionDate();
+            /*comp = entity.getVersionDate();
             if (comp != null) 
-                theComps.add(comp);
+                theComps.add(comp);*/
             comp = entity.getCreator();
             if (comp != null) 
                 theComps.add(comp);
@@ -821,12 +827,12 @@ public class SoftwareParser extends AbstractParser {
     public List<SoftwareEntity> filterByRefCallout(List<SoftwareEntity> entities, List<BiblioComponent> refBibComponents) {
         for(BiblioComponent refBib : refBibComponents) {
             for(SoftwareEntity entity : entities) {
-                if (entity.getVersionNumber() == null)
+                if (entity.getVersion() == null)
                     continue;
-                SoftwareComponent versionNumber = entity.getVersionNumber();
-                if ( (refBib.getOffsetStart() >= versionNumber.getOffsetStart()) &&
-                     (refBib.getOffsetEnd() <= versionNumber.getOffsetEnd()) ) {
-                    entity.setVersionNumber(null);
+                SoftwareComponent version = entity.getVersion();
+                if ( (refBib.getOffsetStart() >= version.getOffsetStart()) &&
+                     (refBib.getOffsetEnd() <= version.getOffsetEnd()) ) {
+                    entity.setVersion(null);
                 }
             }
         }
@@ -988,7 +994,8 @@ public class SoftwareParser extends AbstractParser {
 
                 // to store unit term positions
                 List<OffsetPosition> softwareTokenPositions = softwareLexicon.tokenPositionsSoftwareNames(tokens);
-                String ress = addFeatures(tokens, softwareTokenPositions);
+                List<OffsetPosition> urlPositions = Lexicon.getInstance().tokenPositionsUrlPattern(tokens);
+                String ress = addFeatures(tokens, softwareTokenPositions, urlPositions);
                 String res = null;
                 try {
                     res = label(ress);
@@ -1056,7 +1063,8 @@ public class SoftwareParser extends AbstractParser {
 
                 // to store unit term positions
                 List<OffsetPosition> softwareTokenPositions = softwareLexicon.tokenPositionsSoftwareNames(tokenizations);
-                String ress = addFeatures(tokenizations, softwareTokenPositions);
+                List<OffsetPosition> urlPositions = Lexicon.getInstance().tokenPositionsUrlPattern(tokenizations);
+                String ress = addFeatures(tokenizations, softwareTokenPositions, urlPositions);
                 String res = null;
                 try {
                     res = label(ress);
@@ -1145,12 +1153,14 @@ public class SoftwareParser extends AbstractParser {
 
     @SuppressWarnings({"UnusedParameters"})
     public String addFeatures(List<LayoutToken> tokens,
-                               List<OffsetPosition> softwareTokenPositions) {
+                               List<OffsetPosition> softwareTokenPositions,
+                               List<OffsetPosition> urlPositions) {
         int totalLine = tokens.size();
         int posit = 0;
         int currentSoftwareIndex = 0;
         List<OffsetPosition> localPositions = softwareTokenPositions;
         boolean isSoftwarePattern = false;
+        boolean isUrl = false;
         StringBuilder result = new StringBuilder();
         try {
             for (LayoutToken token : tokens) {
@@ -1173,7 +1183,7 @@ public class SoftwareParser extends AbstractParser {
                     continue;
                 }
 
-                // do we have a unit at position posit?
+                // do we have a software-match token at position posit?
                 if ((localPositions != null) && (localPositions.size() > 0)) {
                     for (int mm = currentSoftwareIndex; mm < localPositions.size(); mm++) {
                         if ((posit >= localPositions.get(mm).start) && (posit <= localPositions.get(mm).end)) {
@@ -1189,9 +1199,19 @@ public class SoftwareParser extends AbstractParser {
                     }
                 }
 
+                isUrl = false;
+                if (urlPositions != null) {
+                    for(OffsetPosition thePosition : urlPositions) {
+                        if (posit >= thePosition.start && posit <= thePosition.end) {     
+                            isUrl = true;
+                            break;
+                        } 
+                    }
+                }
+
                 FeaturesVectorSoftware featuresVector =
-                        FeaturesVectorSoftware.addFeaturesSoftware(text, null,
-                                softwareLexicon.inSoftwareDictionary(token.getText()), isSoftwarePattern);
+                        FeaturesVectorSoftware.addFeaturesSoftware(text, null, 
+                            softwareLexicon.inSoftwareDictionary(text), isSoftwarePattern, isUrl);
                 result.append(featuresVector.printVector());
                 result.append("\n");
                 posit++;
@@ -1216,7 +1236,7 @@ public class SoftwareParser extends AbstractParser {
 
         SoftwareComponent currentComponent = null;
         SoftwareLexicon.Software_Type openEntity = null;
-
+//System.out.println(result);
         int pos = 0; // position in term of characters for creating the offsets
 
         for (TaggingTokenCluster cluster : clusters) {

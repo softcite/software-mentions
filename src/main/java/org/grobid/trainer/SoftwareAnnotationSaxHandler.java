@@ -111,7 +111,7 @@ public class SoftwareAnnotationSaxHandler extends DefaultHandler {
                                     currentTag = "<version-date>";
                                 }*/ else if (value.equals("url")) {
                                     currentTag = "<url>";
-                                } else if (value.equals("creator")) {
+                                } else if (value.equals("creator") || value.equals("publisher")) {
                                     currentTag = "<creator>";
                                 } else if (value.equals("version")) {
                                     currentTag = "<version>";
@@ -151,7 +151,7 @@ public class SoftwareAnnotationSaxHandler extends DefaultHandler {
             List<String> tokenizations = SoftwareAnalyzer.getInstance().tokenize(text);
             boolean begin = true;
             for (String tok : tokenizations) {
-                tok = tok.trim();
+                //tok = tok.trim();
                 if (tok.length() == 0)
                     continue;
                 

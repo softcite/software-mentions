@@ -68,13 +68,14 @@ public class BiblioComponent extends SoftwareComponent {
         if (normalizedForm != null)
             buffer.append(", \"normalizedForm\" : \"" + normalizedForm + "\"");
 
-        if (biblio != null) {
+        /*if (biblio != null) {
             try {
                 buffer.append(", \"tei\": " + mapper.writeValueAsString(biblio.toTEI(refKey)));
             } catch (JsonProcessingException e) {
                 logger.warn("tei for biblio cannot be encoded", e);
             }
-        }
+        }*/
+        buffer.append(", \"refKey\": " + refKey);
         
         // knowledge information
         if (wikidataId != null) {

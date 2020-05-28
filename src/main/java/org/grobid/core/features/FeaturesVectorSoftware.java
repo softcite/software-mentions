@@ -42,6 +42,8 @@ public class FeaturesVectorSoftware {
 	// converted character shape
 	public String wordShapeTrimmed = null;
 
+    public boolean http = false;
+
     public FeaturesVectorSoftware() {
     }
 
@@ -111,6 +113,11 @@ public class FeaturesVectorSoftware {
 		
 		// word shape trimmed (1)
 		res.append(" " + wordShapeTrimmed);
+
+        if (http)
+            res.append(" 1");
+        else
+            res.append(" 0");
 		
         // label - for training data (1)
         if (label != null)
@@ -127,7 +134,8 @@ public class FeaturesVectorSoftware {
     static public FeaturesVectorSoftware addFeaturesSoftware(String line,
                                             String label,
                                             boolean isSoftwareToken,
-                                            boolean isSoftwarePattern) {
+                                            boolean isSoftwarePattern,
+                                            boolean isUrl) {
         FeatureFactory featureFactory = FeatureFactory.getInstance();
 
         FeaturesVectorSoftware featuresVector = new FeaturesVectorSoftware();
@@ -192,11 +200,13 @@ public class FeaturesVectorSoftware {
 
             featuresVector.softwareName = isSoftwareToken;
 
-			featuresVector.isSoftwareToken = isSoftwarePattern; 
+            featuresVector.isSoftwareToken = isSoftwarePattern;
 
 			featuresVector.shadowNumber = TextUtilities.shadowNumbers(word);
 			
 			featuresVector.wordShape = TextUtilities.wordShape(word);
+
+            featuresVector.http = isUrl;
 			
 			featuresVector.wordShapeTrimmed = TextUtilities.wordShapeTrimmed(word);
         }

@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  *  Representation of a mention of a component corresponding to a software description.
- *  The component can be the software name, the version number or date, the software creator,
+ *  The component can be the software name, the version, the software creator (re-scoped as publisher),
  *  or the software URL.  
  *
  */

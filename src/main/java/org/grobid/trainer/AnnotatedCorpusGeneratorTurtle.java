@@ -3,6 +3,7 @@ package org.grobid.trainer;
 import org.grobid.core.analyzers.SoftwareAnalyzer;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.utilities.ArticleUtilities;
+import org.grobid.core.utilities.SoftwareConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,9 @@ import org.semanticweb.yars.turtle.*;
 import org.semanticweb.yars.nx.*;
 
 import java.net.URI;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 /**
  * Not used anymore! We use the .csv files, which are largely enough for this kind 
@@ -42,8 +46,8 @@ import java.net.URI;
  * Just as a reference, I mention here that, from the text mining point of view,
  * a standard XML annotations framework like (MUC's ENAMEX or TEI style annotations) 
  * should be preferably used for reliable, constrained, readable and complete corpus 
- * annotations rather than the heavy and painful semantic web framework which 
- * is too disconnected from the actual linguistic and layout material. 
+ * annotations rather than the semantic web framework which is too disconnected from 
+ * the actual linguistic and layout material. 
  *
  * Once the corpus is an XML format, we can use the consistency scripts under 
  * scripts/ to analyse, review and correct the annotations in a simple manner.
@@ -60,6 +64,11 @@ public class AnnotatedCorpusGeneratorTurtle {
     static public Charset UTF_8 = Charset.forName("UTF-8"); // StandardCharsets.UTF_8
 
     private ArticleUtilities articleUtilities = new ArticleUtilities();
+    private SoftwareConfiguration configuration;
+
+    public AnnotatedCorpusGeneratorTurtle(SoftwareConfiguration conf) {
+        this.configuration = conf;
+    }
 
     /**
      * Start the conversion/fusion process for generating MUC-style annotated XML documents
@@ -139,7 +148,7 @@ public class AnnotatedCorpusGeneratorTurtle {
     private File getPDF(String pathPDFs, String identifier) {
         File inRepo = new File(pathPDFs + File.separator + identifier + ".pdf");
         if (!inRepo.exists()) {
-            File notInRepo = articleUtilities.getPDFDoc(identifier);
+            File notInRepo = articleUtilities.getPDFDoc(identifier, this.configuration);
             if (notInRepo == null) {
                 return null;
             } else {
@@ -162,7 +171,7 @@ public class AnnotatedCorpusGeneratorTurtle {
      *
      * @param args Command line arguments.
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
        
         // we are expecting three arguments, absolute path to the original PDF 
         // documents, absolute path to the softcite data in ttl and abolute path
@@ -194,7 +203,10 @@ public class AnnotatedCorpusGeneratorTurtle {
             new File(xmlPath).mkdirs();
         }       
 
-        AnnotatedCorpusGeneratorTurtle converter = new AnnotatedCorpusGeneratorTurtle();
+        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+        SoftwareConfiguration conf = mapper.readValue(new File("resources/config/config.yml"), SoftwareConfiguration.class);
+
+        AnnotatedCorpusGeneratorTurtle converter = new AnnotatedCorpusGeneratorTurtle(conf);
         converter.process(documentPath, ttlPath, xmlPath);
     }
 }

@@ -6,9 +6,8 @@ import org.grobid.core.data.SoftwareComponent;
 import org.grobid.core.document.Document;
 import org.grobid.core.factory.GrobidFactory;
 import org.grobid.core.utilities.GrobidProperties;
-import org.grobid.core.utilities.SoftwareProperties;
+import org.grobid.core.utilities.SoftwareConfiguration;
 import org.grobid.core.main.GrobidHomeFinder;
-//import org.grobid.core.utilities.Pair;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -20,6 +19,9 @@ import java.util.Arrays;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertNotNull;
@@ -28,12 +30,16 @@ import static org.junit.Assert.assertNotNull;
  * @author Patrice
  */
 public class SoftwareParserTest {
-    private static Engine engine;
+    private static SoftwareConfiguration configuration;
 
     @BeforeClass
     public static void setUpClass() throws Exception {
+        SoftwareConfiguration conf = null;
         try {
-            String pGrobidHome = SoftwareProperties.get("grobid.home");
+            ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+            conf = mapper.readValue(new File("resources/config/config.yml"), SoftwareConfiguration.class);
+
+            String pGrobidHome = conf.getGrobidHome();
 
             GrobidHomeFinder grobidHomeFinder = new GrobidHomeFinder(Arrays.asList(pGrobidHome));
             GrobidProperties.getInstance(grobidHomeFinder);
@@ -44,7 +50,7 @@ public class SoftwareParserTest {
             exp.printStackTrace();
         }
 
-        engine = GrobidFactory.getInstance().createEngine();
+        configuration = conf;
     }
 
     @Before
@@ -57,7 +63,7 @@ public class SoftwareParserTest {
         System.out.println("testSoftwareParserText - testSoftwareParserText - testSoftwareParserText");
         String text = IOUtils.toString(this.getClass().getResourceAsStream("/text.txt"), StandardCharsets.UTF_8.toString());
         text = text.replaceAll("\\n", " ").replaceAll("\\t", " ");
-        List<SoftwareEntity> entities = SoftwareParser.getInstance().processText(text);
+        List<SoftwareEntity> entities = SoftwareParser.getInstance(configuration).processText(text, false);
         //System.out.println(text);
         //System.out.println(entities.size());
         assertThat(entities, hasSize(5));
@@ -65,7 +71,7 @@ public class SoftwareParserTest {
 
     //@Test
     public void testSoftwareParserPDF() throws Exception {
-        Pair<List<SoftwareEntity>, Document> res = SoftwareParser.getInstance().processPDF(new File("./src/test/resources/annot.pdf"));
+        Pair<List<SoftwareEntity>, Document> res = SoftwareParser.getInstance(configuration).processPDF(new File("./src/test/resources/annot.pdf"), false);
         List<SoftwareEntity> entities = res.getLeft();
 
         assertThat(entities, hasSize(19));

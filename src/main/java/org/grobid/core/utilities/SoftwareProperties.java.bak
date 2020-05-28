@@ -21,15 +21,26 @@ public class SoftwareProperties {
 	public static String getTmpPath() {
 		return SoftwareProperties.get("grobid.software.tmpPath");
 	}
-	
-	public static String getEmbeddings() {
-		return SoftwareProperties.get("grobid.software.engine.embeddings");
-	}
 
 	/**
 	 *  This will override engine selection in GROBID
 	 */
 	public static String getEngine() {
 		return SoftwareProperties.get("grobid.software.engine");
+	}
+
+	/**
+	 *  This will overrideDeLFT install path in GROBID
+	 */
+	public static String getDeLFTPath() {
+        return SoftwareProperties.get("grobid.software.delft.install");
+    }
+
+    public static String getDelftEmbeddings() {
+		return SoftwareProperties.get("grobid.software.delft.embeddings");
+	}
+
+	public static String getDelftArchitecture() {
+		return SoftwareProperties.get("grobid.software.delft.architecture");
 	}
 }

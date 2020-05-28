@@ -15,8 +15,11 @@ import org.grobid.core.main.GrobidHomeFinder;
 import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.Pair;
-import org.grobid.core.utilities.SoftwareProperties;
+import org.grobid.core.utilities.SoftwareConfiguration;
 import org.grobid.trainer.evaluation.EvaluationUtilities;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -34,8 +37,14 @@ public class SoftwareTrainer extends AbstractTrainer {
 
     private SoftwareLexicon softwareLexicon = null;
 
+    private SoftwareConfiguration conf = null;
+
     public SoftwareTrainer() {
         this(0.00001, 20, 0);
+
+        epsilon = 0.00001;
+        window = 30;
+        nbMaxIterations = 1500;
     }
 
     public SoftwareTrainer(double epsilon, int window, int nbMaxIterations) {
@@ -47,6 +56,10 @@ public class SoftwareTrainer extends AbstractTrainer {
         //this.nbMaxIterations = nbMaxIterations;
         this.nbMaxIterations = 2000;
         softwareLexicon = SoftwareLexicon.getInstance();
+    }
+
+    public void setSoftwareConf(SoftwareConfiguration conf) {
+        this.conf = conf;
     }
 
     /**
@@ -110,10 +123,12 @@ public class SoftwareTrainer extends AbstractTrainer {
             SAXParserFactory spf = SAXParserFactory.newInstance();
             SoftwareAnnotationSaxHandler handler = new SoftwareAnnotationSaxHandler();
 
-            File thefile = new File(corpusDir.getPath() + "/all.clean.tei.xml");
+            //File thefile = new File(corpusDir.getPath() + "/all.clean.tei.xml");
+            File thefile = new File(corpusDir.getPath() + "/all_clean_post_processed.tei.xml");
+            //all_clean_post_processed_with_no_mention.tei.xml
 
             if (!thefile.exists()) {
-                System.out.println("The XML TEI corpus training document does not exist: " + corpusDir.getPath() + "/all.clean.tei.xml");
+                System.out.println("The XML TEI corpus training document does not exist: " + corpusDir.getPath() + "/all_clean_post_processed.tei.xml");
             } else {
                 //get a new instance of parser
                 SAXParser p = spf.newSAXParser();
@@ -158,8 +173,9 @@ public class SoftwareTrainer extends AbstractTrainer {
                             continue;
 
                         List<OffsetPosition> softwareTokenPositions = softwareLexicon.tokenPositionsSoftwareNamesVectorLabeled(bufferLabeled);
+                        List<OffsetPosition> urlPositions = softwareLexicon.tokenPositionsUrlVectorLabeled(bufferLabeled);
 
-                        addFeatures(bufferLabeled, writer, softwareTokenPositions);
+                        addFeatures(bufferLabeled, writer, softwareTokenPositions, urlPositions);
                         writer.write("\n");
                     }
                     writer.write("\n");
@@ -279,8 +295,9 @@ public class SoftwareTrainer extends AbstractTrainer {
                             continue;
 
                         List<OffsetPosition> softwareTokenPositions = softwareLexicon.tokenPositionsSoftwareNamesVectorLabeled(bufferLabeled);
+                        List<OffsetPosition> urlPositions = softwareLexicon.tokenPositionsUrlVectorLabeled(bufferLabeled);
 
-                        addFeatures(bufferLabeled, writer, softwareTokenPositions);
+                        addFeatures(bufferLabeled, writer, softwareTokenPositions, urlPositions);
                         writer.write("\n");
                     }
                     writer.write("\n");
@@ -460,7 +477,7 @@ public class SoftwareTrainer extends AbstractTrainer {
      * A: crf text
      * B: tokenizations list
      */
-    public Pair<String, List<LayoutToken>> getCRFData(File pdfFile, List<PDFAnnotation> annotations) {
+    /*public Pair<String, List<LayoutToken>> getCRFData(File pdfFile, List<PDFAnnotation> annotations) {
 
         Writer crfWriter = null;
         List<LayoutToken> tokenizations = null;
@@ -545,8 +562,9 @@ public class SoftwareTrainer extends AbstractTrainer {
                 }
                 // add features
                 List<OffsetPosition> softwareTokenPositions = softwareLexicon.tokenPositionsSoftwareNamesVectorLabeled(labeled);
+                List<OffsetPosition> urlPositions = softwareLexicon.tokenPositionsUrlVectorLabeled(labeled);
 
-                addFeatures(labeled, crfWriter, softwareTokenPositions);
+                addFeatures(labeled, crfWriter, softwareTokenPositions, urlPositions);
             }
             crfWriter.write("\n");
         } catch (Exception e) {
@@ -564,17 +582,20 @@ public class SoftwareTrainer extends AbstractTrainer {
             return new Pair<String, List<LayoutToken>>(crfWriter.toString(), tokenizations);
         else
             return null;
-    }
+    }*/
 
     @SuppressWarnings({"UnusedParameters"})
     private void addFeatures(List<Pair<String, String>> texts,
                              Writer writer,
-                             List<OffsetPosition> softwareTokenPositions) {
+                             List<OffsetPosition> softwareTokenPositions,
+                             List<OffsetPosition> urlPositions) {
         int totalLine = texts.size();
         int posit = 0;
+        int positUrl = 0;
         int currentSoftwareIndex = 0;
         List<OffsetPosition> localPositions = softwareTokenPositions;
         boolean isSoftwarePattern = false;
+        boolean isUrl = false;
         try {
             for (Pair<String, String> lineP : texts) {
                 String token = lineP.getA();
@@ -583,13 +604,25 @@ public class SoftwareTrainer extends AbstractTrainer {
                     writer.flush();
                 }
 
+                if (token.trim().length() == 0) {
+                    positUrl++;
+                    continue;
+                }
+
                 String label = lineP.getB();
-                /*if (label != null) {
-                    isSoftwarePattern = true;
-                }*/
 
                 // do we have an software at position posit?
-                if ((localPositions != null) && (localPositions.size() > 0)) {
+                isSoftwarePattern = false;
+                if (localPositions != null) {
+                    for(OffsetPosition thePosition : localPositions) {
+                        if (posit >= thePosition.start && posit <= thePosition.end) {     
+                            isSoftwarePattern = true;
+                            break;
+                        } 
+                    }
+                }
+
+                /*if ((localPositions != null) && (localPositions.size() > 0)) {
                     for (int mm = currentSoftwareIndex; mm < localPositions.size(); mm++) {
                         if ((posit >= localPositions.get(mm).start) &&
                                 (posit <= localPositions.get(mm).end)) {
@@ -603,17 +636,28 @@ public class SoftwareTrainer extends AbstractTrainer {
                             continue;
                         }
                     }
+                }*/
+
+                isUrl = false;
+                if (urlPositions != null) {
+                    for(OffsetPosition thePosition : urlPositions) {
+                        if (positUrl >= thePosition.start && positUrl <= thePosition.end) {     
+                            isUrl = true;
+                            break;
+                        } 
+                    }
                 }
 
                 FeaturesVectorSoftware featuresVector =
-                        FeaturesVectorSoftware.addFeaturesSoftware(token, label,
-                                softwareLexicon.inSoftwareDictionary(token), isSoftwarePattern);
+                        FeaturesVectorSoftware.addFeaturesSoftware(token, label, 
+                            softwareLexicon.inSoftwareDictionary(token), isSoftwarePattern, isUrl);
                 if (featuresVector.label == null)
                     continue;
                 writer.write(featuresVector.printVector());
                 writer.write("\n");
                 writer.flush();
                 posit++;
+                positUrl++;
                 isSoftwarePattern = false;
             }
         } catch (Exception e) {
@@ -635,7 +679,7 @@ public class SoftwareTrainer extends AbstractTrainer {
     }
 
     public String splitTrainEvaluate(Double split, boolean random) {
-        System.out.println("PAths :\n" + getCorpusPath() + "\n" + GrobidProperties.getModelPath(model).getAbsolutePath() + "\n" + getTempTrainingDataPath().getAbsolutePath() + "\n" + getTempEvaluationDataPath().getAbsolutePath() + " \nrand " + random);
+        System.out.println("Paths :\n" + getCorpusPath() + "\n" + GrobidProperties.getModelPath(model).getAbsolutePath() + "\n" + getTempTrainingDataPath().getAbsolutePath() + "\n" + getTempEvaluationDataPath().getAbsolutePath() + " \nrand " + random);
 
         File trainDataPath = getTempTrainingDataPath();
         File evalDataPath = getTempEvaluationDataPath();
@@ -663,11 +707,11 @@ public class SoftwareTrainer extends AbstractTrainer {
     }
 
     protected final File getCorpusPath() {
-        return new File(SoftwareProperties.get("grobid.software.corpusPath"));
+        return new File(conf.getCorpusPath());
     }
 
     protected final File getTemplatePath() {
-        return new File(SoftwareProperties.get("grobid.software.templatePath"));
+        return new File(conf.getTemplatePath());
     }
 
     /**
@@ -676,8 +720,13 @@ public class SoftwareTrainer extends AbstractTrainer {
      * @param args Command line arguments.
      */
     public static void main(String[] args) {
+        SoftwareConfiguration conf = null;
         try {
-            String pGrobidHome = SoftwareProperties.get("grobid.home");
+            ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+            conf = mapper.readValue(new File("resources/config/config.yml"), SoftwareConfiguration.class);
+            String pGrobidHome = conf.getGrobidHome();
+
+            //String pGrobidHome = SoftwareProperties.get("grobid.home");
 
             GrobidHomeFinder grobidHomeFinder = new GrobidHomeFinder(Arrays.asList(pGrobidHome));
             GrobidProperties.getInstance(grobidHomeFinder);
@@ -688,7 +737,8 @@ public class SoftwareTrainer extends AbstractTrainer {
             exp.printStackTrace();
         }
 
-        Trainer trainer = new SoftwareTrainer();
+        SoftwareTrainer trainer = new SoftwareTrainer();
+        trainer.setSoftwareConf(conf);
         AbstractTrainer.runTraining(trainer);
         System.out.println(AbstractTrainer.runEvaluation(trainer));
         System.exit(0);

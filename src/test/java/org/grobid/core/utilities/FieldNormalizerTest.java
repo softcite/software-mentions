@@ -7,7 +7,7 @@ import org.grobid.core.document.Document;
 import org.grobid.core.factory.GrobidFactory;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.utilities.GrobidProperties;
-import org.grobid.core.utilities.SoftwareProperties;
+import org.grobid.core.utilities.SoftwareConfiguration;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.main.GrobidHomeFinder;
 import org.grobid.core.utilities.Pair;
@@ -30,6 +30,13 @@ import static org.junit.Assert.assertNotNull;
  * @author Patrice
  */
 public class FieldNormalizerTest {
+
+    private static FieldNormalizer fieldNormalizer = null;
+
+    @BeforeClass
+    public static void setUpClass() throws Exception {
+        fieldNormalizer = new FieldNormalizer();
+    }
 
     @Test
     public void testVersion1() throws Exception {
@@ -118,28 +125,28 @@ public class FieldNormalizerTest {
     @Test
     public void testCreator1() throws Exception {
         String testString = "SPSS Inc., Chicago IL, USA";
-        String resString = FieldNormalizer.normalizeCreator(testString);
+        String resString = fieldNormalizer.normalizeCreator(testString);
         assertEquals("SPSS Inc.", resString);
     }
 
     @Test
     public void testCreator2() throws Exception {
         String testString = "(Bruker Corporation, Santa Barbara, CA, USA)";
-        String resString = FieldNormalizer.normalizeCreator(testString);
+        String resString = fieldNormalizer.normalizeCreator(testString);
         assertEquals("Bruker Corporation", resString);
     }
 
     @Test
     public void testCreator3() throws Exception {
         String testString = "IBM Corporation";
-        String resString = FieldNormalizer.normalizeCreator(testString);
+        String resString = fieldNormalizer.normalizeCreator(testString);
         assertEquals("IBM Corporation", resString);
     }
 
     @Test
     public void testCreator4() throws Exception {
         String testString = "STATA Corp LP. Package";
-        String resString = FieldNormalizer.normalizeCreator(testString);
+        String resString = fieldNormalizer.normalizeCreator(testString);
         assertEquals("STATA Corp", resString);
     }
 

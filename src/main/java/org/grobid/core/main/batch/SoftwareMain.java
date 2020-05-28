@@ -3,7 +3,7 @@ package org.grobid.core.main.batch;
 import org.grobid.core.engines.SoftwareParser;
 import org.grobid.core.main.GrobidHomeFinder;
 import org.grobid.core.utilities.GrobidProperties;
-import org.grobid.core.utilities.SoftwareProperties;
+import org.grobid.core.utilities.SoftwareConfiguration;
 import org.grobid.core.main.LibraryLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,8 +12,10 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.apache.commons.lang3.StringUtils.isNotEmpty;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 /**
  *
@@ -52,10 +54,10 @@ public class SoftwareMain {
     /**
      * Infer some parameters not given in arguments.
      */
-    protected static void inferParamsNotSet() {
+    protected static void inferParamsNotSet(SoftwareConfiguration conf) {
         String tmpFilePath;
         if (gbdArgs.getPath2grobidHome() == null) {
-            tmpFilePath = SoftwareProperties.get("grobid.home");
+            tmpFilePath = conf.getGrobidHome();
 
             if (tmpFilePath == null) {
                 tmpFilePath = new File("grobid-home").getAbsolutePath();
@@ -70,16 +72,21 @@ public class SoftwareMain {
     /**
      * Initialize the batch.
      */
-    protected static void initProcess() {
+    protected static void initProcess(SoftwareConfiguration conf) {
         GrobidProperties.getInstance();
+
+        if (conf.getEngine().toUpperCase().equals("WAPITI"))    
+            LibraryLoader.load();
     }
 
-    protected static void initProcess(String grobidHome) {
+    protected static void initProcess(String grobidHome, SoftwareConfiguration conf) {
         try {
             final GrobidHomeFinder grobidHomeFinder = new GrobidHomeFinder(Arrays.asList(grobidHome));
             grobidHomeFinder.findGrobidHomeOrFail();
             GrobidProperties.getInstance(grobidHomeFinder);
-            if (SoftwareProperties.get("grobid.software.engine").toUpperCase().equals("WAPITI"))
+
+            //if (SoftwareProperties.get("grobid.software.engine").toUpperCase().equals("WAPITI"))
+            if (conf.getEngine().toUpperCase().equals("WAPITI"))    
                 LibraryLoader.load();
         } catch (final Exception exp) {
             System.err.println("Grobid initialisation failed: " + exp);
@@ -177,23 +184,23 @@ public class SoftwareMain {
     public static void main(final String[] args) throws Exception {
         gbdArgs = new GrobidMainArgs();
 
+        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+        SoftwareConfiguration conf = mapper.readValue(new File("resources/config/config.yml"), SoftwareConfiguration.class);
+
         if (processArgs(args) && (gbdArgs.getProcessMethodName() != null)) {
-            inferParamsNotSet();
+            inferParamsNotSet(conf);
             if (isNotEmpty(gbdArgs.getPath2grobidHome())) {
-                initProcess(gbdArgs.getPath2grobidHome());
+                initProcess(gbdArgs.getPath2grobidHome(), conf);
             } else {
                 LOGGER.warn("Grobid home not provided, using default. ");
-                initProcess();
+                initProcess(conf);
             }
             
             int nb = 0;
             long time = System.currentTimeMillis();
 
-            SoftwareParser softwareParser = SoftwareParser.getInstance();
+            SoftwareParser softwareParser = SoftwareParser.getInstance(conf);
 			
-            //if (gbdArgs.getProcessMethodName().equals(COMMAND_PROCESS_TEXT)) {
-            //    nb = softwareParser.batchProcess(gbdArgs.getPath2Input(), gbdArgs.getPath2Output());
-            //} else
 			if (gbdArgs.getProcessMethodName().equals(COMMAND_CREATE_TRAINING)) {
                 nb = softwareParser.createTrainingBatch(gbdArgs.getPath2Input(), gbdArgs.getPath2Output(), -1);
             }  else if (gbdArgs.getProcessMethodName().equals(COMMAND_BOOTSTRAP_TRAINING_PDF)) {

@@ -16,12 +16,15 @@ var grobid = (function ($) {
     // store the current entities extracted by the service
     var entityMap = new Object();
 
+    // store the references attached to the entities and extracted by the service
+    var referenceMap = new Object();
+
     function defineBaseURL(ext) {
         var baseUrl = null;
         if ($(location).attr('href').indexOf("index.html") != -1)
             baseUrl = $(location).attr('href').replace("index.html", ext);
         else
-            baseUrl = $(location).attr('href') + ext;
+            baseUrl = $(location).attr('href') + 'service' + '/' + ext;
         return baseUrl;
     }
 
@@ -144,6 +147,7 @@ var grobid = (function ($) {
         // re-init the entity map
         entityMap = new Object();
         conceptMap = new Object();
+        referenceMap = new Object();
 
         var selected = $('#selectedService option:selected').attr('value');
         if (selected == 'processSoftwareText') {
@@ -399,15 +403,21 @@ var grobid = (function ($) {
                     pieces.push(versionDate)
                 }
 
+                var version = entity['version']
+                if (version) {
+                    version['subtype'] = 'version'
+                    pieces.push(version)
+                }
+
                 var softwareUrl = entity['url']
                 if (softwareUrl) {
                     softwareUrl['subtype'] = 'url'
                     pieces.push(softwareUrl)
                 }
 
-                var creator = entity['creator']
+                var creator = entity['publisher']
                 if (creator) {
-                    creator['subtype'] = 'creator'
+                    creator['subtype'] = 'publisher'
                     pieces.push(creator)
                 }
 
@@ -482,9 +492,11 @@ var grobid = (function ($) {
                     indexComp++;
                 if (entity['version-date'])
                     indexComp++;
+                if (entity['version'])
+                    indexComp++;
                 if (entity['url'])
                     indexComp++;
-                if (entity['creator'])
+                if (entity['publisher'])
                     indexComp++;
                 for(var currentIndexComp = 0; currentIndexComp< indexComp; currentIndexComp++) {
                     $('#annot-' + entityIndex + '-' + currentIndexComp).bind('mouseenter', viewEntity);
@@ -563,15 +575,21 @@ var grobid = (function ($) {
                     pieces.push(versionDate)
                 }
 
+                var version = entity['version']
+                if (version) {
+                    version['subtype'] = 'version'
+                    pieces.push(version)
+                }
+
                 var softwareUrl = entity['url']
                 if (softwareUrl) {
                     softwareUrl['subtype'] = 'url'
                     pieces.push(softwareUrl)
                 }
 
-                var creator = entity['creator']
+                var creator = entity['publisher']
                 if (creator) {
-                    creator['subtype'] = 'creator'
+                    creator['subtype'] = 'publisher'
                     pieces.push(creator)
                 }
 
@@ -605,6 +623,13 @@ var grobid = (function ($) {
                         });
                     }
                 }
+            });
+        }
+
+        var references = json.references
+        if (references) {
+            references.forEach(function (reference, n) {
+                referenceMap[reference.refKey] = reference.tei;
             });
         }
     }
@@ -775,6 +800,13 @@ var grobid = (function ($) {
         if (versionDate)
             string += "<p>Version date: <b>" + versionDate + "</b></p>"
 
+        var version = null
+        if (entity['version'])
+            version = entity['version'].rawForm;
+
+        if (version)
+            string += "<p>Version: <b>" + version + "</b></p>"
+
         var url = null
         if (entity['url'])
             url = entity['url'].rawForm;
@@ -788,11 +820,11 @@ var grobid = (function ($) {
         }
 
         var creator = null
-        if (entity['creator'])
-            creator = entity['creator'].rawForm;
+        if (entity['publisher'])
+            creator = entity['publisher'].rawForm;
 
         if (creator)
-            string += "<p>Creator: <b>" + creator + "</b></p>"            
+            string += "<p>Publisher: <b>" + creator + "</b></p>"            
 
         //string += "<p>conf: <i>" + conf + "</i></p>";
         
@@ -815,10 +847,10 @@ var grobid = (function ($) {
                     //string += "<b>" + entity['references'][r]['label'] + "</b>"    
                     localLabel = ""
                     localHtml = ""
-                    if (entity['references'][r]['tei']) {
+                    if (entity['references'][r]['refKey'] && referenceMap[entity['references'][r]['refKey']]) {
                         //localHtml += entity['references'][r]['tei']
 //console.log(entity['references'][r]['tei']);
-                        var doc = parse(entity['references'][r]['tei']);
+                        var doc = parse(referenceMap[entity['references'][r]['refKey']]);
                         var authors = doc.getElementsByTagName("author");
                         max = authors.length
                         if (max > 3)

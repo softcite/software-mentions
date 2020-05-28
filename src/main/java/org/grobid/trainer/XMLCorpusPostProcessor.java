@@ -3,6 +3,7 @@ package org.grobid.trainer;
 import org.grobid.core.analyzers.SoftwareAnalyzer;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.utilities.ArticleUtilities;
+import org.grobid.core.utilities.SoftwareConfiguration;
 
 import org.grobid.trainer.SoftciteAnnotation.AnnotationType;
 
@@ -32,6 +33,8 @@ import static org.grobid.core.document.xml.XmlBuilderUtils.teiElement;
 import org.apache.commons.lang3.StringUtils;
 
 import com.fasterxml.jackson.core.io.JsonStringEncoder;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 import org.xml.sax.InputSource;
 import org.w3c.dom.*;
@@ -43,6 +46,7 @@ import javax.xml.transform.stream.*;
 import org.w3c.dom.traversal.DocumentTraversal;
 import org.w3c.dom.traversal.NodeFilter;
 import org.w3c.dom.traversal.TreeWalker;
+import javax.xml.xpath.*;
 
 /**
  * Post-process an existing TEI XML package version of the corpus which has been manually reviewed/reconciled.
@@ -57,6 +61,11 @@ public class XMLCorpusPostProcessor {
     private static final Logger logger = LoggerFactory.getLogger(XMLCorpusPostProcessor.class);
 
     static Charset UTF_8 = Charset.forName("UTF-8"); // StandardCharsets.UTF_8
+    private SoftwareConfiguration configuration;
+
+    public XMLCorpusPostProcessor(SoftwareConfiguration conf) {
+        this.configuration = conf;
+    }
 
     /**
      * Inject provenance information and field "" when possible in a manually reviewed TEI corpus "package" file.     
@@ -66,7 +75,7 @@ public class XMLCorpusPostProcessor {
         Map<String, AnnotatedDocument> documents = new HashMap<String, AnnotatedDocument>();
         Map<String, SoftciteAnnotation> annotations = new HashMap<String, SoftciteAnnotation>();
 
-        AnnotatedCorpusGeneratorCSV converter = new AnnotatedCorpusGeneratorCSV();
+        AnnotatedCorpusGeneratorCSV converter = new AnnotatedCorpusGeneratorCSV(this.configuration);
         converter.importCSVFiles(csvPath, documents, annotations);
         
         // we unfortunately need to use DOM to update the XML file which is always a lot of pain
@@ -325,7 +334,8 @@ System.out.println(annotationContextLeftSignature + " / " + annotationContextRig
                 resp.setTextContent("annotator");
 
                 Element name = document.createElement("name");
-                name.setTextContent("ANONYMIZED");
+                //name.setTextContent("ANONYMIZED");
+                name.setTextContent(annotators.get(index));
 
                 respStmt.appendChild(resp);
                 respStmt.appendChild(name);
@@ -382,6 +392,24 @@ System.out.println(annotationContextLeftSignature + " / " + annotationContextRig
     }
 
     public static String serialize(org.w3c.dom.Document doc, Node node) {
+        // to avoid issues with space reamining from deleted nodes
+        try {
+            XPathFactory xpathFactory = XPathFactory.newInstance();
+            // XPath to find empty text nodes.
+            XPathExpression xpathExp = xpathFactory.newXPath().compile(
+                    "//text()[normalize-space(.) = '']");  
+            NodeList emptyTextNodes = (NodeList) 
+                    xpathExp.evaluate(doc, XPathConstants.NODESET);
+
+            // Remove each empty text node from document.
+            for (int i = 0; i < emptyTextNodes.getLength(); i++) {
+                Node emptyTextNode = emptyTextNodes.item(i);
+                emptyTextNode.getParentNode().removeChild(emptyTextNode);
+            }
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        }
+
         DOMSource domSource = null;
         String xml = null;
         try {
@@ -414,7 +442,7 @@ System.out.println(annotationContextLeftSignature + " / " + annotationContextRig
      *
      * @param args Command line arguments.
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
        
         // we are expecting three arguments, absolute path to the curated TEI XML file
         // documents, absolute path to the softcite data in csv and abolute path
@@ -448,7 +476,10 @@ System.out.println(annotationContextLeftSignature + " / " + annotationContextRig
             System.exit(-1);
         }  
 
-        XMLCorpusPostProcessor postProcessor = new XMLCorpusPostProcessor();
+        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+        SoftwareConfiguration conf = mapper.readValue(new File("resources/config/config.yml"), SoftwareConfiguration.class);
+
+        XMLCorpusPostProcessor postProcessor = new XMLCorpusPostProcessor(conf);
         try {
             postProcessor.process(xmlPath, csvPath, outputXmlPath);
         } catch (Exception e) {

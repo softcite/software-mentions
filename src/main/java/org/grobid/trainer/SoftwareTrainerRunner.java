@@ -1,10 +1,14 @@
 package org.grobid.trainer;
 
 import org.grobid.core.main.GrobidHomeFinder;
-import org.grobid.core.utilities.SoftwareProperties;
+import org.grobid.core.utilities.SoftwareConfiguration;
 import org.grobid.core.utilities.GrobidProperties;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+
 import java.util.Arrays;
+import java.io.File;
 
 /**
  * Training application for training a target model.
@@ -59,8 +63,7 @@ public class SoftwareTrainerRunner {
      */
     public static void main(String[] args) {
         if (args.length < 3) {
-            throw new IllegalStateException(
-                    USAGE);
+            throw new IllegalStateException(USAGE);
         }
 
         RunType mode = RunType.getRunType(Integer.parseInt(args[0]));
@@ -68,7 +71,17 @@ public class SoftwareTrainerRunner {
             throw new IllegalStateException(USAGE);
         }
 
-        String path2GbdHome = SoftwareProperties.get("grobid.home");
+        String path2GbdHome = null;
+        SoftwareConfiguration conf = null;
+        try {
+            ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+            conf = mapper.readValue(new File("resources/config/config.yml"), SoftwareConfiguration.class);
+
+            //String path2GbdHome = SoftwareProperties.get("grobid.home");
+            path2GbdHome = conf.getGrobidHome();
+        } catch(Exception e) {
+            System.err.println("Invalid config file: resources/config/config.yml");
+        }
         String grobidHome = args[2];
         if (grobidHome != null) {
             path2GbdHome = grobidHome;
@@ -119,6 +132,7 @@ public class SoftwareTrainerRunner {
         }
 
         SoftwareTrainer trainer = new SoftwareTrainer();
+        trainer.setSoftwareConf(conf);
 
         /*if (breakParams)
             trainer.setParams(epsilon, window, nbMaxIterations);*/

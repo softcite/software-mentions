@@ -1,0 +1,26 @@
+grobidHome: ../grobid-home
+
+tmpPath: ../grobid-home/tmp/
+
+#------------------------------------------------------
+#proxy to be used for external call ("null" when no proxy)
+proxyHost: #wwwout.nims.go.jp
+proxyPort: #8888
+
+# entity-fishing server information for performing entity disambiguation
+entityFishingHost: cloud.science-miner.com/nerd
+entityFishingPort:
+#entityFishingHost: localhost
+#entityFishingPort: 8090
+
+# sequence labelling algorithm to be used, for CRF select wapiti, for deep learning select delft
+engine: wapiti
+#engine: delft
+
+# additional info for DeLFT only (for embeddings default is glove, could be elmo or flair)
+delftInstall: ../../delft
+delftArchitecture: bilstm-crf
+delftEmbeddings: glove
+
+corpusPath: resources/dataset/software/corpus
+templatePath: resources/dataset/software/crfpp-templates/software.template

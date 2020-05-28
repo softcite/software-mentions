@@ -1,7 +1,11 @@
-package org.grobid.service;
+package org.grobid.service.controller;
+
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 import org.grobid.core.data.SoftwareComponent;
 import org.grobid.core.data.SoftwareEntity;
+import org.grobid.core.data.BibDataSet;
 import org.grobid.core.document.Document;
 import org.grobid.core.engines.Engine;
 import org.grobid.core.main.LibraryLoader;
@@ -13,7 +17,8 @@ import org.grobid.core.factory.GrobidPoolingFactory;
 import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.utilities.IOUtilities;
 import org.grobid.core.utilities.KeyGen;
-//import org.grobid.core.utilities.Pair;
+import org.grobid.core.utilities.SoftwareConfiguration;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.InputSource;
@@ -26,17 +31,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.StreamingOutput;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
@@ -47,12 +44,17 @@ import org.grobid.core.layout.Page;
  *
  * @author Patrice
  */
+@Singleton
 public class SoftwareProcessFile {
 
     /**
      * The class Logger.
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(SoftwareProcessFile.class);
+
+    @Inject
+    public SoftwareProcessFile() {
+    }
 
     /**
      * Uploads the origin PDF, process it and return PDF annotations for references in JSON.
@@ -61,11 +63,11 @@ public class SoftwareProcessFile {
      * @param disambiguate if true, the extracted mention will be disambiguated
      * @return a response object containing the JSON annotations
      */
-	public static Response processPDFAnnotation(final InputStream inputStream, boolean disambiguate) {
+	public static Response processPDFAnnotation(final InputStream inputStream, boolean disambiguate, SoftwareConfiguration configuration) {
         LOGGER.debug(methodLogIn()); 
         Response response = null;
         File originFile = null;
-        SoftwareParser parser = SoftwareParser.getInstance();
+        SoftwareParser parser = SoftwareParser.getInstance(configuration);
         Engine engine = null;
 
         try {
@@ -85,9 +87,10 @@ public class SoftwareProcessFile {
                 List<SoftwareEntity> entities = extractedEntities.getLeft();
                 StringBuilder json = new StringBuilder();
 				json.append("{ ");
+                json.append(SoftwareServiceUtil.applicationDetails(GrobidProperties.getVersion()));
 
 				// page height and width
-                json.append("\"pages\":[");
+                json.append(", \"pages\":[");
 				List<Page> pages = doc.getPages();
                 boolean first = true;
                 for(Page page : pages) {
@@ -108,9 +111,14 @@ public class SoftwareProcessFile {
 						first = false;
 					json.append(entity.toJson());
 				}
-				
-				json.append("]");
-                json.append(", \"runtime\" :" + (end-start));
+				json.append("], \"references\":[");
+
+                List<BibDataSet> bibDataSet = doc.getBibDataSets();
+                if (bibDataSet != null && bibDataSet.size()>0) {
+                    SoftwareServiceUtil.serializeReferences(json, bibDataSet, entities);
+                }
+
+                json.append("], \"runtime\" :" + (end-start));
                 json.append("}");
 
                 if (json != null) {

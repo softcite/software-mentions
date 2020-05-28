@@ -27,6 +27,7 @@ import org.grobid.core.lexicon.SoftwareLexicon;
 import org.grobid.core.sax.TextChunkSaxHandler;
 import org.grobid.core.tokenization.TaggingTokenCluster;
 import org.grobid.core.tokenization.TaggingTokenClusteror;
+import org.grobid.core.utilities.SoftwareConfiguration;
 import org.grobid.core.utilities.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -89,9 +90,9 @@ public class SoftwareDisambiguator {
 
     private static boolean serverStatus = false;
 
-    public static SoftwareDisambiguator getInstance() {
+    public static SoftwareDisambiguator getInstance(SoftwareConfiguration configuration) {
         if (instance == null) {
-            getNewInstance();
+            getNewInstance(configuration);
         }
         return instance;
     }
@@ -99,15 +100,14 @@ public class SoftwareDisambiguator {
     /**
      * Create a new instance.
      */
-    private static synchronized void getNewInstance() {
-        instance = new SoftwareDisambiguator();
+    private static synchronized void getNewInstance(SoftwareConfiguration configuration) {
+        instance = new SoftwareDisambiguator(configuration);
     }
 
-    private SoftwareDisambiguator() {
+    private SoftwareDisambiguator(SoftwareConfiguration configuration) {
         try {
-            nerd_host = SoftwareProperties.get("grobid.software.entity-fishing.host");
-            nerd_port = SoftwareProperties.get("grobid.software.entity-fishing.port");
-
+            nerd_host = configuration.getEntityFishingHost();
+            nerd_port = configuration.getEntityFishingPort();
             serverStatus = checkIfAlive();
         } catch(Exception e) {
             LOGGER.error("Cannot read properties for disambiguation service", e);
@@ -129,7 +129,7 @@ public class SoftwareDisambiguator {
             else
                 url = new URL("http://" + nerd_host + "/service/isalive");
 
-            System.out.println("Calling: " + url.toString());
+            LOGGER.debug("Calling: " + url.toString());
             CloseableHttpClient httpClient = HttpClients.createDefault();
             HttpGet get = new HttpGet(url.toString());
 
@@ -182,7 +182,7 @@ public class SoftwareDisambiguator {
         if (json == null)
             return entities;
 
-        System.out.println(json);
+//System.out.println(json);
 
         // build a map for the existing entities in order to catch them easily
         // based on their positions
@@ -270,6 +270,8 @@ public class SoftwareDisambiguator {
 
                     // statements can be used to filter obvious non-software entities which are
                     // mere disambiguation errors
+
+                    // check if value of P31 (instance of) are observed software values
                     boolean toBeFiltered = true;
                     if ( (statements != null) && (statements.get("P31") != null) ) {
                         List<String> p31 = statements.get("P31");
@@ -280,6 +282,9 @@ public class SoftwareDisambiguator {
                             }
                         }
                     }
+
+                    // check if any of the P279 (subclass of) values are compatible with software entities, 
+                    // as collected in existing wikidata software entities
                     if ( toBeFiltered && (statements != null) && (statements.get("P279") != null) ) {
                         List<String> p279 = statements.get("P279");
                         for(String p279Value : p279) {
@@ -290,8 +295,30 @@ public class SoftwareDisambiguator {
                         }
                     }
 
+                    // occurence of any of these properties mean a software (to be refined)
+                    // P178: developer, P3499: Gentoo package identifier, P1324: source code repository, 
+                    // P277: programing language, P348: software version
+                    if ( toBeFiltered && (statements != null) && (statements.get("P178") != null || statements.get("P3499") != null
+                        || statements.get("P1324") != null || statements.get("P277") != null || statements.get("P348") != null) ) {
+                        toBeFiltered = false;
+                    }
+                    
+                    // completely hacky for the moment and to be reviewed
+                    if ( toBeFiltered && (statements != null) && (statements.get("P856") != null) ) {
+                        List<String> p856 = statements.get("P856");
+                        for(String p856Value : p856) {
+                            // these are official web page values, we allow github and apache as possible software web page
+                            // keyterms (.edu, .org ?)
+                            if (p856Value.indexOf("apache") != -1 || p856Value.indexOf("github") != -1 || 
+                                p856Value.indexOf("stanford.edu") != -1) {
+                                toBeFiltered = false;
+                                break;
+                            }
+                        }
+                    }
+
                     if (toBeFiltered) {
-System.out.println("filtered entity: " + wikidataId);
+//System.out.println("filtered entity: " + wikidataId);
                         continue;
                     }
 
@@ -343,7 +370,7 @@ System.out.println("filtered entity: " + wikidataId);
             else
                 url = new URL("http://" + nerd_host + "/service/" + RESOURCEPATH);
 
-System.out.println("Calling: " + url.toString());
+//System.out.println("Calling: " + url.toString());
             CloseableHttpClient httpClient = HttpClients.createDefault();
             HttpPost post = new HttpPost(url.toString());
             //post.addHeader("Content-Type", "application/json");
@@ -400,8 +427,7 @@ System.out.println("Calling: " + url.toString());
             }
 
             buffer.append("], \"full\": true }");
-
-            System.out.println(buffer.toString());
+            LOGGER.debug(buffer.toString());
 
             //params.add(new BasicNameValuePair("query", buffer.toString()));
 
