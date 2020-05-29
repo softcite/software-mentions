@@ -391,7 +391,7 @@ var grobid = (function ($) {
                 softwareName['subtype'] = 'software'
                 pieces.push(softwareName)
                 
-                var versionNumber = entity['version-number']
+                /*var versionNumber = entity['version-number']
                 if (versionNumber) {
                     versionNumber['subtype'] = 'version-number'
                     pieces.push(versionNumber);
@@ -401,7 +401,7 @@ var grobid = (function ($) {
                 if (versionDate) {
                     versionDate['subtype'] = 'version-date'
                     pieces.push(versionDate)
-                }
+                }*/
 
                 var version = entity['version']
                 if (version) {
@@ -431,6 +431,16 @@ var grobid = (function ($) {
                     }
                 }
 
+                pieces.sort(function(a, b) { 
+                    var startA = parseInt(a.offsetStart, 10);
+                    //var endA = parseInt(a.offsetEnd, 10);
+
+                    var startB = parseInt(b.offsetStart, 10);
+                    //var endB = parseInt(b.offsetEnd, 10);
+
+                    return startA-startB; 
+                });
+
                 //var type = entity['type']
                 //var id = entity['id']
 
@@ -445,7 +455,7 @@ var grobid = (function ($) {
                         // we have a problem in the initial sort of the entities
                         // the server response is not compatible with the present client 
                         console.log("Sorting of entities as present in the server's response not valid for this client.");
-                        // note: this should never happen?
+                        // note: this should never happen
                     } else {
                         newString += string.substring(pos, start)
                             //+ '<span id="annot-' + currentEntityIndex + '" rel="popover" data-color="' + piece['subtype'] + '">'
@@ -563,7 +573,7 @@ var grobid = (function ($) {
                 softwareName['subtype'] = 'software'
                 pieces.push(softwareName)
                 
-                var versionNumber = entity['version-number']
+                /*var versionNumber = entity['version-number']
                 if (versionNumber) {
                     versionNumber['subtype'] = 'version-number'
                     pieces.push(versionNumber);
@@ -573,7 +583,7 @@ var grobid = (function ($) {
                 if (versionDate) {
                     versionDate['subtype'] = 'version-date'
                     pieces.push(versionDate)
-                }
+                }*/
 
                 var version = entity['version']
                 if (version) {
@@ -603,6 +613,16 @@ var grobid = (function ($) {
                         pieces.push(references[r])    
                     }
                 }
+
+                pieces.sort(function(a, b) { 
+                    var startA = parseInt(a.offsetStart, 10);
+                    //var endA = parseInt(a.offsetEnd, 10);
+
+                    var startB = parseInt(b.offsetStart, 10);
+                    //var endB = parseInt(b.offsetEnd, 10);
+
+                    return startA-startB; 
+                });
 
                 var type = entity['type']
                 var id = entity['id']

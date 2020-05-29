@@ -146,15 +146,45 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 	}
 
 	/**
-	 * In case of duplicated field, check if the one in parameter isbetter quality than the 
+	 * In case of duplicated field, check if the one in parameter is better quality than the 
 	 * existing object instance one. 
+	 *
+	 * If we have competing version fields, the closest to the software name will be chosen. 
 	 */
 	public boolean betterField(SoftwareComponent component) {
 		if (this.version != null && 
 			component.getLabel().equals(SoftwareTaggingLabels.VERSION) &&
 			component.getNormalizedForm() != null &&
-			this.version.getNormalizedForm() != null &&
-			component.getNormalizedForm().length() > this.version.getNormalizedForm().length()) {
+			this.version.getNormalizedForm() != null) {
+
+			// check positions with software name component 
+			int softwareNameStart = this.softwareName.getOffsetStart();
+			int softwareNameEnd = this.softwareName.getOffsetEnd();
+
+			// parameter candidate version component
+			int componentStart = component.getOffsetStart();
+			int componentEnd = component.getOffsetEnd();
+
+			// distance with software name
+			int distanceComponent = componentEnd - softwareNameEnd;
+
+			// current version component
+			int currentComponentStart = this.version.getOffsetStart();
+			int currentComponentEnd = this.version.getOffsetEnd();
+
+			// distance with software name
+			int distanceCurrent = currentComponentEnd - softwareNameEnd;
+
+			if (distanceComponent < 0 && distanceCurrent > 0) {
+				return false;
+			} else if (distanceComponent > 0 && distanceCurrent < 0) {
+				return true;
+			} else if (distanceComponent < 0 && distanceCurrent < 0) {
+				return true;
+			} else if (distanceComponent > distanceCurrent) {
+				return false;
+			}
+
 			return true;
 		} 
 		return false;

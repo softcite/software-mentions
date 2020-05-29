@@ -461,7 +461,7 @@ public class SoftwareParser extends AbstractParser {
                 }
             }
 
-            System.out.println(entities.size() + " total software entities");  
+            logger.info(entities.size() + " total software entities");  
             // propagate the non-disambiguated entities attributes to the new propagated entities corresponding 
             // to the same software name
             for(SoftwareEntity entity1 : entities) {

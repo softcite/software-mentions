@@ -229,6 +229,8 @@ The following sequence labelling algorithms have been benchmarked:
 
 -    __BiLSTM-CRF__: Bidirectional LSTM-CRF with Gloves static embeddings
 
+-    __BiLSTM-CRF+features__: Bidirectional LSTM-CRF with Gloves static embeddings including a feature channel, the input features are the same as for the CRF model, excluding word forms
+
 -    __BiLSTM-CRF+ELMo__: Bidirectional LSTM-CRF with Gloves static embeddings and ELMo dynamic embeddings 
 
 -    __bert-base-en+CRF__: fine tuned standard BERT base model with CRF activation layer, pre-trained on general English text
@@ -251,11 +253,20 @@ The results (Precision, Recall, F-score) for all the models have been obtained u
 |Labels | CRF ||| BiLSTM-CRF ||| BiLSTM-CRF+ELMo|||
 |--- | --- | --- | --- | --- | --- | --- | ---| --- | --- |
 |Metrics | Precision | Recall | f-score | Precision | Recall | f-score | Precision | Recall | f-score|
-| `<software>` | 86.51 | 72.96 | 79.11 | 79.70 | 75.21 | 77.37 | **86.87** | 80.72 | **83.63** |
-| `<creator>` | 85.93 | 75.5 | 80.3 | 77.57 | 82.48 | 79.94 | **86.40** | **87.81** | **87.07** |
-| `<version>`  | 89.88 | 84.99 | 87.25  | 88.55 | **90.57** | **89.55** | 89.61 | 89.07 | 89.33|
-| `<url>`  | **66.64** | 62.98 | 63.75 | 28.22 | 36.00 | 31.36 | 61.38 | 64.00 | 62.19|
-|micro-average | 86.57 | 75.38 | 80.55  | 79.62 | 78.59 | 79.09 | **86.72** | **83.14** | **84.87** |
+| `<software>` | 86.34 | 73.4 | 79.33 | 79.70 | 75.21 | 77.37 | **86.87** | 80.72 | **83.63** |
+| `<creator>` | 86.77 | 75.26 | 80.59 | 77.57 | 82.48 | 79.94 | **86.40** | **87.81** | **87.07** |
+| `<version>`  | 90.2 | 83.8 | 86.83  | 88.55 | **90.57** | **89.55** | 89.61 | 89.07 | 89.33|
+| `<url>`  | **69.27** | 59.86 | 63.58 | 28.22 | 36.00 | 31.36 | 61.38 | 64.00 | 62.19|
+|micro-average | 86.8 | 75.34 | 80.66  | 79.62 | 78.59 | 79.09 | **86.72** | **83.14** | **84.87** |
+
+|Labels | BiLSTM-CRF+features ||| BiLSTM-CRF+ELMo+features |||
+|--- | --- | --- | --- | --- | --- | --- | ---| --- | --- |
+|Metrics | Precision | Recall | f-score | Precision | Recall | f-score|
+| `<software>` |  |  |  |  |  |  |
+| `<creator>`  |  |  |  |  |  |  |
+| `<version>`  |  |  |  |  |  |  |
+| `<url>`      |  |  |  |  |  |  |
+|micro-average |  |  |  |  |  |  |
 
 Evaluation made on 09.01.2020 for BERT fine-tuned architectures:
 
@@ -344,10 +355,10 @@ In this mode, by default, 90% of the available data is used for training and the
 For n-fold evaluation using the available annotated data (under ```resources/dataset/software/corpus/```), use the command:
 
 ```console
->  ./gradlew eval_software_nfold [-n=10 -PgH=/path/grobid/home -Pt=10]
+>  ./gradlew eval_software_nfold [-Pn=10 -PgH=/path/grobid/home -Pt=10]
 ```
 
-where `n` is the parameter for the number of folds, by default 10. Still by default, the training will use the available number of threads of the machine, but it can also be specified by the parameter `-Pt`. The grobid home can be optionally specified with parameter `-PgH`. By default it will take `../grobid-home`. 
+where `Pn` is the parameter for the number of folds, by default 10. Still by default, the training will use the available number of threads of the machine, but it can also be specified by the parameter `-Pt`. The grobid home can be optionally specified with parameter `-PgH`. By default it will take `../grobid-home`. 
 
 ### Evaluating only
 
