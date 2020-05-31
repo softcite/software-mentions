@@ -265,8 +265,8 @@ The results (Precision, Recall, F-score) for all the models have been obtained u
 |---           | ---                  | ---    | ---    | ---                      | ---    | ---     | 
 |Metrics       | Precision            | Recall | f-score| Precision          | Recall       | f-score |
 | `<software>` | 79.64                | 79.72  | 79.65  | 84.41              | 85.35        | 84.80   |
-| `<creator>`  | 83.58                | 89.68  | 86.52  | 83.04              | 90.96        | 86.80   |
-| `<version>`  | 85.69                | 86.34  | 85.99  | 83.04              | 90.96        | 86.80   |
+| `<creator>`  | 83.58                | 89.68  | 86.52  | 83.04              | **90.96**    | 86.80   |
+| `<version>`  | 85.69                | 86.34  | 85.99  | 86.87              | 86.64        | 86.74   |
 | `<url>`      | 44.99                | 52.27  | 48.19  | 59.31              | 68.64        | 63.21   |
 |micro-average | 80.05                | 81.52  | 80.77  | 83.68              | 85.84        | 84.70   |
 
