@@ -117,3 +117,83 @@ N-Fold evaluation for software model is realized in 60075829 ms
 BUILD SUCCESSFUL in 16h 41m 19s
 
 
+
+===
+BidLSTM CRF + features - 30-05-2020
+===
+
+** Worst ** model scores - run 8
+                  precision    recall  f1-score   support
+
+       <creator>     0.7864    0.7714    0.7788       105
+      <software>     0.8005    0.6939    0.7434       428
+           <url>     0.2609    0.4000    0.3158        15
+       <version>     0.8849    0.8786    0.8817       140
+
+all (micro avg.)     0.7972    0.7369    0.7659       688
+
+
+** Best ** model scores - run 7
+                  precision    recall  f1-score   support
+
+       <creator>     0.8704    0.8952    0.8826       105
+      <software>     0.8272    0.7827    0.8043       428
+           <url>     0.6000    0.6000    0.6000        15
+       <version>     0.8836    0.9214    0.9021       140
+
+all (micro avg.)     0.8412    0.8241    0.8326       688
+
+----------------------------------------------------------------------
+
+Average over 10 folds
+                  precision    recall  f1-score   support
+
+       <creator>     0.8259    0.8524    0.8387       105
+      <software>     0.8057    0.7570    0.7802       428
+           <url>     0.3615    0.4067    0.3805        15
+       <version>     0.8999    0.9114    0.9055       140
+
+all (micro avg.)     0.8171    0.7953    0.8059       
+
+
+
+===
+BidLSTM CRF + ELMo + features - 31-05-2020
+===
+
+Evaluation:
+
+
+** Worst ** model scores - run 3
+                  precision    recall  f1-score   support
+
+       <creator>     0.8019    0.9043    0.8500        94
+      <software>     0.8112    0.8832    0.8456       428
+           <url>     0.4118    0.6364    0.5000        22
+       <version>     0.8613    0.8806    0.8708       134
+
+all (micro avg.)     0.8008    0.8776    0.8374       678
+
+
+** Best ** model scores - run 6
+                  precision    recall  f1-score   support
+
+       <creator>     0.8447    0.9255    0.8832        94
+      <software>     0.8588    0.8528    0.8558       428
+           <url>     0.6071    0.7727    0.6800        22
+       <version>     0.8915    0.8582    0.8745       134
+
+all (micro avg.)     0.8526    0.8614    0.8569       678
+
+----------------------------------------------------------------------
+
+Average over 10 folds
+                  precision    recall  f1-score   support
+
+       <creator>     0.8304    0.9096    0.8680        94
+      <software>     0.8441    0.8535    0.8480       428
+           <url>     0.5931    0.6864    0.6321        22
+       <version>     0.8687    0.8664    0.8674       134
+
+all (micro avg.)     0.8368    0.8584    0.8470    
+
