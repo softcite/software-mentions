@@ -262,7 +262,7 @@ The results (Precision, Recall, F-score) for all the models have been obtained u
 |micro-average | 86.73 | 75.91 | 80.95  | 79.62 | 78.59 | 79.09 | **86.72** | **83.14** | **84.87** |
 
 |Labels        || BiLSTM-CRF+features  |        |        || BiLSTM-CRF+ELMo+features |        |         |
-|---           || ---                  | ---    | ---    || ---                      | ---    | ---     | 
+|---           |---| ---                  | ---    | ---    |---| ---                      | ---    | ---     | 
 |Metrics       || Precision            | Recall | f-score|| Precision          | Recall       | f-score |
 | `<software>` || 79.64                | 79.72  | 79.65  || 84.41              | 85.35        | 84.80   |
 | `<creator>`  || 83.58                | 89.68  | 86.52  || 83.04              | **90.96**    | 86.80   |
