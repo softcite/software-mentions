@@ -259,7 +259,7 @@ The results (Precision, Recall, F-score) for all the models have been obtained u
 | `<creator>`  | 86.74 | 75.31 | 80.6  | 77.57 | 82.48 | 79.94 | **86.40** | **87.81** | **87.07** |
 | `<version>`  | 90.53 | 84.74 | 87.47 | 88.55 | **90.57** | **89.55** | 89.61 | 89.07 | 89.33|
 | `<url>`  | **68.58** | 59.66 | 63.15 | 28.22 | 36.00 | 31.36 | 61.38 | 64.00 | 62.19|
-|micro-average | 86.73 | 75.91 | 80.95 | 79.62 | 78.59 | 79.09 | **86.72** | **83.14** | **84.87** |
+|**micro-average** | 86.73 | 75.91 | 80.95 | 79.62 | 78.59 | 79.09 | **86.72** | **83.14** | **84.87** |
 
 |              | BiLSTM-CRF+features  |        |        | BiLSTM-CRF+ELMo+features |        |         |
 |---           | ---                  | ---    | ---    | ---                      | ---    | ---     | 
@@ -268,7 +268,7 @@ The results (Precision, Recall, F-score) for all the models have been obtained u
 | `<creator>`  | 83.58                | 89.68  | 86.52  | 83.04              | **90.96**    | 86.80   |
 | `<version>`  | 85.69                | 86.34  | 85.99  | 86.87              | 86.64        | 86.74   |
 | `<url>`      | 44.99                | 52.27  | 48.19  | 59.31              | 68.64        | 63.21   |
-|micro-average | 80.05                | 81.52  | 80.77  | 83.68              | 85.84        | 84.70   |
+|**micro-average** | 80.05            | 81.52  | 80.77  | 83.68              | 85.84        | 84.70   |
 
 Evaluation made on 09.01.2020 for BERT fine-tuned architectures:
 
@@ -279,7 +279,7 @@ Evaluation made on 09.01.2020 for BERT fine-tuned architectures:
 | `<creator>` | 72.93 | 70.57 | 71.72 | 79.51 | 77.71 | 78.59 | 
 | `<version>`  | 78.54 | 79.14 | 78.83 | **89.98** | 88.00 | 88.97 |
 | `<url>`   | 38.70 | 56.67 | 45.50 | 63.62 | **75.33** | **68.77** | 
-|micro-average | 74.48 | 72.67 | 73.56 | 84.42 | 82.69 | 83.54 | 
+|**micro-average** | 74.48 | 72.67 | 73.56 | 84.42 | 82.69 | 83.54 | 
 
 Note that the maximum sequence length is normally 1,500 tokens, except for BERT architectures, which have a limit of 512 for the input sequence length. Tokens beyond 1,500 or 512 are truncated and ignored.  
 
