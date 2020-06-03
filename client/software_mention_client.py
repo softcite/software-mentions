@@ -11,6 +11,8 @@ import S3
 import concurrent.futures
 import requests
 import pymongo
+from concurrent.futures import ThreadPoolExecutor, as_completed
+import hashlib
 
 map_size = 100 * 1024 * 1024 * 1024 
 
@@ -26,11 +28,8 @@ class software_mention_client(object):
     def __init__(self, config_path='./config.json'):
         self.config = None
         
-        # standard lmdb environment for storing processed biblio entry uuid relative to software processing
+        # standard lmdb environment for keeping track of PDF annotation relative to software processing
         self.env_software = None
-
-        # lmdb environment for keeping track of PDF annotation failures relative to software processing
-        self.env_fail_software = None
 
         self._load_config(config_path)
         self._init_lmdb()
@@ -68,42 +67,60 @@ class software_mention_client(object):
         envFilePath = os.path.join(self.config["data_path"], 'entries_software')
         self.env_software = lmdb.open(envFilePath, map_size=map_size)
 
-        envFilePath = os.path.join(self.config["data_path"], 'fail_software')
-        self.env_fail_software = lmdb.open(envFilePath, map_size=map_size)
+        #envFilePath = os.path.join(self.config["data_path"], 'fail_software')
+        #self.env_fail_software = lmdb.open(envFilePath, map_size=map_size)
 
     def annotate_directory(self, directory):
         # recursive directory walk for all pdf documents
         pdf_files = []
         out_files = []
+        full_records = []
         for root, directories, filenames in os.walk(directory):
             for filename in filenames: 
                 if filename.endswith(".pdf") or filename.endswith(".PDF"):
-                    print(os.path.join(root,filename))
+                    #print(os.path.join(root,filename))
+
+                    if filename.endswith(".pdf"):
+                        filename_json = filename.replace(".pdf", ".software.json")
+                    elif filename.endswith(".PDF"):
+                        filename_json = filename.replace(".PDF", ".software.json")
+
+                    sha1 = getSHA1(os.path.join(root,filename))
+
+                    # if the json file already exists, we skip 
+                    if os.path.isfile(os.path.join(root, filename_json)):
+                        # check that this id is considered in the lmdb keeping track of the process
+                        with self.env_software.begin() as txn:
+                            status = txn.get(sha1.encode(encoding='UTF-8'))
+                        if status is None:
+                            with self.env_software.begin(write=True) as txn2:
+                                txn2.put(sha1.encode(encoding='UTF-8'), "True".encode(encoding='UTF-8')) 
+                        continue
+
+                    # if identifier already processed successfully in the local lmdb, we skip
+                    # the hash of the PDF file is used as unique identifier for the PDF (SHA1)
+                    with self.env_software.begin() as txn:
+                        status = txn.get(sha1.encode(encoding='UTF-8'))
+                        if status is not None and status.decode(encoding='UTF-8') == "True":
+                            continue
+
                     pdf_files.append(os.path.join(root,filename))
                     if filename.endswith(".pdf"):
                         out_file = filename.replace(".pdf", ".software.json")
                     if filename.endswith(".PDF"):
                         out_file = filename.replace(".PDF", ".software.json")    
                     out_files.append(os.path.join(root,out_file))
+                    record = {}
+                    record["id"] = sha1
+                    full_records.append(record)
                     if len(pdf_files) == self.config["batch_size"]:
-                        self.annotate_batch(pdf_files, out_files, None)
+                        self.annotate_batch(pdf_files, out_files, full_records)
                         pdf_files = []
                         out_files = []
+                        full_records = []
         # last batch
         if len(pdf_files) > 0:
-            self.annotate_batch(pdf_files, out_files, None)
-
-
-    def annotate_batch(self, pdf_files, out_files=None, full_records=None):
-        # process a provided list of PDF
-        #print("annotate_batch", len(pdf_files))
-        with concurrent.futures.ProcessPoolExecutor(max_workers=self.config["concurrency"]) as executor:
-            for i, pdf_file in enumerate(pdf_files):
-                out_file = None if out_files is None else out_files[i]
-                full_record = None if full_records is None else full_records[i]
-
-                executor.submit(annotate, pdf_file, self.config, self.mongo_db, out_file, full_record)
-
+            self.annotate_batch(pdf_files, out_files, full_records)
 
     def annotate_collection(self, data_path):
         # init lmdb transactions
@@ -128,8 +145,25 @@ class software_mention_client(object):
                 local_entry["id"] = key.decode(encoding='UTF-8');
                 #print(local_entry)
 
+                # if the json file already exists, we skip 
+                if os.path.isfile(os.path.join(os.path.join(data_path, generateS3Path(local_entry['id']), local_entry['id']+".software.json"))):
+                    # check that this id is considered in the lmdb keeping track of the process
+                    with self.env_software.begin() as txn:
+                        status = txn.get(local_entry['id'].encode(encoding='UTF-8'))
+                    if status is None:
+                        with self.env_software.begin(write=True) as txn2:
+                            txn2.put(local_entry['id'].encode(encoding='UTF-8'), "True".encode(encoding='UTF-8')) 
+                    continue
+
+                # if identifier already processed successfully in the local lmdb, we skip
+                with self.env_software.begin() as txn:
+                    status = txn.get(local_entry['id'].encode(encoding='UTF-8'))
+                    if status is not None and status.decode(encoding='UTF-8') == "True":
+                        continue
+
                 pdf_files.append(os.path.join(data_path, generateS3Path(local_entry['id']), local_entry['id']+".pdf"))
                 out_files.append(os.path.join(data_path, generateS3Path(local_entry['id']), local_entry['id']+".software.json"))
+
                 full_records.append(local_entry)
                 i += 1
 
@@ -143,12 +177,46 @@ class software_mention_client(object):
         # last batch
         if len(pdf_files) > 0:
             self.annotate_batch(pdf_files, out_files, full_records)
-
         self.env.close()
 
-    """
+    def annotate_batch(self, pdf_files, out_files=None, full_records=None):
+        # process a provided list of PDF
+        #print("annotate_batch", len(pdf_files))
+        with ThreadPoolExecutor(max_workers=self.config["concurrency"]) as executor:
+            executor.map(self.annotate, pdf_files, out_files, full_records)
+
     def reprocess_failed(self):
-    """
+        """
+        we reprocess only files which lead to a failure of the service, we don't reprocess documents
+        where no software mention has been found 
+        """
+        pdf_files = []
+        out_files = []
+        full_records = []
+        i = 0
+        with self.env_software.begin() as txn:
+            cursor = txn.cursor()
+            for key, value in cursor:
+                nb_total += 1
+                result = value.decode(encoding='UTF-8')
+                if result == "False":
+                    # reprocess
+                    pdf_files.append(os.path.join(data_path, generateS3Path(local_entry['id']), local_entry['id']+".pdf"))
+                    out_files.append(os.path.join(data_path, generateS3Path(local_entry['id']), local_entry['id']+".software.json"))
+                    # TBD get the full record from the data_path env
+                    full_records.append(None)
+                    i += 1
+
+            if i == self.config["batch_size"]:
+                self.annotate_batch(pdf_files, out_files, full_records)
+                pdf_files = []
+                out_files = []
+                full_records = []
+                i = 0
+
+        # last batch
+        if len(pdf_files) > 0:
+            self.annotate_batch(pdf_files, out_files, full_records)
 
     def reset(self):
         """
@@ -157,12 +225,8 @@ class software_mention_client(object):
         """
         # close environments
         self.env_software.close()
-        self.env_fail_software.close()
 
         envFilePath = os.path.join(self.config["data_path"], 'entries_software')
-        shutil.rmtree(envFilePath)
-
-        envFilePath = os.path.join(self.config["data_path"], 'fail_software')
         shutil.rmtree(envFilePath)
 
         # re-init the environments
@@ -182,6 +246,92 @@ class software_mention_client(object):
                         inserted_id = mongo_db.annotations.insert_one(jsonObject).inserted_id
                         #print("inserted annotations with id", inserted_id)
 
+    #def annotate(self, file_in, config, mongo_db, file_out=None, full_record=None, env_software=None):
+    def annotate(self, file_in, file_out, full_record):
+        the_file = {'input': open(file_in, 'rb')}
+        url = "http://" + self.config["software_mention_host"]
+        if self.config["software_mention_port"] is not None:
+            url += ":" + str(self.config["software_mention_port"])
+        url += endpoint_pdf
+        
+        #print("calling... ", url)
+
+        response = requests.post(url, files=the_file)
+        jsonObject = None
+        if response.status_code == 503:
+            print('service overloaded, sleep', self.config['sleep_time'], seconds)
+            time.sleep(self.config['sleep_time'])
+            return annotate(file_in, self.config, file_out, full_record)
+        elif response.status_code >= 500:
+            print('[{0}] Server Error'.format(response.status_code))
+        elif response.status_code == 404:
+            print('[{0}] URL not found: [{1}]'.format(response.status_code,api_url))
+        elif response.status_code >= 400:
+            print('[{0}] Bad Request'.format(response.status_code))
+            print(response.content )
+        elif response.status_code == 200:
+            #print('softcite succeed')
+            jsonObject = response.json()
+        else:
+            print('Unexpected Error: [HTTP {0}]: Content: {1}'.format(response.status_code, response.content))
+
+        if jsonObject is not None and len(jsonObject['mentions']) != 0:
+            # add file, DOI, date and version info in the JSON, if available
+            if full_record is not None:
+                jsonObject['id'] = full_record['id']
+                if len(full_record) > 1:
+                    jsonObject['metadata'] = full_record;
+            jsonObject['original_file_path'] = file_in
+            jsonObject['file_name'] = os.path.basename(file_in)
+            
+            if file_out is not None: 
+                # we write the json result into a file together with the processed pdf
+                with open(file_out, "w", encoding="utf-8") as json_file:
+                    json_file.write(json.dumps(jsonObject))
+
+            if config["mongo_host"] is not None:
+                # we store the result in mongo db 
+                if self.mongo_db is None:
+                    mongo_client = pymongo.MongoClient(self.config["mongo_host"], int(self.config["mongo_port"]))
+                    self.mongo_db = mongo_client[self.config["mongo_db"]]
+                inserted_id = self.mongo_db.annotations.insert_one(jsonObject).inserted_id
+                #print("inserted annotations with id", inserted_id)
+
+        # for keeping track of the processing
+        # update processed entry in the lmdb (having entities or not) and failure
+        if self.env_software is not None and full_record is not None:
+            with self.env_software.begin(write=True) as txn:
+                if jsonObject is not None:
+                    txn.put(full_record['id'].encode(encoding='UTF-8'), "True".encode(encoding='UTF-8')) 
+                else:
+                    txn.put(full_record['id'].encode(encoding='UTF-8'), "False".encode(encoding='UTF-8'))
+
+    def diagnostic(self):
+        """
+        Print a report on failures stored during the harvesting process
+        """
+        nb_total = 0
+        nb_fail = 0
+        nb_success = 0  
+
+        with self.env_software.begin() as txn:
+            cursor = txn.cursor()
+            for key, value in cursor:
+                nb_total += 1
+                result = value.decode(encoding='UTF-8')
+                if result == "True":
+                    nb_success += 1
+                else:
+                    nb_fail += 1
+
+        print("---")
+        print("total entries:", nb_total)
+        print("---")
+        print("total successfully processed:", nb_success)
+        print("---")
+        print("total failed:", nb_fail)
+        print("---")
+
 def generateS3Path(identifier):
     '''
     Convert a file name into a path with file prefix as directory paths:
@@ -189,59 +339,8 @@ def generateS3Path(identifier):
     '''
     return os.path.join(identifier[:2], identifier[2:4], identifier[4:6], identifier[6:8], "")
 
-def _serialize_pickle(a):
-    return pickle.dumps(a)
-
 def _deserialize_pickle(serialized):
     return pickle.loads(serialized)
-
-def annotate(file_in, config, mongo_db, file_out=None, full_record=None):
-    the_file = {'input': open(file_in, 'rb')}
-    url = "http://" + config["software_mention_host"]
-    if config["software_mention_port"] is not None:
-        url += ":" + str(config["software_mention_port"])
-    url += endpoint_pdf
-    #print("calling... ", url)
-
-    response = requests.post(url, files=the_file)
-    jsonObject = None
-    if response.status_code == 503:
-        print('sleep')
-        time.sleep(config['sleep_time'])
-        return annotate(file_in, config, file_out, doi, pmc)
-    elif response.status_code >= 500:
-        print('[{0}] Server Error'.format(response.status_code))
-    elif response.status_code == 404:
-        print('[{0}] URL not found: [{1}]'.format(response.status_code,api_url))
-    elif response.status_code >= 400:
-        print('[{0}] Bad Request'.format(response.status_code))
-        print(response.content )
-    elif response.status_code == 200:
-        #print('softcite succeed')
-        jsonObject = response.json()
-    else:
-        print('Unexpected Error: [HTTP {0}]: Content: {1}'.format(response.status_code, response.content))
-
-    if jsonObject is not None and len(jsonObject['mentions']) != 0:
-        # add file, DOI, date and version info in the JSON, if available
-        if full_record is not None:
-            jsonObject['metadata'] = full_record;
-            jsonObject['id'] = full_record['id']
-        jsonObject['original_file_path'] = file_in
-        jsonObject['file_name'] = os.path.basename(file_in)
-        
-        if file_out is not None: 
-            # we write the json result into a file together with the processed pdf
-            with open(file_out, "w", encoding="utf-8") as json_file:
-                json_file.write(json.dumps(jsonObject))
-
-        if config["mongo_host"] is not None:
-            # we store the result in mongo db 
-            if mongo_db is None:
-                mongo_client = pymongo.MongoClient(config["mongo_host"], int(config["mongo_port"]))
-                mongo_db = mongo_client[config["mongo_db"]]
-            inserted_id = mongo_db.annotations.insert_one(jsonObject).inserted_id
-            #print("inserted annotations with id", inserted_id)
 
 def _grobid_software_url(grobid_base, grobid_port):
     the_url = 'http://'+grobid_base
@@ -249,6 +348,21 @@ def _grobid_software_url(grobid_base, grobid_port):
         the_url += ":"+grobid_port
     the_url += "/service/"
     return the_url
+
+BUF_SIZE = 65536    
+
+def getSHA1(the_file):
+    sha1 = hashlib.sha1()
+
+    with open(the_file, 'rb') as f:
+        while True:
+            data = f.read(BUF_SIZE)
+            if not data:
+                break
+            sha1.update(data)
+
+    #print("SHA1: {0}".format(sha1.hexdigest()))
+    return sha1.hexdigest()
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = "GROBID Software Mention recognition client")
@@ -288,7 +402,7 @@ if __name__ == "__main__":
         if repo_in is None: 
             sys.exit("the repo_in where to find the json files to be loaded is not indicated, leaving...")
         client.load_mongo(repo_in)
-
+        
     elif reprocess:
         client.reprocess_failed()
     elif repo_in is not None: 
@@ -297,4 +411,7 @@ if __name__ == "__main__":
         annotate(file_in, client.config, file_out)
     elif data_path is not None: 
         client.annotate_collection(data_path)
+
+    client.diagnostic()
+    
     
