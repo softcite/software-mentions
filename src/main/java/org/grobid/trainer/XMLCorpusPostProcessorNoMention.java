@@ -104,8 +104,8 @@ public class XMLCorpusPostProcessorNoMention {
             tei = FileUtils.readFileToString(new File(xmlCorpusPath), UTF_8);
 
             document = builder.parse(new InputSource(new StringReader(tei)));
+            document = enrichTEIDocument(document, documents, pdfPath);
             document = enrichTEIDocumentNoMention(document, documents, pdfPath);
-            //document = enrichTEIDocument(document, documents, pdfPath);
 
             tei = XMLCorpusPostProcessor.serialize(document, null);
         } catch(ParserConfigurationException e) {

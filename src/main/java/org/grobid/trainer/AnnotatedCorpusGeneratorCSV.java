@@ -1858,7 +1858,7 @@ System.out.print("\n");*/
 
         try {
             CSVParser parser = CSVParser.parse(softciteArticles, UTF_8, CSVFormat.RFC4180);
-            // article,article_set,coder,no_selections_found
+            // article,article_set,coder,no_selections_found,codable,standard_article
             boolean start = true;
             int nbCSVlines = 0;
             for (CSVRecord csvRecord : parser) {
@@ -1869,9 +1869,9 @@ System.out.print("\n");*/
                 }
                 AnnotatedDocument document = null;
                 String annotatorID = null;
-                if (csvRecord.size() != 4)
+                if (csvRecord.size() != 6)
                     System.out.println(" **** Warning **** softcite_articles.csv -> size of csv line " + nbCSVlines + " is " + 
-                        csvRecord.size() + " (should be 4)");
+                        csvRecord.size() + " (should be 6)");
                 for(int i=0; i<csvRecord.size(); i++) {
                     String value = csvRecord.get(i);
                     if (value.trim().length() == 0)

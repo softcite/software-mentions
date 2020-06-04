@@ -334,8 +334,8 @@ System.out.println(annotationContextLeftSignature + " / " + annotationContextRig
                 resp.setTextContent("annotator");
 
                 Element name = document.createElement("name");
-                //name.setTextContent("ANONYMIZED");
-                name.setTextContent(annotators.get(index));
+                name.setTextContent("ANONYMIZED");
+                //name.setTextContent(annotators.get(index));
 
                 respStmt.appendChild(resp);
                 respStmt.appendChild(name);

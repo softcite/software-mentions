@@ -194,6 +194,7 @@ class software_mention_client(object):
         out_files = []
         full_records = []
         i = 0
+        nb_total =0
         with self.env_software.begin() as txn:
             cursor = txn.cursor()
             for key, value in cursor:
@@ -217,6 +218,8 @@ class software_mention_client(object):
         # last batch
         if len(pdf_files) > 0:
             self.annotate_batch(pdf_files, out_files, full_records)
+
+        print("re-processed:", nb_total, "entries")
 
     def reset(self):
         """
