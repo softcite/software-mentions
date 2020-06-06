@@ -1277,13 +1277,38 @@ var grobid = (function ($) {
         }
 
         //doi
-        var doiNodes = doc.evaluate("//idno[@type='doi']", doc, null, XPathResult.ANY_TYPE, null);
+        var doiNodes = doc.evaluate("//idno[@type='DOI']", doc, null, XPathResult.ANY_TYPE, null);
         var doi = doiNodes.iterateNext();
         if (doi && doi.textContent) {
             //if (doi.textContent.startsWith("10."))
-                localHtml += "<tr><td>DOI</td><td><a href=\"https://doi.org/" + doi.textContent + "\" target=\"_blank\">"+doi.textContent+"</a></td></tr>";
+                localHtml += "<tr><td>DOI</td><td><a href=\"https://doi.org/" + doi.textContent + 
+                    "\" target=\"_blank\" style=\"color:#BC0E0E;\">"+doi.textContent+"</a></td></tr>";
             /*else 
                 localHtml += "<tr><td>DOI</td><td><a href=\"https://doi.org/" + doi.textContent + "\">"+doi.textContent+"</a></td></tr>";*/
+        }
+
+        // PMC
+        var pmcNodes = doc.evaluate("//idno[@type='PMCID']", doc, null, XPathResult.ANY_TYPE, null);
+        var pmc = pmcNodes.iterateNext();
+        if (pmc && pmc.textContent) {
+            localHtml += "<tr><td>PMC ID</td><td><a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/" + pmc.textContent + 
+                "/\" target=\"_blank\" style=\"color:#BC0E0E;\">"+pmc.textContent+"</a></td></tr>";
+        }
+
+        // PMID
+        var pmidNodes = doc.evaluate("//idno[@type='PMID']", doc, null, XPathResult.ANY_TYPE, null);
+        var pmid = pmidNodes.iterateNext();
+        if (pmid && pmid.textContent) {
+            localHtml += "<tr><td>PMID</td><td><a href=\"https://pubmed.ncbi.nlm.nih.gov/" + pmid.textContent + 
+                "/\" target=\"_blank\" style=\"color:#BC0E0E;\">"+pmid.textContent+"</a></td></tr>";
+        }
+
+        // Open Access full text
+        var oaNodes = doc.evaluate("//ptr[@type='open-access']/@target", doc, null, XPathResult.ANY_TYPE, null);
+        var oa = oaNodes.iterateNext();
+        if (oa && oa.textContent) {
+            localHtml += "<tr><td>Open Access</td><td><a href=\"" + oa.textContent + "/\" target=\"_blank\" style=\"color:#BC0E0E;\">"+
+                oa.textContent+"</a></td></tr>";
         }
 
         // publisher

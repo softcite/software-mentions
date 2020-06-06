@@ -75,6 +75,8 @@ class software_mention_client(object):
         pdf_files = []
         out_files = []
         full_records = []
+        nb_total = 0
+        start_time = time.time()
         for root, directories, filenames in os.walk(directory):
             for filename in filenames: 
                 if filename.endswith(".pdf") or filename.endswith(".PDF"):
@@ -113,14 +115,20 @@ class software_mention_client(object):
                     record = {}
                     record["id"] = sha1
                     full_records.append(record)
+                    
                     if len(pdf_files) == self.config["batch_size"]:
                         self.annotate_batch(pdf_files, out_files, full_records)
+                        nb_total += len(pdf_files)
                         pdf_files = []
                         out_files = []
                         full_records = []
+                        runtime = round(time.time() - start_time, 3)
+                        print("total process:", nb_total, "- accumulated runtime: %s s " % (runtime), "- %s PDF/s" % round(nb_total/runtime, 2))
         # last batch
         if len(pdf_files) > 0:
             self.annotate_batch(pdf_files, out_files, full_records)
+            runtime = round(time.time() - start_time, 3)
+            print("total process:", nb_total, "- accumulated runtime: %s s " % (runtime), "- %s PDF/s" % round(nb_total/runtime, 2))
 
     def annotate_collection(self, data_path):
         # init lmdb transactions
@@ -137,7 +145,8 @@ class software_mention_client(object):
         pdf_files = []
         out_files = []
         full_records = []
-        i = 0
+        nb_total = 0
+        start_time = time.time()
         with self.env.begin(write=True) as txn:
             cursor = txn.cursor()
             for key, value in cursor:
@@ -146,7 +155,10 @@ class software_mention_client(object):
                 #print(local_entry)
 
                 # if the json file already exists, we skip 
-                if os.path.isfile(os.path.join(os.path.join(data_path, generateS3Path(local_entry['id']), local_entry['id']+".software.json"))):
+                #print(os.path.join(data_path, generateStoragePath(local_entry['id']), 
+                #    local_entry['id'], local_entry['id']+".software.json"))
+                if os.path.isfile(os.path.join(os.path.join(data_path, generateStoragePath(local_entry['id']), 
+                    local_entry['id'], local_entry['id']+".software.json"))):
                     # check that this id is considered in the lmdb keeping track of the process
                     with self.env_software.begin() as txn:
                         status = txn.get(local_entry['id'].encode(encoding='UTF-8'))
@@ -161,22 +173,24 @@ class software_mention_client(object):
                     if status is not None and status.decode(encoding='UTF-8') == "True":
                         continue
 
-                pdf_files.append(os.path.join(data_path, generateS3Path(local_entry['id']), local_entry['id']+".pdf"))
-                out_files.append(os.path.join(data_path, generateS3Path(local_entry['id']), local_entry['id']+".software.json"))
-
+                pdf_files.append(os.path.join(data_path, generateStoragePath(local_entry['id']), local_entry['id'], local_entry['id']+".pdf"))
+                out_files.append(os.path.join(data_path, generateStoragePath(local_entry['id']), local_entry['id'], local_entry['id']+".software.json"))
                 full_records.append(local_entry)
-                i += 1
 
-                if i == self.config["batch_size"]:
+                if len(pdf_files) == self.config["batch_size"]:
                     self.annotate_batch(pdf_files, out_files, full_records)
+                    nb_total += len(pdf_files)
                     pdf_files = []
                     out_files = []
                     full_records = []
-                    i = 0
+                    runtime = round(time.time() - start_time, 3)
+                    print("total process:", nb_total, "- accumulated runtime: %s s " % (runtime), "- %s PDF/s" % round(nb_total/runtime, 2))
 
         # last batch
         if len(pdf_files) > 0:
             self.annotate_batch(pdf_files, out_files, full_records)
+            runtime = round(time.time() - start_time, 3)
+            print("total process:", nb_total, "- accumulated runtime: %s s " % (runtime), "- %s PDF/s" % round(nb_total/runtime, 2))
         self.env.close()
 
     def annotate_batch(self, pdf_files, out_files=None, full_records=None):
@@ -194,7 +208,7 @@ class software_mention_client(object):
         out_files = []
         full_records = []
         i = 0
-        nb_total =0
+        nb_total = 0
         with self.env_software.begin() as txn:
             cursor = txn.cursor()
             for key, value in cursor:
@@ -202,8 +216,8 @@ class software_mention_client(object):
                 result = value.decode(encoding='UTF-8')
                 if result == "False":
                     # reprocess
-                    pdf_files.append(os.path.join(data_path, generateS3Path(local_entry['id']), local_entry['id']+".pdf"))
-                    out_files.append(os.path.join(data_path, generateS3Path(local_entry['id']), local_entry['id']+".software.json"))
+                    pdf_files.append(os.path.join(data_path, generateStoragePath(local_entry['id']), local_entry['id']+".pdf"))
+                    out_files.append(os.path.join(data_path, generateStoragePath(local_entry['id']), local_entry['id']+".software.json"))
                     # TBD get the full record from the data_path env
                     full_records.append(None)
                     i += 1
@@ -236,18 +250,18 @@ class software_mention_client(object):
         self._init_lmdb()
 
     def load_mongo(self, directory):
+        if self.config["mongo_host"] is not None:
+            mongo_client = pymongo.MongoClient(self.config["mongo_host"], int(self.config["mongo_port"]))
+            self.mongo_db = mongo_client[self.config["mongo_db"]]
         for root, directories, filenames in os.walk(directory):
             for filename in filenames: 
                 if filename.endswith(".software.json"):
-                    if self.config["mongo_host"] is not None:
-                        # we store the result in mongo db 
-                        if self.mongo_db is None:
-                            mongo_client = pymongo.MongoClient(self.config["mongo_host"], int(self.config["mongo_port"]))
-                            mongo_db = mongo_client[self.config["mongo_db"]]
-                        the_json = open(os.path.join(root,filename)).read()
-                        jsonObject = json.loads(the_json)
-                        inserted_id = mongo_db.annotations.insert_one(jsonObject).inserted_id
-                        #print("inserted annotations with id", inserted_id)
+                    print(os.path.join(root,filename))
+                    # we store the result in mongo db 
+                    the_json = open(os.path.join(root,filename)).read()
+                    jsonObject = json.loads(the_json)
+                    self._insert_mongo(jsonObject)
+                    #print("inserted annotations with id", inserted_id)
 
     #def annotate(self, file_in, config, mongo_db, file_out=None, full_record=None, env_software=None):
     def annotate(self, file_in, file_out, full_record):
@@ -266,7 +280,7 @@ class software_mention_client(object):
             time.sleep(self.config['sleep_time'])
             return annotate(file_in, self.config, file_out, full_record)
         elif response.status_code >= 500:
-            print('[{0}] Server Error'.format(response.status_code))
+            print('[{0}] Server Error'.format(response.status_code), file_in)
         elif response.status_code == 404:
             print('[{0}] URL not found: [{1}]'.format(response.status_code,api_url))
         elif response.status_code >= 400:
@@ -292,13 +306,9 @@ class software_mention_client(object):
                 with open(file_out, "w", encoding="utf-8") as json_file:
                     json_file.write(json.dumps(jsonObject))
 
-            if config["mongo_host"] is not None:
+            if self.config["mongo_host"] is not None:
                 # we store the result in mongo db 
-                if self.mongo_db is None:
-                    mongo_client = pymongo.MongoClient(self.config["mongo_host"], int(self.config["mongo_port"]))
-                    self.mongo_db = mongo_client[self.config["mongo_db"]]
-                inserted_id = self.mongo_db.annotations.insert_one(jsonObject).inserted_id
-                #print("inserted annotations with id", inserted_id)
+                self._insert_mongo(jsonObject)
 
         # for keeping track of the processing
         # update processed entry in the lmdb (having entities or not) and failure
@@ -309,7 +319,7 @@ class software_mention_client(object):
                 else:
                     txn.put(full_record['id'].encode(encoding='UTF-8'), "False".encode(encoding='UTF-8'))
 
-    def diagnostic(self):
+    def diagnostic(self, full_diagnostic=False):
         """
         Print a report on failures stored during the harvesting process
         """
@@ -335,7 +345,108 @@ class software_mention_client(object):
         print("total failed:", nb_fail)
         print("---")
 
-def generateS3Path(identifier):
+        if full_diagnostic:
+            # check mongodb access - if mongodb is not used or available, we don't go further
+            if self.mongo_db is None:
+                mongo_client = pymongo.MongoClient(self.config["mongo_host"], int(self.config["mongo_port"]))
+                self.mongo_db = mongo_client[self.config["mongo_db"]]
+            if self.mongo_db is None:
+                print("MongoDB server is not available")    
+                return
+            print("MongoDB - number of documents: ", self.mongo_db.documents.count_documents({}))
+            print("MongoDB - number of software mentions: ", self.mongo_db.annotations.count_documents({}))
+
+            #result = self.mongo_db.annotations.aggregate([{"$group": {"_id": '$software-name'}}, {"$group": {"_id": 1, "count": {"$sum": 1}}}], 
+            #    allowDiskUse=True)
+            #for doc in result:
+            result = self.mongo_db.annotations.find( {"software-name": {"$exists": True}} )
+            print("\t  * with software name:", result.count())
+            
+            #result = self.mongo_db.annotations.aggregate([{"$group": {"_id": '$version'}}, {"$group": {"_id": 1, "count": {"$sum": 1}}}], 
+            #    allowDiskUse= True)
+            #for doc in result:
+            #    print("\t  * version", doc['count'])
+
+            result = self.mongo_db.annotations.find( {"version": {"$exists": True}} )
+            print("\t  * with version:", result.count())
+
+
+            #result = self.mongo_db.annotations.aggregate([{"$group": {"_id": '$publisher'}}, {"$group": {"_id": 1, "count": {"$sum": 1}}}], 
+            #    allowDiskUse= True)
+            #for doc in result:
+            #    print("\t  * publisher", doc['count'])
+
+            result = self.mongo_db.annotations.find( {"publisher": {"$exists": True}} )
+            print("\t  * with publisher:", result.count())
+
+            #result = self.mongo_db.annotations.aggregate([{"$group": {"_id": '$url'}}, {"$group": {"_id": 1, "count": {"$sum": 1}}}], 
+            #    allowDiskUse= True)
+            #for doc in result:
+            #    print("\t  * url", doc['count'])
+
+            result = self.mongo_db.annotations.find( {"url": {"$exists": True}} )
+            print("\t  * with url:", result.count())    
+
+            #result = self.mongo_db.annotations.aggregate([{"$group": {"_id": '$references'}}, {"$group": {"_id": 1, "count": {"$sum": 1}}}], 
+            #    allowDiskUse= True)
+            #for doc in result:
+            #    print("\t  * biblio", doc['count'])
+
+            results = self.mongo_db.annotations.find( {"references": {"$exists": True}} )
+            nb_ref = 0
+            has_ref = 0
+            for result in results:
+                has_ref += 1
+                the_references = result.get("references")
+                nb_ref += len(the_references)
+                    
+            print("\t  * with at least one reference", nb_ref) 
+            print("\t  * total references", nb_ref) 
+
+            print("MongoDB - number of bibliographical references: ", self.mongo_db.references.count_documents({}))
+
+            result = self.mongo_db.references.find( {"tei": {"$regex": "DOI"}} )
+            print("\t  * with DOI:", result.count())  
+            print("---")
+
+    def _insert_mongo(self, jsonObject):
+        if self.mongo_db is None:
+            mongo_client = pymongo.MongoClient(self.config["mongo_host"], int(self.config["mongo_port"]))
+            self.mongo_db = mongo_client[self.config["mongo_db"]]
+
+        # check if the article/annotations are not already present
+        if self.mongo_db.documents.count_documents({ 'id': jsonObject['id'] }, limit = 1) != 0:
+            # if yes we replace this object, its annotations and references
+            result = self.mongo_db.documents.find_one({ 'id': jsonObject['id'] })
+            _id = result['_id']
+            self.mongo_db.annotations.delete_many( {'document': _id} )
+            self.mongo_db.references.delete_many( {'document': _id} )
+            result = self.mongo_db.documents.delete_one({ 'id': jsonObject['id'] })
+            #print ("result:", type(result), "-- deleted count:", result.deleted_count)
+        
+        # clean json
+        jsonObject = _clean_json(jsonObject)
+
+        # deep copy of the json object
+        jsonObjectDocument = json.loads(json.dumps(jsonObject))
+        if 'mentions' in jsonObjectDocument:
+            del jsonObjectDocument['mentions']
+        if 'references' in jsonObjectDocument:
+            del jsonObjectDocument['references']
+        inserted_doc_id = self.mongo_db.documents.insert_one(jsonObjectDocument).inserted_id
+        
+        if 'mentions' in jsonObject:
+            for mention in jsonObject['mentions']:
+                mention["document"] = inserted_doc_id
+                inserted_mention_id = self.mongo_db.annotations.insert_one(mention).inserted_id
+
+        if 'references' in jsonObject:
+            for reference in jsonObject['references']:
+                reference["document"] = inserted_doc_id
+                inserted_reference_id = self.mongo_db.references.insert_one(reference).inserted_id
+
+
+def generateStoragePath(identifier):
     '''
     Convert a file name into a path with file prefix as directory paths:
     123456789 -> 12/34/56/123456789
@@ -351,6 +462,15 @@ def _grobid_software_url(grobid_base, grobid_port):
         the_url += ":"+grobid_port
     the_url += "/service/"
     return the_url
+
+def _clean_json(d):
+    # clean recursively a json for insertion in MongoDB, basically remove keys starting with $
+    if not isinstance(d, (dict, list)):
+        return d
+    if isinstance(d, list):
+        return [_clean_json(v) for v in d]
+    return {k: _clean_json(v) for k, v in d.items()
+            if not k.startswith("$") }
 
 BUF_SIZE = 65536    
 
@@ -378,6 +498,8 @@ if __name__ == "__main__":
     parser.add_argument("--reset", action="store_true", help="ignore previous processing states and re-init the annotation process from the beginning") 
     parser.add_argument("--load", action="store_true", help="load json files into the MongoDB instance, the --repo-in parameter must indicate the path "
         +"to the directory of resulting json files to be loaded") 
+    parser.add_argument("--diagnostic", action="store_true", help="perform a full count of annotations and diagnostic using MongoDB "  
+        +"regarding the harvesting and transformation process") 
 
     args = parser.parse_args()
 
@@ -389,6 +511,7 @@ if __name__ == "__main__":
     file_out = args.file_out
     repo_in = args.repo_in
     load_mongo = args.load
+    full_diagnostic = args.diagnostic
 
     client = software_mention_client(config_path=config_path)
 
@@ -400,11 +523,14 @@ if __name__ == "__main__":
 
     if load_mongo:
         # check a mongodb server is specified in the config
-        if client.config["mongo_host"] is None or len(client.config["mongo_host"]) == 0:
+        if client.config["mongo_host"] is None:
             sys.exit("the mongodb server where to load the json files is not indicated in the config file, leaving...")
-        if repo_in is None: 
+        if repo_in is None and data_path is None: 
             sys.exit("the repo_in where to find the json files to be loaded is not indicated, leaving...")
-        client.load_mongo(repo_in)
+        if data_path is not None:
+            client.load_mongo(data_path)
+        elif repo_in is not None:
+            client.load_mongo(repo_in)
         
     elif reprocess:
         client.reprocess_failed()
@@ -415,6 +541,6 @@ if __name__ == "__main__":
     elif data_path is not None: 
         client.annotate_collection(data_path)
 
-    client.diagnostic()
+    client.diagnostic(full_diagnostic=full_diagnostic)
     
     

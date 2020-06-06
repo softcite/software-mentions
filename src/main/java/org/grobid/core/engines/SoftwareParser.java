@@ -158,7 +158,7 @@ public class SoftwareParser extends AbstractParser {
             GrobidAnalysisConfig config =
                         GrobidAnalysisConfig.builder()
                                 .consolidateHeader(0)
-                                .consolidateCitations(1)
+                                .consolidateCitations(0)
                                 .build();
 
 			DocumentSource documentSource = 
@@ -278,7 +278,7 @@ public class SoftwareParser extends AbstractParser {
                 if (entity1.getSoftwareName() != null && entity1.getSoftwareName().getWikidataId() != null) {
                     for (SoftwareEntity entity2 : entities) {
                         if (entity2.getSoftwareName() != null && entity2.getSoftwareName().getWikidataId() != null) {
-                            // if the entity is already disdambiguated, nothing possible
+                            // if the entity is already disambiguated, nothing possible
                             continue;
                         }
                         if (entity2.getSoftwareName() != null && 
@@ -445,6 +445,38 @@ public class SoftwareParser extends AbstractParser {
                     entities = attachRefBib(entities, bibRefComponents);
                 }
 
+                // consolidate the attached ref bib (we don't consolidate all bibliographical references
+                // to avoid useless costly computation)
+                List<BibDataSet> citationsToConsolidate = new ArrayList<BibDataSet>();
+                List<Integer> consolidated = new ArrayList<Integer>();
+                for(SoftwareEntity entity : entities) {
+                    if (entity.getBibRefs() != null && entity.getBibRefs().size() > 0) {
+                        List<BiblioComponent> bibRefs = entity.getBibRefs();
+                        for(BiblioComponent bibRef: bibRefs) {
+                            Integer refKeyVal = new Integer(bibRef.getRefKey());
+                            if (!consolidated.contains(refKeyVal)) {
+                                citationsToConsolidate.add(resCitations.get(refKeyVal));
+                                consolidated.add(refKeyVal);
+                            }
+                        }
+                    }
+                }
+
+                try {
+                    Consolidation consolidator = Consolidation.getInstance();
+                    Map<Integer,BiblioItem> resConsolidation = consolidator.consolidate(citationsToConsolidate);
+                    for(int i=0; i<citationsToConsolidate.size(); i++) {
+                        BiblioItem resCitation = citationsToConsolidate.get(i).getResBib();
+                        BiblioItem bibo = resConsolidation.get(i);
+                        if (bibo != null) {
+                            BiblioItem.correct(resCitation, bibo);
+                        }
+                    }
+                } catch(Exception e) {
+                    throw new GrobidException(
+                    "An exception occured while running consolidation on bibliographical references.", e);
+                } 
+
                 // propagate the bib. ref. to the entities corresponding to the same software name without bib. ref.
                 for(SoftwareEntity entity1 : entities) {
                     if (entity1.getBibRefs() != null && entity1.getBibRefs().size() > 0) {
@@ -489,7 +521,7 @@ public class SoftwareParser extends AbstractParser {
             throw new GrobidException("Cannot process pdf file: " + file.getPath());
         }
 
-        Collections.sort(entities);
+        //Collections.sort(entities);
         //return new Pair<List<SoftwareEntity>,Document>(entities, doc);
         return Pair.of(entities, doc);
     }

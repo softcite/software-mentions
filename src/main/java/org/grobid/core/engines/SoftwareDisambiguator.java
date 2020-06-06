@@ -183,6 +183,9 @@ public class SoftwareDisambiguator {
             return entities;
 
 //System.out.println(json);
+        int segmentStartOffset = 0;
+        if (tokens != null && tokens.size()>0)
+            segmentStartOffset = tokens.get(0).getOffset();
 
         // build a map for the existing entities in order to catch them easily
         // based on their positions
@@ -221,14 +224,14 @@ public class SoftwareDisambiguator {
                     JsonNode entityNode = ite.next();
                     JsonNode startNode = entityNode.findPath("offsetStart");
                     int startOff = -1;
-                    int endOff = -1;
+                    //int endOff = -1;
                     if ((startNode != null) && (!startNode.isMissingNode())) {
                         startOff = startNode.intValue();
                     }
-                    JsonNode endNode = entityNode.findPath("offsetEnd");
+                    /*JsonNode endNode = entityNode.findPath("offsetEnd");
                     if ((endNode != null) && (!endNode.isMissingNode())) {
                         endOff = endNode.intValue();
-                    }
+                    }*/
                     double score = -1;
                     JsonNode scoreNode = entityNode.findPath("nerd_selection_score");
                     if ((scoreNode != null) && (!scoreNode.isMissingNode())) {
@@ -321,8 +324,8 @@ public class SoftwareDisambiguator {
 //System.out.println("filtered entity: " + wikidataId);
                         continue;
                     }
-
-                    SoftwareComponent component = entityPositions.get(startOff);
+//System.out.println(""+startOff + " / " + (startOff+segmentStartOffset+1));
+                    SoftwareComponent component = entityPositions.get(startOff+segmentStartOffset+1);
                     if (component != null) {
                         // merging
                         if (wikidataId != null)
@@ -370,11 +373,10 @@ public class SoftwareDisambiguator {
             else
                 url = new URL("http://" + nerd_host + "/service/" + RESOURCEPATH);
 
-//System.out.println("Calling: " + url.toString());
             CloseableHttpClient httpClient = HttpClients.createDefault();
             HttpPost post = new HttpPost(url.toString());
             //post.addHeader("Content-Type", "application/json");
-            //post.addHeader("Accept", "application/json");            
+            //post.addHeader("Accept", "application/json");
 
             // we create the query structure
             // context as an JSON array of strings
@@ -385,14 +387,19 @@ public class SoftwareDisambiguator {
             // we ask for French and German language correspondences in the result
             //buffer.append(", \"resultLanguages\":[ \"de\", \"fr\"]");
             buffer.append(", \"text\": \"");
+            int startSegmentOffset = -1;
             for(LayoutToken token : subtokens) {
                 String tokenText = token.getText();
+                if (startSegmentOffset == -1)
+                    startSegmentOffset = token.getOffset()+1;
                 if (tokenText.equals("\n")) 
                     tokenText = " ";
                 byte[] encodedText = encoder.quoteAsUTF8(tokenText);
                 String outputEncodedText = new String(encodedText);
                 buffer.append(outputEncodedText);
             }
+            if (startSegmentOffset == -1)
+                startSegmentOffset = 1;
 
             // no mention, it means only the mentions given in the query will be dismabiguated!
             buffer.append("\", \"mentions\": []");
@@ -419,15 +426,17 @@ public class SoftwareDisambiguator {
 
                 byte[] encodedText = encoder.quoteAsUTF8(component.getRawForm() );
                 String outputEncodedText = new String(encodedText);
-               
-                buffer.append("{\"rawName\": \"" + outputEncodedText + "\", \"offsetStart\": " + component.getOffsetStart() + 
-                    ", \"offsetEnd\": " +  component.getOffsetEnd());
+
+                buffer.append("{\"rawName\": \"" + outputEncodedText + "\", \"offsetStart\": " + (component.getOffsetStart() - startSegmentOffset)+ 
+                    ", \"offsetEnd\": " + (component.getOffsetEnd() - startSegmentOffset));
                 //buffer.append(", \"type\": \"");
                 buffer.append(" }");
             }
 
             buffer.append("], \"full\": true }");
+            //buffer.append("] }");
             LOGGER.debug(buffer.toString());
+//System.out.println(buffer.toString());
 
             //params.add(new BasicNameValuePair("query", buffer.toString()));
 
