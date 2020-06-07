@@ -250,13 +250,13 @@ Evaluation made on 03.10.2019 (with update for CRF on 20.05.2020)
 
 The results (Precision, Recall, F-score) for all the models have been obtained using 10-fold cross-validation (average metrics over the 10 folds). We also indicate the best and worst results over the 10 folds in the [complete result page](https://github.com/Impactstory/software-mentions/blob/master/doc/scores-1.0.txt). See [DeLFT](https://github.com/kermitt2/delft) for more details about the models and reproducing all these evaluations. 
 
-`<software>` label means “software name”. `<creator>` corresponds usually to the publisher of the software or, more rarely, the main developer. `<version>` correspond to both version number and version dates, when available. 
+`<software>` label means “software name”. `<publisher>` corresponds usually to the publisher of the software or, more rarely, the main developer. `<version>` correspond to both version number and version dates, when available. 
 
 |          | CRF ||| BiLSTM-CRF ||| BiLSTM-CRF+ELMo|||
 |---       | --- | --- | --- | --- | --- | --- | ---| --- | --- |
 |**Labels**| Precision | Recall | f-score | Precision | Recall | f-score | Precision | Recall | f-score|
 | `<software>` | 86.18 | 74.07 | 79.64 | 79.70 | 75.21 | 77.37 | **86.87** | 80.72 | **83.63** |
-| `<creator>`  | 86.74 | 75.31 | 80.6  | 77.57 | 82.48 | 79.94 | **86.40** | **87.81** | **87.07** |
+| `<publisher>`  | 86.74 | 75.31 | 80.6  | 77.57 | 82.48 | 79.94 | **86.40** | **87.81** | **87.07** |
 | `<version>`  | 90.53 | 84.74 | 87.47 | 88.55 | **90.57** | **89.55** | 89.61 | 89.07 | 89.33|
 | `<url>`  | **68.58** | 59.66 | 63.15 | 28.22 | 36.00 | 31.36 | 61.38 | 64.00 | 62.19|
 |**micro-average** | 86.73 | 75.91 | 80.95 | 79.62 | 78.59 | 79.09 | **86.72** | **83.14** | **84.87** |
@@ -265,7 +265,7 @@ The results (Precision, Recall, F-score) for all the models have been obtained u
 |---           | ---                  | ---    | ---    | ---                      | ---    | ---     | 
 |**Labels**    | Precision            | Recall | f-score| Precision          | Recall       | f-score |
 | `<software>` | 79.64                | 79.72  | 79.65  | 84.41              | 85.35        | 84.80   |
-| `<creator>`  | 83.58                | 89.68  | 86.52  | 83.04              | **90.96**    | 86.80   |
+| `<publisher>`  | 83.58                | 89.68  | 86.52  | 83.04              | **90.96**    | 86.80   |
 | `<version>`  | 85.69                | 86.34  | 85.99  | 86.87              | 86.64        | 86.74   |
 | `<url>`      | 44.99                | 52.27  | 48.19  | 59.31              | 68.64        | 63.21   |
 |**micro-average** | 80.05            | 81.52  | 80.77  | 83.68              | 85.84        | 84.70   |
@@ -276,7 +276,7 @@ Evaluation made on 09.01.2020 for BERT fine-tuned architectures:
 |---        | --- | --- | --- | --- | --- | --- | 
 |**Labels** | Precision | Recall | f-score | Precision | Recall | f-score |
 | `<software>` | 75.58 | 71.64 | 73.55 | 84.85 | **82.43** | 83.62 | 
-| `<creator>` | 72.93 | 70.57 | 71.72 | 79.51 | 77.71 | 78.59 | 
+| `<publisher>` | 72.93 | 70.57 | 71.72 | 79.51 | 77.71 | 78.59 | 
 | `<version>`  | 78.54 | 79.14 | 78.83 | **89.98** | 88.00 | 88.97 |
 | `<url>`   | 38.70 | 56.67 | 45.50 | 63.62 | **75.33** | **68.77** | 
 |**micro-average** | 74.48 | 72.67 | 73.56 | 84.42 | 82.69 | 83.54 | 

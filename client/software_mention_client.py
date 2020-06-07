@@ -39,6 +39,14 @@ class software_mention_client(object):
 
         self.mongo_db = None
 
+        # load blacklist 
+        self.blacklisted = []
+        with open ("resources/covid_blacklist.txt", "r") as blackfile:
+            for line in blackfile:
+                line = line.replace(" ", "").strip()
+                self.blacklisted.append(line)
+        print("blacklist size:", len(self.blacklisted))
+
     def _load_config(self, path='./config.json'):
         """
         Load the json configuration 
@@ -273,7 +281,7 @@ class software_mention_client(object):
         
         #print("calling... ", url)
 
-        response = requests.post(url, files=the_file)
+        response = requests.post(url, files=the_file, data = {'disambiguate': 1})
         jsonObject = None
         if response.status_code == 503:
             print('service overloaded, sleep', self.config['sleep_time'], seconds)
@@ -292,7 +300,7 @@ class software_mention_client(object):
         else:
             print('Unexpected Error: [HTTP {0}]: Content: {1}'.format(response.status_code, response.content))
 
-        if jsonObject is not None and len(jsonObject['mentions']) != 0:
+        if jsonObject is not None and 'mentions' in jsonObject and len(jsonObject['mentions']) != 0:
             # add file, DOI, date and version info in the JSON, if available
             if full_record is not None:
                 jsonObject['id'] = full_record['id']
@@ -300,6 +308,17 @@ class software_mention_client(object):
                     jsonObject['metadata'] = full_record;
             jsonObject['original_file_path'] = file_in
             jsonObject['file_name'] = os.path.basename(file_in)
+
+            # apply blacklist
+            new_mentions = []
+            for mention in jsonObject['mentions']:
+                if "software-name" in mention:
+                    software_name = mention["software-name"]
+                    normalizedForm = software_name["normalizedForm"]
+                    normalizedForm = normalizedForm.replace(" ", "").strip()
+                    if normalizedForm not in self.blacklisted:
+                        new_mentions.append(mention)
+            jsonObject['mentions'] = new_mentions
             
             if file_out is not None: 
                 # we write the json result into a file together with the processed pdf
@@ -356,46 +375,23 @@ class software_mention_client(object):
             print("MongoDB - number of documents: ", self.mongo_db.documents.count_documents({}))
             print("MongoDB - number of software mentions: ", self.mongo_db.annotations.count_documents({}))
 
-            #result = self.mongo_db.annotations.aggregate([{"$group": {"_id": '$software-name'}}, {"$group": {"_id": 1, "count": {"$sum": 1}}}], 
-            #    allowDiskUse=True)
-            #for doc in result:
             result = self.mongo_db.annotations.find( {"software-name": {"$exists": True}} )
             print("\t  * with software name:", result.count())
-            
-            #result = self.mongo_db.annotations.aggregate([{"$group": {"_id": '$version'}}, {"$group": {"_id": 1, "count": {"$sum": 1}}}], 
-            #    allowDiskUse= True)
-            #for doc in result:
-            #    print("\t  * version", doc['count'])
-
+ 
             result = self.mongo_db.annotations.find( {"version": {"$exists": True}} )
             print("\t  * with version:", result.count())
-
-
-            #result = self.mongo_db.annotations.aggregate([{"$group": {"_id": '$publisher'}}, {"$group": {"_id": 1, "count": {"$sum": 1}}}], 
-            #    allowDiskUse= True)
-            #for doc in result:
-            #    print("\t  * publisher", doc['count'])
 
             result = self.mongo_db.annotations.find( {"publisher": {"$exists": True}} )
             print("\t  * with publisher:", result.count())
 
-            #result = self.mongo_db.annotations.aggregate([{"$group": {"_id": '$url'}}, {"$group": {"_id": 1, "count": {"$sum": 1}}}], 
-            #    allowDiskUse= True)
-            #for doc in result:
-            #    print("\t  * url", doc['count'])
-
             result = self.mongo_db.annotations.find( {"url": {"$exists": True}} )
             print("\t  * with url:", result.count())    
-
-            #result = self.mongo_db.annotations.aggregate([{"$group": {"_id": '$references'}}, {"$group": {"_id": 1, "count": {"$sum": 1}}}], 
-            #    allowDiskUse= True)
-            #for doc in result:
-            #    print("\t  * biblio", doc['count'])
 
             results = self.mongo_db.annotations.find( {"references": {"$exists": True}} )
             nb_ref = 0
             has_ref = 0
             for result in results:
+                print(result)
                 has_ref += 1
                 the_references = result.get("references")
                 nb_ref += len(the_references)
@@ -435,15 +431,22 @@ class software_mention_client(object):
             del jsonObjectDocument['references']
         inserted_doc_id = self.mongo_db.documents.insert_one(jsonObjectDocument).inserted_id
         
-        if 'mentions' in jsonObject:
-            for mention in jsonObject['mentions']:
-                mention["document"] = inserted_doc_id
-                inserted_mention_id = self.mongo_db.annotations.insert_one(mention).inserted_id
-
+        local_ref_map = {}
         if 'references' in jsonObject:
             for reference in jsonObject['references']:
                 reference["document"] = inserted_doc_id
                 inserted_reference_id = self.mongo_db.references.insert_one(reference).inserted_id
+                local_ref_map[str(reference["refKey"])] = inserted_reference_id
+
+        if 'mentions' in jsonObject:
+            for mention in jsonObject['mentions']:
+                mention["document"] = inserted_doc_id
+                # insert the mongodb id of the stored references
+                if "references" in mention:
+                    for reference in mention["references"]:
+                        if str(reference["refKey"]) in local_ref_map:
+                            reference["reference_id"] = local_ref_map[str(reference["refKey"])]
+                inserted_mention_id = self.mongo_db.annotations.insert_one(mention).inserted_id
 
 
 def generateStoragePath(identifier):
