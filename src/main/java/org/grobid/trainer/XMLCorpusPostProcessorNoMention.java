@@ -77,6 +77,9 @@ public class XMLCorpusPostProcessorNoMention {
     private Map<String,String> missingTitles = new TreeMap<>();
     private SoftwareConfiguration configuration;
 
+    private List<String> trainingDoc = Arrays.asList("a2008-39-NAT_BIOTECHNOL", "a2010-05-BMC_MOL_BIOL", 
+        "a2007-48-UNDERSEA_HYPERBAR_M", "a2001-40-MOL_ECOL", "a2008-02-WATERBIRDS");
+
     public XMLCorpusPostProcessorNoMention(SoftwareConfiguration conf) {
         this.configuration = conf;
     }
@@ -106,6 +109,9 @@ public class XMLCorpusPostProcessorNoMention {
             document = builder.parse(new InputSource(new StringReader(tei)));
             document = enrichTEIDocument(document, documents, pdfPath);
             document = enrichTEIDocumentNoMention(document, documents, pdfPath);
+
+            // fix all xml:id which are not valid NCName
+            document = fixIdNCName(document);
 
             tei = XMLCorpusPostProcessor.serialize(document, null);
         } catch(ParserConfigurationException e) {
@@ -320,9 +326,9 @@ public class XMLCorpusPostProcessorNoMention {
 
                 nu.xom.Element root = null;
                 if (localAnnotators.size() > 1) {
-                    root = SoftwareParser.getTEIHeaderSimple(docName, biblio, "multiple_annotator");
+                    root = SoftwareParser.getTEIHeaderSimple(doiId2NCName(docName), biblio, "multiple_annotator");
                 } else {
-                    root = SoftwareParser.getTEIHeaderSimple(docName, biblio, "unique_annotator");
+                    root = SoftwareParser.getTEIHeaderSimple(doiId2NCName(docName), biblio, "unique_annotator");
                 }
                 // empty body for TEI conformance
 
@@ -414,9 +420,9 @@ public class XMLCorpusPostProcessorNoMention {
 
                 nu.xom.Element root = null;
                 if (localAnnotators.size() > 1) {
-                    root = SoftwareParser.getTEIHeaderSimple(docName, biblio, "multiple_annotator");
+                    root = SoftwareParser.getTEIHeaderSimple(doiId2NCName(docName), biblio, "multiple_annotator");
                 } else {
-                    root = SoftwareParser.getTEIHeaderSimple(docName, biblio, "unique_annotator");
+                    root = SoftwareParser.getTEIHeaderSimple(doiId2NCName(docName), biblio, "unique_annotator");
                 }
                 // empty body for TEI conformance
 
@@ -1111,6 +1117,33 @@ public class XMLCorpusPostProcessorNoMention {
 
         System.out.println("|annotation edited by curator|"+software_annotation_count+"|"+all_mention_annotation_count+"|"+
             nb_articles_with_annotations+"|-|");
+    }
+
+    private org.w3c.dom.Document fixIdNCName(org.w3c.dom.Document document) {
+        org.w3c.dom.Element documentRoot = document.getDocumentElement();
+        fixIdNCNameElement(documentRoot);
+        return document;
+    }
+
+    private void fixIdNCNameElement(org.w3c.dom.Element element) {
+        String elementId = element.getAttribute("xml:id");
+        if (elementId != null && elementId.length()>0) {
+            String newElementId = doiId2NCName(elementId);
+            element.setAttribute("xml:id", newElementId);
+        }
+        for(org.w3c.dom.Node child = element.getFirstChild(); child != null; child = child.getNextSibling()) {
+            if (child instanceof org.w3c.dom.Element) {
+                fixIdNCNameElement((org.w3c.dom.Element)child);
+            }
+        }
+    }
+
+    private String doiId2NCName(String doi) {
+        if (doi.startsWith("10.")) {
+            doi = doi.replace("%", "_");
+            doi = "_" + doi;
+        }
+        return doi;
     }
 
     private void importCSVMissingTitles(String csvPath, Map<String, AnnotatedDocument> documents) {

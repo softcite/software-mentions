@@ -149,13 +149,14 @@ public class XMLCorpusPostProcessor {
                 Element bodyElement = this.getFirstDirectChild(textElement, "body");
                 if (bodyElement != null) {
                     // iterate through the snippets (p)
+                    int l = 0;
                     NodeList pList = bodyElement.getElementsByTagName("p");
                     for (int j = 0; j < pList.getLength(); j++) {
                         Element snippetElement = (Element) pList.item(j);
 
                         // find the entities
                         NodeList entityList = snippetElement.getElementsByTagName("rs");
-                        for (int k = 0; k < entityList.getLength(); k++) {
+                        for (int k = 0; k < entityList.getLength(); k++, l++) {
                             Element entityElement = (Element) entityList.item(k);
 
                             // check if the element is software type and without xml:id, 
@@ -165,7 +166,7 @@ public class XMLCorpusPostProcessor {
                             String type = entityElement.getAttribute("type");
                             if (type != null && type.equals("software")) {    
                                 if (id == null || id.trim().length() == 0) {
-                                    entityElement.setAttribute("xml:id", pmcid+"-software-simple-"+k);
+                                    entityElement.setAttribute("xml:id", pmcid+"-software-simple-"+l);
                                 }
                             }
                             String localText = this.getText(entityElement);

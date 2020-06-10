@@ -1617,7 +1617,8 @@ System.out.print("\n");*/
                             annotation = annotations.get(value);
                         }
                     } else if (i == 1) {
-                        annotation.setAnnotatorID(value);
+                        if (annotation.getAnnotatorID() == null)
+                            annotation.setAnnotatorID(value);
                     } else if (i == 2) {
                         attribute = value;
                     } else if (i == 3) {
@@ -1800,7 +1801,8 @@ System.out.print("\n");*/
                         document.addAnnotation(annotation); */
 
                     } else if (i == 1) {
-                        annotation.setAnnotatorID(value);
+                        if (annotation.getAnnotatorID() == null)
+                            annotation.setAnnotatorID(value);
                     } else if (i == 2) {
                         String documentID = value;
                         int ind = documentID.indexOf("_");
