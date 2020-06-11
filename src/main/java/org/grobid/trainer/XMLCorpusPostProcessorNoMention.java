@@ -524,13 +524,13 @@ public class XMLCorpusPostProcessorNoMention {
                                 } 
                             } else if (inlineAnnotation.getAttributeValue("type").equals("version")) {
                                 rs.addAttribute(new Attribute("type", "version"));
-                                rs.addAttribute(new Attribute("corresp", "#software-"+index_entity));
+                                rs.addAttribute(new Attribute("corresp", "#" + docName + "-software-"+index_entity));
                             } else if (inlineAnnotation.getAttributeValue("type").equals("publisher")) {
                                 rs.addAttribute(new Attribute("type", "publisher"));
-                                rs.addAttribute(new Attribute("corresp", "#software-"+index_entity));
+                                rs.addAttribute(new Attribute("corresp", "#" + docName + "software-"+index_entity));
                             } else if (inlineAnnotation.getAttributeValue("type").equals("url")) {
                                 rs.addAttribute(new Attribute("type", "url"));
-                                rs.addAttribute(new Attribute("corresp", "#software-"+index_entity));
+                                rs.addAttribute(new Attribute("corresp", "#" + docName + "software-"+index_entity));
                             }
 
                             int indexAnnotator = annotators.indexOf(localAnnotation.getAnnotatorID());
@@ -734,13 +734,13 @@ public class XMLCorpusPostProcessorNoMention {
                     } 
                 } else if (inlineAnnotation.getAttributeValue("type").equals("version")) {
                     rs.addAttribute(new Attribute("type", "version"));
-                    rs.addAttribute(new Attribute("corresp", "#software-"+index_entity));
+                    rs.addAttribute(new Attribute("corresp", "#" + docName + "-software-"+index_entity));
                 } else if (inlineAnnotation.getAttributeValue("type").equals("publisher")) {
                     rs.addAttribute(new Attribute("type", "publisher"));
-                    rs.addAttribute(new Attribute("corresp", "#software-"+index_entity));
+                    rs.addAttribute(new Attribute("corresp", "#" + docName + "-software-"+index_entity));
                 } else if (inlineAnnotation.getAttributeValue("type").equals("url")) {
                     rs.addAttribute(new Attribute("type", "url"));
-                    rs.addAttribute(new Attribute("corresp", "#software-"+index_entity));
+                    rs.addAttribute(new Attribute("corresp", "#" + docName + "-software-"+index_entity));
                 }
 
                 int indexAnnotator = annotators.indexOf(localAnnotation.getAnnotatorID());
@@ -1127,9 +1127,14 @@ public class XMLCorpusPostProcessorNoMention {
 
     private void fixIdNCNameElement(org.w3c.dom.Element element) {
         String elementId = element.getAttribute("xml:id");
-        if (elementId != null && elementId.length()>0) {
+        if (elementId != null && elementId.trim().length()>0) {
             String newElementId = doiId2NCName(elementId);
             element.setAttribute("xml:id", newElementId);
+        }
+        String elementCorresp = element.getAttribute("corresp");
+        if (elementCorresp != null && elementCorresp.trim().length()>0) {
+            String newElementCorresp = doiId2NCName(elementCorresp);
+            element.setAttribute("corresp", newElementCorresp);
         }
         for(org.w3c.dom.Node child = element.getFirstChild(); child != null; child = child.getNextSibling()) {
             if (child instanceof org.w3c.dom.Element) {
@@ -1142,6 +1147,9 @@ public class XMLCorpusPostProcessorNoMention {
         if (doi.startsWith("10.")) {
             doi = doi.replace("%", "_");
             doi = "_" + doi;
+        } else  if (doi.startsWith("#10.")) {
+            doi = doi.replace("%", "_");
+            doi = doi.replace("#10", "#_10");
         }
         return doi;
     }
