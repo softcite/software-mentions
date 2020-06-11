@@ -6,7 +6,7 @@ The goal of this GROBID module is to recognize in textual documents and PDF any 
 
 As the other GROBID models, the module relies only on machine learning and can use linear CRF (via [Wapiti](https://github.com/kermitt2/Wapiti) JNI integration) or Deep Learning model such as BiLSTM-CRF, ELMo and BERT (via [DeLFT](https://github.com/kermitt2/delft) JNI integration). 
 
-A description of the task and some preliminary evaluations can be found [here](doc/description.md).
+A description of the task can be found [here](doc/description.md).
 
 Latest performance (accuracy and runtime) can be found [below](https://github.com/Impactstory/software-mentions#Benchmarking).
 
