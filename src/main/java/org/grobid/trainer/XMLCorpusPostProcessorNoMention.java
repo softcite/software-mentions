@@ -516,7 +516,7 @@ public class XMLCorpusPostProcessorNoMention {
                             if (inlineAnnotation.getAttributeValue("type").equals("software")) { 
                                 hasSoftware = true;
                                 rs.addAttribute(new Attribute("type", "software"));
-                                rs.addAttribute(new Attribute("id", docName+"-software-"+index_entity));
+                                rs.addAttribute(new Attribute("xml:id", "http://www.w3.org/XML/1998/namespace", docName+"-software-"+index_entity));
                                 
                                 // do we have a "software_was_used" information?
                                 if (localAnnotation.getIsUsed()) {
@@ -726,7 +726,7 @@ public class XMLCorpusPostProcessorNoMention {
                 if (inlineAnnotation.getAttributeValue("type").equals("software")) { 
                     hasSoftware = true;
                     rs.addAttribute(new Attribute("type", "software"));
-                    rs.addAttribute(new Attribute("id", docName+"-software-"+index_entity));
+                    rs.addAttribute(new Attribute("xml:id", "http://www.w3.org/XML/1998/namespace", docName+"-software-"+index_entity));
                     
                     // do we have a "software_was_used" information?
                     if (localAnnotation.getIsUsed()) {
