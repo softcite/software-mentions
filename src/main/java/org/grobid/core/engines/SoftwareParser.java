@@ -1427,21 +1427,30 @@ public class SoftwareParser extends AbstractParser {
             Element bibl = teiElement("bibl");
             if (biblio.getDOI() != null) {
                 Element idno = teiElement("idno");
-                idno.addAttribute(new Attribute("DOI", null, biblio.getDOI()));
+                idno.addAttribute(new Attribute("type", null, "DOI"));
+                idno.appendChild(biblio.getDOI());
+                bibl.appendChild(idno);
+            } else if (id.startsWith("10.")) {
+                Element idno = teiElement("idno");
+                idno.addAttribute(new Attribute("type", null, "DOI"));
+                idno.appendChild(id);
                 bibl.appendChild(idno);
             }
             if (biblio.getPMCID() != null) {  
                 Element idno = teiElement("idno");
-                idno.addAttribute(new Attribute("PMC", null, biblio.getPMCID()));
+                idno.addAttribute(new Attribute("type", null, "PMC"));
+                idno.appendChild(biblio.getPMCID());
                 bibl.appendChild(idno);
             } else if (id.startsWith("PMC")) {
                 Element idno = teiElement("idno");
-                idno.addAttribute(new Attribute("PMC", null, id));
+                idno.addAttribute(new Attribute("type", null, "PMC"));
+                idno.appendChild(id);
                 bibl.appendChild(idno);
             }
             if (biblio.getPMID() != null) {
                 Element idno = teiElement("idno");
-                idno.addAttribute(new Attribute("PMID", null, biblio.getPMID()));
+                idno.addAttribute(new Attribute("type", null, "PMID"));
+                idno.appendChild(biblio.getPMID());
                 bibl.appendChild(idno);
             }
             sourceDesc.appendChild(bibl);

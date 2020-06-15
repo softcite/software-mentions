@@ -111,7 +111,14 @@ public class XMLCorpusPostProcessorNoMention {
             document = enrichTEIDocumentNoMention(document, documents, pdfPath);
 
             // fix all xml:id which are not valid NCName
-            document = fixIdNCName(document);
+            //document = fixIdNCName(document);
+
+            tei = XMLCorpusPostProcessor.serialize(document, null);
+            document = builder.parse(new InputSource(new StringReader(tei)));
+
+            // normalize document-level identifiers with uniform random hexa keys 
+            // and remove invalid/training docs
+            document = normalizeIdentifiers(document);
 
             tei = XMLCorpusPostProcessor.serialize(document, null);
         } catch(ParserConfigurationException e) {
@@ -326,9 +333,9 @@ public class XMLCorpusPostProcessorNoMention {
 
                 nu.xom.Element root = null;
                 if (localAnnotators.size() > 1) {
-                    root = SoftwareParser.getTEIHeaderSimple(doiId2NCName(docName), biblio, "multiple_annotator");
+                    root = SoftwareParser.getTEIHeaderSimple(docName, biblio, "multiple_annotator");
                 } else {
-                    root = SoftwareParser.getTEIHeaderSimple(doiId2NCName(docName), biblio, "unique_annotator");
+                    root = SoftwareParser.getTEIHeaderSimple(docName, biblio, "unique_annotator");
                 }
                 // empty body for TEI conformance
 
@@ -420,9 +427,9 @@ public class XMLCorpusPostProcessorNoMention {
 
                 nu.xom.Element root = null;
                 if (localAnnotators.size() > 1) {
-                    root = SoftwareParser.getTEIHeaderSimple(doiId2NCName(docName), biblio, "multiple_annotator");
+                    root = SoftwareParser.getTEIHeaderSimple(docName, biblio, "multiple_annotator");
                 } else {
-                    root = SoftwareParser.getTEIHeaderSimple(doiId2NCName(docName), biblio, "unique_annotator");
+                    root = SoftwareParser.getTEIHeaderSimple(docName, biblio, "unique_annotator");
                 }
                 // empty body for TEI conformance
 
@@ -1119,6 +1126,92 @@ public class XMLCorpusPostProcessorNoMention {
             nb_articles_with_annotations+"|-|");
     }
 
+    private org.w3c.dom.Document normalizeIdentifiers(org.w3c.dom.Document document) {
+        // for the document-level entries (<TEI>) to be removed from the corpus
+        List<org.w3c.dom.Element> toRemove = new ArrayList<>();
+
+        org.w3c.dom.Element documentRoot = document.getDocumentElement();
+        XPathFactory xpathFactory = XPathFactory.newInstance();
+        try {
+            XPath xpath = xpathFactory.newXPath();
+            XPathExpression expr = xpath.compile("//TEI");
+            NodeList result = (NodeList)expr.evaluate(document, XPathConstants.NODESET);
+            NodeList nodes = (NodeList) result;
+            for(int i=0; i < nodes.getLength(); i++) {
+                org.w3c.dom.Element teiElement = (org.w3c.dom.Element)nodes.item(i);
+
+                org.w3c.dom.Element teiHeaderElement = XMLCorpusPostProcessor.getFirstDirectChild(teiElement, "teiHeader");
+                if (teiHeaderElement != null) {
+                    org.w3c.dom.Element fileDescElement = XMLCorpusPostProcessor.getFirstDirectChild(teiHeaderElement, "fileDesc");
+                    if (fileDescElement != null) {
+                        String docId = fileDescElement.getAttribute("xml:id");
+                        if (trainingDoc.contains(docId)) {
+                            toRemove.add(teiElement);
+                        }
+
+                        // get an hexadecimal key for this document
+                        String newDocId = HexaKeyGen.getHexaKey(10, true);
+                        fileDescElement.setAttribute("xml:id", newDocId);
+
+                        // keep a trace of the ID under sourceDesc/bibl/idno @origin
+                        org.w3c.dom.Element sourceDescElement = XMLCorpusPostProcessor.getFirstDirectChild(fileDescElement, "sourceDesc");
+                        if (sourceDescElement != null) {
+                            org.w3c.dom.Element biblElement = XMLCorpusPostProcessor.getFirstDirectChild(sourceDescElement, "bibl");
+                            if (biblElement != null) {
+                                org.w3c.dom.Element idnoElement =  document.createElement("idno");
+                                idnoElement.setAttribute("type", "origin");
+                                idnoElement.setTextContent(docId);
+                                biblElement.appendChild(idnoElement);
+                            }
+                        }
+
+                        // update the @xml:id and @corresp attributes for this document
+                        replaceIdNCNameElement(teiElement, docId, newDocId);
+                    }
+                }
+            }
+        } catch(XPathExpressionException e) {
+            e.printStackTrace();
+        }
+
+        for(org.w3c.dom.Element element : toRemove) {
+            element.getParentNode().removeChild(element);
+        }
+
+        // fix idno
+        try {
+            XPath xpath = xpathFactory.newXPath();
+            XPathExpression expr = xpath.compile("//idno");
+            NodeList result = (NodeList)expr.evaluate(document, XPathConstants.NODESET);
+            NodeList nodes = (NodeList) result;
+            for(int i=0; i < nodes.getLength(); i++) {
+                org.w3c.dom.Element idnoElement = (org.w3c.dom.Element)nodes.item(i);
+                // check the attribute is type and fix otherwise
+
+                NamedNodeMap attributes = idnoElement.getAttributes();
+                String idnoType = null;
+                for(int j=0; j < attributes.getLength(); j++) {
+                    org.w3c.dom.Node theAttribute = attributes.item(j);
+                    if (!theAttribute.getNodeName().equals("type")) {
+                        idnoType = theAttribute.getNodeName();
+                        String idnoValue = theAttribute.getNodeValue();
+
+                        idnoElement.setAttribute("type", idnoType);
+                        idnoElement.setTextContent(idnoValue);
+
+                        break;
+                    }
+                }
+                if (idnoType != null)
+                    idnoElement.removeAttribute(idnoType);
+            }
+        } catch(XPathExpressionException e) {
+            e.printStackTrace();
+        }    
+
+        return document;
+    }
+
     private org.w3c.dom.Document fixIdNCName(org.w3c.dom.Document document) {
         org.w3c.dom.Element documentRoot = document.getDocumentElement();
         fixIdNCNameElement(documentRoot);
@@ -1152,6 +1245,24 @@ public class XMLCorpusPostProcessorNoMention {
             doi = doi.replace("#10", "#_10");
         }
         return doi;
+    }
+
+    private void replaceIdNCNameElement(org.w3c.dom.Element element, String oldId, String newId) {
+        String elementId = element.getAttribute("xml:id");
+        if (elementId != null && elementId.trim().length()>0) {
+            String localId = elementId.replace(oldId, newId);
+            element.setAttribute("xml:id", localId);
+        }
+        String elementCorresp = element.getAttribute("corresp");
+        if (elementCorresp != null && elementCorresp.trim().length()>0) {
+            String localId = elementCorresp.replace(oldId, newId);
+            element.setAttribute("corresp", localId);
+        }
+        for(org.w3c.dom.Node child = element.getFirstChild(); child != null; child = child.getNextSibling()) {
+            if (child instanceof org.w3c.dom.Element) {
+                replaceIdNCNameElement((org.w3c.dom.Element)child, oldId, newId);
+            }
+        }
     }
 
     private void importCSVMissingTitles(String csvPath, Map<String, AnnotatedDocument> documents) {

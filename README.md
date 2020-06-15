@@ -186,7 +186,7 @@ For Deep Learning architectures, indicate `delft` and indicate the installation 
 
 
 ```yaml
-engine=delft
+engine: delft
 delftInstall: ../../delft
 delftArchitecture: bilstm-crf
 delftEmbeddings: glove
@@ -196,7 +196,7 @@ delftEmbeddings: glove
 For further selecting the Deep Learning architecture to be used:
 
 ```yaml
-engine=delft
+engine: delft
 delftArchitecture: scibert
 ```
 
@@ -216,7 +216,7 @@ For __BiLSTM-CRF__ you can further specify the embeddings to be used:
 delftEmbeddings: glove
 ```
 
-Other possibilities are `elmo` and `bert`. Note that in the later case, BERT is used to generate contextual embeddings used by the __BiLSTM-CRF__ architecture, in contrast to the usage of a fine-tuned BERT when BERT or SciBERT are selected as architecture.
+Other possibilities are `elmo` and `bert`. Note that in the later case, BERT is used to generate contextual embeddings used by the __BiLSTM-CRF__ architecture, in contrast to the usage of a fine-tuned BERT when BERT or SciBERT are selected as `delftArchitecture`.
 
 Note that the default setting is __CRF Wapiti__, which does not require any further installation.
 
