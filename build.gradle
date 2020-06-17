@@ -172,7 +172,7 @@ artifacts {
 }
 
 task copyModels(type: Copy) {
-    from "${rootDir}/resources/model"
+    from "${rootDir}/resources/models"
     include "*"
     into "${rootDir}/../grobid-home/models/software/"
 }
