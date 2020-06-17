@@ -248,9 +248,25 @@ All are natively integrated in the JVM to provide state-of-the-art performance b
 
 Evaluation made on 03.10.2019 (with update for CRF on 20.05.2020)
 
-The results (Precision, Recall, F-score) for all the models have been obtained using 10-fold cross-validation (average metrics over the 10 folds). We also indicate the best and worst results over the 10 folds in the [complete result page](https://github.com/Impactstory/software-mentions/blob/master/doc/scores-1.0.txt). See [DeLFT](https://github.com/kermitt2/delft) for more details about the models and reproducing all these evaluations. 
+The results (precision, recall, f-score) for all the models have been obtained using 10-fold cross-validation (average metrics over the 10 folds) at entity-level. We also indicate the best and worst results over the 10 folds in the [complete result page](https://github.com/Impactstory/software-mentions/blob/master/doc/scores-1.0.txt). See [DeLFT](https://github.com/kermitt2/delft) for more details about the models and reproducing all these evaluations. 
 
 `<software>` label means “software name”. `<publisher>` corresponds usually to the publisher of the software or, more rarely, the main developer. `<version>` correspond to both version number and version dates, when available. 
+
+**Summary**
+
+|           | `<software>` | `<publisher>` | `<version>` | `<url>`  | **micro-average** |
+|---        | ---          | ---           | ---         | ---      |  ---              | 
+| **CRF**   |   79.64      |   80.6        |    87.47    |   63.15  |     80.95         | 
+|**BiLSTM-CRF**|   77.37      |   79.94       |  **89.55**  |  31.36   |     79.09         | 
+|**BiLSTM-CRF+features**|   79.65 |   86.52   |    85.99    |  48.19   |     80.77         | 
+|**BiLSTM-CRF+ELMo**| **83.63** | **87.07**   |    89.33    |  62.19   |   **84.87**       | 
+|**BiLSTM-CRF+ELMo+features**| 84.80 | 86.80  |    86.74    |  63.21   |     84.70         | 
+|**bert-base-en+CRF**|  73.55  |  71.72        |   78.83     |  45.50   |     73.56         | 
+|**SciBERT+CRF**|     83.62    |  78.59        |   88.97     |**68.77** |     83.54         | 
+
+f-score based on 10-folds cross validation at field level.
+
+**Details**
 
 |          | CRF ||| BiLSTM-CRF ||| BiLSTM-CRF+ELMo|||
 |---       | --- | --- | --- | --- | --- | --- | ---| --- | --- |
@@ -270,7 +286,7 @@ The results (Precision, Recall, F-score) for all the models have been obtained u
 | `<url>`      | 44.99                | 52.27  | 48.19  | 59.31              | 68.64        | 63.21   |
 |**micro-average** | 80.05            | 81.52  | 80.77  | 83.68              | 85.84        | 84.70   |
 
-Evaluation made on 09.01.2020 for BERT fine-tuned architectures:
+Evaluation BERT fine-tuned architectures:
 
 |           | bert-base-en+CRF ||| SciBERT+CRF ||| 
 |---        | --- | --- | --- | --- | --- | --- | 
