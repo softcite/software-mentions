@@ -259,8 +259,8 @@ The results (precision, recall, f-score) for all the models have been obtained u
 | **CRF**   |   79.64      |   80.6        |    87.47    |   63.15  |     80.95         | 
 |**BiLSTM-CRF**|   77.37      |   79.94       |  **89.55**  |  31.36   |     79.09         | 
 |**BiLSTM-CRF+features**|   79.65 |   86.52   |    85.99    |  48.19   |     80.77         | 
-|**BiLSTM-CRF+ELMo**| **83.63** | **87.07**   |    89.33    |  62.19   |   **84.87**       | 
-|**BiLSTM-CRF+ELMo+features**| 84.80 | 86.80  |    86.74    |  63.21   |     84.70         | 
+|**BiLSTM-CRF+ELMo**| 83.63 | **87.07**   |    89.33    |  62.19   |   **84.87**       | 
+|**BiLSTM-CRF+ELMo+features**| **84.80** | 86.80  |    86.74    |  63.21   |     84.70         | 
 |**bert-base-en+CRF**|  73.55  |  71.72        |   78.83     |  45.50   |     73.56         | 
 |**SciBERT+CRF**|     83.62    |  78.59        |   88.97     |**68.77** |     83.54         | 
 
