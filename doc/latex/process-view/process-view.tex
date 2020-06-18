@@ -1,0 +1,56 @@
+\documentclass{article}
+
+\usepackage[latin1]{inputenc}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+
+\begin{document}
+\pagestyle{empty}
+
+
+% Define block styles
+\tikzstyle{block} = [rectangle, draw, fill={rgb:red,1;green,2;blue,3}, text width=5em, text=white, text centered, rounded corners, minimum height=2em]
+\tikzstyle{block_large} = [rectangle, draw, fill={rgb:red,1;green,2;blue,3}, text width=10em, text=white, text centered, rounded corners, minimum height=2em]
+\tikzstyle{block_very_large} = [rectangle, draw, fill={rgb:red,1;green,2;blue,3}, text width=15em, text=white, text centered, rounded corners, minimum height=2em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=orange!20, node distance=2cm,
+    minimum height=2em]
+    
+\begin{tikzpicture}[node distance = 1.5cm, auto]
+    % Place nodes
+    \node [cloud] (pdf) {Open Access PDF};
+    \node [block, below of=pdf] (grobid) {\bf GROBID};  
+%    \node [cloud, right of=init] (system) {system};
+    \node [cloud, below of=grobid, left of=grobid, node distance=3cm] (structures) {text structures};
+    \node [cloud, below of=grobid, right of=grobid, node distance=3cm] (references) {bibliographical references};
+    \node [block_very_large, below of=structures] (recognition) {\bf software mention recognition};
+    \node [cloud, below of=recognition] (candidates) {software entitity candidates};
+    \node [block_very_large, below of=candidates] (disambiguation) {\bf in context entity disambiguation (entity-fishing)};
+    \node [block_large, below of=disambiguation] (filtering) {\bf entity filtering};
+    \node [cloud, right of=filtering, node distance=6cm] (attachment) {attached references};
+    \node [block_large, below of=attachment] (glutton) {\bf biblio-glutton};
+    \node [cloud, below of=glutton] (disam_ref) {disambiguated references};
+    \node [cloud, left of=disam_ref, node distance=6cm] (full) {full software entities};
+    \node [block_very_large, below of=full] (populating) {\bf knowledge base populating};
+    \node [block_very_large, below of=populating] (dedup) {\bf deduplication \& matching};
+    
+    % Draw edges
+    \path [line] (pdf) -- (grobid);
+    \path [line] (grobid) -- (structures);
+    \path [line] (grobid) -- (references);
+    \path [line] (structures) -- (recognition);
+    \path [line] (recognition) -- (candidates);
+    \path [line] (candidates) -- (disambiguation);
+    \path [line] (disambiguation) -- (filtering);
+    \path [line] (references) -- (attachment);
+    \path [line] (filtering) -- (attachment);
+    \path [line] (attachment) -- (glutton);
+    \path [line] (glutton) -- (disam_ref);
+    \path [line] (disam_ref) -- (full);
+    \path [line] (filtering) -- (full);
+    \path [line] (full) -- (populating);
+    \path [line] (populating) -- (dedup);
+\end{tikzpicture}
+
+
+\end{document}

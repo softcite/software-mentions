@@ -252,7 +252,7 @@ The results (precision, recall, f-score) for all the models have been obtained u
 
 `<software>` label means “software name”. `<publisher>` corresponds usually to the publisher of the software or, more rarely, the main developer. `<version>` correspond to both version number and version dates, when available. 
 
-**Summary**
+#### Summary
 
 |           | `<software>` | `<publisher>` | `<version>` | `<url>`  | **micro-average** |
 |---        | ---          | ---           | ---         | ---      |  ---              | 
@@ -266,7 +266,7 @@ The results (precision, recall, f-score) for all the models have been obtained u
 
 f-score based on 10-folds cross validation at field level.
 
-**Details**
+#### Detailed scores
 
 |          | CRF ||| BiLSTM-CRF ||| BiLSTM-CRF+ELMo|||
 |---       | --- | --- | --- | --- | --- | --- | ---| --- | --- |
