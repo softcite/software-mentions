@@ -109,6 +109,8 @@ public class SoftwareDisambiguator {
             nerd_host = configuration.getEntityFishingHost();
             nerd_port = configuration.getEntityFishingPort();
             serverStatus = checkIfAlive();
+            if (serverStatus == true)
+                ensureCustomizationReady();
         } catch(Exception e) {
             LOGGER.error("Cannot read properties for disambiguation service", e);
         }
@@ -121,7 +123,6 @@ public class SoftwareDisambiguator {
      */
     public boolean checkIfAlive() {
         boolean result = false;
-
         try {
             URL url = null;
             if ( (nerd_port != null) && (nerd_port.length() > 0) )
@@ -130,6 +131,7 @@ public class SoftwareDisambiguator {
                 url = new URL("http://" + nerd_host + "/service/isalive");
 
             LOGGER.debug("Calling: " + url.toString());
+//System.out.println("Calling: " + url.toString());
             CloseableHttpClient httpClient = HttpClients.createDefault();
             HttpGet get = new HttpGet(url.toString());
 
@@ -137,8 +139,7 @@ public class SoftwareDisambiguator {
             Scanner in = null;
             try {
                 response = httpClient.execute(get);
-                // System.out.println(response.getStatusLine());
-
+//System.out.println(response.getStatusLine());
                 int code = response.getStatusLine().getStatusCode();
                 if (code != 200) {
                     LOGGER.error("Failed isalive service: HTTP error code : " + code);
@@ -161,6 +162,96 @@ public class SoftwareDisambiguator {
         }
 
         return result;
+    }
+
+    /**
+     * Check if the software customisation is ready on the entity-fishing server, if not load it 
+     */
+    public void ensureCustomizationReady() {
+        boolean result = false;
+        URL url = null;
+        CloseableHttpResponse response = null;
+        try {
+            if ( (nerd_port != null) && (nerd_port.length() > 0) )
+                url = new URL("http://" + nerd_host + ":" + nerd_port + "/service/customisation/software");
+            else
+                url = new URL("http://" + nerd_host + "/service/customisation/software");
+
+            LOGGER.debug("Calling: " + url.toString());
+//System.out.println("Calling: " + url.toString());
+            CloseableHttpClient httpClient = HttpClients.createDefault();
+            HttpGet get = new HttpGet(url.toString());
+            Scanner in = null;
+            try {
+                response = httpClient.execute(get);
+                // Sytem.out.println(response.getStatusLine());
+                int code = response.getStatusLine().getStatusCode();
+                if (code != 200) {
+                    LOGGER.error("Failed customization lookup service: HTTP error code : " + code);
+                } else {
+                    result = true;
+                }
+            } finally {
+                if (in != null)
+                    in.close();
+                if (response != null)
+                    response.close();
+            }
+        } catch (MalformedURLException e) {
+            LOGGER.error("disambiguation service not available: MalformedURLException");
+        } catch (HttpHostConnectException e) {
+            LOGGER.error("cannot connect to the disambiguation service");
+        } catch(Exception e) {
+            LOGGER.error("disambiguation service not available", e);
+        }
+
+        if (!result && url != null) {
+            LOGGER.info("Software customisation not present on server, loading it...");
+            try {
+                if ( (nerd_port != null) && (nerd_port.length() > 0) )
+                    url = new URL("http://" + nerd_host + ":" + nerd_port + "/service/customisations");
+                else
+                    url = new URL("http://" + nerd_host + "/service/customisations");
+
+                LOGGER.debug("Calling: " + url.toString());
+//System.out.println("Calling: " + url.toString());
+                // load the software customisation
+                File cutomisationFile = new File("resources/config/customisation-software.json");
+                String json = FileUtils.readFileToString(cutomisationFile, "UTF-8");
+
+                CloseableHttpClient httpClient = HttpClients.createDefault();
+                HttpPost post = new HttpPost(url.toString());
+
+                //StringBody stringValue = new StringBody(json, ContentType.MULTIPART_FORM_DATA);
+                //StringBody stringName = new StringBody("software", ContentType.MULTIPART_FORM_DATA);
+                MultipartEntityBuilder builder = MultipartEntityBuilder.create();
+                builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+                builder.addTextBody("value", json);
+                builder.addTextBody("name", "software");
+                //builder.addPart("value", stringValue);
+                //builder.addPart("name", stringName);
+                HttpEntity entity = builder.build();
+                try {
+                    post.setEntity(entity);
+                    response = httpClient.execute(post);
+//System.out.println(response.getStatusLine());
+
+                    int code = response.getStatusLine().getStatusCode();
+                    if (code != 200) {
+                        LOGGER.error("Failed loading software customisation: HTTP error code : " + code);
+                    } else {
+                        LOGGER.info("Software customisation loaded");
+                    }
+                } finally {
+                    if (response != null)
+                        response.close();
+                }
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
@@ -372,7 +463,7 @@ public class SoftwareDisambiguator {
                 url = new URL("http://" + nerd_host + ":" + nerd_port + "/service/" + RESOURCEPATH);
             else
                 url = new URL("http://" + nerd_host + "/service/" + RESOURCEPATH);
-
+//System.out.println(url.toString());
             CloseableHttpClient httpClient = HttpClients.createDefault();
             HttpPost post = new HttpPost(url.toString());
             //post.addHeader("Content-Type", "application/json");
@@ -433,7 +524,7 @@ public class SoftwareDisambiguator {
                 buffer.append(" }");
             }
 
-            buffer.append("], \"full\": true }");
+            buffer.append("], \"full\": true, \"customisation\": \"software\", \"minSelectorScore\": 0.2 }");
             //buffer.append("] }");
             LOGGER.debug(buffer.toString());
 //System.out.println(buffer.toString());
