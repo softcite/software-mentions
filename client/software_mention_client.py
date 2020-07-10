@@ -222,12 +222,18 @@ class software_mention_client(object):
             for key, value in cursor:
                 nb_total += 1
                 result = value.decode(encoding='UTF-8')
+                local_id = key.decode(encoding='UTF-8')
                 if result == "False":
                     # reprocess
-                    pdf_files.append(os.path.join(data_path, generateStoragePath(local_entry['id']), local_entry['id']+".pdf"))
-                    out_files.append(os.path.join(data_path, generateStoragePath(local_entry['id']), local_entry['id']+".software.json"))
-                    # TBD get the full record from the data_path env
-                    full_records.append(None)
+                    print("reprocess", local_id)
+                    pdf_files.append(os.path.join(data_path, generateStoragePath(local_id), local_id, local_id+".pdf"))
+                    out_files.append(os.path.join(data_path, generateStoragePath(local_id), local_id, local_id+".software.json"))
+                    # get the full record from the data_path env
+                    json_file = os.path.join(data_path, generateStoragePath(local_id), local_id, local_id+".json")
+                    if os.path.isfile(json_file):
+                        with open(json_file) as f:
+                            full_record = json.load(f)
+                        full_records.append(full_record)
                     i += 1
 
             if i == self.config["batch_size"]:
@@ -286,7 +292,7 @@ class software_mention_client(object):
         if response.status_code == 503:
             print('service overloaded, sleep', self.config['sleep_time'], seconds)
             time.sleep(self.config['sleep_time'])
-            return annotate(file_in, self.config, file_out, full_record)
+            return self.annotate(file_in, self.config, file_out, full_record)
         elif response.status_code >= 500:
             print('[{0}] Server Error'.format(response.status_code), file_in)
         elif response.status_code == 404:
