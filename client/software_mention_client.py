@@ -397,7 +397,6 @@ class software_mention_client(object):
             nb_ref = 0
             has_ref = 0
             for result in results:
-                print(result)
                 has_ref += 1
                 the_references = result.get("references")
                 nb_ref += len(the_references)
