@@ -534,10 +534,10 @@ public class XMLCorpusPostProcessorNoMention {
                                 rs.addAttribute(new Attribute("corresp", "#" + docName + "-software-"+index_entity));
                             } else if (inlineAnnotation.getAttributeValue("type").equals("publisher")) {
                                 rs.addAttribute(new Attribute("type", "publisher"));
-                                rs.addAttribute(new Attribute("corresp", "#" + docName + "software-"+index_entity));
+                                rs.addAttribute(new Attribute("corresp", "#" + docName + "-software-"+index_entity));
                             } else if (inlineAnnotation.getAttributeValue("type").equals("url")) {
                                 rs.addAttribute(new Attribute("type", "url"));
-                                rs.addAttribute(new Attribute("corresp", "#" + docName + "software-"+index_entity));
+                                rs.addAttribute(new Attribute("corresp", "#" + docName + "-software-"+index_entity));
                             }
 
                             int indexAnnotator = annotators.indexOf(localAnnotation.getAnnotatorID());
