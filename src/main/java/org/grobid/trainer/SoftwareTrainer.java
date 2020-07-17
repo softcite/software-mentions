@@ -17,6 +17,7 @@ import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.Pair;
 import org.grobid.core.utilities.SoftwareConfiguration;
 import org.grobid.trainer.evaluation.EvaluationUtilities;
+import org.grobid.core.engines.tagging.GenericTagger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
@@ -35,9 +36,9 @@ import java.util.List;
  */
 public class SoftwareTrainer extends AbstractTrainer {
 
-    private SoftwareLexicon softwareLexicon = null;
+    protected SoftwareLexicon softwareLexicon = null;
 
-    private SoftwareConfiguration conf = null;
+    protected SoftwareConfiguration conf = null;
 
     public SoftwareTrainer() {
         this(0.00001, 20, 0);
@@ -69,6 +70,7 @@ public class SoftwareTrainer extends AbstractTrainer {
      * PDf layer. The two types of training files suppose two different process in order to
      * generate the CRF training file.
      */
+    @Override
     public int createCRFPPData(File sourcePathLabel,
                                File outputPath) {
         return createCRFPPData(sourcePathLabel, outputPath, null, 1.0);
@@ -79,6 +81,7 @@ public class SoftwareTrainer extends AbstractTrainer {
      * automatically all available labeled data into training and evaluation data
      * according to a given split ratio.
      */
+    @Override
     public int createCRFPPData(final File corpusDir,
                                final File trainingOutputPath,
                                final File evalOutputPath,
@@ -585,7 +588,7 @@ public class SoftwareTrainer extends AbstractTrainer {
     }*/
 
     @SuppressWarnings({"UnusedParameters"})
-    private void addFeatures(List<Pair<String, String>> texts,
+    protected void addFeatures(List<Pair<String, String>> texts,
                              Writer writer,
                              List<OffsetPosition> softwareTokenPositions,
                              List<OffsetPosition> urlPositions) {
@@ -668,18 +671,39 @@ public class SoftwareTrainer extends AbstractTrainer {
     /**
      * Standard evaluation via the the usual Grobid evaluation framework.
      */
+    @Override
     public String evaluate() {
+        System.out.println("------------------------SoftwareTrainer -> evaluate");
+        return evaluate(false);
+    }
+
+    @Override
+    public String evaluate(boolean includeRawResults) {
+        System.out.println("------------------------SoftwareTrainer -> evaluate");
         File evalDataF = GrobidProperties.getInstance().getEvalCorpusPath(
                 new File(new File("resources").getAbsolutePath()), model);
 
         File tmpEvalPath = getTempEvaluationDataPath();
         createCRFPPData(evalDataF, tmpEvalPath);
 
-        return EvaluationUtilities.evaluateStandard(tmpEvalPath.getAbsolutePath(), getTagger()).toString();
+        return EvaluationUtilities.evaluateStandard(tmpEvalPath.getAbsolutePath(), getTagger()).toString(includeRawResults);
     }
 
-    public String splitTrainEvaluate(Double split, boolean random) {
-        System.out.println("Paths :\n" + getCorpusPath() + "\n" + GrobidProperties.getModelPath(model).getAbsolutePath() + "\n" + getTempTrainingDataPath().getAbsolutePath() + "\n" + getTempEvaluationDataPath().getAbsolutePath() + " \nrand " + random);
+    @Override
+    public String evaluate(GenericTagger tagger, boolean includeRawResults) {
+        System.out.println("------------------------SoftwareTrainer -> evaluate");
+        File evalDataF = GrobidProperties.getInstance().getEvalCorpusPath(
+                new File(new File("resources").getAbsolutePath()), model);
+
+        File tmpEvalPath = getTempEvaluationDataPath();
+        createCRFPPData(evalDataF, tmpEvalPath);
+
+        return EvaluationUtilities.evaluateStandard(tmpEvalPath.getAbsolutePath(), tagger).toString(includeRawResults);
+    }
+
+    @Override
+    public String splitTrainEvaluate(Double split) {
+        System.out.println("Paths :\n" + getCorpusPath() + "\n" + GrobidProperties.getModelPath(model).getAbsolutePath() + "\n" + getTempTrainingDataPath().getAbsolutePath() + "\n" + getTempEvaluationDataPath().getAbsolutePath());// + " \nrand " + random);
 
         File trainDataPath = getTempTrainingDataPath();
         File evalDataPath = getTempEvaluationDataPath();

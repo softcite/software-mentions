@@ -17,7 +17,8 @@ import java.io.File;
  */
 public class SoftwareTrainerRunner {
 
-    private static final String USAGE = "Usage: {0 - train, 1 - evaluate, 2 - split, train and evaluate, 3 - eval with n-fold} {software} "
+    private static final String USAGE = "Usage: {0 - train, 1 - evaluate, 2 - split, train and evaluate, 3 - eval with n-fold} "
+            + "{software, software_desambiguation, software_doc_level} "
             + "-s { [0.0 - 1.0] - split ratio, optional} "
             + "-b {epsilon, window, nbMax}"
             + "-t NBThreads";
@@ -131,7 +132,18 @@ public class SoftwareTrainerRunner {
             throw new IllegalStateException(USAGE);
         }
 
-        SoftwareTrainer trainer = new SoftwareTrainer();
+        SoftwareTrainer trainer = null;
+        if ("software".equals(args[1])) { 
+            trainer = new SoftwareTrainer();
+        } else if ("software_desambiguation".equals(args[1])) {  
+            trainer = new SoftwareExtendedEval();
+        } else if ("software_doc_level".equals(args[1])) { 
+            System.out.println("software_doc_level evaluation not yet implemented");
+            System.exit(0);
+        } else {
+            System.out.println("type of train/eval scope not expected: " + args[1]);
+            System.exit(0);
+        }
         trainer.setSoftwareConf(conf);
 
         /*if (breakParams)

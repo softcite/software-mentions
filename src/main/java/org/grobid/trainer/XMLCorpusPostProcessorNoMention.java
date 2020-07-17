@@ -101,8 +101,8 @@ public class XMLCorpusPostProcessorNoMention {
         // we unfortunately need to use DOM to update the XML file which is always a lot of pain
         String tei = null;
         org.w3c.dom.Document document = null;
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         try {
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             tei = FileUtils.readFileToString(new File(xmlCorpusPath), UTF_8);
 
@@ -129,9 +129,31 @@ public class XMLCorpusPostProcessorNoMention {
             e.printStackTrace();
         } 
 
-        // write updated TEI file
+        // write updated full TEI file
         if (tei != null) {
-            FileUtils.writeStringToFile(new File(newXmlCorpusPath), tei, UTF_8);
+            FileUtils.writeStringToFile(new File(newXmlCorpusPath.replace(".tei.xml", "-full.tei.xml")), tei, UTF_8);        
+
+            // write a more compact TEI file without no mention entries and without the non aligned segments (<ab>)
+            try {
+                DocumentBuilder builder = factory.newDocumentBuilder();
+                document = builder.parse(new InputSource(new StringReader(tei)));
+                document = prune(document);
+                tei = XMLCorpusPostProcessor.serialize(document, null);
+
+                document = builder.parse(new InputSource(new StringReader(tei)));
+                tei = XMLCorpusPostProcessor.serialize(document, null);
+            } catch(ParserConfigurationException e) {
+                e.printStackTrace();
+            } catch(IOException e) {
+                e.printStackTrace();
+            } catch(Exception e) {
+                e.printStackTrace();
+            } 
+
+            // write updated full TEI file
+            if (tei != null) {
+                FileUtils.writeStringToFile(new File(newXmlCorpusPath), tei, UTF_8);
+            }
         }
 
         //this.generalCountAnnotations(documents, annotations, xmlCorpusPath);
@@ -1212,6 +1234,48 @@ public class XMLCorpusPostProcessorNoMention {
         return document;
     }
 
+    /**
+     * Remove <ab> elements and doc entries without text content 
+     */
+    private org.w3c.dom.Document prune(org.w3c.dom.Document document) {
+        // remove <ab> elements
+        NodeList theElements = document.getElementsByTagName("ab");
+        for(int i=theElements.getLength()-1; i >= 0; i--) {
+            org.w3c.dom.Element theElement = (org.w3c.dom.Element)theElements.item(i);
+            theElement.getParentNode().removeChild(theElement);
+        }
+
+        // remove doc entries (<TEI> elements) having <body> without content 
+        XPathFactory xpathFactory = XPathFactory.newInstance();
+        try {
+            XPath xPath = xpathFactory.newXPath();
+            String expression = "//TEI/text/body";
+            NodeList nodes = (NodeList) xPath.compile(expression).evaluate(document, XPathConstants.NODESET);
+            for(int i=nodes.getLength()-1; i >= 0 ; i--) {
+                org.w3c.dom.Element bodyElement = (org.w3c.dom.Element)nodes.item(i);
+                // if the bodyElement has no child, we will remove the TEI entry
+                if (!bodyElement.hasChildNodes()) {
+                    // get TEI parent, if we are here we're sure these elements exist
+                    org.w3c.dom.Element textElement = (org.w3c.dom.Element)bodyElement.getParentNode();
+                    org.w3c.dom.Element teiElement = (org.w3c.dom.Element)textElement.getParentNode();
+                    teiElement.getParentNode().removeChild(teiElement);
+                } else {
+                    // check if we have no <p> element
+                    if (XMLCorpusPostProcessor.getFirstDirectChild(bodyElement, "p") == null) {
+                        org.w3c.dom.Element textElement = (org.w3c.dom.Element)bodyElement.getParentNode();
+                        org.w3c.dom.Element teiElement = (org.w3c.dom.Element)textElement.getParentNode();
+                        teiElement.getParentNode().removeChild(teiElement);
+                    }
+                }
+
+            }
+        } catch(XPathExpressionException e) {
+            e.printStackTrace();
+        }    
+
+        return document;
+    }
+
     private org.w3c.dom.Document fixIdNCName(org.w3c.dom.Document document) {
         org.w3c.dom.Element documentRoot = document.getDocumentElement();
         fixIdNCNameElement(documentRoot);
@@ -1351,15 +1415,34 @@ public class XMLCorpusPostProcessorNoMention {
             System.exit(-1);
         }  
 
+        String outputXmlPathTmp = outputXmlPath.replace(".xml", ".tmp.xml");
+
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         SoftwareConfiguration conf = mapper.readValue(new File("resources/config/config.yml"), SoftwareConfiguration.class);
 
-        XMLCorpusPostProcessorNoMention postProcessor = new XMLCorpusPostProcessorNoMention(conf);
+        // post processing has two steps
+        // first one add information to the curated dataset
+        XMLCorpusPostProcessor postProcessor = new XMLCorpusPostProcessor(conf);
         try {
-            postProcessor.process(xmlPath, csvPath, pdfPath, outputXmlPath);
+            postProcessor.process(xmlPath, csvPath, outputXmlPathTmp);
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        // second one add complementary information for document without mentions and non matching contexts
+        XMLCorpusPostProcessorNoMention postProcessorNoMention = new XMLCorpusPostProcessorNoMention(conf);
+        try {
+            postProcessorNoMention.process(outputXmlPathTmp, csvPath, pdfPath, outputXmlPath);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // deleting tmp file
+        File tmpFile = new File(outputXmlPathTmp);
+        if (tmpFile.exists()) {
+            tmpFile.delete();
+        }
+
         System.exit(0);
     }
 }

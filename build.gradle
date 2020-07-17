@@ -212,6 +212,22 @@ task(eval_software, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
 //    jvmArgs '-Xms2g', '-Xmx8g'
 }
 
+// Run like this: ./gradlew eval_software_desambiguation -PgH=/path/grobid/home
+task(eval_software_desambiguation, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
+    main = 'org.grobid.trainer.SoftwareTrainerRunner'
+    classpath = sourceSets.main.runtimeClasspath
+    args '1', 'software_desambiguation', getArg('gH', '../grobid-home')
+//    jvmArgs '-Xms2g', '-Xmx8g'
+}
+
+// Run like this: ./gradlew eval_software_doc_level -PgH=/path/grobid/home
+task(eval_software_doc_level, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
+    main = 'org.grobid.trainer.SoftwareTrainerRunner'
+    classpath = sourceSets.main.runtimeClasspath
+    args '1', 'eval_software_doc_level', getArg('gH', '../grobid-home')
+//    jvmArgs '-Xms2g', '-Xmx8g'
+}
+
 // Run like this: ./gradlew eval_software_split -PgH=/path/grobid/home -Ps=0.8 -Pt=10
 task(eval_software_split, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
     main = 'org.grobid.trainer.SoftwareTrainerRunner'
