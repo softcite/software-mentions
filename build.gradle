@@ -269,15 +269,15 @@ task(clean_tei_corpus_file, dependsOn: 'classes', type: JavaExec, group: 'import
 }
 
 // Run like this: ./gradlew post_process_corpus -Pxml=/path/input/corpus/tei/xml/file -Pcsv=path/csv -Poutput=/output/path/tei/corpus/file
-task(post_process_corpus, dependsOn: 'classes', type: JavaExec, group: 'import') {
+/*task(post_process_corpus, dependsOn: 'classes', type: JavaExec, group: 'import') {
     main = 'org.grobid.trainer.XMLCorpusPostProcessor'
     classpath = sourceSets.main.runtimeClasspath
     args getArg('xml', ''), getArg('csv', ''), getArg('output', '')
     jvmArgs '-Xms2g', '-Xmx8g'
-}
+}*/
 
 // Run like this: ./gradlew post_process_corpus_no_mention -Pxml=/path/input/corpus/tei/xml/file -Pcsv=path/csv -Ppdf=path/pdf -Poutput=/output/path/tei/corpus/file
-task(post_process_corpus_no_mention, dependsOn: 'classes', type: JavaExec, group: 'import') {
+task(post_process_corpus, dependsOn: 'classes', type: JavaExec, group: 'import') {
     main = 'org.grobid.trainer.XMLCorpusPostProcessorNoMention'
     classpath = sourceSets.main.runtimeClasspath
     args getArg('xml', ''), getArg('csv', ''), getArg('pdf', ''), getArg('output', '')

@@ -409,18 +409,19 @@ The compiled XML training files will be written in the standard GROBID training 
 
 ### Post-processing for adding provenance information in the corpus XML TEI file
 
-Once the generated snippet-oriented corpus TEI file is generated, manually reviewed and reconciled, it is possible to re-inject back provenance information (when possible) with the following command:
+Once the snippet-oriented corpus TEI file is generated, manually reviewed and reconciled, it is possible to re-inject back provenance information (when possible), normalize identifiers, add document entries without mention and segments not aligned with actual article content via GROBID, and filter training articles, with the following command:
 
 ```console
-> ./gradlew post_process_corpus -Pxml=/path/input/corpus/tei/xml/file -Pcsv=path/csv -Poutput=/output/path/tei/corpus/file
+> ./gradlew post_process_corpus -Pxml=/path/input/corpus/tei/xml/file -Pcsv=path/csv -Ppdf=path/pdf -Poutput=/output/path/tei/corpus/file
 ```
-
 
 For instance 
 
 ```console
-> ./gradlew post_process_corpus -Pxml=/home/lopez/grobid/software-mentions/resources/dataset/software/corpus/all.clean.tei.xml -Pcsv=/home/lopez/tools/softcite-dataset/data/csv_dataset/ -Poutput=/home/lopez/grobid/software-mentions/resources/dataset/software/corpus/all_clean_post_processed.tei.xml
+> ./gradlew post_process_corpus -Pxml=/home/lopez/grobid/software-mentions/resources/dataset/software/corpus/all.clean.tei.xml -Pcsv=/home/lopez/tools/softcite-dataset/data/csv_dataset/ -Ppdf=/home/lopez/tools/softcite-dataset/pdf/ -Poutput=/home/lopez/grobid/software-mentions/resources/dataset/software/corpus/all_clean_post_processed.tei.xml
 ```
+
+The post-process corpus is a TEI corpus dataset corresponding to the released and delivery format of the Softcite dataset. 
 
 ### Inter-Annotator Agreement measures
 
