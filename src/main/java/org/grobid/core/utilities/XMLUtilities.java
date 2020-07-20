@@ -14,6 +14,7 @@ import org.w3c.dom.*;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
 import org.grobid.core.document.xml.XmlBuilderUtils;
 
@@ -56,6 +57,106 @@ public class XMLUtilities {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static Element getFirstDirectChild(Element parent, String name) {
+        for(Node child = parent.getFirstChild(); child != null; child = child.getNextSibling()) {
+            if (child instanceof Element && name.equals(child.getNodeName())) 
+                return (Element) child;
+        }
+        return null;
+    }
+
+    public static Element getLastDirectChild(Element parent, String name) {
+        NodeList children = parent.getChildNodes();
+        for(int j=children.getLength()-1; j>0; j--) {
+            Node child = children.item(j); 
+            if (child instanceof Element && name.equals(child.getNodeName())) 
+                return (Element) child;
+        }
+        return null;
+    }
+
+    public static String getText(Element element) {
+        StringBuffer buf = new StringBuffer();
+        NodeList list = element.getChildNodes();
+        boolean found = false;
+        for (int i = 0; i < list.getLength(); i++) {
+            Node node = list.item(i);
+            if (node.getNodeType() == Node.TEXT_NODE) {
+                buf.append(node.getNodeValue());
+                found = true;
+            }
+        }
+        return found ? buf.toString() : null;
+    }
+
+    public static Pair<String,String> getLeftRightTextContent(Element current) {
+        // right text
+        Node sibling = current.getNextSibling();
+        while (null != sibling && sibling.getNodeType() != Node.TEXT_NODE) {
+            sibling = sibling.getNextSibling();
+        }
+        String right = null;
+        if (sibling != null)
+            right = ((Text)sibling).getNodeValue();
+
+        // left text
+        sibling = current.getPreviousSibling();
+        while (null != sibling && sibling.getNodeType() != Node.TEXT_NODE) {
+            sibling = sibling.getPreviousSibling();
+        }
+        String left = null;
+        if (sibling != null)
+            left = ((Text)sibling).getNodeValue();
+
+        return Pair.of(left, right);
+    }
+
+    public static String serialize(org.w3c.dom.Document doc, Node node) {
+        // to avoid issues with space reamining from deleted nodes
+        try {
+            XPathFactory xpathFactory = XPathFactory.newInstance();
+            // XPath to find empty text nodes.
+            XPathExpression xpathExp = xpathFactory.newXPath().compile(
+                    "//text()[normalize-space(.) = '']");  
+            NodeList emptyTextNodes = (NodeList) 
+                    xpathExp.evaluate(doc, XPathConstants.NODESET);
+
+            // Remove each empty text node from document.
+            for (int i = 0; i < emptyTextNodes.getLength(); i++) {
+                Node emptyTextNode = emptyTextNodes.item(i);
+                emptyTextNode.getParentNode().removeChild(emptyTextNode);
+            }
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        }
+
+        DOMSource domSource = null;
+        String xml = null;
+        try {
+            if (node == null) {
+                domSource = new DOMSource(doc);
+            } else {
+                domSource = new DOMSource(node);
+            }
+            StringWriter writer = new StringWriter();
+            StreamResult result = new StreamResult(writer);
+            TransformerFactory tf = TransformerFactory.newInstance();
+            Transformer transformer = tf.newTransformer();
+            transformer.setOutputProperty(OutputKeys.METHOD, "xml");
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+
+            if (node != null)
+                transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+            transformer.transform(domSource, result);
+            xml = writer.toString();
+        } catch(TransformerException ex) {
+            ex.printStackTrace();
+        }
+        return xml;
     }
 
 

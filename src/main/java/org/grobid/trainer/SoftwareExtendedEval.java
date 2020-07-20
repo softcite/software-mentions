@@ -63,13 +63,11 @@ public class SoftwareExtendedEval extends SoftwareTrainer {
      */
     @Override
     public String evaluate() {
-        System.out.println("------------------------SoftwareExtendedEval -> evaluate");
         return evaluate(false);
     }
 
     @Override
     public String evaluate(boolean includeRawResults) {
-        System.out.println("------------------------SoftwareExtendedEval -> evaluate");
         File evalDataF = GrobidProperties.getInstance().getEvalCorpusPath(
                 new File(new File("resources").getAbsolutePath()), model);
 
@@ -81,7 +79,6 @@ public class SoftwareExtendedEval extends SoftwareTrainer {
 
     @Override
     public String evaluate(GenericTagger tagger, boolean includeRawResults) {
-        System.out.println("------------------------SoftwareExtendedEval -> evaluate");
         File evalDataF = GrobidProperties.getInstance().getEvalCorpusPath(
                 new File(new File("resources").getAbsolutePath()), model);
 
@@ -93,7 +90,6 @@ public class SoftwareExtendedEval extends SoftwareTrainer {
 
     @Override
     public String splitTrainEvaluate(Double split) {
-        System.out.println("------------------------SoftwareExtendedEval -> splitTrainEvaluate");
         System.out.println("Paths :\n" + getCorpusPath() + "\n" + GrobidProperties.getModelPath(model).getAbsolutePath() + "\n" + getTempTrainingDataPath().getAbsolutePath() + "\n" + getTempEvaluationDataPath().getAbsolutePath());// + " \nrand " + random);
 
         File trainDataPath = getTempTrainingDataPath();
@@ -130,7 +126,6 @@ public class SoftwareExtendedEval extends SoftwareTrainer {
                                final File evalOutputPath,
                                double splitRatio,
                                boolean splitRandom) {
-        System.out.println("------------------------SoftwareExtendedEval -> createCRFPPData");
         int totalExamples = 0;
         Writer writerTraining = null;
         Writer writerEvaluation = null;
@@ -237,9 +232,7 @@ public class SoftwareExtendedEval extends SoftwareTrainer {
     }
 
     public ModelStats evaluateStandard(String path, Function<List<String>, String> taggerFunction) {
-        System.out.println("------------------------SoftwareExtendedEval -> evaluateStandard");
         String theResult = null;
-
         try {
             final BufferedReader bufReader = new BufferedReader(new InputStreamReader(new FileInputStream(path), StandardCharsets.UTF_8));
 
@@ -287,7 +280,7 @@ System.out.println("nb line localInstance:" + localInstanceLines.length);
                 String text = textBuilder.toString();
 
                 // filter out software mentions based on entity disambiguation
-System.out.println("text: " + text);
+//System.out.println("text: " + text);
 
                 List<SoftwareComponent> components = softwareParser.extractSoftwareComponents(text, localInstance, tokens);
 

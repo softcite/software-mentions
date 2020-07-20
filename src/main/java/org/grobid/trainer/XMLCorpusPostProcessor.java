@@ -4,6 +4,7 @@ import org.grobid.core.analyzers.SoftwareAnalyzer;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.utilities.ArticleUtilities;
 import org.grobid.core.utilities.SoftwareConfiguration;
+import org.grobid.core.utilities.XMLUtilities;
 
 import org.grobid.trainer.SoftciteAnnotation.AnnotationType;
 
@@ -90,7 +91,7 @@ public class XMLCorpusPostProcessor {
             document = enrichTEIDocument(document, documents);
             //document.getDocumentElement().normalize();
 
-            tei = serialize(document, null);
+            tei = XMLUtilities.serialize(document, null);
         } catch(ParserConfigurationException e) {
             e.printStackTrace();
         } catch(IOException e) {
@@ -118,9 +119,9 @@ public class XMLCorpusPostProcessor {
             // get the document id (e.g. PMC identifier)
             // it is under teiHeader/fileDesc/@xml:id
             String pmcid = null;
-            Element teiHeaderElement = this.getFirstDirectChild(teiElement, "teiHeader");
+            Element teiHeaderElement = XMLUtilities.getFirstDirectChild(teiElement, "teiHeader");
             if (teiHeaderElement != null) {
-                Element fileDescElement = this.getFirstDirectChild(teiHeaderElement, "fileDesc");
+                Element fileDescElement = XMLUtilities.getFirstDirectChild(teiHeaderElement, "fileDesc");
                 if (fileDescElement != null) {
                     pmcid = fileDescElement.getAttribute("xml:id");
                 }
@@ -143,10 +144,10 @@ public class XMLCorpusPostProcessor {
             teiElement.setAttribute("type", "article");
 
             // get text element (unique) for this document
-            Element textElement = this.getFirstDirectChild(teiElement, "text");
+            Element textElement = XMLUtilities.getFirstDirectChild(teiElement, "text");
             if (textElement != null) {
                 // get body element (unique) for this document
-                Element bodyElement = this.getFirstDirectChild(textElement, "body");
+                Element bodyElement = XMLUtilities.getFirstDirectChild(textElement, "body");
                 if (bodyElement != null) {
                     // iterate through the snippets (p)
                     int l = 0;
@@ -169,7 +170,7 @@ public class XMLCorpusPostProcessor {
                                     entityElement.setAttribute("xml:id", pmcid+"-software-simple-"+l);
                                 }
                             }
-                            String localText = this.getText(entityElement);
+                            String localText = XMLUtilities.getText(entityElement);
 
                             // rename creator to publisher
                             if (type != null && type.equals("creator")) {    
@@ -229,7 +230,7 @@ public class XMLCorpusPostProcessor {
                                     ) {
                                     // we need to check the context around to validate the match
                                     // get the first text node on the right and left 
-                                    Pair<String,String> textImmediateContexts = getLeftRightTextContent(entityElement);
+                                    Pair<String,String> textImmediateContexts = XMLUtilities.getLeftRightTextContent(entityElement);
                                     String annotationContext = annotation.getContext();
                                     String annotationContextSimplified = CrossAgreement.simplifiedField(annotationContext);
                                     String mentionSimplified = CrossAgreement.simplifiedField(localText); 
@@ -346,96 +347,6 @@ System.out.println(annotationContextLeftSignature + " / " + annotationContextRig
         }
 
         return document;
-    }
-
-    public static Element getFirstDirectChild(Element parent, String name) {
-        for(Node child = parent.getFirstChild(); child != null; child = child.getNextSibling()) {
-            if (child instanceof Element && name.equals(child.getNodeName())) 
-                return (Element) child;
-        }
-        return null;
-    }
-
-    public static String getText(Element element) {
-        StringBuffer buf = new StringBuffer();
-        NodeList list = element.getChildNodes();
-        boolean found = false;
-        for (int i = 0; i < list.getLength(); i++) {
-            Node node = list.item(i);
-            if (node.getNodeType() == Node.TEXT_NODE) {
-                buf.append(node.getNodeValue());
-                found = true;
-            }
-        }
-        return found ? buf.toString() : null;
-    }
-
-    public static Pair<String,String> getLeftRightTextContent(Element current) {
-        // right text
-        Node sibling = current.getNextSibling();
-        while (null != sibling && sibling.getNodeType() != Node.TEXT_NODE) {
-            sibling = sibling.getNextSibling();
-        }
-        String right = null;
-        if (sibling != null)
-            right = ((Text)sibling).getNodeValue();
-
-        // left text
-        sibling = current.getPreviousSibling();
-        while (null != sibling && sibling.getNodeType() != Node.TEXT_NODE) {
-            sibling = sibling.getPreviousSibling();
-        }
-        String left = null;
-        if (sibling != null)
-            left = ((Text)sibling).getNodeValue();
-
-        return Pair.of(left, right);
-    }
-
-    public static String serialize(org.w3c.dom.Document doc, Node node) {
-        // to avoid issues with space reamining from deleted nodes
-        try {
-            XPathFactory xpathFactory = XPathFactory.newInstance();
-            // XPath to find empty text nodes.
-            XPathExpression xpathExp = xpathFactory.newXPath().compile(
-                    "//text()[normalize-space(.) = '']");  
-            NodeList emptyTextNodes = (NodeList) 
-                    xpathExp.evaluate(doc, XPathConstants.NODESET);
-
-            // Remove each empty text node from document.
-            for (int i = 0; i < emptyTextNodes.getLength(); i++) {
-                Node emptyTextNode = emptyTextNodes.item(i);
-                emptyTextNode.getParentNode().removeChild(emptyTextNode);
-            }
-        } catch(Exception ex) {
-            ex.printStackTrace();
-        }
-
-        DOMSource domSource = null;
-        String xml = null;
-        try {
-            if (node == null) {
-                domSource = new DOMSource(doc);
-            } else {
-                domSource = new DOMSource(node);
-            }
-            StringWriter writer = new StringWriter();
-            StreamResult result = new StreamResult(writer);
-            TransformerFactory tf = TransformerFactory.newInstance();
-            Transformer transformer = tf.newTransformer();
-            transformer.setOutputProperty(OutputKeys.METHOD, "xml");
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-            transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
-
-            if (node != null)
-                transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
-            transformer.transform(domSource, result);
-            xml = writer.toString();
-        } catch(TransformerException ex) {
-            ex.printStackTrace();
-        }
-        return xml;
     }
 
     /**

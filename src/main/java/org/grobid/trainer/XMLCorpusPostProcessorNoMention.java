@@ -87,7 +87,7 @@ public class XMLCorpusPostProcessorNoMention {
     /**
      * Inject curation class description, document entries without mention and curation class at document level     
      */
-    public void process(String xmlCorpusPath, String csvPath, String pdfPath, String newXmlCorpusPath) throws IOException {
+    public void process(String xmlCorpusPath, String csvPath, String pdfPath, String newXmlCorpusPath, boolean extraContext) throws IOException {
         
         Map<String, AnnotatedDocument> documents = new HashMap<String, AnnotatedDocument>();
         Map<String, SoftciteAnnotation> annotations = new HashMap<String, SoftciteAnnotation>();
@@ -107,20 +107,27 @@ public class XMLCorpusPostProcessorNoMention {
             tei = FileUtils.readFileToString(new File(xmlCorpusPath), UTF_8);
 
             document = builder.parse(new InputSource(new StringReader(tei)));
+
+            // if we want extra-context
+            if (extraContext) {
+                //Pair<String,String> extraTEIs = 
+                document = addExtraContext(document, documents, pdfPath);
+            }
+
             document = enrichTEIDocument(document, documents, pdfPath);
             document = enrichTEIDocumentNoMention(document, documents, pdfPath);
 
             // fix all xml:id which are not valid NCName
             //document = fixIdNCName(document);
 
-            tei = XMLCorpusPostProcessor.serialize(document, null);
+            tei = XMLUtilities.serialize(document, null);
             document = builder.parse(new InputSource(new StringReader(tei)));
 
             // normalize document-level identifiers with uniform random hexa keys 
             // and remove invalid/training docs
             document = normalizeIdentifiers(document);
 
-            tei = XMLCorpusPostProcessor.serialize(document, null);
+            tei = XMLUtilities.serialize(document, null);
         } catch(ParserConfigurationException e) {
             e.printStackTrace();
         } catch(IOException e) {
@@ -138,10 +145,10 @@ public class XMLCorpusPostProcessorNoMention {
                 DocumentBuilder builder = factory.newDocumentBuilder();
                 document = builder.parse(new InputSource(new StringReader(tei)));
                 document = prune(document);
-                tei = XMLCorpusPostProcessor.serialize(document, null);
+                tei = XMLUtilities.serialize(document, null);
 
                 document = builder.parse(new InputSource(new StringReader(tei)));
-                tei = XMLCorpusPostProcessor.serialize(document, null);
+                tei = XMLUtilities.serialize(document, null);
             } catch(ParserConfigurationException e) {
                 e.printStackTrace();
             } catch(IOException e) {
@@ -155,6 +162,11 @@ public class XMLCorpusPostProcessorNoMention {
                 FileUtils.writeStringToFile(new File(newXmlCorpusPath), tei, UTF_8);
             }
         }
+
+        // if we want extra-context
+        /*if (extraContext) {
+            Pair<String,String> extraTEIs = addExtraContext(document, documents, pdfPath);
+        }*/
 
         //this.generalCountAnnotations(documents, annotations, xmlCorpusPath);
     }
@@ -174,9 +186,9 @@ public class XMLCorpusPostProcessorNoMention {
             for(int i=0; i < nodes.getLength(); i++) {
                 org.w3c.dom.Element teiElement = (org.w3c.dom.Element)nodes.item(i);
 
-                org.w3c.dom.Element teiHeaderElement = XMLCorpusPostProcessor.getFirstDirectChild(teiElement, "teiHeader");
+                org.w3c.dom.Element teiHeaderElement = XMLUtilities.getFirstDirectChild(teiElement, "teiHeader");
                 if (teiHeaderElement != null) {
-                    org.w3c.dom.Element fileDescElement = XMLCorpusPostProcessor.getFirstDirectChild(teiHeaderElement, "fileDesc");
+                    org.w3c.dom.Element fileDescElement = XMLUtilities.getFirstDirectChild(teiHeaderElement, "fileDesc");
                     if (fileDescElement != null) {
                         String docId = fileDescElement.getAttribute("xml:id");
 
@@ -251,8 +263,8 @@ public class XMLCorpusPostProcessorNoMention {
                 String identifier = nNode.getAttributes().getNamedItem("xml:id").getNodeValue();
 
                 // get annotator name under <name>
-                org.w3c.dom.Element nameElement = XMLCorpusPostProcessor.getFirstDirectChild((org.w3c.dom.Element)nNode, "name");
-                String annotatorName = XMLCorpusPostProcessor.getText(nameElement);
+                org.w3c.dom.Element nameElement = XMLUtilities.getFirstDirectChild((org.w3c.dom.Element)nNode, "name");
+                String annotatorName = XMLUtilities.getText(nameElement);
                 result.add(annotatorName);
             }
         }
@@ -324,7 +336,7 @@ public class XMLCorpusPostProcessorNoMention {
                 } catch(Exception e) {
                     e.printStackTrace();
                 }
-                if (biblio.getTitle() == null || biblio.getTitle().trim().length() ==0) {
+                if (biblio.getTitle() == null || biblio.getTitle().trim().length() == 0) {
                     // get metadata by consolidation
                     if (docName.startsWith("10."))
                         biblio.setDOI(docName.replace("%2F", "/"));
@@ -1162,9 +1174,9 @@ public class XMLCorpusPostProcessorNoMention {
             for(int i=0; i < nodes.getLength(); i++) {
                 org.w3c.dom.Element teiElement = (org.w3c.dom.Element)nodes.item(i);
 
-                org.w3c.dom.Element teiHeaderElement = XMLCorpusPostProcessor.getFirstDirectChild(teiElement, "teiHeader");
+                org.w3c.dom.Element teiHeaderElement = XMLUtilities.getFirstDirectChild(teiElement, "teiHeader");
                 if (teiHeaderElement != null) {
-                    org.w3c.dom.Element fileDescElement = XMLCorpusPostProcessor.getFirstDirectChild(teiHeaderElement, "fileDesc");
+                    org.w3c.dom.Element fileDescElement = XMLUtilities.getFirstDirectChild(teiHeaderElement, "fileDesc");
                     if (fileDescElement != null) {
                         String docId = fileDescElement.getAttribute("xml:id");
                         if (trainingDoc.contains(docId)) {
@@ -1176,9 +1188,9 @@ public class XMLCorpusPostProcessorNoMention {
                         fileDescElement.setAttribute("xml:id", newDocId);
 
                         // keep a trace of the ID under sourceDesc/bibl/idno @origin
-                        org.w3c.dom.Element sourceDescElement = XMLCorpusPostProcessor.getFirstDirectChild(fileDescElement, "sourceDesc");
+                        org.w3c.dom.Element sourceDescElement = XMLUtilities.getFirstDirectChild(fileDescElement, "sourceDesc");
                         if (sourceDescElement != null) {
-                            org.w3c.dom.Element biblElement = XMLCorpusPostProcessor.getFirstDirectChild(sourceDescElement, "bibl");
+                            org.w3c.dom.Element biblElement = XMLUtilities.getFirstDirectChild(sourceDescElement, "bibl");
                             if (biblElement != null) {
                                 org.w3c.dom.Element idnoElement =  document.createElement("idno");
                                 idnoElement.setAttribute("type", "origin");
@@ -1261,7 +1273,7 @@ public class XMLCorpusPostProcessorNoMention {
                     teiElement.getParentNode().removeChild(teiElement);
                 } else {
                     // check if we have no <p> element
-                    if (XMLCorpusPostProcessor.getFirstDirectChild(bodyElement, "p") == null) {
+                    if (XMLUtilities.getFirstDirectChild(bodyElement, "p") == null) {
                         org.w3c.dom.Element textElement = (org.w3c.dom.Element)bodyElement.getParentNode();
                         org.w3c.dom.Element teiElement = (org.w3c.dom.Element)textElement.getParentNode();
                         teiElement.getParentNode().removeChild(teiElement);
@@ -1274,6 +1286,200 @@ public class XMLCorpusPostProcessorNoMention {
         }    
 
         return document;
+    }
+
+    /**
+     * Add extra paragraphs if the current paragraphs where mentions take place are too small. 
+     * We expect 200 words context minimum. 
+     * We produce two TEI variants with extra context:
+     * - one considering that we need 200 words minimum in the current paragraph, not considering 
+     *   a window centered on the mention
+     * - one considering a minimum of 100 words before and after the mention, so a window centered 
+     *   on the mention. 
+     * If not enough material is present in the paragraph, we add one before and after, so that 
+     * the minimum amount of words is reached.   
+     */
+    //private Pair<String,String> 
+    private org.w3c.dom.Document addExtraContext(org.w3c.dom.Document document, 
+                                                Map<String, AnnotatedDocument> documents,
+                                                String documentPath) {
+        Engine engine = GrobidFactory.getInstance().getEngine();
+        org.w3c.dom.Element documentRoot = document.getDocumentElement();
+        XPathFactory xpathFactory = XPathFactory.newInstance();
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        int tooShort = 0;
+        int total = 0;
+        for (Map.Entry<String, AnnotatedDocument> entry : documents.entrySet()) {
+            /*if (m > 100) {
+                break;
+            }
+            m++;*/
+            String docName = entry.getKey();
+            AnnotatedDocument softciteDocument = entry.getValue();
+
+            // check if the document is present in the TEI corpus, it means it has at 
+            // least one annotation matching with its PDF  
+            try {
+                XPath xpath = xpathFactory.newXPath();
+                //XPathExpression expr = xpath.compile("//*[@id='"+docName+"']");
+                String expression = "//TEI[descendant::fileDesc[@id='"+docName+"']]/text/body/p";
+                NodeList nodes = (NodeList) xpath.compile(expression).evaluate(document, XPathConstants.NODESET);
+                if (nodes.getLength() != 0) {
+                    List<String> localTexts = new ArrayList<>();
+                    // document present with content, we can check the length of the paragraphs
+                    for(int i=0; i < nodes.getLength(); i++) {
+                        org.w3c.dom.Element pElement = (org.w3c.dom.Element)nodes.item(i);
+                        // check text length
+                        String localText = pElement.getTextContent();
+                        localTexts.add(localText);
+                        total++;
+                    }
+
+                    for(int i=0; i < nodes.getLength(); i++) {
+                        org.w3c.dom.Element pElement = (org.w3c.dom.Element)nodes.item(i);
+                        String localText = pElement.getTextContent();
+                        String[] pieces = localText.split("[ -,.:]");
+                        //if (pieces.length < 200) 
+                        {
+                            //tooShort++; 
+
+                            // get position of first and last <rs> in this pElement
+                            int nbTokensLeft = -1;
+                            org.w3c.dom.Element rsElement = XMLUtilities.getFirstDirectChild(pElement, "rs");
+                            if (rsElement != null) {
+                                Pair<String,String> context = XMLUtilities.getLeftRightTextContent(rsElement);
+                                String leftContext = context.getLeft();
+                                int ind = localText.indexOf(leftContext);
+                                leftContext = localText.substring(0,ind) + leftContext;
+                                String[] leftPieces = leftContext.split("[ -,.:]");
+                                nbTokensLeft = leftPieces.length;
+                            }
+
+                            int nbTokensRight = -1;
+                            rsElement = XMLUtilities.getLastDirectChild(pElement, "rs");
+                            if (rsElement != null) {
+                                Pair<String,String> context = XMLUtilities.getLeftRightTextContent(rsElement);
+                                String rightContext = context.getRight();
+                                int ind = localText.indexOf(rightContext);
+                                rightContext = rightContext + localText.substring(ind+rightContext.length(), localText.length());
+                                String[] rightPieces = rightContext.split("[ -,.:]");
+                                nbTokensRight = rightPieces.length;
+                            }
+
+                            File pdfFile = AnnotatedCorpusGeneratorCSV.getPDF(documentPath, docName, this.articleUtilities, this.configuration);
+                            String fullPath = pdfFile.getPath();
+                            fullPath = fullPath.replace(".pdf", ".fulltext.tei.xml");
+                            
+                            // check if full text tei file is present, process with Grobid otherwise
+                            String fullTei = null;
+                            File teiFile = new File(fullPath);
+                            if (teiFile.exists()) {
+                                fullTei = FileUtils.readFileToString(teiFile, "UTF-8");
+                            } else {
+                                // process header with consolidation to get some nice header metadata for this document
+                                GrobidAnalysisConfig configFulltext = new GrobidAnalysisConfig.GrobidAnalysisConfigBuilder()
+                                                        .consolidateHeader(0)
+                                                        .consolidateCitations(0)
+                                                        .build();
+                                try {
+                                    fullTei = engine.fullTextToTEI(pdfFile,configFulltext);
+                                    if (fullTei != null) {
+                                        // write the file for future use
+                                        FileUtils.writeStringToFile(teiFile, fullTei, "UTF-8");
+                                    }
+                                } catch(Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                            List<org.w3c.dom.Node> localParagraphs = new ArrayList<>();
+                            if (fullTei != null) {
+                                DocumentBuilder builder = factory.newDocumentBuilder();
+                                org.w3c.dom.Document fullDocument = builder.parse(new InputSource(new StringReader(fullTei)));
+
+                                // get all <p>
+                                XPath xpath2 = xpathFactory.newXPath();
+                                String expression2 = "//p";
+                                NodeList nodes2 = (NodeList) xpath2.compile(expression2).evaluate(fullDocument, XPathConstants.NODESET);
+                                for(int j=0; j < nodes2.getLength(); j++) {  
+                                    org.w3c.dom.Element pElementFull = (org.w3c.dom.Element)nodes2.item(j);
+                                    localParagraphs.add(pElementFull);
+                                }
+                                // find the short segment
+                                int k = 0;
+                                for(org.w3c.dom.Node theParagraph : localParagraphs) {
+                                    String paragraphText = theParagraph.getTextContent();
+
+                                    if (paragraphText != null && 
+                                        CrossAgreement.simplifiedField(paragraphText).equals(CrossAgreement.simplifiedField(localText))) {
+                                        if (k>0 && nbTokensLeft < 100 && nbTokensLeft != -1) {
+                                            org.w3c.dom.Node theOtherParagraph = localParagraphs.get(k-1);
+                                            String localOtherParagraphText = theOtherParagraph.getTextContent();
+                                            // check if this additional paragraph is not already there
+                                            if (!localTexts.contains(localOtherParagraphText)) {
+                                                org.w3c.dom.Node importedParagraphNode = document.importNode(theOtherParagraph, true);
+                                                pElement.getParentNode().insertBefore(importedParagraphNode, pElement);
+                                                localTexts.add(localOtherParagraphText);
+
+                                                String[] localOtherParagraphTextPieces = localOtherParagraphText.split("[ -,.:]");
+                                                nbTokensLeft = localOtherParagraphTextPieces.length + nbTokensLeft;
+
+                                                if (k-1>0 && nbTokensLeft < 100) {
+                                                    // let's just add a new one
+                                                    theOtherParagraph = localParagraphs.get(k-2);
+                                                    localOtherParagraphText = theOtherParagraph.getTextContent();
+                                                    // check if this additional paragraph is not already there
+                                                    if (!localTexts.contains(localOtherParagraphText)) {
+                                                        org.w3c.dom.Node importedParagraphNode2 = document.importNode(theOtherParagraph, true);
+                                                        pElement.getParentNode().insertBefore(importedParagraphNode2, importedParagraphNode);
+                                                        localTexts.add(localOtherParagraphText);
+                                                    }
+                                                }
+                                            }
+                                        } 
+
+                                        if (k < localParagraphs.size()-1 && nbTokensRight < 100 && nbTokensRight != -1) {
+                                            org.w3c.dom.Node theOtherParagraph = localParagraphs.get(k+1);
+                                            String localOtherParagraphText = theOtherParagraph.getTextContent();
+                                            // check if this additional paragraph is not already there
+                                            if (!localTexts.contains(localOtherParagraphText)) {
+                                                org.w3c.dom.Node importedParagraphNode = document.importNode(theOtherParagraph, true);
+                                                pElement.getParentNode().insertBefore(importedParagraphNode, pElement.getNextSibling());
+                                                localTexts.add(localOtherParagraphText);
+
+                                                String[] localOtherParagraphTextPieces = localOtherParagraphText.split("[ -,.:]");
+                                                nbTokensRight = localOtherParagraphTextPieces.length + nbTokensRight;
+
+                                                if (k < localParagraphs.size()-2 && nbTokensRight < 100) {
+                                                    theOtherParagraph = localParagraphs.get(k+2);
+                                                    localOtherParagraphText = theOtherParagraph.getTextContent();
+                                                    // check if this additional paragraph is not already there
+                                                    if (!localTexts.contains(localOtherParagraphText)) {
+                                                        org.w3c.dom.Node importedParagraphNode2 = document.importNode(theOtherParagraph, true);
+                                                        pElement.getParentNode().insertBefore(importedParagraphNode2, importedParagraphNode.getNextSibling());
+                                                        localTexts.add(localOtherParagraphText);
+                                                    }
+                                                }
+                                            }                                            
+                                        }
+                                    }
+                                    k++;
+                                }
+                            }
+                        }
+                    }
+                }
+            } catch(XPathExpressionException e) {
+                e.printStackTrace();
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        System.out.println("----------------------------" + tooShort + "/" + total);
+
+        return document; //Pair.of("", "");
     }
 
     private org.w3c.dom.Document fixIdNCName(org.w3c.dom.Document document) {
@@ -1415,6 +1621,8 @@ public class XMLCorpusPostProcessorNoMention {
             System.exit(-1);
         }  
 
+        boolean extraContext = true;
+
         String outputXmlPathTmp = outputXmlPath.replace(".xml", ".tmp.xml");
 
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
@@ -1432,7 +1640,7 @@ public class XMLCorpusPostProcessorNoMention {
         // second one add complementary information for document without mentions and non matching contexts
         XMLCorpusPostProcessorNoMention postProcessorNoMention = new XMLCorpusPostProcessorNoMention(conf);
         try {
-            postProcessorNoMention.process(outputXmlPathTmp, csvPath, pdfPath, outputXmlPath);
+            postProcessorNoMention.process(outputXmlPathTmp, csvPath, pdfPath, outputXmlPath, extraContext);
         } catch (Exception e) {
             e.printStackTrace();
         }

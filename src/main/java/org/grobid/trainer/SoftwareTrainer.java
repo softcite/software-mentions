@@ -673,13 +673,11 @@ public class SoftwareTrainer extends AbstractTrainer {
      */
     @Override
     public String evaluate() {
-        System.out.println("------------------------SoftwareTrainer -> evaluate");
         return evaluate(false);
     }
 
     @Override
     public String evaluate(boolean includeRawResults) {
-        System.out.println("------------------------SoftwareTrainer -> evaluate");
         File evalDataF = GrobidProperties.getInstance().getEvalCorpusPath(
                 new File(new File("resources").getAbsolutePath()), model);
 
@@ -691,7 +689,6 @@ public class SoftwareTrainer extends AbstractTrainer {
 
     @Override
     public String evaluate(GenericTagger tagger, boolean includeRawResults) {
-        System.out.println("------------------------SoftwareTrainer -> evaluate");
         File evalDataF = GrobidProperties.getInstance().getEvalCorpusPath(
                 new File(new File("resources").getAbsolutePath()), model);
 
