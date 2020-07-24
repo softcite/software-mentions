@@ -1316,7 +1316,8 @@ public class XMLCorpusPostProcessorNoMention {
             m++;*/
             String docName = entry.getKey();
             AnnotatedDocument softciteDocument = entry.getValue();
-
+            org.w3c.dom.Document fullDocument = null;
+            List<org.w3c.dom.Node> localParagraphs = null;
             // check if the document is present in the TEI corpus, it means it has at 
             // least one annotation matching with its PDF  
             try {
@@ -1331,7 +1332,7 @@ public class XMLCorpusPostProcessorNoMention {
                         org.w3c.dom.Element pElement = (org.w3c.dom.Element)nodes.item(i);
                         // check text length
                         String localText = pElement.getTextContent();
-                        localTexts.add(localText);
+                        localTexts.add(CrossAgreement.simplifiedField(localText));
                         total++;
                     }
 
@@ -1392,10 +1393,10 @@ public class XMLCorpusPostProcessorNoMention {
                                 }
                             }
 
-                            List<org.w3c.dom.Node> localParagraphs = new ArrayList<>();
+                            localParagraphs = new ArrayList<>();
                             if (fullTei != null) {
                                 DocumentBuilder builder = factory.newDocumentBuilder();
-                                org.w3c.dom.Document fullDocument = builder.parse(new InputSource(new StringReader(fullTei)));
+                                fullDocument = builder.parse(new InputSource(new StringReader(fullTei)));
 
                                 // get all <p>
                                 XPath xpath2 = xpathFactory.newXPath();
@@ -1416,10 +1417,10 @@ public class XMLCorpusPostProcessorNoMention {
                                             org.w3c.dom.Node theOtherParagraph = localParagraphs.get(k-1);
                                             String localOtherParagraphText = theOtherParagraph.getTextContent();
                                             // check if this additional paragraph is not already there
-                                            if (!localTexts.contains(localOtherParagraphText)) {
+                                            if (!localTexts.contains(CrossAgreement.simplifiedField(localOtherParagraphText))) {
                                                 org.w3c.dom.Node importedParagraphNode = document.importNode(theOtherParagraph, true);
                                                 pElement.getParentNode().insertBefore(importedParagraphNode, pElement);
-                                                localTexts.add(localOtherParagraphText);
+                                                localTexts.add(CrossAgreement.simplifiedField(localOtherParagraphText));
 
                                                 String[] localOtherParagraphTextPieces = localOtherParagraphText.split("[ -,.:]");
                                                 nbTokensLeft = localOtherParagraphTextPieces.length + nbTokensLeft;
@@ -1429,10 +1430,10 @@ public class XMLCorpusPostProcessorNoMention {
                                                     theOtherParagraph = localParagraphs.get(k-2);
                                                     localOtherParagraphText = theOtherParagraph.getTextContent();
                                                     // check if this additional paragraph is not already there
-                                                    if (!localTexts.contains(localOtherParagraphText)) {
+                                                    if (!localTexts.contains(CrossAgreement.simplifiedField(localOtherParagraphText))) {
                                                         org.w3c.dom.Node importedParagraphNode2 = document.importNode(theOtherParagraph, true);
                                                         pElement.getParentNode().insertBefore(importedParagraphNode2, importedParagraphNode);
-                                                        localTexts.add(localOtherParagraphText);
+                                                        localTexts.add(CrossAgreement.simplifiedField(localOtherParagraphText));
                                                     }
                                                 }
                                             }
@@ -1442,10 +1443,10 @@ public class XMLCorpusPostProcessorNoMention {
                                             org.w3c.dom.Node theOtherParagraph = localParagraphs.get(k+1);
                                             String localOtherParagraphText = theOtherParagraph.getTextContent();
                                             // check if this additional paragraph is not already there
-                                            if (!localTexts.contains(localOtherParagraphText)) {
+                                            if (!localTexts.contains(CrossAgreement.simplifiedField(localOtherParagraphText))) {
                                                 org.w3c.dom.Node importedParagraphNode = document.importNode(theOtherParagraph, true);
                                                 pElement.getParentNode().insertBefore(importedParagraphNode, pElement.getNextSibling());
-                                                localTexts.add(localOtherParagraphText);
+                                                localTexts.add(CrossAgreement.simplifiedField(localOtherParagraphText));
 
                                                 String[] localOtherParagraphTextPieces = localOtherParagraphText.split("[ -,.:]");
                                                 nbTokensRight = localOtherParagraphTextPieces.length + nbTokensRight;
@@ -1454,10 +1455,10 @@ public class XMLCorpusPostProcessorNoMention {
                                                     theOtherParagraph = localParagraphs.get(k+2);
                                                     localOtherParagraphText = theOtherParagraph.getTextContent();
                                                     // check if this additional paragraph is not already there
-                                                    if (!localTexts.contains(localOtherParagraphText)) {
+                                                    if (!localTexts.contains(CrossAgreement.simplifiedField(localOtherParagraphText))) {
                                                         org.w3c.dom.Node importedParagraphNode2 = document.importNode(theOtherParagraph, true);
                                                         pElement.getParentNode().insertBefore(importedParagraphNode2, importedParagraphNode.getNextSibling());
-                                                        localTexts.add(localOtherParagraphText);
+                                                        localTexts.add(CrossAgreement.simplifiedField(localOtherParagraphText));
                                                     }
                                                 }
                                             }                                            
@@ -1469,6 +1470,29 @@ public class XMLCorpusPostProcessorNoMention {
                         }
                     }
                 }
+
+                // add paragraph rank to identify group of contexts
+                /*nodes = (NodeList) xpath.compile(expression).evaluate(document, XPathConstants.NODESET);
+                if (nodes.getLength() != 0) {
+                    for(int i=0; i < nodes.getLength(); i++) {
+                        org.w3c.dom.Element pElement = (org.w3c.dom.Element)nodes.item(i);
+                        String localText = pElement.getTextContent();
+
+                        if (localParagraphs != null) {
+                            int k = 0;
+                            for(org.w3c.dom.Node theParagraph : localParagraphs) {
+                                    String paragraphText = theParagraph.getTextContent();
+
+                                if (paragraphText != null && 
+                                    CrossAgreement.simplifiedField(paragraphText).equals(CrossAgreement.simplifiedField(localText))) {
+                                    pElement.setAttribute("n", ""+k);
+                                    break;
+                                }
+                                k++;
+                            }
+                        }
+                    }
+                }*/
             } catch(XPathExpressionException e) {
                 e.printStackTrace();
             } catch(Exception e) {
@@ -1477,7 +1501,7 @@ public class XMLCorpusPostProcessorNoMention {
 
         }
 
-        System.out.println("----------------------------" + tooShort + "/" + total);
+        //System.out.println("----------------------------" + tooShort + "/" + total);
 
         return document; //Pair.of("", "");
     }
