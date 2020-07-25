@@ -68,6 +68,7 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.conn.HttpHostConnectException;
+import org.apache.commons.lang3.tuple.Pair;
 
 import static org.apache.commons.lang3.StringUtils.*;
 import static org.grobid.core.document.xml.XmlBuilderUtils.teiElement;
@@ -273,6 +274,8 @@ public class SoftwareDisambiguator {
         if (json == null)
             return entities;
 
+        List<SoftwareEntity> filteredEntities = new ArrayList<SoftwareEntity>();
+
 //System.out.println(json);
         int segmentStartOffset = 0;
         if (tokens != null && tokens.size()>0)
@@ -411,10 +414,6 @@ public class SoftwareDisambiguator {
                         }
                     }
 
-                    if (toBeFiltered) {
-//System.out.println("filtered entity: " + wikidataId);
-                        continue;
-                    }
 //System.out.println(""+startOff + " / " + (startOff+segmentStartOffset+1));
                     SoftwareComponent component = entityPositions.get(startOff+segmentStartOffset+1);
                     if (component != null) {
@@ -427,8 +426,21 @@ public class SoftwareDisambiguator {
                             component.setDisambiguationScore(score);
                         if (lang != null)
                             component.setLang(lang);
-                    }
 
+                        if (toBeFiltered) {
+                            component.setFiltered(true);
+//System.out.println("filtered entity: " + wikidataId);
+                            //continue;
+                        }
+                    }
+                }
+            }
+
+            // propagate filtering status
+            for(SoftwareEntity entity : entities) {
+                SoftwareComponent softwareName = entity.getSoftwareName();
+                if (softwareName.isFiltered()) {
+                    entity.setFiltered(true);
                 }
             }
 

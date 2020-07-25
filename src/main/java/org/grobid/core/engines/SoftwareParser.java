@@ -127,8 +127,24 @@ public class SoftwareParser extends AbstractParser {
             entities = groupByEntities(components);
 
             // disambiguation
-            if (disambiguate)
+            if (disambiguate) {
                 entities = disambiguator.disambiguate(entities, tokens);
+                // apply existing filtering
+                List<Integer> indexToBeFiltered = new ArrayList<>();
+                int k = 0;
+                for(SoftwareEntity entity : entities) {
+                    if (entity.isFiltered()) {
+                        indexToBeFiltered.add(new Integer(k));
+                    }
+                    k++;
+                }
+
+                if (indexToBeFiltered.size() > 0) {
+                    for(int j=indexToBeFiltered.size()-1; j>= 0; j--) {
+                        entities.remove(indexToBeFiltered.get(j).intValue());
+                    }
+                }
+            }
 
             // propagate
             // we prepare a matcher for all the identified software names 
@@ -573,7 +589,7 @@ public class SoftwareParser extends AbstractParser {
             // string representation of the feature matrix for CRF lib
             String ress = addFeatures(layoutTokens, softwareTokenPositions, urlPositions);     
            
-            // labeled result from CRF lib
+            // labeled result from sequence labelling lib
             String res = label(ress);
 
             List<SoftwareComponent> components = extractSoftwareComponents(text, res, layoutTokens);
@@ -581,9 +597,26 @@ public class SoftwareParser extends AbstractParser {
             List<SoftwareEntity> localEntities = groupByEntities(components);
 
             // disambiguation
-            if (disambiguate)
+            if (disambiguate) {
                 localEntities = disambiguator.disambiguate(localEntities, layoutTokens);
 
+                // apply existing filtering
+                List<Integer> indexToBeFiltered = new ArrayList<>();
+                int k = 0;
+                for(SoftwareEntity entity : localEntities) {
+                    if (entity.isFiltered()) {
+                        indexToBeFiltered.add(new Integer(k));
+                    }
+                    k++;
+                }
+
+                if (indexToBeFiltered.size() > 0) {
+                    for(int j=indexToBeFiltered.size()-1; j>= 0; j--) {
+                        localEntities.remove(indexToBeFiltered.get(j).intValue());
+                    }
+                }
+            }
+            
             entities.addAll(localEntities);
         }
         return entities;
@@ -633,8 +666,25 @@ public class SoftwareParser extends AbstractParser {
             List<SoftwareEntity> localEntities = groupByEntities(components);
 
             // disambiguation
-            if (disambiguate)
+            if (disambiguate) {
                 localEntities = disambiguator.disambiguate(localEntities, localLayoutTokens);
+
+                // apply existing filtering
+                List<Integer> indexToBeFiltered = new ArrayList<>();
+                int k = 0;
+                for(SoftwareEntity entity : localEntities) {
+                    if (entity.isFiltered()) {
+                        indexToBeFiltered.add(new Integer(k));
+                    }
+                    k++;
+                }
+
+                if (indexToBeFiltered.size() > 0) {
+                    for(int j=indexToBeFiltered.size()-1; j>= 0; j--) {
+                        localEntities.remove(indexToBeFiltered.get(j).intValue());
+                    }
+                }
+            }
 
             entities.addAll(localEntities);
 

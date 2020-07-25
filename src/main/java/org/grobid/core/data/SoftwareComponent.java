@@ -63,6 +63,9 @@ public class SoftwareComponent extends KnowledgeEntity implements Comparable<Sof
 	// tagging label of the LayoutToken cluster corresponding to the component
 	protected TaggingLabel label = null;
 
+	// a status flag indicating that the component was filtered 
+	protected boolean filtered = false;
+
     public SoftwareComponent() {
 		this.offsets = new OffsetPosition();
     }
@@ -172,6 +175,14 @@ public class SoftwareComponent extends KnowledgeEntity implements Comparable<Sof
 	public void normalize() {
 		// TBD is necessary
 	}
+
+	public boolean isFiltered() {
+		return filtered;
+	}
+
+	public void setFiltered(boolean filtered) {
+		this.filtered = filtered;
+	} 
 	
 	@Override
 	public boolean equals(Object object) {

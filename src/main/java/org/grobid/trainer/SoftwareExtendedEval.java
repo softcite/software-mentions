@@ -291,6 +291,12 @@ System.out.println("nb line localInstance:" + localInstanceLines.length);
                 if (disambiguator == null)
                     disambiguator = SoftwareDisambiguator.getInstance(this.conf);
                 entities = disambiguator.disambiguate(entities, tokens);
+
+                // review labelling based on disambiguated entities
+                /*for(SoftwareEntity entity : entities) {
+                    int offset_start = entity.getOffsetStart;
+                    int offset_end = entity.getOffsetStart;
+                }*/
                 
                 currentInd = ind+2;
                 ind = theResult.indexOf("\n\n", ind+1);

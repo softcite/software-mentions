@@ -39,6 +39,8 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 	// identifier of the entity in this KB.
 	private String entityId = null;
 
+	private boolean filtered = false;
+
 	public SoftwareLexicon.Software_Type getType() {
 		return type;
 	}
@@ -101,6 +103,14 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 	public void setEntityId(String id) {
 		this.entityId = id;
 	}
+
+	public boolean isFiltered() {
+		return filtered;
+	}
+
+	public void setFiltered(boolean filtered) {
+		this.filtered = filtered;
+	} 
 
 	/**
 	 * Assuming that software names are identical, this method merges the attributes
