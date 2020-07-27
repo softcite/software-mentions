@@ -204,13 +204,22 @@ public class SoftwareLexicon {
 
         // load the list of P31 and P279 values of the Wikidata software entities
         file = new File("resources/lexicon/softwareVoc.txt.types");
+        File fileExtra = new File("resources/lexicon/softwareRelated.txt.types");
         if (!file.exists()) {
             throw new GrobidResourceException("Cannot initialize software subtype dictionary, because file '" + 
                 file.getAbsolutePath() + "' does not exists.");
         }
+        if (!file.exists()) {
+            throw new GrobidResourceException("Cannot initialize software subtype dictionary, because file '" + 
+                fileExtra.getAbsolutePath() + "' does not exists.");
+        }
         if (!file.canRead()) {
             throw new GrobidResourceException("Cannot initialize software subtype dictionary, because cannot read file '" + 
                 file.getAbsolutePath() + "'.");
+        }
+        if (!fileExtra.canRead()) {
+            throw new GrobidResourceException("Cannot initialize software subtype dictionary, because cannot read file '" + 
+                fileExtra.getAbsolutePath() + "'.");
         }
         // read the file
         try {
@@ -218,6 +227,12 @@ public class SoftwareLexicon {
 
             dis = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
             String l = null;
+            while ((l = dis.readLine()) != null) {
+                if (l.length() == 0) continue;
+                propertyValues.add(l.trim().toLowerCase());
+            }
+
+            dis = new BufferedReader(new InputStreamReader(new FileInputStream(fileExtra), "UTF-8"));
             while ((l = dis.readLine()) != null) {
                 if (l.length() == 0) continue;
                 propertyValues.add(l.trim().toLowerCase());

@@ -21,6 +21,7 @@ import org.grobid.core.engines.SoftwareDisambiguator;
 import org.grobid.core.engines.SoftwareParser;
 import org.grobid.core.data.SoftwareEntity;
 import org.grobid.core.data.SoftwareComponent;
+import org.grobid.core.analyzers.SoftwareAnalyzer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
@@ -47,6 +48,7 @@ public class SoftwareExtendedEval extends SoftwareTrainer {
     /*private SoftwareLexicon softwareLexicon = null;
     private SoftwareConfiguration conf = null;*/
     private SoftwareDisambiguator disambiguator = null;
+    private boolean docLevel = false;
 
     public SoftwareExtendedEval() {
         super(0.00001, 20, 0);
@@ -206,7 +208,8 @@ public class SoftwareExtendedEval extends SoftwareTrainer {
                         List<OffsetPosition> urlPositions = softwareLexicon.tokenPositionsUrlVectorLabeled(bufferLabeled);
 
                         addFeatures(bufferLabeled, writer, softwareTokenPositions, urlPositions);
-                        writer.write("\n");
+                        if (!docLevel)
+                            writer.write("\n");
                     }
                     writer.write("\n");
                     n++;
@@ -243,6 +246,7 @@ public class SoftwareExtendedEval extends SoftwareTrainer {
             }
             long time = System.currentTimeMillis();
             theResult = taggerFunction.apply(instance);
+            StringBuilder resultBuilder = new StringBuilder();
             bufReader.close();
             System.out.println("Labeling took: " + (System.currentTimeMillis() - time) + " ms");
 
@@ -254,33 +258,46 @@ public class SoftwareExtendedEval extends SoftwareTrainer {
 
             int ind = theResult.indexOf("\n\n");
             int currentInd = 0;
+            int pos = 0;
             while(ind != -1) {
                 String localInstance = theResult.substring(currentInd, ind);
 //System.out.println(localInstance);
                 String[] localInstanceLines = localInstance.split("\n");
-System.out.println("nb line localInstance:" + localInstanceLines.length); 
+//System.out.println("nb line localInstance:" + localInstanceLines.length); 
+                pos = 0;
                 for(int i=0; i <localInstanceLines.length; i++) {
                     String theLine = localInstanceLines[i];
                     if (theLine.trim().length() == 0) {
                          textBuilder.append("\n");
-                         tokens.add(new LayoutToken("\n"));
-                     }
+                         LayoutToken newToken = new LayoutToken("\n");
+                         newToken.setOffset(pos);
+                         tokens.add(newToken);
+                         pos++;
+                    }
                     int ind2 = theLine.indexOf("\t");
                     if (ind2 == -1)
                         ind2 = theLine.indexOf(" ");
                     if (ind2 == -1)
                         continue;
+                    LayoutToken newToken = new LayoutToken(theLine.substring(0,ind2));
+                    newToken.setOffset(pos);
+                    pos += newToken.getText().length();
                     textBuilder.append(theLine.substring(0,ind2));
                     textBuilder.append(" ");
-                    tokens.add(new LayoutToken(theLine.substring(0,ind2)));
+                    tokens.add(newToken);
 //System.out.println("adding: " + theLine.substring(0,ind2));
-                    tokens.add(new LayoutToken(" "));
+                    newToken = new LayoutToken(" ");
+                    newToken.setOffset(pos);
+                    tokens.add(newToken);
+                    pos++;
                 }
 
                 String text = textBuilder.toString();
+                textBuilder = new StringBuilder();
 
                 // filter out software mentions based on entity disambiguation
 //System.out.println("text: " + text);
+//System.out.println("nb layout tokens: " + tokens.size());
 
                 List<SoftwareComponent> components = softwareParser.extractSoftwareComponents(text, localInstance, tokens);
 
@@ -292,23 +309,95 @@ System.out.println("nb line localInstance:" + localInstanceLines.length);
                     disambiguator = SoftwareDisambiguator.getInstance(this.conf);
                 entities = disambiguator.disambiguate(entities, tokens);
 
+                int currentLineIndex = 0;
+                int currentLayoutTokenIndex = 0;
+                pos = 0;
+                int posLine = 0;
                 // review labelling based on disambiguated entities
-                /*for(SoftwareEntity entity : entities) {
-                    int offset_start = entity.getOffsetStart;
-                    int offset_end = entity.getOffsetStart;
-                }*/
+                for(SoftwareEntity entity : entities) {
+                    if (entity.isFiltered()) {
+                        SoftwareComponent component = entity.getSoftwareName();
+                        if (component != null) {
+                            // it should always be the case
+                            int offset_start = component.getOffsetStart();
+                            int offset_end = component.getOffsetEnd();
+//System.out.println("offsets: " + offset_start + " / " + offset_end + " | " + text.length());
+                            String segment = text.substring(offset_start, offset_end);
+//System.out.println("text: " + text);
+System.out.println("filtered: " + segment);
+
+                            List<String> segmentTokens = SoftwareAnalyzer.getInstance().tokenize(segment);
+
+                            // align with labeled string
+                            for(int l=currentLineIndex; l<localInstanceLines.length; l++) {
+                                String theLine = localInstanceLines[l];
+                                int ind2 = theLine.indexOf("\t");
+                                if (ind2 == -1)
+                                    ind2 = theLine.indexOf(" ");
+                                if (ind2 == -1)
+                                    continue;
+                                String tokenStr = theLine.substring(0,ind2);
+                                posLine += tokenStr.length();
+
+                                /*if (posLine < offset_start)
+                                    continue;*/
+
+                                String currentToken = "";
+                                while(currentToken.equals(" ") || pos < offset_start || pos < posLine) {
+                                    currentToken = tokens.get(currentLayoutTokenIndex).getText();
+                                    currentLayoutTokenIndex++;
+                                    pos += currentToken.length();
+                                    if (pos >= posLine && currentToken.equals(tokenStr)) {
+                                        posLine = pos;
+                                        break;
+                                    }
+                                }
+                                if (pos > offset_end)
+                                    break;
+                                if (segmentTokens.contains(tokenStr)) {
+                                    int ind3 = theLine.lastIndexOf("\t");
+                                    if (ind3 == -1)
+                                        ind3 = theLine.indexOf(" ");
+                                    if (ind3 != -1) {
+System.out.println(theLine);
+                                        String theNewLine = theLine.substring(0, ind3);
+                                        theNewLine += "\t<other>";
+System.out.println(theNewLine);
+                                        localInstance = localInstance.replace(theLine, theNewLine);
+
+                                    }
+                                    currentLineIndex = l;
+                                    posLine = pos;
+                                }
+                            }
+                        }                        
+                    }
+                }
                 
+                resultBuilder.append(localInstance);
+                resultBuilder.append("\n\n");
+
                 currentInd = ind+2;
                 ind = theResult.indexOf("\n\n", ind+1);
                 textBuilder = new StringBuilder();
                 tokens = new ArrayList<>();
             }
 
+            theResult = resultBuilder.toString();
+
         } catch (Exception e) {
             throw new GrobidException("An exception occurred while evaluating Grobid.", e);
         }
 
         return EvaluationUtilities.computeStats(theResult);
+    }
+
+    public void setDocLevel(boolean docLevel) {
+        this.docLevel = docLevel;
+    }
+
+    public boolean isDocLevel() {
+        return docLevel;
     }
 
     /**

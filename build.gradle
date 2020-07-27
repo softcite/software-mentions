@@ -236,11 +236,27 @@ task(eval_software_split, dependsOn: 'classes', type: JavaExec, group: 'evaluati
     jvmArgs '-Xms2g', '-Xmx8g'
 }
 
+// Run like this: ./gradlew eval_software_desambiguation_split -PgH=/path/grobid/home -Ps=0.8 -Pt=10
+task(eval_software_desambiguation_split, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
+    main = 'org.grobid.trainer.SoftwareTrainerRunner'
+    classpath = sourceSets.main.runtimeClasspath
+    args '2', 'software_desambiguation', getArg('gH', '../grobid-home'), getArg('s', 0.9), getArg('t', '0')
+    jvmArgs '-Xms2g', '-Xmx8g'
+}
+
 // Run like this: ./gradlew eval_software_nfold -PgH=/path/grobid/home -Pt=10
 task(eval_software_nfold, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
     main = 'org.grobid.trainer.SoftwareTrainerRunner'
     classpath = sourceSets.main.runtimeClasspath
     args '3', 'software', getArg('gH', '../grobid-home'), getArg('n', 10), getArg('t', '0')
+    jvmArgs '-Xms2g', '-Xmx8g'
+}
+
+// Run like this: ./gradlew eval_software_desambiguation_nfold -PgH=/path/grobid/home -Pt=10
+task(eval_software_desambiguation_nfold, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
+    main = 'org.grobid.trainer.SoftwareTrainerRunner'
+    classpath = sourceSets.main.runtimeClasspath
+    args '3', 'software_desambiguation', getArg('gH', '../grobid-home'), getArg('n', 10), getArg('t', '0')
     jvmArgs '-Xms2g', '-Xmx8g'
 }
 

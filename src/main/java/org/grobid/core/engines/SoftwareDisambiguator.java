@@ -414,6 +414,22 @@ public class SoftwareDisambiguator {
                         }
                     }
 
+                    // also to be reviewed: anything related to the production of software is kept
+                    if ( toBeFiltered && (statements != null) && (statements.get("P1056") != null) ) {
+                        List<String> p1056 = statements.get("P1056");
+                        for(String p1056Value : p1056) {
+                            if (SoftwareLexicon.getInstance().inSoftwarePropertyValues(p1056Value)) {
+                                toBeFiltered = false;
+                                break;
+                            }
+                        }
+                    }
+
+                    // if we have absolutely no statement, we don't filter
+                    if ( toBeFiltered && (statements == null || statements.size() == 0 || statementsNode.isMissingNode()) ) {
+                        toBeFiltered = false;
+                    }
+
 //System.out.println(""+startOff + " / " + (startOff+segmentStartOffset+1));
                     SoftwareComponent component = entityPositions.get(startOff+segmentStartOffset+1);
                     if (component != null) {
