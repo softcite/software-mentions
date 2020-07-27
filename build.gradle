@@ -224,7 +224,7 @@ task(eval_software_desambiguation, dependsOn: 'classes', type: JavaExec, group: 
 task(eval_software_doc_level, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
     main = 'org.grobid.trainer.SoftwareTrainerRunner'
     classpath = sourceSets.main.runtimeClasspath
-    args '1', 'eval_software_doc_level', getArg('gH', '../grobid-home')
+    args '1', 'software_doc_level', getArg('gH', '../grobid-home')
 //    jvmArgs '-Xms2g', '-Xmx8g'
 }
 
@@ -244,6 +244,14 @@ task(eval_software_desambiguation_split, dependsOn: 'classes', type: JavaExec, g
     jvmArgs '-Xms2g', '-Xmx8g'
 }
 
+// Run like this: ./gradlew eval_software_doc_level_split -PgH=/path/grobid/home -Ps=0.8 -Pt=10
+task(eval_software_doc_level_split, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
+    main = 'org.grobid.trainer.SoftwareTrainerRunner'
+    classpath = sourceSets.main.runtimeClasspath
+    args '2', 'software_doc_level', getArg('gH', '../grobid-home'), getArg('s', 0.9), getArg('t', '0')
+    jvmArgs '-Xms2g', '-Xmx8g'
+}
+
 // Run like this: ./gradlew eval_software_nfold -PgH=/path/grobid/home -Pt=10
 task(eval_software_nfold, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
     main = 'org.grobid.trainer.SoftwareTrainerRunner'
@@ -257,6 +265,14 @@ task(eval_software_desambiguation_nfold, dependsOn: 'classes', type: JavaExec, g
     main = 'org.grobid.trainer.SoftwareTrainerRunner'
     classpath = sourceSets.main.runtimeClasspath
     args '3', 'software_desambiguation', getArg('gH', '../grobid-home'), getArg('n', 10), getArg('t', '0')
+    jvmArgs '-Xms2g', '-Xmx8g'
+}
+
+// Run like this: ./gradlew eval_software_doc_level_nfold -PgH=/path/grobid/home -Pt=10
+task(eval_software_doc_level_nfold, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
+    main = 'org.grobid.trainer.SoftwareTrainerRunner'
+    classpath = sourceSets.main.runtimeClasspath
+    args '3', 'software_doc_level', getArg('gH', '../grobid-home'), getArg('n', 10), getArg('t', '0')
     jvmArgs '-Xms2g', '-Xmx8g'
 }
 

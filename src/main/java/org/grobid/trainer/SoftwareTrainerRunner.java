@@ -138,6 +138,8 @@ public class SoftwareTrainerRunner {
         } else if ("software_desambiguation".equals(args[1])) {  
             trainer = new SoftwareExtendedEval();
         } else if ("software_doc_level".equals(args[1])) { 
+            trainer = new SoftwareExtendedEval();
+            trainer.setDocLevel(true);
             System.out.println("software_doc_level evaluation not yet implemented");
             System.exit(0);
         } else {
