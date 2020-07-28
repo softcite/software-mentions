@@ -22,6 +22,7 @@ import org.grobid.core.engines.SoftwareParser;
 import org.grobid.core.data.SoftwareEntity;
 import org.grobid.core.data.SoftwareComponent;
 import org.grobid.core.analyzers.SoftwareAnalyzer;
+import org.grobid.core.lexicon.FastMatcher;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
@@ -29,9 +30,7 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import org.chasen.crfpp.Tagger;
 import org.grobid.core.engines.tagging.GenericTagger;
@@ -304,10 +303,24 @@ public class SoftwareExtendedEval extends SoftwareTrainer {
                 // we group the identified components by full entities
                 List<SoftwareEntity> entities = softwareParser.groupByEntities(components);
 
-                // disambiguation
-                if (disambiguator == null)
-                    disambiguator = SoftwareDisambiguator.getInstance(this.conf);
-                entities = disambiguator.disambiguate(entities, tokens);
+                if (!this.docLevel) {
+                    // disambiguation evaluation
+                    if (disambiguator == null)
+                        disambiguator = SoftwareDisambiguator.getInstance(this.conf);
+                    entities = disambiguator.disambiguate(entities, tokens);                    
+                } else {
+                    // doc level evaluation
+
+                    // we prepare a matcher for all the identified software names 
+                    FastMatcher termPattern = softwareParser.prepareTermPattern(entities);
+                    // we prepare the frequencies for each software name in the whole document
+                    Map<String, Integer> frequencies = softwareParser.prepareFrequencies(entities, tokens);
+                    // we prepare a map for mapping a software name with its positions of annotation in the document and its IDF
+                    Map<String, org.apache.commons.lang3.tuple.Pair<List<OffsetPosition>,Double>> termProfiles = softwareParser.prepareTermProfiles(entities);
+                    // and call the propagation method
+                    entities = softwareParser.propagateLayoutTokenSequence(tokens, entities, termProfiles, termPattern, frequencies);
+                    Collections.sort(entities);
+                }          
 
                 int currentLineIndex = 0;
                 int currentLayoutTokenIndex = 0;
@@ -316,8 +329,30 @@ public class SoftwareExtendedEval extends SoftwareTrainer {
                 // review labelling based on disambiguated entities
                 for(SoftwareEntity entity : entities) {
                     if (entity.isFiltered()) {
-                        SoftwareComponent component = entity.getSoftwareName();
-                        if (component != null) {
+                        List<SoftwareComponent> localComponents = new ArrayList<>();
+                        List<String> componentTypes = new ArrayList<>();
+                        SoftwareComponent theComponent = entity.getSoftwareName();
+                        if (theComponent != null) {
+                            localComponents.add(theComponent);
+                            componentTypes.add("software");
+                        }
+                        theComponent = entity.getVersion();
+                        if (theComponent != null) {
+                            localComponents.add(theComponent);
+                            componentTypes.add("version");
+                        }
+                        theComponent = entity.getCreator();
+                        if (theComponent != null) {
+                            localComponents.add(theComponent);
+                            componentTypes.add("creator");
+                        }
+                        theComponent = entity.getSoftwareURL();
+                        if (theComponent != null) {
+                            localComponents.add(theComponent);
+                            componentTypes.add("url");
+                        } 
+
+                        for(SoftwareComponent component : localComponents) {
                             // it should always be the case
                             int offset_start = component.getOffsetStart();
                             int offset_end = component.getOffsetEnd();
@@ -370,10 +405,70 @@ System.out.println(theNewLine);
                                     posLine = pos;
                                 }
                             }
-                        }                        
+                        }                    
+                    } else if (entity.isPropagated()) {
+                        SoftwareComponent component = entity.getSoftwareName();
+                        if (component != null) {
+                            int offset_start = component.getOffsetStart();
+                            int offset_end = component.getOffsetEnd();
+                            String segment = text.substring(offset_start, offset_end);
+                            List<String> segmentTokens = SoftwareAnalyzer.getInstance().tokenize(segment);
+
+                            boolean start = true;
+                            // align with labeled string
+                            for(int l=currentLineIndex; l<localInstanceLines.length; l++) {
+                                String theLine = localInstanceLines[l];
+                                int ind2 = theLine.indexOf("\t");
+                                if (ind2 == -1)
+                                    ind2 = theLine.indexOf(" ");
+                                if (ind2 == -1)
+                                    continue;
+                                String tokenStr = theLine.substring(0,ind2);
+                                posLine += tokenStr.length();
+
+                                /*if (posLine < offset_start)
+                                    continue;*/
+
+                                String currentToken = "";
+                                while(currentToken.equals(" ") || pos < offset_start || pos < posLine) {
+                                    currentToken = tokens.get(currentLayoutTokenIndex).getText();
+                                    currentLayoutTokenIndex++;
+                                    pos += currentToken.length();
+                                    if (pos >= posLine && currentToken.equals(tokenStr)) {
+                                        posLine = pos;
+                                        break;
+                                    }
+                                }
+                                if (pos > offset_end)
+                                    break;
+                                if (segmentTokens.contains(tokenStr)) {
+                                    int ind3 = theLine.lastIndexOf("\t");
+                                    if (ind3 == -1)
+                                        ind3 = theLine.indexOf(" ");
+                                    if (ind3 != -1) {
+
+                                        String originalLabel = theLine.substring(ind3, theLine.length());
+                                        if (originalLabel.equals("other")) {
+System.out.println("current line: " + theLine);
+                                            String theNewLine = theLine.substring(0, ind3);
+                                            if (start) {
+                                                theNewLine += "\tI-<software>";
+                                                start = false;
+                                            }
+                                            else    
+                                                theNewLine += "\t<software>";
+System.out.println("new line: " + theNewLine);
+                                            localInstance = localInstance.replace(theLine, theNewLine);
+                                        }
+                                    }
+                                    currentLineIndex = l;
+                                    posLine = pos;
+                                }
+                            }
+                        }
                     }
                 }
-                
+
                 resultBuilder.append(localInstance);
                 resultBuilder.append("\n\n");
 

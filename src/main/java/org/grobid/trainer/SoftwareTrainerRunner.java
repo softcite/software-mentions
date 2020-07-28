@@ -139,9 +139,7 @@ public class SoftwareTrainerRunner {
             trainer = new SoftwareExtendedEval();
         } else if ("software_doc_level".equals(args[1])) { 
             trainer = new SoftwareExtendedEval();
-            trainer.setDocLevel(true);
-            System.out.println("software_doc_level evaluation not yet implemented");
-            System.exit(0);
+            ((SoftwareExtendedEval)trainer).setDocLevel(true);
         } else {
             System.out.println("type of train/eval scope not expected: " + args[1]);
             System.exit(0);

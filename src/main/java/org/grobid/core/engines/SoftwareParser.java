@@ -695,7 +695,7 @@ public class SoftwareParser extends AbstractParser {
         return entities;
     }
 
-    private List<SoftwareEntity> propagateLayoutTokenSequence(List<LayoutToken> layoutTokens, 
+    public List<SoftwareEntity> propagateLayoutTokenSequence(List<LayoutToken> layoutTokens, 
                                               List<SoftwareEntity> entities,
                                               Map<String, Pair<List<OffsetPosition>,Double>> termProfiles,
                                               FastMatcher termPattern, 
@@ -758,6 +758,7 @@ public class SoftwareParser extends AbstractParser {
                         }
                     }
                 }
+                entity.setPropagated(true);
 
                 entities.add(entity);
             }
@@ -1169,7 +1170,7 @@ public class SoftwareParser extends AbstractParser {
         return root;
     }
 
-    private Map<String, Pair<List<OffsetPosition>,Double>> prepareTermProfiles(List<SoftwareEntity> entities) {
+    public Map<String, Pair<List<OffsetPosition>,Double>> prepareTermProfiles(List<SoftwareEntity> entities) {
         Map<String, Pair<List<OffsetPosition>,Double>> result = new TreeMap<String, Pair<List<OffsetPosition>,Double>>();
 
         for(SoftwareEntity entity : entities) {
@@ -1200,7 +1201,7 @@ public class SoftwareParser extends AbstractParser {
         return result;
     } 
 
-    private FastMatcher prepareTermPattern(List<SoftwareEntity> entities) {
+    public FastMatcher prepareTermPattern(List<SoftwareEntity> entities) {
         FastMatcher termPattern = new FastMatcher();
         for(SoftwareEntity entity : entities) {
             SoftwareComponent nameComponent = entity.getSoftwareName();
@@ -1213,7 +1214,7 @@ public class SoftwareParser extends AbstractParser {
         return termPattern;
     }
 
-    private Map<String, Integer> prepareFrequencies(List<SoftwareEntity> entities, List<LayoutToken> tokens) {
+    public Map<String, Integer> prepareFrequencies(List<SoftwareEntity> entities, List<LayoutToken> tokens) {
         Map<String, Integer> frequencies = new TreeMap<String, Integer>();
         for(SoftwareEntity entity : entities) {
             SoftwareComponent nameComponent = entity.getSoftwareName();

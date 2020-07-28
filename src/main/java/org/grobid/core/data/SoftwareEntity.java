@@ -39,7 +39,10 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 	// identifier of the entity in this KB.
 	private String entityId = null;
 
+	// filtered means entity disambiguation resulted in diacarding the entity candidate
 	private boolean filtered = false;
+	// propagated means entity is coming from the document level propagation step 
+	private boolean propagated = false;
 
 	public SoftwareLexicon.Software_Type getType() {
 		return type;
@@ -111,6 +114,14 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 	public void setFiltered(boolean filtered) {
 		this.filtered = filtered;
 	} 
+
+	public boolean isPropagated() {
+		return propagated;
+	}
+
+	public void setPropagated(boolean propagated) {
+		this.propagated = propagated;
+	}
 
 	/**
 	 * Assuming that software names are identical, this method merges the attributes
@@ -304,7 +315,6 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 
 			buffer.append(" ] ");
 		}
-
 
 		buffer.append(" }");
 		return buffer.toString();
