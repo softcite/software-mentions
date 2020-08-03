@@ -137,8 +137,13 @@ public class SoftwareTrainerRunner {
             trainer = new SoftwareTrainer();
         } else if ("software_disambiguation".equals(args[1])) {  
             trainer = new SoftwareExtendedEval();
+            ((SoftwareExtendedEval)trainer).setDisambiguate(true);
         } else if ("software_doc_level".equals(args[1])) { 
             trainer = new SoftwareExtendedEval();
+            ((SoftwareExtendedEval)trainer).setDocLevel(true);
+        } else if ("software_disamb_doc_level".equals(args[1])) { 
+            trainer = new SoftwareExtendedEval();
+            ((SoftwareExtendedEval)trainer).setDisambiguate(true);
             ((SoftwareExtendedEval)trainer).setDocLevel(true);
         } else {
             System.out.println("type of train/eval scope not expected: " + args[1]);

@@ -188,6 +188,9 @@ wrapper {
 
 // Custom Tasks
 
+///////////////////////////
+// train and eval ML models
+
 // Run like this: ./gradlew eval_software -PgH=/path/grobid/home
 task(trainer, dependsOn: 'classes', type: JavaExec, group: 'training') {
     main = 'org.grobid.trainer.SoftwareTrainerRunner'
@@ -228,6 +231,14 @@ task(eval_software_doc_level, dependsOn: 'classes', type: JavaExec, group: 'eval
 //    jvmArgs '-Xms2g', '-Xmx8g'
 }
 
+// Run like this: ./gradlew eval_software_disamb_doc_level -PgH=/path/grobid/home
+task(eval_software_disamb_doc_level, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
+    main = 'org.grobid.trainer.SoftwareTrainerRunner'
+    classpath = sourceSets.main.runtimeClasspath
+    args '1', 'software_disamb_doc_level', getArg('gH', '../grobid-home')
+//    jvmArgs '-Xms2g', '-Xmx8g'
+}
+
 // Run like this: ./gradlew eval_software_split -PgH=/path/grobid/home -Ps=0.8 -Pt=10
 task(eval_software_split, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
     main = 'org.grobid.trainer.SoftwareTrainerRunner'
@@ -249,6 +260,14 @@ task(eval_software_doc_level_split, dependsOn: 'classes', type: JavaExec, group:
     main = 'org.grobid.trainer.SoftwareTrainerRunner'
     classpath = sourceSets.main.runtimeClasspath
     args '2', 'software_doc_level', getArg('gH', '../grobid-home'), getArg('s', 0.9), getArg('t', '0')
+    jvmArgs '-Xms2g', '-Xmx8g'
+}
+
+// Run like this: ./gradlew eval_software_disamb_doc_level_split -PgH=/path/grobid/home -Ps=0.8 -Pt=10
+task(eval_software_disamb_doc_level_split, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
+    main = 'org.grobid.trainer.SoftwareTrainerRunner'
+    classpath = sourceSets.main.runtimeClasspath
+    args '2', 'software_disamb_doc_level', getArg('gH', '../grobid-home'), getArg('s', 0.9), getArg('t', '0')
     jvmArgs '-Xms2g', '-Xmx8g'
 }
 
@@ -275,6 +294,17 @@ task(eval_software_doc_level_nfold, dependsOn: 'classes', type: JavaExec, group:
     args '3', 'software_doc_level', getArg('gH', '../grobid-home'), getArg('n', 10), getArg('t', '0')
     jvmArgs '-Xms2g', '-Xmx8g'
 }
+
+// Run like this: ./gradlew eval_software_disamb_doc_level_nfold -PgH=/path/grobid/home -Pt=10
+task(eval_software_disamb_doc_level_nfold, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
+    main = 'org.grobid.trainer.SoftwareTrainerRunner'
+    classpath = sourceSets.main.runtimeClasspath
+    args '3', 'software_disamb_doc_level', getArg('gH', '../grobid-home'), getArg('n', 10), getArg('t', '0')
+    jvmArgs '-Xms2g', '-Xmx8g'
+}
+
+////////////////////
+// corpus processing
 
 // Run like this: ./gradlew annotated_corpus_generator_csv -Ppdf=/path/input/pdf -Pcsv=path/csv -Poutput=/output/directory
 task(annotated_corpus_generator_csv, dependsOn: 'classes', type: JavaExec, group: 'import') {
@@ -308,6 +338,7 @@ task(post_process_corpus, dependsOn: 'classes', type: JavaExec, group: 'import')
     jvmArgs '-Xms2g', '-Xmx8g'
 }
 
+//////////
 // service
 apply plugin: 'application'
 application {

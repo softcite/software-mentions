@@ -48,6 +48,7 @@ public class SoftwareExtendedEval extends SoftwareTrainer {
     private SoftwareConfiguration conf = null;*/
     private SoftwareDisambiguator disambiguator = null;
     private boolean docLevel = false;
+    private boolean disambiguate = false;
 
     public SoftwareExtendedEval() {
         super(0.00001, 20, 0);
@@ -303,14 +304,15 @@ public class SoftwareExtendedEval extends SoftwareTrainer {
                 // we group the identified components by full entities
                 List<SoftwareEntity> entities = softwareParser.groupByEntities(components);
 
-                if (!this.docLevel) {
+                if (this.disambiguate) {
                     // disambiguation evaluation
                     if (disambiguator == null)
                         disambiguator = SoftwareDisambiguator.getInstance(this.conf);
                     entities = disambiguator.disambiguate(entities, tokens);                    
-                } else {
-                    // doc level evaluation
+                }
 
+                if (this.docLevel) {
+                    // doc level evaluation
                     // we prepare a matcher for all the identified software names 
                     FastMatcher termPattern = softwareParser.prepareTermPattern(entities);
                     // we prepare the frequencies for each software name in the whole document
@@ -359,7 +361,7 @@ public class SoftwareExtendedEval extends SoftwareTrainer {
 //System.out.println("offsets: " + offset_start + " / " + offset_end + " | " + text.length());
                             String segment = text.substring(offset_start, offset_end);
 //System.out.println("text: " + text);
-System.out.println("filtered: " + segment);
+//System.out.println("filtered: " + segment);
 
                             List<String> segmentTokens = SoftwareAnalyzer.getInstance().tokenize(segment);
 
@@ -394,10 +396,10 @@ System.out.println("filtered: " + segment);
                                     if (ind3 == -1)
                                         ind3 = theLine.indexOf(" ");
                                     if (ind3 != -1) {
-System.out.println(theLine);
+//System.out.println(theLine);
                                         String theNewLine = theLine.substring(0, ind3);
                                         theNewLine += "\t<other>";
-System.out.println(theNewLine);
+//System.out.println(theNewLine);
                                         localInstance = localInstance.replace(theLine, theNewLine);
 
                                     }
@@ -405,8 +407,17 @@ System.out.println(theNewLine);
                                     posLine = pos;
                                 }
                             }
-                        }                    
-                    } else if (entity.isPropagated()) {
+                        }       
+                    }
+                } 
+
+                currentLineIndex = 0;
+                currentLayoutTokenIndex = 0;
+                pos = 0;
+                posLine = 0;
+                // review labelling based on doc level propagation 
+                for(SoftwareEntity entity : entities) {
+                    if (entity.isPropagated()) {
                         SoftwareComponent component = entity.getSoftwareName();
                         if (component != null) {
                             int offset_start = component.getOffsetStart();
@@ -449,7 +460,6 @@ System.out.println(theNewLine);
 
                                         String originalLabel = theLine.substring(ind3, theLine.length());
                                         if (originalLabel.equals("other")) {
-System.out.println("current line: " + theLine);
                                             String theNewLine = theLine.substring(0, ind3);
                                             if (start) {
                                                 theNewLine += "\tI-<software>";
@@ -457,7 +467,6 @@ System.out.println("current line: " + theLine);
                                             }
                                             else    
                                                 theNewLine += "\t<software>";
-System.out.println("new line: " + theNewLine);
                                             localInstance = localInstance.replace(theLine, theNewLine);
                                         }
                                     }
@@ -492,7 +501,15 @@ System.out.println("new line: " + theNewLine);
     }
 
     public boolean isDocLevel() {
-        return docLevel;
+        return this.docLevel;
+    }
+
+    public void setDisambiguate(boolean disamb) {
+        this.disambiguate = disamb;
+    }
+
+    public boolean isDisambiguate() {
+        return this.disambiguate;
     }
 
     /**
