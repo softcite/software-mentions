@@ -192,12 +192,12 @@ wrapper {
 // train and eval ML models
 
 // Run like this: ./gradlew eval_software -PgH=/path/grobid/home
-task(trainer, dependsOn: 'classes', type: JavaExec, group: 'training') {
+/*task(trainer, dependsOn: 'classes', type: JavaExec, group: 'training') {
     main = 'org.grobid.trainer.SoftwareTrainerRunner'
     classpath = sourceSets.main.runtimeClasspath
     args '0', 'software', getArg('gH', '../grobid-home'), getArg('b', '0.00001 20 0'), getArg('t', '1')
 //    jvmArgs '-Xms2g', '-Xmx8g'
-}
+}*/
 
 // Run like this: ./gradlew train_software -PgH=/path/grobid/home 
 task(train_software, dependsOn: 'classes', type: JavaExec, group: 'training') {

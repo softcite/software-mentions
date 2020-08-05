@@ -1,0 +1,92 @@
+Evaluations done 04.08.2020
+
+-----------------------------------------------------------------------------------------
+train pmc
+eval econ
+
+base crf
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1           support
+
+<creator>            96.15        31.58        14.63        20           41     
+<software>           73.06        78.1         36.12        49.4         454    
+<url>                99.04        75           21.43        33.33        14     
+<version>            98.72        76           65.52        70.37        29     
+
+all (micro avg.)     91.74        74.42        35.69        48.24        538    
+all (macro avg.)     91.74        65.17        34.43        43.28        538    
+
+===== Instance-level results =====
+
+Total expected instances:   259
+Correct instances:          90
+Instance-level recall:      34.75
+
+-----------------------------------------------------------------------------------------
+train pmc
+eval econ
+
+base crf+disambiguation
+
+label                accuracy     precision    recall       f1           support
+
+<creator>            96.13        31.58        14.63        20           41     
+<software>           73.09        78.74        35.98        49.39        453    
+<url>                99.03        75           21.43        33.33        14     
+<version>            98.71        75           64.29        69.23        28     
+
+all (micro avg.)     91.74        74.8         35.45        48.1         536    
+all (macro avg.)     91.74        65.08        34.08        42.99        536 
+
+-----------------------------------------------------------------------------------------
+train pmc
+eval econ
+
+base crf+doc_level
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1           support
+
+<creator>            96.14        31.58        14.63        20           41     
+<software>           72.99        77.99        35.98        49.24        453    
+<url>                99.04        75           21.43        33.33        14     
+<version>            98.71        75           64.29        69.23        28     
+
+all (micro avg.)     91.72        74.22        35.45        47.98        536    
+all (macro avg.)     91.72        64.89        34.08        42.95        536    
+
+===== Instance-level results =====
+
+Total expected instances:   258
+Correct instances:          89
+Instance-level recall:      34.5
+
+
+-----------------------------------------------------------------------------------------
+train pmc
+eval econ
+
+base crf+disambiguation+doc_level
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1           support
+
+<creator>            96.13        31.58        14.63        20           41     
+<software>           73.09        78.74        35.98        49.39        453    
+<url>                99.03        75           21.43        33.33        14     
+<version>            98.71        75           64.29        69.23        28     
+
+all (micro avg.)     91.74        74.8         35.45        48.1         536    
+all (macro avg.)     91.74        65.08        34.08        42.99        536    
+
+===== Instance-level results =====
+
+Total expected instances:   258
+Correct instances:          90
+Instance-level recall:      34.88
+
+
