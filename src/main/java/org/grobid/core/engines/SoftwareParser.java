@@ -721,7 +721,7 @@ public class SoftwareParser extends AbstractParser {
             if (termProfiles.get(term) != null) {
                 // is the match already present in the entity list? 
                 List<OffsetPosition> thePositions = termProfiles.get(term).getLeft();
-                if (containsPosition(thePositions, localPosition)) {
+                if (overlapsPosition(thePositions, localPosition)) {
                     continue;
                 }
                 tfidf = termFrequency * termProfiles.get(term).getRight();
@@ -729,7 +729,7 @@ public class SoftwareParser extends AbstractParser {
             // ideally we should make a small classifier here with entity frequency, tfidf, disambiguation success and 
             // and/or log-likelyhood/dice coefficient as features - but for the time being we introduce a simple rule
             // with an experimentally defined threshold:
-            if ( (tfidf <= 0) || (tfidf > 0.001) ) {
+            if ( (tfidf <= 0) || (tfidf > 0.001) ) {                
                 // add new entity mention
                 SoftwareComponent name = new SoftwareComponent();
                 name.setRawForm(term);
@@ -771,6 +771,20 @@ public class SoftwareParser extends AbstractParser {
         for (OffsetPosition pos : list) {
             //if (pos.start == position.start && pos.end == position.end)  
             if (pos.start == position.start)  
+                return true;
+        } 
+        return false;
+    }
+
+    private boolean overlapsPosition(final List<OffsetPosition> list, final OffsetPosition position) {
+        for (OffsetPosition pos : list) {
+            if (pos.start == position.start)  
+                return true;
+            if (pos.end == position.end)  
+                return true;
+            if (position.start <= pos.start &&  pos.start <= position.end)  
+                return true;
+            if (pos.start <= position.start && position.start <= pos.end)  
                 return true;
         } 
         return false;
@@ -1179,22 +1193,46 @@ public class SoftwareParser extends AbstractParser {
                 continue;
             String term = nameComponent.getRawForm();
             Pair<List<OffsetPosition>,Double> profile = result.get(term);
+            List<OffsetPosition> localPositions = null;
             if (profile == null) {
-                List<OffsetPosition> localPositions = new ArrayList<OffsetPosition>();
-                List<LayoutToken> localTokens = nameComponent.getTokens();
-                localPositions.add(new OffsetPosition(localTokens.get(0).getOffset(), 
-                    localTokens.get(localTokens.size()-1).getOffset() + localTokens.get(localTokens.size()-1).getText().length()-1));
-                profile = Pair.of(localPositions, SoftwareLexicon.getInstance().getTermIDF(term));
+                localPositions = new ArrayList<OffsetPosition>();
             } else {
-                List<OffsetPosition> localPositions = profile.getLeft();
+                localPositions = profile.getLeft();
                 if (localPositions == null)
                     localPositions = new ArrayList<OffsetPosition>();
-                List<LayoutToken> localTokens = nameComponent.getTokens();
-                localPositions.add(new OffsetPosition(localTokens.get(0).getOffset(), 
-                    localTokens.get(localTokens.size()-1).getOffset() + localTokens.get(localTokens.size()-1).getText().length()-1));
-                profile = Pair.of(localPositions, 
-                                  SoftwareLexicon.getInstance().getTermIDF(term));
             }
+            List<LayoutToken> localTokens = nameComponent.getTokens();
+            localPositions.add(new OffsetPosition(localTokens.get(0).getOffset(), 
+                localTokens.get(localTokens.size()-1).getOffset() + localTokens.get(localTokens.size()-1).getText().length()-1));
+
+            // we need to add the other component to avoid overlap
+            SoftwareComponent versionComponent = entity.getVersion();
+            if (versionComponent != null) {
+                localTokens = versionComponent.getTokens();
+                if (localTokens.size() > 0) {
+                    localPositions.add(new OffsetPosition(localTokens.get(0).getOffset(), 
+                        localTokens.get(localTokens.size()-1).getOffset() + localTokens.get(localTokens.size()-1).getText().length()-1));
+                }
+            }
+            SoftwareComponent publisherComponent = entity.getCreator();
+            if (publisherComponent != null) {
+                localTokens = publisherComponent.getTokens();
+                if (localTokens.size() > 0) {
+                    localPositions.add(new OffsetPosition(localTokens.get(0).getOffset(), 
+                        localTokens.get(localTokens.size()-1).getOffset() + localTokens.get(localTokens.size()-1).getText().length()-1));
+                }
+            }
+            SoftwareComponent urlComponent = entity.getSoftwareURL();
+            if (urlComponent != null) {
+                localTokens = urlComponent.getTokens();
+                if (localTokens.size() > 0) {
+                    localPositions.add(new OffsetPosition(localTokens.get(0).getOffset(), 
+                        localTokens.get(localTokens.size()-1).getOffset() + localTokens.get(localTokens.size()-1).getText().length()-1));
+                }
+            }
+
+            profile = Pair.of(localPositions, SoftwareLexicon.getInstance().getTermIDF(term));
+
             result.put(term, profile);
         }
 
