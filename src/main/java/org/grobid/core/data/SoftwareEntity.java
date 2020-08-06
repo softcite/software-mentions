@@ -16,12 +16,16 @@ import com.fasterxml.jackson.core.io.JsonStringEncoder;
 import java.util.List;
 import java.util.ArrayList;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  *  Representation of a mention of a software entity with all its components.
  *
  */
 public class SoftwareEntity extends KnowledgeEntity implements Comparable<SoftwareEntity> {   
-
+	private static final Logger logger = LoggerFactory.getLogger(SoftwareEntity.class);
+	
 	// type of the entity
 	private SoftwareLexicon.Software_Type type = null;
 	

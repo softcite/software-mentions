@@ -12,6 +12,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  *  Representation of a mention of a component corresponding to a software description.
  *  The component can be the software name, the version, the software creator (re-scoped as publisher),
@@ -19,7 +22,8 @@ import java.util.List;
  *
  */
 public class SoftwareComponent extends KnowledgeEntity implements Comparable<SoftwareComponent> {   
-	
+	private static final Logger logger = LoggerFactory.getLogger(SoftwareComponent.class);
+
 	// Orign of the component definition
 	public enum Origin {
 		GROBID	("grobid"),
@@ -218,8 +222,13 @@ public class SoftwareComponent extends KnowledgeEntity implements Comparable<Sof
 		} catch (JsonProcessingException e) {
 			buffer.append("\"rawForm\" : \"" + "JsonProcessingException" + "\"");
 		}
-		if (normalizedForm != null)
-			buffer.append(", \"normalizedForm\" : \"" + normalizedForm + "\"");
+		if (normalizedForm != null) {
+			try {
+				buffer.append(", \"normalizedForm\" : " + mapper.writeValueAsString(normalizedForm));
+			} catch (JsonProcessingException e) {
+				logger.warn("could not serialize in JSON the normalized form: " + normalizedForm);
+			}
+		}
 		/*if (label != null) {
 			String componentType = label.getLabel();
 			componentType = componentType.replace("<", "");
