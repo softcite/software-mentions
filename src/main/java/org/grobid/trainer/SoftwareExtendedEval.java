@@ -322,9 +322,10 @@ public class SoftwareExtendedEval extends SoftwareTrainer {
                     // we prepare the frequencies for each software name in the whole document
                     Map<String, Integer> frequencies = softwareParser.prepareFrequencies(entities, tokens);
                     // we prepare a map for mapping a software name with its positions of annotation in the document and its IDF
-                    Map<String, org.apache.commons.lang3.tuple.Pair<List<OffsetPosition>,Double>> termProfiles = softwareParser.prepareTermProfiles(entities);
+                    Map<String, Double> termProfiles = softwareParser.prepareTermProfiles(entities);
                     // and call the propagation method
-                    entities = softwareParser.propagateLayoutTokenSequence(tokens, entities, termProfiles, termPattern, frequencies);
+                    List<OffsetPosition> placeTaken = softwareParser.preparePlaceTaken(entities);
+                    entities = softwareParser.propagateLayoutTokenSequence(tokens, entities, termProfiles, termPattern, placeTaken, frequencies);
                     Collections.sort(entities);
                 }          
 

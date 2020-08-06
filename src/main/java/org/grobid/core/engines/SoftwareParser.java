@@ -152,9 +152,11 @@ public class SoftwareParser extends AbstractParser {
             // we prepare the frequencies for each software name in the whole document
             Map<String, Integer> frequencies = prepareFrequencies(entities, tokens);
             // we prepare a map for mapping a software name with its positions of annotation in the document and its IDF
-            Map<String, Pair<List<OffsetPosition>,Double>> termProfiles = prepareTermProfiles(entities);
+            Map<String, Double> termProfiles = prepareTermProfiles(entities);
+            // we prepare a list of existing positions to avoid overlap 
+            List<OffsetPosition> placeTaken = preparePlaceTaken(entities);
             // and call the propagation method
-            entities = propagateLayoutTokenSequence(tokens, entities, termProfiles, termPattern, frequencies);
+            entities = propagateLayoutTokenSequence(tokens, entities, termProfiles, termPattern, placeTaken, frequencies);
             Collections.sort(entities);
         } catch (Exception e) {
             throw new GrobidException("An exception occured while running Grobid.", e);
@@ -317,26 +319,27 @@ public class SoftwareParser extends AbstractParser {
             // we prepare the frequencies for each software name in the whole document
             Map<String, Integer> frequencies = prepareFrequencies(entities, doc.getTokenizations());
             // we prepare a map for mapping a software name with its positions of annotation in the document and its IDF
-            Map<String, Pair<List<OffsetPosition>,Double>> termProfiles = prepareTermProfiles(entities);
-            
+            Map<String, Double> termProfiles = prepareTermProfiles(entities);
+            List<OffsetPosition> placeTaken = preparePlaceTaken(entities);
+
             // second pass, header
             if (resHeader != null) {
                 // title
                 List<LayoutToken> titleTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_TITLE);
                 if (titleTokens != null) {
-                    propagateLayoutTokenSequence(titleTokens, entities, termProfiles, termPattern, frequencies);
+                    propagateLayoutTokenSequence(titleTokens, entities, termProfiles, termPattern, placeTaken, frequencies);
                 } 
 
                 // abstract
                 List<LayoutToken> abstractTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_ABSTRACT);
                 if (abstractTokens != null) {
-                    propagateLayoutTokenSequence(abstractTokens, entities, termProfiles, termPattern, frequencies);
+                    propagateLayoutTokenSequence(abstractTokens, entities, termProfiles, termPattern, placeTaken, frequencies);
                 } 
 
                 // keywords
                 List<LayoutToken> keywordTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_KEYWORD);
                 if (keywordTokens != null) {
-                    propagateLayoutTokenSequence(keywordTokens, entities, termProfiles, termPattern, frequencies);
+                    propagateLayoutTokenSequence(keywordTokens, entities, termProfiles, termPattern, placeTaken, frequencies);
                 }
             }
 
@@ -355,11 +358,11 @@ public class SoftwareParser extends AbstractParser {
 
                     if (clusterLabel.equals(TaggingLabels.PARAGRAPH) || clusterLabel.equals(TaggingLabels.ITEM)) {
                         //|| clusterLabel.equals(TaggingLabels.SECTION) ) {
-                        propagateLayoutTokenSequence(localTokenization, entities, termProfiles, termPattern, frequencies);
+                        propagateLayoutTokenSequence(localTokenization, entities, termProfiles, termPattern, placeTaken, frequencies);
                     } else if (clusterLabel.equals(TaggingLabels.TABLE)) {
-                        //propagateLayoutTokenSequence(localTokenization, entities, termProfiles, termPattern, frequencies);
+                        //propagateLayoutTokenSequence(localTokenization, entities, termProfiles, termPattern, placeTaken, frequencies);
                     } else if (clusterLabel.equals(TaggingLabels.FIGURE)) {
-                        //propagateLayoutTokenSequence(localTokenization, entities, termProfiles, termPattern, frequencies);
+                        //propagateLayoutTokenSequence(localTokenization, entities, termProfiles, termPattern, placeTaken, frequencies);
                     }
                 }
             }
@@ -368,14 +371,14 @@ public class SoftwareParser extends AbstractParser {
             /*documentParts = doc.getDocumentPart(SegmentationLabels.ANNEX);
             if (documentParts != null) {
                 List<LayoutToken> tokenizationParts = doc.getTokenizationParts(documentParts, doc.getTokenizations());
-                propagateLayoutTokenSequence(tokenizationParts, entities, termProfiles, termPattern, frequencies);
+                propagateLayoutTokenSequence(tokenizationParts, entities, termProfiles, termPattern, placeTaken, frequencies);
             }*/
 
             // second pass, footnotes (if relevant)
             /*documentParts = doc.getDocumentPart(SegmentationLabel.FOOTNOTE);
             if (documentParts != null) {
                 List<LayoutToken> tokenizationParts = doc.getTokenizationParts(documentParts, doc.getTokenizations());
-                propagateLayoutTokenSequence(tokenizationParts, entities, termProfiles, termPattern, frequencies);
+                propagateLayoutTokenSequence(tokenizationParts, entities, termProfiles, termPattern, placeTaken, frequencies);
             }*/            
 
             // finally we attach and match bibliographical reference callout
@@ -697,21 +700,23 @@ public class SoftwareParser extends AbstractParser {
 
     public List<SoftwareEntity> propagateLayoutTokenSequence(List<LayoutToken> layoutTokens, 
                                               List<SoftwareEntity> entities,
-                                              Map<String, Pair<List<OffsetPosition>,Double>> termProfiles,
+                                              Map<String, Double> termProfiles,
                                               FastMatcher termPattern, 
+                                              List<OffsetPosition> placeTaken,
                                               Map<String, Integer> frequencies) {
-        List<OffsetPosition> results = termPattern.matchLayoutToken(layoutTokens, true, true);
-        // ignore delimiters, but case sensitive matching
+        List<OffsetPosition> results = termPattern.matchLayoutToken(layoutTokens, false, true);
+        // do not ignore delimiters, but case sensitive matching
         if ( (results == null) || (results.size() == 0) ) {
             return entities;
         }
-        
+       
         for(OffsetPosition position : results) {
             List<LayoutToken> matchedTokens = layoutTokens.subList(position.start, position.end+1);
             OffsetPosition localPosition = new OffsetPosition(matchedTokens.get(0).getOffset(), 
                 matchedTokens.get(matchedTokens.size()-1).getOffset() + matchedTokens.get(matchedTokens.size()-1).getText().length());
 
             String term = LayoutTokensUtil.toText(matchedTokens);
+System.out.println("matched: " + term);
             int termFrequency = 1;
             if (frequencies != null && frequencies.get(term) != null)
                 termFrequency = frequencies.get(term);
@@ -720,61 +725,60 @@ public class SoftwareParser extends AbstractParser {
             double tfidf = -1.0;
             if (termProfiles.get(term) != null) {
                 // is the match already present in the entity list? 
-                List<OffsetPosition> thePositions = termProfiles.get(term).getLeft();
-                if (overlapsPosition(thePositions, localPosition)) {
+                if (overlapsPosition(placeTaken, localPosition)) {
                     continue;
                 }
-                tfidf = termFrequency * termProfiles.get(term).getRight();
-            }
-            // ideally we should make a small classifier here with entity frequency, tfidf, disambiguation success and 
-            // and/or log-likelyhood/dice coefficient as features - but for the time being we introduce a simple rule
-            // with an experimentally defined threshold:
-            if ( (tfidf <= 0) || (tfidf > 0.001) ) {                
-                // add new entity mention
-                SoftwareComponent name = new SoftwareComponent();
-                name.setRawForm(term);
-                name.setOffsetStart(localPosition.start);
-                name.setOffsetEnd(localPosition.end);
-                name.setLabel(SoftwareTaggingLabels.SOFTWARE);
-                name.setTokens(matchedTokens);
+                tfidf = termFrequency * termProfiles.get(term);
+            
+                // ideally we should make a small classifier here with entity frequency, tfidf, disambiguation success and 
+                // and/or log-likelyhood/dice coefficient as features - but for the time being we introduce a simple rule
+                // with an experimentally defined threshold:
+                if ( (tfidf <= 0) || (tfidf > 0.001) ) {                
+                    // add new entity mention
+                    SoftwareComponent name = new SoftwareComponent();
+                    name.setRawForm(term);
+                    name.setOffsetStart(localPosition.start);
+                    name.setOffsetEnd(localPosition.end);
+                    name.setLabel(SoftwareTaggingLabels.SOFTWARE);
+                    name.setTokens(matchedTokens);
 
-                List<BoundingBox> boundingBoxes = BoundingBoxCalculator.calculate(matchedTokens);
-                name.setBoundingBoxes(boundingBoxes);
+                    List<BoundingBox> boundingBoxes = BoundingBoxCalculator.calculate(matchedTokens);
+                    name.setBoundingBoxes(boundingBoxes);
 
-                SoftwareEntity entity = new SoftwareEntity();
-                entity.setSoftwareName(name);
-                entity.setType(SoftwareLexicon.Software_Type.SOFTWARE);
-                // add disambiguation infos if any
-                for(SoftwareEntity ent : entities) {
-                    if (ent.getSoftwareName().getWikipediaExternalRef() != -1) {
-                        if (term.equals(ent.getSoftwareName().getRawForm())) {
-                            ent.getSoftwareName().copyKnowledgeInformationTo(name);
-                            name.setLang(ent.getSoftwareName().getLang());
-                            // add reference if present
-                            entity.setBibRefs(ent.getBibRefs());
-                            // Note: TBD - disamb entity and bib ref should be generalized more widely to all entities
-                            // sharing the software name
-                            break;
+                    SoftwareEntity entity = new SoftwareEntity();
+                    entity.setSoftwareName(name);
+                    entity.setType(SoftwareLexicon.Software_Type.SOFTWARE);
+                    // add disambiguation infos if any
+                    for(SoftwareEntity ent : entities) {
+                        if (ent.getSoftwareName().getWikipediaExternalRef() != -1) {
+                            if (term.equals(ent.getSoftwareName().getRawForm())) {
+                                ent.getSoftwareName().copyKnowledgeInformationTo(name);
+                                name.setLang(ent.getSoftwareName().getLang());
+                                // add reference if present
+                                entity.setBibRefs(ent.getBibRefs());
+                                // Note: TBD - disamb entity and bib ref should be generalized more widely to all entities
+                                // sharing the software name
+                                break;
+                            }
                         }
                     }
-                }
-                entity.setPropagated(true);
+                    entity.setPropagated(true);
 
-                entities.add(entity);
+                    entities.add(entity);
+                }
             }
         }
 
         return entities;
     }
 
-    private boolean containsPosition(final List<OffsetPosition> list, final OffsetPosition position) {
+    /*private boolean containsPosition(final List<OffsetPosition> list, final OffsetPosition position) {
         for (OffsetPosition pos : list) {
-            //if (pos.start == position.start && pos.end == position.end)  
             if (pos.start == position.start)  
                 return true;
         } 
         return false;
-    }
+    }*/
 
     private boolean overlapsPosition(final List<OffsetPosition> list, final OffsetPosition position) {
         for (OffsetPosition pos : list) {
@@ -1184,23 +1188,12 @@ public class SoftwareParser extends AbstractParser {
         return root;
     }
 
-    public Map<String, Pair<List<OffsetPosition>,Double>> prepareTermProfiles(List<SoftwareEntity> entities) {
-        Map<String, Pair<List<OffsetPosition>,Double>> result = new TreeMap<String, Pair<List<OffsetPosition>,Double>>();
-
+    public List<OffsetPosition> preparePlaceTaken(List<SoftwareEntity> entities) {
+        List<OffsetPosition> localPositions = new ArrayList<>();
         for(SoftwareEntity entity : entities) {
             SoftwareComponent nameComponent = entity.getSoftwareName();
             if (nameComponent == null)
                 continue;
-            String term = nameComponent.getRawForm();
-            Pair<List<OffsetPosition>,Double> profile = result.get(term);
-            List<OffsetPosition> localPositions = null;
-            if (profile == null) {
-                localPositions = new ArrayList<OffsetPosition>();
-            } else {
-                localPositions = profile.getLeft();
-                if (localPositions == null)
-                    localPositions = new ArrayList<OffsetPosition>();
-            }
             List<LayoutToken> localTokens = nameComponent.getTokens();
             localPositions.add(new OffsetPosition(localTokens.get(0).getOffset(), 
                 localTokens.get(localTokens.size()-1).getOffset() + localTokens.get(localTokens.size()-1).getText().length()-1));
@@ -1230,10 +1223,23 @@ public class SoftwareParser extends AbstractParser {
                         localTokens.get(localTokens.size()-1).getOffset() + localTokens.get(localTokens.size()-1).getText().length()-1));
                 }
             }
+        }
+        return localPositions;
+    }
 
-            profile = Pair.of(localPositions, SoftwareLexicon.getInstance().getTermIDF(term));
+    public Map<String, Double> prepareTermProfiles(List<SoftwareEntity> entities) {
+        Map<String, Double> result = new TreeMap<String, Double>();
 
-            result.put(term, profile);
+        for(SoftwareEntity entity : entities) {
+            SoftwareComponent nameComponent = entity.getSoftwareName();
+            if (nameComponent == null)
+                continue;
+            String term = nameComponent.getRawForm();
+            Double profile = result.get(term);
+            if (profile == null) {
+                profile = SoftwareLexicon.getInstance().getTermIDF(term);
+                result.put(term, profile);
+            }
         }
 
         return result;
@@ -1246,8 +1252,7 @@ public class SoftwareParser extends AbstractParser {
             if (nameComponent == null)
                 continue;
             String term = nameComponent.getRawForm();
-
-            termPattern.loadTerm(term, SoftwareAnalyzer.getInstance());
+            termPattern.loadTerm(term, SoftwareAnalyzer.getInstance(), false);
         }
         return termPattern;
     }
@@ -1260,9 +1265,9 @@ public class SoftwareParser extends AbstractParser {
                 continue;
             String term = nameComponent.getRawForm();
             if (frequencies.get(term) == null) {
-                FastMatcher termPattern = new FastMatcher();
-                termPattern.loadTerm(term, SoftwareAnalyzer.getInstance());
-                List<OffsetPosition> results = termPattern.matchLayoutToken(tokens, true, true);
+                FastMatcher localTermPattern = new FastMatcher();
+                localTermPattern.loadTerm(term, SoftwareAnalyzer.getInstance());
+                List<OffsetPosition> results = localTermPattern.matchLayoutToken(tokens, true, true);
                 // ignore delimiters, but case sensitive matching
                 int freq = 0;
                 if (results != null) {  
