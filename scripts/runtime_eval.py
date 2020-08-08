@@ -107,9 +107,9 @@ def process_pdf(pdf_file, config):
         )
     }
     
-    the_url = 'http://'+config['grobid_server']
-    if len(config['grobid_port'])>0:
-        the_url += ":"+config['grobid_port']
+    the_url = 'http://'+config['grobid_software_server']
+    if len(config['grobid_software_port'])>0:
+        the_url += ":"+config['grobid_software_port']
     the_url += "/annotateSoftwarePDF"
 
     the_data = {}
@@ -179,9 +179,9 @@ def process_batch_txt(texts, config, nb_threads=1):
             executor.submit(process_txt, text, config)
 
 def process_txt(text, config):
-    the_url = 'http://'+config['grobid_server']
-    if len(config['grobid_port'])>0:
-        the_url += ":"+config['grobid_port']
+    the_url = 'http://'+config['grobid_software_server']
+    if len(config['grobid_software_port'])>0:
+        the_url += ":"+config['grobid_software_port']
     the_url += "/processSoftwareText"
 
     the_data = {}
@@ -208,9 +208,9 @@ def load_config(path='./config.json'):
     config = json.loads(config_json)
 
     # test if the server is up and running...
-    the_url = 'http://'+config['grobid_server']
-    if len(config['grobid_port'])>0:
-        the_url += ":"+config['grobid_port']
+    the_url = 'http://'+config['grobid_software_server']
+    if len(config['grobid_software_port'])>0:
+        the_url += ":"+config['grobid_software_port']
     the_url += "/isalive"
     try:
         r = requests.get(the_url)

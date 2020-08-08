@@ -176,9 +176,9 @@ def _get_groups(groups, string):
 
 
 def process_txt(text, config):
-    the_url = 'http://'+config['grobid_server']
-    if len(config['grobid_port'])>0:
-        the_url += ":"+config['grobid_port']
+    the_url = 'http://'+config['grobid_software_server']
+    if len(config['grobid_software_port'])>0:
+        the_url += ":"+config['grobid_software_port']
     the_url += "/service/processSoftwareText"
 
     the_data = {}
@@ -205,9 +205,9 @@ def load_config(path='./config.json'):
     config = json.loads(config_json)
 
     # test if the server is up and running...
-    the_url = 'http://'+config['grobid_server']
-    if len(config['grobid_port'])>0:
-        the_url += ":"+config['grobid_port']
+    the_url = 'http://'+config['grobid_software_server']
+    if len(config['grobid_software_port'])>0:
+        the_url += ":"+config['grobid_software_port']
     the_url += "/service/isalive"
     try:
         r = requests.get(the_url)
