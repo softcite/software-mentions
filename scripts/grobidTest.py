@@ -2,7 +2,8 @@
     grobidTest.py
     ======================
 
-    This modest python script will evaluate the runtime of the grobid models.
+    This modest python script will evaluate the runtime of the grobid models in DeLFT. The script must be executed from the 
+    root of the DeLFT project directory (as grobidTagger.py, netTagger.py, etc.).
     
     to call the script for evaluation the text processing service:
 

@@ -55,6 +55,8 @@ class TEIContentHandler(xml.sax.ContentHandler):
         if name == "abstract":
             self.abstract = True
             self.document["abstract"] = []
+            self.ref_spans = []
+            self.entity_spans = []
         if name == "head":
             # beginning of paragraph
             self.section = self.accumulated                
@@ -62,6 +64,7 @@ class TEIContentHandler(xml.sax.ContentHandler):
             # beginning of paragraph
             self.paragraph = ''
             self.ref_spans = []
+            self.entity_spans = []
             self.currentOffset = 0
         if name == "rs":
             # beginning of entity
@@ -109,7 +112,8 @@ class TEIContentHandler(xml.sax.ContentHandler):
             if self.abstract:
                 self.document["abstract"].append(local_paragraph)
             else:
-                self.document["body_text"].append(local_paragraph)
+                if "body_text" in self.document:
+                    self.document["body_text"].append(local_paragraph)
             self.paragraph = None
         if name == "rs":
             self.paragraph += self.accumulated
@@ -121,6 +125,8 @@ class TEIContentHandler(xml.sax.ContentHandler):
         if name == "abstract":
             self.abstract = False
         if name == 'ref':
+            if self.paragraph is None:
+                self.paragraph = ""
             self.paragraph += self.accumulated
             if self.current_reference is not None:
                 self.current_reference["text"] = self.accumulated
@@ -140,70 +146,38 @@ class TEIContentHandler(xml.sax.ContentHandler):
     def clear(self): # clear the accumulator for re-use
         self.accumulated = ""
 
+def convert_tei_string(stringXml):
+    # as we have XML mixed content, we need a real XML parser...
+    parser = make_parser()
+    handler = TEIContentHandler()
+    parser.setContentHandler(handler)
+    parser.parseString(stringXml)
+    document = handler.getDocument()
+    return json.dumps(document, indent=4)
 
-class TEI2LossyJSON(object):
+def convert_tei_file(tei_file, output_path=None):
+    # as we have XML mixed content, we need a real XML parser...
+    parser = make_parser()
+    handler = TEIContentHandler()
+    parser.setContentHandler(handler)
+    print(tei_file)
+    parser.parse(tei_file)
+    document = handler.getDocument()
+    if output_path is None:
+        output_file = tei_file.replace(".tei.xml", ".json")
+    else:
+        output_file = os.path.join(output_path, ntpath.basename(tei_file).replace(".tei.xml", ".json"))
+    print(output_file)
+    with open(output_file, 'w') as outfile:
+        json.dump(document, outfile, indent=4)
 
-    #def __init__(self):
-
-    def convert_tei_string(self, stringXml):
-        """
-        Load data and label from a string 
-        the format is as follow:
-        <p> 
-            bla bla you are a <rs type="insult">CENSURED</rs>, 
-            and I will <rs type="threat">find and kill</rs> you bla bla
-        </p>
-        only the insulting expression is labelled, and similarly only the threat 
-        "action" is tagged
-
-        Returns:
-            tuple(numpy array, numpy array): data and labels
-
-        """
-        # as we have XML mixed content, we need a real XML parser...
-        parser = make_parser()
-        handler = TEIContentHandler()
-        parser.setContentHandler(handler)
-        parser.parseString(stringXml)
-        document = handler.getDocument()
-        return json.dumps(document, indent=4)
-
-    def convert_tei_file(self, tei_file, output_path=None):
-        """
-        Load data and label from a string 
-        the format is as follow:
-        <p> 
-            bla bla you are a <rs type="insult">CENSURED</rs>, 
-            and I will <rs type="threat">find and kill</rs> you bla bla
-        </p>
-        only the insulting expression is labelled, and similarly only the threat 
-        "action" is tagged
-
-        Returns:
-            tuple(numpy array, numpy array): data and labels
-
-        """
-        # as we have XML mixed content, we need a real XML parser...
-        parser = make_parser()
-        handler = TEIContentHandler()
-        parser.setContentHandler(handler)
-        parser.parse(tei_file)
-        document = handler.getDocument()
-        if output_path is None:
-            output_file = tei_file.replace(".tei.xml", ".json")
-        else:
-            output_file = os.path.join(output_path, ntpath.basename(tei_file).replace(".tei.xml", ".json"))
-        print(output_file)
-        with open(output_file, 'w') as outfile:
-            json.dump(document, outfile, indent=4)
-
-    def convert_batch_tei_files(self, path_to_tei_files, output_path=None):
-        for file in os.listdir(path_to_tei_files):
-            if file.endswith(".tei.xml"):
-                if output_path is None:
-                    self.convert_tei_file(file, file.replace(".tei.xml", ".json"))
-                else:
-                    self.convert_tei_file(file, os.path.join(output_path, ntpath.basename(file).replace(".tei.xml", ".json")))
+def convert_batch_tei_files(path_to_tei_files, output_path=None):
+    for file in os.listdir(path_to_tei_files):
+        if file.endswith(".tei.xml"):
+            if output_path is None:
+                convert_tei_file(os.path.join(path_to_tei_files, file), path_to_tei_files)
+            else:
+                convert_tei_file(os.path.join(path_to_tei_files, file), output_path)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
@@ -215,22 +189,19 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     tei_file = args.tei_file
-    tei_corpus = args.tei_corpus
+    tei_corpus_path = args.tei_corpus
     output_path = args.output
-
-    converter = TEI2LossyJSON()
 
     # check path and call methods
     if tei_file is not None and not os.path.isfile(tei_file):
         print("the path to the TEI XML file is not valid: ", tei_file)
-    elif tei_corpus is not None and not os.path.isdir(tei_corpus):
+    if tei_corpus_path is not None and not os.path.isdir(tei_corpus_path):
         print("the path to the directory of TEI files is not valid: ", xml_corpus_path)
-    elif tei_file is not None:
+    if tei_file is not None:
         if tei_file.endswith(".tei.xml"):
-            converter.convert_tei_file(tei_file, output_path)
+            convert_tei_file(tei_file, output_path)
         else:    
             print("TEI XML file must end with entension .tei.xml")
             exit()
-    elif tei_corpus is not None:
-        converter.convert_batch_tei_files(tei_corpus, output_path)
-
+    elif tei_corpus_path is not None:
+        convert_batch_tei_files(tei_corpus_path, output_path=output_path)
