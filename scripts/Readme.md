@@ -1,4 +1,4 @@
-# Some python scripts for analyzing and manipulating the corpus data. 
+# Some python scripts for analyzing and manipulating the corpus data
 
 ## Analysis of training data consistency
 
@@ -55,7 +55,7 @@ Having produced the JSON files as indicated above, we can inject the Softcite co
 
 The script realign the annotations from the excerpts present in the corpus file into the complete JSON document. The added annotations are present in each JSON paragraph elements introduced by the `entity_spans` key.
 
-```
+```json
 {
     "section": "statistical analysis",
     "text": "In order to test the heterogeneity of pooled HR, Cochran's Q-test and Higgins I 2 statistics were performed. P\ue02c0.05 was considered statistically significant. Random-effects model was used to calculate pooled HR when between-study heterogeneity was revealed (P\ue02c0.05), and fixed-effects model was conducted when between-study heterogeneity did not reach the statistical significance (P\ue02e0.05). Subgroup analysis, sensitive analysis, and meta-regression were used to investigate the sources of heterogeneity. Publication bias was assessed by using Begg's test and Egger's test. 32,33 STATA version 12.0 (Stata Corporation, College Station, TX, USA) was used to perform all the analyses.",
