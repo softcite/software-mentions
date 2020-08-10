@@ -47,8 +47,8 @@ class TEICorpusHandler(xml.sax.ContentHandler):
         if self.accumulated != '':
             if self.paragraph == None:
                 self.paragraph = ''
-            self.paragraph += self.accumulated.strip()
-            self.currentOffset += len(self.accumulated.strip())
+            self.paragraph += self.accumulated
+            self.currentOffset += len(self.accumulated)
             self.accumulated = ''
         if name == 'idno':
             if attrs.getLength() != 0:
@@ -135,7 +135,7 @@ class TEICorpusHandler(xml.sax.ContentHandler):
             if self.document is not None:
                 if self.paragraph == None:
                     self.paragraph = ''
-                self.paragraph += self.accumulated.strip()
+                self.paragraph += self.accumulated
                 local_paragraph = OrderedDict() 
                 local_paragraph['text'] = self.paragraph
                 if len(self.ref_spans) > 0:
@@ -208,7 +208,7 @@ class TEICorpusHandler(xml.sax.ContentHandler):
         if name == 'teiCorpus':
             print("total unmatched", self.nb_unmatched_file, "/", self.nb_file)
 
-        self.currentOffset += len(self.accumulated.strip())
+        self.currentOffset += len(self.accumulated)
         self.accumulated = ''
 
     def characters(self, content):
@@ -220,9 +220,10 @@ class TEICorpusHandler(xml.sax.ContentHandler):
     def clear(self): # clear the accumulator for re-use
         self.accumulated = ""
 
-
 def signature(string):
     string = string.replace("-", "")
+    string = string.replace("\t", "")
+    string = string.replace("\n", "")
     #string = ''.join([i if ord(i) < 128 else '' for i in string])
     return string.replace(" ", "")
 
