@@ -193,7 +193,7 @@ class TEICorpusHandler(xml.sax.ContentHandler):
                         i += 1
                     if not local_match:
                         print("no match:", self.origin_file)
-                        print(local_text)
+                        #print(local_text)
                         self.nb_unmatched_file += 1
 
             # and write it

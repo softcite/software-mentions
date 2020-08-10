@@ -96,3 +96,9 @@ The script realign the annotations from the excerpts present in the corpus file 
     ]
 },
 ```
+
+Note: to preserve the element order, python scripts must use `OrderedDict` and not usual `dict`, e.g. for loading a json file:
+
+```
+json_doc = json.loads(file, object_pairs_hook=OrderedDict)
+``` 
