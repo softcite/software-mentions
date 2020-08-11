@@ -281,9 +281,7 @@ public class AnnotatedCorpusGeneratorCSV {
             SortedSet<DocumentPiece> documentParts = doc.getDocumentPart(SegmentationLabels.HEADER);
             List<LayoutToken> titleTokens = null;
             if (documentParts != null) {
-                Pair<String,List<LayoutToken>> headerFeatured = engine.getParsers().getHeaderParser().getSectionHeaderFeatured(doc, documentParts, true);
-                // below for grobid 0.6.1
-                //Pair<String,List<LayoutToken>> headerFeatured = engine.getParsers().getHeaderParser().getSectionHeaderFeatured(doc, documentParts);
+                Pair<String,List<LayoutToken>> headerFeatured = engine.getParsers().getHeaderParser().getSectionHeaderFeatured(doc, documentParts);
                 String header = headerFeatured.getLeft();
                 List<LayoutToken> tokenizationHeader = Document.getTokenizationParts(documentParts, doc.getTokenizations());
                 String labeledResult = null;
