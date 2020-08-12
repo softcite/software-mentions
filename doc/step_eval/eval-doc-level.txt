@@ -1,0 +1,385 @@
+> Task :compileJava UP-TO-DATE
+> Task :processResources UP-TO-DATE
+> Task :classes UP-TO-DATE
+
+> Task :eval_software_doc_level_nfold
+path2GbdHome=../grobid-home
+labeled corpus path: resources/dataset/software/corpus
+training data path: /data/workspace/plopez/grobid/grobid-home/tmp/software4293354385135399551.train
+====================== Fold 0 ====================== 
+	epsilon: 1.0E-5
+	window: 20
+	nb max iterations: 2000
+	nb threads: 16
+Labeling took: 2914 ms
+====================== Fold 1 ====================== 
+	epsilon: 1.0E-5
+	window: 20
+	nb max iterations: 2000
+	nb threads: 16
+Labeling took: 2980 ms
+====================== Fold 2 ====================== 
+	epsilon: 1.0E-5
+	window: 20
+	nb max iterations: 2000
+	nb threads: 16
+Labeling took: 3026 ms
+====================== Fold 3 ====================== 
+	epsilon: 1.0E-5
+	window: 20
+	nb max iterations: 2000
+	nb threads: 16
+Labeling took: 3017 ms
+====================== Fold 4 ====================== 
+	epsilon: 1.0E-5
+	window: 20
+	nb max iterations: 2000
+	nb threads: 16
+Labeling took: 3000 ms
+====================== Fold 5 ====================== 
+	epsilon: 1.0E-5
+	window: 20
+	nb max iterations: 2000
+	nb threads: 16
+Labeling took: 3613 ms
+====================== Fold 6 ====================== 
+	epsilon: 1.0E-5
+	window: 20
+	nb max iterations: 2000
+	nb threads: 16
+Labeling took: 2874 ms
+====================== Fold 7 ====================== 
+	epsilon: 1.0E-5
+	window: 20
+	nb max iterations: 2000
+	nb threads: 16
+Labeling took: 3355 ms
+====================== Fold 8 ====================== 
+	epsilon: 1.0E-5
+	window: 20
+	nb max iterations: 2000
+	nb threads: 16
+Labeling took: 3369 ms
+====================== Fold 9 ====================== 
+	epsilon: 1.0E-5
+	window: 20
+	nb max iterations: 2000
+	nb threads: 16
+Labeling took: 3799 ms
+Recap results for each fold:
+
+
+====================== Fold 0 ====================== 
+Saving model in /data/workspace/plopez/grobid/grobid-home/tmp/software_nfold_0_qebtxpzwbw.wapiti
+Training input data: /data/workspace/plopez/grobid/grobid-home/tmp/software7219162937843993362.train
+Evaluation input data: /data/workspace/plopez/grobid/grobid-home/tmp/software8175932276946303474.test
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1           support
+
+<creator>            97.3         89.9         75.42        82.03        118    
+<software>           89.21        87.74        70.45        78.15        396    
+<url>                99.17        60           60           60           15     
+<version>            98.06        91.15        85.12        88.03        121    
+
+all (micro avg.)     95.94        88.07        73.85        80.33        650    
+all (macro avg.)     95.94        82.2         72.75        77.05        650    
+
+===== Instance-level results =====
+
+Total expected instances:   231
+Correct instances:          126
+Instance-level recall:      54.55
+
+
+
+====================== Fold 1 ====================== 
+Saving model in /data/workspace/plopez/grobid/grobid-home/tmp/software_nfold_1_qebtxpzwbw.wapiti
+Training input data: /data/workspace/plopez/grobid/grobid-home/tmp/software4253680151273258414.train
+Evaluation input data: /data/workspace/plopez/grobid/grobid-home/tmp/software6076619033479054464.test
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1           support
+
+<creator>            97.62        85.29        81.31        83.25        107    
+<software>           90.4         86.23        79.05        82.48        420    
+<url>                99.52        50           71.43        58.82        7      
+<version>            98.5         92.04        88.89        90.43        117    
+
+all (micro avg.)     96.51        86.56        81.11        83.74        651    
+all (macro avg.)     96.51        78.39        80.17        78.75        651    
+
+===== Instance-level results =====
+
+Total expected instances:   231
+Correct instances:          134
+Instance-level recall:      58.01
+
+
+
+====================== Fold 2 ====================== 
+Saving model in /data/workspace/plopez/grobid/grobid-home/tmp/software_nfold_2_qebtxpzwbw.wapiti
+Training input data: /data/workspace/plopez/grobid/grobid-home/tmp/software4263806655779942833.train
+Evaluation input data: /data/workspace/plopez/grobid/grobid-home/tmp/software8773173910261774657.test
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1           support
+
+<creator>            96.81        84.54        67.21        74.89        122    
+<software>           89.32        84.58        72.63        78.15        453    
+<url>                98.61        80           44.44        57.14        36     
+<version>            98.14        90.3         86.43        88.32        140    
+
+all (micro avg.)     95.72        85.62        72.97        78.79        751    
+all (macro avg.)     95.72        84.85        67.68        74.62        751    
+
+===== Instance-level results =====
+
+Total expected instances:   231
+Correct instances:          122
+Instance-level recall:      52.81
+
+
+
+====================== Fold 3 ====================== 
+Saving model in /data/workspace/plopez/grobid/grobid-home/tmp/software_nfold_3_qebtxpzwbw.wapiti
+Training input data: /data/workspace/plopez/grobid/grobid-home/tmp/software3924331557731019165.train
+Evaluation input data: /data/workspace/plopez/grobid/grobid-home/tmp/software6510697717327082470.test
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1           support
+
+<creator>            96.82        84.31        73.5         78.54        117    
+<software>           88.56        81.21        72.99        76.88        385    
+<url>                99.39        68.42        81.25        74.29        16     
+<version>            97.83        89.83        84.13        86.89        126    
+
+all (micro avg.)     95.65        83.08        75.47        79.09        644    
+all (macro avg.)     95.65        80.94        77.97        79.15        644    
+
+===== Instance-level results =====
+
+Total expected instances:   231
+Correct instances:          130
+Instance-level recall:      56.28
+
+
+
+====================== Fold 4 ====================== 
+Saving model in /data/workspace/plopez/grobid/grobid-home/tmp/software_nfold_4_qebtxpzwbw.wapiti
+Training input data: /data/workspace/plopez/grobid/grobid-home/tmp/software6423543315412435936.train
+Evaluation input data: /data/workspace/plopez/grobid/grobid-home/tmp/software8656904529478483911.test
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1           support
+
+<creator>            96.57        83.33        74.38        78.6         121    
+<software>           89.85        88.71        72.19        79.61        392    
+<url>                99.44        75           75           75           16     
+<version>            98.6         94.23        87.5         90.74        112    
+
+all (micro avg.)     96.12        88.3         75.35        81.31        641    
+all (macro avg.)     96.12        85.32        77.27        80.99        641    
+
+===== Instance-level results =====
+
+Total expected instances:   231
+Correct instances:          139
+Instance-level recall:      60.17
+
+
+
+====================== Fold 5 ====================== 
+Saving model in /data/workspace/plopez/grobid/grobid-home/tmp/software_nfold_5_qebtxpzwbw.wapiti
+Training input data: /data/workspace/plopez/grobid/grobid-home/tmp/software2358060914117933687.train
+Evaluation input data: /data/workspace/plopez/grobid/grobid-home/tmp/software7952766163763719293.test
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1           support
+
+<creator>            97.49        85.59        81.9         83.7         116    
+<software>           90.72        87.43        76.69        81.71        399    
+<url>                99.05        71.43        29.41        41.67        17     
+<version>            97.83        90           84.38        87.1         128    
+
+all (micro avg.)     96.27        87.41        77.88        82.37        660    
+all (macro avg.)     96.27        83.61        68.09        73.54        660    
+
+===== Instance-level results =====
+
+Total expected instances:   231
+Correct instances:          136
+Instance-level recall:      58.87
+
+
+
+====================== Fold 6 ====================== 
+Saving model in /data/workspace/plopez/grobid/grobid-home/tmp/software_nfold_6_qebtxpzwbw.wapiti
+Training input data: /data/workspace/plopez/grobid/grobid-home/tmp/software7214227395218824941.train
+Evaluation input data: /data/workspace/plopez/grobid/grobid-home/tmp/software4445830207694085477.test
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1           support
+
+<creator>            97.2         82.18        77.57        79.81        107    
+<software>           89.95        86.11        75.43        80.42        411    
+<url>                99.47        85.71        66.67        75           18     
+<version>            98.27        95.52        86.49        90.78        148    
+
+all (micro avg.)     96.22        87.52        77.92        82.44        684    
+all (macro avg.)     96.22        87.38        76.54        81.5         684    
+
+===== Instance-level results =====
+
+Total expected instances:   231
+Correct instances:          132
+Instance-level recall:      57.14
+
+
+
+====================== Fold 7 ====================== 
+Saving model in /data/workspace/plopez/grobid/grobid-home/tmp/software_nfold_7_qebtxpzwbw.wapiti
+Training input data: /data/workspace/plopez/grobid/grobid-home/tmp/software3761490287389128229.train
+Evaluation input data: /data/workspace/plopez/grobid/grobid-home/tmp/software7083126732137181178.test
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1           support
+
+<creator>            97.35        84.71        73.47        78.69        98     
+<software>           90.13        86.13        77.64        81.67        416    
+<url>                99.32        62.5         71.43        66.67        14     
+<version>            97.89        85.83        88.03        86.92        117    
+
+all (micro avg.)     96.17        85.23        78.76        81.87        645    
+all (macro avg.)     96.17        79.79        77.64        78.49        645    
+
+===== Instance-level results =====
+
+Total expected instances:   231
+Correct instances:          130
+Instance-level recall:      56.28
+
+
+
+====================== Fold 8 ====================== 
+Saving model in /data/workspace/plopez/grobid/grobid-home/tmp/software_nfold_8_qebtxpzwbw.wapiti
+Training input data: /data/workspace/plopez/grobid/grobid-home/tmp/software6403031481498778941.train
+Evaluation input data: /data/workspace/plopez/grobid/grobid-home/tmp/software5796992213159961191.test
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1           support
+
+<creator>            97.91        89.13        79.61        84.1         103    
+<software>           89.8         86.19        75.54        80.52        413    
+<url>                99.53        75           69.23        72           13     
+<version>            97.77        96.43        78.83        86.75        137    
+
+all (micro avg.)     96.25        88.41        76.73        82.15        666    
+all (macro avg.)     96.25        86.69        75.8         80.84        666    
+
+===== Instance-level results =====
+
+Total expected instances:   231
+Correct instances:          135
+Instance-level recall:      58.44
+
+
+
+====================== Fold 9 ====================== 
+Saving model in /data/workspace/plopez/grobid/grobid-home/tmp/software_nfold_9_qebtxpzwbw.wapiti
+Training input data: /data/workspace/plopez/grobid/grobid-home/tmp/software999517515573853531.train
+Evaluation input data: /data/workspace/plopez/grobid/grobid-home/tmp/software8427490845481536462.test
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1           support
+
+<creator>            97.43        90           71.68        79.8         113    
+<software>           88.9         86.33        71.88        78.44        448    
+<url>                98.93        60           57.14        58.54        21     
+<version>            98.31        88.52        89.26        88.89        121    
+
+all (micro avg.)     95.89        86.45        74.4         79.97        703    
+all (macro avg.)     95.89        81.21        72.49        76.42        703    
+
+===== Instance-level results =====
+
+Total expected instances:   238
+Correct instances:          121
+Instance-level recall:      50.84
+
+
+
+Summary results: 
+Worst fold
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1           support
+
+<creator>            96.81        84.54        67.21        74.89        122    
+<software>           89.32        84.58        72.63        78.15        453    
+<url>                98.61        80           44.44        57.14        36     
+<version>            98.14        90.3         86.43        88.32        140    
+
+all (micro avg.)     95.72        85.62        72.97        78.79        751    
+all (macro avg.)     95.72        84.85        67.68        74.62        751    
+
+===== Instance-level results =====
+
+Total expected instances:   231
+Correct instances:          122
+Instance-level recall:      52.81
+
+Best fold:
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1           support
+
+<creator>            97.62        85.29        81.31        83.25        107    
+<software>           90.4         86.23        79.05        82.48        420    
+<url>                99.52        50           71.43        58.82        7      
+<version>            98.5         92.04        88.89        90.43        117    
+
+all (micro avg.)     96.51        86.56        81.11        83.74        651    
+all (macro avg.)     96.51        78.39        80.17        78.75        651    
+
+===== Instance-level results =====
+
+Total expected instances:   231
+Correct instances:          134
+Instance-level recall:      58.01
+
+
+Average over 10 folds: 
+
+label                accuracy     precision    recall       f1           support
+
+<creator>            97.25        85.9         75.61        80.34        1122   
+<software>           89.68        86.07        74.45        79.8         4133   
+<url>                99.24        68.81        62.6         63.91        173    
+<version>            98.12        91.39        85.91        88.48        1267   
+
+all                  96.07        86.67        76.44        81.21  
+
+===== Instance-level results =====
+
+Total expected instances:   231.7
+Correct instances:          130.5
+Instance-level recall:      56.32
+
+
+N-Fold evaluation for software model is realized in 180921917 ms
+
+BUILD SUCCESSFUL in 50h 15m 26s
+3 actionable tasks: 1 executed, 2 up-to-date

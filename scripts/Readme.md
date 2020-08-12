@@ -49,6 +49,10 @@ For instance, converting the set of around 5000 Softcite corpus TEI XML files pr
 
 ### Adding the Softcote annotations into the JSON lossy format
 
+Install the dependency for sentence segmentation (pragmatic segmenter port to Python, https://github.com/diasks2/pragmatic_segmenter), use:
+
+> pip3 install -r requirements.txt
+
 Having produced the JSON files as indicated above, we can inject the Softcite corpus curated annotations into the JSON as follow:
 
 > python3 corpus2JSON.py  --tei-corpus ../resources/dataset/software/corpus/softcite_corpus.tei.xml --json-repo /home/lopez/tools/softcite-dataset/json/ --output /home/lopez/tools/softcite-dataset/new
