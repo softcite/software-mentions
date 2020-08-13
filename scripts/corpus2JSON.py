@@ -264,11 +264,13 @@ def convert_to_sentence_segments(json):
                         for ref_span in text_part["ref_spans"]:
                             # check if we have a segmentation in the middle of a ref span
                             if ref_span["start"] >= offset_pos and ref_span["start"] < span.end and ref_span["end"] > span.end:
+                                """
                                 print("\nwarning, segmentation in the middle of ref span: sentence at", 
                                     span.start, span.end, "with ref at", ref_span["start"], ref_span["end"])
                                 print("sentence:", text_part["text"][span.start:span.end])
                                 print("ref:", text_part["text"][ref_span["start"]:ref_span["end"]])
                                 print("\n")
+                                """
                                 # in this case, we cancel this sentence boundary
                                 previous_start = span.start
                                 break
@@ -292,11 +294,13 @@ def convert_to_sentence_segments(json):
                         for entity_span in text_part["entity_spans"]:
                             # check if we have a segmentation in the middle of an entity span
                             if entity_span["start"] >= offset_pos and entity_span["start"] < span.end  and entity_span["end"] > span.end:
+                                """
                                 print("\nwarning, segmentation in the middle of entity span: sentence at", 
                                     span.start, span.end, "with entity at", entity_span["start"], entity_span["end"])
                                 print("sentence:", text_part["text"][span.start:span.end])
                                 print("entity:", text_part["text"][entity_span["start"]:entity_span["end"]])
                                 print("\n")
+                                """
                                 # in this case, we cancel this sentence boundary
                                 previous_start = span.start
                                 break

@@ -1645,7 +1645,7 @@ public class XMLCorpusPostProcessorNoMention {
             System.exit(-1);
         }  
 
-        boolean extraContext = false;
+        boolean extraContext = true;
 
         String outputXmlPathTmp = outputXmlPath.replace(".xml", ".tmp.xml");
 
