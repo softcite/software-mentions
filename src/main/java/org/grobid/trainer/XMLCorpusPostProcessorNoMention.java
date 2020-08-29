@@ -77,6 +77,8 @@ public class XMLCorpusPostProcessorNoMention {
     private Map<String,String> missingTitles = new TreeMap<>();
     private SoftwareConfiguration configuration;
 
+    private Map<String, String> orgin2Key = null;
+
     private List<String> trainingDoc = Arrays.asList("a2008-39-NAT_BIOTECHNOL", "a2010-05-BMC_MOL_BIOL", 
         "a2007-48-UNDERSEA_HYPERBAR_M", "a2001-40-MOL_ECOL", "a2008-02-WATERBIRDS");
 
@@ -1184,7 +1186,14 @@ public class XMLCorpusPostProcessorNoMention {
                         }
 
                         // get an hexadecimal key for this document
-                        String newDocId = HexaKeyGen.getHexaKey(10, true);
+                        // get an already existing key if available
+                        String newDocId = orgin2KeyGen(docId);
+
+                        // otherwise generate a new one
+                        if (newDocId == null) {
+                            newDocId = HexaKeyGen.getHexaKey(10, true);
+                        }
+
                         fileDescElement.setAttribute("xml:id", newDocId);
 
                         // keep a trace of the ID under sourceDesc/bibl/idno @origin
@@ -1559,6 +1568,36 @@ public class XMLCorpusPostProcessorNoMention {
         }
     }
 
+    /**
+     * Map the origin identifier (the identifier used sor the PDF file names) to a stable generated hexa identifier
+     */
+    private String orgin2KeyGen(String origin) {
+        if (this.orgin2Key == null) {
+            this.orgin2Key = new TreeMap<>();
+            // load the map from the csv id file
+            File idsFile = new File("resources" + File.separator + "dataset" + File.separator + "software"+ File.separator +
+                "corpus" + File.separator + "ids.csv");
+            try {
+                BufferedReader b = new BufferedReader(new FileReader(idsFile));
+                boolean start = true;
+                String line;
+                while ((line = b.readLine()) != null) {
+                    // id,origin,DOI,PMID,PMCID
+                    if (start) {
+                        start = false;
+                        continue;
+                    }
+                    String[] pieces = line.split(",");
+                    if (pieces.length >= 2)
+                        this.orgin2Key.put(pieces[1], pieces[0]);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return this.orgin2Key.get(origin);
+    }
+
     private void importCSVMissingTitles(String csvPath, Map<String, AnnotatedDocument> documents) {
         // this csv file gives missing titles for some hard to process articles
         File softciteTitles = new File(csvPath + File.separator + "imputation-tei-article-missing-title.csv");
@@ -1645,7 +1684,7 @@ public class XMLCorpusPostProcessorNoMention {
             System.exit(-1);
         }  
 
-        boolean extraContext = true;
+        boolean extraContext = false;
 
         String outputXmlPathTmp = outputXmlPath.replace(".xml", ".tmp.xml");
 
