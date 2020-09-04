@@ -26,6 +26,7 @@ class TEIContentHandler(xml.sax.ContentHandler):
     accumulated = ''
     currentOffset = -1
     abstract = False
+    biblio_section = False
     current_reference = None
     current_entity = None
 
@@ -50,6 +51,7 @@ class TEIContentHandler(xml.sax.ContentHandler):
             self.current_reference = None
             self.current_entity = None
             self.document = OrderedDict() 
+            self.document["level"] = "paragraph"
             self.accumulated = ''
             self.abstract = False
         if name == "abstract":
@@ -60,7 +62,7 @@ class TEIContentHandler(xml.sax.ContentHandler):
         if name == "head":
             # beginning of paragraph
             self.section = self.accumulated                
-        if name == "p":
+        if name == "p" or name == 'note' or name == 'figDesc':
             # beginning of paragraph
             self.paragraph = ''
             self.ref_spans = []
@@ -89,6 +91,8 @@ class TEIContentHandler(xml.sax.ContentHandler):
                     self.current_reference["start"] = self.currentOffset
         if name == "body":
             self.document["body_text"] = []
+        if name == "listBibl":
+            self.biblio_section = True
         self.accumulated = ''
 
     def endElement(self, name):
@@ -97,23 +101,23 @@ class TEIContentHandler(xml.sax.ContentHandler):
             self.section = self.accumulated  
         if name == 'div':
             self.section = None
-        if name == "p":
+        if (name == "p" or name == "note" or name == 'figDesc') and not self.biblio_section:
             # end of paragraph 
+            # note is considered as a paragraph
             if self.paragraph == None:
                 self.paragraph = ''
             self.paragraph += self.accumulated
-
             local_paragraph = OrderedDict() 
-            if self.section is not None:
+            if self.section is not None and len(self.section.strip())>0:
                 local_paragraph['section'] = self.section
             local_paragraph['text'] = self.paragraph
             if len(self.ref_spans) > 0:
                 local_paragraph['ref_spans'] = self.ref_spans
-            if self.abstract:
-                self.document["abstract"].append(local_paragraph)
-            else:
-                if "body_text" in self.document:
-                    self.document["body_text"].append(local_paragraph)
+            if len(local_paragraph['text'].strip())>0:
+                if self.abstract:
+                    self.document["abstract"].append(local_paragraph)
+                elif "body_text" in self.document:
+                        self.document["body_text"].append(local_paragraph)
             self.paragraph = None
         if name == "rs":
             self.paragraph += self.accumulated
@@ -133,6 +137,8 @@ class TEIContentHandler(xml.sax.ContentHandler):
                 self.current_reference["end"] = self.currentOffset + len(self.accumulated)
                 self.ref_spans.append(self.current_reference)
             self.current_reference = None
+        if name == "listBibl":
+            self.biblio_section = False
 
         self.currentOffset += len(self.accumulated)
         self.accumulated = ''
