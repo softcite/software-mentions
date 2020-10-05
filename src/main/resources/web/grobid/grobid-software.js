@@ -524,7 +524,7 @@ var grobid = (function ($) {
     function fetchConcept(identifier, lang, successFunction) {
         $.ajax({
             type: 'GET',
-            url: 'http://cloud.science-miner.com/nerd/service/kb/concept/' + identifier + '?lang=' + lang,
+            url: 'https://cloud.science-miner.com/nerd/service/kb/concept/' + identifier + '?lang=' + lang,
             success: successFunction,
             dataType: 'json'
         });

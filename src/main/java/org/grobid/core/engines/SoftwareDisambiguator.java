@@ -127,7 +127,10 @@ public class SoftwareDisambiguator {
         try {
             URL url = null;
             if ( (nerd_port != null) && (nerd_port.length() > 0) )
-                url = new URL("http://" + nerd_host + ":" + nerd_port + "/service/isalive");
+                if (nerd_port.equals("443"))
+                    url = new URL("https://" + nerd_host + "/service/isalive");
+                else
+                    url = new URL("http://" + nerd_host + ":" + nerd_port + "/service/isalive");
             else
                 url = new URL("http://" + nerd_host + "/service/isalive");
 
@@ -174,7 +177,10 @@ public class SoftwareDisambiguator {
         CloseableHttpResponse response = null;
         try {
             if ( (nerd_port != null) && (nerd_port.length() > 0) )
-                url = new URL("http://" + nerd_host + ":" + nerd_port + "/service/customisation/software");
+                if (nerd_port.equals("443"))
+                    url = new URL("https://" + nerd_host + "/service/customisation/software");
+                else
+                    url = new URL("http://" + nerd_host + ":" + nerd_port + "/service/customisation/software");
             else
                 url = new URL("http://" + nerd_host + "/service/customisation/software");
 
@@ -185,7 +191,7 @@ public class SoftwareDisambiguator {
             Scanner in = null;
             try {
                 response = httpClient.execute(get);
-                // Sytem.out.println(response.getStatusLine());
+//System.out.println(response.getStatusLine());
                 int code = response.getStatusLine().getStatusCode();
                 if (code != 200) {
                     LOGGER.error("Failed customization lookup service: HTTP error code : " + code);
@@ -210,7 +216,10 @@ public class SoftwareDisambiguator {
             LOGGER.info("Software customisation not present on server, loading it...");
             try {
                 if ( (nerd_port != null) && (nerd_port.length() > 0) )
-                    url = new URL("http://" + nerd_host + ":" + nerd_port + "/service/customisations");
+                    if (nerd_port.equals("443"))
+                        url = new URL("https://" + nerd_host + "/service/customisations");
+                    else
+                       url = new URL("http://" + nerd_host + ":" + nerd_port + "/service/customisations");
                 else
                     url = new URL("http://" + nerd_host + "/service/customisations");
 
@@ -488,10 +497,13 @@ public class SoftwareDisambiguator {
         try {
             URL url = null;
             if ( (nerd_port != null) && (nerd_port.length() > 0) )
-                url = new URL("http://" + nerd_host + ":" + nerd_port + "/service/" + RESOURCEPATH);
+                if (nerd_port.equals("443"))
+                    url = new URL("https://" + nerd_host + "/service/" + RESOURCEPATH);
+                else
+                    url = new URL("http://" + nerd_host + ":" + nerd_port + "/service/" + RESOURCEPATH);
             else
                 url = new URL("http://" + nerd_host + "/service/" + RESOURCEPATH);
-//System.out.println(url.toString());
+//System.out.println("calling... " + url.toString());
             CloseableHttpClient httpClient = HttpClients.createDefault();
             HttpPost post = new HttpPost(url.toString());
             //post.addHeader("Content-Type", "application/json");
