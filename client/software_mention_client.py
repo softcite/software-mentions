@@ -135,6 +135,7 @@ class software_mention_client(object):
         # last batch
         if len(pdf_files) > 0:
             self.annotate_batch(pdf_files, out_files, full_records)
+            nb_total += len(pdf_files)
             runtime = round(time.time() - start_time, 3)
             print("total process:", nb_total, "- accumulated runtime: %s s " % (runtime), "- %s PDF/s" % round(nb_total/runtime, 2))
 
@@ -296,7 +297,7 @@ class software_mention_client(object):
         elif response.status_code >= 500:
             print('[{0}] Server Error'.format(response.status_code), file_in)
         elif response.status_code == 404:
-            print('[{0}] URL not found: [{1}]'.format(response.status_code,api_url))
+            print('[{0}] URL not found: [{1}]'.format(response.status_code, url))
         elif response.status_code >= 400:
             print('[{0}] Bad Request'.format(response.status_code))
             print(response.content )
