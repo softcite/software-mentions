@@ -177,10 +177,12 @@ class software_mention_client(object):
                     continue
 
                 # if identifier already processed successfully in the local lmdb, we skip
+                '''
                 with self.env_software.begin() as txn:
                     status = txn.get(local_entry['id'].encode(encoding='UTF-8'))
                     if status is not None and status.decode(encoding='UTF-8') == "True":
                         continue
+                '''
 
                 pdf_files.append(os.path.join(data_path, generateStoragePath(local_entry['id']), local_entry['id'], local_entry['id']+".pdf"))
                 out_files.append(os.path.join(data_path, generateStoragePath(local_entry['id']), local_entry['id'], local_entry['id']+".software.json"))
@@ -409,6 +411,12 @@ class software_mention_client(object):
 
             result = self.mongo_db.references.find( {"tei": {"$regex": "DOI"}} )
             print("\t  * with DOI:", result.count())  
+
+            result = self.mongo_db.references.find( {"tei": {"$regex": "PMID"}} )
+            print("\t  * with PMID:", result.count())  
+
+            result = self.mongo_db.references.find( {"tei": {"$regex": "PMC"}} )
+            print("\t  * with PMC ID:", result.count())  
             print("---")
 
     def _insert_mongo(self, jsonObject):
@@ -540,7 +548,8 @@ if __name__ == "__main__":
             client.load_mongo(data_path)
         elif repo_in is not None:
             client.load_mongo(repo_in)
-        
+    elif full_diagnostic:
+        client.diagnostic(full_diagnostic=True)
     elif reprocess:
         client.reprocess_failed()
     elif repo_in is not None: 
@@ -550,6 +559,7 @@ if __name__ == "__main__":
     elif data_path is not None: 
         client.annotate_collection(data_path)
 
-    client.diagnostic(full_diagnostic=full_diagnostic)
+    if not full_diagnostic:
+        client.diagnostic(full_diagnostic=False)
     
     

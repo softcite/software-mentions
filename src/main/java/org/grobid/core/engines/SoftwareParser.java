@@ -716,7 +716,7 @@ public class SoftwareParser extends AbstractParser {
                 matchedTokens.get(matchedTokens.size()-1).getOffset() + matchedTokens.get(matchedTokens.size()-1).getText().length());
 
             String term = LayoutTokensUtil.toText(matchedTokens);
-System.out.println("matched: " + term);
+//System.out.println("matched: " + term);
             int termFrequency = 1;
             if (frequencies != null && frequencies.get(term) != null)
                 termFrequency = frequencies.get(term);
