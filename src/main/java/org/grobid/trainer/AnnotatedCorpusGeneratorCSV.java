@@ -172,6 +172,20 @@ public class AnnotatedCorpusGeneratorCSV {
         System.out.println("\n" + totalAnnotations + " total annotations");
         System.out.println(documents.size() + " total annotated documents");    
 
+        // check missing PDF files
+        int nbMissingPdf = 0;
+        int totalDocuments = 0;
+        for (Map.Entry<String, AnnotatedDocument> entry : documents.entrySet()) {
+            totalDocuments++;
+            String docName = entry.getKey();
+            File pdfFile = getPDF(documentPath, docName, articleUtilities, this.configuration);
+            if (pdfFile == null) {
+                nbMissingPdf++;
+            }
+        }
+
+        System.out.println(nbMissingPdf + " missing PDF"); 
+
         // from the loadeed annotations, we rank the annotators by their number of annotations, this information
         // could be used to decide which annotation to pick when we have inter-annotator disagreement (by default 
         // the annotator having produced the most annotations could be selected)
@@ -221,7 +235,7 @@ public class AnnotatedCorpusGeneratorCSV {
         writerCorpusHeader(builderTEICorpus);
 
         // go thought all annotated documents of softcite
-        int m = 0;
+        //int m = 0;
         List<String> xmlFiles = new ArrayList<String>();
         for (Map.Entry<String, AnnotatedDocument> entry : documents.entrySet()) {
             //if (m > 20) {

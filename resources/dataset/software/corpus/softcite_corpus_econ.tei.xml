@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <teiCorpus xmlns="http://www.tei-c.org/ns/1.0" version="4.0.0">
-   <teiHeader>
+   <teiHeader xmlns="">
       <fileDesc>
          <titleStmt>
             <title>Softcite annotated corpus</title>
@@ -217,33 +217,6 @@
    
    
    
-   <TEI subtype="econ" type="article">
-      <teiHeader>
-         <fileDesc xml:id="c7b06cd0b4">
-            <titleStmt>
-               <title>A Short Introduction to the World of Cryptocurrencies</title>
-            </titleStmt>
-            <sourceDesc>
-               <bibl>
-                  <idno type="DOI">10.20955/r.2018.1-16</idno>
-                  <idno type="origin">10.20955%2Fr%2F2018.1-16</idno>
-               </bibl>
-            </sourceDesc>
-         </fileDesc>
-         <encodingDesc/>
-         <profileDesc>
-            <textClass>
-               <catRef target="#with_reconciliation_and_scripts"/>
-               <catRef target="#unique_annotator"/>
-            </textClass>
-         </profileDesc>
-      </teiHeader>
-      <text xml:lang="en">
-         <body>
-            <p>Smart contracts are self-executing contracts. 8 They can be used to stipulate that a Bitcoin payment will be executed only when a certain condition is met. The Ethereum network is currently the leader in the field of smart contracts. Similar to Bitcoin, it is based on blockchain technology and provides a native cryptoasset, called Ether. In contrast to Bitcoin, Ethereum provides a more flexible scripting language and is able to track contractual states. Potential applications include but are not limited to e-voting systems, identity management and decentralized organization, and various forms of fundraising (e.g., initial coin offerings).</p>
-         </body>
-      </text>
-   </TEI>
    
    
    
@@ -255,33 +228,6 @@
    
    
    
-   <TEI subtype="econ" type="article">
-      <teiHeader>
-         <fileDesc xml:id="ebbcac31d1">
-            <titleStmt>
-               <title>Micro-to-Macro Simulation: A Primer With a Labor Market Example</title>
-            </titleStmt>
-            <sourceDesc>
-               <bibl>
-                  <idno type="DOI">10.1257/jep.4.1.99</idno>
-                  <idno type="origin">10.1257%2Fjep.4.1.99</idno>
-               </bibl>
-            </sourceDesc>
-         </fileDesc>
-         <encodingDesc/>
-         <profileDesc>
-            <textClass>
-               <catRef target="#with_reconciliation_and_scripts"/>
-               <catRef target="#unique_annotator"/>
-            </textClass>
-         </profileDesc>
-      </teiHeader>
-      <text xml:lang="en">
-         <body>
-            <p>The core of the model is an extremely simple representation of worker movements into and out of jobs. It is written in BASIC, a close analogue to FORTRAN. Most PC owners have access to the software necessary to build and run BASIC programs.</p>
-         </body>
-      </text>
-   </TEI>
    
    
    
@@ -411,7 +357,6 @@
          </body>
       </text>
    </TEI>
-   
    
    
    
@@ -701,7 +646,7 @@
       </teiHeader>
       <text xml:lang="en">
          <body>
-            <p>As mentioned before, the KKT conditions of the period-3 problem of the PNP model constitute a LCP. We solve it, for each contingent state, by minimizing the complementarity conditions subject to the linear equality constraints and the non-negativity constraints. 17 The period-2 problem of the PNP model is an EPEC, in which each firm faces a Mathematical Program subject to Equilibrium Constraints (MPEC). <ref type="bibr">18</ref> We attempt to solve for equilibrium, if at least one exists, by iterative deletion of dominated strategies. That is, we sequentially solve each firm's profit-maximization problem using as data the optimal values from previously solved problems. Thus, starting from a feasible solution, we solve for g 1 using g <ref type="bibr">(−1)</ref> as data in the first firm's optimization problem (where g (−1) means all firms' generation capacities except for firm 1's), then solve for <ref type="bibr">17</ref> Recall that any LCP can be written as the problem of finding a vector x ∈ n such that x = q + M · y, x T · y = 0, x ≥ 0, and y ≥ 0, where M ∈ n×n , q ∈ n , and y ∈ n . Thus, we can solve it by minimizing x T · y subject to x = q + M · y, x ≥ 0, and y ≥ 0. If the previous problem has an optimal solution where the objective function is zero, then that solution also solves the corresponding LCP. Greater details about the methodology used for solving LCPs are given in <ref type="bibr">(Hobbs, 2001)</ref>. 18 See <ref type="bibr">(Yao et al., 2004)</ref> for definitions of both EPEC and MPEC.g 2 using g <ref type="bibr">(−2)</ref> as data, and so on. We solve each firm's profit-maximization problem using a sequential quadratic programming algorithm implemented in<rs cert="1.0" resp="#annotator14" subtype="used" type="software" xml:id="b4e3e280d1-software-simple-0">MATLAB</rs>. We test our model from a set of different starting points and using different generation-firms' optimization order. All these trials gave us the same results. For the PNP model, the optimal levels of generation capacity under absence of transmission investments are (g * 1 , g * 2 , g * 3 , g * 4 , g * 5 ,g * 6 ) = (100 <ref type="bibr">92, 103.72, 101.15, 95.94, 77.07, 87.69)</ref> in MW. <ref type="table">Table 3</ref> lists the corresponding generation quantities (q i ), adjustment quantities (r i ) and nodal prices (P i ) in the normal state. <ref type="figure">Figure 4</ref> illustrates these results for the Cornell network. In <ref type="figure">Fig. 4</ref>, thick lines represent the transmission lines reaching their thermal capacities (in the indicated direction) and circles are located in the nodes with the highest prices (above $48/MWh).</p>
+            <p>As mentioned before, the KKT conditions of the period-3 problem of the PNP model constitute a LCP. We solve it, for each contingent state, by minimizing the complementarity conditions subject to the linear equality constraints and the non-negativity constraints. 17 The period-2 problem of the PNP model is an EPEC, in which each firm faces a Mathematical Program subject to Equilibrium Constraints (MPEC). <ref type="bibr">18</ref> We attempt to solve for equilibrium, if at least one exists, by iterative deletion of dominated strategies. That is, we sequentially solve each firm's profit-maximization problem using as data the optimal values from previously solved problems. Thus, starting from a feasible solution, we solve for g 1 using g <ref type="bibr">(−1)</ref> as data in the first firm's optimization problem (where g (−1) means all firms' generation capacities except for firm 1's), then solve for <ref type="bibr">17</ref> Recall that any LCP can be written as the problem of finding a vector x ∈ n such that x = q + M · y, x T · y = 0, x ≥ 0, and y ≥ 0, where M ∈ n×n , q ∈ n , and y ∈ n . Thus, we can solve it by minimizing x T · y subject to x = q + M · y, x ≥ 0, and y ≥ 0. If the previous problem has an optimal solution where the objective function is zero, then that solution also solves the corresponding LCP. Greater details about the methodology used for solving LCPs are given in <ref type="bibr">(Hobbs, 2001)</ref>. 18 See <ref type="bibr">(Yao et al., 2004)</ref> for definitions of both EPEC and MPEC.g 2 using g <ref type="bibr">(−2)</ref> as data, and so on. We solve each firm's profit-maximization problem using a sequential quadratic programming algorithm implemented in<rs cert="1.0" resp="#annotator14" subtype="used" type="software" xml:id="b4e3e280d1-software-simple-0">MATLAB</rs> . We test our model from a set of different starting points and using different generation-firms' optimization order. All these trials gave us the same results. For the PNP model, the optimal levels of generation capacity under absence of transmission investments are (g * 1 , g * 2 , g * 3 , g * 4 , g * 5 ,g * 6 ) = (100 <ref type="bibr">92, 103.72, 101.15, 95.94, 77.07, 87.69)</ref> in MW. <ref type="table">Table 3</ref> lists the corresponding generation quantities (q i ), adjustment quantities (r i ) and nodal prices (P i ) in the normal state. <ref type="figure">Figure 4</ref> illustrates these results for the Cornell network. In <ref type="figure">Fig. 4</ref>, thick lines represent the transmission lines reaching their thermal capacities (in the indicated direction) and circles are located in the nodes with the highest prices (above $48/MWh).</p>
          </body>
       </text>
    </TEI>
@@ -763,28 +708,6 @@
    
    
    
-   <TEI subtype="econ" type="article">
-      <teiHeader>
-         <fileDesc xml:id="a902586784">
-            <titleStmt>
-               <title>Paid Family Leave, Fathers' Leave-Taking, and Leave-Sharing in Dual-Earner Households</title>
-            </titleStmt>
-            <biblStruct/>
-         </fileDesc>
-         <encodingDesc/>
-         <profileDesc>
-            <textClass>
-               <catRef target="#with_reconciliation_and_scripts"/>
-               <catRef target="#multiple_annotator"/>
-            </textClass>
-         </profileDesc>
-      </teiHeader>
-      <text xml:lang="en">
-         <body>
-            <p>We use data from the 2000 Census and the 2000 to 2013 waves of the ACS to estimate the effects of CA-PFL on fathers' leave-taking. The ACS is conducted throughout the year and samples 1 percent of the population in most years; thus, it has the major advantage of providing the large samples needed to examine leave-taking behavior among fathers. <ref type="bibr">13</ref> When weighted, the ACS is a nationally representative survey that provides information about labor market experiences and demographic factors. For our purposes, what is particularly important is that individuals are questioned about their labor market status in the week prior to the survey-referred to as the "survey reference week"-allowing us to identify leave-taking during that week. Although the ACS does not ask about parental leave vs. other specific types of leave, it does identify individuals who are temporarily absent from work during that week. The main dependent variable that we examine below is whether the father (or mother) is on leave from work in the survey reference week. This absence could be for many reasons including parental leave, vacation, or illness. 14 This lack of specificity is not <ref type="bibr">12</ref> We adjust family income to account for the number of adults and children in the household. This adjustment is explained below in the fifth section. 13 Data come from the Integrated Public Use Microdata Series (IPUMS) database <ref type="bibr">(Ruggles et al., 2010)</ref>. The ACS started in 2000, and was only a 0.13 percent sample in that year. For the next four years, it was approximately a 0.5 percent sample of the population. The questions used in this study are very comparable in the ACS and the 2000 long-form Census. This analysis combines the 2000 ACS with the 1 percent 2000 Census sample in order to increase the sample size in that year. We also show that our main results are robust to dropping the 2000 data. 14 Specifically, the question asked is: "LAST WEEK, was this person TEMPORARILY absent from a job or business?" Respondents can answer "Yes, on vacation, temporary illness, labor dispute, and so forth." or "No." The Current Population Survey (CPS) asks about maternity and paternity leave specifically and is used to identify the effect of CA-PFL on mothers' leave-taking in Rossin-Slater, <ref type="bibr">Ruhm, and Waldfogel (2013)</ref>. However, the sample of fathers on leave in California in the CPS is too small to produce meaningful estimates.</p>
-         </body>
-      </text>
-   </TEI>
    
    
    
@@ -1168,10 +1091,16 @@
    
    <TEI subtype="econ" type="article">
       <teiHeader>
-         <fileDesc xml:id="c30d7c74a2">
+         <fileDesc xml:id="dfa8190e27">
             <titleStmt>
                <title>MIT Press Journals 2018 catalog</title>
             </titleStmt>
+            <sourceDesc>
+               <bibl>
+                  <idno type="DOI">10.1162/qjec.2005.120.1.273</idno>
+                  <idno type="origin">10.1162%2Fqjec.2005.120.1.273</idno>
+               </bibl>
+            </sourceDesc>
             <biblStruct/>
          </fileDesc>
          <encodingDesc/>
@@ -1184,7 +1113,7 @@
       </teiHeader>
       <text xml:lang="en">
          <body>
-            <p>The journal is hosted on an open-access, open-review, rapid publication platform called <rs cert="0.6" resp="#annotator14" type="software" xml:id="c30d7c74a2-software-3">PubPub</rs>, created by students at the <rs corresp="#c30d7c74a2-software-3" resp="#curator" type="publisher">Media Lab</rs>. <rs cert="0.6" resp="#curator" type="software" xml:id="c30d7c74a2-software-simple-2">PubPub</rs> is a collaborative publication environment with rich commenting features, and powerful, intuitive authoring tools. JoDS articles are authored directly within the <rs cert="0.6" resp="#curator" type="software" xml:id="c30d7c74a2-software-simple-3">PubPub</rs> environment, which provides support for multimedia, image integration, and large data sets.</p>
+            <p>The journal is hosted on an open-access, open-review, rapid publication platform called <rs cert="0.6" resp="#annotator14" type="software" xml:id="dfa8190e27-software-3">PubPub</rs>, created by students at the <rs corresp="#dfa8190e27-software-3" resp="#curator" type="publisher">Media Lab</rs>. <rs cert="0.6" resp="#curator" type="software" xml:id="dfa8190e27-software-simple-2">PubPub</rs> is a collaborative publication environment with rich commenting features, and powerful, intuitive authoring tools. JoDS articles are authored directly within the <rs cert="0.6" resp="#curator" type="software" xml:id="dfa8190e27-software-simple-3">PubPub</rs> environment, which provides support for multimedia, image integration, and large data sets.</p>
          </body>
       </text>
    </TEI>
@@ -1193,10 +1122,16 @@
    
    <TEI subtype="econ" type="article">
       <teiHeader>
-         <fileDesc xml:id="f42a73a7db">
+         <fileDesc xml:id="e39f016514">
             <titleStmt>
                <title>MIT Press Journals 2018 catalog</title>
             </titleStmt>
+            <sourceDesc>
+               <bibl>
+                  <idno type="DOI">10.1162/qjec.2006.121.1.289</idno>
+                  <idno type="origin">10.1162%2Fqjec.2006.121.1.289</idno>
+               </bibl>
+            </sourceDesc>
             <biblStruct/>
          </fileDesc>
          <encodingDesc/>
@@ -1209,7 +1144,7 @@
       </teiHeader>
       <text xml:lang="en">
          <body>
-            <p>The journal is hosted on an open-access, open-review, rapid publication platform called <rs cert="1.0" resp="#annotator8" subtype="used" type="software" xml:id="f42a73a7db-software-0">PubPub</rs>, created by students at the <rs corresp="#f42a73a7db-software-0" resp="#curator" type="publisher">Media Lab</rs>. <rs cert="1.0" resp="#curator" subtype="used" type="software" xml:id="f42a73a7db-software-simple-2">PubPub</rs> is a collaborative publication environment with rich commenting features, and powerful, intuitive authoring tools. JoDS articles are authored directly within the <rs cert="1.0" resp="#curator" subtype="used" type="software" xml:id="f42a73a7db-software-simple-3">PubPub</rs> environment, which provides support for multimedia, image integration, and large data sets.</p>
+            <p>The journal is hosted on an open-access, open-review, rapid publication platform called <rs cert="1.0" resp="#annotator8" subtype="used" type="software" xml:id="e39f016514-software-0">PubPub</rs>, created by students at the <rs corresp="#e39f016514-software-0" resp="#curator" type="publisher">Media Lab</rs>. <rs cert="1.0" resp="#curator" subtype="used" type="software" xml:id="e39f016514-software-simple-2">PubPub</rs> is a collaborative publication environment with rich commenting features, and powerful, intuitive authoring tools. JoDS articles are authored directly within the <rs cert="1.0" resp="#curator" subtype="used" type="software" xml:id="e39f016514-software-simple-3">PubPub</rs> environment, which provides support for multimedia, image integration, and large data sets.</p>
          </body>
       </text>
    </TEI>
@@ -1387,34 +1322,6 @@
    
    
    
-   <TEI subtype="econ" type="article">
-      <teiHeader>
-         <fileDesc xml:id="c22e3c812a">
-            <titleStmt>
-               <title>The Job Market for New Economists: A Market Design Perspective</title>
-            </titleStmt>
-            <sourceDesc>
-               <bibl>
-                  <idno type="DOI">10.1257/jep.24.4.187</idno>
-                  <idno type="origin">10.1257%2Fjep.24.4.187</idno>
-               </bibl>
-            </sourceDesc>
-         </fileDesc>
-         <encodingDesc/>
-         <profileDesc>
-            <textClass>
-               <catRef target="#with_reconciliation_and_scripts"/>
-               <catRef target="#unique_annotator"/>
-            </textClass>
-         </profileDesc>
-      </teiHeader>
-      <text xml:lang="en">
-         <body>
-            <p>Other employers use third-party services such as EconJobMarket.org, Other employers use third-party services such as EconJobMarket.org, AcademicJobsOnline.org (run by Duke's Math Department, offering services to AcademicJobsOnline.org (run by Duke's Math Department, offering services to all sorts of departments), and others such as Academic Careers Online at all sorts of departments), and others such as Academic Careers Online at 〈 〈http:// http:// www.academiccareers-job.com/ www.academiccareers-job.com/〉 〉, Economist Jobs at , Economist Jobs at 〈 〈http://www.econ-jobs.com/ http://www.econ-jobs.com/〉 〉, , EconCareers at EconCareers at 〈 〈http://www.econcareers.com/ http://www.econcareers.com/〉 〉, and LiberalArtsFacultyJobs.com.</p>
-         </body>
-      </text>
-   </TEI>
-   
    
    
    
@@ -1459,7 +1366,6 @@
          </body>
       </text>
    </TEI>
-   
    
    
    
@@ -1562,7 +1468,8 @@
       </teiHeader>
       <text xml:lang="en">
          <body>
-            <ref type="bibr">Beirne (2011)</ref> <p>For further details we refer the Reader to <ref type="bibr">Meyer and Yu (2000)</ref>. Estimation of SV model was performed using <rs cert="0.8" resp="#annotator2" subtype="used" type="software" xml:id="a918413cb3-software-simple-0">OpenBugs</rs> program of <ref type="bibr">Meyer and Yu (2000)</ref>. First 10 000 iterations were treated as the ''burn-out'' period, while next 10,000-as the sample from the posterior distribution. Estimation of conditional mean was performed in <rs cert="0.8" resp="#annotator2" subtype="used" type="software" xml:id="a918413cb3-software-2">OxMetrics</rs> <rs corresp="#a918413cb3-software-2" resp="#annotator2" type="version">6.1</rs> program.</p>
+            <ref type="bibr">Beirne (2011)</ref>
+            <p>For further details we refer the Reader to <ref type="bibr">Meyer and Yu (2000)</ref>. Estimation of SV model was performed using <rs cert="0.8" resp="#annotator2" subtype="used" type="software" xml:id="a918413cb3-software-simple-0">OpenBugs</rs> program of <ref type="bibr">Meyer and Yu (2000)</ref>. First 10 000 iterations were treated as the ''burn-out'' period, while next 10,000-as the sample from the posterior distribution. Estimation of conditional mean was performed in <rs cert="0.8" resp="#annotator2" subtype="used" type="software" xml:id="a918413cb3-software-2">OxMetrics</rs> <rs corresp="#a918413cb3-software-2" resp="#annotator2" type="version">6.1</rs> program.</p>
          </body>
       </text>
    </TEI>
@@ -2062,10 +1969,16 @@
    
    <TEI subtype="econ" type="article">
       <teiHeader>
-         <fileDesc xml:id="b0cf5e3deb">
+         <fileDesc xml:id="f6e5ed2ab3">
             <titleStmt>
                <title>MIT Press Journals 2018 catalog</title>
             </titleStmt>
+            <sourceDesc>
+               <bibl>
+                  <idno type="DOI">10.1162/qjec.2005.120.1.131</idno>
+                  <idno type="origin">10.1162%2Fqjec.2005.120.1.131</idno>
+               </bibl>
+            </sourceDesc>
             <biblStruct/>
          </fileDesc>
          <encodingDesc/>
@@ -2078,40 +1991,12 @@
       </teiHeader>
       <text xml:lang="en">
          <body>
-            <p>The journal is hosted on an open-access, open-review, rapid publication platform called <rs cert="0.8" resp="#annotator14" type="software" xml:id="b0cf5e3deb-software-0">PubPub</rs>, created by students at the <rs corresp="#b0cf5e3deb-software-0" resp="#curator" type="publisher">Media Lab</rs>. <rs cert="0.8" resp="#annotator14" type="software" xml:id="b0cf5e3deb-software-simple-2">PubPub</rs> is a collaborative publication environment with rich commenting features, and powerful, intuitive authoring tools. JoDS articles are authored directly within the <rs cert="0.8" resp="#annotator14" type="software" xml:id="b0cf5e3deb-software-simple-3">PubPub</rs> environment, which provides support for multimedia, image integration, and large data sets.</p>
+            <p>The journal is hosted on an open-access, open-review, rapid publication platform called <rs cert="0.8" resp="#annotator14" type="software" xml:id="f6e5ed2ab3-software-0">PubPub</rs>, created by students at the <rs corresp="#f6e5ed2ab3-software-0" resp="#curator" type="publisher">Media Lab</rs>. <rs cert="0.8" resp="#annotator14" type="software" xml:id="f6e5ed2ab3-software-simple-2">PubPub</rs> is a collaborative publication environment with rich commenting features, and powerful, intuitive authoring tools. JoDS articles are authored directly within the <rs cert="0.8" resp="#annotator14" type="software" xml:id="f6e5ed2ab3-software-simple-3">PubPub</rs> environment, which provides support for multimedia, image integration, and large data sets.</p>
          </body>
       </text>
    </TEI>
    
    
-   <TEI subtype="econ" type="article">
-      <teiHeader>
-         <fileDesc xml:id="f6ec7ae2c7">
-            <titleStmt>
-               <title>Sovereign debt and bank fragility in Spain</title>
-            </titleStmt>
-            <sourceDesc>
-               <bibl>
-                  <idno type="DOI">10.1007/s10290-016-0264-y</idno>
-                  <idno type="origin">10.1007%2Fs10290-016-0264-y</idno>
-               </bibl>
-            </sourceDesc>
-         </fileDesc>
-         <encodingDesc/>
-         <profileDesc>
-            <textClass>
-               <catRef target="#with_reconciliation_and_scripts"/>
-               <catRef target="#unique_annotator"/>
-            </textClass>
-         </profileDesc>
-      </teiHeader>
-      <text xml:lang="en">
-         <body>
-            <p>The model described above is calibrated to match the Spanish economy as closely as possible. We will shortly explain the calibration targets <ref type="table">(Table 1)</ref>, while leaving a more detailed description of the calibration procedures for ''Appendix 2''. Several parameters are taken from <ref type="bibr">Burriel et al. (2010)</ref>, who perform a full blown Bayesian estimation of their model with data from the Spanish economy. We assume the average lifetime of bankers to be equal to 24 quarters, resulting in a survival rate h of 0.9583. The maturity structure parameter q is calibrated to reflect the weighted average maturity of government bonds in Spain between 1998 and 2008, which is 6.1 years according to the OECD Stats database. The annual fixed real payment on long-term government bonds is set to 4.1 %, which is the 1998-2008 average of the interest rate on Spanish government bonds with a maturity of 10 years found in the Statistical Data Warehouse of the European Central Bank <ref type="bibr">(2014)</ref>.</p>
-            <p>The ratio of investment, government consumption and government debt over GDP are derived from Eurostat (2014). The 15-year average percentage of GDP that can be ascribed to private investment and government consumption is taken between 1994 and 2008. This results in steady state ratios of 22.6 % for investments over GDP and 17.8 % for government consumption over GDP. For the steady state credit spread C, the difference between the loans to non-financial corporations (''Total'') and the deposit rate on ''Household deposits redeemable at notice, Total, New Business'' for the period between 2003 and 2007 is taken. Loan rates are not available before 2003. We end the sample at the end of 2007 to exclude data from the Great Recession. For the 2003-2007 period we arrive at an average annual credit spread in Spain of 188 basis points (annually), which amounts to a steady state quarterly spread of 47 basis points. We calibrate the diversion parameter for government bonds k b t to equal 0.5 times the diversion rate for private loans k k t in all periods, as in <ref type="bibr">Gertler and Karadi (2013)</ref>. To make sure that this value does not drive our results, we investigate the model response for different values of k b t =k k t ¼ k b = k k in the Online Appendix. We set the diversion rate for external bonds equal to zero, as these are assumed to be safe and liquid assets.</p>
-         </body>
-      </text>
-   </TEI>
    
    
    
@@ -2173,7 +2058,7 @@
    
    <TEI subtype="econ" type="article">
       <teiHeader>
-         <fileDesc xml:id="fbf0296a9c">
+         <fileDesc xml:id="dd40e87f82">
             <titleStmt>
                <title>Risk attitudes in a social context</title>
             </titleStmt>
@@ -2194,16 +2079,22 @@
       </teiHeader>
       <text xml:lang="en">
          <body>
-            <p>All experimental sessions were conducted at the Behavioral and Experimental Economics laboratory Maastricht (BEELab) with 121 (65 male, 56 female) students from Maastricht University. The vast majority (88%) were students from Economics and Business Administration. The other subjects were students from Law, Cultural Sciences, and from University College Maastricht. They were recruited through email announcements and announcements on the students' intranet. Each subject participated in only one session. The experiment was programmed in <rs cert="1.0" resp="#annotator14" subtype="used" type="software" xml:id="fbf0296a9c-software-1">Z-tree</rs> <ref type="bibr">(Fischbacher 2007)</ref>.</p>
+            <p>All experimental sessions were conducted at the Behavioral and Experimental Economics laboratory Maastricht (BEELab) with 121 (65 male, 56 female) students from Maastricht University. The vast majority (88%) were students from Economics and Business Administration. The other subjects were students from Law, Cultural Sciences, and from University College Maastricht. They were recruited through email announcements and announcements on the students' intranet. Each subject participated in only one session. The experiment was programmed in <rs cert="1.0" resp="#annotator14" subtype="used" type="software" xml:id="dd40e87f82-software-1">Z-tree</rs> <ref type="bibr">(Fischbacher 2007)</ref>.</p>
          </body>
       </text>
    </TEI>
    <TEI subtype="econ" type="article">
       <teiHeader>
-         <fileDesc xml:id="dd40e87f82">
+         <fileDesc xml:id="e645b31c2b">
             <titleStmt>
                <title>Involving Undergraduates in Research To Encourage Them To Undertake Ph.D. Study in Economics</title>
             </titleStmt>
+            <sourceDesc>
+               <bibl>
+                  <idno type="DOI">10.1257/000282805774669772</idno>
+                  <idno type="origin">10.1257%2F000282805774669772</idno>
+               </bibl>
+            </sourceDesc>
             <biblStruct/>
          </fileDesc>
          <encodingDesc/>
@@ -2216,7 +2107,7 @@
       </teiHeader>
       <text xml:lang="en">
          <body>
-            <p>One strategy that I pursue is to recruit undergraduate research assistants prior to their arrival at Cornell. I read through the folders of the students who have accepted offers of admissions to my college (approximately 160) and search for students with strong mathematics, statistics, or economics backgrounds. This usually means students who have taken calculus and/or either advanced-placement economics or advanced-placement statistics in high school. <ref type="bibr">4</ref> I write several of these students prior to their arriving at Cornell and offer them positions as research assistants at CHERI. Given the large fraction of our students who must take out loans or work as part of their financial-aid packages, the take-up rate on these offers is high. <ref type="bibr">5</ref> The current generation of entering first-year students is so computer-literate that they rapidly learn how to use spreadsheet and statistical software programs, such as <rs cert="1.0" resp="#annotator14" type="software" xml:id="dd40e87f82-software-simple-0">EXCEL</rs>, <rs cert="1.0" resp="#annotator14" type="software" xml:id="dd40e87f82-software-simple-1">Stat/Transfer</rs>, and <rs cert="1.0" resp="#annotator14" type="software" xml:id="dd40e87f82-software-simple-2">STATA</rs>. I heuristically explain the econometric models we are using to them, and even if they have not had classes in statistics, they quickly understand the research that I am conducting. Within a short time, we are working together on empirical research projects. These students also mention our work to their friends, and I often link up with other bright students through these referrals.</p>
+            <p>One strategy that I pursue is to recruit undergraduate research assistants prior to their arrival at Cornell. I read through the folders of the students who have accepted offers of admissions to my college (approximately 160) and search for students with strong mathematics, statistics, or economics backgrounds. This usually means students who have taken calculus and/or either advanced-placement economics or advanced-placement statistics in high school. <ref type="bibr">4</ref> I write several of these students prior to their arriving at Cornell and offer them positions as research assistants at CHERI. Given the large fraction of our students who must take out loans or work as part of their financial-aid packages, the take-up rate on these offers is high. <ref type="bibr">5</ref> The current generation of entering first-year students is so computer-literate that they rapidly learn how to use spreadsheet and statistical software programs, such as <rs cert="1.0" resp="#annotator14" type="software" xml:id="e645b31c2b-software-simple-0">EXCEL</rs>, <rs cert="1.0" resp="#annotator14" type="software" xml:id="e645b31c2b-software-simple-1">Stat/Transfer</rs>, and <rs cert="1.0" resp="#annotator14" type="software" xml:id="e645b31c2b-software-simple-2">STATA</rs>. I heuristically explain the econometric models we are using to them, and even if they have not had classes in statistics, they quickly understand the research that I am conducting. Within a short time, we are working together on empirical research projects. These students also mention our work to their friends, and I often link up with other bright students through these referrals.</p>
          </body>
       </text>
    </TEI>
@@ -2379,33 +2270,6 @@
    
    
    
-   <TEI subtype="econ" type="article">
-      <teiHeader>
-         <fileDesc xml:id="c31283212e">
-            <titleStmt>
-               <title>Determinants of foreign direct investment</title>
-            </titleStmt>
-            <sourceDesc>
-               <bibl>
-                  <idno type="DOI">10.1111/caje.12091</idno>
-                  <idno type="origin">10.1111%2Fcaje.12091</idno>
-               </bibl>
-            </sourceDesc>
-         </fileDesc>
-         <encodingDesc/>
-         <profileDesc>
-            <textClass>
-               <catRef target="#with_reconciliation_and_scripts"/>
-               <catRef target="#unique_annotator"/>
-            </textClass>
-         </profileDesc>
-      </teiHeader>
-      <text xml:lang="en">
-         <body>
-            <p>A related BMA analysis we can perform using our covariates is an examination of the determinants of trade flows. This is an interesting litmus test for the BMA procedure, as we would be concerned, for example, if standard gravity variables did not have high inclusion probabilities for trade flows using our BMAmethods. The analysis also provides a comparison of the determinants of FDI and trade flows within the same framework. We gather data on bilateral trade flows from the dataset connected with <ref type="bibr">Rose and Spiegel (2011)</ref> and made available online by Andrew Rose at faculty.haas.berkeley.edu/arose/RecRes.htm#Software. Specifically, the data are CIF imports measured in US$, taken from International Financial Statistics'Direction of Trade CD-ROM, deflated by U.S. CPI for All Urban Consumers (CPI-U), all items, 1982 to 1984 = 100. For comparison purposes, we sample the year 2000 for the same observations we use for our cross-border M&amp;A results, which yielded the largest sample size out of all the FDI measures. <ref type="table">Table 10</ref> provides inclusion probabilities for our BMA analysis of trade flows, as well as repeats the cross-border M&amp;A inclusion probabilities for comparison purposes. The table displays all variables that receive a 50% or higher inclusion probability for explaining at least one of either trade flows or M&amp;A counts. Reassuringly, our BMA analysis of trade flows yields results that are quite in line with accepted practice on how to specify trade flows. The gravity variables and typical frictions (including trade and FDI agreements) show very strong support. This also means that our analysis suggests very similar determinants for trade and cross-border M&amp;A, though there is much less support generally for endowment terms with trade than for cross-border M&amp;A. The biggest differences between the two come in which business cost, infrastructure and other host-country attributes matter for trade versus cross-border M&amp;A. For example, the number of Internet users, legal institutions and domestic credit have high inclusion probabilities for trade but not for cross-border M&amp;A. This is not the first BMA analysis of trade flows. Eicher, Henn and Papageorgiou (2012) use BMA methods to examine the impact of preferential trade agreements on trade flows. They estimate very similar inclusion probabilities for the common overlap of variables between their study and ours, including strong support for GDP terms, geographic features (such as distance) and cultural distance terms.</p>
-         </body>
-      </text>
-   </TEI>
    
    
    
@@ -2560,7 +2424,7 @@
    
    <TEI subtype="econ" type="article">
       <teiHeader>
-         <fileDesc xml:id="a59f265dca">
+         <fileDesc xml:id="db7802c1e8">
             <titleStmt>
                <title>Genotype–environment interactions and their translational implications</title>
             </titleStmt>
@@ -2583,20 +2447,18 @@
       </teiHeader>
       <text xml:lang="en">
          <body>
-            <p>Search engines are an important way of obtaining information on the Internet. According to Alexa Traffic Rank, Google.com is the most popular web site in the United States as well as in the world, and in May 2011, it was the first web site to achieve one billion monthly unique visitors. <ref type="bibr">1</ref> Many people use search engines as a starting point for navigating the Web, making search engines a crucial link in connecting content providers and users. This has spurred a sizable literature on search marketing that studies clicking behavior at search engines. To date, most of this literature has concentrated on the sponsored links that are typically displayed alongside organic links when consumers conduct searches.</p>
-            <p>Existing studies of sponsored search are typically based on a modest number of search terms and the corresponding number of paid clicks received by a single retailer. Our research complements these studies by focusing on the organic clicks that 759 retail sites received from more than 12,000 search terms. There is considerable cross-sectional variation in our data: It includes Web-only retailers as well as traditional retailers and covers 15 different retail segments including apparel, electronics, and mass merchants. For each of these search terms, we observe which retail sites received organic clicks as well as the number of clicks. We also obtained data from the first five pages of search results on <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="a59f265dca-software-simple-0">Google</rs> and <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="a59f265dca-software-simple-1">Bing</rs> for each search term, and this ultimately permits us to quantify the impact on organic clicks of a site's rank (position) in the search results. Our data also include several different measures of the accumulated brand equity of online retailers. These data allow us to determine whether consumers are more likely to click the link of a retailer who is perceived to operate a high-quality site (as a result of the retailer's current and past investments in advertising, the depth and breadth of offerings, secure payments, one-click purchases, returns policies, and so on). Ultimately, this permits us to quantify the benefits of SEO strategies that attempt to gain traffic by improving a retailer's rank in organic search results, versus gaining traffic by improving the quality and brand awareness of a site.</p>
-            <p>1. Alexa Traffic Rank is calculated by combining a web site's average number of daily visitors and page views over the past month.</p>
-            <p>The remainder of this section provides an overview of SEO and the related literature. Section 2 discusses our data and describes the econometric methodology underlying our analysis. Section 3 presents our empirical findings, whereas Section 4 provides robustness checks and some additional results. Finally, we conclude in Section 5 with some additional managerial implications of our findings for SEO. <ref type="figure">Figure 1</ref> highlights the avenues that retailers have for gaining traffic through search engines. This screenshot shows the search results that appear following a search for "shoes online" using <rs cert="1.0" resp="#annotator20" type="software" xml:id="a59f265dca-software-simple-2">Google Search</rs>. In this particular example, three different types of links appear: top ads, side ads, and organic results. <ref type="bibr">3</ref> The top ads (marked by the red box in <ref type="figure">Figure 1</ref>), if any, are the highest listed search results and appear against a yellow background. For this particular search there are three top ads; the maximum number of top ads that may be displayed is four. The organic results (marked by the blue box) are listed below the top ads. Up to ten organic results can appear on a search result page. Finally, the side ads (purple box) appear on the right-hand side of the screen; <rs cert="1.0" resp="#curator" subtype="used" type="software" xml:id="a59f265dca-software-simple-3">Google</rs> allows for up to eight side ads to be shown on a result page.</p>
-            <p>One way retailers obtain traffic is through the paid links that appear in top or side ads. Unlike organic links, retailers can directly influence the position of ads, which are displayed and ranked according to the results of an auction that is run in real time. Retailers identify keywords they want to bid on and specify how much they are willing to spend. <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="a59f265dca-software-simple-4">Google</rs> determines the ad rank using a site's maximum bid specified for the keyword and a quality score, which includes factors like click-through rates and relevance. Advertisers only pay when the link is clicked; the cost per click is equal to the minimum amount needed to get a specific position (generalized second-price auction mechanism). There is an extensive literature (discussed below) examining this avenue for obtaining clicks.</p>
-            <p>A second way retailers obtain traffic through the search engine channel is through clicks on organic results, and this is the focus of our analysis. 4 A site's position in <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="a59f265dca-software-simple-5">Google</rs>'s organic search results depends on the site's relevance to a given search term. The exact algorithm that <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="a59f265dca-software-simple-6">Google</rs> uses to determine a site's ranking is proprietary; according to <rs cert="1.0" resp="#curator" subtype="used" type="software" xml:id="a59f265dca-software-simple-7">Google</rs>, it depends on thousands of factors. <ref type="bibr">5</ref> Although the goal of SEO is to optimize the organic traffic a retailer receives through product searches on search engines, the ultimate goal of retailers is presumably to maximize their profits. One of the initial steps in this optimization process is identifying the benefits and costs of different strategies for increasing traffic. <ref type="bibr">6</ref> Our paper represents a first attempt to examine the benefits side of the ledger, and in particular, to quantify the drivers of retailers' organic clicks.</p>
-            <p>Our main dataset is assembled using data from <rs corresp="#a59f265dca-software-3" resp="#curator" type="publisher">comScore</rs> <rs cert="0.8" resp="#annotator20" subtype="used" type="software" xml:id="a59f265dca-software-3">Search Planner</rs> and contains information on the number of organic clicks web sites received for search terms and phrases entered at main search engines (i.e., <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="a59f265dca-software-simple-10">Google</rs>, <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="a59f265dca-software-simple-11">Bing</rs>, <rs cert="1.0" resp="#annotator20" type="software" xml:id="a59f265dca-software-simple-12">Yahoo</rs>, <rs cert="0.9" resp="#annotator20" type="software" xml:id="a59f265dca-software-simple-13">AOL</rs>, and <rs cert="0.9" resp="#annotator20" type="software" xml:id="a59f265dca-software-simple-14">ASK</rs>) during August 2012. <rs cert="0.8" resp="#annotator20" subtype="used" type="software" xml:id="a59f265dca-software-simple-15">Search Planner</rs> uses the comScore panel, which contains all online browsing activity of around two million U.S. users. Because our goal is to analyze the drivers of organic traffic following product searches, we restrict our sample to only include web sites that are Internet retailers. For this we make use of Internet Retailer's Top 500 Guide, which contains a ranking of North America's 500 largest e-retailers based on annual Web sales. Although not all of these retailers appeared in the <rs corresp="#a59f265dca-software-30" resp="#curator" type="publisher">comScore</rs> <rs cert="0.7" resp="#curator" subtype="used" type="software" xml:id="a59f265dca-software-30">Search Planner</rs> database, some e-retailers (e.g., Amazon) operate multiple web sites (e.g., Amazon.com and Zappos.com), resulting in a total of 759 retail sites for which we have click-through data. For each of these 759 retailers, we used <rs cert="0.7" resp="#curator" subtype="used" type="software" xml:id="a59f265dca-software-simple-18">Search Planner</rs> to identify all search terms that generated traffic from <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="a59f265dca-software-simple-19">Google</rs> to the retailer. There is some overlap in search terms: as shown in <ref type="figure">Figure 1</ref>, Onlineshoes.com as well as Zappos.com appear relatively high in the organic results for the term "shoes online," which means that for both retailers this term is part of the set of search terms that generated traffic from <rs cert="1.0" resp="#curator" subtype="used" type="software" xml:id="a59f265dca-software-simple-20">Google</rs>. In total we end up with 12,184 distinct search terms that led users to the 759 online retailers. The third dataset we use contains all the links that appeared on the first five search results pages on <rs cert="1.0" resp="#annotator20" type="software" xml:id="a59f265dca-software-simple-21">Google Search</rs> and <rs resp="#curator" type="software" xml:id="a59f265dca-software-simple-22">Bing Search</rs> for each of the 12,184 search phrases. We collected these data using a scraper written in Java; the data contain organic search results as well as paid links. <ref type="bibr">10</ref> Not all 759 online retailers are relevant for each of the search terms in our data. For instance, Best Buy is not relevant for individuals searching for shoes and is therefore 9. Aaker (1991) defines brand equity as "a set of brand assets and liabilities linked to a brand, its name and symbol, that add to or subtract from the value provided by a product or service to a firm and/or to that firm's customers." Brand equity is based on factors like brand loyalty, name awareness, and quality. See <ref type="bibr">Keller and Lehmann (2006)</ref> for a recent survey of the branding literature.</p>
-            <p>Our measure of a retail site's brand equity is based on the methodology developed in <ref type="bibr">Baye et al. (2012)</ref> to overcome challenges in measuring the "prominence" of online retailers' names. These authors point out that the standard approach, which uses historical advertising data to measure accumulated brand equity and the strength of a firm's name, is not useful in the case of online retailers. Among other things, many online retailers are privately held and do not disclose advertising expenditures; the parent companies of publically traded online retailers do not typically report monthly advertising expenditures at the URL level. They further argue that the number of product searches on <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="a59f265dca-software-simple-23">Google</rs> (or <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="a59f265dca-software-simple-24">Bing</rs>) that include the retailer's name or URL in the search query-navigational searches, in industry parlance-is a useful measure of a retailer's brand equity. Intuitively, the inclusion of "Amazon" in a product search indicates the consumer recognizes the company and can recall its name. This may be the result of past advertising campaigns, recommendations from friends, knowledge of Amazon's pricing practices, product depth, return policies, and so on. And in contrast to advertising expenditures, it is possible to use data from comScore to measure the number of navigational searches Amazon received in a given month.</p>
-            <p>For these reasons, we use navigational searches to measure a firm's brand equity. Navigational searches are essentially a shortcut for typing in the URL of a specific retailer and then searching its site. Thus, our measure of brand equity is the total number of organic clicks a particular retailer received in August 2012 from searchers who navigated 11. Indeed, Best Buy did not show up in at least the first 30 pages of search results on <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="a59f265dca-software-simple-25">Google</rs> for the search term "shoes online" (checked on February 26, 2013).</p>
-            <p><rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="a59f265dca-software-simple-26">Google</rs> continuously updates its rankings of search results to generate the most relevant search results, which means that our rank variable will depend on past clicks. It is therefore likely that rank is correlated with the error term and thus endogenous. A similar effect may be at work for the ads variable: Ad positions are based on the outcome of a second-price auction that takes the relevance of the bidder with respect to the search term into account, again making it likely that ad positions are based on past clicking behavior on <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="a59f265dca-software-simple-27">Google</rs>.</p>
-            <p>The standard approach in the literature on clicks at platforms (e.g., clicks at price comparison sites or sponsored clicks at search engines) is to assume that such positions are exogenous. Using the Wu-Hausman test for endogeneity, however, we reject the hypothesis that rank and ad positions are exogenous in our data ( p = 0.0023 and p = 0.0116, respectively). To account for the potential endogeneity of these variables, we use information about rank and ads on <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="a59f265dca-software-simple-28">Bing</rs> as instruments. These instruments are correlated with the endogenous regressors, but are unlikely to be correlated with the error term, because <rs cert="0.9" resp="#annotator20" subtype="used" type="software" xml:id="a59f265dca-software-simple-29">Bing</rs>'s decisions on search result rankings and ad positions are not based on past clicks on <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="a59f265dca-software-simple-30">Google</rs>. Indeed, using the Sargan test for overidentifying restrictions, we cannot reject the hypothesis that these are valid instruments for rank and ad positions on <rs cert="1.0" resp="#curator" subtype="used" type="software" xml:id="a59f265dca-software-simple-31">Google</rs> ( p = 0.3795).</p>
-            <p>As we explained in Section 2.1, a retail site is included as an observation if it appears on the first five pages of the <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="a59f265dca-software-simple-32">Google</rs> search result page for a specific search term, independent 15. Retail segment fixed effects control for systematic differences in clicks across, for example, mass merchants who may receive many clicks owing to product breadth effects and specialty retailers who receive fewer clicks. Although this specification assumes the marginal impact of brand equity and rank is identical across retail segments, we show in Section 4 that the results are similar when one excludes mass merchants such as Amazon and Walmart.</p>
-            <p>16. The p-value for this test, which uses navigational searches on <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="a59f265dca-software-simple-33">Bing</rs> as an instrument, is p = 0.1692. of whether the retailer received organic clicks according to <rs cert="0.7" resp="#curator" subtype="used" type="software" xml:id="a59f265dca-software-simple-34">Search Planner</rs>. Complicating matters, <rs cert="0.7" resp="#annotator20" subtype="used" type="software" xml:id="a59f265dca-software-simple-35">Search Planner</rs> only reports the number of organic clicks if those clicks exceed a certain threshold, which means we do not know whether sites receiving zero organic clicks according to <rs cert="0.7" resp="#curator" subtype="used" type="software" xml:id="a59f265dca-software-simple-36">Search Planner</rs> really received no click-throughs for the search term in question or whether they were censored. What makes our setting different from a standard censoring environment is that the selection rule depends on total clicks (including paid clicks) rather than just organic clicks. This means that a different probability mechanism generates both the zero clicks and the positive clicks, and this cannot be captured by a standard Tobit censoring model. For this reason, we estimate a Heckman-type selection model. As we argued in the previous subsection, endogeneity is likely to be important in our data, so we allow for endogenous explanatory variables. Estimation of the model consists of two stages. In the first stage we regress a dummy for having positive clicks on all exogenous variables (including instruments) z. Here, it is important to include at least one more instrument than is necessary for dealing with the endogeneity problem (otherwise identification is purely based on the parametric form of the inverse Mills ratio). This additional exclusion restriction should relate to the probability of observing positive organic clicks. Because this probability relates to the number of total clicks, we use additional variables in the selection equation that are important for getting paid clicks: We add dummies for whether a sponsored link was displayed on each of pages 2 through 5 in the <rs cert="0.9" resp="#annotator20" subtype="used" type="software" xml:id="a59f265dca-software-simple-37">Bing</rs> search results. We obtain the inverse Mills ratio, given byλ = λ(zδ) = φ(zδ)/ (zδ) from the selection equation, and add this to the second stage to obtain</p>
-            <p>The second specification in <ref type="table">Table III</ref> uses navigational searches from <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="a59f265dca-software-simple-38">Bing</rs> rather than <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="a59f265dca-software-simple-39">Google</rs> to measure brand equity. Because <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="a59f265dca-software-simple-40">Bing</rs> has a different population of users and employs a different algorithm for returning search results, it is unlikely that unobserved factors that affect clicks on <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="a59f265dca-software-simple-41">Google</rs> are correlated with this measure of brand equity based on navigational searches on <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="a59f265dca-software-simple-42">Bing</rs>. The results in column <ref type="formula">(2)</ref> show that our findings are robust to using this alternative measure of brand equity.</p>
+            <p>Existing studies of sponsored search are typically based on a modest number of search terms and the corresponding number of paid clicks received by a single retailer. Our research complements these studies by focusing on the organic clicks that 759 retail sites received from more than 12,000 search terms. There is considerable cross-sectional variation in our data: It includes Web-only retailers as well as traditional retailers and covers 15 different retail segments including apparel, electronics, and mass merchants. For each of these search terms, we observe which retail sites received organic clicks as well as the number of clicks. We also obtained data from the first five pages of search results on <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="db7802c1e8-software-simple-0">Google</rs> and <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="db7802c1e8-software-simple-1">Bing</rs> for each search term, and this ultimately permits us to quantify the impact on organic clicks of a site's rank (position) in the search results. Our data also include several different measures of the accumulated brand equity of online retailers. These data allow us to determine whether consumers are more likely to click the link of a retailer who is perceived to operate a high-quality site (as a result of the retailer's current and past investments in advertising, the depth and breadth of offerings, secure payments, one-click purchases, returns policies, and so on). Ultimately, this permits us to quantify the benefits of SEO strategies that attempt to gain traffic by improving a retailer's rank in organic search results, versus gaining traffic by improving the quality and brand awareness of a site.</p>
+            <p>The remainder of this section provides an overview of SEO and the related literature. Section 2 discusses our data and describes the econometric methodology underlying our analysis. Section 3 presents our empirical findings, whereas Section 4 provides robustness checks and some additional results. Finally, we conclude in Section 5 with some additional managerial implications of our findings for SEO. <ref type="figure">Figure 1</ref> highlights the avenues that retailers have for gaining traffic through search engines. This screenshot shows the search results that appear following a search for "shoes online" using <rs cert="1.0" resp="#annotator20" type="software" xml:id="db7802c1e8-software-simple-2">Google Search</rs>. In this particular example, three different types of links appear: top ads, side ads, and organic results. <ref type="bibr">3</ref> The top ads (marked by the red box in <ref type="figure">Figure 1</ref>), if any, are the highest listed search results and appear against a yellow background. For this particular search there are three top ads; the maximum number of top ads that may be displayed is four. The organic results (marked by the blue box) are listed below the top ads. Up to ten organic results can appear on a search result page. Finally, the side ads (purple box) appear on the right-hand side of the screen; <rs cert="1.0" resp="#curator" subtype="used" type="software" xml:id="db7802c1e8-software-simple-3">Google</rs> allows for up to eight side ads to be shown on a result page.</p>
+            <p>One way retailers obtain traffic is through the paid links that appear in top or side ads. Unlike organic links, retailers can directly influence the position of ads, which are displayed and ranked according to the results of an auction that is run in real time. Retailers identify keywords they want to bid on and specify how much they are willing to spend. <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="db7802c1e8-software-simple-4">Google</rs> determines the ad rank using a site's maximum bid specified for the keyword and a quality score, which includes factors like click-through rates and relevance. Advertisers only pay when the link is clicked; the cost per click is equal to the minimum amount needed to get a specific position (generalized second-price auction mechanism). There is an extensive literature (discussed below) examining this avenue for obtaining clicks.</p>
+            <p>A second way retailers obtain traffic through the search engine channel is through clicks on organic results, and this is the focus of our analysis. 4 A site's position in <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="db7802c1e8-software-simple-5">Google</rs>'s organic search results depends on the site's relevance to a given search term. The exact algorithm that <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="db7802c1e8-software-simple-6">Google</rs> uses to determine a site's ranking is proprietary; according to <rs cert="1.0" resp="#curator" subtype="used" type="software" xml:id="db7802c1e8-software-simple-7">Google</rs>, it depends on thousands of factors. <ref type="bibr">5</ref> Although the goal of SEO is to optimize the organic traffic a retailer receives through product searches on search engines, the ultimate goal of retailers is presumably to maximize their profits. One of the initial steps in this optimization process is identifying the benefits and costs of different strategies for increasing traffic. <ref type="bibr">6</ref> Our paper represents a first attempt to examine the benefits side of the ledger, and in particular, to quantify the drivers of retailers' organic clicks.</p>
+            <p>Our main dataset is assembled using data from <rs corresp="#db7802c1e8-software-3" resp="#curator" type="publisher">comScore</rs> <rs cert="0.8" resp="#annotator20" subtype="used" type="software" xml:id="db7802c1e8-software-3">Search Planner</rs> and contains information on the number of organic clicks web sites received for search terms and phrases entered at main search engines (i.e., <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="db7802c1e8-software-simple-10">Google</rs>, <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="db7802c1e8-software-simple-11">Bing</rs>, <rs cert="1.0" resp="#annotator20" type="software" xml:id="db7802c1e8-software-simple-12">Yahoo</rs>, <rs cert="0.9" resp="#annotator20" type="software" xml:id="db7802c1e8-software-simple-13">AOL</rs>, and <rs cert="0.9" resp="#annotator20" type="software" xml:id="db7802c1e8-software-simple-14">ASK</rs>) during August 2012. <rs cert="0.8" resp="#annotator20" subtype="used" type="software" xml:id="db7802c1e8-software-simple-15">Search Planner</rs> uses the comScore panel, which contains all online browsing activity of around two million U.S. users. Because our goal is to analyze the drivers of organic traffic following product searches, we restrict our sample to only include web sites that are Internet retailers. For this we make use of Internet Retailer's Top 500 Guide, which contains a ranking of North America's 500 largest e-retailers based on annual Web sales. Although not all of these retailers appeared in the <rs corresp="#db7802c1e8-software-30" resp="#curator" type="publisher">comScore</rs> <rs cert="0.7" resp="#curator" subtype="used" type="software" xml:id="db7802c1e8-software-30">Search Planner</rs> database, some e-retailers (e.g., Amazon) operate multiple web sites (e.g., Amazon.com and Zappos.com), resulting in a total of 759 retail sites for which we have click-through data. For each of these 759 retailers, we used <rs cert="0.7" resp="#curator" subtype="used" type="software" xml:id="db7802c1e8-software-simple-18">Search Planner</rs> to identify all search terms that generated traffic from <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="db7802c1e8-software-simple-19">Google</rs> to the retailer. There is some overlap in search terms: as shown in <ref type="figure">Figure 1</ref>, Onlineshoes.com as well as Zappos.com appear relatively high in the organic results for the term "shoes online," which means that for both retailers this term is part of the set of search terms that generated traffic from <rs cert="1.0" resp="#curator" subtype="used" type="software" xml:id="db7802c1e8-software-simple-20">Google</rs>. In total we end up with 12,184 distinct search terms that led users to the 759 online retailers. The third dataset we use contains all the links that appeared on the first five search results pages on <rs cert="1.0" resp="#annotator20" type="software" xml:id="db7802c1e8-software-simple-21">Google Search</rs> and <rs resp="#curator" type="software" xml:id="db7802c1e8-software-simple-22">Bing Search</rs> for each of the 12,184 search phrases. We collected these data using a scraper written in Java; the data contain organic search results as well as paid links. <ref type="bibr">10</ref> Not all 759 online retailers are relevant for each of the search terms in our data. For instance, Best Buy is not relevant for individuals searching for shoes and is therefore 9. Aaker (1991) defines brand equity as "a set of brand assets and liabilities linked to a brand, its name and symbol, that add to or subtract from the value provided by a product or service to a firm and/or to that firm's customers." Brand equity is based on factors like brand loyalty, name awareness, and quality. See <ref type="bibr">Keller and Lehmann (2006)</ref> for a recent survey of the branding literature.</p>
+            <p>Our measure of a retail site's brand equity is based on the methodology developed in <ref type="bibr">Baye et al. (2012)</ref> to overcome challenges in measuring the "prominence" of online retailers' names. These authors point out that the standard approach, which uses historical advertising data to measure accumulated brand equity and the strength of a firm's name, is not useful in the case of online retailers. Among other things, many online retailers are privately held and do not disclose advertising expenditures; the parent companies of publically traded online retailers do not typically report monthly advertising expenditures at the URL level. They further argue that the number of product searches on <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="db7802c1e8-software-simple-23">Google</rs> (or <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="db7802c1e8-software-simple-24">Bing</rs>) that include the retailer's name or URL in the search query-navigational searches, in industry parlance-is a useful measure of a retailer's brand equity. Intuitively, the inclusion of "Amazon" in a product search indicates the consumer recognizes the company and can recall its name. This may be the result of past advertising campaigns, recommendations from friends, knowledge of Amazon's pricing practices, product depth, return policies, and so on. And in contrast to advertising expenditures, it is possible to use data from comScore to measure the number of navigational searches Amazon received in a given month.</p>
+            <p>For these reasons, we use navigational searches to measure a firm's brand equity. Navigational searches are essentially a shortcut for typing in the URL of a specific retailer and then searching its site. Thus, our measure of brand equity is the total number of organic clicks a particular retailer received in August 2012 from searchers who navigated 11. Indeed, Best Buy did not show up in at least the first 30 pages of search results on <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="db7802c1e8-software-simple-25">Google</rs> for the search term "shoes online" (checked on February 26, 2013).</p>
+            <p><rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="db7802c1e8-software-simple-26">Google</rs> continuously updates its rankings of search results to generate the most relevant search results, which means that our rank variable will depend on past clicks. It is therefore likely that rank is correlated with the error term and thus endogenous. A similar effect may be at work for the ads variable: Ad positions are based on the outcome of a second-price auction that takes the relevance of the bidder with respect to the search term into account, again making it likely that ad positions are based on past clicking behavior on <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="db7802c1e8-software-simple-27">Google</rs>.</p>
+            <p>The standard approach in the literature on clicks at platforms (e.g., clicks at price comparison sites or sponsored clicks at search engines) is to assume that such positions are exogenous. Using the Wu-Hausman test for endogeneity, however, we reject the hypothesis that rank and ad positions are exogenous in our data ( p = 0.0023 and p = 0.0116, respectively). To account for the potential endogeneity of these variables, we use information about rank and ads on <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="db7802c1e8-software-simple-28">Bing</rs> as instruments. These instruments are correlated with the endogenous regressors, but are unlikely to be correlated with the error term, because <rs cert="0.9" resp="#annotator20" subtype="used" type="software" xml:id="db7802c1e8-software-simple-29">Bing</rs>'s decisions on search result rankings and ad positions are not based on past clicks on <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="db7802c1e8-software-simple-30">Google</rs>. Indeed, using the Sargan test for overidentifying restrictions, we cannot reject the hypothesis that these are valid instruments for rank and ad positions on <rs cert="1.0" resp="#curator" subtype="used" type="software" xml:id="db7802c1e8-software-simple-31">Google</rs> ( p = 0.3795).</p>
+            <p>As we explained in Section 2.1, a retail site is included as an observation if it appears on the first five pages of the <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="db7802c1e8-software-simple-32">Google</rs> search result page for a specific search term, independent 15. Retail segment fixed effects control for systematic differences in clicks across, for example, mass merchants who may receive many clicks owing to product breadth effects and specialty retailers who receive fewer clicks. Although this specification assumes the marginal impact of brand equity and rank is identical across retail segments, we show in Section 4 that the results are similar when one excludes mass merchants such as Amazon and Walmart.</p>
+            <p>16. The p-value for this test, which uses navigational searches on <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="db7802c1e8-software-simple-33">Bing</rs> as an instrument, is p = 0.1692. of whether the retailer received organic clicks according to <rs cert="0.7" resp="#curator" subtype="used" type="software" xml:id="db7802c1e8-software-simple-34">Search Planner</rs>. Complicating matters, <rs cert="0.7" resp="#annotator20" subtype="used" type="software" xml:id="db7802c1e8-software-simple-35">Search Planner</rs> only reports the number of organic clicks if those clicks exceed a certain threshold, which means we do not know whether sites receiving zero organic clicks according to <rs cert="0.7" resp="#curator" subtype="used" type="software" xml:id="db7802c1e8-software-simple-36">Search Planner</rs> really received no click-throughs for the search term in question or whether they were censored. What makes our setting different from a standard censoring environment is that the selection rule depends on total clicks (including paid clicks) rather than just organic clicks. This means that a different probability mechanism generates both the zero clicks and the positive clicks, and this cannot be captured by a standard Tobit censoring model. For this reason, we estimate a Heckman-type selection model. As we argued in the previous subsection, endogeneity is likely to be important in our data, so we allow for endogenous explanatory variables. Estimation of the model consists of two stages. In the first stage we regress a dummy for having positive clicks on all exogenous variables (including instruments) z. Here, it is important to include at least one more instrument than is necessary for dealing with the endogeneity problem (otherwise identification is purely based on the parametric form of the inverse Mills ratio). This additional exclusion restriction should relate to the probability of observing positive organic clicks. Because this probability relates to the number of total clicks, we use additional variables in the selection equation that are important for getting paid clicks: We add dummies for whether a sponsored link was displayed on each of pages 2 through 5 in the <rs cert="0.9" resp="#annotator20" subtype="used" type="software" xml:id="db7802c1e8-software-simple-37">Bing</rs> search results. We obtain the inverse Mills ratio, given byλ = λ(zδ) = φ(zδ)/ (zδ) from the selection equation, and add this to the second stage to obtain</p>
+            <p>The second specification in <ref type="table">Table III</ref> uses navigational searches from <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="db7802c1e8-software-simple-38">Bing</rs> rather than <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="db7802c1e8-software-simple-39">Google</rs> to measure brand equity. Because <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="db7802c1e8-software-simple-40">Bing</rs> has a different population of users and employs a different algorithm for returning search results, it is unlikely that unobserved factors that affect clicks on <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="db7802c1e8-software-simple-41">Google</rs> are correlated with this measure of brand equity based on navigational searches on <rs cert="1.0" resp="#annotator20" subtype="used" type="software" xml:id="db7802c1e8-software-simple-42">Bing</rs>. The results in column <ref type="formula">(2)</ref> show that our findings are robust to using this alternative measure of brand equity.</p>
          </body>
       </text>
    </TEI>
@@ -2727,11 +2589,8 @@
       </teiHeader>
       <text xml:lang="en">
          <body>
-            <p>The CGE model we describe in this section is the GTAP6inGAMS model developed by <ref type="bibr">Rutherford (2005)</ref>.</p>
             <p>14 The model has three economic agents: producers, representative consumers (private and public) and trading partners. The GTAP6inGAMS model is a traditional static Arrow-Debreu general equilibrium model in which the zero profit condition and market clearance define the equilibrium. The GTAP6inGAMS is a modified version of the GTAP model version 6 developed for <rs cert="0.8" resp="#curator" subtype="used" type="software" xml:id="f2ceada032-software-simple-0">GAMS</rs> users. Most of the model specifications are the same as the GTAP model. The differences between the GTAP model and <rs cert="0.8" resp="#annotator5" subtype="used" type="software" xml:id="f2ceada032-software-simple-1">GAMS</rs> version of the model are as follows. First, the GTAP model is based on a constant difference elasticity demand system, but the <rs cert="0.8" resp="#annotator5" subtype="used" type="software" xml:id="f2ceada032-software-simple-2">GAMS</rs> model uses Cobb-Douglas preferences. Second, the GTAP model assumes that global capital is endogenously allocated by regional rates of return. However, for 12. They, however, propose to achieve the bigger trade blocs by utilizing ASEAN as the hub for the integration (e.g. the three sets of ASEAN+1 FTA), which is not desirable based on the empirical analysis in the present paper.</p>
             <p>13. An income terms of a trade measure, the purchasing power of exports in terms of imports (the ratio of the value of exports to the price of imports), can be a better measure of income or welfare effect of price changes in international trade, especially for developing countries, relative to the net barter terms of trade. See <ref type="bibr">Chacholiades (1990, pp. 136-7)</ref>. 14. The explanation of the CGE model used in this paper is derived from <ref type="bibr">Park (2006)</ref>. simplicity, the GTAP6inGAMS model exogenously fixes the global capital flows. The model described in the present paper uses a classification consisting of 7 sectors and 25 economies, as in <ref type="bibr">Park (2006)</ref>. <ref type="bibr">15</ref> The model solution has been calibrated, with 2001 as the base year, using global trade, assistance and production data from the GTAP 6 Database. <ref type="bibr">16</ref> The model has been implemented using the <rs cert="0.8" resp="#annotator5" subtype="used" type="software" xml:id="f2ceada032-software-simple-3">GAMS MPSGE</rs>. <ref type="bibr">17</ref> The GTAP6inGAMS model is adopted because the CGE model is in line with the commonly used GTAP model and the solver, <rs cert="0.8" resp="#annotator5" subtype="used" type="software" xml:id="f2ceada032-software-simple-4">GAMS MPSGE</rs>, is simple and easy to handle.</p>
-            <p>To quantitatively measure the impacts of the proposed East Asian RTAs on welfare, output production and trade flows for each of the participating countries, members as a whole, nonmembers and the world economy, we empirically designed and tested four scenarios. For each of the scenarios, both import tariffs and export taxes between members were eliminated, but the trade 15. The seven sectors are: agricultural products, food products, extractive industry, light manufacturing, heavy manufacturing, technology-intensive manufacturing, and services. The 27 economies are: Indonesia, Malaysia, Philippines, Singapore, Thailand, Vietnam, the rest of Southeast Asia, China, Japan, Korea, Hong Kong, Taiwan, Australia, Brazil, Canada, Chile, India, Mexico, New Zealand, Peru, Russia, the USA, the European Free Trade Association, the Western European countries, and the rest of the world. 16. The GTAP 6 Database is a global database representing the world economy for a given reference year <ref type="bibr">(2001)</ref>. For more detailed information, see <ref type="bibr">Dimaranan (2006</ref>For the base solution of the model economy, we ran the CGE model without changing its initial condition and derived general equilibrium values for each of the economies in the model. Next, we reestimated the model under different scenarios and recalculated the equilibrium values for each case. Then, we compared the different equilibrium values with the initial base solution in terms of percentage deviation from the base to evaluate the experimental impacts of each scenario on each country.</p>
-            <p>Table 2 provides a comparative summary of regional economic effects of the proposed East Asian RTAs by type of RTA. The aggregate effect of the currently effective AFTA had no significant negative effects on the discriminatory liberalization of the Northeast Asian neighbors, but produced significant enough positive gains to ASEAN members. However, if ASEAN members decide to pursue the ASEAN Hub scenario, which includes three sets of ASEAN+1 FTA, it could raise ASEAN's gains from free trade. ASEAN's welfare and GDP gains could be raised to more than three times that of the AFTA. The negative effects on excluded neighbors could be problematic, although the neighboring countries 18. The trade barriers include both tariff and non-tariff barriers. For import tariffs, trade-weighted ad valorem tariffs include tariff rate quotas and the ad valorem equivalents of specific tariffs. The export taxes cover ordinary export subsidies, export tax equivalents of Agreement on Textiles and Clothing quotas, price undertakings and voluntary export restraints. The protection rates in service sectors are assumed to be zero in the GTAP Database. For more detailed information, visit https:// www.gtap.agecon.purdue.edu/databases/v6/v6_doco.asp. 19. As the referee indicated, the base year for existing RTA, such as the ASEAN-China FTA, should be 2004 or 2005 (right before the year into force in <ref type="table">Table 1</ref>). However, similar to other hypothetical scenarios in the present paper, the complete elimination of trade barriers between ASEAN and China are assumed and simulated. Of course, we acknowledge this data problem as a limitation.could increase their exports because of the income effect from the additional GDP gains of ASEAN, with the increase in bilateral trade volume between ASEAN and each of the three Northeast Asian countries. In terms of the negative effects that could be expected from AFTA or the ASEAN Hub scenario, the Northeast Asian neighbors might decide to form their own regional protection strategy against ASEAN by developing a ChinaJapan-Korea FTA. The trade warfare between the two regions could be harmful to the less-developed ASEAN economy and would enormously benefit the Northeast Asian countries, especially the smallest country, like Korea. However, this duplicating RTA competition might not be beneficial to the world economy. It will cause much lower welfare gains to the world economy than those with the existing AFTA and ASEAN Hub scenario.</p>
          </body>
       </text>
    </TEI>
@@ -2880,43 +2739,21 @@
    
    
    
-   <TEI subtype="econ" type="article">
-      <teiHeader>
-         <fileDesc xml:id="e23815ce71">
-            <titleStmt>
-               <title>Learning quality through prices and word-of-mouth communication</title>
-            </titleStmt>
-            <sourceDesc>
-               <bibl>
-                  <idno type="DOI">10.1111/jems.12230</idno>
-                  <idno type="origin">10.1111%2Fjems.12230</idno>
-               </bibl>
-            </sourceDesc>
-         </fileDesc>
-         <encodingDesc/>
-         <profileDesc>
-            <textClass>
-               <catRef target="#with_reconciliation_and_scripts"/>
-               <catRef target="#unique_annotator"/>
-            </textClass>
-         </profileDesc>
-      </teiHeader>
-      <text xml:lang="en">
-         <body>
-            <p>1 WOM refers to product-related commentary shared between friends, family, neighbors, etc. Moreover, advances in information technology and the digital revolution both facilitate and amplify the exchange of information on products via social networking sites and other online fora, such as Facebook, Twitter, forums, blogs, etc., referred to as eWOM.</p>
-            <p>20 In Spence's job-market signaling model, good-type workers signal high-quality via increased education, which at some critical point, bad types are unable to replicate because education is assumed to be more costly for them. Here, the logic of the signaling mechanism does not depend on cost differences across types, instead copycat behavior is prevented by the existence of a second period with improved information (standard singlecrossing). Nevertheless, in contrast to Spence's model where the worker's utility, quasi-linear in beliefs, ensures condition (ii), in our setup, signaling also requires profits to be marginally more sensitive to type for beliefs (sensitivity single-crossing). <ref type="bibr">21</ref> Note that in the experimentation process, second-period consumers observe some noisy signal of the past quantity (for instance, the number of people they meet who tell them they have purchased the product and how satisfied they were). Hence, signaling through (low) prices or (high) quantities will yield the same result. <ref type="bibr">22</ref> A sufficient condition for Assumption 1 to be satisfied is ∫23 Any ad campaign that conveys no direct information about the quality of the product. <ref type="bibr">24</ref> Without WOM communication, profits 2 reduces to Π( , , , ) = ( , , ) + ( 2 ( )), which are independent of the monopolist's type. <ref type="bibr">25</ref> Consider, as an example, the referrals program implemented by Airbnb to encourage inviting friends by giving both the sender and recipient $25 of travel credit when the invited user completes their first trip. The idea is to increase WOM by stimulating the demand. <ref type="bibr">26</ref> Consumers may also spontaneously misreport quality (imagine that consumers are friends of a restaurant owner or recently opened store). In this case, the bias can be one of the two types. First, consumers may report a satisfaction level higher than what they actually experienced, that is, ( , ) = ( , ) + . Second, consumers may report as high quality was observed, that is,̃( , ) = ( = 1, ). In the first scenario, the quality signal Λ( ) is unchanged due to the systematic bias in consumers Bayesian updating. In other words, if misreporting generates differences in reports, then second-period consumers can filter it out. Thus, the separating equilibrium is the same as the one characterized in Section 3.2. In the second scenario, the quality signal is Λ( = 1), as low quality is never reported. Expected profits are then independent of the monopolist's type and the high-quality monopolist can no longer use prices to manipulate information transmission. Therefore, there is no separating equilibrium.</p>
-         </body>
-      </text>
-   </TEI>
    
    
    
    <TEI subtype="econ" type="article">
       <teiHeader>
-         <fileDesc xml:id="d066f504bf">
+         <fileDesc xml:id="e776aa9e78">
             <titleStmt>
                <title>"The United States Congress and IMF financing, 1944-2009"</title>
             </titleStmt>
+            <sourceDesc>
+               <bibl>
+                  <idno type="DOI">10.1007/s11558-011-9108-7</idno>
+                  <idno type="origin">10.1007%2Fs11558-011-9108-7</idno>
+               </bibl>
+            </sourceDesc>
             <biblStruct/>
          </fileDesc>
          <encodingDesc/>
@@ -2929,16 +2766,22 @@
       </teiHeader>
       <text xml:lang="en">
          <body>
-            <p>Model 6.3 moves away from the experiment to assess whether senators' length of tenure affects their voting behavior. Controlling for tenure length is important because senators may be more supportive of the IMF because they serve longer terms than representatives, rather than because they have larger constituencies. I assess this alternative institutional argument via variation among senators with respect to TIME TO ELECTION. This variable measures the number of years between an IMF roll-call vote and a senator's next election. It ranges from 0 to 5, with 0 indicating that a senator is up for reelection later in the same year as the roll-call vote, and 5 indicates that the senator has 5 years remaining until her next election. <ref type="bibr">19</ref> The evidence from Model 6.3 supports the "larger constituency" hypothesis: the point estimate for TIME TO ELECTION is <ref type="bibr">18</ref> Interpreting interaction terms in non-linear models is not straightforward. For example, the direction and significance of the effect may be different for different observations <ref type="bibr">(Ai and Norton 2003)</ref>. Using the inteff command in <rs cert="1.0" resp="#annotator14" subtype="used" type="software" xml:id="d066f504bf-software-simple-0">STATA</rs>, I calculated the interaction effect correctly <ref type="bibr">(Norton et al. 2004)</ref>. This revealed that the interaction term SENATE * REP-AT-LARGE is not statistically significant at any level but positive for all observations. 19 Senators are divided into three classes for purposes of elections and every 2 years the members of one class-approximately one-third of the Senate-face election or reelection. Data on the class and election dates of senators are from Swift et al., Database of Congressional Historical Statistics.Bill and vote information obtained from the "Voteview" and the Library of Congress "Thomas" websites</p>
+            <p>Model 6.3 moves away from the experiment to assess whether senators' length of tenure affects their voting behavior. Controlling for tenure length is important because senators may be more supportive of the IMF because they serve longer terms than representatives, rather than because they have larger constituencies. I assess this alternative institutional argument via variation among senators with respect to TIME TO ELECTION. This variable measures the number of years between an IMF roll-call vote and a senator's next election. It ranges from 0 to 5, with 0 indicating that a senator is up for reelection later in the same year as the roll-call vote, and 5 indicates that the senator has 5 years remaining until her next election. <ref type="bibr">19</ref> The evidence from Model 6.3 supports the "larger constituency" hypothesis: the point estimate for TIME TO ELECTION is <ref type="bibr">18</ref> Interpreting interaction terms in non-linear models is not straightforward. For example, the direction and significance of the effect may be different for different observations <ref type="bibr">(Ai and Norton 2003)</ref>. Using the inteff command in <rs cert="1.0" resp="#annotator14" subtype="used" type="software" xml:id="e776aa9e78-software-simple-0">STATA</rs>, I calculated the interaction effect correctly <ref type="bibr">(Norton et al. 2004)</ref>. This revealed that the interaction term SENATE * REP-AT-LARGE is not statistically significant at any level but positive for all observations. 19 Senators are divided into three classes for purposes of elections and every 2 years the members of one class-approximately one-third of the Senate-face election or reelection. Data on the class and election dates of senators are from Swift et al., Database of Congressional Historical Statistics.Bill and vote information obtained from the "Voteview" and the Library of Congress "Thomas" websites</p>
          </body>
       </text>
    </TEI>
    <TEI subtype="econ" type="article">
       <teiHeader>
-         <fileDesc xml:id="e66dfa8644">
+         <fileDesc xml:id="efb5f079e4">
             <titleStmt>
                <title>MIT Press Journals 2018 catalog</title>
             </titleStmt>
+            <sourceDesc>
+               <bibl>
+                  <idno type="DOI">10.1162/qjec.2005.120.1.87</idno>
+                  <idno type="origin">10.1162%2Fqjec.2005.120.1.87</idno>
+               </bibl>
+            </sourceDesc>
             <biblStruct/>
          </fileDesc>
          <encodingDesc/>
@@ -2951,7 +2794,7 @@
       </teiHeader>
       <text xml:lang="en">
          <body>
-            <p>The journal is hosted on an open-access, open-review, rapid publication platform called <rs cert="0.9" resp="#annotator3" type="software" xml:id="e66dfa8644-software-3">PubPub</rs>, created by students at the <rs corresp="#e66dfa8644-software-3" resp="#curator" type="publisher">Media Lab</rs>. <rs cert="0.9" resp="#annotator3" type="software" xml:id="e66dfa8644-software-simple-2">PubPub</rs> is a collaborative publication environment with rich commenting features, and powerful, intuitive authoring tools. JoDS articles are authored directly within the <rs cert="0.9" resp="#annotator3" type="software" xml:id="e66dfa8644-software-simple-3">PubPub</rs> environment, which provides support for multimedia, image integration, and large data sets.</p>
+            <p>The journal is hosted on an open-access, open-review, rapid publication platform called <rs cert="0.9" resp="#annotator3" type="software" xml:id="efb5f079e4-software-3">PubPub</rs>, created by students at the <rs corresp="#efb5f079e4-software-3" resp="#curator" type="publisher">Media Lab</rs>. <rs cert="0.9" resp="#annotator3" type="software" xml:id="efb5f079e4-software-simple-2">PubPub</rs> is a collaborative publication environment with rich commenting features, and powerful, intuitive authoring tools. JoDS articles are authored directly within the <rs cert="0.9" resp="#annotator3" type="software" xml:id="efb5f079e4-software-simple-3">PubPub</rs> environment, which provides support for multimedia, image integration, and large data sets.</p>
          </body>
       </text>
    </TEI>
@@ -3162,12 +3005,6 @@
       </teiHeader>
       <text xml:lang="en">
          <body>
-            <p>Our interest in this issue comes from the emergence of a hybrid form of governance between intermediation and community building. On the one hand, these platforms define themselves as 'intermediaries', creating an apparent proximity with other online intermediaries such as eBay.com, Craigslist or Facebook, because of a strong technological integration with the Web 2.0 (including social networks and user reviews) <ref type="bibr">(Belk 2014)</ref>. The main difference between intermediaries and merchants is the distribution of control between the platform and the participants <ref type="bibr">(Hagiu 2007)</ref>. While the merchants keep full control over the sale (e.g. pricing, quantities), intermediaries only control the affiliation to their platform, taking the form of a two-sided platform connecting independent sellers and buyers. On the other hand, by putting forward the idea of sharing, these platforms position themselves in a moral system interested in social welfare <ref type="bibr">(Botsman and Rogers 2011)</ref>. Assuming that learning and enforcing morality is the result of both individual attributes and social relations <ref type="bibr">(Hodgson 2014)</ref>, decentralized platforms do not provide the structure for this kind of social enterprise. For instance, we can observe this ambiguity in the governance of Airbnb, in which the platform emphasizes its role of intermediary by describing itself as "a trusted community marketplace" 1 rather than a company or a merchant. Yet, on September 8th 2016, Brian Chesky, CEO and co-founder of Airbnb addressed an email to the entire community of users entitled "Discrimination and Belonging". <ref type="bibr">2</ref> The core of the email consists in the acknowledgment of discrimination on the platform, and the description of new platform policies implementing stronger control over the users' behaviors.</p>
-            <p>By focusing on the individual participants rather than the platform, we need to adopt a performance measure that will reflect this perspective (instead of plaform market shares or winner-take-all competition). We do so by adopting the concept of "allocative efficiency" <ref type="bibr">(Gode and Sunder 1993, 1997)</ref>. In its most generic form, "allocative efficiency is the ratio of the actual to the potential gains from trade" <ref type="bibr">(Gode and Sunder 1997: 603)</ref>. The upper bound of the "potential gains" is reached when the participants can make all the transactions they desire, either as suppliers when they share their possessions, or as customers by accessing the shared goods. Concretely, on the demand side, Airbnb is functioning efficiently if the guests find a room when they desire to travel or BlaBlacar is efficient when there is a seat available for one's desired journey. On the supply side, both the revenue and the efficient utilization of our shareable possessions are impacted if an Airbnb host or a BlaBlaCar traveler cannot find a buyer. From the public good perspective, such a failure can be seen as proof that profit-based platforms cannot provide the basic level of service required by Universal Service obligations <ref type="bibr">(Slee 2016)</ref> or provided by incumbent firms <ref type="bibr">(Cusumano 2015)</ref>.</p>
-            <p>Our model captures the operation of a peer-to-peer marketplace guided by decentralized decision-making and user reviews. Our objective is to compare the performance of different motivations when the peers try to complete transactions. We present our model as an online platform for accommodations (such as Airbnb): the customers are 'guests' who want to find a 'host' for a night at a given location. Below, we describe the model in three blocks / sub-sections:</p>
-            <p>In more detail, we learned from the literature on user reviews that reviews contribute to reputation building and are being used as a proxy rather than a fair source of information. For instance, Fradkin (2014) analyzed search data from Airbnb and shows that potential customers filter the listings based on objective variables (mostly the location and maximum price) before browsing the remaining listings and evaluating more subjective characteristics (including the number and text of reviews). Such a distinction can be found in the model of an online market with a self-selection bias of user reviews built by <ref type="bibr">Li and Hitt (2008)</ref>. In their model, they distinguish two classes of attributes: the 'search attributes', which can be inspected before the transaction, and the 'experience attributes', which are specific to each customer based on its experience of the product.</p>
-            <p>&amp; Price Strategy: <ref type="bibr">Zervas et al. (2017)</ref> point up how Airbnb has affected a specific segment of the hospitality industry, the lower-end hotels. Hotels offering business services do not suffer from the emergence of this platform. <ref type="bibr">Guttentag (2015)</ref> observes that Airbnb is attractive to the low end of the market and covers a demand that is unattractive for the incumbents of the hospitality industry. Airbnb provides accommodations cheaper than hotels. Our understanding is that saving money is a strong motivation on these platforms:</p>
-            <p>From the participant perspective, our results echo the work of <ref type="bibr">Lauermann et al. (2017)</ref> showing that decentralized mechanisms can achieve allocation efficiency even when the participants ignore the exact market condition (including their own characteristics), provided that the search frictions are small. To diminish the search friction, the platform should use all the governance mechanisms (monetary, nonmonetary and informational) at its disposal <ref type="bibr">(Boudreau and Hagiu 2009; Phelps et al. 2008)</ref>. For instance, <ref type="bibr">Gode and Sunder (1997)</ref> face a similar problem when their double auction system cannot prevent the allocative inefficiency resulting from the displacement of intramarginal traders by extramarginal traders (who do not value the goods as much as the intramarginal traders). As a solution, they sketch an alternative market governance that almost mimics the mechanism of centralized assortative matching (e.g., bids and asks closer to actual constraints, delayed decisions queuing in a clearing house). In the same line, <ref type="bibr">Anderson and Renault (1999)</ref> use search costs to explain the emergence of "tourist traps", i.e., options with similar characteristics and largely overpriced, because "buyers do not shop around". Different mechanisms can be tested to achieve such results. In addition to the non-monetary instruments proposed above and following the lessons from the two-sided market literature, the platform can regulate the behaviors monetarily by subsidizing the underactive participants using fees collected from their overpriced counterpart. The platform can also modify how the information is displayed, for instance, to alter the tolerance and the price range of the participants. In fact, Airbnb uses such a mechanism in the search ranking of accommodations. 6</p>
             <p>Data availability statement The datasets generated during and/or analyzed during the current study are available from the corresponding author upon request. The simulation model is also available and can be run using <rs cert="1.0" resp="#annotator14" type="software" xml:id="bd0016b986-software-27">NetLogo</rs> <ref type="bibr">(Wilensky 1999)</ref>.</p>
          </body>
       </text>
@@ -3575,10 +3412,16 @@
    
    <TEI subtype="econ" type="article">
       <teiHeader>
-         <fileDesc xml:id="d3fa7ca637">
+         <fileDesc xml:id="e46553a13f">
             <titleStmt>
                <title>MIT Press Journals 2018 catalog</title>
             </titleStmt>
+            <sourceDesc>
+               <bibl>
+                  <idno type="DOI">10.1162/qjec.121.4.1383</idno>
+                  <idno type="origin">10.1162%2Fqjec.121.4.1383</idno>
+               </bibl>
+            </sourceDesc>
             <biblStruct/>
          </fileDesc>
          <encodingDesc/>
@@ -3591,8 +3434,8 @@
       </teiHeader>
       <text xml:lang="en">
          <body>
-            <p>• In-depth articles on cutting-edge research and developments in technology, methods, and aesthetics of computer music • Reports on products of interest, such as new audio and <rs cert="0.6" resp="#annotator2" type="software" xml:id="d3fa7ca637-software-simple-0">MIDI</rs> software and hardware • Interviews with leading composers of computer music • Announcements of and reports on conferences and courses in the United States and abroad • Publication, event, and recording reviews • Tutorials, letters, and editorials • Numerous graphics, photographs, scores, algorithms, and other illustrations. MIT Press Journals offers CMJ and the annual publication, Leonardo Music Journal (see p. 22), at a special subscription price; see details below.</p>
-            <p>The journal is hosted on an open-access, open-review, rapid publication platform called <rs cert="0.7" resp="#annotator2" type="software" xml:id="d3fa7ca637-software-1">PubPub</rs>, created by students at the <rs corresp="#d3fa7ca637-software-1" resp="#curator" type="publisher">Media Lab</rs>. <rs cert="0.7" resp="#annotator2" type="software" xml:id="d3fa7ca637-software-simple-3">PubPub</rs> is a collaborative publication environment with rich commenting features, and powerful, intuitive authoring tools. JoDS articles are authored directly within the <rs cert="0.7" resp="#annotator2" type="software" xml:id="d3fa7ca637-software-simple-4">PubPub</rs> environment, which provides support for multimedia, image integration, and large data sets.</p>
+            <p>• In-depth articles on cutting-edge research and developments in technology, methods, and aesthetics of computer music • Reports on products of interest, such as new audio and <rs cert="0.6" resp="#annotator2" type="software" xml:id="e46553a13f-software-simple-0">MIDI</rs> software and hardware • Interviews with leading composers of computer music • Announcements of and reports on conferences and courses in the United States and abroad • Publication, event, and recording reviews • Tutorials, letters, and editorials • Numerous graphics, photographs, scores, algorithms, and other illustrations. MIT Press Journals offers CMJ and the annual publication, Leonardo Music Journal (see p. 22), at a special subscription price; see details below.</p>
+            <p>The journal is hosted on an open-access, open-review, rapid publication platform called <rs cert="0.7" resp="#annotator2" type="software" xml:id="e46553a13f-software-1">PubPub</rs>, created by students at the <rs corresp="#e46553a13f-software-1" resp="#curator" type="publisher">Media Lab</rs>. <rs cert="0.7" resp="#annotator2" type="software" xml:id="e46553a13f-software-simple-3">PubPub</rs> is a collaborative publication environment with rich commenting features, and powerful, intuitive authoring tools. JoDS articles are authored directly within the <rs cert="0.7" resp="#annotator2" type="software" xml:id="e46553a13f-software-simple-4">PubPub</rs> environment, which provides support for multimedia, image integration, and large data sets.</p>
          </body>
       </text>
    </TEI>
@@ -3761,10 +3604,16 @@
    
    <TEI subtype="econ" type="article">
       <teiHeader>
-         <fileDesc xml:id="e179596f33">
+         <fileDesc xml:id="a010c944ed">
             <titleStmt>
                <title>VERSLAS: TEORIJA IR PRAKTIKA BUSINESS: THEORY AND PRACTICE A MODEL OF CRITERIA SYSTEM FOR EVALUATION OF CONSTRUCTION CONTRACTION AGREEMENTS</title>
             </titleStmt>
+            <sourceDesc>
+               <bibl>
+                  <idno type="DOI">10.3846/btp.2007.31</idno>
+                  <idno type="origin">10.3846%2Fbtp.2007.31</idno>
+               </bibl>
+            </sourceDesc>
             <biblStruct/>
          </fileDesc>
          <encodingDesc/>
@@ -3777,11 +3626,11 @@
       </teiHeader>
       <text xml:lang="en">
          <body>
-            <p>The <rs cert="1.0" resp="#annotator2" subtype="used" type="software" xml:id="e179596f33-software-simple-0">Expert Choice</rs> software was used to make pilot calculations. This software opens wide opportunities for its users. However, it has drawbacks as well. The main drawback of this software is that it is adjusted for use in stationary work places. The model of indicator hierarchy for construction contract evaluation developed this way is just an extra feature of this software. Meanwhile, users without special software cannot use the developed system of indicators. True, that this system provides a possibility to publish the hierarchical model in Internet; however, only <rs cert="1.0" resp="#annotator2" subtype="used" type="software" xml:id="e179596f33-software-simple-1">Expert Choice</rs> users can make full use of such a model. Besides, this software has other drawbacks characteristic of other stationary software: limited number of workstations, attachment to a specific workstation, little opportunities to share experience with other users, etc.</p>
-            <p>One of the most important opportunities to develop decision support systems is an increase of their integration. First, a system must be developed inside the organisation, and such system with a simple user interface would provide access to and exchange of information among company's employees. A clear link between the decision support system and various data must be provided and it must facilitate installation of various means for resource allocation. In this case, accessibility of the system can be achieved by using standard graphic user interface. Such standardisation is the main reason why <rs corresp="#e179596f33-software-8" resp="#curator" type="publisher">Microsoft</rs> <rs cert="1.0" resp="#annotator2" subtype="used" type="software" xml:id="e179596f33-software-8">Windows</rs> and related products have become widely distributed so fast. The main problem of decision support systems is an interface with additional means that is difficult to implement. From the perspective of a user of a decision support system, the main criterion when a system for work is being selected is the simplicity of its user interface.</p>
-            <p>Another opportunity to improve decision support systems is improvement of accessibility to documents and their management both inside and outside of an organisation. New search and structuring technologies such as underlining of an idea, hypertext and multimedia have been rapidly developed both for scientific research and commercial purposes. One of the most successful examples thereof is groupware, such as <rs resp="#curator" type="software" xml:id="e179596f33-software-11">Lotus Notes</rs>, which emerged recently and is growing fast. The world becomes a uniform connected whole, which is the basis for further development of decision support systems.</p>
-            <p>3. Three CCAs have been selected for calculations and evaluation provided as an example. The evaluation has shown that the first variant is the most favourable to a client, and having analysed graphic information, it is possible to determine possibilities for improvement of agreements. Software <rs cert="1.0" resp="#annotator2" subtype="used" type="software" xml:id="e179596f33-software-simple-5">Expert Choice</rs>, which has been used in this process, is well adjusted to development of a good hierarchy, to determination of criteria significance, to evaluation and analysis of the evaluation results.</p>
-            <p>4. The calculations provided as an example enable the following conclusion: although the aforementioned software has a number of advantages, several main disadvantages can also be distinguished. The software is designed for stationary workstations. Thus the developed hierarchical model of CCA evaluation criteria can be only an extramodule of the aforementioned software. Whereas users who do not have specialised software cannot use the developed system of criteria. Although the system foresees a possibility to place hierarchy models in the Internet, only <rs cert="1.0" resp="#annotator2" subtype="used" type="software" xml:id="e179596f33-software-simple-6">Expert Choice</rs> software users can use them to full extent. Considering the results of the analysis, a specialised decision support system should be developed for CCA evaluation; the system would implement advantages of an Internet-based system.</p>
+            <p>The <rs cert="1.0" resp="#annotator2" subtype="used" type="software" xml:id="a010c944ed-software-simple-0">Expert Choice</rs> software was used to make pilot calculations. This software opens wide opportunities for its users. However, it has drawbacks as well. The main drawback of this software is that it is adjusted for use in stationary work places. The model of indicator hierarchy for construction contract evaluation developed this way is just an extra feature of this software. Meanwhile, users without special software cannot use the developed system of indicators. True, that this system provides a possibility to publish the hierarchical model in Internet; however, only <rs cert="1.0" resp="#annotator2" subtype="used" type="software" xml:id="a010c944ed-software-simple-1">Expert Choice</rs> users can make full use of such a model. Besides, this software has other drawbacks characteristic of other stationary software: limited number of workstations, attachment to a specific workstation, little opportunities to share experience with other users, etc.</p>
+            <p>One of the most important opportunities to develop decision support systems is an increase of their integration. First, a system must be developed inside the organisation, and such system with a simple user interface would provide access to and exchange of information among company's employees. A clear link between the decision support system and various data must be provided and it must facilitate installation of various means for resource allocation. In this case, accessibility of the system can be achieved by using standard graphic user interface. Such standardisation is the main reason why <rs corresp="#a010c944ed-software-8" resp="#curator" type="publisher">Microsoft</rs> <rs cert="1.0" resp="#annotator2" subtype="used" type="software" xml:id="a010c944ed-software-8">Windows</rs> and related products have become widely distributed so fast. The main problem of decision support systems is an interface with additional means that is difficult to implement. From the perspective of a user of a decision support system, the main criterion when a system for work is being selected is the simplicity of its user interface.</p>
+            <p>Another opportunity to improve decision support systems is improvement of accessibility to documents and their management both inside and outside of an organisation. New search and structuring technologies such as underlining of an idea, hypertext and multimedia have been rapidly developed both for scientific research and commercial purposes. One of the most successful examples thereof is groupware, such as <rs resp="#curator" type="software" xml:id="a010c944ed-software-11">Lotus Notes</rs>, which emerged recently and is growing fast. The world becomes a uniform connected whole, which is the basis for further development of decision support systems.</p>
+            <p>3. Three CCAs have been selected for calculations and evaluation provided as an example. The evaluation has shown that the first variant is the most favourable to a client, and having analysed graphic information, it is possible to determine possibilities for improvement of agreements. Software <rs cert="1.0" resp="#annotator2" subtype="used" type="software" xml:id="a010c944ed-software-simple-5">Expert Choice</rs>, which has been used in this process, is well adjusted to development of a good hierarchy, to determination of criteria significance, to evaluation and analysis of the evaluation results.</p>
+            <p>4. The calculations provided as an example enable the following conclusion: although the aforementioned software has a number of advantages, several main disadvantages can also be distinguished. The software is designed for stationary workstations. Thus the developed hierarchical model of CCA evaluation criteria can be only an extramodule of the aforementioned software. Whereas users who do not have specialised software cannot use the developed system of criteria. Although the system foresees a possibility to place hierarchy models in the Internet, only <rs cert="1.0" resp="#annotator2" subtype="used" type="software" xml:id="a010c944ed-software-simple-6">Expert Choice</rs> software users can use them to full extent. Considering the results of the analysis, a specialised decision support system should be developed for CCA evaluation; the system would implement advantages of an Internet-based system.</p>
          </body>
       </text>
    </TEI>
@@ -4328,10 +4177,16 @@
    
    <TEI subtype="econ" type="article">
       <teiHeader>
-         <fileDesc xml:id="e633f0d49f">
+         <fileDesc xml:id="c9408978f5">
             <titleStmt>
                <title>The NAIRU, Unemployment and the Rate of Inflation in Brazil *</title>
             </titleStmt>
+            <sourceDesc>
+               <bibl>
+                  <idno type="DOI">10.1590/s0034-71402003000400011</idno>
+                  <idno type="origin">10.1590%2Fs0034-71402003000400011</idno>
+               </bibl>
+            </sourceDesc>
             <biblStruct/>
          </fileDesc>
          <encodingDesc/>
@@ -4344,7 +4199,7 @@
       </teiHeader>
       <text xml:lang="en">
          <body>
-            <p>The two models were estimated using computer programs developed with the help of the "<rs cert="1.0" resp="#annotator14" subtype="used" type="software" xml:id="e633f0d49f-software-simple-0">Matlab</rs>" software. The log likelihood for the two models, and for a variety of alternative hypothesis, is presented in table 1. <ref type="bibr">6</ref> The parameter of β * t do not enter explicitly in the numerical optimization routine. They are concentrated out by the Kim filter.</p>
+            <p>The two models were estimated using computer programs developed with the help of the "<rs cert="1.0" resp="#annotator14" subtype="used" type="software" xml:id="c9408978f5-software-simple-0">Matlab</rs>" software. The log likelihood for the two models, and for a variety of alternative hypothesis, is presented in table 1. <ref type="bibr">6</ref> The parameter of β * t do not enter explicitly in the numerical optimization routine. They are concentrated out by the Kim filter.</p>
          </body>
       </text>
    </TEI>
@@ -4577,10 +4432,16 @@
    
    <TEI subtype="econ" type="article">
       <teiHeader>
-         <fileDesc xml:id="e3a6d33c50">
+         <fileDesc xml:id="c844840b93">
             <titleStmt>
                <title>MIT Press Journals 2018 catalog</title>
             </titleStmt>
+            <sourceDesc>
+               <bibl>
+                  <idno type="DOI">10.1162/qjec.2005.120.1.345</idno>
+                  <idno type="origin">10.1162%2Fqjec.2005.120.1.345</idno>
+               </bibl>
+            </sourceDesc>
             <biblStruct/>
          </fileDesc>
          <encodingDesc/>
@@ -4593,8 +4454,8 @@
       </teiHeader>
       <text xml:lang="en">
          <body>
-            <p>• In-depth articles on cutting-edge research and developments in technology, methods, and aesthetics of computer music • Reports on products of interest, such as new audio and <rs cert="0.6" resp="#annotator2" type="software" xml:id="e3a6d33c50-software-simple-0">MIDI</rs> software and hardware • Interviews with leading composers of computer music • Announcements of and reports on conferences and courses in the United States and abroad • Publication, event, and recording reviews • Tutorials, letters, and editorials • Numerous graphics, photographs, scores, algorithms, and other illustrations. MIT Press Journals offers CMJ and the annual publication, Leonardo Music Journal (see p. 22), at a special subscription price; see details below.</p>
-            <p>The journal is hosted on an open-access, open-review, rapid publication platform called <rs cert="0.7" resp="#annotator2" type="software" xml:id="e3a6d33c50-software-1">PubPub</rs>, created by students at the <rs corresp="#e3a6d33c50-software-1" resp="#curator" type="publisher">Media Lab</rs>. <rs cert="0.7" resp="#annotator2" type="software" xml:id="e3a6d33c50-software-simple-3">PubPub</rs> is a collaborative publication environment with rich commenting features, and powerful, intuitive authoring tools. JoDS articles are authored directly within the <rs cert="0.7" resp="#annotator2" type="software" xml:id="e3a6d33c50-software-simple-4">PubPub</rs> environment, which provides support for multimedia, image integration, and large data sets.</p>
+            <p>• In-depth articles on cutting-edge research and developments in technology, methods, and aesthetics of computer music • Reports on products of interest, such as new audio and <rs cert="0.6" resp="#annotator2" type="software" xml:id="c844840b93-software-simple-0">MIDI</rs> software and hardware • Interviews with leading composers of computer music • Announcements of and reports on conferences and courses in the United States and abroad • Publication, event, and recording reviews • Tutorials, letters, and editorials • Numerous graphics, photographs, scores, algorithms, and other illustrations. MIT Press Journals offers CMJ and the annual publication, Leonardo Music Journal (see p. 22), at a special subscription price; see details below.</p>
+            <p>The journal is hosted on an open-access, open-review, rapid publication platform called <rs cert="0.7" resp="#annotator2" type="software" xml:id="c844840b93-software-1">PubPub</rs>, created by students at the <rs corresp="#c844840b93-software-1" resp="#curator" type="publisher">Media Lab</rs>. <rs cert="0.7" resp="#annotator2" type="software" xml:id="c844840b93-software-simple-3">PubPub</rs> is a collaborative publication environment with rich commenting features, and powerful, intuitive authoring tools. JoDS articles are authored directly within the <rs cert="0.7" resp="#annotator2" type="software" xml:id="c844840b93-software-simple-4">PubPub</rs> environment, which provides support for multimedia, image integration, and large data sets.</p>
          </body>
       </text>
    </TEI>
@@ -4668,30 +4529,6 @@
    </TEI>
    
    
-   <TEI subtype="econ" type="article">
-      <teiHeader>
-         <fileDesc xml:id="b50eb58823">
-            <titleStmt>
-               <title>Comments Pricing and Cost of Electronics Journals</title>
-            </titleStmt>
-            <biblStruct/>
-         </fileDesc>
-         <encodingDesc/>
-         <profileDesc>
-            <textClass>
-               <catRef target="#with_reconciliation_and_scripts"/>
-               <catRef target="#unique_annotator"/>
-            </textClass>
-         </profileDesc>
-      </teiHeader>
-      <text xml:lang="en">
-         <body>
-            <p>available in AEA's Econlit and other databases. Each article in every Elsevier journal is provided with a citation history (cited by) building up over time, so it is possible to see how an article was later cited within the ScienceDirect journals.</p>
-            <p>ScienceDirect license agreements are individually tailored to the needs of participating universities and consortia of libraries. Depending upon the additional desired contents and functionalities, there is a maximum surcharge of 15 percent. It is becoming clear through such collaborations that Elsevier journals are increasingly used by readers. Thomas Sanville (2001), Executive Director of OhioLINK, has recently described their experience over four years with the usage of electronic journals. In that article, he provides an independent description of the real-life experience of libraries in an electronic consortium for the state of Ohio and, supported by facts and figures, probes the value element of electronic resource sharing within library consortia.</p>
-            <p>There are also significant savings in administration and storage for a library that licenses ScienceDirect. (On average, a library spends less than 30 percent of its total budget on journal/book material; over 70 percent goes to staff and the costs associated with housing, staff and administering the collection). Moreover, the essay does not factor in the significant benefits in convenience and time for faculty and students arising from the availability of all Elsevier journals from one electronic platform on the basis of IP-domain recognition. No passwords are required.</p>
-         </body>
-      </text>
-   </TEI>
    
    
    
@@ -4783,7 +4620,6 @@
          </body>
       </text>
    </TEI>
-   
    
    
    

@@ -130,6 +130,7 @@ public class XMLCorpusPostProcessorNoMention {
             document = normalizeIdentifiers(document);
 
             tei = XMLUtilities.serialize(document, null);
+            tei = reformatTEI(tei);
         } catch(ParserConfigurationException e) {
             e.printStackTrace();
         } catch(IOException e) {
@@ -151,6 +152,7 @@ public class XMLCorpusPostProcessorNoMention {
 
                 document = builder.parse(new InputSource(new StringReader(tei)));
                 tei = XMLUtilities.serialize(document, null);
+                tei = reformatTEI(tei);
             } catch(ParserConfigurationException e) {
                 e.printStackTrace();
             } catch(IOException e) {
@@ -1256,7 +1258,7 @@ public class XMLCorpusPostProcessorNoMention {
     }
 
     /**
-     * Remove <ab> elements and doc entries without text content 
+     * Remove <ab> elements and doc entries without text content and without any annotations
      */
     private org.w3c.dom.Document prune(org.w3c.dom.Document document) {
         // remove <ab> elements
@@ -1272,7 +1274,9 @@ public class XMLCorpusPostProcessorNoMention {
             XPath xPath = xpathFactory.newXPath();
             String expression = "//TEI/text/body";
             NodeList nodes = (NodeList) xPath.compile(expression).evaluate(document, XPathConstants.NODESET);
-            for(int i=nodes.getLength()-1; i >= 0 ; i--) {
+            for(int i=nodes.getLength()-1; i >= 0; i--) {
+                boolean hasNoAnnotation = true;
+                boolean entryRemoved = false;
                 org.w3c.dom.Element bodyElement = (org.w3c.dom.Element)nodes.item(i);
                 // if the bodyElement has no child, we will remove the TEI entry
                 if (!bodyElement.hasChildNodes()) {
@@ -1280,13 +1284,39 @@ public class XMLCorpusPostProcessorNoMention {
                     org.w3c.dom.Element textElement = (org.w3c.dom.Element)bodyElement.getParentNode();
                     org.w3c.dom.Element teiElement = (org.w3c.dom.Element)textElement.getParentNode();
                     teiElement.getParentNode().removeChild(teiElement);
+                    entryRemoved = true;
                 } else {
                     // check if we have no <p> element
                     if (XMLUtilities.getFirstDirectChild(bodyElement, "p") == null) {
                         org.w3c.dom.Element textElement = (org.w3c.dom.Element)bodyElement.getParentNode();
                         org.w3c.dom.Element teiElement = (org.w3c.dom.Element)textElement.getParentNode();
                         teiElement.getParentNode().removeChild(teiElement);
+                        entryRemoved = true;
                     }
+                }
+                // check if we have at least one annotation
+                int l = 0;
+                NodeList pList = bodyElement.getElementsByTagName("p");
+                for (int j = pList.getLength()-1; j >= 0; j--) {
+                    org.w3c.dom.Element snippetElement = (org.w3c.dom.Element) pList.item(j);
+
+                    // find the entities
+                    NodeList entityList = snippetElement.getElementsByTagName("rs");
+                    if (entityList.getLength() != 0) {
+                        // annotation in this snippet
+                        hasNoAnnotation = false;
+                    } else {
+                        // without any annotations, we remove the paragraph, as we want to keep only positive contexts
+                        bodyElement.removeChild(snippetElement);
+                    }
+                }
+
+                if (hasNoAnnotation && !entryRemoved) {
+                    // the TEI entry must be pruned
+                    // get TEI parent, if we are here we're sure these elements exist
+                    org.w3c.dom.Element textElement = (org.w3c.dom.Element)bodyElement.getParentNode();
+                    org.w3c.dom.Element teiElement = (org.w3c.dom.Element)textElement.getParentNode();
+                    teiElement.getParentNode().removeChild(teiElement);
                 }
 
             }
@@ -1515,6 +1545,21 @@ public class XMLCorpusPostProcessorNoMention {
         return document; //Pair.of("", "");
     }
 
+    private String reformatTEI(String tei) {
+        tei = tei.replaceAll("\"\n( )*", "\" ");
+        tei = tei.replaceAll("<p>\n( )*<ref", "<p><ref");
+        tei = tei.replaceAll("<p>\n( )*<rs", "<p><rs");
+        tei = tei.replaceAll("</ref>\n( )*<ref", "</ref> <ref");
+        tei = tei.replaceAll("</rs>\n( )*<rs ", "</rs> <rs ");
+        tei = tei.replaceAll(" \n( )*<rs ", " <rs ");
+        tei = tei.replaceAll("</rs>\n( )*<ref ", "</rs> <ref ");
+        tei = tei.replaceAll("</rs>\n( )*</p>", "</rs></p>");
+        tei = tei.replaceAll("</ref>\n( )*</p>", "</ref></p>");
+        tei = tei.replaceAll("</ref>\n( )*<rs ", "</ref> <rs ");
+        tei = tei.replaceAll("xmlns=\"\" ", "");
+        return tei;
+    }
+
     private org.w3c.dom.Document fixIdNCName(org.w3c.dom.Document document) {
         org.w3c.dom.Element documentRoot = document.getDocumentElement();
         fixIdNCNameElement(documentRoot);
@@ -1684,7 +1729,7 @@ public class XMLCorpusPostProcessorNoMention {
             System.exit(-1);
         }  
 
-        boolean extraContext = false;
+        boolean extraContext = true;
 
         String outputXmlPathTmp = outputXmlPath.replace(".xml", ".tmp.xml");
 

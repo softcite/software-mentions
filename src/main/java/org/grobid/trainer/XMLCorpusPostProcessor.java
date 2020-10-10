@@ -56,6 +56,8 @@ import javax.xml.xpath.*;
  * - addition of cert values when possible/available (scaled to [0,1])
  * - addition of field value "software_was_used" (but would need to be reviewed too!)
  * - addition of a xml:id to software mention element without properties 
+ * - remove document entries without any information (they will be added in the "full" corpus only, see 
+ *   XMLCorpusPostProcessorNoMention.java)
  *  
  */
 public class XMLCorpusPostProcessor {
@@ -116,6 +118,7 @@ public class XMLCorpusPostProcessor {
         System.out.println("number of tei elements/articles: " + sectionList.getLength());
         for (int i = 0; i < sectionList.getLength(); i++) {
             Element teiElement = (Element) sectionList.item(i);
+            
             // get the document id (e.g. PMC identifier)
             // it is under teiHeader/fileDesc/@xml:id
             String pmcid = null;
