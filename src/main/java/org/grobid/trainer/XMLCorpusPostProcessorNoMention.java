@@ -129,6 +129,9 @@ public class XMLCorpusPostProcessorNoMention {
             // and remove invalid/training docs
             document = normalizeIdentifiers(document);
 
+            // inject description notes for full corpus
+            document = injectDescriptionNotes(document, true);
+
             tei = XMLUtilities.serialize(document, null);
             tei = reformatTEI(tei);
         } catch(ParserConfigurationException e) {
@@ -151,6 +154,10 @@ public class XMLCorpusPostProcessorNoMention {
                 tei = XMLUtilities.serialize(document, null);
 
                 document = builder.parse(new InputSource(new StringReader(tei)));
+
+                // inject description notes for (default) "compact" corpus
+                document = injectDescriptionNotes(document, false);
+
                 tei = XMLUtilities.serialize(document, null);
                 tei = reformatTEI(tei);
             } catch(ParserConfigurationException e) {
@@ -1560,6 +1567,53 @@ public class XMLCorpusPostProcessorNoMention {
         return tei;
     }
 
+    private org.w3c.dom.Document injectDescriptionNotes(org.w3c.dom.Document document, boolean full) {
+        // inject descriptions as <note> under <notesStmt>
+        org.w3c.dom.NodeList corpusTitleStmtList = document.getElementsByTagName("titleStmt");
+        // take the first, which is the titleStmt of the teiCorpus header
+        if (corpusTitleStmtList.getLength() > 0) {
+            org.w3c.dom.Element corpusTitleStmtElement = (org.w3c.dom.Element) corpusTitleStmtList.item(0); 
+
+            // remove possible existing <notesStmt>
+            org.w3c.dom.NodeList corpusNotesStmtList = document.getElementsByTagName("notesStmt");
+            // take the first, which is the titleStmt of the teiCorpus header
+            if (corpusNotesStmtList.getLength() > 0) {
+                corpusTitleStmtElement.removeChild((org.w3c.dom.Element) corpusNotesStmtList.item(0)); 
+            }
+
+            // create notesStmt
+            org.w3c.dom.Element notesStmt = document.createElement("notesStmt");
+
+            // create note
+            org.w3c.dom.Element noteElement1 = document.createElement("note");
+            noteElement1.setTextContent("The Softcite dataset is a gold standard corpus of manually annotated software mentions from academic PDFs.");
+            notesStmt.appendChild(noteElement1);
+
+            org.w3c.dom.Element noteElement2 = document.createElement("note");
+            if (full)   
+                noteElement2.setTextContent("This corpus file contains one TEI entry for every scholar publications, including or not manual annotations. For scholar publications containing annotations, each paragraph containing at least one manually annotated software mentions is encoded under the TEI body element. All the manual annotations under p element (paragraph) have been further validated or corrected by a curator to reach a final decision.");
+            else
+                noteElement2.setTextContent("This corpus file contains one TEI entry per scholar publication having at least one software mention. Each paragraph containing at least one manually annotated software mentions is encoded under the TEI body element.");
+            notesStmt.appendChild(noteElement2);
+
+            if (full) {
+                org.w3c.dom.Element noteElement3 = document.createElement("note");
+                noteElement3.setTextContent("For completeness, under ab element (anonymous block), we provide additional snippets for manual annotations that could not be algned with the full paragraph content automatically extracted from PDF. Annotations and contexts under ab element were not validated by a curator. Therefore, these additional annotations and snippets should not be considered as \"gold\" annotation.");
+                notesStmt.appendChild(noteElement3);                
+            }
+
+            // we insert the notesStmt before respStmt
+            org.w3c.dom.NodeList corpusRespStmtList = document.getElementsByTagName("respStmt");
+            if (corpusRespStmtList.getLength() > 0) {
+                org.w3c.dom.Node corpusRespStmtNode = corpusRespStmtList.item(0); 
+
+                corpusTitleStmtElement.insertBefore(notesStmt, corpusRespStmtNode);
+            }
+        }
+
+        return document;
+    }
+
     private org.w3c.dom.Document fixIdNCName(org.w3c.dom.Document document) {
         org.w3c.dom.Element documentRoot = document.getDocumentElement();
         fixIdNCNameElement(documentRoot);
@@ -1729,7 +1783,7 @@ public class XMLCorpusPostProcessorNoMention {
             System.exit(-1);
         }  
 
-        boolean extraContext = true;
+        boolean extraContext = false;
 
         String outputXmlPathTmp = outputXmlPath.replace(".xml", ".tmp.xml");
 

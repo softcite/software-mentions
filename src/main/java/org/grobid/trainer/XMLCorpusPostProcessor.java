@@ -327,11 +327,13 @@ System.out.println(annotationContextLeftSignature + " / " + annotationContextRig
             }
         }
 
-        // inject annotator descriptions 
+        // inject descriptions as <note> under <noteStmt>
         NodeList corpusTitleStmtList = document.getElementsByTagName("titleStmt");
         // take the first, which is the titleStmt of the teiCorpus header
         if (corpusTitleStmtList.getLength() > 0) {
             Element corpusTitleStmtElement = (Element) corpusTitleStmtList.item(0); 
+
+            // inject annotator descriptions 
             for(int index=0; index < annotators.size(); index++) {
                 Element respStmt = document.createElement("respStmt");
                 respStmt.setAttribute("xml:id", "annotator"+index);
