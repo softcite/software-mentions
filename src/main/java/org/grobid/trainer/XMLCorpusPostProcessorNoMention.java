@@ -1569,16 +1569,16 @@ public class XMLCorpusPostProcessorNoMention {
 
     private org.w3c.dom.Document injectDescriptionNotes(org.w3c.dom.Document document, boolean full) {
         // inject descriptions as <note> under <notesStmt>
-        org.w3c.dom.NodeList corpusTitleStmtList = document.getElementsByTagName("titleStmt");
+        org.w3c.dom.NodeList corpusFileDescList = document.getElementsByTagName("fileDesc");
         // take the first, which is the titleStmt of the teiCorpus header
-        if (corpusTitleStmtList.getLength() > 0) {
-            org.w3c.dom.Element corpusTitleStmtElement = (org.w3c.dom.Element) corpusTitleStmtList.item(0); 
+        if (corpusFileDescList.getLength() > 0) {
+            org.w3c.dom.Element corpusFileDescElement = (org.w3c.dom.Element) corpusFileDescList.item(0); 
 
             // remove possible existing <notesStmt>
             org.w3c.dom.NodeList corpusNotesStmtList = document.getElementsByTagName("notesStmt");
             // take the first, which is the titleStmt of the teiCorpus header
             if (corpusNotesStmtList.getLength() > 0) {
-                corpusTitleStmtElement.removeChild((org.w3c.dom.Element) corpusNotesStmtList.item(0)); 
+                corpusFileDescElement.removeChild((org.w3c.dom.Element) corpusNotesStmtList.item(0)); 
             }
 
             // create notesStmt
@@ -1602,12 +1602,11 @@ public class XMLCorpusPostProcessorNoMention {
                 notesStmt.appendChild(noteElement3);                
             }
 
-            // we insert the notesStmt before respStmt
-            org.w3c.dom.NodeList corpusRespStmtList = document.getElementsByTagName("respStmt");
-            if (corpusRespStmtList.getLength() > 0) {
-                org.w3c.dom.Node corpusRespStmtNode = corpusRespStmtList.item(0); 
-
-                corpusTitleStmtElement.insertBefore(notesStmt, corpusRespStmtNode);
+            // we insert the notesStmt before publicationStmt
+            org.w3c.dom.NodeList corpusPublicationStmtList = document.getElementsByTagName("publicationStmt");
+            if (corpusPublicationStmtList.getLength() > 0) {
+                org.w3c.dom.Node corpusPublicationStmtNode = corpusPublicationStmtList.item(0); 
+                corpusFileDescElement.insertBefore(notesStmt, corpusPublicationStmtNode);
             }
         }
 
