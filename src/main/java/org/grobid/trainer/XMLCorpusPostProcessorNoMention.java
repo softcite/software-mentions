@@ -1591,14 +1591,14 @@ public class XMLCorpusPostProcessorNoMention {
 
             org.w3c.dom.Element noteElement2 = document.createElement("note");
             if (full)   
-                noteElement2.setTextContent("This corpus file contains one TEI entry for every scholar publications, including or not manual annotations. For scholar publications containing annotations, each paragraph containing at least one manually annotated software mentions is encoded under the TEI body element. All the manual annotations under p element (paragraph) have been further validated or corrected by a curator to reach a final decision.");
+                noteElement2.setTextContent("This corpus file contains one TEI entry for every scholar publication, including or not manual annotations. For scholar publications containing annotations, each paragraph containing at least one manually annotated software mention is encoded under the TEI body element. All the manual annotations under p elements (paragraph) have been further validated or corrected by a curator to reach a final decision.");
             else
                 noteElement2.setTextContent("This corpus file contains one TEI entry per scholar publication having at least one software mention. Each paragraph containing at least one manually annotated software mentions is encoded under the TEI body element.");
             notesStmt.appendChild(noteElement2);
 
             if (full) {
                 org.w3c.dom.Element noteElement3 = document.createElement("note");
-                noteElement3.setTextContent("For completeness, under ab element (anonymous block), we provide additional snippets for manual annotations that could not be algned with the full paragraph content automatically extracted from PDF. Annotations and contexts under ab element were not validated by a curator. Therefore, these additional annotations and snippets should not be considered as \"gold\" annotation.");
+                noteElement3.setTextContent("For completeness, under ab elements (anonymous block), we provide additional snippets for manual annotations that could not be aligned with the full paragraph content automatically extracted from PDF. Annotations and contexts under ab elements were not validated by a curator. Therefore, these additional annotations and snippets should not be considered as \"gold\" annotation.");
                 notesStmt.appendChild(noteElement3);                
             }
 
