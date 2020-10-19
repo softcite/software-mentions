@@ -92,7 +92,33 @@ Instance-level recall:      34.88
 
 
 
+
+
+--------
+
 Evaluations done 10.10.2020
+
+Wapiti CRF 
+train: pmc
+eval: econ
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1           support
+
+<creator>            96.59        46.15        29.27        35.82        41     
+<software>           73.17        77.36        36.12        49.25        454    
+<url>                99.05        75           21.43        33.33        14     
+<version>            98.65        75           62.07        67.92        29     
+
+all (micro avg.)     91.87        74.06        36.62        49           538    
+all (macro avg.)     91.87        68.38        37.22        46.58        538    
+
+===== Instance-level results =====
+
+Total expected instances:   236
+Correct instances:          69
+Instance-level recall:      29.24
 
 
 --------
