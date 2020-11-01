@@ -1,0 +1,290 @@
+===
+CRF - 29-10-2020
+===
+
+Worst fold
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1           support
+
+<creator>            97.21        80.85        76           78.35        100    
+<software>           88.25        85.75        70.9         77.62        433    
+<url>                99.14        62.5         58.82        60.61        17     
+<version>            98.01        86.61        86.61        86.61        112    
+
+all (micro avg.)     95.65        84.48        74.02        78.9         662    
+all (macro avg.)     95.65        78.93        73.08        75.8         662    
+
+===== Instance-level results =====
+
+Total expected instances:   224
+Correct instances:          112
+Instance-level recall:      50
+
+Best fold:
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1           support
+
+<creator>            96.37        84.11        72           77.59        125    
+<software>           91.07        87.86        77.95        82.61        390    
+<url>                99.86        87.5         87.5         87.5         8      
+<version>            97.98        92.42        86.52        89.38        141    
+
+all (micro avg.)     96.32        88.2         78.77        83.21        664    
+all (macro avg.)     96.32        87.97        80.99        84.27        664    
+
+===== Instance-level results =====
+
+Total expected instances:   224
+Correct instances:          138
+Instance-level recall:      61.61
+
+
+Average over 10 folds: 
+
+label                accuracy     precision    recall       f1           support
+
+<creator>            97.13        84.63        74.95        79.46        1111   
+<software>           89.65        85.87        74.39        79.71        4093   
+<url>                99.29        72.62        62.36        66.72        172    
+<version>            98.02        90.6         85.58        87.98        1258   
+
+all (micro avg.)     96.03        86.27        76.23        80.94  
+
+
+
+===
+BidLSTM-CRF - 28-10-2020
+===
+
+** Worst ** model scores - run 4
+                  precision    recall  f1-score   support
+
+       <creator>     0.7913    0.7583    0.7745       120
+      <software>     0.7770    0.7807    0.7788       415
+           <url>     0.3571    0.4167    0.3846        12
+       <version>     0.8333    0.8712    0.8519       132
+
+all (micro avg.)     0.7822    0.7879    0.7850       679
+
+
+** Best ** model scores - run 6
+                  precision    recall  f1-score   support
+
+       <creator>     0.8919    0.8250    0.8571       120
+      <software>     0.8082    0.8120    0.8101       415
+           <url>     0.6154    0.6667    0.6400        12
+       <version>     0.8605    0.8409    0.8506       132
+
+all (micro avg.)     0.8284    0.8174    0.8228       679
+
+----------------------------------------------------------------------
+
+Average over 10 folds
+                  precision    recall  f1-score   support
+
+       <creator>     0.8516    0.7933    0.8212       120
+      <software>     0.7907    0.7877    0.7890       415
+           <url>     0.4398    0.5000    0.4667        12
+       <version>     0.8352    0.8545    0.8446       132
+
+all (micro avg.)     0.8023    0.7966    0.7994     
+
+
+===
+BidLSTM-CRF-FEATURES - 28-10-2020
+===
+
+** Worst ** model scores - run 1
+                  precision    recall  f1-score   support
+
+       <creator>     0.8654    0.7500    0.8036       120
+      <software>     0.8263    0.7566    0.7899       415
+           <url>     0.4000    0.3333    0.3636        12
+       <version>     0.8571    0.8182    0.8372       132
+
+all (micro avg.)     0.8323    0.7599    0.7945       679
+
+
+** Best ** model scores - run 9
+                  precision    recall  f1-score   support
+
+       <creator>     0.8929    0.8333    0.8621       120
+      <software>     0.8560    0.8024    0.8284       415
+           <url>     0.5000    0.6667    0.5714        12
+       <version>     0.8881    0.9015    0.8947       132
+
+all (micro avg.)     0.8602    0.8247    0.8421       679
+
+----------------------------------------------------------------------
+
+Average over 10 folds
+                  precision    recall  f1-score   support
+
+       <creator>     0.8758    0.8108    0.8416       120
+      <software>     0.8281    0.7880    0.8072       415
+           <url>     0.4480    0.5083    0.4747        12
+       <version>     0.8619    0.8644    0.8630       132
+
+all (micro avg.)     0.8349    0.8019    0.8179 
+
+
+===
+BidLSTM-CRF+ELMo - 29-10-2020
+===
+
+** Worst ** model scores - run 4
+                  precision    recall  f1-score   support
+
+       <creator>     0.8571    0.8500    0.8536       120
+      <software>     0.8091    0.8169    0.8129       415
+           <url>     0.6000    0.7500    0.6667        12
+       <version>     0.9055    0.8712    0.8880       132
+
+all (micro avg.)     0.8309    0.8321    0.8315       679
+
+
+** Best ** model scores - run 7
+                  precision    recall  f1-score   support
+
+       <creator>     0.9060    0.8833    0.8945       120
+      <software>     0.8782    0.8169    0.8464       415
+           <url>     0.9167    0.9167    0.9167        12
+       <version>     0.9055    0.8712    0.8880       132
+
+all (micro avg.)     0.8894    0.8409    0.8645       679
+
+----------------------------------------------------------------------
+
+Average over 10 folds
+                  precision    recall  f1-score   support
+
+       <creator>     0.9092    0.8592    0.8832       120
+      <software>     0.8349    0.8227    0.8285       415
+           <url>     0.7265    0.8500    0.7796        12
+       <version>     0.8838    0.8538    0.8683       132
+
+all (micro avg.)     0.8541    0.8356    0.8446 
+
+
+===
+BidLSTM-CRF-FEATURES+ELMo - 31-10-2020
+===
+
+** Worst ** model scores - run 2
+                  precision    recall  f1-score   support
+
+       <creator>     0.9009    0.8333    0.8658       120
+      <software>     0.7972    0.8145    0.8057       415
+           <url>     0.4444    0.6667    0.5333        12
+       <version>     0.8750    0.8485    0.8615       132
+
+all (micro avg.)     0.8194    0.8218    0.8206       679
+
+
+** Best ** model scores - run 6
+                  precision    recall  f1-score   support
+
+       <creator>     0.9145    0.8917    0.9030       120
+      <software>     0.8568    0.8217    0.8389       415
+           <url>     0.9167    0.9167    0.9167        12
+       <version>     0.9008    0.8258    0.8617       132
+
+all (micro avg.)     0.8765    0.8365    0.8561       679
+
+----------------------------------------------------------------------
+
+Average over 10 folds
+                  precision    recall  f1-score   support
+
+       <creator>     0.9157    0.8583    0.8859       120
+      <software>     0.8318    0.8229    0.8270       415
+           <url>     0.7261    0.8500    0.7814        12
+       <version>     0.8820    0.8455    0.8630       132
+
+all (micro avg.)     0.8529    0.8340    0.8432   
+
+===
+bert-base-en - 30-10-2020
+===
+
+Evaluation:
+
+** Worst ** model scores - run 1
+                  precision    recall  f1-score   support
+
+       <creator>     0.7982    0.7583    0.7778       120
+      <software>     0.7926    0.7735    0.7829       415
+           <url>     0.6429    0.7500    0.6923        12
+       <version>     0.7639    0.8333    0.7971       132
+
+all (micro avg.)     0.7843    0.7820    0.7832       679
+
+
+** Best ** model scores - run 5
+                  precision    recall  f1-score   support
+
+       <creator>     0.8125    0.7583    0.7845       120
+      <software>     0.8068    0.7952    0.8010       415
+           <url>     0.5000    0.6667    0.5714        12
+       <version>     0.8507    0.8636    0.8571       132
+
+all (micro avg.)     0.8092    0.7997    0.8044       679
+
+----------------------------------------------------------------------
+
+Average over 10 folds
+                  precision    recall  f1-score   support
+
+       <creator>     0.7981    0.7567    0.7766       120
+      <software>     0.8037    0.7870    0.7951       415
+           <url>     0.5944    0.7750    0.6722        12
+       <version>     0.8131    0.8432    0.8277       132
+
+all (micro avg.)     0.7995    0.7923    0.7958         
+
+
+===
+SciBERT - 28-10-2020
+===
+
+Evaluation:
+
+** Worst ** model scores - run 5
+                  precision    recall  f1-score   support
+
+       <creator>     0.9273    0.8500    0.8870       120
+      <software>     0.8571    0.8241    0.8403       415
+           <url>     0.6471    0.9167    0.7586        12
+       <version>     0.8898    0.8561    0.8726       132
+
+all (micro avg.)     0.8698    0.8365    0.8529       679
+
+
+** Best ** model scores - run 2
+                  precision    recall  f1-score   support
+
+       <creator>     0.9196    0.8583    0.8879       120
+      <software>     0.8716    0.8506    0.8610       415
+           <url>     0.7333    0.9167    0.8148        12
+       <version>     0.8647    0.8712    0.8679       132
+
+all (micro avg.)     0.8752    0.8571    0.8661       679
+
+----------------------------------------------------------------------
+
+Average over 10 folds
+                  precision    recall  f1-score   support
+
+       <creator>     0.9089    0.8542    0.8806       120
+      <software>     0.8665    0.8443    0.8552       415
+           <url>     0.6486    0.9083    0.7547        12
+       <version>     0.8791    0.8674    0.8731       132
+
+all (micro avg.)     0.8695    0.8517    0.8605   
+
+
+
