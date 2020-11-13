@@ -42,13 +42,14 @@ public class SoftwareController implements SoftwarePaths {
 
     @Inject
     public SoftwareController(SoftwareServiceConfiguration serviceConfiguration) {
-        try {
+        /*try {
             ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
             this.configuration = mapper.readValue(new File("resources/config/config.yml"), SoftwareConfiguration.class);
         } catch(Exception e) {
             LOGGER.error("The config file does not appear valid, see resources/config/config.yml", e);
             this.configuration = null;
-        }
+        }*/
+        this.configuration = serviceConfiguration.getSoftwareConfiguration();
     }
 
         /**

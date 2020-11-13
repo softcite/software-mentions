@@ -85,7 +85,8 @@ public class SoftwareParser extends AbstractParser {
 
     private SoftwareParser(SoftwareConfiguration configuration) {
         super(GrobidModels.SOFTWARE, CntManagerFactory.getCntManager(), 
-            GrobidCRFEngine.valueOf(configuration.getEngine().toUpperCase()));
+            GrobidCRFEngine.valueOf(configuration.getEngine().toUpperCase()),
+            configuration.getDelftArchitecture());
 
         softwareLexicon = SoftwareLexicon.getInstance();
 		parsers = new EngineParsers();
