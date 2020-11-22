@@ -2,19 +2,31 @@
 
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
-The goal of this GROBID module is to recognize in textual documents and PDF any mentions of software. It uses as training data is the [softcite dataset](https://github.com/howisonlab/softcite-dataset) developed by [James Howison](http://james.howison.name/) Lab at the University of Texas at Austin. This annotated corpus and the present software text mining component have been developed supported by a grant from the Alfred P. Sloan foundation to [improve credit for research software](https://blog.ourresearch.org/collaborating-635k-grant-improve-credit-research-software/).
+The goal of this GROBID module is to recognize any software mentions in scholar textual documents and PDF. It uses as training data the [softcite dataset](https://github.com/howisonlab/softcite-dataset) developed by [James Howison](http://james.howison.name/) Lab at the University of Texas at Austin. This annotated corpus and the present software text mining component have been developed supported by a grant from the Alfred P. Sloan foundation to [improve credit for research software](https://blog.ourresearch.org/collaborating-635k-grant-improve-credit-research-software/).
 
-As the other GROBID models, the module relies only on machine learning and can use linear CRF (via [Wapiti](https://github.com/kermitt2/Wapiti) JNI integration) or Deep Learning model such as BiLSTM-CRF, ELMo and BERT (via [DeLFT](https://github.com/kermitt2/delft) JNI integration). 
+As the other GROBID models, the module relies only on state-of-the-art machine learning. The tool can use linear CRF (via [Wapiti](https://github.com/kermitt2/Wapiti) JNI integration) or Deep Learning model such as BiLSTM-CRF, ELMo or fine-tuned transformers BERT (via [DeLFT](https://github.com/kermitt2/delft) JNI integration) and any combination of them. 
 
 A description of the task can be found [here](doc/description.md).
+
+Thanks to its integration in the [GROBID](https://github.com/kermitt2/grobid) framework, the software mention extraction on scholar PDF is:
+
+- __structure-aware__: the extraction is realized on the relevant textual zones, skipping for instance figure content, headnotes, formulas, bibliographical reference section, etc. and exploiting the knowledge of inline reference markers, section and paragraph boundaries, etc. for the textual zones
+
+- __robust__: text stream in PDF is recovered and cleaned with various additional process going beyond traditional pdf-to-text low level PDF extraction tool, for instance line number removal, de-hyphenation, unicode character combination, multi-column support, handling of page/figure breaks, unicode normalization, etc. 
+
+- __combined with bibliographical reference recognition__: the bibliographical reference markers possibly used in combination with the software mention are recognized, attached to the software mention when possible, matched with the full bibliographical reference in the bibliographical section of the article and disambiguated against CrossRef and Unpaywall
+
+- __combined with PDF coordinates__: the bounding boxes of the extracted software mentions, software attributes and attached bibliographical references in the original PDF are provided, in order to create augmented interative PDF to visualize and interact directly with software mentions on the PDF, see the [console demo](https://github.com/ourresearch/software-mentions/#console-web-app)
+
+- __combined with entity disambiguation__: extracted software names are disambiguated in context against software entities in Wikidata via [entity-fishing](https://github.com/kermitt2/entity-fishing)
+
+- __scaling__: as we want to scale to the complete scientific corpus, the process is optimized in runtime and memory usage. We are able to process entirely around 2 PDF per second (including PDF processing and structuring, extractions, bibliographical reference disambiguation against crossref and entity disambiguation against WikiData) on one low/medium cost Ubuntu server, Intel i7-4790 (4 CPU), 4.00 GHz with 16 GB memory (an additional GPU is however necessary when using Deep Learning models and runtime then depends on the DL architecture of choice).
 
 Latest performance (accuracy and runtime) can be found [below](https://github.com/Impactstory/software-mentions#Benchmarking).
 
 ## Install, build, run
 
-Building module requires JDK 1.8 or higher (note: it was not tested with JDK 1.14 yet).  
-
-First install and build the latest development version of GROBID as explained by the [documentation](http://grobid.readthedocs.org).
+Building the module requires JDK 1.8 or higher. First install and build the latest development version of GROBID as explained by the [documentation](http://grobid.readthedocs.org).
 
 Under the installed `grobid/` directory, clone the present module software-mentions (it will appear as sibling sub-project to grobid-core, grobid-trainer, etc.):
 
@@ -22,7 +34,7 @@ Under the installed `grobid/` directory, clone the present module software-menti
 
 > git clone https://github.com/kermitt2/software-mentions
 
-Copy the provided pre-trained model in the standard grobid-home path:
+Copy the provided pre-trained models in the standard grobid-home path:
 
 > ./gradlew copyModels 
 
@@ -33,7 +45,6 @@ Try compiling everything with:
 Run some test: 
 
 > ./gradlew test
-
 
 ## Start the service
 
@@ -244,67 +255,66 @@ The other algorithms rely on the Deep Learning library [DeLFT](https://github.co
 All are natively integrated in the JVM to provide state-of-the-art performance both in accuracy and runtime. 
 
 
-### Accuracy
+### Accuracy of the sequence labeling task
 
-Evaluation made on 03.10.2019 (with update for CRF on 20.05.2020)
+Evaluation made in October 2020.
 
-The results (precision, recall, f-score) for all the models have been obtained using 10-fold cross-validation (average metrics over the 10 folds) at entity-level. We also indicate the best and worst results over the 10 folds in the [complete result page](https://github.com/Impactstory/software-mentions/blob/master/doc/scores-1.0.txt). See [DeLFT](https://github.com/kermitt2/delft) for more details about the models and reproducing all these evaluations. 
+The results (precision, recall, f-score) for all the models have been obtained using 10-fold cross-validation (average metrics over the 10 folds) at entity-level. We also indicate the best and worst results over the 10 folds in the [complete result page](https://github.com/Impactstory/software-mentions/blob/master/doc/scores-1.2.txt). See [DeLFT](https://github.com/kermitt2/delft) for more details about the models and reproducing all these evaluations. The feature-engineered CRF is based on the [custom Wapiti fork](https://github.com/kermitt2/wapiti) integrated in [GROBID](https://github.com/kermitt2/grobid) and available in the present repository. 
 
-`<software>` label means “software name”. `<publisher>` corresponds usually to the publisher of the software or, more rarely, the main developer. `<version>` correspond to both version number and version dates, when available. 
+`<software>` label means “software name”. `<publisher>` corresponds usually to the publisher of the software or, more rarely, the main developer. `<version>` corresponds to both version number and version dates, when available. 
 
 #### Summary
 
 |           | `<software>` | `<publisher>` | `<version>` | `<url>`  | **micro-average** |
 |---        | ---          | ---           | ---         | ---      |  ---              | 
-| **CRF**   |   79.64      |   80.6        |    87.47    |   63.15  |     80.95         | 
-|**BiLSTM-CRF**|   77.37      |   79.94       |  **89.55**  |  31.36   |     79.09         | 
-|**BiLSTM-CRF+features**|   79.65 |   86.52   |    85.99    |  48.19   |     80.77         | 
-|**BiLSTM-CRF+ELMo**| 83.63 | **87.07**   |    89.33    |  62.19   |   **84.87**       | 
-|**BiLSTM-CRF+ELMo+features**| **84.80** | 86.80  |    86.74    |  63.21   |     84.70         | 
-|**bert-base-en+CRF**|  73.55  |  71.72        |   78.83     |  45.50   |     73.56         | 
-|**SciBERT+CRF**|     83.62    |  78.59        |   88.97     |**68.77** |     83.54         | 
+| **CRF**   |   79.71      |   79.46       |    87.98    |   66.72  |     80.94         | 
+|**BiLSTM-CRF**|   78.90   |   82.12       |    84.46    |  46.67   |     79.94         | 
+|**BiLSTM-CRF+features**|   80.72 |  84.16 |    86.30    |  47.47   |     81.79         | 
+|**BiLSTM-CRF+ELMo** | 82.85 | 88.32     |    86.83      |  77.96   |     84.46         | 
+|**BiLSTM-CRF+ELMo+features**| 82.70 | 88.59 |   86.30   |  78.14   |     84.32         | 
+|**bert-base-en+CRF**|  79.51  |  77.66      |   82.77   |  67.22   |     79.58         | 
+|**SciBERT+CRF**     |  85.52  |  88.06        |   87.31     | 75.47 |     86.05         | 
 
-f-score based on 10-folds cross validation at field level.
+__f-score__ based on 10-folds cross validation at field level.
 
 #### Detailed scores
 
 |          | CRF ||| BiLSTM-CRF ||| BiLSTM-CRF+ELMo|||
 |---       | --- | --- | --- | --- | --- | --- | ---| --- | --- |
 |**Labels**| Precision | Recall | f-score | Precision | Recall | f-score | Precision | Recall | f-score|
-| `<software>` | 86.18 | 74.07 | 79.64 | 79.70 | 75.21 | 77.37 | **86.87** | 80.72 | **83.63** |
-| `<publisher>`  | **86.74** | 75.31 | 80.6  | 77.57 | 82.48 | 79.94 | 86.40 | 87.81 | **87.07** |
-| `<version>`  | **90.53** | 84.74 | 87.47 | 88.55 | **90.57** | **89.55** | 89.61 | 89.07 | 89.33|
-| `<url>`  | **68.58** | 59.66 | 63.15 | 28.22 | 36.00 | 31.36 | 61.38 | 64.00 | 62.19|
-|**micro-average** | **86.73** | 75.91 | 80.95 | 79.62 | 78.59 | 79.09 | 86.72 | 83.14 | **84.87** |
+| `<software>` | 85.87 | 74.39 | 79.71 | 79.07 | 78.77 | 78.90 | 83.49 | 82.27 | 82.85 |
+| `<publisher>`  | 84.63 | 74.95 | 79.46  | 85.16 | 79.33 | 82.12 | 90.92 | 85.92 | 88.32 |
+| `<version>`  | 90.6 | 85.58 | 87.98 | 83.52 | 85.45 | 84.46 | 88.38 | 85.38 | 86.83 |
+| `<url>`  | 72.62 | 62.36 | 66.72 | 43.98 | 50.00 | 46.67 | 72.65 | 85.00 | 77.96|
+|**micro-average** | 86.27 | 76.23 | 80.94 | 80.23 | 79.66 | 79.94 | 85.41 | 83.56 | 84.46 |
 
 |              | BiLSTM-CRF+features  |        |        | BiLSTM-CRF+ELMo+features |        |         |
 |---           | ---                  | ---    | ---    | ---                      | ---    | ---     | 
 |**Labels**    | Precision            | Recall | f-score| Precision          | Recall       | f-score |
-| `<software>` | 79.64                | 79.72  | 79.65  | 84.41              | 85.35        | 84.80   |
-| `<publisher>`  | 83.58                | 89.68  | 86.52  | 83.04              | **90.96**    | 86.80   |
-| `<version>`  | 85.69                | 86.34  | 85.99  | 86.87              | 86.64        | 86.74   |
-| `<url>`      | 44.99                | 52.27  | 48.19  | 59.31              | 68.64        | 63.21   |
-|**micro-average** | 80.05            | 81.52  | 80.77  | 83.68              | **85.84**        | 84.70   |
+| `<software>` | 82.81                | 78.80  | 80.72  | 83.18              | 82.29        | 82.70   |
+| `<publisher>`| 87.58                | 81.08  | 84.16  | 91.57              | 85.83        | 88.59   |
+| `<version>`  | 86.19                | 86.44  | 86.30  | 88.20              | 84.55        | 86.30   |
+| `<url>`      | 44.80                | 50.83  | 47.47  | 72.61              | 85.00        | 78.14   |
+|**micro-average** | 83.49            | 80.19  | 81.79  | 85.29              | 83.40        | 84.32   |
 
 Evaluation BERT fine-tuned architectures:
 
 |           | bert-base-en+CRF ||| SciBERT+CRF ||| 
 |---        | --- | --- | --- | --- | --- | --- | 
 |**Labels** | Precision | Recall | f-score | Precision | Recall | f-score |
-| `<software>` | 75.58 | 71.64 | 73.55 | 84.85 | **82.43** | 83.62 | 
-| `<publisher>` | 72.93 | 70.57 | 71.72 | 79.51 | 77.71 | 78.59 | 
-| `<version>`  | 78.54 | 79.14 | 78.83 | 89.98 | 88.00 | 88.97 |
-| `<url>`   | 38.70 | 56.67 | 45.50 | 63.62 | **75.33** | **68.77** | 
-|**micro-average** | 74.48 | 72.67 | 73.56 | 84.42 | 82.69 | 83.54 | 
+| `<software>` | 80.37 | 78.70 | 79.51 | 86.65 | 84.43 | 85.52 | 
+| `<publisher>` | 79.81 | 75.67 | 77.66 | 90.89 | 85.42 | 88.06 | 
+| `<version>`  | 81.31 | 84.32 | 82.77 | 87.91 | 86.74 | 87.31 |
+| `<url>`   | 59.44 | 77.50 | 67.22 | 64.86 | 90.83 | 75.47 | 
+|**micro-average** | 79.95 | 79.23 | 79.58 | 86.95 | 85.17 | 86.05 | 
 
 Note that the maximum sequence length is normally 1,500 tokens, except for BERT architectures, which have a limit of 512 for the input sequence length. Tokens beyond 1,500 or 512 are truncated and ignored.  
 
-For this reason, BERT architectures are in practice difficult to exploit for our use case due to the the input sequence length, which correspond to a complete paragraph to annotate. The software attributes can be distributed in more than one sentence, and some key elements introducting a software mention can be spread in the whole paragraph. The number of tokens in a paragraph frequently go beyond 512, which also degrades the above reported metrics for these models.  
-
+For this reason, BERT architectures are might be impacted by the input sequence length, which correspond for us to a complete paragraph to annotate. The software attributes can be distributed in more than one sentence, and some key elements introducting a software mention can be spread in the whole paragraph. The number of tokens in a paragraph can go beyond 512, which might degrade the above reported metrics for the transformer models.  
 
 ### Runtimes
 
-The following runtimes were obtained based on a Ubuntu 16.04 server Intel i7-4790 (4 CPU), 4.00 GHz with 16 GB memory. The runtimes for the Deep Learning architectures are based on the same machine with a nvidia GPU GeForce 1080Ti (11 GB). Runtime can be reproduced with the [python script below](#runtime-benchmark).
+The following runtimes have been obtained based on a Ubuntu 16.04 server Intel i7-4790 (4 CPU), 4.00 GHz with 16 GB memory. The runtimes for the Deep Learning architectures are based on the same machine with a nvidia GPU GeForce 1080Ti (11 GB). Runtime can be reproduced with the [python script below](#runtime-benchmark).
 
 |CRF ||
 |--- | --- |
@@ -337,9 +347,9 @@ The following runtimes were obtained based on a Ubuntu 16.04 server Intel i7-479
 | 5 | 4,729|
 | 6 | 5,060|
 
-Batch size is a parameter constrained by the capacity of the available GPU. An improvement of the performance of the deep learning architecture requires increasing the number of GPU and the amount of memory of these GPU, similarly as improving CRF capacity requires increasing the number of available threads and CPU. Running a Deep Learning architectures on CPU is around 50 times slower than on GPU (although it depends on the amount of RAM available with the CPU, which can allow to increase the batch size significantly). 
+Batch size is a parameter constrained by the capacity of the available GPU. An improvement of the performance of the deep learning architecture requires increasing the number of GPU and the amount of memory of these GPU, similarly as improving CRF capacity requires increasing the number of available threads and CPU. We observed that running a Deep Learning architectures on CPU is around 50 times slower than on GPU (although it depends on the amount of RAM available with the CPU, which can allow to increase the batch size significantly). 
 
-For the latest and complete evaluation data, see [here](https://github.com/Impactstory/software-mentions/blob/master/doc/scores-1.0.txt)
+For the latest and complete evaluation data, see [here](https://github.com/Impactstory/software-mentions/blob/master/doc/scores-1.2.txt)
 
 
 ## Training and evaluation
