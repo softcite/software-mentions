@@ -267,13 +267,13 @@ The results (precision, recall, f-score) for all the models have been obtained u
 
 |           | `<software>` | `<publisher>` | `<version>` | `<url>`  | **micro-average** |
 |---        | ---          | ---           | ---         | ---      |  ---              | 
-| **CRF**   |   79.71      |   79.46       |    87.98    |   66.72  |     80.94         | 
+| **CRF**   |   79.71      |   79.46       |    **87.98**    |   66.72  |     80.94         | 
 |**BiLSTM-CRF**|   78.90   |   82.12       |    84.46    |  46.67   |     79.94         | 
 |**BiLSTM-CRF+features**|   80.72 |  84.16 |    86.30    |  47.47   |     81.79         | 
 |**BiLSTM-CRF+ELMo** | 82.85 | 88.32     |    86.83      |  77.96   |     84.46         | 
-|**BiLSTM-CRF+ELMo+features**| 82.70 | 88.59 |   86.30   |  78.14   |     84.32         | 
+|**BiLSTM-CRF+ELMo+features**| 82.70 | **88.59** |   86.30   |  **78.14**   |     84.32         | 
 |**bert-base-en+CRF**|  79.51  |  77.66      |   82.77   |  67.22   |     79.58         | 
-|**SciBERT+CRF**     |  85.52  |  88.06        |   87.31     | 75.47 |     86.05         | 
+|**SciBERT+CRF**     |  **85.52**  |  88.06        |   87.31     | 75.47 |     **86.05**        | 
 
 __f-score__ based on 10-folds cross validation at field level.
 
@@ -283,18 +283,18 @@ __f-score__ based on 10-folds cross validation at field level.
 |---       | --- | --- | --- | --- | --- | --- | ---| --- | --- |
 |**Labels**| Precision | Recall | f-score | Precision | Recall | f-score | Precision | Recall | f-score|
 | `<software>` | 85.87 | 74.39 | 79.71 | 79.07 | 78.77 | 78.90 | 83.49 | 82.27 | 82.85 |
-| `<publisher>`  | 84.63 | 74.95 | 79.46  | 85.16 | 79.33 | 82.12 | 90.92 | 85.92 | 88.32 |
-| `<version>`  | 90.6 | 85.58 | 87.98 | 83.52 | 85.45 | 84.46 | 88.38 | 85.38 | 86.83 |
-| `<url>`  | 72.62 | 62.36 | 66.72 | 43.98 | 50.00 | 46.67 | 72.65 | 85.00 | 77.96|
+| `<publisher>`  | 84.63 | 74.95 | 79.46  | 85.16 | 79.33 | 82.12 | 90.92 | **85.92** | 88.32 |
+| `<version>`  | **90.6** | 85.58 | **87.98** | 83.52 | 85.45 | 84.46 | 88.38 | 85.38 | 86.83 |
+| `<url>`  | 72.62 | 62.36 | 66.72 | 43.98 | 50.00 | 46.67 | **72.65** | 85.00 | 77.96|
 |**micro-average** | 86.27 | 76.23 | 80.94 | 80.23 | 79.66 | 79.94 | 85.41 | 83.56 | 84.46 |
 
 |              | BiLSTM-CRF+features  |        |        | BiLSTM-CRF+ELMo+features |        |         |
 |---           | ---                  | ---    | ---    | ---                      | ---    | ---     | 
 |**Labels**    | Precision            | Recall | f-score| Precision          | Recall       | f-score |
 | `<software>` | 82.81                | 78.80  | 80.72  | 83.18              | 82.29        | 82.70   |
-| `<publisher>`| 87.58                | 81.08  | 84.16  | 91.57              | 85.83        | 88.59   |
+| `<publisher>`| 87.58                | 81.08  | 84.16  | **91.57**          | 85.83        | 88.59   |
 | `<version>`  | 86.19                | 86.44  | 86.30  | 88.20              | 84.55        | 86.30   |
-| `<url>`      | 44.80                | 50.83  | 47.47  | 72.61              | 85.00        | 78.14   |
+| `<url>`      | 44.80                | 50.83  | 47.47  | 72.61              | 85.00        | **78.14**   |
 |**micro-average** | 83.49            | 80.19  | 81.79  | 85.29              | 83.40        | 84.32   |
 
 Evaluation BERT fine-tuned architectures:
@@ -302,11 +302,11 @@ Evaluation BERT fine-tuned architectures:
 |           | bert-base-en+CRF ||| SciBERT+CRF ||| 
 |---        | --- | --- | --- | --- | --- | --- | 
 |**Labels** | Precision | Recall | f-score | Precision | Recall | f-score |
-| `<software>` | 80.37 | 78.70 | 79.51 | 86.65 | 84.43 | 85.52 | 
+| `<software>` | 80.37 | 78.70 | 79.51 | **86.65** | **84.43** | **85.52** | 
 | `<publisher>` | 79.81 | 75.67 | 77.66 | 90.89 | 85.42 | 88.06 | 
-| `<version>`  | 81.31 | 84.32 | 82.77 | 87.91 | 86.74 | 87.31 |
-| `<url>`   | 59.44 | 77.50 | 67.22 | 64.86 | 90.83 | 75.47 | 
-|**micro-average** | 79.95 | 79.23 | 79.58 | 86.95 | 85.17 | 86.05 | 
+| `<version>`  | 81.31 | 84.32 | 82.77 | 87.91 | **86.74** | 87.31 |
+| `<url>`   | 59.44 | 77.50 | 67.22 | 64.86 | **90.83** | 75.47 | 
+|**micro-average** | 79.95 | 79.23 | 79.58 | **86.95** | **85.17** | **86.05** | 
 
 Note that the maximum sequence length is normally 1,500 tokens, except for BERT architectures, which have a limit of 512 for the input sequence length. Tokens beyond 1,500 or 512 are truncated and ignored.  
 
