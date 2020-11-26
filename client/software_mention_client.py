@@ -280,7 +280,6 @@ class software_mention_client(object):
                     self._insert_mongo(jsonObject)
                     #print("inserted annotations with id", inserted_id)
 
-    #def annotate(self, file_in, config, mongo_db, file_out=None, full_record=None, env_software=None):
     def annotate(self, file_in, file_out, full_record):
         the_file = {'input': open(file_in, 'rb')}
         url = "http://" + self.config["software_mention_host"]
@@ -337,6 +336,14 @@ class software_mention_client(object):
             if self.config["mongo_host"] is not None:
                 # we store the result in mongo db 
                 self._insert_mongo(jsonObject)
+        elif jsonObject is not None:
+            # we have no software mention in the document, we still write an empty result file
+            # along with the PDF/medtadata files to easily keep track of the processing for this doc
+            if file_out is not None: 
+                # force empty explicit mentions
+                jsonObject['mentions'] = []
+                with open(file_out, "w", encoding="utf-8") as json_file:
+                    json_file.write(json.dumps(jsonObject))
 
         # for keeping track of the processing
         # update processed entry in the lmdb (having entities or not) and failure
