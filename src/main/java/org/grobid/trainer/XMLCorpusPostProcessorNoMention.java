@@ -63,6 +63,7 @@ import static org.grobid.core.document.xml.XmlBuilderUtils.teiElement;
  * - addition of curation level class description at corpus level
  * - addition of corpus document without any annotation, as present in the CSV export corpus
  * - addition of curation class information at document level  
+ * - addition of corrected "software_use" attributes
  *
  * Example usage:
  * > ./gradlew post_process_corpus_no_mention -Pxml=/home/lopez/grobid/software-mentions/resources/dataset/software/corpus/all_clean_post_processed.tei.xml -Pcsv=/home/lopez/tools/softcite-dataset/data/csv_dataset/ -Ppdf=/home/lopez/tools/softcite-dataset/pdf/ -Poutput=/home/lopez/grobid/software-mentions/resources/dataset/software/corpus/all_clean_post_processed_no_mention.tei.xml 
@@ -82,6 +83,9 @@ public class XMLCorpusPostProcessorNoMention {
     private List<String> trainingDoc = Arrays.asList("a2008-39-NAT_BIOTECHNOL", "a2010-05-BMC_MOL_BIOL", 
         "a2007-48-UNDERSEA_HYPERBAR_M", "a2001-40-MOL_ECOL", "a2008-02-WATERBIRDS");
 
+    // map mention with corrected usage information
+    private Map<String, Boolean> softwareUsages = new TreeMap<>();
+
     public XMLCorpusPostProcessorNoMention(SoftwareConfiguration conf) {
         this.configuration = conf;
     }
@@ -99,6 +103,7 @@ public class XMLCorpusPostProcessorNoMention {
         // documents without annotation are present with a "dummy" annotation 
 
         this.importCSVMissingTitles(csvPath, documents);
+        this.loadSoftwareUsage();
         
         // we unfortunately need to use DOM to update the XML file which is always a lot of pain
         String tei = null;
@@ -128,6 +133,9 @@ public class XMLCorpusPostProcessorNoMention {
             // normalize document-level identifiers with uniform random hexa keys 
             // and remove invalid/training docs
             document = normalizeIdentifiers(document);
+
+            // inject curated software usage attributes
+            document = correctSoftwareUsage(document);
 
             // inject description notes for full corpus
             document = injectDescriptionNotes(document, true);
@@ -1196,11 +1204,14 @@ public class XMLCorpusPostProcessorNoMention {
 
                         // get an hexadecimal key for this document
                         // get an already existing key if available
-                        String newDocId = orgin2KeyGen(docId);
-
+                        String newDocId = orgin2KeyGen(docId);                        
                         // otherwise generate a new one
                         if (newDocId == null) {
                             newDocId = HexaKeyGen.getHexaKey(10, true);
+                            if (!trainingDoc.contains(docId)) {
+                                System.out.println("Warning: no existing document hexa key for " + docId + 
+                                    " - a new key is generated: " + newDocId);
+                            }
                         }
 
                         fileDescElement.setAttribute("xml:id", newDocId);
@@ -1263,6 +1274,57 @@ public class XMLCorpusPostProcessorNoMention {
 
         return document;
     }
+
+    private org.w3c.dom.Document correctSoftwareUsage(org.w3c.dom.Document document) {
+        org.w3c.dom.Element documentRoot = document.getDocumentElement();
+        XPathFactory xpathFactory = XPathFactory.newInstance();
+        System.out.println("correctSoftwareUsage: expected " + this.softwareUsages.size() + " corrections");
+        // the list of rs element id corrected, to control if all corrections have been applied
+        List<String> consumed = new ArrayList<>();
+        try {
+            XPath xpath = xpathFactory.newXPath();
+            XPathExpression expr = xpath.compile("//rs");
+            NodeList result = (NodeList)expr.evaluate(document, XPathConstants.NODESET);
+            NodeList nodes = (NodeList) result;
+            for(int i=0; i < nodes.getLength(); i++) {
+                org.w3c.dom.Element rsElement = (org.w3c.dom.Element)nodes.item(i);
+                // get xml:id
+                NamedNodeMap attributes = rsElement.getAttributes();
+                String localId = null;
+                for(int j=0; j < attributes.getLength(); j++) {
+                    org.w3c.dom.Node theAttribute = attributes.item(j);
+                    if (theAttribute.getNodeName().equals("xml:id")) {
+                        localId = theAttribute.getNodeValue();
+                        break;
+                    }
+                }
+                if (localId != null && this.softwareUsages.get(localId) != null) {
+                    if (this.softwareUsages.get(localId).booleanValue())
+                        rsElement.setAttribute("subtype", "used");
+                    else 
+                        rsElement.removeAttribute("subtype");
+
+                    consumed.add(localId);
+                }
+            }
+
+        } catch(XPathExpressionException e) {
+            e.printStackTrace();
+        }    
+
+        int notApplied = 0;
+        for (Map.Entry<String, Boolean> entry : this.softwareUsages.entrySet()) {
+            if (!consumed.contains(entry.getKey())) {
+                System.out.println("Warning: " + entry.getKey() + "/" + entry.getValue() + " software_used correction has not been applied !" );
+                notApplied++;
+            }
+        }
+        System.out.println("total of " + notApplied + " software use corrections not applied");
+
+        return document;
+
+    }
+
 
     /**
      * Remove <ab> elements and doc entries without text content and without any annotations
@@ -1729,6 +1791,39 @@ public class XMLCorpusPostProcessorNoMention {
                 nbCSVlines++;
             }
             System.out.println("number of documents with missing titles: " + nbCSVlines);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadSoftwareUsage() {
+        File softwareUsageFile = new File("resources" + File.separator + "dataset" + File.separator + 
+            "software" + File.separator + "corpus" + File.separator + "software-use-corrections-curated-2020-11-08.csv");
+        try (BufferedReader b = new BufferedReader(new FileReader(softwareUsageFile))) {
+            int nbCSVlines = 0;
+            String line;
+            while ((line = b.readLine()) != null) {
+                if (nbCSVlines == 0) {
+                    nbCSVlines++;
+                    continue;
+                }
+                String[] pieces = line.split(",");
+
+                if (pieces.length != 3) {
+                    System.out.println("invalid curated software usage attribute at line " + nbCSVlines + ": " + line);
+                    continue;
+                }
+
+                String annotationId = pieces[0];
+                String value = pieces[2];
+
+                if ("TRUE".equals(value))
+                    this.softwareUsages.put(annotationId, new Boolean(true));
+                else
+                    this.softwareUsages.put(annotationId, new Boolean(false));
+                nbCSVlines++;
+            }
+            System.out.println(nbCSVlines + " curated software usage attribute loaded");
         } catch (IOException e) {
             e.printStackTrace();
         }

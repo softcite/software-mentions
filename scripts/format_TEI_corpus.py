@@ -2,6 +2,8 @@ import argparse
 import re
 
 """ 
+    DEPRECATED
+
     Simple script to fix some default Java XML serialization issues. 
     This is normally useless, because the Java XML generation now includes its own corrected serialization
     (via the same regex). 

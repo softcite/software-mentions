@@ -250,7 +250,7 @@ public class XMLUtilities {
 
 
     /**
-     * Return the document ID where the annotation takes place
+     * Return the document ID where the annotation is located
      */ 
     private static String getDocIdFromRs(org.w3c.dom.Node node) {
         String result = null;
