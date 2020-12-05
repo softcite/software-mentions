@@ -86,6 +86,9 @@ public class XMLCorpusPostProcessorNoMention {
     // map mention with corrected usage information
     private Map<String, Boolean> softwareUsages = new TreeMap<>();
 
+    // the index of annotators (map annotator string ID to the index)
+    private List<String> annotators = null;
+
     public XMLCorpusPostProcessorNoMention(SoftwareConfiguration conf) {
         this.configuration = conf;
     }
@@ -229,22 +232,22 @@ public class XMLCorpusPostProcessorNoMention {
                         List<SoftciteAnnotation> localAnnotations = softciteDocument.getAnnotations();
 
                         // number of annotators
-                        List<String> annotators = new ArrayList<String>();
+                        List<String> localAnnotators = new ArrayList<String>();
                         for(SoftciteAnnotation localAnnotation : localAnnotations) {
                             String annotatorID = localAnnotation.getAnnotatorID();
-                            if (!annotators.contains(annotatorID)) {
-                                annotators.add(annotatorID);
+                            if (!localAnnotators.contains(annotatorID)) {
+                                localAnnotators.add(annotatorID);
                             }
                         }
 
-                        if (annotators.size() == 1) {
+                        if (localAnnotators.size() == 1) {
                             org.w3c.dom.Element catRef2 = document.createElement("catRef");
 
                             catCuration = "unique_annotator";
                             catRef2.setAttribute("target", "#"+catCuration);
 
                             textClass.appendChild(catRef2);
-                        } else if (annotators.size() > 1) {
+                        } else if (localAnnotators.size() > 1) {
                             org.w3c.dom.Element catRef2 = document.createElement("catRef");
 
                             catCuration = "multiple_annotator";
@@ -301,9 +304,8 @@ public class XMLCorpusPostProcessorNoMention {
         int nbDocWithNonPresentAnnotation = 0;
         int nbDocWithValidNonPresentAnnotation = 0;
         
-        List<String> annotators = null;
         try {
-            annotators = this.readAnnotatorMapping("resources/dataset/software/corpus/annotators.xml");
+            this.annotators = this.readAnnotatorMapping("resources/dataset/software/corpus/annotators.xml");
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -326,7 +328,7 @@ public class XMLCorpusPostProcessorNoMention {
                 if (nodes.getLength() != 0) {
                     // document already present, we can still add the PDF-unmatched annotations 
                     // corresponding to this document
-                    this.addUnmatchedAnnotations(docName, document, softciteDocument, annotators);
+                    this.addUnmatchedAnnotations(docName, document, softciteDocument);
                     continue;
                 }
             } catch(XPathExpressionException e) {
@@ -478,9 +480,14 @@ public class XMLCorpusPostProcessorNoMention {
                     }
                 }
 
+                boolean multipleAnnotators = false;
+                int mostProductiveAnnotator = -1;
                 nu.xom.Element root = null;
                 if (localAnnotators.size() > 1) {
                     root = SoftwareParser.getTEIHeaderSimple(docName, biblio, "multiple_annotator");
+                    multipleAnnotators = true;
+                    // we select the most "productive" one among the annotators for this document
+                    mostProductiveAnnotator = getMostProductiveAnnotator(localAnnotations);
                 } else {
                     root = SoftwareParser.getTEIHeaderSimple(docName, biblio, "unique_annotator");
                 }
@@ -511,6 +518,14 @@ public class XMLCorpusPostProcessorNoMention {
                         String softwareString = localAnnotation.getSoftwareMention();
                         if (softwareString == null || softwareString.trim().length() == 0)
                             continue;
+
+                        if (multipleAnnotators &&  
+                            (mostProductiveAnnotator != -1) && 
+                            (this.annotators.indexOf(localAnnotation.getAnnotatorID()) != mostProductiveAnnotator)
+                            ) {
+                            // keep only "most productive" annotator in case we have several annotators for the same document
+                            continue;
+                        }
 
                         //System.out.println("raw: " + localContext);
 
@@ -593,7 +608,7 @@ public class XMLCorpusPostProcessorNoMention {
                                 rs.addAttribute(new Attribute("corresp", "#" + docName + "-software-"+index_entity));
                             }
 
-                            int indexAnnotator = annotators.indexOf(localAnnotation.getAnnotatorID());
+                            int indexAnnotator = this.annotators.indexOf(localAnnotation.getAnnotatorID());
                             if (indexAnnotator != -1)
                                 rs.addAttribute(new Attribute("resp", "#annotator"+indexAnnotator));
                             
@@ -662,8 +677,7 @@ public class XMLCorpusPostProcessorNoMention {
 
     private void addUnmatchedAnnotations(String docName, 
                                         org.w3c.dom.Document document, 
-                                        AnnotatedDocument softciteDocument, 
-                                        List<String> annotators) {
+                                        AnnotatedDocument softciteDocument) {
         List<SoftciteAnnotation> localAnnotations = softciteDocument.getAnnotations();
         if (localAnnotations == null) {
             // it should never be the case
@@ -707,6 +721,28 @@ public class XMLCorpusPostProcessorNoMention {
         String reviewText = documentRoot.getTextContent();
         String reviewTextSimplified = CrossAgreement.simplifiedFieldNoDigits(reviewText);
 
+        // number of annotators
+        List<String> localAnnotators = new ArrayList<String>();
+        if (localAnnotations != null) {
+            for(SoftciteAnnotation localAnnotation : localAnnotations) {
+                String annotatorID = localAnnotation.getAnnotatorID();
+                if (!localAnnotators.contains(annotatorID)) {
+                    localAnnotators.add(annotatorID);
+                }
+            }
+        }
+
+        boolean multipleAnnotators = false;
+        int mostProductiveAnnotator = -1;
+        if (localAnnotators.size() > 1) {
+            multipleAnnotators = true;
+            // we select the most "productive" one among the annotators for this document
+            mostProductiveAnnotator = getMostProductiveAnnotator(localAnnotations);
+
+            if (mostProductiveAnnotator == -1)
+                System.out.println("WARNING: mostProductiveAnnotator not found: " + docName);
+        }
+
         // we init the entity index beyond the highest possible high number to avoid possible clash with the existing
         // software annatation identifiers present in the TEI XML
         int index_entity = localAnnotations.size();
@@ -723,21 +759,24 @@ public class XMLCorpusPostProcessorNoMention {
             if (softwareString == null || softwareString.trim().length() == 0)
                 continue;
 
+            if (multipleAnnotators &&  
+                (mostProductiveAnnotator != -1) && 
+                (this.annotators.indexOf(localAnnotation.getAnnotatorID()) != mostProductiveAnnotator)
+                ) {
+                // keep only "most productive" annotator in case we have several annotators for the same document
+                continue;
+            }
+
             localContext = XMLUtilities.stripNonValidXMLCharacters(localContext);
             localContext = localContext.replaceAll("<[^>]+>", " ");                        
             localContext = localContext.replace("\n", " ");
             localContext = localContext.replaceAll("( )+", " ");
+            localContext = localContext.replace("&amp;", "&");
+            localContext = localContext.replace("&lt;", "<");
+            localContext = localContext.replace("&gt;", ">");
+            localContext = localContext.replace("&quot;", "\"");
+            localContext = localContext.replace("&apos;", "'");
             localContext = localContext.trim();
-
-            // if the local context is already present in the paragraphs reviewed by the
-            // curator, we skip the annotation
-            String localContextSimplified = CrossAgreement.simplifiedFieldNoDigits(localContext);
-            if (reviewTextSimplified.indexOf(localContextSimplified) != -1)
-                continue;
-
-            if (previousLocalContexts != null && previousLocalContexts.contains(localContextSimplified)) {
-                continue;
-            } 
 
             List<Annotation> sortedAnnotations = this.alignAnnotations(localAnnotation, localContext);
             //System.out.println("nb of inline annotations: " + sortedAnnotations.size());
@@ -747,6 +786,38 @@ public class XMLCorpusPostProcessorNoMention {
                     " - No inline annotation possible for local annotation ");
                 continue;
             }
+
+            // we consider a window for the local context similar to the one used when matching the PDF
+            String localContextShorten = null;
+            if (sortedAnnotations.size() > 0) {
+                // get anchor position
+                Annotation annot = sortedAnnotations.get(0);
+                OffsetPosition position = annot.getOccurence();
+                int leftBound = Math.max(0, position.start-50);
+                int rightBound = Math.min(position.end+50, localContext.length());
+                localContextShorten = localContext.substring(leftBound, rightBound);
+            }
+
+            if (localContextShorten == null)
+                localContextShorten = localContext;
+
+            // if the local context is already present in the paragraphs reviewed by the
+            // curator, we skip the annotation
+            String localContextSimplified = CrossAgreement.simplifiedFieldNoDigits(localContextShorten);
+            if (reviewTextSimplified != null && reviewTextSimplified.indexOf(localContextSimplified) != -1)
+                continue;
+
+            if (localContextSimplified != null && localContextSimplified.indexOf(reviewTextSimplified) != -1)
+                continue;
+
+            localContextSimplified = CrossAgreement.simplifiedFieldNoDigits(localContext);
+
+            if (previousLocalContexts != null && previousLocalContexts.contains(localContextSimplified)) {
+                continue;
+            } 
+
+            //System.out.println("\n\n" + localContext + " | " + localContextShorten + " / " + reviewText);
+            //System.out.println(CrossAgreement.simplifiedFieldNoDigits(localContextShorten) + " / " + reviewTextSimplified);
 
             //nu.xom.Element curParagraph = teiElement("p");
             //nu.xom.Element curSentence = teiElement("s");
@@ -803,7 +874,7 @@ public class XMLCorpusPostProcessorNoMention {
                     rs.addAttribute(new Attribute("corresp", "#" + docName + "-software-"+index_entity));
                 }
 
-                int indexAnnotator = annotators.indexOf(localAnnotation.getAnnotatorID());
+                int indexAnnotator = this.annotators.indexOf(localAnnotation.getAnnotatorID());
                 if (indexAnnotator != -1)
                     rs.addAttribute(new Attribute("resp", "#annotator"+indexAnnotator));
                 
@@ -1612,6 +1683,44 @@ public class XMLCorpusPostProcessorNoMention {
         //System.out.println("----------------------------" + tooShort + "/" + total);
 
         return document; //Pair.of("", "");
+    }
+
+    /**
+     * Return the index of the most productive annotator for a set of annotations.
+     * If only one annotator, return this one.
+     * If no annotation or no annotator, return -1
+     */
+    private int getMostProductiveAnnotator(List<SoftciteAnnotation> localAnnotations) {
+        String mostProductiveAnnotator = null;
+        if (localAnnotations == null || localAnnotations.size() == 0) 
+            return -1;
+
+        Map<String,Integer> annotatorProductions = new HashMap<>();
+
+        for(SoftciteAnnotation localAnnotation : localAnnotations) {
+            String localAnnotatorId = localAnnotation.getAnnotatorID();
+            if (localAnnotatorId != null) {
+                int localProduction = localAnnotation.getArity();
+
+                // increment based on total number of annotations (software name + attributes)
+                if (annotatorProductions.get(localAnnotatorId) == null) {
+                    annotatorProductions.put(localAnnotatorId, localProduction);
+                } else {
+                    annotatorProductions.put(localAnnotatorId, annotatorProductions.get(localAnnotatorId) + localProduction);
+                }
+            }   
+        }
+
+        // find most productive
+        int highestProduction = 0;
+        for (Map.Entry<String, Integer> entry : annotatorProductions.entrySet()) {
+            if (mostProductiveAnnotator == null || highestProduction < entry.getValue()) {
+                mostProductiveAnnotator = entry.getKey();
+                highestProduction = entry.getValue().intValue();
+            } 
+        }
+
+        return this.annotators.indexOf(mostProductiveAnnotator);
     }
 
     private String reformatTEI(String tei) {
