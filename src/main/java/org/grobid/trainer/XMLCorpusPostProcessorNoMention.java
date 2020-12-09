@@ -112,6 +112,8 @@ public class XMLCorpusPostProcessorNoMention {
         String tei = null;
         org.w3c.dom.Document document = null;
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+
+        // write updated full TEI file including unmatched quotes/mentions as <ab>
         try {
             DocumentBuilder builder = factory.newDocumentBuilder();
             tei = FileUtils.readFileToString(new File(xmlCorpusPath), UTF_8);
@@ -140,8 +142,8 @@ public class XMLCorpusPostProcessorNoMention {
             // inject curated software usage attributes
             document = correctSoftwareUsage(document);
 
-            // inject description notes for full corpus
-            document = injectDescriptionNotes(document, true);
+            // inject description notes for full corpus with <ab> (unmatched mentions/quotes)
+            document = injectDescriptionNotes(document, true, true);
 
             tei = XMLUtilities.serialize(document, null);
             tei = reformatTEI(tei);
@@ -153,21 +155,21 @@ public class XMLCorpusPostProcessorNoMention {
             e.printStackTrace();
         } 
 
-        // write updated full TEI file
+        // write updated full TEI file without unmatched quotes/mentions as <ab>
         if (tei != null) {
-            FileUtils.writeStringToFile(new File(newXmlCorpusPath.replace(".tei.xml", "-full.tei.xml")), tei, UTF_8);        
+            FileUtils.writeStringToFile(new File(newXmlCorpusPath.replace(".tei.xml", "-full-with_unmatched.tei.xml")), tei, UTF_8);        
 
-            // write a more compact TEI file without no mention entries and without the non aligned segments (<ab>)
+            // write a more compact TEI file with no mention entries and without the non aligned segments (<ab>)
             try {
                 DocumentBuilder builder = factory.newDocumentBuilder();
                 document = builder.parse(new InputSource(new StringReader(tei)));
-                document = prune(document);
+                document = prune(document, false);
                 tei = XMLUtilities.serialize(document, null);
 
                 document = builder.parse(new InputSource(new StringReader(tei)));
 
-                // inject description notes for (default) "compact" corpus
-                document = injectDescriptionNotes(document, false);
+                // inject description notes for full corpus without <ab>
+                document = injectDescriptionNotes(document, true, false);
 
                 tei = XMLUtilities.serialize(document, null);
                 tei = reformatTEI(tei);
@@ -185,12 +187,39 @@ public class XMLCorpusPostProcessorNoMention {
             }
         }
 
-        // if we want extra-context
-        /*if (extraContext) {
-            Pair<String,String> extraTEIs = addExtraContext(document, documents, pdfPath);
-        }*/
+        // write updated compact TEI file
+        if (tei != null) {
+            FileUtils.writeStringToFile(new File(newXmlCorpusPath.replace(".tei.xml", "-full.tei.xml")), tei, UTF_8);        
 
-        //this.generalCountAnnotations(documents, annotations, xmlCorpusPath);
+            // write a more compact TEI file without no mention entries and without the non aligned segments (<ab>)
+            try {
+                DocumentBuilder builder = factory.newDocumentBuilder();
+                document = builder.parse(new InputSource(new StringReader(tei)));
+                document = prune(document, true);
+                tei = XMLUtilities.serialize(document, null);
+
+                document = builder.parse(new InputSource(new StringReader(tei)));
+
+                // inject description notes for (default) "compact" corpus
+                document = injectDescriptionNotes(document, false, false);
+
+                tei = XMLUtilities.serialize(document, null);
+                tei = reformatTEI(tei);
+            } catch(ParserConfigurationException e) {
+                e.printStackTrace();
+            } catch(IOException e) {
+                e.printStackTrace();
+            } catch(Exception e) {
+                e.printStackTrace();
+            } 
+
+            // write updated full TEI file
+            if (tei != null) {
+                FileUtils.writeStringToFile(new File(newXmlCorpusPath), tei, UTF_8);
+            }
+        }
+
+        this.generalCountAnnotations(documents, annotations, xmlCorpusPath);
     }
 
     private org.w3c.dom.Document enrichTEIDocument(org.w3c.dom.Document document, 
@@ -1400,7 +1429,7 @@ public class XMLCorpusPostProcessorNoMention {
     /**
      * Remove <ab> elements and doc entries without text content and without any annotations
      */
-    private org.w3c.dom.Document prune(org.w3c.dom.Document document) {
+    private org.w3c.dom.Document prune(org.w3c.dom.Document document, boolean pruneNoMention) {
         // remove <ab> elements
         NodeList theElements = document.getElementsByTagName("ab");
         for(int i=theElements.getLength()-1; i >= 0; i--) {
@@ -1408,61 +1437,63 @@ public class XMLCorpusPostProcessorNoMention {
             theElement.getParentNode().removeChild(theElement);
         }
 
-        // remove doc entries (<TEI> elements) having <body> without content 
         XPathFactory xpathFactory = XPathFactory.newInstance();
-        try {
-            XPath xPath = xpathFactory.newXPath();
-            String expression = "//TEI/text/body";
-            NodeList nodes = (NodeList) xPath.compile(expression).evaluate(document, XPathConstants.NODESET);
-            for(int i=nodes.getLength()-1; i >= 0; i--) {
-                boolean hasNoAnnotation = true;
-                boolean entryRemoved = false;
-                org.w3c.dom.Element bodyElement = (org.w3c.dom.Element)nodes.item(i);
-                // if the bodyElement has no child, we will remove the TEI entry
-                if (!bodyElement.hasChildNodes()) {
-                    // get TEI parent, if we are here we're sure these elements exist
-                    org.w3c.dom.Element textElement = (org.w3c.dom.Element)bodyElement.getParentNode();
-                    org.w3c.dom.Element teiElement = (org.w3c.dom.Element)textElement.getParentNode();
-                    teiElement.getParentNode().removeChild(teiElement);
-                    entryRemoved = true;
-                } else {
-                    // check if we have no <p> element
-                    if (XMLUtilities.getFirstDirectChild(bodyElement, "p") == null) {
+
+        // remove doc entries (<TEI> elements) having <body> without content 
+        if (pruneNoMention) {
+            try {
+                XPath xPath = xpathFactory.newXPath();
+                String expression = "//TEI/text/body";
+                NodeList nodes = (NodeList) xPath.compile(expression).evaluate(document, XPathConstants.NODESET);
+                for(int i=nodes.getLength()-1; i >= 0; i--) {
+                    boolean hasNoAnnotation = true;
+                    boolean entryRemoved = false;
+                    org.w3c.dom.Element bodyElement = (org.w3c.dom.Element)nodes.item(i);
+                    // if the bodyElement has no child, we will remove the TEI entry
+                    if (!bodyElement.hasChildNodes()) {
+                        // get TEI parent, if we are here we're sure these elements exist
                         org.w3c.dom.Element textElement = (org.w3c.dom.Element)bodyElement.getParentNode();
                         org.w3c.dom.Element teiElement = (org.w3c.dom.Element)textElement.getParentNode();
                         teiElement.getParentNode().removeChild(teiElement);
                         entryRemoved = true;
-                    }
-                }
-                // check if we have at least one annotation
-                int l = 0;
-                NodeList pList = bodyElement.getElementsByTagName("p");
-                for (int j = pList.getLength()-1; j >= 0; j--) {
-                    org.w3c.dom.Element snippetElement = (org.w3c.dom.Element) pList.item(j);
-
-                    // find the entities
-                    NodeList entityList = snippetElement.getElementsByTagName("rs");
-                    if (entityList.getLength() != 0) {
-                        // annotation in this snippet
-                        hasNoAnnotation = false;
                     } else {
-                        // without any annotations, we remove the paragraph, as we want to keep only positive contexts
-                        bodyElement.removeChild(snippetElement);
+                        // check if we have no <p> element
+                        if (XMLUtilities.getFirstDirectChild(bodyElement, "p") == null) {
+                            org.w3c.dom.Element textElement = (org.w3c.dom.Element)bodyElement.getParentNode();
+                            org.w3c.dom.Element teiElement = (org.w3c.dom.Element)textElement.getParentNode();
+                            teiElement.getParentNode().removeChild(teiElement);
+                            entryRemoved = true;
+                        }
+                    }
+                    // check if we have at least one annotation
+                    int l = 0;
+                    NodeList pList = bodyElement.getElementsByTagName("p");
+                    for (int j = pList.getLength()-1; j >= 0; j--) {
+                        org.w3c.dom.Element snippetElement = (org.w3c.dom.Element) pList.item(j);
+
+                        // find the entities
+                        NodeList entityList = snippetElement.getElementsByTagName("rs");
+                        if (entityList.getLength() != 0) {
+                            // annotation in this snippet
+                            hasNoAnnotation = false;
+                        } else {
+                            // without any annotations, we remove the paragraph, as we want to keep only positive contexts
+                            bodyElement.removeChild(snippetElement);
+                        }
+                    }
+
+                    if (hasNoAnnotation && !entryRemoved) {
+                        // the TEI entry must be pruned
+                        // get TEI parent, if we are here we're sure these elements exist
+                        org.w3c.dom.Element textElement = (org.w3c.dom.Element)bodyElement.getParentNode();
+                        org.w3c.dom.Element teiElement = (org.w3c.dom.Element)textElement.getParentNode();
+                        teiElement.getParentNode().removeChild(teiElement);
                     }
                 }
-
-                if (hasNoAnnotation && !entryRemoved) {
-                    // the TEI entry must be pruned
-                    // get TEI parent, if we are here we're sure these elements exist
-                    org.w3c.dom.Element textElement = (org.w3c.dom.Element)bodyElement.getParentNode();
-                    org.w3c.dom.Element teiElement = (org.w3c.dom.Element)textElement.getParentNode();
-                    teiElement.getParentNode().removeChild(teiElement);
-                }
-
-            }
-        } catch(XPathExpressionException e) {
-            e.printStackTrace();
-        }    
+            } catch(XPathExpressionException e) {
+                e.printStackTrace();
+            }    
+        }
 
         return document;
     }
@@ -1738,7 +1769,7 @@ public class XMLCorpusPostProcessorNoMention {
         return tei;
     }
 
-    private org.w3c.dom.Document injectDescriptionNotes(org.w3c.dom.Document document, boolean full) {
+    private org.w3c.dom.Document injectDescriptionNotes(org.w3c.dom.Document document, boolean full, boolean withAb) {
         // inject descriptions as <note> under <notesStmt>
         org.w3c.dom.NodeList corpusFileDescList = document.getElementsByTagName("fileDesc");
         // take the first, which is the titleStmt of the teiCorpus header
@@ -1764,10 +1795,10 @@ public class XMLCorpusPostProcessorNoMention {
             if (full)   
                 noteElement2.setTextContent("This corpus file contains one TEI entry for every scholar publication, including or not manual annotations. For scholar publications containing annotations, each paragraph containing at least one manually annotated software mention is encoded under the TEI body element. All the manual annotations under p elements (paragraph) have been further validated or corrected by a curator to reach a final decision.");
             else
-                noteElement2.setTextContent("This corpus file contains one TEI entry per scholar publication having at least one software mention. Each paragraph containing at least one manually annotated software mentions is encoded under the TEI body element.");
+                noteElement2.setTextContent("This corpus file contains one TEI entry per scholar publication having at least one software mention. Each paragraph containing at least one manually annotated software mentions is encoded under the TEI body element. All the manual annotations under p elements (paragraph) have been further validated or corrected by a curator to reach a final decision.");
             notesStmt.appendChild(noteElement2);
 
-            if (full) {
+            if (withAb) {
                 org.w3c.dom.Element noteElement3 = document.createElement("note");
                 noteElement3.setTextContent("For completeness, under ab elements (anonymous block), we provide additional snippets for manual annotations that could not be aligned with the full paragraph content automatically extracted from PDF. Annotations and contexts under ab elements were not validated by a curator. Therefore, these additional annotations and snippets should not be considered as \"gold\" annotation.");
                 notesStmt.appendChild(noteElement3);                
