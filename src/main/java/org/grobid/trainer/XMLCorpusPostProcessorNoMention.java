@@ -159,7 +159,8 @@ public class XMLCorpusPostProcessorNoMention {
         if (tei != null) {
             FileUtils.writeStringToFile(new File(newXmlCorpusPath.replace(".tei.xml", "-full-with_unmatched.tei.xml")), tei, UTF_8);        
 
-            // write a more compact TEI file with no mention entries and without the non aligned segments (<ab>)
+            // write a more compact TEI file with no mention entries + without the non aligned segments (<ab>)
+            // + without subtype="used" 
             try {
                 DocumentBuilder builder = factory.newDocumentBuilder();
                 document = builder.parse(new InputSource(new StringReader(tei)));
@@ -191,7 +192,8 @@ public class XMLCorpusPostProcessorNoMention {
         if (tei != null) {
             FileUtils.writeStringToFile(new File(newXmlCorpusPath.replace(".tei.xml", "-full.tei.xml")), tei, UTF_8);        
 
-            // write a more compact TEI file without no mention entries and without the non aligned segments (<ab>)
+            // write a more compact TEI file without no mention entries and without the non aligned segments (<ab>) +
+            // without subtype="used" 
             try {
                 DocumentBuilder builder = factory.newDocumentBuilder();
                 document = builder.parse(new InputSource(new StringReader(tei)));
@@ -1435,6 +1437,14 @@ public class XMLCorpusPostProcessorNoMention {
         for(int i=theElements.getLength()-1; i >= 0; i--) {
             org.w3c.dom.Element theElement = (org.w3c.dom.Element)theElements.item(i);
             theElement.getParentNode().removeChild(theElement);
+        }
+
+        // remove subtype="used" on <rs>
+        theElements = document.getElementsByTagName("rs");
+        for(int i=theElements.getLength()-1; i >= 0; i--) {
+            org.w3c.dom.Element theElement = (org.w3c.dom.Element)theElements.item(i);
+            theElement.removeAttribute("subtype");
+
         }
 
         XPathFactory xpathFactory = XPathFactory.newInstance();
