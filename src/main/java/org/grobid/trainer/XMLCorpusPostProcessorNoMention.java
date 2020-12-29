@@ -1,4 +1,4 @@
- package org.grobid.trainer;
+package org.grobid.trainer;
 
 import org.grobid.core.analyzers.SoftwareAnalyzer;
 import org.grobid.core.exceptions.GrobidException;
@@ -113,6 +113,10 @@ public class XMLCorpusPostProcessorNoMention {
         org.w3c.dom.Document document = null;
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 
+        // CSV file for writing a report of unmatched cases (the <ab> cases) for further corrections
+        BufferedWriter localWriter = new BufferedWriter(new FileWriter("resources/dataset/software/corpus/unmatched_cases_report.csv"));
+        CSVPrinter csvPrinter = new CSVPrinter(localWriter, CSVFormat.DEFAULT.withHeader("identifier", "quote", "tei"));
+
         // write updated full TEI file including unmatched quotes/mentions as <ab>
         try {
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -127,7 +131,7 @@ public class XMLCorpusPostProcessorNoMention {
             }
 
             document = enrichTEIDocument(document, documents, pdfPath);
-            document = enrichTEIDocumentNoMention(document, documents, pdfPath);
+            document = enrichTEIDocumentNoMention(document, documents, pdfPath, csvPrinter);
 
             // fix all xml:id which are not valid NCName
             //document = fixIdNCName(document);
@@ -220,6 +224,8 @@ public class XMLCorpusPostProcessorNoMention {
                 FileUtils.writeStringToFile(new File(newXmlCorpusPath), tei, UTF_8);
             }
         }
+
+        csvPrinter.close();
 
         this.generalCountAnnotations(documents, annotations, xmlCorpusPath);
     }
@@ -326,7 +332,8 @@ public class XMLCorpusPostProcessorNoMention {
 
     private org.w3c.dom.Document enrichTEIDocumentNoMention(org.w3c.dom.Document document, 
                                                    Map<String, AnnotatedDocument> documents,
-                                                   String documentPath) {
+                                                   String documentPath,
+                                                   CSVPrinter csvPrinter) {
 
         org.w3c.dom.Element documentRoot = document.getDocumentElement();
         Engine engine = GrobidFactory.getInstance().getEngine();
@@ -359,7 +366,7 @@ public class XMLCorpusPostProcessorNoMention {
                 if (nodes.getLength() != 0) {
                     // document already present, we can still add the PDF-unmatched annotations 
                     // corresponding to this document
-                    this.addUnmatchedAnnotations(docName, document, softciteDocument);
+                    this.addUnmatchedAnnotations(docName, document, softciteDocument, csvPrinter);
                     continue;
                 }
             } catch(XPathExpressionException e) {
@@ -661,7 +668,17 @@ public class XMLCorpusPostProcessorNoMention {
                             previousLocalContexts = new ArrayList<String>();
                         previousLocalContexts.add(localContextSignature);
 
-                         index_entity++;
+                        // report the unmatched case for manual revision/correction
+                        try {
+                            csvPrinter.printRecord(localAnnotation.getIdentifier(), 
+                                localAnnotation.getContext(),
+                                "data/tei/" + pdfFile.getName().replace(".pdf", ".tei.xml"));
+                            csvPrinter.flush();
+                        } catch (IOException e) {
+                            System.out.println("Something went wrong when writing the CSV unmacthed case report");
+                        }
+
+                        index_entity++;
                     }
 
                     if (hasTextContent)
@@ -708,7 +725,8 @@ public class XMLCorpusPostProcessorNoMention {
 
     private void addUnmatchedAnnotations(String docName, 
                                         org.w3c.dom.Document document, 
-                                        AnnotatedDocument softciteDocument) {
+                                        AnnotatedDocument softciteDocument,
+                                        CSVPrinter csvPrinter) {
         List<SoftciteAnnotation> localAnnotations = softciteDocument.getAnnotations();
         if (localAnnotations == null) {
             // it should never be the case
@@ -919,6 +937,16 @@ public class XMLCorpusPostProcessorNoMention {
 
             curSentence.appendChild(localContext.substring(lastPosition));
             //curParagraph.appendChild(curSentence);
+
+            // report the unmatched case for manual revision/correction
+            try {
+                csvPrinter.printRecord(localAnnotation.getIdentifier(),
+                    localAnnotation.getContext(),
+                    "data/tei/" + docName+".tei.xml");
+                csvPrinter.flush();
+            } catch (IOException e) {
+                System.out.println("Something went wrong when writing the CSV unmacthed case report");
+            }
 
             if (!hasSoftware)
                 continue;
