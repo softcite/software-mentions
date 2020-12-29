@@ -511,7 +511,6 @@ public class AnnotatedCorpusGeneratorCSV {
                 }
             }
 
-            // TBD: use a map...
             for(String field : fields) {
                 checkMentionContextMatch(localAnnotations, field, docName, unmatchMentionContextWriters.get(field));
             }

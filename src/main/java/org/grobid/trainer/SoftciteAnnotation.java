@@ -249,4 +249,21 @@ public class SoftciteAnnotation extends Annotation {
         this.url = url;
     }
 
+    /**
+     * Return the number of independent "annotations", e.g. the sum software name + attributes
+     */
+    public int getArity() {
+        int arity = 0;
+        if (softwareMention != null) 
+            arity++;
+        if (creator != null)
+            arity++;
+        if (versionDate != null || versionNumber != null)
+            arity++;
+        if (url != null)
+            arity++;
+
+        return arity;
+    }
+
 }
