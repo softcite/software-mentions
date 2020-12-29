@@ -196,6 +196,8 @@ public class SoftwareParser extends AbstractParser {
             // segment of interest (e.g. header, body, annex) and possibly apply 
             // the corresponding model to further filter by structure types 
 
+            List<List<LayoutToken>> selectedLayoutTokenSequences = new ArrayList<>();
+
             // from the header, we are interested in title, abstract and keywords
             SortedSet<DocumentPiece> documentParts = doc.getDocumentPart(SegmentationLabels.HEADER);
             BiblioItem resHeader = null;
@@ -216,19 +218,22 @@ public class SoftwareParser extends AbstractParser {
                     // title
                     List<LayoutToken> titleTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_TITLE);
                     if (titleTokens != null) {
-                        processLayoutTokenSequence(titleTokens, entities, disambiguate);
+                        //processLayoutTokenSequence(titleTokens, entities, disambiguate);
+                        selectedLayoutTokenSequences.add(titleTokens);
                     } 
 
                     // abstract
                     List<LayoutToken> abstractTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_ABSTRACT);
                     if (abstractTokens != null) {
-                        processLayoutTokenSequence(abstractTokens, entities, disambiguate);
+                        //processLayoutTokenSequence(abstractTokens, entities, disambiguate);
+                        selectedLayoutTokenSequences.add(abstractTokens);
                     } 
 
                     // keywords
                     List<LayoutToken> keywordTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_KEYWORD);
                     if (keywordTokens != null) {
-                        processLayoutTokenSequence(keywordTokens, entities, disambiguate);
+                        //processLayoutTokenSequence(keywordTokens, entities, disambiguate);
+                        selectedLayoutTokenSequences.add(keywordTokens);
                     }
                 }
             }
@@ -269,7 +274,8 @@ public class SoftwareParser extends AbstractParser {
                         //String clusterContent = LayoutTokensUtil.normalizeText(LayoutTokensUtil.toText(cluster.concatTokens()));
                         if (clusterLabel.equals(TaggingLabels.PARAGRAPH) || clusterLabel.equals(TaggingLabels.ITEM)) {
                             //|| clusterLabel.equals(TaggingLabels.SECTION) {
-                            processLayoutTokenSequence(localTokenization, entities, disambiguate);
+                            //processLayoutTokenSequence(localTokenization, entities, disambiguate);
+                            selectedLayoutTokenSequences.add(localTokenization);
                         } else if (clusterLabel.equals(TaggingLabels.TABLE)) {
                             //processLayoutTokenSequenceTableFigure(localTokenization, entities);
                         } else if (clusterLabel.equals(TaggingLabels.FIGURE)) {
@@ -278,6 +284,11 @@ public class SoftwareParser extends AbstractParser {
                     }
                 }
             }
+
+            // actual processing of the selected sequences which have been delayed to be processed in groups and
+            // take advantage of deep learning batch
+            processLayoutTokenSequenceMultiple(selectedLayoutTokenSequences, entities, disambiguate);
+
 
             // we don't process references (although reference titles could be relevant)
             // acknowledgement? 
@@ -560,7 +571,7 @@ public class SoftwareParser extends AbstractParser {
     }
 
     /**
-     * Process with the software model an arbitrary sequence of LayoutToken objects
+     * Process with the software model a single arbitrary sequence of LayoutToken objects
      */ 
     private List<SoftwareEntity> processLayoutTokenSequence(List<LayoutToken> layoutTokens, 
                                                             List<SoftwareEntity> entities,
@@ -571,11 +582,46 @@ public class SoftwareParser extends AbstractParser {
     }
 
     /**
+     * Process with the software model a single arbitrary sequence of LayoutToken objects
+     */ 
+    private List<SoftwareEntity> processLayoutTokenSequenceMultiple(List<List<LayoutToken>> layoutTokenList, 
+                                                            List<SoftwareEntity> entities,
+                                                            boolean disambiguate) {
+        List<LayoutTokenization> layoutTokenizations = new ArrayList<LayoutTokenization>();
+        for(List<LayoutToken> layoutTokens : layoutTokenList)
+            layoutTokenizations.add(new LayoutTokenization(layoutTokens));
+        return processLayoutTokenSequences(layoutTokenizations, entities, disambiguate);
+    }
+
+    /**
      * Process with the software model a set of arbitrary sequence of LayoutTokenization
      */ 
     private List<SoftwareEntity> processLayoutTokenSequences(List<LayoutTokenization> layoutTokenizations, 
                                                   List<SoftwareEntity> entities, 
                                                   boolean disambiguate) {
+        StringBuilder allRess = new StringBuilder();
+        for(LayoutTokenization layoutTokenization : layoutTokenizations) {
+            List<LayoutToken> layoutTokens = layoutTokenization.getTokenization();
+            layoutTokens = SoftwareAnalyzer.getInstance().retokenizeLayoutTokens(layoutTokens);
+
+            if ( (layoutTokens == null) || (layoutTokens.size() == 0) )
+                continue;
+
+            // positions for lexical match
+            List<OffsetPosition> softwareTokenPositions = softwareLexicon.tokenPositionsSoftwareNames(layoutTokens);
+            List<OffsetPosition> urlPositions = Lexicon.getInstance().tokenPositionsUrlPattern(layoutTokens);
+
+            // string representation of the feature matrix for CRF lib
+            String ress = addFeatures(layoutTokens, softwareTokenPositions, urlPositions);
+            allRess.append(ress);
+            allRess.append("\n\n");   
+        }
+
+        // labeled result from sequence labelling lib
+        String res = label(allRess.toString());
+
+        int l = 0;
+        String[] resBlocks = res.split("\n\n");
         for(LayoutTokenization layoutTokenization : layoutTokenizations) {
             List<LayoutToken> layoutTokens = layoutTokenization.getTokenization();
             layoutTokens = SoftwareAnalyzer.getInstance().retokenizeLayoutTokens(layoutTokens);
@@ -585,18 +631,14 @@ public class SoftwareParser extends AbstractParser {
 
             // text of the selected segment
             String text = LayoutTokensUtil.toText(layoutTokens);
-            
-            // positions for lexical match
-            List<OffsetPosition> softwareTokenPositions = softwareLexicon.tokenPositionsSoftwareNames(layoutTokens);
-            List<OffsetPosition> urlPositions = Lexicon.getInstance().tokenPositionsUrlPattern(layoutTokens);
 
-            // string representation of the feature matrix for CRF lib
-            String ress = addFeatures(layoutTokens, softwareTokenPositions, urlPositions);     
-           
-            // labeled result from sequence labelling lib
-            String res = label(ress);
+            String localRes = resBlocks[l];
 
-            List<SoftwareComponent> components = extractSoftwareComponents(text, res, layoutTokens);
+            if (localRes == null || localRes.length() == 0) 
+                continue;
+
+            List<SoftwareComponent> components = extractSoftwareComponents(text, localRes, layoutTokens);
+            l++;
 
             List<SoftwareEntity> localEntities = groupByEntities(components);
 
