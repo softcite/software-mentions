@@ -28,7 +28,7 @@ class software_mention_client(object):
     def __init__(self, config_path='./config.json'):
         self.config = None
         
-        # standard lmdb environment for keeping track of PDF annotation relative to software processing
+        # standard lmdb environment for keeping track of the status of processing
         self.env_software = None
 
         self._load_config(config_path)
@@ -111,7 +111,7 @@ class software_mention_client(object):
                     # the hash of the PDF file is used as unique identifier for the PDF (SHA1)
                     with self.env_software.begin() as txn:
                         status = txn.get(sha1.encode(encoding='UTF-8'))
-                        if status is not None and status.decode(encoding='UTF-8') == "True":
+                        if status is not None:# and status.decode(encoding='UTF-8') == "True":
                             continue
 
                     pdf_files.append(os.path.join(root,filename))
@@ -176,13 +176,11 @@ class software_mention_client(object):
                             txn2.put(local_entry['id'].encode(encoding='UTF-8'), "True".encode(encoding='UTF-8')) 
                     continue
 
-                # if identifier already processed successfully in the local lmdb, we skip
-                '''
+                # if identifier already processed in the local lmdb (successfully or not), we skip this file
                 with self.env_software.begin() as txn:
                     status = txn.get(local_entry['id'].encode(encoding='UTF-8'))
-                    if status is not None and status.decode(encoding='UTF-8') == "True":
+                    if status is not None:# and status.decode(encoding='UTF-8') == "True":
                         continue
-                '''
 
                 pdf_files.append(os.path.join(data_path, generateStoragePath(local_entry['id']), local_entry['id'], local_entry['id']+".pdf"))
                 out_files.append(os.path.join(data_path, generateStoragePath(local_entry['id']), local_entry['id'], local_entry['id']+".software.json"))
@@ -212,7 +210,7 @@ class software_mention_client(object):
 
     def reprocess_failed(self):
         """
-        we reprocess only files which lead to a failure of the service, we don't reprocess documents
+        we reprocess only files which have led to a failure of the service, we don't reprocess documents
         where no software mention has been found 
         """
         pdf_files = []

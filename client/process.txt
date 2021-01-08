@@ -1,16 +1,24 @@
+* run software mention service:
 cd ~/grobid/software-mentions
 ./gradlew run
 
+* start a mongo instance if not automatically started 
 sudo service mongod start
+
+* when the db is filled, we can check the relevant collection with the mongo console 
 mongo
 use softcite-cord19-scibert
 db.references.count()
 db.documents.count()
 db.annotations.count()
 
+* install/run the client
+
 source env/bin/activate
 python3 software_mention_client.py --data-path /media/lopez/store/cord-19/data3/ --config my_config.json 
 
-find /media/lopez/store/cord-19/data3/ -name *.software.json | wc -l
 
+* results are stored in mongodb but also written along with the full texts
+
+find /media/lopez/store/cord-19/data3/ -name *.software.json | wc -l
 
