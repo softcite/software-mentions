@@ -510,7 +510,6 @@ public class SoftwareParser extends AbstractParser {
                                     }
                                 }
                             }
-                            
                         }
                     }
                 }
@@ -1028,7 +1027,7 @@ public class SoftwareParser extends AbstractParser {
 
 
     /**
-     * Avoid having a version number where we identified a rederence callout
+     * Avoid having a version number where we identified a reference callout
      */
     public List<SoftwareEntity> filterByRefCallout(List<SoftwareEntity> entities, List<BiblioComponent> refBibComponents) {
         for(BiblioComponent refBib : refBibComponents) {
@@ -1545,6 +1544,29 @@ public class SoftwareParser extends AbstractParser {
 
             TaggingLabel clusterLabel = cluster.getTaggingLabel();
             List<LayoutToken> theTokens = cluster.concatTokens();
+
+            // avoid chnuks already identified as reference markers
+            boolean overlapRefMarker = false;
+            for (LayoutToken token : theTokens) {
+                List<TaggingLabel> localLabels = token.getLabels();
+                if (localLabels != null) {
+                    for(TaggingLabel label : localLabels) {
+                        if (TEIFormatter.MARKER_LABELS.contains(label)) {
+                            // we have a clash
+                            overlapRefMarker = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (overlapRefMarker)
+                    break;
+            }
+
+            if (overlapRefMarker) {
+                continue;        
+            }
+
             String clusterContent = LayoutTokensUtil.toText(cluster.concatTokens()).trim();
   
             if ((pos < text.length()-1) && (text.charAt(pos) == ' '))
