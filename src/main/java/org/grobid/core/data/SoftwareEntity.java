@@ -48,6 +48,10 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 	// propagated means entity is coming from the document level propagation step 
 	private boolean propagated = false;
 
+	// the text context where the entity takes place - typically a snippet with the 
+	// sentence including the mention
+	private String context = null;
+
 	public SoftwareLexicon.Software_Type getType() {
 		return type;
 	}
@@ -125,6 +129,14 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 
 	public void setPropagated(boolean propagated) {
 		this.propagated = propagated;
+	}
+
+	public void setContext(String context) {
+		this.context = context;
+	}
+
+	public String getContext() {
+		return this.context;
 	}
 
 	/**
@@ -302,6 +314,12 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 		}
 		if (softwareURL != null) {
 			buffer.append(", \"url\":" + softwareURL.toJson());
+		}
+
+		if (context != null && context.length()>0) {
+			encoded = encoder.quoteAsUTF8(context.replace("\n", " "));
+            output = new String(encoded);
+			buffer.append(", \"context\" : \"" + output + "\"");
 		}
 
 		if (bibRefs != null) {

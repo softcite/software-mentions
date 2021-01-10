@@ -159,6 +159,9 @@ public class SoftwareParser extends AbstractParser {
             // and call the propagation method
             entities = propagateLayoutTokenSequence(tokens, entities, termProfiles, termPattern, placeTaken, frequencies);
             Collections.sort(entities);
+
+            // finally attach a local text context to the entities
+            entities = addContext(entities, text, tokens);
         } catch (Exception e) {
             throw new GrobidException("An exception occured while running Grobid.", e);
         }
@@ -260,6 +263,8 @@ public class SoftwareParser extends AbstractParser {
                     TaggingTokenClusteror clusteror = new TaggingTokenClusteror(GrobidModels.FULLTEXT, rese, 
                         tokenizationBody.getTokenization(), true);
                     bodyClusters = clusteror.cluster();
+                    List<LayoutToken> curParagraphTokens = null;
+                    TaggingLabel lastClusterLabel = null;
                     for (TaggingTokenCluster cluster : bodyClusters) {
                         if (cluster == null) {
                             continue;
@@ -270,25 +275,40 @@ public class SoftwareParser extends AbstractParser {
                         List<LayoutToken> localTokenization = cluster.concatTokens();
                         if ((localTokenization == null) || (localTokenization.size() == 0))
                             continue;
-
+                        
                         //String clusterContent = LayoutTokensUtil.normalizeText(LayoutTokensUtil.toText(cluster.concatTokens()));
-                        if (clusterLabel.equals(TaggingLabels.PARAGRAPH) || clusterLabel.equals(TaggingLabels.ITEM)) {
+                        if (TEIFormatter.MARKER_LABELS.contains(clusterLabel)) {
+                            if (curParagraphTokens == null)
+                                curParagraphTokens = new ArrayList<>();
+                            curParagraphTokens.addAll(localTokenization);
+                        } else if (clusterLabel.equals(TaggingLabels.PARAGRAPH) || clusterLabel.equals(TaggingLabels.ITEM)) {
                             //|| clusterLabel.equals(TaggingLabels.SECTION) {
                             //processLayoutTokenSequence(localTokenization, entities, disambiguate);
-                            selectedLayoutTokenSequences.add(localTokenization);
+                            if (lastClusterLabel == null || curParagraphTokens == null  || isNewParagraph(lastClusterLabel)) { 
+                                if (curParagraphTokens != null)
+                                    selectedLayoutTokenSequences.add(curParagraphTokens);
+                                curParagraphTokens = new ArrayList<>();
+                            }
+                            curParagraphTokens.addAll(localTokenization);
+
+                            //selectedLayoutTokenSequences.add(localTokenization);
                         } else if (clusterLabel.equals(TaggingLabels.TABLE)) {
                             //processLayoutTokenSequenceTableFigure(localTokenization, entities);
                         } else if (clusterLabel.equals(TaggingLabels.FIGURE)) {
                             //processLayoutTokenSequenceTableFigure(localTokenization, entities);
                         }
+
+                        lastClusterLabel = clusterLabel;
                     }
+                    // last paragraph
+                    if (curParagraphTokens != null)
+                        selectedLayoutTokenSequences.add(curParagraphTokens);
                 }
             }
 
             // actual processing of the selected sequences which have been delayed to be processed in groups and
             // take advantage of deep learning batch
             processLayoutTokenSequenceMultiple(selectedLayoutTokenSequences, entities, disambiguate);
-
 
             // we don't process references (although reference titles could be relevant)
             // acknowledgement? 
@@ -357,6 +377,8 @@ public class SoftwareParser extends AbstractParser {
 
             // second pass, body
             if (bodyClusters != null) {
+                List<LayoutToken> curParagraphTokens = null;
+                TaggingLabel lastClusterLabel = null;
                 for (TaggingTokenCluster cluster : bodyClusters) {
                     if (cluster == null) {
                         continue;
@@ -368,15 +390,37 @@ public class SoftwareParser extends AbstractParser {
                     if ((localTokenization == null) || (localTokenization.size() == 0))
                         continue;
 
-                    if (clusterLabel.equals(TaggingLabels.PARAGRAPH) || clusterLabel.equals(TaggingLabels.ITEM)) {
+                    if (TEIFormatter.MARKER_LABELS.contains(clusterLabel)) {
+                        if (curParagraphTokens == null)
+                            curParagraphTokens = new ArrayList<>();
+                        curParagraphTokens.addAll(localTokenization);
+                    } else if (clusterLabel.equals(TaggingLabels.PARAGRAPH) || clusterLabel.equals(TaggingLabels.ITEM)) {
+                        //|| clusterLabel.equals(TaggingLabels.SECTION) {
+                        //processLayoutTokenSequence(localTokenization, entities, disambiguate);
+                        if (lastClusterLabel == null || curParagraphTokens == null  || isNewParagraph(lastClusterLabel)) { 
+                            if (curParagraphTokens != null)
+                                propagateLayoutTokenSequence(curParagraphTokens, entities, termProfiles, termPattern, placeTaken, frequencies);
+                            curParagraphTokens = new ArrayList<>();
+                        }
+                        curParagraphTokens.addAll(localTokenization);
+
+                        //selectedLayoutTokenSequences.add(localTokenization);
+                    }
+
+                    lastClusterLabel = clusterLabel;
+
+                    /*if (clusterLabel.equals(TaggingLabels.PARAGRAPH) || clusterLabel.equals(TaggingLabels.ITEM)) {
                         //|| clusterLabel.equals(TaggingLabels.SECTION) ) {
                         propagateLayoutTokenSequence(localTokenization, entities, termProfiles, termPattern, placeTaken, frequencies);
                     } else if (clusterLabel.equals(TaggingLabels.TABLE)) {
                         //propagateLayoutTokenSequence(localTokenization, entities, termProfiles, termPattern, placeTaken, frequencies);
                     } else if (clusterLabel.equals(TaggingLabels.FIGURE)) {
                         //propagateLayoutTokenSequence(localTokenization, entities, termProfiles, termPattern, placeTaken, frequencies);
-                    }
+                    }*/
                 }
+
+                if (curParagraphTokens != null)
+                    propagateLayoutTokenSequence(curParagraphTokens, entities, termProfiles, termPattern, placeTaken, frequencies);
             }
 
             // second pass, annex
@@ -549,6 +593,9 @@ public class SoftwareParser extends AbstractParser {
 
             Collections.sort(entities);
 
+            // add context to the entities
+            //entities = addContext(entities, null, doc.getTokenizations());
+
         } catch (Exception e) {
             e.printStackTrace();
             throw new GrobidException("Cannot process pdf file: " + file.getPath());
@@ -663,8 +710,11 @@ public class SoftwareParser extends AbstractParser {
                 }
             }
             
+            text = LayoutTokensUtil.normalizeDehyphenizeText(layoutTokens);
             entities.addAll(localEntities);
+            entities = addContext(entities, text, layoutTokens);
         }
+
         return entities;
     }
 
@@ -807,6 +857,11 @@ public class SoftwareParser extends AbstractParser {
                     }
                     entity.setPropagated(true);
 
+                    // add context to this new entity
+                    List<SoftwareEntity> localEntities = new ArrayList<>();
+                    localEntities.add(entity);
+                    addContext(localEntities, null, layoutTokens);
+
                     entities.add(entity);
                 }
             }
@@ -822,6 +877,11 @@ public class SoftwareParser extends AbstractParser {
         } 
         return false;
     }*/
+
+    public static boolean isNewParagraph(TaggingLabel lastClusterLabel) {
+        return (!TEIFormatter.MARKER_LABELS.contains(lastClusterLabel) && lastClusterLabel != TaggingLabels.FIGURE
+                && lastClusterLabel != TaggingLabels.TABLE);
+    }
 
     private boolean overlapsPosition(final List<OffsetPosition> list, final OffsetPosition position) {
         for (OffsetPosition pos : list) {
@@ -1395,6 +1455,74 @@ public class SoftwareParser extends AbstractParser {
     }
 
     /**
+     * Add to the entities their local text contexts: the sentence where the software name occurs.
+     */
+    public List<SoftwareEntity> addContext(List<SoftwareEntity> entities, String text, List<LayoutToken> tokens) {
+        // adjust offsets if tokenization does not start at 0
+        int offsetShift = 0;
+        if (tokens != null && tokens.size()>0)
+            if (tokens.get(0).getOffset() != 0)
+                offsetShift = tokens.get(0).getOffset();
+
+        // we start by segmenting the tokenized text into sentences 
+
+        List<OffsetPosition> forbidden = new ArrayList<OffsetPosition>();
+        // fill the position where entities occur to avoid segmenting in the middle of a software string, same for
+        // the reference marker positions too
+        for(SoftwareEntity entity : entities) {
+            SoftwareComponent softwareName = entity.getSoftwareName();
+            SoftwareComponent version =  entity.getVersion();
+            SoftwareComponent creator =  entity.getCreator();
+            SoftwareComponent softwareURL =  entity.getSoftwareURL();
+            List<BiblioComponent> refMarkers = entity.getBibRefs();
+
+            if (softwareName != null) {
+                forbidden.add(new OffsetPosition(softwareName.getOffsetStart()-offsetShift, softwareName.getOffsetEnd()-offsetShift));
+            }
+            if (version != null) {
+                forbidden.add(new OffsetPosition(version.getOffsetStart()-offsetShift, version.getOffsetEnd()-offsetShift));
+            }
+            if (creator != null) {
+                forbidden.add(new OffsetPosition(creator.getOffsetStart()-offsetShift, creator.getOffsetEnd()-offsetShift));
+            }
+            if (softwareURL != null) {
+                forbidden.add(new OffsetPosition(softwareURL.getOffsetStart()-offsetShift, softwareURL.getOffsetEnd()-offsetShift));
+            }
+            if (refMarkers != null) {
+                for(BiblioComponent biblioComponent : refMarkers) {
+                    forbidden.add(new OffsetPosition(biblioComponent.getOffsetStart()-offsetShift, biblioComponent.getOffsetEnd()-offsetShift));
+                }
+            }
+        }
+
+        if (text == null) {
+            text = LayoutTokensUtil.normalizeText(LayoutTokensUtil.toText(tokens));
+        }
+        List<OffsetPosition> sentencePositions = SentenceUtilities.getInstance().runSentenceDetection(text, forbidden, tokens, null);
+        
+        for(SoftwareEntity entity : entities) {
+            SoftwareComponent softwareName = entity.getSoftwareName();
+            if (softwareName == null)
+                continue;
+            int startEntity = softwareName.getOffsetStart() - offsetShift;
+            int endEntity = softwareName.getOffsetEnd() - offsetShift;
+
+            // get the sentence corresponding to these positions
+            for (OffsetPosition sentencePosition : sentencePositions) {
+                int startSentence = sentencePosition.start;
+                int endSentence = sentencePosition.end;
+
+                if (startSentence <= startEntity && endEntity <= endSentence) {
+                    // set the context as the identified sentence
+                    entity.setContext(text.substring(startSentence, endSentence));
+                    break;
+                }
+            }
+        }
+        return entities;
+    }
+
+    /**
      * Extract identified software components from a CRF labelled text.
      */
     public List<SoftwareComponent> extractSoftwareComponents(String text,
@@ -1448,12 +1576,8 @@ public class SoftwareParser extends AbstractParser {
                 currentComponent = new SoftwareComponent();
 
                 currentComponent.setRawForm(clusterContent);
-                //currentComponent.setOffsetStart(pos);
                 currentComponent.setOffsetStart(theTokens.get(0).getOffset());
-
-                //currentComponent.setOffsetEnd(endPos);
                 currentComponent.setOffsetEnd(theTokens.get(theTokens.size()-1).getOffset() + theTokens.get(theTokens.size()-1).getText().length());
-
 
                 currentComponent.setLabel(clusterLabel);
                 currentComponent.setTokens(theTokens);
