@@ -299,9 +299,8 @@ class software_mention_client(object):
             print('[{0}] URL not found: [{1}]'.format(response.status_code, url))
         elif response.status_code >= 400:
             print('[{0}] Bad Request'.format(response.status_code))
-            print(response.content )
+            print(response.content)
         elif response.status_code == 200:
-            #print('softcite succeed')
             jsonObject = response.json()
         else:
             print('Unexpected Error: [HTTP {0}]: Content: {1}'.format(response.status_code, response.content))
@@ -514,7 +513,7 @@ if __name__ == "__main__":
     parser.add_argument("--repo-in", default=None, help="path to a directory of PDF files to be processed by the GROBID software mention recognizer")  
     parser.add_argument("--file-in", default=None, help="a single PDF input file to be processed by the GROBID software mention recognizer") 
     parser.add_argument("--file-out", default=None, help="path to a single output the software mentions in JSON format, extracted from the PDF file-in") 
-    parser.add_argument("--data-path", default=None, help="path to the JSON dump file created by biblio-glutton-harvester") 
+    parser.add_argument("--data-path", default=None, help="path to the resource files created/harvested by biblio-glutton-harvester") 
     parser.add_argument("--config", default="./config.json", help="path to the config file, default is ./config.json") 
     parser.add_argument("--reprocess", action="store_true", help="reprocessed failed PDF") 
     parser.add_argument("--reset", action="store_true", help="ignore previous processing states and re-init the annotation process from the beginning") 
@@ -548,7 +547,7 @@ if __name__ == "__main__":
         if client.config["mongo_host"] is None:
             sys.exit("the mongodb server where to load the json files is not indicated in the config file, leaving...")
         if repo_in is None and data_path is None: 
-            sys.exit("the repo_in where to find the json files to be loaded is not indicated, leaving...")
+            sys.exit("the repo_in where to find the PDF files to be processed is not indicated, leaving...")
         if data_path is not None:
             client.load_mongo(data_path)
         elif repo_in is not None:
