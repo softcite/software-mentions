@@ -11,7 +11,7 @@ import S3
 import concurrent.futures
 import requests
 import pymongo
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor, as_completed
 import hashlib
 
 map_size = 100 * 1024 * 1024 * 1024 
@@ -206,7 +206,8 @@ class software_mention_client(object):
         # process a provided list of PDF
         #print("annotate_batch", len(pdf_files))
         with ThreadPoolExecutor(max_workers=self.config["concurrency"]) as executor:
-            executor.map(self.annotate, pdf_files, out_files, full_records)
+            #with ProcessPoolExecutor(max_workers=self.config["concurrency"]) as executor:
+            executor.map(self.annotate, pdf_files, out_files, full_records, timeout=60)
 
     def reprocess_failed(self):
         """
@@ -287,7 +288,7 @@ class software_mention_client(object):
         
         #print("calling... ", url)
 
-        response = requests.post(url, files=the_file, data = {'disambiguate': 1})
+        response = requests.post(url, files=the_file, data = {'disambiguate': 1}, timeout=50)
         jsonObject = None
         if response.status_code == 503:
             print('service overloaded, sleep', self.config['sleep_time'], seconds)
@@ -324,7 +325,7 @@ class software_mention_client(object):
                     if normalizedForm not in self.blacklisted:
                         new_mentions.append(mention)
             jsonObject['mentions'] = new_mentions
-            
+
             if file_out is not None: 
                 # we write the json result into a file together with the processed pdf
                 with open(file_out, "w", encoding="utf-8") as json_file:
@@ -333,7 +334,7 @@ class software_mention_client(object):
             if self.config["mongo_host"] is not None:
                 # we store the result in mongo db 
                 self._insert_mongo(jsonObject)
-        elif jsonObject is not None:
+        else:
             # we have no software mention in the document, we still write an empty result file
             # along with the PDF/medtadata files to easily keep track of the processing for this doc
             if file_out is not None: 
