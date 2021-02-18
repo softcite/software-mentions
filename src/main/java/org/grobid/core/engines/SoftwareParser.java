@@ -1506,12 +1506,21 @@ public class SoftwareParser extends AbstractParser {
             int startEntity = softwareName.getOffsetStart() - offsetShift;
             int endEntity = softwareName.getOffsetEnd() - offsetShift;
 
+            //System.out.println("entity: " + softwareName.getOffsetStart() + " " + softwareName.getOffsetEnd());
+            //System.out.println("entity: " + startEntity + " " + endEntity);
+
+            if (startEntity < 0 || endEntity < 0)
+                continue;
+
             // get the sentence corresponding to these positions
             for (OffsetPosition sentencePosition : sentencePositions) {
                 int startSentence = sentencePosition.start;
                 int endSentence = sentencePosition.end;
 
-                if (startSentence <= startEntity && endEntity <= endSentence) {
+                //System.out.println("sentence: " + startSentence + " " + endSentence);
+
+                //if (startSentence <= startEntity && endEntity <= endSentence) {
+                if (startSentence <= startEntity && startEntity < endSentence) {
                     // set the context as the identified sentence
                     entity.setContext(text.substring(startSentence, endSentence));
                     break;
