@@ -234,6 +234,11 @@ public class AnnotatedCorpusGeneratorCSV {
         StringBuilder builderTEICorpus = new StringBuilder();
         writerCorpusHeader(builderTEICorpus);
 
+        // this is a TEI files of "negative" contexts, i.e. paragraphs where we should be sure that there is 
+        // no software mention, to be used when training to better avoid false positive
+        StringBuilder builderTEINegativeCorpus = new StringBuilder();
+        writerCorpusHeader(builderTEINegativeCorpus);
+
         // go thought all annotated documents of softcite
         //int m = 0;
         List<String> xmlFiles = new ArrayList<String>();
@@ -244,6 +249,11 @@ public class AnnotatedCorpusGeneratorCSV {
             //m++;
             String docName = entry.getKey();
             File pdfFile = getPDF(documentPath, docName, articleUtilities, this.configuration);
+
+            System.out.println("docName: " + docName);
+
+            if (pdfFile == null)
+                continue;
 
             // process header with consolidation to get some nice header metadata for this document
             BiblioItem biblio = new BiblioItem();
@@ -257,6 +267,9 @@ public class AnnotatedCorpusGeneratorCSV {
             } catch(Exception e) {
                 e.printStackTrace();
             }
+
+            System.out.println("header done");
+
             AnnotatedDocument document = entry.getValue();
             document.setBiblio(biblio);
 
@@ -272,15 +285,28 @@ public class AnnotatedCorpusGeneratorCSV {
             if (documentSource == null)
                 continue;
 
-            Document doc = engine.getParsers().getSegmentationParser().processing(documentSource, config);
+            System.out.println("before parsing");
+            Document doc = null;
+            try {
+                doc = engine.getParsers().getSegmentationParser().processing(documentSource, config);
+            } catch(Exception e) {
+                e.printStackTrace();
+            }  
             if (doc == null) {
                 logger.error("The parsing of the PDF file corresponding to " + docName + " failed");
                 // TBD
                 continue;
             }
 
+            System.out.println("after parsing");
+
             List<SoftciteAnnotation> localAnnotations = document.getAnnotations();
-            //System.out.println(docName + ": " + localAnnotations.size() + " annotations");
+            if (localAnnotations == null) {
+                System.out.println("no local annotations");
+                localAnnotations = new ArrayList<SoftciteAnnotation>();
+            } 
+            
+            System.out.println(docName + ": " + localAnnotations.size() + " annotations");
 
             Language lang = new Language("en", 1.0);
             
@@ -315,7 +341,11 @@ public class AnnotatedCorpusGeneratorCSV {
                     labeledResult = engine.getParsers().getHeaderParser().label(header);
 
                     BiblioItem resHeader = new BiblioItem();
-                    resHeader.generalResultMapping(doc, labeledResult, tokenizationHeader);
+                    try {
+                        resHeader.generalResultMapping(doc, labeledResult, tokenizationHeader);
+                    } catch(Exception e) {
+                        e.printStackTrace();
+                    }
 
                     // get the LayoutToken of the abstract - all the other ones should be excluded! 
                     List<LayoutToken> abstractTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_ABSTRACT);
@@ -339,8 +369,12 @@ public class AnnotatedCorpusGeneratorCSV {
             if (documentParts != null) {
                 tokenizationReferences = Document.getTokenizationParts(documentParts, doc.getTokenizations());
                 // we process however the bib ref, no consolidation, to better filter invalid ref. callout
-                engine.getParsers().getCitationParser().
-                    processingReferenceSection(doc, engine.getParsers().getReferenceSegmenterParser(), 0);
+                try {
+                    engine.getParsers().getCitationParser().
+                        processingReferenceSection(doc, engine.getParsers().getReferenceSegmenterParser(), 0);
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             // and we need the tokens of the running header (to exclude them!)
@@ -372,6 +406,8 @@ public class AnnotatedCorpusGeneratorCSV {
                     toExclude.add(token.getOffset());
                 }
             }
+
+            System.out.println("ref callout...");
 
             // we keep track of the LayoutToken corresponding to reference callout, in order to applied
             // special filter to exclude creator and version date annotation in the bibliographical reference
@@ -438,6 +474,8 @@ public class AnnotatedCorpusGeneratorCSV {
                     }
                 }
             }
+
+            System.out.println("list report...");
 
             // update total number of mentions and output a list report for each type
             for(SoftciteAnnotation annotation : localAnnotations) {
@@ -528,28 +566,42 @@ public class AnnotatedCorpusGeneratorCSV {
                 }
             }
 
+            System.out.println("writing annotated XML data...");
+
             // finally, we will output an annotated training file for the whole document content, only 
             // annotations that have been matched back to the actual document content are used
             List<Annotation> inlineAnnotations = document.getInlineAnnotations();
             if ( (inlineAnnotations != null) && (inlineAnnotations.size() > 0) ) {
                 Collections.sort(inlineAnnotations);
-                try {
-                    String xmlFile = xmlPath + File.separator + new File(pdfFile.getAbsolutePath())
-                                                                .getName().replace(".pdf", ".software-mention.xml");
-                    generateAnnotatedXMLDocument(xmlFile,
-                                                doc, 
-                                                inlineAnnotations, 
-                                                entry.getKey(),
-                                                toExclude);
-                    insertSnippet(builderTEICorpus, doc, tokenizationBody, reseFullText, inlineAnnotations, entry.getKey(), toExclude, biblio);
-                    xmlFiles.add(xmlFile);
-                } catch(Exception e) {
-                    logger.error("Failed to write the resulting annotated document in xml", e);
-                }
+            }
+            try {
+                String xmlFile = xmlPath + File.separator + new File(pdfFile.getAbsolutePath())
+                                                            .getName().replace(".pdf", ".software-mention.xml");
+                generateAnnotatedXMLDocument(xmlFile,
+                                            doc, 
+                                            inlineAnnotations, 
+                                            entry.getKey(),
+                                            toExclude);
+                insertSnippet(builderTEICorpus, 
+                            builderTEINegativeCorpus, 
+                            doc, 
+                            tokenizationBody, 
+                            reseFullText, 
+                            inlineAnnotations, 
+                            entry.getKey(), 
+                            toExclude, 
+                            biblio);
+                xmlFiles.add(xmlFile);
+            } catch(Exception e) {
+                logger.error("Failed to write the resulting annotated document in xml", e);
             }
             
+            System.out.println("moving to next document...\n\n");
         }
 
+        System.out.println("all document processed, writing reports...");
+
+        // additionally write the list of all software names and attribute strings
         for(String field : fields) {
             Map<String,List<String>> mentionList = mentionLists.get(field);
             //mentionList.sort(String::compareToIgnoreCase);
@@ -578,6 +630,7 @@ public class AnnotatedCorpusGeneratorCSV {
             }
         }
 
+        // reports some failing matches
         for(String field : fields) {
             allMentionsWriters.get(field).close();
         }
@@ -614,13 +667,18 @@ public class AnnotatedCorpusGeneratorCSV {
         }
 
         builderTEICorpus.append("</teiCorpus>\n");
+        builderTEINegativeCorpus.append("</teiCorpus>\n");
 
         // this is a TEI corpus file to represent all the annotated snippets, with a bit more 
-        // of textual styling
+        // of textual styling/decent formatting
         //Writer writerTEICorpus = new PrintWriter(new BufferedWriter(new FileWriter("resources/dataset/software/corpus/all.tei.xml")));
         Writer writerTEICorpus = new PrintWriter(new BufferedWriter(new FileWriter("doc/reports/all.tei.xml")));
         writerTEICorpus.write(XMLUtilities.toPrettyString(builderTEICorpus.toString(), 4));
         writerTEICorpus.close();
+
+        Writer writerTEINegativeCorpus = new PrintWriter(new BufferedWriter(new FileWriter("doc/reports/all.negative.tei.xml")));
+        writerTEINegativeCorpus.write(XMLUtilities.toPrettyString(builderTEINegativeCorpus.toString(), 4));
+        writerTEINegativeCorpus.close();
 
         // computing and reporting cross-agreement for the loaded set
         CrossAgreement crossAgreement = new CrossAgreement(fields);
@@ -1263,6 +1321,7 @@ System.out.print("\n");*/
      * Generate a clean annotated snippet based on the extracted content of PDF. 
      */ 
     private void insertSnippet(StringBuilder builderTEICorpus, 
+                               StringBuilder builderTEINegativeCorpus,
                                Document doc, 
                                LayoutTokenization layoutTokenization,
                                String reseFullText,
@@ -1271,15 +1330,19 @@ System.out.print("\n");*/
                                List<Integer> toExclude,
                                BiblioItem biblio)  throws IOException, ParsingException {
         Element root = SoftwareParser.getTEIHeaderSimple(docID, biblio);
-        
         Element textNode = teiElement("text");
         textNode.addAttribute(new Attribute("xml:lang", "http://www.w3.org/XML/1998/namespace", "en"));
-
         Element body = teiElement("body");
         textNode.appendChild(body);
 
-        // now this is similar to GROBID core TEIFormatter toTEITextPiece, but we want to keep only paragraphs
-        // with software annotations and simplify all other aspects
+        Element rootNegative = SoftwareParser.getTEIHeaderSimple(docID, biblio);
+        Element textNodeNegative = teiElement("text");
+        textNodeNegative.addAttribute(new Attribute("xml:lang", "http://www.w3.org/XML/1998/namespace", "en"));
+        Element bodyNegative = teiElement("body"); // for body positivity, stay away from XML !
+        textNodeNegative.appendChild(bodyNegative);
+
+        // now this is similar to GROBID core TEIFormatter toTEITextPiece, but we want to distinguish paragraphs
+        // with or without software annotations and simplify all other aspects
 
         TaggingLabel lastClusterLabel = null;
 
@@ -1290,6 +1353,7 @@ System.out.print("\n");*/
         List<TaggingTokenCluster> clusters = clusteror.cluster();
 
         List<Element> allParagraphs = new ArrayList<>();
+        List<Element> allNegativeParagraphs = new ArrayList<>();
         Element curParagraph = null;
         Element curList = null;
         int equationIndex = 0; // current equation index position 
@@ -1303,7 +1367,7 @@ System.out.print("\n");*/
 
             if (clusterLabel.equals(TaggingLabels.PARAGRAPH)) {
                 List<LayoutToken> localTokens = cluster.concatTokens();
-                if ( (localTokens.size() == 0) || (inlineAnnotations.size()==0) )
+                if ( (localTokens.size() == 0) || inlineAnnotations == null || (inlineAnnotations.size()==0) )
                     continue;
                 int pos = 0;
                 int offsetFirstToken = localTokens.get(0).getOffset();
@@ -1396,7 +1460,7 @@ System.out.print("\n");*/
             lastClusterLabel = cluster.getTaggingLabel();
         }
 
-        // remove possibly empty div in the paragraph list or paragraph without <rs>
+        // remove possibly empty div in the paragraph list or paragraph without <rs> and put them in the "negative box"
         if (allParagraphs.size() != 0) {
             for(int i = allParagraphs.size()-1; i>=0; i--) {
                 Element theParagraph = allParagraphs.get(i);
@@ -1407,6 +1471,7 @@ System.out.print("\n");*/
                     // check if the paragraph does not contain at least a <rs>
                     Elements elements = theParagraph.getChildElements("rs", "http://www.tei-c.org/ns/1.0");
                     if ((elements == null) || (elements.size() == 0)) {
+                        allNegativeParagraphs.add(theParagraph);
                         allParagraphs.remove(i);
                     }
                 }
@@ -1419,6 +1484,19 @@ System.out.print("\n");*/
 
         builderTEICorpus.append(XmlBuilderUtils.toXml(root));
         builderTEICorpus.append("\n");
+
+        for(Element paragraph : allNegativeParagraphs) {
+            // we expect a minimal length for the negative paragraph and something to fit a 512 tokens input sequence
+            String localText = paragraph.getValue();
+            List<String> localTokens = GrobidAnalyzer.getInstance().tokenize(localText);
+
+            if (50 < localTokens.size() && localTokens.size() < 400) 
+                bodyNegative.appendChild(paragraph);
+        }
+        rootNegative.appendChild(textNodeNegative);
+
+        builderTEINegativeCorpus.append(XmlBuilderUtils.toXml(rootNegative));
+        builderTEINegativeCorpus.append("\n");
     }
 
     private boolean isNewParagraph(TaggingLabel lastClusterLabel, Element curParagraph) {
@@ -1963,11 +2041,11 @@ System.out.print("\n");*/
         builderTEICorpus.append("\t\t\t\t</respStmt>\n");
         builderTEICorpus.append("\t\t\t</titleStmt>\n");
         builderTEICorpus.append("\t\t\t<publicationStmt>\n");
-        builderTEICorpus.append("\t\t\t\t<date when=\"2019\"/>\n");
+        builderTEICorpus.append("\t\t\t\t<date when=\"2021\"/>\n");
         builderTEICorpus.append("\t\t\t\t<availability>CC-BY</availability>\n");
         builderTEICorpus.append("\t\t\t</publicationStmt>\n");
         builderTEICorpus.append("\t\t\t<sourceDesc>\n");
-        builderTEICorpus.append("\t\t\t\t<bibl>Softcite corpus, version 0.1, 2019</bibl>\n");
+        builderTEICorpus.append("\t\t\t\t<bibl>Softcite corpus, version 1.1, 2021</bibl>\n");
         builderTEICorpus.append("\t\t\t</sourceDesc>\n");
         builderTEICorpus.append("\t\t</fileDesc>\n");
 

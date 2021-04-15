@@ -34,6 +34,9 @@ import javax.ws.rs.core.StreamingOutput;
 import java.io.*;
 import java.nio.charset.Charset;
 import java.util.*;
+import java.security.DigestInputStream;
+import java.security.MessageDigest;
+import javax.xml.bind.DatatypeConverter;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
@@ -73,7 +76,12 @@ public class SoftwareProcessFile {
         try {
             //LibraryLoader.load();
             engine = GrobidFactory.getInstance().getEngine();
-            originFile = IOUtilities.writeInputFile(inputStream);
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            DigestInputStream dis = new DigestInputStream(inputStream, md); 
+
+            originFile = IOUtilities.writeInputFile(dis);
+            byte[] digest = md.digest();
+
             GrobidAnalysisConfig config = new GrobidAnalysisConfig.GrobidAnalysisConfigBuilder().build();
 
             if (originFile == null) {
@@ -88,6 +96,9 @@ public class SoftwareProcessFile {
                 StringBuilder json = new StringBuilder();
 				json.append("{ ");
                 json.append(SoftwareServiceUtil.applicationDetails(GrobidProperties.getVersion()));
+                
+                String md5Str = DatatypeConverter.printHexBinary(digest).toUpperCase();
+                json.append(", \"md5\": \"" + md5Str + "\"");
 
 				// page height and width
                 json.append(", \"pages\":[");

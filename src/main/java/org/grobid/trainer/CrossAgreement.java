@@ -94,6 +94,8 @@ public class CrossAgreement {
 
             // check if we have multiple annotators for the same document
             List<String> annotators = new ArrayList<String>();
+            if (annotations == null) 
+                continue;
             for(SoftciteAnnotation annotation : annotations) {
                 String annotator = annotation.getAnnotatorID();
                 if (!annotators.contains(annotator)) 
