@@ -1234,18 +1234,17 @@ public class SoftwareParser extends AbstractParser {
 	  */
     private Element createTrainingPDF(File file, Element root) throws IOException {
         // first we apply GROBID fulltext model on the PDF to get the full text TEI
-        Document teiDoc = null;
+        String teiXML = null;
         try {
-            teiDoc = GrobidFactory.getInstance().createEngine().fullTextToTEIDoc(file, GrobidAnalysisConfig.defaultInstance());
+            teiXML = GrobidFactory.getInstance().createEngine().fullTextToTEI(file, GrobidAnalysisConfig.defaultInstance());
         } catch (Exception e) {
             e.printStackTrace();
             throw new GrobidException("Cannot create training data because GROBID full text model failed on the PDF: " + file.getPath());
         }
-        if (teiDoc == null) {
+        if (teiXML == null) {
             return null;
         }
 
-        String teiXML = teiDoc.getTei();
 		FileUtils.writeStringToFile(new File(file.getPath()+".tei.xml"), teiXML);
 
         // we parse this TEI string similarly as for createTrainingXML
