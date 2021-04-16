@@ -34,6 +34,7 @@ public class SoftwareController implements SoftwarePaths {
 
     private static final String TEXT = "text";
     private static final String DISAMBIGUATE = "disambiguate";
+    private static final String ADD_PARAGRAPH_CONTEXT = "addParagraphContext";
     private static final String XML = "xml";
     private static final String PDF = "pdf";
     private static final String INPUT = "input";
@@ -88,9 +89,11 @@ public class SoftwareController implements SoftwarePaths {
     @Produces("application/json")
     @POST
     public Response processPDFAnnotation(@FormDataParam(INPUT) InputStream inputStream, 
-                                         @DefaultValue("0") @FormDataParam(DISAMBIGUATE) String disambiguate) {
+                                         @DefaultValue("0") @FormDataParam(DISAMBIGUATE) String disambiguate,
+                                         @DefaultValue("0") @FormDataParam(ADD_PARAGRAPH_CONTEXT) String addParagraphContext) {
         boolean disambiguateBoolean = SoftwareServiceUtil.validateBooleanRawParam(disambiguate);
-        return SoftwareProcessFile.processPDFAnnotation(inputStream, disambiguateBoolean, this.configuration);
+        boolean addParagraphContextBoolean = SoftwareServiceUtil.validateBooleanRawParam(addParagraphContext);
+        return SoftwareProcessFile.processPDFAnnotation(inputStream, disambiguateBoolean, addParagraphContextBoolean, this.configuration);
     }
 
 }

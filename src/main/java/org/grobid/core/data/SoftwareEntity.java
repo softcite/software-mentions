@@ -51,6 +51,11 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 	// the text context where the entity takes place - typically a snippet with the 
 	// sentence including the mention
 	private String context = null;
+	private int contextOffset = -1;
+
+	// full paragraph context where the entity takes place, this is an optional field
+	// relevant for certain scenarios only
+	private String paragraph = null;
 
 	public SoftwareLexicon.Software_Type getType() {
 		return type;
@@ -137,6 +142,22 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 
 	public String getContext() {
 		return this.context;
+	}
+
+	public void setContextOffset(int contextOffset) {
+		this.contextOffset = contextOffset;
+	}
+
+	public int getContextOffset() {
+		return this.contextOffset;
+	}
+
+	public void setParagraph(String paragraph) {
+		this.paragraph = paragraph;
+	}
+
+	public String getParagraph() {
+		return this.paragraph;
 	}
 
 	/**
@@ -320,6 +341,16 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 			encoded = encoder.quoteAsUTF8(context.replace("\n", " "));
             output = new String(encoded);
 			buffer.append(", \"context\" : \"" + output + "\"");
+		
+			if (contextOffset != -1) {
+				buffer.append(", \"contextOffset\" : " + contextOffset);
+			}
+		}
+
+		if (paragraph != null && paragraph.length()>0) {
+			encoded = encoder.quoteAsUTF8(paragraph.replace("\n", " "));
+            output = new String(encoded);
+			buffer.append(", \"paragraph\" : \"" + output + "\"");
 		}
 
 		if (bibRefs != null) {

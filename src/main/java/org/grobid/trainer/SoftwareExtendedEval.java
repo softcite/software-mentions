@@ -325,7 +325,7 @@ public class SoftwareExtendedEval extends SoftwareTrainer {
                     Map<String, Double> termProfiles = softwareParser.prepareTermProfiles(entities);
                     // and call the propagation method
                     List<OffsetPosition> placeTaken = softwareParser.preparePlaceTaken(entities);
-                    entities = softwareParser.propagateLayoutTokenSequence(tokens, entities, termProfiles, termPattern, placeTaken, frequencies);
+                    entities = softwareParser.propagateLayoutTokenSequence(tokens, entities, termProfiles, termPattern, placeTaken, frequencies, false);
                     Collections.sort(entities);
                 }          
 
