@@ -1,12 +1,16 @@
 package org.grobid.trainer;
 
+import org.apache.commons.io.FileUtils;
+
 import org.grobid.core.GrobidModels;
 import org.grobid.core.document.Document;
 import org.grobid.core.document.DocumentSource;
 import org.grobid.core.engines.EngineParsers;
+import org.grobid.core.engines.SoftwareParser;
 import org.grobid.core.engines.config.GrobidAnalysisConfig;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.features.FeaturesVectorSoftware;
+import org.grobid.core.data.SoftwareEntity;
 import org.grobid.core.layout.Block;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.layout.PDFAnnotation;
@@ -16,6 +20,7 @@ import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.Pair;
 import org.grobid.core.utilities.SoftwareConfiguration;
+import org.grobid.core.utilities.XMLUtilities;
 import org.grobid.trainer.evaluation.EvaluationUtilities;
 import org.grobid.core.engines.tagging.GenericTagger;
 
@@ -24,10 +29,30 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+import org.xml.sax.InputSource;
+import org.w3c.dom.*;
+import javax.xml.parsers.*;
+import java.io.*;
+import javax.xml.transform.*;
+import javax.xml.transform.dom.*;
+import javax.xml.transform.stream.*;
+import org.w3c.dom.traversal.DocumentTraversal;
+import org.w3c.dom.traversal.NodeFilter;
+import org.w3c.dom.traversal.TreeWalker;
+import org.w3c.dom.ls.*;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import org.grobid.core.main.LibraryLoader;
+import org.grobid.core.utilities.GrobidProperties;
+import org.grobid.core.utilities.GrobidPropertyKeys;
+import org.grobid.core.engines.tagging.GrobidCRFEngine;
+
 
 /**
  * Training of the software entity recognition model
@@ -671,6 +696,168 @@ public class SoftwareTrainer extends AbstractTrainer {
         }
     }
 
+    public static String serialize(org.w3c.dom.Document doc, Node node) {
+        DOMSource domSource = null;
+        String xml = null;
+        try {
+            if (node == null) {
+                domSource = new DOMSource(doc);
+            } else {
+                domSource = new DOMSource(node);
+            }
+            StringWriter writer = new StringWriter();
+            StreamResult result = new StreamResult(writer);
+            TransformerFactory tf = TransformerFactory.newInstance();
+            Transformer transformer = tf.newTransformer();
+            transformer.setOutputProperty(OutputKeys.METHOD, "xml");
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+            if (node != null)
+                transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+            transformer.transform(domSource, result);
+            xml = writer.toString();
+        } catch(TransformerException ex) {
+            ex.printStackTrace();
+        }
+        return xml;
+    }
+
+    /**
+     * Using a set of negative examples, select those which contradicts a given recognition model.
+     * Contradict means that the model predicts incorrectly a software mention and that this 
+     * particular negative example is particularly relevant to correct this model. 
+     */
+    public int selectNegativeExample(File negativeCorpusFile, File outputXMLFile) {
+        int totalExamples = 0;
+        Writer writer = null;
+        SoftwareParser parser = SoftwareParser.getInstance(this.conf);
+        try {
+            
+            System.out.println("negative corpus path: " + negativeCorpusFile.getPath());
+            System.out.println("selection corpus path: " + outputXMLFile.getPath());
+
+            // the file for writing the training data
+            writer = new OutputStreamWriter(new FileOutputStream(outputXMLFile), "UTF8");
+
+            if (!negativeCorpusFile.exists()) {
+                System.out.println("The XML TEI negative corpus does not exist: " + negativeCorpusFile.getPath());
+            } else {
+                DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+                factory.setNamespaceAware(true);
+                DocumentBuilder builder = factory.newDocumentBuilder();
+                String tei = FileUtils.readFileToString(negativeCorpusFile, UTF_8);
+                org.w3c.dom.Document document = builder.parse(new InputSource(new StringReader(tei)));
+
+                // list of index of nodes to remove
+                List<Integer> toRemove = new ArrayList<Integer>();
+
+                NodeList pList = document.getElementsByTagName("p");
+                for (int i = 0; i < pList.getLength(); i++) {
+                    Element paragraphElement = (Element) pList.item(i);
+                    String text = XMLUtilities.getText(paragraphElement);
+
+                    // run the mention recognizer and check if we have annotations
+                    List<SoftwareEntity> entities = parser.processText(text, true);
+
+                    if (entities == null || entities.size() == 0) {
+                        toRemove.add(new Integer(i));
+                    }
+                }
+
+                for(Integer i : toRemove) {
+                    // remove the specific node
+                    Node element = pList.item(i);
+                    element.getParentNode().removeChild(element);
+                }
+
+                totalExamples = pList.getLength() - toRemove.size();
+                writer.write(serialize(document, null));
+            }
+        } catch (Exception e) {
+            throw new GrobidException("An exception occured while selecting negative examples.", e);
+        } finally {
+            try {
+                if (writer != null)
+                    writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return totalExamples;
+    }
+
+
+    /**
+     * Select a given number of negative examples among a given (very large) list, in a random
+     * manner. 
+     * @param max   maximum of negative examples to select
+     */
+    public int randomNegativeExample(File negativeCorpusFile, double max, File outputXMLFile) {
+        int totalExamples = 0;
+        Writer writer = null;
+        try {
+            System.out.println("negative corpus path: " + negativeCorpusFile.getPath());
+            System.out.println("selection corpus path: " + outputXMLFile.getPath());
+
+            // the file for writing the training data
+            writer = new OutputStreamWriter(new FileOutputStream(outputXMLFile), "UTF8");
+
+            if (!negativeCorpusFile.exists()) {
+                System.out.println("The XML TEI negative corpus does not exist: " + negativeCorpusFile.getPath());
+            } else {
+                DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+                factory.setNamespaceAware(true);
+                DocumentBuilder builder = factory.newDocumentBuilder();
+                String tei = FileUtils.readFileToString(negativeCorpusFile, UTF_8);
+                org.w3c.dom.Document document = builder.parse(new InputSource(new StringReader(tei)));
+
+                NodeList pList = document.getElementsByTagName("p");
+
+                int totalMaxExamples = pList.getLength();
+                int rate = 1;
+                if (max < totalMaxExamples) {
+                    rate = (int)(totalMaxExamples % max);
+                }
+
+                // list of index of nodes to remove
+                List<Integer> toRemove = new ArrayList<Integer>();
+
+                int rank = 0;
+                int totalAdded = 0;
+                for (int i = 0; i < pList.getLength(); i++) {
+                    if (rank == rate) {
+                        rank = 0;
+                        totalAdded++;
+                    } else {
+                        toRemove.add(new Integer(i));
+                    }
+                    rank++;
+                    if (totalAdded >= max)
+                        break;
+                }
+
+                for(Integer i : toRemove) {
+                    // remove the specific node
+                    Node element = pList.item(i);
+                    element.getParentNode().removeChild(element);
+                }
+
+                totalExamples = pList.getLength() - toRemove.size();
+                writer.write(serialize(document, null));
+            }
+        } catch (Exception e) {
+            throw new GrobidException("An exception occured while selecting negative examples.", e);
+        } finally {
+            try {
+                if (writer != null)
+                    writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return totalExamples;
+    }
+
     /**
      * Standard evaluation via the the usual Grobid evaluation framework.
      */
@@ -756,6 +943,13 @@ public class SoftwareTrainer extends AbstractTrainer {
             GrobidProperties.getInstance(grobidHomeFinder);
     
             System.out.println(">>>>>>>> GROBID_HOME="+GrobidProperties.get_GROBID_HOME_PATH());
+
+            if (conf != null &&
+                conf.getEngine() != null && 
+                conf.getEngine().equals("delft"))
+                GrobidProperties.setPropertyValue(GrobidPropertyKeys.PROP_GROBID_CRF_ENGINE + ".software", "delft");
+            LibraryLoader.load();
+
         } catch (final Exception exp) {
             System.err.println("GROBID software initialisation failed: " + exp);
             exp.printStackTrace();
