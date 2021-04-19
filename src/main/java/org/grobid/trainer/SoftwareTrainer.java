@@ -44,6 +44,7 @@ import org.w3c.dom.ls.*;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.*;
+import java.nio.file.FileSystems;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -114,16 +115,30 @@ public class SoftwareTrainer extends AbstractTrainer {
         return createCRFPPData(corpusDir, trainingOutputPath, evalOutputPath, splitRatio, true);
     }
 
-
-    /**
-     * CRF training data here are produced from the unique training TEI file containing labelled paragraphs only
-     */
     public int createCRFPPData(final File corpusDir,
                                final File trainingOutputPath,
                                final File evalOutputPath,
                                double splitRatio,
                                boolean splitRandom) {
+        return createCRFPPData(corpusDir, trainingOutputPath, evalOutputPath, splitRatio, true, 2);
+    }
 
+
+    /**
+     * CRF training data here are produced from the unique training TEI file containing labelled paragraphs only
+     *
+     * Negative example modes: 
+     * 0 -> no added negative examples
+     * 1 -> random negative examples
+     * 2 -> erroneously predicted negative examples
+     *
+     */
+    public int createCRFPPData(final File corpusDir,
+                               final File trainingOutputPath,
+                               final File evalOutputPath,
+                               double splitRatio,
+                               boolean splitRandom, 
+                               int negativeMode) {
         int totalExamples = 0;
         Writer writerTraining = null;
         Writer writerEvaluation = null;
@@ -152,7 +167,7 @@ public class SoftwareTrainer extends AbstractTrainer {
             SoftwareAnnotationSaxHandler handler = new SoftwareAnnotationSaxHandler();
 
             //final String corpus_file_name = "all_clean_post_processed.tei.xml";
-            final String corpus_file_name = "softcite_corpus.tei.xml";
+            final String corpus_file_name = "softcite_corpus-full.tei.xml";
             //final String corpus_file_name = "softcite_corpus_pmc.tei.xml";
             //final String corpus_file_name = "softcite_corpus_econ.tei.xml";
 
@@ -209,8 +224,89 @@ public class SoftwareTrainer extends AbstractTrainer {
                         addFeatures(bufferLabeled, writer, softwareTokenPositions, urlPositions);
                         writer.write("\n");
                     }
+
                     writer.write("\n");
                     n++;
+                }
+
+                totalExamples = n;
+
+                // inject negative examples, depdending on the selected mode
+                final String negative_corpus_file_name = "all.negative.tei.xml";
+                
+                String relativePath = corpusDir.getPath() + File.separator + negative_corpus_file_name;
+                String absolutePath = FileSystems.getDefault().getPath(relativePath).normalize().toAbsolutePath().toString();
+                File negativeCorpusFile = new File(absolutePath);
+
+                if (!negativeCorpusFile.exists()) {
+                    System.out.println("The XML TEI negative corpus training document does not exist: " + 
+                        corpusDir.getPath() + File.separator + negative_corpus_file_name);
+                } else {
+                    int addedNegative = 0;
+                    relativePath = corpusDir.getPath() + File.separator + "selected.negative.tei.xml";
+                    absolutePath = FileSystems.getDefault().getPath(relativePath).normalize().toAbsolutePath().toString();
+                    File outputXMLFile =  new File(absolutePath);
+
+                    if (negativeMode == 1) {
+                        addedNegative = randomNegativeExamples(negativeCorpusFile, 2000, outputXMLFile);
+                    } else if (negativeMode == 2) {
+                        addedNegative = selectNegativeExamples(negativeCorpusFile, outputXMLFile);
+                    }
+                    System.out.println("Number of injected negative examples: " + addedNegative);
+                    if (addedNegative > 0) {
+                        handler = new SoftwareAnnotationSaxHandler();
+                        p = spf.newSAXParser();
+                        p.parse(outputXMLFile, handler);
+
+                        allLabeled = handler.getLabeledResult();
+                        n = 0;
+                        for(List<Pair<String, String>> labeled : allLabeled) {
+
+                            // we need to add now the features to the labeled tokens
+                            List<Pair<String, String>> bufferLabeled = null;
+                            int pos = 0;
+
+                            // segmentation into training/evaluation is done file by file
+                            if (splitRandom) {
+                                if (Math.random() <= splitRatio)
+                                    writer = writerTraining;
+                                else
+                                    writer = writerEvaluation;
+                            } else {
+                                if ((double) n / allLabeled.size() <= splitRatio)
+                                    writer = writerTraining;
+                                else
+                                    writer = writerEvaluation;
+                            }
+
+                            // let's iterate by defined CRF input (separated by new line)
+                            while (pos < labeled.size()) {
+                                bufferLabeled = new ArrayList<>();
+                                while (pos < labeled.size()) {
+                                    if (labeled.get(pos).getA().equals("\n")) {
+                                        pos++;
+                                        break;
+                                    }
+                                    bufferLabeled.add(labeled.get(pos));
+                                    pos++;
+                                }
+
+                                if (bufferLabeled.size() == 0)
+                                    continue;
+
+                                List<OffsetPosition> softwareTokenPositions = softwareLexicon.tokenPositionsSoftwareNamesVectorLabeled(bufferLabeled);
+                                List<OffsetPosition> urlPositions = softwareLexicon.tokenPositionsUrlVectorLabeled(bufferLabeled);
+
+                                addFeatures(bufferLabeled, writer, softwareTokenPositions, urlPositions);
+                                writer.write("\n");
+                            }
+
+                            writer.write("\n");
+                            n++;
+                        }
+
+                        totalExamples += n;
+                    }
                 }
             }
         } catch (Exception e) {
@@ -727,17 +823,17 @@ public class SoftwareTrainer extends AbstractTrainer {
      * Contradict means that the model predicts incorrectly a software mention and that this 
      * particular negative example is particularly relevant to correct this model. 
      */
-    public int selectNegativeExample(File negativeCorpusFile, File outputXMLFile) {
+    public int selectNegativeExamples(File negativeCorpusFile, File outputXMLFile) {
         int totalExamples = 0;
         Writer writer = null;
-        SoftwareParser parser = SoftwareParser.getInstance(this.conf);
         try {
-            
-            System.out.println("negative corpus path: " + negativeCorpusFile.getPath());
+            System.out.println("Negative corpus path: " + negativeCorpusFile.getPath());
             System.out.println("selection corpus path: " + outputXMLFile.getPath());
 
             // the file for writing the training data
             writer = new OutputStreamWriter(new FileOutputStream(outputXMLFile), "UTF8");
+
+            SoftwareParser parser = SoftwareParser.getInstance(this.conf);
 
             if (!negativeCorpusFile.exists()) {
                 System.out.println("The XML TEI negative corpus does not exist: " + negativeCorpusFile.getPath());
@@ -757,20 +853,28 @@ public class SoftwareTrainer extends AbstractTrainer {
                     String text = XMLUtilities.getText(paragraphElement);
 
                     // run the mention recognizer and check if we have annotations
-                    List<SoftwareEntity> entities = parser.processText(text, true);
+                    List<SoftwareEntity> entities = parser.processText(text, false);
+if (entities.size() != 0)
+    System.out.println("found: " + entities.size() + " entities");
 
                     if (entities == null || entities.size() == 0) {
                         toRemove.add(new Integer(i));
                     }
                 }
 
-                for(Integer i : toRemove) {
+                totalExamples = pList.getLength() - toRemove.size();
+
+                for(int j=toRemove.size()-1; j>0; j--) {
                     // remove the specific node
-                    Node element = pList.item(i);
-                    element.getParentNode().removeChild(element);
+                    Node element = pList.item(toRemove.get(j));
+                    if (element == null) {
+                        System.out.println("Warning: null element at " + toRemove.get(j));
+                        continue;
+                    }
+                    if (element.getParentNode() != null)
+                        element.getParentNode().removeChild(element);
                 }
 
-                totalExamples = pList.getLength() - toRemove.size();
                 writer.write(serialize(document, null));
             }
         } catch (Exception e) {
@@ -792,11 +896,11 @@ public class SoftwareTrainer extends AbstractTrainer {
      * manner. 
      * @param max   maximum of negative examples to select
      */
-    public int randomNegativeExample(File negativeCorpusFile, double max, File outputXMLFile) {
+    public int randomNegativeExamples(File negativeCorpusFile, double max, File outputXMLFile) {
         int totalExamples = 0;
         Writer writer = null;
         try {
-            System.out.println("negative corpus path: " + negativeCorpusFile.getPath());
+            System.out.println("Negative corpus path: " + negativeCorpusFile.getPath());
             System.out.println("selection corpus path: " + outputXMLFile.getPath());
 
             // the file for writing the training data
@@ -812,19 +916,21 @@ public class SoftwareTrainer extends AbstractTrainer {
                 org.w3c.dom.Document document = builder.parse(new InputSource(new StringReader(tei)));
 
                 NodeList pList = document.getElementsByTagName("p");
-
                 int totalMaxExamples = pList.getLength();
                 int rate = 1;
                 if (max < totalMaxExamples) {
-                    rate = (int)(totalMaxExamples % max);
+                    rate = (int)(totalMaxExamples / max);
                 }
-
                 // list of index of nodes to remove
                 List<Integer> toRemove = new ArrayList<Integer>();
 
                 int rank = 0;
                 int totalAdded = 0;
                 for (int i = 0; i < pList.getLength(); i++) {
+                    if (totalAdded >= max) {
+                        toRemove.add(new Integer(i));
+                        continue;
+                    }
                     if (rank == rate) {
                         rank = 0;
                         totalAdded++;
@@ -832,17 +938,21 @@ public class SoftwareTrainer extends AbstractTrainer {
                         toRemove.add(new Integer(i));
                     }
                     rank++;
-                    if (totalAdded >= max)
-                        break;
-                }
-
-                for(Integer i : toRemove) {
-                    // remove the specific node
-                    Node element = pList.item(i);
-                    element.getParentNode().removeChild(element);
                 }
 
                 totalExamples = pList.getLength() - toRemove.size();
+
+                for(int j=toRemove.size()-1; j>0; j--) {
+                    // remove the specific node
+                    Node element = pList.item(toRemove.get(j));
+                    if (element == null) {
+                        System.out.println("Warning: null element at " + toRemove.get(j));
+                        continue;
+                    }
+                    if (element.getParentNode() != null)
+                        element.getParentNode().removeChild(element);
+                }
+
                 writer.write(serialize(document, null));
             }
         } catch (Exception e) {

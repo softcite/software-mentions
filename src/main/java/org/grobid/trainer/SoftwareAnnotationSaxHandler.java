@@ -61,7 +61,7 @@ public class SoftwareAnnotationSaxHandler extends DefaultHandler {
                	writeData(qName);
                 currentTag = "<other>";
 			} else if (qName.equals("p") || qName.equals("paragraph")) {
-                // let's consider a new CRF input per paragraph too
+                // let's consider a new sequence per paragraph too
                 writeData(qName);
                 //labeled.add(new Pair("\n", null));
                 allLabeled.add(labeled);
