@@ -54,6 +54,7 @@ import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.utilities.GrobidPropertyKeys;
 import org.grobid.core.engines.tagging.GrobidCRFEngine;
 
+import me.tongfei.progressbar.*;
 
 /**
  * Training of the software entity recognition model
@@ -848,17 +849,23 @@ public class SoftwareTrainer extends AbstractTrainer {
                 List<Integer> toRemove = new ArrayList<Integer>();
 
                 NodeList pList = document.getElementsByTagName("p");
-                for (int i = 0; i < pList.getLength(); i++) {
-                    Element paragraphElement = (Element) pList.item(i);
-                    String text = XMLUtilities.getText(paragraphElement);
 
-                    // run the mention recognizer and check if we have annotations
-                    List<SoftwareEntity> entities = parser.processText(text, false);
-if (entities.size() != 0)
-    System.out.println("found: " + entities.size() + " entities");
+                try (ProgressBar pb = new ProgressBar("negative sampling", pList.getLength())) {
+                    for (int i = 0; i < pList.getLength(); i++) {
+                        Element paragraphElement = (Element) pList.item(i);
+                        String text = XMLUtilities.getText(paragraphElement);
+                        if (text == null || text.trim().length() == 0) {
+                            toRemove.add(new Integer(i));
+                            pb.step();
+                            continue;
+                        }
 
-                    if (entities == null || entities.size() == 0) {
-                        toRemove.add(new Integer(i));
+                        // run the mention recognizer and check if we have annotations
+                        List<SoftwareEntity> entities = parser.processText(text, false);
+                        if (entities == null || entities.size() == 0) {
+                            toRemove.add(new Integer(i));
+                        }
+                        pb.step();
                     }
                 }
 

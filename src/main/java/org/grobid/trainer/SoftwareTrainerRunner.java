@@ -3,6 +3,8 @@ package org.grobid.trainer;
 import org.grobid.core.main.GrobidHomeFinder;
 import org.grobid.core.utilities.SoftwareConfiguration;
 import org.grobid.core.utilities.GrobidProperties;
+import org.grobid.core.utilities.GrobidPropertyKeys;
+import org.grobid.core.main.LibraryLoader;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
@@ -89,6 +91,12 @@ public class SoftwareTrainerRunner {
         }
         System.out.println("path2GbdHome=" + path2GbdHome);
         initProcess(path2GbdHome);
+
+        if (conf != null &&
+            conf.getEngine() != null && 
+            conf.getEngine().equals("delft"))
+            GrobidProperties.setPropertyValue(GrobidPropertyKeys.PROP_GROBID_CRF_ENGINE + ".software", "delft");
+        LibraryLoader.load();
 
         Double split = 0.0;
         boolean breakParams = false;
