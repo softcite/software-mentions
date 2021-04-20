@@ -121,7 +121,7 @@ public class SoftwareTrainer extends AbstractTrainer {
                                final File evalOutputPath,
                                double splitRatio,
                                boolean splitRandom) {
-        return createCRFPPData(corpusDir, trainingOutputPath, evalOutputPath, splitRatio, true, 2);
+        return createCRFPPData(corpusDir, trainingOutputPath, evalOutputPath, splitRatio, true, 1);
     }
 
 
@@ -249,7 +249,7 @@ public class SoftwareTrainer extends AbstractTrainer {
                     File outputXMLFile =  new File(absolutePath);
 
                     if (negativeMode == 1) {
-                        addedNegative = randomNegativeExamples(negativeCorpusFile, 2000, outputXMLFile);
+                        addedNegative = randomNegativeExamples(negativeCorpusFile, 2200, outputXMLFile);
                     } else if (negativeMode == 2) {
                         addedNegative = selectNegativeExamples(negativeCorpusFile, outputXMLFile);
                     }
@@ -913,6 +913,8 @@ public class SoftwareTrainer extends AbstractTrainer {
             // the file for writing the training data
             writer = new OutputStreamWriter(new FileOutputStream(outputXMLFile), "UTF8");
 
+            SoftwareParser parser = SoftwareParser.getInstance(this.conf);
+
             if (!negativeCorpusFile.exists()) {
                 System.out.println("The XML TEI negative corpus does not exist: " + negativeCorpusFile.getPath());
             } else {
@@ -926,25 +928,47 @@ public class SoftwareTrainer extends AbstractTrainer {
                 int totalMaxExamples = pList.getLength();
                 int rate = 1;
                 if (max < totalMaxExamples) {
-                    rate = (int)(totalMaxExamples / max);
+                    rate = (int)(totalMaxExamples / max) - 1;
                 }
                 // list of index of nodes to remove
                 List<Integer> toRemove = new ArrayList<Integer>();
 
                 int rank = 0;
                 int totalAdded = 0;
-                for (int i = 0; i < pList.getLength(); i++) {
-                    if (totalAdded >= max) {
-                        toRemove.add(new Integer(i));
-                        continue;
+                try (ProgressBar pb = new ProgressBar("negative sampling", pList.getLength())) {
+                    for (int i = 0; i < pList.getLength(); i++) {
+                        if (totalAdded >= max) {
+                            toRemove.add(new Integer(i));
+                            pb.step();
+                            continue;
+                        }
+
+                        // we want to exclude examples from the model-selected set
+                        Element paragraphElement = (Element) pList.item(i);
+                        String text = XMLUtilities.getText(paragraphElement);
+                        if (text == null || text.trim().length() == 0) {
+                            toRemove.add(new Integer(i));
+                            pb.step();
+                            continue;
+                        }
+
+                        // run the mention recognizer and check if we have annotations
+                        List<SoftwareEntity> entities = parser.processText(text, false);
+                        if (entities != null && entities.size() > 0) {
+                            toRemove.add(new Integer(i));
+                            pb.step();
+                            continue;
+                        }
+
+                        if (rank == rate) {
+                            rank = 0;
+                            totalAdded++;
+                        } else {
+                            toRemove.add(new Integer(i));
+                        }
+                        rank++;
+                        pb.step();
                     }
-                    if (rank == rate) {
-                        rank = 0;
-                        totalAdded++;
-                    } else {
-                        toRemove.add(new Integer(i));
-                    }
-                    rank++;
                 }
 
                 totalExamples = pList.getLength() - toRemove.size();
