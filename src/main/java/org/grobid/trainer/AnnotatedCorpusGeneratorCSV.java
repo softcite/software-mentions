@@ -342,7 +342,7 @@ public class AnnotatedCorpusGeneratorCSV {
 
                     BiblioItem resHeader = new BiblioItem();
                     try {
-                        resHeader.generalResultMapping(doc, labeledResult, tokenizationHeader);
+                        resHeader.generalResultMapping(labeledResult, tokenizationHeader);
                     } catch(Exception e) {
                         e.printStackTrace();
                     }
