@@ -412,7 +412,7 @@ The source of training data is the [softcite dataset](https://github.com/howison
 The path to the PDF repo is the path where the PDF corresponding to the annotated document will be downloaded (done only the first time). For instance:
 
 ```console
-> ./gradlew annotated_corpus_generator_csv -Ppdf=/home/lopez/repository/softcite-dataset/pdf/ -Pcsv=/home/lopez/tools/softcite-dataset/data/csv_dataset/ -Poutput=resources/dataset/software/corpus/
+> ./gradlew annotated_corpus_generator_csv -Ppdf=/media/lopez/T5/softcite-dataset-local-pdf/pdf/ -Pcsv=/home/lopez/tools/softcite-dataset/data/csv_dataset/ -Poutput=resources/dataset/software/corpus/
 ```
 
 The compiled XML training files will be written in the standard GROBID training path for the softwate recognition model under `grobid/software-mentions/resources/dataset/software/corpus/`.
