@@ -17,6 +17,9 @@ import xml
 import regex as re
 from xml.sax import make_parser, handler
 from collections import OrderedDict
+import pysbd
+
+segmenter = pysbd.Segmenter(language='en')
 
 # software recognizer analyzer regex
 DELIMITERS = " \n\r\t(（[ ^%‰°•*,:;?.!/)）-–−‐«»„=≈<>+~\"“”‘’'`$®]*\u2666\u2665\u2663\u2660\u00A0";
@@ -27,6 +30,9 @@ class TEIContentHandler(xml.sax.ContentHandler):
     # working variables
     accumulated = ''
     current_annotation_type = None
+    has_annotation = False
+    open_paragraph = False
+    paragraph_content = ''
 
     def __init__(self):
         xml.sax.ContentHandler.__init__(self)
@@ -35,21 +41,51 @@ class TEIContentHandler(xml.sax.ContentHandler):
 
     def startElement(self, name, attrs):
         if self.accumulated != '' and name in ["ref", "rs"]:
-            tokens = _tokenize(self.accumulated )
+            tokens = _tokenize(self.accumulated)
             self.stats['total_tokens'] += len(tokens)
 
-            if name == 'rs':
-                if attrs.getLength() != 0:
-                    if attrs.getValue("type") != None and len(attrs.getValue("type"))>0:
-                        self.current_annotation_type = attrs.getValue("type")
-                        
+            if self.open_paragraph:
+                self.paragraph_content += self.accumulated
+
+        if name == 'rs':
+            if attrs.getLength() != 0:
+                if attrs.getValue("type") != None and len(attrs.getValue("type"))>0:
+                    self.current_annotation_type = attrs.getValue("type")
+        
+        if name == "p":
+            self.has_annotation = False
+            self.open_paragraph = True
+            self.paragraph_content = ''
+
         self.accumulated = ''
 
     def endElement(self, name):
-        if name in ["head", "p", "note", "figDesc", "abstract", "ref"]:
+        if name in ["head", "note", "figDesc", "abstract", "ref", "p"]:
             tokens = _tokenize(self.accumulated)
             self.stats['total_tokens'] += len(tokens)
-        elif name == "rs":
+            #sentences = segmenter.segment(self.accumulated)
+            #self.stats['total_sentences'] += len(sentences)
+        
+        #if name in ["head"]:
+        #    self.stats['total_sentences'] += 1
+
+        if name == "p":
+            self.stats['total_paragraphs'] += 1
+            
+            if len(tokens) > 1:
+                sentences = segmenter.segment(self.paragraph_content + self.accumulated)
+                self.stats['total_sentences'] += len(sentences)
+
+            if self.has_annotation:
+                self.stats['total_paragraphs_with_annotation'] += 1
+                # to fix, which sentences have annotations?
+                #self.stats['total_sentences_with_annotation'] += 1
+
+            self.has_annotation = False
+            self.open_paragraph = False
+            self.paragraph_content = ''
+
+        if name == "rs":
             self.stats['total_annotations'] += 1
             tokens = _tokenize(self.accumulated)
             # annotation type
@@ -57,16 +93,24 @@ class TEIContentHandler(xml.sax.ContentHandler):
                 if self.current_annotation_type == 'software':
                     self.stats['total_software_names'] += 1
                     self.stats['total_software_tokens'] += len(tokens)
+                    self.has_annotation = True
                 elif self.current_annotation_type == 'version':
                     self.stats['total_versions'] += 1
                     self.stats['total_versions_tokens'] += len(tokens)
+                    self.has_annotation = True
                 elif self.current_annotation_type == 'url':
                     self.stats['total_urls'] += 1
                     self.stats['total_urls_tokens'] += len(tokens)
+                    self.has_annotation = True
                 elif self.current_annotation_type == 'publisher' or self.current_annotation_type == 'creator':
                     self.stats['total_publishers'] += 1
                     self.stats['total_publishers_tokens'] += len(tokens)
+                    self.has_annotation = True
                 self.current_annotation_type = None
+
+        if name == "rs" or name == "ref":
+            if self.open_paragraph:
+                self.paragraph_content += self.accumulated
         self.accumulated = ''
 
     def characters(self, content):
@@ -106,12 +150,15 @@ def count_analysis_tei_corpus(tei_corpus_path):
             merge_stats(global_stats, local_stats)
 
     # report
+    print("\n")
     for field in global_stats:
         print(field, ":", str(global_stats[field]))
     total_annotation_token = global_stats['total_software_tokens'] + global_stats['total_versions_tokens'] + \
                              global_stats['total_urls_tokens'] + global_stats['total_publishers_tokens']
 
     print("total annotation tokens:", str(total_annotation_token))
+
+    print("\npercentage paragraphs with annotation / total paragraph:", _round(100*global_stats['total_paragraphs_with_annotation']/global_stats['total_paragraphs'],4))
 
     print("\npercentage annotation tokens / total tokens:", _round(100*total_annotation_token/global_stats['total_tokens'],4))
     print("percentage software tokens / total tokens:", _round(100*global_stats['total_software_tokens']/global_stats['total_tokens'],4))
@@ -122,6 +169,10 @@ def count_analysis_tei_corpus(tei_corpus_path):
 def init_stats():
     stats = OrderedDict()
     stats['total_document'] = 0 
+    stats['total_paragraphs'] = 0 
+    stats['total_paragraphs_with_annotation'] = 0 
+    stats['total_sentences'] = 0
+    #stats['total_sentences_with_annotation'] = 0
     stats['total_tokens'] = 0 
     stats['total_annotations'] = 0 
     stats['total_software_names'] = 0 
