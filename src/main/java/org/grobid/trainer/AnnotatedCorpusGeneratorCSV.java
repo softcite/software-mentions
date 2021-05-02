@@ -1367,8 +1367,12 @@ System.out.print("\n");*/
 
             if (clusterLabel.equals(TaggingLabels.PARAGRAPH)) {
                 List<LayoutToken> localTokens = cluster.concatTokens();
-                if ( (localTokens.size() == 0) || inlineAnnotations == null || (inlineAnnotations.size()==0) )
+                //if ( (localTokens.size() == 0) || inlineAnnotations == null || (inlineAnnotations.size()==0) )
+                //    continue;
+
+                if (localTokens.size() == 0) 
                     continue;
+
                 int pos = 0;
                 int offsetFirstToken = localTokens.get(0).getOffset();
                 int offsetLastToken = localTokens.get(localTokens.size()-1).getOffset();;
@@ -1376,6 +1380,8 @@ System.out.print("\n");*/
                     curParagraph = teiElement("p");
                     allParagraphs.add(curParagraph);
                 }
+                //if ( (localTokens.size() == 0) || inlineAnnotations == null || (inlineAnnotations.size()==0) )
+                //    continue;
                 if (isAnnotatedCluster(cluster.concatTokens(), inlineAnnotations, toExclude, doc.getTokenizations())) {
                     for (Annotation annotation : inlineAnnotations) {
                         OffsetPosition position = annotation.getOccurence();
@@ -1490,7 +1496,7 @@ System.out.print("\n");*/
             String localText = paragraph.getValue();
             List<String> localTokens = GrobidAnalyzer.getInstance().tokenize(localText);
 
-            if (50 < localTokens.size() && localTokens.size() < 400) 
+            if (30 < localTokens.size() && localTokens.size() < 400) 
                 bodyNegative.appendChild(paragraph);
         }
         rootNegative.appendChild(textNodeNegative);
@@ -1508,6 +1514,8 @@ System.out.print("\n");*/
                                        List<Annotation> inlineAnnotations, 
                                        List<Integer> toExclude,
                                        List<LayoutToken> tokenizations) {
+        if (inlineAnnotations == null)
+            return false;
         for (Annotation annotation : inlineAnnotations) {
             //if (annotation.getType() == SoftciteAnnotation.AnnotationType.SOFTWARE && 
             //    annotation.getOccurence() != null) {
