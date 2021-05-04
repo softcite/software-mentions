@@ -1309,7 +1309,7 @@ public class XMLCorpusPostProcessorNoMention {
             nb_articles_with_annotations+"|-|");
     }
 
-    private org.w3c.dom.Document normalizeIdentifiers(org.w3c.dom.Document document) {
+    public org.w3c.dom.Document normalizeIdentifiers(org.w3c.dom.Document document) {
         // for the document-level entries (<TEI>) to be removed from the corpus
         List<org.w3c.dom.Element> toRemove = new ArrayList<>();
 
@@ -1909,7 +1909,7 @@ public class XMLCorpusPostProcessorNoMention {
     /**
      * Map the origin identifier (the identifier used sor the PDF file names) to a stable generated hexa identifier
      */
-    private String orgin2KeyGen(String origin) {
+    public String orgin2KeyGen(String origin) {
         if (this.orgin2Key == null) {
             this.orgin2Key = new TreeMap<>();
             // load the map from the csv id file

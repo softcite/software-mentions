@@ -60,6 +60,9 @@ import java.util.regex.Pattern;
 import nu.xom.*;
 import static org.grobid.core.document.xml.XmlBuilderUtils.teiElement;
 import org.apache.commons.lang3.StringUtils;
+import org.xml.sax.InputSource;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.DocumentBuilder;
 
 import com.fasterxml.jackson.core.io.JsonStringEncoder;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -677,7 +680,23 @@ public class AnnotatedCorpusGeneratorCSV {
         writerTEICorpus.close();
 
         Writer writerTEINegativeCorpus = new PrintWriter(new BufferedWriter(new FileWriter("doc/reports/all.negative.tei.xml")));
-        writerTEINegativeCorpus.write(XMLUtilities.toPrettyString(builderTEINegativeCorpus.toString(), 4));
+
+        // the negative corpus needs some normalization of the identifiers to be actually usable
+        String teiNegative = XMLUtilities.toPrettyString(builderTEINegativeCorpus.toString(), 4);
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        try {
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            org.w3c.dom.Document documentNegative = builder.parse(new InputSource(new StringReader(teiNegative)));
+
+            // normalize document-level identifiers with uniform random hexa keys 
+            // and remove invalid/training docs
+            XMLCorpusPostProcessorNoMention postProcessorNoMention = new XMLCorpusPostProcessorNoMention(this.configuration);
+            documentNegative = postProcessorNoMention.normalizeIdentifiers(documentNegative);
+
+            writerTEINegativeCorpus.write(XMLUtilities.serialize(documentNegative, null));
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
         writerTEINegativeCorpus.close();
 
         // computing and reporting cross-agreement for the loaded set
@@ -1345,6 +1364,11 @@ System.out.print("\n");*/
         // with or without software annotations and simplify all other aspects
 
         TaggingLabel lastClusterLabel = null;
+
+        if (layoutTokenization == null) {
+            // nothing can be done, GROBID has initially failed
+            return;
+        }
 
         List<LayoutToken> tokenizations = layoutTokenization.getTokenization();
         TaggingTokenClusteror clusteror = new TaggingTokenClusteror(GrobidModels.FULLTEXT, reseFullText, tokenizations);
