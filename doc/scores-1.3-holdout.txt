@@ -1,0 +1,175 @@
+Scores against **complete holdout set** (realistic in term of positive/negative class distribution)
+
+
+* CRF - trained on only positive paragraphs (no negative sampling) 
+2021-05-05
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1           support
+
+<creator>            94.31        37.3         76.56        50.16        209    
+<software>           76.49        26.99        58.36        36.91        658    
+<url>                97.76        17.39        68.57        27.75        35     
+<version>            95.33        46.7         84.98        60.27        233    
+
+all (micro avg.)     90.97        31.73        67.49        43.17        1135   
+all (macro avg.)     90.97        32.09        72.12        43.77        1135   
+
+===== Instance-level results =====
+
+Total expected instances:   33516
+Correct instances:          32303
+Instance-level recall:      96.38
+
+
+
+* CRF - trained with random negative paragraphs (random oversampling) ratio 1
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1           support
+
+<creator>            94.85        44.82        76.56        56.54        209    
+<software>           76.75        31.26        57.29        40.45        658    
+<url>                98.37        26.37        68.57        38.1         35     
+<version>            96.08        56.65        84.12        67.7         233    
+
+all (micro avg.)     91.51        37.85        66.7         48.29        1135   
+all (macro avg.)     91.51        39.77        71.64        50.7         1135   
+
+===== Instance-level results =====
+
+Total expected instances:   33516
+Correct instances:          32609
+Instance-level recall:      97.29
+
+
+
+* CRF - trained with random negative paragraphs (random oversampling) ratio 2
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1           support
+
+<creator>            94.96        46.51        76.56        57.87        209    
+<software>           77.27        32.9         57.29        41.8         658    
+<url>                98.35        26.97        68.57        38.71        35     
+<version>            96           56.82        85.84        68.38        233    
+
+all (micro avg.)     91.65        39.41        67.05        49.64        1135   
+all (macro avg.)     91.65        40.8         72.06        51.69        1135   
+
+===== Instance-level results =====
+
+Total expected instances:   33516
+Correct instances:          32674
+Instance-level recall:      97.49
+
+
+* CRF - trained with random negative paragraphs (random oversampling) ratio 5
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1           support
+
+<creator>            94.65        49.85        77.03        60.53        209    
+<software>           79.8         42.25        55.93        48.14        658    
+<url>                98.52        31.75        57.14        40.82        35     
+<version>            96.05        62.26        84.98        71.87        233    
+
+all (micro avg.)     92.25        47.43        65.81        55.13        1135   
+all (macro avg.)     92.25        46.53        68.77        55.34        1135   
+
+===== Instance-level results =====
+
+Total expected instances:   33516
+Correct instances:          32832
+Instance-level recall:      97.96
+
+
+
+
+
+
+
+
+* CRF - trained with model-selected negative paragraphs (active oversampling) 
+
+
+
+
+
+
+
+
+* bidLSTM-CRF - trained on only positive paragraphs (no negative sampling) , eval complete holdout
+2021-05-05
+
+Evaluation:
+    f1 (micro): 39.62
+                  precision    recall  f1-score   support
+
+       <creator>     0.4052    0.8278    0.5440       209
+      <software>     0.2064    0.6824    0.3170       658
+           <url>     0.1515    0.5714    0.2395        35
+       <version>     0.4839    0.9056    0.6308       233
+
+all (micro avg.)     0.2691    0.7515    0.3963      1135
+
+
+
+
+* bidLSTM-CRF_FEATURES - trained on only positive paragraphs (no negative sampling) , eval complete holdout
+2021-05-05
+
+Evaluation:
+    f1 (micro): 43.31
+                  precision    recall  f1-score   support
+
+       <creator>     0.4930    0.8421    0.6219       209
+      <software>     0.2269    0.7325    0.3465       658
+           <url>     0.1481    0.5714    0.2353        35
+       <version>     0.5815    0.9185    0.7121       233
+
+all (micro avg.)     0.2989    0.7859    0.4331      1135
+
+
+
+
+* BERT-base-en - trained on only positive paragraphs (no negative sampling) , eval complete holdout
+2021-05-05
+    f1 (micro): 29.48
+
+                  precision    recall  f1-score   support
+
+       <creator>     0.3347    0.7799    0.4684       209
+      <software>     0.1498    0.7264    0.2484       658
+           <url>     0.0417    0.6000    0.0781        35
+       <version>     0.3783    0.8541    0.5244       233
+
+all (micro avg.)     0.1830    0.7586    0.2948      1135
+
+Evaluation runtime: 1822.614 seconds 
+
+
+
+
+* SciBERT-CRF - trained on only positive paragraphs (no negative sampling) 
+2021-05-05
+
+Evaluation:
+                  precision    recall  f1-score   support
+
+       <creator>     0.4133    0.8325    0.5524       209
+      <software>     0.2421    0.8055    0.3723       658
+           <url>     0.2411    0.7714    0.3673        35
+       <version>     0.5596    0.9270    0.6979       233
+
+all (micro avg.)     0.3047    0.8344    0.4464      1135
+
+
+Evaluation runtime: 1794.894 seconds 
+
+
+

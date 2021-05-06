@@ -166,11 +166,20 @@ public class SoftwareTrainer extends AbstractTrainer {
             // get a factory for SAX parser
             SAXParserFactory spf = SAXParserFactory.newInstance();
             SoftwareAnnotationSaxHandler handler = new SoftwareAnnotationSaxHandler();
-
-            //final String corpus_file_name = "all_clean_post_processed.tei.xml";
-            final String corpus_file_name = "softcite_corpus-full.tei.xml";
+            
+            // train and split / 10-fold cross evaluation
+            //final String corpus_file_name = "softcite_corpus-full.tei.xml";
+            
+            // cross domain eval
             //final String corpus_file_name = "softcite_corpus_pmc.tei.xml";
             //final String corpus_file_name = "softcite_corpus_econ.tei.xml";
+
+            // train fixed, no negative - optional negative sampling following negative mode
+            final String corpus_file_name = "softcite_corpus-full.working.tei.xml";
+            
+            // eval holdout
+            //final String corpus_file_name = "softcite_corpus-full.holdout-complete.tei.xml";
+            //final String corpus_file_name = "softcite_corpus-full.holdout.tei.xml";
 
             File thefile = new File(corpusDir.getPath() + File.separator + corpus_file_name);
             if (!thefile.exists()) {
@@ -232,8 +241,8 @@ public class SoftwareTrainer extends AbstractTrainer {
 
                 totalExamples = n;
 
-                // inject negative examples, depdending on the selected mode
-                final String negative_corpus_file_name = "all.negative.tei.xml";
+                // inject negative examples, depending on the selected mode
+                final String negative_corpus_file_name = "softcite.all.negative.working.tei.xml";
                 
                 String relativePath = corpusDir.getPath() + File.separator + negative_corpus_file_name;
                 String absolutePath = FileSystems.getDefault().getPath(relativePath).normalize().toAbsolutePath().toString();
@@ -248,8 +257,10 @@ public class SoftwareTrainer extends AbstractTrainer {
                     absolutePath = FileSystems.getDefault().getPath(relativePath).normalize().toAbsolutePath().toString();
                     File outputXMLFile =  new File(absolutePath);
 
+                    // negativeMode is 0 -> do nothing special
+
                     if (negativeMode == 1) {
-                        addedNegative = randomNegativeExamples(negativeCorpusFile, 2200, outputXMLFile);
+                        addedNegative = randomNegativeExamples(negativeCorpusFile, 20000, outputXMLFile);
                     } else if (negativeMode == 2) {
                         addedNegative = selectNegativeExamples(negativeCorpusFile, outputXMLFile);
                     }
@@ -850,7 +861,7 @@ public class SoftwareTrainer extends AbstractTrainer {
 
                 NodeList pList = document.getElementsByTagName("p");
 
-                try (ProgressBar pb = new ProgressBar("negative sampling", pList.getLength())) {
+                try (ProgressBar pb = new ProgressBar("active negative sampling", pList.getLength())) {
                     for (int i = 0; i < pList.getLength(); i++) {
                         Element paragraphElement = (Element) pList.item(i);
                         String text = XMLUtilities.getText(paragraphElement);
@@ -935,7 +946,7 @@ public class SoftwareTrainer extends AbstractTrainer {
 
                 int rank = 0;
                 int totalAdded = 0;
-                try (ProgressBar pb = new ProgressBar("negative sampling", pList.getLength())) {
+                try (ProgressBar pb = new ProgressBar("random negative sampling", pList.getLength())) {
                     for (int i = 0; i < pList.getLength(); i++) {
                         if (totalAdded >= max) {
                             toRemove.add(new Integer(i));
