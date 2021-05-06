@@ -100,6 +100,7 @@ def main(data_path, mode):
     sfiles = "" # sfiles is all files in a string variable it serves at line 127
     files = [file_ for file_ in files if file_.endswith(".xml") ]
     for file in files:
+        print(file)
         with open(data_path + os.sep + file, 'r') as file_:
             sfiles = sfiles + ''.join(file_.readlines())
 
@@ -107,7 +108,7 @@ def main(data_path, mode):
         tree = ET.ElementTree()
         tree.parse(data_path+os.sep+file)
         tree = tree.getroot()
-        for d in tree.findall(u"{http://www.tei-c.org/ns/1.0}tei"):
+        for d in tree.findall(u"{http://www.tei-c.org/ns/1.0}TEI"):
             for t in d.findall(u"{http://www.tei-c.org/ns/1.0}text"):
                 for b in t.findall(u"{http://www.tei-c.org/ns/1.0}body"):
                     for p in b.findall(u"{http://www.tei-c.org/ns/1.0}p"):
@@ -115,6 +116,7 @@ def main(data_path, mode):
     
     # the dictionary "ambiguous" contains the text annotation (string) as key and class (list) as values
     dic = {}
+    print("found a total of", str(len(rs)), "annotations")
     for elt in rs:
         # if dic contain the token as key add new value else initialize token with first value
         textContent = elt.text.strip()

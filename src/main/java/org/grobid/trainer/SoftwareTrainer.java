@@ -121,7 +121,7 @@ public class SoftwareTrainer extends AbstractTrainer {
                                final File evalOutputPath,
                                double splitRatio,
                                boolean splitRandom) {
-        return createCRFPPData(corpusDir, trainingOutputPath, evalOutputPath, splitRatio, true, 1);
+        return createCRFPPData(corpusDir, trainingOutputPath, evalOutputPath, splitRatio, true, 0);
     }
 
 
@@ -175,10 +175,10 @@ public class SoftwareTrainer extends AbstractTrainer {
             //final String corpus_file_name = "softcite_corpus_econ.tei.xml";
 
             // train fixed, no negative - optional negative sampling following negative mode
-            final String corpus_file_name = "softcite_corpus-full.working.tei.xml";
+            //final String corpus_file_name = "softcite_corpus-full.working.tei.xml";
             
             // eval holdout
-            //final String corpus_file_name = "softcite_corpus-full.holdout-complete.tei.xml";
+            final String corpus_file_name = "softcite_corpus-full.holdout-complete.tei.xml";
             //final String corpus_file_name = "softcite_corpus-full.holdout.tei.xml";
 
             File thefile = new File(corpusDir.getPath() + File.separator + corpus_file_name);
