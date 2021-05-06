@@ -67,7 +67,7 @@ dependencies {
     compile group: 'net.arnx', name: 'jsonic', version: '1.3.10'
     //compile group: 'org.dkpro.statistics', name: 'dkpro-statistics-agreement', version: '2.2.0-SNAPSHOT'
     compile "me.tongfei:progressbar:0.9.0"
-    
+
     //Logging
     //compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.25'
     //compile 'org.slf4j:slf4j-api:1.7.25'
@@ -216,7 +216,7 @@ task(eval_software, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
     main = 'org.grobid.trainer.SoftwareTrainerRunner'
     classpath = sourceSets.main.runtimeClasspath
     args '1', 'software', getArg('gH', '../grobid-home')
-//    jvmArgs '-Xms2g', '-Xmx8g'
+    jvmArgs '-Xms2g', '-Xmx8g'
 }
 
 // Run like this: ./gradlew eval_software_disambiguation -PgH=/path/grobid/home
