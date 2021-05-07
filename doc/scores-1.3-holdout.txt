@@ -89,6 +89,28 @@ Instance-level recall:      97.96
 
 
 
+* CRF - trained with random negative paragraphs (random oversampling) ratio 10
+
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1           support
+
+<creator>            95.45        60.62        75.12        67.09        209    
+<software>           81.82        52.48        55.38        53.89        650    
+<url>                98.38        33.33        57.14        42.11        35     
+<version>            95.93        65.78        84.98        74.16        233    
+
+all (micro avg.)     92.89        56.28        65.22        60.42        1127   
+all (macro avg.)     92.89        53.05        68.16        59.31        1127   
+
+===== Instance-level results =====
+
+Total expected instances:   33497
+Correct instances:          32977
+Instance-level recall:      98.45
+
+
 
 
 
