@@ -8,19 +8,19 @@ Scores against **complete holdout set** (realistic in term of positive/negative 
 
 label                accuracy     precision    recall       f1           support
 
-<creator>            94.31        37.3         76.56        50.16        209    
-<software>           76.49        26.99        58.36        36.91        658    
-<url>                97.76        17.39        68.57        27.75        35     
-<version>            95.33        46.7         84.98        60.27        233    
+<creator>            94.67        41.45        76.56        53.78        209    
+<software>           76.94        29.18        58.49        38.93        648    
+<url>                97.69        18.18        68.57        28.74        35     
+<version>            95.79        51.85        84.85        64.37        231    
 
-all (micro avg.)     90.97        31.73        67.49        43.17        1135   
-all (macro avg.)     90.97        32.09        72.12        43.77        1135   
+all (micro avg.)     91.27        34.58        67.59        45.75        1123   
+all (macro avg.)     91.27        35.17        72.12        46.46        1123   
 
 ===== Instance-level results =====
 
-Total expected instances:   33516
-Correct instances:          32303
-Instance-level recall:      96.38
+Total expected instances:   33416
+Correct instances:          32293
+Instance-level recall:      96.64
 
 
 
@@ -30,41 +30,40 @@ Instance-level recall:      96.38
 
 label                accuracy     precision    recall       f1           support
 
-<creator>            94.85        44.82        76.56        56.54        209    
-<software>           76.75        31.26        57.29        40.45        658    
-<url>                98.37        26.37        68.57        38.1         35     
-<version>            96.08        56.65        84.12        67.7         233    
+<creator>            95.36        51.12        76.56        61.3         209    
+<software>           77.39        34.5         57.72        43.19        648    
+<url>                98.32        27.91        68.57        39.67        35     
+<version>            96.69        64.36        84.42        73.03        231    
 
-all (micro avg.)     91.51        37.85        66.7         48.29        1135   
-all (macro avg.)     91.51        39.77        71.64        50.7         1135   
+all (micro avg.)     91.94        42.16        67.05        51.77        1123   
+all (macro avg.)     91.94        44.47        71.81        54.3         1123   
 
 ===== Instance-level results =====
 
-Total expected instances:   33516
-Correct instances:          32609
-Instance-level recall:      97.29
+Total expected instances:   33416
+Correct instances:          32599
+Instance-level recall:      97.56
 
 
-
-* CRF - trained with random negative paragraphs (random oversampling) ratio 2
 
 ===== Field-level results =====
 
 label                accuracy     precision    recall       f1           support
 
-<creator>            94.96        46.51        76.56        57.87        209    
-<software>           77.27        32.9         57.29        41.8         658    
-<url>                98.35        26.97        68.57        38.71        35     
-<version>            96           56.82        85.84        68.38        233    
+<creator>            95.48        53.16        76.56        62.75        209    
+<software>           78.02        36.49        57.72        44.71        648    
+<url>                98.31        28.57        68.57        40.34        35     
+<version>            96.55        63.87        85.71        73.2         231    
 
-all (micro avg.)     91.65        39.41        67.05        49.64        1135   
-all (macro avg.)     91.65        40.8         72.06        51.69        1135   
+all (micro avg.)     92.09        43.95        67.32        53.18        1123   
+all (macro avg.)     92.09        45.52        72.14        55.25        1123   
 
 ===== Instance-level results =====
 
-Total expected instances:   33516
-Correct instances:          32674
-Instance-level recall:      97.49
+Total expected instances:   33416
+Correct instances:          32664
+Instance-level recall:      97.75
+
 
 
 * CRF - trained with random negative paragraphs (random oversampling) ratio 5
@@ -73,46 +72,62 @@ Instance-level recall:      97.49
 
 label                accuracy     precision    recall       f1           support
 
-<creator>            94.65        49.85        77.03        60.53        209    
-<software>           79.8         42.25        55.93        48.14        658    
-<url>                98.52        31.75        57.14        40.82        35     
-<version>            96.05        62.26        84.98        71.87        233    
+<creator>            95.23        57.3         77.03        65.71        209    
+<software>           80.99        48.54        56.48        52.21        648    
+<url>                98.5         34.48        57.14        43.01        35     
+<version>            96.74        70.86        85.28        77.41        231    
 
-all (micro avg.)     92.25        47.43        65.81        55.13        1135   
-all (macro avg.)     92.25        46.53        68.77        55.34        1135   
+all (micro avg.)     92.86        54.27        66.25        59.66        1123   
+all (macro avg.)     92.86        52.8         68.98        59.59        1123   
 
 ===== Instance-level results =====
 
-Total expected instances:   33516
-Correct instances:          32832
-Instance-level recall:      97.96
+Total expected instances:   33416
+Correct instances:          32820
+Instance-level recall:      98.22
 
 
 
 * CRF - trained with random negative paragraphs (random oversampling) ratio 10
 
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1           support
+
+<creator>            95.89        67.67        75.12        71.2         209    
+<software>           82.93        60.13        55.4         57.67        648    
+<url>                98.35        35.71        57.14        43.96        35     
+<version>            96.73        74.62        85.28        79.6         231    
+
+all (micro avg.)     93.47        63.79        65.27        64.52        1123   
+all (macro avg.)     93.47        59.54        68.24        63.11        1123   
+
+===== Instance-level results =====
+
+Total expected instances:   33416
+Correct instances:          32968
+Instance-level recall:      98.66
+
+
+* CRF - trained with random negative paragraphs (random oversampling) ratio 15
 
 ===== Field-level results =====
 
 label                accuracy     precision    recall       f1           support
 
-<creator>            95.45        60.62        75.12        67.09        209    
-<software>           81.82        52.48        55.38        53.89        650    
-<url>                98.38        33.33        57.14        42.11        35     
-<version>            95.93        65.78        84.98        74.16        233    
+<creator>            95.93        70.4         75.12        72.69        209    
+<software>           83.7         66.92        53.7         59.59        648    
+<url>                98.31        34.78        45.71        39.51        35     
+<version>            97           79.75        83.55        81.61        231    
 
-all (micro avg.)     92.89        56.28        65.22        60.42        1127   
-all (macro avg.)     92.89        53.05        68.16        59.31        1127   
+all (micro avg.)     93.73        69.25        63.58        66.3         1123   
+all (macro avg.)     93.73        62.97        64.52        63.35        1123   
 
 ===== Instance-level results =====
 
-Total expected instances:   33497
-Correct instances:          32977
-Instance-level recall:      98.45
-
-
-
-
+Total expected instances:   33416
+Correct instances:          33024
+Instance-level recall:      98.83
 
 
 
@@ -129,17 +144,17 @@ Instance-level recall:      98.45
 2021-05-05
 
 Evaluation:
-    f1 (micro): 39.62
+    f1 (micro): 41.88
                   precision    recall  f1-score   support
 
-       <creator>     0.4052    0.8278    0.5440       209
-      <software>     0.2064    0.6824    0.3170       658
-           <url>     0.1515    0.5714    0.2395        35
-       <version>     0.4839    0.9056    0.6308       233
+       <creator>     0.4529    0.8278    0.5854       209
+      <software>     0.2194    0.6852    0.3323       648
+           <url>     0.1667    0.5714    0.2581        35
+       <version>     0.5359    0.9048    0.6731       231
 
-all (micro avg.)     0.2691    0.7515    0.3963      1135
+all (micro avg.)     0.2901    0.7533    0.4189      1123
 
-
+Evaluation runtime: 350.445 seconds
 
 
 * bidLSTM-CRF_FEATURES - trained on only positive paragraphs (no negative sampling) , eval complete holdout
@@ -176,22 +191,53 @@ Evaluation runtime: 1822.614 seconds
 
 
 
+* Bid-LSTM-CRF+ELMo - trained on only positive paragraphs (no negative sampling) 
+2021-05-05
+
+
+Evaluation:
+    f1 (micro): 54.51
+                  precision    recall  f1-score   support
+
+       <creator>     0.7155    0.7943    0.7528       209
+      <software>     0.3556    0.7485    0.4821       648
+           <url>     0.1162    0.8000    0.2029        35
+       <version>     0.7286    0.8831    0.7984       231
+
+all (micro avg.)     0.4171    0.7863    0.5451      1123
+
+
 
 * SciBERT-CRF - trained on only positive paragraphs (no negative sampling) 
 2021-05-05
 
 Evaluation:
+number of alignment issues with test set: 995
                   precision    recall  f1-score   support
 
-       <creator>     0.4133    0.8325    0.5524       209
-      <software>     0.2421    0.8055    0.3723       658
-           <url>     0.2411    0.7714    0.3673        35
-       <version>     0.5596    0.9270    0.6979       233
+       <creator>     0.4414    0.8469    0.5803       209
+      <software>     0.2573    0.8040    0.3898       648
+           <url>     0.2778    0.7143    0.4000        35
+       <version>     0.7172    0.9221    0.8068       231
 
-all (micro avg.)     0.3047    0.8344    0.4464      1135
+all (micro avg.)     0.3327    0.8335    0.4756      1123
+
+Evaluation runtime: 1794.844 seconds 
 
 
-Evaluation runtime: 1794.894 seconds 
+* SciBERT-CRF - random sampling ratio 15 (best ratio)
+2021-05-05
 
+Evaluation:
+number of alignment issues with test set: 990
+                  precision    recall  f1-score   support
 
+       <creator>     0.6811    0.8278    0.7473       209
+      <software>     0.6048    0.7701    0.6775       648
+           <url>     0.4032    0.7143    0.5155        35
+       <version>     0.7536    0.9134    0.8258       231
+
+all (micro avg.)     0.6390    0.8085    0.7138      1123
+
+Evaluation runtime: 1801.454 seconds 
 
