@@ -30,26 +30,6 @@ Instance-level recall:      96.64
 
 label                accuracy     precision    recall       f1           support
 
-<creator>            95.36        51.12        76.56        61.3         209    
-<software>           77.39        34.5         57.72        43.19        648    
-<url>                98.32        27.91        68.57        39.67        35     
-<version>            96.69        64.36        84.42        73.03        231    
-
-all (micro avg.)     91.94        42.16        67.05        51.77        1123   
-all (macro avg.)     91.94        44.47        71.81        54.3         1123   
-
-===== Instance-level results =====
-
-Total expected instances:   33416
-Correct instances:          32599
-Instance-level recall:      97.56
-
-
-
-===== Field-level results =====
-
-label                accuracy     precision    recall       f1           support
-
 <creator>            95.48        53.16        76.56        62.75        209    
 <software>           78.02        36.49        57.72        44.71        648    
 <url>                98.31        28.57        68.57        40.34        35     
@@ -157,6 +137,8 @@ all (micro avg.)     0.2901    0.7533    0.4189      1123
 Evaluation runtime: 350.445 seconds
 
 
+
+
 * bidLSTM-CRF_FEATURES - trained on only positive paragraphs (no negative sampling) , eval complete holdout
 2021-05-05
 
@@ -191,6 +173,8 @@ Evaluation runtime: 1822.614 seconds
 
 
 
+
+
 * Bid-LSTM-CRF+ELMo - trained on only positive paragraphs (no negative sampling) 
 2021-05-05
 
@@ -205,6 +189,8 @@ Evaluation:
        <version>     0.7286    0.8831    0.7984       231
 
 all (micro avg.)     0.4171    0.7863    0.5451      1123
+
+
 
 
 
@@ -240,4 +226,22 @@ number of alignment issues with test set: 990
 all (micro avg.)     0.6390    0.8085    0.7138      1123
 
 Evaluation runtime: 1801.454 seconds 
+
+
+* SciBERT-CRF - active sampling ratio 15 (best ratio)
+2021-05-05
+
+Evaluation:
+number of alignment issues with test set: 999
+                  precision    recall  f1-score   support
+
+       <creator>     0.7555    0.8278    0.7900       209
+      <software>     0.6931    0.7284    0.7103       648
+           <url>     0.4528    0.6857    0.5455        35
+       <version>     0.8024    0.8788    0.8388       231
+
+all (micro avg.)     0.7171    0.7765    0.7456      1123
+
+Evaluation runtime: 1790.766 seconds 
+
 
