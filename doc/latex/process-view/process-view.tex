@@ -8,38 +8,53 @@
 \pagestyle{empty}
 
 
+
+
+\begin{figure*}[!htbp]
+\begin{center}
+
 % Define block styles
 \tikzstyle{block} = [rectangle, draw, fill={rgb:red,1;green,2;blue,3}, text width=5em, text=white, text centered, rounded corners, minimum height=2em]
 \tikzstyle{block_large} = [rectangle, draw, fill={rgb:red,1;green,2;blue,3}, text width=10em, text=white, text centered, rounded corners, minimum height=2em]
 \tikzstyle{block_very_large} = [rectangle, draw, fill={rgb:red,1;green,2;blue,3}, text width=15em, text=white, text centered, rounded corners, minimum height=2em]
 \tikzstyle{line} = [draw, -latex']
-\tikzstyle{cloud} = [draw, ellipse,fill=orange!20, node distance=2cm,
-    minimum height=2em]
-    
+\tikzstyle{cloud} = [draw, ellipse, fill=orange!20, node distance=2cm, minimum height=2em, text centered]
+\tikzstyle{cloud_final} = [draw, ellipse, double,
+                          double distance=1mm, fill=orange!20, text=black, node distance=2cm, minimum height=2em, text width=8em, text centered]
+ 
 \begin{tikzpicture}[node distance = 1.5cm, auto]
     % Place nodes
-    \node [cloud] (pdf) {Open Access PDF};
-    \node [block, below of=pdf] (grobid) {\bf GROBID};  
-%    \node [cloud, right of=init] (system) {system};
-    \node [cloud, below of=grobid, left of=grobid, node distance=3cm] (structures) {text structures};
-    \node [cloud, below of=grobid, right of=grobid, node distance=3cm] (references) {bibliographical references};
-    \node [block_very_large, below of=structures] (recognition) {\bf software mention recognition};
-    \node [cloud, below of=recognition] (candidates) {software entitity candidates};
-    \node [block_very_large, below of=candidates] (disambiguation) {\bf in context entity disambiguation (entity-fishing)};
-    \node [block_large, below of=disambiguation] (filtering) {\bf entity filtering};
+    \node [block_large] (harvester) {\bf full text harvester};
+    \node [cloud, below of=harvester, below=-1.5cm, left of=harvester, node distance=3cm] (pdf) {PDF};
+    \node [cloud, below of=harvester, below=-1.5cm, right of=harvester, node distance=3cm] (xml) {XML};
+    \node [block, below of=pdf, below=-0.7cm] (pdfalto) {\bf pdfalto};  
+    \node [block, below of=pdfalto, below=-0.9cm] (grobid) {\bf GROBID};  
+    \node [block, below of=xml] (pub2tei) {Pub2TEI};
+    \node [cloud, below of=grobid, below=-1.3cm] (structures) {structured document};
+    \node [cloud, below of=pub2tei, below=-0.8cm, node distance=2cm] (references) {parsed biblio. references};
+    \node [block_very_large, below of=structures, below=-0.7cm] (recognition) {\bf software mention recognition};
+    \node [block_large, below of=recognition, below=-0.9cm] (usage) {\bf usage detection};
+    \node [cloud, below of=usage, below=-1.2cm] (candidates) {software entitity candidates};
+    \node [block_very_large, below of=candidates, below=-0.7cm] (disambiguation) {\bf in context entity disambiguation (entity-fishing)};
+    \node [block_large, below of=disambiguation, below=-0.7cm] (filtering) {\bf entity filtering};
     \node [cloud, right of=filtering, node distance=6cm] (attachment) {attached references};
-    \node [block_large, below of=attachment] (glutton) {\bf biblio-glutton};
-    \node [cloud, below of=glutton] (disam_ref) {disambiguated references};
-    \node [cloud, left of=disam_ref, node distance=6cm] (full) {full software entities};
-    \node [block_very_large, below of=full] (populating) {\bf knowledge base populating};
-    \node [block_very_large, below of=populating] (dedup) {\bf deduplication \& matching};
+    \node [block_large, below of=attachment, below=-0.6cm] (glutton) {\bf biblio-glutton};
+    \node [cloud, below of=glutton, below=-1.1cm] (disam_ref) {disambiguated references};
+    \node [cloud_final, left of=disam_ref, node distance=6cm] (full) {\bf aggregated software entities};
     
     % Draw edges
-    \path [line] (pdf) -- (grobid);
+    \path [line] (harvester) -- (pdf);
+    \path [line] (harvester) -- (xml);
+    \path [line] (pdf) -- (pdfalto);
+    \path [line] (pdfalto) -- (grobid);
+    \path [line] (xml) -- (pub2tei);
     \path [line] (grobid) -- (structures);
     \path [line] (grobid) -- (references);
+    \path [line] (pub2tei) -- (structures);
+    \path [line] (pub2tei) -- (references);
     \path [line] (structures) -- (recognition);
-    \path [line] (recognition) -- (candidates);
+    \path [line] (recognition) -- (usage);
+    \path [line] (usage) -- (candidates);
     \path [line] (candidates) -- (disambiguation);
     \path [line] (disambiguation) -- (filtering);
     \path [line] (references) -- (attachment);
@@ -48,9 +63,11 @@
     \path [line] (glutton) -- (disam_ref);
     \path [line] (disam_ref) -- (full);
     \path [line] (filtering) -- (full);
-    \path [line] (full) -- (populating);
-    \path [line] (populating) -- (dedup);
 \end{tikzpicture}
 
+\end{center}
+  \caption{\small Overview of the Softcite Software extraction pipeline. Blue boxes represent the main processing components, and ovals the different data results. }
+  \label{pipeline2}
+\end{figure*}
 
 \end{document}
