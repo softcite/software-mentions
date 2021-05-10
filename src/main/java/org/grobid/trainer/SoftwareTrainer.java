@@ -175,10 +175,10 @@ public class SoftwareTrainer extends AbstractTrainer {
             //final String corpus_file_name = "softcite_corpus_econ.tei.xml";
 
             // train fixed, no negative - optional negative sampling following negative mode
-            //final String corpus_file_name = "softcite_corpus-full.working.tei.xml";
+            final String corpus_file_name = "softcite_corpus-full.working.tei.xml";
             
             // eval holdout
-            final String corpus_file_name = "softcite_corpus-full.holdout-complete.tei.xml";
+            //final String corpus_file_name = "softcite_corpus-full.holdout-complete.tei.xml";
             //final String corpus_file_name = "softcite_corpus-full.holdout.tei.xml";
 
             File thefile = new File(corpusDir.getPath() + File.separator + corpus_file_name);
@@ -260,9 +260,9 @@ public class SoftwareTrainer extends AbstractTrainer {
                     // negativeMode is 0 -> do nothing special
 
                     if (negativeMode == 1) {
-                        addedNegative = randomNegativeExamples(negativeCorpusFile, 20000, outputXMLFile);
+                        addedNegative = randomNegativeExamples(negativeCorpusFile, 30000, outputXMLFile);
                     } else if (negativeMode == 2) {
-                        addedNegative = selectNegativeExamples(negativeCorpusFile, outputXMLFile);
+                        addedNegative = selectNegativeExamples(negativeCorpusFile, 35000, outputXMLFile);
                     }
                     System.out.println("Number of injected negative examples: " + addedNegative);
                     if (addedNegative > 0) {
@@ -834,8 +834,10 @@ public class SoftwareTrainer extends AbstractTrainer {
      * Using a set of negative examples, select those which contradicts a given recognition model.
      * Contradict means that the model predicts incorrectly a software mention and that this 
      * particular negative example is particularly relevant to correct this model. 
+     *
+     * Given the max parameter, if the max if not reached, we fill the remaning with random samples. 
      */
-    public int selectNegativeExamples(File negativeCorpusFile, File outputXMLFile) {
+    public int selectNegativeExamples(File negativeCorpusFile, double max, File outputXMLFile) {
         int totalExamples = 0;
         Writer writer = null;
         try {
@@ -856,8 +858,10 @@ public class SoftwareTrainer extends AbstractTrainer {
                 String tei = FileUtils.readFileToString(negativeCorpusFile, UTF_8);
                 org.w3c.dom.Document document = builder.parse(new InputSource(new StringReader(tei)));
 
+                int totalAdded = 0;
+
                 // list of index of nodes to remove
-                List<Integer> toRemove = new ArrayList<Integer>();
+                List<Integer> toAdd = new ArrayList<Integer>();
 
                 NodeList pList = document.getElementsByTagName("p");
 
@@ -866,21 +870,34 @@ public class SoftwareTrainer extends AbstractTrainer {
                         Element paragraphElement = (Element) pList.item(i);
                         String text = XMLUtilities.getText(paragraphElement);
                         if (text == null || text.trim().length() == 0) {
-                            toRemove.add(new Integer(i));
                             pb.step();
                             continue;
                         }
 
                         // run the mention recognizer and check if we have annotations
                         List<SoftwareEntity> entities = parser.processText(text, false);
-                        if (entities == null || entities.size() == 0) {
-                            toRemove.add(new Integer(i));
+                        if (entities != null && entities.size() > 0) {
+                            toAdd.add(new Integer(i));
+                            totalAdded++;
                         }
                         pb.step();
                     }
                 }
 
-                totalExamples = pList.getLength() - toRemove.size();
+                System.out.println("Number of examples based on active sampling: " + totalAdded);
+
+                List<Integer> toRemove = new ArrayList<Integer>();
+                for (int i = 0; i < pList.getLength(); i++) {
+                    Element paragraphElement = (Element) pList.item(i);
+                    if (totalAdded < max) {
+                        toAdd.add(new Integer(i));
+                        totalAdded++;
+                    } else if (!toAdd.contains(i)) {
+                        toRemove.add(new Integer(i));
+                    }
+                }
+
+                totalExamples = totalAdded;
 
                 for(int j=toRemove.size()-1; j>0; j--) {
                     // remove the specific node
@@ -937,10 +954,13 @@ public class SoftwareTrainer extends AbstractTrainer {
 
                 NodeList pList = document.getElementsByTagName("p");
                 int totalMaxExamples = pList.getLength();
-                int rate = 1;
+
+                int rate = 0;
                 if (max < totalMaxExamples) {
                     rate = (int)(totalMaxExamples / max) - 1;
-                }
+                } /*else {
+                    max = totalMaxExamples;
+                }*/
                 // list of index of nodes to remove
                 List<Integer> toRemove = new ArrayList<Integer>();
 
@@ -954,7 +974,7 @@ public class SoftwareTrainer extends AbstractTrainer {
                             continue;
                         }
 
-                        // we want to exclude examples from the model-selected set
+                        // we remove when no text auf jeden falle
                         Element paragraphElement = (Element) pList.item(i);
                         String text = XMLUtilities.getText(paragraphElement);
                         if (text == null || text.trim().length() == 0) {
@@ -963,15 +983,16 @@ public class SoftwareTrainer extends AbstractTrainer {
                             continue;
                         }
 
+                        // if we want to avoid selecting the same paragraphs as the model-driven selection
                         // run the mention recognizer and check if we have annotations
-                        List<SoftwareEntity> entities = parser.processText(text, false);
+                        /*List<SoftwareEntity> entities = parser.processText(text, false);
                         if (entities != null && entities.size() > 0) {
                             toRemove.add(new Integer(i));
                             pb.step();
                             continue;
-                        }
+                        }*/
 
-                        if (rank == rate) {
+                        if (rank >= rate) {
                             rank = 0;
                             totalAdded++;
                         } else {

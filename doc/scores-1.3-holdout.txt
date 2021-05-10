@@ -208,6 +208,8 @@ Evaluation runtime: 1812.012 seconds
 
 
 
+
+
 * Bid-LSTM-CRF+ELMo - trained on only positive paragraphs (no negative sampling) 
 2021-05-05
 
@@ -222,6 +224,24 @@ Evaluation:
        <version>     0.7286    0.8831    0.7984       231
 
 all (micro avg.)     0.4171    0.7863    0.5451      1123
+
+
+
+* Bid-LSTM-CRF+ELMo - active sampling ratio 15 (best ratio)
+2021-05-05
+
+Evaluation:
+    f1 (micro): 71.63
+                  precision    recall  f1-score   support
+
+       <creator>     0.7406    0.8469    0.7902       209
+      <software>     0.6187    0.7037    0.6585       648
+           <url>     0.4800    0.6857    0.5647        35
+       <version>     0.7770    0.9048    0.8360       231
+
+all (micro avg.)     0.6687    0.7711    0.7163      1123
+
+Evaluation runtime: 20004.177 seconds
 
 
 
