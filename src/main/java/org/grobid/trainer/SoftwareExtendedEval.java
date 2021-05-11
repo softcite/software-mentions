@@ -133,7 +133,7 @@ public class SoftwareExtendedEval extends SoftwareTrainer {
         Writer writerEvaluation = null;
         try {
             System.out.println("labeled corpus path: " + corpusDir.getPath());
-            System.out.println("training data path: " + trainingOutputPath.getPath());
+            System.out.println("labeled data path: " + trainingOutputPath.getPath());
             if (evalOutputPath != null)
                 System.out.println("evaluation data path: " + evalOutputPath.getPath());
 
@@ -156,9 +156,13 @@ public class SoftwareExtendedEval extends SoftwareTrainer {
             SoftwareAnnotationSaxHandler handler = new SoftwareAnnotationSaxHandler();
 
             //final String corpus_file_name = "all_clean_post_processed.tei.xml";
-            final String corpus_file_name = "softcite_corpus.tei.xml";
+            //final String corpus_file_name = "softcite_corpus.tei.xml";
             //final String corpus_file_name = "softcite_corpus_pmc.tei.xml";
             //final String corpus_file_name = "softcite_corpus_econ.tei.xml";
+
+            // eval holdout
+            final String corpus_file_name = "softcite_corpus-full.holdout-complete.tei.xml";
+            //final String corpus_file_name = "softcite_corpus-full.holdout.tei.xml";
 
             File thefile = new File(corpusDir.getPath() + File.separator + corpus_file_name);
 
@@ -312,7 +316,7 @@ public class SoftwareExtendedEval extends SoftwareTrainer {
                     // disambiguation evaluation
                     if (disambiguator == null)
                         disambiguator = SoftwareDisambiguator.getInstance(this.conf);
-                    entities = disambiguator.disambiguate(entities, tokens);                    
+                    entities = disambiguator.disambiguate(entities, tokens); 
                 }
 
                 if (this.docLevel) {
@@ -339,9 +343,14 @@ public class SoftwareExtendedEval extends SoftwareTrainer {
                         List<SoftwareComponent> localComponents = new ArrayList<>();
                         List<String> componentTypes = new ArrayList<>();
                         SoftwareComponent theComponent = entity.getSoftwareName();
+                        Double disamb_score = null;
                         if (theComponent != null) {
                             localComponents.add(theComponent);
                             componentTypes.add("software");
+                            disamb_score = theComponent.getDisambiguationScore();
+                            /*if (disamb_score != null) {
+                                System.out.println(disamb_score);
+                            }*/
                         }
                         theComponent = entity.getVersion();
                         if (theComponent != null) {
@@ -359,13 +368,16 @@ public class SoftwareExtendedEval extends SoftwareTrainer {
                             componentTypes.add("url");
                         } 
 
+                        if (disamb_score != null && disamb_score.doubleValue() < 0.4) {
+                            continue;
+                        }
+
                         for(SoftwareComponent component : localComponents) {
                             // it should always be the case
                             int offset_start = component.getOffsetStart();
                             int offset_end = component.getOffsetEnd();
 //System.out.println("offsets: " + offset_start + " / " + offset_end + " | " + text.length());
                             String segment = text.substring(offset_start, offset_end);
-//System.out.println("text: " + text);
 //System.out.println("filtered: " + segment);
 
                             List<String> segmentTokens = SoftwareAnalyzer.getInstance().tokenize(segment);
@@ -491,7 +503,6 @@ public class SoftwareExtendedEval extends SoftwareTrainer {
                 textBuilder = new StringBuilder();
                 tokens = new ArrayList<>();
             }
-
             theResult = resultBuilder.toString();
 
         } catch (Exception e) {

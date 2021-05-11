@@ -336,7 +336,7 @@ public class SoftwareDisambiguator {
                         endOff = endNode.intValue();
                     }*/
                     double score = -1;
-                    JsonNode scoreNode = entityNode.findPath("nerd_selection_score");
+                    JsonNode scoreNode = entityNode.findPath("confidence_score");
                     if ((scoreNode != null) && (!scoreNode.isMissingNode())) {
                         score = scoreNode.doubleValue();
                     }
@@ -583,7 +583,7 @@ public class SoftwareDisambiguator {
                 //post.setEntity(new UrlEncodedFormEntity(params));
                 post.setEntity(entity);
                 response = httpClient.execute(post);
-                // Systemout.println(response.getStatusLine());
+                // System.out.println(response.getStatusLine());
 
                 int code = response.getStatusLine().getStatusCode();
                 if (code != 200) {

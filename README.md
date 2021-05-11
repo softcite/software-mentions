@@ -390,7 +390,7 @@ where `Pn` is the parameter for the number of folds, by default 10. Still by def
 
 ### Evaluating only
 
-For evaluating under the labeled data under ```grobid-astro/resources/dataset/software/evaluation``` (fixed "holdout set" approach), use the command:
+For evaluating under the labeled data under ```resources/dataset/software/evaluation``` (fixed "holdout set" approach), use the command:
 
 ```console
 >  ./gradlew eval_software [-PgH=/path/grobid/home]
@@ -398,6 +398,40 @@ For evaluating under the labeled data under ```grobid-astro/resources/dataset/so
 
 The grobid home can be optionally specified with parameter `-PgH`. By default it will take `../grobid-home`  
 
+
+### Evaluation with additional entity disambiguation
+
+Evaluation with entity-disambiguation to discard possible false positives:
+
+```console
+>  ./gradlew eval_software_disambiguation [-PgH=/path/grobid/home]
+```
+
+Evaluation is performed against fixed holdout set under ```resources/dataset/software/evaluation```. 
+
+Be sure to set the parameters to the entity-fishing server performing the disambiguation in the yaml `config.yml` file.
+
+### Document-level evaluation
+
+Evaluation with document level propagation controlled with TF-IDF:
+
+```console
+>  ./gradlew eval_software_doc_level [-PgH=/path/grobid/home]
+```
+
+Evaluation is performed against fixed holdout set under ```resources/dataset/software/evaluation```. 
+
+### Combined entity disambiguation and document level evaluation
+
+Evaluation with entity-disambiguation to discard possible false positives, then document level propagation controlled with TF-IDF:
+
+```console
+>  ./gradlew eval_software_disamb_doc_level [-PgH=/path/grobid/home]
+```
+
+Evaluation is performed against fixed holdout set under ```resources/dataset/software/evaluation```. 
+
+This mode is the one implemnented in the standard software recognition method at document level. 
 
 ## Training data import
 
