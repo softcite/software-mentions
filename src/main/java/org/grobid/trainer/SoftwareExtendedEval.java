@@ -174,53 +174,55 @@ public class SoftwareExtendedEval extends SoftwareTrainer {
                 SAXParser p = spf.newSAXParser();
                 p.parse(thefile, handler);
 
-                List<List<Pair<String, String>>> allLabeled = handler.getLabeledResult();
+                List<List<List<Pair<String, String>>>> allLabeled = handler.getAllLabeledResult();
                 //labeled = subSample(labeled, ratioNegativeSample);
 
                 int n = 0;
-                for(List<Pair<String, String>> labeled : allLabeled) {
+                for(List<List<Pair<String, String>>> docLabeled : allLabeled) {
+                    for(List<Pair<String, String>> labeled : docLabeled) {
 
-                    // we need to add now the features to the labeled tokens
-                    List<Pair<String, String>> bufferLabeled = null;
-                    int pos = 0;
+                        // we need to add now the features to the labeled tokens
+                        List<Pair<String, String>> bufferLabeled = null;
+                        int pos = 0;
 
-                    // segmentation into training/evaluation is done file by file
-                    if (splitRandom) {
-                        if (Math.random() <= splitRatio)
-                            writer = writerTraining;
-                        else
-                            writer = writerEvaluation;
-                    } else {
-                        if ((double) n / allLabeled.size() <= splitRatio)
-                            writer = writerTraining;
-                        else
-                            writer = writerEvaluation;
-                    }
-
-                    // let's iterate by defined CRF input (separated by new line)
-                    while (pos < labeled.size()) {
-                        bufferLabeled = new ArrayList<>();
-                        while (pos < labeled.size()) {
-                            if (labeled.get(pos).getA().equals("\n")) {
-                                pos++;
-                                break;
-                            }
-                            bufferLabeled.add(labeled.get(pos));
-                            pos++;
+                        // segmentation into training/evaluation is done file by file
+                        if (splitRandom) {
+                            if (Math.random() <= splitRatio)
+                                writer = writerTraining;
+                            else
+                                writer = writerEvaluation;
+                        } else {
+                            if ((double) n / allLabeled.size() <= splitRatio)
+                                writer = writerTraining;
+                            else
+                                writer = writerEvaluation;
                         }
 
-                        if (bufferLabeled.size() == 0)
-                            continue;
+                        // let's iterate by defined CRF input (separated by new line)
+                        while (pos < labeled.size()) {
+                            bufferLabeled = new ArrayList<>();
+                            while (pos < labeled.size()) {
+                                if (labeled.get(pos).getA().equals("\n")) {
+                                    pos++;
+                                    break;
+                                }
+                                bufferLabeled.add(labeled.get(pos));
+                                pos++;
+                            }
 
-                        List<OffsetPosition> softwareTokenPositions = softwareLexicon.tokenPositionsSoftwareNamesVectorLabeled(bufferLabeled);
-                        List<OffsetPosition> urlPositions = softwareLexicon.tokenPositionsUrlVectorLabeled(bufferLabeled);
+                            if (bufferLabeled.size() == 0)
+                                continue;
 
-                        addFeatures(bufferLabeled, writer, softwareTokenPositions, urlPositions);
-                        if (!docLevel)
-                            writer.write("\n");
+                            List<OffsetPosition> softwareTokenPositions = softwareLexicon.tokenPositionsSoftwareNamesVectorLabeled(bufferLabeled);
+                            List<OffsetPosition> urlPositions = softwareLexicon.tokenPositionsUrlVectorLabeled(bufferLabeled);
+
+                            addFeatures(bufferLabeled, writer, softwareTokenPositions, urlPositions);
+                            if (!docLevel)
+                                writer.write("\n");
+                        }
+                        writer.write("\n");
+                        n++;
                     }
-                    writer.write("\n");
-                    n++;
                 }
             }
         } catch (Exception e) {

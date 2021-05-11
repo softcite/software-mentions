@@ -190,134 +190,140 @@ public class SoftwareTrainer extends AbstractTrainer {
                 SAXParser p = spf.newSAXParser();
                 p.parse(thefile, handler);
 
-                List<List<Pair<String, String>>> allLabeled = handler.getLabeledResult();
+                List<List<List<Pair<String, String>>>> allLabeled = handler.getAllLabeledResult();
                 //labeled = subSample(labeled, ratioNegativeSample);
 
                 int n = 0;
-                for(List<Pair<String, String>> labeled : allLabeled) {
+                for(List<List<Pair<String, String>>> docLabeled : allLabeled) {
+                    for(List<Pair<String, String>> labeled : docLabeled) {
 
-                    // we need to add now the features to the labeled tokens
-                    List<Pair<String, String>> bufferLabeled = null;
-                    int pos = 0;
+                        // we need to add now the features to the labeled tokens
+                        List<Pair<String, String>> bufferLabeled = null;
+                        int pos = 0;
 
-                    // segmentation into training/evaluation is done file by file
-                    if (splitRandom) {
-                        if (Math.random() <= splitRatio)
-                            writer = writerTraining;
-                        else
-                            writer = writerEvaluation;
-                    } else {
-                        if ((double) n / allLabeled.size() <= splitRatio)
-                            writer = writerTraining;
-                        else
-                            writer = writerEvaluation;
-                    }
-
-                    // let's iterate by defined CRF input (separated by new line)
-                    while (pos < labeled.size()) {
-                        bufferLabeled = new ArrayList<>();
-                        while (pos < labeled.size()) {
-                            if (labeled.get(pos).getA().equals("\n")) {
-                                pos++;
-                                break;
-                            }
-                            bufferLabeled.add(labeled.get(pos));
-                            pos++;
+                        // segmentation into training/evaluation is done file by file
+                        if (splitRandom) {
+                            if (Math.random() <= splitRatio)
+                                writer = writerTraining;
+                            else
+                                writer = writerEvaluation;
+                        } else {
+                            if ((double) n / allLabeled.size() <= splitRatio)
+                                writer = writerTraining;
+                            else
+                                writer = writerEvaluation;
                         }
 
-                        if (bufferLabeled.size() == 0)
-                            continue;
+                        // let's iterate by defined CRF input (separated by new line)
+                        while (pos < labeled.size()) {
+                            bufferLabeled = new ArrayList<>();
+                            while (pos < labeled.size()) {
+                                if (labeled.get(pos).getA().equals("\n")) {
+                                    pos++;
+                                    break;
+                                }
+                                bufferLabeled.add(labeled.get(pos));
+                                pos++;
+                            }
 
-                        List<OffsetPosition> softwareTokenPositions = softwareLexicon.tokenPositionsSoftwareNamesVectorLabeled(bufferLabeled);
-                        List<OffsetPosition> urlPositions = softwareLexicon.tokenPositionsUrlVectorLabeled(bufferLabeled);
+                            if (bufferLabeled.size() == 0)
+                                continue;
 
-                        addFeatures(bufferLabeled, writer, softwareTokenPositions, urlPositions);
+                            List<OffsetPosition> softwareTokenPositions = softwareLexicon.tokenPositionsSoftwareNamesVectorLabeled(bufferLabeled);
+                            List<OffsetPosition> urlPositions = softwareLexicon.tokenPositionsUrlVectorLabeled(bufferLabeled);
+
+                            addFeatures(bufferLabeled, writer, softwareTokenPositions, urlPositions);
+                            writer.write("\n");
+                        }
+
                         writer.write("\n");
+                        n++;
                     }
-
-                    writer.write("\n");
-                    n++;
                 }
 
                 totalExamples = n;
 
-                // inject negative examples, depending on the selected mode
-                final String negative_corpus_file_name = "softcite.all.negative.working.tei.xml";
-                
-                String relativePath = corpusDir.getPath() + File.separator + negative_corpus_file_name;
-                String absolutePath = FileSystems.getDefault().getPath(relativePath).normalize().toAbsolutePath().toString();
-                File negativeCorpusFile = new File(absolutePath);
+                if (negativeMode != 0) {
+                    // inject negative examples, depending on the selected mode
+                    final String negative_corpus_file_name = "softcite.all.negative.working.tei.xml";
+                    
+                    String relativePath = corpusDir.getPath() + File.separator + negative_corpus_file_name;
+                    String absolutePath = FileSystems.getDefault().getPath(relativePath).normalize().toAbsolutePath().toString();
+                    File negativeCorpusFile = new File(absolutePath);
 
-                if (!negativeCorpusFile.exists()) {
-                    System.out.println("The XML TEI negative corpus training document does not exist: " + 
-                        corpusDir.getPath() + File.separator + negative_corpus_file_name);
-                } else {
-                    int addedNegative = 0;
-                    relativePath = corpusDir.getPath() + File.separator + "selected.negative.tei.xml";
-                    absolutePath = FileSystems.getDefault().getPath(relativePath).normalize().toAbsolutePath().toString();
-                    File outputXMLFile =  new File(absolutePath);
+                    if (!negativeCorpusFile.exists()) {
+                        System.out.println("The XML TEI negative corpus training document does not exist: " + 
+                            corpusDir.getPath() + File.separator + negative_corpus_file_name);
+                    } else {
+                        int addedNegative = 0;
+                        relativePath = corpusDir.getPath() + File.separator + "selected.negative.tei.xml";
+                        absolutePath = FileSystems.getDefault().getPath(relativePath).normalize().toAbsolutePath().toString();
+                        File outputXMLFile =  new File(absolutePath);
 
-                    // negativeMode is 0 -> do nothing special
+                        // negativeMode is 0 -> do nothing special
 
-                    if (negativeMode == 1) {
-                        addedNegative = randomNegativeExamples(negativeCorpusFile, 30000, outputXMLFile);
-                    } else if (negativeMode == 2) {
-                        addedNegative = selectNegativeExamples(negativeCorpusFile, 35000, outputXMLFile);
-                    }
-                    System.out.println("Number of injected negative examples: " + addedNegative);
-                    if (addedNegative > 0) {
-                        handler = new SoftwareAnnotationSaxHandler();
-                        p = spf.newSAXParser();
-                        p.parse(outputXMLFile, handler);
-
-                        allLabeled = handler.getLabeledResult();
-                        n = 0;
-                        for(List<Pair<String, String>> labeled : allLabeled) {
-
-                            // we need to add now the features to the labeled tokens
-                            List<Pair<String, String>> bufferLabeled = null;
-                            int pos = 0;
-
-                            // segmentation into training/evaluation is done file by file
-                            if (splitRandom) {
-                                if (Math.random() <= splitRatio)
-                                    writer = writerTraining;
-                                else
-                                    writer = writerEvaluation;
-                            } else {
-                                if ((double) n / allLabeled.size() <= splitRatio)
-                                    writer = writerTraining;
-                                else
-                                    writer = writerEvaluation;
-                            }
-
-                            // let's iterate by defined CRF input (separated by new line)
-                            while (pos < labeled.size()) {
-                                bufferLabeled = new ArrayList<>();
-                                while (pos < labeled.size()) {
-                                    if (labeled.get(pos).getA().equals("\n")) {
-                                        pos++;
-                                        break;
-                                    }
-                                    bufferLabeled.add(labeled.get(pos));
-                                    pos++;
-                                }
-
-                                if (bufferLabeled.size() == 0)
-                                    continue;
-
-                                List<OffsetPosition> softwareTokenPositions = softwareLexicon.tokenPositionsSoftwareNamesVectorLabeled(bufferLabeled);
-                                List<OffsetPosition> urlPositions = softwareLexicon.tokenPositionsUrlVectorLabeled(bufferLabeled);
-
-                                addFeatures(bufferLabeled, writer, softwareTokenPositions, urlPositions);
-                                writer.write("\n");
-                            }
-
-                            writer.write("\n");
-                            n++;
+                        if (negativeMode == 1) {
+                            addedNegative = randomNegativeExamples(negativeCorpusFile, 30000, outputXMLFile);
+                        } else if (negativeMode == 2) {
+                            addedNegative = selectNegativeExamples(negativeCorpusFile, 35000, outputXMLFile);
                         }
+                        System.out.println("Number of injected negative examples: " + addedNegative);
+                        if (addedNegative > 0) {
+                            handler = new SoftwareAnnotationSaxHandler();
+                            p = spf.newSAXParser();
+                            p.parse(outputXMLFile, handler);
 
-                        totalExamples += n;
+                            allLabeled = handler.getAllLabeledResult();
+                            n = 0;
+                            for(List<List<Pair<String, String>>> docLabeled : allLabeled) {
+                                for(List<Pair<String, String>> labeled : docLabeled) {
+
+                                    // we need to add now the features to the labeled tokens
+                                    List<Pair<String, String>> bufferLabeled = null;
+                                    int pos = 0;
+
+                                    // segmentation into training/evaluation is done file by file
+                                    if (splitRandom) {
+                                        if (Math.random() <= splitRatio)
+                                            writer = writerTraining;
+                                        else
+                                            writer = writerEvaluation;
+                                    } else {
+                                        if ((double) n / allLabeled.size() <= splitRatio)
+                                            writer = writerTraining;
+                                        else
+                                            writer = writerEvaluation;
+                                    }
+
+                                    // let's iterate by defined CRF input (separated by new line)
+                                    while (pos < labeled.size()) {
+                                        bufferLabeled = new ArrayList<>();
+                                        while (pos < labeled.size()) {
+                                            if (labeled.get(pos).getA().equals("\n")) {
+                                                pos++;
+                                                break;
+                                            }
+                                            bufferLabeled.add(labeled.get(pos));
+                                            pos++;
+                                        }
+
+                                        if (bufferLabeled.size() == 0)
+                                            continue;
+
+                                        List<OffsetPosition> softwareTokenPositions = softwareLexicon.tokenPositionsSoftwareNamesVectorLabeled(bufferLabeled);
+                                        List<OffsetPosition> urlPositions = softwareLexicon.tokenPositionsUrlVectorLabeled(bufferLabeled);
+
+                                        addFeatures(bufferLabeled, writer, softwareTokenPositions, urlPositions);
+                                        writer.write("\n");
+                                    }
+
+                                    writer.write("\n");
+                                    n++;
+                                }
+                            }
+
+                            totalExamples += n;
+                        }
                     }
                 }
             }

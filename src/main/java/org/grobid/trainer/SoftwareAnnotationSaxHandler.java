@@ -25,9 +25,14 @@ public class SoftwareAnnotationSaxHandler extends DefaultHandler {
 
     private String currentTag = null;
 
-    private List<Pair<String, String>> labeled = null; // store line by line the labeled data
+    // labeling for current paragraph
+    private List<Pair<String, String>> labeled = null; // store line by line the labeled data of the current paragraph
 
-     private List<List<Pair<String, String>>> allLabeled = null; // accumulated instances
+    // labeling for current document
+    private List<List<Pair<String, String>>> labeledDoc = null; // accumulated paragraphs
+
+    // global labeling, one list for the documents, one list for the paragraphs, one list for the words of the paragraph
+    private List<List<List<Pair<String, String>>>> allLabeled = null; // accumulated documents
 
     public SoftwareAnnotationSaxHandler() {
     }
@@ -45,7 +50,7 @@ public class SoftwareAnnotationSaxHandler extends DefaultHandler {
         }
     }
 
-    public List<List<Pair<String, String>>> getLabeledResult() {
+    public List<List<List<Pair<String, String>>>> getAllLabeledResult() {
         return allLabeled;
     }
 
@@ -64,7 +69,10 @@ public class SoftwareAnnotationSaxHandler extends DefaultHandler {
                 // let's consider a new sequence per paragraph too
                 writeData(qName);
                 //labeled.add(new Pair("\n", null));
-                allLabeled.add(labeled);
+                if (labeledDoc != null)
+                    labeledDoc.add(labeled);
+            } else if (qName.equals("TEI")) {
+                allLabeled.add(labeledDoc);
             }
         } catch (Exception e) {
 //		    e.printStackTrace();
@@ -126,6 +134,7 @@ public class SoftwareAnnotationSaxHandler extends DefaultHandler {
                 } else if (qName.equals("p")) {
                     labeled = new ArrayList<>();
                 } else if (qName.equals("tei") || qName.equals("TEI")) {
+                    labeledDoc = new ArrayList<>();
                     accumulator = new StringBuffer();
                     currentTag = null;
                     ignore = true;

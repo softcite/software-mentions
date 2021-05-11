@@ -807,7 +807,8 @@ public class SoftwareParser extends AbstractParser {
                                               List<OffsetPosition> placeTaken,
                                               Map<String, Integer> frequencies,
                                               boolean addParagraphContext) {
-        List<OffsetPosition> results = termPattern.matchLayoutToken(layoutTokens, false, true);
+        //List<OffsetPosition> results = termPattern.matchLayoutToken(layoutTokens, false, true);
+        List<OffsetPosition> results = termPattern.matchLayoutToken(layoutTokens, true, false);
         // do not ignore delimiters, but case sensitive matching
         if ( (results == null) || (results.size() == 0) ) {
             return entities;
@@ -819,7 +820,7 @@ public class SoftwareParser extends AbstractParser {
                 matchedTokens.get(matchedTokens.size()-1).getOffset() + matchedTokens.get(matchedTokens.size()-1).getText().length());
 
             String term = LayoutTokensUtil.toText(matchedTokens);
-//System.out.println("matched: " + term);
+System.out.println("matched: " + term);
             int termFrequency = 1;
             if (frequencies != null && frequencies.get(term) != null)
                 termFrequency = frequencies.get(term);
@@ -836,7 +837,8 @@ public class SoftwareParser extends AbstractParser {
                 // ideally we should make a small classifier here with entity frequency, tfidf, disambiguation success and 
                 // and/or log-likelyhood/dice coefficient as features - but for the time being we introduce a simple rule
                 // with an experimentally defined threshold:
-                if ( (tfidf <= 0) || (tfidf > 0.001) ) {                
+                //if ( (tfidf <= 0) || (tfidf > 0.001) ) 
+                {
                     // add new entity mention
                     SoftwareComponent name = new SoftwareComponent();
                     name.setRawForm(term);
