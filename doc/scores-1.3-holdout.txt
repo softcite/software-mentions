@@ -110,7 +110,6 @@ Correct instances:          33024
 Instance-level recall:      98.83
 
 
-
 * CRF - trained with model-selected negative paragraphs (active oversampling) 
 
 
@@ -149,6 +148,27 @@ Evaluation:
 all (micro avg.)     0.2901    0.7533    0.4189      1123
 
 Evaluation runtime: 350.445 seconds
+
+
+* bidLSTM-CRF - active sampling ratio 15 (best ratio), eval complete holdout
+2021-05-05
+
+
+Evaluation:
+     f1 (micro): 69.36
+                  precision    recall  f1-score   support
+
+       <creator>     0.6667    0.8612    0.7516       209
+      <software>     0.5876    0.6883    0.6340       648
+           <url>     0.5366    0.6286    0.5789        35
+       <version>     0.7473    0.9091    0.8203       231
+
+all (micro avg.)     0.6351    0.7640    0.6936      1123
+
+Evaluation runtime: 341.416 seconds 
+
+
+
 
 
 

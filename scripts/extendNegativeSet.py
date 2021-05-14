@@ -134,12 +134,16 @@ def build_resources(softcite_corpus_path, tei_corpus_path, negative_examples_fil
             for local_paragraph in local_paragraphs:
                 if has_forbidden_content(local_paragraph, forbidden_content) or is_matching_a_paragraph(local_paragraph, corpus_doc_body[0]):
                     continue
+                if content_too_short(local_paragraph, 100):
+                    continue
                 local_paragraph.tail = "\n            "
                 corpus_doc_body[0].append(local_paragraph)
 
             local_figDesc = local_doc.xpath('//tei:figDesc', namespaces={'tei': 'http://www.tei-c.org/ns/1.0'})
             for local_paragraph in local_paragraphs:
                 if has_forbidden_content(local_paragraph, forbidden_content) or is_matching_a_paragraph(local_paragraph, corpus_doc_body[0]):
+                    continue
+                if content_too_short(local_paragraph, 80):
                     continue
                 local_paragraph.tail = "\n            "
                 corpus_doc_body[0].append(local_paragraph)    
@@ -186,6 +190,13 @@ def has_forbidden_content(local_paragraph, forbidden_content):
         if content in text:
             return True
     return False
+
+def content_too_short(local_paragraph, min_char_size):
+    text = local_paragraph.xpath("string()")
+    if len(text) < min_char_size:
+        return True
+    else: 
+        return False
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser( 
