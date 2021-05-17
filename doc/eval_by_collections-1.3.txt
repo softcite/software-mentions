@@ -1,0 +1,26 @@
+-----------------------------------------------------------------------------------------
+train pmc
+eval econ
+
+base CRF
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1           support
+
+<creator>            91.77        4.76         14.29        7.14         7      
+<software>           81.01        45.76        49.09        47.37        55     
+<url>                96.2         20           33.33        25           6      
+<version>            93.04        8.33         100          15.38        2      
+
+all (micro avg.)     90.51        28.07        45.71        34.78        70     
+all (macro avg.)     90.51        19.71        49.18        23.72        70     
+
+===== Instance-level results =====
+
+Total expected instances:   21274
+Correct instances:          21182
+Instance-level recall:      99.57
+
+
+
