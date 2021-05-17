@@ -1,13 +1,22 @@
 '''
-Split negative example files into collections.
+Split corpus file into collections.
 
-For splitting positive example files, use the .sh script which is using XSLT applied on
-the full SoftCite corpus.
+For splitting positive example files, you can also use the .sh script which is using XSLT applied on
+the full SoftCite corpus. XSLT works only when the collection is given at TEI level by @subtype
 
 Usage example:
 
+* splitting negative example corpus file:
+
 > python3 splitByCollection.py --tei-corpus ../resources/dataset/software/corpus/softcite_corpus-full.tei.xml 
---negative-examples-file ../resources/dataset/software/corpus/softcite.all.negative.extended.working.tei.xml
+--examples-file ../resources/dataset/software/corpus/softcite.all.negative.extended.working.tei.xml
+
+* splitting holdout file:
+
+python3 splitByCollection.py --tei-corpus ../resources/dataset/software/corpus/softcite_corpus-full.tei.xml 
+--examples-file ../resources/dataset/software/evaluation/softcite_corpus-full.holdout-complete.tei.xml
+
+
 
 '''
 
@@ -59,22 +68,22 @@ def split_by_collections(tei_corpus_path, negative_examples_file_path):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser( 
-        description = "Split negative example TEI corpus file into collections")
+        description = "Split example TEI corpus file into collections")
     parser.add_argument("--tei-corpus", type=str, help="path to the directory of full text TEI XML files")
-    parser.add_argument("--negative-examples-file", type=str, help="path to the file containing the set of negative examples")
+    parser.add_argument("--examples-file", type=str, help="path to the XML file containing the set of examples to split")
 
     args = parser.parse_args()
     tei_corpus_path = args.tei_corpus
-    negative_examples_file_path = args.negative_examples_file
+    examples_file_path = args.examples_file
 
     # check path and call methods
     if tei_corpus_path is not None and not os.path.isfile(tei_corpus_path):
         print("the path to the directory of TEI files is not valid: ", tei_corpus_path)
         exit()
-    elif negative_examples_file_path is not None and not os.path.isfile(negative_examples_file_path):
-        print("the path to the negative example files is not valid: ", negative_examples_file_path)
+    elif examples_file_path is not None and not os.path.isfile(examples_file_path):
+        print("the path to the example files is not valid: ", examples_file_path)
         exit()
     else:
-        split_by_collections(tei_corpus_path, negative_examples_file_path)
+        split_by_collections(tei_corpus_path, examples_file_path)
 
 
