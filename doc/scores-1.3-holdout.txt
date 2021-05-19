@@ -182,6 +182,20 @@ all (micro avg.)     0.6413    0.7658    0.6981      1123
 
 Evaluation runtime: 343.414 seconds 
 
+update:
+Evaluation:
+    f1 (micro): 71.55
+                  precision    recall  f1-score   support
+
+       <creator>     0.7177    0.8517    0.7790       209
+      <software>     0.6568    0.6852    0.6707       648
+           <url>     0.6316    0.6857    0.6575        35
+       <version>     0.6708    0.9264    0.7782       231
+
+all (micro avg.)     0.6714    0.7658    0.7155      1123
+
+
+
 
 * bidLSTM-CRF_FEATURES - trained on only positive paragraphs (no negative sampling) , eval complete holdout
 2021-05-05
@@ -233,6 +247,18 @@ all (micro avg.)     0.6127    0.7961    0.6925      1123
 
 Evaluation runtime: 443.199 seconds 
 
+
+update
+Evaluation:
+    f1 (micro): 70.87
+                  precision    recall  f1-score   support
+
+       <creator>     0.7092    0.8517    0.7739       209
+      <software>     0.5675    0.7330    0.6397       648
+           <url>     0.4828    0.8000    0.6022        35
+       <version>     0.8386    0.9221    0.8784       231
+
+all (micro avg.)     0.6386    0.7961    0.7087      1123
 
 
 
@@ -337,6 +363,20 @@ Evaluation:
 all (micro avg.)     0.6687    0.7711    0.7163      1123
 
 Evaluation runtime: 20004.177 seconds
+
+update:
+Evaluation:
+    f1 (micro): 71.71
+                  precision    recall  f1-score   support
+
+       <creator>     0.6679    0.8373    0.7431       209
+      <software>     0.7022    0.6296    0.6640       648
+           <url>     0.5667    0.4857    0.5231        35
+       <version>     0.8750    0.8485    0.8615       231
+
+all (micro avg.)     0.7256    0.7088    0.7171      1123
+
+Evaluation runtime: 19885.319 seconds
 
 
 
