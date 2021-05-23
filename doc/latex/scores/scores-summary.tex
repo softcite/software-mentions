@@ -3,26 +3,45 @@
 
 \begin{document}
 
-\begin{table}[ht]
- \begin{center}
+\begin{table}
+\caption{Summary of scores (P: Precision, R: Recall, F: F1-score) at span level (exact match) against the holdout set (994 complete articles, 20\% of the articles of the Softcite Dataset). {\sl no sampling} refers to a training with only paragraphs containing at least one annotation from the 80\% remaining articles. Paragraphs without annotations (negative sampling) are then added to the training data via {\sl random sampling} or {\sl active sample} (model-based). {\bf Bold} indicates the best scores for a given field. We present the random sampling with the best negative/positive sample ratio experimentally set at 15. Reported scores for DL models are averaged over 10 training/runs. }
+\begin{center}
 
-\begin{tabular}{| l | l | l | l | l | l |}
+\begin{tabular}{l | l | c c c | c c c | c c c | c c c | l }
 \hline
- &   &  & &  & {\bf {\bf micro-}} \\
-  & {\bf software}  & {\bf publisher} & {\bf version}  & {\bf url} & {\bf {\bf average}} \\
- \hline
-CRF (custom features) &  79.64   &   80.6   &   87.47   &   63.15  & 80.95 \\   
-BiLSTM-CRF &   77.37      &  79.94      &  {\bf 89.55} &  31.36   &     79.09 \\ 
-BiLSTM-CRF+features &  79.65 &   86.52 &  85.99 & 48.19  & 80.77 \\  
-BiLSTM-CRF+ELMo & 83.63 & {\bf 87.07} & 89.33 & 62.19  & {\bf 84.87} \\ 
-BiLSTM-CRF+ELMo+features & {\bf 84.80} & 86.80 & 86.74 & 63.21 & 84.70 \\ 
-bert-base-en+CRF & 73.55 & 71.72 & 78.83 & 45.50 & 73.56 \\ 
-SciBERT+CRF & 83.62 & 78.59 & 88.97 & {\bf 68.77} & 83.54 \\
+{\bf model} & {\bf under-} & \multicolumn{3}{c|}{\bf software name} & \multicolumn{3}{c|}{\bf publisher} & \multicolumn{3}{c|}{\bf version}  & \multicolumn{3}{c|}{\bf URL} & {\bf F1 micro} \\
+\cline{3-14}
+ & {\bf sampling} & {\bf P} & {\bf R} & {\bf F} & {\bf P} & {\bf R} & {\bf F} & {\bf P} & {\bf R} & {\bf F} & {\bf P} & {\bf R} & {\bf F} & {\bf  average} \\
+\hline
+CRF (custom & none  & 29.18 & 58.49 & 38.93 & 41.45 & 76.56 & 53.78 & 51.85 & 84.85 & 64.37 & 18.18 & 68.57 & 28.74 & 45.75 \\ 
+features) & random & 66.92 & 53.7 & 59.59 & 70.4 & 75.12 & 72.69 & 79.75 & 83.55 & 81.61 & 34.78 & 45.71 & 39.51 & 66.30 \\
+ & active & 68.95 & 52.78 & 59.79 & 70.32 & 73.68 & 71.96 & 80.93 & 82.68 & 81.8 & 32.61 & 42.86 & 37.04 & 66.23 \\ 
+\hline
+BiLSTM-CRF & none & 21.94 & 68.52 & 33.23 & 45.29 & 82.78 & 58.54 & 53.59 & 90.48 & 67.31 & 16.67 & 57.14 & 25.81 & 41.89 \\ 
+ & random & 57.11 & 71.91 & 63.66 & 67.42 & 85.17 & 75.26 & 72.95 & 88.74 & 80.08 & 50.98 & 74.29 & 60.47 & 69.03 \\ 
+ & active & 62.71 & 68.52 & 65.49 & 68.99 & 85.17 & 76.23 & 63.50 & 92.64 & 75.35 & 63.16 & 68.57 & 65.75 & 69.81 \\ 
+\hline
+BiLSTM-CRF & none & 20.94 & 74.54 & 32.69 & 45.66 & 85.65 & 59.57 & 58.40 & 91.77 & 71.38 & 14.53 & 48.57 & 22.37 & 41.42 \\  
++features & random & 54.08 & 73.61 & 62.35 & 68.48 & 84.21 & 75.54 & 72.20 & 92.21 & 80.99 & 50.00 & 65.71 & 56.79 & 68.31 \\ 
+ & active & 54.54 & 73.30 & 62.54 & 68.20 & 85.17 & 75.74 & 79.48 & 92.21 & 85.37 & 47.46 & 80.00 & 59.57 & 69.25 \\ 
+\hline
+BiLSTM-CRF & none & 35.56 & 74.85 & 48.21 & 71.55 & 79.43 & 75.28 & 72.86 & 88.31 & 79.84 & 11.62 & 80.00 & 20.29 & 54.51 \\ 
++\elmo & random & 67.44 & 62.96 & 65.12 & 63.87 & 83.73 & 72.46 & 83.05 & 84.85 & 83.94 & 54.84 & 48.57 & 51.52 & 70.16 \\ 
+ & active & 61.87 & 70.37 & 65.85 & 74.06 & 84.69 & {\bf 79.02} & 77.70 & 90.48 & 83.60 & 48.00 & 68.57 & {\bf 56.47} & 71.63 \\ 
+\hline
+\bert-base & none & 15.08 & 74.23 & 25.07 & 40.19 & 79.43 & 53.38 & 42.12 & 87.88 & 56.94 & 04.49 & 71.43 & 08.45 & 30.36 \\ 
+-CRF &  random & 52.76 & 67.75 & 59.32 & 61.57 & 78.95 & 69.18 & 65.89 & 85.28 & 74.34 & 14.96 & 54.29 & 23.46 & 61.91 \\ 
+ & active & 56.85 & 67.90 & 61.88 & 66.13 & 78.47 & 71.77 & 73.51 & 85.28 & 78.96 & 19.00 & 54.29 & 28.15 & 65.26 \\ 
+\hline
+\scibert-CRF & none & 25.73 & 80.40 & 38.98 & 44.14 & 84.69 & 58.03 & 71.72 & 92.21 & 80.68 & 27.78 & 71.43 & 40.00 & 47.56 \\
+ & random & 60.48 & 77.01 & 67.75 & 68.11 & 82.78 & 74.73 & 75.36 & 91.34 & 82.58 & 40.32 & 71.43 & 51.55 & 71.38 \\ 
+ & active & 69.31 & 72.84 & {\bf 71.03} & 75.55 & 82.78 & 79.00 & 80.24 & 87.88 & {\bf 83.88} & 45.28 & 68.57 & 54.55 & {\bf 74.56} \\ 
 \hline
 \end{tabular}
-\caption{\small f-score at field level based on 10-folds cross validation.}
-  \label{scores}
- \end{center}
+
+\label{scores}
+  
+\end{center}
 \end{table}
 
 \end{document}
