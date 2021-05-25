@@ -167,15 +167,15 @@ public class SoftwareTrainer extends AbstractTrainer {
             SAXParserFactory spf = SAXParserFactory.newInstance();
             SoftwareAnnotationSaxHandler handler = new SoftwareAnnotationSaxHandler();
             
-            // train and split / 10-fold cross evaluation
-            //final String corpus_file_name = "softcite_corpus-full.tei.xml";
+            // train and split / 10-fold cross evaluation or training with full corpus for production
+            final String corpus_file_name = "softcite_corpus-full.tei.xml";
             
             // cross domain eval
             //final String corpus_file_name = "softcite_corpus_pmc-compact.tei.xml";
             //final String corpus_file_name = "softcite_corpus_econ-compact.tei.xml";
 
             // train fixed, no negative - optional negative sampling following negative mode
-            final String corpus_file_name = "softcite_corpus-full.working.tei.xml";
+            //final String corpus_file_name = "softcite_corpus-full.working.tei.xml";
             
             // eval holdout
             //final String corpus_file_name = "softcite_corpus-full.holdout-complete.tei.xml";
@@ -248,8 +248,8 @@ public class SoftwareTrainer extends AbstractTrainer {
                 if (negativeMode != 0) {
                     // inject negative examples, depending on the selected mode
                     //final String negative_corpus_file_name = "softcite.all.negative.working.tei.xml";
-                    //final String negative_corpus_file_name = "softcite.all.negative.extended.working.tei.xml";
-                    final String negative_corpus_file_name = "softcite.all.negative.extended.working.pmc.tei.xml";
+                    final String negative_corpus_file_name = "softcite.all.negative.extended.working.tei.xml";
+                    //final String negative_corpus_file_name = "softcite.all.negative.extended.working.pmc.tei.xml";
                     //final String negative_corpus_file_name = "softcite.all.negative.extended.working.econ.tei.xml";
                     
                     String relativePath = corpusDir.getPath() + File.separator + negative_corpus_file_name;
@@ -270,7 +270,7 @@ public class SoftwareTrainer extends AbstractTrainer {
                         if (negativeMode == 1) {
                             addedNegative = randomNegativeExamples(negativeCorpusFile, 30000, outputXMLFile);
                         } else if (negativeMode == 2) {
-                            addedNegative = selectNegativeExamples(negativeCorpusFile, 20000, outputXMLFile);
+                            addedNegative = selectNegativeExamples(negativeCorpusFile, 50000, outputXMLFile);
                         }
                         System.out.println("Number of injected negative examples: " + addedNegative);
                         if (addedNegative > 0) {
