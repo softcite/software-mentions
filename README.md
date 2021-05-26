@@ -2,9 +2,9 @@
 
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
-The goal of this GROBID module is to recognize any software mentions in scholar textual documents and PDF. It uses as training data the [softcite dataset](https://github.com/howisonlab/softcite-dataset) developed by [James Howison](http://james.howison.name/) Lab at the University of Texas at Austin. This annotated corpus and the present software text mining component have been developed supported by a grant from the Alfred P. Sloan foundation to [improve credit for research software](https://blog.ourresearch.org/collaborating-635k-grant-improve-credit-research-software/).
+The goal of this GROBID module is to recognize any software mentions in scholar textual documents and PDF. It uses as training data the [Softcite Dataset](https://github.com/howisonlab/softcite-dataset) developed by [James Howison](http://james.howison.name/) Lab at the University of Texas at Austin. This annotated corpus and the present software text mining component have been developed supported by a grant from the Alfred P. Sloan foundation to [improve credit for research software](https://blog.ourresearch.org/collaborating-635k-grant-improve-credit-research-software/).
 
-As the other GROBID models, the module relies only on state-of-the-art machine learning. The tool can use linear CRF (via [Wapiti](https://github.com/kermitt2/Wapiti) JNI integration) or Deep Learning model such as BiLSTM-CRF, ELMo or fine-tuned transformers BERT (via [DeLFT](https://github.com/kermitt2/delft) JNI integration) and any combination of them. 
+As the other GROBID models, the module relies only on state-of-the-art machine learning. The tool can use linear CRF (via [Wapiti](https://github.com/kermitt2/Wapiti) JNI integration) or Deep Learning model such as BiLSTM-CRF, ELMo or fine-tuned transformers BERT, e.g. SciBERT (via [DeLFT](https://github.com/kermitt2/delft) JNI integration) and any combination of them. 
 
 A description of the task can be found [here](doc/description.md).
 
@@ -12,7 +12,7 @@ Thanks to its integration in the [GROBID](https://github.com/kermitt2/grobid) fr
 
 - __structure-aware__: the extraction is realized on the relevant textual zones, skipping for instance figure content, headnotes, formulas, bibliographical reference section, etc. and exploiting the knowledge of inline reference markers, section and paragraph boundaries, etc. for the textual zones
 
-- __robust__: text stream in PDF is recovered and cleaned with various additional process going beyond traditional pdf-to-text low level PDF extraction tool, for instance line number removal, de-hyphenation, unicode character combination, multi-column support, handling of page/figure breaks, unicode normalization, etc. 
+- __robust__: text stream in PDF is recovered and cleaned with various additional process going beyond traditional pdf-to-text low level PDF extraction tool, for instance line number removal, de-hyphenation, unicode character combination, multi-column support, handling of page/figure breaks, unicode normalization, removal of manuscript line numbers, etc. 
 
 - __combined with bibliographical reference recognition__: the bibliographical reference markers possibly used in combination with the software mention are recognized, attached to the software mention when possible, matched with the full bibliographical reference in the bibliographical section of the article and disambiguated against CrossRef and Unpaywall
 
@@ -20,9 +20,29 @@ Thanks to its integration in the [GROBID](https://github.com/kermitt2/grobid) fr
 
 - __combined with entity disambiguation__: extracted software names are disambiguated in context against software entities in Wikidata via [entity-fishing](https://github.com/kermitt2/entity-fishing)
 
-- __scaling__: as we want to scale to the complete scientific corpus, the process is optimized in runtime and memory usage. We are able to process entirely around 2 PDF per second (including PDF processing and structuring, extractions, bibliographical reference disambiguation against crossref and entity disambiguation against WikiData) on one low/medium cost Ubuntu server, Intel i7-4790 (4 CPU), 4.00 GHz with 16 GB memory (an additional GPU is however necessary when using Deep Learning models and runtime then depends on the DL architecture of choice).
+- __scaling__: as we want to scale to the complete scientific corpus, the process is optimized in runtime and memory usage. We are able to process entirely around 2 PDF per second with the CRF model (including PDF processing and structuring, extractions, bibliographical reference disambiguation against crossref and entity disambiguation against WikiData) on one low/medium cost Ubuntu server, Intel i7-4790 (4 CPU), 4.00 GHz with 16 GB memory. Around 0.5 PDF per second is processed when using the fine-tuned SciBERT model, the best performing model - an additional GPU is however necessary when using Deep Learning models and runtime, depending on the DL architecture of choice.
 
 Latest performance (accuracy and runtime) can be found [below](https://github.com/Impactstory/software-mentions#Benchmarking).
+
+## Demo
+
+A public demo of the service is available at the following address: https://cloud.science-miner.com/software/
+
+The [web console](https://github.com/ourresearch/software-mentions#console-web-app) allows you to test the processing of text or of a full scholar PDF. The component is developed targeting complete PDF, so the output of a PDF processing will be richer (attachment, parsing and DOI-matching of the bibliographical references appearing with a software mention, coordinates in the PDF of the mentions, document level propagation of mentions). The console displays extracted mentions directly on the PDF pages (via PDF.js), with infobox describing when possible Wikidata entity linking and full reference metadata (with Open Access links when found via Unpaywall).  
+
+This demo is only provided for test, without any guaranties regarding the service quality and availability. If you plan to use this component at scale or in production, you need to install it locally. 
+
+## The Softcite Dataset
+
+The Softcite dataset is available on Zenodo: https://doi.org/10.5281/zenodo.4445202
+
+More details on the Softcite dataset can be found in the following publication:
+
+```
+Du, C, Cohoon, J, Lopez, P, Howison, J. Softcite dataset: A dataset of software mentions in biomedical and economic research publications. J Assoc Inf Sci Technol. 2021; 1–15. https://doi.org/10.1002/asi.24454
+```
+
+The dataset is maintained on the following GitHub repository: https://github.com/howisonlab/softcite-dataset
 
 ## Install, build, run
 
@@ -54,13 +74,21 @@ To start the service:
 
 ### Console web app
 
-Javascript demo/console web app is then accessible at ```http://localhost:8060```. From the console and the `RESTfull services` tab, you can process chunk of text (select `ProcessText`) or process a complete PDF document (select `Annotate PDF document`).
+Javascript demo/console web app is then accessible at ```http://localhost:8060```. From the console and the `RESTfull services` tab, you can process chunk of text (select `ProcessText`) or process a complete PDF document (select `Annotate PDF document`). 
 
 ![GROBID Software mentions Demo](doc/images/screen5.png)
+
+When processing text, it is possible to examine the JSON output of the service with the `Response` tab:
+
+![GROBID Software mentions Demo](doc/images/screen6.png)
 
 When processing the PDF of a scientific article, the tool will also identify bibliographical reference markers and, when possible, attach the full parsed bibliographical reference to the identified software entity. In addition, bibliographical references can be resolved via [biblio-glutton](https://github.com/kermitt2/biblio-glutton), providing a unique DOI, and optionally additional identifiers like PubMed ID, PMC ID, etc. and a link to the Open Access full text of the reference work when available (via Unpaywall).
 
 ![GROBID Software mentions Demo](doc/images/screen4.png)
+
+Software entity linking against Wikidata is realized by [entity-fishing](https://github.com/kermitt2/entity-fishing) and provides when possible Wikidata ID and English Wikipedia page ID. The web console allows to interact and view the entity information in the infobox:
+
+![GROBID Software mentions Demo](doc/images/screen7.jpeg)
 
 ### Web API
 
@@ -68,10 +96,10 @@ When processing the PDF of a scientific article, the tool will also identify bib
 
 Identify the software mentions in text and optionally disambiguate the extracted software mentions against Wikidata.  
 
-|  method   |  request type         |  response type    |  parameters            |  requirement  |  description  |
-|---        |---                    |---                |---                     |---            |---            |
+|  method   |  request type         |  response type     |  parameters            |  requirement  |  description  |
+|---        |---                    |---                 |---                     |---            |---            |
 | GET, POST | `multipart/form-data` | `application/json` | `text`            | required      | the text to be processed |
-|           |                       |                   | `disambiguate` | optional      | `disambiguate` is a string of value `0` (no disambiguation, default value) or `1` (disambiguate and inject Wikidata entity id and Wikipedia pageId) |
+|           |                       |                    | `disambiguate` | optional      | `disambiguate` is a string of value `0` (no disambiguation, default value) or `1` (disambiguate and inject Wikidata entity id and Wikipedia pageId) |
 
 Response status codes:
 
@@ -154,7 +182,6 @@ For PDF, each entity will be associated with a list of bounding box coordinates 
 
 In addition, the response will contain the bibliographical reference information associated to a software mention when found. The bibliographical information are provided in XML TEI (similar format as GROBID).  
 
-
 #### /service/isalive
 
 The service check `/service/isalive` will return true/false whether the service is up and running.
@@ -215,6 +242,8 @@ Possible values are:
 
 - for __BiLSTM-CRF__: `bilstm-crf`
 
+- for __BiLSTM-CRF_FEATURE__: `bilstm-crf_features`
+
 - for __bert-base-en+CRF__: `bert`
 
 - for __SciBERT+CRF__: `scibert`
@@ -230,7 +259,6 @@ delftEmbeddings: glove
 Other possibilities are `elmo` and `bert`. Note that in the later case, BERT is used to generate contextual embeddings used by the __BiLSTM-CRF__ architecture, in contrast to the usage of a fine-tuned BERT when BERT or SciBERT are selected as `delftArchitecture`.
 
 Note that the default setting is __CRF Wapiti__, which does not require any further installation.
-
 
 ## Benchmarking
 
@@ -256,6 +284,16 @@ All are natively integrated in the JVM to provide state-of-the-art performance b
 
 
 ### Accuracy of the sequence labeling task
+
+The reference evaluation is realized against a stable holdout set corresponding to 20% of all the documents of the Softcite dataset (994 articles). The remaining articles (3,977 articles) are used for training. 
+
+The holdout set reproduces the overall distribution of documents with annotation (29.0% of the documents have at least one annotation), the distribution between Biomedicine and Economics fields, and we used a stratified sampling to reproduce the overall distribution of mentions per document (Python script under `scripts/createHoldoutSet.py`). The holdout set in TEI XML format is available under `resources/dataset/software/evaluation/softcite_corpus-full.holdout-complete.tei.xml`. For evaluating portability, we also provides the subset corresponding to the holdout set with PMC files only (biomedicine) and econ files only (Economics). 
+
+Traditional evaluation using 10-fold cross-validation cannot be considered as reliable in this context, because the distribution of annotations in the training data is modified with undersampling methods to address the sparsity of software mentions in scientific literature (Class Imbalance Problem). Evaluation using 10-fold cross-validation will significantly over-estimate the performance as compared to a realistic random distribution. 
+
+
+
+
 
 Evaluation made in October 2020.
 
