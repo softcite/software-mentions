@@ -304,6 +304,10 @@ Sampling techniques to tackle with Class Imbalance Problem (reducing the weight 
 
 #### Summary
 
+To summarize the table below, the best performing model is the fine-tuned SciBERT with active sampling, with a micro-average F1-score at **74.6**. Note that this is on complete PDF extracted articles and with a realistic random distribution of mentions, which means extreme imbalance ratio at token-level between 7200:1 (`software name`) and 17500:1 (`URL` field). Combined with document-level processing (to increase recall) and entity disambiguation filtering (to increase precision), the complete processing with SciBERT reached **79.1** micro-average F1-score (76.7 for software name).
+
+All the following scores are given at span level (exact match) against the holdout set (994 complete articles, 20% of the Softcite corpus).
+
 |model              |sampling|software_precision|software_recall|software_f1|publisher_precision|publisher_recall|publisher_f1|version_precision|version_recall|version_f1|URL_precision|URL_recall|URL_f1|precision_micro_avg|recall_micro_avg|f1_micro_avg|
 |-------------------|--------|------------------|---------------|-----------|-------------------|----------------|------------|-----------------|--------------|----------|-------------|----------|------|-------------------|----------------|------------|
 |CRF                |none    |29.18             |58.49          |38.93      |41.45              |76.56           |53.78       |51.85            |84.85         |64.37     |18.18        |68.57     |28.74 |34.58              |67.59           |45.75       |
@@ -325,7 +329,7 @@ Sampling techniques to tackle with Class Imbalance Problem (reducing the weight 
 |SciBERT-CRF        |random  |60.48             |77.01          |67.75      |68.11              |82.78           |74.73       |75.36            |91.34         |82.58     |40.32        |71.43     |51.55 |63.90              |80.85           |71.38       |
 |SciBERT-CRF        |active  |69.31             |72.84          |71.03      |75.55              |82.78           |79.00       |80.24            |87.88         |83.88     |45.28        |68.57     |54.55 |71.71              |77.65           |74.56       |
 
-See more detailed scores [here](https://github.com/Impactstory/software-mentions/blob/master/doc/scores-1.3.txt). See [DeLFT](https://github.com/kermitt2/delft) for more details about the models and reproducing all these evaluations. The feature-engineered CRF is based on the [custom Wapiti fork](https://github.com/kermitt2/wapiti) integrated in [GROBID](https://github.com/kermitt2/grobid) and available in the present repository. 
+See below and [DeLFT](https://github.com/kermitt2/delft) for more details about the models and reproducing all these evaluations. The feature-engineered CRF is based on the [custom Wapiti fork](https://github.com/kermitt2/wapiti) integrated in [GROBID](https://github.com/kermitt2/grobid) and available in the present repository. 
 
 `<software>` label means “software name”. `<publisher>` corresponds usually to the publisher of the software or, more rarely, the main developer. `<version>` corresponds to both version number and version dates, when available. 
 
