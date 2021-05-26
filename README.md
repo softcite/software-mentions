@@ -1,4 +1,4 @@
-# GROBID software-mentions module
+# Softcite software mentions recognition module
 
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
@@ -39,7 +39,9 @@ The Softcite dataset is available on Zenodo: https://doi.org/10.5281/zenodo.4445
 More details on the Softcite dataset can be found in the following publication:
 
 ```
-Du, C, Cohoon, J, Lopez, P, Howison, J. Softcite dataset: A dataset of software mentions in biomedical and economic research publications. J Assoc Inf Sci Technol. 2021; 1–15. https://doi.org/10.1002/asi.24454
+Du, C, Cohoon, J, Lopez, P, Howison, J. Softcite dataset: A dataset of software mentions 
+in biomedical and economic research publications. J Assoc Inf Sci Technol. 2021; 1–15. 
+https://doi.org/10.1002/asi.24454
 ```
 
 The dataset is maintained on the following GitHub repository: https://github.com/howisonlab/softcite-dataset
@@ -291,64 +293,53 @@ The holdout set reproduces the overall distribution of documents with annotation
 
 Traditional evaluation using 10-fold cross-validation cannot be considered as reliable in this context, because the distribution of annotations in the training data is modified with undersampling methods to address the sparsity of software mentions in scientific literature (Class Imbalance Problem). Evaluation using 10-fold cross-validation will significantly over-estimate the performance as compared to a realistic random distribution. 
 
+Sampling techniques to tackle with Class Imbalance Problem (reducing the weight of the negative majority class) are the following ones:
 
+- **Random negative sampling**: Different ratio of random negative paragraph examples are used in combination with all the positive paragraph examples to create training sets. 
 
+- **Active negative sampling**: A model trained only with positive examples is first created. This model is then applied to all the paragraphs without manual annotations, and we select those where a mention is wrongly predicted, complemented with random sampling to reach the experimentally defined ratio. 
 
+- **None**: No sampling is used, we train only with all the paragraphs containing at least one annotation as available in the Softcite Dataset.
 
-Evaluation made in October 2020.
-
-The results (precision, recall, f-score) for all the models have been obtained using 10-fold cross-validation (average metrics over the 10 folds) at entity-level. We also indicate the best and worst results over the 10 folds in the [complete result page](https://github.com/Impactstory/software-mentions/blob/master/doc/scores-1.2.txt). See [DeLFT](https://github.com/kermitt2/delft) for more details about the models and reproducing all these evaluations. The feature-engineered CRF is based on the [custom Wapiti fork](https://github.com/kermitt2/wapiti) integrated in [GROBID](https://github.com/kermitt2/grobid) and available in the present repository. 
-
-`<software>` label means “software name”. `<publisher>` corresponds usually to the publisher of the software or, more rarely, the main developer. `<version>` corresponds to both version number and version dates, when available. 
 
 #### Summary
 
-|           | `<software>` | `<publisher>` | `<version>` | `<url>`  | **micro-average** |
-|---        | ---          | ---           | ---         | ---      |  ---              | 
-| **CRF**   |   79.71      |   79.46       |    **87.98**    |   66.72  |     80.94         | 
-|**BiLSTM-CRF**|   78.90   |   82.12       |    84.46    |  46.67   |     79.94         | 
-|**BiLSTM-CRF+features**|   80.72 |  84.16 |    86.30    |  47.47   |     81.79         | 
-|**BiLSTM-CRF+ELMo** | 82.85 | 88.32     |    86.83      |  77.96   |     84.46         | 
-|**BiLSTM-CRF+ELMo+features**| 82.70 | **88.59** |   86.30   |  **78.14**   |     84.32         | 
-|**bert-base-en+CRF**|  79.51  |  77.66      |   82.77   |  67.22   |     79.58         | 
-|**SciBERT+CRF**     |  **85.52**  |  88.06        |   87.31     | 75.47 |     **86.05**        | 
+|model              |sampling|software_precision|software_recall|software_f1|publisher_precision|publisher_recall|publisher_f1|version_precision|version_recall|version_f1|URL_precision|URL_recall|URL_f1|precision_micro_avg|recall_micro_avg|f1_micro_avg|
+|-------------------|--------|------------------|---------------|-----------|-------------------|----------------|------------|-----------------|--------------|----------|-------------|----------|------|-------------------|----------------|------------|
+|CRF                |none    |29.18             |58.49          |38.93      |41.45              |76.56           |53.78       |51.85            |84.85         |64.37     |18.18        |68.57     |28.74 |34.58              |67.59           |45.75       |
+|CRF                |random  |66.92             |53.7           |59.59      |70.4               |75.12           |72.69       |79.75            |83.55         |81.61     |34.78        |45.71     |39.51 |69.25              |63.58           |66.30       |
+|CRF                |active  |68.95             |52.78          |59.79      |70.32              |73.68           |71.96       |80.93            |82.68         |81.8      |32.61        |42.86     |37.04 |70.41              |62.51           |66.23       |
+|BiLSTM-CRF         |none    |21.94             |68.52          |33.23      |45.29              |82.78           |58.54       |53.59            |90.48         |67.31     |16.67        |57.14     |25.81 |29.01              |75.33           |41.89       |
+|BiLSTM-CRF         |random  |57.11             |71.91          |63.66      |67.42              |85.17           |75.26       |72.95            |88.74         |80.08     |50.98        |74.29     |60.47 |61.97              |77.92           |69.03       |
+|BiLSTM-CRF         |active  |62.71             |68.52          |65.49      |68.99              |85.17           |76.23       |63.50            |92.64         |75.35     |63.16        |68.57     |65.75 |64.13              |76.58           |69.81       |
+|BiLSTM-CRF+features|none    |20.94             |74.54          |32.69      |45.66              |85.65           |59.57       |58.40            |91.77         |71.38     |14.53        |48.57     |22.37 |28.03              |79.34           |41.42       |
+|BiLSTM-CRF+features|random  |54.08             |73.61          |62.35      |68.48              |84.21           |75.54       |72.20            |92.21         |80.99     |50.00        |65.71     |56.79 |60.07              |79.16           |68.31       |
+|BiLSTM-CRF+features|active  |54.54             |73.30          |62.54      |68.20              |85.17           |75.74       |79.48            |92.21         |85.37     |47.46        |80.00     |59.57 |61.27              |79.61           |69.25       |
+|BiLSTM-CRF+elmo    |none    |35.56             |74.85          |48.21      |71.55              |79.43           |75.28       |72.86            |88.31         |79.84     |11.62        |80.00     |20.29 |41.71              |78.63           |54.51       |
+|BiLSTM-CRF+elmo    |random  |67.44             |62.96          |65.12      |63.87              |83.73           |72.46       |83.05            |84.85         |83.94     |54.84        |48.57     |51.52 |69.46              |70.88           |70.16       |
+|BiLSTM-CRF+elmo    |active  |61.87             |70.37          |65.85      |74.06              |84.69           |79.02       |77.70            |90.48         |83.60     |48.00        |68.57     |56.47 |66.87              |77.11           |71.63       |
+|BERT-base-CRF      |none    |15.08             |74.23          |25.07      |40.19              |79.43           |53.38       |42.12            |87.88         |56.94     |04.49        |71.43     |08.45 |18.85              |77.92           |30.36       |
+|BERT-base-CRF      |random  |52.76             |67.75          |59.32      |61.57              |78.95           |69.18       |65.89            |85.28         |74.34     |14.96        |54.29     |23.46 |53.74              |73.02           |61.91       |
+|BERT-base-CRF      |active  |56.85             |67.90          |61.88      |66.13              |78.47           |71.77       |73.51            |85.28         |78.96     |19.00        |54.29     |28.15 |58.99              |73.02           |65.26       |
+|SciBERT-CRF        |none    |25.73             |80.40          |38.98      |44.14              |84.69           |58.03       |71.72            |92.21         |80.68     |27.78        |71.43     |40.00 |33.27              |83.35           |47.56       |
+|SciBERT-CRF        |random  |60.48             |77.01          |67.75      |68.11              |82.78           |74.73       |75.36            |91.34         |82.58     |40.32        |71.43     |51.55 |63.90              |80.85           |71.38       |
+|SciBERT-CRF        |active  |69.31             |72.84          |71.03      |75.55              |82.78           |79.00       |80.24            |87.88         |83.88     |45.28        |68.57     |54.55 |71.71              |77.65           |74.56       |
 
-__f-score__ based on 10-folds cross validation at field level.
+See more detailed scores [here](https://github.com/Impactstory/software-mentions/blob/master/doc/scores-1.3.txt). See [DeLFT](https://github.com/kermitt2/delft) for more details about the models and reproducing all these evaluations. The feature-engineered CRF is based on the [custom Wapiti fork](https://github.com/kermitt2/wapiti) integrated in [GROBID](https://github.com/kermitt2/grobid) and available in the present repository. 
 
-#### Detailed scores
-
-|          | CRF ||| BiLSTM-CRF ||| BiLSTM-CRF+ELMo|||
-|---       | --- | --- | --- | --- | --- | --- | ---| --- | --- |
-|**Labels**| Precision | Recall | f-score | Precision | Recall | f-score | Precision | Recall | f-score|
-| `<software>` | 85.87 | 74.39 | 79.71 | 79.07 | 78.77 | 78.90 | 83.49 | 82.27 | 82.85 |
-| `<publisher>`  | 84.63 | 74.95 | 79.46  | 85.16 | 79.33 | 82.12 | 90.92 | **85.92** | 88.32 |
-| `<version>`  | **90.6** | 85.58 | **87.98** | 83.52 | 85.45 | 84.46 | 88.38 | 85.38 | 86.83 |
-| `<url>`  | 72.62 | 62.36 | 66.72 | 43.98 | 50.00 | 46.67 | **72.65** | 85.00 | 77.96|
-|**micro-average** | 86.27 | 76.23 | 80.94 | 80.23 | 79.66 | 79.94 | 85.41 | 83.56 | 84.46 |
-
-|              | BiLSTM-CRF+features  |        |        | BiLSTM-CRF+ELMo+features |        |         |
-|---           | ---                  | ---    | ---    | ---                      | ---    | ---     | 
-|**Labels**    | Precision            | Recall | f-score| Precision          | Recall       | f-score |
-| `<software>` | 82.81                | 78.80  | 80.72  | 83.18              | 82.29        | 82.70   |
-| `<publisher>`| 87.58                | 81.08  | 84.16  | **91.57**          | 85.83        | **88.59**   |
-| `<version>`  | 86.19                | 86.44  | 86.30  | 88.20              | 84.55        | 86.30   |
-| `<url>`      | 44.80                | 50.83  | 47.47  | 72.61              | 85.00        | **78.14**   |
-|**micro-average** | 83.49            | 80.19  | 81.79  | 85.29              | 83.40        | 84.32   |
-
-Evaluation BERT fine-tuned architectures:
-
-|           | bert-base-en+CRF ||| SciBERT+CRF ||| 
-|---        | --- | --- | --- | --- | --- | --- | 
-|**Labels** | Precision | Recall | f-score | Precision | Recall | f-score |
-| `<software>` | 80.37 | 78.70 | 79.51 | **86.65** | **84.43** | **85.52** | 
-| `<publisher>` | 79.81 | 75.67 | 77.66 | 90.89 | 85.42 | 88.06 | 
-| `<version>`  | 81.31 | 84.32 | 82.77 | 87.91 | **86.74** | 87.31 |
-| `<url>`   | 59.44 | 77.50 | 67.22 | 64.86 | **90.83** | 75.47 | 
-|**micro-average** | 79.95 | 79.23 | 79.58 | **86.95** | **85.17** | **86.05** | 
+`<software>` label means “software name”. `<publisher>` corresponds usually to the publisher of the software or, more rarely, the main developer. `<version>` corresponds to both version number and version dates, when available. 
 
 Note that the maximum sequence length is normally 1,500 tokens, except for BERT architectures, which have a limit of 512 for the input sequence length. Tokens beyond 1,500 or 512 are truncated and ignored.  
 
-For this reason, BERT architectures are might be impacted by the input sequence length, which correspond for us to a complete paragraph to annotate. The software attributes can be distributed in more than one sentence, and some key elements introducting a software mention can be spread in the whole paragraph. The number of tokens in a paragraph can go beyond 512, which might degrade the above reported metrics for the transformer models.  
+#### Custom features
+
+Custom features, when used, are as follow: 
+
+![custom features for software mention recognition](doc/images/screen8.png)
+
+The known software name/vocabulary is based on a Wikidata/Wikipedia export for all the software entities, excluding video games. 53,239 different software names are exported (corresponding to around 13K software entities), see [here](https://github.com/ourresearch/software-mentions/blob/master/resources/lexicon/wikidata-software.txt). 
+
+Note: Deep learning models only support additional categorical features, so word form features are automatically excluded for deep learning models based on the arity of the feature in the complete training data. This is an automatic mechanism implemented in [DeLFT](https://github.com/kermitt2/delft).
 
 ### Runtimes
 
@@ -387,9 +378,6 @@ The following runtimes have been obtained based on a Ubuntu 16.04 server Intel i
 
 Batch size is a parameter constrained by the capacity of the available GPU. An improvement of the performance of the deep learning architecture requires increasing the number of GPU and the amount of memory of these GPU, similarly as improving CRF capacity requires increasing the number of available threads and CPU. We observed that running a Deep Learning architectures on CPU is around 50 times slower than on GPU (although it depends on the amount of RAM available with the CPU, which can allow to increase the batch size significantly). 
 
-For the latest and complete evaluation data, see [here](https://github.com/Impactstory/software-mentions/blob/master/doc/scores-1.2.txt)
-
-
 ## Training and evaluation
 
 ### Training only
@@ -403,7 +391,6 @@ For training the software model with all the available training data:
 ```
 
 The training data must be under ```software-mentions/resources/dataset/software/corpus```. 
-
 
 
 ### Training and evaluating with automatic corpus split
