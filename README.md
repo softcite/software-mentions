@@ -293,14 +293,18 @@ The holdout set reproduces the overall distribution of documents with annotation
 
 Traditional evaluation using 10-fold cross-validation cannot be considered as reliable in this context, because the distribution of annotations in the training data is modified with undersampling methods to address the sparsity of software mentions in scientific literature (Class Imbalance Problem). Evaluation using 10-fold cross-validation will significantly over-estimate the performance as compared to a realistic random distribution. 
 
-Sampling techniques to tackle with Class Imbalance Problem (reducing the weight of the negative majority class) are the following ones:
+The training data is built from two sources: 
+
+- all the paragraphs containing at least one annotation from 80% of the articles of the Softcite dataset (1,886 paragraphs from 3,977 articles), corresponding to the file under `resources/dataset/software/corpus/softcite_corpus-full.working.tei.xml`
+- a pool of around 107K paragraphs without any annotations from 80% of the articles of the Softcite dataset, the "negative examples", under `resources/dataset/software/corpus/softcite.all.negative.extended.working.tei.xml` (these 100K pagragraphs were selected randomly from a total of 612,597 paragraphs without manual annotations and not part of the holdout set).
+
+The training data is the combination of the first set with a certain number of negative examples of the second set, depending on the selected undersampling technique. Undersampling techniques are introduced to tackle the Class Imbalance Problem (reducing the weight of the negative majority class), they are the following ones:
 
 - **Random negative sampling**: Different ratio of random negative paragraph examples are used in combination with all the positive paragraph examples to create training sets. 
 
 - **Active negative sampling**: A model trained only with positive examples is first created. This model is then applied to all the paragraphs without manual annotations, and we select those where a mention is wrongly predicted, complemented with random sampling to reach the experimentally defined ratio. 
 
-- **None**: No sampling is used, we train only with all the paragraphs containing at least one annotation as available in the Softcite Dataset.
-
+- **None**: No sampling is used, we train only with all the paragraphs containing at least one annotation as available in the Softcite Dataset, excluding those on the holdout set.
 
 #### Summary
 
@@ -502,11 +506,19 @@ The import process includes the computation of standard Inter-Annotator Agreemen
 
 See this nice [tutorial](https://dkpro.github.io/dkpro-statistics/inter-rater-agreement-tutorial.pdf) about IIA. We might need more sophisticated IIA measures than just percentage agreement for more robustness. We plan, in addition to pourcentage agreement, to also cover various IIA metrics from π, κ, and α families using the [dkpro-statistics-agreement](https://dkpro.github.io/dkpro-statistics/) library:
 
-Christian M. Meyer, Margot Mieskes, Christian Stab, and Iryna Gurevych: [DKPro Agreement: An Open-Source Java Library for Measuring Inter-Rater Agreement](https://dkpro.github.io/dkpro-statistics/dkpro-agreement-poster.pdf), in: Proceedings of the 25th International Conference on Computational Linguistics (COLING), pp. 105–109, August 2014. Dublin, Ireland. 
+```
+Christian M. Meyer, Margot Mieskes, Christian Stab, and Iryna Gurevych. DKPro Agreement: 
+An Open-Source Java Library for Measuring Inter-Rater Agreement, in: Proceedings of the 
+25th International Conference on Computational Linguistics (COLING), pp. 105–109, August 
+2014. Dublin, Ireland. 
+```
 
 For explanations on these IIA measures, see: 
 
-Artstein, R., & Poesio, M. (2008). [Inter-coder agreement for computational linguistics](https://www.mitpressjournals.org/doi/pdf/10.1162/coli.07-034-R2). Computational Linguistics, 34(4), 555-596.
+```
+Artstein, R., & Poesio, M. (2008). Inter-coder agreement for computational linguistics. 
+Computational Linguistics, 34(4), 555-596.
+```
 
 ## Analysis of training data consistency
 
@@ -536,7 +548,7 @@ For generating training data in XML/TEI, based on the current model, from a list
 
 ## Runtime benchmark
 
-A python script is available for benchmarking the services. The main motivation is to evaluation the runtime of the different machine learning models from an end-to-end perspective and on a similar hardware. 
+A python script is available for benchmarking the service runtime. The main motivation is to evaluation the runtime of the different machine learning models from an end-to-end perspective and on a similar hardware. 
 
 By default, the text content for the benchmark is taken from the xml files from the training/eval directory under `resources/dataset/software/corpus`, to call the script for evaluation the text processing service:
 
