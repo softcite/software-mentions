@@ -247,7 +247,6 @@ public class SoftwareTrainer extends AbstractTrainer {
 
                 if (negativeMode != 0) {
                     // inject negative examples, depending on the selected mode
-                    //final String negative_corpus_file_name = "softcite.all.negative.working.tei.xml";
                     final String negative_corpus_file_name = "softcite.all.negative.extended.working.tei.xml";
                     //final String negative_corpus_file_name = "softcite.all.negative.extended.working.pmc.tei.xml";
                     //final String negative_corpus_file_name = "softcite.all.negative.extended.working.econ.tei.xml";
