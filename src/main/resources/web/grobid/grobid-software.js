@@ -31,6 +31,7 @@ var grobid = (function ($) {
     function setBaseUrl(ext) {
         var baseUrl = defineBaseURL(ext);
         $('#gbdForm').attr('action', baseUrl);
+        $('#gbdForm2').attr('action', baseUrl);
     }
 
     $(document).ready(function () {
@@ -38,6 +39,7 @@ var grobid = (function ($) {
         $("#subTitle").html("About");
         $("#divAbout").show();
         $("#divRestI").hide();
+        $("#divRestII").hide();
         $("#divDoc").hide();
 
         createInputTextArea('text');
@@ -60,50 +62,69 @@ var grobid = (function ($) {
             $('#inputTextArea').val(examples[3]);
         });
 
-        $("#selectedService").val('processSoftwareText');
+        /*$("#selectedService").val('processSoftwareText');
         $('#selectedService').change(function () {
             processChange();
             return true;
-        });
+        });*/
 
         $('#submitRequest').bind('click', submitQuery);
+        $('#submitRequest2').bind('click', submitQuery);
 
         $("#about").click(function () {
             $("#about").attr('class', 'section-active');
-            $("#rest").attr('class', 'section-not-active');
+            $("#textTab").attr('class', 'section-not-active');
+            $("#pdfTab").attr('class', 'section-not-active');
             $("#doc").attr('class', 'section-not-active');
-            $("#demo").attr('class', 'section-not-active');
-
+            
             $("#subTitle").html("About");
             $("#subTitle").show();
 
             $("#divAbout").show();
             $("#divRestI").hide();
+            $("#divRestII").hide();
             $("#divDoc").hide();
-            $("#divDemo").hide();
             return false;
         });
-        $("#rest").click(function () {
-            $("#rest").attr('class', 'section-active');
+        $("#textTab").click(function () {
+            $("#textTab").attr('class', 'section-active');
             $("#doc").attr('class', 'section-not-active');
             $("#about").attr('class', 'section-not-active');
-            $("#demo").attr('class', 'section-not-active');
+            $("#pdfTab").attr('class', 'section-not-active');
 
             $("#subTitle").hide();
-            //$("#subTitle").show();
-            processChange();
-
+            
             $("#divRestI").show();
+            $("#divRestII").hide();
             $("#divAbout").hide();
             $("#divDoc").hide();
-            $("#divDemo").hide();
+
+            processChange();
+
+            return false;
+        });
+        $("#pdfTab").click(function () {
+            $("#pdfTab").attr('class', 'section-active');
+            $("#doc").attr('class', 'section-not-active');
+            $("#about").attr('class', 'section-not-active');
+            $("#textTab").attr('class', 'section-not-active');
+
+            $("#subTitle").hide();
+            
+            $("#divRestII").show();
+            $("#divRestI").hide();
+            $("#divAbout").hide();
+            $("#divDoc").hide();
+
+            processChange();
+
             return false;
         });
         $("#doc").click(function () {
             $("#doc").attr('class', 'section-active');
-            $("#rest").attr('class', 'section-not-active');
+            $("#textTab").attr('class', 'section-not-active');
             $("#about").attr('class', 'section-not-active');
-            $("#demo").attr('class', 'section-not-active');
+            $("#pdfTab").attr('class', 'section-not-active');
 
             $("#subTitle").html("Doc");
             $("#subTitle").show();
@@ -111,7 +132,7 @@ var grobid = (function ($) {
             $("#divDoc").show();
             $("#divAbout").hide();
             $("#divRestI").hide();
-            $("#divDemo").hide();
+            $("#divRestII").hide();
             return false;
         });
     });
@@ -119,11 +140,13 @@ var grobid = (function ($) {
     function ShowRequest(formData, jqForm, options) {
         var queryString = $.param(formData);
         $('#infoResult').html('<font color="red">Requesting server...</font>');
+        $('#infoResult2').html('<font color="red">Requesting server...</font>');
         return true;
     }
 
     function AjaxError(jqXHR, textStatus, errorThrown) {
         $('#infoResult').html("<font color='red'>Error encountered while requesting the server.<br/>" + jqXHR.responseText + "</font>");
+        $('#infoResult2').html("<font color='red'>Error encountered while requesting the server.<br/>" + jqXHR.responseText + "</font>");
         entities = null;
     }
 
@@ -132,6 +155,7 @@ var grobid = (function ($) {
             message = "";
         message += " - The PDF document cannot be annotated. Please check the server logs.";
         $('#infoResult').html("<font color='red'>Error encountered while requesting the server.<br/>"+message+"</font>");
+        $('#infoResult2').html("<font color='red'>Error encountered while requesting the server.<br/>"+message+"</font>");
         entities = null;
         return true;
     }
@@ -141,16 +165,23 @@ var grobid = (function ($) {
     }
 
     function submitQuery() {
-        $('#infoResult').html('<font color="grey">Requesting server...</font>');
-        $('#requestResult').html('');
+        
+
+        
 
         // re-init the entity map
         entityMap = new Object();
         conceptMap = new Object();
         referenceMap = new Object();
 
-        var selected = $('#selectedService option:selected').attr('value');
-        if (selected == 'processSoftwareText') {
+        //var selected = $('#selectedService option:selected').attr('value');
+
+        //if (selected == 'processSoftwareText') {
+        if ($("#divRestI").is(":visible")) {
+            
+            $('#infoResult').html('<font color="grey">Requesting server...</font>');
+            $('#requestResult').html('');
+
             var urlLocal = $('#gbdForm').attr('action');
             if ($("#disambiguate").is(":checked"))  
                 disambiguateVal = '1';
@@ -167,18 +198,23 @@ var grobid = (function ($) {
                 //dataType: "text"
             });
         }
-        else if (selected == 'annotateSoftwarePDF') {
+        //else if (selected == 'annotateSoftwarePDF') {
+        else if ($("#divRestII").is(":visible")) {
+
+            $('#infoResult2').html('<font color="grey">Requesting server...</font>');
+            $('#requestResult2').html('');
+
             // we will have JSON annotations to be layered on the PDF
 
             // request for the annotation information
-            var form = document.getElementById('gbdForm');
+            var form = document.getElementById('gbdForm2');
             var formData = new FormData(form);
 
-            if (!$("#disambiguate").is(":checked"))  
+            if (!$("#disambiguate2").is(":checked"))  
                 formData.append('disambiguate', '0');
 
             var xhr = new XMLHttpRequest();
-            var url = $('#gbdForm').attr('action');
+            var url = $('#gbdForm2').attr('action');
             xhr.responseType = 'json'; 
             xhr.open('POST', url, true);
             //ShowRequest2();
@@ -197,7 +233,7 @@ var grobid = (function ($) {
                 // Use PDFJS to render a pdfDocument from pdf array
                 PDFJS.getDocument(pdfAsArray).then(function (pdf) {
                     // Get div#container and cache it for later use
-                    var container = document.getElementById("requestResult");
+                    var container = document.getElementById("requestResult2");
                     // enable hyperlinks within PDF files.
                     //var pdfLinkService = new PDFJS.PDFLinkService();
                     //pdfLinkService.setDocument(pdf, null);
@@ -322,13 +358,14 @@ var grobid = (function ($) {
     }
 
     function SubmitSuccesful(responseText, statusText) {
-        var selected = $('#selectedService option:selected').attr('value');
+        //var selected = $('#selectedService option:selected').attr('value');
 
-        if (selected == 'processSoftwareText') {
+        //if (selected == 'processSoftwareText') 
+        {    
             SubmitSuccesfulText(responseText, statusText);
-        } else if (selected == 'annotateSoftwarePDF') {
+        } /*else if (selected == 'annotateSoftwarePDF') {
             SubmitSuccesfulPDF(responseText, statusText);          
-        }
+        }*/
 
     }
 
@@ -533,11 +570,11 @@ var grobid = (function ($) {
     function setupAnnotations(response) {
         // we must check/wait that the corresponding PDF page is rendered at this point
         if ((response == null) || (response.length == 0)) {
-            $('#infoResult')
+            $('#infoResult2')
                 .html("<font color='red'>Error encountered while receiving the server's answer: response is empty.</font>");
             return;
         } else {
-            $('#infoResult').html('');
+            $('#infoResult2').html('');
         }
 
         var json = response;
@@ -983,14 +1020,16 @@ var grobid = (function ($) {
     }
 
     function processChange() {
-        var selected = $('#selectedService option:selected').attr('value');
+        //var selected = $('#selectedService option:selected').attr('value');
 
-        if (selected == 'processSoftwareText') {
+        if ($("#divRestI").is(":visible")) {
+        //if (selected == 'processSoftwareText') {
             createInputTextArea();
             //$('#consolidateBlock').show();
             setBaseUrl('processSoftwareText');
-        } else if (selected == 'annotateSoftwarePDF') {
-            createInputFile(selected);
+        //} else if (selected == 'annotateSoftwarePDF') {
+        } else if ($("#divRestII").is(":visible")) {
+            createInputFile();
             //$('#consolidateBlock').hide();
             setBaseUrl('annotateSoftwarePDF');
         }
@@ -1328,12 +1367,12 @@ var grobid = (function ($) {
         return localHtml;
     }
 
-    function createInputFile(selected) {
+    function createInputFile() {
         $('#textInputDiv').hide();
         $('#fileInputDiv').show();
 
-        $('#gbdForm').attr('enctype', 'multipart/form-data');
-        $('#gbdForm').attr('method', 'post');
+        $('#gbdForm2').attr('enctype', 'multipart/form-data');
+        $('#gbdForm2').attr('method', 'post');
     }
 
     function createInputTextArea() {

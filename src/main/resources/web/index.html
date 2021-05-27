@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>GROBID Software Recognition Web Application</title>
+        <title>Softcite Software Recognition Web Console</title>
         <link rel="icon" type="image/x-icon" href="resources/img/favicon.ico"/> 
         <link rel="shortcut icon" type="image/x-icon" href="resources/img/favicon.ico"/>
 
@@ -46,14 +46,14 @@
           <div class="content">  
             
             <div class="page-header">
-                 <h1><span style="color:#333;">GROBID Software<!--img src="resources/img/grobid_header_logo.png" /--> 
-                     <span style="padding-left:40px;color:#AE0C0C;">        
+                 <h2><span style="color:#333;">Softcite software mention recognizer<!--img src="resources/img/grobid_header_logo.png" /--></span>
+                     <span style="padding-left:40px;color:#AE0C0C;"></span></h2>
         <h2><small> 
             <a class="section-active" id="about" href="#">About</a> 
                 <span style="padding-left:20px;">&nbsp;</span> 
-            <!--a class="section-active" id="demo" href="#">Demo</a> 
-                <span style="padding-left:20px;">&nbsp;</span-->        
-            <a class="section-not-active" id="rest" href="#">RESTfull services</a> 
+            <a class="section-not-active" id="textTab" href="#">Process Text</a> 
+                <span style="padding-left:20px;">&nbsp;</span>        
+            <a class="section-not-active" id="pdfTab" href="#">Process PDF</a> 
                 <span style="padding-left:20px;">&nbsp;</span> 
             <a class="section-not-active" id="doc" href="#">Doc</a> 
                 <span style="padding-left:20px;">&nbsp;</span> 
@@ -66,55 +66,30 @@
                 <td style="width:100px;align:left;vertical-align: top;"><h4><span id="subTitle"></span></h4></td> 
                 <td style="align:left;vertical-align: top;">
                     <div id="divAbout"> 
-                        <p><large><b>GROBID</b> software entity recognition and disambiguation</p>
-                        <p>This is an open source project available on <a href="https://github.com/kermitt2/grobid-software">GitHub</a> under <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2 License</a>. </p>    
+                        <p><large><b>Softcite</b> software mention recognition and disambiguation</p>
+                        <p>This is an open source project available on <a href="https://github.com/ourresearch/software-mentions" target="_blank" style="color: #BC0E0E;">GitHub</a> under <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank" style="color: #BC0E0E;">Apache 2 License</a>. </p>    
                         <p></p> 
                     </div>   
                     <div id="divDoc"> 
-                        <p>This software mention recognition demo is based on the GROBID Software JSON REST services.</p> 
-                        <p></p>
+                        <p>This Softcite software mention recognition demo is based on a set of REST web services documented <a target="_blank" href="https://github.com/ourresearch/software-mentions#web-api" style="color: #BC0E0E;">here</a>.</p> 
+                        <p>For more general documentation, see the project <a href="https://github.com/ourresearch/software-mentions" target="_blank" style="color: #BC0E0E;">GitHub repository</a>.</p>
                     </div>
                 </td> 
                 </tr>
             </table>
             
             <div id="divRestI">      
-                <!--div class="form-horizontal" method="post" id="gbdForm" target=_blank accept-charset="UTF-8"-->
                 <form class="form-horizontal" method="post" id="gbdForm" target=_blank accept-charset="UTF-8">
                     <table border="0">
                         <tr>
                             <td>Service to call &nbsp;</td>
-                            <td>
-                                <select id="selectedService">
-                                    <option value="processSoftwareText" selected>Process
-                                        text</option>
-                                    <option value="annotateSoftwarePDF">Annotate PDF document</option>
-                                </select>
-                            </td>
+                            <td><b><font size="-1"><a href="https://github.com/ourresearch/software-mentions#serviceprocesssoftwaretext" target="_blank">service/processSoftwareText</a></font></b></td>
                         </tr>
                         <tr><td>&nbsp;</td><td/></tr>
                         <tr>
                             <td><span id="label">&nbsp;</span></td>
                             <td>
                                 <div id="field">
-                                    
-                                    <div class="fileupload fileupload-new" data-provides="fileupload" id="fileInputDiv">
-                                      <div class="input-append">
-                                        <div class="uneditable-input span4" style="white-space:normal;">
-                                            <i class="icon-file fileupload-exists" style="white-space:normal;"></i>
-                                            <span class="fileupload-preview" style="white-space:normal;"></span>
-                                        </div>
-                                        <span class="">
-                                            
-                                        <span class="btn btn-file">
-                                            <span class="fileupload-new" id="labelFile">Select file</span>
-                                            <span class="fileupload-exists">Change</span>
-                                            <input id="input" name="input" type="file" />
-                                        </span>
-                                        <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
-                                      </div>
-                                    </div>
-
                                     <div id="textInputDiv">
                                         <table>
                                             <tr>
@@ -146,6 +121,64 @@
                 <br>
                 <div id="infoResult"></div>
                 <div id="requestResult"></div>
+            </div>
+
+            <div id="divRestII">      
+                <form class="form-horizontal" method="post" id="gbdForm2" target=_blank accept-charset="UTF-8">
+                    <table border="0">
+                        <tr>
+                            <td>Service to call &nbsp;</td>
+                            <td><b><font size="-1"><a href="https://github.com/ourresearch/software-mentions#serviceannotatesoftwarepdf" target="_blank">service/annotateSoftwarePDF</a></font></b></td>
+                        </tr>
+                        <!--tr><td>&nbsp;</td>
+                            <td>
+                                <p>&nbsp;</p>
+                                <p>&nbsp;<a id="pdf0" href="#">PDF 1</a> &nbsp;<a id="pdf1" href="#">PDF 2</a> &nbsp;<a id="pdf2" href="#">PDF 3</a></p>
+                            </td>
+                        </tr-->
+                        <tr>
+                            <td><span id="label2">&nbsp;</span></td>
+                            <td>
+                                <div id="field2">
+                                    
+                                    <div class="fileupload fileupload-new" data-provides="fileupload" id="fileInputDiv">
+                                      <div class="input-append">
+                                        <div class="uneditable-input span4" style="white-space:normal;">
+                                            <i class="icon-file fileupload-exists" style="white-space:normal;"></i>
+                                            <span class="fileupload-preview" style="white-space:normal;"></span>
+                                        </div>
+                                        <span class="">
+                                            
+                                        <span class="btn btn-file">
+                                            <span class="fileupload-new" id="labelFile">Select file</span>
+                                            <span class="fileupload-exists">Change</span>
+                                            <input id="input" name="input" type="file" />
+                                        </span>
+                                        <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+                                      </div>
+                                    </div>
+
+                                    <div id="checkboxes2">
+                                        <table>
+                                            <tr>
+                                            <td><label class="checkbox" id="disambiguateBlock2" style="display: inherit;">   
+                                                <input type="checkbox" id="disambiguate2" name="disambiguate" value="1" checked="">Disambiguate mentions</input>
+                                            </label></td>
+                                            </tr>
+                                        </table>
+                                    </div>                  
+                                </div>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td><td colspan="1"><input id="submitRequest2" value="Submit" class="btn btn-success"/></td>
+                        </tr>   
+                    </table>
+                </form>
+                <br>
+                <div id="infoResult2"></div>
+                <div id="requestResult2"></div>
             </div>
     
         </div>  
