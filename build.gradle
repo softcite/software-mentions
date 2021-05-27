@@ -176,9 +176,12 @@ artifacts {
 }
 
 task copyModels(type: Copy) {
-    from "${rootDir}/resources/models"
-    include "*"
-    into "${rootDir}/../grobid-home/models/software/"
+    from "${rootDir}/resources/models/"
+    include "**"
+    into "${rootDir}/../grobid-home/models/"
+    doLast {
+        ant.gunzip(src: "${rootDir}/../grobid-home/models/software/model.wapiti.gz", dest: "${rootDir}/../grobid-home/models/software/")
+    }
 }
 
 //tasks.withType(JavaCompile) {
