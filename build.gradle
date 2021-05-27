@@ -30,6 +30,7 @@ plugins {
     id 'application'
     id 'maven'
     id 'com.github.johnrengelman.shadow' version '5.2.0'
+    id "de.undercouch.download" version "4.1.1"
 }
 
 group = "org.grobid.software"
@@ -176,11 +177,22 @@ artifacts {
 }
 
 task copyModels(type: Copy) {
-    from "${rootDir}/resources/models/"
-    include "**"
-    into "${rootDir}/../grobid-home/models/"
     doLast {
+        from "${rootDir}/resources/models/"
+        include "**"
+        into "${rootDir}/../grobid-home/models/"
         ant.gunzip(src: "${rootDir}/../grobid-home/models/software/model.wapiti.gz", dest: "${rootDir}/../grobid-home/models/software/")
+    }
+}
+
+task installScibert {
+    doLast {
+        download {
+            src "https://grobid.s3.amazonaws.com/software-scibert.zip"
+            dest "${rootDir}/../grobid-home/models/"
+            overwrite false
+        }
+        ant.unzip(src: "${rootDir}/../grobid-home/models/software-scibert.zip", dest: "${rootDir}/../grobid-home/models/")
     }
 }
 

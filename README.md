@@ -60,6 +60,10 @@ Copy the provided pre-trained models in the standard grobid-home path:
 
 > ./gradlew copyModels 
 
+If you wish to use the SciBERT model (currently the best performing one), which is 1.4 GB size and too large to be stored in the GitHub repo, it needs to be downloaded and installed with the following command:
+
+> ./gradlew installScibert
+
 Try compiling everything with:
 
 > ./gradlew clean install 
