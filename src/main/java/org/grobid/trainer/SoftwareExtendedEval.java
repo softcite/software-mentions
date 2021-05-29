@@ -99,7 +99,7 @@ public class SoftwareExtendedEval extends SoftwareTrainer {
 
         final File dataPath = trainDataPath;
         createCRFPPData(getCorpusPath(), dataPath, evalDataPath, split);
-        GenericTrainer trainer = TrainerFactory.getTrainer();
+        GenericTrainer trainer = TrainerFactory.getTrainer(model);
 
         if (epsilon != 0.0)
             trainer.setEpsilon(epsilon);

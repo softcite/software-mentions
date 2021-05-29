@@ -51,7 +51,7 @@ import java.util.List;
 
 import org.grobid.core.main.LibraryLoader;
 import org.grobid.core.utilities.GrobidProperties;
-import org.grobid.core.utilities.GrobidPropertyKeys;
+//import org.grobid.core.utilities.GrobidPropertyKeys;
 import org.grobid.core.engines.tagging.GrobidCRFEngine;
 
 import me.tongfei.progressbar.*;
@@ -1080,7 +1080,7 @@ public class SoftwareTrainer extends AbstractTrainer {
 
         final File dataPath = trainDataPath;
         createCRFPPData(getCorpusPath(), dataPath, evalDataPath, split);
-        GenericTrainer trainer = TrainerFactory.getTrainer();
+        GenericTrainer trainer = TrainerFactory.getTrainer(model);
 
         if (epsilon != 0.0)
             trainer.setEpsilon(epsilon);

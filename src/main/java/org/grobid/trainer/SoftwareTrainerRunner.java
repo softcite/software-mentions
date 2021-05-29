@@ -3,7 +3,7 @@ package org.grobid.trainer;
 import org.grobid.core.main.GrobidHomeFinder;
 import org.grobid.core.utilities.SoftwareConfiguration;
 import org.grobid.core.utilities.GrobidProperties;
-import org.grobid.core.utilities.GrobidPropertyKeys;
+//import org.grobid.core.utilities.GrobidPropertyKeys;
 import org.grobid.core.main.LibraryLoader;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
