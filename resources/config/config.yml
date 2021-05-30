@@ -1,12 +1,5 @@
 grobidHome: ../grobid-home
 
-tmpPath: ../grobid-home/tmp/
-
-#------------------------------------------------------
-#proxy to be used for external call ("null" when no proxy)
-proxyHost: null
-proxyPort: null
-
 # entity-fishing server information for performing entity disambiguation
 # for https, indicate 443 as port
 entityFishingHost: cloud.science-miner.com/nerd
@@ -18,17 +11,17 @@ corpusPath: resources/dataset/software/corpus
 templatePath: resources/dataset/software/crfpp-templates/software.template
 
 model:
-  - name: "software"
-    engine: "wapiti"
-    #engine: "delft"
-    wapiti:
-      # wapiti training parameters, they will be used at training time only
-      epsilon: 0.00001
-      window: 30
-      nbMaxIterations: 1500
-    delft:
-      # deep learning parameters
-      architecture: "BidLSTM_CRF"
-      #architecture: "scibert"
-      useELMo: false
-      embeddings_name: "glove-840B"
+  name: "software"
+  engine: "wapiti"
+  #engine: "delft"
+  wapiti:
+    # wapiti training parameters, they will be used at training time only
+    epsilon: 0.00001
+    window: 30
+    nbMaxIterations: 1500
+  delft:
+    # deep learning parameters
+    architecture: "BidLSTM_CRF"
+    #architecture: "scibert"
+    useELMo: false
+    embeddings_name: "glove-840B"

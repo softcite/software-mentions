@@ -51,14 +51,14 @@ public class SoftwareExtendedEval extends SoftwareTrainer {
     private boolean disambiguate = false;
 
     public SoftwareExtendedEval() {
-        super(0.00001, 20, 0);
-        softwareLexicon = SoftwareLexicon.getInstance();
+        super();
+        //softwareLexicon = SoftwareLexicon.getInstance();
     }
 
-    public SoftwareExtendedEval(double epsilon, int window, int nbMaxIterations) {
+    /*public SoftwareExtendedEval(double epsilon, int window, int nbMaxIterations) {
         super(epsilon, window, 2000);
         softwareLexicon = SoftwareLexicon.getInstance();
-    }
+    }*/
 
     /**
      * Standard evaluation via the the usual Grobid evaluation framework.

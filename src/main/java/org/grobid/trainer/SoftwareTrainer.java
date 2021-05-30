@@ -68,14 +68,11 @@ public class SoftwareTrainer extends AbstractTrainer {
     protected SoftwareConfiguration conf = null;
 
     public SoftwareTrainer() {
-        this(0.00001, 20, 0);
-
-        epsilon = 0.00001;
-        window = 30;
-        nbMaxIterations = 1500;
+        super(GrobidModels.SOFTWARE);
+        softwareLexicon = SoftwareLexicon.getInstance();
     }
 
-    public SoftwareTrainer(double epsilon, int window, int nbMaxIterations) {
+    /*public SoftwareTrainer(double epsilon, int window, int nbMaxIterations) {
         super(GrobidModels.SOFTWARE);
 
         // adjusting CRF training parameters for this model
@@ -84,7 +81,7 @@ public class SoftwareTrainer extends AbstractTrainer {
         //this.nbMaxIterations = nbMaxIterations;
         this.nbMaxIterations = 2000;
         softwareLexicon = SoftwareLexicon.getInstance();
-    }
+    }*/
 
     public void setSoftwareConf(SoftwareConfiguration conf) {
         this.conf = conf;
