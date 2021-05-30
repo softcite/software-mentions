@@ -75,8 +75,12 @@ public class SoftwareMain {
     protected static void initProcess(SoftwareConfiguration conf) {
         GrobidProperties.getInstance();
 
-        if (conf.getEngine().toUpperCase().equals("WAPITI"))    
-            LibraryLoader.load();
+        /*if (conf.getEngine().toUpperCase().equals("WAPITI"))    
+            LibraryLoader.load();*/
+
+        if (conf != null && conf.getModel() != null)
+            GrobidProperties.addModel(conf.getModel());
+        LibraryLoader.load();
     }
 
     protected static void initProcess(String grobidHome, SoftwareConfiguration conf) {
@@ -85,9 +89,13 @@ public class SoftwareMain {
             grobidHomeFinder.findGrobidHomeOrFail();
             GrobidProperties.getInstance(grobidHomeFinder);
 
+            if (conf != null && conf.getModel() != null)
+                GrobidProperties.addModel(conf.getModel());
+            LibraryLoader.load();
+
             //if (SoftwareProperties.get("grobid.software.engine").toUpperCase().equals("WAPITI"))
-            if (conf.getEngine().toUpperCase().equals("WAPITI"))    
-                LibraryLoader.load();
+            /*if (conf.getEngine().toUpperCase().equals("WAPITI"))    
+                LibraryLoader.load();*/
         } catch (final Exception exp) {
             System.err.println("Grobid initialisation failed: " + exp);
         }

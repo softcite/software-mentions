@@ -148,7 +148,7 @@ public class AnnotatedCorpusGeneratorTurtle {
     private File getPDF(String pathPDFs, String identifier) {
         File inRepo = new File(pathPDFs + File.separator + identifier + ".pdf");
         if (!inRepo.exists()) {
-            File notInRepo = articleUtilities.getPDFDoc(identifier, this.configuration);
+            File notInRepo = articleUtilities.getPDFDoc(identifier);
             if (notInRepo == null) {
                 return null;
             } else {

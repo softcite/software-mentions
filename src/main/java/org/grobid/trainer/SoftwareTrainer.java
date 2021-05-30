@@ -1127,11 +1127,15 @@ public class SoftwareTrainer extends AbstractTrainer {
     
             System.out.println(">>>>>>>> GROBID_HOME="+GrobidProperties.get_GROBID_HOME_PATH());
 
-            if (conf != null &&
+            if (conf != null && conf.getModel() != null)
+                GrobidProperties.addModel(conf.getModel());
+            LibraryLoader.load();
+
+            /*if (conf != null &&
                 conf.getEngine() != null && 
                 conf.getEngine().equals("delft"))
                 GrobidProperties.setPropertyValue(GrobidPropertyKeys.PROP_GROBID_CRF_ENGINE + ".software", "delft");
-            LibraryLoader.load();
+            LibraryLoader.load();*/
 
         } catch (final Exception exp) {
             System.err.println("GROBID software initialisation failed: " + exp);

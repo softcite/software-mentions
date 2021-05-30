@@ -2137,7 +2137,7 @@ System.out.print("\n");*/
     public static File getPDF(String pathPDFs, String identifier, ArticleUtilities articleUtilities, SoftwareConfiguration conf) {
         File inRepo = new File(pathPDFs + File.separator + identifier + ".pdf");
         if (!inRepo.exists()) {
-            File notInRepo = articleUtilities.getPDFDoc(identifier, conf);
+            File notInRepo = articleUtilities.getPDFDoc(identifier);
             if (notInRepo == null) {
                 return null;
             } else {

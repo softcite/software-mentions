@@ -25,7 +25,8 @@ import org.slf4j.LoggerFactory;
 
 import org.grobid.core.utilities.KeyGen;
 import org.grobid.core.utilities.TextUtilities;
-import org.grobid.core.utilities.SoftwareConfiguration;
+import org.grobid.core.utilities.GrobidProperties;
+//import org.grobid.core.utilities.SoftwareConfiguration;
 
 /**
  *  Some convenient methods for retrieving the original PDF files from the annotated set.
@@ -51,7 +52,7 @@ public class ArticleUtilities {
      *
      *  Return null if the identification fails.
      */
-    public File getPDFDoc(String identifier, Source source, SoftwareConfiguration configuration) {
+    public File getPDFDoc(String identifier, Source source) {
         try {
             if (source == null) {
                 source = guessDomain(identifier);
@@ -102,7 +103,7 @@ public class ArticleUtilities {
             }
 
             File file = uploadFile(urll, 
-                configuration.getTmpPath(), 
+                GrobidProperties.getInstance().getTempPath().getPath(), 
                 KeyGen.getKey()+".pdf");
             return file;
         }
@@ -113,8 +114,8 @@ public class ArticleUtilities {
         return null;
     }
     
-    public File getPDFDoc(String identifier, SoftwareConfiguration configuration) {
-        return getPDFDoc(identifier, null, configuration);
+    public File getPDFDoc(String identifier) {
+        return getPDFDoc(identifier, null);
     }
 
     private static String urlDecode(String value) throws Exception {
