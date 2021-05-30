@@ -177,12 +177,10 @@ artifacts {
 }
 
 task copyModels(type: Copy) {
-    doLast {
-        from "${rootDir}/resources/models/"
-        include "**"
-        into "${rootDir}/../grobid-home/models/"
-        ant.gunzip(src: "${rootDir}/../grobid-home/models/software/model.wapiti.gz", dest: "${rootDir}/../grobid-home/models/software/")
-    }
+    from "${rootDir}/resources/models/"
+    include "**"
+    into "${rootDir}/../grobid-home/models/"
+    ant.gunzip(src: "${rootDir}/../grobid-home/models/software/model.wapiti.gz", dest: "${rootDir}/../grobid-home/models/software/")
 }
 
 task installScibert {
