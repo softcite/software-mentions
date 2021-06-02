@@ -26,7 +26,6 @@ COPY grobid-core/ ./grobid-core/
 COPY grobid-service/ ./grobid-service/
 COPY grobid-trainer/ ./grobid-trainer/
 
-
 # cleaning unused native libraries before packaging
 RUN rm -rf grobid-home/pdf2xml/lin-32
 RUN rm -rf grobid-home/pdf2xml/mac-64
@@ -34,6 +33,9 @@ RUN rm -rf grobid-home/pdf2xml/win-*
 RUN rm -rf grobid-home/lib/lin-32
 RUN rm -rf grobid-home/lib/win-*
 RUN rm -rf grobid-home/lib/mac-64
+
+# cleaning unused datasets stuff
+RUN rm -rf software-mentions/resources/dataset
 
 RUN ./gradlew clean assemble install --no-daemon  --info --stacktrace
 
@@ -140,7 +142,7 @@ RUN ./gradlew copyModels
 RUN ./gradlew installScibert
 
 RUN rm -rf resources/models
-RUN rm -rf resources/dataset
+RUN rm /opt/grobid/grobid-home/models/software/model.wapiti.gz
 
 # trigger gradle wrapper install
 RUN ./gradlew --version
