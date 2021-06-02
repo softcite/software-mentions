@@ -139,8 +139,12 @@ RUN ls -al resources/models/software/
 RUN ./gradlew copyModels
 RUN ./gradlew installScibert
 
+RUN rm -rf resources/models
+RUN rm -rf resources/dataset
+
 # trigger gradle wrapper install
 RUN ./gradlew --version
+RUN ./gradlew clean install
 
 CMD ["./gradlew", "run"]
 

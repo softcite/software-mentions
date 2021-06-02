@@ -48,6 +48,9 @@ tasks.withType(JavaCompile) {
 repositories {
     mavenLocal()
     mavenCentral()
+    maven {
+        url new File(rootProject.rootDir, "lib")
+    }
     jcenter()
 }
 
