@@ -136,18 +136,23 @@ COPY --from=builder /opt/grobid-source/software-mentions /opt/grobid/software-me
 COPY --from=builder /root/.m2/repository/org /opt/grobid/software-mentions/lib/org
 
 WORKDIR /opt/grobid/software-mentions
-RUN ls -al resources/models/
-RUN ls -al resources/models/software/
-RUN ./gradlew copyModels
-RUN ./gradlew installScibert
+RUN ./gradlew copyModels installScibert  && rm -rf resources/models && rm /opt/grobid/grobid-home/models/software/model.wapiti.gz && rm /opt/grobid/grobid-home/models/software-scibert.zip
 
-RUN rm -rf resources/models
-RUN rm /opt/grobid/grobid-home/models/software/model.wapiti.gz
+#RUN rm -rf resources/models
+#RUN rm /opt/grobid/grobid-home/models/software/model.wapiti.gz
+#RUN rm /opt/grobid/grobid-home/models/software-scibert.zip
 
 # trigger gradle wrapper install
 RUN ./gradlew --version
-RUN ./gradlew clean install
+#RUN ./gradlew clean install
 
 CMD ["./gradlew", "run"]
 
 ARG GROBID_VERSION
+
+LABEL \
+    authors="The contributors" \
+    org.label-schema.name="software-mentions" \
+    org.label-schema.description="Image with software-mentions service" \
+    org.label-schema.url="https://github.com/ourresearch/software-mentions" \
+    org.label-schema.version=${GROBID_VERSION}

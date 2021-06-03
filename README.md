@@ -74,7 +74,13 @@ Run some test:
 
 ## Docker image
 
-A docker image for the `software-mentions` service can be built with the project Dockerfile. The complete process is as follow: 
+It's possible to use Docker image via docker HUB, pull the image (5.2GB) as follow: 
+
+```bash
+docker pull grobid/software-mentions:0.7.0-SNAPSHOT 
+```
+
+As an alterntive, a docker image for the `software-mentions` service can be built with the project Dockerfile to match the current master version. The complete process is as follow: 
 
 - copy the `Dockerfile.software` at the root of the GROBID installation:
 
@@ -88,9 +94,9 @@ A docker image for the `software-mentions` service can be built with the project
 > docker build -t grobid/software-mentions:0.7.0-SNAPSHOT --build-arg GROBID_VERSION=0.7.0-SNAPSHOT --file Dockerfile.software .
 ```
 
-The Docker image build take several minutes, installing GROBID, software-mentions, a complete Python Deep Learning environment based on DeLFT and deep learning models downloaded from the internet (one fine-tuned base BERT model has a size of ~1.3GB). The resulting image is thus very large, around 10GB, due to the deep learning resources and model. 
+The Docker image build take several minutes, installing GROBID, software-mentions, a complete Python Deep Learning environment based on DeLFT and deep learning models downloaded from the internet (one fine-tuned base BERT model has a size of ~1.3GB). The resulting image is thus very large, around 8GB, due to the deep learning resources and model. 
 
-- you can now run the `software-mentions` service via Docker:
+After pulling or building the Docker image, you can now run the `software-mentions` service as a container:
 
 ```bash
 >  docker run --rm --gpus all -it -p 8060:8060 --init grobid/software-mentions:0.7.0-SNAPSHOT
@@ -109,7 +115,6 @@ By default, CRF models if used for the software mention recognition. To modify t
 ```bash
 > docker run --rm --gpus all --init -p 8060:8060 -v /home/lopez/grobid/software-mentions/resources/config/config.yml:/opt/grobid/software-mentions/resources/config/config.yml:ro  grobid/software-mentions:0.7.0-SNAPSHOT
 ```
-
 
 ## Start the service
 
