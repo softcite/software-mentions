@@ -74,7 +74,7 @@ Run some test:
 
 ## Docker image
 
-It's possible to use Docker image via docker HUB, pull the image (5.2GB) as follow: 
+It's possible to use a Docker image via [docker HUB](https://hub.docker.com/repository/docker/grobid/software-mentions), pull the image (5.2GB) as follow: 
 
 ```bash
 docker pull grobid/software-mentions:0.7.0-SNAPSHOT 
