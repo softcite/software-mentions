@@ -48,7 +48,9 @@ tasks.withType(JavaCompile) {
 repositories {
     mavenLocal()
     mavenCentral()
-//    jcenter()
+    maven {
+        url new File(rootProject.rootDir, "lib")
+    }
 }
 
 ext {
@@ -177,10 +179,12 @@ artifacts {
 }
 
 task copyModels(type: Copy) {
-    from "${rootDir}/resources/models/"
-    include "**"
-    into "${rootDir}/../grobid-home/models/"
-    ant.gunzip(src: "${rootDir}/../grobid-home/models/software/model.wapiti.gz", dest: "${rootDir}/../grobid-home/models/software/")
+    doLast {
+        from "${rootDir}/resources/models/"
+        include "**"
+        into "${rootDir}/../grobid-home/models/"
+        ant.gunzip(src: "${rootDir}/../grobid-home/models/software/model.wapiti.gz", dest: "${rootDir}/../grobid-home/models/software/")
+    }
 }
 
 task installScibert {

@@ -72,11 +72,57 @@ Run some test:
 
 > ./gradlew test
 
+## Docker image
+
+It's possible to use a Docker image via [docker HUB](https://hub.docker.com/repository/docker/grobid/software-mentions), pull the image (5.2GB) as follow: 
+
+```bash
+docker pull grobid/software-mentions:0.7.0-SNAPSHOT 
+```
+
+As an alterntive, a docker image for the `software-mentions` service can be built with the project Dockerfile to match the current master version. The complete process is as follow: 
+
+- copy the `Dockerfile.software` at the root of the GROBID installation:
+
+```bash
+~/grobid/software-mentions$ cp ./Dockerfile.software ..
+```
+
+- from the GROBID root installation (`grobid/`), launch the docker build:
+
+```bash
+> docker build -t grobid/software-mentions:0.7.0-SNAPSHOT --build-arg GROBID_VERSION=0.7.0-SNAPSHOT --file Dockerfile.software .
+```
+
+The Docker image build take several minutes, installing GROBID, software-mentions, a complete Python Deep Learning environment based on DeLFT and deep learning models downloaded from the internet (one fine-tuned base BERT model has a size of ~1.3GB). The resulting image is thus very large, around 8GB, due to the deep learning resources and model. 
+
+After pulling or building the Docker image, you can now run the `software-mentions` service as a container:
+
+```bash
+>  docker run --rm --gpus all -it -p 8060:8060 --init grobid/software-mentions:0.7.0-SNAPSHOT
+```
+
+The build image includes the automatic support of GPU when available on the host machine via the parameter `--gpus all` (with automatic recognition of the CUDA version), with fall back to CPU if GPU are not available. The support of GPU is only available on Linux host machine.
+
+The `software-mentions` service is available at the default host/port `localhost:8060`, but it is possible to map the port at launch time of the container as follow:
+
+```bash
+> docker run --rm --gpus all -it -p 8080:8060 --init grobid/software-mentions:0.7.0-SNAPSHOT
+```
+
+By default, CRF models if used for the software mention recognition. To modify the configuration without rebuilding the image - for instance rather use the SciBERT model, it is possible to mount a modified config file at launch as follow: 
+
+```bash
+> docker run --rm --gpus all --init -p 8060:8060 -v /home/lopez/grobid/software-mentions/resources/config/config.yml:/opt/grobid/software-mentions/resources/config/config.yml:ro  grobid/software-mentions:0.7.0-SNAPSHOT
+```
+
 ## Start the service
 
 To start the service:
 
 > ./gradlew run
+
+or use the above Docker image as documented. 
 
 ### Console web app
 
