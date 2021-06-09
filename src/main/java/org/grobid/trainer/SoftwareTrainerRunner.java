@@ -118,7 +118,7 @@ public class SoftwareTrainerRunner {
                     System.err.println("Warning: the thread number parameter is not a valid integer, " + args[i] + " - using 0 as default thread number");
                     e.printStackTrace();
                 }
-                GrobidProperties.getInstance().setNBThreads(nbTreadsInt);
+                GrobidProperties.getInstance().setWapitiNbThreads(nbTreadsInt);
             } else if (i == 3) {
                 String splitRatio = args[i];
                 try {
