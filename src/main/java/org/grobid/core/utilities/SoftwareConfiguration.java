@@ -1,5 +1,7 @@
 package org.grobid.core.utilities;
 
+import org.grobid.core.utilities.GrobidConfig.ModelParameters;
+
 public class SoftwareConfiguration {
 
     private String grobidHome;
@@ -7,19 +9,10 @@ public class SoftwareConfiguration {
     private String entityFishingHost;
     private String entityFishingPort;
 
-    private String tmpPath;
-
-    private String proxyHost;
-    private String proxyPort;
-
-    private String engine;
-
-    private String delftInstall;
-    private String delftArchitecture;
-    private String delftEmbeddings;
-
     private String corpusPath;
     private String templatePath;
+
+    private ModelParameters model;
 
     public String getGrobidHome() {
         return grobidHome;
@@ -45,31 +38,15 @@ public class SoftwareConfiguration {
         this.entityFishingPort = entityFishingPort;
     }
 
-    public String getTmpPath() {
-        return tmpPath;
+    public ModelParameters getModel() {
+        return model;
     }
 
-    public void setTmpPath(String tmpPath) {
-        this.tmpPath = tmpPath;
+    public void getModel(ModelParameters model) {
+        this.model = model;
     }
 
-    public String getProxyHost() {
-        return proxyHost;
-    }
-
-    public void setProxyHost(String proxyHost) {
-        this.proxyHost = proxyHost;
-    }
-
-    public String getProxyPort() {
-        return proxyPort;
-    }
-
-    public void setProxyPort(String proxyPort) {
-        this.proxyPort = proxyPort;
-    }
-
-    public String getEngine() {
+    /*public String getEngine() {
         return engine;
     }
 
@@ -99,7 +76,7 @@ public class SoftwareConfiguration {
 
     public void setDelftEmbeddings(String delftEmbeddings) {
         this.delftEmbeddings = delftEmbeddings;
-    }
+    }*/
 
     public String getCorpusPath() {
         return corpusPath;

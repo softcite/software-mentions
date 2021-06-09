@@ -2,17 +2,17 @@ buildscript {
     repositories {
         mavenLocal()
         mavenCentral()
-        jcenter()
+//        jcenter()
         maven { url "https://plugins.gradle.org/m2/" }
-        maven { url "https://dl.bintray.com/rookies/maven" }
-        maven { url "http://oss.jfrog.org/artifactory/libs-snapshot" }
-        maven { url "http://oss.jfrog.org/artifactory/libs-release" }
-        maven { url "https://dl.bintray.com/rookies/maven" }
+//        maven { url "https://dl.bintray.com/rookies/maven" }
+//        maven { url "http://oss.jfrog.org/artifactory/libs-snapshot" }
+//        maven { url "http://oss.jfrog.org/artifactory/libs-release" }
+//        maven { url "https://dl.bintray.com/rookies/maven" }
     }
     dependencies {
         classpath group: 'net.researchgate', name: 'gradle-release', version: '2.6.0'
         classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.4.0'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+//        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
         classpath "gradle.plugin.org.gretty:gretty:2.3.1"
         classpath 'com.github.jengelman.gradle.plugins:shadow:5.0.0'
     }
@@ -51,7 +51,6 @@ repositories {
     maven {
         url new File(rootProject.rootDir, "lib")
     }
-    jcenter()
 }
 
 ext {
@@ -180,10 +179,10 @@ artifacts {
 }
 
 task copyModels(type: Copy) {
-    from "${rootDir}/resources/models/"
-    include "**"
-    into "${rootDir}/../grobid-home/models/"
     doLast {
+        from "${rootDir}/resources/models/"
+        include "**"
+        into "${rootDir}/../grobid-home/models/"
         ant.gunzip(src: "${rootDir}/../grobid-home/models/software/model.wapiti.gz", dest: "${rootDir}/../grobid-home/models/software/")
     }
 }

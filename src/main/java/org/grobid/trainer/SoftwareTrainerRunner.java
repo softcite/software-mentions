@@ -3,7 +3,7 @@ package org.grobid.trainer;
 import org.grobid.core.main.GrobidHomeFinder;
 import org.grobid.core.utilities.SoftwareConfiguration;
 import org.grobid.core.utilities.GrobidProperties;
-import org.grobid.core.utilities.GrobidPropertyKeys;
+//import org.grobid.core.utilities.GrobidPropertyKeys;
 import org.grobid.core.main.LibraryLoader;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -92,11 +92,15 @@ public class SoftwareTrainerRunner {
         System.out.println("path2GbdHome=" + path2GbdHome);
         initProcess(path2GbdHome);
 
-        if (conf != null &&
+        if (conf != null && conf.getModel() != null)
+                GrobidProperties.addModel(conf.getModel());
+            LibraryLoader.load();
+
+        /*if (conf != null &&
             conf.getEngine() != null && 
             conf.getEngine().equals("delft"))
             GrobidProperties.setPropertyValue(GrobidPropertyKeys.PROP_GROBID_CRF_ENGINE + ".software", "delft");
-        LibraryLoader.load();
+        LibraryLoader.load();*/
 
         Double split = 0.0;
         boolean breakParams = false;
@@ -107,7 +111,14 @@ public class SoftwareTrainerRunner {
 
         for (int i = 0; i < args.length; i++) {
             if (i == 4) {
-                GrobidProperties.getInstance().setNBThreads(args[i]);
+                int nbTreadsInt = 0;
+                try {
+                    nbTreadsInt = Integer.parseInt(args[i]);
+                } catch (Exception e) {
+                    System.err.println("Warning: the thread number parameter is not a valid integer, " + args[i] + " - using 0 as default thread number");
+                    e.printStackTrace();
+                }
+                GrobidProperties.getInstance().setWapitiNbThreads(nbTreadsInt);
             } else if (i == 3) {
                 String splitRatio = args[i];
                 try {

@@ -51,7 +51,7 @@ import java.util.List;
 
 import org.grobid.core.main.LibraryLoader;
 import org.grobid.core.utilities.GrobidProperties;
-import org.grobid.core.utilities.GrobidPropertyKeys;
+//import org.grobid.core.utilities.GrobidPropertyKeys;
 import org.grobid.core.engines.tagging.GrobidCRFEngine;
 
 import me.tongfei.progressbar.*;
@@ -68,14 +68,11 @@ public class SoftwareTrainer extends AbstractTrainer {
     protected SoftwareConfiguration conf = null;
 
     public SoftwareTrainer() {
-        this(0.00001, 20, 0);
-
-        epsilon = 0.00001;
-        window = 30;
-        nbMaxIterations = 1500;
+        super(GrobidModels.SOFTWARE);
+        softwareLexicon = SoftwareLexicon.getInstance();
     }
 
-    public SoftwareTrainer(double epsilon, int window, int nbMaxIterations) {
+    /*public SoftwareTrainer(double epsilon, int window, int nbMaxIterations) {
         super(GrobidModels.SOFTWARE);
 
         // adjusting CRF training parameters for this model
@@ -84,7 +81,7 @@ public class SoftwareTrainer extends AbstractTrainer {
         //this.nbMaxIterations = nbMaxIterations;
         this.nbMaxIterations = 2000;
         softwareLexicon = SoftwareLexicon.getInstance();
-    }
+    }*/
 
     public void setSoftwareConf(SoftwareConfiguration conf) {
         this.conf = conf;
@@ -1080,7 +1077,7 @@ public class SoftwareTrainer extends AbstractTrainer {
 
         final File dataPath = trainDataPath;
         createCRFPPData(getCorpusPath(), dataPath, evalDataPath, split);
-        GenericTrainer trainer = TrainerFactory.getTrainer();
+        GenericTrainer trainer = TrainerFactory.getTrainer(model);
 
         if (epsilon != 0.0)
             trainer.setEpsilon(epsilon);
@@ -1092,7 +1089,7 @@ public class SoftwareTrainer extends AbstractTrainer {
         final File tempModelPath = new File(GrobidProperties.getModelPath(model).getAbsolutePath() + NEW_MODEL_EXT);
         final File oldModelPath = GrobidProperties.getModelPath(model);
 
-        trainer.train(getTemplatePath(), dataPath, tempModelPath, GrobidProperties.getNBThreads(), model);
+        trainer.train(getTemplatePath(), dataPath, tempModelPath, GrobidProperties.getInstance().getWapitiNbThreads(), model);
 
         // if we are here, that means that training succeeded
         renameModels(oldModelPath, tempModelPath);
@@ -1127,11 +1124,15 @@ public class SoftwareTrainer extends AbstractTrainer {
     
             System.out.println(">>>>>>>> GROBID_HOME="+GrobidProperties.get_GROBID_HOME_PATH());
 
-            if (conf != null &&
+            if (conf != null && conf.getModel() != null)
+                GrobidProperties.addModel(conf.getModel());
+            LibraryLoader.load();
+
+            /*if (conf != null &&
                 conf.getEngine() != null && 
                 conf.getEngine().equals("delft"))
                 GrobidProperties.setPropertyValue(GrobidPropertyKeys.PROP_GROBID_CRF_ENGINE + ".software", "delft");
-            LibraryLoader.load();
+            LibraryLoader.load();*/
 
         } catch (final Exception exp) {
             System.err.println("GROBID software initialisation failed: " + exp);
