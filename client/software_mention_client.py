@@ -44,7 +44,8 @@ class software_mention_client(object):
         with open ("resources/covid_blacklist.txt", "r") as blackfile:
             for line in blackfile:
                 line = line.replace(" ", "").strip()
-                self.blacklisted.append(line)
+                if not line.startswith("#"):
+                    self.blacklisted.append(line)
         print("blacklist size:", len(self.blacklisted))
 
     def _load_config(self, path='./config.json'):
