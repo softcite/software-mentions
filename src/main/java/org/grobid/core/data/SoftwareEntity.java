@@ -51,7 +51,12 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 	// the text context where the entity takes place - typically a snippet with the 
 	// sentence including the mention
 	private String context = null;
-	private int contextOffset = -1;
+	
+	// offset of the context with respect of the paragraph 
+	private int paragraphContextOffset = -1;
+
+	// offset of the context with rspect to the complete content
+	private int globalContextOffset = -1;
 
 	// full paragraph context where the entity takes place, this is an optional field
 	// relevant for certain scenarios only
@@ -144,12 +149,20 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 		return this.context;
 	}
 
-	public void setContextOffset(int contextOffset) {
-		this.contextOffset = contextOffset;
+	public void setParagraphContextOffset(int paragraphContextOffset) {
+		this.paragraphContextOffset = paragraphContextOffset;
 	}
 
-	public int getContextOffset() {
-		return this.contextOffset;
+	public int getParagraphContextOffset() {
+		return this.paragraphContextOffset;
+	}
+
+	public void setGlobalContextOffset(int globalContextOffset) {
+		this.globalContextOffset = globalContextOffset;
+	}
+
+	public int getGlobalContextOffset() {
+		return this.globalContextOffset;
 	}
 
 	public void setParagraph(String paragraph) {
@@ -338,17 +351,21 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 		}
 
 		if (context != null && context.length()>0) {
-			encoded = encoder.quoteAsUTF8(context.replace("\n", " "));
+			encoded = encoder.quoteAsUTF8(context.replace("\n", " ").replace("  ", " "));
             output = new String(encoded);
 			buffer.append(", \"context\" : \"" + output + "\"");
 		
-			if (contextOffset != -1) {
-				buffer.append(", \"contextOffset\" : " + contextOffset);
-			}
+			/*if (globalContextOffset != -1) {
+				buffer.append(", \"contextOffset\" : " + globalContextOffset);
+			}*/
 		}
 
 		if (paragraph != null && paragraph.length()>0) {
-			encoded = encoder.quoteAsUTF8(paragraph.replace("\n", " "));
+			if (paragraphContextOffset != -1) {
+				buffer.append(", \"contextOffset\" : " + paragraphContextOffset);
+			}
+
+			encoded = encoder.quoteAsUTF8(paragraph.replace("\n", " ").replace("  ", " "));
             output = new String(encoded);
 			buffer.append(", \"paragraph\" : \"" + output + "\"");
 		}

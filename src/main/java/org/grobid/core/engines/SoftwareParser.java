@@ -507,7 +507,6 @@ public class SoftwareParser extends AbstractParser {
                                         List<BoundingBox> boundingBoxes = BoundingBoxCalculator.calculate(refTokens);
                                         biblioComponent.setBoundingBoxes(boundingBoxes);
                                         bibRefComponents.add(biblioComponent);
-                                        //break;
                                     }
                                 }
                             }
@@ -997,9 +996,16 @@ System.out.println("matched: " + term);
         // if we cross a bib ref component we attach it, if a bib ref component is just after the last 
         // component of the entity group, we attach it 
         for(SoftwareEntity entity : entities) {
+            // positions are relative to the context if present, so they have to be shifted in this case
+            // to be comparable with reference marker offsets
+            int shiftOffset = 0;
+            if (entity.getGlobalContextOffset() != -1) {
+                shiftOffset = entity.getGlobalContextOffset();
+            }
+
             // find the name component
             SoftwareComponent nameComponent = entity.getSoftwareName();
-            int pos = nameComponent.getOffsetEnd();
+            int pos = nameComponent.getOffsetEnd() + shiftOffset;
             
             // find end boundary
             int endPos = pos;
@@ -1018,7 +1024,7 @@ System.out.println("matched: " + term);
                 theComps.add(comp);
 
             for(SoftwareComponent theComp : theComps) {
-                int localPos = theComp.getOffsetEnd();
+                int localPos = theComp.getOffsetEnd() + shiftOffset;
                 if (localPos > endPos)
                     endPos = localPos;
             }
@@ -1574,8 +1580,10 @@ System.out.println("matched: " + term);
                             }
                         }
                     
+                        entity.setGlobalContextOffset(startSentence + offsetShift);     
+
                         if (addParagraphContext) {
-                            entity.setContextOffset(startSentence);                        
+                            entity.setParagraphContextOffset(startSentence);                        
                             entity.setParagraph(text);
                         }
                     }
