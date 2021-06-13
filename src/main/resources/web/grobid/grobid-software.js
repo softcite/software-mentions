@@ -1024,14 +1024,14 @@ var grobid = (function ($) {
 
         if ($("#divRestI").is(":visible")) {
         //if (selected == 'processSoftwareText') {
+            setBaseUrl('processSoftwareText');
             createInputTextArea();
             //$('#consolidateBlock').show();
-            setBaseUrl('processSoftwareText');
         //} else if (selected == 'annotateSoftwarePDF') {
         } else if ($("#divRestII").is(":visible")) {
+            setBaseUrl('annotateSoftwarePDF');
             createInputFile();
             //$('#consolidateBlock').hide();
-            setBaseUrl('annotateSoftwarePDF');
         }
     };
 
@@ -1373,6 +1373,39 @@ var grobid = (function ($) {
 
         $('#gbdForm2').attr('enctype', 'multipart/form-data');
         $('#gbdForm2').attr('method', 'post');
+
+        $('#examples_pdf').append('<table id="withExamples">' +
+            "<tr style='line-height:130%;'><td><span id='example_pdf0' style='font-size:90%;'>"+examplesPDF[0]+"</span></td></tr>" +
+            "<tr style='line-height:130%;'><td><span id='example_pdf1' style='font-size:90%;'>"+examplesPDF[1]+"</span></td></tr>" +
+            "<tr style='line-height:130%;'><td><span id='example_pdf2' style='font-size:90%;'>"+examplesPDF[2]+"</span></td></tr>" +
+            "</table>");
+
+        // binding of the examples
+        for (index in examplesPDF) {
+            $('#example_pdf'+index).bind('click', function (event) {
+                resetExamplesClasses();
+                var localId = $(this).attr('id');
+                var localIndex = localId.replace("example_pdf", "");                    
+                localIndex = parseInt(localIndex, 10);
+                var selected = $('#selectedService').find('option:selected').attr('value');
+                setJsonExamplePDF(examplesPDF[localIndex]);
+                $(this).removeClass('section-non-active').addClass('section-active');
+            });
+        }
+    }
+
+    function setJsonExamplePDF(theExample) {
+        $.ajax({
+            'async': true,
+            'global': false,
+            'url': "resources/pdf-examples/"+theExample.replace("/","%2F")+".json",
+            'dataType': "json",
+            'success': function(data) {
+                $('#input').attr('value', vkbeautify.json(JSON.stringify(data)));
+            }
+        });
+
+        window.open("resources/pdf-examples/"+theExample.replace("/","%2F")+".pdf");
     }
 
     function createInputTextArea() {
@@ -1396,13 +1429,26 @@ var grobid = (function ($) {
         }
     }
 
-    var examples = ["The column scores (the fraction of entirely correct columns) were  reported  in  addition  " +
+    const examples = ["The column scores (the fraction of entirely correct columns) were  reported  in  addition  " +
     "to Q-scores  for  BAliBASE 3.0. Wilcoxon  signed-ranks  tests  were  performed  to  calculate statistical " +
     " significance  of  comparisons  between  alignment programs,   which   include   ProbCons   (version   1.10)" +
     "   (23), MAFFT (version 5.667) (11) with several options, MUSCLE (version 3.52) (10) and ClustalW (version 1.83) (7).",
     "Sequences were further annotated with PERL scripts using BioPerl libraries (21) together with data and libraries from Ensemble (22) (Supplementary Table 1 and Supplementary Perl scripts 1-3). Repetitive sequences were identified using repeatmasker (http://www.repeatmasker.org). Spike control amplicons were prepared by PCR from DNA extracted from normal blood. ",
     "All statistical analyses were done using computer software Prism 6 for Windows (version 6.02; GraphPad Software, San Diego, CA, USA). One-Way ANOVA was used to detect differences amongst the groups. To account for the non-normal distribution of the data, all data were sorted by rank status prior to ANOVA statistical analysis. ",
     "The statistical analysis was performed using IBM SPSS Statistics v. 20 (SPSS Inc, 2003, Chicago, USA)."]
+
+    // PDF examples
+    const examplesPDF = [ "PMC3130168", "PMC2773253", "econ01" ];
+
+    function resetExamplesClasses() {
+        for (index in examples) {
+            $('#example'+index).removeClass('section-active').addClass('section-non-active');
+        }
+
+        for (index in examplesPDF) {
+            $('#example_pdf'+index).removeClass('section-active').addClass('section-non-active');
+        }
+    }
 
 })(jQuery);
 
