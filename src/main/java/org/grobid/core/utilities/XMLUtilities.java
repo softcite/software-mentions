@@ -91,6 +91,24 @@ public class XMLUtilities {
         return found ? buf.toString() : null;
     }
 
+    public static String getTextNoRefMarkers(Element element) {
+        StringBuffer buf = new StringBuffer();
+        NodeList list = element.getChildNodes();
+        boolean found = false;
+        for (int i = 0; i < list.getLength(); i++) {
+            Node node = list.item(i);
+            if (node.getNodeType() == Node.ELEMENT_NODE) {
+                if ("ref".equals(node.getNodeName()))
+                    continue;
+            } 
+            if (node.getNodeType() == Node.TEXT_NODE) {
+                buf.append(node.getNodeValue());
+                found = true;
+            }
+        }
+        return found ? buf.toString() : null;
+    }
+
     public static Pair<String,String> getLeftRightTextContent(Element current) {
         // right text
         Node sibling = current.getNextSibling();

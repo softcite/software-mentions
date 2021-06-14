@@ -1367,6 +1367,10 @@ var grobid = (function ($) {
         return localHtml;
     }
 
+    function isEmpty(element){
+        return !$.trim(element.html())
+    }
+
     function createInputFile() {
         $('#textInputDiv').hide();
         $('#fileInputDiv').show();
@@ -1374,23 +1378,25 @@ var grobid = (function ($) {
         $('#gbdForm2').attr('enctype', 'multipart/form-data');
         $('#gbdForm2').attr('method', 'post');
 
-        $('#examples_pdf').append('<table id="withExamples">' +
-            "<tr style='line-height:130%;'><td><span id='example_pdf0' style='font-size:90%;'>"+examplesPDF[0]+"</span></td></tr>" +
-            "<tr style='line-height:130%;'><td><span id='example_pdf1' style='font-size:90%;'>"+examplesPDF[1]+"</span></td></tr>" +
-            "<tr style='line-height:130%;'><td><span id='example_pdf2' style='font-size:90%;'>"+examplesPDF[2]+"</span></td></tr>" +
-            "</table>");
+        if (isEmpty($('#examples_pdf'))) {
+            $('#examples_pdf').append('<table id="withExamples">' +
+                "<tr style='line-height:130%;'><td><span id='example_pdf0' style='font-size:90%;'>"+examplesPDF[0]+"</span></td></tr>" +
+                "<tr style='line-height:130%;'><td><span id='example_pdf1' style='font-size:90%;'>"+examplesPDF[1]+"</span></td></tr>" +
+                "<tr style='line-height:130%;'><td><span id='example_pdf2' style='font-size:90%;'>"+examplesPDF[2]+"</span></td></tr>" +
+                "</table>");
 
-        // binding of the examples
-        for (index in examplesPDF) {
-            $('#example_pdf'+index).bind('click', function (event) {
-                resetExamplesClasses();
-                var localId = $(this).attr('id');
-                var localIndex = localId.replace("example_pdf", "");                    
-                localIndex = parseInt(localIndex, 10);
-                var selected = $('#selectedService').find('option:selected').attr('value');
-                setJsonExamplePDF(examplesPDF[localIndex]);
-                $(this).removeClass('section-non-active').addClass('section-active');
-            });
+            // binding of the examples
+            for (index in examplesPDF) {
+                $('#example_pdf'+index).bind('click', function (event) {
+                    resetExamplesClasses();
+                    var localId = $(this).attr('id');
+                    var localIndex = localId.replace("example_pdf", "");                    
+                    localIndex = parseInt(localIndex, 10);
+                    var selected = $('#selectedService').find('option:selected').attr('value');
+                    setJsonExamplePDF(examplesPDF[localIndex]);
+                    $(this).removeClass('section-non-active').addClass('section-active');
+                });
+            }
         }
     }
 

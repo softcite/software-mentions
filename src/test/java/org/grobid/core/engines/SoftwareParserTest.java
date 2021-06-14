@@ -71,7 +71,8 @@ public class SoftwareParserTest {
 
     //@Test
     public void testSoftwareParserPDF() throws Exception {
-        Pair<List<SoftwareEntity>, Document> res = SoftwareParser.getInstance(configuration).processPDF(new File("./src/test/resources/annot.pdf"), false);
+        Pair<List<SoftwareEntity>, Document> res = 
+            SoftwareParser.getInstance(configuration).processPDF(new File("./src/test/resources/annot.pdf"), false, false);
         List<SoftwareEntity> entities = res.getLeft();
 
         assertThat(entities, hasSize(19));

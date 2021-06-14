@@ -234,6 +234,33 @@ For PDF, each entity will be associated with a list of bounding box coordinates 
 
 In addition, the response will contain the bibliographical reference information associated to a software mention when found. The bibliographical information are provided in XML TEI (similar format as GROBID).  
 
+#### /service/extractSoftwareXML
+
+The softcite software mention service can extract software mentions with sentence context information from a variety of publisher XML formats, including not only JATS, but also a dozen of mainstream publisher native XML (Elsevier, Nature, ScholarOne, Wiley, etc.). See [Pub2TEI](https://github.com/kermitt2/Pub2TEI) for the list of supported formats. 
+
+|  method   |  request type         |  response type       |  parameters         |  requirement  |  description  |
+|---        |---                    |---                   |---                  |---            |---            |
+| POST      | `multipart/form-data` | `application/json`   | `input`             | required      | XML file to be processed |
+|           |                       |                      | `disambiguate`      | optional      | `disambiguate` is a string of value `0` (no disambiguation, default value) or `1` (disambiguate and inject Wikidata entity id and Wikipedia pageId) |
+
+Response status codes:
+
+|     HTTP Status code |   reason                                               |
+|---                   |---                                                     |
+|         200          |     Successful operation.                              |
+|         204          |     Process was completed, but no content could be extracted and structured |
+|         400          |     Wrong request, missing parameters, missing header  |
+|         500          |     Indicate an internal service error, further described by a provided message           |
+|         503          |     The service is not available, which usually means that all the threads are currently used                       |
+
+A `503` error normally means that all the threads available to GROBID are currently used for processing concurrent requests. The client need to re-send the query after a wait time that will allow the server to free some threads. The wait time depends on the service and the capacities of the server, we suggest 2 seconds for the `extractSoftwareXML` service or 3 seconds when disambiguation is also requested.
+
+Using ```curl``` POST request with a __XML file__:
+
+```console
+curl --form input=@./src/test/resources/PMC3130168.xml --form disambiguate=1 localhost:8060/service/extractSoftwareXML
+```
+
 #### /service/isalive
 
 The service check `/service/isalive` will return true/false whether the service is up and running.

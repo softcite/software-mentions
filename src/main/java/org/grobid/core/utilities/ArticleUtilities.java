@@ -8,6 +8,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.commons.io.FileUtils;
 
 import com.fasterxml.jackson.databind.*;
 
@@ -202,6 +203,64 @@ public class ArticleUtilities {
         catch (Exception e) {
             throw new Exception("An exception occured while downloading " + urll, e);
         }
+    }
+
+    /**
+     * Apply a Pub2TEI transformation to an XML file to produce a TEI file.
+     * Input XML file must be a native XML publisher file supported by Pub2TEI.
+     * Output the path to the transformed outputed file or null if the transformation failed.
+     */
+    public static String applyPub2TEI(String inputFilePath, String outputFilePath, String pathToPub2TEI) {
+        // we use an external command line for simplification (though it would be more elegant to 
+        // stay in the current VM)
+        // java -jar Samples/saxon9he.jar -s:/mnt/data/resources/plos/0/ -xsl:Stylesheets/Publishers.xsl -o:/mnt/data/resources/plos/0/tei/ -dtd:off -a:off -expand:off -t
+
+        // remove first the DTD declaration from the input nlm/jats XML because all these shitty xml mechanisms break 
+        // the process at one point or another or keep looking for something over the internet 
+        try {
+            String xmlContent = FileUtils.readFileToString(new File(inputFilePath), "UTF-8");
+            xmlContent = xmlContent.replaceAll("<!DOCTYPE((.|\n|\r)*?)\">", ""); 
+            FileUtils.writeStringToFile(new File(inputFilePath), xmlContent, "UTF-8");
+        } catch(IOException e) {
+            logger.error("Fail to preprocess the XML file to be transformed", e);
+        }
+
+        ProcessBuilder processBuilder = new ProcessBuilder(); 
+        String s = "-s:"+inputFilePath;
+        File dirToPub2TEI = new File(pathToPub2TEI);
+
+        String xsl = "-xsl:" + dirToPub2TEI.getAbsolutePath() + "/Stylesheets/Publishers.xsl";
+        String o = "-o:"+outputFilePath;
+        processBuilder.command("java", "-jar", dirToPub2TEI.getAbsolutePath() + "/Samples/saxon9he.jar", s, xsl, o, "-dtd:off", "-a:off", "-expand:off", "-t");
+        //processBuilder.directory(new File(pathToPub2TEI)); 
+        //System.out.println(processBuilder.command().toString());
+        try {
+            Process process = processBuilder.start();
+            StringBuilder output = new StringBuilder();
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(process.getInputStream()));
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                output.append(line + "\n");
+            }
+
+            int exitVal = process.waitFor();
+            if (exitVal == 0) {
+                System.out.println("XML transformation done");
+            } else {
+                // abnormal...
+                System.out.println("XML transformation failed");
+                outputFilePath = null;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            outputFilePath = null;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            outputFilePath = null;
+        }
+        return outputFilePath;
     }
 
 }
