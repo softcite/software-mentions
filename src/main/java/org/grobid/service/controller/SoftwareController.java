@@ -96,4 +96,16 @@ public class SoftwareController implements SoftwarePaths {
         return SoftwareProcessFile.processPDFAnnotation(inputStream, disambiguateBoolean, addParagraphContextBoolean, this.configuration);
     }
 
+    @Path(PATH_EXTRACT_SOFTWARE_XML)
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces("application/json")
+    @POST
+    public Response processXML(@FormDataParam(INPUT) InputStream inputStream, 
+                                @DefaultValue("0") @FormDataParam(DISAMBIGUATE) String disambiguate,
+                                @DefaultValue("0") @FormDataParam(ADD_PARAGRAPH_CONTEXT) String addParagraphContext) {
+        boolean disambiguateBoolean = SoftwareServiceUtil.validateBooleanRawParam(disambiguate);
+        boolean addParagraphContextBoolean = SoftwareServiceUtil.validateBooleanRawParam(addParagraphContext);
+        return SoftwareProcessFile.extractXML(inputStream, disambiguateBoolean, addParagraphContextBoolean, this.configuration);
+    }
+
 }

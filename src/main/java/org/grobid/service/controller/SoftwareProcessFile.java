@@ -60,7 +60,7 @@ public class SoftwareProcessFile {
     }
 
     /**
-     * Uploads the origin PDF, process it and return PDF annotations for references in JSON.
+     * Uploads the origin PDF, process it and return PDF annotations for the software mention objects in JSON.
      *
      * @param inputStream the data of origin PDF
      * @param disambiguate if true, the extracted mention will be disambiguated
@@ -78,7 +78,6 @@ public class SoftwareProcessFile {
         Engine engine = null;
 
         try {
-            //LibraryLoader.load();
             engine = GrobidFactory.getInstance().getEngine();
             MessageDigest md = MessageDigest.getInstance("MD5");
             DigestInputStream dis = new DigestInputStream(inputStream, md); 
@@ -92,7 +91,8 @@ public class SoftwareProcessFile {
                 response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
             } else {
                 long start = System.currentTimeMillis();
-                Pair<List<SoftwareEntity>, Document> extractedEntities = parser.processPDF(originFile, disambiguate, addParagraphContext);
+                Pair<List<SoftwareEntity>, Document> extractedEntities = 
+                    parser.processPDF(originFile, disambiguate, addParagraphContext);
                 long end = System.currentTimeMillis();
 
                 Document doc = extractedEntities.getRight();
@@ -160,12 +160,88 @@ public class SoftwareProcessFile {
         return response;
     }
 
-    public static String methodLogIn() {
-        return ">> " + SoftwareProcessFile.class.getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName();
-    }
+    /**
+     * Uploads the origin XML, process it and return the extracted software mention objects in JSON.
+     *
+     * @param inputStream the data of origin PDF
+     * @param disambiguate if true, the extracted mention will be disambiguated
+     * @param addParagraphContext if true, the full paragraph where an annotation takes place is added
+     * @return a response object containing the JSON annotations
+     */
+    public static Response extractXML(final InputStream inputStream, 
+                                        boolean disambiguate, 
+                                        boolean addParagraphContext,
+                                        SoftwareConfiguration configuration) {
+        LOGGER.debug(methodLogIn()); 
+        Response response = null;
+        File originFile = null;
+        SoftwareParser parser = SoftwareParser.getInstance(configuration);
 
-    public static String methodLogOut() {
-        return "<< " + SoftwareProcessFile.class.getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName();
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            DigestInputStream dis = new DigestInputStream(inputStream, md); 
+
+            originFile = IOUtilities.writeInputFile(dis);
+            byte[] digest = md.digest();
+
+            if (originFile == null) {
+                response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
+            } else {
+                long start = System.currentTimeMillis();
+                List<SoftwareEntity> extractedEntities = 
+                    parser.processXML(originFile, disambiguate, addParagraphContext);
+                long end = System.currentTimeMillis();
+
+                StringBuilder json = new StringBuilder();
+                json.append("{ ");
+                json.append(SoftwareServiceUtil.applicationDetails(GrobidProperties.getVersion()));
+                
+                String md5Str = DatatypeConverter.printHexBinary(digest).toUpperCase();
+                json.append(", \"md5\": \"" + md5Str + "\"");
+                json.append(", \"mentions\":[");
+                boolean first = true;
+                if (extractedEntities != null) {
+                    for(SoftwareEntity entity : extractedEntities) {
+                        if (!first)
+                            json.append(", ");
+                        else
+                            first = false;
+                        json.append(entity.toJson());
+                    }
+                }
+                json.append("], \"references\":[");
+
+                /*List<BibDataSet> bibDataSet = doc.getBibDataSets();
+                if (bibDataSet != null && bibDataSet.size()>0) {
+                    SoftwareServiceUtil.serializeReferences(json, bibDataSet, extractedEntities);
+                }*/
+
+                json.append("], \"runtime\" :" + (end-start));
+                json.append("}");
+
+                if (json != null) {
+                    response = Response
+                            .ok()
+                            .type("application/json")
+                            .entity(json.toString())
+                            .build();
+                }
+                else {
+                    response = Response.status(Status.NO_CONTENT).build();
+                }
+            }
+
+        } catch (NoSuchElementException nseExp) {
+            LOGGER.error("Could not get an instance of SoftwareParser. Sending service unavailable.");
+            response = Response.status(Status.SERVICE_UNAVAILABLE).build();
+        } catch (Exception exp) {
+            LOGGER.error("An unexpected exception occurs. ", exp);
+            response = Response.status(Status.INTERNAL_SERVER_ERROR).entity(exp.getMessage()).build();
+        } finally {
+            IOUtilities.removeTempFile(originFile);
+        }
+        LOGGER.debug(methodLogOut());
+        return response;
     }
 
     /**
@@ -173,6 +249,14 @@ public class SoftwareProcessFile {
      */
     public static boolean isResultOK(String result) {
         return StringUtils.isBlank(result) ? false : true;
+    }
+
+    public static String methodLogIn() {
+        return ">> " + SoftwareProcessFile.class.getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName();
+    }
+
+    public static String methodLogOut() {
+        return "<< " + SoftwareProcessFile.class.getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName();
     }
 
 }

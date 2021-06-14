@@ -27,9 +27,10 @@ COPY grobid-service/ ./grobid-service/
 COPY grobid-trainer/ ./grobid-trainer/
 
 # cleaning unused native libraries before packaging
-RUN rm -rf grobid-home/pdf2xml/lin-32
-RUN rm -rf grobid-home/pdf2xml/mac-64
-RUN rm -rf grobid-home/pdf2xml/win-*
+RUN rm -rf grobid-home/pdf2xml
+RUN rm -rf grobid-home/pdfalto/lin-32
+RUN rm -rf grobid-home/pdfalto/mac-64
+RUN rm -rf grobid-home/pdfalto/win-*
 RUN rm -rf grobid-home/lib/lin-32
 RUN rm -rf grobid-home/lib/win-*
 RUN rm -rf grobid-home/lib/mac-64
@@ -46,7 +47,7 @@ WORKDIR /opt/grobid
 RUN unzip -o /opt/grobid-source/grobid-service/build/distributions/grobid-service-*.zip && \
     mv grobid-service* grobid-service
 RUN unzip -o /opt/grobid-source/grobid-home/build/distributions/grobid-home-*.zip && \
-    chmod -R 755 /opt/grobid/grobid-home/pdf2xml
+    chmod -R 755 /opt/grobid/grobid-home/pdfalto 
 RUN rm -rf grobid-source
 
 # -------------------
@@ -74,12 +75,6 @@ WORKDIR /opt/grobid
 
 COPY --from=builder /opt/grobid .
 
-RUN rm -rf /opt/grobid/grobid-home/pdf2xml/lin-32
-RUN rm -rf /opt/grobid/grobid-home/pdf2xml/mac-64
-RUN rm -rf /opt/grobid/grobid-home/pdf2xml/win-*
-RUN rm -rf /opt/grobid/grobid-home/lib/lin-32
-RUN rm -rf /opt/grobid/grobid-home/lib/win-*
-
 RUN python3 -m pip install pip --upgrade
 
 # install DeLFT via pypi
@@ -102,9 +97,6 @@ ENV TINI_VERSION v0.18.0
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
 RUN chmod +x /tini
 ENTRYPOINT ["/tini", "-s", "--"]
-
-#RUN chmod -R 755 /opt/grobid/grobid-home/pdf2xml 
-#RUN chmod 777 /opt/grobid/grobid-home/tmp
 
 # install jep (and temporarily the matching JDK)
 ENV TEMP_JDK_HOME=/tmp/jdk-${JAVA_VERSION}

@@ -54,6 +54,20 @@ import nu.xom.Text;
 import static org.apache.commons.lang3.StringUtils.*;
 import static org.grobid.core.document.xml.XmlBuilderUtils.teiElement;
 import org.apache.commons.lang3.tuple.Pair;
+import org.xml.sax.InputSource;
+import org.w3c.dom.*;
+import javax.xml.parsers.*;
+import java.io.*;
+import javax.xml.transform.*;
+import javax.xml.transform.dom.*;
+import javax.xml.transform.stream.*;
+import org.w3c.dom.traversal.DocumentTraversal;
+import org.w3c.dom.traversal.NodeFilter;
+import org.w3c.dom.traversal.TreeWalker;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
+
+import org.w3c.dom.ls.*;
 
 /**
  * Software mentions extraction.
@@ -64,6 +78,11 @@ public class SoftwareParser extends AbstractParser {
     private static final Logger logger = LoggerFactory.getLogger(SoftwareParser.class);
 
     private static volatile SoftwareParser instance;
+
+    private SoftwareLexicon softwareLexicon = null;
+    private EngineParsers parsers;
+    private SoftwareDisambiguator disambiguator;
+    private SoftwareConfiguration softwareConfiguration;
 
     public static SoftwareParser getInstance(SoftwareConfiguration configuration) {
         if (instance == null) {
@@ -79,10 +98,7 @@ public class SoftwareParser extends AbstractParser {
         instance = new SoftwareParser(configuration);
     }
 
-    private SoftwareLexicon softwareLexicon = null;
-	private EngineParsers parsers;
-    private SoftwareDisambiguator disambiguator;
-
+    
     private SoftwareParser(SoftwareConfiguration configuration) {
         super(GrobidModels.SOFTWARE, CntManagerFactory.getCntManager(), 
             GrobidCRFEngine.valueOf(configuration.getModel().engine.toUpperCase()),
@@ -91,6 +107,7 @@ public class SoftwareParser extends AbstractParser {
         softwareLexicon = SoftwareLexicon.getInstance();
 		parsers = new EngineParsers();
         disambiguator = SoftwareDisambiguator.getInstance(configuration);
+        softwareConfiguration = configuration;
     }
 
     /**
@@ -170,8 +187,8 @@ public class SoftwareParser extends AbstractParser {
     }
 
 	/**
-	  * Extract all Software mentions from a pdf file 
-	  */
+	 * Extract all Software mentions from a pdf file 
+	 */
     public Pair<List<SoftwareEntity>,Document> processPDF(File file, 
                                                         boolean disambiguate, 
                                                         boolean addParagraphContext) throws IOException {
@@ -1860,4 +1877,176 @@ System.out.println("matched: " + term);
                                    int ind) {
 		return 0;
 	}
+
+    /**
+     * Extract all software mentions from a publisher XML file
+     */
+    public List<SoftwareEntity> processXML(File file, 
+                                           boolean disambiguate, 
+                                           boolean addParagraphContext) throws IOException {
+        List<SoftwareEntity> entities = null;
+        try {
+            String tei = processXML(file);
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            factory.setNamespaceAware(true);
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            //tei = avoidDomParserAttributeBug(tei);
+
+            org.w3c.dom.Document document = builder.parse(new InputSource(new StringReader(tei)));
+            //document.getDocumentElement().normalize();
+            
+            entities = processTEIDocument(document, disambiguate, addParagraphContext);
+            
+            //tei = restoreDomParserAttributeBug(tei); 
+
+        } catch (final Exception exp) {
+            logger.error("An error occured while processing the following XML file: "
+                + file.getPath(), exp);
+        } 
+
+        return entities;
+    }
+
+
+    /**
+     * Tranform an XML document (for example JATS) to a TEI document.
+     * Transformation of the XML/JATS/NLM/etc. document is realised thanks to Pub2TEI 
+     * (https://github.com/kermitt2/pub2tei) 
+     * 
+     * @return TEI string
+     */
+    public String processXML(File file) throws Exception {
+        /*File file = new File(filePath);
+        if (!file.exists())
+            return null;*/
+        String fileName = file.getName();
+        String tei = null;
+        String newFilePath = null;
+        try {
+            String tmpFilePath = this.softwareConfiguration.getTmpPath();
+            newFilePath = ArticleUtilities.applyPub2TEI(file.getAbsolutePath(), 
+                tmpFilePath + "/" + fileName.replace(".xml", ".tei.xml"), 
+                this.softwareConfiguration.getPub2TEIPath());
+            //System.out.println(newFilePath);
+
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            factory.setNamespaceAware(true);
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            tei = FileUtils.readFileToString(new File(newFilePath), UTF_8);
+
+        } catch (final Exception exp) {
+            logger.error("An error occured while processing the following XML file: " + file.getAbsolutePath(), exp);
+        } finally {
+            if (newFilePath != null) {
+                File newFile = new File(newFilePath);
+                IOUtilities.removeTempFile(newFile);
+            }
+        }
+        return tei;
+    }
+
+
+    /**
+     * Extract all software mentions from a publisher XML file
+     */
+    public List<SoftwareEntity> processTEIDocument(org.w3c.dom.Document doc, boolean disambiguate, boolean addParagraphContext) { 
+        List<SoftwareEntity> entities = new ArrayList<SoftwareEntity>();
+
+        List<List<LayoutToken>> selectedLayoutTokenSequences = new ArrayList<>();
+        List<LayoutToken> docLayoutTokens = new ArrayList<>();
+
+        org.w3c.dom.NodeList paragraphList = doc.getElementsByTagName("p");
+        for (int i = 0; i < paragraphList.getLength(); i++) {
+            org.w3c.dom.Element paragraphElement = (org.w3c.dom.Element) paragraphList.item(i);
+
+            // check that the father is not <abstract> and not <figDesc>
+            org.w3c.dom.Node fatherNode = paragraphElement.getParentNode();
+            if (fatherNode != null) {
+                if ("availability".equals(fatherNode.getNodeName()))
+                    continue;
+            }
+
+            String contentText = UnicodeUtil.normaliseText(XMLUtilities.getTextNoRefMarkers(paragraphElement));
+            if (contentText != null && contentText.length()>0) {
+                List<LayoutToken> paragraphTokens = 
+                    SoftwareAnalyzer.getInstance().tokenizeWithLayoutToken(contentText);
+                if (paragraphTokens != null && paragraphTokens.size() > 0) {
+                    docLayoutTokens.addAll(paragraphTokens);
+                    selectedLayoutTokenSequences.add(paragraphTokens);
+                }
+            }
+        }
+
+        processLayoutTokenSequenceMultiple(selectedLayoutTokenSequences, entities, disambiguate, addParagraphContext);
+
+        // propagate the disambiguated entities to the non-disambiguated entities corresponding to the same software name
+        for(SoftwareEntity entity1 : entities) {
+            if (entity1.getSoftwareName() != null && entity1.getSoftwareName().getWikidataId() != null) {
+                for (SoftwareEntity entity2 : entities) {
+                    if (entity2.getSoftwareName() != null && entity2.getSoftwareName().getWikidataId() != null) {
+                        // if the entity is already disambiguated, nothing possible
+                        continue;
+                    }
+                    if (entity2.getSoftwareName() != null && 
+                        entity2.getSoftwareName().getRawForm().equals(entity1.getSoftwareName().getRawForm())) {
+                        entity1.getSoftwareName().copyKnowledgeInformationTo(entity2.getSoftwareName());
+                        entity2.getSoftwareName().setLang(entity1.getSoftwareName().getLang());
+                    }
+                }
+            }
+        }
+
+        // second pass for document level consistency
+        // we prepare a matcher for all the identified software names 
+        FastMatcher termPattern = prepareTermPattern(entities);
+        // we prepare the frequencies for each software name in the whole document
+        Map<String, Integer> frequencies = prepareFrequencies(entities, docLayoutTokens);
+        // we prepare a map for mapping a software name with its positions of annotation in the document and its IDF
+        Map<String, Double> termProfiles = prepareTermProfiles(entities);
+        List<OffsetPosition> placeTaken = preparePlaceTaken(entities);
+
+        for (int i = 0; i < paragraphList.getLength(); i++) {
+            org.w3c.dom.Element paragraphElement = (org.w3c.dom.Element) paragraphList.item(i);
+
+            // check that the father is not <abstract> and not <figDesc>
+            org.w3c.dom.Node fatherNode = paragraphElement.getParentNode();
+            if (fatherNode != null) {
+                if ("availability".equals(fatherNode.getNodeName()))
+                    continue;
+            }
+
+            String contentText = UnicodeUtil.normaliseText(XMLUtilities.getTextNoRefMarkers(paragraphElement));
+            if (contentText != null && contentText.length()>0) {
+                List<LayoutToken> paragraphTokens = 
+                    SoftwareAnalyzer.getInstance().tokenizeWithLayoutToken(contentText);
+                if (paragraphTokens != null && paragraphTokens.size() > 0) {
+                    propagateLayoutTokenSequence(paragraphTokens, entities, termProfiles, termPattern, placeTaken, frequencies, addParagraphContext);
+                }
+            }
+        }
+        
+        // propagate the non-disambiguated entities attributes to the new propagated entities corresponding 
+        // to the same software name
+        for(SoftwareEntity entity1 : entities) {
+            if (entity1.getSoftwareName() != null) {
+                for (SoftwareEntity entity2 : entities) {
+                    if (entity2.getSoftwareName() != null && 
+                        entity2.getSoftwareName().getNormalizedForm().equals(entity1.getSoftwareName().getNormalizedForm())) {
+                        SoftwareEntity.merge(entity1, entity2);
+                        if (entity1.getSoftwareName().getWikidataId() != null && entity2.getSoftwareName().getWikidataId() == null) {
+                            entity1.getSoftwareName().copyKnowledgeInformationTo(entity2.getSoftwareName());
+                            entity2.getSoftwareName().setLang(entity1.getSoftwareName().getLang());
+                        } else if (entity2.getSoftwareName().getWikidataId() != null && entity1.getSoftwareName().getWikidataId() == null) {
+                            entity2.getSoftwareName().copyKnowledgeInformationTo(entity1.getSoftwareName());
+                            entity1.getSoftwareName().setLang(entity2.getSoftwareName().getLang());
+                        }
+                    }
+                }
+            }
+        }
+
+        Collections.sort(entities);
+
+        return entities;
+    }
 }

@@ -11,6 +11,8 @@ public class SoftwareConfiguration {
 
     private String corpusPath;
     private String templatePath;
+    private String tmpPath;
+    private String pub2teiPath;
 
     private ModelParameters model;
 
@@ -46,38 +48,6 @@ public class SoftwareConfiguration {
         this.model = model;
     }
 
-    /*public String getEngine() {
-        return engine;
-    }
-
-    public void setEngine(String engine) {
-        this.engine = engine;
-    }
-
-    public String getDelftInstall() {
-        return delftInstall;
-    }
-
-    public void setDelftInstall(String delftInstall) {
-        this.delftInstall = delftInstall;
-    }
-
-    public String getDelftArchitecture() {
-        return delftArchitecture;
-    }
-
-    public void setDelftArchitecture(String delftArchitecture) {
-        this.delftArchitecture = delftArchitecture;
-    }
-
-    public String getDelftEmbeddings() {
-        return delftEmbeddings;
-    }
-
-    public void setDelftEmbeddings(String delftEmbeddings) {
-        this.delftEmbeddings = delftEmbeddings;
-    }*/
-
     public String getCorpusPath() {
         return corpusPath;
     }
@@ -92,5 +62,21 @@ public class SoftwareConfiguration {
 
     public void setTemplatePath(String templatePath) {
         this.templatePath = templatePath;
+    }
+
+    public String getTmpPath() {
+        return tmpPath;
+    }
+
+    public void setTmpPath(String tmpPath) {
+        this.tmpPath = tmpPath;
+    }
+
+    public String getPub2TEIPath() {
+        return this.pub2teiPath;
+    }
+
+    public void setPub2teiPath(String pub2teiPath) {
+        this.pub2teiPath = pub2teiPath;
     }
 }
