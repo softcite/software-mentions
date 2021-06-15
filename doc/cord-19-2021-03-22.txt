@@ -1,0 +1,35 @@
+> python3 software_mention_client.py --data-path  /media/lopez/store/cord-19/data/ --config my_config.json
+
+total process: 50 - accumulated runtime: 67.196 s  - 0.74 PDF/s
+...
+total process: 250550 - accumulated runtime: 447433.606 s  - 0.56 PDF/s
+---
+total entries: 211213
+---
+total successfully processed: 211213
+
+
+> python3 software_mention_client.py --diagnostic --config my_config.json 
+
+blacklist size: 536
+Grobid software mention server is up and running
+---
+total entries: 211213
+---
+total successfully processed: 211213
+---
+total failed: 0
+---
+MongoDB - number of documents:  76448
+MongoDB - number of software mentions:  318147
+      * with software name: 318147
+      * with version: 105661
+      * with publisher: 62240
+      * with url: 29753
+      * with at least one reference 61170
+      * total references 61170
+MongoDB - number of bibliographical references:  33720
+      * with DOI: 15931
+      * with PMID: 10611
+      * with PMC ID: 6435
+---

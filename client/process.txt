@@ -25,3 +25,10 @@ find /media/lopez/store/cord-19/data3/ -name *.software.json | wc -l
 to clean:
 
 find /media/lopez/store/cord-19/data3/ -name "*.software.json" -type f -delete
+
+
+* export from mongodb and further ingestion in the KB:
+
+mongoexport -d softcite-cord19-scibert -c annotations -o /media/lopez/store/cord-19/scibert-db2/softcite-cord19-annotations.json
+mongoexport -d softcite-cord19-scibert -c documents -o /media/lopez/store/cord-19/scibert-db2/softcite-cord19-documents.json
+mongoexport -d softcite-cord19-scibert -c references -o /media/lopez/store/cord-19/scibert-db2/softcite-cord19-references.json
