@@ -26,11 +26,13 @@ Latest performance (accuracy and runtime) can be found [below](https://github.co
 
 ## Demo
 
-A public demo of the service is available at the following address: https://cloud.science-miner.com/software/
+A public demo of the service is available at the following address: https://software.science-miner.com/software/
 
 The [web console](https://github.com/ourresearch/software-mentions#console-web-app) allows you to test the processing of text or of a full scholar PDF. The component is developed targeting complete PDF, so the output of a PDF processing will be richer (attachment, parsing and DOI-matching of the bibliographical references appearing with a software mention, coordinates in the PDF of the mentions, document level propagation of mentions). The console displays extracted mentions directly on the PDF pages (via PDF.js), with infobox describing when possible Wikidata entity linking and full reference metadata (with Open Access links when found via Unpaywall).  
 
 This demo is only provided for test, without any guaranties regarding the service quality and availability. If you plan to use this component at scale or in production, you need to install it locally. 
+
+The demo run with the CRF model to reduce the computational load (the server is used for other demos and has no GPU). For most accurate results, a local installation with a SciBERT model is required. 
 
 ## The Softcite Dataset
 
@@ -234,6 +236,33 @@ For PDF, each entity will be associated with a list of bounding box coordinates 
 
 In addition, the response will contain the bibliographical reference information associated to a software mention when found. The bibliographical information are provided in XML TEI (similar format as GROBID).  
 
+#### /service/extractSoftwareXML
+
+The softcite software mention service can extract software mentions with sentence context information from a variety of publisher XML formats, including not only JATS, but also a dozen of mainstream publisher native XML (Elsevier, Nature, ScholarOne, Wiley, etc.). See [Pub2TEI](https://github.com/kermitt2/Pub2TEI) for the list of supported formats. 
+
+|  method   |  request type         |  response type       |  parameters         |  requirement  |  description  |
+|---        |---                    |---                   |---                  |---            |---            |
+| POST      | `multipart/form-data` | `application/json`   | `input`             | required      | XML file to be processed |
+|           |                       |                      | `disambiguate`      | optional      | `disambiguate` is a string of value `0` (no disambiguation, default value) or `1` (disambiguate and inject Wikidata entity id and Wikipedia pageId) |
+
+Response status codes:
+
+|     HTTP Status code |   reason                                               |
+|---                   |---                                                     |
+|         200          |     Successful operation.                              |
+|         204          |     Process was completed, but no content could be extracted and structured |
+|         400          |     Wrong request, missing parameters, missing header  |
+|         500          |     Indicate an internal service error, further described by a provided message           |
+|         503          |     The service is not available, which usually means that all the threads are currently used                       |
+
+A `503` error normally means that all the threads available to GROBID are currently used for processing concurrent requests. The client need to re-send the query after a wait time that will allow the server to free some threads. The wait time depends on the service and the capacities of the server, we suggest 2 seconds for the `extractSoftwareXML` service or 3 seconds when disambiguation is also requested.
+
+Using ```curl``` POST request with a __XML file__:
+
+```console
+curl --form input=@./src/test/resources/PMC3130168.xml --form disambiguate=1 localhost:8060/service/extractSoftwareXML
+```
+
 #### /service/isalive
 
 The service check `/service/isalive` will return true/false whether the service is up and running.
@@ -264,33 +293,58 @@ entityFishingHost: localhost
 entityFishingPort: 8090
 ```
 
-- to select the sequence labelling algorithm to be used, use the config parameter `engine`:
+To process XML files following a variety pf publisher native formats, you need to install [Pub2TEI](https://github.com/kermitt2/Pub2TEI) and indicate its installation path in the configuration file:
+
+```yml
+# path to Pub2TEI repository as available at https://github.com/kermitt2/Pub2TEI
+pub2teiPath: "../../Pub2TEI/"
+```
+
+- to select the sequence labelling algorithm to be used, use the config parameter `engine` under model:
 
 For CRF:
 
 ```yaml
-engine=wapiti
+model:
+  name: "software"
+  engine: "wapiti"
 ```
 
 For Deep Learning architectures, indicate `delft` and indicate the installation path of the `DeLFT` library. To install and take advantage of DeLFT, see the installation instructions [here](https://github.com/kermitt2/delft).
 
 
-```yaml
-engine: delft
-delftInstall: ../../delft
-delftArchitecture: bilstm-crf
-delftEmbeddings: glove
+The model to be used can be fully parametrised in the model block:
+
+
+```yml
+model:
+  name: "software"
+  engine: "wapiti"
+  #engine: "delft"
+  wapiti:
+    # wapiti training parameters, they will be used at training time only
+    epsilon: 0.00001
+    window: 30
+    nbMaxIterations: 1500
+  delft:
+    # deep learning parameters
+    architecture: "BidLSTM_CRF"
+    #architecture: "scibert"
+    useELMo: false
+    embeddings_name: "glove-840B"
 ```
 
+FTo use the SciBERT fine-tuned model:
 
-For further selecting the Deep Learning architecture to be used:
-
-```yaml
-engine: delft
-delftArchitecture: scibert
+```yml
+model:
+  name: "software"
+  engine: "delft"
+  delft:  
+    architecture: "scibert"
 ```
 
-Possible values are:
+The possible values for the Deep Learning architectures (supported by DeLFT) are:
 
 - for __BiLSTM-CRF__: `bilstm-crf`
 
@@ -304,13 +358,14 @@ For __BiLSTM-CRF__ you can further specify the embeddings to be used:
 
 - for using Gloves embeddings (default):
 
-```yaml
-delftEmbeddings: glove
+```yml
+    embeddings_name: glove
 ```
 
-Other possibilities are `elmo` and `bert`. Note that in the later case, BERT is used to generate contextual embeddings used by the __BiLSTM-CRF__ architecture, in contrast to the usage of a fine-tuned BERT when BERT or SciBERT are selected as `delftArchitecture`.
+Other possibilities are `elmo` and `bert`. Note that in the later case, BERT is used to generate contextual embeddings used by the __BiLSTM-CRF__ architecture, in contrast to the usage of a fine-tuned BERT when BERT or SciBERT are selected as `architecture`.
 
 Note that the default setting is __CRF Wapiti__, which does not require any further installation.
+
 
 ## Benchmarking
 
