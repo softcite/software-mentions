@@ -36,7 +36,7 @@ The demo run with the CRF model to reduce the computational load (the server is 
 
 ## The Softcite Dataset
 
-The Softcite dataset is available on Zenodo: https://doi.org/10.5281/zenodo.4445202
+The Softcite dataset, a gold standard manually annotated corpus of 4,971 scholar articles, is available on Zenodo: https://doi.org/10.5281/zenodo.4445202
 
 More details on the Softcite dataset can be found in the following publication:
 
@@ -47,6 +47,10 @@ https://doi.org/10.1002/asi.24454
 ```
 
 The dataset is maintained on the following GitHub repository: https://github.com/howisonlab/softcite-dataset
+
+## Softcite software mention extraction from the CORD-19 publications
+
+This dataset is the result of the extraction of software mentions from the set of publications of the CORD-19 corpus (https://allenai.org/data/cord-19) by the Softcite software recognizer using SciBERT fine-tuned model: https://zenodo.org/record/4961241 
 
 ## Install, build, run
 
@@ -76,7 +80,7 @@ Run some test:
 
 ## Docker image
 
-It's possible to use a Docker image via [docker HUB](https://hub.docker.com/repository/docker/grobid/software-mentions), pull the image (5.2GB) as follow: 
+It's possible to use a Docker image via [docker HUB](https://hub.docker.com/repository/docker/grobid/software-mentions), pull the image (5.25GB) as follow: 
 
 ```bash
 docker pull grobid/software-mentions:0.7.0-SNAPSHOT 

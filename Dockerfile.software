@@ -128,11 +128,7 @@ COPY --from=builder /opt/grobid-source/software-mentions /opt/grobid/software-me
 COPY --from=builder /root/.m2/repository/org /opt/grobid/software-mentions/lib/org
 
 WORKDIR /opt/grobid/software-mentions
-RUN ./gradlew copyModels installScibert  && rm -rf resources/models && rm /opt/grobid/grobid-home/models/software/model.wapiti.gz && rm /opt/grobid/grobid-home/models/software-scibert.zip
-
-#RUN rm -rf resources/models
-#RUN rm /opt/grobid/grobid-home/models/software/model.wapiti.gz
-#RUN rm /opt/grobid/grobid-home/models/software-scibert.zip
+RUN ./gradlew copyModels installScibert  && rm -rf resources/models && rm -f /opt/grobid/grobid-home/models/software/model.wapiti.gz && rm -f /opt/grobid/grobid-home/models/software-scibert.zip
 
 # trigger gradle wrapper install
 RUN ./gradlew --version
