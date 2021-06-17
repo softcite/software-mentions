@@ -179,11 +179,14 @@ artifacts {
 }
 
 task copyModels(type: Copy) {
-    doLast {
+    //doLast 
+    //{
         from "${rootDir}/resources/models/"
         include "**"
         into "${rootDir}/../grobid-home/models/"
-        ant.gunzip(src: "${rootDir}/../grobid-home/models/software/model.wapiti.gz", dest: "${rootDir}/../grobid-home/models/software/")
+    doLast 
+    { 
+        ant.gunzip(src: "${rootDir}/resources/models/software/model.wapiti.gz", dest: "${rootDir}/../grobid-home/models/software/")
     }
 }
 
