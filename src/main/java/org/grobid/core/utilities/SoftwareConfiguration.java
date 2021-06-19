@@ -1,7 +1,9 @@
 package org.grobid.core.utilities;
 
 import org.grobid.core.utilities.GrobidConfig.ModelParameters;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SoftwareConfiguration {
 
     private String grobidHome;

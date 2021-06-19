@@ -42,4 +42,9 @@ public interface SoftwarePaths {
      * path extension for extracting software entities from publisher XML documents.
      */
     public static final String PATH_EXTRACT_SOFTWARE_XML = "extractSoftwareXML";
+
+    /**
+     * path extension for extracting software entities from an URL to an online PDF.
+     */
+    //public static final String PATH_ANNOTATE_SOFTWARE_PDF_URL = "annotateSoftwarePDFURL";
 }

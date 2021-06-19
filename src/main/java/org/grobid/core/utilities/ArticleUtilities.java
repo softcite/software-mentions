@@ -182,7 +182,7 @@ public class ArticleUtilities {
         return urlForPdf;
     }
 
-    private static File uploadFile(String urll, String path, String name) throws Exception {
+    public static File uploadFile(String urll, String path, String name) throws Exception {
         try {
             File pathFile = new File(path);
             if (!pathFile.exists()) {
