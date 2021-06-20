@@ -360,6 +360,30 @@ public class SoftwareParser extends AbstractParser {
                 }
             }
 
+            // use identified software names to possibly normalize hyphenized software names
+            // e.g. for MOD-ELLER, normalize to MODELLER because MODELLER is found elsewhere in the document
+            if (entities.size() > 0) {
+                List<String> allRawForms = new ArrayList<String>();
+                for (SoftwareEntity entity : entities) {
+                    SoftwareComponent softwareComponent = entity.getSoftwareName();
+                    String localRawForm = softwareComponent.getRawForm();
+                    if (localRawForm.indexOf("-") == -1) {
+                        allRawForms.add(localRawForm);
+                    }
+                }
+                for (SoftwareEntity entity : entities) {
+                    SoftwareComponent softwareComponent = entity.getSoftwareName();
+                    String localRawForm = softwareComponent.getRawForm();
+                    if (localRawForm.indexOf("-") != -1) {
+                        localRawForm = localRawForm.replaceAll("-( |\\n)*", "");
+                        localRawForm = localRawForm.replace("-", "");
+                        if (allRawForms.contains(localRawForm)) {
+                            softwareComponent.setNormalizedForm(localRawForm);
+                        }
+                    }
+                }
+            }
+
             // second pass for document level consistency: the goal is to propagate the identified entities in the part of the
             // document where the same term appears without labeling. For controlling the propagation we use a tf-idf measure
             // of the term. As possible improvement, a specific classifier could be used.   
@@ -611,30 +635,6 @@ public class SoftwareParser extends AbstractParser {
 
             // add context to the entities
             //entities = addContext(entities, null, doc.getTokenizations(), true, addParagraphContext);
-
-            // use identified software names to possibly normalize hyphenized software names
-            // e.g. for MOD-ELLER, normalize to MODELLER because MODELLER is found elsewhere in the document
-            if (entities.size() > 0) {
-                List<String> allRawForms = new ArrayList<String>();
-                for (SoftwareEntity entity : entities) {
-                    SoftwareComponent softwareComponent = entity.getSoftwareName();
-                    String localRawForm = softwareComponent.getRawForm();
-                    if (localRawForm.indexOf("-") == -1) {
-                        allRawForms.add(localRawForm);
-                    }
-                }
-                for (SoftwareEntity entity : entities) {
-                    SoftwareComponent softwareComponent = entity.getSoftwareName();
-                    String localRawForm = softwareComponent.getRawForm();
-                    if (localRawForm.indexOf("-") != -1) {
-                        localRawForm = localRawForm.replaceAll("-( |\\n)*", "");
-                        localRawForm = localRawForm.replace("-", "");
-                        if (allRawForms.contains(localRawForm)) {
-                            softwareComponent.setNormalizedForm(localRawForm);
-                        }
-                    }
-                }
-            }
 
         } catch (Exception e) {
             e.printStackTrace();
