@@ -198,6 +198,10 @@ var grobid = (function ($) {
         //else if (selected == 'annotateSoftwarePDF') {
         else if ($("#divRestII").is(":visible")) {
 
+            // clean possible selected PDF examples
+            // binding of the examples
+            resetExamplesClasses();
+
             $('#infoResult2').html('<font color="grey">Requesting server...</font>');
             $('#requestResult2').html('');
 
@@ -571,10 +575,12 @@ var grobid = (function ($) {
                 .html("<font color='red'>Error encountered while receiving the server's answer: response is empty.</font>");
             return;
         } else {
+            // we will print an index summarizing the result here
             $('#infoResult2').html('');
         }
 
         var json = response;
+        displaySummary(response)
         var pageInfo = json.pages;
 
         var page_height = 0.0;
@@ -687,6 +693,110 @@ var grobid = (function ($) {
             });
         }
     }
+
+    function displaySummary(response) {
+        entities = response.mentions;
+        // get page canvs width for visual alignment
+        if ($("canvas").length > 0)
+            width = $("canvas").first().width();
+        else 
+            width = "70%";
+        if (entities) {
+            summary = '<div style="width: '+width+'; border-style: solid; border-width: 1px; border-color: gray;">';
+            summary += "<p>&nbsp;&nbsp;<b>"+ entities.length + "</b> mentions found</p>";
+
+            summary += "<table>";
+
+            const local_map = new Map();
+
+            entities.forEach(function (entity, n) {
+                var local_page = -1;
+                if (entity['software-name'].boundingBoxes && entity['software-name'].boundingBoxes.length>0)
+                    local_page = entity['software-name'].boundingBoxes[0].p;
+                var the_id = 'annot-' + n + '-00';
+                if (local_page != -1)
+                    the_id += '_' + local_page;
+                var softwareNameRaw = entity['software-name'].normalizedForm;
+                if (!local_map.has(softwareNameRaw)) {
+                    local_map.set(softwareNameRaw, new Array());
+                }
+                var localArray = local_map.get(softwareNameRaw)
+                localArray.push(the_id)
+                local_map.set(softwareNameRaw, localArray);
+            });
+
+            var span_ids = new Array();
+
+            for (let [key, value] of local_map) {
+                //local_map.forEach((value, key) => {
+                summary += "<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td>"+key+"</td>";
+                summary += "<td>";
+
+                value.sort(function(a, b) {
+                    var a_page = -1;
+                    if (a.indexOf("_") != -1) {
+                        var local_page = a.substring(a.indexOf("_")+1);
+                        a_page = parseInt(local_page);
+                        if (isNaN(a_page))
+                            a_page = -1;
+                    }
+
+                    var b_page = -1;
+                    if (b.indexOf("_") != -1) {
+                        var local_page = b.substring(b.indexOf("_")+1);
+                        b_page = parseInt(local_page);
+                        if (isNaN(b_page))
+                            b_page = -1;
+                    }
+
+                    if (a_page < b_page) {
+                        return -1;
+                    }
+                    if (a_page > b_page) {
+                        return 1;
+                    }
+                    return 0;
+                });
+
+                for (var i=0; i<value.length; i++) {
+                    var the_id_full = value[i];
+                    var the_id = the_id_full;
+                    var local_page = the_id_full;
+                    if (the_id_full.indexOf("_") != -1) {
+                        the_id = the_id_full.substring(0,the_id_full.indexOf("_"));
+                        local_page = the_id_full.substring(the_id_full.indexOf("_"));
+                    }
+                    summary += "&nbsp;<span class='index' id='index_"+the_id+"'>page"+local_page+"</span>&nbsp;";
+                    span_ids.push('index_'+the_id);
+                }
+                summary += "</td></tr>";
+            };
+
+            summary += "</table>";
+
+            summary += "</div>";
+
+            $('#infoResult2').html(summary);
+
+            for(var span_index in span_ids) {
+                var span_id = span_ids[span_index];
+                $("#"+span_ids[span_index]).bind('click', function (event) {
+                    var localId = $(this).attr('id');
+
+                    const local_target = document.querySelector('#'+localId.replace('index_',''));
+                    const topPos = local_target.getBoundingClientRect().top + window.pageYOffset - 100;
+
+                    window.scrollTo({
+                      top: topPos, 
+                      behavior: 'smooth' 
+                    });
+
+                    local_target.click();
+                });
+            }
+        }
+    }
+
 
     function annotateEntity(theId, rawForm, theType, thePos, page_height, page_width, entityIndex, positionIndex) {
         //console.log('annotate: ' + ' ' + rawForm + ' ' + theType + ' ')
@@ -1385,10 +1495,12 @@ var grobid = (function ($) {
                 +examplesPDF[2]+"</a></span></td></tr>" +
                 "</table>");
 
+            resetExamplesClasses();
+
             // binding of the examples
             for (index in examplesPDF) {
                 $('#example_pdf'+index).bind('click', function (event) {
-                    resetExamplesClasses();
+                    
                     var localId = $(this).attr('id');
                     var localIndex = localId.replace("example_pdf", "");                    
                     localIndex = parseInt(localIndex, 10);
