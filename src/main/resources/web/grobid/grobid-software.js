@@ -741,7 +741,7 @@ var grobid = (function ($) {
                     summary += "#fff;'>"
                 }
                 summary += "<td width='20%'>"+key+"</td>";
-                summary += "<td width='80%' style='word-break: break-all;' >";
+                summary += "<td width='80%' style='display: inline-block; word-break: break-word;' >";
 
                 value.sort(function(a, b) {
                     var a_page = -1;
