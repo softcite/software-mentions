@@ -202,8 +202,9 @@ var grobid = (function ($) {
             // binding of the examples
             resetExamplesClasses();
 
+            $('#infoResult2').empty();
             $('#infoResult2').html('<font color="grey">Requesting server...</font>');
-            $('#requestResult2').html('');
+            $('#requestResult2').empty();
 
             // we will have JSON annotations to be layered on the PDF
 
@@ -576,11 +577,11 @@ var grobid = (function ($) {
             return;
         } else {
             // we will print an index summarizing the result here
-            $('#infoResult2').html('');
+            $('#infoResult2').empty();
+            $('#infoResult2').hide();
         }
 
         var json = response;
-        displaySummary(response)
         var pageInfo = json.pages;
 
         var page_height = 0.0;
@@ -692,9 +693,13 @@ var grobid = (function ($) {
                 referenceMap[reference.refKey] = reference.tei;
             });
         }
+
+        displaySummary(response)
+        $('#infoResult2').show();
     }
 
     function displaySummary(response) {
+        $('#infoResult2').empty();
         entities = response.mentions;
         // get page canvs width for visual alignment
         if ($("canvas").length > 0)
@@ -702,10 +707,10 @@ var grobid = (function ($) {
         else 
             width = "70%";
         if (entities) {
-            summary = '<div style="width: '+width+'; border-style: solid; border-width: 1px; border-color: gray;">';
+            var summary = '<div style="width: '+width+'; border-style: solid; border-width: 1px; border-color: gray;">';
             summary += "<p>&nbsp;&nbsp;<b>"+ entities.length + "</b> mentions found</p>";
 
-            summary += "<table>";
+            summary += "<table width='" + width+ "px' style='table-layout: fixed; overflow: scroll; padding-left:5px;'>";
 
             const local_map = new Map();
 
@@ -727,10 +732,16 @@ var grobid = (function ($) {
 
             var span_ids = new Array();
 
+            var n = 0;
             for (let [key, value] of local_map) {
-                //local_map.forEach((value, key) => {
-                summary += "<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td>"+key+"</td>";
-                summary += "<td>";
+                summary += "<tr width='"+width+"' style='background: ";
+                if (n%2 == 0) {
+                    summary += "#eee;'>"
+                } else {
+                    summary += "#fff;'>"
+                }
+                summary += "<td width='20%'>"+key+"</td>";
+                summary += "<td width='80%' style='word-break: break-all;' >";
 
                 value.sort(function(a, b) {
                     var a_page = -1;
@@ -766,10 +777,11 @@ var grobid = (function ($) {
                         the_id = the_id_full.substring(0,the_id_full.indexOf("_"));
                         local_page = the_id_full.substring(the_id_full.indexOf("_"));
                     }
-                    summary += "&nbsp;<span class='index' id='index_"+the_id+"'>page"+local_page+"</span>&nbsp;";
+                    summary += "<span class='index' id='index_"+the_id+"'>page"+local_page+"</span>&nbsp;";
                     span_ids.push('index_'+the_id);
                 }
                 summary += "</td></tr>";
+                n++;
             };
 
             summary += "</table>";
@@ -1485,6 +1497,8 @@ var grobid = (function ($) {
         $('#gbdForm2').attr('enctype', 'multipart/form-data');
         $('#gbdForm2').attr('method', 'post');
 
+        resetExamplesClasses();
+
         if (isEmpty($('#examples_pdf'))) {
             $('#examples_pdf').append('<table id="withExamples">' +
                 "<tr style='line-height:130%;'><td><span style='font-size:90%;'><a id='example_pdf0' href='#' data-toggle='modal' data-target='#confirm-process'>"
@@ -1494,8 +1508,6 @@ var grobid = (function ($) {
                 "<tr style='line-height:130%;'><td><span style='font-size:90%;'><a id='example_pdf2' href='#' data-toggle='modal' data-target='#confirm-process'>"
                 +examplesPDF[2]+"</a></span></td></tr>" +
                 "</table>");
-
-            resetExamplesClasses();
 
             // binding of the examples
             for (index in examplesPDF) {
@@ -1507,14 +1519,20 @@ var grobid = (function ($) {
 
                     $('#name_pdf_example').html(examplesPDF[localIndex]);
 
+                    resetExamplesClasses();
+
                     var selected = $('#selectedService').find('option:selected').attr('value');
                     $(this).removeClass('section-non-active').addClass('section-active');
-                    $('#validate-process').bind('click', function(e) {
-
-                        setJsonExamplePDF(examplesPDF[localIndex]);
-                    });
                 });
             }
+
+            // binding the model click process button
+            $('#validate-process').bind('click', function(e) {
+                // which pdf is selected?
+                var selected_pdf = $('#name_pdf_example').text();
+
+                setJsonExamplePDF(selected_pdf);
+            });
         }
     }
 
@@ -1524,6 +1542,7 @@ var grobid = (function ($) {
         //pdf_url = defineBaseURL("resources/pdf-examples/"+theExample.replace("/","%2F")+".pdf");
         pdf_url = "resources/pdf-examples/"+theExample.replace("/","%2F")+".pdf";
 
+        $('#infoResult2').empty();
         $('#infoResult2').html('<font color="grey">Requesting server...</font>');
         $('#requestResult2').html('');
 
@@ -1671,6 +1690,7 @@ var grobid = (function ($) {
         httpGetAsynBlob(pdf_url, res => reader.readAsArrayBuffer(res))
 
         xhr.onreadystatechange = function (e) {
+            $('#infoResult2').html("");
             if (xhr.readyState == 4 && xhr.status == 200) {
                 var response = e.target.response;
                 //var response = JSON.parse(xhr.responseText);
