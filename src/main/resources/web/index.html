@@ -21,7 +21,9 @@
         <!--link rel="stylesheet" href="resources/css/awesome-bootstrap-checkbox.css"/-->
         
         <script type="text/javascript" src="resources/bootstrap/js/prettify.js"></script> 
-        <script type="text/javascript" src="resources/js/vkbeautify.js"></script>        
+        <script type="text/javascript" src="resources/js/vkbeautify.js"></script> 
+        <script type="text/javascript" src="resources/js/bigSlide.min.js"></script>
+        <!--script type="text/javascript" src="resources/js/sliiide.min.js"></script-->
 
         <!-- to render wiki syntax in html -->
         <script type="text/javascript" src="resources/js/wiki2html.js"></script>
@@ -41,6 +43,16 @@
     </head>
     
     <body>  
+        <div id="toggle-group" href="#drawer" style="z-index:99;"> 
+            <input type="checkbox" id="pure-toggle-right" class="pure-toggle" data-toggle="right">
+            <label class="pure-toggle-label" for="pure-toggle-right" data-toggle-label="right">
+                <span class="pure-toggle-icon"></span>
+            </label>
+        </div>
+
+        <!--div id="drawer" style="z-index:99; display: flex; justify-content: center;"></div-->
+        <nav id="drawer" class="panel" role="navigation" style="z-index:98; display: flex; justify-content: center;"></nav>
+
         <div class="container" style="width:85%;">  
             
           <div class="content">  
@@ -222,4 +234,5 @@
         </div>
         
     </body> 
+
 </html>

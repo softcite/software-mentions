@@ -42,6 +42,10 @@ var grobid = (function ($) {
         $("#divRestII").hide();
         $("#divDoc").hide();
 
+        $("#toggle-group").hide();
+        $("#pure-toggle-right").hide();
+        $("#pure-toggle-right").checked = false;
+
         createInputTextArea('text');
         setBaseUrl('processSoftwareText');
         $('#example0').bind('click', function (event) {
@@ -72,6 +76,10 @@ var grobid = (function ($) {
         $('#submitRequest2').bind('click', submitQuery);
 
         $("#about").click(function () {
+            $("#toggle-group").hide();
+            $("#pure-toggle-right").hide();
+            $("#pure-toggle-right").checked = false;
+            
             $("#about").attr('class', 'section-active');
             $("#textTab").attr('class', 'section-not-active');
             $("#pdfTab").attr('class', 'section-not-active');
@@ -84,9 +92,18 @@ var grobid = (function ($) {
             $("#divRestI").hide();
             $("#divRestII").hide();
             $("#divDoc").hide();
+
+            if ($('#mention-count-drawer').is(":visible")) {
+                $("#toggle-group").click();
+            }
+
             return false;
         });
         $("#textTab").click(function () {
+            $("#toggle-group").hide();
+            $("#pure-toggle-right").hide();
+            $("#pure-toggle-right").checked = false;
+
             $("#textTab").attr('class', 'section-active');
             $("#doc").attr('class', 'section-not-active');
             $("#about").attr('class', 'section-not-active');
@@ -100,6 +117,10 @@ var grobid = (function ($) {
             $("#divDoc").hide();
 
             processChange();
+
+            if ($('#mention-count-drawer').is(":visible")) {
+                $("#toggle-group").click();
+            }
 
             return false;
         });
@@ -118,9 +139,19 @@ var grobid = (function ($) {
 
             processChange();
 
+            if ($('#mention-count').is(":visible")) {
+                $("#toggle-group").show();
+                $("#pure-toggle-right").show();
+                $("#pure-toggle-right").checked = true;
+            }
+
             return false;
         });
         $("#doc").click(function () {
+            $("#toggle-group").hide();
+            $("#pure-toggle-right").hide();
+            $("#pure-toggle-right").checked = false;
+
             $("#doc").attr('class', 'section-active');
             $("#textTab").attr('class', 'section-not-active');
             $("#about").attr('class', 'section-not-active');
@@ -133,6 +164,11 @@ var grobid = (function ($) {
             $("#divAbout").hide();
             $("#divRestI").hide();
             $("#divRestII").hide();
+
+            if ($('#mention-count-drawer').is(":visible")) {
+                $("#toggle-group").click();
+            }
+
             return false;
         });
     });
@@ -172,6 +208,9 @@ var grobid = (function ($) {
         referenceMap = new Object();
 
         //var selected = $('#selectedService option:selected').attr('value');
+
+        $("#pure-toggle-right").hide();
+        $("#toggle-group").hide();
 
         //if (selected == 'processSoftwareText') {
         if ($("#divRestI").is(":visible")) {
@@ -699,6 +738,7 @@ var grobid = (function ($) {
     }
 
     function displaySummary(response) {
+
         $('#infoResult2').empty();
         entities = response.mentions;
         // get page canvs width for visual alignment
@@ -707,8 +747,8 @@ var grobid = (function ($) {
         else 
             width = "70%";
         if (entities) {
-            var summary = '<div style="width: '+width+'; border-style: solid; border-width: 1px; border-color: gray;">';
-            summary += "<p>&nbsp;&nbsp;<b>"+ entities.length + "</b> mentions found</p>";
+            var summary = '';
+            summary += "<div id='mention-count' style='background-color: white; width: 100%;'><p>&nbsp;&nbsp;<b>"+ entities.length + "</b> mentions found</p></div>";
 
             summary += "<table width='" + width+ "px' style='table-layout: fixed; overflow: scroll; padding-left:5px;'>";
 
@@ -741,7 +781,8 @@ var grobid = (function ($) {
                     summary += "#fff;'>"
                 }
                 summary += "<td width='20%'>"+key+"</td>";
-                summary += "<td width='80%' style='display: inline-block; word-break: break-word;' >";
+                summary += "<td width='5%%'>"+value.length+"</td>";
+                summary += "<td width='75%' style='display: inline-block; word-break: break-word;' >";
 
                 value.sort(function(a, b) {
                     var a_page = -1;
@@ -788,7 +829,36 @@ var grobid = (function ($) {
 
             summary += "</div>";
 
-            $('#infoResult2').html(summary);
+            $('#infoResult2').html('<div style="width: '+width+
+                    '; border-style: solid; border-width: 1px; border-color: gray; background-color: white;">' +
+                    summary);
+
+            $('#toggle-group').bigSlide( {side: 'right', menu: '#drawer', menuWidth: width, afterOpen() {
+                //$("#pure-toggle-right").checked = false;
+                $("#pure-toggle-right").bind('click', function (event) {
+                    console.log("#pure-toggle-right click");
+                    $("#toggle-group").click();
+                });
+                $('#drawer').show();
+
+            }, 
+            afterClose() {
+                $('#drawer').hide();
+            }
+            });
+
+            for(var span_index in span_ids) {
+                summary = summary.replace(span_ids[span_index], span_ids[span_index]+"-drawer");
+            }
+            $('#drawer').html('<div style="width: '+width+
+                '; border-style: solid; border-width: 1px; border-color: gray; background-color: white; margin: auto;">'+ 
+                summary.replace('mention-count', 'mention-count-drawer'));
+
+            //$("#toggle-group").click(); //slides the menu open
+            $("#pure-toggle-right").show();
+            $("#toggle-group").show();
+
+            //menu.reset(); //removes all the css that sliiide added to any element
 
             for(var span_index in span_ids) {
                 var span_id = span_ids[span_index];
@@ -805,7 +875,34 @@ var grobid = (function ($) {
 
                     local_target.click();
                 });
+
+                $("#"+span_ids[span_index]+"-drawer").bind('click', function (event) {
+                    var localId = $(this).attr('id');
+
+                    const local_target = document.querySelector('#'+localId.replace('index_','').replace("-drawer",""));
+                    const topPos = local_target.getBoundingClientRect().top + window.pageYOffset - 100;
+
+                    window.scrollTo({
+                      top: topPos, 
+                      behavior: 'smooth' 
+                    });
+
+                    local_target.click();
+
+                    $("#toggle-group").click();
+                });
             }
+
+            /*$("#pure-toggle-right").bind('click', function (event) {
+                if (('#pure-toggle-right').checked) {
+                    menu.deactivate(); 
+                    $("#pure-toggle-right").checked = false;
+                }
+                else {
+                    menu.activate();
+                    $("#pure-toggle-right").checked = true;
+                }
+            });*/
         }
     }
 
@@ -1541,6 +1638,9 @@ var grobid = (function ($) {
 
         //pdf_url = defineBaseURL("resources/pdf-examples/"+theExample.replace("/","%2F")+".pdf");
         pdf_url = "resources/pdf-examples/"+theExample.replace("/","%2F")+".pdf";
+
+        $("#pure-toggle-right").hide();
+        $("#toggle-group").hide();
 
         $('#infoResult2').empty();
         $('#infoResult2').html('<font color="grey">Requesting server...</font>');
