@@ -83,7 +83,7 @@ Run some test:
 It's possible to use a Docker image via [docker HUB](https://hub.docker.com/repository/docker/grobid/software-mentions), pull the image (5.25GB) as follow: 
 
 ```bash
-docker pull grobid/software-mentions:0.7.1-SNAPSHOT 
+docker pull grobid/software-mentions:0.7.0-SNAPSHOT 
 ```
 
 As an alterntive, a docker image for the `software-mentions` service can be built with the project Dockerfile to match the current master version. The complete process is as follow: 
