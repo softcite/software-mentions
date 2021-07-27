@@ -1,3 +1,7 @@
+'''
+    Run the software mention recognizer service on PDF collections
+'''
+
 import sys
 import os
 import shutil
@@ -116,11 +120,7 @@ class software_mention_client(object):
                             continue
 
                     pdf_files.append(os.path.join(root,filename))
-                    if filename.endswith(".pdf"):
-                        out_file = filename.replace(".pdf", ".software.json")
-                    if filename.endswith(".PDF"):
-                        out_file = filename.replace(".PDF", ".software.json")    
-                    out_files.append(os.path.join(root,out_file))
+                    out_files.append(os.path.join(root, filename_json))
                     record = {}
                     record["id"] = sha1
                     full_records.append(record)
@@ -167,8 +167,8 @@ class software_mention_client(object):
                 # if the json file already exists, we skip 
                 #print(os.path.join(data_path, generateStoragePath(local_entry['id']), 
                 #    local_entry['id'], local_entry['id']+".software.json"))
-                if os.path.isfile(os.path.join(os.path.join(data_path, generateStoragePath(local_entry['id']), 
-                    local_entry['id'], local_entry['id']+".software.json"))):
+                json_outfile = os.path.join(os.path.join(data_path, generateStoragePath(local_entry['id']), local_entry['id'], local_entry['id']+".software.json"))
+                if os.path.isfile(json_outfile):
                     # check that this id is considered in the lmdb keeping track of the process
                     with self.env_software.begin() as txn:
                         status = txn.get(local_entry['id'].encode(encoding='UTF-8'))
@@ -184,7 +184,7 @@ class software_mention_client(object):
                         continue
 
                 pdf_files.append(os.path.join(data_path, generateStoragePath(local_entry['id']), local_entry['id'], local_entry['id']+".pdf"))
-                out_files.append(os.path.join(data_path, generateStoragePath(local_entry['id']), local_entry['id'], local_entry['id']+".software.json"))
+                out_files.append(json_outfile)
                 full_records.append(local_entry)
 
                 if len(pdf_files) == self.config["batch_size"]:

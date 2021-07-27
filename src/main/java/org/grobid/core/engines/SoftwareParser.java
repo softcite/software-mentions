@@ -848,6 +848,10 @@ public class SoftwareParser extends AbstractParser {
                                               Map<String, Integer> frequencies,
                                               boolean addParagraphContext) {
         //List<OffsetPosition> results = termPattern.matchLayoutToken(layoutTokens, false, true);
+        int sequenceStartPosition = 0;
+        if (layoutTokens.size() > 0) 
+            sequenceStartPosition = layoutTokens.get(0).getOffset();
+        
         List<OffsetPosition> results = termPattern.matchLayoutToken(layoutTokens, true, false);
         // do not ignore delimiters, but case sensitive matching
         if ( (results == null) || (results.size() == 0) ) {
@@ -860,7 +864,7 @@ public class SoftwareParser extends AbstractParser {
                 matchedTokens.get(matchedTokens.size()-1).getOffset() + matchedTokens.get(matchedTokens.size()-1).getText().length());
 
             String term = LayoutTokensUtil.toText(matchedTokens);
-System.out.println("matched: " + term);
+//System.out.println("matched: " + term);
             int termFrequency = 1;
             if (frequencies != null && frequencies.get(term) != null)
                 termFrequency = frequencies.get(term);
@@ -877,13 +881,13 @@ System.out.println("matched: " + term);
                 // ideally we should make a small classifier here with entity frequency, tfidf, disambiguation success and 
                 // and/or log-likelyhood/dice coefficient as features - but for the time being we introduce a simple rule
                 // with an experimentally defined threshold:
-                //if ( (tfidf <= 0) || (tfidf > 0.001) ) 
+                if ( (tfidf <= 0) || (tfidf > 0.001) ) 
                 {
                     // add new entity mention
                     SoftwareComponent name = new SoftwareComponent();
                     name.setRawForm(term);
-                    name.setOffsetStart(localPosition.start);
-                    name.setOffsetEnd(localPosition.end);
+                    name.setOffsetStart(localPosition.start - sequenceStartPosition);
+                    name.setOffsetEnd(localPosition.end - sequenceStartPosition);
                     name.setLabel(SoftwareTaggingLabels.SOFTWARE);
                     name.setTokens(matchedTokens);
 
@@ -1561,6 +1565,10 @@ System.out.println("matched: " + term);
             text = LayoutTokensUtil.normalizeText(LayoutTokensUtil.toText(tokens));
         }
         List<OffsetPosition> sentencePositions = SentenceUtilities.getInstance().runSentenceDetection(text, forbidden, tokens, null);
+        if (sentencePositions == null) {
+            sentencePositions = new ArrayList<>();
+            sentencePositions.add(new OffsetPosition(0, text.length()));
+        }
         
         for(SoftwareEntity entity : entities) {
             SoftwareComponent softwareName = entity.getSoftwareName();
