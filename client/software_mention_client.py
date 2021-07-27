@@ -561,7 +561,7 @@ if __name__ == "__main__":
     elif repo_in is not None: 
         client.annotate_directory(repo_in)
     elif file_in is not None:
-        annotate(file_in, client.config, file_out)
+        client.annotate(file_in, client.config, file_out)
     elif data_path is not None: 
         client.annotate_collection(data_path)
 
