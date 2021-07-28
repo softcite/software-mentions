@@ -27,15 +27,21 @@ public class BiblioComponent extends SoftwareComponent {
     private static final Logger logger = LoggerFactory.getLogger(BiblioComponent.class);
 
     // the full matched bibliographical reference record
-    private BiblioItem biblio = null;
+    protected BiblioItem biblio = null;
 
     // identifier for relating callout and reference, should be cconsistent with 
     // a full text TEI produced by GROBID
-    private int refKey = -1;
+    protected int refKey = -1;
 
     public BiblioComponent(BiblioItem biblio, int refKey) {
         this.biblio = biblio;
         this.refKey = refKey;
+    }
+
+    public BiblioComponent(BiblioComponent ent) {
+        super(ent);
+        this.biblio = ent.biblio;
+        this.refKey = ent.refKey;
     }
 
     public void setBiblio(BiblioItem biblio) {
@@ -91,9 +97,11 @@ public class BiblioComponent extends SoftwareComponent {
             buffer.append(", \"confidence\": " + TextUtilities.formatFourDecimals(disambiguationScore.doubleValue()));
         }
 
-        buffer.append(", \"offsetStart\" : " + offsets.start);
-        buffer.append(", \"offsetEnd\" : " + offsets.end);  
-                
+        if (offsets != null) {
+            buffer.append(", \"offsetStart\" : " + offsets.start);
+            buffer.append(", \"offsetEnd\" : " + offsets.end);  
+        }
+
         if ( (boundingBoxes != null) && (boundingBoxes.size() > 0) ) {
             buffer.append(", \"boundingBoxes\" : [");
             boolean first = true;

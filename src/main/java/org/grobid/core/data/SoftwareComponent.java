@@ -79,13 +79,19 @@ public class SoftwareComponent extends KnowledgeEntity implements Comparable<Sof
 		this.offsets = new OffsetPosition();
     }
 
-	/*public SoftwareComponent(SoftwareComponent ent) {
-		rawForm = ent.rawForm;
-		normalizedForm = ent.normalizedForm;
-		offsets = ent.offsets;
-		conf = ent.conf;
-		origin = ent.origin;
-	}*/
+    /**
+     * This is a deep copy of a component, excluding layout tokens, offset and bounding boxes information.
+     * The usage is for propagation of the component information to entities in other position.
+     */
+	public SoftwareComponent(SoftwareComponent ent) {
+		this.rawForm = ent.rawForm;
+		this.normalizedForm = ent.normalizedForm;
+		this.conf = ent.conf;
+		this.origin = ent.origin;
+		this.lang = ent.lang;
+		this.label = ent.label;
+		this.filtered = ent.filtered;
+	}
 
     public String getRawForm() {
         return rawForm;
@@ -252,8 +258,10 @@ public class SoftwareComponent extends KnowledgeEntity implements Comparable<Sof
 			buffer.append(", \"confidence\": " + TextUtilities.formatFourDecimals(disambiguationScore.doubleValue()));
 		}
 
-		buffer.append(", \"offsetStart\" : " + offsets.start);
-		buffer.append(", \"offsetEnd\" : " + offsets.end);	
+		if (offsets != null) {
+			buffer.append(", \"offsetStart\" : " + offsets.start);
+			buffer.append(", \"offsetEnd\" : " + offsets.end);	
+		}
 		
 		//buffer.append(", \"conf\" : \"" + conf + "\"");
 		

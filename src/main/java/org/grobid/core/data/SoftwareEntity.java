@@ -201,6 +201,45 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 	}
 
 	/**
+	 * Assuming that software names are identical, this method merges the attributes
+	 * of the two entities with a copy of the added attribute component.    
+	 */
+	public static void mergeWithCopy(SoftwareEntity entity1, SoftwareEntity entity2) {
+
+		if (entity1.getVersion() == null && entity2.getVersion() != null)
+			entity1.setVersion(new SoftwareComponent(entity2.getVersion()));
+		else if (entity2.getVersion() == null && entity1.getVersion() != null)
+			entity2.setVersion(new SoftwareComponent(entity1.getVersion()));
+
+		if (entity1.getCreator() == null && entity2.getCreator() != null)
+			entity1.setCreator(new SoftwareComponent(entity2.getCreator()));
+		else if (entity2.getCreator() == null && entity1.getCreator() != null)
+			entity2.setCreator(new SoftwareComponent(entity1.getCreator()));
+
+		if (entity1.getSoftwareURL() == null && entity2.getSoftwareURL() != null)
+			entity1.setSoftwareURL(new SoftwareComponent(entity2.getSoftwareURL()));
+		else if (entity2.getSoftwareURL() == null && entity1.getSoftwareURL() != null)
+			entity2.setSoftwareURL(new SoftwareComponent(entity1.getSoftwareURL()));
+
+		if (entity1.getBibRefs() == null && entity2.getBibRefs() != null) {
+			List<BiblioComponent> newBibRefs = new ArrayList<>();
+			for(BiblioComponent bibComponent : entity2.getBibRefs()) {
+				newBibRefs.add(new BiblioComponent(bibComponent));
+			}
+			if (newBibRefs.size() > 0)
+				entity1.setBibRefs(newBibRefs);
+		}
+		else if (entity2.getBibRefs() == null && entity1.getBibRefs() != null) {
+			List<BiblioComponent> newBibRefs = new ArrayList<>();
+			for(BiblioComponent bibComponent : entity1.getBibRefs()) {
+				newBibRefs.add(new BiblioComponent(bibComponent));
+			}
+			if (newBibRefs.size() > 0)
+				entity2.setBibRefs(newBibRefs);
+		}
+	}
+
+	/**
 	 * Check if a component corresponding to a given label is already present in a software entity.
 	 * Bibliographical references are ignored because they can be accumulated to the same entity.
 	 * SOFTWARE labels are ignored because they anchor the process of attaching components. 
