@@ -35,6 +35,7 @@ import org.grobid.core.utilities.counters.CntManager;
 import org.grobid.core.utilities.counters.impl.CntManagerFactory;
 import org.grobid.core.lexicon.FastMatcher;
 import org.grobid.core.utilities.SoftwareConfiguration;
+import org.grobid.core.features.FeatureFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -773,7 +774,7 @@ public class SoftwareParser extends AbstractParser {
             
             // labeled result from CRF lib
             String res = label(ress);
-    //System.out.println(res);
+            //System.out.println(res);
             List<SoftwareComponent> components = extractSoftwareComponents(text, res, localLayoutTokens);
 
             // we group the identified components by full entities
@@ -816,13 +817,14 @@ public class SoftwareParser extends AbstractParser {
                                               List<OffsetPosition> placeTaken,
                                               Map<String, Integer> frequencies,
                                               boolean addParagraphContext) {
-        List<OffsetPosition> results = termPattern.matchLayoutToken(layoutTokens, true, false);
-        // above: do not ignore delimiters, but case sensitive matching
+
+        List<OffsetPosition> results = termPattern.matchLayoutToken(layoutTokens, true, true);
+        // above: do not ignore delimiters and case sensitive matching
         
         if ( (results == null) || (results.size() == 0) ) {
             return entities;
         }
-       
+
         List<SoftwareEntity> localEntities = new ArrayList<>();
         for(OffsetPosition position : results) {
             // the match positions are expressed relative to the local layoutTokens index, while the offset at
@@ -853,36 +855,37 @@ public class SoftwareParser extends AbstractParser {
 
             // check the tf-idf of the term
             double tfidf = -1.0;
-            if (termProfiles.get(term) != null) {
-                // is the match already present in the entity list? 
-                if (overlapsPosition(placeTaken, rawMatchedPosition)) {
-                    continue;
-                }
-                tfidf = termFrequency * termProfiles.get(term);
             
-                // ideally we should make a small classifier here with entity frequency, tfidf, disambiguation success and 
-                // and/or log-likelyhood/dice coefficient as features - but for the time being we introduce a simple rule
-                // with an experimentally defined threshold:
-                if ( (tfidf <= 0) || (tfidf > 0.001) ) {
-                    // add new entity mention
-                    SoftwareComponent name = new SoftwareComponent();
-                    name.setRawForm(term);
-                    // these offsets are relative now to the local layoutTokens sequence
-                    name.setOffsetStart(matchedPosition.start);
-                    name.setOffsetEnd(matchedPosition.end);
-                    name.setLabel(SoftwareTaggingLabels.SOFTWARE);
-                    name.setTokens(matchedTokens);
+            // is the match already present in the entity list? 
+            if (overlapsPosition(placeTaken, rawMatchedPosition)) {
+                continue;
+            }
+            if (termProfiles.get(term) != null) {
+                tfidf = termFrequency * termProfiles.get(term);
+            }
 
-                    List<BoundingBox> boundingBoxes = BoundingBoxCalculator.calculate(matchedTokens);
-                    name.setBoundingBoxes(boundingBoxes);
+            // ideally we should make a small classifier here with entity frequency, tfidf, disambiguation success and 
+            // and/or log-likelyhood/dice coefficient as features - but for the time being we introduce a simple rule
+            // with an experimentally defined threshold:
+            if ( (tfidf <= 0) || (tfidf > 0.001) ) {
+                // add new entity mention
+                SoftwareComponent name = new SoftwareComponent();
+                name.setRawForm(term);
+                // these offsets are relative now to the local layoutTokens sequence
+                name.setOffsetStart(matchedPosition.start);
+                name.setOffsetEnd(matchedPosition.end);
+                name.setLabel(SoftwareTaggingLabels.SOFTWARE);
+                name.setTokens(matchedTokens);
 
-                    SoftwareEntity entity = new SoftwareEntity();
-                    entity.setSoftwareName(name);
-                    entity.setType(SoftwareLexicon.Software_Type.SOFTWARE);
-                     entity.setPropagated(true);
-                    localEntities.add(entity);
-                    entities.add(entity);
-                }
+                List<BoundingBox> boundingBoxes = BoundingBoxCalculator.calculate(matchedTokens);
+                name.setBoundingBoxes(boundingBoxes);
+
+                SoftwareEntity entity = new SoftwareEntity();
+                entity.setSoftwareName(name);
+                entity.setType(SoftwareLexicon.Software_Type.SOFTWARE);
+                entity.setPropagated(true);
+                localEntities.add(entity);
+                entities.add(entity);
             }
         }
 
@@ -1331,10 +1334,21 @@ public class SoftwareParser extends AbstractParser {
             if (nameComponent == null)
                 continue;
             String term = nameComponent.getRawForm();
+            term = term.replace("\n", " ");
+            term = term.replaceAll("( )+", " ");
+
             Double profile = result.get(term);
             if (profile == null) {
                 profile = SoftwareLexicon.getInstance().getTermIDF(term);
                 result.put(term, profile);
+            }
+
+            if (!term.equals(nameComponent.getNormalizedForm())) {
+                profile = result.get(nameComponent.getNormalizedForm());
+                if (profile == null) {
+                    profile = SoftwareLexicon.getInstance().getTermIDF(nameComponent.getNormalizedForm());
+                    result.put(nameComponent.getNormalizedForm(), profile);
+                }
             }
         }
 
@@ -1343,12 +1357,36 @@ public class SoftwareParser extends AbstractParser {
 
     public FastMatcher prepareTermPattern(List<SoftwareEntity> entities) {
         FastMatcher termPattern = new FastMatcher();
+        List<String> added = new ArrayList<>();
         for(SoftwareEntity entity : entities) {
             SoftwareComponent nameComponent = entity.getSoftwareName();
             if (nameComponent == null)
                 continue;
             String term = nameComponent.getRawForm();
-            termPattern.loadTerm(term, SoftwareAnalyzer.getInstance(), false);
+            term = term.replace("\n", " ");
+            term = term.replaceAll("( )+", " ");
+
+            if (term.trim().length() == 0)
+                continue;
+
+            // for safety, we don't propagate something that looks like a stopword with simply an Uppercase first letter
+            if (FeatureFactory.getInstance().test_first_capital(term) && 
+                !FeatureFactory.getInstance().test_all_capital(term) &&
+                SoftwareLexicon.getInstance().isEnglishStopword(term.toLowerCase()) ) {
+                continue;
+            }
+
+            if (!added.contains(term)) {
+                termPattern.loadTerm(term, SoftwareAnalyzer.getInstance(), false);
+                added.add(term);
+            }
+
+            if (!term.equals(nameComponent.getNormalizedForm())) {
+                if (!added.contains(nameComponent.getNormalizedForm())) {
+                    termPattern.loadTerm(nameComponent.getNormalizedForm(), SoftwareAnalyzer.getInstance(), false);
+                    added.add(nameComponent.getNormalizedForm());
+                }
+            }
         }
         return termPattern;
     }
@@ -1641,10 +1679,20 @@ public class SoftwareParser extends AbstractParser {
 
             if (overlapRefMarker) {
                 pos = endPos;
-                continue;        
+                continue;
             }
 
             if (!clusterLabel.equals(SoftwareTaggingLabels.OTHER)) {
+
+                // conservative check, minimal well-formedness of the content for software name
+                if (clusterLabel.equals(SoftwareTaggingLabels.SOFTWARE)) {
+                    if (SoftwareAnalyzer.DELIMITERS.indexOf(clusterContent) != -1 || 
+                        SoftwareLexicon.getInstance().isEnglishStopword(clusterContent) ) {
+                        pos = endPos;
+                        continue;
+                    }
+                }
+
                 currentComponent = new SoftwareComponent();
 
                 currentComponent.setRawForm(clusterContent);

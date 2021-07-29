@@ -57,6 +57,8 @@ public class SoftwareLexicon {
     // the list of P31 and P279 values of the Wikidata software entities
     private List<String> propertyValues = null;
 
+    private List<String> englishStopwords = null;
+
     private static volatile SoftwareLexicon instance;
 
     public static synchronized SoftwareLexicon getInstance() {
@@ -249,6 +251,46 @@ public class SoftwareLexicon {
                 throw new GrobidResourceException("Cannot close IO stream.", e);
             }
         }
+
+        // a list of stopwords for English for conservative checks with software names
+        englishStopwords = new ArrayList<>();
+        file = new File("resources/lexicon/stopwords_en.txt");
+        if (!file.exists()) {
+            throw new GrobidResourceException("Cannot initialize English stopwords, because file '" + 
+                file.getAbsolutePath() + "' does not exists.");
+        }
+        if (!file.exists()) {
+            throw new GrobidResourceException("Cannot initialize English stopwords, because file '" + 
+                fileExtra.getAbsolutePath() + "' does not exists.");
+        }
+        if (!file.canRead()) {
+            throw new GrobidResourceException("Cannot initialize English stopwords, because cannot read file '" + 
+                file.getAbsolutePath() + "'.");
+        }
+        if (!fileExtra.canRead()) {
+            throw new GrobidResourceException("Cannot initialize English stopwords, because cannot read file '" + 
+                fileExtra.getAbsolutePath() + "'.");
+        }
+        // read the file
+        try {
+            dis = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
+            String l = null;
+            while ((l = dis.readLine()) != null) {
+                if (l.length() == 0) continue;
+                englishStopwords.add(l.trim());
+            }
+        } catch (FileNotFoundException e) {
+            throw new GrobidException("English stopwords file not found.", e);
+        } catch (IOException e) {
+            throw new GrobidException("Cannot read English stopwords file.", e);
+        } finally {
+            try {
+                if (dis != null)
+                    dis.close();
+            } catch(Exception e) {
+                throw new GrobidResourceException("Cannot close IO stream.", e);
+            }
+        }
     }
 	
 	public boolean inSoftwareDictionary(String string) {
@@ -357,4 +399,12 @@ public class SoftwareLexicon {
     public boolean inSoftwareCategories(String value) {
         return wikipediaCategories.contains(value.toLowerCase());
     }   
+
+    public boolean isEnglishStopword(String value) {
+        if (this.englishStopwords == null || value == null)
+            return false;
+        if (value.length() == 1) 
+            value = value.toLowerCase();
+        return this.englishStopwords.contains(value);
+    }
 }
