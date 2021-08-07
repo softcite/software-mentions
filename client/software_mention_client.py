@@ -19,6 +19,8 @@ from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor, as_compl
 import hashlib
 import copyreg
 import types
+import logging
+import logging.handlers
 
 map_size = 100 * 1024 * 1024 * 1024 
 
@@ -26,6 +28,7 @@ map_size = 100 * 1024 * 1024 * 1024
 endpoint_pdf = '/service/annotateSoftwarePDF'
 endpoint_txt = '/service/annotateSoftwareText'
 
+logging.basicConfig(filename='client.log', filemode='w', level=logging.DEBUG)
 
 class software_mention_client(object):
     """
@@ -53,7 +56,7 @@ class software_mention_client(object):
                 line = line.replace(" ", "").strip()
                 if not line.startswith("#"):
                     self.blacklisted.append(line)
-        print("blacklist size:", len(self.blacklisted))
+        logging.info("blacklist size:", len(self.blacklisted))
 
         self.scorched_earth = False
 
@@ -70,13 +73,14 @@ class software_mention_client(object):
         the_url += "isalive"
         try:
             r = requests.get(the_url)
+
             if r.status_code != 200:
-                print('Grobid software mention server does not appear up and running ' + str(r.status_code))
+                logging.error('Softcite software mention server does not appear up and running ' + str(r.status_code))
             else:
-                print("Grobid software mention server is up and running")
+                logging.info("Softcite software mention server is up and running")
                 return True
         except: 
-            print('Grobid software mention server does not appear up and running:',
+            logging.error('Softcite software mention server does not appear up and running:',
                 'test call to grobid software mention failed, please check and re-start a server.')
         return False
 
@@ -98,8 +102,6 @@ class software_mention_client(object):
         for root, directories, filenames in os.walk(directory):
             for filename in filenames: 
                 if filename.endswith(".pdf") or filename.endswith(".PDF"):
-                    #print(os.path.join(root,filename))
-
                     if filename.endswith(".pdf"):
                         filename_json = filename.replace(".pdf", ".software.json")
                     elif filename.endswith(".PDF"):
@@ -148,7 +150,6 @@ class software_mention_client(object):
     def annotate_collection(self, data_path):
         # init lmdb transactions
         # open in read mode
-        #print(os.path.join(data_path, 'entries_software'))
         envFilePath = os.path.join(data_path, 'entries')
         self.env = lmdb.open(envFilePath, map_size=map_size)
 
@@ -170,8 +171,6 @@ class software_mention_client(object):
                 #print(local_entry)
 
                 # if the json file already exists, we skip 
-                #print(os.path.join(data_path, generateStoragePath(local_entry['id']), 
-                #    local_entry['id'], local_entry['id']+".software.json"))
                 json_outfile = os.path.join(os.path.join(data_path, generateStoragePath(local_entry['id']), local_entry['id'], local_entry['id']+".software.json"))
                 if os.path.isfile(json_outfile):
                     # check that this id is considered in the lmdb keeping track of the process
@@ -210,7 +209,6 @@ class software_mention_client(object):
 
     def annotate_batch(self, pdf_files, out_files=None, full_records=None):
         # process a provided list of PDF
-        #print("annotate_batch", len(pdf_files))
         with ThreadPoolExecutor(max_workers=self.config["concurrency"]) as executor:
             #with ProcessPoolExecutor(max_workers=self.config["concurrency"]) as executor:
             # note: ProcessPoolExecutor will not work due to env objects that can't be serailized (e.g. LMDB variables)
@@ -235,7 +233,7 @@ class software_mention_client(object):
                 local_id = key.decode(encoding='UTF-8')
                 if result == "False":
                     # reprocess
-                    print("reprocess", local_id)
+                    logging.info("reprocess " + local_id)
                     pdf_files.append(os.path.join(data_path, generateStoragePath(local_id), local_id, local_id+".pdf"))
                     out_files.append(os.path.join(data_path, generateStoragePath(local_id), local_id, local_id+".software.json"))
                     # get the full record from the data_path env
@@ -257,7 +255,7 @@ class software_mention_client(object):
         if len(pdf_files) > 0:
             self.annotate_batch(pdf_files, out_files, full_records)
 
-        print("re-processed:", nb_total, "entries")
+        logging.info("re-processed: " + str(nb_total) + " entries")
 
     def reset(self):
         """
@@ -280,12 +278,11 @@ class software_mention_client(object):
         for root, directories, filenames in os.walk(directory):
             for filename in filenames: 
                 if filename.endswith(".software.json"):
-                    print(os.path.join(root,filename))
+                    #print(os.path.join(root,filename))
                     # we store the result in mongo db 
                     the_json = open(os.path.join(root,filename)).read()
                     jsonObject = json.loads(the_json)
                     self._insert_mongo(jsonObject)
-                    #print("inserted annotations with id", inserted_id)
 
     def annotate(self, file_in, file_out, full_record):
         the_file = {'input': open(file_in, 'rb')}
@@ -299,22 +296,22 @@ class software_mention_client(object):
         response = requests.post(url, files=the_file, data = {'disambiguate': 1}, timeout=50)
         jsonObject = None
         if response.status_code == 503:
-            print('service overloaded, sleep', self.config['sleep_time'], seconds)
+            logging.info('service overloaded, sleep ' + str(self.config['sleep_time']) + ' seconds')
             time.sleep(self.config['sleep_time'])
             return self.annotate(file_in, self.config, file_out, full_record)
         elif response.status_code >= 500:
-            print('[{0}] Server Error'.format(response.status_code), file_in)
+            logging.error('[{0}] Server Error '.format(response.status_code) + file_in)
         elif response.status_code == 404:
-            print('[{0}] URL not found: [{1}]'.format(response.status_code, url))
+            logging.error('[{0}] URL not found: [{1}] '.format(response.status_code + url))
         elif response.status_code >= 400:
-            print('[{0}] Bad Request'.format(response.status_code))
-            print(response.content)
+            logging.error('[{0}] Bad Request'.format(response.status_code))
+            logging.error(response.content)
         elif response.status_code == 200:
             jsonObject = response.json()
             # note: in case the recognizer has found no software in the document, it will still return
             # a json object as result, without mentions, but with MD5 and page information
         else:
-            print('Unexpected Error: [HTTP {0}]: Content: {1}'.format(response.status_code, response.content))
+            logging.error('Unexpected Error: [HTTP {0}]: Content: {1}'.format(response.status_code, response.content))
 
         # at this stage, if jsonObject is still at None, the process failed 
 
@@ -371,7 +368,7 @@ class software_mention_client(object):
             try:
                 os.remove(file_in) 
             except:
-                print("Error while deleting file ", file_in)
+                logging.exception("Error while deleting file " + file_in)
 
     def diagnostic(self, full_diagnostic=False):
         """
@@ -527,7 +524,6 @@ def getSHA1(the_file):
                 break
             sha1.update(data)
 
-    #print("SHA1: {0}".format(sha1.hexdigest()))
     return sha1.hexdigest()
 
 if __name__ == "__main__":
