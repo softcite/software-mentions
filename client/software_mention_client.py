@@ -27,16 +27,6 @@ endpoint_pdf = '/service/annotateSoftwarePDF'
 endpoint_txt = '/service/annotateSoftwareText'
 
 
-# the following method is used to have a class method supported by pickle in order to use ProcessPoolExecutor
-def _pickle_method(m):
-    if m.im_self is None:
-        return getattr, (m.im_class, m.im_func.func_name)
-    else:
-        return getattr, (m.im_self, m.im_func.func_name)
-
-copyreg.pickle(types.MethodType, _pickle_method)
-
-
 class software_mention_client(object):
     """
     Python client for using the GROBID software mention service. 
@@ -221,8 +211,10 @@ class software_mention_client(object):
     def annotate_batch(self, pdf_files, out_files=None, full_records=None):
         # process a provided list of PDF
         #print("annotate_batch", len(pdf_files))
-        #with ThreadPoolExecutor(max_workers=self.config["concurrency"]) as executor:
-        with ProcessPoolExecutor(max_workers=self.config["concurrency"]) as executor:
+        with ThreadPoolExecutor(max_workers=self.config["concurrency"]) as executor:
+            #with ProcessPoolExecutor(max_workers=self.config["concurrency"]) as executor:
+            # note: ProcessPoolExecutor will not work due to env objects that can't be serailized (e.g. LMDB variables)
+            # client is not cpu bounded but io bounded, so normally it's still okay with threads and GIL
             executor.map(self.annotate, pdf_files, out_files, full_records, timeout=300)
 
     def reprocess_failed(self):
