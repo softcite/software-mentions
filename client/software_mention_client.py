@@ -65,6 +65,8 @@ class software_mention_client(object):
                     self.blacklisted.append(line)
         print("blacklist size:", len(self.blacklisted))
 
+        self.scorched_earth = False
+
     def _load_config(self, path='./config.json'):
         """
         Load the json configuration 
@@ -96,7 +98,7 @@ class software_mention_client(object):
         #envFilePath = os.path.join(self.config["data_path"], 'fail_software')
         #self.env_fail_software = lmdb.open(envFilePath, map_size=map_size)
 
-    def annotate_directory(self, directory, scorched_earth=False):
+    def annotate_directory(self, directory):
         # recursive directory walk for all pdf documents
         pdf_files = []
         out_files = []
@@ -139,7 +141,7 @@ class software_mention_client(object):
                     full_records.append(record)
                     
                     if len(pdf_files) == self.config["batch_size"]:
-                        self.annotate_batch(pdf_files, out_files, full_records, scorched_earth=scorched_earth)
+                        self.annotate_batch(pdf_files, out_files, full_records)
                         nb_total += len(pdf_files)
                         pdf_files = []
                         out_files = []
@@ -148,12 +150,12 @@ class software_mention_client(object):
                         print("total process:", nb_total, "- accumulated runtime: %s s " % (runtime), "- %s PDF/s" % round(nb_total/runtime, 2))
         # last batch
         if len(pdf_files) > 0:
-            self.annotate_batch(pdf_files, out_files, full_records, scorched_earth=scorched_earth)
+            self.annotate_batch(pdf_files, out_files, full_records)
             nb_total += len(pdf_files)
             runtime = round(time.time() - start_time, 3)
             print("total process:", nb_total, "- accumulated runtime: %s s " % (runtime), "- %s PDF/s" % round(nb_total/runtime, 2))
 
-    def annotate_collection(self, data_path, scorched_earth=False):
+    def annotate_collection(self, data_path):
         # init lmdb transactions
         # open in read mode
         #print(os.path.join(data_path, 'entries_software'))
@@ -201,7 +203,7 @@ class software_mention_client(object):
                 full_records.append(local_entry)
 
                 if len(pdf_files) == self.config["batch_size"]:
-                    self.annotate_batch(pdf_files, out_files, full_records, scorched_earth=scorched_earth)
+                    self.annotate_batch(pdf_files, out_files, full_records)
                     nb_total += len(pdf_files)
                     pdf_files = []
                     out_files = []
@@ -211,19 +213,19 @@ class software_mention_client(object):
 
         # last batch
         if len(pdf_files) > 0:
-            self.annotate_batch(pdf_files, out_files, full_records, scorched_earth=scorched_earth)
+            self.annotate_batch(pdf_files, out_files, full_records)
             runtime = round(time.time() - start_time, 3)
             print("total process:", nb_total, "- accumulated runtime: %s s " % (runtime), "- %s PDF/s" % round(nb_total/runtime, 2))
         self.env.close()
 
-    def annotate_batch(self, pdf_files, out_files=None, full_records=None, scorched_earth=False):
+    def annotate_batch(self, pdf_files, out_files=None, full_records=None):
         # process a provided list of PDF
         #print("annotate_batch", len(pdf_files))
         #with ThreadPoolExecutor(max_workers=self.config["concurrency"]) as executor:
         with ProcessPoolExecutor(max_workers=self.config["concurrency"]) as executor:
-            executor.map(self.annotate, pdf_files, out_files, full_records, scorched_earth, timeout=300)
+            executor.map(self.annotate, pdf_files, out_files, full_records, timeout=300)
 
-    def reprocess_failed(self, scorched_earth=False):
+    def reprocess_failed(self):
         """
         we reprocess only files which have led to a failure of the service, we don't reprocess documents
         where no software mention has been found 
@@ -253,7 +255,7 @@ class software_mention_client(object):
                     i += 1
 
             if i == self.config["batch_size"]:
-                self.annotate_batch(pdf_files, out_files, full_records, scorched_earth=scorched_earth)
+                self.annotate_batch(pdf_files, out_files, full_records)
                 pdf_files = []
                 out_files = []
                 full_records = []
@@ -261,7 +263,7 @@ class software_mention_client(object):
 
         # last batch
         if len(pdf_files) > 0:
-            self.annotate_batch(pdf_files, out_files, full_records, scorched_earth=scorched_earth)
+            self.annotate_batch(pdf_files, out_files, full_records)
 
         print("re-processed:", nb_total, "entries")
 
@@ -293,7 +295,7 @@ class software_mention_client(object):
                     self._insert_mongo(jsonObject)
                     #print("inserted annotations with id", inserted_id)
 
-    def annotate(self, file_in, file_out, full_record, scorched_earth):
+    def annotate(self, file_in, file_out, full_record):
         the_file = {'input': open(file_in, 'rb')}
         url = "http://" + self.config["software_mention_host"]
         if self.config["software_mention_port"] is not None:
@@ -372,7 +374,7 @@ class software_mention_client(object):
                     # the process failed
                     txn.put(full_record['id'].encode(encoding='UTF-8'), "False".encode(encoding='UTF-8'))
 
-        if scorched_earth and jsonObject is not None:
+        if self.scorched_earth and jsonObject is not None:
             # processed is done, remove local PDF file
             try:
                 os.remove(file_in) 
@@ -573,6 +575,9 @@ if __name__ == "__main__":
     if reset:
         client.reset()
 
+    if scorched_earth:
+        client.scorched_earth = True
+
     if load_mongo:
         # check a mongodb server is specified in the config
         if client.config["mongo_host"] is None:
@@ -586,13 +591,13 @@ if __name__ == "__main__":
     elif full_diagnostic:
         client.diagnostic(full_diagnostic=True)
     elif reprocess:
-        client.reprocess_failed(scorched_earth=scorched_earth)
+        client.reprocess_failed()
     elif repo_in is not None: 
-        client.annotate_directory(repo_in, scorched_earth=scorched_earth)
+        client.annotate_directory(repo_in)
     elif file_in is not None:
         client.annotate(file_in, client.config, file_out)
     elif data_path is not None: 
-        client.annotate_collection(data_path, scorched_earth=scorched_earth)
+        client.annotate_collection(data_path)
 
     if not full_diagnostic:
         client.diagnostic(full_diagnostic=False)
