@@ -17,12 +17,25 @@ import requests
 import pymongo
 from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor, as_completed
 import hashlib
+import copyreg
+import types
 
 map_size = 100 * 1024 * 1024 * 1024 
 
 # default endpoint
 endpoint_pdf = '/service/annotateSoftwarePDF'
 endpoint_txt = '/service/annotateSoftwareText'
+
+
+# the following method is used to have a class method supported by pickle in order to use ProcessPoolExecutor
+def _pickle_method(m):
+    if m.im_self is None:
+        return getattr, (m.im_class, m.im_func.func_name)
+    else:
+        return getattr, (m.im_self, m.im_func.func_name)
+
+copyreg.pickle(types.MethodType, _pickle_method)
+
 
 class software_mention_client(object):
     """
@@ -83,7 +96,7 @@ class software_mention_client(object):
         #envFilePath = os.path.join(self.config["data_path"], 'fail_software')
         #self.env_fail_software = lmdb.open(envFilePath, map_size=map_size)
 
-    def annotate_directory(self, directory):
+    def annotate_directory(self, directory, scorched_earth=False):
         # recursive directory walk for all pdf documents
         pdf_files = []
         out_files = []
@@ -126,7 +139,7 @@ class software_mention_client(object):
                     full_records.append(record)
                     
                     if len(pdf_files) == self.config["batch_size"]:
-                        self.annotate_batch(pdf_files, out_files, full_records)
+                        self.annotate_batch(pdf_files, out_files, full_records, scorched_earth=scorched_earth)
                         nb_total += len(pdf_files)
                         pdf_files = []
                         out_files = []
@@ -135,12 +148,12 @@ class software_mention_client(object):
                         print("total process:", nb_total, "- accumulated runtime: %s s " % (runtime), "- %s PDF/s" % round(nb_total/runtime, 2))
         # last batch
         if len(pdf_files) > 0:
-            self.annotate_batch(pdf_files, out_files, full_records)
+            self.annotate_batch(pdf_files, out_files, full_records, scorched_earth=scorched_earth)
             nb_total += len(pdf_files)
             runtime = round(time.time() - start_time, 3)
             print("total process:", nb_total, "- accumulated runtime: %s s " % (runtime), "- %s PDF/s" % round(nb_total/runtime, 2))
 
-    def annotate_collection(self, data_path):
+    def annotate_collection(self, data_path, scorched_earth=False):
         # init lmdb transactions
         # open in read mode
         #print(os.path.join(data_path, 'entries_software'))
@@ -188,7 +201,7 @@ class software_mention_client(object):
                 full_records.append(local_entry)
 
                 if len(pdf_files) == self.config["batch_size"]:
-                    self.annotate_batch(pdf_files, out_files, full_records)
+                    self.annotate_batch(pdf_files, out_files, full_records, scorched_earth=scorched_earth)
                     nb_total += len(pdf_files)
                     pdf_files = []
                     out_files = []
@@ -198,19 +211,19 @@ class software_mention_client(object):
 
         # last batch
         if len(pdf_files) > 0:
-            self.annotate_batch(pdf_files, out_files, full_records)
+            self.annotate_batch(pdf_files, out_files, full_records, scorched_earth=scorched_earth)
             runtime = round(time.time() - start_time, 3)
             print("total process:", nb_total, "- accumulated runtime: %s s " % (runtime), "- %s PDF/s" % round(nb_total/runtime, 2))
         self.env.close()
 
-    def annotate_batch(self, pdf_files, out_files=None, full_records=None):
+    def annotate_batch(self, pdf_files, out_files=None, full_records=None, scorched_earth=False):
         # process a provided list of PDF
         #print("annotate_batch", len(pdf_files))
-        with ThreadPoolExecutor(max_workers=self.config["concurrency"]) as executor:
-            #with ProcessPoolExecutor(max_workers=self.config["concurrency"]) as executor:
-            executor.map(self.annotate, pdf_files, out_files, full_records, timeout=60)
+        #with ThreadPoolExecutor(max_workers=self.config["concurrency"]) as executor:
+        with ProcessPoolExecutor(max_workers=self.config["concurrency"]) as executor:
+            executor.map(self.annotate, pdf_files, out_files, full_records, scorched_earth, timeout=300)
 
-    def reprocess_failed(self):
+    def reprocess_failed(self, scorched_earth=False):
         """
         we reprocess only files which have led to a failure of the service, we don't reprocess documents
         where no software mention has been found 
@@ -240,7 +253,7 @@ class software_mention_client(object):
                     i += 1
 
             if i == self.config["batch_size"]:
-                self.annotate_batch(pdf_files, out_files, full_records)
+                self.annotate_batch(pdf_files, out_files, full_records, scorched_earth=scorched_earth)
                 pdf_files = []
                 out_files = []
                 full_records = []
@@ -248,7 +261,7 @@ class software_mention_client(object):
 
         # last batch
         if len(pdf_files) > 0:
-            self.annotate_batch(pdf_files, out_files, full_records)
+            self.annotate_batch(pdf_files, out_files, full_records, scorched_earth=scorched_earth)
 
         print("re-processed:", nb_total, "entries")
 
@@ -280,7 +293,7 @@ class software_mention_client(object):
                     self._insert_mongo(jsonObject)
                     #print("inserted annotations with id", inserted_id)
 
-    def annotate(self, file_in, file_out, full_record):
+    def annotate(self, file_in, file_out, full_record, scorched_earth):
         the_file = {'input': open(file_in, 'rb')}
         url = "http://" + self.config["software_mention_host"]
         if self.config["software_mention_port"] is not None:
@@ -304,10 +317,15 @@ class software_mention_client(object):
             print(response.content)
         elif response.status_code == 200:
             jsonObject = response.json()
+            # note: in case the recognizer has found no software in the document, it will still return
+            # a json object as result, without mentions, but with MD5 and page information
         else:
             print('Unexpected Error: [HTTP {0}]: Content: {1}'.format(response.status_code, response.content))
 
+        # at this stage, if jsonObject is still at None, the process failed 
+
         if jsonObject is not None and 'mentions' in jsonObject and len(jsonObject['mentions']) != 0:
+            # we have found software mentions in the document
             # add file, DOI, date and version info in the JSON, if available
             if full_record is not None:
                 jsonObject['id'] = full_record['id']
@@ -335,7 +353,7 @@ class software_mention_client(object):
             if self.config["mongo_host"] is not None:
                 # we store the result in mongo db 
                 self._insert_mongo(jsonObject)
-        else:
+        elif jsonObject is not None:
             # we have no software mention in the document, we still write an empty result file
             # along with the PDF/medtadata files to easily keep track of the processing for this doc
             if file_out is not None: 
@@ -351,7 +369,15 @@ class software_mention_client(object):
                 if jsonObject is not None:
                     txn.put(full_record['id'].encode(encoding='UTF-8'), "True".encode(encoding='UTF-8')) 
                 else:
+                    # the process failed
                     txn.put(full_record['id'].encode(encoding='UTF-8'), "False".encode(encoding='UTF-8'))
+
+        if scorched_earth and jsonObject is not None:
+            # processed is done, remove local PDF file
+            try:
+                os.remove(file_in) 
+            except:
+                print("Error while deleting file ", file_in)
 
     def diagnostic(self, full_diagnostic=False):
         """
@@ -521,8 +547,8 @@ if __name__ == "__main__":
     parser.add_argument("--reset", action="store_true", help="ignore previous processing states and re-init the annotation process from the beginning") 
     parser.add_argument("--load", action="store_true", help="load json files into the MongoDB instance, the --repo-in parameter must indicate the path "
         +"to the directory of resulting json files to be loaded") 
-    parser.add_argument("--diagnostic", action="store_true", help="perform a full count of annotations and diagnostic using MongoDB "  
-        +"regarding the harvesting and transformation process") 
+    parser.add_argument("--scorched-earth", action="store_true", help="remove a PDF file after its sucessful processing in order to save storage space" 
+        +", careful with this!") 
 
     args = parser.parse_args()
 
@@ -535,6 +561,7 @@ if __name__ == "__main__":
     repo_in = args.repo_in
     load_mongo = args.load
     full_diagnostic = args.diagnostic
+    scorched_earth = args.scorched_earth
 
     client = software_mention_client(config_path=config_path)
 
@@ -557,13 +584,13 @@ if __name__ == "__main__":
     elif full_diagnostic:
         client.diagnostic(full_diagnostic=True)
     elif reprocess:
-        client.reprocess_failed()
+        client.reprocess_failed(scorched_earth=scorched_earth)
     elif repo_in is not None: 
-        client.annotate_directory(repo_in)
+        client.annotate_directory(repo_in, scorched_earth=scorched_earth)
     elif file_in is not None:
         client.annotate(file_in, client.config, file_out)
     elif data_path is not None: 
-        client.annotate_collection(data_path)
+        client.annotate_collection(data_path, scorched_earth=scorched_earth)
 
     if not full_diagnostic:
         client.diagnostic(full_diagnostic=False)
