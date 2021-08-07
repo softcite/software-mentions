@@ -547,6 +547,8 @@ if __name__ == "__main__":
     parser.add_argument("--reset", action="store_true", help="ignore previous processing states and re-init the annotation process from the beginning") 
     parser.add_argument("--load", action="store_true", help="load json files into the MongoDB instance, the --repo-in parameter must indicate the path "
         +"to the directory of resulting json files to be loaded") 
+    parser.add_argument("--diagnostic", action="store_true", help="perform a full count of annotations and diagnostic using MongoDB "  
+        +"regarding the harvesting and transformation process") 
     parser.add_argument("--scorched-earth", action="store_true", help="remove a PDF file after its sucessful processing in order to save storage space" 
         +", careful with this!") 
 
