@@ -54,7 +54,9 @@ This dataset is the result of the extraction of software mentions from the set o
 
 ## Install, build, run
 
-Building the module requires JDK 1.8 or higher. First install and build the latest development version of GROBID as explained by the [documentation](http://grobid.readthedocs.org).
+The easiest way to deploy and run the service is to use the Docker image, see next section. 
+
+Building the module requires JDK 1.8 or higher. First install and build the latest development version of GROBID as explained by the [documentation](http://grobid.readthedocs.org), together with [DeLFT](https://github.com/kermitt2/delft) for Deep Learning model support.
 
 Under the installed and built `grobid/` directory, clone the present module software-mentions (it will appear as sibling sub-project to grobid-core, grobid-trainer, etc.):
 
@@ -78,29 +80,17 @@ Run some test:
 
 > ./gradlew test
 
+To start the service:
+
+> ./gradlew run
+
 ## Docker image
 
 It's possible to use a Docker image via [docker HUB](https://hub.docker.com/repository/docker/grobid/software-mentions), pull the image (5.25GB) as follow: 
 
 ```bash
-docker pull grobid/software-mentions:0.7.0-SNAPSHOT 
+docker pull grobid/software-mentions:0.7.1-SNAPSHOT 
 ```
-
-As an alterntive, a docker image for the `software-mentions` service can be built with the project Dockerfile to match the current master version. The complete process is as follow: 
-
-- copy the `Dockerfile.software` at the root of the GROBID installation:
-
-```bash
-~/grobid/software-mentions$ cp ./Dockerfile.software ..
-```
-
-- from the GROBID root installation (`grobid/`), launch the docker build:
-
-```bash
-> docker build -t grobid/software-mentions:0.7.1-SNAPSHOT --build-arg GROBID_VERSION=0.7.1-SNAPSHOT --file Dockerfile.software .
-```
-
-The Docker image build take several minutes, installing GROBID, software-mentions, a complete Python Deep Learning environment based on DeLFT and deep learning models downloaded from the internet (one fine-tuned base BERT model has a size of ~1.3GB). The resulting image is thus very large, around 8GB, due to the deep learning resources and model. 
 
 After pulling or building the Docker image, you can now run the `software-mentions` service as a container:
 
@@ -122,13 +112,23 @@ By default, CRF models if used for the software mention recognition. To modify t
 > docker run --rm --gpus all --init -p 8060:8060 -v /home/lopez/grobid/software-mentions/resources/config/config.yml:/opt/grobid/software-mentions/resources/config/config.yml:ro  grobid/software-mentions:0.7.1-SNAPSHOT
 ```
 
-## Start the service
+As an alterntive, a docker image for the `software-mentions` service can be built with the project Dockerfile to match the current master version. The complete process is as follow: 
 
-To start the service:
+- copy the `Dockerfile.software` at the root of the GROBID installation:
 
-> ./gradlew run
+```bash
+~/grobid/software-mentions$ cp ./Dockerfile.software ..
+```
 
-or use the above Docker image as documented. 
+- from the GROBID root installation (`grobid/`), launch the docker build:
+
+```bash
+> docker build -t grobid/software-mentions:0.7.1-SNAPSHOT --build-arg GROBID_VERSION=0.7.1-SNAPSHOT --file Dockerfile.software .
+```
+
+The Docker image build take several minutes, installing GROBID, software-mentions, a complete Python Deep Learning environment based on DeLFT and deep learning models downloaded from the internet (one fine-tuned base BERT model has a size of ~1.3GB). The resulting image is thus very large, around 8GB, due to the deep learning resources and model. 
+
+
 
 ### Console web app
 
@@ -147,6 +147,10 @@ When processing the PDF of a scientific article, the tool will also identify bib
 Software entity linking against Wikidata is realized by [entity-fishing](https://github.com/kermitt2/entity-fishing) and provides when possible Wikidata ID and English Wikipedia page ID. The web console allows to interact and view the entity information in the infobox:
 
 ![GROBID Software mentions Demo](doc/images/screen7.jpeg)
+
+## Python client for the Softcite software mention recognition service
+
+To exploit the Softcite software mention recognition service efficiently (concurrent calls) and robustly, a Python client is available [here](https://github.com/softcite/software_mentions_client).
 
 ### Web API
 
@@ -169,7 +173,7 @@ Response status codes:
 |         500          |     Indicate an internal service error, further described by a provided message           |
 |         503          |     The service is not available, which usually means that all the threads are currently used                       |
 
-A `503` error normally means that all the threads available to GROBID are currently used for processing concurrent requests. The client need to re-send the query after a wait time that will allow the server to free some threads. The wait time depends on the service and the capacities of the server, we suggest 1 seconds for the `processSoftwareText` service.
+A `503` error normally means that all the threads available to Softcite service are currently used for processing concurrent requests. The client need to re-send the query after a wait time that will allow the server to free some threads. The wait time depends on the service and the capacities of the server, we suggest 1 seconds for the `processSoftwareText` service.
 
 Using ```curl``` POST/GET requests with some __text__:
 
@@ -228,7 +232,7 @@ Response status codes:
 |         500          |     Indicate an internal service error, further described by a provided message           |
 |         503          |     The service is not available, which usually means that all the threads are currently used                       |
 
-A `503` error normally means that all the threads available to GROBID are currently used for processing concurrent requests. The client need to re-send the query after a wait time that will allow the server to free some threads. The wait time depends on the service and the capacities of the server, we suggest 2 seconds for the `annotateSoftwarePDF` service or 3 seconds when disambiguation is also requested.
+A `503` error normally means that all the threads available to Softcite service are currently used for processing concurrent requests. The client need to re-send the query after a wait time that will allow the server to free some threads. The wait time depends on the service and the capacities of the server, we suggest 2 seconds for the `annotateSoftwarePDF` service or 3 seconds when disambiguation is also requested.
 
 Using ```curl``` POST request with a __PDF file__:
 
@@ -259,7 +263,7 @@ Response status codes:
 |         500          |     Indicate an internal service error, further described by a provided message           |
 |         503          |     The service is not available, which usually means that all the threads are currently used                       |
 
-A `503` error normally means that all the threads available to GROBID are currently used for processing concurrent requests. The client need to re-send the query after a wait time that will allow the server to free some threads. The wait time depends on the service and the capacities of the server, we suggest 2 seconds for the `extractSoftwareXML` service or 3 seconds when disambiguation is also requested.
+A `503` error normally means that all the threads available to Softcite service are currently used for processing concurrent requests. The client need to re-send the query after a wait time that will allow the server to free some threads. The wait time depends on the service and the capacities of the server, we suggest 2 seconds for the `extractSoftwareXML` service or 3 seconds when disambiguation is also requested.
 
 Using ```curl``` POST request with a __XML file__:
 
@@ -338,7 +342,7 @@ model:
     embeddings_name: "glove-840B"
 ```
 
-FTo use the SciBERT fine-tuned model:
+To use the SciBERT fine-tuned model (recommended):
 
 ```yml
 model:
@@ -707,4 +711,4 @@ Tested with python 3.*
 
 ## License
 
-GROBID and the grobid software-mentions module are distributed under [Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0). 
+GROBID and the Softcite software mentions module are distributed under [Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0). 
