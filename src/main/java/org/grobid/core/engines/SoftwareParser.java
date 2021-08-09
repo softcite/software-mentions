@@ -679,8 +679,13 @@ public class SoftwareParser extends AbstractParser {
         }
 
         // labeled result from sequence labelling lib
-        String res = label(allRess.toString());
+        String allResString = allRess.toString();
+        if (allResString.trim().length() == 0) {
+            // empty content, nothing more to do
+            return entities;
+        }
 
+        String res = label(allResString);
         int l = 0;
         String[] resBlocks = res.split("\n\n");
         for(LayoutTokenization layoutTokenization : layoutTokenizations) {
