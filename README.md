@@ -708,6 +708,9 @@ The default value is 1, so there is no parallelization in the call to the servic
 
 Tested with python 3.*
 
+## Acknowledgements
+
+We would like to acknowledge the support of the Alfred P. Sloan Foundation, Grant/Award Number: 2016-7209, and of the Gordon and Betty Moore Foundation, Grant/Award Number 8622.
 
 ## License
 
