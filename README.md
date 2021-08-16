@@ -712,3 +712,9 @@ Tested with python 3.*
 ## License
 
 GROBID and the Softcite software mentions module are distributed under [Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0). 
+
+The documentation of the project is distributed under [CC-0](https://creativecommons.org/publicdomain/zero/1.0/) license and the annotated data under [CC-BY](https://creativecommons.org/licenses/by/4.0/) license.
+
+If you contribute to Softcite Knowledge Base project, you agree to share your contribution following these licenses. 
+
+Contact: Patrice Lopez (<patrice.lopez@science-miner.com>)
