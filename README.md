@@ -4,7 +4,7 @@
 
 The goal of this GROBID module is to recognize any software mentions in scholar textual documents and PDF. It uses as training data the [Softcite Dataset](https://github.com/howisonlab/softcite-dataset) developed by [James Howison](http://james.howison.name/) Lab at the University of Texas at Austin. This annotated corpus and the present software text mining component have been developed supported by a grant from the Alfred P. Sloan foundation to [improve credit for research software](https://blog.ourresearch.org/collaborating-635k-grant-improve-credit-research-software/).
 
-Code with [paper (CC-BY)](doc/afp1085-lopezA-CC-BY.pdf): 
+_Code with paper_: the [following article is available in CC-BY](https://github.com/ourresearch/software-mentions/raw/master/doc/afp1085-lopezA-CC-BY.pdf): 
 
 ```
 Patrice Lopez, Caifan Du, Johanna Cohoon, Karthik Ram, and James Howison. 2021. 
