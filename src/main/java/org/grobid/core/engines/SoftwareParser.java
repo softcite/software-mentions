@@ -137,7 +137,7 @@ public class SoftwareParser extends AbstractParser {
             try {
                 res = label(ress);
             } catch (Exception e) {
-                throw new GrobidException("CRF labeling for software parsing failed.", e);
+                throw new GrobidException("Sequence labeling for software parsing failed.", e);
             }
 
             components = extractSoftwareComponents(text, res, tokens);
@@ -269,7 +269,7 @@ public class SoftwareParser extends AbstractParser {
                     if ( (bodytext != null) && (bodytext.trim().length() > 0) ) {               
                         rese = parsers.getFullTextParser().label(bodytext);
                     } else {
-                        logger.debug("Fulltext model: The input to the CRF processing is empty");
+                        logger.debug("Fulltext model: The input to the sequence labelling processing is empty");
                     }
 
                     TaggingTokenClusteror clusteror = new TaggingTokenClusteror(GrobidModels.FULLTEXT, rese, 
@@ -672,7 +672,7 @@ public class SoftwareParser extends AbstractParser {
             List<OffsetPosition> softwareTokenPositions = softwareLexicon.tokenPositionsSoftwareNames(layoutTokens);
             List<OffsetPosition> urlPositions = Lexicon.getInstance().tokenPositionsUrlPattern(layoutTokens);
 
-            // string representation of the feature matrix for CRF lib
+            // string representation of the feature matrix for sequence labeling lib
             String ress = addFeatures(layoutTokens, softwareTokenPositions, urlPositions);
             allRess.append(ress);
             allRess.append("\n\n");   
@@ -774,10 +774,10 @@ public class SoftwareParser extends AbstractParser {
             List<OffsetPosition> softwareTokenPositions = softwareLexicon.tokenPositionsSoftwareNames(localLayoutTokens);
             List<OffsetPosition> urlPositions = Lexicon.getInstance().tokenPositionsUrlPattern(localLayoutTokens);
 
-            // string representation of the feature matrix for CRF lib
+            // string representation of the feature matrix for sequence labeling lib
             String ress = addFeatures(localLayoutTokens, softwareTokenPositions, urlPositions);     
             
-            // labeled result from CRF lib
+            // labeled result from sequence labeling lib
             String res = label(ress);
             //System.out.println(res);
             List<SoftwareComponent> components = extractSoftwareComponents(text, res, localLayoutTokens);
@@ -1117,7 +1117,7 @@ public class SoftwareParser extends AbstractParser {
 	/**
 	 * Generate training data with the current model using new files located in a given directory.
 	 * the generated training data can then be corrected manually to be used for updating the
-	 * software CRF model.
+	 * software sequence labeling model.
      */
     @SuppressWarnings({"UnusedParameters"})
     public int createTrainingBatch(String inputDirectory,
@@ -1208,7 +1208,7 @@ public class SoftwareParser extends AbstractParser {
                 try {
                     res = label(ress);
                 } catch (Exception e) {
-                    throw new GrobidException("CRF labeling for software mention parsing failed.", e);
+                    throw new GrobidException("Sequence labeling for software mention parsing failed.", e);
                 }
                 components = extractSoftwareComponents(text, res, tokens);
 
@@ -1276,7 +1276,7 @@ public class SoftwareParser extends AbstractParser {
                 try {
                     res = label(ress);
                 } catch (Exception e) {
-                    throw new GrobidException("CRF labeling for software parsing failed.", e);
+                    throw new GrobidException("Sequence labeling for software parsing failed.", e);
                 }
                 components = extractSoftwareComponents(text, res, tokenizations);
 
@@ -1615,7 +1615,7 @@ public class SoftwareParser extends AbstractParser {
     }
 
     /**
-     * Extract identified software components from a CRF labelled text.
+     * Extract identified software components from a sequence labelled text.
      */
     public List<SoftwareComponent> extractSoftwareComponents(String text,
                                                 	String result,
