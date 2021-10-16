@@ -35,7 +35,7 @@ Latest performance (accuracy and runtime) can be found [below](https://github.co
 
 ## Demo
 
-A public demo of the service is available at the following address: https://software.science-miner.com/software/
+A public demo of the service is available at the following address: https://cloud.science-miner.com/software/
 
 The [web console](https://github.com/ourresearch/software-mentions#console-web-app) allows you to test the processing of text or of a full scholar PDF. The component is developed targeting complete PDF, so the output of a PDF processing will be richer (attachment, parsing and DOI-matching of the bibliographical references appearing with a software mention, coordinates in the PDF of the mentions, document level propagation of mentions). The console displays extracted mentions directly on the PDF pages (via PDF.js), with infobox describing when possible Wikidata entity linking and full reference metadata (with Open Access links when found via Unpaywall).  
 
@@ -59,7 +59,7 @@ The dataset is maintained on the following GitHub repository: https://github.com
 
 ## Softcite software mention extraction from the CORD-19 publications
 
-This dataset is the result of the extraction of software mentions from the set of publications of the CORD-19 corpus (https://allenai.org/data/cord-19) by the Softcite software recognizer using SciBERT fine-tuned model: https://zenodo.org/record/4961241 
+This dataset is the result of the extraction of software mentions from the set of publications of the CORD-19 corpus (https://allenai.org/data/cord-19) by the Softcite software recognizer using SciBERT fine-tuned model: https://zenodo.org/record/5235661 
 
 ## Install, build, run
 
@@ -95,7 +95,7 @@ To start the service:
 
 ## Docker image
 
-It's possible to use a Docker image via [docker HUB](https://hub.docker.com/repository/docker/grobid/software-mentions), pull the image (5.25GB) as follow: 
+It's possible to use a Docker image via [docker HUB](https://hub.docker.com/r/grobid/software-mentions), pull the image (5.25GB) as follow: 
 
 ```bash
 docker pull grobid/software-mentions:0.7.1-SNAPSHOT 
