@@ -1692,7 +1692,8 @@ public class SoftwareParser extends AbstractParser {
                 // conservative check, minimal well-formedness of the content for software name
                 if (clusterLabel.equals(SoftwareTaggingLabels.SOFTWARE)) {
                     if (SoftwareAnalyzer.DELIMITERS.indexOf(clusterContent) != -1 || 
-                        SoftwareLexicon.getInstance().isEnglishStopword(clusterContent) ) {
+                        SoftwareLexicon.getInstance().isEnglishStopword(clusterContent) ||
+                        FeatureFactory.getInstance().test_number(clusterContent)) {
                         pos = endPos;
                         continue;
                     }
