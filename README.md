@@ -44,7 +44,7 @@ The [web console](https://github.com/ourresearch/software-mentions#console-web-a
 
 This demo is only provided for test, without any guaranties regarding the service quality and availability. If you plan to use this component at scale or in production, you need to install it locally. 
 
-The demo run with the CRF model to reduce the computational load (the server is used for other demos and has no GPU). For most accurate results, a local installation with a SciBERT model is required. 
+**The demo run with the CRF model** to reduce the computational load, as the server is used for other demos and has no GPU (for cost reasons). For significantly more accurate results (see the [benchmarking](https://github.com/Impactstory/software-mentions#Benchmarking)), a local installation with a SciBERT model is required. 
 
 ## The Softcite Dataset
 
@@ -54,7 +54,7 @@ More details on the Softcite dataset can be found in the following publication:
 
 ```
 Du, C, Cohoon, J, Lopez, P, Howison, J. Softcite dataset: A dataset of software mentions 
-in biomedical and economic research publications. J Assoc Inf Sci Technol. 2021; 1–15. 
+in biomedical and economic research publications. J Assoc Inf Sci Technol. (JASIST) 2021; 1–15. 
 https://doi.org/10.1002/asi.24454
 ```
 
