@@ -1,6 +1,8 @@
 # Softcite software mention recognition service
 
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
+[![Demo cloud.science-miner.com/software](https://img.shields.io/website-up-down-green-red/https/cloud.science-miner.com/software.svg)](http://cloud.science-miner.com/software)
+[![Docker Hub](https://img.shields.io/docker/pulls/grobid/software-mentions.svg)](https://hub.docker.com/r/grobid/software-mentions "Docker Pulls")
 
 The goal of this GROBID module is to recognize any software mentions in scholar textual documents and PDF. It uses as training data the [Softcite Dataset](https://github.com/howisonlab/softcite-dataset) developed by [James Howison](http://james.howison.name/) Lab at the University of Texas at Austin. This annotated corpus and the present software text mining component have been developed supported by a grant from the Alfred P. Sloan foundation to [improve credit for research software](https://blog.ourresearch.org/collaborating-635k-grant-improve-credit-research-software/).
 
@@ -11,6 +13,7 @@ Patrice Lopez, Caifan Du, Johanna Cohoon, Karthik Ram, and James Howison. 2021.
 Mining Software Entities in Scientific Literature: Document-level NER for an Extremely Imbalance and Large-scale Task. 
 In Proceedings of the 30th ACM International Conference on Information and Knowledge Management (CIKM ’21), 
 November 1–5, 2021, QLD, Australia. https://doi.org/10.1145/3459637.3481936
+[Best Applied Research Paper Award runner-up]
 ```
 
 As the other GROBID models, the module relies only on state-of-the-art machine learning. The tool can use linear CRF (via [Wapiti](https://github.com/kermitt2/Wapiti) JNI integration) or Deep Learning model such as BiLSTM-CRF, ELMo or fine-tuned transformers BERT, e.g. SciBERT (via [DeLFT](https://github.com/kermitt2/delft) JNI integration) and any combination of them. 
