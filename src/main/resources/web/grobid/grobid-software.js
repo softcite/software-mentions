@@ -196,6 +196,15 @@ var grobid = (function ($) {
         return true;
     }
 
+    function AjaxError21(message) {
+        if (!message)
+            message ="";
+        $('#infoResult1').html("<font color='red'>Error encountered while requesting the server.<br/>"+message+"</font>");
+        $('#infoResult2').html("<font color='red'>Error encountered while requesting the server.<br/>"+message+"</font>");
+        responseJson = null;
+        return true;
+    }
+
     function htmll(s) {
         return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     }
@@ -265,136 +274,139 @@ var grobid = (function ($) {
             // display the local PDF
             if ((document.getElementById("input").files[0].type == 'application/pdf') ||
                 (document.getElementById("input").files[0].name.endsWith(".pdf")) ||
-                (document.getElementById("input").files[0].name.endsWith(".PDF")))
+                (document.getElementById("input").files[0].name.endsWith(".PDF"))) {
                 var reader = new FileReader();
-            reader.onloadend = function () {
-                // to avoid cross origin issue
-                //PDFJS.disableWorker = true;
-                var pdfAsArray = new Uint8Array(reader.result);
-                // Use PDFJS to render a pdfDocument from pdf array
-                PDFJS.getDocument(pdfAsArray).then(function (pdf) {
-                    // Get div#container and cache it for later use
-                    var container = document.getElementById("requestResult2");
-                    // enable hyperlinks within PDF files.
-                    //var pdfLinkService = new PDFJS.PDFLinkService();
-                    //pdfLinkService.setDocument(pdf, null);
+                reader.onloadend = function () {
+                    // to avoid cross origin issue
+                    //PDFJS.disableWorker = true;
+                    var pdfAsArray = new Uint8Array(reader.result);
+                    // Use PDFJS to render a pdfDocument from pdf array
+                    PDFJS.getDocument(pdfAsArray).then(function (pdf) {
+                        // Get div#container and cache it for later use
+                        var container = document.getElementById("requestResult2");
+                        // enable hyperlinks within PDF files.
+                        //var pdfLinkService = new PDFJS.PDFLinkService();
+                        //pdfLinkService.setDocument(pdf, null);
 
-                    //$('#requestResult').html('');
-                    nbPages = pdf.numPages;
+                        //$('#requestResult').html('');
+                        nbPages = pdf.numPages;
 
-                    // Loop from 1 to total_number_of_pages in PDF document
-                    for (var i = 1; i <= nbPages; i++) {
+                        // Loop from 1 to total_number_of_pages in PDF document
+                        for (var i = 1; i <= nbPages; i++) {
 
-                        // Get desired page
-                        pdf.getPage(i).then(function (page) {
-                            var table = document.createElement("table");
-                            table.setAttribute('style', 'table-layout: fixed; width: 100%;')
-                            var tr = document.createElement("tr");
-                            var td1 = document.createElement("td");
-                            var td2 = document.createElement("td");
+                            // Get desired page
+                            pdf.getPage(i).then(function (page) {
+                                var table = document.createElement("table");
+                                table.setAttribute('style', 'table-layout: fixed; width: 100%;')
+                                var tr = document.createElement("tr");
+                                var td1 = document.createElement("td");
+                                var td2 = document.createElement("td");
 
-                            tr.appendChild(td1);
-                            tr.appendChild(td2);
-                            table.appendChild(tr);
+                                tr.appendChild(td1);
+                                tr.appendChild(td2);
+                                table.appendChild(tr);
 
-                            var div0 = document.createElement("div");
-                            div0.setAttribute("style", "text-align: center; margin-top: 1cm;");
-                            var pageInfo = document.createElement("p");
-                            var t = document.createTextNode("page " + (page.pageIndex + 1) + "/" + (nbPages));
-                            pageInfo.appendChild(t);
-                            div0.appendChild(pageInfo);
+                                var div0 = document.createElement("div");
+                                div0.setAttribute("style", "text-align: center; margin-top: 1cm;");
+                                var pageInfo = document.createElement("p");
+                                var t = document.createTextNode("page " + (page.pageIndex + 1) + "/" + (nbPages));
+                                pageInfo.appendChild(t);
+                                div0.appendChild(pageInfo);
 
-                            td1.appendChild(div0);
+                                td1.appendChild(div0);
 
 
-                            var div = document.createElement("div");
+                                var div = document.createElement("div");
 
-                            // Set id attribute with page-#{pdf_page_number} format
-                            div.setAttribute("id", "page-" + (page.pageIndex + 1));
+                                // Set id attribute with page-#{pdf_page_number} format
+                                div.setAttribute("id", "page-" + (page.pageIndex + 1));
 
-                            // This will keep positions of child elements as per our needs, and add a light border
-                            div.setAttribute("style", "position: relative; ");
+                                // This will keep positions of child elements as per our needs, and add a light border
+                                div.setAttribute("style", "position: relative; ");
 
-                            // Create a new Canvas element
-                            var canvas = document.createElement("canvas");
-                            canvas.setAttribute("style", "border-style: solid; border-width: 1px; border-color: gray;");
+                                // Create a new Canvas element
+                                var canvas = document.createElement("canvas");
+                                canvas.setAttribute("style", "border-style: solid; border-width: 1px; border-color: gray;");
 
-                            // Append Canvas within div#page-#{pdf_page_number}
-                            div.appendChild(canvas);
+                                // Append Canvas within div#page-#{pdf_page_number}
+                                div.appendChild(canvas);
 
-                            // Append div within div#container
-                            td1.setAttribute('style', 'width:70%;');
-                            td1.appendChild(div);
+                                // Append div within div#container
+                                td1.setAttribute('style', 'width:70%;');
+                                td1.appendChild(div);
 
-                            var annot = document.createElement("div");
-                            annot.setAttribute('style', 'vertical-align:top;');
-                            annot.setAttribute('id', 'detailed_annot-' + (page.pageIndex + 1));
-                            td2.setAttribute('style', 'vertical-align:top;width:30%;');
-                            td2.appendChild(annot);
+                                var annot = document.createElement("div");
+                                annot.setAttribute('style', 'vertical-align:top;');
+                                annot.setAttribute('id', 'detailed_annot-' + (page.pageIndex + 1));
+                                td2.setAttribute('style', 'vertical-align:top;width:30%;');
+                                td2.appendChild(annot);
 
-                            container.appendChild(table);
+                                container.appendChild(table);
 
-                            //fitToContainer(canvas);
+                                //fitToContainer(canvas);
 
-                            // we could think about a dynamic way to set the scale based on the available parent width
-                            //var scale = 1.2;
-                            //var viewport = page.getViewport(scale);
-                            var viewport = page.getViewport((td1.offsetWidth * 0.98) / page.getViewport(1.0).width);
+                                // we could think about a dynamic way to set the scale based on the available parent width
+                                //var scale = 1.2;
+                                //var viewport = page.getViewport(scale);
+                                var viewport = page.getViewport((td1.offsetWidth * 0.98) / page.getViewport(1.0).width);
 
-                            var context = canvas.getContext('2d');
-                            canvas.height = viewport.height;
-                            canvas.width = viewport.width;
+                                var context = canvas.getContext('2d');
+                                canvas.height = viewport.height;
+                                canvas.width = viewport.width;
 
-                            var renderContext = {
-                                canvasContext: context,
-                                viewport: viewport
-                            };
-
-                            // Render PDF page
-                            page.render(renderContext).then(function () {
-                                // Get text-fragments
-                                return page.getTextContent();
-                            })
-                            .then(function (textContent) {
-                                // Create div which will hold text-fragments
-                                var textLayerDiv = document.createElement("div");
-
-                                // Set it's class to textLayer which have required CSS styles
-                                textLayerDiv.setAttribute("class", "textLayer");
-
-                                // Append newly created div in `div#page-#{pdf_page_number}`
-                                div.appendChild(textLayerDiv);
-
-                                // Create new instance of TextLayerBuilder class
-                                var textLayer = new TextLayerBuilder({
-                                    textLayerDiv: textLayerDiv,
-                                    pageIndex: page.pageIndex,
+                                var renderContext = {
+                                    canvasContext: context,
                                     viewport: viewport
+                                };
+
+                                // Render PDF page
+                                page.render(renderContext).then(function () {
+                                    // Get text-fragments
+                                    return page.getTextContent();
+                                })
+                                .then(function (textContent) {
+                                    // Create div which will hold text-fragments
+                                    var textLayerDiv = document.createElement("div");
+
+                                    // Set it's class to textLayer which have required CSS styles
+                                    textLayerDiv.setAttribute("class", "textLayer");
+
+                                    // Append newly created div in `div#page-#{pdf_page_number}`
+                                    div.appendChild(textLayerDiv);
+
+                                    // Create new instance of TextLayerBuilder class
+                                    var textLayer = new TextLayerBuilder({
+                                        textLayerDiv: textLayerDiv,
+                                        pageIndex: page.pageIndex,
+                                        viewport: viewport
+                                    });
+
+                                    // Set text-fragments
+                                    textLayer.setTextContent(textContent);
+
+                                    // Render text-fragments
+                                    textLayer.render();
                                 });
-
-                                // Set text-fragments
-                                textLayer.setTextContent(textContent);
-
-                                // Render text-fragments
-                                textLayer.render();
                             });
-                        });
-                    }
-                });
-            }
-            reader.readAsArrayBuffer(document.getElementById("input").files[0]);
-
-            xhr.onreadystatechange = function (e) {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    var response = e.target.response;
-                    //var response = JSON.parse(xhr.responseText);
-                    //console.log(response);
-                    setupAnnotations(response);
-                } else if (xhr.status != 200) {
-                    AjaxError2("Response " + xhr.status + ": ");
+                        }
+                    });
                 }
-            };
-            xhr.send(formData);
+                reader.readAsArrayBuffer(document.getElementById("input").files[0]);
+
+                xhr.onreadystatechange = function (e) {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        var response = e.target.response;
+                        //var response = JSON.parse(xhr.responseText);
+                        //console.log(response);
+                        setupAnnotations(response);
+                    } else if (xhr.status != 200) {
+                        AjaxError2("Response " + xhr.status + ": ");
+                    }
+                };
+                xhr.send(formData);
+            } else {
+                AjaxError21("This does not look like a PDF");
+            }
         }
     }
 
