@@ -729,7 +729,7 @@ We would like to acknowledge the support of the Alfred P. Sloan Foundation, Gran
 For citing this software work, please refer to the present GitHub project, together with the [Software Heritage](https://www.softwareheritage.org/) project-level permanent identifier. For example, with BibTeX:
 
 ```bibtex
-@misc{GROBID,
+@misc{softwarementions,
     title = {Softcite Software Mention Recognizer},
     howpublished = {\url{https://github.com/ourresearch/software-mentions}},
     publisher = {GitHub},
