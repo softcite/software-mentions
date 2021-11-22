@@ -664,18 +664,6 @@ var grobid = (function ($) {
                 var softwareName = entity['software-name']
                 softwareName['subtype'] = 'software'
                 pieces.push(softwareName)
-                
-                /*var versionNumber = entity['version-number']
-                if (versionNumber) {
-                    versionNumber['subtype'] = 'version-number'
-                    pieces.push(versionNumber);
-                }
-                
-                var versionDate = entity['version-date']
-                if (versionDate) {
-                    versionDate['subtype'] = 'version-date'
-                    pieces.push(versionDate)
-                }*/
 
                 var version = entity['version']
                 if (version) {

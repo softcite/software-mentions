@@ -724,6 +724,21 @@ Tested with python 3.*
 
 We would like to acknowledge the support of the Alfred P. Sloan Foundation, Grant/Award Number: 2016-7209, and of the Gordon and Betty Moore Foundation, Grant/Award Number 8622.
 
+## How to cite
+
+For citing this software work, please refer to the present GitHub project, together with the [Software Heritage](https://www.softwareheritage.org/) project-level permanent identifier. For example, with BibTeX:
+
+```bibtex
+@misc{GROBID,
+    title = {Softcite Software Mention Recognizer},
+    howpublished = {\url{https://github.com/ourresearch/software-mentions}},
+    publisher = {GitHub},
+    year = {2018--2021},
+    archivePrefix = {swh},
+    eprint = {1:dir:68278b7870e291d58d993e672a4cd9788d5a0666}
+}
+```
+
 ## License
 
 GROBID and the Softcite software mentions module are distributed under [Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0). 
