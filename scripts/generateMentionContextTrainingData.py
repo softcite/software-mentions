@@ -34,11 +34,17 @@ def export_file(text_file, ann_file, documents):
 
     annotations = []
     for line in annotation_lines:
-        line = line.replace(" ", "\t")
-        line = re.sub("(\t)+", "\t", line)
+        #line = line.replace(" ", "\t")
+        #line = re.sub("(\t)+", "\t", line)
         annotation_chunks = line.split("\t")
-        if len(annotation_chunks) != 5:
+        if len(annotation_chunks) != 3:
             continue
+        sub_chunks = annotation_chunks[1].split(" ")
+        if len(sub_chunks) != 3:
+            continue
+
+        annotation_chunks = [ annotation_chunks[0], sub_chunks[0], sub_chunks[1], sub_chunks[2], annotation_chunks[2]]    
+
         annotation = {}
         if annotation_chunks[0].startswith("R"):
             # this is a relation
@@ -82,6 +88,7 @@ def export_file(text_file, ann_file, documents):
             if annotation["start"] >= start and annotation["end"] <= end:
                 # annotation is located in the sentence
                 entity_span = OrderedDict()
+                entity_span["id"] = doc_number + "_" + annotation["id"]
                 entity_span["start"] = annotation["start"] - start
                 entity_span["end"] = annotation["end"] - start
                 if annotation["type"].startswith("Application") or annotation["type"].startswith("PlugIn"):
@@ -103,10 +110,10 @@ def export_file(text_file, ann_file, documents):
                     entity_span["type"] = "unknown"
 
                 entity_span["raw_form"] = annotation["chunk"]
-                entity_span["used"] = False
-                entity_span["contribution"] = False
-                entity_span["shared"] = False
                 if entity_span["type"] == "software":
+                    entity_span["used"] = False
+                    entity_span["contribution"] = False
+                    entity_span["shared"] = False
                     if annotation["type"].find("_Usage") != -1:
                         entity_span["used"] = True
                     if annotation["type"].find("_Creation") != -1:
