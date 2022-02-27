@@ -86,6 +86,13 @@ def export_file(text_file, ann_file, documents):
         # do we have an annotation on this position?
         for annotation in annotations:
             if annotation["start"] >= start and annotation["end"] <= end:
+
+                if annotation["type"] == "Citation":
+                    continue
+
+                if "chunk" not in annotation or len(annotation["chunk"]) == 0:
+                    continue
+
                 # annotation is located in the sentence
                 entity_span = OrderedDict()
                 entity_span["id"] = doc_number + "_" + annotation["id"]
@@ -104,12 +111,10 @@ def export_file(text_file, ann_file, documents):
                     # context is relevant for capturing a sharing of the software, although the mention is not 
                     # directly related
                     entity_span["type"] = "software"
-                elif annotation["type"] == "Citation":
-                    continue
                 else:
                     entity_span["type"] = "unknown"
 
-                entity_span["raw_form"] = annotation["chunk"]
+                entity_span["rawForm"] = annotation["chunk"]
                 if entity_span["type"] == "software":
                     entity_span["used"] = False
                     entity_span["contribution"] = False
@@ -169,9 +174,12 @@ def export(text_corpus, output_path):
                 if os.path.isfile(annotation_filename):
                     export_file(text_filename, annotation_filename, documents)
     
+    result = {}
+    result["documents"] = documents
+
     # print json result
     with open(output_path, 'w') as outfile:
-        json.dump(documents, outfile, indent=4)  
+        json.dump(result, outfile, indent=4)  
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
