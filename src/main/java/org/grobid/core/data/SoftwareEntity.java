@@ -62,6 +62,17 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 	// relevant for certain scenarios only
 	private String paragraph = null;
 
+	// features of the mention context relatively to the referenced software: 
+	// 1) software usage by the research work disclosed in the document: used
+	// 2) software contribution of the research work disclosed in the document (creation, extension, etc.): contribution
+	// 3) software is shared
+	private Boolean used = null;
+	private Double usedScore = null;
+	private Boolean contribution = null;
+	private Double contributionScore = null;
+	private Boolean shared = null;
+	private Double sharedScore = null;
+
 	public SoftwareLexicon.Software_Type getType() {
 		return type;
 	}
@@ -171,6 +182,54 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 
 	public String getParagraph() {
 		return this.paragraph;
+	}
+
+	public Boolean getUsed() {
+		return this.used;
+	} 
+
+	public void setUsed(Boolean used) {
+		this.used = used;
+	}
+
+	public Double getUsedScore() {
+		return this.usedScore;
+	}
+
+	public void setUsedScore(Double usedScore) {
+		this.usedScore = usedScore;
+	}
+
+	public Boolean getContribution() {
+		return this.used;
+	} 
+
+	public void setContribution(Boolean contribution) {
+		this.contribution = contribution;
+	}
+
+	public Double getContributionScore() {
+		return this.contributionScore;
+	} 
+
+	public void setContributionScore(Double contributionScore) {
+		this.contributionScore = contributionScore;
+	}
+
+	public Boolean getShared() {
+		return this.shared;
+	} 
+
+	public void setShared(Boolean shared) {
+		this.shared = shared;
+	} 
+
+	public Double getSharedScore() {
+		return this.sharedScore;
+	} 
+
+	public void setSharedScore(Double sharedScore) {
+		this.sharedScore = sharedScore;
 	}
 
 	/**
