@@ -2,6 +2,7 @@ package org.grobid.core.utilities;
 
 import org.grobid.core.utilities.GrobidConfig.ModelParameters;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SoftwareConfiguration {
@@ -16,7 +17,8 @@ public class SoftwareConfiguration {
     private String tmpPath;
     private String pub2teiPath;
 
-    private ModelParameters model;
+    //private ModelParameters model;
+    private List<ModelParameters> models;
 
     public String getGrobidHome() {
         return grobidHome;
@@ -42,12 +44,26 @@ public class SoftwareConfiguration {
         this.entityFishingPort = entityFishingPort;
     }
 
-    public ModelParameters getModel() {
-        return model;
+    public List<ModelParameters> getModels() {
+        return models;
     }
 
-    public void getModel(ModelParameters model) {
-        this.model = model;
+    public ModelParameters getModel() {
+        // by default return the software mention sequence labeling model
+        return getModel("software");
+    }
+
+    public ModelParameters getModel(String modelName) {
+        for(ModelParameters parameters : models) {
+            if (parameters.name.equals(modelName)) {
+                return parameters;
+            }
+        }
+        return null;
+    }
+
+    public void setModels(List<ModelParameters> models) {
+        this.models = models;
     }
 
     public String getCorpusPath() {
