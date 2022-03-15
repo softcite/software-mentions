@@ -77,6 +77,7 @@ public class SoftwareLexicon {
 
         //File file = new File(GrobidProperties.getGrobidHomePath()+"/../software-mentions/resources/lexicon/wikidata-softwares.txt");
         File file = new File("resources/lexicon/wikidata-software.txt");
+        file = new File(file.getAbsolutePath());
         if (!file.exists()) {
             throw new GrobidResourceException("Cannot initialize software dictionary, because file '" + 
                 file.getAbsolutePath() + "' does not exists.");
@@ -121,6 +122,7 @@ public class SoftwareLexicon {
 
         // term idf
         file = new File("resources/lexicon/idf.label.en.txt.gz");
+        file = new File(file.getAbsolutePath());
         if (!file.exists()) {
             throw new GrobidResourceException("Cannot initialize software dictionary, because file '" + 
                 file.getAbsolutePath() + "' does not exists.");
@@ -173,6 +175,7 @@ public class SoftwareLexicon {
 
         // load the list of Wikipedia categories where software articles belong to
         file = new File("resources/lexicon/softwareVoc.txt.categories");
+        file = new File(file.getAbsolutePath());
         if (!file.exists()) {
             throw new GrobidResourceException("Cannot initialize software category dictionary, because file '" + 
                 file.getAbsolutePath() + "' does not exists.");
@@ -206,7 +209,9 @@ public class SoftwareLexicon {
 
         // load the list of P31 and P279 values of the Wikidata software entities
         file = new File("resources/lexicon/softwareVoc.txt.types");
+        file = new File(file.getAbsolutePath());
         File fileExtra = new File("resources/lexicon/softwareRelated.txt.types");
+        fileExtra = new File(fileExtra.getAbsolutePath());
         if (!file.exists()) {
             throw new GrobidResourceException("Cannot initialize software subtype dictionary, because file '" + 
                 file.getAbsolutePath() + "' does not exists.");
@@ -255,6 +260,7 @@ public class SoftwareLexicon {
         // a list of stopwords for English for conservative checks with software names
         englishStopwords = new ArrayList<>();
         file = new File("resources/lexicon/stopwords_en.txt");
+        file = new File(file.getAbsolutePath());
         if (!file.exists()) {
             throw new GrobidResourceException("Cannot initialize English stopwords, because file '" + 
                 file.getAbsolutePath() + "' does not exists.");

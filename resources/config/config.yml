@@ -16,8 +16,8 @@ pub2teiPath: "../../Pub2TEI/"
 
 models:
   - name: "software"
-    engine: "wapiti"
-    #engine: "delft"
+    #engine: "wapiti"
+    engine: "delft"
     wapiti:
       # wapiti training parameters, they will be used at training time only
       epsilon: 0.00001
@@ -28,15 +28,14 @@ models:
       #architecture: "BidLSTM_CRF"
       #useELMo: false
       #embeddings_name: "glove-840B"
-      architecture: "BERT-CRF"
+      architecture: "BERT_CRF"
       transformer: "allenai/scibert_scivocab_cased"
 
   - name: "software_context"
     engine: "delft"
     delft:
-      architecture: "gru"
-      useELMo: false
-      embeddings_name: "glove-840B"
-      #architecture: "bert"
-      #transformer: "allenai/scibert_scivocab_cased"
+      #architecture: "gru"
+      #embeddings_name: "glove-840B"
+      architecture: "bert"
+      transformer: "allenai/scibert_scivocab_cased"
 

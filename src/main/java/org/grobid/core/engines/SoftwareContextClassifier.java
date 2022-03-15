@@ -85,7 +85,7 @@ public class SoftwareContextClassifier {
         logger.info("classify: " + texts.size() + " sentence(s)");
 
         String the_json = this.classifier.classify(texts);
-        System.out.println(the_json);
+        //System.out.println(the_json);
 
         return the_json;
     }

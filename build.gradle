@@ -193,13 +193,21 @@ task copyModels(type: Copy) {
 task installScibert {
     doLast {
         download {
-            src "https://grobid.s3.amazonaws.com/software-scibert.zip"
+            src "https://grobid.s3.amazonaws.com/software-BERT_CRF-0.3.0.zip"
             dest "${rootDir}/../grobid-home/models/"
             overwrite false
         }
-        ant.unzip(src: "${rootDir}/../grobid-home/models/software-scibert.zip", dest: "${rootDir}/../grobid-home/models/")
+        ant.unzip(src: "${rootDir}/../grobid-home/models/software-BERT_CRF-0.3.0.zip", dest: "${rootDir}/../grobid-home/models/")
+        download {
+            src "https://grobid.s3.amazonaws.com/software_context_bert-0.3.0.zip"
+            dest "${rootDir}/../grobid-home/models/"
+            overwrite false
+        }
+        ant.unzip(src: "${rootDir}/../grobid-home/models/software_context_bert-0.3.0.zip", dest: "${rootDir}/../grobid-home/models/")
     }
 }
+
+
 
 //tasks.withType(JavaCompile) {
 //    options.compilerArgs << "-Xlint:deprecation"
