@@ -606,13 +606,13 @@ public class SoftwareParser extends AbstractParser {
 
             Collections.sort(entities);
 
+            entities = SoftwareContextClassifier.getInstance(softwareConfiguration).classifyDocumentContexts(entities);
+
         } catch (Exception e) {
             e.printStackTrace();
             throw new GrobidException("Cannot process pdf file: " + file.getPath());
         }
 
-        //Collections.sort(entities);
-        //return new Pair<List<SoftwareEntity>,Document>(entities, doc);
         return Pair.of(entities, doc);
     }
 

@@ -64,12 +64,12 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 
 	// features of the mention context relatively to the referenced software: 
 	// 1) software usage by the research work disclosed in the document: used
-	// 2) software contribution of the research work disclosed in the document (creation, extension, etc.): contribution
+	// 2) software creation of the research work disclosed in the document (creation, extension, etc.): contribution
 	// 3) software is shared
 	private Boolean used = null;
 	private Double usedScore = null;
-	private Boolean contribution = null;
-	private Double contributionScore = null;
+	private Boolean created = null;
+	private Double createdScore = null;
 	private Boolean shared = null;
 	private Double sharedScore = null;
 
@@ -200,20 +200,20 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 		this.usedScore = usedScore;
 	}
 
-	public Boolean getContribution() {
-		return this.used;
+	public Boolean getCreated() {
+		return this.created;
 	} 
 
-	public void setContribution(Boolean contribution) {
-		this.contribution = contribution;
+	public void setCreated(Boolean created) {
+		this.created = created;
 	}
 
-	public Double getContributionScore() {
-		return this.contributionScore;
+	public Double getCreatedScore() {
+		return this.createdScore;
 	} 
 
-	public void setContributionScore(Double contributionScore) {
-		this.contributionScore = contributionScore;
+	public void setCreatedScore(Double createdScore) {
+		this.createdScore = createdScore;
 	}
 
 	public Boolean getShared() {
@@ -467,6 +467,12 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
             output = new String(encoded);
 			buffer.append(", \"paragraph\" : \"" + output + "\"");
 		}
+
+		buffer.append(", \"used\" : { \"value\": " + this.used + ", \"score\": " + this.usedScore + "}");
+
+		buffer.append(", \"created\" : { \"value\": " + this.created + ", \"score\": " + this.createdScore + "}");
+
+		buffer.append(", \"shared\" : { \"value\": " + this.shared + ", \"score\": " + this.sharedScore + "}");
 
 		if (bibRefs != null) {
 			buffer.append(", \"references\" : ["); 

@@ -1,7 +1,6 @@
 package org.grobid.core.engines;
 
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 
 import org.apache.commons.io.FileUtils;
 import org.grobid.core.GrobidModels;
@@ -13,6 +12,8 @@ import org.grobid.core.utilities.*;
 import org.grobid.core.jni.PythonEnvironmentConfig;
 import org.grobid.core.jni.DeLFTClassifierModel;
 import org.grobid.core.utilities.GrobidConfig.ModelParameters;
+import org.grobid.core.utilities.TextUtilities;
+import org.grobid.core.data.SoftwareEntity;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +22,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.commons.lang3.tuple.Pair;
+
+import com.fasterxml.jackson.core.*;
+import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.node.*;
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.core.io.*;
 
 import static org.apache.commons.lang3.ArrayUtils.isEmpty;
 
@@ -36,12 +43,14 @@ import static org.apache.commons.lang3.ArrayUtils.isEmpty;
  * the nature of the software mention at document level. 
  */
 public class SoftwareContextClassifier {
-    private static final Logger logger = LoggerFactory.getLogger(SoftwareContextClassifier.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(SoftwareContextClassifier.class);
 
     private DeLFTClassifierModel classifier = null;
     private SoftwareConfiguration softwareConfiguration;
+    private JsonParser parser;
 
     private static volatile SoftwareContextClassifier instance;
+    
 
     public static SoftwareContextClassifier getInstance(SoftwareConfiguration configuration) {
         if (instance == null) {
@@ -60,7 +69,6 @@ public class SoftwareContextClassifier {
     private SoftwareContextClassifier(SoftwareConfiguration configuration) {
         ModelParameters parameter = configuration.getModel("software_context");
         this.classifier = new DeLFTClassifierModel("software_context", parameter.delft.architecture);
-
     }
 
     /**
@@ -82,12 +90,115 @@ public class SoftwareContextClassifier {
     public String classify(List<String> texts) throws Exception {
         if (texts == null || texts.size() == 0)
             return null;
-        logger.info("classify: " + texts.size() + " sentence(s)");
 
+        LOGGER.info("classify: " + texts.size() + " sentence(s)");
         String the_json = this.classifier.classify(texts);
         //System.out.println(the_json);
 
         return the_json;
+    }
+
+    /**
+     * Process the contexts of a set of entities identified in a document. Each context is
+     * classified and a global decision is realized at document-level using all the mentioned 
+     * contexts corresponding to the same software.  
+     * 
+     **/
+    public List<SoftwareEntity> classifyDocumentContexts(List<SoftwareEntity> entities) {
+        List<String> contexts = new ArrayList<>();
+        for(SoftwareEntity entity : entities) {
+            if (entity.getContext() != null && entity.getContext().length()>0) {
+                String localContext = TextUtilities.dehyphenize(entity.getContext());
+                localContext = localContext.replace("\n", " ");
+                localContext = localContext.replaceAll("( )+", " ");
+                contexts.add(localContext);
+            } else {
+                // dummy place holder
+                contexts.add("");
+            }
+        }
+
+        String results = null;
+        try {
+            results = classify(contexts);
+        } catch(Exception e) {
+            LOGGER.error("fail to classify document's set of contexts", e);
+            return entities;
+        }
+
+        if (results == null) 
+            return entities;
+
+        // set resulting context classes to entity mentions
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode root = mapper.readTree(results);
+
+            int entityRank =0;
+            String lang = null;
+            JsonNode classificationsNode = root.findPath("classifications");
+            if ((classificationsNode != null) && (!classificationsNode.isMissingNode())) {
+                Iterator<JsonNode> ite = classificationsNode.elements();
+                while (ite.hasNext()) {
+                    JsonNode classificationNode = ite.next();
+
+                    JsonNode usedNode = classificationNode.findPath("used");
+                    JsonNode createdNode = classificationNode.findPath("creation");
+                    JsonNode sharedNode = classificationNode.findPath("shared");
+                    JsonNode textNode = classificationNode.findPath("text");
+
+                    double scoreUsed = 0.0;
+                    if ((usedNode != null) && (!usedNode.isMissingNode())) {
+                        scoreUsed = usedNode.doubleValue();
+                    }
+
+                    double scoreCreated = 0.0;
+                    if ((createdNode != null) && (!createdNode.isMissingNode())) {
+                        scoreCreated = createdNode.doubleValue();
+                    }
+
+                    double scoreShared = 0.0;
+                    if ((sharedNode != null) && (!sharedNode.isMissingNode())) {
+                        scoreShared = sharedNode.doubleValue();
+                    }
+
+                    String textValue = null;
+                    if ((textNode != null) && (!textNode.isMissingNode())) {
+                        textValue = textNode.textValue();
+                    }
+
+                    SoftwareEntity entity = entities.get(entityRank);
+                    entity.setUsedScore(scoreUsed);
+                    entity.setCreatedScore(scoreCreated);
+                    entity.setSharedScore(scoreShared);
+
+                    if (scoreUsed>0.5) {
+                        entity.setUsed(true);
+                        if (scoreCreated > 0.5) {
+                            entity.setCreated(true);
+                            if (scoreShared > 0.5) {
+                                entity.setShared(true);
+                            } else {
+                                entity.setShared(false);
+                            }
+                        } else {
+                            entity.setCreated(false);
+                            entity.setShared(false);
+                        }
+                    } else {
+                        entity.setUsed(false);
+                        entity.setCreated(false);
+                        entity.setShared(false);
+                    }
+
+                    entityRank++;
+                }
+            }
+        } catch(JsonProcessingException e) {
+            LOGGER.error("failed to parse JSON context classification result", e);
+        }
+
+        return entities;
     }
 
 }
