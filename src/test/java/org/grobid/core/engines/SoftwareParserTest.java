@@ -48,7 +48,7 @@ public class SoftwareParserTest {
     
             System.out.println(">>>>>>>> GROBID_HOME="+GrobidProperties.get_GROBID_HOME_PATH());
 
-            if (softwareConfiguration != null && softwareConfiguration.getModel() != null) {
+            if (softwareConfiguration != null && softwareConfiguration.getModels() != null) {
                 for (ModelParameters model : softwareConfiguration.getModels())
                     GrobidProperties.getInstance().addModel(model);
             }
@@ -69,7 +69,6 @@ public class SoftwareParserTest {
 
     @Test
     public void testSoftwareParserText() throws Exception {
-        System.out.println("testSoftwareParserText - testSoftwareParserText - testSoftwareParserText");
         String text = IOUtils.toString(this.getClass().getResourceAsStream("/text.txt"), StandardCharsets.UTF_8.toString());
         text = text.replaceAll("\\n", " ").replaceAll("\\t", " ");
         List<SoftwareEntity> entities = SoftwareParser.getInstance(configuration).processText(text, false);
