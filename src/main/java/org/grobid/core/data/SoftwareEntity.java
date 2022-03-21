@@ -73,6 +73,12 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 	private Boolean shared = null;
 	private Double sharedScore = null;
 
+	// characteristics of the mention context relatively to the referenced software for the single local mention
+	private SoftwareContextAttributes mentionContextAttributes = null;
+
+	// characteristics of the mention contexts relatively to the referenced software considering all mentions in a document
+	private SoftwareContextAttributes documentContextAttributes = null;
+
 	public SoftwareLexicon.Software_Type getType() {
 		return type;
 	}
@@ -184,52 +190,20 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 		return this.paragraph;
 	}
 
-	public Boolean getUsed() {
-		return this.used;
-	} 
-
-	public void setUsed(Boolean used) {
-		this.used = used;
+	public SoftwareContextAttributes getMentionContextAttributes() {
+		return this.mentionContextAttributes;
 	}
 
-	public Double getUsedScore() {
-		return this.usedScore;
+	public void setMentionContextAttributes(SoftwareContextAttributes attributes) {
+		this.mentionContextAttributes = attributes;
 	}
 
-	public void setUsedScore(Double usedScore) {
-		this.usedScore = usedScore;
+	public SoftwareContextAttributes getDocumentContextAttributes() {
+		return this.documentContextAttributes;
 	}
 
-	public Boolean getCreated() {
-		return this.created;
-	} 
-
-	public void setCreated(Boolean created) {
-		this.created = created;
-	}
-
-	public Double getCreatedScore() {
-		return this.createdScore;
-	} 
-
-	public void setCreatedScore(Double createdScore) {
-		this.createdScore = createdScore;
-	}
-
-	public Boolean getShared() {
-		return this.shared;
-	} 
-
-	public void setShared(Boolean shared) {
-		this.shared = shared;
-	} 
-
-	public Double getSharedScore() {
-		return this.sharedScore;
-	} 
-
-	public void setSharedScore(Double sharedScore) {
-		this.sharedScore = sharedScore;
+	public void setDocumentContextAttributes(SoftwareContextAttributes attributes) {
+		this.documentContextAttributes = attributes;
 	}
 
 	/**
@@ -433,10 +407,10 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 		if (type != null) {
 			encoded = encoder.quoteAsUTF8(type.getName().toLowerCase());
             output = new String(encoded);
-			buffer.append(", \"type\" : \"" + output + "\"");	
+			buffer.append(", \"type\": \"" + output + "\"");	
 		}
 		if (entityId != null) {
-			buffer.append(", \"id\" : \"" + entityId + "\"");	
+			buffer.append(", \"id\": \"" + entityId + "\"");	
 		}
 		if (version != null) {
 			buffer.append(", \"version\":" + version.toJson());
@@ -460,22 +434,24 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 
 		if (paragraph != null && paragraph.length()>0) {
 			if (paragraphContextOffset != -1) {
-				buffer.append(", \"contextOffset\" : " + paragraphContextOffset);
+				buffer.append(", \"contextOffset\": " + paragraphContextOffset);
 			}
 
 			encoded = encoder.quoteAsUTF8(paragraph.replace("\n", " ").replace("  ", " "));
             output = new String(encoded);
-			buffer.append(", \"paragraph\" : \"" + output + "\"");
+			buffer.append(", \"paragraph\": \"" + output + "\"");
 		}
 
-		buffer.append(", \"used\" : { \"value\": " + this.used + ", \"score\": " + this.usedScore + "}");
+		if (mentionContextAttributes != null) {
+			buffer.append(", \"mentionContextAttributes\": " + mentionContextAttributes.toJson());
+		}
 
-		buffer.append(", \"created\" : { \"value\": " + this.created + ", \"score\": " + this.createdScore + "}");
-
-		buffer.append(", \"shared\" : { \"value\": " + this.shared + ", \"score\": " + this.sharedScore + "}");
+		if (documentContextAttributes != null) {
+			buffer.append(", \"documentContextAttributes\": " + documentContextAttributes.toJson());
+		}
 
 		if (bibRefs != null) {
-			buffer.append(", \"references\" : ["); 
+			buffer.append(", \"references\": ["); 
 			boolean first = true;
 			for(BiblioComponent bibRef : bibRefs) {
 				if (bibRef.getBiblio() == null)

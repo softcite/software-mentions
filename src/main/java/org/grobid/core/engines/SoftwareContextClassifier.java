@@ -14,6 +14,7 @@ import org.grobid.core.jni.DeLFTClassifierModel;
 import org.grobid.core.utilities.GrobidConfig.ModelParameters;
 import org.grobid.core.utilities.TextUtilities;
 import org.grobid.core.data.SoftwareEntity;
+import org.grobid.core.data.SoftwareContextAttributes;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -166,36 +167,98 @@ public class SoftwareContextClassifier {
                     if ((textNode != null) && (!textNode.isMissingNode())) {
                         textValue = textNode.textValue();
                     }
-
-                    SoftwareEntity entity = entities.get(entityRank);
-                    entity.setUsedScore(scoreUsed);
-                    entity.setCreatedScore(scoreCreated);
-                    entity.setSharedScore(scoreShared);
+                    
+                    SoftwareContextAttributes contextAttributes = new SoftwareContextAttributes();
+                    contextAttributes.setUsedScore(scoreUsed);
+                    contextAttributes.setCreatedScore(scoreCreated);
+                    contextAttributes.setSharedScore(scoreShared);
 
                     if (scoreUsed>0.5) {
-                        entity.setUsed(true);
+                        contextAttributes.setUsed(true);
                         if (scoreCreated > 0.5) {
-                            entity.setCreated(true);
+                            contextAttributes.setCreated(true);
                             if (scoreShared > 0.5) {
-                                entity.setShared(true);
+                                contextAttributes.setShared(true);
                             } else {
-                                entity.setShared(false);
+                                contextAttributes.setShared(false);
                             }
                         } else {
-                            entity.setCreated(false);
-                            entity.setShared(false);
+                            contextAttributes.setCreated(false);
+                            contextAttributes.setShared(false);
                         }
                     } else {
-                        entity.setUsed(false);
-                        entity.setCreated(false);
-                        entity.setShared(false);
+                        contextAttributes.setUsed(false);
+                        contextAttributes.setCreated(false);
+                        contextAttributes.setShared(false);
                     }
+
+                    SoftwareEntity entity = entities.get(entityRank);
+                    entity.setMentionContextAttributes(contextAttributes);
 
                     entityRank++;
                 }
             }
         } catch(JsonProcessingException e) {
             LOGGER.error("failed to parse JSON context classification result", e);
+        }
+
+        // in a second pass, we share all predictions for mentions of the same software name in 
+        // different places and apply a consistency propagation
+        Map<String, List<SoftwareEntity>> entityMap = new TreeMap<>();
+        for(SoftwareEntity entity : entities) {
+            String softwareName = entity.getSoftwareName().getNormalizedForm();
+            List<SoftwareEntity> localList = entityMap.get(softwareName);
+            if (localList == null) {
+                localList = new ArrayList<>();
+            } 
+            localList.add(entity);
+            entityMap.put(softwareName, localList);
+        }
+
+        for (Map.Entry<String, List<SoftwareEntity>> entry : entityMap.entrySet()) {
+            int is_used = 0;
+            double best_used = 0.0;        
+            int is_created = 0;
+            double best_created = 0.0;
+            int is_shared = 0;
+            double best_shared = 0.0;
+            for(SoftwareEntity entity : entry.getValue()) {
+                SoftwareContextAttributes localContextAttributes = entity.getMentionContextAttributes();
+                if (localContextAttributes.getUsed()) {
+                    is_used++;
+                    if (localContextAttributes.getUsedScore() > best_used)
+                        best_used = localContextAttributes.getUsedScore();
+                }
+                if (localContextAttributes.getCreated()) {
+                    is_created++;
+                    if (localContextAttributes.getCreatedScore() > 0)
+                        best_created = localContextAttributes.getCreatedScore();
+                }
+                if (localContextAttributes.getShared()) {
+                    is_shared++;
+                    if (localContextAttributes.getSharedScore() > 0)
+                        best_shared = localContextAttributes.getSharedScore();
+                }
+            }
+
+            SoftwareContextAttributes globalContextAttributes = new SoftwareContextAttributes();
+            globalContextAttributes.init();
+            if (is_used > 0) {
+                globalContextAttributes.setUsed(true);
+                globalContextAttributes.setUsedScore(best_used);
+                if (is_created > 0) {
+                    globalContextAttributes.setCreated(true);
+                    globalContextAttributes.setCreatedScore(best_created);
+                    if (is_shared > 0) {
+                        globalContextAttributes.setShared(true);
+                        globalContextAttributes.setSharedScore(best_shared);
+                    }
+                }
+            }
+
+            for(SoftwareEntity entity : entry.getValue()) {
+                entity.setDocumentContextAttributes(globalContextAttributes);
+            }
         }
 
         return entities;

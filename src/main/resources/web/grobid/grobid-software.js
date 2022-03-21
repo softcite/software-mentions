@@ -750,9 +750,11 @@ var grobid = (function ($) {
             var summary = '';
             summary += "<div id='mention-count' style='background-color: white; width: 100%;'><p>&nbsp;&nbsp;<b>"+ entities.length + "</b> mentions found</p></div>";
 
-            summary += "<table width='" + width+ "px' style='table-layout: fixed; overflow: scroll; padding-left:5px;'>";
+            summary += "<table width='" + width+ "px' style='table-layout: fixed; overflow: scroll; padding-left:5px; width:"+width+"%;'>";
+            summary += '<colgroup><col span="1" style="width: 20%;"><col span="1" style="width: 5%;"><col span="1" style="width: 55%;"><col span="1" style="width: 20%;"></colgroup>';
 
-            const local_map = new Map();
+            var local_map = new Map();
+            var usage_map = new Map();
 
             entities.forEach(function (entity, n) {
                 var local_page = -1;
@@ -768,7 +770,14 @@ var grobid = (function ($) {
                 var localArray = local_map.get(softwareNameRaw)
                 localArray.push(the_id)
                 local_map.set(softwareNameRaw, localArray);
+
+                if (entity['documentContextAttributes']) {
+                    //console.log(entity['documentContextAttributes']);
+                    usage_map.set(softwareNameRaw, entity['documentContextAttributes']);
+                }
             });
+
+            console.log(usage_map);
 
             var span_ids = new Array();
 
@@ -780,9 +789,9 @@ var grobid = (function ($) {
                 } else {
                     summary += "#fff;'>"
                 }
-                summary += "<td width='20%'>"+key+"</td>";
-                summary += "<td width='5%%'>"+value.length+"</td>";
-                summary += "<td width='75%' style='display: inline-block; word-break: break-word;' >";
+                summary += "<td>"+key+"</td>";
+                summary += "<td>"+value.length+"</td>";
+                summary += "<td style='display: inline-block; word-break: break-word;' >";
 
                 value.sort(function(a, b) {
                     var a_page = -1;
@@ -818,10 +827,24 @@ var grobid = (function ($) {
                         the_id = the_id_full.substring(0,the_id_full.indexOf("_"));
                         local_page = the_id_full.substring(the_id_full.indexOf("_"));
                     }
-                    summary += "<span class='index' id='index_"+the_id+"'>page"+local_page+"</span>&nbsp;";
+                    summary += "<span class='index' id='index_"+the_id+"'>page"+local_page+"</span> ";
                     span_ids.push('index_'+the_id);
                 }
-                summary += "</td></tr>";
+
+                var attributesInfo = ""
+                console.log(key)
+                if (usage_map.get(key)) {
+                    documentAttributes = usage_map.get(key);
+                    console.log(documentAttributes);
+                    if (documentAttributes.used.value)
+                        attributesInfo += "used";
+                    if (documentAttributes.created.value)
+                        attributesInfo += " created";
+                    if (documentAttributes.shared.value)
+                        attributesInfo += " shared";
+                }
+
+                summary += "<td>" + attributesInfo + "</td></tr>";
                 n++;
             };
 
