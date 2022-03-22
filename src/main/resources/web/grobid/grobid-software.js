@@ -1101,7 +1101,7 @@ var grobid = (function ($) {
             version = entity['version'].rawForm;
 
         if (version)
-            string += "<p>Version: <b>" + version + "</b></p>"
+            string += "<p>Version: <b>" + version + "</b></p>";
 
         var url = null
         if (entity['url'])
@@ -1112,7 +1112,7 @@ var grobid = (function ($) {
             if (!url.startsWith('http://') && !url.startsWith('https://'))
                 url = 'http://' + url;
 
-            string += '<p>URL: <b><a href=\"' + url + '\" target=\"_blank\">' + url + '</b></p>'
+            string += '<p>URL: <b><a href=\"' + url + '\" target=\"_blank\">' + url + '</b></p>';
         }
 
         var creator = null
@@ -1120,12 +1120,12 @@ var grobid = (function ($) {
             creator = entity['publisher'].rawForm;
 
         if (creator)
-            string += "<p>Publisher: <b>" + creator + "</b></p>"            
+            string += "<p>Publisher: <b>" + creator + "</b></p>";
 
-        //string += "<p>conf: <i>" + conf + "</i></p>";
-        
         if (entity.confidence)
             string += "<p>conf: <i>" + entity.confidence + "</i></p>";
+
+
 
         if (wikipedia) {
             string += "</td><td style='align:right;bgcolor:#fff'>";
@@ -1134,6 +1134,54 @@ var grobid = (function ($) {
         }
 
         string += "</td></tr></table>";
+
+        if (entity.mentionContextAttributes || entity.documentContextAttributes) {
+            string += "<br/><div style='width:100%;background-color:#fff;border:0px'>";
+
+            if (entity.mentionContextAttributes) {
+
+                if (entity.mentionContextAttributes.used.value || entity.mentionContextAttributes.created.value || entity.mentionContextAttributes.shared.value)
+                    string += "<p>Mention-level: ";
+
+                if (entity.mentionContextAttributes.used.value) {
+                    string += "<b>used</b> (<i>" + entity.mentionContextAttributes.used.score.toFixed(3) + "</i>)";
+                }
+
+                if (entity.mentionContextAttributes.created.value) {
+                    string += " - <b>created</b> (<i>" + entity.mentionContextAttributes.created.score.toFixed(3) + "</i>)";
+                }
+
+                if (entity.mentionContextAttributes.shared.value) {
+                    string += " - <b>shared</b> (<i>" + entity.mentionContextAttributes.shared.score.toFixed(3) + "</i>)";
+                }
+
+                if (entity.mentionContextAttributes.used.value) 
+                    string += "</p>";
+            }
+
+            if (entity.documentContextAttributes) {
+                if (entity.documentContextAttributes.used.value || entity.documentContextAttributes.created.value || entity.documentContextAttributes.shared.value)
+                    string += "<p>Document-level: ";
+
+                if (entity.documentContextAttributes.used.value) {
+                    string += "<b>used</b> (<i>" + entity.documentContextAttributes.used.score.toFixed(3) + "</i>)";
+                }
+
+                if (entity.documentContextAttributes.created.value) {
+                    string += " - <b>created</b> (<i>" + entity.documentContextAttributes.created.score.toFixed(3) + "</i>)";
+                }
+
+                if (entity.documentContextAttributes.shared.value) {
+                    string += " - <b>shared</b> (<i>" + entity.documentContextAttributes.shared.score.toFixed(3) + "</i>)";
+                }
+
+                if (entity.documentContextAttributes.used.value) {
+                    string += "</p>";
+                }
+            }
+            
+            string += "</div>";
+        }
 
         // bibliographical reference(s)
         if (entity['references']) {

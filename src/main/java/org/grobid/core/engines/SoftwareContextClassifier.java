@@ -173,25 +173,21 @@ public class SoftwareContextClassifier {
                     contextAttributes.setCreatedScore(scoreCreated);
                     contextAttributes.setSharedScore(scoreShared);
 
-                    if (scoreUsed>0.5) {
+                    if (scoreUsed>0.5) 
                         contextAttributes.setUsed(true);
-                        if (scoreCreated > 0.5) {
-                            contextAttributes.setCreated(true);
-                            if (scoreShared > 0.5) {
-                                contextAttributes.setShared(true);
-                            } else {
-                                contextAttributes.setShared(false);
-                            }
-                        } else {
-                            contextAttributes.setCreated(false);
-                            contextAttributes.setShared(false);
-                        }
-                    } else {
+                    else 
                         contextAttributes.setUsed(false);
-                        contextAttributes.setCreated(false);
-                        contextAttributes.setShared(false);
-                    }
 
+                    if (scoreCreated > 0.5) 
+                        contextAttributes.setCreated(true);
+                    else 
+                        contextAttributes.setCreated(false);
+
+                    if (scoreShared > 0.5) 
+                        contextAttributes.setShared(true);
+                    else 
+                        contextAttributes.setShared(false);
+                    
                     SoftwareEntity entity = entities.get(entityRank);
                     entity.setMentionContextAttributes(contextAttributes);
 
@@ -206,16 +202,27 @@ public class SoftwareContextClassifier {
         // different places and apply a consistency propagation
         Map<String, List<SoftwareEntity>> entityMap = new TreeMap<>();
         for(SoftwareEntity entity : entities) {
-            String softwareName = entity.getSoftwareName().getNormalizedForm();
-            List<SoftwareEntity> localList = entityMap.get(softwareName);
+            String softwareNameRaw = entity.getSoftwareName().getRawForm();
+            List<SoftwareEntity> localList = entityMap.get(softwareNameRaw);
             if (localList == null) {
                 localList = new ArrayList<>();
             } 
             localList.add(entity);
-            entityMap.put(softwareName, localList);
+            entityMap.put(softwareNameRaw, localList);
+
+            String softwareNameNormalized = entity.getSoftwareName().getNormalizedForm();
+            if (softwareNameNormalized != null && !softwareNameRaw.equals(softwareNameNormalized)) {
+                localList = entityMap.get(softwareNameNormalized);
+                if (localList == null) {
+                    localList = new ArrayList<>();
+                } 
+                localList.add(entity);
+                entityMap.put(softwareNameNormalized, localList);
+            }
         }
 
         for (Map.Entry<String, List<SoftwareEntity>> entry : entityMap.entrySet()) {
+
             int is_used = 0;
             double best_used = 0.0;        
             int is_created = 0;
@@ -224,40 +231,41 @@ public class SoftwareContextClassifier {
             double best_shared = 0.0;
             for(SoftwareEntity entity : entry.getValue()) {
                 SoftwareContextAttributes localContextAttributes = entity.getMentionContextAttributes();
-                if (localContextAttributes.getUsed()) {
+                if (localContextAttributes.getUsed()) 
                     is_used++;
-                    if (localContextAttributes.getUsedScore() > best_used)
-                        best_used = localContextAttributes.getUsedScore();
-                }
-                if (localContextAttributes.getCreated()) {
+                if (localContextAttributes.getUsedScore() > best_used)
+                    best_used = localContextAttributes.getUsedScore();
+
+                if (localContextAttributes.getCreated()) 
                     is_created++;
-                    if (localContextAttributes.getCreatedScore() > 0)
-                        best_created = localContextAttributes.getCreatedScore();
-                }
-                if (localContextAttributes.getShared()) {
+                if (localContextAttributes.getCreatedScore() > best_created)
+                    best_created = localContextAttributes.getCreatedScore();
+
+                if (localContextAttributes.getShared()) 
                     is_shared++;
-                    if (localContextAttributes.getSharedScore() > 0)
-                        best_shared = localContextAttributes.getSharedScore();
-                }
+                if (localContextAttributes.getSharedScore() > best_shared)
+                    best_shared = localContextAttributes.getSharedScore();
             }
 
             SoftwareContextAttributes globalContextAttributes = new SoftwareContextAttributes();
             globalContextAttributes.init();
-            if (is_used > 0) {
+            if (is_used > 0)
                 globalContextAttributes.setUsed(true);
+            if (best_used > 0.0)
                 globalContextAttributes.setUsedScore(best_used);
-                if (is_created > 0) {
-                    globalContextAttributes.setCreated(true);
-                    globalContextAttributes.setCreatedScore(best_created);
-                    if (is_shared > 0) {
-                        globalContextAttributes.setShared(true);
-                        globalContextAttributes.setSharedScore(best_shared);
-                    }
-                }
-            }
+
+            if (is_created > 0) 
+                globalContextAttributes.setCreated(true);
+            if (best_created > 0.0)
+                globalContextAttributes.setCreatedScore(best_created);
+
+            if (is_shared > 0)
+                globalContextAttributes.setShared(true);
+            if (best_shared > 0.0)
+                globalContextAttributes.setSharedScore(best_shared);
 
             for(SoftwareEntity entity : entry.getValue()) {
-                entity.setDocumentContextAttributes(globalContextAttributes);
+                entity.mergeDocumentContextAttributes(globalContextAttributes);
             }
         }
 

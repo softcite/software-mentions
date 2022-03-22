@@ -202,8 +202,39 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 		return this.documentContextAttributes;
 	}
 
-	public void setDocumentContextAttributes(SoftwareContextAttributes attributes) {
-		this.documentContextAttributes = attributes;
+	public void mergeDocumentContextAttributes(SoftwareContextAttributes attributes) {
+		if (this.documentContextAttributes == null)
+			this.documentContextAttributes = attributes;
+
+		if (this.documentContextAttributes.getUsed() == null || !this.documentContextAttributes.getUsed()) {
+			this.documentContextAttributes.setUsed(attributes.getUsed());
+		}
+
+		if (this.documentContextAttributes.getUsedScore() != null) {
+			if (attributes.getUsedScore() > this.documentContextAttributes.getUsedScore()) 
+				this.documentContextAttributes.setUsedScore(attributes.getUsedScore());
+		} else
+			this.documentContextAttributes.setUsedScore(attributes.getUsedScore());
+
+		if (this.documentContextAttributes.getCreated() == null || !this.documentContextAttributes.getCreated()) {
+			this.documentContextAttributes.setCreated(attributes.getCreated());
+		}
+
+		if (this.documentContextAttributes.getCreatedScore() != null) {
+			if (attributes.getCreatedScore() > this.documentContextAttributes.getCreatedScore()) 
+				this.documentContextAttributes.setCreatedScore(attributes.getCreatedScore());
+		} else
+			this.documentContextAttributes.setCreatedScore(attributes.getCreatedScore());
+
+		if (this.documentContextAttributes.getShared() == null || !this.documentContextAttributes.getShared()) {
+			this.documentContextAttributes.setShared(attributes.getShared());
+		}
+
+		if (this.documentContextAttributes.getSharedScore() != null) {
+			if (attributes.getSharedScore() > this.documentContextAttributes.getSharedScore()) 
+				this.documentContextAttributes.setSharedScore(attributes.getSharedScore());
+		} else
+			this.documentContextAttributes.setSharedScore(attributes.getSharedScore());
 	}
 
 	/**

@@ -178,8 +178,12 @@ public class SoftwareParser extends AbstractParser {
             entities = propagateLayoutTokenSequence(tokens, entities, termProfiles, termPattern, placeTaken, frequencies, false);
             Collections.sort(entities);
 
-            // finally attach a local text context to the entities
+            // attach a local text context to the entities
             entities = addContext(entities, text, tokens, false, false);
+
+            // finally classify the context for predicting the role of the software mention
+            entities = SoftwareContextClassifier.getInstance(softwareConfiguration).classifyDocumentContexts(entities);            
+
         } catch (Exception e) {
             throw new GrobidException("An exception occured while running Grobid.", e);
         }
