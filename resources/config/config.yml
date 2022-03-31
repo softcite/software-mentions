@@ -14,6 +14,10 @@ tmpPath: tmp/
 # path to Pub2TEI repository as available at https://github.com/kermitt2/Pub2TEI
 pub2teiPath: "../../Pub2TEI/"
 
+# if true we use binary classifiers for the contexts, otherwise use a single multi-label classifier
+# binary classifiers perform better, but havier to use
+useBinaryContextClassifiers: true
+
 models:
   - name: "software"
     #engine: "wapiti"
@@ -32,6 +36,30 @@ models:
       transformer: "allenai/scibert_scivocab_cased"
 
   - name: "software_context"
+    engine: "delft"
+    delft:
+      #architecture: "gru"
+      #embeddings_name: "glove-840B"
+      architecture: "bert"
+      transformer: "allenai/scibert_scivocab_cased"
+
+  - name: "software_context_used"
+    engine: "delft"
+    delft:
+      #architecture: "gru"
+      #embeddings_name: "glove-840B"
+      architecture: "bert"
+      transformer: "allenai/scibert_scivocab_cased"
+
+  - name: "software_context_creation"
+    engine: "delft"
+    delft:
+      #architecture: "gru"
+      #embeddings_name: "glove-840B"
+      architecture: "bert"
+      transformer: "allenai/scibert_scivocab_cased"
+
+  - name: "software_context_shared"
     engine: "delft"
     delft:
       #architecture: "gru"

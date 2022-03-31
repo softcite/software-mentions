@@ -17,6 +17,8 @@ public class SoftwareConfiguration {
     private String tmpPath;
     private String pub2teiPath;
 
+    private Boolean useBinaryContextClassifiers;
+
     //private ModelParameters model;
     private List<ModelParameters> models;
 
@@ -88,6 +90,14 @@ public class SoftwareConfiguration {
 
     public void setTmpPath(String tmpPath) {
         this.tmpPath = tmpPath;
+    }
+
+    public Boolean getUseBinaryContextClassifiers() {
+        return this.useBinaryContextClassifiers;
+    }
+
+    public void setUseBinaryContextClassifiers(Boolean binary) {
+        this.useBinaryContextClassifiers = binary;
     }
 
     public String getPub2TEIPath() {

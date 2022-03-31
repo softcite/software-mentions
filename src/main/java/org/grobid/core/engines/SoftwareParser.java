@@ -368,25 +368,47 @@ public class SoftwareParser extends AbstractParser {
 
             // use identified software names to possibly normalize hyphenized software names
             // e.g. for MOD-ELLER, normalize to MODELLER because MODELLER is found elsewhere in the document
+            // In addition, identify suspicious software names ending with hyphen and check if they
+            // are not part of a larger "hyphenized" entity
             if (entities.size() > 0) {
                 List<String> allRawForms = new ArrayList<String>();
+                List<String> allHyphenedForm = new ArrayList<String>();
                 for (SoftwareEntity entity : entities) {
                     SoftwareComponent softwareComponent = entity.getSoftwareName();
                     String localRawForm = softwareComponent.getRawForm();
-                    if (localRawForm.indexOf("-") == -1) {
+                    if (localRawForm.indexOf("-") == -1 && !allRawForms.contains(localRawForm))
                         allRawForms.add(localRawForm);
-                    }
+                    if (localRawForm.indexOf("-") != -1 && !localRawForm.endsWith("-") && !allHyphenedForm.contains(localRawForm))
+                        allHyphenedForm.add(localRawForm);
                 }
                 for (SoftwareEntity entity : entities) {
                     SoftwareComponent softwareComponent = entity.getSoftwareName();
                     String localRawForm = softwareComponent.getRawForm();
-                    if (localRawForm.indexOf("-") != -1) {
+                    if (localRawForm.indexOf("-") != -1 && !localRawForm.endsWith("-")) {
                         localRawForm = localRawForm.replaceAll("-( |\\n)*", "");
                         localRawForm = localRawForm.replace("-", "");
                         if (allRawForms.contains(localRawForm)) {
                             softwareComponent.setNormalizedForm(localRawForm);
                         }
                     }
+                }
+                List<Integer> toBeFiltered = new ArrayList<>();
+                for (int i=0; i<entities.size(); i++) {
+                    SoftwareEntity entity = entities.get(i);
+                    SoftwareComponent softwareComponent = entity.getSoftwareName();
+                    String localRawForm = softwareComponent.getRawForm();
+                    if (localRawForm.endsWith("-")) {
+                        for(String hyphenForm : allHyphenedForm) {
+                            if (hyphenForm.indexOf(localRawForm) != -1) {
+                                toBeFiltered.add(i);
+                            }
+                        }
+                    }
+                }
+
+                for(int j=entities.size()-1; j>=0; j--) {
+                    if (toBeFiltered.contains(j))
+                        entities.remove(j);
                 }
             }
 
@@ -1723,6 +1745,17 @@ public class SoftwareParser extends AbstractParser {
                         FeatureFactory.getInstance().test_number(clusterContent) ||
                         clusterContent.replace("\n", "").equals("//")) {
                         // note: the last conditional test is a rare error by SciBERT model
+                        pos = endPos;
+                        continue;
+                    }
+                }
+
+                // conservative check, minimal well-formedness of the content for publisher name
+                if (clusterLabel.equals(SoftwareTaggingLabels.CREATOR)) {
+                    if (SoftwareAnalyzer.DELIMITERS.indexOf(clusterContent) != -1 || 
+                        SoftwareLexicon.getInstance().isEnglishStopword(clusterContent) ||
+                        FeatureFactory.getInstance().test_number(clusterContent) ||
+                        (clusterContent.startsWith("-") && clusterContent.indexOf("\n") != -1)) {
                         pos = endPos;
                         continue;
                     }
