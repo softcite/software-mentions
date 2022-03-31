@@ -218,10 +218,26 @@ task installScibert {
             overwrite false
         }
         ant.unzip(src: "${rootDir}/../grobid-home/models/software_context_bert-0.3.0.zip", dest: "${rootDir}/../grobid-home/models/")
+        download {
+            src "https://grobid.s3.amazonaws.com/software_context_used_bert-0.3.0.zip"
+            dest "${rootDir}/../grobid-home/models/"
+            overwrite false
+        }
+        ant.unzip(src: "${rootDir}/../grobid-home/models/software_context_used_bert-0.3.0.zip", dest: "${rootDir}/../grobid-home/models/")
+        download {
+            src "https://grobid.s3.amazonaws.com/software_context__creation_bert-0.3.0.zip"
+            dest "${rootDir}/../grobid-home/models/"
+            overwrite false
+        }
+        ant.unzip(src: "${rootDir}/../grobid-home/models/software_context_creation_bert-0.3.0.zip", dest: "${rootDir}/../grobid-home/models/")
+        download {
+            src "https://grobid.s3.amazonaws.com/software_context_shared_bert-0.3.0.zip"
+            dest "${rootDir}/../grobid-home/models/"
+            overwrite false
+        }
+        ant.unzip(src: "${rootDir}/../grobid-home/models/software_context_shared_bert-0.3.0.zip", dest: "${rootDir}/../grobid-home/models/")
     }
 }
-
-
 
 //tasks.withType(JavaCompile) {
 //    options.compilerArgs << "-Xlint:deprecation"
