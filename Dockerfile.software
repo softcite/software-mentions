@@ -128,7 +128,7 @@ COPY --from=builder /opt/grobid-source/software-mentions /opt/grobid/software-me
 COPY --from=builder /root/.m2/repository/org /opt/grobid/software-mentions/lib/org
 
 WORKDIR /opt/grobid/software-mentions
-RUN ./gradlew copyModels installScibert  && rm -rf resources/models && rm -f /opt/grobid/grobid-home/models/software/model.wapiti.gz && rm -f /opt/grobid/grobid-home/models/software-scibert.zip
+RUN ./gradlew copyModels installScibert  && rm -rf resources/models && rm -f /opt/grobid/grobid-home/models/software/model.wapiti.gz && rm -f /opt/grobid/grobid-home/models/software-BERT_CRF-0.3.0.zip && rm -f /opt/grobid/grobid-home/models/software_context_bert-0.3.0.zip && rm -f /opt/grobid/grobid-home/models/software_context_used_bert-0.3.0.zip && rm -f /opt/grobid/grobid-home/models/software_context_shared_bert-0.3.0.zip && rm -f /opt/grobid/grobid-home/models/software_context_creation_bert-0.3.0.zip
 
 # trigger gradle wrapper install
 RUN ./gradlew --version
