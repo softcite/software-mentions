@@ -110,7 +110,7 @@ RUN curl --fail --show-error --location -q ${JDK_URL} -o /tmp/openjdk.tar.gz \
     && JAVA_HOME=${TEMP_JDK_HOME} pip3 install jep==4.0.2 \
     && rm -f /tmp/openjdk.tar.gz \
     && rm -rf "${TEMP_JDK_HOME}"
-ENV LD_LIBRARY_PATH=/usr/local/lib/python3.6/dist-packages/jep:${LD_LIBRARY_PATH}
+ENV LD_LIBRARY_PATH=/usr/local/lib/python3.8/dist-packages/jep:${LD_LIBRARY_PATH}
 # remove libjep.so because we are providng our own version in the virtual env
 RUN rm /opt/grobid/grobid-home/lib/lin-64/jep/libjep.so
 
@@ -121,18 +121,21 @@ COPY --from=builder /opt/grobid-source/grobid-home/config/resources-registry.jso
 #RUN python3 preload_embeddings.py --embedding word2vec --registry ./resources-registry.json
 RUN ln -s /opt/grobid /opt/delft
 
-RUN mkdir delft
-RUN cp ./resources-registry.json delft/
-
 COPY --from=builder /opt/grobid-source/software-mentions /opt/grobid/software-mentions
 COPY --from=builder /root/.m2/repository/org /opt/grobid/software-mentions/lib/org
 
 WORKDIR /opt/grobid/software-mentions
-RUN ./gradlew copyModels installScibert  && rm -rf resources/models && rm -f /opt/grobid/grobid-home/models/software/model.wapiti.gz && rm -f /opt/grobid/grobid-home/models/software-BERT_CRF-0.3.0.zip && rm -f /opt/grobid/grobid-home/models/software_context_bert-0.3.0.zip && rm -f /opt/grobid/grobid-home/models/software_context_used_bert-0.3.0.zip && rm -f /opt/grobid/grobid-home/models/software_context_shared_bert-0.3.0.zip && rm -f /opt/grobid/grobid-home/models/software_context_creation_bert-0.3.0.zip
+
+RUN mkdir /opt/grobid/delft
+RUN mkdir /opt/grobid/delft/delft
+COPY --from=builder /opt/grobid-source/grobid-home/config/resources-registry.json /opt/grobid/delft/delft/resources-registry.json
 
 # trigger gradle wrapper install
 RUN ./gradlew --version
-#RUN ./gradlew clean install
+
+RUN ./gradlew copyModels installScibert  && rm -rf resources/models && rm -f /opt/grobid/grobid-home/models/software/model.wapiti.gz && rm -f /opt/grobid/grobid-home/models/software-BERT_CRF-0.3.0.zip && rm -f /opt/grobid/grobid-home/models/software_context_bert-0.3.0.zip && rm -f /opt/grobid/grobid-home/models/software_context_used_bert-0.3.0.zip && rm -f /opt/grobid/grobid-home/models/software_context_shared_bert-0.3.0.zip && rm -f /opt/grobid/grobid-home/models/software_context_creation_bert-0.3.0.zip
+
+RUN ./gradlew clean install
 
 CMD ["./gradlew", "run"]
 
