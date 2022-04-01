@@ -178,8 +178,12 @@ public class SoftwareParser extends AbstractParser {
             entities = propagateLayoutTokenSequence(tokens, entities, termProfiles, termPattern, placeTaken, frequencies, false);
             Collections.sort(entities);
 
-            // finally attach a local text context to the entities
+            // attach a local text context to the entities
             entities = addContext(entities, text, tokens, false, false);
+
+            // finally classify the context for predicting the role of the software mention
+            entities = SoftwareContextClassifier.getInstance(softwareConfiguration).classifyDocumentContexts(entities);            
+
         } catch (Exception e) {
             throw new GrobidException("An exception occured while running Grobid.", e);
         }
@@ -316,24 +320,34 @@ public class SoftwareParser extends AbstractParser {
                 }
             }
 
-            // actual processing of the selected sequences which have been delayed to be processed in groups and
-            // take advantage of deep learning batch
-            processLayoutTokenSequenceMultiple(selectedLayoutTokenSequences, entities, disambiguate, addParagraphContext);
-
             // we don't process references (although reference titles could be relevant)
             // acknowledgement? 
 
-            // we can process annexes, uncomment below
-            /*documentParts = doc.getDocumentPart(SegmentationLabels.ANNEX);
+            // we can process annexes
+            documentParts = doc.getDocumentPart(SegmentationLabels.ANNEX);
             if (documentParts != null) {
-                processDocumentPart(documentParts, doc, entities);
-            }*/
+                //processDocumentPart(documentParts, doc, entities);
 
-            // footnotes are also relevant? uncomment below
-            /*documentParts = doc.getDocumentPart(SegmentationLabel.FOOTNOTE);
+                List<LayoutToken> annexTokens = doc.getTokenizationParts(documentParts, doc.getTokenizations());
+                if (annexTokens != null) {
+                    selectedLayoutTokenSequences.add(annexTokens);
+                } 
+            }
+
+            // footnotes are also relevant
+            documentParts = doc.getDocumentPart(SegmentationLabels.FOOTNOTE);
             if (documentParts != null) {
-                processDocumentPart(documentParts, doc, components);
-            }*/
+                //processDocumentPart(documentParts, doc, components);
+
+                List<LayoutToken> footnoteTokens = doc.getTokenizationParts(documentParts, doc.getTokenizations());
+                if (footnoteTokens != null) {
+                    selectedLayoutTokenSequences.add(footnoteTokens);
+                } 
+            }
+
+            // actual processing of the selected sequences which have been delayed to be processed in groups and
+            // take advantage of deep learning batch
+            processLayoutTokenSequenceMultiple(selectedLayoutTokenSequences, entities, disambiguate, addParagraphContext);
 
             // propagate the disambiguated entities to the non-disambiguated entities corresponding to the same software name
             for(SoftwareEntity entity1 : entities) {
@@ -354,25 +368,47 @@ public class SoftwareParser extends AbstractParser {
 
             // use identified software names to possibly normalize hyphenized software names
             // e.g. for MOD-ELLER, normalize to MODELLER because MODELLER is found elsewhere in the document
+            // In addition, identify suspicious software names ending with hyphen and check if they
+            // are not part of a larger "hyphenized" entity
             if (entities.size() > 0) {
                 List<String> allRawForms = new ArrayList<String>();
+                List<String> allHyphenedForm = new ArrayList<String>();
                 for (SoftwareEntity entity : entities) {
                     SoftwareComponent softwareComponent = entity.getSoftwareName();
                     String localRawForm = softwareComponent.getRawForm();
-                    if (localRawForm.indexOf("-") == -1) {
+                    if (localRawForm.indexOf("-") == -1 && !allRawForms.contains(localRawForm))
                         allRawForms.add(localRawForm);
-                    }
+                    if (localRawForm.indexOf("-") != -1 && !localRawForm.endsWith("-") && !allHyphenedForm.contains(localRawForm))
+                        allHyphenedForm.add(localRawForm);
                 }
                 for (SoftwareEntity entity : entities) {
                     SoftwareComponent softwareComponent = entity.getSoftwareName();
                     String localRawForm = softwareComponent.getRawForm();
-                    if (localRawForm.indexOf("-") != -1) {
+                    if (localRawForm.indexOf("-") != -1 && !localRawForm.endsWith("-")) {
                         localRawForm = localRawForm.replaceAll("-( |\\n)*", "");
                         localRawForm = localRawForm.replace("-", "");
                         if (allRawForms.contains(localRawForm)) {
                             softwareComponent.setNormalizedForm(localRawForm);
                         }
                     }
+                }
+                List<Integer> toBeFiltered = new ArrayList<>();
+                for (int i=0; i<entities.size(); i++) {
+                    SoftwareEntity entity = entities.get(i);
+                    SoftwareComponent softwareComponent = entity.getSoftwareName();
+                    String localRawForm = softwareComponent.getRawForm();
+                    if (localRawForm.endsWith("-")) {
+                        for(String hyphenForm : allHyphenedForm) {
+                            if (hyphenForm.indexOf(localRawForm) != -1) {
+                                toBeFiltered.add(i);
+                            }
+                        }
+                    }
+                }
+
+                for(int j=entities.size()-1; j>=0; j--) {
+                    if (toBeFiltered.contains(j))
+                        entities.remove(j);
                 }
             }
 
@@ -460,7 +496,6 @@ public class SoftwareParser extends AbstractParser {
             }*/            
 
             // finally we attach and match bibliographical reference callout
-            //List<LayoutToken> tokenizations = layoutTokenization.getTokenization();
             TEIFormatter formatter = new TEIFormatter(doc, parsers.getFullTextParser());
             // second pass, body
             if ( (bodyClusters != null) && (resCitations != null) && (resCitations.size() > 0) ) {
@@ -606,13 +641,13 @@ public class SoftwareParser extends AbstractParser {
 
             Collections.sort(entities);
 
+            entities = SoftwareContextClassifier.getInstance(softwareConfiguration).classifyDocumentContexts(entities);
+
         } catch (Exception e) {
             e.printStackTrace();
             throw new GrobidException("Cannot process pdf file: " + file.getPath());
         }
 
-        //Collections.sort(entities);
-        //return new Pair<List<SoftwareEntity>,Document>(entities, doc);
         return Pair.of(entities, doc);
     }
 
@@ -980,7 +1015,8 @@ public class SoftwareParser extends AbstractParser {
                 int dist1 = currentEntity.getSoftwareName().getOffsetStart() - component.getOffsetEnd();
                 int dist2 = component.getOffsetStart() - previousEntity.getSoftwareName().getOffsetEnd(); 
                 if (dist2 <= dist1*2) {
-                    previousEntity.setComponent(component);
+                    if (previousEntity.freeField(component.getLabel())) 
+                        previousEntity.setComponent(component);
                 } else
                     currentEntity.setComponent(component);
             } else if (component.getOffsetEnd() >= currentEntity.getSoftwareName().getOffsetEnd()) {
@@ -1574,7 +1610,7 @@ public class SoftwareParser extends AbstractParser {
                         softwareName.setOffsetStart(startEntity - startSentence);
                         softwareName.setOffsetEnd(endEntity - startSentence);
 
-                        /*SoftwareComponent version = entity.getVersion();
+                        SoftwareComponent version = entity.getVersion();
                         if (version != null) {
                             version.setOffsetStart(version.getOffsetStart() - startSentence);
                             version.setOffsetEnd(version.getOffsetEnd() - startSentence);
@@ -1592,13 +1628,16 @@ public class SoftwareParser extends AbstractParser {
                             softwareURL.setOffsetEnd(softwareURL.getOffsetEnd() - startSentence);
                         }
 
+                        /*
+                        // normally no bib ref attached to a software mention at this stage
                         List<BiblioComponent> localBibRefs = entity.getBibRefs();
                         if (localBibRefs != null) {
                             for(BiblioComponent localBibRef : localBibRefs) {
                                 localBibRef.setOffsetStart(localBibRef.getOffsetStart() - startSentence - offsetShift);
                                 localBibRef.setOffsetEnd(localBibRef.getOffsetEnd() - startSentence - offsetShift);
                             }
-                        }*/
+                        }
+                        */
                     
                         entity.setGlobalContextOffset(startSentence + offsetShift);     
 
@@ -1699,6 +1738,29 @@ public class SoftwareParser extends AbstractParser {
                     }
                 }
 
+                // conservative check, minimal well-formedness of the content for URL
+                if (clusterLabel.equals(SoftwareTaggingLabels.SOFTWARE_URL)) {
+                    if (SoftwareAnalyzer.DELIMITERS.indexOf(clusterContent) != -1 || 
+                        SoftwareLexicon.getInstance().isEnglishStopword(clusterContent) ||
+                        FeatureFactory.getInstance().test_number(clusterContent) ||
+                        clusterContent.replace("\n", "").equals("//")) {
+                        // note: the last conditional test is a rare error by SciBERT model
+                        pos = endPos;
+                        continue;
+                    }
+                }
+
+                // conservative check, minimal well-formedness of the content for publisher name
+                if (clusterLabel.equals(SoftwareTaggingLabels.CREATOR)) {
+                    if (SoftwareAnalyzer.DELIMITERS.indexOf(clusterContent) != -1 || 
+                        SoftwareLexicon.getInstance().isEnglishStopword(clusterContent) ||
+                        FeatureFactory.getInstance().test_number(clusterContent) ||
+                        (clusterContent.startsWith("-") && clusterContent.indexOf("\n") != -1)) {
+                        pos = endPos;
+                        continue;
+                    }
+                }
+
                 currentComponent = new SoftwareComponent();
 
                 currentComponent.setRawForm(clusterContent);
@@ -1720,7 +1782,133 @@ public class SoftwareParser extends AbstractParser {
             //pos += clusterContent.length();
         }
 
+        // post process URL to have well formed URL
+        components = postProcessURLComponents(components, tokenizations);
+
+        Collections.sort(components);
+
         return components;
+    }
+
+    /**
+     * Post-processing for labeled URL component to obtain a well-formed URL. 
+     * We extend the recognized URL on the left and the right and add parts corresponding to a URL 
+     * but not incorrectly labeled (e.g. missed "http" prefix or everlooked trailing ".html").  
+     **/
+    public List<SoftwareComponent> postProcessURLComponents(List<SoftwareComponent> components, List<LayoutToken> tokenizations) {
+        List<OffsetPosition> urlPositions = Lexicon.getInstance().tokenPositionsUrlPattern(tokenizations);
+        if (urlPositions == null || urlPositions.size() == 0)
+            return components;
+
+        /*for(OffsetPosition position : urlPositions) {
+            String localUrl = LayoutTokensUtil.toText(tokenizations.subList(position.start, position.end+1));
+            System.out.println(localUrl);
+        }*/
+
+        // in case component labeled tokens overlap with URL positions, we extend the component to URL position
+        for(SoftwareComponent component : components) {
+            // only consider URL components
+            if (!component.getLabel().equals(SoftwareTaggingLabels.SOFTWARE_URL))
+                continue;
+
+            // character offsets
+            int start = component.getOffsetStart();
+            int end = component.getOffsetEnd();
+
+            if (component.getTokens() == null || component.getTokens().size() == 0)
+                continue;
+
+            // layout tokens
+            LayoutToken startToken = component.getTokens().get(0);
+            LayoutToken endToken = component.getTokens().get(component.getTokens().size()-1);
+
+            // index of Layouttoken in the token list
+            int startTokenOffset = tokenizations.indexOf(startToken);
+            int endTokenOffset = tokenizations.indexOf(endToken);
+
+            if (startTokenOffset == -1 || endTokenOffset == -1)
+                continue;
+
+            //System.out.println(">>" + LayoutTokensUtil.toText(tokenizations.subList(startTokenOffset, endTokenOffset+1)) + "<<");
+
+            // check overlap with URL positions
+            for(OffsetPosition position : urlPositions) {
+                // parano check
+                if (position.start >= tokenizations.size() || position.end >= tokenizations.size())
+                    continue;
+
+                if (position.start <= startTokenOffset && endTokenOffset <= position.end) {
+                    // extend component
+                    component.setOffsetStart(tokenizations.get(position.start).getOffset());
+                    component.setOffsetEnd(tokenizations.get(position.end).getText().length());
+
+                    component.setTokens(tokenizations.subList(position.start, position.end+1));
+
+                    component.setRawForm(LayoutTokensUtil.toText(tokenizations.subList(position.start, position.end+1)));
+
+                    List<BoundingBox> boundingBoxes = BoundingBoxCalculator.calculate(tokenizations.subList(position.start, position.end+1));
+                    component.setBoundingBoxes(boundingBoxes);
+                }
+            }
+        }
+
+        // filter out possible redundant components for the same URL positions
+        List<Integer> toBeRemoved = new ArrayList<>();
+        for(int i=0; i<components.size(); i++) {
+            SoftwareComponent component = components.get(i);
+
+            // only consider URL components
+            if (!component.getLabel().equals(SoftwareTaggingLabels.SOFTWARE_URL))
+                continue;
+
+            if (toBeRemoved.contains(i))
+                continue;
+
+            int start = component.getOffsetStart();
+            int end = component.getOffsetEnd();
+
+            for(int j=0; j<components.size(); j++) {
+                if (i == j)
+                    continue;
+
+                if (toBeRemoved.contains(j))
+                    continue;
+
+                SoftwareComponent component2 = components.get(j);
+                // only consider URL components
+                if (!component2.getLabel().equals(SoftwareTaggingLabels.SOFTWARE_URL))
+                    continue;
+
+                int localStart = component2.getOffsetStart();
+                int localEnd = component2.getOffsetEnd();
+
+                // check overlap
+                if (end < localStart)
+                    break;
+                if (localEnd < start)
+                    continue;
+                if ( (start>localStart && start<localEnd) || 
+                     (localStart < end && end < localEnd) ) {
+                    // we have an overlap, we keep the longest match
+                    if (end-start < localEnd-localStart)
+                        toBeRemoved.add(i);
+                    else
+                        toBeRemoved.add(j);
+                    continue;
+                }
+            }
+        }
+
+        if (toBeRemoved.size() == 0)
+            return components;
+
+        List<SoftwareComponent> newComponents = new ArrayList<>();
+        for(int i=0; i<components.size(); i++) {
+            if (!toBeRemoved.contains(i))
+                newComponents.add(components.get(i));
+        }
+
+        return newComponents;
     }
 
 	/**

@@ -18,6 +18,7 @@ import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Arrays;
+import java.util.ArrayList;
 
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -31,7 +32,7 @@ import static org.junit.Assert.assertNotNull;
 /**
  * @author Patrice
  */
-public class SoftwareParserTest {
+public class SoftwareContextClassifierTest {
     private static SoftwareConfiguration configuration;
 
     @BeforeClass
@@ -39,7 +40,10 @@ public class SoftwareParserTest {
         SoftwareConfiguration softwareConfiguration = null;
         try {
             ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-            softwareConfiguration = mapper.readValue(new File("resources/config/config.yml"), SoftwareConfiguration.class);
+
+            File yamlFile = new File("resources/config/config.yml");
+            yamlFile = new File(yamlFile.getAbsolutePath());
+            softwareConfiguration = mapper.readValue(yamlFile, SoftwareConfiguration.class);
 
             String pGrobidHome = softwareConfiguration.getGrobidHome();
 
@@ -68,22 +72,13 @@ public class SoftwareParserTest {
     }
 
     @Test
-    public void testSoftwareParserText() throws Exception {
+    public void testSoftwareContextClassifierText() throws Exception {
         String text = IOUtils.toString(this.getClass().getResourceAsStream("/text.txt"), StandardCharsets.UTF_8.toString());
         text = text.replaceAll("\\n", " ").replaceAll("\\t", " ");
-        List<SoftwareEntity> entities = SoftwareParser.getInstance(configuration).processText(text, false);
-        System.out.println(text);
-        System.out.println(entities.size());
-        assertThat(entities, hasSize(3));
-    }
-
-    //@Test
-    public void testSoftwareParserPDF() throws Exception {
-        Pair<List<SoftwareEntity>, Document> res = 
-            SoftwareParser.getInstance(configuration).processPDF(new File("./src/test/resources/annot.pdf"), false, false);
-        List<SoftwareEntity> entities = res.getLeft();
-
-        assertThat(entities, hasSize(19));
+        //List<String> texts = new ArrayList<>();
+        //texts.add(text);
+        String json = SoftwareContextClassifier.getInstance(configuration).classify(texts);
+        System.out.println(json);
     }
 
 }

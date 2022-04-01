@@ -750,9 +750,11 @@ var grobid = (function ($) {
             var summary = '';
             summary += "<div id='mention-count' style='background-color: white; width: 100%;'><p>&nbsp;&nbsp;<b>"+ entities.length + "</b> mentions found</p></div>";
 
-            summary += "<table width='" + width+ "px' style='table-layout: fixed; overflow: scroll; padding-left:5px;'>";
+            summary += "<table width='" + width+ "px' style='table-layout: fixed; overflow: scroll; padding-left:5px; width:"+width+"%;'>";
+            summary += '<colgroup><col span="1" style="width: 20%;"><col span="1" style="width: 5%;"><col span="1" style="width: 55%;"><col span="1" style="width: 20%;"></colgroup>';
 
-            const local_map = new Map();
+            var local_map = new Map();
+            var usage_map = new Map();
 
             entities.forEach(function (entity, n) {
                 var local_page = -1;
@@ -768,7 +770,14 @@ var grobid = (function ($) {
                 var localArray = local_map.get(softwareNameRaw)
                 localArray.push(the_id)
                 local_map.set(softwareNameRaw, localArray);
+
+                if (entity['documentContextAttributes']) {
+                    //console.log(entity['documentContextAttributes']);
+                    usage_map.set(softwareNameRaw, entity['documentContextAttributes']);
+                }
             });
+
+            console.log(usage_map);
 
             var span_ids = new Array();
 
@@ -780,9 +789,9 @@ var grobid = (function ($) {
                 } else {
                     summary += "#fff;'>"
                 }
-                summary += "<td width='20%'>"+key+"</td>";
-                summary += "<td width='5%%'>"+value.length+"</td>";
-                summary += "<td width='75%' style='display: inline-block; word-break: break-word;' >";
+                summary += "<td>"+key+"</td>";
+                summary += "<td>"+value.length+"</td>";
+                summary += "<td style='display: inline-block; word-break: break-word;' >";
 
                 value.sort(function(a, b) {
                     var a_page = -1;
@@ -818,10 +827,24 @@ var grobid = (function ($) {
                         the_id = the_id_full.substring(0,the_id_full.indexOf("_"));
                         local_page = the_id_full.substring(the_id_full.indexOf("_"));
                     }
-                    summary += "<span class='index' id='index_"+the_id+"'>page"+local_page+"</span>&nbsp;";
+                    summary += "<span class='index' id='index_"+the_id+"'>page"+local_page+"</span> ";
                     span_ids.push('index_'+the_id);
                 }
-                summary += "</td></tr>";
+
+                var attributesInfo = ""
+                console.log(key)
+                if (usage_map.get(key)) {
+                    documentAttributes = usage_map.get(key);
+                    console.log(documentAttributes);
+                    if (documentAttributes.used.value)
+                        attributesInfo += "used";
+                    if (documentAttributes.created.value)
+                        attributesInfo += " created";
+                    if (documentAttributes.shared.value)
+                        attributesInfo += " shared";
+                }
+
+                summary += "<td>" + attributesInfo + "</td></tr>";
                 n++;
             };
 
@@ -1078,7 +1101,7 @@ var grobid = (function ($) {
             version = entity['version'].rawForm;
 
         if (version)
-            string += "<p>Version: <b>" + version + "</b></p>"
+            string += "<p>Version: <b>" + version + "</b></p>";
 
         var url = null
         if (entity['url'])
@@ -1089,7 +1112,7 @@ var grobid = (function ($) {
             if (!url.startsWith('http://') && !url.startsWith('https://'))
                 url = 'http://' + url;
 
-            string += '<p>URL: <b><a href=\"' + url + '\" target=\"_blank\">' + url + '</b></p>'
+            string += '<p>URL: <b><a href=\"' + url + '\" target=\"_blank\">' + url + '</b></p>';
         }
 
         var creator = null
@@ -1097,12 +1120,12 @@ var grobid = (function ($) {
             creator = entity['publisher'].rawForm;
 
         if (creator)
-            string += "<p>Publisher: <b>" + creator + "</b></p>"            
+            string += "<p>Publisher: <b>" + creator + "</b></p>";
 
-        //string += "<p>conf: <i>" + conf + "</i></p>";
-        
         if (entity.confidence)
             string += "<p>conf: <i>" + entity.confidence + "</i></p>";
+
+
 
         if (wikipedia) {
             string += "</td><td style='align:right;bgcolor:#fff'>";
@@ -1111,6 +1134,54 @@ var grobid = (function ($) {
         }
 
         string += "</td></tr></table>";
+
+        if (entity.mentionContextAttributes || entity.documentContextAttributes) {
+            string += "<br/><div style='width:100%;background-color:#fff;border:0px'>";
+
+            if (entity.mentionContextAttributes) {
+
+                if (entity.mentionContextAttributes.used.value || entity.mentionContextAttributes.created.value || entity.mentionContextAttributes.shared.value)
+                    string += "<p>Mention-level: ";
+
+                if (entity.mentionContextAttributes.used.value) {
+                    string += "<b>used</b> (<i>" + entity.mentionContextAttributes.used.score.toFixed(3) + "</i>)";
+                }
+
+                if (entity.mentionContextAttributes.created.value) {
+                    string += " - <b>created</b> (<i>" + entity.mentionContextAttributes.created.score.toFixed(3) + "</i>)";
+                }
+
+                if (entity.mentionContextAttributes.shared.value) {
+                    string += " - <b>shared</b> (<i>" + entity.mentionContextAttributes.shared.score.toFixed(3) + "</i>)";
+                }
+
+                if (entity.mentionContextAttributes.used.value) 
+                    string += "</p>";
+            }
+
+            if (entity.documentContextAttributes) {
+                if (entity.documentContextAttributes.used.value || entity.documentContextAttributes.created.value || entity.documentContextAttributes.shared.value)
+                    string += "<p>Document-level: ";
+
+                if (entity.documentContextAttributes.used.value) {
+                    string += "<b>used</b> (<i>" + entity.documentContextAttributes.used.score.toFixed(3) + "</i>)";
+                }
+
+                if (entity.documentContextAttributes.created.value) {
+                    string += " - <b>created</b> (<i>" + entity.documentContextAttributes.created.score.toFixed(3) + "</i>)";
+                }
+
+                if (entity.documentContextAttributes.shared.value) {
+                    string += " - <b>shared</b> (<i>" + entity.documentContextAttributes.shared.score.toFixed(3) + "</i>)";
+                }
+
+                if (entity.documentContextAttributes.used.value) {
+                    string += "</p>";
+                }
+            }
+            
+            string += "</div>";
+        }
 
         // bibliographical reference(s)
         if (entity['references']) {

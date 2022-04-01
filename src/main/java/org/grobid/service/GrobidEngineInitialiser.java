@@ -4,11 +4,11 @@ import com.google.common.collect.ImmutableList;
 import org.grobid.core.main.GrobidHomeFinder;
 import org.grobid.core.main.LibraryLoader;
 import org.grobid.core.utilities.GrobidProperties;
-//import org.grobid.core.utilities.GrobidPropertyKeys;
 import org.grobid.core.engines.tagging.GrobidCRFEngine;
 import org.grobid.core.lexicon.SoftwareLexicon;
 import org.grobid.service.configuration.SoftwareServiceConfiguration;
 import org.grobid.core.utilities.SoftwareConfiguration;
+import org.grobid.core.utilities.GrobidConfig.ModelParameters;
 
 import java.io.*;
 
@@ -43,8 +43,10 @@ public class GrobidEngineInitialiser {
 
         configuration.setSoftwareConfiguration(softwareConfiguration);
 
-        if (softwareConfiguration != null && softwareConfiguration.getModel() != null)
-            GrobidProperties.getInstance().addModel(softwareConfiguration.getModel());
+        if (softwareConfiguration != null && softwareConfiguration.getModels() != null) {
+            for (ModelParameters model : softwareConfiguration.getModels())
+                    GrobidProperties.getInstance().addModel(model);
+        }
         LibraryLoader.load();
     }
 }

@@ -14,18 +14,56 @@ tmpPath: tmp/
 # path to Pub2TEI repository as available at https://github.com/kermitt2/Pub2TEI
 pub2teiPath: "../../Pub2TEI/"
 
-model:
-  name: "software"
-  engine: "wapiti"
-  #engine: "delft"
-  wapiti:
-    # wapiti training parameters, they will be used at training time only
-    epsilon: 0.00001
-    window: 30
-    nbMaxIterations: 1500
-  delft:
-    # deep learning parameters
-    #architecture: "BidLSTM_CRF"
-    architecture: "scibert"
-    useELMo: false
-    embeddings_name: "glove-840B"
+# if true we use binary classifiers for the contexts, otherwise use a single multi-label classifier
+# binary classifiers perform better, but havier to use
+useBinaryContextClassifiers: true
+
+models:
+  - name: "software"
+    #engine: "wapiti"
+    engine: "delft"
+    wapiti:
+      # wapiti training parameters, they will be used at training time only
+      epsilon: 0.00001
+      window: 30
+      nbMaxIterations: 1500
+    delft:
+      # deep learning parameters
+      #architecture: "BidLSTM_CRF"
+      #useELMo: false
+      #embeddings_name: "glove-840B"
+      architecture: "BERT_CRF"
+      transformer: "allenai/scibert_scivocab_cased"
+
+  - name: "software_context"
+    engine: "delft"
+    delft:
+      #architecture: "gru"
+      #embeddings_name: "glove-840B"
+      architecture: "bert"
+      transformer: "allenai/scibert_scivocab_cased"
+
+  - name: "software_context_used"
+    engine: "delft"
+    delft:
+      #architecture: "gru"
+      #embeddings_name: "glove-840B"
+      architecture: "bert"
+      transformer: "allenai/scibert_scivocab_cased"
+
+  - name: "software_context_creation"
+    engine: "delft"
+    delft:
+      #architecture: "gru"
+      #embeddings_name: "glove-840B"
+      architecture: "bert"
+      transformer: "allenai/scibert_scivocab_cased"
+
+  - name: "software_context_shared"
+    engine: "delft"
+    delft:
+      #architecture: "gru"
+      #embeddings_name: "glove-840B"
+      architecture: "bert"
+      transformer: "allenai/scibert_scivocab_cased"
+

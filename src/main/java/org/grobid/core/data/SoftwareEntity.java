@@ -64,14 +64,20 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 
 	// features of the mention context relatively to the referenced software: 
 	// 1) software usage by the research work disclosed in the document: used
-	// 2) software contribution of the research work disclosed in the document (creation, extension, etc.): contribution
+	// 2) software creation of the research work disclosed in the document (creation, extension, etc.): contribution
 	// 3) software is shared
 	private Boolean used = null;
 	private Double usedScore = null;
-	private Boolean contribution = null;
-	private Double contributionScore = null;
+	private Boolean created = null;
+	private Double createdScore = null;
 	private Boolean shared = null;
 	private Double sharedScore = null;
+
+	// characteristics of the mention context relatively to the referenced software for the single local mention
+	private SoftwareContextAttributes mentionContextAttributes = null;
+
+	// characteristics of the mention contexts relatively to the referenced software considering all mentions in a document
+	private SoftwareContextAttributes documentContextAttributes = null;
 
 	public SoftwareLexicon.Software_Type getType() {
 		return type;
@@ -184,52 +190,51 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 		return this.paragraph;
 	}
 
-	public Boolean getUsed() {
-		return this.used;
-	} 
-
-	public void setUsed(Boolean used) {
-		this.used = used;
+	public SoftwareContextAttributes getMentionContextAttributes() {
+		return this.mentionContextAttributes;
 	}
 
-	public Double getUsedScore() {
-		return this.usedScore;
+	public void setMentionContextAttributes(SoftwareContextAttributes attributes) {
+		this.mentionContextAttributes = attributes;
 	}
 
-	public void setUsedScore(Double usedScore) {
-		this.usedScore = usedScore;
+	public SoftwareContextAttributes getDocumentContextAttributes() {
+		return this.documentContextAttributes;
 	}
 
-	public Boolean getContribution() {
-		return this.used;
-	} 
+	public void mergeDocumentContextAttributes(SoftwareContextAttributes attributes) {
+		if (this.documentContextAttributes == null)
+			this.documentContextAttributes = attributes;
 
-	public void setContribution(Boolean contribution) {
-		this.contribution = contribution;
-	}
+		if (this.documentContextAttributes.getUsed() == null || !this.documentContextAttributes.getUsed()) {
+			this.documentContextAttributes.setUsed(attributes.getUsed());
+		}
 
-	public Double getContributionScore() {
-		return this.contributionScore;
-	} 
+		if (this.documentContextAttributes.getUsedScore() != null) {
+			if (attributes.getUsedScore() > this.documentContextAttributes.getUsedScore()) 
+				this.documentContextAttributes.setUsedScore(attributes.getUsedScore());
+		} else
+			this.documentContextAttributes.setUsedScore(attributes.getUsedScore());
 
-	public void setContributionScore(Double contributionScore) {
-		this.contributionScore = contributionScore;
-	}
+		if (this.documentContextAttributes.getCreated() == null || !this.documentContextAttributes.getCreated()) {
+			this.documentContextAttributes.setCreated(attributes.getCreated());
+		}
 
-	public Boolean getShared() {
-		return this.shared;
-	} 
+		if (this.documentContextAttributes.getCreatedScore() != null) {
+			if (attributes.getCreatedScore() > this.documentContextAttributes.getCreatedScore()) 
+				this.documentContextAttributes.setCreatedScore(attributes.getCreatedScore());
+		} else
+			this.documentContextAttributes.setCreatedScore(attributes.getCreatedScore());
 
-	public void setShared(Boolean shared) {
-		this.shared = shared;
-	} 
+		if (this.documentContextAttributes.getShared() == null || !this.documentContextAttributes.getShared()) {
+			this.documentContextAttributes.setShared(attributes.getShared());
+		}
 
-	public Double getSharedScore() {
-		return this.sharedScore;
-	} 
-
-	public void setSharedScore(Double sharedScore) {
-		this.sharedScore = sharedScore;
+		if (this.documentContextAttributes.getSharedScore() != null) {
+			if (attributes.getSharedScore() > this.documentContextAttributes.getSharedScore()) 
+				this.documentContextAttributes.setSharedScore(attributes.getSharedScore());
+		} else
+			this.documentContextAttributes.setSharedScore(attributes.getSharedScore());
 	}
 
 	/**
@@ -433,10 +438,10 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 		if (type != null) {
 			encoded = encoder.quoteAsUTF8(type.getName().toLowerCase());
             output = new String(encoded);
-			buffer.append(", \"type\" : \"" + output + "\"");	
+			buffer.append(", \"type\": \"" + output + "\"");	
 		}
 		if (entityId != null) {
-			buffer.append(", \"id\" : \"" + entityId + "\"");	
+			buffer.append(", \"id\": \"" + entityId + "\"");	
 		}
 		if (version != null) {
 			buffer.append(", \"version\":" + version.toJson());
@@ -460,16 +465,24 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 
 		if (paragraph != null && paragraph.length()>0) {
 			if (paragraphContextOffset != -1) {
-				buffer.append(", \"contextOffset\" : " + paragraphContextOffset);
+				buffer.append(", \"contextOffset\": " + paragraphContextOffset);
 			}
 
 			encoded = encoder.quoteAsUTF8(paragraph.replace("\n", " ").replace("  ", " "));
             output = new String(encoded);
-			buffer.append(", \"paragraph\" : \"" + output + "\"");
+			buffer.append(", \"paragraph\": \"" + output + "\"");
+		}
+
+		if (mentionContextAttributes != null) {
+			buffer.append(", \"mentionContextAttributes\": " + mentionContextAttributes.toJson());
+		}
+
+		if (documentContextAttributes != null) {
+			buffer.append(", \"documentContextAttributes\": " + documentContextAttributes.toJson());
 		}
 
 		if (bibRefs != null) {
-			buffer.append(", \"references\" : ["); 
+			buffer.append(", \"references\": ["); 
 			boolean first = true;
 			for(BiblioComponent bibRef : bibRefs) {
 				if (bibRef.getBiblio() == null)
