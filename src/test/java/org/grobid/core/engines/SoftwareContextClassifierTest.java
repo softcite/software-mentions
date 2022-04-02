@@ -29,6 +29,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertNotNull;
 
+import org.grobid.core.engines.SoftwareContextClassifier.MODEL_TYPE;
+
 /**
  * @author Patrice
  */
@@ -75,9 +77,9 @@ public class SoftwareContextClassifierTest {
     public void testSoftwareContextClassifierText() throws Exception {
         String text = IOUtils.toString(this.getClass().getResourceAsStream("/text.txt"), StandardCharsets.UTF_8.toString());
         text = text.replaceAll("\\n", " ").replaceAll("\\t", " ");
-        //List<String> texts = new ArrayList<>();
-        //texts.add(text);
-        String json = SoftwareContextClassifier.getInstance(configuration).classify(texts);
+        List<String> texts = new ArrayList<>();
+        texts.add(text);
+        String json = SoftwareContextClassifier.getInstance(configuration).classify(texts, MODEL_TYPE.used);
         System.out.println(json);
     }
 
