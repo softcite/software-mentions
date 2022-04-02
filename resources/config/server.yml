@@ -1,5 +1,10 @@
 grobidHome: ../grobid-home
 
+# CORS configuration for the web API service
+corsAllowedOrigins: "*"
+corsAllowedMethods: "OPTIONS,GET,PUT,POST,DELETE,HEAD"
+corsAllowedHeaders: "X-Requested-With,Content-Type,Accept,Origin"
+
 server:
   type: custom
   idleTimeout: 120 seconds
