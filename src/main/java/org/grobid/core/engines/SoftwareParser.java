@@ -1840,11 +1840,11 @@ public class SoftwareParser extends AbstractParser {
                 if (position.start <= startTokenOffset && endTokenOffset <= position.end) {
                     // extend component
                     component.setOffsetStart(tokenizations.get(position.start).getOffset());
-                    component.setOffsetEnd(tokenizations.get(position.end).getText().length());
 
                     component.setTokens(tokenizations.subList(position.start, position.end+1));
 
                     component.setRawForm(LayoutTokensUtil.toText(tokenizations.subList(position.start, position.end+1)));
+                    component.setOffsetEnd(component.getOffsetStart() + component.getRawForm().length());
 
                     List<BoundingBox> boundingBoxes = BoundingBoxCalculator.calculate(tokenizations.subList(position.start, position.end+1));
                     component.setBoundingBoxes(boundingBoxes);
