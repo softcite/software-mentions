@@ -32,6 +32,8 @@ Thanks to its integration in the [GROBID](https://github.com/kermitt2/grobid) fr
 
 - __combined with entity disambiguation__: extracted software names are disambiguated in context against software entities in Wikidata via [entity-fishing](https://github.com/kermitt2/entity-fishing)
 
+- __combined with software usage, creation and sharing__ characterizations: based on the different mentions of a software in a document, each mention is classified to estimate if the software is likely used in the research work, a creation part of the research work and if it is publicly shared. A consolidation step then provides at document-level these characterization for each mentioned software.
+
 - __scaling__: as we want to scale to the complete scientific corpus, the process is optimized in runtime and memory usage. We are able to process entirely around 2 PDF per second with the CRF model (including PDF processing and structuring, extractions, bibliographical reference disambiguation against crossref and entity disambiguation against WikiData) on one low/medium cost Ubuntu server, Intel i7-4790 (4 CPU), 4.00 GHz with 16 GB memory. Around 0.5 PDF per second is processed when using the fine-tuned SciBERT model, the best performing model - an additional GPU is however necessary when using Deep Learning models and runtime, depending on the DL architecture of choice.
 
 Latest performance (accuracy and runtime) can be found [below](https://github.com/Impactstory/software-mentions#Benchmarking).
@@ -48,7 +50,7 @@ This demo is only provided for test, without any guaranties regarding the servic
 
 ## The Softcite Dataset
 
-The Softcite dataset, a gold standard manually annotated corpus of 4,971 scholar articles, is available on Zenodo: https://doi.org/10.5281/zenodo.4445202
+For sampling, training and evaluation of the sequence labeling model and additional attribute attachment mechanisms, we use the Softcite dataset, a gold standard manually annotated corpus of 4,971 scholar articles, available on Zenodo: https://doi.org/10.5281/zenodo.4445202
 
 More details on the Softcite dataset can be found in the following publication:
 
@@ -138,9 +140,7 @@ As an alterntive, a docker image for the `software-mentions` service can be buil
 > docker build -t grobid/software-mentions:0.7.1 --build-arg GROBID_VERSION=0.7.1 --file Dockerfile.software .
 ```
 
-The Docker image build take several minutes, installing GROBID, software-mentions, a complete Python Deep Learning environment based on DeLFT and deep learning models downloaded from the internet (one fine-tuned base BERT model has a size of ~1.3GB). The resulting image is thus very large, around 8GB, due to the deep learning resources and model. 
-
-
+The Docker image build take several minutes, installing GROBID, software-mentions, a complete Python Deep Learning environment based on [DeLFT](https://github.com/kermitt2/delft) and deep learning models downloaded from the internet (one fine-tuned model with a BERT layer has a size of around 400 MB). The resulting image is thus very large, around 8GB, due to the deep learning resources and models. 
 
 ### Console web app
 
@@ -387,7 +387,7 @@ Other possibilities are `elmo` and `bert`. Note that in the later case, BERT is 
 Note that the default setting is __CRF Wapiti__, which does not require any further installation.
 
 
-## Benchmarking
+## Benchmarking of the sequence labeling task
 
 The following sequence labelling algorithms have been benchmarked:
 
@@ -511,7 +511,100 @@ The following runtimes have been obtained based on a Ubuntu 16.04 server Intel i
 
 Batch size is a parameter constrained by the capacity of the available GPU. An improvement of the performance of the deep learning architecture requires increasing the number of GPU and the amount of memory of these GPU, similarly as improving CRF capacity requires increasing the number of available threads and CPU. We observed that running a Deep Learning architectures on CPU is around 50 times slower than on GPU (although it depends on the amount of RAM available with the CPU, which can allow to increase the batch size significantly). 
 
-## Training and evaluation
+## Software mention context characterization
+
+Every mentioned software in a document is automatically enriched with usage, creation and sharing information based on the different software mention contexts in the document. In the JSON results, mentioned software are characterized with the following attributes:
+
+ *  __used__: the mentioned software is used by the research work disclosed in the document
+ *  __created__: the mentioned software is a creation/contribution of the research work disclosed in the document (creation, extension of an existing software, new script to be run on an existing software envrionment, etc.)
+ *  __shared__: software is claimed to be shared publicly via a sharing statement (note: this does not necessarily means that the softwate is Open Source)
+
+For each of these attributes, a score in `[0,1]` and binary class values are provided at mention-level and at document-level. For example, the following mention context indicates that the software `Mobyle` is shared. However, at document-level, other contexts further characterize the role of the software, indicating that it is also used and is a creation described in the research work corresponding to the document:
+
+```
+{
+    "context": "Availability: The Mobyle system is distributed under the terms of the GNU GPLv2 on the project web site (http://bioweb2.pasteur.fr/ projects/mobyle/).",
+    "mentionContextAttributes": {
+        "used": {
+            "value": false,
+            "score": 0.012282907962799072
+        },
+        "created": {
+            "value": false,
+            "score": 5.9604644775390625E-6
+        },
+        "shared": {
+            "value": true,
+            "score": 0.9282650947570801
+        }
+    },
+    "documentContextAttributes": {
+        "used": {
+            "value": true,
+            "score": 0.9994845390319824
+        },
+        "created": {
+            "value": true,
+            "score": 0.9999511241912842
+        },
+        "shared": {
+            "value": true,
+            "score": 0.9282650947570801
+        }
+    }
+}
+```
+
+On the demo console, these attributes are reported in the resulting document-level summary box and in the mention-level infobox:
+
+![GROBID Software mentions Demo](doc/images/screen9.png)
+
+### Training and evaluation corpus
+
+We use the following manually annotated resources for training and evaluation:
+
+- Softcite dataset, available on Zenodo: https://doi.org/10.5281/zenodo.4445202 for usage information
+
+- SoMeSci dataset, available on Zenodo: https://doi.org/10.5281/zenodo.4701764, for creation and sharing information, and additional usage information
+
+```
+Schindler, David, Bensmann, Felix, Dietze, Stefan, & Krüger, Frank. (2021). SoMeSci - Software Mentions in Science (0.1) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.4701764
+```
+
+### Evaluation
+
+To perform the enrichment for the three above defined attribute classes, we currently use three binary classifiers applied to the contextual sentences of a mention. We hypothesize here that the wording used to introduce and describe a software mention can characterize its possible usage/creation/sharing. Classifiers are based on fine-tuned SciBERT implemented with [DeLFT](https://github.com/kermitt2/delft). 
+
+The three binary classifiers perform as follow with 10-fold cross-evaluation:
+
+```
+Evaluation on 303 instances:
+                   precision        recall       f-score       support
+          used        0.9669        0.9791        0.9730           239
+      not_used        0.9180        0.8750        0.8960            64     
+
+Evaluation on 303 instances:
+                   precision        recall       f-score       support
+      creation        0.8400        0.9130        0.8750            23
+  not_creation        0.9928        0.9857        0.9892           280
+
+Evaluation on 303 instances:
+                   precision        recall       f-score       support
+        shared        0.7368        0.7778        0.7568            18
+    not_shared        0.9859        0.9825        0.9842           285
+```
+
+Using three binary classifiers perform better than a single multi-class multi-label classifier, still based on 10-fold cross-evaluation: 
+
+```
+Evaluation on 303 instances:
+                   precision        recall       f-score       support
+          used        0.9438        0.9833        0.9631           239
+      creation        0.7097        0.9565        0.8148            23
+        shared        0.6522        0.8333        0.7317            18    
+```
+
+## Commands for sequence labeling training and evaluation
 
 ### Training only
 
