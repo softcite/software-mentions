@@ -568,7 +568,9 @@ We use the following manually annotated resources for training and evaluation:
 - SoMeSci dataset, available on Zenodo: https://doi.org/10.5281/zenodo.4701764, for creation and sharing information, and additional usage information
 
 ```
-Schindler, David, Bensmann, Felix, Dietze, Stefan, & Krüger, Frank. (2021). SoMeSci - Software Mentions in Science (0.1) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.4701764
+Schindler, David, Bensmann, Felix, Dietze, Stefan, & Krüger, Frank. (2021). 
+SoMeSci - Software Mentions in Science (0.1) [Data set]. 
+Zenodo. https://doi.org/10.5281/zenodo.4701764
 ```
 
 ### Evaluation
