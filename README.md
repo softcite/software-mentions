@@ -315,12 +315,12 @@ entityFishingPort: 8090
 
 To process XML files following a variety pf publisher native formats, you need to install [Pub2TEI](https://github.com/kermitt2/Pub2TEI) and indicate its installation path in the configuration file:
 
-```yml
+```yaml
 # path to Pub2TEI repository as available at https://github.com/kermitt2/Pub2TEI
 pub2teiPath: "../../Pub2TEI/"
 ```
 
-- The sequence labeling model is called `software`. To select the sequence labelling algorithm to be used, use the config parameter `engine` under model named `name: "software"`:
+- The **sequence labeling model** is called `software`. To select the sequence labelling algorithm to be used, use the config parameter `engine` under model named `name: "software"`:
 
 For CRF:
 
@@ -335,31 +335,31 @@ For Deep Learning architectures, indicate `delft` and indicate the installation 
 The model to be used can be fully parametrised in the model block:
 
 
-```yml
-model:
-  name: "software"
-  engine: "delft"
-  wapiti:
-    # wapiti training parameters, only considered when wapiti is used as engine for the model, these parameters are be used at training time only
-    epsilon: 0.00001
-    window: 30
-    nbMaxIterations: 1500
-  delft:
-    # deep learning parameters
-    architecture: "BidLSTM_CRF"
-    useELMo: false
-    embeddings_name: "glove-840B"
+```yaml
+models:
+  - name: "software"
+    engine: "delft"
+    wapiti:
+      # wapiti training parameters, only considered when wapiti is used as engine for the model, these parameters are be used at training time only
+      epsilon: 0.00001
+      window: 30
+      nbMaxIterations: 1500
+    delft:
+      # deep learning parameters
+      architecture: "BidLSTM_CRF"
+      useELMo: false
+      embeddings_name: "glove-840B"
 ```
 
 To use the SciBERT fine-tuned model (recommended):
 
-```yml
-model:
-  name: "software"
-  engine: "delft"
-  delft:  
-    architecture: "BERT_CRF"
-    transformer: "allenai/scibert_scivocab_cased"
+```yaml
+models:
+  - name: "software"
+    engine: "delft"
+    delft:  
+      architecture: "BERT_CRF"
+      transformer: "allenai/scibert_scivocab_cased"
 ```
 
 The possible values for the Deep Learning architectures (supported by DeLFT) are:
@@ -376,13 +376,13 @@ For __BiLSTM-CRF__ you need to further specify the embeddings to be used
 
 - for using RNN models (`BiLSTM-CRF`, `BiLSTM-CRF_FEATURES`), the name of the static embeddings must be indicated:
 
-```yml
+```yaml
     embeddings_name: glove-840B
 ```
 
 - for using a transformer-based architecture, the name of the pre-trained transformer model as available according to HuggingFace Hub must be indicated:
 
-```yml
+```yaml
     transformer: "allenai/scibert_scivocab_cased"
 ```
 
@@ -390,7 +390,7 @@ Note that the default setting is __CRF Wapiti__, which does not require any furt
 
 DeLFT sequence labeling models are described [here](https://delft.readthedocs.io/en/latest/sequence_labeling/). For more details, see also the [GROBID Deep Learning model documentation](https://grobid.readthedocs.io/en/latest/Deep-Learning-models/). Using directly [DeLFT](https://github.com/kermitt2/delft), it is possible to re-train other Deep Learning models using different archiectures and pre-trained models (see the command line [here](https://delft.readthedocs.io/en/latest/grobid/#grobid-models)), and run them into this module. 
 
-- to select the text classification algorithm to be used for predicting the role of the mentioned software (see [here](https://github.com/ourresearch/software-mentions#software-mention-context-characterization) for explanations), the config parameters are also set under the corresponding models:
+- to select the **text classification algorithm** to be used for predicting the role of the mentioned software (see [here](https://github.com/ourresearch/software-mentions#software-mention-context-characterization) for explanations), the config parameters are also set under the corresponding models:
 
 For a transformer-base architecture using SciBERT as pretrained model (recommended): 
 
@@ -415,7 +415,6 @@ For a RNN GRU architecture using `glove-840B` static embeddings (not recommended
 The choice to use a multi-label classifier for the context characterization or 3 binary classifiers can be parametrized. Binary classifiers perform better, but require more memory resources. This can be set by the following parameter:
 
 ```yaml
-
 # if true we use binary classifiers for the contexts, otherwise use a single multi-label classifier
 # binary classifiers perform better, but havier to use
 useBinaryContextClassifiers: true
