@@ -366,21 +366,21 @@ The possible values for the Deep Learning architectures (supported by DeLFT) are
 
 - for __BiLSTM-CRF__: `BidLSTM_CRF`
 
-- for __BiLSTM-CRF_FEATURE__: `BidLSTM_CRF_FEATURES`
+- for __BiLSTM-CRF_FEATURES__: `BidLSTM_CRF_FEATURES`
 
-- for __bert-base-en+CRF__: `BERT`
+- for transformer-based architecture: `BERT`
 
-- for __SciBERT+CRF__: `BERT_CRF`
+- for transformer-based architecturewith CRF activation layer: `BERT_CRF`
 
-For __BiLSTM-CRF__ you need to further specify the embeddings to be used:
+For __BiLSTM-CRF__ you need to further specify the embeddings to be used
 
-- for using RNN models, the name of the static embeddings must be indicated:
+- for using RNN models (`BiLSTM-CRF`, `BiLSTM-CRF_FEATURES`), the name of the static embeddings must be indicated:
 
 ```yml
     embeddings_name: glove-840B
 ```
 
-- when using a transformer-based architecture, the name of the pre-trained transformer model as available according to HuggingFace Hub must be indicated:
+- for using a transformer-based architecture, the name of the pre-trained transformer model as available according to HuggingFace Hub must be indicated:
 
 ```yml
     transformer: "allenai/scibert_scivocab_cased"
@@ -388,7 +388,7 @@ For __BiLSTM-CRF__ you need to further specify the embeddings to be used:
 
 Note that the default setting is __CRF Wapiti__, which does not require any further installation.
 
-DeLFT sequence labeling models are described [here](https://delft.readthedocs.io/en/latest/sequence_labeling/). For more details, see also the [GROBID Deep Learning model documentation](https://grobid.readthedocs.io/en/latest/Deep-Learning-models/). Using directly [DeLFT](https://github.com/kermitt2/delft), it is possible to re-train other Deep Learning models using different archiectures and pre-trained models (see the command line [here](https://delft.readthedocs.io/en/latest/grobid/#grobid-models)), and run them in this module. 
+DeLFT sequence labeling models are described [here](https://delft.readthedocs.io/en/latest/sequence_labeling/). For more details, see also the [GROBID Deep Learning model documentation](https://grobid.readthedocs.io/en/latest/Deep-Learning-models/). Using directly [DeLFT](https://github.com/kermitt2/delft), it is possible to re-train other Deep Learning models using different archiectures and pre-trained models (see the command line [here](https://delft.readthedocs.io/en/latest/grobid/#grobid-models)), and run them into this module. 
 
 - to select the text classification algorithm to be used for predicting the role of the mentioned software (see [here](https://github.com/ourresearch/software-mentions#software-mention-context-characterization) for explanations), the config parameters are also set under the corresponding models:
 
@@ -412,7 +412,7 @@ For a RNN GRU architecture using `glove-840B` static embeddings (not recommended
       embeddings_name: "glove-840B"
 ```
 
-There is the choice to use a multi-label classifier for the context characterization or 3 binary classifiers. Binary classifiers perform better, but require more memory resources. This can be set by the following parameter:
+The choice to use a multi-label classifier for the context characterization or 3 binary classifiers can be parametrized. Binary classifiers perform better, but require more memory resources. This can be set by the following parameter:
 
 ```yaml
 
