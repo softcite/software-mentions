@@ -332,7 +332,6 @@ model:
 
 For Deep Learning architectures, indicate `delft` and indicate the installation path of the `DeLFT` library. To install and take advantage of DeLFT, see the installation instructions [here](https://github.com/kermitt2/delft).
 
-
 The model to be used can be fully parametrised in the model block:
 
 
@@ -348,10 +347,8 @@ model:
     nbMaxIterations: 1500
   delft:
     # deep learning parameters
-    architecture: "BidLSTM_CRF"
-    #architecture: "scibert"
-    useELMo: false
-    embeddings_name: "glove-840B"
+    architecture: "scibert"
+    transformer: "allenai/scibert_scivocab_cased"
 ```
 
 To use the SciBERT fine-tuned model (recommended):
@@ -362,6 +359,7 @@ model:
   engine: "delft"
   delft:  
     architecture: "scibert"
+    transformer: "allenai/scibert_scivocab_cased"
 ```
 
 The possible values for the Deep Learning architectures (supported by DeLFT) are:
@@ -382,7 +380,7 @@ For __BiLSTM-CRF__ you can further specify the embeddings to be used:
     embeddings_name: glove
 ```
 
-Other possibilities are `elmo` and `bert`. Note that in the later case, BERT is used to generate contextual embeddings used by the __BiLSTM-CRF__ architecture, in contrast to the usage of a fine-tuned BERT when BERT or SciBERT are selected as `architecture`.
+Other possibilities are `elmo` and `bert`. Note that in the later case, BERT is used to generate contextual embeddings used by the __BiLSTM-CRF__ architecture, in contrast to the usage of a fine-tuned BERT when BERT or SciBERT are selected as `architecture`. For transformer-based architecture, the name of the pre-trained model must be indicated (e.g. `transformer: "allenai/scibert_scivocab_cased"`). For RNN architectures, the name of the static embeddings must be indicated (e.g. `embeddings_name: "glove-840B"`). 
 
 Note that the default setting is __CRF Wapiti__, which does not require any further installation.
 
