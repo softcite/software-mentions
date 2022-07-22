@@ -23,7 +23,8 @@ models:
     #engine: "wapiti"
     engine: "delft"
     wapiti:
-      # wapiti training parameters, they will be used at training time only
+      # wapiti training parameters, only considered when wapiti is used as engine for the model, 
+      # these parameters are be used at training time only
       epsilon: 0.00001
       window: 30
       nbMaxIterations: 1500
@@ -36,6 +37,7 @@ models:
       transformer: "allenai/scibert_scivocab_cased"
 
   - name: "software_context"
+    # multi-label classifier for the context 
     engine: "delft"
     delft:
       #architecture: "gru"
@@ -44,6 +46,7 @@ models:
       transformer: "allenai/scibert_scivocab_cased"
 
   - name: "software_context_used"
+    # binary classifier to predict if the context of the mention correspond to a usage of the software 
     engine: "delft"
     delft:
       #architecture: "gru"
@@ -52,6 +55,7 @@ models:
       transformer: "allenai/scibert_scivocab_cased"
 
   - name: "software_context_creation"
+    # binary classifier to predict if the context of the mention correspond to a creation of the software 
     engine: "delft"
     delft:
       #architecture: "gru"
@@ -60,6 +64,7 @@ models:
       transformer: "allenai/scibert_scivocab_cased"
 
   - name: "software_context_shared"
+    # binary classifier to predict if the context of the mention correspond to a sharing of the software 
     engine: "delft"
     delft:
       #architecture: "gru"

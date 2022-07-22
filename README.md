@@ -320,14 +320,14 @@ To process XML files following a variety pf publisher native formats, you need t
 pub2teiPath: "../../Pub2TEI/"
 ```
 
-- to select the sequence labelling algorithm to be used, use the config parameter `engine` under model:
+- The sequence labeling model is called `software`. To select the sequence labelling algorithm to be used, use the config parameter `engine` under model named `name: "software"`:
 
 For CRF:
 
 ```yaml
-model:
-  name: "software"
-  engine: "wapiti"
+models:
+  - name: "software"
+    engine: "wapiti"
 ```
 
 For Deep Learning architectures, indicate `delft` and indicate the installation path of the `DeLFT` library. To install and take advantage of DeLFT, see the installation instructions [here](https://github.com/kermitt2/delft).
@@ -338,17 +338,17 @@ The model to be used can be fully parametrised in the model block:
 ```yml
 model:
   name: "software"
-  engine: "wapiti"
-  #engine: "delft"
+  engine: "delft"
   wapiti:
-    # wapiti training parameters, they will be used at training time only
+    # wapiti training parameters, only considered when wapiti is used as engine for the model, these parameters are be used at training time only
     epsilon: 0.00001
     window: 30
     nbMaxIterations: 1500
   delft:
     # deep learning parameters
-    architecture: "scibert"
-    transformer: "allenai/scibert_scivocab_cased"
+    architecture: "BidLSTM_CRF"
+    useELMo: false
+    embeddings_name: "glove-840B"
 ```
 
 To use the SciBERT fine-tuned model (recommended):
@@ -358,31 +358,72 @@ model:
   name: "software"
   engine: "delft"
   delft:  
-    architecture: "scibert"
+    architecture: "BERT_CRF"
     transformer: "allenai/scibert_scivocab_cased"
 ```
 
 The possible values for the Deep Learning architectures (supported by DeLFT) are:
 
-- for __BiLSTM-CRF__: `bilstm-crf`
+- for __BiLSTM-CRF__: `BidLSTM_CRF`
 
-- for __BiLSTM-CRF_FEATURE__: `bilstm-crf_features`
+- for __BiLSTM-CRF_FEATURE__: `BidLSTM_CRF_FEATURES`
 
-- for __bert-base-en+CRF__: `bert`
+- for __bert-base-en+CRF__: `BERT`
 
-- for __SciBERT+CRF__: `scibert`
+- for __SciBERT+CRF__: `BERT_CRF`
 
-For __BiLSTM-CRF__ you can further specify the embeddings to be used:
+For __BiLSTM-CRF__ you need to further specify the embeddings to be used:
 
-- for using Gloves embeddings (default):
+- for using RNN models, the name of the static embeddings must be indicated:
 
 ```yml
-    embeddings_name: glove
+    embeddings_name: glove-840B
 ```
 
-Other possibilities are `elmo` and `bert`. Note that in the later case, BERT is used to generate contextual embeddings used by the __BiLSTM-CRF__ architecture, in contrast to the usage of a fine-tuned BERT when BERT or SciBERT are selected as `architecture`. For transformer-based architecture, the name of the pre-trained model must be indicated (e.g. `transformer: "allenai/scibert_scivocab_cased"`). For RNN architectures, the name of the static embeddings must be indicated (e.g. `embeddings_name: "glove-840B"`). 
+- when using a transformer-based architecture, the name of the pre-trained transformer model as available according to HuggingFace Hub must be indicated:
+
+```yml
+    transformer: "allenai/scibert_scivocab_cased"
+```
 
 Note that the default setting is __CRF Wapiti__, which does not require any further installation.
+
+DeLFT sequence labeling models are described [here](https://delft.readthedocs.io/en/latest/sequence_labeling/). For more details, see also the [GROBID Deep Learning model documentation](https://grobid.readthedocs.io/en/latest/Deep-Learning-models/). Using directly [DeLFT](https://github.com/kermitt2/delft), it is possible to re-train other Deep Learning models using different archiectures and pre-trained models (see the command line [here](https://delft.readthedocs.io/en/latest/grobid/#grobid-models)), and run them in this module. 
+
+- to select the text classification algorithm to be used for predicting the role of the mentioned software (see [here](https://github.com/ourresearch/software-mentions#software-mention-context-characterization) for explanations), the config parameters are also set under the corresponding models:
+
+For a transformer-base architecture using SciBERT as pretrained model (recommended): 
+
+```yaml
+ - name: "software_context_used"
+    engine: "delft"
+    delft:
+      architecture: "bert"
+      transformer: "allenai/scibert_scivocab_cased"
+```
+
+For a RNN GRU architecture using `glove-840B` static embeddings (not recommended):
+
+```yaml
+ - name: "software_context_used"
+    engine: "delft"
+    delft:
+      architecture: "gru"
+      embeddings_name: "glove-840B"
+```
+
+There is the choice to use a multi-label classifier for the context characterization or 3 binary classifiers. Binary classifiers perform better, but require more memory resources. This can be set by the following parameter:
+
+```yaml
+
+# if true we use binary classifiers for the contexts, otherwise use a single multi-label classifier
+# binary classifiers perform better, but havier to use
+useBinaryContextClassifiers: true
+```
+
+The single multi-label classifier is named `"software_context"`. The 3 binary classifiers are named `"software_context_used"`, `"software_context_creation"` and `"software_context_shared"`.
+
+DeLFT text classification models are described [here](https://delft.readthedocs.io/en/latest/text_classification/). It is possible to retrain classification models with the [DeLFT](https://github.com/kermitt2/delft) library (`python3 delft/applications/softwareClassifier.py --help`) and run them in this module.
 
 
 ## Benchmarking of the sequence labeling task
