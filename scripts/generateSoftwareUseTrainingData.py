@@ -31,6 +31,10 @@ class TEICorpusHandler(xml.sax.ContentHandler):
     entity_spans = None
     document = None
     doc_id = None
+    doi = None
+    pmc = None
+    pmid = None
+    current_id = None
 
     # json outout
     documents = None
@@ -60,6 +64,12 @@ class TEICorpusHandler(xml.sax.ContentHandler):
             self.document = OrderedDict() 
             if self.doc_id is not None:
                 self.document["id"] = self.doc_id
+            if self.doi is not None and len(self.doi)>0:
+                self.document["doi"] = self.doi
+            if self.pmc is not None and len(self.pmc)>0:
+                self.document["pmc"] = self.pmc
+            if self.pmid is not None and len(self.pmid)>0:
+                self.document["pmid"] = self.pmid
             self.document["texts"] = []
         if name == "p": 
             self.paragraph = ''
@@ -88,6 +98,17 @@ class TEICorpusHandler(xml.sax.ContentHandler):
             if attrs.getLength() != 0:
                 if "xml:id" in attrs:
                     self.doc_id = attrs.getValue("xml:id")
+        if name == "idno":
+            if attrs.getLength() != 0:
+                if "type" in attrs:
+                    if attrs.getValue("type") == "DOI":
+                        self.current_id = "doi"
+                    elif attrs.getValue("type") == "PMC":
+                        self.current_id = "pmc"
+                    elif attrs.getValue("type") == "PMID":
+                        self.current_id = "pmid"
+                    else:
+                        self.current_id = None
 
     def endElement(self, name):
         if name == "rs":
@@ -108,22 +129,40 @@ class TEICorpusHandler(xml.sax.ContentHandler):
                 local_paragraph['text'] = self.paragraph
                 if len(self.entity_spans) > 0:
                     local_paragraph['entity_spans'] = self.entity_spans
-                self.document["texts"].append(local_paragraph)
-                self.nb_snippets += 1
+                    self.document["texts"].append(local_paragraph)
+                    self.nb_snippets += 1
         if name == 'body':
             new_json = OrderedDict()
             new_json["id"] = self.document["id"]
+            if "doi" in self.document:
+                new_json["doi"] = self.document["doi"]
+            if "pmc" in self.document:
+                new_json["pmc"] = self.document["pmc"]
+            if "pmid" in self.document:
+                new_json["pmid"] = self.document["pmid"]    
             new_json["texts"] = []
             process_text_list(self.seg, self.document["texts"], new_json)
-            self.documents["documents"].append(new_json)
+            if len(new_json["texts"])>0:
+                self.documents["documents"].append(new_json)
             #self.documents["documents"].append(self.document)
             self.document = None
             self.doc_id = None
+            self.doi = None
+            self.pmc = None
+            self.pmid = None
+            self.current_id = None
         if name == 'teiCorpus':
             print("total exported sentences", self.nb_snippets)
             # write ouput 
             with open(self.output_path, 'w') as outfile:
                 json.dump(self.documents, outfile, indent=4)  
+        if name == 'idno':
+            if self.current_id == "doi": 
+                self.doi = self.accumulated
+            elif self.current_id == "pmc":
+                self.pmc = self.accumulated
+            elif self.current_id == "pmid":
+                self.pmid = self.accumulated
 
         self.currentOffset += len(self.accumulated)
         self.accumulated = ''
@@ -196,7 +235,7 @@ def process_text_list(seg, text_list, new_json):
                     if len(new_entity_spans) > 0 and previous_start == -1:
                         sentence_structure["entity_spans"] = new_entity_spans
 
-                if previous_start == -1:
+                if previous_start == -1 and "entity_spans" in sentence_structure and len(sentence_structure["entity_spans"])>0:
                     new_json["texts"].append(sentence_structure)
 
 def test_json_wellformedness(json_path):
