@@ -415,6 +415,153 @@ public class SoftwareContextClassifier {
         return documentPropagation(entities);
     }
 
+    public List<String> classifyDocumentContextsBinaryString(List<String> sentences) {
+        List<String> contexts = new ArrayList<>();
+        List<SoftwareContextAttributes> allContextAttributes = new ArrayList<>();
+        for(String sentence : sentences) {
+            if (sentence != null && sentence.length()>0) {
+                String localContext = TextUtilities.dehyphenize(sentence);
+                localContext = localContext.replace("\n", " ");
+                localContext = localContext.replaceAll("( )+", " ");
+                contexts.add(localContext);
+            } else {
+                // dummy place holder
+                contexts.add("");
+            }
+            allContextAttributes.add(new SoftwareContextAttributes());
+        }
+
+        String resultsUsed = null;
+        String resultsCreated = null;
+        String resultsShared = null;
+        try {
+            resultsUsed = classify(contexts, MODEL_TYPE.used);
+            resultsCreated = classify(contexts, MODEL_TYPE.created);
+            resultsShared = classify(contexts, MODEL_TYPE.shared);
+        } catch(Exception e) {
+            LOGGER.error("fail to classify document's set of contexts", e);
+            return null;
+        }
+
+        if (resultsUsed == null && resultsCreated == null && resultsShared == null) 
+            return null;
+
+        List<String> results = new ArrayList<>();
+        results.add(resultsUsed);
+        results.add(resultsCreated);
+        results.add(resultsShared);
+
+        List<String> resultJson = new ArrayList<>();
+
+        // set resulting context classes to entity mentions
+        for(int i=0; i<results.size(); i++) {
+            if (results.get(i) == null) 
+                continue;
+            try {
+                ObjectMapper mapper = new ObjectMapper();
+                JsonNode root = mapper.readTree(results.get(i));
+
+                int sentenceRank =0;
+                String lang = null;
+                JsonNode classificationsNode = root.findPath("classifications");
+                if ((classificationsNode != null) && (!classificationsNode.isMissingNode())) {
+                    Iterator<JsonNode> ite = classificationsNode.elements();
+                    while (ite.hasNext()) {
+                        JsonNode classificationNode = ite.next();
+                        SoftwareContextAttributes contextAttributes = allContextAttributes.get(sentenceRank);
+                        if (i==0) {
+                            JsonNode usedNode = classificationNode.findPath("used");
+                            JsonNode notUsedNode = classificationNode.findPath("not_used");
+
+                            double scoreUsed = 0.0;
+                            if ((usedNode != null) && (!usedNode.isMissingNode())) {
+                                scoreUsed = usedNode.doubleValue();
+                            }
+                            double scoreNotUsed = 0.0;
+                            if ((notUsedNode != null) && (!notUsedNode.isMissingNode())) {
+                                scoreNotUsed = notUsedNode.doubleValue();
+                            }
+
+                            if (scoreUsed > scoreNotUsed)
+                                contextAttributes.setUsedScore(scoreUsed);
+                            else 
+                                contextAttributes.setUsedScore(1-scoreNotUsed);
+
+                            if (scoreUsed>0.5 && scoreUsed > scoreNotUsed) 
+                                contextAttributes.setUsed(true);
+                            else 
+                                contextAttributes.setUsed(false);
+                        } else if (i == 1) {
+                            JsonNode createdNode = classificationNode.findPath("creation");
+                            JsonNode notCreatedNode = classificationNode.findPath("not_creation");
+
+                            double scoreCreated = 0.0;
+                            if ((createdNode != null) && (!createdNode.isMissingNode())) {
+                                scoreCreated = createdNode.doubleValue();
+                            }
+
+                            double scoreNotCreated = 0.0;
+                            if ((notCreatedNode != null) && (!notCreatedNode.isMissingNode())) {
+                                scoreNotCreated = notCreatedNode.doubleValue();
+                            }
+
+                            if (scoreCreated > scoreNotCreated)
+                                contextAttributes.setCreatedScore(scoreCreated);
+                            else
+                                contextAttributes.setCreatedScore(1 - scoreNotCreated);
+
+                            if (scoreCreated > 0.5 && scoreCreated > scoreNotCreated) 
+                                contextAttributes.setCreated(true);
+                            else 
+                                contextAttributes.setCreated(false);
+                        } else {
+                            JsonNode sharedNode = classificationNode.findPath("shared");
+                            JsonNode notSharedNode = classificationNode.findPath("not_shared");
+
+                            double scoreShared = 0.0;
+                            if ((sharedNode != null) && (!sharedNode.isMissingNode())) {
+                                scoreShared = sharedNode.doubleValue();
+                            }
+
+                            double scoreNotShared = 0.0;
+                            if ((notSharedNode != null) && (!notSharedNode.isMissingNode())) {
+                                scoreNotShared = notSharedNode.doubleValue();
+                            }
+
+                            if (scoreShared > scoreNotShared)
+                                contextAttributes.setSharedScore(scoreShared);
+                            else
+                                contextAttributes.setSharedScore(1 - scoreNotShared);
+
+                            if (scoreShared > 0.5 && scoreShared > scoreNotShared) 
+                                contextAttributes.setShared(true);
+                            else 
+                                contextAttributes.setShared(false);
+                        }
+
+                        JsonNode textNode = classificationNode.findPath("text");
+                        String textValue = null;
+                        if ((textNode != null) && (!textNode.isMissingNode())) {
+                            textValue = textNode.textValue();
+                        }
+                        
+                        sentenceRank++;
+                    }
+                }
+            } catch(JsonProcessingException e) {
+                LOGGER.error("failed to parse JSON context classification result", e);
+            }
+        }
+
+        for(SoftwareContextAttributes contextAttributes : allContextAttributes) {
+            resultJson.add(contextAttributes.toJson());
+        }
+
+        // in a second pass, we share all predictions for mentions of the same software name in 
+        // different places and apply a consistency propagation
+        return resultJson;
+    }
+
     private List<SoftwareEntity> documentPropagation(List<SoftwareEntity> entities) {
         Map<String, List<SoftwareEntity>> entityMap = new TreeMap<>();
         for(SoftwareEntity entity : entities) {

@@ -8,7 +8,7 @@ package org.grobid.service.controller;
  */
 public interface SoftwarePaths {
     /**
-     * path extension for software service.
+     * path extension for software service
      */
     public static final String PATH_SOFTWARE = "/";
     
@@ -18,7 +18,7 @@ public interface SoftwarePaths {
     String PATH_IS_ALIVE = "isalive";
 
     /**
-     * path extension for extracting software entities from a text.
+     * path extension for extracting software entities from a text
      */
     public static final String PATH_SOFTWARE_TEXT = "processSoftwareText";
 
@@ -29,12 +29,12 @@ public interface SoftwarePaths {
     public static final String PATH_SOFTWARE_XML = "processSoftwareTEI";
 
     /**
-     * path extension for extracting software entities from a PDF file.
+     * path extension for extracting software entities from a PDF file
      */
     public static final String PATH_SOFTWARE_PDF = "processSoftwarePDF";
 
     /**
-     * path extension for annotating a PDF file with the recognized software entities.
+     * path extension for annotating a PDF file with the recognized software entities
      */
     public static final String PATH_ANNOTATE_SOFTWARE_PDF = "annotateSoftwarePDF";
 
@@ -44,7 +44,12 @@ public interface SoftwarePaths {
     public static final String PATH_EXTRACT_SOFTWARE_XML = "extractSoftwareXML";
 
     /**
-     * path extension for extracting software entities from an URL to an online PDF.
+     * path extension for characterizing the context of a software sentence
+     */
+    public static final String PATH_SOFTWARE_CONTEXT = "characterizeSoftwareContext";
+
+    /**
+     * path extension for extracting software entities from an URL to an online PDF
      */
     //public static final String PATH_ANNOTATE_SOFTWARE_PDF_URL = "annotateSoftwarePDFURL";
 }

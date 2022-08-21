@@ -119,4 +119,16 @@ public class SoftwareController implements SoftwarePaths {
         return SoftwareProcessFile.extractXML(inputStream, disambiguateBoolean, addParagraphContextBoolean, this.configuration);
     }
 
+    @Path(PATH_SOFTWARE_CONTEXT)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    @GET
+    public Response processSoftwareContext_get(@QueryParam(TEXT) String text) {
+        //LOGGER.info(text);
+        return SoftwareProcessString.characterizeContext(text, this.configuration);
+    }
+
+
+
+
+
 }
