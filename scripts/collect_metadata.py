@@ -142,7 +142,9 @@ def biblio_glutton_lookup(config, doi=None, pmcid=None, pmid=None):
     return jsonResult
 
 def _biblio_glutton_url(biblio_glutton_base, biblio_glutton_port):
-    res = "http://"
+    res = ""
+    if not biblio_glutton_base.startswith("http"):
+        res = "http://"
     if biblio_glutton_base.endswith("/"):
         res += biblio_glutton_base[:-1]
     else: 

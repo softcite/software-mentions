@@ -14,12 +14,15 @@ from xml.sax import make_parser, handler
 import pysbd
 from corpus2JSON import validate_segmentation
 from nltk.tokenize.punkt import PunktSentenceTokenizer
+import requests
+from collect_metadata import biblio_glutton_lookup
 
 class TEICorpusHandler(xml.sax.ContentHandler):
     """ 
     TEI XML SAX handler for reading the TEI corpus file corresponding to the Softcite corpus  
     """
     output_path = None
+    config = None
 
     # working variables
     accumulated = ''
@@ -43,10 +46,11 @@ class TEICorpusHandler(xml.sax.ContentHandler):
     nb_snippets = 0
     nb_file = 0
 
-    def __init__(self, output_path):
+    def __init__(self, config, output_path):
         xml.sax.ContentHandler.__init__(self)
         self.output_path = output_path
         self.seg = pysbd.Segmenter(language="en", clean=False, char_span=True)
+        self.config = config
 
     def startElement(self, name, attrs):
         if self.accumulated != '':
@@ -134,14 +138,26 @@ class TEICorpusHandler(xml.sax.ContentHandler):
         if name == 'body':
             new_json = OrderedDict()
             new_json["id"] = self.document["id"]
+            local_doi = None
+            local_pmc = None
+            local_pmid = None
             if "doi" in self.document:
                 new_json["doi"] = self.document["doi"]
+                local_doi = self.document["doi"]
             if "pmc" in self.document:
                 new_json["pmc"] = self.document["pmc"]
+                local_pmc = self.document["pmc"]
             if "pmid" in self.document:
-                new_json["pmid"] = self.document["pmid"]    
+                new_json["pmid"] = self.document["pmid"]
+                local_pmid = self.document["pmid"]
+
+            # add a full text URL
+            local_url = add_full_text_url(self.config, doi=local_doi, pmc=local_pmc, pmid=local_pmid)
+            if local_url != None:
+                new_json["full_text_url"] = local_url
+
             new_json["texts"] = []
-            process_text_list(self.seg, self.document["texts"], new_json)
+            process_text_list(self.config, self.seg, self.document["texts"], new_json, True)
             if len(new_json["texts"])>0:
                 self.documents["documents"].append(new_json)
             #self.documents["documents"].append(self.document)
@@ -173,7 +189,7 @@ class TEICorpusHandler(xml.sax.ContentHandler):
     def clear(self): # clear the accumulator for re-use
         self.accumulated = ""
 
-def process_text_list(seg, text_list, new_json):
+def process_text_list(config, seg, text_list, new_json, predict):
     for text_part in text_list:
         if "text" in text_part:
             the_sentences = seg.segment(text_part["text"])
@@ -236,6 +252,13 @@ def process_text_list(seg, text_list, new_json):
                         sentence_structure["entity_spans"] = new_entity_spans
 
                 if previous_start == -1 and "entity_spans" in sentence_structure and len(sentence_structure["entity_spans"])>0:
+                    if predict:
+                        # we use the softcite service to predict and pre-annotate the characterization of the sentence mention
+                        prediction = predict_sentence_usage(config, sentence_structure["text"])
+                        sentence_structure["context_attributes"] = prediction
+                        sentence_structure["full_context"] = text_part["text"]
+                        #print(prediction)
+
                     new_json["texts"].append(sentence_structure)
 
 def test_json_wellformedness(json_path):
@@ -266,9 +289,73 @@ def test_json_wellformedness(json_path):
                             print("\n")
                             print("text length beyond 1500 characters:", str(len(text)), "/", text)
 
-def export(xml_corpus, output_path):
+def load_config(path='./config.json'):
+    """
+    Load the json configuration. Return the config dict or None if the service check fails. 
+    """
+    try:
+        config_json = open(path).read()
+        config = json.loads(config_json)
+        print(config_json)
+        service_isalive(config)
+    except: 
+        print('\n-> loading configuration failed')
+        config = None
+    return config
+
+def _grobid_software_url(grobid_base, grobid_port):
+    the_url = 'http://'+grobid_base
+    if grobid_port is not None and len(grobid_port)>0:
+        the_url += ":"+grobid_port
+    the_url += "/service/"
+    return the_url
+
+def service_isalive(config):
+    # test if GROBID software mention recognizer is up and running...
+    the_url = _grobid_software_url(config['grobid_software_server'], config['grobid_software_port'])
+    the_url += "isalive"
+    try:
+        r = requests.get(the_url)
+        if r.status_code != 200:
+            print('Grobid software mention server does not appear up and running ' + str(r.status_code))
+        else:
+            print("Grobid software mention server is up and running")
+            return True
+    except: 
+        print('Grobid software mention server does not appear up and running:',
+            'test call to grobid software mention failed, please check and re-start a server if you wish to use it for enrichment.')
+    return False
+
+def predict_sentence_usage(config, text):
+    the_url = _grobid_software_url(config['grobid_software_server'], config['grobid_software_port'])
+    the_url += "characterizeSoftwareContext"
+    params = {'text': text}
+    try:
+        r = requests.get(the_url, params=params)
+    except: 
+        print('Failed request to Grobid software mention server.')
+        return None
+    return r.json()
+
+def add_full_text_url(config, doi=None, pmc=None, pmid=None):
+    if pmc != None:
+        return "https://www.ncbi.nlm.nih.gov/pmc/articles/" + pmc + "/pdf"
+
+    if doi != None:
+        json_record = biblio_glutton_lookup(config, doi=doi)
+        if json_record != None and "oaLink" in json_record:
+            return json_record["oaLink"]
+
+    if pmid != None:
+        json_record = biblio_glutton_lookup(config, pmid=pmid)
+        if json_record != None and "oaLink" in json_record:
+            return json_record["oaLink"]
+
+    return None
+
+def export(config, xml_corpus, output_path):
     parser = make_parser()
-    handler = TEICorpusHandler(output_path)
+    handler = TEICorpusHandler(config, output_path)
     parser.setContentHandler(handler)
     parser.parse(xml_corpus)
 
@@ -279,15 +366,19 @@ if __name__ == "__main__":
         help="path to the TEI XML Softcite corpus file")
     parser.add_argument("--output", type=str, 
         help="path where to generate the software use classification datsset JSON file")
+    parser.add_argument("--config", default='config.json', help="configuration file to be used")
 
     args = parser.parse_args()
     xml_corpus = args.xml_corpus
     output_path = args.output
+    config_path = args.config
 
     # check path and call methods
     if xml_corpus is None or not os.path.isfile(xml_corpus):
         print("error: the path to the XML corpus files is not valid: ", xml_corpus)
         exit(0)
 
-    export(xml_corpus, output_path)
+    config = load_config(path=config_path)
+
+    export(config, xml_corpus, output_path)
     test_json_wellformedness(output_path)
