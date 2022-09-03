@@ -113,7 +113,15 @@ class TEICorpusHandler(xml.sax.ContentHandler):
                         self.current_id = "pmid"
                     else:
                         self.current_id = None
-
+                elif "DOI" in attrs:
+                    self.doi = attrs.getValue("DOI")
+                    self.current_id = None
+                elif "PMC" in attrs:
+                    self.pmc = attrs.getValue("PMC")
+                    self.current_id = None
+                elif "PMID" in attrs:
+                    self.pmid = attrs.getValue("PMID")
+                    self.current_id = None
     def endElement(self, name):
         if name == "rs":
             self.paragraph += self.accumulated
@@ -255,7 +263,7 @@ def process_text_list(config, seg, text_list, new_json, predict):
                     if predict:
                         # we use the softcite service to predict and pre-annotate the characterization of the sentence mention
                         prediction = predict_sentence_usage(config, sentence_structure["text"])
-                        sentence_structure["context_attributes"] = prediction
+                        sentence_structure["class_attributes"] = prediction
                         sentence_structure["full_context"] = text_part["text"]
                         #print(prediction)
 
