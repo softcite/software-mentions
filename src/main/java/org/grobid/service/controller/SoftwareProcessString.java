@@ -135,7 +135,7 @@ public class SoftwareProcessString {
 			if (resultJson != null) {
 				retVal.append("{ ");
 				retVal.append(SoftwareServiceUtil.applicationDetails(GrobidProperties.getVersion()));
-				retVal.append(", \"classifcation\": " + resultJson);
+				retVal.append(", \"classification\": " + resultJson);
 				retVal.append(", \"runtime\": " + (end-start));
 				retVal.append("}");
 			}
