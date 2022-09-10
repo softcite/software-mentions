@@ -190,11 +190,11 @@ A `503` error normally means that all the threads available to Softcite service 
 Using ```curl``` POST/GET requests with some __text__:
 
 ```console
-curl -X POST -d "text=We test GROBID (version 0.6.1)." localhost:8060/service/processSoftwareText
+curl -X POST -d "text=We test GROBID (version 0.7.1)." localhost:8060/service/processSoftwareText
 ```
 
 ```console
-curl -GET --data-urlencode "text=We test GROBID (version 0.6.1)." localhost:8060/service/processSoftwareText
+curl -GET --data-urlencode "text=We test GROBID (version 0.7.1)." localhost:8060/service/processSoftwareText
 ```
 
 which should return this:
@@ -202,26 +202,53 @@ which should return this:
 ```json
 {
     "application": "software-mentions",
-    "version": "0.7.1-SNAPSHOT",
-    "date": "2020-05-20T22:31+0000",
-    "mentions": [
-        {
-            "software-name": {
-                "rawForm": "GROBID",
-                "normalizedForm": "GROBID",
-                "offsetStart": 8,
-                "offsetEnd": 15
+    "version": "0.7.1",
+    "date": "2022-09-10T07:02+0000",
+    "mentions": [{
+        "software-name": {
+            "rawForm": "GROBID",
+            "normalizedForm": "GROBID",
+            "offsetStart": 8,
+            "offsetEnd": 14
+        },
+        "type": "software",
+        "version": {
+            "rawForm": "0.7.1",
+            "normalizedForm": "0.7.1",
+            "offsetStart": 24,
+            "offsetEnd": 29
+        },
+        "context": "We test GROBID (version 0.7.1).",
+        "mentionContextAttributes": {
+            "used": {
+                "value": true,
+                "score": 0.9999960660934448
             },
-            "type": "software",
-            "version": {
-                "rawForm": "0.6.1",
-                "normalizedForm": "0.6.1",
-                "offsetStart": 24,
-                "offsetEnd": 29
+            "created": {
+                "value": false,
+                "score": 2.384185791015625E-7
+            },
+            "shared": {
+                "value": false,
+                "score": 1.1920928955078125E-7
+            }
+        },
+        "documentContextAttributes": {
+            "used": {
+                "value": true,
+                "score": 0.9999960660934448
+            },
+            "created": {
+                "value": false,
+                "score": 2.384185791015625E-7
+            },
+            "shared": {
+                "value": false,
+                "score": 1.1920928955078125E-7
             }
         }
-    ],
-    "runtime": 1
+    }],
+    "runtime": 242
 }
 ```
 
