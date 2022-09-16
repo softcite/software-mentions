@@ -36,7 +36,7 @@ Thanks to its integration in the [GROBID](https://github.com/kermitt2/grobid) fr
 
 - __scaling__: as we want to scale to the complete scientific corpus, the process is optimized in runtime and memory usage. We are able to process entirely around 2 PDF per second with the CRF model (including PDF processing and structuring, extractions, bibliographical reference disambiguation against crossref and entity disambiguation against WikiData) on one low/medium cost Ubuntu server, Intel i7-4790 (4 CPU), 4.00 GHz with 16 GB memory. Around 0.5 PDF per second is processed when using the fine-tuned SciBERT model, the best performing model - an additional GPU is however necessary when using Deep Learning models and runtime, depending on the DL architecture of choice.
 
-Latest performance (accuracy and runtime) can be found [below](https://github.com/Impactstory/software-mentions#Benchmarking).
+Latest performance (accuracy and runtime) can be found [below](https://github.com/ourresearch/software-mentions#benchmarking-of-the-sequence-labeling-task).
 
 ## Demo
 
@@ -46,7 +46,7 @@ The [web console](https://github.com/ourresearch/software-mentions#console-web-a
 
 This demo is only provided for test, without any guaranties regarding the service quality and availability. If you plan to use this component at scale or in production, you need to install it locally. 
 
-**The demo run with the CRF model** to reduce the computational load, as the server is used for other demos and has no GPU (for cost reasons). For significantly more accurate results (see the [benchmarking](https://github.com/Impactstory/software-mentions#Benchmarking)), a local installation with a SciBERT model is required. 
+**The demo run with the CRF model** to reduce the computational load, as the server is used for other demos and has no GPU (for cost reasons). For significantly more accurate results (see the [benchmarking](https://github.com/ourresearch/software-mentions#benchmarking-of-the-sequence-labeling-task)), a local installation with a SciBERT model is required. 
 
 ## The Softcite Dataset
 
@@ -586,7 +586,7 @@ Every mentioned software in a document is automatically enriched with usage, cre
 
 For each of these attributes, a score in `[0,1]` and binary class values are provided at mention-level and at document-level. For example, the following mention context indicates that the software `Mobyle` is shared. However, at document-level, other contexts further characterize the role of the software, indicating that it is also used and is a creation described in the research work corresponding to the document:
 
-```
+```json
 {
     "context": "Availability: The Mobyle system is distributed under the terms of the GNU GPLv2 on the project web site (http://bioweb2.pasteur.fr/ projects/mobyle/).",
     "mentionContextAttributes": {
@@ -905,6 +905,6 @@ GROBID and the Softcite software mentions module are distributed under [Apache 2
 
 The documentation of the project is distributed under [CC-0](https://creativecommons.org/publicdomain/zero/1.0/) license and the annotated data under [CC-BY](https://creativecommons.org/licenses/by/4.0/) license.
 
-If you contribute to Softcite Knowledge Base project, you agree to share your contribution following these licenses. 
+If you contribute to Softcite software mentions recogniton project, you agree to share your contribution following these licenses. 
 
 Contact: Patrice Lopez (<patrice.lopez@science-miner.com>)
