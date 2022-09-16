@@ -2,12 +2,15 @@
     Generate labeled dataset for software use classification using the Softcite corpus file.
     The produced dataset in JSON format is at sentence level, with usage information (target 
     binary class) and offset corresponding to the software mention annotations.
+
+    Alternatively use CSV file with document and sentence to process.
 """
 
 import os
 import argparse
 import ntpath
 import json
+import csv
 from collections import OrderedDict
 import xml
 from xml.sax import make_parser, handler
@@ -367,26 +370,82 @@ def export(config, xml_corpus, output_path):
     parser.setContentHandler(handler)
     parser.parse(xml_corpus)
 
+def export_csv(config, csv_corpus, output_path):
+    # format of the CSV file is (tab separated, it's a tsv file actually): 
+    # DOI   sentence    license 
+    corpus = {}
+    documents_doi = {}
+    documents = []
+    with open(csv_corpus) as csvfile:
+        
+        csvreader = csv.reader(csvfile, delimiter='\t')
+        for row in csvreader:
+            #print(str(row))
+            if len(row) != 3:
+                print("Invalid row: " + str(row))
+                continue
+
+            new_document = False
+            document_doi = row[0].strip()
+            if document_doi in documents_doi:
+                document = documents_doi[document_doi]
+            else:
+                new_document = True
+                document = {}
+                document["doi"] = document_doi
+                documents_doi[document_doi] = document
+                # add a full text URL
+                local_url = add_full_text_url(config, doi=document_doi)
+                if local_url != None:
+                    document["full_text_url"] = local_url
+        
+            sentence_structure = {}
+            #sentence_structure = OrderedDict()
+            text_content = row[1].strip()
+            prediction = predict_sentence_usage(config, text_content)
+            sentence_structure["class_attributes"] = prediction
+            sentence_structure["full_context"] = text_content
+            sentence_structure["text"] = text_content
+        
+            if "texts" not in document:
+                document["texts"] = []
+            document["texts"].append(sentence_structure)
+
+            if new_document:
+                documents.append(document)
+
+    corpus["documents"] = documents
+    if len(documents) > 0:
+        with open(output_path, 'w') as outfile:
+            json.dump(corpus, outfile, indent=4)
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description = "Generate labeled dataset for software use classification")
     parser.add_argument("--xml-corpus", type=str, 
         help="path to the TEI XML Softcite corpus file")
+    parser.add_argument("--csv-corpus", type=str, 
+        help="path to a CSV file with sentences to be processed")
     parser.add_argument("--output", type=str, 
         help="path where to generate the software use classification datsset JSON file")
     parser.add_argument("--config", default='config.json', help="configuration file to be used")
 
     args = parser.parse_args()
     xml_corpus = args.xml_corpus
+    csv_corpus = args.csv_corpus
     output_path = args.output
     config_path = args.config
+
+    config = load_config(path=config_path)
+
+    if csv_corpus is not None and os.path.isfile(csv_corpus):
+        export_csv(config, csv_corpus, output_path)
+        exit(0)
 
     # check path and call methods
     if xml_corpus is None or not os.path.isfile(xml_corpus):
         print("error: the path to the XML corpus files is not valid: ", xml_corpus)
         exit(0)
-
-    config = load_config(path=config_path)
 
     export(config, xml_corpus, output_path)
     test_json_wellformedness(output_path)
