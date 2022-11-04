@@ -2,6 +2,9 @@ package org.grobid.core.utilities;
 
 import java.io.*;
 import java.util.Iterator;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.xml.parsers.*;
 import javax.xml.transform.*;
@@ -323,6 +326,112 @@ public class XMLUtilities {
         }
         return out.toString();
     }    
+
+    private static List<String> textualElements = Arrays.asList("p", "figDesc");
+
+    /**
+     * Segment the text content of a TEI XML document into sentences under a particular node element.
+     * Sentence markers are using TEI <s> elements.
+     **/
+    public static void segment(org.w3c.dom.Document doc, Node node) {
+        final NodeList children = node.getChildNodes();
+        for (int i = 0; i < children.getLength(); i++) {
+            final Node n = children.item(i);
+            if ( (n.getNodeType() == Node.ELEMENT_NODE) && 
+                 (textualElements.contains(n.getNodeName())) ) {
+                // text content
+                //String text = n.getTextContent();
+                StringBuffer textBuffer = new StringBuffer();
+                NodeList childNodes = n.getChildNodes();
+                for(int y=0; y<childNodes.getLength(); y++) {
+                    textBuffer.append(serialize(doc, childNodes.item(y)));
+                    textBuffer.append(" ");
+                }
+                String text = textBuffer.toString();
+                //String theSentences[] = detector.sentDetect(text);
+                List<OffsetPosition> theSentenceBoundaries = SentenceUtilities.getInstance().runSentenceDetection(text);
+
+                // we're making a first pass to ensure that there is no element broken by the segmentation
+                List<String> sentences = new ArrayList<String>();
+                List<String> toConcatenate = new ArrayList<String>();
+                for(OffsetPosition sentPos : theSentenceBoundaries) {
+                    //System.out.println("new chunk: " + sent);
+                    String sent = text.substring(sentPos.start, sentPos.end);
+                    String newSent = sent;
+                    if (toConcatenate.size() != 0) {
+                        StringBuffer conc = new StringBuffer();
+                        for(String concat : toConcatenate) {
+                            conc.append(concat);
+                            conc.append(" ");
+                        }
+                        newSent = conc.toString() + sent;
+                    }
+                    String fullSent = "<s>" + newSent + "</s>";
+                    boolean fail = false;
+                    try {
+                        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+                        factory.setNamespaceAware(true);
+                        org.w3c.dom.Document d = factory.newDocumentBuilder().parse(new InputSource(new StringReader(fullSent)));                
+                    } catch(Exception e) {
+                        fail = true;
+                    }
+                    if (fail)
+                        toConcatenate.add(sent);
+                    else {
+                        sentences.add(fullSent);
+                        toConcatenate = new ArrayList<String>();
+                    }
+                }
+
+                List<Node> newNodes = new ArrayList<Node>();
+                for(String sent : sentences) {
+                    //System.out.println("-----------------");
+                    sent = sent.replace("\n", " ");
+                    sent = sent.replaceAll("( )+", " ");
+                
+                    //Element sentenceElement = doc.createElement("s");                        
+                    //sentenceElement.setTextContent(sent);
+                    //newNodes.add(sentenceElement);
+
+                    //System.out.println(sent);  
+
+                    try {
+                        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+                        factory.setNamespaceAware(true);
+                        org.w3c.dom.Document d = factory.newDocumentBuilder().parse(new InputSource(new StringReader(sent)));
+                        //d.getDocumentElement().normalize();
+                        Node newNode = doc.importNode(d.getDocumentElement(), true);
+                        newNodes.add(newNode);
+                        //System.out.println(serialize(doc, newNode));
+                    } catch(Exception e) {
+
+                    }
+                }
+
+                // remove old nodes 
+                while (n.hasChildNodes())
+                    n.removeChild(n.getFirstChild());
+
+                // and add new ones
+
+                // if we have a figDesc, we need to inject div/p nodes for dataseer-ml support
+                if (n.getNodeName().equals("figDesc")) {
+                    Element theDiv = doc.createElementNS("http://www.tei-c.org/ns/1.0", "div");
+                    Element theP = doc.createElementNS("http://www.tei-c.org/ns/1.0", "p");
+                    for(Node theNode : newNodes) 
+                        theP.appendChild(theNode);
+                    theDiv.appendChild(theP);
+                    n.appendChild(theDiv);
+                } else {
+                    for(Node theNode : newNodes) 
+                        n.appendChild(theNode);
+                }
+
+            } else if (n.getNodeType() == Node.ELEMENT_NODE) {
+                segment(doc, (Element) n);
+            }
+        }
+    }
 
     /**
      * Command line execution for cleaning the TEI training corpus.

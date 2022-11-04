@@ -164,7 +164,7 @@ public class XMLCorpusPostProcessorNoMention {
             FileUtils.writeStringToFile(new File(newXmlCorpusPath.replace(".tei.xml", "-full-with_unmatched.tei.xml")), tei, UTF_8);        
 
             // write a more compact TEI file with no mention entries + without the non aligned segments (<ab>)
-            // + without subtype="used" 
+            // + without role="used" 
             try {
                 DocumentBuilder builder = factory.newDocumentBuilder();
                 document = builder.parse(new InputSource(new StringReader(tei)));
@@ -172,6 +172,9 @@ public class XMLCorpusPostProcessorNoMention {
                 tei = XMLUtilities.serialize(document, null);
 
                 document = builder.parse(new InputSource(new StringReader(tei)));
+
+                // inject curated software usage attributes
+                document = correctSoftwareUsage(document);
 
                 // inject description notes for full corpus without <ab>
                 document = injectDescriptionNotes(document, true, false);
@@ -197,7 +200,7 @@ public class XMLCorpusPostProcessorNoMention {
             FileUtils.writeStringToFile(new File(newXmlCorpusPath.replace(".tei.xml", "-full.tei.xml")), tei, UTF_8);        
 
             // write a more compact TEI file without no mention entries and without the non aligned segments (<ab>) +
-            // without subtype="used" 
+            // without role="used" 
             try {
                 DocumentBuilder builder = factory.newDocumentBuilder();
                 document = builder.parse(new InputSource(new StringReader(tei)));
@@ -205,6 +208,9 @@ public class XMLCorpusPostProcessorNoMention {
                 tei = XMLUtilities.serialize(document, null);
 
                 document = builder.parse(new InputSource(new StringReader(tei)));
+
+                // inject curated software usage attributes
+                document = correctSoftwareUsage(document);
 
                 // inject description notes for (default) "compact" corpus
                 document = injectDescriptionNotes(document, false, false);
@@ -624,10 +630,19 @@ public class XMLCorpusPostProcessorNoMention {
                                 rs.addAttribute(new Attribute("type", "software"));
                                 rs.addAttribute(new Attribute("xml:id", "http://www.w3.org/XML/1998/namespace", docName+"-software-"+index_entity));
                                 
+                                // do we have a subtype? 
+                                if (inlineAnnotation.getAttributeValue("subtype") != null) {
+                                    rs.addAttribute(new Attribute("subtype", inlineAnnotation.getAttributeValue("subtype")));
+                                }
+
+                                // possible corresp to link to environment
+
+
+
                                 // do we have a "software_was_used" information?
                                 if (localAnnotation.getIsUsed()) {
                                     // add an attribute
-                                    rs.addAttribute(new Attribute("subtype", "used"));
+                                    rs.addAttribute(new Attribute("role", "used"));
                                 }
 
                                 // add certainty provided by annotator
@@ -640,9 +655,18 @@ public class XMLCorpusPostProcessorNoMention {
                                 rs.addAttribute(new Attribute("corresp", "#" + docName + "-software-"+index_entity));
                             } else if (inlineAnnotation.getAttributeValue("type").equals("publisher")) {
                                 rs.addAttribute(new Attribute("type", "publisher"));
+
+                                // do we have a subtype? ("person" as a unique possibility normally)
+                                if (inlineAnnotation.getAttributeValue("subtype") != null) {
+                                    rs.addAttribute(new Attribute("subtype", inlineAnnotation.getAttributeValue("subtype")));
+                                }
+
                                 rs.addAttribute(new Attribute("corresp", "#" + docName + "-software-"+index_entity));
                             } else if (inlineAnnotation.getAttributeValue("type").equals("url")) {
                                 rs.addAttribute(new Attribute("type", "url"));
+                                rs.addAttribute(new Attribute("corresp", "#" + docName + "-software-"+index_entity));
+                            } else if (inlineAnnotation.getAttributeValue("type").equals("language")) {
+                                rs.addAttribute(new Attribute("type", "language"));
                                 rs.addAttribute(new Attribute("corresp", "#" + docName + "-software-"+index_entity));
                             }
 
@@ -901,10 +925,18 @@ public class XMLCorpusPostProcessorNoMention {
                     rs.addAttribute(new Attribute("type", "software"));
                     rs.addAttribute(new Attribute("xml:id", "http://www.w3.org/XML/1998/namespace", docName+"-software-"+index_entity));
                     
+                    // do we have a subtype? 
+                    if (inlineAnnotation.getAttributeValue("subtype") != null) {
+                        rs.addAttribute(new Attribute("subtype", inlineAnnotation.getAttributeValue("subtype")));
+                    }
+
+                    // possible corresp to link to environment
+
+
                     // do we have a "software_was_used" information?
                     if (localAnnotation.getIsUsed()) {
                         // add an attribute
-                        rs.addAttribute(new Attribute("subtype", "used"));
+                        rs.addAttribute(new Attribute("role", "used"));
                     }
 
                     // add certainty provided by annotator
@@ -918,6 +950,12 @@ public class XMLCorpusPostProcessorNoMention {
                 } else if (inlineAnnotation.getAttributeValue("type").equals("publisher")) {
                     rs.addAttribute(new Attribute("type", "publisher"));
                     rs.addAttribute(new Attribute("corresp", "#" + docName + "-software-"+index_entity));
+
+                    // do we have a subtype? ("person" as a unique possibility normally)
+                    if (inlineAnnotation.getAttributeValue("subtype") != null) {
+                        rs.addAttribute(new Attribute("subtype", inlineAnnotation.getAttributeValue("subtype")));
+                    }
+
                 } else if (inlineAnnotation.getAttributeValue("type").equals("url")) {
                     rs.addAttribute(new Attribute("type", "url"));
                     rs.addAttribute(new Attribute("corresp", "#" + docName + "-software-"+index_entity));
@@ -1346,15 +1384,22 @@ public class XMLCorpusPostProcessorNoMention {
 
                         fileDescElement.setAttribute("xml:id", newDocId);
 
-                        // keep a trace of the ID under sourceDesc/bibl/idno @origin
+                        // keep a trace of the ID under sourceDesc/bibl/idno @origin (if not already present)
                         org.w3c.dom.Element sourceDescElement = XMLUtilities.getFirstDirectChild(fileDescElement, "sourceDesc");
                         if (sourceDescElement != null) {
                             org.w3c.dom.Element biblElement = XMLUtilities.getFirstDirectChild(sourceDescElement, "bibl");
                             if (biblElement != null) {
-                                org.w3c.dom.Element idnoElement =  document.createElement("idno");
-                                idnoElement.setAttribute("type", "origin");
-                                idnoElement.setTextContent(docId);
-                                biblElement.appendChild(idnoElement);
+                                // do we already have an idno element of type origin? 
+                                XPath xpath2 = xpathFactory.newXPath();
+                                XPathExpression expr2 = xpath2.compile(".//idno[@type='origin']");
+                                NodeList result2 = (NodeList)expr.evaluate(biblElement, XPathConstants.NODESET);
+                                NodeList nodes2 = (NodeList) result2;
+                                if (nodes2.getLength() == 0) {
+                                    org.w3c.dom.Element idnoElement =  document.createElement("idno");
+                                    idnoElement.setAttribute("type", "origin");
+                                    idnoElement.setTextContent(docId);
+                                    biblElement.appendChild(idnoElement);
+                                }
                             }
                         }
 
@@ -1430,9 +1475,9 @@ public class XMLCorpusPostProcessorNoMention {
                 }
                 if (localId != null && this.softwareUsages.get(localId) != null) {
                     if (this.softwareUsages.get(localId).booleanValue())
-                        rsElement.setAttribute("subtype", "used");
+                        rsElement.setAttribute("role", "used");
                     else 
-                        rsElement.removeAttribute("subtype");
+                        rsElement.removeAttribute("role");
 
                     consumed.add(localId);
                 }
@@ -1467,11 +1512,11 @@ public class XMLCorpusPostProcessorNoMention {
             theElement.getParentNode().removeChild(theElement);
         }
 
-        // remove subtype="used" on <rs>
+        // remove role="used" on <rs>
         theElements = document.getElementsByTagName("rs");
         for(int i=theElements.getLength()-1; i >= 0; i--) {
             org.w3c.dom.Element theElement = (org.w3c.dom.Element)theElements.item(i);
-            theElement.removeAttribute("subtype");
+            theElement.removeAttribute("role");
 
         }
 
@@ -1804,6 +1849,8 @@ public class XMLCorpusPostProcessorNoMention {
         tei = tei.replaceAll("</ref>\n( )*</p>", "</ref></p>");
         tei = tei.replaceAll("</ref>\n( )*<rs ", "</ref> <rs ");
         tei = tei.replaceAll("xmlns=\"\" ", "");
+        tei = tei.replaceAll("        <ref type=\"bibr\">.*</ref>\n", "");
+        tei = tei.replaceAll("<ref target=\"#b\\d+\" type=\"bibr\">", "<ref type=\"bibr\">");
         return tei;
     }
 
@@ -1910,6 +1957,10 @@ public class XMLCorpusPostProcessorNoMention {
      * Map the origin identifier (the identifier used sor the PDF file names) to a stable generated hexa identifier
      */
     public String orgin2KeyGen(String origin) {
+        // check if it's not already an hexa key
+        if (origin.length() == 10 && !origin.startsWith("PMC") && !origin.startsWith("10."))
+            return origin;
+
         if (this.orgin2Key == null) {
             this.orgin2Key = new TreeMap<>();
             // load the map from the csv id file

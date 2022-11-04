@@ -199,7 +199,7 @@ public class XMLCorpusPostProcessor {
                                     // do we have a "software_was_used" information?
                                     if (annotation.getIsUsed()) {
                                         // add an attribute
-                                        entityElement.setAttribute("subtype", "used");
+                                        entityElement.setAttribute("role", "used");
                                     }
 
                                     // add certainty provided by annotator
