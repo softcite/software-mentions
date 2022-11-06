@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teiCorpus xmlns="http://www.tei-c.org/ns/1.0" version="4.0.0">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>Softcite annotated corpus</title>
+        <respStmt>
+          <resp>Principal Investigator</resp>
+          <name>James Howison</name>
+        </respStmt>
+        </titleStmt>
+      <notesStmt>
+        <note>The Softcite dataset is a gold standard corpus of manually annotated software mentions from academic PDFs.</note>
+        <note>This corpus file contains one TEI entry per scholar publication having at least one software mention. Each paragraph containing at least one manually annotated software mentions is encoded under the TEI body element. All the manual annotations under p elements (paragraph) have been further validated or corrected by a curator to reach a final decision.</note>
+      </notesStmt>
+      <publicationStmt>
+        <publisher>Howison Lab, University of Texas at Austin, School of Information</publisher>
+        <date when="2022"/>
+        <availability status="free">
+          <licence target="https://creativecommons.org/licenses/by/4.0/">
+            <p>
+              <s>Attribution 4.0 International (CC BY 4.0)</s>
+            </p>
+          </licence>
+        </availability>
+      </publicationStmt>
+      <sourceDesc>
+        <bibl>Softcite corpus, version 1.0.0, 2022</bibl>
+      </sourceDesc>
+    </fileDesc>
+    <encodingDesc>
+      <appInfo>
+        <application ident="GROBID" version="0.5.6-SNAPSHOT" when="2019-07-14T13:21+0000">
+          <desc>A machine learning software for extracting information from scholarly documents</desc>
+          <ref target="https://github.com/kermitt2/grobid"/>
+        </application>
+        <application ident="GROBID-SOFTWARE-MENTIONS" version="0.6.0-SNAPSHOT" when="2019-11-21T14:59+0000">
+          <desc>A GROBID module to recognize in textual documents and PDF any mentions of software</desc>
+          <ref target="https://github.com/ourresearch/software-mentions"/>
+        </application>
+      </appInfo>
+      <classDecl>
+        <taxonomy>
+          <category xml:id="unique_annotator">
+            <catDesc>Document originally analyzed by one annotator</catDesc>
+          </category>
+          <category xml:id="multiple_annotators">
+            <catDesc>Document originally analyzed by more than one annotator</catDesc>
+          </category>
+          <category xml:id="with_reconciliation">
+            <catDesc>Document analyzed by one or more annotators with review by the curator team</catDesc>
+          </category>
+          <category xml:id="with_reconciliation_and_scripts">
+            <catDesc>Document analyzed by one or more annotators with review by the curator team, combined with additional corrections driven by automated consistency checks</catDesc>
+          </category>
+        </taxonomy>
+      </classDecl>
+    </encodingDesc>
+  </teiHeader>
+  <TEI subtype="pmc" type="article" xmlns="http://www.tei-c.org/ns/1.0">
+    <teiHeader>
+      <fileDesc xml:id="a7f72b2925">
+        <titleStmt>
+          <title>A comparative study of collimation in bedside chest radiography for preterm infants in two teaching hospitals</title>
+        </titleStmt>
+        <sourceDesc>
+          <bibl>
+            <idno type="DOI">10.1016/j.ejro.2015.07.002</idno>
+            <idno type="PMC">PMC4750616</idno>
+            <idno type="PMID">26937444</idno>
+          </bibl>
+        </sourceDesc>
+      </fileDesc>
+      <encodingDesc/>
+      <profileDesc>
+        <textClass>
+          <catRef target="#with_reconciliation_and_scripts"/>
+          <catRef target="#unique_annotator"/>
+        </textClass>
+      </profileDesc>
+    </teiHeader>
+    <text xml:lang="en">
+      <body>
+        <p>Two experienced radiologists (JCS and IK-S) evaluated the image quality, based on the exposure of non-thoracic structures. They determined the most superior and inferior parts of the body, as well as the lateral structures, which had been included within the boundaries of collimation on each chest X-ray. The readers performed their evaluations according to the European Guidelines on Quality Criteria for Diagnostic Radiographic Images in Paediatrics <ref type="bibr">[12]</ref>. A grading system was used to measure image quality in terms of correct collimation. Inappropriate exposure of abdominal viscera was assumed when the caudal imaging field extended below the level of L1/2 (1 point). Exposure of the cranial structures was considered inappropriate when the collimated field included more than the tip of the mandible (1 point). Inappropriate exposure of the arms was assumed when more than the diametaphyseal junction of the proximal humerus came within the field of view: part of the diaphyseal humerus (1 point); entire humerus (2 points); part of the forearm (1 point); entire forearm (2 points); hand (1 point). The maximum score was 12 points. The image quality in terms of correct collimation was graded arbitrarily as follows: 0 points = optimal image quality; 1-2 points = slightly reduced; 3-4 = moderately reduced; 5-6 = markedly reduced; and &gt;7 points = severely reduced <ref type="figure">Fig. 1</ref>). Rotation and tilting were also recorded. Radiographic errors were recorded on individual tick sheets and the information was captured in an <rs cert="1.0" resp="#annotator0" type="software" xml:id="a7f72b2925-software-0">Excel</rs> spreadsheet (<rs corresp="#a7f72b2925-software-0" resp="#curator" type="publisher">Microsoft</rs>, Redmond, WA). The readers resolved any differences by consensus.</p>
+        <p>Optimal 0.32 * 0.39 * Sub-optimal 0.68 0.61 1-2 parts exposed Slightly reduced 0.48 0.49 3-4 parts exposed Moderately reduced 0.17 0.08 5-6 parts exposed Markedly reduced 0.02 0.04 &gt;7 parts exposed Severely reduced 0.01 0.00 rected for continuity) was used to calculate differences between the hospitals, as well as between optimal and suboptimal images with respect to age, gestation, number of tubes and catheters, radiographer, and the number of years' experience. Student's t test was used to calculate differences between DAPs. The Spearman rank correlation coefficient was used to analyse the correlation between the radiographer's experience in performing X-rays and collimation quality. A level of p &lt; 0.05 was regarded as statistically significant. Analyses were performed using <rs cert="1.0" resp="#annotator0" subtype="environment" type="software" xml:id="a7f72b2925-software-1">SAS</rs> statistical software (version <rs corresp="#a7f72b2925-software-1" resp="#annotator0" type="version">9.1</rs>; <rs corresp="#a7f72b2925-software-1" resp="#curator" type="publisher">SAS Institute</rs>, Cary, NC).</p>
+      </body>
+    </text>
+  </TEI>
+  <TEI subtype="pmc" type="article" xmlns="http://www.tei-c.org/ns/1.0">
+    <teiHeader>
+      <fileDesc xml:id="b991b33626">
+        <titleStmt>
+          <title>NaHCO3 enhances the antitumor activities of cytokine-induced killer cells against hepatocellular carcinoma HepG2 cells</title>
+        </titleStmt>
+        <sourceDesc>
+          <bibl>
+            <idno type="DOI">10.3892/ol.2016.5112</idno>
+            <idno type="PMC">PMC5103916</idno>
+            <idno type="PMID">27899977</idno>
+          </bibl>
+        </sourceDesc>
+      </fileDesc>
+      <encodingDesc/>
+      <profileDesc>
+        <textClass>
+          <catRef target="#with_reconciliation_and_scripts"/>
+          <catRef target="#unique_annotator"/>
+        </textClass>
+      </profileDesc>
+    </teiHeader>
+    <text xml:lang="en">
+      <body>
+        <p>
+          <s>Statistical analysis.</s>
+          <s>Differences between groups were compared using analysis of variance, and the least significant difference test was used for multiple mean comparisons.</s>
+          <s>P&lt;0.05 was considered to indicate a statistically significant difference.</s>
+          <s>Statistical analysis was conducted using <rs resp="#curator" subtype="environment" type="software" xml:id="b991b33626-software-0">SPSS</rs> software v <rs corresp="#b991b33626-software-0" resp="#annotator1" type="version">13.0</rs> ( <rs corresp="#b991b33626-software-0" resp="#curator" type="publisher">SPSS Inc</rs> ., Chicago, IL, USA).</s>
+        </p>
+        <p>
+          <s>Preparation of CIK cells.</s>
+          <s>Peripheral blood mononuclear cells (PBMCs) were isolated from peripheral blood by standard Ficoll separation, as previously described <ref type="bibr">(5)</ref> .</s>
+          <s>Human peripheral blood samples were obtained with full informed consent from patients with HCC.</s>
+          <s>In total, six samples were collected between January 2014 and July 2014 at the Department of Gastroenterology of Renmin Hospital, Hubei University of Medicine (Shiyan, China).</s>
+          <s>The isolated cells were resuspended in RPMI-1640 medium supplemented with 1,000 U/ml interferon (IFN)-γ (R&amp;D Systems, Inc., Minneapolis, MN, USA) and incubated at 37˚C for 24 h.</s>
+          <s>Then, recombinant human interleukin (IL)-2 protein (cat.</s>
+          <s>no.</s>
+          <s>202-IL-050; R&amp;D Systems, Inc.) and mouse anti-cluster of differentiation (CD)3 monoclonal antibody (cat.</s>
+          <s>no.</s>
+          <s>MAB100; dilution, 1:1,000; R&amp;D Systems, Inc.) were added at 500 U/ml and 50 ng/ml, respectively.</s>
+          <s>Subsequently, the cells were refreshed with RPMI-1640 medium supplemented with IL-2 (500 U/ml) every other day for 10 days prior to being subjected to flow cytometry analysis.</s>
+          <s>
+            <ref type="bibr">6</ref> CIK cells were harvested and washed once with phosphate-buffered saline (PBS) containing 1% bovine serum albumin (BSA; Beyotime Institute of Biotechnology, Haimen, China), and resuspended in 100 µl PBS/BSA.</s>
+          <s>The cells were then incubated with the above conjugated monoclonal antibodies separately for 20 min at 4 o C, washed twice with PBS and resuspended in 400 µl PBS.</s>
+          <s>Flow cytometric analysis was performed with a BD FACSCalibur™ flow cytometer (BD Biosciences), and the data were analyzed using the <rs resp="#curator" type="software" xml:id="b991b33626-software-100">WinMDI</rs> software, version <rs corresp="#b991b33626-software-100" resp="#curator" type="version">2.9</rs>
+          </s>
+          <s>(The <rs corresp="#b991b33626-software-100" resp="#curator" type="publisher">Scripps Research Institute</rs> , La Jolla, CA, USA).</s>
+          <s>The dead cells and debris were gated out.</s>
+        </p>
+      </body>
+    </text>
+  </TEI>
+  <TEI subtype="pmc" type="article" xmlns="http://www.tei-c.org/ns/1.0">
+    <teiHeader>
+      <fileDesc xml:id="f204e3a468">
+        <titleStmt>
+          <title>Deep brain stimulation of globus pallidus internus for DYT1 posi- tive primary generalized dystonia</title>
+        </titleStmt>
+        <sourceDesc>
+          <bibl>
+            <idno type="PMC">PMC4153526</idno>
+          </bibl>
+        </sourceDesc>
+      </fileDesc>
+      <encodingDesc/>
+      <profileDesc>
+        <textClass>
+          <catRef target="#with_reconciliation_and_scripts"/>
+          <catRef target="#multiple_annotator"/>
+        </textClass>
+      </profileDesc>
+    </teiHeader>
+    <text xml:lang="en">
+      <body>
+        <p>
+          <s>The mean and standard deviation of patient's age, disease and follow up duration, in addition to pre-and post-operative BFMDS scores were calculated.</s>
+          <s>According to the normal distribution of data, the paired t-test was used to compare changes of the BFMDS before and after surgery.</s>
+          <s>We correlated post-operative BFMDRS with patients' age, disease duration, age at the time of surgery and pre-operative BFMDRS.A probability value less than 0.05 was considered to be significant.</s>
+          <s>The <rs cert="1.0" resp="#annotator0" subtype="environment" type="software" xml:id="f204e3a468-software-0">SPSS</rs> software version <rs corresp="#f204e3a468-software-0" resp="#annotator0" type="version">11.0</rs> ( <rs corresp="#f204e3a468-software-0" resp="#curator" type="publisher">SPSS Inc</rs> ., Chicago, USA) was used for the statistical analysis.</s>
+        </p>
+      </body>
+    </text>
+  </TEI>
+</teiCorpus>
