@@ -94,6 +94,8 @@ class TEICorpusHandler(xml.sax.ContentHandler):
                 if "subtype" in attrs:
                     if attrs.getValue("subtype") == "used":
                         self.current_entity["used"] = True
+                    else:
+                        self.current_entity["subtype"] = attrs.getValue("subtype")
                 if "xml:id" in attrs:
                     self.current_entity["id"] = attrs.getValue("xml:id")
                 if "corresp" in attrs:
