@@ -20,6 +20,7 @@ import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.Pair;
 import org.grobid.core.utilities.SoftwareConfiguration;
+import org.grobid.core.utilities.GrobidConfig.ModelParameters;
 import org.grobid.core.utilities.XMLUtilities;
 import org.grobid.trainer.evaluation.EvaluationUtilities;
 import org.grobid.core.engines.tagging.GenericTagger;
@@ -118,12 +119,12 @@ public class SoftwareTrainer extends AbstractTrainer {
                                final File evalOutputPath,
                                double splitRatio,
                                boolean splitRandom) {
-        return createCRFPPData(corpusDir, trainingOutputPath, evalOutputPath, splitRatio, true, 0);
+        return createCRFPPData(corpusDir, trainingOutputPath, evalOutputPath, splitRatio, true, 2);
     }
 
 
     /**
-     * CRF training data here are produced from the unique training TEI file containing labelled paragraphs only
+     * Training data here are produced from the unique training TEI file containing labelled paragraphs only
      *
      * Negative example modes: 
      * 0 -> no added negative examples
@@ -165,7 +166,8 @@ public class SoftwareTrainer extends AbstractTrainer {
             SoftwareAnnotationSaxHandler handler = new SoftwareAnnotationSaxHandler();
             
             // train and split / 10-fold cross evaluation or training with full corpus for production
-            final String corpus_file_name = "softcite_corpus-full.tei.xml";
+            //final String corpus_file_name = "softcite_corpus-full.tei.xml";
+            final String corpus_file_name = "all_clean_post_processed-full.tei.xml";
             
             // cross domain eval
             //final String corpus_file_name = "softcite_corpus_pmc-compact.tei.xml";
@@ -731,7 +733,7 @@ public class SoftwareTrainer extends AbstractTrainer {
     }*/
 
     @SuppressWarnings({"UnusedParameters"})
-    protected void addFeatures(List<Pair<String, String>> texts,
+    static public void addFeatures(List<Pair<String, String>> texts,
                              Writer writer,
                              List<OffsetPosition> softwareTokenPositions,
                              List<OffsetPosition> urlPositions) {
@@ -796,7 +798,7 @@ public class SoftwareTrainer extends AbstractTrainer {
 
                 FeaturesVectorSoftware featuresVector =
                         FeaturesVectorSoftware.addFeaturesSoftware(token, label, 
-                            softwareLexicon.inSoftwareDictionary(token), isSoftwarePattern, isUrl);
+                            SoftwareLexicon.getInstance().inSoftwareDictionary(token), isSoftwarePattern, isUrl);
                 if (featuresVector.label == null)
                     continue;
                 writer.write(featuresVector.printVector());
@@ -991,7 +993,8 @@ public class SoftwareTrainer extends AbstractTrainer {
                         }
 
                         // if we want to avoid selecting the same paragraphs as the model-driven selection
-                        // run the mention recognizer and check if we have annotations
+                        // run the mention recognizer and check if we have annotations 
+                        // note that then it's not anymore really random, so just for experimenting
                         /*List<SoftwareEntity> entities = parser.processText(text, false);
                         if (entities != null && entities.size() > 0) {
                             toRemove.add(new Integer(i));
@@ -1098,11 +1101,11 @@ public class SoftwareTrainer extends AbstractTrainer {
     }
 
     protected final File getCorpusPath() {
-        return new File(conf.getCorpusPath());
+        return new File(conf.getCorpusPath() + "/software/corpus/");
     }
 
     protected final File getTemplatePath() {
-        return new File(conf.getTemplatePath());
+        return new File(conf.getCorpusPath() + "/software/crfpp-templates/software.template");
     }
 
     /**
@@ -1117,22 +1120,16 @@ public class SoftwareTrainer extends AbstractTrainer {
             conf = mapper.readValue(new File("resources/config/config.yml"), SoftwareConfiguration.class);
             String pGrobidHome = conf.getGrobidHome();
 
-            //String pGrobidHome = SoftwareProperties.get("grobid.home");
-
             GrobidHomeFinder grobidHomeFinder = new GrobidHomeFinder(Arrays.asList(pGrobidHome));
             GrobidProperties.getInstance(grobidHomeFinder);
     
             System.out.println(">>>>>>>> GROBID_HOME="+GrobidProperties.get_GROBID_HOME_PATH());
 
-            if (conf != null && conf.getModel() != null)
-                GrobidProperties.addModel(conf.getModel());
+            if (conf != null && conf.getModel("software") != null) {
+                for (ModelParameters model : conf.getModels()) 
+                    GrobidProperties.getInstance().addModel(model);
+            }
             LibraryLoader.load();
-
-            /*if (conf != null &&
-                conf.getEngine() != null && 
-                conf.getEngine().equals("delft"))
-                GrobidProperties.setPropertyValue(GrobidPropertyKeys.PROP_GROBID_CRF_ENGINE + ".software", "delft");
-            LibraryLoader.load();*/
 
         } catch (final Exception exp) {
             System.err.println("GROBID software initialisation failed: " + exp);

@@ -3,6 +3,7 @@ package org.grobid.trainer;
 import org.grobid.core.analyzers.SoftwareAnalyzer;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.utilities.Pair;
+import org.grobid.core.utilities.SentenceUtilities;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -29,12 +30,30 @@ public class SoftwareAnnotationSaxHandler extends DefaultHandler {
     private List<Pair<String, String>> labeled = null; // store line by line the labeled data of the current paragraph
 
     // labeling for current document
-    private List<List<Pair<String, String>>> labeledDoc = null; // accumulated paragraphs
-
+    private List<List<Pair<String, String>>> labeledDoc = null; // accumulated paragraphs/sentences
+    private List<Boolean> labeledSoftwareMarkers = null; // mark if accumulated paragraphs/sentences has at least a software label
+    
     // global labeling, one list for the documents, one list for the paragraphs, one list for the words of the paragraph
     private List<List<List<Pair<String, String>>>> allLabeled = null; // accumulated documents
+    private List<List<Boolean>> allLabeledSoftwareMarkers = null; // mark if accumulated document has at least a software label
+
+    private boolean hasSoftware = false;
+
+    // if type mode, we generate labels relative to the software typing
+    private boolean typeMode = false;
+
+    // by default we process input at paragraph level, if sentence level is true, we use sentences
+    private boolean sentenceLevel = false;
 
     public SoftwareAnnotationSaxHandler() {
+    }
+
+    public void setTypeMode(boolean mode) {
+        this.typeMode = mode;
+    }
+
+    public void setSentenceLevel(boolean sentenceLevel) {
+        this.sentenceLevel = sentenceLevel;
     }
 
     public void characters(char[] buffer, int start, int length) {
@@ -54,28 +73,36 @@ public class SoftwareAnnotationSaxHandler extends DefaultHandler {
         return allLabeled;
     }
 
+    public List<List<Boolean>> getAllLabeledSoftwareFlags() {
+        return allLabeledSoftwareMarkers;
+    }
+
     public void endElement(java.lang.String uri,
                            java.lang.String localName,
                            java.lang.String qName) throws SAXException {
         try {
-            /*if ((!qName.equals("lb")) && (!qName.equals("pb"))) {
-                writeData(qName);
-                currentTag = null;
-            }*/
             if (qName.equals("rs")) {
                	writeData(qName);
                 currentTag = "<other>";
-			} else if (qName.equals("p") || qName.equals("paragraph")) {
-                // let's consider a new sequence per paragraph too
+			} else if (qName.equals("s") && sentenceLevel) {
+                // in sentence level mode, we have one sequence per sentence
                 writeData(qName);
-                //labeled.add(new Pair("\n", null));
-                if (labeledDoc != null)
+                if (labeledDoc != null) {
                     labeledDoc.add(labeled);
+                    labeledSoftwareMarkers.add(hasSoftware);
+                }
+            } else if ( (qName.equals("p") || qName.equals("paragraph")) && !sentenceLevel) {
+                // let's consider a new sequence per paragraph when we are not working at sentence level
+                writeData(qName);
+                if (labeledDoc != null) {
+                    labeledDoc.add(labeled);
+                    labeledSoftwareMarkers.add(hasSoftware);
+                }
             } else if (qName.equals("TEI")) {
                 allLabeled.add(labeledDoc);
+                allLabeledSoftwareMarkers.add(labeledSoftwareMarkers);
             }
         } catch (Exception e) {
-//		    e.printStackTrace();
             throw new GrobidException("An exception occured while running Grobid.", e);
         }
     }
@@ -111,33 +138,56 @@ public class SoftwareAnnotationSaxHandler extends DefaultHandler {
 
                         if ((name != null) && (value != null)) {
                             if (name.equals("type")) {
-                                if (value.equals("software")) {
-                                    currentTag = "<software>";
-								} /*else if (value.equals("version-number")) {
-                                    currentTag = "<version-number>";
-                                } else if (value.equals("version-date")) {
-                                    currentTag = "<version-date>";
-                                }*/ else if (value.equals("url")) {
-                                    currentTag = "<url>";
-                                } else if (value.equals("creator") || value.equals("publisher")) {
-                                    currentTag = "<creator>";
-                                } else if (value.equals("version")) {
-                                    currentTag = "<version>";
-                                }else {
-                               	 	System.out.println("Warning: unknown entity attribute name, " + value);
-                            	}
-							}
+                                if (!typeMode) {
+                                    if (value.equals("software")) {
+                                        currentTag = "<software>";
+                                        hasSoftware = true;
+    								} else if (value.equals("url")) {
+                                        currentTag = "<url>";
+                                    } else if (value.equals("creator") || value.equals("publisher")) {
+                                        currentTag = "<creator>";
+                                    } else if (value.equals("version")) {
+                                        currentTag = "<version>";
+                                    } else if (!value.equals("language")) {
+                                   	 	System.out.println("Warning: unknown entity attribute name, " + value);
+                                	}
+                                } else if (value.equals("language")) {
+                                    currentTag = "<language>";
+                                } else if (value.equals("software")) {
+                                    hasSoftware = true;
+                                } 
+							} else if (name.equals("subtype") && typeMode) {
+                                if (value.equals("environment")) {
+                                    currentTag = "<environment>";
+                                } else if (value.equals("component")) {
+                                    currentTag = "<component>";
+                                } else if (value.equals("implicit")) {
+                                    currentTag = "<implicit>";
+                                } else {
+                                    if (!value.equals("person") && !value.equals("url")) {
+                                        System.out.println("Warning: unknown entity attribute name, " + value);
+                                    }
+                                }
+                            }
                         }
                     }
                 } else if (qName.equals("teiCorpus")) {
                     allLabeled = new ArrayList<>();
-                } else if (qName.equals("p")) {
+                    allLabeledSoftwareMarkers = new ArrayList<>();
+                    hasSoftware = false;
+                } else if ((qName.equals("p") || qName.equals("paragraph")) && !sentenceLevel) {
                     labeled = new ArrayList<>();
+                    hasSoftware = false;
+                } else if (qName.equals("s") && sentenceLevel) {
+                    labeled = new ArrayList<>();
+                    hasSoftware = false;
                 } else if (qName.equals("tei") || qName.equals("TEI")) {
                     labeledDoc = new ArrayList<>();
+                    labeledSoftwareMarkers = new ArrayList<>();
                     accumulator = new StringBuffer();
                     currentTag = null;
                     ignore = true;
+                    hasSoftware = false;
                 } 
             }
         } catch (Exception e) {
@@ -147,12 +197,15 @@ public class SoftwareAnnotationSaxHandler extends DefaultHandler {
     }
 
     private void writeData(String qName) {
+//if (currentTag != null && !currentTag.equals("<other>"))
+//System.out.println(currentTag + " -> " + getText());
         if (currentTag == null)
             currentTag = "<other>";
         if ((qName.equals("other")) ||
                 (qName.equals("rs")) ||
                 (qName.equals("paragraph")) || 
                 (qName.equals("p")) ||
+                (qName.equals("s")) ||
                 (qName.equals("ref")) ||
                 (qName.equals("div"))) {
             String text = getText();

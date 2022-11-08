@@ -151,20 +151,20 @@ public class XMLCorpusPostProcessorNoMention {
 
             tei = XMLUtilities.serialize(document, null);
             tei = reformatTEI(tei);
+
+            if (tei != null) 
+                FileUtils.writeStringToFile(new File(newXmlCorpusPath.replace(".tei.xml", "-full-with_unmatched.tei.xml")), tei, UTF_8);    
         } catch(ParserConfigurationException e) {
             e.printStackTrace();
         } catch(IOException e) {
             e.printStackTrace();
         } catch(Exception e) {
             e.printStackTrace();
-        } 
+        }
 
-        // write updated full TEI file without unmatched quotes/mentions as <ab>
+        // write a more compact TEI file with no mention entries and without the non aligned segments (<ab>),
+        // without role="used", without sentence segmentation, but with no mention entries
         if (tei != null) {
-            FileUtils.writeStringToFile(new File(newXmlCorpusPath.replace(".tei.xml", "-full-with_unmatched.tei.xml")), tei, UTF_8);        
-
-            // write a more compact TEI file with no mention entries + without the non aligned segments (<ab>)
-            // + without role="used" 
             try {
                 DocumentBuilder builder = factory.newDocumentBuilder();
                 document = builder.parse(new InputSource(new StringReader(tei)));
@@ -173,14 +173,16 @@ public class XMLCorpusPostProcessorNoMention {
 
                 document = builder.parse(new InputSource(new StringReader(tei)));
 
-                // inject curated software usage attributes
-                document = correctSoftwareUsage(document);
-
                 // inject description notes for full corpus without <ab>
                 document = injectDescriptionNotes(document, true, false);
 
                 tei = XMLUtilities.serialize(document, null);
                 tei = reformatTEI(tei);
+
+                // write updated full TEI file
+                if (tei != null) 
+                    FileUtils.writeStringToFile(new File(newXmlCorpusPath.replace(".tei.xml", "-full.tei.xml")), tei, UTF_8);  
+            
             } catch(ParserConfigurationException e) {
                 e.printStackTrace();
             } catch(IOException e) {
@@ -188,19 +190,11 @@ public class XMLCorpusPostProcessorNoMention {
             } catch(Exception e) {
                 e.printStackTrace();
             } 
-
-            // write updated full TEI file
-            if (tei != null) {
-                FileUtils.writeStringToFile(new File(newXmlCorpusPath), tei, UTF_8);
-            }
         }
 
-        // write updated compact TEI file
+        // write a more compact TEI file without no mention entries and without the non aligned segments (<ab>), 
+        // without role="used" and without sentence segmentation
         if (tei != null) {
-            FileUtils.writeStringToFile(new File(newXmlCorpusPath.replace(".tei.xml", "-full.tei.xml")), tei, UTF_8);        
-
-            // write a more compact TEI file without no mention entries and without the non aligned segments (<ab>) +
-            // without role="used" 
             try {
                 DocumentBuilder builder = factory.newDocumentBuilder();
                 document = builder.parse(new InputSource(new StringReader(tei)));
@@ -209,14 +203,16 @@ public class XMLCorpusPostProcessorNoMention {
 
                 document = builder.parse(new InputSource(new StringReader(tei)));
 
-                // inject curated software usage attributes
-                document = correctSoftwareUsage(document);
-
                 // inject description notes for (default) "compact" corpus
                 document = injectDescriptionNotes(document, false, false);
 
                 tei = XMLUtilities.serialize(document, null);
                 tei = reformatTEI(tei);
+
+                // write updated compatec TEI file
+                if (tei != null) 
+                    FileUtils.writeStringToFile(new File(newXmlCorpusPath), tei, UTF_8);
+
             } catch(ParserConfigurationException e) {
                 e.printStackTrace();
             } catch(IOException e) {
@@ -224,11 +220,39 @@ public class XMLCorpusPostProcessorNoMention {
             } catch(Exception e) {
                 e.printStackTrace();
             } 
+        }
+                  
+        // write a more compact TEI file without no mention entries and without the non aligned segments (<ab>),
+        // without role="used", with sentence segmentation
+        if (tei != null) {
+            try {
+                DocumentBuilder builder = factory.newDocumentBuilder();
+                document = builder.parse(new InputSource(new StringReader(tei)));
+                document = prune(document, true);
+                tei = XMLUtilities.serialize(document, null);
 
-            // write updated full TEI file
-            if (tei != null) {
-                FileUtils.writeStringToFile(new File(newXmlCorpusPath), tei, UTF_8);
-            }
+                document = builder.parse(new InputSource(new StringReader(tei)));
+
+                // inject description notes for (default) "compact" corpus
+                document = injectDescriptionNotes(document, false, false);
+
+                org.w3c.dom.Element root = document.getDocumentElement();
+                XMLUtilities.segment(document, root);
+
+                tei = XMLUtilities.serialize(document, null);
+                tei = reformatTEI(tei);
+
+                // write updated full TEI file
+                if (tei != null) 
+                    FileUtils.writeStringToFile(new File(newXmlCorpusPath.replace(".tei.xml", "-sentence.tei.xml")), tei, UTF_8);  
+
+            } catch(ParserConfigurationException e) {
+                e.printStackTrace();
+            } catch(IOException e) {
+                e.printStackTrace();
+            } catch(Exception e) {
+                e.printStackTrace();
+            } 
         }
 
         csvPrinter.close();
@@ -1851,6 +1875,7 @@ public class XMLCorpusPostProcessorNoMention {
         tei = tei.replaceAll("xmlns=\"\" ", "");
         tei = tei.replaceAll("        <ref type=\"bibr\">.*</ref>\n", "");
         tei = tei.replaceAll("<ref target=\"#b\\d+\" type=\"bibr\">", "<ref type=\"bibr\">");
+        tei = tei.replaceAll("</rs>\n          </s>\n          <s>software", "</rs> software");
         return tei;
     }
 

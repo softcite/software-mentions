@@ -3,7 +3,7 @@ package org.grobid.trainer;
 import org.grobid.core.main.GrobidHomeFinder;
 import org.grobid.core.utilities.SoftwareConfiguration;
 import org.grobid.core.utilities.GrobidProperties;
-//import org.grobid.core.utilities.GrobidPropertyKeys;
+import org.grobid.core.utilities.GrobidConfig.ModelParameters;
 import org.grobid.core.main.LibraryLoader;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,7 +20,7 @@ import java.io.File;
 public class SoftwareTrainerRunner {
 
     private static final String USAGE = "Usage: {0 - train, 1 - evaluate, 2 - split, train and evaluate, 3 - eval with n-fold} "
-            + "{software, software_disambiguation, software_doc_level} "
+            + "{software, software_type, software_disambiguation, software_doc_level} "
             + "-s { [0.0 - 1.0] - split ratio, optional} "
             + "-b {epsilon, window, nbMax}"
             + "-t NBThreads";
@@ -92,18 +92,12 @@ public class SoftwareTrainerRunner {
         System.out.println("path2GbdHome=" + path2GbdHome);
         initProcess(path2GbdHome);
 
-        if (conf != null && conf.getModel() != null)
-                GrobidProperties.addModel(conf.getModel());
-            LibraryLoader.load();
-
-        /*if (conf != null &&
-            conf.getEngine() != null && 
-            conf.getEngine().equals("delft"))
-            GrobidProperties.setPropertyValue(GrobidPropertyKeys.PROP_GROBID_CRF_ENGINE + ".software", "delft");
-        LibraryLoader.load();*/
+        if (conf != null && (conf.getModel("software") != null || conf.getModel("software-type") != null))
+            for (ModelParameters model : conf.getModels()) 
+                GrobidProperties.getInstance().addModel(model);
+        LibraryLoader.load();
 
         Double split = 0.0;
-        boolean breakParams = false;
         double epsilon = 0.000001;
         int window = 20;
         int nbMaxIterations = 0;
@@ -136,20 +130,38 @@ public class SoftwareTrainerRunner {
                     throw new IllegalStateException("Invalid number of folds value: " + args[i + 1]);
                 }
             }
-            /*else if (args[i].equals("-b")) {
-                if ((mode == RunType.TRAIN) && (args.length >= 7)) {
-                    breakParams = true;
-                    epsilon = Double.parseDouble(args[i + 1]);
-                    window = Integer.parseInt(args[i + 2]);
-                    nbMaxIterations = Integer.parseInt(args[i + 3]);
-                } else
-                    throw new IllegalStateException(USAGE);
-            }*/
         }
 
         if (path2GbdHome == null) {
             throw new IllegalStateException(USAGE);
         }
+
+        if ("software_type".equals(args[1])) { 
+            SoftwareTypeTrainer trainer = new SoftwareTypeTrainer();
+
+            trainer.setSoftwareConf(conf);
+
+            switch (mode) {
+                case TRAIN:
+                    AbstractTrainer.runTraining(trainer);
+                    break;
+                case EVAL:
+                    System.out.println(AbstractTrainer.runEvaluation(trainer));
+                    break;
+                case SPLIT:
+                    System.out.println(AbstractTrainer.runSplitTrainingEvaluation(trainer, split));
+                    break;
+                case EVAL_N_FOLD:
+                    if(numFolds == 0) {
+                        throw new IllegalArgumentException("N should be > 0");
+                    }
+                    System.out.println(AbstractTrainer.runNFoldEvaluation(trainer, numFolds));
+                    break;
+                default:
+                    throw new IllegalStateException("Invalid RunType: " + mode.name());
+            }
+            System.exit(0);
+        } 
 
         SoftwareTrainer trainer = null;
         if ("software".equals(args[1])) { 
@@ -169,9 +181,6 @@ public class SoftwareTrainerRunner {
             System.exit(0);
         }
         trainer.setSoftwareConf(conf);
-
-        /*if (breakParams)
-            trainer.setParams(epsilon, window, nbMaxIterations);*/
 
         switch (mode) {
             case TRAIN:
