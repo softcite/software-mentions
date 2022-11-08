@@ -6,6 +6,7 @@ import org.grobid.core.analyzers.SoftwareAnalyzer;
 import org.grobid.core.data.SoftwareComponent;
 import org.grobid.core.data.BiblioComponent;
 import org.grobid.core.data.SoftwareEntity;
+import org.grobid.core.data.SoftwareType;
 import org.grobid.core.data.BiblioItem;
 import org.grobid.core.data.BibDataSet;
 import org.grobid.core.document.Document;
@@ -58,7 +59,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.xml.sax.InputSource;
 import org.w3c.dom.*;
 import javax.xml.parsers.*;
-import java.io.*;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.*;
 import javax.xml.transform.stream.*;
@@ -84,6 +84,7 @@ public class SoftwareParser extends AbstractParser {
     private EngineParsers parsers;
     private SoftwareDisambiguator disambiguator;
     private SoftwareConfiguration softwareConfiguration;
+    private SoftwareTypeParser softwareTypeParser;
 
     public static SoftwareParser getInstance(SoftwareConfiguration configuration) {
         if (instance == null) {
@@ -102,13 +103,14 @@ public class SoftwareParser extends AbstractParser {
     
     private SoftwareParser(SoftwareConfiguration configuration) {
         super(GrobidModels.SOFTWARE, CntManagerFactory.getCntManager(), 
-            GrobidCRFEngine.valueOf(configuration.getModel().engine.toUpperCase()),
-            configuration.getModel().delft.architecture);
+            GrobidCRFEngine.valueOf(configuration.getModel("software").engine.toUpperCase()),
+            configuration.getModel("software").delft.architecture);
 
         softwareLexicon = SoftwareLexicon.getInstance();
 		parsers = new EngineParsers();
         disambiguator = SoftwareDisambiguator.getInstance(configuration);
         softwareConfiguration = configuration;
+        softwareTypeParser = SoftwareTypeParser.getInstance(configuration);
     }
 
     /**
@@ -178,11 +180,30 @@ public class SoftwareParser extends AbstractParser {
             entities = propagateLayoutTokenSequence(tokens, entities, termProfiles, termPattern, placeTaken, frequencies, false);
             Collections.sort(entities);
 
+            // refine software types, if there is anything to refine
+            if (entities.size() > 0) {
+                try {
+                    List<SoftwareType> entityTypes = softwareTypeParser.processFeatureInput(text, ress, tokens);
+
+                    for(SoftwareType entityType : entityTypes) {
+                        System.out.println("\n" + entityType.toString());
+                    }
+
+                    entities = refineTypes(entities, entityTypes);
+                    
+                    // additional sort in case new entites were introduced
+                    Collections.sort(entities);
+
+                } catch (Exception e) {
+                    throw new GrobidException("Sequence labeling for software type parsing failed.", e);
+                }
+            }
+
             // attach a local text context to the entities
             entities = addContext(entities, text, tokens, false, false);
 
             // finally classify the context for predicting the role of the software mention
-            entities = SoftwareContextClassifier.getInstance(softwareConfiguration).classifyDocumentContexts(entities);            
+            entities = SoftwareContextClassifier.getInstance(softwareConfiguration).classifyDocumentContexts(entities);
 
         } catch (Exception e) {
             throw new GrobidException("An exception occured while running Grobid.", e);
@@ -768,7 +789,17 @@ public class SoftwareParser extends AbstractParser {
             // we would need to re-align offsets in a post-processing if we go with 
             // dehyphenized text in the context
             //text = LayoutTokensUtil.normalizeDehyphenizeText(layoutTokens);
-            
+
+            // finally refine software types, if there is anything to refine
+            if (localEntities.size() > 0) {
+                try {
+                    List<SoftwareType> entityTypes = softwareTypeParser.processFeatureInput(text, localRes, layoutTokens);
+                    localEntities = refineTypes(entities, entityTypes);
+                } catch (Exception e) {
+                    throw new GrobidException("Sequence labeling for software type parsing failed.", e);
+                }
+            }
+
             localEntities = addContext(localEntities, text, layoutTokens, true, addParagraphContext);
 
             entities.addAll(localEntities);
@@ -881,6 +912,11 @@ public class SoftwareParser extends AbstractParser {
             }
 
             String term = LayoutTokensUtil.toText(matchedTokens);
+            if (term.length() == 1 && !"R".equals(term)) {
+                // if the term is just one character, better skip it (except for "R" alone, 
+                // but we will need to consider if it creates too many false matches)
+                continue;
+            }
             OffsetPosition matchedPosition = new OffsetPosition(matchedPositionStart, matchedPositionStart+term.length());
 
             // this positions is expressed at document-level, to check if we have not matched something already recognized
@@ -1403,6 +1439,11 @@ public class SoftwareParser extends AbstractParser {
             SoftwareComponent nameComponent = entity.getSoftwareName();
             if (nameComponent == null)
                 continue;
+
+            // we don't propagate implicit software names
+            if (entity.getType() == SoftwareLexicon.Software_Type.IMPLICIT)
+                continue;
+
             String term = nameComponent.getRawForm();
             term = term.replace("\n", " ");
             term = term.replaceAll("( )+", " ");
@@ -1665,7 +1706,7 @@ public class SoftwareParser extends AbstractParser {
         List<TaggingTokenCluster> clusters = clusteror.cluster();
 
         SoftwareComponent currentComponent = null;
-        SoftwareLexicon.Software_Type openEntity = null;
+        //SoftwareLexicon.Software_Type openEntity = null;
         int pos = 0; // position in term of characters for creating the offsets
 
         for (TaggingTokenCluster cluster : clusters) {
@@ -2239,4 +2280,213 @@ public class SoftwareParser extends AbstractParser {
 
         return entities;
     }
+
+
+    private List<SoftwareEntity> refineTypes(List<SoftwareEntity> entities, List<SoftwareType> entityTypes) {
+        // create a simple map of positions for entityTypes
+        Map<OffsetPosition, SoftwareType> positionsEntityTypes = new HashMap<>();
+        for(SoftwareType entityType : entityTypes) {
+            positionsEntityTypes.put(entityType.getOffsets(), entityType);
+        }
+
+        // check overlap and possibly associate types
+        for(SoftwareEntity entity : entities) {
+            // get software name component 
+            SoftwareComponent softwareName = entity.getSoftwareName();
+            OffsetPosition positionEntity = softwareName.getOffsets();
+
+System.out.println("entity: " + softwareName.getRawForm() + " / " + positionEntity.start + " " + positionEntity.end);
+
+            // note: elements in entityTypes are removed as they are "consumed", via iterator.remove()
+            for(Iterator iter = entityTypes.iterator(); iter.hasNext();) {
+                SoftwareType entityType= (SoftwareType) iter.next();
+                OffsetPosition localTypePosition = entityType.getOffsets();
+
+System.out.println("entityType: " + entityType.getRawForm() + " / " + localTypePosition.start + " " + localTypePosition.end);
+                // check overlap between software entity and software type span
+                if (
+                    (localTypePosition.start <= positionEntity.start && localTypePosition.end > positionEntity.start) ||
+                    (localTypePosition.start >= positionEntity.start && localTypePosition.start < positionEntity.end) ) {
+                    // overlap case 
+                    if (entityType.getType() == SoftwareLexicon.Software_Type.LANGUAGE && 
+                        (localTypePosition.start != positionEntity.start || localTypePosition.end != positionEntity.end) ) {
+                        // we remove the language raw string from the software name if leading or trailing overlap
+                        String softwareNameRawForm = softwareName.getRawForm();
+                        String entityTypeRawForm = entityType.getRawForm();
+                        if (softwareNameRawForm.startsWith(entityTypeRawForm) || softwareNameRawForm.endsWith(entityTypeRawForm)) {
+                            
+                            if (softwareNameRawForm.startsWith(entityTypeRawForm)) {
+                                softwareName.setRawForm(softwareNameRawForm.substring(entityTypeRawForm.length(), softwareNameRawForm.length()));
+                                softwareName.setOffsetStart(softwareName.getOffsetStart() + entityTypeRawForm.length());
+                                softwareName.setTokens(
+                                    softwareName.getTokens().subList(entityType.getTokens().size(), softwareName.getTokens().size()));
+
+                                while (softwareName.getRawForm().startsWith(" ")) {
+                                    softwareName.setRawForm(softwareName.getRawForm().substring(1,softwareName.getRawForm().length()));
+                                    softwareName.setOffsetStart(softwareName.getOffsetStart()+1);
+                                    softwareName.setTokens(softwareName.getTokens().subList(1,softwareName.getTokens().size()));
+                                }
+
+                                List<BoundingBox> boundingBoxes = BoundingBoxCalculator.calculate(softwareName.getTokens());
+                                softwareName.setBoundingBoxes(boundingBoxes);
+                            } else {
+                                softwareName.setRawForm(softwareNameRawForm.substring(0, softwareNameRawForm.length()-entityTypeRawForm.length()));
+                                softwareName.setOffsetEnd(softwareName.getOffsetEnd() - entityTypeRawForm.length());
+                                softwareName.setTokens(
+                                    softwareName.getTokens().subList(0, softwareName.getTokens().size()-entityType.getTokens().size()));
+
+                                while (softwareName.getRawForm().endsWith(" ")) {
+                                    softwareName.setRawForm(softwareName.getRawForm().substring(0,softwareName.getRawForm().length()-1));
+                                    softwareName.setOffsetStart(softwareName.getOffsetEnd()-1);
+                                    softwareName.setTokens(softwareName.getTokens().subList(0,softwareName.getTokens().size()-1));
+                                }
+
+                                List<BoundingBox> boundingBoxes = BoundingBoxCalculator.calculate(softwareName.getTokens());
+                                softwareName.setBoundingBoxes(boundingBoxes);
+                            }
+
+                            // we had a language component to the software entity
+                            SoftwareComponent languageComponent = createSoftwareComponentFromLanguage(entityType, SoftwareTaggingLabels.LANGUAGE);
+                            entity.setLanguage(languageComponent);
+
+                            // consume the entityType
+                            iter.remove();
+                        }
+                    } else if ( entityType.getType() != SoftwareLexicon.Software_Type.LANGUAGE && 
+                         (entity.getType() == null || 
+                          entity.getType() == SoftwareLexicon.Software_Type.UNKNOWN ||
+                          entity.getType() == SoftwareLexicon.Software_Type.SOFTWARE) 
+                        ) {
+                        entity.setType(entityType.getType());
+
+                        // consume the entityType
+                        iter.remove();
+                    }
+                }
+            }
+        }
+
+        // add remaining implicit software names
+        if (entityTypes.size() > 0) {
+            for(Iterator iter = entityTypes.iterator(); iter.hasNext();) {
+                SoftwareType entityType= (SoftwareType) iter.next();
+                OffsetPosition localTypePosition = entityType.getOffsets();
+
+                if (entityType.getType() == SoftwareLexicon.Software_Type.IMPLICIT) {
+                    // if at the end of the process we still have a implicit software name not consumed, we can
+                    // add it as simple implicit software name
+                    SoftwareComponent implicitComponent = createSoftwareComponentFromLanguage(entityType, SoftwareTaggingLabels.IMPLICIT);
+                    SoftwareEntity entity = new SoftwareEntity();
+                    entity.setSoftwareName(implicitComponent);
+                    entity.setType(SoftwareLexicon.Software_Type.IMPLICIT);
+                    entities.add(entity);
+
+                    // consume the entityType
+                    iter.remove();
+                }
+            }
+        }
+
+        Collections.sort(entities);
+
+        // try to attach remaining language name(s) to software entity
+        if (entityTypes.size() > 0) {
+            for(Iterator iter = entityTypes.iterator(); iter.hasNext();) {
+                SoftwareType entityType= (SoftwareType) iter.next();
+                OffsetPosition localTypePosition = entityType.getOffsets();
+
+                if (entityType.getType() == SoftwareLexicon.Software_Type.LANGUAGE) {
+                    // if at the end of the process we still have language name not consumed, we can try to attach it to
+                    // the closest software name
+
+                    // closest software name on the left (if any)
+                    SoftwareEntity entityLeft = null;
+                    for(SoftwareEntity softwareEntity : entities) {
+                        SoftwareComponent softwareName = softwareEntity.getSoftwareName();
+                        OffsetPosition positionEntity = softwareName.getOffsets();
+
+                        if (positionEntity.end < localTypePosition.start) {
+                            entityLeft = softwareEntity;
+                        } else {
+                            break;
+                        }
+                    }
+
+                    // closest software name on the right (if any)
+                    SoftwareEntity entityRight = null;
+                    for(int k=entities.size()-1; k>=0; k--) {
+                        SoftwareEntity softwareEntity = entities.get(k);
+                        SoftwareComponent softwareName = softwareEntity.getSoftwareName();
+                        OffsetPosition positionEntity = softwareName.getOffsets();
+
+                        if (positionEntity.start > localTypePosition.end) {
+                            entityLeft = softwareEntity;
+                        } else {
+                            break;
+                        }
+                    }
+
+                    // proximity constraint + bonus to the left in case of middle position
+                    if (entityLeft == null) {
+                        // check distance
+                        if (entityRight.getSoftwareName().getOffsetStart() - localTypePosition.end <= 20) {
+                            // attachment
+                            SoftwareComponent languageComponent = createSoftwareComponentFromLanguage(entityType, SoftwareTaggingLabels.LANGUAGE);
+                            entityRight.setLanguage(languageComponent);
+                        }
+                    } else if (entityRight == null) {
+                        // check distance
+                        if (localTypePosition.start - entityLeft.getSoftwareName().getOffsetEnd() <= 20) {
+                            // attachment
+                            SoftwareComponent languageComponent = createSoftwareComponentFromLanguage(entityType, SoftwareTaggingLabels.LANGUAGE);
+                            entityLeft.setLanguage(languageComponent);
+                        }
+                    } else {
+                        // programming language component is in the middle of the two software entities, attach to the closest
+                        // with distance constraint + bonus to left entity
+                        int distLeft = localTypePosition.start - entityLeft.getSoftwareName().getOffsetEnd();
+                        int distRight = entityRight.getSoftwareName().getOffsetStart() - localTypePosition.end;
+
+                        if (distLeft>20 && distRight<=20) {
+                            SoftwareComponent languageComponent = createSoftwareComponentFromLanguage(entityType, SoftwareTaggingLabels.LANGUAGE);
+                            entityRight.setLanguage(languageComponent);
+                        } else if (distLeft<=20 && distRight>20) {
+                            SoftwareComponent languageComponent = createSoftwareComponentFromLanguage(entityType, SoftwareTaggingLabels.LANGUAGE);
+                            entityLeft.setLanguage(languageComponent);
+                        } else if (distRight<=20 && distLeft<=20) {
+                            if (distRight*2 < distLeft) {
+                                SoftwareComponent languageComponent = createSoftwareComponentFromLanguage(entityType, SoftwareTaggingLabels.LANGUAGE);
+                                entityRight.setLanguage(languageComponent);
+                            } else {
+                                SoftwareComponent languageComponent = createSoftwareComponentFromLanguage(entityType, SoftwareTaggingLabels.LANGUAGE);
+                                entityLeft.setLanguage(languageComponent);
+                            }
+                        }
+                    }
+
+                    // consume the entityType
+                    iter.remove();
+                }
+            }
+        }
+
+        // model conflict language / software for the same position: so which one to choose? it is reasonable to 
+        // consider it as a software environment corresponding to the identified programming language
+
+
+        return entities;
+    }
+
+    public SoftwareComponent createSoftwareComponentFromLanguage(SoftwareType entityType, TaggingLabel label) {
+        SoftwareComponent languageComponent = new SoftwareComponent();
+        languageComponent.setRawForm(entityType.getRawForm());
+        languageComponent.setOffsetStart(entityType.getOffsetStart());
+        languageComponent.setOffsetEnd(entityType.getOffsetEnd());
+        languageComponent.setLabel(label);
+        languageComponent.setTokens(entityType.getTokens());
+        List<BoundingBox> boundingBoxes = BoundingBoxCalculator.calculate(entityType.getTokens());
+        languageComponent.setBoundingBoxes(boundingBoxes);
+        return languageComponent;
+    }
+
 }

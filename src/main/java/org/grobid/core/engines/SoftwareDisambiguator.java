@@ -75,7 +75,7 @@ import static org.grobid.core.document.xml.XmlBuilderUtils.teiElement;
 
 /**
  * Software entity disambiguator. Once software mentions are recognized and grouped
- * into and entity (software name with recognized attributes), we use entity-fishing
+ * into an entity (software name with recognized attributes), we use entity-fishing
  * service to disambiguate the software against Wikidata, as well as the attribute 
  * values (currently only creator).
  *

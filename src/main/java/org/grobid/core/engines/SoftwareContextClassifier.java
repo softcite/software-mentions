@@ -96,22 +96,22 @@ public class SoftwareContextClassifier {
     }
 
     private SoftwareContextClassifier(SoftwareConfiguration configuration) {
-        ModelParameters parameter = configuration.getModel("software_context");
+        ModelParameters parameter = configuration.getModel("context");
 
-        ModelParameters parameterUsed = configuration.getModel("software_context_used");
-        ModelParameters parameterCreated = configuration.getModel("software_context_creation");
-        ModelParameters parameterShared = configuration.getModel("software_context_shared");
+        ModelParameters parameterUsed = configuration.getModel("context_used");
+        ModelParameters parameterCreated = configuration.getModel("context_creation");
+        ModelParameters parameterShared = configuration.getModel("context_shared");
 
         this.useBinary = configuration.getUseBinaryContextClassifiers();
         if (this.useBinary == null)
             this.useBinary = true;
 
         if (this.useBinary) {
-            this.classifierBinaryUsed = new DeLFTClassifierModel("software_context_used", parameterUsed.delft.architecture);
-            this.classifierBinaryCreated = new DeLFTClassifierModel("software_context_creation", parameterCreated.delft.architecture);
-            this.classifierBinaryShared = new DeLFTClassifierModel("software_context_shared", parameterShared.delft.architecture);
+            this.classifierBinaryUsed = new DeLFTClassifierModel("context_used", parameterUsed.delft.architecture);
+            this.classifierBinaryCreated = new DeLFTClassifierModel("context_creation", parameterCreated.delft.architecture);
+            this.classifierBinaryShared = new DeLFTClassifierModel("context_shared", parameterShared.delft.architecture);
         } else {
-            this.classifier = new DeLFTClassifierModel("software_context", parameter.delft.architecture);
+            this.classifier = new DeLFTClassifierModel("context", parameter.delft.architecture);
         }
     }
 
