@@ -31,7 +31,11 @@ public class SoftwareLexicon {
     // NER base types
     public enum Software_Type {
         UNKNOWN("UNKNOWN"),
-        SOFTWARE("SOFTWARE");
+        SOFTWARE("SOFTWARE"),
+        ENVIRONMENT("ENVIRONMENT"),
+        COMPONENT("COMPONENT"),
+        IMPLICIT("IMPLICIT"),
+        LANGUAGE("LANGUAGE");
 
         private String name;
 
@@ -40,7 +44,7 @@ public class SoftwareLexicon {
         }
 
         public String getName() {
-            return name;
+            return name.toLowerCase();
         }
     }
 
@@ -58,6 +62,10 @@ public class SoftwareLexicon {
     private List<String> propertyValues = null;
 
     private List<String> englishStopwords = null;
+
+    // a map to store information on programming languages:
+    // name of the programming language (as Wikipedia English page title), Wikipedia EN URL, Wikidata ID
+    private Map<String, Pair<String,String>> programmingLanguages = null;
 
     private static volatile SoftwareLexicon instance;
 
@@ -216,7 +224,7 @@ public class SoftwareLexicon {
             throw new GrobidResourceException("Cannot initialize software subtype dictionary, because file '" + 
                 file.getAbsolutePath() + "' does not exists.");
         }
-        if (!file.exists()) {
+        if (!fileExtra.exists()) {
             throw new GrobidResourceException("Cannot initialize software subtype dictionary, because file '" + 
                 fileExtra.getAbsolutePath() + "' does not exists.");
         }
@@ -265,17 +273,9 @@ public class SoftwareLexicon {
             throw new GrobidResourceException("Cannot initialize English stopwords, because file '" + 
                 file.getAbsolutePath() + "' does not exists.");
         }
-        if (!file.exists()) {
-            throw new GrobidResourceException("Cannot initialize English stopwords, because file '" + 
-                fileExtra.getAbsolutePath() + "' does not exists.");
-        }
         if (!file.canRead()) {
             throw new GrobidResourceException("Cannot initialize English stopwords, because cannot read file '" + 
                 file.getAbsolutePath() + "'.");
-        }
-        if (!fileExtra.canRead()) {
-            throw new GrobidResourceException("Cannot initialize English stopwords, because cannot read file '" + 
-                fileExtra.getAbsolutePath() + "'.");
         }
         // read the file
         try {
@@ -289,6 +289,48 @@ public class SoftwareLexicon {
             throw new GrobidException("English stopwords file not found.", e);
         } catch (IOException e) {
             throw new GrobidException("Cannot read English stopwords file.", e);
+        } finally {
+            try {
+                if (dis != null)
+                    dis.close();
+            } catch(Exception e) {
+                throw new GrobidResourceException("Cannot close IO stream.", e);
+            }
+        }
+
+        programmingLanguages = new TreeMap<>();
+        file = new File("resources/lexicon/programming-languages.csv");
+        file = new File(file.getAbsolutePath());
+        if (!file.exists()) {
+            throw new GrobidResourceException("Cannot initialize programming language map, because file '" + 
+                file.getAbsolutePath() + "' does not exists.");
+        }
+        if (!file.canRead()) {
+            throw new GrobidResourceException("Cannot initialize programming language map, because cannot read file '" + 
+                file.getAbsolutePath() + "'.");
+        }
+        // read the file
+        try {
+            dis = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
+            String l = null;
+            while ((l = dis.readLine()) != null) {
+                if (l.length() == 0) continue;
+                String[] pieces = l.split(",");
+                if (pieces.length != 3)
+                    continue;
+                String languageName = pieces[0];
+                Pair<String,String> wikiInfo = new Pair<>(pieces[1],pieces[2]);
+                programmingLanguages.put(languageName, wikiInfo);
+
+                // all uppercase variant 
+                String languageNameUpperCase = languageName.toUpperCase();
+                if (programmingLanguages.get(languageNameUpperCase) == null)
+                    programmingLanguages.put(languageNameUpperCase, wikiInfo);
+            }
+        } catch (FileNotFoundException e) {
+            throw new GrobidException("programming language file not found.", e);
+        } catch (IOException e) {
+            throw new GrobidException("Cannot read programming language file.", e);
         } finally {
             try {
                 if (dis != null)
@@ -413,4 +455,14 @@ public class SoftwareLexicon {
             value = value.toLowerCase();
         return this.englishStopwords.contains(value);
     }
+
+    /**
+     * If known programming language, we return wikipedia-en URL and Wikidata ID as Pair of String, 
+     * if available. 
+     * If the programming language is unknonw, we return null.
+     **/
+    public Pair<String, String> getProgrammingLanguageWikiInfo(String rawProgrammingLanguageString) {
+        return programmingLanguages.get(rawProgrammingLanguageString);
+    }
+
 }

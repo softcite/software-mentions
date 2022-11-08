@@ -21,10 +21,15 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import org.grobid.core.document.xml.XmlBuilderUtils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  *  Some convenient methods for suffering a bit less with XML.
  */
 public class XMLUtilities {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(XMLUtilities.class);
 
     public static String toPrettyString(String xml, int indent) {
         try {
@@ -348,8 +353,15 @@ public class XMLUtilities {
                     textBuffer.append(" ");
                 }
                 String text = textBuffer.toString();
+
+                //List<OffsetPosition> forbiddenPositions = new ArrayList<>();
                 //String theSentences[] = detector.sentDetect(text);
-                List<OffsetPosition> theSentenceBoundaries = SentenceUtilities.getInstance().runSentenceDetection(text);
+                List<OffsetPosition> theSentenceBoundaries = null;
+                try {
+                    theSentenceBoundaries = SentenceUtilities.getInstance().runSentenceDetection(text);
+                } catch(Exception e) {
+                    LOGGER.warn("The sentence segmentation failed for: " + text);
+                }
 
                 // we're making a first pass to ensure that there is no element broken by the segmentation
                 List<String> sentences = new ArrayList<String>();
@@ -428,6 +440,7 @@ public class XMLUtilities {
                 }
 
             } else if (n.getNodeType() == Node.ELEMENT_NODE) {
+                // not a target text content element, we apply the segmentation recursively
                 segment(doc, (Element) n);
             }
         }

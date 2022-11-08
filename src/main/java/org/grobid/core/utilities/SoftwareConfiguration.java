@@ -13,9 +13,10 @@ public class SoftwareConfiguration {
     private String entityFishingPort;
 
     private String corpusPath;
-    private String templatePath;
+    //private String templatePath;
     private String tmpPath;
     private String pub2teiPath;
+    public String version;
 
     private Boolean useBinaryContextClassifiers;
 
@@ -50,10 +51,10 @@ public class SoftwareConfiguration {
         return models;
     }
 
-    public ModelParameters getModel() {
+    /*public ModelParameters getModel() {
         // by default return the software mention sequence labeling model
         return getModel("software");
-    }
+    }*/
 
     public ModelParameters getModel(String modelName) {
         for(ModelParameters parameters : models) {
@@ -76,13 +77,13 @@ public class SoftwareConfiguration {
         this.corpusPath = corpusPath;
     }
 
-    public String getTemplatePath() {
+    /*public String getTemplatePath() {
         return templatePath;
     }
 
     public void setTemplatePath(String templatePath) {
         this.templatePath = templatePath;
-    }
+    }*/
 
     public String getTmpPath() {
         return tmpPath;
@@ -106,5 +107,13 @@ public class SoftwareConfiguration {
 
     public void setPub2teiPath(String pub2teiPath) {
         this.pub2teiPath = pub2teiPath;
+    }
+
+    public String getVersion() {
+        return this.version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
     }
 }

@@ -4,6 +4,7 @@ import org.grobid.core.engines.SoftwareParser;
 import org.grobid.core.main.GrobidHomeFinder;
 import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.utilities.SoftwareConfiguration;
+import org.grobid.core.utilities.GrobidConfig.ModelParameters;
 import org.grobid.core.main.LibraryLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -78,8 +79,9 @@ public class SoftwareMain {
         /*if (conf.getEngine().toUpperCase().equals("WAPITI"))    
             LibraryLoader.load();*/
 
-        if (conf != null && conf.getModel() != null)
-            GrobidProperties.addModel(conf.getModel());
+        if (conf != null && ( conf.getModel("software") != null || conf.getModel("software-type") != null))
+            for (ModelParameters model : conf.getModels()) 
+                GrobidProperties.getInstance().addModel(model);
         LibraryLoader.load();
     }
 
@@ -89,8 +91,9 @@ public class SoftwareMain {
             grobidHomeFinder.findGrobidHomeOrFail();
             GrobidProperties.getInstance(grobidHomeFinder);
 
-            if (conf != null && conf.getModel() != null)
-                GrobidProperties.addModel(conf.getModel());
+            if (conf != null && ( conf.getModel("software") != null || conf.getModel("software-type") != null))
+                for (ModelParameters model : conf.getModels()) 
+                    GrobidProperties.getInstance().addModel(model);
             LibraryLoader.load();
 
             //if (SoftwareProperties.get("grobid.software.engine").toUpperCase().equals("WAPITI"))

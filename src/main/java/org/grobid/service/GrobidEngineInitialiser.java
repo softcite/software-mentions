@@ -44,8 +44,8 @@ public class GrobidEngineInitialiser {
         configuration.setSoftwareConfiguration(softwareConfiguration);
 
         if (softwareConfiguration != null && softwareConfiguration.getModels() != null) {
-            for (ModelParameters model : softwareConfiguration.getModels())
-                    GrobidProperties.getInstance().addModel(model);
+            for (ModelParameters model : softwareConfiguration.getModels()) 
+                GrobidProperties.getInstance().addModel(model);
         }
         LibraryLoader.load();
     }
