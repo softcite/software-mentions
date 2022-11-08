@@ -327,7 +327,7 @@ public class SoftwareTypeParser extends AbstractParser {
                 currentSoftwareType.setTokens(theTokens);
 
                 String rawType = clusterLabel.getLabel().toUpperCase().replace("<", "").replace(">", "");
-                System.out.println(rawType);
+                //System.out.println(rawType);
                 try {
                     currentSoftwareType.setType(SoftwareLexicon.Software_Type.valueOf(rawType));
                 } catch(Exception e) {

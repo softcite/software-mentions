@@ -511,6 +511,12 @@ var grobid = (function ($) {
                     pieces.push(creator)
                 }
 
+                var language = entity['language']
+                if (language) {
+                    language['subtype'] = 'language'
+                    pieces.push(language)
+                }
+
                 var references = entity['references']
                 if (references) {
                     for(var reference in references) {
@@ -598,6 +604,8 @@ var grobid = (function ($) {
                     indexComp++;
                 if (entity['publisher'])
                     indexComp++;
+                if (entity['language'])
+                    indexComp++;
                 for(var currentIndexComp = 0; currentIndexComp< indexComp; currentIndexComp++) {
                     $('#annot-' + entityIndex + '-' + currentIndexComp).bind('mouseenter', viewEntity);
                     $('#annot-' + entityIndex + '-' + currentIndexComp).bind('click', viewEntity);
@@ -681,6 +689,12 @@ var grobid = (function ($) {
                 if (creator) {
                     creator['subtype'] = 'publisher'
                     pieces.push(creator)
+                }
+
+                var language = entity['language']
+                if (language) {
+                    language['subtype'] = 'language'
+                    pieces.push(language)
                 }
 
                 var references = entity['references']
@@ -1048,6 +1062,9 @@ var grobid = (function ($) {
         var wikipedia = entity.wikipediaExternalRef;
         var wikidataId = entity.wikidataId;
         var type = entity.type;
+        var softwareType = null;
+        if (entity["software-type"])
+            softwareType = entity["software-type"];
 
         var colorLabel = null;
         if (type)
@@ -1074,7 +1091,10 @@ var grobid = (function ($) {
             "<table style='width:100%;background-color:#fff;border:0px'><tr style='background-color:#fff;border:0px;'><td style='background-color:#fff;border:0px;'>";
 
         if (type)
-            string += "<p>Type: <b>" + type + "</b></p>";
+            string += "<p>Entity type: <b>" + type + "</b></p>";
+
+        if (softwareType)
+            string += "<p>Software type: <b>" + softwareType + "</b></p>";
 
         if (content)
             string += "<p>Raw name: <b>" + content + "</b></p>";                
@@ -1082,28 +1102,31 @@ var grobid = (function ($) {
         if (normalized)
             string += "<p>Normalized name: <b>" + normalized + "</b></p>";
 
-        var versionNumber = null
+        var versionNumber = null;
         if (entity['version-number'])
             versionNumber = entity['version-number'].rawForm;
 
         if (versionNumber)
             string += "<p>Version nb: <b>" + versionNumber + "</b></p>"
 
-        var versionDate = null
+        var versionDate = null;
         if (entity['version-date'])
             versionDate = entity['version-date'].rawForm;
 
         if (versionDate)
             string += "<p>Version date: <b>" + versionDate + "</b></p>"
 
-        var version = null
+        var version = null;
         if (entity['version'])
             version = entity['version'].rawForm;
 
         if (version)
             string += "<p>Version: <b>" + version + "</b></p>";
 
-        var url = null
+        if (language)
+            string += "<p>Language: <b>" + language + "</b></p>";
+
+        var url = null;
         if (entity['url'])
             url = entity['url'].rawForm;
 
@@ -1115,6 +1138,8 @@ var grobid = (function ($) {
             string += '<p>URL: <b><a href=\"' + url + '\" target=\"_blank\">' + url + '</b></p>';
         }
 
+        
+
         var creator = null
         if (entity['publisher'])
             creator = entity['publisher'].rawForm;
@@ -1122,10 +1147,16 @@ var grobid = (function ($) {
         if (creator)
             string += "<p>Publisher: <b>" + creator + "</b></p>";
 
+
+        var language = null;
+        if (entity['language'])
+            language = entity['language'].rawForm;
+
+        if (language)
+            string += "<p>Language: <b>" + language + "</b></p>";
+
         if (entity.confidence)
             string += "<p>conf: <i>" + entity.confidence + "</i></p>";
-
-
 
         if (wikipedia) {
             string += "</td><td style='align:right;bgcolor:#fff'>";

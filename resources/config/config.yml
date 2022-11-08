@@ -1,3 +1,5 @@
+version: "0.7.3-SNAPSHOT"
+
 grobidHome: ../grobid-home
 
 # entity-fishing server information for performing entity disambiguation
@@ -7,8 +9,7 @@ entityFishingPort: 443
 #entityFishingHost: localhost
 #entityFishingPort: 8090
 
-corpusPath: resources/dataset/software/corpus
-templatePath: resources/dataset/software/crfpp-templates/software.template
+corpusPath: resources/dataset/
 tmpPath: tmp/
 
 # path to Pub2TEI repository as available at https://github.com/kermitt2/Pub2TEI
@@ -34,41 +35,59 @@ models:
       #useELMo: false
       #embeddings_name: "glove-840B"
       architecture: "BERT_CRF"
-      transformer: "allenai/scibert_scivocab_cased"
+      #transformer: "allenai/scibert_scivocab_cased"
+      transformer: "michiyasunaga/LinkBERT-basecased"
 
-  - name: "software_context"
+  - name: "software-type"
+    engine: "wapiti"
+    #engine: "delft"
+    wapiti:
+      # wapiti training parameters, only considered when wapiti is used as engine for the model, 
+      # these parameters are be used at training time only
+      epsilon: 0.00001
+      window: 30
+      nbMaxIterations: 1500
+    delft:
+      # deep learning parameters
+      #architecture: "BidLSTM_CRF"
+      #useELMo: false
+      #embeddings_name: "glove-840B"
+      architecture: "BERT_CRF"
+      transformer: "michiyasunaga/LinkBERT-basecased"
+
+  - name: "context"
     # multi-label classifier for the context 
     engine: "delft"
     delft:
       #architecture: "gru"
       #embeddings_name: "glove-840B"
       architecture: "bert"
-      transformer: "allenai/scibert_scivocab_cased"
+      transformer: "michiyasunaga/LinkBERT-basecased"
 
-  - name: "software_context_used"
+  - name: "context_used"
     # binary classifier to predict if the context of the mention correspond to a usage of the software 
     engine: "delft"
     delft:
       #architecture: "gru"
       #embeddings_name: "glove-840B"
       architecture: "bert"
-      transformer: "allenai/scibert_scivocab_cased"
+      transformer: "michiyasunaga/LinkBERT-basecased"
 
-  - name: "software_context_creation"
+  - name: "context_creation"
     # binary classifier to predict if the context of the mention correspond to a creation of the software 
     engine: "delft"
     delft:
       #architecture: "gru"
       #embeddings_name: "glove-840B"
       architecture: "bert"
-      transformer: "allenai/scibert_scivocab_cased"
+      transformer: "michiyasunaga/LinkBERT-basecased"
 
-  - name: "software_context_shared"
+  - name: "context_shared"
     # binary classifier to predict if the context of the mention correspond to a sharing of the software 
     engine: "delft"
     delft:
       #architecture: "gru"
       #embeddings_name: "glove-840B"
       architecture: "bert"
-      transformer: "allenai/scibert_scivocab_cased"
+      transformer: "michiyasunaga/LinkBERT-basecased"
 

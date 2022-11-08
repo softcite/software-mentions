@@ -184,15 +184,15 @@ public class SoftwareParser extends AbstractParser {
             if (entities.size() > 0) {
                 try {
                     List<SoftwareType> entityTypes = softwareTypeParser.processFeatureInput(text, ress, tokens);
-
-                    for(SoftwareType entityType : entityTypes) {
+                    /*for(SoftwareType entityType : entityTypes) {
                         System.out.println("\n" + entityType.toString());
-                    }
-
-                    entities = refineTypes(entities, entityTypes);
+                    }*/
+                    if (entityTypes != null && entityTypes.size() > 0) {
+                        entities = refineTypes(entities, entityTypes);
                     
-                    // additional sort in case new entites were introduced
-                    Collections.sort(entities);
+                        // additional sort in case new entites were introduced
+                        Collections.sort(entities);
+                    }
 
                 } catch (Exception e) {
                     throw new GrobidException("Sequence labeling for software type parsing failed.", e);
@@ -794,7 +794,10 @@ public class SoftwareParser extends AbstractParser {
             if (localEntities.size() > 0) {
                 try {
                     List<SoftwareType> entityTypes = softwareTypeParser.processFeatureInput(text, localRes, layoutTokens);
-                    localEntities = refineTypes(entities, entityTypes);
+                    if (entityTypes != null && entityTypes.size() > 0) {
+                        localEntities = refineTypes(localEntities, entityTypes);
+                        Collections.sort(localEntities);
+                    }
                 } catch (Exception e) {
                     throw new GrobidException("Sequence labeling for software type parsing failed.", e);
                 }
@@ -2283,26 +2286,20 @@ public class SoftwareParser extends AbstractParser {
 
 
     private List<SoftwareEntity> refineTypes(List<SoftwareEntity> entities, List<SoftwareType> entityTypes) {
-        // create a simple map of positions for entityTypes
-        Map<OffsetPosition, SoftwareType> positionsEntityTypes = new HashMap<>();
-        for(SoftwareType entityType : entityTypes) {
-            positionsEntityTypes.put(entityType.getOffsets(), entityType);
-        }
-
         // check overlap and possibly associate types
         for(SoftwareEntity entity : entities) {
             // get software name component 
             SoftwareComponent softwareName = entity.getSoftwareName();
             OffsetPosition positionEntity = softwareName.getOffsets();
 
-System.out.println("entity: " + softwareName.getRawForm() + " / " + positionEntity.start + " " + positionEntity.end);
+//System.out.println("entity: " + softwareName.getRawForm() + " / " + positionEntity.start + " " + positionEntity.end);
 
             // note: elements in entityTypes are removed as they are "consumed", via iterator.remove()
             for(Iterator iter = entityTypes.iterator(); iter.hasNext();) {
                 SoftwareType entityType= (SoftwareType) iter.next();
                 OffsetPosition localTypePosition = entityType.getOffsets();
 
-System.out.println("entityType: " + entityType.getRawForm() + " / " + localTypePosition.start + " " + localTypePosition.end);
+//System.out.println("entityType: " + entityType.getRawForm() + " / " + localTypePosition.start + " " + localTypePosition.end);
                 // check overlap between software entity and software type span
                 if (
                     (localTypePosition.start <= positionEntity.start && localTypePosition.end > positionEntity.start) ||
@@ -2472,7 +2469,6 @@ System.out.println("entityType: " + entityType.getRawForm() + " / " + localTypeP
 
         // model conflict language / software for the same position: so which one to choose? it is reasonable to 
         // consider it as a software environment corresponding to the identified programming language
-
 
         return entities;
     }
