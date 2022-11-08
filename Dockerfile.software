@@ -133,7 +133,7 @@ COPY --from=builder /opt/grobid-source/grobid-home/config/resources-registry.jso
 # trigger gradle wrapper install
 RUN ./gradlew --version
 
-RUN ./gradlew copyModels installModels  && rm -rf resources/models && rm -f /opt/grobid/grobid-home/models/software/model.wapiti.gz && rm -f /opt/grobid/grobid-home/models/software-BERT_CRF-0.3.0.zip && rm -f /opt/grobid/grobid-home/models/context_bert-0.3.2.zip && rm -f /opt/grobid/grobid-home/models/context_used_bert-0.3.2.zip && rm -f /opt/grobid/grobid-home/models/context_shared_bert-0.3.2.zip && rm -f /opt/grobid/grobid-home/models/context_creation_bert-0.3.2.zip
+RUN ./gradlew copyModels installModels  && rm -rf resources/models && rm -f /opt/grobid/grobid-home/models/software/model.wapiti.gz && rm -f /opt/grobid/grobid-home/models/software-BERT_CRF-0.3.2.zip && rm -f /opt/grobid/grobid-home/models/software-type-BERT_CRF-0.3.2.zip && rm -f /opt/grobid/grobid-home/models/context_bert-0.3.2.zip && rm -f /opt/grobid/grobid-home/models/context_used_bert-0.3.2.zip && rm -f /opt/grobid/grobid-home/models/context_shared_bert-0.3.2.zip && rm -f /opt/grobid/grobid-home/models/context_creation_bert-0.3.2.zip
 
 RUN ./gradlew clean install
 

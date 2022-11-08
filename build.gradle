@@ -27,7 +27,7 @@ apply plugin: 'base'
 apply plugin: 'com.github.kt3k.coveralls'
 
 group = "org.grobid.software"
-version = '0.7.1'
+version = '0.7.3-SNAPSHOT'
 
 description = """software-mentions"""
 
@@ -60,8 +60,8 @@ dependencies {
     //implementation fileTree(dir: new File(rootProject.rootDir, 'lib'), include: localLibs)
 
     //Grobid
-    implementation group: 'org.grobid', name: 'grobid-core', version: '0.7.1'
-    implementation group: 'org.grobid', name: 'grobid-trainer', version: '0.7.1'
+    implementation group: 'org.grobid', name: 'grobid-core', version: '0.7.3-SNAPSHOT'
+    implementation group: 'org.grobid', name: 'grobid-trainer', version: '0.7.3-SNAPSHOT'
     implementation group: 'net.arnx', name: 'jsonic', version: '1.3.10'
     //compile group: 'org.dkpro.statistics', name: 'dkpro-statistics-agreement', version: '2.2.0-SNAPSHOT'
     implementation "me.tongfei:progressbar:0.9.0"
@@ -205,38 +205,38 @@ task copyModels(type: Copy) {
     }
 }
 
-task installScibert {
+task installModels {
     doLast {
         download {
-            src "https://grobid.s3.amazonaws.com/software-BERT_CRF-0.3.0.zip"
+            src "https://grobid.s3.amazonaws.com/software-BERT_CRF-0.3.2.zip"
             dest "${rootDir}/../grobid-home/models/"
             overwrite false
         }
-        ant.unzip(src: "${rootDir}/../grobid-home/models/software-BERT_CRF-0.3.0.zip", dest: "${rootDir}/../grobid-home/models/")
+        ant.unzip(src: "${rootDir}/../grobid-home/models/software-BERT_CRF-0.3.2.zip", dest: "${rootDir}/../grobid-home/models/")
         download {
-            src "https://grobid.s3.amazonaws.com/software_context_bert-0.3.0.zip"
+            src "https://grobid.s3.amazonaws.com/context_bert-0.3.2.zip"
             dest "${rootDir}/../grobid-home/models/"
             overwrite false
         }
-        ant.unzip(src: "${rootDir}/../grobid-home/models/software_context_bert-0.3.0.zip", dest: "${rootDir}/../grobid-home/models/")
+        ant.unzip(src: "${rootDir}/../grobid-home/models/context_bert-0.3.2.zip", dest: "${rootDir}/../grobid-home/models/")
         download {
-            src "https://grobid.s3.amazonaws.com/software_context_used_bert-0.3.0.zip"
+            src "https://grobid.s3.amazonaws.com/context_bert_used-0.3.2.zip"
             dest "${rootDir}/../grobid-home/models/"
             overwrite false
         }
-        ant.unzip(src: "${rootDir}/../grobid-home/models/software_context_used_bert-0.3.0.zip", dest: "${rootDir}/../grobid-home/models/")
+        ant.unzip(src: "${rootDir}/../grobid-home/models/context_bert_used-0.3.2.zip", dest: "${rootDir}/../grobid-home/models/")
         download {
-            src "https://grobid.s3.amazonaws.com/software_context_creation_bert-0.3.0.zip"
+            src "https://grobid.s3.amazonaws.com/context_bert_creation-0.3.2.zip"
             dest "${rootDir}/../grobid-home/models/"
             overwrite false
         }
-        ant.unzip(src: "${rootDir}/../grobid-home/models/software_context_creation_bert-0.3.0.zip", dest: "${rootDir}/../grobid-home/models/")
+        ant.unzip(src: "${rootDir}/../grobid-home/models/context_bert_creation-0.3.2.zip", dest: "${rootDir}/../grobid-home/models/")
         download {
-            src "https://grobid.s3.amazonaws.com/software_context_shared_bert-0.3.0.zip"
+            src "https://grobid.s3.amazonaws.com/context_bert_shared-0.3.2.zip"
             dest "${rootDir}/../grobid-home/models/"
             overwrite false
         }
-        ant.unzip(src: "${rootDir}/../grobid-home/models/software_context_shared_bert-0.3.0.zip", dest: "${rootDir}/../grobid-home/models/")
+        ant.unzip(src: "${rootDir}/../grobid-home/models/context_bert_shared-0.3.2.zip", dest: "${rootDir}/../grobid-home/models/")
     }
 }
 
@@ -256,7 +256,7 @@ wrapper {
 
 // Run like this: ./gradlew eval_software -PgH=/path/grobid/home
 /*task(trainer, dependsOn: 'classes', type: JavaExec, group: 'training') {
-    main = 'org.grobid.trainer.SoftwareTrainerRunner'
+    mainClass = 'org.grobid.trainer.SoftwareTrainerRunner'
     classpath = sourceSets.main.runtimeClasspath
     args '0', 'software', getArg('gH', '../grobid-home'), getArg('b', '0.00001 20 0'), getArg('t', '1')
 //    jvmArgs '-Xms2g', '-Xmx8g'
@@ -264,15 +264,19 @@ wrapper {
 
 // Run like this: ./gradlew train_software -PgH=/path/grobid/home 
 task(train_software, dependsOn: 'classes', type: JavaExec, group: 'training') {
-    main = 'org.grobid.trainer.SoftwareTrainer'
+    mainClass = 'org.grobid.trainer.SoftwareTrainer'
     classpath = sourceSets.main.runtimeClasspath
-//    args '0', 'software', getArg('gH', '../grobid-home'), getArg('b', ''),
-//    jvmArgs '-Xms2g', '-Xmx8g'
+}
+
+// Run like this: ./gradlew train_software_type -PgH=/path/grobid/home 
+task(train_software_type, dependsOn: 'classes', type: JavaExec, group: 'training') {
+    mainClass = 'org.grobid.trainer.SoftwareTypeTrainer'
+    classpath = sourceSets.main.runtimeClasspath
 }
 
 // Run like this: ./gradlew eval_software -PgH=/path/grobid/home
 task(eval_software, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
-    main = 'org.grobid.trainer.SoftwareTrainerRunner'
+    mainClass = 'org.grobid.trainer.SoftwareTrainerRunner'
     classpath = sourceSets.main.runtimeClasspath
     args '1', 'software', getArg('gH', '../grobid-home')
     jvmArgs '-Xms2g', '-Xmx8g'
@@ -280,7 +284,7 @@ task(eval_software, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
 
 // Run like this: ./gradlew eval_software_disambiguation -PgH=/path/grobid/home
 task(eval_software_disambiguation, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
-    main = 'org.grobid.trainer.SoftwareTrainerRunner'
+    mainClass = 'org.grobid.trainer.SoftwareTrainerRunner'
     classpath = sourceSets.main.runtimeClasspath
     args '1', 'software_disambiguation', getArg('gH', '../grobid-home')
     jvmArgs '-Xms2g', '-Xmx8g'
@@ -288,7 +292,7 @@ task(eval_software_disambiguation, dependsOn: 'classes', type: JavaExec, group: 
 
 // Run like this: ./gradlew eval_software_doc_level -PgH=/path/grobid/home
 task(eval_software_doc_level, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
-    main = 'org.grobid.trainer.SoftwareTrainerRunner'
+    mainClass = 'org.grobid.trainer.SoftwareTrainerRunner'
     classpath = sourceSets.main.runtimeClasspath
     args '1', 'software_doc_level', getArg('gH', '../grobid-home')
     jvmArgs '-Xms2g', '-Xmx8g'
@@ -296,7 +300,7 @@ task(eval_software_doc_level, dependsOn: 'classes', type: JavaExec, group: 'eval
 
 // Run like this: ./gradlew eval_software_disamb_doc_level -PgH=/path/grobid/home
 task(eval_software_disamb_doc_level, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
-    main = 'org.grobid.trainer.SoftwareTrainerRunner'
+    mainClass = 'org.grobid.trainer.SoftwareTrainerRunner'
     classpath = sourceSets.main.runtimeClasspath
     args '1', 'software_disamb_doc_level', getArg('gH', '../grobid-home')
     jvmArgs '-Xms2g', '-Xmx8g'
@@ -304,7 +308,7 @@ task(eval_software_disamb_doc_level, dependsOn: 'classes', type: JavaExec, group
 
 // Run like this: ./gradlew eval_software_split -PgH=/path/grobid/home -Ps=0.8 -Pt=10
 task(eval_software_split, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
-    main = 'org.grobid.trainer.SoftwareTrainerRunner'
+    mainClass = 'org.grobid.trainer.SoftwareTrainerRunner'
     classpath = sourceSets.main.runtimeClasspath
     args '2', 'software', getArg('gH', '../grobid-home'), getArg('s', 0.9), getArg('t', '0')
     jvmArgs '-Xms2g', '-Xmx8g'
@@ -312,7 +316,7 @@ task(eval_software_split, dependsOn: 'classes', type: JavaExec, group: 'evaluati
 
 // Run like this: ./gradlew eval_software_disambiguation_split -PgH=/path/grobid/home -Ps=0.8 -Pt=10
 task(eval_software_disambiguation_split, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
-    main = 'org.grobid.trainer.SoftwareTrainerRunner'
+    mainClass = 'org.grobid.trainer.SoftwareTrainerRunner'
     classpath = sourceSets.main.runtimeClasspath
     args '2', 'software_disambiguation', getArg('gH', '../grobid-home'), getArg('s', 0.9), getArg('t', '0')
     jvmArgs '-Xms2g', '-Xmx8g'
@@ -320,7 +324,7 @@ task(eval_software_disambiguation_split, dependsOn: 'classes', type: JavaExec, g
 
 // Run like this: ./gradlew eval_software_doc_level_split -PgH=/path/grobid/home -Ps=0.8 -Pt=10
 task(eval_software_doc_level_split, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
-    main = 'org.grobid.trainer.SoftwareTrainerRunner'
+    mainClass = 'org.grobid.trainer.SoftwareTrainerRunner'
     classpath = sourceSets.main.runtimeClasspath
     args '2', 'software_doc_level', getArg('gH', '../grobid-home'), getArg('s', 0.9), getArg('t', '0')
     jvmArgs '-Xms2g', '-Xmx8g'
@@ -328,7 +332,7 @@ task(eval_software_doc_level_split, dependsOn: 'classes', type: JavaExec, group:
 
 // Run like this: ./gradlew eval_software_disamb_doc_level_split -PgH=/path/grobid/home -Ps=0.8 -Pt=10
 task(eval_software_disamb_doc_level_split, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
-    main = 'org.grobid.trainer.SoftwareTrainerRunner'
+    mainClass = 'org.grobid.trainer.SoftwareTrainerRunner'
     classpath = sourceSets.main.runtimeClasspath
     args '2', 'software_disamb_doc_level', getArg('gH', '../grobid-home'), getArg('s', 0.9), getArg('t', '0')
     jvmArgs '-Xms2g', '-Xmx8g'
@@ -336,7 +340,7 @@ task(eval_software_disamb_doc_level_split, dependsOn: 'classes', type: JavaExec,
 
 // Run like this: ./gradlew eval_software_nfold -PgH=/path/grobid/home -Pt=10
 task(eval_software_nfold, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
-    main = 'org.grobid.trainer.SoftwareTrainerRunner'
+    mainClass = 'org.grobid.trainer.SoftwareTrainerRunner'
     classpath = sourceSets.main.runtimeClasspath
     args '3', 'software', getArg('gH', '../grobid-home'), getArg('n', 10), getArg('t', '0')
     jvmArgs '-Xms2g', '-Xmx8g'
@@ -344,7 +348,7 @@ task(eval_software_nfold, dependsOn: 'classes', type: JavaExec, group: 'evaluati
 
 // Run like this: ./gradlew eval_software_disambiguation_nfold -PgH=/path/grobid/home -Pt=10
 task(eval_software_disambiguation_nfold, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
-    main = 'org.grobid.trainer.SoftwareTrainerRunner'
+    mainClass = 'org.grobid.trainer.SoftwareTrainerRunner'
     classpath = sourceSets.main.runtimeClasspath
     args '3', 'software_disambiguation', getArg('gH', '../grobid-home'), getArg('n', 10), getArg('t', '0')
     jvmArgs '-Xms2g', '-Xmx8g'
@@ -352,7 +356,7 @@ task(eval_software_disambiguation_nfold, dependsOn: 'classes', type: JavaExec, g
 
 // Run like this: ./gradlew eval_software_doc_level_nfold -PgH=/path/grobid/home -Pt=10
 task(eval_software_doc_level_nfold, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
-    main = 'org.grobid.trainer.SoftwareTrainerRunner'
+    mainClass = 'org.grobid.trainer.SoftwareTrainerRunner'
     classpath = sourceSets.main.runtimeClasspath
     args '3', 'software_doc_level', getArg('gH', '../grobid-home'), getArg('n', 10), getArg('t', '0')
     jvmArgs '-Xms2g', '-Xmx8g'
@@ -360,7 +364,7 @@ task(eval_software_doc_level_nfold, dependsOn: 'classes', type: JavaExec, group:
 
 // Run like this: ./gradlew eval_software_disamb_doc_level_nfold -PgH=/path/grobid/home -Pt=10
 task(eval_software_disamb_doc_level_nfold, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
-    main = 'org.grobid.trainer.SoftwareTrainerRunner'
+    mainClass = 'org.grobid.trainer.SoftwareTrainerRunner'
     classpath = sourceSets.main.runtimeClasspath
     args '3', 'software_disamb_doc_level', getArg('gH', '../grobid-home'), getArg('n', 10), getArg('t', '0')
     jvmArgs '-Xms2g', '-Xmx8g'
@@ -371,7 +375,7 @@ task(eval_software_disamb_doc_level_nfold, dependsOn: 'classes', type: JavaExec,
 
 // Run like this: ./gradlew annotated_corpus_generator_csv -Ppdf=/path/input/pdf -Pcsv=path/csv -Poutput=/output/directory
 task(annotated_corpus_generator_csv, dependsOn: 'classes', type: JavaExec, group: 'import') {
-    main = 'org.grobid.trainer.AnnotatedCorpusGeneratorCSV'
+    mainClass = 'org.grobid.trainer.AnnotatedCorpusGeneratorCSV'
     classpath = sourceSets.main.runtimeClasspath
     args getArg('pdf', ''), getArg('csv', ''), getArg('output', 'resources/dataset/software/corpus/')
     jvmArgs '-Xms2g', '-Xmx8g'
@@ -379,7 +383,7 @@ task(annotated_corpus_generator_csv, dependsOn: 'classes', type: JavaExec, group
 
 // Run like this: ./gradlew export_corpus_json -Pinput=/path/input/in.tei.xml -Poutput=/path/output/out.json
 task(export_corpus_json, dependsOn: 'classes', type: JavaExec, group: 'export') {
-    main = 'org.grobid.trainer.ExportCorpusJson'
+    mainClass = 'org.grobid.trainer.ExportCorpusJson'
     classpath = sourceSets.main.runtimeClasspath
     args getArg('input', ''), getArg('output', '')
     jvmArgs '-Xms2g', '-Xmx8g'
@@ -387,7 +391,7 @@ task(export_corpus_json, dependsOn: 'classes', type: JavaExec, group: 'export') 
 
 // Run like this: ./gradlew clean_tei_corpus_file -Ptei=/path/input/tei 
 task(clean_tei_corpus_file, dependsOn: 'classes', type: JavaExec, group: 'import') {
-    main = 'org.grobid.core.utilities.XMLUtilities'
+    mainClass = 'org.grobid.core.utilities.XMLUtilities'
     classpath = sourceSets.main.runtimeClasspath
     args getArg('xml', 'resources/dataset/software/corpus/all.tei.xml')
     jvmArgs '-Xms2g', '-Xmx8g'
@@ -395,7 +399,7 @@ task(clean_tei_corpus_file, dependsOn: 'classes', type: JavaExec, group: 'import
 
 // Run like this: ./gradlew post_process_corpus_no_mention -Pxml=/path/input/corpus/tei/xml/file -Pcsv=path/csv -Ppdf=path/pdf -Poutput=/output/path/tei/corpus/file
 task(post_process_corpus, dependsOn: 'classes', type: JavaExec, group: 'import') {
-    main = 'org.grobid.trainer.XMLCorpusPostProcessorNoMention'
+    mainClass = 'org.grobid.trainer.XMLCorpusPostProcessorNoMention'
     classpath = sourceSets.main.runtimeClasspath
     args getArg('xml', ''), getArg('csv', ''), getArg('pdf', ''), getArg('output', '')
     jvmArgs '-Xms2g', '-Xmx8g'
