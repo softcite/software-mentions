@@ -61,7 +61,7 @@ public class SoftwareComponent extends KnowledgeEntity implements Comparable<Sof
 	// orign of the component definition
 	protected Origin origin = Origin.GROBID;
 	
-	// language
+	// language (natural language, not programming language)
 	protected String lang = null;
 
 	// tagging label of the LayoutToken cluster corresponding to the component

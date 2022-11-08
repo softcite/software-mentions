@@ -34,6 +34,7 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 	private SoftwareComponent version = null;
 	private SoftwareComponent creator = null;
 	private SoftwareComponent softwareURL = null;
+	private SoftwareComponent language = null;
 
 	// one or several bibliographical references attached to the software entity
 	private List<BiblioComponent> bibRefs = null;
@@ -117,6 +118,14 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 
 	public void setSoftwareURL(SoftwareComponent softwareURL) {
 		this.softwareURL = softwareURL;
+	}
+
+	public SoftwareComponent getLanguage() {
+		return this.language;
+	}
+
+	public void setLanguage(SoftwareComponent language) {
+		this.language = language;
 	}
 
 	public List<BiblioComponent> getBibRefs() {
@@ -258,6 +267,11 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 		else if (entity2.getSoftwareURL() == null)
 			entity2.setSoftwareURL(entity1.getSoftwareURL());
 
+		if (entity1.getLanguage() == null)
+			entity1.setLanguage(entity2.getLanguage());
+		else if (entity2.getLanguage() == null)
+			entity2.setLanguage(entity1.getLanguage());
+
 		if (entity1.getBibRefs() == null)
 			entity1.setBibRefs(entity2.getBibRefs());
 		else if (entity2.getBibRefs() == null)
@@ -284,6 +298,11 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 			entity1.setSoftwareURL(new SoftwareComponent(entity2.getSoftwareURL()));
 		else if (entity2.getSoftwareURL() == null && entity1.getSoftwareURL() != null)
 			entity2.setSoftwareURL(new SoftwareComponent(entity1.getSoftwareURL()));
+
+		if (entity1.getLanguage() == null && entity2.getLanguage() != null)
+			entity1.setLanguage(new SoftwareComponent(entity2.getLanguage()));
+		else if (entity2.getLanguage() == null && entity1.getLanguage() != null)
+			entity2.setLanguage(new SoftwareComponent(entity1.getLanguage()));
 
 		if (entity1.getBibRefs() == null && entity2.getBibRefs() != null) {
 			List<BiblioComponent> newBibRefs = new ArrayList<>();
@@ -373,6 +392,8 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 			this.creator = component;
 		} else if (component.getLabel().equals(SoftwareTaggingLabels.VERSION)) {
 			this.version = component;
+		} else if (component.getLabel().equals(SoftwareTaggingLabels.LANGUAGE)) {
+			this.language = component;
 		}
 	}
 
@@ -407,12 +428,25 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 			return "{}";
 		}
 		JsonStringEncoder encoder = JsonStringEncoder.getInstance();
+		byte[] encoded = null;
+		String output = null;
+
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("{ ");
 
+		buffer.append("\"type\": \"software\"");
+
+		// type of the software
+		if (type != null) {
+			buffer.append(", \"software-type\": \"");
+			encoded = encoder.quoteAsUTF8(type.getName());
+            output = new String(encoded);
+            buffer.append(output).append("\"");
+		}
+
 		// knowledge information
 		if (softwareName.getWikidataId() != null) {
-			buffer.append("\"wikidataId\": \"" + softwareName.getWikidataId() + "\"");
+			buffer.append(", \"wikidataId\": \"" + softwareName.getWikidataId() + "\"");
 		}
 		if (softwareName.getWikipediaExternalRef() != -1) {
 			buffer.append(", \"wikipediaExternalRef\": " + softwareName.getWikipediaExternalRef());
@@ -424,22 +458,9 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 			buffer.append(", \"confidence\": " + TextUtilities.formatFourDecimals(softwareName.getDisambiguationScore().doubleValue()));
 		}
 
-		if ((softwareName.getWikidataId() != null) || 
-			(softwareName.getWikipediaExternalRef() != -1) || 
-			(softwareName.getDisambiguationScore() != null) ||
-			(softwareName.getLang() != null))
-			buffer.append(", ");
-
-		byte[] encoded = null;
-		String output = null;
-		
-		buffer.append("\"software-name\": ");
+		buffer.append(", \"software-name\": ");
 		buffer.append(softwareName.toJson());
-		if (type != null) {
-			encoded = encoder.quoteAsUTF8(type.getName().toLowerCase());
-            output = new String(encoded);
-			buffer.append(", \"type\": \"" + output + "\"");	
-		}
+		
 		if (entityId != null) {
 			buffer.append(", \"id\": \"" + entityId + "\"");	
 		}
@@ -451,6 +472,9 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 		}
 		if (softwareURL != null) {
 			buffer.append(", \"url\":" + softwareURL.toJson());
+		}
+		if (language != null) {
+			buffer.append(", \"language\":" + language.toJson());
 		}
 
 		if (context != null && context.length()>0) {
