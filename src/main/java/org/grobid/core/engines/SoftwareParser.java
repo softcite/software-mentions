@@ -366,6 +366,15 @@ public class SoftwareParser extends AbstractParser {
                 } 
             }
 
+            // explicit availability statements
+            documentParts = doc.getDocumentPart(SegmentationLabels.AVAILABILITY);
+            if (documentParts != null) {
+                List<LayoutToken> availabilityTokens = doc.getTokenizationParts(documentParts, doc.getTokenizations());
+                if (availabilityTokens != null) {
+                    selectedLayoutTokenSequences.add(availabilityTokens);
+                }
+            }
+
             // actual processing of the selected sequences which have been delayed to be processed in groups and
             // take advantage of deep learning batch
             processLayoutTokenSequenceMultiple(selectedLayoutTokenSequences, entities, disambiguate, addParagraphContext);
