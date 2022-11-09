@@ -2384,6 +2384,29 @@ public class SoftwareParser extends AbstractParser {
             }
         }
 
+        // model conflict language / software for the same position: so which one to choose? it is reasonable to 
+        // consider it as a software environment corresponding to the identified programming language
+        if (entityTypes.size() > 0) {
+            for(Iterator iter = entityTypes.iterator(); iter.hasNext();) {
+                SoftwareType entityType= (SoftwareType) iter.next();
+                
+                if (entityType.getType() == SoftwareLexicon.Software_Type.LANGUAGE) {
+                    OffsetPosition localTypePosition = entityType.getOffsets();
+                    for(SoftwareEntity softwareEntity : entities) {
+                        SoftwareComponent softwareName = softwareEntity.getSoftwareName();
+                        OffsetPosition positionEntity = softwareName.getOffsets();
+
+                        if (positionEntity.start == localTypePosition.start && positionEntity.end == localTypePosition.end) {
+                            softwareEntity.setType(SoftwareLexicon.Software_Type.ENVIRONMENT);
+
+                            // consume the entityType
+                            iter.remove();
+                        }
+                    }
+                }
+            }
+        }
+
         Collections.sort(entities);
 
         // try to attach remaining language name(s) to software entity
@@ -2467,9 +2490,6 @@ public class SoftwareParser extends AbstractParser {
             }
         }
 
-        // model conflict language / software for the same position: so which one to choose? it is reasonable to 
-        // consider it as a software environment corresponding to the identified programming language
-
         return entities;
     }
 
@@ -2482,6 +2502,12 @@ public class SoftwareParser extends AbstractParser {
         languageComponent.setTokens(entityType.getTokens());
         List<BoundingBox> boundingBoxes = BoundingBoxCalculator.calculate(entityType.getTokens());
         languageComponent.setBoundingBoxes(boundingBoxes);
+
+        // look-up Wikidata information
+        org.grobid.core.utilities.Pair<String,String> wikiInfo = softwareLexicon.getProgrammingLanguageWikiInfo(entityType.getRawForm());
+        if (wikiInfo != null && wikiInfo.getB() != null && wikiInfo.getB().length()>0) {
+            languageComponent.setWikidataId(wikiInfo.getB());
+        }
         return languageComponent;
     }
 
