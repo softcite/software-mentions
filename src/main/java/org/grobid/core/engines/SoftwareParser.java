@@ -246,35 +246,40 @@ public class SoftwareParser extends AbstractParser {
             List<List<LayoutToken>> selectedLayoutTokenSequences = new ArrayList<>();
 
             // from the header, we are interested in title, abstract and keywords
-            SortedSet<DocumentPiece> documentParts = doc.getDocumentPart(SegmentationLabels.HEADER);
             BiblioItem resHeader = null;
+            SortedSet<DocumentPiece> documentParts = doc.getDocumentPart(SegmentationLabels.HEADER);
             if (documentParts != null) {
-                Pair<String,List<LayoutToken>> headerFeatured = parsers.getHeaderParser().getSectionHeaderFeatured(doc, documentParts);
-                String header = featuredHeader.getLeft();
-                List<LayoutToken> headerTokenization = featuredHeader.getRight();
-                String labeledResult = null;
-                if ((header != null) && (header.trim().length() > 0)) {
-                    labeledResult = parsers.getHeaderParser().label(header);
-                    resHeader = new BiblioItem();
-                    resHeader.generalResultMapping(labeledResult, tokenizationHeader);
+                try {
+                    Pair<String,List<LayoutToken>> headerFeatured = parsers.getHeaderParser().getSectionHeaderFeatured(doc, documentParts);
+                    String header = headerFeatured.getLeft();
+                    List<LayoutToken> headerTokenization = headerFeatured.getRight();
+                    String labeledResult = null;
+                    if ((header != null) && (header.trim().length() > 0)) {
+                        labeledResult = parsers.getHeaderParser().label(header);
+                        resHeader = new BiblioItem();
+                        resHeader.generalResultMapping(labeledResult, headerTokenization);
 
-                    // title
-                    List<LayoutToken> titleTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_TITLE);
-                    if (titleTokens != null) {
-                        selectedLayoutTokenSequences.add(titleTokens);
-                    } 
+                        // title
+                        List<LayoutToken> titleTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_TITLE);
+                        if (titleTokens != null) {
+                            selectedLayoutTokenSequences.add(titleTokens);
+                        } 
 
-                    // abstract
-                    List<LayoutToken> abstractTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_ABSTRACT);
-                    if (abstractTokens != null) {
-                        selectedLayoutTokenSequences.add(abstractTokens);
-                    } 
+                        // abstract
+                        List<LayoutToken> abstractTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_ABSTRACT);
+                        if (abstractTokens != null) {
+                            selectedLayoutTokenSequences.add(abstractTokens);
+                        } 
 
-                    // keywords
-                    List<LayoutToken> keywordTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_KEYWORD);
-                    if (keywordTokens != null) {
-                        selectedLayoutTokenSequences.add(keywordTokens);
+                        // keywords
+                        List<LayoutToken> keywordTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_KEYWORD);
+                        if (keywordTokens != null) {
+                            selectedLayoutTokenSequences.add(keywordTokens);
+                        }
                     }
+                } catch (Exception e) {
+                    logger.error("Fail to parse header area for file " + file.getPath(), e);
+                    resHeader = null;
                 }
             }
 
