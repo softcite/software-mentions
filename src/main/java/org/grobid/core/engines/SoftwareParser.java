@@ -250,8 +250,8 @@ public class SoftwareParser extends AbstractParser {
             BiblioItem resHeader = null;
             if (documentParts != null) {
                 Pair<String,List<LayoutToken>> headerFeatured = parsers.getHeaderParser().getSectionHeaderFeatured(doc, documentParts);
-                String header = headerFeatured.getLeft();
-                List<LayoutToken> tokenizationHeader = doc.getTokenizationParts(documentParts, doc.getTokenizations());
+                String header = featuredHeader.getLeft();
+                List<LayoutToken> headerTokenization = featuredHeader.getRight();
                 String labeledResult = null;
                 if ((header != null) && (header.trim().length() > 0)) {
                     labeledResult = parsers.getHeaderParser().label(header);
