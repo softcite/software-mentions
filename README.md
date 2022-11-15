@@ -581,7 +581,7 @@ Batch size is a parameter constrained by the capacity of the available GPU. An i
 Every mentioned software in a document is automatically enriched with usage, creation and sharing information based on the different software mention contexts in the document. In the JSON results, mentioned software are characterized with the following attributes:
 
  *  __used__: the mentioned software is used by the research work disclosed in the document
- *  __created__: the mentioned software is a creation/contribution of the research work disclosed in the document (creation, extension of an existing software, new script to be run on an existing software envrionment, etc.)
+ *  __created__: the mentioned software is a creation of the research work disclosed in the document or the object of a contribution of the research work 
  *  __shared__: software is claimed to be shared publicly via a sharing statement (note: this does not necessarily means that the softwate is Open Source)
 
 For each of these attributes, a score in `[0,1]` and binary class values are provided at mention-level and at document-level. For example, the following mention context indicates that the software `Mobyle` is shared. However, at document-level, other contexts further characterize the role of the software, indicating that it is also used and is a creation described in the research work corresponding to the document:
