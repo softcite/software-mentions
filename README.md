@@ -16,7 +16,7 @@ November 1–5, 2021, QLD, Australia. https://doi.org/10.1145/3459637.3481936
 [Best Applied Research Paper Award runner-up]
 ```
 
-As the other GROBID models, the module relies only on state-of-the-art machine learning. The tool can use linear CRF (via [Wapiti](https://github.com/kermitt2/Wapiti) JNI integration) or Deep Learning model such as BiLSTM-CRF, ELMo or fine-tuned transformers BERT, e.g. SciBERT (via [DeLFT](https://github.com/kermitt2/delft) JNI integration) and any combination of them. 
+As the other GROBID models, the module relies only on state-of-the-art machine learning. The tool can use linear CRF (via [Wapiti](https://github.com/kermitt2/Wapiti) JNI integration) or Deep Learning model such as BiLSTM-CRF, ELMo or fine-tuned transformers BERT, e.g. SciBERT and LinkBERT (via [DeLFT](https://github.com/kermitt2/delft) JNI integration) and any combination of them. 
 
 A description of the task can be found [here](doc/description.md).
 

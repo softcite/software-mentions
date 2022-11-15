@@ -289,7 +289,7 @@ The XML string can then be retrieved from the JSON result and parsed with the ap
     }, {
         "refKey": 52,
         "tei": "<biblStruct xml:id=\"b52\">\n\t<analytic>\n\t\t<title level=\"a\" type=\"main\">ProSA-web: interactive web service for the recognition of errors in three-dimensional structures of proteins</title>\n\t\t<author>\n\t\t\t<persName><forename type=\"first\">B</forename><surname>Wei</surname></persName>\n\t\t</author>\n\t\t<author>\n\t\t\t<persName><forename type=\"first\">R</forename><forename type=\"middle\">L</forename><surname>Jing</surname></persName>\n\t\t</author>\n\t\t<author>\n\t\t\t<persName><forename type=\"first\">C</forename><forename type=\"middle\">S</forename><surname>Wang</surname></persName>\n\t\t</author>\n\t\t<author>\n\t\t\t<persName><forename type=\"first\">Xp ;</forename><surname>Chang</surname></persName>\n\t\t</author>\n\t\t<author>\n\t\t\t<persName><forename type=\"first\">M</forename><surname>Wiederstein</surname></persName>\n\t\t</author>\n\t\t<author>\n\t\t\t<persName><forename type=\"first\">M</forename><forename type=\"middle\">J</forename><surname>Sippl</surname></persName>\n\t\t</author>\n\t</analytic>\n\t<monogr>\n\t\t<title level=\"j\">Scientia Agricola Sinica</title>\n\t\t<imprint>\n\t\t\t<biblScope unit=\"volume\">39</biblScope>\n\t\t\t<biblScope unit=\"page\" from=\"407\" to=\"410\" />\n\t\t\t<date type=\"published\" when=\"2006\">2006. 2007</date>\n\t\t</imprint>\n\t</monogr>\n\t<note>Nucleic Acids Research</note>\n</biblStruct>\n"
-    }],
+    }
 ]
 ```
 
