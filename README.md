@@ -46,7 +46,7 @@ The [web console](https://github.com/ourresearch/software-mentions#console-web-a
 
 This demo is only provided for test, without any guaranties regarding the service quality and availability. If you plan to use this component at scale or in production, you need to install it locally. 
 
-**The demo run with the CRF model** to reduce the computational load, as the server is used for other demos and has no GPU (for cost reasons). For significantly more accurate results (see the [benchmarking](https://github.com/ourresearch/software-mentions#benchmarking-of-the-sequence-labeling-task)), a local installation with a SciBERT model is required. 
+**The demo run with the CRF model** to reduce the computational load, as the server is used for other demos and has no GPU (for cost reasons). For significantly more accurate results (see the [benchmarking](https://github.com/ourresearch/software-mentions#benchmarking-of-the-sequence-labeling-task)), a local installation with sciBERT models is required, the Docker image being the easiest way to achieve this (SciBERT models are included and used by default in the image). 
 
 ## The Softcite Dataset
 
@@ -66,41 +66,10 @@ The dataset is maintained on the following GitHub repository: https://github.com
 
 This dataset is the result of the extraction of software mentions from the set of publications of the CORD-19 corpus (https://allenai.org/data/cord-19) by the Softcite software recognizer using SciBERT fine-tuned model: https://zenodo.org/record/5235661 
 
-## Install, build, run
-
-The easiest way to deploy and run the service is to use the Docker image, see next section. 
-
-Building the module requires JDK 1.8 or higher. First install and build the latest development version of GROBID as explained by the [documentation](http://grobid.readthedocs.org), together with [DeLFT](https://github.com/kermitt2/delft) for Deep Learning model support.
-
-Under the installed and built `grobid/` directory, clone the present module software-mentions (it will appear as sibling sub-project to grobid-core, grobid-trainer, etc.):
-
-> cd grobid/
-
-> git clone https://github.com/kermitt2/software-mentions
-
-Copy the provided pre-trained models in the standard grobid-home path:
-
-> ./gradlew copyModels 
-
-Install larger models (fine-tuned transformers, currently the best performing one, total 1.5 GB size and too large to be stored in the GitHub repo), they need to be downloaded and installed with the following command:
-
-> ./gradlew installModels
-
-Try compiling everything with:
-
-> ./gradlew clean install 
-
-Run some test: 
-
-> ./gradlew test
-
-To start the service:
-
-> ./gradlew run
-
 ## Docker image
 
-It's possible to use a Docker image via [docker HUB](https://hub.docker.com/r/grobid/software-mentions), pull the image (5.25GB) as follow: 
+It is recommended to use the Docker image for running the service. The best Deep Learning models are included and are used by default by this image. 
+To use a Docker image via [docker HUB](https://hub.docker.com/r/grobid/software-mentions), pull the image (around 10GB) as follow: 
 
 ```bash
 docker pull grobid/software-mentions:0.7.3-SNAPSHOT
@@ -142,7 +111,39 @@ As an alterntive, a docker image for the `software-mentions` service can be buil
 
 The Docker image build take several minutes, installing GROBID, software-mentions, a complete Python Deep Learning environment based on [DeLFT](https://github.com/kermitt2/delft) and deep learning models downloaded from the internet (one fine-tuned model with a BERT layer has a size of around 400 MB). The resulting image is thus very large, around 8GB, due to the deep learning resources and models. 
 
-### Console web app
+## Install, build, run
+
+The easiest way to deploy and run the service is to use the Docker image, see previous section. 
+
+Building the module requires JDK 1.8 or higher. First install and build the latest development version of GROBID as explained by the [documentation](http://grobid.readthedocs.org), together with [DeLFT](https://github.com/kermitt2/delft) for Deep Learning model support.
+
+Under the installed and built `grobid/` directory, clone the present module software-mentions (it will appear as sibling sub-project to grobid-core, grobid-trainer, etc.):
+
+> cd grobid/
+
+> git clone https://github.com/kermitt2/software-mentions
+
+Copy the provided pre-trained models in the standard grobid-home path:
+
+> ./gradlew copyModels 
+
+Install larger models (fine-tuned transformers, currently the best performing one, total 1.5 GB size and too large to be stored in the GitHub repo), they need to be downloaded and installed with the following command:
+
+> ./gradlew installModels
+
+Try compiling everything with:
+
+> ./gradlew clean install 
+
+Run some test: 
+
+> ./gradlew test
+
+To start the service:
+
+> ./gradlew run
+
+## Console web app
 
 Javascript demo/console web app is then accessible at ```http://localhost:8060```. From the console and the `RESTfull services` tab, you can process chunk of text (select `ProcessText`) or process a complete PDF document (select `Annotate PDF document`). 
 
@@ -164,9 +165,13 @@ Software entity linking against Wikidata is realized by [entity-fishing](https:/
 
 To exploit the Softcite software mention recognition service efficiently (concurrent calls) and robustly, a Python client is available [here](https://github.com/softcite/software_mentions_client).
 
-### Web API
+## JSON format for the extracted software mention
 
-#### /service/processSoftwareText
+The resulting software mention extractions include many attributes and information. These extractions follow the [JSON format documented on this page](https://github.com/ourresearch/software-mentions/blob/master/doc/annotation_schema.md). 
+
+## Web API
+
+### /service/processSoftwareText
 
 Identify the software mentions in text and optionally disambiguate the extracted software mentions against Wikidata.  
 
@@ -254,7 +259,7 @@ which should return this:
 
 Runtimes are expressed in milliseconds. 
 
-#### /service/annotateSoftwarePDF
+### /service/annotateSoftwarePDF
 
 |  method   |  request type         |  response type       |  parameters         |  requirement  |  description  |
 |---        |---                    |---                   |---                  |---            |---            |
@@ -283,7 +288,7 @@ For PDF, each entity will be associated with a list of bounding box coordinates 
 
 In addition, the response will contain the bibliographical reference information associated to a software mention when found. The bibliographical information are provided in XML TEI (similar format as GROBID).  
 
-#### /service/extractSoftwareXML
+### /service/extractSoftwareXML
 
 The softcite software mention service can extract software mentions with sentence context information from a variety of publisher XML formats, including not only JATS, but also a dozen of mainstream publisher native XML (Elsevier, Nature, ScholarOne, Wiley, etc.). See [Pub2TEI](https://github.com/kermitt2/Pub2TEI) for the list of supported formats. 
 
@@ -310,7 +315,7 @@ Using ```curl``` POST request with a __XML file__:
 curl --form input=@./src/test/resources/PMC3130168.xml --form disambiguate=1 localhost:8060/service/extractSoftwareXML
 ```
 
-#### /service/isalive
+### /service/isalive
 
 The service check `/service/isalive` will return true/false whether the service is up and running.
 
@@ -624,7 +629,7 @@ On the demo console, these attributes are reported in the resulting document-lev
 
 ![GROBID Software mentions Demo](doc/images/screen9.png)
 
-### Training and evaluation corpus
+### Training and evaluation corpus for context characterizations
 
 We use the following manually annotated resources for training and evaluation:
 
@@ -638,7 +643,7 @@ SoMeSci - Software Mentions in Science (0.1) [Data set].
 Zenodo. https://doi.org/10.5281/zenodo.4701764
 ```
 
-### Evaluation
+### Evaluation of context characterizations
 
 To perform the enrichment for the three above defined attribute classes, we currently use three binary classifiers applied to the contextual sentences of a mention. We hypothesize here that the wording used to introduce and describe a software mention can characterize its possible usage/creation/sharing. Classifiers are based on fine-tuned SciBERT implemented with [DeLFT](https://github.com/kermitt2/delft). 
 

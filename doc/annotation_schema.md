@@ -2,13 +2,13 @@
 
 This page presents the current JSON schema used to represent software mention extractions from a scholar publication or a fragment of scientific text.
 
-## Response enveloppe
+## Response envelope
 
 ### Text query
 
-The response to a text fragment-level query contains first metadata about the software version used to process the document, date of processing and runtime. The list of identified software `mentions` are provided as a simple JSON array. Note that no bibliographical reference information is associated to text queries, because Grobid extracts and resolves bibliographical references at document-level. 
+The response to a text fragment-level query contains first metadata about the software version used to process the document, the date of processing and the server runtime. The list of identified software `mentions` are provided as a JSON array. Note that no bibliographical reference information is associated to text queries, because Grobid extracts and resolves bibliographical references at document-level. 
 
-```
+```json
 {
     "application": "software-mentions",
     "version": "0.7.3-SNAPSHOT",
@@ -20,15 +20,15 @@ The response to a text fragment-level query contains first metadata about the so
 
 ### PDF and XML document query
 
-As previously, the document-level information corresponds first to metadata about the software version used to process the document, date of processing and runtime.
+Similarly as text queries, the document-level information corresponds first to metadata about the software version used to process the document, the date of processing and the server runtime.
 
-In addition in case of a PDF input, the size of the pages of the document are provided according to standard PDF representation (in particular using "abstract" unit, see [here](https://grobid.readthedocs.io/en/latest/Coordinates-in-PDF/#coordinate-system-in-the-pdf) for more details). The coordinates of the annotations will be relative to these pages and their X/Y sizes.  
+In addition in case of a PDF input, the size of the pages of the document are provided according to standard PDF representation (in particular using "abstract" PDF unit, see [here](https://grobid.readthedocs.io/en/latest/Coordinates-in-PDF/#coordinate-system-in-the-pdf) for more details). The coordinates of the annotations will be relative to these pages and their X/Y sizes.  
 
 A MD5 hash is also included as a unique identifier of the PDF file, specific to the uploaded file binaries. 
 
-A `references` elements is included together with the array of `mentions` to list the extracted structured bibliographical references associated to the mentioned software.  
+A `references` elements is included together with the array of `mentions`, listing the extracted structured bibliographical references associated to the mentioned software.  
 
-```
+```json
 "application": "software-mentions",
     "version": "0.7.3-SNAPSHOT",
     "date": "2022-11-15T08:05+0000",
@@ -58,7 +58,7 @@ In case an XML document is the input to be processed, representations are simpli
 
 A software mention is a JSON element using the following general structure, which is repeated for every mention spotted in a document: 
 
-```
+```json
 {
     "type": "software",
     "software-type": "...",
@@ -85,17 +85,17 @@ The `type` here is the general type of entity and will always be `software` for 
 
 `software-type` refines when possible the type of software, with the following possible values:
 
-- `environment`: a software environment is a generic software used to resolve tasks or create additional application-specific by the way of additional scripts/macros/codes to be executed or dependent on this software environment. When a software environment is mentioned alone in a research paper, it is frequent that some implicit code exists, written in this environment.
+- `environment`: a software environment is a generic software used to resolve tasks or create additional application-specific by the way of additional scripts/macros/codes to be executed or dependent on this software environment. Examples are R-Studio, Jupyter Notebook, MATLAB or SAS. When a software environment is mentioned alone in a research paper (for example SPSS), some implicit code might exist, written in this environment. However, this is not always the case, because many software environments include today point-and-click user interface and can be used without writing any scripts for solving complex scientific tasks. 
 
-- `implicit`: the mentioned software is not named, it is simplified referred to with a generic phrase such as code, script, program, modules, etc. It corresponds usually to some one-shot code written specifically for a research work. 
+- `implicit`: the mentioned software is not named, it is simply referred to by the way of a generic phrase such as "code", "script", "program", "module", etc. It corresponds usually to some one-shot code written specifically for a research work. 
 
 - `component`: when used in the same context of a software environment, the software mention indicated that the software is running or depends on this environment. 
 
 - `software`: this corresponds to the default case of a named software running as standalone application.
 
-The fields `software-name`, `version`, `publisher` and `url` corresponds to extracted chunks of information identified in the mention context. They all follow the same substructure, identifying offset information relative to the context string (`offsetStart` and `offsetEnd`) and bounding box coordinates relative to the PDF (`boundingBoxes`):
+The fields `software-name`, `version`, `publisher` and `url` correspond to extracted chunks of information identified in the mention context. They all follow the same substructure, encoding offset information relative to the context string (`offsetStart` and `offsetEnd`) and bounding box coordinates relative to the PDF (`boundingBoxes`):
 
-```
+```json
     "software-name": {
         "rawForm": "ClustalW",
         "normalizedForm": "ClustalW",
@@ -114,6 +114,8 @@ The fields `software-name`, `version`, `publisher` and `url` corresponds to extr
         }]
     }
 ```
+
+In case of a response to an XML document or a text fragment, coordinates in general are not present. 
 
 `rawForm` give the exact strict as extracted from the source text content. `normalizedForm` is a normalized version of this extracted string, more appropriate for displaying results to users and further processing like deduplication (normalization ensures in particular a string without possible interrupting end-of-line and various possible PDF noise). 
 
@@ -135,7 +137,7 @@ See [here](https://grobid.readthedocs.io/en/latest/Coordinates-in-PDF/#coordinat
 
 `references` describes the possible "reference markers" (also called "reference callouts") as extracted in the document associated to this software. There can be more than one reference markers associated to a software mention. For each reference marker, a `refKey` is used to link this reference marker to the full parsed bibliographical reference identified in the document (see next section). If the reference marker is present in the mention context, it is expressed with similar information as the extracted field attributes (so it will contain offsets and bounding box information). Otherwise, the reference marker information is propagated from other contexts. The original reference string is identified with the attribte `label` and its normalized form with the attribute `normalizedForm`.
 
-```
+```json
 "references": [{
     "label": "(Wiederstein and Sippl, 2007)",
     "normalizedForm": "Wiederstein and Sippl, 2007",
@@ -151,8 +153,6 @@ See [here](https://grobid.readthedocs.io/en/latest/Coordinates-in-PDF/#coordinat
     }]
 }]
 ```
-
-In case of a response to an XML document or a text fragment, coordinates in general are not present. 
 
 `mentionContextAttributes` and `documentContextAttributes` follow the same scheme and provide information about the mentioned software in term of usage, creation and sharing based on the different software mention contexts in the document. Mentioned software are characterized with the following attributes:
 
@@ -200,7 +200,7 @@ For each of these attributes, a confidence scores in `[0,1]` and a binary class 
 
 Here is an example of a full JSON mention object following the described scheme, with a software name associated to a URL and a bibliographical reference marker, for a software used in the described research work:
 
-```
+```json
 {
     "type": "software",
     "software-type": "software",
@@ -279,7 +279,7 @@ The encoding is very simple and relies on GROBID TEI results. For every involved
 
 The XML string can then be retrieved from the JSON result and parsed with the appropriate XML parser. 
 
-```
+```json
 "references": [{
         "refKey": 24,
         "tei": "<biblStruct xml:id=\"b24\">\n\t<analytic>\n\t\t<title level=\"a\" type=\"main\">Protein secondary structure prediction based on position-specific scoring matrices 1 1Edited by G. Von Heijne</title>\n\t\t<author>\n\t\t\t<persName><forename type=\"first\">David</forename><forename type=\"middle\">T</forename><surname>Jones</surname></persName>\n\t\t</author>\n\t\t<idno type=\"DOI\">10.1006/jmbi.1999.3091</idno>\n\t</analytic>\n\t<monogr>\n\t\t<title level=\"j\">Journal of Molecular Biology</title>\n\t\t<title level=\"j\" type=\"abbrev\">Journal of Molecular Biology</title>\n\t\t<idno type=\"ISSN\">0022-2836</idno>\n\t\t<imprint>\n\t\t\t<biblScope unit=\"volume\">292</biblScope>\n\t\t\t<biblScope unit=\"issue\">2</biblScope>\n\t\t\t<biblScope unit=\"page\" from=\"195\" to=\"202\" />\n\t\t\t<date type=\"published\" when=\"1999-09\">1999</date>\n\t\t\t<publisher>Elsevier BV</publisher>\n\t\t</imprint>\n\t</monogr>\n</biblStruct>\n"
