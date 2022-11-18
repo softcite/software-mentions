@@ -29,7 +29,7 @@ A MD5 hash is also included as a unique identifier of the PDF file, specific to 
 A `references` elements is included together with the array of `mentions`, listing the extracted structured bibliographical references associated to the mentioned software.  
 
 ```json
-"application": "software-mentions",
+    "application": "software-mentions",
     "version": "0.7.3-SNAPSHOT",
     "date": "2022-11-15T08:05+0000",
     "md5": "2E7BEFDEE469C6F80024FC03FD97FE18",

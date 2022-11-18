@@ -1,13 +1,16 @@
 # Software mention recognizer in scientific literature
 
-The goal of this component is to recognize in textual documents and in PDF any mentions of software with associated attribute information such as number version, author, url or version date.   
+The goal of this component is to recognize in textual documents and in PDF any mentions of software with associated attribute information such as number version, publisher, url, version, bibliographical references and programming language. 
+
+The tool tries to distinguish implicit software (piece of software without name, but refered to with generic phrases such as "code", "script", "module", "marco", "program", etc.), software environment (a software for creating custom task-solving application, usually via some scripts, such as MATLAB, R-Studio, SPSS, etc.) and software mentioned as part of a larger software environment (module, package, etc.). 
+
+The tool also characterize the software mention at mention and document-level to support various scenarios, predicting from the mention contexts if the  software is used or not in the described research, created or not as part of the research and shared publicly or not. 
 
 ## Existing works
 
 Existing works are mainly relying on rule-based approaches and gazeteers of software names. 
 
-Using the rule-based technique, Duck et al identify software mentions with a precision of 0.58 and recall of 0.68 (Duck, Nenadic, Brass, Robertson, & Stevens, 2013). In a later paper they improve this to 0.80 and 0.64 respectively
-(Duck et al., 2016).
+Using the rule-based technique, Duck et al identify software mentions with a precision of 0.58 and recall of 0.68 (Duck, Nenadic, Brass, Robertson, & Stevens, 2013). In a later paper they improve this to 0.80 and 0.64 respectively (Duck et al., 2016).
 
 Priem and Piwowar (2016) employ a related approach in the Depsy application (http://depsy.org), using preset search phrases to find mentions.
 
