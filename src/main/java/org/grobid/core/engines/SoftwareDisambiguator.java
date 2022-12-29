@@ -227,6 +227,7 @@ public class SoftwareDisambiguator {
 //System.out.println("Calling: " + url.toString());
                 // load the software customisation
                 File cutomisationFile = new File("resources/config/customisation-software.json");
+                cutomisationFile = new File(cutomisationFile.getAbsolutePath());
                 String json = FileUtils.readFileToString(cutomisationFile, "UTF-8");
 
                 CloseableHttpClient httpClient = HttpClients.createDefault();
