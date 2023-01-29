@@ -46,7 +46,7 @@ def build_annotation_map(softcite_corpus_path):
 
     return annotation_map
 
-def create_holdout_sets(softcite_corpus_path, tei_corpus_path, negative_examples_file_path, ratio=0.2):
+def create_resource_sets(softcite_corpus_path, tei_corpus_path, negative_examples_file_path):
     annotation_map = build_annotation_map(softcite_corpus_path)
 
     build_resources(softcite_corpus_path, tei_corpus_path, negative_examples_file_path, annotation_map)
@@ -204,13 +204,11 @@ if __name__ == "__main__":
     parser.add_argument("--softcite-corpus", type=str, help="path to the full softcite corpus file")
     parser.add_argument("--tei-corpus", type=str, help="path to the directory of full text TEI XML files")
     parser.add_argument("--negative-examples-file", type=str, help="path to the file containing the set of negative examples")
-    parser.add_argument("--ratio", type=float, help="proportion of documents tobe assigned to the holdout set, default is 0.2")
 
     args = parser.parse_args()
     softcite_corpus_path = args.softcite_corpus
     tei_corpus_path = args.tei_corpus
     negative_examples_file_path = args.negative_examples_file
-    ratio = args.ratio
 
     # check path and call methods
     if softcite_corpus_path is not None and not os.path.isfile(softcite_corpus_path):
@@ -223,5 +221,5 @@ if __name__ == "__main__":
         print("the path to the negative example files is not valid: ", negative_examples_file_path)
         exit()
     else:
-        create_holdout_sets(softcite_corpus_path, tei_corpus_path, negative_examples_file_path, ratio)
+        create_resource_sets(softcite_corpus_path, tei_corpus_path, negative_examples_file_path)
 

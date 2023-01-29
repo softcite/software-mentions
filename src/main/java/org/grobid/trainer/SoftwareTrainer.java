@@ -124,12 +124,14 @@ public class SoftwareTrainer extends AbstractTrainer {
 
 
     /**
-     * Training data here are produced from the unique training TEI file containing labelled paragraphs only
+     * Training data here are produced from the unique training TEI file containing labelled paragraphs only.
+     * We optionally add negative examples (paragraphs without labels coming from the rest of the full text 
+     * articles).
      *
      * Negative example modes: 
      * 0 -> no added negative examples
      * 1 -> random negative examples
-     * 2 -> erroneously predicted negative examples
+     * 2 -> erroneously predicted negative examples (active sampling)
      *
      */
     public int createCRFPPData(final File corpusDir,

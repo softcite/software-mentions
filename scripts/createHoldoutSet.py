@@ -64,41 +64,74 @@ def build_annotation_map(softcite_corpus_path):
 
     return annotation_map
 
-def create_holdout_sets(softcite_corpus_path, tei_corpus_path, negative_examples_file_path, ratio=0.2):
-    annotation_map = build_annotation_map(softcite_corpus_path)
+def create_holdout_sets(softcite_corpus_path, tei_corpus_path, negative_examples_file_path, ratio=0.2, update=True):
+    if not update:
+        # we generate holdout/working set partition and id files
+        annotation_map = build_annotation_map(softcite_corpus_path)
 
-    # build the strata from annotation counts
-    size = (len(annotation_map) // nb_strata) + 1
+        # build the strata from annotation counts
+        size = (len(annotation_map) // nb_strata) + 1
 
-    print(str(size), len(annotation_map))
+        print(str(size), len(annotation_map))
 
-    # map the doc to its "subpopulation", a category given as a int from 0 to (nb_strata -1)    
-    category_map = {}
-    strata_rank = 0
-    strata_size = 0
-    for doc in annotation_map:
-        category_map[doc] = strata_rank
-        strata_size += 1
-        if strata_size == size:
-            strata_rank += 1 
-            strata_size = 0
+        # map the doc to its "subpopulation", a category given as a int from 0 to (nb_strata -1)    
+        category_map = {}
+        strata_rank = 0
+        strata_size = 0
+        for doc in annotation_map:
+            category_map[doc] = strata_rank
+            strata_size += 1
+            if strata_size == size:
+                strata_rank += 1 
+                strata_size = 0
 
-    # create arrays for sampling
-    all_docs = []
-    all_cat = []
-    for doc in category_map:
-        all_docs.append(doc)
-        all_cat.append(category_map[doc])
+        # create arrays for sampling
+        all_docs = []
+        all_cat = []
+        for doc in category_map:
+            all_docs.append(doc)
+            all_cat.append(category_map[doc])
 
-    holdout_size = math.floor(len(all_docs) * 0.2)
-    working_size = len(all_docs) - holdout_size
+        holdout_size = math.floor(len(all_docs) * 0.2)
+        working_size = len(all_docs) - holdout_size
 
-    # this will perform the stratified sampling following the "number of annotation" subpopulations 
-    doc_holdout, doc_working = train_test_split(all_docs, test_size=working_size, train_size=holdout_size, shuffle=True, stratify=all_cat)
+        # this will perform the stratified sampling following the "number of annotation" subpopulations 
+        doc_holdout, doc_working = train_test_split(all_docs, test_size=working_size, train_size=holdout_size, shuffle=True, stratify=all_cat)
 
-    build_resources(doc_holdout, doc_working, tei_corpus_path, negative_examples_file_path, annotation_map)
+        write_doc_id_files(doc_holdout, doc_working, tei_corpus_path, negative_examples_file_path)
+    else:
+        # build list of working documents from the corresponding CSV identifier file
+        doc_working = []
+        with open(os.path.join(tei_corpus_path, "ids.working.csv"), mode='r') as csv_file:
+            csv_reader = csv.DictReader(csv_file)
+            line_count = 0
+            for row in csv_reader:
+                if line_count == 0:
+                    line_count += 1
+                    continue
+                doc_working.append(row["id"])
+                line_count += 1
 
-def build_resources(doc_holdout, doc_working, tei_corpus_path, negative_examples_file_path, annotation_map):
+        print("working set:", str(len(doc_working)), "documents")
+
+        # build list of holdout documents from the corresponding CSV identifier file
+        doc_holdout = []
+        with open(os.path.join(tei_corpus_path, "ids.holdout.csv"), mode='r') as csv_file:
+            csv_reader = csv.DictReader(csv_file)
+            line_count = 0
+            for row in csv_reader:
+                if line_count == 0:
+                    line_count += 1
+                    continue
+                doc_holdout.append(row["id"])
+                line_count += 1
+
+        print("holdout set:", str(len(doc_holdout)), "documents")
+
+
+    build_resources(doc_holdout, doc_working, tei_corpus_path, negative_examples_file_path)
+
+def write_doc_id_files(doc_holdout, doc_working, tei_corpus_path, negative_examples_file_path):
     print("holdout set:", str(len(doc_holdout)), "documents")
     print("working set:", str(len(doc_working)), "documents")
     
@@ -129,9 +162,39 @@ def build_resources(doc_holdout, doc_working, tei_corpus_path, negative_examples
     file_holdout.close()
     file_working.close()
 
+def build_resources(doc_holdout, doc_working, tei_corpus_path, negative_examples_file_path):
+    # under tei_corpus_path, we will find the identifier mapping (normally)
+    map_identifiers = {}
+    all_identifiers = []
+    print(os.path.join(tei_corpus_path, "ids.csv"))
+    with open(os.path.join(tei_corpus_path, "ids.csv")) as csv_file:
+        csv_reader = csv.DictReader(csv_file)
+        first_line = True
+        for row in csv_reader:
+            if first_line:
+                first_line = False
+                continue
+            map_identifiers[row["id"]] = row
+            if row["id"] in all_identifiers:
+                print("duplicate identifier in ids.csv:", row["id"])
+            else:
+                all_identifiers.append(row["id"])
+
+    print("total number of idenfiers:", len(all_identifiers))
+
     # partition of the softcite corpus
     # working set
     root = etree.parse(softcite_corpus_path)
+
+    # check the identifiers not in the XML corpus file
+    nb_doc_missing = 0
+    for the_id in map_identifiers:
+        the_node = root.xpath('//tei:teiHeader/tei:fileDesc[@xml:id="'+the_id+'"]', namespaces={'tei': 'http://www.tei-c.org/ns/1.0'})
+        if len(the_node) == 0:
+            print("identifier not found:", the_id)
+            nb_doc_missing += 1
+    print("total doc missing in XML corpus file:", str(nb_doc_missing))
+
     node_to_remove_working = []
     documents = root.xpath('//tei:TEI', namespaces={'tei': 'http://www.tei-c.org/ns/1.0'})
     for doc in documents:
@@ -284,12 +347,14 @@ if __name__ == "__main__":
     parser.add_argument("--tei-corpus", type=str, help="path to the directory of full text TEI XML files")
     parser.add_argument("--negative-examples-file", type=str, help="path to the file containing the set of negative examples")
     parser.add_argument("--ratio", type=float, help="proportion of documents tobe assigned to the holdout set, default is 0.2")
+    parser.add_argument("--update", action="store_true", help="do not re-partition, just update corpus files")
 
     args = parser.parse_args()
     softcite_corpus_path = args.softcite_corpus
     tei_corpus_path = args.tei_corpus
     negative_examples_file_path = args.negative_examples_file
     ratio = args.ratio
+    update = args.update
 
     # check path and call methods
     if softcite_corpus_path is not None and not os.path.isfile(softcite_corpus_path):
@@ -302,5 +367,5 @@ if __name__ == "__main__":
         print("the path to the negative example files is not valid: ", negative_examples_file_path)
         exit()
     else:
-        create_holdout_sets(softcite_corpus_path, tei_corpus_path, negative_examples_file_path, ratio)
+        create_holdout_sets(softcite_corpus_path, tei_corpus_path, negative_examples_file_path, ratio, update)
 
