@@ -65,6 +65,8 @@ def build_resources(softcite_corpus_path, tei_corpus_path, negative_examples_fil
                 continue
             map_identifiers[row["id"]] = row
     
+    print("all documents:", str(len(map_identifiers)), "documents")
+
     # build list of working documents from the two corresponding CSV identifier files
     doc_working = []
     with open(os.path.join(tei_corpus_path, "ids.working.csv"), mode='r') as csv_file:
@@ -79,6 +81,20 @@ def build_resources(softcite_corpus_path, tei_corpus_path, negative_examples_fil
 
     print("working set:", str(len(doc_working)), "documents")
 
+    # build list of holdout documents from the corresponding CSV identifier file
+    doc_holdout = []
+    with open(os.path.join(tei_corpus_path, "ids.holdout.csv"), mode='r') as csv_file:
+        csv_reader = csv.DictReader(csv_file)
+        line_count = 0
+        for row in csv_reader:
+            if line_count == 0:
+                line_count += 1
+                continue
+            doc_holdout.append(row["id"])
+            line_count += 1
+
+    print("holdout set:", str(len(doc_holdout)), "documents")
+
     # the final softcite corpus 
     root_softcite = etree.parse(softcite_corpus_path)
 
@@ -91,14 +107,16 @@ def build_resources(softcite_corpus_path, tei_corpus_path, negative_examples_fil
         if not local_id[0] in doc_working:
             node_to_remove_working.append(doc)
 
-    for node in node_to_remove_working:
-        node.getparent().remove(node)
+    # check if necessary with your input corpus file
+    #for node in node_to_remove_working:
+    #    node.getparent().remove(node)
 
     # we want to inject more negative examples, we get them in the grobid's full text TEI 
     for doc in documents:
         # get document identifier under <teiHeader><fileDesc xml:id="b991b33626">
         local_id = doc.xpath('./tei:teiHeader/tei:fileDesc/@xml:id', namespaces={'tei': 'http://www.tei-c.org/ns/1.0'})
-        if local_id[0] in doc_working:
+        #if local_id[0] in doc_working:
+        if local_id[0] in doc_working or local_id[0] in doc_holdout:
             local_identifiers = map_identifiers[local_id[0]]
             # forbidden content is all the content of the <rs> of type software name, publisher and url (of length>2)
             # if such content is present in the paragraph considered for addition, we skip it to avoid adding false 
@@ -148,7 +166,7 @@ def build_resources(softcite_corpus_path, tei_corpus_path, negative_examples_fil
                 local_paragraph.tail = "\n            "
                 corpus_doc_body[0].append(local_paragraph)    
 
-    root.write(negative_examples_file_path.replace(".working.tei.xml", ".extended.working.tei.xml"), pretty_print=True)
+    root.write(negative_examples_file_path.replace(".tei.xml", ".extended.tei.xml"), pretty_print=True)
 
  
 def is_matching_a_paragraph(paragraph, body):
