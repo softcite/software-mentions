@@ -169,14 +169,15 @@ public class SoftwareTrainer extends AbstractTrainer {
             
             // train and split / 10-fold cross evaluation or training with full corpus for production
             //final String corpus_file_name = "softcite_corpus-full.tei.xml";
-            final String corpus_file_name = "all_clean_post_processed-full.tei.xml";
+            //final String corpus_file_name = "all_clean_post_processed-full.tei.xml";
             
             // cross domain eval
             //final String corpus_file_name = "softcite_corpus_pmc-compact.tei.xml";
             //final String corpus_file_name = "softcite_corpus_econ-compact.tei.xml";
 
             // train fixed, no negative - optional negative sampling following negative mode
-            //final String corpus_file_name = "softcite_corpus-full.working.tei.xml";
+            //final String corpus_file_name = "all_clean_post_processed-full.working.tei.xml";
+            final String corpus_file_name = "all_clean_post_processed-full.tei.xml";
             
             // eval holdout
             //final String corpus_file_name = "softcite_corpus-full.holdout-complete.tei.xml";
@@ -189,6 +190,8 @@ public class SoftwareTrainer extends AbstractTrainer {
                 System.out.println("The XML TEI corpus training document does not exist: " + 
                     corpusDir.getPath() + File.separator + corpus_file_name);
             } else {
+                System.out.println("training corpus XML path: " + thefile.getPath());
+
                 //get a new instance of parser
                 SAXParser p = spf.newSAXParser();
                 p.parse(thefile, handler);
@@ -248,7 +251,8 @@ public class SoftwareTrainer extends AbstractTrainer {
 
                 if (negativeMode != 0) {
                     // inject negative examples, depending on the selected mode
-                    final String negative_corpus_file_name = "softcite.all.negative.extended.working.tei.xml";
+                    final String negative_corpus_file_name = "softcite.all.negative.extended.tei.xml";
+                    //final String negative_corpus_file_name = "softcite.all.negative.working.extended.tei.xml";
                     //final String negative_corpus_file_name = "softcite.all.negative.extended.working.pmc.tei.xml";
                     //final String negative_corpus_file_name = "softcite.all.negative.extended.working.econ.tei.xml";
                     
@@ -268,7 +272,7 @@ public class SoftwareTrainer extends AbstractTrainer {
                         // negativeMode is 0 -> do nothing special
 
                         if (negativeMode == 1) {
-                            addedNegative = randomNegativeExamples(negativeCorpusFile, 30000, outputXMLFile);
+                            addedNegative = randomNegativeExamples(negativeCorpusFile, 50000, outputXMLFile);
                         } else if (negativeMode == 2) {
                             addedNegative = selectNegativeExamples(negativeCorpusFile, 50000, outputXMLFile);
                         }
