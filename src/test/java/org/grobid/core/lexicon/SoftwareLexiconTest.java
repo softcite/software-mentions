@@ -50,7 +50,7 @@ public class SoftwareLexiconTest {
     
             System.out.println(">>>>>>>> GROBID_HOME="+GrobidProperties.get_GROBID_HOME_PATH());
 
-            if (softwareConfiguration != null && softwareConfiguration.getModel() != null) {
+            if (softwareConfiguration != null && softwareConfiguration.getModels() != null) {
                 for (ModelParameters model : softwareConfiguration.getModels())
                     GrobidProperties.getInstance().addModel(model);
             }
