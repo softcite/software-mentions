@@ -42,10 +42,12 @@ When possible, we further specify the type of the mentioned software with the at
 
 ```xml
 the data were analyzed using <rs type="software" xml:id="PMC3203616-software-1">Multi Gauge</rs> Version 
-<rs type="version" corresp="#PMC3203616-software-1">3.0</rs> software (<rs type="publisher" corresp="#PMC3203616-software-1">FUJIFILM</rs>). 
+<rs type="version" corresp="#PMC3203616-software-1">3.0</rs> software (<rs type="publisher" 
+corresp="#PMC3203616-software-1">FUJIFILM</rs>). 
 
-The open-source software <rs type="software" xml:id="PMC5367605-software-3">ITK- Snap</rs> <rs corresp="#PMC5367605-software-3" 
-type="version">2.0.0</rs> <ref type="bibr">35</ref> is used to manually delineate the tumour on each MRI slice where it is visible.</p>
+The open-source software <rs type="software" xml:id="PMC5367605-software-3">ITK- Snap</rs> 
+<rs corresp="#PMC5367605-software-3" type="version">2.0.0</rs> <ref type="bibr">35</ref> is used to manually delineate 
+the tumour on each MRI slice where it is visible.</p>
 
 Post-acquisition image processing was carried out using <rs type="software" xml:id="PMC2652046-software-0">CorelDraw</rs> 
 <rs corresp="#PMC2652046-software-0" type="version">12</rs> software.
@@ -56,33 +58,35 @@ expressed with or without dependency to another software _in the mention context
 
 ```xml
 The maximum likelihood outcrossing rates were estimated in <rs type="software" subtype="environment" 
-xml:id="PMC4303630-software-3">Mathematica</rs> <rs corresp="#PMC4303630-software-3" type="version">7</rs> following the method used 
-by <ref type="bibr">Johnson et al. (2004)</ref>
+xml:id="PMC4303630-software-3">Mathematica</rs> <rs corresp="#PMC4303630-software-3" type="version">7</rs> following 
+the method used by <ref type="bibr">Johnson et al. (2004)</ref>
 
 All image processes and statistical analyses were done using <rs type="software" subtype="environment" 
-xml:id="PMC4968915-software-1">Matlab</rs> (<rs corresp="#PMC4968915-software-1" type="publisher">Mathworks</rs>, Natick, MA, USA).
+xml:id="PMC4968915-software-1">Matlab</rs> (<rs corresp="#PMC4968915-software-1" type="publisher">Mathworks</rs>, Natick, 
+MA, USA).
 ```
 
 - **named software component:** `@subtype="environment"`, for a named software depending on another software environment mentioned in the mention context
 to run. We always have a software environment expressed in the same mention context, and the dependency of the software component to the software environment is encoded with the `@corresp` pointer to the `xml:id` of the software environment. 
 
 ```xml
-Area under the curve (AUC) was estimated by <rs type="software" subtype="environment" xml:id="PMC5063056-software-3">R</rs> package 
-<rs type="software" subtype="component" corresp="#PMC5063056-software-3" xml:id="PMC5063056-software-4">pROC</rs> to determine the 
-95% confidence intervals (95%CI).
+Area under the curve (AUC) was estimated by <rs type="software" subtype="environment" xml:id="PMC5063056-software-3">R</rs> 
+package <rs type="software" subtype="component" corresp="#PMC5063056-software-3" xml:id="PMC5063056-software-4">pROC</rs> 
+to determine the 95% confidence intervals (95%CI).
 
-For the variance ratio test, I used the <rs type="software" subtype="environment" xml:id="10.1111%2Fecin.12279-software-0">Stata</rs> 
-command <rs type="software" subtype="component" corresp="#10.1111%2Fecin.12279-software-0" 
-xml:id="10.1111%2Fecin.12279-software-1">sdtest</rs>. 
+For the variance ratio test, I used the <rs type="software" subtype="environment" 
+xml:id="10.1111%2Fecin.12279-software-0">Stata</rs> command <rs type="software" subtype="component" 
+corresp="#10.1111%2Fecin.12279-software-0" xml:id="10.1111%2Fecin.12279-software-1">sdtest</rs>. 
 
 This library is based on the <rs type="software" subtype="environment" xml:id="PMC2881388-software-1">Python</rs> package 
 <rs type="software" subtype="component" corresp="#PMC2881388-software-1" xml:id="PMC2881388-software-2">NetworkX</rs> 
 <ref type="bibr">(Hagberg et al., 2008)</ref>. 
 
-D-prime, which measures the distance between the signal and the noise means in standard deviation units <ref type="bibr">(40)</ref>, 
-was calculated using <rs type="software" subtype="environment" xml:id="PMC5458338-software-3">matlab</rs> function <rs type="software" 
-subtype="component" corresp="#PMC5458338-software-3" xml:id="PMC5458338-software-4">dprime_simple</rs> 
-(<rs corresp="#PMC5458338-software-4" type="url">https://it.mathworks.com/matlabcentral/fileex change/47711-dprime-simple-m</rs>
+D-prime, which measures the distance between the signal and the noise means in standard deviation units 
+<ref type="bibr">(40)</ref>, was calculated using <rs type="software" subtype="environment" 
+xml:id="PMC5458338-software-3">matlab</rs> function <rs type="software" subtype="component" corresp="#PMC5458338-software-3" 
+xml:id="PMC5458338-software-4">dprime_simple</rs> (<rs corresp="#PMC5458338-software-4" 
+type="url">https://it.mathworks.com/matlabcentral/fileex change/47711-dprime-simple-m</rs>
 ```
 
 - **implicit software component:** `@subtype="implicit"` for an unnamed software. The software refering expression is a generic term for program, such as program, code, script, macro, package, library, etc. Optionally, if the unnamed software is depending on another software environment to run, the software environment being expressed in the mention context, then the the dependency of the unamed software to the software environment is encoded with the `@corresp` pointer to the `xml:id` of the software environment (similarly as for a software component). 
@@ -91,13 +95,13 @@ subtype="component" corresp="#PMC5458338-software-3" xml:id="PMC5458338-software
 We developed a <rs type="language" corresp="#PMC4551074-software-200">Perl</rs> <rs type="software" subtype="implicit" 
 xml:id="PMC4551074-software-200">program</rs> to store all the graph paths for a given protein. 
 
-In this paper, we aimed to evaluate the heterogeneity of liver parenchyma on Gd-EOB-DTPA-enhanced MR images, using CV value processed 
-by our <rs type="software" subtype="environment" xml:id="PMC5390613-software-1">MATLAB</rs>-based <rs type="software" subtype="implicit" 
-xml:id="PMC5390613-software-2" corresp="#PMC5390613-software-1">software</rs>.
+In this paper, we aimed to evaluate the heterogeneity of liver parenchyma on Gd-EOB-DTPA-enhanced MR images, using CV 
+value processed by our <rs type="software" subtype="environment" xml:id="PMC5390613-software-1">MATLAB</rs>-based 
+<rs type="software" subtype="implicit" xml:id="PMC5390613-software-2" corresp="#PMC5390613-software-1">software</rs>.
 
-The <rs type="software" subtype="environment" xml:id="10.1111%2Froie.12300-software-0">Matlab</rs> <rs type="software" subtype="implicit" 
-xml:id="10.1111%2Froie.12300-software-1" corresp="#10.1111%2Froie.12300-software-0">code</rs> is downloadable in 
-<rs type="url" corresp="#10.1111%2Froie.12300-software-1">mwkang.site11.com/code/rie2016</rs>.
+The <rs type="software" subtype="environment" xml:id="10.1111%2Froie.12300-software-0">Matlab</rs> <rs type="software" 
+subtype="implicit" xml:id="10.1111%2Froie.12300-software-1" corresp="#10.1111%2Froie.12300-software-0">code</rs> is 
+downloadable in <rs type="url" corresp="#10.1111%2Froie.12300-software-1">mwkang.site11.com/code/rie2016</rs>.
 ```
 
 For determining the type of a software, some search about the software on the internet is often necessary. 
@@ -109,12 +113,12 @@ The `version` tag identifies the version of the mentioned software, it is encode
 Version annotation should cover only the specific number or date string, without any other token like "version", "v.", etc. or extra punctuations:
 
 ```xml
-<p>We performed meta-analysis using <rs type="software" xml:id="PMC4898839-software-100"> Review Manager</rs> Software (version 
-<rs type="version" corresp="#PMC4898839-software-100">5</rs>).</p>
+<p>We performed meta-analysis using <rs type="software" xml:id="PMC4898839-software-100"> Review Manager</rs> Software 
+(version <rs type="version" corresp="#PMC4898839-software-100">5</rs>).</p>
 
-<p>All statistical analyses were conducted with IBM <rs type="software" subtype="environment" xml:id="PMC4504996-software-1">SPSS 
-Statistics</rs> ver. <rs type="version" corresp="#PMC4504996-software-1">20.0</rs> (<rs type="publisher" 
-corresp="#PMC4504996-software-1">IBM Co.</rs>, Armonk, NY, USA).</p>
+<p>All statistical analyses were conducted with IBM <rs type="software" subtype="environment" 
+xml:id="PMC4504996-software-1">SPSS Statistics</rs> ver. <rs type="version" corresp="#PMC4504996-software-1">20.0</rs> 
+(<rs type="publisher" corresp="#PMC4504996-software-1">IBM Co.</rs>, Armonk, NY, USA).</p>
 
 <p><rs type="software" subtype="environment" xml:id="PMC5372150-software-1">SPSS</rs> V.<rs type="version" 
 corresp="#PMC5372150-software-1">15.0</rs> for Windows was used for all the statistical analyses.</p>
@@ -130,9 +134,9 @@ A publisher annotation should only contain the name of the publisher, including 
 <rs id="software-0" type="software">SPSS</rs> ver. <rs corresp="#software-0" type="version-number">11.0</rs> 
 (<rs corresp="#software-0" type="publisher">SPSS Inc.</rs>, Chicago, IL, USA) was used to evaluate the data.
 
-... followed by the Tukey-Kramer post hoc test performed with <rs id="software-0" type="software">GraphPad prism</rs> software 
-(version <rs corresp="#software-0" type="version-number">4.0</rs>, <rs corresp="#software-0" type="publisher">GraphPad Software</rs>, 
-San Diego, CA, USA).
+... followed by the Tukey-Kramer post hoc test performed with <rs id="software-0" type="software">GraphPad prism</rs> 
+software (version <rs corresp="#software-0" type="version-number">4.0</rs>, <rs corresp="#software-0" type="publisher">
+GraphPad Software</rs>, San Diego, CA, USA).
 
 All the analysis was performed in the <rs id="software-0" type="software">MATLAB</rs> environment 
 (<rs corresp="#software-0" type="publisher">The MathWorks</rs>, Natick, MA)
@@ -142,19 +146,20 @@ In case the creator/developer persons are directly mentioned, they are also labe
 
 ```xml
 <p>Sequences obtained were analyzed and edited using <rs type="software" xml:id="PMC4435018-software-1">BioEdit</rs> 
-<rs type="version" corresp="#PMC4435018-software-1">7.2.5</rs>.&#169;1999-2013 software (<rs type="publisher" subtype="person" 
-corresp="#PMC4435018-software-1">Tom Hall</rs>, <rs type="publisher" corresp="#PMC4435018-software-1">Ibis Biosciences</rs>, 
-Carlsbad, CA).</p>
+<rs type="version" corresp="#PMC4435018-software-1">7.2.5</rs>.&#169;1999-2013 software (<rs type="publisher" 
+subtype="person" corresp="#PMC4435018-software-1">Tom Hall</rs>, <rs type="publisher" corresp="#PMC4435018-software-1">
+Ibis Biosciences</rs>, Carlsbad, CA).</p>
 
-<p>We have found a way to double the accuracy of <rs type="software" subtype="environment" xml:id="b3951a8cf2-99">Matlab</rs>'s 
-<rs type="publisher" subtype="person" corresp="#b3951a8cf2-100">Ricatti</rs> equation solver <rs type="software" subtype="component" 
-xml:id="b3951a8cf2-100" corresp="#b3951a8cf2-99">lyap.m</rs> by essentially applying it twice.</p>
+<p>We have found a way to double the accuracy of <rs type="software" subtype="environment" xml:id="b3951a8cf2-99">Matlab
+</rs>'s <rs type="publisher" subtype="person" corresp="#b3951a8cf2-100">Ricatti</rs> equation solver <rs type="software" 
+subtype="component" xml:id="b3951a8cf2-100" corresp="#b3951a8cf2-99">lyap.m</rs> by essentially applying it twice.</p>
 ```
 
 * **Combined publisher/software name:** We distinguish software publisher and software name when used in combination. For instance:
 
 ```xml
-<rs corresp="#PMC0000000-software-1" type="publisher">Microsoft</rs> <rs type="software" xml:id="PMC0000000-software-1">Excel</rs>
+<rs corresp="#PMC0000000-software-1" type="publisher">Microsoft</rs> <rs type="software" 
+xml:id="PMC0000000-software-1">Excel</rs>
 ```
 
 Exceptions are for software names always including the publisher by usage, the main cases being "Lotus Notes" (we never see "Notes" alone for this software) and "GraphPad Prism" ("Prism" only is not observed). 
@@ -325,18 +330,18 @@ The programming environment here is clearly a software and should be annotated a
 When a software package or library is developed within a larger software environment, as a _software dependency_, and that this dependency is expressed in the mention context, we identify the two software respectively as `@subtype=component` and `@subtype=environment`, with a relationship encoded with `@corresp` pointing from the component to the environment part identifier. The two related software mentions can have their own attributes. 
 
 ```xml
-<rs corresp="#d984c41c4d-software-1" resp="#annotator22" subtype="component" type="software" xml:id="d984c41c4d-software-2">rgp</rs> 
-is an implementation of GP methods in the <rs cert="1.0" resp="#curator" subtype="environment"   type="software" 
-xml:id="d984c41c4d-software-1">R</rs> environment. 
+<rs corresp="#d984c41c4d-software-1" resp="#annotator22" subtype="component" type="software" 
+xml:id="d984c41c4d-software-2">rgp</rs> is an implementation of GP methods in the <rs cert="1.0" resp="#curator" 
+subtype="environment" type="software" xml:id="d984c41c4d-software-1">R</rs> environment. 
 ```
 
 It is possible to encode a list of components depending on a single environment:
 
 ```xml
-Mlr and decision trees were implemented in <rs resp="#curator" subtype="environment" type="software" xml:id="d984c41c4d-software-1">r</rs> 
-using <rs corresp="#d984c41c4d-software-1" resp="#curator" subtype="component" type="software" xml:id="d984c41c4d-software-2">lm command</rs> 
-and <rs corresp="#d984c41c4d-software-1" resp="#annotator22" subtype="component" type="software" xml:id="d984c41c4d-software-3">cubist</rs> 
-package, respectively. 
+Mlr and decision trees were implemented in <rs resp="#curator" subtype="environment" type="software" 
+xml:id="d984c41c4d-software-1">r</rs> using <rs corresp="#d984c41c4d-software-1" resp="#curator" subtype="component" 
+type="software" xml:id="d984c41c4d-software-2">lm command</rs> and <rs corresp="#d984c41c4d-software-1" 
+resp="#annotator22" subtype="component" type="software" xml:id="d984c41c4d-software-3">cubist</rs> package, respectively. 
 ```
 
 Another case, less frequent, is to have several hierarchical dependency relations, which are encoded similarly as follow: 
@@ -344,6 +349,7 @@ Another case, less frequent, is to have several hierarchical dependency relation
 ```xml
 The package <rs corresp="#d984c41c4d-software-1" resp="#annotator22" subtype="component" type="software" 
 xml:id="d984c41c4d-software-0">fscaret</rs> allows semiautomatic feature selection, working as a wrapper for the 
-<rs corresp="#d984c41c4d-software-2" resp="#curator" subtype="component" type="software" xml:id="d984c41c4d-software-1">caret</rs> 
-package in <rs resp="#curator" subtype="environment" type="software" xml:id="d984c41c4d-software-2">R</rs>.
+<rs corresp="#d984c41c4d-software-2" resp="#curator" subtype="component" type="software" 
+xml:id="d984c41c4d-software-1">caret</rs> package in <rs resp="#curator" subtype="environment" type="software" 
+xml:id="d984c41c4d-software-2">R</rs>.
 ```
