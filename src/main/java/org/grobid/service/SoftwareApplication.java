@@ -8,6 +8,7 @@ import io.dropwizard.forms.MultiPartBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import org.eclipse.jetty.servlets.CrossOriginFilter;
+import org.eclipse.jetty.servlets.QoSFilter;
 import org.grobid.service.configuration.SoftwareServiceConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,10 +22,6 @@ public class SoftwareApplication extends Application<SoftwareServiceConfiguratio
     private static final String RESOURCES = "/service";
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SoftwareApplication.class);
-
-    public static void main(String[] args) throws Exception {
-        new SoftwareApplication().run(args);
-    }
 
     @Override
     public String getName() {
@@ -48,18 +45,32 @@ public class SoftwareApplication extends Application<SoftwareServiceConfiguratio
 
     @Override
     public void run(SoftwareServiceConfiguration configuration, Environment environment) {
+        LOGGER.info("Service config={}", configuration);
+        environment.jersey().setUrlPattern(RESOURCES + "/*");
+
+        String allowedOrigins = configuration.getCorsAllowedOrigins();
+        String allowedMethods = configuration.getCorsAllowedMethods();
+        String allowedHeaders = configuration.getCorsAllowedHeaders();
+
         // Enable CORS headers
         final FilterRegistration.Dynamic cors =
-                environment.servlets().addFilter("CORS", CrossOriginFilter.class);
+            environment.servlets().addFilter("CORS", CrossOriginFilter.class);
 
-        // Configure CORS parameters
-        cors.setInitParameter("allowedOrigins", "*");
-        cors.setInitParameter("allowedHeaders", "X-Requested-With,Content-Type,Accept,Origin");
-        cors.setInitParameter("allowedMethods", "OPTIONS,GET,PUT,POST,DELETE,HEAD");
+        // CORS parameters
+        cors.setInitParameter(CrossOriginFilter.ALLOWED_ORIGINS_PARAM, allowedOrigins);
+        cors.setInitParameter(CrossOriginFilter.ALLOWED_METHODS_PARAM, allowedMethods);
+        cors.setInitParameter(CrossOriginFilter.ALLOWED_HEADERS_PARAM, allowedHeaders);
 
         // Add URL mapping
         cors.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
 
-        environment.jersey().setUrlPattern(RESOURCES + "/*");
+        // Enable QoS filter
+        final FilterRegistration.Dynamic qos = environment.servlets().addFilter("QOS", QoSFilter.class);
+        qos.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
+        qos.setInitParameter("maxRequests", String.valueOf(configuration.getMaxParallelRequests()));
+    }
+
+    public static void main(String[] args) throws Exception {
+        new SoftwareApplication().run(args);
     }
 }
