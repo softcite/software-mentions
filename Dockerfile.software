@@ -6,6 +6,8 @@ FROM openjdk:8u275-jdk as builder
 
 USER root
 
+ARG GROBID_VERSION
+
 RUN apt-get update && \
     apt-get -y --no-install-recommends install unzip
 
@@ -52,7 +54,6 @@ RUN rm -rf grobid-source
 # -------------------
 # build runtime image
 # -------------------
-
 
 # use NVIDIA Container Toolkit to automatically recognize possible GPU drivers on the host machine
 FROM tensorflow/tensorflow:2.7.0-gpu
@@ -142,13 +143,13 @@ COPY --from=builder /opt/grobid-source/grobid-home/config/resources-registry.jso
 # trigger gradle wrapper install
 RUN ./gradlew --version
 
+# install all the ML models
 RUN ./gradlew copyModels installModels  && rm -rf resources/models && rm -f /opt/grobid/grobid-home/models/software/model.wapiti.gz && rm -f /opt/grobid/grobid-home/models/software-BERT_CRF-0.3.2.zip && rm -f /opt/grobid/grobid-home/models/context_bert-0.3.2.zip && rm -f /opt/grobid/grobid-home/models/context_used_bert-0.3.2.zip && rm -f /opt/grobid/grobid-home/models/context_shared_bert-0.3.2.zip && rm -f /opt/grobid/grobid-home/models/context_creation_bert-0.3.2.zip
 
-RUN ./gradlew clean install
+#RUN ./gradlew clean install -x test
+RUN ./gradlew clean assemble --no-daemon --stacktrace --info -x test
 
-CMD ["./gradlew", "run"]
-
-ARG GROBID_VERSION
+CMD ["sh", "-c", "java -jar build/libs/software-mentions-${GROBID_VERSION}-onejar.jar server resources/config/server.yml"]
 
 LABEL \
     authors="The contributors" \

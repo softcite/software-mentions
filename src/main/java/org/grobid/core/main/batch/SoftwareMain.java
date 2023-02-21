@@ -192,7 +192,7 @@ public class SoftwareMain {
         return result;
     }
 
-    public static void main(final String[] args) throws Exception {
+    /*public static void main(final String[] args) throws Exception {
         gbdArgs = new GrobidMainArgs();
 
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
@@ -222,6 +222,6 @@ public class SoftwareMain {
             LOGGER.info(nb + " files processed in " + (System.currentTimeMillis() - time) + " milliseconds");
         }
 
-    }
+    }*/
 
 }
