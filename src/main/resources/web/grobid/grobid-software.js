@@ -18,14 +18,21 @@ var grobid = (function ($) {
 
     // store the references attached to the entities and extracted by the service
     var referenceMap = new Object();
-
+    
     function defineBaseURL(ext) {
         var baseUrl = null;
-        if ($(location).attr('href').indexOf("index.html") != -1)
-            baseUrl = $(location).attr('href').replace("index.html", ext);
-        else
-            baseUrl = $(location).attr('href') + 'service' + '/' + ext;
-        return baseUrl;
+        var localBase = $(location).attr('href');
+        if (localBase.indexOf("index.html") != -1) {
+            localBase = localBase.replace("index.html", "");
+        } 
+        if (localBase.endsWith("#")) {
+            localBase = localBase.substring(0,localBase.endsWith("#"));
+        } 
+        if (localBase.indexOf("?") != -1) {
+            // remove possible uri parameters
+            localBase = localBase.substring(0,localBase.indexOf("?"));
+        } 
+        return localBase + "service/" + ext;
     }
 
     function setBaseUrl(ext) {
