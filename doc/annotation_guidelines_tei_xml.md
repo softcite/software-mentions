@@ -330,26 +330,35 @@ The programming environment here is clearly a software and should be annotated a
 When a software package or library is developed within a larger software environment, as a _software dependency_, and that this dependency is expressed in the mention context, we identify the two software respectively as `@subtype=component` and `@subtype=environment`, with a relationship encoded with `@corresp` pointing from the component to the environment part identifier. The two related software mentions can have their own attributes. 
 
 ```xml
-<rs corresp="#d984c41c4d-software-1" resp="#annotator22" subtype="component" type="software" 
-xml:id="d984c41c4d-software-2">rgp</rs> is an implementation of GP methods in the <rs cert="1.0" resp="#curator" 
-subtype="environment" type="software" xml:id="d984c41c4d-software-1">R</rs> environment. 
+<rs corresp="#d984c41c4d-software-1" subtype="component" type="software" xml:id="d984c41c4d-software-2">rgp</rs> 
+is an implementation of GP methods in the <rs cert="1.0" subtype="environment" type="software" 
+xml:id="d984c41c4d-software-1">R</rs> environment. 
 ```
 
 It is possible to encode a list of components depending on a single environment:
 
 ```xml
-Mlr and decision trees were implemented in <rs resp="#curator" subtype="environment" type="software" 
-xml:id="d984c41c4d-software-1">r</rs> using <rs corresp="#d984c41c4d-software-1" resp="#curator" subtype="component" 
-type="software" xml:id="d984c41c4d-software-2">lm command</rs> and <rs corresp="#d984c41c4d-software-1" 
-resp="#annotator22" subtype="component" type="software" xml:id="d984c41c4d-software-3">cubist</rs> package, respectively. 
+Mlr and decision trees were implemented in <rs subtype="environment" type="software" xml:id="d984c41c4d-software-1">r</rs> 
+using <rs corresp="#d984c41c4d-software-1" subtype="component" type="software" xml:id="d984c41c4d-software-2">lm command</rs> 
+and <rs corresp="#d984c41c4d-software-1" resp="#annotator22" subtype="component" type="software" 
+xml:id="d984c41c4d-software-3">cubist</rs> package, respectively. 
 ```
 
 Another case, less frequent, is to have several hierarchical dependency relations, which are encoded similarly as follow: 
 
 ```xml
-The package <rs corresp="#d984c41c4d-software-1" resp="#annotator22" subtype="component" type="software" 
-xml:id="d984c41c4d-software-0">fscaret</rs> allows semiautomatic feature selection, working as a wrapper for the 
-<rs corresp="#d984c41c4d-software-2" resp="#curator" subtype="component" type="software" 
-xml:id="d984c41c4d-software-1">caret</rs> package in <rs resp="#curator" subtype="environment" type="software" 
+The package <rs corresp="#d984c41c4d-software-1" subtype="component" type="software" xml:id="d984c41c4d-software-0">fscaret</rs> 
+allows semiautomatic feature selection, working as a wrapper for the <rs corresp="#d984c41c4d-software-2" subtype="component" 
+type="software" xml:id="d984c41c4d-software-1">caret</rs> package in <rs subtype="environment" type="software" 
 xml:id="d984c41c4d-software-2">R</rs>.
+```
+
+## Annotator information
+
+In the XML corpus, `<rs>` elements can have an addition attribute `@resp` indicating the annotator who has last edited the annotation. Annotators are identified by a number. The `@resp` attribute is an XML pointer to the annotator definition in the header part of the XML corpus. When a curator has corrected or reconciliate annotations in case of disagreement, the attribute value is `@resp="#curator"`. The `@resp` attributes are automatically generated from the annotation environment. 
+
+```xml
+Radiographic errors were recorded on individual tick sheets and the information was captured in an 
+<rs cert="1.0" resp="#annotator0" type="software" xml:id="a7f72b2925-software-0">Excel</rs> spreadsheet 
+(<rs corresp="#a7f72b2925-software-0" resp="#curator" type="publisher">Microsoft</rs>, Redmond, WA). 
 ```
