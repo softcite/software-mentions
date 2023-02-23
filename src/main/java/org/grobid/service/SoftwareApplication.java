@@ -40,7 +40,7 @@ public class SoftwareApplication extends Application<SoftwareServiceConfiguratio
         bootstrap.addBundle(guiceBundle);
         bootstrap.addBundle(new MultiPartBundle());
         bootstrap.addBundle(new AssetsBundle("/web", "/", "index.html", "assets"));
-        //bootstrap.addCommand(new CreateTrainingCommand());
+        //bootstrap.addCommand(new CreateCommands());
     }
 
     @Override

@@ -831,7 +831,7 @@ See the description of the output directly in the header of the `script/consiste
 For generating training data in XML/TEI, based on the current model, from a list of text or PDF files in a input repository, use the following command: 
 
 ```console
-> java -Xmx4G -jar target/software-mentions/software-mentions-0.7.1-SNAPSHOT-onejar.jar -gH ../grobid-home -dIn ~/test_software/ -dOut ~/test_software/out/ -exe createTraining
+> java -Xmx4G -jar target/software-mentions/software-mentions-0.7.3-SNAPSHOT-onejar.jar -gH ../grobid-home -dIn ~/test_software/ -dOut ~/test_software/out/ -exe createTraining
 ```
 
 ## Runtime benchmark

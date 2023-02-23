@@ -149,7 +149,7 @@ RUN ./gradlew copyModels installModels  && rm -rf resources/models && rm -f /opt
 #RUN ./gradlew clean install -x test
 RUN ./gradlew clean assemble --no-daemon --stacktrace --info -x test
 
-CMD ["sh", "-c", "java -jar build/libs/software-mentions-${GROBID_VERSION}-onejar.jar server resources/config/server.yml"]
+CMD ["sh", "-c", "java -jar build/libs/software-mentions-${GROBID_VERSION}-onejar.jar server resources/config/config.yml"]
 
 LABEL \
     authors="The contributors" \
