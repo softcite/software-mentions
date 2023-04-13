@@ -87,7 +87,7 @@ The `software-mentions` service is available at the default host/port `localhost
 > docker run --rm --gpus all -it -p 8080:8060 grobid/software-mentions:0.7.3-SNAPSHOT
 ```
 
-By default, CRF models if used for the software mention recognition. To modify the configuration without rebuilding the image - for instance rather use the SciBERT model, it is possible to mount a modified config file at launch as follow: 
+In this image, the best deep learning models are used by default. The selection of models can be modified, for example to use faster models or requiring less GPU memory. To modify the configuration without rebuilding the image - for instance rather use the CRF model, it is possible to mount a modified config file at launch as follow: 
 
 ```bash
 > docker run --rm --gpus all -p 8060:8060 -v /home/lopez/grobid/software-mentions/resources/config/config.yml:/opt/grobid/software-mentions/resources/config/config.yml:ro  grobid/software-mentions:0.7.3-SNAPSHOT
@@ -107,7 +107,7 @@ As an alterntive, a docker image for the `software-mentions` service can be buil
 > docker build -t grobid/software-mentions:0.7.3-SNAPSHOT --build-arg GROBID_VERSION=0.7.3-SNAPSHOT --file Dockerfile.software .
 ```
 
-The Docker image build take several minutes, installing GROBID, software-mentions, a complete Python Deep Learning environment based on [DeLFT](https://github.com/kermitt2/delft) and deep learning models downloaded from the internet (one fine-tuned model with a BERT layer has a size of around 400 MB). The resulting image is thus very large, around 8GB, due to the deep learning resources and models. 
+Building the Docker image takes several minutes: installing GROBID, software-mentions, a complete Python Deep Learning environment based on [DeLFT](https://github.com/kermitt2/delft) and deep learning models downloaded from the internet (one fine-tuned model with a BERT layer has a size of around 400 MB). The resulting image is thus very large, around 8GB, due to the deep learning resources and models. 
 
 ## Install, build, run
 
