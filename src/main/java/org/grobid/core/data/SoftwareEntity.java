@@ -478,7 +478,8 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 		}
 
 		if (context != null && context.length()>0) {
-			encoded = encoder.quoteAsUTF8(context.replace("\n", " ").replace("  ", " "));
+			//encoded = encoder.quoteAsUTF8(context.replace("\n", " ").replace("  ", " "));
+            encoded = encoder.quoteAsUTF8(context);
             output = new String(encoded);
 			buffer.append(", \"context\" : \"" + output + "\"");
 		
@@ -492,7 +493,8 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 				buffer.append(", \"contextOffset\": " + paragraphContextOffset);
 			}
 
-			encoded = encoder.quoteAsUTF8(paragraph.replace("\n", " ").replace("  ", " "));
+			//encoded = encoder.quoteAsUTF8(paragraph.replace("\n", " ").replace("  ", " "));
+			encoded = encoder.quoteAsUTF8(paragraph);
             output = new String(encoded);
 			buffer.append(", \"paragraph\": \"" + output + "\"");
 		}

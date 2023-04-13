@@ -905,6 +905,11 @@ public class SoftwareParser extends AbstractParser {
                                               List<OffsetPosition> placeTaken,
                                               Map<String, Integer> frequencies,
                                               boolean addParagraphContext) {
+        // possible offset of the sequence in the complete document tokenization
+        int offsetShift = 0;
+        if (layoutTokens != null && layoutTokens.size()>0 && layoutTokens.get(0).getOffset() != 0) {
+            offsetShift = layoutTokens.get(0).getOffset();
+        }
 
         List<OffsetPosition> results = termPattern.matchLayoutToken(layoutTokens, true, true);
         // above: do not ignore delimiters and case sensitive matching
@@ -950,7 +955,7 @@ public class SoftwareParser extends AbstractParser {
             double tfidf = -1.0;
             
             // is the match already present in the entity list? 
-            if (overlapsPosition(placeTaken, rawMatchedPosition)) {
+            if (overlapsPosition(placeTaken, rawMatchedPosition, offsetShift)) {
                 continue;
             }
             if (termProfiles.get(term) != null) {
@@ -979,6 +984,8 @@ public class SoftwareParser extends AbstractParser {
                 entity.setPropagated(true);
                 localEntities.add(entity);
                 entities.add(entity);
+
+                placeTaken.add(new OffsetPosition(matchedPosition.start+offsetShift, matchedPosition.end+offsetShift));
             }
         }
 
@@ -993,15 +1000,19 @@ public class SoftwareParser extends AbstractParser {
                 && lastClusterLabel != TaggingLabels.TABLE);
     }
 
-    private boolean overlapsPosition(final List<OffsetPosition> list, final OffsetPosition position) {
+    private boolean overlapsPosition(final List<OffsetPosition> list, final OffsetPosition position, int offsetShift) {
         for (OffsetPosition pos : list) {
-            if (pos.start == position.start)  
+            if (pos.start == position.start || pos.start-offsetShift == position.start)  
                 return true;
-            if (pos.end == position.end)  
+            if (pos.end == position.end || pos.end-offsetShift == position.end)  
                 return true;
             if (position.start <= pos.start &&  pos.start <= position.end)  
                 return true;
-            if (pos.start <= position.start && position.start <= pos.end)  
+            if (position.start <= pos.start-offsetShift &&  pos.start-offsetShift <= position.end)  
+                return true;
+            if (pos.start-offsetShift <= position.start && position.start <= pos.end-offsetShift)  
+                return true;
+            if (pos.start-offsetShift <= position.start && position.start <= pos.end-offsetShift)  
                 return true;
         } 
         return false;
@@ -1598,6 +1609,8 @@ public class SoftwareParser extends AbstractParser {
             offsetShift = tokens.get(0).getOffset();
         }
 
+        //System.out.println("offsetShift: " + offsetShift);
+
         // we start by segmenting the tokenized text into sentences 
 
         List<OffsetPosition> forbidden = new ArrayList<OffsetPosition>();
@@ -1649,6 +1662,9 @@ public class SoftwareParser extends AbstractParser {
             int startEntity = softwareName.getOffsetStart();
             int endEntity = softwareName.getOffsetEnd();
 
+            //System.out.println("startEntity: " + startEntity + ", endEntity: " + endEntity);
+            //System.out.println("from text: ]" + text.substring(startEntity, endEntity) + "[");
+
             // the following should never happen, but for safety - TBD: this kind of ill-formed entity should be discarded ?
             if (startEntity < 0 || endEntity < 0)
                 continue;
@@ -1658,9 +1674,13 @@ public class SoftwareParser extends AbstractParser {
                 int startSentence = sentencePosition.start;
                 int endSentence = sentencePosition.end;
 
+                //System.out.println("startSentence: " + startSentence + ", endSentence: " + endSentence);
+
                 if (startSentence <= startEntity && endEntity <= endSentence) {
                     // set the context as the identified sentence
                     entity.setContext(text.substring(startSentence, endSentence));
+
+                    //System.out.println("context: " + entity.getContext());
                
                     if (fromPDF) {
                         // we relate the entity offset to the context text
@@ -1706,6 +1726,77 @@ public class SoftwareParser extends AbstractParser {
                     }
                     break;
                 }
+            }
+        }
+
+        // normalize context string and offsets
+        // we want to avoid end-of-line and multiple spaces in the context string, 
+        // which involves normalizing the context string and adjust the entity offset according to the string changes
+        if (fromPDF) {
+            for(SoftwareEntity entity : entities) {
+                SoftwareComponent softwareName = entity.getSoftwareName();
+                if (softwareName == null)
+                    continue;
+
+                String context = entity.getContext();
+                if (context == null)
+                    continue;
+                String new_context = context.replace("\n", " ").replace("  ", " ");
+                int shift = context.length() - new_context.length();
+                if (shift == 0)
+                    continue;
+
+                int localStart = softwareName.getOffsetStart();
+                int localEnd = softwareName.getOffsetEnd();
+
+                int newStartEntity = new_context.indexOf(softwareName.getRawForm(), localStart-shift);
+                int newEndEntity = newStartEntity + softwareName.getRawForm().length();
+
+                if (newStartEntity != -1) {
+                    softwareName.setOffsetStart(newStartEntity);
+                    softwareName.setOffsetEnd(newEndEntity);
+                }
+
+                SoftwareComponent version = entity.getVersion();
+                if (version != null) {
+                    localStart = version.getOffsetStart();
+
+                    newStartEntity = new_context.indexOf(version.getRawForm(), localStart-shift);
+                    newEndEntity = newStartEntity + version.getRawForm().length();
+
+                    if (newStartEntity != -1) {
+                        version.setOffsetStart(newStartEntity);
+                        version.setOffsetEnd(newEndEntity);
+                    }
+                }
+
+                SoftwareComponent creator = entity.getCreator();
+                if (creator != null) {
+                    localStart = creator.getOffsetStart();
+
+                    newStartEntity = new_context.indexOf(creator.getRawForm(), localStart-shift);
+                    newEndEntity = newStartEntity + creator.getRawForm().length();
+
+                    if (newStartEntity != -1) {
+                        creator.setOffsetStart(newStartEntity);
+                        creator.setOffsetEnd(newEndEntity);
+                    }
+                }
+
+                SoftwareComponent softwareURL = entity.getSoftwareURL();
+                if (softwareURL != null) {
+                    localStart = softwareURL.getOffsetStart();
+
+                    newStartEntity = new_context.indexOf(softwareURL.getRawForm(), localStart-shift);
+                    newEndEntity = newStartEntity + softwareURL.getRawForm().length();
+
+                    if (newStartEntity != -1) {
+                        softwareURL.setOffsetStart(newStartEntity);
+                        softwareURL.setOffsetEnd(newEndEntity);
+                    }
+                }
+
+                entity.setContext(new_context);
             }
         }
         return entities;
