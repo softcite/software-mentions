@@ -63,6 +63,8 @@ public class SoftwareLexicon {
 
     private List<String> englishStopwords = null;
 
+    private List<String> blacklistSoftwareNames = null;
+
     // a map to store information on programming languages:
     // name of the programming language (as Wikipedia English page title), Wikipedia EN URL, Wikidata ID
     private Map<String, Pair<String,String>> programmingLanguages = null;
@@ -331,6 +333,69 @@ public class SoftwareLexicon {
             throw new GrobidException("programming language file not found.", e);
         } catch (IOException e) {
             throw new GrobidException("Cannot read programming language file.", e);
+        } finally {
+            try {
+                if (dis != null)
+                    dis.close();
+            } catch(Exception e) {
+                throw new GrobidResourceException("Cannot close IO stream.", e);
+            }
+        }
+
+        // a list of invalid software names for conservative checks
+        blacklistSoftwareNames = new ArrayList<>();
+        file = new File("resources/lexicon/software_name_blacklist.txt");
+        file = new File(file.getAbsolutePath());
+        if (!file.exists()) {
+            throw new GrobidResourceException("Cannot initialize software name blacklist, because file '" + 
+                file.getAbsolutePath() + "' does not exists.");
+        }
+        if (!file.canRead()) {
+            throw new GrobidResourceException("Cannot initialize software name blacklist, because cannot read file '" + 
+                file.getAbsolutePath() + "'.");
+        }
+        // read the file
+        try {
+            dis = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
+            String l = null;
+            while ((l = dis.readLine()) != null) {
+                if (l.length() == 0) continue;
+                blacklistSoftwareNames.add(l.trim());
+            }
+        } catch (FileNotFoundException e) {
+            throw new GrobidException("Software name blacklist file not found.", e);
+        } catch (IOException e) {
+            throw new GrobidException("Cannot read software name blacklist file.", e);
+        } finally {
+            try {
+                if (dis != null)
+                    dis.close();
+            } catch(Exception e) {
+                throw new GrobidResourceException("Cannot close IO stream.", e);
+            }
+        }
+        file = new File("resources/lexicon/covid_blacklist.txt");
+        file = new File(file.getAbsolutePath());
+        if (!file.exists()) {
+            throw new GrobidResourceException("Cannot initialize covid domain software name blacklist, because file '" + 
+                file.getAbsolutePath() + "' does not exists.");
+        }
+        if (!file.canRead()) {
+            throw new GrobidResourceException("Cannot initialize covid domain software name blacklist, because cannot read file '" + 
+                file.getAbsolutePath() + "'.");
+        }
+        // read the file
+        try {
+            dis = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
+            String l = null;
+            while ((l = dis.readLine()) != null) {
+                if (l.length() == 0) continue;
+                blacklistSoftwareNames.add(l.trim());
+            }
+        } catch (FileNotFoundException e) {
+            throw new GrobidException("Blacklist file not found.", e);
+        } catch (IOException e) {
+            throw new GrobidException("Cannot read covid domain software name blacklist file.", e);
         } finally {
             try {
                 if (dis != null)
