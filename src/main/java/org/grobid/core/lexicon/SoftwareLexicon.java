@@ -360,6 +360,7 @@ public class SoftwareLexicon {
             String l = null;
             while ((l = dis.readLine()) != null) {
                 if (l.length() == 0) continue;
+                if (l.trim().startsWith("#")) continue;
                 blacklistSoftwareNames.add(l.trim());
             }
         } catch (FileNotFoundException e) {
@@ -374,7 +375,8 @@ public class SoftwareLexicon {
                 throw new GrobidResourceException("Cannot close IO stream.", e);
             }
         }
-        file = new File("resources/lexicon/covid_blacklist.txt");
+
+        /*file = new File("resources/lexicon/covid_blacklist.txt");
         file = new File(file.getAbsolutePath());
         if (!file.exists()) {
             throw new GrobidResourceException("Cannot initialize covid domain software name blacklist, because file '" + 
@@ -403,7 +405,7 @@ public class SoftwareLexicon {
             } catch(Exception e) {
                 throw new GrobidResourceException("Cannot close IO stream.", e);
             }
-        }
+        }*/
     }
 	
 	public boolean inSoftwareDictionary(String string) {
@@ -528,6 +530,12 @@ public class SoftwareLexicon {
      **/
     public Pair<String, String> getProgrammingLanguageWikiInfo(String rawProgrammingLanguageString) {
         return programmingLanguages.get(rawProgrammingLanguageString);
+    }
+
+    public boolean isInSoftwareNameBlacklist(String value) {
+        if (this.blacklistSoftwareNames == null || value == null)
+            return false;
+        return this.blacklistSoftwareNames.contains(value);
     }
 
 }

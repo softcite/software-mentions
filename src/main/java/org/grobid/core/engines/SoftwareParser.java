@@ -1885,6 +1885,12 @@ public class SoftwareParser extends AbstractParser {
                         pos = endPos;
                         continue;
                     }
+
+                    // software name blacklist check
+                    if (SoftwareLexicon.getInstance().isInSoftwareNameBlacklist(clusterContent)) {
+                        pos = endPos;
+                        continue;
+                    }
                 }
 
                 // conservative check, minimal well-formedness of the content for URL
