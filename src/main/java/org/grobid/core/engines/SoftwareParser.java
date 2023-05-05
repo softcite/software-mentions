@@ -2254,6 +2254,30 @@ public class SoftwareParser extends AbstractParser {
 
 
     /**
+     * Extract all software mentions from a publisher XML file
+     */
+    public List<SoftwareEntity> processTEI(File file, 
+                                           boolean disambiguate, 
+                                           boolean addParagraphContext) throws IOException {
+        List<SoftwareEntity> entities = null;
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            factory.setNamespaceAware(true);
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            org.w3c.dom.Document document = builder.parse(file);
+            //document.getDocumentElement().normalize();
+            entities = processTEIDocument(document, disambiguate, addParagraphContext);
+            //tei = restoreDomParserAttributeBug(tei); 
+
+        } catch (final Exception exp) {
+            logger.error("An error occured while processing the following XML file: "
+                + file.getPath(), exp);
+        } 
+
+        return entities;
+    }
+
+    /**
      * Tranform an XML document (for example JATS) to a TEI document.
      * Transformation of the XML/JATS/NLM/etc. document is realised thanks to Pub2TEI 
      * (https://github.com/kermitt2/pub2tei) 
@@ -2391,6 +2415,9 @@ public class SoftwareParser extends AbstractParser {
         }
 
         Collections.sort(entities);
+
+        // finally classify the context for predicting the role of the software mention
+        entities = SoftwareContextClassifier.getInstance(softwareConfiguration).classifyDocumentContexts(entities);
 
         return entities;
     }

@@ -127,8 +127,16 @@ public class SoftwareController implements SoftwarePaths {
         return SoftwareProcessString.characterizeContext(text, this.configuration);
     }
 
-
-
-
+    @Path(PATH_EXTRACT_SOFTWARE_TEI)
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces("application/json")
+    @POST
+    public Response processTEI(@FormDataParam(INPUT) InputStream inputStream, 
+                                @DefaultValue("0") @FormDataParam(DISAMBIGUATE) String disambiguate,
+                                @DefaultValue("0") @FormDataParam(ADD_PARAGRAPH_CONTEXT) String addParagraphContext) {
+        boolean disambiguateBoolean = SoftwareServiceUtil.validateBooleanRawParam(disambiguate);
+        boolean addParagraphContextBoolean = SoftwareServiceUtil.validateBooleanRawParam(addParagraphContext);
+        return SoftwareProcessFile.extractTEI(inputStream, disambiguateBoolean, addParagraphContextBoolean, this.configuration);
+    }
 
 }

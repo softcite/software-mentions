@@ -39,9 +39,14 @@ public interface SoftwarePaths {
     public static final String PATH_ANNOTATE_SOFTWARE_PDF = "annotateSoftwarePDF";
 
     /**
-     * path extension for extracting software entities from publisher XML documents.
+     * path extension for annotating software entities from publisher XML documents.
      */
-    public static final String PATH_EXTRACT_SOFTWARE_XML = "extractSoftwareXML";
+    public static final String PATH_EXTRACT_SOFTWARE_XML = "annotateSoftwareXML";
+
+    /**
+     * path extension for annotating software entities from a TEI XML documents.
+     */
+    public static final String PATH_EXTRACT_SOFTWARE_TEI = "annotateSoftwareTEI";
 
     /**
      * path extension for characterizing the context of a software sentence
