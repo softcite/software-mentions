@@ -286,9 +286,9 @@ For PDF, each entity will be associated with a list of bounding box coordinates 
 
 In addition, the response will contain the bibliographical reference information associated to a software mention when found. The bibliographical information are provided in XML TEI (similar format as GROBID).  
 
-### /service/extractSoftwareXML
+### /service/annotateSoftwareXML
 
-The softcite software mention service can extract software mentions with sentence context information from a variety of publisher XML formats, including not only JATS, but also a dozen of mainstream publisher native XML (Elsevier, Nature, ScholarOne, Wiley, etc.). See [Pub2TEI](https://github.com/kermitt2/Pub2TEI) for the list of supported formats. 
+The softcite software mention service can extract software mentions with sentence context information from a variety of publisher XML formats, including not only JATS, but also a dozen of mainstream publisher native XML (Elsevier, Nature, ScholarOne, Wiley, etc.). See [Pub2TEI](https://github.com/kermitt2/Pub2TEI) for the list of supported formats. Each call with an XML file (non TEI XML) will involve a transformation of the XML file into a TEI XML file, which will slow down the overall process. This additional time (a few seconds) is due to the loading and compilation of the style sheets that need to be performed for every calls.  
 
 |  method   |  request type         |  response type       |  parameters         |  requirement  |  description  |
 |---        |---                    |---                   |---                  |---            |---            |
@@ -310,7 +310,34 @@ A `503` error normally means that all the threads available to Softcite service 
 Using ```curl``` POST request with a __XML file__:
 
 ```console
-curl --form input=@./src/test/resources/PMC3130168.xml --form disambiguate=1 localhost:8060/service/extractSoftwareXML
+curl --form input=@./src/test/resources/PMC3130168.xml --form disambiguate=1 localhost:8060/service/annotateSoftwareXML
+```
+
+### /service/annotateSoftwareTEI
+
+The softcite software mention service will extracts software mentions with sentence context information from TEI XML files directly, without then the need of further transformation as for the other publisher XML formats (see above). The process will thus be much faster and should preferably used if possible.  
+
+|  method   |  request type         |  response type       |  parameters         |  requirement  |  description  |
+|---        |---                    |---                   |---                  |---            |---            |
+| POST      | `multipart/form-data` | `application/json`   | `input`             | required      | TEI XML file to be processed |
+|           |                       |                      | `disambiguate`      | optional      | `disambiguate` is a string of value `0` (no disambiguation, default value) or `1` (disambiguate and inject Wikidata entity id and Wikipedia pageId) |
+
+Response status codes:
+
+|     HTTP Status code |   reason                                               |
+|---                   |---                                                     |
+|         200          |     Successful operation.                              |
+|         204          |     Process was completed, but no content could be extracted and structured |
+|         400          |     Wrong request, missing parameters, missing header  |
+|         500          |     Indicate an internal service error, further described by a provided message           |
+|         503          |     The service is not available, which usually means that all the threads are currently used                       |
+
+A `503` error normally means that all the threads available to Softcite service are currently used for processing concurrent requests. The client need to re-send the query after a wait time that will allow the server to free some threads. The wait time depends on the service and the capacities of the server, we suggest 2 seconds for the `extractSoftwareXML` service or 3 seconds when disambiguation is also requested.
+
+Using ```curl``` POST request with a __XML file__:
+
+```console
+curl --form input=@./src/test/resources/PMC3130168.tei.xml --form disambiguate=1 localhost:8060/service/annotateSoftwareTEI
 ```
 
 ### /service/isalive
