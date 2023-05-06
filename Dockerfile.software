@@ -6,8 +6,6 @@ FROM openjdk:8u275-jdk as builder
 
 USER root
 
-ARG GROBID_VERSION
-
 RUN apt-get update && \
     apt-get -y --no-install-recommends install unzip
 
@@ -134,6 +132,12 @@ RUN ln -s /opt/grobid /opt/delft
 COPY --from=builder /opt/grobid-source/software-mentions /opt/grobid/software-mentions
 COPY --from=builder /root/.m2/repository/org /opt/grobid/software-mentions/lib/org
 
+# install Pub2TEI
+WORKDIR /opt/
+RUN wget https://github.com/kermitt2/Pub2TEI/archive/refs/heads/master.zip
+RUN unzip master.zip
+RUN mv Pub2TEI-master Pub2TEI
+
 WORKDIR /opt/grobid/software-mentions
 
 RUN mkdir /opt/grobid/delft
@@ -149,7 +153,9 @@ RUN ./gradlew copyModels installModels  && rm -rf resources/models && rm -f /opt
 #RUN ./gradlew clean install -x test
 RUN ./gradlew clean assemble --no-daemon --stacktrace --info -x test
 
-CMD ["sh", "-c", "java -jar build/libs/software-mentions-${GROBID_VERSION}-onejar.jar server resources/config/config.yml"]
+CMD ["sh", "-c", "java -jar build/libs/software-mentions-0.7.3-SNAPSHOT-onejar.jar server resources/config/config.yml"]
+
+ARG GROBID_VERSION
 
 LABEL \
     authors="The contributors" \
