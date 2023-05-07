@@ -2226,10 +2226,10 @@ public class SoftwareParser extends AbstractParser {
     /**
      * Extract all software mentions from a publisher XML file
      */
-    public List<SoftwareEntity> processXML(File file, 
+    public Pair<List<SoftwareEntity>, List<BibDataSet>> processXML(File file, 
                                            boolean disambiguate, 
                                            boolean addParagraphContext) throws IOException {
-        List<SoftwareEntity> entities = null;
+        Pair<List<SoftwareEntity>, List<BibDataSet>> resultExtraction = null;
         try {
             String tei = processXML(file);
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -2240,7 +2240,7 @@ public class SoftwareParser extends AbstractParser {
             org.w3c.dom.Document document = builder.parse(new InputSource(new StringReader(tei)));
             //document.getDocumentElement().normalize();
             
-            entities = processTEIDocument(document, disambiguate, addParagraphContext);
+            resultExtraction = processTEIDocument(document, disambiguate, addParagraphContext);
             
             //tei = restoreDomParserAttributeBug(tei); 
 
@@ -2249,24 +2249,24 @@ public class SoftwareParser extends AbstractParser {
                 + file.getPath(), exp);
         } 
 
-        return entities;
+        return resultExtraction;
     }
 
 
     /**
      * Extract all software mentions from a publisher XML file
      */
-    public List<SoftwareEntity> processTEI(File file, 
+    public Pair<List<SoftwareEntity>, List<BibDataSet>> processTEI(File file, 
                                            boolean disambiguate, 
                                            boolean addParagraphContext) throws IOException {
-        List<SoftwareEntity> entities = null;
+        Pair<List<SoftwareEntity>, List<BibDataSet>> resultExtraction = null;
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             factory.setNamespaceAware(true);
             DocumentBuilder builder = factory.newDocumentBuilder();
             org.w3c.dom.Document document = builder.parse(file);
             //document.getDocumentElement().normalize();
-            entities = processTEIDocument(document, disambiguate, addParagraphContext);
+            resultExtraction = processTEIDocument(document, disambiguate, addParagraphContext);
             //tei = restoreDomParserAttributeBug(tei); 
 
         } catch (final Exception exp) {
@@ -2274,7 +2274,7 @@ public class SoftwareParser extends AbstractParser {
                 + file.getPath(), exp);
         } 
 
-        return entities;
+        return resultExtraction;
     }
 
     /**
@@ -2318,11 +2318,16 @@ public class SoftwareParser extends AbstractParser {
     /**
      * Extract all software mentions from a publisher XML file
      */
-    public List<SoftwareEntity> processTEIDocument(org.w3c.dom.Document doc, boolean disambiguate, boolean addParagraphContext) { 
+    public Pair<List<SoftwareEntity>, List<BibDataSet>> processTEIDocument(org.w3c.dom.Document doc, 
+                                                                        boolean disambiguate, 
+                                                                        boolean addParagraphContext) { 
         List<SoftwareEntity> entities = new ArrayList<SoftwareEntity>();
 
         List<List<LayoutToken>> selectedLayoutTokenSequences = new ArrayList<>();
+        List<List<LayoutToken>> selectedOriginalLayoutTokenSequences = new ArrayList<>();
         List<LayoutToken> docLayoutTokens = new ArrayList<>();
+
+        List<Map<String,Pair<OffsetPosition,String>>> selectedRefInfos = new ArrayList<>();
 
         org.w3c.dom.NodeList paragraphList = doc.getElementsByTagName("p");
         for (int i = 0; i < paragraphList.getLength(); i++) {
@@ -2335,13 +2340,24 @@ public class SoftwareParser extends AbstractParser {
                     continue;
             }
 
-            String contentText = UnicodeUtil.normaliseText(XMLUtilities.getTextNoRefMarkers(paragraphElement));
+            //String contentText = UnicodeUtil.normaliseText(XMLUtilities.getTextNoRefMarkers(paragraphElement));
+            Pair<String,Map<String,Pair<OffsetPosition,String>>> contentTextAndRef = 
+                XMLUtilities.getTextNoRefMarkersAndMarkerPositions(paragraphElement);
+            String contentText = UnicodeUtil.normaliseText(contentTextAndRef.getLeft());
+            Map<String,Pair<OffsetPosition,String>> refInfos = contentTextAndRef.getRight();
+            
             if (contentText != null && contentText.length()>0) {
                 List<LayoutToken> paragraphTokens = 
                     SoftwareAnalyzer.getInstance().tokenizeWithLayoutToken(contentText);
+                String orginalText = UnicodeUtil.normaliseText(XMLUtilities.getText(paragraphElement));    
+                List<LayoutToken> originalParagraphTokens = 
+                    SoftwareAnalyzer.getInstance().tokenizeWithLayoutToken(orginalText);
                 if (paragraphTokens != null && paragraphTokens.size() > 0) {
                     docLayoutTokens.addAll(paragraphTokens);
                     selectedLayoutTokenSequences.add(paragraphTokens);
+
+                    selectedRefInfos.add(refInfos);
+                    selectedOriginalLayoutTokenSequences.add(originalParagraphTokens);
                 }
             }
         }
@@ -2414,12 +2430,24 @@ public class SoftwareParser extends AbstractParser {
             }
         }
 
+        // local bibliographical references to spot in the XML mark-up, to attach and propagate
+        List<BibDataSet> resCitations = new ArrayList<>();
+        org.w3c.dom.NodeList bibList = doc.getElementsByTagName("biblStruct");
+        for (int i = 0; i < bibList.getLength(); i++) {
+            org.w3c.dom.Element biblStructElement = (org.w3c.dom.Element) bibList.item(i);
+            BiblioItem biblio = parseTEIBiblioItem(biblStructElement);
+
+            BibDataSet bds = new BibDataSet(biblio);
+            bds.setRefSymbol(biblStructElement.getAttributeValue("xml:id"));
+            resCitations.add(bds);
+        }
+
         Collections.sort(entities);
 
         // finally classify the context for predicting the role of the software mention
         entities = SoftwareContextClassifier.getInstance(softwareConfiguration).classifyDocumentContexts(entities);
 
-        return entities;
+        return Pair.of(entities, resCitations);
     }
 
 
