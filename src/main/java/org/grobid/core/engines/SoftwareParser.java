@@ -2435,10 +2435,11 @@ public class SoftwareParser extends AbstractParser {
         org.w3c.dom.NodeList bibList = doc.getElementsByTagName("biblStruct");
         for (int i = 0; i < bibList.getLength(); i++) {
             org.w3c.dom.Element biblStructElement = (org.w3c.dom.Element) bibList.item(i);
-            BiblioItem biblio = parseTEIBiblioItem(biblStructElement);
+            BiblioItem biblio = XMLUtilities.parseTEIBiblioItem(biblStructElement);
 
-            BibDataSet bds = new BibDataSet(biblio);
-            bds.setRefSymbol(biblStructElement.getAttributeValue("xml:id"));
+            BibDataSet bds = new BibDataSet();
+            bds.setResBib(biblio);
+            bds.setRefSymbol(biblStructElement.getAttribute("xml:id"));
             resCitations.add(bds);
         }
 

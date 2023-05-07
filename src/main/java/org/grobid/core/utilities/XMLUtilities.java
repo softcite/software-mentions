@@ -18,10 +18,14 @@ import javax.xml.xpath.*;
 import org.w3c.dom.*;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import org.grobid.core.document.xml.XmlBuilderUtils;
+import org.grobid.core.data.BiblioItem;
+import org.grobid.core.sax.BiblStructSaxHandler;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -117,6 +121,23 @@ public class XMLUtilities {
             }
         }
         return found ? buf.toString() : null;
+    }
+
+    public static BiblioItem parseTEIBiblioItem(org.w3c.dom.Element biblStructElement) {
+        BiblStructSaxHandler handler = new BiblStructSaxHandler();
+        String teiXML = null;
+        try {
+            SAXParserFactory spf = SAXParserFactory.newInstance();
+            SAXParser p = spf.newSAXParser();
+            teiXML = serialize(null, biblStructElement);
+            p.parse(new InputSource(new StringReader(teiXML)), handler);
+        } catch(Exception e) {
+            if (teiXML != null)
+                LOGGER.warn("The parsing of the biblStruct from TEI document failed for: " + teiXML);
+            else 
+                LOGGER.warn("The parsing of the biblStruct from TEI document failed for: " + biblStructElement.toString());
+        }
+        return handler.getBiblioItem();
     }
 
     public static Pair<String,Map<String,Pair<OffsetPosition,String>>> getTextNoRefMarkersAndMarkerPositions(Element element) {
