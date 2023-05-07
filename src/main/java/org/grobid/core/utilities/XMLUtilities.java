@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.xml.parsers.*;
 import javax.xml.transform.*;
@@ -115,6 +117,47 @@ public class XMLUtilities {
             }
         }
         return found ? buf.toString() : null;
+    }
+
+    public static Pair<String,Map<String,Pair<OffsetPosition,String>>> getTextNoRefMarkersAndMarkerPositions(Element element) {
+        StringBuffer buf = new StringBuffer();
+        NodeList list = element.getChildNodes();
+        boolean found = false;
+        int indexPos = 0;
+        boolean isRefString = false;
+
+        // map a ref string with its position and the reference key as present in the XML
+        Map<String,Pair<OffsetPosition,String>> right = new TreeMap<>();
+
+        // the key of the reference
+        String bibId = null;
+
+        for (int i = 0; i < list.getLength(); i++) {
+            Node node = list.item(i);
+            if (node.getNodeType() == Node.ELEMENT_NODE) {
+                if ("ref".equals(node.getNodeName())) {
+                    isRefString = true;
+                    bibId = ((Element) node).getAttribute("target");
+                    if (bibId != null && bibId.startsWith("#")) {
+                        bibId = bibId.substring(1, bibId.length());
+                    }
+                }
+                else
+                    isRefString = false;
+            } 
+            if (node.getNodeType() == Node.TEXT_NODE) {
+                String chunk = node.getNodeValue();
+                if (isRefString) {
+                    Pair<OffsetPosition, String> refInfo = Pair.of(new OffsetPosition(indexPos, indexPos+chunk.length()), bibId);
+                    right.put(chunk, refInfo);
+                } else
+                    buf.append(chunk);
+                found = true;
+                indexPos =+ chunk.length();
+            }
+        }
+        String left = found ? buf.toString() : null;
+        return Pair.of(left, right);
     }
 
     public static Pair<String,String> getLeftRightTextContent(Element current) {
