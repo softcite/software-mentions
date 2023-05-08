@@ -2450,6 +2450,58 @@ public class SoftwareParser extends AbstractParser {
             bds.setRefSymbol(biblStructElement.getAttribute("xml:id"));
             resCitations.add(bds);
         }
+        attachReferencesXML(entities, selectedRefInfos, selectedLayoutTokenSequences, selectedOriginalLayoutTokenSequences);
+
+        // consolidate the attached ref bib (we don't consolidate all bibliographical references
+        // to avoid useless costly computation)
+        List<BibDataSet> citationsToConsolidate = new ArrayList<BibDataSet>();
+        List<Integer> consolidated = new ArrayList<Integer>();
+        for(SoftwareEntity entity : entities) {
+            if (entity.getBibRefs() != null && entity.getBibRefs().size() > 0) {
+                List<BiblioComponent> bibRefs = entity.getBibRefs();
+                for(BiblioComponent bibRef: bibRefs) {
+                    Integer refKeyVal = new Integer(bibRef.getRefKey());
+                    if (!consolidated.contains(refKeyVal)) {
+                        citationsToConsolidate.add(resCitations.get(refKeyVal));
+                        consolidated.add(refKeyVal);
+                    }
+                }
+            }
+        }
+
+        try {
+            Consolidation consolidator = Consolidation.getInstance();
+            Map<Integer,BiblioItem> resConsolidation = consolidator.consolidate(citationsToConsolidate);
+            for(int i=0; i<citationsToConsolidate.size(); i++) {
+                BiblioItem resCitation = citationsToConsolidate.get(i).getResBib();
+                BiblioItem bibo = resConsolidation.get(i);
+                if (bibo != null) {
+                    BiblioItem.correct(resCitation, bibo);
+                }
+            }
+        } catch(Exception e) {
+            throw new GrobidException(
+            "An exception occured while running consolidation on bibliographical references.", e);
+        } 
+
+        // propagate the bib. ref. to the entities corresponding to the same software name without bib. ref.
+        for(SoftwareEntity entity1 : entities) {
+            if (entity1.getBibRefs() != null && entity1.getBibRefs().size() > 0) {
+                for (SoftwareEntity entity2 : entities) {
+                    if (entity2.getBibRefs() != null) {
+                        continue;
+                    }
+                    if (entity2.getSoftwareName() != null && 
+                        entity2.getSoftwareName().getRawForm().equals(entity1.getSoftwareName().getRawForm())) {
+                        List<BiblioComponent> newBibRefs = new ArrayList<>();
+                        for(BiblioComponent bibComponent : entity1.getBibRefs()) {
+                            newBibRefs.add(new BiblioComponent(bibComponent));
+                        }
+                        entity2.setBibRefs(newBibRefs);
+                    }
+                }
+            }
+        }
 
         Collections.sort(entities);
 
@@ -2684,6 +2736,18 @@ public class SoftwareParser extends AbstractParser {
             languageComponent.setWikidataId(wikiInfo.getB());
         }
         return languageComponent;
+    }
+
+    private void attachReferencesXML(List<SoftwareEntity> entities, 
+                                    List<Map<String,Pair<OffsetPosition,String>>> selectedRefInfos, 
+                                    List<List<LayoutToken>> selectedLayoutTokenSequences, 
+                                    List<List<LayoutToken>> selectedOriginalLayoutTokenSequences) {
+        for(SoftwareEntity entity : entities) {
+
+
+
+
+        }
     }
 
 }
