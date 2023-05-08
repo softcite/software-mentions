@@ -35,7 +35,8 @@ public class GrobidEngineInitialiser {
         SoftwareConfiguration softwareConfiguration = null;
         try {
             ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-            softwareConfiguration = mapper.readValue(new File("resources/config/config.yml"), SoftwareConfiguration.class);
+            File configFile = new File("resources/config/config.yml");
+            softwareConfiguration = mapper.readValue(new File(configFile.getAbsolutePath()), SoftwareConfiguration.class);
         } catch(Exception e) {
             LOGGER.error("The config file does not appear valid, see resources/config/config.yml", e);
             softwareConfiguration = null;

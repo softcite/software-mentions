@@ -196,7 +196,9 @@ public class SoftwareMain {
         gbdArgs = new GrobidMainArgs();
 
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-        SoftwareConfiguration conf = mapper.readValue(new File("resources/config/config.yml"), SoftwareConfiguration.class);
+        File yamlFile = new File("resources/config/config.yml");
+        yamlFile = new File(yamlFile.getAbsolutePath());
+        SoftwareConfiguration conf = mapper.readValue(yamlFile, SoftwareConfiguration.class);
 
         if (processArgs(args) && (gbdArgs.getProcessMethodName() != null)) {
             inferParamsNotSet(conf);

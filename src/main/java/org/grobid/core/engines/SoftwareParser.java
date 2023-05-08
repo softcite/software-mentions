@@ -2435,6 +2435,14 @@ public class SoftwareParser extends AbstractParser {
         org.w3c.dom.NodeList bibList = doc.getElementsByTagName("biblStruct");
         for (int i = 0; i < bibList.getLength(); i++) {
             org.w3c.dom.Element biblStructElement = (org.w3c.dom.Element) bibList.item(i);
+
+            // filter <biblStruct> not having as father <listBibl>
+            org.w3c.dom.Node fatherNode = biblStructElement.getParentNode();
+            if (fatherNode != null) {
+                if (!"listBibl".equals(fatherNode.getNodeName()))
+                    continue;
+            }
+
             BiblioItem biblio = XMLUtilities.parseTEIBiblioItem(biblStructElement);
 
             BibDataSet bds = new BibDataSet();
