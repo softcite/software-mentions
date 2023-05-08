@@ -39,7 +39,9 @@ public class FieldNormalizer {
 
     public FieldNormalizer() {
         try {
-            addresses = new ArrayList<>(Files.readAllLines(Paths.get("resources/lexicon/addresses.txt")));
+            File addressFile = new File("resources/lexicon/addresses.txt");
+            String addressFilePath = addressFile.getAbsolutePath();
+            addresses = new ArrayList<>(Files.readAllLines(Paths.get(addressFilePath)));
         } catch(IOException e) {
             e.printStackTrace();
         }
