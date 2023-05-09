@@ -1084,9 +1084,14 @@ public class SoftwareParser extends AbstractParser {
 
 
     /**
-     * Try to attach relevant bib ref component to software entities
+     * Try to attach relevant bib ref component to software entities. 
+     * Default max interval between ref and "mention" boundary is 5 characters, but it can be modified if needed. 
      */
     public List<SoftwareEntity> attachRefBib(List<SoftwareEntity> entities, List<BiblioComponent> refBibComponents) {
+        return attachRefBib(entities, refBibComponents, 5);
+    }
+
+    public List<SoftwareEntity> attachRefBib(List<SoftwareEntity> entities, List<BiblioComponent> refBibComponents, int intervalMax) {
 
         // we anchor the process to the software names and aggregate other closest components on the right
         // if we cross a bib ref component we attach it, if a bib ref component is just after the last 
@@ -1130,7 +1135,7 @@ public class SoftwareParser extends AbstractParser {
             // find included or just next bib ref callout
             for(BiblioComponent refBib : refBibComponents) {
                 if ( (refBib.getOffsetStart() >= pos) &&
-                     (refBib.getOffsetStart() <= endPos+5) ) {
+                     (refBib.getOffsetStart() <= endPos+intervalMax) ) {
                     entity.addBibRef(refBib);
                     endPos = refBib.getOffsetEnd();
                 }
@@ -1656,9 +1661,6 @@ public class SoftwareParser extends AbstractParser {
             // offsets here are relative to the local provided tokens
             int startEntity = softwareName.getOffsetStart();
             int endEntity = softwareName.getOffsetEnd();
-
-            //System.out.println("startEntity: " + startEntity + ", endEntity: " + endEntity);
-            //System.out.println("from text: ]" + text.substring(startEntity, endEntity) + "[");
 
             // the following should never happen, but for safety - TBD: this kind of ill-formed entity should be discarded ?
             if (startEntity < 0 || endEntity < 0)
@@ -2375,6 +2377,8 @@ public class SoftwareParser extends AbstractParser {
         for(SoftwareEntity entity : entities) {
             if (entity.getSoftwareName() != null) {
                 String context = entity.getContext();
+                String oldContext = new String(entity.getContext());
+
                 int paragraphContextOffset = entity.getParagraphContextOffset();
                 int globalContextOffset = entity.getGlobalContextOffset();
                 String paragraph = entity.getParagraph();
@@ -2389,7 +2393,7 @@ public class SoftwareParser extends AbstractParser {
                     if (selectedLayoutTokenSequence != null && selectedLayoutTokenSequence.size()>0) {
                         posStartSequence = selectedLayoutTokenSequence.get(0).getOffset();
                         String localText = LayoutTokensUtil.toText(selectedLayoutTokenSequence);
-                        if (posStartSequence <= globalContextOffset && globalContextOffset<=posStartSequence+localText.length()) {
+                        if (posStartSequence <= globalContextOffset && globalContextOffset<posStartSequence+localText.length()) {
                             // the context is within this sequence
                             int maxBound = Math.min((globalContextOffset-posStartSequence)+context.length()+1, localText.length());
                             String newContext = localText.substring(globalContextOffset-posStartSequence, maxBound);
@@ -2400,32 +2404,60 @@ public class SoftwareParser extends AbstractParser {
                 }
 
                 context = entity.getContext();
-                //System.out.println(softwareName.getRawForm() + " / " + softwareName.getOffsetStart() + "-" + softwareName.getOffsetEnd() + 
-                //    " / global offset: " + globalContextOffset + " / context: " + context + " / parag.: " + paragraph);
+                if (context == null || context.trim().length() == 0) {
+                    // this should not happen, but just in case...
+                    entity.setContext(oldContext);
+                    context = oldContext;
+                }
 
                 SoftwareComponent version = entity.getVersion();
                 if (version != null && (version.getOffsetStart() < 0 || version.getOffsetEnd() < 0)) {
+                    entity.setVersion(null);
+                }
+                if (version != null && (version.getOffsetStart() > context.length() || version.getOffsetEnd() > context.length())) {
                     entity.setVersion(null);
                 }
                 SoftwareComponent creator = entity.getCreator();
                 if (creator != null && (creator.getOffsetStart() < 0 || creator.getOffsetEnd() < 0)) {
                     entity.setCreator(null);
                 }
+                if (creator != null && (creator.getOffsetStart() > context.length() || creator.getOffsetEnd() > context.length())) {
+                    entity.setCreator(null);
+                }
                 SoftwareComponent url = entity.getSoftwareURL();
                 if (url != null && (url.getOffsetStart() < 0 || url.getOffsetEnd() < 0)) {
+                    entity.setSoftwareURL(null);
+                }
+                if (url != null && (url.getOffsetStart() > context.length() || url.getOffsetEnd() > context.length())) {
                     entity.setSoftwareURL(null);
                 }
                 SoftwareComponent language = entity.getLanguage();
                 if (language != null && (language.getOffsetStart() < 0 || language.getOffsetEnd() < 0)) {
                     entity.setLanguage(null);
                 }
+                if (language != null && (language.getOffsetStart() > context.length() || language.getOffsetEnd() > context.length())) {
+                    entity.setLanguage(null);
+                }
             }
-            // note: we might need to check offsets beyond the end of the context window, but so far I've 
-            // never observed this case
         }
 
+        /*for(SoftwareEntity entity : entities) {
+            if (entity.getSoftwareName() != null) {
+                String context = entity.getContext();
+                int paragraphContextOffset = entity.getParagraphContextOffset();
+                int globalContextOffset = entity.getGlobalContextOffset();
+                String paragraph = entity.getParagraph();
+                SoftwareComponent softwareName = entity.getSoftwareName();
+
+                if (context == null || context.trim().length() == 0) {
+                    System.out.println(softwareName.getRawForm() + " / " + softwareName.getOffsetStart() + "-" + softwareName.getOffsetEnd() + 
+                        " / global offset: " + globalContextOffset + " / context: " + context + " / parag.: " + paragraph);
+                }
+            }
+        }*/
+
         // propagate the disambiguated entities to the non-disambiguated entities corresponding to the same software name
-        for(SoftwareEntity entity1 : entities) {
+        /*for(SoftwareEntity entity1 : entities) {
             if (entity1.getSoftwareName() != null && entity1.getSoftwareName().getWikidataId() != null) {
                 for (SoftwareEntity entity2 : entities) {
                     if (entity2.getSoftwareName() != null && entity2.getSoftwareName().getWikidataId() != null) {
@@ -2465,7 +2497,7 @@ public class SoftwareParser extends AbstractParser {
                 List<LayoutToken> paragraphTokens = 
                     SoftwareAnalyzer.getInstance().tokenizeWithLayoutToken(contentText);
                 if (paragraphTokens != null && paragraphTokens.size() > 0) {
-                    //propagateLayoutTokenSequence(paragraphTokens, entities, termProfiles, termPattern, placeTaken, frequencies, addParagraphContext, false, true);
+                    propagateLayoutTokenSequence(paragraphTokens, entities, termProfiles, termPattern, placeTaken, frequencies, addParagraphContext, false, true);
                 }
             }
         }
@@ -2488,7 +2520,7 @@ public class SoftwareParser extends AbstractParser {
                     }
                 }
             }
-        }
+        }*/
 
         Collections.sort(entities);
 
@@ -2833,7 +2865,7 @@ public class SoftwareParser extends AbstractParser {
                         OffsetPosition refMarkerPosition = bibValue.getLeft();
                         String refMarkerKey = bibValue.getRight();
                         if (refMarkerPosition.start >= contextOffset && refMarkerPosition.end <= contextOffset+context.length()) {
-                            System.out.println(refMarkerKey + " at " + refMarkerPosition.start + "-" + refMarkerPosition.end + " in: " + context + " / " + contextOffset +"-"+(contextOffset+context.length()));
+                            //System.out.println(refMarkerKey + " at " + refMarkerPosition.start + "-" + refMarkerPosition.end + " in: " + context + " / " + contextOffset +"-"+(contextOffset+context.length()));
                         
                             // de we have components overlaping a ref marker? if yes discard these components
                             SoftwareComponent version = entity.getVersion();
@@ -2873,7 +2905,6 @@ public class SoftwareParser extends AbstractParser {
                                     biblioComponent.setOffsetStart(refMarkerPosition.start);
                                     biblioComponent.setOffsetEnd(refMarkerPosition.end);
                                     bibRefComponents.add(biblioComponent);
-System.out.println(biblioComponent.toJson());
                                 }
                             }
                         }
@@ -2887,7 +2918,7 @@ System.out.println(biblioComponent.toJson());
             // avoid having version number where we identified bibliographical reference
             //entities = filterByRefCallout(entities, bibRefComponents);
             // attach references to software entities 
-            entities = attachRefBib(entities, bibRefComponents);
+            entities = attachRefBib(entities, bibRefComponents, 10);
         }
 
         return entities;
