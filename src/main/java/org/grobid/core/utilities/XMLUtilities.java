@@ -22,6 +22,7 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.tuple.Pair;
+import org.apache.commons.lang3.StringUtils;
 
 import org.grobid.core.document.xml.XmlBuilderUtils;
 import org.grobid.core.data.BiblioItem;
@@ -105,6 +106,23 @@ public class XMLUtilities {
         return found ? buf.toString() : null;
     }
 
+    public static BiblioItem parseTEIBiblioItem(org.w3c.dom.Element biblStructElement) {
+        BiblStructSaxHandler handler = new BiblStructSaxHandler();
+        String teiXML = null;
+        try {
+            SAXParserFactory spf = SAXParserFactory.newInstance();
+            SAXParser p = spf.newSAXParser();
+            teiXML = serialize(null, biblStructElement);
+            p.parse(new InputSource(new StringReader(teiXML)), handler);
+        } catch(Exception e) {
+            if (teiXML != null)
+                LOGGER.warn("The parsing of the biblStruct from TEI document failed for: " + teiXML);
+            else 
+                LOGGER.warn("The parsing of the biblStruct from TEI document failed for: " + biblStructElement.toString());
+        }
+        return handler.getBiblioItem();
+    }
+
     public static String getTextNoRefMarkers(Element element) {
         StringBuffer buf = new StringBuffer();
         NodeList list = element.getChildNodes();
@@ -123,29 +141,11 @@ public class XMLUtilities {
         return found ? buf.toString() : null;
     }
 
-    public static BiblioItem parseTEIBiblioItem(org.w3c.dom.Element biblStructElement) {
-        BiblStructSaxHandler handler = new BiblStructSaxHandler();
-        String teiXML = null;
-        try {
-            SAXParserFactory spf = SAXParserFactory.newInstance();
-            SAXParser p = spf.newSAXParser();
-            teiXML = serialize(null, biblStructElement);
-            p.parse(new InputSource(new StringReader(teiXML)), handler);
-        } catch(Exception e) {
-            if (teiXML != null)
-                LOGGER.warn("The parsing of the biblStruct from TEI document failed for: " + teiXML);
-            else 
-                LOGGER.warn("The parsing of the biblStruct from TEI document failed for: " + biblStructElement.toString());
-        }
-        return handler.getBiblioItem();
-    }
-
-    public static Pair<String,Map<String,Pair<OffsetPosition,String>>> getTextNoRefMarkersAndMarkerPositions(Element element) {
+    public static Pair<String,Map<String,Pair<OffsetPosition,String>>> getTextNoRefMarkersAndMarkerPositions(Element element, int globalPos) {
         StringBuffer buf = new StringBuffer();
         NodeList list = element.getChildNodes();
         boolean found = false;
-        int indexPos = 0;
-        boolean isRefString = false;
+        int indexPos = globalPos;
 
         // map a ref string with its position and the reference key as present in the XML
         Map<String,Pair<OffsetPosition,String>> right = new TreeMap<>();
@@ -157,24 +157,56 @@ public class XMLUtilities {
             Node node = list.item(i);
             if (node.getNodeType() == Node.ELEMENT_NODE) {
                 if ("ref".equals(node.getNodeName())) {
-                    isRefString = true;
-                    bibId = ((Element) node).getAttribute("target");
-                    if (bibId != null && bibId.startsWith("#")) {
-                        bibId = bibId.substring(1, bibId.length());
+
+                    if ("bibr".equals(((Element) node).getAttribute("type"))) {
+                        bibId = ((Element) node).getAttribute("target");
+                        if (bibId != null && bibId.startsWith("#")) {
+                            bibId = bibId.substring(1, bibId.length());
+                        }
+                    }
+
+                    // get the ref marker text
+                    NodeList list2 = node.getChildNodes();
+                    for (int j = 0; j < list2.getLength(); j++) {
+                        Node node2 = list2.item(j);
+                        if (node2.getNodeType() == Node.TEXT_NODE) {
+                            String chunk = node2.getNodeValue();
+
+                            if ("bibr".equals(((Element) node).getAttribute("type"))) {
+                                Pair<OffsetPosition, String> refInfo = Pair.of(new OffsetPosition(indexPos, indexPos+chunk.length()), bibId);
+                                right.put(chunk, refInfo);
+                                String holder = StringUtils.repeat(" ", chunk.length());
+                                buf.append(holder);
+                            } else if ("uri".equals(((Element) node).getAttribute("type")) || "url".equals(((Element) node).getAttribute("type"))) {
+                                // added like normal text
+                                buf.append(chunk);
+                                found = true;
+                            } else {
+                                // other ref are filtered out
+                                String holder = StringUtils.repeat(" ", chunk.length());
+                                buf.append(holder);
+                            }
+                            indexPos += chunk.length();
+                        }
+                    }
+                } else {
+                    // get the text recursively
+                    NodeList list2 = node.getChildNodes();
+                    for (int j = 0; j < list2.getLength(); j++) {
+                        Node node2 = list2.item(j);
+                        if (node2.getNodeType() == Node.TEXT_NODE) {
+                            String chunk = node2.getNodeValue();
+                            buf.append(chunk);
+                            found = true;
+                            indexPos += chunk.length();
+                        }
                     }
                 }
-                else
-                    isRefString = false;
-            } 
-            if (node.getNodeType() == Node.TEXT_NODE) {
+            } else if (node.getNodeType() == Node.TEXT_NODE) {
                 String chunk = node.getNodeValue();
-                if (isRefString) {
-                    Pair<OffsetPosition, String> refInfo = Pair.of(new OffsetPosition(indexPos, indexPos+chunk.length()), bibId);
-                    right.put(chunk, refInfo);
-                } else
-                    buf.append(chunk);
+                buf.append(chunk);
                 found = true;
-                indexPos =+ chunk.length();
+                indexPos += chunk.length();
             }
         }
         String left = found ? buf.toString() : null;
