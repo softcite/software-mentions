@@ -12,7 +12,6 @@ import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.utilities.SoftwareConfiguration;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.main.GrobidHomeFinder;
-import org.grobid.core.utilities.Pair;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -20,6 +19,7 @@ import org.junit.Test;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Map;
 import java.util.Arrays;
 
 import javax.xml.parsers.*;
@@ -34,6 +34,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+import org.apache.commons.lang3.tuple.Pair;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.startsWith;
@@ -57,7 +58,7 @@ public class XMLUtilitiesTest {
             org.w3c.dom.Element biblStructElement = document.getDocumentElement();
             BiblioItem biblio = XMLUtilities.parseTEIBiblioItem(biblStructElement);
 
-            System.out.println(biblio.toTEI(0));
+            //System.out.println(biblio.toTEI(0));
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -74,7 +75,7 @@ public class XMLUtilitiesTest {
             org.w3c.dom.Element biblStructElement = document.getDocumentElement();
             BiblioItem biblio = XMLUtilities.parseTEIBiblioItem(biblStructElement);
 
-            System.out.println(biblio.toTEI(0));
+            //System.out.println(biblio.toTEI(0));
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -91,7 +92,37 @@ public class XMLUtilitiesTest {
             org.w3c.dom.Element biblStructElement = document.getDocumentElement();
             BiblioItem biblio = XMLUtilities.parseTEIBiblioItem(biblStructElement);
 
-            System.out.println(biblio.toTEI(0));
+            //System.out.println(biblio.toTEI(0));
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testXMLParagraphContentParsing() throws Exception {
+        try {
+            String testString = "<p>RNA was purified and prepared as described from Huh7 cells treated for 96h with DFMO or infected for 24h with CVB3. Libraries were prepared by the University of Chicago Genomics Facility and analyzed by Illumina NovaSeq 6000. Read quality was evaluated using FastQC (v0.11.5). Adapters were trimmed in parallel to a quality trimming (bbduk, <ref type=\"uri\" target=\"http://sourceforge.net/projects/bbmap\">sourceforge.net/projects/bbmap</ref>/). All remaining sequences were mapped against the human reference genome build 38 with STAR (v2.5.2b) [<ref type=\"bibr\" target=\"#ppat.1011317.ref049\">49</ref>]. HTseq (v0.6.1) was used to count all reads for each gene and set up a read count table [<ref type=\"bibr\" target=\"#ppat.1011317.ref050\">50</ref>]. Differential gene expression analyses were performed using the DESeq2 Bioconductor package (v1.30.1) [<ref type=\"bibr\" target=\"#ppat.1011317.ref051\">51</ref>]. The default “ashr” shrinkage (v2.2–47) [<ref type=\"bibr\" target=\"#ppat.1011317.ref052\">52</ref>] set up was used for our analysis. Gene set enrichment analysis (GSEA) was performed with the fgsea Bioconductor package [<ref type=\"bibr\" target=\"#ppat.1011317.ref053\">53</ref>], using Hallmark gene sets downloaded from the Molecular Signatures Database [<ref type=\"bibr\" target=\"#ppat.1011317.ref054\">54</ref>].</p>";
+            org.w3c.dom.Document document = DocumentBuilderFactory.newInstance()
+                        .newDocumentBuilder()
+                        .parse(new InputSource(new ByteArrayInputStream(testString.getBytes("utf-8"))));
+            org.w3c.dom.Element element = document.getDocumentElement();
+
+            Pair<String,Map<String,Pair<OffsetPosition,String>>> contentTextAndRef = 
+                XMLUtilities.getTextNoRefMarkersAndMarkerPositions(element, 0);
+
+            String contentText = UnicodeUtil.normaliseText(contentTextAndRef.getLeft());
+            Map<String,Pair<OffsetPosition,String>> refInfos = contentTextAndRef.getRight();
+
+            //System.out.println(contentText);
+
+            for (Map.Entry<String,Pair<OffsetPosition,String>> entry : refInfos.entrySet()) {
+                String bibString = entry.getKey();
+                Pair<OffsetPosition,String> bibValue = entry.getValue();
+
+                OffsetPosition refMarkerPosition = bibValue.getLeft();
+                String refMarkerKey = bibValue.getRight();
+                System.out.println(bibString + "/" + refMarkerKey + " at " + refMarkerPosition.start + "-" + refMarkerPosition.end + " in: " + contentText + " / " + 0 +"-"+(contentText.length()));
+            }
         } catch(Exception e) {
             e.printStackTrace();
         }
