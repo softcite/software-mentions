@@ -1902,6 +1902,14 @@ public class SoftwareParser extends AbstractParser {
                     }
                 }
 
+                // conservative check, minimal well-formedness of the content for version
+                if (clusterLabel.equals(SoftwareTaggingLabels.VERSION)) {
+                    if (SoftwareAnalyzer.DELIMITERS.indexOf(clusterContent) != -1) {
+                        pos = endPos;
+                        continue;
+                    }
+                }
+
                 // conservative check, minimal well-formedness of the content for publisher name
                 if (clusterLabel.equals(SoftwareTaggingLabels.CREATOR)) {
                     if (SoftwareAnalyzer.DELIMITERS.indexOf(clusterContent) != -1 || 
@@ -2441,23 +2449,8 @@ public class SoftwareParser extends AbstractParser {
             }
         }
 
-        /*for(SoftwareEntity entity : entities) {
-            if (entity.getSoftwareName() != null) {
-                String context = entity.getContext();
-                int paragraphContextOffset = entity.getParagraphContextOffset();
-                int globalContextOffset = entity.getGlobalContextOffset();
-                String paragraph = entity.getParagraph();
-                SoftwareComponent softwareName = entity.getSoftwareName();
-
-                if (context == null || context.trim().length() == 0) {
-                    System.out.println(softwareName.getRawForm() + " / " + softwareName.getOffsetStart() + "-" + softwareName.getOffsetEnd() + 
-                        " / global offset: " + globalContextOffset + " / context: " + context + " / parag.: " + paragraph);
-                }
-            }
-        }*/
-
         // propagate the disambiguated entities to the non-disambiguated entities corresponding to the same software name
-        /*for(SoftwareEntity entity1 : entities) {
+        for(SoftwareEntity entity1 : entities) {
             if (entity1.getSoftwareName() != null && entity1.getSoftwareName().getWikidataId() != null) {
                 for (SoftwareEntity entity2 : entities) {
                     if (entity2.getSoftwareName() != null && entity2.getSoftwareName().getWikidataId() != null) {
@@ -2482,6 +2475,7 @@ public class SoftwareParser extends AbstractParser {
         Map<String, Double> termProfiles = prepareTermProfiles(entities);
         List<OffsetPosition> placeTaken = preparePlaceTaken(entities);
 
+        globalPos = 0;
         for (int i = 0; i < paragraphList.getLength(); i++) {
             org.w3c.dom.Element paragraphElement = (org.w3c.dom.Element) paragraphList.item(i);
 
@@ -2492,13 +2486,18 @@ public class SoftwareParser extends AbstractParser {
                     continue;
             }
 
-            String contentText = UnicodeUtil.normaliseText(XMLUtilities.getTextNoRefMarkers(paragraphElement));
+            String contentText = UnicodeUtil.normaliseText(paragraphElement.getTextContent()); 
             if (contentText != null && contentText.length()>0) {
                 List<LayoutToken> paragraphTokens = 
                     SoftwareAnalyzer.getInstance().tokenizeWithLayoutToken(contentText);
+
                 if (paragraphTokens != null && paragraphTokens.size() > 0) {
+                    for(LayoutToken paragraphToken : paragraphTokens) {
+                        paragraphToken.setOffset(paragraphToken.getOffset()+globalPos);
+                    }
                     propagateLayoutTokenSequence(paragraphTokens, entities, termProfiles, termPattern, placeTaken, frequencies, addParagraphContext, false, true);
                 }
+                globalPos += contentText.length();
             }
         }
         
@@ -2520,7 +2519,7 @@ public class SoftwareParser extends AbstractParser {
                     }
                 }
             }
-        }*/
+        }
 
         Collections.sort(entities);
 
