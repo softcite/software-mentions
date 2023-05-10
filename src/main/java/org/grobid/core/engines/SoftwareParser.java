@@ -2389,7 +2389,6 @@ public class SoftwareParser extends AbstractParser {
 
                 int paragraphContextOffset = entity.getParagraphContextOffset();
                 int globalContextOffset = entity.getGlobalContextOffset();
-                String paragraph = entity.getParagraph();
                 SoftwareComponent softwareName = entity.getSoftwareName();
 
                 //System.out.println(softwareName.getRawForm() + " / " + softwareName.getOffsetStart() + "-" + softwareName.getOffsetEnd() + 
@@ -2413,7 +2412,7 @@ public class SoftwareParser extends AbstractParser {
 
                 context = entity.getContext();
                 if (context == null || context.trim().length() == 0) {
-                    // this should not happen, but just in case...
+                    // this should never happen, but just in case...
                     entity.setContext(oldContext);
                     context = oldContext;
                 }
@@ -2581,19 +2580,21 @@ public class SoftwareParser extends AbstractParser {
         } 
 
         // propagate the bib. ref. to the entities corresponding to the same software name without bib. ref.
-        for(SoftwareEntity entity1 : entities) {
-            if (entity1.getBibRefs() != null && entity1.getBibRefs().size() > 0) {
-                for (SoftwareEntity entity2 : entities) {
-                    if (entity2.getBibRefs() != null) {
-                        continue;
-                    }
-                    if (entity2.getSoftwareName() != null && 
-                        entity2.getSoftwareName().getRawForm().equals(entity1.getSoftwareName().getRawForm())) {
-                        List<BiblioComponent> newBibRefs = new ArrayList<>();
-                        for(BiblioComponent bibComponent : entity1.getBibRefs()) {
-                            newBibRefs.add(new BiblioComponent(bibComponent));
+        if (entities != null && entities.size()>0) {
+            for(SoftwareEntity entity1 : entities) {
+                if (entity1.getBibRefs() != null && entity1.getBibRefs().size() > 0) {
+                    for (SoftwareEntity entity2 : entities) {
+                        if (entity2.getBibRefs() != null) {
+                            continue;
                         }
-                        entity2.setBibRefs(newBibRefs);
+                        if (entity2.getSoftwareName() != null && 
+                            entity2.getSoftwareName().getRawForm().equals(entity1.getSoftwareName().getRawForm())) {
+                            List<BiblioComponent> newBibRefs = new ArrayList<>();
+                            for(BiblioComponent bibComponent : entity1.getBibRefs()) {
+                                newBibRefs.add(new BiblioComponent(bibComponent));
+                            }
+                            entity2.setBibRefs(newBibRefs);
+                        }
                     }
                 }
             }
@@ -2615,14 +2616,11 @@ public class SoftwareParser extends AbstractParser {
             SoftwareComponent softwareName = entity.getSoftwareName();
             OffsetPosition positionEntity = softwareName.getOffsets();
 
-//System.out.println("entity: " + softwareName.getRawForm() + " / " + positionEntity.start + " " + positionEntity.end);
-
             // note: elements in entityTypes are removed as they are "consumed", via iterator.remove()
             for(Iterator iter = entityTypes.iterator(); iter.hasNext();) {
                 SoftwareType entityType= (SoftwareType) iter.next();
                 OffsetPosition localTypePosition = entityType.getOffsets();
 
-//System.out.println("entityType: " + entityType.getRawForm() + " / " + localTypePosition.start + " " + localTypePosition.end);
                 // check overlap between software entity and software type span
                 if (
                     (localTypePosition.start <= positionEntity.start && localTypePosition.end > positionEntity.start) ||
@@ -2864,7 +2862,6 @@ public class SoftwareParser extends AbstractParser {
                         OffsetPosition refMarkerPosition = bibValue.getLeft();
                         String refMarkerKey = bibValue.getRight();
                         if (refMarkerPosition.start >= contextOffset && refMarkerPosition.end <= contextOffset+context.length()) {
-                            //System.out.println(refMarkerKey + " at " + refMarkerPosition.start + "-" + refMarkerPosition.end + " in: " + context + " / " + contextOffset +"-"+(contextOffset+context.length()));
                         
                             // de we have components overlaping a ref marker? if yes discard these components
                             SoftwareComponent version = entity.getVersion();
@@ -2884,13 +2881,12 @@ public class SoftwareParser extends AbstractParser {
                                 entity.setLanguage(null);
                             }
 
-                            // finally ref marker attachement? reuse the standard reference attachment rule here
+                            // finally ref marker attachement
                             SoftwareComponent softwareName = entity.getSoftwareName();
-                            //if (softwareName.getOffsetEnd()+contextOffset < refMarkerPosition.start && (refMarkerPosition.start-(softwareName.getOffsetEnd()+contextOffset) < 20)) 
-                            {
-                                // get the bibref object
-                                BibDataSet resBib = null;
-                                int indexRef = 0;
+                            // get the bibref object
+                            BibDataSet resBib = null;
+                            int indexRef = 0;
+                            if (resCitations != null & resCitations.size()>0) {
                                 for(BibDataSet resCitation : resCitations) {
                                     if (refMarkerKey.equals(resCitation.getRefSymbol())) {
                                         resBib = resCitation;
@@ -2914,8 +2910,6 @@ public class SoftwareParser extends AbstractParser {
         }
 
         if (bibRefComponents.size() > 0) {
-            // avoid having version number where we identified bibliographical reference
-            //entities = filterByRefCallout(entities, bibRefComponents);
             // attach references to software entities 
             entities = attachRefBib(entities, bibRefComponents, 10);
         }
