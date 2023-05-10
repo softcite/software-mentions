@@ -208,11 +208,11 @@ task copyModels(type: Copy) {
 task installModels {
     doLast {
         download {
-            src "https://grobid.s3.amazonaws.com/software-BERT_CRF-0.3.2.zip"
+            src "https://grobid.s3.amazonaws.com/software-BERT-0.3.2.zip"
             dest "${rootDir}/../grobid-home/models/"
             overwrite false
         }
-        ant.unzip(src: "${rootDir}/../grobid-home/models/software-BERT_CRF-0.3.2.zip", dest: "${rootDir}/../grobid-home/models/")
+        ant.unzip(src: "${rootDir}/../grobid-home/models/software-BERT-0.3.2.zip", dest: "${rootDir}/../grobid-home/models/")
         download {
             src "https://grobid.s3.amazonaws.com/context_bert-0.3.2.zip"
             dest "${rootDir}/../grobid-home/models/"
