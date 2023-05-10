@@ -2520,7 +2520,7 @@ public class SoftwareParser extends AbstractParser {
             }
         }
 
-        Collections.sort(entities);
+        //Collections.sort(entities);
 
         // local bibliographical references to spot in the XML mark-up, to attach and propagate
         List<BibDataSet> resCitations = new ArrayList<>();

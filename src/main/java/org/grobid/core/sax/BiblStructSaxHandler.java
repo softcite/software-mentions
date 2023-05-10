@@ -114,14 +114,15 @@ public class BiblStructSaxHandler extends DefaultHandler {
 
     public void endElement(String uri, String localName, String qName) throws SAXException {
         if (qName.equals("biblStruct")) {
+            BiblioItem.cleanTitles(biblioItem);
             biblioItem.postProcessPages();
             accumulator.setLength(0);
-            entryType = null;
+            this.entryType = null;
         } else if (qName.equals("title")) {
             String title = getText();
-            if (this.entryType.equals("book") && level == null)
+            if (this.entryType != null && this.entryType.equals("book") && level == null)
                 biblioItem.setBookTitle(title);
-            else if (entryType.equals("book") && level.equals("j"))
+            else if (this.entryType != null && entryType.equals("book") && level.equals("j"))
                 biblioItem.setBookTitle(title);
             else if (level == null || level.equals("a"))
                 biblioItem.setTitle(title);
@@ -159,6 +160,12 @@ public class BiblStructSaxHandler extends DefaultHandler {
             if (currentPerson != null) {
                 currentPerson.normalizeName();
                 biblioItem.addFullAuthor(currentPerson);
+            }
+            currentPerson = null;
+        } else if (qName.equals("editor")) {
+            if (currentPerson != null) {
+                currentPerson.normalizeName();
+                biblioItem.addFullEditor(currentPerson);
             }
             currentPerson = null;
         } else if (qName.equals("forename")) {
@@ -263,7 +270,10 @@ public class BiblStructSaxHandler extends DefaultHandler {
             subUnitValue = null;
         } else if (qName.equals("publisher")) {
             biblioItem.setPublisher(getText());
+        } else if (qName.equals("pubPlace")) {
+            biblioItem.setLocation(getText());
         }
+        
         accumulator.setLength(0);
     }
 
@@ -308,6 +318,9 @@ public class BiblStructSaxHandler extends DefaultHandler {
                 }
             }
         } else if (qName.equals("author")) {
+            currentPerson = new Person();
+            firstName = true;
+        } else if (qName.equals("editor")) {
             currentPerson = new Person();
             firstName = true;
         } else if (qName.equals("forename")) {
