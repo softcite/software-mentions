@@ -99,6 +99,48 @@ public class XMLUtilitiesTest {
     }
 
     @Test
+    public void testParsingBiblio4() throws Exception {
+        try {
+            String testString = "<biblStruct type=\"journal\" xml:id=\"ppat.1011317.ref002\">\n"+
+                        "<analytic>\n"+
+                        "    <title level=\"a\" type=\"main\">Eflornithine for the treatment of human African trypanosomiasis</title>\n"+
+                        "    <author>\n"+
+                        "        <persName>\n"+
+                        "            <surname>Burri</surname>\n"+
+                        "            <forename type=\"first\">C</forename>\n"+
+                        "        </persName>\n"+
+                        "    </author>\n"+
+                        "    <author>\n"+
+                        "        <persName>\n"+
+                        "            <surname>Brun</surname>\n"+
+                        "            <forename type=\"first\">R</forename>\n"+
+                        "        </persName>\n"+
+                        "    </author>\n"+
+                        "</analytic>\n"+
+                        "<monogr>\n"+
+                        "    <title level=\"j\">Parasitol Res</title>\n"+
+                        "    <imprint>\n"+
+                        "        <date type=\"year\">2003</date>\n"+
+                        "        <biblScope unit=\"vol\">90</biblScope>\n"+
+                        "        <biblScope unit=\"page\" from=\"S49\">S49</biblScope>\n"+
+                        "        <biblScope unit=\"page\" to=\"52\">52</biblScope>\n"+
+                        "    </imprint>\n"+
+                        "</monogr>\n"+
+                    "</biblStruct>";
+            org.w3c.dom.Document document = DocumentBuilderFactory.newInstance()
+                        .newDocumentBuilder()
+                        .parse(new InputSource(new ByteArrayInputStream(testString.getBytes("utf-8"))));
+
+            org.w3c.dom.Element biblStructElement = document.getDocumentElement();
+            BiblioItem biblio = XMLUtilities.parseTEIBiblioItem(biblStructElement);
+
+            System.out.println(biblio.toTEI(0));
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
     public void testXMLParagraphContentParsing() throws Exception {
         try {
             String testString = "<p>RNA was purified and prepared as described from Huh7 cells treated for 96h with DFMO or infected for 24h with CVB3. Libraries were prepared by the University of Chicago Genomics Facility and analyzed by Illumina NovaSeq 6000. Read quality was evaluated using FastQC (v0.11.5). Adapters were trimmed in parallel to a quality trimming (bbduk, <ref type=\"uri\" target=\"http://sourceforge.net/projects/bbmap\">sourceforge.net/projects/bbmap</ref>/). All remaining sequences were mapped against the human reference genome build 38 with STAR (v2.5.2b) [<ref type=\"bibr\" target=\"#ppat.1011317.ref049\">49</ref>]. HTseq (v0.6.1) was used to count all reads for each gene and set up a read count table [<ref type=\"bibr\" target=\"#ppat.1011317.ref050\">50</ref>]. Differential gene expression analyses were performed using the DESeq2 Bioconductor package (v1.30.1) [<ref type=\"bibr\" target=\"#ppat.1011317.ref051\">51</ref>]. The default “ashr” shrinkage (v2.2–47) [<ref type=\"bibr\" target=\"#ppat.1011317.ref052\">52</ref>] set up was used for our analysis. Gene set enrichment analysis (GSEA) was performed with the fgsea Bioconductor package [<ref type=\"bibr\" target=\"#ppat.1011317.ref053\">53</ref>], using Hallmark gene sets downloaded from the Molecular Signatures Database [<ref type=\"bibr\" target=\"#ppat.1011317.ref054\">54</ref>].</p>";

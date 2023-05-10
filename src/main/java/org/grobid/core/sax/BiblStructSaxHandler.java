@@ -254,8 +254,8 @@ public class BiblStructSaxHandler extends DefaultHandler {
                     biblioItem.setPageRange(getText());
                 }
             } else if (this.unit != null && (this.unit.equals("vol") || this.unit.equals("volume"))) {
-                biblioItem.setVolume(getText());
-            } else if (this.unit != null && (this.unit.equals("issue") || this.unit.equals("issue"))) {
+                biblioItem.setVolumeBlock(getText(), false);
+            } else if (this.unit != null && (this.unit.equals("issue") || this.unit.equals("number"))) {
                 biblioItem.setIssue(getText());
             } 
             unit = null;
