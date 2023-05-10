@@ -78,7 +78,9 @@ public class SoftwareTrainerRunner {
         SoftwareConfiguration conf = null;
         try {
             ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-            conf = mapper.readValue(new File("resources/config/config.yml"), SoftwareConfiguration.class);
+            File yamlFile = new File("resources/config/config.yml");
+            yamlFile = new File(yamlFile.getAbsolutePath());
+            conf = mapper.readValue(yamlFile, SoftwareConfiguration.class);
 
             //String path2GbdHome = SoftwareProperties.get("grobid.home");
             path2GbdHome = conf.getGrobidHome();

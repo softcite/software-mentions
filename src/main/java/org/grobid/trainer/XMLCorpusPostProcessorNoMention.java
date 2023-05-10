@@ -2136,7 +2136,9 @@ public class XMLCorpusPostProcessorNoMention {
         String outputXmlPathTmp = outputXmlPath.replace(".xml", ".tmp.xml");
 
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-        SoftwareConfiguration conf = mapper.readValue(new File("resources/config/config.yml"), SoftwareConfiguration.class);
+        File yamlFile = new File("resources/config/config.yml");
+        yamlFile = new File(yamlFile.getAbsolutePath());
+        SoftwareConfiguration conf = mapper.readValue(yamlFile, SoftwareConfiguration.class);
 
         // post processing has two steps
         // first one add information to the curated dataset

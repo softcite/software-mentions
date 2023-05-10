@@ -384,7 +384,9 @@ public class SoftwareTypeTrainer extends AbstractTrainer {
         SoftwareConfiguration conf = null;
         try {
             ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-            conf = mapper.readValue(new File("resources/config/config.yml"), SoftwareConfiguration.class);
+            File yamlFile = new File("resources/config/config.yml");
+            yamlFile = new File(yamlFile.getAbsolutePath());
+            conf = mapper.readValue(yamlFile, SoftwareConfiguration.class);
             String pGrobidHome = conf.getGrobidHome();
 
             //String pGrobidHome = SoftwareProperties.get("grobid.home");

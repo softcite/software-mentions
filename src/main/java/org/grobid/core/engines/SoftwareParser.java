@@ -177,7 +177,7 @@ public class SoftwareParser extends AbstractParser {
             // we prepare a list of existing positions to avoid overlap 
             List<OffsetPosition> placeTaken = preparePlaceTaken(entities);
             // and call the propagation method
-            entities = propagateLayoutTokenSequence(tokens, entities, termProfiles, termPattern, placeTaken, frequencies, false);
+            entities = propagateLayoutTokenSequence(tokens, entities, termProfiles, termPattern, placeTaken, frequencies, false, false, false);
             Collections.sort(entities);
 
             // refine software types, if there is anything to refine
@@ -200,7 +200,7 @@ public class SoftwareParser extends AbstractParser {
             }
 
             // attach a local text context to the entities
-            entities = addContext(entities, text, tokens, false, false);
+            entities = addContext(entities, text, tokens, false, false, false);
 
             // finally classify the context for predicting the role of the software mention
             entities = SoftwareContextClassifier.getInstance(softwareConfiguration).classifyDocumentContexts(entities);
@@ -352,8 +352,6 @@ public class SoftwareParser extends AbstractParser {
             // we can process annexes
             documentParts = doc.getDocumentPart(SegmentationLabels.ANNEX);
             if (documentParts != null) {
-                //processDocumentPart(documentParts, doc, entities);
-
                 List<LayoutToken> annexTokens = doc.getTokenizationParts(documentParts, doc.getTokenizations());
                 if (annexTokens != null) {
                     selectedLayoutTokenSequences.add(annexTokens);
@@ -363,8 +361,6 @@ public class SoftwareParser extends AbstractParser {
             // footnotes are also relevant
             documentParts = doc.getDocumentPart(SegmentationLabels.FOOTNOTE);
             if (documentParts != null) {
-                //processDocumentPart(documentParts, doc, components);
-
                 List<LayoutToken> footnoteTokens = doc.getTokenizationParts(documentParts, doc.getTokenizations());
                 if (footnoteTokens != null) {
                     selectedLayoutTokenSequences.add(footnoteTokens);
@@ -382,7 +378,7 @@ public class SoftwareParser extends AbstractParser {
 
             // actual processing of the selected sequences which have been delayed to be processed in groups and
             // take advantage of deep learning batch
-            processLayoutTokenSequenceMultiple(selectedLayoutTokenSequences, entities, disambiguate, addParagraphContext);
+            processLayoutTokenSequenceMultiple(selectedLayoutTokenSequences, entities, disambiguate, addParagraphContext, true, false);
 
             // propagate the disambiguated entities to the non-disambiguated entities corresponding to the same software name
             for(SoftwareEntity entity1 : entities) {
@@ -464,19 +460,19 @@ public class SoftwareParser extends AbstractParser {
                 // title
                 List<LayoutToken> titleTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_TITLE);
                 if (titleTokens != null) {
-                    propagateLayoutTokenSequence(titleTokens, entities, termProfiles, termPattern, placeTaken, frequencies, addParagraphContext);
+                    propagateLayoutTokenSequence(titleTokens, entities, termProfiles, termPattern, placeTaken, frequencies, addParagraphContext, true, false);
                 } 
 
                 // abstract
                 List<LayoutToken> abstractTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_ABSTRACT);
                 if (abstractTokens != null) {
-                    propagateLayoutTokenSequence(abstractTokens, entities, termProfiles, termPattern, placeTaken, frequencies, addParagraphContext);
+                    propagateLayoutTokenSequence(abstractTokens, entities, termProfiles, termPattern, placeTaken, frequencies, addParagraphContext, true, false);
                 } 
 
                 // keywords
                 List<LayoutToken> keywordTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_KEYWORD);
                 if (keywordTokens != null) {
-                    propagateLayoutTokenSequence(keywordTokens, entities, termProfiles, termPattern, placeTaken, frequencies, addParagraphContext);
+                    propagateLayoutTokenSequence(keywordTokens, entities, termProfiles, termPattern, placeTaken, frequencies, addParagraphContext, true, false);
                 }
             }
 
@@ -503,7 +499,7 @@ public class SoftwareParser extends AbstractParser {
                         //|| clusterLabel.equals(TaggingLabels.SECTION) {
                         if (lastClusterLabel == null || curParagraphTokens == null  || isNewParagraph(lastClusterLabel)) { 
                             if (curParagraphTokens != null)
-                                propagateLayoutTokenSequence(curParagraphTokens, entities, termProfiles, termPattern, placeTaken, frequencies, addParagraphContext);
+                                propagateLayoutTokenSequence(curParagraphTokens, entities, termProfiles, termPattern, placeTaken, frequencies, addParagraphContext, true, false);
                             curParagraphTokens = new ArrayList<>();
                         }
                         curParagraphTokens.addAll(localTokenization);
@@ -513,21 +509,21 @@ public class SoftwareParser extends AbstractParser {
                 }
 
                 if (curParagraphTokens != null)
-                    propagateLayoutTokenSequence(curParagraphTokens, entities, termProfiles, termPattern, placeTaken, frequencies, addParagraphContext);
+                    propagateLayoutTokenSequence(curParagraphTokens, entities, termProfiles, termPattern, placeTaken, frequencies, addParagraphContext, true, false);
             }
 
             // second pass, annex - if relevant, uncomment
             /*documentParts = doc.getDocumentPart(SegmentationLabels.ANNEX);
             if (documentParts != null) {
                 List<LayoutToken> tokenizationParts = doc.getTokenizationParts(documentParts, doc.getTokenizations());
-                propagateLayoutTokenSequence(tokenizationParts, entities, termProfiles, termPattern, placeTaken, frequencies);
+                propagateLayoutTokenSequence(tokenizationParts, entities, termProfiles, termPattern, placeTaken, frequencies, true, false);
             }*/
 
             // second pass, footnotes (if relevant, uncomment)
             /*documentParts = doc.getDocumentPart(SegmentationLabel.FOOTNOTE);
             if (documentParts != null) {
                 List<LayoutToken> tokenizationParts = doc.getTokenizationParts(documentParts, doc.getTokenizations());
-                propagateLayoutTokenSequence(tokenizationParts, entities, termProfiles, termPattern, placeTaken, frequencies);
+                propagateLayoutTokenSequence(tokenizationParts, entities, termProfiles, termPattern, placeTaken, frequencies, true, false);
             }*/            
 
             // finally we attach and match bibliographical reference callout
@@ -687,27 +683,17 @@ public class SoftwareParser extends AbstractParser {
     }
 
     /**
-     * Process with the software model a segment coming from the segmentation model
-     */
-    private List<SoftwareEntity> processDocumentPart(SortedSet<DocumentPiece> documentParts, 
-                                                  Document doc,
-                                                  List<SoftwareEntity> entities,
-                                                  boolean disambiguate, 
-                                                  boolean addParagraphContext) {
-        List<LayoutToken> tokenizationParts = doc.getTokenizationParts(documentParts, doc.getTokenizations());
-        return processLayoutTokenSequence(tokenizationParts, entities, disambiguate, addParagraphContext);
-    }
-
-    /**
      * Process with the software model a single arbitrary sequence of LayoutToken objects
      */ 
     private List<SoftwareEntity> processLayoutTokenSequence(List<LayoutToken> layoutTokens, 
                                                             List<SoftwareEntity> entities,
                                                             boolean disambiguate,
-                                                            boolean addParagraphContext) {
+                                                            boolean addParagraphContext,
+                                                            boolean fromPDF,
+                                                            boolean fromXML) {
         List<LayoutTokenization> layoutTokenizations = new ArrayList<LayoutTokenization>();
         layoutTokenizations.add(new LayoutTokenization(layoutTokens));
-        return processLayoutTokenSequences(layoutTokenizations, entities, disambiguate, addParagraphContext);
+        return processLayoutTokenSequences(layoutTokenizations, entities, disambiguate, addParagraphContext, fromPDF, fromXML);
     }
 
     /**
@@ -716,11 +702,13 @@ public class SoftwareParser extends AbstractParser {
     private List<SoftwareEntity> processLayoutTokenSequenceMultiple(List<List<LayoutToken>> layoutTokenList, 
                                                             List<SoftwareEntity> entities,
                                                             boolean disambiguate, 
-                                                            boolean addParagraphContext) {
+                                                            boolean addParagraphContext,
+                                                            boolean fromPDF,
+                                                            boolean fromXML) {
         List<LayoutTokenization> layoutTokenizations = new ArrayList<LayoutTokenization>();
         for(List<LayoutToken> layoutTokens : layoutTokenList)
             layoutTokenizations.add(new LayoutTokenization(layoutTokens));
-        return processLayoutTokenSequences(layoutTokenizations, entities, disambiguate, addParagraphContext);
+        return processLayoutTokenSequences(layoutTokenizations, entities, disambiguate, addParagraphContext, fromPDF, fromXML);
     }
 
     /**
@@ -729,7 +717,9 @@ public class SoftwareParser extends AbstractParser {
     private List<SoftwareEntity> processLayoutTokenSequences(List<LayoutTokenization> layoutTokenizations, 
                                                   List<SoftwareEntity> entities, 
                                                   boolean disambiguate,
-                                                  boolean addParagraphContext) {
+                                                  boolean addParagraphContext,
+                                                  boolean fromPDF,
+                                                  boolean fromXML) {
         StringBuilder allRess = new StringBuilder();
         for(LayoutTokenization layoutTokenization : layoutTokenizations) {
             List<LayoutToken> layoutTokens = layoutTokenization.getTokenization();
@@ -817,7 +807,7 @@ public class SoftwareParser extends AbstractParser {
                 }
             }
 
-            localEntities = addContext(localEntities, text, layoutTokens, true, addParagraphContext);
+            localEntities = addContext(localEntities, text, layoutTokens, fromPDF, fromXML, addParagraphContext);
 
             entities.addAll(localEntities);
         }
@@ -904,7 +894,9 @@ public class SoftwareParser extends AbstractParser {
                                               FastMatcher termPattern, 
                                               List<OffsetPosition> placeTaken,
                                               Map<String, Integer> frequencies,
-                                              boolean addParagraphContext) {
+                                              boolean addParagraphContext,
+                                              boolean fromPDF,
+                                              boolean fromXML) {
         // possible offset of the sequence in the complete document tokenization
         int offsetShift = 0;
         if (layoutTokens != null && layoutTokens.size()>0 && layoutTokens.get(0).getOffset() != 0) {
@@ -990,7 +982,7 @@ public class SoftwareParser extends AbstractParser {
         }
 
         // add context to the new entities
-        addContext(localEntities, null, layoutTokens, true, addParagraphContext);
+        addContext(localEntities, null, layoutTokens, fromPDF, fromXML, addParagraphContext);
 
         return entities;
     }
@@ -1092,9 +1084,14 @@ public class SoftwareParser extends AbstractParser {
 
 
     /**
-     * Try to attach relevant bib ref component to software entities
+     * Try to attach relevant bib ref component to software entities. 
+     * Default max interval between ref and "mention" boundary is 5 characters, but it can be modified if needed. 
      */
     public List<SoftwareEntity> attachRefBib(List<SoftwareEntity> entities, List<BiblioComponent> refBibComponents) {
+        return attachRefBib(entities, refBibComponents, 5);
+    }
+
+    public List<SoftwareEntity> attachRefBib(List<SoftwareEntity> entities, List<BiblioComponent> refBibComponents, int intervalMax) {
 
         // we anchor the process to the software names and aggregate other closest components on the right
         // if we cross a bib ref component we attach it, if a bib ref component is just after the last 
@@ -1128,6 +1125,8 @@ public class SoftwareParser extends AbstractParser {
                 theComps.add(comp);
 
             for(SoftwareComponent theComp : theComps) {
+                if (theComp.getOffsets() == null)
+                    continue;
                 int localPos = theComp.getOffsetEnd() + shiftOffset;
                 if (localPos > endPos)
                     endPos = localPos;
@@ -1136,7 +1135,7 @@ public class SoftwareParser extends AbstractParser {
             // find included or just next bib ref callout
             for(BiblioComponent refBib : refBibComponents) {
                 if ( (refBib.getOffsetStart() >= pos) &&
-                     (refBib.getOffsetStart() <= endPos+5) ) {
+                     (refBib.getOffsetStart() <= endPos+intervalMax) ) {
                     entity.addBibRef(refBib);
                     endPos = refBib.getOffsetEnd();
                 }
@@ -1602,6 +1601,7 @@ public class SoftwareParser extends AbstractParser {
                                         String text, 
                                         List<LayoutToken> tokens, 
                                         boolean fromPDF,
+                                        boolean fromXML,
                                         boolean addParagraphContext) {
         // adjust offsets if tokenization does not start at 0
         int offsetShift = 0;
@@ -1662,9 +1662,6 @@ public class SoftwareParser extends AbstractParser {
             int startEntity = softwareName.getOffsetStart();
             int endEntity = softwareName.getOffsetEnd();
 
-            //System.out.println("startEntity: " + startEntity + ", endEntity: " + endEntity);
-            //System.out.println("from text: ]" + text.substring(startEntity, endEntity) + "[");
-
             // the following should never happen, but for safety - TBD: this kind of ill-formed entity should be discarded ?
             if (startEntity < 0 || endEntity < 0)
                 continue;
@@ -1682,7 +1679,7 @@ public class SoftwareParser extends AbstractParser {
 
                     //System.out.println("context: " + entity.getContext());
                
-                    if (fromPDF) {
+                    if (fromPDF || fromXML) {
                         // we relate the entity offset to the context text
                         // update the offsets of the entity components relatively to the context
                         softwareName.setOffsetStart(startEntity - startSentence);
@@ -1900,6 +1897,14 @@ public class SoftwareParser extends AbstractParser {
                         FeatureFactory.getInstance().test_number(clusterContent) ||
                         clusterContent.replace("\n", "").equals("//")) {
                         // note: the last conditional test is a rare error by SciBERT model
+                        pos = endPos;
+                        continue;
+                    }
+                }
+
+                // conservative check, minimal well-formedness of the content for version
+                if (clusterLabel.equals(SoftwareTaggingLabels.VERSION)) {
+                    if (SoftwareAnalyzer.DELIMITERS.indexOf(clusterContent) != -1) {
                         pos = endPos;
                         continue;
                     }
@@ -2226,10 +2231,10 @@ public class SoftwareParser extends AbstractParser {
     /**
      * Extract all software mentions from a publisher XML file
      */
-    public List<SoftwareEntity> processXML(File file, 
+    public Pair<List<SoftwareEntity>, List<BibDataSet>> processXML(File file, 
                                            boolean disambiguate, 
                                            boolean addParagraphContext) throws IOException {
-        List<SoftwareEntity> entities = null;
+        Pair<List<SoftwareEntity>, List<BibDataSet>> resultExtraction = null;
         try {
             String tei = processXML(file);
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -2240,7 +2245,7 @@ public class SoftwareParser extends AbstractParser {
             org.w3c.dom.Document document = builder.parse(new InputSource(new StringReader(tei)));
             //document.getDocumentElement().normalize();
             
-            entities = processTEIDocument(document, disambiguate, addParagraphContext);
+            resultExtraction = processTEIDocument(document, disambiguate, addParagraphContext);
             
             //tei = restoreDomParserAttributeBug(tei); 
 
@@ -2249,24 +2254,24 @@ public class SoftwareParser extends AbstractParser {
                 + file.getPath(), exp);
         } 
 
-        return entities;
+        return resultExtraction;
     }
 
 
     /**
      * Extract all software mentions from a publisher XML file
      */
-    public List<SoftwareEntity> processTEI(File file, 
+    public Pair<List<SoftwareEntity>, List<BibDataSet>> processTEI(File file, 
                                            boolean disambiguate, 
                                            boolean addParagraphContext) throws IOException {
-        List<SoftwareEntity> entities = null;
+        Pair<List<SoftwareEntity>, List<BibDataSet>> resultExtraction = null;
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             factory.setNamespaceAware(true);
             DocumentBuilder builder = factory.newDocumentBuilder();
             org.w3c.dom.Document document = builder.parse(file);
             //document.getDocumentElement().normalize();
-            entities = processTEIDocument(document, disambiguate, addParagraphContext);
+            resultExtraction = processTEIDocument(document, disambiguate, addParagraphContext);
             //tei = restoreDomParserAttributeBug(tei); 
 
         } catch (final Exception exp) {
@@ -2274,7 +2279,7 @@ public class SoftwareParser extends AbstractParser {
                 + file.getPath(), exp);
         } 
 
-        return entities;
+        return resultExtraction;
     }
 
     /**
@@ -2318,13 +2323,19 @@ public class SoftwareParser extends AbstractParser {
     /**
      * Extract all software mentions from a publisher XML file
      */
-    public List<SoftwareEntity> processTEIDocument(org.w3c.dom.Document doc, boolean disambiguate, boolean addParagraphContext) { 
+    public Pair<List<SoftwareEntity>, List<BibDataSet>> processTEIDocument(org.w3c.dom.Document doc, 
+                                                                        boolean disambiguate, 
+                                                                        boolean addParagraphContext) { 
         List<SoftwareEntity> entities = new ArrayList<SoftwareEntity>();
 
         List<List<LayoutToken>> selectedLayoutTokenSequences = new ArrayList<>();
+        List<List<LayoutToken>> selectedOriginalLayoutTokenSequences = new ArrayList<>();
         List<LayoutToken> docLayoutTokens = new ArrayList<>();
 
+        List<Map<String,Pair<OffsetPosition,String>>> selectedRefInfos = new ArrayList<>();
+
         org.w3c.dom.NodeList paragraphList = doc.getElementsByTagName("p");
+        int globalPos = 0;
         for (int i = 0; i < paragraphList.getLength(); i++) {
             org.w3c.dom.Element paragraphElement = (org.w3c.dom.Element) paragraphList.item(i);
 
@@ -2335,18 +2346,107 @@ public class SoftwareParser extends AbstractParser {
                     continue;
             }
 
-            String contentText = UnicodeUtil.normaliseText(XMLUtilities.getTextNoRefMarkers(paragraphElement));
+            Pair<String,Map<String,Pair<OffsetPosition,String>>> contentTextAndRef = 
+                XMLUtilities.getTextNoRefMarkersAndMarkerPositions(paragraphElement, globalPos);
+            String contentText = UnicodeUtil.normaliseText(contentTextAndRef.getLeft());
+            Map<String,Pair<OffsetPosition,String>> refInfos = contentTextAndRef.getRight();
+            
             if (contentText != null && contentText.length()>0) {
                 List<LayoutToken> paragraphTokens = 
                     SoftwareAnalyzer.getInstance().tokenizeWithLayoutToken(contentText);
+                String orginalText = UnicodeUtil.normaliseText(paragraphElement.getTextContent());    
+                List<LayoutToken> originalParagraphTokens = 
+                    SoftwareAnalyzer.getInstance().tokenizeWithLayoutToken(orginalText);
                 if (paragraphTokens != null && paragraphTokens.size() > 0) {
-                    docLayoutTokens.addAll(paragraphTokens);
+                    // shift the paragraph tokens to the global position
+                    for(LayoutToken paragraphToken : paragraphTokens) {
+                        paragraphToken.setOffset(paragraphToken.getOffset()+globalPos);
+                    }
+                    for(LayoutToken originalParagraphToken : originalParagraphTokens) {
+                        originalParagraphToken.setOffset(originalParagraphToken.getOffset()+globalPos);
+                    }
+
                     selectedLayoutTokenSequences.add(paragraphTokens);
+                    docLayoutTokens.addAll(originalParagraphTokens);
+                    
+                    selectedRefInfos.add(refInfos);
+                    selectedOriginalLayoutTokenSequences.add(originalParagraphTokens);
                 }
+
+                globalPos += contentText.length();
             }
         }
 
-        processLayoutTokenSequenceMultiple(selectedLayoutTokenSequences, entities, disambiguate, addParagraphContext);
+        processLayoutTokenSequenceMultiple(selectedLayoutTokenSequences, entities, disambiguate, addParagraphContext, false, true);
+        selectedLayoutTokenSequences = selectedOriginalLayoutTokenSequences;
+
+        // filter out components outside context, restore original tokenization  
+        int sequenceIndex = 0;
+        for(SoftwareEntity entity : entities) {
+            if (entity.getSoftwareName() != null) {
+                String context = entity.getContext();
+                String oldContext = new String(entity.getContext());
+
+                int paragraphContextOffset = entity.getParagraphContextOffset();
+                int globalContextOffset = entity.getGlobalContextOffset();
+                SoftwareComponent softwareName = entity.getSoftwareName();
+
+                //System.out.println(softwareName.getRawForm() + " / " + softwareName.getOffsetStart() + "-" + softwareName.getOffsetEnd() + 
+                //    " / global offset: " + globalContextOffset + " / context: " + context + " / final context pos: " + (globalContextOffset+context.length()) );
+
+                for(int i=sequenceIndex; i<selectedLayoutTokenSequences.size(); i++) {
+                    int posStartSequence = -1;
+                    List<LayoutToken> selectedLayoutTokenSequence = selectedLayoutTokenSequences.get(i);
+                    if (selectedLayoutTokenSequence != null && selectedLayoutTokenSequence.size()>0) {
+                        posStartSequence = selectedLayoutTokenSequence.get(0).getOffset();
+                        String localText = LayoutTokensUtil.toText(selectedLayoutTokenSequence);
+                        if (posStartSequence <= globalContextOffset && globalContextOffset<posStartSequence+localText.length()) {
+                            // the context is within this sequence
+                            int maxBound = Math.min((globalContextOffset-posStartSequence)+context.length()+1, localText.length());
+                            String newContext = localText.substring(globalContextOffset-posStartSequence, maxBound);
+                            entity.setContext(newContext);
+                            break;
+                        }
+                    }
+                }
+
+                context = entity.getContext();
+                if (context == null || context.trim().length() == 0) {
+                    // this should never happen, but just in case...
+                    entity.setContext(oldContext);
+                    context = oldContext;
+                }
+
+                SoftwareComponent version = entity.getVersion();
+                if (version != null && (version.getOffsetStart() < 0 || version.getOffsetEnd() < 0)) {
+                    entity.setVersion(null);
+                }
+                if (version != null && (version.getOffsetStart() > context.length() || version.getOffsetEnd() > context.length())) {
+                    entity.setVersion(null);
+                }
+                SoftwareComponent creator = entity.getCreator();
+                if (creator != null && (creator.getOffsetStart() < 0 || creator.getOffsetEnd() < 0)) {
+                    entity.setCreator(null);
+                }
+                if (creator != null && (creator.getOffsetStart() > context.length() || creator.getOffsetEnd() > context.length())) {
+                    entity.setCreator(null);
+                }
+                SoftwareComponent url = entity.getSoftwareURL();
+                if (url != null && (url.getOffsetStart() < 0 || url.getOffsetEnd() < 0)) {
+                    entity.setSoftwareURL(null);
+                }
+                if (url != null && (url.getOffsetStart() > context.length() || url.getOffsetEnd() > context.length())) {
+                    entity.setSoftwareURL(null);
+                }
+                SoftwareComponent language = entity.getLanguage();
+                if (language != null && (language.getOffsetStart() < 0 || language.getOffsetEnd() < 0)) {
+                    entity.setLanguage(null);
+                }
+                if (language != null && (language.getOffsetStart() > context.length() || language.getOffsetEnd() > context.length())) {
+                    entity.setLanguage(null);
+                }
+            }
+        }
 
         // propagate the disambiguated entities to the non-disambiguated entities corresponding to the same software name
         for(SoftwareEntity entity1 : entities) {
@@ -2374,6 +2474,7 @@ public class SoftwareParser extends AbstractParser {
         Map<String, Double> termProfiles = prepareTermProfiles(entities);
         List<OffsetPosition> placeTaken = preparePlaceTaken(entities);
 
+        globalPos = 0;
         for (int i = 0; i < paragraphList.getLength(); i++) {
             org.w3c.dom.Element paragraphElement = (org.w3c.dom.Element) paragraphList.item(i);
 
@@ -2384,13 +2485,18 @@ public class SoftwareParser extends AbstractParser {
                     continue;
             }
 
-            String contentText = UnicodeUtil.normaliseText(XMLUtilities.getTextNoRefMarkers(paragraphElement));
+            String contentText = UnicodeUtil.normaliseText(paragraphElement.getTextContent()); 
             if (contentText != null && contentText.length()>0) {
                 List<LayoutToken> paragraphTokens = 
                     SoftwareAnalyzer.getInstance().tokenizeWithLayoutToken(contentText);
+
                 if (paragraphTokens != null && paragraphTokens.size() > 0) {
-                    propagateLayoutTokenSequence(paragraphTokens, entities, termProfiles, termPattern, placeTaken, frequencies, addParagraphContext);
+                    for(LayoutToken paragraphToken : paragraphTokens) {
+                        paragraphToken.setOffset(paragraphToken.getOffset()+globalPos);
+                    }
+                    propagateLayoutTokenSequence(paragraphTokens, entities, termProfiles, termPattern, placeTaken, frequencies, addParagraphContext, false, true);
                 }
+                globalPos += contentText.length();
             }
         }
         
@@ -2416,10 +2522,90 @@ public class SoftwareParser extends AbstractParser {
 
         Collections.sort(entities);
 
+        // local bibliographical references to spot in the XML mark-up, to attach and propagate
+        List<BibDataSet> resCitations = new ArrayList<>();
+        org.w3c.dom.NodeList bibList = doc.getElementsByTagName("biblStruct");
+        for (int i = 0; i < bibList.getLength(); i++) {
+            org.w3c.dom.Element biblStructElement = (org.w3c.dom.Element) bibList.item(i);
+
+            // filter <biblStruct> not having as father <listBibl>
+            org.w3c.dom.Node fatherNode = biblStructElement.getParentNode();
+            if (fatherNode != null) {
+                if (!"listBibl".equals(fatherNode.getNodeName()))
+                    continue;
+            }
+
+            BiblioItem biblio = XMLUtilities.parseTEIBiblioItem(biblStructElement);
+
+            BibDataSet bds = new BibDataSet();
+            bds.setResBib(biblio);
+            bds.setRefSymbol(biblStructElement.getAttribute("xml:id"));
+            resCitations.add(bds);
+        }
+
+        entities = attachReferencesXML(entities, 
+                                    selectedRefInfos, 
+                                    resCitations);
+
+        // consolidate the attached ref bib (we don't consolidate all bibliographical references
+        // to avoid useless costly computation)
+        List<BibDataSet> citationsToConsolidate = new ArrayList<BibDataSet>();
+        List<Integer> consolidated = new ArrayList<Integer>();
+        for(SoftwareEntity entity : entities) {
+            if (entity.getBibRefs() != null && entity.getBibRefs().size() > 0) {
+                List<BiblioComponent> bibRefs = entity.getBibRefs();
+                for(BiblioComponent bibRef: bibRefs) {
+                    Integer refKeyVal = new Integer(bibRef.getRefKey());
+                    if (!consolidated.contains(refKeyVal)) {
+                        citationsToConsolidate.add(resCitations.get(refKeyVal));
+                        consolidated.add(refKeyVal);
+                    }
+                }
+            }
+        }
+
+        try {
+            Consolidation consolidator = Consolidation.getInstance();
+            Map<Integer,BiblioItem> resConsolidation = consolidator.consolidate(citationsToConsolidate);
+            for(int i=0; i<citationsToConsolidate.size(); i++) {
+                BiblioItem resCitation = citationsToConsolidate.get(i).getResBib();
+                BiblioItem bibo = resConsolidation.get(i);
+                if (bibo != null) {
+                    BiblioItem.correct(resCitation, bibo);
+                }
+            }
+        } catch(Exception e) {
+            throw new GrobidException(
+            "An exception occured while running consolidation on bibliographical references.", e);
+        } 
+
+        // propagate the bib. ref. to the entities corresponding to the same software name without bib. ref.
+        if (entities != null && entities.size()>0) {
+            for(SoftwareEntity entity1 : entities) {
+                if (entity1.getBibRefs() != null && entity1.getBibRefs().size() > 0) {
+                    for (SoftwareEntity entity2 : entities) {
+                        if (entity2.getBibRefs() != null) {
+                            continue;
+                        }
+                        if (entity2.getSoftwareName() != null && 
+                            entity2.getSoftwareName().getRawForm().equals(entity1.getSoftwareName().getRawForm())) {
+                            List<BiblioComponent> newBibRefs = new ArrayList<>();
+                            for(BiblioComponent bibComponent : entity1.getBibRefs()) {
+                                newBibRefs.add(new BiblioComponent(bibComponent));
+                            }
+                            entity2.setBibRefs(newBibRefs);
+                        }
+                    }
+                }
+            }
+        }
+
+        Collections.sort(entities);
+
         // finally classify the context for predicting the role of the software mention
         entities = SoftwareContextClassifier.getInstance(softwareConfiguration).classifyDocumentContexts(entities);
 
-        return entities;
+        return Pair.of(entities, resCitations);
     }
 
 
@@ -2430,14 +2616,11 @@ public class SoftwareParser extends AbstractParser {
             SoftwareComponent softwareName = entity.getSoftwareName();
             OffsetPosition positionEntity = softwareName.getOffsets();
 
-//System.out.println("entity: " + softwareName.getRawForm() + " / " + positionEntity.start + " " + positionEntity.end);
-
             // note: elements in entityTypes are removed as they are "consumed", via iterator.remove()
             for(Iterator iter = entityTypes.iterator(); iter.hasNext();) {
                 SoftwareType entityType= (SoftwareType) iter.next();
                 OffsetPosition localTypePosition = entityType.getOffsets();
 
-//System.out.println("entityType: " + entityType.getRawForm() + " / " + localTypePosition.start + " " + localTypePosition.end);
                 // check overlap between software entity and software type span
                 if (
                     (localTypePosition.start <= positionEntity.start && localTypePosition.end > positionEntity.start) ||
@@ -2647,6 +2830,91 @@ public class SoftwareParser extends AbstractParser {
             languageComponent.setWikidataId(wikiInfo.getB());
         }
         return languageComponent;
+    }
+
+    private List<SoftwareEntity> attachReferencesXML(List<SoftwareEntity> entities, 
+                                    List<Map<String,Pair<OffsetPosition,String>>> selectedRefInfos, 
+                                    List<BibDataSet> resCitations) {
+        if (selectedRefInfos == null || selectedRefInfos.size() == 0) 
+            return entities;
+
+        // for the biblio ref. attached to this software entity
+        List<BiblioComponent> bibRefComponents = new ArrayList<BiblioComponent>();
+
+        int refInfoIndex = 0;
+        List<String> contextDone = new ArrayList<>();
+        for(SoftwareEntity entity : entities) {
+            if (entity.getSoftwareName() != null) {
+                String context = entity.getContext();
+
+                if (contextDone.contains(context))
+                    continue;
+
+                int contextOffset = entity.getGlobalContextOffset();
+
+                // do we have ref markers in this context window?
+                for(int i=refInfoIndex; i < selectedRefInfos.size(); i++) {
+                    Map<String,Pair<OffsetPosition,String>> selectedRefInfo = selectedRefInfos.get(i);
+                    for (Map.Entry<String,Pair<OffsetPosition,String>> entry : selectedRefInfo.entrySet()) {
+                        String bibString = entry.getKey();
+                        Pair<OffsetPosition,String> bibValue = entry.getValue();
+
+                        OffsetPosition refMarkerPosition = bibValue.getLeft();
+                        String refMarkerKey = bibValue.getRight();
+                        if (refMarkerPosition.start >= contextOffset && refMarkerPosition.end <= contextOffset+context.length()) {
+                        
+                            // de we have components overlaping a ref marker? if yes discard these components
+                            SoftwareComponent version = entity.getVersion();
+                            if (version != null && version.getOffsets() != null && version.getOffsetStart() >= refMarkerPosition.start && version.getOffsetEnd() <= refMarkerPosition.end) {
+                                entity.setVersion(null);
+                            }
+                            SoftwareComponent creator = entity.getCreator();
+                            if (creator != null && creator.getOffsets() != null && creator.getOffsetStart() >= refMarkerPosition.start && creator.getOffsetEnd() <= refMarkerPosition.end) {
+                                entity.setCreator(null);
+                            }
+                            SoftwareComponent url = entity.getSoftwareURL();
+                            if (url != null && url.getOffsets() != null && url.getOffsetStart() >= refMarkerPosition.start && url.getOffsetEnd() <= refMarkerPosition.end) {
+                                entity.setSoftwareURL(null);
+                            }
+                            SoftwareComponent language = entity.getLanguage();
+                            if (language != null && language.getOffsets() != null && language.getOffsetStart() >= refMarkerPosition.start && language.getOffsetEnd() <= refMarkerPosition.end) {
+                                entity.setLanguage(null);
+                            }
+
+                            // finally ref marker attachement
+                            SoftwareComponent softwareName = entity.getSoftwareName();
+                            // get the bibref object
+                            BibDataSet resBib = null;
+                            int indexRef = 0;
+                            if (resCitations != null & resCitations.size()>0) {
+                                for(BibDataSet resCitation : resCitations) {
+                                    if (refMarkerKey.equals(resCitation.getRefSymbol())) {
+                                        resBib = resCitation;
+                                        break;
+                                    }
+                                    indexRef++;
+                                }
+                                if (resBib != null) {
+                                    BiblioComponent biblioComponent = new BiblioComponent(resBib.getResBib(), indexRef);
+                                    biblioComponent.setRawForm(bibString);
+                                    biblioComponent.setOffsetStart(refMarkerPosition.start);
+                                    biblioComponent.setOffsetEnd(refMarkerPosition.end);
+                                    bibRefComponents.add(biblioComponent);
+                                }
+                            }
+                        }
+                    }
+                }
+                contextDone.add(context);
+            }
+        }
+
+        if (bibRefComponents.size() > 0) {
+            // attach references to software entities 
+            entities = attachRefBib(entities, bibRefComponents, 10);
+        }
+
+        return entities;
     }
 
 }

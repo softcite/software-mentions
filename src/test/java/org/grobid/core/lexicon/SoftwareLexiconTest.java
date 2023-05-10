@@ -41,7 +41,9 @@ public class SoftwareLexiconTest {
         SoftwareConfiguration softwareConfiguration = null;
         try {
             ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-            softwareConfiguration = mapper.readValue(new File("resources/config/config.yml"), SoftwareConfiguration.class);
+            File yamlFile = new File("resources/config/config.yml");
+            yamlFile = new File(yamlFile.getAbsolutePath());
+            softwareConfiguration = mapper.readValue(yamlFile, SoftwareConfiguration.class);
 
             String pGrobidHome = softwareConfiguration.getGrobidHome();
 

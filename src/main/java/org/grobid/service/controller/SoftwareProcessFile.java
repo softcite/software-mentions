@@ -290,9 +290,11 @@ public class SoftwareProcessFile {
                 response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
             } else {
                 long start = System.currentTimeMillis();
-                List<SoftwareEntity> extractedEntities = 
+                Pair<List<SoftwareEntity>, List<BibDataSet>> extractionResult = 
                     parser.processXML(originFile, disambiguate, addParagraphContext);
                 long end = System.currentTimeMillis();
+
+                List<SoftwareEntity> extractedEntities = extractionResult.getLeft();
 
                 StringBuilder json = new StringBuilder();
                 json.append("{ ");
@@ -313,10 +315,10 @@ public class SoftwareProcessFile {
                 }
                 json.append("], \"references\":[");
 
-                /*List<BibDataSet> bibDataSet = doc.getBibDataSets();
+                List<BibDataSet> bibDataSet = extractionResult.getRight();
                 if (bibDataSet != null && bibDataSet.size()>0) {
                     SoftwareServiceUtil.serializeReferences(json, bibDataSet, extractedEntities);
-                }*/
+                }
 
                 json.append("], \"runtime\" :" + (end-start));
                 json.append("}");
@@ -374,8 +376,10 @@ public class SoftwareProcessFile {
                 response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
             } else {
                 long start = System.currentTimeMillis();
-                List<SoftwareEntity> extractedEntities = parser.processTEI(originFile, disambiguate, addParagraphContext);
+                Pair<List<SoftwareEntity>, List<BibDataSet>> extractionResult = parser.processTEI(originFile, disambiguate, addParagraphContext);
                 long end = System.currentTimeMillis();
+
+                List<SoftwareEntity> extractedEntities = extractionResult.getLeft();
 
                 StringBuilder json = new StringBuilder();
                 json.append("{ ");
@@ -396,10 +400,10 @@ public class SoftwareProcessFile {
                 }
                 json.append("], \"references\":[");
 
-                /*List<BibDataSet> bibDataSet = doc.getBibDataSets();
+                List<BibDataSet> bibDataSet = extractionResult.getRight();
                 if (bibDataSet != null && bibDataSet.size()>0) {
                     SoftwareServiceUtil.serializeReferences(json, bibDataSet, extractedEntities);
-                }*/
+                }
 
                 json.append("], \"runtime\" :" + (end-start));
                 json.append("}");

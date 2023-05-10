@@ -331,7 +331,7 @@ public class SoftwareExtendedEval extends SoftwareTrainer {
                     Map<String, Double> termProfiles = softwareParser.prepareTermProfiles(entities);
                     // and call the propagation method
                     List<OffsetPosition> placeTaken = softwareParser.preparePlaceTaken(entities);
-                    entities = softwareParser.propagateLayoutTokenSequence(tokens, entities, termProfiles, termPattern, placeTaken, frequencies, false);
+                    entities = softwareParser.propagateLayoutTokenSequence(tokens, entities, termProfiles, termPattern, placeTaken, frequencies, false, false, false);
                     Collections.sort(entities);
                 }          
 
@@ -539,7 +539,9 @@ public class SoftwareExtendedEval extends SoftwareTrainer {
         SoftwareConfiguration conf = null;
         try {
             ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-            conf = mapper.readValue(new File("resources/config/config.yml"), SoftwareConfiguration.class);
+            File yamlFile = new File("resources/config/config.yml");
+            yamlFile = new File(yamlFile.getAbsolutePath());
+            conf = mapper.readValue(yamlFile, SoftwareConfiguration.class);
             String pGrobidHome = conf.getGrobidHome();
 
             //String pGrobidHome = SoftwareProperties.get("grobid.home");

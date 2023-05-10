@@ -394,7 +394,9 @@ System.out.println(annotationContextLeftSignature + " / " + annotationContextRig
         }  
 
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-        SoftwareConfiguration conf = mapper.readValue(new File("resources/config/config.yml"), SoftwareConfiguration.class);
+        File yamlFile = new File("resources/config/config.yml");
+        yamlFile = new File(yamlFile.getAbsolutePath());
+        SoftwareConfiguration conf = mapper.readValue(yamlFile, SoftwareConfiguration.class);
 
         XMLCorpusPostProcessor postProcessor = new XMLCorpusPostProcessor(conf);
         try {
