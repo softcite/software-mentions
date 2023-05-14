@@ -47,7 +47,7 @@ WORKDIR /opt/grobid
 RUN unzip -o /opt/grobid-source/grobid-service/build/distributions/grobid-service-*.zip && \
     mv grobid-service* grobid-service
 RUN unzip -o /opt/grobid-source/grobid-home/build/distributions/grobid-home-*.zip && \
-    chmod -R 755 /opt/grobid/grobid-home/pdfalto 
+    chmod -R 755 /opt/grobid/grobid-home/pdfalto
 RUN rm -rf grobid-source
 
 # -------------------
@@ -56,7 +56,6 @@ RUN rm -rf grobid-source
 
 # use NVIDIA Container Toolkit to automatically recognize possible GPU drivers on the host machine
 FROM tensorflow/tensorflow:2.7.0-gpu
-#CMD nvidia-smi
 
 # setting locale is likely useless but to be sure
 ENV LANG C.UTF-8
@@ -155,11 +154,9 @@ RUN ./gradlew --version
 # install all the ML models
 RUN ./gradlew copyModels installModels  && rm -rf resources/models && rm -f /opt/grobid/grobid-home/models/software/model.wapiti.gz && rm -f /opt/grobid/grobid-home/models/software-BERT-0.3.2.zip && rm -f /opt/grobid/grobid-home/models/context_bert-0.3.2.zip && rm -f /opt/grobid/grobid-home/models/context_used_bert-0.3.2.zip && rm -f /opt/grobid/grobid-home/models/context_shared_bert-0.3.2.zip && rm -f /opt/grobid/grobid-home/models/context_creation_bert-0.3.2.zip
 
-RUN ./gradlew clean assemble --no-daemon --stacktrace --info -x test
+RUN ./gradlew clean assemble install --no-daemon --stacktrace --info -x test
 
-ENV SOFTWARE_MENTIONS_OPTS "--add-opens java.base/java.lang=ALL-UNNAMED"
-
-CMD ["sh", "-c", "java -jar build/libs/software-mentions-0.8.0-SNAPSHOT-onejar.jar server resources/config/config.yml"]
+CMD ["sh", "-c", "java --add-opens java.base/java.lang=ALL-UNNAMED -jar build/libs/software-mentions-0.8.0-SNAPSHOT-onejar.jar server resources/config/config.yml"]
 
 ARG GROBID_VERSION
 
