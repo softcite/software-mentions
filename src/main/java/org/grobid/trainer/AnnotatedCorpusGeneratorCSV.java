@@ -360,7 +360,7 @@ public class AnnotatedCorpusGeneratorCSV {
                     }
                     if (abstractTokens != null) {
                         for(LayoutToken token : abstractTokens) {
-                            toExclude.remove(new Integer(token.getOffset()));
+                            toExclude.remove(Integer.valueOf(token.getOffset()));
                         }
                     }
                 }
@@ -1620,7 +1620,7 @@ System.out.print("\n");*/
                 String annotatorID = annotation.getAnnotatorID();
                 Integer numberAnnotations = annotators.get(annotatorID);
                 if (numberAnnotations == null)
-                    numberAnnotations = new Integer(0);
+                    numberAnnotations = Integer.valueOf(0);
                 numberAnnotations += 1;
                 annotators.put(annotatorID, numberAnnotations);
             }

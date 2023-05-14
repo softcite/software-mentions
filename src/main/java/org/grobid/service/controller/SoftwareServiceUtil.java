@@ -78,7 +78,7 @@ public class SoftwareServiceUtil {
                             }
                             json.append("}");
                         }
-                        serializedKeys.add(new Integer(refKey));
+                        serializedKeys.add(Integer.valueOf(refKey));
                     }
                 }
             }

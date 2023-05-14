@@ -2,7 +2,8 @@
 # build builder image
 # -------------------
 
-FROM openjdk:8u275-jdk as builder
+#FROM openjdk:8u275-jdk as builder
+FROM openjdk:17-jdk-slim as builder
 
 USER root
 
@@ -55,7 +56,7 @@ RUN rm -rf grobid-source
 
 # use NVIDIA Container Toolkit to automatically recognize possible GPU drivers on the host machine
 FROM tensorflow/tensorflow:2.7.0-gpu
-CMD nvidia-smi
+#CMD nvidia-smi
 
 # setting locale is likely useless but to be sure
 ENV LANG C.UTF-8
@@ -69,9 +70,18 @@ RUN wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86
 RUN dpkg -i cuda-keyring_1.0-1_all.deb
 
 # install JRE 8, python and other dependencies
+#RUN apt-get update && \
+#    apt-get -y --no-install-recommends install apt-utils build-essential gcc libxml2 unzip curl \
+#    openjdk-8-jre-headless openjdk-8-jdk ca-certificates-java \
+#    musl gfortran \
+#    python3 python3-pip python3-setuptools python3-dev \
+#    && apt-get clean \
+#    && rm -rf /var/lib/apt/lists/*
+
+# install JRE, python and other dependencies
 RUN apt-get update && \
-    apt-get -y --no-install-recommends install apt-utils build-essential gcc libxml2 unzip curl \
-    openjdk-8-jre-headless openjdk-8-jdk ca-certificates-java \
+    apt-get -y --no-install-recommends install apt-utils build-essential gcc libxml2 libfontconfig unzip curl \
+    openjdk-17-jre-headless openjdk-17-jdk ca-certificates-java \
     musl gfortran \
     python3 python3-pip python3-setuptools python3-dev \
     && apt-get clean \
@@ -99,30 +109,25 @@ WORKDIR /opt/grobid
 ENV JAVA_OPTS=-Xmx4g
 
 # Add Tini
-ENV TINI_VERSION v0.18.0
-ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
-RUN chmod +x /tini
-ENTRYPOINT ["/tini", "-s", "--"]
+#ENV TINI_VERSION v0.18.0
+#ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
+#RUN chmod +x /tini
+#ENTRYPOINT ["/tini", "-s", "--"]
 
 # install jep (and temporarily the matching JDK)
-ENV TEMP_JDK_HOME=/tmp/jdk-${JAVA_VERSION}
-ENV JDK_URL=https://github.com/AdoptOpenJDK/openjdk8-upstream-binaries/releases/download/jdk8u212-b04/OpenJDK8U-x64_linux_8u212b04.tar.gz
-RUN curl --fail --show-error --location -q ${JDK_URL} -o /tmp/openjdk.tar.gz \
-    && ls -lh /tmp/openjdk.tar.gz \
-    && mkdir - "${TEMP_JDK_HOME}" \
-    && tar --extract \
-        --file /tmp/openjdk.tar.gz \
-        --directory "${TEMP_JDK_HOME}" \
-        --strip-components 1 \
-        --no-same-owner \
-    && JAVA_HOME=${TEMP_JDK_HOME} pip3 install jep==4.0.2 \
-    && rm -f /tmp/openjdk.tar.gz \
-    && rm -rf "${TEMP_JDK_HOME}"
-ENV LD_LIBRARY_PATH=/usr/local/lib/python3.8/dist-packages/jep:${LD_LIBRARY_PATH}
-# remove libjep.so because we are providng our own version in the virtual env
+ENV JDK_URL=https://download.java.net/java/GA/jdk17.0.2/dfd4a8d0985749f896bed50d7138ee7f/8/GPL/openjdk-17.0.2_linux-x64_bin.tar.gz
+RUN curl --fail --show-error --location -q ${JDK_URL} -o /tmp/openjdk.tar.gz 
+RUN mkdir /tmp/jdk-17 
+RUN tar xvfz /tmp/openjdk.tar.gz --directory /tmp/jdk-17 --strip-components 1 --no-same-owner 
+RUN /tmp/jdk-17/bin/javac -version
+RUN JAVA_HOME=/tmp/jdk-17 pip3 install jep==4.0.2 
+RUN rm -f /tmp/openjdk.tar.gz 
+RUN rm -rf /tmp/jdk-17
+ENV LD_LIBRARY_PATH=/usr/local/lib/python3.8/dist-packages/jep:grobid-home/lib/lin-64:grobid-home/lib/lin-64/jep:${LD_LIBRARY_PATH}
+# remove libjep.so because we are providing our own version in the virtual env above
 RUN rm /opt/grobid/grobid-home/lib/lin-64/jep/libjep.so
 
-# preload embeddings, for GROBID all the RNN models use glove-840B (default for the script), ELMo is currently not loaded 
+# preload embeddings 
 
 COPY --from=builder /opt/grobid-source/grobid-home/scripts/preload_embeddings.py .
 COPY --from=builder /opt/grobid-source/grobid-home/config/resources-registry.json .
@@ -150,10 +155,11 @@ RUN ./gradlew --version
 # install all the ML models
 RUN ./gradlew copyModels installModels  && rm -rf resources/models && rm -f /opt/grobid/grobid-home/models/software/model.wapiti.gz && rm -f /opt/grobid/grobid-home/models/software-BERT-0.3.2.zip && rm -f /opt/grobid/grobid-home/models/context_bert-0.3.2.zip && rm -f /opt/grobid/grobid-home/models/context_used_bert-0.3.2.zip && rm -f /opt/grobid/grobid-home/models/context_shared_bert-0.3.2.zip && rm -f /opt/grobid/grobid-home/models/context_creation_bert-0.3.2.zip
 
-#RUN ./gradlew clean install -x test
 RUN ./gradlew clean assemble --no-daemon --stacktrace --info -x test
 
-CMD ["sh", "-c", "java -jar build/libs/software-mentions-0.7.3-SNAPSHOT-onejar.jar server resources/config/config.yml"]
+ENV SOFTWARE_MENTIONS_OPTS "--add-opens java.base/java.lang=ALL-UNNAMED"
+
+CMD ["sh", "-c", "java -jar build/libs/software-mentions-0.8.0-SNAPSHOT-onejar.jar server resources/config/config.yml"]
 
 ARG GROBID_VERSION
 

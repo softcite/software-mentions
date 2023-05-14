@@ -1217,7 +1217,7 @@ public class XMLCorpusPostProcessorNoMention {
                     
                     // per global software entity
                     if (annotatorCountEntities.get(annotator) == null) {
-                        annotatorCountEntities.put(annotator, new Integer(1));
+                        annotatorCountEntities.put(annotator, Integer.valueOf(1));
                     } else {
                         annotatorCountEntities.put(annotator, annotatorCountEntities.get(annotator)+1);
                     }
@@ -1234,7 +1234,7 @@ public class XMLCorpusPostProcessorNoMention {
                         theSum++;
 
                     if (annotatorCountAll.get(annotator) == null) {
-                        annotatorCountAll.put(annotator, new Integer(theSum));
+                        annotatorCountAll.put(annotator, Integer.valueOf(theSum));
                     } else {
                         annotatorCountAll.put(annotator, annotatorCountAll.get(annotator)+theSum);
                     }
@@ -2072,9 +2072,9 @@ public class XMLCorpusPostProcessorNoMention {
                 String value = pieces[2];
 
                 if ("TRUE".equals(value))
-                    this.softwareUsages.put(annotationId, new Boolean(true));
+                    this.softwareUsages.put(annotationId, Boolean.valueOf(true));
                 else
-                    this.softwareUsages.put(annotationId, new Boolean(false));
+                    this.softwareUsages.put(annotationId, Boolean.valueOf(false));
                 nbCSVlines++;
             }
             System.out.println(nbCSVlines + " curated software usage attribute loaded");

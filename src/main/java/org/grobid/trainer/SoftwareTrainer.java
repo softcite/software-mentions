@@ -892,7 +892,7 @@ public class SoftwareTrainer extends AbstractTrainer {
                         // run the mention recognizer and check if we have annotations
                         List<SoftwareEntity> entities = parser.processText(text, false);
                         if (entities != null && entities.size() > 0) {
-                            toAdd.add(new Integer(i));
+                            toAdd.add(Integer.valueOf(i));
                             totalAdded++;
                         }
                         pb.step();
@@ -905,10 +905,10 @@ public class SoftwareTrainer extends AbstractTrainer {
                 for (int i = 0; i < pList.getLength(); i++) {
                     Element paragraphElement = (Element) pList.item(i);
                     if (totalAdded < max) {
-                        toAdd.add(new Integer(i));
+                        toAdd.add(Integer.valueOf(i));
                         totalAdded++;
                     } else if (!toAdd.contains(i)) {
-                        toRemove.add(new Integer(i));
+                        toRemove.add(Integer.valueOf(i));
                     }
                 }
 
@@ -984,7 +984,7 @@ public class SoftwareTrainer extends AbstractTrainer {
                 try (ProgressBar pb = new ProgressBar("random negative sampling", pList.getLength())) {
                     for (int i = 0; i < pList.getLength(); i++) {
                         if (totalAdded >= max) {
-                            toRemove.add(new Integer(i));
+                            toRemove.add(Integer.valueOf(i));
                             pb.step();
                             continue;
                         }
@@ -993,7 +993,7 @@ public class SoftwareTrainer extends AbstractTrainer {
                         Element paragraphElement = (Element) pList.item(i);
                         String text = XMLUtilities.getText(paragraphElement);
                         if (text == null || text.trim().length() == 0) {
-                            toRemove.add(new Integer(i));
+                            toRemove.add(Integer.valueOf(i));
                             pb.step();
                             continue;
                         }
@@ -1012,7 +1012,7 @@ public class SoftwareTrainer extends AbstractTrainer {
                             rank = 0;
                             totalAdded++;
                         } else {
-                            toRemove.add(new Integer(i));
+                            toRemove.add(Integer.valueOf(i));
                         }
                         rank++;
                         pb.step();

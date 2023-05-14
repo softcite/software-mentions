@@ -298,9 +298,9 @@ public class SoftwareDisambiguator {
             SoftwareComponent softwareName = entity.getSoftwareName();
             SoftwareComponent softwareCreator = entity.getCreator();
 
-            entityPositions.put(new Integer(softwareName.getOffsetStart()), softwareName);
+            entityPositions.put(Integer.valueOf(softwareName.getOffsetStart()), softwareName);
             if (softwareCreator != null)
-                entityPositions.put(new Integer(softwareCreator.getOffsetStart()), softwareCreator);
+                entityPositions.put(Integer.valueOf(softwareCreator.getOffsetStart()), softwareCreator);
         }
 
         // merge entity disambiguation with actual extracted mentions

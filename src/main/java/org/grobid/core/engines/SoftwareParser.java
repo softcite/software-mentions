@@ -155,7 +155,7 @@ public class SoftwareParser extends AbstractParser {
                 int k = 0;
                 for(SoftwareEntity entity : entities) {
                     if (entity.isFiltered()) {
-                        indexToBeFiltered.add(new Integer(k));
+                        indexToBeFiltered.add(Integer.valueOf(k));
                     }
                     k++;
                 }
@@ -605,7 +605,7 @@ public class SoftwareParser extends AbstractParser {
                     if (entity.getBibRefs() != null && entity.getBibRefs().size() > 0) {
                         List<BiblioComponent> bibRefs = entity.getBibRefs();
                         for(BiblioComponent bibRef: bibRefs) {
-                            Integer refKeyVal = new Integer(bibRef.getRefKey());
+                            Integer refKeyVal = Integer.valueOf(bibRef.getRefKey());
                             if (!consolidated.contains(refKeyVal)) {
                                 citationsToConsolidate.add(resCitations.get(refKeyVal));
                                 consolidated.add(refKeyVal);
@@ -777,7 +777,7 @@ public class SoftwareParser extends AbstractParser {
                 int k = 0;
                 for(SoftwareEntity entity : localEntities) {
                     if (entity.isFiltered()) {
-                        indexToBeFiltered.add(new Integer(k));
+                        indexToBeFiltered.add(Integer.valueOf(k));
                     }
                     k++;
                 }
@@ -867,7 +867,7 @@ public class SoftwareParser extends AbstractParser {
                 int k = 0;
                 for(SoftwareEntity entity : localEntities) {
                     if (entity.isFiltered()) {
-                        indexToBeFiltered.add(new Integer(k));
+                        indexToBeFiltered.add(Integer.valueOf(k));
                     }
                     k++;
                 }
@@ -1516,7 +1516,7 @@ public class SoftwareParser extends AbstractParser {
                 if (results != null) {  
                     freq = results.size();
                 }
-                frequencies.put(term, new Integer(freq));
+                frequencies.put(term, Integer.valueOf(freq));
             }
         }
         return frequencies;
@@ -2557,7 +2557,7 @@ public class SoftwareParser extends AbstractParser {
             if (entity.getBibRefs() != null && entity.getBibRefs().size() > 0) {
                 List<BiblioComponent> bibRefs = entity.getBibRefs();
                 for(BiblioComponent bibRef: bibRefs) {
-                    Integer refKeyVal = new Integer(bibRef.getRefKey());
+                    Integer refKeyVal = Integer.valueOf(bibRef.getRefKey());
                     if (!consolidated.contains(refKeyVal)) {
                         citationsToConsolidate.add(resCitations.get(refKeyVal));
                         consolidated.add(refKeyVal);

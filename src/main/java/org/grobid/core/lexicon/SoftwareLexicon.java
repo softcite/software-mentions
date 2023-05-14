@@ -168,7 +168,7 @@ public class SoftwareLexicon {
                     continue;
                 }
 
-                termIDF.put(term, new Double(idf));
+                termIDF.put(term, Double.valueOf(idf));
             }
         } catch (FileNotFoundException e) {
             throw new GrobidException("SoftwareLexicon file not found.", e);
