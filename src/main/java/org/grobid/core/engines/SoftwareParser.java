@@ -2385,6 +2385,8 @@ public class SoftwareParser extends AbstractParser {
         for(SoftwareEntity entity : entities) {
             if (entity.getSoftwareName() != null) {
                 String context = entity.getContext();
+                if (context == null) 
+                    continue;
                 String oldContext = new String(entity.getContext());
 
                 int paragraphContextOffset = entity.getParagraphContextOffset();
