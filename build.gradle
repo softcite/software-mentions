@@ -6,8 +6,8 @@ buildscript {
     }
     dependencies {
         classpath 'gradle.plugin.org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.12.0'
-//        classpath "gradle.plugin.org.gretty:gretty:2.3.1"
         classpath "gradle.plugin.com.github.jengelman.gradle.plugins:shadow:7.0.0"
+        classpath 'com.adarshr:gradle-test-logger-plugin:2.0.0'
     }
 }
 
@@ -27,9 +27,11 @@ apply plugin: 'base'
 apply plugin: 'com.github.kt3k.coveralls'
 
 group = "org.grobid.software"
-version = '0.7.3-SNAPSHOT'
+version = '0.8.0-SNAPSHOT'
 
 description = """software-mentions"""
+
+import org.apache.tools.ant.taskdefs.condition.Os
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -41,7 +43,7 @@ tasks.withType(JavaCompile) {
 repositories {
     mavenLocal()
     mavenCentral()
-    maven { url "https://jitpack.io" }
+//    maven { url "https://jitpack.io" }
     maven { url "https://grobid.s3.eu-west-1.amazonaws.com/repo/" }
     maven {
         url new File(rootProject.rootDir, "lib")
@@ -58,10 +60,7 @@ dependencies {
 
     // packaging local libs inside output jar
     //implementation fileTree(dir: new File(rootProject.rootDir, 'lib'), include: localLibs)
-
-    //Grobid
-    implementation group: 'org.grobid', name: 'grobid-core', version: '0.7.3-SNAPSHOT'
-    implementation group: 'org.grobid', name: 'grobid-trainer', version: '0.7.3-SNAPSHOT'
+    
     implementation group: 'net.arnx', name: 'jsonic', version: '1.3.10'
     //compile group: 'org.dkpro.statistics', name: 'dkpro-statistics-agreement', version: '2.2.0-SNAPSHOT'
     implementation "me.tongfei:progressbar:0.9.0"
@@ -82,15 +81,17 @@ dependencies {
     implementation group: 'org.apache.commons', name: 'commons-csv', version: '1.5'
 
     //Dropwizard
-    implementation "io.dropwizard:dropwizard-core:1.3.23" 
+    implementation "io.dropwizard:dropwizard-core:1.3.23"
     implementation "io.dropwizard:dropwizard-assets:1.3.23"
-    implementation "com.hubspot.dropwizard:dropwizard-guicier:1.3.5.2"
+    implementation "com.hubspot.dropwizard:dropwizard-guicier:1.3.5.0"
     implementation "io.dropwizard:dropwizard-testing:1.3.23"
     implementation "io.dropwizard:dropwizard-forms:1.3.23"
     implementation "io.dropwizard:dropwizard-client:1.3.23"
     implementation "io.dropwizard:dropwizard-auth:1.3.23"
     implementation "io.dropwizard.metrics:metrics-core:4.0.0"
-    implementation "io.dropwizard.metrics:metrics-servlets:4.0.0"
+    implementation ("io.dropwizard.metrics:metrics-servlets:4.0.0") {
+        //exclude group: 'ch.qos.logback', module: "logback-classic"
+    }
 
     implementation group: 'com.google.guava', name: 'guava', version: '28.2-jre'
 
@@ -106,7 +107,18 @@ dependencies {
     implementation group: 'javax.activation', name: 'activation', version: '1.1.1'
     implementation group: 'asm', name: 'asm', version: '3.3.1'
 
+    implementation 'black.ninia:jep:4.0.2'
+    implementation 'org.apache.opennlp:opennlp-tools:1.9.1'
+    implementation "joda-time:joda-time:2.9.9"
+    implementation "org.apache.lucene:lucene-analyzers-common:4.5.1"
+    implementation group: 'org.jruby', name: 'jruby-complete', version: '9.2.13.0'
+    implementation "org.apache.pdfbox:pdfbox:2.0.18"
+    
     implementation group: 'org.semanticweb.yars', name: 'nxparser-parsers', version: '2.3.3'
+
+    //Grobid
+    implementation group: 'org.grobid', name: 'grobid-core', version: '0.8.0-SNAPSHOT'
+    implementation group: 'org.grobid', name: 'grobid-trainer', version: '0.8.0-SNAPSHOT'
 
     //Tests
     testImplementation group: 'junit', name: 'junit', version: '4.12'
@@ -117,17 +129,56 @@ configurations.all {
     resolutionStrategy {
         force 'xml-apis:xml-apis:1.4.01'
     }
-    exclude group: 'org.slf4j', module: "slf4j-log4j12"    
+    
+    exclude group: 'org.slf4j', module: "slf4j-log4j12"
+    exclude group: 'org.slf4j', module: "slf4j-jdk14"
+    exclude group: 'log4j', module: "log4j"
+
+    /*resolutionStrategy.dependencySubstitution {
+        // Substitute one module dependency for another
+        substitute module('org.slf4j:slf4j-log4j12') with module('ch.qos.logback:logback-core:1.2.3')
+        substitute module('org.slf4j:slf4j-log4j14') with module('ch.qos.logback:logback-core:1.2.3')
+        substitute module('org.slf4j:log4j-over-slf4j') with module('ch.qos.logback:logback-core:1.2.3')
+    }*/
+
+    //exclude group: 'ch.qos.logback', module: "logback-classic"
+    //exclude group: 'ch.qos.logback', module: "logback-access"
+    //exclude group: 'ch.qos.logback', module: "logback-core"
+    exclude group: 'org.slf4j', module: "log4j-over-slf4j"
+
     //if (project.gradle.startParameter.taskNames.contains('run') ||
     //   project.gradle.startParameter.taskNames.contains('post_process_corpus'))
     //    exclude group: 'org.slf4j', module: "slf4j-jdk14"  
     //if (project.gradle.startParameter.taskNames.contains('run'))
-    exclude group: 'org.slf4j', module: "slf4j-jdk14"
+    //exclude group: 'org.slf4j', module: "slf4j-jdk14"
+    //exclude group: 'org.slf4j', module: "slf4j-log4j12"
+    //exclude group: 'org.slf4j', module: "slf4j-log4j14"
+}
+
+
+def libraries = ""
+if (Os.isFamily(Os.FAMILY_MAC)) {
+    if (Os.OS_ARCH.equals("aarch64")) {
+        libraries = "${file("../grobid-home/lib/mac_arm-64").absolutePath}"    
+    } else {
+        libraries = "${file("../grobid-home/lib/mac-64").absolutePath}"
+    }
+} else if (Os.isFamily(Os.FAMILY_UNIX)) {
+    libraries = "${file("../grobid-home/lib/lin-64/jep").absolutePath}:" +
+        "${file("../grobid-home/lib/lin-64").absolutePath}:"
+} else  {
+    throw new RuntimeException("Unsupported platform!")
 }
 
 test {
     testLogging.showStandardStreams = true
     exclude '**/**IntegrationTest**'
+
+    if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
+        jvmArgs "--add-opens", "java.base/java.util.stream=ALL-UNNAMED", 
+        "--add-opens", "java.base/java.io=ALL-UNNAMED"
+    }
+    systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
 }
 
 // return the default value if the property has not been specified in command line
@@ -194,13 +245,10 @@ artifacts {
 }
 
 task copyModels(type: Copy) {
-    //doLast 
-    //{
-        from "${rootDir}/resources/models/"
-        include "**"
-        into "${rootDir}/../grobid-home/models/"
-    doLast 
-    { 
+    from "${rootDir}/resources/models/"
+    include "**"
+    into "${rootDir}/../grobid-home/models/"
+    doLast { 
         ant.gunzip(src: "${rootDir}/resources/models/software/model.wapiti.gz", dest: "${rootDir}/../grobid-home/models/software/")
     }
 }
@@ -262,16 +310,29 @@ wrapper {
 //    jvmArgs '-Xms2g', '-Xmx8g'
 }*/
 
+
 // Run like this: ./gradlew train_software -PgH=/path/grobid/home 
 task(train_software, dependsOn: 'classes', type: JavaExec, group: 'training') {
     mainClass = 'org.grobid.trainer.SoftwareTrainer'
     classpath = sourceSets.main.runtimeClasspath
+    if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
+        jvmArgs '-Xmx3072m', "--add-opens", "java.base/java.lang=ALL-UNNAMED"
+    } else {
+        jvmArgs '-Xmx3072m'
+    }
+    systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
 }
 
 // Run like this: ./gradlew train_software_type -PgH=/path/grobid/home 
 task(train_software_type, dependsOn: 'classes', type: JavaExec, group: 'training') {
     mainClass = 'org.grobid.trainer.SoftwareTypeTrainer'
     classpath = sourceSets.main.runtimeClasspath
+    if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
+        jvmArgs '-Xmx3072m', "--add-opens", "java.base/java.lang=ALL-UNNAMED"
+    } else {
+        jvmArgs '-Xmx3072m'
+    }
+    systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
 }
 
 // Run like this: ./gradlew eval_software -PgH=/path/grobid/home
@@ -279,7 +340,12 @@ task(eval_software, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
     mainClass = 'org.grobid.trainer.SoftwareTrainerRunner'
     classpath = sourceSets.main.runtimeClasspath
     args '1', 'software', getArg('gH', '../grobid-home')
-    jvmArgs '-Xms2g', '-Xmx8g'
+    if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
+        jvmArgs '-Xms2g', '-Xmx8g', "--add-opens", "java.base/java.lang=ALL-UNNAMED"
+    } else {
+        jvmArgs '-Xms2g', '-Xmx8g'
+    }
+    systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
 }
 
 // Run like this: ./gradlew eval_software_disambiguation -PgH=/path/grobid/home
@@ -287,7 +353,12 @@ task(eval_software_disambiguation, dependsOn: 'classes', type: JavaExec, group: 
     mainClass = 'org.grobid.trainer.SoftwareTrainerRunner'
     classpath = sourceSets.main.runtimeClasspath
     args '1', 'software_disambiguation', getArg('gH', '../grobid-home')
-    jvmArgs '-Xms2g', '-Xmx8g'
+    if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
+        jvmArgs '-Xms2g', '-Xmx8g', "--add-opens", "java.base/java.lang=ALL-UNNAMED"
+    } else {
+        jvmArgs '-Xms2g', '-Xmx8g'
+    }
+    systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
 }
 
 // Run like this: ./gradlew eval_software_doc_level -PgH=/path/grobid/home
@@ -295,7 +366,12 @@ task(eval_software_doc_level, dependsOn: 'classes', type: JavaExec, group: 'eval
     mainClass = 'org.grobid.trainer.SoftwareTrainerRunner'
     classpath = sourceSets.main.runtimeClasspath
     args '1', 'software_doc_level', getArg('gH', '../grobid-home')
-    jvmArgs '-Xms2g', '-Xmx8g'
+    if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
+        jvmArgs '-Xms2g', '-Xmx8g', "--add-opens", "java.base/java.lang=ALL-UNNAMED"
+    } else {
+        jvmArgs '-Xms2g', '-Xmx8g'
+    }
+    systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
 }
 
 // Run like this: ./gradlew eval_software_disamb_doc_level -PgH=/path/grobid/home
@@ -303,7 +379,12 @@ task(eval_software_disamb_doc_level, dependsOn: 'classes', type: JavaExec, group
     mainClass = 'org.grobid.trainer.SoftwareTrainerRunner'
     classpath = sourceSets.main.runtimeClasspath
     args '1', 'software_disamb_doc_level', getArg('gH', '../grobid-home')
-    jvmArgs '-Xms2g', '-Xmx8g'
+    if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
+        jvmArgs '-Xms2g', '-Xmx8g', "--add-opens", "java.base/java.lang=ALL-UNNAMED"
+    } else {
+        jvmArgs '-Xms2g', '-Xmx8g'
+    }
+    systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
 }
 
 // Run like this: ./gradlew eval_software_split -PgH=/path/grobid/home -Ps=0.8 -Pt=10
@@ -311,7 +392,12 @@ task(eval_software_split, dependsOn: 'classes', type: JavaExec, group: 'evaluati
     mainClass = 'org.grobid.trainer.SoftwareTrainerRunner'
     classpath = sourceSets.main.runtimeClasspath
     args '2', 'software', getArg('gH', '../grobid-home'), getArg('s', 0.9), getArg('t', '0')
-    jvmArgs '-Xms2g', '-Xmx8g'
+    if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
+        jvmArgs '-Xms2g', '-Xmx8g', "--add-opens", "java.base/java.lang=ALL-UNNAMED"
+    } else {
+        jvmArgs '-Xms2g', '-Xmx8g'
+    }
+    systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
 }
 
 // Run like this: ./gradlew eval_software_disambiguation_split -PgH=/path/grobid/home -Ps=0.8 -Pt=10
@@ -319,7 +405,12 @@ task(eval_software_disambiguation_split, dependsOn: 'classes', type: JavaExec, g
     mainClass = 'org.grobid.trainer.SoftwareTrainerRunner'
     classpath = sourceSets.main.runtimeClasspath
     args '2', 'software_disambiguation', getArg('gH', '../grobid-home'), getArg('s', 0.9), getArg('t', '0')
-    jvmArgs '-Xms2g', '-Xmx8g'
+    if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
+        jvmArgs '-Xms2g', '-Xmx8g', "--add-opens", "java.base/java.lang=ALL-UNNAMED"
+    } else {
+        jvmArgs '-Xms2g', '-Xmx8g'
+    }
+    systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
 }
 
 // Run like this: ./gradlew eval_software_doc_level_split -PgH=/path/grobid/home -Ps=0.8 -Pt=10
@@ -327,7 +418,12 @@ task(eval_software_doc_level_split, dependsOn: 'classes', type: JavaExec, group:
     mainClass = 'org.grobid.trainer.SoftwareTrainerRunner'
     classpath = sourceSets.main.runtimeClasspath
     args '2', 'software_doc_level', getArg('gH', '../grobid-home'), getArg('s', 0.9), getArg('t', '0')
-    jvmArgs '-Xms2g', '-Xmx8g'
+    if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
+        jvmArgs '-Xms2g', '-Xmx8g', "--add-opens", "java.base/java.lang=ALL-UNNAMED"
+    } else {
+        jvmArgs '-Xms2g', '-Xmx8g'
+    }
+    systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
 }
 
 // Run like this: ./gradlew eval_software_disamb_doc_level_split -PgH=/path/grobid/home -Ps=0.8 -Pt=10
@@ -335,7 +431,12 @@ task(eval_software_disamb_doc_level_split, dependsOn: 'classes', type: JavaExec,
     mainClass = 'org.grobid.trainer.SoftwareTrainerRunner'
     classpath = sourceSets.main.runtimeClasspath
     args '2', 'software_disamb_doc_level', getArg('gH', '../grobid-home'), getArg('s', 0.9), getArg('t', '0')
-    jvmArgs '-Xms2g', '-Xmx8g'
+    if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
+        jvmArgs '-Xms2g', '-Xmx8g', "--add-opens", "java.base/java.lang=ALL-UNNAMED"
+    } else {
+        jvmArgs '-Xms2g', '-Xmx8g'
+    }
+    systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
 }
 
 // Run like this: ./gradlew eval_software_nfold -PgH=/path/grobid/home -Pt=10
@@ -343,7 +444,12 @@ task(eval_software_nfold, dependsOn: 'classes', type: JavaExec, group: 'evaluati
     mainClass = 'org.grobid.trainer.SoftwareTrainerRunner'
     classpath = sourceSets.main.runtimeClasspath
     args '3', 'software', getArg('gH', '../grobid-home'), getArg('n', 10), getArg('t', '0')
-    jvmArgs '-Xms2g', '-Xmx8g'
+    if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
+        jvmArgs '-Xms2g', '-Xmx8g', "--add-opens", "java.base/java.lang=ALL-UNNAMED"
+    } else {
+        jvmArgs '-Xms2g', '-Xmx8g'
+    }
+    systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
 }
 
 // Run like this: ./gradlew eval_software_disambiguation_nfold -PgH=/path/grobid/home -Pt=10
@@ -351,7 +457,12 @@ task(eval_software_disambiguation_nfold, dependsOn: 'classes', type: JavaExec, g
     mainClass = 'org.grobid.trainer.SoftwareTrainerRunner'
     classpath = sourceSets.main.runtimeClasspath
     args '3', 'software_disambiguation', getArg('gH', '../grobid-home'), getArg('n', 10), getArg('t', '0')
-    jvmArgs '-Xms2g', '-Xmx8g'
+    if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
+        jvmArgs '-Xms2g', '-Xmx8g', "--add-opens", "java.base/java.lang=ALL-UNNAMED"
+    } else {
+        jvmArgs '-Xms2g', '-Xmx8g'
+    }
+    systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
 }
 
 // Run like this: ./gradlew eval_software_doc_level_nfold -PgH=/path/grobid/home -Pt=10
@@ -359,7 +470,12 @@ task(eval_software_doc_level_nfold, dependsOn: 'classes', type: JavaExec, group:
     mainClass = 'org.grobid.trainer.SoftwareTrainerRunner'
     classpath = sourceSets.main.runtimeClasspath
     args '3', 'software_doc_level', getArg('gH', '../grobid-home'), getArg('n', 10), getArg('t', '0')
-    jvmArgs '-Xms2g', '-Xmx8g'
+    if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
+        jvmArgs '-Xms2g', '-Xmx8g', "--add-opens", "java.base/java.lang=ALL-UNNAMED"
+    } else {
+        jvmArgs '-Xms2g', '-Xmx8g'
+    }
+    systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
 }
 
 // Run like this: ./gradlew eval_software_disamb_doc_level_nfold -PgH=/path/grobid/home -Pt=10
@@ -367,7 +483,12 @@ task(eval_software_disamb_doc_level_nfold, dependsOn: 'classes', type: JavaExec,
     mainClass = 'org.grobid.trainer.SoftwareTrainerRunner'
     classpath = sourceSets.main.runtimeClasspath
     args '3', 'software_disamb_doc_level', getArg('gH', '../grobid-home'), getArg('n', 10), getArg('t', '0')
-    jvmArgs '-Xms2g', '-Xmx8g'
+    if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
+        jvmArgs '-Xms2g', '-Xmx8g', "--add-opens", "java.base/java.lang=ALL-UNNAMED"
+    } else {
+        jvmArgs '-Xms2g', '-Xmx8g'
+    }
+    systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
 }
 
 ////////////////////
@@ -378,7 +499,12 @@ task(annotated_corpus_generator_csv, dependsOn: 'classes', type: JavaExec, group
     mainClass = 'org.grobid.trainer.AnnotatedCorpusGeneratorCSV'
     classpath = sourceSets.main.runtimeClasspath
     args getArg('pdf', ''), getArg('csv', ''), getArg('output', 'resources/dataset/software/corpus/')
-    jvmArgs '-Xms2g', '-Xmx8g'
+    if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
+        jvmArgs '-Xms2g', '-Xmx8g', "--add-opens", "java.base/java.lang=ALL-UNNAMED"
+    } else {
+        jvmArgs '-Xms2g', '-Xmx8g'
+    }
+    systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
 }
 
 // Run like this: ./gradlew export_corpus_json -Pinput=/path/input/in.tei.xml -Poutput=/path/output/out.json
@@ -386,7 +512,12 @@ task(export_corpus_json, dependsOn: 'classes', type: JavaExec, group: 'export') 
     mainClass = 'org.grobid.trainer.ExportCorpusJson'
     classpath = sourceSets.main.runtimeClasspath
     args getArg('input', ''), getArg('output', '')
-    jvmArgs '-Xms2g', '-Xmx8g'
+    if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
+        jvmArgs '-Xms2g', '-Xmx8g', "--add-opens", "java.base/java.lang=ALL-UNNAMED"
+    } else {
+        jvmArgs '-Xms2g', '-Xmx8g'
+    }
+    systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
 }
 
 // Run like this: ./gradlew clean_tei_corpus_file -Ptei=/path/input/tei 
@@ -394,7 +525,12 @@ task(clean_tei_corpus_file, dependsOn: 'classes', type: JavaExec, group: 'import
     mainClass = 'org.grobid.core.utilities.XMLUtilities'
     classpath = sourceSets.main.runtimeClasspath
     args getArg('xml', 'resources/dataset/software/corpus/all.tei.xml')
-    jvmArgs '-Xms2g', '-Xmx8g'
+    if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
+        jvmArgs '-Xms2g', '-Xmx8g', "--add-opens", "java.base/java.lang=ALL-UNNAMED"
+    } else {
+        jvmArgs '-Xms2g', '-Xmx8g'
+    }
+    systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
 }
 
 // Run like this: ./gradlew post_process_corpus_no_mention -Pxml=/path/input/corpus/tei/xml/file -Pcsv=path/csv -Ppdf=path/pdf -Poutput=/output/path/tei/corpus/file
@@ -402,7 +538,12 @@ task(post_process_corpus, dependsOn: 'classes', type: JavaExec, group: 'import')
     mainClass = 'org.grobid.trainer.XMLCorpusPostProcessorNoMention'
     classpath = sourceSets.main.runtimeClasspath
     args getArg('xml', ''), getArg('csv', ''), getArg('pdf', ''), getArg('output', '')
-    jvmArgs '-Xms2g', '-Xmx8g'
+    if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
+        jvmArgs '-Xms2g', '-Xmx8g', "--add-opens", "java.base/java.lang=ALL-UNNAMED"
+    } else {
+        jvmArgs '-Xms2g', '-Xmx8g'
+    }
+    systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
 }
 
 //////////
@@ -412,6 +553,13 @@ application {
     mainClassName = 'org.grobid.service.SoftwareApplication'
 
     run {
+        if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
+            jvmArgs "--add-opens", "java.base/java.lang=ALL-UNNAMED"
+        }
+        workingDir = rootProject.rootDir
+        def javaLibraryPath = "${System.getProperty('java.library.path')}:" + libraries
+        systemProperty "java.library.path", javaLibraryPath
+
         args = ['server', 'resources/config/config.yml']
     }
 }
