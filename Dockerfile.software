@@ -2,7 +2,6 @@
 # build builder image
 # -------------------
 
-#FROM openjdk:8u275-jdk as builder
 FROM openjdk:17-jdk-slim as builder
 
 USER root
@@ -68,15 +67,6 @@ RUN rm /etc/apt/sources.list.d/nvidia-ml.list
 RUN wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-keyring_1.0-1_all.deb
 RUN dpkg -i cuda-keyring_1.0-1_all.deb
 
-# install JRE 8, python and other dependencies
-#RUN apt-get update && \
-#    apt-get -y --no-install-recommends install apt-utils build-essential gcc libxml2 unzip curl \
-#    openjdk-8-jre-headless openjdk-8-jdk ca-certificates-java \
-#    musl gfortran \
-#    python3 python3-pip python3-setuptools python3-dev \
-#    && apt-get clean \
-#    && rm -rf /var/lib/apt/lists/*
-
 # install JRE, python and other dependencies
 RUN apt-get update && \
     apt-get -y --no-install-recommends install apt-utils build-essential gcc libxml2 libfontconfig unzip curl \
@@ -106,12 +96,6 @@ ENV PYTHONWARNINGS="ignore"
 WORKDIR /opt/grobid
 
 ENV JAVA_OPTS=-Xmx4g
-
-# Add Tini
-#ENV TINI_VERSION v0.18.0
-#ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
-#RUN chmod +x /tini
-#ENTRYPOINT ["/tini", "-s", "--"]
 
 # install jep (and temporarily the matching JDK)
 ENV JDK_URL=https://download.java.net/java/GA/jdk17.0.2/dfd4a8d0985749f896bed50d7138ee7f/8/GPL/openjdk-17.0.2_linux-x64_bin.tar.gz
@@ -164,5 +148,5 @@ LABEL \
     authors="The contributors" \
     org.label-schema.name="software-mentions" \
     org.label-schema.description="Image with software-mentions service" \
-    org.label-schema.url="https://github.com/ourresearch/software-mentions" \
+    org.label-schema.url="https://github.com/softcite/software-mentions" \
     org.label-schema.version=${GROBID_VERSION}
