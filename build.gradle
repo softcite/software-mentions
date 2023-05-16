@@ -19,7 +19,7 @@ plugins {
 apply plugin: 'jacoco'
 
 jacoco {
-    toolVersion = '0.8.5'
+    toolVersion = '0.8.8'
 }
 
 apply plugin: 'java-library'
@@ -113,7 +113,7 @@ dependencies {
     implementation "org.apache.lucene:lucene-analyzers-common:4.5.1"
     implementation group: 'org.jruby', name: 'jruby-complete', version: '9.2.13.0'
     implementation "org.apache.pdfbox:pdfbox:2.0.18"
-    
+
     implementation group: 'org.semanticweb.yars', name: 'nxparser-parsers', version: '2.3.3'
 
     //Grobid
@@ -233,7 +233,6 @@ shadowJar {
     configurations = [project.configurations.runtimeClasspath]
 }
 
-
 jar {
     dependsOn mainJar
     enabled true
@@ -294,7 +293,7 @@ task installModels {
 //}
 
 wrapper {
-    gradleVersion "7.1.1"
+    gradleVersion "7.2"
 }
 
 // Custom Tasks
