@@ -376,7 +376,7 @@ public class SoftwareLexicon {
             }
         }
 
-        /*file = new File("resources/lexicon/covid_blacklist.txt");
+        file = new File("resources/lexicon/covid_blacklist.txt");
         file = new File(file.getAbsolutePath());
         if (!file.exists()) {
             throw new GrobidResourceException("Cannot initialize covid domain software name blacklist, because file '" + 
@@ -392,6 +392,11 @@ public class SoftwareLexicon {
             String l = null;
             while ((l = dis.readLine()) != null) {
                 if (l.length() == 0) continue;
+                if (l.trim().startsWith("#")) continue;
+                // in general excluding R is not desirable... for the COVID subdomain only it prevents some
+                // R for R-factor to be incorrectly recognized as software (few error proportionally, but 
+                // there is so many occurences of R as R-factor here that it becomes a visible error)
+                if (l.trim().equals("R")) continue;
                 blacklistSoftwareNames.add(l.trim());
             }
         } catch (FileNotFoundException e) {
@@ -405,7 +410,7 @@ public class SoftwareLexicon {
             } catch(Exception e) {
                 throw new GrobidResourceException("Cannot close IO stream.", e);
             }
-        }*/
+        }
     }
 	
 	public boolean inSoftwareDictionary(String string) {
