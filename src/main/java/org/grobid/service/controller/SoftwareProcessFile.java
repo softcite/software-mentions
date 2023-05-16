@@ -379,7 +379,10 @@ public class SoftwareProcessFile {
                 Pair<List<SoftwareEntity>, List<BibDataSet>> extractionResult = parser.processTEI(originFile, disambiguate, addParagraphContext);
                 long end = System.currentTimeMillis();
 
-                List<SoftwareEntity> extractedEntities = extractionResult.getLeft();
+                List<SoftwareEntity> extractedEntities = null;
+                if (extractionResult != null) {
+                    extractedEntities = extractionResult.getLeft();
+                }
 
                 StringBuilder json = new StringBuilder();
                 json.append("{ ");
@@ -400,11 +403,13 @@ public class SoftwareProcessFile {
                 }
                 json.append("], \"references\":[");
 
-                List<BibDataSet> bibDataSet = extractionResult.getRight();
-                if (bibDataSet != null && bibDataSet.size()>0) {
-                    SoftwareServiceUtil.serializeReferences(json, bibDataSet, extractedEntities);
+                if (extractionResult != null) {
+                    List<BibDataSet> bibDataSet = extractionResult.getRight();
+                    if (bibDataSet != null && bibDataSet.size()>0) {
+                        SoftwareServiceUtil.serializeReferences(json, bibDataSet, extractedEntities);
+                    }
                 }
-
+                
                 json.append("], \"runtime\" :" + (end-start));
                 json.append("}");
 
