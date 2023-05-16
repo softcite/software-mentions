@@ -496,7 +496,6 @@ public class SoftwareParser extends AbstractParser {
                             curParagraphTokens = new ArrayList<>();
                         curParagraphTokens.addAll(localTokenization);
                     } else if (clusterLabel.equals(TaggingLabels.PARAGRAPH) || clusterLabel.equals(TaggingLabels.ITEM)) {
-                        //|| clusterLabel.equals(TaggingLabels.SECTION) {
                         if (lastClusterLabel == null || curParagraphTokens == null  || isNewParagraph(lastClusterLabel)) { 
                             if (curParagraphTokens != null)
                                 propagateLayoutTokenSequence(curParagraphTokens, entities, termProfiles, termPattern, placeTaken, frequencies, addParagraphContext, true, false);
@@ -757,6 +756,9 @@ public class SoftwareParser extends AbstractParser {
 
             // text of the selected segment
             String text = LayoutTokensUtil.toText(layoutTokens);
+
+            if (l >= resBlocks.length)
+                break;
 
             String localRes = resBlocks[l];
 
@@ -2770,21 +2772,21 @@ public class SoftwareParser extends AbstractParser {
                     }
 
                     // proximity constraint + bonus to the left in case of middle position
-                    if (entityLeft == null) {
+                    if (entityLeft == null && entityRight != null) {
                         // check distance
                         if (entityRight.getSoftwareName().getOffsetStart() - localTypePosition.end <= 20) {
                             // attachment
                             SoftwareComponent languageComponent = createSoftwareComponentFromLanguage(entityType, SoftwareTaggingLabels.LANGUAGE);
                             entityRight.setLanguage(languageComponent);
                         }
-                    } else if (entityRight == null) {
+                    } else if (entityRight == null && entityLeft != null) {
                         // check distance
                         if (localTypePosition.start - entityLeft.getSoftwareName().getOffsetEnd() <= 20) {
                             // attachment
                             SoftwareComponent languageComponent = createSoftwareComponentFromLanguage(entityType, SoftwareTaggingLabels.LANGUAGE);
                             entityLeft.setLanguage(languageComponent);
                         }
-                    } else {
+                    } else if (entityRight != null & entityLeft != null) {
                         // programming language component is in the middle of the two software entities, attach to the closest
                         // with distance constraint + bonus to left entity
                         int distLeft = localTypePosition.start - entityLeft.getSoftwareName().getOffsetEnd();
@@ -2849,7 +2851,7 @@ public class SoftwareParser extends AbstractParser {
             if (entity.getSoftwareName() != null) {
                 String context = entity.getContext();
 
-                if (contextDone.contains(context))
+                if (context == null || contextDone.contains(context))
                     continue;
 
                 int contextOffset = entity.getGlobalContextOffset();
