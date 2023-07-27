@@ -119,7 +119,9 @@ Under the installed and built `grobid/` directory, clone the present module soft
 
 > cd grobid/
 
-> git clone https://github.com/kermitt2/software-mentions
+> git clone https://github.com/softcite/software-mentions
+
+> cd software-mentions
 
 Copy the provided pre-trained models in the standard grobid-home path:
 
