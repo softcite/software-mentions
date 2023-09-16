@@ -70,7 +70,9 @@ A software mention is a JSON element using the following general structure, whic
     "version": {...},
     "publisher": {...},
     "url": {...},
+    "language": {...},
     "context": "...",
+    "paragraph": "...",
     "references": [{
             "label": "(Jones, 1999)",
             "normalizedForm": "Jones, 1999",
@@ -93,7 +95,7 @@ The `type` here is the general type of entity and will always be `software` for 
 
 - `software`: this corresponds to the default case of a named software running as standalone application.
 
-The fields `software-name`, `version`, `publisher` and `url` correspond to extracted chunks of information identified in the mention context. They all follow the same substructure, encoding offset information relative to the context string (`offsetStart` and `offsetEnd`) and bounding box coordinates relative to the PDF (`boundingBoxes`):
+The fields `software-name`, `version`, `publisher`, `url` and `language` correspond to extracted chunks of information identified in the mention context. They all follow the same substructure, encoding offset information relative to the context string (`offsetStart` and `offsetEnd`) and bounding box coordinates relative to the PDF (`boundingBoxes`):
 
 ```json
     "software-name": {
@@ -131,28 +133,9 @@ The following fields are optional and present if a Wikidata disambiguation for t
 
 See [here](https://grobid.readthedocs.io/en/latest/Coordinates-in-PDF/#coordinates-in-json-results) for information about the interpretation of the bounding box coordinates on the PDF page layout. 
 
-`context` is the textual representation of the sentence where the software mention takes place. Offset used to identify chunk in the fields `software-name`, `version`, `publisher` and `url` are relative to this context string. 
+`context` is the textual representation of the sentence where the software mention takes place. Offset used to identify chunk in the fields `software-name`, `version`, `publisher`, `url` and `language` are relative to this context string. 
 
 `paragraph` (optional) is the texual representation of the complete paragraph where the software mention takes place. This extended context can be useful for applying subsequent process to a larger context than just the sentence where a mention takes place.
-
-`references` describes the possible "reference markers" (also called "reference callouts") as extracted in the document associated to this software. There can be more than one reference markers associated to a software mention. For each reference marker, a `refKey` is used to link this reference marker to the full parsed bibliographical reference identified in the document (see next section). If the reference marker is present in the mention context, it is expressed with similar information as the extracted field attributes (so it will contain offsets and bounding box information). Otherwise, the reference marker information is propagated from other contexts. The original reference string is identified with the attribte `label` and its normalized form with the attribute `normalizedForm`.
-
-```json
-"references": [{
-    "label": "(Wiederstein and Sippl, 2007)",
-    "normalizedForm": "Wiederstein and Sippl, 2007",
-    "refKey": 52,
-    "offsetStart": 155,
-    "offsetEnd": 184,
-    "boundingBoxes": [{
-        "p": 4,
-        "x": 420.435,
-        "y": 340.243,
-        "w": 112.34849999999989,
-        "h": 8.051699999999983
-    }]
-}]
-```
 
 `mentionContextAttributes` and `documentContextAttributes` follow the same scheme and provide information about the mentioned software in term of usage, creation and sharing based on the different software mention contexts in the document. Mentioned software are characterized with the following attributes:
 
@@ -194,6 +177,25 @@ For each of these attributes, a confidence scores in `[0,1]` and a binary class 
         }
     }
 }
+```
+
+`references` describes the possible "reference markers" (also called "reference callouts") as extracted in the document associated to this software. There can be more than one reference markers associated to a software mention. For each reference marker, a `refKey` is used to link this reference marker to the full parsed bibliographical reference identified in the document (see next section). If the reference marker is present in the mention context, it is expressed with similar information as the extracted field attributes (so it will contain offsets and bounding box information). Otherwise, the reference marker information is propagated from other contexts. The original reference string is identified with the attribte `label` and its normalized form with the attribute `normalizedForm`.
+
+```json
+"references": [{
+    "label": "(Wiederstein and Sippl, 2007)",
+    "normalizedForm": "Wiederstein and Sippl, 2007",
+    "refKey": 52,
+    "offsetStart": 155,
+    "offsetEnd": 184,
+    "boundingBoxes": [{
+        "p": 4,
+        "x": 420.435,
+        "y": 340.243,
+        "w": 112.34849999999989,
+        "h": 8.051699999999983
+    }]
+}]
 ```
 
 ### Full mention example 
@@ -292,5 +294,4 @@ The XML string can then be retrieved from the JSON result and parsed with the ap
     }
 ]
 ```
-
 
