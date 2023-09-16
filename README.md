@@ -4,7 +4,7 @@
 [![Demo cloud.science-miner.com/software](https://img.shields.io/website-up-down-green-red/https/cloud.science-miner.com/software.svg)](http://cloud.science-miner.com/software)
 [![Docker Hub](https://img.shields.io/docker/pulls/grobid/software-mentions.svg)](https://hub.docker.com/r/grobid/software-mentions "Docker Pulls")
 
-The goal of this GROBID module is to recognize any software mentions in scholar textual documents and PDF. It uses as training data the [Softcite Dataset](https://github.com/howisonlab/softcite-dataset) developed by [James Howison](http://james.howison.name/) Lab at the University of Texas at Austin. This annotated corpus and the present software text mining component have been developed supported by a grant from the Alfred P. Sloan foundation to [improve credit for research software](https://blog.ourresearch.org/collaborating-635k-grant-improve-credit-research-software/).
+The goal of this GROBID module is to recognize any software mentions in scholar textual documents, publisher XML and PDF. It uses as training data the [Softcite Dataset](https://github.com/howisonlab/softcite-dataset) developed by [James Howison](http://james.howison.name/) Lab at the University of Texas at Austin. This annotated corpus and the present software text mining component have been developed supported by a grant from the Alfred P. Sloan foundation to [improve credit for research software](https://blog.ourresearch.org/collaborating-635k-grant-improve-credit-research-software/).
 
 _Code with paper_: the [following article is available in CC-BY](https://github.com/ourresearch/software-mentions/raw/master/doc/afp1085-lopezA-CC-BY.pdf): 
 
@@ -14,6 +14,13 @@ Mining Software Entities in Scientific Literature: Document-level NER for an Ext
 In Proceedings of the 30th ACM International Conference on Information and Knowledge Management (CIKM ’21), 
 November 1–5, 2021, QLD, Australia. https://doi.org/10.1145/3459637.3481936
 [Best Applied Research Paper Award runner-up]
+```
+
+For more recent evaluations and a description of a use case in production to monitor Open Science in France, see:
+
+```
+Aricia Bassinet, Laetitia Bracco, Anne L'Hôte, Eric Jeangirard, Patrice Lopez, et al.. Large-scale Machine-Learning analysis of scientific PDF for monitoring the production and the openness of research data and software in France. 2023. ⟨hal-04121339v3⟩
+https://hal.science/hal-04121339v3
 ```
 
 As the other GROBID models, the module relies only on state-of-the-art machine learning. The tool can use linear CRF (via [Wapiti](https://github.com/kermitt2/Wapiti) JNI integration) or Deep Learning model such as BiLSTM-CRF, ELMo or fine-tuned transformers BERT, e.g. SciBERT and LinkBERT (via [DeLFT](https://github.com/kermitt2/delft) JNI integration) and any combination of them. 
@@ -26,7 +33,7 @@ Thanks to its integration in the [GROBID](https://github.com/kermitt2/grobid) fr
 
 - __combined with bibliographical reference recognition__: the bibliographical reference markers possibly used in combination with the software mention are recognized, attached to the software mention when possible, matched with the full bibliographical reference in the bibliographical section of the article and disambiguated against CrossRef and Unpaywall
 
-- __combined with PDF coordinates__: the bounding boxes of the extracted software mentions, software attributes and attached bibliographical references in the original PDF are provided, in order to create augmented interative PDF to visualize and interact directly with software mentions on the PDF, see the [console demo](https://github.com/ourresearch/software-mentions/#console-web-app)
+- __combined with PDF coordinates__: in case the input is a PDF, the bounding boxes of the extracted software mentions, software attributes and attached bibliographical references in the original PDF are provided, in order to create augmented interative PDF to visualize and interact directly with software mentions on the PDF, see the [console demo](https://github.com/ourresearch/software-mentions/#console-web-app)
 
 - __combined with entity disambiguation__: extracted software names are disambiguated in context against software entities in Wikidata via [entity-fishing](https://github.com/kermitt2/entity-fishing)
 
@@ -34,7 +41,7 @@ Thanks to its integration in the [GROBID](https://github.com/kermitt2/grobid) fr
 
 - __scaling__: as we want to scale to the complete scientific corpus, the process is optimized in runtime and memory usage. We are able to process entirely around 2 PDF per second with the CRF model (including PDF processing and structuring, extractions, bibliographical reference disambiguation against crossref and entity disambiguation against WikiData) on one low/medium cost Ubuntu server, Intel i7-4790 (4 CPU), 4.00 GHz with 16 GB memory. Around 0.5 PDF per second is processed when using the fine-tuned SciBERT model, the best performing model - an additional GPU is however necessary when using Deep Learning models and runtime, depending on the DL architecture of choice.
 
-Latest performance (accuracy and runtime) can be found [below](https://github.com/ourresearch/software-mentions#benchmarking-of-the-sequence-labeling-task).
+Latest performance (accuracy and runtime) can be found in the most recent cited publication above, and more model comparisons [below](https://github.com/ourresearch/software-mentions#benchmarking-of-the-sequence-labeling-task).
 
 ## Demo
 
@@ -42,13 +49,16 @@ A public demo of the service is available at the following address: https://clou
 
 The [web console](https://github.com/ourresearch/software-mentions#console-web-app) allows you to test the processing of text or of a full scholar PDF. The component is developed targeting complete PDF, so the output of a PDF processing will be richer (attachment, parsing and DOI-matching of the bibliographical references appearing with a software mention, coordinates in the PDF of the mentions, document level propagation of mentions). The console displays extracted mentions directly on the PDF pages (via PDF.js), with infobox describing when possible Wikidata entity linking and full reference metadata (with Open Access links when found via Unpaywall).  
 
-This demo is only provided for test, without any guaranties regarding the service quality and availability. If you plan to use this component at scale or in production, you need to install it locally. 
+This demo is only provided for test, without any guaranties regarding the service quality and availability. If you plan to use this component at scale or in production, you need to install it locally (see how to deploy a [docker image](https://github.com/ourresearch/software-mentions#docker-image)). 
 
-**The demo run with the CRF model** to reduce the computational load, as the server is used for other demos and has no GPU (for cost reasons). For significantly more accurate results (see the [benchmarking](https://github.com/ourresearch/software-mentions#benchmarking-of-the-sequence-labeling-task)), a local installation with sciBERT models is required, the Docker image being the easiest way to achieve this (SciBERT models are included and used by default in the image). 
+Note: **The demo run with the CRF model** to reduce the computational load, as the server is used for other demos and has no GPU (for cost reasons). For significantly more accurate results (see the [benchmarking](https://github.com/ourresearch/software-mentions#benchmarking-of-the-sequence-labeling-task)), sciBERT/LinkBERT models are required, the Docker image being the easiest way to achieve this (fine-tuned transformer models are included and used by default in the image). 
 
 ## The Softcite Dataset
 
-For sampling, training and evaluation of the sequence labeling model and additional attribute attachment mechanisms, we use the Softcite dataset, a gold standard manually annotated corpus of 4,971 scholar articles, available on Zenodo: https://doi.org/10.5281/zenodo.4445202
+For sampling, training and evaluation of the sequence labeling model and additional attribute attachment mechanisms, we use the Softcite dataset, a gold standard manually annotated corpus of 4,971 scholar articles, available on Zenodo (version 2.0): 
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7995565.svg)](https://doi.org/10.5281/zenodo.7995565)
+
 
 More details on the Softcite dataset can be found in the following publication:
 
@@ -58,25 +68,23 @@ in biomedical and economic research publications. J Assoc Inf Sci Technol. (JASI
 https://doi.org/10.1002/asi.24454
 ```
 
-The dataset is maintained on the following GitHub repository: https://github.com/howisonlab/softcite-dataset
+The latest version of the dataset is maintained on the following GitHub repository: https://github.com/softcite/softcite_dataset_v2
 
-## Softcite software mention extraction from the CORD-19 publications
-
-This dataset is the result of the extraction of software mentions from the set of publications of the CORD-19 corpus (https://allenai.org/data/cord-19) by the Softcite software recognizer using SciBERT fine-tuned model: https://zenodo.org/record/5235661 
+Original development was carried out at https://github.com/howisonlab/softcite-dataset
 
 ## Docker image
 
 It is recommended to use the Docker image for running the service. The best Deep Learning models are included and are used by default by this image. 
-To use a Docker image via [docker HUB](https://hub.docker.com/r/grobid/software-mentions), pull the image (around 10GB) as follow: 
+To use a Docker image via [docker HUB](https://hub.docker.com/r/grobid/software-mentions), pull the image (around 11GB) as follow: 
 
 ```bash
-docker pull grobid/software-mentions:0.7.3-SNAPSHOT
+docker pull grobid/software-mentions:0.8.0-SNAPSHOT
 ```
 
 After pulling or building the Docker image, you can now run the `software-mentions` service as a container:
 
 ```bash
->  docker run --rm --gpus all -it -p 8060:8060 grobid/software-mentions:0.7.3-SNAPSHOT
+>  docker run --rm --gpus all -it -p 8060:8060 grobid/software-mentions:0.8.0-SNAPSHOT
 ```
 
 The build image includes the automatic support of GPU when available on the host machine via the parameter `--gpus all` (with automatic recognition of the CUDA version), with fall back to CPU if GPU are not available. The support of GPU is only available on Linux host machine.
@@ -84,13 +92,13 @@ The build image includes the automatic support of GPU when available on the host
 The `software-mentions` service is available at the default host/port `localhost:8060`, but it is possible to map the port at launch time of the container as follow:
 
 ```bash
-> docker run --rm --gpus all -it -p 8080:8060 grobid/software-mentions:0.7.3-SNAPSHOT
+> docker run --rm --gpus all -it -p 8080:8060 grobid/software-mentions:0.8.0-SNAPSHOT
 ```
 
 In this image, the best deep learning models are used by default. The selection of models can be modified, for example to use faster models or requiring less GPU memory. To modify the configuration without rebuilding the image - for instance rather use the CRF model, it is possible to mount a modified config file at launch as follow: 
 
 ```bash
-> docker run --rm --gpus all -p 8060:8060 -v /home/lopez/grobid/software-mentions/resources/config/config.yml:/opt/grobid/software-mentions/resources/config/config.yml:ro  grobid/software-mentions:0.7.3-SNAPSHOT
+> docker run --rm --gpus all -p 8060:8060 -v /home/lopez/grobid/software-mentions/resources/config/config.yml:/opt/grobid/software-mentions/resources/config/config.yml:ro  grobid/software-mentions:0.8.0-SNAPSHOT
 ```
 
 As an alterntive, a docker image for the `software-mentions` service can be built with the project Dockerfile to match the current master version. The complete process is as follow: 
@@ -104,16 +112,16 @@ As an alterntive, a docker image for the `software-mentions` service can be buil
 - from the GROBID root installation (`grobid/`), launch the docker build:
 
 ```bash
-> docker build -t grobid/software-mentions:0.7.3-SNAPSHOT --build-arg GROBID_VERSION=0.7.3-SNAPSHOT --file Dockerfile.software .
+> docker build -t grobid/software-mentions:0.8.0-SNAPSHOT --build-arg GROBID_VERSION=0.8.0-SNAPSHOT --file Dockerfile.software .
 ```
 
 Building the Docker image takes several minutes: installing GROBID, software-mentions, a complete Python Deep Learning environment based on [DeLFT](https://github.com/kermitt2/delft) and deep learning models downloaded from the internet (one fine-tuned model with a BERT layer has a size of around 400 MB). The resulting image is thus very large, around 8GB, due to the deep learning resources and models. 
 
 ## Install, build, run
 
-The easiest way to deploy and run the service is to use the Docker image, see previous section. 
+The easiest way to deploy and run the service is to use the Docker image, see previous section. If you're courageous or would like to contribute to the development, this section presents the install and build process.
 
-Building the module requires JDK 1.8 or higher. First install and build the latest development version of GROBID as explained by the [documentation](http://grobid.readthedocs.org), together with [DeLFT](https://github.com/kermitt2/delft) for Deep Learning model support.
+Building the module requires JDK 1.8 or higher (tested up to Java 15). First install and build the latest development version of GROBID as explained by the [documentation](http://grobid.readthedocs.org), together with [DeLFT](https://github.com/kermitt2/delft) for Deep Learning model support. An installation of [Pub2TEI](https://github.com/kermitt2/Pub2TEI) is also necessary to process a variety of publisher XML formats (including for example JATS).
 
 Under the installed and built `grobid/` directory, clone the present module software-mentions (it will appear as sibling sub-project to grobid-core, grobid-trainer, etc.):
 
@@ -163,9 +171,21 @@ Software entity linking against Wikidata is realized by [entity-fishing](https:/
 
 To exploit the Softcite software mention recognition service efficiently (concurrent calls) and robustly, a Python client is available [here](https://github.com/softcite/software_mentions_client).
 
+If you want to process a directory of PDF and/or XML documents, this is the best and simplest solution: deploy a Dokcer image of the server and use this client. 
+
+## Tutorial
+
+A tutorial is available at https://github.com/softcite/tutorials/blob/master/process_all_of_plos.md describing how to process the "All of PLOS" collection, step by step. You can apply the same approach for any collection of XML or PDF scientific articles.  
+
 ## JSON format for the extracted software mention
 
 The resulting software mention extractions include many attributes and information. These extractions follow the [JSON format documented on this page](https://github.com/ourresearch/software-mentions/blob/master/doc/annotation_schema.md). 
+
+
+## Softcite software mention extraction from the CORD-19 publications
+
+This dataset is the result of the extraction of software mentions from the set of publications of the CORD-19 corpus (https://allenai.org/data/cord-19) by the Softcite software recognizer using SciBERT fine-tuned model: https://zenodo.org/record/5235661 
+
 
 ## Web API
 
@@ -387,7 +407,7 @@ models:
     engine: "wapiti"
 ```
 
-For Deep Learning architectures, indicate `delft` and indicate the installation path of the `DeLFT` library. To install and take advantage of DeLFT, see the installation instructions [here](https://github.com/kermitt2/delft).
+For Deep Learning architectures, which provide significantly better accuracy, indicate `delft` and indicate the installation path of the `DeLFT` library. To install and take advantage of DeLFT, see the installation instructions [here](https://github.com/kermitt2/delft).
 
 The model to be used can be fully parametrised in the model block:
 
@@ -408,7 +428,7 @@ models:
       embeddings_name: "glove-840B"
 ```
 
-To use the SciBERT fine-tuned model (recommended):
+To use the SciBERT fine-tuned model, this is the **recommended** model:
 
 ```yaml
 models:
@@ -419,13 +439,15 @@ models:
       transformer: "allenai/scibert_scivocab_cased"
 ```
 
+The `transformer` field indicates the name of the used pretrained model and should match the name of a HuggingFace transformer model that has been fine-tuned for the software mention recognition task. 
+
 The possible values for the Deep Learning architectures (supported by DeLFT) are:
 
 - for __BiLSTM-CRF__: `BidLSTM_CRF`
 
 - for __BiLSTM-CRF_FEATURES__: `BidLSTM_CRF_FEATURES`
 
-- for transformer-based architecture: `BERT`
+- for transformer-based architecture: `BERT` (with then any transformers variant indicated in the field `transformer`, including for example RoBERTa models)
 
 - for transformer-based architecturewith CRF activation layer: `BERT_CRF`
 
@@ -445,18 +467,18 @@ For __BiLSTM-CRF__ you need to further specify the embeddings to be used
 
 Note that the default setting is __CRF Wapiti__, which does not require any further installation.
 
-DeLFT sequence labeling models are described [here](https://delft.readthedocs.io/en/latest/sequence_labeling/). For more details, see also the [GROBID Deep Learning model documentation](https://grobid.readthedocs.io/en/latest/Deep-Learning-models/). Using directly [DeLFT](https://github.com/kermitt2/delft), it is possible to re-train other Deep Learning models using different archiectures and pre-trained models (see the command line [here](https://delft.readthedocs.io/en/latest/grobid/#grobid-models)), and run them into this module. 
+DeLFT sequence labeling models are described [here](https://delft.readthedocs.io/en/latest/sequence_labeling/). For more details, see also the [GROBID Deep Learning model documentation](https://grobid.readthedocs.io/en/latest/Deep-Learning-models/). Using directly [DeLFT](https://github.com/kermitt2/delft), it is possible to re-train other Deep Learning models using different architectures and pre-trained models (see the command line [here](https://delft.readthedocs.io/en/latest/grobid/#grobid-models)), and run them into this module. 
 
 - to select the **text classification algorithm** to be used for predicting the role of the mentioned software (see [here](https://github.com/ourresearch/software-mentions#software-mention-context-characterization) for explanations), the config parameters are also set under the corresponding models:
 
-For a transformer-base architecture using SciBERT as pretrained model (recommended): 
+For a transformer-base architecture using LinkBERT base as pretrained model (recommended): 
 
 ```yaml
  - name: "software_context_used"
     engine: "delft"
     delft:
       architecture: "bert"
-      transformer: "allenai/scibert_scivocab_cased"
+      transformer: "michiyasunaga/LinkBERT-basecased"
 ```
 
 For a RNN GRU architecture using `glove-840B` static embeddings (not recommended):
@@ -469,7 +491,7 @@ For a RNN GRU architecture using `glove-840B` static embeddings (not recommended
       embeddings_name: "glove-840B"
 ```
 
-The choice to use a multi-label classifier for the context characterization or 3 binary classifiers can be parametrized. Binary classifiers perform better, but require more memory resources. This can be set by the following parameter:
+The choice to use a multi-label classifier for the context characterization or 3 binary classifiers can be parametrized. **Binary classifiers perform better**, but require more memory resources. This can be set by the following parameter:
 
 ```yaml
 # if true we use binary classifiers for the contexts, otherwise use a single multi-label classifier
