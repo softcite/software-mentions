@@ -995,6 +995,8 @@ public class SoftwareParser extends AbstractParser {
     }
 
     private boolean overlapsPosition(final List<OffsetPosition> list, final OffsetPosition position, int offsetShift) {
+        // note: in principle, positions related to absolute document offsets from the layout tokens, so offsetShift
+        // does not be used. However, to be conservative, we also consider it.
         for (OffsetPosition pos : list) {
             if (pos.start == position.start || pos.start-offsetShift == position.start)  
                 return true;
@@ -1007,6 +1009,10 @@ public class SoftwareParser extends AbstractParser {
             if (pos.start-offsetShift <= position.start && position.start <= pos.end-offsetShift)  
                 return true;
             if (pos.start-offsetShift <= position.start && position.start <= pos.end-offsetShift)  
+                return true;
+            if (pos.start <= position.start && position.start < pos.end)
+                return true;
+            if (position.start < pos.end && pos.end <= position.end)
                 return true;
         } 
         return false;
