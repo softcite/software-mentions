@@ -113,7 +113,7 @@ In this image, the best deep learning models are used by default. The selection 
 > docker run --rm --gpus all -it --init --ulimit core=0 -p 8060:8060 -v /home/lopez/grobid/software-mentions/resources/config/config.yml:/opt/grobid/software-mentions/resources/config/config.yml:ro  grobid/software-mentions:0.8.0-SNAPSHOT
 ```
 
-As an alterntive, a docker image for the `software-mentions` service can be built with the project Dockerfile to match the current master version. The complete process is as follow: 
+As an alternative, a docker image for the `software-mentions` service can be built with the project Dockerfile to match the current master version. The complete process is as follow: 
 
 - copy the `Dockerfile.software` at the root of the GROBID installation:
 
