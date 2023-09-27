@@ -84,21 +84,33 @@ docker pull grobid/software-mentions:0.8.0-SNAPSHOT
 After pulling or building the Docker image, you can now run the `software-mentions` service as a container:
 
 ```bash
->  docker run --rm --gpus all -it -p 8060:8060 grobid/software-mentions:0.8.0-SNAPSHOT
+>  docker run --rm --gpus all -it --ulimit core=0 -p 8060:8060 grobid/software-mentions:0.8.0-SNAPSHOT
 ```
 
-The build image includes the automatic support of GPU when available on the host machine via the parameter `--gpus all` (with automatic recognition of the CUDA version), with fall back to CPU if GPU are not available. The support of GPU is only available on Linux host machine.
+The build image includes the automatic support of GPU when available on the host machine via the parameter `--gpus all` (with automatic recognition of the CUDA version). The support of GPU is only available on Linux host machine. If no GPU are available on your host machine, just remove the `--gpus all` parameter, but usage of GPU is recommended for best runtime:
+
+```bash
+>  docker run --rm -it --ulimit core=0 -p 8060:8060 grobid/software-mentions:0.8.0-SNAPSHOT
+```
+
+To specify to use only certain GPUs (see the [nvidia container toolkit user guide](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/user-guide.html#gpu-enumeration) for more details):
+
+```bash
+> docker run --rm --gpus '"device=1,2"' -it --init --ulimit core=0 -p 8060:8060 grobid/software-mentions:0.8.0-SNAPSHOT
+```
+
+Note that starting for convenience the container with option `--ulimit core=0` avoids having possible core dumped inside the container, which can happen overwise due to the very rare crash of the PDF parsing C++ component. Starting the container with parameter `-it` allows to interact with the docker process, which is of limited use here, except conveniently stopping the docker container with control-c.  
 
 The `software-mentions` service is available at the default host/port `localhost:8060`, but it is possible to map the port at launch time of the container as follow:
 
 ```bash
-> docker run --rm --gpus all -it -p 8080:8060 grobid/software-mentions:0.8.0-SNAPSHOT
+> docker run --rm --gpus all -it --init --ulimit core=0 -p 8080:8060 grobid/software-mentions:0.8.0-SNAPSHOT
 ```
 
 In this image, the best deep learning models are used by default. The selection of models can be modified, for example to use faster models or requiring less GPU memory. To modify the configuration without rebuilding the image - for instance rather use the CRF model, it is possible to mount a modified config file at launch as follow: 
 
 ```bash
-> docker run --rm --gpus all -p 8060:8060 -v /home/lopez/grobid/software-mentions/resources/config/config.yml:/opt/grobid/software-mentions/resources/config/config.yml:ro  grobid/software-mentions:0.8.0-SNAPSHOT
+> docker run --rm --gpus all -it --init --ulimit core=0 -p 8060:8060 -v /home/lopez/grobid/software-mentions/resources/config/config.yml:/opt/grobid/software-mentions/resources/config/config.yml:ro  grobid/software-mentions:0.8.0-SNAPSHOT
 ```
 
 As an alterntive, a docker image for the `software-mentions` service can be built with the project Dockerfile to match the current master version. The complete process is as follow: 

@@ -49,7 +49,6 @@ A `references` elements is included together with the array of `mentions`, listi
     "mentions": [...],
     "references": [...]
 }
-
 ```
 
 In case an XML document is the input to be processed, representations are simplified to exclude layout coordinates and MD5 hash. 
