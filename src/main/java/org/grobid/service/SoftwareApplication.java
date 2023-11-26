@@ -10,8 +10,8 @@ import io.dropwizard.setup.Environment;
 import org.eclipse.jetty.servlets.CrossOriginFilter;
 import org.eclipse.jetty.servlets.QoSFilter;
 import org.grobid.service.configuration.SoftwareServiceConfiguration;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 
 import javax.servlet.DispatcherType;
 import javax.servlet.FilterRegistration;
@@ -21,7 +21,7 @@ import java.util.EnumSet;
 public class SoftwareApplication extends Application<SoftwareServiceConfiguration> {
     private static final String RESOURCES = "/service";
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(SoftwareApplication.class);
+    //private static final Logger LOGGER = LoggerFactory.getLogger(SoftwareApplication.class);
 
     @Override
     public String getName() {
@@ -45,7 +45,7 @@ public class SoftwareApplication extends Application<SoftwareServiceConfiguratio
 
     @Override
     public void run(SoftwareServiceConfiguration configuration, Environment environment) {
-        LOGGER.info("Service config={}", configuration);
+        //LOGGER.info("Service config={}", configuration);
         environment.jersey().setUrlPattern(RESOURCES + "/*");
 
         String allowedOrigins = configuration.getCorsAllowedOrigins();

@@ -161,7 +161,7 @@ public class TEICorpusSaxHandler extends DefaultHandler {
         int index = 0;
         for(String text : texts) {
             StringBuilder builder = new StringBuilder();
-System.out.println(index);
+//System.out.println(index);
             byte[] encoded = encoder.quoteAsUTF8(identifier+"-"+index);
             String output = new String(encoded);
             

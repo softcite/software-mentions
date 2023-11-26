@@ -257,7 +257,7 @@ public class SoftwareParser extends AbstractParser {
                     if ((header != null) && (header.trim().length() > 0)) {
                         labeledResult = parsers.getHeaderParser().label(header);
                         resHeader = new BiblioItem();
-                        resHeader.generalResultMapping(labeledResult, headerTokenization);
+                        resHeader.generalResultMappingHeader(labeledResult, headerTokenization);
 
                         // title
                         List<LayoutToken> titleTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_TITLE);

@@ -112,20 +112,31 @@ server:
   maxThreads: 2048
   maxQueuedRequests: 2048
   acceptQueueSize: 2048
+  # change the following for having all http requests logged
+  requestLog:
+    appenders: []
 
+# these logging settings apply to the service usage mode
 logging:
   level: INFO
-
+  loggers:
+    org.apache.pdfbox.pdmodel.font.PDSimpleFont: "OFF"
+    org.glassfish.jersey.internal: "OFF"
+    com.squarespace.jersey2.guice.JerseyGuiceUtils: "OFF"
   appenders:
     - type: console
-      threshold: INFO
+      threshold: WARN
+      timeZone: UTC
+      # uncomment to have the logs in json format
+      #layout:
+      #  type: json
     - type: file
+      currentLogFilename: logs/grobid-service.log
       threshold: INFO
-      logFormat: "%-6level [%d{HH:mm:ss.SSS}] [%t] %logger{5} - %X{code} %msg %n"
-      currentLogFilename: logs/software.log
-      archivedLogFilenamePattern: logs/software-%d{yyyy-MM-dd}-%i.log.gz
+      archive: true
+      archivedLogFilenamePattern: logs/grobid-service-%d.log
       archivedFileCount: 7
       timeZone: UTC
-      maxFileSize: 50MB
-
-timeZone: UTC
+      # uncomment to have the logs in json format
+      #layout:
+      #  type: json
