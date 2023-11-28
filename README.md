@@ -137,29 +137,40 @@ Building the module requires JDK 1.8 or higher (tested up to Java 15). First ins
 
 Under the installed and built `grobid/` directory, clone the present module software-mentions (it will appear as sibling sub-project to grobid-core, grobid-trainer, etc.):
 
-> cd grobid/
-
-> git clone https://github.com/kermitt2/software-mentions
+```console
+cd grobid/
+git clone https://github.com/softcite/software-mentions
+```
 
 Copy the provided pre-trained models in the standard grobid-home path:
 
-> ./gradlew copyModels 
+```console
+./gradlew copyModels 
+```
 
 Install larger models (fine-tuned transformers, currently the best performing one, total 1.5 GB size and too large to be stored in the GitHub repo), they need to be downloaded and installed with the following command:
 
-> ./gradlew installModels
+```console
+./gradlew installModels
+```
 
 Try compiling everything with:
 
-> ./gradlew clean install 
+```console
+./gradlew clean install 
+```
 
 Run some test: 
 
-> ./gradlew test
+```console
+./gradlew test
+```
 
 To start the service:
 
-> ./gradlew run
+```console
+./gradlew run
+```
 
 ## Console web app
 
