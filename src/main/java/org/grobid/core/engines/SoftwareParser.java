@@ -368,9 +368,10 @@ public class SoftwareParser extends AbstractParser {
             }
 
             // explicit availability statements
+            List<LayoutToken> availabilityTokens = null;
             documentParts = doc.getDocumentPart(SegmentationLabels.AVAILABILITY);
             if (documentParts != null) {
-                List<LayoutToken> availabilityTokens = doc.getTokenizationParts(documentParts, doc.getTokenizations());
+                availabilityTokens = doc.getTokenizationParts(documentParts, doc.getTokenizations());
                 if (availabilityTokens != null) {
                     selectedLayoutTokenSequences.add(availabilityTokens);
                 }
@@ -670,6 +671,10 @@ public class SoftwareParser extends AbstractParser {
             }
 
             Collections.sort(entities);
+
+            // mark software present in Data Availability section(s)
+            if (availabilityTokens != null && availabilityTokens.size()>0)
+                entities = markDAS(entities, availabilityTokens);
 
             entities = SoftwareContextClassifier.getInstance(softwareConfiguration).classifyDocumentContexts(entities);
 
@@ -986,6 +991,26 @@ public class SoftwareParser extends AbstractParser {
         // add context to the new entities
         addContext(localEntities, null, layoutTokens, fromPDF, fromXML, addParagraphContext);
 
+        return entities;
+    }
+
+    public List<SoftwareEntity> markDAS(List<SoftwareEntity> entities, List<LayoutToken> availabilityTokens) {
+        if (entities == null || entities.size() == 0)
+            return entities;
+        for(SoftwareEntity entity : entities) {
+            if (entity.isInDataAvailabilitySection())
+                continue;
+            if (entity.getContext() == null) 
+                continue;
+            int context_offset_start = entity.getGlobalContextOffset();
+            int context_offset_end = context_offset_start + entity.getContext().length();
+            for (LayoutToken token : availabilityTokens) {
+                if (context_offset_start <= token.getOffset() && token.getOffset() < context_offset_end) {
+                    entity.setInDataAvailabilitySection(true);
+                    break;
+                }
+            }
+        }
         return entities;
     }
 
@@ -2348,11 +2373,11 @@ public class SoftwareParser extends AbstractParser {
             org.w3c.dom.Element paragraphElement = (org.w3c.dom.Element) paragraphList.item(i);
 
             // check that the father is not <abstract> and not <figDesc>
-            org.w3c.dom.Node fatherNode = paragraphElement.getParentNode();
+            /*org.w3c.dom.Node fatherNode = paragraphElement.getParentNode();
             if (fatherNode != null) {
                 if ("availability".equals(fatherNode.getNodeName()))
                     continue;
-            }
+            }*/
 
             Pair<String,Map<String,Pair<OffsetPosition,String>>> contentTextAndRef = 
                 XMLUtilities.getTextNoRefMarkersAndMarkerPositions(paragraphElement, globalPos);
@@ -2489,11 +2514,11 @@ public class SoftwareParser extends AbstractParser {
             org.w3c.dom.Element paragraphElement = (org.w3c.dom.Element) paragraphList.item(i);
 
             // check that the father is not <abstract> and not <figDesc>
-            org.w3c.dom.Node fatherNode = paragraphElement.getParentNode();
+            /*org.w3c.dom.Node fatherNode = paragraphElement.getParentNode();
             if (fatherNode != null) {
                 if ("availability".equals(fatherNode.getNodeName()))
                     continue;
-            }
+            }*/
 
             String contentText = UnicodeUtil.normaliseText(paragraphElement.getTextContent()); 
             if (contentText != null && contentText.length()>0) {
@@ -2539,11 +2564,11 @@ public class SoftwareParser extends AbstractParser {
             org.w3c.dom.Element biblStructElement = (org.w3c.dom.Element) bibList.item(i);
 
             // filter <biblStruct> not having as father <listBibl>
-            org.w3c.dom.Node fatherNode = biblStructElement.getParentNode();
+            /*org.w3c.dom.Node fatherNode = biblStructElement.getParentNode();
             if (fatherNode != null) {
                 if (!"listBibl".equals(fatherNode.getNodeName()))
                     continue;
-            }
+            }*/
 
             BiblioItem biblio = XMLUtilities.parseTEIBiblioItem(biblStructElement);
 

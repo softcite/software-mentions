@@ -74,6 +74,9 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 	private Boolean shared = null;
 	private Double sharedScore = null;
 
+	// a flag to indicate if the entity is located in the Data Availability section
+	private boolean inDataAvailabilitySection = false;
+
 	// characteristics of the mention context relatively to the referenced software for the single local mention
 	private SoftwareContextAttributes mentionContextAttributes = null;
 
@@ -209,6 +212,14 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 
 	public SoftwareContextAttributes getDocumentContextAttributes() {
 		return this.documentContextAttributes;
+	}
+
+	public boolean isInDataAvailabilitySection() {
+		return this.inDataAvailabilitySection;
+	}
+
+	public void setInDataAvailabilitySection(boolean inDAS) {
+		this.inDataAvailabilitySection = inDAS;
 	}
 
 	public void mergeDocumentContextAttributes(SoftwareContextAttributes attributes) {
@@ -476,6 +487,10 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 		if (language != null) {
 			buffer.append(", \"language\":" + language.toJson());
 		}
+
+		if (inDataAvailabilitySection) {
+            buffer.append(", \"inDataAvailabilitySection\" : true");
+        }
 
 		if (context != null && context.length()>0) {
 			//encoded = encoder.quoteAsUTF8(context.replace("\n", " ").replace("  ", " "));
