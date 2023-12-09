@@ -140,7 +140,7 @@ RUN ./gradlew copyModels installModels  && rm -rf resources/models && rm -f /opt
 
 RUN ./gradlew clean assemble install --no-daemon --stacktrace --info -x test
 
-CMD ["sh", "-c", "java --add-opens java.base/java.lang=ALL-UNNAMED -jar build/libs/software-mentions-0.8.0-SNAPSHOT-onejar.jar server resources/config/config.yml"]
+CMD ["sh", "-c", "java --add-opens java.base/java.lang=ALL-UNNAMED -jar build/libs/software-mentions-0.8.0-onejar.jar server resources/config/config.yml"]
 
 ARG GROBID_VERSION
 
