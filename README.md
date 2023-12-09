@@ -78,25 +78,25 @@ It is recommended to use the Docker image for running the service. The best Deep
 To use a Docker image via [docker HUB](https://hub.docker.com/r/grobid/software-mentions), pull the image (around 11GB) as follow: 
 
 ```bash
-docker pull grobid/software-mentions:0.8.0-SNAPSHOT
+docker pull grobid/software-mentions:0.8.0
 ```
 
 After pulling or building the Docker image, you can now run the `software-mentions` service as a container:
 
 ```bash
->  docker run --rm --gpus all -it --ulimit core=0 -p 8060:8060 grobid/software-mentions:0.8.0-SNAPSHOT
+>  docker run --rm --gpus all -it --ulimit core=0 -p 8060:8060 grobid/software-mentions:0.8.0
 ```
 
 The build image includes the automatic support of GPU when available on the host machine via the parameter `--gpus all` (with automatic recognition of the CUDA version). The support of GPU is only available on Linux host machine. If no GPU are available on your host machine, just remove the `--gpus all` parameter, but usage of GPU is recommended for best runtime:
 
 ```bash
->  docker run --rm -it --ulimit core=0 -p 8060:8060 grobid/software-mentions:0.8.0-SNAPSHOT
+>  docker run --rm -it --ulimit core=0 -p 8060:8060 grobid/software-mentions:0.8.0
 ```
 
 To specify to use only certain GPUs (see the [nvidia container toolkit user guide](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/user-guide.html#gpu-enumeration) for more details):
 
 ```bash
-> docker run --rm --gpus '"device=1,2"' -it --init --ulimit core=0 -p 8060:8060 grobid/software-mentions:0.8.0-SNAPSHOT
+> docker run --rm --gpus '"device=1,2"' -it --init --ulimit core=0 -p 8060:8060 grobid/software-mentions:0.8.0
 ```
 
 Note that starting for convenience the container with option `--ulimit core=0` avoids having possible core dumped inside the container, which can happen overwise due to the very rare crash of the PDF parsing C++ component. Starting the container with parameter `-it` allows to interact with the docker process, which is of limited use here, except conveniently stopping the docker container with control-c.  
@@ -104,13 +104,13 @@ Note that starting for convenience the container with option `--ulimit core=0` a
 The `software-mentions` service is available at the default host/port `localhost:8060`, but it is possible to map the port at launch time of the container as follow:
 
 ```bash
-> docker run --rm --gpus all -it --init --ulimit core=0 -p 8080:8060 grobid/software-mentions:0.8.0-SNAPSHOT
+> docker run --rm --gpus all -it --init --ulimit core=0 -p 8080:8060 grobid/software-mentions:0.8.0
 ```
 
 In this image, the best deep learning models are used by default. The selection of models can be modified, for example to use faster models or requiring less GPU memory. To modify the configuration without rebuilding the image - for instance rather use the CRF model, it is possible to mount a modified config file at launch as follow: 
 
 ```bash
-> docker run --rm --gpus all -it --init --ulimit core=0 -p 8060:8060 -v /home/lopez/grobid/software-mentions/resources/config/config.yml:/opt/grobid/software-mentions/resources/config/config.yml:ro  grobid/software-mentions:0.8.0-SNAPSHOT
+> docker run --rm --gpus all -it --init --ulimit core=0 -p 8060:8060 -v /home/lopez/grobid/software-mentions/resources/config/config.yml:/opt/grobid/software-mentions/resources/config/config.yml:ro  grobid/software-mentions:0.8.0
 ```
 
 As an alternative, a docker image for the `software-mentions` service can be built with the project Dockerfile to match the current master version. The complete process is as follow: 
@@ -124,7 +124,7 @@ As an alternative, a docker image for the `software-mentions` service can be bui
 - from the GROBID root installation (`grobid/`), launch the docker build:
 
 ```bash
-> docker build -t grobid/software-mentions:0.8.0-SNAPSHOT --build-arg GROBID_VERSION=0.8.0-SNAPSHOT --file Dockerfile.software .
+> docker build -t grobid/software-mentions:0.8.0-SNAPSHOT --build-arg GROBID_VERSION=0.8.0 --file Dockerfile.software .
 ```
 
 Building the Docker image takes several minutes: installing GROBID, software-mentions, a complete Python Deep Learning environment based on [DeLFT](https://github.com/kermitt2/delft) and deep learning models downloaded from the internet (one fine-tuned model with a BERT layer has a size of around 400 MB). The resulting image is thus very large, around 8GB, due to the deep learning resources and models. 
