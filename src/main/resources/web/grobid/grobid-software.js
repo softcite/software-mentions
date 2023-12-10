@@ -26,7 +26,7 @@ var grobid = (function ($) {
             localBase = localBase.replace("index.html", "");
         } 
         if (localBase.endsWith("#")) {
-            localBase = localBase.substring(0,localBase.endsWith("#"));
+            localBase = localBase.substring(0,localBase.length-1);
         } 
         if (localBase.indexOf("?") != -1) {
             // remove possible uri parameters
