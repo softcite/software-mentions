@@ -19,7 +19,8 @@ November 1–5, 2021, QLD, Australia. https://doi.org/10.1145/3459637.3481936
 For more recent evaluations and a description of a use case in production to monitor Open Science in France, see:
 
 ```
-Aricia Bassinet, Laetitia Bracco, Anne L'Hôte, Eric Jeangirard, Patrice Lopez, et al.. Large-scale Machine-Learning analysis of scientific PDF for monitoring the production and the openness of research data and software in France. 2023. ⟨hal-04121339v3⟩
+Aricia Bassinet, Laetitia Bracco, Anne L'Hôte, Eric Jeangirard, Patrice Lopez, et al. 2023. 
+Large-scale Machine-Learning analysis of scientific PDF for monitoring the production and the openness of research data and software in France. ⟨hal-04121339v3⟩ 
 https://hal.science/hal-04121339v3
 ```
 
