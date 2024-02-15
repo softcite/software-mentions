@@ -279,16 +279,7 @@ wrapper {
 ///////////////////////////
 // train and eval ML models
 
-// Run like this: ./gradlew eval_software -PgH=/path/grobid/home
-/*task(trainer, dependsOn: 'classes', type: JavaExec, group: 'training') {
-    mainClass = 'org.grobid.trainer.SoftwareTrainerRunner'
-    classpath = sourceSets.main.runtimeClasspath
-    args '0', 'software', getArg('gH', '../grobid-home'), getArg('b', '0.00001 20 0'), getArg('t', '1')
-//    jvmArgs '-Xms2g', '-Xmx8g'
-}*/
-
-
-// Run like this: ./gradlew train_software -PgH=/path/grobid/home 
+// Run like this: ./gradlew train_software 
 task(train_software, dependsOn: 'classes', type: JavaExec, group: 'training') {
     mainClass = 'org.grobid.trainer.SoftwareTrainer'
     classpath = sourceSets.main.runtimeClasspath
@@ -300,7 +291,7 @@ task(train_software, dependsOn: 'classes', type: JavaExec, group: 'training') {
     systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
 }
 
-// Run like this: ./gradlew train_software_type -PgH=/path/grobid/home 
+// Run like this: ./gradlew train_software_type 
 task(train_software_type, dependsOn: 'classes', type: JavaExec, group: 'training') {
     mainClass = 'org.grobid.trainer.SoftwareTypeTrainer'
     classpath = sourceSets.main.runtimeClasspath
@@ -522,6 +513,23 @@ task(post_process_corpus, dependsOn: 'classes', type: JavaExec, group: 'import')
     }
     systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
 }
+
+////////////////////
+// create pre-annotated training data from PDF (under -PIn=/test_software/in/) with the current models, written under -POut=/test_software/out/ 
+
+// Run like this: ./gradlew create_training -Pin=/test_software/in/ -Pout=/test_software/out/
+task(create_training, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
+    mainClass = 'org.grobid.core.main.batch.SoftwareMain'
+    classpath = sourceSets.main.runtimeClasspath
+    args '-in', getArg('in', ''), '-out', getArg('out', ''), '-exe', 'createTraining'
+    if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
+        jvmArgs '-Xms4g', '-Xmx12g', "--add-opens", "java.base/java.lang=ALL-UNNAMED"
+    } else {
+        jvmArgs '-Xms4g', '-Xmx12g'
+    }
+    systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
+}
+
 
 //////////
 // service

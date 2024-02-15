@@ -901,10 +901,10 @@ See the description of the output directly in the header of the `script/consiste
 
 ## Generation of training data
 
-For generating training data in XML/TEI, based on the current model, from a list of text or PDF files in a input repository, use the following command: 
+For generating training data in XML/TEI in an output repository (given by `-Pout=` parameter), based on the current ML model, from a list of text or PDF files in a input repository (given by `-Pin=` parameter), use the following command: 
 
 ```console
-> java -Xmx4G -jar target/software-mentions/software-mentions-0.7.3-SNAPSHOT-onejar.jar -gH ../grobid-home -dIn ~/test_software/ -dOut ~/test_software/out/ -exe createTraining
+> ./gradlew create_training -Pin=/test_software/in/ -Pout=/test_software/out/
 ```
 
 ## Runtime benchmark

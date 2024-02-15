@@ -1256,9 +1256,17 @@ public class SoftwareParser extends AbstractParser {
                                    String outputDirectory,
                                    int ind) throws IOException {
         try {
+            if (inputDirectory == null || inputDirectory.length() == 0) {
+                throw new GrobidException("Cannot create training data because input directory is invalid: " + inputDirectory);
+            }
+
             File path = new File(inputDirectory);
             if (!path.exists()) {
                 throw new GrobidException("Cannot create training data because input directory can not be accessed: " + inputDirectory);
+            }
+
+            if (outputDirectory == null || outputDirectory.length() == 0) {
+                throw new GrobidException("Cannot create training data because output directory is invalid: " + outputDirectory);
             }
 
             File pathOut = new File(outputDirectory);
