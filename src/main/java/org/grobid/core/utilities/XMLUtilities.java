@@ -92,6 +92,11 @@ public class XMLUtilities {
         return null;
     }
 
+    /**
+     * Get the text under the child nodes of the provided element at first level only
+     * (this is not a recursive text concatenation for all the sub-hierarchy like 
+     * Element.getTextContent()).
+     **/
     public static String getText(Element element) {
         StringBuffer buf = new StringBuffer();
         NodeList list = element.getChildNodes();
@@ -190,7 +195,7 @@ public class XMLUtilities {
                         }
                     }
                 } else {
-                    // get the text recursively
+                    // get the text one level deeper
                     NodeList list2 = node.getChildNodes();
                     for (int j = 0; j < list2.getLength(); j++) {
                         Node node2 = list2.item(j);

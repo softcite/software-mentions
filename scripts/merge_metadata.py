@@ -48,12 +48,28 @@ for root, directories, filenames in os.walk(directory_softcite):
 
             # open corresponding metadata file
             if is_gzipped:
-                metadata_filename = filename.replace(".software.json", ".json.gz")
+                if filename.endswith(".jats.software.json"):
+                    metadata_filename = filename.replace(".jats.software.json", ".json.gz")
+                elif filename.endswith(".latex.software.json"):
+                    metadata_filename = filename.replace(".latex.software.json", ".json.gz")
+                else:
+                    metadata_filename = filename.replace(".software.json", ".json.gz")
                 metadata_root = root.replace(directory_softcite, directory_metadata)
+                if not os.path.exists(os.path.join(metadata_root, metadata_filename)):
+                    print("did not find document metadata file: " + metadata_filename)
+
                 the_metadata_json = gzip.open(os.path.join(metadata_root, metadata_filename)).read()
             else:
-                metadata_filename = filename.replace(".software.json", ".json")
+                if filename.endswith(".jats.software.json"):
+                    metadata_filename = filename.replace(".jats.software.json", ".json")
+                elif filename.endswith(".latex.software.json"):
+                    metadata_filename = filename.replace(".latex.software.json", ".json")
+                else:
+                    metadata_filename = filename.replace(".software.json", ".json") 
                 metadata_root = root.replace(directory_softcite, directory_metadata)
+                if not os.path.exists(os.path.join(metadata_root, metadata_filename)):
+                    print("did not find document metadata file: " + metadata_filename)
+
                 the_metadata_json = open(os.path.join(metadata_root, metadata_filename)).read()
 
             try:
