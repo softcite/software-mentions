@@ -1239,7 +1239,7 @@ public class SoftwareParser extends AbstractParser {
         if (root != null) {
             //System.out.println(XmlBuilderUtils.toXml(root));
             try {
-                FileUtils.writeStringToFile(new File(pathTEI), XmlBuilderUtils.toXml(root));
+                FileUtils.writeStringToFile(new File(pathTEI), XmlBuilderUtils.toPrettyXml(root));
             } catch (IOException e) {
                 throw new GrobidException("Cannot create training data because output file can not be accessed: " + pathTEI);
             }
@@ -2127,7 +2127,10 @@ public class SoftwareParser extends AbstractParser {
 
             //if (component.getLabel() != OTHER) 
             {
-                componentElement.addAttribute(new Attribute("type", component.getLabel().getLabel()));
+                String localLabel = component.getLabel().getLabel().replace("<", "");
+                localLabel = localLabel.replace(">", "");
+
+                componentElement.addAttribute(new Attribute("type", localLabel));
 
                 int startE = component.getOffsetStart();
                 int endE = component.getOffsetEnd();

@@ -521,7 +521,7 @@ task(post_process_corpus, dependsOn: 'classes', type: JavaExec, group: 'import')
 task(create_training, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
     mainClass = 'org.grobid.core.main.batch.SoftwareMain'
     classpath = sourceSets.main.runtimeClasspath
-    args '-in', getArg('in', ''), '-out', getArg('out', ''), '-exe', 'createTraining'
+    args '-dIn', getArg('in', ''), '-dOut', getArg('out', ''), '-exe', 'createTraining'
     if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
         jvmArgs '-Xms4g', '-Xmx12g', "--add-opens", "java.base/java.lang=ALL-UNNAMED"
     } else {
