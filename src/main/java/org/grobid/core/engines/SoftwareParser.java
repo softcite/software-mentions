@@ -2122,26 +2122,28 @@ public class SoftwareParser extends AbstractParser {
         int pos = 0;
 		if ( (components == null) || (components.size() == 0) )
 			p.appendChild(text);
-        for (SoftwareComponent component : components) {
-            Element componentElement = teiElement("rs");
+        else {
+            for (SoftwareComponent component : components) {
+                Element componentElement = teiElement("rs");
 
-            //if (component.getLabel() != OTHER) 
-            {
-                String localLabel = component.getLabel().getLabel().replace("<", "");
-                localLabel = localLabel.replace(">", "");
+                //if (component.getLabel() != OTHER) 
+                {
+                    String localLabel = component.getLabel().getLabel().replace("<", "");
+                    localLabel = localLabel.replace(">", "");
 
-                componentElement.addAttribute(new Attribute("type", localLabel));
+                    componentElement.addAttribute(new Attribute("type", localLabel));
 
-                int startE = component.getOffsetStart();
-                int endE = component.getOffsetEnd();
+                    int startE = component.getOffsetStart();
+                    int endE = component.getOffsetEnd();
 
-				p.appendChild(text.substring(pos, startE));
-                componentElement.appendChild(text.substring(startE, endE));
-                pos = endE;
+    				p.appendChild(text.substring(pos, startE));
+                    componentElement.appendChild(text.substring(startE, endE));
+                    pos = endE;
+                }
+                p.appendChild(componentElement);
             }
-            p.appendChild(componentElement);
+            p.appendChild(text.substring(pos, text.length()));
         }
-        p.appendChild(text.substring(pos, text.length()));
 
         return p;
     }
