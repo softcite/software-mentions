@@ -14,7 +14,7 @@ WORKDIR /opt/grobid
 RUN mkdir -p software-mentions-source grobid-home/models
 COPY src software-mentions-source/src
 COPY settings.gradle software-mentions-source/
-COPY resources/config/config-docker.yml software-mentions-source/resources/config/config.yml
+COPY resources/config/config.yml software-mentions-source/resources/config/config.yml
 COPY resources/models software-mentions-source/resources/models
 COPY resources/lexicon software-mentions-source/resources/lexicon
 COPY build.gradle software-mentions-source/
