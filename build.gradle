@@ -44,6 +44,12 @@ tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 
+def conf = new org.yaml.snakeyaml.Yaml().load(new File("resources/config/config.yml").newInputStream())
+def grobidHome = conf.grobidHome.replace("\$", "").replace('{', "").replace("GROBID_HOME:- ", "").replace("}", "")
+if (grobidHome.startsWith("../")) {
+    grobidHome = "${rootProject.rootDir}/${grobidHome}"
+}
+
 repositories {
     mavenLocal()
     mavenCentral()
@@ -233,9 +239,9 @@ artifacts {
 task copyModels(type: Copy) {
     from "${rootDir}/resources/models/"
     include "**"
-    into "${rootDir}/../grobid-home/models/"
+    into "${grobidHome}/models/"
     doLast { 
-        ant.gunzip(src: "${rootDir}/resources/models/software/model.wapiti.gz", dest: "${rootDir}/../grobid-home/models/software/")
+        ant.gunzip(src: "${rootDir}/resources/models/software/model.wapiti.gz", dest: "${grobidHome}/models/software/")
     }
 }
 
@@ -243,34 +249,34 @@ task installModels {
     doLast {
         download {
             src "https://grobid.s3.amazonaws.com/software-BERT-0.3.2.zip"
-            dest "${rootDir}/../grobid-home/models/"
+            dest "${grobidHome}/models/"
             overwrite false
         }
-        ant.unzip(src: "${rootDir}/../grobid-home/models/software-BERT-0.3.2.zip", dest: "${rootDir}/../grobid-home/models/")
+        ant.unzip(src: "${grobidHome}/models/software-BERT-0.3.2.zip", dest: "${grobidHome}/models/")
         download {
             src "https://grobid.s3.amazonaws.com/context_bert-0.3.2.zip"
-            dest "${rootDir}/../grobid-home/models/"
+            dest "${grobidHome}/models/"
             overwrite false
         }
-        ant.unzip(src: "${rootDir}/../grobid-home/models/context_bert-0.3.2.zip", dest: "${rootDir}/../grobid-home/models/")
+        ant.unzip(src: "${grobidHome}/models/context_bert-0.3.2.zip", dest: "${grobidHome}/models/")
         download {
             src "https://grobid.s3.amazonaws.com/context_bert_used-0.3.2.zip"
-            dest "${rootDir}/../grobid-home/models/"
+            dest "${grobidHome}/models/"
             overwrite false
         }
-        ant.unzip(src: "${rootDir}/../grobid-home/models/context_bert_used-0.3.2.zip", dest: "${rootDir}/../grobid-home/models/")
+        ant.unzip(src: "${grobidHome}/models/context_bert_used-0.3.2.zip", dest: "${grobidHome}/models/")
         download {
             src "https://grobid.s3.amazonaws.com/context_bert_creation-0.3.2.zip"
-            dest "${rootDir}/../grobid-home/models/"
+            dest "${grobidHome}/models/"
             overwrite false
         }
-        ant.unzip(src: "${rootDir}/../grobid-home/models/context_bert_creation-0.3.2.zip", dest: "${rootDir}/../grobid-home/models/")
+        ant.unzip(src: "${grobidHome}/models/context_bert_creation-0.3.2.zip", dest: "${grobidHome}/models/")
         download {
             src "https://grobid.s3.amazonaws.com/context_bert_shared-0.3.2.zip"
-            dest "${rootDir}/../grobid-home/models/"
+            dest "${grobidHome}/models/"
             overwrite false
         }
-        ant.unzip(src: "${rootDir}/../grobid-home/models/context_bert_shared-0.3.2.zip", dest: "${rootDir}/../grobid-home/models/")
+        ant.unzip(src: "${rootDir}/${grobidHome}/models/context_bert_shared-0.3.2.zip", dest: "${grobidHome}/models/")
     }
 }
 
