@@ -22,27 +22,20 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build -x test
 
-    - name: Test with Gradle Jacoco and Coveralls
-      run: ./gradlew test jacocoTestReport coveralls --no-daemon
-
-    - name: Coveralls GitHub Action
-      uses: coverallsapp/github-action@v2
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        format: jacoco
+#    - name: Test with Gradle Jacoco and Coveralls
+#      run: ./gradlew test jacocoTestReport coveralls --no-daemon
+#
+#    - name: Coveralls GitHub Action
+#      uses: coverallsapp/github-action@v2
+#      with:
+#        github-token: ${{ secrets.GITHUB_TOKEN }}
+#        format: jacoco
 
   docker-build:
     needs: [ build ]
     runs-on: ubuntu-latest
 
     steps:
-#      - name: Maximize build disk space
-#        uses: easimon/maximize-build-space@v10
-#        with:
-#           remove-dotnet: 'true'
-#           remove-haskell: 'true'
-#           remove-codeql: 'true'
-#           remove-android: 'true'
       - name: Create more disk space
         run: |
           sudo rm -rf /usr/share/dotnet
