@@ -32,7 +32,8 @@ RUN ./gradlew copyModels installModels  --no-daemon --info --stacktrace \
 
 # Preparing distribution
 WORKDIR /opt/grobid
-RUN unzip -o /opt/grobid/software-mentions-source/build/distributions/software-mentions-0*.zip -d software-mentions_distribution \
+RUN rm /opt/grobid/software-mentions-source/build/distributions/software-mentions-shadow* \
+  && unzip -o /opt/grobid/software-mentions-source/build/distributions/software-mentions-*.zip -d software-mentions_distribution \
   && mv software-mentions_distribution/software-mentions-* software-mentions \
   && rm -rf /opt/grobid/software-mentions-source/build
 
