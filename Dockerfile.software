@@ -63,7 +63,7 @@ RUN rm -rf /opt/grobid/grobid-home/models/*-with_ELMo \
 
 COPY --from=builder /opt/grobid/grobid-home/models ./grobid-home/models
 COPY --from=builder /opt/grobid/software-mentions ./software-mentions/
-COPY --from=builder /opt/grobid/software-mentions-source/resources/config/config.yml ./software-mentions/resources/config/
+COPY --from=builder /opt/grobid/software-mentions-source/resources/config/config-docker.yml ./software-mentions/resources/config/config.yml
 COPY --from=builder /opt/grobid/software-mentions-source/resources/lexicon/ ./software-mentions/resources/lexicon/
 
 COPY --from=builder /opt/grobid/software-mentions /opt/grobid/software-mentions
