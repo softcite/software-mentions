@@ -27,7 +27,7 @@ COPY localLibs software-mentions-source/localLibs
 WORKDIR /opt/grobid/software-mentions-source
 RUN rm -rf /opt/grobid/grobid-home/models/*
 RUN ./gradlew clean assemble -x shadowJar --no-daemon  --stacktrace --info
-RUN ./gradlew installModels  --no-daemon --info --stacktrace \
+RUN ./gradlew copyModels installModels  --no-daemon --info --stacktrace \
     && rm -f /opt/grobid/grobid-home/models/*.zip
 
 # Preparing distribution

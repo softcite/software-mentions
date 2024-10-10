@@ -277,7 +277,7 @@ task installModels {
             dest "${grobidHome}/models/"
             overwrite false
         }
-        ant.unzip(src: "${rootDir}/${grobidHome}/models/context_bert_shared-0.3.2.zip", dest: "${grobidHome}/models/")
+        ant.unzip(src: "${grobidHome}/models/context_bert_shared-0.3.2.zip", dest: "${grobidHome}/models/")
     }
 }
 
