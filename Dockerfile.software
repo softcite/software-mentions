@@ -80,7 +80,7 @@ VOLUME ["/opt/grobid/grobid-home/tmp"]
 
 ARG GROBID_VERSION
 ENV GROBID_VERSION=${GROBID_VERSION:-latest}
-ENV SOFWARE_MENTIONS_OPTS "-Djava.library.path=/opt/grobid/grobid-home/lib/lin-64:/usr/local/lib/python3.8/dist-packages/jep --add-opens java.base/java.lang=ALL-UNNAMED"
+ENV SOFTWARE_MENTIONS_OPTS "-Djava.library.path=/opt/grobid/grobid-home/lib/lin-64:/usr/local/lib/python3.8/dist-packages/jep --add-opens java.base/java.lang=ALL-UNNAMED"
 
 CMD ["./software-mentions/bin/software-mentions", "server", "software-mentions/resources/config/config.yml"]
 
