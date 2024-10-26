@@ -66,7 +66,7 @@ xml:id="PMC4968915-software-1">Matlab</rs> (<rs corresp="#PMC4968915-software-1"
 MA, USA).
 ```
 
-- **named software component:** `@subtype="environment"`, for a named software depending on another software environment mentioned in the mention context
+- **named software component:** `@subtype="component"`, for a named software depending on another software environment mentioned in the mention context
 to run. We always have a software environment expressed in the same mention context, and the dependency of the software component to the software environment is encoded with the `@corresp` pointer to the `xml:id` of the software environment. 
 
 ```xml
@@ -89,7 +89,7 @@ xml:id="PMC5458338-software-4">dprime_simple</rs> (<rs corresp="#PMC5458338-soft
 type="url">https://it.mathworks.com/matlabcentral/fileex change/47711-dprime-simple-m</rs>
 ```
 
-- **implicit software component:** `@subtype="implicit"` for an unnamed software. The software refering expression is a generic term for program, such as program, code, script, macro, package, library, etc. Optionally, if the unnamed software is depending on another software environment to run, the software environment being expressed in the mention context, then the the dependency of the unamed software to the software environment is encoded with the `@corresp` pointer to the `xml:id` of the software environment (similarly as for a software component). 
+- **implicit software:** `@subtype="implicit"` for an unnamed software. The software refering expression is a generic term for program, such as program, code, script, macro, package, library, etc. Optionally, if the unnamed software is depending on another software environment to run, the software environment being expressed in the mention context, then the the dependency of the unamed software to the software environment is encoded with the `@corresp` pointer to the `xml:id` of the software environment (similarly as for a software component). 
 
 ```xml
 We developed a <rs type="language" corresp="#PMC4551074-software-200">Perl</rs> <rs type="software" subtype="implicit" 
