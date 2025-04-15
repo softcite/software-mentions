@@ -1,74 +1,59 @@
 package org.grobid.core.engines;
 
+import nu.xom.Attribute;
+import nu.xom.Element;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 import org.grobid.core.GrobidModels;
 import org.grobid.core.analyzers.SoftwareAnalyzer;
-import org.grobid.core.data.SoftwareComponent;
-import org.grobid.core.data.BiblioComponent;
-import org.grobid.core.data.SoftwareEntity;
-import org.grobid.core.data.SoftwareType;
-import org.grobid.core.data.BiblioItem;
-import org.grobid.core.data.BibDataSet;
+import org.grobid.core.data.*;
 import org.grobid.core.document.Document;
 import org.grobid.core.document.DocumentPiece;
 import org.grobid.core.document.DocumentSource;
 import org.grobid.core.document.TEIFormatter;
 import org.grobid.core.document.xml.XmlBuilderUtils;
 import org.grobid.core.engines.config.GrobidAnalysisConfig;
-import org.grobid.core.engines.label.SoftwareTaggingLabels;
 import org.grobid.core.engines.label.SegmentationLabels;
+import org.grobid.core.engines.label.SoftwareTaggingLabels;
 import org.grobid.core.engines.label.TaggingLabel;
 import org.grobid.core.engines.label.TaggingLabels;
 import org.grobid.core.engines.tagging.GrobidCRFEngine;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.factory.GrobidFactory;
+import org.grobid.core.features.FeatureFactory;
 import org.grobid.core.features.FeaturesVectorSoftware;
 import org.grobid.core.layout.BoundingBox;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.layout.LayoutTokenization;
-import org.grobid.core.lexicon.SoftwareLexicon;
+import org.grobid.core.lexicon.FastMatcher;
 import org.grobid.core.lexicon.Lexicon;
+import org.grobid.core.lexicon.SoftwareLexicon;
 import org.grobid.core.sax.TextChunkSaxHandler;
 import org.grobid.core.tokenization.TaggingTokenCluster;
 import org.grobid.core.tokenization.TaggingTokenClusteror;
 import org.grobid.core.utilities.*;
-import org.grobid.core.utilities.counters.CntManager;
 import org.grobid.core.utilities.counters.impl.CntManagerFactory;
-import org.grobid.core.lexicon.FastMatcher;
-import org.grobid.core.utilities.SoftwareConfiguration;
-import org.grobid.core.features.FeatureFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.xml.sax.InputSource;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-import java.io.*;
+import java.io.File;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.io.StringReader;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import nu.xom.Attribute;
-import nu.xom.Element;
-import nu.xom.Node;
-import nu.xom.Text;
-
-import static org.apache.commons.lang3.StringUtils.*;
-import static org.grobid.core.document.xml.XmlBuilderUtils.teiElement;
-import org.apache.commons.lang3.tuple.Pair;
-import org.xml.sax.InputSource;
-import org.w3c.dom.*;
-import javax.xml.parsers.*;
-import javax.xml.transform.*;
-import javax.xml.transform.dom.*;
-import javax.xml.transform.stream.*;
-import org.w3c.dom.traversal.DocumentTraversal;
-import org.w3c.dom.traversal.NodeFilter;
-import org.w3c.dom.traversal.TreeWalker;
-
 import static java.nio.charset.StandardCharsets.UTF_8;
-
-import org.w3c.dom.ls.*;
+import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.grobid.core.document.xml.XmlBuilderUtils.teiElement;
 
 /**
  * Software mentions extraction.
@@ -2372,7 +2357,7 @@ public class SoftwareParser extends AbstractParser {
     public Pair<List<SoftwareEntity>, List<BibDataSet>> processTEIDocument(org.w3c.dom.Document doc, 
                                                                         boolean disambiguate, 
                                                                         boolean addParagraphContext) { 
-        List<SoftwareEntity> entities = new ArrayList<SoftwareEntity>();
+        List<SoftwareEntity> entities = new ArrayList<>();
 
         List<List<LayoutToken>> selectedLayoutTokenSequences = new ArrayList<>();
         List<List<LayoutToken>> selectedOriginalLayoutTokenSequences = new ArrayList<>();
@@ -2397,13 +2382,13 @@ public class SoftwareParser extends AbstractParser {
             String contentText = UnicodeUtil.normaliseText(contentTextAndRef.getLeft());
             Map<String,Pair<OffsetPosition,String>> refInfos = contentTextAndRef.getRight();
             
-            if (contentText != null && contentText.length()>0) {
+            if (StringUtils.isNotBlank(contentText)) {
                 List<LayoutToken> paragraphTokens = 
                     SoftwareAnalyzer.getInstance().tokenizeWithLayoutToken(contentText);
                 String orginalText = UnicodeUtil.normaliseText(paragraphElement.getTextContent());    
                 List<LayoutToken> originalParagraphTokens = 
                     SoftwareAnalyzer.getInstance().tokenizeWithLayoutToken(orginalText);
-                if (paragraphTokens != null && paragraphTokens.size() > 0) {
+                if (CollectionUtils.isNotEmpty(paragraphTokens)) {
                     // shift the paragraph tokens to the global position
                     for(LayoutToken paragraphToken : paragraphTokens) {
                         paragraphToken.setOffset(paragraphToken.getOffset()+globalPos);
