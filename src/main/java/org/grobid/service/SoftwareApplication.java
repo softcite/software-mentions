@@ -1,40 +1,36 @@
 package org.grobid.service;
 
-import com.google.inject.Module;
-import com.hubspot.dropwizard.guicier.GuiceBundle;
-import io.dropwizard.Application;
+import com.google.inject.AbstractModule;
 import io.dropwizard.assets.AssetsBundle;
+import io.dropwizard.core.Application;
+import io.dropwizard.core.setup.Bootstrap;
+import io.dropwizard.core.setup.Environment;
 import io.dropwizard.forms.MultiPartBundle;
-import io.dropwizard.setup.Bootstrap;
-import io.dropwizard.setup.Environment;
+import jakarta.servlet.DispatcherType;
+import jakarta.servlet.FilterRegistration;
 import org.eclipse.jetty.servlets.CrossOriginFilter;
 import org.eclipse.jetty.servlets.QoSFilter;
 import org.grobid.service.configuration.SoftwareServiceConfiguration;
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
+import org.grobid.service.controller.HealthCheck;
+import ru.vyarus.dropwizard.guice.GuiceBundle;
 
-import javax.servlet.DispatcherType;
-import javax.servlet.FilterRegistration;
-import java.util.Arrays;
 import java.util.EnumSet;
 
 public class SoftwareApplication extends Application<SoftwareServiceConfiguration> {
     private static final String RESOURCES = "/service";
-
-    //private static final Logger LOGGER = LoggerFactory.getLogger(SoftwareApplication.class);
 
     @Override
     public String getName() {
         return "software-mentions";
     }
 
-    private Iterable<? extends Module> getGuiceModules() {
-        return Arrays.asList(new SoftwareServiceModule());
+    private AbstractModule getGuiceModules() {
+        return new SoftwareServiceModule();
     }
 
     @Override
     public void initialize(Bootstrap<SoftwareServiceConfiguration> bootstrap) {
-        GuiceBundle<SoftwareServiceConfiguration> guiceBundle = GuiceBundle.defaultBuilder(SoftwareServiceConfiguration.class)
+        GuiceBundle guiceBundle = GuiceBundle.builder()
                 .modules(getGuiceModules())
                 .build();
         bootstrap.addBundle(guiceBundle);
@@ -45,7 +41,8 @@ public class SoftwareApplication extends Application<SoftwareServiceConfiguratio
 
     @Override
     public void run(SoftwareServiceConfiguration configuration, Environment environment) {
-        //LOGGER.info("Service config={}", configuration);
+        environment.healthChecks().register("health-check", new HealthCheck(configuration));
+
         environment.jersey().setUrlPattern(RESOURCES + "/*");
 
         String allowedOrigins = configuration.getCorsAllowedOrigins();
