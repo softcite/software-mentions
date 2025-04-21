@@ -40,7 +40,7 @@ public class Downloader {
             IOUtils.closeQuietly(httpclient);
         }
     }
-    
+
     static class FileDownloadResponseHandler implements ResponseHandler<File> {
 
         private final File target;
@@ -55,22 +55,25 @@ public class Downloader {
             FileUtils.copyInputStreamToFile(source, this.target);
             return this.target;
         }
-        
+
     }
-    
+
     private static class StreamGobbler implements Runnable {
         private InputStream inputStream;
         private Consumer<String> consumer;
-     
+
         public StreamGobbler(InputStream inputStream, Consumer<String> consumer) {
             this.inputStream = inputStream;
             this.consumer = consumer;
         }
-     
+
         @Override
         public void run() {
-            new BufferedReader(new InputStreamReader(inputStream)).lines()
-              .forEach(consumer);
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+                reader.lines().forEach(consumer);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
