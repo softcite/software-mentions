@@ -246,9 +246,7 @@ public class SoftwareExtendedEval extends SoftwareTrainer {
 
     public ModelStats evaluateStandard(String path, Function<List<String>, String> taggerFunction) {
         String theResult = null;
-        try {
-            final BufferedReader bufReader = new BufferedReader(new InputStreamReader(new FileInputStream(path), StandardCharsets.UTF_8));
-
+        try (BufferedReader bufReader = new BufferedReader(new InputStreamReader(new FileInputStream(path), StandardCharsets.UTF_8))) {
             String line = null;
             List<String> instance = new ArrayList<>();
             while ((line = bufReader.readLine()) != null) {
@@ -257,7 +255,6 @@ public class SoftwareExtendedEval extends SoftwareTrainer {
             long time = System.currentTimeMillis();
             theResult = taggerFunction.apply(instance);
             StringBuilder resultBuilder = new StringBuilder();
-            bufReader.close();
             System.out.println("Labeling took: " + (System.currentTimeMillis() - time) + " ms");
 
             SoftwareParser softwareParser = SoftwareParser.getInstance(this.conf);
@@ -548,7 +545,7 @@ public class SoftwareExtendedEval extends SoftwareTrainer {
 
             GrobidHomeFinder grobidHomeFinder = new GrobidHomeFinder(Arrays.asList(pGrobidHome));
             GrobidProperties.getInstance(grobidHomeFinder);
-    
+
             System.out.println(">>>>>>>> GROBID_HOME="+GrobidProperties.get_GROBID_HOME_PATH());
         } catch (final Exception exp) {
             System.err.println("GROBID software initialisation failed: " + exp);

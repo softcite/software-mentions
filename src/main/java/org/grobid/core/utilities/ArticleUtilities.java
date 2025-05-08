@@ -114,7 +114,7 @@ public class ArticleUtilities {
 
         return null;
     }
-    
+
     public File getPDFDoc(String identifier) {
         return getPDFDoc(identifier, null);
     }
@@ -156,13 +156,13 @@ public class ArticleUtilities {
         System.out.println("Response Code : " + 
                        response.getStatusLine().getStatusCode());
 
-        BufferedReader rd = new BufferedReader(
-                       new InputStreamReader(response.getEntity().getContent()));
-
         StringBuffer result = new StringBuffer();
-        String line = "";
-        while ((line = rd.readLine()) != null) {
-            result.append(line);
+        try (BufferedReader rd = new BufferedReader(
+                       new InputStreamReader(response.getEntity().getContent()))) {
+            String line = "";
+            while ((line = rd.readLine()) != null) {
+                result.append(line);
+            }
         }
         String json = result.toString();
         //System.out.println(result.toString());
@@ -237,12 +237,12 @@ public class ArticleUtilities {
         try {
             Process process = processBuilder.start();
             StringBuilder output = new StringBuilder();
-            BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(process.getInputStream()));
-
-            String line;
-            while ((line = reader.readLine()) != null) {
-                output.append(line + "\n");
+            try (BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(process.getInputStream()))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    output.append(line + "\n");
+                }
             }
 
             int exitVal = process.waitFor();
