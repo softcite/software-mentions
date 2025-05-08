@@ -311,7 +311,8 @@ task installModels(dependsOn: [copyModels, downloadModelsGit]){
             "context_creation_bert",
             "context_shared_bert",
             "context_used_bert",
-            "software-BERT"
+            "software-BERT",
+            "software-type-BERT"
         ).each { String subDirName ->
             var subDir = new File(sourceDir, subDirName)
             if (subDir.isDirectory()) {
