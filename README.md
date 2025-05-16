@@ -390,8 +390,8 @@ The service check `/service/isalive` will return true/false whether the service 
 
 ### Service admin and usage information
 
-The service provides also an admin console, reachable at <http://yourhost:8071> where some additional checks like ping, metrics, hearthbeat are available.
-We recommend, in particular to have a look at the metrics (using the [Metric library](https://metrics.dropwizard.io/3.1.0/getting-started/)) which are providing the rate of execution as well as the throughput of each entry point.
+The service provides also an admin console, reachable at <http://yourhost:8071> where some additional checks like ping, metrics, hearth beat are available.
+We recommend, in particular, having a look at the metrics (using the [Metric library](https://metrics.dropwizard.io/3.1.0/getting-started/)) which are providing the rate of execution as well as the throughput of each entry point.
 
 ## Configuration
 
@@ -414,7 +414,7 @@ entityFishingHost: localhost
 entityFishingPort: 8090
 ```
 
-To process XML files following a variety pf publisher native formats, you need to install [Pub2TEI](https://github.com/kermitt2/Pub2TEI) and indicate its installation path in the configuration file:
+To process XML files following a variety pf publisher native format, you need to install [Pub2TEI](https://github.com/kermitt2/Pub2TEI) and indicate its installation path in the configuration file:
 
 ```yaml
 # path to Pub2TEI repository as available at https://github.com/kermitt2/Pub2TEI
@@ -471,9 +471,9 @@ The possible values for the Deep Learning architectures (supported by DeLFT) are
 
 - for __BiLSTM-CRF_FEATURES__: `BidLSTM_CRF_FEATURES`
 
-- for transformer-based architecture: `BERT` (with then any transformers variant indicated in the field `transformer`, including for example RoBERTa models)
+- for transformer-based architecture: `BERT` (with then any transformers variant indicated in the field `transformer`, including, for example, RoBERTa models)
 
-- for transformer-based architecturewith CRF activation layer: `BERT_CRF`
+- for transformer-based architecture with CRF activation layer: `BERT_CRF`
 
 For __BiLSTM-CRF__ you need to further specify the embeddings to be used
 
@@ -483,7 +483,7 @@ For __BiLSTM-CRF__ you need to further specify the embeddings to be used
     embeddings_name: glove-840B
 ```
 
-- for using a transformer-based architecture, the name of the pre-trained transformer model as available according to HuggingFace Hub must be indicated:
+- for using a transformer-based architecture, the name of the pre-trained transformer model as available according to the HuggingFace hub must be indicated:
 
 ```yaml
     transformer: "allenai/scibert_scivocab_cased"
@@ -495,7 +495,7 @@ DeLFT sequence labeling models are described [here](https://delft.readthedocs.io
 
 - to select the **text classification algorithm** to be used for predicting the role of the mentioned software (see [here](https://github.com/ourresearch/software-mentions#software-mention-context-characterization) for explanations), the config parameters are also set under the corresponding models:
 
-For a transformer-base architecture using LinkBERT base as pretrained model (recommended): 
+For a transformer-base architecture using LinkBERT base as a pretrained model (recommended): 
 
 ```yaml
  - name: "software_context_used"
@@ -530,7 +530,7 @@ DeLFT text classification models are described [here](https://delft.readthedocs.
 
 ## Benchmarking of the sequence labeling task
 
-The following sequence labelling algorithms have been benchmarked:
+The following sequence labeling algorithms have been benchmarked:
 
 -    __CRF__: Conditional Random Fields with custom feature engineering 
 
@@ -542,9 +542,9 @@ The following sequence labelling algorithms have been benchmarked:
 
 -    __BiLSTM-CRF+ELMo+features__: Bidirectional LSTM-CRF with Gloves static embeddings, ELMo dynamic embeddings and including a feature channel, the input features are the same as for the CRF model, excluding word forms
 
--    __bert-base-en+CRF__: fine tuned standard BERT base model with CRF activation layer, pre-trained on general English text
+-    __bert-base-en+CRF__: fine-tuned standard BERT base model with CRF activation layer, pre-trained on a general English text
 
--    __SciBERT+CRF__: fine tuned BERT base model with CRF activation layer, pre-trained on scientific text 
+-    __SciBERT+CRF__: fine-tuned BERT base model with CRF activation layer, pre-trained on a scientific text 
 
 The CRF implementation is based on a custom fork of [Wapiti](https://github.com/kermitt2/wapiti).
 The other algorithms rely on the Deep Learning library [DeLFT](https://github.com/kermitt2/delft).
@@ -555,9 +555,9 @@ All are natively integrated in the JVM to provide state-of-the-art performance b
 
 The reference evaluation is realized against a stable holdout set corresponding to 20% of all the documents of the Softcite dataset (994 articles). The remaining articles (3,977 articles) are used for training. 
 
-The holdout set reproduces the overall distribution of documents with annotation (29.0% of the documents have at least one annotation), the distribution between Biomedicine and Economics fields, and we used a stratified sampling to reproduce the overall distribution of mentions per document (Python script under `scripts/createHoldoutSet.py`). The holdout set in TEI XML format is available under `resources/dataset/software/evaluation/softcite_corpus-full.holdout-complete.tei.xml`. For evaluating portability, we also provides the subset corresponding to the holdout set with PMC files only (biomedicine) and econ files only (Economics). 
+The holdout set reproduces the overall distribution of documents with annotation (29.0% of the documents have at least one annotation), the distribution between Biomedicine and Economics fields. We used a stratified sampling to reproduce the overall distribution of mentions per document (Python script under `scripts/createHoldoutSet.py`). The holdout set in TEI XML format is available under `resources/dataset/software/evaluation/softcite_corpus-full.holdout-complete.tei.xml`. For evaluating portability, we also provides the subset corresponding to the holdout set with PMC files only (biomedicine) and econ files only (Economics). 
 
-Traditional evaluation using 10-fold cross-validation cannot be considered as reliable in this context, because the distribution of annotations in the training data is modified with undersampling methods to address the sparsity of software mentions in scientific literature (Class Imbalance Problem). Evaluation using 10-fold cross-validation will significantly over-estimate the performance as compared to a realistic random distribution. 
+Traditional evaluation using 10-fold cross-validation cannot be considered as reliable in this context. The distribution of annotations in the training data is modified with undersampling methods to address the sparsity of software mentions in scientific literature (Class Imbalance Problem). Evaluation using 10-fold cross-validation will significantly overestimate the performance as compared to a realistic random distribution. 
 
 The training data is built from two sources: 
 
