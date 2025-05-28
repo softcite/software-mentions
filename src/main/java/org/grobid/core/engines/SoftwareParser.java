@@ -27,6 +27,7 @@ import org.grobid.core.features.FeaturesVectorSoftware;
 import org.grobid.core.layout.BoundingBox;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.layout.LayoutTokenization;
+import org.grobid.core.layout.PDFAnnotation;
 import org.grobid.core.lexicon.FastMatcher;
 import org.grobid.core.lexicon.Lexicon;
 import org.grobid.core.lexicon.SoftwareLexicon;
@@ -50,6 +51,7 @@ import java.io.StringReader;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -364,7 +366,7 @@ public class SoftwareParser extends AbstractParser {
 
             // actual processing of the selected sequences which have been delayed to be processed in groups and
             // take advantage of deep learning batch
-            processLayoutTokenSequenceMultiple(selectedLayoutTokenSequences, entities, disambiguate, addParagraphContext, true, false);
+            processLayoutTokenSequenceMultiple(selectedLayoutTokenSequences, entities, disambiguate, addParagraphContext, true, false, doc.getPDFAnnotations());
 
             // propagate the disambiguated entities to the non-disambiguated entities corresponding to the same software name
             for(SoftwareEntity entity1 : entities) {
@@ -674,41 +676,69 @@ public class SoftwareParser extends AbstractParser {
     /**
      * Process with the software model a single arbitrary sequence of LayoutToken objects
      */ 
-    private List<SoftwareEntity> processLayoutTokenSequence(List<LayoutToken> layoutTokens, 
-                                                            List<SoftwareEntity> entities,
-                                                            boolean disambiguate,
-                                                            boolean addParagraphContext,
-                                                            boolean fromPDF,
-                                                            boolean fromXML) {
+    private List<SoftwareEntity> processLayoutTokenSequence(
+        List<LayoutToken> layoutTokens,
+            List<SoftwareEntity> entities,
+            boolean disambiguate,
+            boolean addParagraphContext,
+            boolean fromPDF,
+            boolean fromXML,
+            List<PDFAnnotation> pdfAnnotations
+    ) {
         List<LayoutTokenization> layoutTokenizations = new ArrayList<LayoutTokenization>();
         layoutTokenizations.add(new LayoutTokenization(layoutTokens));
-        return processLayoutTokenSequences(layoutTokenizations, entities, disambiguate, addParagraphContext, fromPDF, fromXML);
+        return processLayoutTokenSequences(layoutTokenizations, entities, disambiguate, addParagraphContext, fromPDF, fromXML, pdfAnnotations);
     }
 
     /**
      * Process with the software model a single arbitrary sequence of LayoutToken objects
-     */ 
-    private List<SoftwareEntity> processLayoutTokenSequenceMultiple(List<List<LayoutToken>> layoutTokenList, 
-                                                            List<SoftwareEntity> entities,
-                                                            boolean disambiguate, 
-                                                            boolean addParagraphContext,
-                                                            boolean fromPDF,
-                                                            boolean fromXML) {
+     */
+    private List<SoftwareEntity> processLayoutTokenSequenceMultiple(
+        List<List<LayoutToken>> layoutTokenList,
+        List<SoftwareEntity> entities,
+        boolean disambiguate,
+        boolean addParagraphContext,
+        boolean fromPDF,
+        boolean fromXML) {
+
+        return processLayoutTokenSequenceMultiple(
+            layoutTokenList,
+            entities,
+            disambiguate,
+            addParagraphContext,
+            fromPDF,
+            fromXML,
+            null
+        );
+    }
+
+    private List<SoftwareEntity> processLayoutTokenSequenceMultiple(
+        List<List<LayoutToken>> layoutTokenList,
+        List<SoftwareEntity> entities,
+        boolean disambiguate,
+        boolean addParagraphContext,
+        boolean fromPDF,
+        boolean fromXML,
+        List<PDFAnnotation> pdfAnnotations
+    ) {
         List<LayoutTokenization> layoutTokenizations = new ArrayList<LayoutTokenization>();
         for(List<LayoutToken> layoutTokens : layoutTokenList)
             layoutTokenizations.add(new LayoutTokenization(layoutTokens));
-        return processLayoutTokenSequences(layoutTokenizations, entities, disambiguate, addParagraphContext, fromPDF, fromXML);
+        return processLayoutTokenSequences(layoutTokenizations, entities, disambiguate, addParagraphContext, fromPDF, fromXML, pdfAnnotations);
     }
 
     /**
      * Process with the software model a set of arbitrary sequence of LayoutTokenization
      */ 
-    private List<SoftwareEntity> processLayoutTokenSequences(List<LayoutTokenization> layoutTokenizations, 
-                                                  List<SoftwareEntity> entities, 
-                                                  boolean disambiguate,
-                                                  boolean addParagraphContext,
-                                                  boolean fromPDF,
-                                                  boolean fromXML) {
+    private List<SoftwareEntity> processLayoutTokenSequences(
+        List<LayoutTokenization> layoutTokenizations,
+        List<SoftwareEntity> entities,
+        boolean disambiguate,
+        boolean addParagraphContext,
+        boolean fromPDF,
+        boolean fromXML,
+        List<PDFAnnotation> pdfAnnotations
+    ) {
         StringBuilder allRess = new StringBuilder();
         for(LayoutTokenization layoutTokenization : layoutTokenizations) {
             List<LayoutToken> layoutTokens = layoutTokenization.getTokenization();
@@ -719,7 +749,9 @@ public class SoftwareParser extends AbstractParser {
 
             // positions for lexical match
             List<OffsetPosition> softwareTokenPositions = softwareLexicon.tokenPositionsSoftwareNames(layoutTokens);
-            List<OffsetPosition> urlPositions = Lexicon.getInstance().tokenPositionsUrlPattern(layoutTokens);
+            List<OffsetPosition> urlPositions = Lexicon.tokenPositionUrlPatternWithPdfAnnotations(layoutTokens, pdfAnnotations).stream()
+                .map(Pair::getLeft)
+                .collect(Collectors.toList());
 
             // string representation of the feature matrix for sequence labeling lib
             String ress = addFeatures(layoutTokens, softwareTokenPositions, urlPositions);
@@ -2408,7 +2440,7 @@ public class SoftwareParser extends AbstractParser {
             }
         }
 
-        processLayoutTokenSequenceMultiple(selectedLayoutTokenSequences, entities, disambiguate, addParagraphContext, false, true);
+        entities = processLayoutTokenSequenceMultiple(selectedLayoutTokenSequences, entities, disambiguate, addParagraphContext, false, true);
         selectedLayoutTokenSequences = selectedOriginalLayoutTokenSequences;
 
         // filter out components outside context, restore original tokenization  
