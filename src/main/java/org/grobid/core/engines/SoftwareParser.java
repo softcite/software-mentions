@@ -111,7 +111,7 @@ public class SoftwareParser extends AbstractParser {
             List<OffsetPosition> softwareTokenPositions = softwareLexicon.tokenPositionsSoftwareNames(tokensSentence);
             List<OffsetPosition> urlPositions = Lexicon.getInstance().tokenPositionsUrlPattern(tokensSentence);
             String ress = addFeatures(tokensSentence, softwareTokenPositions, urlPositions);
-            ressList.add(ress);
+            ressList.add(ress + "\n");
         }
         String res;
         try {
