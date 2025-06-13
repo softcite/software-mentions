@@ -320,7 +320,7 @@ task downloadModelsGit {
         } else {
             def grgit = Grgit.clone(
                 dir: "${grobidHome}/models/softcite",
-                uri: "https://huggingface.co/sciencialab/software-mentions-models",
+                uri: "https://huggingface.co/SoFairOA/software-mentions-models",
                 depth: 1
             )
         }
@@ -339,7 +339,8 @@ task installModels(dependsOn: [copyModels, downloadModelsGit]){
             "context_shared_bert",
             "context_used_bert",
             "software-BERT",
-            "software-type-BERT"
+            "software-BERT_CRF",
+            "software-type-BERT_CRF"
         ).each { String subDirName ->
             var subDir = new File(sourceDir, subDirName)
             if (subDir.isDirectory()) {
