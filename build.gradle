@@ -320,7 +320,7 @@ task downloadModelsGit {
         } else {
             def grgit = Grgit.clone(
                 dir: "${grobidHome}/models/softcite",
-                uri: "https://huggingface.co/SoFairOA/software-mentions-models",
+                uri: "https://huggingface.co/SoFairOA/software-mentions-models-experiments",
                 depth: 1
             )
         }
