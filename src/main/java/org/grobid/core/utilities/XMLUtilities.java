@@ -111,13 +111,13 @@ public class XMLUtilities {
         return found ? buf.toString() : null;
     }
 
-    public static BiblioItem parseTEIBiblioItem(org.w3c.dom.Element biblStructElement) {
+    public static BiblioItem parseTEIBiblioItem(org.w3c.dom.Document doc, org.w3c.dom.Element biblStructElement) {
         BiblStructSaxHandler handler = new BiblStructSaxHandler();
         String teiXML = null;
         try {
             SAXParserFactory spf = SAXParserFactory.newInstance();
             SAXParser p = spf.newSAXParser();
-            teiXML = serialize(null, biblStructElement);
+            teiXML = serialize(doc, biblStructElement);
             p.parse(new InputSource(new StringReader(teiXML)), handler);
         } catch(Exception e) {
             if (teiXML != null)
