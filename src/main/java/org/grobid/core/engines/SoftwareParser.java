@@ -2561,6 +2561,9 @@ public class SoftwareParser extends AbstractParser {
             }
         }
 
+        logger.warn("Number of sequences too large for this model: "
+            + selectedLayoutTokenSequences.stream().filter(s -> s.size() > 512).count());
+
         processLayoutTokenSequenceMultiple(selectedLayoutTokenSequences, entities, disambiguate, addParagraphContext, false, true);
         selectedLayoutTokenSequences = selectedOriginalLayoutTokenSequences;
 
@@ -2721,7 +2724,7 @@ public class SoftwareParser extends AbstractParser {
                     continue;
             }*/
 
-            BiblioItem biblio = XMLUtilities.parseTEIBiblioItem(biblStructElement);
+            BiblioItem biblio = XMLUtilities.parseTEIBiblioItem(doc, biblStructElement);
 
             BibDataSet bds = new BibDataSet();
             bds.setResBib(biblio);
