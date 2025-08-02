@@ -56,7 +56,7 @@ public class XMLUtilitiesTest {
                     .parse(new InputSource(new ByteArrayInputStream(testString.getBytes("utf-8"))));
 
             org.w3c.dom.Element biblStructElement = document.getDocumentElement();
-            BiblioItem biblio = XMLUtilities.parseTEIBiblioItem(biblStructElement);
+            BiblioItem biblio = XMLUtilities.parseTEIBiblioItem(document, biblStructElement);
 
             //System.out.println(biblio.toTEI(0));
         } catch(Exception e) {
@@ -73,7 +73,7 @@ public class XMLUtilitiesTest {
                         .parse(new InputSource(new ByteArrayInputStream(testString.getBytes("utf-8"))));
 
             org.w3c.dom.Element biblStructElement = document.getDocumentElement();
-            BiblioItem biblio = XMLUtilities.parseTEIBiblioItem(biblStructElement);
+            BiblioItem biblio = XMLUtilities.parseTEIBiblioItem(document, biblStructElement);
 
             //System.out.println(biblio.toTEI(0));
         } catch(Exception e) {
@@ -90,7 +90,7 @@ public class XMLUtilitiesTest {
                         .parse(new InputSource(new ByteArrayInputStream(testString.getBytes("utf-8"))));
 
             org.w3c.dom.Element biblStructElement = document.getDocumentElement();
-            BiblioItem biblio = XMLUtilities.parseTEIBiblioItem(biblStructElement);
+            BiblioItem biblio = XMLUtilities.parseTEIBiblioItem(document, biblStructElement);
 
             //System.out.println(biblio.toTEI(0));
         } catch(Exception e) {
@@ -132,7 +132,7 @@ public class XMLUtilitiesTest {
                         .parse(new InputSource(new ByteArrayInputStream(testString.getBytes("utf-8"))));
 
             org.w3c.dom.Element biblStructElement = document.getDocumentElement();
-            BiblioItem biblio = XMLUtilities.parseTEIBiblioItem(biblStructElement);
+            BiblioItem biblio = XMLUtilities.parseTEIBiblioItem(document, biblStructElement);
 
             System.out.println(biblio.toTEI(0));
         } catch(Exception e) {
@@ -174,7 +174,7 @@ public class XMLUtilitiesTest {
                         .parse(new InputSource(new ByteArrayInputStream(testString.getBytes("utf-8"))));
 
             org.w3c.dom.Element biblStructElement = document.getDocumentElement();
-            BiblioItem biblio = XMLUtilities.parseTEIBiblioItem(biblStructElement);
+            BiblioItem biblio = XMLUtilities.parseTEIBiblioItem(document, biblStructElement);
 
             System.out.println(biblio.toTEI(0));
         } catch(Exception e) {
