@@ -6,7 +6,10 @@ buildscript {
         flatDir {
             dirs 'localLibs'
         }
-        maven { url "https://grobid.s3.eu-west-1.amazonaws.com/repo/" }
+        maven {
+            name = 'ajoberstar-backup'
+            url = 'https://ajoberstar.org/bintray-backup/'
+        }
     }
     dependencies {
         classpath 'gradle.plugin.org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.12.0'
@@ -17,8 +20,10 @@ buildscript {
 }
 
 plugins {
-    id 'com.github.johnrengelman.shadow' version '7.0.0'
-    id "de.undercouch.download" version "4.1.1"
+    id 'com.github.johnrengelman.shadow' version '7.1.0'
+    id 'org.ajoberstar.grgit' version '5.3.0' apply false
+    id 'distribution'
+    id 'application'
 }
 
 apply plugin: 'jacoco'
@@ -54,10 +59,16 @@ if (grobidHome.startsWith("../")) {
 repositories {
     mavenLocal()
     mavenCentral()
-    maven { url "https://grobid.s3.eu-west-1.amazonaws.com/repo/" }
     maven {
-        url new File(rootProject.rootDir, "lib")
+        url new File(rootProject.rootDir, "localLibs")
     }
+    maven {
+        name = 'ajoberstar-backup'
+        url = 'https://ajoberstar.org/bintray-backup/'
+    }
+//    flatDir {
+//        dirs 'localLibs'
+//    }
 }
 
 ext {
@@ -70,7 +81,7 @@ dependencies {
 
     // packaging local libs inside output jar
     //implementation fileTree(dir: new File(rootProject.rootDir, 'lib'), include: localLibs)
-    
+
     implementation group: 'net.arnx', name: 'jsonic', version: '1.3.10'
     //compile group: 'org.dkpro.statistics', name: 'dkpro-statistics-agreement', version: '2.2.0-SNAPSHOT'
     implementation "me.tongfei:progressbar:0.9.0"
@@ -80,11 +91,11 @@ dependencies {
 
     //Apache commons
     implementation group: 'commons-pool', name: 'commons-pool', version: '1.6'
-    implementation group: 'commons-io', name: 'commons-io', version: '2.5'
-    implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.3'
+    implementation group: 'commons-io', name: 'commons-io', version: '2.9.0'
+    implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.14'
     implementation group: 'org.apache.httpcomponents', name: 'httpmime', version: '4.5.3'
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.6'
-    implementation group: 'org.apache.commons', name: 'commons-collections4', version: '4.1'
+    implementation group: 'org.apache.commons', name: 'commons-collections4', version: '4.4'
     implementation group: 'org.apache.commons', name: 'commons-csv', version: '1.5'
 
     //Dropwizard
@@ -122,10 +133,10 @@ dependencies {
     implementation group: 'org.semanticweb.yars', name: 'nxparser-parsers', version: '2.3.3'
 
     //Grobid
-    implementation (group: 'org.grobid', name: 'grobid-core', version: '0.8.1') {
+    implementation(group: 'org.grobid', name: 'grobid-core', version: '0.8.1') {
         exclude group: 'org.slf4j', module: "slf4j-log4j12"
     }
-    implementation (group: 'org.grobid', name: 'grobid-trainer', version: '0.8.1') {
+    implementation(group: 'org.grobid', name: 'grobid-trainer', version: '0.8.1') {
         exclude group: 'org.slf4j', module: "slf4j-log4j12"
     }
 
@@ -134,26 +145,45 @@ dependencies {
     testImplementation group: 'org.hamcrest', name: 'hamcrest-all', version: '1.3'
 }
 
-configurations.all { 
+configurations.all {
     resolutionStrategy {
         force 'xml-apis:xml-apis:1.4.01'
     }
-    
+
     exclude group: 'org.slf4j', module: "slf4j-log4j12"
 }
 
-def libraries = ""
-if (Os.isFamily(Os.FAMILY_MAC)) {
-    if (Os.OS_ARCH.equals("aarch64")) {
-        libraries = "${file("../grobid-home/lib/mac_arm-64").absolutePath}"    
+def getJavaLibraryPath = {
+    def jepLocalLibraries = ""
+    if (Os.isFamily(Os.FAMILY_MAC)) {
+        if (Os.OS_ARCH.equals("aarch64")) {
+            jepLocalLibraries = "${file("${grobidHome}/lib/mac_arm-64").absolutePath}"
+        } else {
+            jepLocalLibraries = "${file("${grobidHome}/lib/mac-64").absolutePath}"
+        }
+    } else if (Os.isFamily(Os.FAMILY_UNIX)) {
+        jepLocalLibraries = "${grobidHome}/lib/lin-64/jep:${grobidHome}/lib/lin-64"
     } else {
-        libraries = "${file("../grobid-home/lib/mac-64").absolutePath}"
+        throw new RuntimeException("Unsupported platform!")
     }
-} else if (Os.isFamily(Os.FAMILY_UNIX)) {
-    libraries = "${file("../grobid-home/lib/lin-64/jep").absolutePath}:" +
-        "${file("../grobid-home/lib/lin-64").absolutePath}:"
-} else  {
-    throw new RuntimeException("Unsupported platform!")
+
+    def javaLibraryPath = "${System.getProperty('java.library.path')}:${jepLocalLibraries}"
+
+    def envPrefix = ""
+    if (System.env.CONDA_PREFIX) {
+        envPrefix = "${System.env.CONDA_PREFIX}"
+    } else if (System.env.VIRTUAL_ENV) {
+        envPrefix = "${System.env.VIRTUAL_ENV}"
+    }
+
+    if (envPrefix) {
+        def envLibs = "${envPrefix}/lib"
+        def pythonDirectory = file(envLibs).listFiles({ it.toString().contains("/lib/python") } as FileFilter)?.first()
+        def pythonVersion = (pythonDirectory =~ /python([0-9]\.[0-9]+)/)[0][1]
+
+        javaLibraryPath += ":${envLibs}:${envLibs}/python${pythonVersion}/site-packages/jep"
+    }
+    return javaLibraryPath
 }
 
 test {
@@ -161,10 +191,10 @@ test {
     exclude '**/**IntegrationTest**'
 
     if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
-        jvmArgs "--add-opens", "java.base/java.util.stream=ALL-UNNAMED", 
-        "--add-opens", "java.base/java.io=ALL-UNNAMED"
+        jvmArgs "--add-opens", "java.base/java.util.stream=ALL-UNNAMED",
+            "--add-opens", "java.base/java.io=ALL-UNNAMED"
     }
-    systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
+    systemProperty "java.library.path", "${System.getProperty('java.library.path')}:" + getJavaLibraryPath()
 }
 
 // return the default value if the property has not been specified in command line
@@ -232,6 +262,11 @@ jar {
     enabled true
 }
 
+distZip.enabled = true
+distTar.enabled = false
+shadowDistZip.enabled = false
+shadowDistTar.enabled = false
+
 artifacts {
     archives jar
     archives shadowJar
@@ -241,43 +276,54 @@ task copyModels(type: Copy) {
     from "${rootDir}/resources/models/"
     include "**"
     into "${grobidHome}/models/"
-    doLast { 
+    doLast {
         ant.gunzip(src: "${rootDir}/resources/models/software/model.wapiti.gz", dest: "${grobidHome}/models/software/")
     }
 }
 
-task installModels {
+import org.ajoberstar.grgit.Grgit
+
+task downloadModelsGit {
     doLast {
-        download {
-            src "https://grobid.s3.amazonaws.com/software-BERT-0.3.2.zip"
-            dest "${grobidHome}/models/"
-            overwrite false
+        if (new File("${grobidHome}/models/softcite").exists()) {
+            def grgit = Grgit.open(
+                dir: "${grobidHome}/models/softcite",
+            )
+            grgit.pull()
+        } else {
+            def grgit = Grgit.clone(
+                dir: "${grobidHome}/models/softcite",
+                uri: "https://huggingface.co/sciencialab/software-mentions-models",
+                depth: 1
+            )
         }
-        ant.unzip(src: "${grobidHome}/models/software-BERT-0.3.2.zip", dest: "${grobidHome}/models/")
-        download {
-            src "https://grobid.s3.amazonaws.com/context_bert-0.3.2.zip"
-            dest "${grobidHome}/models/"
-            overwrite false
+
+    }
+}
+
+task installModels(dependsOn: [copyModels, downloadModelsGit]){
+    doLast {
+        def sourceDir = file("${grobidHome}/models/softcite")
+        def destDir = file("${grobidHome}/models/")
+
+        Arrays.asList(
+            "context_bert",
+            "context_creation_bert",
+            "context_shared_bert",
+            "context_used_bert",
+            "software-BERT",
+            "software-type-BERT"
+        ).each { String subDirName ->
+            var subDir = new File(sourceDir, subDirName)
+            if (subDir.isDirectory()) {
+                copy {
+                    from subDir
+                    into new File(destDir, subDirName)
+                }
+            }
         }
-        ant.unzip(src: "${grobidHome}/models/context_bert-0.3.2.zip", dest: "${grobidHome}/models/")
-        download {
-            src "https://grobid.s3.amazonaws.com/context_bert_used-0.3.2.zip"
-            dest "${grobidHome}/models/"
-            overwrite false
-        }
-        ant.unzip(src: "${grobidHome}/models/context_bert_used-0.3.2.zip", dest: "${grobidHome}/models/")
-        download {
-            src "https://grobid.s3.amazonaws.com/context_bert_creation-0.3.2.zip"
-            dest "${grobidHome}/models/"
-            overwrite false
-        }
-        ant.unzip(src: "${grobidHome}/models/context_bert_creation-0.3.2.zip", dest: "${grobidHome}/models/")
-        download {
-            src "https://grobid.s3.amazonaws.com/context_bert_shared-0.3.2.zip"
-            dest "${grobidHome}/models/"
-            overwrite false
-        }
-        ant.unzip(src: "${grobidHome}/models/context_bert_shared-0.3.2.zip", dest: "${grobidHome}/models/")
+
+        delete files("${sourceDir}")
     }
 }
 
@@ -299,7 +345,7 @@ task(train_software, dependsOn: 'classes', type: JavaExec, group: 'training') {
     } else {
         jvmArgs '-Xmx3072m'
     }
-    systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
+    systemProperty "java.library.path", "${System.getProperty('java.library.path')}:" + getJavaLibraryPath()
 }
 
 // Run like this: ./gradlew train_software_type 
@@ -311,7 +357,7 @@ task(train_software_type, dependsOn: 'classes', type: JavaExec, group: 'training
     } else {
         jvmArgs '-Xmx3072m'
     }
-    systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
+    systemProperty "java.library.path", "${System.getProperty('java.library.path')}:" + getJavaLibraryPath()
 }
 
 // Run like this: ./gradlew eval_software -PgH=/path/grobid/home
@@ -324,7 +370,7 @@ task(eval_software, dependsOn: 'classes', type: JavaExec, group: 'evaluation') {
     } else {
         jvmArgs '-Xms2g', '-Xmx8g'
     }
-    systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
+    systemProperty "java.library.path", "${System.getProperty('java.library.path')}:" + getJavaLibraryPath()
 }
 
 // Run like this: ./gradlew eval_software_disambiguation -PgH=/path/grobid/home
@@ -337,7 +383,7 @@ task(eval_software_disambiguation, dependsOn: 'classes', type: JavaExec, group: 
     } else {
         jvmArgs '-Xms2g', '-Xmx8g'
     }
-    systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
+    systemProperty "java.library.path", "${System.getProperty('java.library.path')}:" + getJavaLibraryPath()
 }
 
 // Run like this: ./gradlew eval_software_doc_level -PgH=/path/grobid/home
@@ -350,7 +396,7 @@ task(eval_software_doc_level, dependsOn: 'classes', type: JavaExec, group: 'eval
     } else {
         jvmArgs '-Xms2g', '-Xmx8g'
     }
-    systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
+    systemProperty "java.library.path", "${System.getProperty('java.library.path')}:" + getJavaLibraryPath()
 }
 
 // Run like this: ./gradlew eval_software_disamb_doc_level -PgH=/path/grobid/home
@@ -363,7 +409,7 @@ task(eval_software_disamb_doc_level, dependsOn: 'classes', type: JavaExec, group
     } else {
         jvmArgs '-Xms2g', '-Xmx8g'
     }
-    systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
+    systemProperty "java.library.path", "${System.getProperty('java.library.path')}:" + getJavaLibraryPath()
 }
 
 // Run like this: ./gradlew eval_software_split -PgH=/path/grobid/home -Ps=0.8 -Pt=10
@@ -376,7 +422,7 @@ task(eval_software_split, dependsOn: 'classes', type: JavaExec, group: 'evaluati
     } else {
         jvmArgs '-Xms2g', '-Xmx8g'
     }
-    systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
+    systemProperty "java.library.path", "${System.getProperty('java.library.path')}:" + getJavaLibraryPath()
 }
 
 // Run like this: ./gradlew eval_software_disambiguation_split -PgH=/path/grobid/home -Ps=0.8 -Pt=10
@@ -389,7 +435,7 @@ task(eval_software_disambiguation_split, dependsOn: 'classes', type: JavaExec, g
     } else {
         jvmArgs '-Xms2g', '-Xmx8g'
     }
-    systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
+    systemProperty "java.library.path", "${System.getProperty('java.library.path')}:" + getJavaLibraryPath()
 }
 
 // Run like this: ./gradlew eval_software_doc_level_split -PgH=/path/grobid/home -Ps=0.8 -Pt=10
@@ -402,7 +448,7 @@ task(eval_software_doc_level_split, dependsOn: 'classes', type: JavaExec, group:
     } else {
         jvmArgs '-Xms2g', '-Xmx8g'
     }
-    systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
+    systemProperty "java.library.path", "${System.getProperty('java.library.path')}:" + getJavaLibraryPath()
 }
 
 // Run like this: ./gradlew eval_software_disamb_doc_level_split -PgH=/path/grobid/home -Ps=0.8 -Pt=10
@@ -415,7 +461,7 @@ task(eval_software_disamb_doc_level_split, dependsOn: 'classes', type: JavaExec,
     } else {
         jvmArgs '-Xms2g', '-Xmx8g'
     }
-    systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
+    systemProperty "java.library.path", "${System.getProperty('java.library.path')}:" + getJavaLibraryPath()
 }
 
 // Run like this: ./gradlew eval_software_nfold -PgH=/path/grobid/home -Pt=10
@@ -428,7 +474,7 @@ task(eval_software_nfold, dependsOn: 'classes', type: JavaExec, group: 'evaluati
     } else {
         jvmArgs '-Xms2g', '-Xmx8g'
     }
-    systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
+    systemProperty "java.library.path", "${System.getProperty('java.library.path')}:" + getJavaLibraryPath()
 }
 
 // Run like this: ./gradlew eval_software_disambiguation_nfold -PgH=/path/grobid/home -Pt=10
@@ -441,7 +487,7 @@ task(eval_software_disambiguation_nfold, dependsOn: 'classes', type: JavaExec, g
     } else {
         jvmArgs '-Xms2g', '-Xmx8g'
     }
-    systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
+    systemProperty "java.library.path", "${System.getProperty('java.library.path')}:" + getJavaLibraryPath()
 }
 
 // Run like this: ./gradlew eval_software_doc_level_nfold -PgH=/path/grobid/home -Pt=10
@@ -454,7 +500,7 @@ task(eval_software_doc_level_nfold, dependsOn: 'classes', type: JavaExec, group:
     } else {
         jvmArgs '-Xms2g', '-Xmx8g'
     }
-    systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
+    systemProperty "java.library.path", "${System.getProperty('java.library.path')}:" + getJavaLibraryPath()
 }
 
 // Run like this: ./gradlew eval_software_disamb_doc_level_nfold -PgH=/path/grobid/home -Pt=10
@@ -467,7 +513,7 @@ task(eval_software_disamb_doc_level_nfold, dependsOn: 'classes', type: JavaExec,
     } else {
         jvmArgs '-Xms2g', '-Xmx8g'
     }
-    systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
+    systemProperty "java.library.path", "${System.getProperty('java.library.path')}:" + getJavaLibraryPath()
 }
 
 ////////////////////
@@ -483,7 +529,7 @@ task(annotated_corpus_generator_csv, dependsOn: 'classes', type: JavaExec, group
     } else {
         jvmArgs '-Xms2g', '-Xmx8g'
     }
-    systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
+    systemProperty "java.library.path", "${System.getProperty('java.library.path')}:" + getJavaLibraryPath()
 }
 
 // Run like this: ./gradlew export_corpus_json -Pinput=/path/input/in.tei.xml -Poutput=/path/output/out.json
@@ -496,7 +542,7 @@ task(export_corpus_json, dependsOn: 'classes', type: JavaExec, group: 'export') 
     } else {
         jvmArgs '-Xms2g', '-Xmx8g'
     }
-    systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
+    systemProperty "java.library.path", "${System.getProperty('java.library.path')}:" + getJavaLibraryPath()
 }
 
 // Run like this: ./gradlew clean_tei_corpus_file -Ptei=/path/input/tei 
@@ -509,7 +555,7 @@ task(clean_tei_corpus_file, dependsOn: 'classes', type: JavaExec, group: 'import
     } else {
         jvmArgs '-Xms2g', '-Xmx8g'
     }
-    systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
+    systemProperty "java.library.path", "${System.getProperty('java.library.path')}:" + getJavaLibraryPath()
 }
 
 // Run like this: ./gradlew post_process_corpus_no_mention -Pxml=/path/input/corpus/tei/xml/file -Pcsv=path/csv -Ppdf=path/pdf -Poutput=/output/path/tei/corpus/file
@@ -522,7 +568,7 @@ task(post_process_corpus, dependsOn: 'classes', type: JavaExec, group: 'import')
     } else {
         jvmArgs '-Xms2g', '-Xmx8g'
     }
-    systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
+    systemProperty "java.library.path", "${System.getProperty('java.library.path')}:" + getJavaLibraryPath()
 }
 
 ////////////////////
@@ -538,7 +584,7 @@ task(create_training, dependsOn: 'classes', type: JavaExec, group: 'evaluation')
     } else {
         jvmArgs '-Xms4g', '-Xmx12g'
     }
-    systemProperty "java.library.path","${System.getProperty('java.library.path')}:" + libraries
+    systemProperty "java.library.path", "${System.getProperty('java.library.path')}:" + getJavaLibraryPath()
 }
 
 
@@ -553,20 +599,7 @@ application {
             jvmArgs "--add-opens", "java.base/java.lang=ALL-UNNAMED"
         }
         workingDir = rootProject.rootDir
-        def javaLibraryPath = "${System.getProperty('java.library.path')}:" + libraries
-
-        if (System.env.CONDA_PREFIX) {
-            def condaEnv = "${System.env.CONDA_PREFIX}/lib"
-            def pythonDirectory = file(condaEnv).listFiles({ it.toString().contains("/lib/python") } as FileFilter)?.first()
-            def pythonVersion = (pythonDirectory =~ /python([0-9]\.[0-9]+)/)[0][1]
-
-            javaLibraryPath = "${System.getProperty('java.library.path')}:" +
-                libraries + ":" +
-                "${System.env.CONDA_PREFIX}/lib:" +
-                "${System.env.CONDA_PREFIX}/lib/python${pythonVersion}/site-packages/jep"
-        }
-
-        systemProperty "java.library.path", javaLibraryPath
+        systemProperty "java.library.path", "${System.getProperty('java.library.path')}:" + getJavaLibraryPath()
 
         args = ['server', 'resources/config/config.yml']
     }
