@@ -51,12 +51,13 @@ public class SoftwareProcessString {
 	 *         the extracted software mentions
 	 */
 	public static Response processText(String text, boolean disambiguate, SoftwareConfiguration configuration) {
-		LOGGER.debug(methodLogIn());
 		Response response = null;
 		StringBuilder retVal = new StringBuilder();
 		SoftwareParser parser = SoftwareParser.getInstance(configuration);
 		try {
-			LOGGER.debug(">> set raw text for stateless service'...");
+            if (text == null) {
+                return Response.status(Status.BAD_REQUEST).build();
+            }
 			
 			List<SoftwareEntity> entities = null;
 			text = text.replaceAll("\\n", " ").replaceAll("\\t", " ");
@@ -97,8 +98,7 @@ public class SoftwareProcessString {
 		} catch (Exception e) {
 			LOGGER.error("An unexpected exception occurs. ", e);
 			response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
-		} 
-		LOGGER.debug(methodLogOut());
+		}
 		return response;
 	}
 
