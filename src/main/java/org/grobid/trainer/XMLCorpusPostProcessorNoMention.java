@@ -97,7 +97,7 @@ public class XMLCorpusPostProcessorNoMention {
      * Inject curation class description, document entries without mention and curation class at document level     
      */
     public void process(String xmlCorpusPath, String csvPath, String pdfPath, String newXmlCorpusPath, boolean extraContext) throws IOException {
-        
+
         Map<String, AnnotatedDocument> documents = new HashMap<String, AnnotatedDocument>();
         Map<String, SoftciteAnnotation> annotations = new HashMap<String, SoftciteAnnotation>();
 
@@ -107,7 +107,7 @@ public class XMLCorpusPostProcessorNoMention {
 
         this.importCSVMissingTitles(csvPath, documents);
         this.loadSoftwareUsage();
-        
+
         // we unfortunately need to use DOM to update the XML file which is always a lot of pain
         String tei = null;
         org.w3c.dom.Document document = null;
@@ -182,7 +182,7 @@ public class XMLCorpusPostProcessorNoMention {
                 // write updated full TEI file
                 if (tei != null) 
                     FileUtils.writeStringToFile(new File(newXmlCorpusPath.replace(".tei.xml", "-full.tei.xml")), tei, UTF_8);  
-            
+
             } catch(ParserConfigurationException e) {
                 e.printStackTrace();
             } catch(IOException e) {
@@ -221,7 +221,7 @@ public class XMLCorpusPostProcessorNoMention {
                 e.printStackTrace();
             } 
         }
-                  
+
         // write a more compact TEI file without no mention entries and without the non aligned segments (<ab>),
         // without role="used", with sentence segmentation
         if (tei != null) {
@@ -371,7 +371,7 @@ public class XMLCorpusPostProcessorNoMention {
         int m = 0;
         int nbDocWithNonPresentAnnotation = 0;
         int nbDocWithValidNonPresentAnnotation = 0;
-        
+
         try {
             this.annotators = this.readAnnotatorMapping("resources/dataset/software/corpus/annotators.xml");
         } catch(Exception e) {
@@ -409,7 +409,7 @@ public class XMLCorpusPostProcessorNoMention {
             if (localAnnotations == null) {
                 System.out.println(" **** Warning **** " + docName + " - document with null localAnnotation object");
             } 
-            
+
             if (localAnnotations != null && localAnnotations.size() == 1 && localAnnotations.get(0).getType() == AnnotationType.DUMMY) {
                 File pdfFile = AnnotatedCorpusGeneratorCSV.getPDF(documentPath, docName, articleUtilities, this.configuration);
 
@@ -566,7 +566,7 @@ public class XMLCorpusPostProcessorNoMention {
 
                 nu.xom.Element body = teiElement("body");                
                 textNode.appendChild(body);
-                
+
                 if (localAnnotations != null && localAnnotations.size() > 0) {
                     nbDocWithNonPresentAnnotation++;
                     boolean hasTextContent = false;
@@ -653,7 +653,7 @@ public class XMLCorpusPostProcessorNoMention {
                                 hasSoftware = true;
                                 rs.addAttribute(new Attribute("type", "software"));
                                 rs.addAttribute(new Attribute("xml:id", "http://www.w3.org/XML/1998/namespace", docName+"-software-"+index_entity));
-                                
+
                                 // do we have a subtype? 
                                 if (inlineAnnotation.getAttributeValue("subtype") != null) {
                                     rs.addAttribute(new Attribute("subtype", inlineAnnotation.getAttributeValue("subtype")));
@@ -697,7 +697,7 @@ public class XMLCorpusPostProcessorNoMention {
                             int indexAnnotator = this.annotators.indexOf(localAnnotation.getAnnotatorID());
                             if (indexAnnotator != -1)
                                 rs.addAttribute(new Attribute("resp", "#annotator"+indexAnnotator));
-                            
+
                             curSentence.appendChild(rs);
 
                             if (inlineAnnotation.getText().endsWith(" ")) {
@@ -755,7 +755,7 @@ public class XMLCorpusPostProcessorNoMention {
 
                     if (!articleSet.equals("training_article"))
                         documentRoot.appendChild(importedFragmentNode);
-                    
+
                 } catch(ParserConfigurationException e) {
                     e.printStackTrace();
                 } catch(IOException e) {
@@ -948,7 +948,7 @@ public class XMLCorpusPostProcessorNoMention {
                     hasSoftware = true;
                     rs.addAttribute(new Attribute("type", "software"));
                     rs.addAttribute(new Attribute("xml:id", "http://www.w3.org/XML/1998/namespace", docName+"-software-"+index_entity));
-                    
+
                     // do we have a subtype? 
                     if (inlineAnnotation.getAttributeValue("subtype") != null) {
                         rs.addAttribute(new Attribute("subtype", inlineAnnotation.getAttributeValue("subtype")));
@@ -988,7 +988,7 @@ public class XMLCorpusPostProcessorNoMention {
                 int indexAnnotator = this.annotators.indexOf(localAnnotation.getAnnotatorID());
                 if (indexAnnotator != -1)
                     rs.addAttribute(new Attribute("resp", "#annotator"+indexAnnotator));
-                
+
                 curSentence.appendChild(rs);
 
                 if (inlineAnnotation.getText().endsWith(" ")) {
@@ -1032,7 +1032,7 @@ public class XMLCorpusPostProcessorNoMention {
                 org.w3c.dom.Node importedFragmentNode = document.importNode(fragmentDocument.getDocumentElement(), true);
 
                 documentRoot.appendChild(importedFragmentNode);
-                
+
             } catch(ParserConfigurationException e) {
                 e.printStackTrace();
             } catch(IOException e) {
@@ -1214,7 +1214,7 @@ public class XMLCorpusPostProcessorNoMention {
                         continue; 
 
                     String annotator = annotation.getAnnotatorID();
-                    
+
                     // per global software entity
                     if (annotatorCountEntities.get(annotator) == null) {
                         annotatorCountEntities.put(annotator, Integer.valueOf(1));
@@ -1687,7 +1687,7 @@ public class XMLCorpusPostProcessorNoMention {
                             File pdfFile = AnnotatedCorpusGeneratorCSV.getPDF(documentPath, docName, this.articleUtilities, this.configuration);
                             String fullPath = pdfFile.getPath();
                             fullPath = fullPath.replace(".pdf", ".fulltext.tei.xml");
-                            
+
                             // check if full text tei file is present, process with Grobid otherwise
                             String fullTei = null;
                             File teiFile = new File(fullPath);
@@ -1991,8 +1991,7 @@ public class XMLCorpusPostProcessorNoMention {
             // load the map from the csv id file
             File idsFile = new File("resources" + File.separator + "dataset" + File.separator + "software"+ File.separator +
                 "corpus" + File.separator + "ids.csv");
-            try {
-                BufferedReader b = new BufferedReader(new FileReader(idsFile));
+            try (BufferedReader b = new BufferedReader(new FileReader(idsFile))) {
                 boolean start = true;
                 String line;
                 while ((line = b.readLine()) != null) {
@@ -2015,8 +2014,7 @@ public class XMLCorpusPostProcessorNoMention {
     private void importCSVMissingTitles(String csvPath, Map<String, AnnotatedDocument> documents) {
         // this csv file gives missing titles for some hard to process articles
         File softciteTitles = new File(csvPath + File.separator + "imputation-tei-article-missing-title.csv");
-        try {
-            BufferedReader b = new BufferedReader(new FileReader(softciteTitles));
+        try (BufferedReader b = new BufferedReader(new FileReader(softciteTitles))) {
             boolean start = true;
             int nbCSVlines = 0;
             String line;
@@ -2089,7 +2087,7 @@ public class XMLCorpusPostProcessorNoMention {
      * @param args Command line arguments.
      */
     public static void main(String[] args) throws Exception {
-       
+
         // we are expecting four arguments: absolute path to the curated TEI XML corpus file, 
         // absolute path to softcite data in csv and abolute path
         // absolute path to the softcite PDF directory
@@ -2166,4 +2164,3 @@ public class XMLCorpusPostProcessorNoMention {
         System.exit(0);
     }
 }
-

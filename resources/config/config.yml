@@ -1,11 +1,11 @@
-version: "0.8.0"
+version: "0.8.1"
 
 grobidHome: ../grobid-home
 
 # entity-fishing server information for performing entity disambiguation
 # for https, indicate 443 as port
-entityFishingHost: cloud.science-miner.com/nerd
-entityFishingPort: 443
+entityFishingHost:
+entityFishingPort:
 #entityFishingHost: localhost
 #entityFishingPort: 8090
 
@@ -101,17 +101,18 @@ corsAllowedHeaders: "X-Requested-With,Content-Type,Accept,Origin"
 
 server:
   type: custom
-  idleTimeout: 120 seconds
   applicationConnectors:
     - type: http
       port: 8060
+      idleTimeout: 120 seconds
+      acceptQueueSize: 2048
   adminConnectors:
     - type: http
       port: 8061
   registerDefaultExceptionMappers: false
   maxThreads: 2048
   maxQueuedRequests: 2048
-  acceptQueueSize: 2048
+
   # change the following for having all http requests logged
   requestLog:
     appenders: []
@@ -125,7 +126,7 @@ logging:
     com.squarespace.jersey2.guice.JerseyGuiceUtils: "OFF"
   appenders:
     - type: console
-      threshold: WARN
+      threshold: INFO
       timeZone: UTC
       # uncomment to have the logs in json format
       #layout:
