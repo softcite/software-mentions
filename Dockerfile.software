@@ -9,6 +9,7 @@ USER root
 RUN apt-get update && \
     apt-get -y --no-install-recommends install apt-utils libxml2 git-lfs unzip wget
 
+
 WORKDIR /opt/grobid
 
 RUN mkdir -p software-mentions-source grobid-home/models
