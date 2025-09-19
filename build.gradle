@@ -37,6 +37,36 @@ apply plugin: 'java-library'
 apply plugin: 'base'
 apply plugin: 'com.github.kt3k.coveralls'
 
+
+def getGitRevision() {
+    def gitRevision = "unknown"
+    try {
+        def stdout = new ByteArrayOutputStream()
+        println("Checking git under ${rootProject.rootDir}")
+        exec {
+            workingDir rootProject.rootDir
+            commandLine 'git', 'describe', '--tags', '--always', '--first-parent'
+            standardOutput = stdout
+        }
+        gitRevision = stdout.toString().trim()
+        println "Current Git revision: ${gitRevision}"
+    } catch (Exception e) {
+        println "Could not get Git revision: ${e}"
+    }
+    return gitRevision
+}
+
+project.ext.gitRevision = getGitRevision()
+
+// Create a task to expose the revision for other tasks
+tasks.register('collectGitRevision') {
+    project.ext.gitRevision = getGitRevision()
+    doLast {
+        println "Git revision: ${project.ext.gitRevision}"
+    }
+}
+
+
 group = "org.grobid.software"
 version = '0.8.2-SNAPSHOT'
 
@@ -138,6 +168,9 @@ dependencies {
 
     //Grobid
     implementation(group: 'org.grobid', name: 'grobid-core', version: '0.8.2') {
+        exclude group: 'org.slf4j', module: "slf4j-log4j12"
+    }
+    api(group: 'org.grobid', name: 'grobid-service', version: '0.8.2') {
         exclude group: 'org.slf4j', module: "slf4j-log4j12"
     }
     implementation(group: 'org.grobid', name: 'grobid-trainer', version: '0.8.2') {
@@ -297,6 +330,15 @@ shadowDistTar.enabled = false
 artifacts {
     archives jar
     archives shadowJar
+}
+
+processResources {
+    filesMatching(["version.txt", "revision.txt"]) {
+        expand(
+            project_version: project.property('version') ?: "unknown",
+            project_revision: rootProject.ext.gitRevision
+        )
+    }
 }
 
 task copyModels(type: Copy) {
