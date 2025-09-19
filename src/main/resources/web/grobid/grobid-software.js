@@ -267,7 +267,7 @@ class SoftciteApp {
         this.resetMaps();
         $("#pure-toggle-right, #toggle-group").hide();
             
-            $('#infoResult').html('<font color="grey">Requesting server...</font>');
+            $('#infoResult').html('<span style="color: grey;">Requesting server...</span>');
             $('#requestResult').html('');
 
         const urlLocal = $('#gbdForm').attr('action');
@@ -288,7 +288,7 @@ class SoftciteApp {
         $("#pure-toggle-right, #toggle-group").hide();
         this.resetExamplesClasses();
         
-        $('#infoResult2').empty().html('<font color="grey">Requesting server...</font>');
+        $('#infoResult2').empty().html('<span style="color: grey;">Requesting server...</span>');
         // initialize tabbed result area for PDF
         this.initializePdfTabs();
 
@@ -457,7 +457,7 @@ class SoftciteApp {
     handleTextResponse(responseText) {
         this.responseJson = responseText;
         if (!this.responseJson) {
-            $('#infoResult').html("<font color='red'>Error encountered while receiving the server's answer: response is empty.</font>");
+            $('#infoResult').html("<span style='color:red;'>Error encountered while receiving the server's answer: response is empty.</span>");
             return;
         }
         
@@ -661,7 +661,7 @@ class SoftciteApp {
 
     setupAnnotations(response) {
         if ((response == null) || (response.length == 0)) {
-            $('#infoResult2').html("<font color='red'>Error encountered while receiving the server's answer: response is empty.</font>");
+            $('#infoResult2').html("<span style='color:red;'>Error encountered while receiving the server's answer: response is empty.</span>");
             return;
         } else {
             $('#infoResult2').empty().hide();
@@ -1241,10 +1241,10 @@ class SoftciteApp {
         if ((wikipedia != null) || (wikidataId != null)) {
             string += '<p>References: ';
             if (wikipedia != null) {
-                string += `<a href="http://${lang}.wikipedia.org/wiki?curid=${wikipedia}" target="_blank"><img style="max-width:28px;max-height:22px;margin-top:5px;" src="resources/img/wikipedia.png"/></a>`;
+                string += `<a href="http://${lang}.wikipedia.org/wiki?curid=${wikipedia}" target="_blank"><img style="max-width:28px;max-height:22px;margin-top:5px;" src="resources/img/wikipedia.png" alt="Wikipedia"/></a>`;
             }
             if (wikidataId != null) {
-                string += `<a href="https://www.wikidata.org/wiki/${wikidataId}" target="_blank"><img style="max-width:28px;max-height:22px;margin-top:5px;" src="resources/img/Wikidata-logo.svg"/></a>`;
+                string += `<a href="https://www.wikidata.org/wiki/${wikidataId}" target="_blank"><img style="max-width:28px;max-height:22px;margin-top:5px;" src="resources/img/Wikidata-logo.svg" alt="Wikidata"/></a>`;
             }
             string += '</p>';
         }
@@ -1258,7 +1258,7 @@ class SoftciteApp {
         const pdf_url = `resources/pdf-examples/${example.replace("/", "%2F")}.pdf`;
         
         $("#pure-toggle-right, #toggle-group").hide();
-        $('#infoResult2').empty().html('<font color="grey">Requesting server...</font>');
+        $('#infoResult2').empty().html('<span style="color: grey;">Requesting server...</span>');
         // initialize tabbed result area for PDF
         this.initializePdfTabs();
 
@@ -1688,7 +1688,7 @@ class SoftciteApp {
 
         if (this._imgCache[cacheKey]) {
             const imgUrl = this._imgCache[cacheKey];
-            spanNode.innerHTML = `<img src="${imgUrl}"/>`;
+            spanNode.innerHTML = `<img src="${imgUrl}" alt="Wikipedia thumbnail"/>`;
         } else {
             const theUrl = this._wikimediaUrls[lang] + wikipedia;
             $.ajax({
@@ -1702,7 +1702,7 @@ class SoftciteApp {
                         const pageInfo = response.query.pages[wikipedia];
                         if (pageInfo.thumbnail && pageInfo.thumbnail.source) {
                             const imgUrl = pageInfo.thumbnail.source;
-                            span.innerHTML = `<img src="${imgUrl}"/>`;
+                            span.innerHTML = `<img src="${imgUrl}" alt="Wikipedia thumbnail"/>`;
                             this._imgCache[cacheKey] = imgUrl;
                         }
                     }
@@ -1713,13 +1713,13 @@ class SoftciteApp {
 
     handleAjaxError(jqXHR) {
         const errorMsg = "Error encountered while requesting the server.<br/>" + jqXHR.responseText;
-        $('#infoResult, #infoResult2').html(`<font color='red'>${errorMsg}</font>`);
+        $('#infoResult, #infoResult2').html(`<span style='color:red;'>${errorMsg}</span>`);
         this.entities = null;
     }
 
     handleAjaxError2(message = "") {
         const errorMsg = message + " - The PDF document cannot be annotated. Please check the server logs.";
-        $('#infoResult, #infoResult2').html(`<font color='red'>Error encountered while requesting the server.<br/>${errorMsg}</font>`);
+        $('#infoResult, #infoResult2').html(`<span style='color:red;'>Error encountered while requesting the server.<br/>${errorMsg}</span>`);
         this.entities = null;
     }
 
