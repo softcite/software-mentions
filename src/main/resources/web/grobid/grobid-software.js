@@ -385,17 +385,17 @@ class SoftciteApp {
         const td1 = document.createElement("td");
         const td2 = document.createElement("td");
 
-                                tr.appendChild(td1);
-                                tr.appendChild(td2);
-                                table.appendChild(tr);
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        table.appendChild(tr);
 
         // Page info
         const div0 = document.createElement("div");
-                                div0.setAttribute("style", "text-align: center; margin-top: 1cm;");
+        div0.setAttribute("style", "text-align: center; margin-top: 1cm;");
         const pageInfo = document.createElement("p");
         pageInfo.appendChild(document.createTextNode(`page ${page.pageIndex + 1}/${nbPages}`));
-                                div0.appendChild(pageInfo);
-                                td1.appendChild(div0);
+        div0.appendChild(pageInfo);
+        td1.appendChild(div0);
 
         // PDF page container
         const div = document.createElement("div");
@@ -403,31 +403,37 @@ class SoftciteApp {
         div.setAttribute("style", "position: relative;");
         
         const canvas = document.createElement("canvas");
-                                canvas.setAttribute("style", "border-style: solid; border-width: 1px; border-color: gray;");
-                                div.appendChild(canvas);
+        canvas.setAttribute("style", "border-style: solid; border-width: 1px; border-color: gray;");
+        div.appendChild(canvas);
 
-                                td1.setAttribute('style', 'width:70%;');
-                                td1.appendChild(div);
+        td1.setAttribute('style', 'width:70%;');
+        td1.appendChild(div);
 
-        // Annotation container
+        // Annotation container (right column)
         const annot = document.createElement("div");
-                                annot.setAttribute('style', 'vertical-align:top;');
         annot.setAttribute('id', `detailed_annot-${page.pageIndex + 1}`);
-                                td2.setAttribute('style', 'vertical-align:top;width:30%;');
-                                td2.appendChild(annot);
+        // This panel will be absolutely positioned within the right column
+        annot.setAttribute('style', 'position:absolute; left:0; right:0;');
+        td2.setAttribute('style', 'vertical-align:top;width:30%; position:relative;');
+        td2.appendChild(annot);
 
-                                container.appendChild(table);
+        container.appendChild(table);
 
         // Render PDF
         const viewport = page.getViewport((td1.offsetWidth * 0.98) / page.getViewport(1.0).width);
         const context = canvas.getContext('2d');
-                                canvas.height = viewport.height;
-                                canvas.width = viewport.width;
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+
+        // Make right column height follow the page header + canvas height for reliable positioning
+        const headerH = div0 ? div0.offsetHeight : 0;
+        td2.style.height = `${headerH + viewport.height}px`;
+        td2.style.position = 'relative';
 
         const renderContext = { canvasContext: context, viewport: viewport };
 
         page.render(renderContext).then(() => {
-                                    return page.getTextContent();
+            return page.getTextContent();
         }).then((textContent) => {
             this.createTextLayer(div, textContent, page.pageIndex, viewport);
         });
@@ -1020,12 +1026,9 @@ class SoftciteApp {
         const content = entity['software-name'].rawForm;
         const normalized = this.getPreferredTerm(wikipedia);
 
-        let string = `<div class='info-sense-box ${colorLabel}'`;
-        if (topPos !== -1) {
-            string += ` style='vertical-align:top; position:relative; top:${topPos}'`;
-        }
-
-        string += `><h4 style='color:#FFF;padding-left:10px;'>${content.toUpperCase()}</h4>`;
+        // Remove inline positioning; we'll position the panel container instead
+        let string = `<div class='info-sense-box ${colorLabel}'>`;
+        string += `<h4 style='color:#FFF;padding-left:10px;'>${content.toUpperCase()}</h4>`;
         string += `<div class='container-fluid' style='background-color:#F9F9F9;color:#70695C;border:padding:5px;margin-top:5px;'>`;
         string += `<table style='width:100%;background-color:#fff;border:0px'><tr style='background-color:#fff;border:0px;'><td style='background-color:#fff;border:0px;'>`;
 
@@ -1316,9 +1319,9 @@ class SoftciteApp {
         const width = (thePos.w * scale_x) + 1;
         const height = (thePos.h * scale_y) + 1;
 
-        // Make clickable the area
+        // Make clickable the area, ensure it sits above the textLayer
         const element = document.createElement("a");
-        const attributes = `display:block; width:${width}px; height:${height}px; position:absolute; top:${y}px; left:${x}px;`;
+        const attributes = `display:block; width:${width}px; height:${height}px; position:absolute; top:${y}px; left:${x}px; z-index: 5; pointer-events: auto;`;
         element.setAttribute("style", attributes + "border:2px solid;");
         element.setAttribute("class", theType.toLowerCase());
         element.setAttribute("id", `annot-${entityIndex}-${positionIndex}`);
@@ -1338,7 +1341,21 @@ class SoftciteApp {
             return;
         }
 
-        const topPos = $(event.target).position().top;
+        // Desired vertical position relative to the PDF page
+        let desiredTop = $(event.target).position().top;
+        try {
+            const pageDiv = document.getElementById(`page-${pageIndex}`);
+            if (pageDiv && pageDiv.parentElement) {
+                const leftTd = pageDiv.parentElement; // the left table cell
+                const leftTdTop = leftTd.getBoundingClientRect().top + window.pageYOffset;
+                const pageDivTop = pageDiv.getBoundingClientRect().top + window.pageYOffset;
+                const headerOffset = pageDivTop - leftTdTop; // space above canvas (page header + margins)
+                desiredTop = Math.max(0, headerOffset + desiredTop - 8);
+            }
+        } catch (e) {
+            // keep fallback desiredTop
+        }
+
         const ind1 = localID.indexOf('-');
         const localEntityNumber = parseInt(localID.substring(ind1 + 1, localID.length));
 
@@ -1350,9 +1367,33 @@ class SoftciteApp {
         const entityList = this.entityMap.get(localEntityNumber);
         if (entityList && entityList.length > 0) {
             const entity = entityList[entityList.length - 1];
-            string = this.toHtml(entity, topPos, pageIndex);
+            string = this.toHtml(entity, -1, pageIndex);
         }
-        $(`#detailed_annot-${pageIndex}`).html(string).show();
+
+        const panel = document.getElementById(`detailed_annot-${pageIndex}`);
+        if (!panel) return;
+        panel.innerHTML = string;
+        panel.style.display = 'block';
+        panel.style.position = 'absolute';
+        panel.style.left = '0';
+        panel.style.right = '0';
+
+        // Clamp within the right column height
+        const parent = panel.parentElement;
+        const box = panel.firstElementChild;
+        const parentH = parent ? parent.clientHeight : 0;
+        const boxH = box ? box.offsetHeight : 0;
+        let topClamped = desiredTop;
+        if (parentH > 0 && boxH > 0) {
+            const maxTop = Math.max(0, parentH - boxH - 8);
+            topClamped = Math.max(0, Math.min(desiredTop, maxTop));
+        }
+        panel.style.top = `${topClamped}px`;
+        // Keep content visible inside the panel area
+        if (parentH > 0) {
+            panel.style.maxHeight = `${parentH - 8}px`;
+            panel.style.overflow = 'auto';
+        }
     }
 
     fetchConcept(identifier, lang, successFunction) {
