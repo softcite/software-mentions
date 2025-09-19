@@ -1,5 +1,5 @@
-  /**
-  	*  Ad hoc Modifications to Bootstrap 
+/**
+  	*  Ad hoc Modifications to Bootstrap
     * 
     *  Author: Patrice Lopez        
   	*/
@@ -165,7 +165,7 @@ table.statements {
   border-collapse: separate; 
   font-size: 12px;
   font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  border-spacing: 2;
+  border-spacing: 2px;
   padding: 0px;
   border-collapse: separate;
 }
@@ -174,7 +174,7 @@ table.statements tr {
   background-color: #FCF8E3; 
   word-break:normal; 
   font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  border-spacing: 2;
+  border-spacing: 2px;
   padding: 0px;
   border-collapse: separate;
 }
@@ -235,7 +235,8 @@ span {word-break:normal;}
 }
 
 .info-sense-box,.details-list {
-	margin:1px 1;padding:5px 2px 3px 2px;border:1px solid #87A1A8;background-color:#87A1A8;border-radius:5px;
+	margin: 1px;
+	padding:5px 2px 3px 2px;border:1px solid #87A1A8;background-color:#87A1A8;border-radius:5px;
 	font-size:14px;
 }
 
@@ -395,3 +396,50 @@ span.index:hover {
     transform: translateX(-50%) translateY(-10px) rotate(-45deg);
     -webkit-transform: translateX(-50%) translateY(-10px) rotate(-45deg);
     top: 10px; }
+
+/* Improve visibility of annotation boxes on PDF pages */
+#pdfAnnotationContainer a.software,
+#pdfAnnotationContainer a.version,
+#pdfAnnotationContainer a.version-date,
+#pdfAnnotationContainer a.version-number,
+#pdfAnnotationContainer a.url,
+#pdfAnnotationContainer a.publisher,
+#pdfAnnotationContainer a.reference,
+#pdfAnnotationContainer a.language,
+div[id^="page-"] a.software,
+div[id^="page-"] a.version,
+div[id^="page-"] a.version-date,
+div[id^="page-"] a.version-number,
+div[id^="page-"] a.url,
+div[id^="page-"] a.publisher,
+div[id^="page-"] a.reference,
+div[id^="page-"] a.language {
+  cursor: pointer;
+  /* smooth hover highlight */
+  transition: background-color 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
+}
+
+/* Base fills (light) */
+#pdfAnnotationContainer a.software, div[id^="page-"] a.software { background-color: rgba(128, 0, 128, 0.18); }
+#pdfAnnotationContainer a.version, div[id^="page-"] a.version { background-color: rgba(51, 102, 204, 0.18); }
+#pdfAnnotationContainer a.version-date, div[id^="page-"] a.version-date { background-color: rgba(51, 102, 204, 0.18); }
+#pdfAnnotationContainer a.version-number, div[id^="page-"] a.version-number { background-color: rgba(0, 102, 255, 0.18); }
+#pdfAnnotationContainer a.url, div[id^="page-"] a.url { background-color: rgba(255, 51, 153, 0.18); }
+#pdfAnnotationContainer a.publisher, div[id^="page-"] a.publisher { background-color: rgba(153, 51, 0, 0.18); }
+#pdfAnnotationContainer a.reference, div[id^="page-"] a.reference { background-color: rgba(0, 153, 51, 0.18); }
+#pdfAnnotationContainer a.language, div[id^="page-"] a.language { background-color: rgba(0, 153, 51, 0.18); }
+
+/* Hover emphasis */
+#pdfAnnotationContainer a.software:hover, div[id^="page-"] a.software:hover { background-color: rgba(128, 0, 128, 0.32); }
+#pdfAnnotationContainer a.version:hover, div[id^="page-"] a.version:hover { background-color: rgba(51, 102, 204, 0.32); }
+#pdfAnnotationContainer a.version-date:hover, div[id^="page-"] a.version-date:hover { background-color: rgba(51, 102, 204, 0.32); }
+#pdfAnnotationContainer a.version-number:hover, div[id^="page-"] a.version-number:hover { background-color: rgba(0, 102, 255, 0.32); }
+#pdfAnnotationContainer a.url:hover, div[id^="page-"] a.url:hover { background-color: rgba(255, 51, 153, 0.32); }
+#pdfAnnotationContainer a.publisher:hover, div[id^="page-"] a.publisher:hover { background-color: rgba(153, 51, 0, 0.32); }
+#pdfAnnotationContainer a.reference:hover, div[id^="page-"] a.reference:hover { background-color: rgba(0, 153, 51, 0.32); }
+#pdfAnnotationContainer a.language:hover, div[id^="page-"] a.language:hover { background-color: rgba(0, 153, 51, 0.32); }
+
+/* Add spacing above the results tabs (Text and PDF) */
+.note-tabs {
+    margin-top: 12px;
+}
