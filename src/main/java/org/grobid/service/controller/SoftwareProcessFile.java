@@ -14,11 +14,7 @@ import org.grobid.core.document.DocumentSource;
 import org.grobid.core.engines.SoftwareParser;
 import org.grobid.core.engines.config.GrobidAnalysisConfig;
 import org.grobid.core.factory.GrobidPoolingFactory;
-import org.grobid.core.utilities.GrobidProperties;
-import org.grobid.core.utilities.IOUtilities;
-import org.grobid.core.utilities.KeyGen;
-import org.grobid.core.utilities.SoftwareConfiguration;
-import org.grobid.core.utilities.ArticleUtilities;
+import org.grobid.core.utilities.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -100,7 +96,7 @@ public class SoftwareProcessFile {
                 List<SoftwareEntity> entities = extractedEntities.getLeft();
                 StringBuilder json = new StringBuilder();
 				json.append("{ ");
-                json.append(SoftwareServiceUtil.applicationDetails(GrobidProperties.getVersion()));
+                json.append(SoftwareServiceUtil.applicationDetails(Versioner.getVersion(), Versioner.getRevision()));
                 
                 String md5Str = DatatypeConverter.printHexBinary(digest).toUpperCase();
                 json.append(", \"md5\": \"" + md5Str + "\"");
@@ -298,7 +294,7 @@ public class SoftwareProcessFile {
 
                 StringBuilder json = new StringBuilder();
                 json.append("{ ");
-                json.append(SoftwareServiceUtil.applicationDetails(GrobidProperties.getVersion()));
+                json.append(SoftwareServiceUtil.applicationDetails(Versioner.getVersion(), Versioner.getRevision()));
                 
                 String md5Str = DatatypeConverter.printHexBinary(digest).toUpperCase();
                 json.append(", \"md5\": \"" + md5Str + "\"");
@@ -386,7 +382,7 @@ public class SoftwareProcessFile {
 
                 StringBuilder json = new StringBuilder();
                 json.append("{ ");
-                json.append(SoftwareServiceUtil.applicationDetails(GrobidProperties.getVersion()));
+                json.append(SoftwareServiceUtil.applicationDetails(Versioner.getVersion(), Versioner.getRevision()));
                 
                 String md5Str = DatatypeConverter.printHexBinary(digest).toUpperCase();
                 json.append(", \"md5\": \"" + md5Str + "\"");
