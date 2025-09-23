@@ -1,25 +1,20 @@
 package org.grobid.service.controller;
 
-import org.glassfish.jersey.media.multipart.FormDataParam;
-import org.grobid.service.configuration.SoftwareServiceConfiguration;
-import org.grobid.core.utilities.SoftwareConfiguration;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import jakarta.ws.rs.core.UriInfo;
+import org.glassfish.jersey.media.multipart.FormDataParam;
+import org.grobid.core.utilities.GrobidProperties;
+import org.grobid.core.utilities.SoftwareConfiguration;
+import org.grobid.core.utilities.Versioner;
+import org.grobid.service.configuration.SoftwareServiceConfiguration;
+import org.grobid.service.data.ServiceInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-
-import java.util.Arrays;
-import java.io.*;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 /**
  * RESTful service for GROBID Software extension.
@@ -53,9 +48,6 @@ public class SoftwareController implements SoftwarePaths {
         this.configuration = serviceConfiguration.getSoftwareConfiguration();
     }
 
-        /**
-     * @see org.grobid.service.process.GrobidRestProcessGeneric#isAlive()
-     */
     @Path(PATH_IS_ALIVE)
     @Produces(MediaType.TEXT_PLAIN)
     @GET
@@ -137,6 +129,13 @@ public class SoftwareController implements SoftwarePaths {
         boolean disambiguateBoolean = SoftwareServiceUtil.validateBooleanRawParam(disambiguate);
         boolean addParagraphContextBoolean = SoftwareServiceUtil.validateBooleanRawParam(addParagraphContext);
         return SoftwareProcessFile.extractTEI(inputStream, disambiguateBoolean, addParagraphContextBoolean, this.configuration);
+    }
+
+    @Path(PATH_VERSION)
+    @Produces(MediaType.APPLICATION_JSON)
+    @GET
+    public ServiceInfo getVersion() {
+        return new ServiceInfo(Versioner.getVersion(), Versioner.getRevision());
     }
 
 }

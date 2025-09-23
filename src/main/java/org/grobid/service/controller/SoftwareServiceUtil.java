@@ -25,7 +25,7 @@ public class SoftwareServiceUtil {
     /**
      * Give application information to be added in a JSON result
      */
-    public static String applicationDetails(String version) {
+    public static String applicationDetails(String version, String gitRevision) {
         StringBuilder sb = new StringBuilder();
 
         TimeZone tz = TimeZone.getTimeZone("UTC");
@@ -34,8 +34,12 @@ public class SoftwareServiceUtil {
         String dateISOString = df.format(new java.util.Date());
 
         sb.append("\"application\": \"software-mentions\", ");
-        if (version !=null)
+        if (version !=null) {
             sb.append("\"version\": \"" + version + "\", ");
+        }
+        if (gitRevision != null) {
+            sb.append("\"revision\": \"" + gitRevision + "\", ");
+        }
         sb.append("\"date\": \"" + dateISOString + "\"");
 
         return sb.toString();
