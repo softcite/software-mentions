@@ -1263,30 +1263,49 @@ class SoftciteApp {
         this.initializePdfTabs();
 
         const formData = new FormData();
-        if (!$("#disambiguate2").is(":checked")) {
-            formData.append('disambiguate', '0');
-        } else {
-            formData.append('disambiguate', '1');
-        }
-        
+        formData.append('disambiguate', $("#disambiguate2").is(":checked") ? '1' : '0');
+
         const xhr = new XMLHttpRequest();
         const url = this.defineBaseURL("annotateSoftwarePDF");
         xhr.responseType = 'json';
         xhr.open('POST', url, true);
         
-        // Load and process the PDF file
-        this.httpGetAsynBlob(pdf_url, (data) => {
-            const the_blob = new Blob([data], { type: 'application/pdf' });
-            formData.append('input', the_blob, `${example.replace("/", "%2F")}.pdf`);
-            xhr.send(formData);
+        // Load and process the PDF file: render pages AND send to backend
+        this.httpGetAsynBlob(pdf_url, async (data) => {
+            try {
+                const arrayBuffer = await data.arrayBuffer();
+                const pdfAsArray = new Uint8Array(arrayBuffer);
+                // Render locally using PDF.js
+                const getDocument = (window.PDFJS && window.PDFJS.getDocument)
+                    ? window.PDFJS.getDocument
+                    : (window.pdfjsLib && window.pdfjsLib.getDocument ? window.pdfjsLib.getDocument : null);
+                if (getDocument) {
+                    try {
+                        const task = getDocument(pdfAsArray);
+                        if (task && task.promise && typeof task.promise.then === 'function') {
+                            task.promise.then((pdf) => this.renderPDFPages(pdf));
+                        } else if (task && typeof task.then === 'function') {
+                            task.then((pdf) => this.renderPDFPages(pdf));
+                        }
+                    } catch (e) {
+                        // ignore render errors; backend annotations may still be displayed
+                    }
+                }
+                // Send to backend
+                const the_blob = new Blob([data], { type: 'application/pdf' });
+                formData.append('input', the_blob, `${example.replace("/", "%2F")}.pdf`);
+                xhr.send(formData);
+            } catch (err) {
+                this.handleAjaxError2('Unable to load PDF example.');
+            }
         });
-        
+
         xhr.onreadystatechange = (e) => {
-            $('#infoResult2').html("");
             if (xhr.readyState === 4 && xhr.status === 200) {
+                $('#infoResult2').html("");
                 const response = e.target.response;
                 this.setupAnnotations(response);
-            } else if (xhr.status !== 200) {
+            } else if (xhr.readyState === 4 && xhr.status !== 200) {
                 this.handleAjaxError2(`Response ${xhr.status}: `);
             }
         };
@@ -1295,7 +1314,7 @@ class SoftciteApp {
     httpGetAsynBlob(theUrl, callback) {
         const xmlHttp = new XMLHttpRequest();
         xmlHttp.responseType = 'blob';
-        xmlHttp.onreadystatechange = function() { 
+        xmlHttp.onreadystatechange = function() {
             if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
                 callback(xmlHttp.response);
             }
@@ -1306,31 +1325,48 @@ class SoftciteApp {
 
     annotateEntity(theId, rawForm, theType, thePos, page_height, page_width, entityIndex, positionIndex) {
         const page = thePos.p;
-        const pageDiv = $(`#page-${page}`);
-        const canvas = pageDiv.children('canvas').eq(0);
+        const tryAppend = (attempt = 0) => {
+            const pageDiv = $(`#page-${page}`);
+            if (pageDiv.length === 0) {
+                if (attempt < 50) {
+                    // wait for the page to be rendered
+                    return setTimeout(() => tryAppend(attempt + 1), 100);
+                }
+                // give up silently if page never appears
+                return;
+            }
+            const canvas = pageDiv.children('canvas').eq(0);
+            if (canvas.length === 0) {
+                if (attempt < 50) {
+                    return setTimeout(() => tryAppend(attempt + 1), 100);
+                }
+                return;
+            }
 
-        const canvasHeight = canvas.height();
-        const canvasWidth = canvas.width();
-        const scale_y = canvasHeight / page_height;
-        const scale_x = canvasWidth / page_width;
+            const canvasHeight = canvas.height();
+            const canvasWidth = canvas.width();
+            const scale_y = canvasHeight / page_height;
+            const scale_x = canvasWidth / page_width;
 
-        const x = (thePos.x * scale_x) - 1;
-        const y = (thePos.y * scale_y) - 1;
-        const width = (thePos.w * scale_x) + 1;
-        const height = (thePos.h * scale_y) + 1;
+            const x = (thePos.x * scale_x) - 1;
+            const y = (thePos.y * scale_y) - 1;
+            const width = (thePos.w * scale_x) + 1;
+            const height = (thePos.h * scale_y) + 1;
 
-        // Make clickable the area, ensure it sits above the textLayer
-        const element = document.createElement("a");
-        const attributes = `display:block; width:${width}px; height:${height}px; position:absolute; top:${y}px; left:${x}px; z-index: 5; pointer-events: auto;`;
-        element.setAttribute("style", attributes + "border:2px solid;");
-        element.setAttribute("class", theType.toLowerCase());
-        element.setAttribute("id", `annot-${entityIndex}-${positionIndex}`);
-        element.setAttribute("page", page);
+            // Make clickable the area, ensure it sits above the textLayer
+            const element = document.createElement("a");
+            const attributes = `display:block; width:${width}px; height:${height}px; position:absolute; top:${y}px; left:${x}px; z-index: 5; pointer-events: auto;`;
+            element.setAttribute("style", attributes + "border:2px solid;");
+            element.setAttribute("class", theType.toLowerCase());
+            element.setAttribute("id", `annot-${entityIndex}-${positionIndex}`);
+            element.setAttribute("page", page);
 
-        pageDiv.append(element);
+            pageDiv.append(element);
 
-        $(`#annot-${entityIndex}-${positionIndex}`).bind('mouseenter', (e) => this.viewEntityPDF(e));
-        $(`#annot-${entityIndex}-${positionIndex}`).bind('click', (e) => this.viewEntityPDF(e));
+            $(`#annot-${entityIndex}-${positionIndex}`).bind('mouseenter', (e) => this.viewEntityPDF(e));
+            $(`#annot-${entityIndex}-${positionIndex}`).bind('click', (e) => this.viewEntityPDF(e));
+        };
+        tryAppend(0);
     }
 
     viewEntityPDF(event) {
@@ -1350,7 +1386,7 @@ class SoftciteApp {
                 const leftTdTop = leftTd.getBoundingClientRect().top + window.pageYOffset;
                 const pageDivTop = pageDiv.getBoundingClientRect().top + window.pageYOffset;
                 const headerOffset = pageDivTop - leftTdTop; // space above canvas (page header + margins)
-                desiredTop = Math.max(0, headerOffset + desiredTop - 8);
+                desiredTop = Math.max(0, headerOffset + desiredTop - 4);
             }
         } catch (e) {
             // keep fallback desiredTop
@@ -1385,13 +1421,13 @@ class SoftciteApp {
         const boxH = box ? box.offsetHeight : 0;
         let topClamped = desiredTop;
         if (parentH > 0 && boxH > 0) {
-            const maxTop = Math.max(0, parentH - boxH - 8);
+            const maxTop = Math.max(0, parentH - boxH - 6);
             topClamped = Math.max(0, Math.min(desiredTop, maxTop));
         }
         panel.style.top = `${topClamped}px`;
         // Keep content visible inside the panel area
         if (parentH > 0) {
-            panel.style.maxHeight = `${parentH - 8}px`;
+            panel.style.maxHeight = `${parentH - 6}px`;
             panel.style.overflow = 'auto';
         }
     }
@@ -1666,6 +1702,16 @@ class SoftciteApp {
         return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     }
 
+    // Basic XML parser for TEI references
+    parse(xmlString) {
+        try {
+            const parser = new DOMParser();
+            return parser.parseFromString(xmlString, 'text/xml');
+        } catch (e) {
+            return document.implementation.createDocument('', '', null);
+        }
+    }
+
     // Wikipedia image lookup with caching and JSONP (feature parity)
     lookupWikiMediaImage(wikipedia, lang, pageIndex) {
         const wikimediaURL_prefix = 'https://';
@@ -1753,3 +1799,4 @@ window.grobid = {
     submitQuery: () => window.softciteApp.submitQuery(),
     // Add other legacy methods as needed
 };
+
