@@ -53,8 +53,5 @@ public interface SoftwarePaths {
      */
     public static final String PATH_SOFTWARE_CONTEXT = "characterizeSoftwareContext";
 
-    /**
-     * path extension for extracting software entities from an URL to an online PDF
-     */
-    //public static final String PATH_ANNOTATE_SOFTWARE_PDF_URL = "annotateSoftwarePDFURL";
+    public static final String PATH_VERSION = "version";
 }

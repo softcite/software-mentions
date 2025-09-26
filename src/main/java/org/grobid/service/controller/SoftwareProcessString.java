@@ -20,6 +20,7 @@ import org.grobid.core.factory.GrobidPoolingFactory;
 import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.utilities.SoftwareConfiguration;
 
+import org.grobid.core.utilities.Versioner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -67,10 +68,10 @@ public class SoftwareProcessString {
 
 			if (entities != null) {
 				retVal.append("{ ");
-				retVal.append(SoftwareServiceUtil.applicationDetails(GrobidProperties.getVersion()));
-				if (entities.size() == 0)
-					retVal.append(", \"mentions\": []");
-				else {
+				retVal.append(SoftwareServiceUtil.applicationDetails(Versioner.getVersion(), Versioner.getRevision()));
+				if (entities.size() == 0) {
+                    retVal.append(", \"mentions\": []");
+                } else {
 					boolean first = true;
 					for(SoftwareEntity entity : entities)	{
 						if (first) {
@@ -134,7 +135,7 @@ public class SoftwareProcessString {
 
 			if (resultJson != null) {
 				retVal.append("{ ");
-				retVal.append(SoftwareServiceUtil.applicationDetails(GrobidProperties.getVersion()));
+				retVal.append(SoftwareServiceUtil.applicationDetails(Versioner.getVersion(), Versioner.getRevision()));
 				retVal.append(", \"classification\": " + resultJson);
 				retVal.append(", \"runtime\": " + (end-start));
 				retVal.append("}");
