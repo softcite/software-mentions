@@ -141,9 +141,10 @@ Under the installed and built `grobid/` directory, clone the present module soft
 ```console
 cd grobid/
 git clone https://github.com/softcite/software-mentions
+cd software-mentions
 ```
 
-Copy the provided pre-trained models in the standard grobid-home path:
+Copy the provided pre-trained models into the standard grobid-home path:
 
 ```console
 ./gradlew copyModels 

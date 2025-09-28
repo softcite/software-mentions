@@ -879,10 +879,10 @@ public class SoftwareParser extends AbstractParser {
      */
     private List<SoftwareEntity> processLayoutTokenSequences(
         List<LayoutTokenization> layoutTokenizations,
-                                                             List<SoftwareEntity> entities,
-                                                             boolean disambiguate,
-                                                             boolean addParagraphContext,
-                                                             boolean fromPDF,
+        List<SoftwareEntity> entities,
+        boolean disambiguate,
+        boolean addParagraphContext,
+        boolean fromPDF,
         boolean fromXML,
         List<PDFAnnotation> pdfAnnotations
     ) {
@@ -896,12 +896,14 @@ public class SoftwareParser extends AbstractParser {
 
             // positions for lexical match
             List<OffsetPosition> softwareTokenPositions = softwareLexicon.tokenPositionsSoftwareNames(layoutTokens);
-            List<OffsetPosition> urlPositions = Lexicon.tokenPositionUrlPatternWithPdfAnnotations(layoutTokens, pdfAnnotations).stream()
+            List<OffsetPosition> urlTokensPositions = Lexicon.tokenPositionUrlPatternWithPdfAnnotations(layoutTokens, pdfAnnotations).stream()
                 .map(Pair::getLeft)
                 .collect(Collectors.toList());
 
+            urlTokensPositions.stream().forEach(o -> o.end += 1);
+
             // string representation of the feature matrix for sequence labeling lib
-            String ress = addFeatures(layoutTokens, softwareTokenPositions, urlPositions);
+            String ress = addFeatures(layoutTokens, softwareTokenPositions, urlTokensPositions);
             allRess.append(ress);
             allRess.append("\n\n");
         }
@@ -990,10 +992,13 @@ public class SoftwareParser extends AbstractParser {
      * Process with the software model a set of arbitrary sequence of LayoutTokenization
      * from tables and figures, where the content is not structured (yet)
      */
-    private List<SoftwareEntity> processLayoutTokenSequenceTableFigure(List<LayoutToken> layoutTokens,
-                                                                       List<SoftwareEntity> entities,
-                                                                       boolean disambiguate,
-                                                                       boolean addParagraphContext) {
+    private List<SoftwareEntity> processLayoutTokenSequenceTableFigure(
+        List<LayoutToken> layoutTokens,
+        List<SoftwareEntity> entities,
+        boolean disambiguate,
+        boolean addParagraphContext,
+        List<PDFAnnotation> pdfAnnotations
+    ) {
         layoutTokens = SoftwareAnalyzer.getInstance().retokenizeLayoutTokens(layoutTokens);
 
         int pos = 0;
@@ -1016,7 +1021,9 @@ public class SoftwareParser extends AbstractParser {
 
             // positions for lexical match
             List<OffsetPosition> softwareTokenPositions = softwareLexicon.tokenPositionsSoftwareNames(localLayoutTokens);
-            List<OffsetPosition> urlPositions = Lexicon.getInstance().tokenPositionsUrlPattern(localLayoutTokens);
+            List<OffsetPosition> urlPositions = Lexicon.tokenPositionUrlPatternWithPdfAnnotations(layoutTokens, pdfAnnotations).stream()
+                .map(Pair::getLeft)
+                .collect(Collectors.toList());
 
             // string representation of the feature matrix for sequence labeling lib
             String ress = addFeatures(localLayoutTokens, softwareTokenPositions, urlPositions);
