@@ -24,8 +24,6 @@ Large-scale Machine-Learning analysis of scientific PDF for monitoring the produ
 https://hal.science/hal-04121339v3
 ```
 
-And additional improvements thanks to [the SoFAIR EU-funded project, including good documentation on the output data format](https://sofairoa.github.io/solution_documentation/04-software-mention-extraction-and-disambiguation/).
-
 As the other GROBID models, the module relies only on state-of-the-art machine learning. The tool can use linear CRF (via [Wapiti](https://github.com/kermitt2/Wapiti) JNI integration) or Deep Learning model such as BiLSTM-CRF, ELMo or fine-tuned transformers BERT, e.g. SciBERT and LinkBERT (via [DeLFT](https://github.com/kermitt2/delft) JNI integration) and any combination of them. 
 
 Thanks to its integration in the [GROBID](https://github.com/kermitt2/grobid) framework, the software mention extraction on scholar PDF is:
