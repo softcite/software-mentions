@@ -2,29 +2,22 @@ package org.grobid.service.controller;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-
-import java.util.List;
-import java.util.ArrayList;
-import java.util.NoSuchElementException;
-
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
-
-import org.grobid.core.data.SoftwareComponent;
+import org.apache.commons.collections4.CollectionUtils;
 import org.grobid.core.data.SoftwareEntity;
-import org.grobid.core.engines.SoftwareParser;
 import org.grobid.core.engines.SoftwareContextClassifier;
-import org.grobid.core.engines.SoftwareContextClassifier.MODEL_TYPE;
-import org.grobid.core.factory.GrobidPoolingFactory;
-import org.grobid.core.utilities.GrobidProperties;
+import org.grobid.core.engines.SoftwareParser;
 import org.grobid.core.utilities.SoftwareConfiguration;
-
+import org.grobid.core.utilities.TextNormalizationUtils;
 import org.grobid.core.utilities.Versioner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.apache.commons.lang3.StringUtils;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * 
@@ -56,12 +49,12 @@ public class SoftwareProcessString {
 		StringBuilder retVal = new StringBuilder();
 		SoftwareParser parser = SoftwareParser.getInstance(configuration);
 		try {
-            if (text == null) {
+            if (TextNormalizationUtils.isBlank(text)) {
                 return Response.status(Status.BAD_REQUEST).build();
             }
-			
+
 			List<SoftwareEntity> entities = null;
-			text = text.replaceAll("\\n", " ").replaceAll("\\t", " ");
+			text = TextNormalizationUtils.normalizeTextWhitespace(text);
 			long start = System.currentTimeMillis();
 			entities = parser.processText(text, disambiguate);
 			long end = System.currentTimeMillis();
@@ -69,7 +62,7 @@ public class SoftwareProcessString {
 			if (entities != null) {
 				retVal.append("{ ");
 				retVal.append(SoftwareServiceUtil.applicationDetails(Versioner.getVersion(), Versioner.getRevision()));
-				if (entities.size() == 0) {
+				if (CollectionUtils.isEmpty(entities)) {
                     retVal.append(", \"mentions\": []");
                 } else {
 					boolean first = true;
@@ -117,15 +110,15 @@ public class SoftwareProcessString {
 		SoftwareContextClassifier classifier = SoftwareContextClassifier.getInstance(configuration);
 		try {
 			LOGGER.debug(">> set raw text for stateless service'...");
-			
-			text = text.replaceAll("\\n", " ").replaceAll("\\t", " ");
+
+			text = TextNormalizationUtils.normalizeTextWhitespace(text);
 			long start = System.currentTimeMillis();
 			String resultJson = null;
 	        List<String> texts = new ArrayList<>();
 	        texts.add(text);
 	        try {
 	            List<String> results = classifier.classifyDocumentContextsBinaryString(texts);
-	            if (results.size()>0)
+	            if (CollectionUtils.isNotEmpty(results))
 		            resultJson = results.get(0);
 	        } catch(Exception e) {
 	            LOGGER.error("fail to classify document's set of contexts", e);
@@ -195,7 +188,7 @@ public class SoftwareProcessString {
 	 * Check whether the result is null or empty.
 	 */
 	public static boolean isResultOK(String result) {
-		return StringUtils.isBlank(result) ? false : true;
+		return TextNormalizationUtils.isNotBlank(result);
 	}
 
 }

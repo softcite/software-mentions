@@ -1,36 +1,21 @@
 package org.grobid.core.engines;
 
-import java.util.*;
-
-import org.apache.commons.io.FileUtils;
-import org.grobid.core.GrobidModels;
-import org.grobid.core.exceptions.GrobidException;
-import org.grobid.core.factory.GrobidFactory;
-import org.grobid.core.layout.LayoutToken;
-import org.grobid.core.layout.LayoutTokenization;
-import org.grobid.core.utilities.*;
-import org.grobid.core.jni.PythonEnvironmentConfig;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.grobid.core.data.SoftwareContextAttributes;
+import org.grobid.core.data.SoftwareEntity;
 import org.grobid.core.jni.DeLFTClassifierModel;
 import org.grobid.core.utilities.GrobidConfig.ModelParameters;
+import org.grobid.core.utilities.SoftwareConfiguration;
 import org.grobid.core.utilities.TextUtilities;
-import org.grobid.core.data.SoftwareEntity;
-import org.grobid.core.data.SoftwareContextAttributes;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.SystemUtils;
-import org.apache.commons.lang3.tuple.Pair;
-
-import com.fasterxml.jackson.core.*;
-import com.fasterxml.jackson.databind.*;
-import com.fasterxml.jackson.databind.node.*;
-import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.core.io.*;
-
-import static org.apache.commons.lang3.ArrayUtils.isEmpty;
+import java.util.*;
 
 /**
  * Use a Deep Learning multiclass and multilabel classifier to characterize the context of a recognized software mention. 
@@ -132,7 +117,7 @@ public class SoftwareContextClassifier {
      * @return list of predicted labels/scores pairs for each text
      */
     public String classify(List<String> texts, MODEL_TYPE type) throws Exception {
-        if (texts == null || texts.size() == 0)
+        if (CollectionUtils.isEmpty(texts))
             return null;
 
         LOGGER.info("classify: " + texts.size() + " sentence(s) for type " + type.toString());

@@ -26,6 +26,7 @@ import org.grobid.core.factory.GrobidFactory;
 import org.grobid.core.features.FeatureFactory;
 import org.grobid.core.features.FeaturesVectorSoftware;
 import org.grobid.core.layout.BoundingBox;
+import org.grobid.core.utilities.TextNormalizationUtils;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.layout.LayoutTokenization;
 import org.grobid.core.layout.PDFAnnotation;
@@ -555,7 +556,7 @@ public class SoftwareParser extends AbstractParser {
                     SoftwareComponent softwareComponent = entity.getSoftwareName();
                     String localRawForm = softwareComponent.getRawForm();
                     if (localRawForm.indexOf("-") != -1 && !localRawForm.endsWith("-")) {
-                        localRawForm = localRawForm.replaceAll("-( |\\n)*", "");
+                        localRawForm = TextNormalizationUtils.removeDashPatterns(localRawForm);
                         localRawForm = localRawForm.replace("-", "");
                         if (allRawForms.contains(localRawForm)) {
                             softwareComponent.setNormalizedForm(localRawForm);
@@ -1170,7 +1171,7 @@ public class SoftwareParser extends AbstractParser {
     }
 
     public List<SoftwareEntity> markDAS(List<SoftwareEntity> entities, List<LayoutToken> availabilityTokens) {
-        if (entities == null || entities.size() == 0)
+        if (CollectionUtils.isEmpty(entities))
             return entities;
         for (SoftwareEntity entity : entities) {
             if (entity.isInDataAvailabilitySection())
@@ -1242,7 +1243,7 @@ public class SoftwareParser extends AbstractParser {
         int n = 0; // index in entities
         SoftwareEntity previousEntity = null;
         currentEntity = null;
-        if (entities.size() == 0)
+        if (CollectionUtils.isEmpty(entities))
             return entities;
         if (entities.size() > 1) {
             previousEntity = entities.get(0);

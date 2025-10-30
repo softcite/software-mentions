@@ -1,53 +1,30 @@
 package org.grobid.core.engines;
 
-import org.apache.commons.io.FileUtils;
-import org.grobid.core.GrobidModels;
+import org.apache.commons.collections4.CollectionUtils;
 import org.grobid.core.analyzers.SoftwareAnalyzer;
-import org.grobid.core.data.SoftwareComponent;
-import org.grobid.core.data.BiblioComponent;
-import org.grobid.core.data.SoftwareEntity;
 import org.grobid.core.data.SoftwareType;
-import org.grobid.core.lexicon.SoftwareLexicon.Software_Type;
 import org.grobid.core.document.TEIFormatter;
-import org.grobid.core.document.Document;
-import org.grobid.core.document.DocumentPiece;
-import org.grobid.core.document.DocumentSource;
-import org.grobid.core.engines.config.GrobidAnalysisConfig;
 import org.grobid.core.engines.label.SoftwareTaggingLabels;
-import org.grobid.core.engines.label.SegmentationLabels;
 import org.grobid.core.engines.label.TaggingLabel;
-import org.grobid.core.engines.label.TaggingLabels;
 import org.grobid.core.engines.tagging.GrobidCRFEngine;
-import org.grobid.core.exceptions.GrobidException;
-import org.grobid.core.factory.GrobidFactory;
-import org.grobid.core.features.FeaturesVectorSoftware;
+import org.grobid.core.features.FeatureFactory;
 import org.grobid.core.layout.BoundingBox;
 import org.grobid.core.layout.LayoutToken;
-import org.grobid.core.layout.LayoutTokenization;
-import org.grobid.core.lexicon.SoftwareLexicon;
 import org.grobid.core.lexicon.Lexicon;
+import org.grobid.core.lexicon.SoftwareLexicon;
 import org.grobid.core.tokenization.TaggingTokenCluster;
 import org.grobid.core.tokenization.TaggingTokenClusteror;
-import org.grobid.core.utilities.*;
-import org.grobid.core.utilities.counters.CntManager;
-import org.grobid.core.utilities.counters.impl.CntManagerFactory;
-import org.grobid.core.lexicon.FastMatcher;
+import org.grobid.core.utilities.BoundingBoxCalculator;
+import org.grobid.core.utilities.LayoutTokensUtil;
+import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.SoftwareConfiguration;
-import org.grobid.core.features.FeatureFactory;
-
+import org.grobid.core.utilities.counters.impl.CntManagerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.*;
-
-import static org.apache.commons.lang3.StringUtils.*;
-import static org.grobid.core.document.xml.XmlBuilderUtils.teiElement;
-import org.apache.commons.lang3.tuple.Pair;
-
-import static java.nio.charset.StandardCharsets.UTF_8;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 
 /**
@@ -124,7 +101,7 @@ public class SoftwareTypeParser extends AbstractParser {
         for(List<LayoutToken> layoutTokens : layoutTokenList) {
             layoutTokens = SoftwareAnalyzer.getInstance().retokenizeLayoutTokens(layoutTokens);
 
-            if ( (layoutTokens == null) || (layoutTokens.size() == 0) )
+            if (CollectionUtils.isEmpty(layoutTokens))
                 continue;
 
             // positions for lexical match
@@ -150,7 +127,7 @@ public class SoftwareTypeParser extends AbstractParser {
         for(List<LayoutToken> layoutTokens : layoutTokenList) {
             layoutTokens = SoftwareAnalyzer.getInstance().retokenizeLayoutTokens(layoutTokens);
 
-            if ( (layoutTokens == null) || (layoutTokens.size() == 0) )
+            if (CollectionUtils.isEmpty(layoutTokens))
                 continue;
 
             // text of the selected segment
@@ -185,7 +162,7 @@ public class SoftwareTypeParser extends AbstractParser {
      * Process a list of already prepared input with features
      **/
     public List<List<SoftwareType>> processFeatureInputs(List<String> inputFeatures, List<List<LayoutToken>> layoutTokenList) throws Exception {
-        if (inputFeatures == null || inputFeatures.size() == 0) {
+        if (CollectionUtils.isEmpty(inputFeatures)) {
             // empty content, nothing more to do
             return null;
         }
