@@ -3,6 +3,7 @@ package org.grobid.trainer;
 import org.grobid.core.main.GrobidHomeFinder;
 import org.grobid.core.utilities.SoftwareConfiguration;
 import org.grobid.core.utilities.GrobidProperties;
+import org.grobid.core.utilities.ConfigurationValidator;
 import org.grobid.core.utilities.GrobidConfig.ModelParameters;
 import org.grobid.core.main.LibraryLoader;
 
@@ -94,8 +95,8 @@ public class SoftwareTrainerRunner {
         System.out.println("path2GbdHome=" + path2GbdHome);
         initProcess(path2GbdHome);
 
-        if (conf != null && (conf.getModel("software") != null || conf.getModel("software-type") != null))
-            for (ModelParameters model : conf.getModels()) 
+        if (ConfigurationValidator.hasValidSoftwareModels(conf))
+            for (ModelParameters model : conf.getModels())
                 GrobidProperties.getInstance().addModel(model);
         LibraryLoader.load();
 

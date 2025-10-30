@@ -2,43 +2,35 @@ package org.grobid.service.controller;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-
-import org.grobid.core.data.SoftwareComponent;
-import org.grobid.core.data.SoftwareEntity;
-import org.grobid.core.data.BibDataSet;
-import org.grobid.core.document.Document;
-import org.grobid.core.engines.Engine;
-import org.grobid.core.main.LibraryLoader;
-import org.grobid.core.factory.GrobidFactory;
-import org.grobid.core.document.DocumentSource;
-import org.grobid.core.engines.SoftwareParser;
-import org.grobid.core.engines.config.GrobidAnalysisConfig;
-import org.grobid.core.factory.GrobidPoolingFactory;
-import org.grobid.core.utilities.*;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-import org.xml.sax.XMLReader;
-import org.xml.sax.helpers.XMLReaderFactory;
-
-import jakarta.ws.rs.WebApplicationException;
-import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
-import jakarta.ws.rs.core.StreamingOutput;
-import java.io.*;
-import java.nio.charset.Charset;
-import java.util.*;
-import java.security.DigestInputStream;
-import java.security.MessageDigest;
-import javax.xml.bind.DatatypeConverter;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
-
+import org.apache.commons.lang3.tuple.Triple;
+import org.grobid.core.data.BibDataSet;
+import org.grobid.core.data.BiblioItem;
+import org.grobid.core.data.ArticleBiblio;
+import org.grobid.core.data.SoftwareEntity;
+import org.grobid.core.document.Document;
+import org.grobid.core.engines.Engine;
+import org.grobid.core.engines.SoftwareParser;
+import org.grobid.core.engines.config.GrobidAnalysisConfig;
+import org.grobid.core.factory.GrobidFactory;
 import org.grobid.core.layout.Page;
+import org.grobid.core.utilities.IOUtilities;
+import org.grobid.core.utilities.SoftwareConfiguration;
+import org.grobid.core.utilities.Versioner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.xml.bind.DatatypeConverter;
+import java.io.File;
+import java.io.InputStream;
+import java.security.DigestInputStream;
+import java.security.MessageDigest;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 /**
  *
@@ -100,6 +92,12 @@ public class SoftwareProcessFile {
                 
                 String md5Str = DatatypeConverter.printHexBinary(digest).toUpperCase();
                 json.append(", \"md5\": \"" + md5Str + "\"");
+
+                // Add article metadata (biblio) from document header
+                BiblioItem resHeader = doc.getResHeader();
+                Optional<ArticleBiblio> metadata = ArticleBiblio.fromBiblioItem(resHeader);
+
+                metadata.ifPresent(articleBiblio -> json.append(", " + articleBiblio.toJson()));
 
 				// page height and width
                 json.append(", \"pages\":[");
@@ -286,18 +284,22 @@ public class SoftwareProcessFile {
                 response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
             } else {
                 long start = System.currentTimeMillis();
-                Pair<List<SoftwareEntity>, List<BibDataSet>> extractionResult = 
+                Triple<Optional<ArticleBiblio>, List<SoftwareEntity>, List<BibDataSet>> extractionResult =
                     parser.processXML(originFile, disambiguate, addParagraphContext);
                 long end = System.currentTimeMillis();
 
-                List<SoftwareEntity> extractedEntities = extractionResult.getLeft();
+                List<SoftwareEntity> extractedEntities = extractionResult.getMiddle();
+                Optional<ArticleBiblio> metadata = extractionResult.getLeft();
 
                 StringBuilder json = new StringBuilder();
                 json.append("{ ");
                 json.append(SoftwareServiceUtil.applicationDetails(Versioner.getVersion(), Versioner.getRevision()));
-                
+
                 String md5Str = DatatypeConverter.printHexBinary(digest).toUpperCase();
                 json.append(", \"md5\": \"" + md5Str + "\"");
+
+                metadata.ifPresent(articleBiblio -> json.append(", " + articleBiblio.toJson()));
+
                 json.append(", \"mentions\":[");
                 boolean first = true;
                 if (extractedEntities != null) {
@@ -372,20 +374,25 @@ public class SoftwareProcessFile {
                 response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
             } else {
                 long start = System.currentTimeMillis();
-                Pair<List<SoftwareEntity>, List<BibDataSet>> extractionResult = parser.processTEI(originFile, disambiguate, addParagraphContext);
+                Triple<Optional<ArticleBiblio>, List<SoftwareEntity>, List<BibDataSet>> extractionResult = parser.processTEI(originFile, disambiguate, addParagraphContext);
                 long end = System.currentTimeMillis();
 
                 List<SoftwareEntity> extractedEntities = null;
+                Optional<ArticleBiblio> metadata = Optional.empty();
                 if (extractionResult != null) {
-                    extractedEntities = extractionResult.getLeft();
+                    extractedEntities = extractionResult.getMiddle();
+                    metadata = extractionResult.getLeft();
                 }
 
                 StringBuilder json = new StringBuilder();
                 json.append("{ ");
                 json.append(SoftwareServiceUtil.applicationDetails(Versioner.getVersion(), Versioner.getRevision()));
-                
+
                 String md5Str = DatatypeConverter.printHexBinary(digest).toUpperCase();
                 json.append(", \"md5\": \"" + md5Str + "\"");
+
+                metadata.ifPresent(articleBiblio -> json.append(", " + articleBiblio.toJson()));
+
                 json.append(", \"mentions\":[");
                 boolean first = true;
                 if (extractedEntities != null) {
@@ -399,11 +406,9 @@ public class SoftwareProcessFile {
                 }
                 json.append("], \"references\":[");
 
-                if (extractionResult != null) {
-                    List<BibDataSet> bibDataSet = extractionResult.getRight();
-                    if (bibDataSet != null && bibDataSet.size()>0) {
-                        SoftwareServiceUtil.serializeReferences(json, bibDataSet, extractedEntities);
-                    }
+                List<BibDataSet> teiBibDataSet = extractionResult != null ? extractionResult.getRight() : null;
+                if (teiBibDataSet != null && teiBibDataSet.size()>0) {
+                    SoftwareServiceUtil.serializeReferences(json, teiBibDataSet, extractedEntities);
                 }
                 
                 json.append("], \"runtime\" :" + (end-start));

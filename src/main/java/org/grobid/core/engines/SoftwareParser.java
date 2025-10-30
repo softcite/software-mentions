@@ -6,6 +6,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
+import org.apache.commons.lang3.tuple.Triple;
 import org.grobid.core.GrobidModels;
 import org.grobid.core.analyzers.SoftwareAnalyzer;
 import org.grobid.core.data.*;
@@ -25,6 +26,7 @@ import org.grobid.core.factory.GrobidFactory;
 import org.grobid.core.features.FeatureFactory;
 import org.grobid.core.features.FeaturesVectorSoftware;
 import org.grobid.core.layout.BoundingBox;
+import org.grobid.core.utilities.TextNormalizationUtils;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.layout.LayoutTokenization;
 import org.grobid.core.layout.PDFAnnotation;
@@ -349,9 +351,11 @@ public class SoftwareParser extends AbstractParser {
     /**
      * Extract all Software mentions from a pdf file
      */
-    public Pair<List<SoftwareEntity>, Document> processPDF(File file,
-                                                           boolean disambiguate,
-                                                           boolean addParagraphContext) throws IOException {
+    public Pair<List<SoftwareEntity>, Document> processPDF(
+        File file,
+        boolean disambiguate,
+        boolean addParagraphContext
+    ) throws IOException {
         List<SoftwareEntity> entities = new ArrayList<SoftwareEntity>();
         Document doc = null;
         try {
@@ -380,7 +384,8 @@ public class SoftwareParser extends AbstractParser {
             List<List<LayoutToken>> selectedLayoutTokenSequences = new ArrayList<>();
 
             // from the header, we are interested in title, abstract and keywords
-            BiblioItem resHeader = null;
+            BiblioItem resHeader = new BiblioItem();
+            doc.setResHeader(resHeader);
             SortedSet<DocumentPiece> documentParts = doc.getDocumentPart(SegmentationLabels.HEADER);
             if (documentParts != null) {
                 try {
@@ -390,8 +395,8 @@ public class SoftwareParser extends AbstractParser {
                     String labeledResult = null;
                     if ((header != null) && (header.trim().length() > 0)) {
                         labeledResult = parsers.getHeaderParser().label(header);
-                        resHeader = new BiblioItem();
-                        resHeader.generalResultMappingHeader(labeledResult, headerTokenization);
+
+                        resHeader = parsers.getHeaderParser().resultExtraction(labeledResult, headerTokenization, resHeader);
 
                         // title
                         List<LayoutToken> titleTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_TITLE);
@@ -551,7 +556,7 @@ public class SoftwareParser extends AbstractParser {
                     SoftwareComponent softwareComponent = entity.getSoftwareName();
                     String localRawForm = softwareComponent.getRawForm();
                     if (localRawForm.indexOf("-") != -1 && !localRawForm.endsWith("-")) {
-                        localRawForm = localRawForm.replaceAll("-( |\\n)*", "");
+                        localRawForm = TextNormalizationUtils.removeDashPatterns(localRawForm);
                         localRawForm = localRawForm.replace("-", "");
                         if (allRawForms.contains(localRawForm)) {
                             softwareComponent.setNormalizedForm(localRawForm);
@@ -825,12 +830,12 @@ public class SoftwareParser extends AbstractParser {
      */
     private List<SoftwareEntity> processLayoutTokenSequence(
         List<LayoutToken> layoutTokens,
-            List<SoftwareEntity> entities,
-            boolean disambiguate,
-            boolean addParagraphContext,
-            boolean fromPDF,
-            boolean fromXML,
-            List<PDFAnnotation> pdfAnnotations
+        List<SoftwareEntity> entities,
+        boolean disambiguate,
+        boolean addParagraphContext,
+        boolean fromPDF,
+        boolean fromXML,
+        List<PDFAnnotation> pdfAnnotations
     ) {
         List<LayoutTokenization> layoutTokenizations = new ArrayList<LayoutTokenization>();
         layoutTokenizations.add(new LayoutTokenization(layoutTokens));
@@ -842,11 +847,11 @@ public class SoftwareParser extends AbstractParser {
      */
     private List<SoftwareEntity> processLayoutTokenSequenceMultiple(
         List<List<LayoutToken>> layoutTokenList,
-                                                                    List<SoftwareEntity> entities,
-                                                                    boolean disambiguate,
-                                                                    boolean addParagraphContext,
-                                                                    boolean fromPDF,
-                                                                    boolean fromXML) {
+        List<SoftwareEntity> entities,
+        boolean disambiguate,
+        boolean addParagraphContext,
+        boolean fromPDF,
+        boolean fromXML) {
 
         return processLayoutTokenSequenceMultiple(
             layoutTokenList,
@@ -1166,7 +1171,7 @@ public class SoftwareParser extends AbstractParser {
     }
 
     public List<SoftwareEntity> markDAS(List<SoftwareEntity> entities, List<LayoutToken> availabilityTokens) {
-        if (entities == null || entities.size() == 0)
+        if (CollectionUtils.isEmpty(entities))
             return entities;
         for (SoftwareEntity entity : entities) {
             if (entity.isInDataAvailabilitySection())
@@ -1238,7 +1243,7 @@ public class SoftwareParser extends AbstractParser {
         int n = 0; // index in entities
         SoftwareEntity previousEntity = null;
         currentEntity = null;
-        if (entities.size() == 0)
+        if (CollectionUtils.isEmpty(entities))
             return entities;
         if (entities.size() > 1) {
             previousEntity = entities.get(0);
@@ -2454,10 +2459,10 @@ public class SoftwareParser extends AbstractParser {
     /**
      * Extract all software mentions from a publisher XML file
      */
-    public Pair<List<SoftwareEntity>, List<BibDataSet>> processXML(File file,
-                                                                   boolean disambiguate,
-                                                                   boolean addParagraphContext) throws IOException {
-        Pair<List<SoftwareEntity>, List<BibDataSet>> resultExtraction = null;
+    public Triple<Optional<ArticleBiblio>, List<SoftwareEntity>, List<BibDataSet>> processXML(File file,
+                                                                                              boolean disambiguate,
+                                                                                              boolean addParagraphContext) throws IOException {
+        Triple<Optional<ArticleBiblio>, List<SoftwareEntity>, List<BibDataSet>> resultExtraction = null;
         try {
             String tei = processXML(file);
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -2484,10 +2489,12 @@ public class SoftwareParser extends AbstractParser {
     /**
      * Extract all software mentions from a publisher XML file
      */
-    public Pair<List<SoftwareEntity>, List<BibDataSet>> processTEI(File file,
-                                                                   boolean disambiguate,
-                                                                   boolean addParagraphContext) throws IOException {
-        Pair<List<SoftwareEntity>, List<BibDataSet>> resultExtraction = null;
+    public Triple<Optional<ArticleBiblio>, List<SoftwareEntity>, List<BibDataSet>> processTEI(
+        File file,
+        boolean disambiguate,
+        boolean addParagraphContext
+    ) throws IOException {
+        Triple<Optional<ArticleBiblio>, List<SoftwareEntity>, List<BibDataSet>> resultExtraction = null;
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             factory.setNamespaceAware(true);
@@ -2546,9 +2553,11 @@ public class SoftwareParser extends AbstractParser {
     /**
      * Extract all software mentions from a publisher XML file
      */
-    public Pair<List<SoftwareEntity>, List<BibDataSet>> processTEIDocument(org.w3c.dom.Document doc,
-                                                                           boolean disambiguate,
-                                                                           boolean addParagraphContext) {
+    public Triple<Optional<ArticleBiblio>, List<SoftwareEntity>, List<BibDataSet>> processTEIDocument(
+        org.w3c.dom.Document doc,
+        boolean disambiguate,
+        boolean addParagraphContext
+    ) {
         List<SoftwareEntity> entities = new ArrayList<>();
 
         List<List<LayoutToken>> selectedLayoutTokenSequencesRaw = new ArrayList<>();
@@ -2609,7 +2618,7 @@ public class SoftwareParser extends AbstractParser {
                     if (tokens.size() > 512) {
                         String tempText = LayoutTokensUtil.toText(tokens);
                         List<OffsetPosition> offsetPositions = SentenceUtilities.getInstance().runSentenceDetection(tempText);
-                        List<List<LayoutToken>> splitTokens =offsetPositions.stream()
+                        List<List<LayoutToken>> splitTokens = offsetPositions.stream()
                             .map(op -> tempText.substring(op.start, op.end))
                             .map(s -> SoftwareAnalyzer.getInstance().tokenizeWithLayoutToken(s))
                             .collect(Collectors.toList());
@@ -2853,7 +2862,8 @@ public class SoftwareParser extends AbstractParser {
         // finally classify the context for predicting the role of the software mention
         entities = SoftwareContextClassifier.getInstance(softwareConfiguration).classifyDocumentContexts(entities);
 
-        return Pair.of(entities, resCitations);
+        Optional<ArticleBiblio> metadata = ArticleBiblio.fromTeiDocument(doc);
+        return Triple.of(metadata, entities, resCitations);
     }
 
 

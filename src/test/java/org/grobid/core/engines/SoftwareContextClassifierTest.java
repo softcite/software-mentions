@@ -7,6 +7,7 @@ import org.grobid.core.document.Document;
 import org.grobid.core.factory.GrobidFactory;
 import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.utilities.SoftwareConfiguration;
+import org.grobid.core.utilities.TextNormalizationUtils;
 import org.grobid.core.main.GrobidHomeFinder;
 import org.grobid.core.utilities.GrobidConfig.ModelParameters;
 import org.grobid.core.main.LibraryLoader;
@@ -76,7 +77,7 @@ public class SoftwareContextClassifierTest {
     @Test
     public void testSoftwareContextClassifierText() throws Exception {
         String text = IOUtils.toString(this.getClass().getResourceAsStream("/text.txt"), StandardCharsets.UTF_8.toString());
-        text = text.replaceAll("\\n", " ").replaceAll("\\t", " ");
+        text = TextNormalizationUtils.normalizeTextWhitespace(text);
         List<String> texts = new ArrayList<>();
         texts.add(text);
         String json = SoftwareContextClassifier.getInstance(configuration).classify(texts, MODEL_TYPE.used);

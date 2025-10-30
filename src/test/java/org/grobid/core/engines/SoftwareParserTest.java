@@ -1,32 +1,28 @@
 package org.grobid.core.engines;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.tuple.Pair;
 import org.grobid.core.data.SoftwareEntity;
-import org.grobid.core.data.SoftwareComponent;
 import org.grobid.core.document.Document;
-import org.grobid.core.factory.GrobidFactory;
+import org.grobid.core.main.GrobidHomeFinder;
+import org.grobid.core.main.LibraryLoader;
+import org.grobid.core.utilities.GrobidConfig.ModelParameters;
 import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.utilities.SoftwareConfiguration;
-import org.grobid.core.main.GrobidHomeFinder;
-import org.grobid.core.utilities.GrobidConfig.ModelParameters;
-import org.grobid.core.main.LibraryLoader;
+import org.grobid.core.utilities.TextNormalizationUtils;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
 import java.util.Arrays;
-
-import org.apache.commons.lang3.tuple.Pair;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
-import static org.junit.Assert.assertNotNull;
 
 /**
  * @author Patrice
@@ -72,7 +68,7 @@ public class SoftwareParserTest {
     @Test
     public void testSoftwareParserText() throws Exception {
         String text = IOUtils.toString(this.getClass().getResourceAsStream("/text.txt"), StandardCharsets.UTF_8.toString());
-        text = text.replaceAll("\\n", " ").replaceAll("\\t", " ");
+        text = TextNormalizationUtils.normalizeTextWhitespace(text);
         List<SoftwareEntity> entities = SoftwareParser.getInstance(configuration).processText(text, false);
         System.out.println(text);
         System.out.println(entities.size());
