@@ -4,11 +4,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.grobid.core.utilities.LayoutTokensUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.NodeList;
 
+import javax.xml.namespace.NamespaceContext;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
@@ -36,7 +36,6 @@ public class ArticleBiblio {
         this.title = title;
         this.authors = authors;
     }
-
     // Getters and setters
     public String getDoi() {
         return doi;
@@ -61,7 +60,6 @@ public class ArticleBiblio {
     public String getAuthors() {
         return this.authors;
     }
-
     /**
      * Check if this metadata article has any meaningful content
      */
@@ -72,41 +70,46 @@ public class ArticleBiblio {
     }
 
     /**
-     * Convert this MetadataArticle to JSON string for API response
+     * Convert this ArticleBiblio to JSON string for API response
      */
     public String toJson() {
         ObjectMapper mapper = new ObjectMapper();
         StringBuilder json = new StringBuilder();
+        boolean hasField = false;
 
         json.append("\"biblio\": {");
-        boolean firstField = true;
 
         // Add DOI if available
-        if (doi != null && !doi.trim().isEmpty()) {
-            if (!firstField) json.append(", ");
+        if (StringUtils.isNotBlank(doi)) {
+            json.append("\"doi\": ");
             try {
-                json.append("\"doi\": ").append(mapper.writeValueAsString(doi));
+                json.append(mapper.writeValueAsString(doi));
             } catch (JsonProcessingException e) {
-                json.append("\"doi\": \"\"");
+                json.append("\"\"");
             }
-            firstField = false;
+            hasField = true;
         }
 
         // Add title if available
-        if (title != null && !title.trim().isEmpty()) {
-            if (!firstField) json.append(", ");
+        if (StringUtils.isNotBlank(title)) {
+            if (hasField) json.append(", ");
+            json.append("\"title\": ");
             try {
-                json.append("\"title\": ").append(mapper.writeValueAsString(title));
+                json.append(mapper.writeValueAsString(title));
             } catch (JsonProcessingException e) {
-                json.append("\"title\": \"\"");
+                json.append("\"\"");
             }
-            firstField = false;
+            hasField = true;
         }
 
         // Add authors if available
         if (StringUtils.isNotBlank(authors)) {
-            if (!firstField) json.append(", ");
-            json.append("\"authors\": \"" + authors + "\"");
+            if (hasField) json.append(", ");
+            try {
+                json.append("\"authors\": ").append(mapper.writeValueAsString(authors));
+            } catch (JsonProcessingException e) {
+                json.append("\"authors\": \"\"");
+            }
         }
 
         json.append("}");
@@ -156,61 +159,135 @@ public class ArticleBiblio {
             XPathFactory xPathFactory = XPathFactory.newInstance();
             XPath xpath = xPathFactory.newXPath();
 
+            // Set up namespace context for TEI documents
+            NamespaceContext nsContext = new TEINamespaceContext();
+            xpath.setNamespaceContext(nsContext);
+
+            // Extract metadata using namespace-aware XPath
             String title = extractTitle(teiDocument, xpath);
             String doi = extractDOI(teiDocument, xpath);
-            List<String> authors = extractAuthors(teiDocument, xpath);
+            List<Person> authors = extractAuthors(teiDocument, xpath);
+
+            LOGGER.debug("Extracted from TEI: title='{}', doi='{}', authors={}", title, doi, authors.size());
 
             ArticleBiblio articleMetadata = new ArticleBiblio();
             articleMetadata.setDoi(doi);
             articleMetadata.setTitle(title);
 
             if (CollectionUtils.isNotEmpty(authors)) {
-                articleMetadata.setAuthors(String.join(", ", authors));
+                articleMetadata.setAuthors(formatAuthors(authors));
             }
 
-            return articleMetadata.hasContent() ? Optional.of(articleMetadata) : Optional.empty();
+            boolean hasContent = articleMetadata.hasContent();
+            LOGGER.debug("Article metadata has content: {}, result: {}", hasContent, articleMetadata);
+            return hasContent ? Optional.of(articleMetadata) : Optional.empty();
         } catch (Exception e) {
+            LOGGER.error("Error extracting article metadata from TEI document", e);
             return Optional.empty();
         }
     }
 
     private static String extractTitle(org.w3c.dom.Document doc, XPath xpath) {
         try {
-            NodeList titleNodes = (NodeList) xpath.evaluate("//teiHeader/fileDesc/titleStmt/title[@level='a'][@type='main']/text()", doc, XPathConstants.NODESET);
-            if (titleNodes != null && titleNodes.getLength() > 0) {
-                String title = titleNodes.item(0).getNodeValue().trim();
-                return title.isEmpty() ? "" : title;
+            // Try multiple possible title paths with namespace
+            String[] titlePaths = {
+                "//tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@level='a'][@type='main']/text()",
+                "//tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@level='a']",
+                "//tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type='main']/text()",
+            };
+
+            for (String path : titlePaths) {
+                try {
+                    NodeList titleNodes = (NodeList) xpath.evaluate(path, doc, XPathConstants.NODESET);
+                    if (titleNodes != null && titleNodes.getLength() > 0) {
+                        String title = titleNodes.item(0).getNodeValue().trim();
+                        if (!title.isEmpty()) {
+                            LOGGER.debug("Found title using path '{}': '{}'", path, title);
+                            return title;
+                        }
+                    }
+                } catch (Exception e) {
+                    LOGGER.debug("Failed to extract title with path '{}': {}", path, e.getMessage());
+                }
             }
         } catch (Exception e) {
+            LOGGER.debug("Error extracting title from TEI document", e);
         }
         return "";
     }
 
     private static String extractDOI(org.w3c.dom.Document doc, XPath xpath) {
+        String path = "//tei:teiHeader/tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:idno[@type='DOI']/text()";
+
         try {
-            NodeList doiNodes = (NodeList) xpath.evaluate("//teiHeader/fileDesc/sourceDesc/biblStruct/idno[2]/text()", doc, XPathConstants.NODESET);
+            NodeList doiNodes = (NodeList) xpath.evaluate(path, doc, XPathConstants.NODESET);
             if (doiNodes != null && doiNodes.getLength() > 0) {
                 String doi = doiNodes.item(0).getNodeValue().trim();
-                return doi.isEmpty() ? "" : doi;
+                if (!doi.isEmpty() && (doi.startsWith("10.") || doi.contains("doi.org"))) {
+                    LOGGER.debug("Found DOI using path '{}': '{}'", path, doi);
+                    return doi;
+                }
             }
         } catch (Exception e) {
+            LOGGER.debug("Failed to extract DOI with path '{}': {}", path, e.getMessage());
         }
         return "";
     }
 
-    private static List<String> extractAuthors(org.w3c.dom.Document doc, XPath xpath) {
-        List<String> authors = new ArrayList<>();
+    private static List<Person> extractAuthors(org.w3c.dom.Document doc, XPath xpath) {
+        List<Person> authors = new ArrayList<>();
+        String authorsPath = "//tei:teiHeader/tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:analytic/tei:author/tei:persName";
+
         try {
-            NodeList authorNodes = (NodeList) xpath.evaluate("//teiHeader/fileDesc/sourceDesc/biblStruct/analytic/author/persName", doc, XPathConstants.NODESET);
+            NodeList authorNodes = (NodeList) xpath.evaluate(authorsPath, doc, XPathConstants.NODESET);
+            LOGGER.debug("Found {} author nodes using path '{}'", authorNodes.getLength(), authorsPath);
+
             for (int i = 0; i < authorNodes.getLength(); i++) {
-                String author = formatAuthorFromNode(authorNodes.item(i));
-                if (!author.isEmpty() && !authors.contains(author)) {
-                    authors.add(author);
+                Person person = createPersonFromNode(authorNodes.item(i));
+                if (person != null) {
+                    authors.add(person);
+                    LOGGER.debug("Added author: '{}'", formatPersonName(person));
                 }
             }
         } catch (Exception e) {
+            LOGGER.debug("Failed to extract authors with path '{}': {}", authorsPath, e.getMessage());
         }
+
         return authors;
+    }
+
+    /**
+     * Create a Person object from an XML persName node
+     */
+    private static Person createPersonFromNode(org.w3c.dom.Node node) {
+        if (node == null) return null;
+
+        Person person = new Person();
+
+        if (node.getNodeName().equals("persName")) {
+            NodeList childNodes = node.getChildNodes();
+            for (int i = 0; i < childNodes.getLength(); i++) {
+                org.w3c.dom.Node child = childNodes.item(i);
+                if (child.getNodeName().equals("surname")) {
+                    person.setLastName(child.getTextContent().trim());
+                } else if (child.getNodeName().equals("forename")) {
+                    person.setFirstName(child.getTextContent().trim());
+                } else if (child.getNodeName().equals("middlename")) {
+                    person.setMiddleName(child.getTextContent().trim());
+                }
+            }
+        } else {
+            // If it's not a persName node, use the text content as the full name
+            String fullName = node.getTextContent().trim();
+            if (!fullName.isEmpty()) {
+                person.setLastName(fullName); // Fallback: put full name in last name
+            }
+        }
+
+        // Return person if it has any name data
+        return (StringUtils.isNotBlank(person.getLastName()) ||
+                StringUtils.isNotBlank(person.getFirstName()) ||
+                StringUtils.isNotBlank(person.getMiddleName())) ? person : null;
     }
 
     /**
@@ -224,67 +301,76 @@ public class ArticleBiblio {
             }
 
             Person author = authors.get(i);
-            String lastName = author.getLastName();
-            String firstName = author.getFirstName();
-            String middleName = author.getMiddleName();
-
-            // Build name parts as "first middle last"
-            StringBuilder fullName = new StringBuilder();
-
-            if (firstName != null && !firstName.trim().isEmpty()) {
-                fullName.append(firstName.trim());
-            }
-
-            if (middleName != null && !middleName.trim().isEmpty()) {
-                if (fullName.length() > 0) {
-                    fullName.append(" ");
-                }
-                fullName.append(middleName.trim());
-            }
-
-            if (lastName != null && !lastName.trim().isEmpty()) {
-                if (fullName.length() > 0) {
-                    fullName.append(" ");
-                }
-                fullName.append(lastName.trim());
-            }
-
-            formattedAuthors.append(fullName);
+            formattedAuthors.append(formatPersonName(author));
         }
         return formattedAuthors.toString();
     }
 
     /**
-     * Format author from XML node as "surname, name"
+     * Format a Person's name as "first middle last"
      */
-    private static String formatAuthorFromNode(org.w3c.dom.Node node) {
-        if (node == null) return "";
+    private static String formatPersonName(Person person) {
+        String lastName = person.getLastName();
+        String firstName = person.getFirstName();
+        String middleName = person.getMiddleName();
 
-        if (node.getNodeName().equals("persName")) {
-            String surname = "";
-            String forename = "";
+        StringBuilder fullName = new StringBuilder();
 
-            NodeList childNodes = node.getChildNodes();
-            for (int i = 0; i < childNodes.getLength(); i++) {
-                org.w3c.dom.Node child = childNodes.item(i);
-                if (child.getNodeName().equals("surname")) {
-                    surname = child.getTextContent().trim();
-                } else if (child.getNodeName().equals("forename")) {
-                    forename = child.getTextContent().trim();
-                }
-            }
-
-            if (!surname.isEmpty()) {
-                return forename.isEmpty() ? surname : surname + ", " + forename;
-            }
+        if (StringUtils.isNotBlank(firstName)) {
+            fullName.append(firstName.trim());
         }
 
-        return node.getTextContent().trim();
+        if (StringUtils.isNotBlank(middleName)) {
+            if (!fullName.isEmpty()) {
+                fullName.append(" ");
+            }
+            fullName.append(middleName.trim());
+        }
+
+        if (StringUtils.isNotBlank(lastName)) {
+            if (!fullName.isEmpty()) {
+                fullName.append(" ");
+            }
+            fullName.append(lastName.trim());
+        }
+
+        return fullName.toString();
     }
 
+    
     @Override
     public String toString() {
         return String.format("MetadataArticle{doi='%s', title='%s', authors=%s}",
             doi, title, authors);
+    }
+
+    /**
+     * Simple namespace context for TEI documents
+     */
+    private static class TEINamespaceContext implements NamespaceContext {
+        @Override
+        public String getNamespaceURI(String prefix) {
+            if ("tei".equals(prefix)) {
+                return "http://www.tei-c.org/ns/1.0";
+            }
+            return null;
+        }
+
+        @Override
+        public String getPrefix(String namespaceURI) {
+            if ("http://www.tei-c.org/ns/1.0".equals(namespaceURI)) {
+                return "tei";
+            }
+            return null;
+        }
+
+        @Override
+        public java.util.Iterator<String> getPrefixes(String namespaceURI) {
+            java.util.Set<String> prefixes = new java.util.HashSet<>();
+            if ("http://www.tei-c.org/ns/1.0".equals(namespaceURI)) {
+                prefixes.add("tei");
+            }
+            return prefixes.iterator();
+        }
     }
 }

@@ -2834,9 +2834,9 @@ public class SoftwareParser extends AbstractParser {
         }
 
         // propagate the bib. ref. to the entities corresponding to the same software name without bib. ref.
-        if (entities != null && entities.size() > 0) {
+        if (CollectionUtils.isNotEmpty(entities)) {
             for (SoftwareEntity entity1 : entities) {
-                if (entity1.getBibRefs() != null && entity1.getBibRefs().size() > 0) {
+                if (CollectionUtils.isNotEmpty(entity1.getBibRefs())) {
                     for (SoftwareEntity entity2 : entities) {
                         if (entity2.getBibRefs() != null) {
                             continue;
