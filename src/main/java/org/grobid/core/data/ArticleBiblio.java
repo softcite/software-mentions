@@ -135,9 +135,10 @@ public class ArticleBiblio {
             LOGGER.debug("Extracted title: " + biblioItem.getTitle());
         }
 
-        String authors = LayoutTokensUtil.normalizeText(biblioItem.getAuthors());
-        if (StringUtils.isNotBlank(authors)) {
-            metadata.setAuthors(authors);
+        List<Person> authors = biblioItem.getFullAuthors();
+        if (CollectionUtils.isNotEmpty(authors)) {
+            String authorsAsList = formatAuthors(authors);
+            metadata.setAuthors(authorsAsList);
         }
 
         return metadata.hasContent() ? Optional.of(metadata) : Optional.empty();
@@ -210,6 +211,47 @@ public class ArticleBiblio {
         } catch (Exception e) {
         }
         return authors;
+    }
+
+    /**
+     * Format list of authors as "first middle last, first2 middle2 last2, ..."
+     */
+    private static String formatAuthors(List<Person> authors) {
+        StringBuilder formattedAuthors = new StringBuilder();
+        for (int i = 0; i < authors.size(); i++) {
+            if (i > 0) {
+                formattedAuthors.append(", ");
+            }
+
+            Person author = authors.get(i);
+            String lastName = author.getLastName();
+            String firstName = author.getFirstName();
+            String middleName = author.getMiddleName();
+
+            // Build name parts as "first middle last"
+            StringBuilder fullName = new StringBuilder();
+
+            if (firstName != null && !firstName.trim().isEmpty()) {
+                fullName.append(firstName.trim());
+            }
+
+            if (middleName != null && !middleName.trim().isEmpty()) {
+                if (fullName.length() > 0) {
+                    fullName.append(" ");
+                }
+                fullName.append(middleName.trim());
+            }
+
+            if (lastName != null && !lastName.trim().isEmpty()) {
+                if (fullName.length() > 0) {
+                    fullName.append(" ");
+                }
+                fullName.append(lastName.trim());
+            }
+
+            formattedAuthors.append(fullName);
+        }
+        return formattedAuthors.toString();
     }
 
     /**

@@ -392,10 +392,8 @@ public class SoftwareParser extends AbstractParser {
                     String header = headerFeatured.getLeft();
                     List<LayoutToken> headerTokenization = headerFeatured.getRight();
                     String labeledResult = null;
-                    if ((header != null) && (header.trim().length() > 0)) {
-                        labeledResult = parsers.getHeaderParser().label(header);
-
-                        resHeader = parsers.getHeaderParser().resultExtraction(labeledResult, headerTokenization, resHeader);
+                    if (StringUtils.isNotBlank(header)) {
+                        parsers.getHeaderParser().processingHeaderSection(config, doc, resHeader, false);
 
                         // title
                         List<LayoutToken> titleTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_TITLE);
@@ -434,7 +432,7 @@ public class SoftwareParser extends AbstractParser {
 
                     LayoutTokenization tokenizationBody = featSeg.getRight();
                     String rese = null;
-                    if ((bodytext != null) && (bodytext.trim().length() > 0)) {
+                    if (StringUtils.isNotBlank(bodytext)) {
                         rese = parsers.getFullTextParser().label(bodytext);
                     } else {
                         logger.debug("Fulltext model: The input to the sequence labelling processing is empty");
