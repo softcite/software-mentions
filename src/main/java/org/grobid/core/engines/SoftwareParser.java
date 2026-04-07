@@ -3,9 +3,11 @@ package org.grobid.core.engines;
 import nu.xom.Attribute;
 import nu.xom.Element;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.IteratorUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
+import org.apache.commons.lang3.tuple.Triple;
 import org.grobid.core.GrobidModels;
 import org.grobid.core.analyzers.SoftwareAnalyzer;
 import org.grobid.core.data.*;
@@ -215,8 +217,7 @@ public class SoftwareParser extends AbstractParser {
         List<LayoutToken> tokens = SoftwareAnalyzer.getInstance().tokenizeWithLayoutToken(text);
         if (CollectionUtils.isEmpty(tokens)) {
             return null;
-        } else if (tokens.size() > 512 && softwareConfiguration.getModel("software").engine.equals("delft")) {
-//        } else if (tokens.size() > 512) {
+        } else if (needToSplitInSentences(tokens)) {
             String tempText = LayoutTokensUtil.toText(tokens);
             List<OffsetPosition> offsetPositions = SentenceUtilities.getInstance().runSentenceDetection(tempText);
             List<List<LayoutToken>> outputTokens = offsetPositions.stream()
@@ -340,18 +341,30 @@ public class SoftwareParser extends AbstractParser {
             entities = SoftwareContextClassifier.getInstance(softwareConfiguration).classifyDocumentContexts(entities);
 
         } catch (Exception e) {
-            throw new GrobidException("An exception occured while running Grobid.", e);
+            throw new GrobidException("An exception occurred while running Grobid.", e);
         }
 
         return entities;
     }
 
+    private boolean needToSplitInSentences(List<LayoutToken> tokens) {
+        return tokens.size() > 512 && isSequenceLabellingUsingDL();
+    }
+
+    private boolean isSequenceLabellingUsingDL() {
+//        return true;
+        return softwareConfiguration.getModel("software").engine.equals("delft")
+            || softwareConfiguration.getModel("software-type").engine.equals("delft");
+    }
+
     /**
      * Extract all Software mentions from a pdf file
      */
-    public Pair<List<SoftwareEntity>, Document> processPDF(File file,
-                                                           boolean disambiguate,
-                                                           boolean addParagraphContext) throws IOException {
+    public Pair<List<SoftwareEntity>, Document> processPDF(
+        File file,
+        boolean disambiguate,
+        boolean addParagraphContext
+    ) throws IOException {
         List<SoftwareEntity> entities = new ArrayList<SoftwareEntity>();
         Document doc = null;
         try {
@@ -380,7 +393,8 @@ public class SoftwareParser extends AbstractParser {
             List<List<LayoutToken>> selectedLayoutTokenSequences = new ArrayList<>();
 
             // from the header, we are interested in title, abstract and keywords
-            BiblioItem resHeader = null;
+            BiblioItem resHeader = new BiblioItem();
+            doc.setResHeader(resHeader);
             SortedSet<DocumentPiece> documentParts = doc.getDocumentPart(SegmentationLabels.HEADER);
             if (documentParts != null) {
                 try {
@@ -388,10 +402,8 @@ public class SoftwareParser extends AbstractParser {
                     String header = headerFeatured.getLeft();
                     List<LayoutToken> headerTokenization = headerFeatured.getRight();
                     String labeledResult = null;
-                    if ((header != null) && (header.trim().length() > 0)) {
-                        labeledResult = parsers.getHeaderParser().label(header);
-                        resHeader = new BiblioItem();
-                        resHeader.generalResultMappingHeader(labeledResult, headerTokenization);
+                    if (StringUtils.isNotBlank(header)) {
+                        parsers.getHeaderParser().processingHeaderSection(config, doc, resHeader, false);
 
                         // title
                         List<LayoutToken> titleTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_TITLE);
@@ -430,7 +442,7 @@ public class SoftwareParser extends AbstractParser {
 
                     LayoutTokenization tokenizationBody = featSeg.getRight();
                     String rese = null;
-                    if ((bodytext != null) && (bodytext.trim().length() > 0)) {
+                    if (StringUtils.isNotBlank(bodytext)) {
                         rese = parsers.getFullTextParser().label(bodytext);
                     } else {
                         logger.debug("Fulltext model: The input to the sequence labelling processing is empty");
@@ -760,7 +772,7 @@ public class SoftwareParser extends AbstractParser {
                     }
                 } catch (Exception e) {
                     throw new GrobidException(
-                        "An exception occured while running consolidation on bibliographical references.", e);
+                        "An exception occurred while running consolidation on bibliographical references.", e);
                 }
 
                 // propagate the bib. ref. to the entities corresponding to the same software name without bib. ref.
@@ -825,14 +837,14 @@ public class SoftwareParser extends AbstractParser {
      */
     private List<SoftwareEntity> processLayoutTokenSequence(
         List<LayoutToken> layoutTokens,
-            List<SoftwareEntity> entities,
-            boolean disambiguate,
-            boolean addParagraphContext,
-            boolean fromPDF,
-            boolean fromXML,
-            List<PDFAnnotation> pdfAnnotations
+        List<SoftwareEntity> entities,
+        boolean disambiguate,
+        boolean addParagraphContext,
+        boolean fromPDF,
+        boolean fromXML,
+        List<PDFAnnotation> pdfAnnotations
     ) {
-        List<LayoutTokenization> layoutTokenizations = new ArrayList<LayoutTokenization>();
+        List<LayoutTokenization> layoutTokenizations = new ArrayList<>();
         layoutTokenizations.add(new LayoutTokenization(layoutTokens));
         return processLayoutTokenSequences(layoutTokenizations, entities, disambiguate, addParagraphContext, fromPDF, fromXML, pdfAnnotations);
     }
@@ -842,11 +854,12 @@ public class SoftwareParser extends AbstractParser {
      */
     private List<SoftwareEntity> processLayoutTokenSequenceMultiple(
         List<List<LayoutToken>> layoutTokenList,
-                                                                    List<SoftwareEntity> entities,
-                                                                    boolean disambiguate,
-                                                                    boolean addParagraphContext,
-                                                                    boolean fromPDF,
-                                                                    boolean fromXML) {
+        List<SoftwareEntity> entities,
+        boolean disambiguate,
+        boolean addParagraphContext,
+        boolean fromPDF,
+        boolean fromXML
+    ) {
 
         return processLayoutTokenSequenceMultiple(
             layoutTokenList,
@@ -868,7 +881,7 @@ public class SoftwareParser extends AbstractParser {
         boolean fromXML,
         List<PDFAnnotation> pdfAnnotations
     ) {
-        List<LayoutTokenization> layoutTokenizations = new ArrayList<LayoutTokenization>();
+        List<LayoutTokenization> layoutTokenizations = new ArrayList<>();
         for (List<LayoutToken> layoutTokens : layoutTokenList)
             layoutTokenizations.add(new LayoutTokenization(layoutTokens));
         return processLayoutTokenSequences(layoutTokenizations, entities, disambiguate, addParagraphContext, fromPDF, fromXML, pdfAnnotations);
@@ -891,7 +904,7 @@ public class SoftwareParser extends AbstractParser {
             List<LayoutToken> layoutTokens = layoutTokenization.getTokenization();
             layoutTokens = SoftwareAnalyzer.getInstance().retokenizeLayoutTokens(layoutTokens);
 
-            if ((layoutTokens == null) || (layoutTokens.size() == 0))
+            if (CollectionUtils.isEmpty(layoutTokens))
                 continue;
 
             // positions for lexical match
@@ -910,7 +923,7 @@ public class SoftwareParser extends AbstractParser {
 
         // labeled result from sequence labelling lib
         String allResString = allRess.toString();
-        if (allResString.trim().length() == 0) {
+        if (StringUtils.isBlank(allResString)) {
             // empty content, nothing more to do
             return entities;
         }
@@ -922,7 +935,7 @@ public class SoftwareParser extends AbstractParser {
             List<LayoutToken> layoutTokens = layoutTokenization.getTokenization();
             layoutTokens = SoftwareAnalyzer.getInstance().retokenizeLayoutTokens(layoutTokens);
 
-            if ((layoutTokens == null) || (layoutTokens.size() == 0))
+            if (CollectionUtils.isEmpty(layoutTokens))
                 continue;
 
             // text of the selected segment
@@ -933,8 +946,9 @@ public class SoftwareParser extends AbstractParser {
 
             String localRes = resBlocks[l];
 
-            if (localRes == null || localRes.length() == 0)
+            if (StringUtils.isBlank(localRes)) {
                 continue;
+            }
 
             List<SoftwareComponent> components = extractSoftwareComponents(text, localRes, layoutTokens);
             l++;
@@ -968,10 +982,10 @@ public class SoftwareParser extends AbstractParser {
             //text = LayoutTokensUtil.normalizeDehyphenizeText(layoutTokens);
 
             // finally refine software types, if there is anything to refine
-            if (localEntities.size() > 0) {
+            if (CollectionUtils.isNotEmpty(localEntities)) {
                 try {
                     List<SoftwareType> entityTypes = softwareTypeParser.processFeatureInput(text, localRes, layoutTokens);
-                    if (entityTypes != null && entityTypes.size() > 0) {
+                    if (CollectionUtils.isNotEmpty(entityTypes)) {
                         localEntities = refineTypes(localEntities, entityTypes);
                         Collections.sort(localEntities);
                     }
@@ -1066,15 +1080,17 @@ public class SoftwareParser extends AbstractParser {
         return entities;
     }
 
-    public List<SoftwareEntity> propagateLayoutTokenSequence(List<LayoutToken> layoutTokens,
-                                                             List<SoftwareEntity> entities,
-                                                             Map<String, Double> termProfiles,
-                                                             FastMatcher termPattern,
-                                                             List<OffsetPosition> placeTaken,
-                                                             Map<String, Integer> frequencies,
-                                                             boolean addParagraphContext,
-                                                             boolean fromPDF,
-                                                             boolean fromXML) {
+    public List<SoftwareEntity> propagateLayoutTokenSequence(
+        List<LayoutToken> layoutTokens,
+        List<SoftwareEntity> entities,
+        Map<String, Double> termProfiles,
+        FastMatcher termPattern,
+        List<OffsetPosition> placeTaken,
+        Map<String, Integer> frequencies,
+        boolean addParagraphContext,
+        boolean fromPDF,
+        boolean fromXML
+    ) {
         // possible offset of the sequence in the complete document tokenization
         int offsetShift = 0;
         if (layoutTokens != null && layoutTokens.size() > 0 && layoutTokens.get(0).getOffset() != 0) {
@@ -1475,7 +1491,7 @@ public class SoftwareParser extends AbstractParser {
                     String pathTEI = outputDirectory + "/" + file.getName().substring(0, file.getName().length() - 4) + ".training.tei.xml";
                     createTraining(file.getAbsolutePath(), pathTEI, n);
                 } catch (final Exception exp) {
-                    logger.error("An error occured while processing the following pdf: "
+                    logger.error("An error occurred while processing the following pdf: "
                         + file.getPath() + ": " + exp);
                 }
                 if (ind != -1)
@@ -1484,7 +1500,7 @@ public class SoftwareParser extends AbstractParser {
 
             return refFiles.length;
         } catch (final Exception exp) {
-            throw new GrobidException("An exception occured while running Grobid batch.", exp);
+            throw new GrobidException("An exception occurred while running Grobid batch.", exp);
         }
     }
 
@@ -1805,7 +1821,7 @@ public class SoftwareParser extends AbstractParser {
                 isSoftwarePattern = false;
             }
         } catch (Exception e) {
-            throw new GrobidException("An exception occured while running Grobid.", e);
+            throw new GrobidException("An exception occurred while running Grobid.", e);
         }
         return result.toString();
     }
@@ -1813,15 +1829,17 @@ public class SoftwareParser extends AbstractParser {
     /**
      * Add to the entities their local text contexts: the sentence where the software name occurs.
      */
-    public List<SoftwareEntity> addContext(List<SoftwareEntity> entities,
-                                           String text,
-                                           List<LayoutToken> tokens,
-                                           boolean fromPDF,
-                                           boolean fromXML,
-                                           boolean addParagraphContext) {
+    public List<SoftwareEntity> addContext(
+        List<SoftwareEntity> entities,
+        String text,
+        List<LayoutToken> tokens,
+        boolean fromPDF,
+        boolean fromXML,
+        boolean addParagraphContext
+    ) {
         // adjust offsets if tokenization does not start at 0
         int offsetShift = 0;
-        if (tokens != null && tokens.size() > 0 && tokens.get(0).getOffset() != 0) {
+        if (CollectionUtils.isNotEmpty(tokens) && tokens.get(0).getOffset() != 0) {
             offsetShift = tokens.get(0).getOffset();
         }
 
@@ -1829,7 +1847,7 @@ public class SoftwareParser extends AbstractParser {
 
         // we start by segmenting the tokenized text into sentences
 
-        List<OffsetPosition> forbidden = new ArrayList<OffsetPosition>();
+        List<OffsetPosition> forbidden = new ArrayList<>();
         // fill the position where entities occur to avoid segmenting in the middle of a software string, same for
         // the reference marker positions too
         for (SoftwareEntity entity : entities) {
@@ -2108,7 +2126,7 @@ public class SoftwareParser extends AbstractParser {
 
                 // conservative check, minimal well-formedness of the content for URL
                 if (clusterLabel.equals(SoftwareTaggingLabels.SOFTWARE_URL)) {
-                    if (SoftwareAnalyzer.DELIMITERS.indexOf(clusterContent) != -1 ||
+                    if (SoftwareAnalyzer.DELIMITERS.contains(clusterContent) ||
                         SoftwareLexicon.getInstance().isEnglishStopword(clusterContent) ||
                         FeatureFactory.getInstance().test_number(clusterContent) ||
                         clusterContent.replace("\n", "").equals("//")) {
@@ -2454,10 +2472,10 @@ public class SoftwareParser extends AbstractParser {
     /**
      * Extract all software mentions from a publisher XML file
      */
-    public Pair<List<SoftwareEntity>, List<BibDataSet>> processXML(File file,
-                                                                   boolean disambiguate,
-                                                                   boolean addParagraphContext) throws IOException {
-        Pair<List<SoftwareEntity>, List<BibDataSet>> resultExtraction = null;
+    public Triple<Optional<ArticleBiblio>, List<SoftwareEntity>, List<BibDataSet>> processXML(File file,
+                                                                                              boolean disambiguate,
+                                                                                              boolean addParagraphContext) throws IOException {
+        Triple<Optional<ArticleBiblio>, List<SoftwareEntity>, List<BibDataSet>> resultExtraction = null;
         try {
             String tei = processXML(file);
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -2473,7 +2491,7 @@ public class SoftwareParser extends AbstractParser {
             //tei = restoreDomParserAttributeBug(tei);
 
         } catch (final Exception exp) {
-            logger.error("An error occured while processing the following XML file: "
+            logger.error("An error occurred while processing the following XML file: "
                 + file.getPath(), exp);
         }
 
@@ -2484,10 +2502,12 @@ public class SoftwareParser extends AbstractParser {
     /**
      * Extract all software mentions from a publisher XML file
      */
-    public Pair<List<SoftwareEntity>, List<BibDataSet>> processTEI(File file,
-                                                                   boolean disambiguate,
-                                                                   boolean addParagraphContext) throws IOException {
-        Pair<List<SoftwareEntity>, List<BibDataSet>> resultExtraction = null;
+    public Triple<Optional<ArticleBiblio>, List<SoftwareEntity>, List<BibDataSet>> processTEI(
+        File file,
+        boolean disambiguate,
+        boolean addParagraphContext
+    ) throws IOException {
+        Triple<Optional<ArticleBiblio>, List<SoftwareEntity>, List<BibDataSet>> resultExtraction = null;
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             factory.setNamespaceAware(true);
@@ -2498,7 +2518,7 @@ public class SoftwareParser extends AbstractParser {
             //tei = restoreDomParserAttributeBug(tei);
 
         } catch (final Exception exp) {
-            logger.error("An error occured while processing the following XML file: "
+            logger.error("An error occurred while processing the following XML file: "
                 + file.getPath(), exp);
         }
 
@@ -2532,7 +2552,7 @@ public class SoftwareParser extends AbstractParser {
             tei = FileUtils.readFileToString(new File(newFilePath), UTF_8);
 
         } catch (final Exception exp) {
-            logger.error("An error occured while processing the following XML file: " + file.getAbsolutePath(), exp);
+            logger.error("An error occurred while processing the following XML file: " + file.getAbsolutePath(), exp);
         } finally {
             if (newFilePath != null) {
                 File newFile = new File(newFilePath);
@@ -2546,9 +2566,11 @@ public class SoftwareParser extends AbstractParser {
     /**
      * Extract all software mentions from a publisher XML file
      */
-    public Pair<List<SoftwareEntity>, List<BibDataSet>> processTEIDocument(org.w3c.dom.Document doc,
-                                                                           boolean disambiguate,
-                                                                           boolean addParagraphContext) {
+    public Triple<Optional<ArticleBiblio>, List<SoftwareEntity>, List<BibDataSet>> processTEIDocument(
+        org.w3c.dom.Document doc,
+        boolean disambiguate,
+        boolean addParagraphContext
+    ) {
         List<SoftwareEntity> entities = new ArrayList<>();
 
         List<List<LayoutToken>> selectedLayoutTokenSequencesRaw = new ArrayList<>();
@@ -2577,9 +2599,9 @@ public class SoftwareParser extends AbstractParser {
             if (StringUtils.isNotBlank(contentText)) {
                 List<LayoutToken> paragraphTokens =
                     SoftwareAnalyzer.getInstance().tokenizeWithLayoutToken(contentText);
-                String orginalText = UnicodeUtil.normaliseText(paragraphElement.getTextContent());
+                String originalText = UnicodeUtil.normaliseText(paragraphElement.getTextContent());
                 List<LayoutToken> originalParagraphTokens =
-                    SoftwareAnalyzer.getInstance().tokenizeWithLayoutToken(orginalText);
+                    SoftwareAnalyzer.getInstance().tokenizeWithLayoutToken(originalText);
                 if (CollectionUtils.isNotEmpty(paragraphTokens)) {
                     // shift the paragraph tokens to the global position
                     for (LayoutToken paragraphToken : paragraphTokens) {
@@ -2600,28 +2622,35 @@ public class SoftwareParser extends AbstractParser {
             }
         }
 
-        logger.warn("Number of sequences too large for the BERT model: "
-            + selectedLayoutTokenSequencesRaw.stream().filter(s -> s.size() > 512).count());
+        List<List<LayoutToken>> selectedLayoutTokenSequences = new ArrayList<>(selectedLayoutTokenSequencesRaw);
 
-        // Run the sentence segmenter for sequences that are larger than 512 tokens, what the BERT model can handle.
-        List<List<LayoutToken>> selectedLayoutTokenSequences = selectedLayoutTokenSequencesRaw.stream()
-            .flatMap(tokens -> {
-                    if (tokens.size() > 512) {
-                        String tempText = LayoutTokensUtil.toText(tokens);
-                        List<OffsetPosition> offsetPositions = SentenceUtilities.getInstance().runSentenceDetection(tempText);
-                        List<List<LayoutToken>> splitTokens =offsetPositions.stream()
-                            .map(op -> tempText.substring(op.start, op.end))
-                            .map(s -> SoftwareAnalyzer.getInstance().tokenizeWithLayoutToken(s))
-                            .collect(Collectors.toList());
-                        return splitTokens.stream();
+        if (isSequenceLabellingUsingDL()) {
+            logger.warn("Number of sequences too large for the BERT model: "
+                + selectedLayoutTokenSequencesRaw.stream().filter(s -> s.size() > 512).count());
+
+            // Run the sentence segmenter for sequences that are larger than 512 tokens, what the BERT model can handle.
+            List<List<LayoutToken>> tempSequences = new ArrayList<>();
+            for (List<LayoutToken> tokens : selectedLayoutTokenSequencesRaw) {
+                if (tokens.size() > 512) {
+                    // Split large sequences into sentences
+                    String tempText = LayoutTokensUtil.toText(tokens);
+                    int offset = tokens.get(0).getOffset();
+                    List<OffsetPosition> offsetPositions = SentenceUtilities.getInstance().runSentenceDetection(tempText);
+
+                    for (OffsetPosition op : offsetPositions) {
+                        String sentenceText = tempText.substring(op.start, op.end);
+                        List<LayoutToken> sentenceTokens = SoftwareAnalyzer.getInstance().tokenizeWithLayoutToken(sentenceText);
+                        sentenceTokens.stream().forEach(token -> token.setOffset(token.getOffset() + offset + op.start));
+
+                        tempSequences.add(sentenceTokens);
                     }
-                    return Stream.of(tokens);
+                } else {
+                    // Keep small sequences as-is
+                    tempSequences.add(tokens);
                 }
-            ).collect(Collectors.toList());
-
-        logger.warn("Number of sequences too large for the BERT model: "
-            + selectedLayoutTokenSequences.stream().filter(s -> s.size() > 512).count());
-
+            }
+            selectedLayoutTokenSequences = tempSequences;
+        }
 
         processLayoutTokenSequenceMultiple(selectedLayoutTokenSequences, entities, disambiguate, addParagraphContext, false, true);
         selectedLayoutTokenSequences = selectedOriginalLayoutTokenSequences;
@@ -2633,7 +2662,7 @@ public class SoftwareParser extends AbstractParser {
                 String context = entity.getContext();
                 if (context == null)
                     continue;
-                String oldContext = new String(entity.getContext());
+                String oldContext = entity.getContext();
 
                 int paragraphContextOffset = entity.getParagraphContextOffset();
                 int globalContextOffset = entity.getGlobalContextOffset();
@@ -2645,7 +2674,7 @@ public class SoftwareParser extends AbstractParser {
                 for (int i = sequenceIndex; i < selectedLayoutTokenSequences.size(); i++) {
                     int posStartSequence = -1;
                     List<LayoutToken> selectedLayoutTokenSequence = selectedLayoutTokenSequences.get(i);
-                    if (selectedLayoutTokenSequence != null && selectedLayoutTokenSequence.size() > 0) {
+                    if (CollectionUtils.isNotEmpty(selectedLayoutTokenSequence)) {
                         posStartSequence = selectedLayoutTokenSequence.get(0).getOffset();
                         String localText = LayoutTokensUtil.toText(selectedLayoutTokenSequence);
                         if (posStartSequence <= globalContextOffset && globalContextOffset < posStartSequence + localText.length()) {
@@ -2659,7 +2688,7 @@ public class SoftwareParser extends AbstractParser {
                 }
 
                 context = entity.getContext();
-                if (context == null || context.trim().length() == 0) {
+                if (StringUtils.isNotBlank(context)) {
                     // this should never happen, but just in case...
                     entity.setContext(oldContext);
                     context = oldContext;
@@ -2824,13 +2853,13 @@ public class SoftwareParser extends AbstractParser {
             }
         } catch (Exception e) {
             throw new GrobidException(
-                "An exception occured while running consolidation on bibliographical references.", e);
+                "An exception occurred while running consolidation on bibliographical references.", e);
         }
 
         // propagate the bib. ref. to the entities corresponding to the same software name without bib. ref.
-        if (entities != null && entities.size() > 0) {
+        if (CollectionUtils.isNotEmpty(entities)) {
             for (SoftwareEntity entity1 : entities) {
-                if (entity1.getBibRefs() != null && entity1.getBibRefs().size() > 0) {
+                if (CollectionUtils.isNotEmpty(entity1.getBibRefs())) {
                     for (SoftwareEntity entity2 : entities) {
                         if (entity2.getBibRefs() != null) {
                             continue;
@@ -2851,9 +2880,10 @@ public class SoftwareParser extends AbstractParser {
         Collections.sort(entities);
 
         // finally classify the context for predicting the role of the software mention
-        entities = SoftwareContextClassifier.getInstance(softwareConfiguration).classifyDocumentContexts(entities);
+//        entities = SoftwareContextClassifier.getInstance(softwareConfiguration).classifyDocumentContexts(entities);
 
-        return Pair.of(entities, resCitations);
+        Optional<ArticleBiblio> metadata = ArticleBiblio.fromTeiDocument(doc);
+        return Triple.of(metadata, entities, resCitations);
     }
 
 

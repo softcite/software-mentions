@@ -2,43 +2,35 @@ package org.grobid.service.controller;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-
-import org.grobid.core.data.SoftwareComponent;
-import org.grobid.core.data.SoftwareEntity;
-import org.grobid.core.data.BibDataSet;
-import org.grobid.core.document.Document;
-import org.grobid.core.engines.Engine;
-import org.grobid.core.main.LibraryLoader;
-import org.grobid.core.factory.GrobidFactory;
-import org.grobid.core.document.DocumentSource;
-import org.grobid.core.engines.SoftwareParser;
-import org.grobid.core.engines.config.GrobidAnalysisConfig;
-import org.grobid.core.factory.GrobidPoolingFactory;
-import org.grobid.core.utilities.*;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-import org.xml.sax.XMLReader;
-import org.xml.sax.helpers.XMLReaderFactory;
-
-import jakarta.ws.rs.WebApplicationException;
-import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
-import jakarta.ws.rs.core.StreamingOutput;
-import java.io.*;
-import java.nio.charset.Charset;
-import java.util.*;
-import java.security.DigestInputStream;
-import java.security.MessageDigest;
-import javax.xml.bind.DatatypeConverter;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
-
+import org.apache.commons.lang3.tuple.Triple;
+import org.grobid.core.data.BibDataSet;
+import org.grobid.core.data.BiblioItem;
+import org.grobid.core.data.ArticleBiblio;
+import org.grobid.core.data.SoftwareEntity;
+import org.grobid.core.document.Document;
+import org.grobid.core.engines.Engine;
+import org.grobid.core.engines.SoftwareParser;
+import org.grobid.core.engines.config.GrobidAnalysisConfig;
+import org.grobid.core.factory.GrobidFactory;
 import org.grobid.core.layout.Page;
+import org.grobid.core.utilities.IOUtilities;
+import org.grobid.core.utilities.SoftwareConfiguration;
+import org.grobid.core.utilities.Versioner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.xml.bind.DatatypeConverter;
+import java.io.File;
+import java.io.InputStream;
+import java.security.DigestInputStream;
+import java.security.MessageDigest;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 /**
  *
@@ -64,11 +56,11 @@ public class SoftwareProcessFile {
      * @param addParagraphContext if true, the full paragraph where an annotation takes place is added
      * @return a response object containing the JSON annotations
      */
-	public static Response processPDFAnnotation(final InputStream inputStream, 
-                                                boolean disambiguate, 
+    public static Response processPDFAnnotation(final InputStream inputStream,
+                                                boolean disambiguate,
                                                 boolean addParagraphContext,
                                                 SoftwareConfiguration configuration) {
-        LOGGER.debug(methodLogIn()); 
+        LOGGER.debug(methodLogIn());
         Response response = null;
         File originFile = null;
         SoftwareParser parser = SoftwareParser.getInstance(configuration);
@@ -77,7 +69,7 @@ public class SoftwareProcessFile {
         try {
             engine = GrobidFactory.getInstance().getEngine();
             MessageDigest md = MessageDigest.getInstance("MD5");
-            DigestInputStream dis = new DigestInputStream(inputStream, md); 
+            DigestInputStream dis = new DigestInputStream(inputStream, md);
 
             originFile = IOUtilities.writeInputFile(dis);
             byte[] digest = md.digest();
@@ -88,59 +80,64 @@ public class SoftwareProcessFile {
                 response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
             } else {
                 long start = System.currentTimeMillis();
-                Pair<List<SoftwareEntity>, Document> extractedEntities = 
+                Pair<List<SoftwareEntity>, Document> extractedEntities =
                     parser.processPDF(originFile, disambiguate, addParagraphContext);
                 long end = System.currentTimeMillis();
 
                 Document doc = extractedEntities.getRight();
                 List<SoftwareEntity> entities = extractedEntities.getLeft();
                 StringBuilder json = new StringBuilder();
-				json.append("{ ");
+                json.append("{ ");
                 json.append(SoftwareServiceUtil.applicationDetails(Versioner.getVersion(), Versioner.getRevision()));
-                
+
                 String md5Str = DatatypeConverter.printHexBinary(digest).toUpperCase();
                 json.append(", \"md5\": \"" + md5Str + "\"");
 
+                // Add article metadata (biblio) from document header
+                BiblioItem resHeader = doc.getResHeader();
+                Optional<ArticleBiblio> metadata = ArticleBiblio.fromBiblioItem(resHeader);
+
+                metadata.ifPresent(articleBiblio -> json.append(", " + articleBiblio.toJson()));
+
 				// page height and width
                 json.append(", \"pages\":[");
-				List<Page> pages = doc.getPages();
+                List<Page> pages = doc.getPages();
                 boolean first = true;
-                for(Page page : pages) {
-    				if (first) 
+                for (Page page : pages) {
+                    if (first)
                         first = false;
                     else
-                        json.append(", ");    
-    				json.append("{\"page_height\":" + page.getHeight());
-    				json.append(", \"page_width\":" + page.getWidth() + "}");
+                        json.append(", ");
+                    json.append("{\"page_height\":" + page.getHeight());
+                    json.append(", \"page_width\":" + page.getWidth() + "}");
                 }
 
-				json.append("], \"mentions\":[");
-				first = true;
-				for(SoftwareEntity entity : entities) {
-					if (!first)
-						json.append(", ");
-					else
-						first = false;
-					json.append(entity.toJson());
-				}
-				json.append("], \"references\":[");
+                json.append("], \"mentions\":[");
+                first = true;
+                for (SoftwareEntity entity : entities) {
+                    if (!first)
+                        json.append(", ");
+                    else
+                        first = false;
+                    json.append(entity.toJson());
+                }
+                json.append("], \"references\":[");
 
                 List<BibDataSet> bibDataSet = doc.getBibDataSets();
-                if (bibDataSet != null && bibDataSet.size()>0) {
+                if (bibDataSet != null && bibDataSet.size() > 0) {
                     SoftwareServiceUtil.serializeReferences(json, bibDataSet, entities);
                 }
 
-                json.append("], \"runtime\" :" + (end-start));
+                json.append("], \"runtime\" :" + (end - start));
                 json.append("}");
 
                 if (json != null) {
                     response = Response
-                            .ok()
-                            .type("application/json")
-                            .entity(json.toString())
-                            .build();
-                }
-                else {
+                        .ok()
+                        .type("application/json")
+                        .entity(json.toString())
+                        .build();
+                } else {
                     response = Response.status(Status.NO_CONTENT).build();
                 }
             }
@@ -266,18 +263,18 @@ public class SoftwareProcessFile {
      * @param addParagraphContext if true, the full paragraph where an annotation takes place is added
      * @return a response object containing the JSON annotations
      */
-    public static Response extractXML(final InputStream inputStream, 
-                                        boolean disambiguate, 
-                                        boolean addParagraphContext,
-                                        SoftwareConfiguration configuration) {
-        LOGGER.debug(methodLogIn()); 
+    public static Response extractXML(final InputStream inputStream,
+                                      boolean disambiguate,
+                                      boolean addParagraphContext,
+                                      SoftwareConfiguration configuration) {
+        LOGGER.debug(methodLogIn());
         Response response = null;
         File originFile = null;
         SoftwareParser parser = SoftwareParser.getInstance(configuration);
 
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
-            DigestInputStream dis = new DigestInputStream(inputStream, md); 
+            DigestInputStream dis = new DigestInputStream(inputStream, md);
 
             originFile = IOUtilities.writeInputFile(dis);
             byte[] digest = md.digest();
@@ -286,22 +283,26 @@ public class SoftwareProcessFile {
                 response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
             } else {
                 long start = System.currentTimeMillis();
-                Pair<List<SoftwareEntity>, List<BibDataSet>> extractionResult = 
+                Triple<Optional<ArticleBiblio>, List<SoftwareEntity>, List<BibDataSet>> extractionResult =
                     parser.processXML(originFile, disambiguate, addParagraphContext);
                 long end = System.currentTimeMillis();
 
-                List<SoftwareEntity> extractedEntities = extractionResult.getLeft();
+                List<SoftwareEntity> extractedEntities = extractionResult.getMiddle();
+                Optional<ArticleBiblio> metadata = extractionResult.getLeft();
 
                 StringBuilder json = new StringBuilder();
                 json.append("{ ");
                 json.append(SoftwareServiceUtil.applicationDetails(Versioner.getVersion(), Versioner.getRevision()));
-                
+
                 String md5Str = DatatypeConverter.printHexBinary(digest).toUpperCase();
                 json.append(", \"md5\": \"" + md5Str + "\"");
+
+                metadata.ifPresent(articleBiblio -> json.append(", " + articleBiblio.toJson()));
+
                 json.append(", \"mentions\":[");
                 boolean first = true;
                 if (extractedEntities != null) {
-                    for(SoftwareEntity entity : extractedEntities) {
+                    for (SoftwareEntity entity : extractedEntities) {
                         if (!first)
                             json.append(", ");
                         else
@@ -312,21 +313,20 @@ public class SoftwareProcessFile {
                 json.append("], \"references\":[");
 
                 List<BibDataSet> bibDataSet = extractionResult.getRight();
-                if (bibDataSet != null && bibDataSet.size()>0) {
+                if (bibDataSet != null && bibDataSet.size() > 0) {
                     SoftwareServiceUtil.serializeReferences(json, bibDataSet, extractedEntities);
                 }
 
-                json.append("], \"runtime\" :" + (end-start));
+                json.append("], \"runtime\" :" + (end - start));
                 json.append("}");
 
                 if (json != null) {
                     response = Response
-                            .ok()
-                            .type("application/json")
-                            .entity(json.toString())
-                            .build();
-                }
-                else {
+                        .ok()
+                        .type("application/json")
+                        .entity(json.toString())
+                        .build();
+                } else {
                     response = Response.status(Status.NO_CONTENT).build();
                 }
             }
@@ -352,18 +352,20 @@ public class SoftwareProcessFile {
      * @param addParagraphContext if true, the full paragraph where an annotation takes place is added
      * @return a response object containing the JSON annotations
      */
-    public static Response extractTEI(final InputStream inputStream, 
-                                        boolean disambiguate, 
-                                        boolean addParagraphContext,
-                                        SoftwareConfiguration configuration) {
-        LOGGER.debug(methodLogIn()); 
+    public static Response extractTEI(
+        final InputStream inputStream,
+        boolean disambiguate,
+        boolean addParagraphContext,
+        SoftwareConfiguration configuration
+    ) {
+        LOGGER.debug(methodLogIn());
         Response response = null;
         File originFile = null;
         SoftwareParser parser = SoftwareParser.getInstance(configuration);
 
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
-            DigestInputStream dis = new DigestInputStream(inputStream, md); 
+            DigestInputStream dis = new DigestInputStream(inputStream, md);
 
             originFile = IOUtilities.writeInputFile(dis);
             byte[] digest = md.digest();
@@ -372,24 +374,29 @@ public class SoftwareProcessFile {
                 response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
             } else {
                 long start = System.currentTimeMillis();
-                Pair<List<SoftwareEntity>, List<BibDataSet>> extractionResult = parser.processTEI(originFile, disambiguate, addParagraphContext);
+                Triple<Optional<ArticleBiblio>, List<SoftwareEntity>, List<BibDataSet>> extractionResult = parser.processTEI(originFile, disambiguate, addParagraphContext);
                 long end = System.currentTimeMillis();
 
                 List<SoftwareEntity> extractedEntities = null;
+                Optional<ArticleBiblio> metadata = Optional.empty();
                 if (extractionResult != null) {
-                    extractedEntities = extractionResult.getLeft();
+                    extractedEntities = extractionResult.getMiddle();
+                    metadata = extractionResult.getLeft();
                 }
 
                 StringBuilder json = new StringBuilder();
                 json.append("{ ");
                 json.append(SoftwareServiceUtil.applicationDetails(Versioner.getVersion(), Versioner.getRevision()));
-                
+
                 String md5Str = DatatypeConverter.printHexBinary(digest).toUpperCase();
                 json.append(", \"md5\": \"" + md5Str + "\"");
+
+                metadata.ifPresent(articleBiblio -> json.append(", " + articleBiblio.toJson()));
+
                 json.append(", \"mentions\":[");
                 boolean first = true;
                 if (extractedEntities != null) {
-                    for(SoftwareEntity entity : extractedEntities) {
+                    for (SoftwareEntity entity : extractedEntities) {
                         if (!first)
                             json.append(", ");
                         else
@@ -401,22 +408,21 @@ public class SoftwareProcessFile {
 
                 if (extractionResult != null) {
                     List<BibDataSet> bibDataSet = extractionResult.getRight();
-                    if (bibDataSet != null && bibDataSet.size()>0) {
+                    if (bibDataSet != null && bibDataSet.size() > 0) {
                         SoftwareServiceUtil.serializeReferences(json, bibDataSet, extractedEntities);
                     }
                 }
-                
-                json.append("], \"runtime\" :" + (end-start));
+
+                json.append("], \"runtime\" :" + (end - start));
                 json.append("}");
 
                 if (json != null) {
                     response = Response
-                            .ok()
-                            .type("application/json")
-                            .entity(json.toString())
-                            .build();
-                }
-                else {
+                        .ok()
+                        .type("application/json")
+                        .entity(json.toString())
+                        .build();
+                } else {
                     response = Response.status(Status.NO_CONTENT).build();
                 }
             }

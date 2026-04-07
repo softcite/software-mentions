@@ -1,18 +1,18 @@
 package org.grobid.service.controller;
 
-import java.util.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-
-import org.grobid.core.data.BibDataSet;
-import org.grobid.core.data.SoftwareEntity;
-import org.grobid.core.data.BiblioComponent;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+import org.grobid.core.data.BibDataSet;
+import org.grobid.core.data.BiblioComponent;
+import org.grobid.core.data.SoftwareEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.TimeZone;
 
 /**
  * Utility methods for GROBID Software service.

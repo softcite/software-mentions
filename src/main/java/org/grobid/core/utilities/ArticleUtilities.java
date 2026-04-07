@@ -201,7 +201,7 @@ public class ArticleUtilities {
             return outFile;
         } 
         catch (Exception e) {
-            throw new Exception("An exception occured while downloading " + urll, e);
+            throw new Exception("An exception occurred while downloading " + urll, e);
         }
     }
 
