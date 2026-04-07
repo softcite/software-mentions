@@ -103,7 +103,7 @@ public class SoftwareAnnotationSaxHandler extends DefaultHandler {
                 allLabeledSoftwareMarkers.add(labeledSoftwareMarkers);
             }
         } catch (Exception e) {
-            throw new GrobidException("An exception occured while running Grobid.", e);
+            throw new GrobidException("An exception occurred while running Grobid.", e);
         }
     }
 
@@ -192,7 +192,7 @@ public class SoftwareAnnotationSaxHandler extends DefaultHandler {
             }
         } catch (Exception e) {
 //		    e.printStackTrace();
-            throw new GrobidException("An exception occured while running Grobid.", e);
+            throw new GrobidException("An exception occurred while running Grobid.", e);
         }
     }
 
