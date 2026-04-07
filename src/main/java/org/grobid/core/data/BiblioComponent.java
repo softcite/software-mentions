@@ -1,17 +1,9 @@
 package org.grobid.core.data;
 
-import org.grobid.core.engines.label.TaggingLabel;
-import org.grobid.core.utilities.TextUtilities;
-import org.grobid.core.utilities.OffsetPosition;
-import org.grobid.core.lexicon.SoftwareLexicon;
-import org.grobid.core.layout.BoundingBox;
-import org.grobid.core.layout.LayoutToken;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.util.List;
-
+import org.grobid.core.layout.BoundingBox;
+import org.grobid.core.utilities.TextUtilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -82,7 +74,7 @@ public class BiblioComponent extends SoftwareComponent {
             }
         }*/
         buffer.append(", \"refKey\": " + refKey);
-        
+
         // knowledge information
         if (wikidataId != null) {
             buffer.append(", \"wikidataId\": \"" + wikidataId + "\"");
