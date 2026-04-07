@@ -56,11 +56,11 @@ public class SoftwareProcessFile {
      * @param addParagraphContext if true, the full paragraph where an annotation takes place is added
      * @return a response object containing the JSON annotations
      */
-	public static Response processPDFAnnotation(final InputStream inputStream, 
-                                                boolean disambiguate, 
+    public static Response processPDFAnnotation(final InputStream inputStream,
+                                                boolean disambiguate,
                                                 boolean addParagraphContext,
                                                 SoftwareConfiguration configuration) {
-        LOGGER.debug(methodLogIn()); 
+        LOGGER.debug(methodLogIn());
         Response response = null;
         File originFile = null;
         SoftwareParser parser = SoftwareParser.getInstance(configuration);
@@ -69,7 +69,7 @@ public class SoftwareProcessFile {
         try {
             engine = GrobidFactory.getInstance().getEngine();
             MessageDigest md = MessageDigest.getInstance("MD5");
-            DigestInputStream dis = new DigestInputStream(inputStream, md); 
+            DigestInputStream dis = new DigestInputStream(inputStream, md);
 
             originFile = IOUtilities.writeInputFile(dis);
             byte[] digest = md.digest();
@@ -80,16 +80,16 @@ public class SoftwareProcessFile {
                 response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
             } else {
                 long start = System.currentTimeMillis();
-                Pair<List<SoftwareEntity>, Document> extractedEntities = 
+                Pair<List<SoftwareEntity>, Document> extractedEntities =
                     parser.processPDF(originFile, disambiguate, addParagraphContext);
                 long end = System.currentTimeMillis();
 
                 Document doc = extractedEntities.getRight();
                 List<SoftwareEntity> entities = extractedEntities.getLeft();
                 StringBuilder json = new StringBuilder();
-				json.append("{ ");
+                json.append("{ ");
                 json.append(SoftwareServiceUtil.applicationDetails(Versioner.getVersion(), Versioner.getRevision()));
-                
+
                 String md5Str = DatatypeConverter.printHexBinary(digest).toUpperCase();
                 json.append(", \"md5\": \"" + md5Str + "\"");
 
@@ -101,44 +101,43 @@ public class SoftwareProcessFile {
 
 				// page height and width
                 json.append(", \"pages\":[");
-				List<Page> pages = doc.getPages();
+                List<Page> pages = doc.getPages();
                 boolean first = true;
-                for(Page page : pages) {
-    				if (first) 
+                for (Page page : pages) {
+                    if (first)
                         first = false;
                     else
-                        json.append(", ");    
-    				json.append("{\"page_height\":" + page.getHeight());
-    				json.append(", \"page_width\":" + page.getWidth() + "}");
+                        json.append(", ");
+                    json.append("{\"page_height\":" + page.getHeight());
+                    json.append(", \"page_width\":" + page.getWidth() + "}");
                 }
 
-				json.append("], \"mentions\":[");
-				first = true;
-				for(SoftwareEntity entity : entities) {
-					if (!first)
-						json.append(", ");
-					else
-						first = false;
-					json.append(entity.toJson());
-				}
-				json.append("], \"references\":[");
+                json.append("], \"mentions\":[");
+                first = true;
+                for (SoftwareEntity entity : entities) {
+                    if (!first)
+                        json.append(", ");
+                    else
+                        first = false;
+                    json.append(entity.toJson());
+                }
+                json.append("], \"references\":[");
 
                 List<BibDataSet> bibDataSet = doc.getBibDataSets();
-                if (bibDataSet != null && bibDataSet.size()>0) {
+                if (bibDataSet != null && bibDataSet.size() > 0) {
                     SoftwareServiceUtil.serializeReferences(json, bibDataSet, entities);
                 }
 
-                json.append("], \"runtime\" :" + (end-start));
+                json.append("], \"runtime\" :" + (end - start));
                 json.append("}");
 
                 if (json != null) {
                     response = Response
-                            .ok()
-                            .type("application/json")
-                            .entity(json.toString())
-                            .build();
-                }
-                else {
+                        .ok()
+                        .type("application/json")
+                        .entity(json.toString())
+                        .build();
+                } else {
                     response = Response.status(Status.NO_CONTENT).build();
                 }
             }
@@ -264,18 +263,18 @@ public class SoftwareProcessFile {
      * @param addParagraphContext if true, the full paragraph where an annotation takes place is added
      * @return a response object containing the JSON annotations
      */
-    public static Response extractXML(final InputStream inputStream, 
-                                        boolean disambiguate, 
-                                        boolean addParagraphContext,
-                                        SoftwareConfiguration configuration) {
-        LOGGER.debug(methodLogIn()); 
+    public static Response extractXML(final InputStream inputStream,
+                                      boolean disambiguate,
+                                      boolean addParagraphContext,
+                                      SoftwareConfiguration configuration) {
+        LOGGER.debug(methodLogIn());
         Response response = null;
         File originFile = null;
         SoftwareParser parser = SoftwareParser.getInstance(configuration);
 
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
-            DigestInputStream dis = new DigestInputStream(inputStream, md); 
+            DigestInputStream dis = new DigestInputStream(inputStream, md);
 
             originFile = IOUtilities.writeInputFile(dis);
             byte[] digest = md.digest();
@@ -303,7 +302,7 @@ public class SoftwareProcessFile {
                 json.append(", \"mentions\":[");
                 boolean first = true;
                 if (extractedEntities != null) {
-                    for(SoftwareEntity entity : extractedEntities) {
+                    for (SoftwareEntity entity : extractedEntities) {
                         if (!first)
                             json.append(", ");
                         else
@@ -314,21 +313,20 @@ public class SoftwareProcessFile {
                 json.append("], \"references\":[");
 
                 List<BibDataSet> bibDataSet = extractionResult.getRight();
-                if (bibDataSet != null && bibDataSet.size()>0) {
+                if (bibDataSet != null && bibDataSet.size() > 0) {
                     SoftwareServiceUtil.serializeReferences(json, bibDataSet, extractedEntities);
                 }
 
-                json.append("], \"runtime\" :" + (end-start));
+                json.append("], \"runtime\" :" + (end - start));
                 json.append("}");
 
                 if (json != null) {
                     response = Response
-                            .ok()
-                            .type("application/json")
-                            .entity(json.toString())
-                            .build();
-                }
-                else {
+                        .ok()
+                        .type("application/json")
+                        .entity(json.toString())
+                        .build();
+                } else {
                     response = Response.status(Status.NO_CONTENT).build();
                 }
             }
@@ -354,18 +352,20 @@ public class SoftwareProcessFile {
      * @param addParagraphContext if true, the full paragraph where an annotation takes place is added
      * @return a response object containing the JSON annotations
      */
-    public static Response extractTEI(final InputStream inputStream, 
-                                        boolean disambiguate, 
-                                        boolean addParagraphContext,
-                                        SoftwareConfiguration configuration) {
-        LOGGER.debug(methodLogIn()); 
+    public static Response extractTEI(
+        final InputStream inputStream,
+        boolean disambiguate,
+        boolean addParagraphContext,
+        SoftwareConfiguration configuration
+    ) {
+        LOGGER.debug(methodLogIn());
         Response response = null;
         File originFile = null;
         SoftwareParser parser = SoftwareParser.getInstance(configuration);
 
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
-            DigestInputStream dis = new DigestInputStream(inputStream, md); 
+            DigestInputStream dis = new DigestInputStream(inputStream, md);
 
             originFile = IOUtilities.writeInputFile(dis);
             byte[] digest = md.digest();
@@ -396,7 +396,7 @@ public class SoftwareProcessFile {
                 json.append(", \"mentions\":[");
                 boolean first = true;
                 if (extractedEntities != null) {
-                    for(SoftwareEntity entity : extractedEntities) {
+                    for (SoftwareEntity entity : extractedEntities) {
                         if (!first)
                             json.append(", ");
                         else
@@ -406,22 +406,23 @@ public class SoftwareProcessFile {
                 }
                 json.append("], \"references\":[");
 
-                List<BibDataSet> teiBibDataSet = extractionResult != null ? extractionResult.getRight() : null;
-                if (teiBibDataSet != null && teiBibDataSet.size()>0) {
-                    SoftwareServiceUtil.serializeReferences(json, teiBibDataSet, extractedEntities);
+                if (extractionResult != null) {
+                    List<BibDataSet> bibDataSet = extractionResult.getRight();
+                    if (bibDataSet != null && bibDataSet.size() > 0) {
+                        SoftwareServiceUtil.serializeReferences(json, bibDataSet, extractedEntities);
+                    }
                 }
-                
-                json.append("], \"runtime\" :" + (end-start));
+
+                json.append("], \"runtime\" :" + (end - start));
                 json.append("}");
 
                 if (json != null) {
                     response = Response
-                            .ok()
-                            .type("application/json")
-                            .entity(json.toString())
-                            .build();
-                }
-                else {
+                        .ok()
+                        .type("application/json")
+                        .entity(json.toString())
+                        .build();
+                } else {
                     response = Response.status(Status.NO_CONTENT).build();
                 }
             }
