@@ -221,7 +221,7 @@ public class SoftwareTypeTrainer extends AbstractTrainer {
             }
 
         } catch (Exception e) {
-            throw new GrobidException("An exception occured while training GROBID.", e);
+            throw new GrobidException("An exception occurred while training GROBID.", e);
         } finally {
             try {
                 if (writerTraining != null)

@@ -13,6 +13,8 @@ class SoftciteApp {
         this.entityMap = new Map();
         this.referenceMap = new Map();
         this.responseJson = null;
+        // Base URL for external concept service, fetched from backend config
+        this.conceptServiceBaseUrl = null;
 
         // Example texts
         this.examples = [
@@ -36,6 +38,7 @@ class SoftciteApp {
         this.setupEventListeners();
         this.initializeUI();
         this.setupBaseURL();
+        this.fetchConceptBaseUrl();
         this.configurePdfJs();
     }
 
@@ -140,6 +143,27 @@ class SoftciteApp {
     setupBaseURL() {
         // Initialize base URL setup
         this.setBaseUrl('processSoftwareText');
+    }
+
+    // Retrieve concept service base URL from backend configuration endpoint
+    fetchConceptBaseUrl() {
+        try {
+            const url = this.defineBaseURL('config/conceptBaseUrl');
+            $.getJSON(url)
+                .done((payload) => {
+                    if (payload && typeof payload.conceptBaseUrl === 'string') {
+                        const v = payload.conceptBaseUrl.trim();
+                        this.conceptServiceBaseUrl = v.length > 0 ? v : null;
+                    }
+                })
+                .fail(() => {
+                    // ignore errors, proxy will be used
+                    this.conceptServiceBaseUrl = null;
+                });
+        } catch (e) {
+            // ignore; proxy will be used
+            this.conceptServiceBaseUrl = null;
+        }
     }
 
     configurePdfJs() {
@@ -1433,14 +1457,34 @@ class SoftciteApp {
     }
 
     fetchConcept(identifier, lang, successFunction) {
-        $.ajax({
-            type: 'GET',
-            url: 'https://cloud.science-miner.com/nerd/service/kb/concept/' + identifier + '?lang=' + lang,
-            success: (result) => {
-                successFunction(result);
-            },
-            dataType: 'json'
-        });
+        // prefer configured external service if available; otherwise use backend proxy
+        const callProxy = () => {
+            const proxyUrl = this.defineBaseURL('kb/concept/' + encodeURIComponent(identifier)) + (lang ? ('?lang=' + encodeURIComponent(lang)) : '');
+            $.ajax({
+                type: 'GET',
+                url: proxyUrl,
+                success: (result) => successFunction(result),
+                dataType: 'json'
+            });
+        };
+
+        if (this.conceptServiceBaseUrl) {
+            const base = this.conceptServiceBaseUrl;
+            const sep = base.endsWith('/') ? '' : '/';
+            const externalUrl = base + sep + encodeURIComponent(identifier) + (lang ? ('?lang=' + encodeURIComponent(lang)) : '');
+            $.ajax({
+                type: 'GET',
+                url: externalUrl,
+                success: (result) => successFunction(result),
+                error: () => {
+                    // CORS or upstream error: fallback to backend proxy
+                    callProxy();
+                },
+                dataType: 'json'
+            });
+        } else {
+            callProxy();
+        }
     }
 
     // New implementations based on original frontend for feature parity
@@ -1799,4 +1843,3 @@ window.grobid = {
     submitQuery: () => window.softciteApp.submitQuery(),
     // Add other legacy methods as needed
 };
-

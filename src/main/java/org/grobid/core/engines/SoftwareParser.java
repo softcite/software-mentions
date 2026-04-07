@@ -7,6 +7,7 @@ import org.apache.commons.collections4.IteratorUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
+import org.apache.commons.lang3.tuple.Triple;
 import org.grobid.core.GrobidModels;
 import org.grobid.core.analyzers.SoftwareAnalyzer;
 import org.grobid.core.data.*;
@@ -340,7 +341,7 @@ public class SoftwareParser extends AbstractParser {
             entities = SoftwareContextClassifier.getInstance(softwareConfiguration).classifyDocumentContexts(entities);
 
         } catch (Exception e) {
-            throw new GrobidException("An exception occured while running Grobid.", e);
+            throw new GrobidException("An exception occurred while running Grobid.", e);
         }
 
         return entities;
@@ -359,9 +360,11 @@ public class SoftwareParser extends AbstractParser {
     /**
      * Extract all Software mentions from a pdf file
      */
-    public Pair<List<SoftwareEntity>, Document> processPDF(File file,
-                                                           boolean disambiguate,
-                                                           boolean addParagraphContext) throws IOException {
+    public Pair<List<SoftwareEntity>, Document> processPDF(
+        File file,
+        boolean disambiguate,
+        boolean addParagraphContext
+    ) throws IOException {
         List<SoftwareEntity> entities = new ArrayList<SoftwareEntity>();
         Document doc = null;
         try {
@@ -390,7 +393,8 @@ public class SoftwareParser extends AbstractParser {
             List<List<LayoutToken>> selectedLayoutTokenSequences = new ArrayList<>();
 
             // from the header, we are interested in title, abstract and keywords
-            BiblioItem resHeader = null;
+            BiblioItem resHeader = new BiblioItem();
+            doc.setResHeader(resHeader);
             SortedSet<DocumentPiece> documentParts = doc.getDocumentPart(SegmentationLabels.HEADER);
             if (documentParts != null) {
                 try {
@@ -398,10 +402,8 @@ public class SoftwareParser extends AbstractParser {
                     String header = headerFeatured.getLeft();
                     List<LayoutToken> headerTokenization = headerFeatured.getRight();
                     String labeledResult = null;
-                    if ((header != null) && (header.trim().length() > 0)) {
-                        labeledResult = parsers.getHeaderParser().label(header);
-                        resHeader = new BiblioItem();
-                        resHeader.generalResultMappingHeader(labeledResult, headerTokenization);
+                    if (StringUtils.isNotBlank(header)) {
+                        parsers.getHeaderParser().processingHeaderSection(config, doc, resHeader, false);
 
                         // title
                         List<LayoutToken> titleTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_TITLE);
@@ -440,7 +442,7 @@ public class SoftwareParser extends AbstractParser {
 
                     LayoutTokenization tokenizationBody = featSeg.getRight();
                     String rese = null;
-                    if ((bodytext != null) && (bodytext.trim().length() > 0)) {
+                    if (StringUtils.isNotBlank(bodytext)) {
                         rese = parsers.getFullTextParser().label(bodytext);
                     } else {
                         logger.debug("Fulltext model: The input to the sequence labelling processing is empty");
@@ -770,7 +772,7 @@ public class SoftwareParser extends AbstractParser {
                     }
                 } catch (Exception e) {
                     throw new GrobidException(
-                        "An exception occured while running consolidation on bibliographical references.", e);
+                        "An exception occurred while running consolidation on bibliographical references.", e);
                 }
 
                 // propagate the bib. ref. to the entities corresponding to the same software name without bib. ref.
@@ -1489,7 +1491,7 @@ public class SoftwareParser extends AbstractParser {
                     String pathTEI = outputDirectory + "/" + file.getName().substring(0, file.getName().length() - 4) + ".training.tei.xml";
                     createTraining(file.getAbsolutePath(), pathTEI, n);
                 } catch (final Exception exp) {
-                    logger.error("An error occured while processing the following pdf: "
+                    logger.error("An error occurred while processing the following pdf: "
                         + file.getPath() + ": " + exp);
                 }
                 if (ind != -1)
@@ -1498,7 +1500,7 @@ public class SoftwareParser extends AbstractParser {
 
             return refFiles.length;
         } catch (final Exception exp) {
-            throw new GrobidException("An exception occured while running Grobid batch.", exp);
+            throw new GrobidException("An exception occurred while running Grobid batch.", exp);
         }
     }
 
@@ -1819,7 +1821,7 @@ public class SoftwareParser extends AbstractParser {
                 isSoftwarePattern = false;
             }
         } catch (Exception e) {
-            throw new GrobidException("An exception occured while running Grobid.", e);
+            throw new GrobidException("An exception occurred while running Grobid.", e);
         }
         return result.toString();
     }
@@ -2124,7 +2126,7 @@ public class SoftwareParser extends AbstractParser {
 
                 // conservative check, minimal well-formedness of the content for URL
                 if (clusterLabel.equals(SoftwareTaggingLabels.SOFTWARE_URL)) {
-                    if (SoftwareAnalyzer.DELIMITERS.indexOf(clusterContent) != -1 ||
+                    if (SoftwareAnalyzer.DELIMITERS.contains(clusterContent) ||
                         SoftwareLexicon.getInstance().isEnglishStopword(clusterContent) ||
                         FeatureFactory.getInstance().test_number(clusterContent) ||
                         clusterContent.replace("\n", "").equals("//")) {
@@ -2470,12 +2472,10 @@ public class SoftwareParser extends AbstractParser {
     /**
      * Extract all software mentions from a publisher XML file
      */
-    public Pair<List<SoftwareEntity>, List<BibDataSet>> processXML(
-        File file,
-        boolean disambiguate,
-        boolean addParagraphContext
-    ) throws IOException {
-        Pair<List<SoftwareEntity>, List<BibDataSet>> resultExtraction = null;
+    public Triple<Optional<ArticleBiblio>, List<SoftwareEntity>, List<BibDataSet>> processXML(File file,
+                                                                                              boolean disambiguate,
+                                                                                              boolean addParagraphContext) throws IOException {
+        Triple<Optional<ArticleBiblio>, List<SoftwareEntity>, List<BibDataSet>> resultExtraction = null;
         try {
             String tei = processXML(file);
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -2491,7 +2491,7 @@ public class SoftwareParser extends AbstractParser {
             //tei = restoreDomParserAttributeBug(tei);
 
         } catch (final Exception exp) {
-            logger.error("An error occured while processing the following XML file: "
+            logger.error("An error occurred while processing the following XML file: "
                 + file.getPath(), exp);
         }
 
@@ -2502,12 +2502,12 @@ public class SoftwareParser extends AbstractParser {
     /**
      * Extract all software mentions from a publisher XML file
      */
-    public Pair<List<SoftwareEntity>, List<BibDataSet>> processTEI(
+    public Triple<Optional<ArticleBiblio>, List<SoftwareEntity>, List<BibDataSet>> processTEI(
         File file,
         boolean disambiguate,
         boolean addParagraphContext
     ) throws IOException {
-        Pair<List<SoftwareEntity>, List<BibDataSet>> resultExtraction = null;
+        Triple<Optional<ArticleBiblio>, List<SoftwareEntity>, List<BibDataSet>> resultExtraction = null;
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             factory.setNamespaceAware(true);
@@ -2518,7 +2518,7 @@ public class SoftwareParser extends AbstractParser {
             //tei = restoreDomParserAttributeBug(tei);
 
         } catch (final Exception exp) {
-            logger.error("An error occured while processing the following XML file: "
+            logger.error("An error occurred while processing the following XML file: "
                 + file.getPath(), exp);
         }
 
@@ -2552,7 +2552,7 @@ public class SoftwareParser extends AbstractParser {
             tei = FileUtils.readFileToString(new File(newFilePath), UTF_8);
 
         } catch (final Exception exp) {
-            logger.error("An error occured while processing the following XML file: " + file.getAbsolutePath(), exp);
+            logger.error("An error occurred while processing the following XML file: " + file.getAbsolutePath(), exp);
         } finally {
             if (newFilePath != null) {
                 File newFile = new File(newFilePath);
@@ -2566,7 +2566,7 @@ public class SoftwareParser extends AbstractParser {
     /**
      * Extract all software mentions from a publisher XML file
      */
-    public Pair<List<SoftwareEntity>, List<BibDataSet>> processTEIDocument(
+    public Triple<Optional<ArticleBiblio>, List<SoftwareEntity>, List<BibDataSet>> processTEIDocument(
         org.w3c.dom.Document doc,
         boolean disambiguate,
         boolean addParagraphContext
@@ -2853,13 +2853,13 @@ public class SoftwareParser extends AbstractParser {
             }
         } catch (Exception e) {
             throw new GrobidException(
-                "An exception occured while running consolidation on bibliographical references.", e);
+                "An exception occurred while running consolidation on bibliographical references.", e);
         }
 
         // propagate the bib. ref. to the entities corresponding to the same software name without bib. ref.
-        if (entities != null && entities.size() > 0) {
+        if (CollectionUtils.isNotEmpty(entities)) {
             for (SoftwareEntity entity1 : entities) {
-                if (entity1.getBibRefs() != null && entity1.getBibRefs().size() > 0) {
+                if (CollectionUtils.isNotEmpty(entity1.getBibRefs())) {
                     for (SoftwareEntity entity2 : entities) {
                         if (entity2.getBibRefs() != null) {
                             continue;
@@ -2882,7 +2882,8 @@ public class SoftwareParser extends AbstractParser {
         // finally classify the context for predicting the role of the software mention
 //        entities = SoftwareContextClassifier.getInstance(softwareConfiguration).classifyDocumentContexts(entities);
 
-        return Pair.of(entities, resCitations);
+        Optional<ArticleBiblio> metadata = ArticleBiblio.fromTeiDocument(doc);
+        return Triple.of(metadata, entities, resCitations);
     }
 
 

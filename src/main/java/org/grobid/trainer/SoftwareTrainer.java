@@ -337,7 +337,7 @@ public class SoftwareTrainer extends AbstractTrainer {
                 }
             }
         } catch (Exception e) {
-            throw new GrobidException("An exception occured while training GROBID.", e);
+            throw new GrobidException("An exception occurred while training GROBID.", e);
         } finally {
             try {
                 if (writerTraining != null)
@@ -582,7 +582,7 @@ public class SoftwareTrainer extends AbstractTrainer {
                 }
             }*/
         } catch (Exception e) {
-            throw new GrobidException("An exception occured while training GROBID.", e);
+            throw new GrobidException("An exception occurred while training GROBID.", e);
         } finally {
             try {
                 if (writerTraining != null)
@@ -722,7 +722,7 @@ public class SoftwareTrainer extends AbstractTrainer {
             }
             crfWriter.write("\n");
         } catch (Exception e) {
-            throw new GrobidException("An exception occured while training Grobid.", e);
+            throw new GrobidException("An exception occurred while training Grobid.", e);
         } finally {
             try {
                 if (crfWriter != null)
@@ -815,7 +815,7 @@ public class SoftwareTrainer extends AbstractTrainer {
                 isSoftwarePattern = false;
             }
         } catch (Exception e) {
-            throw new GrobidException("An exception occured while running Grobid.", e);
+            throw new GrobidException("An exception occurred while running Grobid.", e);
         }
     }
 
@@ -928,7 +928,7 @@ public class SoftwareTrainer extends AbstractTrainer {
                 writer.write(serialize(document, null));
             }
         } catch (Exception e) {
-            throw new GrobidException("An exception occured while selecting negative examples.", e);
+            throw new GrobidException("An exception occurred while selecting negative examples.", e);
         } finally {
             try {
                 if (writer != null)
@@ -1035,7 +1035,7 @@ public class SoftwareTrainer extends AbstractTrainer {
                 writer.write(serialize(document, null));
             }
         } catch (Exception e) {
-            throw new GrobidException("An exception occured while selecting negative examples.", e);
+            throw new GrobidException("An exception occurred while selecting negative examples.", e);
         } finally {
             try {
                 if (writer != null)

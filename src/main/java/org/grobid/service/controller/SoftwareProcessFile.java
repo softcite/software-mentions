@@ -6,7 +6,10 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
+import org.apache.commons.lang3.tuple.Triple;
 import org.grobid.core.data.BibDataSet;
+import org.grobid.core.data.BiblioItem;
+import org.grobid.core.data.ArticleBiblio;
 import org.grobid.core.data.SoftwareEntity;
 import org.grobid.core.document.Document;
 import org.grobid.core.engines.Engine;
@@ -27,6 +30,7 @@ import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 /**
  *
@@ -89,7 +93,13 @@ public class SoftwareProcessFile {
                 String md5Str = DatatypeConverter.printHexBinary(digest).toUpperCase();
                 json.append(", \"md5\": \"" + md5Str + "\"");
 
-                // page height and width
+                // Add article metadata (biblio) from document header
+                BiblioItem resHeader = doc.getResHeader();
+                Optional<ArticleBiblio> metadata = ArticleBiblio.fromBiblioItem(resHeader);
+
+                metadata.ifPresent(articleBiblio -> json.append(", " + articleBiblio.toJson()));
+
+				// page height and width
                 json.append(", \"pages\":[");
                 List<Page> pages = doc.getPages();
                 boolean first = true;
@@ -273,11 +283,12 @@ public class SoftwareProcessFile {
                 response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
             } else {
                 long start = System.currentTimeMillis();
-                Pair<List<SoftwareEntity>, List<BibDataSet>> extractionResult =
+                Triple<Optional<ArticleBiblio>, List<SoftwareEntity>, List<BibDataSet>> extractionResult =
                     parser.processXML(originFile, disambiguate, addParagraphContext);
                 long end = System.currentTimeMillis();
 
-                List<SoftwareEntity> extractedEntities = extractionResult.getLeft();
+                List<SoftwareEntity> extractedEntities = extractionResult.getMiddle();
+                Optional<ArticleBiblio> metadata = extractionResult.getLeft();
 
                 StringBuilder json = new StringBuilder();
                 json.append("{ ");
@@ -285,6 +296,9 @@ public class SoftwareProcessFile {
 
                 String md5Str = DatatypeConverter.printHexBinary(digest).toUpperCase();
                 json.append(", \"md5\": \"" + md5Str + "\"");
+
+                metadata.ifPresent(articleBiblio -> json.append(", " + articleBiblio.toJson()));
+
                 json.append(", \"mentions\":[");
                 boolean first = true;
                 if (extractedEntities != null) {
@@ -360,12 +374,14 @@ public class SoftwareProcessFile {
                 response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
             } else {
                 long start = System.currentTimeMillis();
-                Pair<List<SoftwareEntity>, List<BibDataSet>> extractionResult = parser.processTEI(originFile, disambiguate, addParagraphContext);
+                Triple<Optional<ArticleBiblio>, List<SoftwareEntity>, List<BibDataSet>> extractionResult = parser.processTEI(originFile, disambiguate, addParagraphContext);
                 long end = System.currentTimeMillis();
 
                 List<SoftwareEntity> extractedEntities = null;
+                Optional<ArticleBiblio> metadata = Optional.empty();
                 if (extractionResult != null) {
-                    extractedEntities = extractionResult.getLeft();
+                    extractedEntities = extractionResult.getMiddle();
+                    metadata = extractionResult.getLeft();
                 }
 
                 StringBuilder json = new StringBuilder();
@@ -374,6 +390,9 @@ public class SoftwareProcessFile {
 
                 String md5Str = DatatypeConverter.printHexBinary(digest).toUpperCase();
                 json.append(", \"md5\": \"" + md5Str + "\"");
+
+                metadata.ifPresent(articleBiblio -> json.append(", " + articleBiblio.toJson()));
+
                 json.append(", \"mentions\":[");
                 boolean first = true;
                 if (extractedEntities != null) {

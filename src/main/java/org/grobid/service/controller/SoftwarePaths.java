@@ -54,4 +54,10 @@ public interface SoftwarePaths {
     public static final String PATH_SOFTWARE_CONTEXT = "characterizeSoftwareContext";
 
     public static final String PATH_VERSION = "version";
+
+    // New path to expose concept service base URL from configuration
+    public static final String PATH_CONFIG_CONCEPT_BASE_URL = "config/conceptBaseUrl";
+
+    // New path for proxying concept lookup via backend
+    public static final String PATH_KB_CONCEPT = "kb/concept/{identifier}";
 }
