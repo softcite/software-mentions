@@ -68,7 +68,9 @@ version = '0.9.0-SNAPSHOT'
 
 description = """software-mentions"""
 
+import javax.inject.Inject
 import org.apache.tools.ant.taskdefs.condition.Os
+import org.gradle.process.ExecOperations
 
 java {
     toolchain {
@@ -347,25 +349,45 @@ processResources {
 }
 
 task copyModels(type: Copy) {
-    from "${rootDir}/resources/models/"
-    include "**"
+    from "${rootDir}/resources/models"
+    include "**/*.wapiti"
+    include "**/config.json"
+    include "**/transformer-config.json"
+    include "**/transformer-tokenizer/**"
+    include "**/model_weights.hdf5"
+    include "**/preprocessor.json"
+    exclude "**/features-engineering/**"
+    exclude "**/result-logs/**"
     into "${grobidHome}/models/"
+
     doLast {
+        // model.wapiti.gz is intentionally not in the include list — handled by gunzip below
         ant.gunzip(src: "${rootDir}/resources/models/software/model.wapiti.gz", dest: "${grobidHome}/models/software/")
+        print "Copy models under grobid-home: ${grobidHome}"
     }
 }
 
+// Gradle 9 removed the dynamic `exec {}` shortcut inside task actions, so we
+// inject ExecOperations via a helper interface and call it from doLast.
+interface InjectedExecOps {
+    @Inject ExecOperations getExecOps()
+}
+
 task downloadModelsGit(dependsOn: copyModels) {
+    def targetDir = file("${grobidHome}/models/softcite")
+    def injected = objects.newInstance(InjectedExecOps)
     doLast {
-        def targetDir = file("${grobidHome}/models/softcite")
+        targetDir.parentFile.mkdirs()
+        // Requires git-xet to be installed beforehand (https://hf.co/docs/hub/git-xet),
+        // since the HuggingFace repository stores large model files via Xet storage.
         if (targetDir.exists()) {
-            exec {
-                workingDir targetDir
-                commandLine 'git', 'pull', '--depth=1'
+            injected.execOps.exec {
+                workingDir = targetDir
+                commandLine 'git', 'pull'
             }
         } else {
-            exec {
-                commandLine 'git', 'clone', '--depth=1',
+            injected.execOps.exec {
+                commandLine 'git', 'clone',
                     'https://huggingface.co/sciencialab/software-mentions-models',
                     targetDir.absolutePath
             }
