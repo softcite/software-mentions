@@ -61,22 +61,30 @@ jobs:
           pushImage: true
           tags:  |
             latest-develop, ${{ github.event.inputs.custom_tag}}
-      - name: Image digest
-        run: echo ${{ steps.docker_build.outputs.digest }}
-      - name: Docker Image Summary
+      - name: Job summary
+        if: always()
+        env:
+          IMAGE_FULL_NAME: ${{ steps.docker_build.outputs.imageFullName }}
+          IMAGE_NAME: ${{ steps.docker_build.outputs.imageName }}
+          IMAGE_TAGS: ${{ steps.docker_build.outputs.tags }}
+          IMAGE_DIGEST: ${{ steps.docker_build.outputs.digest }}
         run: |
-          echo "## 🐳 Docker Image Uploaded Successfully" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Image Details:**" >> $GITHUB_STEP_SUMMARY
-          echo "- **Registry:** docker.io" >> $GITHUB_STEP_SUMMARY
-          echo "- **Image:** lfoppiano/software-mentions" >> $GITHUB_STEP_SUMMARY
-          echo "- **Type:** CRF-only build" >> $GITHUB_STEP_SUMMARY
-          echo "- **Tags:**" >> $GITHUB_STEP_SUMMARY
-          echo "  - \`latest-develop\`" >> $GITHUB_STEP_SUMMARY
-          echo "  - \`${{ github.event.inputs.custom_tag }}\`" >> $GITHUB_STEP_SUMMARY
-          echo "- **Digest:** \`${{ steps.docker_build.outputs.digest }}\`" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Usage:**" >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
-          echo "docker pull lfoppiano/software-mentions:${{ github.event.inputs.custom_tag }}" >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          {
+            if [ -z "$IMAGE_DIGEST" ]; then
+              echo "_Built but not pushed (pull request)_"
+              echo ""
+            fi
+            echo "## Docker image"
+            echo ""
+            echo "| Field    | Value |"
+            echo "|----------|-------|"
+            echo "| Image    | \`$IMAGE_FULL_NAME\` |"
+            echo "| Tags     | \`$IMAGE_TAGS\` |"
+            echo "| Digest   | \`$IMAGE_DIGEST\` |"
+            echo "| Registry | \`docker.io\` |"
+            echo ""
+            echo '```'
+            echo "docker pull $IMAGE_FULL_NAME"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
