@@ -2,7 +2,7 @@
 # build builder image
 # -------------------
 
-FROM eclipse-temurin:17.0.15_6-jdk AS builder
+FROM eclipse-temurin:21.0.10_7-jdk AS builder
 
 USER root
 
@@ -52,7 +52,7 @@ RUN wget https://github.com/kermitt2/Pub2TEI/archive/refs/heads/master.zip && \
 # build runtime image
 # -------------------
 
-FROM lfoppiano/grobid:0.8.2.1-full AS runtime
+FROM lfoppiano/grobid:0.9.0-full AS runtime
 
 # setting locale is likely useless but to be sure
 ENV LANG C.UTF-8
@@ -83,7 +83,7 @@ VOLUME ["/opt/grobid/grobid-home/tmp"]
 
 ARG GROBID_VERSION
 ENV GROBID_VERSION=${GROBID_VERSION:-latest}
-ENV SOFTWARE_MENTIONS_OPTS="-Djava.library.path=/opt/grobid/grobid-home/lib/lin-64:/usr/local/lib/python3.8/dist-packages/jep --add-opens java.base/java.lang=ALL-UNNAMED"
+ENV SOFTWARE_MENTIONS_OPTS="-Djava.library.path=/opt/grobid/grobid-home/lib/lin-64:/usr/local/lib/python3.11/dist-packages/jep --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED"
 
 CMD ["./software-mentions/bin/software-mentions", "server", "software-mentions/resources/config/config.yml"]
 
