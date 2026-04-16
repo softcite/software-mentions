@@ -44,16 +44,6 @@ Thanks to its integration in the [GROBID](https://github.com/kermitt2/grobid) fr
 
 Latest performance (accuracy and runtime) can be found in the most recent cited publication above, and more model comparisons [below](https://github.com/ourresearch/software-mentions#benchmarking-of-the-sequence-labeling-task).
 
-## Demo
-
-A public demo of the service is available at the following address: https://cloud.science-miner.com/software/
-
-The [web console](https://github.com/ourresearch/software-mentions#console-web-app) allows you to test the processing of text or of a full scholar PDF. The component is developed targeting complete PDF, so the output of a PDF processing will be richer (attachment, parsing and DOI-matching of the bibliographical references appearing with a software mention, coordinates in the PDF of the mentions, document level propagation of mentions). The console displays extracted mentions directly on the PDF pages (via PDF.js), with infobox describing when possible Wikidata entity linking and full reference metadata (with Open Access links when found via Unpaywall).  
-
-This demo is only provided for test, without any guaranties regarding the service quality and availability. If you plan to use this component at scale or in production, you need to install it locally (see how to deploy a [docker image](https://github.com/ourresearch/software-mentions#docker-image)). 
-
-Note: **The demo run with the CRF model** to reduce the computational load, as the server is used for other demos and has no GPU (for cost reasons). For significantly more accurate results (see the [benchmarking](https://github.com/ourresearch/software-mentions#benchmarking-of-the-sequence-labeling-task)), sciBERT/LinkBERT models are required, the Docker image being the easiest way to achieve this (fine-tuned transformer models are included and used by default in the image). 
-
 ## The Softcite Dataset
 
 For sampling, training and evaluation of the sequence labeling model and additional attribute attachment mechanisms, we use the Softcite dataset, a gold standard manually annotated corpus of 4,971 scholar articles, available on Zenodo (version 2.0): 
