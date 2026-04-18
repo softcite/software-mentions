@@ -135,15 +135,10 @@ public class SoftwareDisambiguator {
                 url = new URL("http://" + nerd_host + "/service/isalive");
 
             LOGGER.debug("Calling: " + url.toString());
-//System.out.println("Calling: " + url.toString());
-            CloseableHttpClient httpClient = HttpClients.createDefault();
             HttpGet get = new HttpGet(url.toString());
 
-            CloseableHttpResponse response = null;
-            Scanner in = null;
-            try {
-                response = httpClient.execute(get);
-//System.out.println(response.getStatusLine());
+            try (CloseableHttpClient httpClient = HttpClients.createDefault();
+                 CloseableHttpResponse response = httpClient.execute(get)) {
                 int code = response.getStatusLine().getStatusCode();
                 if (code != 200) {
                     LOGGER.error("Failed isalive service: HTTP error code : " + code);
@@ -151,11 +146,6 @@ public class SoftwareDisambiguator {
                 } else {
                     result = true;
                 }
-            } finally {
-                if (in != null)
-                    in.close();
-                if (response != null)
-                    response.close();
             }
         } catch (MalformedURLException e) {
             LOGGER.error("disambiguation service not available: MalformedURLException");
@@ -169,12 +159,11 @@ public class SoftwareDisambiguator {
     }
 
     /**
-     * Check if the software customisation is ready on the entity-fishing server, if not load it 
+     * Check if the software customisation is ready on the entity-fishing server, if not load it
      */
     public void ensureCustomizationReady() {
         boolean result = false;
         URL url = null;
-        CloseableHttpResponse response = null;
         try {
             if ( (nerd_port != null) && (nerd_port.length() > 0) )
                 if (nerd_port.equals("443"))
@@ -185,24 +174,15 @@ public class SoftwareDisambiguator {
                 url = new URL("http://" + nerd_host + "/service/customisation/software");
 
             LOGGER.debug("Calling: " + url.toString());
-//System.out.println("Calling: " + url.toString());
-            CloseableHttpClient httpClient = HttpClients.createDefault();
             HttpGet get = new HttpGet(url.toString());
-            Scanner in = null;
-            try {
-                response = httpClient.execute(get);
-//System.out.println(response.getStatusLine());
+            try (CloseableHttpClient httpClient = HttpClients.createDefault();
+                 CloseableHttpResponse response = httpClient.execute(get)) {
                 int code = response.getStatusLine().getStatusCode();
                 if (code != 200) {
                     LOGGER.error("Failed customization lookup service: HTTP error code : " + code);
                 } else {
                     result = true;
                 }
-            } finally {
-                if (in != null)
-                    in.close();
-                if (response != null)
-                    response.close();
             }
         } catch (MalformedURLException e) {
             LOGGER.error("disambiguation service not available: MalformedURLException");
@@ -230,37 +210,27 @@ public class SoftwareDisambiguator {
                 cutomisationFile = new File(cutomisationFile.getAbsolutePath());
                 String json = FileUtils.readFileToString(cutomisationFile, "UTF-8");
 
-                CloseableHttpClient httpClient = HttpClients.createDefault();
                 HttpPost post = new HttpPost(url.toString());
 
-                //StringBody stringValue = new StringBody(json, ContentType.MULTIPART_FORM_DATA);
-                //StringBody stringName = new StringBody("software", ContentType.MULTIPART_FORM_DATA);
                 MultipartEntityBuilder builder = MultipartEntityBuilder.create();
                 builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
                 builder.addTextBody("value", json);
                 builder.addTextBody("name", "software");
-                //builder.addPart("value", stringValue);
-                //builder.addPart("name", stringName);
                 HttpEntity entity = builder.build();
-                try {
-                    post.setEntity(entity);
-                    response = httpClient.execute(post);
-//System.out.println(response.getStatusLine());
-
+                post.setEntity(entity);
+                try (CloseableHttpClient httpClient = HttpClients.createDefault();
+                     CloseableHttpResponse response = httpClient.execute(post)) {
                     int code = response.getStatusLine().getStatusCode();
                     if (code != 200) {
                         LOGGER.error("Failed loading software customisation: HTTP error code : " + code);
                     } else {
                         LOGGER.info("Software customisation loaded");
                     }
-                } finally {
-                    if (response != null)
-                        response.close();
                 }
             } catch (MalformedURLException e) {
-                e.printStackTrace();
+                LOGGER.warn("MalformedURLException while loading software customisation", e);
             } catch (IOException e) {
-                e.printStackTrace();
+                LOGGER.warn("I/O error while loading software customisation", e);
             }
         }
     }
@@ -504,8 +474,6 @@ public class SoftwareDisambiguator {
                     url = new URL("http://" + nerd_host + ":" + nerd_port + "/service/" + RESOURCEPATH);
             else
                 url = new URL("http://" + nerd_host + "/service/" + RESOURCEPATH);
-//System.out.println("calling... " + url.toString());
-            CloseableHttpClient httpClient = HttpClients.createDefault();
             HttpPost post = new HttpPost(url.toString());
             //post.addHeader("Content-Type", "application/json");
             //post.addHeader("Accept", "application/json");
@@ -578,14 +546,9 @@ public class SoftwareDisambiguator {
             builder.addPart("query", stringBody);
             HttpEntity entity = builder.build();
 
-            CloseableHttpResponse response = null;
-            Scanner in = null;
-            try {
-                //post.setEntity(new UrlEncodedFormEntity(params));
-                post.setEntity(entity);
-                response = httpClient.execute(post);
-                // System.out.println(response.getStatusLine());
-
+            post.setEntity(entity);
+            try (CloseableHttpClient httpClient = HttpClients.createDefault();
+                 CloseableHttpResponse response = httpClient.execute(post)) {
                 int code = response.getStatusLine().getStatusCode();
                 if (code != 200) {
                     LOGGER.error("Failed annotating text segment: HTTP error code : " + code);
@@ -593,22 +556,18 @@ public class SoftwareDisambiguator {
                 }
 
                 HttpEntity entityResp = response.getEntity();
-                in = new Scanner(entityResp.getContent());
-                while (in.hasNext()) {
-                    output.append(in.next());
-                    output.append(" ");
+                try (Scanner in = new Scanner(entityResp.getContent())) {
+                    while (in.hasNext()) {
+                        output.append(in.next());
+                        output.append(" ");
+                    }
                 }
                 EntityUtils.consume(entityResp);
-            } finally {
-                if (in != null)
-                    in.close();
-                if (response != null)
-                    response.close();
             }
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            LOGGER.warn("MalformedURLException while calling entity-fishing", e);
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.warn("I/O error while calling entity-fishing", e);
         }
         return output.toString().trim();
     }
