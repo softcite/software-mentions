@@ -2880,7 +2880,7 @@ public class SoftwareParser extends AbstractParser {
         Collections.sort(entities);
 
         // finally classify the context for predicting the role of the software mention
-//        entities = SoftwareContextClassifier.getInstance(softwareConfiguration).classifyDocumentContexts(entities);
+        entities = SoftwareContextClassifier.getInstance(softwareConfiguration).classifyDocumentContexts(entities);
 
         Optional<ArticleBiblio> metadata = ArticleBiblio.fromTeiDocument(doc);
         return Triple.of(metadata, entities, resCitations);
