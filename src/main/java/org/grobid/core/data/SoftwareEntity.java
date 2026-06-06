@@ -230,31 +230,34 @@ public class SoftwareEntity extends KnowledgeEntity implements Comparable<Softwa
 			this.documentContextAttributes.setUsed(attributes.getUsed());
 		}
 
+		Double incomingUsedScore = attributes.getUsedScore();
 		if (this.documentContextAttributes.getUsedScore() != null) {
-			if (attributes.getUsedScore() > this.documentContextAttributes.getUsedScore()) 
-				this.documentContextAttributes.setUsedScore(attributes.getUsedScore());
+			if (incomingUsedScore != null && incomingUsedScore > this.documentContextAttributes.getUsedScore())
+				this.documentContextAttributes.setUsedScore(incomingUsedScore);
 		} else
-			this.documentContextAttributes.setUsedScore(attributes.getUsedScore());
+			this.documentContextAttributes.setUsedScore(incomingUsedScore);
 
 		if (this.documentContextAttributes.getCreated() == null || !this.documentContextAttributes.getCreated()) {
 			this.documentContextAttributes.setCreated(attributes.getCreated());
 		}
 
+		Double incomingCreatedScore = attributes.getCreatedScore();
 		if (this.documentContextAttributes.getCreatedScore() != null) {
-			if (attributes.getCreatedScore() > this.documentContextAttributes.getCreatedScore()) 
-				this.documentContextAttributes.setCreatedScore(attributes.getCreatedScore());
+			if (incomingCreatedScore != null && incomingCreatedScore > this.documentContextAttributes.getCreatedScore())
+				this.documentContextAttributes.setCreatedScore(incomingCreatedScore);
 		} else
-			this.documentContextAttributes.setCreatedScore(attributes.getCreatedScore());
+			this.documentContextAttributes.setCreatedScore(incomingCreatedScore);
 
 		if (this.documentContextAttributes.getShared() == null || !this.documentContextAttributes.getShared()) {
 			this.documentContextAttributes.setShared(attributes.getShared());
 		}
 
+		Double incomingSharedScore = attributes.getSharedScore();
 		if (this.documentContextAttributes.getSharedScore() != null) {
-			if (attributes.getSharedScore() > this.documentContextAttributes.getSharedScore()) 
-				this.documentContextAttributes.setSharedScore(attributes.getSharedScore());
+			if (incomingSharedScore != null && incomingSharedScore > this.documentContextAttributes.getSharedScore())
+				this.documentContextAttributes.setSharedScore(incomingSharedScore);
 		} else
-			this.documentContextAttributes.setSharedScore(attributes.getSharedScore());
+			this.documentContextAttributes.setSharedScore(incomingSharedScore);
 	}
 
 	/**

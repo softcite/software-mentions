@@ -322,9 +322,13 @@ public class SoftwareContextClassifier {
                         JsonNode classificationNode = ite.next();
                         SoftwareEntity entity = entities.get(entityRank);
                         SoftwareContextAttributes contextAttributes = entity.getMentionContextAttributes();
-                        if (contextAttributes == null)
+                        if (contextAttributes == null) {
                             contextAttributes = new SoftwareContextAttributes();
-                        
+                            // default flags to false and scores to 0.0 so that a null result from one of the
+                            // binary classifiers does not leave any attribute unset (which would NPE downstream)
+                            contextAttributes.init();
+                        }
+
                         if (i==0) {
                             JsonNode usedNode = classificationNode.findPath("used");
                             JsonNode notUsedNode = classificationNode.findPath("not_used");
@@ -428,7 +432,9 @@ public class SoftwareContextClassifier {
                 // dummy place holder
                 contexts.add("");
             }
-            allContextAttributes.add(new SoftwareContextAttributes());
+            SoftwareContextAttributes newContextAttributes = new SoftwareContextAttributes();
+            newContextAttributes.init();
+            allContextAttributes.add(newContextAttributes);
         }
 
         String resultsUsed = null;
@@ -561,7 +567,8 @@ public class SoftwareContextClassifier {
         return resultJson;
     }
 
-    private List<SoftwareEntity> documentPropagation(List<SoftwareEntity> entities) {
+    // package-private and static (uses no instance state) so it can be unit-tested without loading the DL models
+    static List<SoftwareEntity> documentPropagation(List<SoftwareEntity> entities) {
         Map<String, List<SoftwareEntity>> entityMap = new TreeMap<>();
         for(SoftwareEntity entity : entities) {
             String softwareNameRaw = entity.getSoftwareName().getRawForm();
@@ -593,20 +600,27 @@ public class SoftwareContextClassifier {
             double best_shared = 0.0;
             for(SoftwareEntity entity : entry.getValue()) {
                 SoftwareContextAttributes localContextAttributes = entity.getMentionContextAttributes();
-                if (localContextAttributes.getUsed()) 
+                // a missing attributes object contributes nothing (treated as all false / 0.0)
+                if (localContextAttributes == null)
+                    continue;
+
+                if (Boolean.TRUE.equals(localContextAttributes.getUsed()))
                     is_used++;
-                if (localContextAttributes.getUsedScore() > best_used)
-                    best_used = localContextAttributes.getUsedScore();
+                Double usedScore = localContextAttributes.getUsedScore();
+                if (usedScore != null && usedScore > best_used)
+                    best_used = usedScore;
 
-                if (localContextAttributes.getCreated()) 
+                if (Boolean.TRUE.equals(localContextAttributes.getCreated()))
                     is_created++;
-                if (localContextAttributes.getCreatedScore() > best_created)
-                    best_created = localContextAttributes.getCreatedScore();
+                Double createdScore = localContextAttributes.getCreatedScore();
+                if (createdScore != null && createdScore > best_created)
+                    best_created = createdScore;
 
-                if (localContextAttributes.getShared()) 
+                if (Boolean.TRUE.equals(localContextAttributes.getShared()))
                     is_shared++;
-                if (localContextAttributes.getSharedScore() > best_shared)
-                    best_shared = localContextAttributes.getSharedScore();
+                Double sharedScore = localContextAttributes.getSharedScore();
+                if (sharedScore != null && sharedScore > best_shared)
+                    best_shared = sharedScore;
             }
 
             SoftwareContextAttributes globalContextAttributes = new SoftwareContextAttributes();
