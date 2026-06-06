@@ -439,8 +439,7 @@ public class SoftwareContextClassifier {
             resultsCreated = classify(contexts, MODEL_TYPE.created);
             resultsShared = classify(contexts, MODEL_TYPE.shared);
         } catch(Exception e) {
-            LOGGER.error("fail to classify document's set of contexts", e);
-            return null;
+            throw new GrobidException("Failed to classify document's set of contexts", e);
         }
 
         if (resultsUsed == null && resultsCreated == null && resultsShared == null) 

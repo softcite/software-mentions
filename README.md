@@ -204,6 +204,10 @@ This dataset is the result of the extraction of software mentions from the set o
 
 ## Web API
 
+### Error handling
+
+The processing endpoints (`processSoftwareText`, `annotateSoftwarePDF`, `annotateSoftwareXML`, `annotateSoftwareTEI`) **fail loud**: when an internal step fails — for instance the context classifier, or the parsing of an XML/TEI input — the service returns an HTTP `500` together with a descriptive error message, instead of silently returning an empty or partial `200` response. A `204` (no content) is reserved for the case where the input is valid but genuinely contains nothing to extract. Clients should therefore treat a `500` as a real processing failure to surface or retry, not as "no mentions found".
+
 ### /service/processSoftwareText
 
 Identify the software mentions in text and optionally disambiguate the extracted software mentions against Wikidata.  

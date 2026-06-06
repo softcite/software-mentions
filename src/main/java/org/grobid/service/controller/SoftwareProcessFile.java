@@ -131,15 +131,11 @@ public class SoftwareProcessFile {
                 json.append("], \"runtime\" :" + (end - start));
                 json.append("}");
 
-                if (json != null) {
-                    response = Response
-                        .ok()
-                        .type("application/json")
-                        .entity(json.toString())
-                        .build();
-                } else {
-                    response = Response.status(Status.NO_CONTENT).build();
-                }
+                response = Response
+                    .ok()
+                    .type("application/json")
+                    .entity(json.toString())
+                    .build();
             }
         } catch (NoSuchElementException nseExp) {
             LOGGER.error("Could not get an instance of SoftwareParser. Sending service unavailable.");
@@ -320,15 +316,11 @@ public class SoftwareProcessFile {
                 json.append("], \"runtime\" :" + (end - start));
                 json.append("}");
 
-                if (json != null) {
-                    response = Response
-                        .ok()
-                        .type("application/json")
-                        .entity(json.toString())
-                        .build();
-                } else {
-                    response = Response.status(Status.NO_CONTENT).build();
-                }
+                response = Response
+                    .ok()
+                    .type("application/json")
+                    .entity(json.toString())
+                    .build();
             }
 
         } catch (NoSuchElementException nseExp) {
@@ -416,15 +408,11 @@ public class SoftwareProcessFile {
                 json.append("], \"runtime\" :" + (end - start));
                 json.append("}");
 
-                if (json != null) {
-                    response = Response
-                        .ok()
-                        .type("application/json")
-                        .entity(json.toString())
-                        .build();
-                } else {
-                    response = Response.status(Status.NO_CONTENT).build();
-                }
+                response = Response
+                    .ok()
+                    .type("application/json")
+                    .entity(json.toString())
+                    .build();
             }
 
         } catch (NoSuchElementException nseExp) {
