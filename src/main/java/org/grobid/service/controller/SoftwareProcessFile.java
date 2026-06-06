@@ -15,6 +15,8 @@ import org.grobid.core.document.Document;
 import org.grobid.core.engines.Engine;
 import org.grobid.core.engines.SoftwareParser;
 import org.grobid.core.engines.config.GrobidAnalysisConfig;
+import org.grobid.core.exceptions.GrobidException;
+import org.grobid.core.exceptions.GrobidExceptionStatus;
 import org.grobid.core.factory.GrobidFactory;
 import org.grobid.core.layout.Page;
 import org.grobid.core.utilities.IOUtilities;
@@ -46,6 +48,21 @@ public class SoftwareProcessFile {
 
     @Inject
     public SoftwareProcessFile() {
+    }
+
+    /**
+     * Build the error response for a processing failure. Failures caused by invalid input
+     * (a {@link GrobidException} flagged as {@link GrobidExceptionStatus#BAD_INPUT_DATA}, e.g. a
+     * malformed/unparseable PDF, XML or TEI) are reported as HTTP 400; anything else is a genuine
+     * internal error and reported as HTTP 500.
+     */
+    private static Response buildErrorResponse(Exception exp) {
+        Status httpStatus = Status.INTERNAL_SERVER_ERROR;
+        if (exp instanceof GrobidException
+            && ((GrobidException) exp).getStatus() == GrobidExceptionStatus.BAD_INPUT_DATA) {
+            httpStatus = Status.BAD_REQUEST;
+        }
+        return Response.status(httpStatus).entity(exp.getMessage()).build();
     }
 
     /**
@@ -142,7 +159,7 @@ public class SoftwareProcessFile {
             response = Response.status(Status.SERVICE_UNAVAILABLE).build();
         } catch (Exception exp) {
             LOGGER.error("An unexpected exception occurs. ", exp);
-            response = Response.status(Status.INTERNAL_SERVER_ERROR).entity(exp.getMessage()).build();
+            response = buildErrorResponse(exp);
         } finally {
             IOUtilities.removeTempFile(originFile);
         }
@@ -243,7 +260,7 @@ public class SoftwareProcessFile {
             response = Response.status(Status.SERVICE_UNAVAILABLE).build();
         } catch (Exception exp) {
             LOGGER.error("An unexpected exception occurs. ", exp);
-            response = Response.status(Status.INTERNAL_SERVER_ERROR).entity(exp.getMessage()).build();
+            response = buildErrorResponse(exp);
         } finally {
             IOUtilities.removeTempFile(tmpPdf);
         }
@@ -328,7 +345,7 @@ public class SoftwareProcessFile {
             response = Response.status(Status.SERVICE_UNAVAILABLE).build();
         } catch (Exception exp) {
             LOGGER.error("An unexpected exception occurs. ", exp);
-            response = Response.status(Status.INTERNAL_SERVER_ERROR).entity(exp.getMessage()).build();
+            response = buildErrorResponse(exp);
         } finally {
             IOUtilities.removeTempFile(originFile);
         }
@@ -420,7 +437,7 @@ public class SoftwareProcessFile {
             response = Response.status(Status.SERVICE_UNAVAILABLE).build();
         } catch (Exception exp) {
             LOGGER.error("An unexpected exception occurs. ", exp);
-            response = Response.status(Status.INTERNAL_SERVER_ERROR).entity(exp.getMessage()).build();
+            response = buildErrorResponse(exp);
         } finally {
             IOUtilities.removeTempFile(originFile);
         }
