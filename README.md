@@ -206,7 +206,13 @@ This dataset is the result of the extraction of software mentions from the set o
 
 ### Error handling
 
-The processing endpoints (`processSoftwareText`, `annotateSoftwarePDF`, `annotateSoftwareXML`, `annotateSoftwareTEI`) **fail loud**: when an internal step fails — for instance the context classifier, or the parsing of an XML/TEI input — the service returns an HTTP `500` together with a descriptive error message, instead of silently returning an empty or partial `200` response. A `204` (no content) is reserved for the case where the input is valid but genuinely contains nothing to extract. Clients should therefore treat a `500` as a real processing failure to surface or retry, not as "no mentions found".
+The processing endpoints (`processSoftwareText`, `annotateSoftwarePDF`, `annotateSoftwareXML`, `annotateSoftwareTEI`) **fail loud** instead of silently returning an empty or partial `200` response, and distinguish *who* is at fault:
+
+- **`400 Bad Request`** — the submitted document is invalid input the service cannot process: a malformed or unparseable PDF, publisher XML or TEI file (e.g. not well-formed XML, an empty upload, or a PDF with no extractable content). The response body carries a descriptive message.
+- **`500 Internal Server Error`** — a genuine internal failure of the pipeline (model inference, context classification, etc.) on otherwise-valid input.
+- **`204 No Content`** — the input is valid but genuinely contains nothing to extract.
+
+Clients should treat a `400` as "fix the input and resubmit" and a `500` as a real server-side failure to surface or retry — neither should be read as "no mentions found".
 
 ### /service/processSoftwareText
 

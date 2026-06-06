@@ -23,6 +23,7 @@ import org.grobid.core.engines.label.TaggingLabel;
 import org.grobid.core.engines.label.TaggingLabels;
 import org.grobid.core.engines.tagging.GrobidCRFEngine;
 import org.grobid.core.exceptions.GrobidException;
+import org.grobid.core.exceptions.GrobidExceptionStatus;
 import org.grobid.core.factory.GrobidFactory;
 import org.grobid.core.features.FeatureFactory;
 import org.grobid.core.features.FeaturesVectorSoftware;
@@ -825,7 +826,12 @@ public class SoftwareParser extends AbstractParser {
             entities = SoftwareContextClassifier.getInstance(softwareConfiguration).classifyDocumentContexts(entities);
 
         } catch (Exception e) {
-            throw new GrobidException("Cannot process pdf file: " + file.getPath(), e);
+            // preserve the underlying status (e.g. BAD_INPUT_DATA for a corrupt PDF raised by GROBID)
+            // so that invalid input is still reported as such rather than downgraded to a generic error
+            GrobidExceptionStatus status = (e instanceof GrobidException)
+                ? ((GrobidException) e).getStatus()
+                : GrobidExceptionStatus.GENERAL;
+            throw new GrobidException("Cannot process pdf file: " + file.getPath(), e, status);
         }
 
         return Pair.of(entities, doc);
@@ -2487,7 +2493,7 @@ public class SoftwareParser extends AbstractParser {
     public Triple<Optional<ArticleBiblio>, List<SoftwareEntity>, List<BibDataSet>> processXML(File file,
                                                                                               boolean disambiguate,
                                                                                               boolean addParagraphContext) throws IOException {
-        Triple<Optional<ArticleBiblio>, List<SoftwareEntity>, List<BibDataSet>> resultExtraction = null;
+        org.w3c.dom.Document document;
         try {
             String tei = processXML(file);
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -2495,19 +2501,17 @@ public class SoftwareParser extends AbstractParser {
             DocumentBuilder builder = factory.newDocumentBuilder();
             //tei = avoidDomParserAttributeBug(tei);
 
-            org.w3c.dom.Document document = builder.parse(new InputSource(new StringReader(tei)));
+            document = builder.parse(new InputSource(new StringReader(tei)));
             //document.getDocumentElement().normalize();
-
-            resultExtraction = processTEIDocument(document, disambiguate, addParagraphContext);
-
             //tei = restoreDomParserAttributeBug(tei);
 
         } catch (final Exception exp) {
-            throw new GrobidException("An error occurred while processing the following XML file: "
-                + file.getPath(), exp);
+            // a failure to transform/parse the input is a client error: the submitted XML is invalid
+            throw new GrobidException("An error occurred while parsing the following XML file: "
+                + file.getPath(), exp, GrobidExceptionStatus.BAD_INPUT_DATA);
         }
 
-        return resultExtraction;
+        return processTEIDocument(document, disambiguate, addParagraphContext);
     }
 
 
@@ -2519,22 +2523,22 @@ public class SoftwareParser extends AbstractParser {
         boolean disambiguate,
         boolean addParagraphContext
     ) throws IOException {
-        Triple<Optional<ArticleBiblio>, List<SoftwareEntity>, List<BibDataSet>> resultExtraction = null;
+        org.w3c.dom.Document document;
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             factory.setNamespaceAware(true);
             DocumentBuilder builder = factory.newDocumentBuilder();
-            org.w3c.dom.Document document = builder.parse(file);
+            document = builder.parse(file);
             //document.getDocumentElement().normalize();
-            resultExtraction = processTEIDocument(document, disambiguate, addParagraphContext);
             //tei = restoreDomParserAttributeBug(tei);
 
         } catch (final Exception exp) {
-            throw new GrobidException("An error occurred while processing the following TEI file: "
-                + file.getPath(), exp);
+            // a failure to parse the input is a client error: the submitted TEI is invalid
+            throw new GrobidException("An error occurred while parsing the following TEI file: "
+                + file.getPath(), exp, GrobidExceptionStatus.BAD_INPUT_DATA);
         }
 
-        return resultExtraction;
+        return processTEIDocument(document, disambiguate, addParagraphContext);
     }
 
     /**
