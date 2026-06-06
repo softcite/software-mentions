@@ -825,8 +825,7 @@ public class SoftwareParser extends AbstractParser {
             entities = SoftwareContextClassifier.getInstance(softwareConfiguration).classifyDocumentContexts(entities);
 
         } catch (Exception e) {
-            e.printStackTrace();
-            throw new GrobidException("Cannot process pdf file: " + file.getPath());
+            throw new GrobidException("Cannot process pdf file: " + file.getPath(), e);
         }
 
         return Pair.of(entities, doc);
@@ -2491,7 +2490,7 @@ public class SoftwareParser extends AbstractParser {
             //tei = restoreDomParserAttributeBug(tei);
 
         } catch (final Exception exp) {
-            logger.error("An error occurred while processing the following XML file: "
+            throw new GrobidException("An error occurred while processing the following XML file: "
                 + file.getPath(), exp);
         }
 
@@ -2518,7 +2517,7 @@ public class SoftwareParser extends AbstractParser {
             //tei = restoreDomParserAttributeBug(tei);
 
         } catch (final Exception exp) {
-            logger.error("An error occurred while processing the following XML file: "
+            throw new GrobidException("An error occurred while processing the following TEI file: "
                 + file.getPath(), exp);
         }
 

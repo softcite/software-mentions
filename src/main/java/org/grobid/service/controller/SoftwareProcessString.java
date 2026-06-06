@@ -123,13 +123,9 @@ public class SoftwareProcessString {
 			String resultJson = null;
 	        List<String> texts = new ArrayList<>();
 	        texts.add(text);
-	        try {
-	            List<String> results = classifier.classifyDocumentContextsBinaryString(texts);
-	            if (results.size()>0)
-		            resultJson = results.get(0);
-	        } catch(Exception e) {
-	            LOGGER.error("fail to classify document's set of contexts", e);
-	        }
+	        List<String> results = classifier.classifyDocumentContextsBinaryString(texts);
+	        if (results != null && results.size() > 0)
+	            resultJson = results.get(0);
 
 			long end = System.currentTimeMillis();
 
