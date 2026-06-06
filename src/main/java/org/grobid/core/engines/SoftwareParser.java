@@ -899,6 +899,14 @@ public class SoftwareParser extends AbstractParser {
         boolean fromXML,
         List<PDFAnnotation> pdfAnnotations
     ) {
+        // The TEI/XML path has no PDF, so callers pass null. grobid-core's
+        // Lexicon.tokenPositionsAnyURLMatchingPdfAnnotations() does pdfAnnotations.parallelStream()
+        // with no null check -> NPE -> every TEI request 500s. Normalize to an empty list:
+        // the annotation branch yields nothing, regex URL detection still runs.
+        if (pdfAnnotations == null) {
+            pdfAnnotations = Collections.emptyList();
+        }
+
         StringBuilder allRess = new StringBuilder();
         for (LayoutTokenization layoutTokenization : layoutTokenizations) {
             List<LayoutToken> layoutTokens = layoutTokenization.getTokenization();
@@ -1014,6 +1022,11 @@ public class SoftwareParser extends AbstractParser {
         List<PDFAnnotation> pdfAnnotations
     ) {
         layoutTokens = SoftwareAnalyzer.getInstance().retokenizeLayoutTokens(layoutTokens);
+
+        // Same null guard as processLayoutTokenSequences: grobid-core dereferences pdfAnnotations.
+        if (pdfAnnotations == null) {
+            pdfAnnotations = Collections.emptyList();
+        }
 
         int pos = 0;
         List<LayoutToken> localLayoutTokens = null;
