@@ -22,7 +22,6 @@ plugins {
     id 'com.gradleup.shadow' version '8.3.10'
     id 'distribution'
     id 'application'
-    id "org.jetbrains.kotlin.jvm" version "2.0.21"
 }
 
 apply plugin: 'jacoco'
@@ -39,13 +38,11 @@ apply plugin: 'com.github.kt3k.coveralls'
 def getGitRevision() {
     def gitRevision = "unknown"
     try {
-        println("Checking git under ${rootProject.rootDir}")
         def result = providers.exec {
             workingDir = rootProject.rootDir
             commandLine 'git', 'describe', '--tags', '--always', '--first-parent'
         }
         gitRevision = result.standardOutput.asText.get().trim()
-        println "Current Git revision: ${gitRevision}"
     } catch (Exception e) {
         println "Could not get Git revision: ${e}"
     }
@@ -54,7 +51,6 @@ def getGitRevision() {
 
 project.ext.gitRevision = getGitRevision()
 
-// Create a task to expose the revision for other tasks
 tasks.register('collectGitRevision') {
     project.ext.gitRevision = getGitRevision()
     doLast {
@@ -170,13 +166,13 @@ dependencies {
     implementation group: 'org.semanticweb.yars', name: 'nxparser-parsers', version: '2.3.3'
 
     //Grobid
-    implementation(group: 'org.grobid', name: 'grobid-core', version: '0.9.0') {
+    implementation(group: 'org.grobid', name: 'grobid-core', version: '0.9.1') {
         exclude group: 'org.slf4j', module: "slf4j-log4j12"
     }
-    api(group: 'org.grobid', name: 'grobid-service', version: '0.9.0') {
+    api(group: 'org.grobid', name: 'grobid-service', version: '0.9.1') {
         exclude group: 'org.slf4j', module: "slf4j-log4j12"
     }
-    implementation(group: 'org.grobid', name: 'grobid-trainer', version: '0.9.0') {
+    implementation(group: 'org.grobid', name: 'grobid-trainer', version: '0.9.1') {
         exclude group: 'org.slf4j', module: "slf4j-log4j12"
     }
 
@@ -199,9 +195,6 @@ dependencies {
     testImplementation 'org.hamcrest:hamcrest-library:2.2'
     testImplementation 'org.powermock:powermock-module-junit4:2.0.9'
     testImplementation 'org.powermock:powermock-api-easymock:2.0.9'
-    testImplementation 'org.jetbrains.kotlin:kotlin-test'
-    testImplementation "io.mockk:mockk:1.13.9"
-
 }
 
 configurations.all {
@@ -323,10 +316,6 @@ shadowJar {
 jar {
     dependsOn mainJar
     enabled = true
-}
-
-artifacts {
-    archives shadowJar
 }
 
 distZip.enabled = true

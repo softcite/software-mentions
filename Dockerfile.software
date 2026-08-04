@@ -52,7 +52,7 @@ RUN wget https://github.com/kermitt2/Pub2TEI/archive/refs/heads/master.zip && \
 # build runtime image
 # -------------------
 
-FROM lfoppiano/grobid:0.9.0-full AS runtime
+FROM lfoppiano/grobid:0.9.1-full AS runtime
 
 # setting locale is likely useless but to be sure
 ENV LANG C.UTF-8
