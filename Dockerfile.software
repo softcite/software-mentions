@@ -87,6 +87,15 @@ ENV SOFTWARE_MENTIONS_OPTS="-Djava.library.path=/opt/grobid/grobid-home/lib/lin-
 
 CMD ["./software-mentions/bin/software-mentions", "server", "software-mentions/resources/config/config.yml"]
 
+# Container-level liveness probe. /service/isalive returns "true" when the
+# Dropwizard server is up; models are loaded lazily on first request so we
+# don't need to wait for them before reporting healthy.
+# Using python3 (required by JEP/DeLFT so guaranteed present) instead of
+# curl/wget to avoid depending on packages that may not ship in the GROBID
+# base image.
+HEALTHCHECK --interval=30s --timeout=5s --start-period=90s --retries=3 \
+    CMD python3 -c "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://localhost:8060/service/isalive', timeout=4).status == 200 else 1)" || exit 1
+
 LABEL \
     authors="The contributors" \
     org.label-schema.name="software-mentions" \

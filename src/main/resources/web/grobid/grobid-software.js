@@ -40,6 +40,37 @@ class SoftciteApp {
         this.setupBaseURL();
         this.fetchConceptBaseUrl();
         this.configurePdfJs();
+        this.startHealthCheck();
+    }
+
+    /**
+     * Polls /service/isalive and reflects the result on the #healthIndicator
+     * span in the header. Intervalized so we don't block the event loop.
+     * The 30s cadence is a balance between responsiveness and server load —
+     * bump it up if many users keep the page open.
+     */
+    startHealthCheck(intervalMs = 30000) {
+        const probe = async () => {
+            const $indicator = $('#healthIndicator');
+            if ($indicator.length === 0) return;
+            $indicator.removeClass('health-unknown health-healthy health-unhealthy')
+                      .addClass('health-checking');
+            const url = this.defineBaseURL('isalive');
+            try {
+                const resp = await fetch(url, { method: 'GET', cache: 'no-store' });
+                const ok = resp.ok;
+                const label = ok ? 'reachable' : `HTTP ${resp.status}`;
+                $indicator.removeClass('health-checking')
+                          .addClass(ok ? 'health-healthy' : 'health-unhealthy')
+                          .attr('title', `Service status: ${label} (checked ${new Date().toLocaleTimeString()})`);
+            } catch (err) {
+                const msg = (err && err.message) ? err.message : 'network error';
+                $indicator.removeClass('health-checking').addClass('health-unhealthy')
+                          .attr('title', `Service status: unreachable (${msg})`);
+            }
+        };
+        probe();
+        setInterval(probe, intervalMs);
     }
 
     setupEventListeners() {
@@ -291,7 +322,7 @@ class SoftciteApp {
         this.resetMaps();
         $("#pure-toggle-right, #toggle-group").hide();
             
-            $('#infoResult').html('<span style="color: grey;">Requesting server...</span>');
+            $('#infoResult').html('<span style="color: grey;"><i class="fa fa-spinner fa-spin"></i> Requesting server\u2026</span>');
             $('#requestResult').html('');
 
         const urlLocal = $('#gbdForm').attr('action');
@@ -312,7 +343,7 @@ class SoftciteApp {
         $("#pure-toggle-right, #toggle-group").hide();
         this.resetExamplesClasses();
         
-        $('#infoResult2').empty().html('<span style="color: grey;">Requesting server...</span>');
+        $('#infoResult2').empty().html('<span style="color: grey;"><i class="fa fa-spinner fa-spin"></i> Requesting server\u2026</span>');
         // initialize tabbed result area for PDF
         this.initializePdfTabs();
 
@@ -1282,7 +1313,7 @@ class SoftciteApp {
         const pdf_url = `resources/pdf-examples/${example.replace("/", "%2F")}.pdf`;
         
         $("#pure-toggle-right, #toggle-group").hide();
-        $('#infoResult2').empty().html('<span style="color: grey;">Requesting server...</span>');
+        $('#infoResult2').empty().html('<span style="color: grey;"><i class="fa fa-spinner fa-spin"></i> Requesting server\u2026</span>');
         // initialize tabbed result area for PDF
         this.initializePdfTabs();
 
@@ -1802,14 +1833,14 @@ class SoftciteApp {
     }
 
     handleAjaxError(jqXHR) {
-        const errorMsg = "Error encountered while requesting the server.<br/>" + jqXHR.responseText;
-        $('#infoResult, #infoResult2').html(`<span style='color:red;'>${errorMsg}</span>`);
+        const responseText = jqXHR && jqXHR.responseText ? this.escapeHtml(jqXHR.responseText) : "";
+        $('#infoResult, #infoResult2').html(`<span style='color:red;'>Error encountered while requesting the server.<br/>${responseText}</span>`);
         this.entities = null;
     }
 
     handleAjaxError2(message = "") {
-        const errorMsg = message + " - The PDF document cannot be annotated. Please check the server logs.";
-        $('#infoResult, #infoResult2').html(`<span style='color:red;'>Error encountered while requesting the server.<br/>${errorMsg}</span>`);
+        const safeMessage = this.escapeHtml(String(message));
+        $('#infoResult, #infoResult2').html(`<span style='color:red;'>Error encountered while requesting the server.<br/>${safeMessage} - The PDF document cannot be annotated. Please check the server logs.</span>`);
         this.entities = null;
     }
 

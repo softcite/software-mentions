@@ -1,0 +1,28 @@
+# Build outputs (regenerated inside the builder stage)
+build/
+.gradle/
+out/
+
+# IDE / editor / OS
+.idea/
+.vscode/
+*.iml
+.DS_Store
+
+# Runtime & logs (never needed at build time)
+logs/
+tmp/
+*.log
+
+# Research / developer helpers never copied into the image
+scripts/
+doc/
+
+# Markdown & meta — not copied into the image
+*.md
+LICENSE
+.claude/
+.github/
+
+# Note: .git/ is intentionally NOT listed — Dockerfile.software COPYs it so
+# Gradle can stamp revision.txt from `git rev-parse`.
