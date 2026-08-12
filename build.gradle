@@ -35,12 +35,17 @@ apply plugin: 'base'
 apply plugin: 'com.github.kt3k.coveralls'
 
 
+// Deliberately *not* --first-parent, matching Grobid: a release cut on a branch and merged
+// back with a merge commit leaves its tag on the second parent, so --first-parent walks
+// straight past it and reports the *previous* release.
+// --always keeps a bare commit sha as the fallback when no tag is reachable, which is the
+// case today - this repository has no tags yet - and in the shallow clones CI checks out.
 def getGitRevision() {
     def gitRevision = "unknown"
     try {
         def result = providers.exec {
             workingDir = rootProject.rootDir
-            commandLine 'git', 'describe', '--tags', '--always', '--first-parent'
+            commandLine 'git', 'describe', '--tags', '--always'
         }
         gitRevision = result.standardOutput.asText.get().trim()
     } catch (Exception e) {
@@ -336,6 +341,14 @@ artifacts {
 }
 
 processResources {
+    // The version and the revision are injected here rather than read from the source files,
+    // so Gradle cannot see them change and keeps the task UP-TO-DATE: revision.txt would
+    // otherwise keep whatever value it was first generated with, and a build made after
+    // moving to another commit would bake the stale revision into the artifact.
+    // Declaring them as inputs makes the task re-run whenever either changes.
+    inputs.property('projectVersion', project.property('version').toString())
+    inputs.property('gitRevision', rootProject.ext.gitRevision)
+
     filesMatching(["version.txt", "revision.txt"]) {
         expand(
             project_version: project.property('version') ?: "unknown",
