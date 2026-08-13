@@ -249,6 +249,12 @@ test {
     testLogging.showStandardStreams = true
     exclude '**/**IntegrationTest**'
 
+    // Without this Gradle uses the JUnit 4 runner, which cannot see a JUnit 5 test at all: a
+    // Jupiter test is silently not discovered rather than failing, so it looks like it passes.
+    // The dependencies for both are already declared - junit-jupiter for new tests, and
+    // junit-vintage-engine so that the existing JUnit 3/4 tests keep running on the platform.
+    useJUnitPlatform()
+
     if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
         jvmArgs "--add-opens", "java.base/java.util.stream=ALL-UNNAMED",
             "--add-opens", "java.base/java.io=ALL-UNNAMED",
