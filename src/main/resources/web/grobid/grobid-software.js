@@ -6,6 +6,10 @@
  */
 
 class SoftciteApp {
+
+    // used to link the git revision shown in the footer to the commit it was built from
+    static REPOSITORY_URL = 'https://github.com/softcite/software-mentions';
+
     constructor() {
         this.supportedLanguages = ["en"];
         this.entities = null;
@@ -39,6 +43,9 @@ class SoftciteApp {
         this.initializeUI();
         this.setupBaseURL();
         this.fetchConceptBaseUrl();
+        this.fetchVersion();
+        this.fetchHealth();
+        setInterval(() => this.fetchHealth(), 30000);
         this.configurePdfJs();
     }
 
@@ -164,6 +171,93 @@ class SoftciteApp {
             // ignore; proxy will be used
             this.conceptServiceBaseUrl = null;
         }
+    }
+
+    /**
+     * Shows the running version in the footer, with the git revision linking to the commit it
+     * was built from. Both come from /service/version; the revision is 'unknown' when the build
+     * could not reach git, in which case only the version is shown.
+     */
+    fetchVersion() {
+        $.ajax({
+            type: 'GET',
+            url: this.defineBaseURL('version'),
+            dataType: 'json',
+            success: (data) => {
+                if (!data || !data.version) {
+                    return;
+                }
+                let versionHtml = '- version: ' + data.version;
+                if (data.revision && data.revision !== 'unknown') {
+                    // 'v1.0.0-25-gabc1234' -> link on the commit sha, label keeps the full describe
+                    let commitHash = data.revision;
+                    const match = data.revision.match(/-\d+-g([0-9a-f]+)$/);
+                    if (match) {
+                        commitHash = match[1];
+                    }
+                    versionHtml += ' (<a href="' + SoftciteApp.REPOSITORY_URL + '/commit/' +
+                        encodeURIComponent(commitHash) +
+                        '" target="_blank" style="color:#848484;">' + data.revision + '</a>)';
+                }
+                $('#grobid-version').html(versionHtml);
+            }
+        });
+    }
+
+    /**
+     * Polls /service/health and reflects the result on the coloured dot in the header. The
+     * endpoint answers 503 when the service is not ready, so the error branch has to read the
+     * body too - it carries the reason.
+     */
+    fetchHealth() {
+        $.ajax({
+            type: 'GET',
+            url: this.defineBaseURL('health'),
+            dataType: 'json',
+            success: (data) => this.updateHealthIndicator(data),
+            error: (jqXHR) => {
+                let data = null;
+                try {
+                    data = JSON.parse(jqXHR.responseText);
+                } catch (e) {
+                    data = null;
+                }
+                if (data) {
+                    this.updateHealthIndicator(data);
+                } else {
+                    this.setHealthIndicator(false, 'Service unreachable');
+                }
+            }
+        });
+    }
+
+    updateHealthIndicator(data) {
+        const failed = (data.models && data.models.totalFailed) || 0;
+        const loaded = (data.models && data.models.totalLoaded) || 0;
+
+        if (data.ready && (failed === 0)) {
+            // models are loaded on the first request that needs them, so 0 loaded is normal here
+            this.setHealthIndicator(true, 'Service is ready (' + loaded + ' model(s) loaded)');
+            return;
+        }
+
+        const reasons = [];
+        if (data.grobidHomeConfigured === false) {
+            reasons.push('grobid-home is not configured');
+        }
+        if (failed > 0) {
+            reasons.push(failed + ' model(s) failed to load: ' +
+                Object.keys(data.models.failed || {}).join(', '));
+        }
+        this.setHealthIndicator(false,
+            'Service is not ready' + (reasons.length ? ': ' + reasons.join(', ') : ''));
+    }
+
+    setHealthIndicator(healthy, title) {
+        const indicator = $('#health-indicator');
+        indicator.removeClass('healthy unhealthy');
+        indicator.addClass(healthy ? 'healthy' : 'unhealthy');
+        indicator.attr('title', title);
     }
 
     configurePdfJs() {
