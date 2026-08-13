@@ -18,7 +18,6 @@ import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Arrays;
-import java.util.ArrayList;
 
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -29,12 +28,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertNotNull;
 
-import org.grobid.core.engines.SoftwareContextClassifier.MODEL_TYPE;
-
 /**
  * @author Patrice
  */
-public class SoftwareContextClassifierTest {
+public class SoftwareParserIntegrationTest {
     private static SoftwareConfiguration configuration;
 
     @BeforeClass
@@ -42,7 +39,6 @@ public class SoftwareContextClassifierTest {
         SoftwareConfiguration softwareConfiguration = null;
         try {
             ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-
             File yamlFile = new File("resources/config/config.yml");
             yamlFile = new File(yamlFile.getAbsolutePath());
             softwareConfiguration = mapper.readValue(yamlFile, SoftwareConfiguration.class);
@@ -74,13 +70,22 @@ public class SoftwareContextClassifierTest {
     }
 
     @Test
-    public void testSoftwareContextClassifierText() throws Exception {
+    public void testSoftwareParserText() throws Exception {
         String text = IOUtils.toString(this.getClass().getResourceAsStream("/text.txt"), StandardCharsets.UTF_8.toString());
         text = text.replaceAll("\\n", " ").replaceAll("\\t", " ");
-        List<String> texts = new ArrayList<>();
-        texts.add(text);
-        String json = SoftwareContextClassifier.getInstance(configuration).classify(texts, MODEL_TYPE.used);
-        System.out.println(json);
+        List<SoftwareEntity> entities = SoftwareParser.getInstance(configuration).processText(text, false);
+        System.out.println(text);
+        System.out.println(entities.size());
+        assertThat(entities, hasSize(3));
+    }
+
+    //@Test
+    public void testSoftwareParserPDF() throws Exception {
+        Pair<List<SoftwareEntity>, Document> res = 
+            SoftwareParser.getInstance(configuration).processPDF(new File("./src/test/resources/annot.pdf"), false, false);
+        List<SoftwareEntity> entities = res.getLeft();
+
+        assertThat(entities, hasSize(19));
     }
 
 }

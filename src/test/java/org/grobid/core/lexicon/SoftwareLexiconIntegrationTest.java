@@ -33,7 +33,7 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 /**
  * @author Patrice
  */
-public class SoftwareLexiconTest {
+public class SoftwareLexiconIntegrationTest {
     private static SoftwareLexicon softwareLexicon;
 
     @BeforeClass

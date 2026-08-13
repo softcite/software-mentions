@@ -266,6 +266,32 @@ test {
     systemProperty "java.library.path", "${System.getProperty('java.library.path')}:" + getJavaLibraryPath()
 }
 
+// Everything, the *IntegrationTest classes included. Those need a real grobid-home next to the
+// repository, with the models installed, so they only pass where that has been set up - which is
+// why `test` excludes them and CI runs `test`. Run these explicitly with `./gradlew integration`.
+// Same split as grobid-quantities.
+task integration(type: Test) {
+    // a Test task created by hand inherits nothing from the java plugin's `test`: without these
+    // two it has no classes to run and reports success on 0 tests
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+
+    include '**'
+
+    testLogging.showStandardStreams = true
+    useJUnitPlatform()
+
+    if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
+        jvmArgs "--add-opens", "java.base/java.util.stream=ALL-UNNAMED",
+            "--add-opens", "java.base/java.io=ALL-UNNAMED",
+            "--add-opens", "java.xml/jdk.xml.internal=ALL-UNNAMED",
+            // Reflective access needed by the test mocking framework (EasyMock) on Java 21
+            "--add-opens", "java.base/java.lang=ALL-UNNAMED",
+            "--add-opens", "java.base/java.util=ALL-UNNAMED"
+    }
+    systemProperty "java.library.path", "${System.getProperty('java.library.path')}:" + getJavaLibraryPath()
+}
+
 // return the default value if the property has not been specified in command line
 ext.getArg = { propName, defaultVal ->
     return project.hasProperty(propName) ? project.getProperty(propName) : defaultVal;

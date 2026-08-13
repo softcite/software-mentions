@@ -16,7 +16,7 @@ import static org.junit.Assert.assertNotNull;
 
 /**
  * Model-free unit tests for the document-level context propagation logic. Unlike
- * {@link SoftwareContextClassifierTest}, these do not load GROBID or the DeLFT models: they exercise
+ * {@link SoftwareContextClassifierIntegrationTest}, these do not load GROBID or the DeLFT models: they exercise
  * the pure post-processing in {@link SoftwareContextClassifier#documentPropagation(List)} and
  * {@link SoftwareEntity#mergeDocumentContextAttributes(SoftwareContextAttributes)} directly.
  *
