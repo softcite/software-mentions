@@ -1,6 +1,7 @@
 package org.grobid.core.utilities;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.TreeMap;
 
+import javax.xml.XMLConstants;
 import javax.xml.parsers.*;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
@@ -38,16 +40,111 @@ public class XMLUtilities {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(XMLUtilities.class);
 
-    public static String toPrettyString(String xml, int indent) {
+    // Cached JAXP factories. JAXP factories are not guaranteed thread-safe for
+    // their new*() methods; synchronized accessors below produce per-call
+    // builders/parsers/transformers that are themselves single-thread only.
+    // Caching avoids repeated ServiceLoader discovery which, under sustained
+    // TEI load, left classloader-backed references accumulating on the heap.
+    // Each factory is also hardened against XXE/SSRF since callers parse
+    // user-supplied XML/TEI; features are set defensively so unsupported
+    // options on a given JAXP implementation do not break class init.
+    private static final DocumentBuilderFactory DBF;
+    private static final SAXParserFactory SPF;
+    private static final XPathFactory XPF = XPathFactory.newInstance();
+    private static final TransformerFactory TF;
+
+    static {
+        DBF = DocumentBuilderFactory.newInstance();
+        DBF.setNamespaceAware(true);
+        hardenDocumentBuilderFactory(DBF);
+
+        SPF = SAXParserFactory.newInstance();
+        hardenSAXParserFactory(SPF);
+
+        TF = TransformerFactory.newInstance();
+        hardenTransformerFactory(TF);
+    }
+
+    private static void hardenDocumentBuilderFactory(DocumentBuilderFactory factory) {
+        trySetDBFeature(factory, XMLConstants.FEATURE_SECURE_PROCESSING, true);
+        trySetDBFeature(factory, "http://apache.org/xml/features/disallow-doctype-decl", true);
+        trySetDBFeature(factory, "http://xml.org/sax/features/external-general-entities", false);
+        trySetDBFeature(factory, "http://xml.org/sax/features/external-parameter-entities", false);
+        trySetDBFeature(factory, "http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
         try {
+            factory.setXIncludeAware(false);
+        } catch (UnsupportedOperationException | AbstractMethodError ignore) {
+            // older JAXP impls
+        }
+        factory.setExpandEntityReferences(false);
+    }
+
+    private static void trySetDBFeature(DocumentBuilderFactory factory, String feature, boolean value) {
+        try {
+            factory.setFeature(feature, value);
+        } catch (ParserConfigurationException e) {
+            LOGGER.debug("Unsupported DocumentBuilderFactory feature: {}", feature);
+        }
+    }
+
+    private static void hardenSAXParserFactory(SAXParserFactory factory) {
+        trySetSPFeature(factory, XMLConstants.FEATURE_SECURE_PROCESSING, true);
+        trySetSPFeature(factory, "http://apache.org/xml/features/disallow-doctype-decl", true);
+        trySetSPFeature(factory, "http://xml.org/sax/features/external-general-entities", false);
+        trySetSPFeature(factory, "http://xml.org/sax/features/external-parameter-entities", false);
+        trySetSPFeature(factory, "http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+    }
+
+    private static void trySetSPFeature(SAXParserFactory factory, String feature, boolean value) {
+        try {
+            factory.setFeature(feature, value);
+        } catch (Exception e) {
+            LOGGER.debug("Unsupported SAXParserFactory feature: {}", feature);
+        }
+    }
+
+    private static void hardenTransformerFactory(TransformerFactory factory) {
+        try {
+            factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+        } catch (TransformerConfigurationException e) {
+            LOGGER.debug("Unsupported TransformerFactory feature: FEATURE_SECURE_PROCESSING");
+        }
+        trySetTFAttribute(factory, XMLConstants.ACCESS_EXTERNAL_DTD, "");
+        trySetTFAttribute(factory, XMLConstants.ACCESS_EXTERNAL_STYLESHEET, "");
+    }
+
+    private static void trySetTFAttribute(TransformerFactory factory, String attribute, Object value) {
+        try {
+            factory.setAttribute(attribute, value);
+        } catch (IllegalArgumentException e) {
+            LOGGER.debug("Unsupported TransformerFactory attribute: {}", attribute);
+        }
+    }
+
+    private static synchronized DocumentBuilder newBuilder() throws ParserConfigurationException {
+        return DBF.newDocumentBuilder();
+    }
+
+    private static synchronized SAXParser newSAXParser() throws Exception {
+        return SPF.newSAXParser();
+    }
+
+    private static synchronized XPath newXPath() {
+        return XPF.newXPath();
+    }
+
+    private static synchronized Transformer newTransformer() throws TransformerConfigurationException {
+        return TF.newTransformer();
+    }
+
+    public static String toPrettyString(String xml, int indent) {
+        try (ByteArrayInputStream inputStream = new ByteArrayInputStream(xml.getBytes(StandardCharsets.UTF_8))) {
             // Turn xml string into a document
-            org.w3c.dom.Document document = DocumentBuilderFactory.newInstance()
-                    .newDocumentBuilder()
-                    .parse(new InputSource(new ByteArrayInputStream(xml.getBytes("utf-8"))));
+            org.w3c.dom.Document document = newBuilder().parse(new InputSource(inputStream));
 
             // Remove whitespaces outside tags
             document.normalize();
-            XPath xPath = XPathFactory.newInstance().newXPath();
+            XPath xPath = newXPath();
             org.w3c.dom.NodeList nodeList = (org.w3c.dom.NodeList) xPath.evaluate("//text()[normalize-space()='']",
                                                           document,
                                                           XPathConstants.NODESET);
@@ -58,17 +155,17 @@ public class XMLUtilities {
             }
 
             // Setup pretty print options
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
+            Transformer transformer = newTransformer();
             transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
             transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
             transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 
             // Return pretty print xml string
-            StringWriter stringWriter = new StringWriter();
-            transformer.transform(new DOMSource(document), new StreamResult(stringWriter));
-            return stringWriter.toString();
+            try (StringWriter stringWriter = new StringWriter()) {
+                transformer.transform(new DOMSource(document), new StreamResult(stringWriter));
+                return stringWriter.toString();
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -115,14 +212,15 @@ public class XMLUtilities {
         BiblStructSaxHandler handler = new BiblStructSaxHandler();
         String teiXML = null;
         try {
-            SAXParserFactory spf = SAXParserFactory.newInstance();
-            SAXParser p = spf.newSAXParser();
+            SAXParser p = newSAXParser();
             teiXML = serialize(doc, biblStructElement);
-            p.parse(new InputSource(new StringReader(teiXML)), handler);
+            try (StringReader reader = new StringReader(teiXML)) {
+                p.parse(new InputSource(reader), handler);
+            }
         } catch(Exception e) {
             if (teiXML != null)
                 LOGGER.warn("The parsing of the biblStruct from TEI document failed for: " + teiXML);
-            else 
+            else
                 LOGGER.warn("The parsing of the biblStruct from TEI document failed for: " + biblStructElement.toString());
         }
         return handler.getBiblioItem();
@@ -243,11 +341,10 @@ public class XMLUtilities {
     public static String serialize(org.w3c.dom.Document doc, Node node) {
         // to avoid issues with space reamining from deleted nodes
         try {
-            XPathFactory xpathFactory = XPathFactory.newInstance();
             // XPath to find empty text nodes.
-            XPathExpression xpathExp = xpathFactory.newXPath().compile(
-                    "//text()[normalize-space(.) = '']");  
-            NodeList emptyTextNodes = (NodeList) 
+            XPathExpression xpathExp = newXPath().compile(
+                    "//text()[normalize-space(.) = '']");
+            NodeList emptyTextNodes = (NodeList)
                     xpathExp.evaluate(doc, XPathConstants.NODESET);
 
             // Remove each empty text node from document.
@@ -256,21 +353,13 @@ public class XMLUtilities {
                 emptyTextNode.getParentNode().removeChild(emptyTextNode);
             }
         } catch(Exception ex) {
-            ex.printStackTrace();
+            LOGGER.warn("Failed to strip empty text nodes before serialize()", ex);
         }
 
-        DOMSource domSource = null;
-        String xml = null;
-        try {
-            if (node == null) {
-                domSource = new DOMSource(doc);
-            } else {
-                domSource = new DOMSource(node);
-            }
-            StringWriter writer = new StringWriter();
+        DOMSource domSource = (node == null) ? new DOMSource(doc) : new DOMSource(node);
+        try (StringWriter writer = new StringWriter()) {
             StreamResult result = new StreamResult(writer);
-            TransformerFactory tf = TransformerFactory.newInstance();
-            Transformer transformer = tf.newTransformer();
+            Transformer transformer = newTransformer();
             transformer.setOutputProperty(OutputKeys.METHOD, "xml");
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
@@ -279,11 +368,11 @@ public class XMLUtilities {
             if (node != null)
                 transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
             transformer.transform(domSource, result);
-            xml = writer.toString();
-        } catch(TransformerException ex) {
-            ex.printStackTrace();
+            return writer.toString();
+        } catch(TransformerException | IOException ex) {
+            LOGGER.warn("Failed to serialize DOM node", ex);
+            return null;
         }
-        return xml;
     }
 
 
@@ -296,13 +385,11 @@ public class XMLUtilities {
         File outputFile = new File(documentPath.replace(".tei.xml", ".clean.tei.xml"));
 
         // we use a DOM parser
-        org.w3c.dom.Document document = DocumentBuilderFactory.newInstance()
-                    .newDocumentBuilder()
-                    .parse(documentFile);
+        org.w3c.dom.Document document = newBuilder().parse(documentFile);
 
         // remove tei entries with empty body
         document.normalize();
-        XPath xPath = XPathFactory.newInstance().newXPath();
+        XPath xPath = newXPath();
         org.w3c.dom.NodeList nodeList = (org.w3c.dom.NodeList) xPath.evaluate("//tei/text/body",
                                                       document,
                                                       XPathConstants.NODESET);
@@ -350,28 +437,26 @@ public class XMLUtilities {
         }
 
         // Setup pretty print options
-        TransformerFactory transformerFactory = TransformerFactory.newInstance();
-        Transformer transformer = transformerFactory.newTransformer();
+        Transformer transformer = newTransformer();
         transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
         transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
         transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 
         // Return pretty print xml string
-        StringWriter stringWriter = new StringWriter();
-        transformer.transform(new DOMSource(document), new StreamResult(stringWriter));
-        
-        // write result to file
-        FileUtils.writeStringToFile(outputFile, stringWriter.toString(), "UTF-8");
+        try (StringWriter stringWriter = new StringWriter()) {
+            transformer.transform(new DOMSource(document), new StreamResult(stringWriter));
 
-        // check again if everything is well-formed after the changes
-        try {
-            document = DocumentBuilderFactory.newInstance()
-                        .newDocumentBuilder()
-                        .parse(new InputSource(new ByteArrayInputStream(stringWriter.toString().getBytes("UTF-8"))));
-        } catch(Exception e) {
-            System.out.println("Problem with the final TEI XML");
-            e.printStackTrace();
+            // write result to file
+            FileUtils.writeStringToFile(outputFile, stringWriter.toString(), "UTF-8");
+
+            // check again if everything is well-formed after the changes
+            try (ByteArrayInputStream inputStream =
+                         new ByteArrayInputStream(stringWriter.toString().getBytes(StandardCharsets.UTF_8))) {
+                document = newBuilder().parse(new InputSource(inputStream));
+            } catch(Exception e) {
+                LOGGER.warn("Problem with the final TEI XML", e);
+            }
         }
     }
 
@@ -481,10 +566,8 @@ public class XMLUtilities {
                     }
                     String fullSent = "<s>" + newSent + "</s>";
                     boolean fail = false;
-                    try {
-                        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-                        factory.setNamespaceAware(true);
-                        org.w3c.dom.Document d = factory.newDocumentBuilder().parse(new InputSource(new StringReader(fullSent)));                
+                    try (StringReader reader = new StringReader(fullSent)) {
+                        newBuilder().parse(new InputSource(reader));
                     } catch(Exception e) {
                         fail = true;
                     }
@@ -508,16 +591,14 @@ public class XMLUtilities {
 
                     //System.out.println(sent);  
 
-                    try {
-                        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-                        factory.setNamespaceAware(true);
-                        org.w3c.dom.Document d = factory.newDocumentBuilder().parse(new InputSource(new StringReader(sent)));
+                    try (StringReader reader = new StringReader(sent)) {
+                        org.w3c.dom.Document d = newBuilder().parse(new InputSource(reader));
                         //d.getDocumentElement().normalize();
                         Node newNode = doc.importNode(d.getDocumentElement(), true);
                         newNodes.add(newNode);
                         //System.out.println(serialize(doc, newNode));
                     } catch(Exception e) {
-
+                        LOGGER.debug("Failed to re-parse segmented sentence", e);
                     }
                 }
 

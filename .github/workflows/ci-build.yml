@@ -2,9 +2,9 @@ name: Build unstable
 
 on: [push]
 
-concurrency: 
+concurrency:
   group: gradle
-#  cancel-in-progress: true
+  cancel-in-progress: true
 
 
 jobs:
@@ -22,14 +22,14 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build -x test
 
-#    - name: Test with Gradle Jacoco and Coveralls
-#      run: ./gradlew test jacocoTestReport coveralls --no-daemon
-#
-#    - name: Coveralls GitHub Action
-#      uses: coverallsapp/github-action@v2
-#      with:
-#        github-token: ${{ secrets.GITHUB_TOKEN }}
-#        format: jacoco
+    - name: Test with Gradle Jacoco and Coveralls
+      run: ./gradlew test jacocoTestReport coveralls --no-daemon
+
+    - name: Coveralls GitHub Action
+      uses: coverallsapp/github-action@v2
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        format: jacoco
 
   docker-build:
     needs: [ build ]
