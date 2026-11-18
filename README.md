@@ -24,6 +24,8 @@ Large-scale Machine-Learning analysis of scientific PDF for monitoring the produ
 https://hal.science/hal-04121339v3
 ```
 
+Machine-readable citation metadata are available in [`CITATION.cff`](CITATION.cff) (used by GitHub's "Cite this repository" button) and [`codemeta.json`](codemeta.json) ([CodeMeta](https://codemeta.github.io/), used by Software Heritage and HAL). `codemeta.json` is generated from `CITATION.cff` and must not be edited by hand: after changing `CITATION.cff`, regenerate it with `pip install cffconvert==2.0.0 && cffconvert -i CITATION.cff -f codemeta -o codemeta.json`. The authors and contributors are listed in [`AUTHORS.md`](AUTHORS.md).
+
 As the other GROBID models, the module relies only on state-of-the-art machine learning. The tool can use linear CRF (via [Wapiti](https://github.com/kermitt2/Wapiti) JNI integration) or Deep Learning model such as BiLSTM-CRF, ELMo or fine-tuned transformers BERT, e.g. SciBERT and LinkBERT (via [DeLFT](https://github.com/kermitt2/delft) JNI integration) and any combination of them. 
 
 Thanks to its integration in the [GROBID](https://github.com/kermitt2/grobid) framework, the software mention extraction on scholar PDF is:
